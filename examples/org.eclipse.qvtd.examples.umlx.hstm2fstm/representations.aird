@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:diagram="http://www.eclipse.org/sirius/diagram/1.1.0" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" xmlns:umlx="http://www.eclipse.org/qvt/2016/UMLX" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" xsi:schemaLocation="http://www.eclipse.org/sirius/description/1.1.0 http://www.eclipse.org/sirius/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description http://www.eclipse.org/sirius/diagram/description/style/1.1.0 http://www.eclipse.org/sirius/diagram/1.1.0#//description/style">
-  <viewpoint:DAnalysis xmi:id="_SaMxAOYsEeaNp56HWYxqCA" selectedViews="_CkSy0OYtEeab8LW48qYgdQ" version="11.1.0.201608251200">
-    <semanticResources>src/org/eclipse/qvtd/examples/umlx/hstm2fstm/FlatStateMachine.ecore</semanticResources>
+  <viewpoint:DAnalysis xmi:id="_SaMxAOYsEeaNp56HWYxqCA" selectedViews="_CkSy0OYtEeab8LW48qYgdQ" version="12.1.0.201708031200">
     <semanticResources>http://www.eclipse.org/emf/2002/Ecore</semanticResources>
-    <semanticResources>src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine.ecore</semanticResources>
-    <semanticResources>src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx</semanticResources>
-    <semanticResources>src/org/eclipse/qvtd/examples/umlx/hstm2fstm/out/expected.xmi</semanticResources>
+    <semanticResources>model/FlatStateMachine.ecore</semanticResources>
+    <semanticResources>model/HierarchicalStateMachine.ecore</semanticResources>
+    <semanticResources>model/HierarchicalStateMachine2FlatStateMachine.umlx</semanticResources>
+    <semanticResources>model/out/expected.xmi</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" xmi:id="_CkSy0OYtEeab8LW48qYgdQ">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']"/>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_F19X4OYtEeab8LW48qYgdQ" name="UMLX Relation HierachicalStateMachine2FlatStateMachine" representation="_F19X4eYtEeab8LW48qYgdQ">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_F19X4OYtEeab8LW48qYgdQ" name="UMLX Relation HierachicalStateMachine2FlatStateMachine" repPath="#_8UPKwPqhEeetB8d-AyOcmw">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']"/>
-        <target xmi:type="umlx:RelDiagram" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine"/>
+        <target xmi:type="umlx:RelDiagram" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_L-T2MOYtEeab8LW48qYgdQ" name="UMLX Relation HierachicalTransition2FlatTransition" representation="_L-T2MeYtEeab8LW48qYgdQ">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_L-T2MOYtEeab8LW48qYgdQ" name="UMLX Relation HierachicalTransition2FlatTransition" repPath="#_8VRskPqhEeetB8d-AyOcmw">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']"/>
-        <target xmi:type="umlx:RelDiagram" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition"/>
+        <target xmi:type="umlx:RelDiagram" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_5ju70OYtEeab8LW48qYgdQ" name="UMLX Relation LeafState2FlatState" representation="_5ju70eYtEeab8LW48qYgdQ">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_5ju70OYtEeab8LW48qYgdQ" name="UMLX Relation LeafState2FlatState" repPath="#_8VuYgPqhEeetB8d-AyOcmw">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']"/>
-        <target xmi:type="umlx:RelDiagram" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState"/>
+        <target xmi:type="umlx:RelDiagram" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState"/>
       </ownedRepresentationDescriptors>
-      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_PM1LMOYuEeab8LW48qYgdQ" name="UMLX Transformation HierarchicalStateMachine2FlatStateMachine" representation="_PM1LMeYuEeab8LW48qYgdQ">
+      <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" xmi:id="_PM1LMOYuEeab8LW48qYgdQ" name="UMLX Transformation HierarchicalStateMachine2FlatStateMachine" repPath="#_8WBTcPqhEeetB8d-AyOcmw">
         <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']"/>
-        <target xmi:type="umlx:TxDiagram" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#T.HierarchicalStateMachine2FlatStateMachine"/>
+        <target xmi:type="umlx:TxDiagram" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#T.HierarchicalStateMachine2FlatStateMachine"/>
       </ownedRepresentationDescriptors>
     </ownedViews>
   </viewpoint:DAnalysis>
-  <diagram:DSemanticDiagram xmi:id="_F19X4eYtEeab8LW48qYgdQ" name="UMLX Relation HierachicalStateMachine2FlatStateMachine">
+  <diagram:DSemanticDiagram xmi:id="_F19X4eYtEeab8LW48qYgdQ" name="UMLX Relation HierachicalStateMachine2FlatStateMachine" uid="_8UPKwPqhEeetB8d-AyOcmw">
     <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_F19X4uYtEeab8LW48qYgdQ" source="DANNOTATION_CUSTOMIZATION_KEY">
       <data xmi:type="diagram:ComputedStyleDescriptionRegistry" xmi:id="_F19X4-YtEeab8LW48qYgdQ"/>
     </ownedAnnotationEntries>
@@ -122,8 +122,8 @@
       </data>
     </ownedAnnotationEntries>
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_F19X5OYtEeab8LW48qYgdQ" name="«primitive»" tooltipText="Tooltip for RelDomainNode">
-      <target xmi:type="umlx:RelDomainNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine."/>
-      <semanticElements xmi:type="umlx:RelDomainNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine."/>
+      <target xmi:type="umlx:RelDomainNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine."/>
+      <semanticElements xmi:type="umlx:RelDomainNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine."/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -132,8 +132,8 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']"/>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_F19X5uYtEeab8LW48qYgdQ" name="stateMachineName : EString" tooltipText="Tooltip for RelPatternNode" incomingEdges="_F19X8OYtEeab8LW48qYgdQ _F19X9OYtEeab8LW48qYgdQ" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine..stateMachineName"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine..stateMachineName"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine..stateMachineName"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine..stateMachineName"/>
         <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_F19X5-YtEeab8LW48qYgdQ" showIcon="false" iconPath="/org.eclipse.qvtd.umlx.design/icons/UClassVariable.gif" borderSize="2" borderSizeComputationExpression="2" borderColor="253,206,137" foregroundColor="255,255,255">
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']/@style"/>
         </ownedStyle>
@@ -141,8 +141,8 @@
       </ownedDiagramElements>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_F19X6OYtEeab8LW48qYgdQ" name="hier" tooltipText="Tooltip for RelDomainNode">
-      <target xmi:type="umlx:RelDomainNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.hier"/>
-      <semanticElements xmi:type="umlx:RelDomainNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.hier"/>
+      <target xmi:type="umlx:RelDomainNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.hier"/>
+      <semanticElements xmi:type="umlx:RelDomainNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.hier"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -151,8 +151,8 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']"/>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_F19X6uYtEeab8LW48qYgdQ" name="hierarchicalStateMachine : StateMachine" tooltipText="Tooltip for RelPatternNode" outgoingEdges="_F19X8OYtEeab8LW48qYgdQ" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.hier.hierarchicalStateMachine"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.hier.hierarchicalStateMachine"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.hier.hierarchicalStateMachine"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.hier.hierarchicalStateMachine"/>
         <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_F19X6-YtEeab8LW48qYgdQ" showIcon="false" iconPath="/org.eclipse.qvtd.umlx.design/icons/UClassVariable.gif" borderSize="4" borderSizeComputationExpression="4" borderColor="253,206,137" foregroundColor="255,255,255">
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']/@conditionnalStyles.1/@style"/>
         </ownedStyle>
@@ -160,8 +160,8 @@
       </ownedDiagramElements>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_F19X7OYtEeab8LW48qYgdQ" name="flat" tooltipText="Tooltip for RelDomainNode">
-      <target xmi:type="umlx:RelDomainNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.flat"/>
-      <semanticElements xmi:type="umlx:RelDomainNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.flat"/>
+      <target xmi:type="umlx:RelDomainNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.flat"/>
+      <semanticElements xmi:type="umlx:RelDomainNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.flat"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -170,8 +170,8 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']"/>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_F19X7uYtEeab8LW48qYgdQ" name="flatStateMachine : StateMachine" tooltipText="Tooltip for RelPatternNode" outgoingEdges="_F19X9OYtEeab8LW48qYgdQ" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.flat.flatStateMachine"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.flat.flatStateMachine"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.flat.flatStateMachine"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine.flat.flatStateMachine"/>
         <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_F19X7-YtEeab8LW48qYgdQ" showIcon="false" iconPath="/org.eclipse.qvtd.umlx.design/icons/UClassVariable.gif" borderSize="4" borderSizeComputationExpression="4" borderColor="253,206,137" foregroundColor="255,255,255">
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']/@conditionnalStyles.1/@style"/>
         </ownedStyle>
@@ -179,8 +179,8 @@
       </ownedDiagramElements>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_F19X8OYtEeab8LW48qYgdQ" sourceNode="_F19X6uYtEeab8LW48qYgdQ" targetNode="_F19X5uYtEeab8LW48qYgdQ" endLabel="name [1]">
-      <target xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine...hierarchicalStateMachine..stateMachineName"/>
-      <semanticElements xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine...hierarchicalStateMachine..stateMachineName"/>
+      <target xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine...hierarchicalStateMachine..stateMachineName"/>
+      <semanticElements xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine...hierarchicalStateMachine..stateMachineName"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_F19X8eYtEeab8LW48qYgdQ" size="2" centered="Both" strokeColor="154,103,23">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']/@conditionnalStyles.2/@style"/>
         <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_F19X8uYtEeab8LW48qYgdQ" showIcon="false"/>
@@ -189,8 +189,8 @@
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_F19X9OYtEeab8LW48qYgdQ" sourceNode="_F19X7uYtEeab8LW48qYgdQ" targetNode="_F19X5uYtEeab8LW48qYgdQ" endLabel="name [1]">
-      <target xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine...flatStateMachine..stateMachineName"/>
-      <semanticElements xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine...flatStateMachine..stateMachineName"/>
+      <target xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine...flatStateMachine..stateMachineName"/>
+      <semanticElements xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine...flatStateMachine..stateMachineName"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_F19X9eYtEeab8LW48qYgdQ" size="2" centered="Both" strokeColor="154,103,23">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']/@conditionnalStyles.2/@style"/>
         <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_F19X9uYtEeab8LW48qYgdQ" showIcon="false"/>
@@ -201,9 +201,9 @@
     <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']"/>
     <filterVariableHistory xmi:type="diagram:FilterVariableHistory" xmi:id="_F19X-OYtEeab8LW48qYgdQ"/>
     <activatedLayers xmi:type="description_1:Layer" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer"/>
-    <target xmi:type="umlx:RelDiagram" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine"/>
+    <target xmi:type="umlx:RelDiagram" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine"/>
   </diagram:DSemanticDiagram>
-  <diagram:DSemanticDiagram xmi:id="_L-T2MeYtEeab8LW48qYgdQ" name="UMLX Relation HierachicalTransition2FlatTransition">
+  <diagram:DSemanticDiagram xmi:id="_L-T2MeYtEeab8LW48qYgdQ" name="UMLX Relation HierachicalTransition2FlatTransition" uid="_8VRskPqhEeetB8d-AyOcmw">
     <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_L-T2MuYtEeab8LW48qYgdQ" source="DANNOTATION_CUSTOMIZATION_KEY">
       <data xmi:type="diagram:ComputedStyleDescriptionRegistry" xmi:id="_L-T2M-YtEeab8LW48qYgdQ"/>
     </ownedAnnotationEntries>
@@ -608,8 +608,8 @@
       </data>
     </ownedAnnotationEntries>
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_L-T2NOYtEeab8LW48qYgdQ" name="«primitive»" tooltipText="Tooltip for RelDomainNode">
-      <target xmi:type="umlx:RelDomainNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition."/>
-      <semanticElements xmi:type="umlx:RelDomainNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition."/>
+      <target xmi:type="umlx:RelDomainNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition."/>
+      <semanticElements xmi:type="umlx:RelDomainNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition."/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -618,8 +618,8 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']"/>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_L-T2NuYtEeab8LW48qYgdQ" name="transitionName : EString" tooltipText="Tooltip for RelPatternNode" incomingEdges="_L-T2WuYtEeab8LW48qYgdQ _L-T2XuYtEeab8LW48qYgdQ" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..transitionName"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..transitionName"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..transitionName"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..transitionName"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -629,8 +629,8 @@
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']"/>
       </ownedDiagramElements>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_L-T2OOYtEeab8LW48qYgdQ" name="leafFromState : State" tooltipText="Tooltip for RelPatternNode" incomingEdges="_L-T2gOYtEeab8LW48qYgdQ" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..leafFromState"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..leafFromState"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..leafFromState"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..leafFromState"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -640,8 +640,8 @@
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']"/>
       </ownedDiagramElements>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_L-T2OuYtEeab8LW48qYgdQ" name="leafToState : State" tooltipText="Tooltip for RelPatternNode" incomingEdges="_L-T2huYtEeab8LW48qYgdQ" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..leafToState"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..leafToState"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..leafToState"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..leafToState"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -651,8 +651,8 @@
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']"/>
       </ownedDiagramElements>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_L-T2POYtEeab8LW48qYgdQ" name="this.getLeafStates(hierarchicalFromState)->includes(leafFromState)" tooltipText="Tooltip for RelPatternNode" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#X.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..735140798"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#X.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..735140798"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#X.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..735140798"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#X.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..735140798"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -662,8 +662,8 @@
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']"/>
       </ownedDiagramElements>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_L-T2PuYtEeab8LW48qYgdQ" name="this.getLeafStates(hierarchicalToState)->includes(leafToState)" tooltipText="Tooltip for RelPatternNode" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#X.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..1258632478"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#X.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..1258632478"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#X.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..1258632478"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#X.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition..1258632478"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -674,8 +674,8 @@
       </ownedDiagramElements>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_L-T2QOYtEeab8LW48qYgdQ" name="hier" tooltipText="Tooltip for RelDomainNode">
-      <target xmi:type="umlx:RelDomainNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier"/>
-      <semanticElements xmi:type="umlx:RelDomainNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier"/>
+      <target xmi:type="umlx:RelDomainNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier"/>
+      <semanticElements xmi:type="umlx:RelDomainNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -684,8 +684,8 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']"/>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_L-T2QuYtEeab8LW48qYgdQ" name="hierarchicalTransition : Transition" tooltipText="Tooltip for RelPatternNode" outgoingEdges="_L-T2XuYtEeab8LW48qYgdQ _L-T2YuYtEeab8LW48qYgdQ _L-T2auYtEeab8LW48qYgdQ" incomingEdges="_L-T2ZuYtEeab8LW48qYgdQ" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalTransition"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalTransition"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalTransition"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalTransition"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -695,8 +695,8 @@
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']"/>
       </ownedDiagramElements>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_L-T2ROYtEeab8LW48qYgdQ" name="hierarchicalFromState : State" tooltipText="Tooltip for RelPatternNode" incomingEdges="_L-T2YuYtEeab8LW48qYgdQ" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalFromState"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalFromState"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalFromState"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalFromState"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -706,8 +706,8 @@
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']"/>
       </ownedDiagramElements>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_L-T2RuYtEeab8LW48qYgdQ" name="hierarchicalStateMachine : StateMachine" tooltipText="Tooltip for RelPatternNode" outgoingEdges="_L-T2ZuYtEeab8LW48qYgdQ" incomingEdges="_L-T2euYtEeab8LW48qYgdQ" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalStateMachine"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalStateMachine"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalStateMachine"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalStateMachine"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -717,8 +717,8 @@
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']"/>
       </ownedDiagramElements>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_L-T2SOYtEeab8LW48qYgdQ" name="hierarchicalToState : State" tooltipText="Tooltip for RelPatternNode" incomingEdges="_L-T2auYtEeab8LW48qYgdQ" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalToState"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalToState"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalToState"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier.hierarchicalToState"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -729,8 +729,8 @@
       </ownedDiagramElements>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_L-T2SuYtEeab8LW48qYgdQ" name="flat" tooltipText="Tooltip for RelDomainNode">
-      <target xmi:type="umlx:RelDomainNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat"/>
-      <semanticElements xmi:type="umlx:RelDomainNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat"/>
+      <target xmi:type="umlx:RelDomainNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat"/>
+      <semanticElements xmi:type="umlx:RelDomainNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -739,8 +739,8 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']"/>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_L-T2TOYtEeab8LW48qYgdQ" name="flatTransition : Transition" tooltipText="Tooltip for RelPatternNode" outgoingEdges="_L-T2WuYtEeab8LW48qYgdQ _L-T2buYtEeab8LW48qYgdQ _L-T2duYtEeab8LW48qYgdQ" incomingEdges="_L-T2cuYtEeab8LW48qYgdQ" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatTransition"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatTransition"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatTransition"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatTransition"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -750,8 +750,8 @@
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']"/>
       </ownedDiagramElements>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_L-T2TuYtEeab8LW48qYgdQ" name="flatFromState : State" tooltipText="Tooltip for RelPatternNode" incomingEdges="_L-T2buYtEeab8LW48qYgdQ _L-T2g-YtEeab8LW48qYgdQ" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatFromState"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatFromState"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatFromState"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatFromState"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -761,8 +761,8 @@
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']"/>
       </ownedDiagramElements>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_L-T2UOYtEeab8LW48qYgdQ" name="flatStateMachine : StateMachine" tooltipText="Tooltip for RelPatternNode" outgoingEdges="_L-T2cuYtEeab8LW48qYgdQ" incomingEdges="_L-T2feYtEeab8LW48qYgdQ" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatStateMachine"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatStateMachine"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatStateMachine"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatStateMachine"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -772,8 +772,8 @@
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']"/>
       </ownedDiagramElements>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_L-T2UuYtEeab8LW48qYgdQ" name="flatToState : State" tooltipText="Tooltip for RelPatternNode" incomingEdges="_L-T2duYtEeab8LW48qYgdQ _L-T2ieYtEeab8LW48qYgdQ" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatToState"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatToState"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatToState"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat.flatToState"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -784,8 +784,8 @@
       </ownedDiagramElements>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_L-T2VOYtEeab8LW48qYgdQ" name="HierachicalStateMachine2FlatStateMachine" tooltipText="Tooltip for RelInvocationNode" outgoingEdges="_L-T2euYtEeab8LW48qYgdQ _L-T2feYtEeab8LW48qYgdQ" height="3">
-      <target xmi:type="umlx:RelInvocationNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#V.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.HierachicalStateMachine2FlatStateMachine"/>
-      <semanticElements xmi:type="umlx:RelInvocationNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#V.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.HierachicalStateMachine2FlatStateMachine"/>
+      <target xmi:type="umlx:RelInvocationNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#V.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.HierachicalStateMachine2FlatStateMachine"/>
+      <semanticElements xmi:type="umlx:RelInvocationNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#V.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.HierachicalStateMachine2FlatStateMachine"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -795,8 +795,8 @@
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelInvocationContainer']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_L-T2VuYtEeab8LW48qYgdQ" name="LeafState2FlatState" tooltipText="Tooltip for RelInvocationNode" outgoingEdges="_L-T2gOYtEeab8LW48qYgdQ _L-T2g-YtEeab8LW48qYgdQ" height="3">
-      <target xmi:type="umlx:RelInvocationNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#V.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatFromState.leafFromState~"/>
-      <semanticElements xmi:type="umlx:RelInvocationNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#V.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatFromState.leafFromState~"/>
+      <target xmi:type="umlx:RelInvocationNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#V.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatFromState.leafFromState~"/>
+      <semanticElements xmi:type="umlx:RelInvocationNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#V.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatFromState.leafFromState~"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -806,8 +806,8 @@
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelInvocationContainer']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_L-T2WOYtEeab8LW48qYgdQ" name="LeafState2FlatState" tooltipText="Tooltip for RelInvocationNode" outgoingEdges="_L-T2huYtEeab8LW48qYgdQ _L-T2ieYtEeab8LW48qYgdQ" height="3">
-      <target xmi:type="umlx:RelInvocationNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#V.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatToState.leafToState~"/>
-      <semanticElements xmi:type="umlx:RelInvocationNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#V.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatToState.leafToState~"/>
+      <target xmi:type="umlx:RelInvocationNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#V.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatToState.leafToState~"/>
+      <semanticElements xmi:type="umlx:RelInvocationNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#V.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatToState.leafToState~"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -817,8 +817,8 @@
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelInvocationContainer']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_L-T2WuYtEeab8LW48qYgdQ" sourceNode="_L-T2TOYtEeab8LW48qYgdQ" targetNode="_L-T2NuYtEeab8LW48qYgdQ" endLabel="name [1]">
-      <target xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition...flatTransition..transitionName"/>
-      <semanticElements xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition...flatTransition..transitionName"/>
+      <target xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition...flatTransition..transitionName"/>
+      <semanticElements xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition...flatTransition..transitionName"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_L-T2W-YtEeab8LW48qYgdQ" size="2" centered="Both" strokeColor="154,103,23">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']/@conditionnalStyles.2/@style"/>
         <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_L-T2XOYtEeab8LW48qYgdQ" showIcon="false"/>
@@ -827,8 +827,8 @@
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_L-T2XuYtEeab8LW48qYgdQ" sourceNode="_L-T2QuYtEeab8LW48qYgdQ" targetNode="_L-T2NuYtEeab8LW48qYgdQ" endLabel="name [1]">
-      <target xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition...hierarchicalTransition..transitionName"/>
-      <semanticElements xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition...hierarchicalTransition..transitionName"/>
+      <target xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition...hierarchicalTransition..transitionName"/>
+      <semanticElements xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition...hierarchicalTransition..transitionName"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_L-T2X-YtEeab8LW48qYgdQ" size="2" centered="Both" strokeColor="154,103,23">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']/@conditionnalStyles.2/@style"/>
         <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_L-T2YOYtEeab8LW48qYgdQ" showIcon="false"/>
@@ -837,8 +837,8 @@
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_L-T2YuYtEeab8LW48qYgdQ" sourceNode="_L-T2QuYtEeab8LW48qYgdQ" targetNode="_L-T2ROYtEeab8LW48qYgdQ" beginLabel="outTransitions [*]" endLabel="fromState [1]">
-      <target xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalTransition..hierarchicalFromState"/>
-      <semanticElements xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalTransition..hierarchicalFromState"/>
+      <target xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalTransition..hierarchicalFromState"/>
+      <semanticElements xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalTransition..hierarchicalFromState"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_L-T2Y-YtEeab8LW48qYgdQ" sourceArrow="InputFillClosedArrow" targetArrow="InputFillClosedArrow" size="2" centered="Both" strokeColor="154,103,23">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']/@style"/>
         <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_L-T2ZOYtEeab8LW48qYgdQ" showIcon="false"/>
@@ -847,8 +847,8 @@
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_L-T2ZuYtEeab8LW48qYgdQ" sourceNode="_L-T2RuYtEeab8LW48qYgdQ" targetNode="_L-T2QuYtEeab8LW48qYgdQ" beginLabel="owningStateMachine [1]" endLabel="ownedTransitions [*]">
-      <target xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalStateMachine..hierarchicalTransition"/>
-      <semanticElements xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalStateMachine..hierarchicalTransition"/>
+      <target xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalStateMachine..hierarchicalTransition"/>
+      <semanticElements xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalStateMachine..hierarchicalTransition"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_L-T2Z-YtEeab8LW48qYgdQ" sourceArrow="InputArrowWithFillDiamond" targetArrow="InputFillClosedArrow" size="2" centered="Both" strokeColor="154,103,23">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']/@conditionnalStyles.0/@style"/>
         <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_L-T2aOYtEeab8LW48qYgdQ" showIcon="false"/>
@@ -857,8 +857,8 @@
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_L-T2auYtEeab8LW48qYgdQ" sourceNode="_L-T2QuYtEeab8LW48qYgdQ" targetNode="_L-T2SOYtEeab8LW48qYgdQ" beginLabel="inTransitions [*]" endLabel="toState [1]">
-      <target xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalTransition..hierarchicalToState"/>
-      <semanticElements xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalTransition..hierarchicalToState"/>
+      <target xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalTransition..hierarchicalToState"/>
+      <semanticElements xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.hier..hierarchicalTransition..hierarchicalToState"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_L-T2a-YtEeab8LW48qYgdQ" sourceArrow="InputFillClosedArrow" targetArrow="InputFillClosedArrow" size="2" centered="Both" strokeColor="154,103,23">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']/@style"/>
         <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_L-T2bOYtEeab8LW48qYgdQ" showIcon="false"/>
@@ -867,8 +867,8 @@
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_L-T2buYtEeab8LW48qYgdQ" sourceNode="_L-T2TOYtEeab8LW48qYgdQ" targetNode="_L-T2TuYtEeab8LW48qYgdQ" beginLabel="outTransitions [*]" endLabel="fromState [1]">
-      <target xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatTransition..flatFromState"/>
-      <semanticElements xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatTransition..flatFromState"/>
+      <target xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatTransition..flatFromState"/>
+      <semanticElements xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatTransition..flatFromState"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_L-T2b-YtEeab8LW48qYgdQ" sourceArrow="InputFillClosedArrow" targetArrow="InputFillClosedArrow" size="2" centered="Both" strokeColor="154,103,23">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']/@style"/>
         <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_L-T2cOYtEeab8LW48qYgdQ" showIcon="false"/>
@@ -877,8 +877,8 @@
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_L-T2cuYtEeab8LW48qYgdQ" sourceNode="_L-T2UOYtEeab8LW48qYgdQ" targetNode="_L-T2TOYtEeab8LW48qYgdQ" beginLabel="owningStateMachine [1]" endLabel="ownedTransitions [*]">
-      <target xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatStateMachine..flatTransition"/>
-      <semanticElements xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatStateMachine..flatTransition"/>
+      <target xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatStateMachine..flatTransition"/>
+      <semanticElements xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatStateMachine..flatTransition"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_L-T2c-YtEeab8LW48qYgdQ" sourceArrow="InputArrowWithFillDiamond" targetArrow="InputFillClosedArrow" size="2" centered="Both" strokeColor="154,103,23">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']/@conditionnalStyles.0/@style"/>
         <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_L-T2dOYtEeab8LW48qYgdQ" showIcon="false"/>
@@ -887,8 +887,8 @@
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_L-T2duYtEeab8LW48qYgdQ" sourceNode="_L-T2TOYtEeab8LW48qYgdQ" targetNode="_L-T2UuYtEeab8LW48qYgdQ" beginLabel="inTransitions [*]" endLabel="toState [1]">
-      <target xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatTransition..flatToState"/>
-      <semanticElements xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatTransition..flatToState"/>
+      <target xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatTransition..flatToState"/>
+      <semanticElements xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.flat..flatTransition..flatToState"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_L-T2d-YtEeab8LW48qYgdQ" sourceArrow="InputFillClosedArrow" targetArrow="InputFillClosedArrow" size="2" centered="Both" strokeColor="154,103,23">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']/@style"/>
         <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_L-T2eOYtEeab8LW48qYgdQ" showIcon="false"/>
@@ -897,8 +897,8 @@
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_L-T2euYtEeab8LW48qYgdQ" sourceNode="_L-T2VOYtEeab8LW48qYgdQ" targetNode="_L-T2RuYtEeab8LW48qYgdQ" endLabel="hierarchicalStateMachine">
-      <target xmi:type="umlx:RelInvocationEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.HierachicalStateMachine2FlatStateMachine.hierarchicalStateMachine"/>
-      <semanticElements xmi:type="umlx:RelInvocationEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.HierachicalStateMachine2FlatStateMachine.hierarchicalStateMachine"/>
+      <target xmi:type="umlx:RelInvocationEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.HierachicalStateMachine2FlatStateMachine.hierarchicalStateMachine"/>
+      <semanticElements xmi:type="umlx:RelInvocationEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.HierachicalStateMachine2FlatStateMachine.hierarchicalStateMachine"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_L-T2e-YtEeab8LW48qYgdQ" sourceArrow="InputFillClosedArrow" targetArrow="InputFillClosedArrow" size="2" centered="Both" strokeColor="114,159,207">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelInvocationEdge']/@style"/>
         <endLabelStyle xmi:type="diagram:EndLabelStyle" xmi:id="_L-T2fOYtEeab8LW48qYgdQ" showIcon="false"/>
@@ -906,8 +906,8 @@
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelInvocationEdge']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_L-T2feYtEeab8LW48qYgdQ" sourceNode="_L-T2VOYtEeab8LW48qYgdQ" targetNode="_L-T2UOYtEeab8LW48qYgdQ" endLabel="flatStateMachine">
-      <target xmi:type="umlx:RelInvocationEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.HierachicalStateMachine2FlatStateMachine.flatStateMachine"/>
-      <semanticElements xmi:type="umlx:RelInvocationEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.HierachicalStateMachine2FlatStateMachine.flatStateMachine"/>
+      <target xmi:type="umlx:RelInvocationEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.HierachicalStateMachine2FlatStateMachine.flatStateMachine"/>
+      <semanticElements xmi:type="umlx:RelInvocationEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.HierachicalStateMachine2FlatStateMachine.flatStateMachine"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_L-T2fuYtEeab8LW48qYgdQ" sourceArrow="InputFillClosedArrow" targetArrow="InputFillClosedArrow" size="2" centered="Both" strokeColor="114,159,207">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelInvocationEdge']/@style"/>
         <endLabelStyle xmi:type="diagram:EndLabelStyle" xmi:id="_L-T2f-YtEeab8LW48qYgdQ" showIcon="false"/>
@@ -915,8 +915,8 @@
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelInvocationEdge']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_L-T2gOYtEeab8LW48qYgdQ" sourceNode="_L-T2VuYtEeab8LW48qYgdQ" targetNode="_L-T2OOYtEeab8LW48qYgdQ" endLabel="leafState">
-      <target xmi:type="umlx:RelInvocationEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatFromState.leafFromState~.leafState"/>
-      <semanticElements xmi:type="umlx:RelInvocationEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatFromState.leafFromState~.leafState"/>
+      <target xmi:type="umlx:RelInvocationEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatFromState.leafFromState~.leafState"/>
+      <semanticElements xmi:type="umlx:RelInvocationEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatFromState.leafFromState~.leafState"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_L-T2geYtEeab8LW48qYgdQ" sourceArrow="InputFillClosedArrow" targetArrow="InputFillClosedArrow" size="2" centered="Both" strokeColor="114,159,207">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelInvocationEdge']/@style"/>
         <endLabelStyle xmi:type="diagram:EndLabelStyle" xmi:id="_L-T2guYtEeab8LW48qYgdQ" showIcon="false"/>
@@ -924,8 +924,8 @@
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelInvocationEdge']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_L-T2g-YtEeab8LW48qYgdQ" sourceNode="_L-T2VuYtEeab8LW48qYgdQ" targetNode="_L-T2TuYtEeab8LW48qYgdQ" endLabel="flatState">
-      <target xmi:type="umlx:RelInvocationEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatFromState.leafFromState~.flatState"/>
-      <semanticElements xmi:type="umlx:RelInvocationEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatFromState.leafFromState~.flatState"/>
+      <target xmi:type="umlx:RelInvocationEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatFromState.leafFromState~.flatState"/>
+      <semanticElements xmi:type="umlx:RelInvocationEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatFromState.leafFromState~.flatState"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_L-T2hOYtEeab8LW48qYgdQ" sourceArrow="InputFillClosedArrow" targetArrow="InputFillClosedArrow" size="2" centered="Both" strokeColor="114,159,207">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelInvocationEdge']/@style"/>
         <endLabelStyle xmi:type="diagram:EndLabelStyle" xmi:id="_L-T2heYtEeab8LW48qYgdQ" showIcon="false"/>
@@ -933,8 +933,8 @@
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelInvocationEdge']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_L-T2huYtEeab8LW48qYgdQ" sourceNode="_L-T2WOYtEeab8LW48qYgdQ" targetNode="_L-T2OuYtEeab8LW48qYgdQ" endLabel="leafState">
-      <target xmi:type="umlx:RelInvocationEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatToState.leafToState~.leafState"/>
-      <semanticElements xmi:type="umlx:RelInvocationEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatToState.leafToState~.leafState"/>
+      <target xmi:type="umlx:RelInvocationEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatToState.leafToState~.leafState"/>
+      <semanticElements xmi:type="umlx:RelInvocationEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatToState.leafToState~.leafState"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_L-T2h-YtEeab8LW48qYgdQ" sourceArrow="InputFillClosedArrow" targetArrow="InputFillClosedArrow" size="2" centered="Both" strokeColor="114,159,207">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelInvocationEdge']/@style"/>
         <endLabelStyle xmi:type="diagram:EndLabelStyle" xmi:id="_L-T2iOYtEeab8LW48qYgdQ" showIcon="false"/>
@@ -942,8 +942,8 @@
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelInvocationEdge']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_L-T2ieYtEeab8LW48qYgdQ" sourceNode="_L-T2WOYtEeab8LW48qYgdQ" targetNode="_L-T2UuYtEeab8LW48qYgdQ" endLabel="flatState">
-      <target xmi:type="umlx:RelInvocationEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatToState.leafToState~.flatState"/>
-      <semanticElements xmi:type="umlx:RelInvocationEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatToState.leafToState~.flatState"/>
+      <target xmi:type="umlx:RelInvocationEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatToState.leafToState~.flatState"/>
+      <semanticElements xmi:type="umlx:RelInvocationEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition.LeafState2FlatState~flatToState.leafToState~.flatState"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_L-T2iuYtEeab8LW48qYgdQ" sourceArrow="InputFillClosedArrow" targetArrow="InputFillClosedArrow" size="2" centered="Both" strokeColor="114,159,207">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelInvocationEdge']/@style"/>
         <endLabelStyle xmi:type="diagram:EndLabelStyle" xmi:id="_L-T2i-YtEeab8LW48qYgdQ" showIcon="false"/>
@@ -953,9 +953,9 @@
     <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']"/>
     <filterVariableHistory xmi:type="diagram:FilterVariableHistory" xmi:id="_L-T2jOYtEeab8LW48qYgdQ"/>
     <activatedLayers xmi:type="description_1:Layer" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer"/>
-    <target xmi:type="umlx:RelDiagram" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition"/>
+    <target xmi:type="umlx:RelDiagram" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition"/>
   </diagram:DSemanticDiagram>
-  <diagram:DSemanticDiagram xmi:id="_5ju70eYtEeab8LW48qYgdQ" name="UMLX Relation LeafState2FlatState">
+  <diagram:DSemanticDiagram xmi:id="_5ju70eYtEeab8LW48qYgdQ" name="UMLX Relation LeafState2FlatState" uid="_8VuYgPqhEeetB8d-AyOcmw">
     <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_5ju70uYtEeab8LW48qYgdQ" source="DANNOTATION_CUSTOMIZATION_KEY">
       <data xmi:type="diagram:ComputedStyleDescriptionRegistry" xmi:id="_5ju70-YtEeab8LW48qYgdQ"/>
     </ownedAnnotationEntries>
@@ -1151,8 +1151,8 @@
       </data>
     </ownedAnnotationEntries>
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_5ju71OYtEeab8LW48qYgdQ" name="«primitive»" tooltipText="Tooltip for RelDomainNode">
-      <target xmi:type="umlx:RelDomainNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState."/>
-      <semanticElements xmi:type="umlx:RelDomainNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState."/>
+      <target xmi:type="umlx:RelDomainNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState."/>
+      <semanticElements xmi:type="umlx:RelDomainNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState."/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -1161,8 +1161,8 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']"/>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_5ju71uYtEeab8LW48qYgdQ" name="stateName : EString" tooltipText="Tooltip for RelPatternNode" incomingEdges="_5ju76OYtEeab8LW48qYgdQ _5ju77OYtEeab8LW48qYgdQ" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState..stateName"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState..stateName"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState..stateName"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState..stateName"/>
         <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_5ju71-YtEeab8LW48qYgdQ" showIcon="false" iconPath="/org.eclipse.qvtd.umlx.design/icons/UClassVariable.gif" borderSize="2" borderSizeComputationExpression="2" borderColor="253,206,137" foregroundColor="255,255,255">
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']/@style"/>
         </ownedStyle>
@@ -1170,8 +1170,8 @@
       </ownedDiagramElements>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_5ju72OYtEeab8LW48qYgdQ" name="hier" tooltipText="Tooltip for RelDomainNode">
-      <target xmi:type="umlx:RelDomainNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier"/>
-      <semanticElements xmi:type="umlx:RelDomainNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier"/>
+      <target xmi:type="umlx:RelDomainNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier"/>
+      <semanticElements xmi:type="umlx:RelDomainNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -1180,16 +1180,16 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']"/>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_5ju72uYtEeab8LW48qYgdQ" name="leafState : State" tooltipText="Tooltip for RelPatternNode" outgoingEdges="_5ju77OYtEeab8LW48qYgdQ" incomingEdges="_5ju78OYtEeab8LW48qYgdQ" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.leafState"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.leafState"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.leafState"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.leafState"/>
         <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_5ju72-YtEeab8LW48qYgdQ" showIcon="false" iconPath="/org.eclipse.qvtd.umlx.design/icons/UClassVariable.gif" borderSize="4" borderSizeComputationExpression="4" borderColor="253,206,137" foregroundColor="255,255,255">
           <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']/@conditionnalStyles.1/@style"/>
         </ownedStyle>
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']"/>
       </ownedDiagramElements>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_5ju73OYtEeab8LW48qYgdQ" name="hierarchicalStateMachine : StateMachine" tooltipText="Tooltip for RelPatternNode" outgoingEdges="_5ju78OYtEeab8LW48qYgdQ" incomingEdges="_5ju7-OYtEeab8LW48qYgdQ" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.hierarchicalStateMachine"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.hierarchicalStateMachine"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.hierarchicalStateMachine"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.hierarchicalStateMachine"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -1199,8 +1199,8 @@
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']"/>
       </ownedDiagramElements>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_5ju73uYtEeab8LW48qYgdQ" tooltipText="Tooltip for RelPatternNode" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#X.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.645304190"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#X.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.645304190"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#X.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.645304190"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#X.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier.645304190"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -1211,8 +1211,8 @@
       </ownedDiagramElements>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_5ju74OYtEeab8LW48qYgdQ" name="flat" tooltipText="Tooltip for RelDomainNode">
-      <target xmi:type="umlx:RelDomainNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat"/>
-      <semanticElements xmi:type="umlx:RelDomainNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat"/>
+      <target xmi:type="umlx:RelDomainNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat"/>
+      <semanticElements xmi:type="umlx:RelDomainNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#D.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -1221,8 +1221,8 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']"/>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_5ju74uYtEeab8LW48qYgdQ" name="flatState : State" tooltipText="Tooltip for RelPatternNode" outgoingEdges="_5ju76OYtEeab8LW48qYgdQ" incomingEdges="_5ju79OYtEeab8LW48qYgdQ" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat.flatState"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat.flatState"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat.flatState"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat.flatState"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -1232,8 +1232,8 @@
         <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelDomainContainer']/@subContainerMappings[name='RelPatternNodeContainer']"/>
       </ownedDiagramElements>
       <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_5ju75OYtEeab8LW48qYgdQ" name="flatStateMachine : StateMachine" tooltipText="Tooltip for RelPatternNode" outgoingEdges="_5ju79OYtEeab8LW48qYgdQ" incomingEdges="_5j4FweYtEeab8LW48qYgdQ" height="3">
-        <target xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat.flatStateMachine"/>
-        <semanticElements xmi:type="umlx:RelPatternNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat.flatStateMachine"/>
+        <target xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat.flatStateMachine"/>
+        <semanticElements xmi:type="umlx:RelPatternNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#C.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat.flatStateMachine"/>
         <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
         <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
         <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -1244,8 +1244,8 @@
       </ownedDiagramElements>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_5ju75uYtEeab8LW48qYgdQ" name="HierachicalStateMachine2FlatStateMachine" tooltipText="Tooltip for RelInvocationNode" outgoingEdges="_5ju7-OYtEeab8LW48qYgdQ _5j4FweYtEeab8LW48qYgdQ" height="3">
-      <target xmi:type="umlx:RelInvocationNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#V.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.HierachicalStateMachine2FlatStateMachine"/>
-      <semanticElements xmi:type="umlx:RelInvocationNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#V.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.HierachicalStateMachine2FlatStateMachine"/>
+      <target xmi:type="umlx:RelInvocationNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#V.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.HierachicalStateMachine2FlatStateMachine"/>
+      <semanticElements xmi:type="umlx:RelInvocationNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#V.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.HierachicalStateMachine2FlatStateMachine"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -1255,8 +1255,8 @@
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@containerMappings[name='RelInvocationContainer']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_5ju76OYtEeab8LW48qYgdQ" sourceNode="_5ju74uYtEeab8LW48qYgdQ" targetNode="_5ju71uYtEeab8LW48qYgdQ" endLabel="name [1]">
-      <target xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState...flatState..stateName"/>
-      <semanticElements xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState...flatState..stateName"/>
+      <target xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState...flatState..stateName"/>
+      <semanticElements xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState...flatState..stateName"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_5ju76eYtEeab8LW48qYgdQ" size="2" centered="Both" strokeColor="154,103,23">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']/@conditionnalStyles.2/@style"/>
         <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_5ju76uYtEeab8LW48qYgdQ" showIcon="false"/>
@@ -1265,8 +1265,8 @@
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_5ju77OYtEeab8LW48qYgdQ" sourceNode="_5ju72uYtEeab8LW48qYgdQ" targetNode="_5ju71uYtEeab8LW48qYgdQ" endLabel="name [1]">
-      <target xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState...leafState..stateName"/>
-      <semanticElements xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState...leafState..stateName"/>
+      <target xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState...leafState..stateName"/>
+      <semanticElements xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState...leafState..stateName"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_5ju77eYtEeab8LW48qYgdQ" size="2" centered="Both" strokeColor="154,103,23">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']/@conditionnalStyles.2/@style"/>
         <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_5ju77uYtEeab8LW48qYgdQ" showIcon="false"/>
@@ -1275,8 +1275,8 @@
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_5ju78OYtEeab8LW48qYgdQ" sourceNode="_5ju73OYtEeab8LW48qYgdQ" targetNode="_5ju72uYtEeab8LW48qYgdQ" beginLabel="owningStateMachine [1]" endLabel="ownedStates [*]">
-      <target xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier..hierarchicalStateMachine..leafState"/>
-      <semanticElements xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier..hierarchicalStateMachine..leafState"/>
+      <target xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier..hierarchicalStateMachine..leafState"/>
+      <semanticElements xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.hier..hierarchicalStateMachine..leafState"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_5ju78eYtEeab8LW48qYgdQ" sourceArrow="InputArrowWithFillDiamond" targetArrow="InputFillClosedArrow" size="2" centered="Both" strokeColor="154,103,23">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']/@conditionnalStyles.0/@style"/>
         <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_5ju78uYtEeab8LW48qYgdQ" showIcon="false"/>
@@ -1285,8 +1285,8 @@
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_5ju79OYtEeab8LW48qYgdQ" sourceNode="_5ju75OYtEeab8LW48qYgdQ" targetNode="_5ju74uYtEeab8LW48qYgdQ" beginLabel="owningStateMachine [1]" endLabel="ownedStates [*]">
-      <target xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat..flatStateMachine..flatState"/>
-      <semanticElements xmi:type="umlx:RelPatternEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat..flatStateMachine..flatState"/>
+      <target xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat..flatStateMachine..flatState"/>
+      <semanticElements xmi:type="umlx:RelPatternEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#E.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.flat..flatStateMachine..flatState"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_5ju79eYtEeab8LW48qYgdQ" sourceArrow="InputArrowWithFillDiamond" targetArrow="InputFillClosedArrow" size="2" centered="Both" strokeColor="154,103,23">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']/@conditionnalStyles.0/@style"/>
         <beginLabelStyle xmi:type="diagram:BeginLabelStyle" xmi:id="_5ju79uYtEeab8LW48qYgdQ" showIcon="false"/>
@@ -1295,8 +1295,8 @@
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelPatternEdge']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_5ju7-OYtEeab8LW48qYgdQ" sourceNode="_5ju75uYtEeab8LW48qYgdQ" targetNode="_5ju73OYtEeab8LW48qYgdQ" endLabel="hierarchicalStateMachine">
-      <target xmi:type="umlx:RelInvocationEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.HierachicalStateMachine2FlatStateMachine.hierarchicalStateMachine"/>
-      <semanticElements xmi:type="umlx:RelInvocationEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.HierachicalStateMachine2FlatStateMachine.hierarchicalStateMachine"/>
+      <target xmi:type="umlx:RelInvocationEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.HierachicalStateMachine2FlatStateMachine.hierarchicalStateMachine"/>
+      <semanticElements xmi:type="umlx:RelInvocationEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.HierachicalStateMachine2FlatStateMachine.hierarchicalStateMachine"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_5ju7-eYtEeab8LW48qYgdQ" sourceArrow="InputFillClosedArrow" targetArrow="InputFillClosedArrow" size="2" centered="Both" strokeColor="114,159,207">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelInvocationEdge']/@style"/>
         <endLabelStyle xmi:type="diagram:EndLabelStyle" xmi:id="_5j4FwOYtEeab8LW48qYgdQ" showIcon="false"/>
@@ -1304,8 +1304,8 @@
       <actualMapping xmi:type="description_1:EdgeMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelInvocationEdge']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DEdge" xmi:id="_5j4FweYtEeab8LW48qYgdQ" sourceNode="_5ju75uYtEeab8LW48qYgdQ" targetNode="_5ju75OYtEeab8LW48qYgdQ" endLabel="flatStateMachine">
-      <target xmi:type="umlx:RelInvocationEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.HierachicalStateMachine2FlatStateMachine.flatStateMachine"/>
-      <semanticElements xmi:type="umlx:RelInvocationEdge" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.HierachicalStateMachine2FlatStateMachine.flatStateMachine"/>
+      <target xmi:type="umlx:RelInvocationEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.HierachicalStateMachine2FlatStateMachine.flatStateMachine"/>
+      <semanticElements xmi:type="umlx:RelInvocationEdge" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#A.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState.HierachicalStateMachine2FlatStateMachine.flatStateMachine"/>
       <ownedStyle xmi:type="diagram:EdgeStyle" xmi:id="_5j4FwuYtEeab8LW48qYgdQ" sourceArrow="InputFillClosedArrow" targetArrow="InputFillClosedArrow" size="2" centered="Both" strokeColor="114,159,207">
         <description xmi:type="style:EdgeStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer/@edgeMappings[name='RelInvocationEdge']/@style"/>
         <endLabelStyle xmi:type="diagram:EndLabelStyle" xmi:id="_5j4Fw-YtEeab8LW48qYgdQ" showIcon="false"/>
@@ -1315,9 +1315,9 @@
     <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']"/>
     <filterVariableHistory xmi:type="diagram:FilterVariableHistory" xmi:id="_5j4FxOYtEeab8LW48qYgdQ"/>
     <activatedLayers xmi:type="description_1:Layer" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Relation%20Diagram']/@defaultLayer"/>
-    <target xmi:type="umlx:RelDiagram" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState"/>
+    <target xmi:type="umlx:RelDiagram" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState"/>
   </diagram:DSemanticDiagram>
-  <diagram:DSemanticDiagram xmi:id="_PM1LMeYuEeab8LW48qYgdQ" name="UMLX Transformation HierarchicalStateMachine2FlatStateMachine">
+  <diagram:DSemanticDiagram xmi:id="_PM1LMeYuEeab8LW48qYgdQ" name="UMLX Transformation HierarchicalStateMachine2FlatStateMachine" uid="_8WBTcPqhEeetB8d-AyOcmw">
     <ownedAnnotationEntries xmi:type="description:AnnotationEntry" xmi:id="_PM1LMuYuEeab8LW48qYgdQ" source="DANNOTATION_CUSTOMIZATION_KEY">
       <data xmi:type="diagram:ComputedStyleDescriptionRegistry" xmi:id="_PM1LM-YuEeab8LW48qYgdQ"/>
     </ownedAnnotationEntries>
@@ -1411,16 +1411,14 @@
       </data>
     </ownedAnnotationEntries>
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_PM1LNOYuEeab8LW48qYgdQ" name="hierMM" tooltipText="Tooltip for TxImportNode" height="2">
-      <target xmi:type="umlx:TxImportNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#I.HierarchicalStateMachine2FlatStateMachine.hierMM"/>
-      <semanticElements xmi:type="umlx:TxImportNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#I.HierarchicalStateMachine2FlatStateMachine.hierMM"/>
       <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_PM1LNeYuEeab8LW48qYgdQ" iconPath="/org.eclipse.uml2.uml.edit/icons/full/obj16/PackageImport.gif" borderSize="2" borderSizeComputationExpression="2" borderColor="114,159,207" foregroundColor="255,255,255">
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxImportContainer']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxImportContainer']"/>
+      <target xmi:type="umlx:TxImportNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#I.HierarchicalStateMachine2FlatStateMachine.hierMM"/>
+      <semanticElements xmi:type="umlx:TxImportNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#I.HierarchicalStateMachine2FlatStateMachine.hierMM"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_PM1LNuYuEeab8LW48qYgdQ" name="flatMM" tooltipText="Tooltip for TxImportNode" height="2">
-      <target xmi:type="umlx:TxImportNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#I.HierarchicalStateMachine2FlatStateMachine.flatMM"/>
-      <semanticElements xmi:type="umlx:TxImportNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#I.HierarchicalStateMachine2FlatStateMachine.flatMM"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -1428,18 +1426,20 @@
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxImportContainer']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxImportContainer']"/>
+      <target xmi:type="umlx:TxImportNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#I.HierarchicalStateMachine2FlatStateMachine.flatMM"/>
+      <semanticElements xmi:type="umlx:TxImportNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#I.HierarchicalStateMachine2FlatStateMachine.flatMM"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_PM1LOOYuEeab8LW48qYgdQ" name="«top»&#xA;HierachicalStateMachine2FlatStateMachine" tooltipText="Tooltip for RelDiagram" height="3">
-      <target xmi:type="umlx:RelDiagram" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine"/>
-      <semanticElements xmi:type="umlx:RelDiagram" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine"/>
+      <target xmi:type="umlx:RelDiagram" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine"/>
+      <semanticElements xmi:type="umlx:RelDiagram" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.HierachicalStateMachine2FlatStateMachine"/>
       <ownedStyle xmi:type="diagram:FlatContainerStyle" xmi:id="_PM1LOeYuEeab8LW48qYgdQ" iconPath="/org.eclipse.qvtd.umlx.design/icons/UMLXRelation.gif" borderSize="2" borderSizeComputationExpression="2" borderColor="114,159,207" foregroundColor="255,255,255">
         <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxRelDiagramContainer']/@style"/>
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxRelDiagramContainer']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_PM1LOuYuEeab8LW48qYgdQ" name="«top»&#xA;HierachicalTransition2FlatTransition" tooltipText="Tooltip for RelDiagram" height="3">
-      <target xmi:type="umlx:RelDiagram" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition"/>
-      <semanticElements xmi:type="umlx:RelDiagram" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition"/>
+      <target xmi:type="umlx:RelDiagram" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition"/>
+      <semanticElements xmi:type="umlx:RelDiagram" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.HierachicalTransition2FlatTransition"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -1449,8 +1449,8 @@
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxRelDiagramContainer']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeContainer" xmi:id="_PM1LPOYuEeab8LW48qYgdQ" name="«top»&#xA;LeafState2FlatState" tooltipText="Tooltip for RelDiagram" height="3">
-      <target xmi:type="umlx:RelDiagram" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState"/>
-      <semanticElements xmi:type="umlx:RelDiagram" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState"/>
+      <target xmi:type="umlx:RelDiagram" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState"/>
+      <semanticElements xmi:type="umlx:RelDiagram" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#R.HierarchicalStateMachine2FlatStateMachine.LeafState2FlatState"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -1460,8 +1460,8 @@
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxRelDiagramContainer']"/>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_PM1LPuYuEeab8LW48qYgdQ" name="hier" tooltipText="Tooltip for TxTypedModelNode">
-      <target xmi:type="umlx:TxTypedModelNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#Tp.HierarchicalStateMachine2FlatStateMachine.hier"/>
-      <semanticElements xmi:type="umlx:TxTypedModelNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#Tp.HierarchicalStateMachine2FlatStateMachine.hier"/>
+      <target xmi:type="umlx:TxTypedModelNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#Tp.HierarchicalStateMachine2FlatStateMachine.hier"/>
+      <semanticElements xmi:type="umlx:TxTypedModelNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#Tp.HierarchicalStateMachine2FlatStateMachine.hier"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -1470,8 +1470,8 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxTypedModelContainer']"/>
       <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_PM1LQOYuEeab8LW48qYgdQ" name="HierarchicalStateMachine" tooltipText="Tooltip for TxPackageNode">
-        <target xmi:type="umlx:TxPackageNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#U.HierarchicalStateMachine2FlatStateMachine.hier.HierarchicalStateMachine"/>
-        <semanticElements xmi:type="umlx:TxPackageNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#U.HierarchicalStateMachine2FlatStateMachine.hier.HierarchicalStateMachine"/>
+        <target xmi:type="umlx:TxPackageNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#U.HierarchicalStateMachine2FlatStateMachine.hier.HierarchicalStateMachine"/>
+        <semanticElements xmi:type="umlx:TxPackageNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#U.HierarchicalStateMachine2FlatStateMachine.hier.HierarchicalStateMachine"/>
         <ownedStyle xmi:type="diagram:Square" xmi:id="_PM1LQeYuEeab8LW48qYgdQ" iconPath="/org.eclipse.emf.ecore.edit/icons/full/obj16/EPackage.gif" labelAlignment="LEFT" borderColor="253,206,137" labelPosition="node" color="255,255,255">
           <description xmi:type="style:SquareDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxTypedModelContainer']/@subNodeMappings[name='TxPackageNode']/@style"/>
         </ownedStyle>
@@ -1479,8 +1479,8 @@
       </ownedElements>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_PM1LQuYuEeab8LW48qYgdQ" name="flat" tooltipText="Tooltip for TxTypedModelNode">
-      <target xmi:type="umlx:TxTypedModelNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#Tp.HierarchicalStateMachine2FlatStateMachine.flat"/>
-      <semanticElements xmi:type="umlx:TxTypedModelNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#Tp.HierarchicalStateMachine2FlatStateMachine.flat"/>
+      <target xmi:type="umlx:TxTypedModelNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#Tp.HierarchicalStateMachine2FlatStateMachine.flat"/>
+      <semanticElements xmi:type="umlx:TxTypedModelNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#Tp.HierarchicalStateMachine2FlatStateMachine.flat"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -1489,8 +1489,8 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxTypedModelContainer']"/>
       <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_PM1LROYuEeab8LW48qYgdQ" name="FlatStateMachine" tooltipText="Tooltip for TxPackageNode">
-        <target xmi:type="umlx:TxPackageNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#U.HierarchicalStateMachine2FlatStateMachine.flat.FlatStateMachine"/>
-        <semanticElements xmi:type="umlx:TxPackageNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#U.HierarchicalStateMachine2FlatStateMachine.flat.FlatStateMachine"/>
+        <target xmi:type="umlx:TxPackageNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#U.HierarchicalStateMachine2FlatStateMachine.flat.FlatStateMachine"/>
+        <semanticElements xmi:type="umlx:TxPackageNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#U.HierarchicalStateMachine2FlatStateMachine.flat.FlatStateMachine"/>
         <ownedStyle xmi:type="diagram:Square" xmi:id="_PM1LReYuEeab8LW48qYgdQ" iconPath="/org.eclipse.emf.ecore.edit/icons/full/obj16/EPackage.gif" labelAlignment="LEFT" borderColor="253,206,137" labelPosition="node" color="255,255,255">
           <description xmi:type="style:SquareDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxTypedModelContainer']/@subNodeMappings[name='TxPackageNode']/@style"/>
         </ownedStyle>
@@ -1498,8 +1498,8 @@
       </ownedElements>
     </ownedDiagramElements>
     <ownedDiagramElements xmi:type="diagram:DNodeList" xmi:id="_PM1LRuYuEeab8LW48qYgdQ" name="getLeafStates : Set(State)" tooltipText="Tooltip for TxQueryNode">
-      <target xmi:type="umlx:TxQueryNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#Q.HierarchicalStateMachine2FlatStateMachine.getLeafStates..hierarchicalState"/>
-      <semanticElements xmi:type="umlx:TxQueryNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#Q.HierarchicalStateMachine2FlatStateMachine.getLeafStates..hierarchicalState"/>
+      <target xmi:type="umlx:TxQueryNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#Q.HierarchicalStateMachine2FlatStateMachine.getLeafStates..hierarchicalState"/>
+      <semanticElements xmi:type="umlx:TxQueryNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#Q.HierarchicalStateMachine2FlatStateMachine.getLeafStates..hierarchicalState"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
@@ -1508,8 +1508,8 @@
       </ownedStyle>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxQueryContainer']"/>
       <ownedElements xmi:type="diagram:DNodeListElement" xmi:id="_PM1LSOYuEeab8LW48qYgdQ" name="hierarchicalState : State" tooltipText="Tooltip for TxParameterNode">
-        <target xmi:type="umlx:TxParameterNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#Qp.HierarchicalStateMachine2FlatStateMachine.getLeafStates.hierarchicalState"/>
-        <semanticElements xmi:type="umlx:TxParameterNode" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#Qp.HierarchicalStateMachine2FlatStateMachine.getLeafStates.hierarchicalState"/>
+        <target xmi:type="umlx:TxParameterNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#Qp.HierarchicalStateMachine2FlatStateMachine.getLeafStates.hierarchicalState"/>
+        <semanticElements xmi:type="umlx:TxParameterNode" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#Qp.HierarchicalStateMachine2FlatStateMachine.getLeafStates.hierarchicalState"/>
         <ownedStyle xmi:type="diagram:Square" xmi:id="_PM1LSeYuEeab8LW48qYgdQ" iconPath="/org.eclipse.qvtd.xtext.qvtbase.ui/icons/FunctionParameter.gif" labelAlignment="LEFT" borderSize="2" borderSizeComputationExpression="2" borderColor="253,206,137" labelPosition="node" color="255,255,255">
           <description xmi:type="style:SquareDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer/@containerMappings[name='TxQueryContainer']/@subNodeMappings[name='TxParameterNode']/@style"/>
         </ownedStyle>
@@ -1519,6 +1519,6 @@
     <description xmi:type="description_1:DiagramDescription" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']"/>
     <filterVariableHistory xmi:type="diagram:FilterVariableHistory" xmi:id="_PM1LSuYuEeab8LW48qYgdQ"/>
     <activatedLayers xmi:type="description_1:Layer" href="platform:/plugin/org.eclipse.qvtd.umlx.design/description/umlx.odesign#//@ownedViewpoints[name='umlx-viewpoint-id']/@ownedRepresentations[name='UMLX%20Transformation%20Diagram']/@defaultLayer"/>
-    <target xmi:type="umlx:TxDiagram" href="src/org/eclipse/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine2FlatStateMachine.umlx#T.HierarchicalStateMachine2FlatStateMachine"/>
+    <target xmi:type="umlx:TxDiagram" href="model/HierarchicalStateMachine2FlatStateMachine.umlx#T.HierarchicalStateMachine2FlatStateMachine"/>
   </diagram:DSemanticDiagram>
 </xmi:XMI>
