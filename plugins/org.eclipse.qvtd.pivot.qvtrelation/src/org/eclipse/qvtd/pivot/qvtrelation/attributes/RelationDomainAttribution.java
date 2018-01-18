@@ -34,8 +34,8 @@ public class RelationDomainAttribution extends AbstractAttribution
 		TypedModel typedModel = targetElement.getTypedModel();
 		if (typedModel != null) {
 			for (org.eclipse.ocl.pivot.Package pPackage : typedModel.getUsedPackage()) {
-				environmentView.addNamedElement(pPackage);
-				environmentView.addNamedElements(pPackage.getOwnedClasses());
+				environmentView.addAllPackages(pPackage);
+				environmentView.addAllTypes(pPackage);
 			}
 		}
 		return scopeView.getParent();
