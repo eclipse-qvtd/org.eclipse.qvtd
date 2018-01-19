@@ -17,7 +17,7 @@ context CheckStatement
 inv TypeIsBoolean: ownedExpression.type = Boolean
 
 context DeclareStatement
-inv CompatibleTypeForCheckedValue: isCheck implies type.conformsTo(ownedExpression.type)
+--inv CompatibleTypeForCheckedValue: isCheck implies type.conformsTo(ownedExpression.type)
 inv CompatibleTypeForUncheckedValue: not isCheck implies ownedExpression.type.conformsTo(type)
 
 --context GuardParameter

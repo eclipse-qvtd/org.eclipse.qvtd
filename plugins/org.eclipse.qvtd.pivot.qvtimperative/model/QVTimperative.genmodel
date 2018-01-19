@@ -50,10 +50,6 @@
     <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-DeclareStatement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-DeclareStatement-isCheck"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-DeclareStatement-ownedExpression"/>
-      <genOperations ecoreOperation="QVTimperative.ecore#//DeclareStatement/validateCompatibleTypeForCheckedValue">
-        <genParameters ecoreParameter="QVTimperative.ecore#//DeclareStatement/validateCompatibleTypeForCheckedValue/diagnostics"/>
-        <genParameters ecoreParameter="QVTimperative.ecore#//DeclareStatement/validateCompatibleTypeForCheckedValue/context"/>
-      </genOperations>
       <genOperations ecoreOperation="QVTimperative.ecore#//DeclareStatement/validateCompatibleTypeForUncheckedValue">
         <genParameters ecoreParameter="QVTimperative.ecore#//DeclareStatement/validateCompatibleTypeForUncheckedValue/diagnostics"/>
         <genParameters ecoreParameter="QVTimperative.ecore#//DeclareStatement/validateCompatibleTypeForUncheckedValue/context"/>

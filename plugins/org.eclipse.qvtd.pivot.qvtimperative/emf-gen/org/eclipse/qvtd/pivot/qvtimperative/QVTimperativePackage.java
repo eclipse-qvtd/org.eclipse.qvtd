@@ -1911,22 +1911,13 @@ public interface QVTimperativePackage extends EPackage {
 	int DECLARE_STATEMENT___JOIN_NAMES__ELIST = VARIABLE_STATEMENT___JOIN_NAMES__ELIST;
 
 	/**
-	 * The operation id for the '<em>Validate Compatible Type For Checked Value</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DECLARE_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_CHECKED_VALUE__DIAGNOSTICCHAIN_MAP = VARIABLE_STATEMENT_OPERATION_COUNT + 0;
-
-	/**
 	 * The operation id for the '<em>Validate Compatible Type For Unchecked Value</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARE_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE__DIAGNOSTICCHAIN_MAP = VARIABLE_STATEMENT_OPERATION_COUNT + 1;
+	int DECLARE_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE__DIAGNOSTICCHAIN_MAP = VARIABLE_STATEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Declare Statement</em>' class.
@@ -1935,7 +1926,7 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARE_STATEMENT_OPERATION_COUNT = VARIABLE_STATEMENT_OPERATION_COUNT + 2;
+	int DECLARE_STATEMENT_OPERATION_COUNT = VARIABLE_STATEMENT_OPERATION_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -4843,16 +4834,6 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getDeclareStatement_OwnedExpression();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#validateCompatibleTypeForCheckedValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Checked Value</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Validate Compatible Type For Checked Value</em>' operation.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#validateCompatibleTypeForCheckedValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
-	 * @generated
-	 */
-	EOperation getDeclareStatement__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map();
-
-	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement#validateCompatibleTypeForUncheckedValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Unchecked Value</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5878,14 +5859,6 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EReference DECLARE_STATEMENT__OWNED_EXPRESSION = eINSTANCE.getDeclareStatement_OwnedExpression();
-
-		/**
-		 * The meta object literal for the '<em><b>Validate Compatible Type For Checked Value</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation DECLARE_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_CHECKED_VALUE__DIAGNOSTICCHAIN_MAP = eINSTANCE.getDeclareStatement__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Compatible Type For Unchecked Value</b></em>' operation.

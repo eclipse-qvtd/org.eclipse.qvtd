@@ -102,20 +102,12 @@ public class QVTimperativeValidator extends EObjectValidator {
 	public static final int CHECK_STATEMENT__VALIDATE_TYPE_IS_BOOLEAN = 3;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Checked Value' of 'Declare Statement'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final int DECLARE_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_CHECKED_VALUE = 4;
-
-	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Unchecked Value' of 'Declare Statement'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int DECLARE_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE = 5;
+	public static final int DECLARE_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE = 4;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validateall Rules Are Mappings' of 'Imperative Transformation'.
@@ -123,7 +115,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int IMPERATIVE_TRANSFORMATION__VALIDATEALL_RULES_ARE_MAPPINGS = 6;
+	public static final int IMPERATIVE_TRANSFORMATION__VALIDATEALL_RULES_ARE_MAPPINGS = 5;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Name Is Not Null' of 'Imperative Typed Model'.
@@ -131,7 +123,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int IMPERATIVE_TYPED_MODEL__VALIDATE_NAME_IS_NOT_NULL = 7;
+	public static final int IMPERATIVE_TYPED_MODEL__VALIDATE_NAME_IS_NOT_NULL = 6;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Not Both Checked And Enforced' of 'Imperative Typed Model'.
@@ -139,7 +131,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int IMPERATIVE_TYPED_MODEL__VALIDATE_NOT_BOTH_CHECKED_AND_ENFORCED = 8;
+	public static final int IMPERATIVE_TYPED_MODEL__VALIDATE_NOT_BOTH_CHECKED_AND_ENFORCED = 7;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Name Is Not Null' of 'Mapping'.
@@ -147,7 +139,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MAPPING__VALIDATE_NAME_IS_NOT_NULL = 9;
+	public static final int MAPPING__VALIDATE_NAME_IS_NOT_NULL = 8;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Mapping Parameter Names Are Unique' of 'Mapping'.
@@ -155,7 +147,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MAPPING__VALIDATE_MAPPING_PARAMETER_NAMES_ARE_UNIQUE = 10;
+	public static final int MAPPING__VALIDATE_MAPPING_PARAMETER_NAMES_ARE_UNIQUE = 9;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Local Variable Names Are Unique' of 'Mapping'.
@@ -163,7 +155,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MAPPING__VALIDATE_LOCAL_VARIABLE_NAMES_ARE_UNIQUE = 11;
+	public static final int MAPPING__VALIDATE_LOCAL_VARIABLE_NAMES_ARE_UNIQUE = 10;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Matching Call Bindings' of 'Mapping Call'.
@@ -171,7 +163,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MAPPING_CALL__VALIDATE_MATCHING_CALL_BINDINGS = 12;
+	public static final int MAPPING_CALL__VALIDATE_MATCHING_CALL_BINDINGS = 11;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Not Both Install And Invoke' of 'Mapping Call'.
@@ -179,7 +171,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MAPPING_CALL__VALIDATE_NOT_BOTH_INSTALL_AND_INVOKE = 13;
+	public static final int MAPPING_CALL__VALIDATE_NOT_BOTH_INSTALL_AND_INVOKE = 12;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Unique Call Bindings' of 'Mapping Call'.
@@ -187,7 +179,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MAPPING_CALL__VALIDATE_UNIQUE_CALL_BINDINGS = 14;
+	public static final int MAPPING_CALL__VALIDATE_UNIQUE_CALL_BINDINGS = 13;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Parameter Is Mapping Parameter' of 'Mapping Parameter Binding'.
@@ -195,7 +187,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MAPPING_PARAMETER_BINDING__VALIDATE_PARAMETER_IS_MAPPING_PARAMETER = 15;
+	public static final int MAPPING_PARAMETER_BINDING__VALIDATE_PARAMETER_IS_MAPPING_PARAMETER = 14;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Value' of 'New Statement'.
@@ -203,7 +195,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int NEW_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 16;
+	public static final int NEW_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 15;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Non Data Type For Type' of 'New Statement'.
@@ -211,7 +203,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int NEW_STATEMENT__VALIDATE_NON_DATA_TYPE_FOR_TYPE = 17;
+	public static final int NEW_STATEMENT__VALIDATE_NON_DATA_TYPE_FOR_TYPE = 16;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Class For Property' of 'Set Statement'.
@@ -219,7 +211,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SET_STATEMENT__VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY = 18;
+	public static final int SET_STATEMENT__VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY = 17;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Partial Value' of 'Set Statement'.
@@ -227,7 +219,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SET_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE = 19;
+	public static final int SET_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE = 18;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Total Value' of 'Set Statement'.
@@ -235,7 +227,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SET_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE = 20;
+	public static final int SET_STATEMENT__VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE = 19;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Value Does Not Navigate From Realized Variables' of 'Set Statement'.
@@ -243,7 +235,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SET_STATEMENT__VALIDATE_VALUE_DOES_NOT_NAVIGATE_FROM_REALIZED_VARIABLES = 21;
+	public static final int SET_STATEMENT__VALIDATE_VALUE_DOES_NOT_NAVIGATE_FROM_REALIZED_VARIABLES = 20;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Target Property Is Not Read Only' of 'Set Statement'.
@@ -251,7 +243,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SET_STATEMENT__VALIDATE_TARGET_PROPERTY_IS_NOT_READ_ONLY = 22;
+	public static final int SET_STATEMENT__VALIDATE_TARGET_PROPERTY_IS_NOT_READ_ONLY = 21;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Checked Value' of 'Simple Parameter Binding'.
@@ -259,7 +251,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SIMPLE_PARAMETER_BINDING__VALIDATE_COMPATIBLE_TYPE_FOR_CHECKED_VALUE = 23;
+	public static final int SIMPLE_PARAMETER_BINDING__VALIDATE_COMPATIBLE_TYPE_FOR_CHECKED_VALUE = 22;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Unchecked Value' of 'Simple Parameter Binding'.
@@ -267,7 +259,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SIMPLE_PARAMETER_BINDING__VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE = 24;
+	public static final int SIMPLE_PARAMETER_BINDING__VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE = 23;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -275,7 +267,7 @@ public class QVTimperativeValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 24;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 23;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -561,19 +553,8 @@ public class QVTimperativeValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateNameIsNotNull(declareStatement, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotInvalid(declareStatement, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotNull(declareStatement, diagnostics, context);
-		if (result || diagnostics != null) result &= validateDeclareStatement_validateCompatibleTypeForCheckedValue(declareStatement, diagnostics, context);
 		if (result || diagnostics != null) result &= validateDeclareStatement_validateCompatibleTypeForUncheckedValue(declareStatement, diagnostics, context);
 		return result;
-	}
-
-	/**
-	 * Validates the validateCompatibleTypeForCheckedValue constraint of '<em>Declare Statement</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateDeclareStatement_validateCompatibleTypeForCheckedValue(DeclareStatement declareStatement, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return declareStatement.validateCompatibleTypeForCheckedValue(diagnostics, context);
 	}
 
 	/**

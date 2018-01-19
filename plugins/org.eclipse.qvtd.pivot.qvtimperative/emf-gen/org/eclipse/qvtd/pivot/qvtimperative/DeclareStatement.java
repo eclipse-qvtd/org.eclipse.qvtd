@@ -105,13 +105,6 @@ public interface DeclareStatement extends VariableStatement, ObservableStatement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	boolean validateCompatibleTypeForCheckedValue(DiagnosticChain diagnostics, Map<Object, Object> context);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	boolean validateCompatibleTypeForUncheckedValue(DiagnosticChain diagnostics, Map<Object, Object> context);
 
 } // PredicateVariable
