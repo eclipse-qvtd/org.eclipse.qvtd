@@ -339,6 +339,13 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				if (edge instanceof NavigableEdge) {
 					Property property = RegionUtil.getProperty((NavigableEdge)edge);
 					OCLExpression sourceExp = createVariableExp(sourceNode);
+					Type sourceType = sourceExp.getType();
+					Type requiredType = property.getOwningClass();
+					if ((requiredType != null) && !sourceType.conformsTo(getMetamodelManager().getStandardLibrary(), requiredType)) {
+						String castName = "cast_" + sourceNode.getName(); // FIXME BUG 530033 in a closed world this is always a fail
+						DeclareStatement castStatement = createCheckedDeclareStatement(castName, sourceExp, requiredType);
+						sourceExp = helper.createVariableExp(castStatement);
+					}
 					OCLExpression source2targetExp = createCallExp(sourceExp, property);
 					if (targetNode.isTrue()) {
 						createCheckStatement(source2targetExp);
@@ -1447,6 +1454,13 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		OCLExpression booleanExpression = helper.createOperationCallExp(firstExpression, operatorName, secondExpression);
 		CheckStatement checkStatement = createCheckStatement(booleanExpression);
 		return checkStatement;
+	}
+
+	private @NonNull DeclareStatement createCheckedDeclareStatement(@NonNull String name, @NonNull OCLExpression sourceExp, @NonNull Type requiredType) {
+		String safeName = getSafeName(name);
+		DeclareStatement castStatement = helper.createDeclareStatement(safeName, requiredType, true, sourceExp);
+		mapping.getOwnedStatements().add(castStatement);
+		return castStatement;
 	}
 
 	private void createClassSetStatement(@NonNull NavigableEdge edge) {
