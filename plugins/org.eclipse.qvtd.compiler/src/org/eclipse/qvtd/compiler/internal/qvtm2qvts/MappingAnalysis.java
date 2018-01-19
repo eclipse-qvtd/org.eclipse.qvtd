@@ -524,7 +524,10 @@ public class MappingAnalysis implements Nameable
 					DomainUsage domainUsage = RegionUtil.getScheduleManager(mappingRegion).getDomainUsage(variable);
 					boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
 					if (isEnforceable) {
-						assert variable instanceof RealizedVariable;
+						//						assert variable instanceof RealizedVariable;
+						if (!(variable instanceof RealizedVariable)) {
+							getScheduleManager().addRegionError(mappingRegion, "Enforceable variable ''{0}'' has not been realized in ''{1}''", variable, mappingRegion);
+						}
 						node = RegionUtil.createRealizedStepNode(mappingRegion, variable);
 					}
 					else {
