@@ -53,6 +53,9 @@ inv WhereInvocationIsANonTopRelation:
 	let pattern : qvtbase::Pattern = self->asOrderedSet()->closure(e : ocl::OclElement | e.oclContainer())->selectByKind(qvtbase::Pattern)->first() in
     let relation : Relation = pattern->asOrderedSet()->closure(e : ocl::OclElement | e.oclContainer())->selectByKind(Relation)->first() in
 	relation._where = pattern implies not referredRelation.isTopLevel
+inv DataTypeInvocationIsANonTopRelation:
+	self.argument->exists(type.oclIsKindOf(pivot::DataType) and not type.oclIsKindOf(pivot::CollectionType))
+	implies not referredRelation.isTopLevel
 	
 context RelationDomain
 inv RelationDomainAssignmentsAreUnique:

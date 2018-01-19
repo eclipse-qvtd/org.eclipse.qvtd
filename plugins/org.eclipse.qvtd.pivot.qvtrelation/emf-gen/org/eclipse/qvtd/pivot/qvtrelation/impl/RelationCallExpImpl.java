@@ -40,13 +40,16 @@ import org.eclipse.ocl.pivot.library.collection.CollectionAsOrderedSetOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionSelectByKindOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionSizeOperation;
 import org.eclipse.ocl.pivot.library.collection.OrderedCollectionFirstOperation;
+import org.eclipse.ocl.pivot.library.logical.BooleanAndOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanImpliesOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsSetOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
+import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -327,7 +330,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						 */
 						@Override
 						public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object asOrderedSet, final /*@NonInvalid*/ java.lang.@Nullable Object e_0) {
-							final /*@NonInvalid*/ java.lang.@Nullable Object symbol_0 = (Object)e_0;
+							final /*@NonInvalid*/ java.lang.@Nullable Object symbol_0 = e_0;
 							final /*@Thrown*/ java.lang.@Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, symbol_0);
 							return oclContainer;
 						}
@@ -361,7 +364,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 						 */
 						@Override
 						public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object asOrderedSet_0, final /*@NonInvalid*/ java.lang.@Nullable Object e_1) {
-							final /*@NonInvalid*/ java.lang.@Nullable Object symbol_1 = (Object)e_1;
+							final /*@NonInvalid*/ java.lang.@Nullable Object symbol_1 = e_1;
 							final /*@Thrown*/ java.lang.@Nullable Object oclContainer_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, symbol_1);
 							return oclContainer_0;
 						}
@@ -407,6 +410,139 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 			symbol_2 = logDiagnostic;
 		}
 		return Boolean.TRUE == symbol_2;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean validateDataTypeInvocationIsANonTopRelation(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		/**
+		 *
+		 * inv DataTypeInvocationIsANonTopRelation:
+		 *   let
+		 *     severity : Integer[1] = 'RelationCallExp::DataTypeInvocationIsANonTopRelation'.getSeverity()
+		 *   in
+		 *     if severity <= 0
+		 *     then true
+		 *     else
+		 *       let
+		 *         result : Boolean[?] = self.argument->exists(
+		 *           type.oclIsKindOf(DataType) and
+		 *           not type.oclIsKindOf(CollectionType)) implies not referredRelation.isTopLevel
+		 *       in
+		 *         'RelationCallExp::DataTypeInvocationIsANonTopRelation'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+		 *     endif
+		 */
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_RelationCallExp_c_c_DataTypeInvocationIsANonTopRelation);
+		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
+		/*@NonInvalid*/ boolean symbol_0;
+		if (le) {
+			symbol_0 = ValueUtil.TRUE_VALUE;
+		}
+		else {
+			/*@Caught*/ @Nullable Object CAUGHT_result;
+			try {
+				/*@Caught*/ @Nullable Object CAUGHT_exists;
+				try {
+					@SuppressWarnings("null")
+					final /*@NonInvalid*/ java.util.@NonNull List<OCLExpression> argument = this.getArgument();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_argument = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_OCLExpression, argument);
+					/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.FALSE_VALUE;
+					@NonNull Iterator<Object> ITERATOR__1 = BOXED_argument.iterator();
+					/*@Thrown*/ java.lang.@Nullable Boolean exists;
+					while (true) {
+						if (!ITERATOR__1.hasNext()) {
+							if (accumulator == null) {
+								exists = null;
+							}
+							else if (accumulator == ValueUtil.FALSE_VALUE) {
+								exists = ValueUtil.FALSE_VALUE;
+							}
+							else {
+								throw (InvalidValueException)accumulator;
+							}
+							break;
+						}
+						@SuppressWarnings("null")
+						/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression _1 = (OCLExpression)ITERATOR__1.next();
+						/**
+						 *
+						 * type.oclIsKindOf(DataType) and
+						 * not type.oclIsKindOf(CollectionType)
+						 */
+						/*@Caught*/ @Nullable Object CAUGHT_and;
+						try {
+							/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
+							try {
+								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_DataType = idResolver.getClass(QVTrelationTables.CLSSid_DataType, null);
+								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = _1.getType();
+								final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_DataType).booleanValue();
+								CAUGHT_oclIsKindOf = oclIsKindOf;
+							}
+							catch (Exception e) {
+								CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
+							}
+							/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf_0;
+							try {
+								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType = idResolver.getClass(QVTrelationTables.CLSSid_CollectionType, null);
+								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = _1.getType();
+								final /*@Thrown*/ boolean oclIsKindOf_0 = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type_0, TYP_CollectionType).booleanValue();
+								CAUGHT_oclIsKindOf_0 = oclIsKindOf_0;
+							}
+							catch (Exception e) {
+								CAUGHT_oclIsKindOf_0 = ValueUtil.createInvalidValue(e);
+							}
+							final /*@NonInvalid*/ java.lang.@Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf_0);
+							final /*@Thrown*/ java.lang.@Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf, not);
+							CAUGHT_and = and;
+						}
+						catch (Exception e) {
+							CAUGHT_and = ValueUtil.createInvalidValue(e);
+						}
+						//
+						if (CAUGHT_and == ValueUtil.TRUE_VALUE) {					// Normal successful body evaluation result
+							exists = ValueUtil.TRUE_VALUE;
+							break;														// Stop immediately
+						}
+						else if (CAUGHT_and == ValueUtil.FALSE_VALUE) {				// Normal unsuccessful body evaluation result
+							;															// Carry on
+						}
+						else if (CAUGHT_and == null) {								// Abnormal null body evaluation result
+							if (accumulator == ValueUtil.FALSE_VALUE) {
+								accumulator = null;										// Cache a null failure
+							}
+						}
+						else if (CAUGHT_and instanceof InvalidValueException) {		// Abnormal exception evaluation result
+							accumulator = CAUGHT_and;									// Cache an exception failure
+						}
+						else {															// Impossible badly typed result
+							accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "exists");
+						}
+					}
+					CAUGHT_exists = exists;
+				}
+				catch (Exception e) {
+					CAUGHT_exists = ValueUtil.createInvalidValue(e);
+				}
+				@SuppressWarnings("null")
+				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtrelation.@NonNull Relation referredRelation = this.getReferredRelation();
+				final /*@NonInvalid*/ boolean isTopLevel = referredRelation.isIsTopLevel();
+				final /*@NonInvalid*/ java.lang.@Nullable Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(isTopLevel);
+				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_exists, not_0);
+				CAUGHT_result = result;
+			}
+			catch (Exception e) {
+				CAUGHT_result = ValueUtil.createInvalidValue(e);
+			}
+			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_RelationCallExp_c_c_DataTypeInvocationIsANonTopRelation, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
+			symbol_0 = logDiagnostic;
+		}
+		return Boolean.TRUE == symbol_0;
 	}
 
 	/**
@@ -507,6 +643,8 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 				return validateMatchingArgumentCount((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 			case QVTrelationPackage.RELATION_CALL_EXP___VALIDATE_WHERE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP:
 				return validateWhereInvocationIsANonTopRelation((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
+			case QVTrelationPackage.RELATION_CALL_EXP___VALIDATE_DATA_TYPE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP:
+				return validateDataTypeInvocationIsANonTopRelation((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);
 	}

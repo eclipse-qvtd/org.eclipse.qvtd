@@ -180,12 +180,13 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-			(theQVTrelationPackage,
-			 new EValidator.Descriptor() {
-				 public EValidator getEValidator() {
-					 return QVTrelationValidator.INSTANCE;
-				 }
-			 });
+		(theQVTrelationPackage,
+			new EValidator.Descriptor() {
+			@Override
+			public EValidator getEValidator() {
+				return QVTrelationValidator.INSTANCE;
+			}
+		});
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTrelationPackage.freeze();
@@ -501,6 +502,16 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	@Override
+	public EOperation getRelationCallExp__ValidateDataTypeInvocationIsANonTopRelation__DiagnosticChain_Map() {
+		return relationCallExpEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getRelationDomain() {
 		return relationDomainEClass;
 	}
@@ -787,6 +798,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		createEReference(relationCallExpEClass, RELATION_CALL_EXP__REFERRED_RELATION);
 		createEOperation(relationCallExpEClass, RELATION_CALL_EXP___VALIDATE_MATCHING_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP);
 		createEOperation(relationCallExpEClass, RELATION_CALL_EXP___VALIDATE_WHERE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP);
+		createEOperation(relationCallExpEClass, RELATION_CALL_EXP___VALIDATE_DATA_TYPE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP);
 
 		relationDomainEClass = createEClass(RELATION_DOMAIN);
 		createEReference(relationDomainEClass, RELATION_DOMAIN__DEFAULT_ASSIGNMENT);
@@ -1003,6 +1015,15 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		g1.getETypeArguments().add(g2);
 		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
 
+		op = initEOperation(getRelationCallExp__ValidateDataTypeInvocationIsANonTopRelation__DiagnosticChain_Map(), ecorePackage.getEBoolean(), "validateDataTypeInvocationIsANonTopRelation", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDiagnosticChain(), "diagnostics", 0, 1, IS_UNIQUE, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEJavaObject());
+		g1.getETypeArguments().add(g2);
+		addEParameter(op, g1, "context", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(relationDomainEClass, RelationDomain.class, "RelationDomain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRelationDomain_DefaultAssignment(), this.getRelationDomainAssignment(), this.getRelationDomainAssignment_Owner(), "defaultAssignment", null, 0, -1, RelationDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getRelationDomain_Pattern(), this.getDomainPattern(), this.getDomainPattern_RelationDomain(), "pattern", null, 0, -1, RelationDomain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1094,10 +1115,10 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	protected void createEcoreAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this,
-		   source,
-		   new String[] {
-		   });
+		(this,
+			source,
+			new String[] {
+		});
 	}
 
 	/**
@@ -1109,59 +1130,59 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	protected void createEmofAnnotations() {
 		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		  (getKey_Identifies(),
-		   source,
-		   new String[] {
-			   "body", "key"
-		   });
+		(getKey_Identifies(),
+			source,
+			new String[] {
+				"body", "key"
+		});
 		addAnnotation
-		  (getKey_OppositePart(),
-		   source,
-		   new String[] {
-			   "body", "oppKey"
-		   });
+		(getKey_OppositePart(),
+			source,
+			new String[] {
+				"body", "oppKey"
+		});
 		addAnnotation
-		  (getKey_Part(),
-		   source,
-		   new String[] {
-			   "body", "key"
-		   });
+		(getKey_Part(),
+			source,
+			new String[] {
+				"body", "key"
+		});
 		addAnnotation
-		  (getRelation_When(),
-		   source,
-		   new String[] {
-			   "body", "whenOwner"
-		   });
+		(getRelation_When(),
+			source,
+			new String[] {
+				"body", "whenOwner"
+		});
 		addAnnotation
-		  (getRelation_Where(),
-		   source,
-		   new String[] {
-			   "body", "whereOwner"
-		   });
+		(getRelation_Where(),
+			source,
+			new String[] {
+				"body", "whereOwner"
+		});
 		addAnnotation
-		  (getRelationCallExp_Argument(),
-		   source,
-		   new String[] {
-			   "body", "relationCallExp"
-		   });
+		(getRelationCallExp_Argument(),
+			source,
+			new String[] {
+				"body", "relationCallExp"
+		});
 		addAnnotation
-		  (getRelationCallExp_ReferredRelation(),
-		   source,
-		   new String[] {
-			   "body", "relationCallExp"
-		   });
+		(getRelationCallExp_ReferredRelation(),
+			source,
+			new String[] {
+				"body", "relationCallExp"
+		});
 		addAnnotation
-		  (getRelationDomainAssignment_ValueExp(),
-		   source,
-		   new String[] {
-			   "body", "domainAssignment"
-		   });
+		(getRelationDomainAssignment_ValueExp(),
+			source,
+			new String[] {
+				"body", "domainAssignment"
+		});
 		addAnnotation
-		  (getRelationDomainAssignment_Variable(),
-		   source,
-		   new String[] {
-			   "body", "domainAssignment"
-		   });
+		(getRelationDomainAssignment_Variable(),
+			source,
+			new String[] {
+				"body", "domainAssignment"
+		});
 	}
 
 	/**
@@ -1173,113 +1194,119 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	protected void createUMLAnnotations() {
 		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
 		addAnnotation
-		  (getKey__ValidateIdentifiesIsNotAbstract__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "IdentifiesIsNotAbstract"
-		   });
+		(getKey__ValidateIdentifiesIsNotAbstract__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "IdentifiesIsNotAbstract"
+		});
 		addAnnotation
-		  (getKey__ValidateIdentifiesIsAUsedPackageClass__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "IdentifiesIsAUsedPackageClass"
-		   });
+		(getKey__ValidateIdentifiesIsAUsedPackageClass__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "IdentifiesIsAUsedPackageClass"
+		});
 		addAnnotation
-		  (getKey__ValidateNoSuperKeys__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "NoSuperKeys"
-		   });
+		(getKey__ValidateNoSuperKeys__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "NoSuperKeys"
+		});
 		addAnnotation
-		  (getKey__ValidateIdentifiesIsUnique__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "IdentifiesIsUnique"
-		   });
+		(getKey__ValidateIdentifiesIsUnique__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "IdentifiesIsUnique"
+		});
 		addAnnotation
-		  (getKey__ValidateOppositePartsHaveOpposites__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "OppositePartsHaveOpposites"
-		   });
+		(getKey__ValidateOppositePartsHaveOpposites__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "OppositePartsHaveOpposites"
+		});
 		addAnnotation
-		  (getKey__ValidateOppositePartsAreOppositeParts__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "OppositePartsAreOppositeParts"
-		   });
+		(getKey__ValidateOppositePartsAreOppositeParts__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "OppositePartsAreOppositeParts"
+		});
 		addAnnotation
-		  (getKey__ValidatePartsAreParts__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "PartsAreParts"
-		   });
+		(getKey__ValidatePartsAreParts__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "PartsAreParts"
+		});
 		addAnnotation
-		  (getKey__ValidatePartsAreUnique__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "PartsAreUnique"
-		   });
+		(getKey__ValidatePartsAreUnique__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "PartsAreUnique"
+		});
 		addAnnotation
-		  (getRelation__ValidateDomainsAreRelationDomains__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "DomainsAreRelationDomains"
-		   });
+		(getRelation__ValidateDomainsAreRelationDomains__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "DomainsAreRelationDomains"
+		});
 		addAnnotation
-		  (getRelation__ValidateTopRelationOverriddenByTopRelation__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "TopRelationOverriddenByTopRelation"
-		   });
+		(getRelation__ValidateTopRelationOverriddenByTopRelation__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "TopRelationOverriddenByTopRelation"
+		});
 		addAnnotation
-		  (getRelation__ValidateTransformationIsRelationalTransformation__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "TransformationIsRelationalTransformation"
-		   });
+		(getRelation__ValidateTransformationIsRelationalTransformation__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "TransformationIsRelationalTransformation"
+		});
 		addAnnotation
-		  (getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "MatchingArgumentCount"
-		   });
+		(getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "MatchingArgumentCount"
+		});
 		addAnnotation
-		  (getRelationCallExp__ValidateWhereInvocationIsANonTopRelation__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "WhereInvocationIsANonTopRelation"
-		   });
+		(getRelationCallExp__ValidateWhereInvocationIsANonTopRelation__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "WhereInvocationIsANonTopRelation"
+		});
 		addAnnotation
-		  (getRelationDomain__ValidateRelationDomainAssignmentsAreUnique__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "RelationDomainAssignmentsAreUnique"
-		   });
+		(getRelationCallExp__ValidateDataTypeInvocationIsANonTopRelation__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "DataTypeInvocationIsANonTopRelation"
+		});
 		addAnnotation
-		  (getRelationDomainAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "CompatibleTypeForValue"
-		   });
+		(getRelationDomain__ValidateRelationDomainAssignmentsAreUnique__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "RelationDomainAssignmentsAreUnique"
+		});
 		addAnnotation
-		  (getRelationalTransformation__ValidateRulesAreRelations__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "RulesAreRelations"
-		   });
+		(getRelationDomainAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForValue"
+		});
 		addAnnotation
-		  (getSharedVariable__ValidateCompatibleTypeForInitializer__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "CompatibleTypeForInitializer"
-		   });
+		(getRelationalTransformation__ValidateRulesAreRelations__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "RulesAreRelations"
+		});
 		addAnnotation
-		  (getSharedVariable__ValidateCompatibleNullityForInitializer__DiagnosticChain_Map(),
-		   source,
-		   new String[] {
-			   "originalName", "CompatibleNullityForInitializer"
-		   });
+		(getSharedVariable__ValidateCompatibleTypeForInitializer__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleTypeForInitializer"
+		});
+		addAnnotation
+		(getSharedVariable__ValidateCompatibleNullityForInitializer__DiagnosticChain_Map(),
+			source,
+			new String[] {
+				"originalName", "CompatibleNullityForInitializer"
+		});
 	}
 
 } //QVTrelationPackageImpl

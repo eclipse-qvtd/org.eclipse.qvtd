@@ -89,6 +89,10 @@
         <genParameters ecoreParameter="QVTrelation.ecore#//RelationCallExp/validateWhereInvocationIsANonTopRelation/diagnostics"/>
         <genParameters ecoreParameter="QVTrelation.ecore#//RelationCallExp/validateWhereInvocationIsANonTopRelation/context"/>
       </genOperations>
+      <genOperations ecoreOperation="QVTrelation.ecore#//RelationCallExp/validateDataTypeInvocationIsANonTopRelation">
+        <genParameters ecoreParameter="QVTrelation.ecore#//RelationCallExp/validateDataTypeInvocationIsANonTopRelation/diagnostics"/>
+        <genParameters ecoreParameter="QVTrelation.ecore#//RelationCallExp/validateDataTypeInvocationIsANonTopRelation/context"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTrelation.ecore#T-qvtrelation-RelationDomain">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTrelation.ecore#F-qvtrelation-RelationDomain-defaultAssignment"/>

@@ -159,12 +159,20 @@ public class QVTrelationValidator extends EObjectValidator {
 	public static final int RELATION_CALL_EXP__VALIDATE_WHERE_INVOCATION_IS_ANON_TOP_RELATION = 13;
 
 	/**
+	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Data Type Invocation Is ANon Top Relation' of 'Relation Call Exp'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public static final int RELATION_CALL_EXP__VALIDATE_DATA_TYPE_INVOCATION_IS_ANON_TOP_RELATION = 14;
+
+	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Relation Domain Assignments Are Unique' of 'Relation Domain'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATION_DOMAIN__VALIDATE_RELATION_DOMAIN_ASSIGNMENTS_ARE_UNIQUE = 14;
+	public static final int RELATION_DOMAIN__VALIDATE_RELATION_DOMAIN_ASSIGNMENTS_ARE_UNIQUE = 15;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Value' of 'Relation Domain Assignment'.
@@ -172,7 +180,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATION_DOMAIN_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 15;
+	public static final int RELATION_DOMAIN_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 16;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Rules Are Relations' of 'Relational Transformation'.
@@ -180,7 +188,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int RELATIONAL_TRANSFORMATION__VALIDATE_RULES_ARE_RELATIONS = 16;
+	public static final int RELATIONAL_TRANSFORMATION__VALIDATE_RULES_ARE_RELATIONS = 17;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Initializer' of 'Shared Variable'.
@@ -188,7 +196,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SHARED_VARIABLE__VALIDATE_COMPATIBLE_TYPE_FOR_INITIALIZER = 17;
+	public static final int SHARED_VARIABLE__VALIDATE_COMPATIBLE_TYPE_FOR_INITIALIZER = 18;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Nullity For Initializer' of 'Shared Variable'.
@@ -196,7 +204,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int SHARED_VARIABLE__VALIDATE_COMPATIBLE_NULLITY_FOR_INITIALIZER = 18;
+	public static final int SHARED_VARIABLE__VALIDATE_COMPATIBLE_NULLITY_FOR_INITIALIZER = 19;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -204,7 +212,7 @@ public class QVTrelationValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 18;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 19;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -476,6 +484,7 @@ public class QVTrelationValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= pivotValidator.validateOCLExpression_validateTypeIsNotNull(relationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelationCallExp_validateMatchingArgumentCount(relationCallExp, diagnostics, context);
 		if (result || diagnostics != null) result &= validateRelationCallExp_validateWhereInvocationIsANonTopRelation(relationCallExp, diagnostics, context);
+		if (result || diagnostics != null) result &= validateRelationCallExp_validateDataTypeInvocationIsANonTopRelation(relationCallExp, diagnostics, context);
 		return result;
 	}
 
@@ -497,6 +506,16 @@ public class QVTrelationValidator extends EObjectValidator {
 	 */
 	public boolean validateRelationCallExp_validateWhereInvocationIsANonTopRelation(RelationCallExp relationCallExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return relationCallExp.validateWhereInvocationIsANonTopRelation(diagnostics, context);
+	}
+
+	/**
+	 * Validates the validateDataTypeInvocationIsANonTopRelation constraint of '<em>Relation Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateRelationCallExp_validateDataTypeInvocationIsANonTopRelation(RelationCallExp relationCallExp, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return relationCallExp.validateDataTypeInvocationIsANonTopRelation(diagnostics, context);
 	}
 
 	/**

@@ -809,13 +809,22 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION_CALL_EXP___VALIDATE_WHERE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP = PivotPackage.OCL_EXPRESSION_OPERATION_COUNT + 1;
 
 	/**
+	 * The operation id for the '<em>Validate Data Type Invocation Is ANon Top Relation</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_CALL_EXP___VALIDATE_DATA_TYPE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP = PivotPackage.OCL_EXPRESSION_OPERATION_COUNT + 2;
+
+	/**
 	 * The number of operations of the '<em>Relation Call Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CALL_EXP_OPERATION_COUNT = PivotPackage.OCL_EXPRESSION_OPERATION_COUNT + 2;
+	int RELATION_CALL_EXP_OPERATION_COUNT = PivotPackage.OCL_EXPRESSION_OPERATION_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationDomainImpl <em>Relation Domain</em>}' class.
@@ -2507,6 +2516,16 @@ public interface QVTrelationPackage extends EPackage {
 	EOperation getRelationCallExp__ValidateWhereInvocationIsANonTopRelation__DiagnosticChain_Map();
 
 	/**
+	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp#validateDataTypeInvocationIsANonTopRelation(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Data Type Invocation Is ANon Top Relation</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Validate Data Type Invocation Is ANon Top Relation</em>' operation.
+	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp#validateDataTypeInvocationIsANonTopRelation(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map)
+	 * @generated
+	 */
+	EOperation getRelationCallExp__ValidateDataTypeInvocationIsANonTopRelation__DiagnosticChain_Map();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomain <em>Relation Domain</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3016,6 +3035,14 @@ public interface QVTrelationPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation RELATION_CALL_EXP___VALIDATE_WHERE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelationCallExp__ValidateWhereInvocationIsANonTopRelation__DiagnosticChain_Map();
+
+		/**
+		 * The meta object literal for the '<em><b>Validate Data Type Invocation Is ANon Top Relation</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation RELATION_CALL_EXP___VALIDATE_DATA_TYPE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP = eINSTANCE.getRelationCallExp__ValidateDataTypeInvocationIsANonTopRelation__DiagnosticChain_Map();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationDomainImpl <em>Relation Domain</em>}' class.
