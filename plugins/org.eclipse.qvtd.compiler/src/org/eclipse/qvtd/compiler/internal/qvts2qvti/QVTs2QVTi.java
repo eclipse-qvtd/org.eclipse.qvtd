@@ -127,7 +127,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 		Collections.sort(sortedImportedNamespaces, NameUtil.NAMEABLE_COMPARATOR);
 		List<Import> ownedImports = model.getOwnedImports();
 		for (@NonNull Namespace importedNamespace : sortedImportedNamespaces) {
-			ownedImports.add(createImport(null, importedNamespace));
+			ownedImports.add(createImport(/*null*/ "mm_" +importedNamespace.getName() + "MM" , importedNamespace));	// FIXME BUG 530025 bad aliases
 		}
 	}
 
