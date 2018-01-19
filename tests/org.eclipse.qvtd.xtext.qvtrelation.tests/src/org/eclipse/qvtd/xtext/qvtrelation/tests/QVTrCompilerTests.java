@@ -65,6 +65,13 @@ public class QVTrCompilerTests extends LoadTestCase
 			}
 
 			@Override
+			public @NonNull ImperativeTransformation compile(@NonNull String enforcedOutputName) throws IOException {
+				ImperativeTransformation asTransformation = super.compile(enforcedOutputName);
+				//				compilerChain.throwCompilerChainExceptionForWarnings();
+				return asTransformation;
+			}
+
+			@Override
 			protected @NonNull QVTm2QVTsCompilerStep createQVTm2QVTsCompilerStep() {
 				return new QVTm2QVTsCompilerStep(this)
 				{

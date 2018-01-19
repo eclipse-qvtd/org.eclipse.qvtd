@@ -134,6 +134,10 @@ public abstract class ScheduleManager implements Adapter
 		throw new UnsupportedOperationException();		// FIXME move to caller
 	}
 
+	public void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
+		throw new UnsupportedOperationException();		// FIXME move to caller
+	}
+
 	private void analyzeCallTree() {
 		Map<@NonNull Mapping, @NonNull List<@NonNull Mapping>> consumer2producers = new HashMap<>();
 		List<@NonNull ClassDatum> middleClassDatums = new ArrayList<>();

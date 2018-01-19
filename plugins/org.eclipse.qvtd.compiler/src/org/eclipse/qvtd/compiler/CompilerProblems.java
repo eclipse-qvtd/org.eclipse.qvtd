@@ -61,5 +61,17 @@ public class CompilerProblems
 		if (errors != null) {
 			throw new CompilerChainException(String.valueOf(errors));
 		}
+		if (warnings != null) {
+			throw new CompilerChainException(String.valueOf(warnings));
+		}
 	}
+
+	/*	public void throwCompilerChainExceptionForWarnings() throws CompilerChainException {
+		if (errors != null) {
+			throw new CompilerChainException(String.valueOf(errors));
+		}
+		if (warnings != null) {
+			throw new CompilerChainException(String.valueOf(warnings));
+		}
+	} */
 }

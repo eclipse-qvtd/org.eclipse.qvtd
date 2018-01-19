@@ -107,6 +107,11 @@ public class QVTm2QVTs extends ScheduleManager
 		addProblem(RegionUtil.createRegionError(region, messageTemplate, bindings));
 	}
 
+	@Override
+	public void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
+		addProblem(RegionUtil.createRegionWarning(region, messageTemplate, bindings));
+	}
+
 	public @NonNull OperationRegion analyzeOperation(@NonNull ScheduleManager scheduleManager, @NonNull OperationCallExp operationCallExp) {
 		Operation operation = operationCallExp.getReferredOperation();
 		LanguageExpression bodyExpression = operation.getBodyExpression();

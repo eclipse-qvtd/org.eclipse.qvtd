@@ -439,7 +439,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			else {
 				NodeConnection headConnection = createHeadConnection(region, headNode);
 				if (headConnection == null) {
-					scheduleManager.addRegionError(region, "createHeadConnections abandoned for " + headNode);
+					scheduleManager.addRegionWarning(region, "No incomimg connections for " + headNode.getName());
 					headConnection = createHeadConnection(region, headNode);	// FIXME debugging
 					return null;										//  so matching only fails for unmatchable real heads
 				}
