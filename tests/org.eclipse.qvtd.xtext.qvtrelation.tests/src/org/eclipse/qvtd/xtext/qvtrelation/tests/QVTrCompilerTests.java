@@ -244,6 +244,56 @@ public class QVTrCompilerTests extends LoadTestCase
 	}
 
 	@Test
+	public void testQVTrCompiler_Ecore2Pivot_CG() throws Exception {
+		//		Splitter.GROUPS.setState(true);
+		//		Splitter.RESULT.setState(true);
+		//		Splitter.STAGES.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		//   	QVTm2QVTp.PARTITIONING.setState(true);
+		//		AbstractMerger.EARLY.setState(true);
+		//		AbstractMerger.FAILURE.setState(true);
+		//		AbstractMerger.LATE.setState(true);
+		ConnectivityChecker.CONNECTIVITY_CLASSDATUMS.setState(true);
+		ConnectivityChecker.CONNECTIVITY_CONNECTIONS.setState(true);
+		ConnectivityChecker.CONNECTIVITY_EDGES.setState(true);
+		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
+		Class<? extends Transformer> txClass1 = null;
+		//		URI txURI1 = URI.createPlatformResourceURI("/org.eclipse.ocl.pivot/model/Ecore2Pivot.qvtr", true);
+		URI txURI1 = getModelsURI("ecore2pivot/Ecore2Pivot.qvtr");
+		MyQVT myQVT1 = createQVT("Ecore2Pivot", txURI1);
+		myQVT1.addUsedGenPackage("org.eclipse.emf.ecore/model/Ecore.genmodel", "//ecore");
+		myQVT1.addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
+		try {
+			ClassLoader classLoader = getClass().getClassLoader();
+			assert classLoader != null;
+			((PivotMetamodelManager)myQVT1.getMetamodelManager()).getImplementationManager().getClassLoaders().add(classLoader);
+			txClass1 = myQVT1.buildTransformation("as", false);
+			//			Class<? extends Transformer> txClass = Ecore2Pivot.class;
+			//
+			//			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 0);
+			//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0)
+			//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 8);
+		}
+		finally {
+			myQVT1.dispose();
+		}
+		URI asURI2 = getTestURI("Families.ecore.oclas");
+		MyQVT myQVT2 = createQVT("Ecore2Pivot", txURI1);
+		//		MyQVT myQVT2 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", null);
+		try {
+			myQVT2.createGeneratedExecutor(txClass1);
+			myQVT2.loadInput("ecore", getModelsURI("families2persons/Families.ecore"));
+			myQVT2.executeTransformation();
+			myQVT2.saveOutput("as", asURI2, getModelsURI("ecore2pivot/Families_expected.ecore.oclas"), null);
+		}
+		finally {
+			myQVT2.dispose();
+		}
+	}
+
+	@Test
 	public void testQVTrCompiler_Families2Persons_CG() throws Exception {
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);

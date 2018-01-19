@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pivot:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage" xmi:id="AAAAA" URI="http://www.eclipse.org/qvtd/xtext/qvtrelation/tests/Families2Persons/1.0/Families" name="Families"
+    nsPrefix="families">
+  <ownedClasses xmi:id="Jhvvd" name="Family">
+    <ownedProperties xmi:id="o4fg5" name="daughters"/>
+    <ownedProperties xmi:id="ZkBJD" name="father"/>
+    <ownedProperties xmi:id="+nNi4" name="lastName"/>
+    <ownedProperties xmi:id="A602P" name="mother"/>
+    <ownedProperties xmi:id="ejovP" name="sons"/>
+  </ownedClasses>
+  <ownedClasses xmi:id=",dS6p" name="Member">
+    <ownedProperties xmi:id="nC3He" name="familyDaughter"/>
+    <ownedProperties xmi:id="7,oXz" name="familyFather"/>
+    <ownedProperties xmi:id="iVcFA" name="familyMother"/>
+    <ownedProperties xmi:id="p21uC" name="familySon"/>
+    <ownedProperties xmi:id="2dcsb" name="firstName"/>
+  </ownedClasses>
+</pivot:Package>

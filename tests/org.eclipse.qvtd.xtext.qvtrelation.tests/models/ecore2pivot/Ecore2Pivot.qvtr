@@ -1,0 +1,106 @@
+/*******************************************************************************
+ * Copyright (c) 2017 Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial implementation
+ *******************************************************************************/
+import ecoreMM : 'http://www.eclipse.org/emf/2002/Ecore'; 
+import pivotMM : 'http://www.eclipse.org/ocl/2015/Pivot';
+--import pivotMM : 'platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore'::pivot;
+
+package org::eclipse::ocl::pivot2::ecore2pivot {
+/**
+ * Transform an Ecore metamodel to a Pivot metamodel
+ */
+	transformation Ecore2Pivot(ecore:ecoreMM, as:pivotMM)
+	{
+		/**
+		 *  ecore::EAttribute <=> pivot::Property
+		 */
+		top relation mapEAttribute {
+			eClass : ecoreMM::EClass;
+			asClass : pivotMM::Class;
+			name : String;
+			/*enforce*/ domain ecore eAttribute : EAttribute {
+				eContainingClass = eClass,
+				name = name
+			};
+			enforce domain as asProperty : Property {
+				owningClass = asClass,
+				name = name
+			};
+			when {
+				mapEClass(eClass, asClass);
+			}
+		}
+		
+		/**
+		 *  ecore::EClass <=> pivot::Class
+		 */
+		top relation mapEClass {
+			ePackage : ecoreMM::EPackage;
+			asPackage : pivotMM::Package;
+			name : String;
+			isAbstract : Boolean;
+			isInterface : Boolean;
+			/*enforce*/ domain ecore eClass : EClass {
+				ePackage = ePackage,
+				name = name,
+				abstract = isAbstract,
+				interface = isInterface
+			};
+			enforce domain as asClass : Class {
+				owningPackage = asPackage,
+				name = name,
+				isAbstract = isAbstract,
+				isInterface = isInterface
+			};
+			when {
+				mapEPackage(ePackage, asPackage);
+			}
+		}
+		
+		/**
+		 *  ecore::EPackage <=> pivot::Package
+		 */
+		top relation mapEPackage {
+			name : String;
+			nsPrefix : String;
+			nsURI : String;
+			/*enforce*/ domain ecore ePackage : EPackage {
+				name = name,
+				nsPrefix = nsPrefix,
+				nsURI = nsURI
+			};
+			enforce domain as asPackage : Package {
+				name = name,
+				nsPrefix = nsPrefix,
+				URI = nsURI
+			};
+		}
+
+		/**
+		 *  ecore::EReference <=> pivot::Property
+		 */
+		top relation mapEReference {
+			eClass : ecoreMM::EClass;
+			asClass : pivotMM::Class;
+			name : String;
+			/*enforce*/ domain ecore eReference : EReference {
+				eContainingClass = eClass,
+				name = name
+			};
+			enforce domain as asProperty : Property {
+				owningClass = asClass,
+				name = name
+			};
+			when {
+				mapEClass(eClass, asClass);
+			}
+		}
+	}
+}
