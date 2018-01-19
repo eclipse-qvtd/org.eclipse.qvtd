@@ -546,7 +546,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		Node targetNode2 = this.targetNode;
 		assert sourceNode2 != null;
 		assert targetNode2 != null;
-		assert sourceNode2 != targetNode2;
+		//		assert sourceNode2 != targetNode2;		-- cyclic edges may be unusual, but they're not wrong
 		Region region = QVTscheduleUtil.getOwningRegion(sourceNode2);
 		assert region == targetNode2.getOwningRegion();
 		//		region.addEdge(this);
