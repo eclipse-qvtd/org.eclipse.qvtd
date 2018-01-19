@@ -80,6 +80,9 @@ public abstract class Element2MiddleProperty implements Nameable
 		property.setName(name);
 		property.setType(type);
 		property.setIsRequired(isRequired);
+		if ((type instanceof DataType) && !((DataType)type).isIsSerializable()) {
+			property.setIsTransient(true);
+		}
 		if (domainName != null) {
 			Annotation domainAnnotation = PivotFactory.eINSTANCE.createAnnotation();
 			domainAnnotation.setName(DomainUsage.QVT_DOMAINS_ANNOTATION_SOURCE);
