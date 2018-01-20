@@ -45,10 +45,6 @@
         <genParameters ecoreParameter="QVTcore.ecore#//BottomVariable/validateCompatibleTypeForInitializer/diagnostics"/>
         <genParameters ecoreParameter="QVTcore.ecore#//BottomVariable/validateCompatibleTypeForInitializer/context"/>
       </genOperations>
-      <genOperations ecoreOperation="QVTcore.ecore#//BottomVariable/validateCompatibleNullityForInitializer">
-        <genParameters ecoreParameter="QVTcore.ecore#//BottomVariable/validateCompatibleNullityForInitializer/diagnostics"/>
-        <genParameters ecoreParameter="QVTcore.ecore#//BottomVariable/validateCompatibleNullityForInitializer/context"/>
-      </genOperations>
     </genClasses>
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-CoreDomain"/>
     <genClasses ecoreClass="QVTcore.ecore#T-qvtcore-CoreModel"/>

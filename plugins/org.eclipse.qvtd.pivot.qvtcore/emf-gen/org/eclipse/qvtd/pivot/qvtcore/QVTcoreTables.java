@@ -99,7 +99,6 @@ public class QVTcoreTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull TuplePartId PARTid_ = org.eclipse.ocl.pivot.ids.IdManager.getTuplePartId(1, "status", org.eclipse.ocl.pivot.ids.TypeId.BOOLEAN);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull TuplePartId PARTid__0 = org.eclipse.ocl.pivot.ids.IdManager.getTuplePartId(0, "message", org.eclipse.ocl.pivot.ids.TypeId.STRING);
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_BottomPattern_c_c_VariablesAreBottomVariables = "BottomPattern::VariablesAreBottomVariables";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_BottomVariable_c_c_CompatibleNullityForInitializer = "BottomVariable::CompatibleNullityForInitializer";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_BottomVariable_c_c_CompatibleTypeForInitializer = "BottomVariable::CompatibleTypeForInitializer";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_GuardPattern_c_c_VariablesAreGuardVariables = "GuardPattern::VariablesAreGuardVariables";
 	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_GuardVariable_c_c_NoInitializer = "GuardVariable::NoInitializer";

@@ -71,20 +71,12 @@ public class QVTcoreValidator extends EObjectValidator {
 	public static final int BOTTOM_VARIABLE__VALIDATE_COMPATIBLE_TYPE_FOR_INITIALIZER = 2;
 
 	/**
-	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Nullity For Initializer' of 'Bottom Variable'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static final int BOTTOM_VARIABLE__VALIDATE_COMPATIBLE_NULLITY_FOR_INITIALIZER = 3;
-
-	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Variables Are Guard Variables' of 'Guard Pattern'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int GUARD_PATTERN__VALIDATE_VARIABLES_ARE_GUARD_VARIABLES = 4;
+	public static final int GUARD_PATTERN__VALIDATE_VARIABLES_ARE_GUARD_VARIABLES = 3;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate No Initializer' of 'Guard Variable'.
@@ -92,7 +84,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int GUARD_VARIABLE__VALIDATE_NO_INITIALIZER = 5;
+	public static final int GUARD_VARIABLE__VALIDATE_NO_INITIALIZER = 4;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Domains Are Core Domains' of 'Mapping'.
@@ -100,7 +92,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MAPPING__VALIDATE_DOMAINS_ARE_CORE_DOMAINS = 6;
+	public static final int MAPPING__VALIDATE_DOMAINS_ARE_CORE_DOMAINS = 5;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Nested Name Is Null' of 'Mapping'.
@@ -108,7 +100,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MAPPING__VALIDATE_NESTED_NAME_IS_NULL = 7;
+	public static final int MAPPING__VALIDATE_NESTED_NAME_IS_NULL = 6;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Root Name Is Not Null' of 'Mapping'.
@@ -116,7 +108,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int MAPPING__VALIDATE_ROOT_NAME_IS_NOT_NULL = 8;
+	public static final int MAPPING__VALIDATE_ROOT_NAME_IS_NOT_NULL = 7;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Partial Value' of 'Opposite Property Assignment'.
@@ -124,7 +116,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE = 9;
+	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE = 8;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Total Value' of 'Opposite Property Assignment'.
@@ -132,7 +124,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE = 10;
+	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE = 9;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Opposite Property Is Implicit' of 'Opposite Property Assignment'.
@@ -140,7 +132,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_OPPOSITE_PROPERTY_IS_IMPLICIT = 11;
+	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_OPPOSITE_PROPERTY_IS_IMPLICIT = 10;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Target Propety Is Slot Property' of 'Opposite Property Assignment'.
@@ -148,7 +140,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY = 12;
+	public static final int OPPOSITE_PROPERTY_ASSIGNMENT__VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY = 11;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Partial Value' of 'Property Assignment'.
@@ -156,7 +148,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int PROPERTY_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE = 13;
+	public static final int PROPERTY_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE = 12;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Total Value' of 'Property Assignment'.
@@ -164,7 +156,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int PROPERTY_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE = 14;
+	public static final int PROPERTY_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE = 13;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Property Is Not Implicit' of 'Property Assignment'.
@@ -172,7 +164,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int PROPERTY_ASSIGNMENT__VALIDATE_PROPERTY_IS_NOT_IMPLICIT = 15;
+	public static final int PROPERTY_ASSIGNMENT__VALIDATE_PROPERTY_IS_NOT_IMPLICIT = 14;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Target Property Is Slot Property' of 'Property Assignment'.
@@ -180,7 +172,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int PROPERTY_ASSIGNMENT__VALIDATE_TARGET_PROPERTY_IS_SLOT_PROPERTY = 16;
+	public static final int PROPERTY_ASSIGNMENT__VALIDATE_TARGET_PROPERTY_IS_SLOT_PROPERTY = 15;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Non Data Type For Type' of 'Realized Variable'.
@@ -188,7 +180,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int REALIZED_VARIABLE__VALIDATE_NON_DATA_TYPE_FOR_TYPE = 17;
+	public static final int REALIZED_VARIABLE__VALIDATE_NON_DATA_TYPE_FOR_TYPE = 16;
 
 	/**
 	 * The {@link org.eclipse.emf.common.util.Diagnostic#getCode() code} for constraint 'Validate Compatible Type For Value' of 'Variable Assignment'.
@@ -196,7 +188,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public static final int VARIABLE_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 18;
+	public static final int VARIABLE_ASSIGNMENT__VALIDATE_COMPATIBLE_TYPE_FOR_VALUE = 17;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants.
@@ -204,7 +196,7 @@ public class QVTcoreValidator extends EObjectValidator {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 18;
+	private static final int GENERATED_DIAGNOSTIC_CODE_COUNT = 17;
 
 	/**
 	 * A constant with a fixed name that can be used as the base value for additional hand written constants in a derived class.
@@ -368,7 +360,6 @@ public class QVTcoreValidator extends EObjectValidator {
 		if (result || diagnostics != null) result &= pivotValidator.validateVariableDeclaration_validateTypeIsNotNull(bottomVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= pivotValidator.validateVariable_validateCompatibleInitialiserType(bottomVariable, diagnostics, context);
 		if (result || diagnostics != null) result &= validateBottomVariable_validateCompatibleTypeForInitializer(bottomVariable, diagnostics, context);
-		if (result || diagnostics != null) result &= validateBottomVariable_validateCompatibleNullityForInitializer(bottomVariable, diagnostics, context);
 		return result;
 	}
 
@@ -380,16 +371,6 @@ public class QVTcoreValidator extends EObjectValidator {
 	 */
 	public boolean validateBottomVariable_validateCompatibleTypeForInitializer(BottomVariable bottomVariable, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return bottomVariable.validateCompatibleTypeForInitializer(diagnostics, context);
-	}
-
-	/**
-	 * Validates the validateCompatibleNullityForInitializer constraint of '<em>Bottom Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean validateBottomVariable_validateCompatibleNullityForInitializer(BottomVariable bottomVariable, DiagnosticChain diagnostics, Map<Object, Object> context) {
-		return bottomVariable.validateCompatibleNullityForInitializer(diagnostics, context);
 	}
 
 	/**
