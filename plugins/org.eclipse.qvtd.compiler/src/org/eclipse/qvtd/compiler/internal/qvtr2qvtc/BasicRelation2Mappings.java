@@ -71,6 +71,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 /**
@@ -1131,11 +1132,14 @@ import com.google.common.collect.Sets;
 			 * Creates the assignment of the middle model to the L/R models
 			 */
 			// RDomainVarToMDBottomAssignmnetForEnforcement
-			if (relationAnalysis.traceIsRealized()) {
-				variablesAnalysis.addTraceNavigationAssignment(rTemplateVariable, !rRelation.isIsTopLevel());
+			boolean isTopLevel = rRelation.isIsTopLevel();
+			boolean isAssignment = relationAnalysis.traceIsRealized() || !rEnforcedRootVariables.contains(rTemplateVariable);
+			if (!isAssignment && !isTopLevel) {
+				Iterable<@NonNull RelationCallExp> incomingWhenInvocations = relationAnalysis.getIncomingWhenInvocations();
+				isAssignment = (incomingWhenInvocations != null) && !Iterables.isEmpty(incomingWhenInvocations);
 			}
-			else if (!rEnforcedRootVariables.contains(rTemplateVariable)) {
-				variablesAnalysis.addTraceNavigationAssignment(rTemplateVariable, !rRelation.isIsTopLevel());
+			if (isAssignment) {
+				variablesAnalysis.addTraceNavigationAssignment(rTemplateVariable, !isTopLevel);
 			}
 			else {
 				variablesAnalysis.addTraceNavigationPredicate(rTemplateVariable);

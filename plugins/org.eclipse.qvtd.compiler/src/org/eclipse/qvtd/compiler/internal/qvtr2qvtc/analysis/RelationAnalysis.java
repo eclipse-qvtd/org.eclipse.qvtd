@@ -280,6 +280,9 @@ public class RelationAnalysis extends QVTrelationHelper
 		if ((relation.getOverridden() != null) || !relation.getOverrides().isEmpty()) {
 			return true;			// overrides require invocation (not trace) to be passed from dispatcher.
 		}
+		//		if ((incomingWhenInvocations != null) && !Iterables.isEmpty(incomingWhenInvocations)) {
+		//			return true;
+		//		}
 		return false;  // nooverrides allows trace to be passed from dispatcher.
 	}
 }
