@@ -211,7 +211,7 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 			TemplateExp template = pivotElement.getTemplateExpression();
 			Variable rootVariable = template.getBindsTo();
 			assert rootVariable != null;
-			context.setType(rootVariable, type, true);
+			helper.setType(rootVariable, type, true);
 			if (template instanceof ObjectTemplateExp) {
 				((ObjectTemplateExp)template).setReferredClass((org.eclipse.ocl.pivot.Class)type);
 			}
@@ -266,14 +266,14 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 				//					context.refreshRequiredType(pivotVariable, ownedType);
 				//				}
 				//				else {
-				context.setType(pivotVariable, pivotType, isRequired != Boolean.FALSE);
+				helper.setType(pivotVariable, pivotType, isRequired != Boolean.FALSE);
 				//				}
 				pivotVariable.setOwnedInit(null);
 			}
 		}
 		if ((pivotVariable != null) && (oclExpression != null)) {
 			pivotVariable.setOwnedInit(oclExpression);
-			pivotVariable.setIsRequired(oclExpression.isIsRequired());
+			pivotVariable.setIsRequired((isRequired == Boolean.TRUE) || oclExpression.isIsRequired());
 		}
 		return null;
 	}
