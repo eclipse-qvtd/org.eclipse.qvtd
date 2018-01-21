@@ -423,14 +423,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTschedulePackage.RULE_ACTION: {
-				RuleAction ruleAction = (RuleAction)theEObject;
-				T result = caseRuleAction(ruleAction);
-				if (result == null) result = caseElement(ruleAction);
-				if (result == null) result = caseVisitable(ruleAction);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTschedulePackage.RULE_REGION: {
 				RuleRegion ruleRegion = (RuleRegion)theEObject;
 				T result = caseRuleRegion(ruleRegion);
@@ -1123,21 +1115,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRegion(Region object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Rule Action</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Rule Action</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseRuleAction(RuleAction object) {
 		return null;
 	}
 

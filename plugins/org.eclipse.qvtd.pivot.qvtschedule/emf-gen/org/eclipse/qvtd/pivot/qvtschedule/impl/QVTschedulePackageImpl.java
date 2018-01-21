@@ -42,7 +42,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.InputNode;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratorNode;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.RuleAction;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NamedMappingRegion;
@@ -377,13 +376,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass ruleActionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass ruleRegionEClass = null;
 
 	/**
@@ -467,7 +459,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EReference getAbstractDatum_ProducedByActions() {
+	public EReference getAbstractDatum_ReferredTypedModel() {
 		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -477,7 +469,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EReference getAbstractDatum_ReferredTypedModel() {
+	public EReference getAbstractDatum_ConsumingRegions() {
 		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -487,7 +479,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EReference getAbstractDatum_RequiredByActions() {
+	public EReference getAbstractDatum_ProducingRegions() {
 		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -579,26 +571,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	@Override
 	public EReference getClassDatum_SuperClassDatums() {
 		return (EReference)classDatumEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getClassDatum_ConsumingRegions() {
-		return (EReference)classDatumEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getClassDatum_ProducingRegions() {
-		return (EReference)classDatumEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -817,7 +789,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EReference getScheduleModel_OwnedRuleActions() {
+	public EReference getScheduleModel_OwnedOtherMappingRegions() {
 		return (EReference)scheduleModelEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -827,18 +799,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EReference getScheduleModel_OwnedOtherMappingRegions() {
-		return (EReference)scheduleModelEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getScheduleModel_OwnedScheduledRegion() {
-		return (EReference)scheduleModelEClass.getEStructuralFeatures().get(4);
+		return (EReference)scheduleModelEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1567,56 +1529,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EClass getRuleAction() {
-		return ruleActionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getRuleAction_OwningScheduleModel() {
-		return (EReference)ruleActionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getRuleAction_ProducedDatums() {
-		return (EReference)ruleActionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getRuleAction_ReferredRule() {
-		return (EReference)ruleActionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getRuleAction_RequiredDatums() {
-		return (EReference)ruleActionEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getRuleRegion() {
 		return ruleRegionEClass;
 	}
@@ -1639,6 +1551,26 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	@Override
 	public EReference getRuleRegion_ReferredRule() {
 		return (EReference)ruleRegionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getRuleRegion_ProducedDatums() {
+		return (EReference)ruleRegionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getRuleRegion_ConsumedDatums() {
+		return (EReference)ruleRegionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1691,9 +1623,9 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		// Create classes and their features
 		abstractDatumEClass = createEClass(ABSTRACT_DATUM);
-		createEReference(abstractDatumEClass, ABSTRACT_DATUM__PRODUCED_BY_ACTIONS);
 		createEReference(abstractDatumEClass, ABSTRACT_DATUM__REFERRED_TYPED_MODEL);
-		createEReference(abstractDatumEClass, ABSTRACT_DATUM__REQUIRED_BY_ACTIONS);
+		createEReference(abstractDatumEClass, ABSTRACT_DATUM__CONSUMING_REGIONS);
+		createEReference(abstractDatumEClass, ABSTRACT_DATUM__PRODUCING_REGIONS);
 
 		castEdgeEClass = createEClass(CAST_EDGE);
 		createEReference(castEdgeEClass, CAST_EDGE__PROPERTY);
@@ -1705,8 +1637,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEReference(classDatumEClass, CLASS_DATUM__OWNING_SCHEDULE_MODEL);
 		createEReference(classDatumEClass, CLASS_DATUM__REFERRED_CLASS);
 		createEReference(classDatumEClass, CLASS_DATUM__SUPER_CLASS_DATUMS);
-		createEReference(classDatumEClass, CLASS_DATUM__CONSUMING_REGIONS);
-		createEReference(classDatumEClass, CLASS_DATUM__PRODUCING_REGIONS);
 
 		composedNodeEClass = createEClass(COMPOSED_NODE);
 
@@ -1814,20 +1744,15 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEReference(regionEClass, REGION__OWNED_NODES);
 		createEReference(regionEClass, REGION__OWNING_SCHEDULED_REGION);
 
-		ruleActionEClass = createEClass(RULE_ACTION);
-		createEReference(ruleActionEClass, RULE_ACTION__OWNING_SCHEDULE_MODEL);
-		createEReference(ruleActionEClass, RULE_ACTION__PRODUCED_DATUMS);
-		createEReference(ruleActionEClass, RULE_ACTION__REFERRED_RULE);
-		createEReference(ruleActionEClass, RULE_ACTION__REQUIRED_DATUMS);
-
 		ruleRegionEClass = createEClass(RULE_REGION);
 		createEAttribute(ruleRegionEClass, RULE_REGION__NAME);
 		createEReference(ruleRegionEClass, RULE_REGION__REFERRED_RULE);
+		createEReference(ruleRegionEClass, RULE_REGION__PRODUCED_DATUMS);
+		createEReference(ruleRegionEClass, RULE_REGION__CONSUMED_DATUMS);
 
 		scheduleModelEClass = createEClass(SCHEDULE_MODEL);
 		createEReference(scheduleModelEClass, SCHEDULE_MODEL__LOADING_REGION);
 		createEReference(scheduleModelEClass, SCHEDULE_MODEL__OWNED_CLASS_DATUMS);
-		createEReference(scheduleModelEClass, SCHEDULE_MODEL__OWNED_RULE_ACTIONS);
 		createEReference(scheduleModelEClass, SCHEDULE_MODEL__OWNED_OTHER_MAPPING_REGIONS);
 		createEReference(scheduleModelEClass, SCHEDULE_MODEL__OWNED_SCHEDULED_REGION);
 
@@ -1936,7 +1861,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		regionEClass.getESuperTypes().add(thePivotPackage.getElement());
 		regionEClass.getESuperTypes().add(thePivotPackage.getNameable());
 		regionEClass.getESuperTypes().add(this.getSymbolable());
-		ruleActionEClass.getESuperTypes().add(thePivotPackage.getElement());
 		ruleRegionEClass.getESuperTypes().add(this.getMappingRegion());
 		scheduleModelEClass.getESuperTypes().add(thePivotPackage.getModel());
 		scheduledRegionEClass.getESuperTypes().add(this.getRegion());
@@ -1947,9 +1871,9 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(abstractDatumEClass, AbstractDatum.class, "AbstractDatum", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAbstractDatum_ProducedByActions(), this.getRuleAction(), this.getRuleAction_ProducedDatums(), "producedByActions", null, 0, -1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractDatum_ReferredTypedModel(), theQVTbasePackage.getTypedModel(), null, "referredTypedModel", null, 1, 1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractDatum_RequiredByActions(), this.getRuleAction(), this.getRuleAction_RequiredDatums(), "requiredByActions", null, 0, -1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractDatum_ConsumingRegions(), this.getRuleRegion(), this.getRuleRegion_ConsumedDatums(), "consumingRegions", null, 0, -1, AbstractDatum.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getAbstractDatum_ProducingRegions(), this.getRuleRegion(), this.getRuleRegion_ProducedDatums(), "producingRegions", null, 0, -1, AbstractDatum.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(castEdgeEClass, CastEdge.class, "CastEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCastEdge_Property(), thePivotPackage.getProperty(), null, "property", null, 1, 1, CastEdge.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -1961,8 +1885,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEReference(getClassDatum_OwningScheduleModel(), this.getScheduleModel(), this.getScheduleModel_OwnedClassDatums(), "owningScheduleModel", null, 1, 1, ClassDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassDatum_ReferredClass(), thePivotPackage.getClass_(), null, "referredClass", null, 1, 1, ClassDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassDatum_SuperClassDatums(), this.getClassDatum(), null, "superClassDatums", null, 0, -1, ClassDatum.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getClassDatum_ConsumingRegions(), this.getRuleRegion(), null, "consumingRegions", null, 0, -1, ClassDatum.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getClassDatum_ProducingRegions(), this.getRuleRegion(), null, "producingRegions", null, 0, -1, ClassDatum.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(composedNodeEClass, ComposedNode.class, "ComposedNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2071,20 +1993,15 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEReference(getRegion_OwnedNodes(), this.getNode(), this.getNode_OwningRegion(), "ownedNodes", null, 0, -1, Region.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRegion_OwningScheduledRegion(), this.getScheduledRegion(), this.getScheduledRegion_OwnedRegions(), "owningScheduledRegion", null, 0, 1, Region.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(ruleActionEClass, RuleAction.class, "RuleAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRuleAction_OwningScheduleModel(), this.getScheduleModel(), this.getScheduleModel_OwnedRuleActions(), "owningScheduleModel", null, 1, 1, RuleAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRuleAction_ProducedDatums(), this.getAbstractDatum(), this.getAbstractDatum_ProducedByActions(), "producedDatums", null, 0, -1, RuleAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRuleAction_ReferredRule(), theQVTbasePackage.getRule(), null, "referredRule", null, 1, 1, RuleAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRuleAction_RequiredDatums(), this.getAbstractDatum(), this.getAbstractDatum_RequiredByActions(), "requiredDatums", null, 0, -1, RuleAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(ruleRegionEClass, RuleRegion.class, "RuleRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRuleRegion_Name(), ecorePackage.getEString(), "name", null, 1, 1, RuleRegion.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getRuleRegion_ReferredRule(), theQVTbasePackage.getRule(), null, "referredRule", null, 1, 1, RuleRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRuleRegion_ProducedDatums(), this.getAbstractDatum(), this.getAbstractDatum_ProducingRegions(), "producedDatums", null, 0, -1, RuleRegion.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getRuleRegion_ConsumedDatums(), this.getAbstractDatum(), this.getAbstractDatum_ConsumingRegions(), "consumedDatums", null, 0, -1, RuleRegion.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(scheduleModelEClass, ScheduleModel.class, "ScheduleModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getScheduleModel_LoadingRegion(), this.getLoadingRegion(), null, "loadingRegion", null, 1, 1, ScheduleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScheduleModel_OwnedClassDatums(), this.getClassDatum(), this.getClassDatum_OwningScheduleModel(), "ownedClassDatums", null, 0, -1, ScheduleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getScheduleModel_OwnedRuleActions(), this.getRuleAction(), this.getRuleAction_OwningScheduleModel(), "ownedRuleActions", null, 0, -1, ScheduleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScheduleModel_OwnedOtherMappingRegions(), this.getMappingRegion(), null, "ownedOtherMappingRegions", null, 0, -1, ScheduleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScheduleModel_OwnedScheduledRegion(), this.getScheduledRegion(), this.getScheduledRegion_OwningScheduleModel(), "ownedScheduledRegion", null, 0, 1, ScheduleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2143,10 +2060,10 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	protected void createEcoreAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-		});
+		  (this,
+		   source,
+		   new String[] {
+		   });
 	}
 
 } //QVTschedulePackageImpl

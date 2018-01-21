@@ -25,9 +25,9 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getProducedByActions <em>Produced By Actions</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getReferredTypedModel <em>Referred Typed Model</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getRequiredByActions <em>Required By Actions</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getConsumingRegions <em>Consuming Regions</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getProducingRegions <em>Producing Regions</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getAbstractDatum()
@@ -35,25 +35,6 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * @generated
  */
 public interface AbstractDatum extends Element {
-	/**
-	 * Returns the value of the '<em><b>Produced By Actions</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.RuleAction}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.RuleAction#getProducedDatums <em>Produced Datums</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Produced By Actions</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Produced By Actions</em>' reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getAbstractDatum_ProducedByActions()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.RuleAction#getProducedDatums
-	 * @model opposite="producedDatums"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!AbstractDatum!producedByActions'"
-	 * @generated
-	 */
-	EList<RuleAction> getProducedByActions();
-
 	/**
 	 * Returns the value of the '<em><b>Referred Typed Model</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -82,22 +63,41 @@ public interface AbstractDatum extends Element {
 	void setReferredTypedModel(TypedModel value);
 
 	/**
-	 * Returns the value of the '<em><b>Required By Actions</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.RuleAction}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.RuleAction#getRequiredDatums <em>Required Datums</em>}'.
+	 * Returns the value of the '<em><b>Consuming Regions</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.RuleRegion}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.RuleRegion#getConsumedDatums <em>Consumed Datums</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Required By Actions</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Consuming Regions</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Required By Actions</em>' reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getAbstractDatum_RequiredByActions()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.RuleAction#getRequiredDatums
-	 * @model opposite="requiredDatums" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!AbstractDatum!requiredByActions'"
+	 * @return the value of the '<em>Consuming Regions</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getAbstractDatum_ConsumingRegions()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.RuleRegion#getConsumedDatums
+	 * @model opposite="consumedDatums" resolveProxies="false" transient="true" ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!AbstractDatum!consumingRegions'"
 	 * @generated
 	 */
-	EList<RuleAction> getRequiredByActions();
+	EList<RuleRegion> getConsumingRegions();
+
+	/**
+	 * Returns the value of the '<em><b>Producing Regions</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.RuleRegion}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.RuleRegion#getProducedDatums <em>Produced Datums</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Producing Regions</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Producing Regions</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getAbstractDatum_ProducingRegions()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.RuleRegion#getProducedDatums
+	 * @model opposite="producedDatums" resolveProxies="false" transient="true" ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!AbstractDatum!producingRegions'"
+	 * @generated
+	 */
+	EList<RuleRegion> getProducingRegions();
 
 } // AbstractDatum

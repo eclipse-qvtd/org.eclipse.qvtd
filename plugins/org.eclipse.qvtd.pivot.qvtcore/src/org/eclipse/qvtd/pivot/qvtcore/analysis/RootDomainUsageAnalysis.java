@@ -70,11 +70,6 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		}
 
 		@Override
-		public @Nullable TypedModel getTypedModel() throws IllegalStateException {
-			return getTypedModel(null);
-		}
-
-		@Override
 		public @Nullable TypedModel getTypedModel(@Nullable Element context) throws IllegalStateException {
 			int residue = bitMask;
 			for (int i = 0; residue != 0; i++) {
@@ -108,15 +103,15 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 			return typedModels;
 		}
 
-		@Override
-		public boolean isCheckable() {
-			return isInput();
-		}
+		//		@Override
+		//		public boolean isCheckable() {
+		//			return isInput();
+		//		}
 
-		@Override
-		public boolean isEnforceable() {
-			return isOutput();
-		}
+		//		@Override
+		//		public boolean isEnforceable() {
+		//			return isOutput();
+		//		}
 
 		@Override
 		public boolean isInput() {

@@ -18,6 +18,7 @@ import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
 public class RelationDomainAttribution extends AbstractAttribution
 {
@@ -33,7 +34,7 @@ public class RelationDomainAttribution extends AbstractAttribution
 		}
 		TypedModel typedModel = targetElement.getTypedModel();
 		if (typedModel != null) {
-			for (org.eclipse.ocl.pivot.Package pPackage : typedModel.getUsedPackage()) {
+			for (org.eclipse.ocl.pivot.Package pPackage : QVTrelationUtil.getUsedPackages(typedModel)) {
 				environmentView.addAllPackages(pPackage);
 				environmentView.addAllTypes(pPackage);
 			}

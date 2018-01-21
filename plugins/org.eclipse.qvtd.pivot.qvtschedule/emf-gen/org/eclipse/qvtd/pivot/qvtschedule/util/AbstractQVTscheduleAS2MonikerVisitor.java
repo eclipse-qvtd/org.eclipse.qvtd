@@ -201,11 +201,6 @@ public abstract class AbstractQVTscheduleAS2MonikerVisitor
 	}
 
 	@Override
-	public @Nullable Object visitRuleAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RuleAction object) {
-		return visitElement(object);
-	}
-
-	@Override
 	public @Nullable Object visitRuleRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RuleRegion object) {
 		return visitMappingRegion(object);
 	}

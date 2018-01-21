@@ -20,12 +20,12 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.RuleAction;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 
 /**
@@ -36,24 +36,14 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.AbstractDatumImpl#getProducedByActions <em>Produced By Actions</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.AbstractDatumImpl#getReferredTypedModel <em>Referred Typed Model</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.AbstractDatumImpl#getRequiredByActions <em>Required By Actions</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.AbstractDatumImpl#getConsumingRegions <em>Consuming Regions</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.AbstractDatumImpl#getProducingRegions <em>Producing Regions</em>}</li>
  * </ul>
  *
  * @generated
  */
 public abstract class AbstractDatumImpl extends ElementImpl implements AbstractDatum {
-	/**
-	 * The cached value of the '{@link #getProducedByActions() <em>Produced By Actions</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getProducedByActions()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<RuleAction> producedByActions;
-
 	/**
 	 * The cached value of the '{@link #getReferredTypedModel() <em>Referred Typed Model</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -65,14 +55,24 @@ public abstract class AbstractDatumImpl extends ElementImpl implements AbstractD
 	protected TypedModel referredTypedModel;
 
 	/**
-	 * The cached value of the '{@link #getRequiredByActions() <em>Required By Actions</em>}' reference list.
+	 * The cached value of the '{@link #getConsumingRegions() <em>Consuming Regions</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRequiredByActions()
+	 * @see #getConsumingRegions()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<RuleAction> requiredByActions;
+	protected EList<RuleRegion> consumingRegions;
+
+	/**
+	 * The cached value of the '{@link #getProducingRegions() <em>Producing Regions</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProducingRegions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<RuleRegion> producingRegions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -91,19 +91,6 @@ public abstract class AbstractDatumImpl extends ElementImpl implements AbstractD
 	@Override
 	protected EClass eStaticClass() {
 		return QVTschedulePackage.Literals.ABSTRACT_DATUM;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<RuleAction> getProducedByActions() {
-		if (producedByActions == null) {
-			producedByActions = new EObjectWithInverseResolvingEList.ManyInverse<RuleAction>(RuleAction.class, this, QVTschedulePackage.ABSTRACT_DATUM__PRODUCED_BY_ACTIONS, QVTschedulePackage.RULE_ACTION__PRODUCED_DATUMS);
-		}
-		return producedByActions;
 	}
 
 	/**
@@ -152,11 +139,24 @@ public abstract class AbstractDatumImpl extends ElementImpl implements AbstractD
 	 * @generated
 	 */
 	@Override
-	public EList<RuleAction> getRequiredByActions() {
-		if (requiredByActions == null) {
-			requiredByActions = new EObjectWithInverseResolvingEList.ManyInverse<RuleAction>(RuleAction.class, this, QVTschedulePackage.ABSTRACT_DATUM__REQUIRED_BY_ACTIONS, QVTschedulePackage.RULE_ACTION__REQUIRED_DATUMS);
+	public EList<RuleRegion> getConsumingRegions() {
+		if (consumingRegions == null) {
+			consumingRegions = new EObjectWithInverseEList.ManyInverse<RuleRegion>(RuleRegion.class, this, QVTschedulePackage.ABSTRACT_DATUM__CONSUMING_REGIONS, QVTschedulePackage.RULE_REGION__CONSUMED_DATUMS);
 		}
-		return requiredByActions;
+		return consumingRegions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<RuleRegion> getProducingRegions() {
+		if (producingRegions == null) {
+			producingRegions = new EObjectWithInverseEList.ManyInverse<RuleRegion>(RuleRegion.class, this, QVTschedulePackage.ABSTRACT_DATUM__PRODUCING_REGIONS, QVTschedulePackage.RULE_REGION__PRODUCED_DATUMS);
+		}
+		return producingRegions;
 	}
 
 	/**
@@ -168,10 +168,10 @@ public abstract class AbstractDatumImpl extends ElementImpl implements AbstractD
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.ABSTRACT_DATUM__PRODUCED_BY_ACTIONS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getProducedByActions()).basicAdd(otherEnd, msgs);
-			case QVTschedulePackage.ABSTRACT_DATUM__REQUIRED_BY_ACTIONS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRequiredByActions()).basicAdd(otherEnd, msgs);
+			case QVTschedulePackage.ABSTRACT_DATUM__CONSUMING_REGIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConsumingRegions()).basicAdd(otherEnd, msgs);
+			case QVTschedulePackage.ABSTRACT_DATUM__PRODUCING_REGIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getProducingRegions()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -184,10 +184,10 @@ public abstract class AbstractDatumImpl extends ElementImpl implements AbstractD
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.ABSTRACT_DATUM__PRODUCED_BY_ACTIONS:
-				return ((InternalEList<?>)getProducedByActions()).basicRemove(otherEnd, msgs);
-			case QVTschedulePackage.ABSTRACT_DATUM__REQUIRED_BY_ACTIONS:
-				return ((InternalEList<?>)getRequiredByActions()).basicRemove(otherEnd, msgs);
+			case QVTschedulePackage.ABSTRACT_DATUM__CONSUMING_REGIONS:
+				return ((InternalEList<?>)getConsumingRegions()).basicRemove(otherEnd, msgs);
+			case QVTschedulePackage.ABSTRACT_DATUM__PRODUCING_REGIONS:
+				return ((InternalEList<?>)getProducingRegions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -200,13 +200,13 @@ public abstract class AbstractDatumImpl extends ElementImpl implements AbstractD
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.ABSTRACT_DATUM__PRODUCED_BY_ACTIONS:
-				return getProducedByActions();
 			case QVTschedulePackage.ABSTRACT_DATUM__REFERRED_TYPED_MODEL:
 				if (resolve) return getReferredTypedModel();
 				return basicGetReferredTypedModel();
-			case QVTschedulePackage.ABSTRACT_DATUM__REQUIRED_BY_ACTIONS:
-				return getRequiredByActions();
+			case QVTschedulePackage.ABSTRACT_DATUM__CONSUMING_REGIONS:
+				return getConsumingRegions();
+			case QVTschedulePackage.ABSTRACT_DATUM__PRODUCING_REGIONS:
+				return getProducingRegions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -220,16 +220,16 @@ public abstract class AbstractDatumImpl extends ElementImpl implements AbstractD
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.ABSTRACT_DATUM__PRODUCED_BY_ACTIONS:
-				getProducedByActions().clear();
-				getProducedByActions().addAll((Collection<? extends RuleAction>)newValue);
-				return;
 			case QVTschedulePackage.ABSTRACT_DATUM__REFERRED_TYPED_MODEL:
 				setReferredTypedModel((TypedModel)newValue);
 				return;
-			case QVTschedulePackage.ABSTRACT_DATUM__REQUIRED_BY_ACTIONS:
-				getRequiredByActions().clear();
-				getRequiredByActions().addAll((Collection<? extends RuleAction>)newValue);
+			case QVTschedulePackage.ABSTRACT_DATUM__CONSUMING_REGIONS:
+				getConsumingRegions().clear();
+				getConsumingRegions().addAll((Collection<? extends RuleRegion>)newValue);
+				return;
+			case QVTschedulePackage.ABSTRACT_DATUM__PRODUCING_REGIONS:
+				getProducingRegions().clear();
+				getProducingRegions().addAll((Collection<? extends RuleRegion>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -243,14 +243,14 @@ public abstract class AbstractDatumImpl extends ElementImpl implements AbstractD
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.ABSTRACT_DATUM__PRODUCED_BY_ACTIONS:
-				getProducedByActions().clear();
-				return;
 			case QVTschedulePackage.ABSTRACT_DATUM__REFERRED_TYPED_MODEL:
 				setReferredTypedModel((TypedModel)null);
 				return;
-			case QVTschedulePackage.ABSTRACT_DATUM__REQUIRED_BY_ACTIONS:
-				getRequiredByActions().clear();
+			case QVTschedulePackage.ABSTRACT_DATUM__CONSUMING_REGIONS:
+				getConsumingRegions().clear();
+				return;
+			case QVTschedulePackage.ABSTRACT_DATUM__PRODUCING_REGIONS:
+				getProducingRegions().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -264,12 +264,12 @@ public abstract class AbstractDatumImpl extends ElementImpl implements AbstractD
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.ABSTRACT_DATUM__PRODUCED_BY_ACTIONS:
-				return producedByActions != null && !producedByActions.isEmpty();
 			case QVTschedulePackage.ABSTRACT_DATUM__REFERRED_TYPED_MODEL:
 				return referredTypedModel != null;
-			case QVTschedulePackage.ABSTRACT_DATUM__REQUIRED_BY_ACTIONS:
-				return requiredByActions != null && !requiredByActions.isEmpty();
+			case QVTschedulePackage.ABSTRACT_DATUM__CONSUMING_REGIONS:
+				return consumingRegions != null && !consumingRegions.isEmpty();
+			case QVTschedulePackage.ABSTRACT_DATUM__PRODUCING_REGIONS:
+				return producingRegions != null && !producingRegions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

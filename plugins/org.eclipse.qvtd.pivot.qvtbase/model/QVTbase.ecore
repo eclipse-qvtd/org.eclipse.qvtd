@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmi:id="P-qvtbase" name="qvtbase" nsURI="http://www.eclipse.org/qvt/2015/QVTbase" nsPrefix="qvtb">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:id="P-qvtbase" name="qvtbase" nsURI="http://www.eclipse.org/qvt/2015/QVTbase"
+    nsPrefix="qvtb">
   <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
     <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
     <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
     <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
   </eAnnotations>
-  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-BaseModel" name="BaseModel" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Model"/>
-  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-Domain" name="Domain" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-NamedElement ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-ReferringElement">
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-BaseModel" name="BaseModel"
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Model"/>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-Domain" name="Domain" abstract="true"
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-NamedElement ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-ReferringElement">
     <eOperations name="validateNameIsTypedModelName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="NameIsTypedModelName"/>
@@ -38,15 +41,19 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtbase-Domain-isCheckable" name="isCheckable" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtbase-Domain-isCheckable"
+        name="isCheckable" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         unsettable="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtbase-Domain-isEnforceable" name="isEnforceable" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtbase-Domain-isEnforceable"
+        name="isEnforceable" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         unsettable="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Domain-rule" name="rule" lowerBound="1" eType="#T-qvtbase-Rule"
-        transient="true" eOpposite="#F-qvtbase-Rule-domain"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Domain-typedModel" name="typedModel" eType="#T-qvtbase-TypedModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Domain-rule"
+        name="rule" lowerBound="1" eType="#T-qvtbase-Rule" transient="true" eOpposite="#F-qvtbase-Rule-domain"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Domain-typedModel"
+        name="typedModel" eType="#T-qvtbase-TypedModel"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-Function" name="Function" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Operation">
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-Function" name="Function"
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Operation">
     <eOperations name="validateParametersAreFunctionParameter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="ParametersAreFunctionParameter"/>
@@ -77,17 +84,22 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Function-queryExpression" name="queryExpression" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Function-queryExpression"
+        name="queryExpression" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-FunctionParameter" name="FunctionParameter" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Parameter"/>
-  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-Pattern" name="Pattern" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Pattern-predicate" name="predicate" ordered="false" upperBound="-1"
-        eType="#T-qvtbase-Predicate" containment="true" eOpposite="#F-qvtbase-Predicate-pattern"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Pattern-bindsTo" name="bindsTo" ordered="false" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable"/>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-FunctionParameter" name="FunctionParameter"
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Parameter"/>
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-Pattern" name="Pattern"
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Pattern-predicate"
+        name="predicate" ordered="false" upperBound="-1" eType="#T-qvtbase-Predicate"
+        containment="true" eOpposite="#F-qvtbase-Predicate-pattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Pattern-bindsTo"
+        name="bindsTo" ordered="false" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-Predicate" name="Predicate" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-Predicate" name="Predicate"
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
     <eOperations name="validateConditionIsBoolean" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="ConditionIsBoolean"/>
@@ -103,16 +115,19 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Predicate-conditionExpression" name="conditionExpression" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression" containment="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Predicate-conditionExpression"
+        name="conditionExpression" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-OCLExpression"
+        containment="true">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="predicate"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Predicate-pattern" name="pattern" lowerBound="1" eType="#T-qvtbase-Pattern"
-        transient="true" eOpposite="#F-qvtbase-Pattern-predicate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Predicate-pattern"
+        name="pattern" lowerBound="1" eType="#T-qvtbase-Pattern" transient="true"
+        eOpposite="#F-qvtbase-Pattern-predicate"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-Rule" name="Rule" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-Rule" name="Rule" abstract="true"
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-NamedElement">
     <eOperations name="validateDomainNameIsUnique" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="DomainNameIsUnique"/>
@@ -158,17 +173,22 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Rule-domain" name="domain" upperBound="-1" eType="#T-qvtbase-Domain"
-        containment="true" eOpposite="#F-qvtbase-Domain-rule"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtbase-Rule-isAbstract" name="isAbstract" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Rule-domain"
+        name="domain" upperBound="-1" eType="#T-qvtbase-Domain" containment="true"
+        eOpposite="#F-qvtbase-Domain-rule"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="F-qvtbase-Rule-isAbstract"
+        name="isAbstract" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Rule-overridden" name="overridden" eType="#T-qvtbase-Rule" eOpposite="#F-qvtbase-Rule-overrides"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Rule-overrides" name="overrides" upperBound="-1" eType="#T-qvtbase-Rule"
-        eOpposite="#F-qvtbase-Rule-overridden"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Rule-transformation" name="transformation" eType="#T-qvtbase-Transformation"
-        transient="true" resolveProxies="false" eOpposite="#F-qvtbase-Transformation-rule"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Rule-overridden"
+        name="overridden" eType="#T-qvtbase-Rule" eOpposite="#F-qvtbase-Rule-overrides"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Rule-overrides"
+        name="overrides" upperBound="-1" eType="#T-qvtbase-Rule" eOpposite="#F-qvtbase-Rule-overridden"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Rule-transformation"
+        name="transformation" eType="#T-qvtbase-Transformation" transient="true" resolveProxies="false"
+        eOpposite="#F-qvtbase-Transformation-rule"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-Transformation" name="Transformation" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class">
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-Transformation" name="Transformation"
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class">
     <eOperations name="getFunction" lowerBound="1" eType="#T-qvtbase-Function">
       <eParameters name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
@@ -235,32 +255,40 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Transformation-ownedTag" name="ownedTag" ordered="false" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Annotation" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Transformation-modelParameter" name="modelParameter" upperBound="-1"
-        eType="#T-qvtbase-TypedModel" containment="true" eOpposite="#F-qvtbase-TypedModel-transformation"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Transformation-rule" name="rule" ordered="false" upperBound="-1"
-        eType="#T-qvtbase-Rule" containment="true" eOpposite="#F-qvtbase-Rule-transformation"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Transformation-extends" name="extends" eType="#T-qvtbase-Transformation">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Transformation-ownedTag"
+        name="ownedTag" ordered="false" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Annotation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Transformation-modelParameter"
+        name="modelParameter" upperBound="-1" eType="#T-qvtbase-TypedModel" containment="true"
+        eOpposite="#F-qvtbase-TypedModel-transformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Transformation-rule"
+        name="rule" ordered="false" upperBound="-1" eType="#T-qvtbase-Rule" containment="true"
+        eOpposite="#F-qvtbase-Rule-transformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Transformation-extends"
+        name="extends" eType="#T-qvtbase-Transformation">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="extendedBy"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Transformation-ownedContext" name="ownedContext" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable"
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-Transformation-ownedContext"
+        name="ownedContext" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-TypedModel" name="TypedModel" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-TypedModel-transformation" name="transformation" lowerBound="1"
-        eType="#T-qvtbase-Transformation" transient="true" eOpposite="#F-qvtbase-Transformation-modelParameter"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-TypedModel-usedPackage" name="usedPackage" ordered="false" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Package"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-TypedModel-dependsOn" name="dependsOn" ordered="false" upperBound="-1"
-        eType="#T-qvtbase-TypedModel">
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtbase-TypedModel" name="TypedModel"
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-TypedModel-transformation"
+        name="transformation" lowerBound="1" eType="#T-qvtbase-Transformation" transient="true"
+        eOpposite="#F-qvtbase-Transformation-modelParameter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-TypedModel-usedPackage"
+        name="usedPackage" ordered="false" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Package"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-TypedModel-dependsOn"
+        name="dependsOn" ordered="false" upperBound="-1" eType="#T-qvtbase-TypedModel">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="dependent"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-TypedModel-ownedContext" name="ownedContext" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable"
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtbase-TypedModel-ownedContext"
+        name="ownedContext" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable"
         containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

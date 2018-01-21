@@ -29,8 +29,6 @@ import org.eclipse.ocl.pivot.CompleteClass;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getOwningScheduleModel <em>Owning Schedule Model</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getReferredClass <em>Referred Class</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getSuperClassDatums <em>Super Class Datums</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getConsumingRegions <em>Consuming Regions</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getProducingRegions <em>Producing Regions</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum()
@@ -156,39 +154,5 @@ public interface ClassDatum extends AbstractDatum {
 	 * @generated
 	 */
 	EList<ClassDatum> getSuperClassDatums();
-
-	/**
-	 * Returns the value of the '<em><b>Consuming Regions</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.RuleRegion}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Consuming Regions</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Consuming Regions</em>' reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_ConsumingRegions()
-	 * @model transient="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!consumingRegions'"
-	 * @generated
-	 */
-	EList<RuleRegion> getConsumingRegions();
-
-	/**
-	 * Returns the value of the '<em><b>Producing Regions</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.RuleRegion}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Producing Regions</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Producing Regions</em>' reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_ProducingRegions()
-	 * @model transient="true" ordered="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!producingRegions'"
-	 * @generated
-	 */
-	EList<RuleRegion> getProducingRegions();
 
 } // ClassDatum

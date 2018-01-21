@@ -48,13 +48,12 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
-import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.RuleAction;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -107,7 +106,7 @@ public abstract class ScheduleManager implements Adapter
 
 	private /*@LazyNonNull */ OperationDependencyAnalysis operationDependencyAnalysis = null;
 
-	private /*@LazyNonNull*/ List<@NonNull Mapping> orderedMappings;	// Only ordered to improve determinacy
+	private /*@LazyNonNull*/ List<@NonNull RuleRegion> orderedMappings;	// Only ordered to improve determinacy
 
 	protected ScheduleManager(@NonNull ScheduleModel scheduleModel, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
 			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
@@ -120,7 +119,7 @@ public abstract class ScheduleManager implements Adapter
 		asTransformation.getModelParameter().add(domainAnalysis.getPrimitiveTypeModel());		// FIXME move to QVTm
 		domainAnalysis.analyzeTransformation(asTransformation);
 		this.datumCaches = new DatumCaches(this);
-		datumCaches.analyzeTransformation(asTransformation);
+		this.orderedMappings = datumCaches.analyzeTransformation(asTransformation);
 		analyzeCallTree();
 		//
 		this.inputUsage = domainAnalysis.getInputUsage();
@@ -151,17 +150,17 @@ public abstract class ScheduleManager implements Adapter
 			if (usage.isMiddle()) {
 				middleClassDatums.add(classDatum);
 				if (s != null) {
-					s.append("middle: " + classDatum.getProducedByActions() + "\n");
+					s.append("middle: " + classDatum.getProducingRegions() + "\n");
 				}
-				for (@NonNull RuleAction consumerAction : QVTscheduleUtil.getRequiredByActions(classDatum)) {
-					Rule consumer = QVTscheduleUtil.getReferredRule(consumerAction);
+				for (@NonNull RuleRegion consumingRegion : QVTscheduleUtil.getConsumingRegions(classDatum)) {
+					Rule consumer = QVTscheduleUtil.getReferredRule(consumingRegion);
 					List<@NonNull Rule> producers = consumer2producers.get(consumer);
 					if (producers == null) {
 						producers = new ArrayList<>();
 						consumer2producers.put(consumer, producers);
 					}
-					for (@NonNull RuleAction producerAction : QVTscheduleUtil.getProducedByActions(classDatum)) {
-						Rule producer = QVTscheduleUtil.getReferredRule(producerAction);
+					for (@NonNull RuleRegion producingRegion : QVTscheduleUtil.getProducingRegions(classDatum)) {
+						Rule producer = QVTscheduleUtil.getReferredRule(producingRegion);
 						if (!producers.contains(producer)) {
 							producers.add(producer);
 						}
@@ -333,12 +332,12 @@ public abstract class ScheduleManager implements Adapter
 		return operationDependencyAnalysis2;
 	}
 
-	protected @NonNull Iterable<@NonNull Mapping> getOrderedMappings() {
-		List<@NonNull Mapping> orderedMappings2 = orderedMappings;
+	protected @NonNull Iterable<@NonNull RuleRegion> getOrderedMappings() {
+		List<@NonNull RuleRegion> orderedMappings2 = orderedMappings;
 		if (orderedMappings2 == null) {
 			orderedMappings2 = orderedMappings = new ArrayList<>();
 			for (@NonNull Rule rule : ClassUtil.nullFree(transformation.getRule())) {
-				orderedMappings.add((Mapping)rule);
+				orderedMappings.add((RuleRegion)rule);
 			}
 			Collections.sort(orderedMappings2, NameUtil.NAMEABLE_COMPARATOR);
 		}

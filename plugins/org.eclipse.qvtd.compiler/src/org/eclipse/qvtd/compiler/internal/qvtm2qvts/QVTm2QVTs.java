@@ -51,7 +51,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
-import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -60,6 +59,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
@@ -306,13 +306,13 @@ public class QVTm2QVTs extends ScheduleManager
 	}
 
 	public @NonNull List<@NonNull Region> transform() throws IOException {
-		Iterable<@NonNull Mapping> orderedMappings = getOrderedMappings();
+		Iterable<@NonNull RuleRegion> orderedRuleRegions = getOrderedMappings();
 		//
 		//	Extract salient characteristics from within each MappingAction.
 		//
-		for (@NonNull Mapping mapping : orderedMappings) {
-			MappingAnalysis mappingRegion = MappingAnalysis.createMappingRegion(this, mapping);
-			mapping2mappingAnalysis.put(mapping, mappingRegion);
+		for (@NonNull RuleRegion ruleRegion : orderedRuleRegions) {
+			MappingAnalysis mappingRegion = MappingAnalysis.createMappingRegion(this, ruleRegion);
+			mapping2mappingAnalysis.put(RegionUtil.getReferredRule(ruleRegion), mappingRegion);
 		}
 		List<@NonNull MappingAnalysis> mappingAnalyses = new ArrayList<>(mapping2mappingAnalysis.values());
 		Collections.sort(mappingAnalyses, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
@@ -325,7 +325,8 @@ public class QVTm2QVTs extends ScheduleManager
 			}
 		}
 		List<@NonNull MappingRegion> orderedRegions = new ArrayList<>();
-		for (@NonNull Mapping mapping : orderedMappings) {
+		for (@NonNull RuleRegion ruleRegion : orderedRuleRegions) {
+			Rule mapping = RegionUtil.getReferredRule(ruleRegion);
 			MappingAnalysis mappingAnalysis = mapping2mappingAnalysis.get(mapping);
 			assert mappingAnalysis != null;
 			orderedRegions.add(mappingAnalysis.getRuleRegion());

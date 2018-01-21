@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -54,7 +55,7 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.RuleAction;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
@@ -103,23 +104,28 @@ public class DatumCaches
 
 	}
 
-	public void analyzeTransformation(@NonNull Transformation transformation) {
+	public @NonNull List<@NonNull RuleRegion> analyzeTransformation(@NonNull Transformation transformation) {
+		List<@NonNull RuleRegion> ruleRegions = new ArrayList<>();
 		for (@NonNull Rule rule : QVTcoreUtil.getRule(transformation)) {
-			analyzeMapping(rule);
+			ruleRegions.add(analyzeMapping(rule));
 		}
+		return ruleRegions;
 	}
 
-	private void analyzeMapping(@NonNull Rule rule) {
-		RuleAction ruleAction = QVTscheduleFactory.eINSTANCE.createRuleAction();
-		ruleAction.setReferredRule(rule);
-		ruleAction.setOwningScheduleModel(scheduleManager.getScheduleModel());
-		List<@NonNull AbstractDatum> productions = QVTscheduleUtil.Internal.getProducedDatumsList(ruleAction);
-		List<@NonNull AbstractDatum> requisites = QVTscheduleUtil.Internal.getRequiredDatumsList(ruleAction);
+	private @NonNull RuleRegion analyzeMapping(@NonNull Rule rule) {
+		RuleRegion ruleRegion = QVTscheduleFactory.eINSTANCE.createRuleRegion();
+		//		ruleRegion.setOwningScheduleModel(scheduleManager.getScheduleModel());
+		ruleRegion.setReferredRule(rule);
+		//		RuleAction ruleAction = QVTscheduleFactory.eINSTANCE.createRuleAction();
+		//		ruleAction.setReferredRuleRegion(ruleRegion);
+		//		ruleAction.setOwningScheduleModel(scheduleManager.getScheduleModel());
+		List<@NonNull AbstractDatum> productions = QVTscheduleUtil.Internal.getProducedDatumsList(ruleRegion);
+		List<@NonNull AbstractDatum> consumptions = QVTscheduleUtil.Internal.getConsumedDatumsList(ruleRegion);
 		for (@NonNull EObject eObject : new TreeIterable(rule, true)) {
 			if (eObject instanceof GuardPattern) {
 				for (@NonNull Variable inputVar : QVTcoreUtil.getOwnedVariables((GuardPattern)eObject)) {
 					TypedModel typedModel = getTypedModel(inputVar);
-					requisites.add(getClassDatum(typedModel, QVTcoreUtil.getClass(inputVar)));
+					consumptions.add(getClassDatum(typedModel, QVTcoreUtil.getClass(inputVar)));
 				}
 			}
 			else if (eObject instanceof RealizedVariable) {
@@ -132,7 +138,7 @@ public class DatumCaches
 				OCLExpression ownedSource = QVTcoreUtil.getOwnedSource(opCall);
 				Type type = QVTcoreUtil.getType(ownedSource);
 				CompleteClass context = completeModel.getCompleteClass(type);
-				requisites.addAll(getOperationPropertyDatums(opCall, context, new HashMap<>(), new HashMap<>()));
+				consumptions.addAll(getOperationPropertyDatums(opCall, context, new HashMap<>(), new HashMap<>()));
 			}
 			else if (eObject instanceof NavigationAssignment) {
 				productions.addAll(getAssignedPropertyDatums((NavigationAssignment)eObject));
@@ -144,9 +150,10 @@ public class DatumCaches
 				Property property = QVTcoreUtil.getReferredProperty(navigationCallExp);
 				org.eclipse.ocl.pivot.Class context = QVTcoreUtil.getClass(source);
 				PropertyDatum propertyDatum = getPropertyDatum(typedModel, context, property);
-				requisites.add(propertyDatum);
+				consumptions.add(propertyDatum);
 			}
 		}
+		return ruleRegion;
 	}
 
 	private boolean assertValidTypedModel(@NonNull TypedModel typedModel, @NonNull CompleteClass completeClass) {

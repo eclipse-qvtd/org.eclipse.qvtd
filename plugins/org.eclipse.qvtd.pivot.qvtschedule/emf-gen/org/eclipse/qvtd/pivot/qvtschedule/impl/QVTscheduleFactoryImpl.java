@@ -92,7 +92,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.PREDICATE_EDGE: return createPredicateEdge();
 			case QVTschedulePackage.PROPERTY_DATUM: return createPropertyDatum();
 			case QVTschedulePackage.RECURSION_EDGE: return createRecursionEdge();
-			case QVTschedulePackage.RULE_ACTION: return createRuleAction();
 			case QVTschedulePackage.RULE_REGION: return createRuleRegion();
 			case QVTschedulePackage.SCHEDULE_MODEL: return createScheduleModel();
 			case QVTschedulePackage.SCHEDULED_REGION: return createScheduledRegion();
@@ -389,17 +388,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull RecursionEdge createRecursionEdge() {
 		RecursionEdgeImpl recursionEdge = new RecursionEdgeImpl();
 		return recursionEdge;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull RuleAction createRuleAction() {
-		RuleActionImpl ruleAction = new RuleActionImpl();
-		return ruleAction;
 	}
 
 	/**

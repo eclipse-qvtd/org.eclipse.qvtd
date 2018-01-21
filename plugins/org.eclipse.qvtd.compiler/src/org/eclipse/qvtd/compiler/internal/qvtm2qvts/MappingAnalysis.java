@@ -49,18 +49,18 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * A MappingAnalysis provides the analysis a QVTc mapping.
  */
 public class MappingAnalysis implements Nameable
 {
-	public static @NonNull MappingAnalysis createMappingRegion(@NonNull ScheduleManager scheduleManager, @NonNull Mapping mapping) {
-		MappingAnalysis mappingAnalysis = new MappingAnalysis(scheduleManager.getScheduleModel(), mapping);
+	public static @NonNull MappingAnalysis createMappingRegion(@NonNull ScheduleManager scheduleManager, @NonNull RuleRegion ruleRegion) {
+		MappingAnalysis mappingAnalysis = new MappingAnalysis(scheduleManager.getScheduleModel(), ruleRegion);
 		@SuppressWarnings("unused")String name = mappingAnalysis.getRuleRegion().getName();
 		mappingAnalysis.initialize();
 		return mappingAnalysis;
@@ -102,13 +102,13 @@ public class MappingAnalysis implements Nameable
 	 */
 	private /*@LazyNonNull*/ List<@NonNull Node> dependencyHeadNodes = null;
 
-	private MappingAnalysis(@NonNull ScheduleModel scheduleModel, @NonNull Mapping mapping) {
-		this.ruleRegion =  QVTscheduleFactory.eINSTANCE.createRuleRegion();
+	private MappingAnalysis(@NonNull ScheduleModel scheduleModel, @NonNull RuleRegion ruleRegion) {
+		this.ruleRegion = ruleRegion;
 		((RuleRegionImpl)ruleRegion).setFixmeScheduleModel(scheduleModel);
 		scheduleModel.getOwnedOtherMappingRegions().add(ruleRegion);
-		ruleRegion.setReferredRule(mapping);
 		this.expressionAnalyzer = new ExpressionAnalyzer(this);
 		//
+		Mapping mapping = (Mapping)QVTscheduleUtil.getReferredRule(ruleRegion);
 		GuardPattern guardPattern = QVTcoreUtil.getGuardPattern(mapping);
 		BottomPattern bottomPattern = QVTcoreUtil.getBottomPattern(mapping);
 		guardPatterns.add(guardPattern);

@@ -202,11 +202,6 @@ implements QVTscheduleVisitor<Boolean>
 	}
 
 	@Override
-	public @Nullable Boolean visitRuleAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RuleAction object) {
-		return visitElement(object);
-	}
-
-	@Override
 	public @Nullable Boolean visitRuleRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RuleRegion object) {
 		return visitMappingRegion(object);
 	}

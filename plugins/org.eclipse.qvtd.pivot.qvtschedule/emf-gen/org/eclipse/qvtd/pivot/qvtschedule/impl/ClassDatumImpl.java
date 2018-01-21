@@ -30,7 +30,6 @@ import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
-import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
@@ -47,8 +46,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getOwningScheduleModel <em>Owning Schedule Model</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getReferredClass <em>Referred Class</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getSuperClassDatums <em>Super Class Datums</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getConsumingRegions <em>Consuming Regions</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClassDatumImpl#getProducingRegions <em>Producing Regions</em>}</li>
  * </ul>
  *
  * @generated
@@ -93,26 +90,6 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * @ordered
 	 */
 	protected EList<ClassDatum> superClassDatums;
-
-	/**
-	 * The cached value of the '{@link #getConsumingRegions() <em>Consuming Regions</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getConsumingRegions()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<RuleRegion> consumingRegions;
-
-	/**
-	 * The cached value of the '{@link #getProducingRegions() <em>Producing Regions</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getProducingRegions()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<RuleRegion> producingRegions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -287,32 +264,6 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EList<RuleRegion> getConsumingRegions() {
-		if (consumingRegions == null) {
-			consumingRegions = new EObjectResolvingEList<RuleRegion>(RuleRegion.class, this, QVTschedulePackage.CLASS_DATUM__CONSUMING_REGIONS);
-		}
-		return consumingRegions;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<RuleRegion> getProducingRegions() {
-		if (producingRegions == null) {
-			producingRegions = new EObjectResolvingEList<RuleRegion>(RuleRegion.class, this, QVTschedulePackage.CLASS_DATUM__PRODUCING_REGIONS);
-		}
-		return producingRegions;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -377,10 +328,6 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 				return basicGetReferredClass();
 			case QVTschedulePackage.CLASS_DATUM__SUPER_CLASS_DATUMS:
 				return getSuperClassDatums();
-			case QVTschedulePackage.CLASS_DATUM__CONSUMING_REGIONS:
-				return getConsumingRegions();
-			case QVTschedulePackage.CLASS_DATUM__PRODUCING_REGIONS:
-				return getProducingRegions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -411,14 +358,6 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 				getSuperClassDatums().clear();
 				getSuperClassDatums().addAll((Collection<? extends ClassDatum>)newValue);
 				return;
-			case QVTschedulePackage.CLASS_DATUM__CONSUMING_REGIONS:
-				getConsumingRegions().clear();
-				getConsumingRegions().addAll((Collection<? extends RuleRegion>)newValue);
-				return;
-			case QVTschedulePackage.CLASS_DATUM__PRODUCING_REGIONS:
-				getProducingRegions().clear();
-				getProducingRegions().addAll((Collection<? extends RuleRegion>)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -446,12 +385,6 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 			case QVTschedulePackage.CLASS_DATUM__SUPER_CLASS_DATUMS:
 				getSuperClassDatums().clear();
 				return;
-			case QVTschedulePackage.CLASS_DATUM__CONSUMING_REGIONS:
-				getConsumingRegions().clear();
-				return;
-			case QVTschedulePackage.CLASS_DATUM__PRODUCING_REGIONS:
-				getProducingRegions().clear();
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -474,10 +407,6 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 				return referredClass != null;
 			case QVTschedulePackage.CLASS_DATUM__SUPER_CLASS_DATUMS:
 				return superClassDatums != null && !superClassDatums.isEmpty();
-			case QVTschedulePackage.CLASS_DATUM__CONSUMING_REGIONS:
-				return consumingRegions != null && !consumingRegions.isEmpty();
-			case QVTschedulePackage.CLASS_DATUM__PRODUCING_REGIONS:
-				return producingRegions != null && !producingRegions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

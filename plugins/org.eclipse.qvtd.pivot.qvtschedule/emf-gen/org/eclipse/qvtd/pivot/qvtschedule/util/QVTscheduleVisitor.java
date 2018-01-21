@@ -57,7 +57,6 @@ public interface QVTscheduleVisitor<R> extends org.eclipse.ocl.pivot.util.Visito
 	R visitPropertyDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull PropertyDatum object);
 	R visitRecursionEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RecursionEdge object);
 	R visitRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Region object);
-	R visitRuleAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RuleAction object);
 	R visitRuleRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RuleRegion object);
 	R visitScheduleModel(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduleModel object);
 	R visitScheduledRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduledRegion object);

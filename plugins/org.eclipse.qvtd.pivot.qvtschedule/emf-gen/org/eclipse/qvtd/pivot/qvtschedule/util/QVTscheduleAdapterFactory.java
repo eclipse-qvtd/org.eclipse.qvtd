@@ -213,10 +213,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createRegionAdapter();
 			}
 			@Override
-			public Adapter caseRuleAction(RuleAction object) {
-				return createRuleActionAdapter();
-			}
-			@Override
 			public Adapter caseRuleRegion(RuleRegion object) {
 				return createRuleRegionAdapter();
 			}
@@ -853,20 +849,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRegionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.RuleAction <em>Rule Action</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.RuleAction
-	 * @generated
-	 */
-	public Adapter createRuleActionAdapter() {
 		return null;
 	}
 

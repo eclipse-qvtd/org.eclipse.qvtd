@@ -49,15 +49,6 @@ public interface DomainUsage
 	 * Return the TypedModel for this usage, null for none, non-null for one, Exception for more than one.
 	 * Note that a primitive TypedModel may be returned for DataType usage; it has no container.
 	 *
-	 * @deprecated specify a context
-	 */
-	@Deprecated
-	@Nullable TypedModel getTypedModel() throws IllegalStateException;
-
-	/**
-	 * Return the TypedModel for this usage, null for none, non-null for one, Exception for more than one.
-	 * Note that a primitive TypedModel may be returned for DataType usage; it has no container.
-	 *
 	 * Any ambiguous usage is diagnosed with respect to the optional context.
 	 */
 	@Nullable TypedModel getTypedModel(@Nullable Element context) throws IllegalStateException;
@@ -68,23 +59,9 @@ public interface DomainUsage
 	@NonNull Iterable<@NonNull TypedModel> getTypedModels();
 
 	/**
-	 * Return true if this usage includes usage in a checkable domain.
-	 * @deprecated use isInput()
-	 */
-	@Deprecated
-	boolean isCheckable();
-
-	/**
 	 * Return true if this usage has been resolve to zero or more TypedModels, false if it is an unresolved variable usage.
 	 */
 	boolean isConstant();
-
-	/**
-	 * Return true if this usage includes usage in an enforceable domain.
-	 * @deprecated use isOutput()
-	 */
-	@Deprecated
-	boolean isEnforceable();
 
 	/**
 	 * Return true if this usage includes usage in an input domain, a domain that is fully not-enforceable transformation-wide.
