@@ -35,6 +35,7 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
@@ -44,9 +45,8 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -54,7 +54,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.BasicMappingRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 
 /**
  * A BasicMappingRegion provides the initial QVTs node-edge graph representation of a QVTm mapping.
@@ -63,12 +64,12 @@ public class MappingAnalysis implements Nameable
 {
 	public static @NonNull MappingAnalysis createMappingRegion(@NonNull ScheduleManager scheduleManager, @NonNull Mapping mapping) {
 		MappingAnalysis mappingAnalysis = new MappingAnalysis(scheduleManager.getScheduleModel(), mapping);
-		@SuppressWarnings("unused")String name = mappingAnalysis.getMappingRegion().getName();
+		@SuppressWarnings("unused")String name = mappingAnalysis.getRuleRegion().getName();
 		mappingAnalysis.initialize();
 		return mappingAnalysis;
 	}
 
-	private final @NonNull BasicMappingRegionImpl mappingRegion;
+	private final @NonNull RuleRegionImpl mappingRegion;
 
 	/**
 	 * Predicates that are too complex to analyze. i.e. more than a comparison of a bound variable wrt
@@ -105,10 +106,10 @@ public class MappingAnalysis implements Nameable
 	private /*@LazyNonNull*/ List<@NonNull Node> dependencyHeadNodes = null;
 
 	private MappingAnalysis(@NonNull ScheduleModel scheduleModel, @NonNull Mapping mapping) {
-		this.mappingRegion = (BasicMappingRegionImpl) QVTscheduleFactory.eINSTANCE.createBasicMappingRegion();
+		this.mappingRegion = (RuleRegionImpl) QVTscheduleFactory.eINSTANCE.createRuleRegion();
 		mappingRegion.setFixmeScheduleModel(scheduleModel);
 		scheduleModel.getOwnedOtherMappingRegions().add(mappingRegion);
-		mappingRegion.setReferredMapping(mapping);
+		mappingRegion.setReferredRule(mapping);
 		this.expressionAnalyzer = new ExpressionAnalyzer(this);
 		//
 		GuardPattern guardPattern = QVTcoreUtil.getGuardPattern(mapping);
@@ -433,7 +434,7 @@ public class MappingAnalysis implements Nameable
 		return null;
 	}
 
-	public @NonNull BasicMappingRegion getMappingRegion() {
+	public @NonNull RuleRegion getRuleRegion() {
 		return mappingRegion;
 	}
 
@@ -608,7 +609,7 @@ public class MappingAnalysis implements Nameable
 		for (@NonNull Node newNode : mappingRegion.getNewNodes()) {
 			ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(newNode);
 			classDatumAnalysis.addProduction(mappingRegion, newNode);
-			for (@NonNull Mapping consumingMapping : classDatumAnalysis.getRequiredBy()) {
+			for (@NonNull Rule consumingMapping : classDatumAnalysis.getRequiredBy()) {
 				MappingRegion consumingRegion = qvtm2qts.getMappingRegion(consumingMapping);
 				for (@NonNull Node consumingNode : consumingRegion.getOldNodes()) {
 					if (consumingNode.getCompleteClass() == classDatumAnalysis.getClassDatum().getCompleteClass()) {		// FIXME inheritance
@@ -620,7 +621,7 @@ public class MappingAnalysis implements Nameable
 		for (@NonNull Node predicatedNode : mappingRegion.getOldNodes()) {
 			ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(predicatedNode);
 			classDatumAnalysis.addConsumption(mappingRegion, predicatedNode);
-			for (@NonNull Mapping producingMapping : classDatumAnalysis.getProducedBy()) {
+			for (@NonNull Rule producingMapping : classDatumAnalysis.getProducedBy()) {
 				MappingRegion producingRegion = qvtm2qts.getMappingRegion(producingMapping);
 				assert producingRegion != null;
 				for (@NonNull Node newNode : producingRegion.getNewNodes()) {

@@ -26,7 +26,6 @@ import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
@@ -35,6 +34,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 
 /**
  * ConnectivityChecker is a debug aid providing anslyses and consistency checks of a ScheduleModel.

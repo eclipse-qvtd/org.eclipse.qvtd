@@ -75,7 +75,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -104,6 +103,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 

@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractQVTscheduleAS2XMIidVisitor;
 
+@SuppressWarnings("deprecation")
 public class QVTscheduleAS2XMIidVisitor extends AbstractQVTscheduleAS2XMIidVisitor
 {
 	public QVTscheduleAS2XMIidVisitor(@NonNull AS2XMIid context) {

@@ -67,17 +67,17 @@ import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.BasicMappingRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 import com.google.common.collect.Iterables;
@@ -122,7 +122,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 
 	protected ExpressionAnalyzer(@NonNull MappingAnalysis context) {
 		super(context);
-		this.scheduleManager = RegionUtil.getScheduleManager(context.getMappingRegion());
+		this.scheduleManager = RegionUtil.getScheduleManager(context.getRuleRegion());
 		this.environmentFactory = scheduleManager.getEnvironmentFactory();
 		this.helper = new QVTcoreHelper(environmentFactory);
 		this.standardLibraryHelper = new StandardLibraryHelper(environmentFactory.getStandardLibrary());
@@ -149,8 +149,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		Node targetNode;
 		if (asSource instanceof VariableExp) {
 			VariableDeclaration referredVariable = QVTcoreUtil.getReferredVariable((VariableExp)asSource);
-			BasicMappingRegion mappingRegion = context.getMappingRegion();
-			sourceNode = mappingRegion.getNode(referredVariable);
+			RuleRegion ruleRegion = context.getRuleRegion();
+			sourceNode = ruleRegion.getNode(referredVariable);
 			if (sourceNode != null) {
 				Map<@NonNull OCLExpression, @NonNull Node> expression2knownNode2 = expression2knownNode;
 				if (expression2knownNode2 == null) {
@@ -163,14 +163,14 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 				return null;
 			}
 			else {
-				//				scheduleManager.addRegionError(mappingRegion, "Failed to unify simple equality predicate " + operationCallExp);
+				//				scheduleManager.addRegionError(ruleRegion, "Failed to unify simple equality predicate " + operationCallExp);
 				sourceNode = analyze(asSource);
 			}
 		}
 		else if (asTarget instanceof VariableExp) {
 			VariableDeclaration referredVariable = QVTcoreUtil.getReferredVariable((VariableExp)asTarget);
-			BasicMappingRegionImpl mappingRegion = (BasicMappingRegionImpl)context.getMappingRegion();
-			targetNode = mappingRegion.getNode(referredVariable);
+			RuleRegionImpl ruleRegion = (RuleRegionImpl)context.getRuleRegion();
+			targetNode = ruleRegion.getNode(referredVariable);
 			if (targetNode != null) {
 				Map<@NonNull OCLExpression, @NonNull Node> expression2knownNode2 = expression2knownNode;
 				if (expression2knownNode2 == null) {
@@ -183,7 +183,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 				return null;
 			}
 			else {
-				//				scheduleManager.addRegionError(mappingRegion, "Failed to unify simple equality predicate " + operationCallExp);
+				//				scheduleManager.addRegionError(ruleRegion, "Failed to unify simple equality predicate " + operationCallExp);
 				targetNode = analyze(asTarget);
 			}
 		}
@@ -200,7 +200,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 			if (targetNode == sourceNode) {
 				return null;
 			}
-			//				scheduleManager.addRegionError(mappingRegion, "Failed to unify simple equality predicate " + operationCallExp);
+			//				scheduleManager.addRegionError(ruleRegion, "Failed to unify simple equality predicate " + operationCallExp);
 		}
 		else {
 			sourceNode = analyze(asSource);
@@ -215,7 +215,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 			if (targetNode == sourceNode) {
 				return null;
 			}
-			//				scheduleManager.addRegionError(mappingRegion, "Failed to unify simple equality predicate " + operationCallExp);
+			//				scheduleManager.addRegionError(ruleRegion, "Failed to unify simple equality predicate " + operationCallExp);
 		}
 		//		createPredicateEdge(sourceNode, "«equals»", targetNode);
 		createExpressionEdge(targetNode, QVTscheduleConstants.EQUALS_NAME, sourceNode);
@@ -411,11 +411,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 	}
 
 	protected @NonNull Node createDependencyNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return RegionUtil.createDependencyNode(context.getMappingRegion(), name, classDatumAnalysis);
+		return RegionUtil.createDependencyNode(context.getRuleRegion(), name, classDatumAnalysis);
 	}
 
 	protected @NonNull Node createErrorNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return RegionUtil.createErrorNode(context.getMappingRegion(), name, classDatumAnalysis);
+		return RegionUtil.createErrorNode(context.getRuleRegion(), name, classDatumAnalysis);
 	}
 
 	protected @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
@@ -465,11 +465,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 	}
 
 	protected @NonNull Node createNullNode(@NonNull TypedElement typedElement) {
-		return RegionUtil.createNullNode(context.getMappingRegion(), isUnconditional(), typedElement);
+		return RegionUtil.createNullNode(context.getRuleRegion(), isUnconditional(), typedElement);
 	}
 
 	protected @NonNull Node createOperationNode(@NonNull String name, @NonNull TypedElement typedElement, @NonNull Node @NonNull ... argNodes) {
-		return RegionUtil.createOperationNode(context.getMappingRegion(), isUnconditional(), name, typedElement, argNodes);
+		return RegionUtil.createOperationNode(context.getRuleRegion(), isUnconditional(), name, typedElement, argNodes);
 	}
 
 	protected @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
@@ -567,7 +567,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 			}
 			else {
-				CompleteClass propertyCompleteClass = RegionUtil.getScheduleManager(context.getMappingRegion()).getClassDatumAnalysis(source2targetProperty).getClassDatum().getCompleteClass();
+				CompleteClass propertyCompleteClass = RegionUtil.getScheduleManager(context.getRuleRegion()).getClassDatumAnalysis(source2targetProperty).getClassDatum().getCompleteClass();
 				CompleteClass valueCompleteClass = targetNode.getCompleteClass();
 				if (valueCompleteClass == propertyCompleteClass) {
 					navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
@@ -740,7 +740,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		ClassDatumAnalysis classDatumAnalysis = scheduleManager.getClassDatumAnalysis(ownedVariable);
 		CompleteClass requiredClass = RegionUtil.getCompleteClass(classDatumAnalysis);
 		if (actualClass.conformsTo(requiredClass)) {
-			context.getMappingRegion().addVariableNode(ownedVariable, initNode);
+			context.getRuleRegion().addVariableNode(ownedVariable, initNode);
 			initNode.addTypedElement(ownedVariable);
 		}
 		else {
@@ -966,7 +966,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 					createExpressionEdge(argNodes[i], argNames[i], operationNode);
 				}
 				if (referredOperation.getBodyExpression() != null) {
-					ScheduleManager scheduleManager = RegionUtil.getScheduleManager(context.getMappingRegion());
+					ScheduleManager scheduleManager = RegionUtil.getScheduleManager(context.getRuleRegion());
 					QVTm2QVTs qvtm2qvts = (QVTm2QVTs) scheduleManager;		// FIXME cast
 					OperationRegion operationRegion = qvtm2qvts.analyzeOperation(scheduleManager, operationCallExp);
 					Iterable<@NonNull Node> referenceNodes = RegionUtil.getDependencyNodes(operationRegion);

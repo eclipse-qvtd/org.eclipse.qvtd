@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 
 /**
  * The DomainUsageAnalysis supports analysis of a Transformation's Domains to associated a bitmask of possible TypedModels with

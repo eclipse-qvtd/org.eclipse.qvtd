@@ -43,11 +43,6 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
-	public R visitBasicMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull BasicMappingRegion object) {
-		return delegate.visitBasicMappingRegion(object);
-	}
-
-	@Override
 	public R visitCastEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CastEdge object) {
 		return delegate.visitCastEdge(object);
 	}
@@ -115,11 +110,6 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	@Override
 	public R visitLoadingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull LoadingRegion object) {
 		return delegate.visitLoadingRegion(object);
-	}
-
-	@Override
-	public R visitMappingAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingAction object) {
-		return delegate.visitMappingAction(object);
 	}
 
 	@Override
@@ -200,6 +190,16 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	@Override
 	public R visitRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Region object) {
 		return delegate.visitRegion(object);
+	}
+
+	@Override
+	public R visitRuleAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RuleAction object) {
+		return delegate.visitRuleAction(object);
+	}
+
+	@Override
+	public R visitRuleRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RuleRegion object) {
+		return delegate.visitRuleRegion(object);
 	}
 
 	@Override

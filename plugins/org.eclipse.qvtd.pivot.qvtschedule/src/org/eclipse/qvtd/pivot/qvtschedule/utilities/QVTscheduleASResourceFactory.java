@@ -31,6 +31,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 /**
  * QVTscheduleASResourceFactory supports creation of a QVTschedule AS resource and associated artefacts.
  */
+@SuppressWarnings("deprecation")
 public class QVTscheduleASResourceFactory extends AbstractASResourceFactory
 {
 	public static final @NonNull String FILE_EXTENSION = "qvtsas";

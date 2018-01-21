@@ -23,7 +23,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -36,13 +36,13 @@ import com.google.common.collect.Sets;
 class Correlator
 {
 	public static @Nullable Correlator correlate(@NonNull MappingRegion secondaryRegion, @NonNull MappingRegion primaryRegion, @NonNull CorrelationStrategy strategy, @Nullable Map<@NonNull Node, @NonNull Node> primaryNode2secondaryNode) {
-		if (secondaryRegion instanceof BasicMappingRegion) {
-			if (((BasicMappingRegion)secondaryRegion).getReferredMapping().isIsAbstract()) {
+		if (secondaryRegion instanceof RuleRegion) {
+			if (((RuleRegion)secondaryRegion).getReferredRule().isIsAbstract()) {
 				return null;
 			}
 		}
-		if (primaryRegion instanceof BasicMappingRegion) {
-			if (((BasicMappingRegion)primaryRegion).getReferredMapping().isIsAbstract()) {
+		if (primaryRegion instanceof RuleRegion) {
+			if (((RuleRegion)primaryRegion).getReferredRule().isIsAbstract()) {
 				return null;
 			}
 		}

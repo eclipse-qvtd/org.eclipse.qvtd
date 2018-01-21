@@ -34,7 +34,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.BasicMappingRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
@@ -188,7 +188,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		//    	myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation_486938("person", false, "Families2Persons.genmodel"); // FIXME BUG 486938
-			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 2);
+			myQVT.assertRegionCount(RuleRegionImpl.class, 2);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
@@ -266,7 +266,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		try {
 			Class<? extends Transformer> txClassReverse = myQVT.buildTransformation("forward", false, "List2List.genmodel");
 			//			Class<? extends Transformer> txClassReverse = Forward2Reverse.class;
-			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 0);
+			myQVT.assertRegionCount(RuleRegionImpl.class, 0);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 9);
@@ -342,7 +342,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		try {
 			//			myQVT.createGeneratedExecutor(hsv2hsl.class);
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("hsl", false, "HSV2HSL.genmodel");
-			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 1);
+			myQVT.assertRegionCount(RuleRegionImpl.class, 1);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 4);
@@ -417,7 +417,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		myQVT.setSuppressFailureDiagnosis(true);					// FIXME BUG 511028
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("rdbms", false, "SimpleUML2RDBMS.genmodel");
-			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 11);
+			myQVT.assertRegionCount(RuleRegionImpl.class, 11);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 3);
@@ -469,7 +469,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		myQVT.setSuppressFailureDiagnosis(true);					// FIXME BUG 511028
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("rdbms", false, "SimpleUML2RDBMS.genmodel");
-			myQVT.assertRegionCount(BasicMappingRegionImpl.class, 11);
+			myQVT.assertRegionCount(RuleRegionImpl.class, 11);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 3);

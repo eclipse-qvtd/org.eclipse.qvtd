@@ -27,7 +27,6 @@ import org.eclipse.jdt.annotation.NonNull;
 public interface QVTscheduleVisitor<R> extends org.eclipse.ocl.pivot.util.Visitor<R>
 {
 	R visitAbstractDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull AbstractDatum object);
-	R visitBasicMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull BasicMappingRegion object);
 	R visitCastEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CastEdge object);
 	R visitClassDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ClassDatum object);
 	R visitComposedNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ComposedNode object);
@@ -42,7 +41,6 @@ public interface QVTscheduleVisitor<R> extends org.eclipse.ocl.pivot.util.Visito
 	R visitIteratedEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull IteratedEdge object);
 	R visitIteratorNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull IteratorNode object);
 	R visitLoadingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull LoadingRegion object);
-	R visitMappingAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingAction object);
 	R visitMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingRegion object);
 	R visitMicroMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MicroMappingRegion object);
 	R visitNamedMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NamedMappingRegion object);
@@ -59,6 +57,8 @@ public interface QVTscheduleVisitor<R> extends org.eclipse.ocl.pivot.util.Visito
 	R visitPropertyDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull PropertyDatum object);
 	R visitRecursionEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RecursionEdge object);
 	R visitRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Region object);
+	R visitRuleAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RuleAction object);
+	R visitRuleRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RuleRegion object);
 	R visitScheduleModel(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduleModel object);
 	R visitScheduledRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduledRegion object);
 	R visitStatusNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull StatusNode object);

@@ -25,17 +25,17 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingAction;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleAction;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
@@ -97,12 +97,12 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static class Internal
 	{
-		public static @NonNull List<@NonNull AbstractDatum> getProducedDatumsList(@NonNull MappingAction mappingAction) {
-			return ClassUtil.nullFree(mappingAction.getProducedDatums());
+		public static @NonNull List<@NonNull AbstractDatum> getProducedDatumsList(@NonNull RuleAction ruleAction) {
+			return ClassUtil.nullFree(ruleAction.getProducedDatums());
 		}
 
-		public static @NonNull List<@NonNull AbstractDatum> getRequiredDatumsList(@NonNull MappingAction mappingAction) {
-			return ClassUtil.nullFree(mappingAction.getRequiredDatums());
+		public static @NonNull List<@NonNull AbstractDatum> getRequiredDatumsList(@NonNull RuleAction ruleAction) {
+			return ClassUtil.nullFree(ruleAction.getRequiredDatums());
 		}
 	}
 
@@ -554,36 +554,36 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(node.getOwningRegion());
 	}
 
-	public static @NonNull Iterable<@NonNull MappingAction> getProducedByActions(@NonNull AbstractDatum abstractDatum) {
+	public static @NonNull Iterable<@NonNull RuleAction> getProducedByActions(@NonNull AbstractDatum abstractDatum) {
 		return ClassUtil.nullFree(abstractDatum.getProducedByActions());
 	}
 
-	public static @NonNull Iterable<@NonNull AbstractDatum> getProducedDatums(@NonNull MappingAction mappingAction) {
-		return ClassUtil.nullFree(mappingAction.getProducedDatums());
+	public static @NonNull Iterable<@NonNull AbstractDatum> getProducedDatums(@NonNull RuleAction ruleAction) {
+		return ClassUtil.nullFree(ruleAction.getProducedDatums());
 	}
 
 	public static @NonNull Property getProperty(@NonNull NavigableEdge navigableEdge) {
 		return ClassUtil.nonNullState(navigableEdge.getProperty());
 	}
 
-	public static @NonNull Mapping getReferredMapping(@NonNull MappingAction mappingAction) {
-		return ClassUtil.nonNullState(mappingAction.getReferredMapping());
+	public static @NonNull Rule getReferredRule(@NonNull RuleAction ruleAction) {
+		return ClassUtil.nonNullState(ruleAction.getReferredRule());
 	}
 
-	public static @NonNull Mapping getReferredMapping(@NonNull BasicMappingRegion basicMappingRegion) {
-		return ClassUtil.nonNullState(basicMappingRegion.getReferredMapping());
+	public static @NonNull Rule getReferredRule(@NonNull RuleRegion ruleRegion) {
+		return ClassUtil.nonNullState(ruleRegion.getReferredRule());
 	}
 
 	public static @NonNull TypedModel getReferredTypedModel(@NonNull ClassDatum classDatum) {
 		return ClassUtil.nonNullState(classDatum.getReferredTypedModel());
 	}
 
-	public static @NonNull Iterable<@NonNull MappingAction> getRequiredByActions(@NonNull AbstractDatum abstractDatum) {
+	public static @NonNull Iterable<@NonNull RuleAction> getRequiredByActions(@NonNull AbstractDatum abstractDatum) {
 		return ClassUtil.nullFree(abstractDatum.getRequiredByActions());
 	}
 
-	public static @NonNull Iterable<@NonNull AbstractDatum> getRequiredDatums(@NonNull MappingAction mappingAction) {
-		return ClassUtil.nullFree(mappingAction.getRequiredDatums());
+	public static @NonNull Iterable<@NonNull AbstractDatum> getRequiredDatums(@NonNull RuleAction ruleAction) {
+		return ClassUtil.nullFree(ruleAction.getRequiredDatums());
 	}
 
 	public static @NonNull ScheduleModel getScheduleModel(@NonNull Region region) {

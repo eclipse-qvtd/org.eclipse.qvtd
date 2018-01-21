@@ -28,11 +28,12 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 
 /**
  * AbstractDomainUsageAnalysis provides shared functionality for the overall analysis and for nested operational analyses.
  */
-public abstract class AbstractBaseDomainUsageAnalysis extends AbstractDomainUsageAnalysis implements QVTbaseVisitor<@NonNull DomainUsage>
+public abstract class AbstractBaseDomainUsageAnalysis extends AbstractDomainUsageAnalysis implements QVTbaseVisitor<org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage>
 {
 	protected AbstractBaseDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);

@@ -37,8 +37,8 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 public interface AbstractDatum extends Element {
 	/**
 	 * Returns the value of the '<em><b>Produced By Actions</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.MappingAction}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingAction#getProducedDatums <em>Produced Datums</em>}'.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.RuleAction}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.RuleAction#getProducedDatums <em>Produced Datums</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Produced By Actions</em>' reference list isn't clear,
@@ -47,12 +47,12 @@ public interface AbstractDatum extends Element {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Produced By Actions</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getAbstractDatum_ProducedByActions()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingAction#getProducedDatums
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.RuleAction#getProducedDatums
 	 * @model opposite="producedDatums"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!AbstractDatum!producedByActions'"
 	 * @generated
 	 */
-	EList<MappingAction> getProducedByActions();
+	EList<RuleAction> getProducedByActions();
 
 	/**
 	 * Returns the value of the '<em><b>Referred Typed Model</b></em>' reference.
@@ -83,8 +83,8 @@ public interface AbstractDatum extends Element {
 
 	/**
 	 * Returns the value of the '<em><b>Required By Actions</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.MappingAction}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingAction#getRequiredDatums <em>Required Datums</em>}'.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.RuleAction}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.RuleAction#getRequiredDatums <em>Required Datums</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Required By Actions</em>' reference list isn't clear,
@@ -93,11 +93,11 @@ public interface AbstractDatum extends Element {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Required By Actions</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getAbstractDatum_RequiredByActions()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingAction#getRequiredDatums
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.RuleAction#getRequiredDatums
 	 * @model opposite="requiredDatums" derived="true"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!AbstractDatum!requiredByActions'"
 	 * @generated
 	 */
-	EList<MappingAction> getRequiredByActions();
+	EList<RuleAction> getRequiredByActions();
 
 } // AbstractDatum

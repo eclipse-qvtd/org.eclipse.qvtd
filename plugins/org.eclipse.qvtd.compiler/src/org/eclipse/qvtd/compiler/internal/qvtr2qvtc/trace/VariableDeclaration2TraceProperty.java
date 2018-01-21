@@ -15,9 +15,9 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 
 /**
  * VariableDeclaration2MiddleProperty accumulates the requirements on the trace property for a pattern variable.

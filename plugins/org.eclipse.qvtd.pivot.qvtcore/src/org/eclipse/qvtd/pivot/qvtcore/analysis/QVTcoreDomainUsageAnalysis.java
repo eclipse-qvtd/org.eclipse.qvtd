@@ -45,11 +45,12 @@ import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 
 /**
  * QVTcoreDomainUsageAnalysis provides shared functionality for the overall analysis and for nested operational analyses.
  */
-public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTcoreVisitor<@NonNull DomainUsage>
+public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTcoreVisitor<org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage>
 {
 	public QVTcoreDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);

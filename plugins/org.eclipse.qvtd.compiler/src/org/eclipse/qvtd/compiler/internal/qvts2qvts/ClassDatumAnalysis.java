@@ -36,14 +36,14 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtcore.Mapping;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingAction;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleAction;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
@@ -68,8 +68,8 @@ public class ClassDatumAnalysis implements Adapter
 	protected final @NonNull DomainUsage domainUsage;
 	protected final @NonNull ClassDatum elementalClassDatum;
 
-	private @Nullable List<@NonNull Mapping> producedBy = null;
-	private @Nullable List<@NonNull Mapping> requiredBy = null;
+	private @Nullable List<@NonNull Rule> producedBy = null;
+	private @Nullable List<@NonNull Rule> requiredBy = null;
 	private @Nullable List<@NonNull ClassDatumAnalysis> superClassDatumAnalyses = null;
 
 
@@ -183,14 +183,14 @@ public class ClassDatumAnalysis implements Adapter
 		return multiOpposites2;
 	}
 
-	public @NonNull List<@NonNull Mapping> getProducedBy() {
-		List<@NonNull Mapping> producedBy2 = producedBy;
+	public @NonNull List<@NonNull Rule> getProducedBy() {
+		List<@NonNull Rule> producedBy2 = producedBy;
 		if (producedBy2  == null) {
 			producedBy = producedBy2 = new ArrayList<>();
-			for (@NonNull MappingAction producingAction : ClassUtil.nullFree(classDatum.getProducedByActions())) {
-				Mapping mapping = producingAction.getReferredMapping();
-				assert mapping != null;
-				producedBy2.add(mapping);
+			for (@NonNull RuleAction producingAction : ClassUtil.nullFree(classDatum.getProducedByActions())) {
+				Rule rule = producingAction.getReferredRule();
+				assert rule != null;
+				producedBy2.add(rule);
 			}
 		}
 		return producedBy2;
@@ -204,14 +204,14 @@ public class ClassDatumAnalysis implements Adapter
 		return producer2assignmentNodes.keySet();
 	}
 
-	public @NonNull List<@NonNull Mapping> getRequiredBy() {
-		List<@NonNull Mapping> requiredBy2 = requiredBy;
+	public @NonNull List<@NonNull Rule> getRequiredBy() {
+		List<@NonNull Rule> requiredBy2 = requiredBy;
 		if (requiredBy2  == null) {
 			requiredBy = requiredBy2 = new ArrayList<>();
-			for (@NonNull MappingAction consumingAction : ClassUtil.nullFree(classDatum.getRequiredByActions())) {
-				Mapping mapping = consumingAction.getReferredMapping();
-				assert mapping != null;
-				requiredBy2.add(mapping);
+			for (@NonNull RuleAction consumingAction : ClassUtil.nullFree(classDatum.getRequiredByActions())) {
+				Rule rule = consumingAction.getReferredRule();
+				assert rule != null;
+				requiredBy2.add(rule);
 			}
 		}
 		return requiredBy2;

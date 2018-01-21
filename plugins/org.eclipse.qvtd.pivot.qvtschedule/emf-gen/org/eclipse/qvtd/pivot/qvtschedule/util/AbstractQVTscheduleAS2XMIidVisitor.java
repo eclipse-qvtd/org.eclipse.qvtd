@@ -32,9 +32,10 @@ import org.eclipse.ocl.pivot.utilities.PivotAS2XMIidVisitor;
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the method delegates to visiting().
  */
+@SuppressWarnings("deprecation")
 public abstract class AbstractQVTscheduleAS2XMIidVisitor
-	extends PivotAS2XMIidVisitor
-	implements QVTscheduleVisitor<Boolean>
+extends PivotAS2XMIidVisitor
+implements QVTscheduleVisitor<Boolean>
 {
 	/**
 	 * Initializes me with an initial value for my result.
@@ -48,11 +49,6 @@ public abstract class AbstractQVTscheduleAS2XMIidVisitor
 	@Override
 	public @Nullable Boolean visitAbstractDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull AbstractDatum object) {
 		return visitElement(object);
-	}
-
-	@Override
-	public @Nullable Boolean visitBasicMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull BasicMappingRegion object) {
-		return visitMappingRegion(object);
 	}
 
 	@Override
@@ -123,11 +119,6 @@ public abstract class AbstractQVTscheduleAS2XMIidVisitor
 	@Override
 	public @Nullable Boolean visitLoadingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull LoadingRegion object) {
 		return visitRegion(object);
-	}
-
-	@Override
-	public @Nullable Boolean visitMappingAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingAction object) {
-		return visitElement(object);
 	}
 
 	@Override
@@ -208,6 +199,16 @@ public abstract class AbstractQVTscheduleAS2XMIidVisitor
 	@Override
 	public @Nullable Boolean visitRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Region object) {
 		return visitElement(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitRuleAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RuleAction object) {
+		return visitElement(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitRuleRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RuleRegion object) {
+		return visitMappingRegion(object);
 	}
 
 	@Override

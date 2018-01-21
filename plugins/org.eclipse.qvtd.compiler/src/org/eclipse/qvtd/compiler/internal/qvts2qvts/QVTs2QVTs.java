@@ -43,7 +43,6 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPa
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
@@ -58,6 +57,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.LoadingRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
@@ -85,7 +85,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	/**
 	 * The input models that may introduce model elements for transformation.
 	 */
-	private final @NonNull Map<@NonNull Model, @NonNull DomainUsage> inputModels = new HashMap<>();
+	private final @NonNull Map<@NonNull Model, org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage> inputModels = new HashMap<>();
 	private final @NonNull StandardLibraryHelper standardLibraryHelper;
 	//	private final @NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges = new HashMap<>();
 	//	private final @NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges = new HashMap<>();

@@ -9,7 +9,6 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
@@ -25,12 +24,13 @@ import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.TemplateVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 
 /**
  * A QVTrelationDomainUsageAnalysis identifies a constrained domain result from the DomainUsageAnalysis of a QVTr AST node.
  */
-public class QVTrelationDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTrelationVisitor<@NonNull DomainUsage>
+public class QVTrelationDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTrelationVisitor<org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage>
 {
 	public QVTrelationDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);

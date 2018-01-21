@@ -26,8 +26,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtcore.Mapping;
-import org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
@@ -41,13 +41,13 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicMappingRegionImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicMappingRegionImpl#getReferredMapping <em>Referred Mapping</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl#getReferredRule <em>Referred Rule</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMappingRegion {
+public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -59,21 +59,21 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 	protected static final String NAME_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getReferredMapping() <em>Referred Mapping</em>}' reference.
+	 * The cached value of the '{@link #getReferredRule() <em>Referred Rule</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferredMapping()
+	 * @see #getReferredRule()
 	 * @generated
 	 * @ordered
 	 */
-	protected Mapping referredMapping;
+	protected Rule referredRule;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BasicMappingRegionImpl() {
+	protected RuleRegionImpl() {
 		super();
 	}
 
@@ -84,7 +84,7 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTschedulePackage.Literals.BASIC_MAPPING_REGION;
+		return QVTschedulePackage.Literals.RULE_REGION;
 	}
 
 	/**
@@ -95,11 +95,11 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.BASIC_MAPPING_REGION__NAME:
+			case QVTschedulePackage.RULE_REGION__NAME:
 				return getName();
-			case QVTschedulePackage.BASIC_MAPPING_REGION__REFERRED_MAPPING:
-				if (resolve) return getReferredMapping();
-				return basicGetReferredMapping();
+			case QVTschedulePackage.RULE_REGION__REFERRED_RULE:
+				if (resolve) return getReferredRule();
+				return basicGetReferredRule();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -112,8 +112,8 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.BASIC_MAPPING_REGION__REFERRED_MAPPING:
-				setReferredMapping((Mapping)newValue);
+			case QVTschedulePackage.RULE_REGION__REFERRED_RULE:
+				setReferredRule((Rule)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -127,8 +127,8 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.BASIC_MAPPING_REGION__REFERRED_MAPPING:
-				setReferredMapping((Mapping)null);
+			case QVTschedulePackage.RULE_REGION__REFERRED_RULE:
+				setReferredRule((Rule)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -142,10 +142,10 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.BASIC_MAPPING_REGION__NAME:
+			case QVTschedulePackage.RULE_REGION__NAME:
 				return NAME_EDEFAULT == null ? getName() != null : !NAME_EDEFAULT.equals(getName());
-			case QVTschedulePackage.BASIC_MAPPING_REGION__REFERRED_MAPPING:
-				return referredMapping != null;
+			case QVTschedulePackage.RULE_REGION__REFERRED_RULE:
+				return referredRule != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -157,7 +157,7 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitBasicMappingRegion(this);
+		return (R) ((QVTscheduleVisitor<?>)visitor).visitRuleRegion(this);
 	}
 
 	/**
@@ -177,7 +177,7 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 	 */
 	@Override
 	public String getName() {
-		return QVTscheduleUtil.getReferredMapping(this).getName();
+		return QVTscheduleUtil.getReferredRule(this).getName();
 	}
 
 	/**
@@ -186,16 +186,16 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 	 * @generated
 	 */
 	@Override
-	public Mapping getReferredMapping() {
-		if (referredMapping != null && referredMapping.eIsProxy()) {
-			InternalEObject oldReferredMapping = (InternalEObject)referredMapping;
-			referredMapping = (Mapping)eResolveProxy(oldReferredMapping);
-			if (referredMapping != oldReferredMapping) {
+	public Rule getReferredRule() {
+		if (referredRule != null && referredRule.eIsProxy()) {
+			InternalEObject oldReferredRule = (InternalEObject)referredRule;
+			referredRule = (Rule)eResolveProxy(oldReferredRule);
+			if (referredRule != oldReferredRule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.BASIC_MAPPING_REGION__REFERRED_MAPPING, oldReferredMapping, referredMapping));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.RULE_REGION__REFERRED_RULE, oldReferredRule, referredRule));
 			}
 		}
-		return referredMapping;
+		return referredRule;
 	}
 
 	/**
@@ -203,8 +203,8 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Mapping basicGetReferredMapping() {
-		return referredMapping;
+	public Rule basicGetReferredRule() {
+		return referredRule;
 	}
 
 	/**
@@ -213,11 +213,11 @@ public class BasicMappingRegionImpl extends MappingRegionImpl implements BasicMa
 	 * @generated
 	 */
 	@Override
-	public void setReferredMapping(Mapping newReferredMapping) {
-		Mapping oldReferredMapping = referredMapping;
-		referredMapping = newReferredMapping;
+	public void setReferredRule(Rule newReferredRule) {
+		Rule oldReferredRule = referredRule;
+		referredRule = newReferredRule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.BASIC_MAPPING_REGION__REFERRED_MAPPING, oldReferredMapping, referredMapping));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.RULE_REGION__REFERRED_RULE, oldReferredRule, referredRule));
 	}
 
 	@Override

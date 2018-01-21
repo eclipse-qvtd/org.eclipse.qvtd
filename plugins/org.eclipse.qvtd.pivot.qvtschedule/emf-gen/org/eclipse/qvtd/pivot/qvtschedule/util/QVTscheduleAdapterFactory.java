@@ -25,8 +25,8 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.*;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 
 /**
  * <!-- begin-user-doc -->
@@ -89,10 +89,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createAbstractDatumAdapter();
 			}
 			@Override
-			public Adapter caseBasicMappingRegion(BasicMappingRegion object) {
-				return createBasicMappingRegionAdapter();
-			}
-			@Override
 			public Adapter caseCastEdge(CastEdge object) {
 				return createCastEdgeAdapter();
 			}
@@ -151,10 +147,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseLoadingRegion(LoadingRegion object) {
 				return createLoadingRegionAdapter();
-			}
-			@Override
-			public Adapter caseMappingAction(MappingAction object) {
-				return createMappingActionAdapter();
 			}
 			@Override
 			public Adapter caseMappingRegion(MappingRegion object) {
@@ -219,6 +211,14 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseRegion(Region object) {
 				return createRegionAdapter();
+			}
+			@Override
+			public Adapter caseRuleAction(RuleAction object) {
+				return createRuleActionAdapter();
+			}
+			@Override
+			public Adapter caseRuleRegion(RuleRegion object) {
+				return createRuleRegionAdapter();
 			}
 			@Override
 			public Adapter caseScheduleModel(ScheduleModel object) {
@@ -307,20 +307,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAbstractDatumAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion <em>Basic Mapping Region</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicMappingRegion
-	 * @generated
-	 */
-	public Adapter createBasicMappingRegionAdapter() {
 		return null;
 	}
 
@@ -549,13 +535,13 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage <em>Domain Usage</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage <em>Domain Usage</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage
 	 * @generated
 	 */
 	public Adapter createDomainUsageAdapter() {
@@ -643,20 +629,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLoadingRegionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingAction <em>Mapping Action</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingAction
-	 * @generated
-	 */
-	public Adapter createMappingActionAdapter() {
 		return null;
 	}
 
@@ -881,6 +853,34 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRegionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.RuleAction <em>Rule Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.RuleAction
+	 * @generated
+	 */
+	public Adapter createRuleActionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.RuleRegion <em>Rule Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.RuleRegion
+	 * @generated
+	 */
+	public Adapter createRuleRegionAdapter() {
 		return null;
 	}
 

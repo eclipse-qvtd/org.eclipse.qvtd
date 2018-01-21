@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingAction;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleAction;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 
 /**
@@ -52,7 +52,7 @@ public abstract class AbstractDatumImpl extends ElementImpl implements AbstractD
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<MappingAction> producedByActions;
+	protected EList<RuleAction> producedByActions;
 
 	/**
 	 * The cached value of the '{@link #getReferredTypedModel() <em>Referred Typed Model</em>}' reference.
@@ -72,7 +72,7 @@ public abstract class AbstractDatumImpl extends ElementImpl implements AbstractD
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<MappingAction> requiredByActions;
+	protected EList<RuleAction> requiredByActions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -99,9 +99,9 @@ public abstract class AbstractDatumImpl extends ElementImpl implements AbstractD
 	 * @generated
 	 */
 	@Override
-	public EList<MappingAction> getProducedByActions() {
+	public EList<RuleAction> getProducedByActions() {
 		if (producedByActions == null) {
-			producedByActions = new EObjectWithInverseResolvingEList.ManyInverse<MappingAction>(MappingAction.class, this, QVTschedulePackage.ABSTRACT_DATUM__PRODUCED_BY_ACTIONS, QVTschedulePackage.MAPPING_ACTION__PRODUCED_DATUMS);
+			producedByActions = new EObjectWithInverseResolvingEList.ManyInverse<RuleAction>(RuleAction.class, this, QVTschedulePackage.ABSTRACT_DATUM__PRODUCED_BY_ACTIONS, QVTschedulePackage.RULE_ACTION__PRODUCED_DATUMS);
 		}
 		return producedByActions;
 	}
@@ -152,9 +152,9 @@ public abstract class AbstractDatumImpl extends ElementImpl implements AbstractD
 	 * @generated
 	 */
 	@Override
-	public EList<MappingAction> getRequiredByActions() {
+	public EList<RuleAction> getRequiredByActions() {
 		if (requiredByActions == null) {
-			requiredByActions = new EObjectWithInverseResolvingEList.ManyInverse<MappingAction>(MappingAction.class, this, QVTschedulePackage.ABSTRACT_DATUM__REQUIRED_BY_ACTIONS, QVTschedulePackage.MAPPING_ACTION__REQUIRED_DATUMS);
+			requiredByActions = new EObjectWithInverseResolvingEList.ManyInverse<RuleAction>(RuleAction.class, this, QVTschedulePackage.ABSTRACT_DATUM__REQUIRED_BY_ACTIONS, QVTschedulePackage.RULE_ACTION__REQUIRED_DATUMS);
 		}
 		return requiredByActions;
 	}
@@ -222,14 +222,14 @@ public abstract class AbstractDatumImpl extends ElementImpl implements AbstractD
 		switch (featureID) {
 			case QVTschedulePackage.ABSTRACT_DATUM__PRODUCED_BY_ACTIONS:
 				getProducedByActions().clear();
-				getProducedByActions().addAll((Collection<? extends MappingAction>)newValue);
+				getProducedByActions().addAll((Collection<? extends RuleAction>)newValue);
 				return;
 			case QVTschedulePackage.ABSTRACT_DATUM__REFERRED_TYPED_MODEL:
 				setReferredTypedModel((TypedModel)newValue);
 				return;
 			case QVTschedulePackage.ABSTRACT_DATUM__REQUIRED_BY_ACTIONS:
 				getRequiredByActions().clear();
-				getRequiredByActions().addAll((Collection<? extends MappingAction>)newValue);
+				getRequiredByActions().addAll((Collection<? extends RuleAction>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

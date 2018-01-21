@@ -35,15 +35,6 @@ public interface QVTscheduleFactory extends EFactory {
 	QVTscheduleFactory eINSTANCE = org.eclipse.qvtd.pivot.qvtschedule.impl.QVTscheduleFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Basic Mapping Region</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Basic Mapping Region</em>'.
-	 * @generated
-	 */
-	@NonNull BasicMappingRegion createBasicMappingRegion();
-
-	/**
 	 * Returns a new object of class '<em>Cast Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -141,15 +132,6 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull LoadingRegion createLoadingRegion();
-
-	/**
-	 * Returns a new object of class '<em>Mapping Action</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Mapping Action</em>'.
-	 * @generated
-	 */
-	@NonNull MappingAction createMappingAction();
 
 	/**
 	 * Returns a new object of class '<em>Micro Mapping Region</em>'.
@@ -258,6 +240,24 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull RecursionEdge createRecursionEdge();
+
+	/**
+	 * Returns a new object of class '<em>Rule Action</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Rule Action</em>'.
+	 * @generated
+	 */
+	@NonNull RuleAction createRuleAction();
+
+	/**
+	 * Returns a new object of class '<em>Rule Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Rule Region</em>'.
+	 * @generated
+	 */
+	@NonNull RuleRegion createRuleRegion();
 
 	/**
 	 * Returns a new object of class '<em>Schedule Model</em>'.

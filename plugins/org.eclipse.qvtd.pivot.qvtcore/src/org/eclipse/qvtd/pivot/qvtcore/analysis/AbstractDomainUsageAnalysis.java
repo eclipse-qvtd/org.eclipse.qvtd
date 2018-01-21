@@ -69,14 +69,15 @@ import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ParserException;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 
 /**
  * AbstractDomainUsageAnalysis provides shared functionality for the overall analysis and for nested operational analyses.
  */
-public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivotVisitor<@NonNull DomainUsage, @NonNull EnvironmentFactory> implements DomainUsageAnalysis.Internal
+public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivotVisitor<org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage, @NonNull EnvironmentFactory> implements DomainUsageAnalysis.Internal
 {
 	private DomainUsage selfUsage = null;
-	protected final @NonNull Map<@NonNull Element, @NonNull DomainUsage> element2usage = new HashMap<>();
+	protected final @NonNull Map<@NonNull Element, org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage> element2usage = new HashMap<>();
 
 	protected AbstractDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
@@ -227,9 +228,9 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 
 	@Override
 	public String toString() {
-		Map<@NonNull String, @NonNull DomainUsage> map = new HashMap<>(element2usage.size());
+		Map<@NonNull String, org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage> map = new HashMap<>(element2usage.size());
 		List<@NonNull String> keys = new ArrayList<>(element2usage.size());
-		for (Map.Entry<@NonNull Element, @NonNull DomainUsage> entry : element2usage.entrySet()) {
+		for (Map.Entry<@NonNull Element, org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage> entry : element2usage.entrySet()) {
 			Element element = entry.getKey();
 			String key = element.eClass().getName() + " : " + element;
 			map.put(key, entry.getValue());
@@ -542,7 +543,7 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingPivot
 				}
 			}
 			DomainUsageAnalysis analysis = rootAnalysis.getAnalysis(operation);
-			Map<@NonNull DomainUsage, @NonNull DomainUsage> referred2specialized = new HashMap<>();
+			Map<org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage, org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage> referred2specialized = new HashMap<>();
 			List<@NonNull Parameter> ownedParameters = ClassUtil.nullFree(operation.getOwnedParameters());
 			int iMax = Math.min(ownedParameters.size(), object.getOwnedArguments().size());
 			for (int i = 0; i < iMax; i++) {

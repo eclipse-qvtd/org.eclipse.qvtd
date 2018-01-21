@@ -47,12 +47,12 @@ import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -62,6 +62,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 import com.google.common.collect.Iterables;
@@ -88,7 +89,7 @@ public class QVTm2QVTs extends ScheduleManager
 	/**
 	 * The Region to which each mapping is allocated.
 	 */
-	private final @NonNull Map<@NonNull Mapping, @NonNull MappingAnalysis> mapping2mappingAnalysis = new HashMap<>();
+	private final @NonNull Map<@NonNull Rule, @NonNull MappingAnalysis> mapping2mappingAnalysis = new HashMap<>();
 
 	private Map<@NonNull OperationDatum, @NonNull OperationRegion> operationDatum2operationRegion = new HashMap<>();
 
@@ -304,10 +305,10 @@ public class QVTm2QVTs extends ScheduleManager
 		return new ClassDatumAnalysis(this, classDatum);
 	}
 
-	public @NonNull MappingRegion getMappingRegion(@NonNull Mapping mapping) {
+	public @NonNull MappingRegion getMappingRegion(@NonNull Rule mapping) {
 		MappingAnalysis mappingAnalysis = mapping2mappingAnalysis.get(mapping);
 		assert mappingAnalysis != null;
-		return mappingAnalysis.getMappingRegion();
+		return mappingAnalysis.getRuleRegion();
 	}
 
 	public @NonNull List<@NonNull Region> transform() throws IOException {
@@ -326,14 +327,14 @@ public class QVTm2QVTs extends ScheduleManager
 		}
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			for (@NonNull MappingAnalysis mappingAnalysis : mappingAnalyses) {
-				writeDebugGraphs(mappingAnalysis.getMappingRegion(), null);
+				writeDebugGraphs(mappingAnalysis.getRuleRegion(), null);
 			}
 		}
 		List<@NonNull MappingRegion> orderedRegions = new ArrayList<>();
 		for (@NonNull Mapping mapping : orderedMappings) {
 			MappingAnalysis mappingAnalysis = mapping2mappingAnalysis.get(mapping);
 			assert mappingAnalysis != null;
-			orderedRegions.add(mappingAnalysis.getMappingRegion());
+			orderedRegions.add(mappingAnalysis.getRuleRegion());
 			//			mappingRegion.resolveRecursion();
 		}
 		boolean noEarlyMerge = isNoEarlyMerge();

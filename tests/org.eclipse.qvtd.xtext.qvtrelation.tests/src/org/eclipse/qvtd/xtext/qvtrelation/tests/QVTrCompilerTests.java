@@ -39,7 +39,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.BasicMappingRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
@@ -226,7 +226,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.models.families2persons.trace_Families2Persons.trace_Families2PersonsPackage");
 		try {
 			txClass3 = myQVT3.buildTransformation("Persons", false);//,
-			myQVT3.assertRegionCount(BasicMappingRegionImpl.class, 2);
+			myQVT3.assertRegionCount(RuleRegionImpl.class, 2);
 			myQVT3.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT3.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			myQVT3.assertRegionCount(MicroMappingRegionImpl.class, 0);
@@ -319,7 +319,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT1 = createQVT("Families2Persons", getModelsURI("families2persons/Families2Persons_expected.qvtras"));
 		try {
 			txClass = myQVT1.buildTransformation("Persons", false);//,
-			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 2);
+			myQVT1.assertRegionCount(RuleRegionImpl.class, 2);
 			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 0);
@@ -446,7 +446,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			txClass = myQVT1.buildTransformation("reverse", false);//,
 			//			Class<? extends Transformer> txClass = Forward2Reverse.class;
-			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 2);
+			myQVT1.assertRegionCount(RuleRegionImpl.class, 2);
 			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 4);
@@ -532,7 +532,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT1 = createQVT("HierarchicalStateMachine2FlatStateMachine", getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"));
 		try {
 			txClass = myQVT1.buildTransformation("flat", false);//,
-			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 3);
+			myQVT1.assertRegionCount(RuleRegionImpl.class, 3);
 			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 0);
@@ -580,7 +580,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT1 = createQVT("hstm2fstm", txURI);
 		try {
 			txClass = myQVT1.buildTransformation("flat", false);//,
-			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 3);
+			myQVT1.assertRegionCount(RuleRegionImpl.class, 3);
 			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 0);
@@ -809,7 +809,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			txClass = myQVT1.buildTransformation("stm", false);//,
 			//					"SeqMM.SeqMMPackage", "PSeqToStm.PSeqToStmPackage");
 			//
-			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 4);
+			myQVT1.assertRegionCount(RuleRegionImpl.class, 4);
 			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 0);

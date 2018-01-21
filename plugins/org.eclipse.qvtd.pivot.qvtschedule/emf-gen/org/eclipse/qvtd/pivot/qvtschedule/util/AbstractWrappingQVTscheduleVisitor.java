@@ -46,18 +46,6 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
-	public R visitBasicMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull BasicMappingRegion object) {
-		@Nullable P prologue = preVisit(object);
-		try {
-			R result = delegate.visitBasicMappingRegion(object);
-			return postVisit(object, prologue, result);
-		}
-		catch (Throwable e) {
-			return badVisit(object, prologue, e);
-		}
-	}
-
-	@Override
 	public R visitCastEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CastEdge object) {
 		@Nullable P prologue = preVisit(object);
 		try {
@@ -218,18 +206,6 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitLoadingRegion(object);
-			return postVisit(object, prologue, result);
-		}
-		catch (Throwable e) {
-			return badVisit(object, prologue, e);
-		}
-	}
-
-	@Override
-	public R visitMappingAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingAction object) {
-		@Nullable P prologue = preVisit(object);
-		try {
-			R result = delegate.visitMappingAction(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {
@@ -422,6 +398,30 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitRegion(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitRuleAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RuleAction object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitRuleAction(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitRuleRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RuleRegion object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitRuleRegion(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {

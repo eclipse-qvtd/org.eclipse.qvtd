@@ -69,7 +69,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case QVTschedulePackage.BASIC_MAPPING_REGION: return createBasicMappingRegion();
 			case QVTschedulePackage.CAST_EDGE: return createCastEdge();
 			case QVTschedulePackage.CLASS_DATUM: return createClassDatum();
 			case QVTschedulePackage.COMPOSED_NODE: return createComposedNode();
@@ -81,7 +80,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.ITERATED_EDGE: return createIteratedEdge();
 			case QVTschedulePackage.ITERATOR_NODE: return createIteratorNode();
 			case QVTschedulePackage.LOADING_REGION: return createLoadingRegion();
-			case QVTschedulePackage.MAPPING_ACTION: return createMappingAction();
 			case QVTschedulePackage.MICRO_MAPPING_REGION: return createMicroMappingRegion();
 			case QVTschedulePackage.NAMED_MAPPING_REGION: return createNamedMappingRegion();
 			case QVTschedulePackage.NAVIGATION_EDGE: return createNavigationEdge();
@@ -94,6 +92,8 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.PREDICATE_EDGE: return createPredicateEdge();
 			case QVTschedulePackage.PROPERTY_DATUM: return createPropertyDatum();
 			case QVTschedulePackage.RECURSION_EDGE: return createRecursionEdge();
+			case QVTschedulePackage.RULE_ACTION: return createRuleAction();
+			case QVTschedulePackage.RULE_REGION: return createRuleRegion();
 			case QVTschedulePackage.SCHEDULE_MODEL: return createScheduleModel();
 			case QVTschedulePackage.SCHEDULED_REGION: return createScheduledRegion();
 			case QVTschedulePackage.STATUS_NODE: return createStatusNode();
@@ -136,17 +136,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull BasicMappingRegion createBasicMappingRegion() {
-		BasicMappingRegionImpl basicMappingRegion = new BasicMappingRegionImpl();
-		return basicMappingRegion;
 	}
 
 	/**
@@ -268,17 +257,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull LoadingRegion createLoadingRegion() {
 		LoadingRegionImpl loadingRegion = new LoadingRegionImpl();
 		return loadingRegion;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull MappingAction createMappingAction() {
-		MappingActionImpl mappingAction = new MappingActionImpl();
-		return mappingAction;
 	}
 
 	/**
@@ -411,6 +389,28 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull RecursionEdge createRecursionEdge() {
 		RecursionEdgeImpl recursionEdge = new RecursionEdgeImpl();
 		return recursionEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull RuleAction createRuleAction() {
+		RuleActionImpl ruleAction = new RuleActionImpl();
+		return ruleAction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull RuleRegion createRuleRegion() {
+		RuleRegionImpl ruleRegion = new RuleRegionImpl();
+		return ruleRegion;
 	}
 
 	/**

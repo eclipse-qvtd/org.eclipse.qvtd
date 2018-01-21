@@ -14,7 +14,7 @@ package org.eclipse.qvtd.pivot.qvtschedule;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleASResourceFactory;
 
 import com.google.inject.Guice;
@@ -34,7 +34,7 @@ public class QVTschedulePivotStandaloneSetup
 	}
 
 	public static void init() {
-		QVTcorePivotStandaloneSetup.doSetup();
+		QVTbasePivotStandaloneSetup.doSetup();
 		//		QVTschedulePivotScoping.init();
 		QVTscheduleASResourceFactory.getInstance();
 		//		QVTscheduleToStringVisitor.FACTORY.getClass();

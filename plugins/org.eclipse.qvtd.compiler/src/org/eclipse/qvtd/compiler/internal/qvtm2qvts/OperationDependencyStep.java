@@ -15,7 +15,7 @@ import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 
 /**
  * OperationDependencyStep describes one step in the set of alternative usages of an analyzed operation input/output value.

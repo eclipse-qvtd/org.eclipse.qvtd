@@ -47,18 +47,17 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingAction;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleAction;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
@@ -106,17 +105,17 @@ public class DatumCaches
 
 	public void analyzeTransformation(@NonNull Transformation transformation) {
 		for (@NonNull Rule rule : QVTcoreUtil.getRule(transformation)) {
-			analyzeMapping((Mapping) rule);
+			analyzeMapping(rule);
 		}
 	}
 
-	private void analyzeMapping(@NonNull Mapping mapping) {
-		MappingAction mappingAction = QVTscheduleFactory.eINSTANCE.createMappingAction();
-		mappingAction.setReferredMapping(mapping);
-		mappingAction.setOwningScheduleModel(scheduleManager.getScheduleModel());
-		List<@NonNull AbstractDatum> productions = QVTscheduleUtil.Internal.getProducedDatumsList(mappingAction);
-		List<@NonNull AbstractDatum> requisites = QVTscheduleUtil.Internal.getRequiredDatumsList(mappingAction);
-		for (@NonNull EObject eObject : new TreeIterable(mapping, true)) {
+	private void analyzeMapping(@NonNull Rule rule) {
+		RuleAction ruleAction = QVTscheduleFactory.eINSTANCE.createRuleAction();
+		ruleAction.setReferredRule(rule);
+		ruleAction.setOwningScheduleModel(scheduleManager.getScheduleModel());
+		List<@NonNull AbstractDatum> productions = QVTscheduleUtil.Internal.getProducedDatumsList(ruleAction);
+		List<@NonNull AbstractDatum> requisites = QVTscheduleUtil.Internal.getRequiredDatumsList(ruleAction);
+		for (@NonNull EObject eObject : new TreeIterable(rule, true)) {
 			if (eObject instanceof GuardPattern) {
 				for (@NonNull Variable inputVar : QVTcoreUtil.getOwnedVariables((GuardPattern)eObject)) {
 					TypedModel typedModel = getTypedModel(inputVar);
@@ -236,10 +235,10 @@ public class DatumCaches
 				getUsage(value);
 				throw new IllegalStateException("No DomainUsage for " + value);
 			}
-//			if (valueUsage == domainUsageAnalysis.getNoneUsage()) {
-//				getUsage(value);
-//				throw new IllegalStateException("None DomainUsage for " + value);
-//			}
+			//			if (valueUsage == domainUsageAnalysis.getNoneUsage()) {
+			//				getUsage(value);
+			//				throw new IllegalStateException("None DomainUsage for " + value);
+			//			}
 			Type propertyType = targetProp.getType();
 			if ((propertyType != null) && (propertyType.getESObject() != EcorePackage.Literals.EOBJECT)) {		// FIXME Legacy fix tolerating undeclared import of EObject
 				DomainUsage propertyUsage = getUsage(propertyType);

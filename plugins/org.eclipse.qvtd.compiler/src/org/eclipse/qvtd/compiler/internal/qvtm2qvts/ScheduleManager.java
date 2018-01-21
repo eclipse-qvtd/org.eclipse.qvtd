@@ -47,17 +47,17 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingAction;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleAction;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToCallGraphVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToRegionGraphVisitor;
@@ -139,7 +139,7 @@ public abstract class ScheduleManager implements Adapter
 	}
 
 	private void analyzeCallTree() {
-		Map<@NonNull Mapping, @NonNull List<@NonNull Mapping>> consumer2producers = new HashMap<>();
+		Map<@NonNull Rule, @NonNull List<@NonNull Rule>> consumer2producers = new HashMap<>();
 		List<@NonNull ClassDatum> middleClassDatums = new ArrayList<>();
 		StringBuilder s = QVTm2QVTs.CALL_TREE.isActive() ? new StringBuilder() : null;
 		for (@NonNull ClassDatum classDatum : QVTscheduleUtil.getOwnedClassDatums(scheduleModel)) {
@@ -150,15 +150,15 @@ public abstract class ScheduleManager implements Adapter
 				if (s != null) {
 					s.append("middle: " + classDatum.getProducedByActions() + "\n");
 				}
-				for (@NonNull MappingAction consumerAction : QVTscheduleUtil.getRequiredByActions(classDatum)) {
-					Mapping consumer = QVTscheduleUtil.getReferredMapping(consumerAction);
-					List<@NonNull Mapping> producers = consumer2producers.get(consumer);
+				for (@NonNull RuleAction consumerAction : QVTscheduleUtil.getRequiredByActions(classDatum)) {
+					Rule consumer = QVTscheduleUtil.getReferredRule(consumerAction);
+					List<@NonNull Rule> producers = consumer2producers.get(consumer);
 					if (producers == null) {
 						producers = new ArrayList<>();
 						consumer2producers.put(consumer, producers);
 					}
-					for (@NonNull MappingAction producerAction : QVTscheduleUtil.getProducedByActions(classDatum)) {
-						Mapping producer = QVTscheduleUtil.getReferredMapping(producerAction);
+					for (@NonNull RuleAction producerAction : QVTscheduleUtil.getProducedByActions(classDatum)) {
+						Rule producer = QVTscheduleUtil.getReferredRule(producerAction);
 						if (!producers.contains(producer)) {
 							producers.add(producer);
 						}

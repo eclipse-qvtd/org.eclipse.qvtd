@@ -47,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 
 public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAnalysis implements DomainUsageAnalysis.Root
 {
@@ -294,7 +295,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	/**
 	 * The domains in which the containing class of a property may be used.
 	 */
-	protected final @NonNull Map<@NonNull Property, @NonNull DomainUsage> property2containingClassUsage = new HashMap<>();
+	protected final @NonNull Map<@NonNull Property, org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage> property2containingClassUsage = new HashMap<>();
 
 	/**
 	 * The nested analyses for declared operations.

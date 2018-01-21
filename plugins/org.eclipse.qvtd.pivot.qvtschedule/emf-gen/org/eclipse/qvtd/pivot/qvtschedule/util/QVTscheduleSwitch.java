@@ -24,8 +24,8 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.*;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 
 /**
  * <!-- begin-user-doc -->
@@ -89,18 +89,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				T result = caseAbstractDatum(abstractDatum);
 				if (result == null) result = caseElement(abstractDatum);
 				if (result == null) result = caseVisitable(abstractDatum);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTschedulePackage.BASIC_MAPPING_REGION: {
-				BasicMappingRegion basicMappingRegion = (BasicMappingRegion)theEObject;
-				T result = caseBasicMappingRegion(basicMappingRegion);
-				if (result == null) result = caseMappingRegion(basicMappingRegion);
-				if (result == null) result = caseRegion(basicMappingRegion);
-				if (result == null) result = caseElement(basicMappingRegion);
-				if (result == null) result = caseNameable(basicMappingRegion);
-				if (result == null) result = caseSymbolable(basicMappingRegion);
-				if (result == null) result = caseVisitable(basicMappingRegion);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -257,14 +245,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseNameable(loadingRegion);
 				if (result == null) result = caseSymbolable(loadingRegion);
 				if (result == null) result = caseVisitable(loadingRegion);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTschedulePackage.MAPPING_ACTION: {
-				MappingAction mappingAction = (MappingAction)theEObject;
-				T result = caseMappingAction(mappingAction);
-				if (result == null) result = caseElement(mappingAction);
-				if (result == null) result = caseVisitable(mappingAction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -443,6 +423,26 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTschedulePackage.RULE_ACTION: {
+				RuleAction ruleAction = (RuleAction)theEObject;
+				T result = caseRuleAction(ruleAction);
+				if (result == null) result = caseElement(ruleAction);
+				if (result == null) result = caseVisitable(ruleAction);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTschedulePackage.RULE_REGION: {
+				RuleRegion ruleRegion = (RuleRegion)theEObject;
+				T result = caseRuleRegion(ruleRegion);
+				if (result == null) result = caseMappingRegion(ruleRegion);
+				if (result == null) result = caseRegion(ruleRegion);
+				if (result == null) result = caseElement(ruleRegion);
+				if (result == null) result = caseNameable(ruleRegion);
+				if (result == null) result = caseSymbolable(ruleRegion);
+				if (result == null) result = caseVisitable(ruleRegion);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTschedulePackage.SCHEDULE_MODEL: {
 				ScheduleModel scheduleModel = (ScheduleModel)theEObject;
 				T result = caseScheduleModel(scheduleModel);
@@ -538,21 +538,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAbstractDatum(AbstractDatum object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Basic Mapping Region</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Basic Mapping Region</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBasicMappingRegion(BasicMappingRegion object) {
 		return null;
 	}
 
@@ -902,21 +887,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Mapping Action</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Mapping Action</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMappingAction(MappingAction object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Mapping Region</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1153,6 +1123,36 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRegion(Region object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Rule Action</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Rule Action</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRuleAction(RuleAction object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Rule Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Rule Region</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRuleRegion(RuleRegion object) {
 		return null;
 	}
 

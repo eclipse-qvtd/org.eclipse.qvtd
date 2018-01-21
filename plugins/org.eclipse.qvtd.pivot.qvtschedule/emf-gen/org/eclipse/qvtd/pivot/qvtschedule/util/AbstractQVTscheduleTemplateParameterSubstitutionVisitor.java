@@ -52,11 +52,6 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
-	public @Nullable Object visitBasicMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull BasicMappingRegion object) {
-		return visitMappingRegion(object);
-	}
-
-	@Override
 	public @Nullable Object visitCastEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CastEdge object) {
 		return visitNavigableEdge(object);
 	}
@@ -124,11 +119,6 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 	@Override
 	public @Nullable Object visitLoadingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull LoadingRegion object) {
 		return visitRegion(object);
-	}
-
-	@Override
-	public @Nullable Object visitMappingAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingAction object) {
-		return visitElement(object);
 	}
 
 	@Override
@@ -209,6 +199,16 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 	@Override
 	public @Nullable Object visitRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Region object) {
 		return visitElement(object);
+	}
+
+	@Override
+	public @Nullable Object visitRuleAction(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RuleAction object) {
+		return visitElement(object);
+	}
+
+	@Override
+	public @Nullable Object visitRuleRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RuleRegion object) {
+		return visitMappingRegion(object);
 	}
 
 	@Override

@@ -29,7 +29,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 
 public class QVTscheduleConstants
 {
-	@SuppressWarnings("null")
 	public static final @NonNull String PLUGIN_ID = QVTschedulePackage.class.getPackage().getName();
 
 	public static final @NonNull TracingOption CONNECTION_CREATION = new TracingOption(PLUGIN_ID, "qvtm2qvts/connectionCreation");	// FIXME

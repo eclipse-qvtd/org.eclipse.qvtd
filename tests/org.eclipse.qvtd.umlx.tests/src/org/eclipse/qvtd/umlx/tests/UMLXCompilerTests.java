@@ -28,7 +28,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.BasicMappingRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.umlx.compiler.UMLXCompilerChain;
@@ -145,7 +145,7 @@ public class UMLXCompilerTests extends LoadTestCase
 		MyQVT myQVT1 = createQVT("Forward2Reverse", getModelsURI("forward2reverse/Forward2Reverse.umlx"));
 		try {
 			txClass = myQVT1.buildTransformation("reverse", false);
-			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 2);
+			myQVT1.assertRegionCount(RuleRegionImpl.class, 2);
 			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 4);
@@ -210,7 +210,7 @@ public class UMLXCompilerTests extends LoadTestCase
 		//		MyQVT myQVT = new MyQVT("forward2reverse");
 		try {
 			txClass = myQVT1.buildTransformation("flat", false);
-			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 3);
+			myQVT1.assertRegionCount(RuleRegionImpl.class, 3);
 			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 0);
