@@ -33,9 +33,7 @@ import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.CoreDomain;
@@ -49,7 +47,6 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
@@ -58,7 +55,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 
 /**
- * A BasicMappingRegion provides the initial QVTs node-edge graph representation of a QVTm mapping.
+ * A MappingAnalysis provides the analysis a QVTc mapping.
  */
 public class MappingAnalysis implements Nameable
 {
@@ -69,7 +66,7 @@ public class MappingAnalysis implements Nameable
 		return mappingAnalysis;
 	}
 
-	private final @NonNull RuleRegionImpl mappingRegion;
+	private final @NonNull RuleRegion ruleRegion;
 
 	/**
 	 * Predicates that are too complex to analyze. i.e. more than a comparison of a bound variable wrt
@@ -106,10 +103,10 @@ public class MappingAnalysis implements Nameable
 	private /*@LazyNonNull*/ List<@NonNull Node> dependencyHeadNodes = null;
 
 	private MappingAnalysis(@NonNull ScheduleModel scheduleModel, @NonNull Mapping mapping) {
-		this.mappingRegion = (RuleRegionImpl) QVTscheduleFactory.eINSTANCE.createRuleRegion();
-		mappingRegion.setFixmeScheduleModel(scheduleModel);
-		scheduleModel.getOwnedOtherMappingRegions().add(mappingRegion);
-		mappingRegion.setReferredRule(mapping);
+		this.ruleRegion =  QVTscheduleFactory.eINSTANCE.createRuleRegion();
+		((RuleRegionImpl)ruleRegion).setFixmeScheduleModel(scheduleModel);
+		scheduleModel.getOwnedOtherMappingRegions().add(ruleRegion);
+		ruleRegion.setReferredRule(mapping);
 		this.expressionAnalyzer = new ExpressionAnalyzer(this);
 		//
 		GuardPattern guardPattern = QVTcoreUtil.getGuardPattern(mapping);
@@ -203,7 +200,7 @@ public class MappingAnalysis implements Nameable
 			else { */
 			Node resultNode = conditionExpression.accept(expressionAnalyzer);
 			if ((resultNode != null) && !resultNode.isTrue()) {
-				Node trueNode = RegionUtil.createTrueNode(mappingRegion);
+				Node trueNode = RegionUtil.createTrueNode(ruleRegion);
 				RegionUtil.createPredicateEdge(resultNode, null, trueNode);
 			}
 			// FIXME ?? do includes() here explicitly
@@ -211,7 +208,7 @@ public class MappingAnalysis implements Nameable
 	}
 
 	protected void analyzeContainments() {
-		for (@NonNull Node node : mappingRegion.getNewNodes()) {
+		for (@NonNull Node node : ruleRegion.getNewNodes()) {
 			boolean isContained = false;
 			for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 				Property property = edge.getProperty();
@@ -233,10 +230,10 @@ public class MappingAnalysis implements Nameable
 	protected void analyzeGuardVariables() {
 		for (@NonNull GuardPattern guardPattern : guardPatterns) {
 			for (@NonNull Variable guardVariable : ClassUtil.nullFree(guardPattern.getVariable())) {
-				Node guardNode = mappingRegion.getNode(guardVariable);
+				Node guardNode = ruleRegion.getNode(guardVariable);
 				assert guardNode == null;
-				guardNode = RegionUtil.createOldNode(mappingRegion, guardVariable);
-				assert guardNode == mappingRegion.getNode(guardVariable);
+				guardNode = RegionUtil.createOldNode(ruleRegion, guardVariable);
+				assert guardNode == ruleRegion.getNode(guardVariable);
 			}
 		}
 	}
@@ -291,10 +288,10 @@ public class MappingAnalysis implements Nameable
 	protected void analyzeRealizedVariables() {
 		for (@NonNull BottomPattern bottomPattern : bottomPatterns) {
 			for (@NonNull RealizedVariable realizedVariable : ClassUtil.nullFree(bottomPattern.getRealizedVariable())) {
-				Node realizedNode = mappingRegion.getNode(realizedVariable);
+				Node realizedNode = ruleRegion.getNode(realizedVariable);
 				assert realizedNode == null;
-				realizedNode = RegionUtil.createRealizedStepNode(mappingRegion, realizedVariable);
-				assert realizedNode == mappingRegion.getNode(realizedVariable);
+				realizedNode = RegionUtil.createRealizedStepNode(ruleRegion, realizedVariable);
+				assert realizedNode == ruleRegion.getNode(realizedVariable);
 			}
 		}
 	}
@@ -330,7 +327,7 @@ public class MappingAnalysis implements Nameable
 				//		assert guardVariables.contains(targetVariable);
 				//		assert guardVariables.contains(sourceVariable);
 				Node sourceNode = getReferenceNode(sourceVariable);
-				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : RegionUtil.createNullNode(mappingRegion, true, null);
+				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : RegionUtil.createNullNode(ruleRegion, true, null);
 				//				assert sourceNode.isGuard();
 				//				assert (boundVariable == null) || targetNode.isGuard();
 				assert sourceNode.isClass();
@@ -395,13 +392,13 @@ public class MappingAnalysis implements Nameable
 		ClassDatum variableClassDatum = scheduleManager.getClassDatum(variable);
 		CompleteClass variableCompleteClass = RegionUtil.getCompleteClass(variableClassDatum);
 		if (!initCompleteClass.conformsTo(variableCompleteClass)) {
-			Node castNode = RegionUtil.createOldNode(mappingRegion, variable);
+			Node castNode = RegionUtil.createOldNode(ruleRegion, variable);
 			Property castProperty = scheduleManager.getCastProperty(PivotUtil.getType(variable));
 			expressionAnalyzer.createCastEdge(bestInitNode, castProperty, castNode);
 			bestInitNode = castNode;
 		}
 		bestInitNode.addTypedElement(variable);
-		mappingRegion.addVariableNode(variable, bestInitNode);
+		ruleRegion.addVariableNode(variable, bestInitNode);
 		for (@NonNull OCLExpression initExpression : expressions) {
 			if (initExpression != bestInitExpression) {
 				// FIXME if the extra init is a navigation we can add a navigation to the bestInitNode
@@ -413,20 +410,20 @@ public class MappingAnalysis implements Nameable
 		return bestInitNode;
 	}
 
-	public @NonNull Node createDependencyHead(@NonNull ClassDatumAnalysis classDatumAnalysis) {
+	public @NonNull Node createDependencyHead(@NonNull ClassDatum classDatum) {
 		if (dependencyHeadNodes == null) {
 			dependencyHeadNodes = new ArrayList<>();
 		}
-		Node dependencyHeadNode = RegionUtil.createDependencyNode(mappingRegion, "«extra-" + (dependencyHeadNodes.size()+1) + "»", classDatumAnalysis);
+		Node dependencyHeadNode = RegionUtil.createDependencyNode(ruleRegion, "«extra-" + (dependencyHeadNodes.size()+1) + "»", classDatum);
 		dependencyHeadNode.setHead();
 		dependencyHeadNodes.add(dependencyHeadNode);
 		return dependencyHeadNode;
 	}
 
-	public @Nullable Node getDependencyHead(@NonNull ClassDatumAnalysis classDatumAnalysis) {
+	public @Nullable Node getDependencyHead(@NonNull ClassDatum classDatum) {
 		if (dependencyHeadNodes != null) {
 			for (@NonNull Node dependencyHeadNode : dependencyHeadNodes) {
-				if (RegionUtil.getClassDatumAnalysis(dependencyHeadNode) == classDatumAnalysis) {
+				if (RegionUtil.getClassDatum(dependencyHeadNode) == classDatum) {
 					return dependencyHeadNode;
 				}
 			}
@@ -434,13 +431,9 @@ public class MappingAnalysis implements Nameable
 		return null;
 	}
 
-	public @NonNull RuleRegion getRuleRegion() {
-		return mappingRegion;
-	}
-
 	@Override
 	public @NonNull String getName() {
-		return RegionUtil.getName(mappingRegion);
+		return RegionUtil.getName(ruleRegion);
 	}
 
 	/**
@@ -458,7 +451,7 @@ public class MappingAnalysis implements Nameable
 		if (conditionExpression instanceof OperationCallExp) {
 			OperationCallExp callExp = (OperationCallExp)conditionExpression;
 			OperationId operationId = callExp.getReferredOperation().getOperationId();
-			if (PivotUtil.isSameOperation(operationId, RegionUtil.getScheduleManager(mappingRegion).getStandardLibraryHelper().getOclAnyEqualsId())) {
+			if (PivotUtil.isSameOperation(operationId, RegionUtil.getScheduleManager(ruleRegion).getStandardLibraryHelper().getOclAnyEqualsId())) {
 				OCLExpression leftExp = callExp.getOwnedSource();
 				if (leftExp instanceof VariableExp) {
 					return leftExp;
@@ -487,7 +480,7 @@ public class MappingAnalysis implements Nameable
 		if (conditionExpression instanceof OperationCallExp) {
 			OperationCallExp callExp = (OperationCallExp)conditionExpression;
 			OperationId operationId = callExp.getReferredOperation().getOperationId();
-			if (PivotUtil.isSameOperation(operationId, RegionUtil.getScheduleManager(mappingRegion).getStandardLibraryHelper().getOclAnyEqualsId())) {
+			if (PivotUtil.isSameOperation(operationId, RegionUtil.getScheduleManager(ruleRegion).getStandardLibraryHelper().getOclAnyEqualsId())) {
 				OCLExpression leftExp = callExp.getOwnedSource();
 				OCLExpression rightExp = callExp.getOwnedArguments().get(0);
 				if (leftExp instanceof VariableExp) {
@@ -509,7 +502,7 @@ public class MappingAnalysis implements Nameable
 	}
 
 	public @NonNull Node getReferenceNode(@NonNull VariableDeclaration variableDeclaration) {
-		Node node = mappingRegion.getNode(variableDeclaration);
+		Node node = ruleRegion.getNode(variableDeclaration);
 		if (node == null) {
 			if (variableDeclaration instanceof Variable) {
 				Variable variable = (Variable)variableDeclaration;
@@ -522,17 +515,17 @@ public class MappingAnalysis implements Nameable
 					node = analyzeVariable(variable, expressions);
 				}
 				else if (variable.eContainer() instanceof BottomPattern) {
-					DomainUsage domainUsage = RegionUtil.getScheduleManager(mappingRegion).getDomainUsage(variable);
+					DomainUsage domainUsage = RegionUtil.getScheduleManager(ruleRegion).getDomainUsage(variable);
 					boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
 					if (isEnforceable) {
 						//						assert variable instanceof RealizedVariable;
 						if (!(variable instanceof RealizedVariable)) {
-							getScheduleManager().addRegionError(mappingRegion, "Enforceable variable ''{0}'' has not been realized in ''{1}''", variable, mappingRegion);
+							getScheduleManager().addRegionError(ruleRegion, "Enforceable variable ''{0}'' has not been realized in ''{1}''", variable, ruleRegion);
 						}
-						node = RegionUtil.createRealizedStepNode(mappingRegion, variable);
+						node = RegionUtil.createRealizedStepNode(ruleRegion, variable);
 					}
 					else {
-						node = RegionUtil.createLoadedStepNode(mappingRegion, variable);		// FIXME Predicated ??
+						node = RegionUtil.createLoadedStepNode(ruleRegion, variable);		// FIXME Predicated ??
 					}
 				}
 			}
@@ -550,15 +543,19 @@ public class MappingAnalysis implements Nameable
 		} */
 	}
 
+	public @NonNull RuleRegion getRuleRegion() {
+		return ruleRegion;
+	}
+
 	protected @NonNull ScheduleManager getScheduleManager() {
 		return expressionAnalyzer.scheduleManager;
 	}
 
 	public @NonNull Node getUnknownNode(@NonNull TypedElement typedElement) {
 		assert !(typedElement instanceof Property);		// Property entries should be AttributeNodes
-		Node node = mappingRegion.getNode(typedElement);
+		Node node = ruleRegion.getNode(typedElement);
 		if (node == null) {
-			node = RegionUtil.createUnknownNode(mappingRegion, ClassUtil.nonNullState(typedElement.getType().toString()), typedElement);
+			node = RegionUtil.createUnknownNode(ruleRegion, ClassUtil.nonNullState(typedElement.getType().toString()), typedElement);
 			//			node2node.put(typedElement, node);
 		}
 		return node;
@@ -582,7 +579,7 @@ public class MappingAnalysis implements Nameable
 		analyzeComplexPredicates();
 		analyzeContainments();
 		//
-		RegionHelper regionHelper = new RegionHelper(mappingRegion);
+		RegionHelper regionHelper = new RegionHelper(ruleRegion);
 		List<@NonNull Node> headNodes = regionHelper.initHeadNodes(null);
 		regionHelper.computeUtilities(headNodes);
 	}
@@ -606,30 +603,13 @@ public class MappingAnalysis implements Nameable
 	}
 
 	public void registerConsumptionsAndProductions(@NonNull QVTm2QVTs qvtm2qts) {
-		for (@NonNull Node newNode : mappingRegion.getNewNodes()) {
-			ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(newNode);
-			classDatumAnalysis.addProduction(mappingRegion, newNode);
-			for (@NonNull Rule consumingMapping : classDatumAnalysis.getRequiredBy()) {
-				MappingRegion consumingRegion = qvtm2qts.getMappingRegion(consumingMapping);
-				for (@NonNull Node consumingNode : consumingRegion.getOldNodes()) {
-					if (consumingNode.getCompleteClass() == classDatumAnalysis.getClassDatum().getCompleteClass()) {		// FIXME inheritance
-						classDatumAnalysis.addConsumption(consumingRegion, consumingNode);
-					}
-				}
-			}
+		for (@NonNull Node newNode : ruleRegion.getNewNodes()) {
+			ClassDatum classDatum = RegionUtil.getClassDatum(newNode);
+			classDatum.getProducingRegions().add(ruleRegion);
 		}
-		for (@NonNull Node predicatedNode : mappingRegion.getOldNodes()) {
-			ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(predicatedNode);
-			classDatumAnalysis.addConsumption(mappingRegion, predicatedNode);
-			for (@NonNull Rule producingMapping : classDatumAnalysis.getProducedBy()) {
-				MappingRegion producingRegion = qvtm2qts.getMappingRegion(producingMapping);
-				assert producingRegion != null;
-				for (@NonNull Node newNode : producingRegion.getNewNodes()) {
-					if (newNode.getCompleteClass() == classDatumAnalysis.getClassDatum().getCompleteClass()) {		// FIXME inheritance
-						classDatumAnalysis.addProduction(producingRegion, newNode);
-					}
-				}
-			}
+		for (@NonNull Node predicatedNode : ruleRegion.getOldNodes()) {
+			ClassDatum classDatum = RegionUtil.getClassDatum(predicatedNode);
+			classDatum.getConsumingRegions().add(ruleRegion);
 		}
 	}
 

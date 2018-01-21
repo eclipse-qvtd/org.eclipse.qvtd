@@ -104,6 +104,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		public static @NonNull List<@NonNull AbstractDatum> getRequiredDatumsList(@NonNull RuleAction ruleAction) {
 			return ClassUtil.nullFree(ruleAction.getRequiredDatums());
 		}
+
+		public static @NonNull List<@NonNull ClassDatum> getSuperClassDatumsList(@NonNull ClassDatum classDatum) {
+			return ClassUtil.nullFree(classDatum.getSuperClassDatums());
+		}
 	}
 
 	public static final class IsCallableRegionPredicate implements Predicate<@NonNull Region>

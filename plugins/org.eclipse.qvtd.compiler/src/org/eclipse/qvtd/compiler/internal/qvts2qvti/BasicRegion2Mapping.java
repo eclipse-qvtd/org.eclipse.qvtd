@@ -68,7 +68,6 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -1510,11 +1509,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	private @NonNull GuardParameter createGuardParameter(@NonNull Node guardNode) {
-		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(guardNode);
+		ClassDatum classDatum = RegionUtil.getClassDatum(guardNode);
 		Type variableType = guardNode.getCompleteClass().getPrimaryClass();
-		ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(classDatumAnalysis.getClassDatum().getReferredTypedModel()));
+		ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(classDatum.getReferredTypedModel()));
 		GuardParameter guardParameter = helper.createGuardParameter(getSafeName(guardNode), iTypedModel, variableType, true);
-		Property statusProperty = RegionUtil.basicGetStatusProperty(guardNode);
+		Property statusProperty = RegionUtil.basicGetStatusProperty(visitor.getScheduleManager(), guardNode);
 		if (statusProperty != null) {
 			NavigableEdge statusEdge = guardNode.getNavigationEdge(statusProperty);
 			if ((statusEdge != null) && statusEdge.isRealized()) {
@@ -1797,7 +1796,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	private boolean isHazardousWrite(@NonNull NavigableEdge edge) {
 		Node sourceNode = edge.getEdgeSource();
 		Property asProperty = RegionUtil.getProperty(edge);
-		TypedModel typedModel = RegionUtil.getTypedModel(RegionUtil.getClassDatumAnalysis(sourceNode));
+		TypedModel typedModel = RegionUtil.getTypedModel(RegionUtil.getClassDatum(sourceNode));
 		RegionAnalysis regionAnalysis = RegionAnalysis.get(region);
 		Iterable<@NonNull NavigableEdge> enforcedEdges = regionAnalysis.getEnforcedEdges(typedModel, asProperty);
 		return enforcedEdges != null;

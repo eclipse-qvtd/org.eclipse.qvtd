@@ -36,6 +36,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -65,6 +66,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
 
 public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable Element, @Nullable Object>
 {
+	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull QVTimperativeHelper helper;
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull ProblemHandler problemHandler;
@@ -86,8 +88,9 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 
 	private /*@LazyNonNull*/ ImperativeTypedModel qvtiMiddleTypedModel = null;
 
-	public QVTs2QVTiVisitor(@NonNull ProblemHandler problemHandler, @NonNull QVTimperativeHelper helper, @NonNull Transformation qvtmTransformation, @NonNull SymbolNameReservation symbolNameReservation) {
+	public QVTs2QVTiVisitor(@NonNull ScheduleManager scheduleManager, @NonNull ProblemHandler problemHandler, @NonNull QVTimperativeHelper helper, @NonNull Transformation qvtmTransformation, @NonNull SymbolNameReservation symbolNameReservation) {
 		super(null);
+		this.scheduleManager = scheduleManager;
 		this.helper = helper;
 		this.environmentFactory = helper.getEnvironmentFactory();
 		this.problemHandler = problemHandler;
@@ -327,6 +330,10 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			}
 		}
 		return reservedNames2;
+	}
+
+	public @NonNull ScheduleManager getScheduleManager() {
+		return scheduleManager;
 	}
 
 	public @NonNull StandardLibrary getStandardLibrary() {

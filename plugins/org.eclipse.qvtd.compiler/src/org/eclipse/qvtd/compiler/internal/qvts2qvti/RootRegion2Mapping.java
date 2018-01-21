@@ -34,7 +34,6 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
@@ -54,7 +53,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 	/**
 	 * Mapping from the type to allInstances variable.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull AppendParameter> classDatumAnalysis2variable = new HashMap<>();
+	private final @NonNull Map<@NonNull ClassDatum, @NonNull AppendParameter> classDatum2variable = new HashMap<>();
 
 	/**
 	 * Mapping from the scheduled Nodes to their QVTi variables.
@@ -87,17 +86,17 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			String name = rootConnection.getName();
 			assert name != null;
 			if (regionNode != null) {
-				ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(regionNode);
-				AppendParameter allInstancesVariable = classDatumAnalysis2variable.get(classDatumAnalysis);
+				ClassDatum classDatum = RegionUtil.getClassDatum(regionNode);
+				AppendParameter allInstancesVariable = classDatum2variable.get(classDatum);
 				if (allInstancesVariable == null) {
-					Type collectionType = classDatumAnalysis.getClassDatum().getCompleteClass().getPrimaryClass();
+					Type collectionType = classDatum.getCompleteClass().getPrimaryClass();
 					Type elementType = ((CollectionType)collectionType).getElementType();
 					assert elementType != null;
 					assert !(elementType instanceof CollectionType);
 					String safeName = getSafeName(name);
 					allInstancesVariable = helper.createAppendParameter(safeName, elementType, true); //DeclareStatement(safeName, sourceType, true, asSource);
 					mapping.getOwnedMappingParameters().add(allInstancesVariable);
-					classDatumAnalysis2variable.put(classDatumAnalysis, allInstancesVariable);
+					classDatum2variable.put(classDatum, allInstancesVariable);
 				}
 				connection2variable.put(rootConnection, allInstancesVariable);
 			}

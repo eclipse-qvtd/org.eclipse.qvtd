@@ -26,6 +26,7 @@ import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -268,7 +269,7 @@ public class MappingPartitioner
 								realizedOutputEdges.add(edge);
 							}
 						}
-						if (targetNode.isLoaded() && RegionUtil.isMiddle(sourceNode)) {
+						if (targetNode.isLoaded() && getScheduleManager().isMiddle(sourceNode)) {
 							//							navigableEdges.add(navigationEdge);
 						}
 					}
@@ -318,7 +319,7 @@ public class MappingPartitioner
 				else if (node.isLoaded()) {
 					//					hasLoadedNodes  = true;
 				}
-				else if (RegionUtil.isMiddle(node)) {
+				else if (getScheduleManager().isMiddle(node)) {
 					if (node.isPredicated()) {
 						addConsumptionOfMiddleNode(node);
 					}
@@ -363,7 +364,7 @@ public class MappingPartitioner
 
 	private void analyzeStatusNode(@NonNull Node traceNode) {
 		Node statusNode = null;
-		Property statusProperty = RegionUtil.basicGetStatusProperty(traceNode);
+		Property statusProperty = RegionUtil.basicGetStatusProperty(getScheduleManager(), traceNode);
 		if (statusProperty != null) {
 			transformationPartitioner.getSuccessPropertyDatum(statusProperty);
 			statusNode = RegionUtil.createStatusNode(region);
@@ -617,6 +618,10 @@ public class MappingPartitioner
 
 	public @NonNull MappingRegion getRegion() {
 		return region;
+	}
+
+	protected @NonNull ScheduleManager getScheduleManager() {
+		return transformationPartitioner.getScheduleManager();
 	}
 
 	public @Nullable Node getStatusNode(@NonNull Node traceNode) {

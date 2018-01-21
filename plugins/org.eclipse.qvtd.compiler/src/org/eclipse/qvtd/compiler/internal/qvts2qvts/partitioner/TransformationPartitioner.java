@@ -56,6 +56,7 @@ public class TransformationPartitioner
 	}
 
 	protected final @NonNull ScheduleManager scheduleManager;
+
 	protected final @NonNull ProblemHandler problemHandler;
 	protected final @NonNull Iterable<@NonNull ? extends Region> activeRegions;
 
@@ -419,6 +420,10 @@ public class TransformationPartitioner
 
 	public @NonNull MappingPartitioner getMappingPartitioner(@NonNull MappingRegion region) {
 		return ClassUtil.nonNullState(region2mappingPartitioner.get(region));
+	}
+
+	protected @NonNull ScheduleManager getScheduleManager() {
+		return scheduleManager;
 	}
 
 	public @NonNull PropertyDatum getSuccessPropertyDatum(@NonNull Property successProperty) {

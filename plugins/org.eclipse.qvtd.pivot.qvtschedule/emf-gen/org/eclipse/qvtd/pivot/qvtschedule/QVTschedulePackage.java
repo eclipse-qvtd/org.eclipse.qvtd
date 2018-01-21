@@ -988,13 +988,31 @@ public interface QVTschedulePackage extends EPackage {
 	int CLASS_DATUM__SUPER_CLASS_DATUMS = ABSTRACT_DATUM_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Consuming Regions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM__CONSUMING_REGIONS = ABSTRACT_DATUM_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Producing Regions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM__PRODUCING_REGIONS = ABSTRACT_DATUM_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Class Datum</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DATUM_FEATURE_COUNT = ABSTRACT_DATUM_FEATURE_COUNT + 5;
+	int CLASS_DATUM_FEATURE_COUNT = ABSTRACT_DATUM_FEATURE_COUNT + 7;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -6051,6 +6069,28 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getClassDatum_SuperClassDatums();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getConsumingRegions <em>Consuming Regions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Consuming Regions</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getConsumingRegions()
+	 * @see #getClassDatum()
+	 * @generated
+	 */
+	EReference getClassDatum_ConsumingRegions();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getProducingRegions <em>Producing Regions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Producing Regions</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ClassDatum#getProducingRegions()
+	 * @see #getClassDatum()
+	 * @generated
+	 */
+	EReference getClassDatum_ProducingRegions();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.ComposedNode <em>Composed Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7308,6 +7348,22 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference CLASS_DATUM__SUPER_CLASS_DATUMS = eINSTANCE.getClassDatum_SuperClassDatums();
+
+		/**
+		 * The meta object literal for the '<em><b>Consuming Regions</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_DATUM__CONSUMING_REGIONS = eINSTANCE.getClassDatum_ConsumingRegions();
+
+		/**
+		 * The meta object literal for the '<em><b>Producing Regions</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_DATUM__PRODUCING_REGIONS = eINSTANCE.getClassDatum_ProducingRegions();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ComposedNodeImpl <em>Composed Node</em>}' class.

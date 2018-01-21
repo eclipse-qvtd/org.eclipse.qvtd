@@ -25,7 +25,6 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerConstants;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
@@ -118,7 +117,7 @@ public class ConnectivityChecker
 			superClassDatums = new HashSet<>();
 			classDatum2superClassDatums.put(classDatum, superClassDatums);
 			superClassDatums.add(classDatum);
-			for (@NonNull ClassDatum superClassDatum : RegionUtil.getSuperClassDatums(classDatum)) {
+			for (@NonNull ClassDatum superClassDatum : scheduleManager.getSuperClassDatums(classDatum)) {
 				for (@NonNull ClassDatum transitiveSuperClassDatum : analyzeClassDatums(superClassDatum)) {
 					superClassDatums.add(transitiveSuperClassDatum);
 					Set<@NonNull ClassDatum> subClassDatums = classDatum2subClassDatums.get(transitiveSuperClassDatum);
@@ -217,8 +216,7 @@ public class ConnectivityChecker
 		for (@NonNull String name : names) {
 			ClassDatum classDatum = name2classDatum.get(name);
 			assert classDatum != null;
-			ClassDatumAnalysis classDatumAnalysis = scheduleManager.getClassDatumAnalysis(classDatum);
-			DomainUsage domainUsage = classDatumAnalysis.getDomainUsage();
+			DomainUsage domainUsage = scheduleManager.getDomainUsage(classDatum);
 			if (domainUsage.isMiddle() || domainUsage.isOutput()) {
 				int subProducers = getSubProducers(classDatum).size();
 				List<@NonNull Node> producingNodes = producer2nodes.get(classDatum);

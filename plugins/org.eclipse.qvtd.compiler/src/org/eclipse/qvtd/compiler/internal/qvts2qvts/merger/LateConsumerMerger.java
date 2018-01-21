@@ -24,7 +24,7 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -141,8 +141,8 @@ public class LateConsumerMerger extends AbstractMerger
 					if (!property.isIsRequired()) {
 						return true;					// If property is optional, it's absence cannot cause a failure
 					}
-					ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(secondaryEdge.getEdgeTarget());
-					Iterable<@NonNull NavigableEdge> realizedEdges = getContentsAnalysis().getNewEdges(secondaryEdge, classDatumAnalysis);
+					ClassDatum classDatum = RegionUtil.getClassDatum(secondaryEdge.getEdgeTarget());
+					Iterable<@NonNull NavigableEdge> realizedEdges = getContentsAnalysis().getNewEdges(secondaryEdge, classDatum);
 					if (realizedEdges != null) {
 						int firstIndex = secondaryEdge.getOwningRegion().getFirstIndex();
 						for (@NonNull NavigableEdge realizedEdge : realizedEdges) {

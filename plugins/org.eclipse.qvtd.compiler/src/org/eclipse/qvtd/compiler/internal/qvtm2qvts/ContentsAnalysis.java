@@ -24,7 +24,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -45,13 +44,13 @@ public class ContentsAnalysis
 	/**
 	 * The Speculation or Realized Nodes that produce each ClassDatum.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> classDatumAnalysis2newNodes = new HashMap<>();
+	private final @NonNull Map<@NonNull ClassDatum, @NonNull List<@NonNull Node>> classDatum2newNodes = new HashMap<>();
 
 	/**
 	 * The input model classes that may be used as independent inputs by mappings and the nodes at which they are consumed.
 	 * In the worst case a flat schedule just permutes allInstances() to provide all mapping inputs.
 	 */
-	private final @NonNull Map<@NonNull ClassDatumAnalysis, @NonNull List<@NonNull Node>> classDatumAnalysis2oldNodes = new HashMap<>();
+	private final @NonNull Map<@NonNull ClassDatum, @NonNull List<@NonNull Node>> classDatum2oldNodes = new HashMap<>();
 
 	/**
 	 * The Realized Edges that produce each PropertyDatum (or its opposite).
@@ -85,12 +84,13 @@ public class ContentsAnalysis
 	}
 
 	private void addNewNode(@NonNull Node newNode) {
-		ClassDatumAnalysis classDatumAnalysis = scheduleManager.getElementalClassDatumAnalysis(newNode);
-		for (@NonNull ClassDatumAnalysis superClassDatumAnalysis : classDatumAnalysis.getSuperClassDatumAnalyses()) {
-			List<@NonNull Node> nodes = classDatumAnalysis2newNodes.get(superClassDatumAnalysis);
+		ClassDatum classDatum = RegionUtil.getClassDatum(newNode);
+		ClassDatum elementalClassDatum = scheduleManager.getElementalClassDatum(classDatum);
+		for (@NonNull ClassDatum superClassDatum : scheduleManager.getSuperClassDatums(elementalClassDatum)) {
+			List<@NonNull Node> nodes = classDatum2newNodes.get(superClassDatum);
 			if (nodes == null) {
 				nodes = new ArrayList<>();
-				classDatumAnalysis2newNodes.put(superClassDatumAnalysis, nodes);
+				classDatum2newNodes.put(superClassDatum, nodes);
 			}
 			nodes.add(newNode);
 		}
@@ -101,11 +101,12 @@ public class ContentsAnalysis
 		//		Region region = oldNode.getRegion();
 		//		Region invokingRegion = region.getInvokingRegion();
 		//		assert (invokingRegion == this) || (invokingRegion == null);
-		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(oldNode);
-		List<@NonNull Node> nodes = classDatumAnalysis2oldNodes.get(classDatumAnalysis);
+		//		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(oldNode);
+		ClassDatum classDatum = RegionUtil.getClassDatum(oldNode);
+		List<@NonNull Node> nodes = classDatum2oldNodes.get(classDatum);
 		if (nodes == null) {
 			nodes = new ArrayList<>();
-			classDatumAnalysis2oldNodes.put(classDatumAnalysis, nodes);
+			classDatum2oldNodes.put(classDatum, nodes);
 		}
 		if (!nodes.contains(oldNode)) {
 			nodes.add(oldNode);
@@ -142,8 +143,8 @@ public class ContentsAnalysis
 	private @Nullable PropertyDatum basicGetPropertyDatum(@NonNull NavigableEdge producedEdge) {
 		assert !producedEdge.isCast();				// Handled by caller
 		Property forwardProperty = producedEdge.getProperty();
-		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(producedEdge.getEdgeSource());
-		ClassDatum forwardClassDatum = RegionUtil.getElementalClassDatum(classDatumAnalysis);
+		ClassDatum classDatum = RegionUtil.getClassDatum(producedEdge.getEdgeSource());
+		ClassDatum forwardClassDatum = scheduleManager.getElementalClassDatum(classDatum);
 		//		PropertyDatum forwardPropertyDatum = getScheduleModel().getPropertyDatum(forwardClassDatum, property);
 		//		if (forwardPropertyDatum.getClassDatum() == forwardClassDatum) {
 		//			return forwardPropertyDatum;
@@ -174,8 +175,8 @@ public class ContentsAnalysis
 			return bestPropertyDatum;
 		}
 		Property reverseProperty = forwardProperty.getOpposite();
-		classDatumAnalysis = RegionUtil.getClassDatumAnalysis(producedEdge.getEdgeTarget());
-		ClassDatum reverseClassDatum = RegionUtil.getElementalClassDatum(classDatumAnalysis);
+		classDatum = RegionUtil.getClassDatum(producedEdge.getEdgeTarget());
+		ClassDatum reverseClassDatum = scheduleManager.getElementalClassDatum(classDatum);
 		Iterable<@NonNull PropertyDatum> reversePropertyDatums = scheduleManager.getAllPropertyDatums(reverseClassDatum);
 		for (PropertyDatum propertyDatum : reversePropertyDatums) {
 			if ((propertyDatum.getReferredProperty() == reverseProperty) && (propertyDatum.getOwningClassDatum() == reverseClassDatum)) {
@@ -204,9 +205,9 @@ public class ContentsAnalysis
 	}
 
 	public Stream<String> dumpClass2oldNode() {
-		Stream<String> entries = classDatumAnalysis2oldNodes.keySet().stream().map(
+		Stream<String> entries = classDatum2oldNodes.keySet().stream().map(
 			k -> {
-				List<Node> list = classDatumAnalysis2oldNodes.get(k);
+				List<Node> list = classDatum2oldNodes.get(k);
 				assert list != null;
 				return String.valueOf(k) + " : " + list.stream().map(
 					p -> p.getDisplayName()
@@ -217,11 +218,11 @@ public class ContentsAnalysis
 	}
 
 	public Stream<String> dumpClass2newNode() {
-		Stream<String> entries = classDatumAnalysis2newNodes.keySet().stream().map(
+		Stream<String> entries = classDatum2newNodes.keySet().stream().map(
 			k -> {
-				List<Node> list = classDatumAnalysis2newNodes.get(k);
+				List<Node> list = classDatum2newNodes.get(k);
 				assert list != null;
-				return k.getDomainUsage() + " " + String.valueOf(k) + " : " +
+				return scheduleManager.getDomainUsage(k) + " " + String.valueOf(k) + " : " +
 				list.stream().map(
 					p -> p.getDisplayName()
 						).sorted().reduce("", QVTscheduleUtil.stringJoin("\n\t\t")
@@ -268,7 +269,7 @@ public class ContentsAnalysis
 		return realizedEdges;
 	}
 
-	public @Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatumAnalysis requiredClassDatumAnalysis) {
+	public @Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatum requiredClassDatum) {
 		Property property = edge.getProperty();
 		if (property.eContainer() == null) {			// Ignore pseudo-properties such as «iterate»
 			return null;
@@ -287,7 +288,7 @@ public class ContentsAnalysis
 		if (realizedEdges == null) {
 			return null;
 		}
-		CompleteClass requiredClass = RegionUtil.getCompleteClass(requiredClassDatumAnalysis);
+		CompleteClass requiredClass = RegionUtil.getCompleteClass(requiredClassDatum);
 		List<@NonNull NavigableEdge> conformantRealizedEdges = null;
 		for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
 			Node targetNode = realizedEdge.getEdgeTarget();
@@ -302,12 +303,12 @@ public class ContentsAnalysis
 		return conformantRealizedEdges;
 	}
 
-	public @Nullable Iterable<@NonNull Node> getNewNodes(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return classDatumAnalysis2newNodes.get(classDatumAnalysis);
+	public @Nullable Iterable<@NonNull Node> getNewNodes(@NonNull ClassDatum classDatum) {
+		return classDatum2newNodes.get(classDatum);
 	}
 
-	public @Nullable Iterable<@NonNull Node> getOldNodes(@NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return classDatumAnalysis2oldNodes.get(classDatumAnalysis);
+	public @Nullable Iterable<@NonNull Node> getOldNodes(@NonNull ClassDatum classDatum) {
+		return classDatum2oldNodes.get(classDatum);
 	}
 
 	/**
@@ -345,16 +346,14 @@ public class ContentsAnalysis
 	}
 
 	private void removeNewNode(@NonNull Node newNode) {
-		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(newNode);
-		List<@NonNull Node> nodes = classDatumAnalysis2newNodes.get(classDatumAnalysis);
+		List<@NonNull Node> nodes = classDatum2newNodes.get(newNode.getClassDatum());
 		if (nodes != null) {
 			nodes.remove(newNode);
 		}
 	}
 
 	private void removeOldNode(@NonNull Node oldNode) {
-		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(oldNode);
-		List<@NonNull Node> nodes = classDatumAnalysis2oldNodes.get(classDatumAnalysis);
+		List<@NonNull Node> nodes = classDatum2oldNodes.get(oldNode.getClassDatum());
 		if (nodes != null) {
 			nodes.remove(oldNode);
 		}

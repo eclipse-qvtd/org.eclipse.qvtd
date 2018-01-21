@@ -37,7 +37,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredClass" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superClassDatums" upperBound="-1"
-        eType="#//ClassDatum"/>
+        eType="#//ClassDatum" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="consumingRegions" ordered="false"
+        upperBound="-1" eType="#//RuleRegion" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="producingRegions" ordered="false"
+        upperBound="-1" eType="#//RuleRegion" transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComposedNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable #//Symbolable">

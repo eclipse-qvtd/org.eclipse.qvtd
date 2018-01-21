@@ -15,8 +15,11 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
@@ -39,7 +42,6 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -51,6 +53,7 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleAction;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -80,27 +83,27 @@ public abstract class ScheduleManager implements Adapter
 	private final @NonNull DomainUsage inputUsage;
 
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
-	private final @NonNull ClassDatumAnalysis oclVoidClassDatumAnalysis;
+	private final @NonNull ClassDatum oclVoidClassDatum;
 
 	/**
 	 * The extended analysis of each ClassDatum.
 	 */
-	private final @NonNull Map<ClassDatum, ClassDatumAnalysis> classDatum2classDatumAnalysis = new HashMap<ClassDatum, ClassDatumAnalysis>();
+	private final @NonNull Set<@NonNull ClassDatum> classDatums = new HashSet<>();
 
 	/**
 	 * Property used as a navigation to cast to a specific type.
 	 */
-	private final @NonNull Map<Type, Property> type2castProperty = new HashMap<Type, Property>();
+	private final @NonNull Map<Type, Property> type2castProperty = new HashMap<>();
 
 	/**
-	 * Property used as a navigation to iterate collection elementse.
+	 * Property used as a navigation to iterate collection elements.
 	 */
-	private final @NonNull Map<Type, Property> type2iterateProperty = new HashMap<Type, Property>();
+	private final @NonNull Map<Type, Property> type2iterateProperty = new HashMap<>();
 
 	/**
 	 * Property used as an argument role identification.
 	 */
-	private final @NonNull Map<String, Property> name2argumentProperty = new HashMap<String, Property>();
+	private final @NonNull Map<String, Property> name2argumentProperty = new HashMap<>();
 
 	private /*@LazyNonNull */ OperationDependencyAnalysis operationDependencyAnalysis = null;
 
@@ -127,7 +130,7 @@ public abstract class ScheduleManager implements Adapter
 		//
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
 		this.standardLibraryHelper = new StandardLibraryHelper(standardLibrary);
-		oclVoidClassDatumAnalysis = getClassDatumAnalysis(standardLibrary.getOclVoidType(), domainAnalysis.getPrimitiveTypeModel());
+		oclVoidClassDatum = getClassDatum(standardLibrary.getOclVoidType(), domainAnalysis.getPrimitiveTypeModel());
 	}
 
 	public void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
@@ -172,8 +175,6 @@ public abstract class ScheduleManager implements Adapter
 		}
 	}
 
-	protected abstract @NonNull ClassDatumAnalysis createClassDatumAnalysis(@NonNull ClassDatum classDatum);
-
 	protected @NonNull Property createProperty(@NonNull String name, @NonNull Type type, boolean isRequired) {
 		Property property = PivotUtil.createProperty(name, type);
 		property.setIsRequired(isRequired);
@@ -202,6 +203,10 @@ public abstract class ScheduleManager implements Adapter
 		return castProperty;
 	}
 
+	public @NonNull ClassDatum getClassDatum(@NonNull CompleteClass completeClass, @NonNull TypedModel typedModel) {
+		return datumCaches.getClassDatum(typedModel, completeClass);
+	}
+
 	public @NonNull ClassDatum getClassDatum(@NonNull TypedElement asTypedElement) {
 		org.eclipse.ocl.pivot.Class asType = (org.eclipse.ocl.pivot.Class)asTypedElement.getType();
 		assert asType != null;
@@ -223,14 +228,14 @@ public abstract class ScheduleManager implements Adapter
 		return datumCaches.getClassDatum(typedModel, asType);
 	}
 
-	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull ClassDatum classDatum) {
+	/*	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull ClassDatum classDatum) {
 		ClassDatumAnalysis classDatumAnalysis = classDatum2classDatumAnalysis.get(classDatum);
 		if (classDatumAnalysis == null) {
-			classDatumAnalysis = createClassDatumAnalysis(classDatum);
+			classDatumAnalysis = new ClassDatumAnalysis(this, classDatum);
 			classDatum2classDatumAnalysis.put(classDatum, classDatumAnalysis);
 		}
 		return classDatumAnalysis;
-	}
+	} */
 
 	//	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull Element contextElement, @NonNull Type type) {
 	//		ClassDatum classDatum = getClassDatum(type);
@@ -244,24 +249,24 @@ public abstract class ScheduleManager implements Adapter
 		return getClassDatumAnalysis(classDatum);
 	} */
 
-	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull TypedElement typedElement) {
+	/*	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull TypedElement typedElement) {
 		ClassDatum classDatum = getClassDatum(typedElement);
 		//		DomainUsage usage = getDomainUsage(typedElement);
 		return getClassDatumAnalysis(classDatum);
-	}
+	} */
 
-	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(org.eclipse.ocl.pivot.@NonNull Class type, @NonNull TypedModel typedModel) {
+	/*	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(org.eclipse.ocl.pivot.@NonNull Class type, @NonNull TypedModel typedModel) {
 		ClassDatum classDatum = datumCaches.getClassDatum(typedModel, type);
 		return getClassDatumAnalysis(classDatum);
-	}
+	} */
 
-	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull CompleteClass completeClass, @NonNull TypedModel typedModel) {
+	/*	public @NonNull ClassDatumAnalysis getClassDatumAnalysis(@NonNull CompleteClass completeClass, @NonNull TypedModel typedModel) {
 		ClassDatum classDatum = datumCaches.getClassDatum(typedModel, completeClass);
 		return getClassDatumAnalysis(classDatum);
-	}
+	} */
 
-	public @NonNull Iterable<ClassDatumAnalysis> getClassDatumAnalyses() {
-		return classDatum2classDatumAnalysis.values();
+	public @NonNull Iterable<@NonNull ClassDatum> getClassDatums() {
+		return classDatums;
 	}
 
 	public @NonNull ContainmentAnalysis getContainmentAnalysis() {
@@ -273,6 +278,9 @@ public abstract class ScheduleManager implements Adapter
 	}
 
 	public @NonNull DomainUsage getDomainUsage(@NonNull Element element) {
+		if (element instanceof ClassDatum) {
+			return getDomainUsage(QVTscheduleUtil.getReferredTypedModel((ClassDatum)element));
+		}
 		DomainUsageAnalysis analysis = domainAnalysis;
 		Operation operation = PivotUtil.getContainingOperation(element);
 		if (operation != null) {
@@ -281,16 +289,19 @@ public abstract class ScheduleManager implements Adapter
 		return ClassUtil.nonNullState(analysis.getUsage(element));
 	}
 
-	public @NonNull ClassDatumAnalysis getElementalClassDatumAnalysis(@NonNull Node calledNode) {
-		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(calledNode);
-		CompleteClass completeClass = classDatumAnalysis.getClassDatum().getCompleteClass();
-		org.eclipse.ocl.pivot.Class primaryClass = completeClass.getPrimaryClass();
-		if (primaryClass instanceof CollectionType) {
-			org.eclipse.ocl.pivot.Class elementType = (org.eclipse.ocl.pivot.Class)((CollectionType)primaryClass).getElementType();
-			assert elementType != null;
-			classDatumAnalysis = getClassDatumAnalysis(elementType, RegionUtil.getTypedModel(classDatumAnalysis));
+	public @NonNull ClassDatum getElementalClassDatum(@NonNull ClassDatum classDatum) {
+		Type type = classDatum.getCompleteClass().getPrimaryClass();
+		Type elementType = type;
+		while (elementType instanceof CollectionType) {
+			elementType = ((CollectionType)elementType).getElementType();
 		}
-		return classDatumAnalysis;
+		if ((elementType == null) || (elementType == type) || !(elementType instanceof org.eclipse.ocl.pivot.Class)) {
+			return classDatum;
+		}
+		else {
+			TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
+			return getClassDatum((org.eclipse.ocl.pivot.Class)elementType, typedModel);
+		}
 	}
 
 	public @NonNull EnvironmentFactory getEnvironmentFactory() {
@@ -310,8 +321,8 @@ public abstract class ScheduleManager implements Adapter
 		return iterateProperty;
 	}
 
-	public @NonNull ClassDatumAnalysis getOclVoidClassDatumAnalysis() {
-		return oclVoidClassDatumAnalysis;
+	public @NonNull ClassDatum getOclVoidClassDatum() {
+		return oclVoidClassDatum;
 	}
 
 	public @NonNull OperationDependencyAnalysis getOperationDependencyAnalysis() {
@@ -354,6 +365,21 @@ public abstract class ScheduleManager implements Adapter
 		return datumCaches.getSuccessPropertyDatum(successProperty);
 	}
 
+	public @NonNull Iterable<@NonNull ClassDatum> getSuperClassDatums(@NonNull ClassDatum classDatum) {
+		List<@NonNull ClassDatum> superClassDatums = RegionUtil.Internal.getSuperClassDatumsList(classDatum);
+		if (superClassDatums.isEmpty()) {
+			DomainUsage domainUsage = getDomainUsage(classDatum);
+			CompleteClass completeClass = classDatum.getCompleteClass();
+			for (@NonNull CompleteClass completeSuperClass : completeClass.getSuperCompleteClasses()) {
+				ClassDatum superClassDatum = getClassDatum(completeSuperClass, ClassUtil.nonNullState(domainUsage.getTypedModel(completeClass)));
+				if (!superClassDatums.contains(superClassDatum)) {
+					superClassDatums.add(superClassDatum);
+				}
+			}
+		}
+		return superClassDatums;
+	}
+
 	@Override
 	public Notifier getTarget() {
 		return scheduleModel;
@@ -373,6 +399,32 @@ public abstract class ScheduleManager implements Adapter
 	 */
 	public boolean isDirty(@NonNull Property property) {
 		return domainAnalysis.isDirty(property);
+	}
+
+	/**
+	 * Return true if the elemental source type of thatEdge is compatible with the source type of thisEdge.
+	 */
+	public boolean isElementallyConformantSource(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
+		Node thatSource = thatEdge.getEdgeSource();
+		CompleteClass thatType = ClassUtil.nonNullState(getElementalClassDatum(RegionUtil.getClassDatum(thatSource)).getCompleteClass());
+		CompleteClass thisType = ClassUtil.nonNullState(getElementalClassDatum(RegionUtil.getClassDatum(thisEdge.getEdgeSource())).getCompleteClass());
+		if (thatType.conformsTo(thisType)) {
+			return true;
+		}
+		if (thatSource.isRealized()) {
+			return false;
+		}
+		if (thisType.conformsTo(thatType)) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Return true if node is part of the middle (traced) domain.
+	 */
+	public boolean isMiddle(@NonNull Node node) {
+		return getDomainUsage(RegionUtil.getClassDatum(node)).isMiddle();
 	}
 
 	public boolean isNoEarlyMerge() {

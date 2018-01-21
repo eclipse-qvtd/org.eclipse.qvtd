@@ -212,8 +212,10 @@ public class DatumCaches
 		if (classDatums.add(cDatum)) {
 			Iterables.addAll(propertyDatums, QVTscheduleUtil.getOwnedPropertyDatums(cDatum));
 		}
-		for (@NonNull ClassDatum superClassDatum : QVTscheduleUtil.getSuperClassDatums(cDatum)) {
-			getAllPropertyDatumsInternal(classDatums, propertyDatums, superClassDatum);
+		for (@NonNull ClassDatum superClassDatum : scheduleManager.getSuperClassDatums(cDatum)) {
+			if (superClassDatum != cDatum) {
+				getAllPropertyDatumsInternal(classDatums, propertyDatums, superClassDatum);
+			}
 		}
 		return propertyDatums;
 	}
@@ -288,7 +290,8 @@ public class DatumCaches
 			classDatum.setReferredTypedModel(typedModel);
 			org.eclipse.ocl.pivot.@NonNull Class aClass = completeClass.getPrimaryClass();
 			if (!(aClass instanceof DataType)) {
-				List<ClassDatum> superClassDatums = classDatum.getSuperClassDatums();
+				//				scheduleManager.getSuperClassDatums(classDatum);  -- lazily computed
+				/*				List<ClassDatum> superClassDatums = classDatum.getSuperClassDatums();
 				for (@NonNull CompleteClass superCompleteClass : completeClass.getProperSuperCompleteClasses()) {
 					DomainUsage superUsage = getUsage(superCompleteClass.getPrimaryClass());
 					if (superUsage != null) {		// Ignore superClassDatum with differet typedModels (OclAny)
@@ -298,7 +301,7 @@ public class DatumCaches
 							superClassDatums.add(superClassDatum);
 						}
 					}
-				}
+				} */
 			}
 			completeClass2classDatums.put(completeClass, classDatum);
 		}

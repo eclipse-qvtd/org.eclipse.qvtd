@@ -57,7 +57,6 @@ import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -71,6 +70,7 @@ import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
@@ -410,12 +410,12 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		return RegionUtil.createDataTypeNode(name, sourceNode, navigationCallExp);
 	}
 
-	protected @NonNull Node createDependencyNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return RegionUtil.createDependencyNode(context.getRuleRegion(), name, classDatumAnalysis);
+	protected @NonNull Node createDependencyNode(@NonNull String name, @NonNull ClassDatum classDatum) {
+		return RegionUtil.createDependencyNode(context.getRuleRegion(), name, classDatum);
 	}
 
-	protected @NonNull Node createErrorNode(@NonNull String name, @NonNull ClassDatumAnalysis classDatumAnalysis) {
-		return RegionUtil.createErrorNode(context.getRuleRegion(), name, classDatumAnalysis);
+	protected @NonNull Node createErrorNode(@NonNull String name, @NonNull ClassDatum classDatum) {
+		return RegionUtil.createErrorNode(context.getRuleRegion(), name, classDatum);
 	}
 
 	protected @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
@@ -567,7 +567,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 			}
 			else {
-				CompleteClass propertyCompleteClass = RegionUtil.getScheduleManager(context.getRuleRegion()).getClassDatumAnalysis(source2targetProperty).getClassDatum().getCompleteClass();
+				CompleteClass propertyCompleteClass = RegionUtil.getScheduleManager(context.getRuleRegion()).getClassDatum(source2targetProperty).getCompleteClass();
 				CompleteClass valueCompleteClass = targetNode.getCompleteClass();
 				if (valueCompleteClass == propertyCompleteClass) {
 					navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
@@ -666,8 +666,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 			if (!referenceEdge.isSecondary()) {
 				Node referenceTargetNode = referenceEdge.getEdgeTarget();
 				String name = RegionUtil.getName(referenceTargetNode);
-				ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(referenceTargetNode);
-				Node instantiatedTargetNode = createDependencyNode(name, classDatumAnalysis);
+				ClassDatum classDatum = RegionUtil.getClassDatum(referenceTargetNode);
+				Node instantiatedTargetNode = createDependencyNode(name, classDatum);
 				createNavigationEdge(instantiatedNode, RegionUtil.getProperty(referenceEdge), instantiatedTargetNode, false);
 				instantiate(instantiatedTargetNode, referenceTargetNode);
 			}
@@ -711,8 +711,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 	@Override
 	public @NonNull Node visitElement(@NonNull Element element) {
 		Class oclInvalidType = scheduleManager.getStandardLibrary().getOclInvalidType();
-		ClassDatumAnalysis classDatumAnalysis = scheduleManager.getClassDatumAnalysis(oclInvalidType, scheduleManager.getDomainAnalysis().getPrimitiveTypeModel());
-		Node errorNode = createErrorNode("«error»", classDatumAnalysis);
+		ClassDatum classDatum = scheduleManager.getClassDatum(oclInvalidType, scheduleManager.getDomainAnalysis().getPrimitiveTypeModel());
+		Node errorNode = createErrorNode("«error»", classDatum);
 		for (EObject eObject : element.eContents()) {
 			Node node = analyze((Element) eObject);
 			createExpressionEdge(node, "?", errorNode);
@@ -737,8 +737,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		assert initNode != null;
 		Type type = QVTcoreUtil.getType(ownedVariable);
 		CompleteClass actualClass = initNode.getCompleteClass();
-		ClassDatumAnalysis classDatumAnalysis = scheduleManager.getClassDatumAnalysis(ownedVariable);
-		CompleteClass requiredClass = RegionUtil.getCompleteClass(classDatumAnalysis);
+		ClassDatum classDatum = scheduleManager.getClassDatum(ownedVariable);
+		CompleteClass requiredClass = RegionUtil.getCompleteClass(classDatum);
 		if (actualClass.conformsTo(requiredClass)) {
 			context.getRuleRegion().addVariableNode(ownedVariable, initNode);
 			initNode.addTypedElement(ownedVariable);
@@ -971,10 +971,10 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 					OperationRegion operationRegion = qvtm2qvts.analyzeOperation(scheduleManager, operationCallExp);
 					Iterable<@NonNull Node> referenceNodes = RegionUtil.getDependencyNodes(operationRegion);
 					for (@NonNull Node referenceNode : referenceNodes) {
-						ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(referenceNode);
-						Node dependencyHead = context.getDependencyHead(classDatumAnalysis);
+						ClassDatum classDatum = RegionUtil.getClassDatum(referenceNode);
+						Node dependencyHead = context.getDependencyHead(classDatum);
 						if (dependencyHead == null) {
-							dependencyHead = context.createDependencyHead(classDatumAnalysis);
+							dependencyHead = context.createDependencyHead(classDatum);
 							createExpressionEdge(dependencyHead, RegionUtil.getName(dependencyHead), operationNode);
 							instantiate(dependencyHead, referenceNode);
 						}
@@ -1060,8 +1060,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		Type referredType = QVTcoreUtil.getReferredType(typeExp);
 		TypedModel typedModel = domainUsage.getTypedModel(typeExp);
 		assert typedModel != null;
-		ClassDatumAnalysis classDatumAnalysis = scheduleManager.getClassDatumAnalysis((org.eclipse.ocl.pivot.Class)referredType, typedModel);
-		String typeName = PrettyPrinter.printType(RegionUtil.getCompleteClass(classDatumAnalysis));
+		ClassDatum classDatum = scheduleManager.getClassDatum((org.eclipse.ocl.pivot.Class)referredType, typedModel);
+		String typeName = PrettyPrinter.printType(RegionUtil.getCompleteClass(classDatum));
 		Node operationNode = createConnectedOperationNode(typeName, typeExp);
 		return operationNode;
 	}

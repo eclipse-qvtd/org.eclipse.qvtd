@@ -45,7 +45,6 @@ import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -156,15 +155,15 @@ public class QVTm2QVTs extends ScheduleManager
 		assert type != null;
 		TypedModel typedModel = getDomainUsage(expression).getTypedModel(expression);
 		assert typedModel != null;
-		ClassDatumAnalysis classDatumAnalysis = getClassDatumAnalysis(type, typedModel);
-		Node parameterNode = RegionUtil.createOperationParameterNode(operationRegion, name, classDatumAnalysis);
+		ClassDatum classDatum = getClassDatum(type, typedModel);
+		Node parameterNode = RegionUtil.createOperationParameterNode(operationRegion, name, classDatum);
 		//		addVariableNode(variable, parameterNode);
 		operationRegion.addHeadNode(parameterNode);
 		return parameterNode;
 	}
 
-	private @NonNull Node createOperationParameterNode(@NonNull OperationRegion operationRegion, @NonNull ClassDatumAnalysis classDatumAnalysis, @NonNull String name) {
-		Node parameterNode = RegionUtil.createOperationParameterNode(operationRegion, name, classDatumAnalysis);
+	private @NonNull Node createOperationParameterNode(@NonNull OperationRegion operationRegion, @NonNull ClassDatum classDatum, @NonNull String name) {
+		Node parameterNode = RegionUtil.createOperationParameterNode(operationRegion, name, classDatum);
 		//		addVariableNode(variable, parameterNode);
 		operationRegion.addHeadNode(parameterNode);
 		return parameterNode;
@@ -209,7 +208,7 @@ public class QVTm2QVTs extends ScheduleManager
 		Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> hiddenPaths = paths.getHiddenPaths();
 		Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> returnPaths = paths.getReturnPaths();
 		RootDomainUsageAnalysis domainAnalysis = getDomainAnalysis();
-		Map<@NonNull ClassDatumAnalysis, @NonNull Node> classDatumAnalysis2node = new HashMap<>();
+		Map<@NonNull ClassDatum, @NonNull Node> classDatum2node = new HashMap<>();
 		for (List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> steps : Iterables.concat(returnPaths, hiddenPaths)) {
 			if (steps.size() > 0) {
 				boolean isDirty = false;
@@ -228,8 +227,8 @@ public class QVTm2QVTs extends ScheduleManager
 					org.eclipse.ocl.pivot.Class stepType = steps.get(0).getElementalType();
 					TypedModel typedModel = stepUsage.getTypedModel(classStep.getElement());
 					assert typedModel != null;
-					ClassDatumAnalysis classDatumAnalysis = getClassDatumAnalysis(stepType, typedModel);
-					CompleteClass completeClass = classDatumAnalysis.getClassDatum().getCompleteClass();
+					ClassDatum classDatum = getClassDatum(stepType, typedModel);
+					CompleteClass completeClass = classDatum.getCompleteClass();
 					Type primaryClass = completeClass.getPrimaryClass();
 					if (!(primaryClass instanceof DataType) && !(primaryClass instanceof VoidType)) {
 						//					OCLExpression source = operationCallExp.getOwnedSource();
@@ -241,11 +240,11 @@ public class QVTm2QVTs extends ScheduleManager
 							assert dependencyNode2 != null;
 						}
 						else {
-							dependencyNode2 = classDatumAnalysis2node.get(classDatumAnalysis);
+							dependencyNode2 = classDatum2node.get(classDatum);
 							if (dependencyNode2 == null) {
 								assert !"OclVoid".equals(stepType.getName());
-								dependencyNode2 = createOperationParameterNode(operationRegion, classDatumAnalysis, "extra2_" + stepType.getName());
-								classDatumAnalysis2node.put(classDatumAnalysis, dependencyNode2);
+								dependencyNode2 = createOperationParameterNode(operationRegion, classDatum, "extra2_" + stepType.getName());
+								classDatum2node.put(classDatum, dependencyNode2);
 								operationRegion.addDependencyNode(dependencyNode2);
 							}
 						}
@@ -265,9 +264,9 @@ public class QVTm2QVTs extends ScheduleManager
 							if (primaryClass instanceof CollectionType) {
 								Property iterateProperty = getIterateProperty(primaryClass);
 								Type elementType = PivotUtil.getElementType((CollectionType)primaryClass);
-								TypedModel typedModel2 = RegionUtil.getTypedModel(classDatumAnalysis);
-								ClassDatumAnalysis elementClassDatumAnalysis = getClassDatumAnalysis((org.eclipse.ocl.pivot.Class) elementType, typedModel2);
-								Node elementNode = RegionUtil.createOperationElementNode(operationRegion, operationName, elementClassDatumAnalysis, dependencyNode2);
+								TypedModel typedModel2 = RegionUtil.getTypedModel(classDatum);
+								ClassDatum elementClassDatum = getClassDatum((org.eclipse.ocl.pivot.Class) elementType, typedModel2);
+								Node elementNode = RegionUtil.createOperationElementNode(operationRegion, operationName, elementClassDatum, dependencyNode2);
 								//(region, name, typedElement, argNodes)Node(region, name, callExp, sourceNode)Node(this, name, iterateProperty, dependencyNode2);
 								RegionUtil.createNavigationEdge(dependencyNode2, iterateProperty, elementNode, false);
 								dependencyNode2 = elementNode;
@@ -298,11 +297,6 @@ public class QVTm2QVTs extends ScheduleManager
 		operationRegion.toGraph(new DOTStringBuilder());
 		operationRegion.toGraph(new GraphMLStringBuilder());
 		return operationRegion;
-	}
-
-	@Override
-	protected @NonNull ClassDatumAnalysis createClassDatumAnalysis(@NonNull ClassDatum classDatum) {
-		return new ClassDatumAnalysis(this, classDatum);
 	}
 
 	public @NonNull MappingRegion getMappingRegion(@NonNull Rule mapping) {

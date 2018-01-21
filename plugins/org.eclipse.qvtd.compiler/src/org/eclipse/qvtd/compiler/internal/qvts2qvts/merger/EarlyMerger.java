@@ -29,7 +29,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.ClassDatumAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -156,14 +156,14 @@ public class EarlyMerger extends AbstractMerger
 	 * a non-null unconditional class within the primary region. It may be multiply-produced, e.g. recursed.
 	 */
 	protected boolean isSecondaryCandidate(@NonNull Region primaryRegion,
-			@NonNull Region secondaryRegion, @NonNull Set<@NonNull ClassDatumAnalysis> toOneReachableClasses) {
+			@NonNull Region secondaryRegion, @NonNull Set<@NonNull ClassDatum> toOneReachableClasses) {
 		List<@NonNull Node> secondaryHeadNodes = RegionUtil.Internal.getHeadNodesList(secondaryRegion);
 		if (secondaryHeadNodes.size() != 1) {
 			return false;
 		}
 		Node classNode = secondaryHeadNodes.get(0);
-		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(classNode);
-		return toOneReachableClasses.contains(classDatumAnalysis);
+		ClassDatum classDatum = RegionUtil.getClassDatum(classNode);
+		return toOneReachableClasses.contains(classDatum);
 	}
 
 	private boolean isToOne(@Nullable TypedElement typedElement) {
@@ -267,23 +267,23 @@ public class EarlyMerger extends AbstractMerger
 		//	Find the classes that could be consumed by a secondary region head, and the number
 		//	of possible consuming contexts.
 		//
-		Map<@NonNull ClassDatumAnalysis, @NonNull Integer> hostClass2count = new HashMap<>();
+		Map<@NonNull ClassDatum, @NonNull Integer> hostClass2count = new HashMap<>();
 		for (@NonNull Node hostNode : getHostNodes(primaryRegion)) {
-			ClassDatumAnalysis hostClassDatumAnalysis = RegionUtil.getClassDatumAnalysis(hostNode);
-			Integer count = hostClass2count.get(hostClassDatumAnalysis);
-			hostClass2count.put(hostClassDatumAnalysis, count != null ? count+1 : 1);
+			ClassDatum hostClassDatum = RegionUtil.getClassDatum(hostNode);
+			Integer count = hostClass2count.get(hostClassDatum);
+			hostClass2count.put(hostClassDatum, count != null ? count+1 : 1);
 		}
 		//
 		//	Find the secondary regions for single possibility host classes.
 		//
 		Set<@NonNull MappingRegion> secondaryRegions = new HashSet<>();
-		for (Map.Entry<@NonNull ClassDatumAnalysis, @NonNull Integer> entry : hostClass2count.entrySet()) {
+		for (Map.Entry<@NonNull ClassDatum, @NonNull Integer> entry : hostClass2count.entrySet()) {
 			if (entry.getValue() == 1) {
-				ClassDatumAnalysis primaryClassDatumAnalysis = entry.getKey();
-				for (@NonNull MappingRegion secondaryRegion : primaryClassDatumAnalysis.getConsumingRegions()) {
+				ClassDatum primaryClassDatum = entry.getKey();
+				for (@NonNull MappingRegion secondaryRegion : RegionUtil.getConsumingRegions(primaryClassDatum)) {
 					if (secondaryRegion != primaryRegion) {
 						for (@NonNull Node secondaryHeadNode : RegionUtil.getHeadNodes(secondaryRegion)) {
-							if (RegionUtil.getClassDatumAnalysis(secondaryHeadNode) == primaryClassDatumAnalysis) {
+							if (RegionUtil.getClassDatum(secondaryHeadNode) == primaryClassDatum) {
 								secondaryRegions.add(secondaryRegion);
 								break;
 							}
