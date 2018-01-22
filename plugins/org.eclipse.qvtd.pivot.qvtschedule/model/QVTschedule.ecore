@@ -213,6 +213,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredOperation" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Operation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="resultNode" eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduleModel" lowerBound="1"
+        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/ownedOperationRegions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PatternTypedNode" eSuperTypes="#//Node">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="matched" lowerBound="1"
@@ -265,6 +267,8 @@
         eType="#//LoadingRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedClassDatums" upperBound="-1"
         eType="#//ClassDatum" containment="true" eOpposite="#//ClassDatum/owningScheduleModel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperationRegions"
+        upperBound="-1" eType="#//OperationRegion" containment="true" eOpposite="#//OperationRegion/owningScheduleModel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOtherMappingRegions"
         upperBound="-1" eType="#//MappingRegion" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedScheduledRegion" eType="#//ScheduledRegion"
