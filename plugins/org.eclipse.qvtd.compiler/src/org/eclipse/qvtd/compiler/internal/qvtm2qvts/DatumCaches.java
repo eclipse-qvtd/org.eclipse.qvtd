@@ -114,7 +114,7 @@ public class DatumCaches
 
 	private @NonNull RuleRegion analyzeMapping(@NonNull Rule rule) {
 		RuleRegion ruleRegion = QVTscheduleFactory.eINSTANCE.createRuleRegion();
-		//		ruleRegion.setOwningScheduleModel(scheduleManager.getScheduleModel());
+		ruleRegion.setOwningScheduleModel(scheduleManager.getScheduleModel());
 		ruleRegion.setReferredRule(rule);
 		//		RuleAction ruleAction = QVTscheduleFactory.eINSTANCE.createRuleAction();
 		//		ruleAction.setReferredRuleRegion(ruleRegion);

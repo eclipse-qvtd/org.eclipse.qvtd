@@ -53,7 +53,7 @@ public class LateConsumerMerger extends AbstractMerger
 	public static class LateMergedMappingRegion extends NamedMappingRegionImpl
 	{
 		public LateMergedMappingRegion(@NonNull ScheduleManager scheduleManager, @NonNull String name) {
-			setFixmeScheduleModel(scheduleManager.getScheduleModel());
+			scheduleManager.addMappingRegion(this);
 			setName(name);
 			setSymbolNameSuffix("_lc");
 		}
@@ -71,23 +71,24 @@ public class LateConsumerMerger extends AbstractMerger
 		}
 
 		public void install(@NonNull ContentsAnalysis contentsAnalysis, @NonNull MappingRegion mergedRegion) {
+			ScheduleManager scheduleManager = RegionUtil.getScheduleManager(primaryRegion);
 			ScheduledRegion invokingRegion = RegionUtil.getContainingScheduledRegion(primaryRegion);
 			List<@NonNull Region> callableParents = Lists.newArrayList(primaryRegion.getCallableParents());
 			contentsAnalysis.removeRegion(primaryRegion);
 			for (@NonNull Region callableParent : callableParents) {
 				callableParent.replaceCallToChild(primaryRegion, mergedRegion);
 			}
-			primaryRegion.setOwningScheduledRegion(invokingRegion);
+			scheduleManager.setScheduledRegion(primaryRegion, invokingRegion);
 			for (@NonNull MappingRegion secondaryRegion : secondaryRegions) {
 				contentsAnalysis.removeRegion(secondaryRegion);
-				assert invokingRegion == secondaryRegion.getOwningScheduledRegion();
+				assert invokingRegion == secondaryRegion.getScheduledRegion();
 				for (@NonNull Region callableParent : callableParents) {
 					callableParent.removeCallToChild(secondaryRegion);
 				}
-				secondaryRegion.setOwningScheduledRegion(invokingRegion);
+				scheduleManager.setScheduledRegion(secondaryRegion, invokingRegion);
 			}
 			contentsAnalysis.addRegion(mergedRegion);
-			mergedRegion.setOwningScheduledRegion(invokingRegion);
+			scheduleManager.setScheduledRegion(mergedRegion, invokingRegion);
 			for (@NonNull Node oldHeadNode : RegionUtil.getHeadNodes(primaryRegion)) {
 				NodeConnection incomingConnection = oldHeadNode.getIncomingConnection();
 				if (incomingConnection != null) {
@@ -433,7 +434,7 @@ public class LateConsumerMerger extends AbstractMerger
 	private void prune() {
 		for (@NonNull List<@NonNull MappingRegion> oldRegions : newRegion2oldRegions.values()) {
 			for (@NonNull MappingRegion oldRegion : oldRegions) {
-				oldRegion.getOwningScheduledRegion().getOwnedMappingRegions().remove(oldRegion);
+				//				oldRegion.getOwningScheduledRegion().getOwnedMappingRegions().remove(oldRegion);
 			}
 		}
 	}

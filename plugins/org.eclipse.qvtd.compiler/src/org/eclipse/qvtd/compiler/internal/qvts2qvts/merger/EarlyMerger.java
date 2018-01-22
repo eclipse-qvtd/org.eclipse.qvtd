@@ -47,7 +47,7 @@ public class EarlyMerger extends AbstractMerger
 	public static class EarlyMergedMappingRegion extends NamedMappingRegionImpl
 	{
 		public EarlyMergedMappingRegion(@NonNull ScheduleManager scheduleManager, @NonNull String name) {
-			setFixmeScheduleModel(scheduleManager.getScheduleModel());
+			scheduleManager.addMappingRegion(this);
 			setName(name);
 			setSymbolNameSuffix("_e");
 		}
@@ -249,7 +249,7 @@ public class EarlyMerger extends AbstractMerger
 						regionMerger.addSecondaryRegion(secondaryRegion, secondary2primary.getNode2Node());
 						regionMerger.prune();
 						mergedRegion = regionMerger.create();
-						primaryRegion.getScheduleModel().getOwnedOtherMappingRegions().add(mergedRegion);
+						RegionUtil.getScheduleManager(primaryRegion).addMappingRegion(mergedRegion);
 						regionMerger.check(mergedRegion);
 						primaryRegion = mergedRegion;
 					}

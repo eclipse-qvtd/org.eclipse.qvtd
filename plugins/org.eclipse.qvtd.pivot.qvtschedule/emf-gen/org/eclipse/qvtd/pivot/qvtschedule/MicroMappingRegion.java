@@ -20,6 +20,10 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  * A representation of the model object '<em><b>Micro Mapping Region</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A MappingRegion provides a graphical representation of an executable micro-mapping; a partial mapping free from dependency hazards.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>

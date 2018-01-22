@@ -58,21 +58,23 @@ public interface ScheduleModel extends Model
 	 */
 	EList<OperationRegion> getOwnedOperationRegions();
 	/**
-	 * Returns the value of the '<em><b>Owned Other Mapping Regions</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Mapping Regions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.MappingRegion}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingRegion#getOwningScheduleModel <em>Owning Schedule Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Owned Other Mapping Regions</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Mapping Regions</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Other Mapping Regions</em>' containment reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getScheduleModel_OwnedOtherMappingRegions()
-	 * @model containment="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduleModel!ownedOtherMappingRegions'"
+	 * @return the value of the '<em>Owned Mapping Regions</em>' containment reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getScheduleModel_OwnedMappingRegions()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingRegion#getOwningScheduleModel
+	 * @model opposite="owningScheduleModel" containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduleModel!ownedMappingRegions'"
 	 * @generated
 	 */
-	EList<MappingRegion> getOwnedOtherMappingRegions();
+	EList<MappingRegion> getOwnedMappingRegions();
 	/**
 	 * Returns the value of the '<em><b>Owned Scheduled Region</b></em>' containment reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwningScheduleModel <em>Owning Schedule Model</em>}'.

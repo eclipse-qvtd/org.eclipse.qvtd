@@ -25,7 +25,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
@@ -322,15 +321,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	@SuppressWarnings("unused")			// Used in the debugger
 	private final @NonNull ToDOT toDot = new ToDOT(this){};
 
-	private ScheduleModel scheduleModel;		// FIXME delete me
-
-	// Provides a fallback access to the scheduleModel in case containment is incomplete
-	public void setFixmeScheduleModel(@NonNull ScheduleModel scheduleModel) {
-		ScheduleModel scheduleModel2 = getScheduleModel();
-		assert scheduleModel2 == null;		// Containment is complete; didn't need this call
-		this.scheduleModel = scheduleModel;
-	}
-
 	@Override
 	public void addCallToChild(@NonNull Region region) {
 		callableChildren.add(region);
@@ -392,10 +382,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		//		}
 	}
 
-	protected @Nullable String basicGetSymbolName() {
-		return symbolName;
-	}
-
 	/**
 	 * Return true if a navigable path from startNode following the edges of protoPath,
 	 * re-using edges and nodes where possible could be created. REturn false if such
@@ -419,13 +405,13 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		return true;
 	}
 
-	protected @NonNull SymbolNameBuilder computeSymbolName() {
+	protected void computeSymbolName(@NonNull SymbolNameBuilder sIn) {
+		SymbolNameBuilder s = null;
 		//		List<String> names = new ArrayList<>();
 		//		for (@NonNull MappingAction action : getMappingActions()) {
 		//			names.add(action.getMapping().getName());
 		//		}
 		//		Collections.sort(names);
-		SymbolNameBuilder s = null;
 		Set<@NonNull Node> bestToOneSubRegion = null;
 		Node bestNamingNode = null;
 		int bestToOneSubRegionSize = 0;
@@ -479,7 +465,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 				edgeNames.add(name);
 			}
 			if (edgeNames.size() > 0) {
-				s = new SymbolNameBuilder();
+				s = sIn;
 				s.appendName(bestNamingNode.getCompleteClass().getName());
 				Collections.sort(edgeNames);
 				for (@NonNull String edgeName : edgeNames) {
@@ -493,7 +479,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 					edgeNames.add(name);
 				}
 				if (edgeNames.size() > 0) {
-					s = new SymbolNameBuilder();
+					s = sIn;
 					s.appendName(bestNamingNode.getCompleteClass().getName());
 					s.appendString("_");
 					Collections.sort(edgeNames);
@@ -505,7 +491,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 			}
 		}
 		if ((s == null) && (bestNamingNode != null)) {
-			s = new SymbolNameBuilder();
+			s = sIn;
 			//			s.appendString(getSymbolNamePrefix());
 			s.appendName(bestNamingNode.getCompleteClass().getName());
 			List<@NonNull String> headNames = new ArrayList<>();
@@ -522,7 +508,7 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 		}
 		if (s == null) {
 			for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(this)) {
-				s = new SymbolNameBuilder();
+				s = sIn;
 				//				s.appendString(getSymbolNamePrefix());
 				s.appendName(headNode.getCompleteClass().getName());
 				List<@NonNull String> edgeNames = new ArrayList<>();
@@ -538,7 +524,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 				break;
 			}
 		}
-		return s != null ? s : new SymbolNameBuilder();
 	}
 
 	private @NonNull Set<@NonNull Node> computeToOneSubRegion(@NonNull Set<@NonNull Node> toOneSubRegion, @NonNull Node atNode) {
@@ -974,16 +959,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	}
 
 	@Override
-	public ScheduleModel getScheduleModel() {
-		for (EObject eObject = this; eObject != null; eObject = eObject.eContainer()) {
-			if (eObject instanceof ScheduleModel) {
-				return (ScheduleModel)eObject;
-			}
-		}
-		return scheduleModel;
-	}
-
-	@Override
 	public @Nullable String getShape() {
 		return null;
 	}
@@ -997,11 +972,22 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	public final @NonNull String getSymbolName() {
 		String symbolName2 = symbolName;
 		if (symbolName2 == null) {
-			SymbolNameBuilder s = new SymbolNameBuilder(0);
-			s.appendString(getSymbolNamePrefix());
-			s.appendString(computeSymbolName().toString());
-			s.appendString(String.valueOf(getSymbolNameSuffix()));
-			symbolName = symbolName2 = getScheduleModel().reserveSymbolName(s, this);
+			SymbolNameBuilder s1 = new SymbolNameBuilder(0);			// No limit
+			SymbolNameBuilder s2 = new SymbolNameBuilder(50);			// 50 character inner limit
+			computeSymbolName(s2);
+			s1.appendString(getSymbolNamePrefix());
+			s1.appendString(s2.toString());
+			s1.appendString(String.valueOf(getSymbolNameSuffix()));
+			ScheduleModel scheduleModel = QVTscheduleUtil.basicGetContainingScheduleModel(this);
+			if (scheduleModel != null) {
+				symbolName2 = scheduleModel.reserveSymbolName(s1, this);
+				//				System.out.println("Reserved '" + symbolName2 + "' for " + this);
+			}
+			else {
+				symbolName2 = s1.toString();
+				System.err.println("Failed to reserve '" + symbolName2 + "' for " + this);
+			}
+			symbolName = symbolName2;
 		}
 		return symbolName2;
 	}

@@ -27,7 +27,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A RuleRegion provides a graphical representation of a Rule; QVTc Mapping or QVTr Relation.
+ * A RuleRegion provides a graphical representation of an executable mapping defined by a Rule; QVTc Mapping or QVTr Relation.
  * <!-- end-model-doc -->
  *
  * <p>

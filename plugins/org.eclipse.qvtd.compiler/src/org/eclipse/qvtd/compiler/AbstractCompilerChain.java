@@ -227,6 +227,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				String rootName = ClassUtil.nonNullState(asTransformation.eResource().getURI().trimFileExtension().trimFileExtension().lastSegment());
 				QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, qvtm2qvts, rootName);
 				ScheduledRegion scheduledRegion = qvts2qvts.transform(qvtm2qvts, activeRegions);
+				scheduledRegion.setReferredTransformation(asTransformation);
 				ScheduleManager scheduleManager = RegionUtil.getScheduleManager(scheduledRegion);
 				throwCompilerChainExceptionForErrors();
 				sResource.getContents().add(scheduleManager.getScheduleModel());

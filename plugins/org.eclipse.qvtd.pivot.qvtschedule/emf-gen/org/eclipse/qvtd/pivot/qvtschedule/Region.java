@@ -175,7 +175,6 @@ public interface Region extends Element, Nameable, Symbolable, ToDOTable, GraphN
 	@NonNull Iterable<@NonNull NavigableEdge> getRealizedNavigationEdges();
 	@NonNull Iterable<@NonNull Edge> getRecursionEdges();
 	@NonNull List<@NonNull NodeConnection> getRootConnections();
-	ScheduleModel getScheduleModel();
 	@Nullable String getShape();
 	@Nullable String getStyle();
 	@NonNull Iterable<@NonNull Node> getTrueNodes();

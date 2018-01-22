@@ -56,7 +56,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.LoadingRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -863,19 +862,19 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	}
 
 	public @NonNull ScheduledRegion createRootRegion(@NonNull Iterable<@NonNull MappingRegion> allRegions) {
-		ScheduledRegion rootRegion = null;
+		ScheduledRegion scheduledRegion = null;
 		for (@NonNull MappingRegion region : Lists.newArrayList(allRegions)) {
-			if (region.getOwningScheduledRegion() == null) {
-				if (rootRegion == null) {
-					rootRegion = QVTscheduleFactory.eINSTANCE.createScheduledRegion();
-					rootRegion.setOwningScheduleModel(scheduleManager.getScheduleModel());
-					rootRegion.setName(rootName);
+			if (region.getScheduledRegion() == null) {
+				if (scheduledRegion == null) {
+					scheduledRegion = QVTscheduleFactory.eINSTANCE.createScheduledRegion();
+					scheduledRegion.setOwningScheduleModel(scheduleManager.getScheduleModel());
+					scheduledRegion.setName(rootName);
 				}
-				region.setOwningScheduledRegion(rootRegion);
+				scheduleManager.setScheduledRegion(region, scheduledRegion);
 			}
 		}
-		assert rootRegion != null;
-		return rootRegion;
+		assert scheduledRegion != null;
+		return scheduledRegion;
 	}
 
 	public void createSchedule1(@NonNull ScheduledRegion rootScheduledRegion) {
@@ -889,7 +888,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//
 		//	Identify the content of each region.
 		//
-		for (@NonNull Region region : RegionUtil.getOwnedMappingRegions(rootScheduledRegion)) {
+		for (@NonNull Region region : RegionUtil.getMappingRegions(rootScheduledRegion)) {
 			contentsAnalysis.addRegion(region);
 		}
 		if (QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.isActive()) {
@@ -1096,7 +1095,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			int orderedRegionIndex = orderedRegions.indexOf(oldRegions.get(0));
 			for (@NonNull MappingRegion oldRegion : oldRegions) {
 				orderedRegions.remove(oldRegion);
-				oldRegion.setOwningScheduledRegion(null);
+				scheduleManager.setScheduledRegion(oldRegion, null);
 			}
 			orderedRegions.add(orderedRegionIndex, newRegion);
 			QVTscheduleConstants.POLLED_PROPERTIES.println("building indexes for " + newRegion + " " + newRegion.getIndexRangeText());
@@ -1110,7 +1109,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 
 	public @NonNull ScheduledRegion transform(@NonNull ScheduleManager scheduleManager, @NonNull Iterable<@NonNull MappingRegion> activeRegions) throws CompilerChainException {
 		this.contentsAnalysis = new ContentsAnalysis(scheduleManager);
-		((LoadingRegionImpl)loadingRegion).setFixmeScheduleModel(scheduleManager.getScheduleModel());
+		//		((LoadingRegionImpl)loadingRegion).setFixmeScheduleModel(scheduleManager.getScheduleModel());
 		//		for (@NonNull Region region : activeRegions) {
 		//			System.out.println("activeRegions " + region);
 		//		}
@@ -1122,6 +1121,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			activeRegions = partitionedRegions;
 		}
 		ScheduledRegion rootRegion = createRootRegion(activeRegions);
+		rootRegion.setOwnedLoadingRegion(loadingRegion);
 		createSchedule1(rootRegion);
 		createSchedule2(rootRegion);
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {

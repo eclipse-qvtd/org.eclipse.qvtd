@@ -52,6 +52,7 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -130,6 +131,10 @@ public abstract class ScheduleManager implements Adapter
 		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
 		this.standardLibraryHelper = new StandardLibraryHelper(standardLibrary);
 		oclVoidClassDatum = getClassDatum(standardLibrary.getOclVoidType(), domainAnalysis.getPrimitiveTypeModel());
+	}
+
+	public void addMappingRegion(@NonNull MappingRegion mappingRegion) {
+		scheduleModel.getOwnedMappingRegions().add(mappingRegion);
 	}
 
 	public void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
@@ -454,6 +459,10 @@ public abstract class ScheduleManager implements Adapter
 	@Override
 	public void notifyChanged(Notification notification) {}
 
+	public void setScheduledRegion(@NonNull MappingRegion mappingRegion, @Nullable ScheduledRegion scheduledRegion) {
+		mappingRegion.setScheduledRegion(scheduledRegion);
+	}
+
 	@Override
 	public void setTarget(Notifier newTarget) {}
 
@@ -556,7 +565,7 @@ public abstract class ScheduleManager implements Adapter
 		} catch (IOException e) {
 			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
-		for (@NonNull Region nestedRegion : RegionUtil.getOwnedMappingRegions(region)) {
+		for (@NonNull Region nestedRegion : RegionUtil.getMappingRegions(region)) {
 			if (nestedRegion instanceof ScheduledRegion) {
 				writeRegionDOTfile((@NonNull ScheduledRegion)nestedRegion, suffix);
 			}
@@ -575,7 +584,7 @@ public abstract class ScheduleManager implements Adapter
 		} catch (IOException e) {
 			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
-		for (@NonNull Region nestedRegion : RegionUtil.getOwnedMappingRegions(region)) {
+		for (@NonNull Region nestedRegion : RegionUtil.getMappingRegions(region)) {
 			if (nestedRegion instanceof ScheduledRegion) {
 				writeRegionGraphMLfile((@NonNull ScheduledRegion)nestedRegion, suffix);
 			}

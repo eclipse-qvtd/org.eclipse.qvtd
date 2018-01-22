@@ -482,16 +482,9 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	}
 
 	@Override
-	protected @NonNull SymbolNameBuilder computeSymbolName() {
-		SymbolNameBuilder s = new SymbolNameBuilder();
+	protected void computeSymbolName(@NonNull SymbolNameBuilder s) {
 		s.appendString("o_");
 		s.appendName(name);
-		return s;
-	}
-
-	@Override
-	public ScheduleModel getScheduleModel() {
-		return getOwningScheduleModel();
 	}
 
 	@Override

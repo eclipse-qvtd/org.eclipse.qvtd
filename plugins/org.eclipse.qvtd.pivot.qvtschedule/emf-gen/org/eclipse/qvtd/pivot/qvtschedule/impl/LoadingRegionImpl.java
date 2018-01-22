@@ -190,10 +190,8 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	}
 
 	@Override
-	protected @NonNull SymbolNameBuilder computeSymbolName() {
-		SymbolNameBuilder s = new SymbolNameBuilder();
+	protected void computeSymbolName(@NonNull SymbolNameBuilder s) {
 		s.appendString(QVTscheduleUtil.ROOT_MAPPING_NAME);
-		return s;
 	}
 
 	@Override

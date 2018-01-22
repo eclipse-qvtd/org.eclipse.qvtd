@@ -53,7 +53,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPropertyDatums" upperBound="-1"
         eType="#//PropertyDatum" containment="true" eOpposite="#//PropertyDatum/owningClassDatum"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduleModel" lowerBound="1"
-        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/ownedClassDatums"/>
+        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/ownedClassDatums">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The overall ScheduleModel in which this ClassDatum is contained."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredClass" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superClassDatums" upperBound="-1"
@@ -122,12 +126,24 @@
         lowerBound="1" eType="#//ScheduledRegion" eOpposite="#//ScheduledRegion/ownedLoadingRegion"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingRegion" abstract="true" eSuperTypes="#//Region">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A MappingRegion provides a graphical representation of an executable mapping."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="headNodes" upperBound="-1"
         eType="#//Node"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduledRegion"
-        eType="#//ScheduledRegion" eOpposite="#//ScheduledRegion/ownedMappingRegions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduleModel" eType="#//ScheduleModel"
+        eOpposite="#//ScheduleModel/ownedMappingRegions">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The overall ScheduleModel in which this MappingRegion is contained."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scheduledRegion" eType="#//ScheduledRegion"
+        eOpposite="#//ScheduledRegion/mappingRegions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MicroMappingRegion" eSuperTypes="#//MappingRegion">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A MappingRegion provides a graphical representation of an executable micro-mapping; a partial mapping free from dependency hazards."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mappingRegion" lowerBound="1"
         eType="#//MappingRegion"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="namePrefix" lowerBound="1"
@@ -235,7 +251,11 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="resultNode" eType="#//Node"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduleModel" lowerBound="1"
-        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/ownedOperationRegions"/>
+        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/ownedOperationRegions">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The overall ScheduleModel in which this OperationRegion is contained."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PatternTypedNode" eSuperTypes="#//Node">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="matched" lowerBound="1"
@@ -252,7 +272,11 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="#//PropertyDatum"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningClassDatum" lowerBound="1"
-        eType="#//ClassDatum" eOpposite="#//ClassDatum/ownedPropertyDatums"/>
+        eType="#//ClassDatum" eOpposite="#//ClassDatum/ownedPropertyDatums">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The parent ClassDatum for which this PropertyDatum defines a slot."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superPropertyDatums" upperBound="-1"
@@ -273,7 +297,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RuleRegion" eSuperTypes="#//MappingRegion">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A RuleRegion provides a graphical representation of a Rule; QVTc Mapping or QVTr Relation."/>
+      <details key="documentation" value="A RuleRegion provides a graphical representation of an executable mapping defined by a Rule; QVTc Mapping or QVTr Relation."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true"/>
@@ -306,8 +330,8 @@
         eType="#//ClassDatum" containment="true" eOpposite="#//ClassDatum/owningScheduleModel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperationRegions"
         upperBound="-1" eType="#//OperationRegion" containment="true" eOpposite="#//OperationRegion/owningScheduleModel"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOtherMappingRegions"
-        upperBound="-1" eType="#//MappingRegion" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMappingRegions" upperBound="-1"
+        eType="#//MappingRegion" containment="true" eOpposite="#//MappingRegion/owningScheduleModel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedScheduledRegion" eType="#//ScheduledRegion"
         containment="true" eOpposite="#//ScheduledRegion/owningScheduleModel"/>
   </eClassifiers>
@@ -320,10 +344,14 @@
         eType="#//Connection" containment="true" eOpposite="#//Connection/owningScheduledRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedLoadingRegion" lowerBound="1"
         eType="#//LoadingRegion" containment="true" eOpposite="#//LoadingRegion/owningScheduledRegion"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMappingRegions" upperBound="-1"
-        eType="#//MappingRegion" containment="true" eOpposite="#//MappingRegion/owningScheduledRegion"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingRegions" upperBound="-1"
+        eType="#//MappingRegion" eOpposite="#//MappingRegion/scheduledRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduleModel" lowerBound="1"
-        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/ownedScheduledRegion"/>
+        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/ownedScheduledRegion">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The overall ScheduleModel in which this ScheduledRegion is contained."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredTransformation"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Transformation">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

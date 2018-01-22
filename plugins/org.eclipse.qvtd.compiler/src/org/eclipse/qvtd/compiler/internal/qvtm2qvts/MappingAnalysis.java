@@ -50,7 +50,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -104,8 +103,7 @@ public class MappingAnalysis implements Nameable
 
 	private MappingAnalysis(@NonNull ScheduleModel scheduleModel, @NonNull RuleRegion ruleRegion) {
 		this.ruleRegion = ruleRegion;
-		((RuleRegionImpl)ruleRegion).setFixmeScheduleModel(scheduleModel);
-		scheduleModel.getOwnedOtherMappingRegions().add(ruleRegion);
+		assert scheduleModel.getOwnedMappingRegions().contains(ruleRegion);
 		this.expressionAnalyzer = new ExpressionAnalyzer(this);
 		//
 		Mapping mapping = (Mapping)QVTscheduleUtil.getReferredRule(ruleRegion);

@@ -49,7 +49,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import com.google.common.collect.Iterables;
@@ -899,12 +898,12 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		return filter;
 	}
 
-	//	@Override
+	/*	//	@Override
 	public ScheduleModel getScheduleModel() {
 		Region region = getOwningRegion();
 		assert region != null;
 		return region.getScheduleModel();
-	}
+	} */
 
 	protected @Nullable String getShape() {
 		return null;

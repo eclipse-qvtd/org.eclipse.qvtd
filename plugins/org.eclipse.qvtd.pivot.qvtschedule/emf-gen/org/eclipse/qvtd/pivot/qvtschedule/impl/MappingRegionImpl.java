@@ -24,9 +24,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 
 /**
@@ -38,7 +40,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingRegionImpl#getHeadNodes <em>Head Nodes</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingRegionImpl#getOwningScheduledRegion <em>Owning Scheduled Region</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingRegionImpl#getOwningScheduleModel <em>Owning Schedule Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingRegionImpl#getScheduledRegion <em>Scheduled Region</em>}</li>
  * </ul>
  *
  * @generated
@@ -53,6 +56,16 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	 * @ordered
 	 */
 	protected EList<Node> headNodes;
+
+	/**
+	 * The cached value of the '{@link #getScheduledRegion() <em>Scheduled Region</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getScheduledRegion()
+	 * @generated
+	 * @ordered
+	 */
+	protected ScheduledRegion scheduledRegion;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -92,9 +105,9 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	 * @generated
 	 */
 	@Override
-	public ScheduledRegion getOwningScheduledRegion() {
-		if (eContainerFeatureID() != QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULED_REGION) return null;
-		return (ScheduledRegion)eInternalContainer();
+	public ScheduleModel getOwningScheduleModel() {
+		if (eContainerFeatureID() != QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL) return null;
+		return (ScheduleModel)eInternalContainer();
 	}
 
 	/**
@@ -102,8 +115,8 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwningScheduledRegion(ScheduledRegion newOwningScheduledRegion, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningScheduledRegion, QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULED_REGION, msgs);
+	public NotificationChain basicSetOwningScheduleModel(ScheduleModel newOwningScheduleModel, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningScheduleModel, QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL, msgs);
 		return msgs;
 	}
 
@@ -113,20 +126,82 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	 * @generated
 	 */
 	@Override
-	public void setOwningScheduledRegion(ScheduledRegion newOwningScheduledRegion) {
-		if (newOwningScheduledRegion != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULED_REGION && newOwningScheduledRegion != null)) {
-			if (EcoreUtil.isAncestor(this, newOwningScheduledRegion))
+	public void setOwningScheduleModel(ScheduleModel newOwningScheduleModel) {
+		if (newOwningScheduleModel != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL && newOwningScheduleModel != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningScheduleModel))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newOwningScheduledRegion != null)
-				msgs = ((InternalEObject)newOwningScheduledRegion).eInverseAdd(this, QVTschedulePackage.SCHEDULED_REGION__OWNED_MAPPING_REGIONS, ScheduledRegion.class, msgs);
-			msgs = basicSetOwningScheduledRegion(newOwningScheduledRegion, msgs);
+			if (newOwningScheduleModel != null)
+				msgs = ((InternalEObject)newOwningScheduleModel).eInverseAdd(this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_MAPPING_REGIONS, ScheduleModel.class, msgs);
+			msgs = basicSetOwningScheduleModel(newOwningScheduleModel, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULED_REGION, newOwningScheduledRegion, newOwningScheduledRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL, newOwningScheduleModel, newOwningScheduleModel));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ScheduledRegion getScheduledRegion() {
+		if (scheduledRegion != null && scheduledRegion.eIsProxy()) {
+			InternalEObject oldScheduledRegion = (InternalEObject)scheduledRegion;
+			scheduledRegion = (ScheduledRegion)eResolveProxy(oldScheduledRegion);
+			if (scheduledRegion != oldScheduledRegion) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.MAPPING_REGION__SCHEDULED_REGION, oldScheduledRegion, scheduledRegion));
+			}
+		}
+		return scheduledRegion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ScheduledRegion basicGetScheduledRegion() {
+		return scheduledRegion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetScheduledRegion(ScheduledRegion newScheduledRegion, NotificationChain msgs) {
+		ScheduledRegion oldScheduledRegion = scheduledRegion;
+		scheduledRegion = newScheduledRegion;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.MAPPING_REGION__SCHEDULED_REGION, oldScheduledRegion, newScheduledRegion);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setScheduledRegion(ScheduledRegion newScheduledRegion) {
+		if (newScheduledRegion != scheduledRegion) {
+			NotificationChain msgs = null;
+			if (scheduledRegion != null)
+				msgs = ((InternalEObject)scheduledRegion).eInverseRemove(this, QVTschedulePackage.SCHEDULED_REGION__MAPPING_REGIONS, ScheduledRegion.class, msgs);
+			if (newScheduledRegion != null)
+				msgs = ((InternalEObject)newScheduledRegion).eInverseAdd(this, QVTschedulePackage.SCHEDULED_REGION__MAPPING_REGIONS, ScheduledRegion.class, msgs);
+			msgs = basicSetScheduledRegion(newScheduledRegion, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.MAPPING_REGION__SCHEDULED_REGION, newScheduledRegion, newScheduledRegion));
 	}
 
 	/**
@@ -137,10 +212,14 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULED_REGION:
+			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningScheduledRegion((ScheduledRegion)otherEnd, msgs);
+				return basicSetOwningScheduleModel((ScheduleModel)otherEnd, msgs);
+			case QVTschedulePackage.MAPPING_REGION__SCHEDULED_REGION:
+				if (scheduledRegion != null)
+					msgs = ((InternalEObject)scheduledRegion).eInverseRemove(this, QVTschedulePackage.SCHEDULED_REGION__MAPPING_REGIONS, ScheduledRegion.class, msgs);
+				return basicSetScheduledRegion((ScheduledRegion)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -153,8 +232,10 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULED_REGION:
-				return basicSetOwningScheduledRegion(null, msgs);
+			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
+				return basicSetOwningScheduleModel(null, msgs);
+			case QVTschedulePackage.MAPPING_REGION__SCHEDULED_REGION:
+				return basicSetScheduledRegion(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -167,8 +248,8 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULED_REGION:
-				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.SCHEDULED_REGION__OWNED_MAPPING_REGIONS, ScheduledRegion.class, msgs);
+			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
+				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_MAPPING_REGIONS, ScheduleModel.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -183,8 +264,11 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 		switch (featureID) {
 			case QVTschedulePackage.MAPPING_REGION__HEAD_NODES:
 				return getHeadNodes();
-			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULED_REGION:
-				return getOwningScheduledRegion();
+			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
+				return getOwningScheduleModel();
+			case QVTschedulePackage.MAPPING_REGION__SCHEDULED_REGION:
+				if (resolve) return getScheduledRegion();
+				return basicGetScheduledRegion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -202,8 +286,11 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 				getHeadNodes().clear();
 				getHeadNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULED_REGION:
-				setOwningScheduledRegion((ScheduledRegion)newValue);
+			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
+				setOwningScheduleModel((ScheduleModel)newValue);
+				return;
+			case QVTschedulePackage.MAPPING_REGION__SCHEDULED_REGION:
+				setScheduledRegion((ScheduledRegion)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -220,8 +307,11 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 			case QVTschedulePackage.MAPPING_REGION__HEAD_NODES:
 				getHeadNodes().clear();
 				return;
-			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULED_REGION:
-				setOwningScheduledRegion((ScheduledRegion)null);
+			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
+				setOwningScheduleModel((ScheduleModel)null);
+				return;
+			case QVTschedulePackage.MAPPING_REGION__SCHEDULED_REGION:
+				setScheduledRegion((ScheduledRegion)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -237,8 +327,10 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 		switch (featureID) {
 			case QVTschedulePackage.MAPPING_REGION__HEAD_NODES:
 				return headNodes != null && !headNodes.isEmpty();
-			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULED_REGION:
-				return getOwningScheduledRegion() != null;
+			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
+				return getOwningScheduleModel() != null;
+			case QVTschedulePackage.MAPPING_REGION__SCHEDULED_REGION:
+				return scheduledRegion != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -249,8 +341,8 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	}
 
 	@Override
-	public ScheduledRegion getContainingScheduledRegion() {
-		return getOwningScheduledRegion();
+	public @Nullable ScheduledRegion getContainingScheduledRegion() {
+		return getScheduledRegion();
 	}
 
 	@Override

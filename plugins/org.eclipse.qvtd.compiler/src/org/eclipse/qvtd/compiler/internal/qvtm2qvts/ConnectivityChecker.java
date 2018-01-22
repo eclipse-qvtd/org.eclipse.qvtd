@@ -103,7 +103,8 @@ public class ConnectivityChecker
 		for (@NonNull Connection connection : RegionUtil.getOwnedConnections(scheduledRegion)) {
 			analyzeConnection(connection);
 		}
-		for (@NonNull Region region : RegionUtil.getOwnedMappingRegions(scheduledRegion)) {
+		analyzeRegion(RegionUtil.getOwnedLoadingRegion(scheduledRegion));
+		for (@NonNull Region region : RegionUtil.getMappingRegions(scheduledRegion)) {
 			analyzeRegion(region);
 		}
 	}

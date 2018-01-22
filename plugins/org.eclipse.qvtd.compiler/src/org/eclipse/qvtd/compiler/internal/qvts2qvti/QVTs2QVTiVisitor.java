@@ -411,19 +411,13 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 	}
 
 	@Override
-	public @Nullable Element visitScheduledRegion(@NonNull ScheduledRegion rootScheduledRegion) {
+	public @Nullable Element visitScheduledRegion(@NonNull ScheduledRegion scheduledRegion) {
 		//		String name = rootRegion.getName();
 		//
 		List<@NonNull Region> callableRegions = new ArrayList<>();
-		callableRegions.add(RegionUtil.getOwnedLoadingRegion(rootScheduledRegion));
-		for (@NonNull Region region : RegionUtil.getOwnedMappingRegions(rootScheduledRegion)) {
-			if (region.isOperationRegion()) {}
-			//			else if (region.isConnectionRegion()) {
-			//				callableRegions.add(region);
-			//			}
-			else {
-				callableRegions.add(region);
-			}
+		callableRegions.add(RegionUtil.getOwnedLoadingRegion(scheduledRegion));
+		for (@NonNull MappingRegion region : RegionUtil.getMappingRegions(scheduledRegion)) {
+			callableRegions.add(region);
 		}
 
 		List<@NonNull Region> sortedRegions = QVTscheduleUtil.EarliestRegionComparator.sort(callableRegions);

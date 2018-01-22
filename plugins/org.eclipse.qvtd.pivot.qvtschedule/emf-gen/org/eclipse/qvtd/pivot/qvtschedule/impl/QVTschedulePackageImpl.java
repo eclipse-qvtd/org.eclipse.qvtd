@@ -781,7 +781,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EReference getScheduleModel_OwnedOtherMappingRegions() {
+	public EReference getScheduleModel_OwnedMappingRegions() {
 		return (EReference)scheduleModelEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -841,7 +841,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EReference getScheduledRegion_OwnedMappingRegions() {
+	public EReference getScheduledRegion_MappingRegions() {
 		return (EReference)scheduledRegionEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1041,8 +1041,18 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingRegion_OwningScheduledRegion() {
+	public EReference getMappingRegion_OwningScheduleModel() {
 		return (EReference)mappingRegionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getMappingRegion_ScheduledRegion() {
+		return (EReference)mappingRegionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1699,7 +1709,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		mappingRegionEClass = createEClass(MAPPING_REGION);
 		createEReference(mappingRegionEClass, MAPPING_REGION__HEAD_NODES);
-		createEReference(mappingRegionEClass, MAPPING_REGION__OWNING_SCHEDULED_REGION);
+		createEReference(mappingRegionEClass, MAPPING_REGION__OWNING_SCHEDULE_MODEL);
+		createEReference(mappingRegionEClass, MAPPING_REGION__SCHEDULED_REGION);
 
 		microMappingRegionEClass = createEClass(MICRO_MAPPING_REGION);
 		createEReference(microMappingRegionEClass, MICRO_MAPPING_REGION__MAPPING_REGION);
@@ -1777,14 +1788,14 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		scheduleModelEClass = createEClass(SCHEDULE_MODEL);
 		createEReference(scheduleModelEClass, SCHEDULE_MODEL__OWNED_CLASS_DATUMS);
 		createEReference(scheduleModelEClass, SCHEDULE_MODEL__OWNED_OPERATION_REGIONS);
-		createEReference(scheduleModelEClass, SCHEDULE_MODEL__OWNED_OTHER_MAPPING_REGIONS);
+		createEReference(scheduleModelEClass, SCHEDULE_MODEL__OWNED_MAPPING_REGIONS);
 		createEReference(scheduleModelEClass, SCHEDULE_MODEL__OWNED_SCHEDULED_REGION);
 
 		scheduledRegionEClass = createEClass(SCHEDULED_REGION);
 		createEAttribute(scheduledRegionEClass, SCHEDULED_REGION__NAME);
 		createEReference(scheduledRegionEClass, SCHEDULED_REGION__OWNED_CONNECTIONS);
 		createEReference(scheduledRegionEClass, SCHEDULED_REGION__OWNED_LOADING_REGION);
-		createEReference(scheduledRegionEClass, SCHEDULED_REGION__OWNED_MAPPING_REGIONS);
+		createEReference(scheduledRegionEClass, SCHEDULED_REGION__MAPPING_REGIONS);
 		createEReference(scheduledRegionEClass, SCHEDULED_REGION__OWNING_SCHEDULE_MODEL);
 		createEReference(scheduledRegionEClass, SCHEDULED_REGION__REFERRED_TRANSFORMATION);
 
@@ -1950,7 +1961,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		initEClass(mappingRegionEClass, MappingRegion.class, "MappingRegion", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingRegion_HeadNodes(), this.getNode(), null, "headNodes", null, 0, -1, MappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingRegion_OwningScheduledRegion(), this.getScheduledRegion(), this.getScheduledRegion_OwnedMappingRegions(), "owningScheduledRegion", null, 0, 1, MappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingRegion_OwningScheduleModel(), this.getScheduleModel(), this.getScheduleModel_OwnedMappingRegions(), "owningScheduleModel", null, 0, 1, MappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingRegion_ScheduledRegion(), this.getScheduledRegion(), this.getScheduledRegion_MappingRegions(), "scheduledRegion", null, 0, 1, MappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(microMappingRegionEClass, MicroMappingRegion.class, "MicroMappingRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMicroMappingRegion_MappingRegion(), this.getMappingRegion(), null, "mappingRegion", null, 1, 1, MicroMappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2028,14 +2040,14 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEClass(scheduleModelEClass, ScheduleModel.class, "ScheduleModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getScheduleModel_OwnedClassDatums(), this.getClassDatum(), this.getClassDatum_OwningScheduleModel(), "ownedClassDatums", null, 0, -1, ScheduleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScheduleModel_OwnedOperationRegions(), this.getOperationRegion(), this.getOperationRegion_OwningScheduleModel(), "ownedOperationRegions", null, 0, -1, ScheduleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getScheduleModel_OwnedOtherMappingRegions(), this.getMappingRegion(), null, "ownedOtherMappingRegions", null, 0, -1, ScheduleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScheduleModel_OwnedMappingRegions(), this.getMappingRegion(), this.getMappingRegion_OwningScheduleModel(), "ownedMappingRegions", null, 0, -1, ScheduleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScheduleModel_OwnedScheduledRegion(), this.getScheduledRegion(), this.getScheduledRegion_OwningScheduleModel(), "ownedScheduledRegion", null, 0, 1, ScheduleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(scheduledRegionEClass, ScheduledRegion.class, "ScheduledRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getScheduledRegion_Name(), ecorePackage.getEString(), "name", null, 1, 1, ScheduledRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScheduledRegion_OwnedConnections(), this.getConnection(), this.getConnection_OwningScheduledRegion(), "ownedConnections", null, 0, -1, ScheduledRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScheduledRegion_OwnedLoadingRegion(), this.getLoadingRegion(), this.getLoadingRegion_OwningScheduledRegion(), "ownedLoadingRegion", null, 1, 1, ScheduledRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getScheduledRegion_OwnedMappingRegions(), this.getMappingRegion(), this.getMappingRegion_OwningScheduledRegion(), "ownedMappingRegions", null, 0, -1, ScheduledRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScheduledRegion_MappingRegions(), this.getMappingRegion(), this.getMappingRegion_ScheduledRegion(), "mappingRegions", null, 0, -1, ScheduledRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScheduledRegion_OwningScheduleModel(), this.getScheduleModel(), this.getScheduleModel_OwnedScheduledRegion(), "owningScheduleModel", null, 1, 1, ScheduledRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScheduledRegion_ReferredTransformation(), theQVTbasePackage.getTransformation(), null, "referredTransformation", null, 0, 1, ScheduledRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

@@ -74,6 +74,9 @@ public interface PropertyDatum extends AbstractDatum {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The parent ClassDatum for which this PropertyDatum defines a slot.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owning Class Datum</em>' container reference.
 	 * @see #setOwningClassDatum(ClassDatum)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPropertyDatum_OwningClassDatum()

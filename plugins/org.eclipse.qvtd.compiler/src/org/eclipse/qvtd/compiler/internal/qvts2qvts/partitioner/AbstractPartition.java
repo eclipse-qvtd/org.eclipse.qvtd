@@ -33,8 +33,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -257,7 +255,7 @@ abstract class AbstractPartition
 	protected @NonNull MicroMappingRegion createPartialRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
 		ScheduleManager scheduleManager = RegionUtil.getScheduleManager(region);
 		MicroMappingRegion partialRegion = QVTscheduleFactory.eINSTANCE.createMicroMappingRegion();
-		((MicroMappingRegionImpl)partialRegion).setFixmeScheduleModel(scheduleManager.getScheduleModel());
+		scheduleManager.addMappingRegion(partialRegion);
 		partialRegion.setMappingRegion(region);
 		partialRegion.setNamePrefix(namePrefix);
 		partialRegion.setSymbolNameSuffix(symbolSuffix);

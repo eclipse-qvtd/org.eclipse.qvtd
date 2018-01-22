@@ -95,6 +95,9 @@ public interface ClassDatum extends AbstractDatum {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The overall ScheduleModel in which this ClassDatum is contained.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owning Schedule Model</em>' container reference.
 	 * @see #setOwningScheduleModel(ScheduleModel)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getClassDatum_OwningScheduleModel()

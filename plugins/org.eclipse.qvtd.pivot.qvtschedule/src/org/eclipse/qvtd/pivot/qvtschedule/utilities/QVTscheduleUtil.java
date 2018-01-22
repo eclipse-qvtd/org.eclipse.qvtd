@@ -18,9 +18,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.BinaryOperator;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -46,7 +48,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -356,6 +357,15 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return asPhase(nodeRole, Role.SPECULATION);
 	}
 
+	public static @Nullable ScheduleModel basicGetContainingScheduleModel(@NonNull Element element) {
+		for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof ScheduleModel) {
+				return (ScheduleModel)eObject;
+			}
+		}
+		return null;
+	}
+
 	public static boolean conformsToClassOrBehavioralClass(@NonNull CompleteClass firstType, @NonNull CompleteClass secondType) {
 		return firstType.conformsTo(secondType) || firstType.conformsTo(secondType.getBehavioralClass());
 	}
@@ -511,6 +521,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(node.getIncomingEdges());
 	}
 
+	public static @NonNull Iterable<@NonNull MappingRegion> getMappingRegions(@NonNull ScheduledRegion scheduledRegion) {
+		return ClassUtil.nullFree(scheduledRegion.getMappingRegions());
+	}
+
 	public static @NonNull String getName(@NonNull Nameable nameable) {
 		return ClassUtil.nonNullState(nameable.getName());
 	}
@@ -555,8 +569,12 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(classDatum.getOwnedPropertyDatums());
 	}
 
-	public static @NonNull Iterable<@NonNull MappingRegion> getOwnedMappingRegions(@NonNull ScheduledRegion scheduledRegion) {
-		return ClassUtil.nullFree(scheduledRegion.getOwnedMappingRegions());
+	//	public static @NonNull Iterable<@NonNull MappingRegion> getOwnedMappingRegions(@NonNull ScheduleModel scheduleModel) {
+	//		return ClassUtil.nullFree(scheduleModel.getOwnedMappingRegions());
+	//	}
+
+	public static @NonNull Iterable<@NonNull OperationRegion> getOwnedOperationRegions(@NonNull ScheduleModel scheduleModel) {
+		return ClassUtil.nullFree(scheduleModel.getOwnedOperationRegions());
 	}
 
 	public static @NonNull Region getOwningRegion(@NonNull ConnectionEnd connectionEnd) {
@@ -565,6 +583,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Region getOwningRegion(@NonNull Node node) {
 		return ClassUtil.nonNullState(node.getOwningRegion());
+	}
+
+	public static @NonNull ScheduleModel getOwningScheduleModel(@NonNull ScheduledRegion scheduledRegion) {
+		return ClassUtil.nonNullState(scheduledRegion.getOwningScheduleModel());
 	}
 
 	public static @NonNull Iterable<@NonNull RuleRegion> getProducingRegions(@NonNull AbstractDatum abstractDatum) {
@@ -584,7 +606,12 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	}
 
 	public static @NonNull ScheduleModel getScheduleModel(@NonNull Region region) {
-		return ClassUtil.nonNullState(region.getScheduleModel());
+		for (EObject eObject = region; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof ScheduleModel) {
+				return (ScheduleModel)eObject;
+			}
+		}
+		return ClassUtil.nonNullState(null);
 	}
 
 	public static <CE extends ConnectionEnd> @NonNull Iterable<@NonNull CE> getSourceEnds(@NonNull DatumConnection<CE> datumConnection) {
