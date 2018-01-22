@@ -106,6 +106,8 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A LoadingRegion provides a graphical representation of the model elements to be loaded from input models."/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduledRegion2"
+        lowerBound="1" eType="#//ScheduleModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingRegion" abstract="true" eSuperTypes="#//Region">
     <eStructuralFeatures xsi:type="ecore:EReference" name="headNodes" upperBound="-1"
@@ -297,10 +299,18 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedConnections" upperBound="-1"
         eType="#//Connection" containment="true" eOpposite="#//Connection/owningScheduledRegion"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedLoadingRegion" lowerBound="1"
+        eType="#//LoadingRegion" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRegions" upperBound="-1"
         eType="#//Region" containment="true" eOpposite="#//Region/owningScheduledRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduleModel" lowerBound="1"
         eType="#//ScheduleModel" eOpposite="#//ScheduleModel/ownedScheduledRegion"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredTransformation"
+        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Transformation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The Transformation represented by this ScheduledRegion."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StatusNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="Symbolable" abstract="true" interface="true">
