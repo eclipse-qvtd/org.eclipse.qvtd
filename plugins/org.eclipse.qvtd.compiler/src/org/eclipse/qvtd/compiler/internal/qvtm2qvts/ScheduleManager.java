@@ -556,7 +556,7 @@ public abstract class ScheduleManager implements Adapter
 		} catch (IOException e) {
 			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
-		for (@NonNull Region nestedRegion : RegionUtil.getOwnedRegions(region)) {
+		for (@NonNull Region nestedRegion : RegionUtil.getOwnedMappingRegions(region)) {
 			if (nestedRegion instanceof ScheduledRegion) {
 				writeRegionDOTfile((@NonNull ScheduledRegion)nestedRegion, suffix);
 			}
@@ -575,7 +575,7 @@ public abstract class ScheduleManager implements Adapter
 		} catch (IOException e) {
 			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
-		for (@NonNull Region nestedRegion : RegionUtil.getOwnedRegions(region)) {
+		for (@NonNull Region nestedRegion : RegionUtil.getOwnedMappingRegions(region)) {
 			if (nestedRegion instanceof ScheduledRegion) {
 				writeRegionGraphMLfile((@NonNull ScheduledRegion)nestedRegion, suffix);
 			}

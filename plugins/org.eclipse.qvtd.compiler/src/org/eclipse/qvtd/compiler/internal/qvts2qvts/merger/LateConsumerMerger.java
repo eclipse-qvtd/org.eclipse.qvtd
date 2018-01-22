@@ -71,14 +71,14 @@ public class LateConsumerMerger extends AbstractMerger
 		}
 
 		public void install(@NonNull ContentsAnalysis contentsAnalysis, @NonNull MappingRegion mergedRegion) {
-			ScheduledRegion invokingRegion = RegionUtil.getOwningScheduledRegion(primaryRegion);
+			ScheduledRegion invokingRegion = RegionUtil.getContainingScheduledRegion(primaryRegion);
 			List<@NonNull Region> callableParents = Lists.newArrayList(primaryRegion.getCallableParents());
 			contentsAnalysis.removeRegion(primaryRegion);
 			for (@NonNull Region callableParent : callableParents) {
 				callableParent.replaceCallToChild(primaryRegion, mergedRegion);
 			}
 			primaryRegion.setOwningScheduledRegion(invokingRegion);
-			for (@NonNull Region secondaryRegion : secondaryRegions) {
+			for (@NonNull MappingRegion secondaryRegion : secondaryRegions) {
 				contentsAnalysis.removeRegion(secondaryRegion);
 				assert invokingRegion == secondaryRegion.getOwningScheduledRegion();
 				for (@NonNull Region callableParent : callableParents) {
@@ -253,7 +253,7 @@ public class LateConsumerMerger extends AbstractMerger
 	 *
 	 * inputRegions should be indexed to encourage consecutive indexes for regions sharing an input connection.
 	 */
-	public static @NonNull Map<@NonNull Region, @NonNull List<@NonNull Region>> merge(@NonNull ScheduledRegion scheduledRegion) {
+	public static @NonNull Map<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> merge(@NonNull ScheduledRegion scheduledRegion) {
 		LateConsumerMerger lateMerger = new LateConsumerMerger(scheduledRegion);
 		lateMerger.merge();
 		lateMerger.prune();
@@ -266,7 +266,7 @@ public class LateConsumerMerger extends AbstractMerger
 	protected final @NonNull ScheduledRegion scheduledRegion;
 	protected final @NonNull List<@NonNull Region> allRegions = new ArrayList<>();
 	private /*@LazyNonNull*/ ContentsAnalysis contentsAnalysis;
-	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Region>> newRegion2oldRegions = new HashMap<>();
+	private final @NonNull Map<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> newRegion2oldRegions = new HashMap<>();
 	protected final @NonNull LateStrategy LateStrategy_INSTANCE = new LateStrategy();
 
 	public LateConsumerMerger(@NonNull ScheduledRegion scheduledRegion) {
@@ -294,7 +294,7 @@ public class LateConsumerMerger extends AbstractMerger
 		return contentsAnalysis2;
 	}
 
-	public @NonNull Map<@NonNull Region, @NonNull List<@NonNull Region>> getMerges() {
+	public @NonNull Map<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> getMerges() {
 		return newRegion2oldRegions;
 	}
 
@@ -415,7 +415,7 @@ public class LateConsumerMerger extends AbstractMerger
 				MappingRegion mergedRegion = regionMerger.create();
 				regionMerger.check(mergedRegion);
 				regionMerger.install(getContentsAnalysis(), mergedRegion);
-				List<@NonNull Region> oldRegions = new ArrayList<>();
+				List<@NonNull MappingRegion> oldRegions = new ArrayList<>();
 				oldRegions.add(primaryRegion);
 				oldRegions.addAll(regionMerger.getSecondaryRegions());
 				newRegion2oldRegions.put(mergedRegion, oldRegions);
@@ -431,9 +431,9 @@ public class LateConsumerMerger extends AbstractMerger
 	}
 
 	private void prune() {
-		for (@NonNull List<@NonNull Region> oldRegions : newRegion2oldRegions.values()) {
-			for (@NonNull Region oldRegion : oldRegions) {
-				oldRegion.getOwningScheduledRegion().getOwnedRegions().remove(oldRegion);
+		for (@NonNull List<@NonNull MappingRegion> oldRegions : newRegion2oldRegions.values()) {
+			for (@NonNull MappingRegion oldRegion : oldRegions) {
+				oldRegion.getOwningScheduledRegion().getOwnedMappingRegions().remove(oldRegion);
 			}
 		}
 	}

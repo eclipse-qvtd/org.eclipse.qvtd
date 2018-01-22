@@ -36,6 +36,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
@@ -478,6 +479,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(abstractDatum.getConsumingRegions());
 	}
 
+	public static @NonNull ScheduledRegion getContainingScheduledRegion(@NonNull Region region) {
+		return ClassUtil.nonNullState(region.getContainingScheduledRegion());
+	}
+
 	public static @NonNull Iterable<@NonNull Node> getDependencyNodes(@NonNull OperationRegion operationRegion) {
 		return ClassUtil.nullFree(operationRegion.getDependencyNodes());
 	}
@@ -550,12 +555,8 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(classDatum.getOwnedPropertyDatums());
 	}
 
-	public static @NonNull Iterable<@NonNull Region> getOwnedRegions(@NonNull ScheduledRegion scheduledRegion) {
-		return ClassUtil.nullFree(scheduledRegion.getOwnedRegions());
-	}
-
-	public static @NonNull ScheduledRegion getOwningScheduledRegion(@NonNull Region region) {
-		return ClassUtil.nonNullState(region.getOwningScheduledRegion());
+	public static @NonNull Iterable<@NonNull MappingRegion> getOwnedMappingRegions(@NonNull ScheduledRegion scheduledRegion) {
+		return ClassUtil.nullFree(scheduledRegion.getOwnedMappingRegions());
 	}
 
 	public static @NonNull Region getOwningRegion(@NonNull ConnectionEnd connectionEnd) {

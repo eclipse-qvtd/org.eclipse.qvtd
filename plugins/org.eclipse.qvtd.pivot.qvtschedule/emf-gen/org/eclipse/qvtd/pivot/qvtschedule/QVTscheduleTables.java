@@ -115,7 +115,6 @@ public class QVTscheduleTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_NodeConnection = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_NodeConnection);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_OperationRegion = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_OperationRegion);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_PropertyDatum = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_PropertyDatum);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Region = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_Region);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_AbstractDatum = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_AbstractDatum);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_RuleRegion = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_RuleRegion);
 
@@ -718,11 +717,12 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _EdgeConnection__NavigableEdge__incomingConnection = new ExecutorPropertyWithImplementation("NavigableEdge", Types._EdgeConnection, 1, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NAVIGABLE_EDGE__INCOMING_CONNECTION));
 		public static final @NonNull ExecutorProperty _EdgeConnection__NavigableEdge__outgoingConnections = new ExecutorPropertyWithImplementation("NavigableEdge", Types._EdgeConnection, 2, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS));
 
-		public static final @NonNull ExecutorProperty _LoadingRegion__owningScheduledRegion2 = new EcoreExecutorProperty(QVTschedulePackage.Literals.LOADING_REGION__OWNING_SCHEDULED_REGION2, Types._LoadingRegion, 0);
+		public static final @NonNull ExecutorProperty _LoadingRegion__owningScheduledRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.LOADING_REGION__OWNING_SCHEDULED_REGION, Types._LoadingRegion, 0);
 
 		public static final @NonNull ExecutorProperty _MappingRegion__headNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAPPING_REGION__HEAD_NODES, Types._MappingRegion, 0);
-		public static final @NonNull ExecutorProperty _MappingRegion__MicroMappingRegion__mappingRegion = new ExecutorPropertyWithImplementation("MicroMappingRegion", Types._MappingRegion, 1, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.MICRO_MAPPING_REGION__MAPPING_REGION));
-		public static final @NonNull ExecutorProperty _MappingRegion__ScheduleModel__ownedOtherMappingRegions = new ExecutorPropertyWithImplementation("ScheduleModel", Types._MappingRegion, 2, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_OTHER_MAPPING_REGIONS));
+		public static final @NonNull ExecutorProperty _MappingRegion__owningScheduledRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAPPING_REGION__OWNING_SCHEDULED_REGION, Types._MappingRegion, 1);
+		public static final @NonNull ExecutorProperty _MappingRegion__MicroMappingRegion__mappingRegion = new ExecutorPropertyWithImplementation("MicroMappingRegion", Types._MappingRegion, 2, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.MICRO_MAPPING_REGION__MAPPING_REGION));
+		public static final @NonNull ExecutorProperty _MappingRegion__ScheduleModel__ownedOtherMappingRegions = new ExecutorPropertyWithImplementation("ScheduleModel", Types._MappingRegion, 3, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_OTHER_MAPPING_REGIONS));
 
 		public static final @NonNull ExecutorProperty _MicroMappingRegion__mappingRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.MICRO_MAPPING_REGION__MAPPING_REGION, Types._MicroMappingRegion, 0);
 		public static final @NonNull ExecutorProperty _MicroMappingRegion__namePrefix = new EcoreExecutorProperty(QVTschedulePackage.Literals.MICRO_MAPPING_REGION__NAME_PREFIX, Types._MicroMappingRegion, 1);
@@ -783,7 +783,6 @@ public class QVTscheduleTables
 
 		public static final @NonNull ExecutorProperty _Region__ownedEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.REGION__OWNED_EDGES, Types._Region, 0);
 		public static final @NonNull ExecutorProperty _Region__ownedNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.REGION__OWNED_NODES, Types._Region, 1);
-		public static final @NonNull ExecutorProperty _Region__owningScheduledRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.REGION__OWNING_SCHEDULED_REGION, Types._Region, 2);
 
 		public static final @NonNull ExecutorProperty _RuleRegion__consumedDatums = new EcoreExecutorProperty(QVTschedulePackage.Literals.RULE_REGION__CONSUMED_DATUMS, Types._RuleRegion, 0);
 		public static final @NonNull ExecutorProperty _RuleRegion__name = new EcoreExecutorProperty(QVTschedulePackage.Literals.RULE_REGION__NAME, Types._RuleRegion, 1);
@@ -798,7 +797,7 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _ScheduledRegion__name = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULED_REGION__NAME, Types._ScheduledRegion, 0);
 		public static final @NonNull ExecutorProperty _ScheduledRegion__ownedConnections = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULED_REGION__OWNED_CONNECTIONS, Types._ScheduledRegion, 1);
 		public static final @NonNull ExecutorProperty _ScheduledRegion__ownedLoadingRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULED_REGION__OWNED_LOADING_REGION, Types._ScheduledRegion, 2);
-		public static final @NonNull ExecutorProperty _ScheduledRegion__ownedRegions = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULED_REGION__OWNED_REGIONS, Types._ScheduledRegion, 3);
+		public static final @NonNull ExecutorProperty _ScheduledRegion__ownedMappingRegions = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULED_REGION__OWNED_MAPPING_REGIONS, Types._ScheduledRegion, 3);
 		public static final @NonNull ExecutorProperty _ScheduledRegion__owningScheduleModel = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULED_REGION__OWNING_SCHEDULE_MODEL, Types._ScheduledRegion, 4);
 		public static final @NonNull ExecutorProperty _ScheduledRegion__referredTransformation = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULED_REGION__REFERRED_TRANSFORMATION, Types._ScheduledRegion, 5);
 
@@ -3417,8 +3416,7 @@ public class QVTscheduleTables
 		private static final @NonNull ExecutorProperty @NonNull [] _LoadingRegion = {
 			QVTscheduleTables.Properties._Region__ownedEdges,
 			QVTscheduleTables.Properties._Region__ownedNodes,
-			QVTscheduleTables.Properties._Region__owningScheduledRegion,
-			QVTscheduleTables.Properties._LoadingRegion__owningScheduledRegion2,
+			QVTscheduleTables.Properties._LoadingRegion__owningScheduledRegion,
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
@@ -3426,7 +3424,7 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._MappingRegion__headNodes,
 			QVTscheduleTables.Properties._Region__ownedEdges,
 			QVTscheduleTables.Properties._Region__ownedNodes,
-			QVTscheduleTables.Properties._Region__owningScheduledRegion,
+			QVTscheduleTables.Properties._MappingRegion__owningScheduledRegion,
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
@@ -3436,7 +3434,7 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._MicroMappingRegion__namePrefix,
 			QVTscheduleTables.Properties._Region__ownedEdges,
 			QVTscheduleTables.Properties._Region__ownedNodes,
-			QVTscheduleTables.Properties._Region__owningScheduledRegion,
+			QVTscheduleTables.Properties._MappingRegion__owningScheduledRegion,
 			QVTscheduleTables.Properties._Symbolable__symbolName,
 			QVTscheduleTables.Properties._MicroMappingRegion__symbolNameSuffix
 		};
@@ -3446,7 +3444,7 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._NamedMappingRegion__name,
 			QVTscheduleTables.Properties._Region__ownedEdges,
 			QVTscheduleTables.Properties._Region__ownedNodes,
-			QVTscheduleTables.Properties._Region__owningScheduledRegion,
+			QVTscheduleTables.Properties._MappingRegion__owningScheduledRegion,
 			QVTscheduleTables.Properties._Symbolable__symbolName,
 			QVTscheduleTables.Properties._NamedMappingRegion__symbolNameSuffix
 		};
@@ -3528,7 +3526,6 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._Region__ownedEdges,
 			QVTscheduleTables.Properties._Region__ownedNodes,
 			QVTscheduleTables.Properties._OperationRegion__owningScheduleModel,
-			QVTscheduleTables.Properties._Region__owningScheduledRegion,
 			QVTscheduleTables.Properties._OperationRegion__referredOperation,
 			QVTscheduleTables.Properties._OperationRegion__resultNode,
 			QVTscheduleTables.Properties._Symbolable__symbolName
@@ -3589,7 +3586,6 @@ public class QVTscheduleTables
 		private static final @NonNull ExecutorProperty @NonNull [] _Region = {
 			QVTscheduleTables.Properties._Region__ownedEdges,
 			QVTscheduleTables.Properties._Region__ownedNodes,
-			QVTscheduleTables.Properties._Region__owningScheduledRegion,
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};
 
@@ -3601,7 +3597,7 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._RuleRegion__name,
 			QVTscheduleTables.Properties._Region__ownedEdges,
 			QVTscheduleTables.Properties._Region__ownedNodes,
-			QVTscheduleTables.Properties._Region__owningScheduledRegion,
+			QVTscheduleTables.Properties._MappingRegion__owningScheduledRegion,
 			QVTscheduleTables.Properties._RuleRegion__producedDatums,
 			QVTscheduleTables.Properties._RuleRegion__referredRule,
 			QVTscheduleTables.Properties._Symbolable__symbolName
@@ -3619,10 +3615,9 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._ScheduledRegion__ownedConnections,
 			QVTscheduleTables.Properties._Region__ownedEdges,
 			QVTscheduleTables.Properties._ScheduledRegion__ownedLoadingRegion,
+			QVTscheduleTables.Properties._ScheduledRegion__ownedMappingRegions,
 			QVTscheduleTables.Properties._Region__ownedNodes,
-			QVTscheduleTables.Properties._ScheduledRegion__ownedRegions,
 			QVTscheduleTables.Properties._ScheduledRegion__owningScheduleModel,
-			QVTscheduleTables.Properties._Region__owningScheduledRegion,
 			QVTscheduleTables.Properties._ScheduledRegion__referredTransformation,
 			QVTscheduleTables.Properties._Symbolable__symbolName
 		};

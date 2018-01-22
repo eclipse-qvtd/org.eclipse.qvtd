@@ -166,7 +166,7 @@ public class ToGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullabl
 	public @Nullable String visitScheduledRegion(@NonNull ScheduledRegion scheduledRegion) {
 		context.setLabel(scheduledRegion.getName());
 		context.pushCluster();
-		for (@NonNull Region region : QVTscheduleUtil.getOwnedRegions(scheduledRegion)) {
+		for (@NonNull Region region : QVTscheduleUtil.getOwnedMappingRegions(scheduledRegion)) {
 			region.accept(this);
 		}
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(scheduledRegion)) {

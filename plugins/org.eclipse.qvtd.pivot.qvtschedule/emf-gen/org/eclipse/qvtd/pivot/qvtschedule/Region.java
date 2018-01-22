@@ -30,13 +30,16 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
  * @extends ToDOTable, GraphNode
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A Region is a sub-graph with Nodes and Edges in the graphical representation of a Rule. Derived Regions provide distinct forms of execution semantics.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedEdges <em>Owned Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedNodes <em>Owned Nodes</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwningScheduledRegion <em>Owning Scheduled Region</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion()
@@ -45,35 +48,6 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
  */
 public interface Region extends Element, Nameable, Symbolable, ToDOTable, GraphNode
 {
-	/**
-	 * Returns the value of the '<em><b>Owning Scheduled Region</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedRegions <em>Owned Regions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owning Scheduled Region</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owning Scheduled Region</em>' container reference.
-	 * @see #setOwningScheduledRegion(ScheduledRegion)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_OwningScheduledRegion()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedRegions
-	 * @model opposite="ownedRegions" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!owningScheduledRegion'"
-	 * @generated
-	 */
-	ScheduledRegion getOwningScheduledRegion();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwningScheduledRegion <em>Owning Scheduled Region</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Scheduled Region</em>' container reference.
-	 * @see #getOwningScheduledRegion()
-	 * @generated
-	 */
-	void setOwningScheduledRegion(ScheduledRegion value);
-
 	/**
 	 * Returns the value of the '<em><b>Owned Edges</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Edge}.
@@ -144,6 +118,7 @@ public interface Region extends Element, Nameable, Symbolable, ToDOTable, GraphN
 	@NonNull Iterable<@NonNull Region> getCallingRegions();
 	@NonNull String getColor();
 	@NonNull Iterable<@NonNull Node> getComposedNodes();
+	@Nullable ScheduledRegion getContainingScheduledRegion();
 	@NonNull Iterable<@NonNull Edge> getExpressionEdges();
 
 	/**

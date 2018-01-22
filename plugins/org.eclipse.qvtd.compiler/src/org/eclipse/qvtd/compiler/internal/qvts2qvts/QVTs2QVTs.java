@@ -152,7 +152,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	 * composition relationships that form part of an extended metamodel that is not known until run-time.
 	 */
 	private @NonNull LoadingRegion createRootContainmentRegion(@NonNull ScheduledRegion rootScheduledRegion) {
-		loadingRegion.setOwningScheduledRegion2(rootScheduledRegion);
+		loadingRegion.setOwningScheduledRegion(rootScheduledRegion);
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			scheduleManager.writeDebugGraphs(loadingRegion, null);
 		}
@@ -222,7 +222,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		if (predicatedProperty.isIsImplicit()) {
 			return;			// unnavigable opposites are handled by the navigable property
 		}
-		ScheduledRegion invokingRegion2 = region.getOwningScheduledRegion();
+		ScheduledRegion invokingRegion2 = region.getContainingScheduledRegion();
 		assert invokingRegion2 != null;
 		NavigableEdge castEdge = QVTscheduleUtil.getCastTarget(predicatedEdge);
 		Node castTarget = QVTscheduleUtil.getCastTarget(castEdge.getEdgeTarget());
@@ -355,7 +355,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	 * surrounding all possible sources.
 	 */
 	private @Nullable NodeConnection createHeadConnection(@NonNull Region region, @NonNull Node headNode) {
-		ScheduledRegion invokingRegion2 = RegionUtil.getOwningScheduledRegion(region);
+		ScheduledRegion invokingRegion2 = RegionUtil.getContainingScheduledRegion(region);
 		List<@NonNull Node> headSources = null;
 		//
 		//	Locate compatible introducers and non-recursive producers
@@ -862,9 +862,9 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//		}
 	}
 
-	public @NonNull ScheduledRegion createRootRegion(@NonNull Iterable<@NonNull ? extends Region> allRegions) {
+	public @NonNull ScheduledRegion createRootRegion(@NonNull Iterable<@NonNull MappingRegion> allRegions) {
 		ScheduledRegion rootRegion = null;
-		for (@NonNull Region region : Lists.newArrayList(allRegions)) {
+		for (@NonNull MappingRegion region : Lists.newArrayList(allRegions)) {
 			if (region.getOwningScheduledRegion() == null) {
 				if (rootRegion == null) {
 					rootRegion = QVTscheduleFactory.eINSTANCE.createScheduledRegion();
@@ -889,7 +889,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//
 		//	Identify the content of each region.
 		//
-		for (@NonNull Region region : RegionUtil.getOwnedRegions(rootScheduledRegion)) {
+		for (@NonNull Region region : RegionUtil.getOwnedMappingRegions(rootScheduledRegion)) {
 			contentsAnalysis.addRegion(region);
 		}
 		if (QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.isActive()) {
@@ -1088,13 +1088,13 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	private void lateMerge(@NonNull ScheduledRegion scheduledRegion, @NonNull List<@NonNull Region> orderedRegions,
 			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges,
 			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges) {
-		Map<@NonNull Region, @NonNull List<@NonNull Region>> newRegion2oldRegions = LateConsumerMerger.merge(scheduledRegion);
-		for (Map.Entry<@NonNull Region, @NonNull List<@NonNull Region>> entry : newRegion2oldRegions.entrySet()) {
+		Map<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> newRegion2oldRegions = LateConsumerMerger.merge(scheduledRegion);
+		for (Map.Entry<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> entry : newRegion2oldRegions.entrySet()) {
 			Region newRegion = entry.getKey();
-			List<@NonNull Region> oldRegions = entry.getValue();
+			List<@NonNull MappingRegion> oldRegions = entry.getValue();
 			assert oldRegions.size() >= 2;
 			int orderedRegionIndex = orderedRegions.indexOf(oldRegions.get(0));
-			for (@NonNull Region oldRegion : oldRegions) {
+			for (@NonNull MappingRegion oldRegion : oldRegions) {
 				orderedRegions.remove(oldRegion);
 				oldRegion.setOwningScheduledRegion(null);
 			}
@@ -1108,7 +1108,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	protected void splitRegions() {
 	}
 
-	public @NonNull ScheduledRegion transform(@NonNull ScheduleManager scheduleManager, @NonNull Iterable<@NonNull ? extends Region> activeRegions) throws CompilerChainException {
+	public @NonNull ScheduledRegion transform(@NonNull ScheduleManager scheduleManager, @NonNull Iterable<@NonNull MappingRegion> activeRegions) throws CompilerChainException {
 		this.contentsAnalysis = new ContentsAnalysis(scheduleManager);
 		((LoadingRegionImpl)loadingRegion).setFixmeScheduleModel(scheduleManager.getScheduleModel());
 		//		for (@NonNull Region region : activeRegions) {

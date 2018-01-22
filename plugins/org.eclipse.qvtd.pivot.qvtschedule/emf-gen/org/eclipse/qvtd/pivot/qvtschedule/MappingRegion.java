@@ -41,4 +41,33 @@ public interface MappingRegion extends Region
 	 */
 	@Override
 	EList<Node> getHeadNodes();
+
+	/**
+	 * Returns the value of the '<em><b>Owning Scheduled Region</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedMappingRegions <em>Owned Mapping Regions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owning Scheduled Region</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owning Scheduled Region</em>' container reference.
+	 * @see #setOwningScheduledRegion(ScheduledRegion)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMappingRegion_OwningScheduledRegion()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedMappingRegions
+	 * @model opposite="ownedMappingRegions" transient="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!MappingRegion!owningScheduledRegion'"
+	 * @generated
+	 */
+	ScheduledRegion getOwningScheduledRegion();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingRegion#getOwningScheduledRegion <em>Owning Scheduled Region</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owning Scheduled Region</em>' container reference.
+	 * @see #getOwningScheduledRegion()
+	 * @generated
+	 */
+	void setOwningScheduledRegion(ScheduledRegion value);
 }

@@ -41,7 +41,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.LoadingRegionImpl#getOwningScheduledRegion2 <em>Owning Scheduled Region2</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.LoadingRegionImpl#getOwningScheduledRegion <em>Owning Scheduled Region</em>}</li>
  * </ul>
  *
  * @generated
@@ -72,41 +72,9 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	 * @generated
 	 */
 	@Override
-	public ScheduledRegion getOwningScheduledRegion2() {
-		if (eContainerFeatureID() != QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION2) return null;
+	public ScheduledRegion getOwningScheduledRegion() {
+		if (eContainerFeatureID() != QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION) return null;
 		return (ScheduledRegion)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwningScheduledRegion2(ScheduledRegion newOwningScheduledRegion2, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningScheduledRegion2, QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION2, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOwningScheduledRegion2(ScheduledRegion newOwningScheduledRegion2) {
-		if (newOwningScheduledRegion2 != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION2 && newOwningScheduledRegion2 != null)) {
-			if (EcoreUtil.isAncestor(this, newOwningScheduledRegion2))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newOwningScheduledRegion2 != null)
-				msgs = ((InternalEObject)newOwningScheduledRegion2).eInverseAdd(this, QVTschedulePackage.SCHEDULED_REGION__OWNED_LOADING_REGION, ScheduledRegion.class, msgs);
-			msgs = basicSetOwningScheduledRegion2(newOwningScheduledRegion2, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION2, newOwningScheduledRegion2, newOwningScheduledRegion2));
 	}
 
 	/**
@@ -117,10 +85,10 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION2:
+			case QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningScheduledRegion2((ScheduledRegion)otherEnd, msgs);
+				return basicSetOwningScheduledRegion((ScheduledRegion)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -133,8 +101,8 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION2:
-				return basicSetOwningScheduledRegion2(null, msgs);
+			case QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION:
+				return basicSetOwningScheduledRegion(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -147,7 +115,7 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION2:
+			case QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION:
 				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.SCHEDULED_REGION__OWNED_LOADING_REGION, ScheduledRegion.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -161,8 +129,8 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION2:
-				return getOwningScheduledRegion2();
+			case QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION:
+				return getOwningScheduledRegion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -175,8 +143,8 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION2:
-				setOwningScheduledRegion2((ScheduledRegion)newValue);
+			case QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION:
+				setOwningScheduledRegion((ScheduledRegion)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -190,8 +158,8 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION2:
-				setOwningScheduledRegion2((ScheduledRegion)null);
+			case QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION:
+				setOwningScheduledRegion((ScheduledRegion)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -205,8 +173,8 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION2:
-				return getOwningScheduledRegion2() != null;
+			case QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION:
+				return getOwningScheduledRegion() != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -253,7 +221,6 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public NotificationChain basicSetOwningScheduledRegion(ScheduledRegion newOwningScheduledRegion, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newOwningScheduledRegion, QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION, msgs);
 		return msgs;
@@ -265,7 +232,24 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	 * @generated
 	 */
 	@Override
-	public ScheduledRegion getOwningScheduledRegion() {
-		return getOwningScheduledRegion2();
+	public void setOwningScheduledRegion(ScheduledRegion newOwningScheduledRegion) {
+		if (newOwningScheduledRegion != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION && newOwningScheduledRegion != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningScheduledRegion))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newOwningScheduledRegion != null)
+				msgs = ((InternalEObject)newOwningScheduledRegion).eInverseAdd(this, QVTschedulePackage.SCHEDULED_REGION__OWNED_LOADING_REGION, ScheduledRegion.class, msgs);
+			msgs = basicSetOwningScheduledRegion(newOwningScheduledRegion, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION, newOwningScheduledRegion, newOwningScheduledRegion));
+	}
+
+	@Override
+	public ScheduledRegion getContainingScheduledRegion() {
+		return getOwningScheduledRegion();
 	}
 } //RootCompositionRegionImpl

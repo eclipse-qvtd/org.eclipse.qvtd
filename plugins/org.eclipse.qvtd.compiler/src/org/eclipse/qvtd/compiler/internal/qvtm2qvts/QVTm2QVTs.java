@@ -304,7 +304,7 @@ public class QVTm2QVTs extends ScheduleManager
 		return mappingAnalysis.getRuleRegion();
 	}
 
-	public @NonNull List<@NonNull Region> transform() throws IOException {
+	public @NonNull List<@NonNull MappingRegion> transform() throws IOException {
 		Iterable<@NonNull RuleRegion> orderedRuleRegions = getOrderedMappings();
 		//
 		//	Extract salient characteristics from within each MappingAction.
@@ -332,7 +332,7 @@ public class QVTm2QVTs extends ScheduleManager
 			//			mappingRegion.resolveRecursion();
 		}
 		boolean noEarlyMerge = isNoEarlyMerge();
-		List<@NonNull Region> activeRegions = new ArrayList<>(noEarlyMerge ? orderedRegions : EarlyMerger.merge(orderedRegions));
+		List<@NonNull MappingRegion> activeRegions = new ArrayList<>(noEarlyMerge ? orderedRegions : EarlyMerger.merge(orderedRegions));
 		//		for (@NonNull Region activeRegion : activeRegions) {
 		//			((AbstractRegion)activeRegion).resolveRecursion();
 		//		}
