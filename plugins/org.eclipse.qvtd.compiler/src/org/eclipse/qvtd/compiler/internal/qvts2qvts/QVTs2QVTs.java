@@ -152,7 +152,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	 * composition relationships that form part of an extended metamodel that is not known until run-time.
 	 */
 	private @NonNull LoadingRegion createRootContainmentRegion(@NonNull ScheduledRegion rootScheduledRegion) {
-		loadingRegion.setOwningScheduledRegion(rootScheduledRegion);
+		loadingRegion.setOwningScheduledRegion2(rootScheduledRegion);
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			scheduleManager.writeDebugGraphs(loadingRegion, null);
 		}

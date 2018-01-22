@@ -21,6 +21,10 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * A representation of the model object '<em><b>Abstract Datum</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * An AbstractDatum identifies a typed information element produced by one or more regions and consumed by one or more usually other regions.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>

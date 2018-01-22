@@ -81,6 +81,9 @@ public interface OperationRegion extends Region
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The Operation represented by this OperationRegion.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Referred Operation</em>' reference.
 	 * @see #setReferredOperation(Operation)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getOperationRegion_ReferredOperation()

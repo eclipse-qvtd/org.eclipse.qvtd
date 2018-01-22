@@ -35,6 +35,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
@@ -535,6 +536,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Iterable<@NonNull Edge> getOwnedEdges(@NonNull Region region) {
 		return ClassUtil.nullFree(region.getOwnedEdges());
+	}
+
+	public static @NonNull LoadingRegion getOwnedLoadingRegion(@NonNull ScheduledRegion scheduledRegion) {
+		return ClassUtil.nonNullState(scheduledRegion.getOwnedLoadingRegion());
 	}
 
 	public static @NonNull Iterable<@NonNull Node> getOwnedNodes(@NonNull Region region) {

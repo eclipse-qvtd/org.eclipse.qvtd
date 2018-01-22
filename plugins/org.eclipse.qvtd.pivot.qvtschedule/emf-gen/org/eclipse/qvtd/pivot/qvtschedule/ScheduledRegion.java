@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvtschedule;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 public interface ScheduledRegion extends Region
 {
@@ -61,6 +62,33 @@ public interface ScheduledRegion extends Region
 	 */
 	EList<Connection> getOwnedConnections();
 	/**
+	 * Returns the value of the '<em><b>Owned Loading Region</b></em>' containment reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getOwningScheduledRegion2 <em>Owning Scheduled Region2</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Loading Region</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Loading Region</em>' containment reference.
+	 * @see #setOwnedLoadingRegion(LoadingRegion)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getScheduledRegion_OwnedLoadingRegion()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getOwningScheduledRegion2
+	 * @model opposite="owningScheduledRegion2" containment="true" required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduledRegion!ownedLoadingRegion'"
+	 * @generated
+	 */
+	LoadingRegion getOwnedLoadingRegion();
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedLoadingRegion <em>Owned Loading Region</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owned Loading Region</em>' containment reference.
+	 * @see #getOwnedLoadingRegion()
+	 * @generated
+	 */
+	void setOwnedLoadingRegion(LoadingRegion value);
+	/**
 	 * Returns the value of the '<em><b>Owned Regions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Region}.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwningScheduledRegion <em>Owning Scheduled Region</em>}'.
@@ -105,6 +133,29 @@ public interface ScheduledRegion extends Region
 	 * @generated
 	 */
 	void setOwningScheduleModel(ScheduleModel value);
+	/**
+	 * Returns the value of the '<em><b>Referred Transformation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The Transformation represented by this ScheduledRegion.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Referred Transformation</em>' reference.
+	 * @see #setReferredTransformation(Transformation)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getScheduledRegion_ReferredTransformation()
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduledRegion!referredTransformation'"
+	 * @generated
+	 */
+	Transformation getReferredTransformation();
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getReferredTransformation <em>Referred Transformation</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Referred Transformation</em>' reference.
+	 * @see #getReferredTransformation()
+	 * @generated
+	 */
+	void setReferredTransformation(Transformation value);
 	@NonNull Iterable<@NonNull Region> getCallableRegions();
 	@Nullable Region getNormalizedRegion(@NonNull Region region);
 }

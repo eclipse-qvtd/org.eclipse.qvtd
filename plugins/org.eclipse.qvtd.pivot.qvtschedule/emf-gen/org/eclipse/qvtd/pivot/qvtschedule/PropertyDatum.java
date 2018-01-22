@@ -20,6 +20,10 @@ import org.eclipse.ocl.pivot.Property;
  * A representation of the model object '<em><b>Property Datum</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A PropertyDatum identifies a DataType value produced by one or more regions and consumed by one or more usually other regions. The DataType value is passsed within an Object Slot.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>

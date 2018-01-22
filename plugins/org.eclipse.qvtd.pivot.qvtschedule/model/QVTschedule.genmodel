@@ -76,7 +76,9 @@
     <genClasses ecoreClass="QVTschedule.ecore#//InputNode"/>
     <genClasses ecoreClass="QVTschedule.ecore#//IteratedEdge"/>
     <genClasses ecoreClass="QVTschedule.ecore#//IteratorNode"/>
-    <genClasses ecoreClass="QVTschedule.ecore#//LoadingRegion"/>
+    <genClasses ecoreClass="QVTschedule.ecore#//LoadingRegion">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//LoadingRegion/owningScheduledRegion2"/>
+    </genClasses>
     <genClasses ecoreClass="QVTschedule.ecore#//MappingRegion">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//MappingRegion/headNodes"/>
     </genClasses>
@@ -154,7 +156,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//RuleRegion/consumedDatums"/>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//ScheduleModel">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduleModel/loadingRegion"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduleModel/ownedClassDatums"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduleModel/ownedOperationRegions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduleModel/ownedOtherMappingRegions"/>
@@ -163,8 +164,10 @@
     <genClasses ecoreClass="QVTschedule.ecore#//ScheduledRegion">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//ScheduledRegion/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduledRegion/ownedConnections"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduledRegion/ownedLoadingRegion"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduledRegion/ownedRegions"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduledRegion/owningScheduleModel"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduledRegion/referredTransformation"/>
     </genClasses>
     <genClasses ecoreClass="QVTschedule.ecore#//StatusNode"/>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//Symbolable">

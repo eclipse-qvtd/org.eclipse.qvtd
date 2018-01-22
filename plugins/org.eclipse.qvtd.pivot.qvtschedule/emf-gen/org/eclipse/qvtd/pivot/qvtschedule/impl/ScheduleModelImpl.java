@@ -29,7 +29,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.ModelImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -47,7 +46,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl#getLoadingRegion <em>Loading Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl#getOwnedClassDatums <em>Owned Class Datums</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl#getOwnedOperationRegions <em>Owned Operation Regions</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl#getOwnedOtherMappingRegions <em>Owned Other Mapping Regions</em>}</li>
@@ -57,15 +55,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
  * @generated
  */
 public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
-	/**
-	 * The cached value of the '{@link #getLoadingRegion() <em>Loading Region</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLoadingRegion()
-	 * @generated
-	 * @ordered
-	 */
-	protected LoadingRegion loadingRegion;
 	/**
 	 * The cached value of the '{@link #getOwnedClassDatums() <em>Owned Class Datums</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -119,46 +108,6 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTschedulePackage.Literals.SCHEDULE_MODEL;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public LoadingRegion getLoadingRegion() {
-		if (loadingRegion != null && loadingRegion.eIsProxy()) {
-			InternalEObject oldLoadingRegion = (InternalEObject)loadingRegion;
-			loadingRegion = (LoadingRegion)eResolveProxy(oldLoadingRegion);
-			if (loadingRegion != oldLoadingRegion) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.SCHEDULE_MODEL__LOADING_REGION, oldLoadingRegion, loadingRegion));
-			}
-		}
-		return loadingRegion;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public LoadingRegion basicGetLoadingRegion() {
-		return loadingRegion;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setLoadingRegion(LoadingRegion newLoadingRegion) {
-		LoadingRegion oldLoadingRegion = loadingRegion;
-		loadingRegion = newLoadingRegion;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SCHEDULE_MODEL__LOADING_REGION, oldLoadingRegion, loadingRegion));
 	}
 
 	/**
@@ -294,9 +243,6 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.SCHEDULE_MODEL__LOADING_REGION:
-				if (resolve) return getLoadingRegion();
-				return basicGetLoadingRegion();
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_CLASS_DATUMS:
 				return getOwnedClassDatums();
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_OPERATION_REGIONS:
@@ -318,9 +264,6 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.SCHEDULE_MODEL__LOADING_REGION:
-				setLoadingRegion((LoadingRegion)newValue);
-				return;
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_CLASS_DATUMS:
 				getOwnedClassDatums().clear();
 				getOwnedClassDatums().addAll((Collection<? extends ClassDatum>)newValue);
@@ -348,9 +291,6 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.SCHEDULE_MODEL__LOADING_REGION:
-				setLoadingRegion((LoadingRegion)null);
-				return;
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_CLASS_DATUMS:
 				getOwnedClassDatums().clear();
 				return;
@@ -375,8 +315,6 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.SCHEDULE_MODEL__LOADING_REGION:
-				return loadingRegion != null;
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_CLASS_DATUMS:
 				return ownedClassDatums != null && !ownedClassDatums.isEmpty();
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_OPERATION_REGIONS:

@@ -68,7 +68,7 @@ public interface RuleRegion extends MappingRegion {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The property to navigate from source to target.
+	 * The Rule represented by this RuleRegion.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Referred Rule</em>' reference.
 	 * @see #setReferredRule(Rule)

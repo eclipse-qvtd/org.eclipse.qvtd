@@ -20,6 +20,10 @@ import org.eclipse.ocl.pivot.CompleteClass;
  * A representation of the model object '<em><b>Class Datum</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A ClassDatum identifies a Class-typed object produced by one or more regions and consumed by one or more usually other regions. The object is passed by reference, possibly within a Connection.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
