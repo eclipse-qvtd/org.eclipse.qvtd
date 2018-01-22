@@ -9,16 +9,28 @@
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractDatum" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="An AbstractDatum identifies a typed information element produced by one or more regions and consumed by one or more usually other regions."/>
+      <details key="documentation" value="An AbstractDatum identifies a typed information element produced by one or more regions and consumed by one or more usually other regions.&#xA;Derived Datum classes provide the informaion type which in combination with the TypedModelfully identifies information in noth endogeneous and exogeneous transformations."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredTypedModel" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel"/>
+        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The TypedModel for which this Datum provides an information element. For endogeneous transformations multiple Datums with distinct TypedModels may exist for the same Class."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="consumingRegions" ordered="false"
         upperBound="-1" eType="#//RuleRegion" transient="true" resolveProxies="false"
-        eOpposite="#//RuleRegion/consumedDatums"/>
+        eOpposite="#//RuleRegion/consumedDatums">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The original RuleRegions that consume and so require this Datum as a prerequisite."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="producingRegions" ordered="false"
         upperBound="-1" eType="#//RuleRegion" transient="true" resolveProxies="false"
-        eOpposite="#//RuleRegion/producedDatums"/>
+        eOpposite="#//RuleRegion/producedDatums">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The original RuleRegions that produce this Datum."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CastEdge" eSuperTypes="#//NavigableEdge">
     <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
@@ -106,12 +118,14 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A LoadingRegion provides a graphical representation of the model elements to be loaded from input models."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduledRegion2"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduledRegion"
         lowerBound="1" eType="#//ScheduledRegion" eOpposite="#//ScheduledRegion/ownedLoadingRegion"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingRegion" abstract="true" eSuperTypes="#//Region">
     <eStructuralFeatures xsi:type="ecore:EReference" name="headNodes" upperBound="-1"
         eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduledRegion"
+        eType="#//ScheduledRegion" eOpposite="#//ScheduledRegion/ownedMappingRegions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MicroMappingRegion" eSuperTypes="#//MappingRegion">
     <eStructuralFeatures xsi:type="ecore:EReference" name="mappingRegion" lowerBound="1"
@@ -249,12 +263,13 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Region" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable #//Symbolable">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A Region is a sub-graph with Nodes and Edges in the graphical representation of a Rule. Derived Regions provide distinct forms of execution semantics."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedEdges" upperBound="-1"
         eType="#//Edge" containment="true" eOpposite="#//Edge/owningRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedNodes" upperBound="-1"
         eType="#//Node" containment="true" eOpposite="#//Node/owningRegion"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduledRegion"
-        eType="#//ScheduledRegion" eOpposite="#//ScheduledRegion/ownedRegions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RuleRegion" eSuperTypes="#//MappingRegion">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -304,9 +319,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedConnections" upperBound="-1"
         eType="#//Connection" containment="true" eOpposite="#//Connection/owningScheduledRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedLoadingRegion" lowerBound="1"
-        eType="#//LoadingRegion" containment="true" eOpposite="#//LoadingRegion/owningScheduledRegion2"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRegions" upperBound="-1"
-        eType="#//Region" containment="true" eOpposite="#//Region/owningScheduledRegion"/>
+        eType="#//LoadingRegion" containment="true" eOpposite="#//LoadingRegion/owningScheduledRegion"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMappingRegions" upperBound="-1"
+        eType="#//MappingRegion" containment="true" eOpposite="#//MappingRegion/owningScheduledRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduleModel" lowerBound="1"
         eType="#//ScheduleModel" eOpposite="#//ScheduleModel/ownedScheduledRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredTransformation"
