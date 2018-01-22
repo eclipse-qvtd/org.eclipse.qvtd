@@ -8,6 +8,9 @@
     <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractDatum" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An AbstractDatum identifies a typed information element produced by one or more regions and consumed by one or more usually other regions."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredTypedModel" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="consumingRegions" ordered="false"
@@ -29,6 +32,9 @@
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Class"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassDatum" eSuperTypes="#//AbstractDatum">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A ClassDatum identifies a Class-typed object produced by one or more regions and consumed by one or more usually other regions. The object is passed by reference, possibly within a Connection."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="completeClass" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-CompleteClass"
         transient="true" derived="true"/>
@@ -67,18 +73,6 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DependencyNode" eSuperTypes="#//Node"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainUsage" abstract="true" interface="true">
-    <eOperations name="getTypedModel" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel">
-      <eParameters name="element" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element"/>
-    </eOperations>
-    <eOperations name="getTypedModels" upperBound="-1" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-TypedModel"/>
-    <eOperations name="isConstant" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="isInput" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="isMiddle" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="isNone" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="isOutput" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eOperations name="isPrimitive" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Edge" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An edge is directed and abstracts any Node interconnection within a Region."/>
@@ -108,7 +102,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="InputNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="IteratedEdge" eSuperTypes="#//Edge"/>
   <eClassifiers xsi:type="ecore:EClass" name="IteratorNode" eSuperTypes="#//VariableNode"/>
-  <eClassifiers xsi:type="ecore:EClass" name="LoadingRegion" eSuperTypes="#//Region"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LoadingRegion" eSuperTypes="#//Region">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A LoadingRegion provides a graphical representation of the model elements to be loaded from input models."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingRegion" abstract="true" eSuperTypes="#//Region">
     <eStructuralFeatures xsi:type="ecore:EReference" name="headNodes" upperBound="-1"
         eType="#//Node"/>
@@ -205,13 +203,20 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationRegion" eSuperTypes="#//Region">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An OperationRegion provides a graphical representation of the dependencies of an Operation(or Function)."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dependencyNodes" upperBound="-1"
         eType="#//Node"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="headNodes" upperBound="-1"
         eType="#//Node"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredOperation" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Operation"/>
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Operation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The Operation represented by this OperationRegion."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="resultNode" eType="#//Node"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduleModel" lowerBound="1"
         eType="#//ScheduleModel" eOpposite="#//ScheduleModel/ownedOperationRegions"/>
@@ -226,6 +231,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PredicateEdge" eSuperTypes="#//Edge"/>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyDatum" eSuperTypes="#//AbstractDatum">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A PropertyDatum identifies a DataType value produced by one or more regions and consumed by one or more usually other regions. The DataType value is passsed within an Object Slot."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="#//PropertyDatum"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningClassDatum" lowerBound="1"
         eType="#//ClassDatum" eOpposite="#//ClassDatum/ownedPropertyDatums"/>
@@ -247,20 +255,31 @@
         eType="#//ScheduledRegion" eOpposite="#//ScheduledRegion/ownedRegions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RuleRegion" eSuperTypes="#//MappingRegion">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A RuleRegion provides a graphical representation of a Rule; QVTc Mapping or QVTr Relation."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredRule" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Rule">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The property to navigate from source to target."/>
+        <details key="documentation" value="The Rule represented by this RuleRegion."/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="producedDatums" ordered="false"
         upperBound="-1" eType="#//AbstractDatum" transient="true" resolveProxies="false"
-        eOpposite="#//AbstractDatum/producingRegions"/>
+        eOpposite="#//AbstractDatum/producingRegions">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The Datums that this Region produces; creates for consumption by other regions."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="consumedDatums" ordered="false"
         upperBound="-1" eType="#//AbstractDatum" transient="true" resolveProxies="false"
-        eOpposite="#//AbstractDatum/consumingRegions"/>
+        eOpposite="#//AbstractDatum/consumingRegions">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The Datums that this Region consumes; requires to have been produced by other regions."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScheduleModel" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Model">
     <eStructuralFeatures xsi:type="ecore:EReference" name="loadingRegion" lowerBound="1"

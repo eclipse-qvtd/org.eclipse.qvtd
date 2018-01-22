@@ -26,6 +26,10 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
  * A representation of the model object '<em><b>Basic Mapping Region</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A RuleRegion provides a graphical representation of a Rule; QVTc Mapping or QVTr Relation.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
@@ -95,6 +99,9 @@ public interface RuleRegion extends MappingRegion {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The Datums that this Region produces; creates for consumption by other regions.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Produced Datums</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRuleRegion_ProducedDatums()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getProducingRegions
@@ -114,6 +121,9 @@ public interface RuleRegion extends MappingRegion {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The Datums that this Region consumes; requires to have been produced by other regions.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Consumed Datums</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRuleRegion_ConsumedDatums()
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getConsumingRegions

@@ -65,6 +65,24 @@ public interface ScheduleModel extends Model
 	 */
 	EList<ClassDatum> getOwnedClassDatums();
 	/**
+	 * Returns the value of the '<em><b>Owned Operation Regions</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.OperationRegion}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getOwningScheduleModel <em>Owning Schedule Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Operation Regions</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Operation Regions</em>' containment reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getScheduleModel_OwnedOperationRegions()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getOwningScheduleModel
+	 * @model opposite="owningScheduleModel" containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduleModel!ownedOperationRegions'"
+	 * @generated
+	 */
+	EList<OperationRegion> getOwnedOperationRegions();
+	/**
 	 * Returns the value of the '<em><b>Owned Other Mapping Regions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.MappingRegion}.
 	 * <!-- begin-user-doc -->

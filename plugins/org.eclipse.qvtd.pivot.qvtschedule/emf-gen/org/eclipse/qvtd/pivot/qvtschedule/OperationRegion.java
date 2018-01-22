@@ -123,6 +123,33 @@ public interface OperationRegion extends Region
 	 */
 	void setResultNode(Node value);
 
+	/**
+	 * Returns the value of the '<em><b>Owning Schedule Model</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getOwnedOperationRegions <em>Owned Operation Regions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owning Schedule Model</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owning Schedule Model</em>' container reference.
+	 * @see #setOwningScheduleModel(ScheduleModel)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getOperationRegion_OwningScheduleModel()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getOwnedOperationRegions
+	 * @model opposite="ownedOperationRegions" required="true" transient="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!OperationRegion!owningScheduleModel'"
+	 * @generated
+	 */
+	ScheduleModel getOwningScheduleModel();
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getOwningScheduleModel <em>Owning Schedule Model</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owning Schedule Model</em>' container reference.
+	 * @see #getOwningScheduleModel()
+	 * @generated
+	 */
+	void setOwningScheduleModel(ScheduleModel value);
 	void addDependencyNode(@NonNull Node node);
 	void addHeadNode(@NonNull Node node);
 }

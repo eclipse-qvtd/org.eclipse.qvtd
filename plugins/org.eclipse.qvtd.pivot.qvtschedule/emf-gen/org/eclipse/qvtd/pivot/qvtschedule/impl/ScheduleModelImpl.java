@@ -31,6 +31,7 @@ import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
@@ -48,6 +49,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl#getLoadingRegion <em>Loading Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl#getOwnedClassDatums <em>Owned Class Datums</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl#getOwnedOperationRegions <em>Owned Operation Regions</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl#getOwnedOtherMappingRegions <em>Owned Other Mapping Regions</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl#getOwnedScheduledRegion <em>Owned Scheduled Region</em>}</li>
  * </ul>
@@ -73,6 +75,15 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	 * @ordered
 	 */
 	protected EList<ClassDatum> ownedClassDatums;
+	/**
+	 * The cached value of the '{@link #getOwnedOperationRegions() <em>Owned Operation Regions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedOperationRegions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<OperationRegion> ownedOperationRegions;
 	/**
 	 * The cached value of the '{@link #getOwnedOtherMappingRegions() <em>Owned Other Mapping Regions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -169,6 +180,19 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	 * @generated
 	 */
 	@Override
+	public EList<OperationRegion> getOwnedOperationRegions() {
+		if (ownedOperationRegions == null) {
+			ownedOperationRegions = new EObjectContainmentWithInverseEList<OperationRegion>(OperationRegion.class, this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_OPERATION_REGIONS, QVTschedulePackage.OPERATION_REGION__OWNING_SCHEDULE_MODEL);
+		}
+		return ownedOperationRegions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EList<MappingRegion> getOwnedOtherMappingRegions() {
 		if (ownedOtherMappingRegions == null) {
 			ownedOtherMappingRegions = new EObjectContainmentEList<MappingRegion>(MappingRegion.class, this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_OTHER_MAPPING_REGIONS);
@@ -232,6 +256,8 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 		switch (featureID) {
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_CLASS_DATUMS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedClassDatums()).basicAdd(otherEnd, msgs);
+			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_OPERATION_REGIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedOperationRegions()).basicAdd(otherEnd, msgs);
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_SCHEDULED_REGION:
 				if (ownedScheduledRegion != null)
 					msgs = ((InternalEObject)ownedScheduledRegion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTschedulePackage.SCHEDULE_MODEL__OWNED_SCHEDULED_REGION, null, msgs);
@@ -250,6 +276,8 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 		switch (featureID) {
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_CLASS_DATUMS:
 				return ((InternalEList<?>)getOwnedClassDatums()).basicRemove(otherEnd, msgs);
+			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_OPERATION_REGIONS:
+				return ((InternalEList<?>)getOwnedOperationRegions()).basicRemove(otherEnd, msgs);
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_OTHER_MAPPING_REGIONS:
 				return ((InternalEList<?>)getOwnedOtherMappingRegions()).basicRemove(otherEnd, msgs);
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_SCHEDULED_REGION:
@@ -271,6 +299,8 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 				return basicGetLoadingRegion();
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_CLASS_DATUMS:
 				return getOwnedClassDatums();
+			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_OPERATION_REGIONS:
+				return getOwnedOperationRegions();
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_OTHER_MAPPING_REGIONS:
 				return getOwnedOtherMappingRegions();
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_SCHEDULED_REGION:
@@ -294,6 +324,10 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_CLASS_DATUMS:
 				getOwnedClassDatums().clear();
 				getOwnedClassDatums().addAll((Collection<? extends ClassDatum>)newValue);
+				return;
+			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_OPERATION_REGIONS:
+				getOwnedOperationRegions().clear();
+				getOwnedOperationRegions().addAll((Collection<? extends OperationRegion>)newValue);
 				return;
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_OTHER_MAPPING_REGIONS:
 				getOwnedOtherMappingRegions().clear();
@@ -320,6 +354,9 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_CLASS_DATUMS:
 				getOwnedClassDatums().clear();
 				return;
+			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_OPERATION_REGIONS:
+				getOwnedOperationRegions().clear();
+				return;
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_OTHER_MAPPING_REGIONS:
 				getOwnedOtherMappingRegions().clear();
 				return;
@@ -342,6 +379,8 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 				return loadingRegion != null;
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_CLASS_DATUMS:
 				return ownedClassDatums != null && !ownedClassDatums.isEmpty();
+			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_OPERATION_REGIONS:
+				return ownedOperationRegions != null && !ownedOperationRegions.isEmpty();
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_OTHER_MAPPING_REGIONS:
 				return ownedOtherMappingRegions != null && !ownedOtherMappingRegions.isEmpty();
 			case QVTschedulePackage.SCHEDULE_MODEL__OWNED_SCHEDULED_REGION:

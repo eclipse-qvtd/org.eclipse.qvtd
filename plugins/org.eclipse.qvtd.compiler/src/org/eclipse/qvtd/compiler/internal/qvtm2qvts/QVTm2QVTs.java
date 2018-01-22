@@ -60,7 +60,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
@@ -174,7 +173,7 @@ public class QVTm2QVTs extends ScheduleManager
 		Map<@NonNull VariableDeclaration, @NonNull Node> parameter2node = new HashMap<>();
 		String operationName = ClassUtil.nonNullState(operationDatum.toString());
 		OperationRegion operationRegion = QVTscheduleFactory.eINSTANCE.createOperationRegion();
-		((OperationRegionImpl)operationRegion).setFixmeScheduleModel(scheduleManager.getScheduleModel());
+		scheduleManager.getScheduleModel().getOwnedOperationRegions().add(operationRegion);
 		operationRegion.setReferredOperation(ClassUtil.nonNullState(operationCallExp.getReferredOperation()));
 		operationRegion.setName(operationName);
 		//

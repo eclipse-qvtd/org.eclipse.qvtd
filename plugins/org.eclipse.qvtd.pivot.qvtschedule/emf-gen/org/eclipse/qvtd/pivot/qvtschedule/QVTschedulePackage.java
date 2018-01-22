@@ -256,7 +256,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRole()
 	 * @generated
 	 */
-	int ROLE = 42;
+	int ROLE = 41;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl <em>Navigable Edge</em>}' class.
@@ -1681,6 +1681,156 @@ public interface QVTschedulePackage extends EPackage {
 	int DEPENDENCY_NODE_OPERATION_COUNT = NODE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.LoadingRegionImpl <em>Loading Region</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.LoadingRegionImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getLoadingRegion()
+	 * @generated
+	 */
+	int LOADING_REGION = 15;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl <em>Named Mapping Region</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNamedMappingRegion()
+	 * @generated
+	 */
+	int NAMED_MAPPING_REGION = 18;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NullNodeImpl <em>Null Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.NullNodeImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNullNode()
+	 * @generated
+	 */
+	int NULL_NODE = 23;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationNodeImpl <em>Operation Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.OperationNodeImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationNode()
+	 * @generated
+	 */
+	int OPERATION_NODE = 24;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PatternTypedNodeImpl <em>Pattern Typed Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.PatternTypedNodeImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPatternTypedNode()
+	 * @generated
+	 */
+	int PATTERN_TYPED_NODE = 26;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PatternVariableNodeImpl <em>Pattern Variable Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.PatternVariableNodeImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPatternVariableNode()
+	 * @generated
+	 */
+	int PATTERN_VARIABLE_NODE = 27;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PredicateEdgeImpl <em>Predicate Edge</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.PredicateEdgeImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPredicateEdge()
+	 * @generated
+	 */
+	int PREDICATE_EDGE = 28;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RecursionEdgeImpl <em>Recursion Edge</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.RecursionEdgeImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRecursionEdge()
+	 * @generated
+	 */
+	int RECURSION_EDGE = 30;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl <em>Rule Region</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRuleRegion()
+	 * @generated
+	 */
+	int RULE_REGION = 32;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl <em>Schedule Model</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getScheduleModel()
+	 * @generated
+	 */
+	int SCHEDULE_MODEL = 33;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl <em>Scheduled Region</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getScheduledRegion()
+	 * @generated
+	 */
+	int SCHEDULED_REGION = 34;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.StatusNodeImpl <em>Status Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.StatusNodeImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getStatusNode()
+	 * @generated
+	 */
+	int STATUS_NODE = 35;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.Symbolable <em>Symbolable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Symbolable
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getSymbolable()
+	 * @generated
+	 */
+	int SYMBOLABLE = 36;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.TrueNodeImpl <em>True Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.TrueNodeImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getTrueNode()
+	 * @generated
+	 */
+	int TRUE_NODE = 37;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.UnknownNodeImpl <em>Unknown Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.UnknownNodeImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getUnknownNode()
+	 * @generated
+	 */
+	int UNKNOWN_NODE = 38;
+
+	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2743,16 +2893,6 @@ public interface QVTschedulePackage extends EPackage {
 	int REGION_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.LoadingRegionImpl <em>Loading Region</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.LoadingRegionImpl
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getLoadingRegion()
-	 * @generated
-	 */
-	int LOADING_REGION = 15;
-
-	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3120,16 +3260,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int MICRO_MAPPING_REGION_OPERATION_COUNT = MAPPING_REGION_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl <em>Named Mapping Region</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNamedMappingRegion()
-	 * @generated
-	 */
-	int NAMED_MAPPING_REGION = 18;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -3564,16 +3694,6 @@ public interface QVTschedulePackage extends EPackage {
 	int NODE_CONNECTION_OPERATION_COUNT = DATUM_CONNECTION_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NullNodeImpl <em>Null Node</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.NullNodeImpl
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNullNode()
-	 * @generated
-	 */
-	int NULL_NODE = 23;
-
-	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3725,16 +3845,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NULL_NODE_OPERATION_COUNT = NODE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationNodeImpl <em>Operation Node</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.OperationNodeImpl
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationNode()
-	 * @generated
-	 */
-	int OPERATION_NODE = 24;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -4007,13 +4117,22 @@ public interface QVTschedulePackage extends EPackage {
 	int OPERATION_REGION__RESULT_NODE = REGION_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Owning Schedule Model</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_REGION__OWNING_SCHEDULE_MODEL = REGION_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Operation Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 5;
+	int OPERATION_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 6;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -4041,16 +4160,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_REGION_OPERATION_COUNT = REGION_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PatternTypedNodeImpl <em>Pattern Typed Node</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.PatternTypedNodeImpl
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPatternTypedNode()
-	 * @generated
-	 */
-	int PATTERN_TYPED_NODE = 26;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -4204,16 +4313,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int PATTERN_TYPED_NODE_OPERATION_COUNT = NODE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PatternVariableNodeImpl <em>Pattern Variable Node</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.PatternVariableNodeImpl
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPatternVariableNode()
-	 * @generated
-	 */
-	int PATTERN_VARIABLE_NODE = 27;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -4376,16 +4475,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int PATTERN_VARIABLE_NODE_OPERATION_COUNT = VARIABLE_NODE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PredicateEdgeImpl <em>Predicate Edge</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.PredicateEdgeImpl
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPredicateEdge()
-	 * @generated
-	 */
-	int PREDICATE_EDGE = 28;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -4640,16 +4729,6 @@ public interface QVTschedulePackage extends EPackage {
 	int PROPERTY_DATUM_OPERATION_COUNT = ABSTRACT_DATUM_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RecursionEdgeImpl <em>Recursion Edge</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.RecursionEdgeImpl
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRecursionEdge()
-	 * @generated
-	 */
-	int RECURSION_EDGE = 30;
-
-	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4774,16 +4853,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int RECURSION_EDGE_OPERATION_COUNT = EDGE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl <em>Rule Region</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRuleRegion()
-	 * @generated
-	 */
-	int RULE_REGION = 32;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -4939,16 +5008,6 @@ public interface QVTschedulePackage extends EPackage {
 	int RULE_REGION_OPERATION_COUNT = MAPPING_REGION_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl <em>Schedule Model</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getScheduleModel()
-	 * @generated
-	 */
-	int SCHEDULE_MODEL = 33;
-
-	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5057,13 +5116,22 @@ public interface QVTschedulePackage extends EPackage {
 	int SCHEDULE_MODEL__OWNED_CLASS_DATUMS = PivotPackage.MODEL_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Owned Operation Regions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_MODEL__OWNED_OPERATION_REGIONS = PivotPackage.MODEL_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Owned Other Mapping Regions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULE_MODEL__OWNED_OTHER_MAPPING_REGIONS = PivotPackage.MODEL_FEATURE_COUNT + 2;
+	int SCHEDULE_MODEL__OWNED_OTHER_MAPPING_REGIONS = PivotPackage.MODEL_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Owned Scheduled Region</b></em>' containment reference.
@@ -5072,7 +5140,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULE_MODEL__OWNED_SCHEDULED_REGION = PivotPackage.MODEL_FEATURE_COUNT + 3;
+	int SCHEDULE_MODEL__OWNED_SCHEDULED_REGION = PivotPackage.MODEL_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Schedule Model</em>' class.
@@ -5081,7 +5149,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULE_MODEL_FEATURE_COUNT = PivotPackage.MODEL_FEATURE_COUNT + 4;
+	int SCHEDULE_MODEL_FEATURE_COUNT = PivotPackage.MODEL_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -5109,16 +5177,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int SCHEDULE_MODEL_OPERATION_COUNT = PivotPackage.MODEL_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl <em>Scheduled Region</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getScheduledRegion()
-	 * @generated
-	 */
-	int SCHEDULED_REGION = 34;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -5265,16 +5323,6 @@ public interface QVTschedulePackage extends EPackage {
 	int SCHEDULED_REGION_OPERATION_COUNT = REGION_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.StatusNodeImpl <em>Status Node</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.StatusNodeImpl
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getStatusNode()
-	 * @generated
-	 */
-	int STATUS_NODE = 35;
-
-	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5419,16 +5467,6 @@ public interface QVTschedulePackage extends EPackage {
 	int STATUS_NODE_OPERATION_COUNT = NODE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.Symbolable <em>Symbolable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.Symbolable
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getSymbolable()
-	 * @generated
-	 */
-	int SYMBOLABLE = 36;
-
-	/**
 	 * The feature id for the '<em><b>Symbol Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5454,16 +5492,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int SYMBOLABLE_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.TrueNodeImpl <em>True Node</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.TrueNodeImpl
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getTrueNode()
-	 * @generated
-	 */
-	int TRUE_NODE = 37;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -5610,16 +5638,6 @@ public interface QVTschedulePackage extends EPackage {
 	int TRUE_NODE_OPERATION_COUNT = NODE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.UnknownNodeImpl <em>Unknown Node</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.UnknownNodeImpl
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getUnknownNode()
-	 * @generated
-	 */
-	int UNKNOWN_NODE = 38;
-
-	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5764,34 +5782,6 @@ public interface QVTschedulePackage extends EPackage {
 	int UNKNOWN_NODE_OPERATION_COUNT = NODE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage <em>Domain Usage</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getDomainUsage()
-	 * @generated
-	 */
-	int DOMAIN_USAGE = 40;
-
-	/**
-	 * The number of structural features of the '<em>Domain Usage</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_USAGE_FEATURE_COUNT = 0;
-
-	/**
-	 * The number of operations of the '<em>Domain Usage</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DOMAIN_USAGE_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole <em>Connection Role</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5799,7 +5789,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getConnectionRole()
 	 * @generated
 	 */
-	int CONNECTION_ROLE = 41;
+	int CONNECTION_ROLE = 40;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum <em>Abstract Datum</em>}'.
@@ -6164,6 +6154,17 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getScheduleModel_OwnedClassDatums();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getOwnedOperationRegions <em>Owned Operation Regions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Operation Regions</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getOwnedOperationRegions()
+	 * @see #getScheduleModel()
+	 * @generated
+	 */
+	EReference getScheduleModel_OwnedOperationRegions();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getOwnedOtherMappingRegions <em>Owned Other Mapping Regions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6310,17 +6311,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getVariableNode_ReferredVariable();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage <em>Domain Usage</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Domain Usage</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage
-	 * @model instanceClass="org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage"
-	 * @generated
-	 */
-	EClass getDomainUsage();
 
 	/**
 	 * Returns the meta object for enum '{@link org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole <em>Connection Role</em>}'.
@@ -6799,6 +6789,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getOperationRegion_ResultNode();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getOwningScheduleModel <em>Owning Schedule Model</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Schedule Model</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getOwningScheduleModel()
+	 * @see #getOperationRegion()
+	 * @generated
+	 */
+	EReference getOperationRegion_OwningScheduleModel();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.PatternTypedNode <em>Pattern Typed Node</em>}'.
@@ -7344,6 +7345,14 @@ public interface QVTschedulePackage extends EPackage {
 		EReference SCHEDULE_MODEL__OWNED_CLASS_DATUMS = eINSTANCE.getScheduleModel_OwnedClassDatums();
 
 		/**
+		 * The meta object literal for the '<em><b>Owned Operation Regions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCHEDULE_MODEL__OWNED_OPERATION_REGIONS = eINSTANCE.getScheduleModel_OwnedOperationRegions();
+
+		/**
 		 * The meta object literal for the '<em><b>Owned Other Mapping Regions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7466,16 +7475,6 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference VARIABLE_NODE__REFERRED_VARIABLE = eINSTANCE.getVariableNode_ReferredVariable();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage <em>Domain Usage</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage
-		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getDomainUsage()
-		 * @generated
-		 */
-		EClass DOMAIN_USAGE = eINSTANCE.getDomainUsage();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole <em>Connection Role</em>}' enum.
@@ -7870,6 +7869,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference OPERATION_REGION__RESULT_NODE = eINSTANCE.getOperationRegion_ResultNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Schedule Model</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION_REGION__OWNING_SCHEDULE_MODEL = eINSTANCE.getOperationRegion_OwningScheduleModel();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PatternTypedNodeImpl <em>Pattern Typed Node</em>}' class.

@@ -25,7 +25,6 @@ import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtschedule.*;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 
 /**
  * <!-- begin-user-doc -->
@@ -508,12 +507,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTschedulePackage.DOMAIN_USAGE: {
-				DomainUsage domainUsage = (DomainUsage)theEObject;
-				T result = caseDomainUsage(domainUsage);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -770,21 +763,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseVariableNode(VariableNode object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Domain Usage</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Domain Usage</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDomainUsage(DomainUsage object) {
 		return null;
 	}
 

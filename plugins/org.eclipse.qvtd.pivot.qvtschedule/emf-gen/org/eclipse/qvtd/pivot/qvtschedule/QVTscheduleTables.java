@@ -113,6 +113,7 @@ public class QVTscheduleTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_MappingRegion = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_MappingRegion);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Node = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_Node);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_NodeConnection = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_NodeConnection);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_OperationRegion = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_OperationRegion);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_PropertyDatum = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_PropertyDatum);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Region = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_Region);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_AbstractDatum = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_AbstractDatum);
@@ -157,7 +158,6 @@ public class QVTscheduleTables
 		public static final @NonNull EcoreExecutorEnumeration _ConnectionRole = new EcoreExecutorEnumeration(QVTschedulePackage.Literals.CONNECTION_ROLE, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _DatumConnection = new EcoreExecutorType(QVTschedulePackage.Literals.DATUM_CONNECTION, PACKAGE, 0 | ExecutorType.ABSTRACT, TypeParameters._DatumConnection_CE);
 		public static final @NonNull EcoreExecutorType _DependencyNode = new EcoreExecutorType(QVTschedulePackage.Literals.DEPENDENCY_NODE, PACKAGE, 0);
-		public static final @NonNull EcoreExecutorType _DomainUsage = new EcoreExecutorType(QVTschedulePackage.Literals.DOMAIN_USAGE, PACKAGE, 0 | ExecutorType.ABSTRACT);
 		public static final @NonNull EcoreExecutorType _Edge = new EcoreExecutorType(QVTschedulePackage.Literals.EDGE, PACKAGE, 0 | ExecutorType.ABSTRACT);
 		public static final @NonNull EcoreExecutorType _EdgeConnection = new EcoreExecutorType(QVTschedulePackage.Literals.EDGE_CONNECTION, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _ErrorNode = new EcoreExecutorType(QVTschedulePackage.Literals.ERROR_NODE, PACKAGE, 0);
@@ -202,7 +202,6 @@ public class QVTscheduleTables
 			_ConnectionRole,
 			_DatumConnection,
 			_DependencyNode,
-			_DomainUsage,
 			_Edge,
 			_EdgeConnection,
 			_ErrorNode,
@@ -328,10 +327,6 @@ public class QVTscheduleTables
 		private static final @NonNull ExecutorFragment _DependencyNode__OclAny = new ExecutorFragment(Types._DependencyNode, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _DependencyNode__OclElement = new ExecutorFragment(Types._DependencyNode, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _DependencyNode__Visitable = new ExecutorFragment(Types._DependencyNode, PivotTables.Types._Visitable);
-
-		private static final @NonNull ExecutorFragment _DomainUsage__DomainUsage = new ExecutorFragment(Types._DomainUsage, QVTscheduleTables.Types._DomainUsage);
-		private static final @NonNull ExecutorFragment _DomainUsage__OclAny = new ExecutorFragment(Types._DomainUsage, OCLstdlibTables.Types._OclAny);
-		private static final @NonNull ExecutorFragment _DomainUsage__OclElement = new ExecutorFragment(Types._DomainUsage, OCLstdlibTables.Types._OclElement);
 
 		private static final @NonNull ExecutorFragment _Edge__Edge = new ExecutorFragment(Types._Edge, QVTscheduleTables.Types._Edge);
 		private static final @NonNull ExecutorFragment _Edge__Element = new ExecutorFragment(Types._Edge, PivotTables.Types._Element);
@@ -769,8 +764,9 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _OperationRegion__dependencyNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_REGION__DEPENDENCY_NODES, Types._OperationRegion, 0);
 		public static final @NonNull ExecutorProperty _OperationRegion__headNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_REGION__HEAD_NODES, Types._OperationRegion, 1);
 		public static final @NonNull ExecutorProperty _OperationRegion__name = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_REGION__NAME, Types._OperationRegion, 2);
-		public static final @NonNull ExecutorProperty _OperationRegion__referredOperation = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_REGION__REFERRED_OPERATION, Types._OperationRegion, 3);
-		public static final @NonNull ExecutorProperty _OperationRegion__resultNode = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_REGION__RESULT_NODE, Types._OperationRegion, 4);
+		public static final @NonNull ExecutorProperty _OperationRegion__owningScheduleModel = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_REGION__OWNING_SCHEDULE_MODEL, Types._OperationRegion, 3);
+		public static final @NonNull ExecutorProperty _OperationRegion__referredOperation = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_REGION__REFERRED_OPERATION, Types._OperationRegion, 4);
+		public static final @NonNull ExecutorProperty _OperationRegion__resultNode = new EcoreExecutorProperty(QVTschedulePackage.Literals.OPERATION_REGION__RESULT_NODE, Types._OperationRegion, 5);
 
 		public static final @NonNull ExecutorProperty _PatternTypedNode__matched = new EcoreExecutorProperty(QVTschedulePackage.Literals.PATTERN_TYPED_NODE__MATCHED, Types._PatternTypedNode, 0);
 
@@ -796,8 +792,9 @@ public class QVTscheduleTables
 
 		public static final @NonNull ExecutorProperty _ScheduleModel__loadingRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__LOADING_REGION, Types._ScheduleModel, 0);
 		public static final @NonNull ExecutorProperty _ScheduleModel__ownedClassDatums = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_CLASS_DATUMS, Types._ScheduleModel, 1);
-		public static final @NonNull ExecutorProperty _ScheduleModel__ownedOtherMappingRegions = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_OTHER_MAPPING_REGIONS, Types._ScheduleModel, 2);
-		public static final @NonNull ExecutorProperty _ScheduleModel__ownedScheduledRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_SCHEDULED_REGION, Types._ScheduleModel, 3);
+		public static final @NonNull ExecutorProperty _ScheduleModel__ownedOperationRegions = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_OPERATION_REGIONS, Types._ScheduleModel, 2);
+		public static final @NonNull ExecutorProperty _ScheduleModel__ownedOtherMappingRegions = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_OTHER_MAPPING_REGIONS, Types._ScheduleModel, 3);
+		public static final @NonNull ExecutorProperty _ScheduleModel__ownedScheduledRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_SCHEDULED_REGION, Types._ScheduleModel, 4);
 
 		public static final @NonNull ExecutorProperty _ScheduledRegion__name = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULED_REGION__NAME, Types._ScheduledRegion, 0);
 		public static final @NonNull ExecutorProperty _ScheduledRegion__ownedConnections = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULED_REGION__OWNED_CONNECTIONS, Types._ScheduledRegion, 1);
@@ -929,14 +926,6 @@ public class QVTscheduleTables
 				Fragments._DependencyNode__DependencyNode /* 5 */
 			};
 		private static final int @NonNull [] __DependencyNode = { 1,1,3,1,1,1 };
-
-		private static final @NonNull ExecutorFragment @NonNull [] _DomainUsage =
-			{
-				Fragments._DomainUsage__OclAny /* 0 */,
-				Fragments._DomainUsage__OclElement /* 1 */,
-				Fragments._DomainUsage__DomainUsage /* 2 */
-			};
-		private static final int @NonNull [] __DomainUsage = { 1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Edge =
 			{
@@ -1371,7 +1360,6 @@ public class QVTscheduleTables
 			Types._ConnectionRole.initFragments(_ConnectionRole, __ConnectionRole);
 			Types._DatumConnection.initFragments(_DatumConnection, __DatumConnection);
 			Types._DependencyNode.initFragments(_DependencyNode, __DependencyNode);
-			Types._DomainUsage.initFragments(_DomainUsage, __DomainUsage);
 			Types._Edge.initFragments(_Edge, __Edge);
 			Types._EdgeConnection.initFragments(_EdgeConnection, __EdgeConnection);
 			Types._ErrorNode.initFragments(_ErrorNode, __ErrorNode);
@@ -1732,34 +1720,6 @@ public class QVTscheduleTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _DependencyNode__Visitable = {};
-
-		private static final @NonNull ExecutorOperation @NonNull [] _DomainUsage__DomainUsage = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _DomainUsage__OclAny = {
-			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
-			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
-			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
-			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
-			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
-			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
-			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
-			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
-			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
-			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
-			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
-			OCLstdlibTables.Operations._OclAny__toString /* toString() */
-		};
-		private static final @NonNull ExecutorOperation @NonNull [] _DomainUsage__OclElement = {
-			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
-			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[?]) */,
-			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
-			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
-			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[?]) */,
-			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
-			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
-		};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _Edge__Edge = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Edge__Element = {
@@ -3010,10 +2970,6 @@ public class QVTscheduleTables
 			Fragments._DependencyNode__OclElement.initOperations(_DependencyNode__OclElement);
 			Fragments._DependencyNode__Visitable.initOperations(_DependencyNode__Visitable);
 
-			Fragments._DomainUsage__DomainUsage.initOperations(_DomainUsage__DomainUsage);
-			Fragments._DomainUsage__OclAny.initOperations(_DomainUsage__OclAny);
-			Fragments._DomainUsage__OclElement.initOperations(_DomainUsage__OclElement);
-
 			Fragments._Edge__Edge.initOperations(_Edge__Edge);
 			Fragments._Edge__Element.initOperations(_Edge__Element);
 			Fragments._Edge__Nameable.initOperations(_Edge__Nameable);
@@ -3390,8 +3346,6 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._Node__owningRegion
 		};
 
-		private static final @NonNull ExecutorProperty @NonNull [] _DomainUsage = {};
-
 		private static final @NonNull ExecutorProperty @NonNull [] _Edge = {
 			QVTscheduleTables.Properties._Edge__edgeRole,
 			QVTscheduleTables.Properties._Edge__name,
@@ -3571,6 +3525,7 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._OperationRegion__name,
 			QVTscheduleTables.Properties._Region__ownedEdges,
 			QVTscheduleTables.Properties._Region__ownedNodes,
+			QVTscheduleTables.Properties._OperationRegion__owningScheduleModel,
 			QVTscheduleTables.Properties._Region__owningScheduledRegion,
 			QVTscheduleTables.Properties._OperationRegion__referredOperation,
 			QVTscheduleTables.Properties._OperationRegion__resultNode,
@@ -3653,6 +3608,7 @@ public class QVTscheduleTables
 		private static final @NonNull ExecutorProperty @NonNull [] _ScheduleModel = {
 			QVTscheduleTables.Properties._ScheduleModel__loadingRegion,
 			QVTscheduleTables.Properties._ScheduleModel__ownedClassDatums,
+			QVTscheduleTables.Properties._ScheduleModel__ownedOperationRegions,
 			QVTscheduleTables.Properties._ScheduleModel__ownedOtherMappingRegions,
 			QVTscheduleTables.Properties._ScheduleModel__ownedScheduledRegion
 		};
@@ -3730,7 +3686,6 @@ public class QVTscheduleTables
 			Fragments._ConnectionRole__ConnectionRole.initProperties(_ConnectionRole);
 			Fragments._DatumConnection__DatumConnection.initProperties(_DatumConnection);
 			Fragments._DependencyNode__DependencyNode.initProperties(_DependencyNode);
-			Fragments._DomainUsage__DomainUsage.initProperties(_DomainUsage);
 			Fragments._Edge__Edge.initProperties(_Edge);
 			Fragments._EdgeConnection__EdgeConnection.initProperties(_EdgeConnection);
 			Fragments._ErrorNode__ErrorNode.initProperties(_ErrorNode);
