@@ -25,9 +25,11 @@ import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.internal.resource.ASResourceFactory;
 import org.eclipse.ocl.pivot.internal.resource.ASSaver;
 import org.eclipse.ocl.pivot.internal.resource.AbstractASResourceFactory;
+import org.eclipse.ocl.pivot.internal.resource.LUSSIDs;
 import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.AS2MonikerVisitor;
 import org.eclipse.ocl.pivot.utilities.AS2XMIidVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverLocateVisitor;
@@ -35,6 +37,7 @@ import org.eclipse.ocl.pivot.utilities.ASSaverNormalizeVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverResolveVisitor;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLUSSIDs;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 
 /**
@@ -108,6 +111,11 @@ public class QVTcoreASResourceFactory extends AbstractASResourceFactory
 	@Override
 	public @NonNull ASSaverResolveVisitor createASSaverResolveVisitor(@NonNull ASSaver asSaver) {
 		return new QVTcoreASSaverResolveVisitor(asSaver);
+	}
+
+	@Override
+	public @NonNull LUSSIDs createLUSSIDs(@NonNull ASResource asResource, @NonNull Map<@NonNull Object, @Nullable Object> options) {
+		return new QVTbaseLUSSIDs(asResource, options);
 	}
 
 	@Override

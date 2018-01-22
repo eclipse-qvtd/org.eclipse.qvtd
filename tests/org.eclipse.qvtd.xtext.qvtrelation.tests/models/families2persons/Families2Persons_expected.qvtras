@@ -106,7 +106,7 @@
           <ownedThen xsi:type="pivot:BooleanLiteralExp" booleanSymbol="true" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs"/>
         </queryExpression>
       </ownedOperations>
-      <rule xsi:type="qvtr:Relation" isTopLevel="true" name="Member2Female">
+      <rule xsi:type="qvtr:Relation" xmi:id="hcUQQ" isTopLevel="true" name="Member2Female">
         <domain xsi:type="qvtr:RelationDomain" isCheckable="true" isEnforceable="false" rootVariable="#8tM8f" typedModel="#z2sgS">
           <pattern>
             <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#8tM8f" type="pivot:Class Families.ecore.oclas#r2YVU"/>
@@ -146,7 +146,7 @@
           </predicate>
         </when>
       </rule>
-      <rule xsi:type="qvtr:Relation" isTopLevel="true" name="Member2Male">
+      <rule xsi:type="qvtr:Relation" xmi:id="ifoLA" isTopLevel="true" name="Member2Male">
         <domain xsi:type="qvtr:RelationDomain" isCheckable="true" isEnforceable="false" rootVariable="#50ALF" typedModel="#z2sgS">
           <pattern>
             <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#50ALF" type="pivot:Class Families.ecore.oclas#r2YVU"/>
