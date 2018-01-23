@@ -20,9 +20,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -67,13 +64,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToCallGraphVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToRegionGraphVisitor;
 
-public abstract class ScheduleManager implements Adapter
+public abstract class ScheduleManager
 {
-	public static @NonNull ScheduleManager zget(@NonNull ScheduleModel scheduleModel) {
-		ScheduleManager adapter = ClassUtil.getAdapter(ScheduleManager.class, scheduleModel);
-		return ClassUtil.nonNullState(adapter);
-	}
-
 	private final @NonNull ScheduleModel scheduleModel;
 	private final @NonNull EnvironmentFactory environmentFactory;
 	private final @NonNull Transformation transformation;
@@ -116,7 +108,6 @@ public abstract class ScheduleManager implements Adapter
 	protected ScheduleManager(@NonNull ScheduleModel scheduleModel, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
 			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
 		this.scheduleModel = scheduleModel;
-		scheduleModel.eAdapters().add(this);
 		this.environmentFactory = environmentFactory;
 		this.transformation = asTransformation;
 		this.schedulerOptions = schedulerOptions;
@@ -411,18 +402,8 @@ public abstract class ScheduleManager implements Adapter
 		return superClassDatums;
 	}
 
-	@Override
-	public Notifier getTarget() {
-		return scheduleModel;
-	}
-
 	public @NonNull Transformation getTransformation() {
 		return transformation;
-	}
-
-	@Override
-	public boolean isAdapterForType(Object type) {
-		return type == ScheduleManager.class;
 	}
 
 	/**
@@ -483,15 +464,9 @@ public abstract class ScheduleManager implements Adapter
 		return !usage.isOutput();
 	}
 
-	@Override
-	public void notifyChanged(Notification notification) {}
-
 	public void setScheduledRegion(@NonNull MappingRegion mappingRegion, @Nullable ScheduledRegion scheduledRegion) {
 		mappingRegion.setScheduledRegion(scheduledRegion);
 	}
-
-	@Override
-	public void setTarget(Notifier newTarget) {}
 
 	public void writeCallDOTfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
 		URI baseURI = getGraphsBaseURI();
