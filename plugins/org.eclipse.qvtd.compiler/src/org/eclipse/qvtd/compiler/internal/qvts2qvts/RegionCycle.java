@@ -19,8 +19,8 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * A RegionCycle identifies a Set or Regions that encompass a cyclic dependency.
@@ -86,7 +86,7 @@ public final class RegionCycle
 			List<@NonNull String> names = new ArrayList<@NonNull String>();
 			Collections.sort(names);
 			for (@NonNull Region region : regions) {
-				names.add(RegionUtil.getName(region));
+				names.add(QVTscheduleUtil.getName(region));
 			}
 			Collections.sort(names);
 			StringBuilder s = null;

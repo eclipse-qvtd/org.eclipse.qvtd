@@ -17,11 +17,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * An EdgeMerger gathers the contributions for an edge in a merged region and supports
@@ -42,7 +42,7 @@ class EdgeMerger
 		mergedSourceNodeMerger = regionMerger.getNodeMerger(oldEdge.getEdgeSource());
 		mergedTargetNodeMerger = regionMerger.getNodeMerger(oldEdge.getEdgeTarget());
 		oldEdges.add(oldEdge);
-		edgeRole = RegionUtil.getEdgeRole(oldEdge);
+		edgeRole = QVTscheduleUtil.getEdgeRole(oldEdge);
 		regionMerger.mapOldEdge(oldEdge, this);
 		mergedSourceNodeMerger.addOutgoingEdgeMerger(this, mergedTargetNodeMerger);
 		mergedTargetNodeMerger.addIncomingEdgeMerger(this, mergedSourceNodeMerger);
@@ -52,7 +52,7 @@ class EdgeMerger
 		assert !oldEdge.isSecondary();
 		assert !oldEdges.contains(oldEdge);
 		oldEdges.add(oldEdge);
-		edgeRole = RegionUtil.mergeToMoreKnownPhase(edgeRole, RegionUtil.getEdgeRole(oldEdge));
+		edgeRole = QVTscheduleUtil.mergeToMoreKnownPhase(edgeRole, QVTscheduleUtil.getEdgeRole(oldEdge));
 		regionMerger.mapOldEdge(oldEdge, this);
 	}
 

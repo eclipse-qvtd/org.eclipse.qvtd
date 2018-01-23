@@ -25,7 +25,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.MappingRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -34,6 +34,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -55,6 +56,8 @@ import com.google.common.collect.Sets;
  */
 public class MappingPartitioner
 {
+	protected final @NonNull ScheduleManager scheduleManager;
+
 	/**
 	 * The overall transformation partitioner providing global analysis results.
 	 */
@@ -167,6 +170,7 @@ public class MappingPartitioner
 
 	public MappingPartitioner(@NonNull TransformationPartitioner transformationPartitioner, @NonNull MappingRegion region) {
 		//		super(getTraceNodes(region.getNodes()), getNavigableEdges(region.getNavigationEdges()));
+		this.scheduleManager = transformationPartitioner.getScheduleManager();
 		this.transformationPartitioner = transformationPartitioner;
 		this.region = region;
 		//
@@ -197,7 +201,7 @@ public class MappingPartitioner
 		assert !corrolaryEdges.contains(edge);
 		corrolaryEdges.add(edge);
 		corrolaryNodes.add(targetNode);
-		transformationPartitioner.addCorrolary(RegionUtil.getProperty(edge), region);
+		transformationPartitioner.addCorrolary(QVTscheduleUtil.getProperty(edge), region);
 	}
 
 	public void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole, @NonNull AbstractPartition partition) {
@@ -249,7 +253,7 @@ public class MappingPartitioner
 	}
 
 	private void analyzeEdges() {
-		for (@NonNull Edge edge : RegionUtil.getOwnedEdges(region)) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
 			if (!edge.isSecondary()) {
 				if (edge.isPredicated()) {
 					predicatedEdges.add(edge);
@@ -269,7 +273,7 @@ public class MappingPartitioner
 								realizedOutputEdges.add(edge);
 							}
 						}
-						if (targetNode.isLoaded() && getScheduleManager().isMiddle(sourceNode)) {
+						if (targetNode.isLoaded() && scheduleManager.isMiddle(sourceNode)) {
 							//							navigableEdges.add(navigationEdge);
 						}
 					}
@@ -282,7 +286,7 @@ public class MappingPartitioner
 						}
 					}
 				}
-				/*				else if (RegionUtil.isRealizedIncludes(edge)) {
+				/*				else if (QVTscheduleUtil.isRealizedIncludes(edge)) {
 					realizedEdges.add(edge);
 					Node sourceNode = edge.getSource();
 					if ((sourceNode != traceNode) && (sourceNode == Role.PREDICATED || sourceNode == Role.REALIZED)) {
@@ -305,7 +309,7 @@ public class MappingPartitioner
 	}
 
 	private void analyzeNodes() {
-		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
 			if (node.isTrue()) {
 				trueNodes.add(node);
 			}
@@ -319,7 +323,7 @@ public class MappingPartitioner
 				else if (node.isLoaded()) {
 					//					hasLoadedNodes  = true;
 				}
-				else if (getScheduleManager().isMiddle(node)) {
+				else if (scheduleManager.isMiddle(node)) {
 					if (node.isPredicated()) {
 						addConsumptionOfMiddleNode(node);
 					}
@@ -364,21 +368,22 @@ public class MappingPartitioner
 
 	private void analyzeStatusNode(@NonNull Node traceNode) {
 		Node statusNode = null;
-		Property statusProperty = RegionUtil.basicGetStatusProperty(getScheduleManager(), traceNode);
+		Property statusProperty = scheduleManager.basicGetStatusProperty(traceNode);
 		if (statusProperty != null) {
 			transformationPartitioner.getSuccessPropertyDatum(statusProperty);
-			statusNode = RegionUtil.createStatusNode(region);
+			RegionHelper regionHelper = new RegionHelper(scheduleManager, region);
+			statusNode = regionHelper.createStatusNode();
 			statusNode.setUtility(Node.Utility.STRONGLY_MATCHED);
 			@SuppressWarnings("unused")
-			NavigableEdge statusEdge = RegionUtil.createNavigationEdge(traceNode, statusProperty, statusNode, false);
+			NavigableEdge statusEdge = regionHelper.createNavigationEdge(traceNode, statusProperty, statusNode, false);
 		}
 		traceNode2statusNode.put(traceNode, statusNode);
 	}
 
 	private void analyzeTraceEdges(@NonNull Node traceNode) {
-		for (@NonNull Edge edge : RegionUtil.getOutgoingEdges(traceNode)) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(traceNode)) {
 			if ((edge.isNavigation() && edge.isRealized())) {
-				Node tracedNode = RegionUtil.getTargetNode(edge);
+				Node tracedNode = QVTscheduleUtil.getTargetNode(edge);
 				node2traceEdge.put(tracedNode, edge);
 			}
 		}
@@ -426,22 +431,22 @@ public class MappingPartitioner
 	//	}
 
 	private void check() {
-		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
 			if ((node.isSpeculated() || node.isRealized()) && !hasRealizedNode(node)) {
-				transformationPartitioner.addProblem(RegionUtil.createRegionError(region, "Should have realized " + node));
+				transformationPartitioner.addProblem(CompilerUtil.createRegionError(region, "Should have realized " + node));
 			}
 		}
 		Set<@NonNull Edge> allPrimaryEdges = new HashSet<>();
-		for (@NonNull Edge edge : RegionUtil.getOwnedEdges(region)) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
 			if (!edge.isSecondary()) {
 				allPrimaryEdges.add(edge);
 				if (edge.isRealized() && !hasRealizedEdge(edge)) {
-					transformationPartitioner.addProblem(RegionUtil.createRegionError(region, "Should have realized " + edge));
+					transformationPartitioner.addProblem(CompilerUtil.createRegionError(region, "Should have realized " + edge));
 				}
 			}
 		}
 		//
-		Set<@NonNull Node> deadNodes = computeDeadNodes(RegionUtil.getOwnedNodes(region));
+		Set<@NonNull Node> deadNodes = computeDeadNodes(QVTscheduleUtil.getOwnedNodes(region));
 		Set<@NonNull Edge> deadEdges = computeDeadEdges(deadNodes);
 		allPrimaryEdges.removeAll(deadEdges);
 		Set<@NonNull Edge> partitionedEdges = new HashSet<>(debugEdge2partitions.keySet());
@@ -449,13 +454,13 @@ public class MappingPartitioner
 			Set<@NonNull Edge> extraEdgesSet = Sets.newHashSet(partitionedEdges);
 			CompilerUtil.removeAll(extraEdgesSet, allPrimaryEdges);
 			for (@NonNull Edge edge : extraEdgesSet) {
-				transformationPartitioner.addProblem(RegionUtil.createRegionWarning(region, "Extra " + edge));
+				transformationPartitioner.addProblem(CompilerUtil.createRegionWarning(region, "Extra " + edge));
 			}
 			Set<@NonNull Edge> missingEdgesSet = Sets.newHashSet(allPrimaryEdges);
 			missingEdgesSet.removeAll(partitionedEdges);
 			for (@NonNull Edge edge : missingEdgesSet) {
 				if (transformationPartitioner.getCorrolaryOf(edge) == null) {// && !isDead(edge)) {
-					transformationPartitioner.addProblem(RegionUtil.createRegionWarning(region, "Missing " + edge));
+					transformationPartitioner.addProblem(CompilerUtil.createRegionWarning(region, "Missing " + edge));
 				}
 			}
 		}
@@ -464,8 +469,8 @@ public class MappingPartitioner
 	private @NonNull Set<@NonNull Edge> computeDeadEdges(@NonNull Iterable<@NonNull Node> deadNodes) {
 		Set<@NonNull Edge> deadEdges = new HashSet<>();
 		for (@NonNull Node node : deadNodes) {
-			Iterables.addAll(deadEdges, RegionUtil.getIncomingEdges(node));
-			Iterables.addAll(deadEdges, RegionUtil.getOutgoingEdges(node));
+			Iterables.addAll(deadEdges, QVTscheduleUtil.getIncomingEdges(node));
+			Iterables.addAll(deadEdges, QVTscheduleUtil.getOutgoingEdges(node));
 		}
 		return deadEdges;
 	}
@@ -489,7 +494,7 @@ public class MappingPartitioner
 			List<@NonNull Node> moreDeadNodesList = new ArrayList<>(moreDeadNodes);
 			moreDeadNodes = null;
 			for (@NonNull Node deadNode : moreDeadNodesList) {
-				for (@NonNull Edge edge : RegionUtil.getIncomingEdges(deadNode)) {
+				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(deadNode)) {
 					Node sourceNode = edge.getEdgeSource();
 					if (!sourceNode.isHead() && isDead(sourceNode, deadNodes)) {
 						if (moreDeadNodes == null) {
@@ -510,7 +515,7 @@ public class MappingPartitioner
 		AssignmentPartition assignmentPartition = new AssignmentPartition(this, outputEdge);
 		MicroMappingRegion microMappingRegion = assignmentPartition.createMicroMappingRegion("«edge" + i + "»", "_p" + i);
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			RegionUtil.getScheduleManager(microMappingRegion).writeDebugGraphs(microMappingRegion, null);
+			scheduleManager.writeDebugGraphs(microMappingRegion, null);
 		}
 		assignmentPartition.check(microMappingRegion);
 		return microMappingRegion;
@@ -520,7 +525,7 @@ public class MappingPartitioner
 		RealizedPartition realizedPartition = new RealizedPartition(this);
 		MicroMappingRegion microMappingRegion = realizedPartition.createMicroMappingRegion("«realized»", "_r0");
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			RegionUtil.getScheduleManager(microMappingRegion).writeDebugGraphs(microMappingRegion, null);
+			scheduleManager.writeDebugGraphs(microMappingRegion, null);
 		}
 		realizedPartition.check(microMappingRegion);
 		return microMappingRegion;
@@ -530,7 +535,7 @@ public class MappingPartitioner
 		SpeculatedPartition speculatedPartition = new SpeculatedPartition(this);
 		MicroMappingRegion microMappingRegion = speculatedPartition.createMicroMappingRegion("«speculated»", "_p2");
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			RegionUtil.getScheduleManager(microMappingRegion).writeDebugGraphs(microMappingRegion, null);
+			scheduleManager.writeDebugGraphs(microMappingRegion, null);
 		}
 		speculatedPartition.check(microMappingRegion);
 		return microMappingRegion;
@@ -540,7 +545,7 @@ public class MappingPartitioner
 		SpeculatingPartition speculatingPartition = new SpeculatingPartition(this);
 		MicroMappingRegion microMappingRegion = speculatingPartition.createMicroMappingRegion("«speculating»", "_p1");
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			RegionUtil.getScheduleManager(microMappingRegion).writeDebugGraphs(microMappingRegion, null);
+			scheduleManager.writeDebugGraphs(microMappingRegion, null);
 		}
 		speculatingPartition.check(microMappingRegion);
 		return microMappingRegion;
@@ -550,7 +555,7 @@ public class MappingPartitioner
 		SpeculationPartition speculationPartition = new SpeculationPartition(this);
 		MicroMappingRegion microMappingRegion = speculationPartition.createMicroMappingRegion("«speculation»", "_p0");
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			RegionUtil.getScheduleManager(microMappingRegion).writeDebugGraphs(microMappingRegion, null);
+			scheduleManager.writeDebugGraphs(microMappingRegion, null);
 		}
 		speculationPartition.check(microMappingRegion);
 		return microMappingRegion;
@@ -621,7 +626,7 @@ public class MappingPartitioner
 	}
 
 	protected @NonNull ScheduleManager getScheduleManager() {
-		return transformationPartitioner.getScheduleManager();
+		return scheduleManager;
 	}
 
 	public @Nullable Node getStatusNode(@NonNull Node traceNode) {
@@ -664,7 +669,7 @@ public class MappingPartitioner
 	}
 
 	private boolean hasNoComputationInputs(@NonNull Node node) {
-		for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 			if (edge.isComputation()) {
 				return false;
 			}
@@ -713,14 +718,14 @@ public class MappingPartitioner
 		if (node.isHead()) {
 			return false;
 		}
-		for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 			if (edge.isNavigation()) {
 				if ((knownDeadNodes == null) || !knownDeadNodes.contains(edge.getEdgeSource())) {
 					return false;
 				}
 			}
 		}
-		for (@NonNull Edge edge : RegionUtil.getOutgoingEdges(node)) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(node)) {
 			if (edge.isNavigation() || edge.isExpression()) {
 				if ((knownDeadNodes == null) || !knownDeadNodes.contains(edge.getEdgeTarget())) {
 					return false;

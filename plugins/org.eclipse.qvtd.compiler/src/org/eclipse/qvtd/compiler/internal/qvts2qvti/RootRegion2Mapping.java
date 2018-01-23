@@ -33,7 +33,6 @@ import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
@@ -47,6 +46,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 {
@@ -86,7 +86,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 			String name = rootConnection.getName();
 			assert name != null;
 			if (regionNode != null) {
-				ClassDatum classDatum = RegionUtil.getClassDatum(regionNode);
+				ClassDatum classDatum = QVTscheduleUtil.getClassDatum(regionNode);
 				AppendParameter allInstancesVariable = classDatum2variable.get(classDatum);
 				if (allInstancesVariable == null) {
 					Type collectionType = classDatum.getCompleteClass().getPrimaryClass();
@@ -157,7 +157,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 
 	protected Type getType(@NonNull IdResolver idResolver, @NonNull NodeConnection rootConnection) {
 		Type commonType = null;
-		for (@NonNull Node node : RegionUtil.getSourceEnds(rootConnection)) {
+		for (@NonNull Node node : QVTscheduleUtil.getSourceEnds(rootConnection)) {
 			Type nodeType = node.getCompleteClass().getPrimaryClass();
 			if (commonType == null) {
 				commonType = nodeType;
@@ -258,7 +258,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 		//	Create domains
 		//
 		Set<@NonNull ImperativeTypedModel> checkableTypedModels = new HashSet<>();
-		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
 			ClassDatum classDatum = node.getClassDatum();
 			org.eclipse.ocl.pivot.Class type = classDatum.getCompleteClass().getPrimaryClass();
 			if (!(type instanceof DataType) && !(type instanceof AnyType) && !(type instanceof VoidType) && !(type instanceof InvalidType)) {

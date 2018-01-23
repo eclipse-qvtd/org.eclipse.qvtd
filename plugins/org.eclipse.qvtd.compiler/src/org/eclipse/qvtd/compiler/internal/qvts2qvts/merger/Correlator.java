@@ -22,8 +22,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -104,7 +104,7 @@ class Correlator
 		this.primaryRegion = primaryRegion;
 		this.secondaryRegion = secondaryRegion;
 		this.strategy = strategy;
-		this.completeClass2primaryNodes = RegionUtil.getCompleteClass2Nodes(primaryRegion);
+		this.completeClass2primaryNodes = QVTscheduleUtil.getCompleteClass2Nodes(primaryRegion);
 		if (primaryNode2secondaryNode != null) {
 			for (Map.Entry<@NonNull Node, @NonNull Node> entry : primaryNode2secondaryNode.entrySet()) {
 				secondaryNode2primaryNode.put(entry.getValue(), entry.getKey());
@@ -281,9 +281,9 @@ class Correlator
 			}
 			for (@NonNull NavigableEdge uncastSecondaryEdge : secondarySourceNode.getNavigationEdges()) {
 				Node uncastSecondaryTargetNode = uncastSecondaryEdge.getEdgeTarget();
-				Iterable<@NonNull Node> secondaryTargetNodes = RegionUtil.getCastTargets(uncastSecondaryTargetNode, true);
+				Iterable<@NonNull Node> secondaryTargetNodes = QVTscheduleUtil.getCastTargets(uncastSecondaryTargetNode, true);
 				if (primarySourceNode != null) {
-					NavigableEdge uncastPrimaryEdge = primarySourceNode.getNavigationEdge(RegionUtil.getProperty(uncastSecondaryEdge));	// Skip isSecondary properties
+					NavigableEdge uncastPrimaryEdge = primarySourceNode.getNavigationEdge(QVTscheduleUtil.getProperty(uncastSecondaryEdge));	// Skip isSecondary properties
 					if (!strategy.navigableEdgesMatch(uncastSecondaryEdge, uncastPrimaryEdge)) {
 						return false;
 					}
@@ -296,7 +296,7 @@ class Correlator
 							return false;
 						}
 						Map<@NonNull CompleteClass, @NonNull Node> completeClass2primaryTargetNodes = new HashMap<>();
-						for (@NonNull Node primaryTargetNode : RegionUtil.getCastTargets(uncastPrimaryTargetNode, true)) {
+						for (@NonNull Node primaryTargetNode : QVTscheduleUtil.getCastTargets(uncastPrimaryTargetNode, true)) {
 							CompleteClass targetCompleteClass = primaryTargetNode.getCompleteClass();
 							Node oldNode = completeClass2primaryTargetNodes.put(targetCompleteClass, primaryTargetNode);
 							if (oldNode != null) {
@@ -406,7 +406,7 @@ class Correlator
 			boolean ok = !mergedNode.isIterator();
 			if (ok) {
 				for (@NonNull NavigableEdge predicateEdge : predicateEdges) {
-					Property property = RegionUtil.getProperty(predicateEdge);
+					Property property = QVTscheduleUtil.getProperty(predicateEdge);
 					Node navigation = mergedNode.getNavigationTarget(property);
 					if (navigation == null) {
 						ok = false;

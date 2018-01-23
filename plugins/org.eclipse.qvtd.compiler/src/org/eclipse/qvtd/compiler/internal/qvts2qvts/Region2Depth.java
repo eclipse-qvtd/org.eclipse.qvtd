@@ -20,12 +20,12 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * Region2Depth provides facilities that use a temporary cache depth of the region passing binding tree.
@@ -119,7 +119,7 @@ public class Region2Depth
 			parentRegions = new ArrayList<>();
 			for (@NonNull DatumConnection<?> parentConnection : childRegion.getIncomingPassedConnections()) {
 				for (@NonNull Node source : parentConnection.getSourceNodes()) {
-					Region sourceRegion = RegionUtil.getOwningRegion(source);
+					Region sourceRegion = QVTscheduleUtil.getOwningRegion(source);
 					ScheduledRegion sourceInvokingRegion = sourceRegion.getContainingScheduledRegion();
 					int sourceInvokingRegionDepth = sourceInvokingRegion != null ? getRegionDepth(sourceInvokingRegion) : 0;
 					Region parentRegion = sourceInvokingRegionDepth < childInvokingRegionDepth ? childInvokingRegion : sourceRegion;

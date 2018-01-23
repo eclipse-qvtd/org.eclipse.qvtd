@@ -34,6 +34,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * ConnectivityChecker is a debug aid providing anslyses and consistency checks of a ScheduleModel.
@@ -85,26 +86,26 @@ public class ConnectivityChecker
 	public ConnectivityChecker(@NonNull ScheduleManager scheduleManager) {
 		this.scheduleManager = scheduleManager;
 		this.scheduleModel = scheduleManager.getScheduleModel();
-		this.scheduledRegion = RegionUtil.getOwnedScheduledRegion(scheduleModel);
+		this.scheduledRegion = QVTscheduleUtil.getOwnedScheduledRegion(scheduleModel);
 	}
 
 	protected @NonNull ClassDatum addClassDatum(@NonNull Node node) {
 		ClassDatum classDatum = getNormalizedClassDatum(node);
-		String name = RegionUtil.getName(classDatum);
+		String name = QVTscheduleUtil.getName(classDatum);
 		ClassDatum oldClassDatum = name2classDatum.put(name, classDatum);
 		assert (oldClassDatum == null) || (oldClassDatum == classDatum);
 		return classDatum;
 	}
 
 	public void analyze() {
-		for (@NonNull ClassDatum classDatum : RegionUtil.getOwnedClassDatums(scheduleModel)) {
+		for (@NonNull ClassDatum classDatum : QVTscheduleUtil.getOwnedClassDatums(scheduleModel)) {
 			analyzeClassDatums(classDatum);
 		}
-		for (@NonNull Connection connection : RegionUtil.getOwnedConnections(scheduledRegion)) {
+		for (@NonNull Connection connection : QVTscheduleUtil.getOwnedConnections(scheduledRegion)) {
 			analyzeConnection(connection);
 		}
-		analyzeRegion(RegionUtil.getOwnedLoadingRegion(scheduledRegion));
-		for (@NonNull Region region : RegionUtil.getMappingRegions(scheduledRegion)) {
+		analyzeRegion(QVTscheduleUtil.getOwnedLoadingRegion(scheduledRegion));
+		for (@NonNull Region region : QVTscheduleUtil.getMappingRegions(scheduledRegion)) {
 			analyzeRegion(region);
 		}
 	}
@@ -136,7 +137,7 @@ public class ConnectivityChecker
 
 	protected void analyzeConnection(@NonNull Connection connection) {
 		DatumConnection<?> datumConnection = (DatumConnection<?>) connection;
-		DatumConnection<?> oldDatumConnection = name2connection.put(RegionUtil.getName(datumConnection), datumConnection);
+		DatumConnection<?> oldDatumConnection = name2connection.put(QVTscheduleUtil.getName(datumConnection), datumConnection);
 		assert oldDatumConnection == null;
 		for (@NonNull Node sourceNode : datumConnection.getSourceNodes()) {
 			ClassDatum classDatum = addClassDatum(sourceNode);
@@ -161,7 +162,7 @@ public class ConnectivityChecker
 	}
 
 	protected void analyzeRegion(@NonNull Region region) {
-		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
 			if (node.isNew()) {
 				ClassDatum classDatum = addClassDatum(node);
 				List<@NonNull Node> nodes = producer2nodes.get(classDatum);
@@ -183,9 +184,9 @@ public class ConnectivityChecker
 				nodes.add(node);
 			}
 		}
-		for (@NonNull Edge edge : RegionUtil.getOwnedEdges(region)) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
 			if (edge.isRealized()) {
-				ClassDatum classDatum = addClassDatum(RegionUtil.getSourceNode(edge));
+				ClassDatum classDatum = addClassDatum(QVTscheduleUtil.getSourceNode(edge));
 				List<@NonNull Edge> edges = producer2edges.get(classDatum);
 				if (edges == null) {
 					edges = new ArrayList<>();
@@ -195,7 +196,7 @@ public class ConnectivityChecker
 				edges.add(edge);
 			}
 			if (edge.isPredicated()) {
-				ClassDatum classDatum = addClassDatum(RegionUtil.getSourceNode(edge));
+				ClassDatum classDatum = addClassDatum(QVTscheduleUtil.getSourceNode(edge));
 				List<@NonNull Edge> edges = consumer2edges.get(classDatum);
 				if (edges == null) {
 					edges = new ArrayList<>();
@@ -244,11 +245,11 @@ public class ConnectivityChecker
 
 	// FIXME this fudges the inconvenience that a ComposedNode has a Collection ClassDatum
 	private @NonNull ClassDatum getNormalizedClassDatum(@NonNull Node node) {
-		ClassDatum classDatum = RegionUtil.getClassDatum(node);
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(node);
 		org.eclipse.ocl.pivot.Class primaryClass = classDatum.getCompleteClass().getPrimaryClass();
 		if (primaryClass instanceof CollectionType) {
 			primaryClass = (org.eclipse.ocl.pivot.Class)PivotUtil.getElementType((CollectionType)primaryClass);
-			classDatum = scheduleManager.getClassDatum(primaryClass, RegionUtil.getReferredTypedModel(classDatum));
+			classDatum = scheduleManager.getClassDatum(primaryClass, QVTscheduleUtil.getReferredTypedModel(classDatum));
 		}
 		return classDatum;
 	}
@@ -450,7 +451,7 @@ public class ConnectivityChecker
 				List<@NonNull String> names2 = new ArrayList<>();
 				for (@NonNull ClassDatum subClassDatum : subClassDatums) {
 					if (subClassDatum != classDatum) {
-						names2.add(RegionUtil.getName(subClassDatum));
+						names2.add(QVTscheduleUtil.getName(subClassDatum));
 					}
 				}
 				Collections.sort(names2);
@@ -476,7 +477,7 @@ public class ConnectivityChecker
 				List<@NonNull String> names2 = new ArrayList<>();
 				for (@NonNull ClassDatum superClassDatum : superClassDatums) {
 					if (superClassDatum != classDatum) {
-						names2.add(RegionUtil.getName(superClassDatum));
+						names2.add(QVTscheduleUtil.getName(superClassDatum));
 					}
 				}
 				Collections.sort(names2);

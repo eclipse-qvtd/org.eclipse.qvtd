@@ -27,7 +27,6 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -35,6 +34,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Sets;
 
@@ -55,13 +55,13 @@ public class EarlyMerger extends AbstractMerger
 
 	protected static class EarlyRegionMerger extends RegionMerger
 	{
-		protected EarlyRegionMerger(@NonNull MappingRegion primaryRegion) {
-			super(primaryRegion);
+		protected EarlyRegionMerger(@NonNull ScheduleManager scheduleManager, @NonNull MappingRegion primaryRegion) {
+			super(scheduleManager, primaryRegion);
 		}
 
 		@Override
 		protected @NonNull MappingRegion createNewRegion(@NonNull String newName) {
-			return new EarlyMergedMappingRegion(RegionUtil.getScheduleManager(primaryRegion), newName);
+			return new EarlyMergedMappingRegion(scheduleManager, newName);
 		}
 	}
 
@@ -78,15 +78,17 @@ public class EarlyMerger extends AbstractMerger
 	 *
 	 * Returns the inputRegions after replacement of merges.
 	 */
-	public static @NonNull List<@NonNull MappingRegion> merge(@NonNull Iterable<@NonNull MappingRegion> inputRegions) {
-		EarlyMerger earlyMerger = new EarlyMerger(inputRegions);
+	public static @NonNull List<@NonNull MappingRegion> merge(@NonNull ScheduleManager scheduleManager, @NonNull Iterable<@NonNull MappingRegion> inputRegions) {
+		EarlyMerger earlyMerger = new EarlyMerger(scheduleManager, inputRegions);
 		return earlyMerger.merge();
 	}
 
+	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull LinkedHashSet<@NonNull MappingRegion> residualInputRegions;
 	protected final @NonNull List<@NonNull MappingRegion> outputRegions = new ArrayList<>();
 
-	protected EarlyMerger(@NonNull Iterable<@NonNull MappingRegion> inputRegions) {
+	protected EarlyMerger(@NonNull ScheduleManager scheduleManager, @NonNull Iterable<@NonNull MappingRegion> inputRegions) {
+		this.scheduleManager = scheduleManager;
 		this.residualInputRegions = Sets.newLinkedHashSet(inputRegions);
 	}
 
@@ -96,7 +98,7 @@ public class EarlyMerger extends AbstractMerger
 	 */
 	protected @NonNull Iterable<@NonNull Node> getHostNodes(@NonNull MappingRegion region) {
 		Set<@NonNull Node> hostNodes = new HashSet<>();
-		for (@NonNull Node node : RegionUtil.getHeadNodes(region)) {
+		for (@NonNull Node node : QVTscheduleUtil.getHeadNodes(region)) {
 			getHostNodesAccumulator(hostNodes, node);
 		}
 		return hostNodes;
@@ -157,12 +159,12 @@ public class EarlyMerger extends AbstractMerger
 	 */
 	protected boolean isSecondaryCandidate(@NonNull Region primaryRegion,
 			@NonNull Region secondaryRegion, @NonNull Set<@NonNull ClassDatum> toOneReachableClasses) {
-		List<@NonNull Node> secondaryHeadNodes = RegionUtil.Internal.getHeadNodesList(secondaryRegion);
+		List<@NonNull Node> secondaryHeadNodes = QVTscheduleUtil.Internal.getHeadNodesList(secondaryRegion);
 		if (secondaryHeadNodes.size() != 1) {
 			return false;
 		}
 		Node classNode = secondaryHeadNodes.get(0);
-		ClassDatum classDatum = RegionUtil.getClassDatum(classNode);
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(classNode);
 		return toOneReachableClasses.contains(classDatum);
 	}
 
@@ -217,7 +219,7 @@ public class EarlyMerger extends AbstractMerger
 			else {
 				outputRegions.add(mergedRegion);
 				if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-					RegionUtil.getScheduleManager(mergedRegion).writeDebugGraphs(mergedRegion, null);
+					scheduleManager.writeDebugGraphs(mergedRegion, null);
 				}
 			}
 			residualInputRegions.remove(candidateRegion);
@@ -245,11 +247,11 @@ public class EarlyMerger extends AbstractMerger
 					if (doMerge) {
 						residualInputRegions.remove(mergedRegion);
 						residualInputRegions.remove(secondaryRegion);
-						RegionMerger regionMerger = new EarlyRegionMerger(primaryRegion);
+						RegionMerger regionMerger = new EarlyRegionMerger(scheduleManager, primaryRegion);
 						regionMerger.addSecondaryRegion(secondaryRegion, secondary2primary.getNode2Node());
 						regionMerger.prune();
 						mergedRegion = regionMerger.create();
-						RegionUtil.getScheduleManager(primaryRegion).addMappingRegion(mergedRegion);
+						scheduleManager.addMappingRegion(mergedRegion);
 						regionMerger.check(mergedRegion);
 						primaryRegion = mergedRegion;
 					}
@@ -269,7 +271,7 @@ public class EarlyMerger extends AbstractMerger
 		//
 		Map<@NonNull ClassDatum, @NonNull Integer> hostClass2count = new HashMap<>();
 		for (@NonNull Node hostNode : getHostNodes(primaryRegion)) {
-			ClassDatum hostClassDatum = RegionUtil.getClassDatum(hostNode);
+			ClassDatum hostClassDatum = QVTscheduleUtil.getClassDatum(hostNode);
 			Integer count = hostClass2count.get(hostClassDatum);
 			hostClass2count.put(hostClassDatum, count != null ? count+1 : 1);
 		}
@@ -280,10 +282,10 @@ public class EarlyMerger extends AbstractMerger
 		for (Map.Entry<@NonNull ClassDatum, @NonNull Integer> entry : hostClass2count.entrySet()) {
 			if (entry.getValue() == 1) {
 				ClassDatum primaryClassDatum = entry.getKey();
-				for (@NonNull MappingRegion secondaryRegion : RegionUtil.getConsumingRegions(primaryClassDatum)) {
+				for (@NonNull MappingRegion secondaryRegion : QVTscheduleUtil.getConsumingRegions(primaryClassDatum)) {
 					if (secondaryRegion != primaryRegion) {
-						for (@NonNull Node secondaryHeadNode : RegionUtil.getHeadNodes(secondaryRegion)) {
-							if (RegionUtil.getClassDatum(secondaryHeadNode) == primaryClassDatum) {
+						for (@NonNull Node secondaryHeadNode : QVTscheduleUtil.getHeadNodes(secondaryRegion)) {
+							if (QVTscheduleUtil.getClassDatum(secondaryHeadNode) == primaryClassDatum) {
 								secondaryRegions.add(secondaryRegion);
 								break;
 							}

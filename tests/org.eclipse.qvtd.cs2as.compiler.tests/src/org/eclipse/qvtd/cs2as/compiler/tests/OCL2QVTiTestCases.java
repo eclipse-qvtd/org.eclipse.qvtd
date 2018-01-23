@@ -36,6 +36,7 @@ import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
@@ -53,9 +54,11 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiIncrementalExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -173,10 +176,10 @@ public class OCL2QVTiTestCases extends LoadTestCase
 					return new QVTm2QVTsCompilerStep(this)
 					{
 						@Override
-						public @NonNull ScheduledRegion execute(@NonNull Resource pResource) throws IOException {
-							ScheduledRegion rootRegion = super.execute(pResource);
-							instrumentRegion(rootRegion);
-							return rootRegion;
+						public @NonNull ScheduleManager execute(@NonNull Resource pResource) throws IOException {
+							ScheduleManager scheduleManager = super.execute(pResource);
+							instrumentRegion(scheduleManager);
+							return scheduleManager;
 						}
 					};
 				}
@@ -189,6 +192,12 @@ public class OCL2QVTiTestCases extends LoadTestCase
 				doSerialize(inputURI, serializedURI);
 			}
 			return qvtiTransf;
+		}
+
+		protected void instrumentRegion(@NonNull ScheduleManager scheduleManager) {
+			ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
+			ScheduledRegion rootRegion = QVTscheduleUtil.getOwnedScheduledRegion(scheduleModel);
+			instrumentRegion(rootRegion);
 		}
 
 		private void instrumentRegion(@NonNull Region parentRegion) {

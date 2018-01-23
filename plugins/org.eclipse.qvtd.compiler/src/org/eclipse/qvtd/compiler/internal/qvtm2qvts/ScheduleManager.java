@@ -42,6 +42,8 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -67,7 +69,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToRegionGraphVisitor;
 
 public abstract class ScheduleManager implements Adapter
 {
-	public static @NonNull ScheduleManager get(@NonNull ScheduleModel scheduleModel) {
+	public static @NonNull ScheduleManager zget(@NonNull ScheduleModel scheduleModel) {
 		ScheduleManager adapter = ClassUtil.getAdapter(ScheduleManager.class, scheduleModel);
 		return ClassUtil.nonNullState(adapter);
 	}
@@ -108,6 +110,8 @@ public abstract class ScheduleManager implements Adapter
 	private /*@LazyNonNull */ OperationDependencyAnalysis operationDependencyAnalysis = null;
 
 	private /*@LazyNonNull*/ List<@NonNull RuleRegion> orderedMappings;	// Only ordered to improve determinacy
+
+	private @NonNull Map<@NonNull Region, @NonNull RegionAnalysis> region2regionAnalysis = new HashMap<>();
 
 	protected ScheduleManager(@NonNull ScheduleModel scheduleModel, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
 			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
@@ -177,6 +181,14 @@ public abstract class ScheduleManager implements Adapter
 			s.append("consumer2producers: " + consumer2producers);
 			QVTm2QVTs.CALL_TREE.println(s.toString());
 		}
+	}
+
+	public @Nullable Property basicGetStatusProperty(@NonNull Node node) {
+		if (!isMiddle(node)) {
+			return null;
+		}
+		CompleteClass completeClass = node.getCompleteClass();
+		return completeClass.getProperty(QVTrNameGenerator.TRACECLASS_STATUS_PROPERTY_NAME);
 	}
 
 	protected @NonNull Property createProperty(@NonNull String name, @NonNull Type type, boolean isRequired) {
@@ -353,6 +365,15 @@ public abstract class ScheduleManager implements Adapter
 		return datumCaches.getPropertyDatum(classDatum, property);
 	}
 
+	public @NonNull RegionAnalysis getRegionAnalysis(@NonNull Region region) {
+		RegionAnalysis regionAnalysis = region2regionAnalysis.get(region);
+		if (regionAnalysis == null) {
+			regionAnalysis = new RegionAnalysis(this, region);
+			region2regionAnalysis.put(region, regionAnalysis);
+		}
+		return regionAnalysis;
+	}
+
 	public @NonNull ScheduleModel getScheduleModel() {
 		return scheduleModel;
 	}
@@ -365,12 +386,18 @@ public abstract class ScheduleManager implements Adapter
 		return standardLibraryHelper;
 	}
 
+	/*	public @NonNull Property getStatusProperty(@NonNull Node node) {
+		assert isMiddle(node);
+		CompleteClass completeClass = node.getCompleteClass();
+		return ClassUtil.nonNullState(completeClass.getProperty(QVTrNameGenerator.TRACECLASS_STATUS_PROPERTY_NAME));
+	} */
+
 	public @NonNull PropertyDatum getSuccessPropertyDatum(@NonNull Property successProperty) {
 		return datumCaches.getSuccessPropertyDatum(successProperty);
 	}
 
 	public @NonNull Iterable<@NonNull ClassDatum> getSuperClassDatums(@NonNull ClassDatum classDatum) {
-		List<@NonNull ClassDatum> superClassDatums = RegionUtil.Internal.getSuperClassDatumsList(classDatum);
+		List<@NonNull ClassDatum> superClassDatums = QVTscheduleUtil.Internal.getSuperClassDatumsList(classDatum);
 		if (superClassDatums.isEmpty()) {
 			DomainUsage domainUsage = getDomainUsage(classDatum);
 			CompleteClass completeClass = classDatum.getCompleteClass();
@@ -410,8 +437,8 @@ public abstract class ScheduleManager implements Adapter
 	 */
 	public boolean isElementallyConformantSource(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
 		Node thatSource = thatEdge.getEdgeSource();
-		CompleteClass thatType = ClassUtil.nonNullState(getElementalClassDatum(RegionUtil.getClassDatum(thatSource)).getCompleteClass());
-		CompleteClass thisType = ClassUtil.nonNullState(getElementalClassDatum(RegionUtil.getClassDatum(thisEdge.getEdgeSource())).getCompleteClass());
+		CompleteClass thatType = ClassUtil.nonNullState(getElementalClassDatum(QVTscheduleUtil.getClassDatum(thatSource)).getCompleteClass());
+		CompleteClass thisType = ClassUtil.nonNullState(getElementalClassDatum(QVTscheduleUtil.getClassDatum(thisEdge.getEdgeSource())).getCompleteClass());
 		if (thatType.conformsTo(thisType)) {
 			return true;
 		}
@@ -428,7 +455,7 @@ public abstract class ScheduleManager implements Adapter
 	 * Return true if node is part of the middle (traced) domain.
 	 */
 	public boolean isMiddle(@NonNull Node node) {
-		return getDomainUsage(RegionUtil.getClassDatum(node)).isMiddle();
+		return getDomainUsage(QVTscheduleUtil.getClassDatum(node)).isMiddle();
 	}
 
 	public boolean isNoEarlyMerge() {
@@ -565,7 +592,7 @@ public abstract class ScheduleManager implements Adapter
 		} catch (IOException e) {
 			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
-		for (@NonNull Region nestedRegion : RegionUtil.getMappingRegions(region)) {
+		for (@NonNull Region nestedRegion : QVTscheduleUtil.getMappingRegions(region)) {
 			if (nestedRegion instanceof ScheduledRegion) {
 				writeRegionDOTfile((@NonNull ScheduledRegion)nestedRegion, suffix);
 			}
@@ -584,7 +611,7 @@ public abstract class ScheduleManager implements Adapter
 		} catch (IOException e) {
 			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 		}
-		for (@NonNull Region nestedRegion : RegionUtil.getMappingRegions(region)) {
+		for (@NonNull Region nestedRegion : QVTscheduleUtil.getMappingRegions(region)) {
 			if (nestedRegion instanceof ScheduledRegion) {
 				writeRegionGraphMLfile((@NonNull ScheduledRegion)nestedRegion, suffix);
 			}

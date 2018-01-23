@@ -19,7 +19,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
@@ -28,6 +28,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * The PartitioningVisitor performs the selective clone of a region, selecting and possibly reclassifying
@@ -35,13 +36,15 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisit
  */
 class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable Element, @Nullable Object>
 {
+	protected final @NonNull RegionHelper regionHelper;
 	protected final @NonNull MicroMappingRegion partialRegion;
 	protected final @NonNull AbstractPartition partition;
 	private final @NonNull Map<@NonNull Node, @NonNull Node> oldNode2partialNode = new HashMap<>();
 
-	protected PartitioningVisitor(@NonNull MicroMappingRegion partialRegion, @NonNull AbstractPartition partition) {
+	protected PartitioningVisitor(@NonNull RegionHelper regionHelper, @NonNull AbstractPartition partition) {
 		super(null);
-		this.partialRegion = partialRegion;
+		this.regionHelper = regionHelper;
+		this.partialRegion = (MicroMappingRegion)regionHelper.getRegion();
 		this.partition = partition;
 	}
 
@@ -110,13 +113,13 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 		//
 		//	Create the nodes.
 		//
-		for (@NonNull Node node : RegionUtil.getOwnedNodes(mappingRegion)) {
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
 			node.accept(this);
 		}
 		//
 		//	Create the edges.
 		//
-		for (@NonNull Edge edge : RegionUtil.getOwnedEdges(mappingRegion)) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(mappingRegion)) {
 			edge.accept(this);
 		}
 		//
@@ -159,11 +162,11 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 			//	An operation result that is cached in the middle trace by a speculation partition
 			//	must be converted to a step node when re-accessed by a speculated partition.
 			//
-			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 				if (edge.isNavigation() && edge.isRealized()) {
 					Role edgeRole = partition.getEdgeRole(edge);
 					if ((edgeRole != null) && edgeRole == Role.PREDICATED) {
-						partialNode = RegionUtil.createPredicatedStepNode(partialRegion, node, node.isMatched());
+						partialNode = regionHelper.createPredicatedStepNode(node, node.isMatched());
 						break;
 					}
 				}

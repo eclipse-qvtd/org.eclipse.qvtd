@@ -28,12 +28,12 @@ import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTcCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.splitter.Splitter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
@@ -75,10 +75,10 @@ public class QVTcCompilerTests extends LoadTestCase
 				return new QVTm2QVTsCompilerStep(this)
 				{
 					@Override
-					public @NonNull ScheduledRegion execute(@NonNull Resource pResource) throws IOException {
-						ScheduledRegion rootRegion = super.execute(pResource);
-						instrumentRegion(rootRegion);
-						return rootRegion;
+					public @NonNull ScheduleManager execute(@NonNull Resource pResource) throws IOException {
+						ScheduleManager scheduleManager = super.execute(pResource);
+						instrumentRegion(scheduleManager);
+						return scheduleManager;
 					}
 				};
 			}

@@ -23,10 +23,10 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
@@ -120,7 +120,7 @@ public class Splitter extends SplitterAnalysis
 		assert targetMutualGroup != null;
 		Iterable<@NonNull Node> reachableNodes = mutualGroup.getReachableNodes();
 		for (@NonNull Node node : reachableNodes) {		// FIXME ?? can only be heads
-			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 				assert edge.getEdgeTarget() == node;
 				if (!edge.isRealized() && edge.isComputation()) {
 					Node sourceNode = edge.getEdgeSource();
@@ -144,7 +144,7 @@ public class Splitter extends SplitterAnalysis
 	}
 
 	protected Iterable<@NonNull SimpleGroup> computeComputableSourceGroups(@NonNull Set<@NonNull SimpleGroup> groups, @NonNull Node targetNode) {
-		for (@NonNull Edge edge : RegionUtil.getIncomingEdges(targetNode)) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
 			if (edge.isComputation()) {
 				Node sourceNode = edge.getEdgeSource();
 				Iterable<@NonNull SimpleGroup> sourceGroups = basicGetReachableSimpleGroups(sourceNode);

@@ -22,10 +22,10 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import com.google.common.collect.Lists;
 
 /**
@@ -121,7 +121,7 @@ public class ReachabilityForest
 				//
 				for (@NonNull Node sourceNode : thisCostNodes) {
 					assert node2cost.get(sourceNode) == thisCost;
-					for (@NonNull Edge edge : RegionUtil.getOutgoingEdges(sourceNode)) {
+					for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
 						Node targetNode = edge.getEdgeTarget();
 						if (!node2reachingEdge.containsKey(targetNode)) {
 							Integer targetCost = node2cost.get(targetNode);
@@ -159,9 +159,9 @@ public class ReachabilityForest
 							else if (edge.isComputation() /*&& edge.isUnconditional()*/) {
 								int nextCost = thisCost + OPERATION_COST;
 								if (targetNode.isOperation()) {
-									for (@NonNull Edge incomingEdge : RegionUtil.getIncomingEdges(targetNode)) {
+									for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
 										if (incomingEdge.isOld() && incomingEdge.isComputation()) {
-											Node node = RegionUtil.getSourceNode(incomingEdge);
+											Node node = QVTscheduleUtil.getSourceNode(incomingEdge);
 											Integer cost = node2cost.get(node);
 											if ((cost == null) || (cost > thisCost)) {
 												nextCost = -1;
@@ -205,10 +205,10 @@ public class ReachabilityForest
 			{
 				@Override
 				public int compare(@NonNull Edge e1, @NonNull Edge e2) {
-					Node s1 = RegionUtil.getSourceNode(e1);
-					Node t1 = RegionUtil.getTargetNode(e1);
-					Node s2 = RegionUtil.getSourceNode(e2);
-					Node t2 = RegionUtil.getTargetNode(e2);
+					Node s1 = QVTscheduleUtil.getSourceNode(e1);
+					Node t1 = QVTscheduleUtil.getTargetNode(e1);
+					Node s2 = QVTscheduleUtil.getSourceNode(e2);
+					Node t2 = QVTscheduleUtil.getTargetNode(e2);
 					Integer d1s = node2cost.get(s1);
 					Integer d1t = node2cost.get(t1);
 					Integer d2s = node2cost.get(s2);
@@ -277,7 +277,7 @@ public class ReachabilityForest
 	private void getPredecessors(@NonNull Set<@NonNull Node> precedingNodes, @NonNull Node targetNode) {
 		if (precedingNodes.add(targetNode)) {
 			if (targetNode.isOperation()) {
-				for (@NonNull Edge edge : RegionUtil.getIncomingEdges(targetNode)) {
+				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
 					//					assert edge.isUnconditional();
 					if (edge.isComputation()) {
 						getPredecessors(precedingNodes, edge.getEdgeSource());

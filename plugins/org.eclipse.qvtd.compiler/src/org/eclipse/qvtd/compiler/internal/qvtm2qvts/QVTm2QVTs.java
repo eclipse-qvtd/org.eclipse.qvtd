@@ -46,6 +46,7 @@ import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -62,6 +63,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
 
@@ -103,12 +105,12 @@ public class QVTm2QVTs extends ScheduleManager
 
 	@Override
 	public void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
-		addProblem(RegionUtil.createRegionError(region, messageTemplate, bindings));
+		addProblem(CompilerUtil.createRegionError(region, messageTemplate, bindings));
 	}
 
 	@Override
 	public void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
-		addProblem(RegionUtil.createRegionWarning(region, messageTemplate, bindings));
+		addProblem(CompilerUtil.createRegionWarning(region, messageTemplate, bindings));
 	}
 
 	public @NonNull OperationRegion analyzeOperation(@NonNull ScheduleManager scheduleManager, @NonNull OperationCallExp operationCallExp) {
@@ -149,22 +151,22 @@ public class QVTm2QVTs extends ScheduleManager
 		return new OperationDatum(this, operationName, classDatums);
 	}
 
-	private @NonNull Node createOperationParameterNode(@NonNull OperationRegion operationRegion, @NonNull Variable variable, @NonNull String name, @NonNull OCLExpression expression) {
+	private @NonNull Node createOperationParameterNode(@NonNull RegionHelper regionHelper, @NonNull Variable variable, @NonNull String name, @NonNull OCLExpression expression) {
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)expression.getType();
 		assert type != null;
 		TypedModel typedModel = getDomainUsage(expression).getTypedModel(expression);
 		assert typedModel != null;
 		ClassDatum classDatum = getClassDatum(type, typedModel);
-		Node parameterNode = RegionUtil.createOperationParameterNode(operationRegion, name, classDatum);
+		Node parameterNode = regionHelper.createOperationParameterNode(name, classDatum);
 		//		addVariableNode(variable, parameterNode);
-		operationRegion.addHeadNode(parameterNode);
+		((OperationRegion)regionHelper.getRegion()).addHeadNode(parameterNode);
 		return parameterNode;
 	}
 
-	private @NonNull Node createOperationParameterNode(@NonNull OperationRegion operationRegion, @NonNull ClassDatum classDatum, @NonNull String name) {
-		Node parameterNode = RegionUtil.createOperationParameterNode(operationRegion, name, classDatum);
+	private @NonNull Node createOperationParameterNode(@NonNull RegionHelper regionHelper, @NonNull ClassDatum classDatum, @NonNull String name) {
+		Node parameterNode = regionHelper.createOperationParameterNode(name, classDatum);
 		//		addVariableNode(variable, parameterNode);
-		operationRegion.addHeadNode(parameterNode);
+		((OperationRegion)regionHelper.getRegion()).addHeadNode(parameterNode);
 		return parameterNode;
 	}
 
@@ -172,29 +174,30 @@ public class QVTm2QVTs extends ScheduleManager
 			@NonNull ExpressionInOCL specification, @NonNull OperationDatum operationDatum) {
 		Map<@NonNull VariableDeclaration, @NonNull Node> parameter2node = new HashMap<>();
 		String operationName = ClassUtil.nonNullState(operationDatum.toString());
-		OperationRegion operationRegion = QVTscheduleFactory.eINSTANCE.createOperationRegion();
+		final OperationRegion operationRegion = QVTscheduleFactory.eINSTANCE.createOperationRegion();
 		scheduleManager.getScheduleModel().getOwnedOperationRegions().add(operationRegion);
 		operationRegion.setReferredOperation(ClassUtil.nonNullState(operationCallExp.getReferredOperation()));
 		operationRegion.setName(operationName);
+		RegionHelper regionHelper = new RegionHelper(scheduleManager, operationRegion);
 		//
 		Variable selfVariable = specification.getOwnedContext();
 		OCLExpression source = operationCallExp.getOwnedSource();
 		assert source != null;
-		Node selfNode = createOperationParameterNode(operationRegion, selfVariable, ClassUtil.nonNullState(selfVariable.getName()), source);
+		Node selfNode = createOperationParameterNode(regionHelper, selfVariable, ClassUtil.nonNullState(selfVariable.getName()), source);
 		parameter2node.put(selfVariable, selfNode);
 		Node dependencyNode;
 		dependencyNode = selfNode;
 		//
-		Node resultNode = RegionUtil.createStepNode("result", operationCallExp, dependencyNode, false);
+		Node resultNode = regionHelper.createStepNode("result", operationCallExp, dependencyNode, false);
 		operationRegion.setResultNode(resultNode);
-		RegionUtil.createExpressionEdge(dependencyNode, QVTscheduleConstants.RETURN_NAME, resultNode);
+		regionHelper.createExpressionEdge(dependencyNode, QVTscheduleConstants.RETURN_NAME, resultNode);
 		//
 		List<Variable> ownedParameters = specification.getOwnedParameters();
 		List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
 		int iSize = Math.min(ownedArguments.size(), ownedParameters.size());
 		for (int i = 0; i < iSize; i++) {
 			Variable parameter = ownedParameters.get(i);
-			Node parameterNode = createOperationParameterNode(operationRegion, parameter, ClassUtil.nonNullState(parameter.getName()), ClassUtil.nonNullState(ownedArguments.get(i)));
+			Node parameterNode = createOperationParameterNode(regionHelper, parameter, ClassUtil.nonNullState(parameter.getName()), ClassUtil.nonNullState(ownedArguments.get(i)));
 			parameter2node.put(parameter, parameterNode);
 		}
 		//
@@ -242,7 +245,7 @@ public class QVTm2QVTs extends ScheduleManager
 							dependencyNode2 = classDatum2node.get(classDatum);
 							if (dependencyNode2 == null) {
 								assert !"OclVoid".equals(stepType.getName());
-								dependencyNode2 = createOperationParameterNode(operationRegion, classDatum, "extra2_" + stepType.getName());
+								dependencyNode2 = createOperationParameterNode(regionHelper, classDatum, "extra2_" + stepType.getName());
 								classDatum2node.put(classDatum, dependencyNode2);
 								operationRegion.addDependencyNode(dependencyNode2);
 							}
@@ -258,31 +261,31 @@ public class QVTm2QVTs extends ScheduleManager
 							//						assert typedModel != null;
 							//						stepType = propertyStep.getType();
 							//						classDatumAnalysis = scheduleModel.getClassDatumAnalysis(stepType, typedModel);
-							//						Node nextNode = RegionUtil.StepNodeRoleFactory.PREDICATED_STEP.createNode(this, "next", classDatumAnalysis);
+							//						Node nextNode = QVTscheduleUtil.StepNodeRoleFactory.PREDICATED_STEP.createNode(this, "next", classDatumAnalysis);
 
 							if (primaryClass instanceof CollectionType) {
 								Property iterateProperty = getIterateProperty(primaryClass);
 								Type elementType = PivotUtil.getElementType((CollectionType)primaryClass);
-								TypedModel typedModel2 = RegionUtil.getTypedModel(classDatum);
+								TypedModel typedModel2 = QVTscheduleUtil.getTypedModel(classDatum);
 								ClassDatum elementClassDatum = getClassDatum((org.eclipse.ocl.pivot.Class) elementType, typedModel2);
-								Node elementNode = RegionUtil.createOperationElementNode(operationRegion, operationName, elementClassDatum, dependencyNode2);
+								Node elementNode = regionHelper.createOperationElementNode(operationName, elementClassDatum, dependencyNode2);
 								//(region, name, typedElement, argNodes)Node(region, name, callExp, sourceNode)Node(this, name, iterateProperty, dependencyNode2);
-								RegionUtil.createNavigationEdge(dependencyNode2, iterateProperty, elementNode, false);
+								regionHelper.createNavigationEdge(dependencyNode2, iterateProperty, elementNode, false);
 								dependencyNode2 = elementNode;
 							}
 							//							assert !dependencyNode2.isMatched();
 							Node nextNode;			// FIXME re-use shared paths
 							if (callExp instanceof NavigationCallExp) {
-								String name = RegionUtil.recoverVariableName(callExp);
+								String name = CompilerUtil.recoverVariableName(callExp);
 								if (name == null) {
 									name = QVTcoreUtil.getName(QVTcoreUtil.getReferredProperty((NavigationCallExp)callExp));
 								}
-								nextNode = RegionUtil.createDataTypeNode(name, dependencyNode2, (NavigationCallExp)callExp);
+								nextNode = regionHelper.createDataTypeNode(name, dependencyNode2, (NavigationCallExp)callExp);
 							}
 							else {
-								nextNode = RegionUtil.createDataTypeNode(dependencyNode2, property);
+								nextNode = regionHelper.createDataTypeNode(dependencyNode2, property);
 							}
-							RegionUtil.createNavigationEdge(dependencyNode2, property, nextNode, false);
+							regionHelper.createNavigationEdge(dependencyNode2, property, nextNode, false);
 							dependencyNode2 = nextNode;
 						}
 					}
@@ -311,7 +314,7 @@ public class QVTm2QVTs extends ScheduleManager
 		//
 		for (@NonNull RuleRegion ruleRegion : orderedRuleRegions) {
 			MappingAnalysis mappingRegion = MappingAnalysis.createMappingRegion(this, ruleRegion);
-			mapping2mappingAnalysis.put(RegionUtil.getReferredRule(ruleRegion), mappingRegion);
+			mapping2mappingAnalysis.put(QVTscheduleUtil.getReferredRule(ruleRegion), mappingRegion);
 		}
 		List<@NonNull MappingAnalysis> mappingAnalyses = new ArrayList<>(mapping2mappingAnalysis.values());
 		Collections.sort(mappingAnalyses, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
@@ -325,14 +328,14 @@ public class QVTm2QVTs extends ScheduleManager
 		}
 		List<@NonNull MappingRegion> orderedRegions = new ArrayList<>();
 		for (@NonNull RuleRegion ruleRegion : orderedRuleRegions) {
-			Rule mapping = RegionUtil.getReferredRule(ruleRegion);
+			Rule mapping = QVTscheduleUtil.getReferredRule(ruleRegion);
 			MappingAnalysis mappingAnalysis = mapping2mappingAnalysis.get(mapping);
 			assert mappingAnalysis != null;
 			orderedRegions.add(mappingAnalysis.getRuleRegion());
 			//			mappingRegion.resolveRecursion();
 		}
 		boolean noEarlyMerge = isNoEarlyMerge();
-		List<@NonNull MappingRegion> activeRegions = new ArrayList<>(noEarlyMerge ? orderedRegions : EarlyMerger.merge(orderedRegions));
+		List<@NonNull MappingRegion> activeRegions = new ArrayList<>(noEarlyMerge ? orderedRegions : EarlyMerger.merge(this, orderedRegions));
 		//		for (@NonNull Region activeRegion : activeRegions) {
 		//			((AbstractRegion)activeRegion).resolveRecursion();
 		//		}

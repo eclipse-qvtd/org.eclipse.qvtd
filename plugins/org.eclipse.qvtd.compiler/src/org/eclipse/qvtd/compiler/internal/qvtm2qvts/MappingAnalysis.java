@@ -25,13 +25,11 @@ import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
@@ -49,31 +47,26 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * A MappingAnalysis provides the analysis a QVTc mapping.
  */
-public class MappingAnalysis implements Nameable
+public class MappingAnalysis extends RuleAnalysis
 {
 	public static @NonNull MappingAnalysis createMappingRegion(@NonNull ScheduleManager scheduleManager, @NonNull RuleRegion ruleRegion) {
-		MappingAnalysis mappingAnalysis = new MappingAnalysis(scheduleManager.getScheduleModel(), ruleRegion);
+		MappingAnalysis mappingAnalysis = new MappingAnalysis(scheduleManager, ruleRegion);
 		@SuppressWarnings("unused")String name = mappingAnalysis.getRuleRegion().getName();
 		mappingAnalysis.initialize();
 		return mappingAnalysis;
 	}
-
-	private final @NonNull RuleRegion ruleRegion;
 
 	/**
 	 * Predicates that are too complex to analyze. i.e. more than a comparison of a bound variable wrt
 	 * a property call chain on another bound variable.
 	 */
 	private final @NonNull Set<@NonNull Predicate> complexPredicates = new HashSet<>();
-
-	private final @NonNull ExpressionAnalyzer expressionAnalyzer;
 
 	/**
 	 * All the guard patterns. (domain and mapping).
@@ -96,15 +89,8 @@ public class MappingAnalysis implements Nameable
 	 */
 	private @NonNull Map<@NonNull VariableDeclaration, @NonNull List<@NonNull OCLExpression>> variable2expressions = new HashMap<>();
 
-	/**
-	 * The dependency heads to accommodate operation content.
-	 */
-	private /*@LazyNonNull*/ List<@NonNull Node> dependencyHeadNodes = null;
-
-	private MappingAnalysis(@NonNull ScheduleModel scheduleModel, @NonNull RuleRegion ruleRegion) {
-		this.ruleRegion = ruleRegion;
-		assert scheduleModel.getOwnedMappingRegions().contains(ruleRegion);
-		this.expressionAnalyzer = new ExpressionAnalyzer(this);
+	private MappingAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull RuleRegion ruleRegion) {
+		super(scheduleManager, ruleRegion);
 		//
 		Mapping mapping = (Mapping)QVTscheduleUtil.getReferredRule(ruleRegion);
 		GuardPattern guardPattern = QVTcoreUtil.getGuardPattern(mapping);
@@ -177,20 +163,20 @@ public class MappingAnalysis implements Nameable
 					Node rightNode = expressionAnalyzer.analyze(rightExpression);
 					if (leftNode != rightNode) {
 						if (leftNode.isKnown() && !(leftExpression instanceof NavigationCallExp)) {
-							RegionUtil.ARGUMENT.createEdge(this, leftNode, "=", rightNode);
+							QVTscheduleUtil.ARGUMENT.createEdge(this, leftNode, "=", rightNode);
 						}
 						else if (rightNode.isKnown() && !(rightExpression instanceof NavigationCallExp)) {
-							RegionUtil.ARGUMENT.createEdge(this, rightNode, "=", leftNode);
+							QVTscheduleUtil.ARGUMENT.createEdge(this, rightNode, "=", leftNode);
 						}
 						else if (leftNode.isKnown()) {
-							RegionUtil.ARGUMENT.createEdge(this, leftNode, "=", rightNode);
+							QVTscheduleUtil.ARGUMENT.createEdge(this, leftNode, "=", rightNode);
 						}
 						else if (rightNode.isKnown()) {
-							RegionUtil.ARGUMENT.createEdge(this, rightNode, "=", leftNode);
+							QVTscheduleUtil.ARGUMENT.createEdge(this, rightNode, "=", leftNode);
 						}
 						else {
-							RegionUtil.BINDING.createEdge(this, leftNode, null, rightNode);			// FIXME
-							RegionUtil.BINDING.createEdge(this, rightNode, null, leftNode);
+							QVTscheduleUtil.BINDING.createEdge(this, leftNode, null, rightNode);			// FIXME
+							QVTscheduleUtil.BINDING.createEdge(this, rightNode, null, leftNode);
 						}
 					}
 				}
@@ -198,8 +184,8 @@ public class MappingAnalysis implements Nameable
 			else { */
 			Node resultNode = conditionExpression.accept(expressionAnalyzer);
 			if ((resultNode != null) && !resultNode.isTrue()) {
-				Node trueNode = RegionUtil.createTrueNode(ruleRegion);
-				RegionUtil.createPredicateEdge(resultNode, null, trueNode);
+				Node trueNode = regionHelper.createTrueNode();
+				regionHelper.createPredicateEdge(resultNode, null, trueNode);
 			}
 			// FIXME ?? do includes() here explicitly
 		}
@@ -230,7 +216,7 @@ public class MappingAnalysis implements Nameable
 			for (@NonNull Variable guardVariable : ClassUtil.nullFree(guardPattern.getVariable())) {
 				Node guardNode = ruleRegion.getNode(guardVariable);
 				assert guardNode == null;
-				guardNode = RegionUtil.createOldNode(ruleRegion, guardVariable);
+				guardNode = regionHelper.createOldNode(guardVariable);
 				assert guardNode == ruleRegion.getNode(guardVariable);
 			}
 		}
@@ -288,7 +274,7 @@ public class MappingAnalysis implements Nameable
 			for (@NonNull RealizedVariable realizedVariable : ClassUtil.nullFree(bottomPattern.getRealizedVariable())) {
 				Node realizedNode = ruleRegion.getNode(realizedVariable);
 				assert realizedNode == null;
-				realizedNode = RegionUtil.createRealizedStepNode(ruleRegion, realizedVariable);
+				realizedNode = regionHelper.createRealizedStepNode(realizedVariable);
 				assert realizedNode == ruleRegion.getNode(realizedVariable);
 			}
 		}
@@ -325,14 +311,14 @@ public class MappingAnalysis implements Nameable
 				//		assert guardVariables.contains(targetVariable);
 				//		assert guardVariables.contains(sourceVariable);
 				Node sourceNode = getReferenceNode(sourceVariable);
-				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : RegionUtil.createNullNode(ruleRegion, true, null);
+				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : regionHelper.createNullNode(true, null);
 				//				assert sourceNode.isGuard();
 				//				assert (boundVariable == null) || targetNode.isGuard();
 				assert sourceNode.isClass();
 				if (!referredProperty.isIsMany()) {
 					Edge predicateEdge = sourceNode.getPredicateEdge(referredProperty);
 					if (predicateEdge == null) {
-						RegionUtil.createNavigationEdge(sourceNode, referredProperty, targetNode, false);
+						regionHelper.createNavigationEdge(sourceNode, referredProperty, targetNode, false);
 					}
 					else {
 						assert predicateEdge.getEdgeTarget() == targetNode;
@@ -369,28 +355,27 @@ public class MappingAnalysis implements Nameable
 		assert bestInitNode != null;
 		/*		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {
 			if (QVTbaseUtil.isIdentification(((OperationCallExp)ownedInit).getReferredOperation())) {
-				Node stepNode = RegionUtil.createRealizedStepNode(mappingRegion, variable);
-				RegionUtil.createEqualsEdge(initNode, stepNode);
+				Node stepNode = QVTscheduleUtil.createRealizedStepNode(mappingRegion, variable);
+				QVTscheduleUtil.createEqualsEdge(initNode, stepNode);
 				initNode = stepNode;
 			}
 			//			else if (variable.getType() instanceof CollectionType) {
-			//				Node stepNode = RegionUtil.ATTRIBUTE.createNode(this, variable, (OperationCallExp)ownedInit);
-			//				RegionUtil.RESULT.createEdge(this, initNode, null, stepNode);
+			//				Node stepNode = QVTscheduleUtil.ATTRIBUTE.createNode(this, variable, (OperationCallExp)ownedInit);
+			//				QVTscheduleUtil.RESULT.createEdge(this, initNode, null, stepNode);
 			//				initNode = stepNode;
 			//			}
 			else {
-				//				Node stepNode = RegionUtil.STEP.createNode(this, variable.getName(), (OperationCallExp)ownedInit, initNode);
-				Node stepNode = RegionUtil.createLoadedStepNode(mappingRegion, variable);
-				RegionUtil.createEqualsEdge(initNode, stepNode);
+				//				Node stepNode = QVTscheduleUtil.STEP.createNode(this, variable.getName(), (OperationCallExp)ownedInit, initNode);
+				Node stepNode = QVTscheduleUtil.createLoadedStepNode(mappingRegion, variable);
+				QVTscheduleUtil.createEqualsEdge(initNode, stepNode);
 				initNode = stepNode;
 			}
 		} */
 		CompleteClass initCompleteClass = bestInitNode.getCompleteClass();
-		ScheduleManager scheduleManager = getScheduleManager();
 		ClassDatum variableClassDatum = scheduleManager.getClassDatum(variable);
-		CompleteClass variableCompleteClass = RegionUtil.getCompleteClass(variableClassDatum);
+		CompleteClass variableCompleteClass = QVTscheduleUtil.getCompleteClass(variableClassDatum);
 		if (!initCompleteClass.conformsTo(variableCompleteClass)) {
-			Node castNode = RegionUtil.createOldNode(ruleRegion, variable);
+			Node castNode = regionHelper.createOldNode(variable);
 			Property castProperty = scheduleManager.getCastProperty(PivotUtil.getType(variable));
 			expressionAnalyzer.createCastEdge(bestInitNode, castProperty, castNode);
 			bestInitNode = castNode;
@@ -402,36 +387,10 @@ public class MappingAnalysis implements Nameable
 				// FIXME if the extra init is a navigation we can add a navigation to the bestInitNode
 				Node initNode = bestInitExpression.accept(expressionAnalyzer);
 				assert initNode != null;
-				RegionUtil.createEqualsEdge(bestInitNode, initNode);
+				regionHelper.createEqualsEdge(bestInitNode, initNode);
 			}
 		}
 		return bestInitNode;
-	}
-
-	public @NonNull Node createDependencyHead(@NonNull ClassDatum classDatum) {
-		if (dependencyHeadNodes == null) {
-			dependencyHeadNodes = new ArrayList<>();
-		}
-		Node dependencyHeadNode = RegionUtil.createDependencyNode(ruleRegion, "«extra-" + (dependencyHeadNodes.size()+1) + "»", classDatum);
-		dependencyHeadNode.setHead();
-		dependencyHeadNodes.add(dependencyHeadNode);
-		return dependencyHeadNode;
-	}
-
-	public @Nullable Node getDependencyHead(@NonNull ClassDatum classDatum) {
-		if (dependencyHeadNodes != null) {
-			for (@NonNull Node dependencyHeadNode : dependencyHeadNodes) {
-				if (RegionUtil.getClassDatum(dependencyHeadNode) == classDatum) {
-					return dependencyHeadNode;
-				}
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public @NonNull String getName() {
-		return RegionUtil.getName(ruleRegion);
 	}
 
 	/**
@@ -449,7 +408,7 @@ public class MappingAnalysis implements Nameable
 		if (conditionExpression instanceof OperationCallExp) {
 			OperationCallExp callExp = (OperationCallExp)conditionExpression;
 			OperationId operationId = callExp.getReferredOperation().getOperationId();
-			if (PivotUtil.isSameOperation(operationId, RegionUtil.getScheduleManager(ruleRegion).getStandardLibraryHelper().getOclAnyEqualsId())) {
+			if (PivotUtil.isSameOperation(operationId, scheduleManager.getStandardLibraryHelper().getOclAnyEqualsId())) {
 				OCLExpression leftExp = callExp.getOwnedSource();
 				if (leftExp instanceof VariableExp) {
 					return leftExp;
@@ -478,7 +437,7 @@ public class MappingAnalysis implements Nameable
 		if (conditionExpression instanceof OperationCallExp) {
 			OperationCallExp callExp = (OperationCallExp)conditionExpression;
 			OperationId operationId = callExp.getReferredOperation().getOperationId();
-			if (PivotUtil.isSameOperation(operationId, RegionUtil.getScheduleManager(ruleRegion).getStandardLibraryHelper().getOclAnyEqualsId())) {
+			if (PivotUtil.isSameOperation(operationId, scheduleManager.getStandardLibraryHelper().getOclAnyEqualsId())) {
 				OCLExpression leftExp = callExp.getOwnedSource();
 				OCLExpression rightExp = callExp.getOwnedArguments().get(0);
 				if (leftExp instanceof VariableExp) {
@@ -499,6 +458,7 @@ public class MappingAnalysis implements Nameable
 		return null;
 	}
 
+	@Override
 	public @NonNull Node getReferenceNode(@NonNull VariableDeclaration variableDeclaration) {
 		Node node = ruleRegion.getNode(variableDeclaration);
 		if (node == null) {
@@ -513,17 +473,17 @@ public class MappingAnalysis implements Nameable
 					node = analyzeVariable(variable, expressions);
 				}
 				else if (variable.eContainer() instanceof BottomPattern) {
-					DomainUsage domainUsage = RegionUtil.getScheduleManager(ruleRegion).getDomainUsage(variable);
+					DomainUsage domainUsage = scheduleManager.getDomainUsage(variable);
 					boolean isEnforceable = domainUsage.isOutput() || domainUsage.isMiddle();
 					if (isEnforceable) {
 						//						assert variable instanceof RealizedVariable;
 						if (!(variable instanceof RealizedVariable)) {
-							getScheduleManager().addRegionError(ruleRegion, "Enforceable variable ''{0}'' has not been realized in ''{1}''", variable, ruleRegion);
+							scheduleManager.addRegionError(ruleRegion, "Enforceable variable ''{0}'' has not been realized in ''{1}''", variable, ruleRegion);
 						}
-						node = RegionUtil.createRealizedStepNode(ruleRegion, variable);
+						node = regionHelper.createRealizedStepNode(variable);
 					}
 					else {
-						node = RegionUtil.createLoadedStepNode(ruleRegion, variable);		// FIXME Predicated ??
+						node = regionHelper.createLoadedStepNode(variable);		// FIXME Predicated ??
 					}
 				}
 			}
@@ -531,32 +491,14 @@ public class MappingAnalysis implements Nameable
 		assert node != null : "No variable2simpleNode entry for " + variableDeclaration;
 		return node;
 		/*		if (variable instanceof RealizedVariable) {
-			return RegionUtil.REALIZED_VARIABLE.createNode(this, (RealizedVariable)variable);
+			return QVTscheduleUtil.REALIZED_VARIABLE.createNode(this, (RealizedVariable)variable);
 		}
 		else if (variable.eContainer() instanceof BottomPattern) {
-			return RegionUtil.UNREALIZED_VARIABLE.createNode(this, variable);
+			return QVTscheduleUtil.UNREALIZED_VARIABLE.createNode(this, variable);
 		}
 		else {
 			return new GuardVariableNode(this, variable);
 		} */
-	}
-
-	public @NonNull RuleRegion getRuleRegion() {
-		return ruleRegion;
-	}
-
-	protected @NonNull ScheduleManager getScheduleManager() {
-		return expressionAnalyzer.scheduleManager;
-	}
-
-	public @NonNull Node getUnknownNode(@NonNull TypedElement typedElement) {
-		assert !(typedElement instanceof Property);		// Property entries should be AttributeNodes
-		Node node = ruleRegion.getNode(typedElement);
-		if (node == null) {
-			node = RegionUtil.createUnknownNode(ruleRegion, ClassUtil.nonNullState(typedElement.getType().toString()), typedElement);
-			//			node2node.put(typedElement, node);
-		}
-		return node;
 	}
 
 	public void initialize() {
@@ -585,6 +527,7 @@ public class MappingAnalysis implements Nameable
 	/**
 	 * Return true if the navigation from sourceNode using source2targetProperty corresponds to a PropertyAssigmment,
 	 */
+	@Override
 	public boolean isPropertyAssignment(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
 		if (sourceNode.isRealized()) {
 			for (@NonNull NavigationAssignment navigationAssignment : navigationAssignments) {
@@ -602,17 +545,12 @@ public class MappingAnalysis implements Nameable
 
 	public void registerConsumptionsAndProductions(@NonNull QVTm2QVTs qvtm2qts) {
 		for (@NonNull Node newNode : ruleRegion.getNewNodes()) {
-			ClassDatum classDatum = RegionUtil.getClassDatum(newNode);
+			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(newNode);
 			classDatum.getProducingRegions().add(ruleRegion);
 		}
 		for (@NonNull Node predicatedNode : ruleRegion.getOldNodes()) {
-			ClassDatum classDatum = RegionUtil.getClassDatum(predicatedNode);
+			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(predicatedNode);
 			classDatum.getConsumingRegions().add(ruleRegion);
 		}
-	}
-
-	@Override
-	public @NonNull String toString() {
-		return getName();
 	}
 }

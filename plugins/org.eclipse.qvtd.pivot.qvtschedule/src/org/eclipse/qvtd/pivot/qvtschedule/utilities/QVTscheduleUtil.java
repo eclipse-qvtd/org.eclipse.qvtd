@@ -13,22 +13,32 @@ package org.eclipse.qvtd.pivot.qvtschedule.utilities;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.BinaryOperator;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.IfExp;
+import org.eclipse.ocl.pivot.LoopExp;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -101,6 +111,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	{
 		public static @NonNull List<@NonNull AbstractDatum> getConsumedDatumsList(@NonNull RuleRegion ruleRegion) {
 			return ClassUtil.nullFree(ruleRegion.getConsumedDatums());
+		}
+
+		public static @NonNull List<@NonNull Node> getHeadNodesList(@NonNull Region region) {
+			return ClassUtil.nullFree(region.getHeadNodes());
 		}
 
 		public static @NonNull List<@NonNull AbstractDatum> getProducedDatumsList(@NonNull RuleRegion ruleRegion) {
@@ -370,6 +384,17 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return firstType.conformsTo(secondType) || firstType.conformsTo(secondType.getBehavioralClass());
 	}
 
+	public static boolean containsNone(@NonNull Iterable<@NonNull Node> firstNodes, @NonNull Iterable<@NonNull Node> secondNodes) {
+		for (@NonNull Node firstNode : firstNodes) {
+			for (@NonNull Node secondNode : secondNodes) {
+				if (firstNode == secondNode) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
 	/**
 	 * Return the edge unless it is subject to a cast chain in which case return the final cast.
 	 */
@@ -485,6 +510,22 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(classDatum.getCompleteClass());
 	}
 
+	public static @NonNull Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> getCompleteClass2Nodes(@NonNull Region region) {
+		Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> completeClass2nodes = new HashMap<>();
+		for (@NonNull Node node : getOwnedNodes(region)) {
+			CompleteClass completeClass = node.getCompleteClass();
+			List<@NonNull Node> mergedNodes = completeClass2nodes.get(completeClass);
+			if (mergedNodes == null) {
+				mergedNodes = new ArrayList<>();
+				completeClass2nodes.put(completeClass, mergedNodes);
+			}
+			if (!mergedNodes.contains(node)) {
+				mergedNodes.add(node);
+			}
+		}
+		return completeClass2nodes;
+	}
+
 	public static @NonNull Iterable<@NonNull RuleRegion> getConsumingRegions(@NonNull AbstractDatum abstractDatum) {
 		return ClassUtil.nullFree(abstractDatum.getConsumingRegions());
 	}
@@ -529,8 +570,56 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(nameable.getName());
 	}
 
+	public static @NonNull String getName(@NonNull ClassDatum classDatum) {
+		return classDatum.getReferredTypedModel().getName() + "!" + classDatum.getCompleteClass().getPrimaryClass().toString();
+	}
+
 	public static @NonNull Role getNodeRole(@NonNull Node node) {
 		return ClassUtil.nonNullState(node.getNodeRole());
+	}
+
+	public static @NonNull Role getOperationNodePhase(@NonNull Region region, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
+		boolean isLoaded = false;
+		boolean isPredicated = false;
+		boolean isRealized = false;
+		if (argNodes != null) {
+			for (Node argNode : argNodes) {
+				if (argNode.isRealized()) {
+					isRealized = true;
+				}
+				else if (argNode.isPredicated()) {
+					isPredicated = true;
+				}
+				else if (argNode.isLoaded()) {
+					isLoaded = true;
+				}
+			}
+		}
+		if (typedElement instanceof OperationCallExp) {
+			Operation asOperation = ((OperationCallExp)typedElement).getReferredOperation();
+			if (QVTbaseUtil.isIdentification(asOperation)) {
+				//				DomainUsage usage = getScheduleManager(region).getDomainUsage(typedElement);
+				//				if (!usage.isInput()) {
+				isRealized = true;
+				//				}
+			}
+		}
+		if (isRealized) {
+			return Role.REALIZED;
+		}
+		else if (isPredicated) {
+			return Role.PREDICATED;
+		}
+		else if (isLoaded) {
+			return Role.LOADED;
+		}
+		else {
+			return Role.CONSTANT;
+		}
+	}
+
+	public static @NonNull NavigableEdge getOppositeEdge(@NonNull NavigableEdge navigableEdge) {
+		return ClassUtil.nonNullState(navigableEdge.getOppositeEdge());
 	}
 
 	public static @NonNull Iterable<@NonNull EdgeConnection> getOutgoingConnections(@NonNull NavigableEdge navigableEdge) {
@@ -577,6 +666,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(scheduleModel.getOwnedOperationRegions());
 	}
 
+	public static @NonNull ScheduledRegion getOwnedScheduledRegion(@NonNull ScheduleModel scheduleModel) {
+		return ClassUtil.nonNullState(scheduleModel.getOwnedScheduledRegion());
+	}
+
 	public static @NonNull Region getOwningRegion(@NonNull ConnectionEnd connectionEnd) {
 		return ClassUtil.nonNullState(connectionEnd.getOwningRegion());
 	}
@@ -587,6 +680,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull ScheduleModel getOwningScheduleModel(@NonNull ScheduledRegion scheduledRegion) {
 		return ClassUtil.nonNullState(scheduledRegion.getOwningScheduleModel());
+	}
+
+	public static @NonNull NavigableEdge getPrimaryEdge(@NonNull NavigableEdge navigableEdge) {
+		return navigableEdge.isSecondary() ? getOppositeEdge(navigableEdge) : navigableEdge;
 	}
 
 	public static @NonNull Iterable<@NonNull RuleRegion> getProducingRegions(@NonNull AbstractDatum abstractDatum) {
@@ -630,6 +727,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(edge.getTargetNode());
 	}
 
+	public static @NonNull TypedModel getTypedModel(@NonNull ClassDatum classDatum) {
+		return ClassUtil.nonNullState(classDatum.getReferredTypedModel());
+	}
+
 	/**
 	 * Return true if the target of thatEdge is compatible with the target of thisEdge.
 	 */
@@ -648,6 +749,64 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 			return true;
 		}
 		return false;
+	}
+
+	public static boolean isMatched(@NonNull TypedElement typedElement) {
+		boolean isMatched = false;
+		Type type = typedElement.getType();
+		if (type instanceof CollectionType) {
+			//			IntegerValue lowerValue = ((CollectionType)type).getLowerValue();
+			//			if (lowerValue.signum() > 0) {
+			isMatched = true;
+			assert typedElement.isIsRequired();
+			//			}
+		}
+		else {
+			isMatched = typedElement.isIsRequired();
+		}
+		if (!isMatched) {
+			return false;
+		}
+		return isUnconditional(typedElement);
+	}
+
+	/*	public static boolean isRealizedIncludes(@NonNull Edge edge) {	// FIXME includes should be a pseudo-navigation edge
+		if (!edge.isRealized()) {
+			return false;
+		}
+		if (!edge.isComputation()) {
+			return false;
+		}
+		return "«includes»".equals(edge.getName()) || "«includesAll»".equals(edge.getName());
+	} */
+
+	public static boolean isUnconditional(@NonNull TypedElement typedElement) {
+		EObject eContainer = typedElement.eContainer();
+		if (eContainer instanceof IfExp) {
+			IfExp ifExp = (IfExp)eContainer;
+			if ((typedElement == ifExp.getOwnedThen()) || (typedElement == ifExp.getOwnedElse())) {
+				return false;
+			}
+		}
+		else if (eContainer instanceof LoopExp) {
+			LoopExp loopExp = (LoopExp)eContainer;
+			if (typedElement == loopExp.getOwnedBody()) {
+				return false;
+			}
+		}
+		if (eContainer instanceof TypedElement) {
+			return isUnconditional((TypedElement) eContainer);
+		}
+		return true;
+	}
+
+	public static boolean isUnconditional(@NonNull Edge edge) {
+		for (@NonNull TypedElement typedElement : edge.getEdgeSource().getTypedElements()) {
+			if (!isUnconditional(typedElement)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public static @NonNull Role mergeToLessKnownPhase(Role firstRole, Role secondRole) {
@@ -716,5 +875,23 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 			return secondRole;
 		}
 		throw new UnsupportedOperationException();
+	}
+
+	public static Node.@NonNull Utility mergeToStrongerUtility(Node.@NonNull Utility nodeUtility1, Node.@NonNull Utility nodeUtility2) {
+		if ((nodeUtility1 == Node.Utility.STRONGLY_MATCHED) || (nodeUtility2 == Node.Utility.STRONGLY_MATCHED)) {
+			return Node.Utility.STRONGLY_MATCHED;
+		}
+		else if ((nodeUtility1 == Node.Utility.WEAKLY_MATCHED) || (nodeUtility2 == Node.Utility.WEAKLY_MATCHED)) {
+			return Node.Utility.WEAKLY_MATCHED;
+		}
+		else if ((nodeUtility1 == Node.Utility.CONDITIONAL) || (nodeUtility2 == Node.Utility.CONDITIONAL)) {
+			return Node.Utility.CONDITIONAL;
+		}
+		else if ((nodeUtility1 == Node.Utility.DEPENDENCY) || (nodeUtility2 == Node.Utility.DEPENDENCY)) {
+			return Node.Utility.DEPENDENCY;
+		}
+		else {
+			return Node.Utility.DEAD;
+		}
 	}
 }

@@ -20,11 +20,12 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import com.google.common.collect.Iterables;
 
 /**
@@ -35,6 +36,8 @@ import com.google.common.collect.Iterables;
  */
 abstract class RegionMerger // implements Region
 {
+	protected final @NonNull ScheduleManager scheduleManager;
+
 	/**
 	 * The primary original region contributing to the merged region.
 	 */
@@ -65,15 +68,16 @@ abstract class RegionMerger // implements Region
 	 */
 	private /*@LazyNonNull*/ Set<@NonNull Edge> debugPrunedEdges = null;
 
-	protected RegionMerger(@NonNull MappingRegion primaryRegion) {
+	protected RegionMerger(@NonNull ScheduleManager scheduleManager, @NonNull MappingRegion primaryRegion) {
+		this.scheduleManager = scheduleManager;
 		this.primaryRegion = primaryRegion;
 		//		assert !(primaryRegion instanceof MicroMappingRegion);
 		//
-		for (@NonNull Node primaryNode : RegionUtil.getOwnedNodes(primaryRegion)) {
+		for (@NonNull Node primaryNode : QVTscheduleUtil.getOwnedNodes(primaryRegion)) {
 			new NodeMerger(this, primaryNode);
 		}
 		//
-		for (@NonNull Edge primaryEdge : RegionUtil.getOwnedEdges(primaryRegion)) {
+		for (@NonNull Edge primaryEdge : QVTscheduleUtil.getOwnedEdges(primaryRegion)) {
 			if (!primaryEdge.isSecondary()) {
 				new EdgeMerger(this, primaryEdge);
 			}
@@ -116,7 +120,7 @@ abstract class RegionMerger // implements Region
 		secondaryRegions.add(secondaryRegion);
 		this.secondaryNode2primaryNode.putAll(secondaryNode2primaryNode);
 		//
-		for (@NonNull Node secondaryNode : RegionUtil.getOwnedNodes(secondaryRegion)) {
+		for (@NonNull Node secondaryNode : QVTscheduleUtil.getOwnedNodes(secondaryRegion)) {
 			Node primaryNode = secondaryNode2primaryNode.get(secondaryNode);
 			if (primaryNode != null) {
 				NodeMerger nodeMerger = oldNode2nodeMerger.get(primaryNode);
@@ -128,7 +132,7 @@ abstract class RegionMerger // implements Region
 			}
 		}
 		//
-		for (@NonNull Edge secondaryEdge : RegionUtil.getOwnedEdges(secondaryRegion)) {
+		for (@NonNull Edge secondaryEdge : QVTscheduleUtil.getOwnedEdges(secondaryRegion)) {
 			if (!secondaryEdge.isSecondary()) {
 				addSecondaryEdge(secondaryEdge);
 			}
@@ -147,7 +151,7 @@ abstract class RegionMerger // implements Region
 	}
 
 	protected void checkEdges(@NonNull MappingRegion newRegion, @NonNull Region oldRegion) {
-		for (@NonNull Edge oldEdge : RegionUtil.getOwnedEdges(oldRegion)) {
+		for (@NonNull Edge oldEdge : QVTscheduleUtil.getOwnedEdges(oldRegion)) {
 			assert oldEdge.getOwningRegion() == oldRegion;
 			if (!oldEdge.isRecursion() && !oldEdge.isSecondary()) {		// FIXME Remove this irregularity
 				EdgeMerger edgeMerger = oldEdge2edgeMerger.get(oldEdge);
@@ -163,7 +167,7 @@ abstract class RegionMerger // implements Region
 	}
 
 	protected void checkNodes(@NonNull MappingRegion newRegion, @NonNull Region oldRegion) {
-		for (@NonNull Node oldNode : RegionUtil.getOwnedNodes(oldRegion)) {
+		for (@NonNull Node oldNode : QVTscheduleUtil.getOwnedNodes(oldRegion)) {
 			assert oldNode.getOwningRegion() == oldRegion;
 			Node nodeMerger = getNodeMerger(oldNode).getNewNode();
 			assert nodeMerger.getOwningRegion() == newRegion;
@@ -175,7 +179,7 @@ abstract class RegionMerger // implements Region
 		MappingRegion newRegion = createNewRegion(newName);
 		createNewNodes(newRegion);
 		createNewEdges();
-		//		mappingRegionAnalysis.initHeadNodes(newRegion);
+		//		MappingRegionAnalysis.initHeadNodes(newRegion);
 		return newRegion;
 	}
 
@@ -250,10 +254,10 @@ abstract class RegionMerger // implements Region
 			sourceNodeMerger.destroy();
 			for (@NonNull Node oldNode : sourceNodeMerger.getOldNodes()) {
 				targetNodeMerger.addOldNode(oldNode);
-				for (@NonNull Edge oldEdge : RegionUtil.getIncomingEdges(oldNode)) {
+				for (@NonNull Edge oldEdge : QVTscheduleUtil.getIncomingEdges(oldNode)) {
 					addSecondaryEdge(oldEdge);
 				}
-				for (@NonNull Edge oldEdge : RegionUtil.getOutgoingEdges(oldNode)) {
+				for (@NonNull Edge oldEdge : QVTscheduleUtil.getOutgoingEdges(oldNode)) {
 					addSecondaryEdge(oldEdge);
 				}
 			}

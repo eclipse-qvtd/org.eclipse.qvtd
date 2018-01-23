@@ -84,7 +84,7 @@ public class ContentsAnalysis
 	}
 
 	private void addNewNode(@NonNull Node newNode) {
-		ClassDatum classDatum = RegionUtil.getClassDatum(newNode);
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(newNode);
 		ClassDatum elementalClassDatum = scheduleManager.getElementalClassDatum(classDatum);
 		for (@NonNull ClassDatum superClassDatum : scheduleManager.getSuperClassDatums(elementalClassDatum)) {
 			List<@NonNull Node> nodes = classDatum2newNodes.get(superClassDatum);
@@ -101,8 +101,8 @@ public class ContentsAnalysis
 		//		Region region = oldNode.getRegion();
 		//		Region invokingRegion = region.getInvokingRegion();
 		//		assert (invokingRegion == this) || (invokingRegion == null);
-		//		ClassDatumAnalysis classDatumAnalysis = RegionUtil.getClassDatumAnalysis(oldNode);
-		ClassDatum classDatum = RegionUtil.getClassDatum(oldNode);
+		//		ClassDatumAnalysis classDatumAnalysis = QVTscheduleUtil.getClassDatumAnalysis(oldNode);
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(oldNode);
 		List<@NonNull Node> nodes = classDatum2oldNodes.get(classDatum);
 		if (nodes == null) {
 			nodes = new ArrayList<>();
@@ -143,7 +143,7 @@ public class ContentsAnalysis
 	private @Nullable PropertyDatum basicGetPropertyDatum(@NonNull NavigableEdge producedEdge) {
 		assert !producedEdge.isCast();				// Handled by caller
 		Property forwardProperty = producedEdge.getProperty();
-		ClassDatum classDatum = RegionUtil.getClassDatum(producedEdge.getEdgeSource());
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(producedEdge.getEdgeSource());
 		ClassDatum forwardClassDatum = scheduleManager.getElementalClassDatum(classDatum);
 		//		PropertyDatum forwardPropertyDatum = getScheduleModel().getPropertyDatum(forwardClassDatum, property);
 		//		if (forwardPropertyDatum.getClassDatum() == forwardClassDatum) {
@@ -175,7 +175,7 @@ public class ContentsAnalysis
 			return bestPropertyDatum;
 		}
 		Property reverseProperty = forwardProperty.getOpposite();
-		classDatum = RegionUtil.getClassDatum(producedEdge.getEdgeTarget());
+		classDatum = QVTscheduleUtil.getClassDatum(producedEdge.getEdgeTarget());
 		ClassDatum reverseClassDatum = scheduleManager.getElementalClassDatum(classDatum);
 		Iterable<@NonNull PropertyDatum> reversePropertyDatums = scheduleManager.getAllPropertyDatums(reverseClassDatum);
 		for (PropertyDatum propertyDatum : reversePropertyDatums) {
@@ -288,12 +288,12 @@ public class ContentsAnalysis
 		if (realizedEdges == null) {
 			return null;
 		}
-		CompleteClass requiredClass = RegionUtil.getCompleteClass(requiredClassDatum);
+		CompleteClass requiredClass = QVTscheduleUtil.getCompleteClass(requiredClassDatum);
 		List<@NonNull NavigableEdge> conformantRealizedEdges = null;
 		for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
 			Node targetNode = realizedEdge.getEdgeTarget();
 			CompleteClass realizedClass = targetNode.getCompleteClass();
-			if (RegionUtil.conformsToClassOrBehavioralClass(realizedClass, requiredClass)) {
+			if (QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedClass, requiredClass)) {
 				if (conformantRealizedEdges == null) {
 					conformantRealizedEdges = new ArrayList<>();
 				}
@@ -317,7 +317,7 @@ public class ContentsAnalysis
 	 */
 	private boolean isOnlyCastOrRecursed(@NonNull Node predicatedNode) {
 		boolean isCast = false;
-		for (Edge outgoingEdge : RegionUtil.getOutgoingEdges(predicatedNode)) {
+		for (Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(predicatedNode)) {
 			if (!outgoingEdge.isCast() && !outgoingEdge.isRecursion()) {
 				return false;
 			}

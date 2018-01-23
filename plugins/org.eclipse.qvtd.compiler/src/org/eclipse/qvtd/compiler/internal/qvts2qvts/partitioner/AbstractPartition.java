@@ -21,7 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.MappingRegionAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -33,12 +33,14 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 abstract class AbstractPartition
 {
+	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull MappingPartitioner partitioner;
 	protected final @NonNull Iterable<@NonNull Edge> alreadyRealizedEdges;
 	protected final @NonNull MappingRegion region;
@@ -66,16 +68,17 @@ abstract class AbstractPartition
 	private final @NonNull ReachabilityForest reachabilityForest;
 
 	protected AbstractPartition(@NonNull MappingPartitioner partitioner) {
+		this.scheduleManager = partitioner.getScheduleManager();
 		this.partitioner = partitioner;
 		this.alreadyRealizedEdges = partitioner.getAlreadyRealizedEdges();
 		this.region = partitioner.getRegion();
-		this.name = RegionUtil.getName(region);
+		this.name = QVTscheduleUtil.getName(region);
 		this.reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
 	}
 
 	private void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole) {
 		assert edge.getOwningRegion() == region;
-		Role oldEdgeRole = RegionUtil.getEdgeRole(edge);
+		Role oldEdgeRole = QVTscheduleUtil.getEdgeRole(edge);
 		switch (oldEdgeRole)
 		{
 			case CONSTANT: {
@@ -110,7 +113,7 @@ abstract class AbstractPartition
 
 	protected void addNode(@NonNull Node node, @NonNull Role newNodeRole) {
 		assert node.getOwningRegion() == region;
-		Role oldNodeRole = RegionUtil.getNodeRole(node);
+		Role oldNodeRole = QVTscheduleUtil.getNodeRole(node);
 		switch (oldNodeRole)
 		{
 			case CONSTANT: {
@@ -168,16 +171,16 @@ abstract class AbstractPartition
 						return false;
 					}
 					if (!requiredNode2nodeRole.containsKey(precedingNode)) {
-						requiredNode2nodeRole.put(precedingNode, RegionUtil.getNodeRole(precedingNode));
+						requiredNode2nodeRole.put(precedingNode, QVTscheduleUtil.getNodeRole(precedingNode));
 						requiredNodes.add(precedingNode);
 					}
 				}
 			}
 		}
 		/*		for (@NonNull Node requiredNode : requiredNodes) {
-			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(requiredNode)) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(requiredNode)) {
 				if (!requiredNode2nodeRole.containsKey(precedingNode)) {
-					requiredNode2nodeRole.put(precedingNode, RegionUtil.getNodeRole(precedingNode));
+					requiredNode2nodeRole.put(precedingNode, QVTscheduleUtil.getNodeRole(precedingNode));
 					requiredNodes.add(precedingNode);
 				}
 			}
@@ -190,29 +193,29 @@ abstract class AbstractPartition
 	 */
 	public void check(@NonNull MicroMappingRegion region) {
 		Set<@NonNull Node> reachableNodes = new HashSet<>();
-		for (@NonNull Node node : RegionUtil.getHeadNodes(region)) {
+		for (@NonNull Node node : QVTscheduleUtil.getHeadNodes(region)) {
 			checkGatherReachables(reachableNodes, node);
 		}
-		Set<@NonNull Node> allNodes = Sets.newHashSet(RegionUtil.getOwnedNodes(region));
+		Set<@NonNull Node> allNodes = Sets.newHashSet(QVTscheduleUtil.getOwnedNodes(region));
 		if (!reachableNodes.equals(allNodes)) {
 			Set<@NonNull Node> extraNodesSet = Sets.newHashSet(reachableNodes);
 			CompilerUtil.removeAll(extraNodesSet, allNodes);
 			for (@NonNull Node node : extraNodesSet) {
-				partitioner.addProblem(RegionUtil.createRegionWarning(region, "unexpected " + node));
+				partitioner.addProblem(CompilerUtil.createRegionWarning(region, "unexpected " + node));
 			}
 			Set<@NonNull Node> missingNodesSet = Sets.newHashSet(allNodes);
 			missingNodesSet.removeAll(reachableNodes);
 			for (@NonNull Node node : missingNodesSet) {
 				if (!node.isConstant() && !node.isUnconditional()) {
 					node.isUnconditional();
-					partitioner.addProblem(RegionUtil.createRegionWarning(region, "unreachable " + node));
+					partitioner.addProblem(CompilerUtil.createRegionWarning(region, "unreachable " + node));
 				}
 			}
 		}
 	}
 	private void checkGatherReachables(@NonNull Set<@NonNull Node> reachableNodes, @NonNull Node node) {
 		if (node instanceof OperationNode) {
-			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 				if (edge.isComputation() && !edge.isConstant()) {
 					if (!reachableNodes.contains(edge.getEdgeSource())) {
 						return;
@@ -221,12 +224,12 @@ abstract class AbstractPartition
 			}
 		}
 		if (reachableNodes.add(node)) {
-			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 				if (/*edge.isComputation() ||*/ edge.isNavigation()) {		// excludes only recursion
 					checkGatherReachables(reachableNodes, edge.getEdgeSource());
 				}
 			}
-			for (@NonNull Edge edge : RegionUtil.getOutgoingEdges(node)) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(node)) {
 				if (edge.isComputation() || edge.isNavigation()) {
 					checkGatherReachables(reachableNodes, edge.getEdgeTarget());
 				}
@@ -253,7 +256,6 @@ abstract class AbstractPartition
 	}
 
 	protected @NonNull MicroMappingRegion createPartialRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
-		ScheduleManager scheduleManager = RegionUtil.getScheduleManager(region);
 		MicroMappingRegion partialRegion = QVTscheduleFactory.eINSTANCE.createMicroMappingRegion();
 		scheduleManager.addMappingRegion(partialRegion);
 		partialRegion.setMappingRegion(region);
@@ -263,7 +265,7 @@ abstract class AbstractPartition
 	}
 
 	protected @NonNull PartitioningVisitor createPartitioningVisitor(@NonNull MicroMappingRegion partialRegion) {
-		return new PartitioningVisitor(partialRegion, this);
+		return new PartitioningVisitor(new RegionHelper(scheduleManager, partialRegion), this);
 	}
 
 	/**
@@ -355,7 +357,7 @@ abstract class AbstractPartition
 	 */
 	protected boolean isCorrolary(@NonNull Node node) {
 		if (node.isPredicated()) {
-			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 				if (edge.isPredicated() && edge.isNavigation()) {
 					List<@NonNull MappingRegion> corrolaryOf = partitioner.getCorrolaryOf(edge);
 					if (corrolaryOf != null) {
@@ -365,7 +367,7 @@ abstract class AbstractPartition
 			}
 		}
 		else if (node.isRealized()) {
-			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 				if (edge.isRealized() && edge.isNavigation()) {
 					List<@NonNull MappingRegion> corrolaryOf = partitioner.getCorrolaryOf(edge);
 					if (corrolaryOf != null) {
@@ -386,7 +388,7 @@ abstract class AbstractPartition
 					Node targetNode = traceNode.getNavigationTarget(property);
 					assert targetNode != null;
 					if (!hasNode(targetNode)) {
-						addNode(targetNode, RegionUtil.getNodeRole(targetNode));
+						addNode(targetNode, QVTscheduleUtil.getNodeRole(targetNode));
 					}
 				}
 			}
@@ -435,7 +437,7 @@ abstract class AbstractPartition
 		//
 		//	Add all the other edges whose redundancy must be checked, unless they have already been checked.
 		//
-		for (@NonNull Edge edge : RegionUtil.getOwnedEdges(region)) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
 			if (!edge.isSecondary() && !hasEdge(edge)) {
 				Role sourceNodeRole = node2nodeRole.get(edge.getEdgeSource());
 				if (sourceNodeRole != null) {
@@ -486,7 +488,7 @@ abstract class AbstractPartition
 			if ((traceEdge == null) || !partitioner.hasRealizedEdge(traceEdge)) {
 				for (@NonNull Node precedingNode : getPredecessors(node)) {
 					if (!hasNode(precedingNode)) {
-						addNode(precedingNode, RegionUtil.getNodeRole(precedingNode));
+						addNode(precedingNode, QVTscheduleUtil.getNodeRole(precedingNode));
 					}
 				}
 			}
@@ -500,7 +502,7 @@ abstract class AbstractPartition
 		for (@NonNull Node node : partitioner.getTrueNodes()) {
 			if (!partitioner.hasTrueNode(node)) {
 				if (allPredecessorsAreAvailable(node)) {
-					addNode(node, RegionUtil.getNodeRole(node));
+					addNode(node, QVTscheduleUtil.getNodeRole(node));
 				}
 			}
 		}

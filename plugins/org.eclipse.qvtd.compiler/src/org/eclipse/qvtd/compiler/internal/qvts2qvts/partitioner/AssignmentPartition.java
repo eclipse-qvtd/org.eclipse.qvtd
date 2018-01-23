@@ -13,7 +13,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -47,7 +47,7 @@ class AssignmentPartition extends AbstractPartition
 		//
 		Node sourceNode = realizedEdge.getEdgeSource();
 		if (!hasNode(sourceNode)) {							// never fails; source node is not a trace node
-			Role sourceNodeRole = RegionUtil.getNodeRole(sourceNode);
+			Role sourceNodeRole = QVTscheduleUtil.getNodeRole(sourceNode);
 			if (sourceNodeRole == Role.REALIZED) {
 				sourceNodeRole = QVTscheduleUtil.asPredicated(sourceNodeRole);
 			}
@@ -55,7 +55,7 @@ class AssignmentPartition extends AbstractPartition
 		}
 		Node targetNode = realizedEdge.getEdgeTarget();
 		if (!hasNode(targetNode)) {							// very unlikely to fail; can a REALIZED edge share source/target
-			Role targetNodeRole = RegionUtil.getNodeRole(targetNode);
+			Role targetNodeRole = QVTscheduleUtil.getNodeRole(targetNode);
 			if (targetNodeRole == Role.REALIZED) {
 				targetNodeRole = QVTscheduleUtil.asPredicated(targetNodeRole);
 			}
@@ -77,11 +77,11 @@ class AssignmentPartition extends AbstractPartition
 
 	@Override
 	protected @NonNull PartitioningVisitor createPartitioningVisitor(@NonNull MicroMappingRegion partialRegion) {
-		return new PartitioningVisitor(partialRegion, this)
+		return new PartitioningVisitor(new RegionHelper(scheduleManager, partialRegion), this)
 		{
 			@Override
 			public @Nullable Element visitStatusNode(@NonNull StatusNode node) {
-				Node partialNode = RegionUtil.createTrueNode(partialRegion);
+				Node partialNode = regionHelper.createTrueNode();
 				addNode(node, partialNode);
 				return partialNode;
 			}
@@ -90,11 +90,11 @@ class AssignmentPartition extends AbstractPartition
 
 	@Override
 	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
-		Role edgeRole = RegionUtil.getEdgeRole(edge);
+		Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
 		if (edgeRole == Role.REALIZED) {
 			AbstractPartition realizingPartition = partitioner.getRealizingPartition(edge);
 			if (realizingPartition instanceof AssignmentPartition) {
-				if (!isCorrolary(RegionUtil.getTargetNode(edge))) {			// FIXME do corrolaries before assigns
+				if (!isCorrolary(QVTscheduleUtil.getTargetNode(edge))) {			// FIXME do corrolaries before assigns
 					return null;
 				}
 			}

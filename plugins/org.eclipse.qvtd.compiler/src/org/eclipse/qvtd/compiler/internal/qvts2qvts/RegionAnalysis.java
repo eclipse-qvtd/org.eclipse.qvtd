@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2017 Willink Transformations and others.
+ * Copyright (c) 2016, 2018 Willink Transformations and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -17,15 +17,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
@@ -36,20 +32,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
-public class RegionAnalysis implements Adapter
+public class RegionAnalysis
 {
-	public static @Nullable RegionAnalysis find(@NonNull Region region) {
-		return ClassUtil.getAdapter(RegionAnalysis.class, region);
-	}
-
-	public static @NonNull RegionAnalysis get(@NonNull Region region) {
-		RegionAnalysis adapter = ClassUtil.getAdapter(RegionAnalysis.class, region);
-		if (adapter == null) {
-			adapter = new RegionAnalysis(region);
-		}
-		return adapter;
-	}
-
+	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull Region region;
 
 	/**
@@ -63,8 +48,8 @@ public class RegionAnalysis implements Adapter
 	 */
 	private @Nullable Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull Set<@NonNull NavigableEdge>>> typedModel2property2enforcedEdges = null;
 
-	public RegionAnalysis(@NonNull Region region) {
-		region.eAdapters().add(this);
+	public RegionAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull Region region) {
+		this.scheduleManager = scheduleManager;
 		this.region = region;
 	}
 
@@ -73,8 +58,8 @@ public class RegionAnalysis implements Adapter
 		assert predicatedEdge.getOwningRegion() == region;
 		Map<@NonNull TypedModel, @NonNull Set<@NonNull NavigableEdge>> typedModel2checkedEdges2 = typedModel2checkedEdges;
 		assert typedModel2checkedEdges2 != null;
-		ClassDatum classDatum = RegionUtil.getClassDatum(predicatedEdge.getEdgeSource());
-		TypedModel typedModel = RegionUtil.getReferredTypedModel(classDatum);
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(predicatedEdge.getEdgeSource());
+		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
 		Set<@NonNull NavigableEdge> checkedEdges = typedModel2checkedEdges2.get(typedModel);
 		if (checkedEdges == null) {
 			checkedEdges = new HashSet<>();
@@ -90,14 +75,14 @@ public class RegionAnalysis implements Adapter
 		assert realizedEdge.getOwningRegion() == region;
 		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull Set<@NonNull NavigableEdge>>> typedModel2property2enforcedEdges2 = typedModel2property2enforcedEdges;
 		assert typedModel2property2enforcedEdges2 != null;
-		ClassDatum classDatum = RegionUtil.getClassDatum(realizedEdge.getEdgeSource());
-		TypedModel typedModel = RegionUtil.getReferredTypedModel(classDatum);
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(realizedEdge.getEdgeSource());
+		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
 		Map<@NonNull Property, @NonNull Set<@NonNull NavigableEdge>> property2enforcedEdges2 = typedModel2property2enforcedEdges2.get(typedModel);
 		if (property2enforcedEdges2 == null) {
 			property2enforcedEdges2 = new HashMap<>();
 			typedModel2property2enforcedEdges2.put(typedModel, property2enforcedEdges2);
 		}
-		Property asProperty = RegionUtil.getProperty(realizedEdge);
+		Property asProperty = QVTscheduleUtil.getProperty(realizedEdge);
 		Set<@NonNull NavigableEdge> enforcedEdges = property2enforcedEdges2.get(asProperty);
 		if (enforcedEdges == null) {
 			enforcedEdges = new HashSet<>();
@@ -126,8 +111,8 @@ public class RegionAnalysis implements Adapter
 			if (!predicatedEdge.isCast()) {
 				Property property = QVTscheduleUtil.getProperty(predicatedEdge);
 				Node predicatedNode = predicatedEdge.getEdgeSource();
-				ClassDatum classDatum = RegionUtil.getClassDatum(predicatedNode);
-				TypedModel typedModel = RegionUtil.getReferredTypedModel(classDatum);
+				ClassDatum classDatum = QVTscheduleUtil.getClassDatum(predicatedNode);
+				TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
 				Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> property2predicatedEdges = typedModel2property2predicatedEdges.get(typedModel);
 				if (property2predicatedEdges == null) {
 					property2predicatedEdges = new HashMap<>();
@@ -148,8 +133,8 @@ public class RegionAnalysis implements Adapter
 		for (@NonNull NavigableEdge realizedEdge : region.getRealizedNavigationEdges()) {
 			Property property = QVTscheduleUtil.getProperty(realizedEdge);
 			Node realizedNode = realizedEdge.getEdgeSource();
-			ClassDatum classDatum = RegionUtil.getClassDatum(realizedNode);
-			TypedModel typedModel = RegionUtil.getReferredTypedModel(classDatum);
+			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(realizedNode);
+			TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
 			Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> property2realizedEdges = typedModel2property2realizedEdges.get(typedModel);
 			if (property2realizedEdges == null) {
 				property2realizedEdges = new HashMap<>();
@@ -167,7 +152,6 @@ public class RegionAnalysis implements Adapter
 
 	public void computeCheckedOrEnforcedEdges(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges,
 			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges) {
-		//		CompleteModel completeModel = getScheduleModel().getEnvironmentFactory().getCompleteModel();
 		boolean doDebug = QVTscheduleConstants.POLLED_PROPERTIES.isActive();
 		if (doDebug) {
 			QVTscheduleConstants.POLLED_PROPERTIES.println("analyzing " + region + " (" + region.getIndexRangeText() + ")");
@@ -183,7 +167,7 @@ public class RegionAnalysis implements Adapter
 					boolean isChecked = false;
 					for (@NonNull NavigableEdge usedEdge : QVTscheduleUtil.getSourceEnds(edgeConnection)) {
 						Region usedRegion = QVTscheduleUtil.getOwningRegion(usedEdge);
-						get(usedRegion).addEnforcedEdge(usedEdge);
+						scheduleManager.getRegionAnalysis(usedRegion).addEnforcedEdge(usedEdge);
 						if (usedRegion.getFinalExecutionIndex() >= region.getInvocationIndex()) {
 							addCheckedEdge(predicatedEdge);
 							isChecked = true;
@@ -192,7 +176,7 @@ public class RegionAnalysis implements Adapter
 					if (isChecked) {
 						for (@NonNull NavigableEdge usedEdge : QVTscheduleUtil.getSourceEnds(edgeConnection)) {
 							Region usedRegion = QVTscheduleUtil.getOwningRegion(usedEdge);
-							get(usedRegion).addEnforcedEdge(usedEdge);
+							scheduleManager.getRegionAnalysis(usedRegion).addEnforcedEdge(usedEdge);
 						}
 					}
 				}
@@ -211,7 +195,7 @@ public class RegionAnalysis implements Adapter
 							TypedModel typedModel = classDatum.getReferredTypedModel();
 							Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> property2realizedEdges = typedModel2property2realizedEdges.get(typedModel);
 							assert property2realizedEdges != null;
-							Property oclContainerProperty = RegionUtil.getScheduleManager(region).getStandardLibraryHelper().getOclContainerProperty();
+							Property oclContainerProperty = scheduleManager.getStandardLibraryHelper().getOclContainerProperty();
 							if (property == oclContainerProperty) {
 								//								Node containerNode = predicatedEdge.getTarget();
 								//								Node containedNode = predicatedEdge.getSource();
@@ -251,7 +235,7 @@ public class RegionAnalysis implements Adapter
 											//											}
 											//												if (isNotHazardous == null) {
 											addCheckedEdge(predicatedEdge);
-											get(earlierRegion).addEnforcedEdge(realizedEdge);
+											scheduleManager.getRegionAnalysis(earlierRegion).addEnforcedEdge(realizedEdge);
 											//												}
 											//												else if (doDebug) {
 											//													QVTs2QVTiVisitor.POLLED_PROPERTIES.println("    ignored " + region + "::" + laterNode.getName() + "(" + getEarliestIndex() + ".." + getLatestIndex() + ")" +
@@ -281,7 +265,7 @@ public class RegionAnalysis implements Adapter
 											checkIsHazardFreeBecause = "incompatible-source";
 											enforceIsHazardFreeBecause = "incompatible-source";
 										}
-										else if (!RegionUtil.conformsToClassOrBehavioralClass(realizedTargetType, predicatedTargetType)) {
+										else if (!QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedTargetType, predicatedTargetType)) {
 											checkIsHazardFreeBecause = "incompatible-target";
 											enforceIsHazardFreeBecause = "incompatible-target";
 										}
@@ -306,7 +290,7 @@ public class RegionAnalysis implements Adapter
 													" " + checkIsHazardFreeBecause + " (" + earlierRegion.getIndexRangeText() + ")" + earlierRegion + "::" + realizedEdge.getEdgeSource().getName());
 										}
 										if (enforceIsHazardFreeBecause == null) {
-											get(earlierRegion).addEnforcedEdge(realizedEdge);
+											scheduleManager.getRegionAnalysis(earlierRegion).addEnforcedEdge(realizedEdge);
 										}
 										else if (doDebug) {
 											QVTscheduleConstants.POLLED_PROPERTIES.println("    ignored enforce " + region + "::" + laterNode.getName() + "(" + region.getIndexRangeText() + ")" +
@@ -336,22 +320,6 @@ public class RegionAnalysis implements Adapter
 		}
 		return null;
 	}
-
-	@Override
-	public Notifier getTarget() {
-		return region;
-	}
-
-	@Override
-	public boolean isAdapterForType(Object type) {
-		return type == RegionAnalysis.class;
-	}
-
-	@Override
-	public void notifyChanged(Notification notification) {}
-
-	@Override
-	public void setTarget(Notifier newTarget) {}
 
 	@Override
 	public String toString() {

@@ -12,11 +12,11 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
 
@@ -39,7 +39,7 @@ class RealizedPartition extends AbstractPartition
 		//
 		for (@NonNull Node node : partitioner.getTraceNodes()) {
 			if (!hasNode(node)) {
-				addNode(node, RegionUtil.getNodeRole(node));
+				addNode(node, QVTscheduleUtil.getNodeRole(node));
 			}
 		}
 		//
@@ -47,7 +47,7 @@ class RealizedPartition extends AbstractPartition
 		//
 		for (@NonNull Node node : partitioner.getRealizedOutputNodes()) {
 			if (!hasNode(node)) {
-				addNode(node, RegionUtil.getNodeRole(node));
+				addNode(node, QVTscheduleUtil.getNodeRole(node));
 			}
 		}
 		//
@@ -74,10 +74,10 @@ class RealizedPartition extends AbstractPartition
 				Node sourceNode = edge.getEdgeSource();
 				Node targetNode = edge.getEdgeTarget();
 				if (!hasNode(sourceNode)) {
-					addNode(sourceNode, RegionUtil.getNodeRole(sourceNode));
+					addNode(sourceNode, QVTscheduleUtil.getNodeRole(sourceNode));
 				}
 				if (!hasNode(targetNode)) {
-					addNode(targetNode, RegionUtil.getNodeRole(targetNode));
+					addNode(targetNode, QVTscheduleUtil.getNodeRole(targetNode));
 				}
 			}
 		}
@@ -94,7 +94,7 @@ class RealizedPartition extends AbstractPartition
 
 	@Override
 	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
-		Role edgeRole = RegionUtil.getEdgeRole(edge);
+		Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
 		if (edgeRole == Role.REALIZED) {
 			assert !partitioner.hasRealizedEdge(edge);
 		}

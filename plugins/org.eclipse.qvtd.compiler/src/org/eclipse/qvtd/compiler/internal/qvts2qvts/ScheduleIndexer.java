@@ -17,7 +17,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
@@ -39,8 +39,11 @@ import com.google.common.collect.Lists;
  */
 public class ScheduleIndexer extends ScheduleState
 {
-	public ScheduleIndexer(@NonNull ScheduledRegion rootScheduledRegion) {
+	protected final @NonNull ScheduleManager scheduleManager;
+
+	public ScheduleIndexer(@NonNull ScheduleManager scheduleManager, @NonNull ScheduledRegion rootScheduledRegion) {
 		super(rootScheduledRegion);
+		this.scheduleManager = scheduleManager;
 	}
 
 	@Override
@@ -54,7 +57,7 @@ public class ScheduleIndexer extends ScheduleState
 			scheduleRegion(selectedRegion);
 		}
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			RegionUtil.getScheduleManager(scheduledRegion).writeDebugGraphs(scheduledRegion, "6-indexed", false, true, true);
+			scheduleManager.writeDebugGraphs(scheduledRegion, "6-indexed", false, true, true);
 		}
 	}
 

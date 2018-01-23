@@ -22,7 +22,6 @@ import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -32,6 +31,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -61,18 +62,17 @@ public class LateConsumerMerger extends AbstractMerger
 
 	protected static class LateRegionMerger extends RegionMerger
 	{
-		protected LateRegionMerger(@NonNull MappingRegion primaryRegion) {
-			super(primaryRegion);
+		protected LateRegionMerger(@NonNull ScheduleManager scheduleManager, @NonNull MappingRegion primaryRegion) {
+			super(scheduleManager, primaryRegion);
 		}
 
 		@Override
 		protected @NonNull MappingRegion createNewRegion(@NonNull String newName) {
-			return new LateMergedMappingRegion(RegionUtil.getScheduleManager(primaryRegion), newName);
+			return new LateMergedMappingRegion(scheduleManager, newName);
 		}
 
 		public void install(@NonNull ContentsAnalysis contentsAnalysis, @NonNull MappingRegion mergedRegion) {
-			ScheduleManager scheduleManager = RegionUtil.getScheduleManager(primaryRegion);
-			ScheduledRegion invokingRegion = RegionUtil.getContainingScheduledRegion(primaryRegion);
+			ScheduledRegion invokingRegion = QVTscheduleUtil.getContainingScheduledRegion(primaryRegion);
 			List<@NonNull Region> callableParents = Lists.newArrayList(primaryRegion.getCallableParents());
 			contentsAnalysis.removeRegion(primaryRegion);
 			for (@NonNull Region callableParent : callableParents) {
@@ -89,7 +89,7 @@ public class LateConsumerMerger extends AbstractMerger
 			}
 			contentsAnalysis.addRegion(mergedRegion);
 			scheduleManager.setScheduledRegion(mergedRegion, invokingRegion);
-			for (@NonNull Node oldHeadNode : RegionUtil.getHeadNodes(primaryRegion)) {
+			for (@NonNull Node oldHeadNode : QVTscheduleUtil.getHeadNodes(primaryRegion)) {
 				NodeConnection incomingConnection = oldHeadNode.getIncomingConnection();
 				if (incomingConnection != null) {
 					Node newHeadNode = getNodeMerger(oldHeadNode).getNewNode();
@@ -142,7 +142,7 @@ public class LateConsumerMerger extends AbstractMerger
 					if (!property.isIsRequired()) {
 						return true;					// If property is optional, it's absence cannot cause a failure
 					}
-					ClassDatum classDatum = RegionUtil.getClassDatum(secondaryEdge.getEdgeTarget());
+					ClassDatum classDatum = QVTscheduleUtil.getClassDatum(secondaryEdge.getEdgeTarget());
 					Iterable<@NonNull NavigableEdge> realizedEdges = getContentsAnalysis().getNewEdges(secondaryEdge, classDatum);
 					if (realizedEdges != null) {
 						int firstIndex = secondaryEdge.getOwningRegion().getFirstIndex();
@@ -254,23 +254,25 @@ public class LateConsumerMerger extends AbstractMerger
 	 *
 	 * inputRegions should be indexed to encourage consecutive indexes for regions sharing an input connection.
 	 */
-	public static @NonNull Map<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> merge(@NonNull ScheduledRegion scheduledRegion) {
-		LateConsumerMerger lateMerger = new LateConsumerMerger(scheduledRegion);
+	public static @NonNull Map<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> merge(@NonNull ScheduleManager scheduleManager, @NonNull ScheduledRegion scheduledRegion) {
+		LateConsumerMerger lateMerger = new LateConsumerMerger(scheduleManager, scheduledRegion);
 		lateMerger.merge();
 		lateMerger.prune();
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			RegionUtil.getScheduleManager(scheduledRegion).writeDebugGraphs(scheduledRegion, "8-late", true, true, false);
+			scheduleManager.writeDebugGraphs(scheduledRegion, "8-late", true, true, false);
 		}
 		return lateMerger.getMerges();
 	}
 
+	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull ScheduledRegion scheduledRegion;
 	protected final @NonNull List<@NonNull Region> allRegions = new ArrayList<>();
 	private /*@LazyNonNull*/ ContentsAnalysis contentsAnalysis;
 	private final @NonNull Map<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> newRegion2oldRegions = new HashMap<>();
 	protected final @NonNull LateStrategy LateStrategy_INSTANCE = new LateStrategy();
 
-	public LateConsumerMerger(@NonNull ScheduledRegion scheduledRegion) {
+	public LateConsumerMerger(@NonNull ScheduleManager scheduleManager, @NonNull ScheduledRegion scheduledRegion) {
+		this.scheduleManager = scheduleManager;
 		this.scheduledRegion = scheduledRegion;
 		gatherRegions(scheduledRegion);
 
@@ -287,7 +289,7 @@ public class LateConsumerMerger extends AbstractMerger
 	protected @NonNull ContentsAnalysis getContentsAnalysis() {
 		ContentsAnalysis contentsAnalysis2 = contentsAnalysis;
 		if (contentsAnalysis2 == null) {
-			contentsAnalysis2 = contentsAnalysis = new ContentsAnalysis(RegionUtil.getScheduleManager(scheduledRegion));
+			contentsAnalysis2 = contentsAnalysis = new ContentsAnalysis(scheduleManager);
 			for (@NonNull Region region : allRegions) {
 				contentsAnalysis2.addRegion(region);
 			}
@@ -402,7 +404,7 @@ public class LateConsumerMerger extends AbstractMerger
 						if (doMerge) {
 							if (regionMerger == null) {
 								//							residualInputRegions.remove(primaryRegion);
-								regionMerger = new LateRegionMerger(primaryRegion);
+								regionMerger = new LateRegionMerger(scheduleManager, primaryRegion);
 							}
 							//						residualInputRegions.remove(secondaryRegion);
 							regionMerger.addSecondaryRegion(secondaryRegion, secondary2primary.getNode2Node());
@@ -426,7 +428,7 @@ public class LateConsumerMerger extends AbstractMerger
 						mergedRegion.addIndex(index);
 					}
 				}
-				RegionUtil.getScheduleManager(mergedRegion).writeDebugGraphs(mergedRegion, null);
+				scheduleManager.writeDebugGraphs(mergedRegion, null);
 			}
 		}
 	}

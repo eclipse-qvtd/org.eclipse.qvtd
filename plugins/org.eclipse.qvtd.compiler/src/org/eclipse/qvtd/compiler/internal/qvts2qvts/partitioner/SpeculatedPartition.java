@@ -16,13 +16,14 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.StatusNode;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * The SpeculatedPartition completes the speculation by realizing the corrolaries of the speculation.
@@ -76,11 +77,11 @@ class SpeculatedPartition extends AbstractPartition
 
 	@Override
 	protected @NonNull PartitioningVisitor createPartitioningVisitor(@NonNull MicroMappingRegion partialRegion) {
-		return new PartitioningVisitor(partialRegion, this)
+		return new PartitioningVisitor(new RegionHelper(scheduleManager, partialRegion), this)
 		{
 			@Override
 			public @Nullable Element visitStatusNode(@NonNull StatusNode node) {
-				Node partialNode = RegionUtil.createTrueNode(partialRegion);
+				Node partialNode = regionHelper.createTrueNode();
 				addNode(node, partialNode);
 				return partialNode;
 			}
@@ -89,7 +90,7 @@ class SpeculatedPartition extends AbstractPartition
 
 	@Override
 	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
-		Role edgeRole = RegionUtil.getEdgeRole(edge);
+		Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
 		if (edgeRole == Role.REALIZED && partitioner.hasRealizedEdge(edge)) {
 			if (edge.getEdgeTarget().isConstant()) {
 				edgeRole = null;		// Constant assignment already done in speculation partition. No need to predicate it with a constant to constant connection.
@@ -109,10 +110,10 @@ class SpeculatedPartition extends AbstractPartition
 					Node targetNode = edge.getEdgeTarget();
 					if (!targetNode.isPredicated() || partitioner.hasPredicatedNode(targetNode)) { // || isLocalCorrolary(sourceNode)) {
 						if (!hasNode(sourceNode)) {
-							addNode(sourceNode, RegionUtil.getNodeRole(sourceNode));
+							addNode(sourceNode, QVTscheduleUtil.getNodeRole(sourceNode));
 						}
 						if (!hasNode(targetNode)) {
-							addNode(targetNode, RegionUtil.getNodeRole(targetNode));
+							addNode(targetNode, QVTscheduleUtil.getNodeRole(targetNode));
 						}
 					}
 				}
@@ -123,7 +124,7 @@ class SpeculatedPartition extends AbstractPartition
 	protected void resolveRealizedOutputNodes() {
 		for (@NonNull Node node : partitioner.getCorrolaryNodes()) {
 			if (!hasNode(node)) {
-				addNode(node, RegionUtil.getNodeRole(node));
+				addNode(node, QVTscheduleUtil.getNodeRole(node));
 			}
 		}
 	}

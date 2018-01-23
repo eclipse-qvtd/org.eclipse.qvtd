@@ -24,9 +24,9 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class.
@@ -110,7 +110,7 @@ public class TraceClassAnalysis
 			for (@NonNull Node traceNode : producer.getTraceNodes()) {
 				for (@NonNull NavigableEdge edge : traceNode.getRealizedNavigationEdges()) {
 					if (!edge.getEdgeTarget().isRealized()) {
-						property2edge.put(RegionUtil.getProperty(edge), edge);
+						property2edge.put(QVTscheduleUtil.getProperty(edge), edge);
 					}
 				}
 			}
@@ -148,7 +148,7 @@ public class TraceClassAnalysis
 						property2completeClass2partitioners.put(property, completeClass2partitioners);
 					}
 					CompleteClass completeClass;
-					Node targetNode = RegionUtil.getTargetNode(edge);
+					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
 					if (targetNode.isExplicitNull())  {
 						completeClass = null;
 					}

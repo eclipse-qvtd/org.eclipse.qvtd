@@ -51,6 +51,7 @@ import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTcCompilerChain;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -61,6 +62,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecuto
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
@@ -499,6 +503,12 @@ public abstract class AbstractTestQVT extends QVTimperative
 		Field middleField = middleClass.getDeclaredField("eINSTANCE");
 		EPackage middleEPackage = (EPackage) middleField.get(null);
 		getResourceSet().getPackageRegistry().put(middleEPackage.getNsURI(), middleEPackage);
+	}
+
+	protected void instrumentRegion(@NonNull ScheduleManager scheduleManager) {
+		ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
+		ScheduledRegion rootRegion = QVTscheduleUtil.getOwnedScheduledRegion(scheduleModel);
+		instrumentRegion(rootRegion);
 	}
 
 	protected void instrumentRegion(@NonNull Region parentRegion) {

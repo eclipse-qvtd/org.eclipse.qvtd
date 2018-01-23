@@ -16,12 +16,12 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * The SpeculatingPartition validates the residual predictaes omitted from the speculation.
@@ -79,9 +79,9 @@ class SpeculatingPartition extends AbstractPartition
 		}
 		if (node.isOperation()) {
 			boolean allReachable = true;
-			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 				if (edge.isComputation()) {
-					Node sourceNode = RegionUtil.getSourceNode(edge);
+					Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
 					if (isDownstreamFromCorrolary(sourceNode)) {
 						allReachable = false;
 						break;
@@ -105,8 +105,8 @@ class SpeculatingPartition extends AbstractPartition
 	 */
 	private boolean isLocalCorrolary(@NonNull Node node) {
 		assert node.isRealized();
-		for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
-			if (edge.isRealized() && edge.isNavigation() && !partitioner.isCyclic(RegionUtil.getSourceNode(edge))) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+			if (edge.isRealized() && edge.isNavigation() && !partitioner.isCyclic(QVTscheduleUtil.getSourceNode(edge))) {
 				List<@NonNull MappingRegion> corrolaryOfRegions = partitioner.getCorrolaryOf(edge);
 				if ((corrolaryOfRegions != null) && (corrolaryOfRegions.size() == 1) && corrolaryOfRegions.contains(region)) {
 					return true;
@@ -118,7 +118,7 @@ class SpeculatingPartition extends AbstractPartition
 
 	@Override
 	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
-		Role edgeRole = RegionUtil.getEdgeRole(edge);
+		Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
 		if (edgeRole == Role.REALIZED && partitioner.hasRealizedEdge(edge)) {
 			if (edge.getEdgeTarget().isConstant()) {
 				edgeRole = null;		// Constant assignment already done in speculation partition. No need to predicate it with a constant to constant connection.
@@ -138,10 +138,10 @@ class SpeculatingPartition extends AbstractPartition
 					Node targetNode = edge.getEdgeTarget();
 					if (!targetNode.isRealized()) {
 						if (!hasNode(sourceNode)) {
-							addNode(sourceNode, RegionUtil.getNodeRole(sourceNode));
+							addNode(sourceNode, QVTscheduleUtil.getNodeRole(sourceNode));
 						}
 						if (!hasNode(targetNode)) {
-							addNode(targetNode, RegionUtil.getNodeRole(targetNode));
+							addNode(targetNode, QVTscheduleUtil.getNodeRole(targetNode));
 						}
 					}
 				}
@@ -152,11 +152,11 @@ class SpeculatingPartition extends AbstractPartition
 	protected void resolvePredicatedMiddleNodes() {
 		for (@NonNull Node node : partitioner.getPredicatedMiddleNodes()) {
 			if (!hasNode(node) && node.isMatched() && partitioner.isCyclic(node)) {
-				Role nodeRole = RegionUtil.getNodeRole(node);
+				Role nodeRole = QVTscheduleUtil.getNodeRole(node);
 				if (node.isPattern() && node.isClass()) {
-					nodeRole = RegionUtil.asSpeculated(nodeRole);
+					nodeRole = QVTscheduleUtil.asSpeculated(nodeRole);
 				}
-				addNode(node, RegionUtil.asSpeculated(nodeRole));
+				addNode(node, QVTscheduleUtil.asSpeculated(nodeRole));
 			}
 		}
 	}
@@ -164,7 +164,7 @@ class SpeculatingPartition extends AbstractPartition
 	protected void resolvePredicatedOutputNodes() {
 		for (@NonNull Node node : partitioner.getPredicatedOutputNodes()) {
 			if (!hasNode(node) && !isCorrolary(node) && !isDownstreamFromCorrolary(node)) {
-				addNode(node, RegionUtil.getNodeRole(node));
+				addNode(node, QVTscheduleUtil.getNodeRole(node));
 			}
 		}
 	}
@@ -177,10 +177,10 @@ class SpeculatingPartition extends AbstractPartition
 					Node targetNode = edge.getEdgeTarget();
 					if (!targetNode.isRealized()) {
 						if (!hasNode(sourceNode)) {
-							addNode(sourceNode, RegionUtil.getNodeRole(sourceNode));
+							addNode(sourceNode, QVTscheduleUtil.getNodeRole(sourceNode));
 						}
 						if (!hasNode(targetNode)) {
-							addNode(targetNode, RegionUtil.getNodeRole(targetNode));
+							addNode(targetNode, QVTscheduleUtil.getNodeRole(targetNode));
 						}
 					}
 				}

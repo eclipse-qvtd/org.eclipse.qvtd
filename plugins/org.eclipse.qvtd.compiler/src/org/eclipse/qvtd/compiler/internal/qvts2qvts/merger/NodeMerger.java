@@ -19,10 +19,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * A NodeMerger gathers the contributions for a node in a merged region and supports
@@ -41,7 +41,7 @@ class NodeMerger
 	public NodeMerger(@NonNull RegionMerger regionMerger, @NonNull Node oldNode) {
 		this.regionMerger = regionMerger;
 		oldNodes.add(oldNode);
-		nodeRole = RegionUtil.getNodeRole(oldNode);
+		nodeRole = QVTscheduleUtil.getNodeRole(oldNode);
 		nodeUtility = oldNode.getUtility();
 		regionMerger.mapOldNode(oldNode, this);
 	}
@@ -61,8 +61,8 @@ class NodeMerger
 	public void addOldNode(@NonNull Node oldNode) {
 		assert !oldNodes.contains(oldNode);
 		oldNodes.add(oldNode);
-		nodeRole = RegionUtil.mergeToMoreKnownPhase(nodeRole, RegionUtil.getNodeRole(oldNode));
-		nodeUtility = RegionUtil.mergeToStrongerUtility(nodeUtility, oldNode.getUtility());
+		nodeRole = QVTscheduleUtil.mergeToMoreKnownPhase(nodeRole, QVTscheduleUtil.getNodeRole(oldNode));
+		nodeUtility = QVTscheduleUtil.mergeToStrongerUtility(nodeUtility, oldNode.getUtility());
 		regionMerger.mapOldNode(oldNode, this);
 	}
 

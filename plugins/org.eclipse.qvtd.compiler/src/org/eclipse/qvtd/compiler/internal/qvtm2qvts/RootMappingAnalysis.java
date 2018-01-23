@@ -22,6 +22,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 
@@ -30,7 +31,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
  */
 public class RootMappingAnalysis
 {
+	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull LoadingRegion loadingRegion;
+	protected final @NonNull RegionHelper regionHelper;
 
 	/**
 	 * The null node that is the 'container' of all root model elements.
@@ -49,12 +52,13 @@ public class RootMappingAnalysis
 	 */
 	private final @NonNull Map<@NonNull ClassDatum, @NonNull Map<@Nullable ClassDatum, @NonNull Node>> classDatum2type2node = new HashMap<>();
 
-	public RootMappingAnalysis(@NonNull LoadingRegion loadingRegion) {
+	public RootMappingAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull LoadingRegion loadingRegion) {
+		this.scheduleManager = scheduleManager;
 		this.loadingRegion = loadingRegion;
+		this.regionHelper = new RegionHelper(scheduleManager, loadingRegion);
 	}
 
 	public @NonNull Node getIntroducerNode(@NonNull Node consumerNode) {
-		ScheduleManager scheduleManager = RegionUtil.getScheduleManager(loadingRegion);
 		//
 		//	Identify the containment pattern.
 		//
@@ -67,15 +71,15 @@ public class RootMappingAnalysis
 				containerEdge = edge;
 				parent2childProperty = property;
 				if (property == scheduleManager.getStandardLibraryHelper().getOclContainerProperty()) {
-					containingClassDatum = RegionUtil.getClassDatum(edge.getEdgeSource());
+					containingClassDatum = QVTscheduleUtil.getClassDatum(edge.getEdgeSource());
 				}
 				break;
 			}
 		}
 		CompleteEnvironment completeEnvironment = scheduleManager.getEnvironmentFactory().getCompleteEnvironment();
-		ClassDatum consumedClassDatum = /*getCastTarget(consumerNode)*/RegionUtil.getClassDatum(consumerNode);
+		ClassDatum consumedClassDatum = /*getCastTarget(consumerNode)*/QVTscheduleUtil.getClassDatum(consumerNode);
 		org.eclipse.ocl.pivot.Class elementType = consumedClassDatum.getCompleteClass().getPrimaryClass();
-		TypedModel typedModel = RegionUtil.getTypedModel(consumedClassDatum);
+		TypedModel typedModel = QVTscheduleUtil.getTypedModel(consumedClassDatum);
 		CollectionType childCollectionType = completeEnvironment.getSetType(elementType, true,  null, null);
 		ClassDatum childrenClassDatum = scheduleManager.getClassDatum(childCollectionType, typedModel);
 		//
@@ -90,7 +94,7 @@ public class RootMappingAnalysis
 			}
 			introducedNode = type2node.get(null);
 			if (introducedNode == null) {
-				introducedNode = RegionUtil.createComposingNode(loadingRegion, "«" + elementType.getName() + "»", childrenClassDatum);
+				introducedNode = regionHelper.createComposingNode("«" + elementType.getName() + "»", childrenClassDatum);
 				type2node.put(null, introducedNode);
 			}
 		}
@@ -102,9 +106,9 @@ public class RootMappingAnalysis
 			}
 			introducedNode = property2node.get(null);
 			if (introducedNode == null) {
-				introducedNode = RegionUtil.createComposingNode(loadingRegion, "«" + elementType.getName() + "-null»", childrenClassDatum);
+				introducedNode = regionHelper.createComposingNode("«" + elementType.getName() + "-null»", childrenClassDatum);
 				property2node.put(null, introducedNode);
-				RegionUtil.createNavigationEdge(getNullNode(), parent2childProperty, introducedNode, false);
+				regionHelper.createNavigationEdge(getNullNode(), parent2childProperty, introducedNode, false);
 			}
 		}
 		else if (containingClassDatum != null) {								// Non-root oclContainer ownership
@@ -115,10 +119,10 @@ public class RootMappingAnalysis
 			}
 			introducedNode = type2node.get(containingClassDatum);
 			if (introducedNode == null) {
-				introducedNode = RegionUtil.createComposingNode(loadingRegion, "«" + elementType.getName() + "-oclContents»", childrenClassDatum);
+				introducedNode = regionHelper.createComposingNode("«" + elementType.getName() + "-oclContents»", childrenClassDatum);
 				type2node.put(containingClassDatum, introducedNode);
-				Node containerNode = RegionUtil.createComposingNode(loadingRegion, "«" + containingClassDatum.getCompleteClass().getName() + "-oclContainer»", containingClassDatum);
-				RegionUtil.createNavigationEdge(containerNode, parent2childProperty, introducedNode, false);
+				Node containerNode = regionHelper.createComposingNode("«" + containingClassDatum.getCompleteClass().getName() + "-oclContainer»", containingClassDatum);
+				regionHelper.createNavigationEdge(containerNode, parent2childProperty, introducedNode, false);
 			}
 		}
 		else {																			// Knonw distinctive containment
@@ -129,13 +133,13 @@ public class RootMappingAnalysis
 			}
 			introducedNode = property2node.get(parent2childProperty);
 			if (introducedNode == null) {
-				introducedNode = RegionUtil.createComposingNode(loadingRegion, "«" + elementType.getName() + "-" + parent2childProperty.getName() + "»", childrenClassDatum);
+				introducedNode = regionHelper.createComposingNode("«" + elementType.getName() + "-" + parent2childProperty.getName() + "»", childrenClassDatum);
 				property2node.put(parent2childProperty, introducedNode);
 				org.eclipse.ocl.pivot.Class owningClass = parent2childProperty.getOwningClass();
 				assert owningClass != null;
 				containingClassDatum = scheduleManager.getClassDatum(owningClass, typedModel);
-				Node containerNode = RegionUtil.createComposingNode(loadingRegion, "«" + owningClass.getName() + "-" + parent2childProperty.getName() + "»", containingClassDatum);
-				RegionUtil.createNavigationEdge(containerNode, parent2childProperty, introducedNode, false);
+				Node containerNode = regionHelper.createComposingNode("«" + owningClass.getName() + "-" + parent2childProperty.getName() + "»", containingClassDatum);
+				regionHelper.createNavigationEdge(containerNode, parent2childProperty, introducedNode, false);
 			}
 		}
 		return introducedNode;
@@ -144,7 +148,7 @@ public class RootMappingAnalysis
 	protected @NonNull Node getNullNode() {
 		Node nullNode2 = nullNode;
 		if (nullNode2 == null) {
-			nullNode = nullNode2 = RegionUtil.createNullNode(loadingRegion, true, null);
+			nullNode = nullNode2 = regionHelper.createNullNode(true, null);
 		}
 		return nullNode2;
 	}

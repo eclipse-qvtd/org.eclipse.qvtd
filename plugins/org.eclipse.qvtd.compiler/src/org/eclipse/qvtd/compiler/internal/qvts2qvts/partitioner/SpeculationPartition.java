@@ -16,11 +16,11 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Sets;
 
@@ -39,7 +39,7 @@ class SpeculationPartition extends AbstractPartition
 
 	public SpeculationPartition(@NonNull MappingPartitioner partitioner) {
 		super(partitioner);
-		this.headNodes = Sets.newHashSet(RegionUtil.getHeadNodes(region));
+		this.headNodes = Sets.newHashSet(QVTscheduleUtil.getHeadNodes(region));
 		//
 		//	The realized middle (trace) nodes become speculation nodes.
 		//
@@ -78,7 +78,7 @@ class SpeculationPartition extends AbstractPartition
 	 */
 	protected void addReachableOldAcyclicNodes(@NonNull Node node) {
 		if (!hasNode(node) && (node.isHead() || node.isOld() && !partitioner.isCyclic(node))) {
-			addNode(node, RegionUtil.getNodeRole(node));
+			addNode(node, QVTscheduleUtil.getNodeRole(node));
 			for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 				if (edge.isOld()) {
 					addReachableOldAcyclicNodes(edge.getEdgeTarget());
@@ -99,7 +99,7 @@ class SpeculationPartition extends AbstractPartition
 	@Override
 	protected @NonNull Iterable<@NonNull Node> getReachabilityRootNodes() {
 		List<@NonNull Node> rootNodes = new ArrayList<>();
-		for (@NonNull Node headNode : RegionUtil.getHeadNodes(region)) {
+		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(region)) {
 			if (!headNode.isTrue()) {
 				rootNodes.add(headNode);
 			}
@@ -132,7 +132,7 @@ class SpeculationPartition extends AbstractPartition
 
 	@Override
 	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
-		Role edgeRole = RegionUtil.getEdgeRole(edge);
+		Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
 		if (edgeRole == Role.REALIZED) {
 			assert !partitioner.hasRealizedEdge(edge);
 		}

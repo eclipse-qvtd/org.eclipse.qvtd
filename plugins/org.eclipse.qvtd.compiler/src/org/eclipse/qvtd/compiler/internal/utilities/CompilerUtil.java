@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -28,15 +29,30 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil.UnresolvedProxyCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.CompilerProblem;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionProblem;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
+import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
-public class CompilerUtil
+public class CompilerUtil extends QVTscheduleUtil
 {
 	public final static @NonNull Map<Object, Object> defaultSavingOptions;
 
@@ -131,6 +147,16 @@ public class CompilerUtil
 		assert false : s.toString();
 	}
 
+	public static @NonNull RegionProblem createRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
+		String boundMessage = StringUtil.bind(messageTemplate, bindings);
+		return new RegionProblem(CompilerProblem.Severity.ERROR, region, boundMessage);
+	}
+
+	public static @NonNull RegionProblem createRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
+		String boundMessage = StringUtil.bind(messageTemplate, bindings);
+		return new RegionProblem(CompilerProblem.Severity.WARNING, region, boundMessage);
+	}
+
 	public static void indent(@NonNull StringBuilder s, int depth) {
 		for (int i = 0; i < depth; i++) {
 			s.append("    ");
@@ -159,6 +185,40 @@ public class CompilerUtil
 		else {
 			Collections.sort(nameables, NameUtil.NAMEABLE_COMPARATOR);
 		}
+	}
+
+	/**
+	 * Return the variable name associated with oclExpression, or null if none found.
+	 * This enables the user's choice of name to be used for the expression node that implements it.
+	 */
+	public static @Nullable String recoverVariableName(@NonNull NamedElement namedElement) {
+		EObject eContainer = namedElement.eContainer();
+		EReference eContainmentFeature = namedElement.eContainmentFeature();
+		if ((eContainmentFeature == PivotPackage.Literals.VARIABLE__OWNED_INIT) && (eContainer instanceof Variable)) {
+			return ((Variable)eContainer).getName();
+		}
+		else if ((eContainmentFeature == QVTcorePackage.Literals.ASSIGNMENT__VALUE) && (eContainer instanceof VariableAssignment)) {
+			return ((VariableAssignment)eContainer).getTargetVariable().getName();
+		}
+		else if ((eContainmentFeature == PivotPackage.Literals.CALL_EXP__OWNED_SOURCE) && (eContainer instanceof OperationCallExp)) {
+			OperationCallExp operationCallExp = (OperationCallExp)eContainer;
+			if (PivotUtil.isSameOperation(operationCallExp.getReferredOperation().getOperationId(), OperationId.OCLANY_EQUALS)) {
+				OCLExpression argument = PivotUtil.getOwnedArgument(operationCallExp, 0);
+				if (argument instanceof VariableExp) {
+					return PivotUtil.getReferredVariable((VariableExp)argument).getName();
+				}
+			}
+		}
+		else if ((eContainmentFeature == PivotPackage.Literals.OPERATION_CALL_EXP__OWNED_ARGUMENTS) && (eContainer instanceof OperationCallExp)) {
+			OperationCallExp operationCallExp = (OperationCallExp)eContainer;
+			if (PivotUtil.isSameOperation(operationCallExp.getReferredOperation().getOperationId(), OperationId.OCLANY_EQUALS)) {
+				OCLExpression source = PivotUtil.getOwnedSource(operationCallExp);
+				if (source instanceof VariableExp) {
+					return PivotUtil.getReferredVariable((VariableExp)source).getName();
+				}
+			}
+		}
+		return null;
 	}
 
 	public static <T> void removeAll(@NonNull Collection<T> removeFrom, @NonNull Iterable<T> elementsToTemove) {

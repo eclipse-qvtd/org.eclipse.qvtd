@@ -35,7 +35,6 @@ import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -415,8 +414,8 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		//		String name = rootRegion.getName();
 		//
 		List<@NonNull Region> callableRegions = new ArrayList<>();
-		callableRegions.add(RegionUtil.getOwnedLoadingRegion(scheduledRegion));
-		for (@NonNull MappingRegion region : RegionUtil.getMappingRegions(scheduledRegion)) {
+		callableRegions.add(QVTscheduleUtil.getOwnedLoadingRegion(scheduledRegion));
+		for (@NonNull MappingRegion region : QVTscheduleUtil.getMappingRegions(scheduledRegion)) {
 			callableRegions.add(region);
 		}
 

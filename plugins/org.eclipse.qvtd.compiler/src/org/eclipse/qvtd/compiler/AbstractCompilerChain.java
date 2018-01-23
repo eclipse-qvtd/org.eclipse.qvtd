@@ -39,7 +39,6 @@ import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTc2QVTu;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTi;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.QVTs2QVTs;
@@ -55,7 +54,9 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 public abstract class AbstractCompilerChain extends CompilerUtil implements CompilerChain
@@ -215,7 +216,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			QVTm2QVTs.DEBUG_GRAPHS.setState(getOption(CompilerChain.DEBUG_KEY) == Boolean.TRUE);
 		}
 
-		public @NonNull ScheduledRegion execute(@NonNull Resource pResource) throws IOException {
+		public @NonNull ScheduleManager execute(@NonNull Resource pResource) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
 				Resource sResource = createResource();
@@ -228,11 +229,11 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, qvtm2qvts, rootName);
 				ScheduledRegion scheduledRegion = qvts2qvts.transform(qvtm2qvts, activeRegions);
 				scheduledRegion.setReferredTransformation(asTransformation);
-				ScheduleManager scheduleManager = RegionUtil.getScheduleManager(scheduledRegion);
+				ScheduleManager scheduleManager = qvts2qvts.getScheduleManager();
 				throwCompilerChainExceptionForErrors();
 				sResource.getContents().add(scheduleManager.getScheduleModel());
 				saveResource(sResource);
-				return scheduledRegion;
+				return scheduleManager;
 			}
 			finally {
 				environmentFactory.setCreateStrategy(savedStrategy);
@@ -246,10 +247,12 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			super(compilerChain, QVTI_STEP);
 		}
 
-		public @NonNull ImperativeTransformation execute(@NonNull ScheduledRegion rootRegion) throws IOException {
+		public @NonNull ImperativeTransformation execute(@NonNull ScheduleManager scheduleManager) throws IOException {
 			// Default QVTi strategy ok.
 			Resource iResource = createResource();
-			QVTs2QVTi tx = new QVTs2QVTi(this, environmentFactory);
+			ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
+			ScheduledRegion rootRegion = QVTscheduleUtil.getOwnedScheduledRegion(scheduleModel);
+			QVTs2QVTi tx = new QVTs2QVTi(scheduleManager, this, environmentFactory);
 			Model model = tx.transform(rootRegion);
 			iResource.getContents().add(model);
 			saveResource(iResource);
@@ -553,8 +556,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	}
 
 	protected @NonNull ImperativeTransformation qvtm2qvti(@NonNull Resource pResource) throws IOException {
-		ScheduledRegion rootRegion = qvtm2qvtsCompilerStep.execute(pResource);
-		return qvts2qvtiCompilerStep.execute(rootRegion);
+		ScheduleManager scheduleManager = qvtm2qvtsCompilerStep.execute(pResource);
+		return qvts2qvtiCompilerStep.execute(scheduleManager);
 	}
 
 	@Override

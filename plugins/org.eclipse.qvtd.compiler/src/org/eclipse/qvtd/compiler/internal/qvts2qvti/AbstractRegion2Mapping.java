@@ -38,9 +38,9 @@ import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
@@ -59,6 +59,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 public abstract class AbstractRegion2Mapping
 {
 	protected final @NonNull QVTs2QVTiVisitor visitor;
+	protected final @NonNull ScheduleManager scheduleManager;
+	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull QVTimperativeHelper helper;
 	protected final @NonNull Region region;
 	@SuppressWarnings("unused")private final @NonNull String regionName;
@@ -87,9 +89,11 @@ public abstract class AbstractRegion2Mapping
 
 	public AbstractRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Region region) {
 		this.visitor = visitor;
-		this.helper = new QVTimperativeHelper(visitor.getEnvironmentFactory());
+		this.scheduleManager = visitor.getScheduleManager();
+		this.environmentFactory = scheduleManager.getEnvironmentFactory();
+		this.helper = new QVTimperativeHelper(environmentFactory);
 		this.region = region;
-		this.regionName = RegionUtil.getName(region);
+		this.regionName = QVTscheduleUtil.getName(region);
 		String mappingName = region.getSymbolName();
 		assert mappingName != null;
 		this.mapping = helper.createMapping(mappingName);
@@ -98,7 +102,7 @@ public abstract class AbstractRegion2Mapping
 			this.mapping.setIsAbstract(((RuleRegion)region).getReferredRule().isIsAbstract());
 		}
 		this.names = new HashSet<@NonNull String>(visitor.getReservedNames());
-		for (@NonNull Node node : RegionUtil.getOwnedNodes(region)) {
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
 			for (TypedElement typedElement : node.getTypedElements()) {
 				Node oldNode = qvtm2node.put(typedElement, node);
 				assert (oldNode == null) || (oldNode == node);
@@ -121,7 +125,6 @@ public abstract class AbstractRegion2Mapping
 	protected @NonNull CallExp createCallExp(@NonNull OCLExpression asSource, @NonNull Property asProperty) {
 		if (asProperty.eContainer() == null) {
 			Type asType = asProperty.getType();
-			ScheduleManager scheduleManager = RegionUtil.getScheduleManager(getRegion());
 			if (asProperty == scheduleManager.getStandardLibraryHelper().getOclContainerProperty()) {
 				return helper.createOperationCallExp(asSource, "oclContainer");
 			}
@@ -157,8 +160,7 @@ public abstract class AbstractRegion2Mapping
 	}
 
 	protected @NonNull CallExp createOclAsTypeCallExp(@NonNull OCLExpression asSource, @NonNull Type asType) {
-		ScheduleManager scheduleManager = RegionUtil.getScheduleManager(getRegion());
-		CompleteClass completeClass = scheduleManager.getEnvironmentFactory().getCompleteModel().getCompleteClass(asType);
+		CompleteClass completeClass = environmentFactory.getCompleteModel().getCompleteClass(asType);
 		TypeExp asTypeExp = helper.createTypeExp(completeClass.getPrimaryClass());
 		return helper.createOperationCallExp(asSource, "oclAsType", asTypeExp);
 	}
@@ -173,7 +175,7 @@ public abstract class AbstractRegion2Mapping
 	}
 
 	protected @NonNull Type getConnectionSourcesType(@NonNull NodeConnection connection) {
-		IdResolver idResolver = visitor.getEnvironmentFactory().getIdResolver();
+		IdResolver idResolver = environmentFactory.getIdResolver();
 		Type asType = connection.getSourcesType(idResolver);
 		assert asType != null;
 		return asType;
@@ -235,7 +237,7 @@ public abstract class AbstractRegion2Mapping
 		StandardLibraryInternal standardLibrary = (StandardLibraryInternal)visitor.getStandardLibrary();
 		Type modelType = standardLibrary.getLibraryType("Model");
 		OperationId objectsOfKindOperationId = modelType.getTypeId().getOperationId(1, "objectsOfKind", IdManager.getParametersId(TypeId.T_1));
-		Operation objectsOfKindOperation = visitor.getEnvironmentFactory().getIdResolver().getOperation(objectsOfKindOperationId);
+		Operation objectsOfKindOperation = environmentFactory.getIdResolver().getOperation(objectsOfKindOperationId);
 		return objectsOfKindOperation;
 	}
 
@@ -254,7 +256,7 @@ public abstract class AbstractRegion2Mapping
 		StandardLibraryInternal standardLibrary = (StandardLibraryInternal)visitor.getStandardLibrary();
 		Type modelType = standardLibrary.getLibraryType("Model");
 		OperationId rootObjectsOperationId = modelType.getTypeId().getOperationId(1, "rootObjects", IdManager.getParametersId());
-		Operation rootObjectsOperation = visitor.getEnvironmentFactory().getIdResolver().getOperation(rootObjectsOperationId);
+		Operation rootObjectsOperation = environmentFactory.getIdResolver().getOperation(rootObjectsOperationId);
 		return rootObjectsOperation;
 	}
 

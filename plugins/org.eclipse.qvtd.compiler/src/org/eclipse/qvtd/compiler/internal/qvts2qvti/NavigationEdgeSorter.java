@@ -21,10 +21,10 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Lists;
 
@@ -82,7 +82,7 @@ public class NavigationEdgeSorter
 
 	private @NonNull Set<@NonNull Node> gatherSourceNodes(@NonNull Set<@NonNull Node> sourceNodes, @NonNull Node node) {
 		if (sourceNodes.add(node)) {
-			for (@NonNull Edge edge : RegionUtil.getIncomingEdges(node)) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 				if (edge.isComputation()) {
 					gatherSourceNodes(sourceNodes, edge.getEdgeSource());
 				}
