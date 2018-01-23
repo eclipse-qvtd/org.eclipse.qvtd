@@ -543,7 +543,7 @@ public class MappingAnalysis extends RuleAnalysis
 		return false;
 	}
 
-	public void registerConsumptionsAndProductions(@NonNull AbstractQVTm2QVTs qvtm2qts) {
+	public void registerConsumptionsAndProductions() {
 		for (@NonNull Node newNode : ruleRegion.getNewNodes()) {
 			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(newNode);
 			classDatum.getProducingRegions().add(ruleRegion);

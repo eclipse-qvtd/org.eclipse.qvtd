@@ -970,8 +970,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 					createExpressionEdge(argNodes[i], argNames[i], operationNode);
 				}
 				if (referredOperation.getBodyExpression() != null) {
-					QVTm2QVTs qvtm2qvts = (QVTm2QVTs) scheduleManager;		// FIXME cast
-					OperationRegion operationRegion = qvtm2qvts.analyzeOperation(scheduleManager, operationCallExp);
+					//					QVTm2QVTs qvtm2qvts = (QVTm2QVTs) scheduleManager;		// FIXME cast
+					OperationRegion operationRegion = scheduleManager.analyzeOperation(operationCallExp);
 					Iterable<@NonNull Node> referenceNodes = QVTscheduleUtil.getDependencyNodes(operationRegion);
 					for (@NonNull Node referenceNode : referenceNodes) {
 						ClassDatum classDatum = QVTscheduleUtil.getClassDatum(referenceNode);

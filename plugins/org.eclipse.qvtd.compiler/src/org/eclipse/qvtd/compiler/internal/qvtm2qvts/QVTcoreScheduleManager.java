@@ -1,0 +1,27 @@
+/*******************************************************************************
+ * Copyright (c) 2015, 2018 Willink Transformations and others.
+ * All rights reserved.   This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   E.D.Willink - Initial API and implementation
+ *******************************************************************************/
+package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
+
+import java.util.Map;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.compiler.CompilerChain.Key;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
+
+public class QVTcoreScheduleManager extends ScheduleManager
+{
+	public QVTcoreScheduleManager(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
+			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
+		super(QVTscheduleFactory.eINSTANCE.createScheduleModel(), environmentFactory, asTransformation, schedulerOptions);
+	}
+}

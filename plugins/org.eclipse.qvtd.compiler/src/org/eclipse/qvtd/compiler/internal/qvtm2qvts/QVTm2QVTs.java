@@ -30,7 +30,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
-public class QVTm2QVTs extends AbstractQVTm2QVTs
+public class QVTm2QVTs extends AbstractQVTb2QVTs
 {
 	/**
 	 * The Region to which each mapping is allocated.
@@ -39,8 +39,7 @@ public class QVTm2QVTs extends AbstractQVTm2QVTs
 
 	public QVTm2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
 			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
-
-		super(problemHandler, environmentFactory, asTransformation, schedulerOptions);
+		super(new QVTcoreScheduleManager(environmentFactory, asTransformation, schedulerOptions), problemHandler);
 	}
 
 	public @NonNull MappingRegion getMappingRegion(@NonNull Rule mapping) {
@@ -50,22 +49,22 @@ public class QVTm2QVTs extends AbstractQVTm2QVTs
 	}
 
 	public @NonNull List<@NonNull MappingRegion> transform() throws IOException {
-		Iterable<@NonNull RuleRegion> orderedRuleRegions = getOrderedMappings();
+		Iterable<@NonNull RuleRegion> orderedRuleRegions = scheduleManager.getOrderedMappings();
 		//
 		//	Extract salient characteristics from within each MappingAction.
 		//
 		for (@NonNull RuleRegion ruleRegion : orderedRuleRegions) {
-			MappingAnalysis mappingRegion = MappingAnalysis.createMappingRegion(this, ruleRegion);
+			MappingAnalysis mappingRegion = MappingAnalysis.createMappingRegion(scheduleManager, ruleRegion);
 			mapping2mappingAnalysis.put(QVTscheduleUtil.getReferredRule(ruleRegion), mappingRegion);
 		}
 		List<@NonNull MappingAnalysis> mappingAnalyses = new ArrayList<>(mapping2mappingAnalysis.values());
 		Collections.sort(mappingAnalyses, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
 		for (@NonNull MappingAnalysis mappingRegion : mappingAnalyses) {
-			mappingRegion.registerConsumptionsAndProductions(this);
+			mappingRegion.registerConsumptionsAndProductions();
 		}
-		if (AbstractQVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+		if (AbstractQVTb2QVTs.DEBUG_GRAPHS.isActive()) {
 			for (@NonNull MappingAnalysis mappingAnalysis : mappingAnalyses) {
-				writeDebugGraphs(mappingAnalysis.getRuleRegion(), null);
+				scheduleManager.writeDebugGraphs(mappingAnalysis.getRuleRegion(), null);
 			}
 		}
 		List<@NonNull MappingRegion> orderedRegions = new ArrayList<>();
@@ -76,8 +75,8 @@ public class QVTm2QVTs extends AbstractQVTm2QVTs
 			orderedRegions.add(mappingAnalysis.getRuleRegion());
 			//			mappingRegion.resolveRecursion();
 		}
-		boolean noEarlyMerge = isNoEarlyMerge();
-		List<@NonNull MappingRegion> activeRegions = new ArrayList<>(noEarlyMerge ? orderedRegions : EarlyMerger.merge(this, orderedRegions));
+		boolean noEarlyMerge = scheduleManager.isNoEarlyMerge();
+		List<@NonNull MappingRegion> activeRegions = new ArrayList<>(noEarlyMerge ? orderedRegions : EarlyMerger.merge(scheduleManager, orderedRegions));
 		//		for (@NonNull Region activeRegion : activeRegions) {
 		//			((AbstractRegion)activeRegion).resolveRecursion();
 		//		}
