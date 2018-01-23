@@ -18,7 +18,7 @@ import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 
-public class QVTcoreScheduleManager extends ScheduleManager
+public class QVTcoreScheduleManager extends AbstractScheduleManager
 {
 	public QVTcoreScheduleManager(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
 			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {

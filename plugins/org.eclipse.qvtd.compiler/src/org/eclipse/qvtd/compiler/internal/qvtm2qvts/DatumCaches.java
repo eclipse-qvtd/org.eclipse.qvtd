@@ -11,7 +11,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -104,12 +103,10 @@ public class DatumCaches
 
 	}
 
-	public @NonNull List<@NonNull RuleRegion> analyzeTransformation(@NonNull Transformation transformation) {
-		List<@NonNull RuleRegion> ruleRegions = new ArrayList<>();
+	public void analyzeTransformation(@NonNull Transformation transformation) {
 		for (@NonNull Rule rule : QVTcoreUtil.getRule(transformation)) {
-			ruleRegions.add(analyzeMapping(rule));
+			analyzeMapping(rule);
 		}
-		return ruleRegions;
 	}
 
 	private @NonNull RuleRegion analyzeMapping(@NonNull Rule rule) {
@@ -264,8 +261,8 @@ public class DatumCaches
 			}
 			TypedModel oppositeTypedModel = valueUsage.getTypedModel(propAssign);
 			if (oppositeTypedModel == null) {
-				DomainUsage valueUsage2 = getUsage(value);
-				DomainUsage propertyUsage2 = propertyType != null ? getUsage(propertyType) : null;
+				@SuppressWarnings("unused") DomainUsage valueUsage2 = getUsage(value);
+				@SuppressWarnings("unused") DomainUsage propertyUsage2 = propertyType != null ? getUsage(propertyType) : null;
 				oppositeTypedModel = valueUsage.getTypedModel(propAssign);
 				throw new IllegalStateException("No left/right DomainUsage commonality for \"" + propAssign + "\"");
 			}

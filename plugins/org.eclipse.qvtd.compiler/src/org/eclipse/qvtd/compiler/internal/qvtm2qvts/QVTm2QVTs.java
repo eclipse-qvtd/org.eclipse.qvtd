@@ -49,7 +49,11 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 	}
 
 	public @NonNull List<@NonNull MappingRegion> transform() throws IOException {
-		Iterable<@NonNull RuleRegion> orderedRuleRegions = scheduleManager.getOrderedMappings();
+		List<@NonNull RuleRegion> orderedRuleRegions = new ArrayList<>();
+		for (@NonNull MappingRegion mappingRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager.getScheduleModel())) {
+			orderedRuleRegions.add((RuleRegion) mappingRegion);
+		}
+		Collections.sort(orderedRuleRegions, NameUtil.NAMEABLE_COMPARATOR);		// For predictability
 		//
 		//	Extract salient characteristics from within each MappingAction.
 		//

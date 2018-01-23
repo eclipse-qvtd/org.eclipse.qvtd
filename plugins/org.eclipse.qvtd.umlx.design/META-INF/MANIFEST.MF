@@ -16,3 +16,4 @@ Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: %providerName
 Export-Package: org.eclipse.qvtd.umlx.design
+Automatic-Module-Name: org.eclipse.qvtd.umlx.design

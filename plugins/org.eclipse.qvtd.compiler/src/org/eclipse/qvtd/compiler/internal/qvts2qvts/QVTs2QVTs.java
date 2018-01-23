@@ -1002,7 +1002,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		List<@NonNull Node> nodes = new ArrayList<>();
 		nodes.add(rootAnalysis.getIntroducerNode(headNode));
 		for (@NonNull TypedModel dependsOn : QVTbaseUtil.getDependsOns(QVTscheduleUtil.getTypedModel(classDatum))) {
-			ClassDatum classDatum2 = scheduleManager.getClassDatum(headNode.getCompleteClass().getPrimaryClass(), dependsOn);
+			ClassDatum classDatum2 = scheduleManager.getClassDatum(dependsOn, headNode.getCompleteClass().getPrimaryClass());
 			Iterable<@NonNull Node> newNodes = contentsAnalysis.getNewNodes(classDatum2);
 			if (newNodes != null) {
 				for (@NonNull Node newNode : newNodes) {

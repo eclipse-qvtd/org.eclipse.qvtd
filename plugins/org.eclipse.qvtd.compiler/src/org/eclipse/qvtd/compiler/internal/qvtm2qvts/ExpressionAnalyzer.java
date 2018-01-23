@@ -715,7 +715,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 	@Override
 	public @NonNull Node visitElement(@NonNull Element element) {
 		Class oclInvalidType = scheduleManager.getStandardLibrary().getOclInvalidType();
-		ClassDatum classDatum = scheduleManager.getClassDatum(oclInvalidType, scheduleManager.getDomainAnalysis().getPrimitiveTypeModel());
+		ClassDatum classDatum = scheduleManager.getClassDatum(scheduleManager.getDomainAnalysis().getPrimitiveTypeModel(), oclInvalidType);
 		Node errorNode = createErrorNode("«error»", classDatum);
 		for (EObject eObject : element.eContents()) {
 			Node node = analyze((Element) eObject);
@@ -1063,7 +1063,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		Type referredType = QVTcoreUtil.getReferredType(typeExp);
 		TypedModel typedModel = domainUsage.getTypedModel(typeExp);
 		assert typedModel != null;
-		ClassDatum classDatum = scheduleManager.getClassDatum((org.eclipse.ocl.pivot.Class)referredType, typedModel);
+		ClassDatum classDatum = scheduleManager.getClassDatum(typedModel, (org.eclipse.ocl.pivot.Class)referredType);
 		String typeName = PrettyPrinter.printType(QVTscheduleUtil.getCompleteClass(classDatum));
 		Node operationNode = createConnectedOperationNode(typeName, typeExp);
 		return operationNode;

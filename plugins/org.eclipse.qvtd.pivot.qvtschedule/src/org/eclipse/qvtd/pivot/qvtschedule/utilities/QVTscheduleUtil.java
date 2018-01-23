@@ -658,9 +658,9 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(classDatum.getOwnedPropertyDatums());
 	}
 
-	//	public static @NonNull Iterable<@NonNull MappingRegion> getOwnedMappingRegions(@NonNull ScheduleModel scheduleModel) {
-	//		return ClassUtil.nullFree(scheduleModel.getOwnedMappingRegions());
-	//	}
+	public static @NonNull Iterable<@NonNull MappingRegion> getOwnedMappingRegions(@NonNull ScheduleModel scheduleModel) {
+		return ClassUtil.nullFree(scheduleModel.getOwnedMappingRegions());
+	}
 
 	public static @NonNull Iterable<@NonNull OperationRegion> getOwnedOperationRegions(@NonNull ScheduleModel scheduleModel) {
 		return ClassUtil.nullFree(scheduleModel.getOwnedOperationRegions());

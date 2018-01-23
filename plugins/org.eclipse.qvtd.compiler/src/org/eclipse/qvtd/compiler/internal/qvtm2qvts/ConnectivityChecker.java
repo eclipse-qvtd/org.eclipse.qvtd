@@ -249,7 +249,7 @@ public class ConnectivityChecker
 		org.eclipse.ocl.pivot.Class primaryClass = classDatum.getCompleteClass().getPrimaryClass();
 		if (primaryClass instanceof CollectionType) {
 			primaryClass = (org.eclipse.ocl.pivot.Class)PivotUtil.getElementType((CollectionType)primaryClass);
-			classDatum = scheduleManager.getClassDatum(primaryClass, QVTscheduleUtil.getReferredTypedModel(classDatum));
+			classDatum = scheduleManager.getClassDatum(QVTscheduleUtil.getReferredTypedModel(classDatum), primaryClass);
 		}
 		return classDatum;
 	}

@@ -81,7 +81,7 @@ public class RootMappingAnalysis
 		org.eclipse.ocl.pivot.Class elementType = consumedClassDatum.getCompleteClass().getPrimaryClass();
 		TypedModel typedModel = QVTscheduleUtil.getTypedModel(consumedClassDatum);
 		CollectionType childCollectionType = completeEnvironment.getSetType(elementType, true,  null, null);
-		ClassDatum childrenClassDatum = scheduleManager.getClassDatum(childCollectionType, typedModel);
+		ClassDatum childrenClassDatum = scheduleManager.getClassDatum(typedModel, childCollectionType);
 		//
 		//	Create / re-use the appropriate containment pattern.
 		//
@@ -137,7 +137,7 @@ public class RootMappingAnalysis
 				property2node.put(parent2childProperty, introducedNode);
 				org.eclipse.ocl.pivot.Class owningClass = parent2childProperty.getOwningClass();
 				assert owningClass != null;
-				containingClassDatum = scheduleManager.getClassDatum(owningClass, typedModel);
+				containingClassDatum = scheduleManager.getClassDatum(typedModel, owningClass);
 				Node containerNode = regionHelper.createComposingNode("«" + owningClass.getName() + "-" + parent2childProperty.getName() + "»", containingClassDatum);
 				regionHelper.createNavigationEdge(containerNode, parent2childProperty, introducedNode, false);
 			}

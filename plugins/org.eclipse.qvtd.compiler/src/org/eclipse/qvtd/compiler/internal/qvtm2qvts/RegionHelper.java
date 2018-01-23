@@ -108,7 +108,7 @@ public class RegionHelper extends QVTscheduleUtil
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
 		assert type != null;
 		TypedModel typedModel = getTypedModel(getClassDatum(targetNode));
-		ClassDatum classDatum = scheduleManager.getClassDatum(type, typedModel);
+		ClassDatum classDatum = scheduleManager.getClassDatum(typedModel, type);
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
 		node.initialize(nodeRole, region, name, classDatum);
 		node.setMatched(true);
@@ -128,7 +128,7 @@ public class RegionHelper extends QVTscheduleUtil
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)property.getType();
 		assert type != null;
 		TypedModel typedModel = getTypedModel(getClassDatum(parentNode));
-		ClassDatum classDatum = scheduleManager.getClassDatum(type, typedModel);
+		ClassDatum classDatum = scheduleManager.getClassDatum(typedModel, type);
 		//				DomainUsage domainUsage = parentNode.getClassDatumAnalysis().getDomainUsage();
 		String name = property.getName();
 		assert name != null;
@@ -300,7 +300,7 @@ public class RegionHelper extends QVTscheduleUtil
 		Type elementType = PivotUtil.getElementalType(type);
 		TypedModel typedModel = elementType instanceof DataType ? scheduleManager.getDomainAnalysis().getPrimitiveTypeModel() : sourceNode.getClassDatum().getReferredTypedModel();
 		assert typedModel != null;
-		ClassDatum classDatum = scheduleManager.getClassDatum(type, typedModel);
+		ClassDatum classDatum = scheduleManager.getClassDatum(typedModel, type);
 		String name = source2targetProperty.getName();
 		assert name != null;
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
@@ -363,7 +363,7 @@ public class RegionHelper extends QVTscheduleUtil
 	public @NonNull StatusNode createStatusNode() {
 		org.eclipse.ocl.pivot.Class booleanType = scheduleManager.getStandardLibrary().getBooleanType();
 		DomainUsage primitiveUsage = scheduleManager.getDomainAnalysis().getPrimitiveUsage();
-		ClassDatum classDatum = scheduleManager.getClassDatum(booleanType, ClassUtil.nonNullState(primitiveUsage.getTypedModel(null)));
+		ClassDatum classDatum = scheduleManager.getClassDatum(ClassUtil.nonNullState(primitiveUsage.getTypedModel(null)), booleanType);
 		Role nodeRole = Role.REALIZED;
 		StatusNode node = QVTscheduleFactory.eINSTANCE.createStatusNode();
 		node.initialize(nodeRole, region, "«status»", classDatum);
@@ -391,7 +391,7 @@ public class RegionHelper extends QVTscheduleUtil
 	public @NonNull Node createTrueNode() {
 		org.eclipse.ocl.pivot.Class booleanType = scheduleManager.getStandardLibrary().getBooleanType();
 		DomainUsage primitiveUsage = scheduleManager.getDomainAnalysis().getPrimitiveUsage();
-		ClassDatum classDatum = scheduleManager.getClassDatum(booleanType, ClassUtil.nonNullState(primitiveUsage.getTypedModel(null)));
+		ClassDatum classDatum = scheduleManager.getClassDatum(ClassUtil.nonNullState(primitiveUsage.getTypedModel(null)), booleanType);
 		Role nodeRole = Role.CONSTANT;
 		TrueNode node = QVTscheduleFactory.eINSTANCE.createTrueNode();
 		node.initialize(nodeRole, region, "«true»", classDatum);
