@@ -61,7 +61,15 @@ public interface ScheduleManager
 	@NonNull PropertyDatum getSuccessPropertyDatum(@NonNull Property successProperty);
 	@NonNull Iterable<@NonNull ClassDatum> getSuperClassDatums(@NonNull ClassDatum classDatum);
 	@NonNull Transformation getTransformation();
+
+	/**
+	 * Return true if a mapping may assign this property in an input model.
+	 */
 	boolean isDirty(@NonNull Property property);
+
+	/**
+	 * Return true if the elemental source type of thatEdge is compatible with the source type of thisEdge.
+	 */
 	boolean isElementallyConformantSource(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge);
 
 	/**

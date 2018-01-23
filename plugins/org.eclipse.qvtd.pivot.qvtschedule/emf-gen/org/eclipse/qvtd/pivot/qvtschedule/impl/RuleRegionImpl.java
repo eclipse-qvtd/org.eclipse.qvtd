@@ -37,7 +37,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -228,7 +227,7 @@ public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
 	 */
 	@Override
 	public String getName() {
-		return QVTscheduleUtil.getReferredRule(this).getName();
+		return referredRule != null ? referredRule.getName() : null;
 	}
 
 	/**

@@ -57,9 +57,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
-import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -81,18 +79,18 @@ import com.google.common.collect.Iterables;
 
 public abstract class AbstractScheduleManager implements ScheduleManager
 {
-	private final @NonNull ScheduleModel scheduleModel;
-	private final @NonNull EnvironmentFactory environmentFactory;
-	private final @NonNull Transformation transformation;
+	protected final @NonNull ScheduleModel scheduleModel;
+	protected final @NonNull EnvironmentFactory environmentFactory;
+	protected final @NonNull Transformation transformation;
 	private @Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions;
-	private final @NonNull RootDomainUsageAnalysis domainAnalysis;
-	private final @NonNull DatumCaches datumCaches;
+	protected final @NonNull RootDomainUsageAnalysis domainAnalysis;
+	protected final @NonNull DatumCaches datumCaches;
 
 	@SuppressWarnings("unused")
 	private final @NonNull DomainUsage inputUsage;
 
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
-	private final @NonNull ClassDatum oclVoidClassDatum;
+	protected final @NonNull ClassDatum oclVoidClassDatum;
 
 	/**
 	 * The extended analysis of each ClassDatum.
@@ -126,10 +124,10 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		this.environmentFactory = environmentFactory;
 		this.transformation = asTransformation;
 		this.schedulerOptions = schedulerOptions;
-		this.domainAnalysis = new QVTcoreDomainUsageAnalysis(environmentFactory);
+		this.domainAnalysis = createDomainUsageAnalysis();
 		asTransformation.getModelParameter().add(domainAnalysis.getPrimitiveTypeModel());		// FIXME move to QVTm
 		domainAnalysis.analyzeTransformation(asTransformation);
-		this.datumCaches = new DatumCaches(this);
+		this.datumCaches = createDatumCaches();
 		datumCaches.analyzeTransformation(asTransformation);
 		analyzeCallTree();
 		//
@@ -225,6 +223,10 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		CompleteClass completeClass = node.getCompleteClass();
 		return completeClass.getProperty(QVTrNameGenerator.TRACECLASS_STATUS_PROPERTY_NAME);
 	}
+
+	protected abstract @NonNull DatumCaches createDatumCaches();
+
+	protected abstract @NonNull RootDomainUsageAnalysis createDomainUsageAnalysis();
 
 	private @NonNull OperationDatum createOperationDatum(@NonNull OperationCallExp operationCallExp) {
 		List<@NonNull OCLExpression> ownedArguments = ClassUtil.nullFree(operationCallExp.getOwnedArguments());
@@ -367,7 +369,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 							if (callExp instanceof NavigationCallExp) {
 								String name = CompilerUtil.recoverVariableName(callExp);
 								if (name == null) {
-									name = QVTcoreUtil.getName(QVTcoreUtil.getReferredProperty((NavigationCallExp)callExp));
+									name = QVTscheduleUtil.getName(PivotUtil.getReferredProperty((NavigationCallExp)callExp));
 								}
 								nextNode = regionHelper.createDataTypeNode(name, dependencyNode2, (NavigationCallExp)callExp);
 							}
@@ -584,17 +586,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		return transformation;
 	}
 
-	/**
-	 * Return true if a mapping may assign this property in an input model.
-	 */
 	@Override
 	public boolean isDirty(@NonNull Property property) {
 		return domainAnalysis.isDirty(property);
 	}
 
-	/**
-	 * Return true if the elemental source type of thatEdge is compatible with the source type of thisEdge.
-	 */
 	@Override
 	public boolean isElementallyConformantSource(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge) {
 		Node thatSource = thatEdge.getEdgeSource();

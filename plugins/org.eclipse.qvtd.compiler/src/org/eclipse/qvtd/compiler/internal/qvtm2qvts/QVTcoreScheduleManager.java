@@ -16,6 +16,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 
 public class QVTcoreScheduleManager extends AbstractScheduleManager
@@ -23,5 +25,15 @@ public class QVTcoreScheduleManager extends AbstractScheduleManager
 	public QVTcoreScheduleManager(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
 			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
 		super(QVTscheduleFactory.eINSTANCE.createScheduleModel(), environmentFactory, asTransformation, schedulerOptions);
+	}
+
+	@Override
+	protected @NonNull DatumCaches createDatumCaches() {
+		return new DatumCaches(this);
+	}
+
+	@Override
+	protected @NonNull RootDomainUsageAnalysis createDomainUsageAnalysis() {
+		return new QVTcoreDomainUsageAnalysis(environmentFactory);
 	}
 }

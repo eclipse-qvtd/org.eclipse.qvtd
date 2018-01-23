@@ -75,7 +75,7 @@ import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 
 /**
- * AbstractQVTc2QVTc provides shared functionality for steps in the QVTC/QVTu/QVTm chain.
+ * AbstractQVTc2QVTc provides shared functionality for steps in the QVTc/QVTu/QVTm chain.
  */
 public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 {
