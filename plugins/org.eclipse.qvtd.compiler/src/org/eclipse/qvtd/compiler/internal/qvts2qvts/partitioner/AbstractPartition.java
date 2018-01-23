@@ -20,7 +20,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionHelper;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.MappingRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
@@ -248,7 +248,7 @@ abstract class AbstractPartition
 				partialPreferredHeadNodes.add(partitioningVisitor.getNode(preferredNode));
 			}
 		}
-		RegionHelper.initHeadNodes(microMappingRegion, partialPreferredHeadNodes);
+		MappingRegionAnalysis.initHeadNodes(microMappingRegion, partialPreferredHeadNodes);
 		return microMappingRegion;
 	}
 

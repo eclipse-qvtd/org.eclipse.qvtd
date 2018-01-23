@@ -23,8 +23,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.CompilerProblem;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.MappingRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionUtil;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -407,8 +407,8 @@ public class MappingPartitioner
 				}
 			}
 		}
-		RegionHelper regionHelper = new RegionHelper(region);
-		List<@NonNull Node> headNodes = regionHelper.computeHeadNodes(targetFromSourceClosure, null);
+		MappingRegionAnalysis mappingRegionAnalysis = new MappingRegionAnalysis(region);
+		List<@NonNull Node> headNodes = mappingRegionAnalysis.computeHeadNodes(targetFromSourceClosure, null);
 		if (headNodes.size() == 0) {
 			return Collections.emptyList();
 		}

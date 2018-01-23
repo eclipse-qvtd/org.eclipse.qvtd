@@ -175,7 +175,7 @@ abstract class RegionMerger // implements Region
 		MappingRegion newRegion = createNewRegion(newName);
 		createNewNodes(newRegion);
 		createNewEdges();
-		//		RegionHelper.initHeadNodes(newRegion);
+		//		mappingRegionAnalysis.initHeadNodes(newRegion);
 		return newRegion;
 	}
 

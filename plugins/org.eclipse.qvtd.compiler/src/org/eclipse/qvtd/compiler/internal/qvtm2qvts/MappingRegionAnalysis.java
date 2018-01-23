@@ -36,11 +36,11 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
-public class RegionHelper
+public class MappingRegionAnalysis	// FIXME Unify with MappingAnalysis
 {
 	public static void initHeadNodes(@NonNull MappingRegion mappingRegion, @Nullable List<@NonNull Node> preferredHeadNodes) {
-		RegionHelper regionHelper = new RegionHelper(mappingRegion);
-		regionHelper.initHeadNodes(preferredHeadNodes);
+		MappingRegionAnalysis mappingRegionAnalysis = new MappingRegionAnalysis(mappingRegion);
+		mappingRegionAnalysis.initHeadNodes(preferredHeadNodes);
 	}
 
 	public class HeadNodeGroup
@@ -85,12 +85,12 @@ public class RegionHelper
 		}
 
 		private void computeReachable(@NonNull Node node) {
-			for (@NonNull Edge outgoingEdge : RegionUtil.getOutgoingEdges(node)) {
+			for (@NonNull Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(node)) {
 				if (outgoingEdge.isOld()) {
 					Type sourceType = null;
-					Node targetNode = RegionUtil.getTargetNode(outgoingEdge);
+					Node targetNode = QVTscheduleUtil.getTargetNode(outgoingEdge);
 					if (outgoingEdge.isNavigation()) {
-						Property targetProperty = RegionUtil.getProperty((NavigableEdge) outgoingEdge);
+						Property targetProperty = QVTscheduleUtil.getProperty((NavigableEdge) outgoingEdge);
 						sourceType = targetProperty.getType();
 					}
 					else if (outgoingEdge.isPredicate()) {
@@ -98,9 +98,9 @@ public class RegionHelper
 					}
 					else if (outgoingEdge.isComputation() && !toOneSet.contains(targetNode) && !toManySet.contains(targetNode)) {
 						boolean reachable = true;
-						for (@NonNull Edge incomingEdge : RegionUtil.getIncomingEdges(targetNode)) {
+						for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
 							if ((incomingEdge != outgoingEdge) && incomingEdge.isComputation()) {
-								Node sourceNode = RegionUtil.getSourceNode(incomingEdge);
+								Node sourceNode = QVTscheduleUtil.getSourceNode(incomingEdge);
 								if (!sourceNode.isConstant() && !toOneSet.contains(sourceNode) && !toManySet.contains(sourceNode)) {
 									missingNodes.add(sourceNode);
 									reachable = false;
@@ -288,8 +288,8 @@ public class RegionHelper
 			//
 			//	Uncast next
 			//
-			boolean c1 = RegionUtil.getCastTarget(o1) != o1;
-			boolean c2 = RegionUtil.getCastTarget(o2) != o2;
+			boolean c1 = QVTscheduleUtil.getCastTarget(o1) != o1;
+			boolean c2 = QVTscheduleUtil.getCastTarget(o2) != o2;
 			if (c1 != c2) {
 				return !c1 ? -1 : 1;
 			}
@@ -342,7 +342,7 @@ public class RegionHelper
 	//	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> dependencyNodes = null;
 	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> deadNodes = null;
 
-	public RegionHelper(@NonNull MappingRegion mappingRegion) {
+	public MappingRegionAnalysis(@NonNull MappingRegion mappingRegion) {
 		this.mappingRegion = mappingRegion;
 	}
 
