@@ -1,13 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2015, 2018 Willink Transformations and others.
- * All rights reserved.   This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *   E.D.Willink - Initial API and implementation
- *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -21,13 +11,13 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.ComposedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.DependencyNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.ErrorNode;
@@ -58,12 +48,12 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * A RegionHelper provides stateless utility methods, mostly construction, for use within a Region
  * supervised by a ScheduleManager.
  */
-public class RegionHelper extends QVTscheduleUtil
+public class RegionHelper<R extends Region> extends QVTscheduleUtil implements Nameable
 {
 	protected final @NonNull ScheduleManager scheduleManager;
-	protected final @NonNull Region region;
+	protected final @NonNull R region;
 
-	public RegionHelper(@NonNull ScheduleManager scheduleManager, @NonNull Region region) {
+	public RegionHelper(@NonNull ScheduleManager scheduleManager, @NonNull R region) {
 		this.scheduleManager = scheduleManager;
 		this.region = region;
 	}
@@ -75,13 +65,6 @@ public class RegionHelper extends QVTscheduleUtil
 		castEdge.initialize(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
 		castEdge.initializeProperty(source2targetProperty);
 		return castEdge;
-	}
-
-	public @NonNull Node createComposingNode(@NonNull String name, @NonNull ClassDatum classDatum) {
-		Role nodeRole = Role.LOADED;
-		ComposedNode node = QVTscheduleFactory.eINSTANCE.createComposedNode();
-		node.initialize(nodeRole, region, name, classDatum);
-		return node;
 	}
 
 	public @NonNull Node createDataTypeNode(@NonNull String name, @NonNull Node sourceNode, @NonNull NavigationCallExp navigationCallExp) {
@@ -259,37 +242,12 @@ public class RegionHelper extends QVTscheduleUtil
 		return node;
 	}
 
-	public @NonNull Node createOperationElementNode(@NonNull String name, @NonNull ClassDatum classDatum, @NonNull Node sourceNode) {
-		Role nodeRole = getNodeRole(sourceNode);
-		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
-		node.initialize(nodeRole, region, name, classDatum);
-		node.setMatched(true);
-		return node;
-	}
-
 	public @NonNull Node createOperationNode(boolean isMatched, @NonNull String name, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
 		Role nodeRole = getOperationNodePhase(region, typedElement, argNodes);
 		OperationNode node = QVTscheduleFactory.eINSTANCE.createOperationNode();
 		node.initialize(nodeRole, region, name, scheduleManager.getClassDatum(typedElement));
 		node.setMatched(isMatched);
 		node.addTypedElement(typedElement);
-		return node;
-	}
-
-	public @NonNull Node createOperationParameterNode(@NonNull String name, @NonNull ClassDatum classDatum) {
-		Role nodeRole = Role.PREDICATED;
-		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
-		node.initialize(nodeRole, region, name, classDatum);
-		node.setMatched(true);
-		node.setHead();
-		return node;
-	}
-
-	public @NonNull Node createOperationResultNode(@NonNull String name, @NonNull ClassDatum classDatum, @NonNull Node sourceNode) {
-		Role nodeRole = getNodeRole(sourceNode);
-		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
-		node.initialize(nodeRole, region, name, classDatum);
-		node.setMatched(false);
 		return node;
 	}
 
@@ -406,6 +364,11 @@ public class RegionHelper extends QVTscheduleUtil
 		return node;
 	}
 
+	@Override
+	public @NonNull String getName() {
+		return QVTscheduleUtil.getName(region);
+	}
+
 	protected @NonNull Role getPatternNodeRole(@NonNull Node sourceNode, @NonNull Property property) {
 		Role phase;
 		switch (getNodeRole(sourceNode)) {
@@ -421,7 +384,7 @@ public class RegionHelper extends QVTscheduleUtil
 		return phase;
 	}
 
-	public @NonNull Region getRegion() {
+	public @NonNull R getRegion() {
 		return region;
 	}
 

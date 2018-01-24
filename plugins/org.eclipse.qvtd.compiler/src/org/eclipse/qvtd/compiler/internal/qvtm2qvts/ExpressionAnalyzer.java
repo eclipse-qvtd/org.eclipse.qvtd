@@ -95,12 +95,12 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 	public class ConditionalExpressionAnalyzer extends ExpressionAnalyzer
 	{
 		protected ConditionalExpressionAnalyzer() {
-			super(ExpressionAnalyzer.this.regionHelper, ExpressionAnalyzer.this.context);
+			super(ExpressionAnalyzer.this.context);
 		}
 
 		@Override
 		protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
-			return regionHelper.createStepNode(name, callExp, sourceNode, false);
+			return context.createStepNode(name, callExp, sourceNode, false);
 		}
 
 		@Override
@@ -109,7 +109,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		}
 	}
 
-	protected final @NonNull RegionHelper regionHelper;
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull QVTcoreHelper helper;
@@ -123,10 +122,9 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 	 */
 	private @Nullable Map<@NonNull OCLExpression, @NonNull Node> expression2knownNode;
 
-	protected ExpressionAnalyzer(@NonNull RegionHelper regionHelper, @NonNull RuleAnalysis context) {
+	protected ExpressionAnalyzer(@NonNull RuleAnalysis context) {
 		super(context);
-		this.regionHelper = regionHelper;
-		this.scheduleManager = regionHelper.getScheduleManager();
+		this.scheduleManager = context.getScheduleManager();
 		this.environmentFactory = scheduleManager.getEnvironmentFactory();
 		this.helper = new QVTcoreHelper(environmentFactory);
 		this.standardLibraryHelper = new StandardLibraryHelper(environmentFactory.getStandardLibrary());
@@ -407,52 +405,52 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 	}
 
 	protected @NonNull NavigableEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
-		return regionHelper.createCastEdge(sourceNode, castProperty, castNode);
+		return context.createCastEdge(sourceNode, castProperty, castNode);
 	}
 
 	protected @NonNull Node createDataTypeNode(@NonNull String name, @NonNull Node sourceNode, @NonNull NavigationCallExp navigationCallExp) {
-		return regionHelper.createDataTypeNode(name, sourceNode, navigationCallExp);
+		return context.createDataTypeNode(name, sourceNode, navigationCallExp);
 	}
 
 	protected @NonNull Node createDependencyNode(@NonNull String name, @NonNull ClassDatum classDatum) {
-		return regionHelper.createDependencyNode(name, classDatum);
+		return context.createDependencyNode(name, classDatum);
 	}
 
 	protected @NonNull Node createErrorNode(@NonNull String name, @NonNull ClassDatum classDatum) {
-		return regionHelper.createErrorNode(name, classDatum);
+		return context.createErrorNode(name, classDatum);
 	}
 
 	protected @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
-		return regionHelper.createExpressionEdge(sourceNode, name, targetNode);
+		return context.createExpressionEdge(sourceNode, name, targetNode);
 	}
 
 	protected @NonNull Edge createIteratedEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
-		return regionHelper.createIteratedEdge(sourceNode, name, targetNode);
+		return context.createIteratedEdge(sourceNode, name, targetNode);
 	}
 
 	protected @NonNull Node createIteratorNode(@NonNull Variable iterator, @NonNull Node sourceNode) {
-		return regionHelper.createIteratorNode(iterator, sourceNode);
+		return context.createIteratorNode(iterator, sourceNode);
 	}
 
 	protected @NonNull Node createLetNode(@NonNull Variable letVariable, @NonNull Node inNode) {
-		return regionHelper.createLetVariableNode(letVariable, inNode);
+		return context.createLetVariableNode(letVariable, inNode);
 	}
 
 	protected @NonNull Node createNavigableDataTypeNode(@NonNull Node targetNode, @NonNull NavigationAssignment navigationAssignment) {
-		return regionHelper.createDataTypeNode(targetNode, navigationAssignment);
+		return context.createDataTypeNode(targetNode, navigationAssignment);
 	}
 
 	protected @NonNull Node createNavigableDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
 		assert sourceNode.isMatched();
-		return regionHelper.createDataTypeNode(sourceNode, source2targetProperty);
+		return context.createDataTypeNode(sourceNode, source2targetProperty);
 	}
 
 	protected @NonNull NavigableEdge createNavigableNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode) {
-		return regionHelper.createNavigationEdge(sourceNode, source2targetProperty, targetNode, false);
+		return context.createNavigationEdge(sourceNode, source2targetProperty, targetNode, false);
 	}
 
 	protected @NonNull NavigableEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
-		return regionHelper.createNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
+		return context.createNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
 	}
 
 	protected @NonNull NavigableEdge createNavigationOrRealizedEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
@@ -469,35 +467,35 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 	}
 
 	protected @NonNull Node createNullNode(@NonNull TypedElement typedElement) {
-		return regionHelper.createNullNode(isUnconditional(), typedElement);
+		return context.createNullNode(isUnconditional(), typedElement);
 	}
 
 	protected @NonNull Node createOperationNode(@NonNull String name, @NonNull TypedElement typedElement, @NonNull Node @NonNull ... argNodes) {
-		return regionHelper.createOperationNode(isUnconditional(), name, typedElement, argNodes);
+		return context.createOperationNode(isUnconditional(), name, typedElement, argNodes);
 	}
 
 	protected @NonNull Edge createPredicateEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		return regionHelper.createPredicateEdge(sourceNode, name, targetNode);
+		return context.createPredicateEdge(sourceNode, name, targetNode);
 	}
 
 	protected @NonNull Node createPredicatedClassNode(@NonNull Node parentNode, @NonNull NavigationAssignment navigationAssignment) {
-		return regionHelper.createDependencyClassNode(parentNode, navigationAssignment);
+		return context.createDependencyClassNode(parentNode, navigationAssignment);
 	}
 
 	protected @NonNull Node createRealizedDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
-		return regionHelper.createRealizedDataTypeNode(sourceNode, source2targetProperty);
+		return context.createRealizedDataTypeNode(sourceNode, source2targetProperty);
 	}
 
 	protected @NonNull Edge createRealizedExpressionEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
-		return regionHelper.createRealizedExpressionEdge(sourceNode, name, targetNode);
+		return context.createRealizedExpressionEdge(sourceNode, name, targetNode);
 	}
 
 	protected @NonNull NavigableEdge createRealizedNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
-		return regionHelper.createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
+		return context.createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
 	}
 
 	protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
-		return regionHelper.createStepNode(name, callExp, sourceNode, sourceNode.isMatched() && QVTscheduleUtil.isMatched(callExp));
+		return context.createStepNode(name, callExp, sourceNode, sourceNode.isMatched() && QVTscheduleUtil.isMatched(callExp));
 	}
 
 	protected @Nullable Node findOperationNode(@NonNull String name, @NonNull Node @NonNull ... sourceAndArgumentNodes) {
@@ -580,7 +578,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 					if (navigationAssignment == null) {
 						Node stepNode = createNavigableDataTypeNode(sourceNode, source2targetProperty);
 						navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, stepNode, navigationAssignment);
-						regionHelper.createEqualsEdge(targetNode, stepNode);
+						context.createEqualsEdge(targetNode, stepNode);
 					}
 					else {
 						//						Node stepNode = createNavigableDataTypeNode(targetNode, navigationAssignment);
@@ -593,7 +591,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		else {
 			//			if (!navigationEdge.isRealized() || targetNode.isRealized()) {
 			if (targetNode != navigationEdge.getEdgeTarget()) {
-				regionHelper.createEqualsEdge(targetNode, navigationEdge.getEdgeTarget());
+				context.createEqualsEdge(targetNode, navigationEdge.getEdgeTarget());
 			}
 		}
 		return navigationEdge;
@@ -605,7 +603,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		if (navigationEdge != null) {
 			Node target = navigationEdge.getEdgeTarget();
 			if (target != targetNode) {
-				regionHelper.createEqualsEdge(targetNode, target);
+				context.createEqualsEdge(targetNode, target);
 			}
 		}
 		else {
@@ -647,7 +645,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 				Node valueNode = navigationEdge.getEdgeTarget();
 				assert valueNode.isRealized();
 				Type type = source2targetProperty.getType();
-				Edge equalsEdge = regionHelper.createEqualsEdge(targetNode, valueNode);
+				Edge equalsEdge = context.createEqualsEdge(targetNode, valueNode);
 				if (type instanceof DataType) {
 					assert equalsEdge.isRealized();			// ?? obsolete legacy check that never seems to be used
 				}

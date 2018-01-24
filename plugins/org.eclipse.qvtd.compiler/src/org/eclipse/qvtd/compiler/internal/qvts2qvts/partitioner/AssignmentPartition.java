@@ -77,7 +77,7 @@ class AssignmentPartition extends AbstractPartition
 
 	@Override
 	protected @NonNull PartitioningVisitor createPartitioningVisitor(@NonNull MicroMappingRegion partialRegion) {
-		return new PartitioningVisitor(new RegionHelper(scheduleManager, partialRegion), this)
+		return new PartitioningVisitor(new RegionHelper<>(scheduleManager, partialRegion), this)
 		{
 			@Override
 			public @Nullable Element visitStatusNode(@NonNull StatusNode node) {

@@ -19,7 +19,6 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
@@ -28,11 +27,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 /**
  * A RuleAnalysis provides the analysis a QVTb rule.
  */
-public abstract class RuleAnalysis implements Nameable
+public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 {
-	protected final @NonNull ScheduleManager scheduleManager;
-	protected final @NonNull RuleRegion ruleRegion;
-	protected final @NonNull RegionHelper regionHelper;
 	protected final @NonNull ExpressionAnalyzer expressionAnalyzer;
 
 	/**
@@ -41,10 +37,8 @@ public abstract class RuleAnalysis implements Nameable
 	private /*@LazyNonNull*/ List<@NonNull Node> dependencyHeadNodes = null;
 
 	protected RuleAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull RuleRegion ruleRegion) {
-		this.scheduleManager = scheduleManager;
-		this.ruleRegion = ruleRegion;
-		this.regionHelper = new RegionHelper(scheduleManager, ruleRegion);
-		this.expressionAnalyzer = new ExpressionAnalyzer(regionHelper, this);
+		super(scheduleManager, ruleRegion);
+		this.expressionAnalyzer = new ExpressionAnalyzer(this);
 		assert scheduleManager.getScheduleModel().getOwnedMappingRegions().contains(ruleRegion);
 	}
 
@@ -52,7 +46,7 @@ public abstract class RuleAnalysis implements Nameable
 		if (dependencyHeadNodes == null) {
 			dependencyHeadNodes = new ArrayList<>();
 		}
-		Node dependencyHeadNode = regionHelper.createDependencyNode("«extra-" + (dependencyHeadNodes.size()+1) + "»", classDatum);
+		Node dependencyHeadNode = createDependencyNode("«extra-" + (dependencyHeadNodes.size()+1) + "»", classDatum);
 		dependencyHeadNode.setHead();
 		dependencyHeadNodes.add(dependencyHeadNode);
 		return dependencyHeadNode;
@@ -69,26 +63,17 @@ public abstract class RuleAnalysis implements Nameable
 		return null;
 	}
 
-	@Override
-	public @NonNull String getName() {
-		return QVTscheduleUtil.getName(ruleRegion);
-	}
-
 	public abstract @NonNull Node getReferenceNode(@NonNull VariableDeclaration variableDeclaration);
 
 	public @NonNull RuleRegion getRuleRegion() {
-		return ruleRegion;
-	}
-
-	protected @NonNull ScheduleManager getScheduleManager() {
-		return scheduleManager;
+		return region;
 	}
 
 	public @NonNull Node getUnknownNode(@NonNull TypedElement typedElement) {
 		assert !(typedElement instanceof Property);		// Property entries should be AttributeNodes
-		Node node = ruleRegion.getNode(typedElement);
+		Node node = region.getNode(typedElement);
 		if (node == null) {
-			node = regionHelper.createUnknownNode(ClassUtil.nonNullState(typedElement.getType().toString()), typedElement);
+			node = createUnknownNode(ClassUtil.nonNullState(typedElement.getType().toString()), typedElement);
 			//			node2node.put(typedElement, node);
 		}
 		return node;

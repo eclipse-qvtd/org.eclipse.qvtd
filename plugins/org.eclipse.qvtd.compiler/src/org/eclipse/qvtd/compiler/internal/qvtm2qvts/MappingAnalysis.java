@@ -184,15 +184,15 @@ public class MappingAnalysis extends RuleAnalysis
 			else { */
 			Node resultNode = conditionExpression.accept(expressionAnalyzer);
 			if ((resultNode != null) && !resultNode.isTrue()) {
-				Node trueNode = regionHelper.createTrueNode();
-				regionHelper.createPredicateEdge(resultNode, null, trueNode);
+				Node trueNode = createTrueNode();
+				createPredicateEdge(resultNode, null, trueNode);
 			}
 			// FIXME ?? do includes() here explicitly
 		}
 	}
 
 	protected void analyzeContainments() {
-		for (@NonNull Node node : ruleRegion.getNewNodes()) {
+		for (@NonNull Node node : region.getNewNodes()) {
 			boolean isContained = false;
 			for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 				Property property = edge.getProperty();
@@ -214,10 +214,10 @@ public class MappingAnalysis extends RuleAnalysis
 	protected void analyzeGuardVariables() {
 		for (@NonNull GuardPattern guardPattern : guardPatterns) {
 			for (@NonNull Variable guardVariable : ClassUtil.nullFree(guardPattern.getVariable())) {
-				Node guardNode = ruleRegion.getNode(guardVariable);
+				Node guardNode = region.getNode(guardVariable);
 				assert guardNode == null;
-				guardNode = regionHelper.createOldNode(guardVariable);
-				assert guardNode == ruleRegion.getNode(guardVariable);
+				guardNode = createOldNode(guardVariable);
+				assert guardNode == region.getNode(guardVariable);
 			}
 		}
 	}
@@ -272,10 +272,10 @@ public class MappingAnalysis extends RuleAnalysis
 	protected void analyzeRealizedVariables() {
 		for (@NonNull BottomPattern bottomPattern : bottomPatterns) {
 			for (@NonNull RealizedVariable realizedVariable : ClassUtil.nullFree(bottomPattern.getRealizedVariable())) {
-				Node realizedNode = ruleRegion.getNode(realizedVariable);
+				Node realizedNode = region.getNode(realizedVariable);
 				assert realizedNode == null;
-				realizedNode = regionHelper.createRealizedStepNode(realizedVariable);
-				assert realizedNode == ruleRegion.getNode(realizedVariable);
+				realizedNode = createRealizedStepNode(realizedVariable);
+				assert realizedNode == region.getNode(realizedVariable);
 			}
 		}
 	}
@@ -311,14 +311,14 @@ public class MappingAnalysis extends RuleAnalysis
 				//		assert guardVariables.contains(targetVariable);
 				//		assert guardVariables.contains(sourceVariable);
 				Node sourceNode = getReferenceNode(sourceVariable);
-				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : regionHelper.createNullNode(true, null);
+				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : createNullNode(true, null);
 				//				assert sourceNode.isGuard();
 				//				assert (boundVariable == null) || targetNode.isGuard();
 				assert sourceNode.isClass();
 				if (!referredProperty.isIsMany()) {
 					Edge predicateEdge = sourceNode.getPredicateEdge(referredProperty);
 					if (predicateEdge == null) {
-						regionHelper.createNavigationEdge(sourceNode, referredProperty, targetNode, false);
+						createNavigationEdge(sourceNode, referredProperty, targetNode, false);
 					}
 					else {
 						assert predicateEdge.getEdgeTarget() == targetNode;
@@ -375,19 +375,19 @@ public class MappingAnalysis extends RuleAnalysis
 		ClassDatum variableClassDatum = scheduleManager.getClassDatum(variable);
 		CompleteClass variableCompleteClass = QVTscheduleUtil.getCompleteClass(variableClassDatum);
 		if (!initCompleteClass.conformsTo(variableCompleteClass)) {
-			Node castNode = regionHelper.createOldNode(variable);
+			Node castNode = createOldNode(variable);
 			Property castProperty = scheduleManager.getCastProperty(PivotUtil.getType(variable));
 			expressionAnalyzer.createCastEdge(bestInitNode, castProperty, castNode);
 			bestInitNode = castNode;
 		}
 		bestInitNode.addTypedElement(variable);
-		ruleRegion.addVariableNode(variable, bestInitNode);
+		region.addVariableNode(variable, bestInitNode);
 		for (@NonNull OCLExpression initExpression : expressions) {
 			if (initExpression != bestInitExpression) {
 				// FIXME if the extra init is a navigation we can add a navigation to the bestInitNode
 				Node initNode = bestInitExpression.accept(expressionAnalyzer);
 				assert initNode != null;
-				regionHelper.createEqualsEdge(bestInitNode, initNode);
+				createEqualsEdge(bestInitNode, initNode);
 			}
 		}
 		return bestInitNode;
@@ -460,7 +460,7 @@ public class MappingAnalysis extends RuleAnalysis
 
 	@Override
 	public @NonNull Node getReferenceNode(@NonNull VariableDeclaration variableDeclaration) {
-		Node node = ruleRegion.getNode(variableDeclaration);
+		Node node = region.getNode(variableDeclaration);
 		if (node == null) {
 			if (variableDeclaration instanceof Variable) {
 				Variable variable = (Variable)variableDeclaration;
@@ -478,12 +478,12 @@ public class MappingAnalysis extends RuleAnalysis
 					if (isEnforceable) {
 						//						assert variable instanceof RealizedVariable;
 						if (!(variable instanceof RealizedVariable)) {
-							scheduleManager.addRegionError(ruleRegion, "Enforceable variable ''{0}'' has not been realized in ''{1}''", variable, ruleRegion);
+							scheduleManager.addRegionError(region, "Enforceable variable ''{0}'' has not been realized in ''{1}''", variable, region);
 						}
-						node = regionHelper.createRealizedStepNode(variable);
+						node = createRealizedStepNode(variable);
 					}
 					else {
-						node = regionHelper.createLoadedStepNode(variable);		// FIXME Predicated ??
+						node = createLoadedStepNode(variable);		// FIXME Predicated ??
 					}
 				}
 			}
@@ -519,7 +519,7 @@ public class MappingAnalysis extends RuleAnalysis
 		analyzeComplexPredicates();
 		analyzeContainments();
 		//
-		MappingRegionAnalysis mappingRegionAnalysis = new MappingRegionAnalysis(ruleRegion);
+		MappingRegionAnalysis mappingRegionAnalysis = new MappingRegionAnalysis(region);
 		List<@NonNull Node> headNodes = mappingRegionAnalysis.initHeadNodes(null);
 		mappingRegionAnalysis.computeUtilities(headNodes);
 	}
@@ -544,13 +544,13 @@ public class MappingAnalysis extends RuleAnalysis
 	}
 
 	public void registerConsumptionsAndProductions() {
-		for (@NonNull Node newNode : ruleRegion.getNewNodes()) {
+		for (@NonNull Node newNode : region.getNewNodes()) {
 			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(newNode);
-			classDatum.getProducingRegions().add(ruleRegion);
+			classDatum.getProducingRegions().add(region);
 		}
-		for (@NonNull Node predicatedNode : ruleRegion.getOldNodes()) {
+		for (@NonNull Node predicatedNode : region.getOldNodes()) {
 			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(predicatedNode);
-			classDatum.getConsumingRegions().add(ruleRegion);
+			classDatum.getConsumingRegions().add(region);
 		}
 	}
 }

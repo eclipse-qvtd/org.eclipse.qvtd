@@ -265,7 +265,7 @@ abstract class AbstractPartition
 	}
 
 	protected @NonNull PartitioningVisitor createPartitioningVisitor(@NonNull MicroMappingRegion partialRegion) {
-		return new PartitioningVisitor(new RegionHelper(scheduleManager, partialRegion), this);
+		return new PartitioningVisitor(new RegionHelper<>(scheduleManager, partialRegion), this);
 	}
 
 	/**

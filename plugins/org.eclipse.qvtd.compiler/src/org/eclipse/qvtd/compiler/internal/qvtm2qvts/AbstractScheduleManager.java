@@ -242,7 +242,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		return new OperationDatum(this, operationName, classDatums);
 	}
 
-	private @NonNull Node createOperationParameterNode(@NonNull RegionHelper regionHelper, @NonNull Variable variable, @NonNull String name, @NonNull OCLExpression expression) {
+	private @NonNull Node createOperationParameterNode(@NonNull OperationRegionHelper regionHelper, @NonNull Variable variable, @NonNull String name, @NonNull OCLExpression expression) {
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)expression.getType();
 		assert type != null;
 		TypedModel typedModel = getDomainUsage(expression).getTypedModel(expression);
@@ -250,14 +250,14 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		ClassDatum classDatum = getClassDatum(typedModel, type);
 		Node parameterNode = regionHelper.createOperationParameterNode(name, classDatum);
 		//		addVariableNode(variable, parameterNode);
-		((OperationRegion)regionHelper.getRegion()).addHeadNode(parameterNode);
+		regionHelper.getRegion().addHeadNode(parameterNode);
 		return parameterNode;
 	}
 
-	private @NonNull Node createOperationParameterNode(@NonNull RegionHelper regionHelper, @NonNull ClassDatum classDatum, @NonNull String name) {
+	private @NonNull Node createOperationParameterNode(@NonNull OperationRegionHelper regionHelper, @NonNull ClassDatum classDatum, @NonNull String name) {
 		Node parameterNode = regionHelper.createOperationParameterNode(name, classDatum);
 		//		addVariableNode(variable, parameterNode);
-		((OperationRegion)regionHelper.getRegion()).addHeadNode(parameterNode);
+		regionHelper.getRegion().addHeadNode(parameterNode);
 		return parameterNode;
 	}
 
@@ -269,7 +269,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		scheduleManager.getScheduleModel().getOwnedOperationRegions().add(operationRegion);
 		operationRegion.setReferredOperation(ClassUtil.nonNullState(operationCallExp.getReferredOperation()));
 		operationRegion.setName(operationName);
-		RegionHelper regionHelper = new RegionHelper(scheduleManager, operationRegion);
+		OperationRegionHelper regionHelper = new OperationRegionHelper(scheduleManager, operationRegion);
 		//
 		Variable selfVariable = specification.getOwnedContext();
 		OCLExpression source = operationCallExp.getOwnedSource();

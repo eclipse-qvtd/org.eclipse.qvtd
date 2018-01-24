@@ -35,7 +35,7 @@ import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RootMappingAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.LoadingRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
@@ -72,9 +72,9 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull ProblemHandler problemHandler;
 	protected final @NonNull String rootName;
-	private final @NonNull LoadingRegion loadingRegion;
+	//	private final @NonNull LoadingRegion loadingRegion;
 	private ContentsAnalysis contentsAnalysis;
-	private final @NonNull RootMappingAnalysis rootAnalysis;
+	private final @NonNull LoadingRegionAnalysis loadingRegionAnalysis;
 
 	protected final @NonNull CompleteModel completeModel;
 	private final @NonNull Map<@NonNull Region, org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis> region2regionAnalysis = new HashMap<>();
@@ -104,9 +104,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		this.standardLibraryHelper = new StandardLibraryHelper(standardLibrary);
 		this.problemHandler = problemHandler;
 		this.rootName = rootName;
-		this.loadingRegion = createLoadingRegion();
-
-		this.rootAnalysis = new RootMappingAnalysis(scheduleManager, loadingRegion);
+		this.loadingRegionAnalysis = new LoadingRegionAnalysis(scheduleManager, createLoadingRegion());
 		this.completeModel = environmentFactory.getCompleteModel();
 	}
 
@@ -150,6 +148,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	 * composition relationships that form part of an extended metamodel that is not known until run-time.
 	 */
 	private @NonNull LoadingRegion createRootContainmentRegion(@NonNull ScheduledRegion rootScheduledRegion) {
+		LoadingRegion loadingRegion = loadingRegionAnalysis.getRegion();
 		loadingRegion.setOwningScheduledRegion(rootScheduledRegion);
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			scheduleManager.writeDebugGraphs(loadingRegion, null);
@@ -1000,7 +999,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			return contentsAnalysis.getNewNodes(classDatum);	// FIXME also dependsOn ??
 		}
 		List<@NonNull Node> nodes = new ArrayList<>();
-		nodes.add(rootAnalysis.getIntroducerNode(headNode));
+		nodes.add(loadingRegionAnalysis.getIntroducerNode(headNode));
 		for (@NonNull TypedModel dependsOn : QVTbaseUtil.getDependsOns(QVTscheduleUtil.getTypedModel(classDatum))) {
 			ClassDatum classDatum2 = scheduleManager.getClassDatum(dependsOn, headNode.getCompleteClass().getPrimaryClass());
 			Iterable<@NonNull Node> newNodes = contentsAnalysis.getNewNodes(classDatum2);
@@ -1124,7 +1123,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			activeRegions = partitionedRegions;
 		}
 		ScheduledRegion rootRegion = createRootRegion(activeRegions);
-		rootRegion.setOwnedLoadingRegion(loadingRegion);
+		rootRegion.setOwnedLoadingRegion(loadingRegionAnalysis.getRegion());
 		createSchedule1(rootRegion);
 		createSchedule2(rootRegion);
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {

@@ -371,7 +371,7 @@ public class MappingPartitioner
 		Property statusProperty = scheduleManager.basicGetStatusProperty(traceNode);
 		if (statusProperty != null) {
 			transformationPartitioner.getSuccessPropertyDatum(statusProperty);
-			RegionHelper regionHelper = new RegionHelper(scheduleManager, region);
+			RegionHelper<@NonNull MappingRegion> regionHelper = new RegionHelper<>(scheduleManager, region);
 			statusNode = regionHelper.createStatusNode();
 			statusNode.setUtility(Node.Utility.STRONGLY_MATCHED);
 			@SuppressWarnings("unused")

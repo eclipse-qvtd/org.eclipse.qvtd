@@ -22,19 +22,18 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.ComposedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 
 /**
- * A RootMappingAnalysis provides an analysis of what is introduced by the root mapping.
+ * A LoadingRegionAnalysis provides an analysis of what is externally introduced to the ScheduledRegion.
  */
-public class RootMappingAnalysis
+public class LoadingRegionAnalysis extends RegionHelper<@NonNull LoadingRegion>
 {
-	protected final @NonNull ScheduleManager scheduleManager;
-	protected final @NonNull LoadingRegion loadingRegion;
-	protected final @NonNull RegionHelper regionHelper;
-
 	/**
 	 * The null node that is the 'container' of all root model elements.
 	 */
@@ -52,10 +51,15 @@ public class RootMappingAnalysis
 	 */
 	private final @NonNull Map<@NonNull ClassDatum, @NonNull Map<@Nullable ClassDatum, @NonNull Node>> classDatum2type2node = new HashMap<>();
 
-	public RootMappingAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull LoadingRegion loadingRegion) {
-		this.scheduleManager = scheduleManager;
-		this.loadingRegion = loadingRegion;
-		this.regionHelper = new RegionHelper(scheduleManager, loadingRegion);
+	public LoadingRegionAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull LoadingRegion loadingRegion) {
+		super(scheduleManager, loadingRegion);
+	}
+
+	public @NonNull Node createComposingNode(@NonNull String name, @NonNull ClassDatum classDatum) {
+		Role nodeRole = Role.LOADED;
+		ComposedNode node = QVTscheduleFactory.eINSTANCE.createComposedNode();
+		node.initialize(nodeRole, region, name, classDatum);
+		return node;
 	}
 
 	public @NonNull Node getIntroducerNode(@NonNull Node consumerNode) {
@@ -94,7 +98,7 @@ public class RootMappingAnalysis
 			}
 			introducedNode = type2node.get(null);
 			if (introducedNode == null) {
-				introducedNode = regionHelper.createComposingNode("«" + elementType.getName() + "»", childrenClassDatum);
+				introducedNode = createComposingNode("«" + elementType.getName() + "»", childrenClassDatum);
 				type2node.put(null, introducedNode);
 			}
 		}
@@ -106,9 +110,9 @@ public class RootMappingAnalysis
 			}
 			introducedNode = property2node.get(null);
 			if (introducedNode == null) {
-				introducedNode = regionHelper.createComposingNode("«" + elementType.getName() + "-null»", childrenClassDatum);
+				introducedNode = createComposingNode("«" + elementType.getName() + "-null»", childrenClassDatum);
 				property2node.put(null, introducedNode);
-				regionHelper.createNavigationEdge(getNullNode(), parent2childProperty, introducedNode, false);
+				createNavigationEdge(getNullNode(), parent2childProperty, introducedNode, false);
 			}
 		}
 		else if (containingClassDatum != null) {								// Non-root oclContainer ownership
@@ -119,10 +123,10 @@ public class RootMappingAnalysis
 			}
 			introducedNode = type2node.get(containingClassDatum);
 			if (introducedNode == null) {
-				introducedNode = regionHelper.createComposingNode("«" + elementType.getName() + "-oclContents»", childrenClassDatum);
+				introducedNode = createComposingNode("«" + elementType.getName() + "-oclContents»", childrenClassDatum);
 				type2node.put(containingClassDatum, introducedNode);
-				Node containerNode = regionHelper.createComposingNode("«" + containingClassDatum.getCompleteClass().getName() + "-oclContainer»", containingClassDatum);
-				regionHelper.createNavigationEdge(containerNode, parent2childProperty, introducedNode, false);
+				Node containerNode = createComposingNode("«" + containingClassDatum.getCompleteClass().getName() + "-oclContainer»", containingClassDatum);
+				createNavigationEdge(containerNode, parent2childProperty, introducedNode, false);
 			}
 		}
 		else {																			// Knonw distinctive containment
@@ -133,13 +137,13 @@ public class RootMappingAnalysis
 			}
 			introducedNode = property2node.get(parent2childProperty);
 			if (introducedNode == null) {
-				introducedNode = regionHelper.createComposingNode("«" + elementType.getName() + "-" + parent2childProperty.getName() + "»", childrenClassDatum);
+				introducedNode = createComposingNode("«" + elementType.getName() + "-" + parent2childProperty.getName() + "»", childrenClassDatum);
 				property2node.put(parent2childProperty, introducedNode);
 				org.eclipse.ocl.pivot.Class owningClass = parent2childProperty.getOwningClass();
 				assert owningClass != null;
 				containingClassDatum = scheduleManager.getClassDatum(typedModel, owningClass);
-				Node containerNode = regionHelper.createComposingNode("«" + owningClass.getName() + "-" + parent2childProperty.getName() + "»", containingClassDatum);
-				regionHelper.createNavigationEdge(containerNode, parent2childProperty, introducedNode, false);
+				Node containerNode = createComposingNode("«" + owningClass.getName() + "-" + parent2childProperty.getName() + "»", containingClassDatum);
+				createNavigationEdge(containerNode, parent2childProperty, introducedNode, false);
 			}
 		}
 		return introducedNode;
@@ -148,7 +152,7 @@ public class RootMappingAnalysis
 	protected @NonNull Node getNullNode() {
 		Node nullNode2 = nullNode;
 		if (nullNode2 == null) {
-			nullNode = nullNode2 = regionHelper.createNullNode(true, null);
+			nullNode = nullNode2 = createNullNode(true, null);
 		}
 		return nullNode2;
 	}
