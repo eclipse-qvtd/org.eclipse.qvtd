@@ -259,7 +259,7 @@ public class LateConsumerMerger extends AbstractMerger
 		lateMerger.merge();
 		lateMerger.prune();
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(scheduledRegion, "8-late", true, true, false);
+			scheduleManager.writeDebugGraphs("8-late", true, true, false);
 		}
 		return lateMerger.getMerges();
 	}

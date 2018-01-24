@@ -43,7 +43,7 @@ public abstract class AbstractExtendingQVTscheduleVisitor<R, C>
 
 	@Override
 	public R visitAbstractDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull AbstractDatum object) {
-		return visitElement(object);
+		return visitNamedElement(object);
 	}
 
 	@Override

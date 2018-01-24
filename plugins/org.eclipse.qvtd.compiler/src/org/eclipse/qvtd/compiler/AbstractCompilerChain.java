@@ -34,6 +34,7 @@ import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTc2QVTu;
@@ -51,7 +52,9 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.Create
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
@@ -228,8 +231,10 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				ScheduleManager scheduleManager = qvtm2qvts.getScheduleManager();
 				String rootName = ClassUtil.nonNullState(asTransformation.eResource().getURI().trimFileExtension().trimFileExtension().lastSegment());
 				QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, scheduleManager, rootName);
-				ScheduledRegion scheduledRegion = qvts2qvts.transform(scheduleManager, activeRegions);
-				scheduledRegion.setReferredTransformation(asTransformation);
+				List<@NonNull ScheduledRegion> scheduledRegions = qvts2qvts.transform(scheduleManager, activeRegions);
+				for (@NonNull ScheduledRegion scheduledRegion : scheduledRegions) {
+					scheduledRegion.setReferredTransformation(asTransformation);
+				}
 				throwCompilerChainExceptionForErrors();
 				sResource.getContents().add(scheduleManager.getScheduleModel());
 				saveResource(sResource);
@@ -251,9 +256,11 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			// Default QVTi strategy ok.
 			Resource iResource = createResource();
 			ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
-			ScheduledRegion rootRegion = QVTscheduleUtil.getOwnedScheduledRegion(scheduleModel);
 			QVTs2QVTi tx = new QVTs2QVTi(scheduleManager, this, environmentFactory);
-			Model model = tx.transform(rootRegion);
+			Model model = PivotUtil.createModel(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, null);
+			for (@NonNull ScheduledRegion scheduledRegion : QVTscheduleUtil.getOwnedScheduledRegions(scheduleModel)) {
+				tx.transform(model, scheduledRegion);
+			}
 			iResource.getContents().add(model);
 			saveResource(iResource);
 			ImperativeTransformation transformation = (ImperativeTransformation) getTransformation(iResource);

@@ -274,7 +274,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningScheduleModel != null)
-				msgs = ((InternalEObject)newOwningScheduleModel).eInverseAdd(this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_SCHEDULED_REGION, ScheduleModel.class, msgs);
+				msgs = ((InternalEObject)newOwningScheduleModel).eInverseAdd(this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_SCHEDULED_REGIONS, ScheduleModel.class, msgs);
 			msgs = basicSetOwningScheduleModel(newOwningScheduleModel, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -376,7 +376,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case QVTschedulePackage.SCHEDULED_REGION__OWNING_SCHEDULE_MODEL:
-				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_SCHEDULED_REGION, ScheduleModel.class, msgs);
+				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_SCHEDULED_REGIONS, ScheduleModel.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

@@ -71,7 +71,7 @@ public class ConnectivityChecker
 
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull ScheduleModel scheduleModel;
-	protected final @NonNull ScheduledRegion scheduledRegion;
+	//	protected final @NonNull ScheduledRegion scheduledRegion;
 	private final @NonNull Map<@NonNull String, @NonNull ClassDatum> name2classDatum = new HashMap<>();
 	private final @NonNull Map<@NonNull String, @NonNull DatumConnection<?>> name2connection = new HashMap<>();
 	private final @NonNull Map<@NonNull ClassDatum, @NonNull Set<@NonNull ClassDatum>> classDatum2subClassDatums = new HashMap<>();
@@ -86,7 +86,6 @@ public class ConnectivityChecker
 	public ConnectivityChecker(@NonNull ScheduleManager scheduleManager) {
 		this.scheduleManager = scheduleManager;
 		this.scheduleModel = scheduleManager.getScheduleModel();
-		this.scheduledRegion = QVTscheduleUtil.getOwnedScheduledRegion(scheduleModel);
 	}
 
 	protected @NonNull ClassDatum addClassDatum(@NonNull Node node) {
@@ -101,12 +100,14 @@ public class ConnectivityChecker
 		for (@NonNull ClassDatum classDatum : QVTscheduleUtil.getOwnedClassDatums(scheduleModel)) {
 			analyzeClassDatums(classDatum);
 		}
-		for (@NonNull Connection connection : QVTscheduleUtil.getOwnedConnections(scheduledRegion)) {
-			analyzeConnection(connection);
-		}
-		analyzeRegion(QVTscheduleUtil.getOwnedLoadingRegion(scheduledRegion));
-		for (@NonNull Region region : QVTscheduleUtil.getMappingRegions(scheduledRegion)) {
-			analyzeRegion(region);
+		for (@NonNull ScheduledRegion scheduledRegion : QVTscheduleUtil.getOwnedScheduledRegions(scheduleModel)) {
+			for (@NonNull Connection connection : QVTscheduleUtil.getOwnedConnections(scheduledRegion)) {
+				analyzeConnection(connection);
+			}
+			analyzeRegion(QVTscheduleUtil.getOwnedLoadingRegion(scheduledRegion));
+			for (@NonNull Region region : QVTscheduleUtil.getMappingRegions(scheduledRegion)) {
+				analyzeRegion(region);
+			}
 		}
 	}
 

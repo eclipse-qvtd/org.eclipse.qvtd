@@ -167,7 +167,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			createIncomingConnections(region);
 		}
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(rootScheduledRegion, "4-bindings", true, true, false);
+			scheduleManager.writeDebugGraphs("4-bindings", true, true, false);
 		}
 		//		for (Region region : sortedCallableRegions) {
 		//			region.checkIncomingConnections();
@@ -657,7 +657,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//		splitConnectionVariables();
 		//
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(scheduledRegion, "5-cycled", true, true, false);
+			scheduleManager.writeDebugGraphs("5-cycled", true, true, false);
 		}
 	}
 
@@ -707,7 +707,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			}
 		}
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(scheduledRegion, "7-pruned", true, true, false);
+			scheduleManager.writeDebugGraphs("7-pruned", true, true, false);
 		}
 
 		boolean noLateConsumerMerge = scheduleManager.isNoLateConsumerMerge();
@@ -1109,7 +1109,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	protected void splitRegions() {
 	}
 
-	public @NonNull ScheduledRegion transform(@NonNull ScheduleManager scheduleManager, @NonNull Iterable<@NonNull MappingRegion> activeRegions) throws CompilerChainException {
+	public @NonNull List<@NonNull ScheduledRegion> transform(@NonNull ScheduleManager scheduleManager, @NonNull Iterable<@NonNull MappingRegion> activeRegions) throws CompilerChainException {
 		this.contentsAnalysis = new ContentsAnalysis(scheduleManager);
 		//		((LoadingRegionImpl)loadingRegion).setFixmeScheduleModel(scheduleManager.getScheduleModel());
 		//		for (@NonNull Region region : activeRegions) {
@@ -1122,20 +1122,22 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			//			}
 			activeRegions = partitionedRegions;
 		}
-		ScheduledRegion rootRegion = scheduleManager.getScheduleModel().getOwnedScheduledRegion(); //createRootRegion(activeRegions);
-		if (rootRegion == null) {
-			rootRegion = createRootRegion(activeRegions);		// FIXME For QVTm but not QVTr
+		List<@NonNull ScheduledRegion> scheduledRegions = QVTscheduleUtil.Internal.getOwnedScheduledRegionsList(scheduleManager.getScheduleModel());
+		if (scheduledRegions.isEmpty()) {		// FIXME For QVTm but not QVTr
+			scheduledRegions = Collections.singletonList(createRootRegion(activeRegions));
 		}
-		rootRegion.setOwnedLoadingRegion(loadingRegionAnalysis.getRegion());
-		createSchedule1(rootRegion);
-		createSchedule2(rootRegion);
+		for (@NonNull ScheduledRegion scheduledRegion : scheduledRegions) {
+			scheduledRegion.setOwnedLoadingRegion(loadingRegionAnalysis.getRegion());
+			createSchedule1(scheduledRegion);
+			createSchedule2(scheduledRegion);
+			//
+			if (ConnectivityChecker.CONNECTIVITY.isActive()) {
+				//			ConnectivityChecker.checkConnectivity(scheduleManager);
+			}
+		}
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(rootRegion, "9-final", true, true, true);
+			scheduleManager.writeDebugGraphs("9-final", true, true, true);
 		}
-		//
-		if (ConnectivityChecker.CONNECTIVITY.isActive()) {
-			//			ConnectivityChecker.checkConnectivity(scheduleManager);
-		}
-		return rootRegion;
+		return scheduledRegions;
 	}
 }

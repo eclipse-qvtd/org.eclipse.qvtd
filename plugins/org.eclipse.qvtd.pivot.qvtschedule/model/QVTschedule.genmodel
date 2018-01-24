@@ -158,9 +158,9 @@
     </genClasses>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//ScheduleModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduleModel/ownedClassDatums"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduleModel/ownedOperationRegions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduleModel/ownedMappingRegions"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduleModel/ownedScheduledRegion"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduleModel/ownedOperationRegions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//ScheduleModel/ownedScheduledRegions"/>
     </genClasses>
     <genClasses ecoreClass="QVTschedule.ecore#//ScheduledRegion">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//ScheduledRegion/name"/>

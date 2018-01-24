@@ -196,8 +196,9 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 		protected void instrumentRegion(@NonNull ScheduleManager scheduleManager) {
 			ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
-			ScheduledRegion rootRegion = QVTscheduleUtil.getOwnedScheduledRegion(scheduleModel);
-			instrumentRegion(rootRegion);
+			for (@NonNull ScheduledRegion scheduledRegion : QVTscheduleUtil.getOwnedScheduledRegions(scheduleModel)) {
+				instrumentRegion(scheduledRegion);
+			}
 		}
 
 		private void instrumentRegion(@NonNull Region parentRegion) {

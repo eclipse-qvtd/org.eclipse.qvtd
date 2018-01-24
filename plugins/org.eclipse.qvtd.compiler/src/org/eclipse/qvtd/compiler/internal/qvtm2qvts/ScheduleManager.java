@@ -81,5 +81,5 @@ public interface ScheduleManager
 	boolean isNoLateConsumerMerge();
 	void setScheduledRegion(@NonNull MappingRegion mappingRegion, @Nullable ScheduledRegion scheduledRegion);
 	void writeDebugGraphs(@NonNull Region region, @Nullable String context);
-	void writeDebugGraphs(@NonNull ScheduledRegion scheduledRegion, @NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph);
+	void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph);
 }

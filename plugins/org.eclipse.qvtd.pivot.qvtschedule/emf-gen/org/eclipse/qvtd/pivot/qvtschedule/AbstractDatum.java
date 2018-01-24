@@ -13,7 +13,7 @@
 package org.eclipse.qvtd.pivot.qvtschedule;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
@@ -39,7 +39,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractDatum extends Element {
+public interface AbstractDatum extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Referred Typed Model</b></em>' reference.
 	 * <!-- begin-user-doc -->

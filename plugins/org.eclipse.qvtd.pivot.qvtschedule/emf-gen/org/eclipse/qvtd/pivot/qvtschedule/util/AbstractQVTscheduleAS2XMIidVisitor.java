@@ -48,7 +48,7 @@ implements QVTscheduleVisitor<Boolean>
 
 	@Override
 	public @Nullable Boolean visitAbstractDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull AbstractDatum object) {
-		return visitElement(object);
+		return visitNamedElement(object);
 	}
 
 	@Override

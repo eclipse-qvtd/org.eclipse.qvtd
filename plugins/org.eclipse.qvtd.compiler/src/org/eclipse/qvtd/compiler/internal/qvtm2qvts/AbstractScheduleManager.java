@@ -674,19 +674,21 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public void writeDebugGraphs(@NonNull ScheduledRegion scheduledRegion, @NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph) {
-		if (doNodesGraph) {
-			writeDebugGraphs(scheduledRegion, context);
-		}
-		if (doRegionGraph) {
-			String suffix = "-r-" + context;
-			writeRegionDOTfile(scheduledRegion, suffix);
-			writeRegionGraphMLfile(scheduledRegion, suffix);
-		}
-		if (doCallGraph) {
-			String suffix = "-c-" + context;
-			writeCallDOTfile(scheduledRegion, suffix);
-			writeCallGraphMLfile(scheduledRegion, suffix);
+	public void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph) {
+		for (@NonNull ScheduledRegion scheduledRegion : QVTscheduleUtil.getOwnedScheduledRegions(scheduleModel)) {
+			if (doNodesGraph) {
+				writeDebugGraphs(scheduledRegion, context);
+			}
+			if (doRegionGraph) {
+				String suffix = "-r-" + context;
+				writeRegionDOTfile(scheduledRegion, suffix);
+				writeRegionGraphMLfile(scheduledRegion, suffix);
+			}
+			if (doCallGraph) {
+				String suffix = "-c-" + context;
+				writeCallDOTfile(scheduledRegion, suffix);
+				writeCallGraphMLfile(scheduledRegion, suffix);
+			}
 		}
 	}
 

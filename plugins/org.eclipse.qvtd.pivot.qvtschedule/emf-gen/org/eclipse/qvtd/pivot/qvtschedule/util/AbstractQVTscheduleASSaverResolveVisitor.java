@@ -47,7 +47,7 @@ public abstract class AbstractQVTscheduleASSaverResolveVisitor
 
 	@Override
 	public @Nullable Object visitAbstractDatum(org.eclipse.qvtd.pivot.qvtschedule.@NonNull AbstractDatum object) {
-		return visitElement(object);
+		return visitNamedElement(object);
 	}
 
 	@Override

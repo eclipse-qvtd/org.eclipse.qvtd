@@ -196,6 +196,7 @@ public abstract class DatumCaches
 			classDatum.setOwningScheduleModel(scheduleManager.getScheduleModel());
 			classDatum.setCompleteClass(completeClass);
 			classDatum.setReferredClass(completeClass.getPrimaryClass());
+			classDatum.setName(completeClass.getPrimaryClass().getName());
 			classDatum.setReferredTypedModel(typedModel);
 			org.eclipse.ocl.pivot.@NonNull Class aClass = completeClass.getPrimaryClass();
 			if (!(aClass instanceof DataType)) {
@@ -359,6 +360,7 @@ public abstract class DatumCaches
 		PropertyDatum propertyDatum = QVTscheduleFactory.eINSTANCE.createPropertyDatum();
 		propertyDatum.setReferredTypedModel(typedModel);
 		propertyDatum.setReferredProperty(property);
+		propertyDatum.setName(property.getName());
 		propertyDatum.setOwningClassDatum(classDatum);
 		assert targetCompleteClass.conformsTo(hostCompleteClass);
 		for (@NonNull CompleteClass superCompleteClass : targetCompleteClass.getSuperCompleteClasses()) {

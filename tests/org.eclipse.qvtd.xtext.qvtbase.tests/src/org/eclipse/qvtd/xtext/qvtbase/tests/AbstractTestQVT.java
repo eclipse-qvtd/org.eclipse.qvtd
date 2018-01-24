@@ -507,8 +507,9 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	protected void instrumentRegion(@NonNull ScheduleManager scheduleManager) {
 		ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
-		ScheduledRegion rootRegion = QVTscheduleUtil.getOwnedScheduledRegion(scheduleModel);
-		instrumentRegion(rootRegion);
+		for (@NonNull ScheduledRegion scheduledRegion : QVTscheduleUtil.getOwnedScheduledRegions(scheduleModel)) {
+			instrumentRegion(scheduledRegion);
+		}
 	}
 
 	protected void instrumentRegion(@NonNull Region parentRegion) {

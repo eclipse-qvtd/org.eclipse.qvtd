@@ -115,6 +115,7 @@ public class QVTscheduleTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_NodeConnection = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_NodeConnection);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_OperationRegion = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_OperationRegion);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_PropertyDatum = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_PropertyDatum);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_ScheduledRegion = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_ScheduledRegion);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_AbstractDatum = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_AbstractDatum);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_RuleRegion = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_RuleRegion);
 
@@ -261,6 +262,8 @@ public class QVTscheduleTables
 
 		private static final @NonNull ExecutorFragment _AbstractDatum__AbstractDatum = new ExecutorFragment(Types._AbstractDatum, QVTscheduleTables.Types._AbstractDatum);
 		private static final @NonNull ExecutorFragment _AbstractDatum__Element = new ExecutorFragment(Types._AbstractDatum, PivotTables.Types._Element);
+		private static final @NonNull ExecutorFragment _AbstractDatum__Nameable = new ExecutorFragment(Types._AbstractDatum, PivotTables.Types._Nameable);
+		private static final @NonNull ExecutorFragment _AbstractDatum__NamedElement = new ExecutorFragment(Types._AbstractDatum, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _AbstractDatum__OclAny = new ExecutorFragment(Types._AbstractDatum, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _AbstractDatum__OclElement = new ExecutorFragment(Types._AbstractDatum, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _AbstractDatum__Visitable = new ExecutorFragment(Types._AbstractDatum, PivotTables.Types._Visitable);
@@ -278,6 +281,8 @@ public class QVTscheduleTables
 		private static final @NonNull ExecutorFragment _ClassDatum__AbstractDatum = new ExecutorFragment(Types._ClassDatum, QVTscheduleTables.Types._AbstractDatum);
 		private static final @NonNull ExecutorFragment _ClassDatum__ClassDatum = new ExecutorFragment(Types._ClassDatum, QVTscheduleTables.Types._ClassDatum);
 		private static final @NonNull ExecutorFragment _ClassDatum__Element = new ExecutorFragment(Types._ClassDatum, PivotTables.Types._Element);
+		private static final @NonNull ExecutorFragment _ClassDatum__Nameable = new ExecutorFragment(Types._ClassDatum, PivotTables.Types._Nameable);
+		private static final @NonNull ExecutorFragment _ClassDatum__NamedElement = new ExecutorFragment(Types._ClassDatum, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _ClassDatum__OclAny = new ExecutorFragment(Types._ClassDatum, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _ClassDatum__OclElement = new ExecutorFragment(Types._ClassDatum, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _ClassDatum__Visitable = new ExecutorFragment(Types._ClassDatum, PivotTables.Types._Visitable);
@@ -519,6 +524,8 @@ public class QVTscheduleTables
 
 		private static final @NonNull ExecutorFragment _PropertyDatum__AbstractDatum = new ExecutorFragment(Types._PropertyDatum, QVTscheduleTables.Types._AbstractDatum);
 		private static final @NonNull ExecutorFragment _PropertyDatum__Element = new ExecutorFragment(Types._PropertyDatum, PivotTables.Types._Element);
+		private static final @NonNull ExecutorFragment _PropertyDatum__Nameable = new ExecutorFragment(Types._PropertyDatum, PivotTables.Types._Nameable);
+		private static final @NonNull ExecutorFragment _PropertyDatum__NamedElement = new ExecutorFragment(Types._PropertyDatum, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _PropertyDatum__OclAny = new ExecutorFragment(Types._PropertyDatum, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _PropertyDatum__OclElement = new ExecutorFragment(Types._PropertyDatum, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _PropertyDatum__PropertyDatum = new ExecutorFragment(Types._PropertyDatum, QVTscheduleTables.Types._PropertyDatum);
@@ -792,7 +799,7 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _ScheduleModel__ownedClassDatums = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_CLASS_DATUMS, Types._ScheduleModel, 0);
 		public static final @NonNull ExecutorProperty _ScheduleModel__ownedMappingRegions = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_MAPPING_REGIONS, Types._ScheduleModel, 1);
 		public static final @NonNull ExecutorProperty _ScheduleModel__ownedOperationRegions = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_OPERATION_REGIONS, Types._ScheduleModel, 2);
-		public static final @NonNull ExecutorProperty _ScheduleModel__ownedScheduledRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_SCHEDULED_REGION, Types._ScheduleModel, 3);
+		public static final @NonNull ExecutorProperty _ScheduleModel__ownedScheduledRegions = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_SCHEDULED_REGIONS, Types._ScheduleModel, 3);
 
 		public static final @NonNull ExecutorProperty _ScheduledRegion__mappingRegions = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULED_REGION__MAPPING_REGIONS, Types._ScheduledRegion, 0);
 		public static final @NonNull ExecutorProperty _ScheduledRegion__name = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULED_REGION__NAME, Types._ScheduledRegion, 1);
@@ -827,11 +834,13 @@ public class QVTscheduleTables
 			{
 				Fragments._AbstractDatum__OclAny /* 0 */,
 				Fragments._AbstractDatum__OclElement /* 1 */,
+				Fragments._AbstractDatum__Nameable /* 2 */,
 				Fragments._AbstractDatum__Visitable /* 2 */,
 				Fragments._AbstractDatum__Element /* 3 */,
-				Fragments._AbstractDatum__AbstractDatum /* 4 */
+				Fragments._AbstractDatum__NamedElement /* 4 */,
+				Fragments._AbstractDatum__AbstractDatum /* 5 */
 			};
-		private static final int @NonNull [] __AbstractDatum = { 1,1,1,1,1 };
+		private static final int @NonNull [] __AbstractDatum = { 1,1,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _CastEdge =
 			{
@@ -851,12 +860,14 @@ public class QVTscheduleTables
 			{
 				Fragments._ClassDatum__OclAny /* 0 */,
 				Fragments._ClassDatum__OclElement /* 1 */,
+				Fragments._ClassDatum__Nameable /* 2 */,
 				Fragments._ClassDatum__Visitable /* 2 */,
 				Fragments._ClassDatum__Element /* 3 */,
-				Fragments._ClassDatum__AbstractDatum /* 4 */,
-				Fragments._ClassDatum__ClassDatum /* 5 */
+				Fragments._ClassDatum__NamedElement /* 4 */,
+				Fragments._ClassDatum__AbstractDatum /* 5 */,
+				Fragments._ClassDatum__ClassDatum /* 6 */
 			};
-		private static final int @NonNull [] __ClassDatum = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __ClassDatum = { 1,1,2,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _ComposedNode =
 			{
@@ -1205,12 +1216,14 @@ public class QVTscheduleTables
 			{
 				Fragments._PropertyDatum__OclAny /* 0 */,
 				Fragments._PropertyDatum__OclElement /* 1 */,
+				Fragments._PropertyDatum__Nameable /* 2 */,
 				Fragments._PropertyDatum__Visitable /* 2 */,
 				Fragments._PropertyDatum__Element /* 3 */,
-				Fragments._PropertyDatum__AbstractDatum /* 4 */,
-				Fragments._PropertyDatum__PropertyDatum /* 5 */
+				Fragments._PropertyDatum__NamedElement /* 4 */,
+				Fragments._PropertyDatum__AbstractDatum /* 5 */,
+				Fragments._PropertyDatum__PropertyDatum /* 6 */
 			};
-		private static final int @NonNull [] __PropertyDatum = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __PropertyDatum = { 1,1,2,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _RecursionEdge =
 			{
@@ -1417,6 +1430,8 @@ public class QVTscheduleTables
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
+		private static final @NonNull ExecutorOperation @NonNull [] _AbstractDatum__Nameable = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _AbstractDatum__NamedElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _AbstractDatum__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
@@ -1488,6 +1503,8 @@ public class QVTscheduleTables
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
+		private static final @NonNull ExecutorOperation @NonNull [] _ClassDatum__Nameable = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _ClassDatum__NamedElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _ClassDatum__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
@@ -2484,6 +2501,8 @@ public class QVTscheduleTables
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
+		private static final @NonNull ExecutorOperation @NonNull [] _PropertyDatum__Nameable = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _PropertyDatum__NamedElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _PropertyDatum__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
@@ -2904,6 +2923,8 @@ public class QVTscheduleTables
 		static {
 			Fragments._AbstractDatum__AbstractDatum.initOperations(_AbstractDatum__AbstractDatum);
 			Fragments._AbstractDatum__Element.initOperations(_AbstractDatum__Element);
+			Fragments._AbstractDatum__Nameable.initOperations(_AbstractDatum__Nameable);
+			Fragments._AbstractDatum__NamedElement.initOperations(_AbstractDatum__NamedElement);
 			Fragments._AbstractDatum__OclAny.initOperations(_AbstractDatum__OclAny);
 			Fragments._AbstractDatum__OclElement.initOperations(_AbstractDatum__OclElement);
 			Fragments._AbstractDatum__Visitable.initOperations(_AbstractDatum__Visitable);
@@ -2921,6 +2942,8 @@ public class QVTscheduleTables
 			Fragments._ClassDatum__AbstractDatum.initOperations(_ClassDatum__AbstractDatum);
 			Fragments._ClassDatum__ClassDatum.initOperations(_ClassDatum__ClassDatum);
 			Fragments._ClassDatum__Element.initOperations(_ClassDatum__Element);
+			Fragments._ClassDatum__Nameable.initOperations(_ClassDatum__Nameable);
+			Fragments._ClassDatum__NamedElement.initOperations(_ClassDatum__NamedElement);
 			Fragments._ClassDatum__OclAny.initOperations(_ClassDatum__OclAny);
 			Fragments._ClassDatum__OclElement.initOperations(_ClassDatum__OclElement);
 			Fragments._ClassDatum__Visitable.initOperations(_ClassDatum__Visitable);
@@ -3162,6 +3185,8 @@ public class QVTscheduleTables
 
 			Fragments._PropertyDatum__AbstractDatum.initOperations(_PropertyDatum__AbstractDatum);
 			Fragments._PropertyDatum__Element.initOperations(_PropertyDatum__Element);
+			Fragments._PropertyDatum__Nameable.initOperations(_PropertyDatum__Nameable);
+			Fragments._PropertyDatum__NamedElement.initOperations(_PropertyDatum__NamedElement);
 			Fragments._PropertyDatum__OclAny.initOperations(_PropertyDatum__OclAny);
 			Fragments._PropertyDatum__OclElement.initOperations(_PropertyDatum__OclElement);
 			Fragments._PropertyDatum__PropertyDatum.initOperations(_PropertyDatum__PropertyDatum);
@@ -3611,7 +3636,7 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._ScheduleModel__ownedClassDatums,
 			QVTscheduleTables.Properties._ScheduleModel__ownedMappingRegions,
 			QVTscheduleTables.Properties._ScheduleModel__ownedOperationRegions,
-			QVTscheduleTables.Properties._ScheduleModel__ownedScheduledRegion
+			QVTscheduleTables.Properties._ScheduleModel__ownedScheduledRegions
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _ScheduledRegion = {

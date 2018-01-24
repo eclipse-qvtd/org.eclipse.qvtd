@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
@@ -43,7 +43,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
  *
  * @generated
  */
-public abstract class AbstractDatumImpl extends ElementImpl implements AbstractDatum {
+public abstract class AbstractDatumImpl extends NamedElementImpl implements AbstractDatum {
 	/**
 	 * The cached value of the '{@link #getReferredTypedModel() <em>Referred Typed Model</em>}' reference.
 	 * <!-- begin-user-doc -->

@@ -108,7 +108,7 @@ public interface ScheduledRegion extends Region
 	EList<MappingRegion> getMappingRegions();
 	/**
 	 * Returns the value of the '<em><b>Owning Schedule Model</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getOwnedScheduledRegion <em>Owned Scheduled Region</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getOwnedScheduledRegions <em>Owned Scheduled Regions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owning Schedule Model</em>' container reference isn't clear,
@@ -121,8 +121,8 @@ public interface ScheduledRegion extends Region
 	 * @return the value of the '<em>Owning Schedule Model</em>' container reference.
 	 * @see #setOwningScheduleModel(ScheduleModel)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getScheduledRegion_OwningScheduleModel()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getOwnedScheduledRegion
-	 * @model opposite="ownedScheduledRegion" required="true" transient="false"
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getOwnedScheduledRegions
+	 * @model opposite="ownedScheduledRegions" required="true" transient="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduledRegion!owningScheduleModel'"
 	 * @generated
 	 */

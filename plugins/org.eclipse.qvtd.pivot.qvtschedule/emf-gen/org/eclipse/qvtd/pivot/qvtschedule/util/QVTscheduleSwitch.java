@@ -86,7 +86,9 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 			case QVTschedulePackage.ABSTRACT_DATUM: {
 				AbstractDatum abstractDatum = (AbstractDatum)theEObject;
 				T result = caseAbstractDatum(abstractDatum);
+				if (result == null) result = caseNamedElement(abstractDatum);
 				if (result == null) result = caseElement(abstractDatum);
+				if (result == null) result = caseNameable(abstractDatum);
 				if (result == null) result = caseVisitable(abstractDatum);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -107,7 +109,9 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				ClassDatum classDatum = (ClassDatum)theEObject;
 				T result = caseClassDatum(classDatum);
 				if (result == null) result = caseAbstractDatum(classDatum);
+				if (result == null) result = caseNamedElement(classDatum);
 				if (result == null) result = caseElement(classDatum);
+				if (result == null) result = caseNameable(classDatum);
 				if (result == null) result = caseVisitable(classDatum);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -397,7 +401,9 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				PropertyDatum propertyDatum = (PropertyDatum)theEObject;
 				T result = casePropertyDatum(propertyDatum);
 				if (result == null) result = caseAbstractDatum(propertyDatum);
+				if (result == null) result = caseNamedElement(propertyDatum);
 				if (result == null) result = caseElement(propertyDatum);
+				if (result == null) result = caseNameable(propertyDatum);
 				if (result == null) result = caseVisitable(propertyDatum);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
