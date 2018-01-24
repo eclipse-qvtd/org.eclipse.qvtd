@@ -221,6 +221,10 @@ public class QVTrelationUtil extends QVTtemplateUtil
 		return ClassUtil.nonNullState(rDomainPattern.getTemplateExpression());
 	}
 
+	public static @NonNull OCLExpression getOwnedValue(@NonNull PropertyTemplateItem rPropertyTemplateItem) {
+		return ClassUtil.nonNullState(rPropertyTemplateItem.getValue());
+	}
+
 	public static @NonNull Iterable<@NonNull Variable> getOwnedVariables(@NonNull Relation rRelation) {
 		return ClassUtil.nullFree(rRelation.getVariable());
 	}

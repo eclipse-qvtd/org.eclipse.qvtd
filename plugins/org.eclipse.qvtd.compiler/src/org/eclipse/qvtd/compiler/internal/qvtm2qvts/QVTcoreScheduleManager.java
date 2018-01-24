@@ -29,7 +29,7 @@ public class QVTcoreScheduleManager extends AbstractScheduleManager
 
 	@Override
 	protected @NonNull DatumCaches createDatumCaches() {
-		return new DatumCaches(this);
+		return new QVTcoreDatumCaches(this);
 	}
 
 	@Override

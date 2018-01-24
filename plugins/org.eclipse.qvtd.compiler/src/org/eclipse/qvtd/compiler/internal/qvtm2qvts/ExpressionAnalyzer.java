@@ -61,13 +61,10 @@ import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.util.AbstractExtendingQVTbaseVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
-import org.eclipse.qvtd.pivot.qvtcore.util.AbstractExtendingQVTcoreVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
@@ -84,7 +81,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
 
-public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullable Node, @NonNull RuleAnalysis>
+public abstract class ExpressionAnalyzer extends AbstractExtendingQVTbaseVisitor<@Nullable Node, @NonNull RuleAnalysis>
 {
 	private static final @NonNull String @NonNull [] ifArgNames = new @NonNull String[]{QVTscheduleConstants.IF_CONDITION_NAME, QVTscheduleConstants.IF_THEN_NAME, QVTscheduleConstants.IF_ELSE_NAME};
 	private static final @NonNull String @NonNull [] mapArgNames = new @NonNull String[]{"«key»", "«value»"};
@@ -92,28 +89,11 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 	private static final @NonNull String @NonNull [] rangeArgNames = new @NonNull String[]{"«first»", "«last»"};
 	private static final @NonNull String @NonNull [] srcArgNames = new @NonNull String[]{"«source»", "«arg»"};
 
-	public class ConditionalExpressionAnalyzer extends ExpressionAnalyzer
-	{
-		protected ConditionalExpressionAnalyzer() {
-			super(ExpressionAnalyzer.this.context);
-		}
-
-		@Override
-		protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
-			return context.createStepNode(name, callExp, sourceNode, false);
-		}
-
-		@Override
-		protected boolean isUnconditional() {
-			return false;
-		}
-	}
-
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull QVTcoreHelper helper;
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
-	private /*@LazyNonNull*/ ConditionalExpressionAnalyzer conditionalExpressionAnalyzer = null;
+	private /*@LazyNonNull*/ ExpressionAnalyzer conditionalExpressionAnalyzer = null;
 	//	private /*@LazyNonNull*/ OperationDependencyAnalysis operationDependencyAnalysis;
 
 	/**
@@ -408,6 +388,8 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		return context.createCastEdge(sourceNode, castProperty, castNode);
 	}
 
+	protected abstract @NonNull ExpressionAnalyzer createConditionalExpressionAnalyzer();
+
 	protected @NonNull Node createDataTypeNode(@NonNull String name, @NonNull Node sourceNode, @NonNull NavigationCallExp navigationCallExp) {
 		return context.createDataTypeNode(name, sourceNode, navigationCallExp);
 	}
@@ -525,9 +507,9 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 	}
 
 	private @NonNull ExpressionAnalyzer getConditionalExpressionAnalyzer() {
-		ConditionalExpressionAnalyzer conditionalExpressionAnalyzer2 = conditionalExpressionAnalyzer;
+		ExpressionAnalyzer conditionalExpressionAnalyzer2 = conditionalExpressionAnalyzer;
 		if (conditionalExpressionAnalyzer2 == null) {
-			conditionalExpressionAnalyzer = conditionalExpressionAnalyzer2 = new ConditionalExpressionAnalyzer();
+			conditionalExpressionAnalyzer = conditionalExpressionAnalyzer2 = createConditionalExpressionAnalyzer();
 		}
 		return conditionalExpressionAnalyzer2;
 	}
@@ -819,31 +801,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 	}
 
 	@Override
-	public @NonNull Node visitNavigationAssignment(@NonNull NavigationAssignment asNavigationAssignment) {
-		Node slotNode = analyze(asNavigationAssignment.getSlotExpression());
-		assert slotNode.isClass();
-		Property property = QVTcoreUtil.getTargetProperty(asNavigationAssignment);
-		OCLExpression value = QVTcoreUtil.getValue(asNavigationAssignment);
-		helper.rewriteSafeNavigations(value);
-		Node targetNode = analyze(value);
-		NavigableEdge navigationEdge = getNavigationEdge(slotNode, property, targetNode, asNavigationAssignment);
-		Node valueNode = navigationEdge.getEdgeTarget();
-		CompleteClass valueCompleteClass = valueNode.getCompleteClass();
-		Type propertyType = PivotUtil.getType(property);
-		if (asNavigationAssignment.isIsPartial()) {
-			propertyType = PivotUtil.getElementType(((CollectionType)propertyType));
-		}
-		CompleteClass targetCompleteClass = environmentFactory.getCompleteModel().getCompleteClass(propertyType);
-		if (!QVTscheduleUtil.conformsToClassOrBehavioralClass(valueCompleteClass, targetCompleteClass)) {	// Allow value to be physical or behavioral
-			// FIXME we could synthesize a cast, but it's easier to do oclAsType() in QVTm
-			if (!valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass()) && !valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass())) {
-				throw new IllegalStateException("Incompatible types " + valueCompleteClass + ", " + targetCompleteClass + " for " + asNavigationAssignment);
-			}
-		}
-		return slotNode;
-	}
-
-	@Override
 	public @NonNull Node visitNavigationCallExp(@NonNull NavigationCallExp navigationCallExp) {
 		assert !navigationCallExp.isIsSafe();
 		Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
@@ -999,16 +956,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 	}
 
 	@Override
-	public @NonNull Node visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment asNavigationAssignment) {
-		return visitNavigationAssignment(asNavigationAssignment);
-	}
-
-	@Override
-	public @NonNull Node visitPropertyAssignment(@NonNull PropertyAssignment asNavigationAssignment) {
-		return visitNavigationAssignment(asNavigationAssignment);
-	}
-
-	@Override
 	public @NonNull Node visitShadowExp(@NonNull ShadowExp shadowExp) {
 		List<ShadowPart> ownedParts = shadowExp.getOwnedParts();
 		int iSize = ownedParts.size();
@@ -1065,11 +1012,6 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		String typeName = PrettyPrinter.printType(QVTscheduleUtil.getCompleteClass(classDatum));
 		Node operationNode = createConnectedOperationNode(typeName, typeExp);
 		return operationNode;
-	}
-
-	@Override
-	public @Nullable Node visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
-		return null;
 	}
 
 	@Override

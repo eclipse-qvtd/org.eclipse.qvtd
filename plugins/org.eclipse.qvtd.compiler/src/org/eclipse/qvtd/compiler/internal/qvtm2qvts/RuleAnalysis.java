@@ -39,7 +39,7 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 
 	protected RuleAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull RuleRegion ruleRegion) {
 		super(scheduleManager, ruleRegion);
-		this.expressionAnalyzer = new ExpressionAnalyzer(this);
+		this.expressionAnalyzer = createExpressionAnalyzer();
 		assert scheduleManager.getScheduleModel().getOwnedMappingRegions().contains(ruleRegion);
 	}
 
@@ -52,6 +52,8 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 		dependencyHeadNodes.add(dependencyHeadNode);
 		return dependencyHeadNode;
 	}
+
+	protected abstract @NonNull ExpressionAnalyzer createExpressionAnalyzer();
 
 	public @Nullable Node getDependencyHead(@NonNull ClassDatum classDatum) {
 		if (dependencyHeadNodes != null) {

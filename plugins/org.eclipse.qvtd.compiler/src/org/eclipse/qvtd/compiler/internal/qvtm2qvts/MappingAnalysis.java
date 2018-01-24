@@ -19,12 +19,15 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CallExp;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -39,8 +42,11 @@ import org.eclipse.qvtd.pivot.qvtcore.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.OppositePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -60,6 +66,157 @@ public class MappingAnalysis extends RuleAnalysis
 		@SuppressWarnings("unused")String name = mappingAnalysis.getRegion().getName();
 		mappingAnalysis.initialize();
 		return mappingAnalysis;
+	}
+
+	public static abstract class AbstractQVTcoreExpressionAnalyzer extends ExpressionAnalyzer implements QVTcoreVisitor<@Nullable Node>
+	{
+		protected AbstractQVTcoreExpressionAnalyzer(@NonNull RuleAnalysis context) {
+			super(context);
+		}
+
+		@Override
+		public @Nullable Node visitAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull Assignment object) {
+			return visitElement(object);
+		}
+
+		@Override
+		public @Nullable Node visitBottomPattern(org.eclipse.qvtd.pivot.qvtcore.@NonNull BottomPattern object) {
+			return visitCorePattern(object);
+		}
+
+		@Override
+		public @Nullable Node visitBottomVariable(org.eclipse.qvtd.pivot.qvtcore.@NonNull BottomVariable object) {
+			return visitVariable(object);
+		}
+
+		@Override
+		public @Nullable Node visitCoreDomain(org.eclipse.qvtd.pivot.qvtcore.@NonNull CoreDomain object) {
+			return visitDomain(object);
+		}
+
+		@Override
+		public @Nullable Node visitCoreModel(org.eclipse.qvtd.pivot.qvtcore.@NonNull CoreModel object) {
+			return visitBaseModel(object);
+		}
+
+		@Override
+		public @Nullable Node visitCorePattern(org.eclipse.qvtd.pivot.qvtcore.@NonNull CorePattern object) {
+			return visitPattern(object);
+		}
+
+		@Override
+		public @Nullable Node visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtcore.@NonNull EnforcementOperation object) {
+			return visitElement(object);
+		}
+
+		@Override
+		public @Nullable Node visitGuardPattern(org.eclipse.qvtd.pivot.qvtcore.@NonNull GuardPattern object) {
+			return visitCorePattern(object);
+		}
+
+		@Override
+		public @Nullable Node visitGuardVariable(org.eclipse.qvtd.pivot.qvtcore.@NonNull GuardVariable object) {
+			return visitVariable(object);
+		}
+
+		@Override
+		public @Nullable Node visitMapping(org.eclipse.qvtd.pivot.qvtcore.@NonNull Mapping object) {
+			return visitRule(object);
+		}
+
+		@Override
+		public @Nullable Node visitNavigationAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull NavigationAssignment object) {
+			return visitAssignment(object);
+		}
+
+		@Override
+		public @Nullable Node visitOppositePropertyAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull OppositePropertyAssignment object) {
+			return visitNavigationAssignment(object);
+		}
+
+		@Override
+		public @Nullable Node visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull PropertyAssignment object) {
+			return visitNavigationAssignment(object);
+		}
+
+		@Override
+		public @Nullable Node visitRealizedVariable(org.eclipse.qvtd.pivot.qvtcore.@NonNull RealizedVariable object) {
+			return visitVariable(object);
+		}
+
+		@Override
+		public @Nullable Node visitVariableAssignment(org.eclipse.qvtd.pivot.qvtcore.@NonNull VariableAssignment object) {
+			return visitAssignment(object);
+		}
+	}
+
+	public static class QVTcoreExpressionAnalyzer extends AbstractQVTcoreExpressionAnalyzer
+	{
+		protected QVTcoreExpressionAnalyzer(@NonNull RuleAnalysis context) {
+			super(context);
+		}
+
+		@Override
+		protected @NonNull ExpressionAnalyzer createConditionalExpressionAnalyzer() {
+			return new ConditionalExpressionAnalyzer(context);
+		}
+
+		@Override
+		public @NonNull Node visitNavigationAssignment(@NonNull NavigationAssignment asNavigationAssignment) {
+			Node slotNode = analyze(asNavigationAssignment.getSlotExpression());
+			assert slotNode.isClass();
+			Property property = QVTcoreUtil.getTargetProperty(asNavigationAssignment);
+			OCLExpression value = QVTcoreUtil.getValue(asNavigationAssignment);
+			helper.rewriteSafeNavigations(value);
+			Node targetNode = analyze(value);
+			NavigableEdge navigationEdge = getNavigationEdge(slotNode, property, targetNode, asNavigationAssignment);
+			Node valueNode = navigationEdge.getEdgeTarget();
+			CompleteClass valueCompleteClass = valueNode.getCompleteClass();
+			Type propertyType = PivotUtil.getType(property);
+			if (asNavigationAssignment.isIsPartial()) {
+				propertyType = PivotUtil.getElementType(((CollectionType)propertyType));
+			}
+			CompleteClass targetCompleteClass = environmentFactory.getCompleteModel().getCompleteClass(propertyType);
+			if (!QVTscheduleUtil.conformsToClassOrBehavioralClass(valueCompleteClass, targetCompleteClass)) {	// Allow value to be physical or behavioral
+				// FIXME we could synthesize a cast, but it's easier to do oclAsType() in QVTm
+				if (!valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass()) && !valueCompleteClass.conformsTo(targetCompleteClass.getBehavioralClass())) {
+					throw new IllegalStateException("Incompatible types " + valueCompleteClass + ", " + targetCompleteClass + " for " + asNavigationAssignment);
+				}
+			}
+			return slotNode;
+		}
+
+		@Override
+		public @NonNull Node visitOppositePropertyAssignment(@NonNull OppositePropertyAssignment asNavigationAssignment) {
+			return visitNavigationAssignment(asNavigationAssignment);
+		}
+
+		@Override
+		public @NonNull Node visitPropertyAssignment(@NonNull PropertyAssignment asNavigationAssignment) {
+			return visitNavigationAssignment(asNavigationAssignment);
+		}
+
+		@Override
+		public @Nullable Node visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
+			return null;
+		}
+	}
+
+	public static class ConditionalExpressionAnalyzer extends QVTcoreExpressionAnalyzer
+	{
+		protected ConditionalExpressionAnalyzer(@NonNull RuleAnalysis context) {
+			super(context);
+		}
+
+		@Override
+		protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
+			return context.createStepNode(name, callExp, sourceNode, false);
+		}
+
+		@Override
+		protected boolean isUnconditional() {
+			return false;
+		}
 	}
 
 	/**
@@ -391,6 +548,11 @@ public class MappingAnalysis extends RuleAnalysis
 			}
 		}
 		return bestInitNode;
+	}
+
+	@Override
+	protected @NonNull ExpressionAnalyzer createExpressionAnalyzer() {
+		return new QVTcoreExpressionAnalyzer(this);
 	}
 
 	/**
