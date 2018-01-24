@@ -12,15 +12,15 @@
     <unit id="org.eclipse.sirius.specifier.feature.group" version="0.0.0"/>
     <repository location="http://download.eclipse.org/releases/photon/201711031000"/>
     <repository location="http://download.eclipse.org/mmt/atl/updates/milestones/4.0"/>
-    <repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.14milestones/core"/>
+    <repository location="http://download.eclipse.org/modeling/emf/emf/builds/milestone"/>
     <repository location="https://hudson.eclipse.org/ocl/job/ocl-branch-tests/lastSuccessfulBuild/artifact/targetPlatform"/>
     <repository location="http://download.eclipse.org/mmt/qvto/updates/milestones/3.8.0"/>
     <!--repository location="http://download.eclipse.org/modeling/mdt/uml2/updates/5.4milestones"/-->
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.emf.examples.library" version="0.0.0"/>
-    <repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.13"/>
-    <repository location="http://download.eclipse.org/modeling/emf/emf/updates/2.14milestones/core"/>
+    <repository location="http://download.eclipse.org/modeling/emf/emf/builds/release/2.13"/>
+    <repository location="http://download.eclipse.org/modeling/emf/emf/builds/milestone"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.epsilon.core.feature.feature.group" version="0.0.0"/>
@@ -37,7 +37,7 @@
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="com.google.guava" version="0.0.0"/>
-    <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/S20171130170529/repository"/>
+    <repository location="http://download.eclipse.org/tools/orbit/downloads/drops/S20180119201206/repository"/>
   </location>
 </locations>
 </target>
