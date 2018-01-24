@@ -13,7 +13,6 @@ package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,28 +23,18 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
+import com.google.common.collect.Lists;
+
 public class QVTm2QVTs extends AbstractQVTb2QVTs
 {
-	/**
-	 * The Region to which each mapping is allocated.
-	 */
-	private final @NonNull Map<@NonNull Rule, @NonNull MappingAnalysis> mapping2mappingAnalysis = new HashMap<>();
-
 	public QVTm2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
 			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
 		super(new QVTcoreScheduleManager(environmentFactory, asTransformation, schedulerOptions), problemHandler);
-	}
-
-	public @NonNull MappingRegion getMappingRegion(@NonNull Rule mapping) {
-		MappingAnalysis mappingAnalysis = mapping2mappingAnalysis.get(mapping);
-		assert mappingAnalysis != null;
-		return mappingAnalysis.getRuleRegion();
 	}
 
 	public @NonNull List<@NonNull MappingRegion> transform() throws IOException {
@@ -58,25 +47,25 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 		//	Extract salient characteristics from within each MappingAction.
 		//
 		for (@NonNull RuleRegion ruleRegion : orderedRuleRegions) {
-			MappingAnalysis mappingRegion = MappingAnalysis.createMappingRegion(scheduleManager, ruleRegion);
-			mapping2mappingAnalysis.put(QVTscheduleUtil.getReferredRule(ruleRegion), mappingRegion);
+			MappingAnalysis mappingAnalysis = MappingAnalysis.createMappingRegion(scheduleManager, ruleRegion);
+			addRuleAnalysis(mappingAnalysis);
 		}
-		List<@NonNull MappingAnalysis> mappingAnalyses = new ArrayList<>(mapping2mappingAnalysis.values());
+		List<@NonNull RuleAnalysis> mappingAnalyses = Lists.newArrayList(getRuleAnalyses());
 		Collections.sort(mappingAnalyses, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
-		for (@NonNull MappingAnalysis mappingRegion : mappingAnalyses) {
+		for (@NonNull RuleAnalysis mappingRegion : mappingAnalyses) {
 			mappingRegion.registerConsumptionsAndProductions();
 		}
 		if (AbstractQVTb2QVTs.DEBUG_GRAPHS.isActive()) {
-			for (@NonNull MappingAnalysis mappingAnalysis : mappingAnalyses) {
-				scheduleManager.writeDebugGraphs(mappingAnalysis.getRuleRegion(), null);
+			for (@NonNull RuleAnalysis mappingAnalysis : mappingAnalyses) {
+				scheduleManager.writeDebugGraphs(mappingAnalysis.getRegion(), null);
 			}
 		}
 		List<@NonNull MappingRegion> orderedRegions = new ArrayList<>();
 		for (@NonNull RuleRegion ruleRegion : orderedRuleRegions) {
-			Rule mapping = QVTscheduleUtil.getReferredRule(ruleRegion);
-			MappingAnalysis mappingAnalysis = mapping2mappingAnalysis.get(mapping);
-			assert mappingAnalysis != null;
-			orderedRegions.add(mappingAnalysis.getRuleRegion());
+			//			Rule rule = QVTscheduleUtil.getReferredRule(ruleRegion);
+			//			RuleAnalysis mappingAnalysis = getRuleAnalysis(rule);
+			//			orderedRegions.add(mappingAnalysis.getRuleRegion());
+			orderedRegions.add(ruleRegion);
 			//			mappingRegion.resolveRecursion();
 		}
 		boolean noEarlyMerge = scheduleManager.isNoEarlyMerge();

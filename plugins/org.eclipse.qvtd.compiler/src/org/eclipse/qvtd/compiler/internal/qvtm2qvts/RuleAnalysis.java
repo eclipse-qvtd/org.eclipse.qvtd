@@ -19,6 +19,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
@@ -65,8 +66,8 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 
 	public abstract @NonNull Node getReferenceNode(@NonNull VariableDeclaration variableDeclaration);
 
-	public @NonNull RuleRegion getRuleRegion() {
-		return region;
+	public @NonNull Rule getRule() {
+		return QVTscheduleUtil.getReferredRule(region);
 	}
 
 	public @NonNull Node getUnknownNode(@NonNull TypedElement typedElement) {
@@ -83,6 +84,17 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 	 * Return true if the navigation from sourceNode using source2targetProperty corresponds to a PropertyAssigmment,
 	 */
 	public abstract boolean isPropertyAssignment(@NonNull Node sourceNode, @NonNull Property source2targetProperty);
+
+	public void registerConsumptionsAndProductions() {
+		for (@NonNull Node newNode : region.getNewNodes()) {
+			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(newNode);
+			classDatum.getProducingRegions().add(region);
+		}
+		for (@NonNull Node predicatedNode : region.getOldNodes()) {
+			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(predicatedNode);
+			classDatum.getConsumingRegions().add(region);
+		}
+	}
 
 	@Override
 	public @NonNull String toString() {

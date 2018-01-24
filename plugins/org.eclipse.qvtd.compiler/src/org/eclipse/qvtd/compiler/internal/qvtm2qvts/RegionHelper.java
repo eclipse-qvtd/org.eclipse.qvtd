@@ -301,7 +301,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return forwardEdge;
 	}
 
-	public @NonNull VariableNode createRealizedStepNode(@NonNull Variable stepVariable) {
+	public @NonNull VariableNode createRealizedStepNode(@NonNull VariableDeclaration stepVariable) {
 		Role nodeRole = Role.REALIZED;
 		PatternVariableNode node = QVTscheduleFactory.eINSTANCE.createPatternVariableNode();
 		node.initialize(nodeRole, region, getName(stepVariable), scheduleManager.getClassDatum(stepVariable));

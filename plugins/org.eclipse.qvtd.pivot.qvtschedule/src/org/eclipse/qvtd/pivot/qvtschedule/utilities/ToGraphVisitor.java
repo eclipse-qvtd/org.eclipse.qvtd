@@ -169,7 +169,10 @@ public class ToGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullabl
 		for (@NonNull OperationRegion region : QVTscheduleUtil.getOwnedOperationRegions(QVTscheduleUtil.getOwningScheduleModel(scheduledRegion))) {
 			region.accept(this);
 		}
-		QVTscheduleUtil.getOwnedLoadingRegion(scheduledRegion).accept(this);
+		LoadingRegion loadingRegion = scheduledRegion.getOwnedLoadingRegion();
+		if (loadingRegion != null) {
+			loadingRegion.accept(this);
+		}
 		for (@NonNull MappingRegion region : QVTscheduleUtil.getMappingRegions(scheduledRegion)) {
 			region.accept(this);
 		}

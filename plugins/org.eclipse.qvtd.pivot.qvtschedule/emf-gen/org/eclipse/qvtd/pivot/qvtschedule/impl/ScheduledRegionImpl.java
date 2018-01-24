@@ -515,7 +515,14 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 
 	@Override
 	public @NonNull Iterable<@NonNull Region> getCallableRegions() {
-		return Iterables.concat(Collections.singletonList(QVTscheduleUtil.getOwnedLoadingRegion(this)), Iterables.filter(QVTscheduleUtil.getMappingRegions(this), QVTscheduleUtil.IsCallableRegionPredicate.INSTANCE));
+		LoadingRegion loadingRegion = getOwnedLoadingRegion();
+		Iterable<? extends @NonNull Region> mappingRegions = QVTscheduleUtil.getMappingRegions(this);
+		if (loadingRegion != null) {
+			return Iterables.concat(Collections.singletonList(loadingRegion), Iterables.filter(mappingRegions, QVTscheduleUtil.IsCallableRegionPredicate.INSTANCE));
+		}
+		else {
+			return (Iterable<@NonNull Region>) Iterables.filter(mappingRegions, QVTscheduleUtil.IsCallableRegionPredicate.INSTANCE);
+		}
 	}
 
 	@Override

@@ -151,7 +151,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		Node targetNode;
 		if (asSource instanceof VariableExp) {
 			VariableDeclaration referredVariable = QVTcoreUtil.getReferredVariable((VariableExp)asSource);
-			RuleRegion ruleRegion = context.getRuleRegion();
+			RuleRegion ruleRegion = context.getRegion();
 			sourceNode = ruleRegion.getNode(referredVariable);
 			if (sourceNode != null) {
 				Map<@NonNull OCLExpression, @NonNull Node> expression2knownNode2 = expression2knownNode;
@@ -171,7 +171,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		}
 		else if (asTarget instanceof VariableExp) {
 			VariableDeclaration referredVariable = QVTcoreUtil.getReferredVariable((VariableExp)asTarget);
-			RuleRegionImpl ruleRegion = (RuleRegionImpl)context.getRuleRegion();
+			RuleRegionImpl ruleRegion = (RuleRegionImpl)context.getRegion();
 			targetNode = ruleRegion.getNode(referredVariable);
 			if (targetNode != null) {
 				Map<@NonNull OCLExpression, @NonNull Node> expression2knownNode2 = expression2knownNode;
@@ -404,7 +404,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		return operationNode;
 	}
 
-	protected @NonNull NavigableEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
+	public @NonNull NavigableEdge createCastEdge(@NonNull Node sourceNode, @NonNull Property castProperty, @NonNull Node castNode) {
 		return context.createCastEdge(sourceNode, castProperty, castNode);
 	}
 
@@ -742,7 +742,7 @@ public class ExpressionAnalyzer extends AbstractExtendingQVTcoreVisitor<@Nullabl
 		ClassDatum classDatum = scheduleManager.getClassDatum(ownedVariable);
 		CompleteClass requiredClass = QVTscheduleUtil.getCompleteClass(classDatum);
 		if (actualClass.conformsTo(requiredClass)) {
-			context.getRuleRegion().addVariableNode(ownedVariable, initNode);
+			context.getRegion().addVariableNode(ownedVariable, initNode);
 			initNode.addTypedElement(ownedVariable);
 		}
 		else {

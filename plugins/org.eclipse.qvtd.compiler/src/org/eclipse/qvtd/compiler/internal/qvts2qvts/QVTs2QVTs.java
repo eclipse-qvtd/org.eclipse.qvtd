@@ -859,7 +859,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//		}
 	}
 
-	public @NonNull ScheduledRegion createRootRegion(@NonNull Iterable<@NonNull MappingRegion> allRegions) {
+	private @NonNull ScheduledRegion createRootRegion(@NonNull Iterable<@NonNull MappingRegion> allRegions) {
 		ScheduledRegion scheduledRegion = null;
 		for (@NonNull MappingRegion region : Lists.newArrayList(allRegions)) {
 			if (region.getScheduledRegion() == null) {
@@ -1122,7 +1122,10 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			//			}
 			activeRegions = partitionedRegions;
 		}
-		ScheduledRegion rootRegion = createRootRegion(activeRegions);
+		ScheduledRegion rootRegion = scheduleManager.getScheduleModel().getOwnedScheduledRegion(); //createRootRegion(activeRegions);
+		if (rootRegion == null) {
+			rootRegion = createRootRegion(activeRegions);		// FIXME For QVTm but not QVTr
+		}
 		rootRegion.setOwnedLoadingRegion(loadingRegionAnalysis.getRegion());
 		createSchedule1(rootRegion);
 		createSchedule2(rootRegion);

@@ -57,7 +57,7 @@ public class MappingAnalysis extends RuleAnalysis
 {
 	public static @NonNull MappingAnalysis createMappingRegion(@NonNull ScheduleManager scheduleManager, @NonNull RuleRegion ruleRegion) {
 		MappingAnalysis mappingAnalysis = new MappingAnalysis(scheduleManager, ruleRegion);
-		@SuppressWarnings("unused")String name = mappingAnalysis.getRuleRegion().getName();
+		@SuppressWarnings("unused")String name = mappingAnalysis.getRegion().getName();
 		mappingAnalysis.initialize();
 		return mappingAnalysis;
 	}
@@ -541,16 +541,5 @@ public class MappingAnalysis extends RuleAnalysis
 			}
 		}
 		return false;
-	}
-
-	public void registerConsumptionsAndProductions() {
-		for (@NonNull Node newNode : region.getNewNodes()) {
-			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(newNode);
-			classDatum.getProducingRegions().add(region);
-		}
-		for (@NonNull Node predicatedNode : region.getOldNodes()) {
-			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(predicatedNode);
-			classDatum.getConsumingRegions().add(region);
-		}
 	}
 }
