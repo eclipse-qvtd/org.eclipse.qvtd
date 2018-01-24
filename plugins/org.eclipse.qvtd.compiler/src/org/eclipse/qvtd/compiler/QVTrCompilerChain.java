@@ -24,15 +24,22 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.AbstractQVTb2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTr2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.QVTs2QVTs;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 /**
@@ -60,16 +67,60 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 		}
 	}
 
-	protected static class QVTr2QVTcCompilerStep extends AbstractCompilerStep
+	protected static class QVTr2QVTsCompilerStep extends AbstractCompilerStep
+	{
+		public QVTr2QVTsCompilerStep(@NonNull CompilerChain compilerChain) {
+			super(compilerChain, QVTS_STEP);
+			AbstractQVTb2QVTs.DEBUG_GRAPHS.setState(basicGetOption(CompilerChain.DEBUG_KEY) == Boolean.TRUE);
+		}
+
+		public @NonNull ScheduleManager execute(@NonNull Resource pResource, @NonNull String enforcedOutputName) throws IOException {
+			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
+			try {
+				Resource sResource = createResource();
+				CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
+				Transformation asTransformation = AbstractCompilerChain.getTransformation(pResource);
+				QVTuConfiguration qvtuConfiguration = ((AbstractCompilerChain)compilerChain).createQVTuConfiguration(pResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputName);
+				QVTr2QVTs qvtr2qvts = new QVTr2QVTs(this, environmentFactory, qvtuConfiguration, schedulerOptions);
+				ScheduleManager scheduleManager = qvtr2qvts.getScheduleManager();
+				sResource.getContents().add(scheduleManager.getScheduleModel());
+				scheduleManager.analyzeTransformation(asTransformation);
+				scheduleManager.analyzeTransformations();
+				qvtr2qvts.transform(pResource, sResource);
+
+				saveResource(sResource);
+
+
+				//>>>>>>> 49fabe4 wip
+				throwCompilerChainExceptionForErrors();
+
+
+
+				List<@NonNull MappingRegion> activeRegions = qvtr2qvts.getActiveRegions();
+				String rootName = ClassUtil.nonNullState(asTransformation.eResource().getURI().trimFileExtension().trimFileExtension().lastSegment());
+				QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, scheduleManager, rootName);
+				qvts2qvts.transform(scheduleManager, activeRegions);
+				throwCompilerChainExceptionForErrors();
+				//				sResource.getContents().add(scheduleManager.getScheduleModel());
+				saveResource(sResource);
+				return scheduleManager;
+			}
+			finally {
+				environmentFactory.setCreateStrategy(savedStrategy);
+			}
+		}
+	}
+
+	/*	protected static class QVTr2QVTcCompilerStep extends AbstractCompilerStep
 	{
 		public QVTr2QVTcCompilerStep(@NonNull CompilerChain compilerChain) {
 			super(compilerChain, QVTC_STEP);
 		}
 
 		/**
-		 * A derived implementation with Xtext support can override to convert asURI to csURI.
-		 * @throws IOException
-		 */
+	 * A derived implementation with Xtext support can override to convert asURI to csURI.
+	 * @throws IOException
+	 * /
 		protected void doQVTcSerializeAndLoad(@NonNull URI asURI, @NonNull URI csURI) throws IOException {}
 
 		public @NonNull Resource execute(@NonNull QVTr2QVTc t, @NonNull Resource rResource) throws IOException {
@@ -100,7 +151,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			invocationsResource.save(null);
 			AS2Ecore as2ecore = new AS2Ecore(environmentFactory, invocationsURI, null);
 			XMLResource ecoreResource = as2ecore.convertResource(invocationsResource, invocationsURI);
-			ecoreResource.save(null); */
+			ecoreResource.save(null); * /
 			//
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
 			try {
@@ -130,7 +181,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				environmentFactory.setCreateStrategy(savedStrategy);
 			}
 		}
-	}
+	} */
 
 	protected static class TraceCompilerStep extends AbstractCompilerStep
 	{
@@ -193,14 +244,14 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 	}
 
 	protected final @NonNull Xtext2QVTrCompilerStep xtext2qvtrCompilerStep;
-	protected final @NonNull QVTr2QVTcCompilerStep qvtr2qvtcCompilerStep;
+	protected final @NonNull QVTr2QVTsCompilerStep qvtr2qvtsCompilerStep;
 	protected final @NonNull GenModelCompilerStep genmodelCompilerStep;
 	protected final @NonNull TraceCompilerStep traceCompilerStep;
 
 	public QVTrCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull CompilerOptions options) {
 		super(environmentFactory, txURI, prefixURI, options);
 		this.xtext2qvtrCompilerStep = createXtext2QVTrCompilerStep();
-		this.qvtr2qvtcCompilerStep = createQVTr2QVTcCompilerStep();
+		this.qvtr2qvtsCompilerStep = createQVTr2QVTsCompilerStep();
 		this.genmodelCompilerStep = createGenModelCompilerStep();
 		this.traceCompilerStep = createTraceCompilerStep();
 	}
@@ -212,21 +263,22 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 	}
 
 	protected @NonNull ImperativeTransformation compileQVTrAS(@NonNull Resource rResource, @NonNull String enforcedOutputName) throws IOException {
-		QVTr2QVTc t = new QVTr2QVTc(environmentFactory, rResource);
-		t.analyze();
-		@SuppressWarnings("unused")Resource traceResource = traceCompilerStep.execute(t);
-		Resource cResource = qvtr2qvtcCompilerStep.execute(t, rResource);
-		QVTuConfiguration qvtuConfiguration = createQVTuConfiguration(cResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputName);
-		Resource pResource = qvtc2qvtm(cResource, qvtuConfiguration);
-		return qvtm2qvti(pResource);
+		//		QVTr2QVTc t = new QVTr2QVTc(environmentFactory, rResource);
+		//		t.analyze();
+		//		@SuppressWarnings("unused")Resource traceResource = traceCompilerStep.execute(t);
+		ScheduleManager scheduleManager = qvtr2qvtsCompilerStep.execute(rResource, enforcedOutputName);
+		//		QVTuConfiguration qvtuConfiguration = createQVTuConfiguration(cResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputName);
+		//		Resource pResource = qvtc2qvtm(cResource, qvtuConfiguration);
+		//		ScheduledRegion rootRegion = qvtm2qvtsCompilerStep.execute(pResource);
+		return qvts2qvtiCompilerStep.execute(scheduleManager);
 	}
 
 	protected @NonNull GenModelCompilerStep createGenModelCompilerStep() {
 		return new GenModelCompilerStep(this);
 	}
 
-	protected @NonNull QVTr2QVTcCompilerStep createQVTr2QVTcCompilerStep() {
-		return new QVTr2QVTcCompilerStep(this);
+	protected @NonNull QVTr2QVTsCompilerStep createQVTr2QVTsCompilerStep() {
+		return new QVTr2QVTsCompilerStep(this);
 	}
 
 	protected @NonNull TraceCompilerStep createTraceCompilerStep() {

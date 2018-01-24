@@ -81,17 +81,6 @@ public class QVTrCompilerTests extends LoadTestCase
 					}
 				};
 			}
-
-			@Override
-			protected @NonNull QVTr2QVTcCompilerStep createQVTr2QVTcCompilerStep() {
-				return new QVTr2QVTcCompilerStep(this)
-				{
-					@Override
-					protected void doQVTcSerializeAndLoad(@NonNull URI asURI, @NonNull URI csURI) throws IOException {
-						XtextCompilerUtil.doQVTcSerializeAndLoad(environmentFactory.getProjectManager(), asURI, csURI);
-					}
-				};
-			}
 		}
 
 		public MyQVT(@NonNull ProjectManager projectManager, @NonNull String testProjectName, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) {
