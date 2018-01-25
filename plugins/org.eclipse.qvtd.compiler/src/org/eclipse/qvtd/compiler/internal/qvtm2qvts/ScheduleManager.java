@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
@@ -41,10 +42,12 @@ public interface ScheduleManager
 	void addMappingRegion(@NonNull MappingRegion mappingRegion);
 	void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);
 	void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);
+	@NonNull TransformationAnalysis addTransformation(@NonNull Transformation asTransformation);
 	@NonNull OperationRegion analyzeOperation(@NonNull OperationCallExp operationCallExp);
-	void analyzeTransformation(@NonNull Transformation asTransformation);
 	void analyzeTransformations();
 	@Nullable Property basicGetStatusProperty(@NonNull Node node);
+	@NonNull ExpressionAnalyzer createExpressionAnalyzer(@NonNull RuleAnalysis ruleAnalysis);
+	@NonNull RuleAnalysis createRuleAnalysis(@NonNull Rule asRule);
 	@NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum classDatum);
 	@NonNull Property getCastProperty(@NonNull Type type);
 	@NonNull ClassDatum getClassDatum(@NonNull TypedElement asTypedElement);
@@ -62,6 +65,8 @@ public interface ScheduleManager
 	@NonNull StandardLibraryHelper getStandardLibraryHelper();
 	@NonNull PropertyDatum getSuccessPropertyDatum(@NonNull Property successProperty);
 	@NonNull Iterable<@NonNull ClassDatum> getSuperClassDatums(@NonNull ClassDatum classDatum);
+	@NonNull Iterable<@NonNull TransformationAnalysis> getTransformationAnalyses();
+	@NonNull TransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation);
 
 	/**
 	 * Return true if a mapping may assign this property in an input model.

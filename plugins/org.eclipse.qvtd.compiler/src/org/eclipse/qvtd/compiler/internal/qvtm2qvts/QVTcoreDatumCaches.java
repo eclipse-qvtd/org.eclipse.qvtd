@@ -35,7 +35,6 @@ import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -50,13 +49,9 @@ public class QVTcoreDatumCaches extends DatumCaches
 	}
 
 	@Override
-	protected @NonNull RuleRegion analyzeRule(@NonNull Rule rule) {
-		RuleRegion ruleRegion = QVTscheduleFactory.eINSTANCE.createRuleRegion();
-		ruleRegion.setOwningScheduleModel(scheduleManager.getScheduleModel());
-		ruleRegion.setReferredRule(rule);
-		//		RuleAction ruleAction = QVTscheduleFactory.eINSTANCE.createRuleAction();
-		//		ruleAction.setReferredRuleRegion(ruleRegion);
-		//		ruleAction.setOwningScheduleModel(scheduleManager.getScheduleModel());
+	protected @NonNull RuleRegion analyzeRule(@NonNull RuleAnalysis ruleAnalysis) {
+		RuleRegion ruleRegion = ruleAnalysis.getRegion();
+		Rule rule = ruleAnalysis.getRule();
 		List<@NonNull AbstractDatum> productions = QVTscheduleUtil.Internal.getProducedDatumsList(ruleRegion);
 		List<@NonNull AbstractDatum> consumptions = QVTscheduleUtil.Internal.getConsumedDatumsList(ruleRegion);
 		for (@NonNull EObject eObject : new TreeIterable(rule, true)) {

@@ -10,19 +10,13 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotHelper;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 
 public abstract class AbstractQVTb2QVTs extends PivotHelper
@@ -45,11 +39,6 @@ public abstract class AbstractQVTb2QVTs extends PivotHelper
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull ProblemHandler problemHandler;
 
-	/**
-	 * The Region to which each mapping is allocated.
-	 */
-	private final @NonNull Map<@NonNull Rule, @NonNull RuleAnalysis> rule2ruleAnalysis = new HashMap<>();
-
 	public AbstractQVTb2QVTs(@NonNull ScheduleManager scheduleManager, @NonNull ProblemHandler problemHandler) {
 		super(scheduleManager.getEnvironmentFactory());
 		this.scheduleManager = scheduleManager;
@@ -66,24 +55,6 @@ public abstract class AbstractQVTb2QVTs extends PivotHelper
 
 	public void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
 		addProblem(CompilerUtil.createRegionWarning(region, messageTemplate, bindings));
-	}
-
-	protected void addRuleAnalysis(@NonNull RuleAnalysis ruleAnalysis) {
-		rule2ruleAnalysis.put(ruleAnalysis.getRule(), ruleAnalysis);
-	}
-
-	public @NonNull MappingRegion getMappingRegion(@NonNull Rule rule) {
-		RuleAnalysis ruleAnalysis = rule2ruleAnalysis.get(rule);
-		assert ruleAnalysis != null;
-		return ruleAnalysis.getRegion();
-	}
-
-	protected @NonNull Iterable<@NonNull RuleAnalysis> getRuleAnalyses() {
-		return rule2ruleAnalysis.values();
-	}
-
-	protected @NonNull RuleAnalysis getRuleAnalysis(@NonNull Rule rule) {
-		return ClassUtil.nonNullState(rule2ruleAnalysis.get(rule));
 	}
 
 	public @NonNull ScheduleManager getScheduleManager() {

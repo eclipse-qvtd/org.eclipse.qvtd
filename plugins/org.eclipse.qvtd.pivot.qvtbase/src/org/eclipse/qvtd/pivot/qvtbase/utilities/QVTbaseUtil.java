@@ -384,12 +384,28 @@ public class QVTbaseUtil extends PivotUtil
 		return ClassUtil.nullFree(asTransformation.getModelParameter());
 	}
 
+	public static @NonNull Iterable<@NonNull Rule> getOverrides(@NonNull Rule asRule) {
+		return ClassUtil.nullFree(asRule.getOverrides());
+	}
+
+	public static @NonNull Iterable<@NonNull Domain> getOwnedDomains(@NonNull Rule asRule) {
+		return ClassUtil.nullFree(asRule.getDomain());
+	}
+
 	public static @NonNull Iterable<@NonNull Operation> getOwnedOperations(@NonNull Transformation asTransformation) {
 		return ClassUtil.nullFree(asTransformation.getOwnedOperations());
 	}
 
 	public static @NonNull Iterable<@NonNull Predicate> getOwnedPredicates(@NonNull Pattern asPattern) {
 		return ClassUtil.nullFree(asPattern.getPredicate());
+	}
+
+	public static @NonNull Iterable<@NonNull Rule> getOwnedRules(@NonNull Transformation asTransformation) {
+		return ClassUtil.nullFree(asTransformation.getRule());
+	}
+
+	public static @NonNull Transformation getOwningTransformation(@NonNull Rule asRule) {
+		return ClassUtil.nonNullState(asRule.getTransformation());
 	}
 
 	public static @NonNull OCLExpression getQueryExpression(@NonNull Function asFunction) {

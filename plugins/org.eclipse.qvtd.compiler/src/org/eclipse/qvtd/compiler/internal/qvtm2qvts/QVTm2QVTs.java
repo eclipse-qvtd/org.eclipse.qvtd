@@ -45,18 +45,20 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 		//
 		//	Extract salient characteristics from within each MappingAction.
 		//
-		for (@NonNull RuleRegion ruleRegion : orderedRuleRegions) {
-			MappingAnalysis mappingAnalysis = MappingAnalysis.createMappingRegion(scheduleManager, ruleRegion);
-			addRuleAnalysis(mappingAnalysis);
-		}
-		List<@NonNull RuleAnalysis> mappingAnalyses = Lists.newArrayList(getRuleAnalyses());
-		Collections.sort(mappingAnalyses, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
-		for (@NonNull RuleAnalysis mappingRegion : mappingAnalyses) {
-			mappingRegion.registerConsumptionsAndProductions();
-		}
-		if (AbstractQVTb2QVTs.DEBUG_GRAPHS.isActive()) {
-			for (@NonNull RuleAnalysis mappingAnalysis : mappingAnalyses) {
-				scheduleManager.writeDebugGraphs(mappingAnalysis.getRegion(), null);
+		//		for (@NonNull RuleRegion ruleRegion : orderedRuleRegions) {
+		//			MappingAnalysis mappingAnalysis = MappingAnalysis.createMappingRegion(scheduleManager, ruleRegion);
+		//			addRuleAnalysis(mappingAnalysis);
+		//		}
+		for (@NonNull TransformationAnalysis transformationAnalysis : scheduleManager.getTransformationAnalyses()) {
+			List<@NonNull RuleAnalysis> ruleAnalyses = Lists.newArrayList(transformationAnalysis.getRuleAnalyses());
+			Collections.sort(ruleAnalyses, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
+			for (@NonNull RuleAnalysis ruleAnalysis : ruleAnalyses) {
+				ruleAnalysis.registerConsumptionsAndProductions();
+			}
+			if (AbstractQVTb2QVTs.DEBUG_GRAPHS.isActive()) {
+				for (@NonNull RuleAnalysis ruleAnalysis : ruleAnalyses) {
+					scheduleManager.writeDebugGraphs(ruleAnalysis.getRegion(), null);
+				}
 			}
 		}
 		List<@NonNull MappingRegion> orderedRegions = new ArrayList<>();

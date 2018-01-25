@@ -228,7 +228,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				QVTm2QVTs qvtm2qvts = new QVTm2QVTs(this, environmentFactory, schedulerOptions);
 				ScheduleManager scheduleManager = qvtm2qvts.getScheduleManager();
 				sResource.getContents().add(scheduleManager.getScheduleModel());
-				scheduleManager.analyzeTransformation(asTransformation);
+				scheduleManager.addTransformation(asTransformation);
 				scheduleManager.analyzeTransformations();
 				List<@NonNull MappingRegion> activeRegions = qvtm2qvts.transform();
 				throwCompilerChainExceptionForErrors();

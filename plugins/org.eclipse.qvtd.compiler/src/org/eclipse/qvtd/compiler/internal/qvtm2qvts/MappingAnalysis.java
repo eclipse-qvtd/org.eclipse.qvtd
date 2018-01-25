@@ -61,13 +61,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 public class MappingAnalysis extends RuleAnalysis
 {
-	public static @NonNull MappingAnalysis createMappingRegion(@NonNull ScheduleManager scheduleManager, @NonNull RuleRegion ruleRegion) {
-		MappingAnalysis mappingAnalysis = new MappingAnalysis(scheduleManager, ruleRegion);
-		@SuppressWarnings("unused")String name = mappingAnalysis.getRegion().getName();
-		mappingAnalysis.initialize();
-		return mappingAnalysis;
-	}
-
 	public static abstract class AbstractQVTcoreExpressionAnalyzer extends ExpressionAnalyzer implements QVTcoreVisitor<@Nullable Node>
 	{
 		protected AbstractQVTcoreExpressionAnalyzer(@NonNull RuleAnalysis context) {
@@ -246,7 +239,7 @@ public class MappingAnalysis extends RuleAnalysis
 	 */
 	private @NonNull Map<@NonNull VariableDeclaration, @NonNull List<@NonNull OCLExpression>> variable2expressions = new HashMap<>();
 
-	private MappingAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull RuleRegion ruleRegion) {
+	public MappingAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull RuleRegion ruleRegion) {
 		super(scheduleManager, ruleRegion);
 		//
 		Mapping mapping = (Mapping)QVTscheduleUtil.getReferredRule(ruleRegion);
@@ -289,6 +282,30 @@ public class MappingAnalysis extends RuleAnalysis
 		if (!initializers.contains(expression)) {	// Shouldn't really happen but variable.ownedIInit is lazy
 			initializers.add(expression);
 		}
+	}
+
+	@Override
+	public void analyze() {
+		//
+		// Create the BLUE/CYAN guard nodes.
+		//
+		analyzeGuardVariables();
+		//
+		// Create the GREEN realized nodes.
+		//
+		analyzeRealizedVariables();		// FIXME bottom variables too
+		//
+		// Create the predicate/computation nodes and edges
+		//
+		analyzePredicates(guardPatterns);
+		analyzePredicates(bottomPatterns);
+		analyzeAssignmentValues();
+		analyzeComplexPredicates();
+		analyzeContainments();
+		//
+		MappingRegionAnalysis mappingRegionAnalysis = new MappingRegionAnalysis(region);
+		List<@NonNull Node> headNodes = mappingRegionAnalysis.initHeadNodes(null);
+		mappingRegionAnalysis.computeUtilities(headNodes);
 	}
 
 	/**
@@ -550,11 +567,6 @@ public class MappingAnalysis extends RuleAnalysis
 		return bestInitNode;
 	}
 
-	@Override
-	protected @NonNull ExpressionAnalyzer createExpressionAnalyzer() {
-		return new QVTcoreExpressionAnalyzer(this);
-	}
-
 	/**
 	 * Return the boundExpression if conditionExpression is of the form
 	 * <br>"variable = referenceExpression" => VariableExp(variable)
@@ -661,29 +673,6 @@ public class MappingAnalysis extends RuleAnalysis
 		else {
 			return new GuardVariableNode(this, variable);
 		} */
-	}
-
-	public void initialize() {
-		//
-		// Create the BLUE/CYAN guard nodes.
-		//
-		analyzeGuardVariables();
-		//
-		// Create the GREEN realized nodes.
-		//
-		analyzeRealizedVariables();		// FIXME bottom variables too
-		//
-		// Create the predicate/computation nodes and edges
-		//
-		analyzePredicates(guardPatterns);
-		analyzePredicates(bottomPatterns);
-		analyzeAssignmentValues();
-		analyzeComplexPredicates();
-		analyzeContainments();
-		//
-		MappingRegionAnalysis mappingRegionAnalysis = new MappingRegionAnalysis(region);
-		List<@NonNull Node> headNodes = mappingRegionAnalysis.initHeadNodes(null);
-		mappingRegionAnalysis.computeUtilities(headNodes);
 	}
 
 	/**

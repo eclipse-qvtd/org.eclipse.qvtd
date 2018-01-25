@@ -42,7 +42,6 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
@@ -97,11 +96,11 @@ public abstract class DatumCaches
 
 	}
 
-	protected abstract @Nullable RuleRegion analyzeRule(@NonNull Rule rule);
+	protected abstract @Nullable RuleRegion analyzeRule(@NonNull RuleAnalysis ruleAnalysis);
 
-	public void analyzeTransformation(@NonNull Transformation transformation) {
-		for (@NonNull Rule rule : QVTbaseUtil.getRule(transformation)) {
-			analyzeRule(rule);
+	public void analyzeTransformation(@NonNull TransformationAnalysis transformationAnalysis) {
+		for (@NonNull Rule rule : QVTbaseUtil.getOwnedRules(transformationAnalysis.getTransformation())) {
+			analyzeRule(transformationAnalysis.getRuleAnalysis(rule));
 		}
 	}
 

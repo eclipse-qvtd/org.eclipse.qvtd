@@ -114,6 +114,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	private Map<@NonNull OperationDatum, @NonNull OperationRegion> operationDatum2operationRegion = new HashMap<>();
 
+	private final @NonNull Map<@NonNull Transformation, @NonNull TransformationAnalysis> transformation2transformationAnalysis = new HashMap<>();
+
 	protected AbstractScheduleManager(@NonNull ScheduleModel scheduleModel, @NonNull EnvironmentFactory environmentFactory,
 			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
 		this.scheduleModel = scheduleModel;
@@ -137,6 +139,13 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	@Override
 	public void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
 		throw new UnsupportedOperationException();		// FIXME move to caller
+	}
+
+	@Override
+	public @NonNull TransformationAnalysis addTransformation(@NonNull Transformation asTransformation) {
+		TransformationAnalysis transformationAnalysis = createTransformationAnalysis(asTransformation);
+		transformation2transformationAnalysis.put(asTransformation, transformationAnalysis);
+		return transformationAnalysis;
 	}
 
 	private void analyzeCallTree() {
@@ -198,16 +207,17 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		}
 	}
 
-	@Override
-	public void analyzeTransformation(@NonNull Transformation asTransformation) {
-		TypedModel primitiveTypeModel = domainUsageAnalysis.getPrimitiveTypeModel();
-		asTransformation.getModelParameter().add(primitiveTypeModel);		// FIXME move to QVTm
-		domainUsageAnalysis.analyzeTransformation(asTransformation);
-		datumCaches.analyzeTransformation(asTransformation);
+	protected void analyzeTransformation(@NonNull TransformationAnalysis transformationAnalysis) {
+		domainUsageAnalysis.analyzeTransformation(transformationAnalysis.getTransformation());
+		transformationAnalysis.analyze();
+		datumCaches.analyzeTransformation(transformationAnalysis);
 	}
 
 	@Override
 	public void analyzeTransformations() {
+		for (@NonNull TransformationAnalysis transformationAnalysis : transformation2transformationAnalysis.values()) {
+			analyzeTransformation(transformationAnalysis);
+		}
 		analyzeCallTree();
 	}
 
@@ -392,6 +402,10 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		Property property = PivotUtil.createProperty(name, type);
 		property.setIsRequired(isRequired);
 		return property;
+	}
+
+	protected @NonNull TransformationAnalysis createTransformationAnalysis(@NonNull Transformation asTransformation) {
+		return new TransformationAnalysis(this, asTransformation);
 	}
 
 	@Override
@@ -581,6 +595,17 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			}
 		}
 		return superClassDatums;
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull TransformationAnalysis> getTransformationAnalyses() {
+		return transformation2transformationAnalysis.values();
+	}
+
+	@Override
+	public @NonNull TransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation) {
+		TransformationAnalysis transformationAnalysis = transformation2transformationAnalysis.get(transformation);
+		return ClassUtil.nonNullState(transformationAnalysis);
 	}
 
 	@Override
