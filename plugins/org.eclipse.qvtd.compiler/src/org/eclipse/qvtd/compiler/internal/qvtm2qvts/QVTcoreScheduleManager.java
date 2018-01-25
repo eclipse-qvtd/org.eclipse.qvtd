@@ -15,16 +15,15 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 
 public class QVTcoreScheduleManager extends AbstractScheduleManager
 {
-	public QVTcoreScheduleManager(@NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
+	public QVTcoreScheduleManager(@NonNull EnvironmentFactory environmentFactory,
 			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
-		super(QVTscheduleFactory.eINSTANCE.createScheduleModel(), environmentFactory, asTransformation, schedulerOptions);
+		super(QVTscheduleFactory.eINSTANCE.createScheduleModel(), environmentFactory, schedulerOptions);
 	}
 
 	@Override

@@ -225,18 +225,20 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				Resource sResource = createResource();
 				Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions = getOption(CompilerChain.SCHEDULER_OPTIONS_KEY);
 				Transformation asTransformation = AbstractCompilerChain.getTransformation(pResource);
-				QVTm2QVTs qvtm2qvts = new QVTm2QVTs(this, environmentFactory, asTransformation, schedulerOptions);
+				QVTm2QVTs qvtm2qvts = new QVTm2QVTs(this, environmentFactory, schedulerOptions);
+				ScheduleManager scheduleManager = qvtm2qvts.getScheduleManager();
+				sResource.getContents().add(scheduleManager.getScheduleModel());
+				scheduleManager.analyzeTransformation(asTransformation);
+				scheduleManager.analyzeTransformations();
 				List<@NonNull MappingRegion> activeRegions = qvtm2qvts.transform();
 				throwCompilerChainExceptionForErrors();
-				ScheduleManager scheduleManager = qvtm2qvts.getScheduleManager();
-				String rootName = ClassUtil.nonNullState(asTransformation.eResource().getURI().trimFileExtension().trimFileExtension().lastSegment());
+				String rootName = ClassUtil.nonNullState(pResource.getURI().trimFileExtension().trimFileExtension().lastSegment());
 				QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, scheduleManager, rootName);
 				List<@NonNull ScheduledRegion> scheduledRegions = qvts2qvts.transform(scheduleManager, activeRegions);
 				for (@NonNull ScheduledRegion scheduledRegion : scheduledRegions) {
 					scheduledRegion.setReferredTransformation(asTransformation);
 				}
 				throwCompilerChainExceptionForErrors();
-				sResource.getContents().add(scheduleManager.getScheduleModel());
 				saveResource(sResource);
 				return scheduleManager;
 			}

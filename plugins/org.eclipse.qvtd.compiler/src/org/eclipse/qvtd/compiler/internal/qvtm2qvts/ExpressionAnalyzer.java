@@ -695,7 +695,7 @@ public abstract class ExpressionAnalyzer extends AbstractExtendingQVTbaseVisitor
 	@Override
 	public @NonNull Node visitElement(@NonNull Element element) {
 		Class oclInvalidType = scheduleManager.getStandardLibrary().getOclInvalidType();
-		ClassDatum classDatum = scheduleManager.getClassDatum(scheduleManager.getDomainAnalysis().getPrimitiveTypeModel(), oclInvalidType);
+		ClassDatum classDatum = scheduleManager.getClassDatum(scheduleManager.getDomainUsageAnalysis().getPrimitiveTypeModel(), oclInvalidType);
 		Node errorNode = createErrorNode("«error»", classDatum);
 		for (EObject eObject : element.eContents()) {
 			Node node = analyze((Element) eObject);

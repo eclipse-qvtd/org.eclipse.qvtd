@@ -1291,7 +1291,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		// mappings, but that incurs many typedModel accuracy issues.
 		//
 		Set<@NonNull Property> allCheckedProperties = null;
-		DomainUsage anyUsage = scheduleManager.getDomainAnalysis().getAnyUsage();
+		DomainUsage anyUsage = scheduleManager.getDomainUsageAnalysis().getAnyUsage();
 		for (@NonNull TypedModel qvtmTypedModel : anyUsage.getTypedModels()) {
 			Iterable<@NonNull NavigableEdge> checkedEdges = scheduleManager.getRegionAnalysis(region).getCheckedEdges(qvtmTypedModel);
 			if (checkedEdges != null) {

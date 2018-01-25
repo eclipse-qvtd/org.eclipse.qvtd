@@ -256,7 +256,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)source2targetProperty.getType();
 		assert type != null;
 		Type elementType = PivotUtil.getElementalType(type);
-		TypedModel typedModel = elementType instanceof DataType ? scheduleManager.getDomainAnalysis().getPrimitiveTypeModel() : sourceNode.getClassDatum().getReferredTypedModel();
+		TypedModel typedModel = elementType instanceof DataType ? scheduleManager.getDomainUsageAnalysis().getPrimitiveTypeModel() : sourceNode.getClassDatum().getReferredTypedModel();
 		assert typedModel != null;
 		ClassDatum classDatum = scheduleManager.getClassDatum(typedModel, type);
 		String name = source2targetProperty.getName();
@@ -320,7 +320,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 
 	public @NonNull StatusNode createStatusNode() {
 		org.eclipse.ocl.pivot.Class booleanType = scheduleManager.getStandardLibrary().getBooleanType();
-		DomainUsage primitiveUsage = scheduleManager.getDomainAnalysis().getPrimitiveUsage();
+		DomainUsage primitiveUsage = scheduleManager.getDomainUsageAnalysis().getPrimitiveUsage();
 		ClassDatum classDatum = scheduleManager.getClassDatum(ClassUtil.nonNullState(primitiveUsage.getTypedModel(null)), booleanType);
 		Role nodeRole = Role.REALIZED;
 		StatusNode node = QVTscheduleFactory.eINSTANCE.createStatusNode();
@@ -348,7 +348,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 
 	public @NonNull Node createTrueNode() {
 		org.eclipse.ocl.pivot.Class booleanType = scheduleManager.getStandardLibrary().getBooleanType();
-		DomainUsage primitiveUsage = scheduleManager.getDomainAnalysis().getPrimitiveUsage();
+		DomainUsage primitiveUsage = scheduleManager.getDomainUsageAnalysis().getPrimitiveUsage();
 		ClassDatum classDatum = scheduleManager.getClassDatum(ClassUtil.nonNullState(primitiveUsage.getTypedModel(null)), booleanType);
 		Role nodeRole = Role.CONSTANT;
 		TrueNode node = QVTscheduleFactory.eINSTANCE.createTrueNode();

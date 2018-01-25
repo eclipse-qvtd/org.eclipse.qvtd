@@ -39,6 +39,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
 
 /**
@@ -132,7 +133,7 @@ public class QVTs2QVTi extends QVTimperativeHelper
 
 	protected void resolveTransformation(@NonNull Model model, @NonNull ScheduledRegion scheduledRegion) {
 		SymbolNameReservation symbolNameReservation = scheduleManager.getScheduleModel().getSymbolNameAdapter();
-		Transformation transformation = scheduleManager.getTransformation();
+		Transformation transformation = QVTscheduleUtil.getReferredTransformation(scheduledRegion);
 		QVTs2QVTiVisitor visitor = new QVTs2QVTiVisitor(scheduleManager, problemHandler, this, transformation, symbolNameReservation);
 		Transformation qvtiTransformation = (Transformation)scheduledRegion.accept(visitor);
 		NamedElement qvtiChild = qvtiTransformation;

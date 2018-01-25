@@ -23,7 +23,6 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -32,9 +31,9 @@ import com.google.common.collect.Lists;
 
 public class QVTm2QVTs extends AbstractQVTb2QVTs
 {
-	public QVTm2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
+	public QVTm2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory,
 			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
-		super(new QVTcoreScheduleManager(environmentFactory, asTransformation, schedulerOptions), problemHandler);
+		super(new QVTcoreScheduleManager(environmentFactory, schedulerOptions), problemHandler);
 	}
 
 	public @NonNull List<@NonNull MappingRegion> transform() throws IOException {

@@ -72,7 +72,7 @@ public abstract class DatumCaches
 
 	protected DatumCaches(@NonNull ScheduleManager scheduleManager) {
 		this.scheduleManager = scheduleManager;
-		this.domainUsageAnalysis = scheduleManager.getDomainAnalysis();
+		this.domainUsageAnalysis = scheduleManager.getDomainUsageAnalysis();
 		EnvironmentFactory environmentFactory = scheduleManager.getEnvironmentFactory();
 		this.containmentAnalysis = new ContainmentAnalysis(environmentFactory);
 		this.completeModel = environmentFactory.getCompleteModel();

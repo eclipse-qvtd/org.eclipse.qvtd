@@ -37,6 +37,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
@@ -700,6 +701,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Rule getReferredRule(@NonNull RuleRegion ruleRegion) {
 		return ClassUtil.nonNullState(ruleRegion.getReferredRule());
+	}
+
+	public static @NonNull Transformation getReferredTransformation(@NonNull ScheduledRegion scheduledRegion) {
+		return ClassUtil.nonNullState(scheduledRegion.getReferredTransformation());
 	}
 
 	public static @NonNull TypedModel getReferredTypedModel(@NonNull ClassDatum classDatum) {

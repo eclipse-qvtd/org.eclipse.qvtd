@@ -81,16 +81,12 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 {
 	protected final @NonNull ScheduleModel scheduleModel;
 	protected final @NonNull EnvironmentFactory environmentFactory;
-	protected final @NonNull Transformation transformation;
 	private @Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions;
-	protected final @NonNull RootDomainUsageAnalysis domainAnalysis;
+	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
 	protected final @NonNull DatumCaches datumCaches;
-
-	@SuppressWarnings("unused")
-	private final @NonNull DomainUsage inputUsage;
-
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
-	protected final @NonNull ClassDatum oclVoidClassDatum;
+
+	private @Nullable ClassDatum oclVoidClassDatum;
 
 	/**
 	 * The extended analysis of each ClassDatum.
@@ -118,27 +114,14 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	private Map<@NonNull OperationDatum, @NonNull OperationRegion> operationDatum2operationRegion = new HashMap<>();
 
-	protected AbstractScheduleManager(@NonNull ScheduleModel scheduleModel, @NonNull EnvironmentFactory environmentFactory, @NonNull Transformation asTransformation,
+	protected AbstractScheduleManager(@NonNull ScheduleModel scheduleModel, @NonNull EnvironmentFactory environmentFactory,
 			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
 		this.scheduleModel = scheduleModel;
 		this.environmentFactory = environmentFactory;
-		this.transformation = asTransformation;
 		this.schedulerOptions = schedulerOptions;
-		this.domainAnalysis = createDomainUsageAnalysis();
-		asTransformation.getModelParameter().add(domainAnalysis.getPrimitiveTypeModel());		// FIXME move to QVTm
-		domainAnalysis.analyzeTransformation(asTransformation);
+		this.domainUsageAnalysis = createDomainUsageAnalysis();
+		this.standardLibraryHelper = new StandardLibraryHelper(environmentFactory.getStandardLibrary());
 		this.datumCaches = createDatumCaches();
-		datumCaches.analyzeTransformation(asTransformation);
-		analyzeCallTree();
-		//
-		this.inputUsage = domainAnalysis.getInputUsage();
-		//		int outputMask = ((DomainUsage.Internal)domainAnalysis.getOutputUsage()).getMask();
-		//		int inputMask = checkableMask & ~enforceableMask;
-		//		this.inputUsage = domainAnalysis.getConstantUsage(inputMask);
-		//
-		StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
-		this.standardLibraryHelper = new StandardLibraryHelper(standardLibrary);
-		oclVoidClassDatum = getClassDatum(domainAnalysis.getPrimitiveTypeModel(), standardLibrary.getOclVoidType());
 	}
 
 	@Override
@@ -162,7 +145,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		StringBuilder s = QVTm2QVTs.CALL_TREE.isActive() ? new StringBuilder() : null;
 		for (@NonNull ClassDatum classDatum : QVTscheduleUtil.getOwnedClassDatums(scheduleModel)) {
 			TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
-			DomainUsage usage = domainAnalysis.getUsage(typedModel);
+			DomainUsage usage = domainUsageAnalysis.getUsage(typedModel);
 			if (usage.isMiddle()) {
 				middleClassDatums.add(classDatum);
 				if (s != null) {
@@ -213,6 +196,19 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			e.printStackTrace();
 			throw new UnsupportedOperationException(e);
 		}
+	}
+
+	@Override
+	public void analyzeTransformation(@NonNull Transformation asTransformation) {
+		TypedModel primitiveTypeModel = domainUsageAnalysis.getPrimitiveTypeModel();
+		asTransformation.getModelParameter().add(primitiveTypeModel);		// FIXME move to QVTm
+		domainUsageAnalysis.analyzeTransformation(asTransformation);
+		datumCaches.analyzeTransformation(asTransformation);
+	}
+
+	@Override
+	public void analyzeTransformations() {
+		analyzeCallTree();
 	}
 
 	@Override
@@ -300,7 +296,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		//		System.out.println("Analyze2 " + operationCallExp + " gives\n\t" + paths);
 		Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> hiddenPaths = paths.getHiddenPaths();
 		Iterable<@NonNull List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep>> returnPaths = paths.getReturnPaths();
-		RootDomainUsageAnalysis domainAnalysis = scheduleManager.getDomainAnalysis();
+		RootDomainUsageAnalysis domainAnalysis = scheduleManager.getDomainUsageAnalysis();
 		Map<@NonNull ClassDatum, @NonNull Node> classDatum2node = new HashMap<>();
 		for (List<org.eclipse.qvtd.compiler.internal.qvtm2qvts.OperationDependencyStep> steps : Iterables.concat(returnPaths, hiddenPaths)) {
 			if (steps.size() > 0) {
@@ -434,7 +430,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		Type elementType = PivotUtil.getElementalType(asType);
 		TypedModel typedModel;
 		if (elementType instanceof DataType) {
-			typedModel = getDomainAnalysis().getPrimitiveTypeModel();
+			typedModel = getDomainUsageAnalysis().getPrimitiveTypeModel();
 		}
 		else {
 			DomainUsage domainUsage = getDomainUsage(asTypedElement);
@@ -460,21 +456,21 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public @NonNull RootDomainUsageAnalysis getDomainAnalysis() {
-		return domainAnalysis;
-	}
-
-	@Override
 	public @NonNull DomainUsage getDomainUsage(@NonNull Element element) {
 		if (element instanceof ClassDatum) {
 			return getDomainUsage(QVTscheduleUtil.getReferredTypedModel((ClassDatum)element));
 		}
-		DomainUsageAnalysis analysis = domainAnalysis;
+		DomainUsageAnalysis analysis = domainUsageAnalysis;
 		Operation operation = PivotUtil.getContainingOperation(element);
 		if (operation != null) {
-			analysis = domainAnalysis.getAnalysis(operation);
+			analysis = domainUsageAnalysis.getAnalysis(operation);
 		}
 		return ClassUtil.nonNullState(analysis.getUsage(element));
+	}
+
+	@Override
+	public @NonNull RootDomainUsageAnalysis getDomainUsageAnalysis() {
+		return domainUsageAnalysis;
 	}
 
 	@Override
@@ -499,7 +495,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	protected @NonNull URI getGraphsBaseURI() {
-		return transformation.eResource().getURI().trimSegments(1).appendSegment("graphs").appendSegment("");
+		return scheduleModel.eResource().getURI().trimSegments(1).appendSegment("graphs").appendSegment("");
 	}
 
 	public @NonNull Property getIterateProperty(@NonNull Type type) {
@@ -513,13 +509,19 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	@Override
 	public @NonNull ClassDatum getOclVoidClassDatum() {
-		return oclVoidClassDatum;
+		ClassDatum oclVoidClassDatum2 = oclVoidClassDatum;
+		if (oclVoidClassDatum2 == null) {
+			TypedModel primitiveTypeModel = domainUsageAnalysis.getPrimitiveTypeModel();
+			StandardLibrary standardLibrary = environmentFactory.getStandardLibrary();
+			oclVoidClassDatum = oclVoidClassDatum2 = getClassDatum(primitiveTypeModel, standardLibrary.getOclVoidType());
+		}
+		return oclVoidClassDatum2;
 	}
 
 	public @NonNull OperationDependencyAnalysis getOperationDependencyAnalysis() {
 		OperationDependencyAnalysis operationDependencyAnalysis2 = operationDependencyAnalysis;
 		if (operationDependencyAnalysis2 == null) {
-			operationDependencyAnalysis = operationDependencyAnalysis2 = new OperationDependencyAnalysis(getContainmentAnalysis(), getDomainAnalysis());
+			operationDependencyAnalysis = operationDependencyAnalysis2 = new OperationDependencyAnalysis(getContainmentAnalysis(), getDomainUsageAnalysis());
 		}
 		return operationDependencyAnalysis2;
 	}
@@ -582,13 +584,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public @NonNull Transformation getTransformation() {
-		return transformation;
-	}
-
-	@Override
 	public boolean isDirty(@NonNull Property property) {
-		return domainAnalysis.isDirty(property);
+		return domainUsageAnalysis.isDirty(property);
 	}
 
 	@Override

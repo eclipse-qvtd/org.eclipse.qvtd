@@ -42,6 +42,8 @@ public interface ScheduleManager
 	void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);
 	void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);
 	@NonNull OperationRegion analyzeOperation(@NonNull OperationCallExp operationCallExp);
+	void analyzeTransformation(@NonNull Transformation asTransformation);
+	void analyzeTransformations();
 	@Nullable Property basicGetStatusProperty(@NonNull Node node);
 	@NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum classDatum);
 	@NonNull Property getCastProperty(@NonNull Type type);
@@ -49,7 +51,7 @@ public interface ScheduleManager
 	@NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class asType);
 	@NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, @NonNull CompleteClass completeClass);
 	@NonNull Iterable<@NonNull ClassDatum> getClassDatums();
-	@NonNull RootDomainUsageAnalysis getDomainAnalysis();
+	@NonNull RootDomainUsageAnalysis getDomainUsageAnalysis();
 	@NonNull DomainUsage getDomainUsage(@NonNull Element element);
 	@NonNull ClassDatum getElementalClassDatum(@NonNull ClassDatum classDatum);
 	@NonNull EnvironmentFactory getEnvironmentFactory();
@@ -60,7 +62,6 @@ public interface ScheduleManager
 	@NonNull StandardLibraryHelper getStandardLibraryHelper();
 	@NonNull PropertyDatum getSuccessPropertyDatum(@NonNull Property successProperty);
 	@NonNull Iterable<@NonNull ClassDatum> getSuperClassDatums(@NonNull ClassDatum classDatum);
-	@NonNull Transformation getTransformation();
 
 	/**
 	 * Return true if a mapping may assign this property in an input model.
