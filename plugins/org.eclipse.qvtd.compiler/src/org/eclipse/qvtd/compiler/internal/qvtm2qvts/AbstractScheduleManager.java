@@ -219,10 +219,21 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		}
 	}
 
-	protected void analyzeTransformation(@NonNull TransformationAnalysis transformationAnalysis) {
+	protected void analyzeRules(@NonNull TransformationAnalysis transformationAnalysis) {
 		domainUsageAnalysis.analyzeTransformation(transformationAnalysis.getTransformation());
-		transformationAnalysis.analyze();
+		transformationAnalysis.analyzeRules();
+	}
+
+	protected void analyzeTransformation(@NonNull TransformationAnalysis transformationAnalysis) {
+		transformationAnalysis.analyzeTransformation();
 		datumCaches.analyzeTransformation(transformationAnalysis);
+	}
+
+	@Override
+	public void analyzeRules() {
+		for (@NonNull TransformationAnalysis transformationAnalysis : transformation2transformationAnalysis.values()) {
+			analyzeRules(transformationAnalysis);
+		}
 	}
 
 	@Override

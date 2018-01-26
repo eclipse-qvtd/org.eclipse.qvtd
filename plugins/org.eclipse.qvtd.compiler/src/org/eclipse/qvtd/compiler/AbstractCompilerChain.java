@@ -243,7 +243,6 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				ScheduleManager scheduleManager = qvtm2qvts.getScheduleManager();
 				sResource.getContents().add(scheduleManager.getScheduleModel());
 				scheduleManager.addTransformation(asTransformation);
-				scheduleManager.analyzeTransformations();
 				List<@NonNull MappingRegion> activeRegions = qvtm2qvts.transform();
 				throwCompilerChainExceptionForErrors();
 				String rootName = ClassUtil.nonNullState(pResource.getURI().trimFileExtension().trimFileExtension().lastSegment());
