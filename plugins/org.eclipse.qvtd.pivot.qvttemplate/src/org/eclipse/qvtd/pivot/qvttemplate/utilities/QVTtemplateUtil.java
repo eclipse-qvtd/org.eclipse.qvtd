@@ -42,11 +42,19 @@ public class QVTtemplateUtil extends QVTbaseUtil
 
 	public static @Nullable PropertyTemplateItem basicGetPart(@NonNull ObjectTemplateExp rObjectTemplateExp, @NonNull Property asProperty) {
 		for (@NonNull PropertyTemplateItem rPropertyTemplateItem : getOwnedParts(rObjectTemplateExp)) {
-			if (rPropertyTemplateItem.getReferredProperty() == asProperty) {
+			if (basicGetReferredProperty(rPropertyTemplateItem) == asProperty) {
 				return rPropertyTemplateItem;
 			}
 		}
 		return null;
+	}
+
+	public static Property basicGetReferredProperty(@NonNull PropertyTemplateItem rPropertyTemplateItem) {
+		Property property = rPropertyTemplateItem.getReferredProperty();
+		if ((property != null) && rPropertyTemplateItem.isIsOpposite()) {
+			property = property.getOpposite();
+		}
+		return property;
 	}
 
 	public static @NonNull Iterable<@NonNull OCLExpression> getOwnedMembers(@NonNull CollectionTemplateExp rCollectionTemplateExp) {

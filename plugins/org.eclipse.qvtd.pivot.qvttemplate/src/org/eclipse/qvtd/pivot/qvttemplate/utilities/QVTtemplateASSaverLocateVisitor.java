@@ -46,7 +46,7 @@ public class QVTtemplateASSaverLocateVisitor extends AbstractQVTtemplateASSaverL
 
 	@Override
 	public Object visitPropertyTemplateItem(@NonNull PropertyTemplateItem object) {
-		Property referredProperty = object.getReferredProperty();
+		Property referredProperty = QVTtemplateUtil.basicGetReferredProperty(object);
 		if (referredProperty != null) {
 			context.addSpecializingElement(object, referredProperty);
 		}

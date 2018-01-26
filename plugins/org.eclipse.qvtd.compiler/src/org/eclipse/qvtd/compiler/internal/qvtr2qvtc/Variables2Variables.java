@@ -530,7 +530,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 	@Nullable OCLExpression getTemplateExp(@NonNull ObjectTemplateExp objectTemplateExp, @NonNull Parameter keyParameter) {
 		String keyParameterName = keyParameter.getName();
 		for (@NonNull PropertyTemplateItem propertyTemplateItem : ClassUtil.nullFree(objectTemplateExp.getPart())) {
-			Property property = propertyTemplateItem.getReferredProperty();
+			Property property = QVTrelationUtil.getReferredProperty(propertyTemplateItem);
 			if (ClassUtil.safeEquals(property.getName(), keyParameterName)) {
 				return propertyTemplateItem.getValue();
 			}
@@ -538,9 +538,9 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 		EObject eContainer = objectTemplateExp.eContainer();
 		if (eContainer instanceof PropertyTemplateItem) {
 			PropertyTemplateItem containingPropertyTemplateItem = (PropertyTemplateItem)eContainer;
-			Property property = containingPropertyTemplateItem.getReferredProperty();
+			Property property = QVTrelationUtil.basicGetReferredProperty(containingPropertyTemplateItem);
 			Property oppositeProperty = property != null ? property.getOpposite() : null;
-			if ((oppositeProperty != null) && ClassUtil.safeEquals(oppositeProperty.getName(), keyParameterName)) {
+			if ((oppositeProperty != null) && ClassUtil.safeEquals(oppositeProperty.getName(), keyParameterName)) {	// FIXME is this right wrt opposites ?
 				return containingPropertyTemplateItem.getObjContainer();
 			}
 		}

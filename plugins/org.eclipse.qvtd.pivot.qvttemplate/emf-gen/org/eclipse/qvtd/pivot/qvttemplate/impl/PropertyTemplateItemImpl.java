@@ -1090,6 +1090,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 
 	@Override
 	public Element getReferredElement() {
-		return getReferredProperty();
+		Property referredProperty = getReferredProperty();
+		return isOpposite && (referredProperty != null) ? referredProperty.getOpposite() : referredProperty;
 	}
 } //PropertyTemplateItemImpl

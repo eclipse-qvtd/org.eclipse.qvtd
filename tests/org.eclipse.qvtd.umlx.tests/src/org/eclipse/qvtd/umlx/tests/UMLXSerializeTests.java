@@ -46,6 +46,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.TemplateVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
@@ -200,7 +201,7 @@ public class UMLXSerializeTests extends LoadTestCase
 									canBeShared = false;
 									break;
 								}
-								Property asProperty = ((PropertyTemplateItem)eContainer).getReferredProperty();
+								Property asProperty = QVTrelationUtil.getReferredProperty(((PropertyTemplateItem)eContainer));
 								if ((asProperty == null) || asProperty.isIsComposite()) {
 									// perhaps this needs a further is there a when/where reference??
 									//									canBeShared = false;

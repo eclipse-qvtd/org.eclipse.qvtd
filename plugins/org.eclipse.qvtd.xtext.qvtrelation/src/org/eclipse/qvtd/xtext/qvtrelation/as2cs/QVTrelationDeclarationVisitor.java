@@ -503,7 +503,7 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 	public ElementCS visitPropertyTemplateItem(@NonNull PropertyTemplateItem asPropertyTemplateItem) {
 		PropertyTemplateCS csPropertyTemplate = context.refreshElement(PropertyTemplateCS.class, QVTrelationCSPackage.Literals.PROPERTY_TEMPLATE_CS, asPropertyTemplateItem);
 		csPropertyTemplate.setPivot(asPropertyTemplateItem);
-		csPropertyTemplate.setPropertyId(asPropertyTemplateItem.getReferredProperty());
+		csPropertyTemplate.setPropertyId(QVTrelationUtil.getReferredProperty(asPropertyTemplateItem));
 		csPropertyTemplate.setOwnedExpression(context.visitDeclaration(ExpCS.class, asPropertyTemplateItem.getValue()));
 		return csPropertyTemplate;
 	}

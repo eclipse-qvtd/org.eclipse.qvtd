@@ -99,7 +99,7 @@ public class QVTtemplateToStringVisitor extends QVTbaseToStringVisitor implement
 
 	@Override
 	public String visitPropertyTemplateItem(@NonNull PropertyTemplateItem object) {
-		appendName(object.getReferredProperty());
+		appendName(QVTtemplateUtil.basicGetReferredProperty(object));
 		append(" = ");
 		safeVisit(object.getValue());
 		return null;

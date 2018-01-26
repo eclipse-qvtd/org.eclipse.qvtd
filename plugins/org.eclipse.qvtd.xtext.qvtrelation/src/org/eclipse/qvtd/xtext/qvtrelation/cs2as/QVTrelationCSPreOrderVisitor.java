@@ -118,9 +118,9 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 				Type elementType = asCollectionType.getElementType();
 				boolean isNullFree = asCollectionType.isIsNullFree();
 				if ((asVariable != null) && asVariable.isIsImplicit()) {
-					context.setType(asVariable, elementType, isNullFree);
+					context.getHelper().setType(asVariable, elementType, isNullFree);
 				}
-				context.setType(asVariableExp, elementType, isNullFree);
+				context.getHelper().setType(asVariableExp, elementType, isNullFree);
 			}
 			return null;
 		}
@@ -144,10 +144,10 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 					isRequired = context.isRequired(csType);
 				}
 				pivotElement.setReferredClass(type);
-				context.setType(pivotElement, type, isRequired != Boolean.FALSE);
+				context.getHelper().setType(pivotElement, type, isRequired != Boolean.FALSE);
 				Variable variable = pivotElement.getBindsTo();
 				if (variable != null) {
-					context.setType(variable, type, isRequired != Boolean.FALSE);
+					context.getHelper().setType(variable, type, isRequired != Boolean.FALSE);
 				}
 				assert pivotElement.getType() != null;
 			}
@@ -180,8 +180,9 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 			if (pivotElement != null) {
 				Property propertyId = csElement.getPropertyId();
 				if (propertyId != null) {
-					pivotElement.setReferredProperty(propertyId);
-					pivotElement.setIsOpposite(false);
+					boolean isOpposite = propertyId.isIsImplicit();
+					pivotElement.setIsOpposite(isOpposite);
+					pivotElement.setReferredProperty(isOpposite ? propertyId.getOpposite() : propertyId);
 				}
 				else {
 					PathNameCS oppositePropertyId = csElement.getOwnedOppositePropertyId();

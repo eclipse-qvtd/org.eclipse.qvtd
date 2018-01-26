@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -136,7 +137,9 @@ public class QVTrelationHelper extends QVTbaseHelper
 
 	public @NonNull PropertyTemplateItem createPropertyTemplateItem(@NonNull Property asProperty, @NonNull OCLExpression asExpression) {
 		PropertyTemplateItem asPropertyTemplateItem = QVTtemplateFactory.eINSTANCE.createPropertyTemplateItem();
-		asPropertyTemplateItem.setReferredProperty(asProperty);
+		boolean isOpposite = asProperty.isIsImplicit();
+		asPropertyTemplateItem.setIsOpposite(isOpposite);
+		asPropertyTemplateItem.setReferredProperty(isOpposite ? PivotUtil.getOpposite(asProperty) : asProperty);
 		asPropertyTemplateItem.setValue(asExpression);
 		return asPropertyTemplateItem;
 	}

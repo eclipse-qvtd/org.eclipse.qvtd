@@ -29,6 +29,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
@@ -39,7 +40,7 @@ import com.google.inject.Inject;
 
 /**
  * Provides labels for a EObjects.
- * 
+ *
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
 public class QVTrelationLabelProvider extends QVTbaseLabelProvider {
@@ -65,9 +66,9 @@ public class QVTrelationLabelProvider extends QVTbaseLabelProvider {
 		return "ObjectTemplateExp.gif";
 	}
 
-//	protected String image(OppositePropertyCallExp ele) {
-//		return "OppositePropertyCallExp.gif";
-//	}
+	//	protected String image(OppositePropertyCallExp ele) {
+	//		return "OppositePropertyCallExp.gif";
+	//	}
 
 	protected String image(PropertyTemplateItem ele) {
 		return "PropertyTemplateItem.gif";
@@ -129,7 +130,7 @@ public class QVTrelationLabelProvider extends QVTbaseLabelProvider {
 	}
 
 	protected String text(PropertyTemplateItem ele) {
-		return NameUtil.getSafeName(ele.getReferredProperty()) + " =";
+		return NameUtil.getSafeName(ele != null ? QVTrelationUtil.basicGetReferredProperty(ele) : null) + " =";
 	}
 
 	protected String text(Relation ele) {

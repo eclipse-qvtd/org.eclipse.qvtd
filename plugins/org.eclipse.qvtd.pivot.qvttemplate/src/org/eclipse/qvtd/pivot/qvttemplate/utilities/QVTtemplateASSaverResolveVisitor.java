@@ -13,11 +13,9 @@ package	org.eclipse.qvtd.pivot.qvttemplate.utilities;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.internal.resource.ASSaver;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
-import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.util.AbstractQVTtemplateASSaverResolveVisitor;
 
 public class QVTtemplateASSaverResolveVisitor extends AbstractQVTtemplateASSaverResolveVisitor
@@ -44,15 +42,5 @@ public class QVTtemplateASSaverResolveVisitor extends AbstractQVTtemplateASSaver
 			object.setReferredClass(resolvedClass);
 		}
 		return super.visitObjectTemplateExp(object);
-	}
-
-	@Override
-	public Object visitPropertyTemplateItem(@NonNull PropertyTemplateItem object) {
-		Property referredProperty = QVTtemplateUtil.getReferredProperty(object);
-		Property resolvedProperty = context.resolveProperty(referredProperty);
-		if (resolvedProperty != referredProperty) {
-			object.setReferredProperty(resolvedProperty);
-		}
-		return super.visitPropertyTemplateItem(object);
 	}
 }
