@@ -20,9 +20,11 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.AbstractScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.DatumCaches;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ExpressionAnalyzer;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RuleAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.QVTrelationDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.RelationAnalysis.QVTrelationExpressionAnalyzer;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
@@ -35,6 +37,13 @@ public class QVTrelationScheduleManager extends AbstractScheduleManager
 			CompilerOptions.@Nullable StepOptions schedulerOptions) {
 		super(QVTscheduleFactory.eINSTANCE.createScheduleModel(), environmentFactory, schedulerOptions);
 		this.qvtuConfiguration = qvtuConfiguration;
+	}
+
+	@Override
+	public void analyzeTransformation(@NonNull TransformationAnalysis transformationAnalysis) {
+		TypedModel primitiveTypeModel = domainUsageAnalysis.getPrimitiveTypeModel();
+		transformationAnalysis.getTransformation().getModelParameter().add(primitiveTypeModel);
+		super.analyzeTransformation(transformationAnalysis);
 	}
 
 	@Override
