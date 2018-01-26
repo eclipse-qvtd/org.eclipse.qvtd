@@ -207,15 +207,11 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 
 		@Override
 		public @NonNull MappingRegion visitRelation(@NonNull Relation rIn) {
-			//			RuleRegion rOut = QVTscheduleFactory.eINSTANCE.createRuleRegion();
-			//			scheduleManager.addMappingRegion(rOut);
 			TransformationAnalysis transformationAnalysis = scheduleManager.getTransformationAnalysis(QVTbaseUtil.getOwningTransformation(rIn));
 			RelationAnalysis relationAnalysis = this.relationAnalysis = (RelationAnalysis) transformationAnalysis.getRuleAnalysis(rIn);
 			RuleRegion rOut = relationAnalysis.getRegion();
-			//			rOut.setReferredRule(rIn);
+			assert rOut.getReferredRule() == rIn;
 			context.pushScope(rOut);
-			//			RelationAnalysis relationAnalysis = this.relationAnalysis = new RelationAnalysis(scheduleManager, qvtuConfiguration, rOut);
-			context.addRuleAnalysis(relationAnalysis);
 			context.addTrace(rIn, rOut);
 			for (@NonNull VariableDeclaration vIn : QVTrelationUtil.getOwnedVariables(rIn)) {
 				relationAnalysis.analyzeVariableDeclaration(vIn);
@@ -460,7 +456,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 	//		this.middleTypedModelTarget = middleTypedModelTarget;
 	//	}
 
-	public void transform(@NonNull Resource source, @NonNull Resource target) throws IOException {
+	public void transform(@NonNull Resource source, @NonNull Resource target, @Nullable String traceNsURI, @NonNull Resource traceResource) throws IOException {
 		debugSource = source;
 		debugTarget = target;
 		//
@@ -485,14 +481,21 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 				}
 			}
 		}
-		List<@NonNull RuleAnalysis> ruleAnalyses = Lists.newArrayList(getRuleAnalyses());
-		Collections.sort(ruleAnalyses, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
-		for (@NonNull RuleAnalysis mappingRegion : ruleAnalyses) {
-			mappingRegion.registerConsumptionsAndProductions();
+		for (@NonNull TransformationAnalysis transformationAnalysis : scheduleManager.getTransformationAnalyses()) {
+			for (@NonNull RuleAnalysis mappingRegion : transformationAnalysis.getRuleAnalyses()) {
+				mappingRegion.registerConsumptionsAndProductions();
+			}
 		}
 		if (AbstractQVTb2QVTs.DEBUG_GRAPHS.isActive()) {
-			for (@NonNull RuleAnalysis ruleAnalysis : ruleAnalyses) {
-				scheduleManager.writeDebugGraphs(ruleAnalysis.getRegion(), null);
+			for (@NonNull TransformationAnalysis transformationAnalysis : scheduleManager.getTransformationAnalyses()) {
+				for (@NonNull RuleAnalysis mappingRegion : transformationAnalysis.getRuleAnalyses()) {
+					mappingRegion.registerConsumptionsAndProductions();
+				}
+				List<@NonNull RuleAnalysis> ruleAnalyses = Lists.newArrayList(transformationAnalysis.getRuleAnalyses());
+				Collections.sort(ruleAnalyses, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
+				for (@NonNull RuleAnalysis ruleAnalysis : ruleAnalyses) {
+					scheduleManager.writeDebugGraphs(ruleAnalysis.getRegion(), null);
+				}
 			}
 		}
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {

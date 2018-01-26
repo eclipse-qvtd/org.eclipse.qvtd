@@ -84,11 +84,23 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				QVTr2QVTs qvtr2qvts = new QVTr2QVTs(this, environmentFactory, qvtuConfiguration, schedulerOptions);
 				ScheduleManager scheduleManager = qvtr2qvts.getScheduleManager();
 				sResource.getContents().add(scheduleManager.getScheduleModel());
-				scheduleManager.analyzeTransformation(asTransformation);
+				scheduleManager.addTransformation(asTransformation);
+
+				URI traceURI = compilerChain.getURI(TRACE_STEP, URI_KEY);
+				Map<@NonNull String, @Nullable String> traceOptions = compilerChain.getOption(TRACE_STEP, TRACE_OPTIONS_KEY);
+				String traceNsURI = traceOptions != null ? traceOptions.get(TRACE_NS_URI) : null;
+				Resource traceResource = createResource(PivotUtilInternal.getASURI(traceURI));
+				//				if (traceNsURI != null) {
+				//					t.setTraceNsURI(traceNsURI);
+				//				}
+
+
+
+				qvtr2qvts.transform(pResource, sResource, traceNsURI, traceResource);
 				scheduleManager.analyzeTransformations();
-				qvtr2qvts.transform(pResource, sResource);
 
 				saveResource(sResource);
+				saveResource(traceResource);
 
 
 				//>>>>>>> 49fabe4 wip
