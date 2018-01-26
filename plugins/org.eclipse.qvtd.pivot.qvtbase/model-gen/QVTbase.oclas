@@ -13,7 +13,7 @@
       <ownedProperties xmi:id=",1+xi" isUnsettable="true" name="isCheckable" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs"/>
       <ownedProperties xmi:id="ZXmmB" isUnsettable="true" name="isEnforceable" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs"/>
       <ownedProperties xmi:id="jwI+E" isTransient="true" name="rule" opposite="#DtMdd" type="#zS2p0"/>
-      <ownedProperties xmi:id="GoV0K" isRequired="false" name="typedModel" opposite="#TPm6," type="#WqJYx"/>
+      <ownedProperties xmi:id="GoV0K" isRequired="false" name="typedModel" type="#WqJYx"/>
     </ownedClasses>
     <ownedClasses xmi:id="PGjqK" name="Function" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#Yz,F1">
       <ownedInvariants xmi:id="S1Iog" isCallable="true" name="ParametersAreFunctionParameter">
@@ -22,18 +22,18 @@
       <ownedInvariants xmi:id="5hGIF" isCallable="true" name="ReturnTypeIsQueryType">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;queryExpression &lt;> null implies queryExpression.type.conformsTo(type)&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedProperties xmi:id="r1ilM" isComposite="true" isRequired="false" name="queryExpression" opposite="#N9fOm" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#BFtK4"/>
+      <ownedProperties xmi:id="r1ilM" isComposite="true" isRequired="false" name="queryExpression" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#BFtK4"/>
     </ownedClasses>
     <ownedClasses xmi:id="owsj9" name="FunctionParameter" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#as9eG"/>
     <ownedClasses xmi:id="H0dko" name="Pattern" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t5rpa">
-      <ownedProperties xmi:id="056L0" name="bindsTo" opposite="#YwYCh" type="#+iD8q"/>
+      <ownedProperties xmi:id="056L0" name="bindsTo" type="#+iD8q"/>
       <ownedProperties xmi:id="6cYSq" isComposite="true" name="predicate" opposite="#eKpfP" type="#XYdvW"/>
     </ownedClasses>
     <ownedClasses xmi:id="uMSmb" name="Predicate" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t5rpa">
       <ownedInvariants xmi:id="xFRwU" isCallable="true" name="ConditionIsBoolean">
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;conditionExpression.type = Boolean&#xA;&#xA;"/>
       </ownedInvariants>
-      <ownedProperties xmi:id="h0xFs" isComposite="true" name="conditionExpression" opposite="#R0cad" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#BFtK4"/>
+      <ownedProperties xmi:id="h0xFs" isComposite="true" name="conditionExpression" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#BFtK4"/>
       <ownedProperties xmi:id="eKpfP" isTransient="true" name="pattern" opposite="#6cYSq" type="#H0dko"/>
     </ownedClasses>
     <ownedClasses xmi:id="zS2p0" isAbstract="true" name="Rule" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#0kVqz">
@@ -72,18 +72,18 @@
       <ownedOperations xmi:id="rcEGq" name="getModelParameter" type="#WqJYx">
         <ownedParameters name="name" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
       </ownedOperations>
-      <ownedProperties xmi:id="xL9bQ" isRequired="false" name="extends" opposite="#3n7zQ" type="#AjDLV"/>
+      <ownedProperties xmi:id="xL9bQ" isRequired="false" name="extends" type="#AjDLV"/>
       <ownedProperties xmi:id="YTQDv" isComposite="true" name="modelParameter" opposite="#fPfk3" type="#SncSN"/>
-      <ownedProperties xmi:id="iWDDR" isComposite="true" isRequired="false" name="ownedContext" opposite="#AROTe" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t4j6T"/>
-      <ownedProperties xmi:id="NUcXB" isComposite="true" name="ownedTag" opposite="#UougY" type="#5bIlO"/>
+      <ownedProperties xmi:id="iWDDR" isComposite="true" isRequired="false" name="ownedContext" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t4j6T"/>
+      <ownedProperties xmi:id="NUcXB" isComposite="true" name="ownedTag" type="#5bIlO"/>
       <ownedProperties xmi:id="UVEee" isComposite="true" name="rule" opposite="#Img5I" type="#U1psM"/>
       <ownedProperties xmi:id="3n7zQ" isImplicit="true" isRequired="false" name="extendedBy" opposite="#xL9bQ" type="#AjDLV"/>
     </ownedClasses>
     <ownedClasses xmi:id="WqJYx" name="TypedModel" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#0kVqz">
-      <ownedProperties xmi:id="cy5DZ" name="dependsOn" opposite="#,4oQK" type="#,klFp"/>
-      <ownedProperties xmi:id="ggm9N" isComposite="true" isRequired="false" name="ownedContext" opposite="#WYUg6" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t4j6T"/>
+      <ownedProperties xmi:id="cy5DZ" name="dependsOn" type="#,klFp"/>
+      <ownedProperties xmi:id="ggm9N" isComposite="true" isRequired="false" name="ownedContext" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t4j6T"/>
       <ownedProperties xmi:id="fPfk3" isTransient="true" name="transformation" opposite="#YTQDv" type="#AjDLV"/>
-      <ownedProperties xmi:id="fK4wq" name="usedPackage" opposite="#xb2NR" type="#4WjM+"/>
+      <ownedProperties xmi:id="fK4wq" name="usedPackage" type="#4WjM+"/>
       <ownedProperties xmi:id="TPm6," isImplicit="true" name="Domain" opposite="#GoV0K" type="#9+o+H"/>
       <ownedProperties xmi:id=",4oQK" isImplicit="true" isRequired="false" name="dependent" opposite="#cy5DZ" type="#WqJYx"/>
     </ownedClasses>

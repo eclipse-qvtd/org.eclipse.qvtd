@@ -35,8 +35,8 @@ Workflow {
     component = @SubGenerateASModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtschedule"
     	genModelFile =  "model/QVTschedule.genmodel"
-    	superProjectName = "org.eclipse.ocl.pivot"
-    	superGenModelFile = "model/Pivot.genmodel"
+    	superProjectName = "org.eclipse.qvtd.pivot.qvtbase"
+    	superGenModelFile = "model/QVTbase.genmodel"
     	baseProjectName = "org.eclipse.ocl.pivot"
     	baseGenModelFile = "model/Pivot.genmodel"
     }

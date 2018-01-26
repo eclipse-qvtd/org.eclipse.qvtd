@@ -23,7 +23,7 @@ import java.lang.Object;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.resource.ASSaver;
-import org.eclipse.ocl.pivot.utilities.PivotASSaverLocateVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseASSaverLocateVisitor;
 
 /**
  * An AbstractQVTscheduleASSaverLocateVisitor provides a default implementation for each
@@ -33,7 +33,7 @@ import org.eclipse.ocl.pivot.utilities.PivotASSaverLocateVisitor;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractQVTscheduleASSaverLocateVisitor
-	extends PivotASSaverLocateVisitor
+	extends QVTbaseASSaverLocateVisitor
 	implements QVTscheduleVisitor<Object>
 {
 	/**

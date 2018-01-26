@@ -30,7 +30,7 @@ import org.eclipse.jdt.annotation.Nullable;
  */
  @Deprecated
 public abstract class AbstractNullQVTscheduleVisitor<@Nullable R, C>
-	extends org.eclipse.ocl.pivot.util.AbstractNullVisitor<R, C> implements QVTscheduleVisitor<R>
+	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractNullQVTbaseVisitor<R, C> implements QVTscheduleVisitor<R>
 {
 	/**
 	 * Initializes me with an initial value for my result.

@@ -29,7 +29,7 @@ import org.eclipse.jdt.annotation.NonNull;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractExtendingQVTscheduleVisitor<R, C>
-	extends org.eclipse.ocl.pivot.util.AbstractExtendingVisitor<R, C>
+	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractExtendingQVTbaseVisitor<R, C>
 	implements QVTscheduleVisitor<R>
 {
 	/**

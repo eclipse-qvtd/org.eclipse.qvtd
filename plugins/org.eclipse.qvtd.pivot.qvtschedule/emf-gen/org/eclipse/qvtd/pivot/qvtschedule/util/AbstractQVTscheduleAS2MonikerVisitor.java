@@ -23,7 +23,7 @@ import java.lang.Object;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
-import org.eclipse.ocl.pivot.utilities.PivotAS2MonikerVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseAS2MonikerVisitor;
 
 /**
  * An AbstractQVTscheduleAS2MonikerVisitor provides a default implementation for each
@@ -33,7 +33,7 @@ import org.eclipse.ocl.pivot.utilities.PivotAS2MonikerVisitor;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractQVTscheduleAS2MonikerVisitor
-	extends PivotAS2MonikerVisitor
+	extends QVTbaseAS2MonikerVisitor
 	implements QVTscheduleVisitor<Object>
 {
 	/**

@@ -25,7 +25,7 @@ import org.eclipse.jdt.annotation.NonNull;
  * An AbstractDelegatingQVTscheduleVisitor delegates all visits.
  */
 public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D extends QVTscheduleVisitor<R>>
-	extends org.eclipse.ocl.pivot.util.AbstractDelegatingVisitor<R, C, D>
+	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractDelegatingQVTbaseVisitor<R, C, D>
 	implements QVTscheduleVisitor<R>
 {
 	protected AbstractDelegatingQVTscheduleVisitor(@NonNull D delegate, C context) {

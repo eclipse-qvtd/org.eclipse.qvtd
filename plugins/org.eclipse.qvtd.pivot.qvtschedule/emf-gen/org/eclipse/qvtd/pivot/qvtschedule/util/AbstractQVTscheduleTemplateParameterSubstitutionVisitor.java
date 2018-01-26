@@ -24,7 +24,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
-import org.eclipse.ocl.pivot.utilities.PivotTemplateParameterSubstitutionVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseTemplateParameterSubstitutionVisitor;
 
 /**
  * An AbstractQVTscheduleTemplateParameterSubstitutionVisitor provides a default implementation for each
@@ -34,7 +34,7 @@ import org.eclipse.ocl.pivot.utilities.PivotTemplateParameterSubstitutionVisitor
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
-	extends PivotTemplateParameterSubstitutionVisitor
+	extends QVTbaseTemplateParameterSubstitutionVisitor
 	implements QVTscheduleVisitor<Object>
 {
 	/**

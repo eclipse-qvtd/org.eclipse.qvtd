@@ -26,7 +26,7 @@ import org.eclipse.jdt.annotation.NonNull;
  * This can be used by a decorating visitor to execute shared code before redispatching to a decorated visitor.
  */
 public abstract class AbstractMergedQVTscheduleVisitor<R, C>
-	extends org.eclipse.ocl.pivot.util.AbstractMergedVisitor<R, C>
+	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractMergedQVTbaseVisitor<R, C>
 	implements QVTscheduleVisitor<R>
 {
 	protected AbstractMergedQVTscheduleVisitor(C context) {

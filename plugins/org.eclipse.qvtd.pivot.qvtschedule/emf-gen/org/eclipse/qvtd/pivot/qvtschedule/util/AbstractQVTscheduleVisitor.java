@@ -25,7 +25,7 @@ package	org.eclipse.qvtd.pivot.qvtschedule.util;
  * but n implementations of the visitXXX methods..
  */
 public abstract class AbstractQVTscheduleVisitor<R, C>
-	extends org.eclipse.ocl.pivot.util.AbstractVisitor<R, C>
+	extends org.eclipse.qvtd.pivot.qvtbase.util.AbstractQVTbaseVisitor<R, C>
 	implements QVTscheduleVisitor<R>
 {
 	/**
