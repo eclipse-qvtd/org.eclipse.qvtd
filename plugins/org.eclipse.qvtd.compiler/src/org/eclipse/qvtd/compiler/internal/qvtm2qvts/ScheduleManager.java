@@ -42,8 +42,21 @@ public interface ScheduleManager
 	void addMappingRegion(@NonNull MappingRegion mappingRegion);
 	void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);
 	void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);
+
+	/**
+	 * Define an additional/only Transformation to be scheduled by the subsequent anayses and syntheses.
+	 */
 	@NonNull TransformationAnalysis addTransformation(@NonNull Transformation asTransformation);
 	@NonNull OperationRegion analyzeOperation(@NonNull OperationCallExp operationCallExp);
+
+	/**
+	 * Perform the independent local analysis of each Rule.
+	 */
+	void analyzeRules();
+
+	/**
+	 * Perform the interdependent global analysis of each Rule within its Transformation.
+	 */
 	void analyzeTransformations();
 	@Nullable Property basicGetStatusProperty(@NonNull Node node);
 	@NonNull ExpressionAnalyzer createExpressionAnalyzer(@NonNull RuleAnalysis ruleAnalysis);
