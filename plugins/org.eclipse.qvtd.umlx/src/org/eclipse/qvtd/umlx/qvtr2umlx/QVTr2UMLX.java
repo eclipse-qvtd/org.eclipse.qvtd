@@ -530,14 +530,16 @@ public class QVTr2UMLX
 			//
 			Iterable<@NonNull TypedModel> modelParameters = QVTrelationUtil.getModelParameters(qvtrTransformation);
 			for (@NonNull TypedModel qvtrTypedModel : modelParameters) {
-				for (org.eclipse.ocl.pivot.@NonNull Package asPackage : QVTrelationUtil.getUsedPackages(qvtrTypedModel)) {
-					TxPackageNode txPackageNode = asPackage2txPackageNode.get(asPackage);
-					if (txPackageNode == null) {
-						txPackageNode = UMLXFactory.eINSTANCE.createTxPackageNode();
-						//				context.addTrace(usedPackage, txPackageNode);
-						txPackageNode.setReferredEPackage(asPackage.getEPackage());
-						txDiagram.getOwnedTxPackageNodes().add(txPackageNode);
-						asPackage2txPackageNode.put(asPackage, txPackageNode);
+				if (!QVTbaseUtil.TRACE_TYPED_MODEL_NAME.equals(qvtrTypedModel.getName())) {
+					for (org.eclipse.ocl.pivot.@NonNull Package asPackage : QVTrelationUtil.getUsedPackages(qvtrTypedModel)) {
+						TxPackageNode txPackageNode = asPackage2txPackageNode.get(asPackage);
+						if (txPackageNode == null) {
+							txPackageNode = UMLXFactory.eINSTANCE.createTxPackageNode();
+							//				context.addTrace(usedPackage, txPackageNode);
+							txPackageNode.setReferredEPackage(asPackage.getEPackage());
+							txDiagram.getOwnedTxPackageNodes().add(txPackageNode);
+							asPackage2txPackageNode.put(asPackage, txPackageNode);
+						}
 					}
 				}
 			}

@@ -6,9 +6,11 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
@@ -30,7 +32,7 @@ import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 /**
  * A QVTrelationDomainUsageAnalysis identifies a constrained domain result from the DomainUsageAnalysis of a QVTr AST node.
  */
-public class QVTrelationDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTrelationVisitor<org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage>
+public class QVTrelationDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTrelationVisitor<@NonNull DomainUsage>
 {
 	public QVTrelationDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
@@ -90,6 +92,10 @@ public class QVTrelationDomainUsageAnalysis extends RootDomainUsageAnalysis impl
 	public @NonNull DomainUsage visitRelation(@NonNull Relation object) {
 		DomainUsage usage = getRootAnalysis().getNoneUsage();
 		setUsage(object, usage);
+		Variable traceClassVariable = NameUtil.getNameable(object.getVariable(), QVTbaseUtil.TRACE_CLASS_NAME);
+		if (traceClassVariable != null) {
+			setUsage(traceClassVariable, getMiddleUsage());
+		}
 		for (@NonNull Domain domain : QVTrelationUtil.getOwnedDomains(object)) {
 			visit(domain);
 		}

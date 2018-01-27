@@ -36,6 +36,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
@@ -199,7 +200,7 @@ public class QVTrelationASSaverNormalizeVisitor extends AbstractQVTrelationASSav
 			ClassUtil.sort(ownedVariablesList, new VariablesComparator(ownedVariablesList));
 			int iNext = 1;
 			for (@NonNull Variable asVariable : ownedVariablesList) {
-				if (asVariable.isIsImplicit()) {
+				if (asVariable.isIsImplicit() && !QVTbaseUtil.TRACE_CLASS_NAME.equals(asVariable.getName())) {
 					asVariable.setName("_" + iNext++);
 				}
 			}

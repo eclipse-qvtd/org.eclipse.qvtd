@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtrelation.cs2as;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
@@ -59,6 +60,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.TemplateVariable;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationHelper;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
@@ -175,6 +177,10 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 
 	public QVTrelationCSContainmentVisitor(@NonNull CS2ASConversion context) {
 		super(context);
+	}
+
+	public @NonNull QVTrelationHelper getHelper() {
+		return (QVTrelationHelper) helper;
 	}
 
 	/**
@@ -544,6 +550,16 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 				}
 			}
 		}
+		Variable traceClassVariable = NameUtil.getNameable(pivotElement.getVariable(), QVTbaseUtil.TRACE_TYPED_MODEL_NAME);
+		if (traceClassVariable == null) {
+			//			traceClassVariable = getHelper().createSharedVariable(QVTbaseUtil.TRACE_CLASS_NAME, null, null, null);
+			traceClassVariable = QVTrelationFactory.eINSTANCE.createSharedVariable();
+			traceClassVariable.setName(QVTbaseUtil.TRACE_CLASS_NAME);
+			traceClassVariable.setIsImplicit(true);
+			getHelper().setType(traceClassVariable, standardLibrary.getOclElementType(), true);		// FIXME Type not known here ?? ancestral QVTTrace
+			traceClassVariable.setOwnedInit(null);
+		}
+		relationVariables.add(traceClassVariable);
 		PivotUtilInternal.refreshList(pivotElement.getVariable(), relationVariables);
 		pivotElement.setWhen(PivotUtil.getPivot(Pattern.class, csElement.getOwnedWhen()));
 		pivotElement.setWhere(PivotUtil.getPivot(Pattern.class, csElement.getOwnedWhere()));
@@ -587,7 +603,14 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		RelationalTransformation asTransformation = refreshNamedElement(RelationalTransformation.class, eClass, csElement);
 		refreshClassifier(asTransformation, csElement);
 		context.refreshPivotList(Key.class, asTransformation.getOwnedKey(), csElement.getOwnedKeyDecls());
-		context.refreshPivotList(TypedModel.class, asTransformation.getModelParameter(), csElement.getOwnedModelDecls());
+		List<@NonNull TypedModel> modelParameter = QVTrelationUtil.Internal.getModelParameterList(asTransformation);
+		List<@NonNull TypedModel> newPivotElements = context.getNewPivotElements(TypedModel.class, csElement.getOwnedModelDecls());
+		TypedModel traceTypedModel = NameUtil.getNameable(modelParameter, QVTbaseUtil.TRACE_TYPED_MODEL_NAME);
+		if (traceTypedModel == null) {
+			traceTypedModel = getHelper().createTypedModel(QVTbaseUtil.TRACE_TYPED_MODEL_NAME, Collections.emptyList());
+		}
+		newPivotElements.add(traceTypedModel);
+		PivotUtilInternal.refreshList(modelParameter, newPivotElements);
 		context.refreshPivotList(Relation.class, asTransformation.getRule(), csElement.getOwnedRelations());
 		context.refreshPivotList(Operation.class, asTransformation.getOwnedOperations(), csElement.getOwnedQueries());
 		QVTbaseUtil.getContextVariable(standardLibrary, asTransformation);

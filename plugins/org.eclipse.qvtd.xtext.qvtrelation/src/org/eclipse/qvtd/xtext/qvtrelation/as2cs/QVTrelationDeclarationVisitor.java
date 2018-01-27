@@ -41,6 +41,7 @@ import org.eclipse.ocl.pivot.internal.manager.Orphanage;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.ocl.xtext.base.as2cs.AliasAnalysis;
@@ -72,6 +73,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -113,6 +115,8 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationIdCS;
+
+import com.google.common.collect.Lists;
 
 public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor implements QVTrelationVisitor<ElementCS>
 {
@@ -605,7 +609,12 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 			csTransformation.setOwnedPathName(csPathName);
 			context.refreshPathName(csPathName, owningPackage, null);
 		}
-		context.refreshList(csTransformation.getOwnedModelDecls(), context.visitDeclarations(ModelDeclCS.class, asTransformation.getModelParameter(), null));
+		List<@NonNull TypedModel> modelParameters = Lists.newArrayList(QVTrelationUtil.getModelParameters(asTransformation));
+		TypedModel traceTypedModel = NameUtil.getNameable(modelParameters, QVTbaseUtil.TRACE_TYPED_MODEL_NAME);
+		if (traceTypedModel != null) {
+			modelParameters.remove(traceTypedModel);
+		}
+		context.refreshList(csTransformation.getOwnedModelDecls(), context.visitDeclarations(ModelDeclCS.class, modelParameters, null));
 		context.refreshList(csTransformation.getOwnedKeyDecls(), context.visitDeclarations(KeyDeclCS.class, asTransformation.getOwnedKey(), null));
 		context.refreshList(csTransformation.getOwnedQueries(), context.visitDeclarations(QueryCS.class, asTransformation.getOwnedOperations(), null));
 		context.refreshList(csTransformation.getOwnedRelations(), context.visitDeclarations(RelationCS.class, asTransformation.getRule(), null));

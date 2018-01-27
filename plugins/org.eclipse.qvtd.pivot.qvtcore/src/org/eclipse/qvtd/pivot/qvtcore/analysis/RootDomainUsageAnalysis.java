@@ -315,7 +315,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	protected RootDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
 		this.standardLibrary = context.getStandardLibrary();
-		primitiveTypeModel.setName("$primitive$");
+		primitiveTypeModel.setName(QVTbaseUtil.PRIMITIVE_DOMAIN_NAME);
 		add(primitiveTypeModel);
 		validUsages.put(NONE_USAGE_BIT_MASK, getConstantUsage(NONE_USAGE_BIT_MASK));
 		validUsages.put(PRIMITIVE_USAGE_BIT_MASK, getConstantUsage(PRIMITIVE_USAGE_BIT_MASK));
@@ -366,8 +366,13 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		int unenforceableMask = 0;
 		int enforceableMask = 0;
 		CompleteModel completeModel = context.getCompleteModel();
+		TypedModel traceTypedModel = null;
 		for (@NonNull TypedModel typedModel : ClassUtil.nullFree(transformation.getModelParameter())) {
 			if (typedModel == primitiveTypeModel) {
+				continue;
+			}
+			if (QVTbaseUtil.TRACE_TYPED_MODEL_NAME.equals(typedModel.getName())) {
+				traceTypedModel = typedModel;
 				continue;
 			}
 			int nextBit = add(typedModel);
@@ -446,6 +451,9 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		inputUsage = getConstantUsage(getAnyMask() & unenforceableMask);
 		outputUsage = getConstantUsage(getAnyMask() & enforceableMask);
 		middleUsage = getConstantUsage(getAnyMask() & ~unenforceableMask & ~enforceableMask & ~PRIMITIVE_USAGE_BIT_MASK);
+		if (traceTypedModel != null) {
+			setUsage(traceTypedModel, middleUsage);
+		}
 		Variable ownedContext = transformation.getOwnedContext();
 		if (ownedContext != null) {
 			setUsage(ownedContext, getAnyUsage());

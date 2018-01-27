@@ -479,7 +479,9 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		for (@NonNull TypedModel typedModel : QVTcoreUtil.getModelParameters(transformation)) {
 			String modelName = typedModel.getName();
 			if (modelName != null) {
-				if (modelName.equals(enforcedOutputName)) {
+				if (modelName.equals(QVTbaseUtil.TRACE_TYPED_MODEL_NAME)) {
+				}
+				else if (modelName.equals(enforcedOutputName)) {
 					if (outputTypedModels.size() > 1) {
 						throw new CompilerChainException("Ambiguous output domain ''{0}''", enforcedOutputName);
 					}
