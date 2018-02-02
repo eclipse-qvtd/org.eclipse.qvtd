@@ -79,6 +79,16 @@ public class QVTcoreScheduleManager extends AbstractScheduleManager
 	}
 
 	@Override
+	public boolean isInput(@NonNull Domain domain) {
+		return domain.isIsCheckable();
+	}
+
+	@Override
+	public boolean isOutput(@NonNull Domain domain) {
+		return domain.isIsEnforceable();
+	}
+
+	@Override
 	public boolean isTopLevel(@NonNull Rule rule) {
 		throw new UnsupportedOperationException();
 	}

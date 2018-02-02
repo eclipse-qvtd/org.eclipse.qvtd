@@ -19,16 +19,15 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ExpressionAnalyzer;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.MappingRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.TransformationAnalysis;
@@ -37,141 +36,70 @@ import org.eclipse.qvtd.compiler.internal.qvts2trace.VariableDeclaration2TracePr
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
-import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
+import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 /**
  * A RelationAnalysis provides the analysis a QVTc mapping.
  */
 public class RelationAnalysis extends RuleAnalysis
 {
+	public static class InvocationAnalysis
+	{
+		protected final @NonNull RelationAnalysis invokingRelationAnalysis;
+		protected final @NonNull RuleAnalysis2TraceClass invokedRuleAnalysis2TraceClass;
+		protected final @NonNull Node invokedNode;
+		protected final boolean isWhen;
+		private final @NonNull Map<@NonNull VariableDeclaration, @NonNull Node> rootVariable2argumentNode = new HashMap<>();
+
+		public InvocationAnalysis(@NonNull RelationAnalysis invokingRelationAnalysis, @NonNull RuleAnalysis2TraceClass invokedRuleAnalysis2TraceClass,
+				@NonNull RelationCallExp relationCallExp, @NonNull Node invokedNode, boolean isWhen) {
+			this.invokingRelationAnalysis = invokingRelationAnalysis;
+			this.invokedRuleAnalysis2TraceClass = invokedRuleAnalysis2TraceClass;
+			this.invokedNode = invokedNode;
+			this.isWhen = isWhen;
+		}
+
+		public void add(@NonNull VariableDeclaration rootVariable, @NonNull Node argumentNode) {
+			Node oldNode = rootVariable2argumentNode.put(rootVariable, argumentNode);
+			assert oldNode == null;
+		}
+
+		public void install() {
+			for (@NonNull VariableDeclaration rootVariable : rootVariable2argumentNode.keySet()) {
+				Node argumentNode = rootVariable2argumentNode.get(rootVariable);
+				assert argumentNode != null;
+				Property invocationProperty = invokedRuleAnalysis2TraceClass.getTraceProperty(rootVariable);
+				//				if (isWhen) {
+
+				//				}
+				//				else {
+				invokingRelationAnalysis.createNavigationEdge(invokedNode, invocationProperty, argumentNode, null);
+				//				}
+			}
+
+		}
+	}
+
 	/*	public static @NonNull RelationAnalysis createMappingRegion(@NonNull ScheduleManager scheduleManager, @NonNull RuleRegion ruleRegion) {
 		RelationAnalysis mappingAnalysis = new RelationAnalysis(scheduleManager, ruleRegion);
 		@SuppressWarnings("unused")String name = mappingAnalysis.getRuleRegion().getName();
 		mappingAnalysis.initialize();
 		return mappingAnalysis;
 	} */
-
-	public static abstract class AbstractQVTrelationExpressionAnalyzer extends ExpressionAnalyzer implements QVTrelationVisitor<@Nullable Node>
-	{
-		protected AbstractQVTrelationExpressionAnalyzer(@NonNull RuleAnalysis context) {
-			super(context);
-		}
-
-		@Override
-		public @Nullable Node visitCollectionTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull CollectionTemplateExp object) {
-			return visitTemplateExp(object);
-		}
-
-		@Override
-		public @Nullable Node visitObjectTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull ObjectTemplateExp object) {
-			return visitTemplateExp(object);
-		}
-
-		@Override
-		public @Nullable Node visitPropertyTemplateItem(org.eclipse.qvtd.pivot.qvttemplate.@NonNull PropertyTemplateItem object) {
-			return visitElement(object);
-		}
-
-		@Override
-		public @Nullable Node visitTemplateExp(org.eclipse.qvtd.pivot.qvttemplate.@NonNull TemplateExp object) {
-			return visitLiteralExp(object);
-		}
-
-		@Override
-		public @Nullable Node visitDomainPattern(org.eclipse.qvtd.pivot.qvtrelation.@NonNull DomainPattern object) {
-			return visitPattern(object);
-		}
-
-		@Override
-		public @Nullable Node visitKey(org.eclipse.qvtd.pivot.qvtrelation.@NonNull Key object) {
-			return visitElement(object);
-		}
-
-		@Override
-		public @Nullable Node visitRelation(org.eclipse.qvtd.pivot.qvtrelation.@NonNull Relation object) {
-			return visitRule(object);
-		}
-
-		@Override
-		public @Nullable Node visitRelationCallExp(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationCallExp object) {
-			return visitOCLExpression(object);
-		}
-
-		@Override
-		public @Nullable Node visitRelationDomain(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationDomain object) {
-			return visitDomain(object);
-		}
-
-		@Override
-		public @Nullable Node visitRelationDomainAssignment(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationDomainAssignment object) {
-			return visitElement(object);
-		}
-
-		@Override
-		public @Nullable Node visitRelationImplementation(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationImplementation object) {
-			return visitElement(object);
-		}
-
-		@Override
-		public @Nullable Node visitRelationModel(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationModel object) {
-			return visitBaseModel(object);
-		}
-
-		@Override
-		public @Nullable Node visitRelationalTransformation(org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationalTransformation object) {
-			return visitTransformation(object);
-		}
-
-		@Override
-		public @Nullable Node visitSharedVariable(org.eclipse.qvtd.pivot.qvtrelation.@NonNull SharedVariable object) {
-			return visitVariable(object);
-		}
-
-		@Override
-		public @Nullable Node visitTemplateVariable(org.eclipse.qvtd.pivot.qvtrelation.@NonNull TemplateVariable object) {
-			return visitVariable(object);
-		}
-	}
-
-	public static class QVTrelationExpressionAnalyzer extends AbstractQVTrelationExpressionAnalyzer
-	{
-		protected QVTrelationExpressionAnalyzer(@NonNull RuleAnalysis context) {
-			super(context);
-		}
-
-		@Override
-		protected @NonNull ExpressionAnalyzer createConditionalExpressionAnalyzer() {
-			return new ConditionalExpressionAnalyzer(context);
-		}
-	}
-
-	public static class ConditionalExpressionAnalyzer extends QVTrelationExpressionAnalyzer
-	{
-		protected ConditionalExpressionAnalyzer(@NonNull RuleAnalysis context) {
-			super(context);
-		}
-
-		@Override
-		protected @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode) {
-			return context.createStepNode(name, callExp, sourceNode, false);
-		}
-
-		@Override
-		protected boolean isUnconditional() {
-			return false;
-		}
-	}
 
 	protected final @NonNull QVTuConfiguration qvtuConfiguration;
 
@@ -182,6 +110,7 @@ public class RelationAnalysis extends RuleAnalysis
 	private final @NonNull Set<@NonNull Predicate> complexPredicates = new HashSet<>();
 
 	private org.eclipse.ocl.pivot.@Nullable Class traceClass = null;
+	private Node traceNode = null;
 
 	/**
 	 * The variable initializers, simple predicate reference expression and variable assignment values that define a value for each variable.
@@ -198,11 +127,13 @@ public class RelationAnalysis extends RuleAnalysis
 	 * The expressions that call this relation from a when clause.
 	 */
 	private @Nullable List<@NonNull RelationCallExp> incomingWhenInvocations = null;
+	private @Nullable List<@NonNull InvocationAnalysis> incomingWhenInvocationAnalyses = null;
 
 	/**
 	 * The expressions that call this relation from a where clause.
 	 */
 	private @Nullable List<@NonNull RelationCallExp> incomingWhereInvocations = null;
+	private @Nullable List<@NonNull InvocationAnalysis> incomingWhereInvocationAnalyses = null;
 
 	/**
 	 * The expressions that call relations with this relation.
@@ -213,16 +144,25 @@ public class RelationAnalysis extends RuleAnalysis
 	 * The expressions that call relations with this relation's when clause.
 	 */
 	private @Nullable List<@NonNull RelationCallExp> outgoingWhenInvocations = null;
+	private @Nullable List<@NonNull InvocationAnalysis> outgoingWhenInvocationAnalyses = null;
 
 	/**
 	 * The expressions that call relations with this relation's where clause.
 	 */
 	private @Nullable List<@NonNull RelationCallExp> outgoingWhereInvocations = null;
+	private @Nullable List<@NonNull InvocationAnalysis> outgoingWhereInvocationAnalyses = null;
 
 	/**
 	 * Closure of all overriding relations or null if not overridden.
 	 */
 	private @Nullable Set<@NonNull RelationAnalysis> overridingRelationAnalyses = null;
+
+	/**
+	 * The output variables that can be reached by a trabsitive composition relationship
+	 * from an output root variable. These variables are logically created as a single
+	 * composite object.
+	 */
+	private final @NonNull Set<@NonNull VariableDeclaration> composedOutputVariables = new HashSet<>();
 
 	public RelationAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull QVTuConfiguration qvtuConfiguration, @NonNull RuleRegion ruleRegion) {
 		super(transformationAnalysis, ruleRegion);
@@ -485,6 +425,65 @@ public class RelationAnalysis extends RuleAnalysis
 		return targetExpression;
 	}
 
+	@Override
+	public void analyzeStructure() {
+		Relation relation = getRule();
+		for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
+			for (@NonNull DomainPattern domainPattern : QVTrelationUtil.getOwnedPatterns(relationDomain)) {
+				DomainUsage domainUsage = scheduleManager.getDomainUsage(domainPattern);
+				if (domainUsage.isOutput()) {
+					TemplateExp templateExpression = QVTrelationUtil.getOwnedTemplateExpression(domainPattern);
+					Variable rootVariable = QVTrelationUtil.getBindsTo(templateExpression);
+					//					assert rootVariable != null;
+					composedOutputVariables.add(rootVariable);
+					analyzeTemplateExpression(templateExpression);
+				}
+
+			}
+		}
+	}
+
+	private void analyzeTemplateExpression(@NonNull TemplateExp templateExpression) {
+		if (templateExpression instanceof ObjectTemplateExp) {
+			for (@NonNull PropertyTemplateItem propertyTemplateItem : QVTrelationUtil.getOwnedParts((ObjectTemplateExp)templateExpression)) {
+				OCLExpression value = QVTrelationUtil.getOwnedValue(propertyTemplateItem);
+				Property property = QVTrelationUtil.getReferredProperty(propertyTemplateItem);
+				boolean isComposed = property.isIsComposite();
+				//				if (!isComposed) {
+				//					Property oppositeProperty = property.getOpposite();
+				//					if ((oppositeProperty != null) && oppositeProperty.isIsComposite()) {
+				//						isComposed = true;
+				//					}
+				//				}
+				if (isComposed) {
+					if (value instanceof VariableExp) {
+						composedOutputVariables.add(QVTrelationUtil.getReferredVariable((VariableExp)value));
+						// FIXME composed CollectionLiterals
+					}
+					else if (value instanceof TemplateExp) {
+						composedOutputVariables.add(QVTrelationUtil.getBindsTo((TemplateExp)value));
+						analyzeTemplateExpression((TemplateExp)value);
+					}
+				}
+			}
+		}
+		else if (templateExpression instanceof CollectionTemplateExp) {
+			for (@NonNull OCLExpression memberExpression : QVTrelationUtil.getOwnedMembers((CollectionTemplateExp)templateExpression)) {
+				if (memberExpression instanceof VariableExp) {
+					composedOutputVariables.add(QVTrelationUtil.getReferredVariable((VariableExp)memberExpression));
+				}
+				else if (memberExpression instanceof TemplateExp) {
+					composedOutputVariables.add(QVTrelationUtil.getBindsTo((TemplateExp)memberExpression));
+					analyzeTemplateExpression((TemplateExp)memberExpression);
+				}
+			}
+			VariableDeclaration restVariable = ((CollectionTemplateExp)templateExpression).getRest();
+			if (restVariable != null) {
+				composedOutputVariables.add(restVariable);
+			}
+		}
+	}
+
 	/**
 	 * Create a GREEN node for each realized variable.
 	 *
@@ -615,8 +614,13 @@ public class RelationAnalysis extends RuleAnalysis
 	public void analyzeVariableDeclaration(@NonNull VariableDeclaration variableDeclaration) {
 		ClassDatum classDatum = scheduleManager.getClassDatum(variableDeclaration);
 		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
-		if (qvtuConfiguration.isOutput(typedModel)) {
+		if (qvtuConfiguration.isOutput(typedModel) && composedOutputVariables.contains(variableDeclaration)) {
 			createRealizedStepNode(variableDeclaration);
+		}
+		else if (QVTrelationUtil.isTraceClassVariable(variableDeclaration)) {
+			// FIXME create traceClass earlier
+			//			variableDeclaration.setType(traceClass);
+			//			traceNode = createRealizedStepNode(variableDeclaration);
 		}
 		else {
 			createOldNode(variableDeclaration);
@@ -686,7 +690,38 @@ public class RelationAnalysis extends RuleAnalysis
 			}
 		}
 		return null;
-	} */
+	}
+	 * @param invokedRuleAnalysis */
+
+	public @NonNull InvocationAnalysis createInvocationAnalysis(@NonNull RuleAnalysis2TraceClass invokedRuleAnalysis2TraceClass, @NonNull RelationCallExp relationCallExp, Node invokedNode, boolean isWhen) {
+		InvocationAnalysis invocationAnalysis = new InvocationAnalysis(this, invokedRuleAnalysis2TraceClass, relationCallExp, invokedNode, isWhen);
+		RelationAnalysis invokedRelationAnalysis = (RelationAnalysis) invokedRuleAnalysis2TraceClass.getRuleAnalysis();
+		if (isWhen) {
+			List<@NonNull InvocationAnalysis> outgoingWhenInvocationAnalyses2 = outgoingWhenInvocationAnalyses;
+			if (outgoingWhenInvocationAnalyses2 == null) {
+				outgoingWhenInvocationAnalyses = outgoingWhenInvocationAnalyses2 = new ArrayList<>();
+			}
+			outgoingWhenInvocationAnalyses2.add(invocationAnalysis);
+			List<@NonNull InvocationAnalysis> incomingWhenInvocationAnalyses2 = invokedRelationAnalysis.incomingWhenInvocationAnalyses;
+			if (incomingWhenInvocationAnalyses2 == null) {
+				invokedRelationAnalysis.incomingWhenInvocationAnalyses = incomingWhenInvocationAnalyses2 = new ArrayList<>();
+			}
+			incomingWhenInvocationAnalyses2.add(invocationAnalysis);
+		}
+		else {
+			List<@NonNull InvocationAnalysis> outgoingWhereInvocationAnalyses2 = outgoingWhereInvocationAnalyses;
+			if (outgoingWhereInvocationAnalyses2 == null) {
+				outgoingWhereInvocationAnalyses = outgoingWhereInvocationAnalyses2 = new ArrayList<>();
+			}
+			outgoingWhereInvocationAnalyses2.add(invocationAnalysis);
+			List<@NonNull InvocationAnalysis> incomingWhereInvocationAnalyses2 = invokedRelationAnalysis.incomingWhereInvocationAnalyses;
+			if (incomingWhereInvocationAnalyses2 == null) {
+				invokedRelationAnalysis.incomingWhereInvocationAnalyses = incomingWhereInvocationAnalyses2 = new ArrayList<>();
+			}
+			incomingWhereInvocationAnalyses2.add(invocationAnalysis);
+		}
+		return invocationAnalysis;
+	}
 
 	@Override
 	public @Nullable Iterable<@NonNull ? extends OCLExpression> getIncomingInvocations() {
@@ -787,6 +822,27 @@ public class RelationAnalysis extends RuleAnalysis
 		return false;
 	}
 
+	public void installInvocations() {
+		List<@NonNull InvocationAnalysis> outgoingWhenInvocationAnalyses2 = outgoingWhenInvocationAnalyses;
+		if (outgoingWhenInvocationAnalyses2 != null) {
+			for (@NonNull InvocationAnalysis invocationAnalysis : outgoingWhenInvocationAnalyses2) {
+				invocationAnalysis.install();
+			}
+		}
+		List<@NonNull InvocationAnalysis> outgoingWhereInvocationAnalyses2 = outgoingWhereInvocationAnalyses;
+		if (outgoingWhereInvocationAnalyses2 != null) {
+			for (@NonNull InvocationAnalysis invocationAnalysis : outgoingWhereInvocationAnalyses2) {
+				invocationAnalysis.install();
+			}
+		}
+	}
+
+	@Override
+	public void registerConsumptionsAndProductions() {
+		installInvocations();
+		super.registerConsumptionsAndProductions();
+	}
+
 	@Override
 	public void synthesizeTraceClass(@NonNull RuleAnalysis2TraceClass ruleAnalysis2traceClass) {
 		//		VariableDeclaration traceVariable = QVTrelationFactory.eINSTANCE.createSharedVariable();
@@ -794,17 +850,17 @@ public class RelationAnalysis extends RuleAnalysis
 		//		traceVariable.setType(ruleAnalysis2traceClass.getTraceClass());
 		//		traceVariable.setIsRequired(true);
 		//		region.getAnnotatingComments()
-		Variable traceVariable = NameUtil.getNameable(QVTrelationUtil.getOwnedVariables(getRule()),  QVTrelationUtil.TRACE_CLASS_NAME);
+		Variable traceVariable = NameUtil.getNameable(QVTrelationUtil.getOwnedVariables(getRule()), QVTrelationUtil.TRACE_CLASS_NAME);
 		assert traceVariable != null;
 		traceVariable.setType(ruleAnalysis2traceClass.getTraceClass());
-		VariableNode traceNode = createRealizedStepNode(traceVariable);
+		traceNode = createRealizedStepNode(traceVariable);
 		//		Role nodeRole = Role.REALIZED;
 		//		PatternVariableNode traceNode = QVTscheduleFactory.eINSTANCE.createPatternVariableNode();
 		//		ClassDatum classDatum = scheduleManager.getClassDatum(scheduleManager.getDomainUsageAnalysis().getTraceTypedModel(), ruleAnalysis2traceClass.getTraceClass());
 		//		traceNode.initialize(nodeRole, region, getName(traceVariable), classDatum);
 		//		node.initializeVariable(region, stepVariable);
 		//		traceNode.setMatched(true);
-		//		traceNode.setUtility(Node.Utility.STRONGLY_MATCHED);
+		traceNode.setUtility(Node.Utility.STRONGLY_MATCHED);
 		//		return node;
 		for (@NonNull VariableDeclaration2TraceProperty variableDeclaration2traceProperty : ruleAnalysis2traceClass.getVariableDeclaration2TraceProperties()) {
 			Property traceProperty = variableDeclaration2traceProperty.getTraceProperty();

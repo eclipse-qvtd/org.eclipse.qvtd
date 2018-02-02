@@ -62,11 +62,10 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.util.AbstractExtendingQVTbaseVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -91,7 +90,7 @@ public abstract class ExpressionAnalyzer extends AbstractExtendingQVTbaseVisitor
 
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull EnvironmentFactory environmentFactory;
-	protected final @NonNull QVTcoreHelper helper;
+	protected final @NonNull QVTbaseHelper helper;
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
 	private /*@LazyNonNull*/ ExpressionAnalyzer conditionalExpressionAnalyzer = null;
 	//	private /*@LazyNonNull*/ OperationDependencyAnalysis operationDependencyAnalysis;
@@ -106,7 +105,7 @@ public abstract class ExpressionAnalyzer extends AbstractExtendingQVTbaseVisitor
 		super(context);
 		this.scheduleManager = context.getScheduleManager();
 		this.environmentFactory = scheduleManager.getEnvironmentFactory();
-		this.helper = new QVTcoreHelper(environmentFactory);
+		this.helper = new QVTbaseHelper(environmentFactory);
 		this.standardLibraryHelper = new StandardLibraryHelper(environmentFactory.getStandardLibrary());
 		//		this.operationDependencyAnalysis = getOperationDependencyAnalysis();
 	}
@@ -125,12 +124,12 @@ public abstract class ExpressionAnalyzer extends AbstractExtendingQVTbaseVisitor
 	 * For terminal operfations xxxx = yyyy.y() etc it cannot (yet).
 	 */
 	private @Nullable Node analyzeOperationCallExp_equals(@NonNull OperationCallExp operationCallExp) {
-		OCLExpression asSource = QVTcoreUtil.getOwnedSource(operationCallExp);
-		OCLExpression asTarget = QVTcoreUtil.getOwnedArgument(operationCallExp, 0);
+		OCLExpression asSource = QVTbaseUtil.getOwnedSource(operationCallExp);
+		OCLExpression asTarget = QVTbaseUtil.getOwnedArgument(operationCallExp, 0);
 		Node sourceNode;
 		Node targetNode;
 		if (asSource instanceof VariableExp) {
-			VariableDeclaration referredVariable = QVTcoreUtil.getReferredVariable((VariableExp)asSource);
+			VariableDeclaration referredVariable = QVTbaseUtil.getReferredVariable((VariableExp)asSource);
 			RuleRegion ruleRegion = context.getRegion();
 			sourceNode = ruleRegion.getNode(referredVariable);
 			if (sourceNode != null) {
@@ -150,7 +149,7 @@ public abstract class ExpressionAnalyzer extends AbstractExtendingQVTbaseVisitor
 			}
 		}
 		else if (asTarget instanceof VariableExp) {
-			VariableDeclaration referredVariable = QVTcoreUtil.getReferredVariable((VariableExp)asTarget);
+			VariableDeclaration referredVariable = QVTbaseUtil.getReferredVariable((VariableExp)asTarget);
 			RuleRegionImpl ruleRegion = (RuleRegionImpl)context.getRegion();
 			targetNode = ruleRegion.getNode(referredVariable);
 			if (targetNode != null) {
@@ -227,7 +226,7 @@ public abstract class ExpressionAnalyzer extends AbstractExtendingQVTbaseVisitor
 		//		if ((operationCallExp.getOwnedSource() instanceof CallExp) && sourceNode.refineClassDatumAnalysis(scheduler.getClassDatumAnalysis(operationCallExp))) {
 		//			return sourceNode;
 		//		}
-		Type castType = QVTcoreUtil.getType(operationCallExp);
+		Type castType = QVTbaseUtil.getType(operationCallExp);
 		CompleteClass requiredClass = environmentFactory.getCompleteModel().getCompleteClass(castType);
 		CompleteClass predicatedClass = sourceNode.getCompleteClass();
 		if (predicatedClass.conformsTo(requiredClass)) {
@@ -291,7 +290,7 @@ public abstract class ExpressionAnalyzer extends AbstractExtendingQVTbaseVisitor
 			}
 		}
 		else {
-			String name = QVTcoreUtil.getName(QVTcoreUtil.getReferredOperation(operationCallExp));
+			String name = QVTbaseUtil.getName(QVTbaseUtil.getReferredOperation(operationCallExp));
 			Node argumentNode = analyze(argument);
 			operationNode = findOperationNode(name, sourceNode, argumentNode);
 			if (operationNode == null) {
@@ -302,13 +301,13 @@ public abstract class ExpressionAnalyzer extends AbstractExtendingQVTbaseVisitor
 	}
 
 	private @NonNull Node analyzeOperationCallExp_oclContainer(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
-		//		Type castType = QVTcoreUtil.getType(operationCallExp);
+		//		Type castType = QVTbaseUtil.getType(operationCallExp);
 		Property oclContainerProperty = standardLibraryHelper.getOclContainerProperty();
 		Edge oclContainerEdge = sourceNode.getPredicateEdge(oclContainerProperty);
 		if (oclContainerEdge != null) {
 			return oclContainerEdge.getEdgeTarget();
 		}
-		String name = QVTcoreUtil.getName(QVTcoreUtil.getReferredOperation(operationCallExp));
+		String name = QVTbaseUtil.getName(QVTbaseUtil.getReferredOperation(operationCallExp));
 		Node oclContainerNode = createStepNode(name, operationCallExp, sourceNode);
 		oclContainerEdge = createNavigationEdge(sourceNode, oclContainerProperty, oclContainerNode, false);
 		return oclContainerNode;
@@ -719,7 +718,7 @@ public abstract class ExpressionAnalyzer extends AbstractExtendingQVTbaseVisitor
 		Variable ownedVariable = letExp.getOwnedVariable();
 		Node initNode = analyze(ownedVariable.getOwnedInit());
 		assert initNode != null;
-		Type type = QVTcoreUtil.getType(ownedVariable);
+		Type type = QVTbaseUtil.getType(ownedVariable);
 		CompleteClass actualClass = initNode.getCompleteClass();
 		ClassDatum classDatum = scheduleManager.getClassDatum(ownedVariable);
 		CompleteClass requiredClass = QVTscheduleUtil.getCompleteClass(classDatum);
@@ -751,16 +750,16 @@ public abstract class ExpressionAnalyzer extends AbstractExtendingQVTbaseVisitor
 		for (@NonNull Variable iterator : ownedIterators) {
 			Node iteratorNode = createIteratorNode(iterator, sourceNode);
 			@SuppressWarnings("unused")
-			Type iteratorType = QVTcoreUtil.getType(iterator);
+			Type iteratorType = QVTbaseUtil.getType(iterator);
 			//			Property iterateProperty = context.getScheduleModel().getIterateProperty(iteratorType);
 			createIteratedEdge(sourceNode, QVTscheduleConstants.LOOP_ITERATOR_NAME, iteratorNode);
 			argNodes[i++] = iteratorNode;
 		}
 		if (loopExp instanceof IterateExp) {
-			Variable accumulator = QVTcoreUtil.getOwnedResult((IterateExp)loopExp);
+			Variable accumulator = QVTbaseUtil.getOwnedResult((IterateExp)loopExp);
 			Node iteratorNode = createIteratorNode(accumulator, sourceNode);
 			@SuppressWarnings("unused")
-			Type iteratorType = QVTcoreUtil.getType(accumulator);
+			Type iteratorType = QVTbaseUtil.getType(accumulator);
 			//			Property iterateProperty = context.getScheduleModel().getIterateProperty(iteratorType);
 			createIteratedEdge(sourceNode, QVTscheduleConstants.LOOP_ITERATOR_NAME, iteratorNode);
 			argNodes[i++] = iteratorNode;
@@ -793,7 +792,7 @@ public abstract class ExpressionAnalyzer extends AbstractExtendingQVTbaseVisitor
 
 	@Override
 	public @NonNull Node visitMapLiteralPart(@NonNull MapLiteralPart mapLiteralPart) {
-		OCLExpression ownedValue = QVTcoreUtil.getOwnedValue(mapLiteralPart);
+		OCLExpression ownedValue = QVTbaseUtil.getOwnedValue(mapLiteralPart);
 		Node keyNode = analyze(mapLiteralPart.getOwnedKey());
 		Node valueNode = analyze(ownedValue);
 		Node operationNode = createConnectedOperationNode("Part", mapArgNames, ownedValue, keyNode, valueNode);
@@ -804,7 +803,7 @@ public abstract class ExpressionAnalyzer extends AbstractExtendingQVTbaseVisitor
 	public @NonNull Node visitNavigationCallExp(@NonNull NavigationCallExp navigationCallExp) {
 		assert !navigationCallExp.isIsSafe();
 		Property referredProperty = PivotUtil.getReferredProperty(navigationCallExp);
-		OCLExpression ownedSource = QVTcoreUtil.getOwnedSource(navigationCallExp);
+		OCLExpression ownedSource = QVTbaseUtil.getOwnedSource(navigationCallExp);
 		Node sourceNode = analyze(ownedSource);
 		if (sourceNode.isClass()) {
 			if (!referredProperty.isIsMany()) {
@@ -815,9 +814,9 @@ public abstract class ExpressionAnalyzer extends AbstractExtendingQVTbaseVisitor
 			}
 			String name = CompilerUtil.recoverVariableName(navigationCallExp);
 			if (name == null) {
-				name = QVTcoreUtil.getName(referredProperty);
+				name = QVTbaseUtil.getName(referredProperty);
 			}
-			Type type = QVTcoreUtil.getType(referredProperty);
+			Type type = QVTbaseUtil.getType(referredProperty);
 			Node targetNode = expression2knownNode != null ? expression2knownNode.get(navigationCallExp) : null;
 			if (targetNode == null) {
 				if (type instanceof DataType) {
@@ -1005,7 +1004,7 @@ public abstract class ExpressionAnalyzer extends AbstractExtendingQVTbaseVisitor
 	@Override
 	public @NonNull Node visitTypeExp(@NonNull TypeExp typeExp) {
 		DomainUsage domainUsage = scheduleManager.getDomainUsage(typeExp);
-		Type referredType = QVTcoreUtil.getReferredType(typeExp);
+		Type referredType = QVTbaseUtil.getReferredType(typeExp);
 		TypedModel typedModel = domainUsage.getTypedModel(typeExp);
 		assert typedModel != null;
 		ClassDatum classDatum = scheduleManager.getClassDatum(typedModel, (org.eclipse.ocl.pivot.Class)referredType);
@@ -1016,7 +1015,7 @@ public abstract class ExpressionAnalyzer extends AbstractExtendingQVTbaseVisitor
 
 	@Override
 	public @NonNull Node visitVariableExp(@NonNull VariableExp variableExp) {
-		VariableDeclaration referredVariable = QVTcoreUtil.getReferredVariable(variableExp);
+		VariableDeclaration referredVariable = QVTbaseUtil.getReferredVariable(variableExp);
 		return context.getReferenceNode(referredVariable);
 	}
 }

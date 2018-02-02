@@ -217,9 +217,9 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			context.pushScope(rOut);
 			context.addTrace(rIn, rOut);
 			for (@NonNull VariableDeclaration vIn : QVTrelationUtil.getOwnedVariables(rIn)) {
-				if (!QVTrelationUtil.isTraceClassVariable(vIn)) {
-					relationAnalysis.analyzeVariableDeclaration(vIn);
-				}
+				//				if (!QVTrelationUtil.isTraceClassVariable(vIn)) {
+				relationAnalysis.analyzeVariableDeclaration(vIn);
+				//				}
 			}
 			Pattern whenIn = rIn.getWhen();
 			if (whenIn != null) {
@@ -467,9 +467,11 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 	//	}
 
 	public void transform(@NonNull Resource source, @NonNull Resource target, @Nullable String traceNsURI, @NonNull Resource traceResource) throws IOException {
+		QVTrelationScheduleManager scheduleManager2 = getScheduleManager();
 		debugSource = source;
 		debugTarget = target;
-		scheduleManager.analyzeUsages();
+		scheduleManager2.analyzeUsages();
+		scheduleManager2.analyzeRuleStructure();
 		//
 		//	Do the transformation for each CoreModel. First a createVisitor descent of the input, then an updateVisitor descent of the output.
 		//
@@ -492,17 +494,17 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 				}
 			}
 		}
-		scheduleManager.analyzeRules();
+		scheduleManager2.analyzeRules();
 		Model traceModel = PivotFactory.eINSTANCE.createModel();
 		traceModel.setExternalURI(traceResource.getURI().toString());
 		traceResource.getContents().add(traceModel);
-		for (@NonNull TransformationAnalysis transformationAnalysis : scheduleManager.getTransformationAnalyses()) {
+		for (@NonNull TransformationAnalysis transformationAnalysis : scheduleManager2.getTransformationAnalyses()) {
 			if (AbstractQVTb2QVTs.DEBUG_GRAPHS.isActive()) {
 				for (@NonNull RuleAnalysis ruleAnalysis : transformationAnalysis.getRuleAnalyses()) {
-					scheduleManager.writeDebugGraphs(ruleAnalysis.getRegion(), null);
+					scheduleManager2.writeDebugGraphs(ruleAnalysis.getRegion(), null);
 				}
 			}
-			QVTrelationDomainUsageAnalysis domainUsageAnalysis = getScheduleManager().getDomainUsageAnalysis();
+			QVTrelationDomainUsageAnalysis domainUsageAnalysis = scheduleManager2.getDomainUsageAnalysis();
 			TypedModel traceTypedModel = domainUsageAnalysis.getTraceTypedModel();
 			transformationAnalysis.synthesizeTracePackage(traceTypedModel, traceModel);
 			List<@NonNull RuleAnalysis> ruleAnalyses = Lists.newArrayList(transformationAnalysis.getRuleAnalyses());
@@ -512,12 +514,12 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			}
 			if (AbstractQVTb2QVTs.DEBUG_GRAPHS.isActive()) {
 				for (@NonNull RuleAnalysis ruleAnalysis : ruleAnalyses) {
-					scheduleManager.writeDebugGraphs(ruleAnalysis.getRegion(), null);
+					scheduleManager2.writeDebugGraphs(ruleAnalysis.getRegion(), null);
 				}
 			}
 		}
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs("0-init", true, true, true);
+			scheduleManager2.writeDebugGraphs("0-init", true, true, true);
 		}
 		//
 		//	Debug code to confirm that every output object is traceable to some input object.
@@ -540,6 +542,6 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		if (missingTraceArtefacts) {
 			System.err.println("Missing trace TypedModel.Class artefacts were fixed up for '" + target.getURI() + "'");
 		}
-		scheduleManager.analyzeTransformations();
+		scheduleManager2.analyzeTransformations();
 	}
 }

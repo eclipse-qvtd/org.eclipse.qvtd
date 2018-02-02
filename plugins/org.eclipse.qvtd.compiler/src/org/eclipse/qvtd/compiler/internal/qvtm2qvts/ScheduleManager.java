@@ -100,6 +100,7 @@ public interface ScheduleManager
 	@NonNull StandardLibraryHelper getStandardLibraryHelper();
 	@NonNull PropertyDatum getSuccessPropertyDatum(@NonNull Property successProperty);
 	@NonNull Iterable<@NonNull ClassDatum> getSuperClassDatums(@NonNull ClassDatum classDatum);
+	@NonNull TypedModel getTraceTypedModel();
 	@NonNull Iterable<@NonNull TransformationAnalysis> getTransformationAnalyses();
 	@NonNull TransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation);
 	@NonNull TransformationAnalysis2TracePackage getTransformationAnalysis2TracePackage(@NonNull TransformationAnalysis transformationAnalysis);
@@ -115,12 +116,23 @@ public interface ScheduleManager
 	boolean isElementallyConformantSource(@NonNull NavigableEdge thatEdge, @NonNull NavigableEdge thisEdge);
 
 	/**
+	 * Return true if domain is an input domain.
+	 */
+	boolean isInput(@NonNull Domain domain);
+
+	/**
 	 * Return true if node is part of the middle (traced) domain.
 	 */
 	boolean isMiddle(@NonNull Node node);
 
 	boolean isNoEarlyMerge();
 	boolean isNoLateConsumerMerge();
+
+	/**
+	 * Return true if domain is an output domain.
+	 */
+	boolean isOutput(@NonNull Domain domain);
+
 	boolean isTopLevel(@NonNull Rule rule);
 	void setScheduledRegion(@NonNull MappingRegion mappingRegion, @Nullable ScheduledRegion scheduledRegion);
 	void writeDebugGraphs(@NonNull Region region, @Nullable String context);

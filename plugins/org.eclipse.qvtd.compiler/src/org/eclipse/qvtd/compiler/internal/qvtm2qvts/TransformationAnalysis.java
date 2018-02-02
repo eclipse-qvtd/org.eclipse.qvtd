@@ -69,6 +69,12 @@ public class TransformationAnalysis extends QVTbaseHelper implements Nameable
 		}
 	}
 
+	public void analyzeRuleStructure() {
+		for (@NonNull RuleAnalysis ruleAnalysis : rule2ruleAnalysis.values()) {
+			ruleAnalysis.analyzeStructure();
+		}
+	}
+
 	public void analyzeRules() {
 		//		for (@NonNull RuleAnalysis ruleAnalysis : rule2ruleAnalysis.values()) { // FIXME testOCL2QVTi_Source2Target_Interpreted fails on 'random' order
 		for (@NonNull Rule asRule : QVTbaseUtil.getOwnedRules(transformation)) {

@@ -224,6 +224,12 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		}
 	}
 
+	public void analyzeRuleStructure() {
+		for (@NonNull TransformationAnalysis transformationAnalysis : transformation2transformationAnalysis.values()) {
+			transformationAnalysis.analyzeRuleStructure();
+		}
+	}
+
 	@Override
 	public void analyzeRules() {
 		for (@NonNull TransformationAnalysis transformationAnalysis : transformation2transformationAnalysis.values()) {
@@ -636,6 +642,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			}
 		}
 		return superClassDatums;
+	}
+
+	@Override
+	public @NonNull TypedModel getTraceTypedModel() {
+		return domainUsageAnalysis.getTraceTypedModel();
 	}
 
 	@Override
