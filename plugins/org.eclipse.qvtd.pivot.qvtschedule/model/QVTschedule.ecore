@@ -152,7 +152,6 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedMappingRegion" eSuperTypes="#//MappingRegion">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolNameSuffix" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
   </eClassifiers>
@@ -242,7 +241,6 @@
         eType="#//Node"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="headNodes" upperBound="-1"
         eType="#//Node"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredOperation" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Operation">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -286,7 +284,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="primary" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Region" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable #//Symbolable">
+  <eClassifiers xsi:type="ecore:EClass" name="Region" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-NamedElement #//Symbolable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A Region is a sub-graph with Nodes and Edges in the graphical representation of a Rule. Derived Regions provide distinct forms of execution semantics."/>
     </eAnnotations>
@@ -299,8 +297,6 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A RuleRegion provides a graphical representation of an executable mapping defined by a Rule; QVTc Mapping or QVTr Relation."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredRule" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Rule">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -339,7 +335,6 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A ScheduledRegion is the root of a graphical representation of a Transformation."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedConnections" upperBound="-1"
         eType="#//Connection" containment="true" eOpposite="#//Connection/owningScheduledRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedLoadingRegion" lowerBound="1"
