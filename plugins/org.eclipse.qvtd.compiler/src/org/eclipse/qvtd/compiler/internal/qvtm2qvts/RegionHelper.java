@@ -284,11 +284,17 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return edge;
 	}
 
-	public @NonNull Node createPredicatedStepNode(@NonNull Node typedNode, boolean isMatched) {
+	public @NonNull Node createPredicatedNode(@NonNull String name, @NonNull ClassDatum classDatum, boolean isMatched) {
 		PatternTypedNode node = QVTscheduleFactory.eINSTANCE.createPatternTypedNode();
-		node.initialize(Role.PREDICATED, region, getName(typedNode), getClassDatum(typedNode));
+		node.initialize(Role.PREDICATED, region, name, classDatum);
 		node.setMatched(isMatched);
 		return node;
+	}
+
+	public @NonNull Node createPredicatedStepNode(@NonNull Node typedNode, boolean isMatched) {
+		String name = getName(typedNode);
+		ClassDatum classDatum = getClassDatum(typedNode);
+		return createPredicatedNode(name, classDatum, isMatched);
 	}
 
 	public @NonNull Node createRealizedDataTypeNode(@NonNull Node sourceNode, @NonNull Property source2targetProperty) {
@@ -311,12 +317,16 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return forwardEdge;
 	}
 
-	public @NonNull VariableNode createRealizedStepNode(@NonNull VariableDeclaration stepVariable) {
-		Role nodeRole = Role.REALIZED;
+	public @NonNull VariableNode createRealizedNode(@NonNull String name, @NonNull ClassDatum classDatum, boolean isMatched) {
 		PatternVariableNode node = QVTscheduleFactory.eINSTANCE.createPatternVariableNode();
-		node.initialize(nodeRole, region, getName(stepVariable), scheduleManager.getClassDatum(stepVariable));
+		node.initialize(Role.REALIZED, region, name, classDatum);
+		node.setMatched(isMatched);
+		return node;
+	}
+
+	public @NonNull VariableNode createRealizedStepNode(@NonNull VariableDeclaration stepVariable) {
+		VariableNode node = createRealizedNode(getName(stepVariable), scheduleManager.getClassDatum(stepVariable), true);
 		node.initializeVariable(region, stepVariable);
-		node.setMatched(true);
 		return node;
 	}
 

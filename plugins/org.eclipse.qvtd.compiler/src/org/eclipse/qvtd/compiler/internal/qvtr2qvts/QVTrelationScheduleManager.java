@@ -26,7 +26,6 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ExpressionAnalyzer;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.QVTrelationDomainUsageAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvts.RelationAnalysis.QVTrelationExpressionAnalyzer;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -67,7 +66,7 @@ public class QVTrelationScheduleManager extends AbstractScheduleManager
 
 	@Override
 	public @NonNull ExpressionAnalyzer createExpressionAnalyzer(@NonNull RuleAnalysis ruleAnalysis) {
-		return new QVTrelationExpressionAnalyzer(ruleAnalysis);
+		return new QVTrelationExpressionAnalyzer((RelationAnalysis) ruleAnalysis);
 	}
 
 	@Override
@@ -75,6 +74,7 @@ public class QVTrelationScheduleManager extends AbstractScheduleManager
 		RuleRegion ruleRegion = QVTscheduleFactory.eINSTANCE.createRuleRegion();
 		ruleRegion.setOwningScheduleModel(scheduleModel);
 		ruleRegion.setReferredRule(asRule);
+		ruleRegion.setName(nameGenerator.createMappingName((Relation) asRule, qvtuConfiguration));
 		return new RelationAnalysis(transformationAnalysis, qvtuConfiguration, ruleRegion);
 	}
 
@@ -101,6 +101,16 @@ public class QVTrelationScheduleManager extends AbstractScheduleManager
 	@Override
 	public @NonNull List<@NonNull VariableDeclaration> getRootVariables(@NonNull Domain domain) {
 		return new ArrayList<>(QVTrelationUtil.getRootVariables((RelationDomain)domain));		// FIXME avoid new list
+	}
+
+	@Override
+	public boolean isInput(@NonNull Domain domain) {
+		return qvtuConfiguration.isInput(QVTrelationUtil.getTypedModel(domain));
+	}
+
+	@Override
+	public boolean isOutput(@NonNull Domain domain) {
+		return qvtuConfiguration.isOutput(QVTrelationUtil.getTypedModel(domain));
 	}
 
 	@Override

@@ -42,7 +42,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
@@ -228,8 +227,9 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		}
 		for (Rule rule : qvtmTransformation.getRule()) {
 			for (Domain domain : rule.getDomain()) {
-				if (domain.isIsCheckable()) {
-					ImperativeTypedModel checkableTypedModel = qvtmTypedModel2qvtiTypedModel.get(QVTcoreUtil.getTypedModel(domain));
+				TypedModel typedModel = QVTbaseUtil.getTypedModel(domain);
+				if (scheduleManager.isInput(domain)) {
+					ImperativeTypedModel checkableTypedModel = qvtmTypedModel2qvtiTypedModel.get(typedModel);
 					if ((checkableTypedModel != null) && !checkableAndEnforceableTypedModels.contains(checkableTypedModel)) {
 						checkableTypedModel.setIsChecked(true);
 						if (enforceableTypedModels.contains(checkableTypedModel)) {
@@ -241,8 +241,8 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 						}
 					}
 				}
-				if (domain.isIsEnforceable()) {
-					ImperativeTypedModel enforceableTypedModel = qvtmTypedModel2qvtiTypedModel.get(QVTcoreUtil.getTypedModel(domain));
+				if (scheduleManager.isOutput(domain)) {
+					ImperativeTypedModel enforceableTypedModel = qvtmTypedModel2qvtiTypedModel.get(typedModel);
 					if ((enforceableTypedModel != null) && !checkableAndEnforceableTypedModels.contains(enforceableTypedModel)) {
 						enforceableTypedModel.setIsEnforced(true);
 						if (checkableTypedModels.contains(enforceableTypedModel)) {

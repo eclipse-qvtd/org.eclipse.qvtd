@@ -51,6 +51,8 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 
 	public abstract void analyze();
 
+	public void analyzeStructure() {}
+
 	public @NonNull Node createDependencyHead(@NonNull ClassDatum classDatum) {
 		if (dependencyHeadNodes == null) {
 			dependencyHeadNodes = new ArrayList<>();

@@ -9,9 +9,13 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtrelation.Relation;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 
 /**
  * NameGenerator localizes the name generation functionality to facilitate a chnage / rewrite.
@@ -99,11 +103,17 @@ public class NameGenerator
 		return QVTbaseUtil.getName(identifiedVariable) + "_key";
 	}
 
-	public @NonNull String createMappingName(@NonNull Domain domain) {
-		Rule rule = QVTbaseUtil.getContainingRule(domain);
-		String ruleName = PivotUtil.getName(rule);
-		String enforcedDomainName = PivotUtil.getName(domain);
-		return ruleName + '_' + enforcedDomainName;
+	public @NonNull String createMappingName(@NonNull Relation rule, @NonNull QVTuConfiguration qvtuConfiguration) {
+		StringBuilder s = new StringBuilder();
+		s.append(PivotUtil.getName(rule));
+		for (@NonNull RelationDomain domain : QVTrelationUtil.getOwnedDomains(rule)) {
+			TypedModel typedModel = QVTrelationUtil.getTypedModel(domain);
+			if (qvtuConfiguration.isOutput(typedModel)) {
+				s.append("_");
+				s.append(PivotUtil.getName(typedModel));
+			}
+		}
+		return s.toString();
 	}
 
 	public @NonNull String createTraceClassName(@NonNull Rule rule) {
