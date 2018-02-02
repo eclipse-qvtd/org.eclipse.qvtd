@@ -200,11 +200,6 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	}
 
 	@Override
-	public @NonNull String getName() {
-		return QVTscheduleConstants.ROOT_MAPPING_NAME;
-	}
-
-	@Override
 	protected @NonNull String getSymbolNamePrefix() {
 		return "r_";
 	}

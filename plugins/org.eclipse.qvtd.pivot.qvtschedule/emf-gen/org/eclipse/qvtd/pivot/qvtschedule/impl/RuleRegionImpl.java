@@ -208,16 +208,6 @@ public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public String getName() {
-		return referredRule != null ? referredRule.getName() : null;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override

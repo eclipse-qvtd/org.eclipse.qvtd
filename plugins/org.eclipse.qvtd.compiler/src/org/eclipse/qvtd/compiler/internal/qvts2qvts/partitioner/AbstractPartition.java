@@ -261,6 +261,7 @@ abstract class AbstractPartition
 		partialRegion.setMappingRegion(region);
 		partialRegion.setNamePrefix(namePrefix);
 		partialRegion.setSymbolNameSuffix(symbolSuffix);
+		partialRegion.setName(namePrefix + " " + region.getName());
 		return partialRegion;
 	}
 

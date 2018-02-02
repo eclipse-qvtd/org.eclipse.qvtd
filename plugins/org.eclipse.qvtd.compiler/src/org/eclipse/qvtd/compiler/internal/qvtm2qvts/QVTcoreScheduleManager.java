@@ -57,6 +57,7 @@ public class QVTcoreScheduleManager extends AbstractScheduleManager
 		RuleRegion ruleRegion = QVTscheduleFactory.eINSTANCE.createRuleRegion();
 		ruleRegion.setOwningScheduleModel(scheduleModel);
 		ruleRegion.setReferredRule(asRule);
+		ruleRegion.setName(asRule.getName());
 		return new MappingAnalysis(this, ruleRegion);
 	}
 }

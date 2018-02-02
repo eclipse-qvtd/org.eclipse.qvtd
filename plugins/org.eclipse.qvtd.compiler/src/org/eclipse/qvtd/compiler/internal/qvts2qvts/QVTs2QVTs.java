@@ -497,6 +497,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 
 	protected @NonNull LoadingRegion createLoadingRegion() {
 		LoadingRegion loadingRegion = QVTscheduleFactory.eINSTANCE.createLoadingRegion();
+		loadingRegion.setName(QVTscheduleConstants.ROOT_MAPPING_NAME);
 		SymbolNameBuilder s = new SymbolNameBuilder();
 		s.appendString(QVTscheduleUtil.ROOT_MAPPING_NAME);
 		loadingRegion.setSymbolName(scheduleManager.getScheduleModel().reserveSymbolName(s, loadingRegion));
