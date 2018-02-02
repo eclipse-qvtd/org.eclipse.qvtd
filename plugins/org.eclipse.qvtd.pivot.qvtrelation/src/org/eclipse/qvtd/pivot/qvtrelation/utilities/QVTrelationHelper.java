@@ -190,4 +190,20 @@ public class QVTrelationHelper extends QVTbaseHelper
 		asVariable.setOwnedInit(asInitExpression);
 		return asVariable;
 	}
+
+	public @NonNull Variable createTraceClassVariable() {
+		SharedVariable traceClassVariable;
+		traceClassVariable = QVTrelationFactory.eINSTANCE.createSharedVariable();
+		traceClassVariable.setName(QVTrelationUtil.TRACE_CLASS_NAME);
+		traceClassVariable.setIsImplicit(true);
+		setType(traceClassVariable, standardLibrary.getOclElementType(), true);		// FIXME Type not known here ?? ancestral QVTTrace
+		traceClassVariable.setOwnedInit(null);
+		return traceClassVariable;
+	}
+
+	public @NonNull TypedModel createTraceTypedModel() {
+		TypedModel asTypedModel = QVTbaseFactory.eINSTANCE.createTypedModel();
+		asTypedModel.setName(QVTrelationUtil.TRACE_TYPED_MODEL_NAME);
+		return asTypedModel;
+	}
 }

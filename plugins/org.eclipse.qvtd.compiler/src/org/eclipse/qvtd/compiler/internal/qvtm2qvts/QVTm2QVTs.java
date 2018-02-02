@@ -36,6 +36,7 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 	}
 
 	public @NonNull List<@NonNull MappingRegion> transform() throws IOException {
+		scheduleManager.analyzeUsages();
 		scheduleManager.analyzeRules();
 		scheduleManager.analyzeTransformations();
 		List<@NonNull RuleRegion> orderedRuleRegions = new ArrayList<>();

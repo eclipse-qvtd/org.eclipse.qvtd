@@ -38,7 +38,7 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	public static class OCL2QVTmCompilerStep extends AbstractCompilerStep  // FIXME split into multiple steps
 	{
 		private @NonNull URI oclASUri;
-		private @NonNull List<URI> extendedASUris = new ArrayList<URI>();
+		private @NonNull List<@NonNull URI> extendedASUris = new ArrayList<>();
 		private @NonNull String traceabilityPropName;
 
 		public OCL2QVTmCompilerStep(@NonNull CompilerChain compilerChain, @NonNull QVTimperative qvti,
@@ -81,7 +81,7 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 			return pResource;
 		}
 
-		protected Resource execute() throws IOException {
+		protected @NonNull Resource execute() throws IOException {
 			Resource mModel = ocl2qvtm(oclASUri);
 			if (!extendedASUris.isEmpty()) {
 				List<Resource> qvtmModels = new ArrayList<Resource>();
@@ -119,8 +119,8 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	 * @throws CompilerChainException
 	 */
 	public OCL2QVTiCompilerChain(@NonNull QVTimperative qvti, @NonNull CompilerOptions options,
-			@NonNull URI oclDocURI, @NonNull URI prefixURI, @NonNull URI... extendedDocURIs) throws CompilerChainException {
-		super(qvti.getEnvironmentFactory(), oclDocURI, prefixURI, options);
+			@NonNull URI oclDocURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI... extendedDocURIs) throws CompilerChainException {
+		super(qvti.getEnvironmentFactory(), oclDocURI, intermediateFileNamePrefixURI, options);
 		this.ocl2qvtmCompilerStep = new OCL2QVTmCompilerStep(this, qvti, options, oclDocURI, extendedDocURIs);
 	}
 

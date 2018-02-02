@@ -15,10 +15,14 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.internal.qvts2trace.NameGenerator;
+import org.eclipse.qvtd.compiler.internal.qvts2trace.RuleAnalysis2TraceClass;
+import org.eclipse.qvtd.compiler.internal.qvts2trace.TransformationAnalysis2TracePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -30,6 +34,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 {
+	protected final @NonNull TransformationAnalysis transformationAnalysis;
 	protected final @NonNull ExpressionAnalyzer expressionAnalyzer;
 
 	/**
@@ -37,8 +42,9 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 	 */
 	private /*@LazyNonNull*/ List<@NonNull Node> dependencyHeadNodes = null;
 
-	protected RuleAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull RuleRegion ruleRegion) {
-		super(scheduleManager, ruleRegion);
+	protected RuleAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull RuleRegion ruleRegion) {
+		super(transformationAnalysis.getScheduleManager(), ruleRegion);
+		this.transformationAnalysis = transformationAnalysis;
 		this.expressionAnalyzer = scheduleManager.createExpressionAnalyzer(this);
 		assert scheduleManager.getScheduleModel().getOwnedMappingRegions().contains(ruleRegion);
 	}
@@ -66,10 +72,30 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 		return null;
 	}
 
+	public @Nullable Iterable<@NonNull ? extends OCLExpression> getIncomingInvocations() {
+		throw new UnsupportedOperationException("FIXME");
+	}
+
+	public @NonNull NameGenerator getNameGenerator() {
+		return scheduleManager.getNameGenerator();
+	}
+
+	public @Nullable Iterable<@NonNull ? extends OCLExpression> getOutgoingInvocations() {
+		throw new UnsupportedOperationException("FIXME");
+	}
+
+	public @Nullable Iterable<@NonNull ? extends OCLExpression> getOutgoingWhereInvocations() {
+		throw new UnsupportedOperationException("FIXME");
+	}
+
 	public abstract @NonNull Node getReferenceNode(@NonNull VariableDeclaration variableDeclaration);
 
 	public @NonNull Rule getRule() {
 		return QVTscheduleUtil.getReferredRule(region);
+	}
+
+	public @NonNull TransformationAnalysis2TracePackage getTransformationAnalysis2TracePackage() {
+		return scheduleManager.getTransformationAnalysis2TracePackage(transformationAnalysis);
 	}
 
 	public @NonNull Node getUnknownNode(@NonNull TypedElement typedElement) {
@@ -97,6 +123,8 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 			classDatum.getConsumingRegions().add(region);
 		}
 	}
+
+	public abstract void synthesizeTraceClass(@NonNull RuleAnalysis2TraceClass ruleAnalysis2traceClass);
 
 	@Override
 	public @NonNull String toString() {

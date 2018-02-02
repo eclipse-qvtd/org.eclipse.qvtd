@@ -58,8 +58,8 @@ public class QVTrCompilerTests extends LoadTestCase
 	{
 		protected class InstrumentedCompilerChain extends QVTrCompilerChain
 		{
-			protected InstrumentedCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull CompilerOptions options) {
-				super(environmentFactory, txURI, prefixURI, options);
+			protected InstrumentedCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+				super(environmentFactory, txURI, intermediateFileNamePrefixURI, options);
 			}
 
 			@Override
@@ -70,12 +70,12 @@ public class QVTrCompilerTests extends LoadTestCase
 			}
 
 			@Override
-			protected @NonNull QVTm2QVTsCompilerStep createQVTm2QVTsCompilerStep() {
-				return new QVTm2QVTsCompilerStep(this)
+			protected @NonNull QVTr2QVTsCompilerStep createQVTr2QVTsCompilerStep() {
+				return new QVTr2QVTsCompilerStep(this)
 				{
 					@Override
-					public @NonNull ScheduleManager execute(@NonNull Resource pResource) throws IOException {
-						ScheduleManager scheduleManager = super.execute(pResource);
+					public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull String enforcedOutputName) throws IOException {
+						ScheduleManager scheduleManager = super.execute(qvtrResource, traceResource, enforcedOutputName);
 						instrumentRegion(scheduleManager);
 						return scheduleManager;
 					}
@@ -83,13 +83,13 @@ public class QVTrCompilerTests extends LoadTestCase
 			}
 		}
 
-		public MyQVT(@NonNull ProjectManager projectManager, @NonNull String testProjectName, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) {
-			super(projectManager, testProjectName, testBundleURI, txURI, prefixURI, srcFileURI, binFileURI);
+		public MyQVT(@NonNull ProjectManager projectManager, @NonNull String testProjectName, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) {
+			super(projectManager, testProjectName, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
 		}
 
 		@Override
-		protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI prefixURI, @NonNull CompilerOptions options) {
-			return new InstrumentedCompilerChain(getEnvironmentFactory(), txURI, prefixURI, options);
+		protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+			return new InstrumentedCompilerChain(getEnvironmentFactory(), txURI, intermediateFileNamePrefixURI, options);
 		}
 
 		@Override
@@ -110,10 +110,10 @@ public class QVTrCompilerTests extends LoadTestCase
 
 	protected @NonNull MyQVT createQVT(@NonNull String resultPrefix, @NonNull URI txURI) throws Exception {
 		ProjectManager testProjectManager = getTestProjectManager();
-		URI prefixURI = getTestURI(resultPrefix);
+		URI intermediateFileNamePrefixURI = getTestURI(resultPrefix);
 		URI srcFileURI = getTestFileURI(JavaFileUtil.TEST_SRC_FOLDER_NAME + "/");
 		URI binFileURI = getTestFileURI(JavaFileUtil.TEST_BIN_FOLDER_NAME + "/");
-		return new MyQVT(testProjectManager, getTestProject().getName(), getTestBundleURI(), txURI, prefixURI, srcFileURI, binFileURI);
+		return new MyQVT(testProjectManager, getTestProject().getName(), getTestBundleURI(), txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
 	}
 
 	/* (non-Javadoc)

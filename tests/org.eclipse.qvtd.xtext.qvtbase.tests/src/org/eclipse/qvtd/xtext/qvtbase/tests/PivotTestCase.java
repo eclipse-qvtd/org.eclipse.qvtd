@@ -350,5 +350,15 @@ public class PivotTestCase extends TestCase
 		super.setUp();
 		ASResourceImpl.CHECK_IMMUTABILITY.setState(true);
 		TEST_START.println("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
+		startTime = System.nanoTime();
+	}
+	static long startTime;
+
+	@Override
+	protected void tearDown()
+			throws Exception {
+		// TODO Auto-generated method stub
+		long time = System.nanoTime() - startTime;
+		super.tearDown();
 	}
 }

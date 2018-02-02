@@ -34,6 +34,7 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.internal.qvts2trace.RuleAnalysis2TraceClass;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -239,8 +240,8 @@ public class MappingAnalysis extends RuleAnalysis
 	 */
 	private @NonNull Map<@NonNull VariableDeclaration, @NonNull List<@NonNull OCLExpression>> variable2expressions = new HashMap<>();
 
-	public MappingAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull RuleRegion ruleRegion) {
-		super(scheduleManager, ruleRegion);
+	public MappingAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull RuleRegion ruleRegion) {
+		super(transformationAnalysis, ruleRegion);
 		//
 		Mapping mapping = (Mapping)QVTscheduleUtil.getReferredRule(ruleRegion);
 		GuardPattern guardPattern = QVTcoreUtil.getGuardPattern(mapping);
@@ -692,5 +693,10 @@ public class MappingAnalysis extends RuleAnalysis
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public void synthesizeTraceClass(@NonNull RuleAnalysis2TraceClass ruleAnalysis2traceClass) {
+		throw new UnsupportedOperationException();
 	}
 }

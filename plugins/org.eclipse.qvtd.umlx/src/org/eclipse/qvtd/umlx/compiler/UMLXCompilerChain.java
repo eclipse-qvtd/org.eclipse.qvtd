@@ -57,15 +57,15 @@ public class UMLXCompilerChain extends QVTrCompilerChain
 
 	protected final @NonNull UMLX2QVTrCompilerStep umlx2qvtrCompilerStep;
 
-	public UMLXCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull CompilerOptions options) {
-		super(environmentFactory, txURI, prefixURI, options);
+	public UMLXCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+		super(environmentFactory, txURI, intermediateFileNamePrefixURI, options);
 		this.umlx2qvtrCompilerStep = createUMLX2QVTrCompilerStep();
 	}
 
 	@Override
 	public @NonNull ImperativeTransformation compile(@NonNull String enforcedOutputName) throws IOException {
 		Resource rResource = umlx2qvtrCompilerStep.execute(txURI);
-		return compileQVTrAS(rResource, enforcedOutputName);
+		return qvtr2qvti(rResource, enforcedOutputName);
 	}
 
 	protected @NonNull UMLX2QVTrCompilerStep createUMLX2QVTrCompilerStep() {

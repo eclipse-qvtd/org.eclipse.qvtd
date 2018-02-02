@@ -17,15 +17,20 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -39,6 +44,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
@@ -268,7 +274,7 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	 * Return the domain of a given root variable.
 	 * Throws an IllegalStateException if there is no such domain.
 	 */
-	public static @NonNull RelationDomain getRootVariableDomain(@NonNull Variable rootVariable) {
+	public static @NonNull RelationDomain getRootVariableDomain(@NonNull VariableDeclaration rootVariable) {
 		Relation relation = getContainingRelation(rootVariable);
 		for (@NonNull Domain domain : ClassUtil.nullFree(relation.getDomain())) {
 			RelationDomain relationDomain = (RelationDomain)domain;
@@ -302,7 +308,7 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	 * Return all the root variables of relationDomain (in partial RelationCallExp order).
 	 */
 	public static @NonNull List<@NonNull Variable> getRootVariables(@NonNull RelationDomain relationDomain) {
-		List<@NonNull Variable> rootVariables = new ArrayList<@NonNull Variable>();
+		List<@NonNull Variable> rootVariables = new ArrayList<>();
 		for (@NonNull DomainPattern domainPattern : ClassUtil.nullFree(relationDomain.getPattern())) {
 			TemplateExp templateExpression = domainPattern.getTemplateExpression();
 			Variable rootVariable = templateExpression.getBindsTo();
@@ -331,6 +337,10 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	//		return ClassUtil.nonNullState(rRelation.getWhere());
 	//	}
 
+	public static boolean isTraceClassVariable(@NonNull VariableDeclaration variable) {
+		return TRACE_CLASS_NAME.equals(variable.getName()) && (variable instanceof SharedVariable) && ((SharedVariable)variable).isIsImplicit();
+	}
+
 	public static @NonNull RelationalTransformation loadTransformation(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
 		CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
 		try {
@@ -349,5 +359,37 @@ public class QVTrelationUtil extends QVTtemplateUtil
 		finally {
 			environmentFactory.setCreateStrategy(savedStrategy);
 		}
+	}
+
+	/**
+	 * Rewrite asResource to replace ensure that each RelationalTransformation has a $trace$ TypedModel and each
+	 * Relation has a $trace$ SharedVariable..
+	 */
+	public static boolean rewriteMissingTraceArtefacts(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource asResource) {
+		QVTrelationHelper helper = null;
+		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
+			EObject eObject = tit.next();
+			if (eObject instanceof RelationalTransformation) {
+				RelationalTransformation asTransformation = (RelationalTransformation)eObject;
+				TypedModel traceTypedModel = NameUtil.getNameable(getModelParameters(asTransformation), TRACE_TYPED_MODEL_NAME);
+				if (traceTypedModel == null) {
+					if (helper == null) {
+						helper = new QVTrelationHelper(environmentFactory);
+					}
+					asTransformation.getModelParameter().add(helper.createTraceTypedModel());
+				}
+			}
+			if (eObject instanceof Relation) {
+				Relation asRelation = (Relation)eObject;
+				Variable traceClassVariable = NameUtil.getNameable(getOwnedVariables(asRelation), TRACE_CLASS_NAME);
+				if (traceClassVariable == null) {
+					if (helper == null) {
+						helper = new QVTrelationHelper(environmentFactory);
+					}
+					asRelation.getVariable().add(helper.createTraceClassVariable());
+				}
+			}
+		}
+		return helper != null;
 	}
 }

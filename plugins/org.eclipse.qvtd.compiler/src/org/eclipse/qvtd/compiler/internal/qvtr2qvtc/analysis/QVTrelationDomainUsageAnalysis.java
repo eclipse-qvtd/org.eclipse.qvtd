@@ -21,6 +21,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
@@ -46,6 +47,16 @@ public class QVTrelationDomainUsageAnalysis extends RootDomainUsageAnalysis impl
 {
 	public QVTrelationDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
+	}
+
+	@Override
+	public void analyzeTracePackage(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Package tracePackage) {
+		assert typedModel == getTraceTypedModel();
+		setUsage(typedModel, getMiddleUsage());
+		@NonNull DomainUsage typedModelUsage = getMiddleUsage();
+		for (org.eclipse.ocl.pivot.@NonNull Class traceClass : QVTrelationUtil.getOwnedClasses(tracePackage)) {
+			setUsage(traceClass, typedModelUsage);
+		}
 	}
 
 	@Override

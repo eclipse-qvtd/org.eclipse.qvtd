@@ -23,16 +23,16 @@ public abstract class AbstractCompilerStep implements CompilerStep
 {
 	protected final @NonNull CompilerChain compilerChain;
 	protected final @NonNull QVTbaseEnvironmentFactory environmentFactory;
-	protected final @NonNull String name;
-	protected final @NonNull String defaultExtension;
+	protected final @NonNull String stepName;
+	protected final @NonNull String defaultFileExtension;
 
 	private /*@LazyNonNull*/ CompilerProblems compilerProblems = null;
 
 	protected AbstractCompilerStep(@NonNull CompilerChain compilerChain, @NonNull String stepName) {
 		this.compilerChain = compilerChain;
 		this.environmentFactory = compilerChain.getEnvironmentFactory();
-		this.name = stepName;
-		this.defaultExtension = ClassUtil.nonNullState(AbstractCompilerChain.getDefaultExtension(stepName));
+		this.stepName = stepName;
+		this.defaultFileExtension = ClassUtil.nonNullState(AbstractCompilerChain.getDefaultFileExtension(stepName));
 	}
 
 	@Override
@@ -45,16 +45,16 @@ public abstract class AbstractCompilerStep implements CompilerStep
 	}
 
 	public <T> @Nullable T basicGetOption(CompilerOptions.@NonNull Key<T> optionKey) {
-		return compilerChain.basicGetOption(name, optionKey);
+		return compilerChain.basicGetOption(stepName, optionKey);
 	}
 
 	protected void compiled(@NonNull Object object) {
-		compiled(name, object);
+		compiled(stepName, object);
 	}
 
 	@Deprecated // should be using getName() regularly
-	protected void compiled(@NonNull String stepKey, @NonNull Object object) {
-		compilerChain.compiled(stepKey, object);
+	protected void compiled(@NonNull String stepName, @NonNull Object object) {
+		compilerChain.compiled(stepName, object);
 	}
 
 	protected @NonNull Resource createResource() throws IOException {
@@ -76,28 +76,28 @@ public abstract class AbstractCompilerStep implements CompilerStep
 
 	@Override
 	public @NonNull String getDefaultExtension() {
-		return defaultExtension;
+		return defaultFileExtension;
 	}
 
 	@Override
 	public @NonNull String getName() {
-		return name;
+		return stepName;
 	}
 
 	protected @NonNull URI getURI() {
-		return compilerChain.getURI(name, CompilerChain.URI_KEY);
+		return compilerChain.getURI(stepName, CompilerChain.URI_KEY);
 	}
 
 	protected @NonNull Resource saveResource(@NonNull Resource asResource) throws IOException {
-		compilerChain.saveResource(asResource, name);
+		compilerChain.saveResource(asResource, stepName);
 		compiled(asResource);
 		return asResource;
 	}
 
 	@Deprecated // should be using getName() regularly
-	protected @NonNull Resource saveResource(@NonNull Resource asResource, @NonNull String stepKey) throws IOException {
-		compilerChain.saveResource(asResource, stepKey);
-		compiled(stepKey, asResource);
+	protected @NonNull Resource saveResource(@NonNull Resource asResource, @NonNull String stepName) throws IOException {
+		compilerChain.saveResource(asResource, stepName);
+		compiled(stepName, asResource);
 		return asResource;
 	}
 

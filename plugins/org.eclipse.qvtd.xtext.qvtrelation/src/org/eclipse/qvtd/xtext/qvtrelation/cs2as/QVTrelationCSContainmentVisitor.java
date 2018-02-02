@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.xtext.qvtrelation.cs2as;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
@@ -552,12 +551,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		}
 		Variable traceClassVariable = NameUtil.getNameable(pivotElement.getVariable(), QVTbaseUtil.TRACE_TYPED_MODEL_NAME);
 		if (traceClassVariable == null) {
-			//			traceClassVariable = getHelper().createSharedVariable(QVTbaseUtil.TRACE_CLASS_NAME, null, null, null);
-			traceClassVariable = QVTrelationFactory.eINSTANCE.createSharedVariable();
-			traceClassVariable.setName(QVTbaseUtil.TRACE_CLASS_NAME);
-			traceClassVariable.setIsImplicit(true);
-			getHelper().setType(traceClassVariable, standardLibrary.getOclElementType(), true);		// FIXME Type not known here ?? ancestral QVTTrace
-			traceClassVariable.setOwnedInit(null);
+			traceClassVariable = getHelper().createTraceClassVariable();
 		}
 		relationVariables.add(traceClassVariable);
 		PivotUtilInternal.refreshList(pivotElement.getVariable(), relationVariables);
@@ -607,7 +601,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		List<@NonNull TypedModel> newPivotElements = context.getNewPivotElements(TypedModel.class, csElement.getOwnedModelDecls());
 		TypedModel traceTypedModel = QVTbaseUtil.basicGetTraceTypedModel(modelParameter);
 		if (traceTypedModel == null) {
-			traceTypedModel = getHelper().createTypedModel(QVTbaseUtil.TRACE_TYPED_MODEL_NAME, Collections.emptyList());
+			traceTypedModel = getHelper().createTraceTypedModel();
 		}
 		newPivotElements.add(traceTypedModel);
 		PivotUtilInternal.refreshList(modelParameter, newPivotElements);
