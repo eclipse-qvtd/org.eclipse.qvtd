@@ -198,7 +198,7 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 
 	@Override
 	public @Nullable Object visitRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Region object) {
-		return visitElement(object);
+		return visitNamedElement(object);
 	}
 
 	@Override

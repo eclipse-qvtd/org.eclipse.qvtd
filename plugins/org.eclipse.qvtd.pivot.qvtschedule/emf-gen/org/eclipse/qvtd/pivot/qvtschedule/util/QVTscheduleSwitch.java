@@ -244,9 +244,10 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				LoadingRegion loadingRegion = (LoadingRegion)theEObject;
 				T result = caseLoadingRegion(loadingRegion);
 				if (result == null) result = caseRegion(loadingRegion);
+				if (result == null) result = caseNamedElement(loadingRegion);
+				if (result == null) result = caseSymbolable(loadingRegion);
 				if (result == null) result = caseElement(loadingRegion);
 				if (result == null) result = caseNameable(loadingRegion);
-				if (result == null) result = caseSymbolable(loadingRegion);
 				if (result == null) result = caseVisitable(loadingRegion);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -255,9 +256,10 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				MappingRegion mappingRegion = (MappingRegion)theEObject;
 				T result = caseMappingRegion(mappingRegion);
 				if (result == null) result = caseRegion(mappingRegion);
+				if (result == null) result = caseNamedElement(mappingRegion);
+				if (result == null) result = caseSymbolable(mappingRegion);
 				if (result == null) result = caseElement(mappingRegion);
 				if (result == null) result = caseNameable(mappingRegion);
-				if (result == null) result = caseSymbolable(mappingRegion);
 				if (result == null) result = caseVisitable(mappingRegion);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -267,9 +269,10 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				T result = caseMicroMappingRegion(microMappingRegion);
 				if (result == null) result = caseMappingRegion(microMappingRegion);
 				if (result == null) result = caseRegion(microMappingRegion);
+				if (result == null) result = caseNamedElement(microMappingRegion);
+				if (result == null) result = caseSymbolable(microMappingRegion);
 				if (result == null) result = caseElement(microMappingRegion);
 				if (result == null) result = caseNameable(microMappingRegion);
-				if (result == null) result = caseSymbolable(microMappingRegion);
 				if (result == null) result = caseVisitable(microMappingRegion);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -279,9 +282,10 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				T result = caseNamedMappingRegion(namedMappingRegion);
 				if (result == null) result = caseMappingRegion(namedMappingRegion);
 				if (result == null) result = caseRegion(namedMappingRegion);
+				if (result == null) result = caseNamedElement(namedMappingRegion);
+				if (result == null) result = caseSymbolable(namedMappingRegion);
 				if (result == null) result = caseElement(namedMappingRegion);
 				if (result == null) result = caseNameable(namedMappingRegion);
-				if (result == null) result = caseSymbolable(namedMappingRegion);
 				if (result == null) result = caseVisitable(namedMappingRegion);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -357,9 +361,10 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				OperationRegion operationRegion = (OperationRegion)theEObject;
 				T result = caseOperationRegion(operationRegion);
 				if (result == null) result = caseRegion(operationRegion);
+				if (result == null) result = caseNamedElement(operationRegion);
+				if (result == null) result = caseSymbolable(operationRegion);
 				if (result == null) result = caseElement(operationRegion);
 				if (result == null) result = caseNameable(operationRegion);
-				if (result == null) result = caseSymbolable(operationRegion);
 				if (result == null) result = caseVisitable(operationRegion);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -421,9 +426,10 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 			case QVTschedulePackage.REGION: {
 				Region region = (Region)theEObject;
 				T result = caseRegion(region);
+				if (result == null) result = caseNamedElement(region);
+				if (result == null) result = caseSymbolable(region);
 				if (result == null) result = caseElement(region);
 				if (result == null) result = caseNameable(region);
-				if (result == null) result = caseSymbolable(region);
 				if (result == null) result = caseVisitable(region);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -433,9 +439,10 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				T result = caseRuleRegion(ruleRegion);
 				if (result == null) result = caseMappingRegion(ruleRegion);
 				if (result == null) result = caseRegion(ruleRegion);
+				if (result == null) result = caseNamedElement(ruleRegion);
+				if (result == null) result = caseSymbolable(ruleRegion);
 				if (result == null) result = caseElement(ruleRegion);
 				if (result == null) result = caseNameable(ruleRegion);
-				if (result == null) result = caseSymbolable(ruleRegion);
 				if (result == null) result = caseVisitable(ruleRegion);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -456,9 +463,10 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				ScheduledRegion scheduledRegion = (ScheduledRegion)theEObject;
 				T result = caseScheduledRegion(scheduledRegion);
 				if (result == null) result = caseRegion(scheduledRegion);
+				if (result == null) result = caseNamedElement(scheduledRegion);
+				if (result == null) result = caseSymbolable(scheduledRegion);
 				if (result == null) result = caseElement(scheduledRegion);
 				if (result == null) result = caseNameable(scheduledRegion);
-				if (result == null) result = caseSymbolable(scheduledRegion);
 				if (result == null) result = caseVisitable(scheduledRegion);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

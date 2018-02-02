@@ -18,9 +18,8 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
 
@@ -43,10 +42,10 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion()
- * @model abstract="true" superTypes="org.eclipse.ocl.pivot.Element org.eclipse.ocl.pivot.Nameable org.eclipse.qvtd.pivot.qvtschedule.Symbolable"
+ * @model abstract="true"
  * @generated
  */
-public interface Region extends Element, Nameable, Symbolable, ToDOTable, GraphNode
+public interface Region extends NamedElement, Symbolable, ToDOTable, GraphNode
 {
 	/**
 	 * Returns the value of the '<em><b>Owned Edges</b></em>' containment reference list.

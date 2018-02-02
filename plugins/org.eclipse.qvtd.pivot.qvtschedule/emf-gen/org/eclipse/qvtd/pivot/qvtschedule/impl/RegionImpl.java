@@ -33,9 +33,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
-import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT;
@@ -72,7 +71,7 @@ import com.google.common.collect.Iterables;
  *
  * @generated
  */
-public abstract class RegionImpl extends ElementImpl implements Region {
+public abstract class RegionImpl extends NamedElementImpl implements Region {
 	/**
 	 * The default value of the '{@link #getSymbolName() <em>Symbol Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -256,11 +255,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == Nameable.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == Symbolable.class) {
 			switch (derivedFeatureID) {
 				case QVTschedulePackage.REGION__SYMBOL_NAME: return QVTschedulePackage.SYMBOLABLE__SYMBOL_NAME;
@@ -277,11 +271,6 @@ public abstract class RegionImpl extends ElementImpl implements Region {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == Nameable.class) {
-			switch (baseFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == Symbolable.class) {
 			switch (baseFeatureID) {
 				case QVTschedulePackage.SYMBOLABLE__SYMBOL_NAME: return QVTschedulePackage.REGION__SYMBOL_NAME;

@@ -55,7 +55,6 @@ import com.google.common.collect.Iterables;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getOwnedConnections <em>Owned Connections</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getOwnedLoadingRegion <em>Owned Loading Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getMappingRegions <em>Mapping Regions</em>}</li>
@@ -66,26 +65,6 @@ import com.google.common.collect.Iterables;
  * @generated
  */
 public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getOwnedConnections() <em>Owned Connections</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -143,29 +122,6 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTschedulePackage.Literals.SCHEDULED_REGION;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SCHEDULED_REGION__NAME, oldName, name));
 	}
 
 	/**
@@ -389,8 +345,6 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.SCHEDULED_REGION__NAME:
-				return getName();
 			case QVTschedulePackage.SCHEDULED_REGION__OWNED_CONNECTIONS:
 				return getOwnedConnections();
 			case QVTschedulePackage.SCHEDULED_REGION__OWNED_LOADING_REGION:
@@ -415,9 +369,6 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.SCHEDULED_REGION__NAME:
-				setName((String)newValue);
-				return;
 			case QVTschedulePackage.SCHEDULED_REGION__OWNED_CONNECTIONS:
 				getOwnedConnections().clear();
 				getOwnedConnections().addAll((Collection<? extends Connection>)newValue);
@@ -447,9 +398,6 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.SCHEDULED_REGION__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case QVTschedulePackage.SCHEDULED_REGION__OWNED_CONNECTIONS:
 				getOwnedConnections().clear();
 				return;
@@ -477,8 +425,6 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.SCHEDULED_REGION__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case QVTschedulePackage.SCHEDULED_REGION__OWNED_CONNECTIONS:
 				return ownedConnections != null && !ownedConnections.isEmpty();
 			case QVTschedulePackage.SCHEDULED_REGION__OWNED_LOADING_REGION:

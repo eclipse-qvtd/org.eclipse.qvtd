@@ -193,7 +193,7 @@ public abstract class AbstractExtendingQVTscheduleVisitor<R, C>
 
 	@Override
 	public R visitRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Region object) {
-		return visitElement(object);
+		return visitNamedElement(object);
 	}
 
 	@Override

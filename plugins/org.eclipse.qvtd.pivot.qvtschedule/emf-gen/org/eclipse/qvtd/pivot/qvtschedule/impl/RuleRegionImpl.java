@@ -46,7 +46,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl#getReferredRule <em>Referred Rule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl#getProducedDatums <em>Produced Datums</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl#getConsumedDatums <em>Consumed Datums</em>}</li>
@@ -55,16 +54,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  * @generated
  */
 public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
 	/**
 	 * The cached value of the '{@link #getReferredRule() <em>Referred Rule</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -122,8 +111,6 @@ public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.RULE_REGION__NAME:
-				return getName();
 			case QVTschedulePackage.RULE_REGION__REFERRED_RULE:
 				if (resolve) return getReferredRule();
 				return basicGetReferredRule();
@@ -188,8 +175,6 @@ public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.RULE_REGION__NAME:
-				return NAME_EDEFAULT == null ? getName() != null : !NAME_EDEFAULT.equals(getName());
 			case QVTschedulePackage.RULE_REGION__REFERRED_RULE:
 				return referredRule != null;
 			case QVTschedulePackage.RULE_REGION__PRODUCED_DATUMS:

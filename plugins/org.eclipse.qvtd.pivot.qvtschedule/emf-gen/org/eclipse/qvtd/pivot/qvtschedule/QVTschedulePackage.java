@@ -2809,7 +2809,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
+	int REGION__ANNOTATING_COMMENTS = PivotPackage.NAMED_ELEMENT__ANNOTATING_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -2818,7 +2818,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
+	int REGION__OWNED_ANNOTATIONS = PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
@@ -2827,7 +2827,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
+	int REGION__OWNED_COMMENTS = PivotPackage.NAMED_ELEMENT__OWNED_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
@@ -2836,7 +2836,16 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
+	int REGION__OWNED_EXTENSIONS = PivotPackage.NAMED_ELEMENT__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGION__NAME = PivotPackage.NAMED_ELEMENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Symbol Name</b></em>' attribute.
@@ -2845,7 +2854,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__SYMBOL_NAME = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
+	int REGION__SYMBOL_NAME = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Edges</b></em>' containment reference list.
@@ -2854,7 +2863,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__OWNED_EDGES = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
+	int REGION__OWNED_EDGES = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
@@ -2863,7 +2872,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__OWNED_NODES = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
+	int REGION__OWNED_NODES = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Region</em>' class.
@@ -2872,7 +2881,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+	int REGION_FEATURE_COUNT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -2881,7 +2890,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION___ALL_OWNED_ELEMENTS = PivotPackage.ELEMENT___ALL_OWNED_ELEMENTS;
+	int REGION___ALL_OWNED_ELEMENTS = PivotPackage.NAMED_ELEMENT___ALL_OWNED_ELEMENTS;
 
 	/**
 	 * The operation id for the '<em>Get Value</em>' operation.
@@ -2890,7 +2899,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
+	int REGION___GET_VALUE__TYPE_STRING = PivotPackage.NAMED_ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
 	 * The number of operations of the '<em>Region</em>' class.
@@ -2899,7 +2908,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
+	int REGION_OPERATION_COUNT = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2936,6 +2945,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int LOADING_REGION__OWNED_EXTENSIONS = REGION__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOADING_REGION__NAME = REGION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Symbol Name</b></em>' attribute.
@@ -3044,6 +3062,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_REGION__OWNED_EXTENSIONS = REGION__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_REGION__NAME = REGION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Symbol Name</b></em>' attribute.
@@ -3170,6 +3197,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int MICRO_MAPPING_REGION__OWNED_EXTENSIONS = MAPPING_REGION__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MICRO_MAPPING_REGION__NAME = MAPPING_REGION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Symbol Name</b></em>' attribute.
@@ -3325,6 +3361,15 @@ public interface QVTschedulePackage extends EPackage {
 	int NAMED_MAPPING_REGION__OWNED_EXTENSIONS = MAPPING_REGION__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_MAPPING_REGION__NAME = MAPPING_REGION__NAME;
+
+	/**
 	 * The feature id for the '<em><b>Symbol Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3379,22 +3424,13 @@ public interface QVTschedulePackage extends EPackage {
 	int NAMED_MAPPING_REGION__SCHEDULED_REGION = MAPPING_REGION__SCHEDULED_REGION;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_MAPPING_REGION__NAME = MAPPING_REGION_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Symbol Name Suffix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_MAPPING_REGION__SYMBOL_NAME_SUFFIX = MAPPING_REGION_FEATURE_COUNT + 1;
+	int NAMED_MAPPING_REGION__SYMBOL_NAME_SUFFIX = MAPPING_REGION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Named Mapping Region</em>' class.
@@ -3403,7 +3439,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_MAPPING_REGION_FEATURE_COUNT = MAPPING_REGION_FEATURE_COUNT + 2;
+	int NAMED_MAPPING_REGION_FEATURE_COUNT = MAPPING_REGION_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -4072,6 +4108,15 @@ public interface QVTschedulePackage extends EPackage {
 	int OPERATION_REGION__OWNED_EXTENSIONS = REGION__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_REGION__NAME = REGION__NAME;
+
+	/**
 	 * The feature id for the '<em><b>Symbol Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4117,22 +4162,13 @@ public interface QVTschedulePackage extends EPackage {
 	int OPERATION_REGION__HEAD_NODES = REGION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_REGION__NAME = REGION_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Referred Operation</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_REGION__REFERRED_OPERATION = REGION_FEATURE_COUNT + 3;
+	int OPERATION_REGION__REFERRED_OPERATION = REGION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Result Node</b></em>' reference.
@@ -4141,7 +4177,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_REGION__RESULT_NODE = REGION_FEATURE_COUNT + 4;
+	int OPERATION_REGION__RESULT_NODE = REGION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Owning Schedule Model</b></em>' container reference.
@@ -4150,7 +4186,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_REGION__OWNING_SCHEDULE_MODEL = REGION_FEATURE_COUNT + 5;
+	int OPERATION_REGION__OWNING_SCHEDULE_MODEL = REGION_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Operation Region</em>' class.
@@ -4159,7 +4195,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 6;
+	int OPERATION_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -4927,6 +4963,15 @@ public interface QVTschedulePackage extends EPackage {
 	int RULE_REGION__OWNED_EXTENSIONS = MAPPING_REGION__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_REGION__NAME = MAPPING_REGION__NAME;
+
+	/**
 	 * The feature id for the '<em><b>Symbol Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4981,22 +5026,13 @@ public interface QVTschedulePackage extends EPackage {
 	int RULE_REGION__SCHEDULED_REGION = MAPPING_REGION__SCHEDULED_REGION;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE_REGION__NAME = MAPPING_REGION_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Referred Rule</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RULE_REGION__REFERRED_RULE = MAPPING_REGION_FEATURE_COUNT + 1;
+	int RULE_REGION__REFERRED_RULE = MAPPING_REGION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Produced Datums</b></em>' reference list.
@@ -5005,7 +5041,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RULE_REGION__PRODUCED_DATUMS = MAPPING_REGION_FEATURE_COUNT + 2;
+	int RULE_REGION__PRODUCED_DATUMS = MAPPING_REGION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Consumed Datums</b></em>' reference list.
@@ -5014,7 +5050,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RULE_REGION__CONSUMED_DATUMS = MAPPING_REGION_FEATURE_COUNT + 3;
+	int RULE_REGION__CONSUMED_DATUMS = MAPPING_REGION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Rule Region</em>' class.
@@ -5023,7 +5059,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RULE_REGION_FEATURE_COUNT = MAPPING_REGION_FEATURE_COUNT + 4;
+	int RULE_REGION_FEATURE_COUNT = MAPPING_REGION_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -5251,6 +5287,15 @@ public interface QVTschedulePackage extends EPackage {
 	int SCHEDULED_REGION__OWNED_EXTENSIONS = REGION__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULED_REGION__NAME = REGION__NAME;
+
+	/**
 	 * The feature id for the '<em><b>Symbol Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5278,22 +5323,13 @@ public interface QVTschedulePackage extends EPackage {
 	int SCHEDULED_REGION__OWNED_NODES = REGION__OWNED_NODES;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCHEDULED_REGION__NAME = REGION_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Owned Connections</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULED_REGION__OWNED_CONNECTIONS = REGION_FEATURE_COUNT + 1;
+	int SCHEDULED_REGION__OWNED_CONNECTIONS = REGION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Loading Region</b></em>' containment reference.
@@ -5302,7 +5338,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULED_REGION__OWNED_LOADING_REGION = REGION_FEATURE_COUNT + 2;
+	int SCHEDULED_REGION__OWNED_LOADING_REGION = REGION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Mapping Regions</b></em>' reference list.
@@ -5311,7 +5347,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULED_REGION__MAPPING_REGIONS = REGION_FEATURE_COUNT + 3;
+	int SCHEDULED_REGION__MAPPING_REGIONS = REGION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owning Schedule Model</b></em>' container reference.
@@ -5320,7 +5356,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULED_REGION__OWNING_SCHEDULE_MODEL = REGION_FEATURE_COUNT + 4;
+	int SCHEDULED_REGION__OWNING_SCHEDULE_MODEL = REGION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Referred Transformation</b></em>' reference.
@@ -5329,7 +5365,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULED_REGION__REFERRED_TRANSFORMATION = REGION_FEATURE_COUNT + 5;
+	int SCHEDULED_REGION__REFERRED_TRANSFORMATION = REGION_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Scheduled Region</em>' class.
@@ -5338,7 +5374,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULED_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 6;
+	int SCHEDULED_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -6231,17 +6267,6 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getScheduledRegion();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getName()
-	 * @see #getScheduledRegion()
-	 * @generated
-	 */
-	EAttribute getScheduledRegion_Name();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedConnections <em>Owned Connections</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6546,17 +6571,6 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getNamedMappingRegion();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.NamedMappingRegion#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.NamedMappingRegion#getName()
-	 * @see #getNamedMappingRegion()
-	 * @generated
-	 */
-	EAttribute getNamedMappingRegion_Name();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.NamedMappingRegion#getSymbolNameSuffix <em>Symbol Name Suffix</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6847,17 +6861,6 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getOperationRegion_HeadNodes();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getName()
-	 * @see #getOperationRegion()
-	 * @generated
-	 */
-	EAttribute getOperationRegion_Name();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationRegion#getReferredOperation <em>Referred Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7036,17 +7039,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getRuleRegion();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.RuleRegion#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.RuleRegion#getName()
-	 * @see #getRuleRegion()
-	 * @generated
-	 */
-	EAttribute getRuleRegion_Name();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.RuleRegion#getReferredRule <em>Referred Rule</em>}'.
@@ -7449,14 +7441,6 @@ public interface QVTschedulePackage extends EPackage {
 		EClass SCHEDULED_REGION = eINSTANCE.getScheduledRegion();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute SCHEDULED_REGION__NAME = eINSTANCE.getScheduledRegion_Name();
-
-		/**
 		 * The meta object literal for the '<em><b>Owned Connections</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7719,14 +7703,6 @@ public interface QVTschedulePackage extends EPackage {
 		EClass NAMED_MAPPING_REGION = eINSTANCE.getNamedMappingRegion();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute NAMED_MAPPING_REGION__NAME = eINSTANCE.getNamedMappingRegion_Name();
-
-		/**
 		 * The meta object literal for the '<em><b>Symbol Name Suffix</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7957,14 +7933,6 @@ public interface QVTschedulePackage extends EPackage {
 		EReference OPERATION_REGION__HEAD_NODES = eINSTANCE.getOperationRegion_HeadNodes();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute OPERATION_REGION__NAME = eINSTANCE.getOperationRegion_Name();
-
-		/**
 		 * The meta object literal for the '<em><b>Referred Operation</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8113,14 +8081,6 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass RULE_REGION = eINSTANCE.getRuleRegion();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute RULE_REGION__NAME = eINSTANCE.getRuleRegion_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Referred Rule</b></em>' reference feature.
