@@ -50,8 +50,8 @@ public class QVTcCompilerChain extends AbstractCompilerChain
 
 	protected final @NonNull Xtext2QVTcCompilerStep xtext2qvtcCompilerStep;
 
-	public QVTcCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull CompilerOptions options) {
-		super(environmentFactory, txURI, prefixURI, options);
+	public QVTcCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+		super(environmentFactory, txURI, intermediateFileNamePrefixURI, options);
 		this.xtext2qvtcCompilerStep = createXtext2QVTcCompilerStep();
 	}
 

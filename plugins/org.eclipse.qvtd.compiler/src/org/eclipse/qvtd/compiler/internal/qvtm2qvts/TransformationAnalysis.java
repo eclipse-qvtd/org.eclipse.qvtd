@@ -14,9 +14,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.utilities.Nameable;
+import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.internal.qvts2trace.RuleAnalysis2TraceClass;
+import org.eclipse.qvtd.compiler.internal.qvts2trace.TransformationAnalysis2TracePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 
@@ -59,7 +64,7 @@ public class TransformationAnalysis extends QVTbaseHelper implements Nameable
 		this.scheduleManager = scheduleManager;
 		this.transformation = transformation;
 		for (@NonNull Rule asRule : QVTbaseUtil.getOwnedRules(transformation)) {
-			RuleAnalysis ruleAnalysis = scheduleManager.createRuleAnalysis(asRule);
+			RuleAnalysis ruleAnalysis = scheduleManager.createRuleAnalysis(this, asRule);
 			rule2ruleAnalysis.put(asRule, ruleAnalysis);
 		}
 	}
@@ -164,6 +169,24 @@ public class TransformationAnalysis extends QVTbaseHelper implements Nameable
 
 	public @NonNull Transformation getTransformation() {
 		return transformation;
+	}
+
+	public @NonNull TransformationAnalysis2TracePackage getTransformationAnalysis2tracePackage() {
+		return scheduleManager.getTransformationAnalysis2TracePackage(this);
+	}
+
+	public void synthesizeTracePackage(@NonNull TypedModel traceTypedModel, @NonNull Model traceModel) throws CompilerChainException {
+		TransformationAnalysis2TracePackage transformationAnalysis2tracePackage = getTransformationAnalysis2tracePackage();
+		org.eclipse.ocl.pivot.Package tracePackage = transformationAnalysis2tracePackage.transform(traceTypedModel);
+		traceModel.getOwnedPackages().add(tracePackage);
+		traceTypedModel.getUsedPackage().add(tracePackage);
+		scheduleManager.analyzeTracePackage(traceTypedModel, tracePackage);
+
+
+		for (@NonNull RuleAnalysis ruleAnalysis : rule2ruleAnalysis.values()) {
+			RuleAnalysis2TraceClass ruleAnalysis2traceClass = transformationAnalysis2tracePackage.getRuleAnalysis2TraceClass(ruleAnalysis.getRule());
+			ruleAnalysis2traceClass.synthesizeTraceClass();
+		}
 	}
 
 	@Override

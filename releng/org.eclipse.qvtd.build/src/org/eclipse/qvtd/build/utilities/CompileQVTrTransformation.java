@@ -53,13 +53,13 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 {
 	protected class MyQVT extends AbstractTestQVT
 	{
-		public MyQVT(@NonNull ProjectManager projectManager, @NonNull String testProjectName, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) {
-			super(projectManager, testProjectName, testBundleURI, txURI, prefixURI, srcFileURI, binFileURI);
+		public MyQVT(@NonNull ProjectManager projectManager, @NonNull String testProjectName, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) {
+			super(projectManager, testProjectName, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
 		}
 
 		@Override
-		protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI prefixURI, @NonNull CompilerOptions options) {
-			QVTrCompilerChain compilerChain = new QVTrCompilerChain(getEnvironmentFactory(), txURI, prefixURI, options);
+		protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+			QVTrCompilerChain compilerChain = new QVTrCompilerChain(getEnvironmentFactory(), txURI, intermediateFileNamePrefixURI, options);
 			compilerChain.addListener(new Listener()
 			{
 				@Override
@@ -218,10 +218,10 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 		URI testBundleURI = getTestBundleURI();
 		URI txURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/model/ATL2QVTr.qvtr", true);
 		ProjectManager testProjectManager = getTestProjectManager();
-		URI prefixURI = getTestURI("atl2qvtr");
+		URI intermediateFileNamePrefixURI = getTestURI("atl2qvtr");
 		URI srcFileURI = getTestFileURI(JavaFileUtil.TEST_SRC_FOLDER_NAME + "/");
 		URI binFileURI = getTestFileURI(JavaFileUtil.TEST_BIN_FOLDER_NAME + "/");
-		MyQVT myQVT = new MyQVT(testProjectManager, testProjectName, testBundleURI, txURI, prefixURI, srcFileURI, binFileURI);
+		MyQVT myQVT = new MyQVT(testProjectManager, testProjectName, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
 		myQVT.addClasspathProjectName("org.eclipse.m2m.atl.common");
 		myQVT.addClasspathProjectName("org.eclipse.qvtd.atl");
 		myQVT.addClasspathProjectName("org.eclipse.qvtd.pivot.qvtbase");

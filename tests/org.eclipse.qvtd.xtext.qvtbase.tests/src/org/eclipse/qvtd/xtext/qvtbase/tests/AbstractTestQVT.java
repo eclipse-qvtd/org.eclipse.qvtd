@@ -128,7 +128,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	/**
 	 * A prefix for output filenames.
 	 */
-	protected final @NonNull URI prefixURI;
+	protected final @NonNull URI intermediateFileNamePrefixURI;
 
 	/**
 	 * The file folder for generated Java sources.
@@ -158,13 +158,13 @@ public abstract class AbstractTestQVT extends QVTimperative
 	private Collection<@NonNull EPackage> loadedEPackages = null;
 	private @Nullable String copyright = null;
 
-	public AbstractTestQVT(@NonNull ProjectManager projectManager, @NonNull String testProjectName, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) {
+	public AbstractTestQVT(@NonNull ProjectManager projectManager, @NonNull String testProjectName, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) {
 		super(new QVTiEnvironmentFactory(projectManager, null));
 		assert testBundleURI.isPlatform();
 		this.testProjectName = testProjectName;
 		this.testBundleURI = testBundleURI;
 		this.txURI = txURI;
-		this.prefixURI = prefixURI;
+		this.intermediateFileNamePrefixURI = intermediateFileNamePrefixURI;
 		this.srcFileURI = srcFileURI;
 		this.binFileURI = binFileURI;
 		assert srcFileURI.isFile();
@@ -212,21 +212,21 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return genPackage;
 	}
 
-	public void assertRegionCount(@NonNull Class<? extends Region> regionClass, @NonNull Integer count) {
+	public void assertRegionCount(@NonNull Class<? extends Region> regionClass, int count) {
 		TestCase.assertEquals("Region " + regionClass.getSimpleName() + " count:", count != 0 ? count : null, regionClass2count.get(regionClass));
 	}
 
 	public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String outputName,
 			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
 		CompilerOptions options = createBuildCompilerChainOptions(isIncremental);
-		return doBuild(txURI, prefixURI, outputName, options, genModelFiles);
+		return doBuild(txURI, intermediateFileNamePrefixURI, outputName, options, genModelFiles);
 	}
 
 	public @NonNull Class<? extends Transformer> buildTransformation_486938(@NonNull String outputName,
 			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
 		CompilerOptions options = createBuildCompilerChainOptions(isIncremental);
 		options.setOption(CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY, "cg");
-		return doBuild(txURI, prefixURI, outputName, options, genModelFiles);
+		return doBuild(txURI, intermediateFileNamePrefixURI, outputName, options, genModelFiles);
 	}
 
 	//	protected void checkOutput(@NonNull Resource outputResource, @NonNull String expectedFilePath, @Nullable ModelNormalizer normalizer) throws IOException, InterruptedException {
@@ -245,14 +245,14 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	public @NonNull ImperativeTransformation compileTransformation(@NonNull String outputName) throws Exception {
-		return doCompile(txURI, prefixURI, outputName, createCompilerChainOptions());
+		return doCompile(txURI, intermediateFileNamePrefixURI, outputName, createCompilerChainOptions());
 	}
 
 	protected @NonNull CompilerOptions createBuildCompilerChainOptions(boolean isIncremental) {
 		DefaultCompilerOptions compilerOptions = createCompilerChainOptions();
 		compilerOptions.setGenerateClassesOptions(srcFileURI, binFileURI, createClassProjectNames(), isIncremental);
 		if (generateGenModel()) {
-			URI genModelURI = prefixURI.appendFileExtension(AbstractCompilerChain.getDefaultExtension(CompilerChain.GENMODEL_STEP));
+			URI genModelURI = intermediateFileNamePrefixURI.appendFileExtension(AbstractCompilerChain.getDefaultFileExtension(CompilerChain.GENMODEL_STEP));
 			compilerOptions.setGenerateGenModelOptions(genModelURI, getBasePrefix(), copyright, usedGenPackages);
 		}
 		return compilerOptions;
@@ -271,7 +271,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return classProjectNames;
 	}
 
-	protected abstract @NonNull AbstractCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI prefixURI,
+	protected abstract @NonNull AbstractCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI,
 			@NonNull CompilerOptions options);
 
 	protected @NonNull DefaultCompilerOptions createCompilerChainOptions() {
@@ -356,9 +356,9 @@ public abstract class AbstractTestQVT extends QVTimperative
 		}
 	}
 
-	protected @NonNull Class<? extends Transformer> doBuild(@NonNull URI txURI, @NonNull URI prefixURI, @NonNull String outputName,
+	protected @NonNull Class<? extends Transformer> doBuild(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull String outputName,
 			@NonNull CompilerOptions options, @NonNull String @NonNull ... genModelFiles) throws IOException, Exception {
-		compilerChain = createCompilerChain(txURI, prefixURI, options);
+		compilerChain = createCompilerChain(txURI, intermediateFileNamePrefixURI, options);
 		ImperativeTransformation asTransformation = compilerChain.compile(outputName);
 		URI asURI = asTransformation.eResource().getURI();
 		if (asURI != null) {
@@ -368,9 +368,9 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return compilerChain.generate(asTransformation, genModelFiles);
 	}
 
-	protected @NonNull ImperativeTransformation doCompile(@NonNull URI txURI, @NonNull URI prefixURI, @NonNull String outputName,
+	protected @NonNull ImperativeTransformation doCompile(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull String outputName,
 			@NonNull CompilerOptions options) throws Exception {
-		compilerChain = createCompilerChain(txURI, prefixURI, options);
+		compilerChain = createCompilerChain(txURI, intermediateFileNamePrefixURI, options);
 		ImperativeTransformation transformation = compilerChain.compile(outputName);
 		URI txASURI = transformation.eResource().getURI();
 		if (txASURI != null) {

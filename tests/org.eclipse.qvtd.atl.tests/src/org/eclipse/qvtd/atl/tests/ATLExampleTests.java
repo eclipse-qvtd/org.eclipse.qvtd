@@ -60,8 +60,8 @@ public class ATLExampleTests extends LoadTestCase
 			defaultSavingOptions.put(ASResource.OPTION_NORMALIZE_CONTENTS, Boolean.TRUE);
 		}
 
-		public MyQVT(@NonNull ProjectManager projectManager, @NonNull String testProjectName, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) {
-			super(projectManager, testProjectName, testBundleURI, txURI, prefixURI, srcFileURI, binFileURI);
+		public MyQVT(@NonNull ProjectManager projectManager, @NonNull String testProjectName, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) {
+			super(projectManager, testProjectName, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
 			environmentFactory.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
 			//			getMetamodelManager().getASResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());	// FIXME wrong ResourceSet
 			// Ensure ATL parser support is on classpath
@@ -78,8 +78,8 @@ public class ATLExampleTests extends LoadTestCase
 		}
 
 		@Override
-		protected @NonNull AbstractCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI prefixURI, @NonNull CompilerOptions options) {
-			return new QVTrCompilerChain(getEnvironmentFactory(), txURI, prefixURI, options);
+		protected @NonNull AbstractCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
+			return new QVTrCompilerChain(getEnvironmentFactory(), txURI, intermediateFileNamePrefixURI, options);
 		}
 
 		@Override
@@ -97,10 +97,10 @@ public class ATLExampleTests extends LoadTestCase
 
 	protected @NonNull MyQVT createQVT(@NonNull String resultPrefix, @NonNull URI txURI) throws Exception {
 		ProjectManager testProjectManager = getTestProjectManager();
-		URI prefixURI = getTestURI(resultPrefix);
+		URI intermediateFileNamePrefixURI = getTestURI(resultPrefix);
 		URI srcFileURI = getTestFileURI(JavaFileUtil.TEST_SRC_FOLDER_NAME + "/");
 		URI binFileURI = getTestFileURI(JavaFileUtil.TEST_BIN_FOLDER_NAME + "/");
-		return new MyQVT(testProjectManager, getTestProject().getName(), getTestBundleURI(), txURI, prefixURI, srcFileURI, binFileURI);
+		return new MyQVT(testProjectManager, getTestProject().getName(), getTestBundleURI(), txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
 	}
 
 	protected void doATLExampleTest_CG(@NonNull String resultPrefix, @NonNull URI atlURI) throws Exception {

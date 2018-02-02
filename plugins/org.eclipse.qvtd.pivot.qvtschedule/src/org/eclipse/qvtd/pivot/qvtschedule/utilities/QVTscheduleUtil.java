@@ -131,12 +131,14 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		}
 	}
 
+	@Deprecated /* Obsolete - always true */
 	public static final class IsCallableRegionPredicate implements Predicate<@NonNull Region>
 	{
 		public static final @NonNull IsCallableRegionPredicate INSTANCE = new IsCallableRegionPredicate();
 
 		@Override
 		public boolean apply(@NonNull Region region) {
+			assert !region.isOperationRegion();
 			return !region.isOperationRegion();
 		}
 	}

@@ -40,6 +40,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -97,6 +98,16 @@ public abstract class DatumCaches
 	}
 
 	protected abstract @Nullable RuleRegion analyzeRule(@NonNull RuleAnalysis ruleAnalysis);
+
+	public void analyzeTracePackage(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Package tracePackage) {
+		for (org.eclipse.ocl.pivot.@NonNull Class traceClass : PivotUtil.getOwnedClasses(tracePackage)) {
+			ClassDatum classDatum = getClassDatum(typedModel, traceClass);
+			for (@NonNull Property traceProperty : PivotUtil.getOwnedProperties(traceClass)) {
+				@SuppressWarnings("unused")
+				PropertyDatum propertyDatumDatum = getPropertyDatum(classDatum, traceProperty);
+			}
+		}
+	}
 
 	public void analyzeTransformation(@NonNull TransformationAnalysis transformationAnalysis) {
 		for (@NonNull Rule rule : QVTbaseUtil.getOwnedRules(transformationAnalysis.getTransformation())) {

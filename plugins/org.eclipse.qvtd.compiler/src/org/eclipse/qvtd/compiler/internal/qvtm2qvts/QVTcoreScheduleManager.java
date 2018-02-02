@@ -10,13 +10,17 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
+import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.MappingAnalysis.QVTcoreExpressionAnalyzer;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
@@ -51,11 +55,31 @@ public class QVTcoreScheduleManager extends AbstractScheduleManager
 	}
 
 	@Override
-	public @NonNull MappingAnalysis createRuleAnalysis(@NonNull Rule asRule) {
+	public @NonNull MappingAnalysis createRuleAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull Rule asRule) {
 		RuleRegion ruleRegion = QVTscheduleFactory.eINSTANCE.createRuleRegion();
 		ruleRegion.setOwningScheduleModel(scheduleModel);
 		ruleRegion.setReferredRule(asRule);
 		ruleRegion.setName(asRule.getName());
-		return new MappingAnalysis(this, ruleRegion);
+		return new MappingAnalysis(transformationAnalysis, ruleRegion);
+	}
+
+	@Override
+	public @NonNull Rule getReferredRule(@NonNull OCLExpression invocation) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public @NonNull Domain getRootVariableDomain(@NonNull VariableDeclaration variable) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public @NonNull List<@NonNull VariableDeclaration> getRootVariables(@NonNull Domain domain) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public boolean isTopLevel(@NonNull Rule rule) {
+		throw new UnsupportedOperationException();
 	}
 }

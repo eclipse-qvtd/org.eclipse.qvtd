@@ -780,7 +780,7 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 				prefixURI = URI.createURI(subPath, true).resolve(prefixURI.appendSegment(""));
 			}
 			String name = txURI.trimFileExtension().lastSegment();
-			URI deresolveSrcURI = prefixURI.appendSegment(name).appendFileExtension(AbstractCompilerChain.getDefaultExtension(step)).deresolve(getProjectURI());
+			URI deresolveSrcURI = prefixURI.appendSegment(name).appendFileExtension(AbstractCompilerChain.getDefaultFileExtension(step)).deresolve(getProjectURI());
 			List<String> stepProjectSegments = deresolveSrcURI.segmentsList();//.subList(2, segmentCount2);
 			int stepProjectSegmentCount = stepProjectSegments.size();
 			if (prefixURI.isPlatformResource() && (stepProjectSegmentCount >= 2)) {
@@ -1191,7 +1191,7 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 			@NonNull Map<@NonNull String, @Nullable String> intermediateMap) {
 		//		System.out.println("updateGroups");
 		for (String key : getIntermediateKeys()) {
-			intermediateMap.put(key, AbstractCompilerChain.getDefaultExtension(key));
+			intermediateMap.put(key, AbstractCompilerChain.getDefaultFileExtension(key));
 		}
 	}
 

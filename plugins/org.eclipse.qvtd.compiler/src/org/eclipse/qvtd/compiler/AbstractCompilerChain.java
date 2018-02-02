@@ -67,19 +67,19 @@ import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 public abstract class AbstractCompilerChain extends CompilerUtil implements CompilerChain
 {
-	private static final @NonNull Map<@NonNull String, @NonNull String> step2extension = new HashMap<>();
+	private static final @NonNull Map<@NonNull String, @NonNull String> step2fileExtension = new HashMap<>();
 	static {
-		step2extension.put(UMLX_STEP, "umlx");
-		step2extension.put(QVTR_STEP, "qvtras");
-		step2extension.put(TRACE_STEP, "trace.ecore");
-		step2extension.put(GENMODEL_STEP, "genmodel");
-		step2extension.put(QVTC_STEP, "qvtcas");
-		step2extension.put(QVTU_STEP, "qvtu.qvtcas");
-		step2extension.put(QVTM_STEP, "qvtm.qvtcas");
-		step2extension.put(QVTS_STEP, "qvtsas");
-		step2extension.put(QVTI_STEP, "qvtias");
-		step2extension.put(JAVA_STEP, "java");
-		step2extension.put(CLASS_STEP, "class");
+		step2fileExtension.put(UMLX_STEP, "umlx");
+		step2fileExtension.put(QVTR_STEP, "qvtras");
+		step2fileExtension.put(TRACE_STEP, "trace.ecore");
+		step2fileExtension.put(GENMODEL_STEP, "genmodel");
+		step2fileExtension.put(QVTC_STEP, "qvtcas");
+		step2fileExtension.put(QVTU_STEP, "qvtu.qvtcas");
+		step2fileExtension.put(QVTM_STEP, "qvtm.qvtcas");
+		step2fileExtension.put(QVTS_STEP, "qvtsas");
+		step2fileExtension.put(QVTI_STEP, "qvtias");
+		step2fileExtension.put(JAVA_STEP, "java");
+		step2fileExtension.put(CLASS_STEP, "class");
 	}
 
 	protected static class JavaResult
@@ -321,8 +321,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		}
 	}
 
-	public static @Nullable String getDefaultExtension(@NonNull String key) {
-		return step2extension.get(key);
+	public static @Nullable String getDefaultFileExtension(@NonNull String key) {
+		return step2fileExtension.get(key);
 	}
 
 	public static @NonNull Transformation getTransformation(Resource resource) throws IOException {
@@ -355,8 +355,15 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	 */
 	protected final @NonNull CompilerOptions options;
 
+	/**
+	 * The fully qualified file name of the model-to-model transformation
+	 */
 	protected final @NonNull URI txURI;
-	protected final @NonNull URI prefixURI;
+
+	/**
+	 * The fully qualified file name prefix from which default intermediate filenames are created by appending a file extension
+	 */
+	protected final @NonNull URI intermediateFileNamePrefixURI;
 
 	private @Nullable List<@NonNull Listener> listeners = null;
 
@@ -367,11 +374,11 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	protected final @NonNull QVTs2QVTiCompilerStep qvts2qvtiCompilerStep;
 	protected final @NonNull QVTi2JavaCompilerStep qvti2javaCompilerStep;
 
-	protected AbstractCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull CompilerOptions options) {
+	protected AbstractCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
 		this.environmentFactory = environmentFactory;
 		this.asResourceSet = environmentFactory.getMetamodelManager().getASResourceSet();
 		this.txURI = txURI;
-		this.prefixURI = prefixURI;//txURI.trimSegments(1).appendSegment("temp").appendSegment(txURI.trimFileExtension().lastSegment());
+		this.intermediateFileNamePrefixURI = intermediateFileNamePrefixURI;
 		this.options = options;
 		this.java2classCompilerStep = createJava2ClassCompilerStep();
 		this.qvtc2qvtuCompilerStep = createQVTc2QVTuCompilerStep();
@@ -507,7 +514,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	@Override
 	public @NonNull URI getURI(@NonNull String stepKey, CompilerOptions.@NonNull Key<URI> uriKey) {
 		URI uri = basicGetOption(stepKey, URI_KEY);
-		return uri != null ? uri : prefixURI.appendFileExtension(step2extension.get(stepKey));
+		return uri != null ? uri : intermediateFileNamePrefixURI.appendFileExtension(step2fileExtension.get(stepKey));
 	}
 
 	protected @NonNull Class<? extends Transformer> java2class(@NonNull JavaResult javaResult) throws Exception {

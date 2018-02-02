@@ -299,6 +299,8 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 
 	private final @NonNull TypedModel primitiveTypeModel = QVTbaseFactory.eINSTANCE.createTypedModel();
 
+	private @Nullable TypedModel traceTypedModel = null;
+
 	private /*@LazyNonNull*/ OperationId oclAnyEqualsOperationId;
 	private /*@LazyNonNull*/ OperationId oclAnyNotEqualsOperationId;
 	private /*@LazyNonNull*/ OperationId oclElementOclContainerId;
@@ -315,7 +317,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	protected RootDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
 		this.standardLibrary = context.getStandardLibrary();
-		primitiveTypeModel.setName(QVTbaseUtil.PRIMITIVE_DOMAIN_NAME);
+		primitiveTypeModel.setName(QVTbaseUtil.PRIMITIVE_TYPED_MODEL_NAME);
 		add(primitiveTypeModel);
 		validUsages.put(NONE_USAGE_BIT_MASK, getConstantUsage(NONE_USAGE_BIT_MASK));
 		validUsages.put(PRIMITIVE_USAGE_BIT_MASK, getConstantUsage(PRIMITIVE_USAGE_BIT_MASK));
@@ -362,11 +364,12 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		}
 	}
 
+	public void analyzeTracePackage(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Package tracePackage) {}
+
 	public @NonNull Map<Element, DomainUsage> analyzeTransformation(@NonNull Transformation transformation) {
 		int unenforceableMask = 0;
 		int enforceableMask = 0;
 		CompleteModel completeModel = context.getCompleteModel();
-		TypedModel traceTypedModel = null;
 		for (@NonNull TypedModel typedModel : ClassUtil.nullFree(transformation.getModelParameter())) {
 			if (typedModel == primitiveTypeModel) {
 				continue;
@@ -654,6 +657,10 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 	@Override
 	protected @NonNull RootDomainUsageAnalysis getRootAnalysis() {
 		return this;
+	}
+
+	public @NonNull TypedModel getTraceTypedModel() {
+		return ClassUtil.nonNullState(traceTypedModel);
 	}
 
 	public @NonNull TypedModel getTypedModel(int i) {

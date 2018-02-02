@@ -49,12 +49,11 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-
 import com.google.common.collect.Iterables;
 
 public class QVTbaseUtil extends PivotUtil
 {
-	public static final @NonNull String PRIMITIVE_DOMAIN_NAME = "$primitive$";
+	public static final @NonNull String PRIMITIVE_TYPED_MODEL_NAME = "$primitive$";
 	public static final @NonNull String TRACE_CLASS_NAME = "$trace$";
 	public static final @NonNull String TRACE_TYPED_MODEL_NAME = "middle"; //"$trace$";
 
@@ -154,6 +153,10 @@ public class QVTbaseUtil extends PivotUtil
 		return null;
 	}
 
+	public static @Nullable Rule basicGetOverridden(@NonNull Rule rule) {
+		return rule.getOverridden();
+	}
+
 	public static boolean containsAll(@NonNull Iterable<@NonNull ?> iterable1, @NonNull Iterable<@NonNull ?> iterable2) {
 		for (Object e : iterable1) {
 			if (!Iterables.contains(iterable2, e)) {
@@ -247,6 +250,26 @@ public class QVTbaseUtil extends PivotUtil
 				getAllUsedPackagesInternal(allUsedPackages, usedPackage.getImportedPackages());
 			}
 		}
+	}
+
+	public static @NonNull Rule getBaseRule(@NonNull Rule rule) {
+		int i = 0;
+		Rule aRule = rule;
+		while ((aRule = aRule.getOverridden()) != null) {
+			if (i++ < 100) {	// More than a 100 is probably a cycle. Try again with an accurate cycle check
+				return aRule;
+			}
+		}
+		Set<Rule> rules = new HashSet<>();
+		rules.add(rule);
+		aRule = rule;
+		while ((aRule = aRule.getOverridden()) != null) {
+			if (!rules.add(aRule)) {
+				System.err.println("Cyclic override of '" + rule + "' ignored.");
+				return rule;
+			}
+		}
+		return rule;
 	}
 
 	public static @NonNull OCLExpression getConditionExpression(@NonNull Predicate asPredicate) {
@@ -453,6 +476,13 @@ public class QVTbaseUtil extends PivotUtil
 
 	public static @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Package> getUsedPackages(@NonNull TypedModel asTypedModel) {
 		return ClassUtil.nullFree(asTypedModel.getUsedPackage());
+	}
+
+	/**
+	 * Return true if rRelation participates in a hierarchy of overriding/overridden relations.
+	 */
+	public static boolean hasOverrides(@NonNull Rule rule) {
+		return (rule.getOverridden() != null) || !rule.getOverrides().isEmpty();
 	}
 
 	/**

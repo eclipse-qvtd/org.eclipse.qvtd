@@ -10,9 +10,13 @@
  */
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
@@ -23,9 +27,14 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.QVTrelationDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.RelationAnalysis.QVTrelationExpressionAnalyzer;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtrelation.Relation;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 
@@ -62,15 +71,40 @@ public class QVTrelationScheduleManager extends AbstractScheduleManager
 	}
 
 	@Override
-	public @NonNull RelationAnalysis createRuleAnalysis(@NonNull Rule asRule) {
+	public @NonNull RelationAnalysis createRuleAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull Rule asRule) {
 		RuleRegion ruleRegion = QVTscheduleFactory.eINSTANCE.createRuleRegion();
 		ruleRegion.setOwningScheduleModel(scheduleModel);
 		ruleRegion.setReferredRule(asRule);
-		return new RelationAnalysis(this, qvtuConfiguration, ruleRegion);
+		return new RelationAnalysis(transformationAnalysis, qvtuConfiguration, ruleRegion);
+	}
+
+	@Override
+	public @NonNull QVTrelationDomainUsageAnalysis getDomainUsageAnalysis() {
+		return (QVTrelationDomainUsageAnalysis) super.getDomainUsageAnalysis();
 	}
 
 	@Override
 	protected @NonNull URI getGraphsBaseURI() {
 		return getScheduleModel().eResource().getURI().trimSegments(1).appendSegment("graphs").appendSegment("");
+	}
+
+	@Override
+	public @NonNull Rule getReferredRule(@NonNull OCLExpression invocation) {
+		return QVTrelationUtil.getReferredRelation((RelationCallExp) invocation);
+	}
+
+	@Override
+	public @NonNull Domain getRootVariableDomain(@NonNull VariableDeclaration variable) {
+		return QVTrelationUtil.getRootVariableDomain(variable);
+	}
+
+	@Override
+	public @NonNull List<@NonNull VariableDeclaration> getRootVariables(@NonNull Domain domain) {
+		return new ArrayList<>(QVTrelationUtil.getRootVariables((RelationDomain)domain));		// FIXME avoid new list
+	}
+
+	@Override
+	public boolean isTopLevel(@NonNull Rule rule) {
+		return ((Relation)rule).isIsTopLevel();
 	}
 }

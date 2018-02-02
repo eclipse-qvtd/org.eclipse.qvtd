@@ -26,6 +26,7 @@ import org.eclipse.ocl.pivot.utilities.AS2XMIidVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverLocateVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverNormalizeVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverResolveVisitor;
+import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 
 /**
@@ -110,12 +111,12 @@ public class QVTscheduleASResourceFactory extends AbstractASResourceFactory
 	public @NonNull TemplateParameterSubstitutionVisitor createTemplateParameterSubstitutionVisitor(
 			@NonNull EnvironmentFactory environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
 		return new QVTscheduleTemplateParameterSubstitutionVisitor((EnvironmentFactoryInternal) environmentFactory, selfType, selfTypeValue);
-	}
+	} */
 
 	@Override
 	public @NonNull ToStringVisitor createToStringVisitor(@NonNull StringBuilder s) {
 		return new QVTscheduleToStringVisitor(s);
-	} */
+	}
 
 	@Override
 	public @NonNull ASResourceFactory getASResourceFactory() {

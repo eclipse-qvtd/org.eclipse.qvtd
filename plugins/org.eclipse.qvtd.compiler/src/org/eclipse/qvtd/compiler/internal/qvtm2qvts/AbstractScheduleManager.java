@@ -49,6 +49,8 @@ import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2trace.NameGenerator;
+import org.eclipse.qvtd.compiler.internal.qvts2trace.TransformationAnalysis2TracePackage;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -81,6 +83,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 {
 	protected final @NonNull ScheduleModel scheduleModel;
 	protected final @NonNull EnvironmentFactory environmentFactory;
+	protected final @NonNull NameGenerator nameGenerator = new NameGenerator();
 	private CompilerOptions.@Nullable StepOptions schedulerOptions;
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
 	protected final @NonNull DatumCaches datumCaches;
@@ -117,6 +120,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	private final @NonNull Map<@NonNull Transformation, @NonNull TransformationAnalysis> transformation2transformationAnalysis = new HashMap<>();
 	private final boolean doDotGraphs;
 	private final boolean doYedGraphs;
+
+	private final @NonNull Map<@NonNull TransformationAnalysis, @NonNull TransformationAnalysis2TracePackage> transformationAnalysis2transformationAnalysis2tracePackage = new HashMap<>();
 
 	protected AbstractScheduleManager(@NonNull ScheduleModel scheduleModel, @NonNull EnvironmentFactory environmentFactory,
 			CompilerOptions.@Nullable StepOptions schedulerOptions) {
@@ -219,9 +224,17 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		}
 	}
 
-	protected void analyzeRules(@NonNull TransformationAnalysis transformationAnalysis) {
-		domainUsageAnalysis.analyzeTransformation(transformationAnalysis.getTransformation());
-		transformationAnalysis.analyzeRules();
+	@Override
+	public void analyzeRules() {
+		for (@NonNull TransformationAnalysis transformationAnalysis : transformation2transformationAnalysis.values()) {
+			transformationAnalysis.analyzeRules();
+		}
+	}
+
+	@Override
+	public void analyzeTracePackage(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Package tracePackage) {
+		domainUsageAnalysis.analyzeTracePackage(typedModel, tracePackage);
+		datumCaches.analyzeTracePackage(typedModel, tracePackage);
 	}
 
 	protected void analyzeTransformation(@NonNull TransformationAnalysis transformationAnalysis) {
@@ -230,18 +243,18 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public void analyzeRules() {
-		for (@NonNull TransformationAnalysis transformationAnalysis : transformation2transformationAnalysis.values()) {
-			analyzeRules(transformationAnalysis);
-		}
-	}
-
-	@Override
 	public void analyzeTransformations() {
 		for (@NonNull TransformationAnalysis transformationAnalysis : transformation2transformationAnalysis.values()) {
 			analyzeTransformation(transformationAnalysis);
 		}
 		analyzeCallTree();
+	}
+
+	@Override
+	public void analyzeUsages() {
+		for (@NonNull TransformationAnalysis transformationAnalysis : transformation2transformationAnalysis.values()) {
+			domainUsageAnalysis.analyzeTransformation(transformationAnalysis.getTransformation());
+		}
 	}
 
 	@Override
@@ -545,6 +558,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
+	public @NonNull NameGenerator getNameGenerator() {
+		return nameGenerator;
+	}
+
+	@Override
 	public @NonNull ClassDatum getOclVoidClassDatum() {
 		ClassDatum oclVoidClassDatum2 = oclVoidClassDatum;
 		if (oclVoidClassDatum2 == null) {
@@ -563,9 +581,9 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		return operationDependencyAnalysis2;
 	}
 
-	public @NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property) {
-		return datumCaches.getPropertyDatum(classDatum, property);
-	}
+	//	public @NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property) {
+	//		return datumCaches.getPropertyDatum(classDatum, property);
+	//	}
 
 	@Override
 	public @NonNull RegionAnalysis getRegionAnalysis(@NonNull Region region) {
@@ -629,6 +647,16 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	public @NonNull TransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation) {
 		TransformationAnalysis transformationAnalysis = transformation2transformationAnalysis.get(transformation);
 		return ClassUtil.nonNullState(transformationAnalysis);
+	}
+
+	@Override
+	public @NonNull TransformationAnalysis2TracePackage getTransformationAnalysis2TracePackage(@NonNull TransformationAnalysis transformationAnalysis) {
+		TransformationAnalysis2TracePackage transformationAnalysis2tracePackage = transformationAnalysis2transformationAnalysis2tracePackage.get(transformationAnalysis);
+		if (transformationAnalysis2tracePackage == null) {
+			transformationAnalysis2tracePackage = new TransformationAnalysis2TracePackage(this, transformationAnalysis);
+			transformationAnalysis2transformationAnalysis2tracePackage.put(transformationAnalysis, transformationAnalysis2tracePackage);
+		}
+		return transformationAnalysis2tracePackage;
 	}
 
 	@Override

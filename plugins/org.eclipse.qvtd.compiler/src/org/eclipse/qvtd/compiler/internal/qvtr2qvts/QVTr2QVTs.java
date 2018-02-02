@@ -27,6 +27,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Comment;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
+import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotFactory;
@@ -48,8 +49,10 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.QVTrelationDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -214,7 +217,9 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			context.pushScope(rOut);
 			context.addTrace(rIn, rOut);
 			for (@NonNull VariableDeclaration vIn : QVTrelationUtil.getOwnedVariables(rIn)) {
-				relationAnalysis.analyzeVariableDeclaration(vIn);
+				if (!QVTrelationUtil.isTraceClassVariable(vIn)) {
+					relationAnalysis.analyzeVariableDeclaration(vIn);
+				}
 			}
 			Pattern whenIn = rIn.getWhen();
 			if (whenIn != null) {
@@ -443,6 +448,11 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		scopeStack.pop();
 	}
 
+	@Override
+	public @NonNull QVTrelationScheduleManager getScheduleManager() {
+		return (QVTrelationScheduleManager) super.getScheduleManager();
+	}
+
 	public void pushScope(@NonNull Nameable scope) {
 		assert !scopeStack.contains(scope);
 		scopeStack.push(scope);
@@ -459,6 +469,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 	public void transform(@NonNull Resource source, @NonNull Resource target, @Nullable String traceNsURI, @NonNull Resource traceResource) throws IOException {
 		debugSource = source;
 		debugTarget = target;
+		scheduleManager.analyzeUsages();
 		//
 		//	Do the transformation for each CoreModel. First a createVisitor descent of the input, then an updateVisitor descent of the output.
 		//
@@ -481,18 +492,25 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 				}
 			}
 		}
+		scheduleManager.analyzeRules();
+		Model traceModel = PivotFactory.eINSTANCE.createModel();
+		traceModel.setExternalURI(traceResource.getURI().toString());
+		traceResource.getContents().add(traceModel);
 		for (@NonNull TransformationAnalysis transformationAnalysis : scheduleManager.getTransformationAnalyses()) {
-			for (@NonNull RuleAnalysis mappingRegion : transformationAnalysis.getRuleAnalyses()) {
-				mappingRegion.registerConsumptionsAndProductions();
-			}
-		}
-		if (AbstractQVTb2QVTs.DEBUG_GRAPHS.isActive()) {
-			for (@NonNull TransformationAnalysis transformationAnalysis : scheduleManager.getTransformationAnalyses()) {
-				for (@NonNull RuleAnalysis mappingRegion : transformationAnalysis.getRuleAnalyses()) {
-					mappingRegion.registerConsumptionsAndProductions();
+			if (AbstractQVTb2QVTs.DEBUG_GRAPHS.isActive()) {
+				for (@NonNull RuleAnalysis ruleAnalysis : transformationAnalysis.getRuleAnalyses()) {
+					scheduleManager.writeDebugGraphs(ruleAnalysis.getRegion(), null);
 				}
-				List<@NonNull RuleAnalysis> ruleAnalyses = Lists.newArrayList(transformationAnalysis.getRuleAnalyses());
-				Collections.sort(ruleAnalyses, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
+			}
+			QVTrelationDomainUsageAnalysis domainUsageAnalysis = getScheduleManager().getDomainUsageAnalysis();
+			TypedModel traceTypedModel = domainUsageAnalysis.getTraceTypedModel();
+			transformationAnalysis.synthesizeTracePackage(traceTypedModel, traceModel);
+			List<@NonNull RuleAnalysis> ruleAnalyses = Lists.newArrayList(transformationAnalysis.getRuleAnalyses());
+			Collections.sort(ruleAnalyses, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
+			for (@NonNull RuleAnalysis ruleAnalysis : ruleAnalyses) {
+				ruleAnalysis.registerConsumptionsAndProductions();
+			}
+			if (AbstractQVTb2QVTs.DEBUG_GRAPHS.isActive()) {
 				for (@NonNull RuleAnalysis ruleAnalysis : ruleAnalyses) {
 					scheduleManager.writeDebugGraphs(ruleAnalysis.getRegion(), null);
 				}
@@ -502,21 +520,26 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			scheduleManager.writeDebugGraphs("0-init", true, true, true);
 		}
 		//
-		//	Debug code to conform that every output object is traceable to some input object.
+		//	Debug code to confirm that every output object is traceable to some input object.
 		//
 		for (TreeIterator<EObject> tit = target.getAllContents(); tit.hasNext(); ) {
 			EObject eTarget = tit.next();
 			EObject eSource = target2source.get(eTarget);
 			EObject eCopied = debugCopy2source.get(eTarget);
 			if ((eSource == null) && (eCopied == null)) {
-				System.err.println("No source for " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
+				// FIXME				System.err.println("No source for " + eTarget.eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget)) + ":" + eTarget + " / " + eTarget.eContainer().eClass().getName() + "@" + Integer.toString(System.identityHashCode(eTarget.eContainer())));
 			}
 		}
 
 		// FIXME the following lines should go obsolete
 		List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, target);
 		if (missingOperationCallSources != null) {
-			System.err.println("Missing OperationCallExp sources  were fixed up for '" + target.getURI() + "'");
+			System.err.println("Missing OperationCallExp sources were fixed up for '" + target.getURI() + "'");
 		}
+		boolean missingTraceArtefacts = QVTrelationUtil.rewriteMissingTraceArtefacts(environmentFactory, target);
+		if (missingTraceArtefacts) {
+			System.err.println("Missing trace TypedModel.Class artefacts were fixed up for '" + target.getURI() + "'");
+		}
+		scheduleManager.analyzeTransformations();
 	}
 }

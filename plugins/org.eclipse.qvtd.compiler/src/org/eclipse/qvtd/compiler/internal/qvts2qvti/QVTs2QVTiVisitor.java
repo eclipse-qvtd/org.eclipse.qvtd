@@ -217,8 +217,14 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 				assert qvtiMiddleTypedModel  == null;
 				qvtiMiddleTypedModel = qvtiTypedModel;
 			}
+			else if (QVTbaseUtil.TRACE_TYPED_MODEL_NAME.equals(typedModelName)) {
+				assert qvtiMiddleTypedModel  == null;
+				qvtiMiddleTypedModel = qvtiTypedModel;
+			}
 			qvtmTypedModel2qvtiTypedModel.put(qvtmTypedModel, qvtiTypedModel);
-			qvtiTransformation.getModelParameter().add(qvtiTypedModel);
+			if (!QVTbaseUtil.PRIMITIVE_TYPED_MODEL_NAME.equals(typedModelName)) {
+				qvtiTransformation.getModelParameter().add(qvtiTypedModel);
+			}
 		}
 		for (Rule rule : qvtmTransformation.getRule()) {
 			for (Domain domain : rule.getDomain()) {

@@ -348,5 +348,15 @@ public class PivotTestCase extends TestCase
 	protected void setUp() throws Exception {
 		super.setUp();
 		TEST_START.println("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
+		startTime = System.nanoTime();
+	}
+	static long startTime;
+
+	@Override
+	protected void tearDown()
+			throws Exception {
+		// TODO Auto-generated method stub
+		long time = System.nanoTime() - startTime;
+		super.tearDown();
 	}
 }
