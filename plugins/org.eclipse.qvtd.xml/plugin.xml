@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated XMLmodel -->
+      <package
+            uri="http://www.eclipse.org/qvt/2015/XML"
+            class="org.eclipse.qvtd.xml.XMLmodelPackage"
+            genModel="model/XMLmodel.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated XMLmodel -->
+      <parser
+            type="xmlmodel"
+            class="org.eclipse.qvtd.xml.util.XMLmodelResourceFactoryImpl"/>
+   </extension>
+</plugin>
