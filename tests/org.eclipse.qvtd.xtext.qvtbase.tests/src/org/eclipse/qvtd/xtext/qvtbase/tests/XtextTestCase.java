@@ -33,6 +33,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.tests.TestFile;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystem;
+import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Element;
@@ -330,7 +331,7 @@ public class XtextTestCase extends PivotTestCase
 				File testBundleFile = new File(".project");
 				assert !testBundleFile.exists() : "Default working directory should be the workspace rather than a project: " + testBundleFile.getAbsolutePath();
 			}
-			testFileSystem = testFileSystem2 = TestFileSystem.create();
+			testFileSystem = testFileSystem2 = TestFileSystem.create(new TestFileSystemHelper());
 		}
 		return testFileSystem2;
 	}

@@ -31,6 +31,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestFile;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystem;
+import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
@@ -158,7 +159,7 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 				String absolutePath = testBundleFile.getAbsolutePath();
 				assert !testBundleFile.exists() : "Default working directory should be the workspace rather than a project: " + absolutePath;
 			}
-			testFileSystem = testFileSystem2 = TestFileSystem.create();
+			testFileSystem = testFileSystem2 = TestFileSystem.create(new TestFileSystemHelper());
 		}
 		return testFileSystem2;
 	}
