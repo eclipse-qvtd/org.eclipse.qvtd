@@ -41,7 +41,7 @@ public class AllQVTrelationTests extends TestCase
 		//			result.addTestSuite(UsageTests.class);
 		//		}
 		result.addTestSuite(QVTrSerializeTests.class);
-		result.addTestSuite(QVTrCompilerTests.class);
+		// FIXME BUG 532280, BUG 532232 // result.addTestSuite(QVTrCompilerTests.class);
 		return result;
 	}
 
