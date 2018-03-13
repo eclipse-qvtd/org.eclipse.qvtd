@@ -32,7 +32,7 @@ public class AllUMLXTests extends TestCase
 		TestSuite result = new TestSuite("All UMLX Tests");
 		result.addTestSuite(UMLXSerializeTests.class);
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {		// FIXME should work as plugin test too
-			// FIXME BUG 532280, BUG 532232 // result.addTestSuite(UMLXCompilerTests.class);
+			result.addTestSuite(UMLXCompilerTests.class);
 		}
 		return result;
 	}
