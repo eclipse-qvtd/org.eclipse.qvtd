@@ -12,8 +12,6 @@ package org.eclipse.qvtd.umlx.tests;
 
 import java.util.Arrays;
 
-import org.eclipse.emf.common.EMFPlugin;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -31,9 +29,7 @@ public class AllUMLXTests extends TestCase
 	public static Test suite() {
 		TestSuite result = new TestSuite("All UMLX Tests");
 		result.addTestSuite(UMLXSerializeTests.class);
-		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {		// FIXME should work as plugin test too
-			result.addTestSuite(UMLXCompilerTests.class);
-		}
+		result.addTestSuite(UMLXCompilerTests.class);
 		return result;
 	}
 

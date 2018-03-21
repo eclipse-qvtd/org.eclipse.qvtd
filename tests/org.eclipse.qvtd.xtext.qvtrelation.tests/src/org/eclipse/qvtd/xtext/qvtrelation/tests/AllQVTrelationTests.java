@@ -33,12 +33,8 @@ public class AllQVTrelationTests extends TestCase
 		result.addTestSuite(QVTrLoadTests.class);
 		result.addTestSuite(QVTrDomainUsageTests.class);
 		result.addTestSuite(QVTr2QVTrTests.class);
-		//		result.addTestSuite(QVTrPartialRelationAnalysisTests.class);
 		//		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
-		//			result.addTestSuite(EditorTests.class);
-		//		}
-		//		else {	// Bug 370824 Bug 371394 causes this to fail on Hudson
-		//			result.addTestSuite(UsageTests.class);
+		//			result.addTestSuite(EditorTests.class);		-- not yet written
 		//		}
 		result.addTestSuite(QVTrSerializeTests.class);
 		result.addTestSuite(QVTrCompilerTests.class);

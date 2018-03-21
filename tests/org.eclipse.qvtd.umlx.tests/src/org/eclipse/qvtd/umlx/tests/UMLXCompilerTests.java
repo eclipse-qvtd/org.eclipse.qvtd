@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
+import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
@@ -45,7 +46,7 @@ import org.junit.Test;
  */
 public class UMLXCompilerTests extends LoadTestCase
 {
-	protected static class MyQVT extends AbstractTestQVT
+	protected class MyQVT extends AbstractTestQVT
 	{
 		protected class InstrumentedCompilerChain extends UMLXCompilerChain
 		{
@@ -92,6 +93,11 @@ public class UMLXCompilerTests extends LoadTestCase
 		@Override
 		protected @NonNull String getBasePrefix() {
 			return "org.eclipse.qvtd.umlx.tests";
+		}
+
+		@Override
+		protected @NonNull ProjectManager getTestProjectManager() throws Exception {
+			return EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(true) : UMLXCompilerTests.this.getTestProjectManager();
 		}
 	}
 
