@@ -185,4 +185,10 @@ public class PatternVariableNodeImpl extends VariableNodeImpl implements Pattern
 	public boolean isPattern() {
 		return true;
 	}
+
+	@Override
+	public void setName(String newName) {
+		assert !"true".equals(newName);
+		super.setName(newName);
+	}
 } //PatternVariableNodeImpl

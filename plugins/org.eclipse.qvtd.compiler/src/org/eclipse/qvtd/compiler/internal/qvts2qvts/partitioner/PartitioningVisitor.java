@@ -20,6 +20,7 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
+import org.eclipse.qvtd.pivot.qvtschedule.BooleanValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
@@ -86,6 +87,18 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 
 	public @NonNull MicroMappingRegion getRegion() {
 		return partialRegion;
+	}
+
+	@Override
+	public @Nullable Element visitBooleanValueNode(@NonNull BooleanValueNode node) {
+		Role nodeRole = partition.getNodeRole(node);
+		if (nodeRole == null) {
+			return null;
+		}
+		assert nodeRole == Role.CONSTANT;
+		Node partialNode =  node.createNode(nodeRole, partialRegion);
+		addNode(node, partialNode);
+		return partialNode;
 	}
 
 	@Override

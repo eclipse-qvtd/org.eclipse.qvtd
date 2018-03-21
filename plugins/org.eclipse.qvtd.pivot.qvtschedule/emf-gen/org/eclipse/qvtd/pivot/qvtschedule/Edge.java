@@ -324,6 +324,11 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	boolean isSecondary();
 
 	/**
+	 * Return true if this edge is for a multi-region speculated predicate.
+	 */
+	boolean isSpeculated();
+
+	/**
 	 * Return true is this edge is from a trace node to its success node.
 	 */
 	boolean isSuccess();

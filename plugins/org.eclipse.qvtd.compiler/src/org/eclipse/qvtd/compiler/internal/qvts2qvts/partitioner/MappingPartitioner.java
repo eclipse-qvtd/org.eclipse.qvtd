@@ -340,7 +340,7 @@ public class MappingPartitioner implements Nameable
 	private void analyzeNodes() {
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
 			if (node.isExplicitNull()) {
-				assert node.isConstant() && hasNoComputationInputs(node);
+				assert node.isConstant() && hasNoComputationOrSuccessInputs(node);
 				leafConstantNodes.add(node);
 			}
 			else if (node.isPattern()) {
@@ -354,7 +354,7 @@ public class MappingPartitioner implements Nameable
 						addConsumptionOfMiddleNode(node);
 					}
 					else if (node.isSpeculated()) {
-						if (!node.isHead()) {		// Don't create a self-comsumption cycle
+						if (!node.isHead()) {		// Don't create a self-consumption cycle
 							addConsumptionOfMiddleNode(node);
 						}
 					}
@@ -389,7 +389,7 @@ public class MappingPartitioner implements Nameable
 			}
 			else if (node.isOperation()) {
 				if (node.isConstant()) {
-					if (hasNoComputationInputs(node)) {
+					if (hasNoComputationOrSuccessInputs(node)) {
 						leafConstantNodes.add(node);
 					}
 				}
@@ -877,6 +877,15 @@ public class MappingPartitioner implements Nameable
 	private boolean hasNoComputationInputs(@NonNull Node node) {
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 			if (edge.isComputation()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean hasNoComputationOrSuccessInputs(@NonNull Node node) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+			if (edge.isComputation() || edge.isSuccess()) {
 				return false;
 			}
 		}

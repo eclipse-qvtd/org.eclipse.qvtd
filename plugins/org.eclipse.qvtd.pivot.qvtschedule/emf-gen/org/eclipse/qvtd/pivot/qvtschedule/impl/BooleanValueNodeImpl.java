@@ -186,6 +186,7 @@ public class BooleanValueNodeImpl extends OperationNodeImpl implements BooleanVa
 
 	@Override
 	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
+		assert nodeRole == Role.CONSTANT;
 		BooleanValueNodeImpl node = (BooleanValueNodeImpl) super.createNode(nodeRole, region);
 		node.setBooleanValue(booleanValue);
 		return node;
@@ -201,5 +202,11 @@ public class BooleanValueNodeImpl extends OperationNodeImpl implements BooleanVa
 	public void setUtility(@NonNull Utility utility) {
 		assert (utility == Utility.STRONGLY_MATCHED) || (utility == Utility.WEAKLY_MATCHED);
 		super.setUtility(utility);
+	}
+
+	@Override
+	public void setNodeRole(Role newNodeRole) {
+		assert newNodeRole == Role.CONSTANT;
+		super.setNodeRole(newNodeRole);
 	}
 } //BooleanValueNodeImpl
