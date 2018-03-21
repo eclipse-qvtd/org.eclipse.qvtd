@@ -62,6 +62,10 @@ class NewSpeculatedPartition extends AbstractPartition
 		//
 		//		resolveTrueNodes();
 		//
+		//	Add the success predicates.
+		//
+		resolveSuccessEdges();
+		//
 		//	Ensure that the predecessors of each node are included in the partition.
 		//
 		resolvePrecedingNodes();
@@ -73,10 +77,6 @@ class NewSpeculatedPartition extends AbstractPartition
 		//	Join up the edges.
 		//
 		resolveEdges();
-		//
-		//	Add the success predicates.
-		//
-		resolveSuccessNodes();
 	}
 
 
@@ -108,7 +108,10 @@ class NewSpeculatedPartition extends AbstractPartition
 	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
 		Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
 		if (edgeRole == Role.REALIZED && partitioner.hasRealizedEdge(edge)) {
-			if (edge.getEdgeTarget().isConstant()) {
+			if (edge.isSuccess()) {
+				edgeRole = Role.PREDICATED;		// Enforce sequencing
+			}
+			else if (edge.getEdgeTarget().isConstant()) {
 				edgeRole = null;		// Constant assignment already done in speculation partition. No need to predicate it with a constant to constant connection.
 			}
 			else {
@@ -145,13 +148,34 @@ class NewSpeculatedPartition extends AbstractPartition
 		}
 	}
 
-	protected void resolveSuccessNodes() {
-		for (@NonNull Node traceNode : executionNodes) {
-			assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
-			Node successNode = partitioner.getSuccessNode(traceNode);		// FIXME only optional because trace property can be missing
-			if (successNode != null) {
-				addNode(successNode, Role.PREDICATED);
+	protected void resolveSuccessEdges() {
+		//		for (@NonNull Node traceNode : executionNodes) {
+		//			assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
+		//			Node successNode = partitioner.getSuccessNode(traceNode);		// FIXME only optional because trace property can be missing
+		//			if (successNode != null) {
+		//				addNode(successNode, Role.PREDICATED);
+		//			}
+		//		}
+		for (@NonNull Edge edge : partitioner.getSuccessEdges()) {
+			if (partitioner.hasRealizedEdge(edge) || !partitioner.hasPredicatedEdge(edge)) {
+				Node sourceNode = edge.getEdgeSource();
+				Node targetNode = edge.getEdgeTarget();
+				//			if (edge.isPredicated()) {
+				//				if (!hasNode(targetNode)) {
+				//					addNode(targetNode);
+				//				}
+				//				partitioner.addPredicatedNode(targetNode);
+				//				partitioner.addEdge(edge, Role.PREDICATED, this);	// FUXME this fudges inadequate speculation
+				//			}
+				//			else {
+				if (!hasNode(sourceNode)) {
+					addNode(sourceNode);
+				}
+				if (!hasNode(targetNode)) {
+					addNode(targetNode);
+				}
 			}
+			//			}
 		}
 	}
 

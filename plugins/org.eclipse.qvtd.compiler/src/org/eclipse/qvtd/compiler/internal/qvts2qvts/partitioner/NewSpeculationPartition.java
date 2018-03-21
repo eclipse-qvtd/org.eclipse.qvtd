@@ -54,13 +54,13 @@ class NewSpeculationPartition extends AbstractPartition
 		//	For a non-top relation the predicated middle (trace) nodes become speculated nodes.
 		//
 		for (@NonNull Node traceNode : executionNodes) {
-			addNode(traceNode, Role.SPECULATED);
+			addNode(traceNode, Role.PREDICATED); //, Role.SPECULATED);
 		}
 		//
 		//	For an override relation the predicated middle dispatch nodes become speculated nodes.
 		//
 		for (@NonNull Node dispatchNode : predicatedDispatchNodes) {
-			addNode(dispatchNode, Role.SPECULATED);
+			addNode(dispatchNode); //, Role.SPECULATED);
 		}
 		//
 		//	All old nodes reachable from heads that are not part of cycles are copied to the speculation guard.
@@ -79,14 +79,14 @@ class NewSpeculationPartition extends AbstractPartition
 			}
 		}
 		for (@NonNull Node node : checkableOldNodes) {
-			boolean isCorollary = isCorollary(node) && partitioner.isCyclic(node);
+			boolean isCyclicCorollary = isCorollary(node) && partitioner.isCyclic(node);  // waiting for a cyclic corollary could deadlock
 			//			boolean isPredicated = node.isPredicated();
 			//			boolean isMatched = node.isMatched();
 			//			boolean isUnconditional = node.isUnconditional();
 			Utility utility = node.getUtility();
 			boolean isWeaklyMatched = utility == Utility.WEAKLY_MATCHED;
 			boolean isTraced = isTraced(node, executionNodes);
-			if (!isCorollary && (isTraced || isWeaklyMatched)) {
+			if (!isCyclicCorollary && (isTraced || isWeaklyMatched)) {
 				addNode(node);
 			}
 		}

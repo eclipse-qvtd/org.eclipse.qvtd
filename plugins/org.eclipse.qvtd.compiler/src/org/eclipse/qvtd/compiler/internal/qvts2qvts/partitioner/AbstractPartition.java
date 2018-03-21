@@ -86,7 +86,7 @@ abstract class AbstractPartition
 				break;
 			}
 			case PREDICATED: {
-				assert newEdgeRole == Role.PREDICATED;
+				assert (newEdgeRole == Role.PREDICATED) || (newEdgeRole == Role.SPECULATED);
 				break;
 			}
 			case REALIZED: {

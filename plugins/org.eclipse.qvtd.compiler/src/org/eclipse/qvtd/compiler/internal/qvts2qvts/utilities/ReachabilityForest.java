@@ -289,7 +289,7 @@ public class ReachabilityForest
 			if (targetNode.isOperation()) {
 				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
 					//					assert edge.isUnconditional();
-					if (edge.isComputation()) {
+					if (edge.isComputation() || edge.isSuccess()) {
 						getPredecessors(precedingNodes, edge.getEdgeSource());
 					}
 				}

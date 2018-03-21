@@ -19,6 +19,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -40,7 +41,7 @@ class NewSpeculatingPartition extends AbstractPartition
 		//	For a non-top relation the predicated middle (trace) nodes become speculated nodes.
 		//
 		for (@NonNull Node traceNode : executionNodes) {
-			addNode(traceNode, Role.SPECULATED);
+			addNode(traceNode, Role.PREDICATED); //, Role.SPECULATED);
 		}
 		//
 		//	For an override relation the predicated middle dispatch nodes become speculated nodes.
@@ -55,7 +56,7 @@ class NewSpeculatingPartition extends AbstractPartition
 		//		resolvePredicatedMiddleNodes();
 		for (@NonNull Node whenNode : partitioner.getPredicatedWhenNodes()) {
 			if (!partitioner.hasPredicatedNode(whenNode)) {
-				addNode(whenNode, Role.SPECULATED);
+				addNode(whenNode); //, Role.SPECULATED);
 			}
 		}
 		//
@@ -77,7 +78,7 @@ class NewSpeculatingPartition extends AbstractPartition
 		//
 		//	Ensure that re-used trace classes do not lead to ambiguous mappings.
 		//
-		resolveDisambiguations();
+		//		resolveDisambiguations();
 		//
 		//	Join up the edges.
 		//
@@ -90,7 +91,7 @@ class NewSpeculatingPartition extends AbstractPartition
 	}
 
 	private boolean isAlwaysSatisfied(@NonNull Edge edge) {
-		return true;		// FIXME perform compile-time speculation resolution
+		return edge.isUnconditional(); //true;		// FIXME perform compile-time speculation resolution
 	}
 
 	/*	private boolean isDownstreamFromCorollary(@NonNull Node node) {
@@ -153,11 +154,16 @@ class NewSpeculatingPartition extends AbstractPartition
 	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
 		Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
 		if (edgeRole == Role.REALIZED) {
-			/*if (edge instanceof SuccessEdge) {
-				edgeRole = null;			// FIXME fudge awaiting run-time support
-			}
-			else*/ if (partitioner.hasRealizedEdge(edge)) {
-				edgeRole = Role.PREDICATED;
+			/* if (edge instanceof SuccessEdge) {
+						edgeRole = Role.SPECULATED;			// FIXME fudge awaiting run-time support
+					}
+					else */ if (partitioner.hasRealizedEdge(edge)) {
+						edgeRole = Role.PREDICATED;
+					}
+		}
+		if (edgeRole == Role.PREDICATED) {
+			if (edge instanceof SuccessEdge) {
+				edgeRole = Role.SPECULATED;
 			}
 		}
 		return edgeRole;
@@ -206,21 +212,21 @@ class NewSpeculatingPartition extends AbstractPartition
 		for (@NonNull Edge edge : partitioner.getSuccessEdges()) {
 			Node sourceNode = edge.getEdgeSource();
 			Node targetNode = edge.getEdgeTarget();
-			if (edge.isPredicated() && isAlwaysSatisfied(edge)) {
-				//				if (!hasNode(targetNode)) {
-				//					addNode(targetNode);
-				//				}
-				//				partitioner.addPredicatedNode(targetNode);
-				partitioner.addEdge(edge, Role.PREDICATED, this);	// FUXME this fudges inadequate speculation
+			//			if (edge.isPredicated() && isAlwaysSatisfied(edge)) {
+			//				if (!hasNode(targetNode)) {
+			//					addNode(targetNode);
+			//				}
+			//				partitioner.addPredicatedNode(targetNode);
+			//				partitioner.addEdge(edge, Role.PREDICATED, this);	// FIXME this fudges inadequate speculation
+			//			}
+			//			else {
+			if (!hasNode(sourceNode)) {
+				addNode(sourceNode);
 			}
-			else {
-				if (!hasNode(sourceNode)) {
-					addNode(sourceNode);
-				}
-				if (!hasNode(targetNode)) {
-					addNode(targetNode);
-				}
+			if (!hasNode(targetNode)) {
+				addNode(targetNode);
 			}
+			//			}
 		}
 	}
 

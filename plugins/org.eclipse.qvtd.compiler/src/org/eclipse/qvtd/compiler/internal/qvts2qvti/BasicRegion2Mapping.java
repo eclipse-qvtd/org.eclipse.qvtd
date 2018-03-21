@@ -388,7 +388,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 							createCheckStatement(source2targetExp, "includes", targetVariableExp);
 						}
 						else if ((targetNode instanceof BooleanValueNode) && ((BooleanValueNode)targetNode).isBooleanValue()) {
-							createCheckStatement(source2targetExp);
+							if (edge.isSpeculated()) {
+								System.err.println("Speculation code omitted.");
+							}
+							else {
+								createCheckStatement(source2targetExp);
+							}
 						}
 						else if (nodeVariable == null) {
 							ExpressionCreator expressionCreator = new ExpressionCreator(BasicRegion2Mapping.this);
@@ -429,7 +434,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 						createCheckStatement(sourceVariableExp, edgeName, targetVariableExp);
 					}
 					else if (((BooleanValueNode)targetNode).isBooleanValue()) {
-						createCheckStatement(sourceVariableExp);
+						if (edge.isSpeculated()) {
+							System.err.println("Speculation code omitted.");
+						}
+						else {
+							createCheckStatement(sourceVariableExp);
+						}
 					}
 					else {
 						createCheckStatement(sourceVariableExp, "=", helper.createBooleanLiteralExp(false));
