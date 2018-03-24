@@ -6,6 +6,48 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
+			<name>org.eclipse.ocl.pivot.ui.oclbuilder</name>
+			<arguments>
+				<dictionary>
+					<key>disabledExtensions</key>
+					<value>*,essentialocl</value>
+				</dictionary>
+				<dictionary>
+					<key>disabledPaths</key>
+					<value>bin/**,target/**</value>
+				</dictionary>
+				<dictionary>
+					<key>enabledExtensions</key>
+					<value>ecore,ocl,oclinecore,oclstdlib,uml</value>
+				</dictionary>
+				<dictionary>
+					<key>enabledPaths</key>
+					<value>**</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.qvtd.xtext.qvtbase.ui.qvtdbuilder</name>
+			<arguments>
+				<dictionary>
+					<key>disabledExtensions</key>
+					<value>*</value>
+				</dictionary>
+				<dictionary>
+					<key>disabledPaths</key>
+					<value>target/**</value>
+				</dictionary>
+				<dictionary>
+					<key>enabledExtensions</key>
+					<value>qvtc,qvti,qvtr,umlx</value>
+				</dictionary>
+				<dictionary>
+					<key>enabledPaths</key>
+					<value>model/**</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
 			<name>org.eclipse.jdt.core.javabuilder</name>
 			<arguments>
 			</arguments>
@@ -14,5 +56,7 @@
 	<natures>
 		<nature>org.eclipse.sirius.nature.modelingproject</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.eclipse.qvtd.xtext.qvtbase.ui.qvtdnature</nature>
+		<nature>org.eclipse.ocl.pivot.ui.oclnature</nature>
 	</natures>
 </projectDescription>
