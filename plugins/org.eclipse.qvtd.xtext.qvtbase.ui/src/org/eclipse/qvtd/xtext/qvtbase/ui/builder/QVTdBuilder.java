@@ -15,8 +15,11 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.xtext.base.ui.builder.AbstractValidatingBuilder;
+import org.eclipse.ocl.xtext.base.ui.builder.AbstractBuildSelector;
 import org.eclipse.qvtd.xtext.qvtbase.ui.QVTdProjectHelper;
 
 /**
@@ -29,11 +32,23 @@ import org.eclipse.qvtd.xtext.qvtbase.ui.QVTdProjectHelper;
  */
 public class QVTdBuilder extends AbstractValidatingBuilder
 {
+	protected static class QVTdBuildSelector extends AbstractBuildSelector
+	{
+		public QVTdBuildSelector(@NonNull IProject project, @NonNull BuildType buildType, @Nullable Map<String, String> args, @Nullable IProgressMonitor monitor) {
+			super(project, buildType, args, monitor);
+		}
+
+		@Override
+		protected @NonNull String getBuilderName() {
+			return "QVTd";
+		}
+	}
+
 	private static final Logger log = Logger.getLogger(QVTdBuilder.class);
 	public static final String BUILDER_ID = QVTdProjectHelper.BUILDER_ID;
 
-	public static void deleteMarkers(@NonNull IProject project, Map<String, String> arguments) throws CoreException {
-		BuildSelector buildSelector = new BuildSelector("QVTd", project, BuildType.CLEAN, arguments, null);
+	public static void deleteMarkers(@NonNull IProject project, @Nullable Map<String, String> arguments) throws CoreException {
+		AbstractBuildSelector buildSelector = new QVTdBuildSelector(project, BuildType.CLEAN, arguments, null);
 		buildSelector.selectResources(null);
 		buildSelector.deleteMarkers();
 	}
@@ -43,8 +58,9 @@ public class QVTdBuilder extends AbstractValidatingBuilder
 	}
 
 	@Override
-	protected @NonNull String getBuilderName() {
-		return "QVTd";
+	protected @NonNull AbstractBuildSelector createBuildSelector(@NonNull IProject project, @NonNull BuildType buildType,
+			@Nullable Map<String, String> args, @Nullable IProgressMonitor monitor) {
+		return new QVTdBuildSelector(project, buildType, args, monitor);
 	}
 
 	@Override
