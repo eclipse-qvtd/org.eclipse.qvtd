@@ -26,6 +26,7 @@ public class QVTimperativeUiModule extends AbstractQVTimperativeUiModule
 {
 	public static final String PLUGIN_ID = "org.eclipse.qvtd.xtext.qvtimperative.ui";
 	public static final String EDITOR_ID = QVTimperativeActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTIMPERATIVE_QVTIMPERATIVE;
+	public static final String MARKER_ID = "org.eclipse.qvtd.xtext.qvtimperative.ui.Marker";
 
 	public QVTimperativeUiModule(AbstractUIPlugin plugin) {
 		super(plugin);

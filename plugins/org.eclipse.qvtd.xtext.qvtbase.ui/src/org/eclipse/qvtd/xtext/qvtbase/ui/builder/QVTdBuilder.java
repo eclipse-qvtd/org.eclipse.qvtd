@@ -13,6 +13,7 @@ package org.eclipse.qvtd.xtext.qvtbase.ui.builder;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -41,6 +42,24 @@ public class QVTdBuilder extends AbstractValidatingBuilder
 		@Override
 		protected @NonNull String getBuilderName() {
 			return "QVTd";
+		}
+
+		@Override
+		protected @NonNull String getMarkerId(@NonNull IFile iFile) {
+			String fileExtension = iFile.getFileExtension();
+			if ("qvtc".equals(fileExtension)) {
+				return "org.eclipse.qvtd.xtext.qvtcore.ui.Marker"; //QVTcoreUiModule.MARKER_ID;
+			}
+			else if ("qvti".equals(fileExtension)) {
+				return "org.eclipse.qvtd.xtext.qvtimperative.ui.Marker"; //QVTimperativeUiModule.MARKER_ID;
+			}
+			else if ("qvtr".equals(fileExtension)) {
+				return "org.eclipse.qvtd.xtext.qvtrelation.ui.Marker"; //QVTrelationUiModule.MARKER_ID;
+			}
+			else if ("umlx".equals(fileExtension)) {
+				return "org.eclipse.qvtd.umlx.ui.Marker"; //...UMLX....MARKER_ID;
+			}
+			return super.getMarkerId(iFile);
 		}
 	}
 

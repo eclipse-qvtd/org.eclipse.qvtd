@@ -150,25 +150,9 @@
 
 
     <!-- marker definitions for org.eclipse.qvtd.xtext.qvtimperative.QVTimperative -->
-    <extension
-            id="qvtimperative.check.fast"
-            name="%MF_Problem"
-            point="org.eclipse.core.resources.markers">
+    <extension point="org.eclipse.core.resources.markers"
+      id="Marker" name="%MF_Problem">
         <super type="org.eclipse.xtext.ui.check.fast"/>
-        <persistent value="true"/>
-    </extension>
-    <extension
-            id="qvtimperative.check.normal"
-            name="%MF_Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.normal"/>
-        <persistent value="true"/>
-    </extension>
-    <extension
-            id="qvtimperative.check.expensive"
-            name="%MF_Problem"
-            point="org.eclipse.core.resources.markers">
-        <super type="org.eclipse.xtext.ui.check.expensive"/>
         <persistent value="true"/>
     </extension>
 
@@ -210,28 +194,12 @@
          point="org.eclipse.ui.ide.markerResolution">
       <markerResolutionGenerator
             class="org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="org.eclipse.qvtd.xtext.qvtimperative.ui.qvtimperative.check.fast">
+            markerType="org.eclipse.qvtd.xtext.qvtimperative.ui.Marker">
             <attribute
                 name="FIXABLE_KEY"
                 value="true">
             </attribute>
         </markerResolutionGenerator>
-        <markerResolutionGenerator
-            class="org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="org.eclipse.qvtd.xtext.qvtimperative.ui.qvtimperative.check.normal">
-            <attribute
-                name="FIXABLE_KEY"
-                value="true">
-            </attribute>
-        </markerResolutionGenerator>
-        <markerResolutionGenerator
-            class="org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
-            markerType="org.eclipse.qvtd.xtext.qvtimperative.ui.qvtimperative.check.expensive">
-            <attribute
-                name="FIXABLE_KEY"
-                value="true">
-            </attribute>
-      </markerResolutionGenerator>
    </extension>
 
 	<extension point="org.eclipse.ui.menus">

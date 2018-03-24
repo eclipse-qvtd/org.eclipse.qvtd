@@ -26,6 +26,7 @@ public class QVTrelationUiModule extends org.eclipse.qvtd.xtext.qvtrelation.ui.A
 {
 	public static final String PLUGIN_ID = "org.eclipse.qvtd.xtext.qvtrelation.ui";
 	public static final String EDITOR_ID = QVTrelationActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTRELATION_QVTRELATION;
+	public static final String MARKER_ID = "org.eclipse.qvtd.xtext.qvtrelation.ui.Marker";
 
 	public QVTrelationUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
