@@ -18,7 +18,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.internal.utilities.LazyXMIidAssigningResourceImpl;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -921,6 +923,27 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 
 		// Create resource
 		createResource(eNS_URI);
+		/*		XMLResource resource = new XMIResourceImpl(URI.createURI(eNS_URI))
+		{
+			@Override
+			public Map<String, EObject> getIDToEObjectMap() {
+				// TODO Auto-generated method stub
+				return super.getIDToEObjectMap();
+			}
+
+			@Override
+			protected EObject getEObjectByID(String id) {
+				// TODO Auto-generated method stub
+				return super.getEObjectByID(id);
+			}
+
+			@Override
+			protected boolean useIDs()
+			{
+				return eObjectToIDMap != null || idToEObjectMap != null;
+			}
+		};
+		resource.getContents().add(this); */
 
 		// Create annotations
 		// http://www.eclipse.org/emf/2002/Ecore
@@ -1056,4 +1079,13 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		});
 	}
 
+	/**
+	 * Overridden to populate the idToEObjectMap/eObjectToIDMap maps when an attempt is made to use them.
+	 *
+	 * @generated NOT
+	 */
+	@Override
+	protected Resource createResource(/*@NonNull*/ String uri) {
+		return LazyXMIidAssigningResourceImpl.createResource(uri, this);
+	}
 } //QVTbasePackageImpl

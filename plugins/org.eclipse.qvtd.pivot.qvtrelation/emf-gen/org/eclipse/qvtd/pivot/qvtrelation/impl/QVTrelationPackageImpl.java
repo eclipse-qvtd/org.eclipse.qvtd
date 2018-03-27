@@ -18,7 +18,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.internal.utilities.LazyXMIidAssigningResourceImpl;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
@@ -1309,4 +1311,13 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		});
 	}
 
+	/**
+	 * Overridden to populate the idToEObjectMap/eObjectToIDMap maps when an attempt is made to use them.
+	 *
+	 * @generated NOT
+	 */
+	@Override
+	protected Resource createResource(/*@NonNull*/ String uri) {
+		return LazyXMIidAssigningResourceImpl.createResource(uri, this);
+	}
 } //QVTrelationPackageImpl

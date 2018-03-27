@@ -19,7 +19,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.internal.utilities.LazyXMIidAssigningResourceImpl;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
@@ -1386,4 +1388,13 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		});
 	}
 
+	/**
+	 * Overridden to populate the idToEObjectMap/eObjectToIDMap maps when an attempt is made to use them.
+	 *
+	 * @generated NOT
+	 */
+	@Override
+	protected Resource createResource(/*@NonNull*/ String uri) {
+		return LazyXMIidAssigningResourceImpl.createResource(uri, this);
+	}
 } //QVTcorePackageImpl
