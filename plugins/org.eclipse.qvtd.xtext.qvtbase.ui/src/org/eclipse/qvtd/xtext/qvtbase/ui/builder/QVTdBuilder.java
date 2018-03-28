@@ -17,6 +17,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.xtext.base.ui.builder.AbstractValidatingBuilder;
@@ -35,13 +36,8 @@ public class QVTdBuilder extends AbstractValidatingBuilder
 {
 	protected static class QVTdBuildSelector extends AbstractBuildSelector
 	{
-		public QVTdBuildSelector(@NonNull IProject project, @NonNull BuildType buildType, @Nullable Map<String, String> args, @Nullable IProgressMonitor monitor) {
+		public QVTdBuildSelector(@NonNull IProject project, @NonNull BuildType buildType, @Nullable Map<String, String> args, @NonNull IProgressMonitor monitor) {
 			super(project, buildType, args, monitor);
-		}
-
-		@Override
-		protected @NonNull String getBuilderName() {
-			return "QVTd";
 		}
 
 		@Override
@@ -67,7 +63,7 @@ public class QVTdBuilder extends AbstractValidatingBuilder
 	public static final String BUILDER_ID = QVTdProjectHelper.BUILDER_ID;
 
 	public static void deleteMarkers(@NonNull IProject project, @Nullable Map<String, String> arguments) throws CoreException {
-		AbstractBuildSelector buildSelector = new QVTdBuildSelector(project, BuildType.CLEAN, arguments, null);
+		AbstractBuildSelector buildSelector = new QVTdBuildSelector(project, BuildType.CLEAN, arguments, new NullProgressMonitor());
 		buildSelector.selectResources(null);
 		buildSelector.deleteMarkers();
 	}
@@ -78,8 +74,13 @@ public class QVTdBuilder extends AbstractValidatingBuilder
 
 	@Override
 	protected @NonNull AbstractBuildSelector createBuildSelector(@NonNull IProject project, @NonNull BuildType buildType,
-			@Nullable Map<String, String> args, @Nullable IProgressMonitor monitor) {
+			@Nullable Map<String, String> args, @NonNull IProgressMonitor monitor) {
 		return new QVTdBuildSelector(project, buildType, args, monitor);
+	}
+
+	@Override
+	protected @NonNull String getBuilderName() {
+		return "QVTd";
 	}
 
 	@Override
