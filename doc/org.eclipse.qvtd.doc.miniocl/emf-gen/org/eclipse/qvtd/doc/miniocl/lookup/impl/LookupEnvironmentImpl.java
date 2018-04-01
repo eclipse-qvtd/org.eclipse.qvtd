@@ -84,6 +84,7 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<NamedElement> getNamedElements() {
 		if (namedElements == null) {
 			namedElements = new EObjectResolvingEList<NamedElement>(NamedElement.class, this, EnvironmentPackage.LOOKUP_ENVIRONMENT__NAMED_ELEMENTS);
@@ -96,6 +97,7 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LookupEnvironment getParentEnv() {
 		if (parentEnv != null && parentEnv.eIsProxy()) {
 			InternalEObject oldParentEnv = (InternalEObject)parentEnv;
@@ -122,6 +124,7 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setParentEnv(LookupEnvironment newParentEnv) {
 		LookupEnvironment oldParentEnv = parentEnv;
 		parentEnv = newParentEnv;
@@ -134,9 +137,10 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public <NE extends NamedElement> LookupEnvironment addElements(final Collection<NE> elements) {
 		/**
-		 * 
+		 *
 		 * LookupEnvironment{
 		 *   namedElements = namedElements->includingAll(elements), parentEnv = parentEnv
 		 * }
@@ -147,7 +151,6 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property CTORid_parentEnv = idResolver.getProperty(EnvironmentTables.PROPid_parentEnv);
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_lookup_c_c_LookupEnvironment_0 = idResolver.getClass(EnvironmentTables.CLSSid_LookupEnvironment, null);
 		final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.lookup.@NonNull LookupEnvironment symbol_0 = (LookupEnvironment)TYP_lookup_c_c_LookupEnvironment_0.createInstance();
-		@SuppressWarnings("null")
 		final /*@Thrown*/ java.util.@NonNull List<NamedElement> namedElements = this.getNamedElements();
 		final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(EnvironmentTables.ORD_CLSSid_NamedElement, namedElements);
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull CollectionValue BOXED_elements = idResolver.createCollectionOfAll(EnvironmentTables.COL_TMPLid_, elements);
@@ -165,9 +168,10 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LookupEnvironment addElements(final NamedElement elements) {
 		/**
-		 * 
+		 *
 		 * LookupEnvironment{
 		 *   namedElements = namedElements->including(elements), parentEnv = parentEnv
 		 * }
@@ -178,7 +182,6 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property CTORid_parentEnv = idResolver.getProperty(EnvironmentTables.PROPid_parentEnv);
 		final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_lookup_c_c_LookupEnvironment_0 = idResolver.getClass(EnvironmentTables.CLSSid_LookupEnvironment, null);
 		final /*@Thrown*/ org.eclipse.qvtd.doc.miniocl.lookup.@NonNull LookupEnvironment symbol_0 = (LookupEnvironment)TYP_lookup_c_c_LookupEnvironment_0.createInstance();
-		@SuppressWarnings("null")
 		final /*@Thrown*/ java.util.@NonNull List<NamedElement> namedElements = this.getNamedElements();
 		final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(EnvironmentTables.ORD_CLSSid_NamedElement, namedElements);
 		final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue including = (OrderedSetValue)CollectionIncludingOperation.INSTANCE.evaluate(BOXED_namedElements, elements);
@@ -195,6 +198,7 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean hasFinalResult() {
 		throw new UnsupportedOperationException("LookupEnvironment::hasFinalResult() has been created for CG purposes. Don't call this method");
 	}
@@ -204,6 +208,7 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Executor getExecutor() {
 		throw new UnsupportedOperationException("LookupEnvironment::getEvaluator() has been created for CG purposes. Don't call this method");
 	}
@@ -216,11 +221,11 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case EnvironmentPackage.LOOKUP_ENVIRONMENT__NAMED_ELEMENTS:
-				return getNamedElements();
-			case EnvironmentPackage.LOOKUP_ENVIRONMENT__PARENT_ENV:
-				if (resolve) return getParentEnv();
-				return basicGetParentEnv();
+		case EnvironmentPackage.LOOKUP_ENVIRONMENT__NAMED_ELEMENTS:
+			return getNamedElements();
+		case EnvironmentPackage.LOOKUP_ENVIRONMENT__PARENT_ENV:
+			if (resolve) return getParentEnv();
+			return basicGetParentEnv();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -234,13 +239,13 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case EnvironmentPackage.LOOKUP_ENVIRONMENT__NAMED_ELEMENTS:
-				getNamedElements().clear();
-				getNamedElements().addAll((Collection<? extends NamedElement>)newValue);
-				return;
-			case EnvironmentPackage.LOOKUP_ENVIRONMENT__PARENT_ENV:
-				setParentEnv((LookupEnvironment)newValue);
-				return;
+		case EnvironmentPackage.LOOKUP_ENVIRONMENT__NAMED_ELEMENTS:
+			getNamedElements().clear();
+			getNamedElements().addAll((Collection<? extends NamedElement>)newValue);
+			return;
+		case EnvironmentPackage.LOOKUP_ENVIRONMENT__PARENT_ENV:
+			setParentEnv((LookupEnvironment)newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -253,12 +258,12 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case EnvironmentPackage.LOOKUP_ENVIRONMENT__NAMED_ELEMENTS:
-				getNamedElements().clear();
-				return;
-			case EnvironmentPackage.LOOKUP_ENVIRONMENT__PARENT_ENV:
-				setParentEnv((LookupEnvironment)null);
-				return;
+		case EnvironmentPackage.LOOKUP_ENVIRONMENT__NAMED_ELEMENTS:
+			getNamedElements().clear();
+			return;
+		case EnvironmentPackage.LOOKUP_ENVIRONMENT__PARENT_ENV:
+			setParentEnv((LookupEnvironment)null);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -271,10 +276,10 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case EnvironmentPackage.LOOKUP_ENVIRONMENT__NAMED_ELEMENTS:
-				return namedElements != null && !namedElements.isEmpty();
-			case EnvironmentPackage.LOOKUP_ENVIRONMENT__PARENT_ENV:
-				return parentEnv != null;
+		case EnvironmentPackage.LOOKUP_ENVIRONMENT__NAMED_ELEMENTS:
+			return namedElements != null && !namedElements.isEmpty();
+		case EnvironmentPackage.LOOKUP_ENVIRONMENT__PARENT_ENV:
+			return parentEnv != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -288,14 +293,14 @@ public class LookupEnvironmentImpl extends MinimalEObjectImpl.Container implemen
 	@SuppressWarnings({"rawtypes", "unchecked" })
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case EnvironmentPackage.LOOKUP_ENVIRONMENT___ADD_ELEMENTS__COLLECTION:
-				return addElements((Collection)arguments.get(0));
-			case EnvironmentPackage.LOOKUP_ENVIRONMENT___ADD_ELEMENTS__NAMEDELEMENT:
-				return addElements((NamedElement)arguments.get(0));
-			case EnvironmentPackage.LOOKUP_ENVIRONMENT___HAS_FINAL_RESULT:
-				return hasFinalResult();
-			case EnvironmentPackage.LOOKUP_ENVIRONMENT___GET_EXECUTOR:
-				return getExecutor();
+		case EnvironmentPackage.LOOKUP_ENVIRONMENT___ADD_ELEMENTS__COLLECTION:
+			return addElements((Collection)arguments.get(0));
+		case EnvironmentPackage.LOOKUP_ENVIRONMENT___ADD_ELEMENTS__NAMEDELEMENT:
+			return addElements((NamedElement)arguments.get(0));
+		case EnvironmentPackage.LOOKUP_ENVIRONMENT___HAS_FINAL_RESULT:
+			return hasFinalResult();
+		case EnvironmentPackage.LOOKUP_ENVIRONMENT___GET_EXECUTOR:
+			return getExecutor();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

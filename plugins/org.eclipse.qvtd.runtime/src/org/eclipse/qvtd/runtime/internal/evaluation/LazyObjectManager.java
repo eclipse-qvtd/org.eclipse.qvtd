@@ -39,6 +39,7 @@ import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.NumberValue;
 import org.eclipse.ocl.pivot.values.UnlimitedNaturalValue;
 import org.eclipse.qvtd.runtime.evaluation.AbstractObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.AbstractSlotState;
@@ -1009,7 +1010,7 @@ public class LazyObjectManager extends AbstractObjectManager
 							upper = PivotConstantsInternal.ANNOTATED_IMPLICIT_OPPOSITE_UPPER_VALUE;
 						}
 						eOppositeReference2.setUpperBound(upper.isUnlimited() ? -1 : upper.intValue());
-						if (!((IntegerValue)upper).equals(ValueUtil.ONE_VALUE)) {
+						if (!((NumberValue)upper).equals(ValueUtil.ONE_VALUE)) {
 							String uniqueValue = details.get("unique");
 							boolean isUnique = uniqueValue != null ? Boolean.valueOf(uniqueValue) : PivotConstantsInternal.ANNOTATED_IMPLICIT_OPPOSITE_UNIQUE;
 							eOppositeReference2.setUnique(isUnique);

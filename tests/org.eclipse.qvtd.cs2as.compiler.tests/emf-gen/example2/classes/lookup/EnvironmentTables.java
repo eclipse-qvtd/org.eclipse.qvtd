@@ -48,7 +48,6 @@ import org.eclipse.ocl.pivot.utilities.TypeUtil;
  * In order to ensure correct static initialization, a top level class element must be accessed
  * before any nested class element. Therefore an access to PACKAGE.getClass() is recommended.
  */
-@SuppressWarnings("nls")
 public class EnvironmentTables
 {
 	static {
@@ -261,28 +260,28 @@ public class EnvironmentTables
 		}
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Env4CG =
-		{
-			Fragments._Env4CG__OclAny /* 0 */,
-			Fragments._Env4CG__OclElement /* 1 */,
-			Fragments._Env4CG__Env4CG /* 2 */
-		};
+			{
+				Fragments._Env4CG__OclAny /* 0 */,
+				Fragments._Env4CG__OclElement /* 1 */,
+				Fragments._Env4CG__Env4CG /* 2 */
+			};
 		private static final int @NonNull [] __Env4CG = { 1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Executor =
-		{
-			Fragments._Executor__OclAny /* 0 */,
-			Fragments._Executor__OclElement /* 1 */,
-			Fragments._Executor__Executor /* 2 */
-		};
+			{
+				Fragments._Executor__OclAny /* 0 */,
+				Fragments._Executor__OclElement /* 1 */,
+				Fragments._Executor__Executor /* 2 */
+			};
 		private static final int @NonNull [] __Executor = { 1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _LookupEnvironment =
-		{
-			Fragments._LookupEnvironment__OclAny /* 0 */,
-			Fragments._LookupEnvironment__OclElement /* 1 */,
-			Fragments._LookupEnvironment__Env4CG /* 2 */,
-			Fragments._LookupEnvironment__LookupEnvironment /* 3 */
-		};
+			{
+				Fragments._LookupEnvironment__OclAny /* 0 */,
+				Fragments._LookupEnvironment__OclElement /* 1 */,
+				Fragments._LookupEnvironment__Env4CG /* 2 */,
+				Fragments._LookupEnvironment__LookupEnvironment /* 3 */
+			};
 		private static final int @NonNull [] __LookupEnvironment = { 1,1,1,1 };
 
 		/**

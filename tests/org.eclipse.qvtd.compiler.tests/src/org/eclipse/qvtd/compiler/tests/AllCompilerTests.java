@@ -18,7 +18,6 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
-@SuppressWarnings("nls")
 public class AllCompilerTests extends TestCase
 {
 	public AllCompilerTests() {

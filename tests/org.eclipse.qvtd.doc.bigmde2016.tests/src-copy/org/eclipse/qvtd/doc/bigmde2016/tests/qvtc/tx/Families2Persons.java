@@ -43,7 +43,7 @@ import org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation;
  * <br>
  * Extract each output model with {@link getRootObjects(String)}
  */
-@SuppressWarnings("nls")
+@SuppressWarnings("deprecation")
 public class Families2Persons extends AbstractTransformer
 {
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_org = IdManager.getRootPackageId("org");
@@ -228,7 +228,6 @@ public class Families2Persons extends AbstractTransformer
 				if (familyFather_0 == null) {
 					throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvtd/xtext/qvtcore/tests/Upper2Lower/1.0/Families\'::Family::lastName\'");
 				}
-				@SuppressWarnings("null")
 				final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String lastName = familyFather_0.getLastName();
 				symbol_5 = lastName;
 			}
@@ -249,7 +248,6 @@ public class Families2Persons extends AbstractTransformer
 					if (familyMother_0 == null) {
 						throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvtd/xtext/qvtcore/tests/Upper2Lower/1.0/Families\'::Family::lastName\'");
 					}
-					@SuppressWarnings("null")
 					final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String lastName_0 = familyMother_0.getLastName();
 					symbol_4 = lastName_0;
 				}
@@ -270,7 +268,6 @@ public class Families2Persons extends AbstractTransformer
 						if (familySon_0 == null) {
 							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvtd/xtext/qvtcore/tests/Upper2Lower/1.0/Families\'::Family::lastName\'");
 						}
-						@SuppressWarnings("null")
 						final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String lastName_1 = familySon_0.getLastName();
 						symbol_3 = lastName_1;
 					}
@@ -279,7 +276,6 @@ public class Families2Persons extends AbstractTransformer
 						if (familyDaughter == null) {
 							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvtd/xtext/qvtcore/tests/Upper2Lower/1.0/Families\'::Family::lastName\'");
 						}
-						@SuppressWarnings("null")
 						final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String lastName_2 = familyDaughter.getLastName();
 						symbol_3 = lastName_2;
 					}
@@ -358,7 +354,6 @@ public class Families2Persons extends AbstractTransformer
 	 */
 	protected boolean MAP_m_Member2Female_Member_Boolean_46r0(final /*@NonInvalid*/ org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.Families.@org.eclipse.jdt.annotation.NonNull Member s)  {
 		try {
-			@SuppressWarnings("null")
 			final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String firstName = s.getFirstName();
 			final /*@Thrown*/ boolean isFemale = ((FUN_isFemale)FTOR_isFemale.getUniqueComputation(this, s)).symbol_3;
 			/*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Boolean symbol_4;
@@ -406,7 +401,6 @@ public class Families2Persons extends AbstractTransformer
 	 */
 	protected boolean MAP_m_Member2Male_Member_Boolean_46r0(final /*@NonInvalid*/ org.eclipse.qvtd.doc.bigmde2016.tests.qvtc.Families.@org.eclipse.jdt.annotation.NonNull Member s_0)  {
 		try {
-			@SuppressWarnings("null")
 			final /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.NonNull String firstName = s_0.getFirstName();
 			final /*@Thrown*/ boolean isFemale = ((FUN_isFemale)FTOR_isFemale.getUniqueComputation(this, s_0)).symbol_3;
 			final /*@Thrown*/ boolean not2 = BooleanNotOperation2.INSTANCE.evaluate(isFemale).booleanValue();

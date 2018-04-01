@@ -43,7 +43,7 @@ import org.eclipse.qvtd.runtime.library.model.ModelObjectsOfKindOperation;
  * <br>
  * Extract each output model with {@link getRootObjects(String)}
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"deprecation", "unused"})
 public class Forward2Reverse extends AbstractTransformer
 {
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
@@ -72,7 +72,7 @@ public class Forward2Reverse extends AbstractTransformer
 	/*
 	 * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex.
 	 */
-	private static final @NonNull ClassId[] classIndex2classId = new @NonNull ClassId[]{
+	private static final @NonNull ClassId @NonNull [] classIndex2classId = new @NonNull ClassId[]{
 		CLSSid_DoublyLinkedList,        // 0 => DoublyLinkedList
 		CLSSid_Element                  // 1 => Element
 	};
