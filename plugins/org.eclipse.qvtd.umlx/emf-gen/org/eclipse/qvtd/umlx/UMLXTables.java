@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *************************************************************************
@@ -41,7 +41,6 @@ import org.eclipse.qvtd.umlx.UMLXTables;
  * In order to ensure correct static initialization, a top level class element must be accessed
  * before any nested class element. Therefore an access to PACKAGE.getClass() is recommended.
  */
-@SuppressWarnings("nls")
 public class UMLXTables
 {
 	static {
@@ -546,203 +545,203 @@ public class UMLXTables
 		}
 
 		private static final @NonNull ExecutorFragment @NonNull [] _RelDiagram =
-		{
-			Fragments._RelDiagram__OclAny /* 0 */,
-			Fragments._RelDiagram__OclElement /* 1 */,
-			Fragments._RelDiagram__UMLXElement /* 2 */,
-			Fragments._RelDiagram__UMLXNamedElement /* 3 */,
-			Fragments._RelDiagram__RelDiagram /* 4 */
-		};
+			{
+				Fragments._RelDiagram__OclAny /* 0 */,
+				Fragments._RelDiagram__OclElement /* 1 */,
+				Fragments._RelDiagram__UMLXElement /* 2 */,
+				Fragments._RelDiagram__UMLXNamedElement /* 3 */,
+				Fragments._RelDiagram__RelDiagram /* 4 */
+			};
 		private static final int @NonNull [] __RelDiagram = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _RelDomainNode =
-		{
-			Fragments._RelDomainNode__OclAny /* 0 */,
-			Fragments._RelDomainNode__OclElement /* 1 */,
-			Fragments._RelDomainNode__UMLXElement /* 2 */,
-			Fragments._RelDomainNode__RelNode /* 3 */,
-			Fragments._RelDomainNode__RelDomainNode /* 4 */
-		};
+			{
+				Fragments._RelDomainNode__OclAny /* 0 */,
+				Fragments._RelDomainNode__OclElement /* 1 */,
+				Fragments._RelDomainNode__UMLXElement /* 2 */,
+				Fragments._RelDomainNode__RelNode /* 3 */,
+				Fragments._RelDomainNode__RelDomainNode /* 4 */
+			};
 		private static final int @NonNull [] __RelDomainNode = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _RelEdge =
-		{
-			Fragments._RelEdge__OclAny /* 0 */,
-			Fragments._RelEdge__OclElement /* 1 */,
-			Fragments._RelEdge__UMLXElement /* 2 */,
-			Fragments._RelEdge__RelEdge /* 3 */
-		};
+			{
+				Fragments._RelEdge__OclAny /* 0 */,
+				Fragments._RelEdge__OclElement /* 1 */,
+				Fragments._RelEdge__UMLXElement /* 2 */,
+				Fragments._RelEdge__RelEdge /* 3 */
+			};
 		private static final int @NonNull [] __RelEdge = { 1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _RelInvocationEdge =
-		{
-			Fragments._RelInvocationEdge__OclAny /* 0 */,
-			Fragments._RelInvocationEdge__OclElement /* 1 */,
-			Fragments._RelInvocationEdge__UMLXElement /* 2 */,
-			Fragments._RelInvocationEdge__RelEdge /* 3 */,
-			Fragments._RelInvocationEdge__RelInvocationEdge /* 4 */
-		};
+			{
+				Fragments._RelInvocationEdge__OclAny /* 0 */,
+				Fragments._RelInvocationEdge__OclElement /* 1 */,
+				Fragments._RelInvocationEdge__UMLXElement /* 2 */,
+				Fragments._RelInvocationEdge__RelEdge /* 3 */,
+				Fragments._RelInvocationEdge__RelInvocationEdge /* 4 */
+			};
 		private static final int @NonNull [] __RelInvocationEdge = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _RelInvocationNode =
-		{
-			Fragments._RelInvocationNode__OclAny /* 0 */,
-			Fragments._RelInvocationNode__OclElement /* 1 */,
-			Fragments._RelInvocationNode__UMLXElement /* 2 */,
-			Fragments._RelInvocationNode__RelNode /* 3 */,
-			Fragments._RelInvocationNode__RelInvocationNode /* 4 */
-		};
+			{
+				Fragments._RelInvocationNode__OclAny /* 0 */,
+				Fragments._RelInvocationNode__OclElement /* 1 */,
+				Fragments._RelInvocationNode__UMLXElement /* 2 */,
+				Fragments._RelInvocationNode__RelNode /* 3 */,
+				Fragments._RelInvocationNode__RelInvocationNode /* 4 */
+			};
 		private static final int @NonNull [] __RelInvocationNode = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _RelNode =
-		{
-			Fragments._RelNode__OclAny /* 0 */,
-			Fragments._RelNode__OclElement /* 1 */,
-			Fragments._RelNode__UMLXElement /* 2 */,
-			Fragments._RelNode__RelNode /* 3 */
-		};
+			{
+				Fragments._RelNode__OclAny /* 0 */,
+				Fragments._RelNode__OclElement /* 1 */,
+				Fragments._RelNode__UMLXElement /* 2 */,
+				Fragments._RelNode__RelNode /* 3 */
+			};
 		private static final int @NonNull [] __RelNode = { 1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _RelPatternEdge =
-		{
-			Fragments._RelPatternEdge__OclAny /* 0 */,
-			Fragments._RelPatternEdge__OclElement /* 1 */,
-			Fragments._RelPatternEdge__UMLXElement /* 2 */,
-			Fragments._RelPatternEdge__RelEdge /* 3 */,
-			Fragments._RelPatternEdge__RelPatternEdge /* 4 */
-		};
+			{
+				Fragments._RelPatternEdge__OclAny /* 0 */,
+				Fragments._RelPatternEdge__OclElement /* 1 */,
+				Fragments._RelPatternEdge__UMLXElement /* 2 */,
+				Fragments._RelPatternEdge__RelEdge /* 3 */,
+				Fragments._RelPatternEdge__RelPatternEdge /* 4 */
+			};
 		private static final int @NonNull [] __RelPatternEdge = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _RelPatternNode =
-		{
-			Fragments._RelPatternNode__OclAny /* 0 */,
-			Fragments._RelPatternNode__OclElement /* 1 */,
-			Fragments._RelPatternNode__UMLXElement /* 2 */,
-			Fragments._RelPatternNode__RelNode /* 3 */,
-			Fragments._RelPatternNode__UMLXNamedElement /* 3 */,
-			Fragments._RelPatternNode__UMLXTypedElement /* 4 */,
-			Fragments._RelPatternNode__RelPatternNode /* 5 */
-		};
+			{
+				Fragments._RelPatternNode__OclAny /* 0 */,
+				Fragments._RelPatternNode__OclElement /* 1 */,
+				Fragments._RelPatternNode__UMLXElement /* 2 */,
+				Fragments._RelPatternNode__RelNode /* 3 */,
+				Fragments._RelPatternNode__UMLXNamedElement /* 3 */,
+				Fragments._RelPatternNode__UMLXTypedElement /* 4 */,
+				Fragments._RelPatternNode__RelPatternNode /* 5 */
+			};
 		private static final int @NonNull [] __RelPatternNode = { 1,1,1,2,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _TxDiagram =
-		{
-			Fragments._TxDiagram__OclAny /* 0 */,
-			Fragments._TxDiagram__OclElement /* 1 */,
-			Fragments._TxDiagram__UMLXElement /* 2 */,
-			Fragments._TxDiagram__UMLXNamedElement /* 3 */,
-			Fragments._TxDiagram__TxDiagram /* 4 */
-		};
+			{
+				Fragments._TxDiagram__OclAny /* 0 */,
+				Fragments._TxDiagram__OclElement /* 1 */,
+				Fragments._TxDiagram__UMLXElement /* 2 */,
+				Fragments._TxDiagram__UMLXNamedElement /* 3 */,
+				Fragments._TxDiagram__TxDiagram /* 4 */
+			};
 		private static final int @NonNull [] __TxDiagram = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _TxKeyNode =
-		{
-			Fragments._TxKeyNode__OclAny /* 0 */,
-			Fragments._TxKeyNode__OclElement /* 1 */,
-			Fragments._TxKeyNode__UMLXElement /* 2 */,
-			Fragments._TxKeyNode__TxNode /* 3 */,
-			Fragments._TxKeyNode__TxKeyNode /* 4 */
-		};
+			{
+				Fragments._TxKeyNode__OclAny /* 0 */,
+				Fragments._TxKeyNode__OclElement /* 1 */,
+				Fragments._TxKeyNode__UMLXElement /* 2 */,
+				Fragments._TxKeyNode__TxNode /* 3 */,
+				Fragments._TxKeyNode__TxKeyNode /* 4 */
+			};
 		private static final int @NonNull [] __TxKeyNode = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _TxNode =
-		{
-			Fragments._TxNode__OclAny /* 0 */,
-			Fragments._TxNode__OclElement /* 1 */,
-			Fragments._TxNode__UMLXElement /* 2 */,
-			Fragments._TxNode__TxNode /* 3 */
-		};
+			{
+				Fragments._TxNode__OclAny /* 0 */,
+				Fragments._TxNode__OclElement /* 1 */,
+				Fragments._TxNode__UMLXElement /* 2 */,
+				Fragments._TxNode__TxNode /* 3 */
+			};
 		private static final int @NonNull [] __TxNode = { 1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _TxPackageNode =
-		{
-			Fragments._TxPackageNode__OclAny /* 0 */,
-			Fragments._TxPackageNode__OclElement /* 1 */,
-			Fragments._TxPackageNode__UMLXElement /* 2 */,
-			Fragments._TxPackageNode__TxNode /* 3 */,
-			Fragments._TxPackageNode__TxPackageNode /* 4 */
-		};
+			{
+				Fragments._TxPackageNode__OclAny /* 0 */,
+				Fragments._TxPackageNode__OclElement /* 1 */,
+				Fragments._TxPackageNode__UMLXElement /* 2 */,
+				Fragments._TxPackageNode__TxNode /* 3 */,
+				Fragments._TxPackageNode__TxPackageNode /* 4 */
+			};
 		private static final int @NonNull [] __TxPackageNode = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _TxParameterNode =
-		{
-			Fragments._TxParameterNode__OclAny /* 0 */,
-			Fragments._TxParameterNode__OclElement /* 1 */,
-			Fragments._TxParameterNode__UMLXElement /* 2 */,
-			Fragments._TxParameterNode__TxNode /* 3 */,
-			Fragments._TxParameterNode__UMLXNamedElement /* 3 */,
-			Fragments._TxParameterNode__UMLXTypedElement /* 4 */,
-			Fragments._TxParameterNode__TxParameterNode /* 5 */
-		};
+			{
+				Fragments._TxParameterNode__OclAny /* 0 */,
+				Fragments._TxParameterNode__OclElement /* 1 */,
+				Fragments._TxParameterNode__UMLXElement /* 2 */,
+				Fragments._TxParameterNode__TxNode /* 3 */,
+				Fragments._TxParameterNode__UMLXNamedElement /* 3 */,
+				Fragments._TxParameterNode__UMLXTypedElement /* 4 */,
+				Fragments._TxParameterNode__TxParameterNode /* 5 */
+			};
 		private static final int @NonNull [] __TxParameterNode = { 1,1,1,2,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _TxPartNode =
-		{
-			Fragments._TxPartNode__OclAny /* 0 */,
-			Fragments._TxPartNode__OclElement /* 1 */,
-			Fragments._TxPartNode__UMLXElement /* 2 */,
-			Fragments._TxPartNode__TxNode /* 3 */,
-			Fragments._TxPartNode__TxPartNode /* 4 */
-		};
+			{
+				Fragments._TxPartNode__OclAny /* 0 */,
+				Fragments._TxPartNode__OclElement /* 1 */,
+				Fragments._TxPartNode__UMLXElement /* 2 */,
+				Fragments._TxPartNode__TxNode /* 3 */,
+				Fragments._TxPartNode__TxPartNode /* 4 */
+			};
 		private static final int @NonNull [] __TxPartNode = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _TxQueryNode =
-		{
-			Fragments._TxQueryNode__OclAny /* 0 */,
-			Fragments._TxQueryNode__OclElement /* 1 */,
-			Fragments._TxQueryNode__UMLXElement /* 2 */,
-			Fragments._TxQueryNode__TxNode /* 3 */,
-			Fragments._TxQueryNode__UMLXNamedElement /* 3 */,
-			Fragments._TxQueryNode__UMLXTypedElement /* 4 */,
-			Fragments._TxQueryNode__TxQueryNode /* 5 */
-		};
+			{
+				Fragments._TxQueryNode__OclAny /* 0 */,
+				Fragments._TxQueryNode__OclElement /* 1 */,
+				Fragments._TxQueryNode__UMLXElement /* 2 */,
+				Fragments._TxQueryNode__TxNode /* 3 */,
+				Fragments._TxQueryNode__UMLXNamedElement /* 3 */,
+				Fragments._TxQueryNode__UMLXTypedElement /* 4 */,
+				Fragments._TxQueryNode__TxQueryNode /* 5 */
+			};
 		private static final int @NonNull [] __TxQueryNode = { 1,1,1,2,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _TxTypedModelNode =
-		{
-			Fragments._TxTypedModelNode__OclAny /* 0 */,
-			Fragments._TxTypedModelNode__OclElement /* 1 */,
-			Fragments._TxTypedModelNode__UMLXElement /* 2 */,
-			Fragments._TxTypedModelNode__TxNode /* 3 */,
-			Fragments._TxTypedModelNode__UMLXNamedElement /* 3 */,
-			Fragments._TxTypedModelNode__TxTypedModelNode /* 4 */
-		};
+			{
+				Fragments._TxTypedModelNode__OclAny /* 0 */,
+				Fragments._TxTypedModelNode__OclElement /* 1 */,
+				Fragments._TxTypedModelNode__UMLXElement /* 2 */,
+				Fragments._TxTypedModelNode__TxNode /* 3 */,
+				Fragments._TxTypedModelNode__UMLXNamedElement /* 3 */,
+				Fragments._TxTypedModelNode__TxTypedModelNode /* 4 */
+			};
 		private static final int @NonNull [] __TxTypedModelNode = { 1,1,1,2,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _UMLXElement =
-		{
-			Fragments._UMLXElement__OclAny /* 0 */,
-			Fragments._UMLXElement__OclElement /* 1 */,
-			Fragments._UMLXElement__UMLXElement /* 2 */
-		};
+			{
+				Fragments._UMLXElement__OclAny /* 0 */,
+				Fragments._UMLXElement__OclElement /* 1 */,
+				Fragments._UMLXElement__UMLXElement /* 2 */
+			};
 		private static final int @NonNull [] __UMLXElement = { 1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _UMLXModel =
-		{
-			Fragments._UMLXModel__OclAny /* 0 */,
-			Fragments._UMLXModel__OclElement /* 1 */,
-			Fragments._UMLXModel__UMLXElement /* 2 */,
-			Fragments._UMLXModel__UMLXModel /* 3 */
-		};
+			{
+				Fragments._UMLXModel__OclAny /* 0 */,
+				Fragments._UMLXModel__OclElement /* 1 */,
+				Fragments._UMLXModel__UMLXElement /* 2 */,
+				Fragments._UMLXModel__UMLXModel /* 3 */
+			};
 		private static final int @NonNull [] __UMLXModel = { 1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _UMLXNamedElement =
-		{
-			Fragments._UMLXNamedElement__OclAny /* 0 */,
-			Fragments._UMLXNamedElement__OclElement /* 1 */,
-			Fragments._UMLXNamedElement__UMLXElement /* 2 */,
-			Fragments._UMLXNamedElement__UMLXNamedElement /* 3 */
-		};
+			{
+				Fragments._UMLXNamedElement__OclAny /* 0 */,
+				Fragments._UMLXNamedElement__OclElement /* 1 */,
+				Fragments._UMLXNamedElement__UMLXElement /* 2 */,
+				Fragments._UMLXNamedElement__UMLXNamedElement /* 3 */
+			};
 		private static final int @NonNull [] __UMLXNamedElement = { 1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _UMLXTypedElement =
-		{
-			Fragments._UMLXTypedElement__OclAny /* 0 */,
-			Fragments._UMLXTypedElement__OclElement /* 1 */,
-			Fragments._UMLXTypedElement__UMLXElement /* 2 */,
-			Fragments._UMLXTypedElement__UMLXNamedElement /* 3 */,
-			Fragments._UMLXTypedElement__UMLXTypedElement /* 4 */
-		};
+			{
+				Fragments._UMLXTypedElement__OclAny /* 0 */,
+				Fragments._UMLXTypedElement__OclElement /* 1 */,
+				Fragments._UMLXTypedElement__UMLXElement /* 2 */,
+				Fragments._UMLXTypedElement__UMLXNamedElement /* 3 */,
+				Fragments._UMLXTypedElement__UMLXTypedElement /* 4 */
+			};
 		private static final int @NonNull [] __UMLXTypedElement = { 1,1,1,1,1 };
 
 		/**

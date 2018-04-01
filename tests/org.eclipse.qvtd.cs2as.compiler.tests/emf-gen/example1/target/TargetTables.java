@@ -41,7 +41,6 @@ import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
  * In order to ensure correct static initialization, a top level class element must be accessed
  * before any nested class element. Therefore an access to PACKAGE.getClass() is recommended.
  */
-@SuppressWarnings("nls")
 public class TargetTables
 {
 	static {
@@ -337,119 +336,119 @@ public class TargetTables
 		}
 
 		private static final @NonNull ExecutorFragment @NonNull [] _A =
-		{
-			Fragments._A__OclAny /* 0 */,
-			Fragments._A__OclElement /* 1 */,
-			Fragments._A__Visitable /* 2 */,
-			Fragments._A__NamedElement /* 3 */,
-			Fragments._A__Namespace /* 4 */,
-			Fragments._A__A /* 5 */
-		};
+			{
+				Fragments._A__OclAny /* 0 */,
+				Fragments._A__OclElement /* 1 */,
+				Fragments._A__Visitable /* 2 */,
+				Fragments._A__NamedElement /* 3 */,
+				Fragments._A__Namespace /* 4 */,
+				Fragments._A__A /* 5 */
+			};
 		private static final int @NonNull [] __A = { 1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _A1 =
-		{
-			Fragments._A1__OclAny /* 0 */,
-			Fragments._A1__OclElement /* 1 */,
-			Fragments._A1__Visitable /* 2 */,
-			Fragments._A1__NamedElement /* 3 */,
-			Fragments._A1__Namespace /* 4 */,
-			Fragments._A1__A /* 5 */,
-			Fragments._A1__A1 /* 6 */
-		};
+			{
+				Fragments._A1__OclAny /* 0 */,
+				Fragments._A1__OclElement /* 1 */,
+				Fragments._A1__Visitable /* 2 */,
+				Fragments._A1__NamedElement /* 3 */,
+				Fragments._A1__Namespace /* 4 */,
+				Fragments._A1__A /* 5 */,
+				Fragments._A1__A1 /* 6 */
+			};
 		private static final int @NonNull [] __A1 = { 1,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _A2 =
-		{
-			Fragments._A2__OclAny /* 0 */,
-			Fragments._A2__OclElement /* 1 */,
-			Fragments._A2__Visitable /* 2 */,
-			Fragments._A2__NamedElement /* 3 */,
-			Fragments._A2__Namespace /* 4 */,
-			Fragments._A2__A /* 5 */,
-			Fragments._A2__A2 /* 6 */
-		};
+			{
+				Fragments._A2__OclAny /* 0 */,
+				Fragments._A2__OclElement /* 1 */,
+				Fragments._A2__Visitable /* 2 */,
+				Fragments._A2__NamedElement /* 3 */,
+				Fragments._A2__Namespace /* 4 */,
+				Fragments._A2__A /* 5 */,
+				Fragments._A2__A2 /* 6 */
+			};
 		private static final int @NonNull [] __A2 = { 1,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _A3 =
-		{
-			Fragments._A3__OclAny /* 0 */,
-			Fragments._A3__OclElement /* 1 */,
-			Fragments._A3__Visitable /* 2 */,
-			Fragments._A3__NamedElement /* 3 */,
-			Fragments._A3__Namespace /* 4 */,
-			Fragments._A3__A /* 5 */,
-			Fragments._A3__A2 /* 6 */,
-			Fragments._A3__A3 /* 7 */
-		};
+			{
+				Fragments._A3__OclAny /* 0 */,
+				Fragments._A3__OclElement /* 1 */,
+				Fragments._A3__Visitable /* 2 */,
+				Fragments._A3__NamedElement /* 3 */,
+				Fragments._A3__Namespace /* 4 */,
+				Fragments._A3__A /* 5 */,
+				Fragments._A3__A2 /* 6 */,
+				Fragments._A3__A3 /* 7 */
+			};
 		private static final int @NonNull [] __A3 = { 1,1,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _B =
-		{
-			Fragments._B__OclAny /* 0 */,
-			Fragments._B__OclElement /* 1 */,
-			Fragments._B__Visitable /* 2 */,
-			Fragments._B__NamedElement /* 3 */,
-			Fragments._B__Namespace /* 4 */,
-			Fragments._B__B /* 5 */
-		};
+			{
+				Fragments._B__OclAny /* 0 */,
+				Fragments._B__OclElement /* 1 */,
+				Fragments._B__Visitable /* 2 */,
+				Fragments._B__NamedElement /* 3 */,
+				Fragments._B__Namespace /* 4 */,
+				Fragments._B__B /* 5 */
+			};
 		private static final int @NonNull [] __B = { 1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _C =
-		{
-			Fragments._C__OclAny /* 0 */,
-			Fragments._C__OclElement /* 1 */,
-			Fragments._C__Visitable /* 2 */,
-			Fragments._C__NamedElement /* 3 */,
-			Fragments._C__Namespace /* 4 */,
-			Fragments._C__C /* 5 */
-		};
+			{
+				Fragments._C__OclAny /* 0 */,
+				Fragments._C__OclElement /* 1 */,
+				Fragments._C__Visitable /* 2 */,
+				Fragments._C__NamedElement /* 3 */,
+				Fragments._C__Namespace /* 4 */,
+				Fragments._C__C /* 5 */
+			};
 		private static final int @NonNull [] __C = { 1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _D =
-		{
-			Fragments._D__OclAny /* 0 */,
-			Fragments._D__OclElement /* 1 */,
-			Fragments._D__Visitable /* 2 */,
-			Fragments._D__NamedElement /* 3 */,
-			Fragments._D__D /* 4 */
-		};
+			{
+				Fragments._D__OclAny /* 0 */,
+				Fragments._D__OclElement /* 1 */,
+				Fragments._D__Visitable /* 2 */,
+				Fragments._D__NamedElement /* 3 */,
+				Fragments._D__D /* 4 */
+			};
 		private static final int @NonNull [] __D = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _NamedElement =
-		{
-			Fragments._NamedElement__OclAny /* 0 */,
-			Fragments._NamedElement__OclElement /* 1 */,
-			Fragments._NamedElement__Visitable /* 2 */,
-			Fragments._NamedElement__NamedElement /* 3 */
-		};
+			{
+				Fragments._NamedElement__OclAny /* 0 */,
+				Fragments._NamedElement__OclElement /* 1 */,
+				Fragments._NamedElement__Visitable /* 2 */,
+				Fragments._NamedElement__NamedElement /* 3 */
+			};
 		private static final int @NonNull [] __NamedElement = { 1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Namespace =
-		{
-			Fragments._Namespace__OclAny /* 0 */,
-			Fragments._Namespace__OclElement /* 1 */,
-			Fragments._Namespace__Visitable /* 2 */,
-			Fragments._Namespace__NamedElement /* 3 */,
-			Fragments._Namespace__Namespace /* 4 */
-		};
+			{
+				Fragments._Namespace__OclAny /* 0 */,
+				Fragments._Namespace__OclElement /* 1 */,
+				Fragments._Namespace__Visitable /* 2 */,
+				Fragments._Namespace__NamedElement /* 3 */,
+				Fragments._Namespace__Namespace /* 4 */
+			};
 		private static final int @NonNull [] __Namespace = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _TRoot =
-		{
-			Fragments._TRoot__OclAny /* 0 */,
-			Fragments._TRoot__OclElement /* 1 */,
-			Fragments._TRoot__Visitable /* 2 */,
-			Fragments._TRoot__TRoot /* 3 */
-		};
+			{
+				Fragments._TRoot__OclAny /* 0 */,
+				Fragments._TRoot__OclElement /* 1 */,
+				Fragments._TRoot__Visitable /* 2 */,
+				Fragments._TRoot__TRoot /* 3 */
+			};
 		private static final int @NonNull [] __TRoot = { 1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Visitable =
-		{
-			Fragments._Visitable__OclAny /* 0 */,
-			Fragments._Visitable__OclElement /* 1 */,
-			Fragments._Visitable__Visitable /* 2 */
-		};
+			{
+				Fragments._Visitable__OclAny /* 0 */,
+				Fragments._Visitable__OclElement /* 1 */,
+				Fragments._Visitable__Visitable /* 2 */
+			};
 		private static final int @NonNull [] __Visitable = { 1,1,1 };
 
 		/**
