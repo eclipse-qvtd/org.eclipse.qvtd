@@ -38,33 +38,35 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.IQVTiEvaluationVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractMergedQVTimperativeVisitor;
 
-public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<Object, IQVTiEvaluationVisitor> implements IQVTiEvaluationVisitor, VMEvaluationVisitor
+public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<@Nullable Object, @NonNull Executor> implements IQVTiEvaluationVisitor, VMEvaluationVisitor
 {
+	protected final @NonNull EvaluationVisitor evaluationVisitor;
 	protected final @NonNull VMEvaluationStepper vmEvaluationStepper;
 
 	public QVTiVMEvaluationVisitor(@NonNull VMEvaluationStepper vmEvaluationStepper, @NonNull IQVTiEvaluationVisitor nestedEvaluationVisitor) {
-		super(nestedEvaluationVisitor);
+		super(((EvaluationVisitor.EvaluationVisitorExtension)nestedEvaluationVisitor).getExecutor());
+		this.evaluationVisitor = nestedEvaluationVisitor;
 		this.vmEvaluationStepper = vmEvaluationStepper;
-		context.setUndecoratedVisitor(this);
+		nestedEvaluationVisitor.setUndecoratedVisitor(this);
 	}
 	
 	/** @deprecated Evaluator no longer nests */
 	@Deprecated
 	@Override	
 	public @NonNull EvaluationVisitor createNestedEvaluator() {
-		return context.createNestedEvaluator();
+		return evaluationVisitor.createNestedEvaluator();
 	}
 	
 	/** @deprecated Evaluator no longer nests */
 	@Deprecated
 	@Override	
 	public void dispose() {
-		context.dispose();
+		evaluationVisitor.dispose();
 	}
 
 	@Override
 	public @Nullable Object evaluate(@NonNull OCLExpression body) {
-		return context.evaluate(body);
+		return evaluationVisitor.evaluate(body);
 	}
 
 	/** @deprecated moved to Evaluator */
@@ -95,12 +97,12 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 	@Deprecated
 	@Override
 	public @NonNull EvaluationVisitor getEvaluator() {
-		return context.getEvaluator();
+		return this;
 	}
 
 	@Override
 	public @NonNull Executor getExecutor() {
-		return context.getExecutor();
+		return context;
 	}
 
 	/** @deprecated moved to Evaluator */
@@ -133,7 +135,7 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 
 	@Override
 	public @Nullable Monitor getMonitor() {
-		return context.getMonitor();
+		return evaluationVisitor.getMonitor();
 	}
 
 	public @NonNull String getPluginId() {
@@ -193,12 +195,12 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 
 	@Override
 	public boolean isCanceled() {
-		return context.isCanceled();
+		return evaluationVisitor.isCanceled();
 	}
 
 	@Override
 	public void setCanceled(boolean isCanceled) {
-		context.setCanceled(isCanceled);
+		evaluationVisitor.setCanceled(isCanceled);
 	}
 
 	/** @deprecated moved to Evaluator */
@@ -210,12 +212,12 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 
 	@Override
 	public void setMonitor(@Nullable Monitor monitor) {
-		context.setMonitor(monitor);
+		evaluationVisitor.setMonitor(monitor);
 	}
 
 	@Override
 	public void setUndecoratedVisitor(@NonNull EvaluationVisitor evaluationVisitor) {
-		context.setUndecoratedVisitor(evaluationVisitor);
+		this.evaluationVisitor.setUndecoratedVisitor(evaluationVisitor);
 	}
 
 	@Override
@@ -236,7 +238,7 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 	}
 
 	@Override
-	public @Nullable Object visiting(@NonNull Visitable object) {
-		return vmEvaluationStepper.visiting((Element)object);
+	public @Nullable Object visiting(@NonNull Visitable visitable) {
+		return vmEvaluationStepper.visiting((Element)visitable);
 	}
 }
