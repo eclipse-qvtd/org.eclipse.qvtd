@@ -20,4 +20,12 @@ public class QVTimperativeEditor extends BaseEditor
 	public QVTimperativeEditor() {
 		super();
 	}
+
+	@Override
+	protected void initializeEditor() {
+		super.initializeEditor();
+		setEditorContextMenuId("#QVTimperativeEditorContext"); //$NON-NLS-1$
+		setRulerContextMenuId("#QVTimperativeRulerContext"); //$NON-NLS-1$
+		//		setHelpContextId(ITextEditorHelpContextIds.TEXT_EDITOR);
+	}
 }

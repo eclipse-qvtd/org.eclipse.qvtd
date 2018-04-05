@@ -20,4 +20,12 @@ public class QVTrelationEditor extends BaseEditor
 	public QVTrelationEditor() {
 		super();
 	}
+
+	@Override
+	protected void initializeEditor() {
+		super.initializeEditor();
+		setEditorContextMenuId("#QVTrelationEditorContext"); //$NON-NLS-1$
+		setRulerContextMenuId("#QVTrelationRulerContext"); //$NON-NLS-1$
+		//		setHelpContextId(ITextEditorHelpContextIds.TEXT_EDITOR);
+	}
 }

@@ -13,6 +13,7 @@ package org.eclipse.qvtd.xtext.qvtbase.ui;
 import org.eclipse.ocl.xtext.base.ui.BaseEditor;
 import org.eclipse.qvtd.xtext.qvtbase.ui.internal.QVTbaseActivator;
 
+@Deprecated /* @deprecated a deriveed QVT editor should be in use */
 public class QVTbaseEditor extends BaseEditor
 {
 	public static final String EDITOR_ID = QVTbaseActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTBASE_QVTBASE;
