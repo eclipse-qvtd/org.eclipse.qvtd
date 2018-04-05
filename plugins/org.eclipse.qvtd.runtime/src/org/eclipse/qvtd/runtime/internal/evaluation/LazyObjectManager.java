@@ -1009,7 +1009,7 @@ public class LazyObjectManager extends AbstractObjectManager
 							upper = PivotConstantsInternal.ANNOTATED_IMPLICIT_OPPOSITE_UPPER_VALUE;
 						}
 						eOppositeReference2.setUpperBound(upper.isUnlimited() ? -1 : upper.intValue());
-						if (!upper.equals(ValueUtil.ONE_VALUE)) {
+						if (!((IntegerValue)upper).equals(ValueUtil.ONE_VALUE)) {
 							String uniqueValue = details.get("unique");
 							boolean isUnique = uniqueValue != null ? Boolean.valueOf(uniqueValue) : PivotConstantsInternal.ANNOTATED_IMPLICIT_OPPOSITE_UNIQUE;
 							eOppositeReference2.setUnique(isUnique);

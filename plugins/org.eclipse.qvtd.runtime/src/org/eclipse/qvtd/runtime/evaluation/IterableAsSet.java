@@ -36,7 +36,7 @@ class IterableAsSet<T> implements Set<T>
 	}
 
 	@Override
-	public boolean addAll(Collection<? extends T> c) {
+	public boolean addAll(@NonNull Collection<? extends T> c) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -75,6 +75,7 @@ class IterableAsSet<T> implements Set<T>
 		return Iterables.isEmpty(iterable);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public @NonNull Iterator<T> iterator() {
 		return (Iterator<T>) iterable.iterator();
