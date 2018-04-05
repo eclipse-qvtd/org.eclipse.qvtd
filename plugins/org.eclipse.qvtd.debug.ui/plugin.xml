@@ -10,7 +10,55 @@
         </factory>    
     </extension>
     
-	 <extension point="org.eclipse.ui.popupMenus">	
+    
+	<extension point="org.eclipse.ui.commands">
+	  <command id="org.eclipse.qvtd.debug.ui.EnableDisableBreakpointCommand"
+	    name="%EnableBreakpoint.label" description="%EnableBreakpoint.description"/>
+	  <command id="org.eclipse.qvtd.debug.ui.AddRemoveBreakpointCommand"
+	    name="%AddBreakpoint.label" description="%AddBreakpoint.description"/>
+	  <command id="org.eclipse.qvtd.debug.ui.QVTiBreakpointPropertiesCommand"
+	    name="%QVTiBreakpointProperties.label" description="%QVTiBreakpointProperties.description"/>
+	  <!--command id="org.eclipse.qvtd.debug.ui.RunToLineCommand"
+	    name="%RunToLine.label" description="%RunToLine.description"/-->
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	  <handler commandId="org.eclipse.qvtd.debug.ui.EnableDisableBreakpointCommand"
+	    class="org.eclipse.ocl.examples.debug.vm.ui.actions.VMEnableDisableBreakpointHandler"/>
+	  <handler commandId="org.eclipse.qvtd.debug.ui.AddRemoveBreakpointCommand"
+	    class="org.eclipse.ocl.examples.debug.vm.ui.actions.VMToggleBreakpointHandler"/>
+	  <handler commandId="org.eclipse.qvtd.debug.ui.QVTiBreakpointPropertiesCommand"
+	    class="org.eclipse.ocl.examples.debug.vm.ui.actions.VMBreakpointPropertiesHandler"/>
+	  <!--handler commandId="org.eclipse.qvtd.debug.ui.RunToLineCommand"
+	    Since I have never used this for JDT, I cannot justofy spending time making it work for OCL
+	    class="org.eclipse.ocl.examples.debug.vm.ui.actions.VMRunToLineHandler"/-->
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+	  <menuContribution locationURI="popup:#QVTcoreRulerContext?after=additions">
+	    <command commandId="org.eclipse.qvtd.debug.ui.EnableDisableBreakpointCommand"
+	      label="%EnableBreakpoint.label"/>
+	    <command commandId="org.eclipse.qvtd.debug.ui.AddRemoveBreakpointCommand"
+	      label="%AddBreakpoint.label" icon="icons/brkp_obj.gif"/>
+	    <command commandId="org.eclipse.qvtd.debug.ui.QVTiBreakpointPropertiesCommand"
+	      label="%QVTiBreakpointProperties.label"/>
+	  </menuContribution>
+	  <menuContribution locationURI="popup:#QVTimperativeRulerContext?after=additions">
+	    <command commandId="org.eclipse.qvtd.debug.ui.EnableDisableBreakpointCommand"
+	      label="%EnableBreakpoint.label"/>
+	    <command commandId="org.eclipse.qvtd.debug.ui.AddRemoveBreakpointCommand"
+	      label="%AddBreakpoint.label" icon="icons/brkp_obj.gif"/>
+	    <command commandId="org.eclipse.qvtd.debug.ui.QVTiBreakpointPropertiesCommand"
+	      label="%QVTiBreakpointProperties.label"/>
+	  </menuContribution>
+	  <menuContribution locationURI="popup:#QVTrelationRulerContext?after=additions">
+	    <command commandId="org.eclipse.qvtd.debug.ui.EnableDisableBreakpointCommand"
+	      label="%EnableBreakpoint.label"/>
+	    <command commandId="org.eclipse.qvtd.debug.ui.AddRemoveBreakpointCommand"
+	      label="%AddBreakpoint.label" icon="icons/brkp_obj.gif"/>
+	    <command commandId="org.eclipse.qvtd.debug.ui.QVTiBreakpointPropertiesCommand"
+	      label="%QVTiBreakpointProperties.label"/>
+	  </menuContribution>
+	</extension>
+	 <!--extension point="org.eclipse.ui.popupMenus">	
 		 <viewerContribution id="org.eclipse.qvtd.debug.ui.QVTiEditorRulerPopupActions"
 				targetID="#TextRulerContext">
 	         <action id="org.eclipse.qvtd.debug.ui.RulerEnableDisableBreakpointActionDelegate"
@@ -42,7 +90,7 @@
          </visibility>
 		</viewerContribution>
 		
-       <!--viewerContribution
+       <viewerContribution
             id="org.eclipse.qvtd.debug.ui.QVTiEditorWatch"
             targetID="#TextEditorContext">
          <action
@@ -69,7 +117,7 @@
                <objectClass name="org.eclipse.jface.text.ITextSelection"/>
             </and>
          </visibility>
-      </viewerContribution-->
+      </viewerContribution>
  
       <objectContribution id="org.eclipse.qvtd.debug.ui.QVTiBreakpointObjectActions"
 			objectClass="org.eclipse.qvtd.debug.QVTiBreakpoint">
@@ -80,7 +128,7 @@
                menubarPath="additions"/>
       </objectContribution>
 		
-    </extension>
+    </extension-->
     
    <extension point="org.eclipse.ui.editorActions">
       <editorContribution id="org.eclipse.debug.ui.QVTiBreakpointRulerActions"
