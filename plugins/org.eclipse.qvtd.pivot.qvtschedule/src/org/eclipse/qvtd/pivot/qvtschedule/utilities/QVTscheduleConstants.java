@@ -17,6 +17,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
@@ -37,7 +38,7 @@ public class QVTscheduleConstants
 
 	/** The name of the root mapping */
 	public static final @NonNull String ROOT_MAPPING_NAME = "__root__";
-	public static final @NonNull String MIDDLE_DOMAIN_NAME = "middle";
+	public static final @NonNull String MIDDLE_DOMAIN_NAME = QVTbaseUtil.TRACE_TYPED_MODEL_NAME; //"middle";
 
 	public static final @NonNull String REGION_SYMBOL_NAME_PREFIX = "m_";
 	public static final @NonNull String REGION_SYMBOL_NAME_SUFFIX = "";

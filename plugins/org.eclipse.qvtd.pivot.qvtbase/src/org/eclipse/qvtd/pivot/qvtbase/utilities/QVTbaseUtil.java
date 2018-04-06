@@ -56,7 +56,7 @@ public class QVTbaseUtil extends PivotUtil
 {
 	public static final @NonNull String PRIMITIVE_DOMAIN_NAME = "$primitive$";
 	public static final @NonNull String TRACE_CLASS_NAME = "$trace$";
-	public static final @NonNull String TRACE_TYPED_MODEL_NAME = "$trace$";
+	public static final @NonNull String TRACE_TYPED_MODEL_NAME = "middle";//"$trace$";
 
 	public static final class DomainNameComparator implements Comparator<@NonNull Domain>
 	{
