@@ -373,7 +373,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 			}
 			if (QVTbaseUtil.TRACE_TYPED_MODEL_NAME.equals(typedModel.getName())) {
 				traceTypedModel = typedModel;
-				continue;
+				//				continue;
 			}
 			int nextBit = add(typedModel);
 			int bitMask = 1 << nextBit;
