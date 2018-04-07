@@ -4,7 +4,7 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:hstm="http://www.eclipse.org/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine"
-    xsi:schemaLocation="http://www.eclipse.org/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine HierarchicalStateMachine.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/examples/umlx/hstm2fstm/HierarchicalStateMachine ../HierarchicalStateMachine.ecore"
     name="sm">
   <ownedStates
       outTransitions="//@ownedTransitions.0"

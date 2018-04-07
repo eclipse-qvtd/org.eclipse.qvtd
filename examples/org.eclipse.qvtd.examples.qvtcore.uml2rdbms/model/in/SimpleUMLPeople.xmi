@@ -4,7 +4,7 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:simpleuml="http://www.eclipse.org/qvtd/examples/qvtcore/UML2RDBMS/1.0/simpleUML"
-    xsi:schemaLocation="http://www.eclipse.org/qvtd/examples/qvtcore/UML2RDBMS/1.0/simpleUML SimpleUML.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/qvtd/examples/qvtcore/UML2RDBMS/1.0/simpleUML ../SimpleUML.ecore"
     kind=""
     name="People">
   <elements xsi:type="simpleuml:Class" kind="persistent" name="Address" reverse="//@elements.7">
