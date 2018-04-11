@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.qvtd.debug.launching.QVTcLaunchConfigurationDelegate">
+<booleanAttribute key="auto-build" value="false"/>
+<booleanAttribute key="console-trace" value="false"/>
+<stringAttribute key="direction" value="rdbms"/>
+<booleanAttribute key="dot-graphs" value="false"/>
+<stringAttribute key="genmodel" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/model/SimpleUML2RDBMS.genmodel"/>
+<mapAttribute key="in">
+<mapEntry key="uml" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/model/in/SimpleUMLPeople.xmi"/>
+</mapAttribute>
+<mapAttribute key="intermediates">
+<mapEntry key="QVTc" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/model/temp/SimpleUML2RDBMS.qvtcas"/>
+<mapEntry key="QVTi" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/model/temp/SimpleUML2RDBMS.qvtias"/>
+<mapEntry key="QVTm" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/model/temp/SimpleUML2RDBMS.qvtm.qvtcas"/>
+<mapEntry key="QVTs" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/model/temp/SimpleUML2RDBMS.qvtsas"/>
+<mapEntry key="QVTu" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/model/temp/SimpleUML2RDBMS.qvtu.qvtcas"/>
+</mapAttribute>
+<booleanAttribute key="interpreted" value="true"/>
+<stringAttribute key="mode" value="ENFORCE - CREATE"/>
+<mapAttribute key="old-in"/>
+<mapAttribute key="old-out"/>
+<mapAttribute key="out">
+<mapEntry key="middle" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/model/out/middle.xmi"/>
+<mapEntry key="rdbms" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/model/out/rdbms.xmi"/>
+</mapAttribute>
+<stringAttribute key="project" value="org.eclipse.qvtd.examples.qvtcore.uml2rdbms"/>
+<stringAttribute key="tx" value="platform:/resource/org.eclipse.qvtd.examples.qvtcore.uml2rdbms/model/SimpleUML2RDBMS.qvtc"/>
+<booleanAttribute key="view" value="false"/>
+<booleanAttribute key="yed-graphs" value="false"/>
+</launchConfiguration>

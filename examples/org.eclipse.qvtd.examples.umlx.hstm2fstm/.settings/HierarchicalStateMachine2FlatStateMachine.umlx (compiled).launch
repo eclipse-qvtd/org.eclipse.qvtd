@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.qvtd.umlx.launching.UMLXLaunchConfigurationDelegate">
+<booleanAttribute key="auto-build" value="false"/>
+<booleanAttribute key="console-trace" value="false"/>
+<stringAttribute key="direction" value="flat"/>
+<booleanAttribute key="dot-graphs" value="false"/>
+<stringAttribute key="genmodel" value="platform:/resource/org.eclipse.qvtd.examples.umlx.hstm2fstm/model/HierarchicalStateMachine2FlatStateMachine.genmodel"/>
+<mapAttribute key="in">
+<mapEntry key="hier" value="platform:/resource/org.eclipse.qvtd.examples.umlx.hstm2fstm/model/in/hier.xmi"/>
+</mapAttribute>
+<mapAttribute key="intermediates">
+<mapEntry key="Class" value="platform:/resource/org.eclipse.qvtd.examples.umlx.hstm2fstm/bin"/>
+<mapEntry key="GenModel" value="platform:/resource/org.eclipse.qvtd.examples.umlx.hstm2fstm/model/temp/HierarchicalStateMachine2FlatStateMachine.genmodel"/>
+<mapEntry key="Java" value="platform:/resource/org.eclipse.qvtd.examples.umlx.hstm2fstm/src-gen"/>
+<mapEntry key="QVTc" value="platform:/resource/org.eclipse.qvtd.examples.umlx.hstm2fstm/model/temp/HierarchicalStateMachine2FlatStateMachine.qvtcas"/>
+<mapEntry key="QVTi" value="platform:/resource/org.eclipse.qvtd.examples.umlx.hstm2fstm/model/temp/HierarchicalStateMachine2FlatStateMachine.qvtias"/>
+<mapEntry key="QVTm" value="platform:/resource/org.eclipse.qvtd.examples.umlx.hstm2fstm/model/temp/HierarchicalStateMachine2FlatStateMachine.qvtm.qvtcas"/>
+<mapEntry key="QVTr" value="platform:/resource/org.eclipse.qvtd.examples.umlx.hstm2fstm/model/temp/HierarchicalStateMachine2FlatStateMachine.qvtras"/>
+<mapEntry key="QVTs" value="platform:/resource/org.eclipse.qvtd.examples.umlx.hstm2fstm/model/temp/HierarchicalStateMachine2FlatStateMachine.qvtsas"/>
+<mapEntry key="QVTu" value="platform:/resource/org.eclipse.qvtd.examples.umlx.hstm2fstm/model/temp/HierarchicalStateMachine2FlatStateMachine.qvtu.qvtcas"/>
+<mapEntry key="Trace" value="platform:/resource/org.eclipse.qvtd.examples.umlx.hstm2fstm/model/temp/HierarchicalStateMachine2FlatStateMachine.trace.ecore"/>
+</mapAttribute>
+<booleanAttribute key="interpreted" value="false"/>
+<stringAttribute key="mode" value="ENFORCE - CREATE"/>
+<mapAttribute key="old-in"/>
+<mapAttribute key="old-out"/>
+<mapAttribute key="out">
+<mapEntry key="flat" value="platform:/resource/org.eclipse.qvtd.examples.umlx.hstm2fstm/model/out/flat.xmi"/>
+<mapEntry key="middle" value="platform:/resource/org.eclipse.qvtd.examples.umlx.hstm2fstm/model/out/middle.xmi"/>
+</mapAttribute>
+<stringAttribute key="project" value="org.eclipse.qvtd.examples.umlx.hstm2fstm"/>
+<stringAttribute key="tx" value="platform:/resource/org.eclipse.qvtd.examples.umlx.hstm2fstm/model/HierarchicalStateMachine2FlatStateMachine.umlx"/>
+<booleanAttribute key="view" value="false"/>
+<booleanAttribute key="yed-graphs" value="false"/>
+</launchConfiguration>

@@ -3,10 +3,10 @@
 	<target name="init">
 	</target>
 
-	<patternset id="qvtc.excludes" excludes="bin/** qvtcbin/** src-gen/org/**"/>
-	<patternset id="qvtc2.excludes" excludes="bin/** qvtcbin/**"/>
-	<patternset id="qvtr.excludes" excludes="bin/** qvtrbin/** src/** .settings/** META-INF/** .classpath build.properties about.html"/>
-	<patternset id="qvtr2.excludes" excludes="bin/** qvtrbin/** src-gen/org/**"/>
+	<patternset id="qvtc.excludes" excludes="bin/** target/** qvtcbin/** src-gen/org/**"/>
+	<patternset id="qvtc2.excludes" excludes="bin/** target/** qvtcbin/**"/>
+	<patternset id="qvtr.excludes" excludes="bin/** target/** qvtrbin/** src/** .settings/** META-INF/** .classpath build.properties about.html"/>
+	<patternset id="qvtr2.excludes" excludes="bin/** target/** qvtrbin/** src-gen/org/**"/>
 
 	<target name="zip.examples" depends="init">
 		<!-- ../../examples is the prefcerred project layout
