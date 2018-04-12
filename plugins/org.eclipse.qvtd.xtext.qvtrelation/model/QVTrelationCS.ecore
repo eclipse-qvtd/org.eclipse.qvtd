@@ -16,7 +16,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="propertyId" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore#T-qvtrelation-SharedVariable"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DomainCS" eSuperTypes="#//AbstractDomainCS ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Nameable">
+  <eClassifiers xsi:type="ecore:EClass" name="DomainCS" eSuperTypes="#//AbstractDomainCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="implementedBy" eType="ecore:EDataType ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-String"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isCheckonly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEnforce" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
