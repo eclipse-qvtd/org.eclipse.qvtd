@@ -11,15 +11,13 @@
 package org.eclipse.qvtd.umlx.compiler;
 
 import java.io.IOException;
-import java.util.Map;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.AbstractCompilerStep;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -59,7 +57,7 @@ public class UMLXCompilerChain extends QVTrCompilerChain
 
 	protected final @NonNull UMLX2QVTrCompilerStep umlx2qvtrCompilerStep;
 
-	public UMLXCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI, @Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
+	public UMLXCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull CompilerOptions options) {
 		super(environmentFactory, txURI, prefixURI, options);
 		this.umlx2qvtrCompilerStep = createUMLX2QVTrCompilerStep();
 	}

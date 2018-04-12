@@ -24,6 +24,10 @@ public interface QVTiLaunchConstants
 	 */
 	public static final @NonNull String AUTO_BUILD_KEY = "auto-build";
 
+	/**
+	 * ILaunchConfiguration Boolean attribute for generation of *.dot graphs of the scheduling.
+	 */
+	public static final @NonNull String DOT_GRAPHS_KEY = "dot-graphs";
 
 	public static final @NonNull Map<String, String> EMPTY_MAP = new HashMap<String,String>();
 
@@ -77,14 +81,18 @@ public interface QVTiLaunchConstants
 	 */
 	public static final @NonNull String TX_KEY = "tx";
 
+	/**
+	 * ILaunchConfiguration Boolean attribute for generation of *.graphml graphs of the scheduling.
+	 */
+	public static final @NonNull String YED_GRAPHS_KEY = "yed-graphs";
 
 	public static final @NonNull String ENFORCE_UPDATE_MODE = "ENFORCE - UPDATE";
 	public static final @NonNull String ENFORCE_CREATE_MODE = "ENFORCE - CREATE";
 	public static final @NonNull String CHECK_MODE = "CHECK";
 
 
-//	String PREFIX = "org.eclipse.qvtd.debug.";  //$NON-NLS-1$
-//	String MODULE           = PREFIX + "module"; //$NON-NLS-1$
+	//	String PREFIX = "org.eclipse.qvtd.debug.";  //$NON-NLS-1$
+	//	String MODULE           = PREFIX + "module"; //$NON-NLS-1$
 
 
 }

@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ContentsAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -258,9 +257,7 @@ public class LateConsumerMerger extends AbstractMerger
 		LateConsumerMerger lateMerger = new LateConsumerMerger(scheduleManager, scheduledRegion);
 		lateMerger.merge();
 		lateMerger.prune();
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs("8-late", true, true, false);
-		}
+		scheduleManager.writeDebugGraphs("8-late", true, true, false);
 		return lateMerger.getMerges();
 	}
 

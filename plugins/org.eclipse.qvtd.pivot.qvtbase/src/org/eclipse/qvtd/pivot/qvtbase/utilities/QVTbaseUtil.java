@@ -56,7 +56,7 @@ public class QVTbaseUtil extends PivotUtil
 {
 	public static final @NonNull String PRIMITIVE_DOMAIN_NAME = "$primitive$";
 	public static final @NonNull String TRACE_CLASS_NAME = "$trace$";
-	public static final @NonNull String TRACE_TYPED_MODEL_NAME = "middle";//"$trace$";
+	public static final @NonNull String TRACE_TYPED_MODEL_NAME = "middle"; //"$trace$";
 
 	public static final class DomainNameComparator implements Comparator<@NonNull Domain>
 	{
@@ -140,6 +140,15 @@ public class QVTbaseUtil extends PivotUtil
 		for (Domain domain : rule.getDomain()) {
 			if (domain.getTypedModel() == typedModel) {
 				return domain;
+			}
+		}
+		return null;
+	}
+
+	public static @Nullable TypedModel basicGetTraceTypedModel(@NonNull Iterable<@NonNull TypedModel> modelParameters) {
+		for (@NonNull TypedModel typedModel : modelParameters) {
+			if (isTrace(typedModel)) {
+				return typedModel;
 			}
 		}
 		return null;
@@ -425,6 +434,11 @@ public class QVTbaseUtil extends PivotUtil
 		return ClassUtil.nullFree(asTransformation.getRule());
 	}
 
+	public static @NonNull String getTraceName(@NonNull TypedModel traceModel) {
+		String name = traceModel.getName();
+		return name != null ? name : TRACE_TYPED_MODEL_NAME;
+	}
+
 	public static @NonNull TypedModel getTypedModel(@NonNull Domain asDomain) {
 		return ClassUtil.nonNullState(asDomain.getTypedModel());
 	}
@@ -454,23 +468,38 @@ public class QVTbaseUtil extends PivotUtil
 		return false;
 	}
 
+	public static boolean isTrace(@NonNull TypedModel typedModel) {
+		// FIXME BUG 517524 introduce TypedModel.isImplicit.
+		String name = typedModel.getName();					// One old way
+		if (name == null) {
+			return true;
+		}
+		if (TRACE_TYPED_MODEL_NAME.equals(name)) {			// Another old way
+			return true;
+		}
+		return false;
+	}
+
 	public static @NonNull Transformation loadTransformation(@NonNull Class<? extends Model> modelClass, @NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
-		CSResource xtextResource = null;
+		Resource xtextResource = null;
 		ASResource asResource;
 		// Load the transformation resource
 		if (PivotUtilInternal.isASURI(transformationURI)) {
 			asResource = (ASResource) environmentFactory.getMetamodelManager().getASResourceSet().getResource(transformationURI, true);
 		}
 		else {
-			xtextResource = (CSResource) environmentFactory.getResourceSet().getResource(transformationURI, true);
+			xtextResource = environmentFactory.getResourceSet().getResource(transformationURI, true);
 			if (xtextResource == null) {
 				throw new IOException("Failed to load '" + transformationURI + "'");
+			}
+			if (!(xtextResource instanceof CSResource)) {
+				throw new IOException("Failed to load '" + transformationURI + "' as a CS representation of a QVTd transformation AS");
 			}
 			String csMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(xtextResource.getErrors()), "Failed to load '" + transformationURI + "'", "\n");
 			if (csMessage != null) {
 				throw new IOException(csMessage);
 			}
-			asResource = xtextResource.getASResource();
+			asResource = ((CSResource)xtextResource).getASResource();
 		}
 		try {
 			String asMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(asResource.getErrors()), "Failed to load '" + asResource.getURI() + "'", "\n");
@@ -510,23 +539,32 @@ public class QVTbaseUtil extends PivotUtil
 		return null;
 	}
 
-	public static @NonNull Resource loadTransformations(@NonNull Class<? extends Model> modelClass, @NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
-		CSResource xtextResource = null;
+	public static @NonNull ASResource loadTransformations(@NonNull Class<? extends Model> modelClass, @NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
+		Resource xtextResource = null;
 		ASResource asResource;
-		// Load the transformation resource
-		if (PivotUtilInternal.isASURI(transformationURI)) {
-			asResource = (ASResource) environmentFactory.getMetamodelManager().getASResourceSet().getResource(transformationURI, true);
-		}
-		else {
-			xtextResource = (CSResource) environmentFactory.getResourceSet().getResource(transformationURI, true);
-			if (xtextResource == null) {
-				throw new IOException("Failed to load '" + transformationURI + "'");
+		try {
+			// Load the transformation resource
+			if (PivotUtilInternal.isASURI(transformationURI)) {
+				asResource = (ASResource) environmentFactory.getMetamodelManager().getASResourceSet().getResource(transformationURI, true);
 			}
-			String csMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(xtextResource.getErrors()), "Failed to load '" + transformationURI + "'", "\n");
-			if (csMessage != null) {
-				throw new IOException(csMessage);
+			else {
+				xtextResource = environmentFactory.getResourceSet().getResource(transformationURI, true);
+				if (xtextResource == null) {
+					throw new IOException("Failed to load '" + transformationURI + "'");
+				}
+				if (!(xtextResource instanceof CSResource)) {
+					throw new IOException("Failed to load '" + transformationURI + "' as a CS representation of a QVTd transformation AS");
+				}
+				String csMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(xtextResource.getErrors()), "Failed to load '" + transformationURI + "'", "\n");
+				if (csMessage != null) {
+					throw new IOException(csMessage);
+				}
+				asResource = ((CSResource)xtextResource).getASResource();
 			}
-			asResource = xtextResource.getASResource();
+		} finally {
+			if (!keepDebug && (xtextResource instanceof CSResource.CSResourceExtension)) {	// FIXME testQVTcCompiler_Forward2Reverse_CG fails is debug pruned
+				//				((CSResource.CSResourceExtension)xtextResource).dispose();
+			}
 		}
 		if (asResource == null) {
 			throw new IOException("Failed to load '" + transformationURI + "'");

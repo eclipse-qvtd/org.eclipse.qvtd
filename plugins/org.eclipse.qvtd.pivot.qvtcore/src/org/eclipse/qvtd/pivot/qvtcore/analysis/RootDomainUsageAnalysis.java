@@ -371,7 +371,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 			if (typedModel == primitiveTypeModel) {
 				continue;
 			}
-			if (QVTbaseUtil.TRACE_TYPED_MODEL_NAME.equals(typedModel.getName())) {
+			if (QVTbaseUtil.isTrace(typedModel)) {
 				traceTypedModel = typedModel;
 				//				continue;
 			}

@@ -374,9 +374,12 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		asResource.save(options);
 	}
 
-	public @NonNull GenModel saveGenModel(@NonNull ProblemHandler problemHandler, @NonNull Resource asResource, @NonNull URI traceURI, @NonNull URI genModelURI, @Nullable Map<@NonNull String, @Nullable String> genModelOptions, @NonNull Map<Object, Object> saveOptions2, @Nullable Collection<@NonNull ? extends GenPackage> usedGenPackages) throws IOException {
+	public @NonNull GenModel saveGenModel(@NonNull ProblemHandler problemHandler, @NonNull Resource asResource, @NonNull URI traceURI, @NonNull URI genModelURI, @Nullable String modelDirectory, @Nullable Map<@NonNull String, @Nullable String> genModelOptions, @NonNull Map<Object, Object> saveOptions2, @Nullable Collection<@NonNull ? extends GenPackage> usedGenPackages) throws IOException {
 		URI trimFileExtension = traceURI.trimFileExtension();
 		String projectName = getProjectName(traceURI);
+		if (modelDirectory == null) {
+			modelDirectory = "/" + projectName + "/" + JavaFileUtil.TEST_SRC_FOLDER_NAME;
+		}
 		Resource genmodelResource = environmentFactory.getResourceSet().createResource(genModelURI);
 		@SuppressWarnings("null")@NonNull GenModel genModel = GenModelFactory.eINSTANCE.createGenModel();
 		genModel.getForeignModel().add(traceURI.lastSegment());
@@ -392,7 +395,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 			Collections.sort(allUsedGenPackages, GenPackageComparator.INSTANCE);
 			genModel.getUsedGenPackages().addAll(allUsedGenPackages);
 		}
-		genModel.setModelDirectory("/" + projectName + "/" + JavaFileUtil.TEST_SRC_FOLDER_NAME);
+		genModel.setModelDirectory(modelDirectory);
 		genModel.setModelPluginID(projectName);
 		genModel.setModelName(trimFileExtension.lastSegment());
 		genModel.setBundleManifest(false);
@@ -489,7 +492,7 @@ public class QVTr2QVTc extends AbstractQVTc2QVTc
 		return genModel;
 	}
 
-	public @NonNull Resource saveTrace(@NonNull Resource asResource, @NonNull URI traceURI, @NonNull URI genModelURI, @Nullable Map<@NonNull String, @Nullable String> traceOptions, @NonNull Map<?, ?> saveOptions) throws IOException {
+	public @NonNull Resource saveTrace(@NonNull Resource asResource, @NonNull URI traceURI, @Nullable Map<@NonNull String, @Nullable String> traceOptions, @NonNull Map<?, ?> saveOptions) throws IOException {
 		Model root = PivotFactory.eINSTANCE.createModel();
 		root.setExternalURI(traceURI.toString());
 		asResource.getContents().add(root);

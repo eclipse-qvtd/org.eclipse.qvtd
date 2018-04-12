@@ -233,7 +233,12 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 	public @NonNull ImperativeTypedModel getTypedModel(@NonNull String name) {
 		ImperativeTypedModel typedModel = NameUtil.getNameable(QVTimperativeUtil.getOwnedTypedModels(transformation), name);
 		if (typedModel == null) {
+			//			if (QVTbaseUtil.TRACE_TYPED_MODEL_NAME.equals(name)) {
+			//				typedModel = NameUtil.getNameable(QVTimperativeUtil.getOwnedTypedModels(transformation), QVTscheduleConstants.MIDDLE_DOMAIN_NAME);		// FIXME unify name
+			//			}
+			//			if (typedModel == null) {
 			throw new IllegalStateException("Unknown TypedModel '" + name + "'");
+			//			}
 		}
 		return typedModel;
 	}

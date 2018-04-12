@@ -12,20 +12,17 @@ package org.eclipse.qvtd.xtext.qvtcore.tests;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
-import org.eclipse.qvtd.compiler.CompilerChain;
+import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.QVTcCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
@@ -65,8 +62,7 @@ public class QVTcCompilerTests extends LoadTestCase
 	{
 		protected class InstrumentedCompilerChain extends QVTcCompilerChain
 		{
-			protected InstrumentedCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI,
-					@Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
+			protected InstrumentedCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull CompilerOptions options) {
 				super(environmentFactory, txURI, prefixURI, options);
 			}
 
@@ -89,8 +85,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		}
 
 		@Override
-		protected @NonNull QVTcCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI prefixURI,
-				@NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options) {
+		protected @NonNull QVTcCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI prefixURI, @NonNull CompilerOptions options) {
 			return new InstrumentedCompilerChain(getEnvironmentFactory(), txURI, prefixURI, options);
 		}
 

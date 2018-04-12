@@ -13,8 +13,6 @@ package org.eclipse.qvtd.cs2as.compiler.internal;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -30,6 +28,7 @@ import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.AbstractCompilerStep;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
@@ -43,8 +42,7 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 		private @NonNull String traceabilityPropName;
 
 		public OCL2QVTmCompilerStep(@NonNull CompilerChain compilerChain, @NonNull QVTimperative qvti,
-				@Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options,
-				@NonNull URI oclDocURI, @NonNull URI... extendedDocURIs) throws CompilerChainException {
+				@Nullable CompilerOptions options, @NonNull URI oclDocURI, @NonNull URI... extendedDocURIs) throws CompilerChainException {
 			super(compilerChain, QVTM_STEP);
 			this.traceabilityPropName = getTraceabilityPropertyName();
 			ResourceSet externalResourceSet = qvti.getResourceSet();
@@ -100,13 +98,13 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 		}
 
 		private @NonNull String getTraceabilityPropertyName() {
-			String tracePropName = compilerChain.getOption(QVTM_STEP, TRACE_PROPERTY_NAME_KEY);
+			String tracePropName = compilerChain.basicGetOption(QVTM_STEP, TRACE_PROPERTY_NAME_KEY);
 			return tracePropName == null ? DEFAULT_TRACE_PROPERTY_NAME : tracePropName;
 		}
 	}
 
-	public @NonNull static final String DEFAULT_TRACE_PROPERTY_NAME = "ast";
-	public @NonNull static final Key<String> TRACE_PROPERTY_NAME_KEY = new Key<String>("ocl2qvtm.tracePropName");
+	public static final @NonNull String DEFAULT_TRACE_PROPERTY_NAME = "ast";
+	public static final CompilerOptions.@NonNull Key<String> TRACE_PROPERTY_NAME_KEY = new CompilerOptions.Key<String>("ocl2qvtm.tracePropName");
 
 	public final @NonNull OCL2QVTmCompilerStep ocl2qvtmCompilerStep;
 
@@ -120,7 +118,7 @@ public class OCL2QVTiCompilerChain extends AbstractCompilerChain {
 	 * @param extendedDocURIs optional OCL document URIs that the main one extends
 	 * @throws CompilerChainException
 	 */
-	public OCL2QVTiCompilerChain(@NonNull QVTimperative qvti, @Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options,
+	public OCL2QVTiCompilerChain(@NonNull QVTimperative qvti, @NonNull CompilerOptions options,
 			@NonNull URI oclDocURI, @NonNull URI prefixURI, @NonNull URI... extendedDocURIs) throws CompilerChainException {
 		super(qvti.getEnvironmentFactory(), oclDocURI, prefixURI, options);
 		this.ocl2qvtmCompilerStep = new OCL2QVTmCompilerStep(this, qvti, options, oclDocURI, extendedDocURIs);

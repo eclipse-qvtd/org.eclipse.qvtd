@@ -13,7 +13,6 @@ package org.eclipse.qvtd.umlx.ui.launching;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -27,13 +26,14 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
-import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain;
-import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.CompilerOptions;
+import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.debug.ui.launching.DirectionalMainTab;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxTypedModelNode;
@@ -41,26 +41,14 @@ import org.eclipse.qvtd.umlx.compiler.UMLXCompilerChain;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
 import org.eclipse.swt.graphics.Image;
 
+import com.google.common.collect.Lists;
+
 public class UMLXMainTab extends DirectionalMainTab<TxDiagram>
 {
-	private static final @NonNull String @NonNull [] intermediateKeys = new @NonNull String[] {
-		CompilerChain.QVTR_STEP,
-		CompilerChain.TRACE_STEP,
-		CompilerChain.QVTC_STEP,
-		CompilerChain.QVTU_STEP,
-		CompilerChain.QVTM_STEP,
-		CompilerChain.QVTS_STEP,
-		CompilerChain.QVTI_STEP,
-		CompilerChain.GENMODEL_STEP,
-		CompilerChain.JAVA_STEP,
-		CompilerChain.CLASS_STEP
-	};
-
 	@Override
-	protected @NonNull CompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI,
-			@NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
+	protected @NonNull CompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull CompilerOptions compilerOptions) {
 		QVTcoreStandaloneSetup.class.getName();			// QVTrCompilerChain doesn't initialize QVTc
-		return new UMLXCompilerChain(environmentFactory, txURI, txURI, options);
+		return new UMLXCompilerChain(environmentFactory, txURI, txURI, compilerOptions);
 	}
 
 	private void gatherOutputModels(@NonNull List<TxTypedModelNode> outputModels, @NonNull TxTypedModelNode typedModel) {
@@ -80,19 +68,42 @@ public class UMLXMainTab extends DirectionalMainTab<TxDiagram>
 	}
 
 	@Override
-	protected @NonNull String @NonNull [] getIntermediateKeysInternal() {
-		return intermediateKeys;
+	protected @NonNull List<@NonNull String> getIntermediateKeys() {
+		List<@NonNull String> asList = Lists.newArrayList(UMLXLaunchConfigurationDelegate.compileStepKeys);
+		if (!isInterpreted()) {
+			for (@NonNull String stepKey : UMLXLaunchConfigurationDelegate.generateStepKeys) {
+				asList.add(stepKey);
+			}
+		}
+		return asList;
 	}
 
 	@Override
-	protected void initializeOptions(@NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
-		super.initializeOptions(options);
-		initializeURIOption(options, CompilerChain.QVTR_STEP);
-		initializeURIOption(options, CompilerChain.QVTC_STEP);
-		AbstractCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.URI_KEY, getResolvedGenModel());
-		Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<@NonNull String, @Nullable String>();
-		genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, getProjectName());
-		AbstractCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
+	protected void initializeOptions(@NonNull DefaultCompilerOptions compilerOptions) throws IOException {
+		Map<@NonNull String, @NonNull URI> intermediatesMap = getIntermediatesMap(UMLXLaunchConfigurationDelegate.compileStepKeys);
+		compilerOptions.setURIs2(UMLXLaunchConfigurationDelegate.compileStepKeys, intermediatesMap);
+		compilerOptions.setDebugGraphs(doDotGraphs(), doYedGraphs());
+		if (!isInterpreted()) {
+			URI txURI = getTxURI();
+			URI genModelURI = getResolvedCompilerStep(CompilerChain.GENMODEL_STEP);
+			URI javaURI = getResolvedCompilerStep(CompilerChain.JAVA_STEP);
+			URI classURI = getResolvedCompilerStep(CompilerChain.CLASS_STEP);
+			compilerOptions.setQVTrGenerateOptions(getProjectName(), txURI, genModelURI, javaURI, classURI);
+		}
+		/*		super.initializeOptions(compilerOptions);
+		initializeURIOption(compilerOptions, CompilerChain.QVTR_STEP);
+		initializeURIOption(compilerOptions, CompilerChain.TRACE_STEP);
+		initializeURIOption(compilerOptions, CompilerChain.QVTC_STEP);
+		if (isInterpreted()) {
+			compilerOptions.setOption(CompilerChain.GENMODEL_STEP, CompilerChain.URI_KEY, null);
+		}
+		else {
+			initializeURIOption(compilerOptions, CompilerChain.GENMODEL_STEP);
+			//					compilerOptions.setOption(CompilerChain.GENMODEL_STEP, CompilerChain.URI_KEY, getResolvedGenModel());
+			Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<@NonNull String, @Nullable String>();
+			genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, getProjectName());
+			compilerOptions.setOption(CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
+		} */
 	}
 
 	@Override
@@ -150,6 +161,7 @@ public class UMLXMainTab extends DirectionalMainTab<TxDiagram>
 					}
 				}
 			}
+			newOutputsMap.put(QVTbaseUtil.TRACE_TYPED_MODEL_NAME, null); //getDefaultPath(outputsGroup, name));
 		}
 		else if (QVTiLaunchConstants.ENFORCE_CREATE_MODE.equals(modeName)) {
 			for (TxTypedModelNode inputModel : inputModels) {
@@ -168,6 +180,7 @@ public class UMLXMainTab extends DirectionalMainTab<TxDiagram>
 					}
 				}
 			}
+			newOutputsMap.put(QVTbaseUtil.TRACE_TYPED_MODEL_NAME, null); //getDefaultPath(outputsGroup, name));
 		}
 		if (QVTiLaunchConstants.ENFORCE_UPDATE_MODE.equals(modeName)) {
 			for (TxTypedModelNode inputModel : inputModels) {
@@ -188,6 +201,8 @@ public class UMLXMainTab extends DirectionalMainTab<TxDiagram>
 					}
 				}
 			}
+			oldInputsMap.put(QVTbaseUtil.TRACE_TYPED_MODEL_NAME, null); //getDefaultPath(outputsGroup, name));
+			newOutputsMap.put(QVTbaseUtil.TRACE_TYPED_MODEL_NAME, null); //getDefaultPath(outputsGroup, name));
 		}
 		/*		for (TypedModel outputModel : outputModels) {
 			if (outputs.add(outputModel)) {

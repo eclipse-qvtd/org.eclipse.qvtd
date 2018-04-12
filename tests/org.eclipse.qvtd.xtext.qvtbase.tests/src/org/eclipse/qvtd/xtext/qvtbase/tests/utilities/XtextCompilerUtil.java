@@ -128,7 +128,7 @@ public class XtextCompilerUtil extends CompilerUtil
 	public static void doQVTiSerializeAndLoad(@NonNull ProjectManager projectManager, @NonNull URI inputURI, @NonNull URI serializedURI) throws IOException {
 		/*XtextResource csResource =*/ doSerialize(projectManager, inputURI, serializedURI);
 		QVTimperative qvti = QVTimperative.newInstance(projectManager, null);
-		Resource iResource2 = QVTimperativeUtil.loadTransformations(ImperativeModel.class, qvti.getEnvironmentFactory(), serializedURI, false);
+		ASResource iResource2 = QVTimperativeUtil.loadTransformations(ImperativeModel.class, qvti.getEnvironmentFactory(), serializedURI, false);
 		assertNoResourceErrors("IMperative Load", iResource2);
 	}
 
@@ -138,26 +138,26 @@ public class XtextCompilerUtil extends CompilerUtil
 	 * garbage collection is enabled.
 	 */
 	public static void doQVTimperativeSetup() {
-    	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
-    		QVTimperativeStandaloneSetup.doSetup();
-    	}
-    	else {
-    		Guice.createInjector(new QVTimperativeRuntimeModule());
-    	}
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			QVTimperativeStandaloneSetup.doSetup();
+		}
+		else {
+			Guice.createInjector(new QVTimperativeRuntimeModule());
+		}
 	}
-	
+
 	/**
 	 * Perform the appropriate initialization to support QVTrelation parsing and editing using Xtext.
 	 * NB. This must be called before setUp() creates a GlobalStateMemento if the aggressive DEBUG_GC
 	 * garbage collection is enabled.
 	 */
 	public static void doQVTrelationSetup() {
-    	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
-    		QVTrelationStandaloneSetup.doSetup();
-    	}
-    	else {
-    		Guice.createInjector(new QVTrelationRuntimeModule());
-    	}
+		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+			QVTrelationStandaloneSetup.doSetup();
+		}
+		else {
+			Guice.createInjector(new QVTrelationRuntimeModule());
+		}
 	}
 
 	private static XtextResource doSerialize(@NonNull ProjectManager projectManager, @NonNull URI inputURI, @NonNull URI serializedURI) throws IOException {

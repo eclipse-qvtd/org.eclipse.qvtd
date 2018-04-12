@@ -14,7 +14,6 @@ package org.eclipse.qvtd.debug.ui.launching;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -55,8 +54,9 @@ import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain;
-import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.CompilerOptions;
+import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -87,13 +87,19 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		@Override
 		public void widgetSelected(SelectionEvent e) {
 			if (compileJob == null) {
-				CompileJob compileJob2 = createCompileJob();
-				resetCompileStates();
-				if (!compileButton.isDisposed()) {
-					compileButton.setText("Abort");
+				CompileJob compileJob2;
+				try {
+					compileJob2 = createCompileJob();
+					resetCompileStates();
+					if (!compileButton.isDisposed()) {
+						compileButton.setText("Abort");
+					}
+					compileJob = compileJob2;
+					compileJob2.schedule();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
-				compileJob = compileJob2;
-				compileJob2.schedule();
 			}
 			else {
 				cancelCompileJob(true);
@@ -107,12 +113,12 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 	protected class CompileJob extends Job implements CompilerChain.Listener
 	{
 		protected final @NonNull URI txURI;
-		protected final @NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options;
+		protected final @NonNull CompilerOptions options;
 		protected final @NonNull String outputName;
 		protected final @Nullable String genmodelPath;
 		protected final @Nullable URI javaURI;
 
-		public CompileJob(@NonNull URI txURI, @NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options, @NonNull String outputName, @Nullable String genmodelPath, @Nullable URI javaURI) {
+		public CompileJob(@NonNull URI txURI, @NonNull CompilerOptions options, @NonNull String outputName, @Nullable String genmodelPath, @Nullable URI javaURI) {
 			super("Compile Transformation");
 			this.txURI = txURI;
 			this.options = options;
@@ -146,8 +152,9 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 			options.setUseNullAnnotations(true);
 			options.setPackagePrefix("cg");
 			cg.generateClassFile();
-			assert javaURI != null;
-			URI normalizedURI = resourceSet.getURIConverter().normalize(javaURI);
+			URI javaURI2 = javaURI;
+			assert javaURI2 != null;
+			URI normalizedURI = resourceSet.getURIConverter().normalize(javaURI2);
 			String fileString = ClassUtil.nonNullState(normalizedURI.toFileString());
 			cg.saveSourceFile(fileString);
 			//			cg.saveSourceFile("../org.eclipse.qvtd.xtext.qvtcore.tests/test-gen/");
@@ -165,11 +172,11 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		}
 
 		protected void doRun() throws Exception {
+			options.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, XMIUtil.createSaveOptions());
 			QVTimperative qvt = QVTimperative.newInstance(BasicProjectManager.CLASS_PATH, null);
 			CompilerChain compilerChain2 = createCompilerChain(qvt.getEnvironmentFactory(), txURI, options);
-			compilerChain2.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, XMIUtil.createSaveOptions());
 			compilerChain2.addListener(this);
-			if (genmodelPath == null) {
+			if (isInterpreted()) {
 				compilerChain2.compile(outputName);
 			}
 			else {
@@ -211,7 +218,17 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 	protected class InterpretedCheckBoxAdapter extends SelectionAdapter
 	{
 		@Override
+		public void widgetDefaultSelected(SelectionEvent e) {
+			isInterpreted = interpretedCheckButton.getSelection();
+			//			System.out.println("widgetDefaultSelected isInterpreted = " + isInterpreted);
+			groupsModified = true;
+			updateLaunchConfigurationDialog();
+		}
+
+		@Override
 		public void widgetSelected(SelectionEvent e) {
+			isInterpreted = interpretedCheckButton.getSelection();
+			//			System.out.println("widgetSelected isInterpreted = " + isInterpreted);
 			groupsModified = true;
 			updateLaunchConfigurationDialog();
 		}
@@ -252,6 +269,15 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 			catch (Exception ex) {
 				setErrorMessage("Failed to load '" + elementsURI + "': " + ex.toString());
 			} */
+			updateLaunchConfigurationDialog();
+		}
+	}
+
+	protected class SimpleCheckBoxAdapter extends SelectionAdapter
+	{
+		@Override
+		public void widgetSelected(SelectionEvent e) {
+			groupsModified = true;
 			updateLaunchConfigurationDialog();
 		}
 	}
@@ -319,6 +345,8 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 	private Group buildGroup;
 	private Button autoBuildCheckButton;
 	private Button interpretedCheckButton;
+	private Button dotGraphsCheckButton;
+	private Button yedGraphsCheckButton;
 	private Button traceEvaluationCheckButton;
 	private Button compileButton;
 
@@ -332,6 +360,11 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 	 */
 	protected boolean initializing = false;
 
+	/**
+	 * Prevailing state of interpretedCheckButton.
+	 */
+	private boolean isInterpreted = true;
+
 	private boolean updating = false;
 	private boolean txModified = false;
 	private @Nullable TX transformation = null;
@@ -344,7 +377,10 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		projectPath.addModifyListener(new ProjectModifyListener());
 		txPath.addModifyListener(new TransformationModifyListener());
 		compileButton.addSelectionListener(new CompileButtonAdapter());
+		//		System.out.println("listening isInterpreted = " + isInterpreted);
 		interpretedCheckButton.addSelectionListener(new InterpretedCheckBoxAdapter());
+		dotGraphsCheckButton.addSelectionListener(new SimpleCheckBoxAdapter());
+		yedGraphsCheckButton.addSelectionListener(new SimpleCheckBoxAdapter());
 		traceEvaluationCheckButton.addSelectionListener(new InterpretedCheckBoxAdapter());		// Cheap over-re-use
 		//		TransformationModeListener listener = new TransformationModeListener();
 		//FIXME		partialCheckButton.addSelectionListener(listener);
@@ -443,7 +479,7 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		buildGroup.setToolTipText("Running the transformation compilation tool chain");
 		buildGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		buildGroup.setText("Build");
-		buildGroup.setLayout(new GridLayout(4, false));
+		buildGroup.setLayout(new GridLayout(6, false));
 
 		//		buildGroup = new Composite(txGroup, SWT.NONE);
 		//		GridLayout gl_directionGroup = new GridLayout(3, false);
@@ -477,11 +513,24 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		autoBuildCheckButton.setSelection(false);
 		autoBuildCheckButton.setEnabled(false);		// FIXME disabled
 
+		//		System.out.println("created isInterpreted = " + isInterpreted);
 		interpretedCheckButton = new Button(buildGroup, SWT.CHECK);
 		interpretedCheckButton.setToolTipText("Whether to prepare for interpreted execution bypassing the Java generation compilation step.");
 		interpretedCheckButton.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
 		interpretedCheckButton.setText("Interpreted");
-		interpretedCheckButton.setSelection(true);
+		interpretedCheckButton.setSelection(isInterpreted);
+
+		dotGraphsCheckButton = new Button(buildGroup, SWT.CHECK);
+		dotGraphsCheckButton.setToolTipText("Whether to generate *.dot graphs of the mappings and schedule.");
+		dotGraphsCheckButton.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
+		dotGraphsCheckButton.setText("DOT graphs");
+		dotGraphsCheckButton.setSelection(false);
+
+		yedGraphsCheckButton = new Button(buildGroup, SWT.CHECK);
+		yedGraphsCheckButton.setToolTipText("Whether to generate *.graphml graphs of the mappings and schedule.");
+		yedGraphsCheckButton.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 1, 1));
+		yedGraphsCheckButton.setText("YED graphs");
+		yedGraphsCheckButton.setSelection(false);
 
 		traceEvaluationCheckButton = new Button(buildGroup, SWT.CHECK);
 		traceEvaluationCheckButton.setToolTipText("Whether to provide a textual evaluation trace to the console.");
@@ -495,10 +544,10 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		compileButton.setText("  Compile  ");
 	}
 
-	protected @NonNull CompileJob createCompileJob() {
+	protected @NonNull CompileJob createCompileJob() throws IOException {
 		URI txURI = getTxURI();
 		String direction = getDirection();
-		Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options = new HashMap<>();
+		DefaultCompilerOptions options = createCompilerOptions();
 		initializeOptions(options);
 		if (isInterpreted()) {
 			return new CompileJob(txURI, options, direction, null, null);
@@ -510,7 +559,11 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		}
 	}
 
-	protected abstract @NonNull CompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options);
+	protected abstract @NonNull CompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull CompilerOptions options);
+
+	protected @NonNull DefaultCompilerOptions createCompilerOptions() {
+		return new DefaultCompilerOptions();
+	}
 
 	@Override
 	@SuppressWarnings("null")
@@ -521,8 +574,12 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		prepareBrowseProjectsButton(projectBrowseWS, projectPath);
 		LaunchingUtils.prepareBrowseWorkspaceButton(txBrowseWS, txPath, false);
 		LaunchingUtils.prepareBrowseFileSystemButton(txBrowseFile, txPath, false);
-		LaunchingUtils.prepareBrowseWorkspaceButton(genmodelBrowseWS, genmodelPath, false);
-		LaunchingUtils.prepareBrowseFileSystemButton(genmodelBrowseFile, genmodelPath, false);
+		if (genmodelBrowseWS != null) {
+			LaunchingUtils.prepareBrowseWorkspaceButton(genmodelBrowseWS, genmodelPath, false);
+		}
+		if (genmodelBrowseFile != null) {
+			LaunchingUtils.prepareBrowseFileSystemButton(genmodelBrowseFile, genmodelPath, false);
+		}
 		updateParametersGroup(oldInputsGroup, SWT.NONE, EMPTY_MAP, null);
 		updateParametersGroup(oldOutputsGroup, SWT.SAVE, EMPTY_MAP, null);
 		updateParametersGroup(newInputsGroup, SWT.NONE, EMPTY_MAP, null);
@@ -690,6 +747,14 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		return rawValue;
 	}
 
+	protected boolean doDotGraphs() {
+		return dotGraphsCheckButton.getSelection();
+	}
+
+	protected boolean doYedGraphs() {
+		return yedGraphsCheckButton.getSelection();
+	}
+
 	protected @Nullable CompileStepRow getCompilerStepRow(@NonNull String step) {
 		@SuppressWarnings("null")@NonNull Group intermediatesGroup2 = intermediatesGroup;
 		return (CompileStepRow) getParameterRow(intermediatesGroup2, step);
@@ -763,8 +828,8 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		return (QVTiEnvironmentFactory) ocl2.getEnvironmentFactory();
 	}
 
-	protected @NonNull String getGenmodelPath() {
-		return genmodelPath.getText();
+	protected @Nullable String getGenmodelPath() {
+		return genmodelPath != null? genmodelPath.getText() : null;
 	}
 
 	@Override
@@ -772,19 +837,15 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		return QVTdDebugUIPlugin.getDefault().createImage("icons/QVTiModelFile.gif");
 	}
 
-	protected @NonNull List<@NonNull String> getIntermediateKeys() {
-		List<String> asList = Arrays.asList(getIntermediateKeysInternal());
-		List<@NonNull String> intermediateKeys = ClassUtil.nullFree(asList);
-		if (isInterpreted()) {
-			intermediateKeys = new ArrayList<>(intermediateKeys);
-			intermediateKeys.remove(CompilerChain.JAVA_STEP);
-			intermediateKeys.remove(CompilerChain.CLASS_STEP);
+	protected abstract @NonNull List<@NonNull String> getIntermediateKeys();
+
+	protected @NonNull Map<@NonNull String, @NonNull URI> getIntermediatesMap(@NonNull String @NonNull [] keys) {
+		Map<@NonNull String, @NonNull URI> map = new HashMap<>();
+		for (@NonNull String key : keys) {
+			map.put(key, getResolvedCompilerStep(key));
 		}
-		return intermediateKeys;
+		return map;
 	}
-
-	protected abstract @NonNull String @NonNull [] getIntermediateKeysInternal();
-
 
 	protected @Nullable ParameterRow getParameterRow(@NonNull Group group, @NonNull String name) {
 		for (Control child : group.getChildren()) {
@@ -858,6 +919,10 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		txPath.setText(String.valueOf(uri.deresolve(projectURI)));
 		//		autoBuildCheckButton.setSelection(configuration.getAttribute(AUTO_BUILD_KEY, true));					// FIXME disabled
 		interpretedCheckButton.setSelection(configuration.getAttribute(INTERPRETED_KEY, true));
+		isInterpreted = interpretedCheckButton.getSelection();
+		System.out.println("initializeInternal isInterpreted = " + isInterpreted);
+		dotGraphsCheckButton.setSelection(configuration.getAttribute(DOT_GRAPHS_KEY, true));
+		yedGraphsCheckButton.setSelection(configuration.getAttribute(YED_GRAPHS_KEY, true));
 		traceEvaluationCheckButton.setSelection(configuration.getAttribute(TRACE_EVALUATION_KEY, false));
 		Map<String, String> oldInputsMap = configuration.getAttribute(OLD_IN_KEY, EMPTY_MAP);
 		Map<String, String> newInputsMap = configuration.getAttribute(NEW_IN_KEY, EMPTY_MAP);
@@ -891,39 +956,31 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		//			ParameterRow row = (ParameterRow)child;
 		//			System.out.println("  " + row.name + "=>" + row.path.getText());
 		//		}
-		String genmodelAttribute = configuration.getAttribute(GENMODEL_KEY, "");
-		if (genmodelAttribute == null) {
-			URI txURI = getTxURI();
-			String name = txURI.trimFileExtension().lastSegment();
-			URI prefixURI = txURI.trimSegments(1);
-			URI deresolveSrcURI = prefixURI.appendSegment(name).appendFileExtension("genmodel").deresolve(getProjectURI());
-			genmodelAttribute = deresolveSrcURI.toString();
-		}
-		uri = URI.createURI(genmodelAttribute);
-		if (uri.scheme() == null) {
-			uri = URI.createPlatformResourceURI(genmodelAttribute, true);
-		}
-		genmodelPath.setText(String.valueOf(uri.deresolve(getProjectURI())));
-	}
-
-	protected void initializeOptions(@NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
-		AbstractCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, XMIUtil.createSaveOptions());
-		if (isInterpreted()) {
-			AbstractCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, null);
-			AbstractCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, null);
-		}
-		else {
-			initializeURIOption(options, CompilerChain.JAVA_STEP);
-			initializeURIOption(options, CompilerChain.CLASS_STEP);
+		if (genmodelPath != null) {
+			String genmodelAttribute = configuration.getAttribute(GENMODEL_KEY, "");
+			if (genmodelAttribute == null) {
+				URI txURI = getTxURI();
+				String name = txURI.trimFileExtension().lastSegment();
+				URI prefixURI = txURI.trimSegments(1);
+				URI deresolveSrcURI = prefixURI.appendSegment(name).appendFileExtension("genmodel").deresolve(getProjectURI());
+				genmodelAttribute = deresolveSrcURI.toString();
+			}
+			uri = URI.createURI(genmodelAttribute);
+			if (uri.scheme() == null) {
+				uri = URI.createPlatformResourceURI(genmodelAttribute, true);
+			}
+			genmodelPath.setText(String.valueOf(uri.deresolve(getProjectURI())));
 		}
 	}
 
-	protected void initializeURIOption(@NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options, @NonNull String stepKey) {
-		AbstractCompilerChain.setOption(options, stepKey, CompilerChain.URI_KEY, getResolvedCompilerStep(stepKey));
+	protected abstract void initializeOptions(@NonNull DefaultCompilerOptions compilerOptions) throws IOException;
+
+	protected void initializeURIOption(@NonNull CompilerOptions options, @NonNull String stepKey) {
+		options.setOption(stepKey, CompilerChain.URI_KEY, getResolvedCompilerStep(stepKey));
 	}
 
 	protected boolean isInterpreted() {
-		return interpretedCheckButton.getSelection();
+		return isInterpreted;
 	}
 
 	@Override
@@ -932,9 +989,14 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		configuration.setAttribute(PROJECT_KEY, getProjectName());
 		configuration.setAttribute(TX_KEY, getTxURI().toString());
 		configuration.setAttribute(AUTO_BUILD_KEY, autoBuildCheckButton.getSelection());
-		configuration.setAttribute(GENMODEL_KEY, getResolvedGenModel().toString());
+		configuration.setAttribute(DOT_GRAPHS_KEY, dotGraphsCheckButton.getSelection());
+		if (genmodelPath != null) {
+			configuration.setAttribute(GENMODEL_KEY, getResolvedGenModel().toString());
+		}
+		//		System.out.println("performApply isInterpreted = " + isInterpreted);
 		configuration.setAttribute(INTERPRETED_KEY, interpretedCheckButton.getSelection());
 		configuration.setAttribute(TRACE_EVALUATION_KEY, traceEvaluationCheckButton.getSelection());
+		configuration.setAttribute(YED_GRAPHS_KEY, yedGraphsCheckButton.getSelection());
 		performApply_Map(configuration, oldInputsGroup, OLD_IN_KEY);
 		performApply_Map(configuration, newInputsGroup, NEW_IN_KEY);
 		performApply_Map(configuration, oldOutputsGroup, OLD_OUT_KEY);
@@ -1063,8 +1125,10 @@ public abstract class MainTab<TX> extends AbstractMainTab implements QVTiLaunchC
 		configuration.setAttribute(TX_KEY, resolvedTxURI.toString());
 		configuration.setAttribute(GENMODEL_KEY, resolvedTxURI.trimFileExtension().appendFileExtension("genmodel").toString());
 		configuration.setAttribute(AUTO_BUILD_KEY, true);
+		configuration.setAttribute(DOT_GRAPHS_KEY, false);
 		configuration.setAttribute(INTERPRETED_KEY, true);
 		configuration.setAttribute(TRACE_EVALUATION_KEY, false);
+		configuration.setAttribute(YED_GRAPHS_KEY, false);
 		configuration.setAttribute(OLD_IN_KEY, EMPTY_MAP);
 		configuration.setAttribute(NEW_IN_KEY, EMPTY_MAP);
 		configuration.setAttribute(OLD_OUT_KEY, EMPTY_MAP);

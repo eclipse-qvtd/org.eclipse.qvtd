@@ -24,8 +24,8 @@ import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
+import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
-import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
@@ -61,7 +61,7 @@ public class LoadTestCase extends XtextTestCase
 		saveAsXMI(xtextResource, cstURI);
 		pivotResource.setURI(pivotURI);
 		assertValidationDiagnostics("Pivot validation errors", pivotResource, messages);
-		pivotResource.save(TestsXMLUtil.defaultSavingOptions);
+		pivotResource.save(DefaultCompilerOptions.defaultSavingOptions);
 		return pivotResource;
 	}
 
@@ -70,7 +70,7 @@ public class LoadTestCase extends XtextTestCase
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl()); //$NON-NLS-1$
 		Resource xmiResource = resourceSet.createResource(xmiURI);
 		xmiResource.getContents().addAll(resource.getContents());
-		xmiResource.save(TestsXMLUtil.defaultSavingOptions);
+		xmiResource.save(DefaultCompilerOptions.defaultSavingOptions);
 		assertNoResourceErrors("Save failed", xmiResource);
 		resource.getContents().addAll(xmiResource.getContents());
 	}

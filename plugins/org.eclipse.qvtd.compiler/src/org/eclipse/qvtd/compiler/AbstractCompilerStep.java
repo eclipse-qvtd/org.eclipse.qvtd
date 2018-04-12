@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 
 public abstract class AbstractCompilerStep implements CompilerStep
@@ -43,6 +42,10 @@ public abstract class AbstractCompilerStep implements CompilerStep
 			compilerProblems = compilerProblems2 = new CompilerProblems();
 		}
 		compilerProblems2.addProblem(problem);
+	}
+
+	public <T> @Nullable T basicGetOption(CompilerOptions.@NonNull Key<T> optionKey) {
+		return compilerChain.basicGetOption(name, optionKey);
 	}
 
 	protected void compiled(@NonNull Object object) {
@@ -79,10 +82,6 @@ public abstract class AbstractCompilerStep implements CompilerStep
 	@Override
 	public @NonNull String getName() {
 		return name;
-	}
-
-	public <T> @Nullable T getOption(@NonNull Key<T> optionKey) {
-		return compilerChain.getOption(name, optionKey);
 	}
 
 	protected @NonNull URI getURI() {

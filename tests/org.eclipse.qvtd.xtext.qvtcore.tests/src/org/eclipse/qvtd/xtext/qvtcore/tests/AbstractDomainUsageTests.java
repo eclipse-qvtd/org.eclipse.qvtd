@@ -31,12 +31,12 @@ import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.validation.ComposedEValidator;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
+import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
-import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 
 /**
  * Abstract support for tests that demonstrate that the QVTxxxDomainUsageAnalysis analyzes everything.
@@ -124,7 +124,7 @@ public abstract class AbstractDomainUsageTests extends LoadTestCase
 	}
 
 	protected @NonNull Map<Object, Object> getSaveOptions() {
-		return TestsXMLUtil.defaultSavingOptions;
+		return DefaultCompilerOptions.defaultSavingOptions;
 	}
 
 	protected @NonNull Transformation loadTransformation(@NonNull MyQVT myQVT, @NonNull URI transformURI) throws Exception {

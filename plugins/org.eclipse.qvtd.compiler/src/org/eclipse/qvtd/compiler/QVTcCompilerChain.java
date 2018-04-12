@@ -12,13 +12,11 @@ package org.eclipse.qvtd.compiler;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
@@ -37,21 +35,22 @@ public class QVTcCompilerChain extends AbstractCompilerChain
 		}
 
 		public @NonNull Resource execute(@NonNull URI txURI) throws IOException {
-			Resource cResource = QVTcoreUtil.loadTransformations(environmentFactory, txURI, false);
+			ASResource cResource = QVTcoreUtil.loadTransformations(environmentFactory, txURI, false);
+			cResource.setURI(getURI());
 			// FIXME Following code fixes up missing source. Should be fixed earlier.
 			List<@NonNull OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, cResource);
 			if (missingOperationCallSources != null) {
 				System.err.println("Missing OperationCallExp sources were fixed up for '" + txURI + "'");
 			}
 			checkForProxyURIs(cResource);
-			compiled(cResource);
+			saveResource(cResource);
 			return cResource;
 		}
 	}
 
 	protected final @NonNull Xtext2QVTcCompilerStep xtext2qvtcCompilerStep;
 
-	public QVTcCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI, @Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
+	public QVTcCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull CompilerOptions options) {
 		super(environmentFactory, txURI, prefixURI, options);
 		this.xtext2qvtcCompilerStep = createXtext2QVTcCompilerStep();
 	}

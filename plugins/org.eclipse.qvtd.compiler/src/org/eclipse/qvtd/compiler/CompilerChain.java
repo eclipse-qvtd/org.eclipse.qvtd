@@ -27,23 +27,6 @@ import org.eclipse.qvtd.runtime.evaluation.Transformer;
 public interface CompilerChain
 {
 	/**
-	 * A CompilerChain.Key provides type safety for the per-step option values.
-	 */
-	public static class Key<T>
-	{
-		protected final @NonNull String name;
-
-		public Key(@NonNull String name) {
-			this.name = name;
-		}
-
-		@Override
-		public String toString() {
-			return name;
-		}
-	}
-
-	/**
 	 * A CompilerChain.Listener is notified of the completion of each compiler step with a step-specific result object.
 	 */
 	public static interface Listener
@@ -64,42 +47,45 @@ public interface CompilerChain
 	public static final @NonNull String TRACE_STEP = "Trace";
 	public static final @NonNull String UMLX_STEP = "UMLX";
 
-	public static final @NonNull Key<Boolean> CHECK_KEY = new Key<>("check");
-	public static final @NonNull Key<Boolean> DEBUG_KEY = new Key<>("debug");
-	//	public static final @NonNull Key<@NonNull QVTuConfiguration> QVTU_CONFIGURATION_KEY = new Key<>("qvtuConfiguration");
-	public static final @NonNull Key<@NonNull Map<@NonNull String, @Nullable String>> GENMODEL_OPTIONS_KEY = new Key<>("genmodel-options");
-	public static final @NonNull Key<@Nullable Collection<@NonNull ? extends GenPackage>> GENMODEL_USED_GENPACKAGES_KEY = new Key<>("genmodel-usedGenPackages");;
-	public static final @NonNull Key<@NonNull Map<@NonNull String, @Nullable String>> TRACE_OPTIONS_KEY = new Key<>("trace-options");
-	public static final @NonNull Key<@NonNull Map<Object, Object>> SAVE_OPTIONS_KEY = new Key<>("save");
-	public static final @NonNull Key<@NonNull Map<@NonNull Key<? extends Object>, @Nullable Object>> SCHEDULER_OPTIONS_KEY = new Key<>("scheduler-options");
-	public static final @NonNull Key<@Nullable URI> URI_KEY = new Key<>("uri");
-	public static final @NonNull Key<Boolean> VALIDATE_KEY = new Key<>("validate");
+	public static final CompilerOptions.@NonNull Key<Boolean> CHECK_KEY = new CompilerOptions.Key<>("check");
+	public static final CompilerOptions.@NonNull Key<Boolean> DEBUG_KEY = new CompilerOptions.Key<>("debug");
+	//	public static final CompilerOptions.@NonNull Key<@NonNull QVTuConfiguration> QVTU_CONFIGURATION_KEY = new CompilerOptions.Key<>("qvtuConfiguration");
+	public static final CompilerOptions.@NonNull Key<@NonNull String> GENMODEL_MODEL_DIRECTORY_KEY = new CompilerOptions.Key<>("genmodel-model-directory");
+	public static final CompilerOptions.@NonNull Key<@NonNull Map<@NonNull String, @Nullable String>> GENMODEL_OPTIONS_KEY = new CompilerOptions.Key<>("genmodel-options");
+	public static final CompilerOptions.@NonNull Key<@Nullable Collection<@NonNull ? extends GenPackage>> GENMODEL_USED_GENPACKAGES_KEY = new CompilerOptions.Key<>("genmodel-usedGenPackages");;
+	public static final CompilerOptions.@NonNull Key<@NonNull Map<@NonNull String, @Nullable String>> TRACE_OPTIONS_KEY = new CompilerOptions.Key<>("trace-options");
+	public static final CompilerOptions.@NonNull Key<@NonNull Map<Object, Object>> SAVE_OPTIONS_KEY = new CompilerOptions.Key<>("save");
+	public static final CompilerOptions.@NonNull Key<@NonNull Map<CompilerOptions.@NonNull Key<? extends Object>, @Nullable Object>> SCHEDULER_OPTIONS_KEY = new CompilerOptions.Key<>("scheduler-options");
+	public static final CompilerOptions.@NonNull Key<@Nullable URI> URI_KEY = new CompilerOptions.Key<>("uri");
+	public static final CompilerOptions.@NonNull Key<Boolean> VALIDATE_KEY = new CompilerOptions.Key<>("validate");
 
-	public static final @NonNull Key<@NonNull List<@NonNull String>> CLASS_PROJECT_NAMES_KEY = new Key<>("classProjectNames");
+	public static final CompilerOptions.@NonNull Key<@NonNull List<@NonNull String>> CLASS_PROJECT_NAMES_KEY = new CompilerOptions.Key<>("classProjectNames");
 
-	public static final @NonNull Key<@Nullable String> JAVA_EXTRA_PREFIX_KEY = new Key<>("javaExtraPrefix");
-	public static final @NonNull Key<@Nullable Boolean> JAVA_GENERATED_DEBUG_KEY = new Key<>("javaGeneratedDebug");
-	public static final @NonNull Key<@Nullable Boolean> JAVA_INCREMENTAL_KEY = new Key<>("javaIncremental");
+	public static final CompilerOptions.@NonNull Key<@Nullable String> JAVA_EXTRA_PREFIX_KEY = new CompilerOptions.Key<>("javaExtraPrefix");
+	public static final CompilerOptions.@NonNull Key<@Nullable Boolean> JAVA_GENERATED_DEBUG_KEY = new CompilerOptions.Key<>("javaGeneratedDebug");
+	public static final CompilerOptions.@NonNull Key<@Nullable Boolean> JAVA_INCREMENTAL_KEY = new CompilerOptions.Key<>("javaIncremental");
 
 	public static final @NonNull String GENMODEL_BASE_PREFIX = "genModelBasePrefix";
 	public static final @NonNull String GENMODEL_COPYRIGHT_TEXT = "genModelCopyrightText";
 
 	public static final @NonNull String TRACE_NS_URI = "traceNsURI";
 
-	public static final @NonNull Key<Boolean> SCHEDULER_NO_EARLY_MERGE = new Key<>("schedulerNoEarlyMerge");
-	public static final @NonNull Key<Boolean> SCHEDULER_NO_LATE_CONSUMER_MERGE = new Key<>("schedulerNoLateConsumerMerge");
+	public static final CompilerOptions.@NonNull Key<Boolean> SCHEDULER_NO_EARLY_MERGE = new CompilerOptions.Key<>("schedulerNoEarlyMerge");
+	public static final CompilerOptions.@NonNull Key<Boolean> SCHEDULER_NO_LATE_CONSUMER_MERGE = new CompilerOptions.Key<>("schedulerNoLateConsumerMerge");
+	public static final CompilerOptions.@NonNull Key<Boolean> SCHEDULER_DOT_GRAPHS = new CompilerOptions.Key<>("schedulerDotGraphs");
+	public static final CompilerOptions.@NonNull Key<Boolean> SCHEDULER_YED_GRAPHS = new CompilerOptions.Key<>("schedulerYedGraphs");
 
 	void addListener(@NonNull Listener listener);
-	@Nullable URI basicGetURI(@NonNull String stepKey, @NonNull Key<URI> uriKey);
+	<T> @Nullable T basicGetOption(@NonNull String stepKey, CompilerOptions.@NonNull Key<T> optionKey);
+	CompilerOptions.@Nullable StepOptions basicGetOptions(@NonNull String stepKey);
+	@Nullable URI basicGetURI(@NonNull String stepKey, CompilerOptions.@NonNull Key<URI> uriKey);
 	@NonNull Class<? extends Transformer> build(@NonNull String outputName, @NonNull String ... genModelFiles) throws Exception;
 	@NonNull ImperativeTransformation compile(@NonNull String outputName) throws Exception;
 	void compiled(@NonNull String stepKey, @NonNull Object object);
 	@NonNull Resource createResource(@NonNull URI uri) throws IOException;
 	void dispose();
 	@NonNull QVTbaseEnvironmentFactory getEnvironmentFactory();
-	<T> @Nullable T getOption(@NonNull String stepKey, @NonNull Key<T> optionKey);
-	@NonNull URI getURI(@NonNull String stepKey, @NonNull Key<URI> uriKey);
+	@NonNull URI getURI(@NonNull String stepKey, CompilerOptions.@NonNull Key<URI> uriKey);
 	void removeListener(@NonNull Listener listener);
 	void saveResource(@NonNull Resource asResource, @NonNull String stepKey) throws IOException;
-	<T> void setOption(@NonNull String stepKey, @NonNull Key<T> optionKey, @Nullable T object);
 }

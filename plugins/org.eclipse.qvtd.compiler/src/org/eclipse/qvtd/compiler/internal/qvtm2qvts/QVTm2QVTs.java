@@ -14,14 +14,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.compiler.CompilerChain.Key;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
+import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
@@ -32,7 +31,7 @@ import com.google.common.collect.Lists;
 public class QVTm2QVTs extends AbstractQVTb2QVTs
 {
 	public QVTm2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory,
-			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
+			CompilerOptions.@Nullable StepOptions schedulerOptions) {
 		super(new QVTcoreScheduleManager(environmentFactory, schedulerOptions), problemHandler);
 	}
 
@@ -55,10 +54,8 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 			for (@NonNull RuleAnalysis ruleAnalysis : ruleAnalyses) {
 				ruleAnalysis.registerConsumptionsAndProductions();
 			}
-			if (AbstractQVTb2QVTs.DEBUG_GRAPHS.isActive()) {
-				for (@NonNull RuleAnalysis ruleAnalysis : ruleAnalyses) {
-					scheduleManager.writeDebugGraphs(ruleAnalysis.getRegion(), null);
-				}
+			for (@NonNull RuleAnalysis ruleAnalysis : ruleAnalyses) {
+				scheduleManager.writeDebugGraphs(ruleAnalysis.getRegion(), null);
 			}
 		}
 		List<@NonNull MappingRegion> orderedRegions = new ArrayList<>();

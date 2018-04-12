@@ -16,12 +16,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.QVTrelationDomainUsageAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtr.AbstractQVTr2QVTr;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
-import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 import org.eclipse.qvtd.xtext.qvtcore.tests.AbstractDomainUsageTests;
 
@@ -76,7 +76,7 @@ public class QVTr2QVTrTests extends AbstractDomainUsageTests
 		Model outModel = QVTrelationUtil.getModel(outResource);
 		outModel.setName(inURI.lastSegment());
 		outModel.setExternalURI(inURI.toString());
-		outResource.save(TestsXMLUtil.defaultSavingOptions);
+		outResource.save(DefaultCompilerOptions.defaultSavingOptions);
 		assertSameModel(inResource, outResource);
 	}
 

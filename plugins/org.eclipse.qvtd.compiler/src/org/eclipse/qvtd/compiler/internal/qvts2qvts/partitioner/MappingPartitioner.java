@@ -24,7 +24,6 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.MappingRegionAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -514,9 +513,7 @@ public class MappingPartitioner
 	private @NonNull MicroMappingRegion createAssignmentRegion(@NonNull Edge outputEdge, int i) {
 		AssignmentPartition assignmentPartition = new AssignmentPartition(this, outputEdge);
 		MicroMappingRegion microMappingRegion = assignmentPartition.createMicroMappingRegion("«edge" + i + "»", "_p" + i);
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		}
+		scheduleManager.writeDebugGraphs(microMappingRegion, null);
 		assignmentPartition.check(microMappingRegion);
 		return microMappingRegion;
 	}
@@ -524,9 +521,7 @@ public class MappingPartitioner
 	private @NonNull MicroMappingRegion createRealizedRegion() {
 		RealizedPartition realizedPartition = new RealizedPartition(this);
 		MicroMappingRegion microMappingRegion = realizedPartition.createMicroMappingRegion("«realized»", "_r0");
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		}
+		scheduleManager.writeDebugGraphs(microMappingRegion, null);
 		realizedPartition.check(microMappingRegion);
 		return microMappingRegion;
 	}
@@ -534,9 +529,7 @@ public class MappingPartitioner
 	private @NonNull MicroMappingRegion createSpeculatedRegion() {
 		SpeculatedPartition speculatedPartition = new SpeculatedPartition(this);
 		MicroMappingRegion microMappingRegion = speculatedPartition.createMicroMappingRegion("«speculated»", "_p2");
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		}
+		scheduleManager.writeDebugGraphs(microMappingRegion, null);
 		speculatedPartition.check(microMappingRegion);
 		return microMappingRegion;
 	}
@@ -544,9 +537,7 @@ public class MappingPartitioner
 	private @NonNull MicroMappingRegion createSpeculatingRegion() {
 		SpeculatingPartition speculatingPartition = new SpeculatingPartition(this);
 		MicroMappingRegion microMappingRegion = speculatingPartition.createMicroMappingRegion("«speculating»", "_p1");
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		}
+		scheduleManager.writeDebugGraphs(microMappingRegion, null);
 		speculatingPartition.check(microMappingRegion);
 		return microMappingRegion;
 	}
@@ -554,9 +545,7 @@ public class MappingPartitioner
 	private @NonNull MicroMappingRegion createSpeculationRegion() {
 		SpeculationPartition speculationPartition = new SpeculationPartition(this);
 		MicroMappingRegion microMappingRegion = speculationPartition.createMicroMappingRegion("«speculation»", "_p0");
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		}
+		scheduleManager.writeDebugGraphs(microMappingRegion, null);
 		speculationPartition.check(microMappingRegion);
 		return microMappingRegion;
 	}

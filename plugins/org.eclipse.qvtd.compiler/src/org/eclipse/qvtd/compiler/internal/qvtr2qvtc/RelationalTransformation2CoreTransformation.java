@@ -102,7 +102,7 @@ public class RelationalTransformation2CoreTransformation extends QVTcoreHelper
 		//	Create a non-middle TypedModel per model parameter
 		//
 		for (@NonNull TypedModel relationTypedModel : ClassUtil.nullFree(relationalTransformation.getModelParameter())) {
-			if (!QVTbaseUtil.TRACE_TYPED_MODEL_NAME.equals(relationTypedModel.getName())) {
+			if (!QVTbaseUtil.isTrace(relationTypedModel)) {
 				TypedModel coreTypedModel = createTypedModel(coreTransformation2, relationTypedModel.getName(), ClassUtil.nullFree(relationTypedModel.getUsedPackage()));
 				qvtr2qvtc.putTypedModel(relationTypedModel, coreTypedModel);
 			}

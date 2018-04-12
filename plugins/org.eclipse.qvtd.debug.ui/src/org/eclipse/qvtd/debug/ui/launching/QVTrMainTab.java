@@ -12,43 +12,36 @@
 package org.eclipse.qvtd.debug.ui.launching;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
-import org.eclipse.qvtd.compiler.CompilerChain.Key;
+import org.eclipse.qvtd.compiler.CompilerOptions;
+import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
+import org.eclipse.qvtd.debug.launching.QVTrLaunchConfigurationDelegate;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Composite;
+
+import com.google.common.collect.Lists;
 
 public class QVTrMainTab extends QVTDirectionalMainTab<RelationalTransformation>
 {
-	private static final @NonNull String @NonNull [] intermediateKeys = new @NonNull String[] {
-		CompilerChain.QVTR_STEP,
-		CompilerChain.TRACE_STEP,
-		CompilerChain.QVTC_STEP,
-		CompilerChain.QVTU_STEP,
-		CompilerChain.QVTM_STEP,
-		CompilerChain.QVTS_STEP,
-		CompilerChain.QVTI_STEP,
-		CompilerChain.GENMODEL_STEP,
-		CompilerChain.JAVA_STEP,
-		CompilerChain.CLASS_STEP
-	};
-
 	@Override
-	protected @NonNull CompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
+	protected @NonNull CompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull CompilerOptions options) {
 		QVTcoreStandaloneSetup.class.getName();			// QVTrCompilerChain doesn't initialize QVTc
 		return new QVTrCompilerChain(environmentFactory, txURI, txURI, options);
 	}
+
+	@Override
+	protected void createGenmodelGroup(Composite control) {}
 
 	@Override
 	public Image getImage() {
@@ -56,19 +49,28 @@ public class QVTrMainTab extends QVTDirectionalMainTab<RelationalTransformation>
 	}
 
 	@Override
-	protected @NonNull String @NonNull [] getIntermediateKeysInternal() {
-		return intermediateKeys;
+	protected @NonNull List<@NonNull String> getIntermediateKeys() {
+		List<@NonNull String> asList = Lists.newArrayList(QVTrLaunchConfigurationDelegate.compileStepKeys);
+		if (!isInterpreted()) {
+			for (@NonNull String stepKey : QVTrLaunchConfigurationDelegate.generateStepKeys) {
+				asList.add(stepKey);
+			}
+		}
+		return asList;
 	}
 
 	@Override
-	protected void initializeOptions(@NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
-		super.initializeOptions(options);
-		initializeURIOption(options, CompilerChain.QVTR_STEP);
-		initializeURIOption(options, CompilerChain.QVTC_STEP);
-		AbstractCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.URI_KEY, getResolvedGenModel());
-		Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<@NonNull String, @Nullable String>();
-		genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, getProjectName());
-		AbstractCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
+	protected void initializeOptions(@NonNull DefaultCompilerOptions compilerOptions) throws IOException {
+		Map<@NonNull String, @NonNull URI> intermediatesMap = getIntermediatesMap(QVTrLaunchConfigurationDelegate.compileStepKeys);
+		compilerOptions.setURIs2(QVTrLaunchConfigurationDelegate.compileStepKeys, intermediatesMap);
+		compilerOptions.setDebugGraphs(doDotGraphs(), doYedGraphs());
+		if (!isInterpreted()) {
+			URI txURI = getTxURI();
+			URI genModelURI = getResolvedCompilerStep(CompilerChain.GENMODEL_STEP);
+			URI javaURI = getResolvedCompilerStep(CompilerChain.JAVA_STEP);
+			URI classURI = getResolvedCompilerStep(CompilerChain.CLASS_STEP);
+			compilerOptions.setQVTrGenerateOptions(getProjectName(), txURI, genModelURI, javaURI, classURI);
+		}
 	}
 
 	@Override

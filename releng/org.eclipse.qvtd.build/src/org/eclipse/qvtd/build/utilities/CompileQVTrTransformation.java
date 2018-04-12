@@ -13,8 +13,6 @@ package org.eclipse.qvtd.build.utilities;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import org.apache.log4j.Logger;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.EMFPlugin;
@@ -39,8 +37,8 @@ import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
-import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain.Listener;
+import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
@@ -60,8 +58,7 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 		}
 
 		@Override
-		protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI prefixURI,
-				@NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options) {
+		protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI prefixURI, @NonNull CompilerOptions options) {
 			QVTrCompilerChain compilerChain = new QVTrCompilerChain(getEnvironmentFactory(), txURI, prefixURI, options);
 			compilerChain.addListener(new Listener()
 			{

@@ -150,9 +150,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	private @NonNull LoadingRegion createRootContainmentRegion(@NonNull ScheduledRegion rootScheduledRegion) {
 		LoadingRegion loadingRegion = loadingRegionAnalysis.getRegion();
 		loadingRegion.setOwningScheduledRegion(rootScheduledRegion);
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(loadingRegion, null);
-		}
+		scheduleManager.writeDebugGraphs(loadingRegion, null);
 		return loadingRegion;
 	}
 
@@ -166,9 +164,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		for (Region region : sortedCallableRegions) {
 			createIncomingConnections(region);
 		}
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs("4-bindings", true, true, false);
-		}
+		scheduleManager.writeDebugGraphs("4-bindings", true, true, false);
 		//		for (Region region : sortedCallableRegions) {
 		//			region.checkIncomingConnections();
 		//		}
@@ -657,9 +653,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//
 		//		splitConnectionVariables();
 		//
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs("5-cycled", true, true, false);
-		}
+		scheduleManager.writeDebugGraphs("5-cycled", true, true, false);
 	}
 
 	private void createLocalSchedule2(@NonNull ScheduledRegion scheduledRegion, @NonNull List<@NonNull Region> orderedRegions) {
@@ -707,9 +701,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 				}
 			}
 		}
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs("7-pruned", true, true, false);
-		}
+		scheduleManager.writeDebugGraphs("7-pruned", true, true, false);
 
 		boolean noLateConsumerMerge = scheduleManager.isNoLateConsumerMerge();
 		if (!noLateConsumerMerge) {
@@ -1136,9 +1128,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 				//			ConnectivityChecker.checkConnectivity(scheduleManager);
 			}
 		}
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs("9-final", true, true, true);
-		}
+		scheduleManager.writeDebugGraphs("9-final", true, true, true);
 		return scheduledRegions;
 	}
 }

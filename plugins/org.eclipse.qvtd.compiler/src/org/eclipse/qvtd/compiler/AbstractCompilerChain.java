@@ -18,11 +18,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -41,6 +43,7 @@ import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTc2QVTu;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTi;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.QVTs2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtu2qvtm.QVTu2QVTm;
@@ -102,12 +105,23 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		}
 
 		public @NonNull Class<? extends Transformer> execute(@NonNull URI txURI, @NonNull JavaResult javaResult) throws Exception {
-			List<@NonNull String> classPathProjectNames = getOption(CLASS_PROJECT_NAMES_KEY);
-			assert classPathProjectNames != null;
+			List<@NonNull String> classPathProjectNames = basicGetOption(CLASS_PROJECT_NAMES_KEY);
 			URIConverter uriConverter = compilerChain.getEnvironmentFactory().getResourceSet().getURIConverter();
 			assert uriConverter != null;
 			//			System.out.println("classPathProjectNames = " + classPathProjectNames);
-			List<@NonNull String> classpathProjects = JavaFileUtil.createClassPathProjectList(uriConverter, classPathProjectNames);
+			List<@NonNull String> classpathProjects;
+			if (EcorePlugin.IS_ECLIPSE_RUNNING) {
+				URI classFileURI = compilerChain.basicGetOption(QVTrCompilerChain.CLASS_STEP, QVTrCompilerChain.URI_KEY);
+				assert classFileURI != null;
+				String classFilePath2 = classFileURI.toFileString();
+				assert classFilePath2 != null;
+				URI traceURI = compilerChain.getURI(QVTrCompilerChain.TRACE_STEP, QVTrCompilerChain.URI_KEY);
+				String binProjectName = QVTr2QVTc.getProjectName(traceURI);
+				classpathProjects = CompilerUtil.createClassPathProjectList(uriConverter, binProjectName, classFilePath2, classPathProjectNames);
+			}
+			else {
+				classpathProjects = classPathProjectNames != null ? JavaFileUtil.createClassPathProjectList(uriConverter, classPathProjectNames) : null;
+			}
 			//			System.out.println("classpathProjects = " + classpathProjects);
 			String problemMessage = JavaFileUtil.compileClass(javaResult.qualifiedClassName, javaResult.code, javaResult.classPath, classpathProjects);
 			if (problemMessage != null) {
@@ -174,13 +188,13 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			QVTiCodeGenerator cg = new QVTiCodeGenerator(environmentFactory, asTransformation);
 			QVTiCodeGenOptions options = cg.getOptions();
 			options.setUseNullAnnotations(true);
-			String javaExtraPrefix = compilerChain.getOption(JAVA_STEP, JAVA_EXTRA_PREFIX_KEY);
+			String javaExtraPrefix = compilerChain.basicGetOption(JAVA_STEP, JAVA_EXTRA_PREFIX_KEY);
 			if (javaExtraPrefix != null) {
 				options.setPackagePrefix(javaExtraPrefix);
 			}
-			Boolean javaIsGeneratedDebug = compilerChain.getOption(JAVA_STEP, JAVA_GENERATED_DEBUG_KEY);
+			Boolean javaIsGeneratedDebug = compilerChain.basicGetOption(JAVA_STEP, JAVA_GENERATED_DEBUG_KEY);
 			options.setIsGeneratedDebug(javaIsGeneratedDebug == Boolean.TRUE);
-			Boolean javaIsIncremental = compilerChain.getOption(JAVA_STEP, JAVA_INCREMENTAL_KEY);
+			Boolean javaIsIncremental = compilerChain.basicGetOption(JAVA_STEP, JAVA_INCREMENTAL_KEY);
 			options.setIsIncremental(javaIsIncremental == Boolean.TRUE);
 			String javaCodeSource;
 			try {
@@ -216,14 +230,14 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	{
 		public QVTm2QVTsCompilerStep(@NonNull CompilerChain compilerChain) {
 			super(compilerChain, QVTS_STEP);
-			QVTm2QVTs.DEBUG_GRAPHS.setState(getOption(CompilerChain.DEBUG_KEY) == Boolean.TRUE);
+			//			QVTm2QVTs.DEBUG_GRAPHS.setState(getOption(CompilerChain.DEBUG_KEY) == Boolean.TRUE);
 		}
 
 		public @NonNull ScheduleManager execute(@NonNull Resource pResource) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 			try {
 				Resource sResource = createResource();
-				Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions = getOption(CompilerChain.SCHEDULER_OPTIONS_KEY);
+				CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
 				Transformation asTransformation = AbstractCompilerChain.getTransformation(pResource);
 				QVTm2QVTs qvtm2qvts = new QVTm2QVTs(this, environmentFactory, schedulerOptions);
 				ScheduleManager scheduleManager = qvtm2qvts.getScheduleManager();
@@ -312,33 +326,6 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		return step2extension.get(key);
 	}
 
-	/**
-	 * Return the optionsKey sub-option of the stepKey option of the overall options.
-	 * If no stepKey options are available the sub-option of the DEFAULT_KEY is returned.
-	 */
-	public static <T> @Nullable T getOption(@NonNull Map<@NonNull String, @NonNull Map<@NonNull Key<Object>, @Nullable Object>> options,
-			@NonNull String stepKey, @NonNull Key<T> optionKey) {
-		@SuppressWarnings("unchecked")
-		Map<@NonNull String, @NonNull Map<@NonNull Key<T>, @Nullable T>> castOptions = (Map<@NonNull String, @NonNull Map<@NonNull Key<T>, @Nullable T>>)(Object)options;
-		Map<@NonNull Key<T>, @Nullable T> stepOptions = castOptions.get(stepKey);
-		if ((stepOptions == null) && !options.containsKey(stepOptions)) {
-			stepOptions = castOptions.get(DEFAULT_STEP);
-		}
-		//		return stepOptions != null ? stepOptions.get(optionsKey) : null;
-		@Nullable Object optionValue = null;
-		if (stepOptions != null) {
-			optionValue = stepOptions.get(optionKey);
-			if ((optionValue == null) && !options.containsKey(optionKey)) {
-				Map<@NonNull Key<Object>, @Nullable Object> defaultOptions = options.get(DEFAULT_STEP);
-				if (defaultOptions != null){
-					optionValue =  defaultOptions.get(optionKey);
-				}
-			}
-		}
-		@SuppressWarnings("unchecked") T castValue = (T) optionValue;
-		return castValue;
-	}
-
 	public static @NonNull Transformation getTransformation(Resource resource) throws IOException {
 		List<@NonNull Transformation> asTransformations = new ArrayList<>();
 		for (EObject eContent : resource.getContents()) {
@@ -357,22 +344,6 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		}
 	}
 
-	/**
-	 * Set the optionsKey sub-option of the stepKey option of the overall options to optionValue.
-	 * If no stepKey options are available the sub-option of the DEFAULT_KEY is returned.
-	 */
-	public static <T> void setOption(@NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options,
-			@NonNull String stepKey, @NonNull Key<T> optionsKey, @Nullable T optionValue) {
-		@SuppressWarnings("unchecked")
-		Map<@NonNull String, @NonNull Map<@NonNull Key<T>, @Nullable T>> castOptions = (Map<@NonNull String, @NonNull Map<@NonNull Key<T>, @Nullable T>>)(Object)options;
-		Map<@NonNull Key<T>, @Nullable T> stepOptions = castOptions.get(stepKey);
-		if (stepOptions == null) {
-			stepOptions = new HashMap<>();
-			castOptions.put(stepKey, stepOptions);
-		}
-		stepOptions.put(optionsKey, optionValue);
-	}
-
 	protected final @NonNull QVTiEnvironmentFactory environmentFactory;
 	protected final @NonNull ResourceSet asResourceSet;
 
@@ -383,7 +354,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	 *
 	 * If there is no step entry or no key entry, a default is taken from the DEFAULT_STEP.
 	 */
-	protected final @NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options;
+	protected final @NonNull CompilerOptions options;
 
 	protected final @NonNull URI txURI;
 	protected final @NonNull URI prefixURI;
@@ -397,13 +368,12 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	protected final @NonNull QVTs2QVTiCompilerStep qvts2qvtiCompilerStep;
 	protected final @NonNull QVTi2JavaCompilerStep qvti2javaCompilerStep;
 
-	protected AbstractCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI,
-			@Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
+	protected AbstractCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull CompilerOptions options) {
 		this.environmentFactory = environmentFactory;
 		this.asResourceSet = environmentFactory.getMetamodelManager().getASResourceSet();
 		this.txURI = txURI;
 		this.prefixURI = prefixURI;//txURI.trimSegments(1).appendSegment("temp").appendSegment(txURI.trimFileExtension().lastSegment());
-		this.options = options != null ? options : new HashMap<>();
+		this.options = options;
 		this.java2classCompilerStep = createJava2ClassCompilerStep();
 		this.qvtc2qvtuCompilerStep = createQVTc2QVTuCompilerStep();
 		this.qvtu2qvtmCompilerStep = createQVTu2QVTmCompilerStep();
@@ -424,8 +394,18 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	}
 
 	@Override
-	public @Nullable URI basicGetURI(@NonNull String stepKey, @NonNull Key<URI> uriKey) {
-		return getOption(stepKey, URI_KEY);
+	public <T> @Nullable T basicGetOption(@NonNull String stepKey, CompilerOptions.@NonNull Key<T> optionKey) {
+		return options.basicGetOption(stepKey, optionKey);
+	}
+
+	@Override
+	public CompilerOptions.@Nullable StepOptions basicGetOptions(@NonNull String stepKey) {
+		return options.basicGetOptions(stepKey);
+	}
+
+	@Override
+	public @Nullable URI basicGetURI(@NonNull String stepKey, CompilerOptions.@NonNull Key<URI> uriKey) {
+		return basicGetOption(stepKey, URI_KEY);
 	}
 
 	@Override
@@ -477,11 +457,9 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		List<@NonNull TypedModel> outputTypedModels = new ArrayList<>();
 		List<@NonNull TypedModel> intermediateTypedModels = new ArrayList<>();
 		for (@NonNull TypedModel typedModel : QVTcoreUtil.getModelParameters(transformation)) {
-			String modelName = typedModel.getName();
-			if (modelName != null) {
-				if (modelName.equals(QVTbaseUtil.TRACE_TYPED_MODEL_NAME)) {
-				}
-				else if (modelName.equals(enforcedOutputName)) {
+			if (!QVTbaseUtil.isTrace(typedModel)) {
+				String modelName = typedModel.getName();
+				if (enforcedOutputName.equals(modelName)) {
 					if (outputTypedModels.size() > 1) {
 						throw new CompilerChainException("Ambiguous output domain ''{0}''", enforcedOutputName);
 					}
@@ -528,28 +506,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	}
 
 	@Override
-	public <T> @Nullable T getOption(@NonNull String stepKey, @NonNull Key<T> optionKey) {
-		Map<@NonNull Key<Object>, @Nullable Object> stepOptions = options.get(stepKey);
-		if ((stepOptions == null) && !options.containsKey(stepOptions)) {
-			stepOptions = options.get(DEFAULT_STEP);
-		}
-		@Nullable Object optionValue = null;
-		if (stepOptions != null) {
-			optionValue = stepOptions.get(optionKey);
-			if ((optionValue == null) && !options.containsKey(optionKey)) {
-				Map<@NonNull Key<Object>, @Nullable Object> defaultOptions = options.get(DEFAULT_STEP);
-				if (defaultOptions != null){
-					optionValue =  defaultOptions.get(optionKey);
-				}
-			}
-		}
-		@SuppressWarnings("unchecked") T castValue = (T) optionValue;
-		return castValue;
-	}
-
-	@Override
-	public @NonNull URI getURI(@NonNull String stepKey, @NonNull Key<URI> uriKey) {
-		URI uri = getOption(stepKey, URI_KEY);
+	public @NonNull URI getURI(@NonNull String stepKey, CompilerOptions.@NonNull Key<URI> uriKey) {
+		URI uri = basicGetOption(stepKey, URI_KEY);
 		return uri != null ? uri : prefixURI.appendFileExtension(step2extension.get(stepKey));
 	}
 
@@ -581,25 +539,13 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 
 	@Override
 	public void saveResource(@NonNull Resource asResource, @NonNull String stepKey) throws IOException {
-		Map<?, ?> saveOptions = getOption(stepKey, CompilerChain.SAVE_OPTIONS_KEY);
+		Map<?, ?> saveOptions = basicGetOption(stepKey, CompilerChain.SAVE_OPTIONS_KEY);
 		if (saveOptions != null) {
 			asResource.save(saveOptions);
 		}
 		assertNoResourceSetErrors(stepKey, asResource);
-		if (getOption(stepKey, CompilerChain.VALIDATE_KEY) == Boolean.TRUE) {
+		if (basicGetOption(stepKey, CompilerChain.VALIDATE_KEY) == Boolean.TRUE) {
 			assertNoValidationErrors(stepKey, asResource);
 		}
-	}
-
-	@Override
-	public <T> void setOption(@NonNull String stepKey, @NonNull Key<T> optionKey, @Nullable T object) {
-		Map<@NonNull Key<Object>, @Nullable Object> stepOptions = options.get(stepKey);
-		if (stepOptions == null) {
-			stepOptions = new HashMap<>();
-			options.put(stepKey, stepOptions);
-		}
-		@SuppressWarnings("unchecked")
-		Map<@NonNull Key<T>, @Nullable T> stepOptions2 = (Map<@NonNull Key<T>, @Nullable T>)(Object)stepOptions;
-		stepOptions2.put(optionKey, object);
 	}
 }

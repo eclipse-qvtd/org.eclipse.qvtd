@@ -28,6 +28,7 @@ import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
+import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.BasicQVTiExecutor;
@@ -37,7 +38,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecuto
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
-import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.junit.Before;
 import org.junit.Test;
@@ -248,7 +248,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 		boolean success = tx.run();
 		Resource outputResource = rSet.createResource(asModelURI);
 		outputResource.getContents().addAll(tx.getRootEObjects("rightAS"));
-		outputResource.save(TestsXMLUtil.defaultSavingOptions);
+		outputResource.save(DefaultCompilerOptions.defaultSavingOptions);
 		assertTrue(success);
 	}
 
@@ -267,7 +267,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 		testEvaluator.loadModel("leftCS", csModelURI);
 		testEvaluator.createModel("rightAS", asModelURI, null);
 		boolean success = testEvaluator.execute();
-		testEvaluator.saveModels(TestsXMLUtil.defaultSavingOptions);
+		testEvaluator.saveModels(DefaultCompilerOptions.defaultSavingOptions);
 		testEvaluator.dispose();
 		assertTrue(success);
 	}
@@ -277,7 +277,7 @@ public class ExecutionBenchmarks extends LoadTestCase {
 		ResourceSet rSet = new ResourceSetImpl();
 		StandaloneProjectMap.getAdapter(rSet);
 		Resource r = rSet.createResource(modelURI);
-		r.save(TestsXMLUtil.defaultSavingOptions);
+		r.save(DefaultCompilerOptions.defaultSavingOptions);
 	}
 
 	protected ImperativeTransformation getTransformation(ResourceSet rSet, URI qvtiURI) {

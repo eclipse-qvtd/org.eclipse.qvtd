@@ -18,7 +18,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.m2m.atl.dsls.core.EMFTCSInjector;
 import org.eclipse.m2m.atl.emftvm.compiler.AtlResourceFactoryImpl;
 import org.eclipse.m2m.atl.engine.parser.AtlParser;
@@ -29,7 +28,7 @@ import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
-import org.eclipse.qvtd.compiler.CompilerChain;
+import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
@@ -59,8 +58,7 @@ public class QVTrCompilerTests extends LoadTestCase
 	{
 		protected class InstrumentedCompilerChain extends QVTrCompilerChain
 		{
-			protected InstrumentedCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI,
-					@Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
+			protected InstrumentedCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull CompilerOptions options) {
 				super(environmentFactory, txURI, prefixURI, options);
 			}
 
@@ -101,9 +99,13 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 
 		@Override
-		protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI prefixURI,
-				@NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options) {
+		protected @NonNull QVTrCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI prefixURI, @NonNull CompilerOptions options) {
 			return new InstrumentedCompilerChain(getEnvironmentFactory(), txURI, prefixURI, options);
+		}
+
+		@Override
+		protected boolean generateGenModel() {
+			return true;
 		}
 
 		@Override
@@ -919,7 +921,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			//	    	myQVT.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore",  new EcoreResourceFactoryImpl());
 			//	    	myQVT.getEnvironmentFactory().getMetamodelManager().getASResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore",  new EcoreResourceFactoryImpl());
 			Resource outputResource = myQVT.saveOutput("core", "MiniSeq2Stm_CG.oclas", null, null);
-			myQVT.saveOutput("middle", "MiniSeq2Stm_CG_Trace.xmi", null, null);
+			myQVT.saveOutput(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, "MiniSeq2Stm_CG_Trace.xmi", null, null);
 			myQVT.checkOutput(outputResource, "MiniSeq2Stm_expected.oclas", PivotNormalizer.INSTANCE);
 			//
 			//	        myQVT.createGeneratedExecutor(txClass);

@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.m2m.atl.core.emf.EMFModel;
 import org.eclipse.m2m.atl.dsls.core.EMFTCSInjector;
 import org.eclipse.m2m.atl.emftvm.EmftvmFactory;
@@ -31,7 +30,7 @@ import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
-import org.eclipse.qvtd.compiler.CompilerChain.Key;
+import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
 import org.eclipse.qvtd.runtime.evaluation.InvalidEvaluationException;
@@ -79,8 +78,7 @@ public class ATLExampleTests extends LoadTestCase
 		}
 
 		@Override
-		protected @NonNull AbstractCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI prefixURI,
-				@NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
+		protected @NonNull AbstractCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI prefixURI, @NonNull CompilerOptions options) {
 			return new QVTrCompilerChain(getEnvironmentFactory(), txURI, prefixURI, options);
 		}
 

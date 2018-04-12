@@ -50,8 +50,10 @@ import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerChain;
-import org.eclipse.qvtd.compiler.QVTcCompilerChain;
+import org.eclipse.qvtd.compiler.CompilerOptions;
+import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -66,7 +68,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
-import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.xtext.resource.XtextResource;
 
@@ -84,18 +85,18 @@ public abstract class AbstractTestQVT extends QVTimperative
 		//
 		URI savedURI = ClassUtil.nonNullState(asResource.getURI());
 		asResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
-		asResource.save(TestsXMLUtil.defaultSavingOptions);
+		asResource.save(DefaultCompilerOptions.defaultSavingOptions);
 		asResource.setURI(savedURI);
 		try {
 			LoadTestCase.assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);
-			xtextResource.save(TestsXMLUtil.defaultSavingOptions);
+			xtextResource.save(DefaultCompilerOptions.defaultSavingOptions);
 		}
 		catch (Throwable e) {
 			e.printStackTrace();
 			URI xmiURI = outputURI.appendFileExtension(".xmi");
 			Resource xmiResource = resourceSet.createResource(xmiURI);
 			xmiResource.getContents().addAll(ClassUtil.nullFree(xtextResource.getContents()));
-			xmiResource.save(TestsXMLUtil.defaultSavingOptions);
+			xmiResource.save(DefaultCompilerOptions.defaultSavingOptions);
 			LoadTestCase.fail(e.toString());
 		}
 		return xtextResource;
@@ -217,14 +218,14 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	public @NonNull Class<? extends Transformer> buildTransformation(@NonNull String outputName,
 			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
-		Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = createBuildCompilerChainOptions(isIncremental);
+		CompilerOptions options = createBuildCompilerChainOptions(isIncremental);
 		return doBuild(txURI, prefixURI, outputName, options, genModelFiles);
 	}
 
 	public @NonNull Class<? extends Transformer> buildTransformation_486938(@NonNull String outputName,
 			boolean isIncremental, @NonNull String @NonNull... genModelFiles) throws Exception {
-		Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = createBuildCompilerChainOptions(isIncremental);
-		QVTcCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY, "cg");
+		CompilerOptions options = createBuildCompilerChainOptions(isIncremental);
+		options.setOption(CompilerChain.JAVA_STEP, CompilerChain.JAVA_EXTRA_PREFIX_KEY, "cg");
 		return doBuild(txURI, prefixURI, outputName, options, genModelFiles);
 	}
 
@@ -247,37 +248,21 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return doCompile(txURI, prefixURI, outputName, createCompilerChainOptions());
 	}
 
-	protected @NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> createBuildCompilerChainOptions(boolean isIncremental) {
-		Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = createCompilerChainOptions();
-		QVTcCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, srcFileURI);
-		QVTcCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.JAVA_INCREMENTAL_KEY, isIncremental);
-		QVTcCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.JAVA_GENERATED_DEBUG_KEY, true);
-		QVTcCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.CLASS_PROJECT_NAMES_KEY, createClassProjectNames());
-		QVTcCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, binFileURI);
-		AbstractCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
-		AbstractCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, TestsXMLUtil.defaultSavingOptions);
-		Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<>();
-		genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, getBasePrefix());
-		AbstractCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
-		if (copyright != null) {
-			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, copyright);
+	protected @NonNull CompilerOptions createBuildCompilerChainOptions(boolean isIncremental) {
+		DefaultCompilerOptions compilerOptions = createCompilerChainOptions();
+		compilerOptions.setGenerateClassesOptions(srcFileURI, binFileURI, createClassProjectNames(), isIncremental);
+		if (generateGenModel()) {
+			URI genModelURI = prefixURI.appendFileExtension(AbstractCompilerChain.getDefaultExtension(CompilerChain.GENMODEL_STEP));
+			compilerOptions.setGenerateGenModelOptions(genModelURI, getBasePrefix(), copyright, usedGenPackages);
 		}
-		AbstractCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_USED_GENPACKAGES_KEY, usedGenPackages);
-		return options;
+		return compilerOptions;
 	}
 
 	/**
 	 * Return a list of project names that need to be on the class path.
 	 */
 	protected @NonNull List<@NonNull String> createClassProjectNames() {
-		List<@NonNull String> classProjectNames = new ArrayList<>();
-		classProjectNames.add(testProjectName);
-		classProjectNames.add("org.eclipse.qvtd.runtime");
-		classProjectNames.add("org.eclipse.ocl.pivot");
-		classProjectNames.add("org.eclipse.emf.ecore");
-		classProjectNames.add("org.eclipse.emf.common");
-		classProjectNames.add("org.eclipse.jdt.annotation");
-		classProjectNames.add("org.eclipse.osgi");
+		List<@NonNull String> classProjectNames = CompilerUtil.createClasspathProjectNameList(testProjectName);
 		if (additionalProjectNames != null) {
 			for (@NonNull String projectName : additionalProjectNames) {
 				classProjectNames.add(0, projectName);
@@ -287,26 +272,24 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	protected abstract @NonNull AbstractCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI prefixURI,
-			@NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options);
+			@NonNull CompilerOptions options);
 
-	protected @NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> createCompilerChainOptions() {
-		Map<@NonNull String, @Nullable String> genModelOptions = new HashMap<>();
-		genModelOptions.put(CompilerChain.GENMODEL_BASE_PREFIX, getBasePrefix());
-		if (copyright != null) {
-			genModelOptions.put(CompilerChain.GENMODEL_COPYRIGHT_TEXT, copyright);
-		}
-		Map<@NonNull String, @Nullable String> traceOptions = new HashMap<@NonNull String, @Nullable String>();
-		//			traceOptions.put(CompilerChain.TRACE_NS_URI, middleNsURI);
-		Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options = new HashMap<>();
-		QVTcCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
-		QVTcCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, getSaveOptions());
-		AbstractCompilerChain.setOption(options, CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, getSaveOptions());
-		AbstractCompilerChain.setOption(options, CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, null);
-		AbstractCompilerChain.setOption(options, CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, null);
-		AbstractCompilerChain.setOption(options, CompilerChain.TRACE_STEP, CompilerChain.TRACE_OPTIONS_KEY, traceOptions);
-		AbstractCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_USED_GENPACKAGES_KEY, usedGenPackages);
-		AbstractCompilerChain.setOption(options, CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_OPTIONS_KEY, genModelOptions);
-		return options;
+	protected @NonNull DefaultCompilerOptions createCompilerChainOptions() {
+		DefaultCompilerOptions compilerOptions = createCompilerOptions();
+		//		if (copyright != null) {
+		//			compilerOptions.setCopyright(copyright);
+		//		}
+		//		compilerOptions.setBasePrefix(getBasePrefix());
+		//		if (usedGenPackages != null) {
+		//			compilerOptions.setUsedGenPackages(usedGenPackages);
+		//		}
+		return compilerOptions;
+	}
+
+	protected @NonNull DefaultCompilerOptions createCompilerOptions() {
+		DefaultCompilerOptions compilerOptions = new DefaultCompilerOptions();
+		compilerOptions.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.DEBUG_KEY, true);
+		return compilerOptions;
 	}
 
 	public @NonNull Class<? extends Transformer> createGeneratedClass(@NonNull Transformation asTransformation, @NonNull String @NonNull... genModelFiles) throws Exception {
@@ -374,9 +357,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	protected @NonNull Class<? extends Transformer> doBuild(@NonNull URI txURI, @NonNull URI prefixURI, @NonNull String outputName,
-			@NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options,
-			@NonNull String @NonNull ... genModelFiles)
-					throws IOException, Exception {
+			@NonNull CompilerOptions options, @NonNull String @NonNull ... genModelFiles) throws IOException, Exception {
 		compilerChain = createCompilerChain(txURI, prefixURI, options);
 		ImperativeTransformation asTransformation = compilerChain.compile(outputName);
 		URI asURI = asTransformation.eResource().getURI();
@@ -388,7 +369,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	protected @NonNull ImperativeTransformation doCompile(@NonNull URI txURI, @NonNull URI prefixURI, @NonNull String outputName,
-			@NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options) throws Exception {
+			@NonNull CompilerOptions options) throws Exception {
 		compilerChain = createCompilerChain(txURI, prefixURI, options);
 		ImperativeTransformation transformation = compilerChain.compile(outputName);
 		URI txASURI = transformation.eResource().getURI();
@@ -442,7 +423,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	public Transformer executeTransformation() throws Exception {
 		if (interpretedExecutor != null) {
 			interpretedExecutor.execute();
-			interpretedExecutor.saveModels(TestsXMLUtil.defaultSavingOptions);
+			interpretedExecutor.saveModels(DefaultCompilerOptions.defaultSavingOptions);
 			return null;
 		}
 		else {
@@ -456,6 +437,13 @@ public abstract class AbstractTestQVT extends QVTimperative
 			}
 			return transformer;
 		}
+	}
+
+	/**
+	 * Return true if this chanin generates the GenModel.
+	 */
+	protected boolean generateGenModel() {
+		return false;
 	}
 
 	protected abstract @NonNull String getBasePrefix();
@@ -485,7 +473,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	public @NonNull Map<Object, Object> getSaveOptions() {
-		Map<Object, Object> saveOptions = new HashMap<Object, Object>(TestsXMLUtil.defaultSavingOptions);
+		Map<Object, Object> saveOptions = new HashMap<Object, Object>(DefaultCompilerOptions.defaultSavingOptions);
 		saveOptions.put(ASResource.OPTION_NORMALIZE_CONTENTS, Boolean.TRUE);
 		return saveOptions;
 	}

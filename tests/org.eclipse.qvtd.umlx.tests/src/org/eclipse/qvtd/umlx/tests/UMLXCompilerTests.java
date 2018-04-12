@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.umlx.tests;
 
 import java.io.IOException;
-import java.util.Map;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
@@ -23,7 +22,7 @@ import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
-import org.eclipse.qvtd.compiler.CompilerChain;
+import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
@@ -50,8 +49,7 @@ public class UMLXCompilerTests extends LoadTestCase
 	{
 		protected class InstrumentedCompilerChain extends UMLXCompilerChain
 		{
-			protected InstrumentedCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI,
-					@Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
+			protected InstrumentedCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI, @Nullable CompilerOptions options) {
 				super(environmentFactory, txURI, prefixURI, options);
 			}
 
@@ -85,9 +83,13 @@ public class UMLXCompilerTests extends LoadTestCase
 		}
 
 		@Override
-		protected @NonNull UMLXCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI prefixURI,
-				@NonNull Map<@NonNull String, @Nullable Map<CompilerChain.@NonNull Key<Object>, @Nullable Object>> options) {
+		protected @NonNull UMLXCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI prefixURI, @NonNull CompilerOptions options) {
 			return new InstrumentedCompilerChain(getEnvironmentFactory(), txURI, prefixURI, options);
+		}
+
+		@Override
+		protected boolean generateGenModel() {
+			return true;
 		}
 
 		@Override
@@ -116,7 +118,7 @@ public class UMLXCompilerTests extends LoadTestCase
 	@Before
 	public void setUp() throws Exception {
 		BaseLinkingService.DEBUG_RETRY.setState(true);
-		QVTm2QVTs.DEBUG_GRAPHS.setState(true);;
+		QVTm2QVTs.DEBUG_GRAPHS.setState(true);
 		super.setUp();
 		OCLstdlib.install();
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {

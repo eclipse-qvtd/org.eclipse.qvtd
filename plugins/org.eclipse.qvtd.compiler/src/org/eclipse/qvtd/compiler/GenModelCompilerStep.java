@@ -19,8 +19,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
@@ -36,16 +34,16 @@ import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreGeneratorAdapterFactory;
 import org.eclipse.qvtd.compiler.internal.genmodel.QVTdGenModelGeneratorAdapterFactory;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
-
-import com.google.common.collect.Lists;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
 /**
- * GenModelCompilerStep activates the EMG GenModel tooling to generate the Java classes from the
+ * GenModelCompilerStep activates the EMF GenModel tooling to generate the Java classes from the
  * synthesized Ecore model for the middle/trace model.
  */
 public class GenModelCompilerStep extends AbstractCompilerStep
@@ -100,7 +98,7 @@ public class GenModelCompilerStep extends AbstractCompilerStep
 		super(compilerChain, QVTrCompilerChain.GENMODEL_STEP);
 	}
 
-	public void execute() throws IOException {
+	public void execute() throws IOException { // FIXME This is similar to Java2ClassCompilerStep.execute
 		URI genmodelURI = compilerChain.getURI(QVTrCompilerChain.GENMODEL_STEP, QVTrCompilerChain.URI_KEY);
 		URI qvtcURI = compilerChain.getURI(QVTrCompilerChain.QVTC_STEP, QVTrCompilerChain.URI_KEY);
 		Resource cResource = environmentFactory.getMetamodelManager().getASResourceSet().getResource(qvtcURI, true);
@@ -108,37 +106,28 @@ public class GenModelCompilerStep extends AbstractCompilerStep
 		Resource gResource = environmentFactory.getResourceSet().getResource(genmodelURI, true);
 		assert gResource != null;
 		GenModel genModel = (GenModel) gResource.getContents().get(0);
-		List<@NonNull String> classProjectNames = compilerChain.getOption(QVTrCompilerChain.CLASS_STEP, QVTrCompilerChain.CLASS_PROJECT_NAMES_KEY);
-		URI classFileURI = compilerChain.getOption(QVTrCompilerChain.CLASS_STEP, QVTrCompilerChain.URI_KEY);
+		List<@NonNull String> classProjectNames = compilerChain.basicGetOption(QVTrCompilerChain.CLASS_STEP, QVTrCompilerChain.CLASS_PROJECT_NAMES_KEY);
+		URI classFileURI = compilerChain.basicGetOption(QVTrCompilerChain.CLASS_STEP, QVTrCompilerChain.URI_KEY);
 		URI traceURI = compilerChain.getURI(QVTrCompilerChain.TRACE_STEP, QVTrCompilerChain.URI_KEY);
 		if (classFileURI != null) {
-			String binProjectName = QVTr2QVTc.getProjectName(traceURI);
-			//			File zbinFile;
 			String classFilePath;
 			String sourceFilePathPrefix;
 			List<@NonNull String> classpathProjects;
+			URIConverter uriConverter = environmentFactory.getResourceSet().getURIConverter();
 			if (EcorePlugin.IS_ECLIPSE_RUNNING) {
+				String binProjectName = QVTr2QVTc.getProjectName(traceURI);
 				IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-				IProject binProject = root.getProject(binProjectName);
-				IFolder binFolder = binProject.getFolder(JavaFileUtil.TEST_BIN_FOLDER_NAME);
-				File binFile = URIUtil.toFile(binFolder.getLocationURI());
-				classFilePath = binFile.toString()/*.replace(".", "/")*/.replace("\\", "/");		// FIXME deduce/parameterize bin
+				classFilePath = classFileURI.toFileString();
+				assert classFilePath != null;
 				IFile genIFile = root.getFile(new Path(genModel.getModelDirectory()));
 				File genFile = URIUtil.toFile(genIFile.getLocationURI());
 				sourceFilePathPrefix = genFile.getAbsolutePath().replace("\\", "/");
-				if (classProjectNames == null) {
-					classProjectNames = Lists.newArrayList(binProjectName, "org.eclipse.emf.common", "org.eclipse.emf.ecore", "org.eclipse.jdt.annotation", "org.eclipse.ocl.pivot", "org.eclipse.osgi", "org.eclipse.qvtd.runtime");
-				}
-				classpathProjects = JavaFileUtil.createClassPathProjectList(environmentFactory.getResourceSet().getURIConverter(), classProjectNames);
+				classpathProjects = CompilerUtil.createClassPathProjectList(uriConverter, binProjectName, classFilePath, classProjectNames);
 			}
 			else {
-				//				ResourceSet resourceSet = environmentFactory.getResourceSet();
-				//				URI normalizedClassURI = resourceSet.getURIConverter().normalize(classFileURI);
 				classFilePath = classFileURI.toFileString();
-				//				URI location = classFileURI;//ClassUtil.nonNullState(((StandaloneProjectMap)environmentFactory.getProjectManager()).getLocation(binProjectName));
-				//				binFile = new File(objectPath);
 				URI genModelDirectoryURI = URI.createPlatformResourceURI(genModel.getModelDirectory(), true);
-				sourceFilePathPrefix = environmentFactory.getResourceSet().getURIConverter().normalize(genModelDirectoryURI).toFileString() + "/";
+				sourceFilePathPrefix = uriConverter.normalize(genModelDirectoryURI).toFileString() + "/";
 				classpathProjects = null;
 			}
 			assert classFilePath != null;
@@ -163,7 +152,7 @@ public class GenModelCompilerStep extends AbstractCompilerStep
 			}
 		}
 		throwCompilerChainExceptionForErrors();
-		compiled(cResource);
+		compiled(gResource);
 	}
 
 	protected void generateModels(@NonNull GenModel genModel) {

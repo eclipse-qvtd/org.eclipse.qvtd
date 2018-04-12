@@ -53,6 +53,8 @@ import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
+import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
@@ -73,12 +75,9 @@ import org.eclipse.qvtd.runtime.internal.evaluation.AbstractInvocationManagerInt
 import org.eclipse.qvtd.runtime.internal.evaluation.ModificationMonitor;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
-import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-
 import junit.framework.TestCase;
 import tree2talltree.tree.TreePackage;
 
@@ -90,7 +89,7 @@ public class QVTiCompilerTests extends LoadTestCase
 	@SuppressWarnings("unused")private static ComposedEValidator makeSureRequiredBundleIsLoaded = null;
 
 	public static @NonNull Map<Object, Object> getSaveOptions() {
-		return TestsXMLUtil.defaultSavingOptions;
+		return DefaultCompilerOptions.defaultSavingOptions;
 	}
 
 	protected static class MyQVT extends OCLInternal
@@ -174,8 +173,7 @@ public class QVTiCompilerTests extends LoadTestCase
 			TestFile binPath = testProject.getOutputFolder(JavaFileUtil.TEST_BIN_FOLDER_NAME);
 			//			cg.saveSourceFile("../org.eclipse.qvtd.xtext.qvtimperative.tests/test-gen/");
 			cg.saveSourceFile(srcPath.getFileString());
-			ArrayList<@NonNull String> projectNames = Lists.newArrayList("org.eclipse.qvtd.xtext.qvtimperative.tests", "org.eclipse.qvtd.runtime", "org.eclipse.ocl.pivot",
-				"org.eclipse.emf.common", "org.eclipse.emf.ecore", "org.eclipse.jdt.annotation", "org.eclipse.osgi");
+			List<@NonNull String> projectNames = CompilerUtil.createClasspathProjectNameList("org.eclipse.qvtd.xtext.qvtimperative.tests");
 			// System.out.println("projectNames => " + projectNames);
 			List<@NonNull String> classpathList = JavaFileUtil.createClassPathProjectList(asTransformation.eResource().getResourceSet().getURIConverter(), projectNames);
 			// System.out.println("classpathList => " + classpathList);

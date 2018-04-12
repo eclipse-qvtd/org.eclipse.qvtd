@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.utilities;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -23,13 +25,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil.UnresolvedProxyCrossReferencer;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.generator.CodeGenerator;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NamedElement;
@@ -51,6 +56,8 @@ import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+
+import com.google.common.collect.Lists;
 
 public class CompilerUtil extends QVTscheduleUtil
 {
@@ -145,6 +152,55 @@ public class CompilerUtil extends QVTscheduleUtil
 			s.append(child.getMessage());
 		}
 		assert false : s.toString();
+	}
+
+	/**
+	 * Return a new list of project names that need to be on the class path.
+	 */
+	public static @NonNull List<@NonNull String> createClasspathProjectNameList(@NonNull String... projectNames) {
+		List<@NonNull String> classProjectNames = new ArrayList<>();
+		classProjectNames.add("org.eclipse.qvtd.runtime");
+		classProjectNames.add("org.eclipse.ocl.pivot");
+		classProjectNames.add("org.eclipse.emf.ecore");
+		classProjectNames.add("org.eclipse.emf.common");
+		classProjectNames.add("org.eclipse.jdt.annotation");
+		classProjectNames.add("org.eclipse.osgi");
+		if (projectNames != null) {
+			for (@NonNull String projectName : projectNames) {
+				classProjectNames.add(0, projectName);
+			}
+		}
+		return classProjectNames;
+	}
+
+	public static @NonNull List<@NonNull String> createClassPathProjectList(@NonNull URIConverter uriConverter, @NonNull List<@NonNull String> projectNames) {
+		List<@NonNull String> classpathProjectList = new ArrayList<@NonNull String>();
+		for (@NonNull String projectName : projectNames) {
+			File path = JavaFileUtil.getProjectBinFolder(uriConverter, projectName);
+			if (path != null) {
+				classpathProjectList.add(String.valueOf(path));
+			}
+		}
+		//		}
+		return classpathProjectList;
+	}
+
+	/**
+	 * Return the classpath folders corresponding to the projectNames, except that the projectName uses an explicit and
+	 * possibly irregular classFilePath allowing the current project to use a non-standard 'bin' folder to avoid confusion
+	 * between the test compilation and the auto-build.
+	 */
+	public static @NonNull List<@NonNull String> createClassPathProjectList(@NonNull URIConverter uriConverter, @NonNull String projectName,
+			@NonNull String classFilePath, @Nullable Iterable<@NonNull String> projectNames) {
+		assert EcorePlugin.IS_ECLIPSE_RUNNING;
+		if (projectNames == null) {
+			projectNames = CompilerUtil.createClasspathProjectNameList(projectName);
+		}
+		List<@NonNull String> projectNames2 = Lists.newArrayList(projectNames);
+		projectNames2.remove(projectName);
+		List<@NonNull String> classpathProjects = JavaFileUtil.createClassPathProjectList(uriConverter, projectNames2);
+		classpathProjects.add(0, classFilePath);
+		return classpathProjects;
 	}
 
 	public static @NonNull RegionProblem createRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {

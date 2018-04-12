@@ -605,7 +605,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		context.refreshPivotList(Key.class, asTransformation.getOwnedKey(), csElement.getOwnedKeyDecls());
 		List<@NonNull TypedModel> modelParameter = QVTrelationUtil.Internal.getModelParameterList(asTransformation);
 		List<@NonNull TypedModel> newPivotElements = context.getNewPivotElements(TypedModel.class, csElement.getOwnedModelDecls());
-		TypedModel traceTypedModel = NameUtil.getNameable(modelParameter, QVTbaseUtil.TRACE_TYPED_MODEL_NAME);
+		TypedModel traceTypedModel = QVTbaseUtil.basicGetTraceTypedModel(modelParameter);
 		if (traceTypedModel == null) {
 			traceTypedModel = getHelper().createTypedModel(QVTbaseUtil.TRACE_TYPED_MODEL_NAME, Collections.emptyList());
 		}

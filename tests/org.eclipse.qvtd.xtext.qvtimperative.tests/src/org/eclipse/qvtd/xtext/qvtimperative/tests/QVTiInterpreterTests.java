@@ -39,6 +39,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
+import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
@@ -52,7 +53,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
-import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.junit.Before;
@@ -516,7 +516,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		testExecutor.loadModel("leftCS", ClassUtil.nonNullState(csModelURI));
 		testExecutor.createModel("rightAS", ClassUtil.nonNullState(asModelURI), null);
 		testExecutor.execute();
-		testExecutor.saveModels(TestsXMLUtil.defaultSavingOptions);
+		testExecutor.saveModels(DefaultCompilerOptions.defaultSavingOptions);
 		testExecutor.dispose();
 
 		ResourceSet rSet = environmentFactory.getResourceSet();

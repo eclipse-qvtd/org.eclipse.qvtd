@@ -46,7 +46,7 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChain;
-import org.eclipse.qvtd.compiler.CompilerChain.Key;
+import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -81,7 +81,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 {
 	protected final @NonNull ScheduleModel scheduleModel;
 	protected final @NonNull EnvironmentFactory environmentFactory;
-	private @Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions;
+	private CompilerOptions.@Nullable StepOptions schedulerOptions;
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
 	protected final @NonNull DatumCaches datumCaches;
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
@@ -115,15 +115,29 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	private Map<@NonNull OperationDatum, @NonNull OperationRegion> operationDatum2operationRegion = new HashMap<>();
 
 	private final @NonNull Map<@NonNull Transformation, @NonNull TransformationAnalysis> transformation2transformationAnalysis = new HashMap<>();
+	private final boolean doDotGraphs;
+	private final boolean doYedGraphs;
 
 	protected AbstractScheduleManager(@NonNull ScheduleModel scheduleModel, @NonNull EnvironmentFactory environmentFactory,
-			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
+			CompilerOptions.@Nullable StepOptions schedulerOptions) {
 		this.scheduleModel = scheduleModel;
 		this.environmentFactory = environmentFactory;
 		this.schedulerOptions = schedulerOptions;
 		this.domainUsageAnalysis = createDomainUsageAnalysis();
 		this.standardLibraryHelper = new StandardLibraryHelper(environmentFactory.getStandardLibrary());
 		this.datumCaches = createDatumCaches();
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+			this.doDotGraphs = true;
+			this.doYedGraphs = true;
+		}
+		else if (schedulerOptions != null) {
+			this.doDotGraphs = schedulerOptions.basicGet(CompilerChain.SCHEDULER_DOT_GRAPHS) == Boolean.TRUE;
+			this.doYedGraphs = schedulerOptions.basicGet(CompilerChain.SCHEDULER_YED_GRAPHS) == Boolean.TRUE;
+		}
+		else {
+			this.doDotGraphs = false;
+			this.doYedGraphs = false;
+		}
 	}
 
 	@Override
@@ -195,9 +209,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			if (operationRegion == null) {
 				operationRegion = createOperationRegion(this, operationCallExp, specification, operationDatum);
 				operationDatum2operationRegion.put(operationDatum, operationRegion);
-				if (AbstractQVTb2QVTs.DEBUG_GRAPHS.isActive()) {
-					writeDebugGraphs(operationRegion, null);
-				}
+				writeDebugGraphs(operationRegion, null);
 			}
 			return operationRegion;
 		} catch (ParserException e) {
@@ -637,20 +649,20 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	@Override
 	public boolean isNoEarlyMerge() {
-		Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions2 = schedulerOptions;
+		CompilerOptions.StepOptions schedulerOptions2 = schedulerOptions;
 		if (schedulerOptions2 == null) {
 			return false;
 		}
-		return schedulerOptions2.get(CompilerChain.SCHEDULER_NO_EARLY_MERGE) == Boolean.TRUE;
+		return schedulerOptions2.basicGet(CompilerChain.SCHEDULER_NO_EARLY_MERGE) == Boolean.TRUE;
 	}
 
 	@Override
 	public boolean isNoLateConsumerMerge() {
-		Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions2 = schedulerOptions;
+		CompilerOptions.StepOptions schedulerOptions2 = schedulerOptions;
 		if (schedulerOptions2 == null) {
 			return false;
 		}
-		return schedulerOptions2.get(CompilerChain.SCHEDULER_NO_LATE_CONSUMER_MERGE) == Boolean.TRUE;
+		return schedulerOptions2.basicGet(CompilerChain.SCHEDULER_NO_LATE_CONSUMER_MERGE) == Boolean.TRUE;
 	}
 
 	public boolean isKnown(@NonNull VariableDeclaration sourceVariable) {
@@ -668,130 +680,146 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	public void writeCallDOTfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
-		URI baseURI = getGraphsBaseURI();
-		URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_c")*/ + suffix + ".dot").resolve(baseURI);
-		try {
-			OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
-			ToCallGraphVisitor visitor = new ToCallGraphVisitor(new DOTStringBuilder());
-			String s = visitor.visit(region);
-			outputStream.write(s.getBytes());
-			outputStream.close();
-		} catch (IOException e) {
-			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+		if (doDotGraphs) {
+			URI baseURI = getGraphsBaseURI();
+			URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_c")*/ + suffix + ".dot").resolve(baseURI);
+			try {
+				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
+				ToCallGraphVisitor visitor = new ToCallGraphVisitor(new DOTStringBuilder());
+				String s = visitor.visit(region);
+				outputStream.write(s.getBytes());
+				outputStream.close();
+			} catch (IOException e) {
+				System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+			}
 		}
 	}
 
 	public void writeCallGraphMLfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
-		URI baseURI = getGraphsBaseURI();
-		URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_c")*/ + suffix + ".graphml").resolve(baseURI);
-		try {
-			OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
-			ToCallGraphVisitor visitor = new ToCallGraphVisitor(new GraphMLStringBuilder());
-			String s = visitor.visit(region);
-			outputStream.write(s.getBytes());
-			outputStream.close();
-		} catch (IOException e) {
-			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+		if (doYedGraphs) {
+			URI baseURI = getGraphsBaseURI();
+			URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_c")*/ + suffix + ".graphml").resolve(baseURI);
+			try {
+				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
+				ToCallGraphVisitor visitor = new ToCallGraphVisitor(new GraphMLStringBuilder());
+				String s = visitor.visit(region);
+				outputStream.write(s.getBytes());
+				outputStream.close();
+			} catch (IOException e) {
+				System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+			}
 		}
 	}
 
 	@Override
 	public void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph) {
-		for (@NonNull ScheduledRegion scheduledRegion : QVTscheduleUtil.getOwnedScheduledRegions(scheduleModel)) {
-			if (doNodesGraph) {
-				writeDebugGraphs(scheduledRegion, context);
-			}
-			if (doRegionGraph) {
-				String suffix = "-r-" + context;
-				writeRegionDOTfile(scheduledRegion, suffix);
-				writeRegionGraphMLfile(scheduledRegion, suffix);
-			}
-			if (doCallGraph) {
-				String suffix = "-c-" + context;
-				writeCallDOTfile(scheduledRegion, suffix);
-				writeCallGraphMLfile(scheduledRegion, suffix);
+		if (doDotGraphs || doYedGraphs) {
+			for (@NonNull ScheduledRegion scheduledRegion : QVTscheduleUtil.getOwnedScheduledRegions(scheduleModel)) {
+				if (doNodesGraph) {
+					writeDebugGraphs(scheduledRegion, context);
+				}
+				if (doRegionGraph) {
+					String suffix = "-r-" + context;
+					writeRegionDOTfile(scheduledRegion, suffix);
+					writeRegionGraphMLfile(scheduledRegion, suffix);
+				}
+				if (doCallGraph) {
+					String suffix = "-c-" + context;
+					writeCallDOTfile(scheduledRegion, suffix);
+					writeCallGraphMLfile(scheduledRegion, suffix);
+				}
 			}
 		}
 	}
 
 	@Override
 	public void writeDebugGraphs(@NonNull Region region, @Nullable String context) {
-		String suffix = context != null ? "-" + context : null;
-		writeDOTfile(region, suffix);
-		writeGraphMLfile(region, suffix);
+		if (doDotGraphs || doYedGraphs) {
+			String suffix = context != null ? "-" + context : null;
+			writeDOTfile(region, suffix);
+			writeGraphMLfile(region, suffix);
+		}
 	}
 
 
 	public void writeDOTfile(@NonNull Region region, @Nullable String suffix) {
-		URI baseURI = getGraphsBaseURI();
-		String symbolName = region.getSymbolName();
-		if (suffix != null) {
-			symbolName = symbolName + suffix;
-		}
-		URI dotURI = URI.createURI(symbolName + ".dot").resolve(baseURI);
-		try {
-			OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
-			DOTStringBuilder s = new DOTStringBuilder();
-			region.toGraph(s);
-			outputStream.write(s.toString().getBytes());
-			outputStream.close();
-		} catch (IOException e) {
-			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+		if (doDotGraphs) {
+			URI baseURI = getGraphsBaseURI();
+			String symbolName = region.getSymbolName();
+			if (suffix != null) {
+				symbolName = symbolName + suffix;
+			}
+			URI dotURI = URI.createURI(symbolName + ".dot").resolve(baseURI);
+			try {
+				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
+				DOTStringBuilder s = new DOTStringBuilder();
+				region.toGraph(s);
+				outputStream.write(s.toString().getBytes());
+				outputStream.close();
+			} catch (IOException e) {
+				System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+			}
 		}
 	}
 
 	public void writeGraphMLfile(@NonNull Region region, @Nullable String suffix) {
-		URI baseURI = getGraphsBaseURI();
-		String symbolName = region.getSymbolName();
-		if (suffix != null) {
-			symbolName = symbolName + suffix;
-		}
-		URI dotURI = URI.createURI(symbolName + ".graphml").resolve(baseURI);
-		try {
-			OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
-			GraphMLStringBuilder s = new GraphMLStringBuilder();
-			region.toGraph(s);
-			outputStream.write(s.toString().getBytes());
-			outputStream.close();
-		} catch (IOException e) {
-			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+		if (doYedGraphs) {
+			URI baseURI = getGraphsBaseURI();
+			String symbolName = region.getSymbolName();
+			if (suffix != null) {
+				symbolName = symbolName + suffix;
+			}
+			URI dotURI = URI.createURI(symbolName + ".graphml").resolve(baseURI);
+			try {
+				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
+				GraphMLStringBuilder s = new GraphMLStringBuilder();
+				region.toGraph(s);
+				outputStream.write(s.toString().getBytes());
+				outputStream.close();
+			} catch (IOException e) {
+				System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+			}
 		}
 	}
 
 	public void writeRegionDOTfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
-		URI baseURI = getGraphsBaseURI();
-		URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_")*/ + suffix + ".dot").resolve(baseURI);
-		try {
-			OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
-			ToRegionGraphVisitor visitor = new ToRegionGraphVisitor(new DOTStringBuilder());
-			String s = visitor.visit(region);
-			outputStream.write(s.getBytes());
-			outputStream.close();
-		} catch (IOException e) {
-			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
-		}
-		for (@NonNull Region nestedRegion : QVTscheduleUtil.getMappingRegions(region)) {
-			if (nestedRegion instanceof ScheduledRegion) {
-				writeRegionDOTfile((@NonNull ScheduledRegion)nestedRegion, suffix);
+		if (doDotGraphs) {
+			URI baseURI = getGraphsBaseURI();
+			URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_")*/ + suffix + ".dot").resolve(baseURI);
+			try {
+				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
+				ToRegionGraphVisitor visitor = new ToRegionGraphVisitor(new DOTStringBuilder());
+				String s = visitor.visit(region);
+				outputStream.write(s.getBytes());
+				outputStream.close();
+			} catch (IOException e) {
+				System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+			}
+			for (@NonNull Region nestedRegion : QVTscheduleUtil.getMappingRegions(region)) {
+				if (nestedRegion instanceof ScheduledRegion) {
+					writeRegionDOTfile((@NonNull ScheduledRegion)nestedRegion, suffix);
+				}
 			}
 		}
 	}
 
 	public void writeRegionGraphMLfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
-		URI baseURI = getGraphsBaseURI();
-		URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_")*/ + suffix + ".graphml").resolve(baseURI);
-		try {
-			OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
-			ToRegionGraphVisitor visitor = new ToRegionGraphVisitor(new GraphMLStringBuilder());
-			String s = visitor.visit(region);
-			outputStream.write(s.getBytes());
-			outputStream.close();
-		} catch (IOException e) {
-			System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
-		}
-		for (@NonNull Region nestedRegion : QVTscheduleUtil.getMappingRegions(region)) {
-			if (nestedRegion instanceof ScheduledRegion) {
-				writeRegionGraphMLfile((@NonNull ScheduledRegion)nestedRegion, suffix);
+		if (doYedGraphs) {
+			URI baseURI = getGraphsBaseURI();
+			URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_")*/ + suffix + ".graphml").resolve(baseURI);
+			try {
+				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
+				ToRegionGraphVisitor visitor = new ToRegionGraphVisitor(new GraphMLStringBuilder());
+				String s = visitor.visit(region);
+				outputStream.write(s.getBytes());
+				outputStream.close();
+			} catch (IOException e) {
+				System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
+			}
+			for (@NonNull Region nestedRegion : QVTscheduleUtil.getMappingRegions(region)) {
+				if (nestedRegion instanceof ScheduledRegion) {
+					writeRegionGraphMLfile((@NonNull ScheduledRegion)nestedRegion, suffix);
+				}
 			}
 		}
 	}

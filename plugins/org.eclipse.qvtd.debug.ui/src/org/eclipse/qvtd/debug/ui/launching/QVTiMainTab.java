@@ -12,13 +12,17 @@
 package org.eclipse.qvtd.debug.ui.launching;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.QVTiCompilerChain;
-import org.eclipse.qvtd.compiler.CompilerChain.Key;
+import org.eclipse.qvtd.compiler.CompilerOptions;
+import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
+import org.eclipse.qvtd.debug.launching.QVTiLaunchConfigurationDelegate;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -29,17 +33,13 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Group;
 
+import com.google.common.collect.Lists;
+
 public class QVTiMainTab extends MainTab<Transformation> implements QVTiLaunchConstants
 {
-	private static final @NonNull String @NonNull [] intermediateKeys = new @NonNull String[] {
-		CompilerChain.QVTI_STEP,
-		CompilerChain.JAVA_STEP,
-		CompilerChain.CLASS_STEP
-	};
-
 	@Override
-	protected @NonNull QVTiCompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
-		return new QVTiCompilerChain(environmentFactory, txURI, txURI, options);
+	protected @NonNull QVTiCompilerChain createCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull CompilerOptions compilerOptions) {
+		return new QVTiCompilerChain(environmentFactory, txURI, txURI, compilerOptions);
 	}
 
 	@Override
@@ -51,14 +51,28 @@ public class QVTiMainTab extends MainTab<Transformation> implements QVTiLaunchCo
 	}
 
 	@Override
-	protected @NonNull String @NonNull [] getIntermediateKeysInternal() {
-		return intermediateKeys;
+	protected @NonNull List<@NonNull String> getIntermediateKeys() {
+		List<@NonNull String> asList = Lists.newArrayList(QVTiLaunchConfigurationDelegate.compileStepKeys);
+		if (!isInterpreted()) {
+			for (@NonNull String stepKey : QVTiLaunchConfigurationDelegate.generateStepKeys) {
+				asList.add(stepKey);
+			}
+		}
+		return asList;
 	}
 
 	@Override
-	protected void initializeOptions(@NonNull Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
-		super.initializeOptions(options);
-		initializeURIOption(options, CompilerChain.QVTI_STEP);
+	protected void initializeOptions(@NonNull DefaultCompilerOptions compilerOptions) throws IOException {		// FIXME Exploit QVTc/QVTr evolution
+		compilerOptions.setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, XMIUtil.createSaveOptions());
+		if (isInterpreted()) {
+			compilerOptions.setOption(CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, null);
+			compilerOptions.setOption(CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, null);
+		}
+		else {
+			initializeURIOption(compilerOptions, CompilerChain.JAVA_STEP);
+			initializeURIOption(compilerOptions, CompilerChain.CLASS_STEP);
+		}
+		initializeURIOption(compilerOptions, CompilerChain.QVTI_STEP);
 	}
 
 	@Override

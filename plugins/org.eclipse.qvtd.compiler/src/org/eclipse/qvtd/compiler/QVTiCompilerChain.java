@@ -11,12 +11,9 @@
 package org.eclipse.qvtd.compiler;
 
 import java.io.IOException;
-import java.util.Map;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -36,15 +33,16 @@ public class QVTiCompilerChain extends AbstractCompilerChain
 		public @NonNull ImperativeTransformation execute(@NonNull URI txURI) throws IOException {
 			ImperativeTransformation asTransformation = QVTimperativeUtil.loadTransformation(environmentFactory, txURI, false);
 			Resource iResource = ClassUtil.nonNullState(asTransformation.eResource());
+			iResource.setURI(getURI());
 			checkForProxyURIs(iResource);
-			compiled(iResource);
+			saveResource(iResource);
 			return asTransformation;
 		}
 	}
 
 	protected final @NonNull Xtext2QVTiCompilerStep xtext2qvtiCompilerStep;
 
-	public QVTiCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI, @Nullable Map<@NonNull String, @Nullable Map<@NonNull Key<Object>, @Nullable Object>> options) {
+	public QVTiCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI prefixURI, @NonNull CompilerOptions options) {
 		super(environmentFactory, txURI, prefixURI, options);
 		this.xtext2qvtiCompilerStep = createXtext2QVTiCompilerStep();
 	}

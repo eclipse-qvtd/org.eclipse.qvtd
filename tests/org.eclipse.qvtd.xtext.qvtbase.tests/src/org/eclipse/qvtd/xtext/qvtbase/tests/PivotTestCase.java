@@ -47,7 +47,7 @@ import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
-import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
+import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
@@ -302,7 +302,7 @@ public class PivotTestCase extends TestCase
 		Resource ecoreResource = AS2Ecore.createResource((EnvironmentFactoryInternal) ocl.getEnvironmentFactory(), pivotResource, uri, null);
 		assertNoResourceErrors("Ecore2Pivot failed", ecoreResource);
 		if (ecoreURI != null) {
-			ecoreResource.save(TestsXMLUtil.defaultSavingOptions);
+			ecoreResource.save(DefaultCompilerOptions.defaultSavingOptions);
 		}
 		if (validateSaved) {
 			assertNoValidationErrors("Ecore2Pivot invalid", ecoreResource);
@@ -315,7 +315,7 @@ public class PivotTestCase extends TestCase
 		assertNoUnresolvedProxies("Unresolved proxies", pivotResource);
 		if (pivotURI != null) {
 			pivotResource.setURI(pivotURI);
-			pivotResource.save(TestsXMLUtil.defaultSavingOptions);
+			pivotResource.save(DefaultCompilerOptions.defaultSavingOptions);
 		}
 		return pivotResource;
 	}

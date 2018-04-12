@@ -10,11 +10,10 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
-import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.qvtd.compiler.CompilerChain.Key;
+import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.MappingAnalysis.QVTcoreExpressionAnalyzer;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -25,8 +24,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 
 public class QVTcoreScheduleManager extends AbstractScheduleManager
 {
-	public QVTcoreScheduleManager(@NonNull EnvironmentFactory environmentFactory,
-			@Nullable Map<@NonNull Key<? extends Object>, @Nullable Object> schedulerOptions) {
+	public QVTcoreScheduleManager(@NonNull EnvironmentFactory environmentFactory, CompilerOptions.@Nullable StepOptions schedulerOptions) {
 		super(QVTscheduleFactory.eINSTANCE.createScheduleModel(), environmentFactory, schedulerOptions);
 	}
 

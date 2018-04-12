@@ -36,6 +36,8 @@ import org.eclipse.ocl.examples.debug.vm.utils.StreamsProxy;
 import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.CompilerChain;
+import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -47,8 +49,21 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate implements QVTiLaunchConstants
 {
+	public static final @NonNull String @NonNull [] compileStepKeys = new @NonNull String[] {
+		CompilerChain.QVTI_STEP
+	};
+
+	public static final @NonNull String @NonNull [] generateStepKeys = new @NonNull String[] {
+		CompilerChain.JAVA_STEP,
+		CompilerChain.CLASS_STEP
+	};
+
 	protected static final int LAUNCH_ERROR_CODE = 210;
 	protected static final IStatus fgLaunchErrorStatus = new Status(IStatus.ERROR, QVTiDebugPlugin.PLUGIN_ID, LAUNCH_ERROR_CODE, "Launch configuration error", null); //$NON-NLS-1$
+
+	protected @NonNull DefaultCompilerOptions createCompilerOptions() {
+		return new DefaultCompilerOptions();
+	}
 
 	protected @NonNull QVTiExecutor createExecutor(@NonNull QVTiEnvironmentFactory envFactory, @NonNull ImperativeTransformation transformation) {
 		return new QVTiIncrementalExecutor(envFactory, transformation, QVTiIncrementalExecutor.Mode.LAZY);
@@ -105,7 +120,7 @@ public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate
 						}
 					}
 					for (String outName : outMap.keySet()) {
-						if (outName != null) {
+						if (outName != null) { //&& !QVTbaseUtil.TRACE_TYPED_MODEL_NAME.equals(outName)) {
 							URI outURI = URI.createURI(outMap.get(outName), true);
 							executor.createModel(outName, outURI, null);
 						}
