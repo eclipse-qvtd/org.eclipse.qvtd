@@ -158,7 +158,6 @@ public class QVTtemplateTables
 		private static final @NonNull ExecutorFragment _CollectionTemplateExp__CollectionTemplateExp = new ExecutorFragment(Types._CollectionTemplateExp, QVTtemplateTables.Types._CollectionTemplateExp);
 		private static final @NonNull ExecutorFragment _CollectionTemplateExp__Element = new ExecutorFragment(Types._CollectionTemplateExp, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _CollectionTemplateExp__LiteralExp = new ExecutorFragment(Types._CollectionTemplateExp, PivotTables.Types._LiteralExp);
-		private static final @NonNull ExecutorFragment _CollectionTemplateExp__Nameable = new ExecutorFragment(Types._CollectionTemplateExp, PivotTables.Types._Nameable);
 		private static final @NonNull ExecutorFragment _CollectionTemplateExp__NamedElement = new ExecutorFragment(Types._CollectionTemplateExp, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _CollectionTemplateExp__OCLExpression = new ExecutorFragment(Types._CollectionTemplateExp, PivotTables.Types._OCLExpression);
 		private static final @NonNull ExecutorFragment _CollectionTemplateExp__OclAny = new ExecutorFragment(Types._CollectionTemplateExp, OCLstdlibTables.Types._OclAny);
@@ -166,11 +165,9 @@ public class QVTtemplateTables
 		private static final @NonNull ExecutorFragment _CollectionTemplateExp__ReferringElement = new ExecutorFragment(Types._CollectionTemplateExp, PivotTables.Types._ReferringElement);
 		private static final @NonNull ExecutorFragment _CollectionTemplateExp__TemplateExp = new ExecutorFragment(Types._CollectionTemplateExp, QVTtemplateTables.Types._TemplateExp);
 		private static final @NonNull ExecutorFragment _CollectionTemplateExp__TypedElement = new ExecutorFragment(Types._CollectionTemplateExp, PivotTables.Types._TypedElement);
-		private static final @NonNull ExecutorFragment _CollectionTemplateExp__Visitable = new ExecutorFragment(Types._CollectionTemplateExp, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _ObjectTemplateExp__Element = new ExecutorFragment(Types._ObjectTemplateExp, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _ObjectTemplateExp__LiteralExp = new ExecutorFragment(Types._ObjectTemplateExp, PivotTables.Types._LiteralExp);
-		private static final @NonNull ExecutorFragment _ObjectTemplateExp__Nameable = new ExecutorFragment(Types._ObjectTemplateExp, PivotTables.Types._Nameable);
 		private static final @NonNull ExecutorFragment _ObjectTemplateExp__NamedElement = new ExecutorFragment(Types._ObjectTemplateExp, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _ObjectTemplateExp__OCLExpression = new ExecutorFragment(Types._ObjectTemplateExp, PivotTables.Types._OCLExpression);
 		private static final @NonNull ExecutorFragment _ObjectTemplateExp__ObjectTemplateExp = new ExecutorFragment(Types._ObjectTemplateExp, QVTtemplateTables.Types._ObjectTemplateExp);
@@ -179,18 +176,15 @@ public class QVTtemplateTables
 		private static final @NonNull ExecutorFragment _ObjectTemplateExp__ReferringElement = new ExecutorFragment(Types._ObjectTemplateExp, PivotTables.Types._ReferringElement);
 		private static final @NonNull ExecutorFragment _ObjectTemplateExp__TemplateExp = new ExecutorFragment(Types._ObjectTemplateExp, QVTtemplateTables.Types._TemplateExp);
 		private static final @NonNull ExecutorFragment _ObjectTemplateExp__TypedElement = new ExecutorFragment(Types._ObjectTemplateExp, PivotTables.Types._TypedElement);
-		private static final @NonNull ExecutorFragment _ObjectTemplateExp__Visitable = new ExecutorFragment(Types._ObjectTemplateExp, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _PropertyTemplateItem__Element = new ExecutorFragment(Types._PropertyTemplateItem, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _PropertyTemplateItem__OclAny = new ExecutorFragment(Types._PropertyTemplateItem, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _PropertyTemplateItem__OclElement = new ExecutorFragment(Types._PropertyTemplateItem, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _PropertyTemplateItem__PropertyTemplateItem = new ExecutorFragment(Types._PropertyTemplateItem, QVTtemplateTables.Types._PropertyTemplateItem);
 		private static final @NonNull ExecutorFragment _PropertyTemplateItem__ReferringElement = new ExecutorFragment(Types._PropertyTemplateItem, PivotTables.Types._ReferringElement);
-		private static final @NonNull ExecutorFragment _PropertyTemplateItem__Visitable = new ExecutorFragment(Types._PropertyTemplateItem, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _TemplateExp__Element = new ExecutorFragment(Types._TemplateExp, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _TemplateExp__LiteralExp = new ExecutorFragment(Types._TemplateExp, PivotTables.Types._LiteralExp);
-		private static final @NonNull ExecutorFragment _TemplateExp__Nameable = new ExecutorFragment(Types._TemplateExp, PivotTables.Types._Nameable);
 		private static final @NonNull ExecutorFragment _TemplateExp__NamedElement = new ExecutorFragment(Types._TemplateExp, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _TemplateExp__OCLExpression = new ExecutorFragment(Types._TemplateExp, PivotTables.Types._OCLExpression);
 		private static final @NonNull ExecutorFragment _TemplateExp__OclAny = new ExecutorFragment(Types._TemplateExp, OCLstdlibTables.Types._OclAny);
@@ -198,7 +192,6 @@ public class QVTtemplateTables
 		private static final @NonNull ExecutorFragment _TemplateExp__ReferringElement = new ExecutorFragment(Types._TemplateExp, PivotTables.Types._ReferringElement);
 		private static final @NonNull ExecutorFragment _TemplateExp__TemplateExp = new ExecutorFragment(Types._TemplateExp, QVTtemplateTables.Types._TemplateExp);
 		private static final @NonNull ExecutorFragment _TemplateExp__TypedElement = new ExecutorFragment(Types._TemplateExp, PivotTables.Types._TypedElement);
-		private static final @NonNull ExecutorFragment _TemplateExp__Visitable = new ExecutorFragment(Types._TemplateExp, PivotTables.Types._Visitable);
 
 		static {
 			Init.initEnd();
@@ -308,62 +301,55 @@ public class QVTtemplateTables
 			{
 				Fragments._CollectionTemplateExp__OclAny /* 0 */,
 				Fragments._CollectionTemplateExp__OclElement /* 1 */,
-				Fragments._CollectionTemplateExp__Nameable /* 2 */,
+				Fragments._CollectionTemplateExp__Element /* 2 */,
 				Fragments._CollectionTemplateExp__ReferringElement /* 2 */,
-				Fragments._CollectionTemplateExp__Visitable /* 2 */,
-				Fragments._CollectionTemplateExp__Element /* 3 */,
-				Fragments._CollectionTemplateExp__NamedElement /* 4 */,
-				Fragments._CollectionTemplateExp__TypedElement /* 5 */,
-				Fragments._CollectionTemplateExp__OCLExpression /* 6 */,
-				Fragments._CollectionTemplateExp__LiteralExp /* 7 */,
-				Fragments._CollectionTemplateExp__TemplateExp /* 8 */,
-				Fragments._CollectionTemplateExp__CollectionTemplateExp /* 9 */
+				Fragments._CollectionTemplateExp__NamedElement /* 3 */,
+				Fragments._CollectionTemplateExp__TypedElement /* 4 */,
+				Fragments._CollectionTemplateExp__OCLExpression /* 5 */,
+				Fragments._CollectionTemplateExp__LiteralExp /* 6 */,
+				Fragments._CollectionTemplateExp__TemplateExp /* 7 */,
+				Fragments._CollectionTemplateExp__CollectionTemplateExp /* 8 */
 			};
-		private static final int @NonNull [] __CollectionTemplateExp = { 1,1,3,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __CollectionTemplateExp = { 1,1,2,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _ObjectTemplateExp =
 			{
 				Fragments._ObjectTemplateExp__OclAny /* 0 */,
 				Fragments._ObjectTemplateExp__OclElement /* 1 */,
-				Fragments._ObjectTemplateExp__Nameable /* 2 */,
+				Fragments._ObjectTemplateExp__Element /* 2 */,
 				Fragments._ObjectTemplateExp__ReferringElement /* 2 */,
-				Fragments._ObjectTemplateExp__Visitable /* 2 */,
-				Fragments._ObjectTemplateExp__Element /* 3 */,
-				Fragments._ObjectTemplateExp__NamedElement /* 4 */,
-				Fragments._ObjectTemplateExp__TypedElement /* 5 */,
-				Fragments._ObjectTemplateExp__OCLExpression /* 6 */,
-				Fragments._ObjectTemplateExp__LiteralExp /* 7 */,
-				Fragments._ObjectTemplateExp__TemplateExp /* 8 */,
-				Fragments._ObjectTemplateExp__ObjectTemplateExp /* 9 */
+				Fragments._ObjectTemplateExp__NamedElement /* 3 */,
+				Fragments._ObjectTemplateExp__TypedElement /* 4 */,
+				Fragments._ObjectTemplateExp__OCLExpression /* 5 */,
+				Fragments._ObjectTemplateExp__LiteralExp /* 6 */,
+				Fragments._ObjectTemplateExp__TemplateExp /* 7 */,
+				Fragments._ObjectTemplateExp__ObjectTemplateExp /* 8 */
 			};
-		private static final int @NonNull [] __ObjectTemplateExp = { 1,1,3,1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __ObjectTemplateExp = { 1,1,2,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _PropertyTemplateItem =
 			{
 				Fragments._PropertyTemplateItem__OclAny /* 0 */,
 				Fragments._PropertyTemplateItem__OclElement /* 1 */,
+				Fragments._PropertyTemplateItem__Element /* 2 */,
 				Fragments._PropertyTemplateItem__ReferringElement /* 2 */,
-				Fragments._PropertyTemplateItem__Visitable /* 2 */,
-				Fragments._PropertyTemplateItem__Element /* 3 */,
-				Fragments._PropertyTemplateItem__PropertyTemplateItem /* 4 */
+				Fragments._PropertyTemplateItem__PropertyTemplateItem /* 3 */
 			};
-		private static final int @NonNull [] __PropertyTemplateItem = { 1,1,2,1,1 };
+		private static final int @NonNull [] __PropertyTemplateItem = { 1,1,2,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _TemplateExp =
 			{
 				Fragments._TemplateExp__OclAny /* 0 */,
 				Fragments._TemplateExp__OclElement /* 1 */,
-				Fragments._TemplateExp__Nameable /* 2 */,
+				Fragments._TemplateExp__Element /* 2 */,
 				Fragments._TemplateExp__ReferringElement /* 2 */,
-				Fragments._TemplateExp__Visitable /* 2 */,
-				Fragments._TemplateExp__Element /* 3 */,
-				Fragments._TemplateExp__NamedElement /* 4 */,
-				Fragments._TemplateExp__TypedElement /* 5 */,
-				Fragments._TemplateExp__OCLExpression /* 6 */,
-				Fragments._TemplateExp__LiteralExp /* 7 */,
-				Fragments._TemplateExp__TemplateExp /* 8 */
+				Fragments._TemplateExp__NamedElement /* 3 */,
+				Fragments._TemplateExp__TypedElement /* 4 */,
+				Fragments._TemplateExp__OCLExpression /* 5 */,
+				Fragments._TemplateExp__LiteralExp /* 6 */,
+				Fragments._TemplateExp__TemplateExp /* 7 */
 			};
-		private static final int @NonNull [] __TemplateExp = { 1,1,3,1,1,1,1,1,1 };
+		private static final int @NonNull [] __TemplateExp = { 1,1,2,1,1,1,1,1 };
 
 		/**
 		 *	Install the fragment descriptors in the class descriptors.
@@ -398,7 +384,6 @@ public class QVTtemplateTables
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _CollectionTemplateExp__LiteralExp = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionTemplateExp__Nameable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _CollectionTemplateExp__NamedElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _CollectionTemplateExp__OCLExpression = {
 			PivotTables.Operations._OCLExpression__isNonNull /* isNonNull() */,
@@ -437,7 +422,6 @@ public class QVTtemplateTables
 		private static final @NonNull ExecutorOperation @NonNull [] _CollectionTemplateExp__TypedElement = {
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CollectionTemplateExp__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _ObjectTemplateExp__ObjectTemplateExp = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _ObjectTemplateExp__Element = {
@@ -445,7 +429,6 @@ public class QVTtemplateTables
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _ObjectTemplateExp__LiteralExp = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _ObjectTemplateExp__Nameable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _ObjectTemplateExp__NamedElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _ObjectTemplateExp__OCLExpression = {
 			PivotTables.Operations._OCLExpression__isNonNull /* isNonNull() */,
@@ -484,7 +467,6 @@ public class QVTtemplateTables
 		private static final @NonNull ExecutorOperation @NonNull [] _ObjectTemplateExp__TypedElement = {
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _ObjectTemplateExp__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _PropertyTemplateItem__PropertyTemplateItem = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _PropertyTemplateItem__Element = {
@@ -520,7 +502,6 @@ public class QVTtemplateTables
 		private static final @NonNull ExecutorOperation @NonNull [] _PropertyTemplateItem__ReferringElement = {
 			PivotTables.Operations._ReferringElement__getReferredElement /* getReferredElement() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _PropertyTemplateItem__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _TemplateExp__TemplateExp = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _TemplateExp__Element = {
@@ -528,7 +509,6 @@ public class QVTtemplateTables
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _TemplateExp__LiteralExp = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _TemplateExp__Nameable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _TemplateExp__NamedElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _TemplateExp__OCLExpression = {
 			PivotTables.Operations._OCLExpression__isNonNull /* isNonNull() */,
@@ -566,7 +546,6 @@ public class QVTtemplateTables
 		private static final @NonNull ExecutorOperation @NonNull [] _TemplateExp__TypedElement = {
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TemplateExp__Visitable = {};
 
 		/*
 		 *	Install the operation descriptors in the fragment descriptors.
@@ -575,7 +554,6 @@ public class QVTtemplateTables
 			Fragments._CollectionTemplateExp__CollectionTemplateExp.initOperations(_CollectionTemplateExp__CollectionTemplateExp);
 			Fragments._CollectionTemplateExp__Element.initOperations(_CollectionTemplateExp__Element);
 			Fragments._CollectionTemplateExp__LiteralExp.initOperations(_CollectionTemplateExp__LiteralExp);
-			Fragments._CollectionTemplateExp__Nameable.initOperations(_CollectionTemplateExp__Nameable);
 			Fragments._CollectionTemplateExp__NamedElement.initOperations(_CollectionTemplateExp__NamedElement);
 			Fragments._CollectionTemplateExp__OCLExpression.initOperations(_CollectionTemplateExp__OCLExpression);
 			Fragments._CollectionTemplateExp__OclAny.initOperations(_CollectionTemplateExp__OclAny);
@@ -583,11 +561,9 @@ public class QVTtemplateTables
 			Fragments._CollectionTemplateExp__ReferringElement.initOperations(_CollectionTemplateExp__ReferringElement);
 			Fragments._CollectionTemplateExp__TemplateExp.initOperations(_CollectionTemplateExp__TemplateExp);
 			Fragments._CollectionTemplateExp__TypedElement.initOperations(_CollectionTemplateExp__TypedElement);
-			Fragments._CollectionTemplateExp__Visitable.initOperations(_CollectionTemplateExp__Visitable);
 
 			Fragments._ObjectTemplateExp__Element.initOperations(_ObjectTemplateExp__Element);
 			Fragments._ObjectTemplateExp__LiteralExp.initOperations(_ObjectTemplateExp__LiteralExp);
-			Fragments._ObjectTemplateExp__Nameable.initOperations(_ObjectTemplateExp__Nameable);
 			Fragments._ObjectTemplateExp__NamedElement.initOperations(_ObjectTemplateExp__NamedElement);
 			Fragments._ObjectTemplateExp__OCLExpression.initOperations(_ObjectTemplateExp__OCLExpression);
 			Fragments._ObjectTemplateExp__ObjectTemplateExp.initOperations(_ObjectTemplateExp__ObjectTemplateExp);
@@ -596,18 +572,15 @@ public class QVTtemplateTables
 			Fragments._ObjectTemplateExp__ReferringElement.initOperations(_ObjectTemplateExp__ReferringElement);
 			Fragments._ObjectTemplateExp__TemplateExp.initOperations(_ObjectTemplateExp__TemplateExp);
 			Fragments._ObjectTemplateExp__TypedElement.initOperations(_ObjectTemplateExp__TypedElement);
-			Fragments._ObjectTemplateExp__Visitable.initOperations(_ObjectTemplateExp__Visitable);
 
 			Fragments._PropertyTemplateItem__Element.initOperations(_PropertyTemplateItem__Element);
 			Fragments._PropertyTemplateItem__OclAny.initOperations(_PropertyTemplateItem__OclAny);
 			Fragments._PropertyTemplateItem__OclElement.initOperations(_PropertyTemplateItem__OclElement);
 			Fragments._PropertyTemplateItem__PropertyTemplateItem.initOperations(_PropertyTemplateItem__PropertyTemplateItem);
 			Fragments._PropertyTemplateItem__ReferringElement.initOperations(_PropertyTemplateItem__ReferringElement);
-			Fragments._PropertyTemplateItem__Visitable.initOperations(_PropertyTemplateItem__Visitable);
 
 			Fragments._TemplateExp__Element.initOperations(_TemplateExp__Element);
 			Fragments._TemplateExp__LiteralExp.initOperations(_TemplateExp__LiteralExp);
-			Fragments._TemplateExp__Nameable.initOperations(_TemplateExp__Nameable);
 			Fragments._TemplateExp__NamedElement.initOperations(_TemplateExp__NamedElement);
 			Fragments._TemplateExp__OCLExpression.initOperations(_TemplateExp__OCLExpression);
 			Fragments._TemplateExp__OclAny.initOperations(_TemplateExp__OclAny);
@@ -615,7 +588,6 @@ public class QVTtemplateTables
 			Fragments._TemplateExp__ReferringElement.initOperations(_TemplateExp__ReferringElement);
 			Fragments._TemplateExp__TemplateExp.initOperations(_TemplateExp__TemplateExp);
 			Fragments._TemplateExp__TypedElement.initOperations(_TemplateExp__TypedElement);
-			Fragments._TemplateExp__Visitable.initOperations(_TemplateExp__Visitable);
 
 			Init.initEnd();
 		}

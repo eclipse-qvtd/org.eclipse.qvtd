@@ -17,12 +17,12 @@ package org.eclipse.qvtd.pivot.qvtschedule;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Edge</b></em>'.
+ * @extends org.eclipse.ocl.pivot.utilities.Nameable
  * @extends GraphEdge
  * <!-- end-user-doc -->
  *
@@ -42,10 +42,10 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge()
- * @model abstract="true" superTypes="org.eclipse.ocl.pivot.Element org.eclipse.ocl.pivot.Nameable"
+ * @model abstract="true"
  * @generated
  */
-public interface Edge extends Element, Nameable, GraphEdge {
+public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable, GraphEdge {
 	/**
 	 * Returns the value of the '<em><b>Edge Role</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.eclipse.qvtd.pivot.qvtschedule.Role}.
@@ -322,6 +322,11 @@ public interface Edge extends Element, Nameable, GraphEdge {
 	 * Return true is this edge is the auto-created inverse edge of a bidirectional pair of edges.
 	 */
 	boolean isSecondary();
+
+	/**
+	 * Return true is this edge is from a trace node to its success node.
+	 */
+	boolean isSuccess();
 
 
 	/**

@@ -188,26 +188,21 @@ public class QVTbaseTables
 		private static final @NonNull ExecutorFragment _BaseModel__BaseModel = new ExecutorFragment(Types._BaseModel, QVTbaseTables.Types._BaseModel);
 		private static final @NonNull ExecutorFragment _BaseModel__Element = new ExecutorFragment(Types._BaseModel, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _BaseModel__Model = new ExecutorFragment(Types._BaseModel, PivotTables.Types._Model);
-		private static final @NonNull ExecutorFragment _BaseModel__Nameable = new ExecutorFragment(Types._BaseModel, PivotTables.Types._Nameable);
 		private static final @NonNull ExecutorFragment _BaseModel__NamedElement = new ExecutorFragment(Types._BaseModel, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _BaseModel__Namespace = new ExecutorFragment(Types._BaseModel, PivotTables.Types._Namespace);
 		private static final @NonNull ExecutorFragment _BaseModel__OclAny = new ExecutorFragment(Types._BaseModel, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _BaseModel__OclElement = new ExecutorFragment(Types._BaseModel, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _BaseModel__Visitable = new ExecutorFragment(Types._BaseModel, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _Domain__Domain = new ExecutorFragment(Types._Domain, QVTbaseTables.Types._Domain);
 		private static final @NonNull ExecutorFragment _Domain__Element = new ExecutorFragment(Types._Domain, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Domain__Nameable = new ExecutorFragment(Types._Domain, PivotTables.Types._Nameable);
 		private static final @NonNull ExecutorFragment _Domain__NamedElement = new ExecutorFragment(Types._Domain, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _Domain__OclAny = new ExecutorFragment(Types._Domain, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _Domain__OclElement = new ExecutorFragment(Types._Domain, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _Domain__ReferringElement = new ExecutorFragment(Types._Domain, PivotTables.Types._ReferringElement);
-		private static final @NonNull ExecutorFragment _Domain__Visitable = new ExecutorFragment(Types._Domain, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _Function__Element = new ExecutorFragment(Types._Function, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _Function__Feature = new ExecutorFragment(Types._Function, PivotTables.Types._Feature);
 		private static final @NonNull ExecutorFragment _Function__Function = new ExecutorFragment(Types._Function, QVTbaseTables.Types._Function);
-		private static final @NonNull ExecutorFragment _Function__Nameable = new ExecutorFragment(Types._Function, PivotTables.Types._Nameable);
 		private static final @NonNull ExecutorFragment _Function__NamedElement = new ExecutorFragment(Types._Function, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _Function__Namespace = new ExecutorFragment(Types._Function, PivotTables.Types._Namespace);
 		private static final @NonNull ExecutorFragment _Function__OclAny = new ExecutorFragment(Types._Function, OCLstdlibTables.Types._OclAny);
@@ -215,42 +210,34 @@ public class QVTbaseTables
 		private static final @NonNull ExecutorFragment _Function__Operation = new ExecutorFragment(Types._Function, PivotTables.Types._Operation);
 		private static final @NonNull ExecutorFragment _Function__TemplateableElement = new ExecutorFragment(Types._Function, PivotTables.Types._TemplateableElement);
 		private static final @NonNull ExecutorFragment _Function__TypedElement = new ExecutorFragment(Types._Function, PivotTables.Types._TypedElement);
-		private static final @NonNull ExecutorFragment _Function__Visitable = new ExecutorFragment(Types._Function, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _FunctionParameter__Element = new ExecutorFragment(Types._FunctionParameter, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _FunctionParameter__FunctionParameter = new ExecutorFragment(Types._FunctionParameter, QVTbaseTables.Types._FunctionParameter);
-		private static final @NonNull ExecutorFragment _FunctionParameter__Nameable = new ExecutorFragment(Types._FunctionParameter, PivotTables.Types._Nameable);
 		private static final @NonNull ExecutorFragment _FunctionParameter__NamedElement = new ExecutorFragment(Types._FunctionParameter, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _FunctionParameter__OclAny = new ExecutorFragment(Types._FunctionParameter, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _FunctionParameter__OclElement = new ExecutorFragment(Types._FunctionParameter, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _FunctionParameter__Parameter = new ExecutorFragment(Types._FunctionParameter, PivotTables.Types._Parameter);
 		private static final @NonNull ExecutorFragment _FunctionParameter__TypedElement = new ExecutorFragment(Types._FunctionParameter, PivotTables.Types._TypedElement);
 		private static final @NonNull ExecutorFragment _FunctionParameter__VariableDeclaration = new ExecutorFragment(Types._FunctionParameter, PivotTables.Types._VariableDeclaration);
-		private static final @NonNull ExecutorFragment _FunctionParameter__Visitable = new ExecutorFragment(Types._FunctionParameter, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _Pattern__Element = new ExecutorFragment(Types._Pattern, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _Pattern__OclAny = new ExecutorFragment(Types._Pattern, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _Pattern__OclElement = new ExecutorFragment(Types._Pattern, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _Pattern__Pattern = new ExecutorFragment(Types._Pattern, QVTbaseTables.Types._Pattern);
-		private static final @NonNull ExecutorFragment _Pattern__Visitable = new ExecutorFragment(Types._Pattern, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _Predicate__Element = new ExecutorFragment(Types._Predicate, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _Predicate__OclAny = new ExecutorFragment(Types._Predicate, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _Predicate__OclElement = new ExecutorFragment(Types._Predicate, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _Predicate__Predicate = new ExecutorFragment(Types._Predicate, QVTbaseTables.Types._Predicate);
-		private static final @NonNull ExecutorFragment _Predicate__Visitable = new ExecutorFragment(Types._Predicate, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _Rule__Element = new ExecutorFragment(Types._Rule, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Rule__Nameable = new ExecutorFragment(Types._Rule, PivotTables.Types._Nameable);
 		private static final @NonNull ExecutorFragment _Rule__NamedElement = new ExecutorFragment(Types._Rule, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _Rule__OclAny = new ExecutorFragment(Types._Rule, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _Rule__OclElement = new ExecutorFragment(Types._Rule, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _Rule__Rule = new ExecutorFragment(Types._Rule, QVTbaseTables.Types._Rule);
-		private static final @NonNull ExecutorFragment _Rule__Visitable = new ExecutorFragment(Types._Rule, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _Transformation__Class = new ExecutorFragment(Types._Transformation, PivotTables.Types._Class);
 		private static final @NonNull ExecutorFragment _Transformation__Element = new ExecutorFragment(Types._Transformation, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _Transformation__Nameable = new ExecutorFragment(Types._Transformation, PivotTables.Types._Nameable);
 		private static final @NonNull ExecutorFragment _Transformation__NamedElement = new ExecutorFragment(Types._Transformation, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _Transformation__Namespace = new ExecutorFragment(Types._Transformation, PivotTables.Types._Namespace);
 		private static final @NonNull ExecutorFragment _Transformation__OclAny = new ExecutorFragment(Types._Transformation, OCLstdlibTables.Types._OclAny);
@@ -259,15 +246,12 @@ public class QVTbaseTables
 		private static final @NonNull ExecutorFragment _Transformation__TemplateableElement = new ExecutorFragment(Types._Transformation, PivotTables.Types._TemplateableElement);
 		private static final @NonNull ExecutorFragment _Transformation__Transformation = new ExecutorFragment(Types._Transformation, QVTbaseTables.Types._Transformation);
 		private static final @NonNull ExecutorFragment _Transformation__Type = new ExecutorFragment(Types._Transformation, PivotTables.Types._Type);
-		private static final @NonNull ExecutorFragment _Transformation__Visitable = new ExecutorFragment(Types._Transformation, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _TypedModel__Element = new ExecutorFragment(Types._TypedModel, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _TypedModel__Nameable = new ExecutorFragment(Types._TypedModel, PivotTables.Types._Nameable);
 		private static final @NonNull ExecutorFragment _TypedModel__NamedElement = new ExecutorFragment(Types._TypedModel, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _TypedModel__OclAny = new ExecutorFragment(Types._TypedModel, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _TypedModel__OclElement = new ExecutorFragment(Types._TypedModel, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _TypedModel__TypedModel = new ExecutorFragment(Types._TypedModel, QVTbaseTables.Types._TypedModel);
-		private static final @NonNull ExecutorFragment _TypedModel__Visitable = new ExecutorFragment(Types._TypedModel, PivotTables.Types._Visitable);
 
 		static {
 			Init.initEnd();
@@ -401,121 +385,105 @@ public class QVTbaseTables
 			{
 				Fragments._BaseModel__OclAny /* 0 */,
 				Fragments._BaseModel__OclElement /* 1 */,
-				Fragments._BaseModel__Nameable /* 2 */,
-				Fragments._BaseModel__Visitable /* 2 */,
-				Fragments._BaseModel__Element /* 3 */,
-				Fragments._BaseModel__NamedElement /* 4 */,
-				Fragments._BaseModel__Namespace /* 5 */,
-				Fragments._BaseModel__Model /* 6 */,
-				Fragments._BaseModel__BaseModel /* 7 */
+				Fragments._BaseModel__Element /* 2 */,
+				Fragments._BaseModel__NamedElement /* 3 */,
+				Fragments._BaseModel__Namespace /* 4 */,
+				Fragments._BaseModel__Model /* 5 */,
+				Fragments._BaseModel__BaseModel /* 6 */
 			};
-		private static final int @NonNull [] __BaseModel = { 1,1,2,1,1,1,1,1 };
+		private static final int @NonNull [] __BaseModel = { 1,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Domain =
 			{
 				Fragments._Domain__OclAny /* 0 */,
 				Fragments._Domain__OclElement /* 1 */,
-				Fragments._Domain__Nameable /* 2 */,
+				Fragments._Domain__Element /* 2 */,
 				Fragments._Domain__ReferringElement /* 2 */,
-				Fragments._Domain__Visitable /* 2 */,
-				Fragments._Domain__Element /* 3 */,
-				Fragments._Domain__NamedElement /* 4 */,
-				Fragments._Domain__Domain /* 5 */
+				Fragments._Domain__NamedElement /* 3 */,
+				Fragments._Domain__Domain /* 4 */
 			};
-		private static final int @NonNull [] __Domain = { 1,1,3,1,1,1 };
+		private static final int @NonNull [] __Domain = { 1,1,2,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Function =
 			{
 				Fragments._Function__OclAny /* 0 */,
 				Fragments._Function__OclElement /* 1 */,
-				Fragments._Function__Nameable /* 2 */,
-				Fragments._Function__Visitable /* 2 */,
-				Fragments._Function__Element /* 3 */,
-				Fragments._Function__NamedElement /* 4 */,
-				Fragments._Function__TemplateableElement /* 4 */,
-				Fragments._Function__Namespace /* 5 */,
-				Fragments._Function__TypedElement /* 5 */,
-				Fragments._Function__Feature /* 6 */,
-				Fragments._Function__Operation /* 7 */,
-				Fragments._Function__Function /* 8 */
+				Fragments._Function__Element /* 2 */,
+				Fragments._Function__NamedElement /* 3 */,
+				Fragments._Function__TemplateableElement /* 3 */,
+				Fragments._Function__Namespace /* 4 */,
+				Fragments._Function__TypedElement /* 4 */,
+				Fragments._Function__Feature /* 5 */,
+				Fragments._Function__Operation /* 6 */,
+				Fragments._Function__Function /* 7 */
 			};
-		private static final int @NonNull [] __Function = { 1,1,2,1,2,2,1,1,1 };
+		private static final int @NonNull [] __Function = { 1,1,1,2,2,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _FunctionParameter =
 			{
 				Fragments._FunctionParameter__OclAny /* 0 */,
 				Fragments._FunctionParameter__OclElement /* 1 */,
-				Fragments._FunctionParameter__Nameable /* 2 */,
-				Fragments._FunctionParameter__Visitable /* 2 */,
-				Fragments._FunctionParameter__Element /* 3 */,
-				Fragments._FunctionParameter__NamedElement /* 4 */,
-				Fragments._FunctionParameter__TypedElement /* 5 */,
-				Fragments._FunctionParameter__VariableDeclaration /* 6 */,
-				Fragments._FunctionParameter__Parameter /* 7 */,
-				Fragments._FunctionParameter__FunctionParameter /* 8 */
+				Fragments._FunctionParameter__Element /* 2 */,
+				Fragments._FunctionParameter__NamedElement /* 3 */,
+				Fragments._FunctionParameter__TypedElement /* 4 */,
+				Fragments._FunctionParameter__VariableDeclaration /* 5 */,
+				Fragments._FunctionParameter__Parameter /* 6 */,
+				Fragments._FunctionParameter__FunctionParameter /* 7 */
 			};
-		private static final int @NonNull [] __FunctionParameter = { 1,1,2,1,1,1,1,1,1 };
+		private static final int @NonNull [] __FunctionParameter = { 1,1,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Pattern =
 			{
 				Fragments._Pattern__OclAny /* 0 */,
 				Fragments._Pattern__OclElement /* 1 */,
-				Fragments._Pattern__Visitable /* 2 */,
-				Fragments._Pattern__Element /* 3 */,
-				Fragments._Pattern__Pattern /* 4 */
+				Fragments._Pattern__Element /* 2 */,
+				Fragments._Pattern__Pattern /* 3 */
 			};
-		private static final int @NonNull [] __Pattern = { 1,1,1,1,1 };
+		private static final int @NonNull [] __Pattern = { 1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Predicate =
 			{
 				Fragments._Predicate__OclAny /* 0 */,
 				Fragments._Predicate__OclElement /* 1 */,
-				Fragments._Predicate__Visitable /* 2 */,
-				Fragments._Predicate__Element /* 3 */,
-				Fragments._Predicate__Predicate /* 4 */
+				Fragments._Predicate__Element /* 2 */,
+				Fragments._Predicate__Predicate /* 3 */
 			};
-		private static final int @NonNull [] __Predicate = { 1,1,1,1,1 };
+		private static final int @NonNull [] __Predicate = { 1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Rule =
 			{
 				Fragments._Rule__OclAny /* 0 */,
 				Fragments._Rule__OclElement /* 1 */,
-				Fragments._Rule__Nameable /* 2 */,
-				Fragments._Rule__Visitable /* 2 */,
-				Fragments._Rule__Element /* 3 */,
-				Fragments._Rule__NamedElement /* 4 */,
-				Fragments._Rule__Rule /* 5 */
+				Fragments._Rule__Element /* 2 */,
+				Fragments._Rule__NamedElement /* 3 */,
+				Fragments._Rule__Rule /* 4 */
 			};
-		private static final int @NonNull [] __Rule = { 1,1,2,1,1,1 };
+		private static final int @NonNull [] __Rule = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Transformation =
 			{
 				Fragments._Transformation__OclAny /* 0 */,
 				Fragments._Transformation__OclElement /* 1 */,
-				Fragments._Transformation__Nameable /* 2 */,
+				Fragments._Transformation__Element /* 2 */,
 				Fragments._Transformation__OclType /* 2 */,
-				Fragments._Transformation__Visitable /* 2 */,
-				Fragments._Transformation__Element /* 3 */,
-				Fragments._Transformation__NamedElement /* 4 */,
-				Fragments._Transformation__TemplateableElement /* 4 */,
-				Fragments._Transformation__Namespace /* 5 */,
-				Fragments._Transformation__Type /* 5 */,
-				Fragments._Transformation__Class /* 6 */,
-				Fragments._Transformation__Transformation /* 7 */
+				Fragments._Transformation__NamedElement /* 3 */,
+				Fragments._Transformation__TemplateableElement /* 3 */,
+				Fragments._Transformation__Namespace /* 4 */,
+				Fragments._Transformation__Type /* 4 */,
+				Fragments._Transformation__Class /* 5 */,
+				Fragments._Transformation__Transformation /* 6 */
 			};
-		private static final int @NonNull [] __Transformation = { 1,1,3,1,2,2,1,1 };
+		private static final int @NonNull [] __Transformation = { 1,1,2,2,2,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _TypedModel =
 			{
 				Fragments._TypedModel__OclAny /* 0 */,
 				Fragments._TypedModel__OclElement /* 1 */,
-				Fragments._TypedModel__Nameable /* 2 */,
-				Fragments._TypedModel__Visitable /* 2 */,
-				Fragments._TypedModel__Element /* 3 */,
-				Fragments._TypedModel__NamedElement /* 4 */,
-				Fragments._TypedModel__TypedModel /* 5 */
+				Fragments._TypedModel__Element /* 2 */,
+				Fragments._TypedModel__NamedElement /* 3 */,
+				Fragments._TypedModel__TypedModel /* 4 */
 			};
-		private static final int @NonNull [] __TypedModel = { 1,1,2,1,1,1 };
+		private static final int @NonNull [] __TypedModel = { 1,1,1,1,1 };
 
 		/**
 		 *	Install the fragment descriptors in the class descriptors.
@@ -555,7 +523,6 @@ public class QVTbaseTables
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _BaseModel__Model = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _BaseModel__Nameable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _BaseModel__NamedElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _BaseModel__Namespace = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _BaseModel__OclAny = {
@@ -584,14 +551,12 @@ public class QVTbaseTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _BaseModel__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _Domain__Domain = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Domain__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Domain__Nameable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Domain__NamedElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Domain__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
@@ -622,7 +587,6 @@ public class QVTbaseTables
 		private static final @NonNull ExecutorOperation @NonNull [] _Domain__ReferringElement = {
 			PivotTables.Operations._ReferringElement__getReferredElement /* getReferredElement() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Domain__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _Function__Function = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Function__Element = {
@@ -630,7 +594,6 @@ public class QVTbaseTables
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Function__Feature = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Function__Nameable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Function__NamedElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Function__Namespace = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Function__OclAny = {
@@ -664,14 +627,12 @@ public class QVTbaseTables
 		private static final @NonNull ExecutorOperation @NonNull [] _Function__TypedElement = {
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Function__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _FunctionParameter__FunctionParameter = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _FunctionParameter__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _FunctionParameter__Nameable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _FunctionParameter__NamedElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _FunctionParameter__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
@@ -704,7 +665,6 @@ public class QVTbaseTables
 			PivotTables.Operations._TypedElement__CompatibleBody /* CompatibleBody(ValueSpecification[1]) */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _FunctionParameter__VariableDeclaration = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _FunctionParameter__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _Pattern__Pattern = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Pattern__Element = {
@@ -737,7 +697,6 @@ public class QVTbaseTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Pattern__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _Predicate__Predicate = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Predicate__Element = {
@@ -770,14 +729,12 @@ public class QVTbaseTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Predicate__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _Rule__Rule = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Rule__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Rule__Nameable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Rule__NamedElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Rule__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
@@ -805,7 +762,6 @@ public class QVTbaseTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Rule__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__Transformation = {
 			QVTbaseTables.Operations._Transformation__getFunction /* getFunction(String[1]) */,
@@ -816,7 +772,6 @@ public class QVTbaseTables
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__Nameable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__NamedElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__Namespace = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__OclAny = {
@@ -856,14 +811,12 @@ public class QVTbaseTables
 			PivotTables.Operations._Type__isTemplateParameter /* isTemplateParameter() */,
 			PivotTables.Operations._Type__specializeIn /* specializeIn(CallExp[1],Type[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Transformation__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _TypedModel__TypedModel = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _TypedModel__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TypedModel__Nameable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _TypedModel__NamedElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _TypedModel__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
@@ -891,7 +844,6 @@ public class QVTbaseTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _TypedModel__Visitable = {};
 
 		/*
 		 *	Install the operation descriptors in the fragment descriptors.
@@ -900,26 +852,21 @@ public class QVTbaseTables
 			Fragments._BaseModel__BaseModel.initOperations(_BaseModel__BaseModel);
 			Fragments._BaseModel__Element.initOperations(_BaseModel__Element);
 			Fragments._BaseModel__Model.initOperations(_BaseModel__Model);
-			Fragments._BaseModel__Nameable.initOperations(_BaseModel__Nameable);
 			Fragments._BaseModel__NamedElement.initOperations(_BaseModel__NamedElement);
 			Fragments._BaseModel__Namespace.initOperations(_BaseModel__Namespace);
 			Fragments._BaseModel__OclAny.initOperations(_BaseModel__OclAny);
 			Fragments._BaseModel__OclElement.initOperations(_BaseModel__OclElement);
-			Fragments._BaseModel__Visitable.initOperations(_BaseModel__Visitable);
 
 			Fragments._Domain__Domain.initOperations(_Domain__Domain);
 			Fragments._Domain__Element.initOperations(_Domain__Element);
-			Fragments._Domain__Nameable.initOperations(_Domain__Nameable);
 			Fragments._Domain__NamedElement.initOperations(_Domain__NamedElement);
 			Fragments._Domain__OclAny.initOperations(_Domain__OclAny);
 			Fragments._Domain__OclElement.initOperations(_Domain__OclElement);
 			Fragments._Domain__ReferringElement.initOperations(_Domain__ReferringElement);
-			Fragments._Domain__Visitable.initOperations(_Domain__Visitable);
 
 			Fragments._Function__Element.initOperations(_Function__Element);
 			Fragments._Function__Feature.initOperations(_Function__Feature);
 			Fragments._Function__Function.initOperations(_Function__Function);
-			Fragments._Function__Nameable.initOperations(_Function__Nameable);
 			Fragments._Function__NamedElement.initOperations(_Function__NamedElement);
 			Fragments._Function__Namespace.initOperations(_Function__Namespace);
 			Fragments._Function__OclAny.initOperations(_Function__OclAny);
@@ -927,42 +874,34 @@ public class QVTbaseTables
 			Fragments._Function__Operation.initOperations(_Function__Operation);
 			Fragments._Function__TemplateableElement.initOperations(_Function__TemplateableElement);
 			Fragments._Function__TypedElement.initOperations(_Function__TypedElement);
-			Fragments._Function__Visitable.initOperations(_Function__Visitable);
 
 			Fragments._FunctionParameter__Element.initOperations(_FunctionParameter__Element);
 			Fragments._FunctionParameter__FunctionParameter.initOperations(_FunctionParameter__FunctionParameter);
-			Fragments._FunctionParameter__Nameable.initOperations(_FunctionParameter__Nameable);
 			Fragments._FunctionParameter__NamedElement.initOperations(_FunctionParameter__NamedElement);
 			Fragments._FunctionParameter__OclAny.initOperations(_FunctionParameter__OclAny);
 			Fragments._FunctionParameter__OclElement.initOperations(_FunctionParameter__OclElement);
 			Fragments._FunctionParameter__Parameter.initOperations(_FunctionParameter__Parameter);
 			Fragments._FunctionParameter__TypedElement.initOperations(_FunctionParameter__TypedElement);
 			Fragments._FunctionParameter__VariableDeclaration.initOperations(_FunctionParameter__VariableDeclaration);
-			Fragments._FunctionParameter__Visitable.initOperations(_FunctionParameter__Visitable);
 
 			Fragments._Pattern__Element.initOperations(_Pattern__Element);
 			Fragments._Pattern__OclAny.initOperations(_Pattern__OclAny);
 			Fragments._Pattern__OclElement.initOperations(_Pattern__OclElement);
 			Fragments._Pattern__Pattern.initOperations(_Pattern__Pattern);
-			Fragments._Pattern__Visitable.initOperations(_Pattern__Visitable);
 
 			Fragments._Predicate__Element.initOperations(_Predicate__Element);
 			Fragments._Predicate__OclAny.initOperations(_Predicate__OclAny);
 			Fragments._Predicate__OclElement.initOperations(_Predicate__OclElement);
 			Fragments._Predicate__Predicate.initOperations(_Predicate__Predicate);
-			Fragments._Predicate__Visitable.initOperations(_Predicate__Visitable);
 
 			Fragments._Rule__Element.initOperations(_Rule__Element);
-			Fragments._Rule__Nameable.initOperations(_Rule__Nameable);
 			Fragments._Rule__NamedElement.initOperations(_Rule__NamedElement);
 			Fragments._Rule__OclAny.initOperations(_Rule__OclAny);
 			Fragments._Rule__OclElement.initOperations(_Rule__OclElement);
 			Fragments._Rule__Rule.initOperations(_Rule__Rule);
-			Fragments._Rule__Visitable.initOperations(_Rule__Visitable);
 
 			Fragments._Transformation__Class.initOperations(_Transformation__Class);
 			Fragments._Transformation__Element.initOperations(_Transformation__Element);
-			Fragments._Transformation__Nameable.initOperations(_Transformation__Nameable);
 			Fragments._Transformation__NamedElement.initOperations(_Transformation__NamedElement);
 			Fragments._Transformation__Namespace.initOperations(_Transformation__Namespace);
 			Fragments._Transformation__OclAny.initOperations(_Transformation__OclAny);
@@ -971,15 +910,12 @@ public class QVTbaseTables
 			Fragments._Transformation__TemplateableElement.initOperations(_Transformation__TemplateableElement);
 			Fragments._Transformation__Transformation.initOperations(_Transformation__Transformation);
 			Fragments._Transformation__Type.initOperations(_Transformation__Type);
-			Fragments._Transformation__Visitable.initOperations(_Transformation__Visitable);
 
 			Fragments._TypedModel__Element.initOperations(_TypedModel__Element);
-			Fragments._TypedModel__Nameable.initOperations(_TypedModel__Nameable);
 			Fragments._TypedModel__NamedElement.initOperations(_TypedModel__NamedElement);
 			Fragments._TypedModel__OclAny.initOperations(_TypedModel__OclAny);
 			Fragments._TypedModel__OclElement.initOperations(_TypedModel__OclElement);
 			Fragments._TypedModel__TypedModel.initOperations(_TypedModel__TypedModel);
-			Fragments._TypedModel__Visitable.initOperations(_TypedModel__Visitable);
 
 			Init.initEnd();
 		}

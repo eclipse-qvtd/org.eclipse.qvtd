@@ -42,6 +42,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PropertyDatumImpl#getOwningClassDatum <em>Owning Class Datum</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PropertyDatumImpl#getReferredProperty <em>Referred Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PropertyDatumImpl#getSuperPropertyDatums <em>Super Property Datums</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PropertyDatumImpl#isKey <em>Key</em>}</li>
  * </ul>
  *
  * @generated
@@ -76,6 +77,26 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * @ordered
 	 */
 	protected EList<PropertyDatum> superPropertyDatums;
+
+	/**
+	 * The default value of the '{@link #isKey() <em>Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean KEY_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isKey() <em>Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean key = KEY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -238,6 +259,29 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * @generated
 	 */
 	@Override
+	public boolean isKey() {
+		return key;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setKey(boolean newKey) {
+		boolean oldKey = key;
+		key = newKey;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.PROPERTY_DATUM__KEY, oldKey, key));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTschedulePackage.PROPERTY_DATUM__OWNING_CLASS_DATUM:
@@ -294,6 +338,8 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 				return basicGetReferredProperty();
 			case QVTschedulePackage.PROPERTY_DATUM__SUPER_PROPERTY_DATUMS:
 				return getSuperPropertyDatums();
+			case QVTschedulePackage.PROPERTY_DATUM__KEY:
+				return isKey();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -320,6 +366,9 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 				getSuperPropertyDatums().clear();
 				getSuperPropertyDatums().addAll((Collection<? extends PropertyDatum>)newValue);
 				return;
+			case QVTschedulePackage.PROPERTY_DATUM__KEY:
+				setKey((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -344,6 +393,9 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 			case QVTschedulePackage.PROPERTY_DATUM__SUPER_PROPERTY_DATUMS:
 				getSuperPropertyDatums().clear();
 				return;
+			case QVTschedulePackage.PROPERTY_DATUM__KEY:
+				setKey(KEY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -364,6 +416,8 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 				return referredProperty != null;
 			case QVTschedulePackage.PROPERTY_DATUM__SUPER_PROPERTY_DATUMS:
 				return superPropertyDatums != null && !superPropertyDatums.isEmpty();
+			case QVTschedulePackage.PROPERTY_DATUM__KEY:
+				return key != KEY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

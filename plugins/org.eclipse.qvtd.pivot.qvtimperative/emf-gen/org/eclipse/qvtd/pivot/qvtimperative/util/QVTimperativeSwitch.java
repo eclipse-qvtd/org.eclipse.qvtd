@@ -23,8 +23,6 @@ import org.eclipse.ocl.pivot.TemplateableElement;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
-import org.eclipse.ocl.pivot.util.Visitable;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -122,8 +120,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseStatement(addStatement);
 				if (result == null) result = caseNamedElement(addStatement);
 				if (result == null) result = caseElement(addStatement);
-				if (result == null) result = caseNameable(addStatement);
-				if (result == null) result = caseVisitable(addStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -136,8 +132,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(appendParameter);
 				if (result == null) result = caseNamedElement(appendParameter);
 				if (result == null) result = caseElement(appendParameter);
-				if (result == null) result = caseNameable(appendParameter);
-				if (result == null) result = caseVisitable(appendParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -146,7 +140,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				T result = caseAppendParameterBinding(appendParameterBinding);
 				if (result == null) result = caseMappingParameterBinding(appendParameterBinding);
 				if (result == null) result = caseElement(appendParameterBinding);
-				if (result == null) result = caseVisitable(appendParameterBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -161,8 +154,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(bufferStatement);
 				if (result == null) result = caseNamedElement(bufferStatement);
 				if (result == null) result = caseElement(bufferStatement);
-				if (result == null) result = caseNameable(bufferStatement);
-				if (result == null) result = caseVisitable(bufferStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -173,8 +164,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseStatement(checkStatement);
 				if (result == null) result = caseNamedElement(checkStatement);
 				if (result == null) result = caseElement(checkStatement);
-				if (result == null) result = caseNameable(checkStatement);
-				if (result == null) result = caseVisitable(checkStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -185,8 +174,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(connectionVariable);
 				if (result == null) result = caseNamedElement(connectionVariable);
 				if (result == null) result = caseElement(connectionVariable);
-				if (result == null) result = caseNameable(connectionVariable);
-				if (result == null) result = caseVisitable(connectionVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -200,8 +187,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(declareStatement);
 				if (result == null) result = caseNamedElement(declareStatement);
 				if (result == null) result = caseElement(declareStatement);
-				if (result == null) result = caseNameable(declareStatement);
-				if (result == null) result = caseVisitable(declareStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -213,8 +198,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(guardParameter);
 				if (result == null) result = caseNamedElement(guardParameter);
 				if (result == null) result = caseElement(guardParameter);
-				if (result == null) result = caseNameable(guardParameter);
-				if (result == null) result = caseVisitable(guardParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -223,7 +206,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				T result = caseGuardParameterBinding(guardParameterBinding);
 				if (result == null) result = caseMappingParameterBinding(guardParameterBinding);
 				if (result == null) result = caseElement(guardParameterBinding);
-				if (result == null) result = caseVisitable(guardParameterBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -235,8 +217,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseNamespace(imperativeModel);
 				if (result == null) result = caseNamedElement(imperativeModel);
 				if (result == null) result = caseElement(imperativeModel);
-				if (result == null) result = caseNameable(imperativeModel);
-				if (result == null) result = caseVisitable(imperativeModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -250,8 +230,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTemplateableElement(imperativeTransformation);
 				if (result == null) result = caseNamedElement(imperativeTransformation);
 				if (result == null) result = caseElement(imperativeTransformation);
-				if (result == null) result = caseNameable(imperativeTransformation);
-				if (result == null) result = caseVisitable(imperativeTransformation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -261,8 +239,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTypedModel(imperativeTypedModel);
 				if (result == null) result = caseNamedElement(imperativeTypedModel);
 				if (result == null) result = caseElement(imperativeTypedModel);
-				if (result == null) result = caseNameable(imperativeTypedModel);
-				if (result == null) result = caseVisitable(imperativeTypedModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -271,7 +247,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				T result = caseLoopParameterBinding(loopParameterBinding);
 				if (result == null) result = caseMappingParameterBinding(loopParameterBinding);
 				if (result == null) result = caseElement(loopParameterBinding);
-				if (result == null) result = caseVisitable(loopParameterBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -282,8 +257,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(loopVariable);
 				if (result == null) result = caseNamedElement(loopVariable);
 				if (result == null) result = caseElement(loopVariable);
-				if (result == null) result = caseNameable(loopVariable);
-				if (result == null) result = caseVisitable(loopVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -293,8 +266,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseRule(mapping);
 				if (result == null) result = caseNamedElement(mapping);
 				if (result == null) result = caseElement(mapping);
-				if (result == null) result = caseNameable(mapping);
-				if (result == null) result = caseVisitable(mapping);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -306,8 +277,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseStatement(mappingCall);
 				if (result == null) result = caseNamedElement(mappingCall);
 				if (result == null) result = caseElement(mappingCall);
-				if (result == null) result = caseNameable(mappingCall);
-				if (result == null) result = caseVisitable(mappingCall);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -319,8 +288,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseStatement(mappingLoop);
 				if (result == null) result = caseNamedElement(mappingLoop);
 				if (result == null) result = caseElement(mappingLoop);
-				if (result == null) result = caseNameable(mappingLoop);
-				if (result == null) result = caseVisitable(mappingLoop);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -331,8 +298,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(mappingParameter);
 				if (result == null) result = caseNamedElement(mappingParameter);
 				if (result == null) result = caseElement(mappingParameter);
-				if (result == null) result = caseNameable(mappingParameter);
-				if (result == null) result = caseVisitable(mappingParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -340,7 +305,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				MappingParameterBinding mappingParameterBinding = (MappingParameterBinding)theEObject;
 				T result = caseMappingParameterBinding(mappingParameterBinding);
 				if (result == null) result = caseElement(mappingParameterBinding);
-				if (result == null) result = caseVisitable(mappingParameterBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -350,8 +314,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseStatement(mappingStatement);
 				if (result == null) result = caseNamedElement(mappingStatement);
 				if (result == null) result = caseElement(mappingStatement);
-				if (result == null) result = caseNameable(mappingStatement);
-				if (result == null) result = caseVisitable(mappingStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -365,8 +327,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(newStatement);
 				if (result == null) result = caseNamedElement(newStatement);
 				if (result == null) result = caseElement(newStatement);
-				if (result == null) result = caseNameable(newStatement);
-				if (result == null) result = caseVisitable(newStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -376,8 +336,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseStatement(observableStatement);
 				if (result == null) result = caseNamedElement(observableStatement);
 				if (result == null) result = caseElement(observableStatement);
-				if (result == null) result = caseNameable(observableStatement);
-				if (result == null) result = caseVisitable(observableStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -388,8 +346,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseStatement(setStatement);
 				if (result == null) result = caseNamedElement(setStatement);
 				if (result == null) result = caseElement(setStatement);
-				if (result == null) result = caseNameable(setStatement);
-				if (result == null) result = caseVisitable(setStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -401,8 +357,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(simpleParameter);
 				if (result == null) result = caseNamedElement(simpleParameter);
 				if (result == null) result = caseElement(simpleParameter);
-				if (result == null) result = caseNameable(simpleParameter);
-				if (result == null) result = caseVisitable(simpleParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -411,7 +365,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				T result = caseSimpleParameterBinding(simpleParameterBinding);
 				if (result == null) result = caseMappingParameterBinding(simpleParameterBinding);
 				if (result == null) result = caseElement(simpleParameterBinding);
-				if (result == null) result = caseVisitable(simpleParameterBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -420,8 +373,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				T result = caseStatement(statement);
 				if (result == null) result = caseNamedElement(statement);
 				if (result == null) result = caseElement(statement);
-				if (result == null) result = caseNameable(statement);
-				if (result == null) result = caseVisitable(statement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -433,8 +384,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(variableStatement);
 				if (result == null) result = caseNamedElement(variableStatement);
 				if (result == null) result = caseElement(variableStatement);
-				if (result == null) result = caseNameable(variableStatement);
-				if (result == null) result = caseVisitable(variableStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -848,21 +797,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Visitable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Visitable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVisitable(Visitable object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -874,21 +808,6 @@ public class QVTimperativeSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseElement(Element object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Nameable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Nameable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNameable(Nameable object) {
 		return null;
 	}
 

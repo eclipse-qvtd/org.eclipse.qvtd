@@ -46,6 +46,18 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
+	public R visitBooleanValueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull BooleanValueNode object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitBooleanValueNode(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitCastEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CastEdge object) {
 		@Nullable P prologue = preVisit(object);
 		try {
@@ -110,6 +122,18 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitDependencyNode(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitDispatchRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DispatchRegion object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitDispatchRegion(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {
@@ -194,6 +218,18 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitIteratorNode(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitKeyedValueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull KeyedValueNode object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitKeyedValueNode(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {
@@ -334,6 +370,18 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
+	public R visitOperationValueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull OperationValueNode object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitOperationValueNode(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitPatternTypedNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull PatternTypedNode object) {
 		@Nullable P prologue = preVisit(object);
 		try {
@@ -442,10 +490,10 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
-	public R visitStatusNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull StatusNode object) {
+	public R visitSuccessEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SuccessEdge object) {
 		@Nullable P prologue = preVisit(object);
 		try {
-			R result = delegate.visitStatusNode(object);
+			R result = delegate.visitSuccessEdge(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {
@@ -454,10 +502,10 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
-	public R visitTrueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull TrueNode object) {
+	public R visitSuccessNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SuccessNode object) {
 		@Nullable P prologue = preVisit(object);
 		try {
-			R result = delegate.visitTrueNode(object);
+			R result = delegate.visitSuccessNode(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {
@@ -482,6 +530,18 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitVariableNode(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitVerdictRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull VerdictRegion object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitVerdictRegion(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {

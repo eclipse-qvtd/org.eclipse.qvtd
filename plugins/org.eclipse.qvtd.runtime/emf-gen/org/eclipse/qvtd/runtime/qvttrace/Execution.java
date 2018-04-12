@@ -1,7 +1,7 @@
 /**
  * <copyright>
  * 
- * Copyright (c) 2013, 2017 Willink Transformations and others.
+ * Copyright (c) 2018 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,18 +12,18 @@
  * 
  * </copyright>
  */
-package org.eclipse.qvtd.pivot.qvtschedule;
+package org.eclipse.qvtd.runtime.qvttrace;
 
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>True Node</b></em>'.
+ * A representation of the model object '<em><b>Execution</b></em>'.
  * <!-- end-user-doc -->
  *
  *
- * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getTrueNode()
- * @model
+ * @see org.eclipse.qvtd.runtime.qvttrace.QVTtracePackage#getExecution()
+ * @model abstract="true"
  * @generated
  */
-public interface TrueNode extends Node {
-} // TrueNode
+public interface Execution extends TraceInstance {
+} // Execution

@@ -69,22 +69,26 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case QVTschedulePackage.BOOLEAN_VALUE_NODE: return createBooleanValueNode();
 			case QVTschedulePackage.CAST_EDGE: return createCastEdge();
 			case QVTschedulePackage.CLASS_DATUM: return createClassDatum();
 			case QVTschedulePackage.COMPOSED_NODE: return createComposedNode();
 			case QVTschedulePackage.DEPENDENCY_NODE: return createDependencyNode();
+			case QVTschedulePackage.DISPATCH_REGION: return createDispatchRegion();
 			case QVTschedulePackage.EDGE_CONNECTION: return createEdgeConnection();
 			case QVTschedulePackage.ERROR_NODE: return createErrorNode();
 			case QVTschedulePackage.EXPRESSION_EDGE: return createExpressionEdge();
 			case QVTschedulePackage.INPUT_NODE: return createInputNode();
 			case QVTschedulePackage.ITERATED_EDGE: return createIteratedEdge();
 			case QVTschedulePackage.ITERATOR_NODE: return createIteratorNode();
+			case QVTschedulePackage.KEYED_VALUE_NODE: return createKeyedValueNode();
 			case QVTschedulePackage.LOADING_REGION: return createLoadingRegion();
 			case QVTschedulePackage.MICRO_MAPPING_REGION: return createMicroMappingRegion();
 			case QVTschedulePackage.NAMED_MAPPING_REGION: return createNamedMappingRegion();
 			case QVTschedulePackage.NAVIGATION_EDGE: return createNavigationEdge();
 			case QVTschedulePackage.NODE_CONNECTION: return createNodeConnection();
 			case QVTschedulePackage.NULL_NODE: return createNullNode();
+			case QVTschedulePackage.OPERATION_VALUE_NODE: return createOperationValueNode();
 			case QVTschedulePackage.OPERATION_NODE: return createOperationNode();
 			case QVTschedulePackage.OPERATION_REGION: return createOperationRegion();
 			case QVTschedulePackage.PATTERN_TYPED_NODE: return createPatternTypedNode();
@@ -95,9 +99,10 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.RULE_REGION: return createRuleRegion();
 			case QVTschedulePackage.SCHEDULE_MODEL: return createScheduleModel();
 			case QVTschedulePackage.SCHEDULED_REGION: return createScheduledRegion();
-			case QVTschedulePackage.STATUS_NODE: return createStatusNode();
-			case QVTschedulePackage.TRUE_NODE: return createTrueNode();
+			case QVTschedulePackage.SUCCESS_EDGE: return createSuccessEdge();
+			case QVTschedulePackage.SUCCESS_NODE: return createSuccessNode();
 			case QVTschedulePackage.UNKNOWN_NODE: return createUnknownNode();
+			case QVTschedulePackage.VERDICT_REGION: return createVerdictRegion();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -143,6 +148,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
+	public @NonNull BooleanValueNode createBooleanValueNode() {
+		BooleanValueNodeImpl booleanValueNode = new BooleanValueNodeImpl();
+		return booleanValueNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull CastEdge createCastEdge() {
 		CastEdgeImpl castEdge = new CastEdgeImpl();
 		return castEdge;
@@ -179,6 +195,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull DependencyNode createDependencyNode() {
 		DependencyNodeImpl dependencyNode = new DependencyNodeImpl();
 		return dependencyNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull DispatchRegion createDispatchRegion() {
+		DispatchRegionImpl dispatchRegion = new DispatchRegionImpl();
+		return dispatchRegion;
 	}
 
 	/**
@@ -253,6 +280,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
+	public @NonNull KeyedValueNode createKeyedValueNode() {
+		KeyedValueNodeImpl keyedValueNode = new KeyedValueNodeImpl();
+		return keyedValueNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull LoadingRegion createLoadingRegion() {
 		LoadingRegionImpl loadingRegion = new LoadingRegionImpl();
 		return loadingRegion;
@@ -311,6 +349,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull NullNode createNullNode() {
 		NullNodeImpl nullNode = new NullNodeImpl();
 		return nullNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull OperationValueNode createOperationValueNode() {
+		OperationValueNodeImpl operationValueNode = new OperationValueNodeImpl();
+		return operationValueNode;
 	}
 
 	/**
@@ -429,9 +478,9 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public @NonNull StatusNode createStatusNode() {
-		StatusNodeImpl statusNode = new StatusNodeImpl();
-		return statusNode;
+	public @NonNull SuccessEdge createSuccessEdge() {
+		SuccessEdgeImpl successEdge = new SuccessEdgeImpl();
+		return successEdge;
 	}
 
 	/**
@@ -440,9 +489,9 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public @NonNull TrueNode createTrueNode() {
-		TrueNodeImpl trueNode = new TrueNodeImpl();
-		return trueNode;
+	public @NonNull SuccessNode createSuccessNode() {
+		SuccessNodeImpl successNode = new SuccessNodeImpl();
+		return successNode;
 	}
 
 	/**
@@ -454,6 +503,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull UnknownNode createUnknownNode() {
 		UnknownNodeImpl unknownNode = new UnknownNodeImpl();
 		return unknownNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull VerdictRegion createVerdictRegion() {
+		VerdictRegionImpl verdictRegion = new VerdictRegionImpl();
+		return verdictRegion;
 	}
 
 	/**

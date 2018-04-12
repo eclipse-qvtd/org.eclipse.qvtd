@@ -39,7 +39,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
  * <!-- end-model-doc -->
  * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import ecore='http://www.eclipse.org/emf/2002/Ecore#/'"
+ *        annotation="http://www.eclipse.org/OCL/Import ecore='http://www.eclipse.org/emf/2002/Ecore'"
  * @generated
  */
 public interface QVTiCGModelPackage extends EPackage {

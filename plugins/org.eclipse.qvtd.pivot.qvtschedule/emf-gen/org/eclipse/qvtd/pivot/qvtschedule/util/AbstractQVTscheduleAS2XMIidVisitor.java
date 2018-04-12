@@ -52,6 +52,11 @@ implements QVTscheduleVisitor<Boolean>
 	}
 
 	@Override
+	public @Nullable Boolean visitBooleanValueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull BooleanValueNode object) {
+		return visitOperationNode(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitCastEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CastEdge object) {
 		return visitNavigableEdge(object);
 	}
@@ -79,6 +84,11 @@ implements QVTscheduleVisitor<Boolean>
 	@Override
 	public @Nullable Boolean visitDependencyNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DependencyNode object) {
 		return visitNode(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitDispatchRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DispatchRegion object) {
+		return visitRuleRegion(object);
 	}
 
 	@Override
@@ -114,6 +124,11 @@ implements QVTscheduleVisitor<Boolean>
 	@Override
 	public @Nullable Boolean visitIteratorNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull IteratorNode object) {
 		return visitVariableNode(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitKeyedValueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull KeyedValueNode object) {
+		return visitOperationNode(object);
 	}
 
 	@Override
@@ -172,6 +187,11 @@ implements QVTscheduleVisitor<Boolean>
 	}
 
 	@Override
+	public @Nullable Boolean visitOperationValueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull OperationValueNode object) {
+		return visitOperationNode(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitPatternTypedNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull PatternTypedNode object) {
 		return visitNode(object);
 	}
@@ -217,12 +237,12 @@ implements QVTscheduleVisitor<Boolean>
 	}
 
 	@Override
-	public @Nullable Boolean visitStatusNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull StatusNode object) {
-		return visitNode(object);
+	public @Nullable Boolean visitSuccessEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SuccessEdge object) {
+		return visitNavigationEdge(object);
 	}
 
 	@Override
-	public @Nullable Boolean visitTrueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull TrueNode object) {
+	public @Nullable Boolean visitSuccessNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SuccessNode object) {
 		return visitNode(object);
 	}
 
@@ -234,5 +254,10 @@ implements QVTscheduleVisitor<Boolean>
 	@Override
 	public @Nullable Boolean visitVariableNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull VariableNode object) {
 		return visitNode(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitVerdictRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull VerdictRegion object) {
+		return visitRuleRegion(object);
 	}
 }

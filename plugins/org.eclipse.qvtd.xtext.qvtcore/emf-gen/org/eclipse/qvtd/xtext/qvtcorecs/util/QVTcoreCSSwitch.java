@@ -14,8 +14,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.ocl.pivot.utilities.Pivotable;
 import org.eclipse.ocl.xtext.basecs.ClassCS;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
@@ -27,7 +25,6 @@ import org.eclipse.ocl.xtext.basecs.RootPackageCS;
 import org.eclipse.ocl.xtext.basecs.TemplateableElementCS;
 import org.eclipse.ocl.xtext.basecs.TypeCS;
 import org.eclipse.ocl.xtext.basecs.TypedElementCS;
-import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
@@ -95,11 +92,8 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				T result = caseAreaCS(areaCS);
 				if (result == null) result = caseNamedElementCS(areaCS);
 				if (result == null) result = caseModelElementCS(areaCS);
-				if (result == null) result = caseNameable(areaCS);
 				if (result == null) result = casePivotableElementCS(areaCS);
 				if (result == null) result = caseElementCS(areaCS);
-				if (result == null) result = casePivotable(areaCS);
-				if (result == null) result = caseVisitableCS(areaCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -110,8 +104,6 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseModelElementCS(bottomPatternCS);
 				if (result == null) result = casePivotableElementCS(bottomPatternCS);
 				if (result == null) result = caseElementCS(bottomPatternCS);
-				if (result == null) result = casePivotable(bottomPatternCS);
-				if (result == null) result = caseVisitableCS(bottomPatternCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -120,11 +112,8 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				T result = caseDirectionCS(directionCS);
 				if (result == null) result = caseNamedElementCS(directionCS);
 				if (result == null) result = caseModelElementCS(directionCS);
-				if (result == null) result = caseNameable(directionCS);
 				if (result == null) result = casePivotableElementCS(directionCS);
 				if (result == null) result = caseElementCS(directionCS);
-				if (result == null) result = casePivotable(directionCS);
-				if (result == null) result = caseVisitableCS(directionCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -134,11 +123,8 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseAreaCS(domainCS);
 				if (result == null) result = caseNamedElementCS(domainCS);
 				if (result == null) result = caseModelElementCS(domainCS);
-				if (result == null) result = caseNameable(domainCS);
 				if (result == null) result = casePivotableElementCS(domainCS);
 				if (result == null) result = caseElementCS(domainCS);
-				if (result == null) result = casePivotable(domainCS);
-				if (result == null) result = caseVisitableCS(domainCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -148,8 +134,6 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseModelElementCS(enforcementOperationCS);
 				if (result == null) result = casePivotableElementCS(enforcementOperationCS);
 				if (result == null) result = caseElementCS(enforcementOperationCS);
-				if (result == null) result = casePivotable(enforcementOperationCS);
-				if (result == null) result = caseVisitableCS(enforcementOperationCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -160,8 +144,6 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseModelElementCS(guardPatternCS);
 				if (result == null) result = casePivotableElementCS(guardPatternCS);
 				if (result == null) result = caseElementCS(guardPatternCS);
-				if (result == null) result = casePivotable(guardPatternCS);
-				if (result == null) result = caseVisitableCS(guardPatternCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -170,11 +152,8 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				T result = caseMappingCS(mappingCS);
 				if (result == null) result = caseNamedElementCS(mappingCS);
 				if (result == null) result = caseModelElementCS(mappingCS);
-				if (result == null) result = caseNameable(mappingCS);
 				if (result == null) result = casePivotableElementCS(mappingCS);
 				if (result == null) result = caseElementCS(mappingCS);
-				if (result == null) result = casePivotable(mappingCS);
-				if (result == null) result = caseVisitableCS(mappingCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -184,11 +163,8 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTypedElementCS(paramDeclarationCS);
 				if (result == null) result = caseNamedElementCS(paramDeclarationCS);
 				if (result == null) result = caseModelElementCS(paramDeclarationCS);
-				if (result == null) result = caseNameable(paramDeclarationCS);
 				if (result == null) result = casePivotableElementCS(paramDeclarationCS);
 				if (result == null) result = caseElementCS(paramDeclarationCS);
-				if (result == null) result = casePivotable(paramDeclarationCS);
-				if (result == null) result = caseVisitableCS(paramDeclarationCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -198,8 +174,6 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseModelElementCS(patternCS);
 				if (result == null) result = casePivotableElementCS(patternCS);
 				if (result == null) result = caseElementCS(patternCS);
-				if (result == null) result = casePivotable(patternCS);
-				if (result == null) result = caseVisitableCS(patternCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -210,8 +184,6 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseModelElementCS(predicateCS);
 				if (result == null) result = casePivotableElementCS(predicateCS);
 				if (result == null) result = caseElementCS(predicateCS);
-				if (result == null) result = casePivotable(predicateCS);
-				if (result == null) result = caseVisitableCS(predicateCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -222,8 +194,6 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseModelElementCS(predicateOrAssignmentCS);
 				if (result == null) result = casePivotableElementCS(predicateOrAssignmentCS);
 				if (result == null) result = caseElementCS(predicateOrAssignmentCS);
-				if (result == null) result = casePivotable(predicateOrAssignmentCS);
-				if (result == null) result = caseVisitableCS(predicateOrAssignmentCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -234,11 +204,8 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseJavaImplementationCS(queryCS);
 				if (result == null) result = caseNamedElementCS(queryCS);
 				if (result == null) result = caseModelElementCS(queryCS);
-				if (result == null) result = caseNameable(queryCS);
 				if (result == null) result = casePivotableElementCS(queryCS);
 				if (result == null) result = caseElementCS(queryCS);
-				if (result == null) result = casePivotable(queryCS);
-				if (result == null) result = caseVisitableCS(queryCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -248,11 +215,8 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTypedElementCS(realizeableVariableCS);
 				if (result == null) result = caseNamedElementCS(realizeableVariableCS);
 				if (result == null) result = caseModelElementCS(realizeableVariableCS);
-				if (result == null) result = caseNameable(realizeableVariableCS);
 				if (result == null) result = casePivotableElementCS(realizeableVariableCS);
 				if (result == null) result = caseElementCS(realizeableVariableCS);
-				if (result == null) result = casePivotable(realizeableVariableCS);
-				if (result == null) result = caseVisitableCS(realizeableVariableCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -263,11 +227,8 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTypedElementCS(realizedVariableCS);
 				if (result == null) result = caseNamedElementCS(realizedVariableCS);
 				if (result == null) result = caseModelElementCS(realizedVariableCS);
-				if (result == null) result = caseNameable(realizedVariableCS);
 				if (result == null) result = casePivotableElementCS(realizedVariableCS);
 				if (result == null) result = caseElementCS(realizedVariableCS);
-				if (result == null) result = casePivotable(realizedVariableCS);
-				if (result == null) result = caseVisitableCS(realizedVariableCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -280,8 +241,6 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseModelElementCS(topLevelCS);
 				if (result == null) result = casePivotableElementCS(topLevelCS);
 				if (result == null) result = caseElementCS(topLevelCS);
-				if (result == null) result = casePivotable(topLevelCS);
-				if (result == null) result = caseVisitableCS(topLevelCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -294,11 +253,8 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTypeCS(transformationCS);
 				if (result == null) result = caseTemplateableElementCS(transformationCS);
 				if (result == null) result = caseModelElementCS(transformationCS);
-				if (result == null) result = caseNameable(transformationCS);
 				if (result == null) result = casePivotableElementCS(transformationCS);
 				if (result == null) result = caseElementCS(transformationCS);
-				if (result == null) result = casePivotable(transformationCS);
-				if (result == null) result = caseVisitableCS(transformationCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -309,11 +265,8 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTypedElementCS(unrealizedVariableCS);
 				if (result == null) result = caseNamedElementCS(unrealizedVariableCS);
 				if (result == null) result = caseModelElementCS(unrealizedVariableCS);
-				if (result == null) result = caseNameable(unrealizedVariableCS);
 				if (result == null) result = casePivotableElementCS(unrealizedVariableCS);
 				if (result == null) result = caseElementCS(unrealizedVariableCS);
-				if (result == null) result = casePivotable(unrealizedVariableCS);
-				if (result == null) result = caseVisitableCS(unrealizedVariableCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -577,21 +530,6 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Visitable CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Visitable CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVisitableCS(VisitableCS object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Element CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -603,21 +541,6 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseElementCS(ElementCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Pivotable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Pivotable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePivotable(Pivotable object) {
 		return null;
 	}
 
@@ -648,21 +571,6 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseModelElementCS(ModelElementCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Nameable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Nameable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNameable(Nameable object) {
 		return null;
 	}
 

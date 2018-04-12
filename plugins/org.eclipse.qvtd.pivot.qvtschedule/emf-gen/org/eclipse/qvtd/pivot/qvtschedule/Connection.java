@@ -15,11 +15,11 @@
 package org.eclipse.qvtd.pivot.qvtschedule;
 
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Connection</b></em>'.
+ * @extends org.eclipse.ocl.pivot.utilities.Nameable
  * <!-- end-user-doc -->
  *
  * <p>
@@ -30,10 +30,10 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection()
- * @model abstract="true" superTypes="org.eclipse.ocl.pivot.Element org.eclipse.ocl.pivot.Nameable org.eclipse.qvtd.pivot.qvtschedule.Symbolable"
+ * @model abstract="true"
  * @generated
  */
-public interface Connection extends Element, Nameable, Symbolable
+public interface Connection extends Element, Symbolable, org.eclipse.ocl.pivot.utilities.Nameable
 {
 	/**
 	 * Returns the value of the '<em><b>Owning Scheduled Region</b></em>' container reference.

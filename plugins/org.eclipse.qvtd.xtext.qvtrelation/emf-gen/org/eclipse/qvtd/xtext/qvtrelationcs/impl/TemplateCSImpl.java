@@ -15,7 +15,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
 import org.eclipse.ocl.xtext.basecs.NamedElementCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
@@ -324,11 +323,6 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == Nameable.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == NamedElementCS.class) {
 			switch (derivedFeatureID) {
 				case QVTrelationCSPackage.TEMPLATE_CS__NAME: return BaseCSPackage.NAMED_ELEMENT_CS__NAME;
@@ -351,11 +345,6 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == Nameable.class) {
-			switch (baseFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == NamedElementCS.class) {
 			switch (baseFeatureID) {
 				case BaseCSPackage.NAMED_ELEMENT_CS__NAME: return QVTrelationCSPackage.TEMPLATE_CS__NAME;

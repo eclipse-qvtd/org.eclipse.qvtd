@@ -15,8 +15,6 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.ocl.pivot.utilities.Pivotable;
 import org.eclipse.ocl.xtext.basecs.ClassCS;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
@@ -27,7 +25,6 @@ import org.eclipse.ocl.xtext.basecs.PackageOwnerCS;
 import org.eclipse.ocl.xtext.basecs.PivotableElementCS;
 import org.eclipse.ocl.xtext.basecs.TemplateableElementCS;
 import org.eclipse.ocl.xtext.basecs.TypeCS;
-import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.*;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
@@ -95,98 +92,83 @@ public class QVTbaseCSAdapterFactory extends AdapterFactoryImpl
 	 */
 	protected QVTbaseCSSwitch<@Nullable Adapter> modelSwitch =
 			new QVTbaseCSSwitch<@Nullable Adapter>()
-	{
-		@Override
-		public Adapter caseAbstractTransformationCS(AbstractTransformationCS object)
 		{
-			return createAbstractTransformationCSAdapter();
-		}
-		@Override
-		public Adapter caseJavaClassCS(JavaClassCS object)
-		{
-			return createJavaClassCSAdapter();
-		}
-		@Override
-		public Adapter caseJavaImplementationCS(JavaImplementationCS object)
-		{
-			return createJavaImplementationCSAdapter();
-		}
-		@Override
-		public Adapter caseQualifiedPackageCS(QualifiedPackageCS object)
-		{
-			return createQualifiedPackageCSAdapter();
-		}
-		@Override
-		public Adapter caseVisitableCS(VisitableCS object)
-		{
-			return createVisitableCSAdapter();
-		}
-		@Override
-		public Adapter caseElementCS(ElementCS object)
-		{
-			return createElementCSAdapter();
-		}
-		@Override
-		public Adapter casePivotable(Pivotable object)
-		{
-			return createPivotableAdapter();
-		}
-		@Override
-		public Adapter casePivotableElementCS(PivotableElementCS object)
-		{
-			return createPivotableElementCSAdapter();
-		}
-		@Override
-		public Adapter caseModelElementCS(ModelElementCS object)
-		{
-			return createModelElementCSAdapter();
-		}
-		@Override
-		public Adapter caseNameable(Nameable object)
-		{
-			return createNameableAdapter();
-		}
-		@Override
-		public Adapter caseNamedElementCS(NamedElementCS object)
-		{
-			return createNamedElementCSAdapter();
-		}
-		@Override
-		public Adapter caseTypeCS(TypeCS object)
-		{
-			return createTypeCSAdapter();
-		}
-		@Override
-		public Adapter caseTemplateableElementCS(TemplateableElementCS object)
-		{
-			return createTemplateableElementCSAdapter();
-		}
-		@Override
-		public Adapter caseClassCS(ClassCS object)
-		{
-			return createClassCSAdapter();
-		}
-		@Override
-		public Adapter casePackageOwnerCS(PackageOwnerCS object)
-		{
-			return createPackageOwnerCSAdapter();
-		}
-		@Override
-		public Adapter caseNamespaceCS(NamespaceCS object)
-		{
-			return createNamespaceCSAdapter();
-		}
-		@Override
-		public Adapter casePackageCS(PackageCS object)
-		{
-			return createPackageCSAdapter();
-		}
-		@Override
-		public Adapter defaultCase(EObject object)
-		{
-			return createEObjectAdapter();
-		}
-	};
+			@Override
+			public Adapter caseAbstractTransformationCS(AbstractTransformationCS object)
+			{
+				return createAbstractTransformationCSAdapter();
+			}
+			@Override
+			public Adapter caseJavaClassCS(JavaClassCS object)
+			{
+				return createJavaClassCSAdapter();
+			}
+			@Override
+			public Adapter caseJavaImplementationCS(JavaImplementationCS object)
+			{
+				return createJavaImplementationCSAdapter();
+			}
+			@Override
+			public Adapter caseQualifiedPackageCS(QualifiedPackageCS object)
+			{
+				return createQualifiedPackageCSAdapter();
+			}
+			@Override
+			public Adapter caseElementCS(ElementCS object)
+			{
+				return createElementCSAdapter();
+			}
+			@Override
+			public Adapter casePivotableElementCS(PivotableElementCS object)
+			{
+				return createPivotableElementCSAdapter();
+			}
+			@Override
+			public Adapter caseModelElementCS(ModelElementCS object)
+			{
+				return createModelElementCSAdapter();
+			}
+			@Override
+			public Adapter caseNamedElementCS(NamedElementCS object)
+			{
+				return createNamedElementCSAdapter();
+			}
+			@Override
+			public Adapter caseTypeCS(TypeCS object)
+			{
+				return createTypeCSAdapter();
+			}
+			@Override
+			public Adapter caseTemplateableElementCS(TemplateableElementCS object)
+			{
+				return createTemplateableElementCSAdapter();
+			}
+			@Override
+			public Adapter caseClassCS(ClassCS object)
+			{
+				return createClassCSAdapter();
+			}
+			@Override
+			public Adapter casePackageOwnerCS(PackageOwnerCS object)
+			{
+				return createPackageOwnerCSAdapter();
+			}
+			@Override
+			public Adapter caseNamespaceCS(NamespaceCS object)
+			{
+				return createNamespaceCSAdapter();
+			}
+			@Override
+			public Adapter casePackageCS(PackageCS object)
+			{
+				return createPackageCSAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object)
+			{
+				return createEObjectAdapter();
+			}
+		};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.
@@ -264,21 +246,6 @@ public class QVTbaseCSAdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.basecs.util.VisitableCS <em>Visitable CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.xtext.basecs.util.VisitableCS
-	 * @generated
-	 */
-	public Adapter createVisitableCSAdapter()
-	{
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.basecs.ElementCS <em>Element CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -289,21 +256,6 @@ public class QVTbaseCSAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createElementCSAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.utilities.Pivotable <em>Pivotable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.pivot.utilities.Pivotable
-	 * @generated
-	 */
-	public Adapter createPivotableAdapter()
 	{
 		return null;
 	}
@@ -334,21 +286,6 @@ public class QVTbaseCSAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createModelElementCSAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.utilities.Nameable <em>Nameable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.pivot.utilities.Nameable
-	 * @generated
-	 */
-	public Adapter createNameableAdapter()
 	{
 		return null;
 	}

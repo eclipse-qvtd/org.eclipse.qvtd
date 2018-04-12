@@ -1073,11 +1073,11 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	protected void createImportAnnotations() {
 		String source = "http://www.eclipse.org/OCL/Import";
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-				"ecore", "http://www.eclipse.org/emf/2002/Ecore#/"
-		});
+		  (this,
+		   source,
+		   new String[] {
+			   "ecore", "http://www.eclipse.org/emf/2002/Ecore"
+		   });
 	}
 
 } //QVTiCGModelPackageImpl

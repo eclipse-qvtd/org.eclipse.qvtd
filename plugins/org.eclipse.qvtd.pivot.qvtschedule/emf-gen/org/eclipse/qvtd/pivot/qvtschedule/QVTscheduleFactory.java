@@ -35,6 +35,15 @@ public interface QVTscheduleFactory extends EFactory {
 	QVTscheduleFactory eINSTANCE = org.eclipse.qvtd.pivot.qvtschedule.impl.QVTscheduleFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Boolean Value Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Boolean Value Node</em>'.
+	 * @generated
+	 */
+	@NonNull BooleanValueNode createBooleanValueNode();
+
+	/**
 	 * Returns a new object of class '<em>Cast Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -69,6 +78,15 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull DependencyNode createDependencyNode();
+
+	/**
+	 * Returns a new object of class '<em>Dispatch Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Dispatch Region</em>'.
+	 * @generated
+	 */
+	@NonNull DispatchRegion createDispatchRegion();
 
 	/**
 	 * Returns a new object of class '<em>Edge Connection</em>'.
@@ -125,6 +143,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull IteratorNode createIteratorNode();
 
 	/**
+	 * Returns a new object of class '<em>Keyed Value Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Keyed Value Node</em>'.
+	 * @generated
+	 */
+	@NonNull KeyedValueNode createKeyedValueNode();
+
+	/**
 	 * Returns a new object of class '<em>Loading Region</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -177,6 +204,15 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull NullNode createNullNode();
+
+	/**
+	 * Returns a new object of class '<em>Operation Value Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Operation Value Node</em>'.
+	 * @generated
+	 */
+	@NonNull OperationValueNode createOperationValueNode();
 
 	/**
 	 * Returns a new object of class '<em>Operation Node</em>'.
@@ -269,22 +305,22 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull ScheduledRegion createScheduledRegion();
 
 	/**
-	 * Returns a new object of class '<em>Status Node</em>'.
+	 * Returns a new object of class '<em>Success Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Status Node</em>'.
+	 * @return a new object of class '<em>Success Edge</em>'.
 	 * @generated
 	 */
-	@NonNull StatusNode createStatusNode();
+	@NonNull SuccessEdge createSuccessEdge();
 
 	/**
-	 * Returns a new object of class '<em>True Node</em>'.
+	 * Returns a new object of class '<em>Success Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>True Node</em>'.
+	 * @return a new object of class '<em>Success Node</em>'.
 	 * @generated
 	 */
-	@NonNull TrueNode createTrueNode();
+	@NonNull SuccessNode createSuccessNode();
 
 	/**
 	 * Returns a new object of class '<em>Unknown Node</em>'.
@@ -294,6 +330,15 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull UnknownNode createUnknownNode();
+
+	/**
+	 * Returns a new object of class '<em>Verdict Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Verdict Region</em>'.
+	 * @generated
+	 */
+	@NonNull VerdictRegion createVerdictRegion();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -176,7 +176,6 @@ public interface Region extends NamedElement, Symbolable, ToDOTable, GraphNode
 	@NonNull List<@NonNull NodeConnection> getRootConnections();
 	@Nullable String getShape();
 	@Nullable String getStyle();
-	@NonNull Iterable<@NonNull Node> getTrueNodes();
 
 	/**
 	 * Return the regions that this region uses and how many times.

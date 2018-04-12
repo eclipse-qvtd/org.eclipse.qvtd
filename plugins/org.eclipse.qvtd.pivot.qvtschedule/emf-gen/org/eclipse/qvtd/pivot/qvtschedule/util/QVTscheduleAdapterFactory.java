@@ -23,8 +23,6 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
-import org.eclipse.ocl.pivot.util.Visitable;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtschedule.*;
 
 /**
@@ -88,6 +86,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createAbstractDatumAdapter();
 			}
 			@Override
+			public Adapter caseBooleanValueNode(BooleanValueNode object) {
+				return createBooleanValueNodeAdapter();
+			}
+			@Override
 			public Adapter caseCastEdge(CastEdge object) {
 				return createCastEdgeAdapter();
 			}
@@ -116,6 +118,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createDependencyNodeAdapter();
 			}
 			@Override
+			public Adapter caseDispatchRegion(DispatchRegion object) {
+				return createDispatchRegionAdapter();
+			}
+			@Override
 			public Adapter caseEdge(Edge object) {
 				return createEdgeAdapter();
 			}
@@ -142,6 +148,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseIteratorNode(IteratorNode object) {
 				return createIteratorNodeAdapter();
+			}
+			@Override
+			public Adapter caseKeyedValueNode(KeyedValueNode object) {
+				return createKeyedValueNodeAdapter();
 			}
 			@Override
 			public Adapter caseLoadingRegion(LoadingRegion object) {
@@ -178,6 +188,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseNullNode(NullNode object) {
 				return createNullNodeAdapter();
+			}
+			@Override
+			public Adapter caseOperationValueNode(OperationValueNode object) {
+				return createOperationValueNodeAdapter();
 			}
 			@Override
 			public Adapter caseOperationNode(OperationNode object) {
@@ -224,16 +238,16 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createScheduledRegionAdapter();
 			}
 			@Override
-			public Adapter caseStatusNode(StatusNode object) {
-				return createStatusNodeAdapter();
+			public Adapter caseSuccessEdge(SuccessEdge object) {
+				return createSuccessEdgeAdapter();
+			}
+			@Override
+			public Adapter caseSuccessNode(SuccessNode object) {
+				return createSuccessNodeAdapter();
 			}
 			@Override
 			public Adapter caseSymbolable(Symbolable object) {
 				return createSymbolableAdapter();
-			}
-			@Override
-			public Adapter caseTrueNode(TrueNode object) {
-				return createTrueNodeAdapter();
 			}
 			@Override
 			public Adapter caseUnknownNode(UnknownNode object) {
@@ -244,16 +258,12 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createVariableNodeAdapter();
 			}
 			@Override
-			public Adapter caseVisitable(Visitable object) {
-				return createVisitableAdapter();
+			public Adapter caseVerdictRegion(VerdictRegion object) {
+				return createVerdictRegionAdapter();
 			}
 			@Override
 			public Adapter caseElement(Element object) {
 				return createElementAdapter();
-			}
-			@Override
-			public Adapter caseNameable(Nameable object) {
-				return createNameableAdapter();
 			}
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
@@ -298,6 +308,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAbstractDatumAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.BooleanValueNode <em>Boolean Value Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.BooleanValueNode
+	 * @generated
+	 */
+	public Adapter createBooleanValueNodeAdapter() {
 		return null;
 	}
 
@@ -400,6 +424,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion <em>Dispatch Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion
+	 * @generated
+	 */
+	public Adapter createDispatchRegionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge <em>Edge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -456,16 +494,30 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.StatusNode <em>Status Node</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge <em>Success Edge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.StatusNode
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge
 	 * @generated
 	 */
-	public Adapter createStatusNodeAdapter() {
+	public Adapter createSuccessEdgeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.SuccessNode <em>Success Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.SuccessNode
+	 * @generated
+	 */
+	public Adapter createSuccessNodeAdapter() {
 		return null;
 	}
 
@@ -480,20 +532,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSymbolableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.TrueNode <em>True Node</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.TrueNode
-	 * @generated
-	 */
-	public Adapter createTrueNodeAdapter() {
 		return null;
 	}
 
@@ -522,6 +560,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createVariableNodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.VerdictRegion <em>Verdict Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.VerdictRegion
+	 * @generated
+	 */
+	public Adapter createVerdictRegionAdapter() {
 		return null;
 	}
 
@@ -592,6 +644,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createIteratorNodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode <em>Keyed Value Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode
+	 * @generated
+	 */
+	public Adapter createKeyedValueNodeAdapter() {
 		return null;
 	}
 
@@ -722,6 +788,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationValueNode <em>Operation Value Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.OperationValueNode
+	 * @generated
+	 */
+	public Adapter createOperationValueNodeAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationNode <em>Operation Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -848,20 +928,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.util.Visitable <em>Visitable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.pivot.util.Visitable
-	 * @generated
-	 */
-	public Adapter createVisitableAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.Element <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -872,20 +938,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.utilities.Nameable <em>Nameable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.pivot.utilities.Nameable
-	 * @generated
-	 */
-	public Adapter createNameableAdapter() {
 		return null;
 	}
 

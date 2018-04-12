@@ -49,7 +49,7 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
  * auto-generated from /org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore.
  * It facilitates efficient model loading without the overheads of model reading.
  */
-@SuppressWarnings({"nls", "unused"})
+@SuppressWarnings("unused")
 public class QVTbaseMetamodel extends ASResourceImpl
 {
 	/**

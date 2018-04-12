@@ -40,6 +40,11 @@ public enum ConnectionRole implements Enumerator, GraphStringBuilder.GraphEdge {
 	 * The '<em><b>MANDATORY EDGE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A MANDATORY_EDGE connection 'passes' a used input edge that must be fully computed before use. This is typically for a
+	 * collection, since it is not possible to determine when a last partial addition is the last, therefore all
+	 * additions must occur before any access.
+	 * <!-- end-model-doc -->
 	 * @see #MANDATORY_EDGE_VALUE
 	 * @generated
 	 * @ordered
@@ -50,6 +55,11 @@ public enum ConnectionRole implements Enumerator, GraphStringBuilder.GraphEdge {
 	 * The '<em><b>MANDATORY NODE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A MANDATORY_NODE connection 'passes' a used input node that must be fully computed before use. This is typically for a
+	 * collection, since it is not possible to determine when a last partial addition is the last, therefore all
+	 * additions must occur before any access.
+	 * <!-- end-model-doc -->
 	 * @see #MANDATORY_NODE_VALUE
 	 * @generated
 	 * @ordered
@@ -60,6 +70,10 @@ public enum ConnectionRole implements Enumerator, GraphStringBuilder.GraphEdge {
 	 * The '<em><b>PASSED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A PASSED connection passes a required input. This is typically from an introducer/producer/join to
+	 * a consumer's head. A value must actually be passed by the call.
+	 * <!-- end-model-doc -->
 	 * @see #PASSED_VALUE
 	 * @generated
 	 * @ordered
@@ -70,6 +84,10 @@ public enum ConnectionRole implements Enumerator, GraphStringBuilder.GraphEdge {
 	 * The '<em><b>PREFERRED EDGE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A PREFERRED_EDGE connection 'passes' a used input edge that is beneficially but not necessarily computed before use.
+	 * If not computed before use, run-time overheads are incurred to defer reads until writes have occurred.
+	 * <!-- end-model-doc -->
 	 * @see #PREFERRED_EDGE_VALUE
 	 * @generated
 	 * @ordered
@@ -80,6 +98,10 @@ public enum ConnectionRole implements Enumerator, GraphStringBuilder.GraphEdge {
 	 * The '<em><b>PREFERRED NODE</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * A PREFERRED_NODE connection 'passes' a used input node that is beneficially but not necessarily computed before use.
+	 * If not computed before use, run-time overheads are incurred to defer reads until writes have occurred.
+	 * <!-- end-model-doc -->
 	 * @see #PREFERRED_NODE_VALUE
 	 * @generated
 	 * @ordered
@@ -88,6 +110,9 @@ public enum ConnectionRole implements Enumerator, GraphStringBuilder.GraphEdge {
 	 * The '<em><b>UNDEFINED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * An UNDEFINED connection is the intial state of a connection that evolves by merging.
+	 * <!-- end-model-doc -->
 	 * @see #UNDEFINED_VALUE
 	 * @generated
 	 * @ordered

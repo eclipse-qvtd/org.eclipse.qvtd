@@ -63,5 +63,5 @@ public interface VariableNode extends Node {
 	 */
 	void setReferredVariable(VariableDeclaration value);
 
-	public void initializeVariable(@NonNull Region region, /*@NonNull*/ VariableDeclaration variable);
+	public void initializeVariable(@NonNull Region region, @NonNull VariableDeclaration variable);
 } // VariableNode

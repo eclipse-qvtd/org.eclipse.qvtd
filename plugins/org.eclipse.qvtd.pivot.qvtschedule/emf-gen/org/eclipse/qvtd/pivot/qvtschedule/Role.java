@@ -42,6 +42,9 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * The '<em><b>CONSTANT</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Unequivocably known as compile time constant
+	 * <!-- end-model-doc -->
 	 * @see #CONSTANT_VALUE
 	 * @generated
 	 * @ordered
@@ -51,6 +54,9 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * The '<em><b>LOADED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Known once input models loaded
+	 * <!-- end-model-doc -->
 	 * @see #LOADED_VALUE
 	 * @generated
 	 * @ordered
@@ -60,6 +66,9 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * The '<em><b>REALIZED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Known once a mapping has realized its results
+	 * <!-- end-model-doc -->
 	 * @see #REALIZED_VALUE
 	 * @generated
 	 * @ordered
@@ -69,6 +78,9 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * The '<em><b>PREDICATED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Not known, awaiting matching
+	 * <!-- end-model-doc -->
 	 * @see #PREDICATED_VALUE
 	 * @generated
 	 * @ordered
@@ -78,6 +90,9 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * The '<em><b>SPECULATION</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Awaiting other mappings to speculate
+	 * <!-- end-model-doc -->
 	 * @see #SPECULATION_VALUE
 	 * @generated
 	 * @ordered
@@ -87,6 +102,9 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * The '<em><b>SPECULATED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Known other mappings are speculating
+	 * <!-- end-model-doc -->
 	 * @see #SPECULATED_VALUE
 	 * @generated
 	 * @ordered
@@ -96,6 +114,9 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * The '<em><b>OTHER</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Not known, nothing to do with mapping execution
+	 * <!-- end-model-doc -->
 	 * @see #OTHER_VALUE
 	 * @generated
 	 * @ordered

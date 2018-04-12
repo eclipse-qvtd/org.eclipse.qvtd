@@ -20,8 +20,6 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.TypedElement;
-import org.eclipse.ocl.pivot.util.Visitable;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
@@ -95,8 +93,6 @@ public class QVTtemplateSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(collectionTemplateExp);
 				if (result == null) result = caseNamedElement(collectionTemplateExp);
 				if (result == null) result = caseElement(collectionTemplateExp);
-				if (result == null) result = caseNameable(collectionTemplateExp);
-				if (result == null) result = caseVisitable(collectionTemplateExp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -110,8 +106,6 @@ public class QVTtemplateSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(objectTemplateExp);
 				if (result == null) result = caseNamedElement(objectTemplateExp);
 				if (result == null) result = caseElement(objectTemplateExp);
-				if (result == null) result = caseNameable(objectTemplateExp);
-				if (result == null) result = caseVisitable(objectTemplateExp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -120,7 +114,6 @@ public class QVTtemplateSwitch<@Nullable T> extends Switch<T> {
 				T result = casePropertyTemplateItem(propertyTemplateItem);
 				if (result == null) result = caseElement(propertyTemplateItem);
 				if (result == null) result = caseReferringElement(propertyTemplateItem);
-				if (result == null) result = caseVisitable(propertyTemplateItem);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -133,8 +126,6 @@ public class QVTtemplateSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseTypedElement(templateExp);
 				if (result == null) result = caseNamedElement(templateExp);
 				if (result == null) result = caseElement(templateExp);
-				if (result == null) result = caseNameable(templateExp);
-				if (result == null) result = caseVisitable(templateExp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -203,21 +194,6 @@ public class QVTtemplateSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Visitable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Visitable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVisitable(Visitable object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -229,21 +205,6 @@ public class QVTtemplateSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseElement(Element object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Nameable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Nameable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNameable(Nameable object) {
 		return null;
 	}
 

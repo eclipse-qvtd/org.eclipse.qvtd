@@ -47,6 +47,11 @@ public abstract class AbstractExtendingQVTscheduleVisitor<R, C>
 	}
 
 	@Override
+	public R visitBooleanValueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull BooleanValueNode object) {
+		return visitOperationNode(object);
+	}
+
+	@Override
 	public R visitCastEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CastEdge object) {
 		return visitNavigableEdge(object);
 	}
@@ -74,6 +79,11 @@ public abstract class AbstractExtendingQVTscheduleVisitor<R, C>
 	@Override
 	public R visitDependencyNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DependencyNode object) {
 		return visitNode(object);
+	}
+
+	@Override
+	public R visitDispatchRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DispatchRegion object) {
+		return visitRuleRegion(object);
 	}
 
 	@Override
@@ -109,6 +119,11 @@ public abstract class AbstractExtendingQVTscheduleVisitor<R, C>
 	@Override
 	public R visitIteratorNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull IteratorNode object) {
 		return visitVariableNode(object);
+	}
+
+	@Override
+	public R visitKeyedValueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull KeyedValueNode object) {
+		return visitOperationNode(object);
 	}
 
 	@Override
@@ -167,6 +182,11 @@ public abstract class AbstractExtendingQVTscheduleVisitor<R, C>
 	}
 
 	@Override
+	public R visitOperationValueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull OperationValueNode object) {
+		return visitOperationNode(object);
+	}
+
+	@Override
 	public R visitPatternTypedNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull PatternTypedNode object) {
 		return visitNode(object);
 	}
@@ -212,12 +232,12 @@ public abstract class AbstractExtendingQVTscheduleVisitor<R, C>
 	}
 
 	@Override
-	public R visitStatusNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull StatusNode object) {
-		return visitNode(object);
+	public R visitSuccessEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SuccessEdge object) {
+		return visitNavigationEdge(object);
 	}
 
 	@Override
-	public R visitTrueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull TrueNode object) {
+	public R visitSuccessNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SuccessNode object) {
 		return visitNode(object);
 	}
 
@@ -229,5 +249,10 @@ public abstract class AbstractExtendingQVTscheduleVisitor<R, C>
 	@Override
 	public R visitVariableNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull VariableNode object) {
 		return visitNode(object);
+	}
+
+	@Override
+	public R visitVerdictRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull VerdictRegion object) {
+		return visitRuleRegion(object);
 	}
 }
