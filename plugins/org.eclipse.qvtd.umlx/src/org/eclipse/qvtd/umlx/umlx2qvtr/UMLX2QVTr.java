@@ -169,6 +169,7 @@ public class UMLX2QVTr extends QVTrelationHelper
 			//
 			Iterables.addAll(QVTrelationUtil.Internal.getOwnedRelationsList(qvtrRelationalTransformation), allRelationsList);
 			QVTbaseUtil.getContextVariable(environmentFactory.getStandardLibrary(), qvtrRelationalTransformation);
+			qvtrRelationalTransformation.getModelParameter().add(context.createTraceTypedModel());
 			return qvtrRelationalTransformation;
 		}
 

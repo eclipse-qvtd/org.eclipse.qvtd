@@ -10,12 +10,11 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -37,8 +36,8 @@ class SpeculationPartition extends AbstractPartition
 {
 	private final @NonNull Set<@NonNull Node> headNodes;
 
-	public SpeculationPartition(@NonNull MappingPartitioner partitioner) {
-		super(partitioner);
+	public SpeculationPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
+		super(partitioner, reachabilityForest);
 		this.headNodes = Sets.newHashSet(QVTscheduleUtil.getHeadNodes(region));
 		//
 		//	The realized middle (trace) nodes become speculation nodes.
@@ -51,14 +50,12 @@ class SpeculationPartition extends AbstractPartition
 		//	NB. Unreachable loaded nodes are effectively predicates and so are deferred.
 		//
 		for (@NonNull Node node : headNodes) {
-			if (!node.isTrue()) {
-				addReachableOldAcyclicNodes(node);
-			}
+			addReachableOldAcyclicNodes(node);
 		}
 		//
 		//	Add the outstanding predicates that can be checked by this partition.
 		//
-		resolveTrueNodes();
+		//		resolveTrueNodes();
 		//
 		//	Ensure that the predecessors of each node are included in the partition.
 		//
@@ -94,22 +91,6 @@ class SpeculationPartition extends AbstractPartition
 	@Override
 	protected @Nullable Iterable<@NonNull Node> getPreferredHeadNodes() {
 		return null;
-	}
-
-	@Override
-	protected @NonNull Iterable<@NonNull Node> getReachabilityRootNodes() {
-		List<@NonNull Node> rootNodes = new ArrayList<>();
-		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(region)) {
-			if (!headNode.isTrue()) {
-				rootNodes.add(headNode);
-			}
-		}
-		for (@NonNull Node leafConstant : partitioner.getLeafConstantNodes()) {
-			//			if (!leafConstant.isTrue()) {
-			rootNodes.add(leafConstant);
-			//			}
-		}
-		return rootNodes;
 	}
 
 	/**

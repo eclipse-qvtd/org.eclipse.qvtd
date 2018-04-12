@@ -16,6 +16,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 
 import com.google.common.collect.Iterables;
 
@@ -48,7 +49,14 @@ public class CycleAnalysis
 		List<@NonNull MappingRegion> partitionedRegions = new ArrayList<>();
 		for (@NonNull MappingPartitioner mappingPartitioner : orderedMappingPartitioners) {
 			if (mappingPartitioners.contains(mappingPartitioner)) {
-				Iterables.addAll(partitionedRegions, mappingPartitioner.partition());
+				MappingRegion oldRegion = mappingPartitioner.getRegion();
+				ScheduledRegion scheduledRegion = oldRegion.getScheduledRegion();
+				Iterable<@NonNull MappingRegion> newRegions = mappingPartitioner.partition();
+				oldRegion.setScheduledRegion(null);
+				for (@NonNull MappingRegion newRegion : newRegions) {
+					newRegion.setScheduledRegion(scheduledRegion);
+				}
+				Iterables.addAll(partitionedRegions, newRegions);
 			}
 		}
 		return partitionedRegions;

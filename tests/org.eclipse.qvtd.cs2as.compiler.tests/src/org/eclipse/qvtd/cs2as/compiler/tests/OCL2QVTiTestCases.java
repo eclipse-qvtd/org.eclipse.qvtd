@@ -37,7 +37,7 @@ import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.qvtd.compiler.AbstractCompilerOptions;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;

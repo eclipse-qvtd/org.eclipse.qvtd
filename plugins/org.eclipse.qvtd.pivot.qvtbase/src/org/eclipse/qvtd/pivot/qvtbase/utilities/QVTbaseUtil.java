@@ -54,7 +54,7 @@ import com.google.common.collect.Iterables;
 public class QVTbaseUtil extends PivotUtil
 {
 	public static final @NonNull String PRIMITIVE_TYPED_MODEL_NAME = "$primitive$";
-	public static final @NonNull String TRACE_CLASS_NAME = "$trace$";
+	public static final @NonNull String TRACE_CLASS_NAME = "trace";
 	public static final @NonNull String TRACE_TYPED_MODEL_NAME = "middle"; //"$trace$";
 
 	public static final class DomainNameComparator implements Comparator<@NonNull Domain>
@@ -87,6 +87,45 @@ public class QVTbaseUtil extends PivotUtil
 
 		public static @NonNull List<org.eclipse.ocl.pivot.@NonNull Package> getUsedPackagesList(@NonNull TypedModel asTypedModel) {
 			return ClassUtil.nullFree(asTypedModel.getUsedPackage());
+		}
+	}
+
+	/**
+	 * Return the base rule iff this rule participtaes in an override hierarchy.
+	 * Returns null for a non-heirarchy participant.
+	 */
+	public static @Nullable Rule basicGetBaseRule(@NonNull Rule rule) {
+		//
+		//	Root element needs an any sub-rules test.
+		//
+		Rule aRule = rule.getOverridden();
+		if (aRule == null) {
+			return rule.getOverrides().isEmpty() ? null : rule;
+		}
+		//
+		//	Simple up-search, terminating after 100 steps.
+		//
+		for (int i = 0; i < 100; i++) {
+			Rule superRule = aRule.getOverridden();
+			if (superRule == null) {
+				return aRule;
+			}
+			aRule = superRule;
+		}
+		//
+		// Try again with cycle check diagnostic
+		//
+		Set<Rule> rules = new HashSet<>();
+		aRule = rule;
+		while (true) {
+			if (!rules.add(aRule)) {
+				System.err.println("Cyclic override of '" + rule + "' ignored.");
+				return rule;
+			}
+			Rule superRule = aRule.getOverridden();
+			if (superRule == null) {
+				return aRule;
+			}
 		}
 	}
 
@@ -252,30 +291,6 @@ public class QVTbaseUtil extends PivotUtil
 		}
 	}
 
-	public static @NonNull Rule getBaseRule(@NonNull Rule rule) {
-		int i = 0;
-		Rule aRule = rule;
-		while ((aRule = aRule.getOverridden()) != null) {
-			if (i++ < 100) {	// More than a 100 is probably a cycle. Try again with an accurate cycle check
-				return aRule;
-			}
-		}
-		Set<Rule> rules = new HashSet<>();
-		rules.add(rule);
-		aRule = rule;
-		while ((aRule = aRule.getOverridden()) != null) {
-			if (!rules.add(aRule)) {
-				System.err.println("Cyclic override of '" + rule + "' ignored.");
-				return rule;
-			}
-		}
-		return rule;
-	}
-
-	public static @NonNull OCLExpression getConditionExpression(@NonNull Predicate asPredicate) {
-		return ClassUtil.nonNullState(asPredicate.getConditionExpression());
-	}
-
 	public static @NonNull Domain getContainingDomain(@Nullable EObject eObject) {
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Domain) {
@@ -424,6 +439,10 @@ public class QVTbaseUtil extends PivotUtil
 		return ClassUtil.nullFree(asRule.getOverrides());
 	}
 
+	public static @NonNull OCLExpression getOwnedConditionExpression(@NonNull Predicate asPredicate) {
+		return ClassUtil.nonNullState(asPredicate.getConditionExpression());
+	}
+
 	public static @NonNull Iterable<@NonNull Domain> getOwnedDomains(@NonNull Rule asRule) {
 		return ClassUtil.nullFree(asRule.getDomain());
 	}
@@ -464,6 +483,13 @@ public class QVTbaseUtil extends PivotUtil
 
 	public static @NonNull TypedModel getTypedModel(@NonNull Domain asDomain) {
 		return ClassUtil.nonNullState(asDomain.getTypedModel());
+	}
+
+	public static int getTypedModelIndex(@NonNull TypedModel typedModel) {
+		Transformation transformation = ClassUtil.nonNullState(typedModel.getTransformation());
+		int index = transformation.getModelParameter().indexOf(typedModel);
+		assert index >= 0;
+		return index;
 	}
 
 	public static @NonNull Iterable<org.eclipse.ocl.pivot.@NonNull Class> getUsedClasses(@NonNull TypedModel asTypedModel) {

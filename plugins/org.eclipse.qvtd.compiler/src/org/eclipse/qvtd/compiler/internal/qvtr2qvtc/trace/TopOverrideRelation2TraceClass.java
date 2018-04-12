@@ -38,7 +38,7 @@ class TopOverrideRelation2TraceClass extends AbstractRelation2TraceClass
 		assert relation.isIsTopLevel();
 		relation2traceInterface = new Relation2TraceInterface(this);
 		if (relation.getOverridden() == null) {
-			relation2traceInterface.getStatusProperty();
+			relation2traceInterface.getSuccessProperty();
 		}
 		else {
 			reservePropertyName(QVTrNameGenerator.TRACECLASS_STATUS_PROPERTY_NAME);
@@ -58,12 +58,12 @@ class TopOverrideRelation2TraceClass extends AbstractRelation2TraceClass
 	}
 
 	@Override
-	protected @Nullable Property basicGetRelation2StatusProperty() {
-		Property property = super.basicGetRelation2StatusProperty();
+	protected @Nullable Property basicGetRelation2SuccessProperty() {
+		Property property = super.basicGetRelation2SuccessProperty();
 		if (property != null) {
 			return property;
 		}
-		return relation2traceInterface.basicGetRelation2StatusProperty();
+		return relation2traceInterface.basicGetRelation2SuccessProperty();
 	}
 
 	@Override
@@ -129,7 +129,7 @@ class TopOverrideRelation2TraceClass extends AbstractRelation2TraceClass
 	public @NonNull Property getStatusInterfaceProperty() {
 		Relation2TraceClass baseRelation2TraceClass2 = getBaseRelation2TraceClass();
 		if (baseRelation2TraceClass2 == this) {
-			return ClassUtil.nonNullState(relation2traceInterface.basicGetRelation2StatusProperty());
+			return ClassUtil.nonNullState(relation2traceInterface.basicGetRelation2SuccessProperty());
 		}
 		else {
 			return baseRelation2TraceClass2.getStatusInterfaceProperty();
@@ -140,7 +140,7 @@ class TopOverrideRelation2TraceClass extends AbstractRelation2TraceClass
 	public @NonNull Property getStatusTraceProperty() {
 		Relation2TraceClass baseRelation2TraceClass2 = getBaseRelation2TraceClass();
 		if (baseRelation2TraceClass2 == this) {
-			return ClassUtil.nonNullState(basicGetRelation2StatusProperty());
+			return ClassUtil.nonNullState(basicGetRelation2SuccessProperty());
 		}
 		else {
 			return baseRelation2TraceClass2.getStatusInterfaceProperty();

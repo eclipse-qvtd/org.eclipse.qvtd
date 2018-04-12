@@ -1333,7 +1333,7 @@ import com.google.common.collect.Sets;
 				rMiddleGuardDomainVariables.removeAll(rAllVariables);
 				//
 				for (@NonNull Predicate rWhenPredicate : QVTrelationUtil.getOwnedPredicates(rWhenPattern)) {
-					OCLExpression rConditionExpression = QVTrelationUtil.getConditionExpression(rWhenPredicate);
+					OCLExpression rConditionExpression = QVTrelationUtil.getOwnedConditionExpression(rWhenPredicate);
 					mapWhenTerm(rConditionExpression);
 				}
 				//doUnsharedWhenVarsToMgVars(unsharedWhenVars, mg);
@@ -1377,7 +1377,7 @@ import com.google.common.collect.Sets;
 		// RPredicateSetToMBPredicateSet
 		protected void mapWhereBottomPredicates(@NonNull Iterable<@NonNull Predicate> rWherePredicates) throws CompilerChainException {
 			for (@NonNull Predicate rWherePredicate : rWherePredicates) {
-				OCLExpression rExpression = QVTrelationUtil.getConditionExpression(rWherePredicate);
+				OCLExpression rExpression = QVTrelationUtil.getOwnedConditionExpression(rWherePredicate);
 				variablesAnalysis.addPredicate(cMiddleBottomPattern, mapExpression(rExpression));
 			}
 			/*
@@ -1418,7 +1418,7 @@ import com.google.common.collect.Sets;
 				//				rMiddleGuardDomainVariables.removeAll(rAllVariables);
 				//
 				for (@NonNull Predicate rWherePredicate : QVTrelationUtil.getOwnedPredicates(rWherePattern)) {
-					OCLExpression rConditionExpression = QVTrelationUtil.getConditionExpression(rWherePredicate);
+					OCLExpression rConditionExpression = QVTrelationUtil.getOwnedConditionExpression(rWherePredicate);
 					if (rConditionExpression instanceof RelationCallExp) {
 						RelationCallExp rInvocation = (RelationCallExp)rConditionExpression;
 						Relation rInvokedRelation = QVTrelationUtil.getReferredRelation(rInvocation);

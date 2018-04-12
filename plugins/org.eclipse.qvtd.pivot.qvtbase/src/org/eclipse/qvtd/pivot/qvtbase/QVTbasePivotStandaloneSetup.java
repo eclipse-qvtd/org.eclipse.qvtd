@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseLibrary;
 import org.eclipse.qvtd.pivot.qvtbase.scoping.QVTbasePivotScoping;
-
+import org.eclipse.qvtd.runtime.qvttrace.QVTtracePackage;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -27,7 +27,7 @@ import com.google.inject.Injector;
 public class QVTbasePivotStandaloneSetup //implements ISetup
 {
 	private static Injector injector = null;
-	
+
 	public static void doSetup() {
 		if (injector == null) {
 			injector = new QVTbasePivotStandaloneSetup().createInjectorAndDoEMFRegistration();
@@ -39,7 +39,7 @@ public class QVTbasePivotStandaloneSetup //implements ISetup
 		PivotStandaloneSetup.doSetup();
 		QVTbasePivotScoping.init();
 	}
-	
+
 	/**
 	 * Return the Injector for this plugin.
 	 */
@@ -70,17 +70,19 @@ public class QVTbasePivotStandaloneSetup //implements ISetup
 				"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
 		if (!EPackage.Registry.INSTANCE.containsKey(QVTbasePackage.eNS_URI))
 			EPackage.Registry.INSTANCE.put(QVTbasePackage.eNS_URI, QVTbasePackage.eINSTANCE);
+		if (!EPackage.Registry.INSTANCE.containsKey(QVTtracePackage.eNS_URI))
+			EPackage.Registry.INSTANCE.put(QVTtracePackage.eNS_URI, QVTtracePackage.eINSTANCE);
 
 		Injector injector = createInjector();
 		register(injector);
 		return injector;
 	}
-	
+
 	public void register(Injector injector) {
-//		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
-//		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("essentialocl", resourceFactory);
-//		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("essentialocl", serviceProvider);
+		//		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+		//		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
+		//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("essentialocl", resourceFactory);
+		//		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("essentialocl", serviceProvider);
 	}
 }
 

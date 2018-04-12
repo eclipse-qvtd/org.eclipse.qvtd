@@ -22,20 +22,30 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.CompilerProblem;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.MappingRegionAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionHelper;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleHeadAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.VerdictRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
@@ -47,13 +57,13 @@ import com.google.common.collect.Sets;
  *
  * The Speculating partition interacts with other Speculations to establish that all predicates are satisfied.
  *
- * The Speculated partition creates the immediate corrolaries of the successful speculation.
+ * The Speculated partition creates the immediate corollaries of the successful speculation.
  *
  * The Edge partitions realize further edges once their targets are available.
  *
  * Each MappingPartitioner collaborates with an overall TransformationPartitioner for global analyses.
  */
-public class MappingPartitioner
+public class MappingPartitioner implements Nameable
 {
 	protected final @NonNull ScheduleManager scheduleManager;
 
@@ -88,7 +98,7 @@ public class MappingPartitioner
 	private final @NonNull List<@NonNull Node> leafConstantNodes = new ArrayList<>();
 
 	/**
-	 * The map from node to the trace edge by which the node may be located by lookup in a trace node once its trace edge is relaized..
+	 * The map from node to the trace edge by which the node may be located by lookup in a trace node once its trace edge is realized..
 	 */
 	private final @NonNull Map<@NonNull Node, @NonNull Edge> node2traceEdge = new HashMap<>();
 
@@ -103,11 +113,11 @@ public class MappingPartitioner
 	private final @NonNull Set<@NonNull NavigableEdge> oldPrimaryNavigableEdges = new HashSet<>();
 	private final @NonNull Set<@NonNull Edge> realizedEdges = new HashSet<>();
 	private final @NonNull List<@NonNull Edge> realizedOutputEdges = new ArrayList<>();
-	private final @NonNull List<@NonNull Node> trueNodes = new ArrayList<>();
+	private final @NonNull Set<@NonNull SuccessEdge> successEdges = new HashSet<>();	// FIXME redundant wrt traceNode2successEdge.values()
 	//	private boolean hasLoadedNodes = false;
 
 	/**
-	 * The trace nodes and their corresponding status node.
+	 * The trace nodes and their corresponding success node.
 	 *
 	 * There should normally be exactly one trace node.
 	 *
@@ -116,19 +126,19 @@ public class MappingPartitioner
 	 *
 	 * There could be multiple trace nodes after an early merge results. Work in progress.
 	 */
-	private final @NonNull Map<@NonNull Node, @Nullable Node> traceNode2statusNode = new HashMap<>();
+	private final @NonNull Map<@NonNull Node, @Nullable SuccessEdge> traceNode2successEdge = new HashMap<>();
 
 	/**
-	 * The realized edges from the (realized) trace node to a realized (corrolary) ouput node that identify what is
+	 * The realized edges from the (realized) trace node to a realized (corollary) ouput node that identify what is
 	 * guaranteed to be created only speculation succeeds.
 	 */
-	private final @NonNull List<@NonNull NavigableEdge> corrolaryEdges = new ArrayList<>();
+	private final @NonNull List<@NonNull NavigableEdge> corollaryEdges = new ArrayList<>();
 
 	/**
 	 * The realized output nodes guaranteed to be created only speculation succeeds;
-	 * the targets of corrolaryEdges.
+	 * the targets of corollaryEdges.
 	 */
-	private final @NonNull List<@NonNull Node> corrolaryNodes = new ArrayList<>();
+	private final @NonNull List<@NonNull Node> corollaryNodes = new ArrayList<>();
 
 	/**
 	 * Dynamically growing list of constant edges that have been traversed by a partition.
@@ -160,11 +170,6 @@ public class MappingPartitioner
 	 */
 	private final @NonNull Set<@NonNull Node> alreadyRealizedNodes = new HashSet<>();
 
-	/**
-	 * Dynamically growing list of true nodes that have been realized by a partition.
-	 */
-	private final @NonNull Set<@NonNull Node> alreadyTrueNodes = new HashSet<>();
-
 	private final @NonNull Map<@NonNull Edge, @NonNull List<@NonNull AbstractPartition>> debugEdge2partitions = new HashMap<>();
 
 	public MappingPartitioner(@NonNull TransformationPartitioner transformationPartitioner, @NonNull MappingRegion region) {
@@ -172,10 +177,19 @@ public class MappingPartitioner
 		this.scheduleManager = transformationPartitioner.getScheduleManager();
 		this.transformationPartitioner = transformationPartitioner;
 		this.region = region;
+		//		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(region.getName())) {
+		//			getClass();
+		//		}
+		//		if ((region instanceof ActivatorRegion) || (region instanceof DispatchRegion) || (region instanceof VerdictRegion)) {
+		//			return;
+		//		}
 		//
+		if ("mapVariableExp_qvtr".equals(getName())) {
+			getClass();
+		}
 		analyzeNodes();
 		for (@NonNull Node traceNode : analyzeTraceNodes()) {
-			analyzeStatusNode(traceNode);
+			analyzeSuccessEdge(traceNode);
 			analyzeTraceEdges(traceNode);
 		}
 		//
@@ -183,24 +197,28 @@ public class MappingPartitioner
 	}
 
 	private void addConsumptionOfMiddleNode(@NonNull Node node) {
-		predicatedMiddleNodes.add(node);
-		TraceClassAnalysis consumedTraceAnalysis = transformationPartitioner.addConsumer(node.getCompleteClass(), this);
-		List<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses2 = consumedTraceClassAnalyses;
-		if (consumedTraceClassAnalyses2 == null) {
-			consumedTraceClassAnalyses = consumedTraceClassAnalyses2 = new ArrayList<>();
+		if (!predicatedMiddleNodes.contains(node)) {
+			predicatedMiddleNodes.add(node);
+			TraceClassAnalysis consumedTraceAnalysis = transformationPartitioner.addConsumer(node.getCompleteClass(), this);
+			List<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses2 = consumedTraceClassAnalyses;
+			if (consumedTraceClassAnalyses2 == null) {
+				consumedTraceClassAnalyses = consumedTraceClassAnalyses2 = new ArrayList<>();
+			}
+			consumedTraceClassAnalyses2.add(consumedTraceAnalysis);
 		}
-		consumedTraceClassAnalyses2.add(consumedTraceAnalysis);
 	}
 
-	private void addCorrolary(@NonNull NavigableEdge edge) {
+	private void addCorollary(@NonNull NavigableEdge edge) {
 		Node targetNode = edge.getTargetNode();
-		assert traceNode2statusNode.containsKey(edge.getSourceNode());
+		assert traceNode2successEdge.containsKey(edge.getSourceNode());
 		assert targetNode.isRealized();
-		assert !targetNode.isStatus();
-		assert !corrolaryEdges.contains(edge);
-		corrolaryEdges.add(edge);
-		corrolaryNodes.add(targetNode);
-		transformationPartitioner.addCorrolary(QVTscheduleUtil.getProperty(edge), region);
+		assert !targetNode.isSuccess();
+		assert !corollaryEdges.contains(edge);
+		corollaryEdges.add(edge);
+		if (!corollaryNodes.contains(targetNode)) {		// Overrides have a base and derived edge to the same rootVariable node
+			corollaryNodes.add(targetNode);
+		}
+		transformationPartitioner.addCorollary(QVTscheduleUtil.getProperty(edge), region);
 	}
 
 	public void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole, @NonNull AbstractPartition partition) {
@@ -234,21 +252,21 @@ public class MappingPartitioner
 	}
 
 	private void addProductionOfMiddleNode(@NonNull Node node) {
-		realizedMiddleNodes.add(node);
+		if (node.isRealized() && !realizedMiddleNodes.contains(node)) {
+			realizedMiddleNodes.add(node);
+		}
 		TraceClassAnalysis consumedTraceAnalysis = transformationPartitioner.addProducer(node.getCompleteClass(), this);
 		List<@NonNull TraceClassAnalysis> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
 		if (producedTraceClassAnalyses2 == null) {
 			producedTraceClassAnalyses = producedTraceClassAnalyses2 = new ArrayList<>();
 		}
-		producedTraceClassAnalyses2.add(consumedTraceAnalysis);
+		if (!producedTraceClassAnalyses2.contains(consumedTraceAnalysis)) {
+			producedTraceClassAnalyses2.add(consumedTraceAnalysis);
+		}
 	}
 
 	public boolean addRealizedNode(@NonNull Node node) {
 		return alreadyRealizedNodes.add(node);
-	}
-
-	public boolean addTrueNode(@NonNull Node node) {
-		return alreadyTrueNodes.add(node);
 	}
 
 	private void analyzeEdges() {
@@ -262,13 +280,13 @@ public class MappingPartitioner
 						realizedEdges.add(edge);
 						Node sourceNode = edge.getEdgeSource();
 						Node targetNode = edge.getEdgeTarget();
-						if (traceNode2statusNode.containsKey(sourceNode)) {
-							if (targetNode.isRealized() && !targetNode.isStatus()) {
-								addCorrolary((NavigableEdge) edge);
+						if (traceNode2successEdge.containsKey(sourceNode)) {
+							if (targetNode.isRealized() && !targetNode.isSuccess()) {
+								addCorollary((NavigableEdge) edge);
 							}
 						}
 						else if ((sourceNode.isPredicated() || sourceNode.isRealized())) {
-							if (!traceNode2statusNode.containsKey(targetNode) && (targetNode.isPredicated() || targetNode.isRealized())) {
+							if (!traceNode2successEdge.containsKey(targetNode) && (targetNode.isPredicated() || targetNode.isRealized())) {
 								realizedOutputEdges.add(edge);
 							}
 						}
@@ -304,15 +322,24 @@ public class MappingPartitioner
 			if (!edge.isSecondary() && !edge.isRealized()) {
 				oldPrimaryNavigableEdges.add(edge);
 			}
+			if (edge.isSuccess()) {
+				successEdges.add((SuccessEdge) edge);
+				Node sourceNode = edge.getEdgeSource();
+				assert scheduleManager.isMiddle(sourceNode);
+				if (edge.isPredicated()) {
+					addConsumptionOfMiddleNode(sourceNode);
+				}
+				else {
+					assert edge.isRealized();
+					addProductionOfMiddleNode(sourceNode);
+				}
+			}
 		}
 	}
 
 	private void analyzeNodes() {
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
-			if (node.isTrue()) {
-				trueNodes.add(node);
-			}
-			else if (node.isExplicitNull()) {
+			if (node.isExplicitNull()) {
 				assert node.isConstant() && hasNoComputationInputs(node);
 				leafConstantNodes.add(node);
 			}
@@ -325,6 +352,14 @@ public class MappingPartitioner
 				else if (scheduleManager.isMiddle(node)) {
 					if (node.isPredicated()) {
 						addConsumptionOfMiddleNode(node);
+					}
+					else if (node.isSpeculated()) {
+						if (!node.isHead()) {		// Don't create a self-comsumption cycle
+							addConsumptionOfMiddleNode(node);
+						}
+					}
+					else if (node.isSpeculation()) {
+						addProductionOfMiddleNode(node);
 					}
 					else if (node.isRealized()) {
 						addProductionOfMiddleNode(node);
@@ -365,18 +400,24 @@ public class MappingPartitioner
 		}
 	}
 
-	private void analyzeStatusNode(@NonNull Node traceNode) {
-		Node statusNode = null;
-		Property statusProperty = scheduleManager.basicGetStatusProperty(traceNode);
-		if (statusProperty != null) {
-			transformationPartitioner.getSuccessPropertyDatum(statusProperty);
-			RegionHelper<@NonNull MappingRegion> regionHelper = new RegionHelper<>(scheduleManager, region);
-			statusNode = regionHelper.createStatusNode();
-			statusNode.setUtility(Node.Utility.STRONGLY_MATCHED);
-			@SuppressWarnings("unused")
-			NavigableEdge statusEdge = regionHelper.createNavigationEdge(traceNode, statusProperty, statusNode, false);
+	private void analyzeSuccessEdge(@NonNull Node traceNode) {
+		SuccessEdge successEdge = null;
+		Property successProperty = scheduleManager.basicGetSuccessProperty(traceNode);
+		if (successProperty != null) {
+			NavigationEdge statusNavigationEdge = QVTscheduleUtil.basicGetNavigationEdge(traceNode, successProperty);
+			if (statusNavigationEdge != null) {
+				successEdge = (SuccessEdge) statusNavigationEdge;
+			}
+			else {
+				if (!(region instanceof DispatchRegion) && !(region instanceof VerdictRegion)) {
+					RegionHelper<@NonNull MappingRegion> regionHelper = new RegionHelper<>(scheduleManager, region);
+					successEdge = regionHelper.createRealizedSuccess(traceNode, successProperty, null);
+					Node successNode = QVTscheduleUtil.getTargetNode(successEdge);
+					successNode.setUtility(Node.Utility.STRONGLY_MATCHED);		// FIXME is this really neded
+				}
+			}
 		}
-		traceNode2statusNode.put(traceNode, statusNode);
+		traceNode2successEdge.put(traceNode, successEdge);
 	}
 
 	private void analyzeTraceEdges(@NonNull Node traceNode) {
@@ -395,43 +436,18 @@ public class MappingPartitioner
 		if (realizedMiddleNodes.size() == 1) {
 			return Collections.singletonList(realizedMiddleNodes.get(0));
 		}
-		//
-		//	Compute the Set of all source nodes from which each target can be reached by transitive to-one navigation.
-		//
-		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSourceClosure = new HashMap<>();
-		for (@NonNull Node targetNode : realizedMiddleNodes) {
-			targetFromSourceClosure.put(targetNode, Sets.newHashSet(targetNode));
-		}
-		for (@NonNull Node sourceNode : realizedMiddleNodes) {
-			for (@NonNull NavigableEdge navigationEdge : sourceNode.getRealizedNavigationEdges()) {
-				Node targetNode = navigationEdge.getEdgeTarget();
-				Set<@NonNull Node> sourceClosure = targetFromSourceClosure.get(targetNode);
-				if (sourceClosure != null) {
-					sourceClosure.add(sourceNode);
-				}
-			}
-		}
-		MappingRegionAnalysis mappingRegionAnalysis = new MappingRegionAnalysis(region);
-		List<@NonNull Node> headNodes = mappingRegionAnalysis.computeHeadNodes(targetFromSourceClosure, null);
-		if (headNodes.size() == 0) {
+		Iterable<@NonNull Node> headNodes = RuleHeadAnalysis.computeRealizedHeadNodes(region, realizedMiddleNodes);
+		if (Iterables.size(headNodes) == 0) {
 			return Collections.emptyList();
 		}
 		else {
-			return Collections.singletonList(headNodes.get(0));
+			return Collections.singletonList(headNodes.iterator().next());
 		}
 	}
 
-	//	public @Nullable Node basicGetStatusNode() {
-	//		return statusNode;
-	//	}
-
-	//	public @Nullable Node basicGetTraceNode() {
-	//		return traceNode;
-	//	}
-
 	private void check() {
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
-			if ((node.isSpeculated() || node.isRealized()) && !hasRealizedNode(node)) {
+			if (((node.isSpeculated() && !node.isHead()) || node.isRealized()) && !hasRealizedNode(node)) {
 				transformationPartitioner.addProblem(CompilerUtil.createRegionError(region, "Should have realized " + node));
 			}
 		}
@@ -458,7 +474,7 @@ public class MappingPartitioner
 			Set<@NonNull Edge> missingEdgesSet = Sets.newHashSet(allPrimaryEdges);
 			missingEdgesSet.removeAll(partitionedEdges);
 			for (@NonNull Edge edge : missingEdgesSet) {
-				if (transformationPartitioner.getCorrolaryOf(edge) == null) {// && !isDead(edge)) {
+				if (transformationPartitioner.getCorollaryOf(edge) == null) {// && !isDead(edge)) {
 					transformationPartitioner.addProblem(CompilerUtil.createRegionWarning(region, "Missing " + edge));
 				}
 			}
@@ -510,42 +526,127 @@ public class MappingPartitioner
 		return deadNodes;
 	}
 
-	private @NonNull MicroMappingRegion createAssignmentRegion(@NonNull Edge outputEdge, int i) {
-		AssignmentPartition assignmentPartition = new AssignmentPartition(this, outputEdge);
-		MicroMappingRegion microMappingRegion = assignmentPartition.createMicroMappingRegion("«edge" + i + "»", "_p" + i);
-		scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		assignmentPartition.check(microMappingRegion);
-		return microMappingRegion;
-	}
-
-	private @NonNull MicroMappingRegion createRealizedRegion() {
-		RealizedPartition realizedPartition = new RealizedPartition(this);
-		MicroMappingRegion microMappingRegion = realizedPartition.createMicroMappingRegion("«realized»", "_r0");
-		scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		realizedPartition.check(microMappingRegion);
-		return microMappingRegion;
-	}
-
-	private @NonNull MicroMappingRegion createSpeculatedRegion() {
-		SpeculatedPartition speculatedPartition = new SpeculatedPartition(this);
-		MicroMappingRegion microMappingRegion = speculatedPartition.createMicroMappingRegion("«speculated»", "_p2");
-		scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		speculatedPartition.check(microMappingRegion);
-		return microMappingRegion;
-	}
-
-	private @NonNull MicroMappingRegion createSpeculatingRegion() {
-		SpeculatingPartition speculatingPartition = new SpeculatingPartition(this);
-		MicroMappingRegion microMappingRegion = speculatingPartition.createMicroMappingRegion("«speculating»", "_p1");
-		scheduleManager.writeDebugGraphs(microMappingRegion, null);
+	private @NonNull MicroMappingRegion createActivatorRegion(int partitionNumber) {
+		//		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(region.getName())) {
+		//			getClass();
+		//		}
+		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
+		ActivatorPartition speculatingPartition = new ActivatorPartition(this, reachabilityForest);
+		MicroMappingRegion microMappingRegion = speculatingPartition.createMicroMappingRegion("«activator»", "_p" + partitionNumber);
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+			scheduleManager.writeDebugGraphs(microMappingRegion, null);
+		}
+		//			>>>>>>> 4473ebf residue
 		speculatingPartition.check(microMappingRegion);
 		return microMappingRegion;
 	}
 
-	private @NonNull MicroMappingRegion createSpeculationRegion() {
-		SpeculationPartition speculationPartition = new SpeculationPartition(this);
-		MicroMappingRegion microMappingRegion = speculationPartition.createMicroMappingRegion("«speculation»", "_p0");
-		scheduleManager.writeDebugGraphs(microMappingRegion, null);
+	private @NonNull MicroMappingRegion createAssignmentRegion(@NonNull ReachabilityForest reachabilityForest, @NonNull Edge outputEdge, int partitionNumber) {
+		String namePrefix = "«edge" + partitionNumber + "»";
+		String symbolSuffix = "_p" + partitionNumber;
+		//		if ("«edge4» mapNavigationOrAttributeCallExp_Helper_qvtr".equals(namePrefix + " " + region.getName())) {
+		//			getClass();
+		//		}
+		AssignmentPartition assignmentPartition = new AssignmentPartition(this, reachabilityForest, outputEdge);
+		MicroMappingRegion microMappingRegion = assignmentPartition.createMicroMappingRegion(namePrefix, symbolSuffix);
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+			scheduleManager.writeDebugGraphs(microMappingRegion, null);
+		}
+		assignmentPartition.check(microMappingRegion);
+		return microMappingRegion;
+	}
+
+	private @NonNull MicroMappingRegion createNewSpeculatedRegion(int partitionNumber) {
+		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
+		NewSpeculatedPartition speculatedPartition = new NewSpeculatedPartition(this, reachabilityForest);
+		MicroMappingRegion microMappingRegion = speculatedPartition.createMicroMappingRegion("«speculated»", "_p" + partitionNumber);
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+			scheduleManager.writeDebugGraphs(microMappingRegion, null);
+		}
+		speculatedPartition.check(microMappingRegion);
+		return microMappingRegion;
+	}
+
+	private @NonNull MicroMappingRegion createNewSpeculatingRegion(int partitionNumber) {
+		//		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(region.getName())) {
+		//			getClass();
+		//		}
+		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
+		NewSpeculatingPartition speculatingPartition = new NewSpeculatingPartition(this, reachabilityForest);
+		MicroMappingRegion microMappingRegion = speculatingPartition.createMicroMappingRegion("«speculating»", "_p" + partitionNumber);
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+			scheduleManager.writeDebugGraphs(microMappingRegion, null);
+		}
+		speculatingPartition.check(microMappingRegion);
+		return microMappingRegion;
+	}
+
+	private @NonNull MicroMappingRegion createNewSpeculationRegion(int partitionNumber) {
+		ReachabilityForest reachabilityForest = new ReachabilityForest(getSpeculationReachabilityRootNodes(), getAvailableNavigableEdges());
+		NewSpeculationPartition speculationPartition = new NewSpeculationPartition(this, reachabilityForest);
+		MicroMappingRegion microMappingRegion = speculationPartition.createMicroMappingRegion("«speculation»", "_p" + partitionNumber);
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+			scheduleManager.writeDebugGraphs(microMappingRegion, null);
+		}
+		speculationPartition.check(microMappingRegion);
+		return microMappingRegion;
+	}
+
+	private @NonNull MicroMappingRegion createRealizedRegion(int partitionNumber) {
+		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
+		RealizedPartition realizedPartition = new RealizedPartition(this, reachabilityForest);
+		MicroMappingRegion microMappingRegion = realizedPartition.createMicroMappingRegion("«realized»", "_p" + partitionNumber);
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+			scheduleManager.writeDebugGraphs(microMappingRegion, null);
+		}
+		realizedPartition.check(microMappingRegion);
+		return microMappingRegion;
+	}
+
+	private @NonNull MicroMappingRegion createResidualRegion(int partitionNumber) {
+		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
+		ResidualPartition realizedPartition = new ResidualPartition(this, reachabilityForest);
+		MicroMappingRegion microMappingRegion = realizedPartition.createMicroMappingRegion("«residue»", "_p" + partitionNumber);
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+			scheduleManager.writeDebugGraphs(microMappingRegion, null);
+		}
+		realizedPartition.check(microMappingRegion);
+		return microMappingRegion;
+	}
+
+	private @NonNull MicroMappingRegion createSpeculatedRegion(int partitionNumber) {
+		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
+		SpeculatedPartition speculatedPartition = new SpeculatedPartition(this, reachabilityForest);
+		MicroMappingRegion microMappingRegion = speculatedPartition.createMicroMappingRegion("«speculated»", "_p" + partitionNumber);
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+			scheduleManager.writeDebugGraphs(microMappingRegion, null);
+		}
+		speculatedPartition.check(microMappingRegion);
+		return microMappingRegion;
+	}
+
+	private @NonNull MicroMappingRegion createSpeculatingRegion(int partitionNumber) {
+		//		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(region.getName())) {
+		//			getClass();
+		//		}
+		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
+		SpeculatingPartition speculatingPartition = new SpeculatingPartition(this, reachabilityForest);
+		MicroMappingRegion microMappingRegion = speculatingPartition.createMicroMappingRegion("«speculating»", "_p" + partitionNumber);
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+			scheduleManager.writeDebugGraphs(microMappingRegion, null);
+		}
+		speculatingPartition.check(microMappingRegion);
+		return microMappingRegion;
+	}
+
+	private @NonNull MicroMappingRegion createSpeculationRegion(int partitionNumber) {
+		ReachabilityForest reachabilityForest = new ReachabilityForest(getSpeculationReachabilityRootNodes(), getAvailableNavigableEdges());
+		SpeculationPartition speculationPartition = new SpeculationPartition(this, reachabilityForest);
+		MicroMappingRegion microMappingRegion = speculationPartition.createMicroMappingRegion("«speculation»", "_p" + partitionNumber);
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+			scheduleManager.writeDebugGraphs(microMappingRegion, null);
+		}
+		//			>>>>>>> 4473ebf residue
 		speculationPartition.check(microMappingRegion);
 		return microMappingRegion;
 	}
@@ -558,28 +659,72 @@ public class MappingPartitioner
 		return alreadyRealizedEdges.keySet();
 	}
 
+	/**
+	 * Return the navigable edges that may be used by to locate nodes by this partition.
+	 * The default implementation returns all old primary navigable edges
+	 * and all already realized navigable edges
+	 */
+	private @NonNull Iterable<@NonNull NavigableEdge> getAvailableNavigableEdges() {
+		List<@NonNull NavigableEdge> navigableEdges = Lists.newArrayList(getOldPrimaryNavigableEdges());
+		for (@NonNull Edge edge : getAlreadyRealizedEdges()) {
+			if (edge instanceof NavigableEdge) {
+				navigableEdges.add((NavigableEdge) edge);
+			}
+		}
+		return navigableEdges;
+	}
+
 	public @Nullable Iterable<@NonNull TraceClassAnalysis> getConsumedTraceClassAnalyses() {
 		return consumedTraceClassAnalyses;
 	}
 
-	public @NonNull Iterable<@NonNull NavigableEdge> getCorrolaryEdges() {
-		return corrolaryEdges;
+	public @NonNull Iterable<@NonNull NavigableEdge> getCorollaryEdges() {
+		return corollaryEdges;
 	}
 
-	public @NonNull Iterable<@NonNull Node> getCorrolaryNodes() {
-		return corrolaryNodes;
+	public @NonNull Iterable<@NonNull Node> getCorollaryNodes() {
+		return corollaryNodes;
+	}
+
+	public @NonNull Iterable<@NonNull Node> getExecutionNodes() {
+		return Iterables.concat(getPredicatedExecutionNodes(), getRealizedExecutionNodes());
 	}
 
 	public @NonNull Iterable<@NonNull Node> getLeafConstantNodes() {
 		return leafConstantNodes;
 	}
 
+	@Override
+	public String getName() {
+		return region.getName();
+	}
+
 	public @NonNull Iterable<@NonNull NavigableEdge> getOldPrimaryNavigableEdges() {
 		return oldPrimaryNavigableEdges;
 	}
 
+	public @NonNull List<@NonNull Node> getPredicatedDispatchNodes() {
+		List<@NonNull Node> predicatedDispatchNodes = new ArrayList<>();
+		for (@NonNull Node node : getPredicatedMiddleNodes()) {
+			if (QVTrelationNameGenerator.DISPATCHCLASS_SELF_NAME.equals(node.getName())) {
+				predicatedDispatchNodes.add(node);
+			}
+		}
+		return predicatedDispatchNodes;
+	}
+
 	public @NonNull Iterable<@NonNull Edge> getPredicatedEdges() {
 		return predicatedEdges;
+	}
+
+	public @NonNull List<@NonNull Node> getPredicatedExecutionNodes() {
+		List<@NonNull Node> predicatedExecutionNodes = new ArrayList<>();
+		for (@NonNull Node node : getPredicatedMiddleNodes()) {
+			if (QVTrNameGenerator.TRACECLASS_PROPERTY_NAME.equals(node.getName())) {
+				predicatedExecutionNodes.add(node);
+			}
+		}
+		return predicatedExecutionNodes;
 	}
 
 	public @NonNull Iterable<@NonNull Node> getPredicatedMiddleNodes() {
@@ -590,20 +735,66 @@ public class MappingPartitioner
 		return predicatedOutputNodes;
 	}
 
+	public @NonNull List<@NonNull Node> getPredicatedWhenNodes() {
+		List<@NonNull Node> predicatedWhenNodes = new ArrayList<>();
+		for (@NonNull Node node : getPredicatedMiddleNodes()) {
+			if (node.getName().startsWith("when_")) {
+				predicatedWhenNodes.add(node);
+			}
+		}
+		return predicatedWhenNodes;
+	}
+
 	public @Nullable Iterable<@NonNull TraceClassAnalysis> getProducedTraceClassAnalyses() {
 		return producedTraceClassAnalyses;
+	}
+
+	private @NonNull Iterable<@NonNull Node> getReachabilityRootNodes() {
+		Iterable<@NonNull Node> traceNodes = getTraceNodes();
+		Iterable<@NonNull Node> leafConstantNodes = getLeafConstantNodes();
+		return Iterables.concat(traceNodes, leafConstantNodes);
+	}
+
+	public @NonNull List<@NonNull Node> getRealizedDispatchNodes() {
+		List<@NonNull Node> realizedDispatchNodes = new ArrayList<>();
+		for (@NonNull Node node : getRealizedMiddleNodes()) {
+			if (QVTrelationNameGenerator.DISPATCHCLASS_SELF_NAME.equals(node.getName())) {
+				realizedDispatchNodes.add(node);
+			}
+		}
+		return realizedDispatchNodes;
 	}
 
 	public @NonNull Iterable<@NonNull Edge> getRealizedEdges() {
 		return realizedEdges;
 	}
 
-	//	public @NonNull Iterable<@NonNull Node> getRealizedMiddleNodes() {
-	//		return realizedMiddleNodes;
-	//	}
+	public @NonNull List<@NonNull Node> getRealizedExecutionNodes() {
+		List<@NonNull Node> realizedExecutionNodes = new ArrayList<>();
+		for (@NonNull Node node : getRealizedMiddleNodes()) {
+			if (QVTrNameGenerator.TRACECLASS_PROPERTY_NAME.equals(node.getName())) {
+				realizedExecutionNodes.add(node);
+			}
+		}
+		return realizedExecutionNodes;
+	}
+
+	public @NonNull Iterable<@NonNull Node> getRealizedMiddleNodes() {
+		return realizedMiddleNodes;
+	}
 
 	public @NonNull Iterable<@NonNull Node> getRealizedOutputNodes() {
 		return realizedOutputNodes;
+	}
+
+	public @NonNull List<@NonNull Node> getRealizedWhereNodes() {
+		List<@NonNull Node> realizedWhereNodes = new ArrayList<>();
+		for (@NonNull Node node : getRealizedMiddleNodes()) {
+			if (node.getName().startsWith("where_")) {
+				realizedWhereNodes.add(node);
+			}
+		}
+		return realizedWhereNodes;
 	}
 
 	public @Nullable AbstractPartition getRealizingPartition(@NonNull Edge edge) {
@@ -618,8 +809,32 @@ public class MappingPartitioner
 		return scheduleManager;
 	}
 
-	public @Nullable Node getStatusNode(@NonNull Node traceNode) {
-		return traceNode2statusNode.get(traceNode);
+	private @NonNull Iterable<@NonNull Node> getSpeculationReachabilityRootNodes() {
+		List<@NonNull Node> rootNodes = new ArrayList<>();
+		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(region)) {
+			if (!headNode.isDependency()) {
+				rootNodes.add(headNode);
+			}
+		}
+		for (@NonNull Node leafConstant : getLeafConstantNodes()) {
+			//			if (!leafConstant.isTrue()) {
+			rootNodes.add(leafConstant);
+			//			}
+		}
+		return rootNodes;
+	}
+
+	public @Nullable SuccessEdge getSuccessEdge(@NonNull Node traceNode) {
+		return traceNode2successEdge.get(traceNode);
+	}
+
+	public @NonNull Iterable<@NonNull SuccessEdge> getSuccessEdges() {
+		return successEdges;
+	}
+
+	public @Nullable Node getSuccessNode(@NonNull Node traceNode) {
+		SuccessEdge successEdge = traceNode2successEdge.get(traceNode);
+		return successEdge != null ? successEdge.getTargetNode() : null;
 	}
 
 	public @Nullable Iterable<@NonNull TraceClassAnalysis> getSuperProducedTraceClassAnalyses() {
@@ -645,16 +860,18 @@ public class MappingPartitioner
 		return node2traceEdge.get(node);
 	}
 
+	@Deprecated /* @deprecated the semantics of this are too vague */
 	public @NonNull Iterable<@NonNull Node> getTraceNodes() {
-		return traceNode2statusNode.keySet();
+		if (scheduleManager.useActivators()) {				// new QVTr way
+			return getExecutionNodes();
+		}
+		else {												// old QVTc way
+			return traceNode2successEdge.keySet();
+		}
 	}
 
 	public @NonNull TransformationPartitioner getTransformationPartitioner() {
 		return transformationPartitioner;
-	}
-
-	public @NonNull Iterable<@NonNull Node> getTrueNodes() {
-		return trueNodes;
 	}
 
 	private boolean hasNoComputationInputs(@NonNull Node node) {
@@ -690,12 +907,8 @@ public class MappingPartitioner
 		return alreadyRealizedNodes.contains(node);
 	}
 
-	public boolean hasTrueNode(@NonNull Node node) {
-		return alreadyTrueNodes.contains(node);
-	}
-
-	public @Nullable List<@NonNull MappingRegion> getCorrolaryOf(@NonNull Edge edge) {
-		return transformationPartitioner.getCorrolaryOf(edge);
+	public @Nullable List<@NonNull MappingRegion> getCorollaryOf(@NonNull Edge edge) {
+		return transformationPartitioner.getCorollaryOf(edge);
 	}
 
 	public boolean isCyclic(@NonNull Node node) {
@@ -713,6 +926,14 @@ public class MappingPartitioner
 					return false;
 				}
 			}
+			else if (edge.isPredicate()) {
+				if ((knownDeadNodes == null) || !knownDeadNodes.contains(edge.getEdgeSource())) {
+					return false;
+				}
+			}
+			//			else if (edge.isExpression() && edge.isPredicated()) {
+			//				return false;
+			//			}
 		}
 		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(node)) {
 			if (edge.isNavigation() || edge.isExpression()) {
@@ -743,34 +964,37 @@ public class MappingPartitioner
 	} */
 
 	public @NonNull Iterable<@NonNull MappingRegion> partition() {
-		//		System.out.println("    partition " + region);
-		//		Node traceNode2 = traceNode;
-		//		assert traceNode2 != null;												// Regular mapping
-		//		if (!hasLoadedNodes) {										// No inputs
-		//			Collections.singletonList(region);
-		//		} else
-		if (transformationPartitioner.getCycleAnalysis(this) == null) {	// Cycle analysis failed
-			return Collections.singletonList(region);
+		boolean useActivators = scheduleManager.useActivators();
+		if (useActivators) {
+			return partition4qvtr();		// New algorithms with Dispatch/VerdictRegions to support overriding
 		}
-		//		else if (region.getName().startsWith(QVTrNameGenerator.OVERRIDDEN_PREFIX)) {	// FIXME better test
-		//			return Collections.singletonList(region);
-		//		}
 		else {
-			List<@NonNull MappingRegion> regions = new ArrayList<>();
-			if (predicatedMiddleNodes.isEmpty()) {
-				regions.add(createRealizedRegion());
+			return partition4qvtc();		// Old algorithms pending debugging and exploitation of new algorithms
+		}
+	}
+
+	public @NonNull Iterable<@NonNull MappingRegion> partition4qvtc() {
+		boolean isCyclic = transformationPartitioner.getCycleAnalysis(this) != null;
+		List<@NonNull MappingRegion> newRegions = new ArrayList<>();
+		if (!isCyclic) {	// Cycle analysis found no cycles
+			newRegions.add(region);
+		}
+		else {
+			if (!predicatedMiddleNodes.isEmpty()) {
+				newRegions.add(createSpeculationRegion(newRegions.size()));
+				newRegions.add(createSpeculatingRegion(newRegions.size()));
+				newRegions.add(createSpeculatedRegion(newRegions.size()));
 			}
 			else {
-				regions.add(createSpeculationRegion());
-				regions.add(createSpeculatingRegion());
-				regions.add(createSpeculatedRegion());
+				newRegions.add(createRealizedRegion(newRegions.size()));
 			}
+			ReachabilityForest assignmentReachabilityForest	= new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
 			//
 			//	Create an AssignmentRegion for each to-be-realized edge to an output, which may also realize most trace edges too.
 			//
 			for (@NonNull Edge outputEdge : realizedOutputEdges) {
 				if (!hasRealizedEdge(outputEdge)) {
-					regions.add(createAssignmentRegion(outputEdge, regions.size()));
+					newRegions.add(createAssignmentRegion(assignmentReachabilityForest, outputEdge, newRegions.size()));
 				}
 			}
 			//
@@ -778,12 +1002,97 @@ public class MappingPartitioner
 			//
 			for (@NonNull Edge edge : realizedEdges) {
 				if (!hasRealizedEdge(edge)) {
-					regions.add(createAssignmentRegion(edge, regions.size()));
+					newRegions.add(createAssignmentRegion(assignmentReachabilityForest, edge, newRegions.size()));
 				}
 			}
-			check();
-			return regions;
 		}
+		if (newRegions.size() > 1) {		// FIXME shouldn't this work anyway when no partitioning was needed?
+			check();
+		}
+		return newRegions;
+	}
+
+	public @NonNull Iterable<@NonNull MappingRegion> partition4qvtr() {
+		if ("mapVariableExp_qvtr".equals(getName())) {
+			getClass();
+		}
+		if ((region instanceof DispatchRegion) || (region instanceof VerdictRegion)) {
+			return Collections.singletonList(region);
+		}
+		boolean isCyclic = transformationPartitioner.getCycleAnalysis(this) != null;
+		List<@NonNull Node> predicatedDispatchNodes = getPredicatedDispatchNodes();
+		List<@NonNull Node> predicatedExecutionNodes = getPredicatedExecutionNodes();
+		List<@NonNull Node> predicatedWhenNodes = getPredicatedWhenNodes();
+		assert predicatedDispatchNodes.size() + predicatedExecutionNodes.size() + predicatedWhenNodes.size() == predicatedMiddleNodes.size();
+		List<@NonNull Node> realizedDispatchNodes = getRealizedDispatchNodes();
+		List<@NonNull Node> realizedExecutionNodes = getRealizedExecutionNodes();
+		List<@NonNull Node> realizedWhereNodes = getRealizedWhereNodes();
+		assert realizedDispatchNodes.size() + realizedExecutionNodes.size() + realizedWhereNodes.size() == realizedMiddleNodes.size();
+		//		Set<@NonNull Node> dispatchedTraceNodes2 = dispatchedTraceNodes;
+		//		assert dispatchedTraceNodes2 != null;
+		//		Set<@NonNull Node> dispatchedRealizedNodes = new HashSet<>(realizedMiddleNodes);
+		//		dispatchedRealizedNodes.retainAll(dispatchedTraceNodes);
+		//		Set<@NonNull Node> undispatchedRealizedNodes = new HashSet<>(realizedMiddleNodes);
+		//		undispatchedRealizedNodes.removeAll(dispatchedTraceNodes);
+		//		Iterable<@NonNull Node> traceNodes = getTraceNodes();
+		//		Iterator<@NonNull Node> traceNodesIterator = traceNodes.iterator();
+		boolean needsActivator = false;
+		if (realizedExecutionNodes.size() > 0)	{			// A 'single' realized "trace" node is a boring no-override top activation.
+			needsActivator = true;
+		}
+		else {
+			needsActivator = false;
+		}
+
+		//		boolean realizedTrace = dispatchedTraceNodes2.isEmpty() && traceNodesIterator.hasNext() && traceNodesIterator.next().isRealized() && !traceNodesIterator.hasNext();
+		boolean needsSpeculation = isCyclic && (predicatedWhenNodes.size() > 0); //(dispatchedTraceNodes2.isEmpty() ? !predicatedMiddleNodes.isEmpty() : !predicatedMiddleNodes.containsAll(dispatchedTraceNodes2));
+		//
+		//	Create the partitioned regions
+		//
+		List<@NonNull MappingRegion> newRegions = new ArrayList<>();
+		if (needsActivator) {
+			//
+			//	Create an activator to make a QVTr top relation behave as a non-top relation.
+			//
+			newRegions.add(createActivatorRegion(newRegions.size()));
+		}
+		if (!needsSpeculation) {
+			//
+			//	If speculation is not needed just add the functionality as a single region.
+			//
+			if (newRegions.isEmpty()) {		// i.e. a QVTr non top relation - re-use as is
+				newRegions.add(region);
+			}
+			else {							// i.e. a QVTr top relation - create a residue to finish off the activator
+				newRegions.add(createResidualRegion(newRegions.size()));
+			}
+		}
+		else {								// cycles may need speculation nad partitioning into isolated actions
+			newRegions.add(createNewSpeculationRegion(newRegions.size()));
+			newRegions.add(createNewSpeculatingRegion(newRegions.size()));
+			newRegions.add(createNewSpeculatedRegion(newRegions.size()));
+			ReachabilityForest assignmentReachabilityForest	= new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
+			//
+			//	Create an AssignmentRegion for each to-be-realized edge to an output, which may also realize most trace edges too.
+			//
+			for (@NonNull Edge outputEdge : realizedOutputEdges) {
+				if (!hasRealizedEdge(outputEdge)) {
+					newRegions.add(createAssignmentRegion(assignmentReachabilityForest, outputEdge, newRegions.size()));
+				}
+			}
+			//
+			//	Create an AssignmentRegion for each still to-be-realized edge to an output.
+			//
+			for (@NonNull Edge edge : realizedEdges) {
+				if (!hasRealizedEdge(edge)) {
+					newRegions.add(createAssignmentRegion(assignmentReachabilityForest, edge, newRegions.size()));
+				}
+			}
+		}
+		if (newRegions.size() > 1) {		// FIXME shouldn't this work anyway when no partitioning was needed?
+			check();
+		}
+		return newRegions;
 	}
 
 	@Override

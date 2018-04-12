@@ -156,9 +156,13 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 				String absolutePath = testBundleFile.getAbsolutePath();
 				assert !testBundleFile.exists() : "Default working directory should be the workspace rather than a project: " + absolutePath;
 			}
-			testFileSystem = testFileSystem2 = TestFileSystem.create(new TestFileSystemHelper());
+			testFileSystem = testFileSystem2 = TestFileSystem.create(getTestFileSystemHelper());
 		}
 		return testFileSystem2;
+	}
+
+	private @NonNull TestFileSystemHelper getTestFileSystemHelper() {
+		return new TestFileSystemHelper();
 	}
 
 	/**

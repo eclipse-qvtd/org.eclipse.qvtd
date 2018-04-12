@@ -12,18 +12,23 @@ package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractQVTb2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.CompilerOptions;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Lists;
@@ -32,18 +37,27 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 {
 	public QVTm2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory,
 			CompilerOptions.@Nullable StepOptions schedulerOptions) {
-		super(new QVTcoreScheduleManager(environmentFactory, schedulerOptions), problemHandler);
+		super(new QVTcoreScheduleManager(environmentFactory, schedulerOptions)
+		{
+			@Override
+			public void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
+				problemHandler.addProblem(CompilerUtil.createRegionError(region, messageTemplate, bindings));
+			}
+
+			@Override
+			public void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
+				problemHandler.addProblem(CompilerUtil.createRegionWarning(region, messageTemplate, bindings));
+			}
+		}, problemHandler);
 	}
 
-	public @NonNull List<@NonNull MappingRegion> transform() throws IOException {
-		scheduleManager.analyzeUsages();
-		scheduleManager.analyzeRules();
-		scheduleManager.analyzeTransformations();
-		List<@NonNull RuleRegion> orderedRuleRegions = new ArrayList<>();
-		for (@NonNull MappingRegion mappingRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager.getScheduleModel())) {
-			orderedRuleRegions.add((RuleRegion) mappingRegion);
+	public @NonNull Map<@NonNull ScheduledRegion, Iterable<@NonNull MappingRegion>> transform() throws IOException {
+		scheduleManager.analyzeSourceModel();
+		Iterable<@NonNull TransformationAnalysis> transformationAnalyses = scheduleManager.getOrderedTransformationAnalyses();
+		for (@NonNull TransformationAnalysis transformationAnalysis : transformationAnalyses) {
+			transformationAnalysis.analyzeMappingRegions();
 		}
-		Collections.sort(orderedRuleRegions, NameUtil.NAMEABLE_COMPARATOR);		// For predictability
+		Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull RuleRegion>> scheduledRegion2activeRegions = scheduleManager.analyzeTransformations();
 		//
 		//	Extract salient characteristics from within each MappingAction.
 		//
@@ -51,33 +65,32 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 		//			MappingAnalysis mappingAnalysis = MappingAnalysis.createMappingRegion(scheduleManager, ruleRegion);
 		//			addRuleAnalysis(mappingAnalysis);
 		//		}
-		for (@NonNull TransformationAnalysis transformationAnalysis : scheduleManager.getTransformationAnalyses()) {
-			List<@NonNull RuleAnalysis> ruleAnalyses = Lists.newArrayList(transformationAnalysis.getRuleAnalyses());
-			Collections.sort(ruleAnalyses, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
-			for (@NonNull RuleAnalysis ruleAnalysis : ruleAnalyses) {
-				ruleAnalysis.registerConsumptionsAndProductions();
-			}
-			for (@NonNull RuleAnalysis ruleAnalysis : ruleAnalyses) {
-				scheduleManager.writeDebugGraphs(ruleAnalysis.getRegion(), null);
+		for (@NonNull ScheduledRegion scheduledRegion : scheduledRegion2activeRegions.keySet()) {
+			Iterable<? extends @NonNull MappingRegion> activeRegions = scheduledRegion2activeRegions.get(scheduledRegion);
+			assert activeRegions != null;
+			for (@NonNull MappingRegion ruleRegion : activeRegions) {
+				registerConsumptionsAndProductions((RuleRegion) ruleRegion);
 			}
 		}
-		List<@NonNull MappingRegion> orderedRegions = new ArrayList<>();
-		for (@NonNull RuleRegion ruleRegion : orderedRuleRegions) {
-			//			Rule rule = QVTscheduleUtil.getReferredRule(ruleRegion);
-			//			RuleAnalysis mappingAnalysis = getRuleAnalysis(rule);
-			//			orderedRegions.add(mappingAnalysis.getRuleRegion());
-			orderedRegions.add(ruleRegion);
-			//			mappingRegion.resolveRecursion();
+		for (@NonNull MappingRegion ruleRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager.getScheduleModel())) {
+			scheduleManager.writeDebugGraphs(ruleRegion, null);
 		}
-		boolean noEarlyMerge = scheduleManager.isNoEarlyMerge();
-		List<@NonNull MappingRegion> activeRegions = new ArrayList<>(noEarlyMerge ? orderedRegions : EarlyMerger.merge(scheduleManager, orderedRegions));
-		//		for (@NonNull Region activeRegion : activeRegions) {
-		//			((AbstractRegion)activeRegion).resolveRecursion();
-		//		}
-		//		for (@NonNull OperationRegion operationRegion : multiRegion.getOperationRegions()) {
-		//			activeRegions.add(operationRegion);
-		//		}
-		//		multiRegion.setActiveRegions(activeRegions);
-		return activeRegions;
+		Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull MappingRegion>> scheduledRegion2mergedRegions = new HashMap<>();
+		if (!scheduleManager.isNoEarlyMerge()) {
+			for (@NonNull ScheduledRegion scheduledRegion : scheduledRegion2activeRegions.keySet()) {
+				Iterable<@NonNull RuleRegion> activeRegions = scheduledRegion2activeRegions.get(scheduledRegion);
+				assert activeRegions != null;
+				List<@NonNull MappingRegion> mergedRegions = new ArrayList<>(EarlyMerger.merge(scheduleManager, activeRegions));
+				scheduledRegion2mergedRegions.put(scheduledRegion, mergedRegions);
+			}
+		}
+		else {
+			for (@NonNull ScheduledRegion scheduledRegion : scheduledRegion2activeRegions.keySet()) {
+				Iterable<@NonNull RuleRegion> activeRegions = scheduledRegion2activeRegions.get(scheduledRegion);
+				assert activeRegions != null;
+				scheduledRegion2mergedRegions.put(scheduledRegion, Lists.newArrayList(activeRegions));
+			}
+		}
+		return scheduledRegion2mergedRegions;
 	}
 }

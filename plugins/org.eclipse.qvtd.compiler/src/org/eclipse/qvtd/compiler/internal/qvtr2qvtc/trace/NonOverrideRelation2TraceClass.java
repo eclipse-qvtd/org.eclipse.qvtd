@@ -34,7 +34,7 @@ class NonOverrideRelation2TraceClass extends AbstractRelation2TraceClass
 	protected NonOverrideRelation2TraceClass(@NonNull RelationAnalysis relationAnalysis) {
 		super(relationAnalysis, relationAnalysis.getNameGenerator().createTraceClassName(relationAnalysis.getRelation()));
 		assert !QVTrelationUtil.hasOverrides(relation);
-		resolveStatusProperty();
+		resolveSuccessProperty();
 	}
 
 	@Override
@@ -64,12 +64,12 @@ class NonOverrideRelation2TraceClass extends AbstractRelation2TraceClass
 
 	@Override
 	public @NonNull Property getStatusInterfaceProperty() {
-		return ClassUtil.nonNullState(basicGetRelation2StatusProperty());
+		return ClassUtil.nonNullState(basicGetRelation2SuccessProperty());
 	}
 
 	@Override
 	public @NonNull Property getStatusTraceProperty() {
-		return ClassUtil.nonNullState(basicGetRelation2StatusProperty());
+		return ClassUtil.nonNullState(basicGetRelation2SuccessProperty());
 	}
 
 	@Override
@@ -117,7 +117,7 @@ class NonOverrideRelation2TraceClass extends AbstractRelation2TraceClass
 		return false;			// Never happens
 	}
 
-	protected void resolveStatusProperty() {
+	protected void resolveSuccessProperty() {
 		if (!relation.isIsAbstract()) {
 			Iterable<@NonNull RelationCallExp> incomingInvocations = relationAnalysis.getIncomingInvocations();
 			if (incomingInvocations != null) {
@@ -129,7 +129,7 @@ class NonOverrideRelation2TraceClass extends AbstractRelation2TraceClass
 					}
 				}
 				if (needsStatusProperty) {
-					getStatusProperty();
+					getSuccessProperty();
 				}
 			}
 		}

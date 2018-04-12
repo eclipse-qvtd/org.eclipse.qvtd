@@ -16,6 +16,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -25,15 +26,15 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * The SpeculatingPartition validates the residual predictaes omitted from the speculation.
- * The corrolary is realized and realized edges that do not involve other speculations
+ * The corollary is realized and realized edges that do not involve other speculations
  * are also realized. Realization of speculation nodes must wait for the speculated partition.
  */
 class SpeculatingPartition extends AbstractPartition
 {
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
 
-	public SpeculatingPartition(@NonNull MappingPartitioner partitioner) {
-		super(partitioner);
+	public SpeculatingPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
+		super(partitioner, reachabilityForest);
 		//
 		//	The realized middle (trace) nodes become speculated head nodes and their already realized edge ends populate tracedInputNodes.
 		//
@@ -52,13 +53,13 @@ class SpeculatingPartition extends AbstractPartition
 		//
 		resolveMatchedPredicatedEdges();
 		//
-		//	The non-corrolary, non-realized ends of all realized edges are added as is.
+		//	The non-corollary, non-realized ends of all realized edges are added as is.
 		//
 		resolveRealizedEdges();
 		//
 		//	Add the outstanding predicates that can be checked by this partition.
 		//
-		resolveTrueNodes();
+		//		resolveTrueNodes();
 		//
 		//	Ensure that the predecessors of each node are included in the partition.
 		//
@@ -73,8 +74,8 @@ class SpeculatingPartition extends AbstractPartition
 		resolveEdges();
 	}
 
-	private boolean isDownstreamFromCorrolary(@NonNull Node node) {
-		if (isCorrolary(node)) {
+	private boolean isDownstreamFromCorollary(@NonNull Node node) {
+		if (isCorollary(node)) {
 			return true;
 		}
 		if (node.isOperation()) {
@@ -82,7 +83,7 @@ class SpeculatingPartition extends AbstractPartition
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 				if (edge.isComputation()) {
 					Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
-					if (isDownstreamFromCorrolary(sourceNode)) {
+					if (isDownstreamFromCorollary(sourceNode)) {
 						allReachable = false;
 						break;
 					}
@@ -93,7 +94,7 @@ class SpeculatingPartition extends AbstractPartition
 			}
 		}
 		for (@NonNull Node precedingNode : getPredecessors(node)) {
-			if (!isDownstreamFromCorrolary(precedingNode)) {
+			if (!isDownstreamFromCorollary(precedingNode)) {
 				return false;
 			}
 		}
@@ -101,15 +102,19 @@ class SpeculatingPartition extends AbstractPartition
 	}
 
 	/**
-	 * Return true if node is a corrolary of this mapping.
+	 * Return true if node is a corollary of this mapping.
 	 */
-	private boolean isLocalCorrolary(@NonNull Node node) {
+	private boolean isLocalCorollary(@NonNull Node node) {
 		assert node.isRealized();
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-			if (edge.isRealized() && edge.isNavigation() && !partitioner.isCyclic(QVTscheduleUtil.getSourceNode(edge))) {
-				List<@NonNull MappingRegion> corrolaryOfRegions = partitioner.getCorrolaryOf(edge);
-				if ((corrolaryOfRegions != null) && (corrolaryOfRegions.size() == 1) && corrolaryOfRegions.contains(region)) {
-					return true;
+			if (edge.isRealized() && edge.isNavigation()) {
+				// A cyclic node cannot be a corollary since we must establish that all speculating
+				// partitions are ok before the speculated region can create the full cycle.
+				if (!partitioner.isCyclic(QVTscheduleUtil.getSourceNode(edge))) {
+					List<@NonNull MappingRegion> corollaryOfRegions = partitioner.getCorollaryOf(edge);
+					if ((corollaryOfRegions != null) && (corollaryOfRegions.size() == 1) && corollaryOfRegions.contains(region)) {
+						return true;
+					}
 				}
 			}
 		}
@@ -132,7 +137,7 @@ class SpeculatingPartition extends AbstractPartition
 
 	protected void resolveMatchedPredicatedEdges() {
 		for (@NonNull Edge edge : partitioner.getPredicatedEdges()) {
-			if (edge.isMatched() && !partitioner.hasPredicatedEdge(edge) && (partitioner.getCorrolaryOf(edge) == null)) {
+			if (edge.isMatched() && !partitioner.hasPredicatedEdge(edge) && (partitioner.getCorollaryOf(edge) == null)) {
 				Node sourceNode = edge.getEdgeSource();
 				if (!sourceNode.isRealized()) {
 					Node targetNode = edge.getEdgeTarget();
@@ -163,7 +168,7 @@ class SpeculatingPartition extends AbstractPartition
 
 	protected void resolvePredicatedOutputNodes() {
 		for (@NonNull Node node : partitioner.getPredicatedOutputNodes()) {
-			if (!hasNode(node) && !isCorrolary(node) && !isDownstreamFromCorrolary(node)) {
+			if (!hasNode(node) && !isCorollary(node) && !isDownstreamFromCorollary(node)) {
 				addNode(node, QVTscheduleUtil.getNodeRole(node));
 			}
 		}
@@ -171,9 +176,9 @@ class SpeculatingPartition extends AbstractPartition
 
 	protected void resolveRealizedEdges() {
 		for (@NonNull Edge edge : partitioner.getRealizedEdges()) {
-			if (!partitioner.hasRealizedEdge(edge) && (partitioner.getCorrolaryOf(edge) == null)) {
+			if (!partitioner.hasRealizedEdge(edge) && (partitioner.getCorollaryOf(edge) == null)) {
 				Node sourceNode = edge.getEdgeSource();
-				if (!sourceNode.isRealized() || isLocalCorrolary(sourceNode)) {
+				if (!sourceNode.isRealized() || isLocalCorollary(sourceNode)) {
 					Node targetNode = edge.getEdgeTarget();
 					if (!targetNode.isRealized()) {
 						if (!hasNode(sourceNode)) {
@@ -199,9 +204,9 @@ class SpeculatingPartition extends AbstractPartition
 					tracedInputNodes.add(edge.getEdgeTarget());
 				}
 			}
-			Node statusNode = partitioner.getStatusNode(traceNode);		// FIXME only optional because trace property can be missing
-			if (statusNode != null) {
-				addNode(statusNode, Role.REALIZED);
+			Node successNode = partitioner.getSuccessNode(traceNode);		// FIXME only optional because trace property can be missing
+			if (successNode != null) {
+				addNode(successNode, Role.REALIZED);
 			}
 		}
 	}

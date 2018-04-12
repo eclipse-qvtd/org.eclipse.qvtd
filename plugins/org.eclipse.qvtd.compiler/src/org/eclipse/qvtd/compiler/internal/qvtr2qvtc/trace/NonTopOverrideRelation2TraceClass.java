@@ -35,7 +35,7 @@ class NonTopOverrideRelation2TraceClass extends AbstractRelation2TraceClass
 		relation2traceInterface = new Relation2TraceInterface(this);
 		relation2invocationClass = new Relation2InvocationClass(this);
 		if (relation.getOverridden() == null) {
-			relation2traceInterface.getStatusProperty();
+			relation2traceInterface.getSuccessProperty();
 			//			relation2invocationClass.getResultProperty();
 		}
 		else {
@@ -45,12 +45,12 @@ class NonTopOverrideRelation2TraceClass extends AbstractRelation2TraceClass
 	}
 
 	@Override
-	protected @Nullable Property basicGetRelation2StatusProperty() {
-		Property property = super.basicGetRelation2StatusProperty();
+	protected @Nullable Property basicGetRelation2SuccessProperty() {
+		Property property = super.basicGetRelation2SuccessProperty();
 		if (property != null) {
 			return property;
 		}
-		return relation2traceInterface.basicGetRelation2StatusProperty();
+		return relation2traceInterface.basicGetRelation2SuccessProperty();
 	}
 
 	@Override
@@ -91,7 +91,7 @@ class NonTopOverrideRelation2TraceClass extends AbstractRelation2TraceClass
 	public @NonNull Property getStatusInterfaceProperty() {
 		Relation2TraceClass baseRelation2TraceClass = relationalTransformation2tracePackage.getRelation2TraceClass(QVTrelationUtil.getBaseRelation(relation));
 		if (baseRelation2TraceClass == this) {
-			return ClassUtil.nonNullState(relation2traceInterface.basicGetRelation2StatusProperty());
+			return ClassUtil.nonNullState(relation2traceInterface.basicGetRelation2SuccessProperty());
 		}
 		else {
 			return baseRelation2TraceClass.getStatusInterfaceProperty();
@@ -102,7 +102,7 @@ class NonTopOverrideRelation2TraceClass extends AbstractRelation2TraceClass
 	public @NonNull Property getStatusTraceProperty() {
 		Relation2TraceClass baseRelation2TraceClass = relationalTransformation2tracePackage.getRelation2TraceClass(QVTrelationUtil.getBaseRelation(relation));
 		if (baseRelation2TraceClass == this) {
-			return ClassUtil.nonNullState(basicGetRelation2StatusProperty());
+			return ClassUtil.nonNullState(basicGetRelation2SuccessProperty());
 		}
 		else {
 			return baseRelation2TraceClass.getStatusInterfaceProperty();

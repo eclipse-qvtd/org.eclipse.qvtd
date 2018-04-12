@@ -198,15 +198,7 @@ Workflow {
     	baseProjectName = "org.eclipse.ocl.pivot"
     	baseGenModelFile = "model/Pivot.genmodel"
     }
-//    component = @SubGenerateASModel { resourceSet = resourceSet
-//    	projectName = "org.eclipse.qvtd.pivot.schedule"
-//    	modelName = "Schedule"
-//    	projectPrefix = "Schedule"
-//    	superProjectName = "org.eclipse.qvtd.pivot.qvtcorebase"
-//    	superProjectPrefix = "QVTcoreBase"
-//    	modelPackageName = "org.eclipse.qvtd.pivot.schedule"
-//    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtrelation.util"
-//    }
+	component = @GenerateQVTdTraceModels {}
 	component = @GenerateQVTdScheduleModels {}
 	component = ConvertToUnixLineEndings {
 		directory = "org.eclipse.qvtd.pivot.qvtbase/model"

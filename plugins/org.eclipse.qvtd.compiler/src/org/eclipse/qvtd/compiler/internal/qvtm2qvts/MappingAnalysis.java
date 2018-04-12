@@ -34,7 +34,11 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.compiler.internal.qvts2trace.RuleAnalysis2TraceClass;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.UtilityAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleHeadAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -57,14 +61,16 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
+import com.google.common.collect.Iterables;
+
 /**
  * A MappingAnalysis provides the analysis a QVTc mapping.
  */
 public class MappingAnalysis extends RuleAnalysis
 {
-	public static abstract class AbstractQVTcoreExpressionAnalyzer extends ExpressionAnalyzer implements QVTcoreVisitor<@Nullable Node>
+	public static abstract class AbstractQVTcoreExpressionSynthesizer extends ExpressionSynthesizer implements QVTcoreVisitor<@Nullable Node>
 	{
-		protected AbstractQVTcoreExpressionAnalyzer(@NonNull RuleAnalysis context) {
+		protected AbstractQVTcoreExpressionSynthesizer(@NonNull RuleAnalysis context) {
 			super(context);
 		}
 
@@ -144,25 +150,25 @@ public class MappingAnalysis extends RuleAnalysis
 		}
 	}
 
-	public static class QVTcoreExpressionAnalyzer extends AbstractQVTcoreExpressionAnalyzer
+	public static class QVTcoreExpressionSynthesizer extends AbstractQVTcoreExpressionSynthesizer
 	{
-		protected QVTcoreExpressionAnalyzer(@NonNull RuleAnalysis context) {
+		protected QVTcoreExpressionSynthesizer(@NonNull RuleAnalysis context) {
 			super(context);
 		}
 
 		@Override
-		protected @NonNull ExpressionAnalyzer createConditionalExpressionAnalyzer() {
-			return new ConditionalExpressionAnalyzer(context);
+		protected @NonNull ExpressionSynthesizer createConditionalExpressionSynthesizer() {
+			return new ConditionalExpressionSynthesizer(context);
 		}
 
 		@Override
 		public @NonNull Node visitNavigationAssignment(@NonNull NavigationAssignment asNavigationAssignment) {
-			Node slotNode = analyze(asNavigationAssignment.getSlotExpression());
+			Node slotNode = synthesize(asNavigationAssignment.getSlotExpression());
 			assert slotNode.isClass();
 			Property property = QVTcoreUtil.getTargetProperty(asNavigationAssignment);
 			OCLExpression value = QVTcoreUtil.getValue(asNavigationAssignment);
 			helper.rewriteSafeNavigations(value);
-			Node targetNode = analyze(value);
+			Node targetNode = synthesize(value);
 			NavigableEdge navigationEdge = getNavigationEdge(slotNode, property, targetNode, asNavigationAssignment);
 			Node valueNode = navigationEdge.getEdgeTarget();
 			CompleteClass valueCompleteClass = valueNode.getCompleteClass();
@@ -196,9 +202,9 @@ public class MappingAnalysis extends RuleAnalysis
 		}
 	}
 
-	public static class ConditionalExpressionAnalyzer extends QVTcoreExpressionAnalyzer
+	public static class ConditionalExpressionSynthesizer extends QVTcoreExpressionSynthesizer
 	{
-		protected ConditionalExpressionAnalyzer(@NonNull RuleAnalysis context) {
+		protected ConditionalExpressionSynthesizer(@NonNull RuleAnalysis context) {
 			super(context);
 		}
 
@@ -285,30 +291,6 @@ public class MappingAnalysis extends RuleAnalysis
 		}
 	}
 
-	@Override
-	public void analyze() {
-		//
-		// Create the BLUE/CYAN guard nodes.
-		//
-		analyzeGuardVariables();
-		//
-		// Create the GREEN realized nodes.
-		//
-		analyzeRealizedVariables();		// FIXME bottom variables too
-		//
-		// Create the predicate/computation nodes and edges
-		//
-		analyzePredicates(guardPatterns);
-		analyzePredicates(bottomPatterns);
-		analyzeAssignmentValues();
-		analyzeComplexPredicates();
-		analyzeContainments();
-		//
-		MappingRegionAnalysis mappingRegionAnalysis = new MappingRegionAnalysis(region);
-		List<@NonNull Node> headNodes = mappingRegionAnalysis.initHeadNodes(null);
-		mappingRegionAnalysis.computeUtilities(headNodes);
-	}
-
 	/**
 	 * Create the BLUE/CYAN computations for the RHS of assignments.
 	 */
@@ -318,7 +300,7 @@ public class MappingAnalysis extends RuleAnalysis
 			assignmentSorter.addAll(ClassUtil.nullFree(bottomPattern.getAssignment()));
 		}
 		for (@NonNull Assignment assignment : assignmentSorter.getSortedAssignments()) {
-			assignment.accept(expressionAnalyzer);
+			assignment.accept(expressionSynthesizer);
 		}
 	}
 
@@ -357,9 +339,9 @@ public class MappingAnalysis extends RuleAnalysis
 				}
 			}
 			else { */
-			Node resultNode = conditionExpression.accept(expressionAnalyzer);
-			if ((resultNode != null) && !resultNode.isTrue()) {
-				Node trueNode = createTrueNode();
+			Node resultNode = conditionExpression.accept(expressionSynthesizer);
+			if (resultNode != null)  {
+				Node trueNode = createBooleanValueNode(true);
 				createPredicateEdge(resultNode, null, trueNode);
 			}
 			// FIXME ?? do includes() here explicitly
@@ -455,6 +437,30 @@ public class MappingAnalysis extends RuleAnalysis
 		}
 	}
 
+	@Override
+	public void analyzeMappingRegion() {
+		//
+		// Create the BLUE/CYAN guard nodes.
+		//
+		analyzeGuardVariables();
+		//
+		// Create the GREEN realized nodes.
+		//
+		analyzeRealizedVariables();		// FIXME bottom variables too
+		//
+		// Create the predicate/computation nodes and edges
+		//
+		analyzePredicates(guardPatterns);
+		analyzePredicates(bottomPatterns);
+		analyzeAssignmentValues();
+		analyzeComplexPredicates();
+		analyzeContainments();
+		//
+		Iterable<@NonNull Node> headNodes = RuleHeadAnalysis.computeRuleHeadNodes(scheduleManager, region, null);
+		Iterables.addAll(QVTscheduleUtil.Internal.getHeadNodesList(region), headNodes);
+		UtilityAnalysis.assignUtilities(region);
+	}
+
 	//
 	//	Install the targetVariable2sourceVariable2paths entries for a "boundVariable = referenceExpression" predicate,
 	//	where the referenceExpression involves zero or more PropertyCallExps of a VariableExp. boundVariable may be null
@@ -526,7 +532,7 @@ public class MappingAnalysis extends RuleAnalysis
 		if (bestInitExpression == null) {
 			return null;
 		}
-		Node bestInitNode = bestInitExpression.accept(expressionAnalyzer);
+		Node bestInitNode = bestInitExpression.accept(expressionSynthesizer);
 		assert bestInitNode != null;
 		/*		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {
 			if (QVTbaseUtil.isIdentification(((OperationCallExp)ownedInit).getReferredOperation())) {
@@ -552,7 +558,7 @@ public class MappingAnalysis extends RuleAnalysis
 		if (!initCompleteClass.conformsTo(variableCompleteClass)) {
 			Node castNode = createOldNode(variable);
 			Property castProperty = scheduleManager.getCastProperty(PivotUtil.getType(variable));
-			expressionAnalyzer.createCastEdge(bestInitNode, castProperty, castNode);
+			expressionSynthesizer.createCastEdge(bestInitNode, castProperty, castNode);
 			bestInitNode = castNode;
 		}
 		bestInitNode.addTypedElement(variable);
@@ -560,7 +566,7 @@ public class MappingAnalysis extends RuleAnalysis
 		for (@NonNull OCLExpression initExpression : expressions) {
 			if (initExpression != bestInitExpression) {
 				// FIXME if the extra init is a navigation we can add a navigation to the bestInitNode
-				Node initNode = bestInitExpression.accept(expressionAnalyzer);
+				Node initNode = bestInitExpression.accept(expressionSynthesizer);
 				assert initNode != null;
 				createEqualsEdge(bestInitNode, initNode);
 			}
@@ -685,7 +691,7 @@ public class MappingAnalysis extends RuleAnalysis
 			for (@NonNull NavigationAssignment navigationAssignment : navigationAssignments) {
 				Property navigationProperty = QVTcoreUtil.getTargetProperty(navigationAssignment);
 				if (source2targetProperty == navigationProperty) {		// ??? opposites ??? do they even exist ???
-					Node slotNode = expressionAnalyzer.analyze(navigationAssignment.getSlotExpression());
+					Node slotNode = expressionSynthesizer.synthesize(navigationAssignment.getSlotExpression());
 					if (slotNode == sourceNode) {
 						return true;
 					}
@@ -693,10 +699,5 @@ public class MappingAnalysis extends RuleAnalysis
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public void synthesizeTraceClass(@NonNull RuleAnalysis2TraceClass ruleAnalysis2traceClass) {
-		throw new UnsupportedOperationException();
 	}
 }

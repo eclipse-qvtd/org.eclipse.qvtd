@@ -15,6 +15,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
@@ -22,6 +23,8 @@ import org.eclipse.m2m.atl.dsls.core.EMFTCSInjector;
 import org.eclipse.m2m.atl.emftvm.compiler.AtlResourceFactoryImpl;
 import org.eclipse.m2m.atl.engine.parser.AtlParser;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
+import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
+import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
@@ -30,17 +33,20 @@ import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ConnectivityChecker;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
+import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
+import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -108,12 +114,37 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 	}
 
+	protected static class PivotQVTrelationToStringFactory implements QVTtemplateToStringVisitor.Factory
+	{
+		protected PivotQVTrelationToStringFactory() {
+			ToStringVisitor.addFactory(this);
+			QVTrelationToStringVisitor.FACTORY.getClass();
+		}
+
+		@Override
+		public @NonNull ToStringVisitor createToStringVisitor(@NonNull StringBuilder s) {
+			return new QVTrelationToStringVisitor(s);
+		}
+
+		@Override
+		public @NonNull EPackage getEPackage() {
+			EPackage eInstance = PivotPackage.eINSTANCE;
+			assert eInstance != null;
+			return eInstance;
+		}
+	}
+
 	protected @NonNull MyQVT createQVT(@NonNull String resultPrefix, @NonNull URI txURI) throws Exception {
 		ProjectManager testProjectManager = getTestProjectManager();
 		URI intermediateFileNamePrefixURI = getTestURI(resultPrefix);
 		URI srcFileURI = getTestFileURI(JavaFileUtil.TEST_SRC_FOLDER_NAME + "/");
 		URI binFileURI = getTestFileURI(JavaFileUtil.TEST_BIN_FOLDER_NAME + "/");
 		return new MyQVT(testProjectManager, getTestProject().getName(), getTestBundleURI(), txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
+	}
+
+	@Override
+	protected @NonNull TestFileSystemHelper getTestFileSystemHelper() {
+		return new QVTrelationTestFileSystemHelper();
 	}
 
 	/* (non-Javadoc)
@@ -149,19 +180,28 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
-		//		AbstractTransformer.EXCEPTIONS.setState(true);
-		//		AbstractTransformer.INVOCATIONS.setState(true);
+		AbstractTransformer.EXCEPTIONS.setState(true);
+		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		AbstractMerger.EARLY.setState(true);
 		//		AbstractMerger.FAILURE.setState(true);
 		//		AbstractMerger.LATE.setState(true);
+		//		TransformationPartitioner.CYCLES.setState(true);;
+		//		TransformationPartitioner.DISCRIMINATION.setState(true);;
+		//		TransformationPartitioner.PREDECESSORS.setState(true);;
+		//		TransformationPartitioner.SUCCESSORS.setState(true);;
+		//		QVTscheduleConstants.CONNECTION_CREATION.setState(true);;
 		ConnectivityChecker.CONNECTIVITY_CLASSDATUMS.setState(true);
 		ConnectivityChecker.CONNECTIVITY_CONNECTIONS.setState(true);
 		ConnectivityChecker.CONNECTIVITY_EDGES.setState(true);
 		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
+		//		QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
+		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
 		Class<? extends Transformer> txClass1 = null;
-		URI txURI1 = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/model/ATL2QVTr.qvtr", true);
-		MyQVT myQVT1 = createQVT("ATL2QVTr", txURI1);
+		URI txURI1 = getModelsURI("newATL2QVTr/NewATL2QVTr.qvtr");
+		MyQVT myQVT1 = createQVT("NewATL2QVTr", txURI1);
+		//		URI txURI1 = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/model/ATL2QVTr.qvtr", true);
+		//		MyQVT myQVT1 = createQVT("ATL2QVTr", txURI1);
 		myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//ATL");
 		myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//OCL");
 		myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//PrimitiveTypes");
@@ -203,6 +243,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			else {
 				myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
 			}
+			ToStringVisitor.addFactory(new PivotQVTrelationToStringFactory());
 			myQVT2.executeTransformation();
 			myQVT2.saveOutput("qvtr", txURI2, getModelsURI("families2persons/Families2Persons_expected.qvtras"), null);
 		}
@@ -310,10 +351,10 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT1 = createQVT("Families2Persons", getModelsURI("families2persons/Families2Persons_expected.qvtras"));
 		try {
 			txClass = myQVT1.buildTransformation("Persons", false);//,
-			myQVT1.assertRegionCount(RuleRegionImpl.class, 2);
+			myQVT1.assertRegionCount(RuleRegionImpl.class, 0);
 			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 0);
+			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 4);
 		}
 		finally {
 			myQVT1.dispose();
@@ -388,23 +429,23 @@ public class QVTrCompilerTests extends LoadTestCase
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		QVTr2QVTc.VARIABLES.setState(true);
 		MyQVT myQVT = createQVT("Forward2Reverse", getModelsURI("forward2reverse/Forward2Reverse.qvtr"));
-		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("reverse");
 			//
-			myQVT.createInterpretedExecutor(asTransformation);
+			/*			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("forward", getModelsURI("forward2reverse/samples/EmptyList.xmi"));
 			myQVT.createModel("reverse", getTestURI("EmptyList_Interpreted.xmi"));
 			myQVT.executeTransformation();
 			myQVT.saveOutput("reverse", getTestURI("EmptyList_Interpreted.xmi"), getModelsURI("forward2reverse/samples/EmptyList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
-			//
+			 */			//
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("forward", getModelsURI("forward2reverse/samples/OneElementList.xmi"));
 			myQVT.createModel("reverse", getTestURI("OneElementList_Interpreted.xmi"));
 			myQVT.executeTransformation();
 			myQVT.saveOutput("reverse", getTestURI("OneElementList_Interpreted.xmi"), getModelsURI("forward2reverse/samples/OneElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
 			//
-			myQVT.createInterpretedExecutor(asTransformation);
+			/*			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("forward", getModelsURI("forward2reverse/samples/TwoElementList.xmi"));
 			myQVT.createModel("reverse", getTestURI("TwoElementList_Interpreted.xmi"));
 			myQVT.executeTransformation();
@@ -415,7 +456,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT.createModel("reverse", getTestURI("ThreeElementList_Interpreted.xmi"));
 			myQVT.executeTransformation();
 			myQVT.saveOutput("reverse", getTestURI("ThreeElementList_Interpreted.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
-		}
+			 */		}
 		finally {
 			myQVT.dispose();
 		}
@@ -437,10 +478,11 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			txClass = myQVT1.buildTransformation("reverse", false);//,
 			//			Class<? extends Transformer> txClass = Forward2Reverse.class;
-			myQVT1.assertRegionCount(RuleRegionImpl.class, 2);
+			//			myQVT1.assertRegionCount(ActivatorRegionImpl.class, 2);
+			myQVT1.assertRegionCount(RuleRegionImpl.class, 1);
 			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 4);
+			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 7);
 		}
 		finally {
 			myQVT1.dispose();
@@ -523,10 +565,10 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT1 = createQVT("HierarchicalStateMachine2FlatStateMachine", getModelsURI("hstm2fstm/HierarchicalStateMachine2FlatStateMachine.qvtr"));
 		try {
 			txClass = myQVT1.buildTransformation("flat", false);//,
-			myQVT1.assertRegionCount(RuleRegionImpl.class, 3);
+			myQVT1.assertRegionCount(RuleRegionImpl.class, 0);
 			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 0);
+			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 6);
 		}
 		finally {
 			myQVT1.dispose();
@@ -571,10 +613,10 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT1 = createQVT("hstm2fstm", txURI);
 		try {
 			txClass = myQVT1.buildTransformation("flat", false);//,
-			myQVT1.assertRegionCount(RuleRegionImpl.class, 3);
+			myQVT1.assertRegionCount(RuleRegionImpl.class, 0);
 			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 0);
+			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 6);
 		}
 		finally {
 			myQVT1.dispose();
@@ -776,7 +818,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("stm");
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("seqDgm", getModelsURI("seq2stm/samples/Seq.xmi"));
-			myQVT.createModel(QVTscheduleConstants.MIDDLE_DOMAIN_NAME, getTestURI("Seq2Stmc_trace.xmi"));
+			myQVT.createModel(QVTbaseUtil.TRACE_TYPED_MODEL_NAME, getTestURI("Seq2Stmc_trace.xmi"));
 			myQVT.createModel("stm", getTestURI("Stmc_Interpreted.xmi"));
 			myQVT.executeTransformation();
 			myQVT.saveOutput("stm", getTestURI("Stmc_Interpreted.xmi"), getModelsURI("seq2stm/samples/Stmc_expected.xmi"), null);
@@ -800,10 +842,10 @@ public class QVTrCompilerTests extends LoadTestCase
 			txClass = myQVT1.buildTransformation("stm", false);//,
 			//					"SeqMM.SeqMMPackage", "PSeqToStm.PSeqToStmPackage");
 			//
-			myQVT1.assertRegionCount(RuleRegionImpl.class, 4);
+			myQVT1.assertRegionCount(RuleRegionImpl.class, 0);
 			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 0);
+			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 10);
 		}
 		finally {
 			myQVT1.dispose();

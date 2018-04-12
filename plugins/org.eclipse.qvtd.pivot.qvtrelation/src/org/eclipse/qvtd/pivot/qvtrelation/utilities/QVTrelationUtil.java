@@ -180,7 +180,7 @@ public class QVTrelationUtil extends QVTtemplateUtil
 		return ClassUtil.nonNullState(rKey.getIdentifies());
 	}
 
-	public static @NonNull Variable getOverriddenVariable(@NonNull Relation overriddenRelation, @NonNull Variable overridingRootVariable) {
+	public static @NonNull Variable getOverriddenVariable(@NonNull Relation overriddenRelation, @NonNull VariableDeclaration overridingRootVariable) {
 		RelationDomain overridingDomain = QVTrelationUtil.getRootVariableDomain(overridingRootVariable);
 		List<@NonNull Variable> rootVariables = QVTrelationUtil.getRootVariables(overridingDomain);
 		int rootVariableIndex = rootVariables.indexOf(overridingRootVariable);
@@ -207,7 +207,7 @@ public class QVTrelationUtil extends QVTtemplateUtil
 		return ClassUtil.nullFree(rTransformation.getOwnedKey());
 	}
 
-	public static @NonNull Iterable<@NonNull Property> getOwnedOppositeParts(@NonNull Key rKey) {
+	public static @NonNull Iterable<@NonNull Property> getOwnedOppositeParts(@NonNull Key rKey) {	// FIXME merge into a getNormalizedParts
 		return ClassUtil.nullFree(rKey.getOppositePart());
 	}
 
@@ -316,6 +316,10 @@ public class QVTrelationUtil extends QVTtemplateUtil
 			rootVariables.add(rootVariable);
 		}
 		return rootVariables;
+	}
+
+	public static @NonNull Variable getTraceVariable(@NonNull Relation relation) {
+		return ClassUtil.nonNullState(NameUtil.getNameable(getOwnedVariables(relation), TRACE_CLASS_NAME));
 	}
 
 	public static @NonNull RelationalTransformation getTransformation(@NonNull Relation rRelation) {

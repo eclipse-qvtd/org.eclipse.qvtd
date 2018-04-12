@@ -10,14 +10,18 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
-import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.CompilerOptions;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.MappingAnalysis.QVTcoreExpressionAnalyzer;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.DatumCaches;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.RuleAnalysis2TraceGroup;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.MappingAnalysis.QVTcoreExpressionSynthesizer;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -50,8 +54,8 @@ public class QVTcoreScheduleManager extends AbstractScheduleManager
 	}
 
 	@Override
-	public @NonNull ExpressionAnalyzer createExpressionAnalyzer(@NonNull RuleAnalysis ruleAnalysis) {
-		return new QVTcoreExpressionAnalyzer(ruleAnalysis);
+	public @NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis) {
+		return new QVTcoreExpressionSynthesizer(ruleAnalysis);
 	}
 
 	@Override
@@ -64,18 +68,13 @@ public class QVTcoreScheduleManager extends AbstractScheduleManager
 	}
 
 	@Override
-	public @NonNull Rule getReferredRule(@NonNull OCLExpression invocation) {
+	public @NonNull RuleAnalysis2TraceGroup createRuleAnalysis2TraceGroup(@NonNull RuleAnalysis ruleAnalysis) {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public @NonNull Domain getRootVariableDomain(@NonNull VariableDeclaration variable) {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
-	public @NonNull List<@NonNull VariableDeclaration> getRootVariables(@NonNull Domain domain) {
-		throw new UnsupportedOperationException();
+	public @NonNull TransformationAnalysis2TracePackage createTransformationAnalysis2TracePackage(@NonNull TransformationAnalysis transformationAnalysis) {
+		return new TransformationAnalysis2TracePackage(this, transformationAnalysis) {};
 	}
 
 	@Override
@@ -89,7 +88,12 @@ public class QVTcoreScheduleManager extends AbstractScheduleManager
 	}
 
 	@Override
-	public boolean isTopLevel(@NonNull Rule rule) {
-		throw new UnsupportedOperationException();
+	public boolean needsDiscrimination() {
+		return true;
+	}
+
+	@Override
+	public boolean useActivators() {
+		return false;
 	}
 }

@@ -19,7 +19,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
@@ -27,12 +29,12 @@ import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 /**
  * ScheduleCache provides the immutable caches used during the schedule index allocation.
  */
-public abstract class ScheduleCache extends Region2Depth
+public abstract class ScheduleCache
 {
 	/**
 	 * The overall RootScheduledRegion.
 	 */
-	protected final @NonNull ScheduledRegion rootScheduledRegion;
+	protected final @NonNull ScheduledRegion scheduledRegion;
 
 	/**
 	 * All transitively callable regions within the rootScheduledRegion (no OperationRegions).
@@ -65,17 +67,43 @@ public abstract class ScheduleCache extends Region2Depth
 	private final @NonNull Map<@NonNull DatumConnection<?>, @NonNull List<@NonNull Region>> connection2targetRegions = new HashMap<>();
 
 	/**
+	 * The immediate source region of each incoming connection.
+	 */
+	private final @NonNull Map<@NonNull Region, @NonNull Set<@NonNull Region>> target2sources;
+
+	/**
+	 * The immediate source regions for each set of regions forming a cycle.
+	 */
+	private final @NonNull Map<@NonNull Set<@NonNull Region>, @NonNull Set<@NonNull Region>> cycle2sources;
+
+	/**
+	 * The cycle in which each region may participate.
+	 */
+	private final Map<@NonNull Region, @NonNull Set<@NonNull Region>> region2cycle;
+
+	/**
+	 * Depth in the call tree of each region. For the most part all source elements are at lower depth than target elements,
+	 * however the call tree may have cycles which have the same depth throughout the cycle.
+	 *
+	 * FIXME this depth analysis has evolved from when scheduling made extensive use of MappingCalls. Now that
+	 * Connections have been introduced, is the depth still useful and does it repeat some of the intervalIndex analysis?
+	 */
+	private final @NonNull Map<@NonNull Region, @NonNull Integer> region2depth;
+
+	/**
+	 * The parents (invokers) of each region.
+	 */
+	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Region>> region2parents;
+
+	/**
 	 * The regions that have no outgoing passed connections.
 	 */
 	private final @NonNull Set<@NonNull Region> unpassedRegions = new HashSet<>();
 
-	protected ScheduleCache(@NonNull ScheduledRegion rootScheduledRegion) {
-		this.rootScheduledRegion = rootScheduledRegion;
-		this.callableRegions = analyzeRegions(rootScheduledRegion, new ArrayList<>());
+	protected ScheduleCache(@NonNull ScheduledRegion scheduledRegion) {
+		this.scheduledRegion = scheduledRegion;
+		this.callableRegions = analyzeRegions(scheduledRegion, new ArrayList<>());
 		Collections.sort(this.callableRegions, NameUtil.NAMEABLE_COMPARATOR);
-		for (@NonNull Region region : this.callableRegions) {
-			getRegionDepth(region);
-		}
 		//
 		// Initialize the incoming/looping/outgoing connection analyses of each region
 		//
@@ -89,6 +117,27 @@ public abstract class ScheduleCache extends Region2Depth
 		for (@NonNull Region region : this.callableRegions) {
 			analyzeSourcesAndTargets(region);
 		}
+		//
+		//	Identify all the source regions for each target region.
+		//
+		this.target2sources = analyzeSources();
+		//
+		//	Identify all the cycles and their immedite sources.
+		//
+		this.cycle2sources = analyzeCycleSources();
+		//
+		//	Identify all the region that participate in cycles.
+		//
+		this.region2cycle = analyzeCycleElements();
+		//
+		//	Determine the call tree depth of each connection / region.
+		//
+		this.region2depth = analyzeDepths();
+		//
+		//	Determine the call tree parents of each region.
+		//
+		this.region2parents = analyzeParents();
+		//		System.out.println(toString());
 	}
 
 	/**
@@ -129,6 +178,132 @@ public abstract class ScheduleCache extends Region2Depth
 		region2incomingConnections.put(region, incomingConnections);
 		region2loopingConnections.put(region, loopingConnections);
 		region2outgoingConnections.put(region, outgoingConnections);
+	}
+
+	//
+	//	Determine the cycles and their sources.
+	//
+	private @NonNull Map<@NonNull Region, @NonNull Set<@NonNull Region>> analyzeCycleElements() {
+		Map<@NonNull Region, @NonNull Set<@NonNull Region>> region2cycle = new HashMap<>();
+		for (@NonNull Set<@NonNull Region> cycle : cycle2sources.keySet()) {
+			for (@NonNull Region region : cycle) {
+				region2cycle.put(region, cycle);
+			}
+		}
+		return region2cycle;
+	}
+
+	//
+	//	Determine the cycles and their sources.
+	//
+	private @NonNull Map<@NonNull Set<@NonNull Region>, @NonNull Set<@NonNull Region>> analyzeCycleSources() {
+		Map<@NonNull Set<@NonNull Region>, @NonNull Set<@NonNull Region>> cycle2sources = new HashMap<>();
+		Map<@NonNull Region, @NonNull Set<@NonNull Region>> target2sourcesClosure = CompilerUtil.computeClosure(target2sources);
+		Map<@NonNull Region, @NonNull Set<@NonNull Region>> source2targetsClosure = CompilerUtil.computeInverseClosure(target2sourcesClosure);
+		for (@NonNull Region region : callableRegions) {
+			Set<@NonNull Region> sourceRegions = target2sourcesClosure.get(region);
+			Set<@NonNull Region> targetRegions = source2targetsClosure.get(region);
+			assert (sourceRegions != null) && (targetRegions != null);
+			Set<@NonNull Region> cyclicRegions = new HashSet<>(sourceRegions);
+			cyclicRegions.retainAll(targetRegions);
+			if (!cyclicRegions.isEmpty() && !cycle2sources.containsKey(cyclicRegions)) {
+				Set<@NonNull Region> cycleSources = new HashSet<>();
+				for (@NonNull Region cyclicRegion : cyclicRegions) {
+					Set<@NonNull Region> sources = target2sources.get(cyclicRegion);
+					assert sources != null;
+					cycleSources.addAll(sources);
+				}
+				cycleSources.removeAll(cyclicRegions);
+				cycle2sources.put(cyclicRegions, cycleSources);
+			}
+		}
+		return cycle2sources;
+	}
+
+	private @NonNull Map<@NonNull Region, @NonNull Integer> analyzeDepths() {
+		//
+		//	Loop to allocate connection/node element to each depth so that each element has as few sources at greater depth.
+		//
+		Map<@NonNull Region, @NonNull Integer> region2depth = new HashMap<>();
+		Set<@NonNull Region> allRegions = new HashSet<>(target2sources.keySet());
+		Set<@NonNull Region> pendingRegions = new HashSet<>(allRegions);
+		Set<@NonNull Set<@NonNull Region>> pendingCycles = new HashSet<>(cycle2sources.keySet());
+		region2depth.put(scheduledRegion, 0);
+		for (int depth = 1; !pendingRegions.isEmpty(); depth++) {
+			Set<@NonNull Region> readyRegions = new HashSet<>(region2depth.keySet());
+			Set<@NonNull Region> nowReadyRegions = new HashSet<>();
+			Set<@NonNull Set<@NonNull Region>> nowReadyCycles = new HashSet<>();
+			for (@NonNull Region targetRegion : pendingRegions) {
+				Set<@NonNull Region> targetSourceRegions = new HashSet<>(target2sources.get(targetRegion));
+				assert targetSourceRegions != null;
+				targetSourceRegions.removeAll(readyRegions);
+				if (targetSourceRegions.isEmpty()) {
+					nowReadyRegions.add(targetRegion);
+				}
+			}
+			for (@NonNull Set<@NonNull Region> targetCycle : pendingCycles) {
+				Set<@NonNull Region> targetSourceRegions = new HashSet<>(cycle2sources.get(targetCycle));
+				assert targetSourceRegions != null;
+				targetSourceRegions.removeAll(readyRegions);
+				if (targetSourceRegions.isEmpty()) {
+					nowReadyRegions.addAll(targetCycle);
+					nowReadyCycles.add(targetCycle);
+				}
+			}
+			if (nowReadyRegions.size() > 0) {			// one or more elements has all sources at lower depths.
+				for (@NonNull Region nowReadyElement : nowReadyRegions) {
+					region2depth.put(nowReadyElement, depth);
+					pendingRegions.remove(nowReadyElement);
+				}
+				pendingCycles.removeAll(nowReadyCycles);
+			}
+			else {										// else choose an elements with fewest greater depth sources.
+				Region fewestBadSourceElement = null;
+				int badSources = Integer.MAX_VALUE;
+				for (@NonNull Region targetElement : pendingRegions) {
+					Set<@NonNull Element> targetSourceElements = new HashSet<>(target2sources.get(targetElement));
+					assert targetSourceElements != null;
+					targetSourceElements.removeAll(readyRegions);
+					int targetSourceElementsSize = targetSourceElements.size();
+					if ((fewestBadSourceElement == null) || (targetSourceElementsSize < badSources)) {
+						badSources = targetSourceElementsSize;
+						fewestBadSourceElement = targetElement;
+					}
+				}
+				assert fewestBadSourceElement != null;
+				region2depth.put(fewestBadSourceElement, depth);
+				pendingRegions.remove(fewestBadSourceElement);
+			}
+		}
+		return region2depth;
+	}
+
+	private @NonNull Map<@NonNull Region, @NonNull List<@NonNull Region>> analyzeParents() {
+		Map<@NonNull Region, @NonNull List<@NonNull Region>> region2parents = new HashMap<>();
+		region2parents.put(scheduledRegion, Collections.emptyList());
+		for (@NonNull Region targetRegion : callableRegions) {
+			Set<@NonNull Region> parentSet = new HashSet<>();
+			Set<@NonNull Region> sourceRegions = target2sources.get(targetRegion);
+			assert sourceRegions != null;
+			for (@NonNull Region sourceRegion : sourceRegions) {
+				Set<@NonNull Region> sourceCycle = region2cycle.get(sourceRegion);
+				if (sourceCycle != null) {
+					Set<@NonNull Region> cycleSources = cycle2sources.get(sourceCycle);
+					assert cycleSources != null;
+					parentSet.addAll(cycleSources);
+				}
+				else {
+					parentSet.add(sourceRegion);
+				}
+			}
+			if (parentSet.isEmpty()) {
+				parentSet.add(scheduledRegion);
+			}
+			List<@NonNull Region> parentList = new ArrayList<>(parentSet);
+			Collections.sort(parentList, NameUtil.NAMEABLE_COMPARATOR);
+			region2parents.put(targetRegion, parentList);
+		}
+		return region2parents;
 	}
 
 	private  @NonNull List<@NonNull Region> analyzeRegions(@NonNull ScheduledRegion outerScheduledRegion, @NonNull List<@NonNull Region> allCallableRegions) {
@@ -184,6 +359,59 @@ public abstract class ScheduleCache extends Region2Depth
 		}
 	}
 
+	//
+	//	Identify all the source regions for each target region.
+	//
+	private @NonNull Map<@NonNull Region, @NonNull Set<@NonNull Region>> analyzeSources() {
+		Map<@NonNull Region, @NonNull Set<@NonNull Region>> target2sources = new HashMap<>();
+		for (@NonNull Region region : callableRegions) {
+			target2sources.put(region, new HashSet<>());
+		}
+		for (@NonNull Region region : callableRegions) {
+			Set<@NonNull Region> sources = new HashSet<>();
+			target2sources.put(region, sources);
+			List<@NonNull DatumConnection<?>> incomingConnections = region2incomingConnections.get(region);
+			//			List<@NonNull DatumConnection<?>> loopingConnections = region2loopingConnections.get(region);
+			//			List<@NonNull DatumConnection<?>> outgoingConnections = region2outgoingConnections.get(region);
+			assert incomingConnections != null;
+			for (@NonNull DatumConnection<?> incomingConnection : incomingConnections) {
+				List<@NonNull Region> sourceRegions = connection2sourceRegions.get(incomingConnection);
+				assert sourceRegions != null;
+				sources.addAll(sourceRegions);
+			}
+		}
+		return target2sources;
+	}
+
+	public Region getCommonRegion(@NonNull Region firstRegion, @NonNull Region secondRegion) {
+		Region thisRegion = firstRegion;
+		Region thatRegion = secondRegion;
+		while (thisRegion != thatRegion) {
+			int thisDepth = getRegionDepth(thisRegion);
+			int thatDepth = getRegionDepth(thatRegion);
+			if (thisDepth > thatDepth) {
+				thisRegion = getMinimumDepthParentRegion(thisRegion);
+				if (thisRegion == null) {
+					return null;
+				}
+			}
+			else if (thatDepth > thisDepth) {
+				thatRegion = getMinimumDepthParentRegion(thatRegion);
+				if (thatRegion == null) {
+					return null;
+				}
+			}
+			else {
+				thisRegion = getMinimumDepthParentRegion(thisRegion);
+				thatRegion = getMinimumDepthParentRegion(thatRegion);
+				if ((thisRegion == null) || (thatRegion == null)) {
+					return null;
+				}
+			}
+		}
+		return thisRegion;
+	}
+
 	protected @NonNull Iterable<? extends @NonNull DatumConnection<?>> getConnections() {
 		return connection2targetRegions.keySet();
 	}
@@ -200,10 +428,31 @@ public abstract class ScheduleCache extends Region2Depth
 		return loopingConnections;
 	}
 
+	public Region getMinimumDepthParentRegion(@NonNull Region childRegion) {
+		Region minimumDepthParentRegion = null;
+		int minimumDepth = Integer.MAX_VALUE;
+		List<@NonNull Region> parentRegions = region2parents.get(childRegion);
+		assert parentRegions != null;
+		for (@NonNull Region parentRegion : parentRegions) {
+			int parentDepth = getRegionDepth(parentRegion);
+			if ((minimumDepthParentRegion == null) || (parentDepth < minimumDepth)) {
+				minimumDepthParentRegion = parentRegion;
+				minimumDepth = parentDepth;
+			}
+		}
+		return minimumDepthParentRegion;
+	}
+
 	protected @NonNull Iterable<@NonNull DatumConnection<?>> getOutgoingConnections(@NonNull Region region) {
 		List<@NonNull DatumConnection<?>> outgoingConnections = region2outgoingConnections.get(region);
 		assert outgoingConnections != null;
 		return outgoingConnections;
+	}
+
+	private int getRegionDepth(@NonNull Region region) {
+		Integer depth = region2depth.get(region);
+		assert depth != null;
+		return depth;
 	}
 
 	protected @NonNull Iterable<@NonNull Region> getSourceRegions(@NonNull DatumConnection<?> connection) {
@@ -220,5 +469,19 @@ public abstract class ScheduleCache extends Region2Depth
 
 	protected boolean isPassed(@NonNull Region region) {
 		return !unpassedRegions.contains(region);
+	}
+
+	@Override
+	public @NonNull String toString() {
+		StringBuilder s = new StringBuilder();
+		List<@NonNull Region> list = new ArrayList<>(region2depth.keySet());
+		Collections.sort(list, NameUtil.NAMEABLE_COMPARATOR);
+		for (@NonNull Region entry : list) {
+			if (s.length() > 0) {
+				s.append("\n");
+			}
+			s.append(region2depth.get(entry) + " : " + entry.getName());
+		}
+		return s.toString();
 	}
 }

@@ -332,7 +332,7 @@ public class QVTr2UMLX
 			Pattern qvtrWhen = qvtrRelation.getWhen();
 			if (qvtrWhen != null) {
 				for (@NonNull Predicate qvtrPredicate : QVTrelationUtil.getOwnedPredicates(qvtrWhen)) {
-					QVTrelationUtil.getConditionExpression(qvtrPredicate).accept(this);
+					QVTrelationUtil.getOwnedConditionExpression(qvtrPredicate).accept(this);
 				}
 			}
 			//
@@ -341,7 +341,7 @@ public class QVTr2UMLX
 			Pattern qvtrWhere = qvtrRelation.getWhere();
 			if (qvtrWhere != null) {
 				for (@NonNull Predicate qvtrPredicate : QVTrelationUtil.getOwnedPredicates(qvtrWhere)) {
-					QVTrelationUtil.getConditionExpression(qvtrPredicate).accept(this);
+					QVTrelationUtil.getOwnedConditionExpression(qvtrPredicate).accept(this);
 				}
 			}
 			return relDiagram;

@@ -16,24 +16,25 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionHelper;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.StatusNode;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
- * The SpeculatedPartition completes the speculation by realizing the corrolaries of the speculation.
+ * The SpeculatedPartition completes the speculation by realizing the corollaries of the speculation.
  */
 class SpeculatedPartition extends AbstractPartition
 {
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
 
-	public SpeculatedPartition(@NonNull MappingPartitioner partitioner) {
-		super(partitioner);
+	public SpeculatedPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
+		super(partitioner, reachabilityForest);
 		//
 		//	The realized trace nodes becomes a speculated head nodes.
 		//
@@ -43,13 +44,13 @@ class SpeculatedPartition extends AbstractPartition
 		//
 		resolveRealizedOutputNodes();
 		//
-		//	The non-corrolary, non-realized ends of all realized edges are added as is.
+		//	The non-corollary, non-realized ends of all realized edges are added as is.
 		//
 		resolveRealizedEdges();
 		//
 		//	Add the outstanding predicates that can be checked by this partition.
 		//
-		resolveTrueNodes();
+		//		resolveTrueNodes();
 		//
 		//	Ensure that the predecessors of each node are included in the partition.
 		//
@@ -65,7 +66,7 @@ class SpeculatedPartition extends AbstractPartition
 		//
 		//	Add the success predicates.
 		//
-		resolveStatusNodes();
+		resolveSuccessNodes();
 	}
 
 
@@ -80,8 +81,8 @@ class SpeculatedPartition extends AbstractPartition
 		return new PartitioningVisitor(new RegionHelper<>(scheduleManager, partialRegion), this)
 		{
 			@Override
-			public @Nullable Element visitStatusNode(@NonNull StatusNode node) {
-				Node partialNode = regionHelper.createTrueNode();
+			public @Nullable Element visitSuccessNode(@NonNull SuccessNode node) {
+				Node partialNode = regionHelper.createBooleanValueNode(true);
 				addNode(node, partialNode);
 				return partialNode;
 			}
@@ -104,11 +105,11 @@ class SpeculatedPartition extends AbstractPartition
 
 	protected void resolveRealizedEdges() {
 		for (@NonNull Edge edge : partitioner.getRealizedEdges()) {
-			if (!partitioner.hasRealizedEdge(edge) && (partitioner.getCorrolaryOf(edge) == null)) {
+			if (!partitioner.hasRealizedEdge(edge) && (partitioner.getCorollaryOf(edge) == null)) {
 				Node sourceNode = edge.getEdgeSource();
-				if (!sourceNode.isPredicated() || partitioner.hasPredicatedNode(sourceNode)) { // || isLocalCorrolary(sourceNode)) {
+				if (!sourceNode.isPredicated() || partitioner.hasPredicatedNode(sourceNode)) { // || isLocalCorollary(sourceNode)) {
 					Node targetNode = edge.getEdgeTarget();
-					if (!targetNode.isPredicated() || partitioner.hasPredicatedNode(targetNode)) { // || isLocalCorrolary(sourceNode)) {
+					if (!targetNode.isPredicated() || partitioner.hasPredicatedNode(targetNode)) { // || isLocalCorollary(sourceNode)) {
 						if (!hasNode(sourceNode)) {
 							addNode(sourceNode, QVTscheduleUtil.getNodeRole(sourceNode));
 						}
@@ -122,19 +123,19 @@ class SpeculatedPartition extends AbstractPartition
 	}
 
 	protected void resolveRealizedOutputNodes() {
-		for (@NonNull Node node : partitioner.getCorrolaryNodes()) {
-			if (!hasNode(node)) {
+		for (@NonNull Node node : partitioner.getCorollaryNodes()) {
+			if (!hasNode(node) && !node.isSuccess()) {
 				addNode(node, QVTscheduleUtil.getNodeRole(node));
 			}
 		}
 	}
 
-	protected void resolveStatusNodes() {
+	protected void resolveSuccessNodes() {
 		for (@NonNull Node traceNode : partitioner.getTraceNodes()) {
 			assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
-			Node statusNode = partitioner.getStatusNode(traceNode);		// FIXME only optional because trace property can be missing
-			if (statusNode != null) {
-				addNode(statusNode, Role.PREDICATED);
+			Node successNode = partitioner.getSuccessNode(traceNode);		// FIXME only optional because trace property can be missing
+			if (successNode != null) {
+				addNode(successNode, Role.PREDICATED);
 			}
 		}
 	}
@@ -144,9 +145,9 @@ class SpeculatedPartition extends AbstractPartition
 			assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
 			//		if (!hasNode(traceNode)) {
 			addNode(traceNode, Role.PREDICATED);
-			Node statusNode = partitioner.getStatusNode(traceNode);		// FIXME only optional because trace property can be missing
-			if (statusNode != null) {
-				addNode(statusNode, Role.PREDICATED);
+			Node successNode = partitioner.getSuccessNode(traceNode);		// FIXME only optional because trace property can be missing
+			if (successNode != null) {
+				addNode(successNode, Role.PREDICATED);
 			}
 		}
 		for (@NonNull Node traceNode : partitioner.getTraceNodes()) {

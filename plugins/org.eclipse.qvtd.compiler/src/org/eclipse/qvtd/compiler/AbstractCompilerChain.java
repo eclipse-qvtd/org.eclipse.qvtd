@@ -39,10 +39,10 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTc2QVTu;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTi;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.QVTs2QVTs;
@@ -243,11 +243,11 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				ScheduleManager scheduleManager = qvtm2qvts.getScheduleManager();
 				sResource.getContents().add(scheduleManager.getScheduleModel());
 				scheduleManager.addTransformation(asTransformation);
-				List<@NonNull MappingRegion> activeRegions = qvtm2qvts.transform();
+				Map<@NonNull ScheduledRegion, Iterable<@NonNull MappingRegion>> scheduledRegion2activeRegions = qvtm2qvts.transform();
 				throwCompilerChainExceptionForErrors();
 				String rootName = ClassUtil.nonNullState(pResource.getURI().trimFileExtension().trimFileExtension().lastSegment());
 				QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, scheduleManager, rootName);
-				List<@NonNull ScheduledRegion> scheduledRegions = qvts2qvts.transform(scheduleManager, activeRegions);
+				Iterable<@NonNull ScheduledRegion> scheduledRegions = qvts2qvts.transform(scheduleManager, scheduledRegion2activeRegions);
 				for (@NonNull ScheduledRegion scheduledRegion : scheduledRegions) {
 					scheduledRegion.setReferredTransformation(asTransformation);
 				}
