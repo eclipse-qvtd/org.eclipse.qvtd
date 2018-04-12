@@ -1,11 +1,11 @@
 /**
  * <copyright>
  *
- * Copyright (c) 2013, 2017 Willink Transformations and others.
+ * Copyright (c) 2013, 2018 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v2.0
+ * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v20.html
+ * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
@@ -21,24 +21,24 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
-import org.eclipse.qvtd.pivot.qvtschedule.StatusNode;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Success Node</b></em>'.
+ * An implementation of the model object '<em><b>Success Edge</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class StatusNodeImpl extends NodeImpl implements StatusNode {
+public class SuccessEdgeImpl extends NavigationEdgeImpl implements SuccessEdge {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected StatusNodeImpl() {
+	protected SuccessEdgeImpl() {
 		super();
 	}
 
@@ -49,7 +49,7 @@ public class StatusNodeImpl extends NodeImpl implements StatusNode {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTschedulePackage.Literals.STATUS_NODE;
+		return QVTschedulePackage.Literals.SUCCESS_EDGE;
 	}
 
 	/**
@@ -59,16 +59,11 @@ public class StatusNodeImpl extends NodeImpl implements StatusNode {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitStatusNode(this);
+		return (R) ((QVTscheduleVisitor<?>)visitor).visitSuccessEdge(this);
 	}
 
 	@Override
-	public boolean isMatched() {
+	public boolean isSuccess() {
 		return true;
 	}
-
-	@Override
-	public boolean isStatus() {
-		return true;
-	}
-} //SuccessNodeImpl
+} //SuccessEdgeImpl

@@ -515,5 +515,4 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	public boolean isUnboxed() {
 		return (ownedInitValue != null) && ownedInitValue.isUnboxed();
 	}
-
 } //CGPropertyAssignmentImpl

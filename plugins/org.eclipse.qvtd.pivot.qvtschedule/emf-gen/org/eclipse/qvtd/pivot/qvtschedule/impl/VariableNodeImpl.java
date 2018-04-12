@@ -170,12 +170,15 @@ public abstract class VariableNodeImpl extends NodeImpl implements VariableNode 
 	@Override
 	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
 		VariableNodeImpl node = (VariableNodeImpl)super.createNode(nodeRole, region);
-		node.initializeVariable(region, getReferredVariable());
+		VariableDeclaration referredVariable = getReferredVariable();
+		if (referredVariable != null) {
+			node.initializeVariable(region, referredVariable);
+		}
 		return node;
 	}
 
 	@Override
-	public void initializeVariable(@NonNull Region region, /*@NonNull*/ VariableDeclaration variable) {
+	public void initializeVariable(@NonNull Region region, @NonNull VariableDeclaration variable) {
 		assert variable != null;
 		setReferredVariable(variable);
 		assert variable.eContainer() != null;

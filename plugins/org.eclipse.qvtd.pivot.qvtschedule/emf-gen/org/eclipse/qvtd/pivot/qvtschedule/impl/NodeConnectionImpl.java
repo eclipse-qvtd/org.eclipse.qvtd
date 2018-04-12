@@ -235,6 +235,7 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 		}
 		mergeRole(newConnectionRole);
 		targetEnd2role.put(targetNode, newConnectionRole);
+		assert targetNode.getIncomingConnection() == null;
 		targetNode.setIncomingConnection(this);
 		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
 	}

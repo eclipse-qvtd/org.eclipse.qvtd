@@ -730,6 +730,11 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	}
 
 	@Override
+	public boolean isSuccess() {
+		return false;
+	}
+
+	@Override
 	public boolean isUnconditional() {
 		return QVTscheduleUtil.getSourceNode(this).isUnconditional() && QVTscheduleUtil.getTargetNode(this).isUnconditional();
 	}

@@ -404,46 +404,54 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		Set<@NonNull Node> bestToOneSubRegion = null;
 		Node bestNamingNode = null;
 		int bestToOneSubRegionSize = 0;
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(this)) {
-			if (node.isNew() || node.isPredicated() || node.isSpeculated()) {
-				Set<@NonNull Node> toOneSubRegion = computeToOneSubRegion(new HashSet<>(), node);
-				int toOneSubRegionSize = toOneSubRegion.size();
-				Boolean isBetter = null;
-				if ((bestToOneSubRegion == null) || (bestNamingNode == null)) {
-					isBetter = true;
-				}
-				else if (toOneSubRegionSize > bestToOneSubRegionSize) {
-					isBetter = true;
-				}
-				else if (toOneSubRegionSize < bestToOneSubRegionSize) {
-					isBetter = false;
-				}
-				else if (node.isNew() && !bestNamingNode.isNew()) {
-					isBetter = true;
-				}
-				else {
-					int bestRealizedNavigationEdgesSize = Iterables.size(bestNamingNode.getRealizedNavigationEdges());
-					int realizedNavigationEdgesSize = Iterables.size(node.getRealizedNavigationEdges());
-					if (realizedNavigationEdgesSize > bestRealizedNavigationEdgesSize) {
+		for (@NonNull Node node : QVTscheduleUtil.getHeadNodes(this)) {
+			if (node.isOld() && !node.isConstant()) {
+				bestNamingNode = node;
+				break;
+			}
+		}
+		if (bestNamingNode == null) {
+			for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(this)) {
+				if (node.isNew() || node.isPredicated() || node.isSpeculated()) {
+					Set<@NonNull Node> toOneSubRegion = computeToOneSubRegion(new HashSet<>(), node);
+					int toOneSubRegionSize = toOneSubRegion.size();
+					Boolean isBetter = null;
+					if ((bestToOneSubRegion == null) || (bestNamingNode == null)) {
 						isBetter = true;
 					}
-					else if (realizedNavigationEdgesSize < bestRealizedNavigationEdgesSize) {
+					else if (toOneSubRegionSize > bestToOneSubRegionSize) {
+						isBetter = true;
+					}
+					else if (toOneSubRegionSize < bestToOneSubRegionSize) {
 						isBetter = false;
 					}
+					else if (node.isNew() && !bestNamingNode.isNew()) {
+						isBetter = true;
+					}
 					else {
-						int diff = ClassUtil.safeCompareTo(bestNamingNode.getCompleteClass().getName(), node.getCompleteClass().getName());
-						if (diff > 0) {
+						int bestRealizedNavigationEdgesSize = Iterables.size(bestNamingNode.getRealizedNavigationEdges());
+						int realizedNavigationEdgesSize = Iterables.size(node.getRealizedNavigationEdges());
+						if (realizedNavigationEdgesSize > bestRealizedNavigationEdgesSize) {
 							isBetter = true;
 						}
-						else if (diff < 0) {
+						else if (realizedNavigationEdgesSize < bestRealizedNavigationEdgesSize) {
 							isBetter = false;
 						}
+						else {
+							int diff = ClassUtil.safeCompareTo(bestNamingNode.getCompleteClass().getName(), node.getCompleteClass().getName());
+							if (diff > 0) {
+								isBetter = true;
+							}
+							else if (diff < 0) {
+								isBetter = false;
+							}
+						}
 					}
-				}
-				if (isBetter == Boolean.TRUE) {
-					bestToOneSubRegion = toOneSubRegion;
-					bestToOneSubRegionSize = toOneSubRegionSize;
-					bestNamingNode = node;
+					if (isBetter == Boolean.TRUE) {
+						bestToOneSubRegion = toOneSubRegion;
+						bestToOneSubRegionSize = toOneSubRegionSize;
+						bestNamingNode = node;
+					}
 				}
 			}
 		}
@@ -645,6 +653,9 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 
 	@Override
 	public @NonNull Iterable<@NonNull DatumConnection<?>> getIncomingConnections() {		// FIXME cache
+		if ("«speculation» mapOclExpression_qvtr".equals(getName())) {
+			getClass();
+		}
 		List<@NonNull DatumConnection<?>> connections = new ArrayList<>();
 		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(this)) {
 			NodeConnection connection = headNode.getIncomingPassedConnection();
@@ -653,7 +664,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 			}
 		}
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(this)) {
-			if (node.isDependency() || node.isPattern()) {
+			/*			if (node.isDependency() || node.isPattern()) {
 				if (node.isLoaded() || node.isSpeculated() || node.isPredicated()) {	// A DataType may be loaded but subject to an edge predication
 					NodeConnection connection = node.getIncomingUsedConnection();
 					if ((connection != null) && !connections.contains(connection)) {
@@ -661,12 +672,12 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 					}
 				}
 			}
-			else if (node.isTrue()) {		// A <<success>> node
-				NodeConnection connection = node.getIncomingUsedConnection();
-				if ((connection != null) && !connections.contains(connection)) {
-					connections.add(connection);
-				}
+			else if (node.isTrue()) {		// A <<success>> node */
+			NodeConnection connection = node.getIncomingUsedConnection();
+			if ((connection != null) && !connections.contains(connection)) {
+				connections.add(connection);
 			}
+			//			}
 		}
 		for (@NonNull NavigableEdge edge : getPredicatedNavigationEdges()) {
 			EdgeConnection connection = edge.getIncomingConnection();
@@ -987,11 +998,6 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 
 	protected String getSymbolNameSuffix() {
 		return QVTscheduleConstants.REGION_SYMBOL_NAME_SUFFIX;
-	}
-
-	@Override
-	public final @NonNull Iterable<@NonNull Node> getTrueNodes() {
-		return Iterables.filter(QVTscheduleUtil.getOwnedNodes(this), QVTscheduleUtil.IsTrueNodePredicate.INSTANCE);
 	}
 
 	@Override

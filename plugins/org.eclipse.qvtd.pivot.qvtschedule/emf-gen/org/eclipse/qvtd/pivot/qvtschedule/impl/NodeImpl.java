@@ -1090,12 +1090,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public boolean isStatus() {
-		return false;
-	}
-
-	@Override
-	public boolean isTrue() {
+	public boolean isSuccess() {
 		return false;
 	}
 
@@ -1169,7 +1164,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	public void setLabel(@NonNull GraphStringBuilder s) {		// FIXME LabelVisitor
 		StringBuilder n = new StringBuilder();
 		n.append(getName());
-		if (!isExplicitNull() && !isStatus() && !isTrue()) {
+		if (!isExplicitNull() && !isSuccess()) {
 			n.append("\\n");
 			n.append(PrettyPrinter.printType(getCompleteClass().getPrimaryClass()));
 		}

@@ -11,13 +11,13 @@
 package org.eclipse.qvtd.xtext.qvtrelationcs;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Domain CS</b></em>'.
+ * @extends org.eclipse.ocl.pivot.utilities.Nameable
  * <!-- end-user-doc -->
  *
  * <p>
@@ -35,10 +35,10 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS()
- * @model superTypes="org.eclipse.qvtd.xtext.qvtrelationcs.AbstractDomainCS org.eclipse.ocl.pivot.Nameable"
+ * @model
  * @generated
  */
-public interface DomainCS extends AbstractDomainCS, Nameable {
+public interface DomainCS extends AbstractDomainCS, org.eclipse.ocl.pivot.utilities.Nameable {
 	/**
 	 * Returns the value of the '<em><b>Implemented By</b></em>' attribute.
 	 * <!-- begin-user-doc -->

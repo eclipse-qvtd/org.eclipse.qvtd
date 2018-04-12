@@ -1171,7 +1171,6 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		collectionTemplateCSEClass.getESuperTypes().add(this.getTemplateCS());
 		defaultValueCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 		domainCSEClass.getESuperTypes().add(this.getAbstractDomainCS());
-		domainCSEClass.getESuperTypes().add(thePivotPackage.getNameable());
 		domainPatternCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 		elementTemplateCSEClass.getESuperTypes().add(this.getTemplateVariableCS());
 		keyDeclCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());

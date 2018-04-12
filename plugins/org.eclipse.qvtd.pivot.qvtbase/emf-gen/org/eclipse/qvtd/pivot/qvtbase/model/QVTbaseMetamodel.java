@@ -112,7 +112,7 @@ public class QVTbaseMetamodel extends ASResourceImpl
 	/**
 	 * A ReadOnly QVTbaseMetamodel overrides inherited functionality to impose immutable shared behaviour.
 	 */
-	protected static class ReadOnly extends QVTbaseMetamodel
+	protected static class ReadOnly extends QVTbaseMetamodel implements ImmutableResource
 	{
 		protected ReadOnly(@NonNull URI uri) {
 			super(uri);
@@ -132,6 +132,11 @@ public class QVTbaseMetamodel extends ASResourceImpl
 		 */
 		@Override
 		protected void doUnload() {}
+
+		@Override
+		public boolean isCompatibleWith(@NonNull String metamodelURI) {
+			return PIVOT_URI.equals(metamodelURI);
+		}
 
 		/**
 		 * Overridden to trivialise loading of the shared instance.

@@ -23,12 +23,12 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TypedElement;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Node</b></em>'.
+ * @extends org.eclipse.ocl.pivot.utilities.Nameable
  * @extends GraphNode
  * <!-- end-user-doc -->
  *
@@ -52,10 +52,10 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode()
- * @model abstract="true" superTypes="org.eclipse.ocl.pivot.Element org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd org.eclipse.ocl.pivot.Nameable"
+ * @model abstract="true"
  * @generated
  */
-public interface Node extends Element, ConnectionEnd, Nameable, GraphNode
+public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.utilities.Nameable, GraphNode
 {
 	/**
 	 * Returns the value of the '<em><b>Class Datum</b></em>' reference.
@@ -448,12 +448,12 @@ public interface Node extends Element, ConnectionEnd, Nameable, GraphNode
 	/**
 	 * Return true if this is a SuccessNode that provides predication/speculation status.
 	 */
-	boolean isStatus();
+	boolean isSuccess();
 
 	/**
 	 * Return true if this is a TrueNode that terminates a complex predicate expression.
 	 */
-	boolean isTrue();
+	//	boolean isTrue();
 
 	/**
 	 * Return true if this node is unconditionally used in a computation of navigation. .e it does not form
