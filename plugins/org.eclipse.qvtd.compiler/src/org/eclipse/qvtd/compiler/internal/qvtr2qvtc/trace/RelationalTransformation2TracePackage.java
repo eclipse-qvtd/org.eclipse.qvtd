@@ -178,9 +178,9 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 			for (@NonNull Relation2TraceClass relation2traceClass : relation2traceClasses) {
 				s.append("\n\t" + relation2traceClass.toString() + "(");
 				boolean isFirst = true;
-				List<@NonNull Relation2TraceClass> consumedRelation2TraceClasses = Lists.newArrayList(relation2traceClass.getConsumedRelation2TraceClasses());
-				Collections.sort(consumedRelation2TraceClasses);;
-				for (@NonNull Relation2TraceClass consumedRelation2TraceClass : consumedRelation2TraceClasses) {
+				List<@NonNull Relation2TraceClass> consumedRule2TraceGroup = Lists.newArrayList(relation2traceClass.getConsumedRule2TraceGroup());
+				Collections.sort(consumedRule2TraceGroup);;
+				for (@NonNull Relation2TraceClass consumedRelation2TraceClass : consumedRule2TraceGroup) {
 					if (!isFirst) {
 						s.append(",");
 					}
@@ -196,9 +196,9 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 			for (@NonNull Relation2TraceClass relation2traceClass : relation2traceClasses) {
 				s.append("\n\t" + relation2traceClass.toString() + "(");
 				boolean isFirst = true;
-				List<@NonNull Relation2TraceClass> consumedRelation2TraceClasses = new ArrayList<>(relation2traceClass.getTransitivelyConsumedRelation2TraceClasses());
-				Collections.sort(consumedRelation2TraceClasses);;
-				for (@NonNull Relation2TraceClass consumedRelation2TraceClass : consumedRelation2TraceClasses) {
+				List<@NonNull Relation2TraceClass> consumedRule2TraceGroup = new ArrayList<>(relation2traceClass.getTransitivelyConsumedRule2TraceGroup());
+				Collections.sort(consumedRule2TraceGroup);;
+				for (@NonNull Relation2TraceClass consumedRelation2TraceClass : consumedRule2TraceGroup) {
 					if (!isFirst) {
 						s.append(",");
 					}
@@ -214,9 +214,9 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 			for (@NonNull Relation2TraceClass relation2traceClass : relation2traceClasses) {
 				s.append("\n\t" + relation2traceClass.toString() + "(");
 				boolean isFirst = true;
-				List<@NonNull Relation2TraceClass> consumedByRelation2TraceClasses = Lists.newArrayList(relation2traceClass.getConsumedByRelation2TraceClasses());
-				Collections.sort(consumedByRelation2TraceClasses);;
-				for (@NonNull Relation2TraceClass consumedByRelation2TraceClass : consumedByRelation2TraceClasses) {
+				List<@NonNull Relation2TraceClass> consumedByRule2TraceGroup = Lists.newArrayList(relation2traceClass.getConsumedByRule2TraceGroup());
+				Collections.sort(consumedByRule2TraceGroup);;
+				for (@NonNull Relation2TraceClass consumedByRelation2TraceClass : consumedByRule2TraceGroup) {
 					if (!isFirst) {
 						s.append(",");
 					}
@@ -232,9 +232,9 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 			for (@NonNull Relation2TraceClass relation2traceClass : relation2traceClasses) {
 				s.append("\n\t" + relation2traceClass.toString() + "(");
 				boolean isFirst = true;
-				List<@NonNull Relation2TraceClass> consumedByRelation2TraceClasses = new ArrayList<>(relation2traceClass.getTransitivelyConsumedByRelation2TraceClasses());
-				Collections.sort(consumedByRelation2TraceClasses);;
-				for (@NonNull Relation2TraceClass consumedByRelation2TraceClass : consumedByRelation2TraceClasses) {
+				List<@NonNull Relation2TraceClass> consumedByRule2TraceGroup = new ArrayList<>(relation2traceClass.getTransitivelyConsumedByRule2TraceGroup());
+				Collections.sort(consumedByRule2TraceGroup);;
+				for (@NonNull Relation2TraceClass consumedByRelation2TraceClass : consumedByRule2TraceGroup) {
 					if (!isFirst) {
 						s.append(",");
 					}
@@ -250,9 +250,9 @@ public class RelationalTransformation2TracePackage extends QVTbaseHelper
 			for (@NonNull Relation2TraceClass relation2traceClass : relation2traceClasses) {
 				s.append("\n\t" + relation2traceClass.toString() + "(");
 				boolean isFirst = true;
-				List<@NonNull Relation2TraceClass> cyclicRelation2TraceClasses = Lists.newArrayList(relation2traceClass.getCyclicRelation2TraceClasses());
-				Collections.sort(cyclicRelation2TraceClasses);;
-				for (@NonNull Relation2TraceClass cyclicRelation2TraceClass : cyclicRelation2TraceClasses) {
+				List<@NonNull Relation2TraceClass> cyclicRule2TraceGroup = Lists.newArrayList(relation2traceClass.getCyclicRule2TraceGroup());
+				Collections.sort(cyclicRule2TraceGroup);;
+				for (@NonNull Relation2TraceClass cyclicRelation2TraceClass : cyclicRule2TraceGroup) {
 					if (!isFirst) {
 						s.append(",");
 					}

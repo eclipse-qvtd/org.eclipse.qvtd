@@ -532,6 +532,7 @@ class PatternForest
 		qvtrRelation.setIsAbstract(relDiagram.isIsAbstract());
 		qvtrRelation.setIsTopLevel(relDiagram.isIsTop());
 		qvtrRelation.getVariable().addAll(allVariables);
+		qvtrRelation.getVariable().add(umlx2qvtr.createTraceClassVariable());
 		return qvtrRelation;
 	}
 

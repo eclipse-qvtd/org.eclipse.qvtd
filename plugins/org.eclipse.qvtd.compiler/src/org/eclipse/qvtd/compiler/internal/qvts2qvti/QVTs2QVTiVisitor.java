@@ -23,9 +23,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.ShadowPart;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.util.Visitable;
@@ -35,9 +38,10 @@ import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.Region2Depth;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -45,14 +49,18 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.ExpressionEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
@@ -79,12 +87,12 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 	protected final @NonNull Map<@NonNull Region, @NonNull AbstractRegion2Mapping> region2region2mapping = new HashMap<>();
 	private @Nullable Set<@NonNull String> reservedNames = null;
 	private @NonNull Map<@NonNull Operation, @NonNull Operation> qvtmOperation2qvtiOperation = new HashMap<>();
-	private final @NonNull Region2Depth region2depth = new Region2Depth();
 
 	private final @NonNull Set<@NonNull Transformation> otherTransformations = new HashSet<>();	// Workaround Bug 481658
 	private final @NonNull Map<@NonNull String, @NonNull Operation> name2operation = new HashMap<>();	// Workaround Bug 481658
 
 	private /*@LazyNonNull*/ ImperativeTypedModel qvtiMiddleTypedModel = null;
+	private @NonNull Map<@NonNull ClassDatum, @NonNull Function> classDatum2keyFunction = new HashMap<>();
 
 	public QVTs2QVTiVisitor(@NonNull ScheduleManager scheduleManager, @NonNull ProblemHandler problemHandler, @NonNull QVTimperativeHelper helper, @NonNull Transformation qvtmTransformation, @NonNull SymbolNameReservation symbolNameReservation) {
 		super(null);
@@ -185,7 +193,57 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		return iOperation;
 	}
 
+	private void createKeyFunctions(@NonNull Map<@NonNull ClassDatum, Set<@NonNull PropertyDatum>> keyedClassDatum2propertyDatums) {
+		List<@NonNull ClassDatum> classDatums = new ArrayList<>(keyedClassDatum2propertyDatums.keySet());
+		Collections.sort(classDatums, NameUtil.NAMEABLE_COMPARATOR);
+		for (@NonNull ClassDatum classDatum : classDatums) {
+			CompleteClass completeClass = QVTscheduleUtil.getCompleteClass(classDatum);
+			List<@NonNull PropertyDatum> propertyDatums = new ArrayList<>(keyedClassDatum2propertyDatums.get(classDatum));
+			Collections.sort(propertyDatums, NameUtil.NAMEABLE_COMPARATOR);
+			String functionName = scheduleManager.getNameGenerator().createKeyFunctionName(classDatum);
+			List<@NonNull FunctionParameter> asParameters = new ArrayList<>();
+			List<@NonNull ShadowPart> asShadowParts = new ArrayList<>();
+			//
+			//	One shadow part per key property datum
+			//
+			for (@NonNull PropertyDatum propertyDatum : propertyDatums) {
+				Property keyProperty = QVTscheduleUtil.getReferredProperty(propertyDatum);
+				FunctionParameter cParameter = helper.createFunctionParameter(keyProperty);
+				asParameters.add(cParameter);
+				ShadowPart asShadowPart = helper.createShadowPart(keyProperty, helper.createVariableExp(cParameter));
+				asShadowParts.add(asShadowPart);
+			}
+			Collections.sort(asParameters, NameUtil.NAMEABLE_COMPARATOR);
+			//
+			//	One shadow part per uninitialized key property
+			//
+			/*			for (@NonNull Property asProperty : completeClass.getProperties(FeatureFilter.SELECT_NON_STATIC)) {
+				if (!asProperty.isIsImplicit() && !asProperty.isIsMany() && (asProperty != scheduleManager.getStandardLibraryHelper().getOclContainerProperty())) {
+					boolean gotIt = false;
+					for (@NonNull ShadowPart asShadowPart : asShadowParts) {
+						if (asShadowPart.getReferredProperty() == asProperty) {
+							gotIt = true;
+							break;
+						}
+					}
+					if (!gotIt) {
+						ShadowPart asShadowPart = createShadowPart(asProperty, createNullLiteralExp());
+						asShadowParts.add(asShadowPart);
+					}
+				}
+			} */
+			Function asFunction = helper.createFunction(functionName, completeClass.getPrimaryClass(), true, asParameters);
+			OCLExpression asShadowExp = helper.createShadowExp(completeClass.getPrimaryClass(), asShadowParts);
+			asFunction.setQueryExpression(asShadowExp);
+			qvtiTransformation.getOwnedOperations().add(asFunction);
+			classDatum2keyFunction.put(classDatum, asFunction);
+		}
+	}
+
 	public void createRegion2Mapping(@NonNull Region region) {
+		//		if ("m_II__mapVariableExp__referredVariable_result_2".equals(region.toString())) {
+		//			getClass();
+		//		}
 		AbstractRegion2Mapping region2mapping = region2region2mapping.get(region);
 		assert region2mapping == null : "Re-AbstractRegion2Mapping for " + region;
 		//		assert !region.isConnectionRegion();
@@ -225,8 +283,8 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 				qvtiTransformation.getModelParameter().add(qvtiTypedModel);
 			}
 		}
-		for (Rule rule : qvtmTransformation.getRule()) {
-			for (Domain domain : rule.getDomain()) {
+		for (@NonNull Rule rule : QVTbaseUtil.getRule(qvtmTransformation)) {
+			for (@NonNull Domain domain : QVTbaseUtil.getOwnedDomains(rule)) {
 				TypedModel typedModel = QVTbaseUtil.getTypedModel(domain);
 				if (scheduleManager.isInput(domain)) {
 					ImperativeTypedModel checkableTypedModel = qvtmTypedModel2qvtiTypedModel.get(typedModel);
@@ -258,6 +316,35 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		}
 	}
 
+	protected @NonNull Map<@NonNull ClassDatum, Set<@NonNull PropertyDatum>> gatherKeyCalls(List<@NonNull Region> sortedRegions) {
+		Map<@NonNull ClassDatum, Set<@NonNull PropertyDatum>> keyedClassDatum2propertyDatums = new HashMap<>();
+		for (@NonNull Region region : sortedRegions) {
+			for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
+				if (node instanceof KeyedValueNode) {
+					KeyedValueNode keyedValueNode = (KeyedValueNode)node;
+					ClassDatum classDatum = keyedValueNode.getClassDatumValue();
+					assert classDatum != null;
+					Set<@NonNull PropertyDatum> propertyDatums = new HashSet<>();
+					for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(keyedValueNode)) {
+						if (edge instanceof ExpressionEdge) {
+							ExpressionEdge expressionEdge = (ExpressionEdge)edge;
+							Object referredPropertyDatum = expressionEdge.getReferredObject();
+							if (referredPropertyDatum instanceof PropertyDatum) {
+								PropertyDatum propertyDatum = (PropertyDatum)referredPropertyDatum;
+								assert propertyDatum.isKey();
+								boolean wasAdded = propertyDatums.add(propertyDatum);
+								assert wasAdded;
+							}
+						}
+					}
+					Set<@NonNull PropertyDatum> oldPropertyDatums = keyedClassDatum2propertyDatums.put(classDatum, propertyDatums);
+					assert (oldPropertyDatums == null) || oldPropertyDatums.equals(propertyDatums);
+				}
+			}
+		}
+		return keyedClassDatum2propertyDatums;
+	}
+
 	protected void gatherReservedPackageNames(@NonNull Set<@NonNull String> reservedNames, @NonNull Iterable<org.eclipse.ocl.pivot.Package> asPackages) {
 		for (org.eclipse.ocl.pivot.Package asPackage : asPackages) {
 			reservedNames.add(ClassUtil.nonNullState(asPackage.getName()));
@@ -285,6 +372,10 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		return environmentFactory.getIdResolver().getOperation(oclAnyEqualsId);
 	}
 
+	public @NonNull Function getKeyFunction(@NonNull ClassDatum classDatum) {
+		return ClassUtil.nonNullState(classDatum2keyFunction.get(classDatum));
+	}
+
 	public @NonNull MetamodelManager getMetamodelManager() {
 		return environmentFactory.getMetamodelManager();
 	}
@@ -304,10 +395,6 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			return qvtiMiddleTypedModel;
 		}
 		return qvtmTypedModel2qvtiTypedModel.get(qvtmTypedModel);
-	}
-
-	public @NonNull Region2Depth getRegion2Depth() {
-		return region2depth;
 	}
 
 	public @NonNull AbstractRegion2Mapping getRegion2Mapping(@NonNull Region region) {
@@ -426,6 +513,8 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		}
 
 		List<@NonNull Region> sortedRegions = QVTscheduleUtil.EarliestRegionComparator.sort(callableRegions);
+		Map<@NonNull ClassDatum, Set<@NonNull PropertyDatum>> keyedClassDatum2propertyDatums = gatherKeyCalls(sortedRegions);
+		createKeyFunctions(keyedClassDatum2propertyDatums);
 		for (@NonNull Region region : sortedRegions) {
 			//			if (!region.isConnectionRegion()) {
 			createRegion2Mapping(region);

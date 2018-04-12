@@ -31,7 +31,10 @@ import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotFactory;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.internal.manager.Orphanage;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
@@ -42,14 +45,13 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractQVTb2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.DatumCaches;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.AbstractQVTb2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.DatumCaches;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RuleAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.TransformationAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.QVTrelationDomainUsageAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -64,10 +66,12 @@ import org.eclipse.qvtd.pivot.qvtrelation.TemplateVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.util.AbstractExtendingQVTrelationVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
@@ -81,16 +85,14 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 	 *
 	 * References are left unresolved. OCLExpressions are not copied. doXXX methods provide join points for derived implementations.
 	 */
-	protected static class CreateVisitor extends AbstractExtendingQVTrelationVisitor<Element, QVTr2QVTs>
+	protected static class QVTr2QVTsVisitor extends AbstractExtendingQVTrelationVisitor<Element, QVTr2QVTs>
 	{
-		protected final @NonNull ScheduleManager scheduleManager;
-		protected final @NonNull QVTuConfiguration qvtuConfiguration;
+		protected final @NonNull QVTrelationScheduleManager scheduleManager;
 		private @Nullable RelationAnalysis relationAnalysis = null;
 
-		public CreateVisitor(@NonNull QVTr2QVTs context, @NonNull QVTuConfiguration qvtuConfiguration) {
+		public QVTr2QVTsVisitor(@NonNull QVTr2QVTs context) {
 			super(context);
 			this.scheduleManager = context.getScheduleManager();
-			this.qvtuConfiguration = qvtuConfiguration;
 		}
 
 		public <T extends Element> void acceptAll(/*@NonNull*/ Iterable<T> sources) {
@@ -139,6 +141,28 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			return getRelationAnalysis().getRegion();
 		}
 
+		public void transform(@NonNull Resource source, @NonNull Resource target) throws IOException {
+			List<@NonNull EObject> mOuts = target.getContents();
+			for (EObject eContent : source.getContents()) {
+				if (eContent instanceof RelationModel) {
+					RelationModel mIn = (RelationModel) eContent;
+					try {
+						ScheduleModel mOut = (ScheduleModel) mIn.accept(this);
+						assert mOut != null;
+						mOuts.add(mOut);
+						//			mOut.accept(updateVisitor);
+					}
+					catch (WrappedException e) {
+						Throwable t = e.getCause();
+						if (t instanceof IOException) {
+							throw (IOException)t;
+						}
+						throw e;
+					}
+				}
+			}
+		}
+
 		@Override
 		public @Nullable Element visiting(@NonNull Visitable visitable) {
 			throw new IllegalArgumentException("Unsupported " + visitable.eClass().getName() + " for " + getClass().getSimpleName());
@@ -146,7 +170,17 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 
 		@Override
 		public Element visitCollectionTemplateExp(@NonNull CollectionTemplateExp cteIn) {
-			return visiting(cteIn);
+			for (@NonNull OCLExpression member : QVTrelationUtil.getOwnedMembers(cteIn)) {
+				member.accept(this);
+			}
+			// ?? rest ??
+			RelationAnalysis relationAnalysis2 = getRelationAnalysis();
+			relationAnalysis2.synthesizeCollectionTemplate(cteIn);
+			OCLExpression whereIn = cteIn.getWhere();
+			if (whereIn != null) {
+				relationAnalysis2.synthesizePredicate(whereIn);
+			}
+			return null;
 		}
 
 		@Override
@@ -178,13 +212,59 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 
 		@Override
 		public Element visitObjectTemplateExp(@NonNull ObjectTemplateExp oteIn) {
-			//			Variable vIn = QVTrelationUtil.getBindsTo(oteIn);
-			//			RuleRegion ruleRegion = getRuleRegion();
-			//			Node sourceNode = ruleRegion.getNode(vIn);
-			acceptAll(QVTrelationUtil.getOwnedParts(oteIn));
+			RelationAnalysis relationAnalysis2 = getRelationAnalysis();
+			Variable templateVariable = QVTrelationUtil.getBindsTo(oteIn);
+			List<@NonNull PropertyTemplateItem> propertyTemplateItems = QVTrelationUtil.Internal.getOwnedPartsList(oteIn);
+			if (relationAnalysis2.isKeyedRealization(templateVariable)) {
+				RelationalTransformationAnalysis transformationAnalysis = relationAnalysis2.getTransformationAnalysis();
+				org.eclipse.qvtd.pivot.qvtrelation.Key key = transformationAnalysis.getKeyForType(QVTrelationUtil.getType(templateVariable));
+				assert key != null;
+				Iterable<@NonNull Property> keyParts = QVTrelationUtil.getOwnedParts(key);
+				Iterable<@NonNull Property> keyOppositeParts = QVTrelationUtil.getOwnedOppositeParts(key);
+				Map<@NonNull Property, @NonNull Node> property2node = new HashMap<>();
+				//				@NonNull Node[] argNodes = new @NonNull Node[Iterables.size(keyParts) + Iterables.size(keyOppositeParts)];
+				//				int argIndex = 0;
+				for (@NonNull Property keyPart : keyParts) {
+					boolean gotIt = false;
+					for (@NonNull PropertyTemplateItem propertyTemplateItem : propertyTemplateItems) {
+						if (keyPart == QVTrelationUtil.getReferredProperty(propertyTemplateItem)) {
+							Node partNode = relationAnalysis2.synthesizeKeyTemplatePart(propertyTemplateItem);
+							assert partNode != null;
+							property2node.put(keyPart, partNode);
+							gotIt = true;
+							break;
+						}
+					}
+					assert gotIt;		// FIXME container
+				}
+				for (@NonNull Property keyOppositePart : keyOppositeParts) {
+					boolean gotIt = false;
+					Property keyPart = QVTrelationUtil.getOpposite(keyOppositePart);
+					for (@NonNull PropertyTemplateItem propertyTemplateItem : propertyTemplateItems) {
+						if (keyPart == QVTrelationUtil.getReferredProperty(propertyTemplateItem)) {
+							Node partNode = relationAnalysis2.synthesizeKeyTemplatePart(propertyTemplateItem);
+							assert partNode != null;
+							property2node.put(keyPart, partNode);
+							gotIt = true;
+							break;
+						}
+					}
+					assert gotIt;		// FIXME container
+				}
+				relationAnalysis2.synthesizeKeyTemplate(templateVariable, property2node);
+			}
+			else {
+				for (@NonNull PropertyTemplateItem propertyTemplateItem : propertyTemplateItems) {
+					propertyTemplateItem.accept(this);
+				}
+				//				for (@NonNull PropertyTemplateItem propertyTemplateItem : propertyTemplateItems) {
+				//					OCLExpression targetExpression = relationAnalysis2.synthesizeObjectTemplatePart(propertyTemplateItem);
+				//					targetExpression.accept(this);
+				//				}
+			}
 			OCLExpression whereIn = oteIn.getWhere();
 			if (whereIn != null) {
-				getRelationAnalysis().analyzePredicate(whereIn);
+				relationAnalysis2.synthesizePredicate(whereIn);
 			}
 			return null;
 		}
@@ -203,39 +283,53 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 
 		@Override
 		public Element visitPropertyTemplateItem(@NonNull PropertyTemplateItem ptiIn) {
-			OCLExpression targetExpression = getRelationAnalysis().analyzePropertyTemplateItem(ptiIn);
+			OCLExpression targetExpression = QVTrelationUtil.getOwnedValue(ptiIn);
 			targetExpression.accept(this);
-			return null;
+			/*OCLExpression targetExpression =*/ getRelationAnalysis().synthesizeObjectTemplatePart(ptiIn);
+			//			targetExpression.accept(this);
+			return null; //super.visitPropertyTemplateItem(ptiIn);
 		}
 
 		@Override
 		public @NonNull MappingRegion visitRelation(@NonNull Relation rIn) {
-			TransformationAnalysis transformationAnalysis = scheduleManager.getTransformationAnalysis(QVTbaseUtil.getOwningTransformation(rIn));
-			RelationAnalysis relationAnalysis = this.relationAnalysis = (RelationAnalysis) transformationAnalysis.getRuleAnalysis(rIn);
+			//			if ("mapNavigationOrAttributeCallExp_Property".equals(rIn.getName())) {
+			//				getClass();
+			//			}
+			RelationalTransformationAnalysis transformationAnalysis = scheduleManager.getTransformationAnalysis(QVTbaseUtil.getOwningTransformation(rIn));
+			RelationAnalysis relationAnalysis = this.relationAnalysis = transformationAnalysis.getRuleAnalysis(rIn);
 			RuleRegion rOut = relationAnalysis.getRegion();
 			assert rOut.getReferredRule() == rIn;
 			context.pushScope(rOut);
 			context.addTrace(rIn, rOut);
+			//			rOut.setName(rIn.getName());
+			//
+			//	First create all the pattern variable nodes.
+			//
 			for (@NonNull VariableDeclaration vIn : QVTrelationUtil.getOwnedVariables(rIn)) {
 				//				if (!QVTrelationUtil.isTraceClassVariable(vIn)) {
-				relationAnalysis.analyzeVariableDeclaration(vIn);
+				relationAnalysis.synthesizeVariableDeclaration(vIn);
 				//				}
 			}
+			acceptAll(QVTrelationUtil.getOwnedVariables(rIn));		// FIXME does nothing, reuse as earlier traversal
+			//
+			//	Then join up those that have pattern relationships.
+			//
+			acceptAll(QVTrelationUtil.getOwnedDomains(rIn));
+			//
+			//	Before installing the predicates that may re-navigate pattern edges.
+			//
 			Pattern whenIn = rIn.getWhen();
 			if (whenIn != null) {
 				for (@NonNull Predicate pIn : QVTrelationUtil.getOwnedPredicates(whenIn)) {
-					relationAnalysis.analyzePredicate(QVTrelationUtil.getConditionExpression(pIn));
+					relationAnalysis.synthesizePredicate(QVTrelationUtil.getOwnedConditionExpression(pIn));
 				}
 			}
 			Pattern whereIn = rIn.getWhere();
 			if (whereIn != null) {
 				for (@NonNull Predicate pIn : QVTrelationUtil.getOwnedPredicates(whereIn)) {
-					relationAnalysis.analyzePredicate(QVTrelationUtil.getConditionExpression(pIn));
+					relationAnalysis.synthesizePredicate(QVTrelationUtil.getOwnedConditionExpression(pIn));
 				}
 			}
-			//			rOut.setName(rIn.getName());
-			acceptAll(QVTrelationUtil.getOwnedDomains(rIn));
-			acceptAll(QVTrelationUtil.getOwnedVariables(rIn));
 			createAll(rIn.getOwnedComments(), rOut.getOwnedComments());
 			relationAnalysis = null;
 			context.popScope();
@@ -256,7 +350,9 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			createAll(mIn.getOwnedImports(), mOut.getOwnedImports());
 			//			createAll(mIn.getOwnedPackages(), mOut.getOwnedPackages());
 			for (org.eclipse.ocl.pivot.@NonNull Package p : PivotUtil.getOwnedPackages(mIn)) {
-				doPackage(p, mOut);
+				if (!Orphanage.isTypeOrphanage(p)) {
+					doPackage(p, mOut);
+				}
 			}
 			//			if (mOut.getOwnedScheduledRegion() == null) {
 			//				context.addProblem(new CompilerChainException("No scheduled region"));
@@ -268,22 +364,15 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 
 		@Override
 		public @NonNull ScheduledRegion visitRelationalTransformation(@NonNull RelationalTransformation tIn) {
-			ScheduledRegion tOut = QVTscheduleFactory.eINSTANCE.createScheduledRegion();
-			scheduleManager.getScheduleModel().getOwnedScheduledRegions().add(tOut);
-			tOut.setReferredTransformation(tIn);
+			ScheduledRegion tOut = scheduleManager.getTransformationAnalysis(tIn).getScheduledRegion();
 			context.addTrace(tIn, tOut);
-			tOut.setName(tIn.getName());
 			//			tOut.setOwnedContext(create(tIn.getOwnedContext()));
 			//			createAll(tIn.getOwnedOperations(), tOut.getOwnedOperations());
 			//			createAll(tIn.getModelParameter(), tOut.getModelParameter());
 			//			List<MappingRegion> ownedRegions = tOut.getMappingRegions();
 			//						createAll(tIn.getRule(), ownedRegions);
 			for (@NonNull Relation relation : QVTrelationUtil.getOwnedRelations(tIn)) {
-				MappingRegion rOut = (MappingRegion) relation.accept(this);
-				if (rOut != null) {
-					scheduleManager.setScheduledRegion(rOut, tOut);
-					//					ownedRegions.add(target);
-				}
+				@SuppressWarnings("unused")MappingRegion rOut = (MappingRegion) relation.accept(this);
 			}
 			createAll(tIn.getOwnedComments(), tOut.getOwnedComments());
 			return tOut;
@@ -291,22 +380,19 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 
 		@Override
 		public Element visitSharedVariable(@NonNull SharedVariable svIn) {
-			getRelationAnalysis().analyzeVariable(svIn);
+			// SharedVariables are lazily synthesized on demand, thereby re-using the initExpression
+			// node when correctly typed, and avoiding cretaing dead unused variables to confuse the head analysis.
+			//			getRelationAnalysis().synthesizeSharedVariable(svIn);
 			return null;
 		}
 
 		@Override
 		public Element visitTemplateVariable(@NonNull TemplateVariable svIn) {
+			// TemplateVariables are  synthesized by the TemplateExp that binds them.
 			//			getRelationAnalysis().analyzeVariable(svIn);
 			return null;
 		}
 	}
-
-	//	protected final @NonNull QVTuConfiguration qvtuConfiguration;
-	protected final @NonNull CreateVisitor createVisitor;
-	//	protected final @NonNull UpdateVisitor updateVisitor;
-
-	//	private TypedModel middleTypedModelTarget = null;
 
 	/**
 	 * Forward traceability from a source object to its targets for the current mapping. Top level entries ourside a maping are indexed for the null mapping.
@@ -329,9 +415,19 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 
 	public QVTr2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory,
 			@NonNull QVTuConfiguration qvtuConfiguration, CompilerOptions.@Nullable StepOptions schedulerOptions) {
-		super(new QVTrelationScheduleManager(environmentFactory, qvtuConfiguration, schedulerOptions), problemHandler);
+		super(new QVTrelationScheduleManager(environmentFactory, qvtuConfiguration, schedulerOptions) {
+			@Override
+			public void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
+				problemHandler.addProblem(CompilerUtil.createRegionError(region, messageTemplate, bindings));
+			}
+
+			@Override
+			public void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
+				problemHandler.addProblem(CompilerUtil.createRegionWarning(region, messageTemplate, bindings));
+			}
+		}, problemHandler);
 		//		this.qvtuConfiguration = qvtuConfiguration;
-		this.createVisitor = new CreateVisitor(this, qvtuConfiguration);
+		//		this.createVisitor = new CreateVisitor(this, qvtuConfiguration);
 		//		this.updateVisitor = new UpdateVisitor(this);
 	}
 
@@ -427,9 +523,9 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		}
 	}
 
-	public @NonNull List<@NonNull MappingRegion> getActiveRegions() {
-		return new ArrayList<>();
-	}
+	//	public @NonNull List<@NonNull MappingRegion> getActiveRegions() {
+	//		return new ArrayList<>();
+	//	}
 
 	//	protected @NonNull TypedModel getMiddleTypedModelTarget() {
 	//		assert middleTypedModelTarget != null;
@@ -462,65 +558,88 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 	//		this.debugSource =  debugSource;
 	//	}
 
-	//	protected void setMiddleTypedModelTarget(@NonNull TypedModel middleTypedModelTarget) {
-	//		this.middleTypedModelTarget = middleTypedModelTarget;
-	//	}
-
-	public void transform(@NonNull Resource source, @NonNull Resource target, @Nullable String traceNsURI, @NonNull Resource traceResource) throws IOException {
+	public @NonNull Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull MappingRegion>> transform(@NonNull Resource source, @NonNull Resource target, @Nullable String traceNsURI, @NonNull Resource traceResource) throws IOException {
+		// FIXME the following lines should go obsolete
+		List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, target);
+		if (missingOperationCallSources != null) {
+			System.err.println("Missing OperationCallExp sources were fixed up for '" + target.getURI() + "'");
+		}
+		boolean missingTraceArtefacts = QVTrelationUtil.rewriteMissingTraceArtefacts(environmentFactory, source);
+		if (missingTraceArtefacts) {
+			System.err.println("Missing trace TypedModel.Class artefacts were fixed up for '" + target.getURI() + "'");
+		}
+		//
 		QVTrelationScheduleManager scheduleManager2 = getScheduleManager();
 		debugSource = source;
 		debugTarget = target;
-		scheduleManager2.analyzeUsages();
-		scheduleManager2.analyzeRuleStructure();
 		//
-		//	Do the transformation for each CoreModel. First a createVisitor descent of the input, then an updateVisitor descent of the output.
+		//	Perform the pre-analysis that relies solely on traversal of the QVTr source model.
+		//	- Establish which domain each element is part of
+		//	- Establish which output variables are reachable by composition from their root
 		//
-		List<@NonNull EObject> mOuts = target.getContents();
-		for (EObject eContent : source.getContents()) {
-			if (eContent instanceof RelationModel) {
-				RelationModel mIn = (RelationModel) eContent;
-				try {
-					ScheduleModel mOut = (ScheduleModel) mIn.accept(createVisitor);
-					assert mOut != null;
-					mOuts.add(mOut);
-					//			mOut.accept(updateVisitor);
-				}
-				catch (WrappedException e) {
-					Throwable t = e.getCause();
-					if (t instanceof IOException) {
-						throw (IOException)t;
-					}
-					throw e;
-				}
-			}
+		scheduleManager.analyzeSourceModel();
+		//
+		//	Use the QVTr2QVTsVisitor in a tree descent to stnthesize the QVTs elements that correspond directly to QVTr elements.
+		//	Inter-relation elements are accumulated by InvocationAnalysis instances in the RuleAnalysis2TraceGroup.
+		//
+		QVTr2QVTsVisitor qvtr2qvtsVisitor = new QVTr2QVTsVisitor(this);
+		qvtr2qvtsVisitor.transform(source, target);
+		//
+		Iterable<@NonNull TransformationAnalysis> transformationAnalyses = scheduleManager2.getOrderedTransformationAnalyses();
+		List<@NonNull TransformationAnalysis2TracePackage> transformationAnalysis2tracePackages = new ArrayList<>();
+		for (@NonNull TransformationAnalysis transformationAnalysis : transformationAnalyses) {
+			transformationAnalysis2tracePackages.add(transformationAnalysis.getTransformationAnalysis2TracePackage());
 		}
-		scheduleManager2.analyzeRules();
+		//
+		//	Create a trace group to supervise the trace synthesis of each relation.
+		//
+		for (@NonNull TransformationAnalysis2TracePackage transformationAnalysis2tracePackage : transformationAnalysis2tracePackages) {
+			transformationAnalysis2tracePackage.createRuleAnalysis2TraceGroups();
+		}
+		//
+		//	Analyze the trace classes and interfaces to determine their inheritance and properties
+		//
+		for (@NonNull TransformationAnalysis2TracePackage transformationAnalysis2tracePackage : transformationAnalysis2tracePackages) {
+			transformationAnalysis2tracePackage.analyzeTraceElements();
+		}
+		//
+		//	Synthesize the trace nodes and edges to add support for overrides/when/where invocations.
+		//
+		for (@NonNull TransformationAnalysis2TracePackage transformationAnalysis2tracePackage : transformationAnalysis2tracePackages) {
+			transformationAnalysis2tracePackage.synthesizeTraceElements();
+		}
+		/**
+		 * Perform the independent local analysis of each Rule.
+		 */
+		for (@NonNull TransformationAnalysis transformationAnalysis : transformationAnalyses) {
+			transformationAnalysis.analyzeMappingRegions();
+		}
+		for (@NonNull MappingRegion mappingRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager2.getScheduleModel())) {
+			scheduleManager.writeDebugGraphs(mappingRegion, null);
+		}
+		//
+		//	Create trace Model/Package/Class/Property instances
+		//
 		Model traceModel = PivotFactory.eINSTANCE.createModel();
 		traceModel.setExternalURI(traceResource.getURI().toString());
 		traceResource.getContents().add(traceModel);
-		for (@NonNull TransformationAnalysis transformationAnalysis : scheduleManager2.getTransformationAnalyses()) {
-			if (AbstractQVTb2QVTs.DEBUG_GRAPHS.isActive()) {
-				for (@NonNull RuleAnalysis ruleAnalysis : transformationAnalysis.getRuleAnalyses()) {
-					scheduleManager2.writeDebugGraphs(ruleAnalysis.getRegion(), null);
-				}
+		for (@NonNull TransformationAnalysis2TracePackage transformationAnalysis2tracePackage : transformationAnalysis2tracePackages) {
+			org.eclipse.ocl.pivot.Package tracePackage = transformationAnalysis2tracePackage.synthesizeTraceModel();
+			traceModel.getOwnedPackages().add(tracePackage);
+			TypedModel traceTypedModel = scheduleManager.getTraceTypedModel();
+			traceTypedModel.getUsedPackage().add(tracePackage);
+			scheduleManager.analyzeTracePackage(traceTypedModel, tracePackage);
+
+			List<@NonNull MappingRegion> mappingRegions = Lists.newArrayList(QVTscheduleUtil.getOwnedMappingRegions(scheduleManager2.getScheduleModel()));
+			Collections.sort(mappingRegions, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
+			for (@NonNull MappingRegion mappingRegion : mappingRegions) {
+				registerConsumptionsAndProductions((RuleRegion) mappingRegion);
 			}
-			QVTrelationDomainUsageAnalysis domainUsageAnalysis = scheduleManager2.getDomainUsageAnalysis();
-			TypedModel traceTypedModel = domainUsageAnalysis.getTraceTypedModel();
-			transformationAnalysis.synthesizeTracePackage(traceTypedModel, traceModel);
-			List<@NonNull RuleAnalysis> ruleAnalyses = Lists.newArrayList(transformationAnalysis.getRuleAnalyses());
-			Collections.sort(ruleAnalyses, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
-			for (@NonNull RuleAnalysis ruleAnalysis : ruleAnalyses) {
-				ruleAnalysis.registerConsumptionsAndProductions();
-			}
-			if (AbstractQVTb2QVTs.DEBUG_GRAPHS.isActive()) {
-				for (@NonNull RuleAnalysis ruleAnalysis : ruleAnalyses) {
-					scheduleManager2.writeDebugGraphs(ruleAnalysis.getRegion(), null);
-				}
+			for (@NonNull MappingRegion mappingRegion : mappingRegions) {
+				scheduleManager2.writeDebugGraphs(mappingRegion, null);
 			}
 		}
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager2.writeDebugGraphs("0-init", true, true, true);
-		}
+		scheduleManager2.writeDebugGraphs("0-init", true, true, true);
 		//
 		//	Debug code to confirm that every output object is traceable to some input object.
 		//
@@ -533,15 +652,32 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			}
 		}
 
-		// FIXME the following lines should go obsolete
-		List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, target);
-		if (missingOperationCallSources != null) {
-			System.err.println("Missing OperationCallExp sources were fixed up for '" + target.getURI() + "'");
+		Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull RuleRegion>> scheduledRegion2activeRegions = scheduleManager2.analyzeTransformations();
+		//
+		//		List<@NonNull MappingRegion> orderedRegions = new ArrayList<>();
+		//		for (@NonNull MappingRegion ruleRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager2.getScheduleModel())) {
+		//			Rule rule = QVTscheduleUtil.getReferredRule(ruleRegion);
+		//			RuleAnalysis mappingAnalysis = getRuleAnalysis(rule);
+		//			orderedRegions.add(mappingAnalysis.getRuleRegion());
+		//			orderedRegions.add(ruleRegion);
+		//			mappingRegion.resolveRecursion();
+		//		}
+		Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull MappingRegion>> scheduledRegion2mergedRegions = new HashMap<>();
+		if (!scheduleManager.isNoEarlyMerge()) {
+			for (@NonNull ScheduledRegion scheduledRegion : scheduledRegion2activeRegions.keySet()) {
+				Iterable<@NonNull RuleRegion> activeRegions = scheduledRegion2activeRegions.get(scheduledRegion);
+				assert activeRegions != null;
+				List<@NonNull MappingRegion> mergedRegions = new ArrayList<>(EarlyMerger.merge(scheduleManager, activeRegions));
+				scheduledRegion2mergedRegions.put(scheduledRegion, mergedRegions);
+			}
 		}
-		boolean missingTraceArtefacts = QVTrelationUtil.rewriteMissingTraceArtefacts(environmentFactory, target);
-		if (missingTraceArtefacts) {
-			System.err.println("Missing trace TypedModel.Class artefacts were fixed up for '" + target.getURI() + "'");
+		else {
+			for (@NonNull ScheduledRegion scheduledRegion : scheduledRegion2activeRegions.keySet()) {
+				Iterable<@NonNull RuleRegion> activeRegions = scheduledRegion2activeRegions.get(scheduledRegion);
+				assert activeRegions != null;
+				scheduledRegion2mergedRegions.put(scheduledRegion, Lists.newArrayList(activeRegions));
+			}
 		}
-		scheduleManager2.analyzeTransformations();
+		return scheduledRegion2mergedRegions;
 	}
 }

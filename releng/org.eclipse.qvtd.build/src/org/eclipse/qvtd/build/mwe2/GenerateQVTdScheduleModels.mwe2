@@ -24,14 +24,15 @@ import org.eclipse.emf.ecore.resource.impl.*
  *	Generate the Schedule Model used by the QVT scheduling.
  */
 Workflow {
-	bean = ResourceSetImpl : resourceSet {}
-    bean = StandaloneSetup { resourceSet = resourceSet
+	bean = ResourceSetImpl : qvtsResourceSet {}
+    bean = ProjectMapSetup { resourceSet = qvtsResourceSet }
+    bean = StandaloneSetup { resourceSet = qvtsResourceSet
     	platformUri = ".."
     	scanClassPath = true
     }
-    bean = EcoreGenModelSetup { resourceSet = resourceSet }
+    bean = EcoreGenModelSetup { resourceSet = qvtsResourceSet }
 
-    component = @SubGenerateASModel { resourceSet = resourceSet
+    component = @SubGenerateASModel { resourceSet = qvtsResourceSet
     	projectName = "org.eclipse.qvtd.pivot.qvtschedule"
     	genModelFile =  "model/QVTschedule.genmodel"
     	superProjectName = "org.eclipse.qvtd.pivot.qvtbase"

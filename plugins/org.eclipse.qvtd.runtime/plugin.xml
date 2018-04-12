@@ -13,4 +13,33 @@
       	class="org.eclipse.qvtd.runtime.labels.TypedModelInstanceLabelGenerator"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated QVTtrace -->
+      <package
+            uri="http://www.eclipse.org/qvt/2018/QVTtrace"
+            class="org.eclipse.qvtd.runtime.qvttrace.QVTtracePackage"
+            genModel="model/QVTtrace.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated QVTtrace -->
+      <parser
+            contentTypeIdentifier="org.eclipse.qvtd.qvttrace"
+            class="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+      <!-- @generated QVTtrace -->
+      <content-type
+            base-type="org.eclipse.emf.ecore.xmi"
+            file-extensions="qvttrace"
+            id="org.eclipse.qvtd.qvttrace"
+            name="%_UI_QVTtrace_content_type"
+            priority="normal">
+         <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
+            <parameter name="namespace" value="http://www.eclipse.org/qvt/2018/QVTtrace"/>
+            <parameter name="kind" value="xmi"/>
+         </describer>
+      </content-type>
+   </extension>
 </plugin>

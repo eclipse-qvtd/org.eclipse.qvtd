@@ -11,25 +11,48 @@
 package org.eclipse.qvtd.compiler;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
+import org.eclipse.emf.codegen.ecore.genmodel.GenModelFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.importer.ecore.EcoreImporter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
+import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.Import;
+import org.eclipse.ocl.pivot.Model;
+import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.util.DerivedConstants;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractQVTb2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.AbstractQVTb2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc.GenPackageComparator;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTr2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.QVTs2QVTs;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -40,6 +63,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 /**
@@ -81,12 +105,6 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 		public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull String enforcedOutputName) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
 			try {
-				//				<<<<<<< Upstream, based on origin/ewillink/530599
-				//				Resource sResource = createResource();
-				//				CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
-				//				Transformation asTransformation = AbstractCompilerChain.getTransformation(pResource);
-				//				QVTuConfiguration qvtuConfiguration = ((AbstractCompilerChain)compilerChain).createQVTuConfiguration(pResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputName);
-				//				=======
 				CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
 				Transformation asTransformation = AbstractCompilerChain.getTransformation(qvtrResource);
 				QVTuConfiguration qvtuConfiguration = ((AbstractCompilerChain)compilerChain).createQVTuConfiguration(qvtrResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputName);
@@ -104,22 +122,24 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				//				if (traceNsURI != null) {
 				//					t.setTraceNsURI(traceNsURI);
 				//				}
-				qvtr2qvts.transform(qvtrResource, qvtsResource, traceNsURI, traceResource);
+				Map<@NonNull ScheduledRegion, Iterable<@NonNull MappingRegion>> scheduledRegion2activeRegions = qvtr2qvts.transform(qvtrResource, qvtsResource, traceNsURI, traceResource);
 				//
-				//	Ssve trace (occurs as part of GenModel creation)
+				//	Save trace (occurs as part of GenModel creation)
 				//
-				//	URI ecoreURI = traceResource.getURI().trimFileExtension();
-				//	AS2Ecore as2ecore = new AS2Ecore(environmentFactory, ecoreURI, null);
-				//	XMLResource ecoreResource = as2ecore.convertResource(traceResource, ecoreURI);
-				//	ecoreResource.save(null);
-				//	throwCompilerChainExceptionForErrors();
+				if (true) {
+					URI ecoreURI = traceResource.getURI().trimFileExtension();
+					AS2Ecore as2ecore = new AS2Ecore(environmentFactory, ecoreURI, null);
+					XMLResource ecoreResource = as2ecore.convertResource(traceResource, ecoreURI);
+					ecoreResource.save(null);
+					throwCompilerChainExceptionForErrors();
+				}
 				//
 				//	QVTs optimization
 				//
-				List<@NonNull MappingRegion> activeRegions = qvtr2qvts.getActiveRegions();
+				//				List<@NonNull MappingRegion> activeRegions = qvtr2qvts.getActiveRegions();
 				String rootName = ClassUtil.nonNullState(qvtrResource.getURI().trimFileExtension().trimFileExtension().lastSegment());
 				QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, scheduleManager, rootName);
-				qvts2qvts.transform(scheduleManager, activeRegions);
+				qvts2qvts.transform(scheduleManager, scheduledRegion2activeRegions);
 				throwCompilerChainExceptionForErrors();
 				saveResource(qvtsResource);
 				return scheduleManager;
@@ -130,7 +150,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 		}
 	}
 
-	/*	protected static class CreateGenModelCompilerStep extends AbstractCompilerStep
+	protected static class CreateGenModelCompilerStep extends AbstractCompilerStep
 	{
 		public CreateGenModelCompilerStep(@NonNull CompilerChain compilerChain) {
 			super(compilerChain, TRACE_STEP);
@@ -139,52 +159,20 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 		public void execute(@NonNull Resource traceResource) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
 			try {
-				//				<<<<<<< Upstream, based on origin/ewillink/530599
-				//				URI traceURI = compilerChain.getURI(TRACE_STEP, URI_KEY);
-				//				Map<@NonNull String, @Nullable String> traceOptions = compilerChain.basicGetOption(TRACE_STEP, TRACE_OPTIONS_KEY);
-				//				String traceNsURI = traceOptions != null ? traceOptions.get(TRACE_NS_URI) : null;
-				//				Resource traceResource = createResource(PivotUtilInternal.getASURI(traceURI));
-				//				if (traceNsURI != null) {
-				//					t.setTraceNsURI(traceNsURI);
-				//				}
-				//				=======
-				//						>>>>>>> fd5dac8 [529130] Change to QVTr-to-QVTs+trace in CompilerChain
 				//
-				//				<<<<<<< Upstream, based on origin/ewillink/530599
-				//				t.transformToTracePackages();
-				//				Map<Object, Object> saveOptions = compilerChain.basicGetOption(TRACE_STEP, SAVE_OPTIONS_KEY);
-				//				=======
 				//	Create and Save Ecore variant of Trace Model
 				//
 				URI ecoreURI = compilerChain.getURI(TRACE_STEP, URI_KEY);
 				AS2Ecore as2ecore = new AS2Ecore(environmentFactory, ecoreURI, null);
 				XMLResource ecoreResource = as2ecore.convertResource(traceResource, ecoreURI);
 				Map<Object, Object> saveOptions = compilerChain.basicGetOption(TRACE_STEP, SAVE_OPTIONS_KEY);
-				//				>>>>>>> fd5dac8 [529130] Change to QVTr-to-QVTs+trace in CompilerChain
 				if (saveOptions == null) {
 					saveOptions = XMIUtil.createSaveOptions();
 				}
-				//				<<<<<<< Upstream, based on origin/ewillink/530599
-				//				t.saveTrace(traceResource, traceURI, traceOptions, saveOptions);
-				//				=======
 				ecoreResource.save(saveOptions);
 				throwCompilerChainExceptionForErrors();
-				//				>>>>>>> fd5dac8 [529130] Change to QVTr-to-QVTs+trace in CompilerChain
 				assertNoResourceSetErrors("Trace save", traceResource);
 				compiled(traceResource);
-				//				<<<<<<< Upstream, based on origin/ewillink/530599
-				//				URI genModelURI = compilerChain.basicGetURI(GENMODEL_STEP, URI_KEY);
-				//				if (genModelURI != null) {		// FIXME Move to GenModelCompilerStep once traceResource passable
-				//					saveOptions = compilerChain.basicGetOption(GENMODEL_STEP, SAVE_OPTIONS_KEY);
-				//					if (saveOptions == null) {
-				//						saveOptions = XMIUtil.createSaveOptions();
-				//					}
-				//					saveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
-				//					String modelDirectory = compilerChain.basicGetOption(GENMODEL_STEP, GENMODEL_MODEL_DIRECTORY_KEY);
-				//					Map<@NonNull String, @Nullable String> genmodelOptions = compilerChain.basicGetOption(GENMODEL_STEP, GENMODEL_OPTIONS_KEY);
-				//					Collection<@NonNull ? extends GenPackage> usedGenPackages = compilerChain.basicGetOption(GENMODEL_STEP, GENMODEL_USED_GENPACKAGES_KEY);
-				//					t.saveGenModel(this, traceResource, traceURI, genModelURI, modelDirectory, genmodelOptions, saveOptions, usedGenPackages);
-				//					=======
 				//
 				//	Create and Save GenModel
 				//
@@ -192,11 +180,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				saveOptions = compilerChain.basicGetOption(GENMODEL_STEP, SAVE_OPTIONS_KEY);
 				if (saveOptions == null) {
 					saveOptions = XMIUtil.createSaveOptions();
-					//						>>>>>>> fd5dac8 [529130] Change to QVTr-to-QVTs+trace in CompilerChain
 				}
-				//					<<<<<<< Upstream, based on origin/ewillink/530599
-				//					return traceResource;
-				//					=======
 				saveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
 				Collection<@NonNull ? extends GenPackage> usedGenPackages = compilerChain.basicGetOption(GENMODEL_STEP, GENMODEL_USED_GENPACKAGES_KEY);
 				saveGenModel(this, traceResource, genModelURI, compilerChain.basicGetOption(GENMODEL_STEP, GENMODEL_OPTIONS_KEY), saveOptions, usedGenPackages);
@@ -207,14 +191,6 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			}
 		}
 
-/*		<<<<<<< Upstream, based on origin/ewillink/530599
-				protected @NonNull GenModel executeCreateGenModel(@NonNull QVTr2QVTc t, @NonNull Resource traceResource) throws IOException {
-			URI genModelURI = compilerChain.getURI(GENMODEL_STEP, URI_KEY);
-			URI traceURI = compilerChain.getURI(TRACE_STEP, URI_KEY);
-			Map<Object, Object> saveOptions = compilerChain.getOption(GENMODEL_STEP, SAVE_OPTIONS_KEY);
-			if (saveOptions == null) {
-				saveOptions = XMIUtil.createSaveOptions();
-=======
 		private void getUsedGenPackageClosure(@NonNull ProblemHandler problemHandler, @NonNull Map<@NonNull String, @NonNull GenPackage> uri2genPackage, @NonNull Iterable<@NonNull ? extends GenPackage> genPackages) {
 			for (@NonNull GenPackage newGenPackage : genPackages) {
 				String nsURI = newGenPackage.getNSURI();
@@ -234,15 +210,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 						}
 					}
 				}
->>>>>>> fd5dac8 [529130] Change to QVTr-to-QVTs+trace in CompilerChain
 			}
-<<<<<<< Upstream, based on origin/ewillink/530599
-			saveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
-			String modelDirectory = compilerChain.getOption(GENMODEL_STEP, GENMODEL_MODEL_DIRECTORY_KEY);
-			Map<@NonNull String, @Nullable String> genmodelOptions = compilerChain.getOption(GENMODEL_STEP, GENMODEL_OPTIONS_KEY);
-			Collection<@NonNull ? extends GenPackage> usedGenPackages = compilerChain.getOption(GENMODEL_STEP, GENMODEL_USED_GENPACKAGES_KEY);
-			GenModel genModel = t.saveGenModel(this, traceResource, traceURI, genModelURI, modelDirectory, genmodelOptions, saveOptions, usedGenPackages);
-=======
 		}
 
 		public static @NonNull String getProjectName(@NonNull URI traceURI) {
@@ -370,84 +338,21 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
 			saveOptions.put(Resource.OPTION_LINE_DELIMITER, Resource.OPTION_LINE_DELIMITER_UNSPECIFIED);
 			genmodelResource.save(saveOptions);
->>>>>>> fd5dac8 [529130] Change to QVTr-to-QVTs+trace in CompilerChain
 			return genModel;
 		}
-	} */
-
-	protected static class TraceCompilerStep extends AbstractCompilerStep
-	{
-		public TraceCompilerStep(@NonNull CompilerChain compilerChain) {
-			super(compilerChain, TRACE_STEP);
-		}
-
-		public @NonNull Resource execute(@NonNull QVTr2QVTc t) throws IOException {
-			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
-			try {
-				URI traceURI = compilerChain.getURI(TRACE_STEP, URI_KEY);
-				Map<@NonNull String, @Nullable String> traceOptions = compilerChain.basicGetOption(TRACE_STEP, TRACE_OPTIONS_KEY);
-				String traceNsURI = traceOptions != null ? traceOptions.get(TRACE_NS_URI) : null;
-				Resource traceResource = createResource(PivotUtilInternal.getASURI(traceURI));
-				if (traceNsURI != null) {
-					t.setTraceNsURI(traceNsURI);
-				}
-				//
-				t.transformToTracePackages();
-				Map<Object, Object> saveOptions = compilerChain.basicGetOption(TRACE_STEP, SAVE_OPTIONS_KEY);
-				if (saveOptions == null) {
-					saveOptions = XMIUtil.createSaveOptions();
-				}
-				t.saveTrace(traceResource, traceURI, traceOptions, saveOptions);
-				assertNoResourceSetErrors("Trace save", traceResource);
-				compiled(traceResource);
-				URI genModelURI = compilerChain.basicGetURI(GENMODEL_STEP, URI_KEY);
-				if (genModelURI != null) {		// FIXME Move to GenModelCompilerStep once traceResource passable
-					saveOptions = compilerChain.basicGetOption(GENMODEL_STEP, SAVE_OPTIONS_KEY);
-					if (saveOptions == null) {
-						saveOptions = XMIUtil.createSaveOptions();
-					}
-					saveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
-					String modelDirectory = compilerChain.basicGetOption(GENMODEL_STEP, GENMODEL_MODEL_DIRECTORY_KEY);
-					Map<@NonNull String, @Nullable String> genmodelOptions = compilerChain.basicGetOption(GENMODEL_STEP, GENMODEL_OPTIONS_KEY);
-					Collection<@NonNull ? extends GenPackage> usedGenPackages = compilerChain.basicGetOption(GENMODEL_STEP, GENMODEL_USED_GENPACKAGES_KEY);
-					t.saveGenModel(this, traceResource, traceURI, genModelURI, modelDirectory, genmodelOptions, saveOptions, usedGenPackages);
-				}
-				return traceResource;
-			}
-			finally {
-				environmentFactory.setCreateStrategy(savedStrategy);
-			}
-		}
-
-		/*		protected @NonNull GenModel executeCreateGenModel(@NonNull QVTr2QVTc t, @NonNull Resource traceResource) throws IOException {
-			URI genModelURI = compilerChain.getURI(GENMODEL_STEP, URI_KEY);
-			URI traceURI = compilerChain.getURI(TRACE_STEP, URI_KEY);
-			Map<Object, Object> saveOptions = compilerChain.getOption(GENMODEL_STEP, SAVE_OPTIONS_KEY);
-			if (saveOptions == null) {
-				saveOptions = XMIUtil.createSaveOptions();
-			}
-			saveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
-			String modelDirectory = compilerChain.getOption(GENMODEL_STEP, GENMODEL_MODEL_DIRECTORY_KEY);
-			Map<@NonNull String, @Nullable String> genmodelOptions = compilerChain.getOption(GENMODEL_STEP, GENMODEL_OPTIONS_KEY);
-			Collection<@NonNull ? extends GenPackage> usedGenPackages = compilerChain.getOption(GENMODEL_STEP, GENMODEL_USED_GENPACKAGES_KEY);
-			GenModel genModel = t.saveGenModel(this, traceResource, traceURI, genModelURI, modelDirectory, genmodelOptions, saveOptions, usedGenPackages);
-			return genModel;
-		} */
 	}
 
 	protected final @NonNull Xtext2QVTrCompilerStep xtext2qvtrCompilerStep;
 	protected final @NonNull QVTr2QVTsCompilerStep qvtr2qvtsCompilerStep;
-	//	protected final @NonNull CreateGenModelCompilerStep createGenModelCompilerStep;
+	protected final @NonNull CreateGenModelCompilerStep createGenModelCompilerStep;
 	protected final @NonNull GenModelGenerateCompilerStep genmodelGenerateCompilerStep;
-	protected final @NonNull TraceCompilerStep traceCompilerStep;
 
 	public QVTrCompilerChain(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
 		super(environmentFactory, txURI, intermediateFileNamePrefixURI, options);
 		this.xtext2qvtrCompilerStep = createXtext2QVTrCompilerStep();
 		this.qvtr2qvtsCompilerStep = createQVTr2QVTsCompilerStep();
-		//		this.createGenModelCompilerStep = createCreateGenModelCompilerStepStep();
+		this.createGenModelCompilerStep = createCreateGenModelCompilerStepStep();
 		this.genmodelGenerateCompilerStep = createGenModelGenerateCompilerStep();
-		this.traceCompilerStep = createTraceCompilerStep();
 	}
 
 	@Override
@@ -457,32 +362,17 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 	}
 
 	public @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull String enforcedOutputName) throws IOException {
-		QVTr2QVTc t = new QVTr2QVTc(environmentFactory, qvtrResource);
-		t.analyze();
-		@SuppressWarnings("unused")Resource traceResource = traceCompilerStep.execute(t);
 		URI ecoreTraceURI = getURI(TRACE_STEP, URI_KEY);
 		URI traceURI = PivotUtilInternal.getASURI(ecoreTraceURI);
-		//		Resource traceResource = createResource(traceURI);
+		Resource traceResource = createResource(traceURI);
 		ScheduleManager scheduleManager = qvtr2qvtsCompilerStep.execute(qvtrResource, traceResource, enforcedOutputName);
-		//		createGenModelCompilerStep.execute(traceResource);
+		createGenModelCompilerStep.execute(traceResource);
 		return qvts2qvtiCompilerStep.execute(scheduleManager);
-		//		ImperativeTransformation qvtr2qvti = qvtr2qvti(qvtrResource, enforcedOutputName);
-		//		ScheduleManager scheduleManager = qvtr2qvti;
-		//		QVTuConfiguration qvtuConfiguration = createQVTuConfiguration(cResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputName);
-		//		Resource pResource = qvtc2qvtm(cResource, qvtuConfiguration);
-		//		ScheduledRegion rootRegion = qvtm2qvtsCompilerStep.execute(pResource);
-		//		=======
-		//				>>>>>>> fd5dac8 [529130] Change to QVTr-to-QVTs+trace in CompilerChain
-		//	return qvts2qvtiCompilerStep.execute(scheduleManager);
 	}
 
-	//	protected @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull String enforcedOutputName) throws IOException {
-	//		URI ecoreTraceURI = getURI(TRACE_STEP, URI_KEY);
-	//		URI traceURI = PivotUtilInternal.getASURI(ecoreTraceURI);
-	//		Resource traceResource = createResource(traceURI);
-	//		//		createGenModelCompilerStep.execute(traceResource);
-	//		return qvts2qvtiCompilerStep.execute(scheduleManager);
-	//	}
+	protected @NonNull CreateGenModelCompilerStep createCreateGenModelCompilerStepStep() {
+		return new CreateGenModelCompilerStep(this);
+	}
 
 	protected @NonNull GenModelGenerateCompilerStep createGenModelGenerateCompilerStep() {
 		return new GenModelGenerateCompilerStep(this);
@@ -490,10 +380,6 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 
 	protected @NonNull QVTr2QVTsCompilerStep createQVTr2QVTsCompilerStep() {
 		return new QVTr2QVTsCompilerStep(this);
-	}
-
-	protected @NonNull TraceCompilerStep createTraceCompilerStep() {
-		return new TraceCompilerStep(this);
 	}
 
 	protected @NonNull Xtext2QVTrCompilerStep createXtext2QVTrCompilerStep() {

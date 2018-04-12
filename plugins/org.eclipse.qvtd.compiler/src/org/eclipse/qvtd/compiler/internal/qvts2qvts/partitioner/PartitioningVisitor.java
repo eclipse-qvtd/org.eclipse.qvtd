@@ -19,7 +19,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionHelper;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
@@ -113,13 +113,13 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 		//
 		//	Create the nodes.
 		//
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {	// FIXME node2nodeRole.keySet() is smaller
 			node.accept(this);
 		}
 		//
 		//	Create the edges.
 		//
-		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(mappingRegion)) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(mappingRegion)) {	// FIXME edge2edgeRole.keySet() is smaller
 			edge.accept(this);
 		}
 		//

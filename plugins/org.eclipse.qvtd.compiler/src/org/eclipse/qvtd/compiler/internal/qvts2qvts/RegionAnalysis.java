@@ -21,7 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
@@ -250,7 +250,7 @@ public class RegionAnalysis
 								assert property2realizedEdges != null : "No realized typed model for " + typedModel;
 								List<@NonNull NavigableEdge> realizedEdges = property2realizedEdges.get(property);
 								if (realizedEdges == null) {
-									System.err.println("No realized edges for " + property + " in " + typedModel);
+									System.err.println("No realized edges for " + typedModel + "!" + property + " in " + region);
 								}
 								else {
 									for (@NonNull NavigableEdge realizedEdge : realizedEdges) {

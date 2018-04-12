@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -26,8 +27,8 @@ import com.google.common.collect.Iterables;
  */
 class RealizedPartition extends AbstractPartition
 {
-	public RealizedPartition(@NonNull MappingPartitioner partitioner) {
-		super(partitioner);
+	public RealizedPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
+		super(partitioner, reachabilityForest);
 		Iterable<@NonNull Node> predicatedMiddleNodes = partitioner.getPredicatedMiddleNodes();
 		assert Iterables.isEmpty(predicatedMiddleNodes);
 		//
@@ -53,7 +54,7 @@ class RealizedPartition extends AbstractPartition
 		//
 		//	Add the outstanding predicates that can be checked by this partition.
 		//
-		resolveTrueNodes();
+		//		resolveTrueNodes();
 		//
 		//	Ensure that the predecessors of each node are included in the partition.
 		//

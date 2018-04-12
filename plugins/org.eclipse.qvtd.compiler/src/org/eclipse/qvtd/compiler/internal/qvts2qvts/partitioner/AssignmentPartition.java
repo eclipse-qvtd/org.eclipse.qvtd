@@ -13,12 +13,13 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionHelper;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.StatusNode;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -27,19 +28,16 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 class AssignmentPartition extends AbstractPartition
 {
-	//	protected final @NonNull Edge realizedEdge;
-
-	public AssignmentPartition(@NonNull MappingPartitioner partitioner, @NonNull Edge realizedEdge) {
-		super(partitioner);
-		//		this.realizedEdge = realizedEdge;
+	public AssignmentPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, @NonNull Edge realizedEdge) {
+		super(partitioner, reachabilityForest);
 		//
 		//	The realized middle (trace) nodes become predicated head nodes.
 		//
 		for (@NonNull Node traceNode : partitioner.getTraceNodes()) {
 			addNode(traceNode, Role.PREDICATED);
-			Node statusNode = partitioner.getStatusNode(traceNode);
-			if (statusNode != null) {		// status property is not mandatory
-				addNode(statusNode, Role.PREDICATED);
+			Node successNode = partitioner.getSuccessNode(traceNode);
+			if (successNode != null) {		// status property is not mandatory
+				addNode(successNode, Role.PREDICATED);
 			}
 		}
 		//
@@ -65,6 +63,22 @@ class AssignmentPartition extends AbstractPartition
 		//	Add all nodes required to reach the source/target nodes.
 		//
 		resolvePrecedingNodes();
+		Node qvtrThis = null;
+		Node qvtrTransformation = null;
+		for (@NonNull Node node : getNodes()) {
+			if ("qvtrThisVariable".equals(node.getName())) {
+				qvtrThis = node;
+			}
+			else if ("qvtrTransformation".equals(node.getName())) {
+				qvtrTransformation = node;
+			}
+		}
+		if ((qvtrThis != null) != (qvtrTransformation != null)) {
+			//			Iterable<@NonNull Node> reachabilityRootNodes = getReachabilityRootNodes();
+			//			Iterable<@NonNull NavigableEdge> availableNavigableEdges = getAvailableNavigableEdges();
+			//			ReachabilityForest reachabilityForest2 = new ReachabilityForest(reachabilityRootNodes, availableNavigableEdges);
+			resolvePrecedingNodes();
+		}
 		//
 		//	Ensure that re-used trace classes do not lead to ambiguous mappings.
 		//
@@ -80,8 +94,8 @@ class AssignmentPartition extends AbstractPartition
 		return new PartitioningVisitor(new RegionHelper<>(scheduleManager, partialRegion), this)
 		{
 			@Override
-			public @Nullable Element visitStatusNode(@NonNull StatusNode node) {
-				Node partialNode = regionHelper.createTrueNode();
+			public @Nullable Element visitSuccessNode(@NonNull SuccessNode node) {
+				Node partialNode = regionHelper.createBooleanValueNode(true);
 				addNode(node, partialNode);
 				return partialNode;
 			}
@@ -94,7 +108,7 @@ class AssignmentPartition extends AbstractPartition
 		if (edgeRole == Role.REALIZED) {
 			AbstractPartition realizingPartition = partitioner.getRealizingPartition(edge);
 			if (realizingPartition instanceof AssignmentPartition) {
-				if (!isCorrolary(QVTscheduleUtil.getTargetNode(edge))) {			// FIXME do corrolaries before assigns
+				if (!isCorollary(QVTscheduleUtil.getTargetNode(edge))) {			// FIXME do corollaries before assigns
 					return null;
 				}
 			}

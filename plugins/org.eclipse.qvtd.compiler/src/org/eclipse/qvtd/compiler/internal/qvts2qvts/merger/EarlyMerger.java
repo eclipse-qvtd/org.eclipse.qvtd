@@ -26,8 +26,9 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -77,7 +78,7 @@ public class EarlyMerger extends AbstractMerger
 	 *
 	 * Returns the inputRegions after replacement of merges.
 	 */
-	public static @NonNull List<@NonNull MappingRegion> merge(@NonNull ScheduleManager scheduleManager, @NonNull Iterable<@NonNull MappingRegion> inputRegions) {
+	public static @NonNull List<@NonNull MappingRegion> merge(@NonNull ScheduleManager scheduleManager, @NonNull Iterable<? extends @NonNull MappingRegion> inputRegions) {
 		EarlyMerger earlyMerger = new EarlyMerger(scheduleManager, inputRegions);
 		return earlyMerger.merge();
 	}
@@ -86,7 +87,7 @@ public class EarlyMerger extends AbstractMerger
 	protected final @NonNull LinkedHashSet<@NonNull MappingRegion> residualInputRegions;
 	protected final @NonNull List<@NonNull MappingRegion> outputRegions = new ArrayList<>();
 
-	protected EarlyMerger(@NonNull ScheduleManager scheduleManager, @NonNull Iterable<@NonNull MappingRegion> inputRegions) {
+	protected EarlyMerger(@NonNull ScheduleManager scheduleManager, @NonNull Iterable<? extends @NonNull MappingRegion> inputRegions) {
 		this.scheduleManager = scheduleManager;
 		this.residualInputRegions = Sets.newLinkedHashSet(inputRegions);
 	}
@@ -116,7 +117,12 @@ public class EarlyMerger extends AbstractMerger
 		if (!node.isRequired()) {
 			return;
 		}
-		if (node.isTrue()) {
+		if (node.isConstant()) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+				if (edge.isPredicate()) {
+					return;
+				}
+			}
 			return;
 		}
 		if (!node.isPattern()) {
@@ -149,7 +155,13 @@ public class EarlyMerger extends AbstractMerger
 	 */
 	protected boolean isPrimaryCandidate(@NonNull Region mappingRegion) {
 		List<Node> headNodes = mappingRegion.getHeadNodes();
-		return headNodes.size() == 1;
+		if (headNodes.size() != 1) {
+			return false;
+		}
+		if (QVTscheduleUtil.hasPredicates(mappingRegion)) {
+			return false;			// FIXME upgrade to allow merging of matching predicates
+		}
+		return true;
 	}
 
 	/**

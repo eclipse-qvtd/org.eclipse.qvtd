@@ -33,6 +33,10 @@ public abstract class AbstractTransformer extends AbstractTransformerInternal
 	}
 
 	public static final @NonNull String PLUGIN_ID = "org.eclipse.qvtd.runtime";
+	public static final @NonNull String TRACE_MODEL = "org.eclipse.qvtd.runtime/model/QVTtrace.ecore";
+	public static final @NonNull String TRACE_GENMODEL = "org.eclipse.qvtd.runtime/model/QVTtrace.genmodel";
+	public static final @NonNull String TRACE_GENMODEL_FRAGMENT = "//qvttrace";
+
 	public static final @NonNull TracingOption APPENDS = new TracingOption(PLUGIN_ID, "tx/appends");
 	public static final @NonNull TracingOption CONSUMES = new TracingOption(PLUGIN_ID, "tx/consumes");
 	public static final @NonNull TracingOption CONTAINMENTS = new TracingOption(PLUGIN_ID, "tx/containments");

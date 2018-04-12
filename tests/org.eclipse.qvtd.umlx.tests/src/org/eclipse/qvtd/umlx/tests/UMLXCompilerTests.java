@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 20187 Willink Transformations and others.
+ * Copyright (c) 2012, 2018 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -18,13 +18,14 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
+import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.compiler.CompilerOptions;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -36,6 +37,7 @@ import org.eclipse.qvtd.umlx.utilities.UMLXStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
+import org.eclipse.qvtd.xtext.qvtrelation.tests.QVTrelationTestFileSystemHelper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -100,6 +102,11 @@ public class UMLXCompilerTests extends LoadTestCase
 		return new MyQVT(testProjectManager, getTestProject().getName(), getTestBundleURI(), txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
 	}
 
+	@Override
+	protected @NonNull TestFileSystemHelper getTestFileSystemHelper() {
+		return new QVTrelationTestFileSystemHelper();
+	}
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase#setUp()
 	 */
@@ -142,10 +149,10 @@ public class UMLXCompilerTests extends LoadTestCase
 		MyQVT myQVT1 = createQVT("Forward2Reverse", getModelsURI("forward2reverse/Forward2Reverse.umlx"));
 		try {
 			txClass = myQVT1.buildTransformation("reverse", false);
-			myQVT1.assertRegionCount(RuleRegionImpl.class, 2);
+			myQVT1.assertRegionCount(RuleRegionImpl.class, 1);
 			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 4);
+			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 7);
 		}
 		finally {
 			myQVT1.dispose();
@@ -207,10 +214,10 @@ public class UMLXCompilerTests extends LoadTestCase
 		//		MyQVT myQVT = new MyQVT("forward2reverse");
 		try {
 			txClass = myQVT1.buildTransformation("flat", false);
-			myQVT1.assertRegionCount(RuleRegionImpl.class, 3);
+			myQVT1.assertRegionCount(RuleRegionImpl.class, 0);
 			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 0);
+			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 6);
 		}
 		finally {
 			myQVT1.dispose();

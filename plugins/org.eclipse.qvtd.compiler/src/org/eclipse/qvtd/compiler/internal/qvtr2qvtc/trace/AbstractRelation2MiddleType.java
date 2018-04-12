@@ -58,7 +58,7 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 	/**
 	 * The Property that provides the success/failure/not-ready state of the traced mapping.
 	 */
-	private @Nullable Relation2StatusProperty relation2statusProperty = null;
+	private @Nullable Relation2SuccessProperty relation2successProperty = null;
 
 	protected AbstractRelation2MiddleType(@NonNull RelationAnalysis relationAnalysis, @NonNull String middleClassName) {
 		this.relationAnalysis = relationAnalysis;
@@ -84,8 +84,8 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 		//		}
 	}
 
-	protected @Nullable Property basicGetRelation2StatusProperty() {
-		return relation2statusProperty != null ? relation2statusProperty.getTraceProperty() : null;
+	protected @Nullable Property basicGetRelation2SuccessProperty() {
+		return relation2successProperty != null ? relation2successProperty.getTraceProperty() : null;
 	}
 
 	@Override
@@ -159,16 +159,16 @@ abstract class AbstractRelation2MiddleType implements Relation2MiddleType
 		return relationalTransformation2tracePackage;
 	}
 
-	public @NonNull Relation2StatusProperty getStatusProperty() {
-		Relation2StatusProperty statusProperty2 = relation2statusProperty;
-		if (statusProperty2 == null) {
-			relation2statusProperty = statusProperty2 = new Relation2StatusProperty(this);
-			statusProperty2.getTraceProperty();
+	public @NonNull Relation2SuccessProperty getSuccessProperty() {
+		Relation2SuccessProperty successProperty2 = relation2successProperty;
+		if (successProperty2 == null) {
+			relation2successProperty = successProperty2 = new Relation2SuccessProperty(this);
+			successProperty2.getTraceProperty();
 			//			getRelation2TraceClass().createProperty(QVTrNameGenerator.TRACECLASS_INVOCATION_STATUS_PROPERTY_NAME, booleanType);
-			//			statusProperty2.setIsRequired(false);
-			//			middleClass.getOwnedProperties().add(statusProperty2);
+			//			successProperty2.setIsRequired(false);
+			//			middleClass.getOwnedProperties().add(successProperty2);
 		}
-		return statusProperty2;
+		return successProperty2;
 	}
 
 	@Override

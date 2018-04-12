@@ -14,24 +14,40 @@ import StmcMM : 'StmcMM.ecore'::StmcMM;
 
 transformation org::eclipse::qvtd::xtext::qvtrelation::tests::seq2stm::SeqToStm(seqDgm: SeqMM, stm: StmcMM)
 {
-     key StmcMM::StateMachine{name};
-     key StmcMM::State{name,owner};
-     key StmcMM::Transition{name,owner,fromState,toState};
-     key StmcMM::SendMsg{message};
-     key StmcMM::Message{messageId};
+--     key StmcMM::StateMachine{name};
+--     key StmcMM::State{name,owner};
+--     key StmcMM::Transition{name,owner,fromState,toState};
+--     key StmcMM::SendMsg{message};
+     key StmcMM::Message{messageId,owner};
+
+     top relation DummyToDummy
+     {
+          domain seqDgm i:Dummy{};
+          enforce domain stm s:Dummy{};
+     }
 
      top relation InteractionToStateMachine
      {
           sn: String[1];
-
-          domain seqDgm i:Interaction{name = sn};
-          enforce domain stm s:StateMachine{name = sn};
+		seqRoot: SeqMM::Dummy;
+		stmRoot: StmcMM::Dummy;
+          domain seqDgm i:Interaction{
+          	   owner = seqRoot,
+          	name = sn
+          };
+          enforce domain stm s:StateMachine{
+          	   owner = stmRoot,
+          	name = sn
+          };
+          when
+          {
+               DummyToDummy(seqRoot, stmRoot);
+          }
      }
      
      top relation StateToState
      {
           sn: String[1];
-
           domain seqDgm 
           st1:State 
           {
@@ -77,7 +93,7 @@ transformation org::eclipse::qvtd::xtext::qvtrelation::tests::seq2stm::SeqToStm(
                name = mid,
                fromState = fst:State{},
                toState = tst:State{},
-               action = sm:SendMsg {message = m2:Message{messageId = mid}},
+               action = sm:SendMsg {message = m2:Message{messageId = mid, owner=s.owner}},
                owner = s:StateMachine{}
           };
 

@@ -15,12 +15,14 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.BooleanValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ComposedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.DependencyNode;
+import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.ErrorNode;
@@ -28,6 +30,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ExpressionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.InputNode;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratorNode;
+import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
@@ -39,6 +42,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NullNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.OperationValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternTypedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternVariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
@@ -49,10 +53,11 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.StatusNode;
-import org.eclipse.qvtd.pivot.qvtschedule.TrueNode;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
+import org.eclipse.qvtd.pivot.qvtschedule.VerdictRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
 /**
@@ -94,6 +99,12 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 	}
 
 	@Override
+	public String visitBooleanValueNode(@NonNull BooleanValueNode object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public String visitCastEdge(@NonNull CastEdge object) {
 		// TODO Auto-generated method stub
 		return null;
@@ -125,6 +136,12 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 
 	@Override
 	public String visitDependencyNode(@NonNull DependencyNode object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String visitDispatchRegion(@NonNull DispatchRegion object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -171,6 +188,12 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 	public String visitIteratorNode(@NonNull IteratorNode object) {
 		append(object.getClass().getSimpleName() + " ");
 		appendName(object);
+		return null;
+	}
+
+	@Override
+	public String visitKeyedValueNode(@NonNull KeyedValueNode object) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -248,6 +271,12 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 	}
 
 	@Override
+	public String visitOperationValueNode(@NonNull OperationValueNode object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public String visitPatternTypedNode(@NonNull PatternTypedNode object) {
 		// TODO Auto-generated method stub
 		return null;
@@ -303,13 +332,13 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 	}
 
 	@Override
-	public String visitStatusNode(@NonNull StatusNode object) {
+	public String visitSuccessEdge(@NonNull SuccessEdge object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String visitTrueNode(@NonNull TrueNode object) {
+	public String visitSuccessNode(@NonNull SuccessNode object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -322,6 +351,12 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 
 	@Override
 	public String visitVariableNode(@NonNull VariableNode object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String visitVerdictRegion(@NonNull VerdictRegion object) {
 		// TODO Auto-generated method stub
 		return null;
 	}

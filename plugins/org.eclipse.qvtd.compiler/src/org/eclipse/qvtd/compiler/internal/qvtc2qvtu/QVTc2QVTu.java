@@ -429,7 +429,7 @@ public class QVTc2QVTu extends AbstractQVTc2QVTc
 			//			else if ((pIn.getPattern() instanceof BottomPattern) && anyReferencedVariableInMiddleOrOutputDomain(pIn)) {
 			//				oldResult = false;
 			//			}
-			if ((pIn.getPattern() instanceof BottomPattern) && anyReferencedRealizedVariables(QVTcoreUtil.getConditionExpression(pIn))) {
+			if ((pIn.getPattern() instanceof BottomPattern) && anyReferencedRealizedVariables(QVTcoreUtil.getOwnedConditionExpression(pIn))) {
 				//				assert !oldResult;
 				return null;
 			}

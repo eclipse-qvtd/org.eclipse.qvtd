@@ -40,13 +40,14 @@ public class QVTscheduleConstants
 	public static final @NonNull String ROOT_MAPPING_NAME = "__root__";
 	public static final @NonNull String MIDDLE_DOMAIN_NAME = QVTbaseUtil.TRACE_TYPED_MODEL_NAME; //"middle";
 
-	public static final @NonNull String REGION_SYMBOL_NAME_PREFIX = "m_";
+	public static final @NonNull String REGION_SYMBOL_NAME_PREFIX = "m";
 	public static final @NonNull String REGION_SYMBOL_NAME_SUFFIX = "";
 
 	public static final @NonNull String EQUALS_NAME = "«equals»";
 	public static final @NonNull String IF_CONDITION_NAME = "«condition»";
 	public static final @NonNull String IF_ELSE_NAME = "«else»";
 	public static final @NonNull String IF_THEN_NAME = "«then»";
+	public static final @NonNull String INCLUDES_NAME = "«includes»";
 	public static final @NonNull String LOOP_BODY_NAME = "«body»";
 	public static final @NonNull String LOOP_ITERATOR_NAME = "«iterator»";
 	public static final @NonNull String RETURN_NAME = "«return»";

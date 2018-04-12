@@ -368,7 +368,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		 *  atl::OutPattern <=> qvtr::RelationDomain (enforce)
 		 */
 		top relation mapOutPattern {
-			atlModule : atlMM::Module;
+--			atlModule : atlMM::Module;
 			qvtrTypedModel : qvtbMM::TypedModel;
 			/*enforce*/ domain atl atlPattern : OutPattern {
 				rule = atlRule : MatchedRule{
@@ -399,7 +399,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		top relation mapSimpleInPatternElement {
 			elementName : String;
 			atlRule : atlMM::MatchedRule;
-			qvtrDomain : qvtrMM::RelationDomain;
+--			qvtrDomain : qvtrMM::RelationDomain;
 			qvtrRelation : qvtrMM::Relation;
 			/*enforce*/ domain atl atlElement : atlMM::SimpleInPatternElement {
 				varName = elementName,
@@ -438,7 +438,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		top relation mapSimpleOutPatternElement {
 			elementName : String;
 			atlRule : atlMM::MatchedRule;
-			qvtrDomain : qvtrMM::RelationDomain;
+--			qvtrDomain : qvtrMM::RelationDomain;
 			qvtrRelation : qvtrMM::Relation;
 			/*enforce*/ domain atl atlElement : atlMM::SimpleOutPatternElement {
 				varName = elementName,
@@ -726,8 +726,8 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 		/**
 		 *  atl::VariableDeclaration <=> ocl::VariableDeclaration
 		 */
-		abstract relation mapVariable {
-			/*enforce*/ domain atl atlVariable : LocatedElement {};	   
+		relation mapVariable {
+			/*enforce*/ domain atl atlVariable : LocatedElement {};
 			enforce domain qvtr qvtrVariable : VariableDeclaration {};
 		}
 		

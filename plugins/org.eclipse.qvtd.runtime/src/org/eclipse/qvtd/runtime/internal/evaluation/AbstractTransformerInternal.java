@@ -843,4 +843,8 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			}
 		}
 	}
+
+	public @NonNull Object throwInvalidEvaluationException(@NonNull String message, Object... bindings) {
+		throw new InvalidEvaluationException(message, bindings);
+	}
 }

@@ -26,6 +26,7 @@ public class StandardLibraryHelper
 {
 	protected final @NonNull StandardLibrary standardLibrary;
 
+	private final @NonNull Operation collectionExcluding;
 	private final @NonNull OperationId collectionSelectByKindId;
 	private final @NonNull OperationId oclAnyEqualsId;
 	private final @NonNull OperationId oclAnyOclAsSetId;
@@ -33,6 +34,7 @@ public class StandardLibraryHelper
 	private final @NonNull OperationId oclAnyOclIsKindOfId;
 	private final @NonNull Property oclContainerProperty;
 	private final @NonNull OperationId oclElementOclContainerId;
+
 
 	public StandardLibraryHelper(@NonNull StandardLibrary standardLibrary) {
 		this.standardLibrary = standardLibrary;
@@ -56,10 +58,17 @@ public class StandardLibraryHelper
 		Operation operation6 = NameUtil.getNameable(standardLibrary.getCollectionType().getOwnedOperations(), "selectByKind");
 		assert operation6 != null;
 		collectionSelectByKindId = operation6.getOperationId();
+		Operation operation7 = NameUtil.getNameable(standardLibrary.getCollectionType().getOwnedOperations(), "excluding");
+		assert operation7 != null;
+		collectionExcluding = operation7;
 		//
 		Property candidateOclContainerProperty = NameUtil.getNameable(oclElementType.getOwnedProperties(), "oclContainer");
 		assert candidateOclContainerProperty != null : "OCL Standard Librarty has no OclElement::oclContainer property";
 		oclContainerProperty = candidateOclContainerProperty;
+	}
+
+	public @NonNull Operation getCollectionExcludingOperation() {
+		return collectionExcluding;
 	}
 
 	public @NonNull OperationId getCollectionSelectByKindId() {

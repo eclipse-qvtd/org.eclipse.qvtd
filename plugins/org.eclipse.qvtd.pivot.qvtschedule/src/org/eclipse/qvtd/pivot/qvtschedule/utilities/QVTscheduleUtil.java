@@ -51,6 +51,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
@@ -128,6 +129,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 		public static @NonNull List<@NonNull ClassDatum> getSuperClassDatumsList(@NonNull ClassDatum classDatum) {
 			return ClassUtil.nullFree(classDatum.getSuperClassDatums());
+		}
+
+		public static @NonNull List<@NonNull MappingRegion> getMappingRegionsList(@NonNull ScheduledRegion scheduledRegion) {
+			return ClassUtil.nullFree(scheduledRegion.getMappingRegions());
 		}
 	}
 
@@ -303,16 +308,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		}
 	}
 
-	public static final class IsTrueNodePredicate implements Predicate<@NonNull Node>
-	{
-		public static final @NonNull IsTrueNodePredicate INSTANCE = new IsTrueNodePredicate();
-
-		@Override
-		public boolean apply(@NonNull Node node) {
-			return node.isTrue();
-		}
-	}
-
 	public static final class IsUsedBindingEdgePredicate implements Predicate<@NonNull NodeConnection>
 	{
 		public static final @NonNull IsUsedBindingEdgePredicate INSTANCE = new IsUsedBindingEdgePredicate();
@@ -382,6 +377,18 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		for (EObject eObject = element; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof ScheduleModel) {
 				return (ScheduleModel)eObject;
+			}
+		}
+		return null;
+	}
+
+	public static @Nullable NavigationEdge basicGetNavigationEdge(@NonNull Node traceNode, @NonNull Property property) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(traceNode)) {
+			if (edge instanceof NavigationEdge) {
+				NavigationEdge navigationEdge = (NavigationEdge)edge;
+				if (QVTscheduleUtil.getProperty(navigationEdge) == property) {
+					return navigationEdge;
+				}
 			}
 		}
 		return null;
@@ -701,6 +708,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(navigableEdge.getProperty());
 	}
 
+	public static @NonNull Property getReferredProperty(@NonNull PropertyDatum propertyDatum) {
+		return ClassUtil.nonNullState(propertyDatum.getReferredProperty());
+	}
+
 	public static @NonNull Rule getReferredRule(@NonNull RuleRegion ruleRegion) {
 		return ClassUtil.nonNullState(ruleRegion.getReferredRule());
 	}
@@ -740,6 +751,27 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull TypedModel getTypedModel(@NonNull ClassDatum classDatum) {
 		return ClassUtil.nonNullState(classDatum.getReferredTypedModel());
+	}
+
+	public static @NonNull TypedModel getTypedModel(@NonNull Node node) {
+		return getTypedModel(getClassDatum(node));
+	}
+
+	//
+	// FIXME this is a legacy compatiility supporting the obsolescence of TrueNode.
+	//
+	@Deprecated
+	public static boolean hasPredicates(@NonNull Region mappingRegion) {
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
+			if (node.isConstant()) {
+				for (@NonNull Edge incomingEdge : QVTscheduleUtil.getIncomingEdges(node)) {
+					if (incomingEdge.isOld()) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -832,6 +864,12 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		}
 		else if (secondRole == Role.PREDICATED){
 			return secondRole;
+		}
+		else if (firstRole == Role.SPECULATED){
+			return Role.PREDICATED;
+		}
+		else if (secondRole == Role.SPECULATED){
+			return Role.PREDICATED;
 		}
 		else if (firstRole == Role.LOADED) {
 			return firstRole;

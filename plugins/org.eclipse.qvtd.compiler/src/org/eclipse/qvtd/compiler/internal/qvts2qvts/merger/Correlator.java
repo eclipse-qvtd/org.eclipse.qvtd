@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.merger;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -181,9 +182,9 @@ class Correlator
 	 *	Return true if all the computed (TrueNode) predicates exactly match between primaryRegion and secondRegion,
 	 *	updating secondaryNode2primaryNode accordingly.
 	 */
-	protected boolean correlateComputedPredicates() {
-		Iterable<@NonNull Node> primaryTrueNodes = primaryRegion.getTrueNodes();
-		Iterable<@NonNull Node> secondaryTrueNodes = secondaryRegion.getTrueNodes();
+	protected boolean correlateComputedPredicates() {	// FIXME
+		Iterable<@NonNull Node> primaryTrueNodes = Collections.emptyList(); //primaryRegion.getTrueNodes();
+		Iterable<@NonNull Node> secondaryTrueNodes = Collections.emptyList(); //secondaryRegion.getTrueNodes();
 		int primaryTrueSize = Iterables.size(primaryTrueNodes);
 		if (primaryTrueSize != Iterables.size(secondaryTrueNodes)) {
 			return false;
@@ -232,6 +233,9 @@ class Correlator
 				AbstractMerger.FAILURE.println("More than 1 secondary head nodes: " + secondaryHeadNodes.size());
 			}
 			return false;
+		}
+		if (QVTscheduleUtil.hasPredicates(secondaryRegion)) {
+			return false;			// FIXME upgrade to allow merging of matching predicates
 		}
 		Node secondaryHeadNode = secondaryHeadNodes.get(0);
 		CompleteClass completeClass = secondaryHeadNode.getCompleteClass();

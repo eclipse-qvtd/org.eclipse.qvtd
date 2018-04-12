@@ -23,15 +23,18 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+import org.eclipse.qvtd.runtime.evaluation.AbstractDispatch;
 
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class.
  */
-public class TraceClassAnalysis
+public class TraceClassAnalysis implements Nameable
 {
 	protected final @NonNull TransformationPartitioner transformationPartitioner;
 	protected final @NonNull CompleteClass traceClass;
@@ -55,6 +58,9 @@ public class TraceClassAnalysis
 
 	private @NonNull List<@NonNull TraceClassAnalysis> subTraceClassAnalyses = new ArrayList<>();
 	private @NonNull List<@NonNull TraceClassAnalysis> superTraceClassAnalyses = new ArrayList<>();
+
+	private @Nullable Boolean isCyclic = null;
+	private @Nullable Boolean isDispatcher = null;
 
 	public TraceClassAnalysis(@NonNull TransformationPartitioner transformationPartitioner, @NonNull CompleteClass traceClass) {
 		this.transformationPartitioner = transformationPartitioner;
@@ -95,7 +101,7 @@ public class TraceClassAnalysis
 	 * This method identifies the discriminating properties.
 	 */
 	public void discriminate() throws CompilerChainException {
-		if (producers.size() <= 1) {
+		if ((producers.size() <= 1) || (consumers.size() <= 1)) {
 			TransformationPartitioner.DISCRIMINATION.println("Not required for " + this);
 			return;
 		}
@@ -237,6 +243,11 @@ public class TraceClassAnalysis
 		return discriminatingProperties;
 	}
 
+	@Override
+	public String getName() {
+		return traceClass.getName();
+	}
+
 	public @NonNull Iterable<@NonNull MappingPartitioner> getProducers() {
 		return producers;
 	}
@@ -253,13 +264,39 @@ public class TraceClassAnalysis
 		return traceClass;
 	}
 
+	/**
+	 * Return true if this TraceClassAnalyis participates in a production/consumption cycle of either the trace class or its trace properties.
+	 */
 	public boolean isCyclic() {
-		for (@NonNull TraceClassAnalysis subTraceClassAnalysis : subTraceClassAnalyses) {
-			if (transformationPartitioner.getCycleAnalysis(subTraceClassAnalysis) != null) {
-				return true;
+		Boolean isCyclic2 = isCyclic;
+		if (isCyclic2 == null) {
+			for (@NonNull TraceClassAnalysis subTraceClassAnalysis : subTraceClassAnalyses) {
+				if (transformationPartitioner.getCycleAnalysis(subTraceClassAnalysis) != null) {
+					isCyclic2 = isCyclic = true;
+					return isCyclic2;
+				}
 			}
+			isCyclic2 = isCyclic = false;
 		}
-		return false;
+		return isCyclic2;
+	}
+
+	/**
+	 * Return true if this TraceClassAnalyis is for an override hierarchy dispatcher.
+	 */
+	public boolean isDispatcher() {
+		Boolean isDispatcher2 = isDispatcher;
+		if (isDispatcher2 == null) {
+			String abstractDispatchClassName = AbstractDispatch.class.getName();
+			for (org.eclipse.ocl.pivot.@NonNull Class superClass : QVTbaseUtil.getSuperClasses(traceClass.getPrimaryClass())) {
+				if (abstractDispatchClassName.equals(superClass.getInstanceClassName())) {
+					isDispatcher2 = isDispatcher = true;
+					return isDispatcher2;
+				}
+			}
+			isDispatcher2 = isDispatcher = false;
+		}
+		return isDispatcher2;
 	}
 
 	/**

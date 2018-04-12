@@ -41,7 +41,7 @@ public class MappingExpPlaces
 	/**
 	 * A BodyPlace describes the then CG tree for body statements.
 	 */
-	public static class BodyPlace extends ControlPlace
+	public static class BodyPlace extends ControlPlace		// FIXME should this  be a LocalPlace
 	{
 		private BodyPlace(@NonNull LocalPlace mapExpPlace, @NonNull CGValuedElement cgBody) {
 			super(mapExpPlace, cgBody);

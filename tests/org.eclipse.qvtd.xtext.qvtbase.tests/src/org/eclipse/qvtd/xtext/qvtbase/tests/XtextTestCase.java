@@ -331,9 +331,13 @@ public class XtextTestCase extends PivotTestCase
 				File testBundleFile = new File(".project");
 				assert !testBundleFile.exists() : "Default working directory should be the workspace rather than a project: " + testBundleFile.getAbsolutePath();
 			}
-			testFileSystem = testFileSystem2 = TestFileSystem.create(new TestFileSystemHelper());
+			testFileSystem = testFileSystem2 = TestFileSystem.create(getTestFileSystemHelper());
 		}
 		return testFileSystem2;
+	}
+
+	protected @NonNull TestFileSystemHelper getTestFileSystemHelper() {
+		return new TestFileSystemHelper();
 	}
 
 	/**

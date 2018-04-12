@@ -15,8 +15,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.ECollections;
@@ -51,7 +53,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerProblem;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.RegionProblem;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionProblem;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -201,6 +203,54 @@ public class CompilerUtil extends QVTscheduleUtil
 		List<@NonNull String> classpathProjects = JavaFileUtil.createClassPathProjectList(uriConverter, projectNames2);
 		classpathProjects.add(0, classFilePath);
 		return classpathProjects;
+	}
+
+	//
+	//	Ripple the direct from-2-tos to compute and return the transitive from-2-tos closure.
+	//
+	public static <T> @NonNull Map<T, @NonNull Set<T>> computeClosure(@NonNull Map<T, @NonNull Set<T>> from2tos) {
+		Iterable<T> tos = from2tos.keySet();
+		Map<T, @NonNull Set<T>> from2tosClosure = new HashMap<>();
+		for (T from : tos) {
+			from2tosClosure.put(from, new HashSet<>(from2tos.get(from)));
+		}
+		boolean isChanged = true;
+		while (isChanged) {
+			isChanged = false;
+			for (T from : from2tos.keySet()) {
+				Set<T> fromTos = from2tosClosure.get(from);
+				assert fromTos != null;
+				for (T fromTo : new ArrayList<>(fromTos)) {
+					Set<T> fromToTos = from2tosClosure.get(fromTo);
+					assert fromToTos != null;
+					if (fromTos.addAll(fromToTos)) {
+						isChanged = true;
+					}
+				}
+			}
+		}
+		return from2tosClosure;
+	}
+
+	//
+	//	Compute and return the inverse per-to closure of all froms given the from to tos closure.
+	//
+	public static <T> @NonNull Map<T, @NonNull Set<T>> computeInverseClosure(@NonNull Map<T, @NonNull Set<T>> from2tos) {
+		Map<T, @NonNull Set<T>> to2froms = new HashMap<>();
+		Set<T> froms = from2tos.keySet();
+		for (T to : froms) {
+			to2froms.put(to, new HashSet<>());
+		}
+		for (T from : froms) {
+			Set<T> fromTos = from2tos.get(from);
+			assert fromTos != null;
+			for (T fromTo : fromTos) {
+				Set<T> fromToFroms = to2froms.get(fromTo);
+				assert fromToFroms != null;
+				fromToFroms.add(from);
+			}
+		}
+		return to2froms;
 	}
 
 	public static @NonNull RegionProblem createRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
