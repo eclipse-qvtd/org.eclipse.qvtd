@@ -48,6 +48,7 @@ class NewSpeculatingPartition extends AbstractPartition
 		//
 		Node dispatchNode = partitioner.basicGetDispatchNode();
 		if (dispatchNode != null) {
+			assert dispatchNode.isPredicated();
 			addNode(dispatchNode);
 		}
 		//

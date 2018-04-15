@@ -58,8 +58,10 @@ class NewSpeculationPartition extends AbstractPartition
 		//
 		//	For an override relation the predicated middle dispatch nodes become speculated nodes.
 		//
-		if (dispatchNode != null) {
-			addNode(dispatchNode); //, Role.SPECULATED);
+		Node dispatchNode2 = dispatchNode;
+		if (dispatchNode2 != null) {
+			assert dispatchNode2.isPredicated();
+			addNode(dispatchNode2); //, Role.SPECULATED);
 		}
 		//
 		//	All old nodes reachable from heads that are not part of cycles are copied to the speculation guard.
@@ -166,8 +168,8 @@ class NewSpeculationPartition extends AbstractPartition
 			if (partitioner.hasRealizedEdge(edge)) {
 				edgeRole = Role.PREDICATED;
 			}
-			else if (dispatchNode == edge.getSourceNode()){
-				edgeRole = null;			// Suppress Dispatch.result assignment
+			else if (dispatchNode == edge.getSourceNode()) {
+				edgeRole = null;			// Suppress Diaptach.result assignment
 			}
 		}
 		return edgeRole;
