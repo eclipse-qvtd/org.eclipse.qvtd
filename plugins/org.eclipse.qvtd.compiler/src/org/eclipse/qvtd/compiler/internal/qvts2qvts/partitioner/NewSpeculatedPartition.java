@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,12 +32,18 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 class NewSpeculatedPartition extends AbstractPartition
 {
-	private final @NonNull Iterable<@NonNull Node> executionNodes;
+	private final @NonNull Node traceNode;
+	//	private final @Nullable Node predicatedDispatchNode;
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
 
 	public NewSpeculatedPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
 		super(partitioner, reachabilityForest);
-		this.executionNodes = partitioner.getExecutionNodes();
+		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(partitioner.getName())) {
+			getClass();
+		}
+		this.traceNode = partitioner.getTraceNode();
+		//		assert traceNode.isPredicated();
+		//		this.predicatedDispatchNode = partitioner.basicGetPredicatedDispatchNode();
 		//
 		//	The realized trace nodes becomes a speculated head nodes.
 		//
@@ -101,7 +108,7 @@ class NewSpeculatedPartition extends AbstractPartition
 
 	@Override
 	protected @Nullable Iterable<@NonNull Node> getPreferredHeadNodes() {
-		return executionNodes;
+		return Collections.singleton(traceNode);
 	}
 
 	@Override
@@ -180,21 +187,20 @@ class NewSpeculatedPartition extends AbstractPartition
 	}
 
 	protected void resolveTraceNodes() {
-		for (@NonNull Node traceNode : executionNodes) {
-			assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
-			//		if (!hasNode(traceNode)) {
-			addNode(traceNode, Role.PREDICATED);
-			Node successNode = partitioner.getSuccessNode(traceNode);		// FIXME only optional because trace property can be missing
-			if (successNode != null) {
-				addNode(successNode, Role.PREDICATED);
+		assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
+		//		if (!hasNode(traceNode)) {
+		addNode(traceNode, Role.PREDICATED);
+		Node successNode = partitioner.getSuccessNode(traceNode);		// FIXME only optional because trace property can be missing
+		if (successNode != null) {
+			addNode(successNode, Role.PREDICATED);
+		}
+		//		}
+		//		for (@NonNull Node traceNode : executionNodes) {
+		for (@NonNull NavigableEdge edge : traceNode.getNavigationEdges()) {
+			if (partitioner.hasRealizedEdge(edge)) {
+				tracedInputNodes.add(edge.getEdgeTarget());
 			}
 		}
-		for (@NonNull Node traceNode : executionNodes) {
-			for (@NonNull NavigableEdge edge : traceNode.getNavigationEdges()) {
-				if (partitioner.hasRealizedEdge(edge)) {
-					tracedInputNodes.add(edge.getEdgeTarget());
-				}
-			}
-		}
+		//		}
 	}
 }

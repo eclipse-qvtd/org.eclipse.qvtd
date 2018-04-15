@@ -93,6 +93,9 @@ abstract class AbstractPartition
 				if (!partitioner.hasRealizedEdge(edge)) {
 					assert newEdgeRole == Role.REALIZED;
 				}
+				else if (this instanceof NewSpeculatingPartition) {
+					assert (newEdgeRole == Role.PREDICATED) || (newEdgeRole == Role.SPECULATED);		// FIXME rationalize
+				}
 				else {
 					assert newEdgeRole == Role.PREDICATED;
 				}

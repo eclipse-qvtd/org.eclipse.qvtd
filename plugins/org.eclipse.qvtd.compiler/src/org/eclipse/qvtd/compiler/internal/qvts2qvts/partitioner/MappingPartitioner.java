@@ -22,10 +22,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleHeadAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
@@ -193,7 +193,7 @@ public class MappingPartitioner implements Nameable
 		//			return;
 		//		}
 		//
-		if ("mapVariableExp_qvtr".equals(getName())) {
+		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(getName())) {
 			getClass();
 		}
 		analyzeNodes();
@@ -238,6 +238,9 @@ public class MappingPartitioner implements Nameable
 			alreadyLoadedEdges.add(edge);
 		}
 		else if (newEdgeRole == Role.PREDICATED) {
+			alreadyPredicatedEdges.add(edge);
+		}
+		else if (newEdgeRole == Role.SPECULATED) {
 			alreadyPredicatedEdges.add(edge);
 		}
 		else if (newEdgeRole == Role.REALIZED) {
@@ -450,8 +453,8 @@ public class MappingPartitioner implements Nameable
 		}
 	}
 
-	private @NonNull List<@NonNull Node> analyzeTraceNodes() {
-		if (realizedMiddleNodes.size() == 0) {
+	private @NonNull Iterable<@NonNull Node> analyzeTraceNodes() {
+		/*		if (realizedMiddleNodes.size() == 0) {
 			return Collections.emptyList();
 		}
 		if (realizedMiddleNodes.size() == 1) {
@@ -463,7 +466,8 @@ public class MappingPartitioner implements Nameable
 		}
 		else {
 			return Collections.singletonList(headNodes.iterator().next());
-		}
+		} */
+		return Iterables.concat(predicatedMiddleNodes, realizedMiddleNodes);
 	}
 
 	public @Nullable Node basicGetDispatchNode() {
@@ -869,6 +873,11 @@ public class MappingPartitioner implements Nameable
 		return node2traceEdge.get(node);
 	}
 
+	public @NonNull Node getTraceNode() {
+		assert traceNodes.size() == 1;
+		return ClassUtil.nonNullState(traceNodes.get(0));
+	}
+
 	public @NonNull Iterable<@NonNull Node> getTraceNodes() {
 		return traceNodes;
 	}
@@ -1025,21 +1034,36 @@ public class MappingPartitioner implements Nameable
 	}
 
 	public @NonNull Iterable<@NonNull MappingRegion> partition4qvtr() {
-		if ("mapVariableExp_qvtr".equals(getName())) {
+		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(getName())) {
 			getClass();
 		}
 		if ((region instanceof DispatchRegion) || (region instanceof VerdictRegion)) {
 			return Collections.singletonList(region);
 		}
 		boolean isCyclic = transformationPartitioner.getCycleAnalysis(this) != null;
+		/*<<<<<<< Upstream, based on utility
 		//		List<@NonNull Node> predicatedDispatchNodes = getPredicatedDispatchNodes();
 		//		List<@NonNull Node> predicatedExecutionNodes = getPredicatedExecutionNodes();
+=======
+		int predicatedDispatchNodes = (dispatchNode != null) && dispatchNode.isPredicated() ? 1 : 0;
+		List<@NonNull Node> predicatedExecutionNodes = getPredicatedExecutionNodes();
+>>>>>>> f939565 bad */
 		List<@NonNull Node> predicatedWhenNodes = getPredicatedWhenNodes();
+		/* <<<<<<< Upstream, based on utility
 		//		assert predicatedDispatchNodes.size() + predicatedExecutionNodes.size() + predicatedWhenNodes.size() == predicatedMiddleNodes.size();
 		//		List<@NonNull Node> realizedDispatchNodes = getRealizedDispatchNodes();
+=======
+		assert predicatedDispatchNodes + predicatedExecutionNodes.size() + predicatedWhenNodes.size() == predicatedMiddleNodes.size();
+		int realizedDispatchNodes = (dispatchNode != null) && dispatchNode.isRealized() ? 1 : 0;
+>>>>>>> f939565 bad */
 		List<@NonNull Node> realizedExecutionNodes = getRealizedExecutionNodes();
+		/*<<<<<<< Upstream, based on utility
 		//		List<@NonNull Node> realizedWhereNodes = getRealizedWhereNodes();
 		//		assert realizedDispatchNodes.size() + realizedExecutionNodes.size() + realizedWhereNodes.size() == realizedMiddleNodes.size();
+=======
+		List<@NonNull Node> realizedWhereNodes = getRealizedWhereNodes();
+		assert realizedDispatchNodes + realizedExecutionNodes.size() + realizedWhereNodes.size() == realizedMiddleNodes.size();
+>>>>>>> f939565 bad */
 		//		Set<@NonNull Node> dispatchedTraceNodes2 = dispatchedTraceNodes;
 		//		assert dispatchedTraceNodes2 != null;
 		//		Set<@NonNull Node> dispatchedRealizedNodes = new HashSet<>(realizedMiddleNodes);
