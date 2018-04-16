@@ -224,9 +224,11 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	void setOwningRegion(Region value);
 
 	/**
-	 * The prioritized utility of each node.
+	 * The prioritized immutable utility of each node.
 	 */
 	public enum Utility {
+		DISPATCH,						// The predicated dispatcher of an overriding rule (the overridden dispatcher is a TRACE).
+		TRACE,							// The predicated/realized trace node
 		STRONGLY_MATCHED,				// Reachable by to-1 navigation from a head node, or by to-? to an ExplicitNull
 		WEAKLY_MATCHED,					// else unconditionally used in a computation or navigation
 		//		UNCONDITIONALLY_PREDICATING,	// else always computable as part of a predicate
@@ -239,6 +241,8 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 
 	void addOutgoingConnection(@NonNull NodeConnection connection);
 	void addTypedElement(@NonNull TypedElement typedElement);
+
+	@Nullable Utility basicGetUtility();
 
 	/**
 	 * Create a new nodeRole node in region with the saem name, type etc as this node.
@@ -355,6 +359,13 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	boolean isDependency();
 
 	/**
+	 * Return true if this is the predicated dispatcher for an overriding region.
+	 *
+	 * (The realized dispatcher in an invocation is not a predicated dispatcher.)
+	 */
+	boolean isDispatch();
+
+	/**
 	 * Return true if this node is an explicitly null value.
 	 */
 	boolean isExplicitNull();
@@ -449,6 +460,13 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * Return true if this is a SuccessNode that provides predication/speculation status.
 	 */
 	boolean isSuccess();
+
+	/**
+	 * Return true if this is a/the trace for a region.
+	 *
+	 * TBD. Multiple traces are allowed after region merging?
+	 */
+	boolean isTrace();
 
 	/**
 	 * Return true if this is a TrueNode that terminates a complex predicate expression.

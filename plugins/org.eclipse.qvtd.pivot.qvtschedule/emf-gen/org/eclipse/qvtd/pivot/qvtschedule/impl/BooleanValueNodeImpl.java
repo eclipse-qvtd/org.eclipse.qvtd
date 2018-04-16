@@ -31,6 +31,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -200,7 +201,7 @@ public class BooleanValueNodeImpl extends OperationNodeImpl implements BooleanVa
 
 	@Override
 	public void setUtility(@NonNull Utility utility) {
-		assert (utility == Utility.STRONGLY_MATCHED) || (utility == Utility.WEAKLY_MATCHED);
+		assert QVTscheduleUtil.isUnconditional(utility);
 		super.setUtility(utility);
 	}
 

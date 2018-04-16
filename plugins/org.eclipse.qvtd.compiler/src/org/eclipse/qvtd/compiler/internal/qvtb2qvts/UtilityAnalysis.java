@@ -23,6 +23,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -36,10 +37,11 @@ import com.google.common.collect.Sets;
  */
 public class UtilityAnalysis
 {
-	public static void assignUtilities(@NonNull RuleRegion region) {
-		new UtilityAnalysis(region).assignUtilities();
+	public static void assignUtilities(@NonNull ScheduleManager scheduleManager, @NonNull RuleRegion region) {
+		new UtilityAnalysis(scheduleManager, region).assignUtilities();
 	}
 
+	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull MappingRegion mappingRegion;
 
 	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> stronglyMatchedNodes = null;
@@ -48,12 +50,15 @@ public class UtilityAnalysis
 	//	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> dependencyNodes = null;
 	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> deadNodes = null;
 
-	protected UtilityAnalysis(@NonNull MappingRegion mappingRegion) {
+	protected UtilityAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull MappingRegion mappingRegion) {
+		this.scheduleManager = scheduleManager;
 		this.mappingRegion = mappingRegion;
 	}
 
 	protected void assignUtilities() {		// FIXME remove assertions after 1-Jan-2017
 		Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(mappingRegion);
+		Node dispatchNode = computeDispatchNode();
+		Set<@NonNull Node> traceNodes = computeTraceNodes(headNodes);
 		Set<@NonNull Node> stronglyMatchedNodes = computeStronglyMatchedNodes(headNodes);
 		Set<@NonNull Node> unconditionalNodes = computeUnconditionalNodes(headNodes);
 		Set<@NonNull Node> conditionalNodes = computeConditionalNodes(unconditionalNodes);
@@ -61,7 +66,14 @@ public class UtilityAnalysis
 		Set<@NonNull Node> deadNodes = null;
 		//
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
-			if (stronglyMatchedNodes.contains(node)) {
+			Node.Utility oldUtility = node.basicGetUtility();
+			if (dispatchNode == node) {
+				node.setUtility(Node.Utility.DISPATCH);
+			}
+			else if (traceNodes.contains(node)) {
+				node.setUtility(Node.Utility.TRACE);
+			}
+			else if (stronglyMatchedNodes.contains(node)) {
 				node.setUtility(Node.Utility.STRONGLY_MATCHED);
 				//FIXME				assert unconditionalNodes.contains(node);
 				if (!unconditionalNodes.contains(node)) {
@@ -88,6 +100,10 @@ public class UtilityAnalysis
 				deadNodes.add(node);
 				node.setUtility(Node.Utility.DEAD);
 				toString();
+			}
+			Node.Utility newUtility = node.getUtility();
+			if (oldUtility != null) {
+				assert oldUtility == newUtility;
 			}
 		}
 		if (deadNodes != null) {
@@ -169,6 +185,19 @@ public class UtilityAnalysis
 		return conditionalNodes;
 	}
 
+	private @Nullable Node computeDispatchNode() {
+		Node dispatchNode = null;
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
+			if (node.isPredicated()) {
+				if (node.basicGetUtility() == Utility.DISPATCH) {
+					assert dispatchNode == null;		// No double dispatch
+					dispatchNode = node;
+				}
+			}
+		}
+		return dispatchNode;
+	}
+
 	private @NonNull Set<@NonNull Node> computeStronglyMatchedNodes(@NonNull Iterable<@NonNull Node> headNodes) {
 		Set<@NonNull Node> stronglyMatchedNodes = new HashSet<>();
 		for (@NonNull Node headNode : headNodes) {
@@ -204,6 +233,23 @@ public class UtilityAnalysis
 		this.stronglyMatchedNodes = new ArrayList<>(stronglyMatchedNodes);
 		Collections.sort(this.stronglyMatchedNodes, NameUtil.NAMEABLE_COMPARATOR);
 		return stronglyMatchedNodes;
+	}
+
+	private Set<@NonNull Node> computeTraceNodes(@NonNull Iterable<@NonNull Node> headNodes) {
+		Set<@NonNull Node> traceNodes = new HashSet<>();
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
+			if (node.basicGetUtility() == Utility.TRACE) {
+				traceNodes.add(node);
+			}
+		}
+		if (traceNodes.isEmpty()) {			// A QVTc / legacy usage - deduce trace node(s)
+			for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
+				if (node.isRealized() && scheduleManager.isMiddle(node)) {
+					traceNodes.add(node);
+				}
+			}
+		}
+		return traceNodes;
 	}
 
 	private @NonNull Set<@NonNull Node> computeUnconditionalNodes(@NonNull Iterable<@NonNull Node> headNodes) {

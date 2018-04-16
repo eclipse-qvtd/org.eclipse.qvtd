@@ -60,6 +60,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -843,6 +845,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return true;
 	}
 
+	public static boolean isUnconditional(@Nullable Utility utility) {
+		return (utility == Utility.DISPATCH) || (utility == Utility.TRACE) || (utility == Utility.STRONGLY_MATCHED) || (utility == Utility.WEAKLY_MATCHED);
+	}
+
 	public static boolean isUnconditional(@NonNull Edge edge) {
 		for (@NonNull TypedElement typedElement : edge.getEdgeSource().getTypedElements()) {
 			if (!isUnconditional(typedElement)) {
@@ -927,7 +933,15 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	}
 
 	public static Node.@NonNull Utility mergeToStrongerUtility(Node.@NonNull Utility nodeUtility1, Node.@NonNull Utility nodeUtility2) {
-		if ((nodeUtility1 == Node.Utility.STRONGLY_MATCHED) || (nodeUtility2 == Node.Utility.STRONGLY_MATCHED)) {
+		if (nodeUtility1 == Node.Utility.DISPATCH) {
+			assert (nodeUtility2 == Node.Utility.DISPATCH);
+			return Node.Utility.DISPATCH;
+		}
+		else if (nodeUtility1 == Node.Utility.TRACE) {
+			assert (nodeUtility2 == Node.Utility.TRACE);
+			return Node.Utility.TRACE;
+		}
+		else if ((nodeUtility1 == Node.Utility.STRONGLY_MATCHED) || (nodeUtility2 == Node.Utility.STRONGLY_MATCHED)) {
 			return Node.Utility.STRONGLY_MATCHED;
 		}
 		else if ((nodeUtility1 == Node.Utility.WEAKLY_MATCHED) || (nodeUtility2 == Node.Utility.WEAKLY_MATCHED)) {
