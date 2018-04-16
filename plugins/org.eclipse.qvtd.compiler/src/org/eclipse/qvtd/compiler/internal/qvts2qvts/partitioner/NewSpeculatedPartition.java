@@ -150,7 +150,7 @@ class NewSpeculatedPartition extends AbstractPartition
 	protected void resolveRealizedOutputNodes() {
 		for (@NonNull Node node : partitioner.getCorollaryNodes()) {
 			if (!hasNode(node) && !node.isSuccess()) {
-				addNode(node, QVTscheduleUtil.getNodeRole(node));
+				addNode(node);
 			}
 		}
 	}
@@ -164,7 +164,7 @@ class NewSpeculatedPartition extends AbstractPartition
 		//			}
 		//		}
 		for (@NonNull Edge edge : partitioner.getSuccessEdges()) {
-			if (partitioner.hasRealizedEdge(edge) || !partitioner.hasPredicatedEdge(edge)) {
+			if (!partitioner.hasRealizedEdge(edge) && !partitioner.hasPredicatedEdge(edge)) {
 				Node sourceNode = edge.getEdgeSource();
 				Node targetNode = edge.getEdgeTarget();
 				//			if (edge.isPredicated()) {
