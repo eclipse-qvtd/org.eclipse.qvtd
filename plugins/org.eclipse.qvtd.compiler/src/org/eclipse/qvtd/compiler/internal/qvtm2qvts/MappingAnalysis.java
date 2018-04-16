@@ -458,7 +458,7 @@ public class MappingAnalysis extends RuleAnalysis
 		//
 		Iterable<@NonNull Node> headNodes = RuleHeadAnalysis.computeRuleHeadNodes(scheduleManager, region, null);
 		Iterables.addAll(QVTscheduleUtil.Internal.getHeadNodesList(region), headNodes);
-		UtilityAnalysis.assignUtilities(region);
+		UtilityAnalysis.assignUtilities(scheduleManager, region);
 	}
 
 	//

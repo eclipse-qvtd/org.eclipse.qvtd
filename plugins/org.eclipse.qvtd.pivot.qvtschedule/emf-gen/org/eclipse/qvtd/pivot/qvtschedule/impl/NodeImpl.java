@@ -329,6 +329,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 */
 	@Override
 	public void setName(String newName) {
+		if ("trace".equals(newName)) {
+			getClass();
+		}
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
@@ -585,6 +588,11 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		//		if (isHead) {
 		//			s.append("}");
 		//		}
+	}
+
+	@Override
+	public @Nullable Utility basicGetUtility() {
+		return utility;
 	}
 
 	@Override
@@ -996,6 +1004,11 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
+	public boolean isDispatch() {
+		return getUtility() == Utility.DISPATCH;
+	}
+
+	@Override
 	public boolean isExplicitNull() {
 		return false;
 	}
@@ -1095,8 +1108,13 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
+	public boolean isTrace() {
+		return getUtility() == Utility.TRACE;
+	}
+
+	@Override
 	public boolean isUnconditional() {
-		return (utility == Utility.STRONGLY_MATCHED) || (utility == Utility.WEAKLY_MATCHED);
+		return QVTscheduleUtil.isUnconditional(utility);
 	}
 
 	/*	@Override
@@ -1174,8 +1192,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public void setUtility(@NonNull Utility utility) {
-		assert this.utility == null;
-		this.utility  = utility;
+		assert (this.utility == null) || (this.utility == utility);
+		this.utility = utility;
 	}
 
 	@Override

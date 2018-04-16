@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -40,13 +39,13 @@ class NewSpeculationPartition extends AbstractPartition
 {
 	private final @NonNull Set<@NonNull Node> originalHeadNodes;
 	private final @NonNull Iterable<@NonNull Node> executionNodes;
-	private final @NonNull List<@NonNull Node> predicatedDispatchNodes;
+	private final @Nullable Node dispatchNode;
 
 	public NewSpeculationPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
 		super(partitioner, reachabilityForest);
 		this.originalHeadNodes = Sets.newHashSet(QVTscheduleUtil.getHeadNodes(region));
 		this.executionNodes = partitioner.getExecutionNodes();
-		this.predicatedDispatchNodes = partitioner.getPredicatedDispatchNodes();
+		this.dispatchNode = partitioner.basicGetDispatchNode();
 
 		//
 		//	For a no-override top relation the realized middle (trace) nodes become speculated nodes.
@@ -59,7 +58,7 @@ class NewSpeculationPartition extends AbstractPartition
 		//
 		//	For an override relation the predicated middle dispatch nodes become speculated nodes.
 		//
-		for (@NonNull Node dispatchNode : predicatedDispatchNodes) {
+		if (dispatchNode != null) {
 			addNode(dispatchNode); //, Role.SPECULATED);
 		}
 		//
@@ -70,7 +69,7 @@ class NewSpeculationPartition extends AbstractPartition
 		for (@NonNull Node node : originalHeadNodes) {
 			gatherReachableOldAcyclicNodes(checkableOldNodes, node);
 		}
-		for (@NonNull Node dispatchNode : predicatedDispatchNodes) {
+		if (dispatchNode != null) {
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(dispatchNode)) {
 				if (edge.isNavigation() && edge.isOld()) {
 					Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
@@ -167,8 +166,8 @@ class NewSpeculationPartition extends AbstractPartition
 			if (partitioner.hasRealizedEdge(edge)) {
 				edgeRole = Role.PREDICATED;
 			}
-			else if (predicatedDispatchNodes.contains(edge.getSourceNode())){
-				edgeRole = null;			// Suppress Diaptach.result assignment
+			else if (dispatchNode == edge.getSourceNode()){
+				edgeRole = null;			// Suppress Dispatch.result assignment
 			}
 		}
 		return edgeRole;

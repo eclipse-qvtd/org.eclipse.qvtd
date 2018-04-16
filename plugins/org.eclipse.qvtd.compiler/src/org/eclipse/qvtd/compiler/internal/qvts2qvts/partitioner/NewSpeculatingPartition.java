@@ -46,7 +46,8 @@ class NewSpeculatingPartition extends AbstractPartition
 		//
 		//	For an override relation the predicated middle dispatch nodes become speculated nodes.
 		//
-		for (@NonNull Node dispatchNode : partitioner.getPredicatedDispatchNodes()) {
+		Node dispatchNode = partitioner.basicGetDispatchNode();
+		if (dispatchNode != null) {
 			addNode(dispatchNode);
 		}
 		//

@@ -29,7 +29,6 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleHeadAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
@@ -115,6 +114,16 @@ public class MappingPartitioner implements Nameable
 	private final @NonNull List<@NonNull Edge> realizedOutputEdges = new ArrayList<>();
 	private final @NonNull Set<@NonNull SuccessEdge> successEdges = new HashSet<>();	// FIXME redundant wrt traceNode2successEdge.values()
 	//	private boolean hasLoadedNodes = false;
+
+	/**
+	 * The override dispatch node if needed.
+	 */
+	private @Nullable Node dispatchNode = null;
+
+	/**
+	 * The trace node(s).
+	 */
+	private final @NonNull List<@NonNull Node> traceNodes = new ArrayList<>();
 
 	/**
 	 * The trace nodes and their corresponding success node.
@@ -350,6 +359,18 @@ public class MappingPartitioner implements Nameable
 					//					hasLoadedNodes  = true;
 				}
 				else if (scheduleManager.isMiddle(node)) {
+					if (node.isDispatch()) {
+						if (dispatchNode != null) {
+							throw new IllegalStateException();		// Dual dispatcher
+						}
+						dispatchNode = node;
+					}
+					else if (node.isTrace()) {
+						//						if (traceNode != null) {
+						//							throw new IllegalStateException();		// Two traces
+						//						}
+						traceNodes.add(node);
+					}
 					if (node.isPredicated()) {
 						addConsumptionOfMiddleNode(node);
 					}
@@ -443,6 +464,10 @@ public class MappingPartitioner implements Nameable
 		else {
 			return Collections.singletonList(headNodes.iterator().next());
 		}
+	}
+
+	public @Nullable Node basicGetDispatchNode() {
+		return dispatchNode;
 	}
 
 	private void check() {
@@ -703,16 +728,6 @@ public class MappingPartitioner implements Nameable
 		return oldPrimaryNavigableEdges;
 	}
 
-	public @NonNull List<@NonNull Node> getPredicatedDispatchNodes() {
-		List<@NonNull Node> predicatedDispatchNodes = new ArrayList<>();
-		for (@NonNull Node node : getPredicatedMiddleNodes()) {
-			if (QVTrelationNameGenerator.DISPATCHCLASS_SELF_NAME.equals(node.getName())) {
-				predicatedDispatchNodes.add(node);
-			}
-		}
-		return predicatedDispatchNodes;
-	}
-
 	public @NonNull Iterable<@NonNull Edge> getPredicatedEdges() {
 		return predicatedEdges;
 	}
@@ -721,6 +736,7 @@ public class MappingPartitioner implements Nameable
 		List<@NonNull Node> predicatedExecutionNodes = new ArrayList<>();
 		for (@NonNull Node node : getPredicatedMiddleNodes()) {
 			if (QVTrNameGenerator.TRACECLASS_PROPERTY_NAME.equals(node.getName())) {
+				assert node.isTrace();
 				predicatedExecutionNodes.add(node);
 			}
 		}
@@ -755,16 +771,6 @@ public class MappingPartitioner implements Nameable
 		return Iterables.concat(traceNodes, leafConstantNodes);
 	}
 
-	public @NonNull List<@NonNull Node> getRealizedDispatchNodes() {
-		List<@NonNull Node> realizedDispatchNodes = new ArrayList<>();
-		for (@NonNull Node node : getRealizedMiddleNodes()) {
-			if (QVTrelationNameGenerator.DISPATCHCLASS_SELF_NAME.equals(node.getName())) {
-				realizedDispatchNodes.add(node);
-			}
-		}
-		return realizedDispatchNodes;
-	}
-
 	public @NonNull Iterable<@NonNull Edge> getRealizedEdges() {
 		return realizedEdges;
 	}
@@ -775,6 +781,9 @@ public class MappingPartitioner implements Nameable
 			if (QVTrNameGenerator.TRACECLASS_PROPERTY_NAME.equals(node.getName())) {
 				realizedExecutionNodes.add(node);
 			}
+			//			else if (QVTrelationNameGenerator.DISPATCHCLASS_SELF_NAME.equals(node.getName())) {
+			//				realizedExecutionNodes.add(node);
+			//			}
 		}
 		return realizedExecutionNodes;
 	}
@@ -860,28 +869,22 @@ public class MappingPartitioner implements Nameable
 		return node2traceEdge.get(node);
 	}
 
-	@Deprecated /* @deprecated the semantics of this are too vague */
 	public @NonNull Iterable<@NonNull Node> getTraceNodes() {
-		if (scheduleManager.useActivators()) {				// new QVTr way
-			return getExecutionNodes();
-		}
-		else {												// old QVTc way
-			return traceNode2successEdge.keySet();
-		}
+		return traceNodes;
 	}
 
 	public @NonNull TransformationPartitioner getTransformationPartitioner() {
 		return transformationPartitioner;
 	}
 
-	private boolean hasNoComputationInputs(@NonNull Node node) {
+	/*	private boolean hasNoComputationInputs(@NonNull Node node) {
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 			if (edge.isComputation()) {
 				return false;
 			}
 		}
 		return true;
-	}
+	} */
 
 	private boolean hasNoComputationOrSuccessInputs(@NonNull Node node) {
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
@@ -1029,14 +1032,14 @@ public class MappingPartitioner implements Nameable
 			return Collections.singletonList(region);
 		}
 		boolean isCyclic = transformationPartitioner.getCycleAnalysis(this) != null;
-		List<@NonNull Node> predicatedDispatchNodes = getPredicatedDispatchNodes();
-		List<@NonNull Node> predicatedExecutionNodes = getPredicatedExecutionNodes();
+		//		List<@NonNull Node> predicatedDispatchNodes = getPredicatedDispatchNodes();
+		//		List<@NonNull Node> predicatedExecutionNodes = getPredicatedExecutionNodes();
 		List<@NonNull Node> predicatedWhenNodes = getPredicatedWhenNodes();
-		assert predicatedDispatchNodes.size() + predicatedExecutionNodes.size() + predicatedWhenNodes.size() == predicatedMiddleNodes.size();
-		List<@NonNull Node> realizedDispatchNodes = getRealizedDispatchNodes();
+		//		assert predicatedDispatchNodes.size() + predicatedExecutionNodes.size() + predicatedWhenNodes.size() == predicatedMiddleNodes.size();
+		//		List<@NonNull Node> realizedDispatchNodes = getRealizedDispatchNodes();
 		List<@NonNull Node> realizedExecutionNodes = getRealizedExecutionNodes();
-		List<@NonNull Node> realizedWhereNodes = getRealizedWhereNodes();
-		assert realizedDispatchNodes.size() + realizedExecutionNodes.size() + realizedWhereNodes.size() == realizedMiddleNodes.size();
+		//		List<@NonNull Node> realizedWhereNodes = getRealizedWhereNodes();
+		//		assert realizedDispatchNodes.size() + realizedExecutionNodes.size() + realizedWhereNodes.size() == realizedMiddleNodes.size();
 		//		Set<@NonNull Node> dispatchedTraceNodes2 = dispatchedTraceNodes;
 		//		assert dispatchedTraceNodes2 != null;
 		//		Set<@NonNull Node> dispatchedRealizedNodes = new HashSet<>(realizedMiddleNodes);
