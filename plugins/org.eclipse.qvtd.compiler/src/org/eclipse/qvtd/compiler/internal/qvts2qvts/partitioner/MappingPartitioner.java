@@ -202,6 +202,11 @@ public class MappingPartitioner implements Nameable
 			analyzeTraceEdges(traceNode);
 		}
 		//
+		List<@NonNull Node> alreadyRealized = new ArrayList<>(traceNodes);
+		if (dispatchNode != null) {
+			alreadyRealized.add(dispatchNode);
+		}
+		analyzeCorollaries(alreadyRealized);
 		analyzeEdges();
 	}
 
@@ -215,19 +220,6 @@ public class MappingPartitioner implements Nameable
 			}
 			consumedTraceClassAnalyses2.add(consumedTraceAnalysis);
 		}
-	}
-
-	private void addCorollary(@NonNull NavigableEdge edge) {
-		Node targetNode = edge.getTargetNode();
-		assert traceNode2successEdge.containsKey(edge.getSourceNode());
-		assert targetNode.isRealized();
-		assert !targetNode.isSuccess();
-		assert !corollaryEdges.contains(edge);
-		corollaryEdges.add(edge);
-		if (!corollaryNodes.contains(targetNode)) {		// Overrides have a base and derived edge to the same rootVariable node
-			corollaryNodes.add(targetNode);
-		}
-		transformationPartitioner.addCorollary(QVTscheduleUtil.getProperty(edge), region);
 	}
 
 	public void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole, @NonNull AbstractPartition partition) {
@@ -281,6 +273,30 @@ public class MappingPartitioner implements Nameable
 		return alreadyRealizedNodes.add(node);
 	}
 
+	/**
+	 * Identify what gets realized as a consequence of the mapping succeeding.
+	 */
+	private void analyzeCorollaries(@NonNull List<@NonNull Node> alreadyRealizedNodes) {
+		for (int i = 0; i < alreadyRealizedNodes.size(); i++) {
+			Node alreadyRealizedNode = alreadyRealizedNodes.get(i);
+			for (@NonNull NavigableEdge edge : alreadyRealizedNode.getRealizedNavigationEdges()) {
+				Node targetNode = QVTscheduleUtil.getTargetNode(edge);
+				if (targetNode.isRealized() && !targetNode.isSuccess()) {
+					assert !corollaryEdges.contains(edge);
+					corollaryEdges.add(edge);
+					if (!alreadyRealizedNodes.contains(targetNode)) {
+						alreadyRealizedNodes.add(targetNode);
+						assert !corollaryNodes.contains(targetNode);
+						if (!corollaryNodes.contains(targetNode)) {		// Overrides have a base and derived edge to the same rootVariable node
+							corollaryNodes.add(targetNode);
+						}
+					}
+					transformationPartitioner.addCorollary(QVTscheduleUtil.getProperty(edge), region);
+				}
+			}
+		}
+	}
+
 	private void analyzeEdges() {
 		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
 			if (!edge.isSecondary()) {
@@ -292,12 +308,12 @@ public class MappingPartitioner implements Nameable
 						realizedEdges.add(edge);
 						Node sourceNode = edge.getEdgeSource();
 						Node targetNode = edge.getEdgeTarget();
-						if (traceNode2successEdge.containsKey(sourceNode)) {
+						/*if (traceNode2successEdge.containsKey(sourceNode)) {
 							if (targetNode.isRealized() && !targetNode.isSuccess()) {
 								addCorollary((NavigableEdge) edge);
 							}
 						}
-						else if ((sourceNode.isPredicated() || sourceNode.isRealized())) {
+						else*/ if ((sourceNode.isPredicated() || sourceNode.isRealized())) {
 							if (!traceNode2successEdge.containsKey(targetNode) && (targetNode.isPredicated() || targetNode.isRealized())) {
 								realizedOutputEdges.add(edge);
 							}
