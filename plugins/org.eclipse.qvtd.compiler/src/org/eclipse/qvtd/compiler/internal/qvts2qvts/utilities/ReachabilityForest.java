@@ -149,7 +149,8 @@ public class ReachabilityForest
 								else {
 									NavigableEdge oppositeEdge = navigableEdge.getOppositeEdge();
 									if (forwardEdges.contains(oppositeEdge)) {
-										int nextCost = thisCost + INVERSE_NAVIGATION_COST;
+										boolean isImplicit = oppositeEdge.getProperty().isIsImplicit();
+										int nextCost = thisCost + (isImplicit ? INVERSE_NAVIGATION_COST : FORWARD_NAVIGATION_COST);
 										if ((targetCost == null) || (nextCost < targetCost)) {
 											node2cost.put(targetNode, nextCost);
 											node2reachingEdge.put(targetNode, oppositeEdge);
