@@ -52,11 +52,11 @@ class ActivatorPartition extends AbstractPartition
 		//
 		//	Ensure that the predecessors of each node are included in the partition.
 		//
-		resolvePrecedingNodes();
+		//		resolvePrecedingNodes();
 		//
 		//	Ensure that re-used trace classes do not lead to ambiguous mappings.
 		//
-		resolveDisambiguations();
+		//		resolveDisambiguations();
 		//
 		//	Join up the edges.
 		//

@@ -1662,6 +1662,19 @@ public class RelationAnalysis extends RuleAnalysis
 					}
 				}
 			}
+			boolean hasPredicatedTrace = traceNode.isPredicated(); // || traceNode.isSpeculated();
+			assert hasPredicatedTrace;
+			List<@NonNull ? extends VariableDeclaration> rootVariables = QVTrelationUtil.getRootVariables(relation);
+			RelationAnalysis2TraceClass ruleAnalysis2traceClass = getRuleAnalysis2TraceGroup().getRuleAnalysis2TraceClass();
+			for (@NonNull VariableDeclaration2TraceProperty variableDeclaration2traceProperty : ruleAnalysis2traceClass.getVariableDeclaration2TraceProperties()) {
+				Property traceProperty = variableDeclaration2traceProperty.getTraceProperty();
+				VariableDeclaration tracedVariable = variableDeclaration2traceProperty.getOverridingVariable();
+				Node targetNode = region.getNode(tracedVariable);
+				assert targetNode != null;
+				if (!rootVariables.contains(tracedVariable)) {
+					createRealizedNavigationEdge(traceNode, traceProperty, targetNode, null);
+				}
+			}
 		}
 		else {
 			boolean hasPredicatedTrace = traceNode.isPredicated(); // || traceNode.isSpeculated();
@@ -1686,6 +1699,9 @@ public class RelationAnalysis extends RuleAnalysis
 	 * Create trace and when/where invocation nodes and their edges.
 	 */
 	public void synthesizeTraceElements(@NonNull RelationAnalysis2TraceGroup relationAnalysis2traceGroup) {
+		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(getName())) {
+			getClass();
+		}
 		//
 		//	Create the dispatch region if needed by an override.
 		//

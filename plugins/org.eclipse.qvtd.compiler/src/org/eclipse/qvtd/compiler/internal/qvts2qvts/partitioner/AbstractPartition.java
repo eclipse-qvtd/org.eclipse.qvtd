@@ -378,7 +378,7 @@ abstract class AbstractPartition
 					Node targetNode = traceNode.getNavigationTarget(property);
 					assert targetNode != null;
 					if (!hasNode(targetNode)) {
-						addNode(targetNode, QVTscheduleUtil.getNodeRole(targetNode));
+						addNode(targetNode);
 					}
 				}
 			}
@@ -475,12 +475,21 @@ abstract class AbstractPartition
 			Node node = nodes.get(i);
 			assert node != null;
 			Edge traceEdge = partitioner.getTraceEdge(node);
-			if ((traceEdge == null) || !partitioner.hasRealizedEdge(traceEdge)) {
+			Node sourceNode = traceEdge != null ? QVTscheduleUtil.getSourceNode(traceEdge) : null;
+			boolean hasSourceNode = (sourceNode != null) && hasNode(sourceNode);
+			if ((traceEdge == null) || !partitioner.hasRealizedEdge(traceEdge) || !hasSourceNode) {
 				boolean gotOne = false;
 				for (@NonNull Node precedingNode : getPredecessors(node)) {
 					gotOne = true;
 					if (!hasNode(precedingNode)) {
-						addNode(precedingNode, QVTscheduleUtil.getNodeRole(precedingNode));
+						addNode(precedingNode);
+					}
+				}
+				if (!gotOne && (traceEdge != null) && traceEdge.isRealized()) {
+					gotOne = true;
+					if (!hasSourceNode) {
+						assert sourceNode != null;
+						addNode(sourceNode);
 					}
 				}
 				Integer cost = reachabilityForest.getCost(node);
@@ -489,7 +498,7 @@ abstract class AbstractPartition
 					getClass();
 					for (@NonNull Node precedingNode : getPredecessors(node)) {
 						if (!hasNode(precedingNode)) {
-							addNode(precedingNode, QVTscheduleUtil.getNodeRole(precedingNode));
+							addNode(precedingNode);
 						}
 					}
 					assert gotOne;
