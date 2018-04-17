@@ -72,7 +72,7 @@ class NewSpeculatingPartition extends AbstractPartition
 		//
 		//	Add the outstanding predicates that can be checked by this partition.
 		//
-		//		resolveConstantOutputNodes();
+		resolveConstantOutputNodes();
 		//
 		//	Ensure that the predecessors of each node are included in the partition.
 		//
@@ -122,6 +122,14 @@ class NewSpeculatingPartition extends AbstractPartition
 		}
 		return true;
 	} */
+
+	protected void resolveConstantOutputNodes() {
+		for (@NonNull Node constantOutputNode : partitioner.getConstantOutputNodes()) {
+			if (!partitioner.hasPredicatedNode(constantOutputNode)) {
+				addNode(constantOutputNode);
+			}
+		}
+	}
 
 	/**
 	 * Return true if node is a corollary of this mapping.

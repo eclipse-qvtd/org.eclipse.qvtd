@@ -496,7 +496,7 @@ abstract class AbstractPartition
 				//				assert cost != null;
 				if (!gotOne && (cost != null) && (cost > 0)) {
 					getClass();
-					for (@NonNull Node precedingNode : getPredecessors(node)) {
+					for (@NonNull Node precedingNode : getPredecessors(node)) {		// FIXME debugging
 						if (!hasNode(precedingNode)) {
 							addNode(precedingNode);
 						}
