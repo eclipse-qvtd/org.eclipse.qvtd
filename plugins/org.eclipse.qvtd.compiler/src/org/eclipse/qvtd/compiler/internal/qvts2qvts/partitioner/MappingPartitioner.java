@@ -94,7 +94,12 @@ public class MappingPartitioner implements Nameable
 	/**
 	 * The constant nodes that require no computation from other nodes.
 	 */
-	private final @NonNull List<@NonNull Node> leafConstantNodes = new ArrayList<>();
+	private final @NonNull List<@NonNull Node> constantInputNodes = new ArrayList<>();
+
+	/**
+	 * The constant nodes that impose a check on a computation from other nodes.
+	 */
+	private final @NonNull List<@NonNull Node> constantOutputNodes = new ArrayList<>();
 
 	/**
 	 * The map from node to the trace edge by which the node may be located by lookup in a trace node once its trace edge is realized..
@@ -368,8 +373,13 @@ public class MappingPartitioner implements Nameable
 	private void analyzeNodes() {
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
 			if (node.isExplicitNull()) {
-				assert node.isConstant() && hasNoComputationOrSuccessInputs(node);
-				leafConstantNodes.add(node);
+				assert node.isConstant();
+				if (hasNoComputationOrSuccessInputs(node)) {
+					constantInputNodes.add(node);
+				}
+				else {
+					constantOutputNodes.add(node);
+				}
 			}
 			else if (node.isPattern()) {
 				if (node.isConstant()) {
@@ -430,7 +440,10 @@ public class MappingPartitioner implements Nameable
 			else if (node.isOperation()) {
 				if (node.isConstant()) {
 					if (hasNoComputationOrSuccessInputs(node)) {
-						leafConstantNodes.add(node);
+						constantInputNodes.add(node);
+					}
+					else {
+						constantOutputNodes.add(node);
 					}
 				}
 				else if (node.isRealized()) {
@@ -719,6 +732,14 @@ public class MappingPartitioner implements Nameable
 		return navigableEdges;
 	}
 
+	public @NonNull Iterable<@NonNull Node> getConstantInputNodes() {
+		return constantInputNodes;
+	}
+
+	public @NonNull Iterable<@NonNull Node> getConstantOutputNodes() {
+		return constantOutputNodes;
+	}
+
 	public @Nullable Iterable<@NonNull TraceClassAnalysis> getConsumedTraceClassAnalyses() {
 		return consumedTraceClassAnalyses;
 	}
@@ -733,10 +754,6 @@ public class MappingPartitioner implements Nameable
 
 	public @NonNull Iterable<@NonNull Node> getExecutionNodes() {
 		return Iterables.concat(getPredicatedExecutionNodes(), getRealizedExecutionNodes());
-	}
-
-	public @NonNull Iterable<@NonNull Node> getLeafConstantNodes() {
-		return leafConstantNodes;
 	}
 
 	@Override
@@ -787,8 +804,8 @@ public class MappingPartitioner implements Nameable
 
 	private @NonNull Iterable<@NonNull Node> getReachabilityRootNodes() {
 		Iterable<@NonNull Node> traceNodes = getTraceNodes();
-		Iterable<@NonNull Node> leafConstantNodes = getLeafConstantNodes();
-		return Iterables.concat(traceNodes, leafConstantNodes);
+		Iterable<@NonNull Node> constantInputNodes = getConstantInputNodes();
+		return Iterables.concat(traceNodes, constantInputNodes);
 	}
 
 	public @NonNull Iterable<@NonNull Edge> getRealizedEdges() {
@@ -845,10 +862,8 @@ public class MappingPartitioner implements Nameable
 				rootNodes.add(headNode);
 			}
 		}
-		for (@NonNull Node leafConstant : getLeafConstantNodes()) {
-			//			if (!leafConstant.isTrue()) {
-			rootNodes.add(leafConstant);
-			//			}
+		for (@NonNull Node constantInputNode : getConstantInputNodes()) {
+			rootNodes.add(constantInputNode);
 		}
 		return rootNodes;
 	}

@@ -72,7 +72,7 @@ class NewSpeculatingPartition extends AbstractPartition
 		//
 		//	Add the outstanding predicates that can be checked by this partition.
 		//
-		//		resolveTrueNodes();
+		//		resolveConstantOutputNodes();
 		//
 		//	Ensure that the predecessors of each node are included in the partition.
 		//
