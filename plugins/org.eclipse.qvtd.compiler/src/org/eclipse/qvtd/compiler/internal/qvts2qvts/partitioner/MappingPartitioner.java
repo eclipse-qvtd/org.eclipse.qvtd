@@ -198,7 +198,7 @@ public class MappingPartitioner implements Nameable
 		//			return;
 		//		}
 		//
-		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(getName())) {
+		if ("mapVariableExp_referredVariable_Helper_qvtr".equals(getName())) {
 			getClass();
 		}
 		analyzeNodes();
@@ -213,6 +213,17 @@ public class MappingPartitioner implements Nameable
 		}
 		analyzeCorollaries(alreadyRealized);
 		analyzeEdges();
+	}
+
+	private void addConstantNode(@NonNull Node node) {
+		assert node.isConstant();
+		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+			if (edge.isComputation() || (edge.isNavigation() && !edge.isRealized())) {
+				constantOutputNodes.add(node);
+				return;
+			}
+		}
+		constantInputNodes.add(node);
 	}
 
 	private void addConsumptionOfMiddleNode(@NonNull Node node) {
@@ -373,13 +384,7 @@ public class MappingPartitioner implements Nameable
 	private void analyzeNodes() {
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
 			if (node.isExplicitNull()) {
-				assert node.isConstant();
-				if (hasNoComputationOrSuccessInputs(node)) {
-					constantInputNodes.add(node);
-				}
-				else {
-					constantOutputNodes.add(node);
-				}
+				addConstantNode(node);
 			}
 			else if (node.isPattern()) {
 				if (node.isConstant()) {
@@ -439,12 +444,7 @@ public class MappingPartitioner implements Nameable
 			}
 			else if (node.isOperation()) {
 				if (node.isConstant()) {
-					if (hasNoComputationOrSuccessInputs(node)) {
-						constantInputNodes.add(node);
-					}
-					else {
-						constantOutputNodes.add(node);
-					}
+					addConstantNode(node);
 				}
 				else if (node.isRealized()) {
 					realizedOutputNodes.add(node);
@@ -626,7 +626,7 @@ public class MappingPartitioner implements Nameable
 	}
 
 	private @NonNull MicroMappingRegion createNewSpeculatingRegion(int partitionNumber) {
-		//		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(region.getName())) {
+		//		if ("mapVariableExp_referredVariable_Helper_qvtr".equals(region.getName())) {
 		//			getClass();
 		//		}
 		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
@@ -926,14 +926,6 @@ public class MappingPartitioner implements Nameable
 		return true;
 	} */
 
-	private boolean hasNoComputationOrSuccessInputs(@NonNull Node node) {
-		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-			if (edge.isComputation() || edge.isSuccess()) {
-				return false;
-			}
-		}
-		return true;
-	}
 
 	public boolean hasConstantEdge(@NonNull Edge edge) {
 		return alreadyConstantEdges.contains(edge);

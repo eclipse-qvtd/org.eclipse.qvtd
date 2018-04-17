@@ -132,7 +132,7 @@ public class ReachabilityForest
 						//						if ("qvtrThisVariable".equals(targetNode.getName())) {
 						//							getClass();
 						//						}
-						Edge reachingEdge = node2reachingEdge.get(targetNode);
+						//						Edge reachingEdge = node2reachingEdge.get(targetNode);
 						if (!node2reachingEdge.containsKey(targetNode)) {
 							Integer targetCost = node2cost.get(targetNode);
 							assert (targetCost == null) || (thisCost < targetCost);
@@ -289,8 +289,7 @@ public class ReachabilityForest
 		if (precedingNodes.add(targetNode)) {
 			if (targetNode.isOperation()) {
 				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
-					//					assert edge.isUnconditional();
-					if (edge.isComputation() || edge.isSuccess()) {
+					if (edge.isComputation() || (edge.isNavigation() && !edge.isRealized())) {
 						getPredecessors(precedingNodes, edge.getEdgeSource());
 					}
 				}
