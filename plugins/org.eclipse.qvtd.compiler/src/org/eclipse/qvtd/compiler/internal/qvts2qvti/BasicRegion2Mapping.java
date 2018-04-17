@@ -1666,8 +1666,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		Property successProperty = scheduleManager.basicGetSuccessProperty(guardNode);
 		if (successProperty != null) {
 			NavigableEdge successEdge = guardNode.getNavigationEdge(successProperty);
-			if ((successEdge != null) && successEdge.isRealized()) {
-				guardParameter.setSuccessProperty(successProperty);
+			if (successEdge != null) {
+				Node successNode = QVTscheduleUtil.getTargetNode(successEdge);
+				if (successNode.isSuccess()) {
+					assert successEdge.isRealized();
+					guardParameter.setSuccessProperty(successProperty);
+				}
 			}
 		}
 		mapping.getOwnedMappingParameters().add(guardParameter);
