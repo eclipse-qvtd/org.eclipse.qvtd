@@ -1645,7 +1645,7 @@ public class RelationAnalysis extends RuleAnalysis
 			//			RelationAnalysis2TraceClass ruleAnalysis2traceClass = getRuleAnalysis2TraceGroup().getRuleAnalysis2TraceClass();
 			Relation baseRelation = getBaseRelationAnalysis().getRule();
 			for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
-				Boolean isInput = getScheduleManager().isInput(relationDomain);
+				Boolean isInput = getScheduleManager().isInput(relationDomain) || !relation.isIsTopLevel();
 				for (@NonNull VariableDeclaration rootVariable : QVTrelationUtil.getRootVariables(relationDomain)) {
 					VariableDeclaration baseRootVariable = QVTrelationUtil.getOverriddenVariable(baseRelation, rootVariable);
 					VariableDeclaration2TraceProperty overriddenVariableDeclaration2traceProperty = ruleAnalysis2dispatchClass.getVariableDeclaration2TraceProperty(baseRootVariable);
