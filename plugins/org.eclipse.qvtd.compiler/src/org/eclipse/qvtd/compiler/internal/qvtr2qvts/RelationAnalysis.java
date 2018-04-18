@@ -1699,9 +1699,6 @@ public class RelationAnalysis extends RuleAnalysis
 	 * Create trace and when/where invocation nodes and their edges.
 	 */
 	public void synthesizeTraceElements(@NonNull RelationAnalysis2TraceGroup relationAnalysis2traceGroup) {
-		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(getName())) {
-			getClass();
-		}
 		//
 		//	Create the dispatch region if needed by an override.
 		//

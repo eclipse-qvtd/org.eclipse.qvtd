@@ -46,7 +46,6 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
-import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -180,8 +179,8 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
 		//		Splitter.STAGES.setState(true);
-		AbstractTransformer.EXCEPTIONS.setState(true);
-		AbstractTransformer.INVOCATIONS.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		AbstractMerger.EARLY.setState(true);
 		//		AbstractMerger.FAILURE.setState(true);
@@ -191,10 +190,10 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		TransformationPartitioner.PREDECESSORS.setState(true);;
 		//		TransformationPartitioner.SUCCESSORS.setState(true);;
 		//		QVTscheduleConstants.CONNECTION_CREATION.setState(true);;
-		ConnectivityChecker.CONNECTIVITY_CLASSDATUMS.setState(true);
-		ConnectivityChecker.CONNECTIVITY_CONNECTIONS.setState(true);
-		ConnectivityChecker.CONNECTIVITY_EDGES.setState(true);
-		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
+		//		ConnectivityChecker.CONNECTIVITY_CLASSDATUMS.setState(true);
+		//		ConnectivityChecker.CONNECTIVITY_CONNECTIONS.setState(true);
+		//		ConnectivityChecker.CONNECTIVITY_EDGES.setState(true);
+		//		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
 		//		QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
 		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
 		Class<? extends Transformer> txClass1 = null;
@@ -258,6 +257,84 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.models.families2persons.trace_Families2Persons.trace_Families2PersonsPackage");
 		try {
 			txClass3 = myQVT3.buildTransformation("Persons", false);//,
+			myQVT3.assertRegionCount(RuleRegionImpl.class, 0);
+			myQVT3.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+			myQVT3.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			myQVT3.assertRegionCount(MicroMappingRegionImpl.class, 4);
+		}
+		finally {
+			myQVT3.dispose();
+		}
+		MyQVT myQVT4 = createQVT("Families2Persons", txURI2);
+		try {
+			myQVT4.loadEPackage(txClass3, "Families.FamiliesPackage");
+			myQVT4.loadEPackage(txClass3, "Persons.PersonsPackage");
+			myQVT4.loadEPackage(txClass3, "trace_Families2Persons.trace_Families2PersonsPackage");
+			//
+			myQVT4.createGeneratedExecutor(txClass3);
+			myQVT4.loadInput("Families", getModelsURI("families2persons/samples/Families.xmi"));
+			myQVT4.executeTransformation();
+			myQVT4.saveOutput("Persons", getTestURI("Persons_CG.xmi"), getModelsURI("families2persons/samples/Persons_expected.xmi"), Families2PersonsNormalizer.INSTANCE);
+		}
+		finally {
+			myQVT4.dispose();
+		}
+	}
+
+	/*	@Test
+	public void testQVTrCompiler_ATL2QVTr_CG_exec() throws Exception {
+		//		Splitter.GROUPS.setState(true);
+		//		Splitter.RESULT.setState(true);
+		//		Splitter.STAGES.setState(true);
+		AbstractTransformer.EXCEPTIONS.setState(true);
+		AbstractTransformer.INVOCATIONS.setState(true);
+		//   	QVTm2QVTp.PARTITIONING.setState(true);
+		//		AbstractMerger.EARLY.setState(true);
+		//		AbstractMerger.FAILURE.setState(true);
+		//		AbstractMerger.LATE.setState(true);
+		//		TransformationPartitioner.CYCLES.setState(true);;
+		//		TransformationPartitioner.DISCRIMINATION.setState(true);;
+		//		TransformationPartitioner.PREDECESSORS.setState(true);;
+		//		TransformationPartitioner.SUCCESSORS.setState(true);;
+		//		QVTscheduleConstants.CONNECTION_CREATION.setState(true);;
+		ConnectivityChecker.CONNECTIVITY_CLASSDATUMS.setState(true);
+		ConnectivityChecker.CONNECTIVITY_CONNECTIONS.setState(true);
+		ConnectivityChecker.CONNECTIVITY_EDGES.setState(true);
+		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
+		//		QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
+		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
+		Class<? extends Transformer> txClass1 = org.eclipse.qvtd.xtext.qvtrelation.tests.newatl2qvtr.NewATL2QVTr.class;
+		//		URI txURI1 = getModelsURI("newATL2QVTr/NewATL2QVTr.qvtr");
+
+		URI txURI2 = getTestURI("Families2Persons_CG.qvtras");
+		MyQVT myQVT2 = createQVT("ATL2QVTr", txURI2);
+		//		MyQVT myQVT2 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", null);
+		try {
+			myQVT2.createGeneratedExecutor(txClass1);
+			//			if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+			EMFTCSInjector.class.getName();				// Hidden ATL dependency
+			AtlParser.class.getName();					// Hidden ATL dependency
+			myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
+			myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons2.atl"));
+			//			}
+			//			else {
+			//				myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
+			//			}
+			ToStringVisitor.addFactory(new PivotQVTrelationToStringFactory());
+			myQVT2.executeTransformation();
+			myQVT2.saveOutput("qvtr", txURI2, getModelsURI("families2persons/Families2Persons_expected.qvtras"), null);
+		}
+		finally {
+			myQVT2.dispose();
+		}
+		Class<? extends Transformer> txClass3;
+		MyQVT myQVT3 = createQVT("Families2Persons", txURI2);
+		//		MyQVT myQVT3 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", "samples");
+		//		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.models.families2persons.Families.FamiliesPackage");
+		//		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.models.families2persons.Persons.PersonsPackage");
+		//		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.models.families2persons.trace_Families2Persons.trace_Families2PersonsPackage");
+		try {
+			txClass3 = myQVT3.buildTransformation("Persons", false);//,
 			myQVT3.assertRegionCount(RuleRegionImpl.class, 2);
 			myQVT3.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT3.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
@@ -280,7 +357,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		finally {
 			myQVT4.dispose();
 		}
-	}
+	} */
 
 	@Test
 	public void testQVTrCompiler_Ecore2Pivot_CG() throws Exception {
@@ -429,7 +506,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//   	QVTm2QVTp.PARTITIONING.setState(true);
 		//		QVTr2QVTc.VARIABLES.setState(true);
 		MyQVT myQVT = createQVT("Forward2Reverse", getModelsURI("forward2reverse/Forward2Reverse.qvtr"));
-		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+		//		myQVT.getEnvironmentFactory().setEvaluationTracingEnabled(true);
 		try {
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("reverse");
 			//

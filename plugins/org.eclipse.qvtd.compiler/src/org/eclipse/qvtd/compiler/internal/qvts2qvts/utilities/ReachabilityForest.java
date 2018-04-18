@@ -120,19 +120,9 @@ public class ReachabilityForest
 				//	backward and inverse edges in case forward egdes alone are inadequate.
 				//
 				for (@NonNull Node sourceNode : thisCostNodes) {
-					//					if ("qvtrTransformation".equals(sourceNode.getName())) {
-					//						getClass();
-					//					}
-					//					else if ("qvtrThisVariable".equals(sourceNode.getName())) {
-					//						getClass();
-					//					}
 					assert node2cost.get(sourceNode) == thisCost;
 					for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
 						Node targetNode = edge.getEdgeTarget();
-						//						if ("qvtrThisVariable".equals(targetNode.getName())) {
-						//							getClass();
-						//						}
-						//						Edge reachingEdge = node2reachingEdge.get(targetNode);
 						if (!node2reachingEdge.containsKey(targetNode)) {
 							Integer targetCost = node2cost.get(targetNode);
 							assert (targetCost == null) || (thisCost < targetCost);

@@ -38,9 +38,6 @@ class NewSpeculatedPartition extends AbstractPartition
 
 	public NewSpeculatedPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
 		super(partitioner, reachabilityForest);
-		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(partitioner.getName())) {
-			getClass();
-		}
 		this.traceNode = partitioner.getTraceNode();
 		//		assert traceNode.isPredicated();
 		//		this.predicatedDispatchNode = partitioner.basicGetPredicatedDispatchNode();

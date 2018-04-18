@@ -136,9 +136,6 @@ public abstract class ScheduleState extends ScheduleCache
 	 * Compute the set of all regions that are blocked by a mandatory dependence.
 	 */
 	private void analyzeInitialConnectionContent(@NonNull Region region) {
-		//		if ("«speculation» mapOclExpression_qvtr".equals(region.getName())) {
-		//			getClass();
-		//		}
 		boolean hasMandatoryUsedConnection = false;
 		for (@NonNull DatumConnection<?> connection : getIncomingConnections(region)) {
 			if (connection.isMandatory()) {

@@ -80,18 +80,9 @@ public class RelationAnalysis2TraceGroup extends RuleAnalysis2TraceGroup
 
 	@Override
 	public void analyzeTraceElements() throws CompilerChainException {
-		//		if ("TmapHelper".equals(toString())) {
-		//			getClass();
-		//		}
-		//		if ("TmapVariableExp_referredVariable".equals(toString())) {
-		//			getClass();
-		//		}
 		//
 		//	Determine a head node for the minimum number of sub-regions that have a to-one path from the head.
 		//
-		if ("mapOutPattern_qvtr".equals(getName())) {
-			getClass();
-		}
 		List<@NonNull HeadNodeGroup> headNodeGroups = TracedHeadAnalysis.computeTraceHeadGroupNodes(ruleAnalysis.getScheduleManager(), ruleAnalysis.getRegion());
 		RelationAnalysis2TraceInterface relationAnalysis2traceInterface2 = relationAnalysis2traceInterface;
 		if (relationAnalysis2traceInterface2 != null) {
@@ -226,21 +217,14 @@ public class RelationAnalysis2TraceGroup extends RuleAnalysis2TraceGroup
 
 	@Override
 	public void synthesizeTraceElements() throws CompilerChainException {
-		//		if ("TC_mapOclExpression".equals(toString())) {
-		//			getClass();
-		//		}
 		getRuleAnalysis().synthesizeTraceElements(this);
 	}
 
 	@Override
 	public void synthesizeTraceModel() {
-		//		if ("TC_mapVariableExp_referredVariable".equals(toString())) {
-		//			getClass();
-		//		}
 		if (relationAnalysis2traceInterface != null) {
 			relationAnalysis2traceInterface.synthesizeTraceModel();
 		}
-		//		RelationAnalysis2TraceClass relationAnalysis2traceClass2 = relationAnalysis2traceClass;
 		if (relationAnalysis2traceClass != null) {
 			relationAnalysis2traceClass.synthesizeTraceModel();
 		}

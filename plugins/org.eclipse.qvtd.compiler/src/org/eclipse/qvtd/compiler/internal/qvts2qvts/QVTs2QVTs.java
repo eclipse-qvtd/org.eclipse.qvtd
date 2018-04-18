@@ -481,11 +481,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		if (QVTscheduleConstants.CONNECTION_CREATION.isActive()) {
 			QVTscheduleConstants.CONNECTION_CREATION.println("connecting " + region);
 		}
-		if ("m_TmapBooleanExp__ImapOclExpression_TmapOclExpressio_p0".equals(region.toString())) {
-			getClass();
-		}
 		assert !(this instanceof LoadingRegion);
-		//		assert !"LoadingRegion".equals(region.eClass().getName());
 		Iterable<@NonNull NodeConnection> headConnections = createHeadConnections(region);
 		if (headConnections != null) {
 			//

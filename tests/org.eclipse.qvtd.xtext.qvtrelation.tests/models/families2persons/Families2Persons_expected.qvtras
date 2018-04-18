@@ -109,12 +109,14 @@
       <rule xsi:type="qvtr:Relation" xmi:id="hcUQQ" isTopLevel="true" name="Member2Female">
         <domain xsi:type="qvtr:RelationDomain" isCheckable="true" isEnforceable="false" rootVariable="#8tM8f" typedModel="#z2sgS">
           <pattern>
-            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#8tM8f" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#8tM8f" referredClass="Families.ecore.oclas#r2YVU"
+                type="pivot:Class Families.ecore.oclas#r2YVU"/>
           </pattern>
         </domain>
         <domain xsi:type="qvtr:RelationDomain" isCheckable="false" isEnforceable="true" rootVariable="#9tM8f" typedModel="#v4ega">
           <pattern>
-            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#9tM8f" type="pivot:Class Persons.ecore.oclas#pzC6s">
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#9tM8f" referredClass="Persons.ecore.oclas#pzC6s"
+                type="pivot:Class Persons.ecore.oclas#pzC6s">
               <part referredProperty="Persons.ecore.oclas#8tc+u">
                 <value xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#gJ7dJ"
                     type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
@@ -149,12 +151,14 @@
       <rule xsi:type="qvtr:Relation" xmi:id="ifoLA" isTopLevel="true" name="Member2Male">
         <domain xsi:type="qvtr:RelationDomain" isCheckable="true" isEnforceable="false" rootVariable="#50ALF" typedModel="#z2sgS">
           <pattern>
-            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#50ALF" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#50ALF" referredClass="Families.ecore.oclas#r2YVU"
+                type="pivot:Class Families.ecore.oclas#r2YVU"/>
           </pattern>
         </domain>
         <domain xsi:type="qvtr:RelationDomain" isCheckable="false" isEnforceable="true" rootVariable="#60ALF" typedModel="#v4ega">
           <pattern>
-            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#60ALF" type="pivot:Class Persons.ecore.oclas#q+x1v">
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#60ALF" referredClass="Persons.ecore.oclas#q+x1v"
+                type="pivot:Class Persons.ecore.oclas#q+x1v">
               <part referredProperty="Persons.ecore.oclas#8tc+u">
                 <value xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#gJ7dJ"
                     type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
