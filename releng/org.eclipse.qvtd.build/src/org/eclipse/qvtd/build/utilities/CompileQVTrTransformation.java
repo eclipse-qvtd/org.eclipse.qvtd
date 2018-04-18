@@ -72,6 +72,11 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 		}
 
 		@Override
+		protected boolean generateGenModel() {
+			return true;
+		}
+
+		@Override
 		protected @NonNull String getBasePrefix() {
 			return "org.eclipse.qvtd.atl.atl2qvtr";
 		}
