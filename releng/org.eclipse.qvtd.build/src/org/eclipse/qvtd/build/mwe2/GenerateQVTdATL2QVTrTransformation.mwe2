@@ -35,6 +35,9 @@ Workflow {
     component = CompileQVTrTransformation { /*resourceSet = resourceSet*/ skipOnErrors = true
     	qvtrModel = "/org.eclipse.qvtd.atl/model/ATL2QVTr.qvtr" 	
 		usedGenPackage = "org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel#//qvtrelation"
+		usedGenPackage = "org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel#//qvttemplate"
+		usedGenPackage = "org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase"
+		usedGenPackage = "org.eclipse.ocl.pivot/model/Pivot.genmodel#//pivot"
 		usedGenPackage = "org.eclipse.m2m.atl.common/model/ATL.genmodel#//ATL"
 		usedGenPackage = "org.eclipse.m2m.atl.common/model/ATL.genmodel#//OCL"
 		usedGenPackage = "org.eclipse.m2m.atl.common/model/ATL.genmodel#//PrimitiveTypes"

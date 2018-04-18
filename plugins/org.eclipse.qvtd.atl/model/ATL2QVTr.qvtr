@@ -787,4 +787,35 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 			}
 		}
 	}
+	
+	-- ActionBlock, BindingStat, ExpressionStat, IfStat, ForStat
+	-- CalledRule
+	-- DropPattern
+	-- ForEachOutPatternElement
+	-- LazyMatchedRule
+	-- Library, LibraryRef
+	-- Query
+	-- RuleVariableDeclaration
+	
+	-- BagExp, OrderedSetExp, SequenceExp, SetExp
+	-- BagType, OrderedSetType, SequenceType, SetType
+	-- BooleanType, IntegerType, ReakType, StringType
+	-- CollectionType
+	-- EnumLiteralExp
+	-- IterateExp, IteratorElement
+	-- Iterator
+	-- LetExp
+	-- MapExp, MapElement
+	-- MapType
+	-- OclAnyType
+	-- OclContextDefinition
+	-- OclFeatureDefinition
+	-- OclModelElement
+	-- OclType
+	-- OclUndefinedExp
+	-- Parameter
+	-- RealExp
+	-- SuperExp
+	-- TupleExp, TuplePart
+	-- TupleType, TupleTypeAttribute
 }

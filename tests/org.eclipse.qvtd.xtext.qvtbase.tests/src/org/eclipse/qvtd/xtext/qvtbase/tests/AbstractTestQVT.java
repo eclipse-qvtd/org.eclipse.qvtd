@@ -263,12 +263,13 @@ public abstract class AbstractTestQVT extends QVTimperative
 	 * Return a list of project names that need to be on the class path.
 	 */
 	protected @NonNull List<@NonNull String> createClassProjectNames() {
-		List<@NonNull String> classProjectNames = CompilerUtil.createClasspathProjectNameList(testProjectName);
+		List<@NonNull String> classProjectNames = CompilerUtil.createClasspathProjectNameList();
 		if (additionalProjectNames != null) {
 			for (@NonNull String projectName : additionalProjectNames) {
 				classProjectNames.add(0, projectName);
 			}
 		}
+		classProjectNames.add(0, testProjectName);
 		return classProjectNames;
 	}
 
