@@ -19,6 +19,11 @@ import org.eclipse.jdt.annotation.Nullable;
 
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.*;
 
+import org.eclipse.qvtd.runtime.qvttrace.Dispatch;
+import org.eclipse.qvtd.runtime.qvttrace.Execution;
+import org.eclipse.qvtd.runtime.qvttrace.TraceElement;
+import org.eclipse.qvtd.runtime.qvttrace.TraceInstance;
+
 /**
  * <!-- begin-user-doc -->
  * The <b>Switch</b> for the model's inheritance hierarchy.
@@ -76,425 +81,352 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case trace_ATL2QVTrPackage.TC_MAP_BINDING: {
-				TC_mapBinding tC_mapBinding = (TC_mapBinding)theEObject;
-				T result = caseTC_mapBinding(tC_mapBinding);
+			case trace_ATL2QVTrPackage.CMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER: {
+				CmapVariableExp_referredVariable_Helper cmapVariableExp_referredVariable_Helper = (CmapVariableExp_referredVariable_Helper)theEObject;
+				T result = caseCmapVariableExp_referredVariable_Helper(cmapVariableExp_referredVariable_Helper);
+				if (result == null) result = caseDmapVariableExp_referredVariable(cmapVariableExp_referredVariable_Helper);
+				if (result == null) result = caseDispatch(cmapVariableExp_referredVariable_Helper);
+				if (result == null) result = caseTraceInstance(cmapVariableExp_referredVariable_Helper);
+				if (result == null) result = caseTraceElement(cmapVariableExp_referredVariable_Helper);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_BOOLEAN_EXP: {
-				TC_mapBooleanExp tC_mapBooleanExp = (TC_mapBooleanExp)theEObject;
-				T result = caseTC_mapBooleanExp(tC_mapBooleanExp);
-				if (result == null) result = caseTI_mapBooleanExp(tC_mapBooleanExp);
-				if (result == null) result = caseTI_mapOclExpression(tC_mapBooleanExp);
+			case trace_ATL2QVTrPackage.CMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION: {
+				CmapVariableExp_referredVariable_VariableDeclaration cmapVariableExp_referredVariable_VariableDeclaration = (CmapVariableExp_referredVariable_VariableDeclaration)theEObject;
+				T result = caseCmapVariableExp_referredVariable_VariableDeclaration(cmapVariableExp_referredVariable_VariableDeclaration);
+				if (result == null) result = caseDmapVariableExp_referredVariable(cmapVariableExp_referredVariable_VariableDeclaration);
+				if (result == null) result = caseDispatch(cmapVariableExp_referredVariable_VariableDeclaration);
+				if (result == null) result = caseTraceInstance(cmapVariableExp_referredVariable_VariableDeclaration);
+				if (result == null) result = caseTraceElement(cmapVariableExp_referredVariable_VariableDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_HELPER: {
-				TC_mapHelper tC_mapHelper = (TC_mapHelper)theEObject;
-				T result = caseTC_mapHelper(tC_mapHelper);
-				if (result == null) result = caseTI_mapHelper(tC_mapHelper);
+			case trace_ATL2QVTrPackage.DMAP_HELPER: {
+				DmapHelper dmapHelper = (DmapHelper)theEObject;
+				T result = caseDmapHelper(dmapHelper);
+				if (result == null) result = caseDispatch(dmapHelper);
+				if (result == null) result = caseTraceInstance(dmapHelper);
+				if (result == null) result = caseTraceElement(dmapHelper);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_HELPER_ATTRIBUTE: {
-				TC_mapHelper_Attribute tC_mapHelper_Attribute = (TC_mapHelper_Attribute)theEObject;
-				T result = caseTC_mapHelper_Attribute(tC_mapHelper_Attribute);
-				if (result == null) result = caseTI_mapHelper_Attribute(tC_mapHelper_Attribute);
-				if (result == null) result = caseTI_mapHelper(tC_mapHelper_Attribute);
+			case trace_ATL2QVTrPackage.DMAP_OCL_EXPRESSION: {
+				DmapOclExpression dmapOclExpression = (DmapOclExpression)theEObject;
+				T result = caseDmapOclExpression(dmapOclExpression);
+				if (result == null) result = caseDispatch(dmapOclExpression);
+				if (result == null) result = caseTraceInstance(dmapOclExpression);
+				if (result == null) result = caseTraceElement(dmapOclExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_HELPER_CONTEXT: {
-				TC_mapHelper_Context tC_mapHelper_Context = (TC_mapHelper_Context)theEObject;
-				T result = caseTC_mapHelper_Context(tC_mapHelper_Context);
+			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE: {
+				DmapVariableExp_referredVariable dmapVariableExp_referredVariable = (DmapVariableExp_referredVariable)theEObject;
+				T result = caseDmapVariableExp_referredVariable(dmapVariableExp_referredVariable);
+				if (result == null) result = caseDispatch(dmapVariableExp_referredVariable);
+				if (result == null) result = caseTraceInstance(dmapVariableExp_referredVariable);
+				if (result == null) result = caseTraceElement(dmapVariableExp_referredVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_HELPER_OPERATION: {
-				TC_mapHelper_Operation tC_mapHelper_Operation = (TC_mapHelper_Operation)theEObject;
-				T result = caseTC_mapHelper_Operation(tC_mapHelper_Operation);
-				if (result == null) result = caseTI_mapHelper_Operation(tC_mapHelper_Operation);
-				if (result == null) result = caseTI_mapHelper(tC_mapHelper_Operation);
+			case trace_ATL2QVTrPackage.IMAP_HELPER: {
+				ImapHelper imapHelper = (ImapHelper)theEObject;
+				T result = caseImapHelper(imapHelper);
+				if (result == null) result = caseExecution(imapHelper);
+				if (result == null) result = caseTraceInstance(imapHelper);
+				if (result == null) result = caseTraceElement(imapHelper);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_IF_EXP: {
-				TC_mapIfExp tC_mapIfExp = (TC_mapIfExp)theEObject;
-				T result = caseTC_mapIfExp(tC_mapIfExp);
-				if (result == null) result = caseTI_mapIfExp(tC_mapIfExp);
-				if (result == null) result = caseTI_mapOclExpression(tC_mapIfExp);
+			case trace_ATL2QVTrPackage.IMAP_OCL_EXPRESSION: {
+				ImapOclExpression imapOclExpression = (ImapOclExpression)theEObject;
+				T result = caseImapOclExpression(imapOclExpression);
+				if (result == null) result = caseExecution(imapOclExpression);
+				if (result == null) result = caseTraceInstance(imapOclExpression);
+				if (result == null) result = caseTraceElement(imapOclExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_IN_PATTERN: {
-				TC_mapInPattern tC_mapInPattern = (TC_mapInPattern)theEObject;
-				T result = caseTC_mapInPattern(tC_mapInPattern);
+			case trace_ATL2QVTrPackage.IMAP_VARIABLE_EXP_REFERRED_VARIABLE: {
+				ImapVariableExp_referredVariable imapVariableExp_referredVariable = (ImapVariableExp_referredVariable)theEObject;
+				T result = caseImapVariableExp_referredVariable(imapVariableExp_referredVariable);
+				if (result == null) result = caseExecution(imapVariableExp_referredVariable);
+				if (result == null) result = caseTraceInstance(imapVariableExp_referredVariable);
+				if (result == null) result = caseTraceElement(imapVariableExp_referredVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_IN_PATTERN_FILTER: {
-				TC_mapInPattern_filter tC_mapInPattern_filter = (TC_mapInPattern_filter)theEObject;
-				T result = caseTC_mapInPattern_filter(tC_mapInPattern_filter);
+			case trace_ATL2QVTrPackage.TMAP_BINDING: {
+				TmapBinding tmapBinding = (TmapBinding)theEObject;
+				T result = caseTmapBinding(tmapBinding);
+				if (result == null) result = caseExecution(tmapBinding);
+				if (result == null) result = caseTraceInstance(tmapBinding);
+				if (result == null) result = caseTraceElement(tmapBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_INTEGER_EXP: {
-				TC_mapIntegerExp tC_mapIntegerExp = (TC_mapIntegerExp)theEObject;
-				T result = caseTC_mapIntegerExp(tC_mapIntegerExp);
-				if (result == null) result = caseTI_mapIntegerExp(tC_mapIntegerExp);
-				if (result == null) result = caseTI_mapOclExpression(tC_mapIntegerExp);
+			case trace_ATL2QVTrPackage.TMAP_BOOLEAN_EXP: {
+				TmapBooleanExp tmapBooleanExp = (TmapBooleanExp)theEObject;
+				T result = caseTmapBooleanExp(tmapBooleanExp);
+				if (result == null) result = caseImapOclExpression(tmapBooleanExp);
+				if (result == null) result = caseExecution(tmapBooleanExp);
+				if (result == null) result = caseTraceInstance(tmapBooleanExp);
+				if (result == null) result = caseTraceElement(tmapBooleanExp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_MATCHED_RULE: {
-				TC_mapMatchedRule tC_mapMatchedRule = (TC_mapMatchedRule)theEObject;
-				T result = caseTC_mapMatchedRule(tC_mapMatchedRule);
+			case trace_ATL2QVTrPackage.TMAP_HELPER_ATTRIBUTE: {
+				TmapHelper_Attribute tmapHelper_Attribute = (TmapHelper_Attribute)theEObject;
+				T result = caseTmapHelper_Attribute(tmapHelper_Attribute);
+				if (result == null) result = caseImapHelper(tmapHelper_Attribute);
+				if (result == null) result = caseExecution(tmapHelper_Attribute);
+				if (result == null) result = caseTraceInstance(tmapHelper_Attribute);
+				if (result == null) result = caseTraceElement(tmapHelper_Attribute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_MATCHED_RULE_SUPER: {
-				TC_mapMatchedRule_super tC_mapMatchedRule_super = (TC_mapMatchedRule_super)theEObject;
-				T result = caseTC_mapMatchedRule_super(tC_mapMatchedRule_super);
+			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT: {
+				TmapHelper_Context tmapHelper_Context = (TmapHelper_Context)theEObject;
+				T result = caseTmapHelper_Context(tmapHelper_Context);
+				if (result == null) result = caseExecution(tmapHelper_Context);
+				if (result == null) result = caseTraceInstance(tmapHelper_Context);
+				if (result == null) result = caseTraceElement(tmapHelper_Context);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_MODULE: {
-				TC_mapModule tC_mapModule = (TC_mapModule)theEObject;
-				T result = caseTC_mapModule(tC_mapModule);
+			case trace_ATL2QVTrPackage.TMAP_HELPER_OPERATION: {
+				TmapHelper_Operation tmapHelper_Operation = (TmapHelper_Operation)theEObject;
+				T result = caseTmapHelper_Operation(tmapHelper_Operation);
+				if (result == null) result = caseImapHelper(tmapHelper_Operation);
+				if (result == null) result = caseExecution(tmapHelper_Operation);
+				if (result == null) result = caseTraceInstance(tmapHelper_Operation);
+				if (result == null) result = caseTraceElement(tmapHelper_Operation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP: {
-				TC_mapNavigationOrAttributeCallExp tC_mapNavigationOrAttributeCallExp = (TC_mapNavigationOrAttributeCallExp)theEObject;
-				T result = caseTC_mapNavigationOrAttributeCallExp(tC_mapNavigationOrAttributeCallExp);
-				if (result == null) result = caseTI_mapNavigationOrAttributeCallExp(tC_mapNavigationOrAttributeCallExp);
-				if (result == null) result = caseTI_mapOclExpression(tC_mapNavigationOrAttributeCallExp);
+			case trace_ATL2QVTrPackage.TMAP_IF_EXP: {
+				TmapIfExp tmapIfExp = (TmapIfExp)theEObject;
+				T result = caseTmapIfExp(tmapIfExp);
+				if (result == null) result = caseImapOclExpression(tmapIfExp);
+				if (result == null) result = caseExecution(tmapIfExp);
+				if (result == null) result = caseTraceInstance(tmapIfExp);
+				if (result == null) result = caseTraceElement(tmapIfExp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER: {
-				TC_mapNavigationOrAttributeCallExp_Helper tC_mapNavigationOrAttributeCallExp_Helper = (TC_mapNavigationOrAttributeCallExp_Helper)theEObject;
-				T result = caseTC_mapNavigationOrAttributeCallExp_Helper(tC_mapNavigationOrAttributeCallExp_Helper);
-				if (result == null) result = caseTI_mapNavigationOrAttributeCallExp_Helper(tC_mapNavigationOrAttributeCallExp_Helper);
-				if (result == null) result = caseTI_mapNavigationOrAttributeCallExp(tC_mapNavigationOrAttributeCallExp_Helper);
-				if (result == null) result = caseTI_mapOclExpression(tC_mapNavigationOrAttributeCallExp_Helper);
+			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN: {
+				TmapInPattern tmapInPattern = (TmapInPattern)theEObject;
+				T result = caseTmapInPattern(tmapInPattern);
+				if (result == null) result = caseExecution(tmapInPattern);
+				if (result == null) result = caseTraceInstance(tmapInPattern);
+				if (result == null) result = caseTraceElement(tmapInPattern);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY: {
-				TC_mapNavigationOrAttributeCallExp_Property tC_mapNavigationOrAttributeCallExp_Property = (TC_mapNavigationOrAttributeCallExp_Property)theEObject;
-				T result = caseTC_mapNavigationOrAttributeCallExp_Property(tC_mapNavigationOrAttributeCallExp_Property);
-				if (result == null) result = caseTI_mapNavigationOrAttributeCallExp_Property(tC_mapNavigationOrAttributeCallExp_Property);
-				if (result == null) result = caseTI_mapNavigationOrAttributeCallExp(tC_mapNavigationOrAttributeCallExp_Property);
-				if (result == null) result = caseTI_mapOclExpression(tC_mapNavigationOrAttributeCallExp_Property);
+			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN_FILTER: {
+				TmapInPattern_filter tmapInPattern_filter = (TmapInPattern_filter)theEObject;
+				T result = caseTmapInPattern_filter(tmapInPattern_filter);
+				if (result == null) result = caseExecution(tmapInPattern_filter);
+				if (result == null) result = caseTraceInstance(tmapInPattern_filter);
+				if (result == null) result = caseTraceElement(tmapInPattern_filter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_OCL_EXPRESSION: {
-				TC_mapOclExpression tC_mapOclExpression = (TC_mapOclExpression)theEObject;
-				T result = caseTC_mapOclExpression(tC_mapOclExpression);
-				if (result == null) result = caseTI_mapOclExpression(tC_mapOclExpression);
+			case trace_ATL2QVTrPackage.TMAP_INTEGER_EXP: {
+				TmapIntegerExp tmapIntegerExp = (TmapIntegerExp)theEObject;
+				T result = caseTmapIntegerExp(tmapIntegerExp);
+				if (result == null) result = caseImapOclExpression(tmapIntegerExp);
+				if (result == null) result = caseExecution(tmapIntegerExp);
+				if (result == null) result = caseTraceInstance(tmapIntegerExp);
+				if (result == null) result = caseTraceElement(tmapIntegerExp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_OCL_METAMODEL: {
-				TC_mapOclMetamodel tC_mapOclMetamodel = (TC_mapOclMetamodel)theEObject;
-				T result = caseTC_mapOclMetamodel(tC_mapOclMetamodel);
+			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE: {
+				TmapMatchedRule tmapMatchedRule = (TmapMatchedRule)theEObject;
+				T result = caseTmapMatchedRule(tmapMatchedRule);
+				if (result == null) result = caseExecution(tmapMatchedRule);
+				if (result == null) result = caseTraceInstance(tmapMatchedRule);
+				if (result == null) result = caseTraceElement(tmapMatchedRule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_OCL_MODEL_IN: {
-				TC_mapOclModel_IN tC_mapOclModel_IN = (TC_mapOclModel_IN)theEObject;
-				T result = caseTC_mapOclModel_IN(tC_mapOclModel_IN);
+			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER: {
+				TmapMatchedRule_super tmapMatchedRule_super = (TmapMatchedRule_super)theEObject;
+				T result = caseTmapMatchedRule_super(tmapMatchedRule_super);
+				if (result == null) result = caseExecution(tmapMatchedRule_super);
+				if (result == null) result = caseTraceInstance(tmapMatchedRule_super);
+				if (result == null) result = caseTraceElement(tmapMatchedRule_super);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_OCL_MODEL_OUT: {
-				TC_mapOclModel_OUT tC_mapOclModel_OUT = (TC_mapOclModel_OUT)theEObject;
-				T result = caseTC_mapOclModel_OUT(tC_mapOclModel_OUT);
+			case trace_ATL2QVTrPackage.TMAP_MODULE: {
+				TmapModule tmapModule = (TmapModule)theEObject;
+				T result = caseTmapModule(tmapModule);
+				if (result == null) result = caseExecution(tmapModule);
+				if (result == null) result = caseTraceInstance(tmapModule);
+				if (result == null) result = caseTraceElement(tmapModule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_OPERATION_CALL_EXP: {
-				TC_mapOperationCallExp tC_mapOperationCallExp = (TC_mapOperationCallExp)theEObject;
-				T result = caseTC_mapOperationCallExp(tC_mapOperationCallExp);
-				if (result == null) result = caseTI_mapOperationCallExp(tC_mapOperationCallExp);
-				if (result == null) result = caseTI_mapOclExpression(tC_mapOperationCallExp);
+			case trace_ATL2QVTrPackage.TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER: {
+				TmapNavigationOrAttributeCallExp_Helper tmapNavigationOrAttributeCallExp_Helper = (TmapNavigationOrAttributeCallExp_Helper)theEObject;
+				T result = caseTmapNavigationOrAttributeCallExp_Helper(tmapNavigationOrAttributeCallExp_Helper);
+				if (result == null) result = caseImapOclExpression(tmapNavigationOrAttributeCallExp_Helper);
+				if (result == null) result = caseExecution(tmapNavigationOrAttributeCallExp_Helper);
+				if (result == null) result = caseTraceInstance(tmapNavigationOrAttributeCallExp_Helper);
+				if (result == null) result = caseTraceElement(tmapNavigationOrAttributeCallExp_Helper);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_OPERATION_CALL_EXP_HELPER: {
-				TC_mapOperationCallExp_Helper tC_mapOperationCallExp_Helper = (TC_mapOperationCallExp_Helper)theEObject;
-				T result = caseTC_mapOperationCallExp_Helper(tC_mapOperationCallExp_Helper);
-				if (result == null) result = caseTI_mapOperationCallExp_Helper(tC_mapOperationCallExp_Helper);
-				if (result == null) result = caseTI_mapOperationCallExp(tC_mapOperationCallExp_Helper);
-				if (result == null) result = caseTI_mapOclExpression(tC_mapOperationCallExp_Helper);
+			case trace_ATL2QVTrPackage.TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY: {
+				TmapNavigationOrAttributeCallExp_Property tmapNavigationOrAttributeCallExp_Property = (TmapNavigationOrAttributeCallExp_Property)theEObject;
+				T result = caseTmapNavigationOrAttributeCallExp_Property(tmapNavigationOrAttributeCallExp_Property);
+				if (result == null) result = caseImapOclExpression(tmapNavigationOrAttributeCallExp_Property);
+				if (result == null) result = caseExecution(tmapNavigationOrAttributeCallExp_Property);
+				if (result == null) result = caseTraceInstance(tmapNavigationOrAttributeCallExp_Property);
+				if (result == null) result = caseTraceElement(tmapNavigationOrAttributeCallExp_Property);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_OPERATION_CALL_EXP_OPERATION: {
-				TC_mapOperationCallExp_Operation tC_mapOperationCallExp_Operation = (TC_mapOperationCallExp_Operation)theEObject;
-				T result = caseTC_mapOperationCallExp_Operation(tC_mapOperationCallExp_Operation);
-				if (result == null) result = caseTI_mapOperationCallExp_Operation(tC_mapOperationCallExp_Operation);
-				if (result == null) result = caseTI_mapOperationCallExp(tC_mapOperationCallExp_Operation);
-				if (result == null) result = caseTI_mapOclExpression(tC_mapOperationCallExp_Operation);
+			case trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL: {
+				TmapOclMetamodel tmapOclMetamodel = (TmapOclMetamodel)theEObject;
+				T result = caseTmapOclMetamodel(tmapOclMetamodel);
+				if (result == null) result = caseExecution(tmapOclMetamodel);
+				if (result == null) result = caseTraceInstance(tmapOclMetamodel);
+				if (result == null) result = caseTraceElement(tmapOclMetamodel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_OPERATION_CALL_EXP_ARGUMENT: {
-				TC_mapOperationCallExp_argument tC_mapOperationCallExp_argument = (TC_mapOperationCallExp_argument)theEObject;
-				T result = caseTC_mapOperationCallExp_argument(tC_mapOperationCallExp_argument);
+			case trace_ATL2QVTrPackage.TMAP_OCL_MODEL_IN: {
+				TmapOclModel_IN tmapOclModel_IN = (TmapOclModel_IN)theEObject;
+				T result = caseTmapOclModel_IN(tmapOclModel_IN);
+				if (result == null) result = caseExecution(tmapOclModel_IN);
+				if (result == null) result = caseTraceInstance(tmapOclModel_IN);
+				if (result == null) result = caseTraceElement(tmapOclModel_IN);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_OPERATOR_CALL_EXP: {
-				TC_mapOperatorCallExp tC_mapOperatorCallExp = (TC_mapOperatorCallExp)theEObject;
-				T result = caseTC_mapOperatorCallExp(tC_mapOperatorCallExp);
-				if (result == null) result = caseTI_mapOperatorCallExp(tC_mapOperatorCallExp);
-				if (result == null) result = caseTI_mapOperationCallExp(tC_mapOperatorCallExp);
-				if (result == null) result = caseTI_mapOclExpression(tC_mapOperatorCallExp);
+			case trace_ATL2QVTrPackage.TMAP_OCL_MODEL_OUT: {
+				TmapOclModel_OUT tmapOclModel_OUT = (TmapOclModel_OUT)theEObject;
+				T result = caseTmapOclModel_OUT(tmapOclModel_OUT);
+				if (result == null) result = caseExecution(tmapOclModel_OUT);
+				if (result == null) result = caseTraceInstance(tmapOclModel_OUT);
+				if (result == null) result = caseTraceElement(tmapOclModel_OUT);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_OUT_PATTERN: {
-				TC_mapOutPattern tC_mapOutPattern = (TC_mapOutPattern)theEObject;
-				T result = caseTC_mapOutPattern(tC_mapOutPattern);
+			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_HELPER: {
+				TmapOperationCallExp_Helper tmapOperationCallExp_Helper = (TmapOperationCallExp_Helper)theEObject;
+				T result = caseTmapOperationCallExp_Helper(tmapOperationCallExp_Helper);
+				if (result == null) result = caseImapOclExpression(tmapOperationCallExp_Helper);
+				if (result == null) result = caseExecution(tmapOperationCallExp_Helper);
+				if (result == null) result = caseTraceInstance(tmapOperationCallExp_Helper);
+				if (result == null) result = caseTraceElement(tmapOperationCallExp_Helper);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_SIMPLE_IN_PATTERN_ELEMENT: {
-				TC_mapSimpleInPatternElement tC_mapSimpleInPatternElement = (TC_mapSimpleInPatternElement)theEObject;
-				T result = caseTC_mapSimpleInPatternElement(tC_mapSimpleInPatternElement);
+			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_OPERATION: {
+				TmapOperationCallExp_Operation tmapOperationCallExp_Operation = (TmapOperationCallExp_Operation)theEObject;
+				T result = caseTmapOperationCallExp_Operation(tmapOperationCallExp_Operation);
+				if (result == null) result = caseImapOclExpression(tmapOperationCallExp_Operation);
+				if (result == null) result = caseExecution(tmapOperationCallExp_Operation);
+				if (result == null) result = caseTraceInstance(tmapOperationCallExp_Operation);
+				if (result == null) result = caseTraceElement(tmapOperationCallExp_Operation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_SIMPLE_OUT_PATTERN_ELEMENT: {
-				TC_mapSimpleOutPatternElement tC_mapSimpleOutPatternElement = (TC_mapSimpleOutPatternElement)theEObject;
-				T result = caseTC_mapSimpleOutPatternElement(tC_mapSimpleOutPatternElement);
+			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT: {
+				TmapOperationCallExp_argument tmapOperationCallExp_argument = (TmapOperationCallExp_argument)theEObject;
+				T result = caseTmapOperationCallExp_argument(tmapOperationCallExp_argument);
+				if (result == null) result = caseExecution(tmapOperationCallExp_argument);
+				if (result == null) result = caseTraceInstance(tmapOperationCallExp_argument);
+				if (result == null) result = caseTraceElement(tmapOperationCallExp_argument);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_STRING_EXP: {
-				TC_mapStringExp tC_mapStringExp = (TC_mapStringExp)theEObject;
-				T result = caseTC_mapStringExp(tC_mapStringExp);
-				if (result == null) result = caseTI_mapStringExp(tC_mapStringExp);
-				if (result == null) result = caseTI_mapOclExpression(tC_mapStringExp);
+			case trace_ATL2QVTrPackage.TMAP_OPERATOR_CALL_EXP: {
+				TmapOperatorCallExp tmapOperatorCallExp = (TmapOperatorCallExp)theEObject;
+				T result = caseTmapOperatorCallExp(tmapOperatorCallExp);
+				if (result == null) result = caseImapOclExpression(tmapOperatorCallExp);
+				if (result == null) result = caseExecution(tmapOperatorCallExp);
+				if (result == null) result = caseTraceInstance(tmapOperatorCallExp);
+				if (result == null) result = caseTraceElement(tmapOperatorCallExp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_VARIABLE: {
-				TC_mapVariable tC_mapVariable = (TC_mapVariable)theEObject;
-				T result = caseTC_mapVariable(tC_mapVariable);
+			case trace_ATL2QVTrPackage.TMAP_OUT_PATTERN: {
+				TmapOutPattern tmapOutPattern = (TmapOutPattern)theEObject;
+				T result = caseTmapOutPattern(tmapOutPattern);
+				if (result == null) result = caseExecution(tmapOutPattern);
+				if (result == null) result = caseTraceInstance(tmapOutPattern);
+				if (result == null) result = caseTraceElement(tmapOutPattern);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_VARIABLE_EXP: {
-				TC_mapVariableExp tC_mapVariableExp = (TC_mapVariableExp)theEObject;
-				T result = caseTC_mapVariableExp(tC_mapVariableExp);
-				if (result == null) result = caseTI_mapVariableExp(tC_mapVariableExp);
-				if (result == null) result = caseTI_mapOclExpression(tC_mapVariableExp);
+			case trace_ATL2QVTrPackage.TMAP_SIMPLE_IN_PATTERN_ELEMENT: {
+				TmapSimpleInPatternElement tmapSimpleInPatternElement = (TmapSimpleInPatternElement)theEObject;
+				T result = caseTmapSimpleInPatternElement(tmapSimpleInPatternElement);
+				if (result == null) result = caseExecution(tmapSimpleInPatternElement);
+				if (result == null) result = caseTraceInstance(tmapSimpleInPatternElement);
+				if (result == null) result = caseTraceElement(tmapSimpleInPatternElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE: {
-				TC_mapVariableExp_referredVariable tC_mapVariableExp_referredVariable = (TC_mapVariableExp_referredVariable)theEObject;
-				T result = caseTC_mapVariableExp_referredVariable(tC_mapVariableExp_referredVariable);
-				if (result == null) result = caseTI_mapVariableExp_referredVariable(tC_mapVariableExp_referredVariable);
+			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT: {
+				TmapSimpleOutPatternElement tmapSimpleOutPatternElement = (TmapSimpleOutPatternElement)theEObject;
+				T result = caseTmapSimpleOutPatternElement(tmapSimpleOutPatternElement);
+				if (result == null) result = caseExecution(tmapSimpleOutPatternElement);
+				if (result == null) result = caseTraceInstance(tmapSimpleOutPatternElement);
+				if (result == null) result = caseTraceElement(tmapSimpleOutPatternElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER: {
-				TC_mapVariableExp_referredVariable_Helper tC_mapVariableExp_referredVariable_Helper = (TC_mapVariableExp_referredVariable_Helper)theEObject;
-				T result = caseTC_mapVariableExp_referredVariable_Helper(tC_mapVariableExp_referredVariable_Helper);
-				if (result == null) result = caseTI_mapVariableExp_referredVariable_Helper(tC_mapVariableExp_referredVariable_Helper);
-				if (result == null) result = caseTI_mapVariableExp_referredVariable(tC_mapVariableExp_referredVariable_Helper);
+			case trace_ATL2QVTrPackage.TMAP_STRING_EXP: {
+				TmapStringExp tmapStringExp = (TmapStringExp)theEObject;
+				T result = caseTmapStringExp(tmapStringExp);
+				if (result == null) result = caseImapOclExpression(tmapStringExp);
+				if (result == null) result = caseExecution(tmapStringExp);
+				if (result == null) result = caseTraceInstance(tmapStringExp);
+				if (result == null) result = caseTraceElement(tmapStringExp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION: {
-				TC_mapVariableExp_referredVariable_VariableDeclaration tC_mapVariableExp_referredVariable_VariableDeclaration = (TC_mapVariableExp_referredVariable_VariableDeclaration)theEObject;
-				T result = caseTC_mapVariableExp_referredVariable_VariableDeclaration(tC_mapVariableExp_referredVariable_VariableDeclaration);
-				if (result == null) result = caseTI_mapVariableExp_referredVariable_VariableDeclaration(tC_mapVariableExp_referredVariable_VariableDeclaration);
-				if (result == null) result = caseTI_mapVariableExp_referredVariable(tC_mapVariableExp_referredVariable_VariableDeclaration);
+			case trace_ATL2QVTrPackage.TMAP_VARIABLE: {
+				TmapVariable tmapVariable = (TmapVariable)theEObject;
+				T result = caseTmapVariable(tmapVariable);
+				if (result == null) result = caseExecution(tmapVariable);
+				if (result == null) result = caseTraceInstance(tmapVariable);
+				if (result == null) result = caseTraceElement(tmapVariable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TI_MAP_BOOLEAN_EXP: {
-				TI_mapBooleanExp tI_mapBooleanExp = (TI_mapBooleanExp)theEObject;
-				T result = caseTI_mapBooleanExp(tI_mapBooleanExp);
-				if (result == null) result = caseTI_mapOclExpression(tI_mapBooleanExp);
+			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP: {
+				TmapVariableExp tmapVariableExp = (TmapVariableExp)theEObject;
+				T result = caseTmapVariableExp(tmapVariableExp);
+				if (result == null) result = caseImapOclExpression(tmapVariableExp);
+				if (result == null) result = caseExecution(tmapVariableExp);
+				if (result == null) result = caseTraceInstance(tmapVariableExp);
+				if (result == null) result = caseTraceElement(tmapVariableExp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TI_MAP_HELPER: {
-				TI_mapHelper tI_mapHelper = (TI_mapHelper)theEObject;
-				T result = caseTI_mapHelper(tI_mapHelper);
+			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER: {
+				TmapVariableExp_referredVariable_Helper tmapVariableExp_referredVariable_Helper = (TmapVariableExp_referredVariable_Helper)theEObject;
+				T result = caseTmapVariableExp_referredVariable_Helper(tmapVariableExp_referredVariable_Helper);
+				if (result == null) result = caseImapVariableExp_referredVariable(tmapVariableExp_referredVariable_Helper);
+				if (result == null) result = caseExecution(tmapVariableExp_referredVariable_Helper);
+				if (result == null) result = caseTraceInstance(tmapVariableExp_referredVariable_Helper);
+				if (result == null) result = caseTraceElement(tmapVariableExp_referredVariable_Helper);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TI_MAP_HELPER_ATTRIBUTE: {
-				TI_mapHelper_Attribute tI_mapHelper_Attribute = (TI_mapHelper_Attribute)theEObject;
-				T result = caseTI_mapHelper_Attribute(tI_mapHelper_Attribute);
-				if (result == null) result = caseTI_mapHelper(tI_mapHelper_Attribute);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.TI_MAP_HELPER_OPERATION: {
-				TI_mapHelper_Operation tI_mapHelper_Operation = (TI_mapHelper_Operation)theEObject;
-				T result = caseTI_mapHelper_Operation(tI_mapHelper_Operation);
-				if (result == null) result = caseTI_mapHelper(tI_mapHelper_Operation);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.TI_MAP_IF_EXP: {
-				TI_mapIfExp tI_mapIfExp = (TI_mapIfExp)theEObject;
-				T result = caseTI_mapIfExp(tI_mapIfExp);
-				if (result == null) result = caseTI_mapOclExpression(tI_mapIfExp);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.TI_MAP_INTEGER_EXP: {
-				TI_mapIntegerExp tI_mapIntegerExp = (TI_mapIntegerExp)theEObject;
-				T result = caseTI_mapIntegerExp(tI_mapIntegerExp);
-				if (result == null) result = caseTI_mapOclExpression(tI_mapIntegerExp);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP: {
-				TI_mapNavigationOrAttributeCallExp tI_mapNavigationOrAttributeCallExp = (TI_mapNavigationOrAttributeCallExp)theEObject;
-				T result = caseTI_mapNavigationOrAttributeCallExp(tI_mapNavigationOrAttributeCallExp);
-				if (result == null) result = caseTI_mapOclExpression(tI_mapNavigationOrAttributeCallExp);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER: {
-				TI_mapNavigationOrAttributeCallExp_Helper tI_mapNavigationOrAttributeCallExp_Helper = (TI_mapNavigationOrAttributeCallExp_Helper)theEObject;
-				T result = caseTI_mapNavigationOrAttributeCallExp_Helper(tI_mapNavigationOrAttributeCallExp_Helper);
-				if (result == null) result = caseTI_mapNavigationOrAttributeCallExp(tI_mapNavigationOrAttributeCallExp_Helper);
-				if (result == null) result = caseTI_mapOclExpression(tI_mapNavigationOrAttributeCallExp_Helper);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.TI_MAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY: {
-				TI_mapNavigationOrAttributeCallExp_Property tI_mapNavigationOrAttributeCallExp_Property = (TI_mapNavigationOrAttributeCallExp_Property)theEObject;
-				T result = caseTI_mapNavigationOrAttributeCallExp_Property(tI_mapNavigationOrAttributeCallExp_Property);
-				if (result == null) result = caseTI_mapNavigationOrAttributeCallExp(tI_mapNavigationOrAttributeCallExp_Property);
-				if (result == null) result = caseTI_mapOclExpression(tI_mapNavigationOrAttributeCallExp_Property);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.TI_MAP_OCL_EXPRESSION: {
-				TI_mapOclExpression tI_mapOclExpression = (TI_mapOclExpression)theEObject;
-				T result = caseTI_mapOclExpression(tI_mapOclExpression);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP: {
-				TI_mapOperationCallExp tI_mapOperationCallExp = (TI_mapOperationCallExp)theEObject;
-				T result = caseTI_mapOperationCallExp(tI_mapOperationCallExp);
-				if (result == null) result = caseTI_mapOclExpression(tI_mapOperationCallExp);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_HELPER: {
-				TI_mapOperationCallExp_Helper tI_mapOperationCallExp_Helper = (TI_mapOperationCallExp_Helper)theEObject;
-				T result = caseTI_mapOperationCallExp_Helper(tI_mapOperationCallExp_Helper);
-				if (result == null) result = caseTI_mapOperationCallExp(tI_mapOperationCallExp_Helper);
-				if (result == null) result = caseTI_mapOclExpression(tI_mapOperationCallExp_Helper);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.TI_MAP_OPERATION_CALL_EXP_OPERATION: {
-				TI_mapOperationCallExp_Operation tI_mapOperationCallExp_Operation = (TI_mapOperationCallExp_Operation)theEObject;
-				T result = caseTI_mapOperationCallExp_Operation(tI_mapOperationCallExp_Operation);
-				if (result == null) result = caseTI_mapOperationCallExp(tI_mapOperationCallExp_Operation);
-				if (result == null) result = caseTI_mapOclExpression(tI_mapOperationCallExp_Operation);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.TI_MAP_OPERATOR_CALL_EXP: {
-				TI_mapOperatorCallExp tI_mapOperatorCallExp = (TI_mapOperatorCallExp)theEObject;
-				T result = caseTI_mapOperatorCallExp(tI_mapOperatorCallExp);
-				if (result == null) result = caseTI_mapOperationCallExp(tI_mapOperatorCallExp);
-				if (result == null) result = caseTI_mapOclExpression(tI_mapOperatorCallExp);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.TI_MAP_STRING_EXP: {
-				TI_mapStringExp tI_mapStringExp = (TI_mapStringExp)theEObject;
-				T result = caseTI_mapStringExp(tI_mapStringExp);
-				if (result == null) result = caseTI_mapOclExpression(tI_mapStringExp);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP: {
-				TI_mapVariableExp tI_mapVariableExp = (TI_mapVariableExp)theEObject;
-				T result = caseTI_mapVariableExp(tI_mapVariableExp);
-				if (result == null) result = caseTI_mapOclExpression(tI_mapVariableExp);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE: {
-				TI_mapVariableExp_referredVariable tI_mapVariableExp_referredVariable = (TI_mapVariableExp_referredVariable)theEObject;
-				T result = caseTI_mapVariableExp_referredVariable(tI_mapVariableExp_referredVariable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER: {
-				TI_mapVariableExp_referredVariable_Helper tI_mapVariableExp_referredVariable_Helper = (TI_mapVariableExp_referredVariable_Helper)theEObject;
-				T result = caseTI_mapVariableExp_referredVariable_Helper(tI_mapVariableExp_referredVariable_Helper);
-				if (result == null) result = caseTI_mapVariableExp_referredVariable(tI_mapVariableExp_referredVariable_Helper);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.TI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION: {
-				TI_mapVariableExp_referredVariable_VariableDeclaration tI_mapVariableExp_referredVariable_VariableDeclaration = (TI_mapVariableExp_referredVariable_VariableDeclaration)theEObject;
-				T result = caseTI_mapVariableExp_referredVariable_VariableDeclaration(tI_mapVariableExp_referredVariable_VariableDeclaration);
-				if (result == null) result = caseTI_mapVariableExp_referredVariable(tI_mapVariableExp_referredVariable_VariableDeclaration);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE: {
-				WC_mapVariableExp_referredVariable wC_mapVariableExp_referredVariable = (WC_mapVariableExp_referredVariable)theEObject;
-				T result = caseWC_mapVariableExp_referredVariable(wC_mapVariableExp_referredVariable);
-				if (result == null) result = caseWI_mapVariableExp_referredVariable(wC_mapVariableExp_referredVariable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER: {
-				WC_mapVariableExp_referredVariable_Helper wC_mapVariableExp_referredVariable_Helper = (WC_mapVariableExp_referredVariable_Helper)theEObject;
-				T result = caseWC_mapVariableExp_referredVariable_Helper(wC_mapVariableExp_referredVariable_Helper);
-				if (result == null) result = caseWI_mapVariableExp_referredVariable_Helper(wC_mapVariableExp_referredVariable_Helper);
-				if (result == null) result = caseWI_mapVariableExp_referredVariable(wC_mapVariableExp_referredVariable_Helper);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.WC_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION: {
-				WC_mapVariableExp_referredVariable_VariableDeclaration wC_mapVariableExp_referredVariable_VariableDeclaration = (WC_mapVariableExp_referredVariable_VariableDeclaration)theEObject;
-				T result = caseWC_mapVariableExp_referredVariable_VariableDeclaration(wC_mapVariableExp_referredVariable_VariableDeclaration);
-				if (result == null) result = caseWI_mapVariableExp_referredVariable_VariableDeclaration(wC_mapVariableExp_referredVariable_VariableDeclaration);
-				if (result == null) result = caseWI_mapVariableExp_referredVariable(wC_mapVariableExp_referredVariable_VariableDeclaration);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE: {
-				WI_mapVariableExp_referredVariable wI_mapVariableExp_referredVariable = (WI_mapVariableExp_referredVariable)theEObject;
-				T result = caseWI_mapVariableExp_referredVariable(wI_mapVariableExp_referredVariable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER: {
-				WI_mapVariableExp_referredVariable_Helper wI_mapVariableExp_referredVariable_Helper = (WI_mapVariableExp_referredVariable_Helper)theEObject;
-				T result = caseWI_mapVariableExp_referredVariable_Helper(wI_mapVariableExp_referredVariable_Helper);
-				if (result == null) result = caseWI_mapVariableExp_referredVariable(wI_mapVariableExp_referredVariable_Helper);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case trace_ATL2QVTrPackage.WI_MAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION: {
-				WI_mapVariableExp_referredVariable_VariableDeclaration wI_mapVariableExp_referredVariable_VariableDeclaration = (WI_mapVariableExp_referredVariable_VariableDeclaration)theEObject;
-				T result = caseWI_mapVariableExp_referredVariable_VariableDeclaration(wI_mapVariableExp_referredVariable_VariableDeclaration);
-				if (result == null) result = caseWI_mapVariableExp_referredVariable(wI_mapVariableExp_referredVariable_VariableDeclaration);
+			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION: {
+				TmapVariableExp_referredVariable_VariableDeclaration tmapVariableExp_referredVariable_VariableDeclaration = (TmapVariableExp_referredVariable_VariableDeclaration)theEObject;
+				T result = caseTmapVariableExp_referredVariable_VariableDeclaration(tmapVariableExp_referredVariable_VariableDeclaration);
+				if (result == null) result = caseImapVariableExp_referredVariable(tmapVariableExp_referredVariable_VariableDeclaration);
+				if (result == null) result = caseExecution(tmapVariableExp_referredVariable_VariableDeclaration);
+				if (result == null) result = caseTraceInstance(tmapVariableExp_referredVariable_VariableDeclaration);
+				if (result == null) result = caseTraceElement(tmapVariableExp_referredVariable_VariableDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -503,887 +435,617 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Binding</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Cmap Variable Exp referred Variable Helper</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Binding</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Cmap Variable Exp referred Variable Helper</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapBinding(TC_mapBinding object) {
+	public T caseCmapVariableExp_referredVariable_Helper(CmapVariableExp_referredVariable_Helper object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Boolean Exp</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Cmap Variable Exp referred Variable Variable Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Boolean Exp</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Cmap Variable Exp referred Variable Variable Declaration</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapBooleanExp(TC_mapBooleanExp object) {
+	public T caseCmapVariableExp_referredVariable_VariableDeclaration(CmapVariableExp_referredVariable_VariableDeclaration object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Helper</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Dmap Helper</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Helper</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Dmap Helper</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapHelper(TC_mapHelper object) {
+	public T caseDmapHelper(DmapHelper object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Helper Attribute</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Dmap Ocl Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Helper Attribute</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Dmap Ocl Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapHelper_Attribute(TC_mapHelper_Attribute object) {
+	public T caseDmapOclExpression(DmapOclExpression object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Helper Context</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Dmap Variable Exp referred Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Helper Context</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Dmap Variable Exp referred Variable</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapHelper_Context(TC_mapHelper_Context object) {
+	public T caseDmapVariableExp_referredVariable(DmapVariableExp_referredVariable object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Helper Operation</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Imap Helper</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Helper Operation</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Imap Helper</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapHelper_Operation(TC_mapHelper_Operation object) {
+	public T caseImapHelper(ImapHelper object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map If Exp</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Imap Ocl Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map If Exp</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Imap Ocl Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapIfExp(TC_mapIfExp object) {
+	public T caseImapOclExpression(ImapOclExpression object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map In Pattern</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Imap Variable Exp referred Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map In Pattern</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Imap Variable Exp referred Variable</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapInPattern(TC_mapInPattern object) {
+	public T caseImapVariableExp_referredVariable(ImapVariableExp_referredVariable object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map In Pattern filter</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map In Pattern filter</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Binding</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapInPattern_filter(TC_mapInPattern_filter object) {
+	public T caseTmapBinding(TmapBinding object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Integer Exp</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Boolean Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Integer Exp</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Boolean Exp</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapIntegerExp(TC_mapIntegerExp object) {
+	public T caseTmapBooleanExp(TmapBooleanExp object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Matched Rule</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Helper Attribute</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Matched Rule</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Helper Attribute</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapMatchedRule(TC_mapMatchedRule object) {
+	public T caseTmapHelper_Attribute(TmapHelper_Attribute object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Matched Rule super</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Helper Context</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Matched Rule super</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Helper Context</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapMatchedRule_super(TC_mapMatchedRule_super object) {
+	public T caseTmapHelper_Context(TmapHelper_Context object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Module</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Helper Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Module</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Helper Operation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapModule(TC_mapModule object) {
+	public T caseTmapHelper_Operation(TmapHelper_Operation object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Navigation Or Attribute Call Exp</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap If Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Navigation Or Attribute Call Exp</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap If Exp</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapNavigationOrAttributeCallExp(TC_mapNavigationOrAttributeCallExp object) {
+	public T caseTmapIfExp(TmapIfExp object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Navigation Or Attribute Call Exp Helper</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap In Pattern</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Navigation Or Attribute Call Exp Helper</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap In Pattern</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapNavigationOrAttributeCallExp_Helper(TC_mapNavigationOrAttributeCallExp_Helper object) {
+	public T caseTmapInPattern(TmapInPattern object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Navigation Or Attribute Call Exp Property</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap In Pattern filter</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Navigation Or Attribute Call Exp Property</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap In Pattern filter</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapNavigationOrAttributeCallExp_Property(TC_mapNavigationOrAttributeCallExp_Property object) {
+	public T caseTmapInPattern_filter(TmapInPattern_filter object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Ocl Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Integer Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Ocl Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Integer Exp</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapOclExpression(TC_mapOclExpression object) {
+	public T caseTmapIntegerExp(TmapIntegerExp object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Ocl Metamodel</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Matched Rule</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Ocl Metamodel</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Matched Rule</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapOclMetamodel(TC_mapOclMetamodel object) {
+	public T caseTmapMatchedRule(TmapMatchedRule object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Ocl Model IN</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Matched Rule super</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Ocl Model IN</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Matched Rule super</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapOclModel_IN(TC_mapOclModel_IN object) {
+	public T caseTmapMatchedRule_super(TmapMatchedRule_super object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Ocl Model OUT</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Module</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Ocl Model OUT</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Module</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapOclModel_OUT(TC_mapOclModel_OUT object) {
+	public T caseTmapModule(TmapModule object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Operation Call Exp</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Navigation Or Attribute Call Exp Helper</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Operation Call Exp</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Navigation Or Attribute Call Exp Helper</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapOperationCallExp(TC_mapOperationCallExp object) {
+	public T caseTmapNavigationOrAttributeCallExp_Helper(TmapNavigationOrAttributeCallExp_Helper object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Operation Call Exp Helper</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Navigation Or Attribute Call Exp Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Operation Call Exp Helper</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Navigation Or Attribute Call Exp Property</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapOperationCallExp_Helper(TC_mapOperationCallExp_Helper object) {
+	public T caseTmapNavigationOrAttributeCallExp_Property(TmapNavigationOrAttributeCallExp_Property object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Operation Call Exp Operation</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Ocl Metamodel</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Operation Call Exp Operation</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Ocl Metamodel</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapOperationCallExp_Operation(TC_mapOperationCallExp_Operation object) {
+	public T caseTmapOclMetamodel(TmapOclMetamodel object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Operation Call Exp argument</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Ocl Model IN</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Operation Call Exp argument</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Ocl Model IN</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapOperationCallExp_argument(TC_mapOperationCallExp_argument object) {
+	public T caseTmapOclModel_IN(TmapOclModel_IN object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Operator Call Exp</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Ocl Model OUT</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Operator Call Exp</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Ocl Model OUT</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapOperatorCallExp(TC_mapOperatorCallExp object) {
+	public T caseTmapOclModel_OUT(TmapOclModel_OUT object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Out Pattern</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Operation Call Exp Helper</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Out Pattern</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Operation Call Exp Helper</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapOutPattern(TC_mapOutPattern object) {
+	public T caseTmapOperationCallExp_Helper(TmapOperationCallExp_Helper object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Simple In Pattern Element</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Operation Call Exp Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Simple In Pattern Element</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Operation Call Exp Operation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapSimpleInPatternElement(TC_mapSimpleInPatternElement object) {
+	public T caseTmapOperationCallExp_Operation(TmapOperationCallExp_Operation object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Simple Out Pattern Element</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Operation Call Exp argument</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Simple Out Pattern Element</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Operation Call Exp argument</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapSimpleOutPatternElement(TC_mapSimpleOutPatternElement object) {
+	public T caseTmapOperationCallExp_argument(TmapOperationCallExp_argument object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map String Exp</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Operator Call Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map String Exp</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Operator Call Exp</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapStringExp(TC_mapStringExp object) {
+	public T caseTmapOperatorCallExp(TmapOperatorCallExp object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Variable</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Out Pattern</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Variable</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Out Pattern</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapVariable(TC_mapVariable object) {
+	public T caseTmapOutPattern(TmapOutPattern object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Variable Exp</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Simple In Pattern Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Variable Exp</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Simple In Pattern Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapVariableExp(TC_mapVariableExp object) {
+	public T caseTmapSimpleInPatternElement(TmapSimpleInPatternElement object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Variable Exp referred Variable</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Simple Out Pattern Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Variable Exp referred Variable</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Simple Out Pattern Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapVariableExp_referredVariable(TC_mapVariableExp_referredVariable object) {
+	public T caseTmapSimpleOutPatternElement(TmapSimpleOutPatternElement object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Variable Exp referred Variable Helper</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap String Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Variable Exp referred Variable Helper</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap String Exp</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapVariableExp_referredVariable_Helper(TC_mapVariableExp_referredVariable_Helper object) {
+	public T caseTmapStringExp(TmapStringExp object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TC map Variable Exp referred Variable Variable Declaration</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TC map Variable Exp referred Variable Variable Declaration</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Variable</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTC_mapVariableExp_referredVariable_VariableDeclaration(TC_mapVariableExp_referredVariable_VariableDeclaration object) {
+	public T caseTmapVariable(TmapVariable object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TI map Boolean Exp</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Variable Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TI map Boolean Exp</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Variable Exp</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTI_mapBooleanExp(TI_mapBooleanExp object) {
+	public T caseTmapVariableExp(TmapVariableExp object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TI map Helper</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Variable Exp referred Variable Helper</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TI map Helper</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Variable Exp referred Variable Helper</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTI_mapHelper(TI_mapHelper object) {
+	public T caseTmapVariableExp_referredVariable_Helper(TmapVariableExp_referredVariable_Helper object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TI map Helper Attribute</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Tmap Variable Exp referred Variable Variable Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TI map Helper Attribute</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Tmap Variable Exp referred Variable Variable Declaration</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTI_mapHelper_Attribute(TI_mapHelper_Attribute object) {
+	public T caseTmapVariableExp_referredVariable_VariableDeclaration(TmapVariableExp_referredVariable_VariableDeclaration object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TI map Helper Operation</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Trace Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TI map Helper Operation</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Trace Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTI_mapHelper_Operation(TI_mapHelper_Operation object) {
+	public T caseTraceElement(TraceElement object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TI map If Exp</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Trace Instance</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TI map If Exp</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Trace Instance</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTI_mapIfExp(TI_mapIfExp object) {
+	public T caseTraceInstance(TraceInstance object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TI map Integer Exp</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Dispatch</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TI map Integer Exp</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Dispatch</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTI_mapIntegerExp(TI_mapIntegerExp object) {
+	public T caseDispatch(Dispatch object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TI map Navigation Or Attribute Call Exp</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Execution</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TI map Navigation Or Attribute Call Exp</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Execution</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTI_mapNavigationOrAttributeCallExp(TI_mapNavigationOrAttributeCallExp object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TI map Navigation Or Attribute Call Exp Helper</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TI map Navigation Or Attribute Call Exp Helper</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTI_mapNavigationOrAttributeCallExp_Helper(TI_mapNavigationOrAttributeCallExp_Helper object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TI map Navigation Or Attribute Call Exp Property</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TI map Navigation Or Attribute Call Exp Property</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTI_mapNavigationOrAttributeCallExp_Property(TI_mapNavigationOrAttributeCallExp_Property object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TI map Ocl Expression</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TI map Ocl Expression</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTI_mapOclExpression(TI_mapOclExpression object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TI map Operation Call Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TI map Operation Call Exp</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTI_mapOperationCallExp(TI_mapOperationCallExp object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TI map Operation Call Exp Helper</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TI map Operation Call Exp Helper</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTI_mapOperationCallExp_Helper(TI_mapOperationCallExp_Helper object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TI map Operation Call Exp Operation</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TI map Operation Call Exp Operation</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTI_mapOperationCallExp_Operation(TI_mapOperationCallExp_Operation object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TI map Operator Call Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TI map Operator Call Exp</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTI_mapOperatorCallExp(TI_mapOperatorCallExp object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TI map String Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TI map String Exp</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTI_mapStringExp(TI_mapStringExp object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TI map Variable Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TI map Variable Exp</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTI_mapVariableExp(TI_mapVariableExp object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TI map Variable Exp referred Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TI map Variable Exp referred Variable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTI_mapVariableExp_referredVariable(TI_mapVariableExp_referredVariable object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TI map Variable Exp referred Variable Helper</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TI map Variable Exp referred Variable Helper</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTI_mapVariableExp_referredVariable_Helper(TI_mapVariableExp_referredVariable_Helper object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>TI map Variable Exp referred Variable Variable Declaration</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>TI map Variable Exp referred Variable Variable Declaration</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTI_mapVariableExp_referredVariable_VariableDeclaration(TI_mapVariableExp_referredVariable_VariableDeclaration object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>WC map Variable Exp referred Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>WC map Variable Exp referred Variable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseWC_mapVariableExp_referredVariable(WC_mapVariableExp_referredVariable object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>WC map Variable Exp referred Variable Helper</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>WC map Variable Exp referred Variable Helper</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseWC_mapVariableExp_referredVariable_Helper(WC_mapVariableExp_referredVariable_Helper object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>WC map Variable Exp referred Variable Variable Declaration</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>WC map Variable Exp referred Variable Variable Declaration</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseWC_mapVariableExp_referredVariable_VariableDeclaration(WC_mapVariableExp_referredVariable_VariableDeclaration object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>WI map Variable Exp referred Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>WI map Variable Exp referred Variable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseWI_mapVariableExp_referredVariable(WI_mapVariableExp_referredVariable object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>WI map Variable Exp referred Variable Helper</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>WI map Variable Exp referred Variable Helper</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseWI_mapVariableExp_referredVariable_Helper(WI_mapVariableExp_referredVariable_Helper object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>WI map Variable Exp referred Variable Variable Declaration</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>WI map Variable Exp referred Variable Variable Declaration</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseWI_mapVariableExp_referredVariable_VariableDeclaration(WI_mapVariableExp_referredVariable_VariableDeclaration object) {
+	public T caseExecution(Execution object) {
 		return null;
 	}
 

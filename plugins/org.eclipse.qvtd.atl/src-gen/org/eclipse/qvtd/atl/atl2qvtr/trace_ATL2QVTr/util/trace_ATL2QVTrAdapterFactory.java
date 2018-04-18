@@ -21,6 +21,11 @@ import org.eclipse.jdt.annotation.Nullable;
 
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.*;
 
+import org.eclipse.qvtd.runtime.qvttrace.Dispatch;
+import org.eclipse.qvtd.runtime.qvttrace.Execution;
+import org.eclipse.qvtd.runtime.qvttrace.TraceElement;
+import org.eclipse.qvtd.runtime.qvttrace.TraceInstance;
+
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
@@ -78,240 +83,168 @@ public class trace_ATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 	protected trace_ATL2QVTrSwitch<@Nullable Adapter> modelSwitch =
 		new trace_ATL2QVTrSwitch<@Nullable Adapter>() {
 			@Override
-			public Adapter caseTC_mapBinding(TC_mapBinding object) {
-				return createTC_mapBindingAdapter();
+			public Adapter caseCmapVariableExp_referredVariable_Helper(CmapVariableExp_referredVariable_Helper object) {
+				return createCmapVariableExp_referredVariable_HelperAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapBooleanExp(TC_mapBooleanExp object) {
-				return createTC_mapBooleanExpAdapter();
+			public Adapter caseCmapVariableExp_referredVariable_VariableDeclaration(CmapVariableExp_referredVariable_VariableDeclaration object) {
+				return createCmapVariableExp_referredVariable_VariableDeclarationAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapHelper(TC_mapHelper object) {
-				return createTC_mapHelperAdapter();
+			public Adapter caseDmapHelper(DmapHelper object) {
+				return createDmapHelperAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapHelper_Attribute(TC_mapHelper_Attribute object) {
-				return createTC_mapHelper_AttributeAdapter();
+			public Adapter caseDmapOclExpression(DmapOclExpression object) {
+				return createDmapOclExpressionAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapHelper_Context(TC_mapHelper_Context object) {
-				return createTC_mapHelper_ContextAdapter();
+			public Adapter caseDmapVariableExp_referredVariable(DmapVariableExp_referredVariable object) {
+				return createDmapVariableExp_referredVariableAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapHelper_Operation(TC_mapHelper_Operation object) {
-				return createTC_mapHelper_OperationAdapter();
+			public Adapter caseImapHelper(ImapHelper object) {
+				return createImapHelperAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapIfExp(TC_mapIfExp object) {
-				return createTC_mapIfExpAdapter();
+			public Adapter caseImapOclExpression(ImapOclExpression object) {
+				return createImapOclExpressionAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapInPattern(TC_mapInPattern object) {
-				return createTC_mapInPatternAdapter();
+			public Adapter caseImapVariableExp_referredVariable(ImapVariableExp_referredVariable object) {
+				return createImapVariableExp_referredVariableAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapInPattern_filter(TC_mapInPattern_filter object) {
-				return createTC_mapInPattern_filterAdapter();
+			public Adapter caseTmapBinding(TmapBinding object) {
+				return createTmapBindingAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapIntegerExp(TC_mapIntegerExp object) {
-				return createTC_mapIntegerExpAdapter();
+			public Adapter caseTmapBooleanExp(TmapBooleanExp object) {
+				return createTmapBooleanExpAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapMatchedRule(TC_mapMatchedRule object) {
-				return createTC_mapMatchedRuleAdapter();
+			public Adapter caseTmapHelper_Attribute(TmapHelper_Attribute object) {
+				return createTmapHelper_AttributeAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapMatchedRule_super(TC_mapMatchedRule_super object) {
-				return createTC_mapMatchedRule_superAdapter();
+			public Adapter caseTmapHelper_Context(TmapHelper_Context object) {
+				return createTmapHelper_ContextAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapModule(TC_mapModule object) {
-				return createTC_mapModuleAdapter();
+			public Adapter caseTmapHelper_Operation(TmapHelper_Operation object) {
+				return createTmapHelper_OperationAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapNavigationOrAttributeCallExp(TC_mapNavigationOrAttributeCallExp object) {
-				return createTC_mapNavigationOrAttributeCallExpAdapter();
+			public Adapter caseTmapIfExp(TmapIfExp object) {
+				return createTmapIfExpAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapNavigationOrAttributeCallExp_Helper(TC_mapNavigationOrAttributeCallExp_Helper object) {
-				return createTC_mapNavigationOrAttributeCallExp_HelperAdapter();
+			public Adapter caseTmapInPattern(TmapInPattern object) {
+				return createTmapInPatternAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapNavigationOrAttributeCallExp_Property(TC_mapNavigationOrAttributeCallExp_Property object) {
-				return createTC_mapNavigationOrAttributeCallExp_PropertyAdapter();
+			public Adapter caseTmapInPattern_filter(TmapInPattern_filter object) {
+				return createTmapInPattern_filterAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapOclExpression(TC_mapOclExpression object) {
-				return createTC_mapOclExpressionAdapter();
+			public Adapter caseTmapIntegerExp(TmapIntegerExp object) {
+				return createTmapIntegerExpAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapOclMetamodel(TC_mapOclMetamodel object) {
-				return createTC_mapOclMetamodelAdapter();
+			public Adapter caseTmapMatchedRule(TmapMatchedRule object) {
+				return createTmapMatchedRuleAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapOclModel_IN(TC_mapOclModel_IN object) {
-				return createTC_mapOclModel_INAdapter();
+			public Adapter caseTmapMatchedRule_super(TmapMatchedRule_super object) {
+				return createTmapMatchedRule_superAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapOclModel_OUT(TC_mapOclModel_OUT object) {
-				return createTC_mapOclModel_OUTAdapter();
+			public Adapter caseTmapModule(TmapModule object) {
+				return createTmapModuleAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapOperationCallExp(TC_mapOperationCallExp object) {
-				return createTC_mapOperationCallExpAdapter();
+			public Adapter caseTmapNavigationOrAttributeCallExp_Helper(TmapNavigationOrAttributeCallExp_Helper object) {
+				return createTmapNavigationOrAttributeCallExp_HelperAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapOperationCallExp_Helper(TC_mapOperationCallExp_Helper object) {
-				return createTC_mapOperationCallExp_HelperAdapter();
+			public Adapter caseTmapNavigationOrAttributeCallExp_Property(TmapNavigationOrAttributeCallExp_Property object) {
+				return createTmapNavigationOrAttributeCallExp_PropertyAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapOperationCallExp_Operation(TC_mapOperationCallExp_Operation object) {
-				return createTC_mapOperationCallExp_OperationAdapter();
+			public Adapter caseTmapOclMetamodel(TmapOclMetamodel object) {
+				return createTmapOclMetamodelAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapOperationCallExp_argument(TC_mapOperationCallExp_argument object) {
-				return createTC_mapOperationCallExp_argumentAdapter();
+			public Adapter caseTmapOclModel_IN(TmapOclModel_IN object) {
+				return createTmapOclModel_INAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapOperatorCallExp(TC_mapOperatorCallExp object) {
-				return createTC_mapOperatorCallExpAdapter();
+			public Adapter caseTmapOclModel_OUT(TmapOclModel_OUT object) {
+				return createTmapOclModel_OUTAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapOutPattern(TC_mapOutPattern object) {
-				return createTC_mapOutPatternAdapter();
+			public Adapter caseTmapOperationCallExp_Helper(TmapOperationCallExp_Helper object) {
+				return createTmapOperationCallExp_HelperAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapSimpleInPatternElement(TC_mapSimpleInPatternElement object) {
-				return createTC_mapSimpleInPatternElementAdapter();
+			public Adapter caseTmapOperationCallExp_Operation(TmapOperationCallExp_Operation object) {
+				return createTmapOperationCallExp_OperationAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapSimpleOutPatternElement(TC_mapSimpleOutPatternElement object) {
-				return createTC_mapSimpleOutPatternElementAdapter();
+			public Adapter caseTmapOperationCallExp_argument(TmapOperationCallExp_argument object) {
+				return createTmapOperationCallExp_argumentAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapStringExp(TC_mapStringExp object) {
-				return createTC_mapStringExpAdapter();
+			public Adapter caseTmapOperatorCallExp(TmapOperatorCallExp object) {
+				return createTmapOperatorCallExpAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapVariable(TC_mapVariable object) {
-				return createTC_mapVariableAdapter();
+			public Adapter caseTmapOutPattern(TmapOutPattern object) {
+				return createTmapOutPatternAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapVariableExp(TC_mapVariableExp object) {
-				return createTC_mapVariableExpAdapter();
+			public Adapter caseTmapSimpleInPatternElement(TmapSimpleInPatternElement object) {
+				return createTmapSimpleInPatternElementAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapVariableExp_referredVariable(TC_mapVariableExp_referredVariable object) {
-				return createTC_mapVariableExp_referredVariableAdapter();
+			public Adapter caseTmapSimpleOutPatternElement(TmapSimpleOutPatternElement object) {
+				return createTmapSimpleOutPatternElementAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapVariableExp_referredVariable_Helper(TC_mapVariableExp_referredVariable_Helper object) {
-				return createTC_mapVariableExp_referredVariable_HelperAdapter();
+			public Adapter caseTmapStringExp(TmapStringExp object) {
+				return createTmapStringExpAdapter();
 			}
 			@Override
-			public Adapter caseTC_mapVariableExp_referredVariable_VariableDeclaration(TC_mapVariableExp_referredVariable_VariableDeclaration object) {
-				return createTC_mapVariableExp_referredVariable_VariableDeclarationAdapter();
+			public Adapter caseTmapVariable(TmapVariable object) {
+				return createTmapVariableAdapter();
 			}
 			@Override
-			public Adapter caseTI_mapBooleanExp(TI_mapBooleanExp object) {
-				return createTI_mapBooleanExpAdapter();
+			public Adapter caseTmapVariableExp(TmapVariableExp object) {
+				return createTmapVariableExpAdapter();
 			}
 			@Override
-			public Adapter caseTI_mapHelper(TI_mapHelper object) {
-				return createTI_mapHelperAdapter();
+			public Adapter caseTmapVariableExp_referredVariable_Helper(TmapVariableExp_referredVariable_Helper object) {
+				return createTmapVariableExp_referredVariable_HelperAdapter();
 			}
 			@Override
-			public Adapter caseTI_mapHelper_Attribute(TI_mapHelper_Attribute object) {
-				return createTI_mapHelper_AttributeAdapter();
+			public Adapter caseTmapVariableExp_referredVariable_VariableDeclaration(TmapVariableExp_referredVariable_VariableDeclaration object) {
+				return createTmapVariableExp_referredVariable_VariableDeclarationAdapter();
 			}
 			@Override
-			public Adapter caseTI_mapHelper_Operation(TI_mapHelper_Operation object) {
-				return createTI_mapHelper_OperationAdapter();
+			public Adapter caseTraceElement(TraceElement object) {
+				return createTraceElementAdapter();
 			}
 			@Override
-			public Adapter caseTI_mapIfExp(TI_mapIfExp object) {
-				return createTI_mapIfExpAdapter();
+			public Adapter caseTraceInstance(TraceInstance object) {
+				return createTraceInstanceAdapter();
 			}
 			@Override
-			public Adapter caseTI_mapIntegerExp(TI_mapIntegerExp object) {
-				return createTI_mapIntegerExpAdapter();
+			public Adapter caseDispatch(Dispatch object) {
+				return createDispatchAdapter();
 			}
 			@Override
-			public Adapter caseTI_mapNavigationOrAttributeCallExp(TI_mapNavigationOrAttributeCallExp object) {
-				return createTI_mapNavigationOrAttributeCallExpAdapter();
-			}
-			@Override
-			public Adapter caseTI_mapNavigationOrAttributeCallExp_Helper(TI_mapNavigationOrAttributeCallExp_Helper object) {
-				return createTI_mapNavigationOrAttributeCallExp_HelperAdapter();
-			}
-			@Override
-			public Adapter caseTI_mapNavigationOrAttributeCallExp_Property(TI_mapNavigationOrAttributeCallExp_Property object) {
-				return createTI_mapNavigationOrAttributeCallExp_PropertyAdapter();
-			}
-			@Override
-			public Adapter caseTI_mapOclExpression(TI_mapOclExpression object) {
-				return createTI_mapOclExpressionAdapter();
-			}
-			@Override
-			public Adapter caseTI_mapOperationCallExp(TI_mapOperationCallExp object) {
-				return createTI_mapOperationCallExpAdapter();
-			}
-			@Override
-			public Adapter caseTI_mapOperationCallExp_Helper(TI_mapOperationCallExp_Helper object) {
-				return createTI_mapOperationCallExp_HelperAdapter();
-			}
-			@Override
-			public Adapter caseTI_mapOperationCallExp_Operation(TI_mapOperationCallExp_Operation object) {
-				return createTI_mapOperationCallExp_OperationAdapter();
-			}
-			@Override
-			public Adapter caseTI_mapOperatorCallExp(TI_mapOperatorCallExp object) {
-				return createTI_mapOperatorCallExpAdapter();
-			}
-			@Override
-			public Adapter caseTI_mapStringExp(TI_mapStringExp object) {
-				return createTI_mapStringExpAdapter();
-			}
-			@Override
-			public Adapter caseTI_mapVariableExp(TI_mapVariableExp object) {
-				return createTI_mapVariableExpAdapter();
-			}
-			@Override
-			public Adapter caseTI_mapVariableExp_referredVariable(TI_mapVariableExp_referredVariable object) {
-				return createTI_mapVariableExp_referredVariableAdapter();
-			}
-			@Override
-			public Adapter caseTI_mapVariableExp_referredVariable_Helper(TI_mapVariableExp_referredVariable_Helper object) {
-				return createTI_mapVariableExp_referredVariable_HelperAdapter();
-			}
-			@Override
-			public Adapter caseTI_mapVariableExp_referredVariable_VariableDeclaration(TI_mapVariableExp_referredVariable_VariableDeclaration object) {
-				return createTI_mapVariableExp_referredVariable_VariableDeclarationAdapter();
-			}
-			@Override
-			public Adapter caseWC_mapVariableExp_referredVariable(WC_mapVariableExp_referredVariable object) {
-				return createWC_mapVariableExp_referredVariableAdapter();
-			}
-			@Override
-			public Adapter caseWC_mapVariableExp_referredVariable_Helper(WC_mapVariableExp_referredVariable_Helper object) {
-				return createWC_mapVariableExp_referredVariable_HelperAdapter();
-			}
-			@Override
-			public Adapter caseWC_mapVariableExp_referredVariable_VariableDeclaration(WC_mapVariableExp_referredVariable_VariableDeclaration object) {
-				return createWC_mapVariableExp_referredVariable_VariableDeclarationAdapter();
-			}
-			@Override
-			public Adapter caseWI_mapVariableExp_referredVariable(WI_mapVariableExp_referredVariable object) {
-				return createWI_mapVariableExp_referredVariableAdapter();
-			}
-			@Override
-			public Adapter caseWI_mapVariableExp_referredVariable_Helper(WI_mapVariableExp_referredVariable_Helper object) {
-				return createWI_mapVariableExp_referredVariable_HelperAdapter();
-			}
-			@Override
-			public Adapter caseWI_mapVariableExp_referredVariable_VariableDeclaration(WI_mapVariableExp_referredVariable_VariableDeclaration object) {
-				return createWI_mapVariableExp_referredVariable_VariableDeclarationAdapter();
+			public Adapter caseExecution(Execution object) {
+				return createExecutionAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -334,828 +267,576 @@ public class trace_ATL2QVTrAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapBinding <em>TC map Binding</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.CmapVariableExp_referredVariable_Helper <em>Cmap Variable Exp referred Variable Helper</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapBinding
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.CmapVariableExp_referredVariable_Helper
 	 * @generated
 	 */
-	public Adapter createTC_mapBindingAdapter() {
+	public Adapter createCmapVariableExp_referredVariable_HelperAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapBooleanExp <em>TC map Boolean Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.CmapVariableExp_referredVariable_VariableDeclaration <em>Cmap Variable Exp referred Variable Variable Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapBooleanExp
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.CmapVariableExp_referredVariable_VariableDeclaration
 	 * @generated
 	 */
-	public Adapter createTC_mapBooleanExpAdapter() {
+	public Adapter createCmapVariableExp_referredVariable_VariableDeclarationAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapHelper <em>TC map Helper</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapHelper <em>Dmap Helper</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapHelper
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapHelper
 	 * @generated
 	 */
-	public Adapter createTC_mapHelperAdapter() {
+	public Adapter createDmapHelperAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapHelper_Attribute <em>TC map Helper Attribute</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression <em>Dmap Ocl Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapHelper_Attribute
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression
 	 * @generated
 	 */
-	public Adapter createTC_mapHelper_AttributeAdapter() {
+	public Adapter createDmapOclExpressionAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapHelper_Context <em>TC map Helper Context</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapVariableExp_referredVariable <em>Dmap Variable Exp referred Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapHelper_Context
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapVariableExp_referredVariable
 	 * @generated
 	 */
-	public Adapter createTC_mapHelper_ContextAdapter() {
+	public Adapter createDmapVariableExp_referredVariableAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapHelper_Operation <em>TC map Helper Operation</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.ImapHelper <em>Imap Helper</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapHelper_Operation
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.ImapHelper
 	 * @generated
 	 */
-	public Adapter createTC_mapHelper_OperationAdapter() {
+	public Adapter createImapHelperAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapIfExp <em>TC map If Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.ImapOclExpression <em>Imap Ocl Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapIfExp
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.ImapOclExpression
 	 * @generated
 	 */
-	public Adapter createTC_mapIfExpAdapter() {
+	public Adapter createImapOclExpressionAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapInPattern <em>TC map In Pattern</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.ImapVariableExp_referredVariable <em>Imap Variable Exp referred Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapInPattern
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.ImapVariableExp_referredVariable
 	 * @generated
 	 */
-	public Adapter createTC_mapInPatternAdapter() {
+	public Adapter createImapVariableExp_referredVariableAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapInPattern_filter <em>TC map In Pattern filter</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding <em>Tmap Binding</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapInPattern_filter
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBinding
 	 * @generated
 	 */
-	public Adapter createTC_mapInPattern_filterAdapter() {
+	public Adapter createTmapBindingAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapIntegerExp <em>TC map Integer Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBooleanExp <em>Tmap Boolean Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapIntegerExp
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBooleanExp
 	 * @generated
 	 */
-	public Adapter createTC_mapIntegerExpAdapter() {
+	public Adapter createTmapBooleanExpAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapMatchedRule <em>TC map Matched Rule</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Attribute <em>Tmap Helper Attribute</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapMatchedRule
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Attribute
 	 * @generated
 	 */
-	public Adapter createTC_mapMatchedRuleAdapter() {
+	public Adapter createTmapHelper_AttributeAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapMatchedRule_super <em>TC map Matched Rule super</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context <em>Tmap Helper Context</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapMatchedRule_super
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Context
 	 * @generated
 	 */
-	public Adapter createTC_mapMatchedRule_superAdapter() {
+	public Adapter createTmapHelper_ContextAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapModule <em>TC map Module</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Operation <em>Tmap Helper Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapModule
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Operation
 	 * @generated
 	 */
-	public Adapter createTC_mapModuleAdapter() {
+	public Adapter createTmapHelper_OperationAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapNavigationOrAttributeCallExp <em>TC map Navigation Or Attribute Call Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp <em>Tmap If Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapNavigationOrAttributeCallExp
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIfExp
 	 * @generated
 	 */
-	public Adapter createTC_mapNavigationOrAttributeCallExpAdapter() {
+	public Adapter createTmapIfExpAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapNavigationOrAttributeCallExp_Helper <em>TC map Navigation Or Attribute Call Exp Helper</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern <em>Tmap In Pattern</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapNavigationOrAttributeCallExp_Helper
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern
 	 * @generated
 	 */
-	public Adapter createTC_mapNavigationOrAttributeCallExp_HelperAdapter() {
+	public Adapter createTmapInPatternAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapNavigationOrAttributeCallExp_Property <em>TC map Navigation Or Attribute Call Exp Property</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter <em>Tmap In Pattern filter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapNavigationOrAttributeCallExp_Property
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapInPattern_filter
 	 * @generated
 	 */
-	public Adapter createTC_mapNavigationOrAttributeCallExp_PropertyAdapter() {
+	public Adapter createTmapInPattern_filterAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOclExpression <em>TC map Ocl Expression</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIntegerExp <em>Tmap Integer Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOclExpression
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapIntegerExp
 	 * @generated
 	 */
-	public Adapter createTC_mapOclExpressionAdapter() {
+	public Adapter createTmapIntegerExpAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOclMetamodel <em>TC map Ocl Metamodel</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule <em>Tmap Matched Rule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOclMetamodel
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule
 	 * @generated
 	 */
-	public Adapter createTC_mapOclMetamodelAdapter() {
+	public Adapter createTmapMatchedRuleAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOclModel_IN <em>TC map Ocl Model IN</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super <em>Tmap Matched Rule super</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOclModel_IN
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule_super
 	 * @generated
 	 */
-	public Adapter createTC_mapOclModel_INAdapter() {
+	public Adapter createTmapMatchedRule_superAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOclModel_OUT <em>TC map Ocl Model OUT</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule <em>Tmap Module</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOclModel_OUT
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule
 	 * @generated
 	 */
-	public Adapter createTC_mapOclModel_OUTAdapter() {
+	public Adapter createTmapModuleAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOperationCallExp <em>TC map Operation Call Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapNavigationOrAttributeCallExp_Helper <em>Tmap Navigation Or Attribute Call Exp Helper</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOperationCallExp
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapNavigationOrAttributeCallExp_Helper
 	 * @generated
 	 */
-	public Adapter createTC_mapOperationCallExpAdapter() {
+	public Adapter createTmapNavigationOrAttributeCallExp_HelperAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOperationCallExp_Helper <em>TC map Operation Call Exp Helper</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapNavigationOrAttributeCallExp_Property <em>Tmap Navigation Or Attribute Call Exp Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOperationCallExp_Helper
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapNavigationOrAttributeCallExp_Property
 	 * @generated
 	 */
-	public Adapter createTC_mapOperationCallExp_HelperAdapter() {
+	public Adapter createTmapNavigationOrAttributeCallExp_PropertyAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOperationCallExp_Operation <em>TC map Operation Call Exp Operation</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclMetamodel <em>Tmap Ocl Metamodel</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOperationCallExp_Operation
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclMetamodel
 	 * @generated
 	 */
-	public Adapter createTC_mapOperationCallExp_OperationAdapter() {
+	public Adapter createTmapOclMetamodelAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOperationCallExp_argument <em>TC map Operation Call Exp argument</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN <em>Tmap Ocl Model IN</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOperationCallExp_argument
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_IN
 	 * @generated
 	 */
-	public Adapter createTC_mapOperationCallExp_argumentAdapter() {
+	public Adapter createTmapOclModel_INAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOperatorCallExp <em>TC map Operator Call Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_OUT <em>Tmap Ocl Model OUT</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOperatorCallExp
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOclModel_OUT
 	 * @generated
 	 */
-	public Adapter createTC_mapOperatorCallExpAdapter() {
+	public Adapter createTmapOclModel_OUTAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern <em>TC map Out Pattern</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperationCallExp_Helper <em>Tmap Operation Call Exp Helper</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapOutPattern
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperationCallExp_Helper
 	 * @generated
 	 */
-	public Adapter createTC_mapOutPatternAdapter() {
+	public Adapter createTmapOperationCallExp_HelperAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleInPatternElement <em>TC map Simple In Pattern Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperationCallExp_Operation <em>Tmap Operation Call Exp Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleInPatternElement
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperationCallExp_Operation
 	 * @generated
 	 */
-	public Adapter createTC_mapSimpleInPatternElementAdapter() {
+	public Adapter createTmapOperationCallExp_OperationAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleOutPatternElement <em>TC map Simple Out Pattern Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperationCallExp_argument <em>Tmap Operation Call Exp argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapSimpleOutPatternElement
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperationCallExp_argument
 	 * @generated
 	 */
-	public Adapter createTC_mapSimpleOutPatternElementAdapter() {
+	public Adapter createTmapOperationCallExp_argumentAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapStringExp <em>TC map String Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp <em>Tmap Operator Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapStringExp
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOperatorCallExp
 	 * @generated
 	 */
-	public Adapter createTC_mapStringExpAdapter() {
+	public Adapter createTmapOperatorCallExpAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapVariable <em>TC map Variable</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern <em>Tmap Out Pattern</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapVariable
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapOutPattern
 	 * @generated
 	 */
-	public Adapter createTC_mapVariableAdapter() {
+	public Adapter createTmapOutPatternAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapVariableExp <em>TC map Variable Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleInPatternElement <em>Tmap Simple In Pattern Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapVariableExp
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleInPatternElement
 	 * @generated
 	 */
-	public Adapter createTC_mapVariableExpAdapter() {
+	public Adapter createTmapSimpleInPatternElementAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapVariableExp_referredVariable <em>TC map Variable Exp referred Variable</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement <em>Tmap Simple Out Pattern Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapVariableExp_referredVariable
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapSimpleOutPatternElement
 	 * @generated
 	 */
-	public Adapter createTC_mapVariableExp_referredVariableAdapter() {
+	public Adapter createTmapSimpleOutPatternElementAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapVariableExp_referredVariable_Helper <em>TC map Variable Exp referred Variable Helper</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapStringExp <em>Tmap String Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapVariableExp_referredVariable_Helper
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapStringExp
 	 * @generated
 	 */
-	public Adapter createTC_mapVariableExp_referredVariable_HelperAdapter() {
+	public Adapter createTmapStringExpAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapVariableExp_referredVariable_VariableDeclaration <em>TC map Variable Exp referred Variable Variable Declaration</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariable <em>Tmap Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TC_mapVariableExp_referredVariable_VariableDeclaration
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariable
 	 * @generated
 	 */
-	public Adapter createTC_mapVariableExp_referredVariable_VariableDeclarationAdapter() {
+	public Adapter createTmapVariableAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapBooleanExp <em>TI map Boolean Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp <em>Tmap Variable Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapBooleanExp
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp
 	 * @generated
 	 */
-	public Adapter createTI_mapBooleanExpAdapter() {
+	public Adapter createTmapVariableExpAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapHelper <em>TI map Helper</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp_referredVariable_Helper <em>Tmap Variable Exp referred Variable Helper</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapHelper
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp_referredVariable_Helper
 	 * @generated
 	 */
-	public Adapter createTI_mapHelperAdapter() {
+	public Adapter createTmapVariableExp_referredVariable_HelperAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapHelper_Attribute <em>TI map Helper Attribute</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp_referredVariable_VariableDeclaration <em>Tmap Variable Exp referred Variable Variable Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapHelper_Attribute
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp_referredVariable_VariableDeclaration
 	 * @generated
 	 */
-	public Adapter createTI_mapHelper_AttributeAdapter() {
+	public Adapter createTmapVariableExp_referredVariable_VariableDeclarationAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapHelper_Operation <em>TI map Helper Operation</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.runtime.qvttrace.TraceElement <em>Trace Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapHelper_Operation
+	 * @see org.eclipse.qvtd.runtime.qvttrace.TraceElement
 	 * @generated
 	 */
-	public Adapter createTI_mapHelper_OperationAdapter() {
+	public Adapter createTraceElementAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapIfExp <em>TI map If Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.runtime.qvttrace.TraceInstance <em>Trace Instance</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapIfExp
+	 * @see org.eclipse.qvtd.runtime.qvttrace.TraceInstance
 	 * @generated
 	 */
-	public Adapter createTI_mapIfExpAdapter() {
+	public Adapter createTraceInstanceAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapIntegerExp <em>TI map Integer Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.runtime.qvttrace.Dispatch <em>Dispatch</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapIntegerExp
+	 * @see org.eclipse.qvtd.runtime.qvttrace.Dispatch
 	 * @generated
 	 */
-	public Adapter createTI_mapIntegerExpAdapter() {
+	public Adapter createDispatchAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapNavigationOrAttributeCallExp <em>TI map Navigation Or Attribute Call Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.runtime.qvttrace.Execution <em>Execution</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapNavigationOrAttributeCallExp
+	 * @see org.eclipse.qvtd.runtime.qvttrace.Execution
 	 * @generated
 	 */
-	public Adapter createTI_mapNavigationOrAttributeCallExpAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapNavigationOrAttributeCallExp_Helper <em>TI map Navigation Or Attribute Call Exp Helper</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapNavigationOrAttributeCallExp_Helper
-	 * @generated
-	 */
-	public Adapter createTI_mapNavigationOrAttributeCallExp_HelperAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapNavigationOrAttributeCallExp_Property <em>TI map Navigation Or Attribute Call Exp Property</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapNavigationOrAttributeCallExp_Property
-	 * @generated
-	 */
-	public Adapter createTI_mapNavigationOrAttributeCallExp_PropertyAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapOclExpression <em>TI map Ocl Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapOclExpression
-	 * @generated
-	 */
-	public Adapter createTI_mapOclExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapOperationCallExp <em>TI map Operation Call Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapOperationCallExp
-	 * @generated
-	 */
-	public Adapter createTI_mapOperationCallExpAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapOperationCallExp_Helper <em>TI map Operation Call Exp Helper</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapOperationCallExp_Helper
-	 * @generated
-	 */
-	public Adapter createTI_mapOperationCallExp_HelperAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapOperationCallExp_Operation <em>TI map Operation Call Exp Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapOperationCallExp_Operation
-	 * @generated
-	 */
-	public Adapter createTI_mapOperationCallExp_OperationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapOperatorCallExp <em>TI map Operator Call Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapOperatorCallExp
-	 * @generated
-	 */
-	public Adapter createTI_mapOperatorCallExpAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapStringExp <em>TI map String Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapStringExp
-	 * @generated
-	 */
-	public Adapter createTI_mapStringExpAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapVariableExp <em>TI map Variable Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapVariableExp
-	 * @generated
-	 */
-	public Adapter createTI_mapVariableExpAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapVariableExp_referredVariable <em>TI map Variable Exp referred Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapVariableExp_referredVariable
-	 * @generated
-	 */
-	public Adapter createTI_mapVariableExp_referredVariableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapVariableExp_referredVariable_Helper <em>TI map Variable Exp referred Variable Helper</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapVariableExp_referredVariable_Helper
-	 * @generated
-	 */
-	public Adapter createTI_mapVariableExp_referredVariable_HelperAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapVariableExp_referredVariable_VariableDeclaration <em>TI map Variable Exp referred Variable Variable Declaration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TI_mapVariableExp_referredVariable_VariableDeclaration
-	 * @generated
-	 */
-	public Adapter createTI_mapVariableExp_referredVariable_VariableDeclarationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.WC_mapVariableExp_referredVariable <em>WC map Variable Exp referred Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.WC_mapVariableExp_referredVariable
-	 * @generated
-	 */
-	public Adapter createWC_mapVariableExp_referredVariableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.WC_mapVariableExp_referredVariable_Helper <em>WC map Variable Exp referred Variable Helper</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.WC_mapVariableExp_referredVariable_Helper
-	 * @generated
-	 */
-	public Adapter createWC_mapVariableExp_referredVariable_HelperAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.WC_mapVariableExp_referredVariable_VariableDeclaration <em>WC map Variable Exp referred Variable Variable Declaration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.WC_mapVariableExp_referredVariable_VariableDeclaration
-	 * @generated
-	 */
-	public Adapter createWC_mapVariableExp_referredVariable_VariableDeclarationAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.WI_mapVariableExp_referredVariable <em>WI map Variable Exp referred Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.WI_mapVariableExp_referredVariable
-	 * @generated
-	 */
-	public Adapter createWI_mapVariableExp_referredVariableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.WI_mapVariableExp_referredVariable_Helper <em>WI map Variable Exp referred Variable Helper</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.WI_mapVariableExp_referredVariable_Helper
-	 * @generated
-	 */
-	public Adapter createWI_mapVariableExp_referredVariable_HelperAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.WI_mapVariableExp_referredVariable_VariableDeclaration <em>WI map Variable Exp referred Variable Variable Declaration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.WI_mapVariableExp_referredVariable_VariableDeclaration
-	 * @generated
-	 */
-	public Adapter createWI_mapVariableExp_referredVariable_VariableDeclarationAdapter() {
+	public Adapter createExecutionAdapter() {
 		return null;
 	}
 
