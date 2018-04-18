@@ -676,9 +676,6 @@ import com.google.common.collect.Sets;
 			//
 			this.otherDomain2coreDomains = new ArrayList<>();
 			this.rAllOtherBoundVariables = new HashSet<>();
-			if (rRelation.isIsAbstract()) {
-				getClass();
-			}
 			for (@NonNull Domain rDomain : ClassUtil.nullFree(rEnforcedDomain.getRule().getDomain())) {
 				if ((rDomain != rEnforcedDomain) && (rDomain instanceof RelationDomain)) {
 					RelationDomain rRelationDomain = (RelationDomain)rDomain;
@@ -753,9 +750,6 @@ import com.google.common.collect.Sets;
 				done.addAll(toDo);
 				toDo = Sets.newHashSet(variablesAnalysis.getAnalyses());
 				toDo.removeAll(done);
-			}
-			if (rRelation.isIsAbstract()) {
-				getClass();
 			}
 		}
 

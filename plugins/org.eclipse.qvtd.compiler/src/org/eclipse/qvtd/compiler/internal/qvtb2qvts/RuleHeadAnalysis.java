@@ -55,9 +55,6 @@ public class RuleHeadAnalysis extends HeadAnalysis
 	 * The head/not-head nodes are installed by invoking Node.setHead(true/false) as appropriate.
 	 */
 	public static @NonNull Iterable<@NonNull Node> computeRuleHeadNodes(@NonNull ScheduleManager scheduleManager, @NonNull MappingRegion mappingRegion, @Nullable List<@NonNull Node> preferredHeadNodes) {
-		//		if ("mapVariable_qvtr".equals(mappingRegion.toString())) {
-		//			RuleHeadAnalysis.class.getClass();
-		//		}
 		RuleHeadAnalysis mappingRegionAnalysis = new RuleHeadAnalysis(mappingRegion);
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources =  mappingRegionAnalysis.computeOldTargetFromSources();
 		Iterable<@NonNull Node> headNodes =  mappingRegionAnalysis.computeHeadNodes(targetFromSources, preferredHeadNodes);

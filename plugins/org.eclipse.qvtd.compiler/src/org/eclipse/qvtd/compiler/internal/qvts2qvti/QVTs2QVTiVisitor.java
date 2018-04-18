@@ -241,9 +241,6 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 	}
 
 	public void createRegion2Mapping(@NonNull Region region) {
-		//		if ("m_II__mapVariableExp__referredVariable_result_2".equals(region.toString())) {
-		//			getClass();
-		//		}
 		AbstractRegion2Mapping region2mapping = region2region2mapping.get(region);
 		assert region2mapping == null : "Re-AbstractRegion2Mapping for " + region;
 		//		assert !region.isConnectionRegion();

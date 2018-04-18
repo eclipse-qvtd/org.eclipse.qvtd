@@ -187,20 +187,9 @@ public class MappingPartitioner implements Nameable
 	private final @NonNull Map<@NonNull Edge, @NonNull List<@NonNull AbstractPartition>> debugEdge2partitions = new HashMap<>();
 
 	public MappingPartitioner(@NonNull TransformationPartitioner transformationPartitioner, @NonNull MappingRegion region) {
-		//		super(getTraceNodes(region.getNodes()), getNavigableEdges(region.getNavigationEdges()));
 		this.scheduleManager = transformationPartitioner.getScheduleManager();
 		this.transformationPartitioner = transformationPartitioner;
 		this.region = region;
-		//		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(region.getName())) {
-		//			getClass();
-		//		}
-		//		if ((region instanceof ActivatorRegion) || (region instanceof DispatchRegion) || (region instanceof VerdictRegion)) {
-		//			return;
-		//		}
-		//
-		if ("mapVariableExp_referredVariable_Helper_qvtr".equals(getName())) {
-			getClass();
-		}
 		analyzeNodes();
 		for (@NonNull Node traceNode : analyzeTraceNodes()) {
 			analyzeSuccessEdge(traceNode);
@@ -585,16 +574,12 @@ public class MappingPartitioner implements Nameable
 	}
 
 	private @NonNull MicroMappingRegion createActivatorRegion(int partitionNumber) {
-		//		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(region.getName())) {
-		//			getClass();
-		//		}
 		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
 		ActivatorPartition speculatingPartition = new ActivatorPartition(this, reachabilityForest);
 		MicroMappingRegion microMappingRegion = speculatingPartition.createMicroMappingRegion("«activator»", "_p" + partitionNumber);
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			scheduleManager.writeDebugGraphs(microMappingRegion, null);
 		}
-		//			>>>>>>> 4473ebf residue
 		speculatingPartition.check(microMappingRegion);
 		return microMappingRegion;
 	}
@@ -602,9 +587,6 @@ public class MappingPartitioner implements Nameable
 	private @NonNull MicroMappingRegion createAssignmentRegion(@NonNull ReachabilityForest reachabilityForest, @NonNull Edge outputEdge, int partitionNumber) {
 		String namePrefix = "«edge" + partitionNumber + "»";
 		String symbolSuffix = "_p" + partitionNumber;
-		//		if ("«edge4» mapNavigationOrAttributeCallExp_Helper_qvtr".equals(namePrefix + " " + region.getName())) {
-		//			getClass();
-		//		}
 		AssignmentPartition assignmentPartition = new AssignmentPartition(this, reachabilityForest, outputEdge);
 		MicroMappingRegion microMappingRegion = assignmentPartition.createMicroMappingRegion(namePrefix, symbolSuffix);
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
@@ -626,9 +608,6 @@ public class MappingPartitioner implements Nameable
 	}
 
 	private @NonNull MicroMappingRegion createNewSpeculatingRegion(int partitionNumber) {
-		//		if ("mapVariableExp_referredVariable_Helper_qvtr".equals(region.getName())) {
-		//			getClass();
-		//		}
 		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
 		NewSpeculatingPartition speculatingPartition = new NewSpeculatingPartition(this, reachabilityForest);
 		MicroMappingRegion microMappingRegion = speculatingPartition.createMicroMappingRegion("«speculating»", "_p" + partitionNumber);
@@ -684,9 +663,6 @@ public class MappingPartitioner implements Nameable
 	}
 
 	private @NonNull MicroMappingRegion createSpeculatingRegion(int partitionNumber) {
-		//		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(region.getName())) {
-		//			getClass();
-		//		}
 		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
 		SpeculatingPartition speculatingPartition = new SpeculatingPartition(this, reachabilityForest);
 		MicroMappingRegion microMappingRegion = speculatingPartition.createMicroMappingRegion("«speculating»", "_p" + partitionNumber);
@@ -1057,44 +1033,12 @@ public class MappingPartitioner implements Nameable
 	}
 
 	public @NonNull Iterable<@NonNull MappingRegion> partition4qvtr() {
-		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(getName())) {
-			getClass();
-		}
 		if ((region instanceof DispatchRegion) || (region instanceof VerdictRegion)) {
 			return Collections.singletonList(region);
 		}
 		boolean isCyclic = transformationPartitioner.getCycleAnalysis(this) != null;
-		/*<<<<<<< Upstream, based on utility
-		//		List<@NonNull Node> predicatedDispatchNodes = getPredicatedDispatchNodes();
-		//		List<@NonNull Node> predicatedExecutionNodes = getPredicatedExecutionNodes();
-=======
-		int predicatedDispatchNodes = (dispatchNode != null) && dispatchNode.isPredicated() ? 1 : 0;
-		List<@NonNull Node> predicatedExecutionNodes = getPredicatedExecutionNodes();
->>>>>>> f939565 bad */
 		List<@NonNull Node> predicatedWhenNodes = getPredicatedWhenNodes();
-		/* <<<<<<< Upstream, based on utility
-		//		assert predicatedDispatchNodes.size() + predicatedExecutionNodes.size() + predicatedWhenNodes.size() == predicatedMiddleNodes.size();
-		//		List<@NonNull Node> realizedDispatchNodes = getRealizedDispatchNodes();
-=======
-		assert predicatedDispatchNodes + predicatedExecutionNodes.size() + predicatedWhenNodes.size() == predicatedMiddleNodes.size();
-		int realizedDispatchNodes = (dispatchNode != null) && dispatchNode.isRealized() ? 1 : 0;
->>>>>>> f939565 bad */
 		List<@NonNull Node> realizedExecutionNodes = getRealizedExecutionNodes();
-		/*<<<<<<< Upstream, based on utility
-		//		List<@NonNull Node> realizedWhereNodes = getRealizedWhereNodes();
-		//		assert realizedDispatchNodes.size() + realizedExecutionNodes.size() + realizedWhereNodes.size() == realizedMiddleNodes.size();
-=======
-		List<@NonNull Node> realizedWhereNodes = getRealizedWhereNodes();
-		assert realizedDispatchNodes + realizedExecutionNodes.size() + realizedWhereNodes.size() == realizedMiddleNodes.size();
->>>>>>> f939565 bad */
-		//		Set<@NonNull Node> dispatchedTraceNodes2 = dispatchedTraceNodes;
-		//		assert dispatchedTraceNodes2 != null;
-		//		Set<@NonNull Node> dispatchedRealizedNodes = new HashSet<>(realizedMiddleNodes);
-		//		dispatchedRealizedNodes.retainAll(dispatchedTraceNodes);
-		//		Set<@NonNull Node> undispatchedRealizedNodes = new HashSet<>(realizedMiddleNodes);
-		//		undispatchedRealizedNodes.removeAll(dispatchedTraceNodes);
-		//		Iterable<@NonNull Node> traceNodes = getTraceNodes();
-		//		Iterator<@NonNull Node> traceNodesIterator = traceNodes.iterator();
 		boolean needsActivator = false;
 		if (realizedExecutionNodes.size() > 0)	{			// A 'single' realized "trace" node is a boring no-override top activation.
 			needsActivator = true;
@@ -1102,8 +1046,6 @@ public class MappingPartitioner implements Nameable
 		else {
 			needsActivator = false;
 		}
-
-		//		boolean realizedTrace = dispatchedTraceNodes2.isEmpty() && traceNodesIterator.hasNext() && traceNodesIterator.next().isRealized() && !traceNodesIterator.hasNext();
 		boolean needsSpeculation = isCyclic && (predicatedWhenNodes.size() > 0); //(dispatchedTraceNodes2.isEmpty() ? !predicatedMiddleNodes.isEmpty() : !predicatedMiddleNodes.containsAll(dispatchedTraceNodes2));
 		//
 		//	Create the partitioned regions

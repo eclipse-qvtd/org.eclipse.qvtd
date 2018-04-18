@@ -494,7 +494,7 @@ abstract class AbstractPartition
 				}
 				Integer cost = reachabilityForest.getCost(node);
 				//				assert cost != null;
-				if (!gotOne && (cost != null) && (cost > 0)) {
+				/*				if (!gotOne && (cost != null) && (cost > 0)) {
 					getClass();
 					for (@NonNull Node precedingNode : getPredecessors(node)) {		// FIXME debugging
 						if (!hasNode(precedingNode)) {
@@ -502,7 +502,7 @@ abstract class AbstractPartition
 						}
 					}
 					assert gotOne;
-				}
+				} */
 			}
 		}
 	}

@@ -292,9 +292,6 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 
 		@Override
 		public @NonNull MappingRegion visitRelation(@NonNull Relation rIn) {
-			//			if ("mapNavigationOrAttributeCallExp_Property".equals(rIn.getName())) {
-			//				getClass();
-			//			}
 			RelationalTransformationAnalysis transformationAnalysis = scheduleManager.getTransformationAnalysis(QVTbaseUtil.getOwningTransformation(rIn));
 			RelationAnalysis relationAnalysis = this.relationAnalysis = transformationAnalysis.getRuleAnalysis(rIn);
 			RuleRegion rOut = relationAnalysis.getRegion();
