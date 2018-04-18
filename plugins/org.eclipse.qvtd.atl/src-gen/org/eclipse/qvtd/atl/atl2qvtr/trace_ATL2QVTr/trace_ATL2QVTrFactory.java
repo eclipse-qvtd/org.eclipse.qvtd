@@ -30,355 +30,310 @@ public interface trace_ATL2QVTrFactory extends EFactory {
 	trace_ATL2QVTrFactory eINSTANCE = org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.trace_ATL2QVTrFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>TC map Binding</em>'.
+	 * Returns a new object of class '<em>Cmap Variable Exp referred Variable Helper</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Binding</em>'.
+	 * @return a new object of class '<em>Cmap Variable Exp referred Variable Helper</em>'.
 	 * @generated
 	 */
-	TC_mapBinding createTC_mapBinding();
+	CmapVariableExp_referredVariable_Helper createCmapVariableExp_referredVariable_Helper();
 
 	/**
-	 * Returns a new object of class '<em>TC map Boolean Exp</em>'.
+	 * Returns a new object of class '<em>Cmap Variable Exp referred Variable Variable Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Boolean Exp</em>'.
+	 * @return a new object of class '<em>Cmap Variable Exp referred Variable Variable Declaration</em>'.
 	 * @generated
 	 */
-	TC_mapBooleanExp createTC_mapBooleanExp();
+	CmapVariableExp_referredVariable_VariableDeclaration createCmapVariableExp_referredVariable_VariableDeclaration();
 
 	/**
-	 * Returns a new object of class '<em>TC map Helper</em>'.
+	 * Returns a new object of class '<em>Dmap Helper</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Helper</em>'.
+	 * @return a new object of class '<em>Dmap Helper</em>'.
 	 * @generated
 	 */
-	TC_mapHelper createTC_mapHelper();
+	DmapHelper createDmapHelper();
 
 	/**
-	 * Returns a new object of class '<em>TC map Helper Attribute</em>'.
+	 * Returns a new object of class '<em>Dmap Ocl Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Helper Attribute</em>'.
+	 * @return a new object of class '<em>Dmap Ocl Expression</em>'.
 	 * @generated
 	 */
-	TC_mapHelper_Attribute createTC_mapHelper_Attribute();
+	DmapOclExpression createDmapOclExpression();
 
 	/**
-	 * Returns a new object of class '<em>TC map Helper Context</em>'.
+	 * Returns a new object of class '<em>Dmap Variable Exp referred Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Helper Context</em>'.
+	 * @return a new object of class '<em>Dmap Variable Exp referred Variable</em>'.
 	 * @generated
 	 */
-	TC_mapHelper_Context createTC_mapHelper_Context();
+	DmapVariableExp_referredVariable createDmapVariableExp_referredVariable();
 
 	/**
-	 * Returns a new object of class '<em>TC map Helper Operation</em>'.
+	 * Returns a new object of class '<em>Tmap Binding</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Helper Operation</em>'.
+	 * @return a new object of class '<em>Tmap Binding</em>'.
 	 * @generated
 	 */
-	TC_mapHelper_Operation createTC_mapHelper_Operation();
+	TmapBinding createTmapBinding();
 
 	/**
-	 * Returns a new object of class '<em>TC map If Exp</em>'.
+	 * Returns a new object of class '<em>Tmap Boolean Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map If Exp</em>'.
+	 * @return a new object of class '<em>Tmap Boolean Exp</em>'.
 	 * @generated
 	 */
-	TC_mapIfExp createTC_mapIfExp();
+	TmapBooleanExp createTmapBooleanExp();
 
 	/**
-	 * Returns a new object of class '<em>TC map In Pattern</em>'.
+	 * Returns a new object of class '<em>Tmap Helper Attribute</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map In Pattern</em>'.
+	 * @return a new object of class '<em>Tmap Helper Attribute</em>'.
 	 * @generated
 	 */
-	TC_mapInPattern createTC_mapInPattern();
+	TmapHelper_Attribute createTmapHelper_Attribute();
 
 	/**
-	 * Returns a new object of class '<em>TC map In Pattern filter</em>'.
+	 * Returns a new object of class '<em>Tmap Helper Context</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map In Pattern filter</em>'.
+	 * @return a new object of class '<em>Tmap Helper Context</em>'.
 	 * @generated
 	 */
-	TC_mapInPattern_filter createTC_mapInPattern_filter();
+	TmapHelper_Context createTmapHelper_Context();
 
 	/**
-	 * Returns a new object of class '<em>TC map Integer Exp</em>'.
+	 * Returns a new object of class '<em>Tmap Helper Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Integer Exp</em>'.
+	 * @return a new object of class '<em>Tmap Helper Operation</em>'.
 	 * @generated
 	 */
-	TC_mapIntegerExp createTC_mapIntegerExp();
+	TmapHelper_Operation createTmapHelper_Operation();
 
 	/**
-	 * Returns a new object of class '<em>TC map Matched Rule</em>'.
+	 * Returns a new object of class '<em>Tmap If Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Matched Rule</em>'.
+	 * @return a new object of class '<em>Tmap If Exp</em>'.
 	 * @generated
 	 */
-	TC_mapMatchedRule createTC_mapMatchedRule();
+	TmapIfExp createTmapIfExp();
 
 	/**
-	 * Returns a new object of class '<em>TC map Matched Rule super</em>'.
+	 * Returns a new object of class '<em>Tmap In Pattern</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Matched Rule super</em>'.
+	 * @return a new object of class '<em>Tmap In Pattern</em>'.
 	 * @generated
 	 */
-	TC_mapMatchedRule_super createTC_mapMatchedRule_super();
+	TmapInPattern createTmapInPattern();
 
 	/**
-	 * Returns a new object of class '<em>TC map Module</em>'.
+	 * Returns a new object of class '<em>Tmap In Pattern filter</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Module</em>'.
+	 * @return a new object of class '<em>Tmap In Pattern filter</em>'.
 	 * @generated
 	 */
-	TC_mapModule createTC_mapModule();
+	TmapInPattern_filter createTmapInPattern_filter();
 
 	/**
-	 * Returns a new object of class '<em>TC map Navigation Or Attribute Call Exp</em>'.
+	 * Returns a new object of class '<em>Tmap Integer Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Navigation Or Attribute Call Exp</em>'.
+	 * @return a new object of class '<em>Tmap Integer Exp</em>'.
 	 * @generated
 	 */
-	TC_mapNavigationOrAttributeCallExp createTC_mapNavigationOrAttributeCallExp();
+	TmapIntegerExp createTmapIntegerExp();
 
 	/**
-	 * Returns a new object of class '<em>TC map Navigation Or Attribute Call Exp Helper</em>'.
+	 * Returns a new object of class '<em>Tmap Matched Rule</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Navigation Or Attribute Call Exp Helper</em>'.
+	 * @return a new object of class '<em>Tmap Matched Rule</em>'.
 	 * @generated
 	 */
-	TC_mapNavigationOrAttributeCallExp_Helper createTC_mapNavigationOrAttributeCallExp_Helper();
+	TmapMatchedRule createTmapMatchedRule();
 
 	/**
-	 * Returns a new object of class '<em>TC map Navigation Or Attribute Call Exp Property</em>'.
+	 * Returns a new object of class '<em>Tmap Matched Rule super</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Navigation Or Attribute Call Exp Property</em>'.
+	 * @return a new object of class '<em>Tmap Matched Rule super</em>'.
 	 * @generated
 	 */
-	TC_mapNavigationOrAttributeCallExp_Property createTC_mapNavigationOrAttributeCallExp_Property();
+	TmapMatchedRule_super createTmapMatchedRule_super();
 
 	/**
-	 * Returns a new object of class '<em>TC map Ocl Expression</em>'.
+	 * Returns a new object of class '<em>Tmap Module</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Ocl Expression</em>'.
+	 * @return a new object of class '<em>Tmap Module</em>'.
 	 * @generated
 	 */
-	TC_mapOclExpression createTC_mapOclExpression();
+	TmapModule createTmapModule();
 
 	/**
-	 * Returns a new object of class '<em>TC map Ocl Metamodel</em>'.
+	 * Returns a new object of class '<em>Tmap Navigation Or Attribute Call Exp Helper</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Ocl Metamodel</em>'.
+	 * @return a new object of class '<em>Tmap Navigation Or Attribute Call Exp Helper</em>'.
 	 * @generated
 	 */
-	TC_mapOclMetamodel createTC_mapOclMetamodel();
+	TmapNavigationOrAttributeCallExp_Helper createTmapNavigationOrAttributeCallExp_Helper();
 
 	/**
-	 * Returns a new object of class '<em>TC map Ocl Model IN</em>'.
+	 * Returns a new object of class '<em>Tmap Navigation Or Attribute Call Exp Property</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Ocl Model IN</em>'.
+	 * @return a new object of class '<em>Tmap Navigation Or Attribute Call Exp Property</em>'.
 	 * @generated
 	 */
-	TC_mapOclModel_IN createTC_mapOclModel_IN();
+	TmapNavigationOrAttributeCallExp_Property createTmapNavigationOrAttributeCallExp_Property();
 
 	/**
-	 * Returns a new object of class '<em>TC map Ocl Model OUT</em>'.
+	 * Returns a new object of class '<em>Tmap Ocl Metamodel</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Ocl Model OUT</em>'.
+	 * @return a new object of class '<em>Tmap Ocl Metamodel</em>'.
 	 * @generated
 	 */
-	TC_mapOclModel_OUT createTC_mapOclModel_OUT();
+	TmapOclMetamodel createTmapOclMetamodel();
 
 	/**
-	 * Returns a new object of class '<em>TC map Operation Call Exp</em>'.
+	 * Returns a new object of class '<em>Tmap Ocl Model IN</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Operation Call Exp</em>'.
+	 * @return a new object of class '<em>Tmap Ocl Model IN</em>'.
 	 * @generated
 	 */
-	TC_mapOperationCallExp createTC_mapOperationCallExp();
+	TmapOclModel_IN createTmapOclModel_IN();
 
 	/**
-	 * Returns a new object of class '<em>TC map Operation Call Exp Helper</em>'.
+	 * Returns a new object of class '<em>Tmap Ocl Model OUT</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Operation Call Exp Helper</em>'.
+	 * @return a new object of class '<em>Tmap Ocl Model OUT</em>'.
 	 * @generated
 	 */
-	TC_mapOperationCallExp_Helper createTC_mapOperationCallExp_Helper();
+	TmapOclModel_OUT createTmapOclModel_OUT();
 
 	/**
-	 * Returns a new object of class '<em>TC map Operation Call Exp Operation</em>'.
+	 * Returns a new object of class '<em>Tmap Operation Call Exp Helper</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Operation Call Exp Operation</em>'.
+	 * @return a new object of class '<em>Tmap Operation Call Exp Helper</em>'.
 	 * @generated
 	 */
-	TC_mapOperationCallExp_Operation createTC_mapOperationCallExp_Operation();
+	TmapOperationCallExp_Helper createTmapOperationCallExp_Helper();
 
 	/**
-	 * Returns a new object of class '<em>TC map Operation Call Exp argument</em>'.
+	 * Returns a new object of class '<em>Tmap Operation Call Exp Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Operation Call Exp argument</em>'.
+	 * @return a new object of class '<em>Tmap Operation Call Exp Operation</em>'.
 	 * @generated
 	 */
-	TC_mapOperationCallExp_argument createTC_mapOperationCallExp_argument();
+	TmapOperationCallExp_Operation createTmapOperationCallExp_Operation();
 
 	/**
-	 * Returns a new object of class '<em>TC map Operator Call Exp</em>'.
+	 * Returns a new object of class '<em>Tmap Operation Call Exp argument</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Operator Call Exp</em>'.
+	 * @return a new object of class '<em>Tmap Operation Call Exp argument</em>'.
 	 * @generated
 	 */
-	TC_mapOperatorCallExp createTC_mapOperatorCallExp();
+	TmapOperationCallExp_argument createTmapOperationCallExp_argument();
 
 	/**
-	 * Returns a new object of class '<em>TC map Out Pattern</em>'.
+	 * Returns a new object of class '<em>Tmap Operator Call Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Out Pattern</em>'.
+	 * @return a new object of class '<em>Tmap Operator Call Exp</em>'.
 	 * @generated
 	 */
-	TC_mapOutPattern createTC_mapOutPattern();
+	TmapOperatorCallExp createTmapOperatorCallExp();
 
 	/**
-	 * Returns a new object of class '<em>TC map Simple In Pattern Element</em>'.
+	 * Returns a new object of class '<em>Tmap Out Pattern</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Simple In Pattern Element</em>'.
+	 * @return a new object of class '<em>Tmap Out Pattern</em>'.
 	 * @generated
 	 */
-	TC_mapSimpleInPatternElement createTC_mapSimpleInPatternElement();
+	TmapOutPattern createTmapOutPattern();
 
 	/**
-	 * Returns a new object of class '<em>TC map Simple Out Pattern Element</em>'.
+	 * Returns a new object of class '<em>Tmap Simple In Pattern Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Simple Out Pattern Element</em>'.
+	 * @return a new object of class '<em>Tmap Simple In Pattern Element</em>'.
 	 * @generated
 	 */
-	TC_mapSimpleOutPatternElement createTC_mapSimpleOutPatternElement();
+	TmapSimpleInPatternElement createTmapSimpleInPatternElement();
 
 	/**
-	 * Returns a new object of class '<em>TC map String Exp</em>'.
+	 * Returns a new object of class '<em>Tmap Simple Out Pattern Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map String Exp</em>'.
+	 * @return a new object of class '<em>Tmap Simple Out Pattern Element</em>'.
 	 * @generated
 	 */
-	TC_mapStringExp createTC_mapStringExp();
+	TmapSimpleOutPatternElement createTmapSimpleOutPatternElement();
 
 	/**
-	 * Returns a new object of class '<em>TC map Variable</em>'.
+	 * Returns a new object of class '<em>Tmap String Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Variable</em>'.
+	 * @return a new object of class '<em>Tmap String Exp</em>'.
 	 * @generated
 	 */
-	TC_mapVariable createTC_mapVariable();
+	TmapStringExp createTmapStringExp();
 
 	/**
-	 * Returns a new object of class '<em>TC map Variable Exp</em>'.
+	 * Returns a new object of class '<em>Tmap Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Variable Exp</em>'.
+	 * @return a new object of class '<em>Tmap Variable</em>'.
 	 * @generated
 	 */
-	TC_mapVariableExp createTC_mapVariableExp();
+	TmapVariable createTmapVariable();
 
 	/**
-	 * Returns a new object of class '<em>TC map Variable Exp referred Variable</em>'.
+	 * Returns a new object of class '<em>Tmap Variable Exp</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Variable Exp referred Variable</em>'.
+	 * @return a new object of class '<em>Tmap Variable Exp</em>'.
 	 * @generated
 	 */
-	TC_mapVariableExp_referredVariable createTC_mapVariableExp_referredVariable();
+	TmapVariableExp createTmapVariableExp();
 
 	/**
-	 * Returns a new object of class '<em>TC map Variable Exp referred Variable Helper</em>'.
+	 * Returns a new object of class '<em>Tmap Variable Exp referred Variable Helper</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Variable Exp referred Variable Helper</em>'.
+	 * @return a new object of class '<em>Tmap Variable Exp referred Variable Helper</em>'.
 	 * @generated
 	 */
-	TC_mapVariableExp_referredVariable_Helper createTC_mapVariableExp_referredVariable_Helper();
+	TmapVariableExp_referredVariable_Helper createTmapVariableExp_referredVariable_Helper();
 
 	/**
-	 * Returns a new object of class '<em>TC map Variable Exp referred Variable Variable Declaration</em>'.
+	 * Returns a new object of class '<em>Tmap Variable Exp referred Variable Variable Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>TC map Variable Exp referred Variable Variable Declaration</em>'.
+	 * @return a new object of class '<em>Tmap Variable Exp referred Variable Variable Declaration</em>'.
 	 * @generated
 	 */
-	TC_mapVariableExp_referredVariable_VariableDeclaration createTC_mapVariableExp_referredVariable_VariableDeclaration();
-
-	/**
-	 * Returns a new object of class '<em>WC map Variable Exp referred Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>WC map Variable Exp referred Variable</em>'.
-	 * @generated
-	 */
-	WC_mapVariableExp_referredVariable createWC_mapVariableExp_referredVariable();
-
-	/**
-	 * Returns a new object of class '<em>WC map Variable Exp referred Variable Helper</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>WC map Variable Exp referred Variable Helper</em>'.
-	 * @generated
-	 */
-	WC_mapVariableExp_referredVariable_Helper createWC_mapVariableExp_referredVariable_Helper();
-
-	/**
-	 * Returns a new object of class '<em>WC map Variable Exp referred Variable Variable Declaration</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>WC map Variable Exp referred Variable Variable Declaration</em>'.
-	 * @generated
-	 */
-	WC_mapVariableExp_referredVariable_VariableDeclaration createWC_mapVariableExp_referredVariable_VariableDeclaration();
-
-	/**
-	 * Returns a new object of class '<em>WI map Variable Exp referred Variable Helper</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>WI map Variable Exp referred Variable Helper</em>'.
-	 * @generated
-	 */
-	WI_mapVariableExp_referredVariable_Helper createWI_mapVariableExp_referredVariable_Helper();
-
-	/**
-	 * Returns a new object of class '<em>WI map Variable Exp referred Variable Variable Declaration</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>WI map Variable Exp referred Variable Variable Declaration</em>'.
-	 * @generated
-	 */
-	WI_mapVariableExp_referredVariable_VariableDeclaration createWI_mapVariableExp_referredVariable_VariableDeclaration();
+	TmapVariableExp_referredVariable_VariableDeclaration createTmapVariableExp_referredVariable_VariableDeclaration();
 
 	/**
 	 * Returns the package supported by this factory.
