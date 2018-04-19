@@ -131,6 +131,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OclExpression getT1atlArgument() {
 		if (t1atlArgument != null && t1atlArgument.eIsProxy()) {
 			InternalEObject oldT1atlArgument = (InternalEObject)t1atlArgument;
@@ -157,6 +158,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlArgument(OclExpression newT1atlArgument) {
 		OclExpression oldT1atlArgument = t1atlArgument;
 		t1atlArgument = newT1atlArgument;
@@ -169,6 +171,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OperationCallExp getT1atlParent() {
 		if (t1atlParent != null && t1atlParent.eIsProxy()) {
 			InternalEObject oldT1atlParent = (InternalEObject)t1atlParent;
@@ -195,6 +198,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlParent(OperationCallExp newT1atlParent) {
 		OperationCallExp oldT1atlParent = t1atlParent;
 		t1atlParent = newT1atlParent;
@@ -207,6 +211,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getT2qvtrArgument() {
 		if (t2qvtrArgument != null && t2qvtrArgument.eIsProxy()) {
 			InternalEObject oldT2qvtrArgument = (InternalEObject)t2qvtrArgument;
@@ -233,6 +238,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrArgument(OCLExpression newT2qvtrArgument) {
 		OCLExpression oldT2qvtrArgument = t2qvtrArgument;
 		t2qvtrArgument = newT2qvtrArgument;
@@ -245,6 +251,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.ocl.pivot.OperationCallExp getT2qvtrParent() {
 		if (t2qvtrParent != null && t2qvtrParent.eIsProxy()) {
 			InternalEObject oldT2qvtrParent = (InternalEObject)t2qvtrParent;
@@ -271,6 +278,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrParent(org.eclipse.ocl.pivot.OperationCallExp newT2qvtrParent) {
 		org.eclipse.ocl.pivot.OperationCallExp oldT2qvtrParent = t2qvtrParent;
 		t2qvtrParent = newT2qvtrParent;
@@ -283,6 +291,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DmapOclExpression getWmapOclExpression() {
 		if (wmapOclExpression != null && wmapOclExpression.eIsProxy()) {
 			InternalEObject oldWmapOclExpression = (InternalEObject)wmapOclExpression;
@@ -309,6 +318,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWmapOclExpression(DmapOclExpression newWmapOclExpression) {
 		DmapOclExpression oldWmapOclExpression = wmapOclExpression;
 		wmapOclExpression = newWmapOclExpression;
@@ -321,6 +331,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DmapOclExpression getWmapOclExpression1() {
 		if (wmapOclExpression1 != null && wmapOclExpression1.eIsProxy()) {
 			InternalEObject oldWmapOclExpression1 = (InternalEObject)wmapOclExpression1;
@@ -347,6 +358,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWmapOclExpression1(DmapOclExpression newWmapOclExpression1) {
 		DmapOclExpression oldWmapOclExpression1 = wmapOclExpression1;
 		wmapOclExpression1 = newWmapOclExpression1;

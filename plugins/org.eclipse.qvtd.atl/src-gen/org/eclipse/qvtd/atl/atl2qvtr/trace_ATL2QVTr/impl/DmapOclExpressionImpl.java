@@ -218,6 +218,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OclExpression getD1atlExpression() {
 		if (d1atlExpression != null && d1atlExpression.eIsProxy()) {
 			InternalEObject oldD1atlExpression = (InternalEObject)d1atlExpression;
@@ -244,6 +245,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setD1atlExpression(OclExpression newD1atlExpression) {
 		OclExpression oldD1atlExpression = d1atlExpression;
 		d1atlExpression = newD1atlExpression;
@@ -256,6 +258,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getD2qvtrExpression() {
 		if (d2qvtrExpression != null && d2qvtrExpression.eIsProxy()) {
 			InternalEObject oldD2qvtrExpression = (InternalEObject)d2qvtrExpression;
@@ -282,6 +285,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setD2qvtrExpression(OCLExpression newD2qvtrExpression) {
 		OCLExpression oldD2qvtrExpression = d2qvtrExpression;
 		d2qvtrExpression = newD2qvtrExpression;
@@ -294,6 +298,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapBooleanExp getDomapBooleanExp() {
 		return domapBooleanExp;
 	}
@@ -318,6 +323,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomapBooleanExp(TmapBooleanExp newDomapBooleanExp) {
 		if (newDomapBooleanExp != domapBooleanExp) {
 			NotificationChain msgs = null;
@@ -337,6 +343,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapIfExp getDomapIfExp() {
 		return domapIfExp;
 	}
@@ -361,6 +368,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomapIfExp(TmapIfExp newDomapIfExp) {
 		if (newDomapIfExp != domapIfExp) {
 			NotificationChain msgs = null;
@@ -380,6 +388,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapIntegerExp getDomapIntegerExp() {
 		return domapIntegerExp;
 	}
@@ -404,6 +413,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomapIntegerExp(TmapIntegerExp newDomapIntegerExp) {
 		if (newDomapIntegerExp != domapIntegerExp) {
 			NotificationChain msgs = null;
@@ -423,6 +433,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapNavigationOrAttributeCallExp_Helper getDomapNavigationOrAttributeCallExp_Helper() {
 		return domapNavigationOrAttributeCallExp_Helper;
 	}
@@ -447,6 +458,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomapNavigationOrAttributeCallExp_Helper(TmapNavigationOrAttributeCallExp_Helper newDomapNavigationOrAttributeCallExp_Helper) {
 		if (newDomapNavigationOrAttributeCallExp_Helper != domapNavigationOrAttributeCallExp_Helper) {
 			NotificationChain msgs = null;
@@ -466,6 +478,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapNavigationOrAttributeCallExp_Property getDomapNavigationOrAttributeCallExp_Property() {
 		return domapNavigationOrAttributeCallExp_Property;
 	}
@@ -490,6 +503,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomapNavigationOrAttributeCallExp_Property(TmapNavigationOrAttributeCallExp_Property newDomapNavigationOrAttributeCallExp_Property) {
 		if (newDomapNavigationOrAttributeCallExp_Property != domapNavigationOrAttributeCallExp_Property) {
 			NotificationChain msgs = null;
@@ -509,6 +523,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapOperationCallExp_Helper getDomapOperationCallExp_Helper() {
 		return domapOperationCallExp_Helper;
 	}
@@ -533,6 +548,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomapOperationCallExp_Helper(TmapOperationCallExp_Helper newDomapOperationCallExp_Helper) {
 		if (newDomapOperationCallExp_Helper != domapOperationCallExp_Helper) {
 			NotificationChain msgs = null;
@@ -552,6 +568,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapOperationCallExp_Operation getDomapOperationCallExp_Operation() {
 		return domapOperationCallExp_Operation;
 	}
@@ -576,6 +593,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomapOperationCallExp_Operation(TmapOperationCallExp_Operation newDomapOperationCallExp_Operation) {
 		if (newDomapOperationCallExp_Operation != domapOperationCallExp_Operation) {
 			NotificationChain msgs = null;
@@ -595,6 +613,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapOperatorCallExp getDomapOperatorCallExp() {
 		return domapOperatorCallExp;
 	}
@@ -619,6 +638,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomapOperatorCallExp(TmapOperatorCallExp newDomapOperatorCallExp) {
 		if (newDomapOperatorCallExp != domapOperatorCallExp) {
 			NotificationChain msgs = null;
@@ -638,6 +658,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapStringExp getDomapStringExp() {
 		return domapStringExp;
 	}
@@ -662,6 +683,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomapStringExp(TmapStringExp newDomapStringExp) {
 		if (newDomapStringExp != domapStringExp) {
 			NotificationChain msgs = null;
@@ -681,6 +703,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapVariableExp getDomapVariableExp() {
 		return domapVariableExp;
 	}
@@ -705,6 +728,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomapVariableExp(TmapVariableExp newDomapVariableExp) {
 		if (newDomapVariableExp != domapVariableExp) {
 			NotificationChain msgs = null;
@@ -724,6 +748,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ImapOclExpression getResult() {
 		if (result != null && result.eIsProxy()) {
 			InternalEObject oldResult = (InternalEObject)result;
@@ -750,6 +775,7 @@ public class DmapOclExpressionImpl extends DispatchImpl implements DmapOclExpres
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResult(ImapOclExpression newResult) {
 		ImapOclExpression oldResult = result;
 		result = newResult;

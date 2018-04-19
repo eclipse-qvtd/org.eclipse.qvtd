@@ -6,6 +6,7 @@
     name="Families2Persons_CG.qvtras" xmiidVersion="1">
   <ownedPackages xmi:id="6Fh3I" name="">
     <ownedClasses xsi:type="qvtr:RelationalTransformation" xmi:id="lSZ2I" name="Families2Persons">
+      <modelParameter xmi:id="mAGsf" isTrace="true" name="middle"/>
       <modelParameter xmi:id="z2sgS" name="Families" usedPackage="platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Families.ecore.oclas#ci1p7"/>
       <modelParameter xmi:id="v4ega" name="Persons" usedPackage="platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Persons.ecore.oclas#YknpD"/>
       <ownedContext xsi:type="pivot:ParameterVariable" xmi:id="DqXtJ" name="this" type="#lSZ2I"/>
@@ -109,14 +110,14 @@
       <rule xsi:type="qvtr:Relation" xmi:id="hcUQQ" isTopLevel="true" name="Member2Female">
         <domain xsi:type="qvtr:RelationDomain" isCheckable="true" isEnforceable="false" rootVariable="#8tM8f" typedModel="#z2sgS">
           <pattern>
-            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#8tM8f" type="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Families.ecore.oclas#r2YVU"
-                referredClass="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Families.ecore.oclas#r2YVU"/>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#8tM8f" referredClass="platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Families.ecore.oclas#r2YVU"
+                type="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Families.ecore.oclas#r2YVU"/>
           </pattern>
         </domain>
         <domain xsi:type="qvtr:RelationDomain" isCheckable="false" isEnforceable="true" rootVariable="#9tM8f" typedModel="#v4ega">
           <pattern>
-            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#9tM8f" type="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Persons.ecore.oclas#pzC6s"
-                referredClass="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Persons.ecore.oclas#pzC6s">
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#9tM8f" referredClass="platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Persons.ecore.oclas#pzC6s"
+                type="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Persons.ecore.oclas#pzC6s">
               <part referredProperty="platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Persons.ecore.oclas#8tc+u">
                 <value xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#gJ7dJ"
                     type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
@@ -139,6 +140,7 @@
         </domain>
         <variable xsi:type="qvtr:TemplateVariable" xmi:id="8tM8f" name="s" type="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Families.ecore.oclas#r2YVU"/>
         <variable xsi:type="qvtr:TemplateVariable" xmi:id="9tM8f" name="t" type="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Persons.ecore.oclas#pzC6s"/>
+        <variable xsi:type="qvtr:SharedVariable" isImplicit="true" name="trace" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR"/>
         <when>
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="isFemale" referredOperation="#N,BoB" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
@@ -151,14 +153,14 @@
       <rule xsi:type="qvtr:Relation" xmi:id="ifoLA" isTopLevel="true" name="Member2Male">
         <domain xsi:type="qvtr:RelationDomain" isCheckable="true" isEnforceable="false" rootVariable="#50ALF" typedModel="#z2sgS">
           <pattern>
-            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#50ALF" type="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Families.ecore.oclas#r2YVU"
-                referredClass="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Families.ecore.oclas#r2YVU"/>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#50ALF" referredClass="platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Families.ecore.oclas#r2YVU"
+                type="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Families.ecore.oclas#r2YVU"/>
           </pattern>
         </domain>
         <domain xsi:type="qvtr:RelationDomain" isCheckable="false" isEnforceable="true" rootVariable="#60ALF" typedModel="#v4ega">
           <pattern>
-            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#60ALF" type="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Persons.ecore.oclas#q+x1v"
-                referredClass="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Persons.ecore.oclas#q+x1v">
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#60ALF" referredClass="platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Persons.ecore.oclas#q+x1v"
+                type="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Persons.ecore.oclas#q+x1v">
               <part referredProperty="platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Persons.ecore.oclas#8tc+u">
                 <value xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#gJ7dJ"
                     type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
@@ -181,6 +183,7 @@
         </domain>
         <variable xsi:type="qvtr:TemplateVariable" xmi:id="50ALF" name="s" type="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Families.ecore.oclas#r2YVU"/>
         <variable xsi:type="qvtr:TemplateVariable" xmi:id="60ALF" name="t" type="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Persons.ecore.oclas#q+x1v"/>
+        <variable xsi:type="qvtr:SharedVariable" isImplicit="true" name="trace" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR"/>
         <when>
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="not" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#DH5kA"

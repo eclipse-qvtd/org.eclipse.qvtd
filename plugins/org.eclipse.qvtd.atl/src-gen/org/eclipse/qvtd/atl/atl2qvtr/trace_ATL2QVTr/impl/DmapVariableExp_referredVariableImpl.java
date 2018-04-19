@@ -120,6 +120,7 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VariableExp getD1atlExpression() {
 		if (d1atlExpression != null && d1atlExpression.eIsProxy()) {
 			InternalEObject oldD1atlExpression = (InternalEObject)d1atlExpression;
@@ -146,6 +147,7 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setD1atlExpression(VariableExp newD1atlExpression) {
 		VariableExp oldD1atlExpression = d1atlExpression;
 		d1atlExpression = newD1atlExpression;
@@ -158,6 +160,7 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.ocl.pivot.VariableExp getD2qvtrExpression() {
 		if (d2qvtrExpression != null && d2qvtrExpression.eIsProxy()) {
 			InternalEObject oldD2qvtrExpression = (InternalEObject)d2qvtrExpression;
@@ -184,6 +187,7 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setD2qvtrExpression(org.eclipse.ocl.pivot.VariableExp newD2qvtrExpression) {
 		org.eclipse.ocl.pivot.VariableExp oldD2qvtrExpression = d2qvtrExpression;
 		d2qvtrExpression = newD2qvtrExpression;
@@ -196,6 +200,7 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapVariableExp_referredVariable_Helper getDomapVariableExp_referredVariable_Helper() {
 		return domapVariableExp_referredVariable_Helper;
 	}
@@ -220,6 +225,7 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomapVariableExp_referredVariable_Helper(TmapVariableExp_referredVariable_Helper newDomapVariableExp_referredVariable_Helper) {
 		if (newDomapVariableExp_referredVariable_Helper != domapVariableExp_referredVariable_Helper) {
 			NotificationChain msgs = null;
@@ -239,6 +245,7 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapVariableExp_referredVariable_VariableDeclaration getDomapVariableExp_referredVariable_VariableDeclaration() {
 		return domapVariableExp_referredVariable_VariableDeclaration;
 	}
@@ -263,6 +270,7 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomapVariableExp_referredVariable_VariableDeclaration(TmapVariableExp_referredVariable_VariableDeclaration newDomapVariableExp_referredVariable_VariableDeclaration) {
 		if (newDomapVariableExp_referredVariable_VariableDeclaration != domapVariableExp_referredVariable_VariableDeclaration) {
 			NotificationChain msgs = null;
@@ -282,6 +290,7 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ImapVariableExp_referredVariable getResult() {
 		if (result != null && result.eIsProxy()) {
 			InternalEObject oldResult = (InternalEObject)result;
@@ -308,6 +317,7 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResult(ImapVariableExp_referredVariable newResult) {
 		ImapVariableExp_referredVariable oldResult = result;
 		result = newResult;

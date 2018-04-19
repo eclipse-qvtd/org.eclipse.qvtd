@@ -1636,7 +1636,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapMatchedRule_T2qvtrRelation() {
+	public EReference getTmapMatchedRule_T2_1() {
 		return (EReference)tmapMatchedRuleEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -1646,7 +1646,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapMatchedRule_T2qvtrTransformation() {
+	public EReference getTmapMatchedRule_T2qvtrRelation() {
 		return (EReference)tmapMatchedRuleEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -1656,8 +1656,18 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapMatchedRule_WmapModule() {
+	public EReference getTmapMatchedRule_T2qvtrTransformation() {
 		return (EReference)tmapMatchedRuleEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTmapMatchedRule_WmapModule() {
+		return (EReference)tmapMatchedRuleEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -1796,8 +1806,18 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapModule_T2qvtrTransformation() {
+	public EReference getTmapModule_T2_4() {
 		return (EReference)tmapModuleEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTmapModule_T2qvtrTransformation() {
+		return (EReference)tmapModuleEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -3248,6 +3268,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		createEAttribute(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__T0RULE_NAME);
 		createEReference(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__T1ATL_MODULE);
 		createEReference(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__T1MATCHED_RULE);
+		createEReference(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__T2_1);
 		createEReference(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__T2QVTR_RELATION);
 		createEReference(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__T2QVTR_TRANSFORMATION);
 		createEReference(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__WMAP_MODULE);
@@ -3266,6 +3287,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		createEReference(tmapModuleEClass, TMAP_MODULE__T2_1);
 		createEReference(tmapModuleEClass, TMAP_MODULE__T2_2);
 		createEReference(tmapModuleEClass, TMAP_MODULE__T2_3);
+		createEReference(tmapModuleEClass, TMAP_MODULE__T2_4);
 		createEReference(tmapModuleEClass, TMAP_MODULE__T2QVTR_TRANSFORMATION);
 
 		tmapNavigationOrAttributeCallExp_HelperEClass = createEClass(TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER);
@@ -3629,6 +3651,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEAttribute(getTmapMatchedRule_T0ruleName(), ecorePackage.getEString(), "t0ruleName", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_T1atlModule(), theATLPackage.getModule(), null, "t1atlModule", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_T1matchedRule(), theATLPackage.getMatchedRule(), null, "t1matchedRule", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTmapMatchedRule_T2_1(), theQVTrelationPackage.getSharedVariable(), null, "t2_1", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_T2qvtrRelation(), theQVTrelationPackage.getRelation(), null, "t2qvtrRelation", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_T2qvtrTransformation(), theQVTrelationPackage.getRelationalTransformation(), null, "t2qvtrTransformation", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_WmapModule(), this.getTmapModule(), null, "wmapModule", null, 0, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3646,7 +3669,8 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getTmapModule_T1atlModule(), theATLPackage.getModule(), null, "t1atlModule", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapModule_T2_1(), thePivotPackage.getPackage(), null, "t2_1", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapModule_T2_2(), thePivotPackage.getParameterVariable(), null, "t2_2", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTmapModule_T2_3(), theQVTrelationPackage.getRelationModel(), null, "t2_3", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTmapModule_T2_3(), theQVTbasePackage.getTypedModel(), null, "t2_3", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTmapModule_T2_4(), theQVTrelationPackage.getRelationModel(), null, "t2_4", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapModule_T2qvtrTransformation(), theQVTrelationPackage.getRelationalTransformation(), null, "t2qvtrTransformation", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tmapNavigationOrAttributeCallExp_HelperEClass, TmapNavigationOrAttributeCallExp_Helper.class, "TmapNavigationOrAttributeCallExp_Helper", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4483,6 +4507,12 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 				"referredDomain", "atl"
 		});
 		addAnnotation
+		(getTmapMatchedRule_T2_1(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
 		(getTmapMatchedRule_T2qvtrRelation(),
 			source,
 			new String[] {
@@ -4544,6 +4574,12 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		});
 		addAnnotation
 		(getTmapModule_T2_3(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapModule_T2_4(),
 			source,
 			new String[] {
 				"referredDomain", "qvtr"

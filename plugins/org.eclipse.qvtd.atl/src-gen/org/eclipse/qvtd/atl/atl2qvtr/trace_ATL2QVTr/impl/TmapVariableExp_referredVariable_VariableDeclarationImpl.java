@@ -88,6 +88,7 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DmapVariableExp_referredVariable getDispatcher() {
 		if (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__DISPATCHER) return null;
 		return (DmapVariableExp_referredVariable)eInternalContainer();
@@ -108,6 +109,7 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDispatcher(DmapVariableExp_referredVariable newDispatcher) {
 		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__DISPATCHER && newDispatcher != null)) {
 			if (EcoreUtil.isAncestor(this, newDispatcher))
@@ -129,6 +131,7 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PatternElement getT1atlVariable() {
 		if (t1atlVariable != null && t1atlVariable.eIsProxy()) {
 			InternalEObject oldT1atlVariable = (InternalEObject)t1atlVariable;
@@ -155,6 +158,7 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlVariable(PatternElement newT1atlVariable) {
 		PatternElement oldT1atlVariable = t1atlVariable;
 		t1atlVariable = newT1atlVariable;
@@ -167,6 +171,7 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VariableDeclaration getT2qvtrVariable() {
 		if (t2qvtrVariable != null && t2qvtrVariable.eIsProxy()) {
 			InternalEObject oldT2qvtrVariable = (InternalEObject)t2qvtrVariable;
@@ -193,6 +198,7 @@ public class TmapVariableExp_referredVariable_VariableDeclarationImpl extends Im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrVariable(VariableDeclaration newT2qvtrVariable) {
 		VariableDeclaration oldT2qvtrVariable = t2qvtrVariable;
 		t2qvtrVariable = newT2qvtrVariable;

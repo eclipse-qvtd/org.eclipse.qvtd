@@ -85,6 +85,7 @@ public class TmapIntegerExpImpl extends ImapOclExpressionImpl implements TmapInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DmapOclExpression getDispatcher() {
 		if (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_INTEGER_EXP__DISPATCHER) return null;
 		return (DmapOclExpression)eInternalContainer();
@@ -105,6 +106,7 @@ public class TmapIntegerExpImpl extends ImapOclExpressionImpl implements TmapInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDispatcher(DmapOclExpression newDispatcher) {
 		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_INTEGER_EXP__DISPATCHER && newDispatcher != null)) {
 			if (EcoreUtil.isAncestor(this, newDispatcher))
@@ -126,6 +128,7 @@ public class TmapIntegerExpImpl extends ImapOclExpressionImpl implements TmapInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BigInteger getT0symbol() {
 		return t0symbol;
 	}
@@ -135,6 +138,7 @@ public class TmapIntegerExpImpl extends ImapOclExpressionImpl implements TmapInt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT0symbol(BigInteger newT0symbol) {
 		BigInteger oldT0symbol = t0symbol;
 		t0symbol = newT0symbol;

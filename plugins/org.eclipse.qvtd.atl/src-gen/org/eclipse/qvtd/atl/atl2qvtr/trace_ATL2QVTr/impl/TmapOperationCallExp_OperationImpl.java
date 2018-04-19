@@ -120,6 +120,7 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DmapOclExpression getDispatcher() {
 		if (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_OPERATION__DISPATCHER) return null;
 		return (DmapOclExpression)eInternalContainer();
@@ -140,6 +141,7 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDispatcher(DmapOclExpression newDispatcher) {
 		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_OPERATION__DISPATCHER && newDispatcher != null)) {
 			if (EcoreUtil.isAncestor(this, newDispatcher))
@@ -161,6 +163,7 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getT0operationName() {
 		return t0operationName;
 	}
@@ -170,6 +173,7 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT0operationName(String newT0operationName) {
 		String oldT0operationName = t0operationName;
 		t0operationName = newT0operationName;
@@ -182,6 +186,7 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OclExpression getT1atlSource() {
 		if (t1atlSource != null && t1atlSource.eIsProxy()) {
 			InternalEObject oldT1atlSource = (InternalEObject)t1atlSource;
@@ -208,6 +213,7 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlSource(OclExpression newT1atlSource) {
 		OclExpression oldT1atlSource = t1atlSource;
 		t1atlSource = newT1atlSource;
@@ -220,6 +226,7 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getT2qvtrSource() {
 		if (t2qvtrSource != null && t2qvtrSource.eIsProxy()) {
 			InternalEObject oldT2qvtrSource = (InternalEObject)t2qvtrSource;
@@ -246,6 +253,7 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrSource(OCLExpression newT2qvtrSource) {
 		OCLExpression oldT2qvtrSource = t2qvtrSource;
 		t2qvtrSource = newT2qvtrSource;
@@ -258,6 +266,7 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DmapOclExpression getWmapOclExpression() {
 		if (wmapOclExpression != null && wmapOclExpression.eIsProxy()) {
 			InternalEObject oldWmapOclExpression = (InternalEObject)wmapOclExpression;
@@ -284,6 +293,7 @@ public class TmapOperationCallExp_OperationImpl extends ImapOclExpressionImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWmapOclExpression(DmapOclExpression newWmapOclExpression) {
 		DmapOclExpression oldWmapOclExpression = wmapOclExpression;
 		wmapOclExpression = newWmapOclExpression;

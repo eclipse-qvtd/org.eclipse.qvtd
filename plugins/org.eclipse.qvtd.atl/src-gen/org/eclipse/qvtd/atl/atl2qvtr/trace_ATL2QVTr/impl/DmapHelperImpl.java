@@ -122,6 +122,7 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Helper getD1atlHelper() {
 		if (d1atlHelper != null && d1atlHelper.eIsProxy()) {
 			InternalEObject oldD1atlHelper = (InternalEObject)d1atlHelper;
@@ -148,6 +149,7 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setD1atlHelper(Helper newD1atlHelper) {
 		Helper oldD1atlHelper = d1atlHelper;
 		d1atlHelper = newD1atlHelper;
@@ -160,6 +162,7 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Function getD2qvtrFunction() {
 		if (d2qvtrFunction != null && d2qvtrFunction.eIsProxy()) {
 			InternalEObject oldD2qvtrFunction = (InternalEObject)d2qvtrFunction;
@@ -186,6 +189,7 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setD2qvtrFunction(Function newD2qvtrFunction) {
 		Function oldD2qvtrFunction = d2qvtrFunction;
 		d2qvtrFunction = newD2qvtrFunction;
@@ -198,6 +202,7 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapHelper_Attribute getDomapHelper_Attribute() {
 		return domapHelper_Attribute;
 	}
@@ -222,6 +227,7 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomapHelper_Attribute(TmapHelper_Attribute newDomapHelper_Attribute) {
 		if (newDomapHelper_Attribute != domapHelper_Attribute) {
 			NotificationChain msgs = null;
@@ -241,6 +247,7 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapHelper_Operation getDomapHelper_Operation() {
 		return domapHelper_Operation;
 	}
@@ -265,6 +272,7 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDomapHelper_Operation(TmapHelper_Operation newDomapHelper_Operation) {
 		if (newDomapHelper_Operation != domapHelper_Operation) {
 			NotificationChain msgs = null;
@@ -284,6 +292,7 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ImapHelper getResult() {
 		if (result != null && result.eIsProxy()) {
 			InternalEObject oldResult = (InternalEObject)result;
@@ -310,6 +319,7 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setResult(ImapHelper newResult) {
 		ImapHelper oldResult = result;
 		result = newResult;

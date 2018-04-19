@@ -106,6 +106,7 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Boolean getSuccess() {
 		return success;
 	}
@@ -115,6 +116,7 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSuccess(Boolean newSuccess) {
 		Boolean oldSuccess = success;
 		success = newSuccess;
@@ -127,6 +129,7 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LocatedElement getT1atlVariable() {
 		if (t1atlVariable != null && t1atlVariable.eIsProxy()) {
 			InternalEObject oldT1atlVariable = (InternalEObject)t1atlVariable;
@@ -153,6 +156,7 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlVariable(LocatedElement newT1atlVariable) {
 		LocatedElement oldT1atlVariable = t1atlVariable;
 		t1atlVariable = newT1atlVariable;
@@ -165,6 +169,7 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VariableDeclaration getT2qvtrVariable() {
 		if (t2qvtrVariable != null && t2qvtrVariable.eIsProxy()) {
 			InternalEObject oldT2qvtrVariable = (InternalEObject)t2qvtrVariable;
@@ -191,6 +196,7 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrVariable(VariableDeclaration newT2qvtrVariable) {
 		VariableDeclaration oldT2qvtrVariable = t2qvtrVariable;
 		t2qvtrVariable = newT2qvtrVariable;

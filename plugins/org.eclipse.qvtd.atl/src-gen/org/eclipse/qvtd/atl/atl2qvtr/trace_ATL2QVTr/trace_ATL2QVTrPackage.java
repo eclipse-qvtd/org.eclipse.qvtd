@@ -1831,13 +1831,22 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	int TMAP_MATCHED_RULE__T1MATCHED_RULE = QVTtracePackage.EXECUTION_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>T2 1</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TMAP_MATCHED_RULE__T2_1 = QVTtracePackage.EXECUTION_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>T2qvtr Relation</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TMAP_MATCHED_RULE__T2QVTR_RELATION = QVTtracePackage.EXECUTION_FEATURE_COUNT + 4;
+	int TMAP_MATCHED_RULE__T2QVTR_RELATION = QVTtracePackage.EXECUTION_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>T2qvtr Transformation</b></em>' reference.
@@ -1846,7 +1855,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TMAP_MATCHED_RULE__T2QVTR_TRANSFORMATION = QVTtracePackage.EXECUTION_FEATURE_COUNT + 5;
+	int TMAP_MATCHED_RULE__T2QVTR_TRANSFORMATION = QVTtracePackage.EXECUTION_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Wmap Module</b></em>' reference.
@@ -1855,7 +1864,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TMAP_MATCHED_RULE__WMAP_MODULE = QVTtracePackage.EXECUTION_FEATURE_COUNT + 6;
+	int TMAP_MATCHED_RULE__WMAP_MODULE = QVTtracePackage.EXECUTION_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Tmap Matched Rule</em>' class.
@@ -1864,7 +1873,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TMAP_MATCHED_RULE_FEATURE_COUNT = QVTtracePackage.EXECUTION_FEATURE_COUNT + 7;
+	int TMAP_MATCHED_RULE_FEATURE_COUNT = QVTtracePackage.EXECUTION_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of operations of the '<em>Tmap Matched Rule</em>' class.
@@ -2031,13 +2040,22 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	int TMAP_MODULE__T2_3 = QVTtracePackage.EXECUTION_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>T2 4</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TMAP_MODULE__T2_4 = QVTtracePackage.EXECUTION_FEATURE_COUNT + 5;
+
+	/**
 	 * The feature id for the '<em><b>T2qvtr Transformation</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TMAP_MODULE__T2QVTR_TRANSFORMATION = QVTtracePackage.EXECUTION_FEATURE_COUNT + 5;
+	int TMAP_MODULE__T2QVTR_TRANSFORMATION = QVTtracePackage.EXECUTION_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Tmap Module</em>' class.
@@ -2046,7 +2064,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TMAP_MODULE_FEATURE_COUNT = QVTtracePackage.EXECUTION_FEATURE_COUNT + 6;
+	int TMAP_MODULE_FEATURE_COUNT = QVTtracePackage.EXECUTION_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of operations of the '<em>Tmap Module</em>' class.
@@ -5092,6 +5110,17 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	EReference getTmapMatchedRule_T1matchedRule();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT2_1 <em>T2 1</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>T2 1</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT2_1()
+	 * @see #getTmapMatchedRule()
+	 * @generated
+	 */
+	EReference getTmapMatchedRule_T2_1();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT2qvtrRelation <em>T2qvtr Relation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5264,6 +5293,17 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTmapModule_T2_3();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_4 <em>T2 4</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>T2 4</em>'.
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_4()
+	 * @see #getTmapModule()
+	 * @generated
+	 */
+	EReference getTmapModule_T2_4();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2qvtrTransformation <em>T2qvtr Transformation</em>}'.
@@ -7703,6 +7743,14 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		EReference TMAP_MATCHED_RULE__T1MATCHED_RULE = eINSTANCE.getTmapMatchedRule_T1matchedRule();
 
 		/**
+		 * The meta object literal for the '<em><b>T2 1</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TMAP_MATCHED_RULE__T2_1 = eINSTANCE.getTmapMatchedRule_T2_1();
+
+		/**
 		 * The meta object literal for the '<em><b>T2qvtr Relation</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7833,6 +7881,14 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TMAP_MODULE__T2_3 = eINSTANCE.getTmapModule_T2_3();
+
+		/**
+		 * The meta object literal for the '<em><b>T2 4</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TMAP_MODULE__T2_4 = eINSTANCE.getTmapModule_T2_4();
 
 		/**
 		 * The meta object literal for the '<em><b>T2qvtr Transformation</b></em>' reference feature.

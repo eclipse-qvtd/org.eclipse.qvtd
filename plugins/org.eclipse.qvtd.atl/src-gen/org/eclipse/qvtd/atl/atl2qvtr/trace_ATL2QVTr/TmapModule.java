@@ -12,6 +12,8 @@ package org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr;
 
 import org.eclipse.ocl.pivot.ParameterVariable;
 
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 
@@ -31,6 +33,7 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_1 <em>T2 1</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_2 <em>T2 2</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_3 <em>T2 3</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_4 <em>T2 4</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2qvtrTransformation <em>T2qvtr Transformation</em>}</li>
  * </ul>
  *
@@ -157,13 +160,13 @@ public interface TmapModule extends Execution {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>T2 3</em>' reference.
-	 * @see #setT2_3(RelationModel)
+	 * @see #setT2_3(TypedModel)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapModule_T2_3()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	RelationModel getT2_3();
+	TypedModel getT2_3();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_3 <em>T2 3</em>}' reference.
@@ -173,7 +176,34 @@ public interface TmapModule extends Execution {
 	 * @see #getT2_3()
 	 * @generated
 	 */
-	void setT2_3(RelationModel value);
+	void setT2_3(TypedModel value);
+
+	/**
+	 * Returns the value of the '<em><b>T2 4</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>T2 4</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T2 4</em>' reference.
+	 * @see #setT2_4(RelationModel)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapModule_T2_4()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
+	 * @generated
+	 */
+	RelationModel getT2_4();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_4 <em>T2 4</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T2 4</em>' reference.
+	 * @see #getT2_4()
+	 * @generated
+	 */
+	void setT2_4(RelationModel value);
 
 	/**
 	 * Returns the value of the '<em><b>T2qvtr Transformation</b></em>' reference.

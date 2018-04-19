@@ -83,6 +83,7 @@ public class TmapStringExpImpl extends ImapOclExpressionImpl implements TmapStri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DmapOclExpression getDispatcher() {
 		if (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_STRING_EXP__DISPATCHER) return null;
 		return (DmapOclExpression)eInternalContainer();
@@ -103,6 +104,7 @@ public class TmapStringExpImpl extends ImapOclExpressionImpl implements TmapStri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDispatcher(DmapOclExpression newDispatcher) {
 		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_STRING_EXP__DISPATCHER && newDispatcher != null)) {
 			if (EcoreUtil.isAncestor(this, newDispatcher))
@@ -124,6 +126,7 @@ public class TmapStringExpImpl extends ImapOclExpressionImpl implements TmapStri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getT0symbol() {
 		return t0symbol;
 	}
@@ -133,6 +136,7 @@ public class TmapStringExpImpl extends ImapOclExpressionImpl implements TmapStri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT0symbol(String newT0symbol) {
 		String oldT0symbol = t0symbol;
 		t0symbol = newT0symbol;
