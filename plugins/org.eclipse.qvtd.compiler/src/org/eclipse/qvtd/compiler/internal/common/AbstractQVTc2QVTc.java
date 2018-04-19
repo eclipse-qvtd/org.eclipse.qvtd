@@ -385,6 +385,8 @@ public abstract class AbstractQVTc2QVTc extends QVTcoreHelper
 			}
 			tmOut.setName(name);
 			tmOut.getUsedPackage().addAll(tmIn.getUsedPackage());
+			tmOut.setIsPrimitive(tmIn.isIsPrimitive());
+			tmOut.setIsTrace(tmIn.isIsTrace());
 			createAll(tmIn.getOwnedComments(), tmOut.getOwnedComments());
 			return tmOut;
 		}

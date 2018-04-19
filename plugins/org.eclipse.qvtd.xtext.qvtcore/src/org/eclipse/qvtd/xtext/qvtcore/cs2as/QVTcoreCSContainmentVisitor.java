@@ -214,7 +214,10 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 
 	@Override
 	public Continuation<?> visitDirectionCS(@NonNull DirectionCS csElement) {
-		refreshNamedElement(TypedModel.class, QVTbasePackage.Literals.TYPED_MODEL, csElement);
+		TypedModel asTypedModel = refreshNamedElement(TypedModel.class, QVTbasePackage.Literals.TYPED_MODEL, csElement);
+		if (csElement.getName() == null) {
+			asTypedModel.setIsTrace(true);
+		}
 		return new DirectionContentContinuation(context, csElement);
 	}
 

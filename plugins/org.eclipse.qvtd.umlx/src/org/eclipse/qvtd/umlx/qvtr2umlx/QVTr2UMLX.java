@@ -530,7 +530,7 @@ public class QVTr2UMLX
 			//
 			Iterable<@NonNull TypedModel> modelParameters = QVTrelationUtil.getModelParameters(qvtrTransformation);
 			for (@NonNull TypedModel qvtrTypedModel : modelParameters) {
-				if (!QVTbaseUtil.isTrace(qvtrTypedModel)) {
+				if (!qvtrTypedModel.isIsTrace()) {
 					for (org.eclipse.ocl.pivot.@NonNull Package asPackage : QVTrelationUtil.getUsedPackages(qvtrTypedModel)) {
 						TxPackageNode txPackageNode = asPackage2txPackageNode.get(asPackage);
 						if (txPackageNode == null) {

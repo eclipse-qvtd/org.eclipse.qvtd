@@ -185,7 +185,7 @@ public class QVTbaseUtil extends PivotUtil
 
 	public static @Nullable TypedModel basicGetTraceTypedModel(@NonNull Iterable<@NonNull TypedModel> modelParameters) {
 		for (@NonNull TypedModel typedModel : modelParameters) {
-			if (isTrace(typedModel)) {
+			if (typedModel.isIsTrace()) {
 				return typedModel;
 			}
 		}
@@ -524,15 +524,19 @@ public class QVTbaseUtil extends PivotUtil
 		return false;
 	}
 
+	@Deprecated /* @deprecated use TypedModel.isIsTrace() */
 	public static boolean isTrace(@NonNull TypedModel typedModel) {
-		// FIXME BUG 517524 introduce TypedModel.isImplicit.
+		// FIXME BUG 517524 exploit rather than check TypedModel.isImplicit.
 		String name = typedModel.getName();					// One old way
 		if (name == null) {
+			assert typedModel.isIsTrace();
 			return true;
 		}
 		if (TRACE_TYPED_MODEL_NAME.equals(name)) {			// Another old way
+			assert typedModel.isIsTrace();
 			return true;
 		}
+		assert !typedModel.isIsTrace();
 		return false;
 	}
 

@@ -484,4 +484,10 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTbaseVisitor<?>)visitor).visitTypedModel(this);
 	}
+
+	@Override
+	public void setName(String newName) {
+		// TODO Auto-generated method stub
+		super.setName(newName);
+	}
 } //TypedModelImpl

@@ -262,7 +262,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::atl2qvtr {
 				transformation = qvtrTransformation,
 				variable = :SharedVariable {
 					name = 'trace',
-					isTrace = true,
+					isImplicit = true,
 					type = pivotMM::OclElement
 				}
 			};
@@ -309,7 +309,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::atl2qvtr {
 					isRequired = true
 				},
 				modelParameter = : qvtbMM::TypedModel {
-					isImplicit = true,
+					isTrace = true,
 					name = 'middle'
 				}
 			};
