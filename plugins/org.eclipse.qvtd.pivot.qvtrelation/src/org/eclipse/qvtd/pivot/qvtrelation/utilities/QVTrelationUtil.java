@@ -37,6 +37,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -375,7 +376,7 @@ public class QVTrelationUtil extends QVTtemplateUtil
 			EObject eObject = tit.next();
 			if (eObject instanceof RelationalTransformation) {
 				RelationalTransformation asTransformation = (RelationalTransformation)eObject;
-				TypedModel traceTypedModel = NameUtil.getNameable(getModelParameters(asTransformation), TRACE_TYPED_MODEL_NAME);
+				TypedModel traceTypedModel = QVTbaseUtil.basicGetTraceTypedModel(getModelParameters(asTransformation));
 				if (traceTypedModel == null) {
 					if (helper == null) {
 						helper = new QVTrelationHelper(environmentFactory);
@@ -384,8 +385,16 @@ public class QVTrelationUtil extends QVTtemplateUtil
 				}
 			}
 			if (eObject instanceof Relation) {
+				VariableDeclaration traceClassVariable = null;
 				Relation asRelation = (Relation)eObject;
-				Variable traceClassVariable = NameUtil.getNameable(getOwnedVariables(asRelation), TRACE_CLASS_NAME);
+				for (@NonNull VariableDeclaration variable : getOwnedVariables(asRelation)) {
+					if ((variable instanceof SharedVariable) && ((SharedVariable)variable).isIsImplicit()) {
+						traceClassVariable = variable;
+					}
+				}
+				if (traceClassVariable == null) {		// Legacy rescue
+					traceClassVariable = NameUtil.getNameable(getOwnedVariables(asRelation), TRACE_CLASS_NAME);
+				}
 				if (traceClassVariable == null) {
 					if (helper == null) {
 						helper = new QVTrelationHelper(environmentFactory);

@@ -463,7 +463,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		List<@NonNull TypedModel> outputTypedModels = new ArrayList<>();
 		List<@NonNull TypedModel> intermediateTypedModels = new ArrayList<>();
 		for (@NonNull TypedModel typedModel : QVTcoreUtil.getModelParameters(transformation)) {
-			if (!QVTbaseUtil.isTrace(typedModel)) {
+			if (!typedModel.isIsTrace()) {
 				String modelName = typedModel.getName();
 				if (enforcedOutputName.equals(modelName)) {
 					if (outputTypedModels.size() > 1) {

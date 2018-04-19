@@ -318,6 +318,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 		super(environmentFactory);
 		this.standardLibrary = context.getStandardLibrary();
 		primitiveTypeModel.setName(QVTbaseUtil.PRIMITIVE_TYPED_MODEL_NAME);
+		primitiveTypeModel.setIsPrimitive(true);
 		add(primitiveTypeModel);
 		validUsages.put(NONE_USAGE_BIT_MASK, getConstantUsage(NONE_USAGE_BIT_MASK));
 		validUsages.put(PRIMITIVE_USAGE_BIT_MASK, getConstantUsage(PRIMITIVE_USAGE_BIT_MASK));
@@ -374,7 +375,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 			if (typedModel == primitiveTypeModel) {
 				continue;
 			}
-			if (QVTbaseUtil.isTrace(typedModel)) {
+			if (typedModel.isIsTrace()) {
 				traceTypedModel = typedModel;
 				//				continue;
 			}

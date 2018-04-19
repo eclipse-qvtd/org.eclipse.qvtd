@@ -19,8 +19,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -219,7 +221,12 @@ public class QVTcoreUtil extends QVTbaseUtil
 	public static @NonNull ASResource loadTransformations(@NonNull QVTbaseEnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
 		CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTcEnvironmentFactory.CREATE_STRATEGY);
 		try {
-			return loadTransformations(CoreModel.class, environmentFactory, transformationURI, keepDebug);
+			ASResource asResource = loadTransformations(CoreModel.class, environmentFactory, transformationURI, keepDebug);
+			List<@NonNull TypedModel> missingIsTraces = rewriteMissingTypedModelIsTrace(asResource);
+			if (missingIsTraces != null) {
+				System.err.println("TypedModel.isTrace fixed up for '" + transformationURI + "'");
+			}
+			return asResource;
 		}
 		finally {
 			environmentFactory.setCreateStrategy(savedStrategy);
@@ -227,7 +234,28 @@ public class QVTcoreUtil extends QVTbaseUtil
 	}
 
 	/**
-	 * Sort the pattern variables into a least referenced foirst then alphabetical order.
+	 * Rewrite asResource to ensure null-named TypedModel s are isImplicit.
+	 */
+	public static @Nullable List<@NonNull TypedModel> rewriteMissingTypedModelIsTrace(@NonNull Resource asResource) {
+		List<@NonNull TypedModel> missingImplicits = null;
+		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
+			EObject eObject = tit.next();
+			if (eObject instanceof TypedModel) {
+				TypedModel typedModel = (TypedModel)eObject;
+				if ((typedModel.getName() == null) && !typedModel.isIsTrace()) {
+					if (missingImplicits == null) {
+						missingImplicits = new ArrayList<>();
+					}
+					missingImplicits.add(typedModel);
+					typedModel.setIsTrace(true);
+				}
+			}
+		}
+		return missingImplicits;
+	}
+
+	/**
+	 * Sort the pattern variables into a least referenced first then alphabetical order.
 	 */
 	public static void sortPatternVariables(@NonNull List<@NonNull Variable> variables) {
 		if (variables.size() > 1) {

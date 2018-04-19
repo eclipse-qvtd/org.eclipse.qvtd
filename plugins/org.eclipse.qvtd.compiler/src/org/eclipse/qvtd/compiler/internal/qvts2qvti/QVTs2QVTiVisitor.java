@@ -65,7 +65,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
@@ -267,16 +266,16 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			assert typedModelName != null;
 			ImperativeTypedModel qvtiTypedModel = helper.createTypedModel(typedModelName);
 			qvtiTypedModel.getUsedPackage().addAll(qvtmTypedModel.getUsedPackage());
-			if (QVTscheduleConstants.MIDDLE_DOMAIN_NAME.equals(typedModelName)) {
-				assert qvtiMiddleTypedModel  == null;
-				qvtiMiddleTypedModel = qvtiTypedModel;
-			}
-			else if (QVTbaseUtil.TRACE_TYPED_MODEL_NAME.equals(typedModelName)) {
-				assert qvtiMiddleTypedModel  == null;
+			boolean isPrimitive = qvtmTypedModel.isIsPrimitive();
+			boolean isTrace = qvtmTypedModel.isIsTrace();
+			qvtiTypedModel.setIsPrimitive(isPrimitive);
+			qvtiTypedModel.setIsTrace(isTrace);
+			if (isTrace) {
+				assert qvtiMiddleTypedModel == null;
 				qvtiMiddleTypedModel = qvtiTypedModel;
 			}
 			qvtmTypedModel2qvtiTypedModel.put(qvtmTypedModel, qvtiTypedModel);
-			if (!QVTbaseUtil.PRIMITIVE_TYPED_MODEL_NAME.equals(typedModelName)) {
+			if (!isPrimitive) {
 				qvtiTransformation.getModelParameter().add(qvtiTypedModel);
 			}
 		}

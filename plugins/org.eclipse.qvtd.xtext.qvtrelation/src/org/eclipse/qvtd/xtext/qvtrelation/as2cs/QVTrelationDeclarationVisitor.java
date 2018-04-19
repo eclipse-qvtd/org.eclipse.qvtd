@@ -38,7 +38,6 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.manager.Orphanage;
-import org.eclipse.ocl.pivot.internal.utilities.AbstractConversion;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -116,6 +115,8 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationIdCS;
 
+import com.google.common.collect.Lists;
+
 public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor implements QVTrelationVisitor<ElementCS>
 {
 	private static final Logger logger = Logger.getLogger(QVTrelationDeclarationVisitor.class);
@@ -132,16 +133,6 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 			}
 		}
 		return csPathName;
-	}
-
-	protected static class NotTraceTypedModelPredicate implements AbstractConversion.Predicate<@NonNull TypedModel>
-	{
-		public static @NonNull NotTraceTypedModelPredicate INSTANCE = new NotTraceTypedModelPredicate();
-
-		@Override
-		public boolean filter(@NonNull TypedModel typedModel) {
-			return !QVTbaseUtil.isTrace(typedModel);
-		}
 	}
 
 	/**
@@ -617,7 +608,12 @@ public class QVTrelationDeclarationVisitor extends QVTbaseDeclarationVisitor imp
 			csTransformation.setOwnedPathName(csPathName);
 			context.refreshPathName(csPathName, owningPackage, null);
 		}
-		context.refreshList(csTransformation.getOwnedModelDecls(), context.visitDeclarations(ModelDeclCS.class, QVTrelationUtil.getModelParameters(asTransformation), NotTraceTypedModelPredicate.INSTANCE));
+		List<@NonNull TypedModel> modelParameters = Lists.newArrayList(QVTrelationUtil.getModelParameters(asTransformation));
+		TypedModel traceTypedModel = QVTbaseUtil.basicGetTraceTypedModel(modelParameters);
+		if (traceTypedModel != null) {
+			modelParameters.remove(traceTypedModel);
+		}
+		context.refreshList(csTransformation.getOwnedModelDecls(), context.visitDeclarations(ModelDeclCS.class, modelParameters, null));
 		context.refreshList(csTransformation.getOwnedKeyDecls(), context.visitDeclarations(KeyDeclCS.class, asTransformation.getOwnedKey(), null));
 		context.refreshList(csTransformation.getOwnedQueries(), context.visitDeclarations(QueryCS.class, asTransformation.getOwnedOperations(), null));
 		context.refreshList(csTransformation.getOwnedRelations(), context.visitDeclarations(RelationCS.class, asTransformation.getRule(), null));
