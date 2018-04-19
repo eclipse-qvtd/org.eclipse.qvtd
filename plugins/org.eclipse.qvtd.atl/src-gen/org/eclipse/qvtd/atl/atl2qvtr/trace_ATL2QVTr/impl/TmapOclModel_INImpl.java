@@ -165,6 +165,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getT0tmName() {
 		return t0tmName;
 	}
@@ -174,6 +175,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT0tmName(String newT0tmName) {
 		String oldT0tmName = t0tmName;
 		t0tmName = newT0tmName;
@@ -186,6 +188,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.m2m.atl.common.ATL.Module getT1atlModule() {
 		if (t1atlModule != null && t1atlModule.eIsProxy()) {
 			InternalEObject oldT1atlModule = (InternalEObject)t1atlModule;
@@ -212,6 +215,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlModule(org.eclipse.m2m.atl.common.ATL.Module newT1atlModule) {
 		org.eclipse.m2m.atl.common.ATL.Module oldT1atlModule = t1atlModule;
 		t1atlModule = newT1atlModule;
@@ -224,6 +228,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OclModel getT1oclMetamodel() {
 		if (t1oclMetamodel != null && t1oclMetamodel.eIsProxy()) {
 			InternalEObject oldT1oclMetamodel = (InternalEObject)t1oclMetamodel;
@@ -250,6 +255,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1oclMetamodel(OclModel newT1oclMetamodel) {
 		OclModel oldT1oclMetamodel = t1oclMetamodel;
 		t1oclMetamodel = newT1oclMetamodel;
@@ -262,6 +268,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OclModel getT1oclModel() {
 		if (t1oclModel != null && t1oclModel.eIsProxy()) {
 			InternalEObject oldT1oclModel = (InternalEObject)t1oclModel;
@@ -288,6 +295,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1oclModel(OclModel newT1oclModel) {
 		OclModel oldT1oclModel = t1oclModel;
 		t1oclModel = newT1oclModel;
@@ -300,6 +308,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RelationalTransformation getT2qvtrTransformation() {
 		if (t2qvtrTransformation != null && t2qvtrTransformation.eIsProxy()) {
 			InternalEObject oldT2qvtrTransformation = (InternalEObject)t2qvtrTransformation;
@@ -326,6 +335,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrTransformation(RelationalTransformation newT2qvtrTransformation) {
 		RelationalTransformation oldT2qvtrTransformation = t2qvtrTransformation;
 		t2qvtrTransformation = newT2qvtrTransformation;
@@ -338,6 +348,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypedModel getT2qvtrTypedModel() {
 		if (t2qvtrTypedModel != null && t2qvtrTypedModel.eIsProxy()) {
 			InternalEObject oldT2qvtrTypedModel = (InternalEObject)t2qvtrTypedModel;
@@ -364,6 +375,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrTypedModel(TypedModel newT2qvtrTypedModel) {
 		TypedModel oldT2qvtrTypedModel = t2qvtrTypedModel;
 		t2qvtrTypedModel = newT2qvtrTypedModel;
@@ -376,6 +388,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapModule getWmapModule() {
 		if (wmapModule != null && wmapModule.eIsProxy()) {
 			InternalEObject oldWmapModule = (InternalEObject)wmapModule;
@@ -402,6 +415,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWmapModule(TmapModule newWmapModule) {
 		TmapModule oldWmapModule = wmapModule;
 		wmapModule = newWmapModule;
@@ -414,6 +428,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapOclMetamodel getWmapOclMetamodel() {
 		if (wmapOclMetamodel != null && wmapOclMetamodel.eIsProxy()) {
 			InternalEObject oldWmapOclMetamodel = (InternalEObject)wmapOclMetamodel;
@@ -440,6 +455,7 @@ public class TmapOclModel_INImpl extends ExecutionImpl implements TmapOclModel_I
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWmapOclMetamodel(TmapOclMetamodel newWmapOclMetamodel) {
 		TmapOclMetamodel oldWmapOclMetamodel = wmapOclMetamodel;
 		wmapOclMetamodel = newWmapOclMetamodel;

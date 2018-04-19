@@ -106,6 +106,7 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getT0tmName() {
 		return t0tmName;
 	}
@@ -115,6 +116,7 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT0tmName(String newT0tmName) {
 		String oldT0tmName = t0tmName;
 		t0tmName = newT0tmName;
@@ -127,6 +129,7 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OclModel getT1oclMetamodel() {
 		if (t1oclMetamodel != null && t1oclMetamodel.eIsProxy()) {
 			InternalEObject oldT1oclMetamodel = (InternalEObject)t1oclMetamodel;
@@ -153,6 +156,7 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1oclMetamodel(OclModel newT1oclMetamodel) {
 		OclModel oldT1oclMetamodel = t1oclMetamodel;
 		t1oclMetamodel = newT1oclMetamodel;
@@ -165,6 +169,7 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypedModel getT2qvtrTypedModel() {
 		if (t2qvtrTypedModel != null && t2qvtrTypedModel.eIsProxy()) {
 			InternalEObject oldT2qvtrTypedModel = (InternalEObject)t2qvtrTypedModel;
@@ -191,6 +196,7 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrTypedModel(TypedModel newT2qvtrTypedModel) {
 		TypedModel oldT2qvtrTypedModel = t2qvtrTypedModel;
 		t2qvtrTypedModel = newT2qvtrTypedModel;

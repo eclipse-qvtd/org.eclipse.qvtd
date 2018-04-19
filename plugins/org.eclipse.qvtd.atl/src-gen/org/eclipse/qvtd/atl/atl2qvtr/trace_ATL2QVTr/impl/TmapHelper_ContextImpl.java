@@ -146,6 +146,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OclContextDefinition getT1atlContext() {
 		if (t1atlContext != null && t1atlContext.eIsProxy()) {
 			InternalEObject oldT1atlContext = (InternalEObject)t1atlContext;
@@ -172,6 +173,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlContext(OclContextDefinition newT1atlContext) {
 		OclContextDefinition oldT1atlContext = t1atlContext;
 		t1atlContext = newT1atlContext;
@@ -184,6 +186,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OclFeatureDefinition getT1atlDefinition() {
 		if (t1atlDefinition != null && t1atlDefinition.eIsProxy()) {
 			InternalEObject oldT1atlDefinition = (InternalEObject)t1atlDefinition;
@@ -210,6 +213,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlDefinition(OclFeatureDefinition newT1atlDefinition) {
 		OclFeatureDefinition oldT1atlDefinition = t1atlDefinition;
 		t1atlDefinition = newT1atlDefinition;
@@ -222,6 +226,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Helper getT1atlHelper() {
 		if (t1atlHelper != null && t1atlHelper.eIsProxy()) {
 			InternalEObject oldT1atlHelper = (InternalEObject)t1atlHelper;
@@ -248,6 +253,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlHelper(Helper newT1atlHelper) {
 		Helper oldT1atlHelper = t1atlHelper;
 		t1atlHelper = newT1atlHelper;
@@ -260,6 +266,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OclType getT1atlReturnType() {
 		if (t1atlReturnType != null && t1atlReturnType.eIsProxy()) {
 			InternalEObject oldT1atlReturnType = (InternalEObject)t1atlReturnType;
@@ -286,6 +293,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlReturnType(OclType newT1atlReturnType) {
 		OclType oldT1atlReturnType = t1atlReturnType;
 		t1atlReturnType = newT1atlReturnType;
@@ -298,6 +306,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Function getT2qvtrFunction() {
 		if (t2qvtrFunction != null && t2qvtrFunction.eIsProxy()) {
 			InternalEObject oldT2qvtrFunction = (InternalEObject)t2qvtrFunction;
@@ -324,6 +333,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrFunction(Function newT2qvtrFunction) {
 		Function oldT2qvtrFunction = t2qvtrFunction;
 		t2qvtrFunction = newT2qvtrFunction;
@@ -336,6 +346,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FunctionParameter getT2qvtrParameter() {
 		if (t2qvtrParameter != null && t2qvtrParameter.eIsProxy()) {
 			InternalEObject oldT2qvtrParameter = (InternalEObject)t2qvtrParameter;
@@ -362,6 +373,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrParameter(FunctionParameter newT2qvtrParameter) {
 		FunctionParameter oldT2qvtrParameter = t2qvtrParameter;
 		t2qvtrParameter = newT2qvtrParameter;
@@ -374,6 +386,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapVariable getWmapVariable() {
 		if (wmapVariable != null && wmapVariable.eIsProxy()) {
 			InternalEObject oldWmapVariable = (InternalEObject)wmapVariable;
@@ -400,6 +413,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWmapVariable(TmapVariable newWmapVariable) {
 		TmapVariable oldWmapVariable = wmapVariable;
 		wmapVariable = newWmapVariable;

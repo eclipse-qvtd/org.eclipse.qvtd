@@ -130,6 +130,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MatchedRule getT1atlChildRule() {
 		if (t1atlChildRule != null && t1atlChildRule.eIsProxy()) {
 			InternalEObject oldT1atlChildRule = (InternalEObject)t1atlChildRule;
@@ -156,6 +157,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlChildRule(MatchedRule newT1atlChildRule) {
 		MatchedRule oldT1atlChildRule = t1atlChildRule;
 		t1atlChildRule = newT1atlChildRule;
@@ -168,6 +170,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MatchedRule getT1atlSuperRule() {
 		if (t1atlSuperRule != null && t1atlSuperRule.eIsProxy()) {
 			InternalEObject oldT1atlSuperRule = (InternalEObject)t1atlSuperRule;
@@ -194,6 +197,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlSuperRule(MatchedRule newT1atlSuperRule) {
 		MatchedRule oldT1atlSuperRule = t1atlSuperRule;
 		t1atlSuperRule = newT1atlSuperRule;
@@ -206,6 +210,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Relation getT2qvtrOverriddenRelation() {
 		if (t2qvtrOverriddenRelation != null && t2qvtrOverriddenRelation.eIsProxy()) {
 			InternalEObject oldT2qvtrOverriddenRelation = (InternalEObject)t2qvtrOverriddenRelation;
@@ -232,6 +237,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrOverriddenRelation(Relation newT2qvtrOverriddenRelation) {
 		Relation oldT2qvtrOverriddenRelation = t2qvtrOverriddenRelation;
 		t2qvtrOverriddenRelation = newT2qvtrOverriddenRelation;
@@ -244,6 +250,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Relation getT2qvtrOverridesRelation() {
 		if (t2qvtrOverridesRelation != null && t2qvtrOverridesRelation.eIsProxy()) {
 			InternalEObject oldT2qvtrOverridesRelation = (InternalEObject)t2qvtrOverridesRelation;
@@ -270,6 +277,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrOverridesRelation(Relation newT2qvtrOverridesRelation) {
 		Relation oldT2qvtrOverridesRelation = t2qvtrOverridesRelation;
 		t2qvtrOverridesRelation = newT2qvtrOverridesRelation;
@@ -282,6 +290,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapMatchedRule getWmapMatchedRule() {
 		if (wmapMatchedRule != null && wmapMatchedRule.eIsProxy()) {
 			InternalEObject oldWmapMatchedRule = (InternalEObject)wmapMatchedRule;
@@ -308,6 +317,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWmapMatchedRule(TmapMatchedRule newWmapMatchedRule) {
 		TmapMatchedRule oldWmapMatchedRule = wmapMatchedRule;
 		wmapMatchedRule = newWmapMatchedRule;
@@ -320,6 +330,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapMatchedRule getWmapMatchedRule1() {
 		if (wmapMatchedRule1 != null && wmapMatchedRule1.eIsProxy()) {
 			InternalEObject oldWmapMatchedRule1 = (InternalEObject)wmapMatchedRule1;
@@ -346,6 +357,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWmapMatchedRule1(TmapMatchedRule newWmapMatchedRule1) {
 		TmapMatchedRule oldWmapMatchedRule1 = wmapMatchedRule1;
 		wmapMatchedRule1 = newWmapMatchedRule1;

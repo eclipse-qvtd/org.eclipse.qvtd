@@ -79,6 +79,7 @@ public abstract class ImapOclExpressionImpl extends ExecutionImpl implements Ima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Boolean getSuccess() {
 		return success;
 	}
@@ -88,6 +89,7 @@ public abstract class ImapOclExpressionImpl extends ExecutionImpl implements Ima
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSuccess(Boolean newSuccess) {
 		Boolean oldSuccess = success;
 		success = newSuccess;

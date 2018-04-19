@@ -415,6 +415,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCmapVariableExp_referredVariable_Helper() {
 		return cmapVariableExp_referredVariable_HelperEClass;
 	}
@@ -424,6 +425,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCmapVariableExp_referredVariable_VariableDeclaration() {
 		return cmapVariableExp_referredVariable_VariableDeclarationEClass;
 	}
@@ -433,6 +435,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDmapHelper() {
 		return dmapHelperEClass;
 	}
@@ -442,6 +445,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapHelper_D1atlHelper() {
 		return (EReference)dmapHelperEClass.getEStructuralFeatures().get(0);
 	}
@@ -451,6 +455,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapHelper_D2qvtrFunction() {
 		return (EReference)dmapHelperEClass.getEStructuralFeatures().get(1);
 	}
@@ -460,6 +465,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapHelper_DomapHelper_Attribute() {
 		return (EReference)dmapHelperEClass.getEStructuralFeatures().get(2);
 	}
@@ -469,6 +475,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapHelper_DomapHelper_Operation() {
 		return (EReference)dmapHelperEClass.getEStructuralFeatures().get(3);
 	}
@@ -478,6 +485,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapHelper_Result() {
 		return (EReference)dmapHelperEClass.getEStructuralFeatures().get(4);
 	}
@@ -487,6 +495,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDmapOclExpression() {
 		return dmapOclExpressionEClass;
 	}
@@ -496,6 +505,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapOclExpression_D1atlExpression() {
 		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(0);
 	}
@@ -505,6 +515,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapOclExpression_D2qvtrExpression() {
 		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(1);
 	}
@@ -514,6 +525,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapOclExpression_DomapBooleanExp() {
 		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(2);
 	}
@@ -523,6 +535,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapOclExpression_DomapIfExp() {
 		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(3);
 	}
@@ -532,6 +545,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapOclExpression_DomapIntegerExp() {
 		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(4);
 	}
@@ -541,6 +555,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapOclExpression_DomapNavigationOrAttributeCallExp_Helper() {
 		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(5);
 	}
@@ -550,6 +565,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapOclExpression_DomapNavigationOrAttributeCallExp_Property() {
 		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(6);
 	}
@@ -559,6 +575,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapOclExpression_DomapOperationCallExp_Helper() {
 		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(7);
 	}
@@ -568,6 +585,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapOclExpression_DomapOperationCallExp_Operation() {
 		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(8);
 	}
@@ -577,6 +595,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapOclExpression_DomapOperatorCallExp() {
 		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(9);
 	}
@@ -586,6 +605,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapOclExpression_DomapStringExp() {
 		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(10);
 	}
@@ -595,6 +615,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapOclExpression_DomapVariableExp() {
 		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(11);
 	}
@@ -604,6 +625,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapOclExpression_Result() {
 		return (EReference)dmapOclExpressionEClass.getEStructuralFeatures().get(12);
 	}
@@ -613,6 +635,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDmapVariableExp_referredVariable() {
 		return dmapVariableExp_referredVariableEClass;
 	}
@@ -622,6 +645,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapVariableExp_referredVariable_D1atlExpression() {
 		return (EReference)dmapVariableExp_referredVariableEClass.getEStructuralFeatures().get(0);
 	}
@@ -631,6 +655,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapVariableExp_referredVariable_D2qvtrExpression() {
 		return (EReference)dmapVariableExp_referredVariableEClass.getEStructuralFeatures().get(1);
 	}
@@ -640,6 +665,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapVariableExp_referredVariable_DomapVariableExp_referredVariable_Helper() {
 		return (EReference)dmapVariableExp_referredVariableEClass.getEStructuralFeatures().get(2);
 	}
@@ -649,6 +675,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapVariableExp_referredVariable_DomapVariableExp_referredVariable_VariableDeclaration() {
 		return (EReference)dmapVariableExp_referredVariableEClass.getEStructuralFeatures().get(3);
 	}
@@ -658,6 +685,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDmapVariableExp_referredVariable_Result() {
 		return (EReference)dmapVariableExp_referredVariableEClass.getEStructuralFeatures().get(4);
 	}
@@ -667,6 +695,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getImapHelper() {
 		return imapHelperEClass;
 	}
@@ -676,6 +705,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getImapHelper_Success() {
 		return (EAttribute)imapHelperEClass.getEStructuralFeatures().get(0);
 	}
@@ -685,6 +715,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getImapOclExpression() {
 		return imapOclExpressionEClass;
 	}
@@ -694,6 +725,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getImapOclExpression_Success() {
 		return (EAttribute)imapOclExpressionEClass.getEStructuralFeatures().get(0);
 	}
@@ -703,6 +735,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getImapVariableExp_referredVariable() {
 		return imapVariableExp_referredVariableEClass;
 	}
@@ -712,6 +745,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getImapVariableExp_referredVariable_Success() {
 		return (EAttribute)imapVariableExp_referredVariableEClass.getEStructuralFeatures().get(0);
 	}
@@ -721,6 +755,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapBinding() {
 		return tmapBindingEClass;
 	}
@@ -730,6 +765,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapBinding_T0propertyName() {
 		return (EAttribute)tmapBindingEClass.getEStructuralFeatures().get(0);
 	}
@@ -739,6 +775,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapBinding_T1atlBinding() {
 		return (EReference)tmapBindingEClass.getEStructuralFeatures().get(1);
 	}
@@ -748,6 +785,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapBinding_T1atlExpression() {
 		return (EReference)tmapBindingEClass.getEStructuralFeatures().get(2);
 	}
@@ -757,6 +795,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapBinding_T1atlOutPatternElement() {
 		return (EReference)tmapBindingEClass.getEStructuralFeatures().get(3);
 	}
@@ -766,6 +805,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapBinding_T2qvtrExpression() {
 		return (EReference)tmapBindingEClass.getEStructuralFeatures().get(4);
 	}
@@ -775,6 +815,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapBinding_T2qvtrPart() {
 		return (EReference)tmapBindingEClass.getEStructuralFeatures().get(5);
 	}
@@ -784,6 +825,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapBinding_T2qvtrTemplate() {
 		return (EReference)tmapBindingEClass.getEStructuralFeatures().get(6);
 	}
@@ -793,6 +835,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapBinding_WmapOclExpression() {
 		return (EReference)tmapBindingEClass.getEStructuralFeatures().get(7);
 	}
@@ -802,6 +845,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapBinding_WmapSimpleOutPatternElement() {
 		return (EReference)tmapBindingEClass.getEStructuralFeatures().get(8);
 	}
@@ -811,6 +855,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapBooleanExp() {
 		return tmapBooleanExpEClass;
 	}
@@ -820,6 +865,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapBooleanExp_Dispatcher() {
 		return (EReference)tmapBooleanExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -829,6 +875,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapBooleanExp_T0symbol() {
 		return (EAttribute)tmapBooleanExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -838,6 +885,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapHelper_Attribute() {
 		return tmapHelper_AttributeEClass;
 	}
@@ -847,6 +895,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Attribute_Dispatcher() {
 		return (EReference)tmapHelper_AttributeEClass.getEStructuralFeatures().get(0);
 	}
@@ -856,6 +905,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapHelper_Attribute_T0attributeName() {
 		return (EAttribute)tmapHelper_AttributeEClass.getEStructuralFeatures().get(1);
 	}
@@ -865,6 +915,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Attribute_T1atlDefinition() {
 		return (EReference)tmapHelper_AttributeEClass.getEStructuralFeatures().get(2);
 	}
@@ -874,6 +925,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Attribute_T1atlExpression() {
 		return (EReference)tmapHelper_AttributeEClass.getEStructuralFeatures().get(3);
 	}
@@ -883,6 +935,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Attribute_T1atlFeature() {
 		return (EReference)tmapHelper_AttributeEClass.getEStructuralFeatures().get(4);
 	}
@@ -892,6 +945,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Attribute_T1atlModule() {
 		return (EReference)tmapHelper_AttributeEClass.getEStructuralFeatures().get(5);
 	}
@@ -901,6 +955,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Attribute_T1atlType() {
 		return (EReference)tmapHelper_AttributeEClass.getEStructuralFeatures().get(6);
 	}
@@ -910,6 +965,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Attribute_T2qvtrExpression() {
 		return (EReference)tmapHelper_AttributeEClass.getEStructuralFeatures().get(7);
 	}
@@ -919,6 +975,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Attribute_T2qvtrTransformation() {
 		return (EReference)tmapHelper_AttributeEClass.getEStructuralFeatures().get(8);
 	}
@@ -928,6 +985,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Attribute_WmapHelper_Context() {
 		return (EReference)tmapHelper_AttributeEClass.getEStructuralFeatures().get(9);
 	}
@@ -937,6 +995,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Attribute_WmapModule() {
 		return (EReference)tmapHelper_AttributeEClass.getEStructuralFeatures().get(10);
 	}
@@ -946,6 +1005,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Attribute_WmapOclExpression() {
 		return (EReference)tmapHelper_AttributeEClass.getEStructuralFeatures().get(11);
 	}
@@ -955,6 +1015,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapHelper_Context() {
 		return tmapHelper_ContextEClass;
 	}
@@ -964,6 +1025,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Context_T1atlContext() {
 		return (EReference)tmapHelper_ContextEClass.getEStructuralFeatures().get(0);
 	}
@@ -973,6 +1035,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Context_T1atlDefinition() {
 		return (EReference)tmapHelper_ContextEClass.getEStructuralFeatures().get(1);
 	}
@@ -982,6 +1045,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Context_T1atlHelper() {
 		return (EReference)tmapHelper_ContextEClass.getEStructuralFeatures().get(2);
 	}
@@ -991,6 +1055,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Context_T1atlReturnType() {
 		return (EReference)tmapHelper_ContextEClass.getEStructuralFeatures().get(3);
 	}
@@ -1000,6 +1065,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Context_T2qvtrFunction() {
 		return (EReference)tmapHelper_ContextEClass.getEStructuralFeatures().get(4);
 	}
@@ -1009,6 +1075,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Context_T2qvtrParameter() {
 		return (EReference)tmapHelper_ContextEClass.getEStructuralFeatures().get(5);
 	}
@@ -1018,6 +1085,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Context_WmapVariable() {
 		return (EReference)tmapHelper_ContextEClass.getEStructuralFeatures().get(6);
 	}
@@ -1027,6 +1095,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapHelper_Operation() {
 		return tmapHelper_OperationEClass;
 	}
@@ -1036,6 +1105,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Operation_Dispatcher() {
 		return (EReference)tmapHelper_OperationEClass.getEStructuralFeatures().get(0);
 	}
@@ -1045,6 +1115,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapHelper_Operation_T0operationName() {
 		return (EAttribute)tmapHelper_OperationEClass.getEStructuralFeatures().get(1);
 	}
@@ -1054,6 +1125,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Operation_T1atlDefinition() {
 		return (EReference)tmapHelper_OperationEClass.getEStructuralFeatures().get(2);
 	}
@@ -1063,6 +1135,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Operation_T1atlExpression() {
 		return (EReference)tmapHelper_OperationEClass.getEStructuralFeatures().get(3);
 	}
@@ -1072,6 +1145,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Operation_T1atlFeature() {
 		return (EReference)tmapHelper_OperationEClass.getEStructuralFeatures().get(4);
 	}
@@ -1081,6 +1155,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Operation_T1atlModule() {
 		return (EReference)tmapHelper_OperationEClass.getEStructuralFeatures().get(5);
 	}
@@ -1090,6 +1165,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Operation_T1atlType() {
 		return (EReference)tmapHelper_OperationEClass.getEStructuralFeatures().get(6);
 	}
@@ -1099,6 +1175,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Operation_T2qvtrExpression() {
 		return (EReference)tmapHelper_OperationEClass.getEStructuralFeatures().get(7);
 	}
@@ -1108,6 +1185,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Operation_T2qvtrTransformation() {
 		return (EReference)tmapHelper_OperationEClass.getEStructuralFeatures().get(8);
 	}
@@ -1117,6 +1195,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Operation_WmapHelper_Context() {
 		return (EReference)tmapHelper_OperationEClass.getEStructuralFeatures().get(9);
 	}
@@ -1126,6 +1205,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Operation_WmapModule() {
 		return (EReference)tmapHelper_OperationEClass.getEStructuralFeatures().get(10);
 	}
@@ -1135,6 +1215,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapHelper_Operation_WmapOclExpression() {
 		return (EReference)tmapHelper_OperationEClass.getEStructuralFeatures().get(11);
 	}
@@ -1144,6 +1225,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapIfExp() {
 		return tmapIfExpEClass;
 	}
@@ -1153,6 +1235,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapIfExp_Dispatcher() {
 		return (EReference)tmapIfExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1162,6 +1245,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapIfExp_T1atlCondition() {
 		return (EReference)tmapIfExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -1171,6 +1255,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapIfExp_T1atlElse() {
 		return (EReference)tmapIfExpEClass.getEStructuralFeatures().get(2);
 	}
@@ -1180,6 +1265,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapIfExp_T1atlThen() {
 		return (EReference)tmapIfExpEClass.getEStructuralFeatures().get(3);
 	}
@@ -1189,6 +1275,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapIfExp_T2qvtrCondition() {
 		return (EReference)tmapIfExpEClass.getEStructuralFeatures().get(4);
 	}
@@ -1198,6 +1285,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapIfExp_T2qvtrElse() {
 		return (EReference)tmapIfExpEClass.getEStructuralFeatures().get(5);
 	}
@@ -1207,6 +1295,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapIfExp_T2qvtrThen() {
 		return (EReference)tmapIfExpEClass.getEStructuralFeatures().get(6);
 	}
@@ -1216,6 +1305,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapIfExp_WmapOclExpression() {
 		return (EReference)tmapIfExpEClass.getEStructuralFeatures().get(7);
 	}
@@ -1225,6 +1315,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapIfExp_WmapOclExpression1() {
 		return (EReference)tmapIfExpEClass.getEStructuralFeatures().get(8);
 	}
@@ -1234,6 +1325,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapIfExp_WmapOclExpression2() {
 		return (EReference)tmapIfExpEClass.getEStructuralFeatures().get(9);
 	}
@@ -1243,6 +1335,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapInPattern() {
 		return tmapInPatternEClass;
 	}
@@ -1252,6 +1345,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapInPattern_Success() {
 		return (EAttribute)tmapInPatternEClass.getEStructuralFeatures().get(0);
 	}
@@ -1261,6 +1355,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapInPattern_T1atlModel() {
 		return (EReference)tmapInPatternEClass.getEStructuralFeatures().get(1);
 	}
@@ -1270,6 +1365,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapInPattern_T1atlPattern() {
 		return (EReference)tmapInPatternEClass.getEStructuralFeatures().get(2);
 	}
@@ -1279,6 +1375,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapInPattern_T1atlRule() {
 		return (EReference)tmapInPatternEClass.getEStructuralFeatures().get(3);
 	}
@@ -1288,6 +1385,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapInPattern_T2qvtrDomain() {
 		return (EReference)tmapInPatternEClass.getEStructuralFeatures().get(4);
 	}
@@ -1297,6 +1395,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapInPattern_T2qvtrRelation() {
 		return (EReference)tmapInPatternEClass.getEStructuralFeatures().get(5);
 	}
@@ -1306,6 +1405,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapInPattern_T2qvtrTypedModel() {
 		return (EReference)tmapInPatternEClass.getEStructuralFeatures().get(6);
 	}
@@ -1315,6 +1415,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapInPattern_WmapMatchedRule() {
 		return (EReference)tmapInPatternEClass.getEStructuralFeatures().get(7);
 	}
@@ -1324,6 +1425,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapInPattern_WmapOclMetamodel() {
 		return (EReference)tmapInPatternEClass.getEStructuralFeatures().get(8);
 	}
@@ -1333,6 +1435,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapInPattern_filter() {
 		return tmapInPattern_filterEClass;
 	}
@@ -1342,6 +1445,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapInPattern_filter_T1atlExpression() {
 		return (EReference)tmapInPattern_filterEClass.getEStructuralFeatures().get(0);
 	}
@@ -1351,6 +1455,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapInPattern_filter_T1atlPattern() {
 		return (EReference)tmapInPattern_filterEClass.getEStructuralFeatures().get(1);
 	}
@@ -1360,6 +1465,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapInPattern_filter_T1atlRule() {
 		return (EReference)tmapInPattern_filterEClass.getEStructuralFeatures().get(2);
 	}
@@ -1369,6 +1475,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapInPattern_filter_T2p() {
 		return (EReference)tmapInPattern_filterEClass.getEStructuralFeatures().get(3);
 	}
@@ -1378,6 +1485,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapInPattern_filter_T2qvtrDomain() {
 		return (EReference)tmapInPattern_filterEClass.getEStructuralFeatures().get(4);
 	}
@@ -1387,6 +1495,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapInPattern_filter_T2qvtrExpression() {
 		return (EReference)tmapInPattern_filterEClass.getEStructuralFeatures().get(5);
 	}
@@ -1396,6 +1505,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapInPattern_filter_T2qvtrRelation() {
 		return (EReference)tmapInPattern_filterEClass.getEStructuralFeatures().get(6);
 	}
@@ -1405,6 +1515,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapInPattern_filter_T2w() {
 		return (EReference)tmapInPattern_filterEClass.getEStructuralFeatures().get(7);
 	}
@@ -1414,6 +1525,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapInPattern_filter_WmapInPattern() {
 		return (EReference)tmapInPattern_filterEClass.getEStructuralFeatures().get(8);
 	}
@@ -1423,6 +1535,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapInPattern_filter_WmapMatchedRule() {
 		return (EReference)tmapInPattern_filterEClass.getEStructuralFeatures().get(9);
 	}
@@ -1432,6 +1545,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapInPattern_filter_WmapOclExpression() {
 		return (EReference)tmapInPattern_filterEClass.getEStructuralFeatures().get(10);
 	}
@@ -1441,6 +1555,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapIntegerExp() {
 		return tmapIntegerExpEClass;
 	}
@@ -1450,6 +1565,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapIntegerExp_Dispatcher() {
 		return (EReference)tmapIntegerExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -1459,6 +1575,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapIntegerExp_T0symbol() {
 		return (EAttribute)tmapIntegerExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -1468,6 +1585,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapMatchedRule() {
 		return tmapMatchedRuleEClass;
 	}
@@ -1477,6 +1595,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapMatchedRule_Success() {
 		return (EAttribute)tmapMatchedRuleEClass.getEStructuralFeatures().get(0);
 	}
@@ -1486,6 +1605,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapMatchedRule_T0ruleName() {
 		return (EAttribute)tmapMatchedRuleEClass.getEStructuralFeatures().get(1);
 	}
@@ -1495,6 +1615,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapMatchedRule_T1atlModule() {
 		return (EReference)tmapMatchedRuleEClass.getEStructuralFeatures().get(2);
 	}
@@ -1504,6 +1625,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapMatchedRule_T1matchedRule() {
 		return (EReference)tmapMatchedRuleEClass.getEStructuralFeatures().get(3);
 	}
@@ -1513,7 +1635,8 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTmapMatchedRule_T2qvtrRelation() {
+	@Override
+	public EReference getTmapMatchedRule_T2_1() {
 		return (EReference)tmapMatchedRuleEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -1522,7 +1645,8 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTmapMatchedRule_T2qvtrTransformation() {
+	@Override
+	public EReference getTmapMatchedRule_T2qvtrRelation() {
 		return (EReference)tmapMatchedRuleEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -1531,7 +1655,8 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTmapMatchedRule_WmapModule() {
+	@Override
+	public EReference getTmapMatchedRule_T2qvtrTransformation() {
 		return (EReference)tmapMatchedRuleEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -1540,6 +1665,17 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EReference getTmapMatchedRule_WmapModule() {
+		return (EReference)tmapMatchedRuleEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTmapMatchedRule_super() {
 		return tmapMatchedRule_superEClass;
 	}
@@ -1549,6 +1685,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapMatchedRule_super_T1atlChildRule() {
 		return (EReference)tmapMatchedRule_superEClass.getEStructuralFeatures().get(0);
 	}
@@ -1558,6 +1695,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapMatchedRule_super_T1atlSuperRule() {
 		return (EReference)tmapMatchedRule_superEClass.getEStructuralFeatures().get(1);
 	}
@@ -1567,6 +1705,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapMatchedRule_super_T2qvtrOverriddenRelation() {
 		return (EReference)tmapMatchedRule_superEClass.getEStructuralFeatures().get(2);
 	}
@@ -1576,6 +1715,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapMatchedRule_super_T2qvtrOverridesRelation() {
 		return (EReference)tmapMatchedRule_superEClass.getEStructuralFeatures().get(3);
 	}
@@ -1585,6 +1725,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapMatchedRule_super_WmapMatchedRule() {
 		return (EReference)tmapMatchedRule_superEClass.getEStructuralFeatures().get(4);
 	}
@@ -1594,6 +1735,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapMatchedRule_super_WmapMatchedRule1() {
 		return (EReference)tmapMatchedRule_superEClass.getEStructuralFeatures().get(5);
 	}
@@ -1603,6 +1745,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapModule() {
 		return tmapModuleEClass;
 	}
@@ -1612,6 +1755,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapModule_T0txName() {
 		return (EAttribute)tmapModuleEClass.getEStructuralFeatures().get(0);
 	}
@@ -1621,6 +1765,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapModule_T1atlModule() {
 		return (EReference)tmapModuleEClass.getEStructuralFeatures().get(1);
 	}
@@ -1630,6 +1775,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapModule_T2_1() {
 		return (EReference)tmapModuleEClass.getEStructuralFeatures().get(2);
 	}
@@ -1639,6 +1785,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapModule_T2_2() {
 		return (EReference)tmapModuleEClass.getEStructuralFeatures().get(3);
 	}
@@ -1648,6 +1795,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapModule_T2_3() {
 		return (EReference)tmapModuleEClass.getEStructuralFeatures().get(4);
 	}
@@ -1657,7 +1805,8 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTmapModule_T2qvtrTransformation() {
+	@Override
+	public EReference getTmapModule_T2_4() {
 		return (EReference)tmapModuleEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -1666,6 +1815,17 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public EReference getTmapModule_T2qvtrTransformation() {
+		return (EReference)tmapModuleEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTmapNavigationOrAttributeCallExp_Helper() {
 		return tmapNavigationOrAttributeCallExp_HelperEClass;
 	}
@@ -1675,6 +1835,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapNavigationOrAttributeCallExp_Helper_Dispatcher() {
 		return (EReference)tmapNavigationOrAttributeCallExp_HelperEClass.getEStructuralFeatures().get(0);
 	}
@@ -1684,6 +1845,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapNavigationOrAttributeCallExp_Helper_T0propertyName() {
 		return (EAttribute)tmapNavigationOrAttributeCallExp_HelperEClass.getEStructuralFeatures().get(1);
 	}
@@ -1693,6 +1855,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapNavigationOrAttributeCallExp_Helper_T1atlSource() {
 		return (EReference)tmapNavigationOrAttributeCallExp_HelperEClass.getEStructuralFeatures().get(2);
 	}
@@ -1702,6 +1865,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapNavigationOrAttributeCallExp_Helper_T2qvtrOperation() {
 		return (EReference)tmapNavigationOrAttributeCallExp_HelperEClass.getEStructuralFeatures().get(3);
 	}
@@ -1711,6 +1875,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapNavigationOrAttributeCallExp_Helper_T2qvtrSource() {
 		return (EReference)tmapNavigationOrAttributeCallExp_HelperEClass.getEStructuralFeatures().get(4);
 	}
@@ -1720,6 +1885,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapNavigationOrAttributeCallExp_Helper_T2qvtrSourceArgument() {
 		return (EReference)tmapNavigationOrAttributeCallExp_HelperEClass.getEStructuralFeatures().get(5);
 	}
@@ -1729,6 +1895,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapNavigationOrAttributeCallExp_Helper_T2qvtrTransformation() {
 		return (EReference)tmapNavigationOrAttributeCallExp_HelperEClass.getEStructuralFeatures().get(6);
 	}
@@ -1738,6 +1905,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapNavigationOrAttributeCallExp_Helper_WmapHelper() {
 		return (EReference)tmapNavigationOrAttributeCallExp_HelperEClass.getEStructuralFeatures().get(7);
 	}
@@ -1747,6 +1915,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapNavigationOrAttributeCallExp_Helper_WmapModule() {
 		return (EReference)tmapNavigationOrAttributeCallExp_HelperEClass.getEStructuralFeatures().get(8);
 	}
@@ -1756,6 +1925,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapNavigationOrAttributeCallExp_Helper_WmapOclExpression() {
 		return (EReference)tmapNavigationOrAttributeCallExp_HelperEClass.getEStructuralFeatures().get(9);
 	}
@@ -1765,6 +1935,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapNavigationOrAttributeCallExp_Property() {
 		return tmapNavigationOrAttributeCallExp_PropertyEClass;
 	}
@@ -1774,6 +1945,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapNavigationOrAttributeCallExp_Property_Dispatcher() {
 		return (EReference)tmapNavigationOrAttributeCallExp_PropertyEClass.getEStructuralFeatures().get(0);
 	}
@@ -1783,6 +1955,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapNavigationOrAttributeCallExp_Property_T0propertyName() {
 		return (EAttribute)tmapNavigationOrAttributeCallExp_PropertyEClass.getEStructuralFeatures().get(1);
 	}
@@ -1792,6 +1965,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapNavigationOrAttributeCallExp_Property_T1atlSource() {
 		return (EReference)tmapNavigationOrAttributeCallExp_PropertyEClass.getEStructuralFeatures().get(2);
 	}
@@ -1801,6 +1975,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapNavigationOrAttributeCallExp_Property_T2qvtrSource() {
 		return (EReference)tmapNavigationOrAttributeCallExp_PropertyEClass.getEStructuralFeatures().get(3);
 	}
@@ -1810,6 +1985,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapNavigationOrAttributeCallExp_Property_WmapOclExpression() {
 		return (EReference)tmapNavigationOrAttributeCallExp_PropertyEClass.getEStructuralFeatures().get(4);
 	}
@@ -1819,6 +1995,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapOclMetamodel() {
 		return tmapOclMetamodelEClass;
 	}
@@ -1828,6 +2005,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapOclMetamodel_T0tmName() {
 		return (EAttribute)tmapOclMetamodelEClass.getEStructuralFeatures().get(0);
 	}
@@ -1837,6 +2015,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOclMetamodel_T1oclMetamodel() {
 		return (EReference)tmapOclMetamodelEClass.getEStructuralFeatures().get(1);
 	}
@@ -1846,6 +2025,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOclMetamodel_T2qvtrTypedModel() {
 		return (EReference)tmapOclMetamodelEClass.getEStructuralFeatures().get(2);
 	}
@@ -1855,6 +2035,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapOclModel_IN() {
 		return tmapOclModel_INEClass;
 	}
@@ -1864,6 +2045,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapOclModel_IN_T0tmName() {
 		return (EAttribute)tmapOclModel_INEClass.getEStructuralFeatures().get(0);
 	}
@@ -1873,6 +2055,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOclModel_IN_T1atlModule() {
 		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(1);
 	}
@@ -1882,6 +2065,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOclModel_IN_T1oclMetamodel() {
 		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(2);
 	}
@@ -1891,6 +2075,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOclModel_IN_T1oclModel() {
 		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(3);
 	}
@@ -1900,6 +2085,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOclModel_IN_T2qvtrTransformation() {
 		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(4);
 	}
@@ -1909,6 +2095,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOclModel_IN_T2qvtrTypedModel() {
 		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(5);
 	}
@@ -1918,6 +2105,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOclModel_IN_WmapModule() {
 		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(6);
 	}
@@ -1927,6 +2115,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOclModel_IN_WmapOclMetamodel() {
 		return (EReference)tmapOclModel_INEClass.getEStructuralFeatures().get(7);
 	}
@@ -1936,6 +2125,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapOclModel_OUT() {
 		return tmapOclModel_OUTEClass;
 	}
@@ -1945,6 +2135,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapOclModel_OUT_T0tmName() {
 		return (EAttribute)tmapOclModel_OUTEClass.getEStructuralFeatures().get(0);
 	}
@@ -1954,6 +2145,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOclModel_OUT_T1atlModule() {
 		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(1);
 	}
@@ -1963,6 +2155,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOclModel_OUT_T1oclMetamodel() {
 		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(2);
 	}
@@ -1972,6 +2165,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOclModel_OUT_T1oclModel() {
 		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(3);
 	}
@@ -1981,6 +2175,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOclModel_OUT_T2qvtrTransformation() {
 		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(4);
 	}
@@ -1990,6 +2185,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOclModel_OUT_T2qvtrTypedModel() {
 		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(5);
 	}
@@ -1999,6 +2195,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOclModel_OUT_WmapModule() {
 		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(6);
 	}
@@ -2008,6 +2205,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOclModel_OUT_WmapOclMetamodel() {
 		return (EReference)tmapOclModel_OUTEClass.getEStructuralFeatures().get(7);
 	}
@@ -2017,6 +2215,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapOperationCallExp_Helper() {
 		return tmapOperationCallExp_HelperEClass;
 	}
@@ -2026,6 +2225,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperationCallExp_Helper_Dispatcher() {
 		return (EReference)tmapOperationCallExp_HelperEClass.getEStructuralFeatures().get(0);
 	}
@@ -2035,6 +2235,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapOperationCallExp_Helper_T0operationName() {
 		return (EAttribute)tmapOperationCallExp_HelperEClass.getEStructuralFeatures().get(1);
 	}
@@ -2044,6 +2245,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperationCallExp_Helper_T1atlSource() {
 		return (EReference)tmapOperationCallExp_HelperEClass.getEStructuralFeatures().get(2);
 	}
@@ -2053,6 +2255,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperationCallExp_Helper_T2qvtrOperation() {
 		return (EReference)tmapOperationCallExp_HelperEClass.getEStructuralFeatures().get(3);
 	}
@@ -2062,6 +2265,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperationCallExp_Helper_T2qvtrSource() {
 		return (EReference)tmapOperationCallExp_HelperEClass.getEStructuralFeatures().get(4);
 	}
@@ -2071,6 +2275,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperationCallExp_Helper_T2qvtrSourceArgument() {
 		return (EReference)tmapOperationCallExp_HelperEClass.getEStructuralFeatures().get(5);
 	}
@@ -2080,6 +2285,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperationCallExp_Helper_T2qvtrTransformation() {
 		return (EReference)tmapOperationCallExp_HelperEClass.getEStructuralFeatures().get(6);
 	}
@@ -2089,6 +2295,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperationCallExp_Helper_WmapHelper() {
 		return (EReference)tmapOperationCallExp_HelperEClass.getEStructuralFeatures().get(7);
 	}
@@ -2098,6 +2305,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperationCallExp_Helper_WmapModule() {
 		return (EReference)tmapOperationCallExp_HelperEClass.getEStructuralFeatures().get(8);
 	}
@@ -2107,6 +2315,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperationCallExp_Helper_WmapOclExpression() {
 		return (EReference)tmapOperationCallExp_HelperEClass.getEStructuralFeatures().get(9);
 	}
@@ -2116,6 +2325,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapOperationCallExp_Operation() {
 		return tmapOperationCallExp_OperationEClass;
 	}
@@ -2125,6 +2335,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperationCallExp_Operation_Dispatcher() {
 		return (EReference)tmapOperationCallExp_OperationEClass.getEStructuralFeatures().get(0);
 	}
@@ -2134,6 +2345,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapOperationCallExp_Operation_T0operationName() {
 		return (EAttribute)tmapOperationCallExp_OperationEClass.getEStructuralFeatures().get(1);
 	}
@@ -2143,6 +2355,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperationCallExp_Operation_T1atlSource() {
 		return (EReference)tmapOperationCallExp_OperationEClass.getEStructuralFeatures().get(2);
 	}
@@ -2152,6 +2365,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperationCallExp_Operation_T2qvtrSource() {
 		return (EReference)tmapOperationCallExp_OperationEClass.getEStructuralFeatures().get(3);
 	}
@@ -2161,6 +2375,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperationCallExp_Operation_WmapOclExpression() {
 		return (EReference)tmapOperationCallExp_OperationEClass.getEStructuralFeatures().get(4);
 	}
@@ -2170,6 +2385,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapOperationCallExp_argument() {
 		return tmapOperationCallExp_argumentEClass;
 	}
@@ -2179,6 +2395,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperationCallExp_argument_T1atlArgument() {
 		return (EReference)tmapOperationCallExp_argumentEClass.getEStructuralFeatures().get(0);
 	}
@@ -2188,6 +2405,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperationCallExp_argument_T1atlParent() {
 		return (EReference)tmapOperationCallExp_argumentEClass.getEStructuralFeatures().get(1);
 	}
@@ -2197,6 +2415,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperationCallExp_argument_T2qvtrArgument() {
 		return (EReference)tmapOperationCallExp_argumentEClass.getEStructuralFeatures().get(2);
 	}
@@ -2206,6 +2425,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperationCallExp_argument_T2qvtrParent() {
 		return (EReference)tmapOperationCallExp_argumentEClass.getEStructuralFeatures().get(3);
 	}
@@ -2215,6 +2435,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperationCallExp_argument_WmapOclExpression() {
 		return (EReference)tmapOperationCallExp_argumentEClass.getEStructuralFeatures().get(4);
 	}
@@ -2224,6 +2445,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperationCallExp_argument_WmapOclExpression1() {
 		return (EReference)tmapOperationCallExp_argumentEClass.getEStructuralFeatures().get(5);
 	}
@@ -2233,6 +2455,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapOperatorCallExp() {
 		return tmapOperatorCallExpEClass;
 	}
@@ -2242,6 +2465,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperatorCallExp_Dispatcher() {
 		return (EReference)tmapOperatorCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -2251,6 +2475,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapOperatorCallExp_T0operationName() {
 		return (EAttribute)tmapOperatorCallExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -2260,6 +2485,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperatorCallExp_T1atlSource() {
 		return (EReference)tmapOperatorCallExpEClass.getEStructuralFeatures().get(2);
 	}
@@ -2269,6 +2495,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperatorCallExp_T2qvtrSource() {
 		return (EReference)tmapOperatorCallExpEClass.getEStructuralFeatures().get(3);
 	}
@@ -2278,6 +2505,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperatorCallExp_T2qvtrTransformation() {
 		return (EReference)tmapOperatorCallExpEClass.getEStructuralFeatures().get(4);
 	}
@@ -2287,6 +2515,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperatorCallExp_WmapModule() {
 		return (EReference)tmapOperatorCallExpEClass.getEStructuralFeatures().get(5);
 	}
@@ -2296,6 +2525,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOperatorCallExp_WmapOclExpression() {
 		return (EReference)tmapOperatorCallExpEClass.getEStructuralFeatures().get(6);
 	}
@@ -2305,6 +2535,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapOutPattern() {
 		return tmapOutPatternEClass;
 	}
@@ -2314,6 +2545,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapOutPattern_Success() {
 		return (EAttribute)tmapOutPatternEClass.getEStructuralFeatures().get(0);
 	}
@@ -2323,6 +2555,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOutPattern_T1atlPattern() {
 		return (EReference)tmapOutPatternEClass.getEStructuralFeatures().get(1);
 	}
@@ -2332,6 +2565,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOutPattern_T1atlRule() {
 		return (EReference)tmapOutPatternEClass.getEStructuralFeatures().get(2);
 	}
@@ -2341,6 +2575,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOutPattern_T2qvtrDomain() {
 		return (EReference)tmapOutPatternEClass.getEStructuralFeatures().get(3);
 	}
@@ -2350,6 +2585,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOutPattern_T2qvtrRelation() {
 		return (EReference)tmapOutPatternEClass.getEStructuralFeatures().get(4);
 	}
@@ -2359,6 +2595,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOutPattern_T2qvtrTypedModel() {
 		return (EReference)tmapOutPatternEClass.getEStructuralFeatures().get(5);
 	}
@@ -2368,6 +2605,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOutPattern_WmapMatchedRule() {
 		return (EReference)tmapOutPatternEClass.getEStructuralFeatures().get(6);
 	}
@@ -2377,6 +2615,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapOutPattern_WmapOclMetamodel() {
 		return (EReference)tmapOutPatternEClass.getEStructuralFeatures().get(7);
 	}
@@ -2386,6 +2625,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapSimpleInPatternElement() {
 		return tmapSimpleInPatternElementEClass;
 	}
@@ -2395,6 +2635,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapSimpleInPatternElement_T0elementName() {
 		return (EAttribute)tmapSimpleInPatternElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -2404,6 +2645,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleInPatternElement_T1atlElement() {
 		return (EReference)tmapSimpleInPatternElementEClass.getEStructuralFeatures().get(1);
 	}
@@ -2413,6 +2655,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleInPatternElement_T1atlPattern() {
 		return (EReference)tmapSimpleInPatternElementEClass.getEStructuralFeatures().get(2);
 	}
@@ -2422,6 +2665,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleInPatternElement_T1atlRule() {
 		return (EReference)tmapSimpleInPatternElementEClass.getEStructuralFeatures().get(3);
 	}
@@ -2431,6 +2675,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleInPatternElement_T2qvtrDomain() {
 		return (EReference)tmapSimpleInPatternElementEClass.getEStructuralFeatures().get(4);
 	}
@@ -2440,6 +2685,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleInPatternElement_T2qvtrPattern() {
 		return (EReference)tmapSimpleInPatternElementEClass.getEStructuralFeatures().get(5);
 	}
@@ -2449,6 +2695,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleInPatternElement_T2qvtrRelation() {
 		return (EReference)tmapSimpleInPatternElementEClass.getEStructuralFeatures().get(6);
 	}
@@ -2458,6 +2705,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleInPatternElement_T2qvtrTemplate() {
 		return (EReference)tmapSimpleInPatternElementEClass.getEStructuralFeatures().get(7);
 	}
@@ -2467,6 +2715,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleInPatternElement_T2qvtrVariable() {
 		return (EReference)tmapSimpleInPatternElementEClass.getEStructuralFeatures().get(8);
 	}
@@ -2476,6 +2725,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleInPatternElement_WmapInPattern() {
 		return (EReference)tmapSimpleInPatternElementEClass.getEStructuralFeatures().get(9);
 	}
@@ -2485,6 +2735,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleInPatternElement_WmapMatchedRule() {
 		return (EReference)tmapSimpleInPatternElementEClass.getEStructuralFeatures().get(10);
 	}
@@ -2494,6 +2745,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleInPatternElement_WmapVariable() {
 		return (EReference)tmapSimpleInPatternElementEClass.getEStructuralFeatures().get(11);
 	}
@@ -2503,6 +2755,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapSimpleOutPatternElement() {
 		return tmapSimpleOutPatternElementEClass;
 	}
@@ -2512,6 +2765,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapSimpleOutPatternElement_Success() {
 		return (EAttribute)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -2521,6 +2775,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapSimpleOutPatternElement_T0elementName() {
 		return (EAttribute)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(1);
 	}
@@ -2530,6 +2785,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleOutPatternElement_T1atlElement() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(2);
 	}
@@ -2539,6 +2795,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleOutPatternElement_T1atlPattern() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(3);
 	}
@@ -2548,6 +2805,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleOutPatternElement_T1atlRule() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(4);
 	}
@@ -2557,6 +2815,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleOutPatternElement_T2qvtrDomain() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(5);
 	}
@@ -2566,6 +2825,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleOutPatternElement_T2qvtrPattern() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(6);
 	}
@@ -2575,6 +2835,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleOutPatternElement_T2qvtrRelation() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(7);
 	}
@@ -2584,6 +2845,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleOutPatternElement_T2qvtrTemplate() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(8);
 	}
@@ -2593,6 +2855,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleOutPatternElement_T2qvtrVariable() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(9);
 	}
@@ -2602,6 +2865,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleOutPatternElement_WmapMatchedRule() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(10);
 	}
@@ -2611,6 +2875,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleOutPatternElement_WmapOutPattern() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(11);
 	}
@@ -2620,6 +2885,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapSimpleOutPatternElement_WmapVariable() {
 		return (EReference)tmapSimpleOutPatternElementEClass.getEStructuralFeatures().get(12);
 	}
@@ -2629,6 +2895,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapStringExp() {
 		return tmapStringExpEClass;
 	}
@@ -2638,6 +2905,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapStringExp_Dispatcher() {
 		return (EReference)tmapStringExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -2647,6 +2915,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapStringExp_T0symbol() {
 		return (EAttribute)tmapStringExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -2656,6 +2925,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapVariable() {
 		return tmapVariableEClass;
 	}
@@ -2665,6 +2935,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapVariable_Success() {
 		return (EAttribute)tmapVariableEClass.getEStructuralFeatures().get(0);
 	}
@@ -2674,6 +2945,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapVariable_T1atlVariable() {
 		return (EReference)tmapVariableEClass.getEStructuralFeatures().get(1);
 	}
@@ -2683,6 +2955,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapVariable_T2qvtrVariable() {
 		return (EReference)tmapVariableEClass.getEStructuralFeatures().get(2);
 	}
@@ -2692,6 +2965,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapVariableExp() {
 		return tmapVariableExpEClass;
 	}
@@ -2701,6 +2975,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapVariableExp_Dispatcher() {
 		return (EReference)tmapVariableExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -2710,6 +2985,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getTmapVariableExp_T0varName() {
 		return (EAttribute)tmapVariableExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -2719,6 +2995,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapVariableExp_T1atlVariable() {
 		return (EReference)tmapVariableExpEClass.getEStructuralFeatures().get(2);
 	}
@@ -2728,6 +3005,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapVariableExp_WmapVariableExp_referredVariable() {
 		return (EReference)tmapVariableExpEClass.getEStructuralFeatures().get(3);
 	}
@@ -2737,6 +3015,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapVariableExp_referredVariable_Helper() {
 		return tmapVariableExp_referredVariable_HelperEClass;
 	}
@@ -2746,6 +3025,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapVariableExp_referredVariable_Helper_Dispatcher() {
 		return (EReference)tmapVariableExp_referredVariable_HelperEClass.getEStructuralFeatures().get(0);
 	}
@@ -2755,6 +3035,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapVariableExp_referredVariable_Helper_T1atlHelper() {
 		return (EReference)tmapVariableExp_referredVariable_HelperEClass.getEStructuralFeatures().get(1);
 	}
@@ -2764,6 +3045,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapVariableExp_referredVariable_Helper_T1atlVariable() {
 		return (EReference)tmapVariableExp_referredVariable_HelperEClass.getEStructuralFeatures().get(2);
 	}
@@ -2773,6 +3055,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapVariableExp_referredVariable_Helper_T2qvtrVariable() {
 		return (EReference)tmapVariableExp_referredVariable_HelperEClass.getEStructuralFeatures().get(3);
 	}
@@ -2782,6 +3065,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTmapVariableExp_referredVariable_VariableDeclaration() {
 		return tmapVariableExp_referredVariable_VariableDeclarationEClass;
 	}
@@ -2791,6 +3075,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapVariableExp_referredVariable_VariableDeclaration_Dispatcher() {
 		return (EReference)tmapVariableExp_referredVariable_VariableDeclarationEClass.getEStructuralFeatures().get(0);
 	}
@@ -2800,6 +3085,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapVariableExp_referredVariable_VariableDeclaration_T1atlVariable() {
 		return (EReference)tmapVariableExp_referredVariable_VariableDeclarationEClass.getEStructuralFeatures().get(1);
 	}
@@ -2809,6 +3095,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTmapVariableExp_referredVariable_VariableDeclaration_T2qvtrVariable() {
 		return (EReference)tmapVariableExp_referredVariable_VariableDeclarationEClass.getEStructuralFeatures().get(2);
 	}
@@ -2818,6 +3105,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public trace_ATL2QVTrFactory gettrace_ATL2QVTrFactory() {
 		return (trace_ATL2QVTrFactory)getEFactoryInstance();
 	}
@@ -2980,6 +3268,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		createEAttribute(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__T0RULE_NAME);
 		createEReference(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__T1ATL_MODULE);
 		createEReference(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__T1MATCHED_RULE);
+		createEReference(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__T2_1);
 		createEReference(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__T2QVTR_RELATION);
 		createEReference(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__T2QVTR_TRANSFORMATION);
 		createEReference(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__WMAP_MODULE);
@@ -2998,6 +3287,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		createEReference(tmapModuleEClass, TMAP_MODULE__T2_1);
 		createEReference(tmapModuleEClass, TMAP_MODULE__T2_2);
 		createEReference(tmapModuleEClass, TMAP_MODULE__T2_3);
+		createEReference(tmapModuleEClass, TMAP_MODULE__T2_4);
 		createEReference(tmapModuleEClass, TMAP_MODULE__T2QVTR_TRANSFORMATION);
 
 		tmapNavigationOrAttributeCallExp_HelperEClass = createEClass(TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER);
@@ -3361,6 +3651,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEAttribute(getTmapMatchedRule_T0ruleName(), ecorePackage.getEString(), "t0ruleName", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_T1atlModule(), theATLPackage.getModule(), null, "t1atlModule", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_T1matchedRule(), theATLPackage.getMatchedRule(), null, "t1matchedRule", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTmapMatchedRule_T2_1(), theQVTrelationPackage.getSharedVariable(), null, "t2_1", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_T2qvtrRelation(), theQVTrelationPackage.getRelation(), null, "t2qvtrRelation", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_T2qvtrTransformation(), theQVTrelationPackage.getRelationalTransformation(), null, "t2qvtrTransformation", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_WmapModule(), this.getTmapModule(), null, "wmapModule", null, 0, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3378,7 +3669,8 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getTmapModule_T1atlModule(), theATLPackage.getModule(), null, "t1atlModule", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapModule_T2_1(), thePivotPackage.getPackage(), null, "t2_1", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapModule_T2_2(), thePivotPackage.getParameterVariable(), null, "t2_2", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTmapModule_T2_3(), theQVTrelationPackage.getRelationModel(), null, "t2_3", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTmapModule_T2_3(), theQVTbasePackage.getTypedModel(), null, "t2_3", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTmapModule_T2_4(), theQVTrelationPackage.getRelationModel(), null, "t2_4", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapModule_T2qvtrTransformation(), theQVTrelationPackage.getRelationalTransformation(), null, "t2qvtrTransformation", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tmapNavigationOrAttributeCallExp_HelperEClass, TmapNavigationOrAttributeCallExp_Helper.class, "TmapNavigationOrAttributeCallExp_Helper", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -4215,6 +4507,12 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 			   "referredDomain", "atl"
 		   });
 		addAnnotation
+		  (getTmapMatchedRule_T2_1(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
 		  (getTmapMatchedRule_T2qvtrRelation(),
 		   source,
 		   new String[] {
@@ -4276,6 +4574,12 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		   });
 		addAnnotation
 		  (getTmapModule_T2_3(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapModule_T2_4(),
 		   source,
 		   new String[] {
 			   "referredDomain", "qvtr"

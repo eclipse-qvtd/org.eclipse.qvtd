@@ -22,6 +22,8 @@ import org.eclipse.ocl.pivot.ParameterVariable;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage;
 
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 
@@ -40,6 +42,7 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapModuleImpl#getT2_1 <em>T2 1</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapModuleImpl#getT2_2 <em>T2 2</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapModuleImpl#getT2_3 <em>T2 3</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapModuleImpl#getT2_4 <em>T2 4</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapModuleImpl#getT2qvtrTransformation <em>T2qvtr Transformation</em>}</li>
  * </ul>
  *
@@ -104,7 +107,17 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 	 * @generated
 	 * @ordered
 	 */
-	protected RelationModel t2_3;
+	protected TypedModel t2_3;
+
+	/**
+	 * The cached value of the '{@link #getT2_4() <em>T2 4</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getT2_4()
+	 * @generated
+	 * @ordered
+	 */
+	protected RelationModel t2_4;
 
 	/**
 	 * The cached value of the '{@link #getT2qvtrTransformation() <em>T2qvtr Transformation</em>}' reference.
@@ -140,6 +153,7 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getT0txName() {
 		return t0txName;
 	}
@@ -149,6 +163,7 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT0txName(String newT0txName) {
 		String oldT0txName = t0txName;
 		t0txName = newT0txName;
@@ -161,6 +176,7 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.m2m.atl.common.ATL.Module getT1atlModule() {
 		if (t1atlModule != null && t1atlModule.eIsProxy()) {
 			InternalEObject oldT1atlModule = (InternalEObject)t1atlModule;
@@ -187,6 +203,7 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlModule(org.eclipse.m2m.atl.common.ATL.Module newT1atlModule) {
 		org.eclipse.m2m.atl.common.ATL.Module oldT1atlModule = t1atlModule;
 		t1atlModule = newT1atlModule;
@@ -199,6 +216,7 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.ocl.pivot.Package getT2_1() {
 		if (t2_1 != null && t2_1.eIsProxy()) {
 			InternalEObject oldT2_1 = (InternalEObject)t2_1;
@@ -225,6 +243,7 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2_1(org.eclipse.ocl.pivot.Package newT2_1) {
 		org.eclipse.ocl.pivot.Package oldT2_1 = t2_1;
 		t2_1 = newT2_1;
@@ -237,6 +256,7 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ParameterVariable getT2_2() {
 		if (t2_2 != null && t2_2.eIsProxy()) {
 			InternalEObject oldT2_2 = (InternalEObject)t2_2;
@@ -263,6 +283,7 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2_2(ParameterVariable newT2_2) {
 		ParameterVariable oldT2_2 = t2_2;
 		t2_2 = newT2_2;
@@ -275,10 +296,11 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RelationModel getT2_3() {
+	@Override
+	public TypedModel getT2_3() {
 		if (t2_3 != null && t2_3.eIsProxy()) {
 			InternalEObject oldT2_3 = (InternalEObject)t2_3;
-			t2_3 = (RelationModel)eResolveProxy(oldT2_3);
+			t2_3 = (TypedModel)eResolveProxy(oldT2_3);
 			if (t2_3 != oldT2_3) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_MODULE__T2_3, oldT2_3, t2_3));
@@ -292,7 +314,7 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RelationModel basicGetT2_3() {
+	public TypedModel basicGetT2_3() {
 		return t2_3;
 	}
 
@@ -301,8 +323,9 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setT2_3(RelationModel newT2_3) {
-		RelationModel oldT2_3 = t2_3;
+	@Override
+	public void setT2_3(TypedModel newT2_3) {
+		TypedModel oldT2_3 = t2_3;
 		t2_3 = newT2_3;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_MODULE__T2_3, oldT2_3, t2_3));
@@ -313,6 +336,47 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public RelationModel getT2_4() {
+		if (t2_4 != null && t2_4.eIsProxy()) {
+			InternalEObject oldT2_4 = (InternalEObject)t2_4;
+			t2_4 = (RelationModel)eResolveProxy(oldT2_4);
+			if (t2_4 != oldT2_4) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_MODULE__T2_4, oldT2_4, t2_4));
+			}
+		}
+		return t2_4;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RelationModel basicGetT2_4() {
+		return t2_4;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setT2_4(RelationModel newT2_4) {
+		RelationModel oldT2_4 = t2_4;
+		t2_4 = newT2_4;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_MODULE__T2_4, oldT2_4, t2_4));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public RelationalTransformation getT2qvtrTransformation() {
 		if (t2qvtrTransformation != null && t2qvtrTransformation.eIsProxy()) {
 			InternalEObject oldT2qvtrTransformation = (InternalEObject)t2qvtrTransformation;
@@ -339,6 +403,7 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrTransformation(RelationalTransformation newT2qvtrTransformation) {
 		RelationalTransformation oldT2qvtrTransformation = t2qvtrTransformation;
 		t2qvtrTransformation = newT2qvtrTransformation;
@@ -368,6 +433,9 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 			case trace_ATL2QVTrPackage.TMAP_MODULE__T2_3:
 				if (resolve) return getT2_3();
 				return basicGetT2_3();
+			case trace_ATL2QVTrPackage.TMAP_MODULE__T2_4:
+				if (resolve) return getT2_4();
+				return basicGetT2_4();
 			case trace_ATL2QVTrPackage.TMAP_MODULE__T2QVTR_TRANSFORMATION:
 				if (resolve) return getT2qvtrTransformation();
 				return basicGetT2qvtrTransformation();
@@ -396,7 +464,10 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 				setT2_2((ParameterVariable)newValue);
 				return;
 			case trace_ATL2QVTrPackage.TMAP_MODULE__T2_3:
-				setT2_3((RelationModel)newValue);
+				setT2_3((TypedModel)newValue);
+				return;
+			case trace_ATL2QVTrPackage.TMAP_MODULE__T2_4:
+				setT2_4((RelationModel)newValue);
 				return;
 			case trace_ATL2QVTrPackage.TMAP_MODULE__T2QVTR_TRANSFORMATION:
 				setT2qvtrTransformation((RelationalTransformation)newValue);
@@ -426,7 +497,10 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 				setT2_2((ParameterVariable)null);
 				return;
 			case trace_ATL2QVTrPackage.TMAP_MODULE__T2_3:
-				setT2_3((RelationModel)null);
+				setT2_3((TypedModel)null);
+				return;
+			case trace_ATL2QVTrPackage.TMAP_MODULE__T2_4:
+				setT2_4((RelationModel)null);
 				return;
 			case trace_ATL2QVTrPackage.TMAP_MODULE__T2QVTR_TRANSFORMATION:
 				setT2qvtrTransformation((RelationalTransformation)null);
@@ -453,6 +527,8 @@ public class TmapModuleImpl extends ExecutionImpl implements TmapModule {
 				return t2_2 != null;
 			case trace_ATL2QVTrPackage.TMAP_MODULE__T2_3:
 				return t2_3 != null;
+			case trace_ATL2QVTrPackage.TMAP_MODULE__T2_4:
+				return t2_4 != null;
 			case trace_ATL2QVTrPackage.TMAP_MODULE__T2QVTR_TRANSFORMATION:
 				return t2qvtrTransformation != null;
 		}

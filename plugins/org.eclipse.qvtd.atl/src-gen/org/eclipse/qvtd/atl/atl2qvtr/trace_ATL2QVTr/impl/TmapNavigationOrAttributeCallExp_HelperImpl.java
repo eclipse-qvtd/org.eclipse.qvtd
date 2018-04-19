@@ -181,6 +181,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DmapOclExpression getDispatcher() {
 		if (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__DISPATCHER) return null;
 		return (DmapOclExpression)eInternalContainer();
@@ -201,6 +202,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDispatcher(DmapOclExpression newDispatcher) {
 		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__DISPATCHER && newDispatcher != null)) {
 			if (EcoreUtil.isAncestor(this, newDispatcher))
@@ -222,6 +224,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getT0propertyName() {
 		return t0propertyName;
 	}
@@ -231,6 +234,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT0propertyName(String newT0propertyName) {
 		String oldT0propertyName = t0propertyName;
 		t0propertyName = newT0propertyName;
@@ -243,6 +247,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OclExpression getT1atlSource() {
 		if (t1atlSource != null && t1atlSource.eIsProxy()) {
 			InternalEObject oldT1atlSource = (InternalEObject)t1atlSource;
@@ -269,6 +274,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlSource(OclExpression newT1atlSource) {
 		OclExpression oldT1atlSource = t1atlSource;
 		t1atlSource = newT1atlSource;
@@ -281,6 +287,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Operation getT2qvtrOperation() {
 		if (t2qvtrOperation != null && t2qvtrOperation.eIsProxy()) {
 			InternalEObject oldT2qvtrOperation = (InternalEObject)t2qvtrOperation;
@@ -307,6 +314,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrOperation(Operation newT2qvtrOperation) {
 		Operation oldT2qvtrOperation = t2qvtrOperation;
 		t2qvtrOperation = newT2qvtrOperation;
@@ -319,6 +327,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VariableExp getT2qvtrSource() {
 		if (t2qvtrSource != null && t2qvtrSource.eIsProxy()) {
 			InternalEObject oldT2qvtrSource = (InternalEObject)t2qvtrSource;
@@ -345,6 +354,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrSource(VariableExp newT2qvtrSource) {
 		VariableExp oldT2qvtrSource = t2qvtrSource;
 		t2qvtrSource = newT2qvtrSource;
@@ -357,6 +367,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getT2qvtrSourceArgument() {
 		if (t2qvtrSourceArgument != null && t2qvtrSourceArgument.eIsProxy()) {
 			InternalEObject oldT2qvtrSourceArgument = (InternalEObject)t2qvtrSourceArgument;
@@ -383,6 +394,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrSourceArgument(OCLExpression newT2qvtrSourceArgument) {
 		OCLExpression oldT2qvtrSourceArgument = t2qvtrSourceArgument;
 		t2qvtrSourceArgument = newT2qvtrSourceArgument;
@@ -395,6 +407,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RelationalTransformation getT2qvtrTransformation() {
 		if (t2qvtrTransformation != null && t2qvtrTransformation.eIsProxy()) {
 			InternalEObject oldT2qvtrTransformation = (InternalEObject)t2qvtrTransformation;
@@ -421,6 +434,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrTransformation(RelationalTransformation newT2qvtrTransformation) {
 		RelationalTransformation oldT2qvtrTransformation = t2qvtrTransformation;
 		t2qvtrTransformation = newT2qvtrTransformation;
@@ -433,6 +447,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DmapHelper getWmapHelper() {
 		if (wmapHelper != null && wmapHelper.eIsProxy()) {
 			InternalEObject oldWmapHelper = (InternalEObject)wmapHelper;
@@ -459,6 +474,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWmapHelper(DmapHelper newWmapHelper) {
 		DmapHelper oldWmapHelper = wmapHelper;
 		wmapHelper = newWmapHelper;
@@ -471,6 +487,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapModule getWmapModule() {
 		if (wmapModule != null && wmapModule.eIsProxy()) {
 			InternalEObject oldWmapModule = (InternalEObject)wmapModule;
@@ -497,6 +514,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWmapModule(TmapModule newWmapModule) {
 		TmapModule oldWmapModule = wmapModule;
 		wmapModule = newWmapModule;
@@ -509,6 +527,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DmapOclExpression getWmapOclExpression() {
 		if (wmapOclExpression != null && wmapOclExpression.eIsProxy()) {
 			InternalEObject oldWmapOclExpression = (InternalEObject)wmapOclExpression;
@@ -535,6 +554,7 @@ public class TmapNavigationOrAttributeCallExp_HelperImpl extends ImapOclExpressi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWmapOclExpression(DmapOclExpression newWmapOclExpression) {
 		DmapOclExpression oldWmapOclExpression = wmapOclExpression;
 		wmapOclExpression = newWmapOclExpression;

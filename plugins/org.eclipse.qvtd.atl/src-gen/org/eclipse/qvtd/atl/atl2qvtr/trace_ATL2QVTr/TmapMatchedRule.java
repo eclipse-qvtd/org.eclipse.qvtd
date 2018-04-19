@@ -14,6 +14,7 @@ import org.eclipse.m2m.atl.common.ATL.MatchedRule;
 
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
 
 import org.eclipse.qvtd.runtime.qvttrace.Execution;
 
@@ -30,6 +31,7 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT0ruleName <em>T0rule Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT1atlModule <em>T1atl Module</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT1matchedRule <em>T1matched Rule</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT2_1 <em>T2 1</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT2qvtrRelation <em>T2qvtr Relation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT2qvtrTransformation <em>T2qvtr Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getWmapModule <em>Wmap Module</em>}</li>
@@ -147,6 +149,33 @@ public interface TmapMatchedRule extends Execution {
 	 * @generated
 	 */
 	void setT1matchedRule(MatchedRule value);
+
+	/**
+	 * Returns the value of the '<em><b>T2 1</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>T2 1</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T2 1</em>' reference.
+	 * @see #setT2_1(SharedVariable)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapMatchedRule_T2_1()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
+	 * @generated
+	 */
+	SharedVariable getT2_1();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapMatchedRule#getT2_1 <em>T2 1</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T2 1</em>' reference.
+	 * @see #getT2_1()
+	 * @generated
+	 */
+	void setT2_1(SharedVariable value);
 
 	/**
 	 * Returns the value of the '<em><b>T2qvtr Relation</b></em>' reference.

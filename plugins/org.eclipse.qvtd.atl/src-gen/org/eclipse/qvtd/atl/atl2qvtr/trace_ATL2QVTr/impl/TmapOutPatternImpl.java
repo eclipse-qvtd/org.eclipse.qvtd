@@ -167,6 +167,7 @@ public class TmapOutPatternImpl extends ExecutionImpl implements TmapOutPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Boolean getSuccess() {
 		return success;
 	}
@@ -176,6 +177,7 @@ public class TmapOutPatternImpl extends ExecutionImpl implements TmapOutPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSuccess(Boolean newSuccess) {
 		Boolean oldSuccess = success;
 		success = newSuccess;
@@ -188,6 +190,7 @@ public class TmapOutPatternImpl extends ExecutionImpl implements TmapOutPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OutPattern getT1atlPattern() {
 		if (t1atlPattern != null && t1atlPattern.eIsProxy()) {
 			InternalEObject oldT1atlPattern = (InternalEObject)t1atlPattern;
@@ -214,6 +217,7 @@ public class TmapOutPatternImpl extends ExecutionImpl implements TmapOutPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlPattern(OutPattern newT1atlPattern) {
 		OutPattern oldT1atlPattern = t1atlPattern;
 		t1atlPattern = newT1atlPattern;
@@ -226,6 +230,7 @@ public class TmapOutPatternImpl extends ExecutionImpl implements TmapOutPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MatchedRule getT1atlRule() {
 		if (t1atlRule != null && t1atlRule.eIsProxy()) {
 			InternalEObject oldT1atlRule = (InternalEObject)t1atlRule;
@@ -252,6 +257,7 @@ public class TmapOutPatternImpl extends ExecutionImpl implements TmapOutPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlRule(MatchedRule newT1atlRule) {
 		MatchedRule oldT1atlRule = t1atlRule;
 		t1atlRule = newT1atlRule;
@@ -264,6 +270,7 @@ public class TmapOutPatternImpl extends ExecutionImpl implements TmapOutPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RelationDomain getT2qvtrDomain() {
 		if (t2qvtrDomain != null && t2qvtrDomain.eIsProxy()) {
 			InternalEObject oldT2qvtrDomain = (InternalEObject)t2qvtrDomain;
@@ -290,6 +297,7 @@ public class TmapOutPatternImpl extends ExecutionImpl implements TmapOutPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrDomain(RelationDomain newT2qvtrDomain) {
 		RelationDomain oldT2qvtrDomain = t2qvtrDomain;
 		t2qvtrDomain = newT2qvtrDomain;
@@ -302,6 +310,7 @@ public class TmapOutPatternImpl extends ExecutionImpl implements TmapOutPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Relation getT2qvtrRelation() {
 		if (t2qvtrRelation != null && t2qvtrRelation.eIsProxy()) {
 			InternalEObject oldT2qvtrRelation = (InternalEObject)t2qvtrRelation;
@@ -328,6 +337,7 @@ public class TmapOutPatternImpl extends ExecutionImpl implements TmapOutPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrRelation(Relation newT2qvtrRelation) {
 		Relation oldT2qvtrRelation = t2qvtrRelation;
 		t2qvtrRelation = newT2qvtrRelation;
@@ -340,6 +350,7 @@ public class TmapOutPatternImpl extends ExecutionImpl implements TmapOutPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypedModel getT2qvtrTypedModel() {
 		if (t2qvtrTypedModel != null && t2qvtrTypedModel.eIsProxy()) {
 			InternalEObject oldT2qvtrTypedModel = (InternalEObject)t2qvtrTypedModel;
@@ -366,6 +377,7 @@ public class TmapOutPatternImpl extends ExecutionImpl implements TmapOutPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrTypedModel(TypedModel newT2qvtrTypedModel) {
 		TypedModel oldT2qvtrTypedModel = t2qvtrTypedModel;
 		t2qvtrTypedModel = newT2qvtrTypedModel;
@@ -378,6 +390,7 @@ public class TmapOutPatternImpl extends ExecutionImpl implements TmapOutPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapMatchedRule getWmapMatchedRule() {
 		if (wmapMatchedRule != null && wmapMatchedRule.eIsProxy()) {
 			InternalEObject oldWmapMatchedRule = (InternalEObject)wmapMatchedRule;
@@ -404,6 +417,7 @@ public class TmapOutPatternImpl extends ExecutionImpl implements TmapOutPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWmapMatchedRule(TmapMatchedRule newWmapMatchedRule) {
 		TmapMatchedRule oldWmapMatchedRule = wmapMatchedRule;
 		wmapMatchedRule = newWmapMatchedRule;
@@ -416,6 +430,7 @@ public class TmapOutPatternImpl extends ExecutionImpl implements TmapOutPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapOclMetamodel getWmapOclMetamodel() {
 		if (wmapOclMetamodel != null && wmapOclMetamodel.eIsProxy()) {
 			InternalEObject oldWmapOclMetamodel = (InternalEObject)wmapOclMetamodel;
@@ -442,6 +457,7 @@ public class TmapOutPatternImpl extends ExecutionImpl implements TmapOutPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWmapOclMetamodel(TmapOclMetamodel newWmapOclMetamodel) {
 		TmapOclMetamodel oldWmapOclMetamodel = wmapOclMetamodel;
 		wmapOclMetamodel = newWmapOclMetamodel;

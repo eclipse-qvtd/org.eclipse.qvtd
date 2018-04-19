@@ -6,6 +6,7 @@
     name="Families2Persons_CG.qvtras" xmiidVersion="1">
   <ownedPackages xmi:id="6Fh3I" name="">
     <ownedClasses xsi:type="qvtr:RelationalTransformation" xmi:id="lSZ2I" name="Families2Persons">
+      <modelParameter xmi:id="mAGsf" isTrace="true" name="middle"/>
       <modelParameter xmi:id="z2sgS" name="Families" usedPackage="Families.ecore.oclas#ci1p7"/>
       <modelParameter xmi:id="v4ega" name="Persons" usedPackage="Persons.ecore.oclas#YknpD"/>
       <ownedContext xsi:type="pivot:ParameterVariable" xmi:id="DqXtJ" name="this" type="#lSZ2I"/>
@@ -139,6 +140,7 @@
         </domain>
         <variable xsi:type="qvtr:TemplateVariable" xmi:id="8tM8f" name="s" type="pivot:Class Families.ecore.oclas#r2YVU"/>
         <variable xsi:type="qvtr:TemplateVariable" xmi:id="9tM8f" name="t" type="pivot:Class Persons.ecore.oclas#pzC6s"/>
+        <variable xsi:type="qvtr:SharedVariable" isImplicit="true" name="trace" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR"/>
         <when>
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="isFemale" referredOperation="#N,BoB" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
@@ -181,6 +183,7 @@
         </domain>
         <variable xsi:type="qvtr:TemplateVariable" xmi:id="50ALF" name="s" type="pivot:Class Families.ecore.oclas#r2YVU"/>
         <variable xsi:type="qvtr:TemplateVariable" xmi:id="60ALF" name="t" type="pivot:Class Persons.ecore.oclas#q+x1v"/>
+        <variable xsi:type="qvtr:SharedVariable" isImplicit="true" name="trace" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR"/>
         <when>
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="not" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#DH5kA"

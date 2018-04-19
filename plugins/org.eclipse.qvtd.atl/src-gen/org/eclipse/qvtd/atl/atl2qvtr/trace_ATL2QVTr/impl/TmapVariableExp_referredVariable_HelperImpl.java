@@ -99,6 +99,7 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DmapVariableExp_referredVariable getDispatcher() {
 		if (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER) return null;
 		return (DmapVariableExp_referredVariable)eInternalContainer();
@@ -119,6 +120,7 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDispatcher(DmapVariableExp_referredVariable newDispatcher) {
 		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER && newDispatcher != null)) {
 			if (EcoreUtil.isAncestor(this, newDispatcher))
@@ -140,6 +142,7 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Helper getT1atlHelper() {
 		if (t1atlHelper != null && t1atlHelper.eIsProxy()) {
 			InternalEObject oldT1atlHelper = (InternalEObject)t1atlHelper;
@@ -166,6 +169,7 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlHelper(Helper newT1atlHelper) {
 		Helper oldT1atlHelper = t1atlHelper;
 		t1atlHelper = newT1atlHelper;
@@ -178,6 +182,7 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VariableDeclaration getT1atlVariable() {
 		if (t1atlVariable != null && t1atlVariable.eIsProxy()) {
 			InternalEObject oldT1atlVariable = (InternalEObject)t1atlVariable;
@@ -204,6 +209,7 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlVariable(VariableDeclaration newT1atlVariable) {
 		VariableDeclaration oldT1atlVariable = t1atlVariable;
 		t1atlVariable = newT1atlVariable;
@@ -216,6 +222,7 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.ocl.pivot.VariableDeclaration getT2qvtrVariable() {
 		if (t2qvtrVariable != null && t2qvtrVariable.eIsProxy()) {
 			InternalEObject oldT2qvtrVariable = (InternalEObject)t2qvtrVariable;
@@ -242,6 +249,7 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrVariable(org.eclipse.ocl.pivot.VariableDeclaration newT2qvtrVariable) {
 		org.eclipse.ocl.pivot.VariableDeclaration oldT2qvtrVariable = t2qvtrVariable;
 		t2qvtrVariable = newT2qvtrVariable;

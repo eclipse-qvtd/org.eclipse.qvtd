@@ -108,6 +108,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DmapOclExpression getDispatcher() {
 		if (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__DISPATCHER) return null;
 		return (DmapOclExpression)eInternalContainer();
@@ -128,6 +129,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDispatcher(DmapOclExpression newDispatcher) {
 		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__DISPATCHER && newDispatcher != null)) {
 			if (EcoreUtil.isAncestor(this, newDispatcher))
@@ -149,6 +151,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getT0varName() {
 		return t0varName;
 	}
@@ -158,6 +161,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT0varName(String newT0varName) {
 		String oldT0varName = t0varName;
 		t0varName = newT0varName;
@@ -170,6 +174,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VariableDeclaration getT1atlVariable() {
 		if (t1atlVariable != null && t1atlVariable.eIsProxy()) {
 			InternalEObject oldT1atlVariable = (InternalEObject)t1atlVariable;
@@ -196,6 +201,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlVariable(VariableDeclaration newT1atlVariable) {
 		VariableDeclaration oldT1atlVariable = t1atlVariable;
 		t1atlVariable = newT1atlVariable;
@@ -208,6 +214,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DmapVariableExp_referredVariable getWmapVariableExp_referredVariable() {
 		if (wmapVariableExp_referredVariable != null && wmapVariableExp_referredVariable.eIsProxy()) {
 			InternalEObject oldWmapVariableExp_referredVariable = (InternalEObject)wmapVariableExp_referredVariable;
@@ -234,6 +241,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWmapVariableExp_referredVariable(DmapVariableExp_referredVariable newWmapVariableExp_referredVariable) {
 		DmapVariableExp_referredVariable oldWmapVariableExp_referredVariable = wmapVariableExp_referredVariable;
 		wmapVariableExp_referredVariable = newWmapVariableExp_referredVariable;

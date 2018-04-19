@@ -165,6 +165,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DmapOclExpression getDispatcher() {
 		if (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_IF_EXP__DISPATCHER) return null;
 		return (DmapOclExpression)eInternalContainer();
@@ -185,6 +186,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDispatcher(DmapOclExpression newDispatcher) {
 		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_IF_EXP__DISPATCHER && newDispatcher != null)) {
 			if (EcoreUtil.isAncestor(this, newDispatcher))
@@ -206,6 +208,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OclExpression getT1atlCondition() {
 		if (t1atlCondition != null && t1atlCondition.eIsProxy()) {
 			InternalEObject oldT1atlCondition = (InternalEObject)t1atlCondition;
@@ -232,6 +235,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlCondition(OclExpression newT1atlCondition) {
 		OclExpression oldT1atlCondition = t1atlCondition;
 		t1atlCondition = newT1atlCondition;
@@ -244,6 +248,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OclExpression getT1atlElse() {
 		if (t1atlElse != null && t1atlElse.eIsProxy()) {
 			InternalEObject oldT1atlElse = (InternalEObject)t1atlElse;
@@ -270,6 +275,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlElse(OclExpression newT1atlElse) {
 		OclExpression oldT1atlElse = t1atlElse;
 		t1atlElse = newT1atlElse;
@@ -282,6 +288,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OclExpression getT1atlThen() {
 		if (t1atlThen != null && t1atlThen.eIsProxy()) {
 			InternalEObject oldT1atlThen = (InternalEObject)t1atlThen;
@@ -308,6 +315,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlThen(OclExpression newT1atlThen) {
 		OclExpression oldT1atlThen = t1atlThen;
 		t1atlThen = newT1atlThen;
@@ -320,6 +328,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getT2qvtrCondition() {
 		if (t2qvtrCondition != null && t2qvtrCondition.eIsProxy()) {
 			InternalEObject oldT2qvtrCondition = (InternalEObject)t2qvtrCondition;
@@ -346,6 +355,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrCondition(OCLExpression newT2qvtrCondition) {
 		OCLExpression oldT2qvtrCondition = t2qvtrCondition;
 		t2qvtrCondition = newT2qvtrCondition;
@@ -358,6 +368,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getT2qvtrElse() {
 		if (t2qvtrElse != null && t2qvtrElse.eIsProxy()) {
 			InternalEObject oldT2qvtrElse = (InternalEObject)t2qvtrElse;
@@ -384,6 +395,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrElse(OCLExpression newT2qvtrElse) {
 		OCLExpression oldT2qvtrElse = t2qvtrElse;
 		t2qvtrElse = newT2qvtrElse;
@@ -396,6 +408,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getT2qvtrThen() {
 		if (t2qvtrThen != null && t2qvtrThen.eIsProxy()) {
 			InternalEObject oldT2qvtrThen = (InternalEObject)t2qvtrThen;
@@ -422,6 +435,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrThen(OCLExpression newT2qvtrThen) {
 		OCLExpression oldT2qvtrThen = t2qvtrThen;
 		t2qvtrThen = newT2qvtrThen;
@@ -434,6 +448,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DmapOclExpression getWmapOclExpression() {
 		if (wmapOclExpression != null && wmapOclExpression.eIsProxy()) {
 			InternalEObject oldWmapOclExpression = (InternalEObject)wmapOclExpression;
@@ -460,6 +475,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWmapOclExpression(DmapOclExpression newWmapOclExpression) {
 		DmapOclExpression oldWmapOclExpression = wmapOclExpression;
 		wmapOclExpression = newWmapOclExpression;
@@ -472,6 +488,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DmapOclExpression getWmapOclExpression1() {
 		if (wmapOclExpression1 != null && wmapOclExpression1.eIsProxy()) {
 			InternalEObject oldWmapOclExpression1 = (InternalEObject)wmapOclExpression1;
@@ -498,6 +515,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWmapOclExpression1(DmapOclExpression newWmapOclExpression1) {
 		DmapOclExpression oldWmapOclExpression1 = wmapOclExpression1;
 		wmapOclExpression1 = newWmapOclExpression1;
@@ -510,6 +528,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DmapOclExpression getWmapOclExpression2() {
 		if (wmapOclExpression2 != null && wmapOclExpression2.eIsProxy()) {
 			InternalEObject oldWmapOclExpression2 = (InternalEObject)wmapOclExpression2;
@@ -536,6 +555,7 @@ public class TmapIfExpImpl extends ImapOclExpressionImpl implements TmapIfExp {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWmapOclExpression2(DmapOclExpression newWmapOclExpression2) {
 		DmapOclExpression oldWmapOclExpression2 = wmapOclExpression2;
 		wmapOclExpression2 = newWmapOclExpression2;

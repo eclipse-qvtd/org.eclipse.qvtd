@@ -180,6 +180,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getT0propertyName() {
 		return t0propertyName;
 	}
@@ -189,6 +190,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT0propertyName(String newT0propertyName) {
 		String oldT0propertyName = t0propertyName;
 		t0propertyName = newT0propertyName;
@@ -201,6 +203,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Binding getT1atlBinding() {
 		if (t1atlBinding != null && t1atlBinding.eIsProxy()) {
 			InternalEObject oldT1atlBinding = (InternalEObject)t1atlBinding;
@@ -227,6 +230,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlBinding(Binding newT1atlBinding) {
 		Binding oldT1atlBinding = t1atlBinding;
 		t1atlBinding = newT1atlBinding;
@@ -239,6 +243,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OclExpression getT1atlExpression() {
 		if (t1atlExpression != null && t1atlExpression.eIsProxy()) {
 			InternalEObject oldT1atlExpression = (InternalEObject)t1atlExpression;
@@ -265,6 +270,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlExpression(OclExpression newT1atlExpression) {
 		OclExpression oldT1atlExpression = t1atlExpression;
 		t1atlExpression = newT1atlExpression;
@@ -277,6 +283,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SimpleOutPatternElement getT1atlOutPatternElement() {
 		if (t1atlOutPatternElement != null && t1atlOutPatternElement.eIsProxy()) {
 			InternalEObject oldT1atlOutPatternElement = (InternalEObject)t1atlOutPatternElement;
@@ -303,6 +310,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT1atlOutPatternElement(SimpleOutPatternElement newT1atlOutPatternElement) {
 		SimpleOutPatternElement oldT1atlOutPatternElement = t1atlOutPatternElement;
 		t1atlOutPatternElement = newT1atlOutPatternElement;
@@ -315,6 +323,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getT2qvtrExpression() {
 		if (t2qvtrExpression != null && t2qvtrExpression.eIsProxy()) {
 			InternalEObject oldT2qvtrExpression = (InternalEObject)t2qvtrExpression;
@@ -341,6 +350,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrExpression(OCLExpression newT2qvtrExpression) {
 		OCLExpression oldT2qvtrExpression = t2qvtrExpression;
 		t2qvtrExpression = newT2qvtrExpression;
@@ -353,6 +363,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PropertyTemplateItem getT2qvtrPart() {
 		if (t2qvtrPart != null && t2qvtrPart.eIsProxy()) {
 			InternalEObject oldT2qvtrPart = (InternalEObject)t2qvtrPart;
@@ -379,6 +390,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrPart(PropertyTemplateItem newT2qvtrPart) {
 		PropertyTemplateItem oldT2qvtrPart = t2qvtrPart;
 		t2qvtrPart = newT2qvtrPart;
@@ -391,6 +403,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ObjectTemplateExp getT2qvtrTemplate() {
 		if (t2qvtrTemplate != null && t2qvtrTemplate.eIsProxy()) {
 			InternalEObject oldT2qvtrTemplate = (InternalEObject)t2qvtrTemplate;
@@ -417,6 +430,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setT2qvtrTemplate(ObjectTemplateExp newT2qvtrTemplate) {
 		ObjectTemplateExp oldT2qvtrTemplate = t2qvtrTemplate;
 		t2qvtrTemplate = newT2qvtrTemplate;
@@ -429,6 +443,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DmapOclExpression getWmapOclExpression() {
 		if (wmapOclExpression != null && wmapOclExpression.eIsProxy()) {
 			InternalEObject oldWmapOclExpression = (InternalEObject)wmapOclExpression;
@@ -455,6 +470,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWmapOclExpression(DmapOclExpression newWmapOclExpression) {
 		DmapOclExpression oldWmapOclExpression = wmapOclExpression;
 		wmapOclExpression = newWmapOclExpression;
@@ -467,6 +483,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TmapSimpleOutPatternElement getWmapSimpleOutPatternElement() {
 		if (wmapSimpleOutPatternElement != null && wmapSimpleOutPatternElement.eIsProxy()) {
 			InternalEObject oldWmapSimpleOutPatternElement = (InternalEObject)wmapSimpleOutPatternElement;
@@ -493,6 +510,7 @@ public class TmapBindingImpl extends ExecutionImpl implements TmapBinding {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWmapSimpleOutPatternElement(TmapSimpleOutPatternElement newWmapSimpleOutPatternElement) {
 		TmapSimpleOutPatternElement oldWmapSimpleOutPatternElement = wmapSimpleOutPatternElement;
 		wmapSimpleOutPatternElement = newWmapSimpleOutPatternElement;
