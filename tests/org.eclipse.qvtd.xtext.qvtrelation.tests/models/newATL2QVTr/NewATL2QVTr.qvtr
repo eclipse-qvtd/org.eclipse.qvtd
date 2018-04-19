@@ -259,7 +259,12 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::atl2qvtr {
 				name = ruleName,
 				isAbstract = matchedRule.isAbstract,
 				isTopLevel = true,
-				transformation = qvtrTransformation
+				transformation = qvtrTransformation,
+				variable = :SharedVariable {
+					name = 'trace',
+					isTrace = true,
+					type = pivotMM::OclElement
+				}
 			};
 			when {
 				mapModule(atlModule, qvtrTransformation);
@@ -302,6 +307,10 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::atl2qvtr {
 					name = 'this',
 					type = qvtrTransformation,
 					isRequired = true
+				},
+				modelParameter = : qvtbMM::TypedModel {
+					isImplicit = true,
+					name = 'middle'
 				}
 			};
 		}
