@@ -41,6 +41,8 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl#getUsedPackage <em>Used Package</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl#getDependsOn <em>Depends On</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl#getOwnedContext <em>Owned Context</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl#isIsPrimitive <em>Is Primitive</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl#isIsTrace <em>Is Trace</em>}</li>
  * </ul>
  *
  * @generated
@@ -75,6 +77,46 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * @ordered
 	 */
 	protected Variable ownedContext;
+
+	/**
+	 * The default value of the '{@link #isIsPrimitive() <em>Is Primitive</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsPrimitive()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_PRIMITIVE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsPrimitive() <em>Is Primitive</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsPrimitive()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isPrimitive = IS_PRIMITIVE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isIsTrace() <em>Is Trace</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsTrace()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_TRACE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsTrace() <em>Is Trace</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsTrace()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isTrace = IS_TRACE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -217,6 +259,52 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * @generated
 	 */
 	@Override
+	public boolean isIsPrimitive() {
+		return isPrimitive;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsPrimitive(boolean newIsPrimitive) {
+		boolean oldIsPrimitive = isPrimitive;
+		isPrimitive = newIsPrimitive;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.TYPED_MODEL__IS_PRIMITIVE, oldIsPrimitive, isPrimitive));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsTrace() {
+		return isTrace;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsTrace(boolean newIsTrace) {
+		boolean oldIsTrace = isTrace;
+		isTrace = newIsTrace;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.TYPED_MODEL__IS_TRACE, oldIsTrace, isTrace));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTbasePackage.TYPED_MODEL__TRANSFORMATION:
@@ -273,6 +361,10 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 				return getDependsOn();
 			case QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT:
 				return getOwnedContext();
+			case QVTbasePackage.TYPED_MODEL__IS_PRIMITIVE:
+				return isIsPrimitive();
+			case QVTbasePackage.TYPED_MODEL__IS_TRACE:
+				return isIsTrace();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -300,6 +392,12 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 			case QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT:
 				setOwnedContext((Variable)newValue);
 				return;
+			case QVTbasePackage.TYPED_MODEL__IS_PRIMITIVE:
+				setIsPrimitive((Boolean)newValue);
+				return;
+			case QVTbasePackage.TYPED_MODEL__IS_TRACE:
+				setIsTrace((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -324,6 +422,12 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 			case QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT:
 				setOwnedContext((Variable)null);
 				return;
+			case QVTbasePackage.TYPED_MODEL__IS_PRIMITIVE:
+				setIsPrimitive(IS_PRIMITIVE_EDEFAULT);
+				return;
+			case QVTbasePackage.TYPED_MODEL__IS_TRACE:
+				setIsTrace(IS_TRACE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -344,8 +448,30 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 				return dependsOn != null && !dependsOn.isEmpty();
 			case QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT:
 				return ownedContext != null;
+			case QVTbasePackage.TYPED_MODEL__IS_PRIMITIVE:
+				return isPrimitive != IS_PRIMITIVE_EDEFAULT;
+			case QVTbasePackage.TYPED_MODEL__IS_TRACE:
+				return isTrace != IS_TRACE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (isPrimitive: ");
+		result.append(isPrimitive);
+		result.append(", isTrace: ");
+		result.append(isTrace);
+		result.append(')');
+		return result.toString();
 	}
 
 	/**

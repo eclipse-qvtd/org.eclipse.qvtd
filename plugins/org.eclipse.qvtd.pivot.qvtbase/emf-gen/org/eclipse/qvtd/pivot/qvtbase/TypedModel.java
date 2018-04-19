@@ -28,6 +28,8 @@ import org.eclipse.ocl.pivot.Variable;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#getUsedPackage <em>Used Package</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#getDependsOn <em>Depends On</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#getOwnedContext <em>Owned Context</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#isIsPrimitive <em>Is Primitive</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#isIsTrace <em>Is Trace</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTypedModel()
@@ -125,5 +127,59 @@ public interface TypedModel extends NamedElement {
 	 * @generated
 	 */
 	void setOwnedContext(Variable value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Primitive</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The TypedModel is for a primitive domain. It may be added automatically.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Is Primitive</em>' attribute.
+	 * @see #setIsPrimitive(boolean)
+	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTypedModel_IsPrimitive()
+	 * @model default="false" required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!TypedModel!isPrimitive'"
+	 * @generated
+	 */
+	boolean isIsPrimitive();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#isIsPrimitive <em>Is Primitive</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Primitive</em>' attribute.
+	 * @see #isIsPrimitive()
+	 * @generated
+	 */
+	void setIsPrimitive(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Trace</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The TypedModel is for the execution trace. It may be added automatically.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Is Trace</em>' attribute.
+	 * @see #setIsTrace(boolean)
+	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getTypedModel_IsTrace()
+	 * @model default="false" required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTbase!TypedModel!isTrace'"
+	 * @generated
+	 */
+	boolean isIsTrace();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#isIsTrace <em>Is Trace</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Trace</em>' attribute.
+	 * @see #isIsTrace()
+	 * @generated
+	 */
+	void setIsTrace(boolean value);
 
 } // TypedModel

@@ -329,9 +329,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 */
 	@Override
 	public void setName(String newName) {
-		if ("trace".equals(newName)) {
-			getClass();
-		}
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())

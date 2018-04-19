@@ -644,6 +644,26 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
+	public EAttribute getTypedModel_IsPrimitive() {
+		return (EAttribute)typedModelEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTypedModel_IsTrace() {
+		return (EAttribute)typedModelEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public QVTbaseFactory getQVTbaseFactory() {
 		return (QVTbaseFactory)getEFactoryInstance();
 	}
@@ -721,6 +741,8 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEReference(typedModelEClass, TYPED_MODEL__USED_PACKAGE);
 		createEReference(typedModelEClass, TYPED_MODEL__DEPENDS_ON);
 		createEReference(typedModelEClass, TYPED_MODEL__OWNED_CONTEXT);
+		createEAttribute(typedModelEClass, TYPED_MODEL__IS_PRIMITIVE);
+		createEAttribute(typedModelEClass, TYPED_MODEL__IS_TRACE);
 	}
 
 	/**
@@ -920,30 +942,11 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		initEReference(getTypedModel_UsedPackage(), thePivotPackage.getPackage(), null, "usedPackage", null, 0, -1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTypedModel_DependsOn(), this.getTypedModel(), null, "dependsOn", null, 0, -1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getTypedModel_OwnedContext(), thePivotPackage.getVariable(), null, "ownedContext", null, 0, 1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTypedModel_IsPrimitive(), ecorePackage.getEBoolean(), "isPrimitive", "false", 1, 1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTypedModel_IsTrace(), ecorePackage.getEBoolean(), "isTrace", "false", 1, 1, TypedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
-		/*		XMLResource resource = new XMIResourceImpl(URI.createURI(eNS_URI))
-		{
-			@Override
-			public Map<String, EObject> getIDToEObjectMap() {
-				// TODO Auto-generated method stub
-				return super.getIDToEObjectMap();
-			}
-
-			@Override
-			protected EObject getEObjectByID(String id) {
-				// TODO Auto-generated method stub
-				return super.getEObjectByID(id);
-			}
-
-			@Override
-			protected boolean useIDs()
-			{
-				return eObjectToIDMap != null || idToEObjectMap != null;
-			}
-		};
-		resource.getContents().add(this); */
 
 		// Create annotations
 		// http://www.eclipse.org/emf/2002/Ecore
