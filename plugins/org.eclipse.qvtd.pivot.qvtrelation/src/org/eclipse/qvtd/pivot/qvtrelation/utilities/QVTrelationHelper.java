@@ -204,6 +204,7 @@ public class QVTrelationHelper extends QVTbaseHelper
 	public @NonNull TypedModel createTraceTypedModel() {
 		TypedModel asTypedModel = QVTbaseFactory.eINSTANCE.createTypedModel();
 		asTypedModel.setName(QVTrelationUtil.TRACE_TYPED_MODEL_NAME);
+		asTypedModel.setIsTrace(true);
 		return asTypedModel;
 	}
 }
