@@ -157,7 +157,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	//	checked as predicates using equals edges.
 	//
 	public @NonNull Edge createEqualsEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
-		System.err.println("Unexpected " + QVTscheduleConstants.EQUALS_NAME + " edge from " + sourceNode + " to " + targetNode);
+		System.err.println("Unexpected " + QVTscheduleConstants.EQUALS_NAME + " edge in " + region + " from " + sourceNode + " to " + targetNode);
 		return createExpressionEdge(sourceNode, QVTscheduleConstants.EQUALS_NAME, targetNode);
 	}
 
