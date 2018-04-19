@@ -389,7 +389,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 						}
 						else if ((targetNode instanceof BooleanValueNode) && ((BooleanValueNode)targetNode).isBooleanValue()) {
 							if (edge.isSpeculated()) {
-								System.err.println("Speculation code omitted.");
+								System.err.println("Speculation code omitted for " + region);
 							}
 							else {
 								createCheckStatement(source2targetExp);
@@ -435,7 +435,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					}
 					else if (((BooleanValueNode)targetNode).isBooleanValue()) {
 						if (edge.isSpeculated()) {
-							System.err.println("Speculation code omitted.");
+							System.err.println("Speculation code omitted for " + region);
 						}
 						else {
 							createCheckStatement(sourceVariableExp);
