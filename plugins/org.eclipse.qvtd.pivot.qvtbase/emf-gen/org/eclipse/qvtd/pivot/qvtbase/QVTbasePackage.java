@@ -1775,13 +1775,31 @@ public interface QVTbasePackage extends EPackage {
 	int TYPED_MODEL__OWNED_CONTEXT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Is Primitive</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_MODEL__IS_PRIMITIVE = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Is Trace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPED_MODEL__IS_TRACE = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Typed Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPED_MODEL_FEATURE_COUNT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int TYPED_MODEL_FEATURE_COUNT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 
 	/**
@@ -2296,6 +2314,28 @@ public interface QVTbasePackage extends EPackage {
 	EReference getTypedModel_OwnedContext();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#isIsPrimitive <em>Is Primitive</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Primitive</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.TypedModel#isIsPrimitive()
+	 * @see #getTypedModel()
+	 * @generated
+	 */
+	EAttribute getTypedModel_IsPrimitive();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtbase.TypedModel#isIsTrace <em>Is Trace</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Trace</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.TypedModel#isIsTrace()
+	 * @see #getTypedModel()
+	 * @generated
+	 */
+	EAttribute getTypedModel_IsTrace();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2702,6 +2742,22 @@ public interface QVTbasePackage extends EPackage {
 		 * @generated
 		 */
 		EReference TYPED_MODEL__OWNED_CONTEXT = eINSTANCE.getTypedModel_OwnedContext();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Primitive</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TYPED_MODEL__IS_PRIMITIVE = eINSTANCE.getTypedModel_IsPrimitive();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Trace</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TYPED_MODEL__IS_TRACE = eINSTANCE.getTypedModel_IsTrace();
 
 	}
 

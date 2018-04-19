@@ -81,6 +81,12 @@
     </ownedClasses>
     <ownedClasses xmi:id="WqJYx" name="TypedModel" superClasses="../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#0kVqz">
       <ownedProperties xmi:id="cy5DZ" name="dependsOn" type="#,klFp"/>
+      <ownedProperties xmi:id="z+SD0" defaultValueString="false" name="isPrimitive" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
+        <ownedComments body="The TypedModel is for a primitive domain. It may be added automatically."/>
+      </ownedProperties>
+      <ownedProperties xmi:id="R8XrW" defaultValueString="false" name="isTrace" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
+        <ownedComments body="The TypedModel is for the execution trace. It may be added automatically."/>
+      </ownedProperties>
       <ownedProperties xmi:id="ggm9N" isComposite="true" isRequired="false" name="ownedContext" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t4j6T"/>
       <ownedProperties xmi:id="fPfk3" isTransient="true" name="transformation" opposite="#YTQDv" type="#AjDLV"/>
       <ownedProperties xmi:id="fK4wq" name="usedPackage" type="#4WjM+"/>
