@@ -889,7 +889,7 @@ public class RelationAnalysis extends RuleAnalysis
 		Node node = region.getNode(variableDeclaration);
 		if (node == null) {
 			if (variableDeclaration instanceof SharedVariable) {
-				node = getReferenceNodeForSharedVariable((SharedVariable)variableDeclaration);
+				node = getReferenceNodeForSharedVariable((SharedVariable)variableDeclaration, null);
 			}
 			if (node == null) {
 				node = createOldNode(variableDeclaration);
@@ -899,7 +899,7 @@ public class RelationAnalysis extends RuleAnalysis
 		assert node == region.getNode(variableDeclaration);
 		return node;
 	}
-	private @Nullable Node getReferenceNodeForSharedVariable(@NonNull SharedVariable variable /*, @NonNull List<@NonNull OCLExpression> expressions*/) {
+	private @Nullable Node getReferenceNodeForSharedVariable(@NonNull SharedVariable variable, @Nullable OCLExpression predicatedInit /*, @NonNull List<@NonNull OCLExpression> expressions*/) {
 		//
 		//	Use something hard to compute as the initializer that creates an initNode in the hope that other
 		//	initializers might be easier and optimized as simple navigation edges.
@@ -919,7 +919,12 @@ public class RelationAnalysis extends RuleAnalysis
 			bestInitExpression = (expressions.size() > 0) ? expressions.get(0) : null;
 		} */
 		if (bestInitExpression == null) {
-			return null;
+			if (predicatedInit != null) {
+				bestInitExpression = predicatedInit;
+			}
+			else {
+				return null;
+			}
 		}
 		Node bestInitNode = bestInitExpression.accept(expressionSynthesizer);
 		assert bestInitNode != null;
@@ -1202,7 +1207,16 @@ public class RelationAnalysis extends RuleAnalysis
 		else {
 			return false;
 		}
-		Node variableNode = variable.accept(expressionSynthesizer);
+		Node variableNode = region.getNode(variable);
+		if (variableNode == null) {
+			if (variable instanceof SharedVariable) {
+				variableNode = getReferenceNodeForSharedVariable((SharedVariable)variable, valueExp);
+			}
+			if (variableNode != null) {
+				return true;
+			}
+		}
+		variableNode = variable.accept(expressionSynthesizer);
 		Node expressionNode = valueExp.accept(expressionSynthesizer);
 		assert (variableNode != null) && (expressionNode != null);
 		createEqualsEdge(expressionNode, variableNode);

@@ -153,8 +153,8 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	//	of ensuring that downstream code accommodates the duality far outweight the difficulties of creating a single node in the first place.
 	//
 	//	This method is not used by any tests, but one anticipated usage arises if a variable has multiple initializers,
-	//	in which case a hard inkitializer such as an operation call is preferred, and then other initializers are
-	//	checked as predicates using equals edges.
+	//	and/or multiple predicates, in which case a hard initializer such as an operation call is preferred,
+	//	and then other initializers are checked as predicates using equals edges.
 	//
 	public @NonNull Edge createEqualsEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
 		System.err.println("Unexpected " + QVTscheduleConstants.EQUALS_NAME + " edge in " + region + " from " + sourceNode + " to " + targetNode);
