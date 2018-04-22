@@ -576,12 +576,6 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		//
 		scheduleManager.analyzeSourceModel();
 		//
-		//	Use the QVTr2QVTsVisitor in a tree descent to stnthesize the QVTs elements that correspond directly to QVTr elements.
-		//	Inter-relation elements are accumulated by InvocationAnalysis instances in the RuleAnalysis2TraceGroup.
-		//
-		QVTr2QVTsVisitor qvtr2qvtsVisitor = new QVTr2QVTsVisitor(this);
-		qvtr2qvtsVisitor.transform(source, target);
-		//
 		Iterable<@NonNull TransformationAnalysis> transformationAnalyses = scheduleManager2.getOrderedTransformationAnalyses();
 		List<@NonNull TransformationAnalysis2TracePackage> transformationAnalysis2tracePackages = new ArrayList<>();
 		for (@NonNull TransformationAnalysis transformationAnalysis : transformationAnalyses) {
@@ -593,6 +587,12 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		for (@NonNull TransformationAnalysis2TracePackage transformationAnalysis2tracePackage : transformationAnalysis2tracePackages) {
 			transformationAnalysis2tracePackage.createRuleAnalysis2TraceGroups();
 		}
+		//
+		//	Use the QVTr2QVTsVisitor in a tree descent to synthesize the QVTs elements that correspond directly to QVTr elements.
+		//	Inter-relation elements are accumulated by InvocationAnalysis instances in the RuleAnalysis2TraceGroup.
+		//
+		QVTr2QVTsVisitor qvtr2qvtsVisitor = new QVTr2QVTsVisitor(this);
+		qvtr2qvtsVisitor.transform(source, target);
 		//
 		//	Analyze the trace classes and interfaces to determine their inheritance and properties
 		//

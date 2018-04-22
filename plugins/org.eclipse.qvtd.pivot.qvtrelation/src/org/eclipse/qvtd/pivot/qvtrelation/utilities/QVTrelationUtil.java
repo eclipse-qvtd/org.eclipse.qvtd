@@ -38,6 +38,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.TraceHelper;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -372,6 +373,7 @@ public class QVTrelationUtil extends QVTtemplateUtil
 	 */
 	public static boolean rewriteMissingTraceArtefacts(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource asResource) {
 		QVTrelationHelper helper = null;
+		TraceHelper traceHelper = null;
 		for (TreeIterator<EObject> tit = asResource.getAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 			if (eObject instanceof RelationalTransformation) {
@@ -399,7 +401,10 @@ public class QVTrelationUtil extends QVTtemplateUtil
 					if (helper == null) {
 						helper = new QVTrelationHelper(environmentFactory);
 					}
-					asRelation.getVariable().add(helper.createTraceClassVariable());
+					if (traceHelper == null) {
+						traceHelper = new TraceHelper(environmentFactory);
+					}
+					asRelation.getVariable().add(helper.createTraceClassVariable(traceHelper));
 				}
 			}
 		}

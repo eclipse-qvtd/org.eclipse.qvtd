@@ -4,13 +4,11 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
 package org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr;
-
-import org.eclipse.m2m.atl.common.ATL.Helper;
 
 import org.eclipse.m2m.atl.common.OCL.VariableDeclaration;
 
@@ -24,7 +22,6 @@ import org.eclipse.m2m.atl.common.OCL.VariableDeclaration;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp_referredVariable_Helper#getDispatcher <em>Dispatcher</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp_referredVariable_Helper#getT1atlHelper <em>T1atl Helper</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp_referredVariable_Helper#getT1atlVariable <em>T1atl Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp_referredVariable_Helper#getT2qvtrVariable <em>T2qvtr Variable</em>}</li>
  * </ul>
@@ -61,33 +58,6 @@ public interface TmapVariableExp_referredVariable_Helper extends ImapVariableExp
 	 * @generated
 	 */
 	void setDispatcher(DmapVariableExp_referredVariable value);
-
-	/**
-	 * Returns the value of the '<em><b>T1atl Helper</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T1atl Helper</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T1atl Helper</em>' reference.
-	 * @see #setT1atlHelper(Helper)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapVariableExp_referredVariable_Helper_T1atlHelper()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='atl'"
-	 * @generated
-	 */
-	Helper getT1atlHelper();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp_referredVariable_Helper#getT1atlHelper <em>T1atl Helper</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T1atl Helper</em>' reference.
-	 * @see #getT1atlHelper()
-	 * @generated
-	 */
-	void setT1atlHelper(Helper value);
 
 	/**
 	 * Returns the value of the '<em><b>T1atl Variable</b></em>' reference.

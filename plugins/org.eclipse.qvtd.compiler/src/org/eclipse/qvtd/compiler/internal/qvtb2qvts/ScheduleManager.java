@@ -31,6 +31,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.TraceHelper;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -102,6 +103,7 @@ public interface ScheduleManager
 	@NonNull StandardLibraryHelper getStandardLibraryHelper();
 	@NonNull PropertyDatum getSuccessPropertyDatum(@NonNull Property successProperty);
 	@NonNull Iterable<@NonNull ClassDatum> getSuperClassDatums(@NonNull ClassDatum classDatum);
+	@NonNull TraceHelper getTraceHelper();
 	@NonNull TypedModel getTraceTypedModel();
 	@NonNull Iterable<@NonNull TransformationAnalysis> getTransformationAnalyses();
 	@NonNull TransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation);

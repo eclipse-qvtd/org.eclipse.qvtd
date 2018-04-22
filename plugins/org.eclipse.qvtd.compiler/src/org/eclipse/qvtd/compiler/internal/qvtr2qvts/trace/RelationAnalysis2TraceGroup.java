@@ -13,6 +13,7 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace;
 import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.HeadNodeGroup;
@@ -69,6 +70,14 @@ public class RelationAnalysis2TraceGroup extends RuleAnalysis2TraceGroup
 		relationAnalysis2traceInterface = traceInterfaceName != null ? new RelationAnalysis2TraceInterface(this, traceInterfaceName) : null;
 		relationAnalysis2dispatchClass = dispatchClassName != null ? new RelationAnalysis2DispatchClass(this, dispatchClassName) : null;
 		relationAnalysis2invocationClass = invocationClassName != null ? new RelationAnalysis2InvocationClass(this, invocationClassName) : null;
+		//
+		//	Set the trace variable type
+		//
+		RelationAnalysis2TraceClass relationAnalysis2traceClass2 = relationAnalysis2traceClass;
+		if (relationAnalysis2traceClass2 != null) {
+			Variable traceVariable = QVTrelationUtil.getTraceVariable(relation);
+			traceVariable.setType(relationAnalysis2traceClass2.getMiddleClass());
+		}
 	}
 
 	/*	private void analyzeInvocationVariable(@NonNull OCLExpression invocation) {

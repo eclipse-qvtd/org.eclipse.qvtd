@@ -260,7 +260,13 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		Class<? extends Transformer> txClass3;
 		MyQVT myQVT3 = createQVT("Families2Persons", txURI2);
+		// Avoid the Java files being deleted, and add their classPath since we will compile them again Ugh! use different packge prefix
 		myQVT3.setKeepOldJavaFiles();
+		myQVT3.addClasspathProjectName("org.eclipse.m2m.atl.common");
+		myQVT3.addClasspathProjectName("org.eclipse.qvtd.pivot.qvtbase");
+		myQVT3.addClasspathProjectName("org.eclipse.qvtd.pivot.qvtrelation");
+		myQVT3.addClasspathProjectName("org.eclipse.qvtd.pivot.qvttemplate");
+		myQVT3.addClasspathProjectName("org.eclipse.qvtd.atl");
 		//		MyQVT myQVT3 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", "samples");
 		//		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.models.families2persons.Families.FamiliesPackage");
 		//		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.models.families2persons.Persons.PersonsPackage");

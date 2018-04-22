@@ -20,7 +20,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.qvttrace.Dispatch;
 import org.eclipse.qvtd.runtime.qvttrace.Execution;
 import org.eclipse.qvtd.runtime.qvttrace.QVTtraceFactory;
@@ -318,4 +319,14 @@ public class QVTtracePackageImpl extends EPackageImpl implements QVTtracePackage
 		createResource(eNS_URI);
 	}
 
+	//
+	//	The QVTtrace metamodel is extended by transformation-specific trace metamodels, whose superclass references must use the *.ecore form rather than
+	//	the nsURI to avoid instance creation failures when using a dynamically loaded trace metamodel (See Bug 532561). The URI of the QVTtrace resource
+	//	is therefore changed to the *.ecore form. All consumption is therefore persisted with a dynamic Ecore reference so that downstream dynamic
+	//	consumers see a consistent dynamic model hierarchy. Generated consumers generate regardless.
+	//
+	@Override
+	protected Resource createResource(String uri) {
+		return super.createResource(AbstractTransformer.TRACE_MODEL_URI.toString());
+	}
 } //QVTtracePackageImpl

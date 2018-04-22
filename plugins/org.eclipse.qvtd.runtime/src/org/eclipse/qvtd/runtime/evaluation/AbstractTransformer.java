@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.runtime.evaluation;
 
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.ids.ClassId;
@@ -34,6 +35,7 @@ public abstract class AbstractTransformer extends AbstractTransformerInternal
 
 	public static final @NonNull String PLUGIN_ID = "org.eclipse.qvtd.runtime";
 	public static final @NonNull String TRACE_MODEL = "org.eclipse.qvtd.runtime/model/QVTtrace.ecore";
+	public static final @NonNull URI TRACE_MODEL_URI = URI.createPlatformResourceURI(TRACE_MODEL, true);
 	public static final @NonNull String TRACE_GENMODEL = "org.eclipse.qvtd.runtime/model/QVTtrace.genmodel";
 	public static final @NonNull String TRACE_GENMODEL_FRAGMENT = "//qvttrace";
 

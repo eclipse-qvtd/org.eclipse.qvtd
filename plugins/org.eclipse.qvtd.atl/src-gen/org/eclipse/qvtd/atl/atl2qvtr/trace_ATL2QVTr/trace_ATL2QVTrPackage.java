@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -3667,22 +3667,13 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	int TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER = IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>T1atl Helper</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_HELPER = IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>T1atl Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_VARIABLE = IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2;
+	int TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_VARIABLE = IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>T2qvtr Variable</b></em>' reference.
@@ -3691,7 +3682,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T2QVTR_VARIABLE = IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 3;
+	int TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T2QVTR_VARIABLE = IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Tmap Variable Exp referred Variable Helper</em>' class.
@@ -3700,7 +3691,7 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT = IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 4;
+	int TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT = IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Tmap Variable Exp referred Variable Helper</em>' class.
@@ -6632,17 +6623,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 	EReference getTmapVariableExp_referredVariable_Helper_Dispatcher();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp_referredVariable_Helper#getT1atlHelper <em>T1atl Helper</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>T1atl Helper</em>'.
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp_referredVariable_Helper#getT1atlHelper()
-	 * @see #getTmapVariableExp_referredVariable_Helper()
-	 * @generated
-	 */
-	EReference getTmapVariableExp_referredVariable_Helper_T1atlHelper();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp_referredVariable_Helper#getT1atlVariable <em>T1atl Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8897,14 +8877,6 @@ public interface trace_ATL2QVTrPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER = eINSTANCE.getTmapVariableExp_referredVariable_Helper_Dispatcher();
-
-		/**
-		 * The meta object literal for the '<em><b>T1atl Helper</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_HELPER = eINSTANCE.getTmapVariableExp_referredVariable_Helper_T1atlHelper();
 
 		/**
 		 * The meta object literal for the '<em><b>T1atl Variable</b></em>' reference feature.

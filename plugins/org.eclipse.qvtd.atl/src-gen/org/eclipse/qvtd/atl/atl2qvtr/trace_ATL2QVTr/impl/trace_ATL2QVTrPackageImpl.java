@@ -3036,7 +3036,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapVariableExp_referredVariable_Helper_T1atlHelper() {
+	public EReference getTmapVariableExp_referredVariable_Helper_T1atlVariable() {
 		return (EReference)tmapVariableExp_referredVariable_HelperEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -3046,18 +3046,8 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapVariableExp_referredVariable_Helper_T1atlVariable() {
-		return (EReference)tmapVariableExp_referredVariable_HelperEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getTmapVariableExp_referredVariable_Helper_T2qvtrVariable() {
-		return (EReference)tmapVariableExp_referredVariable_HelperEClass.getEStructuralFeatures().get(3);
+		return (EReference)tmapVariableExp_referredVariable_HelperEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -3426,7 +3416,6 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 
 		tmapVariableExp_referredVariable_HelperEClass = createEClass(TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER);
 		createEReference(tmapVariableExp_referredVariable_HelperEClass, TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER);
-		createEReference(tmapVariableExp_referredVariable_HelperEClass, TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_HELPER);
 		createEReference(tmapVariableExp_referredVariable_HelperEClass, TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_VARIABLE);
 		createEReference(tmapVariableExp_referredVariable_HelperEClass, TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T2QVTR_VARIABLE);
 
@@ -3809,7 +3798,6 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 
 		initEClass(tmapVariableExp_referredVariable_HelperEClass, TmapVariableExp_referredVariable_Helper.class, "TmapVariableExp_referredVariable_Helper", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTmapVariableExp_referredVariable_Helper_Dispatcher(), this.getDmapVariableExp_referredVariable(), this.getDmapVariableExp_referredVariable_DomapVariableExp_referredVariable_Helper(), "dispatcher", null, 1, 1, TmapVariableExp_referredVariable_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTmapVariableExp_referredVariable_Helper_T1atlHelper(), theATLPackage.getHelper(), null, "t1atlHelper", null, 1, 1, TmapVariableExp_referredVariable_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapVariableExp_referredVariable_Helper_T1atlVariable(), theOCLPackage.getVariableDeclaration(), null, "t1atlVariable", null, 1, 1, TmapVariableExp_referredVariable_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapVariableExp_referredVariable_Helper_T2qvtrVariable(), thePivotPackage.getVariableDeclaration(), null, "t2qvtrVariable", null, 1, 1, TmapVariableExp_referredVariable_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -5000,12 +4988,6 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		});
 		addAnnotation
 		(getTmapVariableExp_T1atlVariable(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapVariableExp_referredVariable_Helper_T1atlHelper(),
 			source,
 			new String[] {
 				"referredDomain", "atl"

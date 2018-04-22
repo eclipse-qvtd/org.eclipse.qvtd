@@ -61,6 +61,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.TraceHelper;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -88,6 +89,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	protected final @NonNull ScheduleModel scheduleModel;
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull NameGenerator nameGenerator;
+	private @Nullable TraceHelper traceHelper = null;
 	private CompilerOptions.@Nullable StepOptions schedulerOptions;
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
 	protected final @NonNull DatumCaches datumCaches;
@@ -677,6 +679,15 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			}
 		}
 		return superClassDatums;
+	}
+
+	@Override
+	public @NonNull TraceHelper getTraceHelper() {
+		TraceHelper traceHelper2 = traceHelper;
+		if (traceHelper2 == null) {
+			traceHelper = traceHelper2 = new TraceHelper(environmentFactory);
+		}
+		return traceHelper2;
 	}
 
 	@Override

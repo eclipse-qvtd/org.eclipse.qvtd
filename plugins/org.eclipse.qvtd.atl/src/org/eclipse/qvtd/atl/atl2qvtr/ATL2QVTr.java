@@ -54,9 +54,11 @@ import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.StringLiteralExp;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
@@ -67,12 +69,18 @@ import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.library.UnboxedCompositionProperty;
+import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSingleIterationManager;
+import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
+import org.eclipse.ocl.pivot.library.LibraryIteration;
+import org.eclipse.ocl.pivot.library.classifier.ClassifierOclContainerOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionIsEmptyOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionNotEmptyOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionSelectByKindOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsSetOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.BagValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
@@ -143,6 +151,7 @@ import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractComputationConstructor;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractInvocationConstructor;
+import org.eclipse.qvtd.runtime.qvttrace.QVTtracePackage;
 
 /**
  * The ATL2QVTr transformation:
@@ -166,6 +175,7 @@ public class ATL2QVTr extends AbstractTransformer
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbase", null, QVTbasePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTrelation = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTrelation", null, QVTrelationPackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTtemplate", null, QVTtemplatePackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2018_s_QVTtrace = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2018/QVTtrace", null, QVTtracePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvtd_m_example_s_org_s_eclipse_s_qvtd_s_atl_s_atl2qvtr_s_ATL2QVTr = IdManager.getNsURIPackageId("http://www.eclipse.org/qvtd-example/org/eclipse/qvtd/atl/atl2qvtr/ATL2QVTr", "PATL2QVTr", trace_ATL2QVTrPackage.eINSTANCE);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Attribute = PACKid_http_c_s_s_www_eclipse_org_s_gmt_s_2005_s_OCL.getClassId("Attribute", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Binding = PACKid_http_c_s_s_www_eclipse_org_s_gmt_s_2005_s_ATL.getClassId("Binding", 0);
@@ -255,6 +265,7 @@ public class ATL2QVTr extends AbstractTransformer
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TmapVariableExp = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_m_example_s_org_s_eclipse_s_qvtd_s_atl_s_atl2qvtr_s_ATL2QVTr.getClassId("TmapVariableExp", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TmapVariableExp_referredVariable_Helper = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_m_example_s_org_s_eclipse_s_qvtd_s_atl_s_atl2qvtr_s_ATL2QVTr.getClassId("TmapVariableExp_referredVariable_Helper", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TmapVariableExp_referredVariable_VariableDeclaration = PACKid_http_c_s_s_www_eclipse_org_s_qvtd_m_example_s_org_s_eclipse_s_qvtd_s_atl_s_atl2qvtr_s_ATL2QVTr.getClassId("TmapVariableExp_referredVariable_VariableDeclaration", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TraceElement = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2018_s_QVTtrace.getClassId("TraceElement", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Type = PACKid_$metamodel$.getClassId("Type", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TypedModel = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("TypedModel", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Variable = PACKid_$metamodel$.getClassId("Variable", 0);
@@ -293,7 +304,10 @@ public class ATL2QVTr extends AbstractTransformer
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_CLSSid_OclModelElement = TypeId.SEQUENCE.getSpecializedId(CLSSid_OclModelElement);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_CLSSid_OclType = TypeId.SEQUENCE.getSpecializedId(CLSSid_OclType);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_CLSSid_Operation = TypeId.SEQUENCE.getSpecializedId(CLSSid_Operation);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Helper = TypeId.SET.getSpecializedId(CLSSid_Helper);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_InPatternElement = TypeId.SET.getSpecializedId(CLSSid_InPatternElement);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_LocatedElement = TypeId.SET.getSpecializedId(CLSSid_LocatedElement);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_OclElement = TypeId.SET.getSpecializedId(CLSSid_OclElement);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_OclModel = TypeId.SET.getSpecializedId(CLSSid_OclModel);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_Package = TypeId.SET.getSpecializedId(CLSSid_Package);
 	public static final /*@NonInvalid*/ @NonNull NestedPackageId PACKid_atl2qvtr = PACKid_atl.getNestedPackageId("atl2qvtr");
@@ -511,19 +525,67 @@ public class ATL2QVTr extends AbstractTransformer
 	}
 
 	/**
-	 * ::getHelper(element : ATL::LocatedElement[?]) : ATL::Helper[?]
+	 * ::getHelper(element : ATL::LocatedElement[1]) : ATL::Helper[1]
 	 */
 	protected class FUN_getHelper extends AbstractComputation
 	{
 		protected final @NonNull ATL2QVTr self;
-		protected /*@NonInvalid*/ LocatedElement element;
-		protected final /*@Thrown*/ @Nullable Helper instance;
+		protected /*@NonInvalid*/ @NonNull LocatedElement element;
+		protected final /*@Thrown*/ @NonNull Helper instance;
 
+		/**
+		 *
+		 * element->closure(e | e.oclContainer())
+		 * ->selectByKind(ATL::Helper)
+		 * ->any(true)
+		 */
 		@SuppressWarnings("null")
 		public FUN_getHelper(/*Nullable*/ Object @NonNull [] boundValues) {
 			this.self = (ATL2QVTr)boundValues[0];
 			this.element = (LocatedElement)boundValues[1];
-			this.instance = org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getHelper.INSTANCE.evaluate(executor, CLSSid_Helper, element);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_ATL_c_c_Helper_0 = idResolver.getClass(CLSSid_Helper, null);
+			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
+			final /*@NonInvalid*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, SET_CLSSid_LocatedElement, element);
+			final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
+			final LibraryIteration.@NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIteration.LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
+			final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, SET_CLSSid_OclElement, CLSSid_OclElement);
+			/**
+			 * Implementation of the iterator body.
+			 */
+			final @NonNull AbstractBinaryOperation BODY_closure_0 = new AbstractBinaryOperation()
+			{
+				/**
+				 * e.oclContainer()
+				 */
+				@Override
+				public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object e_0) {
+					final /*@NonInvalid*/ @Nullable Object symbol_0 = (Object)e_0;
+					final /*@Thrown*/ @Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, symbol_0);
+					return oclContainer;
+				}
+			};
+			final @NonNull  ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, SET_CLSSid_OclElement, BODY_closure_0, oclAsSet, ACC_closure_0);
+			final /*@Thrown*/ @NonNull SetValue closure = ClassUtil.nonNullState((SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
+			final /*@Thrown*/ @NonNull SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure, TYP_ATL_c_c_Helper_0);
+			@NonNull Iterator<Object> ITERATOR__1 = selectByKind.iterator();
+			/*@Thrown*/ @NonNull Helper any;
+			while (true) {
+				if (!ITERATOR__1.hasNext()) {
+					throw new InvalidValueException("No matching content for 'any'");
+				}
+				@SuppressWarnings("null")
+				/*@NonInvalid*/ @NonNull Helper _1 = (Helper)ITERATOR__1.next();
+				/**
+				 * true
+				 */
+				//
+				if (ValueUtil.TRUE_VALUE != ValueUtil.FALSE_VALUE) {			// Carry on till something found
+					any = _1;
+					break;
+				}
+			}
+			this.instance = any;
 		}
 
 		@Override
@@ -1015,7 +1077,7 @@ public class ATL2QVTr extends AbstractTransformer
 	 *   install mTmapVariableExp__referredVariable__VariableDeclara_p4 {
 	 * trace consumes ::jm_TmapVariableExp__referredVariable__VariableDecl : trace_ATL2QVTr::TmapVariableExp_referredVariable_VariableDeclaration[1];
 	 * }
-	 *   install mTmapVariableExp__referredVariable__Helper_success__p1 {
+	 *   install mTmapVariableExp__referredVariable__Helper_success_p1 {
 	 * trace consumes ::jm_TmapVariableExp__referredVariable__Helper : trace_ATL2QVTr::TmapVariableExp_referredVariable_Helper[1];
 	 * }
 	 *   install mDmapVariableExp__referredVariable_success {
@@ -1383,7 +1445,7 @@ public class ATL2QVTr extends AbstractTransformer
 				MAP_mTmapVariableExp__referredVariable__VariableDeclara_p4(trace_150);
 			}
 			for (@NonNull TmapVariableExp_referredVariable_Helper trace_151 : jm_TmapVariableExp__referredVariable__Helper_1.typedIterable(TmapVariableExp_referredVariable_Helper.class)) {
-				MAP_mTmapVariableExp__referredVariable__Helper_success__p1(trace_151);
+				MAP_mTmapVariableExp__referredVariable__Helper_success_p1(trace_151);
 			}
 			for (@NonNull DmapVariableExp_referredVariable mapVariableExp_referredVariable_0 : jm_DmapVariableExp__referredVariable_1.typedIterable(DmapVariableExp_referredVariable.class)) {
 				MAP_mDmapVariableExp__referredVariable_success(mapVariableExp_referredVariable_0);
@@ -1444,8 +1506,8 @@ public class ATL2QVTr extends AbstractTransformer
 	 *
 	 * map mHelper_DmapHelper in ATL2QVTr {
 	 * guard:atl atlHelper : ATL::Helper[1];
-	 * append jm_TmapHelper__Operation  : trace_ATL2QVTr::TmapHelper_Operation[1];
 	 * append jm_DmapHelper  : trace_ATL2QVTr::DmapHelper[1];
+	 * append jm_TmapHelper__Operation  : trace_ATL2QVTr::TmapHelper_Operation[1];
 	 * append jm_TmapHelper__Attribute  : trace_ATL2QVTr::TmapHelper_Attribute[1];
 	 * new:middle dispatcher : trace_ATL2QVTr::DmapHelper[1];
 	 * new:middle mapHelper_Attribute : trace_ATL2QVTr::TmapHelper_Attribute[1];
@@ -1454,8 +1516,8 @@ public class ATL2QVTr extends AbstractTransformer
 	 * set dispatcher.domapHelper_Attribute := mapHelper_Attribute;
 	 * set dispatcher.domapHelper_Operation := mapHelper_Operation;
 	 * add jm_TmapHelper__Attribute += mapHelper_Attribute;
-	 * add jm_TmapHelper__Operation += mapHelper_Operation;
 	 * add jm_DmapHelper += dispatcher;
+	 * add jm_TmapHelper__Operation += mapHelper_Operation;
 	 *
 	 */
 	protected boolean MAP_mHelper_DmapHelper(final /*@NonInvalid*/ @NonNull Helper atlHelper, final @NonNull Connection jm_DmapHelper, final @NonNull Connection jm_TmapHelper__Attribute, final @NonNull Connection jm_TmapHelper__Operation)  {
@@ -1475,8 +1537,8 @@ public class ATL2QVTr extends AbstractTransformer
 		dispatcher_0.setDomapHelper_Attribute(mapHelper_Attribute);
 		dispatcher_0.setDomapHelper_Operation(mapHelper_Operation);
 		jm_TmapHelper__Attribute.appendElement(mapHelper_Attribute);
-		jm_TmapHelper__Operation.appendElement(mapHelper_Operation);
 		jm_DmapHelper.appendElement(dispatcher_0);
+		jm_TmapHelper__Operation.appendElement(mapHelper_Operation);
 		final /*@Thrown*/ @Nullable Boolean mHelper_DmapHelper = ValueUtil.TRUE_VALUE;
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println((mHelper_DmapHelper ? "done "  : "fail ") + "MAP_mHelper_DmapHelper");
@@ -1488,17 +1550,17 @@ public class ATL2QVTr extends AbstractTransformer
 	 *
 	 * map mOclExpression_DmapOclExpression in ATL2QVTr {
 	 * guard:atl atlExpression : OCL::OclExpression[1];
-	 * append jm_TmapBooleanExp  : trace_ATL2QVTr::TmapBooleanExp[1];
-	 * append jm_TmapNavigationOrAttributeCallExp__Property  : trace_ATL2QVTr::TmapNavigationOrAttributeCallExp_Property[1];
 	 * append jm_TmapNavigationOrAttributeCallExp__Helper  : trace_ATL2QVTr::TmapNavigationOrAttributeCallExp_Helper[1];
-	 * append jm_TmapIntegerExp  : trace_ATL2QVTr::TmapIntegerExp[1];
-	 * append jm_TmapStringExp  : trace_ATL2QVTr::TmapStringExp[1];
-	 * append jm_TmapIfExp  : trace_ATL2QVTr::TmapIfExp[1];
-	 * append jm_TmapOperationCallExp__Helper  : trace_ATL2QVTr::TmapOperationCallExp_Helper[1];
-	 * append jm_TmapOperationCallExp__Operation  : trace_ATL2QVTr::TmapOperationCallExp_Operation[1];
 	 * append jm_TmapOperatorCallExp  : trace_ATL2QVTr::TmapOperatorCallExp[1];
 	 * append jm_DmapOclExpression  : trace_ATL2QVTr::DmapOclExpression[1];
+	 * append jm_TmapOperationCallExp__Operation  : trace_ATL2QVTr::TmapOperationCallExp_Operation[1];
+	 * append jm_TmapBooleanExp  : trace_ATL2QVTr::TmapBooleanExp[1];
+	 * append jm_TmapIntegerExp  : trace_ATL2QVTr::TmapIntegerExp[1];
+	 * append jm_TmapNavigationOrAttributeCallExp__Property  : trace_ATL2QVTr::TmapNavigationOrAttributeCallExp_Property[1];
 	 * append jm_TmapVariableExp  : trace_ATL2QVTr::TmapVariableExp[1];
+	 * append jm_TmapOperationCallExp__Helper  : trace_ATL2QVTr::TmapOperationCallExp_Helper[1];
+	 * append jm_TmapIfExp  : trace_ATL2QVTr::TmapIfExp[1];
+	 * append jm_TmapStringExp  : trace_ATL2QVTr::TmapStringExp[1];
 	 * new:middle dispatcher : trace_ATL2QVTr::DmapOclExpression[1];
 	 * new:middle mapBooleanExp : trace_ATL2QVTr::TmapBooleanExp[1];
 	 * new:middle mapIfExp : trace_ATL2QVTr::TmapIfExp[1];
@@ -1521,17 +1583,17 @@ public class ATL2QVTr extends AbstractTransformer
 	 * set dispatcher.domapOperatorCallExp := mapOperatorCallExp;
 	 * set dispatcher.domapStringExp := mapStringExp;
 	 * set dispatcher.domapVariableExp := mapVariableExp;
-	 * add jm_TmapIfExp += mapIfExp;
-	 * add jm_TmapBooleanExp += mapBooleanExp;
-	 * add jm_TmapOperationCallExp__Helper += mapOperationCallExp_Helper;
 	 * add jm_TmapOperationCallExp__Operation += mapOperationCallExp_Operation;
+	 * add jm_TmapBooleanExp += mapBooleanExp;
+	 * add jm_TmapNavigationOrAttributeCallExp__Helper += mapNavigationOrAttributeCallExp_Helper;
+	 * add jm_TmapOperatorCallExp += mapOperatorCallExp;
 	 * add jm_TmapIntegerExp += mapIntegerExp;
 	 * add jm_TmapNavigationOrAttributeCallExp__Property += mapNavigationOrAttributeCallExp_Property;
-	 * add jm_TmapStringExp += mapStringExp;
-	 * add jm_TmapOperatorCallExp += mapOperatorCallExp;
-	 * add jm_DmapOclExpression += dispatcher;
-	 * add jm_TmapNavigationOrAttributeCallExp__Helper += mapNavigationOrAttributeCallExp_Helper;
 	 * add jm_TmapVariableExp += mapVariableExp;
+	 * add jm_TmapOperationCallExp__Helper += mapOperationCallExp_Helper;
+	 * add jm_TmapIfExp += mapIfExp;
+	 * add jm_DmapOclExpression += dispatcher;
+	 * add jm_TmapStringExp += mapStringExp;
 	 *
 	 */
 	protected boolean MAP_mOclExpression_DmapOclExpression(final /*@NonInvalid*/ @NonNull OclExpression atlExpression, final @NonNull Connection jm_DmapOclExpression, final @NonNull Connection jm_TmapBooleanExp, final @NonNull Connection jm_TmapIfExp, final @NonNull Connection jm_TmapIntegerExp, final @NonNull Connection jm_TmapNavigationOrAttributeCallExp__Helper, final @NonNull Connection jm_TmapNavigationOrAttributeCallExp__Property, final @NonNull Connection jm_TmapOperationCallExp__Helper, final @NonNull Connection jm_TmapOperationCallExp__Operation, final @NonNull Connection jm_TmapOperatorCallExp, final @NonNull Connection jm_TmapStringExp, final @NonNull Connection jm_TmapVariableExp)  {
@@ -1574,17 +1636,17 @@ public class ATL2QVTr extends AbstractTransformer
 		dispatcher_0.setDomapOperatorCallExp(mapOperatorCallExp);
 		dispatcher_0.setDomapStringExp(mapStringExp);
 		dispatcher_0.setDomapVariableExp(mapVariableExp);
-		jm_TmapIfExp.appendElement(mapIfExp);
-		jm_TmapBooleanExp.appendElement(mapBooleanExp);
-		jm_TmapOperationCallExp__Helper.appendElement(mapOperationCallExp_Helper);
 		jm_TmapOperationCallExp__Operation.appendElement(mapOperationCallExp_Operation);
+		jm_TmapBooleanExp.appendElement(mapBooleanExp);
+		jm_TmapNavigationOrAttributeCallExp__Helper.appendElement(mapNavigationOrAttributeCallExp_Helper);
+		jm_TmapOperatorCallExp.appendElement(mapOperatorCallExp);
 		jm_TmapIntegerExp.appendElement(mapIntegerExp);
 		jm_TmapNavigationOrAttributeCallExp__Property.appendElement(mapNavigationOrAttributeCallExp_Property);
-		jm_TmapStringExp.appendElement(mapStringExp);
-		jm_TmapOperatorCallExp.appendElement(mapOperatorCallExp);
-		jm_DmapOclExpression.appendElement(dispatcher_0);
-		jm_TmapNavigationOrAttributeCallExp__Helper.appendElement(mapNavigationOrAttributeCallExp_Helper);
 		jm_TmapVariableExp.appendElement(mapVariableExp);
+		jm_TmapOperationCallExp__Helper.appendElement(mapOperationCallExp_Helper);
+		jm_TmapIfExp.appendElement(mapIfExp);
+		jm_DmapOclExpression.appendElement(dispatcher_0);
+		jm_TmapStringExp.appendElement(mapStringExp);
 		final /*@Thrown*/ @Nullable Boolean mOclExpression_DmapOclExpression = ValueUtil.TRUE_VALUE;
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println((mOclExpression_DmapOclExpression ? "done "  : "fail ") + "MAP_mOclExpression_DmapOclExpression");
@@ -1824,16 +1886,16 @@ public class ATL2QVTr extends AbstractTransformer
 	 * guard:middle trace : trace_ATL2QVTr::TmapIfExp[1] success success;
 	 * var atlThen : OCL::OclExpression[1] := trace.t1atlThen;
 	 * var when_mapOclExpression : trace_ATL2QVTr::DmapOclExpression[1] := atlThen.DmapOclExpression;
-	 * var atlCondition : OCL::OclExpression[1] := trace.t1atlCondition;
-	 * var when_mapOclExpression1 : trace_ATL2QVTr::DmapOclExpression[1] := atlCondition.DmapOclExpression;
 	 * var atlElse : OCL::OclExpression[1] := trace.t1atlElse;
-	 * var when_mapOclExpression2 : trace_ATL2QVTr::DmapOclExpression[1] := atlElse.DmapOclExpression;
+	 * var when_mapOclExpression1 : trace_ATL2QVTr::DmapOclExpression[1] := atlElse.DmapOclExpression;
+	 * var atlCondition : OCL::OclExpression[1] := trace.t1atlCondition;
+	 * var when_mapOclExpression2 : trace_ATL2QVTr::DmapOclExpression[1] := atlCondition.DmapOclExpression;
 	 * var dispatcher : trace_ATL2QVTr::DmapOclExpression[1] := trace.dispatcher;
 	 * set dispatcher.success := true;
 	 * set dispatcher.result := trace;
-	 * set trace.wmapOclExpression1 := when_mapOclExpression2;
+	 * set trace.wmapOclExpression1 := when_mapOclExpression1;
 	 * set trace.wmapOclExpression2 := when_mapOclExpression;
-	 * set trace.wmapOclExpression := when_mapOclExpression1;
+	 * set trace.wmapOclExpression := when_mapOclExpression2;
 	 *
 	 */
 	protected boolean MAP_mTmapIfExp_success_wmapOclExpression_wmapOclExpress_p1(final /*@NonInvalid*/ @NonNull TmapIfExp trace_3)  {
@@ -1850,8 +1912,8 @@ public class ATL2QVTr extends AbstractTransformer
 				throw new InvalidEvaluationException("Null where non-null value required");
 			}
 			@SuppressWarnings("null")
-			final /*@NonInvalid*/ @NonNull OclExpression t1atlCondition = trace_3.getT1atlCondition();
-			final /*@NonInvalid*/ @Nullable DmapOclExpression DmapOclExpression_0 = OPPOSITE_OF_DmapOclExpression_d1atlExpression.get(t1atlCondition);
+			final /*@NonInvalid*/ @NonNull OclExpression t1atlElse = trace_3.getT1atlElse();
+			final /*@NonInvalid*/ @Nullable DmapOclExpression DmapOclExpression_0 = OPPOSITE_OF_DmapOclExpression_d1atlExpression.get(t1atlElse);
 			final /*@NonInvalid*/ boolean symbol_1 = DmapOclExpression_0 != null;
 			/*@Thrown*/ @Nullable Boolean raw_when_mapOclExpression1;
 			if (symbol_1) {
@@ -1859,8 +1921,8 @@ public class ATL2QVTr extends AbstractTransformer
 					throw new InvalidEvaluationException("Null where non-null value required");
 				}
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ @NonNull OclExpression t1atlElse = trace_3.getT1atlElse();
-				final /*@NonInvalid*/ @Nullable DmapOclExpression DmapOclExpression_1 = OPPOSITE_OF_DmapOclExpression_d1atlExpression.get(t1atlElse);
+				final /*@NonInvalid*/ @NonNull OclExpression t1atlCondition = trace_3.getT1atlCondition();
+				final /*@NonInvalid*/ @Nullable DmapOclExpression DmapOclExpression_1 = OPPOSITE_OF_DmapOclExpression_d1atlExpression.get(t1atlCondition);
 				final /*@NonInvalid*/ boolean symbol_2 = DmapOclExpression_1 != null;
 				/*@Thrown*/ @Nullable Boolean raw_when_mapOclExpression2;
 				if (symbol_2) {
@@ -1872,9 +1934,9 @@ public class ATL2QVTr extends AbstractTransformer
 					// mapping statements
 					dispatcher_0.setSuccess((Boolean)ValueUtil.TRUE_VALUE);
 					dispatcher_0.setResult(trace_3);
-					trace_3.setWmapOclExpression1(DmapOclExpression_1);
+					trace_3.setWmapOclExpression1(DmapOclExpression_0);
 					trace_3.setWmapOclExpression2(DmapOclExpression);
-					trace_3.setWmapOclExpression(DmapOclExpression_0);
+					trace_3.setWmapOclExpression(DmapOclExpression_1);
 					final /*@Thrown*/ @Nullable Boolean mTmapIfExp_success_wmapOclExpression_wmapOclExpress_p1 = ValueUtil.TRUE_VALUE;
 					raw_when_mapOclExpression2 = mTmapIfExp_success_wmapOclExpression_wmapOclExpress_p1;
 				}
@@ -2995,7 +3057,7 @@ public class ATL2QVTr extends AbstractTransformer
 	 * var ruleName : String[1] := matchedRule.name;
 	 * var when_mapModule : trace_ATL2QVTr::TmapModule[1] := atlModule.TmapModule;
 	 * var qvtrTransformation : qvtrelation::RelationalTransformation[1] := when_mapModule.t2qvtrTransformation;
-	 * var OclElement1 : Class[1] := OclElement;
+	 * var TraceElement : Class[1] := qvttrace::TraceElement;
 	 * new:qvtr _1 : qvtrelation::SharedVariable[1];
 	 * new:qvtr qvtrRelation : qvtrelation::Relation[1];
 	 * set _1.isImplicit := true;
@@ -3004,7 +3066,7 @@ public class ATL2QVTr extends AbstractTransformer
 	 * set qvtrRelation.isTopLevel := true;
 	 * set qvtrRelation.name := ruleName;
 	 * set trace.t0ruleName := ruleName;
-	 * set _1.type := OclElement1;
+	 * set _1.type := TraceElement;
 	 * set qvtrRelation.transformation := qvtrTransformation;
 	 * set qvtrRelation.variable := _1;
 	 * set trace.t1atlModule := atlModule;
@@ -3040,7 +3102,7 @@ public class ATL2QVTr extends AbstractTransformer
 				}
 				@SuppressWarnings("null")
 				final /*@Thrown*/ @NonNull RelationalTransformation t2qvtrTransformation = TmapModule.getT2qvtrTransformation();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_OclElement_0 = idResolver.getClass(CLSSid_OclElement, null);
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvttrace_c_c_TraceElement_0 = idResolver.getClass(CLSSid_TraceElement, null);
 				// creations
 				final @NonNull SharedVariable _1 = QVTrelationFactory.eINSTANCE.createSharedVariable();
 				models[1/*qvtr*/].add(_1, false);
@@ -3053,7 +3115,7 @@ public class ATL2QVTr extends AbstractTransformer
 				qvtrRelation.setIsTopLevel(ValueUtil.TRUE_VALUE);
 				qvtrRelation.setName(name_2);
 				trace_18.setT0ruleName(name_2);
-				_1.setType(TYP_OclElement_0);
+				_1.setType(TYP_qvttrace_c_c_TraceElement_0);
 				qvtrRelation.setTransformation(t2qvtrTransformation);
 				qvtrRelation.getVariable().add(_1);
 				trace_18.setT1atlModule(module);
@@ -3866,24 +3928,24 @@ public class ATL2QVTr extends AbstractTransformer
 	 *
 	 * map mDmapOclExpression_success in ATL2QVTr {
 	 * guard:middle mapOclExpression : trace_ATL2QVTr::DmapOclExpression[1];
-	 * var mapNavigationOrAttributeCallExp_Property : trace_ATL2QVTr::TmapNavigationOrAttributeCallExp_Property[1] := mapOclExpression.domapNavigationOrAttributeCallExp_Property;
-	 * check mapNavigationOrAttributeCallExp_Property.success = false;
-	 * var mapOperatorCallExp : trace_ATL2QVTr::TmapOperatorCallExp[1] := mapOclExpression.domapOperatorCallExp;
-	 * check mapOperatorCallExp.success = false;
-	 * var mapStringExp : trace_ATL2QVTr::TmapStringExp[1] := mapOclExpression.domapStringExp;
-	 * check mapStringExp.success = false;
-	 * var mapNavigationOrAttributeCallExp_Helper : trace_ATL2QVTr::TmapNavigationOrAttributeCallExp_Helper[1] := mapOclExpression.domapNavigationOrAttributeCallExp_Helper;
-	 * check mapNavigationOrAttributeCallExp_Helper.success = false;
-	 * var mapOperationCallExp_Operation : trace_ATL2QVTr::TmapOperationCallExp_Operation[1] := mapOclExpression.domapOperationCallExp_Operation;
-	 * check mapOperationCallExp_Operation.success = false;
 	 * var mapVariableExp : trace_ATL2QVTr::TmapVariableExp[1] := mapOclExpression.domapVariableExp;
 	 * check mapVariableExp.success = false;
-	 * var mapBooleanExp : trace_ATL2QVTr::TmapBooleanExp[1] := mapOclExpression.domapBooleanExp;
-	 * check mapBooleanExp.success = false;
-	 * var mapIntegerExp : trace_ATL2QVTr::TmapIntegerExp[1] := mapOclExpression.domapIntegerExp;
-	 * check mapIntegerExp.success = false;
 	 * var mapIfExp : trace_ATL2QVTr::TmapIfExp[1] := mapOclExpression.domapIfExp;
 	 * check mapIfExp.success = false;
+	 * var mapOperationCallExp_Operation : trace_ATL2QVTr::TmapOperationCallExp_Operation[1] := mapOclExpression.domapOperationCallExp_Operation;
+	 * check mapOperationCallExp_Operation.success = false;
+	 * var mapIntegerExp : trace_ATL2QVTr::TmapIntegerExp[1] := mapOclExpression.domapIntegerExp;
+	 * check mapIntegerExp.success = false;
+	 * var mapNavigationOrAttributeCallExp_Helper : trace_ATL2QVTr::TmapNavigationOrAttributeCallExp_Helper[1] := mapOclExpression.domapNavigationOrAttributeCallExp_Helper;
+	 * check mapNavigationOrAttributeCallExp_Helper.success = false;
+	 * var mapOperatorCallExp : trace_ATL2QVTr::TmapOperatorCallExp[1] := mapOclExpression.domapOperatorCallExp;
+	 * check mapOperatorCallExp.success = false;
+	 * var mapNavigationOrAttributeCallExp_Property : trace_ATL2QVTr::TmapNavigationOrAttributeCallExp_Property[1] := mapOclExpression.domapNavigationOrAttributeCallExp_Property;
+	 * check mapNavigationOrAttributeCallExp_Property.success = false;
+	 * var mapStringExp : trace_ATL2QVTr::TmapStringExp[1] := mapOclExpression.domapStringExp;
+	 * check mapStringExp.success = false;
+	 * var mapBooleanExp : trace_ATL2QVTr::TmapBooleanExp[1] := mapOclExpression.domapBooleanExp;
+	 * check mapBooleanExp.success = false;
 	 * var mapOperationCallExp_Helper : trace_ATL2QVTr::TmapOperationCallExp_Helper[1] := mapOclExpression.domapOperationCallExp_Helper;
 	 * check mapOperationCallExp_Helper.success = false;
 	 * set mapOclExpression.success := false;
@@ -3893,102 +3955,102 @@ public class ATL2QVTr extends AbstractTransformer
 		if (debugInvocations) {
 			AbstractTransformer.INVOCATIONS.println("invoke MAP_mDmapOclExpression_success" + ", " + mapOclExpression);
 		}
-		final /*@NonInvalid*/ @Nullable TmapNavigationOrAttributeCallExp_Property domapNavigationOrAttributeCallExp_Property = mapOclExpression.getDomapNavigationOrAttributeCallExp_Property();
-		final /*@NonInvalid*/ boolean symbol_0 = domapNavigationOrAttributeCallExp_Property != null;
-		/*@Thrown*/ @Nullable Boolean raw_mapNavigationOrAttributeCallExp_Property;
+		final /*@NonInvalid*/ @Nullable TmapVariableExp domapVariableExp = mapOclExpression.getDomapVariableExp();
+		final /*@NonInvalid*/ boolean symbol_0 = domapVariableExp != null;
+		/*@Thrown*/ @Nullable Boolean raw_mapVariableExp;
 		if (symbol_0) {
-			if (domapNavigationOrAttributeCallExp_Property == null) {
+			if (domapVariableExp == null) {
 				throw new InvalidEvaluationException("Null where non-null value required");
 			}
-			final /*@Thrown*/ @Nullable Boolean success = domapNavigationOrAttributeCallExp_Property.getSuccess();
+			final /*@Thrown*/ @Nullable Boolean success = domapVariableExp.getSuccess();
 			final /*@Thrown*/ boolean eq = success == Boolean.FALSE;
 			/*@Thrown*/ @Nullable Boolean symbol_21;
 			if (eq) {
-				final /*@NonInvalid*/ @Nullable TmapOperatorCallExp domapOperatorCallExp = mapOclExpression.getDomapOperatorCallExp();
-				final /*@NonInvalid*/ boolean symbol_1 = domapOperatorCallExp != null;
-				/*@Thrown*/ @Nullable Boolean raw_mapOperatorCallExp;
+				final /*@NonInvalid*/ @Nullable TmapIfExp domapIfExp = mapOclExpression.getDomapIfExp();
+				final /*@NonInvalid*/ boolean symbol_1 = domapIfExp != null;
+				/*@Thrown*/ @Nullable Boolean raw_mapIfExp;
 				if (symbol_1) {
-					if (domapOperatorCallExp == null) {
+					if (domapIfExp == null) {
 						throw new InvalidEvaluationException("Null where non-null value required");
 					}
-					final /*@Thrown*/ @Nullable Boolean success_0 = domapOperatorCallExp.getSuccess();
+					final /*@Thrown*/ @Nullable Boolean success_0 = domapIfExp.getSuccess();
 					final /*@Thrown*/ boolean eq_0 = success_0 == Boolean.FALSE;
 					/*@Thrown*/ @Nullable Boolean symbol_20;
 					if (eq_0) {
-						final /*@NonInvalid*/ @Nullable TmapStringExp domapStringExp = mapOclExpression.getDomapStringExp();
-						final /*@NonInvalid*/ boolean symbol_2 = domapStringExp != null;
-						/*@Thrown*/ @Nullable Boolean raw_mapStringExp;
+						final /*@NonInvalid*/ @Nullable TmapOperationCallExp_Operation domapOperationCallExp_Operation = mapOclExpression.getDomapOperationCallExp_Operation();
+						final /*@NonInvalid*/ boolean symbol_2 = domapOperationCallExp_Operation != null;
+						/*@Thrown*/ @Nullable Boolean raw_mapOperationCallExp_Operation;
 						if (symbol_2) {
-							if (domapStringExp == null) {
+							if (domapOperationCallExp_Operation == null) {
 								throw new InvalidEvaluationException("Null where non-null value required");
 							}
-							final /*@Thrown*/ @Nullable Boolean success_1 = domapStringExp.getSuccess();
+							final /*@Thrown*/ @Nullable Boolean success_1 = domapOperationCallExp_Operation.getSuccess();
 							final /*@Thrown*/ boolean eq_1 = success_1 == Boolean.FALSE;
 							/*@Thrown*/ @Nullable Boolean symbol_19;
 							if (eq_1) {
-								final /*@NonInvalid*/ @Nullable TmapNavigationOrAttributeCallExp_Helper domapNavigationOrAttributeCallExp_Helper = mapOclExpression.getDomapNavigationOrAttributeCallExp_Helper();
-								final /*@NonInvalid*/ boolean symbol_3 = domapNavigationOrAttributeCallExp_Helper != null;
-								/*@Thrown*/ @Nullable Boolean raw_mapNavigationOrAttributeCallExp_Helper;
+								final /*@NonInvalid*/ @Nullable TmapIntegerExp domapIntegerExp = mapOclExpression.getDomapIntegerExp();
+								final /*@NonInvalid*/ boolean symbol_3 = domapIntegerExp != null;
+								/*@Thrown*/ @Nullable Boolean raw_mapIntegerExp;
 								if (symbol_3) {
-									if (domapNavigationOrAttributeCallExp_Helper == null) {
+									if (domapIntegerExp == null) {
 										throw new InvalidEvaluationException("Null where non-null value required");
 									}
-									final /*@Thrown*/ @Nullable Boolean success_2 = domapNavigationOrAttributeCallExp_Helper.getSuccess();
+									final /*@Thrown*/ @Nullable Boolean success_2 = domapIntegerExp.getSuccess();
 									final /*@Thrown*/ boolean eq_2 = success_2 == Boolean.FALSE;
 									/*@Thrown*/ @Nullable Boolean symbol_18;
 									if (eq_2) {
-										final /*@NonInvalid*/ @Nullable TmapOperationCallExp_Operation domapOperationCallExp_Operation = mapOclExpression.getDomapOperationCallExp_Operation();
-										final /*@NonInvalid*/ boolean symbol_4 = domapOperationCallExp_Operation != null;
-										/*@Thrown*/ @Nullable Boolean raw_mapOperationCallExp_Operation;
+										final /*@NonInvalid*/ @Nullable TmapNavigationOrAttributeCallExp_Helper domapNavigationOrAttributeCallExp_Helper = mapOclExpression.getDomapNavigationOrAttributeCallExp_Helper();
+										final /*@NonInvalid*/ boolean symbol_4 = domapNavigationOrAttributeCallExp_Helper != null;
+										/*@Thrown*/ @Nullable Boolean raw_mapNavigationOrAttributeCallExp_Helper;
 										if (symbol_4) {
-											if (domapOperationCallExp_Operation == null) {
+											if (domapNavigationOrAttributeCallExp_Helper == null) {
 												throw new InvalidEvaluationException("Null where non-null value required");
 											}
-											final /*@Thrown*/ @Nullable Boolean success_3 = domapOperationCallExp_Operation.getSuccess();
+											final /*@Thrown*/ @Nullable Boolean success_3 = domapNavigationOrAttributeCallExp_Helper.getSuccess();
 											final /*@Thrown*/ boolean eq_3 = success_3 == Boolean.FALSE;
 											/*@Thrown*/ @Nullable Boolean symbol_17;
 											if (eq_3) {
-												final /*@NonInvalid*/ @Nullable TmapVariableExp domapVariableExp = mapOclExpression.getDomapVariableExp();
-												final /*@NonInvalid*/ boolean symbol_5 = domapVariableExp != null;
-												/*@Thrown*/ @Nullable Boolean raw_mapVariableExp;
+												final /*@NonInvalid*/ @Nullable TmapOperatorCallExp domapOperatorCallExp = mapOclExpression.getDomapOperatorCallExp();
+												final /*@NonInvalid*/ boolean symbol_5 = domapOperatorCallExp != null;
+												/*@Thrown*/ @Nullable Boolean raw_mapOperatorCallExp;
 												if (symbol_5) {
-													if (domapVariableExp == null) {
+													if (domapOperatorCallExp == null) {
 														throw new InvalidEvaluationException("Null where non-null value required");
 													}
-													final /*@Thrown*/ @Nullable Boolean success_4 = domapVariableExp.getSuccess();
+													final /*@Thrown*/ @Nullable Boolean success_4 = domapOperatorCallExp.getSuccess();
 													final /*@Thrown*/ boolean eq_4 = success_4 == Boolean.FALSE;
 													/*@Thrown*/ @Nullable Boolean symbol_16;
 													if (eq_4) {
-														final /*@NonInvalid*/ @Nullable TmapBooleanExp domapBooleanExp = mapOclExpression.getDomapBooleanExp();
-														final /*@NonInvalid*/ boolean symbol_6 = domapBooleanExp != null;
-														/*@Thrown*/ @Nullable Boolean raw_mapBooleanExp;
+														final /*@NonInvalid*/ @Nullable TmapNavigationOrAttributeCallExp_Property domapNavigationOrAttributeCallExp_Property = mapOclExpression.getDomapNavigationOrAttributeCallExp_Property();
+														final /*@NonInvalid*/ boolean symbol_6 = domapNavigationOrAttributeCallExp_Property != null;
+														/*@Thrown*/ @Nullable Boolean raw_mapNavigationOrAttributeCallExp_Property;
 														if (symbol_6) {
-															if (domapBooleanExp == null) {
+															if (domapNavigationOrAttributeCallExp_Property == null) {
 																throw new InvalidEvaluationException("Null where non-null value required");
 															}
-															final /*@Thrown*/ @Nullable Boolean success_5 = domapBooleanExp.getSuccess();
+															final /*@Thrown*/ @Nullable Boolean success_5 = domapNavigationOrAttributeCallExp_Property.getSuccess();
 															final /*@Thrown*/ boolean eq_5 = success_5 == Boolean.FALSE;
 															/*@Thrown*/ @Nullable Boolean symbol_15;
 															if (eq_5) {
-																final /*@NonInvalid*/ @Nullable TmapIntegerExp domapIntegerExp = mapOclExpression.getDomapIntegerExp();
-																final /*@NonInvalid*/ boolean symbol_7 = domapIntegerExp != null;
-																/*@Thrown*/ @Nullable Boolean raw_mapIntegerExp;
+																final /*@NonInvalid*/ @Nullable TmapStringExp domapStringExp = mapOclExpression.getDomapStringExp();
+																final /*@NonInvalid*/ boolean symbol_7 = domapStringExp != null;
+																/*@Thrown*/ @Nullable Boolean raw_mapStringExp;
 																if (symbol_7) {
-																	if (domapIntegerExp == null) {
+																	if (domapStringExp == null) {
 																		throw new InvalidEvaluationException("Null where non-null value required");
 																	}
-																	final /*@Thrown*/ @Nullable Boolean success_6 = domapIntegerExp.getSuccess();
+																	final /*@Thrown*/ @Nullable Boolean success_6 = domapStringExp.getSuccess();
 																	final /*@Thrown*/ boolean eq_6 = success_6 == Boolean.FALSE;
 																	/*@Thrown*/ @Nullable Boolean symbol_14;
 																	if (eq_6) {
-																		final /*@NonInvalid*/ @Nullable TmapIfExp domapIfExp = mapOclExpression.getDomapIfExp();
-																		final /*@NonInvalid*/ boolean symbol_8 = domapIfExp != null;
-																		/*@Thrown*/ @Nullable Boolean raw_mapIfExp;
+																		final /*@NonInvalid*/ @Nullable TmapBooleanExp domapBooleanExp = mapOclExpression.getDomapBooleanExp();
+																		final /*@NonInvalid*/ boolean symbol_8 = domapBooleanExp != null;
+																		/*@Thrown*/ @Nullable Boolean raw_mapBooleanExp;
 																		if (symbol_8) {
-																			if (domapIfExp == null) {
+																			if (domapBooleanExp == null) {
 																				throw new InvalidEvaluationException("Null where non-null value required");
 																			}
-																			final /*@Thrown*/ @Nullable Boolean success_7 = domapIfExp.getSuccess();
+																			final /*@Thrown*/ @Nullable Boolean success_7 = domapBooleanExp.getSuccess();
 																			final /*@Thrown*/ boolean eq_7 = success_7 == Boolean.FALSE;
 																			/*@Thrown*/ @Nullable Boolean symbol_13;
 																			if (eq_7) {
@@ -4021,95 +4083,95 @@ public class ATL2QVTr extends AbstractTransformer
 																			else {
 																				symbol_13 = ValueUtil.FALSE_VALUE;
 																			}
-																			raw_mapIfExp = symbol_13;
+																			raw_mapBooleanExp = symbol_13;
 																		}
 																		else {
-																			raw_mapIfExp = ValueUtil.FALSE_VALUE;
+																			raw_mapBooleanExp = ValueUtil.FALSE_VALUE;
 																		}
-																		symbol_14 = raw_mapIfExp;
+																		symbol_14 = raw_mapBooleanExp;
 																	}
 																	else {
 																		symbol_14 = ValueUtil.FALSE_VALUE;
 																	}
-																	raw_mapIntegerExp = symbol_14;
+																	raw_mapStringExp = symbol_14;
 																}
 																else {
-																	raw_mapIntegerExp = ValueUtil.FALSE_VALUE;
+																	raw_mapStringExp = ValueUtil.FALSE_VALUE;
 																}
-																symbol_15 = raw_mapIntegerExp;
+																symbol_15 = raw_mapStringExp;
 															}
 															else {
 																symbol_15 = ValueUtil.FALSE_VALUE;
 															}
-															raw_mapBooleanExp = symbol_15;
+															raw_mapNavigationOrAttributeCallExp_Property = symbol_15;
 														}
 														else {
-															raw_mapBooleanExp = ValueUtil.FALSE_VALUE;
+															raw_mapNavigationOrAttributeCallExp_Property = ValueUtil.FALSE_VALUE;
 														}
-														symbol_16 = raw_mapBooleanExp;
+														symbol_16 = raw_mapNavigationOrAttributeCallExp_Property;
 													}
 													else {
 														symbol_16 = ValueUtil.FALSE_VALUE;
 													}
-													raw_mapVariableExp = symbol_16;
+													raw_mapOperatorCallExp = symbol_16;
 												}
 												else {
-													raw_mapVariableExp = ValueUtil.FALSE_VALUE;
+													raw_mapOperatorCallExp = ValueUtil.FALSE_VALUE;
 												}
-												symbol_17 = raw_mapVariableExp;
+												symbol_17 = raw_mapOperatorCallExp;
 											}
 											else {
 												symbol_17 = ValueUtil.FALSE_VALUE;
 											}
-											raw_mapOperationCallExp_Operation = symbol_17;
+											raw_mapNavigationOrAttributeCallExp_Helper = symbol_17;
 										}
 										else {
-											raw_mapOperationCallExp_Operation = ValueUtil.FALSE_VALUE;
+											raw_mapNavigationOrAttributeCallExp_Helper = ValueUtil.FALSE_VALUE;
 										}
-										symbol_18 = raw_mapOperationCallExp_Operation;
+										symbol_18 = raw_mapNavigationOrAttributeCallExp_Helper;
 									}
 									else {
 										symbol_18 = ValueUtil.FALSE_VALUE;
 									}
-									raw_mapNavigationOrAttributeCallExp_Helper = symbol_18;
+									raw_mapIntegerExp = symbol_18;
 								}
 								else {
-									raw_mapNavigationOrAttributeCallExp_Helper = ValueUtil.FALSE_VALUE;
+									raw_mapIntegerExp = ValueUtil.FALSE_VALUE;
 								}
-								symbol_19 = raw_mapNavigationOrAttributeCallExp_Helper;
+								symbol_19 = raw_mapIntegerExp;
 							}
 							else {
 								symbol_19 = ValueUtil.FALSE_VALUE;
 							}
-							raw_mapStringExp = symbol_19;
+							raw_mapOperationCallExp_Operation = symbol_19;
 						}
 						else {
-							raw_mapStringExp = ValueUtil.FALSE_VALUE;
+							raw_mapOperationCallExp_Operation = ValueUtil.FALSE_VALUE;
 						}
-						symbol_20 = raw_mapStringExp;
+						symbol_20 = raw_mapOperationCallExp_Operation;
 					}
 					else {
 						symbol_20 = ValueUtil.FALSE_VALUE;
 					}
-					raw_mapOperatorCallExp = symbol_20;
+					raw_mapIfExp = symbol_20;
 				}
 				else {
-					raw_mapOperatorCallExp = ValueUtil.FALSE_VALUE;
+					raw_mapIfExp = ValueUtil.FALSE_VALUE;
 				}
-				symbol_21 = raw_mapOperatorCallExp;
+				symbol_21 = raw_mapIfExp;
 			}
 			else {
 				symbol_21 = ValueUtil.FALSE_VALUE;
 			}
-			raw_mapNavigationOrAttributeCallExp_Property = symbol_21;
+			raw_mapVariableExp = symbol_21;
 		}
 		else {
-			raw_mapNavigationOrAttributeCallExp_Property = ValueUtil.FALSE_VALUE;
+			raw_mapVariableExp = ValueUtil.FALSE_VALUE;
 		}
 		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println((raw_mapNavigationOrAttributeCallExp_Property ? "done "  : "fail ") + "MAP_mDmapOclExpression_success");
+			AbstractTransformer.INVOCATIONS.println((raw_mapVariableExp ? "done "  : "fail ") + "MAP_mDmapOclExpression_success");
 		}
-		return raw_mapNavigationOrAttributeCallExp_Property;
+		return raw_mapVariableExp;
 	}
 
 	/**
@@ -6768,8 +6830,8 @@ public class ATL2QVTr extends AbstractTransformer
 	 * check when_mapOclExpression.success;
 	 * var atlParent : OCL::OperationCallExp[1] := atlArgument.parentOperation;
 	 * var when_mapOperationCallExp : trace_ATL2QVTr::DmapOclExpression[1] := atlParent.DmapOclExpression;
-	 * check var qvtrParent : OperationCallExp[1] := when_mapOperationCallExp.d2qvtrExpression;
 	 * check when_mapOperationCallExp.success;
+	 * check var qvtrParent : OperationCallExp[1] := when_mapOperationCallExp.d2qvtrExpression;
 	 * var qvtrArgument : OCLExpression[1] := when_mapOclExpression.d2qvtrExpression;
 	 * set qvtrParent.ownedArguments := qvtrArgument;
 	 * set trace.t1atlParent := atlParent;
@@ -6812,18 +6874,18 @@ public class ATL2QVTr extends AbstractTransformer
 						if (DmapOclExpression_0 == null) {
 							throw new InvalidEvaluationException("Null where non-null value required");
 						}
-						@SuppressWarnings("null")
-						final /*@Thrown*/ @NonNull OCLExpression temp1_qvtrParent = DmapOclExpression_0.getD2qvtrExpression();
-						final /*@NonInvalid*/ boolean symbol_3 = temp1_qvtrParent instanceof org.eclipse.ocl.pivot.OperationCallExp;
+						final /*@Thrown*/ @Nullable Boolean success_0 = DmapOclExpression_0.getSuccess();
+						if (success_0 == null) {
+							throw new InvalidEvaluationException("Null if condition");
+						}
 						/*@Thrown*/ @Nullable Boolean symbol_13;
-						if (symbol_3) {
-							final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OperationCallExp symbol_4 = (org.eclipse.ocl.pivot.OperationCallExp)temp1_qvtrParent;
-							final /*@Thrown*/ @Nullable Boolean success_0 = DmapOclExpression_0.getSuccess();
-							if (success_0 == null) {
-								throw new InvalidEvaluationException("Null if condition");
-							}
+						if (success_0) {
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull OCLExpression temp1_qvtrParent = DmapOclExpression_0.getD2qvtrExpression();
+							final /*@NonInvalid*/ boolean symbol_3 = temp1_qvtrParent instanceof org.eclipse.ocl.pivot.OperationCallExp;
 							/*@Thrown*/ @Nullable Boolean symbol_12;
-							if (success_0) {
+							if (symbol_3) {
+								final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull OperationCallExp symbol_4 = (org.eclipse.ocl.pivot.OperationCallExp)temp1_qvtrParent;
 								@SuppressWarnings("null")
 								final /*@Thrown*/ @NonNull OCLExpression d2qvtrExpression = DmapOclExpression.getD2qvtrExpression();
 								// mapping statements
@@ -7768,78 +7830,64 @@ public class ATL2QVTr extends AbstractTransformer
 
 	/**
 	 *
-	 * map mTmapVariableExp__referredVariable__Helper_success__p1 in ATL2QVTr {
+	 * map mTmapVariableExp__referredVariable__Helper_success_p1 in ATL2QVTr {
 	 * guard:middle trace : trace_ATL2QVTr::TmapVariableExp_referredVariable_Helper[1] success success;
 	 * var atlVariable : OCL::VariableDeclaration[1] := trace.t1atlVariable;
 	 * check atlVariable.varName =
 	 *   'self';
 	 * var dispatcher : trace_ATL2QVTr::DmapVariableExp_referredVariable[1] := trace.dispatcher;
 	 * var atlExpression : OCL::VariableExp[1] := dispatcher.d1atlExpression;
-	 * var atlHelper : ATL::Helper[?] := this.getHelper(atlExpression);
-	 * var atlHelper1 : ATL::Helper[1] := atlHelper;
-	 * var when_mapVariable : trace_ATL2QVTr::TmapVariable[1] := atlHelper1.TmapVariable;
+	 * var atlHelper : ATL::Helper[1] := this.getHelper(atlExpression);
+	 * var when_mapVariable : trace_ATL2QVTr::TmapVariable[1] := atlHelper.TmapVariable;
 	 * set dispatcher.success := true;
 	 * set dispatcher.result := trace;
-	 * set trace.t1atlHelper := atlHelper1;
 	 *
 	 */
-	protected boolean MAP_mTmapVariableExp__referredVariable__Helper_success__p1(final /*@NonInvalid*/ @NonNull TmapVariableExp_referredVariable_Helper trace_69)  {
+	protected boolean MAP_mTmapVariableExp__referredVariable__Helper_success_p1(final /*@NonInvalid*/ @NonNull TmapVariableExp_referredVariable_Helper trace_69)  {
 		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("invoke MAP_mTmapVariableExp__referredVariable__Helper_success__p1" + ", " + trace_69);
+			AbstractTransformer.INVOCATIONS.println("invoke MAP_mTmapVariableExp__referredVariable__Helper_success_p1" + ", " + trace_69);
 		}
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ org.eclipse.m2m.atl.common.OCL.@NonNull VariableDeclaration t1atlVariable = trace_69.getT1atlVariable();
 		@SuppressWarnings("null")
 		final /*@NonInvalid*/ @NonNull String varName = t1atlVariable.getVarName();
 		final /*@NonInvalid*/ boolean eq = varName.equals(STR_self);
-		/*@Thrown*/ @Nullable Boolean symbol_6;
+		/*@Thrown*/ @Nullable Boolean symbol_4;
 		if (eq) {
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ @NonNull DmapVariableExp_referredVariable dispatcher_0 = trace_69.getDispatcher();
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ org.eclipse.m2m.atl.common.OCL.@NonNull VariableExp d1atlExpression = dispatcher_0.getD1atlExpression();
-			final /*@NonInvalid*/ @Nullable Helper getHelper = ((FUN_getHelper)FTOR_getHelper.getUniqueComputation(this, d1atlExpression)).instance;
-			final /*@NonInvalid*/ boolean symbol_0 = getHelper != null;
-			/*@Thrown*/ @Nullable Boolean raw_atlHelper1;
+			final /*@NonInvalid*/ @NonNull Helper getHelper = ((FUN_getHelper)FTOR_getHelper.getUniqueComputation(this, d1atlExpression)).instance;
+			final /*@NonInvalid*/ @Nullable TmapVariable TmapVariable = OPPOSITE_OF_TmapVariable_t1atlVariable.get(getHelper);
+			final /*@NonInvalid*/ boolean symbol_0 = TmapVariable != null;
+			/*@Thrown*/ @Nullable Boolean raw_when_mapVariable;
 			if (symbol_0) {
-				if (getHelper == null) {
+				if (TmapVariable == null) {
 					throw new InvalidEvaluationException("Null where non-null value required");
 				}
-				final /*@Thrown*/ @Nullable TmapVariable TmapVariable = OPPOSITE_OF_TmapVariable_t1atlVariable.get(getHelper);
-				final /*@Thrown*/ boolean symbol_1 = TmapVariable != null;
-				/*@Thrown*/ @Nullable Boolean raw_when_mapVariable;
-				if (symbol_1) {
-					if (TmapVariable == null) {
-						throw new InvalidEvaluationException("Null where non-null value required");
-					}
-					// mapping statements
-					dispatcher_0.setSuccess((Boolean)ValueUtil.TRUE_VALUE);
-					dispatcher_0.setResult(trace_69);
-					trace_69.setT1atlHelper(getHelper);
-					final /*@Thrown*/ @Nullable Boolean mTmapVariableExp__referredVariable__Helper_success__p1 = ValueUtil.TRUE_VALUE;
-					raw_when_mapVariable = mTmapVariableExp__referredVariable__Helper_success__p1;
-				}
-				else {
-					raw_when_mapVariable = ValueUtil.FALSE_VALUE;
-				}
-				raw_atlHelper1 = raw_when_mapVariable;
+				// mapping statements
+				dispatcher_0.setSuccess((Boolean)ValueUtil.TRUE_VALUE);
+				dispatcher_0.setResult(trace_69);
+				final /*@Thrown*/ @Nullable Boolean mTmapVariableExp__referredVariable__Helper_success_p1 = ValueUtil.TRUE_VALUE;
+				raw_when_mapVariable = mTmapVariableExp__referredVariable__Helper_success_p1;
 			}
 			else {
-				raw_atlHelper1 = ValueUtil.FALSE_VALUE;
+				raw_when_mapVariable = ValueUtil.FALSE_VALUE;
 			}
-			symbol_6 = raw_atlHelper1;
+			symbol_4 = raw_when_mapVariable;
 		}
 		else {
-			symbol_6 = ValueUtil.FALSE_VALUE;
+			symbol_4 = ValueUtil.FALSE_VALUE;
 		}
-		trace_69.setSuccess(symbol_6);
-		if (symbol_6) {
-			objectManager.assigned(trace_69, trace_ATL2QVTrPackage.Literals.IMAP_VARIABLE_EXP_REFERRED_VARIABLE__SUCCESS, symbol_6);
+		trace_69.setSuccess(symbol_4);
+		if (symbol_4) {
+			objectManager.assigned(trace_69, trace_ATL2QVTrPackage.Literals.IMAP_VARIABLE_EXP_REFERRED_VARIABLE__SUCCESS, symbol_4);
 		}
 		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println((symbol_6 ? "done "  : "fail ") + "MAP_mTmapVariableExp__referredVariable__Helper_success__p1");
+			AbstractTransformer.INVOCATIONS.println((symbol_4 ? "done "  : "fail ") + "MAP_mTmapVariableExp__referredVariable__Helper_success_p1");
 		}
-		return symbol_6;
+		return symbol_4;
 	}
 
 	/**
@@ -7911,11 +7959,13 @@ public class ATL2QVTr extends AbstractTransformer
 	/**
 	 *
 	 * map mTmapVariableExp__referredVariable__Helper_t2qvtrVa_p3 in ATL2QVTr {
-	 * guard:middle trace : trace_ATL2QVTr::TmapVariableExp_referredVariable_Helper[1];
+	 *
+	 *   guard:middle trace : trace_ATL2QVTr::TmapVariableExp_referredVariable_Helper[1];
 	 * check trace.success;
 	 * var dispatcher : trace_ATL2QVTr::DmapVariableExp_referredVariable[1] := trace.dispatcher;
-	 * var atlHelper : ATL::Helper[1] := trace.t1atlHelper;
+	 * var atlExpression : OCL::VariableExp[1] := dispatcher.d1atlExpression;
 	 * var qvtrExpression : VariableExp[1] := dispatcher.d2qvtrExpression;
+	 * var atlHelper : ATL::Helper[1] := this.getHelper(atlExpression);
 	 * var when_mapVariable : trace_ATL2QVTr::TmapVariable[1] := atlHelper.TmapVariable;
 	 * var qvtrVariable : VariableDeclaration[1] := when_mapVariable.t2qvtrVariable;
 	 * set qvtrExpression.referredVariable := qvtrVariable;
@@ -7935,10 +7985,11 @@ public class ATL2QVTr extends AbstractTransformer
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ @NonNull DmapVariableExp_referredVariable dispatcher_0 = trace_70.getDispatcher();
 			@SuppressWarnings("null")
-			final /*@NonInvalid*/ @NonNull Helper t1atlHelper = trace_70.getT1atlHelper();
+			final /*@NonInvalid*/ org.eclipse.m2m.atl.common.OCL.@NonNull VariableExp d1atlExpression = dispatcher_0.getD1atlExpression();
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull VariableExp d2qvtrExpression = dispatcher_0.getD2qvtrExpression();
-			final /*@NonInvalid*/ @Nullable TmapVariable TmapVariable = OPPOSITE_OF_TmapVariable_t1atlVariable.get(t1atlHelper);
+			final /*@NonInvalid*/ @NonNull Helper getHelper = ((FUN_getHelper)FTOR_getHelper.getUniqueComputation(this, d1atlExpression)).instance;
+			final /*@NonInvalid*/ @Nullable TmapVariable TmapVariable = OPPOSITE_OF_TmapVariable_t1atlVariable.get(getHelper);
 			final /*@NonInvalid*/ boolean symbol_0 = TmapVariable != null;
 			/*@Thrown*/ @Nullable Boolean raw_when_mapVariable;
 			if (symbol_0) {
@@ -7970,11 +8021,13 @@ public class ATL2QVTr extends AbstractTransformer
 	/**
 	 *
 	 * map mTmapVariableExp__referredVariable__Helper__type_p4 in ATL2QVTr {
-	 * guard:middle trace : trace_ATL2QVTr::TmapVariableExp_referredVariable_Helper[1];
+	 *
+	 *   guard:middle trace : trace_ATL2QVTr::TmapVariableExp_referredVariable_Helper[1];
 	 * check trace.success;
 	 * var dispatcher : trace_ATL2QVTr::DmapVariableExp_referredVariable[1] := trace.dispatcher;
-	 * var atlHelper : ATL::Helper[1] := trace.t1atlHelper;
+	 * var atlExpression : OCL::VariableExp[1] := dispatcher.d1atlExpression;
 	 * var qvtrExpression : VariableExp[1] := dispatcher.d2qvtrExpression;
+	 * var atlHelper : ATL::Helper[1] := this.getHelper(atlExpression);
 	 * var when_mapVariable : trace_ATL2QVTr::TmapVariable[1] := atlHelper.TmapVariable;
 	 * var qvtrVariable : VariableDeclaration[1] := when_mapVariable.t2qvtrVariable;
 	 * var type : Type[?] := qvtrVariable.type;
@@ -7994,10 +8047,11 @@ public class ATL2QVTr extends AbstractTransformer
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ @NonNull DmapVariableExp_referredVariable dispatcher_0 = trace_71.getDispatcher();
 			@SuppressWarnings("null")
-			final /*@NonInvalid*/ @NonNull Helper t1atlHelper = trace_71.getT1atlHelper();
+			final /*@NonInvalid*/ org.eclipse.m2m.atl.common.OCL.@NonNull VariableExp d1atlExpression = dispatcher_0.getD1atlExpression();
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull VariableExp d2qvtrExpression = dispatcher_0.getD2qvtrExpression();
-			final /*@NonInvalid*/ @Nullable TmapVariable TmapVariable = OPPOSITE_OF_TmapVariable_t1atlVariable.get(t1atlHelper);
+			final /*@NonInvalid*/ @NonNull Helper getHelper = ((FUN_getHelper)FTOR_getHelper.getUniqueComputation(this, d1atlExpression)).instance;
+			final /*@NonInvalid*/ @Nullable TmapVariable TmapVariable = OPPOSITE_OF_TmapVariable_t1atlVariable.get(getHelper);
 			final /*@NonInvalid*/ boolean symbol_0 = TmapVariable != null;
 			/*@Thrown*/ @Nullable Boolean raw_when_mapVariable;
 			if (symbol_0) {

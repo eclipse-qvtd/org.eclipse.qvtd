@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -19,8 +19,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-
-import org.eclipse.m2m.atl.common.ATL.Helper;
 
 import org.eclipse.m2m.atl.common.OCL.VariableDeclaration;
 
@@ -37,7 +35,6 @@ import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExp_referredVariable_HelperImpl#getDispatcher <em>Dispatcher</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExp_referredVariable_HelperImpl#getT1atlHelper <em>T1atl Helper</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExp_referredVariable_HelperImpl#getT1atlVariable <em>T1atl Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.impl.TmapVariableExp_referredVariable_HelperImpl#getT2qvtrVariable <em>T2qvtr Variable</em>}</li>
  * </ul>
@@ -45,16 +42,6 @@ import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage;
  * @generated
  */
 public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp_referredVariableImpl implements TmapVariableExp_referredVariable_Helper {
-	/**
-	 * The cached value of the '{@link #getT1atlHelper() <em>T1atl Helper</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getT1atlHelper()
-	 * @generated
-	 * @ordered
-	 */
-	protected Helper t1atlHelper;
-
 	/**
 	 * The cached value of the '{@link #getT1atlVariable() <em>T1atl Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -143,49 +130,9 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	 * @generated
 	 */
 	@Override
-	public Helper getT1atlHelper() {
-		if (t1atlHelper != null && t1atlHelper.eIsProxy()) {
-			InternalEObject oldT1atlHelper = (InternalEObject)t1atlHelper;
-			t1atlHelper = (Helper)eResolveProxy(oldT1atlHelper);
-			if (t1atlHelper != oldT1atlHelper) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_HELPER, oldT1atlHelper, t1atlHelper));
-			}
-		}
-		return t1atlHelper;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Helper basicGetT1atlHelper() {
-		return t1atlHelper;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setT1atlHelper(Helper newT1atlHelper) {
-		Helper oldT1atlHelper = t1atlHelper;
-		t1atlHelper = newT1atlHelper;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_HELPER, oldT1atlHelper, t1atlHelper));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public VariableDeclaration getT1atlVariable() {
 		if (t1atlVariable != null && t1atlVariable.eIsProxy()) {
-			InternalEObject oldT1atlVariable = (InternalEObject)t1atlVariable;
+			InternalEObject oldT1atlVariable = t1atlVariable;
 			t1atlVariable = (VariableDeclaration)eResolveProxy(oldT1atlVariable);
 			if (t1atlVariable != oldT1atlVariable) {
 				if (eNotificationRequired())
@@ -311,9 +258,6 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 		switch (featureID) {
 			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER:
 				return getDispatcher();
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_HELPER:
-				if (resolve) return getT1atlHelper();
-				return basicGetT1atlHelper();
 			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_VARIABLE:
 				if (resolve) return getT1atlVariable();
 				return basicGetT1atlVariable();
@@ -334,9 +278,6 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 		switch (featureID) {
 			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER:
 				setDispatcher((DmapVariableExp_referredVariable)newValue);
-				return;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_HELPER:
-				setT1atlHelper((Helper)newValue);
 				return;
 			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_VARIABLE:
 				setT1atlVariable((VariableDeclaration)newValue);
@@ -359,9 +300,6 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER:
 				setDispatcher((DmapVariableExp_referredVariable)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_HELPER:
-				setT1atlHelper((Helper)null);
-				return;
 			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_VARIABLE:
 				setT1atlVariable((VariableDeclaration)null);
 				return;
@@ -382,8 +320,6 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 		switch (featureID) {
 			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER:
 				return getDispatcher() != null;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_HELPER:
-				return t1atlHelper != null;
 			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_VARIABLE:
 				return t1atlVariable != null;
 			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T2QVTR_VARIABLE:
