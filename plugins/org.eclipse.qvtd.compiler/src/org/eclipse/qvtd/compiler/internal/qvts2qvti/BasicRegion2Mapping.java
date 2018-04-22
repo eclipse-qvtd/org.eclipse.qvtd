@@ -28,7 +28,6 @@ import org.eclipse.ocl.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.pivot.CollectionRange;
 import org.eclipse.ocl.pivot.CollectionType;
-import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.EnumLiteralExp;
 import org.eclipse.ocl.pivot.IfExp;
 import org.eclipse.ocl.pivot.IterateExp;
@@ -68,6 +67,8 @@ import org.eclipse.ocl.pivot.utilities.NameUtil.ToStringComparator;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedCondition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedConditionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -93,13 +94,11 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.BooleanValueNode;
-import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.ExpressionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
@@ -108,7 +107,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -192,22 +190,22 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 		}
 
-		public void analyze() {
-			Set<@NonNull CheckedCondition> checkedConditions = computeCheckedConditions();
+		public @NonNull Iterable<@NonNull CheckedCondition> analyze() {
+			Set<@NonNull CheckedCondition> checkedConditions = checkedConditionAnalysis.computeCheckedConditions();
 			int checkableSize = checkedConditions.size();
-			if (checkableSize > 0) {
-				List<@NonNull CheckedCondition> sortedCheckedConditions = new ArrayList<>(checkedConditions);
-				if (checkableSize > 1) {
-					Collections.sort(sortedCheckedConditions);
-				}
-				for (@NonNull CheckedCondition checkedCondition : sortedCheckedConditions) {
-					for (@NonNull Edge edge : checkedCondition.getEdges()) {
-						addEdge(edge);
-					}
+			//			if (checkableSize > 0) {
+			List<@NonNull CheckedCondition> sortedCheckedConditions = new ArrayList<>(checkedConditions);
+			if (checkableSize > 1) {
+				Collections.sort(sortedCheckedConditions, new CheckedConditionWeightComparator(BasicRegion2Mapping.this));
+			}
+			for (@NonNull CheckedCondition checkedCondition : sortedCheckedConditions) {
+				for (@NonNull Edge edge : checkedCondition.getEdges()) {
+					addEdge(edge);
 				}
 			}
+			//			}
 			List<@NonNull Edge> residualEdges = null;
-			for (@NonNull Edge edge : oldUnconditionalEdges) {
+			for (@NonNull Edge edge : checkedConditionAnalysis.getOldUnconditionalEdges()) {
 				if (!edge2subexpression.containsKey(edge)) {
 					if (residualEdges == null) {
 						residualEdges = new ArrayList<>();
@@ -223,110 +221,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 			//			assert edgeSchedule.size() == oldEdges.size();		-- FIXME oppositeEdges inhibit simple equality check
 			//			assert new HashSet<>(edgeSchedule).equals(new HashSet<>(oldEdges));
-		}
-
-		/**
-		 * Return all old edges that require a check for readiness or consistency.
-		 */
-		private @NonNull Set<@NonNull CheckedCondition> computeCheckedConditions() {
-			Set<@NonNull Property> allCheckedProperties2 = allCheckedProperties;
-			Set<@NonNull CheckedCondition> checkedConditions = new HashSet<>();
-			Set<@NonNull NavigableEdge> checkedNavigableEdges = null;
-			for (@NonNull Edge edge : oldUnconditionalEdges) {
-				CheckedCondition checkedCondition = null;
-				if (edge instanceof CastEdge) {
-					checkedCondition = new CastEdgeCheckedCondition((CastEdge)edge);
-				}
-				else if (edge instanceof PredicateEdge) {
-					checkedCondition = new PredicateEdgeCheckedCondition((PredicateEdge)edge);
-				}
-				else if ((edge instanceof NavigationEdge) && isCheckedNavigation((NavigationEdge)edge)) {
-					computeOldUnconditionalEdges();
-					checkedCondition = new PredicateNavigationEdgeCheckedCondition((NavigationEdge)edge);
-				}
-				else if (edge instanceof NavigableEdge) {
-					NavigableEdge navigableEdge = (NavigableEdge)edge;
-					if (allCheckedProperties2 != null) {
-						NavigableEdge checkedEdge = QVTscheduleUtil.getPrimaryEdge(navigableEdge);
-						NavigableEdge oppositeEdge = checkedEdge.getOppositeEdge();
-						if (oppositeEdge != null) {
-							Node sourceNode = QVTscheduleUtil.getSourceNode(checkedEdge);
-							Node targetNode = QVTscheduleUtil.getTargetNode(checkedEdge);
-							Integer sourceCost = reachabilityForest.getCost(sourceNode);
-							Integer targetCost = reachabilityForest.getCost(targetNode);
-							if ((sourceCost != null) && (targetCost != null) && (0 < targetCost) &&  (targetCost < sourceCost)) {
-								checkedEdge = oppositeEdge;
-							}
-						}
-
-
-						Property property = checkedEdge.getProperty();
-						if (allCheckedProperties2.contains(property)) {
-							if (checkedNavigableEdges == null) {
-								checkedNavigableEdges = new HashSet<>();
-							}
-							if (checkedNavigableEdges.add(checkedEdge)) {
-								checkedCondition = new NavigableEdgeCheckedCondition(checkedEdge);
-							}
-						}
-					}
-					if (checkedCondition == null) {
-						Node targetNode = QVTscheduleUtil.getTargetNode(edge);
-						if (edge.isPredicated() && targetNode.isConstant()) {
-							checkedCondition = new ConstantTargetCheckedCondition((NavigableEdge)edge);
-						}
-						if ((checkedCondition == null) && edge.isOld()) {
-							Property property = QVTscheduleUtil.getProperty(navigableEdge);
-							CompleteClass edgeTargetCompleteClass = getMetamodelManager().getCompleteModel().getCompleteClass(QVTrelationUtil.getType(property));
-							Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
-							Integer sourceCost = reachabilityForest.getCost(sourceNode);
-							Integer targetCost = reachabilityForest.getCost(targetNode);
-							assert (sourceCost != null) && (targetCost != null);
-							if (sourceCost < targetCost) {
-								CompleteClass targetNodeCompleteClass = targetNode.getCompleteClass();
-								if (!edgeTargetCompleteClass.conformsTo(targetNodeCompleteClass)) {
-									checkedCondition = new CastEdgeCheckedCondition(navigableEdge);
-								}
-							}
-						}
-					}
-				}
-				if (checkedCondition != null) {
-					checkedConditions.add(checkedCondition);
-				}
-			}
-			//
-			//	Multi-input nodes require a consistency check.
-			//
-			for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
-				if (node.isOld() && node.isUnconditional()) {
-					Integer targetCost = reachabilityForest.getCost(node);
-					assert targetCost != null;
-					if (node.isOld()) {
-						Edge firstEdge = null;
-						MultipleEdgeCheckedCondition checkedCondition = null;
-						for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-							if (edge.isOld() && !edge.isExpression()) {		// FIXME why exclude expression?
-								Integer sourceCost = reachabilityForest.getCost(QVTscheduleUtil.getSourceNode(edge));
-								assert sourceCost != null;
-								if (sourceCost <= targetCost) {
-									if (firstEdge == null) {
-										firstEdge = edge;
-									}
-									else if (checkedCondition == null){
-										checkedCondition = new MultipleEdgeCheckedCondition(firstEdge, edge);
-										checkedConditions.add(checkedCondition);
-									}
-									else {
-										checkedCondition.addEdge(edge);
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-			return checkedConditions;
+			return sortedCheckedConditions;
 		}
 
 		private void createCastPredicates(@NonNull Node sourceNode, @NonNull VariableDeclaration sourceVariable) {
@@ -354,7 +249,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 		}
 
-		public void synthesize() {
+		public void synthesize(@NonNull Iterable<@NonNull CheckedCondition> checkedConditions) {
 			for (@NonNull Edge edge : edgeSchedule) {
 				assert edge.isUnconditional();
 				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
@@ -1106,208 +1001,6 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	/**
-	 * A CheckedCondition identifies a possible micromapping failure mechanism. QVTi synthesis prioritises
-	 * easily computed CheckedConditions to minimize the wasted effort in computing failures.
-	 */
-	abstract class CheckedCondition implements Comparable<@NonNull CheckedCondition>
-	{
-		private int weight = -1;
-
-		protected void accumulateNodes(@NonNull Set<@NonNull Node> requiredNodes, @NonNull Edge edge) {
-			requiredNodes.addAll(getPrecedingNodes(QVTscheduleUtil.getSourceNode(edge)));
-			requiredNodes.addAll(getPrecedingNodes(QVTscheduleUtil.getTargetNode(edge)));
-		}
-
-		@Override
-		public int compareTo(@NonNull CheckedCondition that) {
-			int w1 = this.getWeight();
-			int w2 = that.getWeight();
-			return w1 - w2;
-		}
-
-		protected abstract int computeWeight();
-
-		public abstract @NonNull Iterable<@NonNull Edge> getEdges();
-
-		public int getWeight() {
-			if (weight < 0) {
-				weight = computeWeight();
-			}
-			return weight;
-		}
-
-		@Override
-		public @NonNull String toString() {
-			StringBuilder s = new StringBuilder();
-			s.append(getClass().getSimpleName());
-			s.append("(");
-			boolean isFirst = true;
-			for (@NonNull Edge edge : getEdges()) {
-				if (!isFirst) {
-					s.append(",");
-				}
-				s.append(edge.getDisplayName());
-				isFirst = false;
-			}
-			s.append(")");
-			return s.toString();
-		}
-
-	}
-
-	/**
-	 * A CastEdgeCheckedCondition identifies the failure when a source fails to compky with the required target type.
-	 */
-	class CastEdgeCheckedCondition extends CheckedCondition
-	{
-		private final @NonNull NavigableEdge castEdge;
-
-		public CastEdgeCheckedCondition(@NonNull NavigableEdge castEdge) {
-			this.castEdge = castEdge;
-		}
-
-		@Override
-		protected int computeWeight() {
-			Set<@NonNull Node> requiredNodes = new HashSet<>();
-			accumulateNodes(requiredNodes, castEdge);
-			return requiredNodes.size();
-		}
-
-		@Override
-		public @NonNull Iterable<@NonNull Edge> getEdges() {
-			return Collections.singletonList(castEdge);
-		}
-	}
-
-	/**
-	 * A ConstantTargetCheckedCondition identifies the failure when a computation fails to yield the required constant value.
-	 */
-	class ConstantTargetCheckedCondition extends CheckedCondition
-	{
-		private final @NonNull NavigableEdge predicateEdge;
-
-		public ConstantTargetCheckedCondition(@NonNull NavigableEdge predicateEdge) {
-			this.predicateEdge = predicateEdge;
-		}
-
-		@Override
-		protected int computeWeight() {
-			Set<@NonNull Node> requiredNodes = new HashSet<>();
-			requiredNodes.addAll(getPrecedingNodes(QVTscheduleUtil.getSourceNode(predicateEdge)));
-			return requiredNodes.size();
-		}
-
-		@Override
-		public @NonNull Iterable<@NonNull Edge> getEdges() {
-			return Collections.singletonList(predicateEdge);
-		}
-	}
-
-	/**
-	 * A MultipleEdgeCheckedCondition identifies the failure when two alternate navigation paths yield inconsistent results.
-	 */
-	class MultipleEdgeCheckedCondition extends CheckedCondition
-	{
-		private final @NonNull List<@NonNull Edge> edges = new ArrayList<>();
-
-		public MultipleEdgeCheckedCondition(@NonNull Edge firstEdge, @NonNull Edge secondEdge) {
-			addEdge(firstEdge);
-			addEdge(secondEdge);
-		}
-
-		public boolean addEdge(@NonNull Edge edge) {
-			return edges.add(edge);
-		}
-
-		@Override
-		protected int computeWeight() {
-			Set<@NonNull Node> requiredNodes = new HashSet<>();
-			for (@NonNull Edge edge : edges) {
-				accumulateNodes(requiredNodes, edge);
-			}
-			return requiredNodes.size();
-		}
-
-		@Override
-		public @NonNull Iterable<@NonNull Edge> getEdges() {
-			return edges;
-		}
-	}
-
-	/**
-	 * A NavigableEdgeCheckedCondition identifies the temporary failure that arises when
-	 * observing a property access to a not-yet assigned slot.
-	 */
-	class NavigableEdgeCheckedCondition extends CheckedCondition
-	{
-		private final @NonNull NavigableEdge navigableEdge;
-
-		public NavigableEdgeCheckedCondition(@NonNull NavigableEdge navigableEdge) {
-			this.navigableEdge = navigableEdge;
-		}
-
-		@Override
-		protected int computeWeight() {
-			Set<@NonNull Node> requiredNodes = new HashSet<>();
-			accumulateNodes(requiredNodes, navigableEdge);
-			return requiredNodes.size();
-		}
-
-		@Override
-		public @NonNull Iterable<@NonNull Edge> getEdges() {
-			return Collections.singletonList(navigableEdge);
-		}
-	}
-
-	/**
-	 * A PredicateEdgeCheckedCondition identifies the failure of a required consistent computation result.
-	 */
-	class PredicateEdgeCheckedCondition extends CheckedCondition
-	{
-		private final @NonNull PredicateEdge predicateEdge;
-
-		public PredicateEdgeCheckedCondition(@NonNull PredicateEdge predicateEdge) {
-			this.predicateEdge = predicateEdge;
-		}
-
-		@Override
-		protected int computeWeight() {
-			Set<@NonNull Node> requiredNodes = new HashSet<>();
-			accumulateNodes(requiredNodes, predicateEdge);
-			return requiredNodes.size();
-		}
-
-		@Override
-		public @NonNull Iterable<@NonNull Edge> getEdges() {
-			return Collections.singletonList(predicateEdge);
-		}
-	}
-
-	/**
-	 * A PredicateNavigationEdgeCheckedCondition identifies the failure of a navigation to lovate ta required constant value.
-	 */
-	class PredicateNavigationEdgeCheckedCondition extends CheckedCondition
-	{
-		private final @NonNull NavigationEdge navigationEdge;
-
-		public PredicateNavigationEdgeCheckedCondition(@NonNull NavigationEdge navigationEdge) {
-			this.navigationEdge = navigationEdge;
-		}
-
-		@Override
-		protected int computeWeight() {
-			Set<@NonNull Node> requiredNodes = new HashSet<>();
-			accumulateNodes(requiredNodes, navigationEdge);
-			return requiredNodes.size();
-		}
-
-		@Override
-		public @NonNull Iterable<@NonNull Edge> getEdges() {
-			return Collections.singletonList(navigationEdge);
-		}
-	}
-
-	/**
 	 * Lazily computed closure of all preceding nodes, icluding the final node, of each node.
 	 */
 	private @Nullable Map<@NonNull Node, @NonNull Set<@NonNull Node>> node2precedingNodeClosure = null;
@@ -1326,18 +1019,6 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 * Map from each subexpression edge to its contents.
 	 */
 	private final @NonNull Map<@NonNull Edge, @NonNull Subexpression> edge2subexpression = new HashMap<>();
-
-	/**
-	 * All properties (and their opposites) that need to be checked for readiness before access.
-	 */
-	private final @Nullable Set<@NonNull Property> allCheckedProperties;
-
-	/**
-	 * The unconditional old edges provide the pattern matching workload.
-	 * Once cost sorted the list is a sensible residual scheduling order after higher priority checked edges.
-	 * Conditional edges should be scheduled as a consequence of an invoking unconditional edge/node.
-	 */
-	private final @NonNull List<@NonNull Edge> oldUnconditionalEdges;
 
 	/**
 	 * The selected head from each head group that is actually passed. Other heads are computed.
@@ -1359,9 +1040,15 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 */
 	private final @NonNull ReachabilityForest reachabilityForest;
 
+	/**
+	 * The failure mechanisms.
+	 */
+	private final @NonNull CheckedConditionAnalysis checkedConditionAnalysis;
+
 	public BasicRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Region region) {
 		super(visitor, region);
 		this.reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
+		this.checkedConditionAnalysis = new CheckedConditionAnalysis(scheduleManager, reachabilityForest, region);
 		this.resultNode2subexpression = computeSubexpressions();
 		//
 		//	Gather the subexpression contents.
@@ -1370,8 +1057,6 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		for (@NonNull Subexpression subexpression : resultNode2subexpression.values()) {
 			subexpression.analyze(subexpressionResults);
 		}
-		this.allCheckedProperties = computeCheckedProperties();
-		this.oldUnconditionalEdges = computeOldUnconditionalEdges();
 	}
 
 	private @NonNull Iterable<@NonNull Node> getReachabilityRootNodes() {
@@ -1422,57 +1107,13 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	public void addVariable(@NonNull Node node, @NonNull VariableDeclaration variableDeclaration) {
+		@SuppressWarnings("unused")
 		VariableDeclaration oldVariableDeclaration = node2variable.put(node, variableDeclaration);
 		// assert oldVariableDeclaration == null;   -- FIXME QVTc test overwrites
 	}
 
 	public @Nullable VariableDeclaration basicGetVariable(@NonNull Node node) {
 		return node2variable.get(node);
-	}
-
-	/**
-	 * Return all properties (and their opposites) that need checking for readiness prior to access.
-	 */
-	private @Nullable Set<@NonNull Property> computeCheckedProperties() {
-		//
-		// Better, we would not be pessimistic about input/output typedModel ambiguity in endogeneous
-		// mappings, but that incurs many typedModel accuracy issues.
-		//
-		Set<@NonNull Property> allCheckedProperties = null;
-		DomainUsage anyUsage = scheduleManager.getDomainUsageAnalysis().getAnyUsage();
-		for (@NonNull TypedModel qvtmTypedModel : anyUsage.getTypedModels()) {
-			Iterable<@NonNull NavigableEdge> checkedEdges = scheduleManager.getRegionAnalysis(region).getCheckedEdges(qvtmTypedModel);
-			if (checkedEdges != null) {
-				for (@NonNull NavigableEdge checkedEdge : checkedEdges) {
-					Property asProperty = QVTscheduleUtil.getProperty(checkedEdge);
-					if (allCheckedProperties == null) {
-						allCheckedProperties = new HashSet<>();
-					}
-					allCheckedProperties.add(asProperty);
-					Property asOppositeProperty = asProperty.getOpposite();
-					if (asOppositeProperty != null) {
-						allCheckedProperties.add(asOppositeProperty);
-					}
-				}
-			}
-		}
-		return allCheckedProperties;
-	}
-
-	private @NonNull List<@NonNull Edge> computeOldUnconditionalEdges() {
-		Set<@NonNull Edge> oldEdges = new HashSet<>();
-		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
-			if (edge.isOld() && edge.isUnconditional()) {
-				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
-				Node targetNode = QVTscheduleUtil.getTargetNode(edge);
-				if (sourceNode.isOld() && targetNode.isOld()) {
-					oldEdges.add(edge);
-				}
-			}
-		}
-		List<@NonNull Edge> sortedEdges = new ArrayList<>(oldEdges);
-		Collections.sort(sortedEdges, reachabilityForest.getEdgeCostComparator());
-		return sortedEdges;
 	}
 
 	/**
@@ -1721,8 +1362,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	private void createObservedProperties() {
-		Set<@NonNull Property> allCheckedProperties2 = allCheckedProperties;
-		if (allCheckedProperties2 != null) {
+		Set<@NonNull Property> allCheckedProperties = checkedConditionAnalysis.getAllCheckedProperties();
+		if (!allCheckedProperties.isEmpty()) {
 			//
 			// Ideally we could install each observed property as it is actually used. But
 			// this needs to be coded in many places.
@@ -1733,13 +1374,13 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					for (EObject eObject : new TreeIterable(asStatement, false)) {
 						if (eObject instanceof PropertyCallExp) {
 							Property property = PivotUtil.getReferredProperty((PropertyCallExp) eObject);
-							if (allCheckedProperties2.contains(property) && !observedProperties.contains(property)) {
+							if (allCheckedProperties.contains(property) && !observedProperties.contains(property)) {
 								observedProperties.add(property);
 							}
 						}
 						else if (eObject instanceof OppositePropertyCallExp) {
 							Property property = PivotUtil.getReferredProperty((NavigationCallExp) eObject).getOpposite();
-							if (allCheckedProperties2.contains(property) && !observedProperties.contains(property)) {
+							if (allCheckedProperties.contains(property) && !observedProperties.contains(property)) {
 								observedProperties.add(property);
 							}
 						}
@@ -1749,6 +1390,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T extends Operation> @NonNull T createOperation(@NonNull T operation) {
 		Operation newOperation = visitor.create(operation);
 		assert newOperation != null;
@@ -1762,13 +1404,13 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		if (mapping.isIsAbstract()) {
 			//			mapping.getOwnedStatements().add(createCheckStatement(helper.createBooleanLiteralExp(false)));	// FIXME add a message
 			OldEdgeSchedule oldSchedule = new OldEdgeSchedule();
-			oldSchedule.analyze();
-			oldSchedule.synthesize();
+			Iterable<@NonNull CheckedCondition> checkedConditions = oldSchedule.analyze();
+			oldSchedule.synthesize(checkedConditions);
 		}
 		else {
 			OldEdgeSchedule oldSchedule = new OldEdgeSchedule();
-			oldSchedule.analyze();
-			oldSchedule.synthesize();
+			Iterable<@NonNull CheckedCondition> checkedConditions = oldSchedule.analyze();
+			oldSchedule.synthesize(checkedConditions);
 		}
 	}
 
@@ -1890,7 +1532,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 							}
 						}
 						List<@NonNull OCLExpression> asArguments = new ArrayList<>();
-						for (@NonNull PropertyDatum propertyDatum : classDatum.getOwnedPropertyDatums()) {
+						for (@NonNull PropertyDatum propertyDatum : QVTscheduleUtil.getOwnedPropertyDatums(classDatum)) {
 							if (propertyDatum.isKey()) {
 								OCLExpression asArgument = propertyDatum2expression.get(propertyDatum);
 								if (asArgument == null) {
@@ -1992,12 +1634,6 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			variable = createDeclareStatement(node, initExpression);
 		}
 		return variable; */
-	}
-
-	private boolean isCheckedNavigation(@NonNull NavigationEdge edge) {
-		Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
-		Node targetNode = QVTscheduleUtil.getTargetNode(edge);
-		return targetNode.isConstant() && !sourceNode.isNew();
 	}
 
 	private boolean isHazardousWrite(@NonNull NavigableEdge edge) {

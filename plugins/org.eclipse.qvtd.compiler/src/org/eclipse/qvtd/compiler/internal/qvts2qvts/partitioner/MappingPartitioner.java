@@ -1068,7 +1068,7 @@ public class MappingPartitioner implements Nameable
 				newRegions.add(createResidualRegion(newRegions.size()));
 			}
 		}
-		else {								// cycles may need speculation nad partitioning into isolated actions
+		else {								// cycles may need speculation and partitioning into isolated actions
 			newRegions.add(createNewSpeculationRegion(newRegions.size()));
 			newRegions.add(createNewSpeculatingRegion(newRegions.size()));
 			newRegions.add(createNewSpeculatedRegion(newRegions.size()));
