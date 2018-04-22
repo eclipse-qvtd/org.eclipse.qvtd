@@ -56,7 +56,7 @@ class Relation2TraceInterface extends AbstractRelation2MiddleType
 		if (overriddenRelation == null) {
 			return null;
 		}
-		RelationDomain rootVariableDomain = QVTrelationUtil.getRootVariableDomain((Variable) variable);
+		RelationDomain rootVariableDomain = QVTrelationUtil.getRootVariableDomain(variable);
 		List<@NonNull Variable> rootVariables = QVTrelationUtil.getRootVariables(rootVariableDomain);
 		int rootVariableIndex = rootVariables.indexOf(variable);
 		if (rootVariableIndex < 0) {
