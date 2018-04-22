@@ -53,6 +53,7 @@ public interface CompilerChain
 	public static final CompilerOptions.@NonNull Key<@NonNull String> GENMODEL_MODEL_DIRECTORY_KEY = new CompilerOptions.Key<>("genmodel-model-directory");
 	public static final CompilerOptions.@NonNull Key<@NonNull Map<@NonNull String, @Nullable String>> GENMODEL_OPTIONS_KEY = new CompilerOptions.Key<>("genmodel-options");
 	public static final CompilerOptions.@NonNull Key<@Nullable Collection<@NonNull ? extends GenPackage>> GENMODEL_USED_GENPACKAGES_KEY = new CompilerOptions.Key<>("genmodel-usedGenPackages");;
+	public static final CompilerOptions.@NonNull Key<@NonNull Boolean> KEEP_OLD_JAVA_FILES_KEY = new CompilerOptions.Key<>("keep-old-java-files");
 	public static final CompilerOptions.@NonNull Key<@NonNull Map<@NonNull String, @Nullable String>> TRACE_OPTIONS_KEY = new CompilerOptions.Key<>("trace-options");
 	public static final CompilerOptions.@NonNull Key<@NonNull Map<Object, Object>> SAVE_OPTIONS_KEY = new CompilerOptions.Key<>("save");
 	public static final CompilerOptions.@NonNull Key<@NonNull Map<CompilerOptions.@NonNull Key<? extends Object>, @Nullable Object>> SCHEDULER_OPTIONS_KEY = new CompilerOptions.Key<>("scheduler-options");

@@ -31,6 +31,7 @@ import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
+import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
@@ -68,13 +69,6 @@ public class QVTrCompilerTests extends LoadTestCase
 			}
 
 			@Override
-			public @NonNull ImperativeTransformation compile(@NonNull String enforcedOutputName) throws IOException {
-				ImperativeTransformation asTransformation = super.compile(enforcedOutputName);
-				//				compilerChain.throwCompilerChainExceptionForWarnings();
-				return asTransformation;
-			}
-
-			@Override
 			protected @NonNull QVTr2QVTsCompilerStep createQVTr2QVTsCompilerStep() {
 				return new QVTr2QVTsCompilerStep(this)
 				{
@@ -88,8 +82,19 @@ public class QVTrCompilerTests extends LoadTestCase
 			}
 		}
 
+		private boolean keepOldJavaFiles = false;
+
 		public MyQVT(@NonNull ProjectManager projectManager, @NonNull String testProjectName, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) {
 			super(projectManager, testProjectName, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
+		}
+
+		@Override
+		protected @NonNull CompilerOptions createBuildCompilerChainOptions(boolean isIncremental) {
+			CompilerOptions options = super.createBuildCompilerChainOptions(isIncremental);
+			if (keepOldJavaFiles) {
+				options.setOption(CompilerChain.GENMODEL_STEP, CompilerChain.KEEP_OLD_JAVA_FILES_KEY, Boolean.TRUE);
+			}
+			return options;
 		}
 
 		@Override
@@ -110,6 +115,10 @@ public class QVTrCompilerTests extends LoadTestCase
 		@Override
 		protected @NonNull ProjectManager getTestProjectManager() throws Exception {
 			return EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(true) : QVTrCompilerTests.this.getTestProjectManager();
+		}
+
+		protected void setKeepOldJavaFiles() {
+			this.keepOldJavaFiles = true;
 		}
 	}
 
@@ -251,6 +260,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		}
 		Class<? extends Transformer> txClass3;
 		MyQVT myQVT3 = createQVT("Families2Persons", txURI2);
+		myQVT3.setKeepOldJavaFiles();
 		//		MyQVT myQVT3 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", "samples");
 		//		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.models.families2persons.Families.FamiliesPackage");
 		//		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.models.families2persons.Persons.PersonsPackage");

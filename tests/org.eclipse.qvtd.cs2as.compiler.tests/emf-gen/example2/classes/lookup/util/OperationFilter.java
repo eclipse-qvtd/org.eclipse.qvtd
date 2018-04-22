@@ -15,7 +15,6 @@ import example2.classes.Operation;
 import example2.classes.Parameter;
 import example2.classes.lookup.util.AbstractClassesLookupFilter;
 import java.util.Iterator;
-import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.TypedElement;
@@ -33,7 +32,7 @@ import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 
 public class OperationFilter
-	extends AbstractClassesLookupFilter<Operation>
+extends AbstractClassesLookupFilter<Operation>
 {
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example2/classes/1.0", null, ClassesPackage.eINSTANCE);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_java_c_s_s_example2_classes_lookup_util = IdManager.getRootPackageId("java://example2.classes.lookup.util");
@@ -76,7 +75,7 @@ public class OperationFilter
 		@Override
 		public @Nullable Object basicEvaluate(@NonNull Executor executor, @NonNull TypedElement caller, @Nullable Object @NonNull [] sourceAndArgumentValues) {
 			@SuppressWarnings("null") final /*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Operation element_0 = (/*@NonInvalid*/ example2.classes.@org.eclipse.jdt.annotation.NonNull Operation)sourceAndArgumentValues[0];
-			final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Argument> args = (List<Argument>)OperationFilter.this.args;
+			final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Argument> args = OperationFilter.this.args;
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ java.util.@org.eclipse.jdt.annotation.NonNull List<Parameter> ownedParameters = element_0.getOwnedParameters();
 			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_args_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_Argument, args);

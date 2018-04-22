@@ -41,8 +41,7 @@ import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreGeneratorAdapterFactory;
 import org.eclipse.qvtd.compiler.internal.genmodel.QVTdGenModelGeneratorAdapterFactory;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
-
-import com.google.common.collect.Lists;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
 /**
  * GenModelCompilerStep activates the EMG GenModel tooling to generate the Java classes from the
@@ -101,6 +100,7 @@ public class GenModelGenerateCompilerStep extends AbstractCompilerStep
 	}
 
 	public void execute() throws IOException {
+		Boolean keepOldJavaFiles = compilerChain.basicGetOption(QVTrCompilerChain.GENMODEL_STEP, QVTrCompilerChain.KEEP_OLD_JAVA_FILES_KEY);
 		URI genmodelURI = compilerChain.getURI(QVTrCompilerChain.GENMODEL_STEP, QVTrCompilerChain.URI_KEY);
 		Resource genmodelResource = environmentFactory.getResourceSet().getResource(genmodelURI, true);
 		assert genmodelResource != null;
@@ -124,7 +124,7 @@ public class GenModelGenerateCompilerStep extends AbstractCompilerStep
 				File genFile = URIUtil.toFile(genIFile.getLocationURI());
 				sourceFilePathPrefix = genFile.getAbsolutePath().replace("\\", "/");
 				if (classProjectNames == null) {
-					classProjectNames = Lists.newArrayList(binProjectName, "org.eclipse.emf.common", "org.eclipse.emf.ecore", "org.eclipse.jdt.annotation", "org.eclipse.ocl.pivot", "org.eclipse.osgi", "org.eclipse.qvtd.runtime");
+					classProjectNames = CompilerUtil.createClasspathProjectNameList(binProjectName);
 				}
 				classpathProjects = JavaFileUtil.createClassPathProjectList(environmentFactory.getResourceSet().getURIConverter(), classProjectNames);
 			}
@@ -139,10 +139,12 @@ public class GenModelGenerateCompilerStep extends AbstractCompilerStep
 				classpathProjects = null;
 			}
 			assert classFilePath != null;
-			for (GenPackage genPackage : genModel.getGenPackages()) {
-				String basePackage = genPackage.getBasePackage();
-				String sourcePath = sourceFilePathPrefix + (basePackage != null ? ("/" + basePackage.replace(".", "/")) : "");
-				JavaFileUtil.deleteJavaFiles(sourcePath);
+			if (keepOldJavaFiles != Boolean.TRUE) {
+				for (GenPackage genPackage : genModel.getGenPackages()) {
+					String basePackage = genPackage.getBasePackage();
+					String sourcePath = sourceFilePathPrefix + (basePackage != null ? ("/" + basePackage.replace(".", "/")) : "");
+					JavaFileUtil.deleteJavaFiles(sourcePath);
+				}
 			}
 			generateModels(genModel);
 			new File(classFilePath).mkdirs();
