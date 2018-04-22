@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -3036,7 +3036,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapVariableExp_referredVariable_Helper_T1atlHelper() {
+	public EReference getTmapVariableExp_referredVariable_Helper_T1atlVariable() {
 		return (EReference)tmapVariableExp_referredVariable_HelperEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -3046,18 +3046,8 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapVariableExp_referredVariable_Helper_T1atlVariable() {
-		return (EReference)tmapVariableExp_referredVariable_HelperEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EReference getTmapVariableExp_referredVariable_Helper_T2qvtrVariable() {
-		return (EReference)tmapVariableExp_referredVariable_HelperEClass.getEStructuralFeatures().get(3);
+		return (EReference)tmapVariableExp_referredVariable_HelperEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -3426,7 +3416,6 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 
 		tmapVariableExp_referredVariable_HelperEClass = createEClass(TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER);
 		createEReference(tmapVariableExp_referredVariable_HelperEClass, TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER);
-		createEReference(tmapVariableExp_referredVariable_HelperEClass, TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_HELPER);
 		createEReference(tmapVariableExp_referredVariable_HelperEClass, TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_VARIABLE);
 		createEReference(tmapVariableExp_referredVariable_HelperEClass, TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T2QVTR_VARIABLE);
 
@@ -3809,7 +3798,6 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 
 		initEClass(tmapVariableExp_referredVariable_HelperEClass, TmapVariableExp_referredVariable_Helper.class, "TmapVariableExp_referredVariable_Helper", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTmapVariableExp_referredVariable_Helper_Dispatcher(), this.getDmapVariableExp_referredVariable(), this.getDmapVariableExp_referredVariable_DomapVariableExp_referredVariable_Helper(), "dispatcher", null, 1, 1, TmapVariableExp_referredVariable_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTmapVariableExp_referredVariable_Helper_T1atlHelper(), theATLPackage.getHelper(), null, "t1atlHelper", null, 1, 1, TmapVariableExp_referredVariable_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapVariableExp_referredVariable_Helper_T1atlVariable(), theOCLPackage.getVariableDeclaration(), null, "t1atlVariable", null, 1, 1, TmapVariableExp_referredVariable_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapVariableExp_referredVariable_Helper_T2qvtrVariable(), thePivotPackage.getVariableDeclaration(), null, "t2qvtrVariable", null, 1, 1, TmapVariableExp_referredVariable_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3837,221 +3825,221 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	protected void createEmofAnnotations() {
 		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		  (getDmapHelper_D1atlHelper(),
-		   source,
-		   new String[] {
-			   "body", "DmapHelper"
-		   });
+		(getDmapHelper_D1atlHelper(),
+			source,
+			new String[] {
+				"body", "DmapHelper"
+		});
 		addAnnotation
-		  (getDmapHelper_D2qvtrFunction(),
-		   source,
-		   new String[] {
-			   "body", "DmapHelper"
-		   });
+		(getDmapHelper_D2qvtrFunction(),
+			source,
+			new String[] {
+				"body", "DmapHelper"
+		});
 		addAnnotation
-		  (getDmapOclExpression_D1atlExpression(),
-		   source,
-		   new String[] {
-			   "body", "DmapOclExpression"
-		   });
+		(getDmapOclExpression_D1atlExpression(),
+			source,
+			new String[] {
+				"body", "DmapOclExpression"
+		});
 		addAnnotation
-		  (getDmapOclExpression_D2qvtrExpression(),
-		   source,
-		   new String[] {
-			   "body", "DmapOclExpression"
-		   });
+		(getDmapOclExpression_D2qvtrExpression(),
+			source,
+			new String[] {
+				"body", "DmapOclExpression"
+		});
 		addAnnotation
-		  (getDmapVariableExp_referredVariable_D1atlExpression(),
-		   source,
-		   new String[] {
-			   "body", "DmapVariableExp_referredVariable"
-		   });
+		(getDmapVariableExp_referredVariable_D1atlExpression(),
+			source,
+			new String[] {
+				"body", "DmapVariableExp_referredVariable"
+		});
 		addAnnotation
-		  (getDmapVariableExp_referredVariable_D2qvtrExpression(),
-		   source,
-		   new String[] {
-			   "body", "DmapVariableExp_referredVariable"
-		   });
+		(getDmapVariableExp_referredVariable_D2qvtrExpression(),
+			source,
+			new String[] {
+				"body", "DmapVariableExp_referredVariable"
+		});
 		addAnnotation
-		  (getTmapBinding_T1atlBinding(),
-		   source,
-		   new String[] {
-			   "body", "TmapBinding"
-		   });
+		(getTmapBinding_T1atlBinding(),
+			source,
+			new String[] {
+				"body", "TmapBinding"
+		});
 		addAnnotation
-		  (getTmapBinding_T2qvtrPart(),
-		   source,
-		   new String[] {
-			   "body", "TmapBinding"
-		   });
+		(getTmapBinding_T2qvtrPart(),
+			source,
+			new String[] {
+				"body", "TmapBinding"
+		});
 		addAnnotation
-		  (getTmapHelper_Context_T1atlHelper(),
-		   source,
-		   new String[] {
-			   "body", "TmapHelper_Context"
-		   });
+		(getTmapHelper_Context_T1atlHelper(),
+			source,
+			new String[] {
+				"body", "TmapHelper_Context"
+		});
 		addAnnotation
-		  (getTmapHelper_Context_T2qvtrFunction(),
-		   source,
-		   new String[] {
-			   "body", "TmapHelper_Context"
-		   });
+		(getTmapHelper_Context_T2qvtrFunction(),
+			source,
+			new String[] {
+				"body", "TmapHelper_Context"
+		});
 		addAnnotation
-		  (getTmapInPattern_T1atlPattern(),
-		   source,
-		   new String[] {
-			   "body", "TmapInPattern"
-		   });
+		(getTmapInPattern_T1atlPattern(),
+			source,
+			new String[] {
+				"body", "TmapInPattern"
+		});
 		addAnnotation
-		  (getTmapInPattern_T2qvtrDomain(),
-		   source,
-		   new String[] {
-			   "body", "TmapInPattern"
-		   });
+		(getTmapInPattern_T2qvtrDomain(),
+			source,
+			new String[] {
+				"body", "TmapInPattern"
+		});
 		addAnnotation
-		  (getTmapInPattern_filter_T1atlPattern(),
-		   source,
-		   new String[] {
-			   "body", "TmapInPattern_filter"
-		   });
+		(getTmapInPattern_filter_T1atlPattern(),
+			source,
+			new String[] {
+				"body", "TmapInPattern_filter"
+		});
 		addAnnotation
-		  (getTmapInPattern_filter_T2qvtrDomain(),
-		   source,
-		   new String[] {
-			   "body", "TmapInPattern_filter"
-		   });
+		(getTmapInPattern_filter_T2qvtrDomain(),
+			source,
+			new String[] {
+				"body", "TmapInPattern_filter"
+		});
 		addAnnotation
-		  (getTmapMatchedRule_T1matchedRule(),
-		   source,
-		   new String[] {
-			   "body", "TmapMatchedRule"
-		   });
+		(getTmapMatchedRule_T1matchedRule(),
+			source,
+			new String[] {
+				"body", "TmapMatchedRule"
+		});
 		addAnnotation
-		  (getTmapMatchedRule_T2qvtrRelation(),
-		   source,
-		   new String[] {
-			   "body", "TmapMatchedRule"
-		   });
+		(getTmapMatchedRule_T2qvtrRelation(),
+			source,
+			new String[] {
+				"body", "TmapMatchedRule"
+		});
 		addAnnotation
-		  (getTmapMatchedRule_super_T1atlChildRule(),
-		   source,
-		   new String[] {
-			   "body", "TmapMatchedRule_super"
-		   });
+		(getTmapMatchedRule_super_T1atlChildRule(),
+			source,
+			new String[] {
+				"body", "TmapMatchedRule_super"
+		});
 		addAnnotation
-		  (getTmapMatchedRule_super_T2qvtrOverridesRelation(),
-		   source,
-		   new String[] {
-			   "body", "TmapMatchedRule_super"
-		   });
+		(getTmapMatchedRule_super_T2qvtrOverridesRelation(),
+			source,
+			new String[] {
+				"body", "TmapMatchedRule_super"
+		});
 		addAnnotation
-		  (getTmapModule_T1atlModule(),
-		   source,
-		   new String[] {
-			   "body", "TmapModule"
-		   });
+		(getTmapModule_T1atlModule(),
+			source,
+			new String[] {
+				"body", "TmapModule"
+		});
 		addAnnotation
-		  (getTmapModule_T2qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "body", "TmapModule"
-		   });
+		(getTmapModule_T2qvtrTransformation(),
+			source,
+			new String[] {
+				"body", "TmapModule"
+		});
 		addAnnotation
-		  (getTmapOclMetamodel_T1oclMetamodel(),
-		   source,
-		   new String[] {
-			   "body", "TmapOclMetamodel"
-		   });
+		(getTmapOclMetamodel_T1oclMetamodel(),
+			source,
+			new String[] {
+				"body", "TmapOclMetamodel"
+		});
 		addAnnotation
-		  (getTmapOclMetamodel_T2qvtrTypedModel(),
-		   source,
-		   new String[] {
-			   "body", "TmapOclMetamodel"
-		   });
+		(getTmapOclMetamodel_T2qvtrTypedModel(),
+			source,
+			new String[] {
+				"body", "TmapOclMetamodel"
+		});
 		addAnnotation
-		  (getTmapOclModel_IN_T1oclModel(),
-		   source,
-		   new String[] {
-			   "body", "TmapOclModel_IN"
-		   });
+		(getTmapOclModel_IN_T1oclModel(),
+			source,
+			new String[] {
+				"body", "TmapOclModel_IN"
+		});
 		addAnnotation
-		  (getTmapOclModel_IN_T2qvtrTypedModel(),
-		   source,
-		   new String[] {
-			   "body", "TmapOclModel_IN"
-		   });
+		(getTmapOclModel_IN_T2qvtrTypedModel(),
+			source,
+			new String[] {
+				"body", "TmapOclModel_IN"
+		});
 		addAnnotation
-		  (getTmapOclModel_OUT_T1oclModel(),
-		   source,
-		   new String[] {
-			   "body", "TmapOclModel_OUT"
-		   });
+		(getTmapOclModel_OUT_T1oclModel(),
+			source,
+			new String[] {
+				"body", "TmapOclModel_OUT"
+		});
 		addAnnotation
-		  (getTmapOclModel_OUT_T2qvtrTypedModel(),
-		   source,
-		   new String[] {
-			   "body", "TmapOclModel_OUT"
-		   });
+		(getTmapOclModel_OUT_T2qvtrTypedModel(),
+			source,
+			new String[] {
+				"body", "TmapOclModel_OUT"
+		});
 		addAnnotation
-		  (getTmapOperationCallExp_argument_T1atlArgument(),
-		   source,
-		   new String[] {
-			   "body", "TmapOperationCallExp_argument"
-		   });
+		(getTmapOperationCallExp_argument_T1atlArgument(),
+			source,
+			new String[] {
+				"body", "TmapOperationCallExp_argument"
+		});
 		addAnnotation
-		  (getTmapOperationCallExp_argument_T2qvtrArgument(),
-		   source,
-		   new String[] {
-			   "body", "TmapOperationCallExp_argument"
-		   });
+		(getTmapOperationCallExp_argument_T2qvtrArgument(),
+			source,
+			new String[] {
+				"body", "TmapOperationCallExp_argument"
+		});
 		addAnnotation
-		  (getTmapOutPattern_T1atlPattern(),
-		   source,
-		   new String[] {
-			   "body", "TmapOutPattern"
-		   });
+		(getTmapOutPattern_T1atlPattern(),
+			source,
+			new String[] {
+				"body", "TmapOutPattern"
+		});
 		addAnnotation
-		  (getTmapOutPattern_T2qvtrDomain(),
-		   source,
-		   new String[] {
-			   "body", "TmapOutPattern"
-		   });
+		(getTmapOutPattern_T2qvtrDomain(),
+			source,
+			new String[] {
+				"body", "TmapOutPattern"
+		});
 		addAnnotation
-		  (getTmapSimpleInPatternElement_T1atlElement(),
-		   source,
-		   new String[] {
-			   "body", "TmapSimpleInPatternElement"
-		   });
+		(getTmapSimpleInPatternElement_T1atlElement(),
+			source,
+			new String[] {
+				"body", "TmapSimpleInPatternElement"
+		});
 		addAnnotation
-		  (getTmapSimpleInPatternElement_T2qvtrTemplate(),
-		   source,
-		   new String[] {
-			   "body", "TmapSimpleInPatternElement"
-		   });
+		(getTmapSimpleInPatternElement_T2qvtrTemplate(),
+			source,
+			new String[] {
+				"body", "TmapSimpleInPatternElement"
+		});
 		addAnnotation
-		  (getTmapSimpleOutPatternElement_T1atlElement(),
-		   source,
-		   new String[] {
-			   "body", "TmapSimpleOutPatternElement"
-		   });
+		(getTmapSimpleOutPatternElement_T1atlElement(),
+			source,
+			new String[] {
+				"body", "TmapSimpleOutPatternElement"
+		});
 		addAnnotation
-		  (getTmapSimpleOutPatternElement_T2qvtrTemplate(),
-		   source,
-		   new String[] {
-			   "body", "TmapSimpleOutPatternElement"
-		   });
+		(getTmapSimpleOutPatternElement_T2qvtrTemplate(),
+			source,
+			new String[] {
+				"body", "TmapSimpleOutPatternElement"
+		});
 		addAnnotation
-		  (getTmapVariable_T1atlVariable(),
-		   source,
-		   new String[] {
-			   "body", "TmapVariable"
-		   });
+		(getTmapVariable_T1atlVariable(),
+			source,
+			new String[] {
+				"body", "TmapVariable"
+		});
 		addAnnotation
-		  (getTmapVariable_T2qvtrVariable(),
-		   source,
-		   new String[] {
-			   "body", "TmapVariable"
-		   });
+		(getTmapVariable_T2qvtrVariable(),
+			source,
+			new String[] {
+				"body", "TmapVariable"
+		});
 	}
 
 	/**
@@ -4063,977 +4051,971 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	protected void createQvtDomainsAnnotations() {
 		String source = "http://www.eclipse.org/qvt#Domains";
 		addAnnotation
-		  (getDmapHelper_D1atlHelper(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getDmapHelper_D2qvtrFunction(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getDmapHelper_DomapHelper_Attribute(),
-		   source,
-		   new String[] {
-			   "referredDomain", "middle"
-		   });
-		addAnnotation
-		  (getDmapHelper_DomapHelper_Operation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "middle"
-		   });
-		addAnnotation
-		  (getDmapOclExpression_D1atlExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getDmapOclExpression_D2qvtrExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getDmapOclExpression_DomapBooleanExp(),
-		   source,
-		   new String[] {
-			   "referredDomain", "middle"
-		   });
-		addAnnotation
-		  (getDmapOclExpression_DomapIfExp(),
-		   source,
-		   new String[] {
-			   "referredDomain", "middle"
-		   });
-		addAnnotation
-		  (getDmapOclExpression_DomapIntegerExp(),
-		   source,
-		   new String[] {
-			   "referredDomain", "middle"
-		   });
-		addAnnotation
-		  (getDmapOclExpression_DomapNavigationOrAttributeCallExp_Helper(),
-		   source,
-		   new String[] {
-			   "referredDomain", "middle"
-		   });
-		addAnnotation
-		  (getDmapOclExpression_DomapNavigationOrAttributeCallExp_Property(),
-		   source,
-		   new String[] {
-			   "referredDomain", "middle"
-		   });
-		addAnnotation
-		  (getDmapOclExpression_DomapOperationCallExp_Helper(),
-		   source,
-		   new String[] {
-			   "referredDomain", "middle"
-		   });
-		addAnnotation
-		  (getDmapOclExpression_DomapOperationCallExp_Operation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "middle"
-		   });
-		addAnnotation
-		  (getDmapOclExpression_DomapOperatorCallExp(),
-		   source,
-		   new String[] {
-			   "referredDomain", "middle"
-		   });
-		addAnnotation
-		  (getDmapOclExpression_DomapStringExp(),
-		   source,
-		   new String[] {
-			   "referredDomain", "middle"
-		   });
-		addAnnotation
-		  (getDmapOclExpression_DomapVariableExp(),
-		   source,
-		   new String[] {
-			   "referredDomain", "middle"
-		   });
-		addAnnotation
-		  (getDmapVariableExp_referredVariable_D1atlExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getDmapVariableExp_referredVariable_D2qvtrExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getDmapVariableExp_referredVariable_DomapVariableExp_referredVariable_Helper(),
-		   source,
-		   new String[] {
-			   "referredDomain", "middle"
-		   });
-		addAnnotation
-		  (getDmapVariableExp_referredVariable_DomapVariableExp_referredVariable_VariableDeclaration(),
-		   source,
-		   new String[] {
-			   "referredDomain", "middle"
-		   });
-		addAnnotation
-		  (getTmapBinding_T0propertyName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTmapBinding_T1atlBinding(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapBinding_T1atlExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapBinding_T1atlOutPatternElement(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapBinding_T2qvtrExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapBinding_T2qvtrPart(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapBinding_T2qvtrTemplate(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapBooleanExp_T0symbol(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTmapHelper_Attribute_T0attributeName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTmapHelper_Attribute_T1atlDefinition(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapHelper_Attribute_T1atlExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapHelper_Attribute_T1atlFeature(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapHelper_Attribute_T1atlModule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapHelper_Attribute_T1atlType(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapHelper_Attribute_T2qvtrExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapHelper_Attribute_T2qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapHelper_Context_T1atlContext(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapHelper_Context_T1atlDefinition(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapHelper_Context_T1atlHelper(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapHelper_Context_T1atlReturnType(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapHelper_Context_T2qvtrFunction(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapHelper_Context_T2qvtrParameter(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapHelper_Operation_T0operationName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTmapHelper_Operation_T1atlDefinition(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapHelper_Operation_T1atlExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapHelper_Operation_T1atlFeature(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapHelper_Operation_T1atlModule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapHelper_Operation_T1atlType(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapHelper_Operation_T2qvtrExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapHelper_Operation_T2qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapIfExp_T1atlCondition(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapIfExp_T1atlElse(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapIfExp_T1atlThen(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapIfExp_T2qvtrCondition(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapIfExp_T2qvtrElse(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapIfExp_T2qvtrThen(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapInPattern_T1atlModel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapInPattern_T1atlPattern(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapInPattern_T1atlRule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapInPattern_T2qvtrDomain(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapInPattern_T2qvtrRelation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapInPattern_T2qvtrTypedModel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapInPattern_filter_T1atlExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapInPattern_filter_T1atlPattern(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapInPattern_filter_T1atlRule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapInPattern_filter_T2p(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapInPattern_filter_T2qvtrDomain(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapInPattern_filter_T2qvtrExpression(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapInPattern_filter_T2qvtrRelation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapInPattern_filter_T2w(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapIntegerExp_T0symbol(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTmapMatchedRule_T0ruleName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTmapMatchedRule_T1atlModule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapMatchedRule_T1matchedRule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapMatchedRule_T2_1(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapMatchedRule_T2qvtrRelation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapMatchedRule_T2qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapMatchedRule_super_T1atlChildRule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapMatchedRule_super_T1atlSuperRule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapMatchedRule_super_T2qvtrOverriddenRelation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapMatchedRule_super_T2qvtrOverridesRelation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapModule_T0txName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTmapModule_T1atlModule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapModule_T2_1(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapModule_T2_2(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapModule_T2_3(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapModule_T2_4(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapModule_T2qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapNavigationOrAttributeCallExp_Helper_T0propertyName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTmapNavigationOrAttributeCallExp_Helper_T1atlSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapNavigationOrAttributeCallExp_Helper_T2qvtrOperation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapNavigationOrAttributeCallExp_Helper_T2qvtrSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapNavigationOrAttributeCallExp_Helper_T2qvtrSourceArgument(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapNavigationOrAttributeCallExp_Helper_T2qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapNavigationOrAttributeCallExp_Property_T0propertyName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTmapNavigationOrAttributeCallExp_Property_T1atlSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapNavigationOrAttributeCallExp_Property_T2qvtrSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOclMetamodel_T0tmName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTmapOclMetamodel_T1oclMetamodel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapOclMetamodel_T2qvtrTypedModel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOclModel_IN_T0tmName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTmapOclModel_IN_T1atlModule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapOclModel_IN_T1oclMetamodel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapOclModel_IN_T1oclModel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapOclModel_IN_T2qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOclModel_IN_T2qvtrTypedModel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOclModel_OUT_T0tmName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTmapOclModel_OUT_T1atlModule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapOclModel_OUT_T1oclMetamodel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapOclModel_OUT_T1oclModel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapOclModel_OUT_T2qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOclModel_OUT_T2qvtrTypedModel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOperationCallExp_Helper_T0operationName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTmapOperationCallExp_Helper_T1atlSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapOperationCallExp_Helper_T2qvtrOperation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOperationCallExp_Helper_T2qvtrSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOperationCallExp_Helper_T2qvtrSourceArgument(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOperationCallExp_Helper_T2qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOperationCallExp_Operation_T0operationName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTmapOperationCallExp_Operation_T1atlSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapOperationCallExp_Operation_T2qvtrSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOperationCallExp_argument_T1atlArgument(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapOperationCallExp_argument_T1atlParent(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapOperationCallExp_argument_T2qvtrArgument(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOperationCallExp_argument_T2qvtrParent(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOperatorCallExp_T0operationName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTmapOperatorCallExp_T1atlSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapOperatorCallExp_T2qvtrSource(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOperatorCallExp_T2qvtrTransformation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOutPattern_T1atlPattern(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapOutPattern_T1atlRule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapOutPattern_T2qvtrDomain(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOutPattern_T2qvtrRelation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapOutPattern_T2qvtrTypedModel(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapSimpleInPatternElement_T0elementName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTmapSimpleInPatternElement_T1atlElement(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapSimpleInPatternElement_T1atlPattern(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapSimpleInPatternElement_T1atlRule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapSimpleInPatternElement_T2qvtrDomain(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapSimpleInPatternElement_T2qvtrPattern(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapSimpleInPatternElement_T2qvtrRelation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapSimpleInPatternElement_T2qvtrTemplate(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapSimpleInPatternElement_T2qvtrVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapSimpleOutPatternElement_T0elementName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTmapSimpleOutPatternElement_T1atlElement(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapSimpleOutPatternElement_T1atlPattern(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapSimpleOutPatternElement_T1atlRule(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapSimpleOutPatternElement_T2qvtrDomain(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapSimpleOutPatternElement_T2qvtrPattern(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapSimpleOutPatternElement_T2qvtrRelation(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapSimpleOutPatternElement_T2qvtrTemplate(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapSimpleOutPatternElement_T2qvtrVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapStringExp_T0symbol(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTmapVariable_T1atlVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapVariable_T2qvtrVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapVariableExp_T0varName(),
-		   source,
-		   new String[] {
-			   "referredDomain", "$primitive$"
-		   });
-		addAnnotation
-		  (getTmapVariableExp_T1atlVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapVariableExp_referredVariable_Helper_T1atlHelper(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapVariableExp_referredVariable_Helper_T1atlVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapVariableExp_referredVariable_Helper_T2qvtrVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
-		addAnnotation
-		  (getTmapVariableExp_referredVariable_VariableDeclaration_T1atlVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "atl"
-		   });
-		addAnnotation
-		  (getTmapVariableExp_referredVariable_VariableDeclaration_T2qvtrVariable(),
-		   source,
-		   new String[] {
-			   "referredDomain", "qvtr"
-		   });
+		(getDmapHelper_D1atlHelper(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getDmapHelper_D2qvtrFunction(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getDmapHelper_DomapHelper_Attribute(),
+			source,
+			new String[] {
+				"referredDomain", "middle"
+		});
+		addAnnotation
+		(getDmapHelper_DomapHelper_Operation(),
+			source,
+			new String[] {
+				"referredDomain", "middle"
+		});
+		addAnnotation
+		(getDmapOclExpression_D1atlExpression(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getDmapOclExpression_D2qvtrExpression(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getDmapOclExpression_DomapBooleanExp(),
+			source,
+			new String[] {
+				"referredDomain", "middle"
+		});
+		addAnnotation
+		(getDmapOclExpression_DomapIfExp(),
+			source,
+			new String[] {
+				"referredDomain", "middle"
+		});
+		addAnnotation
+		(getDmapOclExpression_DomapIntegerExp(),
+			source,
+			new String[] {
+				"referredDomain", "middle"
+		});
+		addAnnotation
+		(getDmapOclExpression_DomapNavigationOrAttributeCallExp_Helper(),
+			source,
+			new String[] {
+				"referredDomain", "middle"
+		});
+		addAnnotation
+		(getDmapOclExpression_DomapNavigationOrAttributeCallExp_Property(),
+			source,
+			new String[] {
+				"referredDomain", "middle"
+		});
+		addAnnotation
+		(getDmapOclExpression_DomapOperationCallExp_Helper(),
+			source,
+			new String[] {
+				"referredDomain", "middle"
+		});
+		addAnnotation
+		(getDmapOclExpression_DomapOperationCallExp_Operation(),
+			source,
+			new String[] {
+				"referredDomain", "middle"
+		});
+		addAnnotation
+		(getDmapOclExpression_DomapOperatorCallExp(),
+			source,
+			new String[] {
+				"referredDomain", "middle"
+		});
+		addAnnotation
+		(getDmapOclExpression_DomapStringExp(),
+			source,
+			new String[] {
+				"referredDomain", "middle"
+		});
+		addAnnotation
+		(getDmapOclExpression_DomapVariableExp(),
+			source,
+			new String[] {
+				"referredDomain", "middle"
+		});
+		addAnnotation
+		(getDmapVariableExp_referredVariable_D1atlExpression(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getDmapVariableExp_referredVariable_D2qvtrExpression(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getDmapVariableExp_referredVariable_DomapVariableExp_referredVariable_Helper(),
+			source,
+			new String[] {
+				"referredDomain", "middle"
+		});
+		addAnnotation
+		(getDmapVariableExp_referredVariable_DomapVariableExp_referredVariable_VariableDeclaration(),
+			source,
+			new String[] {
+				"referredDomain", "middle"
+		});
+		addAnnotation
+		(getTmapBinding_T0propertyName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTmapBinding_T1atlBinding(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapBinding_T1atlExpression(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapBinding_T1atlOutPatternElement(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapBinding_T2qvtrExpression(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapBinding_T2qvtrPart(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapBinding_T2qvtrTemplate(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapBooleanExp_T0symbol(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTmapHelper_Attribute_T0attributeName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTmapHelper_Attribute_T1atlDefinition(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapHelper_Attribute_T1atlExpression(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapHelper_Attribute_T1atlFeature(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapHelper_Attribute_T1atlModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapHelper_Attribute_T1atlType(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapHelper_Attribute_T2qvtrExpression(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapHelper_Attribute_T2qvtrTransformation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapHelper_Context_T1atlContext(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapHelper_Context_T1atlDefinition(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapHelper_Context_T1atlHelper(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapHelper_Context_T1atlReturnType(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapHelper_Context_T2qvtrFunction(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapHelper_Context_T2qvtrParameter(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapHelper_Operation_T0operationName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTmapHelper_Operation_T1atlDefinition(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapHelper_Operation_T1atlExpression(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapHelper_Operation_T1atlFeature(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapHelper_Operation_T1atlModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapHelper_Operation_T1atlType(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapHelper_Operation_T2qvtrExpression(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapHelper_Operation_T2qvtrTransformation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapIfExp_T1atlCondition(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapIfExp_T1atlElse(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapIfExp_T1atlThen(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapIfExp_T2qvtrCondition(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapIfExp_T2qvtrElse(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapIfExp_T2qvtrThen(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapInPattern_T1atlModel(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapInPattern_T1atlPattern(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapInPattern_T1atlRule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapInPattern_T2qvtrDomain(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapInPattern_T2qvtrRelation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapInPattern_T2qvtrTypedModel(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapInPattern_filter_T1atlExpression(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapInPattern_filter_T1atlPattern(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapInPattern_filter_T1atlRule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapInPattern_filter_T2p(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapInPattern_filter_T2qvtrDomain(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapInPattern_filter_T2qvtrExpression(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapInPattern_filter_T2qvtrRelation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapInPattern_filter_T2w(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapIntegerExp_T0symbol(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTmapMatchedRule_T0ruleName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTmapMatchedRule_T1atlModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapMatchedRule_T1matchedRule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapMatchedRule_T2_1(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapMatchedRule_T2qvtrRelation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapMatchedRule_T2qvtrTransformation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapMatchedRule_super_T1atlChildRule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapMatchedRule_super_T1atlSuperRule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapMatchedRule_super_T2qvtrOverriddenRelation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapMatchedRule_super_T2qvtrOverridesRelation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapModule_T0txName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTmapModule_T1atlModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapModule_T2_1(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapModule_T2_2(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapModule_T2_3(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapModule_T2_4(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapModule_T2qvtrTransformation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapNavigationOrAttributeCallExp_Helper_T0propertyName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTmapNavigationOrAttributeCallExp_Helper_T1atlSource(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapNavigationOrAttributeCallExp_Helper_T2qvtrOperation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapNavigationOrAttributeCallExp_Helper_T2qvtrSource(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapNavigationOrAttributeCallExp_Helper_T2qvtrSourceArgument(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapNavigationOrAttributeCallExp_Helper_T2qvtrTransformation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapNavigationOrAttributeCallExp_Property_T0propertyName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTmapNavigationOrAttributeCallExp_Property_T1atlSource(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapNavigationOrAttributeCallExp_Property_T2qvtrSource(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapOclMetamodel_T0tmName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTmapOclMetamodel_T1oclMetamodel(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapOclMetamodel_T2qvtrTypedModel(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapOclModel_IN_T0tmName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTmapOclModel_IN_T1atlModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapOclModel_IN_T1oclMetamodel(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapOclModel_IN_T1oclModel(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapOclModel_IN_T2qvtrTransformation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapOclModel_IN_T2qvtrTypedModel(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapOclModel_OUT_T0tmName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTmapOclModel_OUT_T1atlModule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapOclModel_OUT_T1oclMetamodel(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapOclModel_OUT_T1oclModel(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapOclModel_OUT_T2qvtrTransformation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapOclModel_OUT_T2qvtrTypedModel(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapOperationCallExp_Helper_T0operationName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTmapOperationCallExp_Helper_T1atlSource(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapOperationCallExp_Helper_T2qvtrOperation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapOperationCallExp_Helper_T2qvtrSource(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapOperationCallExp_Helper_T2qvtrSourceArgument(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapOperationCallExp_Helper_T2qvtrTransformation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapOperationCallExp_Operation_T0operationName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTmapOperationCallExp_Operation_T1atlSource(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapOperationCallExp_Operation_T2qvtrSource(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapOperationCallExp_argument_T1atlArgument(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapOperationCallExp_argument_T1atlParent(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapOperationCallExp_argument_T2qvtrArgument(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapOperationCallExp_argument_T2qvtrParent(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapOperatorCallExp_T0operationName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTmapOperatorCallExp_T1atlSource(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapOperatorCallExp_T2qvtrSource(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapOperatorCallExp_T2qvtrTransformation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapOutPattern_T1atlPattern(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapOutPattern_T1atlRule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapOutPattern_T2qvtrDomain(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapOutPattern_T2qvtrRelation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapOutPattern_T2qvtrTypedModel(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapSimpleInPatternElement_T0elementName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTmapSimpleInPatternElement_T1atlElement(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapSimpleInPatternElement_T1atlPattern(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapSimpleInPatternElement_T1atlRule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapSimpleInPatternElement_T2qvtrDomain(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapSimpleInPatternElement_T2qvtrPattern(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapSimpleInPatternElement_T2qvtrRelation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapSimpleInPatternElement_T2qvtrTemplate(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapSimpleInPatternElement_T2qvtrVariable(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapSimpleOutPatternElement_T0elementName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTmapSimpleOutPatternElement_T1atlElement(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapSimpleOutPatternElement_T1atlPattern(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapSimpleOutPatternElement_T1atlRule(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapSimpleOutPatternElement_T2qvtrDomain(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapSimpleOutPatternElement_T2qvtrPattern(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapSimpleOutPatternElement_T2qvtrRelation(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapSimpleOutPatternElement_T2qvtrTemplate(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapSimpleOutPatternElement_T2qvtrVariable(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapStringExp_T0symbol(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTmapVariable_T1atlVariable(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapVariable_T2qvtrVariable(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapVariableExp_T0varName(),
+			source,
+			new String[] {
+				"referredDomain", "$primitive$"
+		});
+		addAnnotation
+		(getTmapVariableExp_T1atlVariable(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapVariableExp_referredVariable_Helper_T1atlVariable(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapVariableExp_referredVariable_Helper_T2qvtrVariable(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
+		addAnnotation
+		(getTmapVariableExp_referredVariable_VariableDeclaration_T1atlVariable(),
+			source,
+			new String[] {
+				"referredDomain", "atl"
+		});
+		addAnnotation
+		(getTmapVariableExp_referredVariable_VariableDeclaration_T2qvtrVariable(),
+			source,
+			new String[] {
+				"referredDomain", "qvtr"
+		});
 	}
 
 } //trace_ATL2QVTrPackageImpl

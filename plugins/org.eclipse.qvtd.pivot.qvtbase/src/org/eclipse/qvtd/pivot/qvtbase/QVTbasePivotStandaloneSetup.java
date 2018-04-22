@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseLibrary;
 import org.eclipse.qvtd.pivot.qvtbase.scoping.QVTbasePivotScoping;
-import org.eclipse.qvtd.runtime.qvttrace.QVTtracePackage;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -70,8 +69,11 @@ public class QVTbasePivotStandaloneSetup //implements ISetup
 				"xmi", new org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl());
 		if (!EPackage.Registry.INSTANCE.containsKey(QVTbasePackage.eNS_URI))
 			EPackage.Registry.INSTANCE.put(QVTbasePackage.eNS_URI, QVTbasePackage.eINSTANCE);
-		if (!EPackage.Registry.INSTANCE.containsKey(QVTtracePackage.eNS_URI))
-			EPackage.Registry.INSTANCE.put(QVTtracePackage.eNS_URI, QVTtracePackage.eINSTANCE);
+		//
+		//	There should never be any references to QVTtracePackage.eNS_URI since this is associated with the invalid
+		//	dynamic-extends-generated use case identified in Bug 532561. QVTtrace is therefore deliberately unregistered.
+		//
+		//		assert !EPackage.Registry.INSTANCE.containsKey(QVTtracePackage.eNS_URI);
 
 		Injector injector = createInjector();
 		register(injector);

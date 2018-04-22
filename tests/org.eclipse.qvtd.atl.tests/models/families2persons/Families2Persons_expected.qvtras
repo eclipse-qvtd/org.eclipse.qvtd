@@ -140,7 +140,7 @@
         </domain>
         <variable xsi:type="qvtr:TemplateVariable" xmi:id="8tM8f" name="s" type="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Families.ecore.oclas#r2YVU"/>
         <variable xsi:type="qvtr:TemplateVariable" xmi:id="9tM8f" name="t" type="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Persons.ecore.oclas#pzC6s"/>
-        <variable xsi:type="qvtr:SharedVariable" isImplicit="true" name="trace" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR"/>
+        <variable xsi:type="qvtr:SharedVariable" isImplicit="true" name="trace" type="pivot:Class platform:/resource/org.eclipse.qvtd.runtime/model/QVTtrace.ecore.oclas#MdKgS"/>
         <when>
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="isFemale" referredOperation="#N,BoB" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
@@ -183,7 +183,7 @@
         </domain>
         <variable xsi:type="qvtr:TemplateVariable" xmi:id="50ALF" name="s" type="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Families.ecore.oclas#r2YVU"/>
         <variable xsi:type="qvtr:TemplateVariable" xmi:id="60ALF" name="t" type="pivot:Class platform:/resource/org.eclipse.qvtd.atl.tests/models/families2persons/Persons.ecore.oclas#q+x1v"/>
-        <variable xsi:type="qvtr:SharedVariable" isImplicit="true" name="trace" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR"/>
+        <variable xsi:type="qvtr:SharedVariable" isImplicit="true" name="trace" type="pivot:Class platform:/resource/org.eclipse.qvtd.runtime/model/QVTtrace.ecore.oclas#MdKgS"/>
         <when>
           <predicate>
             <conditionExpression xsi:type="pivot:OperationCallExp" name="not" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#DH5kA"

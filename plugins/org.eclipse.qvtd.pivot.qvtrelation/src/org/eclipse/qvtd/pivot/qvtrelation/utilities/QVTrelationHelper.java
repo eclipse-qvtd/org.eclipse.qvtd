@@ -26,6 +26,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.TraceHelper;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationFactory;
@@ -40,7 +41,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateFactory;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
-
 import com.google.common.collect.Iterables;
 
 /**
@@ -191,12 +191,12 @@ public class QVTrelationHelper extends QVTbaseHelper
 		return asVariable;
 	}
 
-	public @NonNull Variable createTraceClassVariable() {
+	public @NonNull Variable createTraceClassVariable(@NonNull TraceHelper traceHelper) {
 		SharedVariable traceClassVariable;
 		traceClassVariable = QVTrelationFactory.eINSTANCE.createSharedVariable();
 		traceClassVariable.setName(QVTrelationUtil.TRACE_CLASS_NAME);
 		traceClassVariable.setIsImplicit(true);
-		setType(traceClassVariable, standardLibrary.getOclElementType(), true);		// FIXME Type not known here ?? ancestral QVTTrace
+		setType(traceClassVariable, traceHelper.getTraceElementClass(), true);		// Use an ancestral QVTTrace type since derived type not yet synthesized
 		traceClassVariable.setOwnedInit(null);
 		return traceClassVariable;
 	}

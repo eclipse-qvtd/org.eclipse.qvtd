@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
@@ -22,8 +21,8 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationScheduleManager;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.TraceHelper;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
-import org.eclipse.qvtd.runtime.qvttrace.QVTtracePackage;
 
 public class RelationalTransformationAnalysis2TracePackage extends TransformationAnalysis2TracePackage
 {
@@ -50,12 +49,8 @@ public class RelationalTransformationAnalysis2TracePackage extends Transformatio
 	public org.eclipse.ocl.pivot.@NonNull Class getDispatchClass() {
 		org.eclipse.ocl.pivot.Class dispatchClass2 = dispatchClass;
 		if (dispatchClass2 == null) {
-			EnvironmentFactory environmentFactory = scheduleManager.getEnvironmentFactory();
-			EPackage traceEPackage = getTraceEPackage();
-			EClass dispatchEClass = (EClass) traceEPackage.getEClassifier(QVTtracePackage.Literals.DISPATCH.getName());
-			dispatchClass2 = environmentFactory.getMetamodelManager().getASOfEcore(org.eclipse.ocl.pivot.Class.class, dispatchEClass);
-			assert dispatchClass2 != null;
-			dispatchClass = dispatchClass2;
+			TraceHelper traceHelper = scheduleManager.getTraceHelper();
+			dispatchClass = dispatchClass2 = traceHelper.getDispatchClass();
 		}
 		return dispatchClass2;
 	}
@@ -63,12 +58,8 @@ public class RelationalTransformationAnalysis2TracePackage extends Transformatio
 	public org.eclipse.ocl.pivot.@NonNull Class getExecutionClass() {
 		org.eclipse.ocl.pivot.Class executionClass2 = executionClass;
 		if (executionClass2 == null) {
-			EnvironmentFactory environmentFactory = scheduleManager.getEnvironmentFactory();
-			EPackage traceEPackage = getTraceEPackage();
-			EClass traceEClass = (EClass) traceEPackage.getEClassifier(QVTtracePackage.Literals.EXECUTION.getName());
-			executionClass2 = environmentFactory.getMetamodelManager().getASOfEcore(org.eclipse.ocl.pivot.Class.class, traceEClass);
-			assert executionClass2 != null;
-			executionClass = executionClass2;
+			TraceHelper traceHelper = scheduleManager.getTraceHelper();
+			executionClass = executionClass2 = traceHelper.getExecutionClass();
 		}
 		return executionClass2;
 	}
@@ -88,7 +79,7 @@ public class RelationalTransformationAnalysis2TracePackage extends Transformatio
 		if (traceEPackage2 == null) {
 			// FIXME ?? use QVTTracePackage.eINSTANCE if it is registered and ECLIPSE_IS_RUNNING
 			EnvironmentFactory environmentFactory = scheduleManager.getEnvironmentFactory();
-			URI traceURI = URI.createPlatformResourceURI(AbstractTransformer.TRACE_MODEL, true);
+			URI traceURI = AbstractTransformer.TRACE_MODEL_URI;
 			Resource resource = environmentFactory.getResourceSet().getResource(traceURI, true);
 			traceEPackage2 = (EPackage) resource.getContents().get(0);
 			assert traceEPackage2 != null;

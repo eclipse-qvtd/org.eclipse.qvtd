@@ -48,6 +48,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.TraceHelper;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationFactory;
@@ -174,12 +175,19 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		}
 	}
 
+	private final @NonNull TraceHelper traceHelper;
+
 	public QVTrelationCSContainmentVisitor(@NonNull CS2ASConversion context) {
 		super(context);
+		this.traceHelper = new TraceHelper(context.getEnvironmentFactory());
 	}
 
 	public @NonNull QVTrelationHelper getHelper() {
 		return (QVTrelationHelper) helper;
+	}
+
+	public @NonNull TraceHelper getTraceHelper() {
+		return traceHelper;
 	}
 
 	/**
@@ -551,7 +559,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		}
 		Variable traceClassVariable = NameUtil.getNameable(pivotElement.getVariable(), QVTbaseUtil.TRACE_TYPED_MODEL_NAME);
 		if (traceClassVariable == null) {
-			traceClassVariable = getHelper().createTraceClassVariable();
+			traceClassVariable = getHelper().createTraceClassVariable(getTraceHelper());
 		}
 		relationVariables.add(traceClassVariable);
 		PivotUtilInternal.refreshList(pivotElement.getVariable(), relationVariables);

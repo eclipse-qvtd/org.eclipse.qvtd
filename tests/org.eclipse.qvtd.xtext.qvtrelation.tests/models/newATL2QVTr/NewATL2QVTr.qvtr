@@ -19,6 +19,7 @@ import pivotMM : 'platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore'::p
 import qvtbMM : 'platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore'::qvtbase;
 import qvttMM : 'platform:/resource/org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore'::qvttemplate;
 import qvtrMM : 'platform:/resource/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore'::qvtrelation;
+import qvttraceMM : 'platform:/resource/org.eclipse.qvtd.runtime/model/QVTtrace.ecore'::qvttrace;
 
 package org::eclipse::qvtd::xtext::qvtrelation::tests::atl2qvtr {
 /**
@@ -258,7 +259,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::atl2qvtr {
 				variable = :SharedVariable {
 					name = 'trace',
 					isImplicit = true,
-					type = pivotMM::OclElement
+					type = qvttraceMM::TraceElement
 				}
 			};
 			when {
@@ -791,4 +792,35 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::atl2qvtr {
 			}
 		}
 	}
+	
+	-- ActionBlock, BindingStat, ExpressionStat, IfStat, ForStat
+	-- CalledRule
+	-- DropPattern
+	-- ForEachOutPatternElement
+	-- LazyMatchedRule
+	-- Library, LibraryRef
+	-- Query
+	-- RuleVariableDeclaration
+	
+	-- BagExp, OrderedSetExp, SequenceExp, SetExp
+	-- BagType, OrderedSetType, SequenceType, SetType
+	-- BooleanType, IntegerType, ReakType, StringType
+	-- CollectionType
+	-- EnumLiteralExp
+	-- IterateExp, IteratorElement
+	-- Iterator
+	-- LetExp
+	-- MapExp, MapElement
+	-- MapType
+	-- OclAnyType
+	-- OclContextDefinition
+	-- OclFeatureDefinition
+	-- OclModelElement
+	-- OclType
+	-- OclUndefinedExp
+	-- Parameter
+	-- RealExp
+	-- SuperExp
+	-- TupleExp, TuplePart
+	-- TupleType, TupleTypeAttribute
 }

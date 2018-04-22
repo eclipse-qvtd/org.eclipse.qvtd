@@ -19,6 +19,7 @@ import pivotMM : 'platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore'::p
 import qvtbMM : 'platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore'::qvtbase;
 import qvttMM : 'platform:/resource/org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore'::qvttemplate;
 import qvtrMM : 'platform:/resource/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore'::qvtrelation;
+import qvttraceMM : 'platform:/resource/org.eclipse.qvtd.runtime/model/QVTtrace.ecore'::qvttrace;
 
 package org::eclipse::qvtd::atl::atl2qvtr {
 /**
@@ -30,10 +31,9 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 
 --		query getContextVariable(_transformation : qvtrMM::RelationalTransformation) : pivotMM::VariableDeclaration[1] implementedby 'org.eclipse.qvtd.atl.atl2qvtr.Helper4getContextVariable';
 
---		query getHelper(element : atlMM::LocatedElement) : atlMM::Helper[1] {
---			element->closure(e : ocl::OclElement | e.oclContainer())->selectByKind(atlMM::Helper)->any(true)
---		}
-		query getHelper(element : atlMM::LocatedElement) : atlMM::Helper[?] implementedby 'org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getHelper';
+		query getHelper(element : atlMM::LocatedElement[1]) : atlMM::Helper[1] {
+			element->closure(e : ocl::OclElement | e.oclContainer())->selectByKind(atlMM::Helper)->any(true)
+		}
 
 		query getModule(element : atlMM::LocatedElement) : atlMM::Module[1] implementedby 'org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getModule';
 
@@ -58,10 +58,6 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 --		query getTypedModel_OUT(atlPattern : atlMM::OutPattern[1], _relation : qvtrMM::Relation) : qvtbMM::TypedModel[1] implementedby 'org.eclipse.qvtd.atl.atl2qvtr.Helper4getTypedModel';
 
 		query getVariable(type : atloclMM::VariableDeclaration[1]) : pivotMM::Variable[1] implementedby 'org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getVariable';
-
-		query getHelper(element : atlMM::LocatedElement) : atlMM::Helper[1] {
-			element->closure(e : ocl::OclElement | e.oclContainer())->selectByKind(atlMM::Helper)->any(true)
-		}
 
 		/**
 		 *  atl::Binding <=> qvtr::PropertyTemplateItem
@@ -263,7 +259,7 @@ package org::eclipse::qvtd::atl::atl2qvtr {
 				variable = :SharedVariable {
 					name = 'trace',
 					isImplicit = true,
-					type = pivotMM::OclElement
+					type = qvttraceMM::TraceElement
 				}
 			};
 			when {

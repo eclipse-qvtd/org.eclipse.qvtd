@@ -27,6 +27,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal.EnvironmentFactoryInternalExtension;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
@@ -40,6 +41,7 @@ import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.TraceHelper;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
@@ -301,6 +303,7 @@ public class UMLX2QVTr extends QVTrelationHelper
 
 	private final @NonNull Resource umlxResource;
 	private final @NonNull Resource qvtrResource;
+	private final @NonNull TraceHelper traceHelper;
 	private final @NonNull Map<@NonNull UMLXElement, @NonNull Element> umlxElement2qvtrElement = new HashMap<>();
 	private final @NonNull List<@NonNull PatternForest> patternForests = new ArrayList<>();
 	private final @NonNull List<@NonNull TxQueryNode> txQueryNodes = new ArrayList<>();
@@ -309,6 +312,7 @@ public class UMLX2QVTr extends QVTrelationHelper
 		super(environmentFactory);
 		this.umlxResource = umlxResource;
 		this.qvtrResource = qvtrResource;
+		this.traceHelper = new TraceHelper(environmentFactory);
 	}
 
 	protected <T extends Element> @Nullable T basicGetQVTrElement(@NonNull Class<T> qvtrClass, @NonNull UMLXElement umlxElement) {
@@ -321,6 +325,10 @@ public class UMLX2QVTr extends QVTrelationHelper
 		}
 		@SuppressWarnings("unchecked")T castElement = (T)qvtrElement;
 		return castElement;
+	}
+
+	public @NonNull Variable createTraceClassVariable() {
+		return createTraceClassVariable(traceHelper);
 	}
 
 	@Override

@@ -53,6 +53,16 @@ Workflow {
     	projectName = "org.eclipse.qvtd.runtime"
     	genModelFile = "model/QVTtrace.genmodel"
     }
+/* A Pivot version of QVTtrace is unhelpful since extensions must use the dynamic model when running
+ * in interpreted form. See Bug 532561.
+    component = GenerateOCLmetamodelXtend { resourceSet = qvttraceResourceSet
+    	projectName = "org.eclipse.qvtd.runtime"
+    	modelFile = "model/QVTtrace.ecore"
+    	uri = "http://www.eclipse.org/qvt/2018/QVTtrace"
+    	javaFolder = "emf-gen"
+    	javaPackageName = "org.eclipse.qvtd.runtime.model"
+    	javaClassName = "QVTtraceMetamodel"
+    } */
 
 //    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
 //    	genModel = "/org.eclipse.qvtd.pivot.qvtschedule/model/Schedule.genmodel" 	
