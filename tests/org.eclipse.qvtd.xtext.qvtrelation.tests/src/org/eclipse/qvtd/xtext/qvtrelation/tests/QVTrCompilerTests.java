@@ -40,7 +40,6 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.TraceHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -253,13 +252,6 @@ public class QVTrCompilerTests extends LoadTestCase
 				myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
 			}
 			ToStringVisitor.addFactory(new PivotQVTrelationToStringFactory());
-			//
-			//	Ensure that the dynamic trace model is loaded to avoid generation of nsURI references that cviolate Bug 532561.
-			//	FIXME should this be a generic special case?
-			//	FIXME should there be a more general facility?
-			//
-			TraceHelper traceHelper = new TraceHelper(myQVT2.getEnvironmentFactory());
-			traceHelper.getTraceElementClass();
 			myQVT2.executeTransformation();
 			myQVT2.saveOutput("qvtr", txURI2, getModelsURI("families2persons/Families2Persons_expected.qvtras"), null);
 		}
