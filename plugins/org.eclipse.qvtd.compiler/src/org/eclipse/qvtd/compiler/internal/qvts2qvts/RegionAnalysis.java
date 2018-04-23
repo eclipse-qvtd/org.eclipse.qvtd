@@ -21,9 +21,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -47,6 +49,17 @@ public class RegionAnalysis
 	 * Sub-index is both by property and its opposite.
 	 */
 	private @Nullable Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull Set<@NonNull NavigableEdge>>> typedModel2property2enforcedEdges = null;
+
+	/**
+	 * The actual and pseudo-RegionAnalysis-es that must be unconditionally successful for this RegionAnalysis
+	 * to be unconditionally successful. null prior to determination.
+	 */
+	private @Nullable Iterable<@NonNull RegionAnalysis> fallibilities = null;
+
+	/**
+	 * The edges that may be left unsynthesized when this RegionAnalysis is used in an infallible cycle.
+	 */
+	private @Nullable Iterable<@NonNull Edge> fallibleEdges = null;
 
 	public RegionAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull Region region) {
 		this.scheduleManager = scheduleManager;
@@ -319,6 +332,30 @@ public class RegionAnalysis
 			return enforcedEdges;
 		}
 		return null;
+	}
+
+	public @NonNull Iterable<@NonNull RegionAnalysis> getFallibilities() {
+		return ClassUtil.nonNullState(fallibilities);
+	}
+
+	public @NonNull Iterable<@NonNull Edge> getFallibleEdges() {
+		return ClassUtil.nonNullState(fallibleEdges);
+	}
+
+	public @NonNull Region getRegion() {
+		return region;
+	}
+
+	public @NonNull ScheduleManager getScheduleManager() {
+		return scheduleManager;
+	}
+
+	public void setFallibilities(@NonNull Iterable<@NonNull RegionAnalysis> fallibilities) {
+		this.fallibilities = fallibilities;
+	}
+
+	public void setFallibleEdges(@NonNull Iterable<@NonNull Edge> fallibleEdges) {
+		this.fallibleEdges  = fallibleEdges;
 	}
 
 	@Override

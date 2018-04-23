@@ -29,6 +29,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
@@ -70,6 +71,11 @@ public class MappingPartitioner implements Nameable
 	 * The overall transformation partitioner providing global analysis results.
 	 */
 	protected final @NonNull TransformationPartitioner transformationPartitioner;
+
+	/**
+	 * The region to be partitioned.
+	 */
+	protected final @NonNull RegionAnalysis regionAnalysis;
 
 	/**
 	 * The region to be partitioned.
@@ -186,10 +192,11 @@ public class MappingPartitioner implements Nameable
 
 	private final @NonNull Map<@NonNull Edge, @NonNull List<@NonNull AbstractPartition>> debugEdge2partitions = new HashMap<>();
 
-	public MappingPartitioner(@NonNull TransformationPartitioner transformationPartitioner, @NonNull MappingRegion region) {
+	public MappingPartitioner(@NonNull TransformationPartitioner transformationPartitioner, @NonNull RegionAnalysis regionAnalysis) {
 		this.scheduleManager = transformationPartitioner.getScheduleManager();
 		this.transformationPartitioner = transformationPartitioner;
-		this.region = region;
+		this.regionAnalysis = regionAnalysis;
+		this.region = (MappingRegion) regionAnalysis.getRegion();
 		analyzeNodes();
 		for (@NonNull Node traceNode : analyzeTraceNodes()) {
 			analyzeSuccessEdge(traceNode);
@@ -492,10 +499,22 @@ public class MappingPartitioner implements Nameable
 		return dispatchNode;
 	}
 
-	private void check() {
+	private void check(boolean isInfallible) {
+		Set<@NonNull Edge> infallibleEdges = null;
+		Set<@NonNull Node> infallibleNodes = null;
+		if (isInfallible) {
+			infallibleEdges = new HashSet<>();
+			infallibleNodes = new HashSet<>();
+			for (@NonNull Edge edge : regionAnalysis.getFallibleEdges()) {
+				infallibleEdges.add(edge);
+				infallibleNodes.add(QVTscheduleUtil.getTargetNode(edge));
+			}
+		}
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
 			if (((node.isSpeculated() && !node.isHead()) || node.isRealized()) && !hasRealizedNode(node)) {
-				transformationPartitioner.addProblem(CompilerUtil.createRegionError(region, "Should have realized " + node));
+				if ((infallibleNodes == null) || !infallibleNodes.contains(node)) {
+					transformationPartitioner.addProblem(CompilerUtil.createRegionError(region, "Should have realized " + node));
+				}
 			}
 		}
 		Set<@NonNull Edge> allPrimaryEdges = new HashSet<>();
@@ -503,7 +522,9 @@ public class MappingPartitioner implements Nameable
 			if (!edge.isSecondary()) {
 				allPrimaryEdges.add(edge);
 				if (edge.isRealized() && !hasRealizedEdge(edge)) {
-					transformationPartitioner.addProblem(CompilerUtil.createRegionError(region, "Should have realized " + edge));
+					if ((infallibleEdges == null) || !infallibleEdges.contains(edge)) {
+						transformationPartitioner.addProblem(CompilerUtil.createRegionError(region, "Should have realized " + edge));
+					}
 				}
 			}
 		}
@@ -607,9 +628,9 @@ public class MappingPartitioner implements Nameable
 		return microMappingRegion;
 	}
 
-	private @NonNull MicroMappingRegion createNewSpeculatingRegion(int partitionNumber) {
+	private @NonNull MicroMappingRegion createNewSpeculatingRegion(int partitionNumber, boolean isInfallible) {
 		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		NewSpeculatingPartition speculatingPartition = new NewSpeculatingPartition(this, reachabilityForest);
+		NewSpeculatingPartition speculatingPartition = new NewSpeculatingPartition(this, reachabilityForest, isInfallible);
 		MicroMappingRegion microMappingRegion = speculatingPartition.createMicroMappingRegion("«speculating»", "_p" + partitionNumber);
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			scheduleManager.writeDebugGraphs(microMappingRegion, null);
@@ -827,6 +848,10 @@ public class MappingPartitioner implements Nameable
 		return region;
 	}
 
+	public @NonNull RegionAnalysis getRegionAnalysis() {
+		return regionAnalysis;
+	}
+
 	protected @NonNull ScheduleManager getScheduleManager() {
 		return scheduleManager;
 	}
@@ -1027,7 +1052,7 @@ public class MappingPartitioner implements Nameable
 			}
 		}
 		if (newRegions.size() > 1) {		// FIXME shouldn't this work anyway when no partitioning was needed?
-			check();
+			check(false);
 		}
 		return newRegions;
 	}
@@ -1036,7 +1061,12 @@ public class MappingPartitioner implements Nameable
 		if ((region instanceof DispatchRegion) || (region instanceof VerdictRegion)) {
 			return Collections.singletonList(region);
 		}
-		boolean isCyclic = transformationPartitioner.getCycleAnalysis(this) != null;
+		CycleAnalysis cycleAnalysis = transformationPartitioner.getCycleAnalysis(this);
+		boolean isCyclic = cycleAnalysis != null;
+		boolean isInfallible = false;
+		if (cycleAnalysis != null) {
+			isInfallible = cycleAnalysis.isInfallible();
+		}
 		List<@NonNull Node> predicatedWhenNodes = getPredicatedWhenNodes();
 		List<@NonNull Node> realizedExecutionNodes = getRealizedExecutionNodes();
 		boolean needsActivator = false;
@@ -1069,8 +1099,11 @@ public class MappingPartitioner implements Nameable
 			}
 		}
 		else {								// cycles may need speculation and partitioning into isolated actions
+			//			if (isInfallible) {
+			//				regionAnalysis.getFallibilities()
+			//			}
 			newRegions.add(createNewSpeculationRegion(newRegions.size()));
-			newRegions.add(createNewSpeculatingRegion(newRegions.size()));
+			newRegions.add(createNewSpeculatingRegion(newRegions.size(), isInfallible));
 			newRegions.add(createNewSpeculatedRegion(newRegions.size()));
 			ReachabilityForest assignmentReachabilityForest	= new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
 			//
@@ -1091,7 +1124,7 @@ public class MappingPartitioner implements Nameable
 			}
 		}
 		if (newRegions.size() > 1) {		// FIXME shouldn't this work anyway when no partitioning was needed?
-			check();
+			check(isInfallible);
 		}
 		return newRegions;
 	}

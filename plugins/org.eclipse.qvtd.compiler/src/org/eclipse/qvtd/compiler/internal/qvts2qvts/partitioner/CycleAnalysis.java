@@ -11,10 +11,13 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 
@@ -25,12 +28,13 @@ import com.google.common.collect.Iterables;
  */
 public class CycleAnalysis
 {
-	protected final @NonNull TransformationPartitioner transformationPartitioner;
+	protected final @NonNull CyclesAnalysis cyclesAnalysis;
 	protected final @NonNull Set<@NonNull MappingPartitioner> mappingPartitioners;
 	protected final @NonNull Set<@NonNull TraceClassAnalysis> traceClassAnalyses;
+	private @Nullable Boolean isInfallible = null;
 
-	public CycleAnalysis(@NonNull TransformationPartitioner transformationPartitioner, @NonNull Set<@NonNull MappingPartitioner> mappingPartitioners, @NonNull Set<@NonNull TraceClassAnalysis> traceClassAnalyses) {
-		this.transformationPartitioner = transformationPartitioner;
+	public CycleAnalysis(@NonNull CyclesAnalysis cyclesAnalysis, @NonNull Set<@NonNull MappingPartitioner> mappingPartitioners, @NonNull Set<@NonNull TraceClassAnalysis> traceClassAnalyses) {
+		this.cyclesAnalysis = cyclesAnalysis;
 		this.mappingPartitioners = mappingPartitioners;
 		this.traceClassAnalyses = traceClassAnalyses;
 		assert !mappingPartitioners.isEmpty();
@@ -43,6 +47,27 @@ public class CycleAnalysis
 
 	public @NonNull Iterable<@NonNull TraceClassAnalysis> getTraceClassAnalyses() {
 		return traceClassAnalyses;
+	}
+
+	/**
+	 * Return true if all sources of fallibility are within the cycle.
+	 */
+	public boolean isInfallible() {
+		Boolean isInfallible2 = isInfallible;
+		if (isInfallible2 == null) {
+			Set<@NonNull RegionAnalysis> cycleFallibilities = new HashSet<>();
+			for (@NonNull MappingPartitioner mappingPartitioner : mappingPartitioners) {
+				RegionAnalysis regionAnalysis = mappingPartitioner.getRegionAnalysis();
+				Iterables.addAll(cycleFallibilities, regionAnalysis.getFallibilities());
+			}
+			Set<@NonNull RegionAnalysis> externalFallibilities = new HashSet<>(cycleFallibilities);
+			for (@NonNull MappingPartitioner mappingPartitioner : mappingPartitioners) {
+				RegionAnalysis regionAnalysis = mappingPartitioner.getRegionAnalysis();
+				externalFallibilities.remove(regionAnalysis);
+			}
+			isInfallible = isInfallible2 = externalFallibilities.isEmpty();
+		}
+		return isInfallible2;
 	}
 
 	public @NonNull Iterable<@NonNull MappingRegion> partition(@NonNull Iterable<@NonNull MappingPartitioner> orderedMappingPartitioners) {

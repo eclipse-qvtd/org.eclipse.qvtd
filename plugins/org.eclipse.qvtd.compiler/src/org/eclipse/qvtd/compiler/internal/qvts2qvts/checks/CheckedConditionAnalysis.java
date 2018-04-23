@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.util.Visitable;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -66,7 +67,7 @@ public class CheckedConditionAnalysis
 
 		public void analyze() {
 			for (@NonNull Edge edge : oldUnconditionalEdges) {
-				assert edge.isOld() && edge.isUnconditional();
+				//				assert edge.isOld() && edge.isUnconditional();
 				edge.accept(this);
 			}
 			for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
@@ -157,21 +158,22 @@ public class CheckedConditionAnalysis
 				}
 			}
 			Property checkedProperty = checkedEdge.getProperty();
-			if (allCheckedProperties.contains(checkedProperty)) {
+			Set<@NonNull Property> allCheckedProperties2 = allCheckedProperties;
+			if ((allCheckedProperties2 != null) && allCheckedProperties2.contains(checkedProperty)) {
 				if (checkedNavigableEdges == null) {
 					checkedNavigableEdges = new HashSet<>();
 				}
 				if (checkedNavigableEdges.add(checkedEdge)) {
 					context.add(new NavigableEdgeCheckedCondition(checkedEdge));
-					return null;
+					//					return null;
 				}
 			}
 			Node targetNode = QVTscheduleUtil.getTargetNode(navigableEdge);
 			if (navigableEdge.isPredicated() && targetNode.isConstant()) {
 				context.add(new ConstantTargetCheckedCondition(navigableEdge));
-				return null;
+				//				return null;
 			}
-			assert navigableEdge.isOld();
+			//			assert navigableEdge.isOld();
 			Property property = QVTscheduleUtil.getProperty(navigableEdge);
 			CompleteClass edgeTargetCompleteClass = completeModel.getCompleteClass(QVTrelationUtil.getType(property));
 			Node sourceNode = QVTscheduleUtil.getSourceNode(navigableEdge);
@@ -182,7 +184,7 @@ public class CheckedConditionAnalysis
 				CompleteClass targetNodeCompleteClass = targetNode.getCompleteClass();
 				if (!edgeTargetCompleteClass.conformsTo(targetNodeCompleteClass)) {
 					context.add(new CastEdgeCheckedCondition(navigableEdge));
-					return null;
+					//					return null;
 				}
 			}
 			return null;
@@ -190,7 +192,7 @@ public class CheckedConditionAnalysis
 
 		@Override
 		public Object visitNavigationEdge(@NonNull NavigationEdge navigationEdge) {
-			if (isCheckedNavigation(navigationEdge)) {
+			if (isCheckedNavigation(navigationEdge)) {		// FIXME Why is this irregularity needed ?
 				context.add(new PredicateNavigationEdgeCheckedCondition(navigationEdge));
 				return null;
 			}
@@ -203,7 +205,6 @@ public class CheckedConditionAnalysis
 		public Object visitNode(@NonNull Node node) {
 			Integer targetCost = reachabilityForest.getCost(node);
 			assert targetCost != null;
-			assert node.isOld();
 			Edge firstEdge = null;
 			MultipleEdgeCheckedCondition checkedCondition = null;
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
@@ -280,13 +281,13 @@ public class CheckedConditionAnalysis
 	};
 
 	protected final @NonNull ScheduleManager scheduleManager;
-	protected final @NonNull ReachabilityForest reachabilityForest;
+	protected final @NonNull ReachabilityForest reachabilityForest;		// FIXME Do we really need this so early?
 	protected final @NonNull Region region;
 
 	/**
 	 * All properties (and their opposites) that need to be checked for readiness before access.
 	 */
-	private final @NonNull Set<@NonNull Property> allCheckedProperties;
+	private final @Nullable Set<@NonNull Property> allCheckedProperties;
 
 	/**
 	 * The unconditional old edges provide the pattern matching workload.
@@ -316,7 +317,7 @@ public class CheckedConditionAnalysis
 	/**
 	 * Return all properties (and their opposites) that need checking for readiness prior to access.
 	 */
-	private @NonNull Set<@NonNull Property> computeCheckedProperties() {
+	protected @Nullable Set<@NonNull Property> computeCheckedProperties() {
 		//
 		// Better, we would not be pessimistic about input/output typedModel ambiguity in endogeneous
 		// mappings, but that incurs many typedModel accuracy issues.
@@ -340,7 +341,7 @@ public class CheckedConditionAnalysis
 	}
 
 	private @NonNull List<@NonNull Edge> computeOldUnconditionalEdges() {
-		Set<@NonNull Edge> oldEdges = new HashSet<>();
+		List<@NonNull Edge> oldEdges = new ArrayList<>();
 		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
 			if (edge.isOld() && edge.isUnconditional()) {
 				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
@@ -350,13 +351,12 @@ public class CheckedConditionAnalysis
 				}
 			}
 		}
-		List<@NonNull Edge> sortedEdges = new ArrayList<>(oldEdges);
-		Collections.sort(sortedEdges, reachabilityForest.getEdgeCostComparator());
-		return sortedEdges;
+		Collections.sort(oldEdges, reachabilityForest.getEdgeCostComparator());
+		return oldEdges;
 	}
 
 	public @NonNull Set<@NonNull Property> getAllCheckedProperties() {
-		return allCheckedProperties;
+		return ClassUtil.nonNullState(allCheckedProperties);
 	}
 
 	public @NonNull Iterable<@NonNull Edge> getOldUnconditionalEdges() {

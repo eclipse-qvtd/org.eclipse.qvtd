@@ -461,27 +461,14 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (isPrimitive: ");
-		result.append(isPrimitive);
-		result.append(", isTrace: ");
-		result.append(isTrace);
-		result.append(')');
-		return result.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTbaseVisitor<?>)visitor).visitTypedModel(this);
+	}
+
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 } //TypedModelImpl
