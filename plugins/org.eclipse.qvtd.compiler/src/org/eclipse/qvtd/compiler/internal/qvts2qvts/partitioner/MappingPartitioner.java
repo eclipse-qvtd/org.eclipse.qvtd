@@ -29,6 +29,8 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedCondition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedConditionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
@@ -741,6 +743,12 @@ public class MappingPartitioner implements Nameable
 		return oldPrimaryNavigableEdges;
 	}
 
+	private @NonNull Iterable<@NonNull Node> getOldReachabilityRootNodes() {
+		Iterable<@NonNull Node> traceNodes = region.getHeadNodes();
+		Iterable<@NonNull Node> constantInputNodes = getConstantInputNodes();
+		return Iterables.concat(traceNodes, constantInputNodes);
+	}
+
 	public @NonNull Iterable<@NonNull Edge> getPredicatedEdges() {
 		return predicatedEdges;
 	}
@@ -1037,6 +1045,18 @@ public class MappingPartitioner implements Nameable
 			return Collections.singletonList(region);
 		}
 		boolean isCyclic = transformationPartitioner.getCycleAnalysis(this) != null;
+		if (isCyclic) {
+			ReachabilityForest checkedReachabilityForest = new ReachabilityForest(getOldReachabilityRootNodes(), getOldPrimaryNavigableEdges());
+			CheckedConditionAnalysis analysis = new CheckedConditionAnalysis(scheduleManager, checkedReachabilityForest, region)
+			{
+				@Override
+				protected @Nullable Set<@NonNull Property> computeCheckedProperties() {
+					return null;
+				}
+			};
+			Set<@NonNull CheckedCondition> checkedConditions = analysis.computeCheckedConditions();
+			System.out.println(checkedConditions);
+		}
 		List<@NonNull Node> predicatedWhenNodes = getPredicatedWhenNodes();
 		List<@NonNull Node> realizedExecutionNodes = getRealizedExecutionNodes();
 		boolean needsActivator = false;

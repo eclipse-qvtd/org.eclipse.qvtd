@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.util.Visitable;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -157,7 +158,8 @@ public class CheckedConditionAnalysis
 				}
 			}
 			Property checkedProperty = checkedEdge.getProperty();
-			if (allCheckedProperties.contains(checkedProperty)) {
+			Set<@NonNull Property> allCheckedProperties2 = allCheckedProperties;
+			if ((allCheckedProperties2 == null) || allCheckedProperties2.contains(checkedProperty)) {
 				if (checkedNavigableEdges == null) {
 					checkedNavigableEdges = new HashSet<>();
 				}
@@ -286,7 +288,7 @@ public class CheckedConditionAnalysis
 	/**
 	 * All properties (and their opposites) that need to be checked for readiness before access.
 	 */
-	private final @NonNull Set<@NonNull Property> allCheckedProperties;
+	private final @Nullable Set<@NonNull Property> allCheckedProperties;
 
 	/**
 	 * The unconditional old edges provide the pattern matching workload.
@@ -316,7 +318,7 @@ public class CheckedConditionAnalysis
 	/**
 	 * Return all properties (and their opposites) that need checking for readiness prior to access.
 	 */
-	private @NonNull Set<@NonNull Property> computeCheckedProperties() {
+	protected @Nullable Set<@NonNull Property> computeCheckedProperties() {
 		//
 		// Better, we would not be pessimistic about input/output typedModel ambiguity in endogeneous
 		// mappings, but that incurs many typedModel accuracy issues.
@@ -356,7 +358,7 @@ public class CheckedConditionAnalysis
 	}
 
 	public @NonNull Set<@NonNull Property> getAllCheckedProperties() {
-		return allCheckedProperties;
+		return ClassUtil.nonNullState(allCheckedProperties);
 	}
 
 	public @NonNull Iterable<@NonNull Edge> getOldUnconditionalEdges() {
