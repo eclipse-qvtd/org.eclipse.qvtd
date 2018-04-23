@@ -249,6 +249,15 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			}
 		}
 
+		protected void createConstantCheck(@NonNull Edge edge, @NonNull OCLExpression checkExpression) {
+			if (edge.isSpeculated()) {
+				System.err.println("Speculation code omitted for " + region);
+			}
+			else {
+				createCheckStatement(checkExpression);
+			}
+		}
+
 		public void synthesize(@NonNull Iterable<@NonNull CheckedCondition> checkedConditions) {
 			for (@NonNull Edge edge : edgeSchedule) {
 				assert edge.isUnconditional();
@@ -283,12 +292,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 							createCheckStatement(source2targetExp, "includes", targetVariableExp);
 						}
 						else if ((targetNode instanceof BooleanValueNode) && ((BooleanValueNode)targetNode).isBooleanValue()) {
-							if (edge.isSpeculated()) {
-								System.err.println("Speculation code omitted for " + region);
-							}
-							else {
-								createCheckStatement(source2targetExp);
-							}
+							createConstantCheck(edge, source2targetExp);
 						}
 						else if (nodeVariable == null) {
 							ExpressionCreator expressionCreator = new ExpressionCreator(BasicRegion2Mapping.this);
@@ -329,12 +333,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 						createCheckStatement(sourceVariableExp, edgeName, targetVariableExp);
 					}
 					else if (((BooleanValueNode)targetNode).isBooleanValue()) {
-						if (edge.isSpeculated()) {
-							System.err.println("Speculation code omitted for " + region);
-						}
-						else {
-							createCheckStatement(sourceVariableExp);
-						}
+						createConstantCheck(edge, sourceVariableExp);
 					}
 					else {
 						createCheckStatement(sourceVariableExp, "=", helper.createBooleanLiteralExp(false));
