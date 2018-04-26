@@ -39,6 +39,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.VerdictRegion;
@@ -88,9 +89,19 @@ public class MappingPartitioner implements Nameable
 	private @Nullable List<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses = null;
 
 	/**
+	 * The TracePropertyAnalysis instances that are consumed by this MappingPartitioner.
+	 */
+	private @Nullable List<@NonNull TracePropertyAnalysis> consumedTracePropertyAnalyses = null;
+
+	/**
 	 * The TraceClassAnalysis instances that are produced by this MappingPartitioner.
 	 */
 	private @Nullable List<@NonNull TraceClassAnalysis> producedTraceClassAnalyses = null;
+
+	/**
+	 * The TracePropertyAnalysis instances that are produced by this MappingPartitioner.
+	 */
+	private @Nullable List<@NonNull TracePropertyAnalysis> producedTracePropertyAnalyses = null;
 
 	/**
 	 * The TraceClassAnalysis instances and super instances that are produced by this MappingPartitioner.
@@ -116,8 +127,10 @@ public class MappingPartitioner implements Nameable
 	 * properties that are directly realized from a middle object provided all predicates are satisfied.
 	 */
 	private final @NonNull List<@NonNull Edge> predicatedEdges = new ArrayList<>();
+	private final @NonNull List<@NonNull Edge> predicatedMiddleEdges = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> predicatedMiddleNodes = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> predicatedOutputNodes = new ArrayList<>();
+	private final @NonNull List<@NonNull Edge> realizedMiddleEdges = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> realizedMiddleNodes = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> realizedOutputNodes = new ArrayList<>();
 	private final @NonNull Set<@NonNull NavigableEdge> oldPrimaryNavigableEdges = new HashSet<>();
@@ -222,6 +235,19 @@ public class MappingPartitioner implements Nameable
 		constantInputNodes.add(node);
 	}
 
+	private void addConsumptionOfMiddleEdge(@NonNull NavigableEdge edge) {
+		if (!predicatedMiddleEdges.contains(edge)) {
+			predicatedMiddleEdges.add(edge);
+			PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
+			TracePropertyAnalysis consumedTraceAnalysis = transformationPartitioner.addConsumer(propertyDatum, this);
+			List<@NonNull TracePropertyAnalysis> consumedTracePropertyAnalyses2 = consumedTracePropertyAnalyses;
+			if (consumedTracePropertyAnalyses2 == null) {
+				consumedTracePropertyAnalyses = consumedTracePropertyAnalyses2 = new ArrayList<>();
+			}
+			consumedTracePropertyAnalyses2.add(consumedTraceAnalysis);
+		}
+	}
+
 	private void addConsumptionOfMiddleNode(@NonNull Node node) {
 		if (!predicatedMiddleNodes.contains(node)) {
 			predicatedMiddleNodes.add(node);
@@ -265,6 +291,22 @@ public class MappingPartitioner implements Nameable
 
 	public void addProblem(@NonNull CompilerProblem problem) {
 		transformationPartitioner.addProblem(problem);
+	}
+
+	private void addProductionOfMiddleEdge(@NonNull NavigableEdge edge) {
+		assert edge.isNew();
+		if (edge.isRealized() && !realizedMiddleEdges.contains(edge)) {
+			realizedMiddleEdges.add(edge);
+		}
+		PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
+		TracePropertyAnalysis consumedTraceAnalysis = transformationPartitioner.addProducer(propertyDatum, this);
+		List<@NonNull TracePropertyAnalysis> producedTracePropertyAnalyses2 = producedTracePropertyAnalyses;
+		if (producedTracePropertyAnalyses2 == null) {
+			producedTracePropertyAnalyses = producedTracePropertyAnalyses2 = new ArrayList<>();
+		}
+		if (!producedTracePropertyAnalyses2.contains(consumedTraceAnalysis)) {
+			producedTracePropertyAnalyses2.add(consumedTraceAnalysis);
+		}
 	}
 
 	private void addProductionOfMiddleNode(@NonNull Node node) {
@@ -367,11 +409,20 @@ public class MappingPartitioner implements Nameable
 				Node sourceNode = edge.getEdgeSource();
 				assert scheduleManager.isMiddle(sourceNode);
 				if (edge.isPredicated()) {
-					addConsumptionOfMiddleNode(sourceNode);
+					addConsumptionOfMiddleEdge(edge);
 				}
 				else {
 					assert edge.isRealized();
+					//<<<<<<< try5
 					addProductionOfMiddleNode(sourceNode);
+					//=======
+					//					//					if (sourceNode.isRealized()) {
+					//					addProductionOfMiddleEdge(edge);
+					//					//					}
+					//					//					else {
+					//					//						getClass();
+					//					//					}
+					//>>>>>>> 1c8bfee wip TracePropertyAnalysis
 				}
 			}
 		}
@@ -741,6 +792,10 @@ public class MappingPartitioner implements Nameable
 		return consumedTraceClassAnalyses;
 	}
 
+	public @Nullable Iterable<@NonNull TracePropertyAnalysis> getConsumedTracePropertyAnalyses() {
+		return consumedTracePropertyAnalyses;
+	}
+
 	public @NonNull Iterable<@NonNull NavigableEdge> getCorollaryEdges() {
 		return corollaryEdges;
 	}
@@ -797,6 +852,10 @@ public class MappingPartitioner implements Nameable
 
 	public @Nullable Iterable<@NonNull TraceClassAnalysis> getProducedTraceClassAnalyses() {
 		return producedTraceClassAnalyses;
+	}
+
+	public @Nullable Iterable<@NonNull TracePropertyAnalysis> getProducedTracePropertyAnalyses() {
+		return producedTracePropertyAnalyses;
 	}
 
 	private @NonNull Iterable<@NonNull Node> getReachabilityRootNodes() {

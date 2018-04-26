@@ -23,7 +23,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -36,20 +35,9 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractDispatch;
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class.
  */
-public class TraceClassAnalysis implements Nameable
+public class TraceClassAnalysis extends TraceElementAnalysis
 {
-	protected final @NonNull TransformationPartitioner transformationPartitioner;
 	protected final @NonNull ClassDatum traceClassDatum;
-
-	/**
-	 * The partitioners that consume (predicate) the trace class.
-	 */
-	private final @NonNull List<@NonNull MappingPartitioner> consumers = new ArrayList<>();
-
-	/**
-	 * The partitioners that produce (realize) the trace class.
-	 */
-	private final @NonNull List<@NonNull MappingPartitioner> producers = new ArrayList<>();
 
 	/**
 	 * The properties necessary to discriminate multiple use of this trace class once its producers
@@ -65,23 +53,11 @@ public class TraceClassAnalysis implements Nameable
 	private @Nullable Boolean isDispatcher = null;
 
 	public TraceClassAnalysis(@NonNull TransformationPartitioner transformationPartitioner, @NonNull ClassDatum traceClassDatum) {
-		this.transformationPartitioner = transformationPartitioner;
+		super(transformationPartitioner);
 		this.traceClassDatum = traceClassDatum;
 		subTraceClassAnalyses.add(this);
 		superTraceClassAnalyses.add(this);
 		assert traceClassDatum.getReferredTypedModel() == transformationPartitioner.getScheduleManager().getTraceTypedModel();
-	}
-
-	public void addConsumer(@NonNull MappingPartitioner consumer) {
-		if (!consumers.contains(consumer)) {		// multi-consumption is possible
-			consumers.add(consumer);
-		}
-	}
-
-	public void addProducer(@NonNull MappingPartitioner producer) {
-		if (!producers.contains(producer)) {		// multi-production of e.g. OclAny is possible
-			producers.add(producer);
-		}
 	}
 
 	public void addSubTraceClassAnalysis(@NonNull TraceClassAnalysis traceClassAnalysis) {
@@ -242,10 +218,6 @@ public class TraceClassAnalysis implements Nameable
 		return traceClassDatum;
 	}
 
-	public @NonNull Iterable<@NonNull MappingPartitioner> getConsumers() {
-		return consumers;
-	}
-
 	public @Nullable Iterable<@NonNull Property> getDiscriminatingProperties() {
 		return discriminatingProperties;
 	}
@@ -253,10 +225,6 @@ public class TraceClassAnalysis implements Nameable
 	@Override
 	public String getName() {
 		return traceClassDatum.getName();
-	}
-
-	public @NonNull Iterable<@NonNull MappingPartitioner> getProducers() {
-		return producers;
 	}
 
 	public @NonNull Iterable<@NonNull TraceClassAnalysis> getSubTraceClassAnalyses() {

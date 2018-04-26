@@ -78,6 +78,11 @@ public class TransformationPartitioner
 	private final @NonNull Map<@NonNull ClassDatum, @NonNull TraceClassAnalysis> classDatum2traceClassAnalysis = new HashMap<>();
 
 	/**
+	 * The TracePropertyAnalysis for each trace property.
+	 */
+	private final @NonNull Map<@NonNull PropertyDatum, @NonNull TracePropertyAnalysis> propertyDatum2tracePropertyAnalysis = new HashMap<>();
+
+	/**
 	 * The analysis of cycles.
 	 */
 	private @Nullable CyclesAnalysis cyclesAnalysis = null;
@@ -115,6 +120,16 @@ public class TransformationPartitioner
 		return middleAnalysis;
 	}
 
+	public @NonNull TracePropertyAnalysis addConsumer(@NonNull PropertyDatum tracePropertyDatum, @NonNull MappingPartitioner consumer) {
+		TracePropertyAnalysis middleAnalysis = propertyDatum2tracePropertyAnalysis.get(tracePropertyDatum);
+		if (middleAnalysis == null) {
+			middleAnalysis = new TracePropertyAnalysis(this, tracePropertyDatum);
+			propertyDatum2tracePropertyAnalysis.put(tracePropertyDatum, middleAnalysis);
+		}
+		middleAnalysis.addConsumer(consumer);
+		return middleAnalysis;
+	}
+
 	public void addCorollary(@NonNull Property property, @NonNull MappingRegion region) {
 		List<@NonNull MappingRegion> regions = corollaryProperty2regions.get(property);
 		if (regions == null) {
@@ -135,6 +150,16 @@ public class TransformationPartitioner
 		if (middleAnalysis == null) {
 			middleAnalysis = new TraceClassAnalysis(this, traceClassDatum);
 			classDatum2traceClassAnalysis.put(traceClassDatum, middleAnalysis);
+		}
+		middleAnalysis.addProducer(producer);
+		return middleAnalysis;
+	}
+
+	public @NonNull TracePropertyAnalysis addProducer(@NonNull PropertyDatum tracePropertyDatum, @NonNull MappingPartitioner producer) {
+		TracePropertyAnalysis middleAnalysis = propertyDatum2tracePropertyAnalysis.get(tracePropertyDatum);
+		if (middleAnalysis == null) {
+			middleAnalysis = new TracePropertyAnalysis(this, tracePropertyDatum);
+			propertyDatum2tracePropertyAnalysis.put(tracePropertyDatum, middleAnalysis);
 		}
 		middleAnalysis.addProducer(producer);
 		return middleAnalysis;
@@ -169,7 +194,7 @@ public class TransformationPartitioner
 		CyclesAnalysis cyclesAnalysis = computeCyclesAnalysis();
 		//
 		//	Each TraceClassAnalysis produced only by acyclic partitioners identifies an acyclic trace class
-		//
+		// ?? is this cdead ?? should it be for TracePropertyAnalysis too ??
 		Set<@NonNull TraceClassAnalysis> acylicAnalysis = new HashSet<>();
 		for (@NonNull MappingPartitioner acyclicProducer : acyclicProducers) {
 			for (@NonNull Node traceNode : acyclicProducer.getTraceNodes()) {
@@ -265,6 +290,10 @@ public class TransformationPartitioner
 
 	public @NonNull TraceClassAnalysis getTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
 		return ClassUtil.nonNullState(classDatum2traceClassAnalysis.get(traceClassDatum));
+	}
+
+	public @NonNull TracePropertyAnalysis getTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
+		return ClassUtil.nonNullState(propertyDatum2tracePropertyAnalysis.get(propertyDatum));
 	}
 
 	public boolean isCyclic(@NonNull ClassDatum traceClassDatum) {

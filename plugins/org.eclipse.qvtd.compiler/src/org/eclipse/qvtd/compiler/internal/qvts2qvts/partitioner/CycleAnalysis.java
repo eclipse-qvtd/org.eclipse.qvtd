@@ -31,12 +31,15 @@ public class CycleAnalysis
 	protected final @NonNull CyclesAnalysis cyclesAnalysis;
 	protected final @NonNull Set<@NonNull MappingPartitioner> mappingPartitioners;
 	protected final @NonNull Set<@NonNull TraceClassAnalysis> traceClassAnalyses;
+	protected final @NonNull Set<@NonNull TracePropertyAnalysis> tracePropertyAnalyses;
 	private @Nullable Boolean isInfallible = null;
 
-	public CycleAnalysis(@NonNull CyclesAnalysis cyclesAnalysis, @NonNull Set<@NonNull MappingPartitioner> mappingPartitioners, @NonNull Set<@NonNull TraceClassAnalysis> traceClassAnalyses) {
+	public CycleAnalysis(@NonNull CyclesAnalysis cyclesAnalysis, @NonNull Set<@NonNull MappingPartitioner> mappingPartitioners,
+			@NonNull Set<@NonNull TraceClassAnalysis> traceClassAnalyses, @NonNull Set<@NonNull TracePropertyAnalysis> tracePropertyAnalyses) {
 		this.cyclesAnalysis = cyclesAnalysis;
 		this.mappingPartitioners = mappingPartitioners;
 		this.traceClassAnalyses = traceClassAnalyses;
+		this.tracePropertyAnalyses = tracePropertyAnalyses;
 		assert !mappingPartitioners.isEmpty();
 		assert !traceClassAnalyses.isEmpty();
 	}
@@ -47,6 +50,10 @@ public class CycleAnalysis
 
 	public @NonNull Iterable<@NonNull TraceClassAnalysis> getTraceClassAnalyses() {
 		return traceClassAnalyses;
+	}
+
+	public @NonNull Iterable<@NonNull TracePropertyAnalysis> getTracePropertyAnalyses() {
+		return tracePropertyAnalyses;
 	}
 
 	/**

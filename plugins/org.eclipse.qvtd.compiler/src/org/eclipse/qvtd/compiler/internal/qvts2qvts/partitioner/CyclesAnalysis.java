@@ -134,6 +134,16 @@ public class CyclesAnalysis
 					}
 				}
 			}
+			Iterable<@NonNull TracePropertyAnalysis> consumedTracePropertyAnalyses = consumer.getConsumedTracePropertyAnalyses();
+			if (consumedTracePropertyAnalyses != null) {
+				for (@NonNull TracePropertyAnalysis consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
+					for (@NonNull MappingPartitioner producer : consumedTracePropertyAnalysis.getProducers()) {
+						Set<@NonNull MappingPartitioner> producers = consumer2producers.get(consumer);
+						assert producers != null;
+						producers.add(producer);
+					}
+				}
+			}
 		}
 		if (TransformationPartitioner.PREDECESSORS.isActive()) {
 			for (@NonNull MappingPartitioner successor : mappingPartitioners) {
@@ -181,6 +191,16 @@ public class CyclesAnalysis
 							assert consumers != null;
 							consumers.add(consumer);
 						}
+					}
+				}
+			}
+			Iterable<@NonNull TracePropertyAnalysis> producedTracePropertyAnalyses = producer.getProducedTracePropertyAnalyses();
+			if (producedTracePropertyAnalyses != null) {
+				for (@NonNull TracePropertyAnalysis producedTracePropertyAnalysis : producedTracePropertyAnalyses) {
+					for (@NonNull MappingPartitioner consumer : producedTracePropertyAnalysis.getConsumers()) {
+						Set<@NonNull MappingPartitioner> consumers = producer2consumers.get(producer);
+						assert consumers != null;
+						consumers.add(consumer);
 					}
 				}
 			}
@@ -232,12 +252,42 @@ public class CyclesAnalysis
 					Collections.sort(mappingPartitioners2, NameUtil.NAMEABLE_COMPARATOR);
 					for (@NonNull MappingPartitioner mappingPartitioner : mappingPartitioners2) {
 						s.append("\n\t" + mappingPartitioner);
+						Iterable<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses = mappingPartitioner.getConsumedTraceClassAnalyses();
+						if (consumedTraceClassAnalyses != null) {
+							for (@NonNull TraceClassAnalysis traceClassAnalysis : consumedTraceClassAnalyses) {
+								s.append("\n\t  =>" + traceClassAnalysis);
+							}
+						}
+						Iterable<@NonNull TraceClassAnalysis> producedTraceClassAnalyses = mappingPartitioner.getProducedTraceClassAnalyses();
+						if (producedTraceClassAnalyses != null) {
+							for (@NonNull TraceClassAnalysis traceClassAnalysis : producedTraceClassAnalyses) {
+								s.append("\n\t  <=" + traceClassAnalysis);
+							}
+						}
+						Iterable<@NonNull TracePropertyAnalysis> consumedTracePropertyAnalyses = mappingPartitioner.getConsumedTracePropertyAnalyses();
+						if (consumedTracePropertyAnalyses != null) {
+							for (@NonNull TracePropertyAnalysis tracePropertyAnalysis : consumedTracePropertyAnalyses) {
+								s.append("\n\t  =>" + tracePropertyAnalysis);
+							}
+						}
+						Iterable<@NonNull TracePropertyAnalysis> producedTracePropertyAnalyses = mappingPartitioner.getProducedTracePropertyAnalyses();
+						if (producedTracePropertyAnalyses != null) {
+							for (@NonNull TracePropertyAnalysis tracePropertyAnalysis : producedTracePropertyAnalyses) {
+								s.append("\n\t  <=" + tracePropertyAnalysis);
+							}
+						}
 					}
 					s.append("\n  TraceClassAnalyses:");
 					List<@NonNull TraceClassAnalysis> traceClassAnalyses = Lists.newArrayList(cycleAnalysis.getTraceClassAnalyses());
 					Collections.sort(traceClassAnalyses, NameUtil.NAMEABLE_COMPARATOR);
 					for (@NonNull TraceClassAnalysis traceClassAnalysis : traceClassAnalyses) {
 						s.append("\n\t" + traceClassAnalysis);
+					}
+					s.append("\n  TracePropertyAnalyses:");
+					List<@NonNull TracePropertyAnalysis> tracePropertyAnalyses = Lists.newArrayList(cycleAnalysis.getTracePropertyAnalyses());
+					Collections.sort(tracePropertyAnalyses, NameUtil.NAMEABLE_COMPARATOR);
+					for (@NonNull TracePropertyAnalysis tracePropertyAnalysis : tracePropertyAnalyses) {
+						s.append("\n\t" + tracePropertyAnalysis);
 					}
 					TransformationPartitioner.CYCLES.println(s.toString());
 				}
@@ -248,13 +298,25 @@ public class CyclesAnalysis
 	protected @NonNull CycleAnalysis createCycleAnalysis(@NonNull Set<@NonNull MappingPartitioner> cyclicMappingPartitioners) {
 		Set<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses = new HashSet<>();
 		Set<@NonNull TraceClassAnalysis> superProducedTraceClassAnalyses = new HashSet<>();
+		Set<@NonNull TracePropertyAnalysis> consumedTracePropertyAnalyses = new HashSet<>();
 		for (@NonNull MappingPartitioner cyclicMappingPartitioner : cyclicMappingPartitioners) {
-			Iterables.addAll(consumedTraceClassAnalyses, cyclicMappingPartitioner.getConsumedTraceClassAnalyses());
-			Iterables.addAll(superProducedTraceClassAnalyses, cyclicMappingPartitioner.getSuperProducedTraceClassAnalyses());
+			Iterable<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses2 = cyclicMappingPartitioner.getConsumedTraceClassAnalyses();
+			if (consumedTraceClassAnalyses2 != null) {
+				Iterables.addAll(consumedTraceClassAnalyses, consumedTraceClassAnalyses2);
+			}
+			Iterable<@NonNull TraceClassAnalysis> superProducedTraceClassAnalyses2 = cyclicMappingPartitioner.getSuperProducedTraceClassAnalyses();
+			if (superProducedTraceClassAnalyses2 != null) {
+				Iterables.addAll(superProducedTraceClassAnalyses, superProducedTraceClassAnalyses2);
+			}
+			Iterable<@NonNull TracePropertyAnalysis> consumedTracePropertyAnalyses2 = cyclicMappingPartitioner.getConsumedTracePropertyAnalyses();
+			if (consumedTracePropertyAnalyses2 != null) {
+				Iterables.addAll(consumedTracePropertyAnalyses, consumedTracePropertyAnalyses2);
+			}
 		}
 		Set<@NonNull TraceClassAnalysis> cyclicTraceClassAnalyses = new HashSet<>(consumedTraceClassAnalyses);
 		cyclicTraceClassAnalyses.retainAll(superProducedTraceClassAnalyses);
-		CycleAnalysis cycleAnalysis = new CycleAnalysis(this, cyclicMappingPartitioners, cyclicTraceClassAnalyses);
+		Set<@NonNull TracePropertyAnalysis> cyclicTracePropertyAnalyses = new HashSet<>(consumedTracePropertyAnalyses);
+		CycleAnalysis cycleAnalysis = new CycleAnalysis(this, cyclicMappingPartitioners, cyclicTraceClassAnalyses, cyclicTracePropertyAnalyses);
 		for (@NonNull MappingPartitioner cyclicMappingPartitioner : cyclicMappingPartitioners) {
 			CycleAnalysis oldCycleAnalysis = mappingPartitioner2cycleAnalysis.put(cyclicMappingPartitioner, cycleAnalysis);
 			assert oldCycleAnalysis == null;
