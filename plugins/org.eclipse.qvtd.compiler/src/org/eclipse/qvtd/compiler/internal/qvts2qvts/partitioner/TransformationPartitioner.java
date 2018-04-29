@@ -20,7 +20,6 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -32,12 +31,15 @@ import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+
 import com.google.common.collect.Iterables;
 
 /**
@@ -73,7 +75,7 @@ public class TransformationPartitioner
 	/**
 	 * The TraceClassAnalysis for each trace class.
 	 */
-	private final @NonNull Map<@NonNull CompleteClass, @NonNull TraceClassAnalysis> completeClass2traceClassAnalysis = new HashMap<>();
+	private final @NonNull Map<@NonNull ClassDatum, @NonNull TraceClassAnalysis> classDatum2traceClassAnalysis = new HashMap<>();
 
 	/**
 	 * The analysis of cycles.
@@ -103,11 +105,11 @@ public class TransformationPartitioner
 		this.activeRegions = activeRegions;
 	}
 
-	public @NonNull TraceClassAnalysis addConsumer(@NonNull CompleteClass completeClass, @NonNull MappingPartitioner consumer) {
-		TraceClassAnalysis middleAnalysis = completeClass2traceClassAnalysis.get(completeClass);
+	public @NonNull TraceClassAnalysis addConsumer(@NonNull ClassDatum traceClassDatum, @NonNull MappingPartitioner consumer) {
+		TraceClassAnalysis middleAnalysis = classDatum2traceClassAnalysis.get(traceClassDatum);
 		if (middleAnalysis == null) {
-			middleAnalysis = new TraceClassAnalysis(this, completeClass);
-			completeClass2traceClassAnalysis.put(completeClass, middleAnalysis);
+			middleAnalysis = new TraceClassAnalysis(this, traceClassDatum);
+			classDatum2traceClassAnalysis.put(traceClassDatum, middleAnalysis);
 		}
 		middleAnalysis.addConsumer(consumer);
 		return middleAnalysis;
@@ -128,11 +130,11 @@ public class TransformationPartitioner
 		problemHandler.addProblem(problem);
 	}
 
-	public @NonNull TraceClassAnalysis addProducer(@NonNull CompleteClass completeClass, @NonNull MappingPartitioner producer) {
-		TraceClassAnalysis middleAnalysis = completeClass2traceClassAnalysis.get(completeClass);
+	public @NonNull TraceClassAnalysis addProducer(@NonNull ClassDatum traceClassDatum, @NonNull MappingPartitioner producer) {
+		TraceClassAnalysis middleAnalysis = classDatum2traceClassAnalysis.get(traceClassDatum);
 		if (middleAnalysis == null) {
-			middleAnalysis = new TraceClassAnalysis(this, completeClass);
-			completeClass2traceClassAnalysis.put(completeClass, middleAnalysis);
+			middleAnalysis = new TraceClassAnalysis(this, traceClassDatum);
+			classDatum2traceClassAnalysis.put(traceClassDatum, middleAnalysis);
 		}
 		middleAnalysis.addProducer(producer);
 		return middleAnalysis;
@@ -171,8 +173,8 @@ public class TransformationPartitioner
 		Set<@NonNull TraceClassAnalysis> acylicAnalysis = new HashSet<>();
 		for (@NonNull MappingPartitioner acyclicProducer : acyclicProducers) {
 			for (@NonNull Node traceNode : acyclicProducer.getTraceNodes()) {
-				CompleteClass traceClass = traceNode.getCompleteClass();
-				TraceClassAnalysis middleAnalysis = completeClass2traceClassAnalysis.get(traceClass);
+				ClassDatum traceClassDatum = QVTscheduleUtil.getClassDatum(traceNode);
+				TraceClassAnalysis middleAnalysis = classDatum2traceClassAnalysis.get(traceClassDatum);
 				assert middleAnalysis != null;
 				if (QVTbaseUtil.containsAll(acyclicProducers, middleAnalysis.getProducers())) {
 					acylicAnalysis.add(middleAnalysis);
@@ -191,19 +193,21 @@ public class TransformationPartitioner
 	}
 
 	private void computeTraceClassDiscrimination() throws CompilerChainException {
-		for (@NonNull TraceClassAnalysis traceClassAnalysis : completeClass2traceClassAnalysis.values()) {
+		for (@NonNull TraceClassAnalysis traceClassAnalysis : classDatum2traceClassAnalysis.values()) {
 			traceClassAnalysis.discriminate();
 		}
 	}
 
 	private void computeTraceClassInheritance() {
-		for (@NonNull TraceClassAnalysis subTraceClassAnalysis : completeClass2traceClassAnalysis.values()) {
-			CompleteClass traceClass = subTraceClassAnalysis.getTraceClass();
-			for (@NonNull CompleteClass superCompleteClass : traceClass.getProperSuperCompleteClasses()) {
-				TraceClassAnalysis superTraceClassAnalysis = completeClass2traceClassAnalysis.get(superCompleteClass);
-				if (superTraceClassAnalysis != null) {
-					superTraceClassAnalysis.addSubTraceClassAnalysis(subTraceClassAnalysis);
-					subTraceClassAnalysis.addSuperTraceClassAnalysis(superTraceClassAnalysis);
+		for (@NonNull TraceClassAnalysis subTraceClassAnalysis : classDatum2traceClassAnalysis.values()) {
+			ClassDatum traceClassDatum = subTraceClassAnalysis.getClassDatum();
+			for (@NonNull ClassDatum superTraceClassDatum : QVTscheduleUtil.getSuperClassDatums(traceClassDatum)) {
+				if (superTraceClassDatum != traceClassDatum) {
+					TraceClassAnalysis superTraceClassAnalysis = classDatum2traceClassAnalysis.get(superTraceClassDatum);
+					if (superTraceClassAnalysis != null) {
+						superTraceClassAnalysis.addSubTraceClassAnalysis(subTraceClassAnalysis);
+						subTraceClassAnalysis.addSuperTraceClassAnalysis(superTraceClassAnalysis);
+					}
 				}
 			}
 		}
@@ -228,8 +232,8 @@ public class TransformationPartitioner
 		return corollaryProperty2regions.get(((NavigableEdge)edge).getProperty());
 	}
 
-	public @Nullable CycleAnalysis getCycleAnalysis(@NonNull CompleteClass completeClass) {
-		TraceClassAnalysis traceClassAnalysis = completeClass2traceClassAnalysis.get(completeClass);
+	public @Nullable CycleAnalysis getCycleAnalysis(@NonNull ClassDatum traceClassDatum) {
+		TraceClassAnalysis traceClassAnalysis = classDatum2traceClassAnalysis.get(traceClassDatum);
 		if (traceClassAnalysis == null) {
 			return null;
 		}
@@ -256,12 +260,12 @@ public class TransformationPartitioner
 		return scheduleManager.getSuccessPropertyDatum(successProperty);
 	}
 
-	public @NonNull TraceClassAnalysis getTraceClassAnalysis(@NonNull CompleteClass completeClass) {
-		return ClassUtil.nonNullState(completeClass2traceClassAnalysis.get(completeClass));
+	public @NonNull TraceClassAnalysis getTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
+		return ClassUtil.nonNullState(classDatum2traceClassAnalysis.get(traceClassDatum));
 	}
 
-	public boolean isCyclic(@NonNull CompleteClass traceClass) {
-		TraceClassAnalysis traceClassAnalysis = completeClass2traceClassAnalysis.get(traceClass);
+	public boolean isCyclic(@NonNull ClassDatum traceClassDatum) {
+		TraceClassAnalysis traceClassAnalysis = classDatum2traceClassAnalysis.get(traceClassDatum);
 		if (traceClassAnalysis == null) {
 			return false;
 		}

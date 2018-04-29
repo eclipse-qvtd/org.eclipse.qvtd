@@ -26,6 +26,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -37,7 +38,7 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractDispatch;
 public class TraceClassAnalysis implements Nameable
 {
 	protected final @NonNull TransformationPartitioner transformationPartitioner;
-	protected final @NonNull CompleteClass traceClass;
+	protected final @NonNull ClassDatum traceClassDatum;
 
 	/**
 	 * The partitioners that consume (predicate) the trace class.
@@ -62,11 +63,12 @@ public class TraceClassAnalysis implements Nameable
 	private @Nullable Boolean isCyclic = null;
 	private @Nullable Boolean isDispatcher = null;
 
-	public TraceClassAnalysis(@NonNull TransformationPartitioner transformationPartitioner, @NonNull CompleteClass traceClass) {
+	public TraceClassAnalysis(@NonNull TransformationPartitioner transformationPartitioner, @NonNull ClassDatum traceClassDatum) {
 		this.transformationPartitioner = transformationPartitioner;
-		this.traceClass = traceClass;
+		this.traceClassDatum = traceClassDatum;
 		subTraceClassAnalyses.add(this);
 		superTraceClassAnalyses.add(this);
+		assert traceClassDatum.getReferredTypedModel() == transformationPartitioner.getScheduleManager().getTraceTypedModel();
 	}
 
 	public void addConsumer(@NonNull MappingPartitioner consumer) {
@@ -235,6 +237,10 @@ public class TraceClassAnalysis implements Nameable
 		}
 	}
 
+	public @NonNull ClassDatum getClassDatum() {
+		return traceClassDatum;
+	}
+
 	public @NonNull Iterable<@NonNull MappingPartitioner> getConsumers() {
 		return consumers;
 	}
@@ -245,7 +251,7 @@ public class TraceClassAnalysis implements Nameable
 
 	@Override
 	public String getName() {
-		return traceClass.getName();
+		return traceClassDatum.getName();
 	}
 
 	public @NonNull Iterable<@NonNull MappingPartitioner> getProducers() {
@@ -261,7 +267,7 @@ public class TraceClassAnalysis implements Nameable
 	}
 
 	public @NonNull CompleteClass getTraceClass() {
-		return traceClass;
+		return QVTscheduleUtil.getCompleteClass(traceClassDatum);
 	}
 
 	/**
@@ -288,7 +294,7 @@ public class TraceClassAnalysis implements Nameable
 		Boolean isDispatcher2 = isDispatcher;
 		if (isDispatcher2 == null) {
 			String abstractDispatchClassName = AbstractDispatch.class.getName();
-			for (org.eclipse.ocl.pivot.@NonNull Class superClass : QVTbaseUtil.getSuperClasses(traceClass.getPrimaryClass())) {
+			for (org.eclipse.ocl.pivot.@NonNull Class superClass : QVTbaseUtil.getSuperClasses(QVTscheduleUtil.getCompleteClass(traceClassDatum).getPrimaryClass())) {
 				if (abstractDispatchClassName.equals(superClass.getInstanceClassName())) {
 					isDispatcher2 = isDispatcher = true;
 					return isDispatcher2;
@@ -321,6 +327,6 @@ public class TraceClassAnalysis implements Nameable
 
 	@Override
 	public String toString() {
-		return traceClass.toString();
+		return traceClassDatum.toString();
 	}
 }

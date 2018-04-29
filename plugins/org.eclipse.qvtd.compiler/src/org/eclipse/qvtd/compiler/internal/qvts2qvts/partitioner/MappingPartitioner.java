@@ -20,7 +20,6 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
@@ -32,6 +31,7 @@ import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -225,7 +225,7 @@ public class MappingPartitioner implements Nameable
 	private void addConsumptionOfMiddleNode(@NonNull Node node) {
 		if (!predicatedMiddleNodes.contains(node)) {
 			predicatedMiddleNodes.add(node);
-			TraceClassAnalysis consumedTraceAnalysis = transformationPartitioner.addConsumer(node.getCompleteClass(), this);
+			TraceClassAnalysis consumedTraceAnalysis = transformationPartitioner.addConsumer(QVTscheduleUtil.getClassDatum(node), this);
 			List<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses2 = consumedTraceClassAnalyses;
 			if (consumedTraceClassAnalyses2 == null) {
 				consumedTraceClassAnalyses = consumedTraceClassAnalyses2 = new ArrayList<>();
@@ -271,7 +271,7 @@ public class MappingPartitioner implements Nameable
 		if (node.isRealized() && !realizedMiddleNodes.contains(node)) {
 			realizedMiddleNodes.add(node);
 		}
-		TraceClassAnalysis consumedTraceAnalysis = transformationPartitioner.addProducer(node.getCompleteClass(), this);
+		TraceClassAnalysis consumedTraceAnalysis = transformationPartitioner.addProducer(QVTscheduleUtil.getClassDatum(node), this);
 		List<@NonNull TraceClassAnalysis> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
 		if (producedTraceClassAnalyses2 == null) {
 			producedTraceClassAnalyses = producedTraceClassAnalyses2 = new ArrayList<>();
@@ -897,8 +897,8 @@ public class MappingPartitioner implements Nameable
 	}
 
 	public @NonNull TraceClassAnalysis getTraceClassAnalysis(@NonNull Node traceNode) {
-		CompleteClass traceClass = traceNode.getCompleteClass();
-		return transformationPartitioner.getTraceClassAnalysis(traceClass);
+		ClassDatum traceClassDatum = QVTscheduleUtil.getClassDatum(traceNode);
+		return transformationPartitioner.getTraceClassAnalysis(traceClassDatum);
 	}
 
 	public @Nullable Edge getTraceEdge(@NonNull Node node) {
@@ -956,9 +956,9 @@ public class MappingPartitioner implements Nameable
 		return transformationPartitioner.getCorollaryOf(edge);
 	}
 
-	public boolean isCyclic(@NonNull Node node) {
-		CompleteClass traceClass = node.getCompleteClass();
-		return transformationPartitioner.isCyclic(traceClass);
+	public boolean isCyclic(@NonNull Node traceNode) {
+		ClassDatum traceClassDatum = QVTscheduleUtil.getClassDatum(traceNode);
+		return transformationPartitioner.isCyclic(traceClassDatum);
 	}
 
 	private boolean isDead(@NonNull Node node, @Nullable Set<@NonNull Node> knownDeadNodes) {

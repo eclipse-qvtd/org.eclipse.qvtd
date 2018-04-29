@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.internal.utilities.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -423,7 +424,12 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 
 	@Override
 	public String toString() {
-		return String.valueOf(getReferredTypedModel()) + "!" + completeClass.getName();
+		if (completeClass == null) {
+			return PivotConstantsInternal.NULL_MARKER;
+		}
+		org.eclipse.ocl.pivot.Class primaryClass = completeClass.getPrimaryClass();
+		org.eclipse.ocl.pivot.Package primaryPackage = primaryClass.getOwningPackage();
+		return String.valueOf(getReferredTypedModel()) + "!" + (primaryPackage != null ? String.valueOf(primaryPackage.getName()) : "null") + "::" + primaryClass.toString();
 	}
 
 	/*	public @Nullable List<Property> getMultiOpposites() {
