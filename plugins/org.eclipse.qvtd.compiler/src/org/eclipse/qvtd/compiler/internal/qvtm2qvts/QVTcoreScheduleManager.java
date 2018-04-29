@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.CompilerOptions;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
@@ -30,8 +31,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 
 public class QVTcoreScheduleManager extends AbstractScheduleManager
 {
-	public QVTcoreScheduleManager(@NonNull EnvironmentFactory environmentFactory, CompilerOptions.@Nullable StepOptions schedulerOptions) {
-		super(QVTscheduleFactory.eINSTANCE.createScheduleModel(), environmentFactory, schedulerOptions);
+	public QVTcoreScheduleManager(@NonNull EnvironmentFactory environmentFactory, @NonNull ProblemHandler problemHandler, CompilerOptions.@Nullable StepOptions schedulerOptions) {
+		super(QVTscheduleFactory.eINSTANCE.createScheduleModel(), environmentFactory, problemHandler, schedulerOptions);
 	}
 
 	@Override

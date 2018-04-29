@@ -24,6 +24,8 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -52,12 +54,12 @@ public class TraceClassAnalysis extends TraceElementAnalysis
 	private @Nullable Boolean isCyclic = null;
 	private @Nullable Boolean isDispatcher = null;
 
-	public TraceClassAnalysis(@NonNull TransformationPartitioner transformationPartitioner, @NonNull ClassDatum traceClassDatum) {
-		super(transformationPartitioner);
+	public TraceClassAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull ClassDatum traceClassDatum) {
+		super(transformationAnalysis);
 		this.traceClassDatum = traceClassDatum;
 		subTraceClassAnalyses.add(this);
 		superTraceClassAnalyses.add(this);
-		assert traceClassDatum.getReferredTypedModel() == transformationPartitioner.getScheduleManager().getTraceTypedModel();
+		assert traceClassDatum.getReferredTypedModel() == transformationAnalysis.getScheduleManager().getTraceTypedModel();
 	}
 
 	public void addSubTraceClassAnalysis(@NonNull TraceClassAnalysis traceClassAnalysis) {
@@ -87,9 +89,9 @@ public class TraceClassAnalysis extends TraceElementAnalysis
 		//
 		//	Identify the properties available for discrimination.
 		//
-		Map<@NonNull MappingPartitioner, @NonNull Map<@NonNull Property, @NonNull NavigableEdge>> partitioner2property2edge = new HashMap<>();
+		Map<@NonNull RegionAnalysis, @NonNull Map<@NonNull Property, @NonNull NavigableEdge>> partitioner2property2edge = new HashMap<>();
 		Set<@NonNull Property> commonProperties = null;
-		for (@NonNull MappingPartitioner producer : producers) {
+		for (@NonNull RegionAnalysis producer : producers) {
 			Map<@NonNull Property, @NonNull NavigableEdge> property2edge = new HashMap<>();
 			partitioner2property2edge.put(producer, property2edge);
 			for (@NonNull Node traceNode : producer.getTraceNodes()) {
@@ -117,20 +119,20 @@ public class TraceClassAnalysis extends TraceElementAnalysis
 		//
 		List<@NonNull Property> sortedProperties = new ArrayList<@NonNull Property>(commonProperties);
 		Collections.sort(sortedProperties, NameUtil.NAMEABLE_COMPARATOR);
-		Map<@NonNull Property, @Nullable Map<@Nullable CompleteClass, @NonNull List<@NonNull MappingPartitioner>>> property2completeClass2partitioners  = new HashMap<>();
+		Map<@NonNull Property, @Nullable Map<@Nullable CompleteClass, @NonNull List<@NonNull RegionAnalysis>>> property2completeClass2regionAnalyses  = new HashMap<>();
 		for (@NonNull Property property : sortedProperties) {
-			for (@NonNull MappingPartitioner producer : producers) {
+			for (@NonNull RegionAnalysis producer : producers) {
 				Map<@NonNull Property, @NonNull NavigableEdge> property2edge = partitioner2property2edge.get(producer);
 				assert property2edge != null;
 				NavigableEdge edge = property2edge.get(property);
 				if (edge == null) {
-					property2completeClass2partitioners.put(property, null);
+					property2completeClass2regionAnalyses.put(property, null);
 				}
 				else {
-					Map<@Nullable CompleteClass, @NonNull List<@NonNull MappingPartitioner>> completeClass2partitioners = property2completeClass2partitioners.get(property);
-					if (completeClass2partitioners == null) {
-						completeClass2partitioners = new HashMap<>();
-						property2completeClass2partitioners.put(property, completeClass2partitioners);
+					Map<@Nullable CompleteClass, @NonNull List<@NonNull RegionAnalysis>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
+					if (completeClass2regionAnalyses == null) {
+						completeClass2regionAnalyses = new HashMap<>();
+						property2completeClass2regionAnalyses.put(property, completeClass2regionAnalyses);
 					}
 					CompleteClass completeClass;
 					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
@@ -140,12 +142,12 @@ public class TraceClassAnalysis extends TraceElementAnalysis
 					else {
 						completeClass = targetNode.getCompleteClass(); // FIXME use/ignore inheritance
 					}
-					List<@NonNull MappingPartitioner> partitioners = completeClass2partitioners.get(completeClass);
-					if (partitioners == null) {
-						partitioners = new ArrayList<>();
-						completeClass2partitioners.put(completeClass, partitioners);
+					List<@NonNull RegionAnalysis> regionAnalyses = completeClass2regionAnalyses.get(completeClass);
+					if (regionAnalyses == null) {
+						regionAnalyses = new ArrayList<>();
+						completeClass2regionAnalyses.put(completeClass, regionAnalyses);
 					}
-					partitioners.add(producer);
+					regionAnalyses.add(producer);
 				}
 				/*				assert edge != null;
 
@@ -175,10 +177,10 @@ public class TraceClassAnalysis extends TraceElementAnalysis
 		//
 		int bestSize = 0;
 		Property bestProperty = null;
-		for (@NonNull Property property : property2completeClass2partitioners.keySet()) {
-			Map<@Nullable CompleteClass, @NonNull List<@NonNull MappingPartitioner>> completeClass2partitioners = property2completeClass2partitioners.get(property);
-			if (completeClass2partitioners != null) {
-				int size = completeClass2partitioners.size();
+		for (@NonNull Property property : property2completeClass2regionAnalyses.keySet()) {
+			Map<@Nullable CompleteClass, @NonNull List<@NonNull RegionAnalysis>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
+			if (completeClass2regionAnalyses != null) {
+				int size = completeClass2regionAnalyses.size();
 				if (size > bestSize) {
 					bestSize = size;
 					bestProperty = property;
@@ -187,17 +189,17 @@ public class TraceClassAnalysis extends TraceElementAnalysis
 		}
 		if (TransformationPartitioner.DISCRIMINATION.isActive()) {
 			StringBuilder s = new StringBuilder();
-			s.append("property->completeClass->partitioners");
-			for (@NonNull Property property : property2completeClass2partitioners.keySet()) {
+			s.append("property->completeClass->regionAnalyses");
+			for (@NonNull Property property : property2completeClass2regionAnalyses.keySet()) {
 				s.append("\n\t" + property);
-				Map<@Nullable CompleteClass, @NonNull List<@NonNull MappingPartitioner>> completeClass2partitioners = property2completeClass2partitioners.get(property);
-				if (completeClass2partitioners != null) {
-					for (@Nullable CompleteClass completeClass : completeClass2partitioners.keySet()) {
+				Map<@Nullable CompleteClass, @NonNull List<@NonNull RegionAnalysis>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
+				if (completeClass2regionAnalyses != null) {
+					for (@Nullable CompleteClass completeClass : completeClass2regionAnalyses.keySet()) {
 						s.append("\n\t\t" + completeClass);
-						List<@NonNull MappingPartitioner> partitioners = completeClass2partitioners.get(completeClass);
-						assert partitioners != null;
-						for (@NonNull MappingPartitioner mappingPartitioner : partitioners) {
-							s.append("\n\t\t\t" + mappingPartitioner);
+						List<@NonNull RegionAnalysis> regionAnalyses = completeClass2regionAnalyses.get(completeClass);
+						assert regionAnalyses != null;
+						for (@NonNull RegionAnalysis regionAnalysis : regionAnalyses) {
+							s.append("\n\t\t\t" + regionAnalysis);
 						}
 					}
 				}
@@ -246,7 +248,7 @@ public class TraceClassAnalysis extends TraceElementAnalysis
 		Boolean isCyclic2 = isCyclic;
 		if (isCyclic2 == null) {
 			for (@NonNull TraceClassAnalysis subTraceClassAnalysis : subTraceClassAnalyses) {
-				if (transformationPartitioner.getCycleAnalysis(subTraceClassAnalysis) != null) {
+				if (transformationAnalysis.getCycleAnalysis(subTraceClassAnalysis) != null) {
 					isCyclic2 = isCyclic = true;
 					return isCyclic2;
 				}

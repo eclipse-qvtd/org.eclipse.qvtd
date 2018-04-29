@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.NameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.RuleAnalysis2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
@@ -50,6 +51,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 public interface ScheduleManager
 {
 	void addMappingRegion(@NonNull MappingRegion mappingRegion);
+	void addProblem(@NonNull CompilerProblem problem);
 	void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);
 	void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);
 

@@ -51,6 +51,8 @@ import org.eclipse.ocl.pivot.utilities.ParserException;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
+import org.eclipse.qvtd.compiler.CompilerProblem;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.NameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
@@ -90,6 +92,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 {
 	protected final @NonNull ScheduleModel scheduleModel;
 	protected final @NonNull EnvironmentFactory environmentFactory;
+	protected final @NonNull ProblemHandler problemHandler;
 	protected final @NonNull NameGenerator nameGenerator;
 	private @Nullable TraceHelper traceHelper = null;
 	private CompilerOptions.@Nullable StepOptions schedulerOptions;
@@ -128,8 +131,6 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	private /*@LazyNonNull */ OperationDependencyAnalysis operationDependencyAnalysis = null;
 
-	private @NonNull Map<@NonNull Region, @NonNull RegionAnalysis> region2regionAnalysis = new HashMap<>();
-
 	private Map<@NonNull OperationDatum, @NonNull OperationRegion> operationDatum2operationRegion = new HashMap<>();
 
 	private final @NonNull Map<@NonNull Transformation, @NonNull TransformationAnalysis> transformation2transformationAnalysis = new HashMap<>();
@@ -139,9 +140,10 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	//	private final @NonNull Map<@NonNull TransformationAnalysis, @NonNull TransformationAnalysis2TracePackage> transformationAnalysis2transformationAnalysis2tracePackage = new HashMap<>();
 
 	protected AbstractScheduleManager(@NonNull ScheduleModel scheduleModel, @NonNull EnvironmentFactory environmentFactory,
-			CompilerOptions.@Nullable StepOptions schedulerOptions) {
+			@NonNull ProblemHandler problemHandler, CompilerOptions.@Nullable StepOptions schedulerOptions) {
 		this.scheduleModel = scheduleModel;
 		this.environmentFactory = environmentFactory;
+		this.problemHandler = problemHandler;
 		this.nameGenerator = createNameGenerator();
 		this.schedulerOptions = schedulerOptions;
 		this.domainUsageAnalysis = createDomainUsageAnalysis();
@@ -168,13 +170,18 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
+	public void addProblem(@NonNull CompilerProblem problem) {
+		problemHandler.addProblem(problem);
+	}
+
+	@Override
 	public void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
-		throw new UnsupportedOperationException();		// FIXME move to caller
+		problemHandler.addProblem(CompilerUtil.createRegionError(region, messageTemplate, bindings));
 	}
 
 	@Override
 	public void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
-		throw new UnsupportedOperationException();		// FIXME move to caller
+		problemHandler.addProblem(CompilerUtil.createRegionWarning(region, messageTemplate, bindings));
 	}
 
 	@Override
@@ -673,12 +680,18 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	@Override
 	public @NonNull RegionAnalysis getRegionAnalysis(@NonNull Region region) {
-		RegionAnalysis regionAnalysis = region2regionAnalysis.get(region);
-		if (regionAnalysis == null) {
-			regionAnalysis = new RegionAnalysis(this, region);
-			region2regionAnalysis.put(region, regionAnalysis);
+		if (region instanceof RuleRegion) {
+			Rule rule = QVTscheduleUtil.getReferredRule((RuleRegion) region);
+			Transformation transformation = QVTbaseUtil.getContainingTransformation(rule);
+			TransformationAnalysis transformationAnalysis = getTransformationAnalysis(transformation);
+			return transformationAnalysis.getRegionAnalysis(region);
 		}
-		return regionAnalysis;
+		else {
+			ScheduledRegion scheduledRegion = QVTscheduleUtil.getContainingScheduledRegion(region);
+			Transformation transformation = QVTscheduleUtil.getReferredTransformation(scheduledRegion);
+			TransformationAnalysis transformationAnalysis = getTransformationAnalysis(transformation);
+			return transformationAnalysis.getRegionAnalysis(region);
+		}
 	}
 
 	public @NonNull RuleAnalysis getRuleAnalysis(@NonNull Rule rule) {

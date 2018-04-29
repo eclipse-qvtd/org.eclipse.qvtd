@@ -13,23 +13,41 @@ package org.eclipse.qvtd.compiler.internal.qvtb2qvts;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.CompletePackage;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
+import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CycleAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CyclesAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TracePropertyAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * A TransformationAnalysis accumulates the tesults of analyzing a RelationalTransformation and its contents.
@@ -61,6 +79,29 @@ public class TransformationAnalysis extends QVTbaseHelper implements Nameable
 	 */
 	private final @NonNull Map<@NonNull Rule, @NonNull RuleAnalysis> rule2ruleAnalysis = new HashMap<>();
 
+	private @NonNull Map<@NonNull Region, @NonNull RegionAnalysis> region2regionAnalysis = new HashMap<>();
+
+	/**
+	 * The TraceClassAnalysis for each trace class.
+	 */
+	private final @NonNull Map<@NonNull ClassDatum, @NonNull TraceClassAnalysis> classDatum2traceClassAnalysis = new HashMap<>();
+
+	/**
+	 * The TracePropertyAnalysis for each trace property.
+	 */
+	private final @NonNull Map<@NonNull PropertyDatum, @NonNull TracePropertyAnalysis> propertyDatum2tracePropertyAnalysis = new HashMap<>();
+
+	/**
+	 * All speculated-trace to realized node properties that are automatically assignable once their speculation
+	 * is validated mapped to the regions that speculate them.
+	 */
+	private final @NonNull Map<@NonNull Property, @NonNull List<@NonNull MappingRegion>> corollaryProperty2regions = new HashMap<>();
+
+	/**
+	 * The analysis of cycles.
+	 */
+	private @Nullable CyclesAnalysis cyclesAnalysis = null;
+
 	public TransformationAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull Transformation transformation, @NonNull ScheduledRegion scheduledRegion) {
 		super(scheduleManager.getEnvironmentFactory());
 		this.scheduleManager = scheduleManager;
@@ -70,6 +111,57 @@ public class TransformationAnalysis extends QVTbaseHelper implements Nameable
 			RuleAnalysis ruleAnalysis = scheduleManager.createRuleAnalysis(this, asRule);
 			rule2ruleAnalysis.put(asRule, ruleAnalysis);
 		}
+	}
+
+	public @NonNull TraceClassAnalysis addConsumer(@NonNull ClassDatum traceClassDatum, @NonNull RegionAnalysis consumer) {
+		TraceClassAnalysis middleAnalysis = classDatum2traceClassAnalysis.get(traceClassDatum);
+		if (middleAnalysis == null) {
+			middleAnalysis = new TraceClassAnalysis(this, traceClassDatum);
+			classDatum2traceClassAnalysis.put(traceClassDatum, middleAnalysis);
+		}
+		middleAnalysis.addConsumer(consumer);
+		return middleAnalysis;
+	}
+
+	public @NonNull TracePropertyAnalysis addConsumer(@NonNull PropertyDatum tracePropertyDatum, @NonNull RegionAnalysis consumer) {
+		TracePropertyAnalysis middleAnalysis = propertyDatum2tracePropertyAnalysis.get(tracePropertyDatum);
+		if (middleAnalysis == null) {
+			middleAnalysis = new TracePropertyAnalysis(this, tracePropertyDatum);
+			propertyDatum2tracePropertyAnalysis.put(tracePropertyDatum, middleAnalysis);
+		}
+		middleAnalysis.addConsumer(consumer);
+		return middleAnalysis;
+	}
+
+	public void addCorollary(@NonNull Property property, @NonNull MappingRegion region) {
+		List<@NonNull MappingRegion> regions = corollaryProperty2regions.get(property);
+		if (regions == null) {
+			regions = new ArrayList<>();
+			corollaryProperty2regions.put(property, regions);
+		}
+		if (!regions.contains(region)) {
+			regions.add(region);
+		}
+	}
+
+	public @NonNull TraceClassAnalysis addProducer(@NonNull ClassDatum traceClassDatum, @NonNull RegionAnalysis producer) {
+		TraceClassAnalysis middleAnalysis = classDatum2traceClassAnalysis.get(traceClassDatum);
+		if (middleAnalysis == null) {
+			middleAnalysis = new TraceClassAnalysis(this, traceClassDatum);
+			classDatum2traceClassAnalysis.put(traceClassDatum, middleAnalysis);
+		}
+		middleAnalysis.addProducer(producer);
+		return middleAnalysis;
+	}
+
+	public @NonNull TracePropertyAnalysis addProducer(@NonNull PropertyDatum tracePropertyDatum, @NonNull RegionAnalysis producer) {
+		TracePropertyAnalysis middleAnalysis = propertyDatum2tracePropertyAnalysis.get(tracePropertyDatum);
+		if (middleAnalysis == null) {
+			middleAnalysis = new TracePropertyAnalysis(this, tracePropertyDatum);
+			propertyDatum2tracePropertyAnalysis.put(tracePropertyDatum, middleAnalysis);
+		}
+		middleAnalysis.addProducer(producer);
+		return middleAnalysis;
 	}
 
 	/**
@@ -98,6 +190,71 @@ public class TransformationAnalysis extends QVTbaseHelper implements Nameable
 		}
 	}
 
+	protected @NonNull CyclesAnalysis computeCyclesAnalysis() {
+		CyclesAnalysis cyclesAnalysis = new CyclesAnalysis(this, region2regionAnalysis.values());
+		cyclesAnalysis.analyze();
+		return cyclesAnalysis;
+	}
+
+	private @NonNull CyclesAnalysis computeCyclicTraceClasses() {
+		//
+		//	Each mapping partitioner that consumes no trace class, is an acyclic producer.
+		//
+		Set<@NonNull RegionAnalysis> acyclicProducers = new HashSet<>();
+		for (@NonNull RegionAnalysis regionAnalysis : region2regionAnalysis.values()) {
+			Iterable<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses = regionAnalysis.getConsumedTraceClassAnalyses();
+			if (consumedTraceClassAnalyses == null) {
+				acyclicProducers.add(regionAnalysis);
+			}
+		}
+		/*		for (@NonNull TraceClassAnalysis middleAnalysis : class2middleAnalysis.values()) {
+		CompleteClass traceClass = middleAnalysis.getTraceClass();
+		for (@NonNull CompleteClass superCompleteClass : traceClass.getProperSuperCompleteClasses()) {
+			for (@NonNull RegionAnalysis producer : middleAnalysis.getProducers()) {
+				addProducer(superCompleteClass, producer);
+			}
+		}
+	} */
+
+		CyclesAnalysis cyclesAnalysis = computeCyclesAnalysis();
+		//
+		//	Each TraceClassAnalysis produced only by acyclic partitioners identifies an acyclic trace class
+		// ?? is this cdead ?? should it be for TracePropertyAnalysis too ??
+		Set<@NonNull TraceClassAnalysis> acylicAnalysis = new HashSet<>();
+		for (@NonNull RegionAnalysis acyclicProducer : acyclicProducers) {
+			for (@NonNull Node traceNode : acyclicProducer.getTraceNodes()) {
+				ClassDatum traceClassDatum = QVTscheduleUtil.getClassDatum(traceNode);
+				TraceClassAnalysis middleAnalysis = classDatum2traceClassAnalysis.get(traceClassDatum);
+				assert middleAnalysis != null;
+				if (QVTbaseUtil.containsAll(acyclicProducers, middleAnalysis.getProducers())) {
+					acylicAnalysis.add(middleAnalysis);
+				}
+			}
+		}
+		return cyclesAnalysis;
+	}
+
+	private void computeTraceClassInheritance() {
+		for (@NonNull TraceClassAnalysis subTraceClassAnalysis : classDatum2traceClassAnalysis.values()) {
+			ClassDatum traceClassDatum = subTraceClassAnalysis.getClassDatum();
+			for (@NonNull ClassDatum superTraceClassDatum : QVTscheduleUtil.getSuperClassDatums(traceClassDatum)) {
+				if (superTraceClassDatum != traceClassDatum) {
+					TraceClassAnalysis superTraceClassAnalysis = classDatum2traceClassAnalysis.get(superTraceClassDatum);
+					if (superTraceClassAnalysis != null) {
+						superTraceClassAnalysis.addSubTraceClassAnalysis(subTraceClassAnalysis);
+						subTraceClassAnalysis.addSuperTraceClassAnalysis(superTraceClassAnalysis);
+					}
+				}
+			}
+		}
+	}
+
+	private void computeTraceClassDiscrimination() throws CompilerChainException {
+		for (@NonNull TraceClassAnalysis traceClassAnalysis : classDatum2traceClassAnalysis.values()) {
+			traceClassAnalysis.discriminate();
+		}
+	}
+
 	public @NonNull Iterable<@NonNull RuleRegion> gatherRuleRegions() {
 		List<@NonNull RuleRegion> ruleRegions = new ArrayList<>();
 		for (@NonNull RuleAnalysis ruleAnalysis : rule2ruleAnalysis.values()) {
@@ -107,9 +264,43 @@ public class TransformationAnalysis extends QVTbaseHelper implements Nameable
 		return ruleRegions;
 	}
 
+	public @Nullable List<@NonNull MappingRegion> getCorollaryOf(@NonNull Edge edge) {
+		if (!(edge.isCast() || edge.isNavigation())) {
+			return null;
+		}
+		return corollaryProperty2regions.get(((NavigableEdge)edge).getProperty());
+	}
+
+	public @Nullable CycleAnalysis getCycleAnalysis(@NonNull ClassDatum traceClassDatum) {
+		TraceClassAnalysis traceClassAnalysis = classDatum2traceClassAnalysis.get(traceClassDatum);
+		if (traceClassAnalysis == null) {
+			return null;
+		}
+		return getCycleAnalysis(traceClassAnalysis);
+	}
+
+	public @Nullable CycleAnalysis getCycleAnalysis(@NonNull RegionAnalysis regionAnalysis) {
+		assert cyclesAnalysis != null;
+		return cyclesAnalysis != null ? cyclesAnalysis.getCycleAnalysis(regionAnalysis) : null;
+	}
+
+	public @Nullable CycleAnalysis getCycleAnalysis(@NonNull TraceClassAnalysis traceClassAnalysis) {
+		assert cyclesAnalysis != null;
+		return cyclesAnalysis != null ? cyclesAnalysis.getCycleAnalysis(traceClassAnalysis) : null;
+	}
+
 	@Override
 	public String getName() {
 		return transformation.getName();
+	}
+
+	public @NonNull RegionAnalysis getRegionAnalysis(@NonNull Region region) {
+		RegionAnalysis regionAnalysis = region2regionAnalysis.get(region);
+		if (regionAnalysis == null) {
+			regionAnalysis = new RegionAnalysis(this, region);
+			region2regionAnalysis.put(region, regionAnalysis);
+		}
+		return regionAnalysis;
 	}
 
 	//	public @NonNull Iterable<@NonNull RuleAnalysis> getRuleAnalyses() {
@@ -137,6 +328,14 @@ public class TransformationAnalysis extends QVTbaseHelper implements Nameable
 		return scheduledRegion;
 	}
 
+	public @NonNull TraceClassAnalysis getTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
+		return ClassUtil.nonNullState(classDatum2traceClassAnalysis.get(traceClassDatum));
+	}
+
+	public @NonNull TracePropertyAnalysis getTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
+		return ClassUtil.nonNullState(propertyDatum2tracePropertyAnalysis.get(propertyDatum));
+	}
+
 	public @NonNull Transformation getTransformation() {
 		return transformation;
 	}
@@ -147,6 +346,24 @@ public class TransformationAnalysis extends QVTbaseHelper implements Nameable
 			transformationAnalysis2tracePackage = transformationAnalysis2tracePackage2 = scheduleManager.createTransformationAnalysis2TracePackage(this);
 		}
 		return transformationAnalysis2tracePackage2;
+	}
+
+	public boolean isCyclic(@NonNull ClassDatum traceClassDatum) {
+		TraceClassAnalysis traceClassAnalysis = classDatum2traceClassAnalysis.get(traceClassDatum);
+		if (traceClassAnalysis == null) {
+			return false;
+		}
+		return traceClassAnalysis.isCyclic();
+	}
+
+	public void prePartition() throws CompilerChainException {
+		if (scheduleManager.needsDiscrimination()) {
+			computeTraceClassDiscrimination();
+		}
+		computeTraceClassInheritance();
+		this.cyclesAnalysis = computeCyclicTraceClasses();
+		//		this.fallibilityAnalysis = computeFallibilityAnalysis();
+
 	}
 
 	@Override

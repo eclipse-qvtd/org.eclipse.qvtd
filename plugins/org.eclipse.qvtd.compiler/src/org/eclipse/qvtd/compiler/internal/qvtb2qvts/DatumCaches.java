@@ -359,7 +359,7 @@ public class DatumCaches
 			return cachedPropertyDatum;
 		}
 		for (PropertyDatum propertyDatum : allPropertyDatums) {
-			if (propertyDatum.getReferredProperty().equals(property)) {
+			if ((propertyDatum.getReferredProperty() == property) && (propertyDatum.getOwningClassDatum() == classDatum)) {
 				return propertyDatum;
 			}
 		}

@@ -36,9 +36,11 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LoadingRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
@@ -1126,9 +1128,11 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		Iterable<@NonNull ScheduledRegion> scheduledRegions = scheduledRegion2activeRegions.keySet();
 		Map<@NonNull ScheduledRegion, Iterable<? extends @NonNull MappingRegion>> scheduledRegion2partitionedRegions = new HashMap<>();
 		for (@NonNull ScheduledRegion scheduledRegion : scheduledRegions) {
+			Transformation transformation = QVTscheduleUtil.getReferredTransformation(scheduledRegion);
+			TransformationAnalysis transformationAnalysis = scheduleManager.getTransformationAnalysis(transformation);
 			Iterable<? extends @NonNull MappingRegion> activeRegions = scheduledRegion2activeRegions.get(scheduledRegion);
 			assert activeRegions != null;
-			Iterable<@NonNull MappingRegion> partitionedRegions = TransformationPartitioner.partition(scheduleManager, problemHandler, activeRegions);
+			Iterable<@NonNull MappingRegion> partitionedRegions = TransformationPartitioner.partition(transformationAnalysis, problemHandler, activeRegions);
 			if (!Iterables.isEmpty(partitionedRegions)) {
 				//			for (@NonNull Region region : partitionedRegions) {
 				//				System.out.println("partitionedRegions " + region);

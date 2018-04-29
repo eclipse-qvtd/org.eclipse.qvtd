@@ -39,6 +39,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
@@ -247,7 +248,8 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			region2mapping = new RootRegion2Mapping(this, (LoadingRegion)region);
 		}
 		else {
-			region2mapping = new BasicRegion2Mapping(this, region);
+			RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
+			region2mapping = new BasicRegion2Mapping(this, regionAnalysis);
 		}
 		region2mapping.synthesizeLocalStatements();
 		region2region2mapping.put(region, region2mapping);

@@ -39,6 +39,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.FallibilityAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -195,6 +196,8 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		AbstractMerger.EARLY.setState(true);
 		//		AbstractMerger.FAILURE.setState(true);
 		//		AbstractMerger.LATE.setState(true);
+		FallibilityAnalysis.GLOBAL.setState(true);;
+		FallibilityAnalysis.LOCAL.setState(true);;
 		TransformationPartitioner.CYCLES.setState(true);;
 		//		TransformationPartitioner.DISCRIMINATION.setState(true);;
 		TransformationPartitioner.PREDECESSORS.setState(true);;

@@ -68,6 +68,11 @@ org.eclipse.qvtd.compiler/qvts2qvts/connectivity/edges=false
 # Turn on display of the final of node fan-in to fan-out
 org.eclipse.qvtd.compiler/qvts2qvts/connectivity/nodes=false
 
+# Turn on tracing of the overall global fallibilities
+org.eclipse.qvtd.compiler/qvts2qvts/fallibility/global=false
+# Turn on tracing of the contributing local fallibilities
+org.eclipse.qvtd.compiler/qvts2qvts/fallibility/local=false
+
 # Turn on tracing of the early merge correlation attempts
 org.eclipse.qvtd.compiler/qvts2qvts/merge/early=false
 # Turn on tracing of the merge correelation failures

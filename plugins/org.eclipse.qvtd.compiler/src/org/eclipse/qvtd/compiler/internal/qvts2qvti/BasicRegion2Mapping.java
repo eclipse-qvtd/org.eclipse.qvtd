@@ -1015,6 +1015,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 	}
 
+	protected final @NonNull RegionAnalysis regionAnalysis;
+
 	/**
 	 * Lazily computed closure of all preceding nodes, icluding the final node, of each node.
 	 */
@@ -1060,10 +1062,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 */
 	private final @NonNull CheckedConditionAnalysis checkedConditionAnalysis;
 
-	public BasicRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Region region) {
-		super(visitor, region);
+	public BasicRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull RegionAnalysis regionAnalysis) {
+		super(visitor, regionAnalysis.getRegion());
+		this.regionAnalysis = regionAnalysis;
 		this.reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		this.checkedConditionAnalysis = new CheckedConditionAnalysis(scheduleManager, reachabilityForest, region);
+		this.checkedConditionAnalysis = new CheckedConditionAnalysis(regionAnalysis, reachabilityForest);
 		this.resultNode2subexpression = computeSubexpressions();
 		//
 		//	Gather the subexpression contents.
@@ -1632,7 +1635,6 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		Node sourceNode = edge.getEdgeSource();
 		Property asProperty = QVTscheduleUtil.getProperty(edge);
 		TypedModel typedModel = QVTscheduleUtil.getTypedModel(sourceNode);
-		RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
 		Iterable<@NonNull NavigableEdge> enforcedEdges = regionAnalysis.getEnforcedEdges(typedModel, asProperty);
 		return enforcedEdges != null;
 	}

@@ -24,10 +24,8 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.CompilerOptions;
-import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -38,18 +36,7 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 {
 	public QVTm2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory,
 			CompilerOptions.@Nullable StepOptions schedulerOptions) {
-		super(new QVTcoreScheduleManager(environmentFactory, schedulerOptions)
-		{
-			@Override
-			public void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
-				problemHandler.addProblem(CompilerUtil.createRegionError(region, messageTemplate, bindings));
-			}
-
-			@Override
-			public void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
-				problemHandler.addProblem(CompilerUtil.createRegionWarning(region, messageTemplate, bindings));
-			}
-		}, problemHandler);
+		super(new QVTcoreScheduleManager(environmentFactory, problemHandler, schedulerOptions), problemHandler);
 	}
 
 	public @NonNull Map<@NonNull ScheduledRegion, Iterable<@NonNull MappingRegion>> transform() throws IOException {

@@ -24,28 +24,28 @@ import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import com.google.common.collect.Iterables;
 
 /**
- * Each CycleAnalysis identifies one group of mappingPartitioners that contribute to a cycle.
+ * Each CycleAnalysis identifies one group of regionAnalyses that contribute to a cycle.
  */
 public class CycleAnalysis
 {
 	protected final @NonNull CyclesAnalysis cyclesAnalysis;
-	protected final @NonNull Set<@NonNull MappingPartitioner> mappingPartitioners;
+	protected final @NonNull Set<@NonNull RegionAnalysis> regionAnalyses;
 	protected final @NonNull Set<@NonNull TraceClassAnalysis> traceClassAnalyses;
 	protected final @NonNull Set<@NonNull TracePropertyAnalysis> tracePropertyAnalyses;
 	private @Nullable Boolean isInfallible = null;
 
-	public CycleAnalysis(@NonNull CyclesAnalysis cyclesAnalysis, @NonNull Set<@NonNull MappingPartitioner> mappingPartitioners,
+	public CycleAnalysis(@NonNull CyclesAnalysis cyclesAnalysis, @NonNull Set<@NonNull RegionAnalysis> regionAnalyses,
 			@NonNull Set<@NonNull TraceClassAnalysis> traceClassAnalyses, @NonNull Set<@NonNull TracePropertyAnalysis> tracePropertyAnalyses) {
 		this.cyclesAnalysis = cyclesAnalysis;
-		this.mappingPartitioners = mappingPartitioners;
+		this.regionAnalyses = regionAnalyses;
 		this.traceClassAnalyses = traceClassAnalyses;
 		this.tracePropertyAnalyses = tracePropertyAnalyses;
-		assert !mappingPartitioners.isEmpty();
-		assert !traceClassAnalyses.isEmpty();
+		assert !regionAnalyses.isEmpty();
+		assert !traceClassAnalyses.isEmpty() || !tracePropertyAnalyses.isEmpty();
 	}
 
-	public @NonNull Iterable<@NonNull MappingPartitioner> getMappingPartitioners() {
-		return mappingPartitioners;
+	public @NonNull Iterable<@NonNull RegionAnalysis> getRegionAnalyses() {
+		return regionAnalyses;
 	}
 
 	public @NonNull Iterable<@NonNull TraceClassAnalysis> getTraceClassAnalyses() {
@@ -63,13 +63,11 @@ public class CycleAnalysis
 		Boolean isInfallible2 = isInfallible;
 		if (isInfallible2 == null) {
 			Set<@NonNull RegionAnalysis> cycleFallibilities = new HashSet<>();
-			for (@NonNull MappingPartitioner mappingPartitioner : mappingPartitioners) {
-				RegionAnalysis regionAnalysis = mappingPartitioner.getRegionAnalysis();
+			for (@NonNull RegionAnalysis regionAnalysis : regionAnalyses) {
 				Iterables.addAll(cycleFallibilities, regionAnalysis.getFallibilities());
 			}
 			Set<@NonNull RegionAnalysis> externalFallibilities = new HashSet<>(cycleFallibilities);
-			for (@NonNull MappingPartitioner mappingPartitioner : mappingPartitioners) {
-				RegionAnalysis regionAnalysis = mappingPartitioner.getRegionAnalysis();
+			for (@NonNull RegionAnalysis regionAnalysis : regionAnalyses) {
 				externalFallibilities.remove(regionAnalysis);
 			}
 			isInfallible = isInfallible2 = externalFallibilities.isEmpty();
@@ -80,7 +78,8 @@ public class CycleAnalysis
 	public @NonNull Iterable<@NonNull MappingRegion> partition(@NonNull Iterable<@NonNull MappingPartitioner> orderedMappingPartitioners) {
 		List<@NonNull MappingRegion> partitionedRegions = new ArrayList<>();
 		for (@NonNull MappingPartitioner mappingPartitioner : orderedMappingPartitioners) {
-			if (mappingPartitioners.contains(mappingPartitioner)) {
+			RegionAnalysis regionAnalysis = mappingPartitioner.getRegionAnalysis();
+			if (regionAnalyses.contains(regionAnalysis)) {
 				MappingRegion oldRegion = mappingPartitioner.getRegion();
 				ScheduledRegion scheduledRegion = oldRegion.getScheduledRegion();
 				Iterable<@NonNull MappingRegion> newRegions = mappingPartitioner.partition();

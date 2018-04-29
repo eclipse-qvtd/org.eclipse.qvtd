@@ -49,7 +49,6 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
-import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -65,7 +64,6 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.AbstractExtendingQVTrelationVisit
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
@@ -408,19 +406,9 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 	private @Nullable Resource debugSource = null;
 	private @Nullable Resource debugTarget = null;
 
-	public QVTr2QVTs(@NonNull ProblemHandler problemHandler, @NonNull EnvironmentFactory environmentFactory,
+	public QVTr2QVTs(@NonNull EnvironmentFactory environmentFactory, @NonNull ProblemHandler problemHandler,
 			@NonNull QVTuConfiguration qvtuConfiguration, CompilerOptions.@Nullable StepOptions schedulerOptions) {
-		super(new QVTrelationScheduleManager(environmentFactory, qvtuConfiguration, schedulerOptions) {
-			@Override
-			public void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
-				problemHandler.addProblem(CompilerUtil.createRegionError(region, messageTemplate, bindings));
-			}
-
-			@Override
-			public void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
-				problemHandler.addProblem(CompilerUtil.createRegionWarning(region, messageTemplate, bindings));
-			}
-		}, problemHandler);
+		super(new QVTrelationScheduleManager(environmentFactory, problemHandler, qvtuConfiguration, schedulerOptions), problemHandler);
 		//		this.qvtuConfiguration = qvtuConfiguration;
 		//		this.createVisitor = new CreateVisitor(this, qvtuConfiguration);
 		//		this.updateVisitor = new UpdateVisitor(this);

@@ -21,6 +21,8 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 
@@ -28,42 +30,42 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**
- * The CyclesAnalysis identifies a CycleAnalysis for each group of mappingPartitioners that contribute to a cycle.
+ * The CyclesAnalysis identifies a CycleAnalysis for each group of regionAnalyses that contribute to a cycle.
  */
 public class CyclesAnalysis
 {
-	protected final @NonNull TransformationPartitioner transformationPartitioner;
-	protected final @NonNull Iterable<@NonNull MappingPartitioner> mappingPartitioners;
+	protected final @NonNull TransformationAnalysis transformationAnalysis;
+	protected final @NonNull Iterable<@NonNull RegionAnalysis> regionAnalyses;
 
 	/**
 	 * Mapping to the cycle analysis that identifies the cycle involving each mapping partitioner.
 	 */
-	protected final @NonNull Map<@NonNull MappingPartitioner, @NonNull CycleAnalysis> mappingPartitioner2cycleAnalysis = new HashMap<>();
+	protected final @NonNull Map<@NonNull RegionAnalysis, @NonNull CycleAnalysis> regionAnalysis2cycleAnalysis = new HashMap<>();
 
 	/**
 	 * Mapping to the cycle analysis that identifies the cycle involving each trace class analysis.
 	 */
 	protected final @NonNull Map<@NonNull TraceClassAnalysis, @NonNull CycleAnalysis> traceClassAnalysis2cycleAnalysis = new HashMap<>();
 
-	public CyclesAnalysis(@NonNull TransformationPartitioner transformationPartitioner, @NonNull Iterable<@NonNull MappingPartitioner> mappingPartitioners) {
-		this.transformationPartitioner = transformationPartitioner;
-		this.mappingPartitioners = mappingPartitioners;
+	public CyclesAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull Iterable<@NonNull RegionAnalysis> regionAnalyses) {
+		this.transformationAnalysis = transformationAnalysis;
+		this.regionAnalyses = regionAnalyses;
 	}
 
 	/**
-	 * Return a map of the MappingPartitioners that form a cycle including each MappingPartitioner.
+	 * Return a map of the RegionAnalyses that form a cycle including each RegionAnalysis.
 	 *
 	 * NB cycles may involve trace classes and their trace class properties.
 	 */
 	public void analyze() {
-		Iterable<@NonNull Set<@NonNull MappingPartitioner>> prunedCycleElements = computeCycleElementSets();
+		Iterable<@NonNull Set<@NonNull RegionAnalysis>> prunedCycleElements = computeCycleElementSets();
 		//
-		/*		for (@NonNull MappingPartitioner mappingPartitioner : mappingPartitioners) {
-			Set<@NonNull MappingPartitioner> newCycleElements = new HashSet<>(partitioner2predecessors.get(mappingPartitioner));
-			newCycleElements.retainAll(partitioner2successors.get(mappingPartitioner));
+		/*		for (@NonNull RegionAnalysis regionAnalysis : regionAnalyses) {
+			Set<@NonNull RegionAnalysis> newCycleElements = new HashSet<>(partitioner2predecessors.get(regionAnalysis));
+			newCycleElements.retainAll(partitioner2successors.get(regionAnalysis));
 			if (!newCycleElements.isEmpty() && !allCycleElements.contains(newCycleElements)) {
-				List<@NonNull Set<@NonNull MappingPartitioner>> redundantCycleElements = null;
-				for (@NonNull Set<@NonNull MappingPartitioner> oldCycleElements : allCycleElements) {
+				List<@NonNull Set<@NonNull RegionAnalysis>> redundantCycleElements = null;
+				for (@NonNull Set<@NonNull RegionAnalysis> oldCycleElements : allCycleElements) {
 					if (QVTbaseUtil.containsAny(oldCycleElements, newCycleElements)) {
 						if (redundantCycleElements == null) {
 							redundantCycleElements = new ArrayList<>();
@@ -84,24 +86,24 @@ public class CyclesAnalysis
 		}
 	}
 
-	protected @Nullable Iterable<@NonNull Set<@NonNull MappingPartitioner>> computeCycleElementSets() {
-		Map<@NonNull MappingPartitioner, @NonNull Set<@NonNull MappingPartitioner>> partitioner2predecessors = computeTransitivePredecessors();
-		Map<@NonNull MappingPartitioner, @NonNull Set<@NonNull MappingPartitioner>> partitioner2successors = computeTransitiveSuccessors();
-		Set<@NonNull Set<@NonNull MappingPartitioner>> allCycleElements = new HashSet<>();
-		for (@NonNull MappingPartitioner mappingPartitioner : mappingPartitioners) {
-			Set<@NonNull MappingPartitioner> newCycleElements = new HashSet<>(partitioner2predecessors.get(mappingPartitioner));
-			newCycleElements.retainAll(partitioner2successors.get(mappingPartitioner));
+	protected @Nullable Iterable<@NonNull Set<@NonNull RegionAnalysis>> computeCycleElementSets() {
+		Map<@NonNull RegionAnalysis, @NonNull Set<@NonNull RegionAnalysis>> partitioner2predecessors = computeTransitivePredecessors();
+		Map<@NonNull RegionAnalysis, @NonNull Set<@NonNull RegionAnalysis>> partitioner2successors = computeTransitiveSuccessors();
+		Set<@NonNull Set<@NonNull RegionAnalysis>> allCycleElements = new HashSet<>();
+		for (@NonNull RegionAnalysis regionAnalysis : regionAnalyses) {
+			Set<@NonNull RegionAnalysis> newCycleElements = new HashSet<>(partitioner2predecessors.get(regionAnalysis));
+			newCycleElements.retainAll(partitioner2successors.get(regionAnalysis));
 			if (!newCycleElements.isEmpty()) {
 				allCycleElements.add(newCycleElements);
 			}
 		}
 		//
-		List<@NonNull Set<@NonNull MappingPartitioner>> prunedCycleElements = new ArrayList<>(allCycleElements);
+		List<@NonNull Set<@NonNull RegionAnalysis>> prunedCycleElements = new ArrayList<>(allCycleElements);
 		for (int i = prunedCycleElements.size(); --i >= 0; ) {
-			Set<@NonNull MappingPartitioner> iCycleElements = prunedCycleElements.get(i);
+			Set<@NonNull RegionAnalysis> iCycleElements = prunedCycleElements.get(i);
 			boolean pruneIt = false;
 			for (int j = i; --j >= 0; ) {
-				Set<@NonNull MappingPartitioner> jCycleElements = prunedCycleElements.get(j);
+				Set<@NonNull RegionAnalysis> jCycleElements = prunedCycleElements.get(j);
 				if (QVTbaseUtil.containsAny(jCycleElements, iCycleElements) && jCycleElements.addAll(iCycleElements)) {
 					pruneIt = true;
 				}
@@ -114,20 +116,20 @@ public class CyclesAnalysis
 	}
 
 	/**
-	 * Return a map of the MappingPartitioners that may execute before each MappingPartitioner.
+	 * Return a map of the RegionAnalyses that may execute before each RegionAnalysis.
 	 */
-	protected @NonNull Map<@NonNull MappingPartitioner, @NonNull Set<@NonNull MappingPartitioner>> computeTransitivePredecessors() {
-		Map<@NonNull MappingPartitioner, @NonNull Set<@NonNull MappingPartitioner>> consumer2producers = new HashMap<>();
-		for (@NonNull MappingPartitioner mappingPartitioner : mappingPartitioners) {
-			consumer2producers.put(mappingPartitioner, new HashSet<>());
+	protected @NonNull Map<@NonNull RegionAnalysis, @NonNull Set<@NonNull RegionAnalysis>> computeTransitivePredecessors() {
+		Map<@NonNull RegionAnalysis, @NonNull Set<@NonNull RegionAnalysis>> consumer2producers = new HashMap<>();
+		for (@NonNull RegionAnalysis regionAnalysis : regionAnalyses) {
+			consumer2producers.put(regionAnalysis, new HashSet<>());
 		}
-		for (@NonNull MappingPartitioner consumer : mappingPartitioners) {
+		for (@NonNull RegionAnalysis consumer : regionAnalyses) {
 			Iterable<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses = consumer.getConsumedTraceClassAnalyses();
 			if (consumedTraceClassAnalyses != null) {
 				for (@NonNull TraceClassAnalysis consumedTraceClassAnalysis : consumedTraceClassAnalyses) {
 					for (@NonNull TraceClassAnalysis subConsumedTraceClass : consumedTraceClassAnalysis.getSubTraceClassAnalyses()) {
-						for (@NonNull MappingPartitioner producer : subConsumedTraceClass.getProducers()) {
-							Set<@NonNull MappingPartitioner> producers = consumer2producers.get(consumer);
+						for (@NonNull RegionAnalysis producer : subConsumedTraceClass.getProducers()) {
+							Set<@NonNull RegionAnalysis> producers = consumer2producers.get(consumer);
 							assert producers != null;
 							producers.add(producer);
 						}
@@ -137,8 +139,8 @@ public class CyclesAnalysis
 			Iterable<@NonNull TracePropertyAnalysis> consumedTracePropertyAnalyses = consumer.getConsumedTracePropertyAnalyses();
 			if (consumedTracePropertyAnalyses != null) {
 				for (@NonNull TracePropertyAnalysis consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
-					for (@NonNull MappingPartitioner producer : consumedTracePropertyAnalysis.getProducers()) {
-						Set<@NonNull MappingPartitioner> producers = consumer2producers.get(consumer);
+					for (@NonNull RegionAnalysis producer : consumedTracePropertyAnalysis.getProducers()) {
+						Set<@NonNull RegionAnalysis> producers = consumer2producers.get(consumer);
 						assert producers != null;
 						producers.add(producer);
 					}
@@ -146,25 +148,25 @@ public class CyclesAnalysis
 			}
 		}
 		if (TransformationPartitioner.PREDECESSORS.isActive()) {
-			for (@NonNull MappingPartitioner successor : mappingPartitioners) {
+			for (@NonNull RegionAnalysis successor : regionAnalyses) {
 				StringBuilder s = new StringBuilder();
 				s.append(successor + ":");
-				List<@NonNull MappingPartitioner> producers = new ArrayList<>(consumer2producers.get(successor));
+				List<@NonNull RegionAnalysis> producers = new ArrayList<>(consumer2producers.get(successor));
 				Collections.sort(producers, NameUtil.NAMEABLE_COMPARATOR);
-				for (@NonNull MappingPartitioner producer : producers) {
+				for (@NonNull RegionAnalysis producer : producers) {
 					s.append(" " + producer);
 				}
 				TransformationPartitioner.PREDECESSORS.println(s.toString());
 			}
 		}
-		Map<@NonNull MappingPartitioner, @NonNull Set<@NonNull MappingPartitioner>> consumer2producersClosure = CompilerUtil.computeClosure(consumer2producers);
+		Map<@NonNull RegionAnalysis, @NonNull Set<@NonNull RegionAnalysis>> consumer2producersClosure = CompilerUtil.computeClosure(consumer2producers);
 		if (TransformationPartitioner.PREDECESSORS.isActive()) {
-			for (@NonNull MappingPartitioner successor : mappingPartitioners) {
+			for (@NonNull RegionAnalysis successor : regionAnalyses) {
 				StringBuilder s = new StringBuilder();
 				s.append(successor + ":");
-				List<@NonNull MappingPartitioner> producers = new ArrayList<>(consumer2producersClosure.get(successor));
+				List<@NonNull RegionAnalysis> producers = new ArrayList<>(consumer2producersClosure.get(successor));
 				Collections.sort(producers, NameUtil.NAMEABLE_COMPARATOR);
-				for (@NonNull MappingPartitioner producer : producers) {
+				for (@NonNull RegionAnalysis producer : producers) {
 					s.append(" " + producer);
 				}
 				TransformationPartitioner.PREDECESSORS.println(s.toString());
@@ -174,20 +176,20 @@ public class CyclesAnalysis
 	}
 
 	/**
-	 * Return a map of the MappingPartitioners that may execute after each MappingPartitioner.
+	 * Return a map of the RegionAnalyses that may execute after each RegionAnalysis.
 	 */
-	protected @NonNull Map<@NonNull MappingPartitioner, @NonNull Set<@NonNull MappingPartitioner>> computeTransitiveSuccessors() {
-		Map<@NonNull MappingPartitioner, @NonNull Set<@NonNull MappingPartitioner>> producer2consumers = new HashMap<>();
-		for (@NonNull MappingPartitioner mappingPartitioner : mappingPartitioners) {
-			producer2consumers.put(mappingPartitioner, new HashSet<>());
+	protected @NonNull Map<@NonNull RegionAnalysis, @NonNull Set<@NonNull RegionAnalysis>> computeTransitiveSuccessors() {
+		Map<@NonNull RegionAnalysis, @NonNull Set<@NonNull RegionAnalysis>> producer2consumers = new HashMap<>();
+		for (@NonNull RegionAnalysis regionAnalysis : regionAnalyses) {
+			producer2consumers.put(regionAnalysis, new HashSet<>());
 		}
-		for (@NonNull MappingPartitioner producer : mappingPartitioners) {
+		for (@NonNull RegionAnalysis producer : regionAnalyses) {
 			Iterable<@NonNull TraceClassAnalysis> producedTraceClassAnalyses = producer.getProducedTraceClassAnalyses();
 			if (producedTraceClassAnalyses != null) {
 				for (@NonNull TraceClassAnalysis producedTraceClassAnalysis : producedTraceClassAnalyses) {
 					for (@NonNull TraceClassAnalysis superProducedTraceClassAnalysis : producedTraceClassAnalysis.getSuperTraceClassAnalyses()) {
-						for (@NonNull MappingPartitioner consumer : superProducedTraceClassAnalysis.getConsumers()) {
-							Set<@NonNull MappingPartitioner> consumers = producer2consumers.get(producer);
+						for (@NonNull RegionAnalysis consumer : superProducedTraceClassAnalysis.getConsumers()) {
+							Set<@NonNull RegionAnalysis> consumers = producer2consumers.get(producer);
 							assert consumers != null;
 							consumers.add(consumer);
 						}
@@ -197,8 +199,8 @@ public class CyclesAnalysis
 			Iterable<@NonNull TracePropertyAnalysis> producedTracePropertyAnalyses = producer.getProducedTracePropertyAnalyses();
 			if (producedTracePropertyAnalyses != null) {
 				for (@NonNull TracePropertyAnalysis producedTracePropertyAnalysis : producedTracePropertyAnalyses) {
-					for (@NonNull MappingPartitioner consumer : producedTracePropertyAnalysis.getConsumers()) {
-						Set<@NonNull MappingPartitioner> consumers = producer2consumers.get(producer);
+					for (@NonNull RegionAnalysis consumer : producedTracePropertyAnalysis.getConsumers()) {
+						Set<@NonNull RegionAnalysis> consumers = producer2consumers.get(producer);
 						assert consumers != null;
 						consumers.add(consumer);
 					}
@@ -206,25 +208,25 @@ public class CyclesAnalysis
 			}
 		}
 		if (TransformationPartitioner.SUCCESSORS.isActive()) {
-			for (@NonNull MappingPartitioner successor : mappingPartitioners) {
+			for (@NonNull RegionAnalysis successor : regionAnalyses) {
 				StringBuilder s = new StringBuilder();
 				s.append(successor + ":");
-				List<@NonNull MappingPartitioner> consumers = new ArrayList<>(producer2consumers.get(successor));
+				List<@NonNull RegionAnalysis> consumers = new ArrayList<>(producer2consumers.get(successor));
 				Collections.sort(consumers, NameUtil.NAMEABLE_COMPARATOR);
-				for (@NonNull MappingPartitioner consumer : consumers) {
+				for (@NonNull RegionAnalysis consumer : consumers) {
 					s.append(" " + consumer);
 				}
 				TransformationPartitioner.SUCCESSORS.println(s.toString());
 			}
 		}
-		Map<@NonNull MappingPartitioner, @NonNull Set<@NonNull MappingPartitioner>> producer2consumersClosure = CompilerUtil.computeClosure(producer2consumers);
+		Map<@NonNull RegionAnalysis, @NonNull Set<@NonNull RegionAnalysis>> producer2consumersClosure = CompilerUtil.computeClosure(producer2consumers);
 		if (TransformationPartitioner.SUCCESSORS.isActive()) {
-			for (@NonNull MappingPartitioner predecessor : mappingPartitioners) {
+			for (@NonNull RegionAnalysis predecessor : regionAnalyses) {
 				StringBuilder s = new StringBuilder();
 				s.append(predecessor + ":");
-				List<@NonNull MappingPartitioner> consumers = new ArrayList<>(producer2consumersClosure.get(predecessor));
+				List<@NonNull RegionAnalysis> consumers = new ArrayList<>(producer2consumersClosure.get(predecessor));
 				Collections.sort(consumers, NameUtil.NAMEABLE_COMPARATOR);
-				for (@NonNull MappingPartitioner consumer : consumers) {
+				for (@NonNull RegionAnalysis consumer : consumers) {
 					s.append(" " + consumer);
 				}
 				TransformationPartitioner.SUCCESSORS.println(s.toString());
@@ -234,9 +236,9 @@ public class CyclesAnalysis
 	}
 
 
-	protected void createCycleAnalyses(@NonNull Iterable<@NonNull Set<@NonNull MappingPartitioner>> cycleElementSets) {
+	protected void createCycleAnalyses(@NonNull Iterable<@NonNull Set<@NonNull RegionAnalysis>> cycleElementSets) {
 		List<@NonNull CycleAnalysis> cycleAnalyses = new ArrayList<>();
-		for (@NonNull Set<@NonNull MappingPartitioner> cycleElements : cycleElementSets) {
+		for (@NonNull Set<@NonNull RegionAnalysis> cycleElements : cycleElementSets) {
 			CycleAnalysis cycleAnalysis = createCycleAnalysis(cycleElements);
 			cycleAnalyses.add(cycleAnalysis);
 		}
@@ -247,30 +249,30 @@ public class CyclesAnalysis
 			else {
 				for (@NonNull CycleAnalysis cycleAnalysis : cycleAnalyses) {
 					StringBuilder s = new StringBuilder();
-					s.append("\n  MappingPartitioners:");
-					List<@NonNull MappingPartitioner> mappingPartitioners2 = Lists.newArrayList(cycleAnalysis.getMappingPartitioners());
-					Collections.sort(mappingPartitioners2, NameUtil.NAMEABLE_COMPARATOR);
-					for (@NonNull MappingPartitioner mappingPartitioner : mappingPartitioners2) {
-						s.append("\n\t" + mappingPartitioner);
-						Iterable<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses = mappingPartitioner.getConsumedTraceClassAnalyses();
+					s.append("\n  RegionAnalyses:");
+					List<@NonNull RegionAnalysis> regionAnalyses2 = Lists.newArrayList(cycleAnalysis.getRegionAnalyses());
+					Collections.sort(regionAnalyses2, NameUtil.NAMEABLE_COMPARATOR);
+					for (@NonNull RegionAnalysis regionAnalysis : regionAnalyses2) {
+						s.append("\n\t" + regionAnalysis);
+						Iterable<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses = regionAnalysis.getConsumedTraceClassAnalyses();
 						if (consumedTraceClassAnalyses != null) {
 							for (@NonNull TraceClassAnalysis traceClassAnalysis : consumedTraceClassAnalyses) {
 								s.append("\n\t  =>" + traceClassAnalysis);
 							}
 						}
-						Iterable<@NonNull TraceClassAnalysis> producedTraceClassAnalyses = mappingPartitioner.getProducedTraceClassAnalyses();
+						Iterable<@NonNull TraceClassAnalysis> producedTraceClassAnalyses = regionAnalysis.getProducedTraceClassAnalyses();
 						if (producedTraceClassAnalyses != null) {
 							for (@NonNull TraceClassAnalysis traceClassAnalysis : producedTraceClassAnalyses) {
 								s.append("\n\t  <=" + traceClassAnalysis);
 							}
 						}
-						Iterable<@NonNull TracePropertyAnalysis> consumedTracePropertyAnalyses = mappingPartitioner.getConsumedTracePropertyAnalyses();
+						Iterable<@NonNull TracePropertyAnalysis> consumedTracePropertyAnalyses = regionAnalysis.getConsumedTracePropertyAnalyses();
 						if (consumedTracePropertyAnalyses != null) {
 							for (@NonNull TracePropertyAnalysis tracePropertyAnalysis : consumedTracePropertyAnalyses) {
 								s.append("\n\t  =>" + tracePropertyAnalysis);
 							}
 						}
-						Iterable<@NonNull TracePropertyAnalysis> producedTracePropertyAnalyses = mappingPartitioner.getProducedTracePropertyAnalyses();
+						Iterable<@NonNull TracePropertyAnalysis> producedTracePropertyAnalyses = regionAnalysis.getProducedTracePropertyAnalyses();
 						if (producedTracePropertyAnalyses != null) {
 							for (@NonNull TracePropertyAnalysis tracePropertyAnalysis : producedTracePropertyAnalyses) {
 								s.append("\n\t  <=" + tracePropertyAnalysis);
@@ -295,20 +297,20 @@ public class CyclesAnalysis
 		}
 	}
 
-	protected @NonNull CycleAnalysis createCycleAnalysis(@NonNull Set<@NonNull MappingPartitioner> cyclicMappingPartitioners) {
+	protected @NonNull CycleAnalysis createCycleAnalysis(@NonNull Set<@NonNull RegionAnalysis> cyclicRegionAnalyses) {
 		Set<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses = new HashSet<>();
 		Set<@NonNull TraceClassAnalysis> superProducedTraceClassAnalyses = new HashSet<>();
 		Set<@NonNull TracePropertyAnalysis> consumedTracePropertyAnalyses = new HashSet<>();
-		for (@NonNull MappingPartitioner cyclicMappingPartitioner : cyclicMappingPartitioners) {
-			Iterable<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses2 = cyclicMappingPartitioner.getConsumedTraceClassAnalyses();
+		for (@NonNull RegionAnalysis cyclicRegionAnalysis : cyclicRegionAnalyses) {
+			Iterable<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses2 = cyclicRegionAnalysis.getConsumedTraceClassAnalyses();
 			if (consumedTraceClassAnalyses2 != null) {
 				Iterables.addAll(consumedTraceClassAnalyses, consumedTraceClassAnalyses2);
 			}
-			Iterable<@NonNull TraceClassAnalysis> superProducedTraceClassAnalyses2 = cyclicMappingPartitioner.getSuperProducedTraceClassAnalyses();
+			Iterable<@NonNull TraceClassAnalysis> superProducedTraceClassAnalyses2 = cyclicRegionAnalysis.getSuperProducedTraceClassAnalyses();
 			if (superProducedTraceClassAnalyses2 != null) {
 				Iterables.addAll(superProducedTraceClassAnalyses, superProducedTraceClassAnalyses2);
 			}
-			Iterable<@NonNull TracePropertyAnalysis> consumedTracePropertyAnalyses2 = cyclicMappingPartitioner.getConsumedTracePropertyAnalyses();
+			Iterable<@NonNull TracePropertyAnalysis> consumedTracePropertyAnalyses2 = cyclicRegionAnalysis.getConsumedTracePropertyAnalyses();
 			if (consumedTracePropertyAnalyses2 != null) {
 				Iterables.addAll(consumedTracePropertyAnalyses, consumedTracePropertyAnalyses2);
 			}
@@ -316,9 +318,9 @@ public class CyclesAnalysis
 		Set<@NonNull TraceClassAnalysis> cyclicTraceClassAnalyses = new HashSet<>(consumedTraceClassAnalyses);
 		cyclicTraceClassAnalyses.retainAll(superProducedTraceClassAnalyses);
 		Set<@NonNull TracePropertyAnalysis> cyclicTracePropertyAnalyses = new HashSet<>(consumedTracePropertyAnalyses);
-		CycleAnalysis cycleAnalysis = new CycleAnalysis(this, cyclicMappingPartitioners, cyclicTraceClassAnalyses, cyclicTracePropertyAnalyses);
-		for (@NonNull MappingPartitioner cyclicMappingPartitioner : cyclicMappingPartitioners) {
-			CycleAnalysis oldCycleAnalysis = mappingPartitioner2cycleAnalysis.put(cyclicMappingPartitioner, cycleAnalysis);
+		CycleAnalysis cycleAnalysis = new CycleAnalysis(this, cyclicRegionAnalyses, cyclicTraceClassAnalyses, cyclicTracePropertyAnalyses);
+		for (@NonNull RegionAnalysis cyclicRegionAnalysis : cyclicRegionAnalyses) {
+			CycleAnalysis oldCycleAnalysis = regionAnalysis2cycleAnalysis.put(cyclicRegionAnalysis, cycleAnalysis);
 			assert oldCycleAnalysis == null;
 		}
 		for (@NonNull TraceClassAnalysis cyclicTraceClassAnalysis : cyclicTraceClassAnalyses) {
@@ -328,15 +330,15 @@ public class CyclesAnalysis
 		return cycleAnalysis;
 	}
 
-	public @Nullable CycleAnalysis getCycleAnalysis(@NonNull MappingPartitioner mappingPartitioner) {
-		return mappingPartitioner2cycleAnalysis.get(mappingPartitioner);
+	public @Nullable CycleAnalysis getCycleAnalysis(@NonNull RegionAnalysis regionAnalysis) {
+		return regionAnalysis2cycleAnalysis.get(regionAnalysis);
 	}
 
 	public @Nullable CycleAnalysis getCycleAnalysis(@NonNull TraceClassAnalysis traceClassAnalysis) {
 		return traceClassAnalysis2cycleAnalysis.get(traceClassAnalysis);
 	}
 
-	public @NonNull TransformationPartitioner getTransformationPartitioner() {
-		return transformationPartitioner;
+	public @NonNull TransformationAnalysis getTransformationAnalysis() {
+		return transformationAnalysis;
 	}
 }

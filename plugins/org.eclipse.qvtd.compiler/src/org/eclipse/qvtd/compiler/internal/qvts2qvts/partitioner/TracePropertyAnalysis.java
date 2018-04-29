@@ -10,8 +10,11 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
+import java.util.Collections;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -22,15 +25,20 @@ public class TracePropertyAnalysis extends TraceElementAnalysis
 {
 	protected final @NonNull PropertyDatum tracePropertyDatum;
 
-	public TracePropertyAnalysis(@NonNull TransformationPartitioner transformationPartitioner, @NonNull PropertyDatum tracePropertyDatum) {
-		super(transformationPartitioner);
+	public TracePropertyAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
+		super(transformationAnalysis);
 		this.tracePropertyDatum = tracePropertyDatum;
-		assert tracePropertyDatum.getReferredTypedModel() == transformationPartitioner.getScheduleManager().getTraceTypedModel();
+		assert tracePropertyDatum.getReferredTypedModel() == transformationAnalysis.getScheduleManager().getTraceTypedModel();
 	}
 
 	@Override
 	public String getName() {
 		return tracePropertyDatum.getName();
+	}
+
+	public Iterable getSuperTracePropertyAnalyses() {
+		// TODO Auto-generated method stub
+		return Collections.emptyList();			// FIXME
 	}
 
 	public @NonNull Property getTraceProperty() {

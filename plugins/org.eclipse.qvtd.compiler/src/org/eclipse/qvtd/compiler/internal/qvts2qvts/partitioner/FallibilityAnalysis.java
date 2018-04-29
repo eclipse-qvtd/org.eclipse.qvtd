@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,8 +21,12 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.TracingOption;
+import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CastEdgeCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedCondition;
@@ -37,10 +42,10 @@ import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -57,9 +62,12 @@ import com.google.common.collect.Sets;
  */
 public class FallibilityAnalysis
 {
+	public static final @NonNull TracingOption GLOBAL = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/fallibility/global");
+	public static final @NonNull TracingOption LOCAL = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/fallibility/local");
+
 	protected class Visitor implements CheckedConditionVisitor<Object>
 	{
-		protected final @NonNull MappingPartitioner mappingPartitioner;
+		protected final @NonNull RegionAnalysis regionAnalysis;
 
 		/**
 		 * Map from the fallible producing RegionAnalysis to the single CheckCondition or Set<@NonNull CheckCondition> that
@@ -67,8 +75,8 @@ public class FallibilityAnalysis
 		 */
 		protected final @NonNull Map<@NonNull CheckedCondition, @NonNull Object> check2regionOrRegions = new HashMap<>();
 
-		public Visitor(@NonNull MappingPartitioner mappingPartitioner) {
-			this.mappingPartitioner = mappingPartitioner;
+		public Visitor(@NonNull RegionAnalysis regionAnalysis) {
+			this.regionAnalysis = regionAnalysis;
 		}
 
 		private void addFallibility(@NonNull CheckedCondition checkedCondition, @NonNull RegionAnalysis producingRegionAnalysis) {
@@ -92,13 +100,14 @@ public class FallibilityAnalysis
 		}
 
 		public @NonNull Map<@NonNull CheckedCondition, @NonNull Object> analyze() {
-			MappingRegion region = mappingPartitioner.getRegion();
+			Region region = regionAnalysis.getRegion();
 			Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(region);
-			Iterable<@NonNull Node> constantInputNodes = mappingPartitioner.getConstantInputNodes();
+			Iterable<@NonNull Node> constantInputNodes = regionAnalysis.getConstantInputNodes();
 			Iterable<@NonNull Node> rootNodes = Iterables.concat(headNodes, constantInputNodes);
-			Iterable<@NonNull NavigableEdge> navigableEdges = mappingPartitioner.getOldPrimaryNavigableEdges();
+			Iterable<@NonNull NavigableEdge> navigableEdges = regionAnalysis.getOldPrimaryNavigableEdges();
 			ReachabilityForest checkedReachabilityForest = new ReachabilityForest(rootNodes, navigableEdges);
-			CheckedConditionAnalysis analysis = new CheckedConditionAnalysis(scheduleManager, checkedReachabilityForest, region)
+			RegionAnalysis regionAnalysis = transformationAnalysis.getRegionAnalysis(region);
+			CheckedConditionAnalysis analysis = new CheckedConditionAnalysis(regionAnalysis, checkedReachabilityForest)
 			{
 				@Override
 				protected @Nullable Set<@NonNull Property> computeCheckedProperties() {
@@ -115,7 +124,11 @@ public class FallibilityAnalysis
 
 		@Override
 		public Object visitCastEdgeCheckedCondition(@NonNull CastEdgeCheckedCondition castEdgeCheckedCondition) {
-			addFallibility(castEdgeCheckedCondition, failSometimes);
+			NavigableEdge castEdge = castEdgeCheckedCondition.getCastEdge();
+			Node sourceNode = QVTscheduleUtil.getSourceNode(castEdge);
+			if (!sourceNode.isDispatch()) {		// A dispatch pattern type error is a non-invocation not a failure
+				addFallibility(castEdgeCheckedCondition, failSometimes);
+			}
 			return null;
 		}
 
@@ -161,7 +174,7 @@ public class FallibilityAnalysis
 					Iterable<@NonNull RuleRegion> contentsGetProducingRegions = originalContentsAnalysis.getProducingRegions(classDatum);
 					for (@NonNull RuleRegion producingRegion : contentsGetProducingRegions) {
 						//						if (producingRegion instanceof MappingRegion) {
-						RegionAnalysis producingRegionAnalysis = scheduleManager.getRegionAnalysis(producingRegion);
+						RegionAnalysis producingRegionAnalysis = transformationAnalysis.getRegionAnalysis(producingRegion);
 						addFallibility(predicateNavigationEdgeCheckedCondition, producingRegionAnalysis);
 						//						}
 						//						else {
@@ -177,27 +190,31 @@ public class FallibilityAnalysis
 		}
 	}
 
+	protected final @NonNull TransformationAnalysis transformationAnalysis;
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull ContentsAnalysis<@NonNull RuleRegion> originalContentsAnalysis;
-	protected final @NonNull TransformationPartitioner transformationPartitioner;
 	//	protected final @NonNull RegionAnalysis failAlways;
 	protected final @NonNull RegionAnalysis failSometimes;
 	private @NonNull Map<@NonNull RegionAnalysis, @NonNull Set<@NonNull RegionAnalysis>> consumer2producers = new HashMap<>();
 
-	public FallibilityAnalysis(@NonNull TransformationPartitioner transformationPartitioner) {
-		this.scheduleManager = transformationPartitioner.getScheduleManager();
+	public FallibilityAnalysis(@NonNull TransformationAnalysis transformationAnalysis) {
+		this.transformationAnalysis = transformationAnalysis;
+		this.scheduleManager = transformationAnalysis.getScheduleManager();
 		this.originalContentsAnalysis = scheduleManager.getOriginalContentsAnalysis();
-		this.transformationPartitioner = transformationPartitioner;
 		//		this.failAlways = createPseudoRegionAnalysis("«failAlways»");
 		this.failSometimes = createPseudoRegionAnalysis("«failSometimes»");
 		//		consumer2producers.put(failAlways, Sets.newHashSet(failAlways));
 		consumer2producers.put(failSometimes, Sets.newHashSet(failSometimes));
 	}
 
-	public void accumulate(@NonNull MappingPartitioner mappingPartitioner) {
-		Visitor visitor = new Visitor(mappingPartitioner);
+	public void accumulate(@NonNull RegionAnalysis consumingRegionAnalysis) {
+		String name = consumingRegionAnalysis.getName();
+		if ("mTmapIfExp_success_t1atlCondition_t1atlElse_t1atlTh".equals(name)) {
+			getClass();
+		}
+		Visitor visitor = new Visitor(consumingRegionAnalysis);
 		Map<@NonNull CheckedCondition, @NonNull Object> check2regionOrRegions = visitor.analyze();
-		Set<@NonNull RegionAnalysis> regionAnalyses = new HashSet<>();
+		Set<@NonNull RegionAnalysis> producingRegionAnalyses = new HashSet<>();
 		Set<@NonNull Edge> edges = new HashSet<>();
 		for (@NonNull CheckedCondition checkedCondition : check2regionOrRegions.keySet()) {
 			for (@NonNull Edge edge : checkedCondition.getEdges()) {
@@ -206,19 +223,18 @@ public class FallibilityAnalysis
 			Object regionOrRegions = check2regionOrRegions.get(checkedCondition);
 			assert regionOrRegions != null;
 			if (regionOrRegions instanceof RegionAnalysis) {
-				regionAnalyses.add((RegionAnalysis) regionOrRegions);
+				producingRegionAnalyses.add((RegionAnalysis) regionOrRegions);
 			}
 			else {
 				@SuppressWarnings("unchecked")
-				Iterable<@NonNull RegionAnalysis> regions = (Iterable<@NonNull RegionAnalysis>) regionOrRegions;
-				for (@NonNull RegionAnalysis regionAnalysis : regions) {
-					regionAnalyses.add(regionAnalysis);
+				Iterable<@NonNull RegionAnalysis> producingRegions = (Iterable<@NonNull RegionAnalysis>) regionOrRegions;
+				for (@NonNull RegionAnalysis producingRegionAnalysis : producingRegions) {
+					producingRegionAnalyses.add(producingRegionAnalysis);
 				}
 			}
 		}
-		RegionAnalysis regionAnalysis = mappingPartitioner.getRegionAnalysis();
-		regionAnalysis.setFallibleEdges(edges);
-		Set<@NonNull RegionAnalysis> old = consumer2producers.put(regionAnalysis, regionAnalyses);
+		consumingRegionAnalysis.setFallibleEdges(edges);
+		Set<@NonNull RegionAnalysis> old = consumer2producers.put(consumingRegionAnalysis, producingRegionAnalyses);
 		assert old == null;
 		/*			Set<@NonNull MappingPartitioner> requiredMappingPartitioners = new HashSet<>();
 			for (@NonNull ClassDatum classDatum : visitor.getTypeDependentConditions().values()) {
@@ -246,15 +262,47 @@ public class FallibilityAnalysis
 			}
 		};
 		dummyRegion.setName(name);;
-		return new RegionAnalysis(scheduleManager, dummyRegion);
+		return new RegionAnalysis(transformationAnalysis, dummyRegion);
 	}
 
 	public void install() {
+		if (LOCAL.isActive()) {
+			List<@NonNull RegionAnalysis> consumers = new ArrayList<>(consumer2producers.keySet());
+			Collections.sort(consumers, NameUtil.NAMEABLE_COMPARATOR);
+			for (@NonNull RegionAnalysis consumingRegionAnalysis : consumers) {
+				StringBuilder s = new StringBuilder();
+				s.append(consumingRegionAnalysis + " <=");
+				Set<@NonNull RegionAnalysis> producers = consumer2producers.get(consumingRegionAnalysis);
+				assert producers != null;
+				List<@NonNull RegionAnalysis> sortedProducers = new ArrayList<>(producers);
+				Collections.sort(sortedProducers, NameUtil.NAMEABLE_COMPARATOR);
+				for (@NonNull RegionAnalysis producingRegionAnalysis : sortedProducers) {
+					s.append(" " + producingRegionAnalysis);
+				}
+				LOCAL.println(s.toString());
+			}
+		}
 		Map<@NonNull RegionAnalysis, @NonNull Set<@NonNull RegionAnalysis>> consumer2producersClosure = CompilerUtil.computeClosure(consumer2producers);
 		for (@NonNull RegionAnalysis consumingRegionAnalysis : consumer2producersClosure.keySet()) {
 			Set<@NonNull RegionAnalysis> fallibilities = consumer2producersClosure.get(consumingRegionAnalysis);
 			assert fallibilities != null;
 			consumingRegionAnalysis.setFallibilities(fallibilities);
+		}
+		if (GLOBAL.isActive()) {
+			List<@NonNull RegionAnalysis> consumers = new ArrayList<>(consumer2producersClosure.keySet());
+			Collections.sort(consumers, NameUtil.NAMEABLE_COMPARATOR);
+			for (@NonNull RegionAnalysis consumingRegionAnalysis : consumers) {
+				StringBuilder s = new StringBuilder();
+				s.append(consumingRegionAnalysis + " <=");
+				Set<@NonNull RegionAnalysis> producers = consumer2producersClosure.get(consumingRegionAnalysis);
+				assert producers != null;
+				List<@NonNull RegionAnalysis> sortedProducers = new ArrayList<>(producers);
+				Collections.sort(sortedProducers, NameUtil.NAMEABLE_COMPARATOR);
+				for (@NonNull RegionAnalysis producingRegionAnalysis : sortedProducers) {
+					s.append(" " + producingRegionAnalysis);
+				}
+				GLOBAL.println(s.toString());
+			}
 		}
 	}
 }

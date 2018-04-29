@@ -25,6 +25,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
@@ -280,6 +281,7 @@ public class CheckedConditionAnalysis
 		}
 	};
 
+	protected final @NonNull RegionAnalysis regionAnalysis;
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull ReachabilityForest reachabilityForest;		// FIXME Do we really need this so early?
 	protected final @NonNull Region region;
@@ -296,10 +298,11 @@ public class CheckedConditionAnalysis
 	 */
 	private final @NonNull List<@NonNull Edge> oldUnconditionalEdges;
 
-	public CheckedConditionAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull ReachabilityForest reachabilityForest, @NonNull Region region) {
-		this.scheduleManager = scheduleManager;
+	public CheckedConditionAnalysis(@NonNull RegionAnalysis regionAnalysis, @NonNull ReachabilityForest reachabilityForest) {
+		this.regionAnalysis = regionAnalysis;
+		this.scheduleManager = regionAnalysis.getScheduleManager();
 		this.reachabilityForest = reachabilityForest;
-		this.region = region;
+		this.region = regionAnalysis.getRegion();
 		this.allCheckedProperties = computeCheckedProperties();
 		this.oldUnconditionalEdges = computeOldUnconditionalEdges();
 	}
@@ -325,7 +328,7 @@ public class CheckedConditionAnalysis
 		Set<@NonNull Property> allCheckedProperties = new HashSet<>();
 		DomainUsage anyUsage = scheduleManager.getDomainUsageAnalysis().getAnyUsage();
 		for (@NonNull TypedModel qvtmTypedModel : anyUsage.getTypedModels()) {
-			Iterable<@NonNull NavigableEdge> checkedEdges = scheduleManager.getRegionAnalysis(region).getCheckedEdges(qvtmTypedModel);
+			Iterable<@NonNull NavigableEdge> checkedEdges = regionAnalysis.getCheckedEdges(qvtmTypedModel);
 			if (checkedEdges != null) {
 				for (@NonNull NavigableEdge checkedEdge : checkedEdges) {
 					Property asProperty = QVTscheduleUtil.getProperty(checkedEdge);
