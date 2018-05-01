@@ -48,6 +48,7 @@ Workflow {
     		from = "http://www.eclipse.org/qvt/2015/QVTbase"
     		to = "org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseMetamodel"
     	}
+    	excludedEClassifierName = "PseudoOperations"
     	excludedEClassifierName = "Model"
     	excludedEClassifierName = "Transformation"
     }
@@ -79,6 +80,7 @@ Workflow {
     		from = "http://www.eclipse.org/qvt/2016/QVTimperative"
     		to = "org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeMetamodel"
     	}
+    	excludedEClassifierName = "PseudoOperations"
     	excludedEClassifierName = "Model"
     	excludedEClassifierName = "Transformation"
     }

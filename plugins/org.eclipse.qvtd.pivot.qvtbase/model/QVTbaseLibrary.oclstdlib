@@ -2,6 +2,79 @@ import qvtb : 'QVTbase.ecore#/';
 
 library qvtbaselibrary : qvtbaselib = 'http://www.eclipse.org/qvt/2015/QVTbaseLibrary'
 {
-type Model : TypedModel {}
-type Transformation : Transformation {}
+	type PseudoOperations : Class {
+		/**
+		 * The PseudoOperations::collection(items) pseudo-operation provides items to allow a collection construction to be treated
+		 * as an Operation within QVTs.
+		 */
+		static operation collection(T)(items : ocl::CollectionItem[*]) : ocl::CollectionLiteralExp[1];
+
+		/**
+		 * The PseudoOperations::error(elements) pseudo-operation provides parameters to allow an error construction to be treated
+		 * as an Operation within QVTs.
+		 */
+		static operation error(T)(elements : ocl::Element[*]) : ocl::OclVoid[1];
+
+		/**
+		 * The PseudoOperations::if(condition, then, else) pseudo-operation provides parameters to allow an IfExp to be treated
+		 * as an Operation within QVTs.
+		 */
+		static operation _'if'(T)(condition : T[?]/*ocl::Boolean[1]*/, _'then' : T[?], _'else' : T[?]) : T[?];
+
+		/**
+		 * The PseudoOperations::loop(source, iterators, body) pseudo-operation provides parameters to allow a LoopExp to be treated
+		 * as an Operation within QVTs.
+		 */
+		static operation loop(E)(source : ocl::OCLExpression[1], iterators : E[*], _'body' : ocl::OCLExpression[1]) : ocl::OclAny[?];
+
+		/**
+		 * The PseudoOperations::map(parts) pseudo-operation provides parameters to allow a map construction to be treated
+		 * as an Operation within QVTs.
+		 */
+		static operation map(T)(parts : ocl::Property[*]) : ocl::MapLiteralExp[1];
+
+		/**
+		 * The PseudoOperations::mapPart(key, value) pseudo-operation provides parameters to allow a MapLiteralPart to be treated
+		 * as an Operation within QVTs.
+		 */
+		static operation mapPart(K,V)(key : K[?], value : V[?]) : ocl::MapLiteralPart[1];
+
+		/**
+		 * The PseudoOperations::range(first, last) pseudo-operation provides parameters to allow a CollectionRange to be treated
+		 * as an Operation within QVTs.
+		 */
+		static operation range(T)(first : T[?], last : T[?]) : ocl::CollectionRange[1];
+
+		/**
+		 * The PseudoOperations::shadow(parts) pseudo-operation provides parameters to allow a shadow Class construction to be treated
+		 * as an Operation within QVTs.
+		 */
+		static operation shadow(T)(parts : ocl::Property[*]) : ocl::ShadowExp[1];
+
+		/**
+		 * The PseudoOperations::shadowPart(value) pseudo-operation provides parameters to allow a ShadowPart to be treated
+		 * as an Operation within QVTs.
+		 */
+		static operation shadowPart(V)(value : V[?]) : ocl::ShadowPart[1];
+
+		/**
+		 * The PseudoOperations::tuple(parts) pseudo-operation provides parameters to allow a tuple construction to be treated
+		 * as an Operation within QVTs.
+		 */
+		static operation tuple(T)(parts : ocl::TupleLiteralPart[*]) : ocl::TupleLiteralExp[1];
+
+		/**
+		 * The PseudoOperations::tuplePart(value) pseudo-operation provides parameters to allow a TupleLiteralPart to be treated
+		 * as an Operation within QVTs.
+		 */
+		static operation tuplePart(V)(value : V[?]) : ocl::TupleLiteralPart[1];
+
+		/**
+		 * The PseudoOperations::type(value) pseudo-operation provides parameters to allow a Type to be treated
+		 * as an Operation within QVTs.
+		 */
+		static operation _'type'(V)(_'type' : V[?]) : ocl::TypeExp[1];
+	}
+	type Model : TypedModel {}
+	type Transformation : Transformation {}
 }
