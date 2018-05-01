@@ -5,6 +5,176 @@
   <ownedImports importedNamespace="pivot:Package ../model/QVTbase.ecore.oclas#6+ray" name="qvtb" xmiidVersion="1"/>
   <ownedPackages xsi:type="pivot:Library" xmi:id="1,PhY" URI="http://www.eclipse.org/qvt/2015/QVTbaseLibrary" name="qvtbaselibrary" nsPrefix="qvtbaselib">
     <ownedClasses xmi:id="v,4ov" name="Model" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR"/>
+    <ownedClasses xmi:id="QluWs" name="PseudoOperations" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR">
+      <ownedOperations xmi:id="VpQqf" isStatic="true" name="collection" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#dfRul">
+        <ownedComments body="The PseudoOperations::collection(items) pseudo-operation provides items to allow a collection construction to be treated&#xA;as an Operation within QVTs."/>
+        <ownedParameters name="items" type="#GqeYl"/>
+        <ownedSignature>
+          <ownedParameters xmi:id="ffzOs" name="T"/>
+        </ownedSignature>
+      </ownedOperations>
+      <ownedOperations xmi:id="IPFp7" isStatic="true" name="error" type="pivot:VoidType http://www.eclipse.org/ocl/2015/Library.oclas#7u3MH">
+        <ownedComments body="The PseudoOperations::error(elements) pseudo-operation provides parameters to allow an error construction to be treated&#xA;as an Operation within QVTs."/>
+        <ownedParameters name="elements" type="#58MeC"/>
+        <ownedSignature>
+          <ownedParameters xmi:id="qTgXw" name="T"/>
+        </ownedSignature>
+      </ownedOperations>
+      <ownedOperations xmi:id="oGGto" isRequired="false" isStatic="true" name="if" type="#KHYoi">
+        <ownedComments body="The PseudoOperations::if(condition, then, else) pseudo-operation provides parameters to allow an IfExp to be treated&#xA;as an Operation within QVTs."/>
+        <ownedParameters isRequired="false" name="condition" type="#KHYoi"/>
+        <ownedParameters isRequired="false" name="then" type="#KHYoi"/>
+        <ownedParameters isRequired="false" name="else" type="#KHYoi"/>
+        <ownedSignature>
+          <ownedParameters xmi:id="KHYoi" name="T"/>
+        </ownedSignature>
+      </ownedOperations>
+      <ownedOperations xmi:id="tGz0H" isRequired="false" isStatic="true" name="loop" type="pivot:AnyType http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
+        <ownedComments body="The PseudoOperations::loop(source, iterators, body) pseudo-operation provides parameters to allow a LoopExp to be treated&#xA;as an Operation within QVTs."/>
+        <ownedParameters name="source" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#BFtK4"/>
+        <ownedParameters name="iterators" type="#8zdNs"/>
+        <ownedParameters name="body" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#BFtK4"/>
+        <ownedSignature>
+          <ownedParameters xmi:id="onlhX" name="E"/>
+        </ownedSignature>
+      </ownedOperations>
+      <ownedOperations xmi:id=",FuUl" isStatic="true" name="map" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#bTDI1">
+        <ownedComments body="The PseudoOperations::map(parts) pseudo-operation provides parameters to allow a map construction to be treated&#xA;as an Operation within QVTs."/>
+        <ownedParameters name="parts" type="#qrSV7"/>
+        <ownedSignature>
+          <ownedParameters xmi:id="Zh9pl" name="T"/>
+        </ownedSignature>
+      </ownedOperations>
+      <ownedOperations xmi:id="ZOcka" isStatic="true" name="mapPart" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#33CoS">
+        <ownedComments body="The PseudoOperations::mapPart(key, value) pseudo-operation provides parameters to allow a MapLiteralPart to be treated&#xA;as an Operation within QVTs."/>
+        <ownedParameters isRequired="false" name="key" type="#6s1SB"/>
+        <ownedParameters isRequired="false" name="value" type="#Ft1SB"/>
+        <ownedSignature>
+          <ownedParameters xmi:id="6s1SB" name="K"/>
+          <ownedParameters xmi:id="Ft1SB" name="V"/>
+        </ownedSignature>
+      </ownedOperations>
+      <ownedOperations xmi:id="lyIKv" isStatic="true" name="range" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#wy8kd">
+        <ownedComments body="The PseudoOperations::range(first, last) pseudo-operation provides parameters to allow a CollectionRange to be treated&#xA;as an Operation within QVTs."/>
+        <ownedParameters isRequired="false" name="first" type="#vy0fo"/>
+        <ownedParameters isRequired="false" name="last" type="#vy0fo"/>
+        <ownedSignature>
+          <ownedParameters xmi:id="vy0fo" name="T"/>
+        </ownedSignature>
+      </ownedOperations>
+      <ownedOperations xmi:id="DVbdv" isStatic="true" name="shadow" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#Oxaac">
+        <ownedComments body="The PseudoOperations::shadow(parts) pseudo-operation provides parameters to allow a shadow Class construction to be treated&#xA;as an Operation within QVTs."/>
+        <ownedParameters name="parts" type="#qrSV7"/>
+        <ownedSignature>
+          <ownedParameters xmi:id="9ouR5" name="T"/>
+        </ownedSignature>
+      </ownedOperations>
+      <ownedOperations xmi:id="ZPR3r" isStatic="true" name="shadowPart" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#kTahU">
+        <ownedComments body="The PseudoOperations::shadowPart(value) pseudo-operation provides parameters to allow a ShadowPart to be treated&#xA;as an Operation within QVTs."/>
+        <ownedParameters isRequired="false" name="value" type="#F2yaR"/>
+        <ownedSignature>
+          <ownedParameters xmi:id="F2yaR" name="V"/>
+        </ownedSignature>
+      </ownedOperations>
+      <ownedOperations xmi:id="yuQ8x" isStatic="true" name="tuple" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#HhIN2">
+        <ownedComments body="The PseudoOperations::tuple(parts) pseudo-operation provides parameters to allow a tuple construction to be treated&#xA;as an Operation within QVTs."/>
+        <ownedParameters name="parts" type="#nc6Pa"/>
+        <ownedSignature>
+          <ownedParameters xmi:id="kwocm" name="T"/>
+        </ownedSignature>
+      </ownedOperations>
+      <ownedOperations xmi:id="B6oW0" isStatic="true" name="tuplePart" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#LgkF0">
+        <ownedComments body="The PseudoOperations::tuplePart(value) pseudo-operation provides parameters to allow a TupleLiteralPart to be treated&#xA;as an Operation within QVTs."/>
+        <ownedParameters isRequired="false" name="value" type="#t1L1E"/>
+        <ownedSignature>
+          <ownedParameters xmi:id="t1L1E" name="V"/>
+        </ownedSignature>
+      </ownedOperations>
+      <ownedOperations xmi:id="gHu6o" isStatic="true" name="type" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#0,h6K">
+        <ownedComments body="The PseudoOperations::type(value) pseudo-operation provides parameters to allow a Type to be treated&#xA;as an Operation within QVTs."/>
+        <ownedParameters isRequired="false" name="type" type="#EPsBM"/>
+        <ownedSignature>
+          <ownedParameters xmi:id="EPsBM" name="V"/>
+        </ownedSignature>
+      </ownedOperations>
+    </ownedClasses>
     <ownedClasses xmi:id="PQm3L" name="Transformation" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#zfDWR"/>
+  </ownedPackages>
+  <ownedPackages URI="http://www.eclipse.org/ocl/2015/Orphanage" name="$$" nsPrefix="orphanage">
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="CEDa0" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#CKfVx" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="4NCP7" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
+      <ownedBindings>
+        <ownedSubstitutions actual="#onlhX" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="1WxfR" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t5rpa" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="mF3WK" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#Gm0Mj" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="j2eRp" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#jbMkR">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#LgkF0" formal="http://www.eclipse.org/ocl/2015/Library.oclas#qs59R"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="GqeYl" name="Set" superClasses="#z+yVk">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#CKfVx" formal="http://www.eclipse.org/ocl/2015/Library.oclas#ODsm5"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="8zdNs" name="Set" superClasses="#pIyKr">
+      <ownedBindings>
+        <ownedSubstitutions actual="#onlhX" formal="http://www.eclipse.org/ocl/2015/Library.oclas#ODsm5"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="58MeC" name="Set" superClasses="#mRhbB">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t5rpa" formal="http://www.eclipse.org/ocl/2015/Library.oclas#ODsm5"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="qrSV7" name="Set" superClasses="#XAnS6">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#Gm0Mj" formal="http://www.eclipse.org/ocl/2015/Library.oclas#ODsm5"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SetType" xmi:id="nc6Pa" name="Set" superClasses="#UxONZ">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#LgkF0" formal="http://www.eclipse.org/ocl/2015/Library.oclas#ODsm5"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="z+yVk" name="UniqueCollection" superClasses="#CEDa0">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#CKfVx" formal="http://www.eclipse.org/ocl/2015/Library.oclas#jdfjE"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="pIyKr" name="UniqueCollection" superClasses="#4NCP7">
+      <ownedBindings>
+        <ownedSubstitutions actual="#onlhX" formal="http://www.eclipse.org/ocl/2015/Library.oclas#jdfjE"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="mRhbB" name="UniqueCollection" superClasses="#1WxfR">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#t5rpa" formal="http://www.eclipse.org/ocl/2015/Library.oclas#jdfjE"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="XAnS6" name="UniqueCollection" superClasses="#mF3WK">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#Gm0Mj" formal="http://www.eclipse.org/ocl/2015/Library.oclas#jdfjE"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" xmi:id="UxONZ" name="UniqueCollection" superClasses="#j2eRp">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#LgkF0" formal="http://www.eclipse.org/ocl/2015/Library.oclas#jdfjE"/>
+      </ownedBindings>
+    </ownedClasses>
   </ownedPackages>
 </pivot:Model>

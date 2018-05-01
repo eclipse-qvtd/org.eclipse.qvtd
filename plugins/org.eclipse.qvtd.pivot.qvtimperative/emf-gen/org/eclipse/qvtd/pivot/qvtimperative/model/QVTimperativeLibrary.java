@@ -50,7 +50,7 @@ import org.eclipse.ocl.pivot.utilities.PivotConstants;
  * to locate a library type when its default Standard Library URI is the same
  * as this Standard Library.
  */
-@SuppressWarnings({"deprecation", "unused"})
+@SuppressWarnings("unused")
 public class QVTimperativeLibrary extends ASResourceImpl
 {
 	/**

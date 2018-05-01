@@ -227,13 +227,18 @@ public class QVTbaseLibrary extends ASResourceImpl
 	{
 		private final @NonNull Model model;
 		private final @NonNull Library qvtbaselibrary;
+		private final @NonNull Package orphanage;
 
 		private Contents(@NonNull String asURI)
 		{
 			model = createModel(asURI);
 			qvtbaselibrary = createLibrary("qvtbaselibrary", "qvtbaselib", "http://www.eclipse.org/qvt/2015/QVTbaseLibrary", null);
+			orphanage = createPackage("$$", "orphanage", "http://www.eclipse.org/ocl/2015/Orphanage", null);
 			installPackages();
 			installClassTypes();
+			installCollectionTypes();
+			installOperations();
+			installTemplateBindings();
 			installComments();
 		}
 
@@ -242,18 +247,71 @@ public class QVTbaseLibrary extends ASResourceImpl
 		}
 
 		private final @NonNull Package _ocl = getPackage(org.eclipse.ocl.pivot.model.OCLstdlib.getDefaultModel(), "ocl");
+		private final @NonNull Package _pivot = getPackage(org.eclipse.ocl.pivot.model.OCLmetamodel.getDefaultModel(), "pivot");
 		private final @NonNull Package _qvtbase = getPackage(org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseMetamodel.getDefaultModel(), "qvtbase");
+		private final @NonNull CollectionType _Collection = getCollectionType(_ocl, "Collection");
+		private final @NonNull Class _CollectionItem = getClass(_pivot, "CollectionItem");
+		private final @NonNull Class _CollectionLiteralExp = getClass(_pivot, "CollectionLiteralExp");
+		private final @NonNull Class _CollectionRange = getClass(_pivot, "CollectionRange");
+		private final @NonNull Class _Element = getClass(_pivot, "Element");
+		private final @NonNull Class _MapLiteralExp = getClass(_pivot, "MapLiteralExp");
+		private final @NonNull Class _MapLiteralPart = getClass(_pivot, "MapLiteralPart");
+		private final @NonNull Class _OCLExpression = getClass(_pivot, "OCLExpression");
 		private final @NonNull AnyType _OclAny = getAnyType(_ocl, "OclAny");
 		private final @NonNull Class _OclElement = getClass(_ocl, "OclElement");
+		private final @NonNull VoidType _OclVoid = getVoidType(_ocl, "OclVoid");
+		private final @NonNull Class _Property = getClass(_pivot, "Property");
+		private final @NonNull SetType _Set = getSetType(_ocl, "Set");
+		private final @NonNull Class _ShadowExp = getClass(_pivot, "ShadowExp");
+		private final @NonNull Class _ShadowPart = getClass(_pivot, "ShadowPart");
+		private final @NonNull Class _TupleLiteralExp = getClass(_pivot, "TupleLiteralExp");
+		private final @NonNull Class _TupleLiteralPart = getClass(_pivot, "TupleLiteralPart");
+		private final @NonNull Class _TypeExp = getClass(_pivot, "TypeExp");
+		private final @NonNull CollectionType _UniqueCollection = getCollectionType(_ocl, "UniqueCollection");
+		private final @NonNull TemplateParameter _Collection_T = getTemplateParameter(_Collection, 0);
+		private final @NonNull TemplateParameter _Set_T = getTemplateParameter(_Set, 0);
+		private final @NonNull TemplateParameter _UniqueCollection_T = getTemplateParameter(_UniqueCollection, 0);
 
 		private void installPackages() {
 			model.getOwnedPackages().add(qvtbaselibrary);
+			model.getOwnedPackages().add(orphanage);
 			model.getOwnedImports().add(createImport(null, _ocl));
 			model.getOwnedImports().add(createImport("qvtb", _qvtbase));
 		}
 
 		private final @NonNull Class _Model = createClass("Model");
+		private final @NonNull Class _PseudoOperations = createClass("PseudoOperations");
 		private final @NonNull Class _Transformation = createClass("Transformation");
+
+		private final @NonNull TemplateParameter tp_PseudoOperations_collection_T = createTemplateParameter("T");
+		private final @NonNull TemplateParameter tp_PseudoOperations_error_T = createTemplateParameter("T");
+		private final @NonNull TemplateParameter tp_PseudoOperations_if_T = createTemplateParameter("T");
+		private final @NonNull TemplateParameter tp_PseudoOperations_loop_E = createTemplateParameter("E");
+		private final @NonNull TemplateParameter tp_PseudoOperations_mapPart_K = createTemplateParameter("K");
+		private final @NonNull TemplateParameter tp_PseudoOperations_mapPart_V = createTemplateParameter("V");
+		private final @NonNull TemplateParameter tp_PseudoOperations_map_T = createTemplateParameter("T");
+		private final @NonNull TemplateParameter tp_PseudoOperations_range_T = createTemplateParameter("T");
+		private final @NonNull TemplateParameter tp_PseudoOperations_shadowPart_V = createTemplateParameter("V");
+		private final @NonNull TemplateParameter tp_PseudoOperations_shadow_T = createTemplateParameter("T");
+		private final @NonNull TemplateParameter tp_PseudoOperations_tuplePart_V = createTemplateParameter("V");
+		private final @NonNull TemplateParameter tp_PseudoOperations_tuple_T = createTemplateParameter("T");
+		private final @NonNull TemplateParameter tp_PseudoOperations_type_V = createTemplateParameter("V");
+
+		private final @NonNull CollectionType _Collection_CollectionItem = createCollectionType(_Collection);
+		private final @NonNull CollectionType _Collection_Element = createCollectionType(_Collection);
+		private final @NonNull CollectionType _Collection_Property = createCollectionType(_Collection);
+		private final @NonNull CollectionType _Collection_TupleLiteralPart = createCollectionType(_Collection);
+		private final @NonNull CollectionType _Collection_PseudoOperations_loop_E = createCollectionType(_Collection);
+		private final @NonNull SetType _Set_CollectionItem = createSetType(_Set);
+		private final @NonNull SetType _Set_Element = createSetType(_Set);
+		private final @NonNull SetType _Set_Property = createSetType(_Set);
+		private final @NonNull SetType _Set_TupleLiteralPart = createSetType(_Set);
+		private final @NonNull SetType _Set_PseudoOperations_loop_E = createSetType(_Set);
+		private final @NonNull CollectionType _UniqueCollection_CollectionItem = createCollectionType(_UniqueCollection);
+		private final @NonNull CollectionType _UniqueCollection_Element = createCollectionType(_UniqueCollection);
+		private final @NonNull CollectionType _UniqueCollection_Property = createCollectionType(_UniqueCollection);
+		private final @NonNull CollectionType _UniqueCollection_TupleLiteralPart = createCollectionType(_UniqueCollection);
+		private final @NonNull CollectionType _UniqueCollection_PseudoOperations_loop_E = createCollectionType(_UniqueCollection);
 
 		private void installClassTypes() {
 			List<Class> ownedClasses;
@@ -264,12 +322,176 @@ public class QVTbaseLibrary extends ASResourceImpl
 			ownedClasses.add(type = _Model);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
+			ownedClasses.add(type = _PseudoOperations);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
 			ownedClasses.add(type = _Transformation);
 			superClasses = type.getSuperClasses();
 			superClasses.add(_OclElement);
 		}
 
+		private void installCollectionTypes() {
+			List<Class> ownedClasses;
+			List<Class> superClasses;
+			CollectionType type;
+
+			ownedClasses = orphanage.getOwnedClasses();
+			ownedClasses.add(type = _Collection_CollectionItem);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type = _Collection_Element);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type = _Collection_Property);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type = _Collection_TupleLiteralPart);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type = _Collection_PseudoOperations_loop_E);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_OclElement);
+			ownedClasses.add(type = _Set_CollectionItem);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_UniqueCollection_CollectionItem);
+			ownedClasses.add(type = _Set_Element);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_UniqueCollection_Element);
+			ownedClasses.add(type = _Set_Property);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_UniqueCollection_Property);
+			ownedClasses.add(type = _Set_TupleLiteralPart);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_UniqueCollection_TupleLiteralPart);
+			ownedClasses.add(type = _Set_PseudoOperations_loop_E);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_UniqueCollection_PseudoOperations_loop_E);
+			ownedClasses.add(type = _UniqueCollection_CollectionItem);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_Collection_CollectionItem);
+			ownedClasses.add(type = _UniqueCollection_Element);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_Collection_Element);
+			ownedClasses.add(type = _UniqueCollection_Property);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_Collection_Property);
+			ownedClasses.add(type = _UniqueCollection_TupleLiteralPart);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_Collection_TupleLiteralPart);
+			ownedClasses.add(type = _UniqueCollection_PseudoOperations_loop_E);
+			superClasses = type.getSuperClasses();
+			superClasses.add(_Collection_PseudoOperations_loop_E);
+		}
+
+		private final @NonNull Operation op_PseudoOperations_collection = createOperation("collection", _CollectionLiteralExp, null, null, tp_PseudoOperations_collection_T);
+		private final @NonNull Operation op_PseudoOperations_error = createOperation("error", _OclVoid, null, null, tp_PseudoOperations_error_T);
+		private final @NonNull Operation op_PseudoOperations_if = createOperation("if", tp_PseudoOperations_if_T, null, null, tp_PseudoOperations_if_T);
+		private final @NonNull Operation op_PseudoOperations_loop = createOperation("loop", _OclAny, null, null, tp_PseudoOperations_loop_E);
+		private final @NonNull Operation op_PseudoOperations_mapPart = createOperation("mapPart", _MapLiteralPart, null, null, tp_PseudoOperations_mapPart_K, tp_PseudoOperations_mapPart_V);
+		private final @NonNull Operation op_PseudoOperations_map = createOperation("map", _MapLiteralExp, null, null, tp_PseudoOperations_map_T);
+		private final @NonNull Operation op_PseudoOperations_range = createOperation("range", _CollectionRange, null, null, tp_PseudoOperations_range_T);
+		private final @NonNull Operation op_PseudoOperations_shadowPart = createOperation("shadowPart", _ShadowPart, null, null, tp_PseudoOperations_shadowPart_V);
+		private final @NonNull Operation op_PseudoOperations_shadow = createOperation("shadow", _ShadowExp, null, null, tp_PseudoOperations_shadow_T);
+		private final @NonNull Operation op_PseudoOperations_tuplePart = createOperation("tuplePart", _TupleLiteralPart, null, null, tp_PseudoOperations_tuplePart_V);
+		private final @NonNull Operation op_PseudoOperations_tuple = createOperation("tuple", _TupleLiteralExp, null, null, tp_PseudoOperations_tuple_T);
+		private final @NonNull Operation op_PseudoOperations_type = createOperation("type", _TypeExp, null, null, tp_PseudoOperations_type_V);
+
+		private void installOperations() {
+			List<Operation> ownedOperations;
+			List<Parameter> ownedParameters;
+			Operation operation;
+			Parameter parameter;
+
+			ownedOperations = _PseudoOperations.getOwnedOperations();
+			ownedOperations.add(operation = op_PseudoOperations_collection);
+			operation.setIsStatic(true);
+			ownedParameters = operation.getOwnedParameters();
+			ownedParameters.add(parameter = createParameter("items", _Set_CollectionItem, true));
+			ownedOperations.add(operation = op_PseudoOperations_error);
+			operation.setIsStatic(true);
+			ownedParameters = operation.getOwnedParameters();
+			ownedParameters.add(parameter = createParameter("elements", _Set_Element, true));
+			ownedOperations.add(operation = op_PseudoOperations_if);
+			operation.setIsRequired(false);
+			operation.setIsStatic(true);
+			ownedParameters = operation.getOwnedParameters();
+			ownedParameters.add(parameter = createParameter("condition", tp_PseudoOperations_if_T, false));
+			ownedParameters.add(parameter = createParameter("then", tp_PseudoOperations_if_T, false));
+			ownedParameters.add(parameter = createParameter("else", tp_PseudoOperations_if_T, false));
+			ownedOperations.add(operation = op_PseudoOperations_loop);
+			operation.setIsRequired(false);
+			operation.setIsStatic(true);
+			ownedParameters = operation.getOwnedParameters();
+			ownedParameters.add(parameter = createParameter("source", _OCLExpression, true));
+			ownedParameters.add(parameter = createParameter("iterators", _Set_PseudoOperations_loop_E, true));
+			ownedParameters.add(parameter = createParameter("body", _OCLExpression, true));
+			ownedOperations.add(operation = op_PseudoOperations_mapPart);
+			operation.setIsStatic(true);
+			ownedParameters = operation.getOwnedParameters();
+			ownedParameters.add(parameter = createParameter("key", tp_PseudoOperations_mapPart_K, false));
+			ownedParameters.add(parameter = createParameter("value", tp_PseudoOperations_mapPart_V, false));
+			ownedOperations.add(operation = op_PseudoOperations_map);
+			operation.setIsStatic(true);
+			ownedParameters = operation.getOwnedParameters();
+			ownedParameters.add(parameter = createParameter("parts", _Set_Property, true));
+			ownedOperations.add(operation = op_PseudoOperations_range);
+			operation.setIsStatic(true);
+			ownedParameters = operation.getOwnedParameters();
+			ownedParameters.add(parameter = createParameter("first", tp_PseudoOperations_range_T, false));
+			ownedParameters.add(parameter = createParameter("last", tp_PseudoOperations_range_T, false));
+			ownedOperations.add(operation = op_PseudoOperations_shadowPart);
+			operation.setIsStatic(true);
+			ownedParameters = operation.getOwnedParameters();
+			ownedParameters.add(parameter = createParameter("value", tp_PseudoOperations_shadowPart_V, false));
+			ownedOperations.add(operation = op_PseudoOperations_shadow);
+			operation.setIsStatic(true);
+			ownedParameters = operation.getOwnedParameters();
+			ownedParameters.add(parameter = createParameter("parts", _Set_Property, true));
+			ownedOperations.add(operation = op_PseudoOperations_tuplePart);
+			operation.setIsStatic(true);
+			ownedParameters = operation.getOwnedParameters();
+			ownedParameters.add(parameter = createParameter("value", tp_PseudoOperations_tuplePart_V, false));
+			ownedOperations.add(operation = op_PseudoOperations_tuple);
+			operation.setIsStatic(true);
+			ownedParameters = operation.getOwnedParameters();
+			ownedParameters.add(parameter = createParameter("parts", _Set_TupleLiteralPart, true));
+			ownedOperations.add(operation = op_PseudoOperations_type);
+			operation.setIsStatic(true);
+			ownedParameters = operation.getOwnedParameters();
+			ownedParameters.add(parameter = createParameter("type", tp_PseudoOperations_type_V, false));
+		}
+
+		private void installTemplateBindings() {
+			addBinding(_Collection_CollectionItem, _CollectionItem);
+			addBinding(_Collection_Element, _Element);
+			addBinding(_Collection_Property, _Property);
+			addBinding(_Collection_PseudoOperations_loop_E, tp_PseudoOperations_loop_E);
+			addBinding(_Collection_TupleLiteralPart, _TupleLiteralPart);
+			addBinding(_Set_CollectionItem, _CollectionItem);
+			addBinding(_Set_Element, _Element);
+			addBinding(_Set_Property, _Property);
+			addBinding(_Set_PseudoOperations_loop_E, tp_PseudoOperations_loop_E);
+			addBinding(_Set_TupleLiteralPart, _TupleLiteralPart);
+			addBinding(_UniqueCollection_CollectionItem, _CollectionItem);
+			addBinding(_UniqueCollection_Element, _Element);
+			addBinding(_UniqueCollection_Property, _Property);
+			addBinding(_UniqueCollection_PseudoOperations_loop_E, tp_PseudoOperations_loop_E);
+			addBinding(_UniqueCollection_TupleLiteralPart, _TupleLiteralPart);
+		}
+
 		private void installComments() {
+			installComment(op_PseudoOperations_collection, "The PseudoOperations::collection(items) pseudo-operation provides items to allow a collection construction to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_error, "The PseudoOperations::error(elements) pseudo-operation provides parameters to allow an error construction to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_if, "The PseudoOperations::if(condition, then, else) pseudo-operation provides parameters to allow an IfExp to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_loop, "The PseudoOperations::loop(source, iterators, body) pseudo-operation provides parameters to allow a LoopExp to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_mapPart, "The PseudoOperations::mapPart(key, value) pseudo-operation provides parameters to allow a MapLiteralPart to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_map, "The PseudoOperations::map(parts) pseudo-operation provides parameters to allow a map construction to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_range, "The PseudoOperations::range(first, last) pseudo-operation provides parameters to allow a CollectionRange to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_shadowPart, "The PseudoOperations::shadowPart(value) pseudo-operation provides parameters to allow a ShadowPart to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_shadow, "The PseudoOperations::shadow(parts) pseudo-operation provides parameters to allow a shadow Class construction to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_tuplePart, "The PseudoOperations::tuplePart(value) pseudo-operation provides parameters to allow a TupleLiteralPart to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_tuple, "The PseudoOperations::tuple(parts) pseudo-operation provides parameters to allow a tuple construction to be treated\nas an Operation within QVTs.");
+			installComment(op_PseudoOperations_type, "The PseudoOperations::type(value) pseudo-operation provides parameters to allow a Type to be treated\nas an Operation within QVTs.");
 		}
 	}
 }
