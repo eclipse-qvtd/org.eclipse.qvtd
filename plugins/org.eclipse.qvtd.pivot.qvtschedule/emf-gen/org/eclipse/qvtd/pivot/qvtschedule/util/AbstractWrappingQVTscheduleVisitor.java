@@ -46,6 +46,18 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
+	public R visitArgumentEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ArgumentEdge object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitArgumentEdge(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitBooleanValueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull BooleanValueNode object) {
 		@Nullable P prologue = preVisit(object);
 		try {
@@ -82,6 +94,18 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
+	public R visitCollectionPartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CollectionPartEdge object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitCollectionPartEdge(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitComposedNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ComposedNode object) {
 		@Nullable P prologue = preVisit(object);
 		try {
@@ -110,6 +134,18 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitDatumConnection(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitDependencyEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DependencyEdge object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitDependencyEdge(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {
@@ -190,6 +226,18 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
+	public R visitIncludesEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull IncludesEdge object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitIncludesEdge(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitInputNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull InputNode object) {
 		@Nullable P prologue = preVisit(object);
 		try {
@@ -226,6 +274,18 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
+	public R visitKeyPartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull KeyPartEdge object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitKeyPartEdge(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitKeyedValueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull KeyedValueNode object) {
 		@Nullable P prologue = preVisit(object);
 		try {
@@ -242,6 +302,18 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitLoadingRegion(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitMapPartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MapPartEdge object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitMapPartEdge(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {
@@ -358,10 +430,34 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
+	public R visitOperationParameterEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull OperationParameterEdge object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitOperationParameterEdge(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitOperationRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull OperationRegion object) {
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitOperationRegion(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitOperationSelfEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull OperationSelfEdge object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitOperationSelfEdge(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {
@@ -490,6 +586,18 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
+	public R visitShadowPartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ShadowPartEdge object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitShadowPartEdge(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitSuccessEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SuccessEdge object) {
 		@Nullable P prologue = preVisit(object);
 		try {
@@ -506,6 +614,18 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitSuccessNode(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
+	public R visitTuplePartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull TuplePartEdge object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitTuplePartEdge(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {

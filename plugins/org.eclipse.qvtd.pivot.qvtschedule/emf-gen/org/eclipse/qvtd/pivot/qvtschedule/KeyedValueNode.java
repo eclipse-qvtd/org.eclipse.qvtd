@@ -20,6 +20,10 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  * A representation of the model object '<em><b>Keyed Value Node</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A KeyedValueNode supports a globally unique value in a QVTs graph; repeated 'realizations' share the one value.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
@@ -40,6 +44,9 @@ public interface KeyedValueNode extends OperationNode {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The type and typedmodel of the unqiue value.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Class Datum Value</em>' reference.
 	 * @see #setClassDatumValue(ClassDatum)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getKeyedValueNode_ClassDatumValue()

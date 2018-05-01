@@ -16,16 +16,12 @@ package org.eclipse.qvtd.pivot.qvtschedule.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
-
 import org.eclipse.jdt.annotation.Nullable;
-
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
-
 import org.eclipse.qvtd.pivot.qvtschedule.*;
 
 /**
@@ -93,6 +89,15 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTschedulePackage.ARGUMENT_EDGE: {
+				ArgumentEdge argumentEdge = (ArgumentEdge)theEObject;
+				T result = caseArgumentEdge(argumentEdge);
+				if (result == null) result = caseExpressionEdge(argumentEdge);
+				if (result == null) result = caseEdge(argumentEdge);
+				if (result == null) result = caseElement(argumentEdge);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTschedulePackage.BOOLEAN_VALUE_NODE: {
 				BooleanValueNode booleanValueNode = (BooleanValueNode)theEObject;
 				T result = caseBooleanValueNode(booleanValueNode);
@@ -119,6 +124,16 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseAbstractDatum(classDatum);
 				if (result == null) result = caseNamedElement(classDatum);
 				if (result == null) result = caseElement(classDatum);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTschedulePackage.COLLECTION_PART_EDGE: {
+				CollectionPartEdge collectionPartEdge = (CollectionPartEdge)theEObject;
+				T result = caseCollectionPartEdge(collectionPartEdge);
+				if (result == null) result = caseArgumentEdge(collectionPartEdge);
+				if (result == null) result = caseExpressionEdge(collectionPartEdge);
+				if (result == null) result = caseEdge(collectionPartEdge);
+				if (result == null) result = caseElement(collectionPartEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -151,6 +166,14 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseConnection(datumConnection);
 				if (result == null) result = caseElement(datumConnection);
 				if (result == null) result = caseSymbolable(datumConnection);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTschedulePackage.DEPENDENCY_EDGE: {
+				DependencyEdge dependencyEdge = (DependencyEdge)theEObject;
+				T result = caseDependencyEdge(dependencyEdge);
+				if (result == null) result = caseEdge(dependencyEdge);
+				if (result == null) result = caseElement(dependencyEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -209,6 +232,15 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTschedulePackage.INCLUDES_EDGE: {
+				IncludesEdge includesEdge = (IncludesEdge)theEObject;
+				T result = caseIncludesEdge(includesEdge);
+				if (result == null) result = caseExpressionEdge(includesEdge);
+				if (result == null) result = caseEdge(includesEdge);
+				if (result == null) result = caseElement(includesEdge);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTschedulePackage.INPUT_NODE: {
 				InputNode inputNode = (InputNode)theEObject;
 				T result = caseInputNode(inputNode);
@@ -236,6 +268,16 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTschedulePackage.KEY_PART_EDGE: {
+				KeyPartEdge keyPartEdge = (KeyPartEdge)theEObject;
+				T result = caseKeyPartEdge(keyPartEdge);
+				if (result == null) result = caseArgumentEdge(keyPartEdge);
+				if (result == null) result = caseExpressionEdge(keyPartEdge);
+				if (result == null) result = caseEdge(keyPartEdge);
+				if (result == null) result = caseElement(keyPartEdge);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTschedulePackage.KEYED_VALUE_NODE: {
 				KeyedValueNode keyedValueNode = (KeyedValueNode)theEObject;
 				T result = caseKeyedValueNode(keyedValueNode);
@@ -253,6 +295,16 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseNamedElement(loadingRegion);
 				if (result == null) result = caseSymbolable(loadingRegion);
 				if (result == null) result = caseElement(loadingRegion);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTschedulePackage.MAP_PART_EDGE: {
+				MapPartEdge mapPartEdge = (MapPartEdge)theEObject;
+				T result = caseMapPartEdge(mapPartEdge);
+				if (result == null) result = caseArgumentEdge(mapPartEdge);
+				if (result == null) result = caseExpressionEdge(mapPartEdge);
+				if (result == null) result = caseEdge(mapPartEdge);
+				if (result == null) result = caseElement(mapPartEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -363,6 +415,26 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTschedulePackage.OPERATION_PARAMETER_EDGE: {
+				OperationParameterEdge operationParameterEdge = (OperationParameterEdge)theEObject;
+				T result = caseOperationParameterEdge(operationParameterEdge);
+				if (result == null) result = caseArgumentEdge(operationParameterEdge);
+				if (result == null) result = caseExpressionEdge(operationParameterEdge);
+				if (result == null) result = caseEdge(operationParameterEdge);
+				if (result == null) result = caseElement(operationParameterEdge);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTschedulePackage.OPERATION_SELF_EDGE: {
+				OperationSelfEdge operationSelfEdge = (OperationSelfEdge)theEObject;
+				T result = caseOperationSelfEdge(operationSelfEdge);
+				if (result == null) result = caseArgumentEdge(operationSelfEdge);
+				if (result == null) result = caseExpressionEdge(operationSelfEdge);
+				if (result == null) result = caseEdge(operationSelfEdge);
+				if (result == null) result = caseElement(operationSelfEdge);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTschedulePackage.PATTERN_TYPED_NODE: {
 				PatternTypedNode patternTypedNode = (PatternTypedNode)theEObject;
 				T result = casePatternTypedNode(patternTypedNode);
@@ -447,6 +519,16 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTschedulePackage.SHADOW_PART_EDGE: {
+				ShadowPartEdge shadowPartEdge = (ShadowPartEdge)theEObject;
+				T result = caseShadowPartEdge(shadowPartEdge);
+				if (result == null) result = caseArgumentEdge(shadowPartEdge);
+				if (result == null) result = caseExpressionEdge(shadowPartEdge);
+				if (result == null) result = caseEdge(shadowPartEdge);
+				if (result == null) result = caseElement(shadowPartEdge);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTschedulePackage.SUCCESS_EDGE: {
 				SuccessEdge successEdge = (SuccessEdge)theEObject;
 				T result = caseSuccessEdge(successEdge);
@@ -470,6 +552,16 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 			case QVTschedulePackage.SYMBOLABLE: {
 				Symbolable symbolable = (Symbolable)theEObject;
 				T result = caseSymbolable(symbolable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTschedulePackage.TUPLE_PART_EDGE: {
+				TuplePartEdge tuplePartEdge = (TuplePartEdge)theEObject;
+				T result = caseTuplePartEdge(tuplePartEdge);
+				if (result == null) result = caseArgumentEdge(tuplePartEdge);
+				if (result == null) result = caseExpressionEdge(tuplePartEdge);
+				if (result == null) result = caseEdge(tuplePartEdge);
+				if (result == null) result = caseElement(tuplePartEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -523,6 +615,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Argument Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Argument Edge</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseArgumentEdge(ArgumentEdge object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Boolean Value Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -564,6 +671,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseClassDatum(ClassDatum object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Collection Part Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Collection Part Edge</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCollectionPartEdge(CollectionPartEdge object) {
 		return null;
 	}
 
@@ -628,6 +750,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Dependency Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Dependency Edge</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDependencyEdge(DependencyEdge object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Dependency Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -688,6 +825,156 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Schedule Model</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Schedule Model</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseScheduleModel(ScheduleModel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Scheduled Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Scheduled Region</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseScheduledRegion(ScheduledRegion object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Shadow Part Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Shadow Part Edge</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseShadowPartEdge(ShadowPartEdge object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Success Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Success Edge</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSuccessEdge(SuccessEdge object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Success Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Success Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSuccessNode(SuccessNode object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Symbolable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Symbolable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSymbolable(Symbolable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Tuple Part Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Tuple Part Edge</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTuplePartEdge(TuplePartEdge object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Unknown Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Unknown Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnknownNode(UnknownNode object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Variable Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Variable Node</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVariableNode(VariableNode object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Verdict Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Verdict Region</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVerdictRegion(VerdictRegion object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Error Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -714,6 +1001,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseExpressionEdge(ExpressionEdge object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Includes Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Includes Edge</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIncludesEdge(IncludesEdge object) {
 		return null;
 	}
 
@@ -763,6 +1065,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Key Part Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Key Part Edge</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseKeyPartEdge(KeyPartEdge object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Keyed Value Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -789,6 +1106,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseLoadingRegion(LoadingRegion object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Map Part Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Map Part Edge</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMapPartEdge(MapPartEdge object) {
 		return null;
 	}
 
@@ -958,6 +1290,36 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Operation Parameter Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Operation Parameter Edge</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOperationParameterEdge(OperationParameterEdge object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Operation Self Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Operation Self Edge</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOperationSelfEdge(OperationSelfEdge object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Pattern Typed Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1059,126 +1421,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRuleRegion(RuleRegion object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Schedule Model</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Schedule Model</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseScheduleModel(ScheduleModel object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Scheduled Region</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Scheduled Region</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseScheduledRegion(ScheduledRegion object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Success Edge</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Success Edge</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSuccessEdge(SuccessEdge object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Success Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Success Node</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSuccessNode(SuccessNode object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Symbolable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Symbolable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSymbolable(Symbolable object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Unknown Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Unknown Node</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUnknownNode(UnknownNode object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Variable Node</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Variable Node</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVariableNode(VariableNode object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Verdict Region</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Verdict Region</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVerdictRegion(VerdictRegion object) {
 		return null;
 	}
 

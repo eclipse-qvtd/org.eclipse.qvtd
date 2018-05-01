@@ -21,6 +21,10 @@ import org.eclipse.ocl.pivot.Operation;
  * A representation of the model object '<em><b>Operation Value Node</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * An OperationValueNode supports an Operation literal value in a QVTs graph.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
@@ -41,6 +45,9 @@ public interface OperationValueNode extends OperationNode {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The Operation literal value.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Operation Value</em>' reference.
 	 * @see #setOperationValue(Operation)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getOperationValueNode_OperationValue()

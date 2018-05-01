@@ -20,6 +20,10 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  * A representation of the model object '<em><b>Boolean Value Node</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A BooleanValueNode supports a Boolean literal value in a QVTs graph.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>
@@ -37,7 +41,7 @@ public interface BooleanValueNode extends OperationNode {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * String/Number/Boolean/EnumerationLiteral/OperationId to characterize the operation node
+	 * The Boolean literal value.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Boolean Value</em>' attribute.
 	 * @see #setBooleanValue(boolean)

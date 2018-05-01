@@ -86,6 +86,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createAbstractDatumAdapter();
 			}
 			@Override
+			public Adapter caseArgumentEdge(ArgumentEdge object) {
+				return createArgumentEdgeAdapter();
+			}
+			@Override
 			public Adapter caseBooleanValueNode(BooleanValueNode object) {
 				return createBooleanValueNodeAdapter();
 			}
@@ -96,6 +100,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseClassDatum(ClassDatum object) {
 				return createClassDatumAdapter();
+			}
+			@Override
+			public Adapter caseCollectionPartEdge(CollectionPartEdge object) {
+				return createCollectionPartEdgeAdapter();
 			}
 			@Override
 			public Adapter caseComposedNode(ComposedNode object) {
@@ -112,6 +120,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public <CE extends ConnectionEnd> Adapter caseDatumConnection(DatumConnection<CE> object) {
 				return createDatumConnectionAdapter();
+			}
+			@Override
+			public Adapter caseDependencyEdge(DependencyEdge object) {
+				return createDependencyEdgeAdapter();
 			}
 			@Override
 			public Adapter caseDependencyNode(DependencyNode object) {
@@ -138,6 +150,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createExpressionEdgeAdapter();
 			}
 			@Override
+			public Adapter caseIncludesEdge(IncludesEdge object) {
+				return createIncludesEdgeAdapter();
+			}
+			@Override
 			public Adapter caseInputNode(InputNode object) {
 				return createInputNodeAdapter();
 			}
@@ -150,12 +166,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createIteratorNodeAdapter();
 			}
 			@Override
+			public Adapter caseKeyPartEdge(KeyPartEdge object) {
+				return createKeyPartEdgeAdapter();
+			}
+			@Override
 			public Adapter caseKeyedValueNode(KeyedValueNode object) {
 				return createKeyedValueNodeAdapter();
 			}
 			@Override
 			public Adapter caseLoadingRegion(LoadingRegion object) {
 				return createLoadingRegionAdapter();
+			}
+			@Override
+			public Adapter caseMapPartEdge(MapPartEdge object) {
+				return createMapPartEdgeAdapter();
 			}
 			@Override
 			public Adapter caseMappingRegion(MappingRegion object) {
@@ -202,6 +226,14 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createOperationRegionAdapter();
 			}
 			@Override
+			public Adapter caseOperationParameterEdge(OperationParameterEdge object) {
+				return createOperationParameterEdgeAdapter();
+			}
+			@Override
+			public Adapter caseOperationSelfEdge(OperationSelfEdge object) {
+				return createOperationSelfEdgeAdapter();
+			}
+			@Override
 			public Adapter casePatternTypedNode(PatternTypedNode object) {
 				return createPatternTypedNodeAdapter();
 			}
@@ -238,6 +270,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createScheduledRegionAdapter();
 			}
 			@Override
+			public Adapter caseShadowPartEdge(ShadowPartEdge object) {
+				return createShadowPartEdgeAdapter();
+			}
+			@Override
 			public Adapter caseSuccessEdge(SuccessEdge object) {
 				return createSuccessEdgeAdapter();
 			}
@@ -248,6 +284,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSymbolable(Symbolable object) {
 				return createSymbolableAdapter();
+			}
+			@Override
+			public Adapter caseTuplePartEdge(TuplePartEdge object) {
+				return createTuplePartEdgeAdapter();
 			}
 			@Override
 			public Adapter caseUnknownNode(UnknownNode object) {
@@ -312,6 +352,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.ArgumentEdge <em>Argument Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ArgumentEdge
+	 * @generated
+	 */
+	public Adapter createArgumentEdgeAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.BooleanValueNode <em>Boolean Value Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -350,6 +404,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createClassDatumAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.CollectionPartEdge <em>Collection Part Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.CollectionPartEdge
+	 * @generated
+	 */
+	public Adapter createCollectionPartEdgeAdapter() {
 		return null;
 	}
 
@@ -406,6 +474,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDatumConnectionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.DependencyEdge <em>Dependency Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.DependencyEdge
+	 * @generated
+	 */
+	public Adapter createDependencyEdgeAdapter() {
 		return null;
 	}
 
@@ -494,6 +576,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge <em>Shadow Part Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge
+	 * @generated
+	 */
+	public Adapter createShadowPartEdgeAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge <em>Success Edge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -532,6 +628,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSymbolableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.TuplePartEdge <em>Tuple Part Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.TuplePartEdge
+	 * @generated
+	 */
+	public Adapter createTuplePartEdgeAdapter() {
 		return null;
 	}
 
@@ -606,6 +716,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.IncludesEdge <em>Includes Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.IncludesEdge
+	 * @generated
+	 */
+	public Adapter createIncludesEdgeAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.InputNode <em>Input Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -648,6 +772,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge <em>Key Part Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge
+	 * @generated
+	 */
+	public Adapter createKeyPartEdgeAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode <em>Keyed Value Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -672,6 +810,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLoadingRegionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.MapPartEdge <em>Map Part Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MapPartEdge
+	 * @generated
+	 */
+	public Adapter createMapPartEdgeAdapter() {
 		return null;
 	}
 
@@ -826,6 +978,34 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOperationRegionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge <em>Operation Parameter Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge
+	 * @generated
+	 */
+	public Adapter createOperationParameterEdgeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationSelfEdge <em>Operation Self Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.OperationSelfEdge
+	 * @generated
+	 */
+	public Adapter createOperationSelfEdgeAdapter() {
 		return null;
 	}
 

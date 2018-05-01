@@ -20,6 +20,10 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  * A representation of the model object '<em><b>Null Node</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * A NullNode supports a null literal value in a QVTs graph.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * </p>

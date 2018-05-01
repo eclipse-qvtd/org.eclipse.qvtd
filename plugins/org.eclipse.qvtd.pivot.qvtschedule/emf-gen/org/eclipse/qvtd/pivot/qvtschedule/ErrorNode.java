@@ -20,6 +20,10 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  * A representation of the model object '<em><b>Error Node</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * An ErrorNode provides a place holder for failed value in a QVTs graph.
+ * <!-- end-model-doc -->
+ *
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getErrorNode()
  * @model

@@ -43,6 +43,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitArgumentEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ArgumentEdge object) {
+		return delegate.visitArgumentEdge(object);
+	}
+
+	@Override
 	public R visitBooleanValueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull BooleanValueNode object) {
 		return delegate.visitBooleanValueNode(object);
 	}
@@ -58,6 +63,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitCollectionPartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CollectionPartEdge object) {
+		return delegate.visitCollectionPartEdge(object);
+	}
+
+	@Override
 	public R visitComposedNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ComposedNode object) {
 		return delegate.visitComposedNode(object);
 	}
@@ -70,6 +80,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	@Override
 	public R visitDatumConnection(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DatumConnection<?> object) {
 		return delegate.visitDatumConnection(object);
+	}
+
+	@Override
+	public R visitDependencyEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DependencyEdge object) {
+		return delegate.visitDependencyEdge(object);
 	}
 
 	@Override
@@ -103,6 +118,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitIncludesEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull IncludesEdge object) {
+		return delegate.visitIncludesEdge(object);
+	}
+
+	@Override
 	public R visitInputNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull InputNode object) {
 		return delegate.visitInputNode(object);
 	}
@@ -118,6 +138,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitKeyPartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull KeyPartEdge object) {
+		return delegate.visitKeyPartEdge(object);
+	}
+
+	@Override
 	public R visitKeyedValueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull KeyedValueNode object) {
 		return delegate.visitKeyedValueNode(object);
 	}
@@ -125,6 +150,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	@Override
 	public R visitLoadingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull LoadingRegion object) {
 		return delegate.visitLoadingRegion(object);
+	}
+
+	@Override
+	public R visitMapPartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MapPartEdge object) {
+		return delegate.visitMapPartEdge(object);
 	}
 
 	@Override
@@ -173,8 +203,18 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitOperationParameterEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull OperationParameterEdge object) {
+		return delegate.visitOperationParameterEdge(object);
+	}
+
+	@Override
 	public R visitOperationRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull OperationRegion object) {
 		return delegate.visitOperationRegion(object);
+	}
+
+	@Override
+	public R visitOperationSelfEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull OperationSelfEdge object) {
+		return delegate.visitOperationSelfEdge(object);
 	}
 
 	@Override
@@ -228,6 +268,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitShadowPartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ShadowPartEdge object) {
+		return delegate.visitShadowPartEdge(object);
+	}
+
+	@Override
 	public R visitSuccessEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SuccessEdge object) {
 		return delegate.visitSuccessEdge(object);
 	}
@@ -235,6 +280,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	@Override
 	public R visitSuccessNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull SuccessNode object) {
 		return delegate.visitSuccessNode(object);
+	}
+
+	@Override
+	public R visitTuplePartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull TuplePartEdge object) {
+		return delegate.visitTuplePartEdge(object);
 	}
 
 	@Override

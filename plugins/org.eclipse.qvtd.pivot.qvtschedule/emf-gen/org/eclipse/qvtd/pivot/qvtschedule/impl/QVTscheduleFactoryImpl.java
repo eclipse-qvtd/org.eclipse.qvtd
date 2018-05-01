@@ -72,17 +72,21 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.BOOLEAN_VALUE_NODE: return createBooleanValueNode();
 			case QVTschedulePackage.CAST_EDGE: return createCastEdge();
 			case QVTschedulePackage.CLASS_DATUM: return createClassDatum();
+			case QVTschedulePackage.COLLECTION_PART_EDGE: return createCollectionPartEdge();
 			case QVTschedulePackage.COMPOSED_NODE: return createComposedNode();
+			case QVTschedulePackage.DEPENDENCY_EDGE: return createDependencyEdge();
 			case QVTschedulePackage.DEPENDENCY_NODE: return createDependencyNode();
 			case QVTschedulePackage.DISPATCH_REGION: return createDispatchRegion();
 			case QVTschedulePackage.EDGE_CONNECTION: return createEdgeConnection();
 			case QVTschedulePackage.ERROR_NODE: return createErrorNode();
-			case QVTschedulePackage.EXPRESSION_EDGE: return createExpressionEdge();
+			case QVTschedulePackage.INCLUDES_EDGE: return createIncludesEdge();
 			case QVTschedulePackage.INPUT_NODE: return createInputNode();
 			case QVTschedulePackage.ITERATED_EDGE: return createIteratedEdge();
 			case QVTschedulePackage.ITERATOR_NODE: return createIteratorNode();
+			case QVTschedulePackage.KEY_PART_EDGE: return createKeyPartEdge();
 			case QVTschedulePackage.KEYED_VALUE_NODE: return createKeyedValueNode();
 			case QVTschedulePackage.LOADING_REGION: return createLoadingRegion();
+			case QVTschedulePackage.MAP_PART_EDGE: return createMapPartEdge();
 			case QVTschedulePackage.MICRO_MAPPING_REGION: return createMicroMappingRegion();
 			case QVTschedulePackage.NAMED_MAPPING_REGION: return createNamedMappingRegion();
 			case QVTschedulePackage.NAVIGATION_EDGE: return createNavigationEdge();
@@ -91,6 +95,8 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.OPERATION_VALUE_NODE: return createOperationValueNode();
 			case QVTschedulePackage.OPERATION_NODE: return createOperationNode();
 			case QVTschedulePackage.OPERATION_REGION: return createOperationRegion();
+			case QVTschedulePackage.OPERATION_PARAMETER_EDGE: return createOperationParameterEdge();
+			case QVTschedulePackage.OPERATION_SELF_EDGE: return createOperationSelfEdge();
 			case QVTschedulePackage.PATTERN_TYPED_NODE: return createPatternTypedNode();
 			case QVTschedulePackage.PATTERN_VARIABLE_NODE: return createPatternVariableNode();
 			case QVTschedulePackage.PREDICATE_EDGE: return createPredicateEdge();
@@ -99,8 +105,10 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.RULE_REGION: return createRuleRegion();
 			case QVTschedulePackage.SCHEDULE_MODEL: return createScheduleModel();
 			case QVTschedulePackage.SCHEDULED_REGION: return createScheduledRegion();
+			case QVTschedulePackage.SHADOW_PART_EDGE: return createShadowPartEdge();
 			case QVTschedulePackage.SUCCESS_EDGE: return createSuccessEdge();
 			case QVTschedulePackage.SUCCESS_NODE: return createSuccessNode();
+			case QVTschedulePackage.TUPLE_PART_EDGE: return createTuplePartEdge();
 			case QVTschedulePackage.UNKNOWN_NODE: return createUnknownNode();
 			case QVTschedulePackage.VERDICT_REGION: return createVerdictRegion();
 			default:
@@ -181,9 +189,31 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
+	public @NonNull CollectionPartEdge createCollectionPartEdge() {
+		CollectionPartEdgeImpl collectionPartEdge = new CollectionPartEdgeImpl();
+		return collectionPartEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull ComposedNode createComposedNode() {
 		ComposedNodeImpl composedNode = new ComposedNodeImpl();
 		return composedNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull DependencyEdge createDependencyEdge() {
+		DependencyEdgeImpl dependencyEdge = new DependencyEdgeImpl();
+		return dependencyEdge;
 	}
 
 	/**
@@ -236,9 +266,9 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public @NonNull ExpressionEdge createExpressionEdge() {
-		ExpressionEdgeImpl expressionEdge = new ExpressionEdgeImpl();
-		return expressionEdge;
+	public @NonNull IncludesEdge createIncludesEdge() {
+		IncludesEdgeImpl includesEdge = new IncludesEdgeImpl();
+		return includesEdge;
 	}
 
 	/**
@@ -280,6 +310,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
+	public @NonNull KeyPartEdge createKeyPartEdge() {
+		KeyPartEdgeImpl keyPartEdge = new KeyPartEdgeImpl();
+		return keyPartEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull KeyedValueNode createKeyedValueNode() {
 		KeyedValueNodeImpl keyedValueNode = new KeyedValueNodeImpl();
 		return keyedValueNode;
@@ -294,6 +335,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull LoadingRegion createLoadingRegion() {
 		LoadingRegionImpl loadingRegion = new LoadingRegionImpl();
 		return loadingRegion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull MapPartEdge createMapPartEdge() {
+		MapPartEdgeImpl mapPartEdge = new MapPartEdgeImpl();
+		return mapPartEdge;
 	}
 
 	/**
@@ -390,6 +442,28 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
+	public @NonNull OperationParameterEdge createOperationParameterEdge() {
+		OperationParameterEdgeImpl operationParameterEdge = new OperationParameterEdgeImpl();
+		return operationParameterEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull OperationSelfEdge createOperationSelfEdge() {
+		OperationSelfEdgeImpl operationSelfEdge = new OperationSelfEdgeImpl();
+		return operationSelfEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull PatternTypedNode createPatternTypedNode() {
 		PatternTypedNodeImpl patternTypedNode = new PatternTypedNodeImpl();
 		return patternTypedNode;
@@ -478,6 +552,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
+	public @NonNull ShadowPartEdge createShadowPartEdge() {
+		ShadowPartEdgeImpl shadowPartEdge = new ShadowPartEdgeImpl();
+		return shadowPartEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull SuccessEdge createSuccessEdge() {
 		SuccessEdgeImpl successEdge = new SuccessEdgeImpl();
 		return successEdge;
@@ -492,6 +577,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull SuccessNode createSuccessNode() {
 		SuccessNodeImpl successNode = new SuccessNodeImpl();
 		return successNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull TuplePartEdge createTuplePartEdge() {
+		TuplePartEdgeImpl tuplePartEdge = new TuplePartEdgeImpl();
+		return tuplePartEdge;
 	}
 
 	/**

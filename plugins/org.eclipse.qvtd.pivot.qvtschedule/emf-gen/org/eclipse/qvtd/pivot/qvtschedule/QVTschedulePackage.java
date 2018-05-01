@@ -205,7 +205,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getClassDatum()
 	 * @generated
 	 */
-	int CLASS_DATUM = 3;
+	int CLASS_DATUM = 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl <em>Connection</em>}' class.
@@ -215,7 +215,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getConnection()
 	 * @generated
 	 */
-	int CONNECTION = 5;
+	int CONNECTION = 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd <em>Connection End</em>}' class.
@@ -225,7 +225,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getConnectionEnd()
 	 * @generated
 	 */
-	int CONNECTION_END = 6;
+	int CONNECTION_END = 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.DatumConnectionImpl <em>Datum Connection</em>}' class.
@@ -235,7 +235,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getDatumConnection()
 	 * @generated
 	 */
-	int DATUM_CONNECTION = 7;
+	int DATUM_CONNECTION = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl <em>Edge</em>}' class.
@@ -245,7 +245,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getEdge()
 	 * @generated
 	 */
-	int EDGE = 10;
+	int EDGE = 13;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeConnectionImpl <em>Edge Connection</em>}' class.
@@ -255,7 +255,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getEdgeConnection()
 	 * @generated
 	 */
-	int EDGE_CONNECTION = 11;
+	int EDGE_CONNECTION = 14;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.Role <em>Role</em>}' enum.
@@ -265,7 +265,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRole()
 	 * @generated
 	 */
-	int ROLE = 46;
+	int ROLE = 56;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl <em>Navigable Edge</em>}' class.
@@ -275,7 +275,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNavigableEdge()
 	 * @generated
 	 */
-	int NAVIGABLE_EDGE = 22;
+	int NAVIGABLE_EDGE = 28;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl <em>Node</em>}' class.
@@ -285,7 +285,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNode()
 	 * @generated
 	 */
-	int NODE = 24;
+	int NODE = 30;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeConnectionImpl <em>Node Connection</em>}' class.
@@ -295,7 +295,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNodeConnection()
 	 * @generated
 	 */
-	int NODE_CONNECTION = 25;
+	int NODE_CONNECTION = 31;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl <em>Operation Region</em>}' class.
@@ -305,7 +305,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationRegion()
 	 * @generated
 	 */
-	int OPERATION_REGION = 29;
+	int OPERATION_REGION = 35;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PropertyDatumImpl <em>Property Datum</em>}' class.
@@ -315,7 +315,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPropertyDatum()
 	 * @generated
 	 */
-	int PROPERTY_DATUM = 33;
+	int PROPERTY_DATUM = 41;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl <em>Region</em>}' class.
@@ -325,7 +325,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRegion()
 	 * @generated
 	 */
-	int REGION = 35;
+	int REGION = 43;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingRegionImpl <em>Mapping Region</em>}' class.
@@ -335,7 +335,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getMappingRegion()
 	 * @generated
 	 */
-	int MAPPING_REGION = 19;
+	int MAPPING_REGION = 25;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigationEdgeImpl <em>Navigation Edge</em>}' class.
@@ -345,7 +345,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNavigationEdge()
 	 * @generated
 	 */
-	int NAVIGATION_EDGE = 23;
+	int NAVIGATION_EDGE = 29;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CastEdgeImpl <em>Cast Edge</em>}' class.
@@ -355,7 +355,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getCastEdge()
 	 * @generated
 	 */
-	int CAST_EDGE = 2;
+	int CAST_EDGE = 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.DependencyNodeImpl <em>Dependency Node</em>}' class.
@@ -365,7 +365,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getDependencyNode()
 	 * @generated
 	 */
-	int DEPENDENCY_NODE = 8;
+	int DEPENDENCY_NODE = 11;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ErrorNodeImpl <em>Error Node</em>}' class.
@@ -375,7 +375,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getErrorNode()
 	 * @generated
 	 */
-	int ERROR_NODE = 12;
+	int ERROR_NODE = 15;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ExpressionEdgeImpl <em>Expression Edge</em>}' class.
@@ -385,7 +385,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getExpressionEdge()
 	 * @generated
 	 */
-	int EXPRESSION_EDGE = 13;
+	int EXPRESSION_EDGE = 16;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.InputNodeImpl <em>Input Node</em>}' class.
@@ -395,7 +395,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getInputNode()
 	 * @generated
 	 */
-	int INPUT_NODE = 14;
+	int INPUT_NODE = 18;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.IteratedEdgeImpl <em>Iterated Edge</em>}' class.
@@ -405,7 +405,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getIteratedEdge()
 	 * @generated
 	 */
-	int ITERATED_EDGE = 15;
+	int ITERATED_EDGE = 19;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.VariableNodeImpl <em>Variable Node</em>}' class.
@@ -415,7 +415,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getVariableNode()
 	 * @generated
 	 */
-	int VARIABLE_NODE = 43;
+	int VARIABLE_NODE = 53;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.IteratorNodeImpl <em>Iterator Node</em>}' class.
@@ -425,7 +425,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getIteratorNode()
 	 * @generated
 	 */
-	int ITERATOR_NODE = 16;
+	int ITERATOR_NODE = 20;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ComposedNodeImpl <em>Composed Node</em>}' class.
@@ -435,7 +435,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getComposedNode()
 	 * @generated
 	 */
-	int COMPOSED_NODE = 4;
+	int COMPOSED_NODE = 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl <em>Micro Mapping Region</em>}' class.
@@ -445,7 +445,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getMicroMappingRegion()
 	 * @generated
 	 */
-	int MICRO_MAPPING_REGION = 20;
+	int MICRO_MAPPING_REGION = 26;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.LoadingRegionImpl <em>Loading Region</em>}' class.
@@ -455,7 +455,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getLoadingRegion()
 	 * @generated
 	 */
-	int LOADING_REGION = 18;
+	int LOADING_REGION = 23;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl <em>Named Mapping Region</em>}' class.
@@ -465,7 +465,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNamedMappingRegion()
 	 * @generated
 	 */
-	int NAMED_MAPPING_REGION = 21;
+	int NAMED_MAPPING_REGION = 27;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NullNodeImpl <em>Null Node</em>}' class.
@@ -475,7 +475,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNullNode()
 	 * @generated
 	 */
-	int NULL_NODE = 26;
+	int NULL_NODE = 32;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationNodeImpl <em>Operation Node</em>}' class.
@@ -485,7 +485,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationNode()
 	 * @generated
 	 */
-	int OPERATION_NODE = 28;
+	int OPERATION_NODE = 34;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PatternTypedNodeImpl <em>Pattern Typed Node</em>}' class.
@@ -495,7 +495,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPatternTypedNode()
 	 * @generated
 	 */
-	int PATTERN_TYPED_NODE = 30;
+	int PATTERN_TYPED_NODE = 38;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PatternVariableNodeImpl <em>Pattern Variable Node</em>}' class.
@@ -505,7 +505,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPatternVariableNode()
 	 * @generated
 	 */
-	int PATTERN_VARIABLE_NODE = 31;
+	int PATTERN_VARIABLE_NODE = 39;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PredicateEdgeImpl <em>Predicate Edge</em>}' class.
@@ -515,7 +515,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPredicateEdge()
 	 * @generated
 	 */
-	int PREDICATE_EDGE = 32;
+	int PREDICATE_EDGE = 40;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RecursionEdgeImpl <em>Recursion Edge</em>}' class.
@@ -525,7 +525,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRecursionEdge()
 	 * @generated
 	 */
-	int RECURSION_EDGE = 34;
+	int RECURSION_EDGE = 42;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl <em>Rule Region</em>}' class.
@@ -535,7 +535,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRuleRegion()
 	 * @generated
 	 */
-	int RULE_REGION = 36;
+	int RULE_REGION = 44;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl <em>Schedule Model</em>}' class.
@@ -545,7 +545,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getScheduleModel()
 	 * @generated
 	 */
-	int SCHEDULE_MODEL = 37;
+	int SCHEDULE_MODEL = 45;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl <em>Scheduled Region</em>}' class.
@@ -555,7 +555,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getScheduledRegion()
 	 * @generated
 	 */
-	int SCHEDULED_REGION = 38;
+	int SCHEDULED_REGION = 46;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.Symbolable <em>Symbolable</em>}' class.
@@ -565,7 +565,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getSymbolable()
 	 * @generated
 	 */
-	int SYMBOLABLE = 41;
+	int SYMBOLABLE = 50;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.UnknownNodeImpl <em>Unknown Node</em>}' class.
@@ -575,7 +575,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getUnknownNode()
 	 * @generated
 	 */
-	int UNKNOWN_NODE = 42;
+	int UNKNOWN_NODE = 52;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.KeyedValueNodeImpl <em>Keyed Value Node</em>}' class.
@@ -585,7 +585,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getKeyedValueNode()
 	 * @generated
 	 */
-	int KEYED_VALUE_NODE = 17;
+	int KEYED_VALUE_NODE = 22;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BooleanValueNodeImpl <em>Boolean Value Node</em>}' class.
@@ -595,7 +595,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getBooleanValueNode()
 	 * @generated
 	 */
-	int BOOLEAN_VALUE_NODE = 1;
+	int BOOLEAN_VALUE_NODE = 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.DispatchRegionImpl <em>Dispatch Region</em>}' class.
@@ -605,7 +605,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getDispatchRegion()
 	 * @generated
 	 */
-	int DISPATCH_REGION = 9;
+	int DISPATCH_REGION = 12;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationValueNodeImpl <em>Operation Value Node</em>}' class.
@@ -615,7 +615,368 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationValueNode()
 	 * @generated
 	 */
-	int OPERATION_VALUE_NODE = 27;
+	int OPERATION_VALUE_NODE = 33;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__EDGE_ROLE = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__NAME = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Owning Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__OWNING_REGION = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Source Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__SOURCE_NODE = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Target Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__TARGET_NODE = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE___ALL_OWNED_ELEMENTS = PivotPackage.ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The number of operations of the '<em>Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_EDGE__ANNOTATING_COMMENTS = EDGE__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_EDGE__OWNED_ANNOTATIONS = EDGE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_EDGE__OWNED_COMMENTS = EDGE__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_EDGE__OWNED_EXTENSIONS = EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_EDGE__EDGE_ROLE = EDGE__EDGE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_EDGE__NAME = EDGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owning Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_EDGE__OWNING_REGION = EDGE__OWNING_REGION;
+
+	/**
+	 * The feature id for the '<em><b>Source Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_EDGE__SOURCE_NODE = EDGE__SOURCE_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Target Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_EDGE__TARGET_NODE = EDGE__TARGET_NODE;
+
+	/**
+	 * The number of structural features of the '<em>Expression Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_EDGE_FEATURE_COUNT = EDGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_EDGE___ALL_OWNED_ELEMENTS = EDGE___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_EDGE___GET_VALUE__TYPE_STRING = EDGE___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The number of operations of the '<em>Expression Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_EDGE_OPERATION_COUNT = EDGE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ArgumentEdgeImpl <em>Argument Edge</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.ArgumentEdgeImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getArgumentEdge()
+	 * @generated
+	 */
+	int ARGUMENT_EDGE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_EDGE__ANNOTATING_COMMENTS = EXPRESSION_EDGE__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_EDGE__OWNED_ANNOTATIONS = EXPRESSION_EDGE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_EDGE__OWNED_COMMENTS = EXPRESSION_EDGE__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_EDGE__OWNED_EXTENSIONS = EXPRESSION_EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_EDGE__EDGE_ROLE = EXPRESSION_EDGE__EDGE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_EDGE__NAME = EXPRESSION_EDGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owning Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_EDGE__OWNING_REGION = EXPRESSION_EDGE__OWNING_REGION;
+
+	/**
+	 * The feature id for the '<em><b>Source Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_EDGE__SOURCE_NODE = EXPRESSION_EDGE__SOURCE_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Target Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_EDGE__TARGET_NODE = EXPRESSION_EDGE__TARGET_NODE;
+
+	/**
+	 * The number of structural features of the '<em>Argument Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_EDGE_FEATURE_COUNT = EXPRESSION_EDGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_EDGE___ALL_OWNED_ELEMENTS = EXPRESSION_EDGE___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_EDGE___GET_VALUE__TYPE_STRING = EXPRESSION_EDGE___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The number of operations of the '<em>Argument Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_EDGE_OPERATION_COUNT = EXPRESSION_EDGE_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1075,123 +1436,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int BOOLEAN_VALUE_NODE_OPERATION_COUNT = OPERATION_NODE_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDGE__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDGE__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDGE__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDGE__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
-
-	/**
-	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDGE__EDGE_ROLE = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDGE__NAME = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Owning Region</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDGE__OWNING_REGION = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Source Node</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDGE__SOURCE_NODE = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Target Node</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDGE__TARGET_NODE = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
-
-	/**
-	 * The number of structural features of the '<em>Edge</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDGE_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 5;
-
-	/**
-	 * The operation id for the '<em>All Owned Elements</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDGE___ALL_OWNED_ELEMENTS = PivotPackage.ELEMENT___ALL_OWNED_ELEMENTS;
-
-	/**
-	 * The operation id for the '<em>Get Value</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDGE___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
-
-	/**
-	 * The number of operations of the '<em>Edge</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EDGE_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1671,6 +1915,142 @@ public interface QVTschedulePackage extends EPackage {
 	int CLASS_DATUM_OPERATION_COUNT = ABSTRACT_DATUM_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CollectionPartEdgeImpl <em>Collection Part Edge</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.CollectionPartEdgeImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getCollectionPartEdge()
+	 * @generated
+	 */
+	int COLLECTION_PART_EDGE = 5;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_PART_EDGE__ANNOTATING_COMMENTS = ARGUMENT_EDGE__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_PART_EDGE__OWNED_ANNOTATIONS = ARGUMENT_EDGE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_PART_EDGE__OWNED_COMMENTS = ARGUMENT_EDGE__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_PART_EDGE__OWNED_EXTENSIONS = ARGUMENT_EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_PART_EDGE__EDGE_ROLE = ARGUMENT_EDGE__EDGE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_PART_EDGE__NAME = ARGUMENT_EDGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owning Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_PART_EDGE__OWNING_REGION = ARGUMENT_EDGE__OWNING_REGION;
+
+	/**
+	 * The feature id for the '<em><b>Source Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_PART_EDGE__SOURCE_NODE = ARGUMENT_EDGE__SOURCE_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Target Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_PART_EDGE__TARGET_NODE = ARGUMENT_EDGE__TARGET_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Part</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_PART_EDGE__REFERRED_PART = ARGUMENT_EDGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Collection Part Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_PART_EDGE_FEATURE_COUNT = ARGUMENT_EDGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_PART_EDGE___ALL_OWNED_ELEMENTS = ARGUMENT_EDGE___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_PART_EDGE___GET_VALUE__TYPE_STRING = ARGUMENT_EDGE___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The number of operations of the '<em>Collection Part Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_PART_EDGE_OPERATION_COUNT = ARGUMENT_EDGE_OPERATION_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2038,6 +2418,133 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int DATUM_CONNECTION_OPERATION_COUNT = CONNECTION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.DependencyEdgeImpl <em>Dependency Edge</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.DependencyEdgeImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getDependencyEdge()
+	 * @generated
+	 */
+	int DEPENDENCY_EDGE = 10;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_EDGE__ANNOTATING_COMMENTS = EDGE__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_EDGE__OWNED_ANNOTATIONS = EDGE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_EDGE__OWNED_COMMENTS = EDGE__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_EDGE__OWNED_EXTENSIONS = EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_EDGE__EDGE_ROLE = EDGE__EDGE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_EDGE__NAME = EDGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owning Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_EDGE__OWNING_REGION = EDGE__OWNING_REGION;
+
+	/**
+	 * The feature id for the '<em><b>Source Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_EDGE__SOURCE_NODE = EDGE__SOURCE_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Target Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_EDGE__TARGET_NODE = EDGE__TARGET_NODE;
+
+	/**
+	 * The number of structural features of the '<em>Dependency Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_EDGE_FEATURE_COUNT = EDGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_EDGE___ALL_OWNED_ELEMENTS = EDGE___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_EDGE___GET_VALUE__TYPE_STRING = EDGE___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The number of operations of the '<em>Dependency Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_EDGE_OPERATION_COUNT = EDGE_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -3030,13 +3537,23 @@ public interface QVTschedulePackage extends EPackage {
 	int ERROR_NODE_OPERATION_COUNT = NODE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.IncludesEdgeImpl <em>Includes Edge</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.IncludesEdgeImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getIncludesEdge()
+	 * @generated
+	 */
+	int INCLUDES_EDGE = 17;
+
+	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_EDGE__ANNOTATING_COMMENTS = EDGE__ANNOTATING_COMMENTS;
+	int INCLUDES_EDGE__ANNOTATING_COMMENTS = EXPRESSION_EDGE__ANNOTATING_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -3045,7 +3562,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_EDGE__OWNED_ANNOTATIONS = EDGE__OWNED_ANNOTATIONS;
+	int INCLUDES_EDGE__OWNED_ANNOTATIONS = EXPRESSION_EDGE__OWNED_ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
@@ -3054,7 +3571,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_EDGE__OWNED_COMMENTS = EDGE__OWNED_COMMENTS;
+	int INCLUDES_EDGE__OWNED_COMMENTS = EXPRESSION_EDGE__OWNED_COMMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
@@ -3063,7 +3580,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_EDGE__OWNED_EXTENSIONS = EDGE__OWNED_EXTENSIONS;
+	int INCLUDES_EDGE__OWNED_EXTENSIONS = EXPRESSION_EDGE__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
@@ -3072,7 +3589,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_EDGE__EDGE_ROLE = EDGE__EDGE_ROLE;
+	int INCLUDES_EDGE__EDGE_ROLE = EXPRESSION_EDGE__EDGE_ROLE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3081,7 +3598,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_EDGE__NAME = EDGE__NAME;
+	int INCLUDES_EDGE__NAME = EXPRESSION_EDGE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owning Region</b></em>' container reference.
@@ -3090,7 +3607,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_EDGE__OWNING_REGION = EDGE__OWNING_REGION;
+	int INCLUDES_EDGE__OWNING_REGION = EXPRESSION_EDGE__OWNING_REGION;
 
 	/**
 	 * The feature id for the '<em><b>Source Node</b></em>' reference.
@@ -3099,7 +3616,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_EDGE__SOURCE_NODE = EDGE__SOURCE_NODE;
+	int INCLUDES_EDGE__SOURCE_NODE = EXPRESSION_EDGE__SOURCE_NODE;
 
 	/**
 	 * The feature id for the '<em><b>Target Node</b></em>' reference.
@@ -3108,25 +3625,16 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_EDGE__TARGET_NODE = EDGE__TARGET_NODE;
+	int INCLUDES_EDGE__TARGET_NODE = EXPRESSION_EDGE__TARGET_NODE;
 
 	/**
-	 * The feature id for the '<em><b>Referred Object</b></em>' attribute.
+	 * The number of structural features of the '<em>Includes Edge</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_EDGE__REFERRED_OBJECT = EDGE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Expression Edge</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXPRESSION_EDGE_FEATURE_COUNT = EDGE_FEATURE_COUNT + 1;
+	int INCLUDES_EDGE_FEATURE_COUNT = EXPRESSION_EDGE_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -3135,7 +3643,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_EDGE___ALL_OWNED_ELEMENTS = EDGE___ALL_OWNED_ELEMENTS;
+	int INCLUDES_EDGE___ALL_OWNED_ELEMENTS = EXPRESSION_EDGE___ALL_OWNED_ELEMENTS;
 
 	/**
 	 * The operation id for the '<em>Get Value</em>' operation.
@@ -3144,16 +3652,16 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_EDGE___GET_VALUE__TYPE_STRING = EDGE___GET_VALUE__TYPE_STRING;
+	int INCLUDES_EDGE___GET_VALUE__TYPE_STRING = EXPRESSION_EDGE___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The number of operations of the '<em>Expression Edge</em>' class.
+	 * The number of operations of the '<em>Includes Edge</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXPRESSION_EDGE_OPERATION_COUNT = EDGE_OPERATION_COUNT + 0;
+	int INCLUDES_EDGE_OPERATION_COUNT = EXPRESSION_EDGE_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -3723,6 +4231,142 @@ public interface QVTschedulePackage extends EPackage {
 	int ITERATOR_NODE_OPERATION_COUNT = VARIABLE_NODE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.KeyPartEdgeImpl <em>Key Part Edge</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.KeyPartEdgeImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getKeyPartEdge()
+	 * @generated
+	 */
+	int KEY_PART_EDGE = 21;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_PART_EDGE__ANNOTATING_COMMENTS = ARGUMENT_EDGE__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_PART_EDGE__OWNED_ANNOTATIONS = ARGUMENT_EDGE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_PART_EDGE__OWNED_COMMENTS = ARGUMENT_EDGE__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_PART_EDGE__OWNED_EXTENSIONS = ARGUMENT_EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_PART_EDGE__EDGE_ROLE = ARGUMENT_EDGE__EDGE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_PART_EDGE__NAME = ARGUMENT_EDGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owning Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_PART_EDGE__OWNING_REGION = ARGUMENT_EDGE__OWNING_REGION;
+
+	/**
+	 * The feature id for the '<em><b>Source Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_PART_EDGE__SOURCE_NODE = ARGUMENT_EDGE__SOURCE_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Target Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_PART_EDGE__TARGET_NODE = ARGUMENT_EDGE__TARGET_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Part</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_PART_EDGE__REFERRED_PART = ARGUMENT_EDGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Key Part Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_PART_EDGE_FEATURE_COUNT = ARGUMENT_EDGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_PART_EDGE___ALL_OWNED_ELEMENTS = ARGUMENT_EDGE___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_PART_EDGE___GET_VALUE__TYPE_STRING = ARGUMENT_EDGE___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The number of operations of the '<em>Key Part Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_PART_EDGE_OPERATION_COUNT = ARGUMENT_EDGE_OPERATION_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4000,6 +4644,142 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int LOADING_REGION_OPERATION_COUNT = REGION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MapPartEdgeImpl <em>Map Part Edge</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.MapPartEdgeImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getMapPartEdge()
+	 * @generated
+	 */
+	int MAP_PART_EDGE = 24;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_PART_EDGE__ANNOTATING_COMMENTS = ARGUMENT_EDGE__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_PART_EDGE__OWNED_ANNOTATIONS = ARGUMENT_EDGE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_PART_EDGE__OWNED_COMMENTS = ARGUMENT_EDGE__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_PART_EDGE__OWNED_EXTENSIONS = ARGUMENT_EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_PART_EDGE__EDGE_ROLE = ARGUMENT_EDGE__EDGE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_PART_EDGE__NAME = ARGUMENT_EDGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owning Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_PART_EDGE__OWNING_REGION = ARGUMENT_EDGE__OWNING_REGION;
+
+	/**
+	 * The feature id for the '<em><b>Source Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_PART_EDGE__SOURCE_NODE = ARGUMENT_EDGE__SOURCE_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Target Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_PART_EDGE__TARGET_NODE = ARGUMENT_EDGE__TARGET_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Part</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_PART_EDGE__REFERRED_PART = ARGUMENT_EDGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Map Part Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_PART_EDGE_FEATURE_COUNT = ARGUMENT_EDGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_PART_EDGE___ALL_OWNED_ELEMENTS = ARGUMENT_EDGE___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_PART_EDGE___GET_VALUE__TYPE_STRING = ARGUMENT_EDGE___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The number of operations of the '<em>Map Part Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_PART_EDGE_OPERATION_COUNT = ARGUMENT_EDGE_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -5073,6 +5853,287 @@ public interface QVTschedulePackage extends EPackage {
 	int OPERATION_REGION_OPERATION_COUNT = REGION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationParameterEdgeImpl <em>Operation Parameter Edge</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.OperationParameterEdgeImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationParameterEdge()
+	 * @generated
+	 */
+	int OPERATION_PARAMETER_EDGE = 36;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_PARAMETER_EDGE__ANNOTATING_COMMENTS = ARGUMENT_EDGE__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_PARAMETER_EDGE__OWNED_ANNOTATIONS = ARGUMENT_EDGE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_PARAMETER_EDGE__OWNED_COMMENTS = ARGUMENT_EDGE__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_PARAMETER_EDGE__OWNED_EXTENSIONS = ARGUMENT_EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_PARAMETER_EDGE__EDGE_ROLE = ARGUMENT_EDGE__EDGE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_PARAMETER_EDGE__NAME = ARGUMENT_EDGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owning Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_PARAMETER_EDGE__OWNING_REGION = ARGUMENT_EDGE__OWNING_REGION;
+
+	/**
+	 * The feature id for the '<em><b>Source Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_PARAMETER_EDGE__SOURCE_NODE = ARGUMENT_EDGE__SOURCE_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Target Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_PARAMETER_EDGE__TARGET_NODE = ARGUMENT_EDGE__TARGET_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Parameter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_PARAMETER_EDGE__REFERRED_PARAMETER = ARGUMENT_EDGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Parameter Index</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_PARAMETER_EDGE__PARAMETER_INDEX = ARGUMENT_EDGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Operation Parameter Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_PARAMETER_EDGE_FEATURE_COUNT = ARGUMENT_EDGE_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_PARAMETER_EDGE___ALL_OWNED_ELEMENTS = ARGUMENT_EDGE___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_PARAMETER_EDGE___GET_VALUE__TYPE_STRING = ARGUMENT_EDGE___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The number of operations of the '<em>Operation Parameter Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_PARAMETER_EDGE_OPERATION_COUNT = ARGUMENT_EDGE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationSelfEdgeImpl <em>Operation Self Edge</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.OperationSelfEdgeImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationSelfEdge()
+	 * @generated
+	 */
+	int OPERATION_SELF_EDGE = 37;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_SELF_EDGE__ANNOTATING_COMMENTS = ARGUMENT_EDGE__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_SELF_EDGE__OWNED_ANNOTATIONS = ARGUMENT_EDGE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_SELF_EDGE__OWNED_COMMENTS = ARGUMENT_EDGE__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_SELF_EDGE__OWNED_EXTENSIONS = ARGUMENT_EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_SELF_EDGE__EDGE_ROLE = ARGUMENT_EDGE__EDGE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_SELF_EDGE__NAME = ARGUMENT_EDGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owning Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_SELF_EDGE__OWNING_REGION = ARGUMENT_EDGE__OWNING_REGION;
+
+	/**
+	 * The feature id for the '<em><b>Source Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_SELF_EDGE__SOURCE_NODE = ARGUMENT_EDGE__SOURCE_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Target Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_SELF_EDGE__TARGET_NODE = ARGUMENT_EDGE__TARGET_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_SELF_EDGE__REFERRED_TYPE = ARGUMENT_EDGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Operation Self Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_SELF_EDGE_FEATURE_COUNT = ARGUMENT_EDGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_SELF_EDGE___ALL_OWNED_ELEMENTS = ARGUMENT_EDGE___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_SELF_EDGE___GET_VALUE__TYPE_STRING = ARGUMENT_EDGE___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The number of operations of the '<em>Operation Self Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_SELF_EDGE_OPERATION_COUNT = ARGUMENT_EDGE_OPERATION_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6099,6 +7160,142 @@ public interface QVTschedulePackage extends EPackage {
 	int SCHEDULED_REGION_OPERATION_COUNT = REGION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ShadowPartEdgeImpl <em>Shadow Part Edge</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.ShadowPartEdgeImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getShadowPartEdge()
+	 * @generated
+	 */
+	int SHADOW_PART_EDGE = 47;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHADOW_PART_EDGE__ANNOTATING_COMMENTS = ARGUMENT_EDGE__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHADOW_PART_EDGE__OWNED_ANNOTATIONS = ARGUMENT_EDGE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHADOW_PART_EDGE__OWNED_COMMENTS = ARGUMENT_EDGE__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHADOW_PART_EDGE__OWNED_EXTENSIONS = ARGUMENT_EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHADOW_PART_EDGE__EDGE_ROLE = ARGUMENT_EDGE__EDGE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHADOW_PART_EDGE__NAME = ARGUMENT_EDGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owning Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHADOW_PART_EDGE__OWNING_REGION = ARGUMENT_EDGE__OWNING_REGION;
+
+	/**
+	 * The feature id for the '<em><b>Source Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHADOW_PART_EDGE__SOURCE_NODE = ARGUMENT_EDGE__SOURCE_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Target Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHADOW_PART_EDGE__TARGET_NODE = ARGUMENT_EDGE__TARGET_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Part</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHADOW_PART_EDGE__REFERRED_PART = ARGUMENT_EDGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Shadow Part Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHADOW_PART_EDGE_FEATURE_COUNT = ARGUMENT_EDGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHADOW_PART_EDGE___ALL_OWNED_ELEMENTS = ARGUMENT_EDGE___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHADOW_PART_EDGE___GET_VALUE__TYPE_STRING = ARGUMENT_EDGE___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The number of operations of the '<em>Shadow Part Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHADOW_PART_EDGE_OPERATION_COUNT = ARGUMENT_EDGE_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.SuccessEdgeImpl <em>Success Edge</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6106,7 +7303,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getSuccessEdge()
 	 * @generated
 	 */
-	int SUCCESS_EDGE = 39;
+	int SUCCESS_EDGE = 48;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -6287,7 +7484,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getSuccessNode()
 	 * @generated
 	 */
-	int SUCCESS_NODE = 40;
+	int SUCCESS_NODE = 49;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -6461,6 +7658,142 @@ public interface QVTschedulePackage extends EPackage {
 	int SYMBOLABLE_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.TuplePartEdgeImpl <em>Tuple Part Edge</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.TuplePartEdgeImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getTuplePartEdge()
+	 * @generated
+	 */
+	int TUPLE_PART_EDGE = 51;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_PART_EDGE__ANNOTATING_COMMENTS = ARGUMENT_EDGE__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_PART_EDGE__OWNED_ANNOTATIONS = ARGUMENT_EDGE__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_PART_EDGE__OWNED_COMMENTS = ARGUMENT_EDGE__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_PART_EDGE__OWNED_EXTENSIONS = ARGUMENT_EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_PART_EDGE__EDGE_ROLE = ARGUMENT_EDGE__EDGE_ROLE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_PART_EDGE__NAME = ARGUMENT_EDGE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owning Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_PART_EDGE__OWNING_REGION = ARGUMENT_EDGE__OWNING_REGION;
+
+	/**
+	 * The feature id for the '<em><b>Source Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_PART_EDGE__SOURCE_NODE = ARGUMENT_EDGE__SOURCE_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Target Node</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_PART_EDGE__TARGET_NODE = ARGUMENT_EDGE__TARGET_NODE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Part</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_PART_EDGE__REFERRED_PART = ARGUMENT_EDGE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Tuple Part Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_PART_EDGE_FEATURE_COUNT = ARGUMENT_EDGE_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_PART_EDGE___ALL_OWNED_ELEMENTS = ARGUMENT_EDGE___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_PART_EDGE___GET_VALUE__TYPE_STRING = ARGUMENT_EDGE___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The number of operations of the '<em>Tuple Part Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_PART_EDGE_OPERATION_COUNT = ARGUMENT_EDGE_OPERATION_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6612,7 +7945,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getVerdictRegion()
 	 * @generated
 	 */
-	int VERDICT_REGION = 44;
+	int VERDICT_REGION = 54;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -6793,7 +8126,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getConnectionRole()
 	 * @generated
 	 */
-	int CONNECTION_ROLE = 45;
+	int CONNECTION_ROLE = 55;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum <em>Abstract Datum</em>}'.
@@ -6837,6 +8170,16 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAbstractDatum_ProducingRegions();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.ArgumentEdge <em>Argument Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Argument Edge</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ArgumentEdge
+	 * @generated
+	 */
+	EClass getArgumentEdge();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.BooleanValueNode <em>Boolean Value Node</em>}'.
@@ -6957,6 +8300,27 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getClassDatum_SuperClassDatums();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.CollectionPartEdge <em>Collection Part Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Collection Part Edge</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.CollectionPartEdge
+	 * @generated
+	 */
+	EClass getCollectionPartEdge();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.CollectionPartEdge#getReferredPart <em>Referred Part</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Part</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.CollectionPartEdge#getReferredPart()
+	 * @see #getCollectionPartEdge()
+	 * @generated
+	 */
+	EReference getCollectionPartEdge_ReferredPart();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.ComposedNode <em>Composed Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7039,6 +8403,16 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDatumConnection_SourceEnds();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.DependencyEdge <em>Dependency Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Dependency Edge</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.DependencyEdge
+	 * @generated
+	 */
+	EClass getDependencyEdge();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.DependencyNode <em>Dependency Node</em>}'.
@@ -7287,6 +8661,27 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getScheduledRegion_ReferredTransformation();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge <em>Shadow Part Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Shadow Part Edge</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge
+	 * @generated
+	 */
+	EClass getShadowPartEdge();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge#getReferredPart <em>Referred Part</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Part</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge#getReferredPart()
+	 * @see #getShadowPartEdge()
+	 * @generated
+	 */
+	EReference getShadowPartEdge_ReferredPart();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge <em>Success Edge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7326,6 +8721,27 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSymbolable_SymbolName();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.TuplePartEdge <em>Tuple Part Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Tuple Part Edge</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.TuplePartEdge
+	 * @generated
+	 */
+	EClass getTuplePartEdge();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.TuplePartEdge#getReferredPart <em>Referred Part</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Part</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.TuplePartEdge#getReferredPart()
+	 * @see #getTuplePartEdge()
+	 * @generated
+	 */
+	EReference getTuplePartEdge_ReferredPart();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.UnknownNode <em>Unknown Node</em>}'.
@@ -7410,15 +8826,14 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getExpressionEdge();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.ExpressionEdge#getReferredObject <em>Referred Object</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.IncludesEdge <em>Includes Edge</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Referred Object</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ExpressionEdge#getReferredObject()
-	 * @see #getExpressionEdge()
+	 * @return the meta object for class '<em>Includes Edge</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.IncludesEdge
 	 * @generated
 	 */
-	EAttribute getExpressionEdge_ReferredObject();
+	EClass getIncludesEdge();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.InputNode <em>Input Node</em>}'.
@@ -7449,6 +8864,27 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getIteratorNode();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge <em>Key Part Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Key Part Edge</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge
+	 * @generated
+	 */
+	EClass getKeyPartEdge();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge#getReferredPart <em>Referred Part</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Part</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge#getReferredPart()
+	 * @see #getKeyPartEdge()
+	 * @generated
+	 */
+	EReference getKeyPartEdge_ReferredPart();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode <em>Keyed Value Node</em>}'.
@@ -7491,6 +8927,27 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getLoadingRegion_OwningScheduledRegion();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.MapPartEdge <em>Map Part Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Map Part Edge</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MapPartEdge
+	 * @generated
+	 */
+	EClass getMapPartEdge();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.MapPartEdge#getReferredPart <em>Referred Part</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Part</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MapPartEdge#getReferredPart()
+	 * @see #getMapPartEdge()
+	 * @generated
+	 */
+	EReference getMapPartEdge_ReferredPart();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingRegion <em>Mapping Region</em>}'.
@@ -7933,6 +9390,59 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getOperationRegion_OwningScheduleModel();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge <em>Operation Parameter Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Operation Parameter Edge</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge
+	 * @generated
+	 */
+	EClass getOperationParameterEdge();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge#getReferredParameter <em>Referred Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Parameter</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge#getReferredParameter()
+	 * @see #getOperationParameterEdge()
+	 * @generated
+	 */
+	EReference getOperationParameterEdge_ReferredParameter();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge#getParameterIndex <em>Parameter Index</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Parameter Index</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge#getParameterIndex()
+	 * @see #getOperationParameterEdge()
+	 * @generated
+	 */
+	EAttribute getOperationParameterEdge_ParameterIndex();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationSelfEdge <em>Operation Self Edge</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Operation Self Edge</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.OperationSelfEdge
+	 * @generated
+	 */
+	EClass getOperationSelfEdge();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationSelfEdge#getReferredType <em>Referred Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Type</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.OperationSelfEdge#getReferredType()
+	 * @see #getOperationSelfEdge()
+	 * @generated
+	 */
+	EReference getOperationSelfEdge_ReferredType();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.PatternTypedNode <em>Pattern Typed Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8203,6 +9713,16 @@ public interface QVTschedulePackage extends EPackage {
 		EReference ABSTRACT_DATUM__PRODUCING_REGIONS = eINSTANCE.getAbstractDatum_ProducingRegions();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ArgumentEdgeImpl <em>Argument Edge</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.ArgumentEdgeImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getArgumentEdge()
+		 * @generated
+		 */
+		EClass ARGUMENT_EDGE = eINSTANCE.getArgumentEdge();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BooleanValueNodeImpl <em>Boolean Value Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8297,6 +9817,24 @@ public interface QVTschedulePackage extends EPackage {
 		EReference CLASS_DATUM__SUPER_CLASS_DATUMS = eINSTANCE.getClassDatum_SuperClassDatums();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CollectionPartEdgeImpl <em>Collection Part Edge</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.CollectionPartEdgeImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getCollectionPartEdge()
+		 * @generated
+		 */
+		EClass COLLECTION_PART_EDGE = eINSTANCE.getCollectionPartEdge();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Part</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COLLECTION_PART_EDGE__REFERRED_PART = eINSTANCE.getCollectionPartEdge_ReferredPart();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ComposedNodeImpl <em>Composed Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8367,6 +9905,16 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference DATUM_CONNECTION__SOURCE_ENDS = eINSTANCE.getDatumConnection_SourceEnds();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.DependencyEdgeImpl <em>Dependency Edge</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.DependencyEdgeImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getDependencyEdge()
+		 * @generated
+		 */
+		EClass DEPENDENCY_EDGE = eINSTANCE.getDependencyEdge();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.DependencyNodeImpl <em>Dependency Node</em>}' class.
@@ -8567,6 +10115,24 @@ public interface QVTschedulePackage extends EPackage {
 		EReference SCHEDULED_REGION__REFERRED_TRANSFORMATION = eINSTANCE.getScheduledRegion_ReferredTransformation();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ShadowPartEdgeImpl <em>Shadow Part Edge</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.ShadowPartEdgeImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getShadowPartEdge()
+		 * @generated
+		 */
+		EClass SHADOW_PART_EDGE = eINSTANCE.getShadowPartEdge();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Part</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SHADOW_PART_EDGE__REFERRED_PART = eINSTANCE.getShadowPartEdge_ReferredPart();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.SuccessEdgeImpl <em>Success Edge</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8603,6 +10169,24 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SYMBOLABLE__SYMBOL_NAME = eINSTANCE.getSymbolable_SymbolName();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.TuplePartEdgeImpl <em>Tuple Part Edge</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.TuplePartEdgeImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getTuplePartEdge()
+		 * @generated
+		 */
+		EClass TUPLE_PART_EDGE = eINSTANCE.getTuplePartEdge();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Part</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TUPLE_PART_EDGE__REFERRED_PART = eINSTANCE.getTuplePartEdge_ReferredPart();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.UnknownNodeImpl <em>Unknown Node</em>}' class.
@@ -8681,12 +10265,14 @@ public interface QVTschedulePackage extends EPackage {
 		EClass EXPRESSION_EDGE = eINSTANCE.getExpressionEdge();
 
 		/**
-		 * The meta object literal for the '<em><b>Referred Object</b></em>' attribute feature.
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.IncludesEdgeImpl <em>Includes Edge</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.IncludesEdgeImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getIncludesEdge()
 		 * @generated
 		 */
-		EAttribute EXPRESSION_EDGE__REFERRED_OBJECT = eINSTANCE.getExpressionEdge_ReferredObject();
+		EClass INCLUDES_EDGE = eINSTANCE.getIncludesEdge();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.InputNodeImpl <em>Input Node</em>}' class.
@@ -8717,6 +10303,24 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass ITERATOR_NODE = eINSTANCE.getIteratorNode();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.KeyPartEdgeImpl <em>Key Part Edge</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.KeyPartEdgeImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getKeyPartEdge()
+		 * @generated
+		 */
+		EClass KEY_PART_EDGE = eINSTANCE.getKeyPartEdge();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Part</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference KEY_PART_EDGE__REFERRED_PART = eINSTANCE.getKeyPartEdge_ReferredPart();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.KeyedValueNodeImpl <em>Keyed Value Node</em>}' class.
@@ -8753,6 +10357,24 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference LOADING_REGION__OWNING_SCHEDULED_REGION = eINSTANCE.getLoadingRegion_OwningScheduledRegion();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MapPartEdgeImpl <em>Map Part Edge</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.MapPartEdgeImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getMapPartEdge()
+		 * @generated
+		 */
+		EClass MAP_PART_EDGE = eINSTANCE.getMapPartEdge();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Part</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAP_PART_EDGE__REFERRED_PART = eINSTANCE.getMapPartEdge_ReferredPart();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingRegionImpl <em>Mapping Region</em>}' class.
@@ -9103,6 +10725,50 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference OPERATION_REGION__OWNING_SCHEDULE_MODEL = eINSTANCE.getOperationRegion_OwningScheduleModel();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationParameterEdgeImpl <em>Operation Parameter Edge</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.OperationParameterEdgeImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationParameterEdge()
+		 * @generated
+		 */
+		EClass OPERATION_PARAMETER_EDGE = eINSTANCE.getOperationParameterEdge();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Parameter</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION_PARAMETER_EDGE__REFERRED_PARAMETER = eINSTANCE.getOperationParameterEdge_ReferredParameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Parameter Index</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute OPERATION_PARAMETER_EDGE__PARAMETER_INDEX = eINSTANCE.getOperationParameterEdge_ParameterIndex();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationSelfEdgeImpl <em>Operation Self Edge</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.OperationSelfEdgeImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationSelfEdge()
+		 * @generated
+		 */
+		EClass OPERATION_SELF_EDGE = eINSTANCE.getOperationSelfEdge();
+
+		/**
+		 * The meta object literal for the '<em><b>Referred Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference OPERATION_SELF_EDGE__REFERRED_TYPE = eINSTANCE.getOperationSelfEdge_ReferredType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PatternTypedNodeImpl <em>Pattern Typed Node</em>}' class.

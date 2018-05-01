@@ -62,6 +62,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull ClassDatum createClassDatum();
 
 	/**
+	 * Returns a new object of class '<em>Collection Part Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Collection Part Edge</em>'.
+	 * @generated
+	 */
+	@NonNull CollectionPartEdge createCollectionPartEdge();
+
+	/**
 	 * Returns a new object of class '<em>Composed Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -69,6 +78,15 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull ComposedNode createComposedNode();
+
+	/**
+	 * Returns a new object of class '<em>Dependency Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Dependency Edge</em>'.
+	 * @generated
+	 */
+	@NonNull DependencyEdge createDependencyEdge();
 
 	/**
 	 * Returns a new object of class '<em>Dependency Node</em>'.
@@ -107,13 +125,13 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull ErrorNode createErrorNode();
 
 	/**
-	 * Returns a new object of class '<em>Expression Edge</em>'.
+	 * Returns a new object of class '<em>Includes Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Expression Edge</em>'.
+	 * @return a new object of class '<em>Includes Edge</em>'.
 	 * @generated
 	 */
-	@NonNull ExpressionEdge createExpressionEdge();
+	@NonNull IncludesEdge createIncludesEdge();
 
 	/**
 	 * Returns a new object of class '<em>Input Node</em>'.
@@ -143,6 +161,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull IteratorNode createIteratorNode();
 
 	/**
+	 * Returns a new object of class '<em>Key Part Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Key Part Edge</em>'.
+	 * @generated
+	 */
+	@NonNull KeyPartEdge createKeyPartEdge();
+
+	/**
 	 * Returns a new object of class '<em>Keyed Value Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -159,6 +186,15 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull LoadingRegion createLoadingRegion();
+
+	/**
+	 * Returns a new object of class '<em>Map Part Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Map Part Edge</em>'.
+	 * @generated
+	 */
+	@NonNull MapPartEdge createMapPartEdge();
 
 	/**
 	 * Returns a new object of class '<em>Micro Mapping Region</em>'.
@@ -233,6 +269,24 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull OperationRegion createOperationRegion();
 
 	/**
+	 * Returns a new object of class '<em>Operation Parameter Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Operation Parameter Edge</em>'.
+	 * @generated
+	 */
+	@NonNull OperationParameterEdge createOperationParameterEdge();
+
+	/**
+	 * Returns a new object of class '<em>Operation Self Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Operation Self Edge</em>'.
+	 * @generated
+	 */
+	@NonNull OperationSelfEdge createOperationSelfEdge();
+
+	/**
 	 * Returns a new object of class '<em>Pattern Typed Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -305,6 +359,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull ScheduledRegion createScheduledRegion();
 
 	/**
+	 * Returns a new object of class '<em>Shadow Part Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Shadow Part Edge</em>'.
+	 * @generated
+	 */
+	@NonNull ShadowPartEdge createShadowPartEdge();
+
+	/**
 	 * Returns a new object of class '<em>Success Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -321,6 +384,15 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull SuccessNode createSuccessNode();
+
+	/**
+	 * Returns a new object of class '<em>Tuple Part Edge</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tuple Part Edge</em>'.
+	 * @generated
+	 */
+	@NonNull TuplePartEdge createTuplePartEdge();
 
 	/**
 	 * Returns a new object of class '<em>Unknown Node</em>'.
