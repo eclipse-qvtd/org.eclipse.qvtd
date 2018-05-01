@@ -67,10 +67,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.PatternVariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
-import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
@@ -86,68 +84,6 @@ import com.google.common.collect.Lists;
  */
 public class RelationAnalysis extends RuleAnalysis
 {
-	/**
-	 * An Activator assists in the synthesis of the activator for a top relation.
-	 */
-	protected class zzActivator extends RegionHelper<@NonNull RuleRegion>
-	{
-		public zzActivator(@NonNull RuleRegion ruleRegion) {
-			super(RelationAnalysis.this.getScheduleManager(), ruleRegion);
-			assert getRule().isIsTopLevel();
-		}
-
-		public void gatherRuleRegions(@NonNull List<@NonNull RuleRegion> ruleRegions) {
-			ruleRegions.add(region);
-		}
-
-		/**
-		 * Create a realized trace node, a predicated guard node per input root variable and a
-		 * predicated property edge between them.
-		 */
-		public void synthesizeElements() {
-			RelationAnalysis2TraceClass relationAnalysis2traceClass = getRuleAnalysis2TraceGroup().getRuleAnalysis2TraceClass();
-			//
-			//	Create the trace node
-			//
-			TypedModel traceTypedModel = getTraceTypedModel();
-			ClassDatum dispatchedClassDatum = scheduleManager.getClassDatum(traceTypedModel, relationAnalysis2traceClass.getMiddleClass());
-			//			traceNode = createRealizedNode(QVTrelationNameGenerator.TRACECLASS_PROPERTY_NAME, dispatchedClassDatum, true);
-			PatternVariableNode traceNode = QVTscheduleFactory.eINSTANCE.createPatternVariableNode();
-			traceNode.initialize(Role.SPECULATION, region, QVTrelationNameGenerator.TRACECLASS_PROPERTY_NAME, dispatchedClassDatum);
-			traceNode.setUtility(Utility.TRACE);
-			traceNode.setMatched(true);
-			//
-			//	Create the trace node assignments to guard nodes
-			//
-			Relation relation = getRule();
-
-			List<@NonNull Node> preferredHeadNodes = Lists.newArrayList(QVTscheduleUtil.getHeadNodes(RelationAnalysis.this.region));
-			Iterable<@NonNull Node> headNodes = RuleHeadAnalysis.computeRuleHeadNodes(scheduleManager, RelationAnalysis.this.region, preferredHeadNodes);
-			List<@NonNull Node> headNodesList = QVTscheduleUtil.Internal.getHeadNodesList(RelationAnalysis.this.region);
-			headNodesList.clear();
-			Iterables.addAll(headNodesList, headNodes);
-
-
-
-
-
-			for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
-				if (scheduleManager.isInput(relationDomain)) {
-					for (@NonNull VariableDeclaration variable : QVTrelationUtil.getRootVariables(relationDomain)) {
-						VariableDeclaration2TraceProperty variableDeclaration2traceClassProperty = relationAnalysis2traceClass.getVariableDeclaration2TraceProperty(variable);
-						Property traceClassProperty = variableDeclaration2traceClassProperty.getTraceProperty();
-						Node targetNode = createOldNode(variable);
-						createRealizedNavigationEdge(traceNode, traceClassProperty, targetNode, false);
-						region.getHeadNodes().add(targetNode);
-						targetNode.setHead();
-					}
-				}
-			}
-			//
-			UtilityAnalysis.assignUtilities(scheduleManager, region);
-		}
-	}
-
 	/**
 	 * A Dispatch assists in the synthesis of the dispatch for an override hierarchy.
 	 */
@@ -1292,11 +1228,10 @@ public class RelationAnalysis extends RuleAnalysis
 		ClassDatum classDatum = ((KeyedValueNode)keyNode).getClassDatumValue();
 		assert classDatum != null;
 		for (@NonNull Property property : property2node.keySet()) {
-			String argName = "«" + QVTrelationUtil.getName(property) + "»";
 			Node node = property2node.get(property);
 			assert node != null;
 			PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(classDatum, property);
-			createExpressionEdge(node, argName, keyNode, propertyDatum);
+			createKeyPartEdge(node, propertyDatum, keyNode);
 		}
 		return null;
 	}
@@ -1333,8 +1268,8 @@ public class RelationAnalysis extends RuleAnalysis
 				Node selfNode = residueNode;
 				assert selfNode != null;
 				residueNode = createOperationNode(isUnconditional(member), collectionExcludingOperation, collectionTemplateExp, residueNode, memberNode);
-				createExpressionEdge(selfNode, "«self»", residueNode, Integer.valueOf(0));
-				createExpressionEdge(memberNode, "«object»", residueNode, Integer.valueOf(1));
+				createOperationSelfEdge(selfNode, QVTrelationUtil.getType(collectionExcludingOperation), residueNode);
+				createOperationParameterEdge(memberNode, QVTrelationUtil.getOwnedParameter(collectionExcludingOperation, 0), -1, residueNode);
 			}
 			memberNode = member.accept(expressionSynthesizer);
 			assert memberNode != null;
@@ -1348,12 +1283,12 @@ public class RelationAnalysis extends RuleAnalysis
 				Node selfNode = residueNode;
 				assert selfNode != null;
 				residueNode = createOperationNode(isUnconditional(rest), collectionExcludingOperation, collectionTemplateExp, residueNode, memberNode);
-				createExpressionEdge(selfNode, "«self»", residueNode);
-				createExpressionEdge(memberNode, "«object»", residueNode);
+				createOperationSelfEdge(selfNode, QVTrelationUtil.getType(collectionExcludingOperation), residueNode);
+				createOperationParameterEdge(memberNode, QVTrelationUtil.getOwnedParameter(collectionExcludingOperation, 0), -1, residueNode);
 			}
 			Node restNode = rest.accept(expressionSynthesizer);
 			assert restNode != null;
-			createPredicateEdge(residueNode, EQUALS_NAME, restNode);
+			createEqualsEdge(residueNode, restNode);
 		}
 		if (rest == null) {
 			Node isEmptyNode = createOperationNode(isUnconditional(collectionTemplateExp), "isEmpty", collectionTemplateExp, residueNode);
@@ -1441,7 +1376,7 @@ public class RelationAnalysis extends RuleAnalysis
 				assert memberNode != null;
 				//			memberNodes.add(memberNode);
 				//			createPredicateEdge(collectionNode, "head-" + i++, memberNode);
-				createRealizedExpressionEdge(collectionNode, INCLUDES_NAME, memberNode);
+				createRealizedIncludesEdge(collectionNode, memberNode);
 			}
 		}
 	}

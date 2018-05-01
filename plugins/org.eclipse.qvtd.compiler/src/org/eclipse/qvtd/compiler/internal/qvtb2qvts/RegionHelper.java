@@ -3,21 +3,30 @@ package org.eclipse.qvtd.compiler.internal.qvtb2qvts;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
+import org.eclipse.ocl.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.pivot.DataType;
+import org.eclipse.ocl.pivot.MapLiteralPart;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.ShadowPart;
+import org.eclipse.ocl.pivot.TupleLiteralPart;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.Nameable;
+import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.BooleanValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.CollectionPartEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.DependencyEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.DependencyNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.ErrorNode;
@@ -25,25 +34,31 @@ import org.eclipse.qvtd.pivot.qvtschedule.ExpressionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.InputNode;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratorNode;
+import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
+import org.eclipse.qvtd.pivot.qvtschedule.MapPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NullNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
+import org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.OperationSelfEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternTypedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternVariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
+import org.eclipse.qvtd.pivot.qvtschedule.TuplePartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -52,6 +67,10 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 public class RegionHelper<R extends Region> extends QVTscheduleUtil implements Nameable
 {
+	public static final @NonNull String EQUALS_NAME = "«equals»";
+	public static final @NonNull String INCLUDES_NAME = "«includes»";
+	public static final @NonNull String LOOP_ITERATOR_NAME = "«iterator»";
+
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull R region;
 
@@ -76,6 +95,15 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		castEdge.initialize(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
 		castEdge.initializeProperty(source2targetProperty);
 		return castEdge;
+	}
+
+	public @NonNull Edge createCollectionPartEdge(@NonNull Node sourceNode, @NonNull CollectionLiteralPart collectionPart, @NonNull Node targetNode) {
+		Role edgeRole = getNodeRole(sourceNode);
+		CollectionPartEdge edge = QVTscheduleFactory.eINSTANCE.createCollectionPartEdge();
+		edge.setReferredPart(collectionPart);
+		String label = "«" + collectionPart.getName() + "»";
+		edge.initialize(edgeRole, sourceNode, label, targetNode);
+		return edge;
 	}
 
 	public @NonNull Node createDataTypeNode(@NonNull String name, @NonNull Node sourceNode, @NonNull NavigationCallExp navigationCallExp) {
@@ -129,6 +157,13 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return createDependencyNode(name, classDatum);
 	}
 
+	public @NonNull Edge createDependencyEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
+		Role edgeRole = getNodeRole(sourceNode);
+		DependencyEdge edge = QVTscheduleFactory.eINSTANCE.createDependencyEdge();
+		edge.initialize(edgeRole, sourceNode, name, targetNode);
+		return edge;
+	}
+
 	public @NonNull Node createDependencyNode(@NonNull String name, @NonNull ClassDatum classDatum) {
 		Role nodeRole = Role.PREDICATED;
 		DependencyNode node = QVTscheduleFactory.eINSTANCE.createDependencyNode();
@@ -157,8 +192,12 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	//	and then other initializers are checked as predicates using equals edges.
 	//
 	public @NonNull Edge createEqualsEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
-		System.err.println("Unexpected " + QVTscheduleConstants.EQUALS_NAME + " edge in " + region + " from " + sourceNode + " to " + targetNode);
-		return createExpressionEdge(sourceNode, QVTscheduleConstants.EQUALS_NAME, targetNode);
+		System.err.println("Unexpected " + EQUALS_NAME + " edge in " + region + " from " + sourceNode + " to " + targetNode);
+		//		Role edgeRole = getNodeRole(sourceNode);
+		//		ExpressionEdge edge = QVTscheduleFactory.eINSTANCE.createEqualsEdge();
+		//		edge.initialize(edgeRole, sourceNode, QVTscheduleConstants.EQUALS_NAME, targetNode);
+		//		return edge;
+		return createPredicateEdge(sourceNode, EQUALS_NAME, targetNode);
 	}
 
 	public @NonNull Node createErrorNode(@NonNull String name, @NonNull ClassDatum classDatum) {
@@ -168,31 +207,16 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
-	public @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode, @NonNull Object object) {
-		Role edgeRole = getNodeRole(sourceNode);
-		ExpressionEdge edge = QVTscheduleFactory.eINSTANCE.createExpressionEdge();
-		edge.setReferredObject(object);
-		edge.initialize(edgeRole, sourceNode, name, targetNode);
-		return edge;
-	}
-
-	public @NonNull Edge createExpressionEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
-		Role edgeRole = getNodeRole(sourceNode);
-		ExpressionEdge edge = QVTscheduleFactory.eINSTANCE.createExpressionEdge();
-		edge.initialize(edgeRole, sourceNode, name, targetNode);
-		return edge;
-	}
-
 	public @NonNull Node createInputNode(@NonNull Role nodeRole, @NonNull String name, @NonNull ClassDatum classDatum) {
 		InputNode node = QVTscheduleFactory.eINSTANCE.createInputNode();
 		node.initialize(nodeRole, region, name, classDatum);
 		return node;
 	}
 
-	public @NonNull Edge createIteratedEdge(@NonNull Node sourceNode, @NonNull String name, @NonNull Node targetNode) {
+	public @NonNull Edge createIteratedEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
 		Role edgeRole = getNodeRole(sourceNode);
 		IteratedEdge edge = QVTscheduleFactory.eINSTANCE.createIteratedEdge();
-		edge.initialize(edgeRole, sourceNode, name, targetNode);
+		edge.initialize(edgeRole, sourceNode, LOOP_ITERATOR_NAME, targetNode);
 		return edge;
 	}
 
@@ -202,6 +226,16 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		node.initialize(nodeRole, region, getName(iterator), scheduleManager.getClassDatum(iterator));
 		node.initializeVariable(region, iterator);
 		return node;
+	}
+
+	public @NonNull Edge createKeyPartEdge(@NonNull Node sourceNode, @NonNull PropertyDatum propertyDatum, @NonNull Node targetNode) {
+		Role edgeRole = getNodeRole(sourceNode);
+		KeyPartEdge edge = QVTscheduleFactory.eINSTANCE.createKeyPartEdge();
+		edge.setReferredPart(propertyDatum);
+		Property referredProperty = QVTscheduleUtil.getReferredProperty(propertyDatum);
+		String name = "«" + QVTrelationUtil.getName(referredProperty) + "»";
+		edge.initialize(edgeRole, sourceNode, name, targetNode);
+		return edge;
 	}
 
 	public @NonNull Node createKeyedNode(boolean isMatched, @NonNull String name, @NonNull VariableDeclaration templateVariable) {
@@ -231,6 +265,15 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		node.initializeVariable(region, stepVariable);
 		node.setMatched(true);
 		return node;
+	}
+
+	public @NonNull Edge createMapPartEdge(@NonNull Node sourceNode, @NonNull MapLiteralPart mapPart, @NonNull Node targetNode) {
+		Role edgeRole = getNodeRole(sourceNode);
+		MapPartEdge edge = QVTscheduleFactory.eINSTANCE.createMapPartEdge();
+		edge.setReferredPart(mapPart);
+		String label = "«" + mapPart.toString() + "»";
+		edge.initialize(edgeRole, sourceNode, label, targetNode);
+		return edge;
 	}
 
 	public @NonNull NavigableEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {
@@ -291,6 +334,35 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
+	public @NonNull Edge createOperationParameterEdge(@NonNull Node sourceNode, @NonNull Parameter parameter, int parameterIndex, @NonNull Node targetNode) {
+		Role edgeRole = getNodeRole(sourceNode);
+		String name;
+		OperationParameterEdge edge = QVTscheduleFactory.eINSTANCE.createOperationParameterEdge();
+		edge.setReferredParameter(parameter);
+		if (parameterIndex >= 0) {
+			//				assert parameter.isIsMany();
+			edge.setParameterIndex(parameterIndex);
+			name = "«" + parameter.getName() + "-" + parameterIndex + "»";
+		}
+		else {
+			//				assert !parameter.isIsMany();
+			name = "«" + parameter.getName() + "»";
+		}
+		//		edge.setReferredObject(typeOrParameter);		// FIXME redundant
+		edge.initialize(edgeRole, sourceNode, name, targetNode);
+		return edge;
+	}
+
+	public @NonNull Edge createOperationSelfEdge(@NonNull Node sourceNode, @NonNull Type type, @NonNull Node targetNode) {
+		Role edgeRole = getNodeRole(sourceNode);
+		OperationSelfEdge edge = QVTscheduleFactory.eINSTANCE.createOperationSelfEdge();
+		edge.setReferredType(type);
+		String name = "«" + PivotConstants.SELF_NAME + "»";
+		//		edge.setReferredObject(typeOrParameter);		// FIXME redundant
+		edge.initialize(edgeRole, sourceNode, "«" + name + "»", targetNode);
+		return edge;
+	}
+
 	public @NonNull Node createPatternNode(@NonNull Role nodeRole, @NonNull Node sourceNode, @NonNull Property source2targetProperty, boolean isMatched) {
 		assert sourceNode.isClass();
 		org.eclipse.ocl.pivot.Class type = (org.eclipse.ocl.pivot.Class)source2targetProperty.getType();
@@ -343,10 +415,10 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return createPatternNode(nodeRole, sourceNode, source2targetProperty, sourceNode.isMatched());
 	}
 
-	public @NonNull Edge createRealizedExpressionEdge(@NonNull Node sourceNode, @Nullable String name, @NonNull Node targetNode) {
+	public @NonNull Edge createRealizedIncludesEdge(@NonNull Node sourceNode, @NonNull Node targetNode) {
 		Role edgeRole = Role.REALIZED;
-		ExpressionEdge edge = QVTscheduleFactory.eINSTANCE.createExpressionEdge();
-		edge.initialize(edgeRole, sourceNode, name, targetNode);
+		ExpressionEdge edge = QVTscheduleFactory.eINSTANCE.createIncludesEdge();
+		edge.initialize(edgeRole, sourceNode, INCLUDES_NAME, targetNode);
 		return edge;
 	}
 
@@ -400,6 +472,15 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return edge;
 	} */
 
+	public @NonNull Edge createShadowPartEdge(@NonNull Node sourceNode, @NonNull ShadowPart shadowPart, @NonNull Node targetNode) {
+		Role edgeRole = getNodeRole(sourceNode);
+		ShadowPartEdge edge = QVTscheduleFactory.eINSTANCE.createShadowPartEdge();
+		edge.setReferredPart(shadowPart);
+		String label = "«" + shadowPart.getName() + "»";
+		edge.initialize(edgeRole, sourceNode, label, targetNode);
+		return edge;
+	}
+
 	public @NonNull Node createStepNode(@NonNull String name, @NonNull CallExp callExp, @NonNull Node sourceNode, boolean isMatched) {
 		DomainUsage domainUsage = scheduleManager.getDomainUsage(callExp);
 		boolean isMiddleOrOutput = domainUsage.isOutput() || domainUsage.isMiddle();
@@ -424,6 +505,15 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		edge.setPrimary(isPrimary);
 		return edge;
 	} */
+
+	public @NonNull Edge createTuplePartEdge(@NonNull Node sourceNode, @NonNull TupleLiteralPart tuplePart, @NonNull Node targetNode) {
+		Role edgeRole = getNodeRole(sourceNode);
+		TuplePartEdge edge = QVTscheduleFactory.eINSTANCE.createTuplePartEdge();
+		edge.setReferredPart(tuplePart);
+		String label = "«" + tuplePart.getName() + "»";
+		edge.initialize(edgeRole, sourceNode, label, targetNode);
+		return edge;
+	}
 
 	public @NonNull Node createUnknownNode(@NonNull String name, @NonNull TypedElement typedElement) {
 		Role nodeRole = Role.OTHER;

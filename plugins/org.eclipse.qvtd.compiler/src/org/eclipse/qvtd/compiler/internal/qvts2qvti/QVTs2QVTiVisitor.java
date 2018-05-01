@@ -52,7 +52,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
-import org.eclipse.qvtd.pivot.qvtschedule.ExpressionEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -322,15 +322,13 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 					assert classDatum != null;
 					Set<@NonNull PropertyDatum> propertyDatums = new HashSet<>();
 					for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(keyedValueNode)) {
-						if (edge instanceof ExpressionEdge) {
-							ExpressionEdge expressionEdge = (ExpressionEdge)edge;
-							Object referredPropertyDatum = expressionEdge.getReferredObject();
-							if (referredPropertyDatum instanceof PropertyDatum) {
-								PropertyDatum propertyDatum = (PropertyDatum)referredPropertyDatum;
-								assert propertyDatum.isKey();
-								boolean wasAdded = propertyDatums.add(propertyDatum);
-								assert wasAdded;
-							}
+						if (edge instanceof KeyPartEdge) {
+							KeyPartEdge keyPartEdge = (KeyPartEdge)edge;
+							PropertyDatum propertyDatum = QVTscheduleUtil.getReferredPart(keyPartEdge);
+							assert propertyDatum.isKey();
+							boolean wasAdded = propertyDatums.add(propertyDatum);
+							assert wasAdded;
+
 						}
 					}
 					Set<@NonNull PropertyDatum> oldPropertyDatums = keyedClassDatum2propertyDatums.put(classDatum, propertyDatums);

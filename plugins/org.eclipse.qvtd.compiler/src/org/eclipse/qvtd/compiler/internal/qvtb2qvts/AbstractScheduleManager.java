@@ -59,6 +59,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.TraceHelper;
@@ -76,7 +77,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToCallGraphVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToRegionGraphVisitor;
@@ -94,6 +94,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
 	protected final @NonNull DatumCaches datumCaches;
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
+	protected final @NonNull QVTbaseLibraryHelper qvtbaseLibraryHelper;
 
 	private @Nullable ClassDatum booleanClassDatum;
 	private @Nullable ClassDatum oclVoidClassDatum;
@@ -138,6 +139,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		this.schedulerOptions = schedulerOptions;
 		this.domainUsageAnalysis = createDomainUsageAnalysis();
 		this.standardLibraryHelper = new StandardLibraryHelper(environmentFactory.getStandardLibrary());
+		this.qvtbaseLibraryHelper = new QVTbaseLibraryHelper();
 		this.datumCaches = createDatumCaches();
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
 			this.doDotGraphs = true;
@@ -332,7 +334,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		//
 		Node resultNode = regionHelper.createStepNode("result", operationCallExp, dependencyNode, false);
 		operationRegion.setResultNode(resultNode);
-		regionHelper.createExpressionEdge(dependencyNode, QVTscheduleConstants.RETURN_NAME, resultNode);
+		regionHelper.createEqualsEdge(dependencyNode, resultNode);
 		//
 		List<Variable> ownedParameters = specification.getOwnedParameters();
 		List<OCLExpression> ownedArguments = operationCallExp.getOwnedArguments();
@@ -620,6 +622,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			Collections.sort(transformationAnalyses, NameUtil.NAMEABLE_COMPARATOR);
 		}
 		return transformationAnalyses;
+	}
+
+	@Override
+	public @NonNull QVTbaseLibraryHelper getQVTbaseLibraryHelper() {
+		return qvtbaseLibraryHelper;
 	}
 
 	@Override

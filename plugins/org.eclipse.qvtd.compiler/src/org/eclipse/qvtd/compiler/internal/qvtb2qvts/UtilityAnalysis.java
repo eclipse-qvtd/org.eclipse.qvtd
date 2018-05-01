@@ -18,14 +18,16 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
+import org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Sets;
@@ -43,6 +45,7 @@ public class UtilityAnalysis
 
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull MappingRegion mappingRegion;
+	protected final @NonNull QVTbaseLibraryHelper qvtbaseLibraryHelper;
 
 	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> stronglyMatchedNodes = null;
 	private /*@LazyNonNull*/ @Nullable List<@NonNull Node> unconditionalNodes = null;
@@ -53,6 +56,7 @@ public class UtilityAnalysis
 	protected UtilityAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull MappingRegion mappingRegion) {
 		this.scheduleManager = scheduleManager;
 		this.mappingRegion = mappingRegion;
+		this.qvtbaseLibraryHelper = scheduleManager.getQVTbaseLibraryHelper();
 	}
 
 	protected void assignUtilities() {		// FIXME remove assertions after 1-Jan-2017
@@ -329,10 +333,20 @@ public class UtilityAnalysis
 	}
 
 	private boolean isConditionalEdge(@NonNull Edge edge) {
-		String edgeName = edge.getName();
-		return QVTscheduleConstants.IF_THEN_NAME.equals(edgeName)
-				|| QVTscheduleConstants.IF_ELSE_NAME.equals(edgeName)
-				|| QVTscheduleConstants.LOOP_BODY_NAME.equals(edgeName);
+		if (edge instanceof OperationParameterEdge) {
+			OperationParameterEdge operationParameterEdge = (OperationParameterEdge)edge;
+			Parameter parameter = operationParameterEdge.getReferredParameter();
+			if (parameter == qvtbaseLibraryHelper.getIfThenParameter()) {
+				return true;
+			}
+			else if (parameter == qvtbaseLibraryHelper.getIfElseParameter()) {
+				return true;
+			}
+			else if (parameter == qvtbaseLibraryHelper.getLoopBodyParameter()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override

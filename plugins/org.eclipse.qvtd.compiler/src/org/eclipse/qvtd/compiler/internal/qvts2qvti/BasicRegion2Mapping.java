@@ -66,6 +66,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil.ToStringComparator;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedConditionAnalysis;
@@ -97,6 +98,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.BooleanValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.ExpressionEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -107,7 +109,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
@@ -861,7 +862,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					OCLExpression ownedInit = variable.getOwnedInit();
 					if (ownedInit == null) {
 						for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {		// FIXME this can pick a downstream rather than upstream edge
-							if (edge.isExpression() && QVTscheduleConstants.EQUALS_NAME.equals(edge.getName())) {
+							if (edge.isExpression() && RegionHelper.EQUALS_NAME.equals(edge.getName())) { // ?? always an Equals(Predicate)Edge
 								Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
 								return create(sourceNode); //createBottomVariable(node, helper.createNullLiteralExp());		// FIXME is this possible?
 							}
@@ -1520,14 +1521,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 						VariableExp thisExp = helper.createVariableExp(QVTimperativeUtil.getContextVariable(scheduleManager.getStandardLibrary(), getTransformation()));
 						Map<@NonNull PropertyDatum, @NonNull VariableExp> propertyDatum2expression = new HashMap<>();
 						for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(newNode)) {
-							if (edge instanceof ExpressionEdge) {
-								ExpressionEdge expressionEdge = (ExpressionEdge)edge;
-								Object referredPropertyDatum = expressionEdge.getReferredObject();
-								if (referredPropertyDatum instanceof PropertyDatum) {
-									PropertyDatum propertyDatum = (PropertyDatum)referredPropertyDatum;
-									VariableExp subexpressionNode = getSubexpressionVariableExp(QVTscheduleUtil.getSourceNode(expressionEdge));
-									propertyDatum2expression.put(propertyDatum, subexpressionNode);
-								}
+							if (edge instanceof KeyPartEdge) {
+								KeyPartEdge keyPartEdge = (KeyPartEdge)edge;
+								PropertyDatum propertyDatum = QVTscheduleUtil.getReferredPart(keyPartEdge);
+								VariableExp subexpressionNode = getSubexpressionVariableExp(QVTscheduleUtil.getSourceNode(edge));
+								propertyDatum2expression.put(propertyDatum, subexpressionNode);
 							}
 						}
 						List<@NonNull OCLExpression> asArguments = new ArrayList<>();
