@@ -32,11 +32,19 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArgumentEdge" abstract="true" eSuperTypes="#//ExpressionEdge">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An ArgumentEdge conveys an expression input to an iteration/operation/pseudo-operation."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanValueNode" eSuperTypes="#//OperationNode">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A BooleanValueNode supports a Boolean literal value in a QVTs graph."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="booleanValue" lowerBound="1"
         eType="ecore:EDataType ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Boolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="String/Number/Boolean/EnumerationLiteral/OperationId to characterize the operation node"/>
+        <details key="documentation" value="The Boolean literal value."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -71,6 +79,17 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="superClassDatums" upperBound="-1"
         eType="#//ClassDatum" transient="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CollectionPartEdge" eSuperTypes="#//ArgumentEdge">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A CollectionPartEdge conveys collection part to a collection construction node."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredPart" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-CollectionLiteralPart">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Collection item lor range for a collection construction."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComposedNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element #//Symbolable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduledRegion"
@@ -95,6 +114,11 @@
         upperBound="-1">
       <eGenericType eTypeParameter="#//DatumConnection/CE"/>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DependencyEdge" eSuperTypes="#//Edge">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A DependencyEdge instantiates the dependencies of an operation in its caller."/>
+    </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DependencyNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="DispatchRegion" eSuperTypes="#//RuleRegion">
@@ -132,20 +156,45 @@
       <eTypeArguments eClassifier="#//NavigableEdge"/>
     </eGenericSuperTypes>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ErrorNode" eSuperTypes="#//Node"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionEdge" eSuperTypes="#//Edge">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="referredObject" eType="ecore:EDataType ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Object">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="String/Number/Boolean/EnumerationLiteral/OperationId to characterize the operation node"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+  <eClassifiers xsi:type="ecore:EClass" name="ErrorNode" eSuperTypes="#//Node">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An ErrorNode provides a place holder for failed value in a QVTs graph."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionEdge" abstract="true" eSuperTypes="#//Edge">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An ExpressionEdge conveys asource value to a target value, possibly manipulating the value en route, more often just identifying distinct inputs to the target."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IncludesEdge" eSuperTypes="#//ExpressionEdge">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An IncludesEdge identifoes that a tagretNode is apart of a source collection node."/>
+    </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InputNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="IteratedEdge" eSuperTypes="#//Edge"/>
   <eClassifiers xsi:type="ecore:EClass" name="IteratorNode" eSuperTypes="#//VariableNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="KeyPartEdge" eSuperTypes="#//ArgumentEdge">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A KeyPartEdge conveys a key part key and value to a keyed value construction node."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredPart" lowerBound="1"
+        eType="#//PropertyDatum">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="PropertyDatum for a keyed value construction."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="KeyedValueNode" eSuperTypes="#//OperationNode">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A KeyedValueNode supports a globally unique value in a QVTs graph; repeated 'realizations' share the one value."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classDatumValue" lowerBound="1"
-        eType="#//ClassDatum"/>
+        eType="#//ClassDatum">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The type and typedmodel of the unqiue value."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LoadingRegion" eSuperTypes="#//Region">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -153,6 +202,17 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduledRegion"
         lowerBound="1" eType="#//ScheduledRegion" eOpposite="#//ScheduledRegion/ownedLoadingRegion"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MapPartEdge" eSuperTypes="#//ArgumentEdge">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A MapPartEdge conveys a map part key and value to a map construction node."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredPart" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-MapLiteralPart">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Map Part for a map construction."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingRegion" abstract="true" eSuperTypes="#//Region">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -255,12 +315,22 @@
     </eGenericSuperTypes>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NullNode" eSuperTypes="#//Node">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A NullNode supports a null literal value in a QVTs graph."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="matched" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationValueNode" eSuperTypes="#//OperationNode">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An OperationValueNode supports an Operation literal value in a QVTs graph."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operationValue" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Operation"/>
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Operation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The Operation literal value."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationNode" eSuperTypes="#//Node">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="matched" lowerBound="1"
@@ -285,6 +355,34 @@
         eType="#//ScheduleModel" eOpposite="#//ScheduleModel/ownedOperationRegions">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The overall ScheduleModel in which this OperationRegion is contained."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationParameterEdge" eSuperTypes="#//ArgumentEdge">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An OperationParameterEdge conveys an operation/iteration source/argument to an operation/iteration node. Pseudo-operations support if()/loop() arguments."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredParameter" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Parameter">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Parameter for which this OperationParameterEdge conveys the argument. For a multi-parameter, parameterIndex disambiguates."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameterIndex" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="-1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Disambiguating index when the referredParameter is a collection. -1 when referredParameter is not a Collection."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationSelfEdge" eSuperTypes="#//ArgumentEdge">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An OperationSelfEdge conveys an operation/iteration source type to an operation/iteration node."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredType" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Type">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Type for an OperationSelfEdge conveying a self source to an operation/iteration."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -392,6 +490,17 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ShadowPartEdge" eSuperTypes="#//ArgumentEdge">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A ShadowPartEdge conveys a shadow part type to a shadow construction node."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredPart" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-ShadowPart">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Shadow part for a shadow instamnce construction."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SuccessEdge" eSuperTypes="#//NavigationEdge">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A SuccessNode has a value corresponding to the true/false success of the cobtaining region."/>
@@ -405,6 +514,17 @@
   <eClassifiers xsi:type="ecore:EClass" name="Symbolable" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TuplePartEdge" eSuperTypes="#//ArgumentEdge">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A TuplePartEdge conveys tuple map part key and value to a map construction node."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredPart" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-TupleLiteralPart">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Tuple Part for a tuple construction."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnknownNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="VariableNode" abstract="true" eSuperTypes="#//Node">
