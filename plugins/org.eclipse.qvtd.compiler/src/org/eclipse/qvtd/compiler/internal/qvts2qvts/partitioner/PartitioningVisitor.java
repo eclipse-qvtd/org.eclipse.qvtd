@@ -175,7 +175,7 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 			//	must be converted to a step node when re-accessed by a speculated partition.
 			//
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-				if (edge.isNavigation() && edge.isRealized()) {
+				if ((edge.isCast() || edge.isNavigation()) && edge.isRealized()) {
 					Role edgeRole = partition.getEdgeRole(edge);
 					if ((edgeRole != null) && edgeRole == Role.PREDICATED) {
 						partialNode = regionHelper.createPredicatedStepNode(node, node.isMatched());

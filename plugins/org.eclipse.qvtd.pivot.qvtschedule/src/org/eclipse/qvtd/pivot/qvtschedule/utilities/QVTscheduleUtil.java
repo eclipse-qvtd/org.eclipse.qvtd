@@ -203,9 +203,9 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		}
 	}
 
-	public static final class IsNavigableNodePredicate implements Predicate<@NonNull Node>
+	public static final class IsMatchedNodePredicate implements Predicate<@NonNull Node>
 	{
-		public static final @NonNull IsNavigableNodePredicate INSTANCE = new IsNavigableNodePredicate();
+		public static final @NonNull IsMatchedNodePredicate INSTANCE = new IsMatchedNodePredicate();
 
 		@Override
 		public boolean apply(@NonNull Node node) {
@@ -213,13 +213,13 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		}
 	}
 
-	public static final class IsNavigationEdgePredicate implements Predicate<@NonNull Edge>
+	public static final class IsNavigableEdgePredicate implements Predicate<@NonNull Edge>
 	{
-		public static final @NonNull IsNavigationEdgePredicate INSTANCE = new IsNavigationEdgePredicate();
+		public static final @NonNull IsNavigableEdgePredicate INSTANCE = new IsNavigableEdgePredicate();
 
 		@Override
 		public boolean apply(@NonNull Edge edge) {
-			return edge.isNavigation();
+			return edge.isCast() || edge.isNavigation();
 		}
 	}
 

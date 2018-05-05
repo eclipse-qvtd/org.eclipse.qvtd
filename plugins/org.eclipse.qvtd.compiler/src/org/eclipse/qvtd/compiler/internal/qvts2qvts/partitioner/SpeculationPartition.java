@@ -76,7 +76,7 @@ class SpeculationPartition extends AbstractPartition
 	protected void addReachableOldAcyclicNodes(@NonNull Node node) {
 		if (!hasNode(node) && (node.isHead() || node.isOld() && !partitioner.isCyclic(node))) {
 			addNode(node, QVTscheduleUtil.getNodeRole(node));
-			for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
+			for (@NonNull NavigableEdge edge : node.getNavigableEdges()) {
 				if (edge.isOld()) {
 					addReachableOldAcyclicNodes(edge.getEdgeTarget());
 				}

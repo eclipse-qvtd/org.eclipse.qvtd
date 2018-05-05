@@ -303,10 +303,10 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	@Nullable NodeConnection getIncomingPassedConnection();
 	@Nullable NodeConnection getIncomingUsedConnection();
 	@NonNull String getLabel();
-	@Nullable NavigableEdge getNavigationEdge(@NonNull Property source2targetProperty);
-	@NonNull Iterable<@NonNull NavigableEdge> getNavigationEdges();
-	@Nullable Node getNavigationTarget(@NonNull Property source2targetProperty);
-	@NonNull Iterable<@NonNull Node> getNavigationTargets();
+	@Nullable NavigableEdge getNavigableEdge(@NonNull Property source2targetProperty);
+	@NonNull Iterable<@NonNull NavigableEdge> getNavigableEdges();
+	@Nullable Node getNavigableTarget(@NonNull Property source2targetProperty);
+	@NonNull Iterable<@NonNull Node> getNavigableTargets();
 
 	/**
 	 * Return the element from which this node originated. Throws an IllegalStateException
@@ -335,7 +335,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	@NonNull Iterable<@NonNull Node> getPassedBindingTargets();
 	@Nullable Edge getPredicateEdge(@NonNull Property source2targetProperty);
 	@NonNull Iterable<@NonNull NavigableEdge> getPredicateEdges();
-	@NonNull Iterable<@NonNull NavigableEdge> getRealizedNavigationEdges();
+	@NonNull Iterable<@NonNull NavigationEdge> getRealizedNavigationEdges();
 	@NonNull Iterable<@NonNull Edge> getRecursionEdges();
 
 	/**

@@ -234,12 +234,12 @@ abstract class AbstractPartition
 		}
 		if (reachableNodes.add(node)) {
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-				if (/*edge.isComputation() ||*/ edge.isNavigation()) {		// excludes only recursion
+				if (/*edge.isComputation() ||*/ edge.isCast() || edge.isNavigation()) {		// excludes only recursion
 					checkGatherReachables(reachableNodes, edge.getEdgeSource());
 				}
 			}
 			for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(node)) {
-				if (edge.isComputation() || edge.isNavigation()) {
+				if (edge.isComputation() || edge.isCast() || edge.isNavigation()) {
 					checkGatherReachables(reachableNodes, edge.getEdgeTarget());
 				}
 			}
@@ -348,7 +348,7 @@ abstract class AbstractPartition
 	protected boolean isCorollary(@NonNull Node node) {
 		if (node.isPredicated()) {
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-				if (edge.isPredicated() && edge.isNavigation()) {
+				if (edge.isPredicated() && (edge.isCast() || edge.isNavigation())) {
 					List<@NonNull MappingRegion> corollaryOf = partitioner.getCorollaryOf(edge);
 					if (corollaryOf != null) {
 						return true;
@@ -358,7 +358,7 @@ abstract class AbstractPartition
 		}
 		else if (node.isRealized()) {
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-				if (edge.isRealized() && edge.isNavigation()) {
+				if (edge.isRealized() && (edge.isCast() || edge.isNavigation())) {
 					List<@NonNull MappingRegion> corollaryOf = partitioner.getCorollaryOf(edge);
 					if (corollaryOf != null) {
 						return true;
@@ -375,7 +375,7 @@ abstract class AbstractPartition
 			Iterable<@NonNull Property> discriminatingProperties = traceClassAnalysis.getDiscriminatingProperties();
 			if (discriminatingProperties != null) {
 				for (@NonNull Property property : discriminatingProperties) {
-					Node targetNode = traceNode.getNavigationTarget(property);
+					Node targetNode = traceNode.getNavigableTarget(property);
 					assert targetNode != null;
 					if (!hasNode(targetNode)) {
 						addNode(targetNode);
@@ -440,7 +440,7 @@ abstract class AbstractPartition
 									edgeRole = null;
 								}
 							}
-							else if (edge.isNavigation()) {
+							else if (edge.isCast() || edge.isNavigation()) {
 								if (partitioner.hasRealizedEdge(edge)) {
 									edgeRole = null;			// A realized edge does not need to be checked
 								}

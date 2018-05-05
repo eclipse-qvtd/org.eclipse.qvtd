@@ -294,7 +294,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 			Node targetNode2 = targetNode;
 			assert targetNode2 != null;
 			if (!targetNode2.isNullLiteral()) {
-				assert (targetNode2.getNavigationEdge(target2sourceProperty) == null) || target2sourceProperty.isIsMany() || (isPartial() == Boolean.TRUE);
+				assert (targetNode2.getNavigableEdge(target2sourceProperty) == null) || target2sourceProperty.isIsMany() || (isPartial() == Boolean.TRUE);
 				if (!property.isIsMany() && !target2sourceProperty.isIsMany() /*&& target2sourceProperty.isIsRequired()*/) {		// FIXME do we need stronger type conformance here ??
 					Role edgeRole2 = edgeRole;
 					Node sourceNode2 = sourceNode;

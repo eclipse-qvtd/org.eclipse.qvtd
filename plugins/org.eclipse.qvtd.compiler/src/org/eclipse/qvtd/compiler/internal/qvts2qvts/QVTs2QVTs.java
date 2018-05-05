@@ -49,6 +49,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
@@ -488,21 +489,20 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			//	Gather multiple edges sharing the same target to avoid multiple incoming connections
 			//
 			Map<@NonNull Node, @NonNull List<@NonNull NavigableEdge>> castTargetNode2predicatedEdges = new HashMap<>();
-			for (@NonNull NavigableEdge predicatedEdge : region.getPredicatedNavigationEdges()) {
-				if (!predicatedEdge.isCast()) {
-					assert predicatedEdge.isNavigation();
-					assert predicatedEdge.getIncomingConnection() == null;
-					Property predicatedProperty = predicatedEdge.getProperty();
-					if (!predicatedProperty.isIsImplicit()) {		// unnavigable opposites are handled by the navigable property
-						NavigableEdge castEdge = QVTscheduleUtil.getCastTarget(predicatedEdge);
-						Node castTargetNode = QVTscheduleUtil.getCastTarget(castEdge.getEdgeTarget());
-						List<@NonNull NavigableEdge> predicatedEdges = castTargetNode2predicatedEdges.get(castTargetNode);
-						if (predicatedEdges == null) {
-							predicatedEdges = new ArrayList<>();
-							castTargetNode2predicatedEdges.put(castTargetNode, predicatedEdges);
-						}
-						predicatedEdges.add(predicatedEdge);
+			for (@NonNull NavigationEdge predicatedEdge : region.getPredicatedNavigationEdges()) {
+				assert !predicatedEdge.isCast();
+				assert predicatedEdge.isNavigation();
+				assert predicatedEdge.getIncomingConnection() == null;
+				Property predicatedProperty = predicatedEdge.getReferredProperty();
+				if (!predicatedProperty.isIsImplicit()) {		// unnavigable opposites are handled by the navigable property
+					NavigableEdge castEdge = QVTscheduleUtil.getCastTarget(predicatedEdge);
+					Node castTargetNode = QVTscheduleUtil.getCastTarget(castEdge.getEdgeTarget());
+					List<@NonNull NavigableEdge> predicatedEdges = castTargetNode2predicatedEdges.get(castTargetNode);
+					if (predicatedEdges == null) {
+						predicatedEdges = new ArrayList<>();
+						castTargetNode2predicatedEdges.put(castTargetNode, predicatedEdges);
 					}
+					predicatedEdges.add(predicatedEdge);
 				}
 			}
 			for (@NonNull Node castTargetNode : castTargetNode2predicatedEdges.keySet()) {
@@ -1068,10 +1068,10 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		if (oldPrevNode != null) {
 			return oldPrevNode == callingNode;
 		}
-		for (@NonNull NavigableEdge calledEdge : calledNode.getNavigationEdges()) {
+		for (@NonNull NavigableEdge calledEdge : calledNode.getNavigableEdges()) {
 			Node nextCalledNode = calledEdge.getEdgeTarget();
 			if (!nextCalledNode.isRealized() && !nextCalledNode.isDataType()) {  // FIXME why exclude AttributeNodes?
-				Edge nextCallingEdge = callingNode.getNavigationEdge(QVTscheduleUtil.getProperty(calledEdge));
+				Edge nextCallingEdge = callingNode.getNavigableEdge(QVTscheduleUtil.getProperty(calledEdge));
 				if (nextCallingEdge != null) {
 					Node nextCallingNode = nextCallingEdge.getEdgeTarget();
 					if ((nextCallingNode.isNullLiteral() != nextCalledNode.isNullLiteral())) {

@@ -45,6 +45,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
@@ -713,7 +714,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public @Nullable NavigableEdge getNavigationEdge(@NonNull Property source2targetProperty) {
+	public @Nullable NavigableEdge getNavigableEdge(@NonNull Property source2targetProperty) {
 		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(this)) {
 			if (edge instanceof NavigableEdge) {
 				NavigableEdge navigationEdge = (NavigableEdge)edge;
@@ -726,14 +727,14 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public final @NonNull Iterable<@NonNull NavigableEdge> getNavigationEdges() {
+	public final @NonNull Iterable<@NonNull NavigableEdge> getNavigableEdges() {
 		@SuppressWarnings("unchecked")
-		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsNavigationEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsNavigableEdgePredicate.INSTANCE);
 		return filter;
 	}
 
 	@Override
-	public @Nullable Node getNavigationTarget(@NonNull Property source2targetProperty) {
+	public @Nullable Node getNavigableTarget(@NonNull Property source2targetProperty) {
 		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(this)) {
 			if (edge instanceof NavigableEdge) {
 				NavigableEdge navigationEdge = (NavigableEdge)edge;
@@ -746,8 +747,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull Node> getNavigationTargets() {
-		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsNavigationEdgePredicate.INSTANCE);
+	public @NonNull Iterable<@NonNull Node> getNavigableTargets() {
+		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsNavigableEdgePredicate.INSTANCE);
 		@NonNull Iterable<@NonNull Node> transform = Iterables.transform(filter, QVTscheduleUtil.EdgeTargetFunction.INSTANCE);
 		return transform;
 	}
@@ -868,9 +869,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public final @NonNull Iterable<@NonNull NavigableEdge> getRealizedNavigationEdges() {
+	public final @NonNull Iterable<@NonNull NavigationEdge> getRealizedNavigationEdges() {
 		@SuppressWarnings("unchecked")
-		Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsRealizedNavigationEdgePredicate.INSTANCE);
+		Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(QVTscheduleUtil.getOutgoingEdges(this), QVTscheduleUtil.IsRealizedNavigationEdgePredicate.INSTANCE);
 		return filter;
 	}
 

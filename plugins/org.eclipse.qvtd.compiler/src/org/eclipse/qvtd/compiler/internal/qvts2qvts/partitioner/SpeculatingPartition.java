@@ -107,7 +107,7 @@ class SpeculatingPartition extends AbstractPartition
 	private boolean isLocalCorollary(@NonNull Node node) {
 		assert node.isRealized();
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-			if (edge.isRealized() && edge.isNavigation()) {
+			if (edge.isRealized() && (edge.isCast() || edge.isNavigation())) {
 				// A cyclic node cannot be a corollary since we must establish that all speculating
 				// partitions are ok before the speculated region can create the full cycle.
 				if (!partitioner.isCyclic(QVTscheduleUtil.getSourceNode(edge))) {
@@ -199,7 +199,7 @@ class SpeculatingPartition extends AbstractPartition
 			addNode(traceNode, Role.SPECULATED);
 		}
 		for (@NonNull Node traceNode : traceNodes) {
-			for (@NonNull NavigableEdge edge : traceNode.getNavigationEdges()) {
+			for (@NonNull NavigableEdge edge : traceNode.getNavigableEdges()) {
 				if (partitioner.hasRealizedEdge(edge)) {
 					tracedInputNodes.add(edge.getEdgeTarget());
 				}

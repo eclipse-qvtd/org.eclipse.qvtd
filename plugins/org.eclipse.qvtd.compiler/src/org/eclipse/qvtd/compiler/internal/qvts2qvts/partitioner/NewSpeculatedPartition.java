@@ -193,7 +193,7 @@ class NewSpeculatedPartition extends AbstractPartition
 		}
 		//		}
 		//		for (@NonNull Node traceNode : executionNodes) {
-		for (@NonNull NavigableEdge edge : traceNode.getNavigationEdges()) {
+		for (@NonNull NavigableEdge edge : traceNode.getNavigableEdges()) {
 			if (partitioner.hasRealizedEdge(edge)) {
 				tracedInputNodes.add(edge.getEdgeTarget());
 			}

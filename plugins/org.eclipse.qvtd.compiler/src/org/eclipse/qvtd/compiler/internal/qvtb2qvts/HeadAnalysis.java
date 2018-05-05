@@ -165,7 +165,7 @@ public abstract class HeadAnalysis
 			Integer implicity = node2implicity2.get(node);
 			if (implicity == null) {
 				implicity = 0;
-				for (@NonNull NavigableEdge e : node.getNavigationEdges()) {
+				for (@NonNull NavigableEdge e : node.getNavigableEdges()) {
 					if (e.getProperty().isIsImplicit()) {
 						implicity++;
 					}

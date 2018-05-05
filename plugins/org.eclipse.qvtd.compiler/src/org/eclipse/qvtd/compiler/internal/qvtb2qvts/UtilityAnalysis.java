@@ -212,7 +212,7 @@ public class UtilityAnalysis
 		while (moreStronglyMatchedNodes.size() > 0) {
 			Set<@NonNull Node> moreMoreNodes = new HashSet<>();
 			for (@NonNull Node sourceNode : moreStronglyMatchedNodes) {
-				for (@NonNull NavigableEdge edge : sourceNode.getNavigationEdges()) {
+				for (@NonNull NavigableEdge edge : sourceNode.getNavigableEdges()) {
 					Node targetNode = edge.getEdgeTarget();
 					if (canBeStronglyMatched(targetNode)) {
 						if (targetNode.isNullLiteral() || edge.getProperty().isIsRequired()) {
@@ -286,7 +286,7 @@ public class UtilityAnalysis
 						// gather <<else>> visibilities
 						// intersection <<then>>/<<else>> is unconditional
 					}
-					else if (incomingEdge.isNavigation()) {		// Unconditional target has unconditional source
+					else if (incomingEdge.isCast() || incomingEdge.isNavigation()) {		// Unconditional target has unconditional source
 						if (unconditionalNodes.add(sourceNode)) {
 							moreMoreNodes.add(sourceNode);
 						}
@@ -299,7 +299,7 @@ public class UtilityAnalysis
 					Node targetNode = outgoingEdge.getEdgeTarget();
 					if (!canBeUnconditional(targetNode)) {}
 					else if (outgoingEdge.isComputation()) {}
-					else if (outgoingEdge.isNavigation()) {
+					else if (outgoingEdge.isCast() || outgoingEdge.isNavigation()) {
 						if (targetNode.isNullLiteral()) {
 							if (unconditionalNodes.add(targetNode)) {
 								moreMoreNodes.add(targetNode);

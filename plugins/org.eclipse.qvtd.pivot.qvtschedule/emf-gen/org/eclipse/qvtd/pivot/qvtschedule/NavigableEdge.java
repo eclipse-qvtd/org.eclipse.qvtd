@@ -14,6 +14,19 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>Navigable Edge</b></em>'.
+ *
+ * deprecated See Bug 534371
+ *
+ * The concepts of NavigableEdge should be dynamically applicable to all mapping edges rather
+ * than just NavigationEdge and irregularly CastEdge.
+ * <!-- end-user-doc -->
+ *
+ * @model
+ * @generated
+ */
 public interface NavigableEdge extends Edge, ConnectionEnd
 {
 	/**

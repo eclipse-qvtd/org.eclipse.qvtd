@@ -131,7 +131,7 @@ public class EarlyMerger extends AbstractMerger
 		if (!hostNodes.add(node)) {
 			return;
 		}
-		for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
+		for (@NonNull NavigableEdge edge : node.getNavigableEdges()) {
 			if (/*!edge.isSecondary() &&*/ edge.isUnconditional()) {		// ?? why isSecondary ?? why not isLoaded ??
 				Property property = edge.getProperty();
 				if (edge.isNew()) {

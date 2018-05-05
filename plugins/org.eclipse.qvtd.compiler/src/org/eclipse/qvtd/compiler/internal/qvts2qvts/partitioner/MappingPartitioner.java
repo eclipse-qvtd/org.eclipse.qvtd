@@ -214,7 +214,7 @@ public class MappingPartitioner implements Nameable
 	private void addConstantNode(@NonNull Node node) {
 		assert node.isConstant();
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-			if (edge.isComputation() || (edge.isNavigation() && !edge.isRealized())) {
+			if (edge.isComputation() || ((edge.isCast() || edge.isNavigation()) && !edge.isRealized())) {
 				constantOutputNodes.add(node);
 				return;
 			}
@@ -291,7 +291,7 @@ public class MappingPartitioner implements Nameable
 	private void analyzeCorollaries(@NonNull List<@NonNull Node> alreadyRealizedNodes) {
 		for (int i = 0; i < alreadyRealizedNodes.size(); i++) {
 			Node alreadyRealizedNode = alreadyRealizedNodes.get(i);
-			for (@NonNull NavigableEdge edge : alreadyRealizedNode.getRealizedNavigationEdges()) {
+			for (@NonNull NavigationEdge edge : alreadyRealizedNode.getRealizedNavigationEdges()) {
 				Node targetNode = QVTscheduleUtil.getTargetNode(edge);
 				if (targetNode.isRealized() && !targetNode.isSuccess()) {
 					assert !corollaryEdges.contains(edge);
@@ -315,7 +315,7 @@ public class MappingPartitioner implements Nameable
 				if (edge.isPredicated()) {
 					predicatedEdges.add(edge);
 				}
-				if (edge.isNavigation()) {
+				if (edge.isCast() || edge.isNavigation()) {
 					if (edge.isRealized()) {
 						realizedEdges.add(edge);
 						Node sourceNode = edge.getEdgeSource();
@@ -471,7 +471,7 @@ public class MappingPartitioner implements Nameable
 
 	private void analyzeTraceEdges(@NonNull Node traceNode) {
 		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(traceNode)) {
-			if ((edge.isNavigation() && edge.isRealized())) {
+			if (((edge.isCast() || edge.isNavigation()) && edge.isRealized())) {
 				Node tracedNode = QVTscheduleUtil.getTargetNode(edge);
 				node2traceEdge.put(tracedNode, edge);
 			}
@@ -966,7 +966,7 @@ public class MappingPartitioner implements Nameable
 			return false;
 		}
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-			if (edge.isNavigation()) {
+			if ((edge.isCast() || edge.isNavigation())) {
 				if ((knownDeadNodes == null) || !knownDeadNodes.contains(edge.getEdgeSource())) {
 					return false;
 				}
@@ -981,7 +981,7 @@ public class MappingPartitioner implements Nameable
 			//			}
 		}
 		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(node)) {
-			if (edge.isNavigation() || edge.isExpression()) {
+			if (edge.isCast() || edge.isNavigation() || edge.isExpression()) {
 				if ((knownDeadNodes == null) || !knownDeadNodes.contains(edge.getEdgeTarget())) {
 					return false;
 				}

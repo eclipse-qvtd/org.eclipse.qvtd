@@ -283,11 +283,11 @@ class Correlator
 			if (!strategy.navigableNodesMatch(secondarySourceNode, primarySourceNode)) {
 				return false;
 			}
-			for (@NonNull NavigableEdge uncastSecondaryEdge : secondarySourceNode.getNavigationEdges()) {
+			for (@NonNull NavigableEdge uncastSecondaryEdge : secondarySourceNode.getNavigableEdges()) {
 				Node uncastSecondaryTargetNode = uncastSecondaryEdge.getEdgeTarget();
 				Iterable<@NonNull Node> secondaryTargetNodes = QVTscheduleUtil.getCastTargets(uncastSecondaryTargetNode, true);
 				if (primarySourceNode != null) {
-					NavigableEdge uncastPrimaryEdge = primarySourceNode.getNavigationEdge(QVTscheduleUtil.getProperty(uncastSecondaryEdge));	// Skip isSecondary properties
+					NavigableEdge uncastPrimaryEdge = primarySourceNode.getNavigableEdge(QVTscheduleUtil.getProperty(uncastSecondaryEdge));	// Skip isSecondary properties
 					if (!strategy.navigableEdgesMatch(uncastSecondaryEdge, uncastPrimaryEdge)) {
 						return false;
 					}
@@ -411,7 +411,7 @@ class Correlator
 			if (ok) {
 				for (@NonNull NavigableEdge predicateEdge : predicateEdges) {
 					Property property = QVTscheduleUtil.getProperty(predicateEdge);
-					Node navigation = mergedNode.getNavigationTarget(property);
+					Node navigation = mergedNode.getNavigableTarget(property);
 					if (navigation == null) {
 						ok = false;
 						break;

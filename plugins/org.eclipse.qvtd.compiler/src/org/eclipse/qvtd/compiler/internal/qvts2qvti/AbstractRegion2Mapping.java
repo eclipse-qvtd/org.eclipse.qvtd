@@ -215,14 +215,14 @@ public abstract class AbstractRegion2Mapping
 			OppositePropertyCallExp propertyCallExp = (OppositePropertyCallExp)qvtmElement;
 			Node sourceNode = getNode(propertyCallExp.getOwnedSource());
 			if (sourceNode != null) {
-				return sourceNode.getNavigationTarget(ClassUtil.nonNullState(propertyCallExp.getReferredProperty().getOpposite()));
+				return sourceNode.getNavigableTarget(ClassUtil.nonNullState(propertyCallExp.getReferredProperty().getOpposite()));
 			}
 		}
 		if (qvtmElement instanceof PropertyCallExp) {
 			PropertyCallExp propertyCallExp = (PropertyCallExp)qvtmElement;
 			Node sourceNode = getNode(propertyCallExp.getOwnedSource());
 			if (sourceNode != null) {
-				return sourceNode.getNavigationTarget(ClassUtil.nonNullState(propertyCallExp.getReferredProperty()));
+				return sourceNode.getNavigableTarget(ClassUtil.nonNullState(propertyCallExp.getReferredProperty()));
 			}
 		}
 		if (qvtmElement != null) {

@@ -226,7 +226,7 @@ public class TransformationPartitioner
 	} */
 
 	public @Nullable List<@NonNull MappingRegion> getCorollaryOf(@NonNull Edge edge) {
-		if (!edge.isNavigation()) {
+		if (!(edge.isCast() || edge.isNavigation())) {
 			return null;
 		}
 		return corollaryProperty2regions.get(((NavigableEdge)edge).getProperty());

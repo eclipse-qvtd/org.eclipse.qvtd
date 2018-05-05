@@ -69,7 +69,7 @@ public class LoadingRegionAnalysis extends RegionHelper<@NonNull LoadingRegion>
 		NavigableEdge containerEdge = null;
 		Property parent2childProperty = null;
 		ClassDatum containingClassDatum = null;
-		for (@NonNull NavigableEdge edge : consumerNode.getNavigationEdges()) {
+		for (@NonNull NavigableEdge edge : consumerNode.getNavigableEdges()) {
 			Property property = edge.getProperty().getOpposite();
 			if ((property != null) && property.isIsComposite() && !property.isIsRequired()) {
 				containerEdge = edge;

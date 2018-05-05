@@ -22,6 +22,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -120,7 +121,7 @@ public class RuleHeadAnalysis extends HeadAnalysis
 				sources1 = Sets.newHashSet(sourceNode);
 				targetFromSources.put(sourceNode, sources1);
 			}
-			for (@NonNull NavigableEdge navigationEdge : sourceNode.getRealizedNavigationEdges()) {
+			for (@NonNull NavigationEdge navigationEdge : sourceNode.getRealizedNavigationEdges()) {
 				Node targetNode = navigationEdge.getEdgeTarget();
 				Set<@NonNull Node> sources2 = targetFromSources.get(targetNode);
 				if (sources2 == null) {
@@ -146,7 +147,7 @@ public class RuleHeadAnalysis extends HeadAnalysis
 						sources1 = Sets.newHashSet(sourceNode);
 						targetFromSources.put(sourceNode, sources1);
 					}
-					for (@NonNull NavigableEdge navigationEdge : sourceNode.getNavigationEdges()) {
+					for (@NonNull NavigableEdge navigationEdge : sourceNode.getNavigableEdges()) {
 						if (!navigationEdge.isRealized()) {
 							Property source2targetProperty = QVTscheduleUtil.getProperty(navigationEdge);
 							if (!source2targetProperty.isIsMany()) {

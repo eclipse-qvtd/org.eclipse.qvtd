@@ -288,7 +288,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 	}
 
 	protected @NonNull NavigableEdge createNavigationOrRealizedEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
-		NavigableEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+		NavigableEdge navigationEdge = sourceNode.getNavigableEdge(source2targetProperty);
 		assert navigationEdge == null;
 		Boolean isPartial = navigationAssignment != null ? navigationAssignment.isIsPartial() : null;
 		if ((navigationAssignment != null) || context.isPropertyAssignment(sourceNode, source2targetProperty)) {
@@ -466,7 +466,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		assert targetNode.isDataType();
 		Type type = source2targetProperty.getType();
 		assert type instanceof DataType;
-		NavigableEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+		NavigableEdge navigationEdge = sourceNode.getNavigableEdge(source2targetProperty);
 		if (navigationEdge == null) {
 			if (!targetNode.isOperation()) {
 				navigationEdge = createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
@@ -502,7 +502,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 
 	protected @NonNull NavigableEdge getNavigationEdgeToClass(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
 		assert targetNode.isClass();
-		NavigableEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+		NavigableEdge navigationEdge = sourceNode.getNavigableEdge(source2targetProperty);
 		if (navigationEdge != null) {
 			Node target = navigationEdge.getEdgeTarget();
 			if (target != targetNode) {
@@ -524,7 +524,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 	protected @NonNull NavigableEdge getNavigationEdgeToExpression(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable NavigationAssignment navigationAssignment) {
 		assert targetNode.isExpression();
 		if (navigationAssignment != null) {
-			NavigableEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+			NavigableEdge navigationEdge = sourceNode.getNavigableEdge(source2targetProperty);
 			assert navigationEdge == null;
 			//			Node valueNode = navigationEdge.getTarget();
 			//			assert valueNode.isRealized();
@@ -543,7 +543,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 			return navigationEdge;
 		}
 		else {
-			NavigableEdge navigationEdge = sourceNode.getNavigationEdge(source2targetProperty);
+			NavigableEdge navigationEdge = sourceNode.getNavigableEdge(source2targetProperty);
 			if (navigationEdge != null) {
 				Node valueNode = navigationEdge.getEdgeTarget();
 				assert valueNode.isRealized();
@@ -567,7 +567,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 	}
 
 	private void instantiate(@NonNull Node instantiatedNode, @NonNull Node referenceNode) {
-		for (@NonNull NavigableEdge referenceEdge : referenceNode.getNavigationEdges()) {
+		for (@NonNull NavigableEdge referenceEdge : referenceNode.getNavigableEdges()) {
 			if (!referenceEdge.isSecondary()) {
 				Node referenceTargetNode = referenceEdge.getEdgeTarget();
 				String name = QVTscheduleUtil.getName(referenceTargetNode);
@@ -684,7 +684,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(sourceNode)) {
 				if (edge instanceof NavigationEdge) {
 					NavigationEdge navigationEdge = (NavigationEdge)edge;
-					Property property = navigationEdge.getProperty();
+					Property property = navigationEdge.getReferredProperty();
 					Property oppositeProperty = property.getOpposite();
 					if ((oppositeProperty != null) && !oppositeProperty.isIsMany()) {
 						createNavigationEdge(targetNode, oppositeProperty, QVTscheduleUtil.getSourceNode(navigationEdge), false);
@@ -1016,7 +1016,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		Node sourceNode = synthesize(ownedSource);
 		if (sourceNode.isClass()) {
 			if (!referredProperty.isIsMany()) {
-				NavigableEdge navigationEdge = sourceNode.getNavigationEdge(referredProperty);
+				NavigableEdge navigationEdge = sourceNode.getNavigableEdge(referredProperty);
 				if (navigationEdge != null) {
 					return navigationEdge.getEdgeTarget();
 				}
@@ -1029,7 +1029,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 			Node targetNode = expression2knownNode != null ? expression2knownNode.get(navigationCallExp) : null;
 			if (targetNode == null) {
 				if (type instanceof DataType) {
-					targetNode = sourceNode.getNavigationTarget(referredProperty);
+					targetNode = sourceNode.getNavigableTarget(referredProperty);
 					if (targetNode == null) {
 						targetNode = createDataTypeNode(name, sourceNode, navigationCallExp);
 					}

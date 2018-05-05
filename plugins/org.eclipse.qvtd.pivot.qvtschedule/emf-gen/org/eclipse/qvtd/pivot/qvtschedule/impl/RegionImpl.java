@@ -42,6 +42,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -381,7 +382,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		//		Region region = startNode.getRegion();
 		Node sourceNode = startNode;
 		for (@NonNull NavigableEdge protoEdge : protoPath) {
-			NavigableEdge edge = sourceNode.getNavigationEdge(QVTscheduleUtil.getProperty(protoEdge));
+			NavigableEdge edge = sourceNode.getNavigableEdge(QVTscheduleUtil.getProperty(protoEdge));
 			if (edge != null) {
 				Node protoTarget = protoEdge.getEdgeTarget();
 				Node target = edge.getEdgeTarget();
@@ -509,7 +510,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 				//				s.appendString(getSymbolNamePrefix());
 				s.appendName(headNode.getCompleteClass().getName());
 				List<@NonNull String> edgeNames = new ArrayList<>();
-				for (@NonNull NavigableEdge edge : headNode.getNavigationEdges()) {
+				for (@NonNull NavigableEdge edge : headNode.getNavigableEdges()) {
 					String propertyName = PivotUtil.getName(QVTscheduleUtil.getProperty(edge));
 					edgeNames.add(edge.getEdgeTarget().isNullLiteral() ? propertyName + "0" : propertyName);
 				}
@@ -525,7 +526,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 
 	private @NonNull Set<@NonNull Node> computeToOneSubRegion(@NonNull Set<@NonNull Node> toOneSubRegion, @NonNull Node atNode) {
 		if (toOneSubRegion.add(atNode)) {
-			for (@NonNull NavigableEdge edge : atNode.getNavigationEdges()) {
+			for (@NonNull NavigableEdge edge : atNode.getNavigableEdges()) {
 				assert edge.getEdgeSource() == atNode;
 				Property source2target = edge.getProperty();
 				if (!source2target.isIsMany() && !source2target.isIsImplicit()) {
@@ -679,7 +680,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 			}
 			//			}
 		}
-		for (@NonNull NavigableEdge edge : getPredicatedNavigationEdges()) {
+		for (@NonNull NavigationEdge edge : getPredicatedNavigationEdges()) {
 			EdgeConnection connection = edge.getIncomingConnection();
 			if ((connection != null) && !connections.contains(connection)) {
 				connections.add(connection);
@@ -774,8 +775,8 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	}
 
 	@Override
-	public final @NonNull Iterable<@NonNull Node> getNavigableNodes() {
-		return Iterables.filter(QVTscheduleUtil.getOwnedNodes(this), QVTscheduleUtil.IsNavigableNodePredicate.INSTANCE);
+	public final @NonNull Iterable<@NonNull Node> getMatchedNodes() {
+		return Iterables.filter(QVTscheduleUtil.getOwnedNodes(this), QVTscheduleUtil.IsMatchedNodePredicate.INSTANCE);
 	}
 
 	@Override
@@ -888,7 +889,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		assert sourceNode.getOwningRegion() == targetNode.getOwningRegion();
 		NavigableEdge bestEdge = null;
 		List<@NonNull NavigableEdge> bestPath = null;
-		for (@NonNull NavigableEdge edge : sourceNode.getNavigationEdges()) {
+		for (@NonNull NavigableEdge edge : sourceNode.getNavigableEdges()) {
 			if (!usedEdges.contains(edge) && !edge.getProperty().isIsMany() && !edge.isRealized()) {
 				if (edge.getEdgeTarget() == targetNode) {
 					bestEdge = getBestEdge(bestEdge, edge);
@@ -928,9 +929,9 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	}
 
 	@Override
-	public final @NonNull Iterable<@NonNull NavigableEdge> getPredicatedNavigationEdges() {
+	public final @NonNull Iterable<@NonNull NavigationEdge> getPredicatedNavigationEdges() {
 		@SuppressWarnings("unchecked")
-		@NonNull Iterable<@NonNull NavigableEdge> filter = (Iterable<@NonNull NavigableEdge>)(Object)Iterables.filter(QVTscheduleUtil.getOwnedEdges(this), QVTscheduleUtil.IsPredicatedNavigationEdgePredicate.INSTANCE);
+		@NonNull Iterable<@NonNull NavigationEdge> filter = (Iterable<@NonNull NavigationEdge>)(Object)Iterables.filter(QVTscheduleUtil.getOwnedEdges(this), QVTscheduleUtil.IsPredicatedNavigationEdgePredicate.INSTANCE);
 		return filter;
 	}
 

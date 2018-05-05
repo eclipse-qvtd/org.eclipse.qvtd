@@ -231,7 +231,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 
 		private void createCastPredicates(@NonNull Node sourceNode, @NonNull VariableDeclaration sourceVariable) {
-			for (@NonNull NavigableEdge edge : sourceNode.getNavigationEdges()) {
+			for (@NonNull NavigableEdge edge : sourceNode.getNavigableEdges()) {
 				if (edge.isCast() && edge.isUnconditional()) {
 					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
 					Property castProperty = QVTscheduleUtil.getProperty(edge);
@@ -400,7 +400,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			for (@NonNull Node node : unconditionalNodes) {
 				int accesses = 0;
 				for (@NonNull Edge outgoingEdge : QVTscheduleUtil.getOutgoingEdges(node)) {
-					if (outgoingEdge.isNavigation() || outgoingEdge.isComputation()) {
+					if (outgoingEdge.isCast() || outgoingEdge.isNavigation() || outgoingEdge.isComputation()) {
 						accesses++;
 					}
 				}
@@ -418,7 +418,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 						boolean isIfThenOrElse = isIf && ("then".equals(edge.getName()) || "else".equals(edge.getName()));
 						analyzeIncomingPath(edge.getEdgeSource(), unconditionalNodes, conditionalNodes, isConditional || isIfThenOrElse);
 					}
-					else if (edge.isNavigation()) {
+					else if (edge.isCast() || edge.isNavigation()) {
 						analyzeIncomingPath(edge.getEdgeSource(), unconditionalNodes, conditionalNodes, isConditional);
 					}
 				}
@@ -610,7 +610,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				return clonedElement;
 			}
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-				if (edge.isNavigation()) {
+				if (edge.isCast() || edge.isNavigation()) {
 					Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
 					if (edgeRole == Role.LOADED) {
 						OCLExpression source = getExpression(edge.getEdgeSource());
@@ -1108,7 +1108,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	protected @NonNull Iterable<@NonNull NavigableEdge> getAvailableNavigableEdges() {
 		Set<@NonNull NavigableEdge> oldEdges = new HashSet<>();
 		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
-			if (edge.isOld() && edge.isNavigation() /*&& edge.isUnconditional()*/) {
+			if (edge.isOld() && (edge.isCast() || edge.isNavigation()) /*&& edge.isUnconditional()*/) {
 				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
 				Node targetNode = QVTscheduleUtil.getTargetNode(edge);
 				if (sourceNode.isOld() && targetNode.isOld()) {
@@ -1301,7 +1301,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		GuardParameter guardParameter = helper.createGuardParameter(getSafeName(guardNode), iTypedModel, variableType, true);
 		Property successProperty = scheduleManager.basicGetSuccessProperty(guardNode);
 		if (successProperty != null) {
-			NavigableEdge successEdge = guardNode.getNavigationEdge(successProperty);
+			NavigableEdge successEdge = guardNode.getNavigableEdge(successProperty);
 			if (successEdge != null) {
 				Node successNode = QVTscheduleUtil.getTargetNode(successEdge);
 				if (successNode.isSuccess()) {

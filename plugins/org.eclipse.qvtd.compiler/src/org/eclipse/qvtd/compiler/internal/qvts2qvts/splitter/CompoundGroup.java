@@ -190,7 +190,7 @@ class CompoundGroup extends AbstractGroup
 	 */
 	protected void createBoundaries(@NonNull SimpleGroup sourceGroup, @NonNull Iterable<@NonNull Node> nonOverlapNodes) {
 		for (@NonNull Node nonOverlapNode : nonOverlapNodes) {
-			for (@NonNull NavigableEdge edge : nonOverlapNode.getNavigationEdges()) {
+			for (@NonNull NavigableEdge edge : nonOverlapNode.getNavigableEdges()) {
 				assert edge.getEdgeSource() == nonOverlapNode;
 				if (!edge.isRealized() && edge.isMatched()) {
 					Property property = edge.getProperty();

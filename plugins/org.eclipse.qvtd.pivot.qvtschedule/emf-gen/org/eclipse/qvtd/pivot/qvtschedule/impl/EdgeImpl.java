@@ -597,7 +597,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 
 	@Override
 	public String getArrowtail() {
-		return isNavigation() ? "vee" : null;
+		return (isCast() || isNavigation()) ? "vee" : null;
 	}
 
 	@Override
@@ -627,7 +627,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	}
 
 	public @NonNull Integer getPenwidth() {
-		return isNavigation() ? 2*QVTscheduleConstants.LINE_WIDTH : QVTscheduleConstants.LINE_WIDTH;
+		return (isCast() || isNavigation()) ? 2*QVTscheduleConstants.LINE_WIDTH : QVTscheduleConstants.LINE_WIDTH;
 	}
 
 	public @Nullable String getStyle() {

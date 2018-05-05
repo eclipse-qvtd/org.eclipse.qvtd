@@ -73,7 +73,7 @@ class NewSpeculationPartition extends AbstractPartition
 		}
 		if (dispatchNode != null) {
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(dispatchNode)) {
-				if (edge.isNavigation() && edge.isOld()) {
+				if ((edge.isCast() || edge.isNavigation()) && edge.isOld()) {
 					Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
 					gatherReachableOldAcyclicNodes(checkableOldNodes, sourceNode);
 				}
@@ -116,7 +116,7 @@ class NewSpeculationPartition extends AbstractPartition
 		//		boolean isNeeded = false;
 		if (!hasNode(node) && !checkableOldNodes.contains(node) && (node.isHead() || node.isOld() && !partitioner.isCyclic(node))) {
 			checkableOldNodes.add(node);
-			for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
+			for (@NonNull NavigableEdge edge : node.getNavigableEdges()) {
 				if (edge.isOld()) {
 					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
 					gatherReachableOldAcyclicNodes(checkableOldNodes, targetNode);
@@ -151,7 +151,7 @@ class NewSpeculationPartition extends AbstractPartition
 
 	protected boolean isTraced(@NonNull Node node, @NonNull Iterable<@NonNull Node> executionNodes) {
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-			if (edge.isNavigation()) {
+			if (edge.isCast() || edge.isNavigation()) {
 				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
 				if (Iterables.contains(executionNodes, sourceNode)) {
 					return true;

@@ -151,7 +151,7 @@ class SpeculatedPartition extends AbstractPartition
 			}
 		}
 		for (@NonNull Node traceNode : partitioner.getTraceNodes()) {
-			for (@NonNull NavigableEdge edge : traceNode.getNavigationEdges()) {
+			for (@NonNull NavigableEdge edge : traceNode.getNavigableEdges()) {
 				if (partitioner.hasRealizedEdge(edge)) {
 					tracedInputNodes.add(edge.getEdgeTarget());
 				}

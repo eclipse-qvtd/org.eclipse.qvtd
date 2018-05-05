@@ -69,7 +69,7 @@ public class TracedHeadAnalysis extends HeadAnalysis
 					sources1 = Sets.newHashSet(sourceNode);
 					targetFromSources.put(sourceNode, sources1);
 				}
-				for (@NonNull NavigableEdge navigationEdge : sourceNode.getNavigationEdges()) {
+				for (@NonNull NavigableEdge navigationEdge : sourceNode.getNavigableEdges()) {
 					Property source2targetProperty = QVTscheduleUtil.getProperty(navigationEdge);
 					//					boolean isRequired = source2targetProperty.isIsRequired();
 					boolean isMany = source2targetProperty.isIsMany();

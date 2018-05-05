@@ -143,7 +143,7 @@ public interface Region extends NamedElement, Symbolable, ToDOTable, GraphNode
 	/**
 	 * Return the nodes that are navigated by navigation from the region's guards.
 	 */
-	@NonNull Iterable<@NonNull Node> getNavigableNodes();
+	@NonNull Iterable<@NonNull Node> getMatchedNodes();
 	@NonNull Iterable<@NonNull NavigableEdge> getNavigationEdges();
 
 	/**
@@ -169,7 +169,7 @@ public interface Region extends NamedElement, Symbolable, ToDOTable, GraphNode
 	@NonNull Iterable<@NonNull NodeConnection> getOutgoingPassedConnections();
 	@NonNull Iterable<@NonNull NodeConnection> getOutgoingUsedConnections();
 	@NonNull Iterable<@NonNull Node> getPatternNodes();
-	@NonNull Iterable<@NonNull NavigableEdge> getPredicatedNavigationEdges();
+	@NonNull Iterable<@NonNull NavigationEdge> getPredicatedNavigationEdges();
 	@NonNull Iterable<@NonNull Edge> getRealizedEdges();
 	@NonNull Iterable<@NonNull NavigableEdge> getRealizedNavigationEdges();
 	@NonNull Iterable<@NonNull Edge> getRecursionEdges();

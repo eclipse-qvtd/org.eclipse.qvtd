@@ -28,6 +28,7 @@ import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractDispatch;
@@ -116,7 +117,7 @@ public class TraceClassAnalysis implements Nameable
 			Map<@NonNull Property, @NonNull NavigableEdge> property2edge = new HashMap<>();
 			partitioner2property2edge.put(producer, property2edge);
 			for (@NonNull Node traceNode : producer.getTraceNodes()) {
-				for (@NonNull NavigableEdge edge : traceNode.getRealizedNavigationEdges()) {
+				for (@NonNull NavigationEdge edge : traceNode.getRealizedNavigationEdges()) {
 					if (!edge.getEdgeTarget().isRealized()) {
 						property2edge.put(QVTscheduleUtil.getProperty(edge), edge);
 					}

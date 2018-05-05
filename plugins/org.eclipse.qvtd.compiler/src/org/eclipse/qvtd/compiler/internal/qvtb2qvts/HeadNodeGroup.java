@@ -75,7 +75,7 @@ public class HeadNodeGroup
 				if (uniqueNodes.contains(targetNode) || iteratedNodes.contains(targetNode) || aggregateNodes.contains(targetNode)) {
 					// targetType = null;			// already reached
 				}
-				else if (source2targetEdge.isNavigation()) {
+				else if (source2targetEdge.isCast() || source2targetEdge.isNavigation()) {
 					Property targetProperty = QVTscheduleUtil.getProperty((NavigableEdge) source2targetEdge);
 					targetType = targetProperty.getType();
 				}

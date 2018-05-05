@@ -61,7 +61,7 @@ class SplitterUtil
 	private static void computeComputableTargetNodes(@NonNull Set<@NonNull Node> computableTargetNodes, @NonNull Node sourceNode, @NonNull Set<@NonNull Node> unresolvedOperationNodes) {
 		if (computableTargetNodes.add(sourceNode)) {
 			for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(sourceNode)) {
-				if (edge.isComputation() || (edge.isNavigation() && !edge.isMatched())) {
+				if (edge.isComputation() || ((edge.isCast() || edge.isNavigation()) && !edge.isMatched())) {
 					Node targetNode = edge.getEdgeTarget();
 					if (targetNode.isRealized() && targetNode.isOperation()) {
 						unresolvedOperationNodes.add(targetNode);		// Keys require an all-input check.
@@ -122,7 +122,7 @@ class SplitterUtil
 
 	private static @NonNull Set<@NonNull Node> computeNavigableNodes(@NonNull Set<@NonNull Node> reachableNodes, @NonNull Node sourceNode) {
 		if (reachableNodes.add(sourceNode)) {
-			for (@NonNull NavigableEdge edge : sourceNode.getNavigationEdges()) {
+			for (@NonNull NavigableEdge edge : sourceNode.getNavigableEdges()) {
 				assert edge.getEdgeSource() == sourceNode;
 				if (!edge.isRealized() && edge.isMatched()) {
 					Node targetNode = edge.getEdgeTarget();
@@ -134,13 +134,13 @@ class SplitterUtil
 	}
 
 	public static boolean isBidirectional(@NonNull Edge edge) {
-		if (!edge.isNavigation()) {
+		if (!(edge.isCast() || edge.isNavigation())) {
 			return false;
 		}
 		Node sourceNode = edge.getEdgeSource();
 		Node targetNode = edge.getEdgeTarget();
 		for (@NonNull Edge edge2 : QVTscheduleUtil.getOutgoingEdges(targetNode)) {
-			if (edge2.isNavigation() && (edge2.getEdgeTarget() == sourceNode)) {
+			if ((edge.isCast() || edge2.isNavigation()) && (edge2.getEdgeTarget() == sourceNode)) {
 				return true;
 			}
 		}

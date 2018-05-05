@@ -427,7 +427,7 @@ public class RelationAnalysis extends RuleAnalysis
 	protected void analyzeContainments() {
 		for (@NonNull Node node : region.getNewNodes()) {
 			boolean isContained = false;
-			for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
+			for (@NonNull NavigableEdge edge : node.getNavigableEdges()) {
 				Property property = edge.getProperty();
 				Property opposite = property.getOpposite();
 				if ((opposite != null) && opposite.isIsComposite() && !edge.getEdgeTarget().isNullLiteral()) {
