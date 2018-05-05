@@ -22,7 +22,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.BooleanValueNode;
+import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.CollectionPartEdge;
@@ -40,11 +40,10 @@ import org.eclipse.qvtd.pivot.qvtschedule.MapPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.NullNode;
+import org.eclipse.qvtd.pivot.qvtschedule.NullLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationSelfEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.OperationValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternTypedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternVariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
@@ -79,9 +78,9 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		this.region = region;
 	}
 
-	public @NonNull BooleanValueNode createBooleanValueNode(boolean isTrue) {
+	public @NonNull BooleanLiteralNode createBooleanValueNode(boolean isTrue) {
 		ClassDatum classDatum = scheduleManager.getBooleanClassDatum();
-		BooleanValueNode booleanValueNode = QVTscheduleFactory.eINSTANCE.createBooleanValueNode();
+		BooleanLiteralNode booleanValueNode = QVTscheduleFactory.eINSTANCE.createBooleanLiteralNode();
 		booleanValueNode.initialize(Role.CONSTANT, region, Boolean.toString(isTrue), classDatum);
 		booleanValueNode.setMatched(true);
 		booleanValueNode.setBooleanValue(isTrue);
@@ -294,7 +293,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		else {
 			classDatum = scheduleManager.getOclVoidClassDatum();
 		}
-		NullNode node = QVTscheduleFactory.eINSTANCE.createNullNode();
+		NullLiteralNode node = QVTscheduleFactory.eINSTANCE.createNullLiteralNode();
 		node.initialize(nodeRole, region, "«null»", classDatum);
 		node.setMatched(isMatched);
 		if (typedElement != null) {
@@ -403,7 +402,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	 * Create a predicated source2targetProperty success edge from sourceNode to a true/false BooleanValueNode.
 	 */
 	public @NonNull SuccessEdge createPredicatedSuccess(@NonNull Node sourceNode, @NonNull Property source2targetProperty, boolean isSuccess) {
-		BooleanValueNode successNode = createBooleanValueNode(isSuccess);
+		BooleanLiteralNode successNode = createBooleanValueNode(isSuccess);
 		SuccessEdge edge = QVTscheduleFactory.eINSTANCE.createSuccessEdge();
 		edge.initialize(Role.PREDICATED, sourceNode, source2targetProperty.getName(), successNode);
 		edge.initializeProperty(source2targetProperty, false);

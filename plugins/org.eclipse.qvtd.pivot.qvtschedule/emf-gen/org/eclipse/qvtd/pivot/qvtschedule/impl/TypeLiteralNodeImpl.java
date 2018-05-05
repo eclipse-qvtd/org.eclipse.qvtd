@@ -17,62 +17,51 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.jdt.annotation.NonNull;
-
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.util.Visitor;
-
-import org.eclipse.qvtd.pivot.qvtschedule.BooleanValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.TypeLiteralNode;
+
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Boolean Value Node</b></em>'.
+ * An implementation of the model object '<em><b>Type Literal Node</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BooleanValueNodeImpl#isBooleanValue <em>Boolean Value</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.TypeLiteralNodeImpl#getTypeValue <em>Type Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class BooleanValueNodeImpl extends OperationNodeImpl implements BooleanValueNode {
+public class TypeLiteralNodeImpl extends OperationNodeImpl implements TypeLiteralNode {
 	/**
-	 * The default value of the '{@link #isBooleanValue() <em>Boolean Value</em>}' attribute.
+	 * The cached value of the '{@link #getTypeValue() <em>Type Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isBooleanValue()
+	 * @see #getTypeValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean BOOLEAN_VALUE_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isBooleanValue() <em>Boolean Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isBooleanValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean booleanValue = BOOLEAN_VALUE_EDEFAULT;
+	protected Type typeValue;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BooleanValueNodeImpl() {
+	protected TypeLiteralNodeImpl() {
 		super();
 	}
 
@@ -83,7 +72,7 @@ public class BooleanValueNodeImpl extends OperationNodeImpl implements BooleanVa
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTschedulePackage.Literals.BOOLEAN_VALUE_NODE;
+		return QVTschedulePackage.Literals.TYPE_LITERAL_NODE;
 	}
 
 	/**
@@ -92,8 +81,25 @@ public class BooleanValueNodeImpl extends OperationNodeImpl implements BooleanVa
 	 * @generated
 	 */
 	@Override
-	public boolean isBooleanValue() {
-		return booleanValue;
+	public Type getTypeValue() {
+		if (typeValue != null && typeValue.eIsProxy()) {
+			InternalEObject oldTypeValue = (InternalEObject)typeValue;
+			typeValue = (Type)eResolveProxy(oldTypeValue);
+			if (typeValue != oldTypeValue) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.TYPE_LITERAL_NODE__TYPE_VALUE, oldTypeValue, typeValue));
+			}
+		}
+		return typeValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Type basicGetTypeValue() {
+		return typeValue;
 	}
 
 	/**
@@ -102,11 +108,11 @@ public class BooleanValueNodeImpl extends OperationNodeImpl implements BooleanVa
 	 * @generated
 	 */
 	@Override
-	public void setBooleanValue(boolean newBooleanValue) {
-		boolean oldBooleanValue = booleanValue;
-		booleanValue = newBooleanValue;
+	public void setTypeValue(Type newTypeValue) {
+		Type oldTypeValue = typeValue;
+		typeValue = newTypeValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.BOOLEAN_VALUE_NODE__BOOLEAN_VALUE, oldBooleanValue, booleanValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.TYPE_LITERAL_NODE__TYPE_VALUE, oldTypeValue, typeValue));
 	}
 
 	/**
@@ -117,8 +123,9 @@ public class BooleanValueNodeImpl extends OperationNodeImpl implements BooleanVa
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.BOOLEAN_VALUE_NODE__BOOLEAN_VALUE:
-				return isBooleanValue();
+			case QVTschedulePackage.TYPE_LITERAL_NODE__TYPE_VALUE:
+				if (resolve) return getTypeValue();
+				return basicGetTypeValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -131,8 +138,8 @@ public class BooleanValueNodeImpl extends OperationNodeImpl implements BooleanVa
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.BOOLEAN_VALUE_NODE__BOOLEAN_VALUE:
-				setBooleanValue((Boolean)newValue);
+			case QVTschedulePackage.TYPE_LITERAL_NODE__TYPE_VALUE:
+				setTypeValue((Type)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -146,8 +153,8 @@ public class BooleanValueNodeImpl extends OperationNodeImpl implements BooleanVa
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.BOOLEAN_VALUE_NODE__BOOLEAN_VALUE:
-				setBooleanValue(BOOLEAN_VALUE_EDEFAULT);
+			case QVTschedulePackage.TYPE_LITERAL_NODE__TYPE_VALUE:
+				setTypeValue((Type)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -161,8 +168,8 @@ public class BooleanValueNodeImpl extends OperationNodeImpl implements BooleanVa
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.BOOLEAN_VALUE_NODE__BOOLEAN_VALUE:
-				return booleanValue != BOOLEAN_VALUE_EDEFAULT;
+			case QVTschedulePackage.TYPE_LITERAL_NODE__TYPE_VALUE:
+				return typeValue != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -174,40 +181,13 @@ public class BooleanValueNodeImpl extends OperationNodeImpl implements BooleanVa
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitBooleanValueNode(this);
-	}
-
-	/**
-	 * @generated NOT
-	 */
-	@Override
-	public @NonNull String toString() {
-		return super.toString();
+		return (R) ((QVTscheduleVisitor<?>)visitor).visitTypeLiteralNode(this);
 	}
 
 	@Override
 	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
-		assert nodeRole == Role.CONSTANT;
-		BooleanValueNodeImpl node = (BooleanValueNodeImpl) super.createNode(nodeRole, region);
-		node.setBooleanValue(booleanValue);
+		TypeLiteralNode node = (TypeLiteralNode)super.createNode(nodeRole, region);
+		node.setTypeValue(typeValue);
 		return node;
 	}
-
-	@Override
-	public void setIncomingConnection(NodeConnection newIncomingConnection) {
-		assert (incomingConnection == null) || (newIncomingConnection == null);
-		super.setIncomingConnection(newIncomingConnection);
-	}
-
-	@Override
-	public void setUtility(@NonNull Utility utility) {
-		assert QVTscheduleUtil.isUnconditional(utility);
-		super.setUtility(utility);
-	}
-
-	@Override
-	public void setNodeRole(Role newNodeRole) {
-		assert newNodeRole == Role.CONSTANT;
-		super.setNodeRole(newNodeRole);
-	}
-} //BooleanValueNodeImpl
+} //TypeLiteralNodeImpl

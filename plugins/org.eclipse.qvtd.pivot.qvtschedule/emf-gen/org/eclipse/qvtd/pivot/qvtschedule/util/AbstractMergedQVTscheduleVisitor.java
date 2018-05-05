@@ -44,7 +44,7 @@ public abstract class AbstractMergedQVTscheduleVisitor<R, C>
 	}
 
 	@Override
-	public R visitBooleanValueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull BooleanValueNode object) {
+	public R visitBooleanLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull BooleanLiteralNode object) {
 		return visiting(object);
 	}
 
@@ -59,7 +59,17 @@ public abstract class AbstractMergedQVTscheduleVisitor<R, C>
 	}
 
 	@Override
+	public R visitCollectionLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CollectionLiteralNode object) {
+		return visiting(object);
+	}
+
+	@Override
 	public R visitCollectionPartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CollectionPartEdge object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitCollectionRangeNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CollectionRangeNode object) {
 		return visiting(object);
 	}
 
@@ -104,12 +114,22 @@ public abstract class AbstractMergedQVTscheduleVisitor<R, C>
 	}
 
 	@Override
+	public R visitEnumLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull EnumLiteralNode object) {
+		return visiting(object);
+	}
+
+	@Override
 	public R visitErrorNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ErrorNode object) {
 		return visiting(object);
 	}
 
 	@Override
 	public R visitExpressionEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ExpressionEdge object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitIfNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull IfNode object) {
 		return visiting(object);
 	}
 
@@ -149,7 +169,22 @@ public abstract class AbstractMergedQVTscheduleVisitor<R, C>
 	}
 
 	@Override
+	public R visitMapLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MapLiteralNode object) {
+		return visiting(object);
+	}
+
+	@Override
 	public R visitMapPartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MapPartEdge object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitMapPartNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MapPartNode object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitMappingNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingNode object) {
 		return visiting(object);
 	}
 
@@ -189,7 +224,17 @@ public abstract class AbstractMergedQVTscheduleVisitor<R, C>
 	}
 
 	@Override
-	public R visitNullNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NullNode object) {
+	public R visitNullLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NullLiteralNode object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitNumericLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NumericLiteralNode object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitOperationCallNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull OperationCallNode object) {
 		return visiting(object);
 	}
 
@@ -210,11 +255,6 @@ public abstract class AbstractMergedQVTscheduleVisitor<R, C>
 
 	@Override
 	public R visitOperationSelfEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull OperationSelfEdge object) {
-		return visiting(object);
-	}
-
-	@Override
-	public R visitOperationValueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull OperationValueNode object) {
 		return visiting(object);
 	}
 
@@ -264,7 +304,17 @@ public abstract class AbstractMergedQVTscheduleVisitor<R, C>
 	}
 
 	@Override
+	public R visitShadowNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ShadowNode object) {
+		return visiting(object);
+	}
+
+	@Override
 	public R visitShadowPartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ShadowPartEdge object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitStringLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull StringLiteralNode object) {
 		return visiting(object);
 	}
 
@@ -279,7 +329,17 @@ public abstract class AbstractMergedQVTscheduleVisitor<R, C>
 	}
 
 	@Override
+	public R visitTupleLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull TupleLiteralNode object) {
+		return visiting(object);
+	}
+
+	@Override
 	public R visitTuplePartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull TuplePartEdge object) {
+		return visiting(object);
+	}
+
+	@Override
+	public R visitTypeLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull TypeLiteralNode object) {
 		return visiting(object);
 	}
 

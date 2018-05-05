@@ -33,7 +33,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.PredicateEdgeCheckedC
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.PredicateNavigationEdgeCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.BooleanValueNode;
+import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -152,7 +152,7 @@ public class FallibilityAnalysis
 			else {
 				Node sourceNode = QVTscheduleUtil.getSourceNode(navigationEdge);
 				Node targetNode = QVTscheduleUtil.getTargetNode(navigationEdge);
-				if (!(targetNode instanceof BooleanValueNode) || ! ((BooleanValueNode)targetNode).isBooleanValue()) {
+				if (!(targetNode instanceof BooleanLiteralNode) || ! ((BooleanLiteralNode)targetNode).isBooleanValue()) {
 					allSuccessesResolved = false;
 				}
 				else {

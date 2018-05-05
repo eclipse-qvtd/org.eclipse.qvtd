@@ -22,7 +22,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 
 /**
@@ -239,9 +239,22 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 		DEAD							// else never used
 	}
 
-	void addOutgoingConnection(@NonNull NodeConnection connection);
-	void addTypedElement(@NonNull TypedElement typedElement);
+	/**
+	 * Register element as a further expression that shares the value of the originating element of this node.
+	 */
+	void addOriginatingElement(@NonNull Element element);
 
+	void addOutgoingConnection(@NonNull NodeConnection connection);
+
+	/**
+	 * Return the element from which this node originated. May be null for a synthetic node.
+	 */
+	@Nullable Element basicGetOriginatingElement();
+
+	/**
+	 * Return a variable that shares the value of the element from which this node originated. May be null.
+	 */
+	@Nullable VariableDeclaration basicGetOriginatingVariable();
 	@Nullable Utility basicGetUtility();
 
 	/**
@@ -294,6 +307,19 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	@NonNull Iterable<@NonNull NavigableEdge> getNavigationEdges();
 	@Nullable Node getNavigationTarget(@NonNull Property source2targetProperty);
 	@NonNull Iterable<@NonNull Node> getNavigationTargets();
+
+	/**
+	 * Return the element from which this node originated. Throws an IllegalStateException
+	 * for a synthetic node that has no originating element.
+	 */
+	@NonNull Element getOriginatingElement();
+
+	/**
+	 * Return the element from which this node originated and also any variables and duplicates that
+	 * share the same value. May be empty for a synthetic node.
+	 */
+	@NonNull Iterable<@NonNull Element> getOriginatingElements();
+
 	@NonNull Iterable<@NonNull NodeConnection> getOutgoingPassedConnections();
 	@NonNull Iterable<@NonNull NodeConnection> getOutgoingUsedBindingEdges();
 	//	@Nullable InterRegionEdge getPassedBindingEdge();
@@ -322,7 +348,6 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 */
 	@NonNull Iterable<@NonNull Node> getRecursionTargets();
 	@NonNull Iterable<@NonNull ? extends Edge> getResultEdges();
-	@NonNull Iterable<@NonNull TypedElement> getTypedElements();
 	@NonNull Iterable<@NonNull Node> getUsedBindingSources();
 	@NonNull Utility getUtility();
 
@@ -368,7 +393,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	/**
 	 * Return true if this node is an explicitly null value.
 	 */
-	boolean isExplicitNull();
+	boolean isNullLiteral();
 
 	/**
 	 * Return true if this node is part of an OCL expression; an iteration or operation other than
@@ -427,6 +452,12 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * isPredicated() is exclusive to isConstant()/isLoaded()/isSpeculation()/isSpeculated()/isRealized()
 	 */
 	boolean isPredicated();
+
+	/**
+	 * Return true if this node has a primitive type and so should not be treated as a possible common sub-expression.
+	 * null, boolean, string, integer, real and enum-literal are all primitive.
+	 */
+	boolean isPrimitive();
 
 	/**
 	 * Return true if the value of this node is determined by execution of a mapping.
@@ -492,6 +523,11 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * Redesignate a guard node as a head.
 	 */
 	void setHead();
+
+	/**
+	 * Register variable as sharing the same value as the orginating element of this node..
+	 */
+	void setOriginatingVariable(@NonNull VariableDeclaration variable);
 
 	void setUtility(@NonNull Utility utility);
 } // Node

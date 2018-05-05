@@ -210,7 +210,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 		if (target2sourceProperty != null) {
 			Node targetNode2 = targetNode;
 			assert targetNode2 != null;
-			if (!targetNode2.isExplicitNull()) {
+			if (!targetNode2.isNullLiteral()) {
 				assert (targetNode2.getNavigationEdge(target2sourceProperty) == null) || target2sourceProperty.isIsMany();
 				if (!property.isIsMany() && !target2sourceProperty.isIsMany() /*&& target2sourceProperty.isIsRequired()*/) {		// FIXME do we need stronger type conformance here ??
 					Role edgeRole2 = edgeRole;
@@ -248,13 +248,13 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 
 	@Override
 	public void setSource(@Nullable Node sourceNode) {
-		assert (sourceNode == null) || !sourceNode.isExplicitNull();
+		assert (sourceNode == null) || !sourceNode.isNullLiteral();
 		super.setSource(sourceNode);
 	}
 
 	@Override
 	public void setTarget(@Nullable Node targetNode) {
-		assert (targetNode == null) || !targetNode.isExplicitNull();
+		assert (targetNode == null) || !targetNode.isNullLiteral();
 		super.setTarget(targetNode);
 	}
 } //CastEdgeImpl

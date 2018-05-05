@@ -22,12 +22,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.jdt.annotation.NonNull;
-
 import org.eclipse.ocl.pivot.Operation;
-
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.OperationValueNode;
+import org.eclipse.qvtd.pivot.qvtschedule.OperationCallNode;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
@@ -35,34 +33,34 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Operation Value Node</b></em>'.
+ * An implementation of the model object '<em><b>Operation Call Node</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationValueNodeImpl#getOperationValue <em>Operation Value</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationCallNodeImpl#getReferredOperation <em>Referred Operation</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class OperationValueNodeImpl extends OperationNodeImpl implements OperationValueNode {
+public class OperationCallNodeImpl extends OperationNodeImpl implements OperationCallNode {
 	/**
-	 * The cached value of the '{@link #getOperationValue() <em>Operation Value</em>}' reference.
+	 * The cached value of the '{@link #getReferredOperation() <em>Referred Operation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOperationValue()
+	 * @see #getReferredOperation()
 	 * @generated
 	 * @ordered
 	 */
-	protected Operation operationValue;
+	protected Operation referredOperation;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected OperationValueNodeImpl() {
+	protected OperationCallNodeImpl() {
 		super();
 	}
 
@@ -73,7 +71,7 @@ public class OperationValueNodeImpl extends OperationNodeImpl implements Operati
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTschedulePackage.Literals.OPERATION_VALUE_NODE;
+		return QVTschedulePackage.Literals.OPERATION_CALL_NODE;
 	}
 
 	/**
@@ -82,16 +80,16 @@ public class OperationValueNodeImpl extends OperationNodeImpl implements Operati
 	 * @generated
 	 */
 	@Override
-	public Operation getOperationValue() {
-		if (operationValue != null && operationValue.eIsProxy()) {
-			InternalEObject oldOperationValue = (InternalEObject)operationValue;
-			operationValue = (Operation)eResolveProxy(oldOperationValue);
-			if (operationValue != oldOperationValue) {
+	public Operation getReferredOperation() {
+		if (referredOperation != null && referredOperation.eIsProxy()) {
+			InternalEObject oldReferredOperation = (InternalEObject)referredOperation;
+			referredOperation = (Operation)eResolveProxy(oldReferredOperation);
+			if (referredOperation != oldReferredOperation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.OPERATION_VALUE_NODE__OPERATION_VALUE, oldOperationValue, operationValue));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.OPERATION_CALL_NODE__REFERRED_OPERATION, oldReferredOperation, referredOperation));
 			}
 		}
-		return operationValue;
+		return referredOperation;
 	}
 
 	/**
@@ -99,8 +97,8 @@ public class OperationValueNodeImpl extends OperationNodeImpl implements Operati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Operation basicGetOperationValue() {
-		return operationValue;
+	public Operation basicGetReferredOperation() {
+		return referredOperation;
 	}
 
 	/**
@@ -109,11 +107,11 @@ public class OperationValueNodeImpl extends OperationNodeImpl implements Operati
 	 * @generated
 	 */
 	@Override
-	public void setOperationValue(Operation newOperationValue) {
-		Operation oldOperationValue = operationValue;
-		operationValue = newOperationValue;
+	public void setReferredOperation(Operation newReferredOperation) {
+		Operation oldReferredOperation = referredOperation;
+		referredOperation = newReferredOperation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.OPERATION_VALUE_NODE__OPERATION_VALUE, oldOperationValue, operationValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.OPERATION_CALL_NODE__REFERRED_OPERATION, oldReferredOperation, referredOperation));
 	}
 
 	/**
@@ -124,9 +122,9 @@ public class OperationValueNodeImpl extends OperationNodeImpl implements Operati
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_VALUE_NODE__OPERATION_VALUE:
-				if (resolve) return getOperationValue();
-				return basicGetOperationValue();
+			case QVTschedulePackage.OPERATION_CALL_NODE__REFERRED_OPERATION:
+				if (resolve) return getReferredOperation();
+				return basicGetReferredOperation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -139,8 +137,8 @@ public class OperationValueNodeImpl extends OperationNodeImpl implements Operati
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_VALUE_NODE__OPERATION_VALUE:
-				setOperationValue((Operation)newValue);
+			case QVTschedulePackage.OPERATION_CALL_NODE__REFERRED_OPERATION:
+				setReferredOperation((Operation)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -154,8 +152,8 @@ public class OperationValueNodeImpl extends OperationNodeImpl implements Operati
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_VALUE_NODE__OPERATION_VALUE:
-				setOperationValue((Operation)null);
+			case QVTschedulePackage.OPERATION_CALL_NODE__REFERRED_OPERATION:
+				setReferredOperation((Operation)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -169,8 +167,8 @@ public class OperationValueNodeImpl extends OperationNodeImpl implements Operati
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_VALUE_NODE__OPERATION_VALUE:
-				return operationValue != null;
+			case QVTschedulePackage.OPERATION_CALL_NODE__REFERRED_OPERATION:
+				return referredOperation != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -182,14 +180,13 @@ public class OperationValueNodeImpl extends OperationNodeImpl implements Operati
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitOperationValueNode(this);
+		return (R) ((QVTscheduleVisitor<?>)visitor).visitOperationCallNode(this);
 	}
 
 	@Override
 	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
-		OperationValueNodeImpl node = (OperationValueNodeImpl) super.createNode(nodeRole, region);
-		node.setOperationValue(operationValue);
+		OperationCallNode node = (OperationCallNode)super.createNode(nodeRole, region);
+		node.setReferredOperation(referredOperation);
 		return node;
 	}
-
-} //OperationValueNodeImpl
+} //OperationCallNodeImpl

@@ -35,13 +35,13 @@ public interface QVTscheduleFactory extends EFactory {
 	QVTscheduleFactory eINSTANCE = org.eclipse.qvtd.pivot.qvtschedule.impl.QVTscheduleFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Boolean Value Node</em>'.
+	 * Returns a new object of class '<em>Boolean Literal Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Boolean Value Node</em>'.
+	 * @return a new object of class '<em>Boolean Literal Node</em>'.
 	 * @generated
 	 */
-	@NonNull BooleanValueNode createBooleanValueNode();
+	@NonNull BooleanLiteralNode createBooleanLiteralNode();
 
 	/**
 	 * Returns a new object of class '<em>Cast Edge</em>'.
@@ -62,6 +62,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull ClassDatum createClassDatum();
 
 	/**
+	 * Returns a new object of class '<em>Collection Literal Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Collection Literal Node</em>'.
+	 * @generated
+	 */
+	@NonNull CollectionLiteralNode createCollectionLiteralNode();
+
+	/**
 	 * Returns a new object of class '<em>Collection Part Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -69,6 +78,15 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull CollectionPartEdge createCollectionPartEdge();
+
+	/**
+	 * Returns a new object of class '<em>Collection Range Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Collection Range Node</em>'.
+	 * @generated
+	 */
+	@NonNull CollectionRangeNode createCollectionRangeNode();
 
 	/**
 	 * Returns a new object of class '<em>Composed Node</em>'.
@@ -116,6 +134,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull EdgeConnection createEdgeConnection();
 
 	/**
+	 * Returns a new object of class '<em>Enum Literal Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enum Literal Node</em>'.
+	 * @generated
+	 */
+	@NonNull EnumLiteralNode createEnumLiteralNode();
+
+	/**
 	 * Returns a new object of class '<em>Error Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -123,6 +150,15 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull ErrorNode createErrorNode();
+
+	/**
+	 * Returns a new object of class '<em>If Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>If Node</em>'.
+	 * @generated
+	 */
+	@NonNull IfNode createIfNode();
 
 	/**
 	 * Returns a new object of class '<em>Includes Edge</em>'.
@@ -188,6 +224,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull LoadingRegion createLoadingRegion();
 
 	/**
+	 * Returns a new object of class '<em>Map Literal Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Map Literal Node</em>'.
+	 * @generated
+	 */
+	@NonNull MapLiteralNode createMapLiteralNode();
+
+	/**
 	 * Returns a new object of class '<em>Map Part Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -195,6 +240,15 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull MapPartEdge createMapPartEdge();
+
+	/**
+	 * Returns a new object of class '<em>Map Part Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Map Part Node</em>'.
+	 * @generated
+	 */
+	@NonNull MapPartNode createMapPartNode();
 
 	/**
 	 * Returns a new object of class '<em>Micro Mapping Region</em>'.
@@ -233,31 +287,31 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull NodeConnection createNodeConnection();
 
 	/**
-	 * Returns a new object of class '<em>Null Node</em>'.
+	 * Returns a new object of class '<em>Null Literal Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Null Node</em>'.
+	 * @return a new object of class '<em>Null Literal Node</em>'.
 	 * @generated
 	 */
-	@NonNull NullNode createNullNode();
+	@NonNull NullLiteralNode createNullLiteralNode();
 
 	/**
-	 * Returns a new object of class '<em>Operation Value Node</em>'.
+	 * Returns a new object of class '<em>Numeric Literal Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Operation Value Node</em>'.
+	 * @return a new object of class '<em>Numeric Literal Node</em>'.
 	 * @generated
 	 */
-	@NonNull OperationValueNode createOperationValueNode();
+	@NonNull NumericLiteralNode createNumericLiteralNode();
 
 	/**
-	 * Returns a new object of class '<em>Operation Node</em>'.
+	 * Returns a new object of class '<em>Operation Call Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Operation Node</em>'.
+	 * @return a new object of class '<em>Operation Call Node</em>'.
 	 * @generated
 	 */
-	@NonNull OperationNode createOperationNode();
+	@NonNull OperationCallNode createOperationCallNode();
 
 	/**
 	 * Returns a new object of class '<em>Operation Region</em>'.
@@ -359,6 +413,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull ScheduledRegion createScheduledRegion();
 
 	/**
+	 * Returns a new object of class '<em>Shadow Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Shadow Node</em>'.
+	 * @generated
+	 */
+	@NonNull ShadowNode createShadowNode();
+
+	/**
 	 * Returns a new object of class '<em>Shadow Part Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -366,6 +429,15 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull ShadowPartEdge createShadowPartEdge();
+
+	/**
+	 * Returns a new object of class '<em>String Literal Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>String Literal Node</em>'.
+	 * @generated
+	 */
+	@NonNull StringLiteralNode createStringLiteralNode();
 
 	/**
 	 * Returns a new object of class '<em>Success Edge</em>'.
@@ -386,6 +458,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull SuccessNode createSuccessNode();
 
 	/**
+	 * Returns a new object of class '<em>Tuple Literal Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Tuple Literal Node</em>'.
+	 * @generated
+	 */
+	@NonNull TupleLiteralNode createTupleLiteralNode();
+
+	/**
 	 * Returns a new object of class '<em>Tuple Part Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -393,6 +474,15 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull TuplePartEdge createTuplePartEdge();
+
+	/**
+	 * Returns a new object of class '<em>Type Literal Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type Literal Node</em>'.
+	 * @generated
+	 */
+	@NonNull TypeLiteralNode createTypeLiteralNode();
 
 	/**
 	 * Returns a new object of class '<em>Unknown Node</em>'.

@@ -45,7 +45,7 @@ public interface KeyedValueNode extends OperationNode {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
-	 * The type and typedmodel of the unqiue value.
+	 * The type and typed model of the unique value.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Class Datum Value</em>' reference.
 	 * @see #setClassDatumValue(ClassDatum)

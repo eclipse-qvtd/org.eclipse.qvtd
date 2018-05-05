@@ -21,21 +21,21 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A BooleanValueNode supports a Boolean literal value in a QVTs graph.
+ * A BooleanLiteralNode supports a Boolean literal value in a QVTs graph.
  * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.BooleanValueNode#isBooleanValue <em>Boolean Value</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode#isBooleanValue <em>Boolean Value</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBooleanValueNode()
+ * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBooleanLiteralNode()
  * @model
  * @generated
  */
-public interface BooleanValueNode extends OperationNode {
+public interface BooleanLiteralNode extends OperationNode {
 	/**
 	 * Returns the value of the '<em><b>Boolean Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -45,15 +45,15 @@ public interface BooleanValueNode extends OperationNode {
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Boolean Value</em>' attribute.
 	 * @see #setBooleanValue(boolean)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBooleanValueNode_BooleanValue()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBooleanLiteralNode_BooleanValue()
 	 * @model dataType="org.eclipse.ocl.pivot.Boolean" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BooleanValueNode!booleanValue'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BooleanLiteralNode!booleanValue'"
 	 * @generated
 	 */
 	boolean isBooleanValue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.BooleanValueNode#isBooleanValue <em>Boolean Value</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode#isBooleanValue <em>Boolean Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Boolean Value</em>' attribute.

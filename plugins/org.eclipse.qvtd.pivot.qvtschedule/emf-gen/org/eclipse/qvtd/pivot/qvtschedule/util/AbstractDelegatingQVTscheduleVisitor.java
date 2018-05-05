@@ -48,8 +48,8 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
-	public R visitBooleanValueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull BooleanValueNode object) {
-		return delegate.visitBooleanValueNode(object);
+	public R visitBooleanLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull BooleanLiteralNode object) {
+		return delegate.visitBooleanLiteralNode(object);
 	}
 
 	@Override
@@ -63,8 +63,18 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitCollectionLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CollectionLiteralNode object) {
+		return delegate.visitCollectionLiteralNode(object);
+	}
+
+	@Override
 	public R visitCollectionPartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CollectionPartEdge object) {
 		return delegate.visitCollectionPartEdge(object);
+	}
+
+	@Override
+	public R visitCollectionRangeNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CollectionRangeNode object) {
+		return delegate.visitCollectionRangeNode(object);
 	}
 
 	@Override
@@ -108,6 +118,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitEnumLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull EnumLiteralNode object) {
+		return delegate.visitEnumLiteralNode(object);
+	}
+
+	@Override
 	public R visitErrorNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ErrorNode object) {
 		return delegate.visitErrorNode(object);
 	}
@@ -115,6 +130,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	@Override
 	public R visitExpressionEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ExpressionEdge object) {
 		return delegate.visitExpressionEdge(object);
+	}
+
+	@Override
+	public R visitIfNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull IfNode object) {
+		return delegate.visitIfNode(object);
 	}
 
 	@Override
@@ -153,8 +173,23 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitMapLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MapLiteralNode object) {
+		return delegate.visitMapLiteralNode(object);
+	}
+
+	@Override
 	public R visitMapPartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MapPartEdge object) {
 		return delegate.visitMapPartEdge(object);
+	}
+
+	@Override
+	public R visitMapPartNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MapPartNode object) {
+		return delegate.visitMapPartNode(object);
+	}
+
+	@Override
+	public R visitMappingNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingNode object) {
+		return delegate.visitMappingNode(object);
 	}
 
 	@Override
@@ -193,8 +228,18 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
-	public R visitNullNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NullNode object) {
-		return delegate.visitNullNode(object);
+	public R visitNullLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NullLiteralNode object) {
+		return delegate.visitNullLiteralNode(object);
+	}
+
+	@Override
+	public R visitNumericLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NumericLiteralNode object) {
+		return delegate.visitNumericLiteralNode(object);
+	}
+
+	@Override
+	public R visitOperationCallNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull OperationCallNode object) {
+		return delegate.visitOperationCallNode(object);
 	}
 
 	@Override
@@ -215,11 +260,6 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	@Override
 	public R visitOperationSelfEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull OperationSelfEdge object) {
 		return delegate.visitOperationSelfEdge(object);
-	}
-
-	@Override
-	public R visitOperationValueNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull OperationValueNode object) {
-		return delegate.visitOperationValueNode(object);
 	}
 
 	@Override
@@ -268,8 +308,18 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitShadowNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ShadowNode object) {
+		return delegate.visitShadowNode(object);
+	}
+
+	@Override
 	public R visitShadowPartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ShadowPartEdge object) {
 		return delegate.visitShadowPartEdge(object);
+	}
+
+	@Override
+	public R visitStringLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull StringLiteralNode object) {
+		return delegate.visitStringLiteralNode(object);
 	}
 
 	@Override
@@ -283,8 +333,18 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitTupleLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull TupleLiteralNode object) {
+		return delegate.visitTupleLiteralNode(object);
+	}
+
+	@Override
 	public R visitTuplePartEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull TuplePartEdge object) {
 		return delegate.visitTuplePartEdge(object);
+	}
+
+	@Override
+	public R visitTypeLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull TypeLiteralNode object) {
+		return delegate.visitTypeLiteralNode(object);
 	}
 
 	@Override

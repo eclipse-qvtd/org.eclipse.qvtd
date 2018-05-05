@@ -16,6 +16,7 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -33,8 +34,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.DataType;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -529,8 +531,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	private boolean isHead = false;
 	private boolean isContained = false;
 
-	private final @NonNull List<@NonNull TypedElement> typedElements = new ArrayList<>();
-
 	private /*@LazyNonNull*/ Utility utility = null;		// Set by post region build analysis
 
 	@Override
@@ -543,21 +543,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public void addTypedElement(@NonNull TypedElement typedElement) {
-		if (!typedElements.contains(typedElement)) {
-			typedElements.add(typedElement);
-			Region region2 = getOwningRegion();
-			assert region2 != null;
-			//			if (isPattern() && isMatched() && !isRealized() && (typedElements.size() == 1) && !region2.isOperationRegion()) {	// FIXME this is not a sound diagnosis
-			//				boolean isMatched = RegionUtil.isMatched(typedElement);
-			//				if (!isMatched) {
-			//					isMatched = RegionUtil.isMatched(typedElement);
-			//				}
-			//				if (!isMatched) {
-			//					region2.getMultiRegion().getScheduleModel().addProblem(region2.createWarning("Cannot add unmatched " + typedElement + " to " + this));
-			//				}
-			//			}
-		}
+	public void addOriginatingElement(@NonNull Element originatingElement) {
+		throw new UnsupportedOperationException();		// Should be MappingNode
 	}
 
 	@Override
@@ -585,6 +572,16 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		//		if (isHead) {
 		//			s.append("}");
 		//		}
+	}
+
+	@Override
+	public @Nullable Element basicGetOriginatingElement() {
+		return null;
+	}
+
+	@Override
+	public @Nullable VariableDeclaration basicGetOriginatingVariable() {
+		return null;
 	}
 
 	@Override
@@ -935,8 +932,13 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull TypedElement> getTypedElements() {
-		return typedElements;
+	public @NonNull Element getOriginatingElement() {
+		throw new UnsupportedOperationException();		// Should be MappingNode
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull Element> getOriginatingElements() {
+		return Collections.emptyList();
 	}
 
 	@Override
@@ -1006,7 +1008,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public boolean isExplicitNull() {
+	public boolean isNullLiteral() {
 		return false;
 	}
 
@@ -1072,6 +1074,11 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
+	public boolean isPrimitive() {
+		return false;
+	}
+
+	@Override
 	public boolean isRealized() {
 		assert nodeRole != null;
 		return nodeRole == Role.REALIZED;
@@ -1079,12 +1086,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public boolean isRequired() {
-		for (@NonNull TypedElement typedElement : getTypedElements()) {
-			if (typedElement.isIsRequired()) {
-				return true;
-			}
-		}
-		return false;
+		throw new UnsupportedOperationException();		// Should be MappingNode
 	}
 
 	@Override
@@ -1179,12 +1181,17 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	public void setLabel(@NonNull GraphStringBuilder s) {		// FIXME LabelVisitor
 		StringBuilder n = new StringBuilder();
 		n.append(getName());
-		if (!isExplicitNull() && !isSuccess()) {
+		if (!isNullLiteral() && !isSuccess()) {
 			n.append("\\n");
 			n.append(PrettyPrinter.printType(getCompleteClass().getPrimaryClass()));
 		}
 		@NonNull String string = n.toString();
 		s.setLabel(string);
+	}
+
+	@Override
+	public void setOriginatingVariable(@NonNull VariableDeclaration variable) {
+		throw new UnsupportedOperationException();		// Should be MappingNode
 	}
 
 	@Override

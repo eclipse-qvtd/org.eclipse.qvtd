@@ -293,7 +293,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		if (target2sourceProperty != null)  {
 			Node targetNode2 = targetNode;
 			assert targetNode2 != null;
-			if (!targetNode2.isExplicitNull()) {
+			if (!targetNode2.isNullLiteral()) {
 				assert (targetNode2.getNavigationEdge(target2sourceProperty) == null) || target2sourceProperty.isIsMany() || (isPartial() == Boolean.TRUE);
 				if (!property.isIsMany() && !target2sourceProperty.isIsMany() /*&& target2sourceProperty.isIsRequired()*/) {		// FIXME do we need stronger type conformance here ??
 					Role edgeRole2 = edgeRole;
@@ -317,7 +317,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 
 	@Override
 	public void setSource(@Nullable Node sourceNode) {
-		assert (sourceNode == null) || !sourceNode.isExplicitNull();
+		assert (sourceNode == null) || !sourceNode.isNullLiteral();
 		super.setSource(sourceNode);
 	}
 

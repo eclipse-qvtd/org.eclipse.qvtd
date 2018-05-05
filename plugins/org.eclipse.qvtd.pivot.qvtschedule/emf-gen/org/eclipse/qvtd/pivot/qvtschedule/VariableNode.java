@@ -34,7 +34,7 @@ import org.eclipse.ocl.pivot.VariableDeclaration;
  * @model abstract="true"
  * @generated
  */
-public interface VariableNode extends Node {
+public interface VariableNode extends MappingNode {
 
 	/**
 	 * Returns the value of the '<em><b>Referred Variable</b></em>' reference.

@@ -32,7 +32,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  *
  * @generated
  */
-public class SuccessNodeImpl extends NodeImpl implements SuccessNode {
+public class SuccessNodeImpl extends MappingNodeImpl implements SuccessNode {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -16,6 +16,7 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EPackage;
@@ -28,11 +29,13 @@ import org.eclipse.ocl.pivot.internal.utilities.LazyXMIidAssigningResourceImpl;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ArgumentEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.BooleanValueNode;
+import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.CollectionLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.CollectionPartEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.CollectionRangeNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ComposedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
@@ -43,8 +46,10 @@ import org.eclipse.qvtd.pivot.qvtschedule.DependencyNode;
 import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.EnumLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ErrorNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ExpressionEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.IfNode;
 import org.eclipse.qvtd.pivot.qvtschedule.IncludesEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.InputNode;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratedEdge;
@@ -52,7 +57,10 @@ import org.eclipse.qvtd.pivot.qvtschedule.IteratorNode;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.MapLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.MapPartEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.MapPartNode;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingNode;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NamedMappingRegion;
@@ -60,12 +68,13 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
-import org.eclipse.qvtd.pivot.qvtschedule.NullNode;
+import org.eclipse.qvtd.pivot.qvtschedule.NullLiteralNode;
+import org.eclipse.qvtd.pivot.qvtschedule.NumericLiteralNode;
+import org.eclipse.qvtd.pivot.qvtschedule.OperationCallNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationSelfEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.OperationValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternTypedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternVariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
@@ -77,11 +86,15 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ShadowNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.StringLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
+import org.eclipse.qvtd.pivot.qvtschedule.TupleLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.TuplePartEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.TypeLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.VerdictRegion;
@@ -112,7 +125,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass booleanValueNodeEClass = null;
+	private EClass booleanLiteralNodeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -133,7 +146,21 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass collectionLiteralNodeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass collectionPartEdgeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass collectionRangeNodeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -203,6 +230,13 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass enumLiteralNodeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass scheduleModelEClass = null;
 
 	/**
@@ -217,7 +251,21 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass shadowNodeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass shadowPartEdgeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass stringLiteralNodeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -245,7 +293,21 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass tupleLiteralNodeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass tuplePartEdgeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typeLiteralNodeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -287,6 +349,13 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EDataType numberEDataType = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass errorNodeEClass = null;
 
 	/**
@@ -295,6 +364,13 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	private EClass expressionEdgeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass ifNodeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -350,7 +426,28 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass mapLiteralNodeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass mapPartEdgeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mapPartNodeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mappingNodeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -406,14 +503,21 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass nullNodeEClass = null;
+	private EClass nullLiteralNodeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass operationValueNodeEClass = null;
+	private EClass numericLiteralNodeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass operationCallNodeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -613,8 +717,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EClass getBooleanValueNode() {
-		return booleanValueNodeEClass;
+	public EClass getBooleanLiteralNode() {
+		return booleanLiteralNodeEClass;
 	}
 
 	/**
@@ -623,8 +727,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EAttribute getBooleanValueNode_BooleanValue() {
-		return (EAttribute)booleanValueNodeEClass.getEStructuralFeatures().get(0);
+	public EAttribute getBooleanLiteralNode_BooleanValue() {
+		return (EAttribute)booleanLiteralNodeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -723,6 +827,16 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
+	public EClass getCollectionLiteralNode() {
+		return collectionLiteralNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getCollectionPartEdge() {
 		return collectionPartEdgeEClass;
 	}
@@ -735,6 +849,16 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	@Override
 	public EReference getCollectionPartEdge_ReferredPart() {
 		return (EReference)collectionPartEdgeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getCollectionRangeNode() {
+		return collectionRangeNodeEClass;
 	}
 
 	/**
@@ -943,8 +1067,38 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
+	public EClass getEnumLiteralNode() {
+		return enumLiteralNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getEnumLiteralNode_EnumValue() {
+		return (EReference)enumLiteralNodeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EEnum getRole() {
 		return roleEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EDataType getNumber() {
+		return numberEDataType;
 	}
 
 	/**
@@ -1063,6 +1217,16 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
+	public EClass getShadowNode() {
+		return shadowNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getShadowPartEdge() {
 		return shadowPartEdgeEClass;
 	}
@@ -1075,6 +1239,26 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	@Override
 	public EReference getShadowPartEdge_ReferredPart() {
 		return (EReference)shadowPartEdgeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getStringLiteralNode() {
+		return stringLiteralNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getStringLiteralNode_StringValue() {
+		return (EAttribute)stringLiteralNodeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1123,6 +1307,16 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
+	public EClass getTupleLiteralNode() {
+		return tupleLiteralNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTuplePartEdge() {
 		return tuplePartEdgeEClass;
 	}
@@ -1135,6 +1329,26 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	@Override
 	public EReference getTuplePartEdge_ReferredPart() {
 		return (EReference)tuplePartEdgeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getTypeLiteralNode() {
+		return typeLiteralNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTypeLiteralNode_TypeValue() {
+		return (EReference)typeLiteralNodeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1215,6 +1429,16 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	@Override
 	public EClass getExpressionEdge() {
 		return expressionEdgeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getIfNode() {
+		return ifNodeEClass;
 	}
 
 	/**
@@ -1323,6 +1547,16 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
+	public EClass getMapLiteralNode() {
+		return mapLiteralNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getMapPartEdge() {
 		return mapPartEdgeEClass;
 	}
@@ -1335,6 +1569,36 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	@Override
 	public EReference getMapPartEdge_ReferredPart() {
 		return (EReference)mapPartEdgeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getMapPartNode() {
+		return mapPartNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getMappingNode() {
+		return mappingNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getMappingNode_Matched() {
+		return (EAttribute)mappingNodeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1633,8 +1897,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EClass getNullNode() {
-		return nullNodeEClass;
+	public EClass getNullLiteralNode() {
+		return nullLiteralNodeEClass;
 	}
 
 	/**
@@ -1643,8 +1907,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EAttribute getNullNode_Matched() {
-		return (EAttribute)nullNodeEClass.getEStructuralFeatures().get(0);
+	public EClass getNumericLiteralNode() {
+		return numericLiteralNodeEClass;
 	}
 
 	/**
@@ -1653,8 +1917,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EClass getOperationValueNode() {
-		return operationValueNodeEClass;
+	public EAttribute getNumericLiteralNode_NumericValue() {
+		return (EAttribute)numericLiteralNodeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1663,8 +1927,18 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EReference getOperationValueNode_OperationValue() {
-		return (EReference)operationValueNodeEClass.getEStructuralFeatures().get(0);
+	public EClass getOperationCallNode() {
+		return operationCallNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getOperationCallNode_ReferredOperation() {
+		return (EReference)operationCallNodeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1675,16 +1949,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	@Override
 	public EClass getOperationNode() {
 		return operationNodeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getOperationNode_Matched() {
-		return (EAttribute)operationNodeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1813,28 +2077,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EAttribute getPatternTypedNode_Matched() {
-		return (EAttribute)patternTypedNodeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getPatternVariableNode() {
 		return patternVariableNodeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getPatternVariableNode_Matched() {
-		return (EAttribute)patternVariableNodeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2033,8 +2277,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		argumentEdgeEClass = createEClass(ARGUMENT_EDGE);
 
-		booleanValueNodeEClass = createEClass(BOOLEAN_VALUE_NODE);
-		createEAttribute(booleanValueNodeEClass, BOOLEAN_VALUE_NODE__BOOLEAN_VALUE);
+		booleanLiteralNodeEClass = createEClass(BOOLEAN_LITERAL_NODE);
+		createEAttribute(booleanLiteralNodeEClass, BOOLEAN_LITERAL_NODE__BOOLEAN_VALUE);
 
 		castEdgeEClass = createEClass(CAST_EDGE);
 		createEReference(castEdgeEClass, CAST_EDGE__PROPERTY);
@@ -2047,8 +2291,12 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEReference(classDatumEClass, CLASS_DATUM__REFERRED_CLASS);
 		createEReference(classDatumEClass, CLASS_DATUM__SUPER_CLASS_DATUMS);
 
+		collectionLiteralNodeEClass = createEClass(COLLECTION_LITERAL_NODE);
+
 		collectionPartEdgeEClass = createEClass(COLLECTION_PART_EDGE);
 		createEReference(collectionPartEdgeEClass, COLLECTION_PART_EDGE__REFERRED_PART);
+
+		collectionRangeNodeEClass = createEClass(COLLECTION_RANGE_NODE);
 
 		composedNodeEClass = createEClass(COMPOSED_NODE);
 
@@ -2079,9 +2327,14 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		edgeConnectionEClass = createEClass(EDGE_CONNECTION);
 		createEReference(edgeConnectionEClass, EDGE_CONNECTION__REFERRED_PROPERTY);
 
+		enumLiteralNodeEClass = createEClass(ENUM_LITERAL_NODE);
+		createEReference(enumLiteralNodeEClass, ENUM_LITERAL_NODE__ENUM_VALUE);
+
 		errorNodeEClass = createEClass(ERROR_NODE);
 
 		expressionEdgeEClass = createEClass(EXPRESSION_EDGE);
+
+		ifNodeEClass = createEClass(IF_NODE);
 
 		includesEdgeEClass = createEClass(INCLUDES_EDGE);
 
@@ -2100,8 +2353,15 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		loadingRegionEClass = createEClass(LOADING_REGION);
 		createEReference(loadingRegionEClass, LOADING_REGION__OWNING_SCHEDULED_REGION);
 
+		mapLiteralNodeEClass = createEClass(MAP_LITERAL_NODE);
+
 		mapPartEdgeEClass = createEClass(MAP_PART_EDGE);
 		createEReference(mapPartEdgeEClass, MAP_PART_EDGE__REFERRED_PART);
+
+		mapPartNodeEClass = createEClass(MAP_PART_NODE);
+
+		mappingNodeEClass = createEClass(MAPPING_NODE);
+		createEAttribute(mappingNodeEClass, MAPPING_NODE__MATCHED);
 
 		mappingRegionEClass = createEClass(MAPPING_REGION);
 		createEReference(mappingRegionEClass, MAPPING_REGION__HEAD_NODES);
@@ -2139,14 +2399,15 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		nodeConnectionEClass = createEClass(NODE_CONNECTION);
 		createEReference(nodeConnectionEClass, NODE_CONNECTION__CLASS_DATUM);
 
-		nullNodeEClass = createEClass(NULL_NODE);
-		createEAttribute(nullNodeEClass, NULL_NODE__MATCHED);
+		nullLiteralNodeEClass = createEClass(NULL_LITERAL_NODE);
 
-		operationValueNodeEClass = createEClass(OPERATION_VALUE_NODE);
-		createEReference(operationValueNodeEClass, OPERATION_VALUE_NODE__OPERATION_VALUE);
+		numericLiteralNodeEClass = createEClass(NUMERIC_LITERAL_NODE);
+		createEAttribute(numericLiteralNodeEClass, NUMERIC_LITERAL_NODE__NUMERIC_VALUE);
+
+		operationCallNodeEClass = createEClass(OPERATION_CALL_NODE);
+		createEReference(operationCallNodeEClass, OPERATION_CALL_NODE__REFERRED_OPERATION);
 
 		operationNodeEClass = createEClass(OPERATION_NODE);
-		createEAttribute(operationNodeEClass, OPERATION_NODE__MATCHED);
 
 		operationRegionEClass = createEClass(OPERATION_REGION);
 		createEReference(operationRegionEClass, OPERATION_REGION__DEPENDENCY_NODES);
@@ -2163,10 +2424,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEReference(operationSelfEdgeEClass, OPERATION_SELF_EDGE__REFERRED_TYPE);
 
 		patternTypedNodeEClass = createEClass(PATTERN_TYPED_NODE);
-		createEAttribute(patternTypedNodeEClass, PATTERN_TYPED_NODE__MATCHED);
 
 		patternVariableNodeEClass = createEClass(PATTERN_VARIABLE_NODE);
-		createEAttribute(patternVariableNodeEClass, PATTERN_VARIABLE_NODE__MATCHED);
 
 		predicateEdgeEClass = createEClass(PREDICATE_EDGE);
 
@@ -2202,8 +2461,13 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEReference(scheduledRegionEClass, SCHEDULED_REGION__OWNING_SCHEDULE_MODEL);
 		createEReference(scheduledRegionEClass, SCHEDULED_REGION__REFERRED_TRANSFORMATION);
 
+		shadowNodeEClass = createEClass(SHADOW_NODE);
+
 		shadowPartEdgeEClass = createEClass(SHADOW_PART_EDGE);
 		createEReference(shadowPartEdgeEClass, SHADOW_PART_EDGE__REFERRED_PART);
+
+		stringLiteralNodeEClass = createEClass(STRING_LITERAL_NODE);
+		createEAttribute(stringLiteralNodeEClass, STRING_LITERAL_NODE__STRING_VALUE);
 
 		successEdgeEClass = createEClass(SUCCESS_EDGE);
 
@@ -2212,8 +2476,13 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		symbolableEClass = createEClass(SYMBOLABLE);
 		createEAttribute(symbolableEClass, SYMBOLABLE__SYMBOL_NAME);
 
+		tupleLiteralNodeEClass = createEClass(TUPLE_LITERAL_NODE);
+
 		tuplePartEdgeEClass = createEClass(TUPLE_PART_EDGE);
 		createEReference(tuplePartEdgeEClass, TUPLE_PART_EDGE__REFERRED_PART);
+
+		typeLiteralNodeEClass = createEClass(TYPE_LITERAL_NODE);
+		createEReference(typeLiteralNodeEClass, TYPE_LITERAL_NODE__TYPE_VALUE);
 
 		unknownNodeEClass = createEClass(UNKNOWN_NODE);
 
@@ -2226,6 +2495,9 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		// Create enums
 		connectionRoleEEnum = createEEnum(CONNECTION_ROLE);
 		roleEEnum = createEEnum(ROLE);
+
+		// Create data types
+		numberEDataType = createEDataType(NUMBER);
 	}
 
 	/**
@@ -2265,10 +2537,12 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		// Add supertypes to classes
 		abstractDatumEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
 		argumentEdgeEClass.getESuperTypes().add(this.getExpressionEdge());
-		booleanValueNodeEClass.getESuperTypes().add(this.getOperationNode());
+		booleanLiteralNodeEClass.getESuperTypes().add(this.getOperationNode());
 		castEdgeEClass.getESuperTypes().add(this.getNavigableEdge());
 		classDatumEClass.getESuperTypes().add(this.getAbstractDatum());
+		collectionLiteralNodeEClass.getESuperTypes().add(this.getOperationNode());
 		collectionPartEdgeEClass.getESuperTypes().add(this.getArgumentEdge());
+		collectionRangeNodeEClass.getESuperTypes().add(this.getOperationNode());
 		composedNodeEClass.getESuperTypes().add(this.getNode());
 		connectionEClass.getESuperTypes().add(thePivotPackage.getElement());
 		connectionEClass.getESuperTypes().add(this.getSymbolable());
@@ -2281,8 +2555,10 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		EGenericType g2 = createEGenericType(this.getNavigableEdge());
 		g1.getETypeArguments().add(g2);
 		edgeConnectionEClass.getEGenericSuperTypes().add(g1);
-		errorNodeEClass.getESuperTypes().add(this.getNode());
+		enumLiteralNodeEClass.getESuperTypes().add(this.getOperationNode());
+		errorNodeEClass.getESuperTypes().add(this.getMappingNode());
 		expressionEdgeEClass.getESuperTypes().add(this.getEdge());
+		ifNodeEClass.getESuperTypes().add(this.getOperationNode());
 		includesEdgeEClass.getESuperTypes().add(this.getExpressionEdge());
 		inputNodeEClass.getESuperTypes().add(this.getNode());
 		iteratedEdgeEClass.getESuperTypes().add(this.getEdge());
@@ -2290,7 +2566,10 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		keyPartEdgeEClass.getESuperTypes().add(this.getArgumentEdge());
 		keyedValueNodeEClass.getESuperTypes().add(this.getOperationNode());
 		loadingRegionEClass.getESuperTypes().add(this.getRegion());
+		mapLiteralNodeEClass.getESuperTypes().add(this.getOperationNode());
 		mapPartEdgeEClass.getESuperTypes().add(this.getArgumentEdge());
+		mapPartNodeEClass.getESuperTypes().add(this.getOperationNode());
+		mappingNodeEClass.getESuperTypes().add(this.getNode());
 		mappingRegionEClass.getESuperTypes().add(this.getRegion());
 		microMappingRegionEClass.getESuperTypes().add(this.getMappingRegion());
 		namedMappingRegionEClass.getESuperTypes().add(this.getMappingRegion());
@@ -2303,13 +2582,14 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		g2 = createEGenericType(this.getNode());
 		g1.getETypeArguments().add(g2);
 		nodeConnectionEClass.getEGenericSuperTypes().add(g1);
-		nullNodeEClass.getESuperTypes().add(this.getNode());
-		operationValueNodeEClass.getESuperTypes().add(this.getOperationNode());
-		operationNodeEClass.getESuperTypes().add(this.getNode());
+		nullLiteralNodeEClass.getESuperTypes().add(this.getOperationNode());
+		numericLiteralNodeEClass.getESuperTypes().add(this.getOperationNode());
+		operationCallNodeEClass.getESuperTypes().add(this.getOperationNode());
+		operationNodeEClass.getESuperTypes().add(this.getMappingNode());
 		operationRegionEClass.getESuperTypes().add(this.getRegion());
 		operationParameterEdgeEClass.getESuperTypes().add(this.getArgumentEdge());
 		operationSelfEdgeEClass.getESuperTypes().add(this.getArgumentEdge());
-		patternTypedNodeEClass.getESuperTypes().add(this.getNode());
+		patternTypedNodeEClass.getESuperTypes().add(this.getMappingNode());
 		patternVariableNodeEClass.getESuperTypes().add(this.getVariableNode());
 		predicateEdgeEClass.getESuperTypes().add(this.getEdge());
 		propertyDatumEClass.getESuperTypes().add(this.getAbstractDatum());
@@ -2319,12 +2599,16 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		ruleRegionEClass.getESuperTypes().add(this.getMappingRegion());
 		scheduleModelEClass.getESuperTypes().add(thePivotPackage.getModel());
 		scheduledRegionEClass.getESuperTypes().add(this.getRegion());
+		shadowNodeEClass.getESuperTypes().add(this.getOperationNode());
 		shadowPartEdgeEClass.getESuperTypes().add(this.getArgumentEdge());
+		stringLiteralNodeEClass.getESuperTypes().add(this.getOperationNode());
 		successEdgeEClass.getESuperTypes().add(this.getNavigationEdge());
-		successNodeEClass.getESuperTypes().add(this.getNode());
+		successNodeEClass.getESuperTypes().add(this.getMappingNode());
+		tupleLiteralNodeEClass.getESuperTypes().add(this.getOperationNode());
 		tuplePartEdgeEClass.getESuperTypes().add(this.getArgumentEdge());
-		unknownNodeEClass.getESuperTypes().add(this.getNode());
-		variableNodeEClass.getESuperTypes().add(this.getNode());
+		typeLiteralNodeEClass.getESuperTypes().add(this.getOperationNode());
+		unknownNodeEClass.getESuperTypes().add(this.getMappingNode());
+		variableNodeEClass.getESuperTypes().add(this.getMappingNode());
 		verdictRegionEClass.getESuperTypes().add(this.getRuleRegion());
 
 		// Initialize classes, features, and operations; add parameters
@@ -2335,8 +2619,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		initEClass(argumentEdgeEClass, ArgumentEdge.class, "ArgumentEdge", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(booleanValueNodeEClass, BooleanValueNode.class, "BooleanValueNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBooleanValueNode_BooleanValue(), thePivotPackage.getBoolean(), "booleanValue", null, 1, 1, BooleanValueNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(booleanLiteralNodeEClass, BooleanLiteralNode.class, "BooleanLiteralNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBooleanLiteralNode_BooleanValue(), thePivotPackage.getBoolean(), "booleanValue", null, 1, 1, BooleanLiteralNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(castEdgeEClass, CastEdge.class, "CastEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCastEdge_Property(), thePivotPackage.getProperty(), null, "property", null, 1, 1, CastEdge.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
@@ -2349,8 +2633,12 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEReference(getClassDatum_ReferredClass(), thePivotPackage.getClass_(), null, "referredClass", null, 1, 1, ClassDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getClassDatum_SuperClassDatums(), this.getClassDatum(), null, "superClassDatums", null, 0, -1, ClassDatum.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(collectionLiteralNodeEClass, CollectionLiteralNode.class, "CollectionLiteralNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(collectionPartEdgeEClass, CollectionPartEdge.class, "CollectionPartEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCollectionPartEdge_ReferredPart(), thePivotPackage.getCollectionLiteralPart(), null, "referredPart", null, 1, 1, CollectionPartEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(collectionRangeNodeEClass, CollectionRangeNode.class, "CollectionRangeNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(composedNodeEClass, ComposedNode.class, "ComposedNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2382,9 +2670,14 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEClass(edgeConnectionEClass, EdgeConnection.class, "EdgeConnection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEdgeConnection_ReferredProperty(), thePivotPackage.getProperty(), null, "referredProperty", null, 1, 1, EdgeConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(enumLiteralNodeEClass, EnumLiteralNode.class, "EnumLiteralNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEnumLiteralNode_EnumValue(), thePivotPackage.getEnumerationLiteral(), null, "enumValue", null, 1, 1, EnumLiteralNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(errorNodeEClass, ErrorNode.class, "ErrorNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(expressionEdgeEClass, ExpressionEdge.class, "ExpressionEdge", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(ifNodeEClass, IfNode.class, "IfNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(includesEdgeEClass, IncludesEdge.class, "IncludesEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2403,8 +2696,15 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEClass(loadingRegionEClass, LoadingRegion.class, "LoadingRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLoadingRegion_OwningScheduledRegion(), this.getScheduledRegion(), this.getScheduledRegion_OwnedLoadingRegion(), "owningScheduledRegion", null, 1, 1, LoadingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(mapLiteralNodeEClass, MapLiteralNode.class, "MapLiteralNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(mapPartEdgeEClass, MapPartEdge.class, "MapPartEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMapPartEdge_ReferredPart(), thePivotPackage.getMapLiteralPart(), null, "referredPart", null, 1, 1, MapPartEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(mapPartNodeEClass, MapPartNode.class, "MapPartNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(mappingNodeEClass, MappingNode.class, "MappingNode", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getMappingNode_Matched(), ecorePackage.getEBoolean(), "matched", "false", 1, 1, MappingNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingRegionEClass, MappingRegion.class, "MappingRegion", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingRegion_HeadNodes(), this.getNode(), null, "headNodes", null, 0, -1, MappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2442,14 +2742,15 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEClass(nodeConnectionEClass, NodeConnection.class, "NodeConnection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNodeConnection_ClassDatum(), this.getClassDatum(), null, "classDatum", null, 1, 1, NodeConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(nullNodeEClass, NullNode.class, "NullNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getNullNode_Matched(), ecorePackage.getEBoolean(), "matched", "false", 1, 1, NullNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(nullLiteralNodeEClass, NullLiteralNode.class, "NullLiteralNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(operationValueNodeEClass, OperationValueNode.class, "OperationValueNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getOperationValueNode_OperationValue(), thePivotPackage.getOperation(), null, "operationValue", null, 1, 1, OperationValueNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(numericLiteralNodeEClass, NumericLiteralNode.class, "NumericLiteralNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNumericLiteralNode_NumericValue(), this.getNumber(), "numericValue", null, 1, 1, NumericLiteralNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(operationNodeEClass, OperationNode.class, "OperationNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getOperationNode_Matched(), ecorePackage.getEBoolean(), "matched", "false", 1, 1, OperationNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(operationCallNodeEClass, OperationCallNode.class, "OperationCallNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getOperationCallNode_ReferredOperation(), thePivotPackage.getOperation(), null, "referredOperation", null, 0, 1, OperationCallNode.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(operationNodeEClass, OperationNode.class, "OperationNode", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(operationRegionEClass, OperationRegion.class, "OperationRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOperationRegion_DependencyNodes(), this.getNode(), null, "dependencyNodes", null, 0, -1, OperationRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2466,10 +2767,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEReference(getOperationSelfEdge_ReferredType(), thePivotPackage.getType(), null, "referredType", null, 1, 1, OperationSelfEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(patternTypedNodeEClass, PatternTypedNode.class, "PatternTypedNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPatternTypedNode_Matched(), ecorePackage.getEBoolean(), "matched", "false", 1, 1, PatternTypedNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(patternVariableNodeEClass, PatternVariableNode.class, "PatternVariableNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getPatternVariableNode_Matched(), ecorePackage.getEBoolean(), "matched", "false", 1, 1, PatternVariableNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(predicateEdgeEClass, PredicateEdge.class, "PredicateEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2505,8 +2804,13 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEReference(getScheduledRegion_OwningScheduleModel(), this.getScheduleModel(), this.getScheduleModel_OwnedScheduledRegions(), "owningScheduleModel", null, 1, 1, ScheduledRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getScheduledRegion_ReferredTransformation(), theQVTbasePackage.getTransformation(), null, "referredTransformation", null, 0, 1, ScheduledRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(shadowNodeEClass, ShadowNode.class, "ShadowNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(shadowPartEdgeEClass, ShadowPartEdge.class, "ShadowPartEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getShadowPartEdge_ReferredPart(), thePivotPackage.getShadowPart(), null, "referredPart", null, 1, 1, ShadowPartEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(stringLiteralNodeEClass, StringLiteralNode.class, "StringLiteralNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStringLiteralNode_StringValue(), thePivotPackage.getString(), "stringValue", null, 1, 1, StringLiteralNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(successEdgeEClass, SuccessEdge.class, "SuccessEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2515,8 +2819,13 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEClass(symbolableEClass, Symbolable.class, "Symbolable", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSymbolable_SymbolName(), ecorePackage.getEString(), "symbolName", null, 1, 1, Symbolable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(tupleLiteralNodeEClass, TupleLiteralNode.class, "TupleLiteralNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(tuplePartEdgeEClass, TuplePartEdge.class, "TuplePartEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTuplePartEdge_ReferredPart(), thePivotPackage.getTupleLiteralPart(), null, "referredPart", null, 1, 1, TuplePartEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(typeLiteralNodeEClass, TypeLiteralNode.class, "TypeLiteralNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypeLiteralNode_TypeValue(), thePivotPackage.getType(), null, "typeValue", null, 1, 1, TypeLiteralNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(unknownNodeEClass, UnknownNode.class, "UnknownNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2544,6 +2853,9 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		addEEnumLiteral(roleEEnum, Role.SPECULATED);
 		addEEnumLiteral(roleEEnum, Role.OTHER);
 
+		// Initialize data types
+		initEDataType(numberEDataType, Number.class, "Number", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
+
 		// Create resource
 		createResource(eNS_URI);
 
@@ -2561,10 +2873,10 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	protected void createEcoreAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this,
-		   source,
-		   new String[] {
-		   });
+		(this,
+			source,
+			new String[] {
+		});
 	}
 
 	/**

@@ -20,45 +20,14 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  * A representation of the model object '<em><b>Operation Node</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.OperationNode#isMatched <em>Matched</em>}</li>
- * </ul>
+ * <!-- begin-model-doc -->
+ * An OperationNode supports a computed value in a QVTs graph.\nDerived literal OperationNodes are computed from their internal state. \nDerived algorithmic OperationNodes use one or more ArgumentEdges to provide computation inputs.
+ * <!-- end-model-doc -->
+ *
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getOperationNode()
- * @model
+ * @model abstract="true"
  * @generated
  */
-public interface OperationNode extends Node {
-
-	/**
-	 * Returns the value of the '<em><b>Matched</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Matched</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Matched</em>' attribute.
-	 * @see #setMatched(boolean)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getOperationNode_Matched()
-	 * @model default="false" required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!OperationNode!matched'"
-	 * @generated
-	 */
-	@Override
-	boolean isMatched();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.OperationNode#isMatched <em>Matched</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Matched</em>' attribute.
-	 * @see #isMatched()
-	 * @generated
-	 */
-	void setMatched(boolean value);
+public interface OperationNode extends MappingNode {
 } // OperationNode

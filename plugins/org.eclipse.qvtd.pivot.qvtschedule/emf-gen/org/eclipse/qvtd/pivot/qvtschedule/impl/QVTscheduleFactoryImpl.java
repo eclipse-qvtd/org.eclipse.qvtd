@@ -69,16 +69,20 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case QVTschedulePackage.BOOLEAN_VALUE_NODE: return createBooleanValueNode();
+			case QVTschedulePackage.BOOLEAN_LITERAL_NODE: return createBooleanLiteralNode();
 			case QVTschedulePackage.CAST_EDGE: return createCastEdge();
 			case QVTschedulePackage.CLASS_DATUM: return createClassDatum();
+			case QVTschedulePackage.COLLECTION_LITERAL_NODE: return createCollectionLiteralNode();
 			case QVTschedulePackage.COLLECTION_PART_EDGE: return createCollectionPartEdge();
+			case QVTschedulePackage.COLLECTION_RANGE_NODE: return createCollectionRangeNode();
 			case QVTschedulePackage.COMPOSED_NODE: return createComposedNode();
 			case QVTschedulePackage.DEPENDENCY_EDGE: return createDependencyEdge();
 			case QVTschedulePackage.DEPENDENCY_NODE: return createDependencyNode();
 			case QVTschedulePackage.DISPATCH_REGION: return createDispatchRegion();
 			case QVTschedulePackage.EDGE_CONNECTION: return createEdgeConnection();
+			case QVTschedulePackage.ENUM_LITERAL_NODE: return createEnumLiteralNode();
 			case QVTschedulePackage.ERROR_NODE: return createErrorNode();
+			case QVTschedulePackage.IF_NODE: return createIfNode();
 			case QVTschedulePackage.INCLUDES_EDGE: return createIncludesEdge();
 			case QVTschedulePackage.INPUT_NODE: return createInputNode();
 			case QVTschedulePackage.ITERATED_EDGE: return createIteratedEdge();
@@ -86,14 +90,16 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.KEY_PART_EDGE: return createKeyPartEdge();
 			case QVTschedulePackage.KEYED_VALUE_NODE: return createKeyedValueNode();
 			case QVTschedulePackage.LOADING_REGION: return createLoadingRegion();
+			case QVTschedulePackage.MAP_LITERAL_NODE: return createMapLiteralNode();
 			case QVTschedulePackage.MAP_PART_EDGE: return createMapPartEdge();
+			case QVTschedulePackage.MAP_PART_NODE: return createMapPartNode();
 			case QVTschedulePackage.MICRO_MAPPING_REGION: return createMicroMappingRegion();
 			case QVTschedulePackage.NAMED_MAPPING_REGION: return createNamedMappingRegion();
 			case QVTschedulePackage.NAVIGATION_EDGE: return createNavigationEdge();
 			case QVTschedulePackage.NODE_CONNECTION: return createNodeConnection();
-			case QVTschedulePackage.NULL_NODE: return createNullNode();
-			case QVTschedulePackage.OPERATION_VALUE_NODE: return createOperationValueNode();
-			case QVTschedulePackage.OPERATION_NODE: return createOperationNode();
+			case QVTschedulePackage.NULL_LITERAL_NODE: return createNullLiteralNode();
+			case QVTschedulePackage.NUMERIC_LITERAL_NODE: return createNumericLiteralNode();
+			case QVTschedulePackage.OPERATION_CALL_NODE: return createOperationCallNode();
 			case QVTschedulePackage.OPERATION_REGION: return createOperationRegion();
 			case QVTschedulePackage.OPERATION_PARAMETER_EDGE: return createOperationParameterEdge();
 			case QVTschedulePackage.OPERATION_SELF_EDGE: return createOperationSelfEdge();
@@ -105,10 +111,14 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.RULE_REGION: return createRuleRegion();
 			case QVTschedulePackage.SCHEDULE_MODEL: return createScheduleModel();
 			case QVTschedulePackage.SCHEDULED_REGION: return createScheduledRegion();
+			case QVTschedulePackage.SHADOW_NODE: return createShadowNode();
 			case QVTschedulePackage.SHADOW_PART_EDGE: return createShadowPartEdge();
+			case QVTschedulePackage.STRING_LITERAL_NODE: return createStringLiteralNode();
 			case QVTschedulePackage.SUCCESS_EDGE: return createSuccessEdge();
 			case QVTschedulePackage.SUCCESS_NODE: return createSuccessNode();
+			case QVTschedulePackage.TUPLE_LITERAL_NODE: return createTupleLiteralNode();
 			case QVTschedulePackage.TUPLE_PART_EDGE: return createTuplePartEdge();
+			case QVTschedulePackage.TYPE_LITERAL_NODE: return createTypeLiteralNode();
 			case QVTschedulePackage.UNKNOWN_NODE: return createUnknownNode();
 			case QVTschedulePackage.VERDICT_REGION: return createVerdictRegion();
 			default:
@@ -128,6 +138,8 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 				return createConnectionRoleFromString(eDataType, initialValue);
 			case QVTschedulePackage.ROLE:
 				return createRoleFromString(eDataType, initialValue);
+			case QVTschedulePackage.NUMBER:
+				return createNumberFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -145,6 +157,8 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 				return convertConnectionRoleToString(eDataType, instanceValue);
 			case QVTschedulePackage.ROLE:
 				return convertRoleToString(eDataType, instanceValue);
+			case QVTschedulePackage.NUMBER:
+				return convertNumberToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
@@ -156,9 +170,9 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public @NonNull BooleanValueNode createBooleanValueNode() {
-		BooleanValueNodeImpl booleanValueNode = new BooleanValueNodeImpl();
-		return booleanValueNode;
+	public @NonNull BooleanLiteralNode createBooleanLiteralNode() {
+		BooleanLiteralNodeImpl booleanLiteralNode = new BooleanLiteralNodeImpl();
+		return booleanLiteralNode;
 	}
 
 	/**
@@ -189,9 +203,31 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
+	public @NonNull CollectionLiteralNode createCollectionLiteralNode() {
+		CollectionLiteralNodeImpl collectionLiteralNode = new CollectionLiteralNodeImpl();
+		return collectionLiteralNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull CollectionPartEdge createCollectionPartEdge() {
 		CollectionPartEdgeImpl collectionPartEdge = new CollectionPartEdgeImpl();
 		return collectionPartEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull CollectionRangeNode createCollectionRangeNode() {
+		CollectionRangeNodeImpl collectionRangeNode = new CollectionRangeNodeImpl();
+		return collectionRangeNode;
 	}
 
 	/**
@@ -255,9 +291,31 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
+	public @NonNull EnumLiteralNode createEnumLiteralNode() {
+		EnumLiteralNodeImpl enumLiteralNode = new EnumLiteralNodeImpl();
+		return enumLiteralNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull ErrorNode createErrorNode() {
 		ErrorNodeImpl errorNode = new ErrorNodeImpl();
 		return errorNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull IfNode createIfNode() {
+		IfNodeImpl ifNode = new IfNodeImpl();
+		return ifNode;
 	}
 
 	/**
@@ -343,9 +401,31 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
+	public @NonNull MapLiteralNode createMapLiteralNode() {
+		MapLiteralNodeImpl mapLiteralNode = new MapLiteralNodeImpl();
+		return mapLiteralNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull MapPartEdge createMapPartEdge() {
 		MapPartEdgeImpl mapPartEdge = new MapPartEdgeImpl();
 		return mapPartEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull MapPartNode createMapPartNode() {
+		MapPartNodeImpl mapPartNode = new MapPartNodeImpl();
+		return mapPartNode;
 	}
 
 	/**
@@ -398,9 +478,9 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public @NonNull NullNode createNullNode() {
-		NullNodeImpl nullNode = new NullNodeImpl();
-		return nullNode;
+	public @NonNull NullLiteralNode createNullLiteralNode() {
+		NullLiteralNodeImpl nullLiteralNode = new NullLiteralNodeImpl();
+		return nullLiteralNode;
 	}
 
 	/**
@@ -409,9 +489,9 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public @NonNull OperationValueNode createOperationValueNode() {
-		OperationValueNodeImpl operationValueNode = new OperationValueNodeImpl();
-		return operationValueNode;
+	public @NonNull NumericLiteralNode createNumericLiteralNode() {
+		NumericLiteralNodeImpl numericLiteralNode = new NumericLiteralNodeImpl();
+		return numericLiteralNode;
 	}
 
 	/**
@@ -420,9 +500,9 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public @NonNull OperationNode createOperationNode() {
-		OperationNodeImpl operationNode = new OperationNodeImpl();
-		return operationNode;
+	public @NonNull OperationCallNode createOperationCallNode() {
+		OperationCallNodeImpl operationCallNode = new OperationCallNodeImpl();
+		return operationCallNode;
 	}
 
 	/**
@@ -552,9 +632,31 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
+	public @NonNull ShadowNode createShadowNode() {
+		ShadowNodeImpl shadowNode = new ShadowNodeImpl();
+		return shadowNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull ShadowPartEdge createShadowPartEdge() {
 		ShadowPartEdgeImpl shadowPartEdge = new ShadowPartEdgeImpl();
 		return shadowPartEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull StringLiteralNode createStringLiteralNode() {
+		StringLiteralNodeImpl stringLiteralNode = new StringLiteralNodeImpl();
+		return stringLiteralNode;
 	}
 
 	/**
@@ -585,9 +687,31 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
+	public @NonNull TupleLiteralNode createTupleLiteralNode() {
+		TupleLiteralNodeImpl tupleLiteralNode = new TupleLiteralNodeImpl();
+		return tupleLiteralNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull TuplePartEdge createTuplePartEdge() {
 		TuplePartEdgeImpl tuplePartEdge = new TuplePartEdgeImpl();
 		return tuplePartEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull TypeLiteralNode createTypeLiteralNode() {
+		TypeLiteralNodeImpl typeLiteralNode = new TypeLiteralNodeImpl();
+		return typeLiteralNode;
 	}
 
 	/**
@@ -650,6 +774,24 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 */
 	public String convertRoleToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Number createNumberFromString(EDataType eDataType, String initialValue) {
+		return (Number)super.createFromString(eDataType, initialValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertNumberToString(EDataType eDataType, Object instanceValue) {
+		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**

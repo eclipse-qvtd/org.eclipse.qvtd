@@ -385,7 +385,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 			if (edge != null) {
 				Node protoTarget = protoEdge.getEdgeTarget();
 				Node target = edge.getEdgeTarget();
-				if (target.isExplicitNull() != (protoTarget.isExplicitNull())) {
+				if (target.isNullLiteral() != (protoTarget.isNullLiteral())) {
 					return false;
 				}
 				sourceNode = target;
@@ -511,7 +511,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 				List<@NonNull String> edgeNames = new ArrayList<>();
 				for (@NonNull NavigableEdge edge : headNode.getNavigationEdges()) {
 					String propertyName = PivotUtil.getName(QVTscheduleUtil.getProperty(edge));
-					edgeNames.add(edge.getEdgeTarget().isExplicitNull() ? propertyName + "0" : propertyName);
+					edgeNames.add(edge.getEdgeTarget().isNullLiteral() ? propertyName + "0" : propertyName);
 				}
 				Collections.sort(edgeNames);
 				for (@NonNull String edgeName : edgeNames) {

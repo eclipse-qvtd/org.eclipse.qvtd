@@ -39,7 +39,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
  *
  * @generated
  */
-public abstract class VariableNodeImpl extends NodeImpl implements VariableNode {
+public abstract class VariableNodeImpl extends MappingNodeImpl implements VariableNode {
 	/**
 	 * The cached value of the '{@link #getReferredVariable() <em>Referred Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -169,7 +169,7 @@ public abstract class VariableNodeImpl extends NodeImpl implements VariableNode 
 
 	@Override
 	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
-		VariableNodeImpl node = (VariableNodeImpl)super.createNode(nodeRole, region);
+		VariableNode node = (VariableNode)super.createNode(nodeRole, region);
 		VariableDeclaration referredVariable = getReferredVariable();
 		if (referredVariable != null) {
 			node.initializeVariable(region, referredVariable);
@@ -183,7 +183,7 @@ public abstract class VariableNodeImpl extends NodeImpl implements VariableNode 
 		setReferredVariable(variable);
 		assert variable.eContainer() != null;
 		assert variable.getName() != null;
-		addTypedElement(variable);
+		setOriginatingVariable(variable);
 		region.addVariableNode(variable, this);
 	}
 

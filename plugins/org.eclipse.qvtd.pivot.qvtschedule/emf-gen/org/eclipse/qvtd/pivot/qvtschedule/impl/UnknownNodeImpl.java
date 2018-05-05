@@ -29,7 +29,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
  *
  * @generated
  */
-public class UnknownNodeImpl extends NodeImpl implements UnknownNode {
+public class UnknownNodeImpl extends MappingNodeImpl implements UnknownNode {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

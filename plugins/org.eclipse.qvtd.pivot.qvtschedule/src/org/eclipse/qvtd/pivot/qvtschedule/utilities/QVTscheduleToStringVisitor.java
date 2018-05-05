@@ -12,14 +12,18 @@ package org.eclipse.qvtd.pivot.qvtschedule.utilities;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.util.Visitable;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ArgumentEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.BooleanValueNode;
+import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.CollectionLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.CollectionPartEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.CollectionRangeNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ComposedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
@@ -28,8 +32,10 @@ import org.eclipse.qvtd.pivot.qvtschedule.DependencyNode;
 import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.EnumLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ErrorNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ExpressionEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.IfNode;
 import org.eclipse.qvtd.pivot.qvtschedule.IncludesEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.InputNode;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratedEdge;
@@ -37,7 +43,10 @@ import org.eclipse.qvtd.pivot.qvtschedule.IteratorNode;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.MapLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.MapPartEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.MapPartNode;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingNode;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NamedMappingRegion;
@@ -45,12 +54,13 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
-import org.eclipse.qvtd.pivot.qvtschedule.NullNode;
+import org.eclipse.qvtd.pivot.qvtschedule.NullLiteralNode;
+import org.eclipse.qvtd.pivot.qvtschedule.NumericLiteralNode;
+import org.eclipse.qvtd.pivot.qvtschedule.OperationCallNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationSelfEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.OperationValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternTypedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternVariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
@@ -61,10 +71,14 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ShadowNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.StringLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
+import org.eclipse.qvtd.pivot.qvtschedule.TupleLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.TuplePartEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.TypeLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.VerdictRegion;
@@ -103,373 +117,336 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 	}
 
 	@Override
-	public String visitAbstractDatum(@NonNull AbstractDatum object) {
+	public String visiting(@NonNull Visitable object) {
 		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
+		if (object instanceof Nameable) {
+			appendName((Nameable) object);
+		}
 		return null;
+	}
+
+	@Override
+	public String visitAbstractDatum(@NonNull AbstractDatum object) {
+		return visiting(object);
 	}
 
 	@Override
 	public String visitArgumentEdge(@NonNull ArgumentEdge object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
-	public String visitBooleanValueNode(@NonNull BooleanValueNode object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+	public String visitBooleanLiteralNode(@NonNull BooleanLiteralNode object) {
+		return visiting(object);
 	}
 
 	@Override
 	public String visitCastEdge(@NonNull CastEdge object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitClassDatum(@NonNull ClassDatum object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
+	}
+
+	@Override
+	public String visitCollectionLiteralNode(@NonNull CollectionLiteralNode object) {
+		return visiting(object);
 	}
 
 	@Override
 	public String visitCollectionPartEdge(@NonNull CollectionPartEdge object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
+	}
+
+	@Override
+	public String visitCollectionRangeNode(@NonNull CollectionRangeNode object) {
+		return visiting(object);
 	}
 
 	@Override
 	public String visitComposedNode(@NonNull ComposedNode object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitConnection(@NonNull Connection object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitDatumConnection(@NonNull DatumConnection<?> object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitDependencyEdge(@NonNull DependencyEdge object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitDependencyNode(@NonNull DependencyNode object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitDispatchRegion(@NonNull DispatchRegion object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitEdge(@NonNull Edge object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitEdgeConnection(@NonNull EdgeConnection object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
+	}
+
+	@Override
+	public String visitEnumLiteralNode(@NonNull EnumLiteralNode object) {
+		return visiting(object);
 	}
 
 	@Override
 	public String visitErrorNode(@NonNull ErrorNode object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitExpressionEdge(@NonNull ExpressionEdge object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
+	}
+
+	@Override
+	public String visitIfNode(@NonNull IfNode object) {
+		return visiting(object);
 	}
 
 	@Override
 	public String visitIncludesEdge(@NonNull IncludesEdge object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitInputNode(@NonNull InputNode object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitIteratedEdge(@NonNull IteratedEdge object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitIteratorNode(@NonNull IteratorNode object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitKeyPartEdge(@NonNull KeyPartEdge object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitKeyedValueNode(@NonNull KeyedValueNode object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitLoadingRegion(@NonNull LoadingRegion object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
+	}
+
+	@Override
+	public String visitMapLiteralNode(@NonNull MapLiteralNode object) {
+		return visiting(object);
 	}
 
 	@Override
 	public String visitMapPartEdge(@NonNull MapPartEdge object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
+	}
+
+	@Override
+	public String visitMapPartNode(@NonNull MapPartNode object) {
+		return visiting(object);
+	}
+
+	@Override
+	public String visitMappingNode(@NonNull MappingNode object) {
+		return visiting(object);
 	}
 
 	@Override
 	public String visitMappingRegion(@NonNull MappingRegion object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitMicroMappingRegion(@NonNull MicroMappingRegion object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitNamedMappingRegion(@NonNull NamedMappingRegion object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitNavigableEdge(@NonNull NavigableEdge object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitNavigationEdge(@NonNull NavigationEdge object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitNode(@NonNull Node object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitNodeConnection(@NonNull NodeConnection object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
-	public String visitNullNode(@NonNull NullNode object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+	public String visitNullLiteralNode(@NonNull NullLiteralNode object) {
+		return visiting(object);
+	}
+
+	@Override
+	public String visitNumericLiteralNode(@NonNull NumericLiteralNode object) {
+		return visiting(object);
+	}
+
+	@Override
+	public String visitOperationCallNode(@NonNull OperationCallNode object) {
+		return visiting(object);
 	}
 
 	@Override
 	public String visitOperationNode(@NonNull OperationNode object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitOperationParameterEdge(@NonNull OperationParameterEdge object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitOperationRegion(@NonNull OperationRegion object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitOperationSelfEdge(@NonNull OperationSelfEdge object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
-	}
-
-	@Override
-	public String visitOperationValueNode(@NonNull OperationValueNode object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitPatternTypedNode(@NonNull PatternTypedNode object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitPatternVariableNode(@NonNull PatternVariableNode object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitPredicateEdge(@NonNull PredicateEdge object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitPropertyDatum(@NonNull PropertyDatum object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitRecursionEdge(@NonNull RecursionEdge object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitRegion(@NonNull Region object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitRuleRegion(@NonNull RuleRegion object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitScheduleModel(@NonNull ScheduleModel object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitScheduledRegion(@NonNull ScheduledRegion object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
+	}
+
+	@Override
+	public String visitShadowNode(@NonNull ShadowNode object) {
+		return visiting(object);
 	}
 
 	@Override
 	public String visitShadowPartEdge(@NonNull ShadowPartEdge object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
+	}
+
+	@Override
+	public String visitStringLiteralNode(@NonNull StringLiteralNode object) {
+		return visiting(object);
 	}
 
 	@Override
 	public String visitSuccessEdge(@NonNull SuccessEdge object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitSuccessNode(@NonNull SuccessNode object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
+	}
+
+	@Override
+	public String visitTupleLiteralNode(@NonNull TupleLiteralNode object) {
+		return visiting(object);
 	}
 
 	@Override
 	public String visitTuplePartEdge(@NonNull TuplePartEdge object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
+	}
+
+	@Override
+	public String visitTypeLiteralNode(@NonNull TypeLiteralNode object) {
+		return visiting(object);
 	}
 
 	@Override
 	public String visitUnknownNode(@NonNull UnknownNode object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitVariableNode(@NonNull VariableNode object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 
 	@Override
 	public String visitVerdictRegion(@NonNull VerdictRegion object) {
-		append(object.getClass().getSimpleName() + " ");
-		appendName(object);
-		return null;
+		return visiting(object);
 	}
 }

@@ -31,7 +31,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
  *
  * @generated
  */
-public class ErrorNodeImpl extends NodeImpl implements ErrorNode {
+public class ErrorNodeImpl extends MappingNodeImpl implements ErrorNode {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

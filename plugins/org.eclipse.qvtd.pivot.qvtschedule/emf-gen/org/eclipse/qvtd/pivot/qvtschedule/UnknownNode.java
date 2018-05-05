@@ -25,5 +25,5 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  * @model
  * @generated
  */
-public interface UnknownNode extends Node {
+public interface UnknownNode extends MappingNode {
 } // UnknownNode

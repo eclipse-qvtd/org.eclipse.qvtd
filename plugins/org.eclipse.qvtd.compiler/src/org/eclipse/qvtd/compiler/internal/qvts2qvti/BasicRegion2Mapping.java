@@ -94,7 +94,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.BooleanValueNode;
+import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.ExpressionEdge;
@@ -104,7 +104,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
-import org.eclipse.qvtd.pivot.qvtschedule.OperationValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -292,7 +291,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 							VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
 							createCheckStatement(source2targetExp, "includes", targetVariableExp);
 						}
-						else if ((targetNode instanceof BooleanValueNode) && ((BooleanValueNode)targetNode).isBooleanValue()) {
+						else if ((targetNode instanceof BooleanLiteralNode) && ((BooleanLiteralNode)targetNode).isBooleanValue()) {
 							createConstantCheck(edge, source2targetExp);
 						}
 						else if (nodeVariable == null) {
@@ -325,7 +324,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				}
 				else if (edge instanceof PredicateEdge) {
 					VariableExp sourceVariableExp = getSubexpressionVariableExp(sourceNode);
-					if (!(targetNode instanceof BooleanValueNode)) {
+					if (!(targetNode instanceof BooleanLiteralNode)) {
 						String edgeName = ClassUtil.nonNullState(edge.getName()).trim();
 						if (edgeName.length() >= 2) {
 							edgeName = edgeName.substring(1, edgeName.length()-1);		// Lose guillemets
@@ -333,7 +332,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 						VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
 						createCheckStatement(sourceVariableExp, edgeName, targetVariableExp);
 					}
-					else if (((BooleanValueNode)targetNode).isBooleanValue()) {
+					else if (((BooleanLiteralNode)targetNode).isBooleanValue()) {
 						createConstantCheck(edge, sourceVariableExp);
 					}
 					else {
@@ -560,8 +559,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			if (variable != null) {
 				return PivotUtil.createVariableExp(variable);
 			}
-			if (node instanceof BooleanValueNode) {
-				BooleanValueNode booleanValueNode = (BooleanValueNode)node;
+			if (node instanceof BooleanLiteralNode) {
+				BooleanLiteralNode booleanValueNode = (BooleanLiteralNode)node;
 				boolean booleanValue = booleanValueNode.isBooleanValue();
 				return helper.createBooleanLiteralExp(booleanValue);
 			}
@@ -571,8 +570,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				return createOperationCallExp(operationValue.getOperationId(), operationIdValueNode);
 			}
 			if (node.isOperation()) {
-				if (node instanceof BooleanValueNode) {
-					return helper.createBooleanLiteralExp(((BooleanValueNode)node).isBooleanValue());
+				if (node instanceof BooleanLiteralNode) {
+					return helper.createBooleanLiteralExp(((BooleanLiteralNode)node).isBooleanValue());
 				}
 				else {
 					Iterable<@NonNull TypedElement> typedElements = node.getTypedElements();
@@ -1130,7 +1129,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				OperationNode resultNode = (OperationNode) node;
 				boolean isPrimitiveExp = false;
 				if (node.isConstant()) {
-					if (node instanceof BooleanValueNode) {
+					if (node instanceof BooleanLiteralNode) {
 						isPrimitiveExp = true;
 					}
 					else {

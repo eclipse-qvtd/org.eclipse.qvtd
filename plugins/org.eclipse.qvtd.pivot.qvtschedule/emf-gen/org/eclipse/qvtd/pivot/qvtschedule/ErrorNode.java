@@ -29,5 +29,5 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  * @model
  * @generated
  */
-public interface ErrorNode extends Node {
+public interface ErrorNode extends MappingNode {
 } // ErrorNode

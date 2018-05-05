@@ -29,5 +29,5 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  * @model
  * @generated
  */
-public interface SuccessNode extends Node {
+public interface SuccessNode extends MappingNode {
 } // SuccessNode

@@ -20,7 +20,7 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
-import org.eclipse.qvtd.pivot.qvtschedule.BooleanValueNode;
+import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
@@ -37,12 +37,12 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable Element, @Nullable Object>
 {
-	protected final @NonNull RegionHelper regionHelper;
+	protected final @NonNull RegionHelper<?> regionHelper;
 	protected final @NonNull MicroMappingRegion partialRegion;
 	protected final @NonNull AbstractPartition partition;
 	private final @NonNull Map<@NonNull Node, @NonNull Node> oldNode2partialNode = new HashMap<>();
 
-	protected PartitioningVisitor(@NonNull RegionHelper regionHelper, @NonNull AbstractPartition partition) {
+	protected PartitioningVisitor(@NonNull RegionHelper<?> regionHelper, @NonNull AbstractPartition partition) {
 		super(null);
 		this.regionHelper = regionHelper;
 		this.partialRegion = (MicroMappingRegion)regionHelper.getRegion();
@@ -90,7 +90,7 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 	}
 
 	@Override
-	public @Nullable Element visitBooleanValueNode(@NonNull BooleanValueNode node) {
+	public @Nullable Element visitBooleanLiteralNode(@NonNull BooleanLiteralNode node) {
 		Role nodeRole = partition.getNodeRole(node);
 		if (nodeRole == null) {
 			return null;
