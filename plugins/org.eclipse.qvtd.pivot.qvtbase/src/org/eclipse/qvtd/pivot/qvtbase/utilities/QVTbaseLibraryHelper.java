@@ -39,11 +39,7 @@ public class QVTbaseLibraryHelper
 	private final @NonNull Parameter rangeFirstParameter;
 	private final @NonNull Parameter rangeLastParameter;
 	private final @NonNull Operation shadowOperation;
-	private final @NonNull Operation shadowPartOperation;
-	private final @NonNull Parameter shadowPartValueParameter;
 	private final @NonNull Operation tupleOperation;
-	private final @NonNull Operation tuplePartOperation;
-	private final @NonNull Parameter tuplePartValueParameter;
 	private final @NonNull Operation typeOperation;
 
 	public QVTbaseLibraryHelper() {
@@ -69,11 +65,7 @@ public class QVTbaseLibraryHelper
 		this.rangeFirstParameter = PivotUtil.getOwnedParameter(rangeOperation, 0);
 		this.rangeLastParameter = PivotUtil.getOwnedParameter(rangeOperation, 1);
 		this.shadowOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "shadow"));
-		this.shadowPartOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "shadowPart"));
-		this.shadowPartValueParameter = PivotUtil.getOwnedParameter(shadowPartOperation, 0);
 		this.tupleOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "tuple"));
-		this.tuplePartOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "tuplePart"));
-		this.tuplePartValueParameter = PivotUtil.getOwnedParameter(tuplePartOperation, 0);
 		this.typeOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "type"));
 	}
 
@@ -145,24 +137,8 @@ public class QVTbaseLibraryHelper
 		return shadowOperation;
 	}
 
-	public @NonNull Operation getShadowPartOperation() {
-		return shadowPartOperation;
-	}
-
-	public @NonNull Parameter getShadowPartValueParameter() {
-		return shadowPartValueParameter;
-	}
-
 	public @NonNull Operation getTupleOperation() {
 		return tupleOperation;
-	}
-
-	public @NonNull Operation getTuplePartOperation() {
-		return tuplePartOperation;
-	}
-
-	public @NonNull Parameter getTuplePartValueParameter() {
-		return tuplePartValueParameter;
 	}
 
 	public @NonNull Operation getTypeOperation() {

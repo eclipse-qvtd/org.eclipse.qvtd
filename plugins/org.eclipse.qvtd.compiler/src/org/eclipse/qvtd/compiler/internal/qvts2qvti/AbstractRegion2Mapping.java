@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.LetExp;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -30,7 +31,6 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypeExp;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
@@ -68,9 +68,9 @@ public abstract class AbstractRegion2Mapping
 	@SuppressWarnings("unused")private final @NonNull String mappingName;
 
 	/**
-	 * Mapping from QVTm expression to Schedule Node.
+	 * Mapping from QVTm/QVTr element to QVTs Node.
 	 */
-	private final @NonNull Map<@NonNull TypedElement, @NonNull Node> qvtm2node = new HashMap<>();
+	private final @NonNull Map<@NonNull Element, @NonNull Node> element2node = new HashMap<>();
 
 	/**
 	 * Safe name for each node
@@ -101,10 +101,10 @@ public abstract class AbstractRegion2Mapping
 		if (region instanceof RuleRegion) {
 			this.mapping.setIsAbstract(((RuleRegion)region).getReferredRule().isIsAbstract());
 		}
-		this.names = new HashSet<@NonNull String>(visitor.getReservedNames());
+		this.names = new HashSet<>(visitor.getReservedNames());
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
-			for (TypedElement typedElement : node.getTypedElements()) {
-				Node oldNode = qvtm2node.put(typedElement, node);
+			for (@NonNull Element element : node.getOriginatingElements()) {
+				Node oldNode = element2node.put(element, node);
 				assert (oldNode == null) || (oldNode == node);
 			}
 		}
@@ -204,29 +204,29 @@ public abstract class AbstractRegion2Mapping
 		return visitor.getMetamodelManager();
 	}
 
-	public @Nullable Node getNode(@Nullable TypedElement qvtmTypedElement) {
-		if (qvtmTypedElement instanceof VariableExp) {
-			return getNode(((VariableExp)qvtmTypedElement).getReferredVariable());
+	public @Nullable Node getNode(@Nullable Element qvtmElement) {
+		if (qvtmElement instanceof VariableExp) {
+			return getNode(((VariableExp)qvtmElement).getReferredVariable());
 		}
-		if (qvtmTypedElement instanceof LetExp) {
-			return getNode(((LetExp)qvtmTypedElement).getOwnedIn());
+		if (qvtmElement instanceof LetExp) {
+			return getNode(((LetExp)qvtmElement).getOwnedIn());
 		}
-		if (qvtmTypedElement instanceof OppositePropertyCallExp) {
-			OppositePropertyCallExp propertyCallExp = (OppositePropertyCallExp)qvtmTypedElement;
+		if (qvtmElement instanceof OppositePropertyCallExp) {
+			OppositePropertyCallExp propertyCallExp = (OppositePropertyCallExp)qvtmElement;
 			Node sourceNode = getNode(propertyCallExp.getOwnedSource());
 			if (sourceNode != null) {
 				return sourceNode.getNavigationTarget(ClassUtil.nonNullState(propertyCallExp.getReferredProperty().getOpposite()));
 			}
 		}
-		if (qvtmTypedElement instanceof PropertyCallExp) {
-			PropertyCallExp propertyCallExp = (PropertyCallExp)qvtmTypedElement;
+		if (qvtmElement instanceof PropertyCallExp) {
+			PropertyCallExp propertyCallExp = (PropertyCallExp)qvtmElement;
 			Node sourceNode = getNode(propertyCallExp.getOwnedSource());
 			if (sourceNode != null) {
 				return sourceNode.getNavigationTarget(ClassUtil.nonNullState(propertyCallExp.getReferredProperty()));
 			}
 		}
-		if (qvtmTypedElement != null) {
-			return qvtm2node.get(qvtmTypedElement);
+		if (qvtmElement != null) {
+			return element2node.get(qvtmElement);
 		}
 		else {
 			return null;

@@ -16,7 +16,6 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
@@ -53,9 +52,9 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 		oldNode2partialNode.put(fullNode, partialNode);
 		partialNode.setUtility(fullNode.getUtility());
 		partialNode.setContained(fullNode.isContained());
-		for (@NonNull TypedElement typedElement : fullNode.getTypedElements()) {
-			partialNode.addTypedElement(typedElement);
-		}
+		//		for (@NonNull TypedElement typedElement : fullNode.getTypedElements()) {
+		//			partialNode.addTypedElement(typedElement);
+		//		}
 	}
 
 	/*	private void checkEdges(@NonNull Region oldRegion) {
@@ -202,9 +201,9 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 		oldNode2partialNode.put(variableNode, partialNode);
 		partialNode.setUtility(variableNode.getUtility());
 		partialNode.setContained(variableNode.isContained());
-		for (@NonNull TypedElement typedElement : variableNode.getTypedElements()) {
-			partialNode.addTypedElement(typedElement);
-		}
+		//		for (@NonNull TypedElement typedElement : variableNode.getTypedElements()) {
+		//			partialNode.addTypedElement(typedElement);
+		//		}
 		return partialNode;
 	}
 

@@ -1074,7 +1074,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 				Edge nextCallingEdge = callingNode.getNavigationEdge(QVTscheduleUtil.getProperty(calledEdge));
 				if (nextCallingEdge != null) {
 					Node nextCallingNode = nextCallingEdge.getEdgeTarget();
-					if ((nextCallingNode.isExplicitNull() != nextCalledNode.isExplicitNull())) {
+					if ((nextCallingNode.isNullLiteral() != nextCalledNode.isNullLiteral())) {
 						return false;
 					}
 					if (!isCompatiblePattern(region, nextCalledNode, nextCallingNode, called2calling)) {

@@ -126,9 +126,6 @@ public class UtilityAnalysis
 	}
 
 	private boolean canBeStronglyMatched(@NonNull Node node) {
-		if (node.isExplicitNull()) {
-			return true;
-		}
 		if (node.isPattern()) {
 			return true;
 		}
@@ -139,9 +136,6 @@ public class UtilityAnalysis
 	}
 
 	private boolean canBeUnconditional(@NonNull Node node) {
-		if (node.isExplicitNull()) {
-			return true;
-		}
 		if (node.isIterator()) {
 			return false;
 		}
@@ -221,7 +215,7 @@ public class UtilityAnalysis
 				for (@NonNull NavigableEdge edge : sourceNode.getNavigationEdges()) {
 					Node targetNode = edge.getEdgeTarget();
 					if (canBeStronglyMatched(targetNode)) {
-						if (targetNode.isExplicitNull() || edge.getProperty().isIsRequired()) {
+						if (targetNode.isNullLiteral() || edge.getProperty().isIsRequired()) {
 							if (stronglyMatchedNodes.add(targetNode)) {
 								moreMoreNodes.add(targetNode);
 							}
@@ -306,7 +300,7 @@ public class UtilityAnalysis
 					if (!canBeUnconditional(targetNode)) {}
 					else if (outgoingEdge.isComputation()) {}
 					else if (outgoingEdge.isNavigation()) {
-						if (targetNode.isExplicitNull()) {
+						if (targetNode.isNullLiteral()) {
 							if (unconditionalNodes.add(targetNode)) {
 								moreMoreNodes.add(targetNode);
 							}

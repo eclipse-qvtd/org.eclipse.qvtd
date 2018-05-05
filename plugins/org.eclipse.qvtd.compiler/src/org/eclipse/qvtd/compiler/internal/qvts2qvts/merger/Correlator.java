@@ -80,7 +80,7 @@ class Correlator
 				return true;
 			}
 			else {
-				assert secondaryNode.isExplicitNull() == primaryNode.isExplicitNull();
+				assert secondaryNode.isNullLiteral() == primaryNode.isNullLiteral();
 				return true;
 			}
 		}
@@ -293,7 +293,7 @@ class Correlator
 					}
 					if (uncastPrimaryEdge != null) {
 						Node uncastPrimaryTargetNode = uncastPrimaryEdge.getEdgeTarget();
-						if (uncastSecondaryTargetNode.isExplicitNull() != uncastPrimaryTargetNode.isExplicitNull()) {
+						if (uncastSecondaryTargetNode.isNullLiteral() != uncastPrimaryTargetNode.isNullLiteral()) {
 							if (debugFailures) {
 								AbstractMerger.FAILURE.println("Inconsistent ExplicitNull: " + uncastSecondaryTargetNode);
 							}

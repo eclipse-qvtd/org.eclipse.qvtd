@@ -332,7 +332,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		Node dependencyNode;
 		dependencyNode = selfNode;
 		//
-		Node resultNode = regionHelper.createStepNode("result", operationCallExp, dependencyNode, false);
+		Node resultNode = regionHelper.createStepNode("result", operationCallExp, dependencyNode, false);	// FIXME do not use a MappingNode
 		operationRegion.setResultNode(resultNode);
 		regionHelper.createEqualsEdge(dependencyNode, resultNode);
 		//

@@ -102,7 +102,7 @@ public class LoadingRegionAnalysis extends RegionHelper<@NonNull LoadingRegion>
 				type2node.put(null, introducedNode);
 			}
 		}
-		else if ((containerEdge != null) && containerEdge.getEdgeTarget().isExplicitNull()) {		// At root, owned by null property
+		else if ((containerEdge != null) && containerEdge.getEdgeTarget().isNullLiteral()) {		// At root, owned by null property
 			Map<@Nullable Property, @NonNull Node> property2node = classDatum2property2node.get(consumedClassDatum);
 			if (property2node == null) {
 				property2node = new HashMap<>();
@@ -152,7 +152,7 @@ public class LoadingRegionAnalysis extends RegionHelper<@NonNull LoadingRegion>
 	protected @NonNull Node getNullNode() {
 		Node nullNode2 = nullNode;
 		if (nullNode2 == null) {
-			nullNode = nullNode2 = createNullNode(true, null);
+			nullNode = nullNode2 = createNullLiteralNode(true, null);
 		}
 		return nullNode2;
 	}

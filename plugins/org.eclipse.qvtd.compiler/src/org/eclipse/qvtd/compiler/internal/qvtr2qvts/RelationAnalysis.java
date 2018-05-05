@@ -430,7 +430,7 @@ public class RelationAnalysis extends RuleAnalysis
 			for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 				Property property = edge.getProperty();
 				Property opposite = property.getOpposite();
-				if ((opposite != null) && opposite.isIsComposite() && !edge.getEdgeTarget().isExplicitNull()) {
+				if ((opposite != null) && opposite.isIsComposite() && !edge.getEdgeTarget().isNullLiteral()) {
 					isContained = true;
 					break;
 				}
@@ -891,7 +891,7 @@ public class RelationAnalysis extends RuleAnalysis
 			expressionSynthesizer.createCastEdge(bestInitNode, castProperty, castNode);
 			bestInitNode = castNode;
 		}
-		bestInitNode.addTypedElement(variable);
+		bestInitNode.setOriginatingVariable(variable);
 		region.addVariableNode(variable, bestInitNode);
 		/*		for (@NonNull OCLExpression initExpression : expressions) {
 			if (initExpression != bestInitExpression) {
@@ -1267,7 +1267,7 @@ public class RelationAnalysis extends RuleAnalysis
 			if (memberNode != null) {
 				Node selfNode = residueNode;
 				assert selfNode != null;
-				residueNode = createOperationNode(isUnconditional(member), collectionExcludingOperation, collectionTemplateExp, residueNode, memberNode);
+				residueNode = createOperationCallNode(isUnconditional(member), null, collectionExcludingOperation, collectionTemplateExp, residueNode, memberNode);
 				createOperationSelfEdge(selfNode, QVTrelationUtil.getType(collectionExcludingOperation), residueNode);
 				createOperationParameterEdge(memberNode, QVTrelationUtil.getOwnedParameter(collectionExcludingOperation, 0), -1, residueNode);
 			}
@@ -1282,7 +1282,7 @@ public class RelationAnalysis extends RuleAnalysis
 			if (memberNode != null) {
 				Node selfNode = residueNode;
 				assert selfNode != null;
-				residueNode = createOperationNode(isUnconditional(rest), collectionExcludingOperation, collectionTemplateExp, residueNode, memberNode);
+				residueNode = createOperationCallNode(isUnconditional(rest), null, collectionExcludingOperation, collectionTemplateExp, residueNode, memberNode);
 				createOperationSelfEdge(selfNode, QVTrelationUtil.getType(collectionExcludingOperation), residueNode);
 				createOperationParameterEdge(memberNode, QVTrelationUtil.getOwnedParameter(collectionExcludingOperation, 0), -1, residueNode);
 			}
@@ -1291,7 +1291,8 @@ public class RelationAnalysis extends RuleAnalysis
 			createEqualsEdge(residueNode, restNode);
 		}
 		if (rest == null) {
-			Node isEmptyNode = createOperationNode(isUnconditional(collectionTemplateExp), "isEmpty", collectionTemplateExp, residueNode);
+			Operation collectionIsEmptyOperation = scheduleManager.getStandardLibraryHelper().getCollectionIsEmptyOperation();
+			Node isEmptyNode = createOperationCallNode(isUnconditional(collectionTemplateExp), null, collectionIsEmptyOperation, collectionTemplateExp, residueNode);
 			createPredicatedStepNode(isEmptyNode, false);
 		}
 	}
@@ -1487,7 +1488,7 @@ public class RelationAnalysis extends RuleAnalysis
 		}
 		Node resultNode = predicateExpression.accept(expressionSynthesizer);
 		if (resultNode != null) {
-			Node trueNode = createBooleanValueNode(true);
+			Node trueNode = createBooleanLiteralNode(true);
 			createPredicateEdge(resultNode, null, trueNode);
 		}
 	}

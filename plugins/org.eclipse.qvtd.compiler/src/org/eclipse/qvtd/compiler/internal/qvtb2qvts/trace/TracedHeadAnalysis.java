@@ -75,7 +75,7 @@ public class TracedHeadAnalysis extends HeadAnalysis
 					boolean isMany = source2targetProperty.isIsMany();
 					Node targetNode = navigationEdge.getEdgeTarget();
 					if (!isMany || targetNode.isDataType()) {
-						if (targetNode.isMatched() /*&& targetNode.isClass()*/ && !targetNode.isExplicitNull() && !targetNode.isConstant()) {
+						if (targetNode.isMatched() /*&& targetNode.isClass()*/ && !targetNode.isNullLiteral() && !targetNode.isConstant()) {
 							Set<@NonNull Node> sources2 = targetFromSources.get(targetNode);
 							if (sources2 == null) {
 								sources2 = Sets.newHashSet(targetNode);

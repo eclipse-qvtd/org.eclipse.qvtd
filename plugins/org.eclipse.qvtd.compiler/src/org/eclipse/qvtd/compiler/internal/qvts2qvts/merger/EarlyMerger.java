@@ -108,7 +108,7 @@ public class EarlyMerger extends AbstractMerger
 		if (!node.isClass()) {		// Simplify - this obviates many of the below
 			return;
 		}
-		if (node.isExplicitNull()) {
+		if (node.isNullLiteral()) {
 			return;
 		}
 		if (node.isOperation()) {

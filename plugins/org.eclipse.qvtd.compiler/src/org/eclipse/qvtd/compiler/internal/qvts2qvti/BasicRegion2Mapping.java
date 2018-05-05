@@ -28,6 +28,7 @@ import org.eclipse.ocl.pivot.CollectionLiteralExp;
 import org.eclipse.ocl.pivot.CollectionLiteralPart;
 import org.eclipse.ocl.pivot.CollectionRange;
 import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.EnumLiteralExp;
 import org.eclipse.ocl.pivot.IfExp;
 import org.eclipse.ocl.pivot.IterateExp;
@@ -53,7 +54,6 @@ import org.eclipse.ocl.pivot.TupleLiteralPart;
 import org.eclipse.ocl.pivot.TupleType;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypeExp;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
@@ -98,17 +98,23 @@ import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.ExpressionEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.IfNode;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.NullLiteralNode;
+import org.eclipse.qvtd.pivot.qvtschedule.NumericLiteralNode;
+import org.eclipse.qvtd.pivot.qvtschedule.OperationCallNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.StringLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -277,7 +283,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 						sourceExp = helper.createVariableExp(castStatement);
 					}
 					OCLExpression source2targetExp = createCallExp(sourceExp, property);
-					if (targetNode.isExplicitNull()) {
+					if (targetNode.isNullLiteral()) {
 						createCheckStatement(source2targetExp, "=", helper.createNullLiteralExp());
 					}
 					else if (targetNode.isConstant() && !sourceNode.isNew()) {
@@ -406,7 +412,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 		private void analyzeIncomingPath(@NonNull Node node, @NonNull Set<Node> unconditionalNodes, @NonNull Set<Node> conditionalNodes, boolean isConditional) {
 			if ((isConditional ? conditionalNodes : unconditionalNodes).add(node)) {
-				boolean isIf = context.isIfExp(node);
+				boolean isIf = node instanceof IfNode;		// FIXME better edge typing
 				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 					if (edge.isComputation()) {
 						boolean isIfThenOrElse = isIf && ("then".equals(edge.getName()) || "else".equals(edge.getName()));
@@ -421,14 +427,14 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 
 		protected @NonNull OCLExpression create(/*@NonNull*/ Node node) {
-			if (node.isExplicitNull()) {
+			if (node.isNullLiteral()) {
 				return helper.createNullLiteralExp();
 			}
 			VariableDeclaration theVariable = context.basicGetVariable(node);
 			if (theVariable == null) {
-				TypedElement oldTypedElement = node.getTypedElements().iterator().next();
-				assert oldTypedElement != null;
-				OCLExpression initExpression = oldTypedElement.accept(this);
+				Element originatingElement = node.getOriginatingElement();
+				assert originatingElement != null;
+				OCLExpression initExpression = originatingElement.accept(this);
 				assert initExpression != null;
 				//				Type type = newExpression.getType();
 				//				assert type != null;
@@ -552,33 +558,45 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 
 		public @Nullable OCLExpression getExpression(@NonNull Node node) {
-			if (node.isExplicitNull()) {
-				return helper.createNullLiteralExp();
-			}
+			//			if (node.isNullLiteral()) {
+			//				return helper.createNullLiteralExp();
+			//			}
 			VariableDeclaration variable = context.basicGetVariable(node);
 			if (variable != null) {
+				assert !node.isNullLiteral();								// null should not be cached in a variable
 				return PivotUtil.createVariableExp(variable);
 			}
-			if (node instanceof BooleanLiteralNode) {
-				BooleanLiteralNode booleanValueNode = (BooleanLiteralNode)node;
-				boolean booleanValue = booleanValueNode.isBooleanValue();
-				return helper.createBooleanLiteralExp(booleanValue);
-			}
-			if (node instanceof OperationValueNode) {
-				OperationValueNode operationIdValueNode = (OperationValueNode)node;
-				Operation operationValue = operationIdValueNode.getOperationValue();
-				return createOperationCallExp(operationValue.getOperationId(), operationIdValueNode);
-			}
 			if (node.isOperation()) {
-				if (node instanceof BooleanLiteralNode) {
+				Element originatingElement = node.basicGetOriginatingElement();
+				if (originatingElement instanceof CollectionTemplateExp) {	// The CollectionTemplateExp synthesis has already identified the necessary operations
+					OperationCallNode operationCallNode = (OperationCallNode)node;
+					Operation operation = operationCallNode.getReferredOperation();
+					return createOperationCallExp(operation.getOperationId(), operationCallNode);
+				}
+				else if (originatingElement != null) {
+					return originatingElement.accept(getInlineExpressionCreator());
+				}
+				else if (node instanceof BooleanLiteralNode) {				// This happens because synthesized nodes have no originating BooleanLiteralExp
 					return helper.createBooleanLiteralExp(((BooleanLiteralNode)node).isBooleanValue());
 				}
-				else {
-					Iterable<@NonNull TypedElement> typedElements = node.getTypedElements();
-					assert Iterables.size(typedElements) >= 1;
-					return typedElements.iterator().next().accept(getInlineExpressionCreator());
+				else if (node instanceof NullLiteralNode) {					// This happens because synthesized nodes have no originating BooleanLiteralExp
+					return helper.createNullLiteralExp();
 				}
-
+				else if (node instanceof NumericLiteralNode) {				// This never happens but we can easily support it if needed
+					Number numericValue = ClassUtil.nonNullState(((NumericLiteralNode)node).getNumericValue());
+					if ((numericValue instanceof Byte) || (numericValue instanceof Integer) || (numericValue instanceof Long) || (numericValue instanceof Short)) {
+						return helper.createIntegerLiteralExp(numericValue);
+					}
+					else {
+						return helper.createRealLiteralExp(numericValue);
+					}
+				}
+				else if (node instanceof StringLiteralNode) {				// This never happens but we can easily support it if needed
+					return helper.createStringLiteralExp(ClassUtil.nonNullState(((StringLiteralNode)node).getStringValue()));
+				}
+				else {
+					throw new UnsupportedOperationException();
+				}
 			}
 			for (@NonNull Edge edge : node.getArgumentEdges()) {
 				Node expNode = edge.getEdgeSource();
@@ -847,18 +865,16 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				if (++debugDepth > 100) {
 					throw new UnsupportedOperationException();
 				}
-				if (node.isExplicitNull()) {
+				if (node.isNullLiteral()) {
 					return helper.createNullLiteralExp();
 				}
 				VariableDeclaration theVariable = context.basicGetVariable(node);
 				if (theVariable != null) {
 					return PivotUtil.createVariableExp(theVariable);
 				}
-				TypedElement oldTypedElement = node.getTypedElements().iterator().next();		// FIXME This fallback should be obsolete
-				assert oldTypedElement != null;
-				if (oldTypedElement instanceof Variable) {
-					Variable variable = (Variable)oldTypedElement;
-					OCLExpression ownedInit = variable.getOwnedInit();
+				VariableDeclaration variable = node.basicGetOriginatingVariable();		// FIXME This fallback should be obsolete
+				if (variable instanceof Variable) {
+					OCLExpression ownedInit = ((Variable)variable).getOwnedInit();
 					if (ownedInit == null) {
 						for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {		// FIXME this can pick a downstream rather than upstream edge
 							if (edge.isExpression() && RegionHelper.EQUALS_NAME.equals(edge.getName())) { // ?? always an Equals(Predicate)Edge
@@ -882,7 +898,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					}
 				}
 				else {
-					return oldTypedElement.accept(this);
+					return node.getOriginatingElement().accept(this);
 				}
 				throw new UnsupportedOperationException();
 			}
@@ -1067,7 +1083,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//	... and the no-input constant nodes
 		//
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
-			if (node.isExplicitNull() || node.isOperation()) {
+			if (node.isOperation()) {
 				if (node.isConstant()) {
 					boolean hasNoComputationInputs = true;
 					for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
@@ -1125,48 +1141,33 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//	Identify the subexpression result nodes
 		//
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
-			if (node.isOperation() && node.isUnconditional()) {
+			if (node.isOperation() && node.isUnconditional() && !node.isPrimitive()) {
 				OperationNode resultNode = (OperationNode) node;
-				boolean isPrimitiveExp = false;
-				if (node.isConstant()) {
-					if (node instanceof BooleanLiteralNode) {
-						isPrimitiveExp = true;
-					}
-					else {
-						TypedElement oldTypedElement = node.getTypedElements().iterator().next();
-						assert oldTypedElement != null;
-						if (oldTypedElement instanceof PrimitiveLiteralExp) {
-							isPrimitiveExp = true;
+				Edge firstEdge = null;
+				boolean isSubexpression = false;
+				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+					if (edge.isNew() && !edge.isSecondary()) {
+						Node edgeSource = edge.getSourceNode();
+						if (edgeSource.isPattern()) {
+							resultNode2subexpression.put(resultNode, new Subexpression(resultNode));
+							isSubexpression = true;
+							break;
 						}
 					}
 				}
-				if (!isPrimitiveExp) {
-					Edge firstEdge = null;
-					boolean isSubexpression = false;
-					for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-						if (edge.isNew() && !edge.isSecondary()) {
-							Node edgeSource = edge.getSourceNode();
-							if (edgeSource.isPattern()) {
-								resultNode2subexpression.put(resultNode, new Subexpression(resultNode));
-								isSubexpression = true;
-								break;
-							}
+				if (!isSubexpression) {
+					for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(node)) {
+						Node edgeTarget = edge.getTargetNode();
+						if (edgeTarget.isPattern() /*|| edgeTarget.isTrue()*/) {
+							resultNode2subexpression.put(resultNode, new Subexpression(resultNode));
+							break;
 						}
-					}
-					if (!isSubexpression) {
-						for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(node)) {
-							Node edgeTarget = edge.getTargetNode();
-							if (edgeTarget.isPattern() /*|| edgeTarget.isTrue()*/) {
-								resultNode2subexpression.put(resultNode, new Subexpression(resultNode));
-								break;
-							}
-							if (firstEdge == null) {
-								firstEdge = edge;
-							}
-							else {
-								resultNode2subexpression.put(resultNode, new Subexpression(resultNode));
-								break;
-							}
+						if (firstEdge == null) {
+							firstEdge = edge;
+						}
+						else {
+							resultNode2subexpression.put(resultNode, new Subexpression(resultNode));
+							break;
 						}
 					}
 				}
@@ -1281,12 +1282,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	private @NonNull DeclareStatement createDeclareStatement(@NonNull Node node, @NonNull OCLExpression initExpression) {
 		Type variableType = node.getCompleteClass().getPrimaryClass();
 		assert variableType != null;
-		boolean isRequired = node.isMatched();
-		for (@NonNull TypedElement typedElement : node.getTypedElements()) {
-			if (!typedElement.isIsRequired()) {
-				isRequired = false;
-			}
-		}
+		boolean isRequired = node.isMatched() && node.isRequired();
 		if (initExpression.isIsRequired()) {
 			isRequired = true;
 		}
@@ -1540,7 +1536,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 						constructor = helper.createOperationCallExp(thisExp, function, asArguments);
 					}
 					if (constructor == null) {
-						constructor = ((OperationCallExp)newNode.getTypedElements().iterator().next()).accept(expressionCreator);
+						constructor = ((OperationCallExp)newNode.getOriginatingElement()).accept(expressionCreator);
 					}
 				}
 				ClassDatum classDatum = newNode.getClassDatum();
@@ -1557,7 +1553,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 	private @NonNull OCLExpression createVariableExp(@NonNull Node node) {
-		if (node.isExplicitNull()) {
+		if (node.isNullLiteral()) {
 			return helper.createNullLiteralExp();
 		}
 		else {
@@ -1641,16 +1637,6 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		return enforcedEdges != null;
 	}
 
-	private boolean isIfExp(@NonNull Node node) {
-		if (node.isExpression()) {
-			for (TypedElement typedElement : node.getTypedElements()) {
-				if (typedElement instanceof IfExp) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
 	@Override
 	public boolean isInfinite() {
 		if (region.getRecursionEdges().iterator().hasNext()) {		// FIXME unduly pessimistic

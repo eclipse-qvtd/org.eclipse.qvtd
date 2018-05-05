@@ -28,6 +28,8 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.IfExp;
 import org.eclipse.ocl.pivot.LoopExp;
+import org.eclipse.ocl.pivot.MapLiteralPart;
+import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
@@ -801,23 +803,28 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return false;
 	}
 
-	public static boolean isMatched(@NonNull TypedElement typedElement) {
-		boolean isMatched = false;
-		Type type = typedElement.getType();
-		if (type instanceof CollectionType) {
-			//			IntegerValue lowerValue = ((CollectionType)type).getLowerValue();
-			//			if (lowerValue.signum() > 0) {
-			isMatched = true;
-			assert typedElement.isIsRequired();
-			//			}
+	public static boolean isMatched(@NonNull Element element) {
+		if (element instanceof MapLiteralPart) {
+			MapLiteralPart mapLiteralPart = (MapLiteralPart)element;
+			OCLExpression key = QVTbaseUtil.getOwnedKey(mapLiteralPart);
+			OCLExpression value = QVTbaseUtil.getOwnedValue(mapLiteralPart);
+			return isMatched(key) && isMatched(value);
 		}
-		else {
-			isMatched = typedElement.isIsRequired();
+		else if (element instanceof TypedElement) {
+			TypedElement typedElement = (TypedElement)element;
+			Type type = typedElement.getType();
+			if (type instanceof CollectionType) {
+				//			IntegerValue lowerValue = ((CollectionType)type).getLowerValue();
+				//			if (lowerValue.signum() > 0) {
+				assert typedElement.isIsRequired();
+				//			}
+			}
+			else if (!typedElement.isIsRequired()) {
+				return false;
+			}
+			return isUnconditional(typedElement);
 		}
-		if (!isMatched) {
-			return false;
-		}
-		return isUnconditional(typedElement);
+		throw new UnsupportedOperationException();
 	}
 
 	/*	public static boolean isRealizedIncludes(@NonNull Edge edge) {	// FIXME includes should be a pseudo-navigation edge
@@ -852,15 +859,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static boolean isUnconditional(@Nullable Utility utility) {
 		return (utility == Utility.DISPATCH) || (utility == Utility.TRACE) || (utility == Utility.STRONGLY_MATCHED) || (utility == Utility.WEAKLY_MATCHED);
-	}
-
-	public static boolean isUnconditional(@NonNull Edge edge) {
-		for (@NonNull TypedElement typedElement : edge.getEdgeSource().getTypedElements()) {
-			if (!isUnconditional(typedElement)) {
-				return false;
-			}
-		}
-		return true;
 	}
 
 	public static @NonNull Role mergeToLessKnownPhase(Role firstRole, Role secondRole) {

@@ -139,7 +139,7 @@ public class RuleHeadAnalysis extends HeadAnalysis
 	private @NonNull Map<@NonNull Node, @NonNull Set<@NonNull Node>> computeOldTargetFromSources() {
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources = new HashMap<>();
 		for (@NonNull Node sourceNode : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
-			if (sourceNode.isPattern() && sourceNode.isMatched() && sourceNode.isClass() && !sourceNode.isExplicitNull() && !sourceNode.isOperation()) {	// Excludes, null, attributes, constants, operations
+			if (sourceNode.isPattern() && sourceNode.isMatched() && sourceNode.isClass() && !sourceNode.isNullLiteral() && !sourceNode.isOperation()) {	// Excludes, null, attributes, constants, operations
 				if (sourceNode.isLoaded() || sourceNode.isPredicated() || sourceNode.isSpeculated()) {
 					Set<@NonNull Node> sources1 = targetFromSources.get(sourceNode);
 					if (sources1 == null) {
@@ -151,7 +151,7 @@ public class RuleHeadAnalysis extends HeadAnalysis
 							Property source2targetProperty = QVTscheduleUtil.getProperty(navigationEdge);
 							if (!source2targetProperty.isIsMany()) {
 								Node targetNode = navigationEdge.getEdgeTarget();
-								if (targetNode.isMatched() /*&& targetNode.isClass()*/ && !targetNode.isExplicitNull()) {
+								if (targetNode.isMatched() /*&& targetNode.isClass()*/ && !targetNode.isNullLiteral()) {
 									Set<@NonNull Node> sources2 = targetFromSources.get(targetNode);
 									if (sources2 == null) {
 										sources2 = Sets.newHashSet(targetNode);

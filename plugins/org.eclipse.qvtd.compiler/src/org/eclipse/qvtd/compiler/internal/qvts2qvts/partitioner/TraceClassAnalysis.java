@@ -157,7 +157,7 @@ public class TraceClassAnalysis implements Nameable
 					}
 					CompleteClass completeClass;
 					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
-					if (targetNode.isExplicitNull())  {
+					if (targetNode.isNullLiteral())  {
 						completeClass = null;
 					}
 					else {

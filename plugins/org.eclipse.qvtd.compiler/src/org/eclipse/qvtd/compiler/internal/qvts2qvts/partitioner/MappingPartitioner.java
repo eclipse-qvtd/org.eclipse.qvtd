@@ -338,7 +338,7 @@ public class MappingPartitioner implements Nameable
 						assert !edge.isExpression();
 						assert !edge.isComputation();
 						Node targetNode = edge.getEdgeTarget();
-						if (!targetNode.isExplicitNull()) {
+						if (!targetNode.isNullLiteral()) {
 							//							navigableEdges.add(navigationEdge);
 						}
 					}
@@ -379,7 +379,7 @@ public class MappingPartitioner implements Nameable
 
 	private void analyzeNodes() {
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
-			if (node.isExplicitNull()) {
+			if (node.isNullLiteral()) {
 				addConstantNode(node);
 			}
 			else if (node.isPattern()) {
@@ -422,7 +422,7 @@ public class MappingPartitioner implements Nameable
 						//						}
 						//					}
 					}
-					else if (!node.isExplicitNull()) {
+					else if (!node.isNullLiteral()) {
 						throw new IllegalStateException("middle node must be predicated or realized : " + node);
 					}
 

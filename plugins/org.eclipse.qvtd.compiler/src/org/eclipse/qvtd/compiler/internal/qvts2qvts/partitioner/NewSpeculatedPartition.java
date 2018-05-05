@@ -96,7 +96,7 @@ class NewSpeculatedPartition extends AbstractPartition
 		{
 			@Override
 			public @Nullable Element visitSuccessNode(@NonNull SuccessNode node) {
-				Node partialNode = regionHelper.createBooleanValueNode(true);
+				Node partialNode = regionHelper.createBooleanLiteralNode(true);
 				addNode(node, partialNode);
 				return partialNode;
 			}

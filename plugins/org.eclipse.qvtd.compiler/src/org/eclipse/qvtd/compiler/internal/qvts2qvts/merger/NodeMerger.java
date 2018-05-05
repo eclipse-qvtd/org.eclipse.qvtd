@@ -17,7 +17,6 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -81,12 +80,12 @@ class NodeMerger
 		if (newNode2 == null) {
 			return null;
 		}
-		for (@NonNull Node oldNode : oldNodes) {
-			//				oldNode2mergedNode.put(oldNode, mergedNode);
-			for (@NonNull TypedElement typedElement : oldNode.getTypedElements()) {
-				newNode2.addTypedElement(typedElement);
-			}
-		}
+		//		for (@NonNull Node oldNode : oldNodes) {
+		//			//				oldNode2mergedNode.put(oldNode, mergedNode);
+		//			for (@NonNull TypedElement typedElement : oldNode.getTypedElements()) {
+		//				newNode2.addTypedElement(typedElement);
+		//			}
+		//		}
 		return newNode2;
 	}
 

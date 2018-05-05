@@ -341,7 +341,7 @@ public class MappingAnalysis extends RuleAnalysis
 			else { */
 			Node resultNode = conditionExpression.accept(expressionSynthesizer);
 			if (resultNode != null)  {
-				Node trueNode = createBooleanValueNode(true);
+				Node trueNode = createBooleanLiteralNode(true);
 				createPredicateEdge(resultNode, null, trueNode);
 			}
 			// FIXME ?? do includes() here explicitly
@@ -354,7 +354,7 @@ public class MappingAnalysis extends RuleAnalysis
 			for (@NonNull NavigableEdge edge : node.getNavigationEdges()) {
 				Property property = edge.getProperty();
 				Property opposite = property.getOpposite();
-				if ((opposite != null) && opposite.isIsComposite() && !edge.getEdgeTarget().isExplicitNull()) {
+				if ((opposite != null) && opposite.isIsComposite() && !edge.getEdgeTarget().isNullLiteral()) {
 					isContained = true;
 					break;
 				}
@@ -492,7 +492,7 @@ public class MappingAnalysis extends RuleAnalysis
 				//		assert guardVariables.contains(targetVariable);
 				//		assert guardVariables.contains(sourceVariable);
 				Node sourceNode = getReferenceNode(sourceVariable);
-				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : createNullNode(true, null);
+				Node targetNode = boundVariable != null ? getReferenceNode(boundVariable) : createNullLiteralNode(true, null);
 				//				assert sourceNode.isGuard();
 				//				assert (boundVariable == null) || targetNode.isGuard();
 				assert sourceNode.isClass();
@@ -561,7 +561,9 @@ public class MappingAnalysis extends RuleAnalysis
 			expressionSynthesizer.createCastEdge(bestInitNode, castProperty, castNode);
 			bestInitNode = castNode;
 		}
-		bestInitNode.addTypedElement(variable);
+		//		if (Iterables.isEmpty(bestInitNode.getTypedElements())) {
+		bestInitNode.setOriginatingVariable(variable);
+		//		}
 		region.addVariableNode(variable, bestInitNode);
 		for (@NonNull OCLExpression initExpression : expressions) {
 			if (initExpression != bestInitExpression) {

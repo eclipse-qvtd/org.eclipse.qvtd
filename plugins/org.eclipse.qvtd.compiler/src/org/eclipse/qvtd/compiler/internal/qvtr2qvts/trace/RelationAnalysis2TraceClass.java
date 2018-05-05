@@ -20,7 +20,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -137,20 +136,11 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 			if (node.isPattern() && node.isMatched()) {
 				boolean unitOpposite = allHeadGroupNodes.contains(node) && !manyTracesPerHead;
 				TypedModel typedModel = QVTscheduleUtil.getTypedModel(node);
-				for (@NonNull TypedElement typedElement : node.getTypedElements()) {
-					if (typedElement instanceof VariableDeclaration) {
-						VariableDeclaration variable = (VariableDeclaration)typedElement;
-						if (!rootVariables.contains(variable)) {
-							VariableDeclaration2TraceProperty variableDeclaration2traceProperty = basicGetVariableDeclaration2TraceProperty(variable);
-							if (variableDeclaration2traceProperty == null) {
-								//								DomainUsageAnalysis domainUsageAnalysis = getTransformation2TracePackage().getDomainUsageAnalysis();
-								//								DomainUsage usage = domainUsageAnalysis.getUsage(variable);
-								//								TypedModel usedTypedModel = usage.getTypedModel(variable);
-								//								assert usedTypedModel != null;
-								//								assert usedTypedModel == typedModel;
-								createVariableDeclaration2TraceProperty(typedModel, variable, unitOpposite);
-							}
-						}
+				VariableDeclaration variable = node.basicGetOriginatingVariable();
+				if ((variable != null) && !rootVariables.contains(variable)) {
+					VariableDeclaration2TraceProperty variableDeclaration2traceProperty = basicGetVariableDeclaration2TraceProperty(variable);
+					if (variableDeclaration2traceProperty == null) {
+						createVariableDeclaration2TraceProperty(typedModel, variable, unitOpposite);
 					}
 				}
 			}
