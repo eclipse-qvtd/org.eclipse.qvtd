@@ -69,25 +69,11 @@
           <ownedParameters xmi:id="9ouR5" name="T"/>
         </ownedSignature>
       </ownedOperations>
-      <ownedOperations xmi:id="ZPR3r" isStatic="true" name="shadowPart" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#kTahU">
-        <ownedComments body="The PseudoOperations::shadowPart(value) pseudo-operation provides parameters to allow a ShadowPart to be treated&#xA;as an Operation within QVTs."/>
-        <ownedParameters isRequired="false" name="value" type="#F2yaR"/>
-        <ownedSignature>
-          <ownedParameters xmi:id="F2yaR" name="V"/>
-        </ownedSignature>
-      </ownedOperations>
       <ownedOperations xmi:id="yuQ8x" isStatic="true" name="tuple" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#HhIN2">
         <ownedComments body="The PseudoOperations::tuple(parts) pseudo-operation provides parameters to allow a tuple construction to be treated&#xA;as an Operation within QVTs."/>
         <ownedParameters name="parts" type="#nc6Pa"/>
         <ownedSignature>
           <ownedParameters xmi:id="kwocm" name="T"/>
-        </ownedSignature>
-      </ownedOperations>
-      <ownedOperations xmi:id="B6oW0" isStatic="true" name="tuplePart" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#LgkF0">
-        <ownedComments body="The PseudoOperations::tuplePart(value) pseudo-operation provides parameters to allow a TupleLiteralPart to be treated&#xA;as an Operation within QVTs."/>
-        <ownedParameters isRequired="false" name="value" type="#t1L1E"/>
-        <ownedSignature>
-          <ownedParameters xmi:id="t1L1E" name="V"/>
         </ownedSignature>
       </ownedOperations>
       <ownedOperations xmi:id="gHu6o" isStatic="true" name="type" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#0,h6K">

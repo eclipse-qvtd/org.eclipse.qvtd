@@ -52,22 +52,10 @@ library qvtbaselibrary : qvtbaselib = 'http://www.eclipse.org/qvt/2015/QVTbaseLi
 		static operation shadow(T)(parts : ocl::Property[*]) : ocl::ShadowExp[1];
 
 		/**
-		 * The PseudoOperations::shadowPart(value) pseudo-operation provides parameters to allow a ShadowPart to be treated
-		 * as an Operation within QVTs.
-		 */
-		static operation shadowPart(V)(value : V[?]) : ocl::ShadowPart[1];
-
-		/**
 		 * The PseudoOperations::tuple(parts) pseudo-operation provides parameters to allow a tuple construction to be treated
 		 * as an Operation within QVTs.
 		 */
 		static operation tuple(T)(parts : ocl::TupleLiteralPart[*]) : ocl::TupleLiteralExp[1];
-
-		/**
-		 * The PseudoOperations::tuplePart(value) pseudo-operation provides parameters to allow a TupleLiteralPart to be treated
-		 * as an Operation within QVTs.
-		 */
-		static operation tuplePart(V)(value : V[?]) : ocl::TupleLiteralPart[1];
 
 		/**
 		 * The PseudoOperations::type(value) pseudo-operation provides parameters to allow a Type to be treated

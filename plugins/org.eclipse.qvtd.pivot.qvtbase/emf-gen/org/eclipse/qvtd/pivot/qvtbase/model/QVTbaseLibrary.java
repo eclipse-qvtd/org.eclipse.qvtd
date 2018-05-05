@@ -263,7 +263,6 @@ public class QVTbaseLibrary extends ASResourceImpl
 		private final @NonNull Class _Property = getClass(_pivot, "Property");
 		private final @NonNull SetType _Set = getSetType(_ocl, "Set");
 		private final @NonNull Class _ShadowExp = getClass(_pivot, "ShadowExp");
-		private final @NonNull Class _ShadowPart = getClass(_pivot, "ShadowPart");
 		private final @NonNull Class _TupleLiteralExp = getClass(_pivot, "TupleLiteralExp");
 		private final @NonNull Class _TupleLiteralPart = getClass(_pivot, "TupleLiteralPart");
 		private final @NonNull Class _TypeExp = getClass(_pivot, "TypeExp");
@@ -291,9 +290,7 @@ public class QVTbaseLibrary extends ASResourceImpl
 		private final @NonNull TemplateParameter tp_PseudoOperations_mapPart_V = createTemplateParameter("V");
 		private final @NonNull TemplateParameter tp_PseudoOperations_map_T = createTemplateParameter("T");
 		private final @NonNull TemplateParameter tp_PseudoOperations_range_T = createTemplateParameter("T");
-		private final @NonNull TemplateParameter tp_PseudoOperations_shadowPart_V = createTemplateParameter("V");
 		private final @NonNull TemplateParameter tp_PseudoOperations_shadow_T = createTemplateParameter("T");
-		private final @NonNull TemplateParameter tp_PseudoOperations_tuplePart_V = createTemplateParameter("V");
 		private final @NonNull TemplateParameter tp_PseudoOperations_tuple_T = createTemplateParameter("T");
 		private final @NonNull TemplateParameter tp_PseudoOperations_type_V = createTemplateParameter("V");
 
@@ -390,9 +387,7 @@ public class QVTbaseLibrary extends ASResourceImpl
 		private final @NonNull Operation op_PseudoOperations_mapPart = createOperation("mapPart", _MapLiteralPart, null, null, tp_PseudoOperations_mapPart_K, tp_PseudoOperations_mapPart_V);
 		private final @NonNull Operation op_PseudoOperations_map = createOperation("map", _MapLiteralExp, null, null, tp_PseudoOperations_map_T);
 		private final @NonNull Operation op_PseudoOperations_range = createOperation("range", _CollectionRange, null, null, tp_PseudoOperations_range_T);
-		private final @NonNull Operation op_PseudoOperations_shadowPart = createOperation("shadowPart", _ShadowPart, null, null, tp_PseudoOperations_shadowPart_V);
 		private final @NonNull Operation op_PseudoOperations_shadow = createOperation("shadow", _ShadowExp, null, null, tp_PseudoOperations_shadow_T);
-		private final @NonNull Operation op_PseudoOperations_tuplePart = createOperation("tuplePart", _TupleLiteralPart, null, null, tp_PseudoOperations_tuplePart_V);
 		private final @NonNull Operation op_PseudoOperations_tuple = createOperation("tuple", _TupleLiteralExp, null, null, tp_PseudoOperations_tuple_T);
 		private final @NonNull Operation op_PseudoOperations_type = createOperation("type", _TypeExp, null, null, tp_PseudoOperations_type_V);
 
@@ -439,18 +434,10 @@ public class QVTbaseLibrary extends ASResourceImpl
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("first", tp_PseudoOperations_range_T, false));
 			ownedParameters.add(parameter = createParameter("last", tp_PseudoOperations_range_T, false));
-			ownedOperations.add(operation = op_PseudoOperations_shadowPart);
-			operation.setIsStatic(true);
-			ownedParameters = operation.getOwnedParameters();
-			ownedParameters.add(parameter = createParameter("value", tp_PseudoOperations_shadowPart_V, false));
 			ownedOperations.add(operation = op_PseudoOperations_shadow);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
 			ownedParameters.add(parameter = createParameter("parts", _Set_Property, true));
-			ownedOperations.add(operation = op_PseudoOperations_tuplePart);
-			operation.setIsStatic(true);
-			ownedParameters = operation.getOwnedParameters();
-			ownedParameters.add(parameter = createParameter("value", tp_PseudoOperations_tuplePart_V, false));
 			ownedOperations.add(operation = op_PseudoOperations_tuple);
 			operation.setIsStatic(true);
 			ownedParameters = operation.getOwnedParameters();
@@ -487,9 +474,7 @@ public class QVTbaseLibrary extends ASResourceImpl
 			installComment(op_PseudoOperations_mapPart, "The PseudoOperations::mapPart(key, value) pseudo-operation provides parameters to allow a MapLiteralPart to be treated\nas an Operation within QVTs.");
 			installComment(op_PseudoOperations_map, "The PseudoOperations::map(parts) pseudo-operation provides parameters to allow a map construction to be treated\nas an Operation within QVTs.");
 			installComment(op_PseudoOperations_range, "The PseudoOperations::range(first, last) pseudo-operation provides parameters to allow a CollectionRange to be treated\nas an Operation within QVTs.");
-			installComment(op_PseudoOperations_shadowPart, "The PseudoOperations::shadowPart(value) pseudo-operation provides parameters to allow a ShadowPart to be treated\nas an Operation within QVTs.");
 			installComment(op_PseudoOperations_shadow, "The PseudoOperations::shadow(parts) pseudo-operation provides parameters to allow a shadow Class construction to be treated\nas an Operation within QVTs.");
-			installComment(op_PseudoOperations_tuplePart, "The PseudoOperations::tuplePart(value) pseudo-operation provides parameters to allow a TupleLiteralPart to be treated\nas an Operation within QVTs.");
 			installComment(op_PseudoOperations_tuple, "The PseudoOperations::tuple(parts) pseudo-operation provides parameters to allow a tuple construction to be treated\nas an Operation within QVTs.");
 			installComment(op_PseudoOperations_type, "The PseudoOperations::type(value) pseudo-operation provides parameters to allow a Type to be treated\nas an Operation within QVTs.");
 		}
