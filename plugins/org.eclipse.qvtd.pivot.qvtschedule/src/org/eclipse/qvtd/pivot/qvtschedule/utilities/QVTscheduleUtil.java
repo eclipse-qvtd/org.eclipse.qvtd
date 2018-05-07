@@ -42,7 +42,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
@@ -116,20 +115,12 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static class Internal
 	{
-		public static @NonNull List<@NonNull AbstractDatum> getConsumedDatumsList(@NonNull RuleRegion ruleRegion) {
-			return ClassUtil.nullFree(ruleRegion.getConsumedDatums());
-		}
-
 		public static @NonNull List<@NonNull Node> getHeadNodesList(@NonNull Region region) {
 			return ClassUtil.nullFree(region.getHeadNodes());
 		}
 
 		public static List<@NonNull ScheduledRegion> getOwnedScheduledRegionsList(@NonNull ScheduleModel scheduleModel) {
 			return ClassUtil.nullFree(scheduleModel.getOwnedScheduledRegions());
-		}
-
-		public static @NonNull List<@NonNull AbstractDatum> getProducedDatumsList(@NonNull RuleRegion ruleRegion) {
-			return ClassUtil.nullFree(ruleRegion.getProducedDatums());
 		}
 
 		public static @NonNull List<@NonNull ClassDatum> getSuperClassDatumsList(@NonNull ClassDatum classDatum) {

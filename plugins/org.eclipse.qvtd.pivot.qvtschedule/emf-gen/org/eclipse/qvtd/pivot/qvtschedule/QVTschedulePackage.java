@@ -145,31 +145,13 @@ public interface QVTschedulePackage extends EPackage {
 	int ABSTRACT_DATUM__REFERRED_TYPED_MODEL = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Consuming Regions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_DATUM__CONSUMING_REGIONS = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Producing Regions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_DATUM__PRODUCING_REGIONS = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Abstract Datum</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM_FEATURE_COUNT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int ABSTRACT_DATUM_FEATURE_COUNT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -1970,24 +1952,6 @@ public interface QVTschedulePackage extends EPackage {
 	int CLASS_DATUM__REFERRED_TYPED_MODEL = ABSTRACT_DATUM__REFERRED_TYPED_MODEL;
 
 	/**
-	 * The feature id for the '<em><b>Consuming Regions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DATUM__CONSUMING_REGIONS = ABSTRACT_DATUM__CONSUMING_REGIONS;
-
-	/**
-	 * The feature id for the '<em><b>Producing Regions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DATUM__PRODUCING_REGIONS = ABSTRACT_DATUM__PRODUCING_REGIONS;
-
-	/**
 	 * The feature id for the '<em><b>Complete Class</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3522,31 +3486,13 @@ public interface QVTschedulePackage extends EPackage {
 	int RULE_REGION__REFERRED_RULE = MAPPING_REGION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Produced Datums</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE_REGION__PRODUCED_DATUMS = MAPPING_REGION_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Consumed Datums</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE_REGION__CONSUMED_DATUMS = MAPPING_REGION_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Rule Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RULE_REGION_FEATURE_COUNT = MAPPING_REGION_FEATURE_COUNT + 3;
+	int RULE_REGION_FEATURE_COUNT = MAPPING_REGION_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -3682,24 +3628,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int DISPATCH_REGION__REFERRED_RULE = RULE_REGION__REFERRED_RULE;
-
-	/**
-	 * The feature id for the '<em><b>Produced Datums</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DISPATCH_REGION__PRODUCED_DATUMS = RULE_REGION__PRODUCED_DATUMS;
-
-	/**
-	 * The feature id for the '<em><b>Consumed Datums</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DISPATCH_REGION__CONSUMED_DATUMS = RULE_REGION__CONSUMED_DATUMS;
 
 	/**
 	 * The feature id for the '<em><b>Referred Rule Region</b></em>' reference.
@@ -7980,24 +7908,6 @@ public interface QVTschedulePackage extends EPackage {
 	int PROPERTY_DATUM__REFERRED_TYPED_MODEL = ABSTRACT_DATUM__REFERRED_TYPED_MODEL;
 
 	/**
-	 * The feature id for the '<em><b>Consuming Regions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_DATUM__CONSUMING_REGIONS = ABSTRACT_DATUM__CONSUMING_REGIONS;
-
-	/**
-	 * The feature id for the '<em><b>Producing Regions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY_DATUM__PRODUCING_REGIONS = ABSTRACT_DATUM__PRODUCING_REGIONS;
-
-	/**
 	 * The feature id for the '<em><b>Opposite</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10104,24 +10014,6 @@ public interface QVTschedulePackage extends EPackage {
 	int VERDICT_REGION__REFERRED_RULE = RULE_REGION__REFERRED_RULE;
 
 	/**
-	 * The feature id for the '<em><b>Produced Datums</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VERDICT_REGION__PRODUCED_DATUMS = RULE_REGION__PRODUCED_DATUMS;
-
-	/**
-	 * The feature id for the '<em><b>Consumed Datums</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VERDICT_REGION__CONSUMED_DATUMS = RULE_REGION__CONSUMED_DATUMS;
-
-	/**
 	 * The feature id for the '<em><b>Referred Rule Region</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10196,28 +10088,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAbstractDatum_ReferredTypedModel();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getConsumingRegions <em>Consuming Regions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Consuming Regions</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getConsumingRegions()
-	 * @see #getAbstractDatum()
-	 * @generated
-	 */
-	EReference getAbstractDatum_ConsumingRegions();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getProducingRegions <em>Producing Regions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Producing Regions</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum#getProducingRegions()
-	 * @see #getAbstractDatum()
-	 * @generated
-	 */
-	EReference getAbstractDatum_ProducingRegions();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.ArgumentEdge <em>Argument Edge</em>}'.
@@ -11805,28 +11675,6 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getRuleRegion_ReferredRule();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.RuleRegion#getProducedDatums <em>Produced Datums</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Produced Datums</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.RuleRegion#getProducedDatums()
-	 * @see #getRuleRegion()
-	 * @generated
-	 */
-	EReference getRuleRegion_ProducedDatums();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.RuleRegion#getConsumedDatums <em>Consumed Datums</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Consumed Datums</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.RuleRegion#getConsumedDatums()
-	 * @see #getRuleRegion()
-	 * @generated
-	 */
-	EReference getRuleRegion_ConsumedDatums();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedEdges <em>Owned Edges</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11888,22 +11736,6 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference ABSTRACT_DATUM__REFERRED_TYPED_MODEL = eINSTANCE.getAbstractDatum_ReferredTypedModel();
-
-		/**
-		 * The meta object literal for the '<em><b>Consuming Regions</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ABSTRACT_DATUM__CONSUMING_REGIONS = eINSTANCE.getAbstractDatum_ConsumingRegions();
-
-		/**
-		 * The meta object literal for the '<em><b>Producing Regions</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ABSTRACT_DATUM__PRODUCING_REGIONS = eINSTANCE.getAbstractDatum_ProducingRegions();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ArgumentEdgeImpl <em>Argument Edge</em>}' class.
@@ -13242,22 +13074,6 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference RULE_REGION__REFERRED_RULE = eINSTANCE.getRuleRegion_ReferredRule();
-
-		/**
-		 * The meta object literal for the '<em><b>Produced Datums</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference RULE_REGION__PRODUCED_DATUMS = eINSTANCE.getRuleRegion_ProducedDatums();
-
-		/**
-		 * The meta object literal for the '<em><b>Consumed Datums</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference RULE_REGION__CONSUMED_DATUMS = eINSTANCE.getRuleRegion_ConsumedDatums();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Edges</b></em>' containment reference list feature.

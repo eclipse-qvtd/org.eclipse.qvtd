@@ -17,20 +17,6 @@
         <details key="documentation" value="The TypedModel for which this Datum provides an information element. For endogeneous transformations multiple Datums with distinct TypedModels may exist for the same Class."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="consumingRegions" ordered="false"
-        upperBound="-1" eType="#//RuleRegion" transient="true" resolveProxies="false"
-        eOpposite="#//RuleRegion/consumedDatums">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The original RuleRegions that consume and so require this Datum as a prerequisite."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="producingRegions" ordered="false"
-        upperBound="-1" eType="#//RuleRegion" transient="true" resolveProxies="false"
-        eOpposite="#//RuleRegion/producedDatums">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The original RuleRegions that produce this Datum."/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ArgumentEdge" abstract="true" eSuperTypes="#//ExpressionEdge">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -484,20 +470,6 @@
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Rule">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Rule represented by this RuleRegion."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="producedDatums" ordered="false"
-        upperBound="-1" eType="#//AbstractDatum" transient="true" resolveProxies="false"
-        eOpposite="#//AbstractDatum/producingRegions">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The Datums that this Region produces; creates for consumption by other regions."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="consumedDatums" ordered="false"
-        upperBound="-1" eType="#//AbstractDatum" transient="true" resolveProxies="false"
-        eOpposite="#//AbstractDatum/consumingRegions">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The Datums that this Region consumes; requires to have been produced by other regions."/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

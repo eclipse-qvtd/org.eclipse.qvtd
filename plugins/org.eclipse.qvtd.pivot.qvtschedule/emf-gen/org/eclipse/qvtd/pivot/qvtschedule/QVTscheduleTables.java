@@ -72,7 +72,6 @@ public class QVTscheduleTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbase", null, org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2017/QVTschedule", null, org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_TMPLid_ = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.ocl.pivot.ids.IdManager.getTemplateParameterId(0));
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_AbstractDatum = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("AbstractDatum", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Class = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_$metamodel$.getClassId("Class", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_ClassDatum = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("ClassDatum", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CollectionLiteralPart = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_$metamodel$.getClassId("CollectionLiteralPart", 0);
@@ -134,8 +133,6 @@ public class QVTscheduleTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_OperationRegion = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_OperationRegion);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_PropertyDatum = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_PropertyDatum);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_ScheduledRegion = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_ScheduledRegion);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_AbstractDatum = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_AbstractDatum);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_RuleRegion = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_RuleRegion);
 
 	/**
 	 *	The type parameters for templated types and operations.
@@ -942,9 +939,7 @@ public class QVTscheduleTables
 			Operations.init();
 		}
 
-		public static final @NonNull ExecutorProperty _AbstractDatum__consumingRegions = new EcoreExecutorProperty(QVTschedulePackage.Literals.ABSTRACT_DATUM__CONSUMING_REGIONS, Types._AbstractDatum, 0);
-		public static final @NonNull ExecutorProperty _AbstractDatum__producingRegions = new EcoreExecutorProperty(QVTschedulePackage.Literals.ABSTRACT_DATUM__PRODUCING_REGIONS, Types._AbstractDatum, 1);
-		public static final @NonNull ExecutorProperty _AbstractDatum__referredTypedModel = new EcoreExecutorProperty(QVTschedulePackage.Literals.ABSTRACT_DATUM__REFERRED_TYPED_MODEL, Types._AbstractDatum, 2);
+		public static final @NonNull ExecutorProperty _AbstractDatum__referredTypedModel = new EcoreExecutorProperty(QVTschedulePackage.Literals.ABSTRACT_DATUM__REFERRED_TYPED_MODEL, Types._AbstractDatum, 0);
 
 		public static final @NonNull ExecutorProperty _BooleanLiteralNode__booleanValue = new EcoreExecutorProperty(QVTschedulePackage.Literals.BOOLEAN_LITERAL_NODE__BOOLEAN_VALUE, Types._BooleanLiteralNode, 0);
 
@@ -1059,11 +1054,9 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _Region__ownedEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.REGION__OWNED_EDGES, Types._Region, 0);
 		public static final @NonNull ExecutorProperty _Region__ownedNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.REGION__OWNED_NODES, Types._Region, 1);
 
-		public static final @NonNull ExecutorProperty _RuleRegion__consumedDatums = new EcoreExecutorProperty(QVTschedulePackage.Literals.RULE_REGION__CONSUMED_DATUMS, Types._RuleRegion, 0);
-		public static final @NonNull ExecutorProperty _RuleRegion__producedDatums = new EcoreExecutorProperty(QVTschedulePackage.Literals.RULE_REGION__PRODUCED_DATUMS, Types._RuleRegion, 1);
-		public static final @NonNull ExecutorProperty _RuleRegion__referredRule = new EcoreExecutorProperty(QVTschedulePackage.Literals.RULE_REGION__REFERRED_RULE, Types._RuleRegion, 2);
-		public static final @NonNull ExecutorProperty _RuleRegion__DispatchRegion__referredRuleRegion = new ExecutorPropertyWithImplementation("DispatchRegion", Types._RuleRegion, 3, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.DISPATCH_REGION__REFERRED_RULE_REGION));
-		public static final @NonNull ExecutorProperty _RuleRegion__VerdictRegion__referredRuleRegion = new ExecutorPropertyWithImplementation("VerdictRegion", Types._RuleRegion, 4, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.VERDICT_REGION__REFERRED_RULE_REGION));
+		public static final @NonNull ExecutorProperty _RuleRegion__referredRule = new EcoreExecutorProperty(QVTschedulePackage.Literals.RULE_REGION__REFERRED_RULE, Types._RuleRegion, 0);
+		public static final @NonNull ExecutorProperty _RuleRegion__DispatchRegion__referredRuleRegion = new ExecutorPropertyWithImplementation("DispatchRegion", Types._RuleRegion, 1, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.DISPATCH_REGION__REFERRED_RULE_REGION));
+		public static final @NonNull ExecutorProperty _RuleRegion__VerdictRegion__referredRuleRegion = new ExecutorPropertyWithImplementation("VerdictRegion", Types._RuleRegion, 2, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.VERDICT_REGION__REFERRED_RULE_REGION));
 
 		public static final @NonNull ExecutorProperty _ScheduleModel__ownedClassDatums = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_CLASS_DATUMS, Types._ScheduleModel, 0);
 		public static final @NonNull ExecutorProperty _ScheduleModel__ownedMappingRegions = new EcoreExecutorProperty(QVTschedulePackage.Literals.SCHEDULE_MODEL__OWNED_MAPPING_REGIONS, Types._ScheduleModel, 1);
@@ -4993,8 +4986,6 @@ public class QVTscheduleTables
 		}
 
 		private static final @NonNull ExecutorProperty @NonNull [] _AbstractDatum = {
-			QVTscheduleTables.Properties._AbstractDatum__consumingRegions,
-			QVTscheduleTables.Properties._AbstractDatum__producingRegions,
 			QVTscheduleTables.Properties._AbstractDatum__referredTypedModel
 		};
 
@@ -5035,10 +5026,8 @@ public class QVTscheduleTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _ClassDatum = {
 			QVTscheduleTables.Properties._ClassDatum__completeClass,
-			QVTscheduleTables.Properties._AbstractDatum__consumingRegions,
 			QVTscheduleTables.Properties._ClassDatum__ownedPropertyDatums,
 			QVTscheduleTables.Properties._ClassDatum__owningScheduleModel,
-			QVTscheduleTables.Properties._AbstractDatum__producingRegions,
 			QVTscheduleTables.Properties._ClassDatum__referredClass,
 			QVTscheduleTables.Properties._AbstractDatum__referredTypedModel,
 			QVTscheduleTables.Properties._ClassDatum__superClassDatums
@@ -5125,12 +5114,10 @@ public class QVTscheduleTables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _DispatchRegion = {
-			QVTscheduleTables.Properties._RuleRegion__consumedDatums,
 			QVTscheduleTables.Properties._MappingRegion__headNodes,
 			QVTscheduleTables.Properties._Region__ownedEdges,
 			QVTscheduleTables.Properties._Region__ownedNodes,
 			QVTscheduleTables.Properties._MappingRegion__owningScheduleModel,
-			QVTscheduleTables.Properties._RuleRegion__producedDatums,
 			QVTscheduleTables.Properties._RuleRegion__referredRule,
 			QVTscheduleTables.Properties._DispatchRegion__referredRuleRegion,
 			QVTscheduleTables.Properties._MappingRegion__scheduledRegion,
@@ -5506,11 +5493,9 @@ public class QVTscheduleTables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _PropertyDatum = {
-			QVTscheduleTables.Properties._AbstractDatum__consumingRegions,
 			QVTscheduleTables.Properties._PropertyDatum__key,
 			QVTscheduleTables.Properties._PropertyDatum__opposite,
 			QVTscheduleTables.Properties._PropertyDatum__owningClassDatum,
-			QVTscheduleTables.Properties._AbstractDatum__producingRegions,
 			QVTscheduleTables.Properties._PropertyDatum__referredProperty,
 			QVTscheduleTables.Properties._AbstractDatum__referredTypedModel,
 			QVTscheduleTables.Properties._PropertyDatum__superPropertyDatums
@@ -5534,12 +5519,10 @@ public class QVTscheduleTables
 		private static final @NonNull ExecutorProperty @NonNull [] _Role = {};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _RuleRegion = {
-			QVTscheduleTables.Properties._RuleRegion__consumedDatums,
 			QVTscheduleTables.Properties._MappingRegion__headNodes,
 			QVTscheduleTables.Properties._Region__ownedEdges,
 			QVTscheduleTables.Properties._Region__ownedNodes,
 			QVTscheduleTables.Properties._MappingRegion__owningScheduleModel,
-			QVTscheduleTables.Properties._RuleRegion__producedDatums,
 			QVTscheduleTables.Properties._RuleRegion__referredRule,
 			QVTscheduleTables.Properties._MappingRegion__scheduledRegion,
 			QVTscheduleTables.Properties._Symbolable__symbolName
@@ -5687,12 +5670,10 @@ public class QVTscheduleTables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _VerdictRegion = {
-			QVTscheduleTables.Properties._RuleRegion__consumedDatums,
 			QVTscheduleTables.Properties._MappingRegion__headNodes,
 			QVTscheduleTables.Properties._Region__ownedEdges,
 			QVTscheduleTables.Properties._Region__ownedNodes,
 			QVTscheduleTables.Properties._MappingRegion__owningScheduleModel,
-			QVTscheduleTables.Properties._RuleRegion__producedDatums,
 			QVTscheduleTables.Properties._RuleRegion__referredRule,
 			QVTscheduleTables.Properties._VerdictRegion__referredRuleRegion,
 			QVTscheduleTables.Properties._MappingRegion__scheduledRegion,
