@@ -15,6 +15,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.CompletePackage;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
@@ -56,7 +57,9 @@ public interface ScheduleManager
 	 * Define an additional/only Transformation to be scheduled by the subsequent anayses and syntheses.
 	 */
 	@NonNull TransformationAnalysis addTransformation(@NonNull Transformation asTransformation);
+	void analyzeCompletePackage(@NonNull TypedModel typedModel, @NonNull CompletePackage completePackage);
 	@NonNull OperationRegion analyzeOperation(@NonNull OperationCallExp operationCallExp);
+	@NonNull ContentsAnalysis<@NonNull RuleRegion> analyzeOriginalContents();
 
 	/**
 	 * Perform the pre-analysis that relies solely on traversal of the QVTr source model.
@@ -97,7 +100,13 @@ public interface ScheduleManager
 	 */
 	@NonNull Iterable<@NonNull TransformationAnalysis> getOrderedTransformationAnalyses();
 
+	/**
+	 * Return the analysis of the pre-partitioned regions consumptions and productions.
+	 */
+	@NonNull ContentsAnalysis<@NonNull RuleRegion> getOriginalContentsAnalysis();
+
 	@NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property);
+	@NonNull PropertyDatum getPropertyDatum(@NonNull NavigableEdge edge);
 	@NonNull QVTbaseLibraryHelper getQVTbaseLibraryHelper();
 	@NonNull RegionAnalysis getRegionAnalysis(@NonNull Region region);
 	@NonNull ScheduleModel getScheduleModel();

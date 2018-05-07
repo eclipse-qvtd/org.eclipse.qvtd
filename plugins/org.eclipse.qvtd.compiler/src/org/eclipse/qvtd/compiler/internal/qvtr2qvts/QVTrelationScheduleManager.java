@@ -16,7 +16,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.DatumCaches;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
@@ -46,18 +45,6 @@ public class QVTrelationScheduleManager extends AbstractScheduleManager
 			CompilerOptions.@Nullable StepOptions schedulerOptions) {
 		super(QVTscheduleFactory.eINSTANCE.createScheduleModel(), environmentFactory, schedulerOptions);
 		this.qvtuConfiguration = qvtuConfiguration;
-	}
-
-	//	@Override
-	//	public void analyzeTransformation(@NonNull TransformationAnalysis transformationAnalysis) {
-	//		TypedModel primitiveTypeModel = domainUsageAnalysis.getPrimitiveTypeModel();
-	//		transformationAnalysis.getTransformation().getModelParameter().add(primitiveTypeModel);
-	//		super.analyzeTransformation(transformationAnalysis);
-	//	}
-
-	@Override
-	protected @NonNull DatumCaches createDatumCaches() {
-		return new QVTrelationDatumCaches(this);
 	}
 
 	@Override

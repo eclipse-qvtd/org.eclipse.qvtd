@@ -12,7 +12,6 @@ package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +37,6 @@ import org.eclipse.ocl.pivot.internal.manager.Orphanage;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -46,7 +44,7 @@ import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractQVTb2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.DatumCaches;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
@@ -470,10 +468,6 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		return target2source.get(target);
 	}
 
-	protected @NonNull DatumCaches createDatumCaches() {
-		return new QVTrelationDatumCaches((QVTrelationScheduleManager) scheduleManager);
-	}
-
 	protected @NonNull Import createImport(@NonNull Import iIn) {
 		Import iOut = createImport(iIn.getName(), ClassUtil.nonNull(iIn.getImportedNamespace()));
 		addTrace(iIn, iOut);
@@ -626,16 +620,12 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			TypedModel traceTypedModel = scheduleManager.getTraceTypedModel();
 			traceTypedModel.getUsedPackage().add(tracePackage);
 			scheduleManager.analyzeTracePackage(traceTypedModel, tracePackage);
-
-			List<@NonNull MappingRegion> mappingRegions = Lists.newArrayList(QVTscheduleUtil.getOwnedMappingRegions(scheduleManager2.getScheduleModel()));
-			Collections.sort(mappingRegions, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
-			for (@NonNull MappingRegion mappingRegion : mappingRegions) {
-				registerConsumptionsAndProductions((RuleRegion) mappingRegion);
-			}
-			for (@NonNull MappingRegion mappingRegion : mappingRegions) {
-				scheduleManager2.writeDebugGraphs(mappingRegion, null);
-			}
 		}
+		for (@NonNull MappingRegion mappingRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager2.getScheduleModel())) {
+			scheduleManager2.writeDebugGraphs(mappingRegion, null);
+		}
+		@SuppressWarnings("unused")
+		ContentsAnalysis<@NonNull RuleRegion> originalContentsAnalysis = scheduleManager2.analyzeOriginalContents();
 		scheduleManager2.writeDebugGraphs("0-init", true, true, true);
 		//
 		//	Debug code to confirm that every output object is traceable to some input object.

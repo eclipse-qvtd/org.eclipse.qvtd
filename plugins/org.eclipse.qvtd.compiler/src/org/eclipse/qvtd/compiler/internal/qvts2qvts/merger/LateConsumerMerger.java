@@ -70,7 +70,7 @@ public class LateConsumerMerger extends AbstractMerger
 			return new LateMergedMappingRegion(scheduleManager, newName);
 		}
 
-		public void install(@NonNull ContentsAnalysis contentsAnalysis, @NonNull MappingRegion mergedRegion) {
+		public void install(@NonNull ContentsAnalysis<@NonNull MappingRegion> contentsAnalysis, @NonNull MappingRegion mergedRegion) {
 			ScheduledRegion invokingRegion = QVTscheduleUtil.getContainingScheduledRegion(primaryRegion);
 			List<@NonNull Region> callableParents = Lists.newArrayList(primaryRegion.getCallableParents());
 			contentsAnalysis.removeRegion(primaryRegion);
@@ -264,7 +264,7 @@ public class LateConsumerMerger extends AbstractMerger
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull ScheduledRegion scheduledRegion;
 	protected final @NonNull List<@NonNull Region> allRegions = new ArrayList<>();
-	private /*@LazyNonNull*/ ContentsAnalysis contentsAnalysis;
+	private /*@LazyNonNull*/ ContentsAnalysis<@NonNull MappingRegion> contentsAnalysis;
 	private final @NonNull Map<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> newRegion2oldRegions = new HashMap<>();
 	protected final @NonNull LateStrategy LateStrategy_INSTANCE = new LateStrategy();
 
@@ -283,12 +283,14 @@ public class LateConsumerMerger extends AbstractMerger
 		return;
 	}
 
-	protected @NonNull ContentsAnalysis getContentsAnalysis() {
-		ContentsAnalysis contentsAnalysis2 = contentsAnalysis;
+	protected @NonNull ContentsAnalysis<@NonNull MappingRegion> getContentsAnalysis() {
+		ContentsAnalysis<@NonNull MappingRegion> contentsAnalysis2 = contentsAnalysis;
 		if (contentsAnalysis2 == null) {
-			contentsAnalysis2 = contentsAnalysis = new ContentsAnalysis(scheduleManager);
+			contentsAnalysis2 = contentsAnalysis = new ContentsAnalysis<@NonNull MappingRegion>(scheduleManager);
 			for (@NonNull Region region : allRegions) {
-				contentsAnalysis2.addRegion(region);
+				if (region instanceof MappingRegion) {			// Skip e.g LoadingRegion
+					contentsAnalysis2.addRegion((MappingRegion) region);
+				}
 			}
 		}
 		return contentsAnalysis2;

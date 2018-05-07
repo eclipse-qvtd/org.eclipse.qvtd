@@ -545,10 +545,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return completeClass2nodes;
 	}
 
-	public static @NonNull Iterable<@NonNull RuleRegion> getConsumingRegions(@NonNull AbstractDatum abstractDatum) {
-		return ClassUtil.nullFree(abstractDatum.getConsumingRegions());
-	}
-
 	public static @NonNull ScheduledRegion getContainingScheduledRegion(@NonNull Region region) {
 		return ClassUtil.nonNullState(region.getContainingScheduledRegion());
 	}
@@ -703,10 +699,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull NavigableEdge getPrimaryEdge(@NonNull NavigableEdge navigableEdge) {
 		return navigableEdge.isSecondary() ? getOppositeEdge(navigableEdge) : navigableEdge;
-	}
-
-	public static @NonNull Iterable<@NonNull RuleRegion> getProducingRegions(@NonNull AbstractDatum abstractDatum) {
-		return ClassUtil.nullFree(abstractDatum.getProducingRegions());
 	}
 
 	public static @NonNull Property getProperty(@NonNull NavigableEdge navigableEdge) {

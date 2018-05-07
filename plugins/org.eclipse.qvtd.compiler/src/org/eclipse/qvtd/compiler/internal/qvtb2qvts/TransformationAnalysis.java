@@ -15,15 +15,17 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CompleteModel;
+import org.eclipse.ocl.pivot.CompletePackage;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
@@ -77,6 +79,13 @@ public class TransformationAnalysis extends QVTbaseHelper implements Nameable
 		for (@NonNull Rule asRule : QVTbaseUtil.getOwnedRules(transformation)) {
 			RuleAnalysis ruleAnalysis = getRuleAnalysis(asRule);
 			ruleAnalysis.analyzeMappingRegion();
+		}
+		CompleteModel completeModel = environmentFactory.getCompleteModel();
+		for (@NonNull TypedModel typedModel : QVTbaseUtil.getModelParameters(transformation)) {
+			for (org.eclipse.ocl.pivot.@NonNull Package asPackage : QVTbaseUtil.getUsedPackages(typedModel)) {
+				CompletePackage completePackage = completeModel.getCompletePackage(asPackage);
+				scheduleManager.analyzeCompletePackage(typedModel, completePackage);
+			}
 		}
 	}
 

@@ -17,11 +17,7 @@ import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public abstract class AbstractQVTb2QVTs extends PivotHelper
 {
@@ -63,18 +59,5 @@ public abstract class AbstractQVTb2QVTs extends PivotHelper
 
 	public @NonNull ScheduleManager getScheduleManager() {
 		return scheduleManager;
-	}
-
-	protected void registerConsumptionsAndProductions(@NonNull RuleRegion region) {	// FIXME Unify with ContentsAnalysis
-		for (@NonNull Node newNode : region.getNewNodes()) {
-			if (!newNode.isSuccess()) {
-				ClassDatum classDatum = QVTscheduleUtil.getClassDatum(newNode);
-				classDatum.getProducingRegions().add(region);
-			}
-		}
-		for (@NonNull Node predicatedNode : region.getOldNodes()) {
-			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(predicatedNode);
-			classDatum.getConsumingRegions().add(region);
-		}
 	}
 }

@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.CompleteModel;
+import org.eclipse.ocl.pivot.CompletePackage;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
@@ -42,13 +43,11 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
@@ -59,7 +58,7 @@ import com.google.common.collect.Iterables;
 /**
  * DatumCaches maintains the caches of ClassDatum and PropertyDatum that establish the inter-Mapping connectivity.
  */
-public abstract class DatumCaches
+public class DatumCaches
 {
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
@@ -105,22 +104,15 @@ public abstract class DatumCaches
 
 	}
 
-	protected abstract @Nullable RuleRegion analyzeRule(@NonNull RuleAnalysis ruleAnalysis);
-
-	public void analyzeTracePackage(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Package tracePackage) {
-		for (org.eclipse.ocl.pivot.@NonNull Class traceClass : PivotUtil.getOwnedClasses(tracePackage)) {
-			TypedModel containingTypedModel = traceClass instanceof DataType ? domainUsageAnalysis.getPrimitiveTypeModel() : typedModel;
-			ClassDatum classDatum = getClassDatum(containingTypedModel, traceClass);
-			for (@NonNull Property traceProperty : PivotUtil.getOwnedProperties(traceClass)) {
+	public void analyzeCompletePackage(@NonNull TypedModel typedModel, @NonNull CompletePackage completePackage) {
+		for (@NonNull CompleteClass completeClass : PivotUtil.getOwnedCompleteClasses(completePackage)) {
+			org.eclipse.ocl.pivot.Class asClass = completeClass.getPrimaryClass();
+			TypedModel containingTypedModel = asClass instanceof DataType ? domainUsageAnalysis.getPrimitiveTypeModel() : typedModel;
+			ClassDatum classDatum = getClassDatum(containingTypedModel, asClass);
+			for (@NonNull Property traceProperty : PivotUtil.getOwnedProperties(asClass)) {
 				@SuppressWarnings("unused")
 				PropertyDatum propertyDatumDatum = getPropertyDatum(classDatum, traceProperty);
 			}
-		}
-	}
-
-	public void analyzeTransformation(@NonNull TransformationAnalysis transformationAnalysis) {
-		for (@NonNull Rule rule : QVTbaseUtil.getOwnedRules(transformationAnalysis.getTransformation())) {
-			analyzeRule(transformationAnalysis.getRuleAnalysis(rule));
 		}
 	}
 

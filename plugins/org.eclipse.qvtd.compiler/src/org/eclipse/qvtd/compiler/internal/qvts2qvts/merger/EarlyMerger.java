@@ -291,11 +291,11 @@ public class EarlyMerger extends AbstractMerger
 		for (Map.Entry<@NonNull ClassDatum, @NonNull Integer> entry : hostClass2count.entrySet()) {
 			if (entry.getValue() == 1) {
 				ClassDatum primaryClassDatum = entry.getKey();
-				for (@NonNull MappingRegion secondaryRegion : QVTscheduleUtil.getConsumingRegions(primaryClassDatum)) {
+				for (@NonNull Region secondaryRegion : scheduleManager.getOriginalContentsAnalysis().getConsumingRegions(primaryClassDatum)) {
 					if (secondaryRegion != primaryRegion) {
 						for (@NonNull Node secondaryHeadNode : QVTscheduleUtil.getHeadNodes(secondaryRegion)) {
 							if (QVTscheduleUtil.getClassDatum(secondaryHeadNode) == primaryClassDatum) {
-								secondaryRegions.add(secondaryRegion);
+								secondaryRegions.add((MappingRegion) secondaryRegion);
 								break;
 							}
 						}

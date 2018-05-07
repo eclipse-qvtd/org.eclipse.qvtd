@@ -20,6 +20,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CastEdgeCheckedCondition;
@@ -40,7 +41,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -157,14 +158,15 @@ public class FallibilityAnalysis
 				}
 				else {
 					ClassDatum classDatum = QVTscheduleUtil.getClassDatum(sourceNode);
-					for(@NonNull Region producingRegion : QVTscheduleUtil.getProducingRegions(classDatum)) {
-						if (producingRegion instanceof MappingRegion) {
-							RegionAnalysis producingRegionAnalysis = scheduleManager.getRegionAnalysis(producingRegion);
-							addFallibility(predicateNavigationEdgeCheckedCondition, producingRegionAnalysis);
-						}
-						else {
-							allSuccessesResolved = false;
-						}
+					Iterable<@NonNull RuleRegion> contentsGetProducingRegions = originalContentsAnalysis.getProducingRegions(classDatum);
+					for (@NonNull RuleRegion producingRegion : contentsGetProducingRegions) {
+						//						if (producingRegion instanceof MappingRegion) {
+						RegionAnalysis producingRegionAnalysis = scheduleManager.getRegionAnalysis(producingRegion);
+						addFallibility(predicateNavigationEdgeCheckedCondition, producingRegionAnalysis);
+						//						}
+						//						else {
+						//							allSuccessesResolved = false;
+						//						}
 					}
 				}
 			}
@@ -176,6 +178,7 @@ public class FallibilityAnalysis
 	}
 
 	protected final @NonNull ScheduleManager scheduleManager;
+	protected final @NonNull ContentsAnalysis<@NonNull RuleRegion> originalContentsAnalysis;
 	protected final @NonNull TransformationPartitioner transformationPartitioner;
 	//	protected final @NonNull RegionAnalysis failAlways;
 	protected final @NonNull RegionAnalysis failSometimes;
@@ -183,6 +186,7 @@ public class FallibilityAnalysis
 
 	public FallibilityAnalysis(@NonNull TransformationPartitioner transformationPartitioner) {
 		this.scheduleManager = transformationPartitioner.getScheduleManager();
+		this.originalContentsAnalysis = scheduleManager.getOriginalContentsAnalysis();
 		this.transformationPartitioner = transformationPartitioner;
 		//		this.failAlways = createPseudoRegionAnalysis("«failAlways»");
 		this.failSometimes = createPseudoRegionAnalysis("«failSometimes»");

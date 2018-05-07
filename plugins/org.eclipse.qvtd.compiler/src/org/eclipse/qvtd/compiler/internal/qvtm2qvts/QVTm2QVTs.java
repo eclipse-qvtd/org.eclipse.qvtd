@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractQVTb2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.CompilerOptions;
@@ -57,21 +58,9 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 		for (@NonNull TransformationAnalysis transformationAnalysis : transformationAnalyses) {
 			transformationAnalysis.analyzeMappingRegions();
 		}
+		@SuppressWarnings("unused")
+		ContentsAnalysis<@NonNull RuleRegion> originalContentsAnalysis = scheduleManager.analyzeOriginalContents();
 		Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull RuleRegion>> scheduledRegion2activeRegions = scheduleManager.analyzeTransformations();
-		//
-		//	Extract salient characteristics from within each MappingAction.
-		//
-		//		for (@NonNull RuleRegion ruleRegion : orderedRuleRegions) {
-		//			MappingAnalysis mappingAnalysis = MappingAnalysis.createMappingRegion(scheduleManager, ruleRegion);
-		//			addRuleAnalysis(mappingAnalysis);
-		//		}
-		for (@NonNull ScheduledRegion scheduledRegion : scheduledRegion2activeRegions.keySet()) {
-			Iterable<? extends @NonNull MappingRegion> activeRegions = scheduledRegion2activeRegions.get(scheduledRegion);
-			assert activeRegions != null;
-			for (@NonNull MappingRegion ruleRegion : activeRegions) {
-				registerConsumptionsAndProductions((RuleRegion) ruleRegion);
-			}
-		}
 		for (@NonNull MappingRegion ruleRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager.getScheduleModel())) {
 			scheduleManager.writeDebugGraphs(ruleRegion, null);
 		}

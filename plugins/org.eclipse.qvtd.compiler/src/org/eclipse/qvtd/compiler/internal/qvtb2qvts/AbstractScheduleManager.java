@@ -26,6 +26,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.CompleteModel;
+import org.eclipse.ocl.pivot.CompletePackage;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
@@ -119,6 +121,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	 */
 	private final @NonNull Map<String, Property> name2argumentProperty = new HashMap<>();
 
+	/**
+	 * The producing/consuming characteristics of each original (unpartitioned) region.
+	 */
+	private @Nullable ContentsAnalysis<@NonNull RuleRegion> originalContentsAnalysis = null;
+
 	private /*@LazyNonNull */ OperationDependencyAnalysis operationDependencyAnalysis = null;
 
 	private @NonNull Map<@NonNull Region, @NonNull RegionAnalysis> region2regionAnalysis = new HashMap<>();
@@ -173,11 +180,14 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	@Override
 	public @NonNull TransformationAnalysis addTransformation(@NonNull Transformation asTransformation) {
 		TransformationAnalysis transformationAnalysis = createTransformationAnalysis(asTransformation);
+		TypedModel primitiveTypeModel = domainUsageAnalysis.getPrimitiveTypeModel();
+		asTransformation.getModelParameter().add(primitiveTypeModel);
 		transformation2transformationAnalysis.put(asTransformation, transformationAnalysis);
 		return transformationAnalysis;
 	}
 
 	private void analyzeCallTree() {
+		ContentsAnalysis<@NonNull RuleRegion> originalContentsAnalysis = getOriginalContentsAnalysis();
 		Map<@NonNull Rule, @NonNull List<@NonNull Rule>> consumer2producers = new HashMap<>();
 		List<@NonNull ClassDatum> middleClassDatums = new ArrayList<>();
 		StringBuilder s = QVTm2QVTs.CALL_TREE.isActive() ? new StringBuilder() : null;
@@ -187,16 +197,18 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			if (usage.isMiddle()) {
 				middleClassDatums.add(classDatum);
 				if (s != null) {
-					s.append("middle: " + classDatum.getProducingRegions() + "\n");
+					s.append("middle: " + originalContentsAnalysis.getProducingRegions(classDatum) + "\n");
 				}
-				for (@NonNull RuleRegion consumingRegion : QVTscheduleUtil.getConsumingRegions(classDatum)) {
+				Iterable<@NonNull RuleRegion> contentsGetConsumingRegions = originalContentsAnalysis.getConsumingRegions(classDatum);
+				for (@NonNull RuleRegion consumingRegion : contentsGetConsumingRegions) {
 					Rule consumer = QVTscheduleUtil.getReferredRule(consumingRegion);
 					List<@NonNull Rule> producers = consumer2producers.get(consumer);
 					if (producers == null) {
 						producers = new ArrayList<>();
 						consumer2producers.put(consumer, producers);
 					}
-					for (@NonNull RuleRegion producingRegion : QVTscheduleUtil.getProducingRegions(classDatum)) {
+					Iterable<@NonNull RuleRegion> contentsGetProducingRegions = originalContentsAnalysis.getProducingRegions(classDatum);
+					for (@NonNull RuleRegion producingRegion : contentsGetProducingRegions) {
 						Rule producer = QVTscheduleUtil.getReferredRule(producingRegion);
 						if (!producers.contains(producer)) {
 							producers.add(producer);
@@ -209,6 +221,12 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			s.append("consumer2producers: " + consumer2producers);
 			QVTm2QVTs.CALL_TREE.println(s.toString());
 		}
+	}
+
+	@Override
+	public void analyzeCompletePackage(@NonNull TypedModel typedModel, @NonNull CompletePackage completePackage) {
+		//		domainUsageAnalysis.analyzeTracePackage(typedModel, tracePackage);
+		datumCaches.analyzeCompletePackage(typedModel, completePackage);
 	}
 
 	@Override
@@ -235,6 +253,18 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
+	public @NonNull ContentsAnalysis<@NonNull RuleRegion> analyzeOriginalContents() {
+		ContentsAnalysis<@NonNull RuleRegion> contentsAnalysis = new ContentsAnalysis<@NonNull RuleRegion>(this);
+		List<@NonNull MappingRegion> mappingRegions = Lists.newArrayList(QVTscheduleUtil.getOwnedMappingRegions(getScheduleModel()));
+		Collections.sort(mappingRegions, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
+		for (@NonNull MappingRegion mappingRegion : mappingRegions) {
+			contentsAnalysis.addRegion((RuleRegion) mappingRegion);
+		}
+		this.originalContentsAnalysis = contentsAnalysis;
+		return contentsAnalysis;
+	}
+
+	@Override
 	public void analyzeSourceModel() {
 		for (@NonNull TransformationAnalysis transformationAnalysis : getOrderedTransformationAnalyses()) {
 			domainUsageAnalysis.analyzeTransformation(transformationAnalysis.getTransformation());
@@ -245,18 +275,15 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	@Override
 	public void analyzeTracePackage(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Package tracePackage) {
 		domainUsageAnalysis.analyzeTracePackage(typedModel, tracePackage);
-		datumCaches.analyzeTracePackage(typedModel, tracePackage);
-	}
-
-	protected void analyzeTransformation(@NonNull TransformationAnalysis transformationAnalysis) {
-		datumCaches.analyzeTransformation(transformationAnalysis);
+		CompleteModel completeModel = environmentFactory.getCompleteModel();
+		CompletePackage completePackage = completeModel.getCompletePackage(tracePackage);
+		datumCaches.analyzeCompletePackage(typedModel, completePackage);
 	}
 
 	@Override
 	public @NonNull Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull RuleRegion>> analyzeTransformations() {
 		Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull RuleRegion>> scheduledRegion2activeRegions = new HashMap<>();
 		for (@NonNull TransformationAnalysis transformationAnalysis : getOrderedTransformationAnalyses()) {
-			analyzeTransformation(transformationAnalysis);
 			Iterable<@NonNull RuleRegion> activeRegions = transformationAnalysis.gatherRuleRegions();
 			scheduledRegion2activeRegions.put(transformationAnalysis.getScheduledRegion(), activeRegions);
 		}
@@ -273,7 +300,9 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		return completeClass.getProperty(QVTrelationNameGenerator.TRACE_SUCCESS_PROPERTY_NAME);
 	}
 
-	protected abstract @NonNull DatumCaches createDatumCaches();
+	protected @NonNull DatumCaches createDatumCaches() {
+		return new DatumCaches(this);
+	}
 
 	protected abstract @NonNull RootDomainUsageAnalysis createDomainUsageAnalysis();
 
@@ -612,6 +641,14 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		return datumCaches.getPropertyDatum(classDatum, property);
 	}
 
+	@Override
+	public @NonNull PropertyDatum getPropertyDatum(@NonNull NavigableEdge edge) {
+		Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
+		Property property = QVTscheduleUtil.getProperty(edge);
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(sourceNode);
+		return getPropertyDatum(classDatum, property);
+	}
+
 	/**
 	 * Return a determinstic alphabetical ordering of the TransformationAnalysis instances.
 	 */
@@ -622,6 +659,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			Collections.sort(transformationAnalyses, NameUtil.NAMEABLE_COMPARATOR);
 		}
 		return transformationAnalyses;
+	}
+
+	@Override
+	public @NonNull ContentsAnalysis<@NonNull RuleRegion> getOriginalContentsAnalysis() {
+		return ClassUtil.nonNullState(originalContentsAnalysis);
 	}
 
 	@Override

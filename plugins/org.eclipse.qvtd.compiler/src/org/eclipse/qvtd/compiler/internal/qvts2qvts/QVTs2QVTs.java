@@ -26,6 +26,7 @@ import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -72,7 +73,6 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	protected final @NonNull ProblemHandler problemHandler;
 	protected final @NonNull String rootName;
 	//	private final @NonNull LoadingRegion loadingRegion;
-	private ContentsAnalysis contentsAnalysis;
 	private final @NonNull LoadingRegionAnalysis loadingRegionAnalysis;
 
 	protected final @NonNull CompleteModel completeModel;
@@ -96,6 +96,11 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	 * The edge connections that unite a set of sources via a shared connection.
 	 */
 	public final @NonNull Map<@NonNull Set<@NonNull NavigableEdge>, @NonNull EdgeConnection> edges2edgeConnection = new HashMap<>();
+
+	/**
+	 * Analysis of the contents of the partitioned mappings, null prior to partitioning.
+	 */
+	private @Nullable ContentsAnalysis<@NonNull MappingRegion> partitionedContentsAnalysis;
 
 	public QVTs2QVTs(@NonNull ProblemHandler problemHandler, @NonNull ScheduleManager qvtm2qvts, @NonNull String rootName) {
 		super(qvtm2qvts.getEnvironmentFactory());
@@ -368,7 +373,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		}
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(headNode);
 		if (isSpeculation && !headNode.isSpeculated()) {
-			sourceNodes = contentsAnalysis.getOldNodes(classDatum);
+			sourceNodes = getPartitionedContentsAnalysis().getOldNodes(classDatum);
 			assert sourceNodes != null;
 		}
 		if (sourceNodes != null) {
@@ -885,14 +890,15 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//
 		//	Identify the content of each region.
 		//
-		for (@NonNull Region region : QVTscheduleUtil.getMappingRegions(rootScheduledRegion)) {
-			contentsAnalysis.addRegion(region);
+		ContentsAnalysis<@NonNull MappingRegion> contentsAnalysis2 = this.partitionedContentsAnalysis = new ContentsAnalysis<@NonNull MappingRegion>(scheduleManager);
+		for (@NonNull MappingRegion region : QVTscheduleUtil.getMappingRegions(rootScheduledRegion)) {
+			contentsAnalysis2.addRegion(region);
 		}
 		if (QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.isActive()) {
-			QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.println(contentsAnalysis.dumpClass2newNode());
+			QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.println(contentsAnalysis2.dumpClass2newNode());
 		}
 		if (QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.isActive()) {
-			QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.println(contentsAnalysis.dumpClass2oldNode());
+			QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.println(contentsAnalysis2.dumpClass2oldNode());
 		}
 		//
 		//	Create the root containment region to introduce all root and otherwise contained consumed classes.
@@ -995,14 +1001,15 @@ public class QVTs2QVTs extends QVTimperativeHelper
 
 	public @Nullable Iterable<@NonNull Node> getIntroducingOrNewNodes(@NonNull Node headNode) {
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(headNode);
+		ContentsAnalysis<@NonNull MappingRegion> partitionedContentsAnalysis = getPartitionedContentsAnalysis();
 		if (!scheduleManager.getDomainUsage(classDatum).isInput()) {
-			return contentsAnalysis.getNewNodes(classDatum);	// FIXME also dependsOn ??
+			return partitionedContentsAnalysis.getNewNodes(classDatum);	// FIXME also dependsOn ??
 		}
 		List<@NonNull Node> nodes = new ArrayList<>();
 		nodes.add(loadingRegionAnalysis.getIntroducerNode(headNode));
 		for (@NonNull TypedModel dependsOn : QVTbaseUtil.getDependsOns(QVTscheduleUtil.getTypedModel(classDatum))) {
 			ClassDatum classDatum2 = scheduleManager.getClassDatum(dependsOn, headNode.getCompleteClass().getPrimaryClass());
-			Iterable<@NonNull Node> newNodes = contentsAnalysis.getNewNodes(classDatum2);
+			Iterable<@NonNull Node> newNodes = partitionedContentsAnalysis.getNewNodes(classDatum2);
 			if (newNodes != null) {
 				for (@NonNull Node newNode : newNodes) {
 					if (!nodes.contains(newNode)) {
@@ -1015,11 +1022,11 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	}
 
 	public @Nullable Iterable<@NonNull NavigableEdge> getNewEdges(@NonNull NavigableEdge edge, @NonNull ClassDatum requiredClassDatum) {
-		return contentsAnalysis.getNewEdges(edge, requiredClassDatum);
+		return getPartitionedContentsAnalysis().getNewEdges(edge, requiredClassDatum);
 	}
 
 	public @Nullable Iterable<@NonNull Node> getNewNodes(@NonNull ClassDatum classDatum) {
-		return contentsAnalysis.getNewNodes(classDatum);
+		return getPartitionedContentsAnalysis().getNewNodes(classDatum);
 	}
 
 	private @NonNull NodeConnection getNodeConnection(@NonNull ScheduledRegion scheduledRegion, @NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatum classDatum, @NonNull DomainUsage domainUsage) {
@@ -1040,6 +1047,10 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			nodes2connection.put(sourceSet, connection);
 		}
 		return connection;
+	}
+
+	public @NonNull ContentsAnalysis<@NonNull MappingRegion> getPartitionedContentsAnalysis() {
+		return ClassUtil.nonNullState(partitionedContentsAnalysis);
 	}
 
 	public @NonNull RegionAnalysis getRegionAnalysis(@NonNull Region region) {
@@ -1107,7 +1118,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	}
 
 	public @NonNull Iterable<@NonNull ScheduledRegion> transform(@NonNull ScheduleManager scheduleManager, @NonNull Map<@NonNull ScheduledRegion, Iterable<@NonNull MappingRegion>> scheduledRegion2activeRegions) throws CompilerChainException {
-		this.contentsAnalysis = new ContentsAnalysis(scheduleManager);
+		//		this.contentsAnalysis = new ContentsAnalysis(scheduleManager);
 		//		((LoadingRegionImpl)loadingRegion).setFixmeScheduleModel(scheduleManager.getScheduleModel());
 		//		for (@NonNull Region region : activeRegions) {
 		//			System.out.println("activeRegions " + region);

@@ -57,8 +57,8 @@ public class TransformationPartitioner
 		TransformationPartitioner transformationPartitioner = new TransformationPartitioner(scheduleManager, problemHandler, activeRegions);
 		return transformationPartitioner.partition();
 	}
-	protected final @NonNull ScheduleManager scheduleManager;
 
+	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull ProblemHandler problemHandler;
 	protected final @NonNull Iterable<@NonNull ? extends Region> activeRegions;
 
@@ -146,7 +146,7 @@ public class TransformationPartitioner
 		return cyclesAnalysis;
 	}
 
-	private void computeCyclicTraceClasses() {
+	private @NonNull CyclesAnalysis computeCyclicTraceClasses() {
 		//
 		//	Each mapping partitioner that consumes no trace class, is an acyclic producer.
 		//
@@ -166,7 +166,7 @@ public class TransformationPartitioner
 		}
 	} */
 
-		this.cyclesAnalysis = computeCyclesAnalysis();
+		CyclesAnalysis cyclesAnalysis = computeCyclesAnalysis();
 		//
 		//	Each TraceClassAnalysis produced only by acyclic partitioners identifies an acyclic trace class
 		//
@@ -181,6 +181,7 @@ public class TransformationPartitioner
 				}
 			}
 		}
+		return cyclesAnalysis;
 	}
 
 	protected @NonNull FallibilityAnalysis computeFallibilityAnalysis() {
@@ -241,10 +242,12 @@ public class TransformationPartitioner
 	}
 
 	public @Nullable CycleAnalysis getCycleAnalysis(@NonNull MappingPartitioner mappingPartitioner) {
+		assert cyclesAnalysis != null;
 		return cyclesAnalysis != null ? cyclesAnalysis.getCycleAnalysis(mappingPartitioner) : null;
 	}
 
 	public @Nullable CycleAnalysis getCycleAnalysis(@NonNull TraceClassAnalysis traceClassAnalysis) {
+		assert cyclesAnalysis != null;
 		return cyclesAnalysis != null ? cyclesAnalysis.getCycleAnalysis(traceClassAnalysis) : null;
 	}
 
@@ -332,8 +335,8 @@ public class TransformationPartitioner
 			computeTraceClassDiscrimination();
 		}
 		computeTraceClassInheritance();
+		this.cyclesAnalysis = computeCyclicTraceClasses();
 		this.fallibilityAnalysis = computeFallibilityAnalysis();
-		computeCyclicTraceClasses();
 		// FIXME check that all head nodes have trace properties
 		//
 		//	Perform per-mapping partitioning
