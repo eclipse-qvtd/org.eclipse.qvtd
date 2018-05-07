@@ -109,7 +109,8 @@ public abstract class DatumCaches
 
 	public void analyzeTracePackage(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Package tracePackage) {
 		for (org.eclipse.ocl.pivot.@NonNull Class traceClass : PivotUtil.getOwnedClasses(tracePackage)) {
-			ClassDatum classDatum = getClassDatum(typedModel, traceClass);
+			TypedModel containingTypedModel = traceClass instanceof DataType ? domainUsageAnalysis.getPrimitiveTypeModel() : typedModel;
+			ClassDatum classDatum = getClassDatum(containingTypedModel, traceClass);
 			for (@NonNull Property traceProperty : PivotUtil.getOwnedProperties(traceClass)) {
 				@SuppressWarnings("unused")
 				PropertyDatum propertyDatumDatum = getPropertyDatum(classDatum, traceProperty);
