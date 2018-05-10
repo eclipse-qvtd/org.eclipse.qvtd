@@ -50,7 +50,7 @@ public interface XMLmodelPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/qvt/2015/XML";
+	String eNS_URI = "http://www.eclipse.org/qvt/2018/XML";
 
 	/**
 	 * The package namespace name.
