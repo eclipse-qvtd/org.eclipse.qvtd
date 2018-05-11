@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated TextModel -->
+      <package
+            uri="http://www.eclipse.org/qvt/2018/TextModel"
+            class="org.eclipse.qvtd.text.TextModelPackage"
+            genModel="model/TextModel.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser
+            type="textmodel"
+            class="org.eclipse.qvtd.text.utilities.TextModelResourceFactoryImpl"/>
+   </extension>
+</plugin>
