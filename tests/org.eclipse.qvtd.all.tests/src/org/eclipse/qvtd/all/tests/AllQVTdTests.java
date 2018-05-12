@@ -45,6 +45,7 @@ public class AllQVTdTests extends TestCase
 		result.addTestSuite(QVTbaseLibraryTests.class);
 		result.addTestSuite(GrammarTests.class);
 		result.addTestSuite(TextModelTests.class);
+		result.addTestSuite(XMLmodelTests.class);
 		result.addTestSuite(OCL2QVTiTestCases.class);
 		result.addTest(AllUMLXTests.suite());
 		// result.addTest(AllATLTests.suite()); -- FIXME waiting for BUG 514604

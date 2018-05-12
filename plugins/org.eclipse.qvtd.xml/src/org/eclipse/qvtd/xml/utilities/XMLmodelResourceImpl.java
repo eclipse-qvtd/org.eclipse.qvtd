@@ -103,12 +103,22 @@ public class XMLmodelResourceImpl extends XMIResourceImpl
 
 		@Override
 		public void characters(char[] ch, int start, int length) {
-			Characters characters = XMLmodelFactory.eINSTANCE.createCharacters();
-			String characterText = new String(ch, start, length);
-			//			if (!characterText.trim().isEmpty()) {
-			characters.setData(characterText);
-			//			}
-			addNode(characters);
+			boolean isWhite = true;
+			for (int i = 0; i < length; i++) {
+				char c = ch[start+i];
+				if (!Character.isWhitespace(c)) {
+					isWhite = false;
+					break;
+				}
+			}
+			if (!isWhite) {
+				String characterText = new String(ch, start, length);
+				Characters characters = XMLmodelFactory.eINSTANCE.createCharacters();
+				//			if (!characterText.trim().isEmpty()) {
+				characters.setData(characterText);
+				//			}
+				addNode(characters);
+			}
 		}
 
 		@Override
@@ -215,6 +225,9 @@ public class XMLmodelResourceImpl extends XMIResourceImpl
 
 	public static class XMLmodelSave extends XMISaveImpl
 	{
+		// FIXME The inherited use of XMLString from XMLSaveImpl is very close to what is required, but
+		//  its handling of mixed content is hard to understand. Some of the whitespacing around characters
+		//  is not quite right. Perhaps a simpler custom variant of XMLString is needed - it is not overrideable.
 		public XMLmodelSave(XMLHelper helper) {
 			super(helper);
 		}
@@ -259,8 +272,8 @@ public class XMLmodelResourceImpl extends XMIResourceImpl
 				}
 				else if (eObject instanceof Characters) {
 					Characters characters = (Characters)eObject;
-					@SuppressWarnings("unused") String data = characters.getData();
-					//					doc.add(data);
+					String data = characters.getData();
+					doc.addText(data);
 				}
 				else if (eObject instanceof CDATA) {
 					CDATA cdata = (CDATA)eObject;
