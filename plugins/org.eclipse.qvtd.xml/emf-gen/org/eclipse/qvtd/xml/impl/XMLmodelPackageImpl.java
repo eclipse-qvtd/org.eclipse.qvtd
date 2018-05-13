@@ -568,6 +568,27 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// http://www.eclipse.org/qvt/2018/PostProcess
+		createPostProcessAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/qvt/2018/PostProcess</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createPostProcessAnnotations() {
+		String source = "http://www.eclipse.org/qvt/2018/PostProcess";
+		addAnnotation
+		  (this,
+		   source,
+		   new String[] {
+			   "raw", "org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl",
+			   "processed", "org.eclipse.qvtd.xml.utilities.XMLmodelResourceFactoryImpl"
+		   });
 	}
 
 } //XMLmodelPackageImpl

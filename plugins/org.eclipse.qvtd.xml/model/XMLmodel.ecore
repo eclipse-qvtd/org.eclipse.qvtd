@@ -7,6 +7,15 @@
     name="xml"
     nsURI="http://www.eclipse.org/qvt/2018/XML"
     nsPrefix="sax">
+  <eAnnotations
+      source="http://www.eclipse.org/qvt/2018/PostProcess">
+    <details
+        key="raw"
+        value="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
+    <details
+        key="processed"
+        value="org.eclipse.qvtd.xml.utilities.XMLmodelResourceFactoryImpl"/>
+  </eAnnotations>
   <eClassifiers
       xsi:type="ecore:EClass"
       name="Attribute"

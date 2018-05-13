@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.text.*;
 
 /**
@@ -34,7 +35,7 @@ import org.eclipse.qvtd.text.*;
  * @see org.eclipse.qvtd.text.TextModelPackage
  * @generated
  */
-public class TextModelSwitch<T> extends Switch<T> {
+public class TextModelSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

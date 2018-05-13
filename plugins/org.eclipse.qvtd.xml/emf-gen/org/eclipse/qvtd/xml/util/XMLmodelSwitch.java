@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.xml.*;
 
 /**
@@ -34,7 +35,7 @@ import org.eclipse.qvtd.xml.*;
  * @see org.eclipse.qvtd.xml.XMLmodelPackage
  * @generated
  */
-public class XMLmodelSwitch<T> extends Switch<T> {
+public class XMLmodelSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see org.eclipse.qvtd.xml.XMLmodelFactory
  * @model kind="package"
+ *        annotation="http://www.eclipse.org/qvt/2018/PostProcess raw='org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl' processed='org.eclipse.qvtd.xml.utilities.XMLmodelResourceFactoryImpl'"
  * @generated
  */
 public interface XMLmodelPackage extends EPackage {

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="text" nsURI="http://www.eclipse.org/qvt/2018/TextModel" nsPrefix="text">
+  <eAnnotations source="http://www.eclipse.org/qvt/2018/PostProcess">
+    <details key="raw" value="org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl"/>
+    <details key="processed" value="org.eclipse.qvtd.text.utilities.TextModelResourceFactoryImpl"/>
+  </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="StringNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A tree of StringNodes provides a hierarchical text structure with an optional cumulative indent, prefix, separator and suffix for child nodes between text and endText contributions."/>

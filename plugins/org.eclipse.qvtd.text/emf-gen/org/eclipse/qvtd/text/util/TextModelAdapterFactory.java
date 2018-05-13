@@ -21,6 +21,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.text.*;
 
 /**
@@ -77,8 +78,8 @@ public class TextModelAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TextModelSwitch<Adapter> modelSwitch =
-		new TextModelSwitch<Adapter>() {
+	protected TextModelSwitch<@Nullable Adapter> modelSwitch =
+		new TextModelSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseStringNode(StringNode object) {
 				return createStringNodeAdapter();
