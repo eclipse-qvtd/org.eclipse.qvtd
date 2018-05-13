@@ -40,7 +40,9 @@ import org.eclipse.qvtd.text.TextModelPackage;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.text.impl.StringNodeImpl#getChildren <em>Children</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.text.impl.StringNodeImpl#getEndText <em>End Text</em>}</li>
  *   <li>{@link org.eclipse.qvtd.text.impl.StringNodeImpl#getIndent <em>Indent</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.text.impl.StringNodeImpl#getNonBreakingSpace <em>Non Breaking Space</em>}</li>
  *   <li>{@link org.eclipse.qvtd.text.impl.StringNodeImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link org.eclipse.qvtd.text.impl.StringNodeImpl#getPrefix <em>Prefix</em>}</li>
  *   <li>{@link org.eclipse.qvtd.text.impl.StringNodeImpl#getSeparator <em>Separator</em>}</li>
@@ -62,6 +64,26 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	protected EList<StringNode> children;
 
 	/**
+	 * The default value of the '{@link #getEndText() <em>End Text</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEndText()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String END_TEXT_EDEFAULT = "";
+
+	/**
+	 * The cached value of the '{@link #getEndText() <em>End Text</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEndText()
+	 * @generated
+	 * @ordered
+	 */
+	protected String endText = END_TEXT_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #getIndent() <em>Indent</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -80,6 +102,26 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	 * @ordered
 	 */
 	protected String indent = INDENT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getNonBreakingSpace() <em>Non Breaking Space</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNonBreakingSpace()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final char NON_BREAKING_SPACE_EDEFAULT = '\u0000';
+
+	/**
+	 * The cached value of the '{@link #getNonBreakingSpace() <em>Non Breaking Space</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNonBreakingSpace()
+	 * @generated
+	 * @ordered
+	 */
+	protected char nonBreakingSpace = NON_BREAKING_SPACE_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getPrefix() <em>Prefix</em>}' attribute.
@@ -198,6 +240,27 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getEndText() {
+		return endText;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEndText(String newEndText) {
+		String oldEndText = endText;
+		endText = newEndText;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TextModelPackage.STRING_NODE__END_TEXT, oldEndText, endText));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public String getIndent() {
 		return indent;
@@ -214,6 +277,27 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 		indent = newIndent;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TextModelPackage.STRING_NODE__INDENT, oldIndent, indent));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public char getNonBreakingSpace() {
+		return nonBreakingSpace;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setNonBreakingSpace(char newNonBreakingSpace) {
+		char oldNonBreakingSpace = nonBreakingSpace;
+		nonBreakingSpace = newNonBreakingSpace;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TextModelPackage.STRING_NODE__NON_BREAKING_SPACE, oldNonBreakingSpace, nonBreakingSpace));
 	}
 
 	/**
@@ -360,12 +444,12 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case TextModelPackage.STRING_NODE__CHILDREN:
-			return ((InternalEList<InternalEObject>)(InternalEList<?>)getChildren()).basicAdd(otherEnd, msgs);
-		case TextModelPackage.STRING_NODE__PARENT:
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			return basicSetParent((StringNode)otherEnd, msgs);
+			case TextModelPackage.STRING_NODE__CHILDREN:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getChildren()).basicAdd(otherEnd, msgs);
+			case TextModelPackage.STRING_NODE__PARENT:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetParent((StringNode)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -378,10 +462,10 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case TextModelPackage.STRING_NODE__CHILDREN:
-			return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
-		case TextModelPackage.STRING_NODE__PARENT:
-			return basicSetParent(null, msgs);
+			case TextModelPackage.STRING_NODE__CHILDREN:
+				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
+			case TextModelPackage.STRING_NODE__PARENT:
+				return basicSetParent(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -394,8 +478,8 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-		case TextModelPackage.STRING_NODE__PARENT:
-			return eInternalContainer().eInverseRemove(this, TextModelPackage.STRING_NODE__CHILDREN, StringNode.class, msgs);
+			case TextModelPackage.STRING_NODE__PARENT:
+				return eInternalContainer().eInverseRemove(this, TextModelPackage.STRING_NODE__CHILDREN, StringNode.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -408,20 +492,24 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case TextModelPackage.STRING_NODE__CHILDREN:
-			return getChildren();
-		case TextModelPackage.STRING_NODE__INDENT:
-			return getIndent();
-		case TextModelPackage.STRING_NODE__PARENT:
-			return getParent();
-		case TextModelPackage.STRING_NODE__PREFIX:
-			return getPrefix();
-		case TextModelPackage.STRING_NODE__SEPARATOR:
-			return getSeparator();
-		case TextModelPackage.STRING_NODE__SUFFIX:
-			return getSuffix();
-		case TextModelPackage.STRING_NODE__TEXT:
-			return getText();
+			case TextModelPackage.STRING_NODE__CHILDREN:
+				return getChildren();
+			case TextModelPackage.STRING_NODE__END_TEXT:
+				return getEndText();
+			case TextModelPackage.STRING_NODE__INDENT:
+				return getIndent();
+			case TextModelPackage.STRING_NODE__NON_BREAKING_SPACE:
+				return getNonBreakingSpace();
+			case TextModelPackage.STRING_NODE__PARENT:
+				return getParent();
+			case TextModelPackage.STRING_NODE__PREFIX:
+				return getPrefix();
+			case TextModelPackage.STRING_NODE__SEPARATOR:
+				return getSeparator();
+			case TextModelPackage.STRING_NODE__SUFFIX:
+				return getSuffix();
+			case TextModelPackage.STRING_NODE__TEXT:
+				return getText();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -435,28 +523,34 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case TextModelPackage.STRING_NODE__CHILDREN:
-			getChildren().clear();
-			getChildren().addAll((Collection<? extends StringNode>)newValue);
-			return;
-		case TextModelPackage.STRING_NODE__INDENT:
-			setIndent((String)newValue);
-			return;
-		case TextModelPackage.STRING_NODE__PARENT:
-			setParent((StringNode)newValue);
-			return;
-		case TextModelPackage.STRING_NODE__PREFIX:
-			setPrefix((String)newValue);
-			return;
-		case TextModelPackage.STRING_NODE__SEPARATOR:
-			setSeparator((String)newValue);
-			return;
-		case TextModelPackage.STRING_NODE__SUFFIX:
-			setSuffix((String)newValue);
-			return;
-		case TextModelPackage.STRING_NODE__TEXT:
-			setText((String)newValue);
-			return;
+			case TextModelPackage.STRING_NODE__CHILDREN:
+				getChildren().clear();
+				getChildren().addAll((Collection<? extends StringNode>)newValue);
+				return;
+			case TextModelPackage.STRING_NODE__END_TEXT:
+				setEndText((String)newValue);
+				return;
+			case TextModelPackage.STRING_NODE__INDENT:
+				setIndent((String)newValue);
+				return;
+			case TextModelPackage.STRING_NODE__NON_BREAKING_SPACE:
+				setNonBreakingSpace((Character)newValue);
+				return;
+			case TextModelPackage.STRING_NODE__PARENT:
+				setParent((StringNode)newValue);
+				return;
+			case TextModelPackage.STRING_NODE__PREFIX:
+				setPrefix((String)newValue);
+				return;
+			case TextModelPackage.STRING_NODE__SEPARATOR:
+				setSeparator((String)newValue);
+				return;
+			case TextModelPackage.STRING_NODE__SUFFIX:
+				setSuffix((String)newValue);
+				return;
+			case TextModelPackage.STRING_NODE__TEXT:
+				setText((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -469,27 +563,33 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case TextModelPackage.STRING_NODE__CHILDREN:
-			getChildren().clear();
-			return;
-		case TextModelPackage.STRING_NODE__INDENT:
-			setIndent(INDENT_EDEFAULT);
-			return;
-		case TextModelPackage.STRING_NODE__PARENT:
-			setParent((StringNode)null);
-			return;
-		case TextModelPackage.STRING_NODE__PREFIX:
-			setPrefix(PREFIX_EDEFAULT);
-			return;
-		case TextModelPackage.STRING_NODE__SEPARATOR:
-			setSeparator(SEPARATOR_EDEFAULT);
-			return;
-		case TextModelPackage.STRING_NODE__SUFFIX:
-			setSuffix(SUFFIX_EDEFAULT);
-			return;
-		case TextModelPackage.STRING_NODE__TEXT:
-			setText(TEXT_EDEFAULT);
-			return;
+			case TextModelPackage.STRING_NODE__CHILDREN:
+				getChildren().clear();
+				return;
+			case TextModelPackage.STRING_NODE__END_TEXT:
+				setEndText(END_TEXT_EDEFAULT);
+				return;
+			case TextModelPackage.STRING_NODE__INDENT:
+				setIndent(INDENT_EDEFAULT);
+				return;
+			case TextModelPackage.STRING_NODE__NON_BREAKING_SPACE:
+				setNonBreakingSpace(NON_BREAKING_SPACE_EDEFAULT);
+				return;
+			case TextModelPackage.STRING_NODE__PARENT:
+				setParent((StringNode)null);
+				return;
+			case TextModelPackage.STRING_NODE__PREFIX:
+				setPrefix(PREFIX_EDEFAULT);
+				return;
+			case TextModelPackage.STRING_NODE__SEPARATOR:
+				setSeparator(SEPARATOR_EDEFAULT);
+				return;
+			case TextModelPackage.STRING_NODE__SUFFIX:
+				setSuffix(SUFFIX_EDEFAULT);
+				return;
+			case TextModelPackage.STRING_NODE__TEXT:
+				setText(TEXT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -502,20 +602,24 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case TextModelPackage.STRING_NODE__CHILDREN:
-			return children != null && !children.isEmpty();
-		case TextModelPackage.STRING_NODE__INDENT:
-			return INDENT_EDEFAULT == null ? indent != null : !INDENT_EDEFAULT.equals(indent);
-		case TextModelPackage.STRING_NODE__PARENT:
-			return getParent() != null;
-		case TextModelPackage.STRING_NODE__PREFIX:
-			return PREFIX_EDEFAULT == null ? prefix != null : !PREFIX_EDEFAULT.equals(prefix);
-		case TextModelPackage.STRING_NODE__SEPARATOR:
-			return SEPARATOR_EDEFAULT == null ? separator != null : !SEPARATOR_EDEFAULT.equals(separator);
-		case TextModelPackage.STRING_NODE__SUFFIX:
-			return SUFFIX_EDEFAULT == null ? suffix != null : !SUFFIX_EDEFAULT.equals(suffix);
-		case TextModelPackage.STRING_NODE__TEXT:
-			return TEXT_EDEFAULT == null ? text != null : !TEXT_EDEFAULT.equals(text);
+			case TextModelPackage.STRING_NODE__CHILDREN:
+				return children != null && !children.isEmpty();
+			case TextModelPackage.STRING_NODE__END_TEXT:
+				return END_TEXT_EDEFAULT == null ? endText != null : !END_TEXT_EDEFAULT.equals(endText);
+			case TextModelPackage.STRING_NODE__INDENT:
+				return INDENT_EDEFAULT == null ? indent != null : !INDENT_EDEFAULT.equals(indent);
+			case TextModelPackage.STRING_NODE__NON_BREAKING_SPACE:
+				return nonBreakingSpace != NON_BREAKING_SPACE_EDEFAULT;
+			case TextModelPackage.STRING_NODE__PARENT:
+				return getParent() != null;
+			case TextModelPackage.STRING_NODE__PREFIX:
+				return PREFIX_EDEFAULT == null ? prefix != null : !PREFIX_EDEFAULT.equals(prefix);
+			case TextModelPackage.STRING_NODE__SEPARATOR:
+				return SEPARATOR_EDEFAULT == null ? separator != null : !SEPARATOR_EDEFAULT.equals(separator);
+			case TextModelPackage.STRING_NODE__SUFFIX:
+				return SUFFIX_EDEFAULT == null ? suffix != null : !SUFFIX_EDEFAULT.equals(suffix);
+			case TextModelPackage.STRING_NODE__TEXT:
+				return TEXT_EDEFAULT == null ? text != null : !TEXT_EDEFAULT.equals(text);
 		}
 		return super.eIsSet(featureID);
 	}

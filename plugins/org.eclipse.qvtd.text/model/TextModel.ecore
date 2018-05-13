@@ -3,7 +3,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="text" nsURI="http://www.eclipse.org/qvt/2018/TextModel" nsPrefix="text">
   <eClassifiers xsi:type="ecore:EClass" name="StringNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A tree of StringNodes provides a hierarchical text structure with an optional cumulative indent, prefix, separator and suffix for child nodes."/>
+      <details key="documentation" value="A tree of StringNodes provides a hierarchical text structure with an optional cumulative indent, prefix, separator and suffix for child nodes between text and endText contributions."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//StringNode" containment="true" eOpposite="#//StringNode/parent">
@@ -11,11 +11,24 @@
         <details key="documentation" value="The child nodes to be preceded by an optional prefix, separated by an optional separatpr and followed by an optional suffix, with all lines preceded by the cumulative indent."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endText" ordered="false"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Optional closing text of this StringTree that follows all children (and suffix)."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="indent" ordered="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Optional additional indent for each child StringTree, in addition to the cumulative indent of all parent StringTrees."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nonBreakingSpace" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EChar">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Optional character whose occurrence within text and endText is to be interpreted as a non-breaking-space. (All characters within indent, prefix, separator and suffix are non-breaking.) "/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//StringNode"

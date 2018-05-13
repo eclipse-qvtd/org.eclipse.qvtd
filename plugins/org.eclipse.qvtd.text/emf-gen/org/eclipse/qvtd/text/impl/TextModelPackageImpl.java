@@ -123,7 +123,7 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStringNode_Indent() {
+	public EAttribute getStringNode_EndText() {
 		return (EAttribute)stringNodeEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -132,8 +132,8 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getStringNode_Parent() {
-		return (EReference)stringNodeEClass.getEStructuralFeatures().get(2);
+	public EAttribute getStringNode_Indent() {
+		return (EAttribute)stringNodeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -141,7 +141,7 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStringNode_Prefix() {
+	public EAttribute getStringNode_NonBreakingSpace() {
 		return (EAttribute)stringNodeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -150,8 +150,8 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStringNode_Separator() {
-		return (EAttribute)stringNodeEClass.getEStructuralFeatures().get(4);
+	public EReference getStringNode_Parent() {
+		return (EReference)stringNodeEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -159,7 +159,7 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStringNode_Suffix() {
+	public EAttribute getStringNode_Prefix() {
 		return (EAttribute)stringNodeEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -168,8 +168,26 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getStringNode_Text() {
+	public EAttribute getStringNode_Separator() {
 		return (EAttribute)stringNodeEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStringNode_Suffix() {
+		return (EAttribute)stringNodeEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStringNode_Text() {
+		return (EAttribute)stringNodeEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -202,7 +220,9 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 		// Create classes and their features
 		stringNodeEClass = createEClass(STRING_NODE);
 		createEReference(stringNodeEClass, STRING_NODE__CHILDREN);
+		createEAttribute(stringNodeEClass, STRING_NODE__END_TEXT);
 		createEAttribute(stringNodeEClass, STRING_NODE__INDENT);
+		createEAttribute(stringNodeEClass, STRING_NODE__NON_BREAKING_SPACE);
 		createEReference(stringNodeEClass, STRING_NODE__PARENT);
 		createEAttribute(stringNodeEClass, STRING_NODE__PREFIX);
 		createEAttribute(stringNodeEClass, STRING_NODE__SEPARATOR);
@@ -242,7 +262,9 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 		// Initialize classes, features, and operations; add parameters
 		initEClass(stringNodeEClass, StringNode.class, "StringNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getStringNode_Children(), this.getStringNode(), this.getStringNode_Parent(), "children", null, 0, -1, StringNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStringNode_EndText(), ecorePackage.getEString(), "endText", "", 1, 1, StringNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getStringNode_Indent(), ecorePackage.getEString(), "indent", "", 1, 1, StringNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getStringNode_NonBreakingSpace(), ecorePackage.getEChar(), "nonBreakingSpace", null, 0, 1, StringNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getStringNode_Parent(), this.getStringNode(), this.getStringNode_Children(), "parent", null, 0, 1, StringNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStringNode_Prefix(), ecorePackage.getEString(), "prefix", "", 1, 1, StringNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getStringNode_Separator(), ecorePackage.getEString(), "separator", "", 1, 1, StringNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

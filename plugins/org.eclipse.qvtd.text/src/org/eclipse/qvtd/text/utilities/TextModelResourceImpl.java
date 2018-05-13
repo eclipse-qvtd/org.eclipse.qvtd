@@ -54,7 +54,7 @@ public class TextModelResourceImpl extends ResourceImpl
 	}
 
 	public static class TextModelSave
-	{
+	{	// FIXME Bug 534614 line-wrap to respect LINE_WIDTH save option
 		protected final @NonNull StringBuilder s = new StringBuilder();
 		protected final @NonNull Stack<@NonNull String> indentStack = new Stack<>();
 		private boolean indentPending = true;			// AT beginning of first line, a first indent is pending
@@ -117,6 +117,7 @@ public class TextModelResourceImpl extends ResourceImpl
 				}
 				append(node.getSuffix());
 			}
+			append(node.getEndText());
 			indentStack.pop();
 		}
 	}

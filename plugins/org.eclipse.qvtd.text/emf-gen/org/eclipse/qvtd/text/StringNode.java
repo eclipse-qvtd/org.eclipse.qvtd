@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.EObject;
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
- * A tree of StringNodes provides a hierarchical text structure with an optional cumulative indent, prefix, separator and suffix for child nodes.
+ * A tree of StringNodes provides a hierarchical text structure with an optional cumulative indent, prefix, separator and suffix for child nodes between text and endText contributions.
  * <!-- end-model-doc -->
  *
  * <p>
@@ -32,7 +32,9 @@ import org.eclipse.emf.ecore.EObject;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.text.StringNode#getChildren <em>Children</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.text.StringNode#getEndText <em>End Text</em>}</li>
  *   <li>{@link org.eclipse.qvtd.text.StringNode#getIndent <em>Indent</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.text.StringNode#getNonBreakingSpace <em>Non Breaking Space</em>}</li>
  *   <li>{@link org.eclipse.qvtd.text.StringNode#getParent <em>Parent</em>}</li>
  *   <li>{@link org.eclipse.qvtd.text.StringNode#getPrefix <em>Prefix</em>}</li>
  *   <li>{@link org.eclipse.qvtd.text.StringNode#getSeparator <em>Separator</em>}</li>
@@ -63,6 +65,32 @@ public interface StringNode extends EObject {
 	EList<StringNode> getChildren();
 
 	/**
+	 * Returns the value of the '<em><b>End Text</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Optional closing text of this StringTree that follows all children (and suffix).
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>End Text</em>' attribute.
+	 * @see #setEndText(String)
+	 * @see org.eclipse.qvtd.text.TextModelPackage#getStringNode_EndText()
+	 * @model default="" required="true" ordered="false"
+	 * @generated
+	 */
+	String getEndText();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.text.StringNode#getEndText <em>End Text</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>End Text</em>' attribute.
+	 * @see #getEndText()
+	 * @generated
+	 */
+	void setEndText(String value);
+
+	/**
 	 * Returns the value of the '<em><b>Indent</b></em>' attribute.
 	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
@@ -87,6 +115,31 @@ public interface StringNode extends EObject {
 	 * @generated
 	 */
 	void setIndent(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Non Breaking Space</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Optional character whose occurrence within text and endText is to be interpreted as a non-breaking-space. (All characters within indent, prefix, separator and suffix are non-breaking.) 
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Non Breaking Space</em>' attribute.
+	 * @see #setNonBreakingSpace(char)
+	 * @see org.eclipse.qvtd.text.TextModelPackage#getStringNode_NonBreakingSpace()
+	 * @model ordered="false"
+	 * @generated
+	 */
+	char getNonBreakingSpace();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.text.StringNode#getNonBreakingSpace <em>Non Breaking Space</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Non Breaking Space</em>' attribute.
+	 * @see #getNonBreakingSpace()
+	 * @generated
+	 */
+	void setNonBreakingSpace(char value);
 
 	/**
 	 * Returns the value of the '<em><b>Parent</b></em>' container reference.

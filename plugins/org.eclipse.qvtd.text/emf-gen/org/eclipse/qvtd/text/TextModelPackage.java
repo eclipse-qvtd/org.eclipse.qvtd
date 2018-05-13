@@ -88,13 +88,31 @@ public interface TextModelPackage extends EPackage {
 	int STRING_NODE__CHILDREN = 0;
 
 	/**
+	 * The feature id for the '<em><b>End Text</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_NODE__END_TEXT = 1;
+
+	/**
 	 * The feature id for the '<em><b>Indent</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_NODE__INDENT = 1;
+	int STRING_NODE__INDENT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Non Breaking Space</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_NODE__NON_BREAKING_SPACE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' container reference.
@@ -103,7 +121,7 @@ public interface TextModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_NODE__PARENT = 2;
+	int STRING_NODE__PARENT = 4;
 
 	/**
 	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
@@ -112,7 +130,7 @@ public interface TextModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_NODE__PREFIX = 3;
+	int STRING_NODE__PREFIX = 5;
 
 	/**
 	 * The feature id for the '<em><b>Separator</b></em>' attribute.
@@ -121,7 +139,7 @@ public interface TextModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_NODE__SEPARATOR = 4;
+	int STRING_NODE__SEPARATOR = 6;
 
 	/**
 	 * The feature id for the '<em><b>Suffix</b></em>' attribute.
@@ -130,7 +148,7 @@ public interface TextModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_NODE__SUFFIX = 5;
+	int STRING_NODE__SUFFIX = 7;
 
 	/**
 	 * The feature id for the '<em><b>Text</b></em>' attribute.
@@ -139,7 +157,7 @@ public interface TextModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_NODE__TEXT = 6;
+	int STRING_NODE__TEXT = 8;
 
 	/**
 	 * The number of structural features of the '<em>String Node</em>' class.
@@ -148,7 +166,7 @@ public interface TextModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STRING_NODE_FEATURE_COUNT = 7;
+	int STRING_NODE_FEATURE_COUNT = 9;
 
 	/**
 	 * The number of operations of the '<em>String Node</em>' class.
@@ -182,6 +200,17 @@ public interface TextModelPackage extends EPackage {
 	EReference getStringNode_Children();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.text.StringNode#getEndText <em>End Text</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>End Text</em>'.
+	 * @see org.eclipse.qvtd.text.StringNode#getEndText()
+	 * @see #getStringNode()
+	 * @generated
+	 */
+	EAttribute getStringNode_EndText();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.text.StringNode#getIndent <em>Indent</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -191,6 +220,17 @@ public interface TextModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getStringNode_Indent();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.text.StringNode#getNonBreakingSpace <em>Non Breaking Space</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Non Breaking Space</em>'.
+	 * @see org.eclipse.qvtd.text.StringNode#getNonBreakingSpace()
+	 * @see #getStringNode()
+	 * @generated
+	 */
+	EAttribute getStringNode_NonBreakingSpace();
 
 	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.text.StringNode#getParent <em>Parent</em>}'.
@@ -289,12 +329,28 @@ public interface TextModelPackage extends EPackage {
 		EReference STRING_NODE__CHILDREN = eINSTANCE.getStringNode_Children();
 
 		/**
+		 * The meta object literal for the '<em><b>End Text</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STRING_NODE__END_TEXT = eINSTANCE.getStringNode_EndText();
+
+		/**
 		 * The meta object literal for the '<em><b>Indent</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute STRING_NODE__INDENT = eINSTANCE.getStringNode_Indent();
+
+		/**
+		 * The meta object literal for the '<em><b>Non Breaking Space</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STRING_NODE__NON_BREAKING_SPACE = eINSTANCE.getStringNode_NonBreakingSpace();
 
 		/**
 		 * The meta object literal for the '<em><b>Parent</b></em>' container reference feature.

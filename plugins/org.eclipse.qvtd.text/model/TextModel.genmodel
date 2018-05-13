@@ -10,7 +10,9 @@
       generateExampleClass="false" ecorePackage="TextModel.ecore#/">
     <genClasses image="false" ecoreClass="TextModel.ecore#//StringNode">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TextModel.ecore#//StringNode/children"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TextModel.ecore#//StringNode/endText"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TextModel.ecore#//StringNode/indent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TextModel.ecore#//StringNode/nonBreakingSpace"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference TextModel.ecore#//StringNode/parent"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TextModel.ecore#//StringNode/prefix"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TextModel.ecore#//StringNode/separator"/>
