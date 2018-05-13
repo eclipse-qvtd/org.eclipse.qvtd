@@ -26,4 +26,6 @@ Workflow {
   component = @GenerateQVTcoreEditor {}
   component = @GenerateQVTimperativeEditor {}
   component = @GenerateQVTrelationEditor {}
+  component = @GenerateTextModels {}
+  component = @GenerateXMLmodels {}
 }

@@ -18,7 +18,6 @@ import org.eclipse.qvtd.build.xtend.*
 import org.eclipse.ocl.examples.build.utilities.*
 import org.eclipse.ocl.examples.build.xtend.*
 import org.eclipse.emf.mwe.utils.*
-import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*
 
 /**
