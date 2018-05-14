@@ -3276,9 +3276,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 	///* A curly bracket clause is a generalized rule for template specialisations and operations arguments.*/
 	//RoundBracketedClauseCS:
-	//	{RoundBracketedClauseCS} '(' (ownedArguments+=NavigatingArgCS ownedArguments+=NavigatingCommaArgCS*
-	//	(ownedArguments+=NavigatingSemiArgCS ownedArguments+=NavigatingCommaArgCS*)? (ownedArguments+=NavigatingBarArgCS
-	//	ownedArguments+=NavigatingCommaArgCS*)*)? ')';
+	//	{RoundBracketedClauseCS} '(' (ownedArguments+=NavigatingArgCS ownedArguments+=(NavigatingCommaArgCS |
+	//	NavigatingSemiArgCS | NavigatingBarArgCS)*)? ')';
 	public EssentialOCLGrammarAccess.RoundBracketedClauseCSElements getRoundBracketedClauseCSAccess() {
 		return gaEssentialOCL.getRoundBracketedClauseCSAccess();
 	}
@@ -3342,7 +3341,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	///* A navigating semi argument is a generalized rule for a semicolon prefixed argument in a round bracket clause. This is typically an iterate accumulator. */
 	//NavigatingSemiArgCS NavigatingArgCS:
-	//	prefix=';' ownedNameExpression=NavigatingArgExpCS (':' ownedType=TypeExpCS ('=' ownedInitExpression=ExpCS)?)?;
+	//	prefix=';' ownedNameExpression=NavigatingArgExpCS (':' ownedType=TypeExpCS)? ('=' ownedInitExpression=ExpCS)?;
 	public EssentialOCLGrammarAccess.NavigatingSemiArgCSElements getNavigatingSemiArgCSAccess() {
 		return gaEssentialOCL.getNavigatingSemiArgCSAccess();
 	}
