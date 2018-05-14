@@ -114,7 +114,7 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 						assignment = refreshVariableAssignment((VariableExp)target, csConstraint);
 					}
 					else if (target != null) {
-						context.addDiagnostic(csElement, "unrecognised Constraint target " + target.eClass().getName());
+						context.addError(csElement, "unrecognised Constraint target " + target.eClass().getName());
 					}
 					if (assignment != null) {
 						OCLExpression initializer = context.visitLeft2Right(OCLExpression.class, csInitializer);
@@ -125,7 +125,7 @@ public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 				}
 				else {
 					if (isDefault) {
-						context.addDiagnostic(csElement, "misplaced default ignored");
+						context.addError(csElement, "misplaced default ignored");
 					}
 					Predicate predicate = PivotUtil.getPivot(Predicate.class, csConstraint);
 					if (predicate != null) {

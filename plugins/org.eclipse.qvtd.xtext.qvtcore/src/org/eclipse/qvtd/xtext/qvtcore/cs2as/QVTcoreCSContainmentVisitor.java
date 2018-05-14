@@ -252,12 +252,12 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
 		if (csElement.eContainer() instanceof TopLevelCS) {
 			if (csElement.getName() == null) {
-				context.addDiagnostic(csElement, "top level mapping must be named");
+				context.addError(csElement, "top level mapping must be named");
 			}
 		}
 		else {
 			if (csElement.getName() != null) {
-				context.addDiagnostic(csElement, "composed mapping must be unnamed");
+				context.addError(csElement, "composed mapping must be unnamed");
 			}
 		}
 		@NonNull Mapping pivotElement = refreshNamedElement(Mapping.class, QVTcorePackage.Literals.MAPPING, csElement);

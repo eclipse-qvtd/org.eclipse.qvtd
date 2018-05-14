@@ -215,15 +215,15 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 		int csArgumentCount = csArguments.size();
 		if (csArgumentCount > 0) {
 			if (csArguments.get(0).getRole() != NavigationRole.EXPRESSION) {
-				context.addDiagnostic(csNameExp, "Relation calls can only specify expressions");
+				context.addError(csNameExp, "Relation calls can only specify expressions");
 			}
 			for (int argIndex = 0; argIndex < csArgumentCount; argIndex++) {
 				NavigatingArgCS csArgument = csArguments.get(argIndex);
 				if (csArgument.getOwnedInitExpression() != null) {
-					context.addDiagnostic(csArgument, "Unexpected initializer for expression");
+					context.addError(csArgument, "Unexpected initializer for expression");
 				}
 				if (csArgument.getOwnedType() != null) {
-					context.addDiagnostic(csArgument, "Unexpected type for expression");
+					context.addError(csArgument, "Unexpected type for expression");
 				}
 				OCLExpression arg = context.visitLeft2Right(OCLExpression.class, csArgument);
 				if (arg != null) {
@@ -233,7 +233,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 		}
 		if ((csArgumentCount != patternsCount) && (relation != standardLibrary.getOclInvalidOperation())) {
 			String boundMessage = StringUtil.bind(PivotMessagesInternal.MismatchedArgumentCount_ERROR_, csArgumentCount, patternsCount);
-			context.addDiagnostic(csNameExp, boundMessage);
+			context.addError(csNameExp, boundMessage);
 		}
 		helper.refreshList(relationCallExp.getArgument(), pivotArguments);
 	}
