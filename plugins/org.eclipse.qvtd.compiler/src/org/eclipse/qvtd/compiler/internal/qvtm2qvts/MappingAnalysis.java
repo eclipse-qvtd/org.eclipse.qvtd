@@ -25,6 +25,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.NullLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
@@ -162,6 +163,11 @@ public class MappingAnalysis extends RuleAnalysis
 		}
 
 		@Override
+		protected @NonNull ExpressionSynthesizer createRequiredExpressionSynthesizer() {
+			return new RequiredExpressionSynthesizer(context);
+		}
+
+		@Override
 		public @NonNull Node visitNavigationAssignment(@NonNull NavigationAssignment asNavigationAssignment) {
 			Node slotNode = synthesize(asNavigationAssignment.getSlotExpression());
 			assert slotNode.isClass();
@@ -216,6 +222,25 @@ public class MappingAnalysis extends RuleAnalysis
 		@Override
 		protected boolean isUnconditional() {
 			return false;
+		}
+	}
+
+	public static class RequiredExpressionSynthesizer extends QVTcoreExpressionSynthesizer
+	{
+		protected RequiredExpressionSynthesizer(@NonNull RuleAnalysis context) {
+			super(context);
+		}
+
+		@Override
+		protected @NonNull Node createOperationCallNode(@NonNull CallExp callExp, @NonNull Operation operation,@NonNull Node @NonNull [] sourceAndArgumentNodes) {
+			Node operationCallNode = super.createOperationCallNode(callExp, operation, sourceAndArgumentNodes);
+			operationCallNode.setRequired();
+			return operationCallNode;
+		}
+
+		@Override
+		protected boolean isRequired() {
+			return true;
 		}
 	}
 

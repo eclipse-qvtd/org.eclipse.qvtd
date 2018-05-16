@@ -71,6 +71,10 @@ public class CheckedConditionAnalysis
 		}
 
 		public void analyze() {
+			String name = region.getName();
+			if ("mapVariableExp_referredVariable_Helper_qvtr".equals(name)) {
+				getClass();
+			}
 			for (@NonNull Edge edge : oldUnconditionalEdges) {
 				//				assert edge.isOld() && edge.isUnconditional();
 				edge.accept(this);

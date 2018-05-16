@@ -905,7 +905,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					}
 				}
 				else {
-					return node.getOriginatingElement().accept(this);
+					Element originatingElement = node.getOriginatingElement();
+					return originatingElement.accept(this);
 				}
 				throw new UnsupportedOperationException();
 			}
@@ -1733,6 +1734,10 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 */
 	@Override
 	public void synthesizeLocalStatements() {
+		String name = region.getName();
+		if ("mapVariableExp_referredVariable_Helper_qvtr".equals(name)) {
+			getClass();
+		}
 		createHeadAndGuardNodeVariables();			// BLUE/CYAN guard/append nodes
 		createPatternMatch();						// BLUE/CYAN nodes and edges
 		createRealizedVariables();					// GREEN nodes

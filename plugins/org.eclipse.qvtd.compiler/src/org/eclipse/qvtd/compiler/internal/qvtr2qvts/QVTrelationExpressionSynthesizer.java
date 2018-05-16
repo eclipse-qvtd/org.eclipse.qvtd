@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.EnumerationLiteral;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
@@ -46,6 +47,25 @@ public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpress
 		}
 	}
 
+	public static class RequiredExpressionSynthesizer extends QVTrelationExpressionSynthesizer
+	{
+		protected RequiredExpressionSynthesizer(@NonNull RelationAnalysis context) {
+			super(context);
+		}
+
+		@Override
+		protected @NonNull Node createOperationCallNode(@NonNull CallExp callExp, @NonNull Operation operation,@NonNull Node @NonNull [] sourceAndArgumentNodes) {
+			Node operationCallNode = super.createOperationCallNode(callExp, operation, sourceAndArgumentNodes);
+			operationCallNode.setRequired();
+			return operationCallNode;
+		}
+
+		@Override
+		protected boolean isRequired() {
+			return true;
+		}
+	}
+
 	protected QVTrelationExpressionSynthesizer(@NonNull RelationAnalysis context) {
 		super(context);
 	}
@@ -53,6 +73,11 @@ public class QVTrelationExpressionSynthesizer extends AbstractQVTrelationExpress
 	@Override
 	protected @NonNull ExpressionSynthesizer createConditionalExpressionSynthesizer() {
 		return new ConditionalExpressionSynthesizer(getRelationAnalysis());
+	}
+
+	@Override
+	protected @NonNull ExpressionSynthesizer createRequiredExpressionSynthesizer() {
+		return new RequiredExpressionSynthesizer(getRelationAnalysis());
 	}
 
 	public @NonNull RelationAnalysis getRelationAnalysis() {

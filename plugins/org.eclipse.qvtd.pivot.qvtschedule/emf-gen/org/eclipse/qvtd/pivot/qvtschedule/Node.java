@@ -529,5 +529,10 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 */
 	void setOriginatingVariable(@NonNull VariableDeclaration variable);
 
+	/**
+	 * Register variable as non-null.
+	 */
+	void setRequired();
+
 	void setUtility(@NonNull Utility utility);
 } // Node

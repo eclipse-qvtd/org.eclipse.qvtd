@@ -34,6 +34,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.UtilityAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleHeadAnalysis;
@@ -862,8 +863,20 @@ public class RelationAnalysis extends RuleAnalysis
 				return null;
 			}
 		}
-		Node bestInitNode = bestInitExpression.accept(expressionSynthesizer);
+		String name = variable.getName();
+		if ("atlHelper".equals(name)) {
+			getClass();
+		}
+		ExpressionSynthesizer expressionSynthesizer2 = expressionSynthesizer;
+		if (variable.isIsRequired()) {
+			expressionSynthesizer2 = expressionSynthesizer.getRequiredExpressionSynthesizer();
+		}
+		Node bestInitNode = bestInitExpression.accept(expressionSynthesizer2);
 		assert bestInitNode != null;
+		if (variable.isIsRequired()) {
+			assert bestInitNode.isRequired();
+			assert bestInitNode.isMatched();
+		}
 		/*		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {
 			if (QVTbaseUtil.isIdentification(((OperationCallExp)ownedInit).getReferredOperation())) {
 				Node stepNode = QVTscheduleUtil.createRealizedStepNode(mappingRegion, variable);
@@ -888,7 +901,7 @@ public class RelationAnalysis extends RuleAnalysis
 		if (!initCompleteClass.conformsTo(variableCompleteClass)) {
 			Node castNode = createOldNode(variable);
 			Property castProperty = scheduleManager.getCastProperty(PivotUtil.getType(variable));
-			expressionSynthesizer.createCastEdge(bestInitNode, castProperty, castNode);
+			expressionSynthesizer2.createCastEdge(bestInitNode, castProperty, castNode);
 			bestInitNode = castNode;
 		}
 		bestInitNode.setOriginatingVariable(variable);

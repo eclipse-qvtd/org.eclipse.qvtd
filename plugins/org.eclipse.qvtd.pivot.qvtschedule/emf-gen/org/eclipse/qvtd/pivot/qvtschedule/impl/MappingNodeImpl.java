@@ -254,6 +254,11 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 	}
 
 	@Override
+	public void setRequired() {
+		isRequired = true;
+	}
+
+	@Override
 	public @NonNull String toString() {
 		return super.toString();
 	}

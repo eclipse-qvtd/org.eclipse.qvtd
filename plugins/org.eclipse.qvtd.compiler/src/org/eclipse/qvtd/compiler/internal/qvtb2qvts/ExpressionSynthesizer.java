@@ -104,6 +104,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 	protected final @NonNull StandardLibraryHelper standardLibraryHelper;
 	protected final @NonNull QVTbaseLibraryHelper qvtbaseLibraryHelper;
 	private /*@LazyNonNull*/ ExpressionSynthesizer conditionalExpressionSynthesizer = null;
+	private /*@LazyNonNull*/ ExpressionSynthesizer requiredExpressionSynthesizer = null;
 	//	private /*@LazyNonNull*/ OperationDependencyAnalysis operationDependencyAnalysis;
 
 	/**
@@ -343,6 +344,8 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		return context.createRealizedNavigationEdge(sourceNode, source2targetProperty, targetNode, isPartial);
 	}
 
+	protected abstract @NonNull ExpressionSynthesizer createRequiredExpressionSynthesizer();
+
 	protected @NonNull Node createShadow(@NonNull ShadowExp shadowExp, @NonNull ShadowPart [] shadowParts, @NonNull Node @NonNull [] partNodes) {
 		assert shadowParts.length == partNodes.length;
 		Operation shadowOperation = qvtbaseLibraryHelper.getShadowOperation();
@@ -566,6 +569,14 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		return createNavigationOrRealizedEdge(sourceNode, source2targetProperty, targetNode, navigationAssignment);
 	}
 
+	public @NonNull ExpressionSynthesizer getRequiredExpressionSynthesizer() {
+		ExpressionSynthesizer requiredExpressionSynthesizer2 = requiredExpressionSynthesizer;
+		if (requiredExpressionSynthesizer2 == null) {
+			requiredExpressionSynthesizer = requiredExpressionSynthesizer2 = createRequiredExpressionSynthesizer();
+		}
+		return requiredExpressionSynthesizer2;
+	}
+
 	private void instantiate(@NonNull Node instantiatedNode, @NonNull Node referenceNode) {
 		for (@NonNull NavigableEdge referenceEdge : referenceNode.getNavigableEdges()) {
 			if (!referenceEdge.isSecondary()) {
@@ -577,6 +588,10 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 				instantiate(instantiatedTargetNode, referenceTargetNode);
 			}
 		}
+	}
+
+	protected boolean isRequired() {
+		return false;
 	}
 
 	protected boolean isUnconditional() {
@@ -1056,11 +1071,9 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 
 	@Override
 	public @Nullable Node visitOperationCallExp(@NonNull OperationCallExp operationCallExp) {
-		if (isUnconditional()) {
-			boolean isMatched = QVTscheduleUtil.isMatched(operationCallExp);
-			if (!isMatched) {
-				return getConditionalExpressionSynthesizer().visitOperationCallExp(operationCallExp);
-			}
+		boolean isMatched = isRequired() || QVTscheduleUtil.isMatched(operationCallExp);
+		if (isUnconditional() && !isMatched) {
+			return getConditionalExpressionSynthesizer().visitOperationCallExp(operationCallExp);
 		}
 		assert !operationCallExp.isIsSafe();
 		Operation referredOperation = QVTbaseUtil.getReferredOperation(operationCallExp);
@@ -1080,9 +1093,11 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 			for (int i = 0; i < iSize; i++) {
 				argNodes[i] = synthesize(ownedArguments.get(i));
 			}
-			boolean isMatched = QVTscheduleUtil.isMatched(operationCallExp);
 			ExpressionSynthesizer nestedAnalyzer = isMatched ? this : getConditionalExpressionSynthesizer();
 			Node operationNode = nestedAnalyzer.createOperationCallNode(operationCallExp, referredOperation, argNodes);
+			if (isRequired()) {
+				operationNode.setRequired();
+			}
 			for (int i = 0; i < iSize; i++) {
 				Parameter parameter = QVTbaseUtil.getOwnedParameter(referredOperation, i);
 				nestedAnalyzer.createOperationParameterEdge(argNodes[i], parameter, -1, operationNode);

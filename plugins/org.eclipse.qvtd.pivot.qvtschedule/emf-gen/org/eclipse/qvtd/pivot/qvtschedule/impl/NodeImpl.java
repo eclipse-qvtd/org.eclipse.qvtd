@@ -1196,6 +1196,11 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
+	public void setRequired() {
+		throw new UnsupportedOperationException();		// Should be MappingNode
+	}
+
+	@Override
 	public void setUtility(@NonNull Utility utility) {
 		assert (this.utility == null) || (this.utility == utility);
 		this.utility = utility;
