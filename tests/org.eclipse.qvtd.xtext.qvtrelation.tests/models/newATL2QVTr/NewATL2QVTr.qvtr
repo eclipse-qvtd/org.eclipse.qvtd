@@ -21,7 +21,7 @@ import qvttMM : 'platform:/resource/org.eclipse.qvtd.pivot.qvttemplate/model/QVT
 import qvtrMM : 'platform:/resource/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore'::qvtrelation;
 import qvttraceMM : 'platform:/resource/org.eclipse.qvtd.runtime/model/QVTtrace.ecore'::qvttrace;
 
-package org::eclipse::qvtd::xtext::qvtrelation::tests::atl2qvtr {
+package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 /**
  * Transform an ATL transformation to a QVTr transformation
  */
@@ -31,9 +31,13 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::atl2qvtr {
 
 --		query getContextVariable(_transformation : qvtrMM::RelationalTransformation) : pivotMM::VariableDeclaration[1] implementedby 'org.eclipse.qvtd.atl.atl2qvtr.Helper4getContextVariable';
 
-		query getHelper(element : atlMM::LocatedElement[1]) : atlMM::Helper[1] {
-			element->closure(e : ocl::OclElement | e.oclContainer())->selectByKind(atlMM::Helper)->any(true)
+		query getHelper(element : atlMM::LocatedElement[1]) : atlMM::Helper[?] {
+			let helpers = element->closure(e : ocl::OclElement | e.oclContainer())->selectByKind(atlMM::Helper)
+			in if helpers->notEmpty() then helpers->any(true) else null endif
 		}
+--		query getHelper(element : atlMM::LocatedElement[1]) : atlMM::Helper[1] {
+--			element->closure(e : ocl::OclElement | e.oclContainer())->selectByKind(atlMM::Helper)->any(true)
+--		}
 
 		query getModule(element : atlMM::LocatedElement) : atlMM::Module[1] implementedby 'org.eclipse.qvtd.atl.atl2qvtr.utilities.Helper4getModule';
 

@@ -47,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
+import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
@@ -127,7 +128,8 @@ public class QVTrCompilerTests extends LoadTestCase
 	protected static class PivotQVTrelationToStringFactory implements QVTtemplateToStringVisitor.Factory
 	{
 		protected PivotQVTrelationToStringFactory() {
-			ToStringVisitor.addFactory(this);
+			ToStringVisitor.addFactory(PivotPackage.eINSTANCE, this);
+			ToStringVisitor.addFactory(QVTtemplatePackage.eINSTANCE, this);
 			QVTrelationToStringVisitor.FACTORY.getClass();
 		}
 

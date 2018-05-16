@@ -1,0 +1,19 @@
+-- @atlcompiler emftvm
+-- @path Families=/org.eclipse.qvtd.xtext.qvtrelation.tests/models/families2persons/Families.ecore
+-- @path Persons=/org.eclipse.qvtd.xtext.qvtrelation.tests/models/families2persons/Persons.ecore
+
+module Families2Persons;
+create OUT : Persons from IN : Families;
+
+helper context Families!Member def: isFemale() : Boolean =
+	self.familyMother.oclIsUndefined();
+
+rule Member2Female {
+	from
+		s : Families!Member --(s.isFemale())
+	to
+		t : Persons!Female (
+--			fullName <- s.firstName + ' ' + s.familyName	
+		)
+}
+

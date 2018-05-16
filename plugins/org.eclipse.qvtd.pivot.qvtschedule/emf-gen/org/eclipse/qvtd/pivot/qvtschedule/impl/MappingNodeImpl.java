@@ -247,7 +247,7 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 		}
 		else {												// Binding of a variable to its initializer
 			assert !originatingElements.contains(variable);
-			assert isRequired == variable.isIsRequired();
+			// need non-null run-time check			assert isRequired == variable.isIsRequired();
 			originatingVariable = variable;
 			originatingElements.add(variable);
 		}
