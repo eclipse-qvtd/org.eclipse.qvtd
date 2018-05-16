@@ -205,8 +205,15 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				Collections.sort(sortedCheckedConditions, new CheckedConditionWeightComparator(BasicRegion2Mapping.this));
 			}
 			for (@NonNull CheckedCondition checkedCondition : sortedCheckedConditions) {
-				for (@NonNull Edge edge : checkedCondition.getEdges()) {
-					addEdge(edge);
+				Iterable<@NonNull Edge> edges = checkedCondition.getEdges();
+				if (edges != null) {
+					for (@NonNull Edge edge : edges) {
+						addEdge(edge);
+					}
+				}
+				Node node = checkedCondition.getNode();
+				if (node != null) {
+					addNode(node);
 				}
 			}
 			//			}

@@ -22,12 +22,15 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.ComposedNode;
@@ -38,6 +41,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.InputNode;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -217,7 +221,7 @@ public class CheckedConditionAnalysis
 							firstEdge = edge;
 						}
 						else if (checkedCondition == null){
-							checkedCondition = new MultipleEdgeCheckedCondition(firstEdge, edge);
+							checkedCondition = new MultipleEdgeCheckedCondition(node, firstEdge, edge);
 							context.add(checkedCondition);
 						}
 						else {
@@ -234,15 +238,23 @@ public class CheckedConditionAnalysis
 		//			return super.visitNullNode(object);
 		//		}
 
-		//		@Override
-		//		public Object visitOperationNode(@NonNull OperationNode object) {
-		//			return super.visitOperationNode(object);
-		//		}
-
-		//		@Override
-		//		public Object visitOperationValueNode(@NonNull OperationValueNode object) {
-		//			return super.visitOperationValueNode(object);
-		//		}
+		@Override
+		public Object visitOperationNode(@NonNull OperationNode operationNode) {
+			Element originatingElement = operationNode.basicGetOriginatingElement();
+			if (originatingElement instanceof TypedElement) {		// TupleParts are not TypedElements
+				TypedElement typedElement = (TypedElement)originatingElement;
+				if (operationNode.isRequired() && !typedElement.isIsRequired()) {
+					context.add(new NonNullInitializerCheckedCondition(operationNode));
+				}
+				Type initializerType = QVTbaseUtil.getType(typedElement);
+				CompleteClass initializerCompleteClass = completeModel.getCompleteClass(initializerType);
+				CompleteClass targetCompleteClass = operationNode.getCompleteClass();
+				if (!initializerCompleteClass.conformsTo(targetCompleteClass)) {
+					context.add(new CastInitializerCheckedCondition(operationNode));
+				}
+			}
+			return super.visitOperationNode(operationNode);
+		}
 
 		//		@Override
 		//		public Object visitPatternTypedNode(@NonNull PatternTypedNode object) {
@@ -311,6 +323,10 @@ public class CheckedConditionAnalysis
 	 * Return all conditions that need checking for mapping success.
 	 */
 	public @NonNull Set<@NonNull CheckedCondition> computeCheckedConditions() {
+		String name = region.getName();
+		if ("mapVariableExp_referredVariable_Helper_qvtr".equals(name)) {
+			getClass();
+		}
 		Set<@NonNull CheckedCondition> checkedConditions = new HashSet<>();
 		Visitor visitor = new Visitor(checkedConditions);
 		visitor.analyze();

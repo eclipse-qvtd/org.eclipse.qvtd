@@ -20,9 +20,11 @@ import org.eclipse.jdt.annotation.NonNull;
 public interface CheckedConditionVisitor<R>
 {
 	R visitCastEdgeCheckedCondition(@NonNull CastEdgeCheckedCondition castEdgeCheckedCondition);
+	R visitCastInitializerCheckedCondition(@NonNull CastInitializerCheckedCondition castInitializerCheckedCondition);
 	R visitConstantTargetCheckedCondition(@NonNull ConstantTargetCheckedCondition constantTargetCheckedCondition);
 	R visitMultipleEdgeCheckedCondition(@NonNull MultipleEdgeCheckedCondition multipleEdgeCheckedCondition);
 	R visitNavigableEdgeCheckedCondition(@NonNull NavigableEdgeCheckedCondition navigableEdgeCheckedCondition);
+	R visitNonNullInitializerCheckedCondition(@NonNull NonNullInitializerCheckedCondition nonNullInitializerCheckedCondition);
 	R visitPredicateEdgeCheckedCondition(@NonNull PredicateEdgeCheckedCondition predicateEdgeCheckedCondition);
 	R visitPredicateNavigationEdgeCheckedCondition(@NonNull PredicateNavigationEdgeCheckedCondition predicateNavigationEdgeCheckedCondition);
 }

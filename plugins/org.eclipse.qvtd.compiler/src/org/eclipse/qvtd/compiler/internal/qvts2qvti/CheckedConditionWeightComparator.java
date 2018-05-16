@@ -18,11 +18,13 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CastEdgeCheckedCondition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CastInitializerCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedConditionVisitor;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.ConstantTargetCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.MultipleEdgeCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.NavigableEdgeCheckedCondition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.NonNullInitializerCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.PredicateEdgeCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.PredicateNavigationEdgeCheckedCondition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -43,9 +45,13 @@ public class CheckedConditionWeightComparator implements CheckedConditionVisitor
 		this.region2mapping = region2mapping;
 	}
 
+	protected void accumulateNode(@NonNull Set<@NonNull Node> requiredNodes, @NonNull Node node) {
+		requiredNodes.addAll(region2mapping.getPrecedingNodes(node));
+	}
+
 	protected void accumulateNodes(@NonNull Set<@NonNull Node> requiredNodes, @NonNull Edge edge) {
-		requiredNodes.addAll(region2mapping.getPrecedingNodes(QVTscheduleUtil.getSourceNode(edge)));
-		requiredNodes.addAll(region2mapping.getPrecedingNodes(QVTscheduleUtil.getTargetNode(edge)));
+		accumulateNode(requiredNodes, QVTscheduleUtil.getSourceNode(edge));
+		accumulateNode(requiredNodes, QVTscheduleUtil.getTargetNode(edge));
 	}
 
 	@Override
@@ -72,6 +78,13 @@ public class CheckedConditionWeightComparator implements CheckedConditionVisitor
 	}
 
 	@Override
+	public @NonNull Integer visitCastInitializerCheckedCondition(@NonNull CastInitializerCheckedCondition castInitializerCheckedCondition) {
+		Set<@NonNull Node> requiredNodes = new HashSet<>();
+		accumulateNode(requiredNodes, castInitializerCheckedCondition.getOperationNode());
+		return requiredNodes.size();
+	}
+
+	@Override
 	public @NonNull Integer visitConstantTargetCheckedCondition(@NonNull ConstantTargetCheckedCondition constantTargetCheckedCondition) {
 		Set<@NonNull Node> requiredNodes = new HashSet<>();
 		requiredNodes.addAll(region2mapping.getPrecedingNodes(QVTscheduleUtil.getSourceNode(constantTargetCheckedCondition.getPredicateEdge())));
@@ -91,6 +104,13 @@ public class CheckedConditionWeightComparator implements CheckedConditionVisitor
 	public @NonNull Integer visitNavigableEdgeCheckedCondition(@NonNull NavigableEdgeCheckedCondition navigableEdgeCheckedCondition) {
 		Set<@NonNull Node> requiredNodes = new HashSet<>();
 		accumulateNodes(requiredNodes, navigableEdgeCheckedCondition.getNavigableEdge());
+		return requiredNodes.size();
+	}
+
+	@Override
+	public @NonNull Integer visitNonNullInitializerCheckedCondition(@NonNull NonNullInitializerCheckedCondition nonNullInitializerCheckedCondition) {
+		Set<@NonNull Node> requiredNodes = new HashSet<>();
+		accumulateNode(requiredNodes, nonNullInitializerCheckedCondition.getOperationNode());
 		return requiredNodes.size();
 	}
 

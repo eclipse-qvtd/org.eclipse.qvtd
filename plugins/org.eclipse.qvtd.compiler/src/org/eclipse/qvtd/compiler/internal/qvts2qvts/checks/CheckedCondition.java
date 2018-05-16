@@ -11,7 +11,9 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.checks;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 
 /**
  * A CheckedCondition identifies a possible micromapping failure mechanism.
@@ -30,9 +32,18 @@ public abstract class CheckedCondition
 	public abstract <R> R accept(@NonNull CheckedConditionVisitor<R> visitor);
 
 	/**
-	 * Return a list of edges that contribute to the check.
+	 * Return a list of edges that contribute to the check, null for none.
 	 */
-	public abstract @NonNull Iterable<@NonNull Edge> getEdges();
+	public @Nullable Iterable<@NonNull Edge> getEdges() {
+		return null;
+	}
+
+	/**
+	 * Return the node that contributes to the check, null for none.
+	 */
+	public @Nullable Node getNode() {
+		return null;
+	}
 
 	@Override
 	public @NonNull String toString() {
@@ -40,11 +51,22 @@ public abstract class CheckedCondition
 		s.append(getClass().getSimpleName());
 		s.append("(");
 		boolean isFirst = true;
-		for (@NonNull Edge edge : getEdges()) {
+		Iterable<@NonNull Edge> edges = getEdges();
+		if (edges != null) {
+			for (@NonNull Edge edge : edges) {
+				if (!isFirst) {
+					s.append(",");
+				}
+				s.append(edge.getDisplayName());
+				isFirst = false;
+			}
+		}
+		Node node = getNode();
+		if (node != null) {
 			if (!isFirst) {
 				s.append(",");
 			}
-			s.append(edge.getDisplayName());
+			s.append(node.getDisplayName());
 			isFirst = false;
 		}
 		s.append(")");

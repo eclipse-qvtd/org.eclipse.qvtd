@@ -29,12 +29,14 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CastEdgeCheckedCondition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CastInitializerCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedConditionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedConditionVisitor;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.ConstantTargetCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.MultipleEdgeCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.NavigableEdgeCheckedCondition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.NonNullInitializerCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.PredicateEdgeCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.PredicateNavigationEdgeCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
@@ -80,6 +82,9 @@ public class FallibilityAnalysis
 		}
 
 		private void addFallibility(@NonNull CheckedCondition checkedCondition, @NonNull RegionAnalysis producingRegionAnalysis) {
+			if (LOCAL.isActive()) {
+				LOCAL.println(regionAnalysis + " may fail because " + checkedCondition + " produced by " + producingRegionAnalysis);
+			}
 			Object regionOrRegions = check2regionOrRegions.get(checkedCondition);
 			if (regionOrRegions == null) {
 				check2regionOrRegions.put(checkedCondition, producingRegionAnalysis);
@@ -115,7 +120,7 @@ public class FallibilityAnalysis
 				}
 			};
 			Set<@NonNull CheckedCondition> checkedConditions = analysis.computeCheckedConditions();
-			System.out.println(region + ": " + checkedConditions);
+			//			System.out.println(region + ": " + checkedConditions);
 			for (@NonNull CheckedCondition checkedCondition : checkedConditions) {
 				checkedCondition.accept(this);
 			}
@@ -127,32 +132,44 @@ public class FallibilityAnalysis
 			NavigableEdge castEdge = castEdgeCheckedCondition.getCastEdge();
 			Node sourceNode = QVTscheduleUtil.getSourceNode(castEdge);
 			if (!sourceNode.isDispatch()) {		// A dispatch pattern type error is a non-invocation not a failure
-				addFallibility(castEdgeCheckedCondition, failSometimes);
+				addFallibility(castEdgeCheckedCondition, getFailSometimes());
 			}
 			return null;
 		}
 
 		@Override
+		public Object visitCastInitializerCheckedCondition(@NonNull CastInitializerCheckedCondition castInitializerCheckedCondition) {
+			addFallibility(castInitializerCheckedCondition, getFailSometimes());
+			return null;
+		}
+
+		@Override
 		public Object visitConstantTargetCheckedCondition(@NonNull ConstantTargetCheckedCondition constantTargetCheckedCondition) {
-			addFallibility(constantTargetCheckedCondition, failSometimes);
+			addFallibility(constantTargetCheckedCondition, getFailSometimes());
 			return null;
 		}
 
 		@Override
 		public Object visitMultipleEdgeCheckedCondition(@NonNull MultipleEdgeCheckedCondition multipleEdgeCheckedCondition) {
-			addFallibility(multipleEdgeCheckedCondition, failSometimes);
+			addFallibility(multipleEdgeCheckedCondition, getFailSometimes());
 			return null;
 		}
 
 		@Override
 		public Object visitNavigableEdgeCheckedCondition(@NonNull NavigableEdgeCheckedCondition navigableEdgeCheckedCondition) {
-			addFallibility(navigableEdgeCheckedCondition, failSometimes);
+			addFallibility(navigableEdgeCheckedCondition, getFailSometimes());
+			return null;
+		}
+
+		@Override
+		public Object visitNonNullInitializerCheckedCondition(@NonNull NonNullInitializerCheckedCondition nonNullInitializerCheckedCondition) {
+			addFallibility(nonNullInitializerCheckedCondition, getFailSometimes());
 			return null;
 		}
 
 		@Override
 		public Object visitPredicateEdgeCheckedCondition(@NonNull PredicateEdgeCheckedCondition predicateEdgeCheckedCondition) {
-			addFallibility(predicateEdgeCheckedCondition, failSometimes);
+			addFallibility(predicateEdgeCheckedCondition, getFailSometimes());
 			return null;
 		}
 
@@ -184,7 +201,7 @@ public class FallibilityAnalysis
 				}
 			}
 			if (!allSuccessesResolved) {
-				addFallibility(predicateNavigationEdgeCheckedCondition, failSometimes);
+				addFallibility(predicateNavigationEdgeCheckedCondition, getFailSometimes());
 			}
 			return null;
 		}
@@ -193,18 +210,14 @@ public class FallibilityAnalysis
 	protected final @NonNull TransformationAnalysis transformationAnalysis;
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull ContentsAnalysis<@NonNull RuleRegion> originalContentsAnalysis;
-	//	protected final @NonNull RegionAnalysis failAlways;
-	protected final @NonNull RegionAnalysis failSometimes;
+	private @Nullable RegionAnalysis failSometimes = null;
+
 	private @NonNull Map<@NonNull RegionAnalysis, @NonNull Set<@NonNull RegionAnalysis>> consumer2producers = new HashMap<>();
 
 	public FallibilityAnalysis(@NonNull TransformationAnalysis transformationAnalysis) {
 		this.transformationAnalysis = transformationAnalysis;
 		this.scheduleManager = transformationAnalysis.getScheduleManager();
 		this.originalContentsAnalysis = scheduleManager.getOriginalContentsAnalysis();
-		//		this.failAlways = createPseudoRegionAnalysis("«failAlways»");
-		this.failSometimes = createPseudoRegionAnalysis("«failSometimes»");
-		//		consumer2producers.put(failAlways, Sets.newHashSet(failAlways));
-		consumer2producers.put(failSometimes, Sets.newHashSet(failSometimes));
 	}
 
 	public void accumulate(@NonNull RegionAnalysis consumingRegionAnalysis) {
@@ -215,10 +228,18 @@ public class FallibilityAnalysis
 		Visitor visitor = new Visitor(consumingRegionAnalysis);
 		Map<@NonNull CheckedCondition, @NonNull Object> check2regionOrRegions = visitor.analyze();
 		Set<@NonNull RegionAnalysis> producingRegionAnalyses = new HashSet<>();
-		Set<@NonNull Edge> edges = new HashSet<>();
+		Set<@NonNull Edge> checkedEdges = new HashSet<>();
+		Set<@NonNull Node> checkedNodes = new HashSet<>();
 		for (@NonNull CheckedCondition checkedCondition : check2regionOrRegions.keySet()) {
-			for (@NonNull Edge edge : checkedCondition.getEdges()) {
-				edges.add(edge);
+			Iterable<@NonNull Edge> conditionEdges = checkedCondition.getEdges();
+			if (conditionEdges != null) {
+				for (@NonNull Edge conditionEdge : conditionEdges) {
+					checkedEdges.add(conditionEdge);
+				}
+			}
+			Node conditionNode = checkedCondition.getNode();
+			if (conditionNode != null) {
+				checkedNodes.add(conditionNode);
 			}
 			Object regionOrRegions = check2regionOrRegions.get(checkedCondition);
 			assert regionOrRegions != null;
@@ -233,7 +254,8 @@ public class FallibilityAnalysis
 				}
 			}
 		}
-		consumingRegionAnalysis.setFallibleEdges(edges);
+		consumingRegionAnalysis.setFallibleEdges(checkedEdges);
+		// FIXME		consumingRegionAnalysis.setFallibleNodes(checkedNodes);
 		Set<@NonNull RegionAnalysis> old = consumer2producers.put(consumingRegionAnalysis, producingRegionAnalyses);
 		assert old == null;
 		/*			Set<@NonNull MappingPartitioner> requiredMappingPartitioners = new HashSet<>();
@@ -263,6 +285,15 @@ public class FallibilityAnalysis
 		};
 		dummyRegion.setName(name);;
 		return new RegionAnalysis(transformationAnalysis, dummyRegion);
+	}
+
+	public @NonNull RegionAnalysis getFailSometimes() {
+		RegionAnalysis failSometimes2 = failSometimes;
+		if (failSometimes2 == null) {
+			failSometimes = failSometimes2 = createPseudoRegionAnalysis("«failSometimes»");
+			consumer2producers.put(failSometimes2, Sets.newHashSet(failSometimes2));
+		}
+		return failSometimes2;
 	}
 
 	public void install() {

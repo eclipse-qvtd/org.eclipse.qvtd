@@ -15,15 +15,18 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 
 /**
- * A MultipleEdgeCheckedCondition identifies the failure when two alternate navigation paths yield inconsistent results.
+ * A MultipleEdgeCheckedCondition identifies the failure when two or more alternate navigation paths yield inconsistent results.
  */
 public class MultipleEdgeCheckedCondition extends CheckedCondition
 {
+	protected final @NonNull Node node;
 	protected final @NonNull List<@NonNull Edge> edges = new ArrayList<>();
 
-	public MultipleEdgeCheckedCondition(@NonNull Edge firstEdge, @NonNull Edge secondEdge) {
+	public MultipleEdgeCheckedCondition(@NonNull Node node,  @NonNull Edge firstEdge, @NonNull Edge secondEdge) {
+		this.node = node;
 		addEdge(firstEdge);
 		addEdge(secondEdge);
 	}
@@ -40,5 +43,10 @@ public class MultipleEdgeCheckedCondition extends CheckedCondition
 	@Override
 	public @NonNull Iterable<@NonNull Edge> getEdges() {
 		return edges;
+	}
+
+	@Override
+	public @NonNull Node getNode() {
+		return node;
 	}
 }
