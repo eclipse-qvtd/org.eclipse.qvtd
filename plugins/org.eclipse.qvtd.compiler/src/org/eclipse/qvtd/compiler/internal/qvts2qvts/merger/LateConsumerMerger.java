@@ -43,7 +43,7 @@ import com.google.common.collect.Lists;
  * Preconditions:
  *
  * Late consumer merge must occur at all possible merge sites, or none. That is, a merged region that consumes
- * some node and surrounding predicates at ts head must merge with all other regions that consume that
+ * some node and surrounding predicates at its head must merge with all other regions that consume that
  * head node with non-conflicting predicates.
  *
  * Every predicated edge/node of a late merged region must be shared with or satisfied by the other region.
@@ -390,7 +390,7 @@ public class LateConsumerMerger extends AbstractMerger
 					if (secondary2primary != null) {
 						boolean doMerge = false;
 						if (!isSharedHead(primaryRegion, secondaryRegion)) {
-							doMerge = true;
+							doMerge = false;
 						}
 						else {
 							if (LATE.isActive()) {

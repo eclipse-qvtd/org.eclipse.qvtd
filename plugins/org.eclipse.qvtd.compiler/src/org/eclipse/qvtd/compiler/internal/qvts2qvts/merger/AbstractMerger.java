@@ -32,8 +32,10 @@ public class AbstractMerger
 	 */
 	protected boolean isSharedHead(@NonNull Region primaryRegion, @NonNull Region secondaryRegion) {
 		for (@NonNull Node primaryHead : QVTscheduleUtil.getHeadNodes(primaryRegion)) {
+			assert !primaryHead.isDependency();
 			ClassDatum primaryClassDatum = QVTscheduleUtil.getClassDatum(primaryHead);
 			for (@NonNull Node secondaryHead : QVTscheduleUtil.getHeadNodes(secondaryRegion)) {
+				assert !secondaryHead.isDependency();
 				if (primaryClassDatum == QVTscheduleUtil.getClassDatum(secondaryHead)) {
 					return true;
 				}
