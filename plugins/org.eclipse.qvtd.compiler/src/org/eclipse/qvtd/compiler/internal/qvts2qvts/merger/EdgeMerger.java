@@ -32,65 +32,79 @@ class EdgeMerger
 	protected final @NonNull RegionMerger regionMerger;
 	protected final @NonNull NodeMerger mergedSourceNodeMerger;
 	protected final @NonNull NodeMerger mergedTargetNodeMerger;
-	protected final @NonNull List<@NonNull Edge> oldEdges = new ArrayList<>();
+	protected final @NonNull List<@NonNull Edge> originalEdges = new ArrayList<>();
 	private @NonNull Role edgeRole;
-	private @Nullable Edge newEdge = null;
+	private @Nullable Edge mergedEdge = null;
 
-	public EdgeMerger(@NonNull RegionMerger regionMerger, @NonNull Edge oldEdge) {
-		assert !oldEdge.isSecondary();
+	public EdgeMerger(@NonNull RegionMerger regionMerger, @NonNull Edge originalEdge) {
+		assert !originalEdge.isSecondary();
 		this.regionMerger = regionMerger;
-		mergedSourceNodeMerger = regionMerger.getNodeMerger(oldEdge.getEdgeSource());
-		mergedTargetNodeMerger = regionMerger.getNodeMerger(oldEdge.getEdgeTarget());
-		oldEdges.add(oldEdge);
-		edgeRole = QVTscheduleUtil.getEdgeRole(oldEdge);
-		regionMerger.mapOldEdge(oldEdge, this);
+		mergedSourceNodeMerger = regionMerger.getNodeMerger(originalEdge.getEdgeSource());
+		mergedTargetNodeMerger = regionMerger.getNodeMerger(originalEdge.getEdgeTarget());
+		originalEdges.add(originalEdge);
+		edgeRole = QVTscheduleUtil.getEdgeRole(originalEdge);
+		regionMerger.mapOriginalEdge(originalEdge, this);
 		mergedSourceNodeMerger.addOutgoingEdgeMerger(this, mergedTargetNodeMerger);
 		mergedTargetNodeMerger.addIncomingEdgeMerger(this, mergedSourceNodeMerger);
 	}
 
-	public void addOldEdge(@NonNull Edge oldEdge) {
-		assert !oldEdge.isSecondary();
-		assert !oldEdges.contains(oldEdge);
-		oldEdges.add(oldEdge);
-		edgeRole = QVTscheduleUtil.mergeToMoreKnownPhase(edgeRole, QVTscheduleUtil.getEdgeRole(oldEdge));
-		regionMerger.mapOldEdge(oldEdge, this);
+	public void addOriginalEdge(@NonNull Edge originalEdge) {
+		assert !originalEdge.isSecondary();
+		assert !originalEdges.contains(originalEdge);
+		originalEdges.add(originalEdge);
+		edgeRole = QVTscheduleUtil.mergeToMoreKnownPhase(edgeRole, QVTscheduleUtil.getEdgeRole(originalEdge));
+		regionMerger.mapOriginalEdge(originalEdge, this);
 	}
 
-	public @Nullable Edge createNewEdge(@NonNull Node sourceNodeMerger, @NonNull Node targetNodeMerger) {
-		Edge newEdge2 = newEdge;
-		assert newEdge2 == null;
-		for (@NonNull Edge oldEdge : oldEdges) {
-			newEdge2 = newEdge = oldEdge.createEdge(edgeRole, sourceNodeMerger, targetNodeMerger);
+	public @Nullable Edge createMergedEdge(@NonNull Node sourceNodeMerger, @NonNull Node targetNodeMerger) {
+		Edge mergedEdge2 = mergedEdge;
+		assert mergedEdge2 == null;
+		for (@NonNull Edge originalEdge : originalEdges) {
+			mergedEdge2 = mergedEdge = originalEdge.createEdge(edgeRole, sourceNodeMerger, targetNodeMerger);
 			break;
 		}
-		if (newEdge2 == null) {
+		if (mergedEdge2 == null) {
 			return null;
 		}
-		return newEdge2;
+		return mergedEdge2;
 	}
 
 	public void destroy() {
 		mergedSourceNodeMerger.removeOutgoingEdgeMerger(this, mergedTargetNodeMerger);
 		mergedTargetNodeMerger.removeIncomingEdgeMerger(this, mergedSourceNodeMerger);
-		for (@NonNull Edge oldEdge : oldEdges) {
-			regionMerger.unmapOldEdge(oldEdge, this);
+		for (@NonNull Edge originalEdge : originalEdges) {
+			regionMerger.unmapOriginalEdge(originalEdge, this);
 		}
 	}
 
-	public @NonNull Edge getNewEdge() {
-		return ClassUtil.nonNullState(newEdge);
+	public @NonNull Edge getMergedEdge() {
+		return ClassUtil.nonNullState(mergedEdge);
 	}
 
-	public @NonNull Iterable<@NonNull Edge> getOldEdges() {
-		return oldEdges;
+	public @NonNull Iterable<@NonNull Edge> getOriginalEdges() {
+		return originalEdges;
 	}
 
-	public @NonNull Node getOldSource() {
-		return oldEdges.get(0).getEdgeSource();
+	public @NonNull Node getOriginalSource() {
+		return getPrimaryEdge().getEdgeSource();
 	}
 
-	public @NonNull Node getOldTarget() {
-		return oldEdges.get(0).getEdgeTarget();
+	public @NonNull Node getOriginalTarget() {
+		return getPrimaryEdge().getEdgeTarget();
+	}
+
+	private @NonNull Edge getPrimaryEdge() {
+		return originalEdges.get(0);
+	}
+
+	public @Nullable Property getProperty() {
+		Edge primaryEdge = getPrimaryEdge();		// FIXME check all original edges
+		if (primaryEdge instanceof NavigableEdge) {
+			return ((NavigableEdge)primaryEdge).getProperty();
+		}
+		else {
+			return null;
+		}
 	}
 
 	public @NonNull NodeMerger getSource() {
@@ -102,34 +116,54 @@ class EdgeMerger
 	}
 
 	private boolean isCast() {
-		return oldEdges.get(0).isCast();
+		return getPrimaryEdge().isCast();
+	}
+
+	public boolean isConstant() {
+		return getPrimaryEdge().isConstant();		// FIXME check all original edges
 	}
 
 	public boolean isFoldable() {
 		return isCast() && mergedTargetNodeMerger.isNew() && !mergedSourceNodeMerger.isNew();
 	}
 
+	public boolean isLoaded() {
+		return getPrimaryEdge().isLoaded();		// FIXME check all original edges
+	}
+
+	public boolean isNew() {
+		return getPrimaryEdge().isNew();		// FIXME check all original edges
+	}
+
+	public boolean isOld() {
+		return getPrimaryEdge().isOld();		// FIXME check all original edges
+	}
+
+	public boolean isUnconditional() {
+		return getPrimaryEdge().isUnconditional();		// FIXME check all original edges
+	}
+
 	/**
-	 * Return an oldEdge that is the same as newEdge or null if none.
+	 * Return an originalEdge that is the same as mergedEdge or null if none.
 	 */
-	public @Nullable Edge sameEdge(@NonNull Edge newEdge) {
-		if (newEdge instanceof NavigableEdge) {
-			Property newProperty = ((NavigableEdge)newEdge).getProperty();
-			for (@NonNull Edge oldEdge : oldEdges) {
-				if (oldEdge instanceof NavigableEdge) {
-					Property oldProperty = ((NavigableEdge)oldEdge).getProperty();
-					if (oldProperty == newProperty) {
-						return oldEdge;
+	public @Nullable Edge sameEdge(@NonNull Edge mergedEdge) {
+		if (mergedEdge instanceof NavigableEdge) {
+			Property mergedProperty = ((NavigableEdge)mergedEdge).getProperty();
+			for (@NonNull Edge originalEdge : originalEdges) {
+				if (originalEdge instanceof NavigableEdge) {
+					Property originalProperty = ((NavigableEdge)originalEdge).getProperty();
+					if (originalProperty == mergedProperty) {
+						return originalEdge;
 					}
 				}
 			}
 		}
 		else {
-			Class<? extends @NonNull Edge> newClass = newEdge.getClass();
-			for (@NonNull Edge oldEdge : oldEdges) {
-				Class<? extends @NonNull Edge> oldClass = oldEdge.getClass();
-				if (oldClass == newClass) {
-					return oldEdge;
+			Class<? extends @NonNull Edge> mergedClass = mergedEdge.getClass();
+			for (@NonNull Edge originalEdge : originalEdges) {
+				Class<? extends @NonNull Edge> originalClass = originalEdge.getClass();
+				if (originalClass == mergedClass) {
+					return originalEdge;
 				}
 			}
 		}
@@ -138,6 +172,6 @@ class EdgeMerger
 
 	@Override
 	public String toString() {
-		return newEdge != null? newEdge.toString() : oldEdges.get(0).toString();
+		return mergedEdge != null? mergedEdge.toString() : getPrimaryEdge().toString();
 	}
 }

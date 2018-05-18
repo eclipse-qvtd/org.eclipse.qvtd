@@ -66,36 +66,36 @@ public class LateConsumerMerger extends AbstractMerger
 		}
 
 		@Override
-		protected @NonNull MappingRegion createNewRegion(@NonNull String newName) {
-			return new LateMergedMappingRegion(scheduleManager, newName);
+		protected @NonNull MappingRegion createMergedRegion(@NonNull String mergedName) {
+			return new LateMergedMappingRegion(scheduleManager, mergedName);
 		}
 
 		public void install(@NonNull ContentsAnalysis<@NonNull MappingRegion> contentsAnalysis, @NonNull MappingRegion mergedRegion) {
+			MappingRegion primaryRegion = getPrimaryRegion();
 			ScheduledRegion invokingRegion = QVTscheduleUtil.getContainingScheduledRegion(primaryRegion);
 			List<@NonNull Region> callableParents = Lists.newArrayList(primaryRegion.getCallableParents());
-			contentsAnalysis.removeRegion(primaryRegion);
-			for (@NonNull Region callableParent : callableParents) {
-				callableParent.replaceCallToChild(primaryRegion, mergedRegion);
-			}
-			scheduleManager.setScheduledRegion(primaryRegion, invokingRegion);
-			for (@NonNull MappingRegion secondaryRegion : secondaryRegions) {
-				contentsAnalysis.removeRegion(secondaryRegion);
-				assert invokingRegion == secondaryRegion.getScheduledRegion();
+			for (@NonNull MappingRegion originalRegion : getOriginalRegions()) {
+				contentsAnalysis.removeRegion(originalRegion);
+				assert invokingRegion == originalRegion.getScheduledRegion();
 				for (@NonNull Region callableParent : callableParents) {
-					callableParent.removeCallToChild(secondaryRegion);
+					if (originalRegion == primaryRegion) {
+						callableParent.replaceCallToChild(primaryRegion, mergedRegion);
+					}
+					else {
+						callableParent.removeCallToChild(originalRegion);
+					}
 				}
-				scheduleManager.setScheduledRegion(secondaryRegion, invokingRegion);
+				scheduleManager.setScheduledRegion(originalRegion, invokingRegion);
 			}
 			contentsAnalysis.addRegion(mergedRegion);
 			scheduleManager.setScheduledRegion(mergedRegion, invokingRegion);
-			for (@NonNull Node oldHeadNode : QVTscheduleUtil.getHeadNodes(primaryRegion)) {
-				NodeConnection incomingConnection = oldHeadNode.getIncomingConnection();
+			for (@NonNull Node originalHeadNode : QVTscheduleUtil.getHeadNodes(primaryRegion)) {
+				NodeConnection incomingConnection = originalHeadNode.getIncomingConnection();
 				if (incomingConnection != null) {
-					Node newHeadNode = getNodeMerger(oldHeadNode).getNewNode();
-					incomingConnection.addPassedTargetNode(newHeadNode);
-					incomingConnection.removeTargetRegion(primaryRegion);
-					for (@NonNull Region secondaryRegion : secondaryRegions) {
-						incomingConnection.removeTargetRegion(secondaryRegion);
+					Node mergedHeadNode = getNodeMerger(originalHeadNode).getMergedNode();
+					incomingConnection.addPassedTargetNode(mergedHeadNode);
+					for (@NonNull Region originalRegion : getOriginalRegions()) {
+						incomingConnection.removeTargetRegion(originalRegion);
 					}
 				}
 			}
@@ -105,46 +105,46 @@ public class LateConsumerMerger extends AbstractMerger
 	private class LateStrategy extends Correlator.AbstractCorrelationStrategy
 	{
 		@Override
-		public boolean navigableEdgesMatch(@NonNull NavigableEdge secondaryEdge, @Nullable NavigableEdge primaryEdge) { // assert same property, skip secondary properties
-			if (secondaryEdge.isSecondary()) {				// Ignore opposites - checked by their forward edge
+		public boolean navigableEdgesMatch(@Nullable EdgeMerger edgeMerger, @NonNull NavigableEdge extraEdge) { // assert same property, skip secondary properties
+			if (extraEdge.isSecondary()) {				// Ignore opposites - checked by their forward edge
 				return true;
 			}
-			Property property = secondaryEdge.getProperty();
-			if (primaryEdge == null) {
-				//				if (/*!secondaryEdge.isRequired() ||*/ !secondaryEdge.isUnconditional()) {
-				//				if (/*!secondaryEdge.isRequired() ||*/ !(QVTscheduleUtil.getSourceNode(secondaryEdge).isUnconditional() && (QVTscheduleUtil.getTargetNode(secondaryEdge).getUtility() == Utility.STRONGLY_MATCHED))) {
-				if (!secondaryEdge.isMatched()) {
+			Property property = extraEdge.getProperty();
+			if (edgeMerger == null) {
+				//				if (/*!extraEdge.isRequired() ||*/ !extraEdge.isUnconditional()) {
+				//				if (/*!extraEdge.isRequired() ||*/ !(QVTscheduleUtil.getSourceNode(extraEdge).isUnconditional() && (QVTscheduleUtil.getTargetNode(extraEdge).getUtility() == Utility.STRONGLY_MATCHED))) {
+				if (!extraEdge.isMatched()) {
 					return true;
 				}
 				if (property.isIsMany() && (((CollectionType)property.getType()).getLower().intValue() == 0)) {
 					return true;
 				}
-				if (secondaryEdge.isConstant()) {
+				if (extraEdge.isConstant()) {
 					if (debugFailures) {
-						FAILURE.println("Missing constant : " + secondaryEdge);
+						FAILURE.println("Missing constant : " + extraEdge);
 					}
 					return false;
 				}
-				if (secondaryEdge.isLoaded()) {
+				if (extraEdge.isLoaded()) {
 					if (debugFailures) {
-						FAILURE.println("Missing loaded : " + secondaryEdge);
+						FAILURE.println("Missing loaded : " + extraEdge);
 					}
 					return false;
 				}
-				if (secondaryEdge.isNew()) {
+				if (extraEdge.isNew()) {
 					return true;
 				}
-				if (secondaryEdge.isOld()) {
-					if (!secondaryEdge.getEdgeTarget().isRequired()) {
+				if (extraEdge.isOld()) {
+					if (!extraEdge.getEdgeTarget().isRequired()) {
 						return true;					// If target is optional, it's absence cannot cause a failure
 					}
 					if (!property.isIsRequired()) {
 						return true;					// If property is optional, it's absence cannot cause a failure
 					}
-					ClassDatum classDatum = QVTscheduleUtil.getClassDatum(secondaryEdge.getEdgeTarget());
-					Iterable<@NonNull NavigableEdge> realizedEdges = getContentsAnalysis().getNewEdges(secondaryEdge, classDatum);
+					ClassDatum classDatum = QVTscheduleUtil.getClassDatum(extraEdge.getEdgeTarget());
+					Iterable<@NonNull NavigableEdge> realizedEdges = getContentsAnalysis().getNewEdges(extraEdge, classDatum);
 					if (realizedEdges != null) {
-						int firstIndex = secondaryEdge.getOwningRegion().getFirstIndex();
+						int firstIndex = extraEdge.getOwningRegion().getFirstIndex();
 						for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
 							Region region = realizedEdge.getOwningRegion();
 							int lastIndex = region.getLastIndex();
@@ -164,87 +164,85 @@ public class LateConsumerMerger extends AbstractMerger
 					toString();
 				}
 				if (debugFailures) {
-					FAILURE.println("Missing predicated match for : " + secondaryEdge);
+					FAILURE.println("Missing predicated match for : " + extraEdge);
 				}
 				return false;		// Missing edge must be unconditional somewhere
 			}
 			else {
-				assert primaryEdge.getProperty() == property;
-				if (/*!primaryEdge.isRequired() ||*/ !primaryEdge.isUnconditional()) {
+				assert edgeMerger.getProperty() == property;
+				if (/*!edgeMerger.isRequired() ||*/ !edgeMerger.isUnconditional()) {
 					return true;
 				}
-				if (secondaryEdge.isConstant() || primaryEdge.isConstant()) {
-					if (secondaryEdge.isConstant() != primaryEdge.isConstant()) {
-						System.out.println("Inconsistent constant: " + secondaryEdge + ", " + primaryEdge);
+				if (extraEdge.isConstant() || edgeMerger.isConstant()) {
+					if (extraEdge.isConstant() != edgeMerger.isConstant()) {
+						System.out.println("Inconsistent constant: " + extraEdge + ", " + edgeMerger);
 					}
 					return true;
 				}
-				if (secondaryEdge.isLoaded() || primaryEdge.isLoaded()) {
-					if (secondaryEdge.isLoaded() != primaryEdge.isLoaded()) {
-						System.out.println("Inconsistent loaded: " + secondaryEdge + ", " + primaryEdge);
+				if (extraEdge.isLoaded() || edgeMerger.isLoaded()) {
+					if (extraEdge.isLoaded() != edgeMerger.isLoaded()) {
+						System.out.println("Inconsistent loaded: " + extraEdge + ", " + edgeMerger);
 					}
 					return true;
 				}
-				if (secondaryEdge.isNew() || primaryEdge.isNew()) {
-					if (secondaryEdge.isNew() == primaryEdge.isNew()) {		// == should only be one REALIZED
-						System.out.println("Inconsistent new: " + secondaryEdge + ", " + primaryEdge);
+				if (extraEdge.isNew() || edgeMerger.isNew()) {
+					if (extraEdge.isNew() == edgeMerger.isNew()) {		// == should only be one REALIZED
+						System.out.println("Inconsistent new: " + extraEdge + ", " + edgeMerger);
 					}
 					return true;
 				}
-				if (secondaryEdge.isOld() || primaryEdge.isOld()) {
-					if (secondaryEdge.isOld() != primaryEdge.isOld()) {
-						System.out.println("Inconsistent old: " + secondaryEdge + ", " + primaryEdge);
+				if (extraEdge.isOld() || edgeMerger.isOld()) {
+					if (extraEdge.isOld() != edgeMerger.isOld()) {
+						System.out.println("Inconsistent old: " + extraEdge + ", " + edgeMerger);
 					}
 					return true;
 				}
 				if (debugFailures) {
-					FAILURE.println("Inconsistent edges : " + secondaryEdge + ", " + primaryEdge);
+					FAILURE.println("Inconsistent edges : " + extraEdge + ", " + edgeMerger);
 				}
-				return false; //super.navigableEdgesMatch(secondaryEdge, primaryEdge);
+				return false; //super.navigableEdgesMatch(extraEdge, edgeMerger);
 			}
 		}
 
 		@Override
-		public boolean navigableNodesMatch(@NonNull Node secondaryNode, @Nullable Node primaryNode) {
-			if (!secondaryNode.isRequired() || !secondaryNode.isUnconditional()) {
+		public boolean navigableNodesMatch(@Nullable NodeMerger nodeMerger, @NonNull Node extraNode) {
+			if (!extraNode.isRequired() || !extraNode.isUnconditional()) {
 				return true;
 			}
-			if (primaryNode == null) {
+			if (nodeMerger == null) {
 				return true;			// Missing node must be created somewhere else (?? duplicates missing edge logic)
 			}
-			else {
-				if (!primaryNode.isRequired() || !primaryNode.isUnconditional()) {
-					return true;
-				}
-				if (secondaryNode.isConstant() || primaryNode.isConstant()) {
-					if (secondaryNode.isConstant() != primaryNode.isConstant()) {
-						System.out.println("Inconsistent constant: " + secondaryNode + ", " + primaryNode);
-					}
-					return true;
-				}
-				if (secondaryNode.isLoaded() || primaryNode.isLoaded()) {
-					if (secondaryNode.isLoaded() != primaryNode.isLoaded()) {
-						System.out.println("Inconsistent loaded: " + secondaryNode + ", " + primaryNode);
-					}
-					return true;
-				}
-				if (secondaryNode.isNew() || primaryNode.isNew()) {
-					if (secondaryNode.isNew() == primaryNode.isNew()) {		// == should only be one REALIZED
-						System.out.println("Inconsistent new: " + secondaryNode + ", " + primaryNode);
-					}
-					return true;
-				}
-				if (secondaryNode.isOld() || primaryNode.isOld()) {
-					if (secondaryNode.isOld() != primaryNode.isOld()) {
-						System.out.println("Inconsistent old: " + secondaryNode + ", " + primaryNode);
-					}
-					return true;
-				}
-				if (debugFailures) {
-					FAILURE.println("Inconsistent nodes : " + secondaryNode + ", " + primaryNode);
-				}
+			if (!nodeMerger.isRequired() || !nodeMerger.isUnconditional()) {
+				return true;
 			}
-			return false;//super.navigableNodesMatch(secondaryNode, primaryNode);
+			if (extraNode.isConstant() || nodeMerger.isConstant()) {
+				if (extraNode.isConstant() != nodeMerger.isConstant()) {
+					System.out.println("Inconsistent constant: " + extraNode + ", " + nodeMerger);
+				}
+				return true;
+			}
+			if (extraNode.isLoaded() || nodeMerger.isLoaded()) {
+				if (extraNode.isLoaded() != nodeMerger.isLoaded()) {
+					System.out.println("Inconsistent loaded: " + extraNode + ", " + nodeMerger);
+				}
+				return true;
+			}
+			if (extraNode.isNew() || nodeMerger.isNew()) {
+				if (extraNode.isNew() == nodeMerger.isNew()) {		// == should only be one REALIZED
+					System.out.println("Inconsistent new: " + extraNode + ", " + nodeMerger);
+				}
+				return true;
+			}
+			if (extraNode.isOld() || nodeMerger.isOld()) {
+				if (extraNode.isOld() != nodeMerger.isOld()) {
+					System.out.println("Inconsistent old: " + extraNode + ", " + nodeMerger);
+				}
+				return true;
+			}
+			if (debugFailures) {
+				FAILURE.println("Inconsistent nodes : " + extraNode + ", " + nodeMerger);
+			}
+			return false;//super.navigableNodesMatch(extraNode, primaryNode);
 		}
 	}
 
@@ -265,7 +263,7 @@ public class LateConsumerMerger extends AbstractMerger
 	protected final @NonNull ScheduledRegion scheduledRegion;
 	protected final @NonNull List<@NonNull Region> allRegions = new ArrayList<>();
 	private /*@LazyNonNull*/ ContentsAnalysis<@NonNull MappingRegion> contentsAnalysis;
-	private final @NonNull Map<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> newRegion2oldRegions = new HashMap<>();
+	private final @NonNull Map<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> mergedRegion2originalRegions = new HashMap<>();
 	protected final @NonNull LateStrategy LateStrategy_INSTANCE = new LateStrategy();
 
 	public LateConsumerMerger(@NonNull ScheduleManager scheduleManager, @NonNull ScheduledRegion scheduledRegion) {
@@ -297,17 +295,17 @@ public class LateConsumerMerger extends AbstractMerger
 	}
 
 	public @NonNull Map<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> getMerges() {
-		return newRegion2oldRegions;
+		return mergedRegion2originalRegions;
 	}
 
 	/*	private @Nullable Iterable<@NonNull Region> getSharedConsumers(@NonNull Region primaryRegion) {
 		Set<@NonNull Region> sharedRegions = null;
 		List<@NonNull Node> headNodes = primaryRegion.getHeadNodes();
 		for (@NonNull Node headNode : headNodes) {
-			Iterable<@NonNull Node> oldNodes = getContentsAnalysis().getOldNodes(headNode.getClassDatumAnalysis());
-			if (oldNodes != null) {
-				for (@NonNull Node oldNode : oldNodes) {
-					Region region = oldNode.getRegion();
+			Iterable<@NonNull Node> originalNodes = getContentsAnalysis().getOldNodes(headNode.getClassDatumAnalysis());
+			if (originalNodes != null) {
+				for (@NonNull Node originalNode : originalNodes) {
+					Region region = originalNode.getRegion();
 					if (region != primaryRegion) {
 						if (sharedRegions == null) {
 							sharedRegions = new HashSet<>();
@@ -386,8 +384,9 @@ public class LateConsumerMerger extends AbstractMerger
 					}
 				}
 				else {
-					Correlator secondary2primary = Correlator.correlate(secondaryRegion, primaryRegion, LateStrategy_INSTANCE, null);
-					if (secondary2primary != null) {
+					LateRegionMerger forwardRegionMerger = regionMerger != null ? regionMerger : new LateRegionMerger(scheduleManager, primaryRegion);
+					Correlator forwardCorrelator = Correlator.correlate(forwardRegionMerger, secondaryRegion, LateStrategy_INSTANCE, null);
+					if (forwardCorrelator != null) {
 						boolean doMerge = false;
 						if (!isSharedHead(primaryRegion, secondaryRegion)) {
 							doMerge = false;
@@ -396,17 +395,18 @@ public class LateConsumerMerger extends AbstractMerger
 							if (LATE.isActive()) {
 								LATE.println("Correlating inverse");
 							}
-							if (Correlator.correlate(primaryRegion, secondaryRegion, LateStrategy_INSTANCE, secondary2primary.getNode2Node()) != null) {
+							LateRegionMerger reverseRegionMerger = new LateRegionMerger(scheduleManager, secondaryRegion);
+							if (Correlator.correlate(reverseRegionMerger, primaryRegion, LateStrategy_INSTANCE, forwardCorrelator) != null) {
 								doMerge = true;
 							}
 						}
 						if (doMerge) {
 							if (regionMerger == null) {
 								//							residualInputRegions.remove(primaryRegion);
-								regionMerger = new LateRegionMerger(scheduleManager, primaryRegion);
+								regionMerger = forwardRegionMerger;
 							}
 							//						residualInputRegions.remove(secondaryRegion);
-							regionMerger.addSecondaryRegion(secondaryRegion, secondary2primary.getNode2Node());
+							regionMerger.addSecondaryRegion(secondaryRegion, forwardCorrelator);
 						}
 					}
 				}
@@ -417,13 +417,12 @@ public class LateConsumerMerger extends AbstractMerger
 				MappingRegion mergedRegion = regionMerger.create();
 				regionMerger.check(mergedRegion);
 				regionMerger.install(getContentsAnalysis(), mergedRegion);
-				List<@NonNull MappingRegion> oldRegions = new ArrayList<>();
-				oldRegions.add(primaryRegion);
-				oldRegions.addAll(regionMerger.getSecondaryRegions());
-				newRegion2oldRegions.put(mergedRegion, oldRegions);
-				residualInputRegions.removeAll(oldRegions);
-				for (@NonNull Region oldRegion : oldRegions) {
-					for (int index : oldRegion.getIndexes()) {
+				List<@NonNull MappingRegion> originalRegions = new ArrayList<>();
+				originalRegions.addAll(regionMerger.getOriginalRegions());
+				mergedRegion2originalRegions.put(mergedRegion, originalRegions);
+				residualInputRegions.removeAll(originalRegions);
+				for (@NonNull Region originalRegion : originalRegions) {
+					for (int index : originalRegion.getIndexes()) {
 						mergedRegion.addIndex(index);
 					}
 				}
@@ -433,9 +432,9 @@ public class LateConsumerMerger extends AbstractMerger
 	}
 
 	private void prune() {
-		for (@NonNull List<@NonNull MappingRegion> oldRegions : newRegion2oldRegions.values()) {
-			for (@NonNull MappingRegion oldRegion : oldRegions) {
-				//				oldRegion.getOwningScheduledRegion().getOwnedMappingRegions().remove(oldRegion);
+		for (@NonNull List<@NonNull MappingRegion> originalRegions : mergedRegion2originalRegions.values()) {
+			for (@NonNull MappingRegion originalRegion : originalRegions) {
+				//				originalRegion.getOwningScheduledRegion().getOwnedMappingRegions().remove(originalRegion);
 			}
 		}
 	}

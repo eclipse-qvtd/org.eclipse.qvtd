@@ -17,8 +17,11 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -30,19 +33,19 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 class NodeMerger
 {
 	protected final @NonNull RegionMerger regionMerger;
-	protected final @NonNull List<@NonNull Node> oldNodes = new ArrayList<>();
+	protected final @NonNull List<@NonNull Node> originalNodes = new ArrayList<>();
 	private @NonNull Role nodeRole;
 	private Node.@NonNull Utility nodeUtility;
 	private @NonNull Map<@NonNull NodeMerger, @NonNull List<@NonNull EdgeMerger>> sourceNodeMerger2edgeMergers = new HashMap<>();
 	private @NonNull Map<@NonNull NodeMerger, @NonNull List<@NonNull EdgeMerger>> targetNodeMerger2edgeMergers = new HashMap<>();
-	private @Nullable Node newNode = null;
+	private @Nullable Node mergedNode = null;
 
-	public NodeMerger(@NonNull RegionMerger regionMerger, @NonNull Node oldNode) {
+	public NodeMerger(@NonNull RegionMerger regionMerger, @NonNull Node originalNode) {
 		this.regionMerger = regionMerger;
-		oldNodes.add(oldNode);
-		nodeRole = QVTscheduleUtil.getNodeRole(oldNode);
-		nodeUtility = oldNode.getUtility();
-		regionMerger.mapOldNode(oldNode, this);
+		originalNodes.add(originalNode);
+		nodeRole = QVTscheduleUtil.getNodeRole(originalNode);
+		nodeUtility = originalNode.getUtility();
+		regionMerger.mapOriginalNode(originalNode, this);
 	}
 
 	public void addIncomingEdgeMerger(@NonNull EdgeMerger edgeMerger, @NonNull NodeMerger sourceNodeMerger) {
@@ -57,36 +60,36 @@ class NodeMerger
 		edgeMergers.add(edgeMerger);
 	}
 
-	public void addOldNode(@NonNull Node oldNode) {
-		assert !oldNodes.contains(oldNode);
-		oldNodes.add(oldNode);
-		nodeRole = QVTscheduleUtil.mergeToMoreKnownPhase(nodeRole, QVTscheduleUtil.getNodeRole(oldNode));
-		nodeUtility = QVTscheduleUtil.mergeToStrongerUtility(nodeUtility, oldNode.getUtility());
-		regionMerger.mapOldNode(oldNode, this);
+	public void addOriginalNode(@NonNull Node originalNode) {
+		assert !originalNodes.contains(originalNode);
+		originalNodes.add(originalNode);
+		nodeRole = QVTscheduleUtil.mergeToMoreKnownPhase(nodeRole, QVTscheduleUtil.getNodeRole(originalNode));
+		nodeUtility = QVTscheduleUtil.mergeToStrongerUtility(nodeUtility, originalNode.getUtility());
+		regionMerger.mapOriginalNode(originalNode, this);
 	}
 
-	public @Nullable Node createNewNode(@NonNull MappingRegion newRegion) {
-		Node newNode2 = newNode;
-		assert newNode2 == null;
-		for (@NonNull Node oldNode : oldNodes) {
-			newNode2 = newNode = oldNode.createNode(nodeRole, newRegion);
-			if (oldNode.isHead()) {
-				newNode2.setHead();
-				newRegion.getHeadNodes().add(newNode2);
+	public @Nullable Node createMergedNode(@NonNull MappingRegion mergedRegion) {
+		Node mergedNode2 = mergedNode;
+		assert mergedNode2 == null;
+		for (@NonNull Node originalNode : originalNodes) {
+			mergedNode2 = mergedNode = originalNode.createNode(nodeRole, mergedRegion);
+			if (originalNode.isHead()) {
+				mergedNode2.setHead();
+				mergedRegion.getHeadNodes().add(mergedNode2);
 			}
-			newNode2.setUtility(nodeUtility);
+			mergedNode2.setUtility(nodeUtility);
 			break;
 		}
-		if (newNode2 == null) {
+		if (mergedNode2 == null) {
 			return null;
 		}
-		//		for (@NonNull Node oldNode : oldNodes) {
-		//			//				oldNode2mergedNode.put(oldNode, mergedNode);
-		//			for (@NonNull TypedElement typedElement : oldNode.getTypedElements()) {
-		//				newNode2.addTypedElement(typedElement);
+		//		for (@NonNull Node originalNode : originalNodes) {
+		//			//				originalNode2mergedNode.put(originalNode, mergedNode);
+		//			for (@NonNull TypedElement typedElement : originalNode.getTypedElements()) {
+		//				mergedNode2.addTypedElement(typedElement);
 		//			}
 		//		}
-		return newNode2;
+		return mergedNode2;
 	}
 
 	public void destroy() {
@@ -100,8 +103,8 @@ class NodeMerger
 				outgoingEdgeMergers.get(i).destroy();
 			}
 		}
-		for (@NonNull Node oldNode : oldNodes) {
-			regionMerger.unmapOldNode(oldNode, this);
+		for (@NonNull Node originalNode : originalNodes) {
+			regionMerger.unmapOriginalNode(originalNode, this);
 		}
 	}
 
@@ -115,6 +118,10 @@ class NodeMerger
 		}
 	}
 
+	public @NonNull Iterable<@NonNull Edge> getArgumentEdges() {
+		return getPrimaryNode().getArgumentEdges();		// FIXME check all original nodes
+	}
+
 	public @NonNull List<@NonNull EdgeMerger> getIncomingEdgeMergers(@NonNull NodeMerger sourceNodeMerger) {
 		List<@NonNull EdgeMerger> edgeMergers = sourceNodeMerger2edgeMergers.get(sourceNodeMerger);
 		if (edgeMergers == null) {
@@ -124,12 +131,28 @@ class NodeMerger
 		return edgeMergers;
 	}
 
-	public @NonNull Node getNewNode() {
-		return ClassUtil.nonNullState(newNode);
+	public @NonNull Node getMergedNode() {
+		return ClassUtil.nonNullState(mergedNode);
 	}
 
-	public @NonNull Iterable<@NonNull Node> getOldNodes() {
-		return oldNodes;
+	public @NonNull String getName() {
+		return QVTscheduleUtil.getName(getPrimaryNode());
+	}
+
+	public @Nullable NavigableEdge getNavigableEdge(@NonNull Property property) {
+		return getPrimaryNode().getNavigableEdge(property);		// FIXME check all original nodes
+	}
+
+	public @Nullable Node getNavigableTarget(@NonNull Property property) {
+		return getPrimaryNode().getNavigableTarget(property);		// FIXME check all original nodes
+	}
+
+	public @NonNull Role getNodeRole() {
+		return QVTscheduleUtil.getNodeRole(getPrimaryNode());
+	}
+
+	public @NonNull Iterable<@NonNull Node> getOriginalNodes() {
+		return originalNodes;
 	}
 
 	public @NonNull List<@NonNull EdgeMerger> getOutgoingEdgeMergers(@NonNull NodeMerger targetNodeMerger) {
@@ -141,8 +164,40 @@ class NodeMerger
 		return edgeMergers;
 	}
 
+	private @NonNull Node getPrimaryNode() {
+		return originalNodes.get(0);
+	}
+
+	public boolean isConstant() {
+		return getPrimaryNode().isConstant();		// FIXME check all original nodes
+	}
+
+	public boolean isIterator() {
+		return getPrimaryNode().isIterator();		// FIXME check all original nodes
+	}
+
+	public boolean isLoaded() {
+		return getPrimaryNode().isLoaded();		// FIXME check all original nodes
+	}
+
 	public boolean isNew() {
 		return nodeRole.isNew();
+	}
+
+	public boolean isNullLiteral() {
+		return getPrimaryNode().isNullLiteral();		// FIXME check all original nodes
+	}
+
+	public boolean isOld() {
+		return getPrimaryNode().isOld();		// FIXME check all original nodes
+	}
+
+	public boolean isRequired() {
+		return getPrimaryNode().isRequired();		// FIXME check all original nodes
+	}
+
+	public boolean isUnconditional() {
+		return getPrimaryNode().isUnconditional();		// FIXME check all original nodes
 	}
 
 	public void removeIncomingEdgeMerger(@NonNull EdgeMerger edgeMerger, @NonNull NodeMerger sourceNodeMerger) {
@@ -159,6 +214,6 @@ class NodeMerger
 
 	@Override
 	public @NonNull String toString() {
-		return String.valueOf(newNode != null? newNode : oldNodes.get(0));
+		return String.valueOf(mergedNode != null? mergedNode : originalNodes.get(0));
 	}
 }

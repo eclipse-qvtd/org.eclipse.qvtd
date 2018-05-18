@@ -34,29 +34,30 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
+/**
+ * A Correlator analyzes the compatibility of a new extraRegion with the future merge of one or more oruuginal regions identifued by a regionMerger.
+ */
 class Correlator
 {
-	public static @Nullable Correlator correlate(@NonNull MappingRegion secondaryRegion, @NonNull MappingRegion primaryRegion, @NonNull CorrelationStrategy strategy, @Nullable Map<@NonNull Node, @NonNull Node> primaryNode2secondaryNode) {
-		if (secondaryRegion instanceof RuleRegion) {
-			if (((RuleRegion)secondaryRegion).getReferredRule().isIsAbstract()) {
+	public static @Nullable Correlator correlate(@NonNull RegionMerger regionMerger, @NonNull MappingRegion extraRegion, @NonNull CorrelationStrategy strategy, @Nullable Correlator inverseCorrelator) {
+		if (extraRegion instanceof RuleRegion) {
+			if (((RuleRegion)extraRegion).getReferredRule().isIsAbstract()) {
 				return null;
 			}
 		}
-		if (primaryRegion instanceof RuleRegion) {
-			if (((RuleRegion)primaryRegion).getReferredRule().isIsAbstract()) {
-				return null;
-			}
+		if (regionMerger.isAbstract()) {
+			return null;
 		}
-		Correlator correlator = new Correlator(primaryRegion, secondaryRegion, strategy, primaryNode2secondaryNode);
+		Correlator correlator = new Correlator(regionMerger, extraRegion, strategy, inverseCorrelator);
 		return correlator.correlate() ? correlator : null;
 	}
 
 	private static interface CorrelationStrategy
 	{
-		boolean navigableEdgesMatch(@NonNull NavigableEdge secondaryEdge, @Nullable NavigableEdge primaryEdge);
-		//		boolean navigableIntermediateNodesMatch(@NonNull Node secondaryNode, @NonNull Node primaryNode);
-		//		boolean navigableNodeMaybeUnmatched(@NonNull Node secondaryNode);
-		boolean navigableNodesMatch(@NonNull Node secondaryNode, @Nullable Node primaryNode);
+		boolean navigableEdgesMatch(@Nullable EdgeMerger edgeMerger, @NonNull NavigableEdge extraEdge);
+		//		boolean navigableIntermediateNodesMatch(@NonNull Node extraNode, @NonNull Node primaryNode);
+		//		boolean navigableNodeMaybeUnmatched(@NonNull Node extraNode);
+		boolean navigableNodesMatch(@Nullable NodeMerger nodeMerger, @NonNull Node extraNode);
 	}
 
 	static abstract class AbstractCorrelationStrategy implements CorrelationStrategy
@@ -64,51 +65,55 @@ class Correlator
 		protected final boolean debugFailures = AbstractMerger.FAILURE.isActive();
 
 		@Override
-		public boolean navigableEdgesMatch(@NonNull NavigableEdge secondaryEdge, @Nullable NavigableEdge primaryEdge) {
+		public boolean navigableEdgesMatch(@Nullable EdgeMerger edgeMerger, @NonNull NavigableEdge extraEdge) {
 			return true;
 		}
 
 		@Override
-		public boolean navigableNodesMatch(@NonNull Node secondaryNode, @Nullable Node primaryNode) {
-			if (primaryNode == null) {
-				if (secondaryNode.isPredicated()) {
+		public boolean navigableNodesMatch(@Nullable NodeMerger nodeMerger, @NonNull Node extraNode) {
+			if (nodeMerger == null) {
+				if (extraNode.isPredicated()) {
 					if (debugFailures) {
-						AbstractMerger.FAILURE.println("Missing predicated match for : " + secondaryNode);
+						AbstractMerger.FAILURE.println("Missing predicated match for : " + extraNode);
 					}
 					return false;
 				}
 				return true;
 			}
 			else {
-				assert secondaryNode.isNullLiteral() == primaryNode.isNullLiteral();
+				assert extraNode.isNullLiteral() == nodeMerger.isNullLiteral();
 				return true;
 			}
 		}
 
 		//		@Override
-		//		public boolean navigableIntermediateNodesMatch(@NonNull Node secondaryNode, @NonNull Node primaryNode) {
-		//			if (secondaryNode.isExplicitNull() != primaryNode.isExplicitNull()) {
+		//		public boolean navigableIntermediateNodesMatch(@NonNull Node extraNode, @NonNull Node primaryNode) {
+		//			if (extraNode.isExplicitNull() != primaryNode.isExplicitNull()) {
 		//				return false;
 		//			}
 		//			return true;
 		//		}
 	}
 
-	protected final @NonNull MappingRegion primaryRegion;
-	protected final @NonNull MappingRegion secondaryRegion;
+	protected final @NonNull RegionMerger regionMerger;
+	protected final @NonNull MappingRegion extraRegion;
 	protected final @NonNull CorrelationStrategy strategy;
-	protected final @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode = new HashMap<>();
-	protected final @NonNull Map<@NonNull CompleteClass, @NonNull List<@NonNull Node>> completeClass2primaryNodes;
+	protected final @NonNull Map<@NonNull Node, @NonNull NodeMerger> extraNode2nodeMerger = new HashMap<>();
 	protected final boolean debugFailures = AbstractMerger.FAILURE.isActive();
 
-	protected Correlator(@NonNull MappingRegion primaryRegion, @NonNull MappingRegion secondaryRegion, @NonNull CorrelationStrategy strategy, @Nullable Map<@NonNull Node, @NonNull Node> primaryNode2secondaryNode) {
-		this.primaryRegion = primaryRegion;
-		this.secondaryRegion = secondaryRegion;
+	protected Correlator(@NonNull RegionMerger regionMerger, @NonNull MappingRegion extraRegion, @NonNull CorrelationStrategy strategy, @Nullable Correlator inverseCorrelator) {
+		this.regionMerger = regionMerger;
+		this.extraRegion = extraRegion;
 		this.strategy = strategy;
-		this.completeClass2primaryNodes = QVTscheduleUtil.getCompleteClass2Nodes(primaryRegion);
-		if (primaryNode2secondaryNode != null) {
-			for (Map.Entry<@NonNull Node, @NonNull Node> entry : primaryNode2secondaryNode.entrySet()) {
-				secondaryNode2primaryNode.put(entry.getValue(), entry.getKey());
+		if (inverseCorrelator != null) {
+			Map<@NonNull Node, @NonNull NodeMerger> inverseNode2NodeMerger = inverseCorrelator.getNode2NodeMerger();
+			for (@NonNull Node inverseNode : inverseNode2NodeMerger.keySet()) {
+				NodeMerger forwardNodeMerger = inverseNode2NodeMerger.get(inverseNode);
+				assert forwardNodeMerger != null;
+				NodeMerger inverseNodeMerger = regionMerger.getNodeMerger(inverseNode);
+				for (@NonNull Node extraNode : forwardNodeMerger.getOriginalNodes()) {
+					extraNode2nodeMerger.put(extraNode, inverseNodeMerger);
+				}
 			}
 		}
 	}
@@ -126,7 +131,7 @@ class Correlator
 		if (!correlateNavigablePredicates()) { // FIXME this may be more efficient but it's a pig to debug, rewrite as intersection then no-extra-predicates
 			return false;
 		}
-		Set<@NonNull Node> navigableNodes = secondaryNode2primaryNode.keySet();
+		Set<@NonNull Node> navigableNodes = extraNode2nodeMerger.keySet();
 		//
 		//	Accumulate the transitive computation to the true nodes. All common computation edges must have compatible node types.
 		//
@@ -144,25 +149,26 @@ class Correlator
 	 * Return true if the tree of computation nodes for firstNode and secondNode are equivalent
 	 * assigning equivalences to first2second.
 	 */
-	protected boolean correlateComputation(@NonNull Node firstNode, @NonNull Node secondNode, @NonNull Map<@NonNull Node, @NonNull Node> first2second) {
-		Node node = first2second.get(firstNode);
-		if (node != null) {
-			return node == secondNode;
+	protected boolean correlateComputation(@NonNull Node firstNode, @NonNull NodeMerger secondNodeMerger, @NonNull Map<@NonNull Node, @NonNull NodeMerger> first2second) {
+		NodeMerger nodeMerger = first2second.get(firstNode);
+		if (nodeMerger != null) {
+			return nodeMerger == secondNodeMerger;
 		}
-		if (firstNode.getNodeRole() != secondNode.getNodeRole()) {
+		//		Node secondNode = secondNodeMerger.getPrimaryNode();
+		if (firstNode.getNodeRole() != secondNodeMerger.getNodeRole()) {
 			return false;
 		}
-		if (!ClassUtil.safeEquals(firstNode.getName(), secondNode.getName())) {		// FIXME stronger e.g. referredOperation
+		if (!ClassUtil.safeEquals(firstNode.getName(), secondNodeMerger.getName())) {		// FIXME stronger e.g. referredOperation
 			return false;
 		}
-		Map<@NonNull Node, @NonNull Node> nestedFirst2second = new HashMap<>(first2second);
-		nestedFirst2second.put(firstNode, secondNode);
-		List<@NonNull Edge> residualSecondArgumentEdges = Lists.newArrayList(secondNode.getArgumentEdges());
+		Map<@NonNull Node, @NonNull NodeMerger> nestedFirst2second = new HashMap<>(first2second);
+		nestedFirst2second.put(firstNode, secondNodeMerger);
+		List<@NonNull Edge> residualSecondArgumentEdges = Lists.newArrayList(secondNodeMerger.getArgumentEdges());
 		for (@NonNull Edge firstEdge : firstNode.getArgumentEdges()) {
 			boolean gotIt = false;
 			for (@NonNull Edge secondEdge : residualSecondArgumentEdges) {
 				if (ClassUtil.safeEquals(firstEdge.getName(), secondEdge.getName())) {
-					if (!correlateComputation(firstEdge.getEdgeSource(), secondEdge.getEdgeSource(), nestedFirst2second)) {
+					if (!correlateComputation(firstEdge.getEdgeSource(), regionMerger.getNodeMerger(secondEdge.getEdgeSource()), nestedFirst2second)) {
 						return false;
 					}
 					gotIt = true;
@@ -179,37 +185,37 @@ class Correlator
 	}
 
 	/**
-	 *	Return true if all the computed (TrueNode) predicates exactly match between primaryRegion and secondRegion,
-	 *	updating secondaryNode2primaryNode accordingly.
+	 *	Return true if all the computed (TrueNode) predicates exactly match between regionMerger and extraRegion,
+	 *	updating extraNode2nodeMerger accordingly.
 	 */
 	protected boolean correlateComputedPredicates() {	// FIXME
 		Iterable<@NonNull Node> primaryTrueNodes = Collections.emptyList(); //primaryRegion.getTrueNodes();
-		Iterable<@NonNull Node> secondaryTrueNodes = Collections.emptyList(); //secondaryRegion.getTrueNodes();
+		Iterable<@NonNull Node> extraTrueNodes = Collections.emptyList(); //extraRegion.getTrueNodes();
 		int primaryTrueSize = Iterables.size(primaryTrueNodes);
-		if (primaryTrueSize != Iterables.size(secondaryTrueNodes)) {
+		if (primaryTrueSize != Iterables.size(extraTrueNodes)) {
 			return false;
 		}
 		if (primaryTrueSize == 0) {
 			return true;
 		}
-		Map<@NonNull Node, @NonNull Node> primary2secondary = new HashMap<>();
+		Map<@NonNull Node, @NonNull NodeMerger> primary2extra = new HashMap<>();
 		if (primaryTrueSize == 1) {
 			Node primaryTrueNode = primaryTrueNodes.iterator().next();
-			Node secondaryTrueNode = secondaryTrueNodes.iterator().next();
-			if (!correlateComputation(primaryTrueNode, secondaryTrueNode, primary2secondary)) {
+			Node extraTrueNode = extraTrueNodes.iterator().next();
+			if (!correlateComputation(primaryTrueNode, regionMerger.getNodeMerger(extraTrueNode), primary2extra)) {
 				return false;
 			}
 		}
 		else {
-			Set<@NonNull Node> residualSecondaryTrueNodes = Sets.newHashSet(secondaryTrueNodes);
+			Set<@NonNull Node> residualExtraTrueNodes = Sets.newHashSet(extraTrueNodes);
 			for (@NonNull Node primaryTrueNode : primaryTrueNodes) {
 				boolean gotIt = false;
-				for (@NonNull Node secondaryTrueNode : residualSecondaryTrueNodes) {
-					Map<@NonNull Node, @NonNull Node> primary2secondary2 = new HashMap<>();
-					if (correlateComputation(primaryTrueNode, secondaryTrueNode, primary2secondary2)) {	// FIXME use hashes
+				for (@NonNull Node extraTrueNode : residualExtraTrueNodes) {
+					Map<@NonNull Node, @NonNull NodeMerger> primary2extra2 = new HashMap<>();
+					if (correlateComputation(primaryTrueNode, regionMerger.getNodeMerger(extraTrueNode), primary2extra2)) {	// FIXME use hashes
 						gotIt = true;
-						primary2secondary.putAll(primary2secondary2);
-						residualSecondaryTrueNodes.remove(secondaryTrueNode);
+						primary2extra.putAll(primary2extra2);
+						residualExtraTrueNodes.remove(extraTrueNode);
 						break;
 					}
 				}
@@ -218,51 +224,54 @@ class Correlator
 				}
 			}
 		}
-		for (@NonNull Node primaryNode : primary2secondary.keySet()) {
-			Node equivalentNode = primary2secondary.get(primaryNode);
-			assert equivalentNode != null;
-			secondaryNode2primaryNode.put(equivalentNode, primaryNode);
+		for (@NonNull Node primaryNode : primary2extra.keySet()) {
+			NodeMerger equivalentNodeMerger = primary2extra.get(primaryNode);
+			assert equivalentNodeMerger != null;
+			NodeMerger primaryNodeMerger = regionMerger.getNodeMerger(primaryNode);
+			for (@NonNull Node originalNode : equivalentNodeMerger.getOriginalNodes()) {
+				extraNode2nodeMerger.put(originalNode, primaryNodeMerger);
+			}
 		}
 		return true;
 	}
 
 	protected boolean correlateHeadNodes() {
-		List<Node> secondaryHeadNodes = secondaryRegion.getHeadNodes();
-		if (secondaryHeadNodes.size() != 1) {			// FIXME Surely consistent multiple heads are ok?
+		List<Node> extraHeadNodes = extraRegion.getHeadNodes();
+		if (extraHeadNodes.size() != 1) {			// FIXME Surely consistent multiple heads are ok?
 			if (debugFailures) {
-				AbstractMerger.FAILURE.println("More than 1 secondary head nodes: " + secondaryHeadNodes.size());
+				AbstractMerger.FAILURE.println("More than 1 extra head nodes: " + extraHeadNodes.size());
 			}
 			return false;
 		}
-		if (QVTscheduleUtil.hasPredicates(secondaryRegion)) {
+		if (QVTscheduleUtil.hasPredicates(extraRegion)) {
 			return false;			// FIXME upgrade to allow merging of matching predicates
 		}
-		Node secondaryHeadNode = secondaryHeadNodes.get(0);
-		CompleteClass completeClass = secondaryHeadNode.getCompleteClass();
-		List<@NonNull Node> primaryNodes = completeClass2primaryNodes.get(completeClass);
-		if ((primaryNodes == null) || (primaryNodes.size() == 0)) {
+		Node extraHeadNode = extraHeadNodes.get(0);
+		CompleteClass completeClass = extraHeadNode.getCompleteClass();
+		List<@NonNull NodeMerger> nodeMergers = regionMerger.getNodeMergers(completeClass);
+		if ((nodeMergers == null) || (nodeMergers.size() == 0)) {
 			if (debugFailures) {
-				AbstractMerger.FAILURE.println("No primary nodes of type: " + completeClass);
+				AbstractMerger.FAILURE.println("No node mergers of type: " + completeClass);
 			}
 			return false;
 		}
-		Node primaryHeadNode = secondaryNode2primaryNode.get(secondaryHeadNode);
-		if (primaryHeadNode == null) {
-			primaryHeadNode = selectMergedHeadNode(secondaryHeadNode, primaryNodes);
-			if (primaryHeadNode == null) {
-				primaryHeadNode = selectMergedHeadNode(secondaryHeadNode, primaryNodes);		// FIXME debugging
+		NodeMerger headNodeMerger = extraNode2nodeMerger.get(extraHeadNode);
+		if (headNodeMerger == null) {
+			headNodeMerger = selectHeadNodeMerger(extraHeadNode, nodeMergers);
+			if (headNodeMerger == null) {
+				headNodeMerger = selectHeadNodeMerger(extraHeadNode, nodeMergers);		// FIXME debugging
 				if (debugFailures) {
-					AbstractMerger.FAILURE.println("No primary head node to match: " + secondaryHeadNode);
+					AbstractMerger.FAILURE.println("No head node merger to match: " + extraHeadNode);
 				}
 				return false;
 			}
-			secondaryNode2primaryNode.put(secondaryHeadNode, primaryHeadNode);
+			extraNode2nodeMerger.put(extraHeadNode, headNodeMerger);
 		}
-		if (primaryNodes.size() > 1) {
-			for (@NonNull Node primaryNode : primaryNodes) {
-				if ((primaryNode != primaryHeadNode) && !primaryNode.isLoaded()) {
+		if (nodeMergers.size() > 1) {
+			for (@NonNull NodeMerger nodeMerger : nodeMergers) {
+				if ((nodeMerger != headNodeMerger) && !nodeMerger.isLoaded()) {
 					if (debugFailures) {		// FIXME multiple matching not-speculated might be ok
-						AbstractMerger.FAILURE.println("Multiple primary nodes of type: " + completeClass);
+						AbstractMerger.FAILURE.println("Multiple node mergers of type: " + completeClass);
 					}
 					return false;
 				}
@@ -273,60 +282,61 @@ class Correlator
 
 	protected boolean correlateNavigablePredicates() {
 		//
-		//	Loop over a growing worklist of secondary nodes.
+		//	Loop over a growing worklist of extra nodes.
 		//
-		Set<@NonNull Node> secondaryNodes = new HashSet<>(secondaryNode2primaryNode.keySet());
-		List<@NonNull Node> secondaryNodesWorkList = new ArrayList<>(secondaryNodes);
-		for (int i = 0; i < secondaryNodesWorkList.size(); i++) {
-			@NonNull Node secondarySourceNode = secondaryNodesWorkList.get(i);
-			@Nullable Node primarySourceNode = secondaryNode2primaryNode.get(secondarySourceNode);
-			if (!strategy.navigableNodesMatch(secondarySourceNode, primarySourceNode)) {
+		Set<@NonNull Node> extraNodes = new HashSet<>(extraNode2nodeMerger.keySet());
+		List<@NonNull Node> extraNodesWorkList = new ArrayList<>(extraNodes);
+		for (int i = 0; i < extraNodesWorkList.size(); i++) {
+			@NonNull Node extraSourceNode = extraNodesWorkList.get(i);
+			@Nullable NodeMerger sourceNodeMerger = extraNode2nodeMerger.get(extraSourceNode);
+			if (!strategy.navigableNodesMatch(sourceNodeMerger, extraSourceNode)) {
 				return false;
 			}
-			for (@NonNull NavigableEdge uncastSecondaryEdge : secondarySourceNode.getNavigableEdges()) {
-				Node uncastSecondaryTargetNode = uncastSecondaryEdge.getEdgeTarget();
-				Iterable<@NonNull Node> secondaryTargetNodes = QVTscheduleUtil.getCastTargets(uncastSecondaryTargetNode, true);
-				if (primarySourceNode != null) {
-					NavigableEdge uncastPrimaryEdge = primarySourceNode.getNavigableEdge(QVTscheduleUtil.getProperty(uncastSecondaryEdge));	// Skip isSecondary properties
-					if (!strategy.navigableEdgesMatch(uncastSecondaryEdge, uncastPrimaryEdge)) {
+			for (@NonNull NavigableEdge uncastExtraEdge : extraSourceNode.getNavigableEdges()) {
+				Node uncastExtraTargetNode = uncastExtraEdge.getEdgeTarget();
+				Iterable<@NonNull Node> extraTargetNodes = QVTscheduleUtil.getCastTargets(uncastExtraTargetNode, true);
+				if (sourceNodeMerger != null) {
+					NavigableEdge uncastPrimaryEdge = sourceNodeMerger.getNavigableEdge(QVTscheduleUtil.getProperty(uncastExtraEdge));	// Skip isSecondary properties
+					EdgeMerger edgeMerger = uncastPrimaryEdge != null ? regionMerger.getEdgeMerger(uncastPrimaryEdge) : null;
+					if (!strategy.navigableEdgesMatch(edgeMerger, uncastExtraEdge)) {
 						return false;
 					}
 					if (uncastPrimaryEdge != null) {
 						Node uncastPrimaryTargetNode = uncastPrimaryEdge.getEdgeTarget();
-						if (uncastSecondaryTargetNode.isNullLiteral() != uncastPrimaryTargetNode.isNullLiteral()) {
+						if (uncastExtraTargetNode.isNullLiteral() != uncastPrimaryTargetNode.isNullLiteral()) {
 							if (debugFailures) {
-								AbstractMerger.FAILURE.println("Inconsistent ExplicitNull: " + uncastSecondaryTargetNode);
+								AbstractMerger.FAILURE.println("Inconsistent ExplicitNull: " + uncastExtraTargetNode);
 							}
 							return false;
 						}
-						Map<@NonNull CompleteClass, @NonNull Node> completeClass2primaryTargetNodes = new HashMap<>();
+						Map<@NonNull CompleteClass, @NonNull NodeMerger> completeClass2targetNodeMergers = new HashMap<>();
 						for (@NonNull Node primaryTargetNode : QVTscheduleUtil.getCastTargets(uncastPrimaryTargetNode, true)) {
 							CompleteClass targetCompleteClass = primaryTargetNode.getCompleteClass();
-							Node oldNode = completeClass2primaryTargetNodes.put(targetCompleteClass, primaryTargetNode);
-							if (oldNode != null) {
+							NodeMerger oldNodeMerger = completeClass2targetNodeMergers.put(targetCompleteClass, regionMerger.getNodeMerger(primaryTargetNode));
+							if (oldNodeMerger != null) {
 								if (debugFailures) {
 									AbstractMerger.FAILURE.println("Inconsistent paths to: " + targetCompleteClass);
 								}
 								return false;		// FIXME should have an earlier cast rationalizer
 							}
 						}
-						for (@NonNull Node secondaryTargetNode : secondaryTargetNodes) {
-							CompleteClass targetCompleteClass = secondaryTargetNode.getCompleteClass();
-							Node primaryTargetNode = completeClass2primaryTargetNodes.remove(targetCompleteClass);
-							if (primaryTargetNode == null) {
+						for (@NonNull Node extraTargetNode : extraTargetNodes) {
+							CompleteClass targetCompleteClass = extraTargetNode.getCompleteClass();
+							NodeMerger targetNodeMerger = completeClass2targetNodeMergers.remove(targetCompleteClass);
+							if (targetNodeMerger == null) {
 								if (debugFailures) {
-									AbstractMerger.FAILURE.println("Inconsistent types at: " + primaryTargetNode + ", " + secondaryTargetNode);
+									AbstractMerger.FAILURE.println("Inconsistent types at: " + targetNodeMerger + ", " + extraTargetNode);
 								}
 								return false;		// FIXME Inconsistent navigation is too complex
 							}
 							else {
-								Node primaryTargetNode2 = secondaryNode2primaryNode.get(secondaryTargetNode);
-								if (primaryTargetNode2 == null) {
-									secondaryNode2primaryNode.put(secondaryTargetNode, primaryTargetNode);
+								NodeMerger targetNodeMerger2 = extraNode2nodeMerger.get(extraTargetNode);
+								if (targetNodeMerger2 == null) {
+									extraNode2nodeMerger.put(extraTargetNode, targetNodeMerger);
 								}
-								else if (primaryTargetNode != primaryTargetNode2) {
+								else if (targetNodeMerger != targetNodeMerger2) {
 									if (debugFailures) {
-										AbstractMerger.FAILURE.println("Inconsistent paths to: " + primaryTargetNode + ", " + primaryTargetNode2);
+										AbstractMerger.FAILURE.println("Inconsistent paths to: " + targetNodeMerger + ", " + targetNodeMerger2);
 									}
 									return false;		// FIXME Inconsistent navigation is too complex
 								}
@@ -334,9 +344,9 @@ class Correlator
 						}
 					}
 				}
-				for (@NonNull Node secondaryTargetNode : secondaryTargetNodes) {
-					if (secondaryNodes.add(secondaryTargetNode)) {
-						secondaryNodesWorkList.add(secondaryTargetNode);
+				for (@NonNull Node extraTargetNode : extraTargetNodes) {
+					if (extraNodes.add(extraTargetNode)) {
+						extraNodesWorkList.add(extraTargetNode);
 					}
 				}
 			}
@@ -344,19 +354,27 @@ class Correlator
 		return true;
 	}
 
-	protected void correlateResidualComputations(@NonNull Iterable<@NonNull Node> secondaryNodes) {
-		for (@NonNull Node secondaryNode : secondaryNodes) {
-			Node primaryNode = secondaryNode2primaryNode.get(secondaryNode);
-			assert primaryNode != null;
-			Map<@NonNull Node, @NonNull Node> secondary2primary2 = new HashMap<>();
-			if (correlateComputation(secondaryNode, primaryNode, secondary2primary2)) {	// FIXME use hashes
-				secondaryNode2primaryNode.putAll(secondary2primary2);
+	protected void correlateResidualComputations(@NonNull Iterable<@NonNull Node> extraNodes) {
+		for (@NonNull Node extraNode : extraNodes) {
+			NodeMerger nodeMerger = extraNode2nodeMerger.get(extraNode);
+			assert nodeMerger != null;
+			Map<@NonNull Node, @NonNull NodeMerger> extraNode2nodeMerger2 = new HashMap<>();
+			if (correlateComputation(extraNode, nodeMerger, extraNode2nodeMerger2)) {	// FIXME use hashes
+				for (@NonNull Node extraNode2 : extraNode2nodeMerger2.keySet()) {
+					NodeMerger nodeMerger2 = extraNode2nodeMerger2.get(extraNode2);
+					assert nodeMerger2 != null;
+					extraNode2nodeMerger.put(extraNode2, nodeMerger2);
+				}
 			}
 		}
 	}
 
-	public @NonNull Map<@NonNull Node, @NonNull Node> getNode2Node() {
-		return secondaryNode2primaryNode;
+	public @NonNull Map<@NonNull Node, @NonNull NodeMerger> getNode2NodeMerger() {
+		return extraNode2nodeMerger;
+	}
+
+	public @NonNull RegionMerger getRegionMerger() {
+		return regionMerger;
 	}
 
 	/**
@@ -394,24 +412,24 @@ class Correlator
 		return bestHeadNode;
 	} */
 
-	protected @Nullable Node selectMergedHeadNode(@NonNull Node headNode, @NonNull List<@NonNull Node> mergedNodes) {
-		if (mergedNodes.size() == 1) {
-			Node mergedNode = mergedNodes.get(0);//selectBestHeadNode(mergedNodes);
+	protected @Nullable NodeMerger selectHeadNodeMerger(@NonNull Node headNode, @NonNull List<@NonNull NodeMerger> nodeMergers) {
+		if (nodeMergers.size() == 1) {
+			NodeMerger nodeMerger = nodeMergers.get(0);//selectBestHeadNode(mergedNodes);
 			//			if (mergedNode.isIterator()) {
 			//				return null;
 			//			}
-			return mergedNode;
+			return nodeMerger;
 		}
-		if (mergedNodes.size() == 0) {
+		if (nodeMergers.size() == 0) {
 			return null;
 		}
 		Iterable<NavigableEdge> predicateEdges = headNode.getPredicateEdges();
-		for (@NonNull Node mergedNode : mergedNodes) {
-			boolean ok = !mergedNode.isIterator();
+		for (@NonNull NodeMerger nodeMerger : nodeMergers) {
+			boolean ok = !nodeMerger.isIterator();
 			if (ok) {
 				for (@NonNull NavigableEdge predicateEdge : predicateEdges) {
 					Property property = QVTscheduleUtil.getProperty(predicateEdge);
-					Node navigation = mergedNode.getNavigableTarget(property);
+					Node navigation = nodeMerger.getNavigableTarget(property);
 					if (navigation == null) {
 						ok = false;
 						break;
@@ -419,7 +437,7 @@ class Correlator
 				}
 			}
 			if (ok) {						// FIXME stronger checking
-				return mergedNode;
+				return nodeMerger;
 			}
 		}
 		return null;

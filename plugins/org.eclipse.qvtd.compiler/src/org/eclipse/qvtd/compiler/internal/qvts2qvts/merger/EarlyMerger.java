@@ -60,8 +60,8 @@ public class EarlyMerger extends AbstractMerger
 		}
 
 		@Override
-		protected @NonNull MappingRegion createNewRegion(@NonNull String newName) {
-			return new EarlyMergedMappingRegion(scheduleManager, newName);
+		protected @NonNull MappingRegion createMergedRegion(@NonNull String mergedName) {
+			return new EarlyMergedMappingRegion(scheduleManager, mergedName);
 		}
 	}
 
@@ -244,24 +244,25 @@ public class EarlyMerger extends AbstractMerger
 				if (EARLY.isActive()) {
 					EARLY.println("Correlating: " + secondaryRegion + ", " + primaryRegion);
 				}
-				Correlator secondary2primary = Correlator.correlate(secondaryRegion, primaryRegion, EarlyStrategy.INSTANCE, null);
-				if (secondary2primary != null) {
+				RegionMerger forwardRegionMerger = new EarlyRegionMerger(scheduleManager, primaryRegion);
+				Correlator forwardCorrelator = Correlator.correlate(forwardRegionMerger, secondaryRegion, EarlyStrategy.INSTANCE, null);
+				if (forwardCorrelator != null) {
 					boolean doMerge = false;
+					RegionMerger reverseRegionMerger = new EarlyRegionMerger(scheduleManager, secondaryRegion);
 					if (!isSharedHead(primaryRegion, secondaryRegion)) {
 						doMerge = false;
 					}
-					else if (Correlator.correlate(primaryRegion, secondaryRegion, EarlyStrategy.INSTANCE, secondary2primary.getNode2Node()) != null) {
+					else if (Correlator.correlate(reverseRegionMerger, primaryRegion, EarlyStrategy.INSTANCE, forwardCorrelator) != null) {
 						doMerge = true;
 					}
 					if (doMerge) {
 						residualInputRegions.remove(mergedRegion);
 						residualInputRegions.remove(secondaryRegion);
-						RegionMerger regionMerger = new EarlyRegionMerger(scheduleManager, primaryRegion);
-						regionMerger.addSecondaryRegion(secondaryRegion, secondary2primary.getNode2Node());
-						regionMerger.prune();
-						mergedRegion = regionMerger.create();
+						forwardRegionMerger.addSecondaryRegion(secondaryRegion, forwardCorrelator);
+						forwardRegionMerger.prune();
+						mergedRegion = forwardRegionMerger.create();
 						scheduleManager.addMappingRegion(mergedRegion);
-						regionMerger.check(mergedRegion);
+						forwardRegionMerger.check(mergedRegion);
 						primaryRegion = mergedRegion;
 					}
 				}

@@ -19,12 +19,15 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import com.google.common.collect.Iterables;
 
@@ -39,29 +42,21 @@ abstract class RegionMerger // implements Region
 	protected final @NonNull ScheduleManager scheduleManager;
 
 	/**
-	 * The primary original region contributing to the merged region.
+	 * The original regions contributing to the merged region.
 	 */
-	protected final @NonNull MappingRegion primaryRegion;
+	private final @NonNull List<@NonNull MappingRegion> originalRegions = new ArrayList<>();
 
 	/**
-	 * Additional secondary region contributing to the merged region.
+	 * Mapping from each original region node to the corresponding merged node.
 	 */
-	protected final @NonNull List<@NonNull MappingRegion> secondaryRegions = new ArrayList<>();
+	protected final @NonNull Map<@NonNull Node, @NonNull NodeMerger> originalNode2nodeMerger = new HashMap<>();
 
 	/**
-	 * Nodes to be merged from a secondary region mapped to a corresponding primary region node.
+	 * Mapping from each original region edge to the corresponding merged edge.
 	 */
-	protected final @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode = new HashMap<>();
+	private final @NonNull Map<@NonNull Edge, @NonNull EdgeMerger> originalEdge2edgeMerger = new HashMap<>();
 
-	/**
-	 * Mapping from each primary and secondary region node to the corresponding merged node.
-	 */
-	protected final @NonNull Map<@NonNull Node, @NonNull NodeMerger> oldNode2nodeMerger = new HashMap<>();
-
-	/**
-	 * Mapping from each primary and secondary region edge to the corresponding merged edge.
-	 */
-	private final @NonNull Map<@NonNull Edge, @NonNull EdgeMerger> oldEdge2edgeMerger = new HashMap<>();
+	private final @NonNull Map<@NonNull CompleteClass, @NonNull List<@NonNull NodeMerger>> completeClass2nodeMergers =  new HashMap<>();
 
 	/**
 	 * The original edges that are not represented in the result.
@@ -70,7 +65,7 @@ abstract class RegionMerger // implements Region
 
 	protected RegionMerger(@NonNull ScheduleManager scheduleManager, @NonNull MappingRegion primaryRegion) {
 		this.scheduleManager = scheduleManager;
-		this.primaryRegion = primaryRegion;
+		originalRegions.add(primaryRegion);
 		//		assert !(primaryRegion instanceof MicroMappingRegion);
 		//
 		for (@NonNull Node primaryNode : QVTscheduleUtil.getOwnedNodes(primaryRegion)) {
@@ -100,7 +95,7 @@ abstract class RegionMerger // implements Region
 			boolean isMerged = false;
 			for (@NonNull EdgeMerger edgeMerger : sourceNodeMerger.getOutgoingEdgeMergers(targetNodeMerger)) {
 				if (edgeMerger.sameEdge(secondaryEdge) != null) {
-					edgeMerger.addOldEdge(secondaryEdge);
+					edgeMerger.addOriginalEdge(secondaryEdge);
 					isMerged = true;
 					break;
 				}
@@ -114,18 +109,19 @@ abstract class RegionMerger // implements Region
 		}
 	}
 
-	public void addSecondaryRegion(@NonNull MappingRegion secondaryRegion, @NonNull Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode) {
+	public void addSecondaryRegion(@NonNull MappingRegion secondaryRegion, @NonNull Correlator correlator) {
+		assert correlator.getRegionMerger() == this;
+		Map<@NonNull Node, @NonNull NodeMerger> node2nodeMerger = correlator.getNode2NodeMerger();
+		//		Map<@NonNull Node, @NonNull Node> secondaryNode2primaryNode = correlator.getNode2Node();
+		//		Map<@NonNull Node, @NonNull NodeMerger> node2nodeMerger = getExtraNode2NodeMerger(secondaryNode2primaryNode);
 		//		assert !(secondaryRegion instanceof MicroMappingRegion);
-		assert !secondaryRegions.contains(secondaryRegion);
-		secondaryRegions.add(secondaryRegion);
-		this.secondaryNode2primaryNode.putAll(secondaryNode2primaryNode);
+		assert !originalRegions.contains(secondaryRegion);
+		originalRegions.add(secondaryRegion);
 		//
 		for (@NonNull Node secondaryNode : QVTscheduleUtil.getOwnedNodes(secondaryRegion)) {
-			Node primaryNode = secondaryNode2primaryNode.get(secondaryNode);
-			if (primaryNode != null) {
-				NodeMerger nodeMerger = oldNode2nodeMerger.get(primaryNode);
-				assert nodeMerger != null;
-				nodeMerger.addOldNode(secondaryNode);
+			NodeMerger nodeMerger = node2nodeMerger.get(secondaryNode);
+			if (nodeMerger != null) {
+				nodeMerger.addOriginalNode(secondaryNode);
 			}
 			else {
 				new NodeMerger(this, secondaryNode);
@@ -139,55 +135,52 @@ abstract class RegionMerger // implements Region
 		}
 	}
 
-	public void check(@NonNull MappingRegion newRegion) {
-		checkNodes(newRegion, primaryRegion);
-		for (@NonNull Region secondaryRegion : secondaryRegions) {
-			checkNodes(newRegion, secondaryRegion);
+	public void check(@NonNull MappingRegion mergedRegion) {
+		for (@NonNull Region originalRegion : originalRegions) {
+			checkNodes(mergedRegion, originalRegion);
 		}
-		checkEdges(newRegion, primaryRegion);
-		for (@NonNull Region secondaryRegion : secondaryRegions) {
-			checkEdges(newRegion, secondaryRegion);
+		for (@NonNull Region originalRegion : originalRegions) {
+			checkEdges(mergedRegion, originalRegion);
 		}
 	}
 
-	protected void checkEdges(@NonNull MappingRegion newRegion, @NonNull Region oldRegion) {
-		for (@NonNull Edge oldEdge : QVTscheduleUtil.getOwnedEdges(oldRegion)) {
-			assert oldEdge.getOwningRegion() == oldRegion;
-			if (!oldEdge.isRecursion() && !oldEdge.isSecondary()) {		// FIXME Remove this irregularity
-				EdgeMerger edgeMerger = oldEdge2edgeMerger.get(oldEdge);
+	protected void checkEdges(@NonNull MappingRegion mergedRegion, @NonNull Region originalRegion) {
+		for (@NonNull Edge originalEdge : QVTscheduleUtil.getOwnedEdges(originalRegion)) {
+			assert originalEdge.getOwningRegion() == originalRegion;
+			if (!originalEdge.isRecursion() && !originalEdge.isSecondary()) {		// FIXME Remove this irregularity
+				EdgeMerger edgeMerger = originalEdge2edgeMerger.get(originalEdge);
 				if (edgeMerger != null) {
-					assert Iterables.contains(edgeMerger.getOldEdges(), oldEdge);
-					assert edgeMerger.getNewEdge().getOwningRegion() == newRegion;
+					assert Iterables.contains(edgeMerger.getOriginalEdges(), originalEdge);
+					assert edgeMerger.getMergedEdge().getOwningRegion() == mergedRegion;
 				}
 				else {
-					assert debugPrunedEdges.contains(oldEdge);
+					assert debugPrunedEdges.contains(originalEdge);
 				}
 			}
 		}
 	}
 
-	protected void checkNodes(@NonNull MappingRegion newRegion, @NonNull Region oldRegion) {
-		for (@NonNull Node oldNode : QVTscheduleUtil.getOwnedNodes(oldRegion)) {
-			assert oldNode.getOwningRegion() == oldRegion;
-			Node nodeMerger = getNodeMerger(oldNode).getNewNode();
-			assert nodeMerger.getOwningRegion() == newRegion;
+	protected void checkNodes(@NonNull MappingRegion mergedRegion, @NonNull Region originalRegion) {
+		for (@NonNull Node originalNode : QVTscheduleUtil.getOwnedNodes(originalRegion)) {
+			assert originalNode.getOwningRegion() == originalRegion;
+			Node nodeMerger = getNodeMerger(originalNode).getMergedNode();
+			assert nodeMerger.getOwningRegion() == mergedRegion;
 		}
 	}
 
 	public @NonNull MappingRegion create() {
-		@NonNull String newName = createNewName();
-		MappingRegion newRegion = createNewRegion(newName);
-		createNewNodes(newRegion);
-		createNewEdges();
-		//		MappingRegionAnalysis.initHeadNodes(newRegion);
-		return newRegion;
+		@NonNull String mergedName = createMergedName();
+		MappingRegion mergedRegion = createMergedRegion(mergedName);
+		createMergedNodes(mergedRegion);
+		createMergedEdges();
+		//		MappingRegionAnalysis.initHeadNodes(mergedRegion);
+		return mergedRegion;
 	}
 
-	protected @NonNull String createNewName() {
+	protected @NonNull String createMergedName() {
 		List<@NonNull String> names = new ArrayList<>();
-		names.add(primaryRegion.getName().replace("»\\n", "» "));
-		for (@NonNull MappingRegion secondaryRegion : secondaryRegions) {
-			names.add(secondaryRegion.getName().replace("»\\n", "» "));
+		for (@NonNull MappingRegion originalRegion : originalRegions) {
+			names.add(originalRegion.getName().replace("»\\n", "» "));
 		}
 		Collections.sort(names);
 		StringBuilder s = new StringBuilder();
@@ -200,42 +193,89 @@ abstract class RegionMerger // implements Region
 		return s.toString();
 	}
 
-	protected void createNewEdges() {
-		for (@NonNull EdgeMerger edgeMerger : new HashSet<>(oldEdge2edgeMerger.values())) {
-			Node sourceNodeMerger = getNodeMerger(edgeMerger.getOldSource()).getNewNode();
-			Node targetNodeMerger = getNodeMerger(edgeMerger.getOldTarget()).getNewNode();
-			edgeMerger.createNewEdge(sourceNodeMerger, targetNodeMerger);
+	protected void createMergedEdges() {
+		for (@NonNull EdgeMerger edgeMerger : new HashSet<>(originalEdge2edgeMerger.values())) {
+			Node sourceNodeMerger = getNodeMerger(edgeMerger.getOriginalSource()).getMergedNode();
+			Node targetNodeMerger = getNodeMerger(edgeMerger.getOriginalTarget()).getMergedNode();
+			edgeMerger.createMergedEdge(sourceNodeMerger, targetNodeMerger);
 		}
 	}
 
-	protected void createNewNodes(@NonNull MappingRegion newRegion) {
-		for (@NonNull NodeMerger nodeMerger : new HashSet<>(oldNode2nodeMerger.values())) {
-			nodeMerger.createNewNode(newRegion);
+	protected void createMergedNodes(@NonNull MappingRegion mergedRegion) {
+		for (@NonNull NodeMerger nodeMerger : new HashSet<>(originalNode2nodeMerger.values())) {
+			nodeMerger.createMergedNode(mergedRegion);
 		}
 	}
 
-	protected abstract @NonNull MappingRegion createNewRegion(@NonNull String newName);
+	protected abstract @NonNull MappingRegion createMergedRegion(@NonNull String mergedName);
 
-	protected @NonNull EdgeMerger getEdgeMerger(@NonNull Edge oldEdge) {
-		return ClassUtil.nonNullState(oldEdge2edgeMerger.get(oldEdge));
+	protected @Nullable EdgeMerger getEdgeMerger(@NonNull Edge originalEdge) {
+		return originalEdge2edgeMerger.get(originalEdge);
 	}
 
-	protected @NonNull NodeMerger getNodeMerger(@NonNull Node oldNode) {
-		return ClassUtil.nonNullState(oldNode2nodeMerger.get(oldNode));
+	protected @NonNull NodeMerger getNodeMerger(@NonNull Node originalNode) {
+		return ClassUtil.nonNullState(originalNode2nodeMerger.get(originalNode));
 	}
 
-	protected @NonNull List<@NonNull MappingRegion> getSecondaryRegions() {
-		return secondaryRegions;
+	public @NonNull Map<@NonNull Node, @NonNull NodeMerger> getExtraNode2NodeMerger(@NonNull Map<@NonNull Node, @NonNull Node> extraNode2existingNode) {
+		Map<@NonNull Node, @NonNull NodeMerger> node2nodeMerger = new HashMap<>();
+		//		for (@NonNull Node node : extraNode2node.keySet()) {
+		//			NodeMerger nodeMerger = originalNode2nodeMerger.get(node);
+		//			//			assert nodeMerger != null;
+		//			if (nodeMerger != null) {
+		//				node2nodeMerger.put(node, nodeMerger);
+		//			}
+		//		}
+		for (@NonNull Node extraNode : extraNode2existingNode.keySet()) {
+			Node existingNode = extraNode2existingNode.get(extraNode);
+			assert existingNode != null;
+			NodeMerger nodeMerger = originalNode2nodeMerger.get(existingNode);
+			assert nodeMerger != null;
+			NodeMerger oldNodeMerger = node2nodeMerger.put(extraNode, nodeMerger);
+			assert (oldNodeMerger == null) || (oldNodeMerger == nodeMerger);
+		}
+		return node2nodeMerger;
 	}
 
-	protected void mapOldEdge(@NonNull Edge oldEdge, @NonNull EdgeMerger edgeMerger) {
-		EdgeMerger oldMergedEdge = oldEdge2edgeMerger.put(oldEdge, edgeMerger);
-		assert oldMergedEdge == null;
+	public @Nullable List<@NonNull NodeMerger> getNodeMergers(@NonNull CompleteClass completeClass) {
+		return completeClass2nodeMergers.get(completeClass);
 	}
 
-	protected void mapOldNode(@NonNull Node oldNode, @NonNull NodeMerger nodeMerger) {
-		NodeMerger oldMergedNode = oldNode2nodeMerger.put(oldNode, nodeMerger);
-		assert oldMergedNode == null;
+	protected @NonNull List<@NonNull MappingRegion> getOriginalRegions() {
+		return originalRegions;
+	}
+
+	public @NonNull MappingRegion getPrimaryRegion() {
+		return originalRegions.get(0);
+	}
+
+	public boolean isAbstract() {
+		MappingRegion primaryRegion = getPrimaryRegion();
+		if (primaryRegion instanceof RuleRegion) {
+			if (((RuleRegion)primaryRegion).getReferredRule().isIsAbstract()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	protected void mapOriginalEdge(@NonNull Edge originalEdge, @NonNull EdgeMerger edgeMerger) {
+		EdgeMerger originalMergedEdge = originalEdge2edgeMerger.put(originalEdge, edgeMerger);
+		assert originalMergedEdge == null;
+	}
+
+	protected void mapOriginalNode(@NonNull Node originalNode, @NonNull NodeMerger nodeMerger) {
+		NodeMerger originalMergedNode = originalNode2nodeMerger.put(originalNode, nodeMerger);
+		assert originalMergedNode == null;
+		CompleteClass completeClass = originalNode.getCompleteClass();
+		List<@NonNull NodeMerger> nodeMergers = completeClass2nodeMergers.get(completeClass);
+		if (nodeMergers == null) {
+			nodeMergers = new ArrayList<>();
+			completeClass2nodeMergers.put(completeClass, nodeMergers);
+		}
+		if (!nodeMergers.contains(nodeMerger)) {
+			nodeMergers.add(nodeMerger);
+		}
 	}
 
 	/**
@@ -245,20 +285,20 @@ abstract class RegionMerger // implements Region
 	 */
 	public void prune() {
 		List<@NonNull EdgeMerger> foldableEdgeMergers = new ArrayList<>();
-		for (@NonNull NodeMerger nodeMerger : new HashSet<>(oldNode2nodeMerger.values())) {
+		for (@NonNull NodeMerger nodeMerger : new HashSet<>(originalNode2nodeMerger.values())) {
 			nodeMerger.gatherFoldableEdges(foldableEdgeMergers);
 		}
 		for (@NonNull EdgeMerger foldableEdgeMerger : foldableEdgeMergers) {
 			NodeMerger sourceNodeMerger = foldableEdgeMerger.getSource();
 			NodeMerger targetNodeMerger = foldableEdgeMerger.getTarget();
 			sourceNodeMerger.destroy();
-			for (@NonNull Node oldNode : sourceNodeMerger.getOldNodes()) {
-				targetNodeMerger.addOldNode(oldNode);
-				for (@NonNull Edge oldEdge : QVTscheduleUtil.getIncomingEdges(oldNode)) {
-					addSecondaryEdge(oldEdge);
+			for (@NonNull Node originalNode : sourceNodeMerger.getOriginalNodes()) {
+				targetNodeMerger.addOriginalNode(originalNode);
+				for (@NonNull Edge originalEdge : QVTscheduleUtil.getIncomingEdges(originalNode)) {
+					addSecondaryEdge(originalEdge);
 				}
-				for (@NonNull Edge oldEdge : QVTscheduleUtil.getOutgoingEdges(oldNode)) {
-					addSecondaryEdge(oldEdge);
+				for (@NonNull Edge originalEdge : QVTscheduleUtil.getOutgoingEdges(originalNode)) {
+					addSecondaryEdge(originalEdge);
 				}
 			}
 		}
@@ -266,16 +306,16 @@ abstract class RegionMerger // implements Region
 
 	@Override
 	public String toString() {
-		return createNewName();
+		return createMergedName();
 	}
 
-	protected void unmapOldEdge(@NonNull Edge oldEdge, @NonNull EdgeMerger edgeMerger) {
-		EdgeMerger oldEdgeMerger = oldEdge2edgeMerger.remove(oldEdge);
-		assert oldEdgeMerger == edgeMerger;
+	protected void unmapOriginalEdge(@NonNull Edge originalEdge, @NonNull EdgeMerger edgeMerger) {
+		EdgeMerger originalEdgeMerger = originalEdge2edgeMerger.remove(originalEdge);
+		assert originalEdgeMerger == edgeMerger;
 	}
 
-	protected void unmapOldNode(@NonNull Node oldNode, @NonNull NodeMerger nodeMerger) {
-		NodeMerger oldNodeMerger = oldNode2nodeMerger.remove(oldNode);
-		assert oldNodeMerger == nodeMerger;
+	protected void unmapOriginalNode(@NonNull Node originalNode, @NonNull NodeMerger nodeMerger) {
+		NodeMerger originalNodeMerger = originalNode2nodeMerger.remove(originalNode);
+		assert originalNodeMerger == nodeMerger;
 	}
 }
