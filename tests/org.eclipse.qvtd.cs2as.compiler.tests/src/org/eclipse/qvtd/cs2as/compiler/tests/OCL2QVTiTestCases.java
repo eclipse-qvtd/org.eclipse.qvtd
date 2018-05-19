@@ -38,6 +38,7 @@ import org.eclipse.qvtd.compiler.AbstractCompilerOptions;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -295,6 +296,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 	@Override
 	@Before
 	public void setUp() throws Exception {
+		QVTm2QVTs.DEBUG_GRAPHS.setState(true);;
 		super.setUp();
 		XtextCompilerUtil.doQVTimperativeSetup(); // To be able to add QVTimperative.ocl validation
 		XtextCompilerUtil.doQVTcoreSetup();
