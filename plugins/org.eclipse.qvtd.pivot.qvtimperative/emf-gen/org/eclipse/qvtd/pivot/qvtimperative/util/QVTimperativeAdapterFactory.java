@@ -24,8 +24,6 @@ import org.eclipse.ocl.pivot.TemplateableElement;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
-import org.eclipse.ocl.pivot.util.Visitable;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -114,183 +112,175 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected QVTimperativeSwitch<@Nullable Adapter> modelSwitch =
 			new QVTimperativeSwitch<@Nullable Adapter>() {
-			@Override
-			public Adapter caseAddStatement(AddStatement object) {
-				return createAddStatementAdapter();
-			}
-			@Override
-			public Adapter caseAppendParameter(AppendParameter object) {
-				return createAppendParameterAdapter();
-			}
-			@Override
-			public Adapter caseAppendParameterBinding(AppendParameterBinding object) {
-				return createAppendParameterBindingAdapter();
-			}
-			@Override
-			public Adapter caseBufferStatement(BufferStatement object) {
-				return createBufferStatementAdapter();
-			}
-			@Override
-			public Adapter caseCheckStatement(CheckStatement object) {
-				return createCheckStatementAdapter();
-			}
-			@Override
-			public Adapter caseConnectionVariable(ConnectionVariable object) {
-				return createConnectionVariableAdapter();
-			}
-			@Override
-			public Adapter caseDeclareStatement(DeclareStatement object) {
-				return createDeclareStatementAdapter();
-			}
-			@Override
-			public Adapter caseGuardParameter(GuardParameter object) {
-				return createGuardParameterAdapter();
-			}
-			@Override
-			public Adapter caseGuardParameterBinding(GuardParameterBinding object) {
-				return createGuardParameterBindingAdapter();
-			}
-			@Override
-			public Adapter caseImperativeModel(ImperativeModel object) {
-				return createImperativeModelAdapter();
-			}
-			@Override
-			public Adapter caseImperativeTransformation(ImperativeTransformation object) {
-				return createImperativeTransformationAdapter();
-			}
-			@Override
-			public Adapter caseImperativeTypedModel(ImperativeTypedModel object) {
-				return createImperativeTypedModelAdapter();
-			}
-			@Override
-			public Adapter caseLoopParameterBinding(LoopParameterBinding object) {
-				return createLoopParameterBindingAdapter();
-			}
-			@Override
-			public Adapter caseLoopVariable(LoopVariable object) {
-				return createLoopVariableAdapter();
-			}
-			@Override
-			public Adapter caseMapping(Mapping object) {
-				return createMappingAdapter();
-			}
-			@Override
-			public Adapter caseMappingCall(MappingCall object) {
-				return createMappingCallAdapter();
-			}
-			@Override
-			public Adapter caseMappingLoop(MappingLoop object) {
-				return createMappingLoopAdapter();
-			}
-			@Override
-			public Adapter caseMappingParameter(MappingParameter object) {
-				return createMappingParameterAdapter();
-			}
-			@Override
-			public Adapter caseMappingParameterBinding(MappingParameterBinding object) {
-				return createMappingParameterBindingAdapter();
-			}
-			@Override
-			public Adapter caseMappingStatement(MappingStatement object) {
-				return createMappingStatementAdapter();
-			}
-			@Override
-			public Adapter caseNewStatement(NewStatement object) {
-				return createNewStatementAdapter();
-			}
-			@Override
-			public Adapter caseObservableStatement(ObservableStatement object) {
-				return createObservableStatementAdapter();
-			}
-			@Override
-			public Adapter caseSetStatement(SetStatement object) {
-				return createSetStatementAdapter();
-			}
-			@Override
-			public Adapter caseSimpleParameter(SimpleParameter object) {
-				return createSimpleParameterAdapter();
-			}
-			@Override
-			public Adapter caseSimpleParameterBinding(SimpleParameterBinding object) {
-				return createSimpleParameterBindingAdapter();
-			}
-			@Override
-			public Adapter caseStatement(Statement object) {
-				return createStatementAdapter();
-			}
-			@Override
-			public Adapter caseVariableStatement(VariableStatement object) {
-				return createVariableStatementAdapter();
-			}
-			@Override
-			public Adapter caseVisitable(Visitable object) {
-				return createVisitableAdapter();
-			}
-			@Override
-			public Adapter caseElement(Element object) {
-				return createElementAdapter();
-			}
-			@Override
-			public Adapter caseNameable(Nameable object) {
-				return createNameableAdapter();
-			}
-			@Override
-			public Adapter caseNamedElement(NamedElement object) {
-				return createNamedElementAdapter();
-			}
-			@Override
-			public Adapter caseTypedElement(TypedElement object) {
-				return createTypedElementAdapter();
-			}
-			@Override
-			public Adapter caseVariableDeclaration(VariableDeclaration object) {
-				return createVariableDeclarationAdapter();
-			}
-			@Override
-			public Adapter caseNamespace(Namespace object) {
-				return createNamespaceAdapter();
-			}
-			@Override
-			public Adapter caseModel(Model object) {
-				return createModelAdapter();
-			}
-			@Override
-			public Adapter caseBaseModel(BaseModel object) {
-				return createBaseModelAdapter();
-			}
-			@Override
-			public Adapter caseType(Type object) {
-				return createTypeAdapter();
-			}
-			@Override
-			public Adapter caseTemplateableElement(TemplateableElement object) {
-				return createTemplateableElementAdapter();
-			}
-			@Override
-			public Adapter caseClass(org.eclipse.ocl.pivot.Class object) {
-				return createClassAdapter();
-			}
-			@Override
-			public Adapter caseTransformation(Transformation object) {
-				return createTransformationAdapter();
-			}
-			@Override
-			public Adapter caseTypedModel(TypedModel object) {
-				return createTypedModelAdapter();
-			}
-			@Override
-			public Adapter caseRule(Rule object) {
-				return createRuleAdapter();
-			}
-			@Override
-			public Adapter caseReferringElement(ReferringElement object) {
-				return createReferringElementAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object) {
-				return createEObjectAdapter();
-			}
-		};
+		@Override
+		public Adapter caseAddStatement(AddStatement object) {
+			return createAddStatementAdapter();
+		}
+		@Override
+		public Adapter caseAppendParameter(AppendParameter object) {
+			return createAppendParameterAdapter();
+		}
+		@Override
+		public Adapter caseAppendParameterBinding(AppendParameterBinding object) {
+			return createAppendParameterBindingAdapter();
+		}
+		@Override
+		public Adapter caseBufferStatement(BufferStatement object) {
+			return createBufferStatementAdapter();
+		}
+		@Override
+		public Adapter caseCheckStatement(CheckStatement object) {
+			return createCheckStatementAdapter();
+		}
+		@Override
+		public Adapter caseConnectionVariable(ConnectionVariable object) {
+			return createConnectionVariableAdapter();
+		}
+		@Override
+		public Adapter caseDeclareStatement(DeclareStatement object) {
+			return createDeclareStatementAdapter();
+		}
+		@Override
+		public Adapter caseGuardParameter(GuardParameter object) {
+			return createGuardParameterAdapter();
+		}
+		@Override
+		public Adapter caseGuardParameterBinding(GuardParameterBinding object) {
+			return createGuardParameterBindingAdapter();
+		}
+		@Override
+		public Adapter caseImperativeModel(ImperativeModel object) {
+			return createImperativeModelAdapter();
+		}
+		@Override
+		public Adapter caseImperativeTransformation(ImperativeTransformation object) {
+			return createImperativeTransformationAdapter();
+		}
+		@Override
+		public Adapter caseImperativeTypedModel(ImperativeTypedModel object) {
+			return createImperativeTypedModelAdapter();
+		}
+		@Override
+		public Adapter caseLoopParameterBinding(LoopParameterBinding object) {
+			return createLoopParameterBindingAdapter();
+		}
+		@Override
+		public Adapter caseLoopVariable(LoopVariable object) {
+			return createLoopVariableAdapter();
+		}
+		@Override
+		public Adapter caseMapping(Mapping object) {
+			return createMappingAdapter();
+		}
+		@Override
+		public Adapter caseMappingCall(MappingCall object) {
+			return createMappingCallAdapter();
+		}
+		@Override
+		public Adapter caseMappingLoop(MappingLoop object) {
+			return createMappingLoopAdapter();
+		}
+		@Override
+		public Adapter caseMappingParameter(MappingParameter object) {
+			return createMappingParameterAdapter();
+		}
+		@Override
+		public Adapter caseMappingParameterBinding(MappingParameterBinding object) {
+			return createMappingParameterBindingAdapter();
+		}
+		@Override
+		public Adapter caseMappingStatement(MappingStatement object) {
+			return createMappingStatementAdapter();
+		}
+		@Override
+		public Adapter caseNewStatement(NewStatement object) {
+			return createNewStatementAdapter();
+		}
+		@Override
+		public Adapter caseObservableStatement(ObservableStatement object) {
+			return createObservableStatementAdapter();
+		}
+		@Override
+		public Adapter caseSetStatement(SetStatement object) {
+			return createSetStatementAdapter();
+		}
+		@Override
+		public Adapter caseSimpleParameter(SimpleParameter object) {
+			return createSimpleParameterAdapter();
+		}
+		@Override
+		public Adapter caseSimpleParameterBinding(SimpleParameterBinding object) {
+			return createSimpleParameterBindingAdapter();
+		}
+		@Override
+		public Adapter caseStatement(Statement object) {
+			return createStatementAdapter();
+		}
+		@Override
+		public Adapter caseVariableStatement(VariableStatement object) {
+			return createVariableStatementAdapter();
+		}
+		@Override
+		public Adapter caseElement(Element object) {
+			return createElementAdapter();
+		}
+		@Override
+		public Adapter caseNamedElement(NamedElement object) {
+			return createNamedElementAdapter();
+		}
+		@Override
+		public Adapter caseTypedElement(TypedElement object) {
+			return createTypedElementAdapter();
+		}
+		@Override
+		public Adapter caseVariableDeclaration(VariableDeclaration object) {
+			return createVariableDeclarationAdapter();
+		}
+		@Override
+		public Adapter caseNamespace(Namespace object) {
+			return createNamespaceAdapter();
+		}
+		@Override
+		public Adapter caseModel(Model object) {
+			return createModelAdapter();
+		}
+		@Override
+		public Adapter caseBaseModel(BaseModel object) {
+			return createBaseModelAdapter();
+		}
+		@Override
+		public Adapter caseType(Type object) {
+			return createTypeAdapter();
+		}
+		@Override
+		public Adapter caseTemplateableElement(TemplateableElement object) {
+			return createTemplateableElementAdapter();
+		}
+		@Override
+		public Adapter caseClass(org.eclipse.ocl.pivot.Class object) {
+			return createClassAdapter();
+		}
+		@Override
+		public Adapter caseTransformation(Transformation object) {
+			return createTransformationAdapter();
+		}
+		@Override
+		public Adapter caseTypedModel(TypedModel object) {
+			return createTypedModelAdapter();
+		}
+		@Override
+		public Adapter caseRule(Rule object) {
+			return createRuleAdapter();
+		}
+		@Override
+		public Adapter caseReferringElement(ReferringElement object) {
+			return createReferringElementAdapter();
+		}
+		@Override
+		public Adapter defaultCase(EObject object) {
+			return createEObjectAdapter();
+		}
+	};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.
@@ -685,20 +675,6 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.util.Visitable <em>Visitable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.pivot.util.Visitable
-	 * @generated
-	 */
-	public Adapter createVisitableAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.Element <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -709,20 +685,6 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.utilities.Nameable <em>Nameable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.pivot.utilities.Nameable
-	 * @generated
-	 */
-	public Adapter createNameableAdapter() {
 		return null;
 	}
 

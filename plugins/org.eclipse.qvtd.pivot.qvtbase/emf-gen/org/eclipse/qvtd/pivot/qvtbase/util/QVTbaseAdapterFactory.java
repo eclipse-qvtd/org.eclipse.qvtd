@@ -27,8 +27,6 @@ import org.eclipse.ocl.pivot.TemplateableElement;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
-import org.eclipse.ocl.pivot.util.Visitable;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -96,107 +94,99 @@ public class QVTbaseAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected QVTbaseSwitch<@Nullable Adapter> modelSwitch =
 			new QVTbaseSwitch<@Nullable Adapter>() {
-			@Override
-			public Adapter caseBaseModel(BaseModel object) {
-				return createBaseModelAdapter();
-			}
-			@Override
-			public Adapter caseDomain(Domain object) {
-				return createDomainAdapter();
-			}
-			@Override
-			public Adapter caseFunction(Function object) {
-				return createFunctionAdapter();
-			}
-			@Override
-			public Adapter caseFunctionParameter(FunctionParameter object) {
-				return createFunctionParameterAdapter();
-			}
-			@Override
-			public Adapter casePattern(Pattern object) {
-				return createPatternAdapter();
-			}
-			@Override
-			public Adapter casePredicate(Predicate object) {
-				return createPredicateAdapter();
-			}
-			@Override
-			public Adapter caseRule(Rule object) {
-				return createRuleAdapter();
-			}
-			@Override
-			public Adapter caseTransformation(Transformation object) {
-				return createTransformationAdapter();
-			}
-			@Override
-			public Adapter caseTypedModel(TypedModel object) {
-				return createTypedModelAdapter();
-			}
-			@Override
-			public Adapter caseVisitable(Visitable object) {
-				return createVisitableAdapter();
-			}
-			@Override
-			public Adapter caseElement(Element object) {
-				return createElementAdapter();
-			}
-			@Override
-			public Adapter caseNameable(Nameable object) {
-				return createNameableAdapter();
-			}
-			@Override
-			public Adapter caseNamedElement(NamedElement object) {
-				return createNamedElementAdapter();
-			}
-			@Override
-			public Adapter caseNamespace(Namespace object) {
-				return createNamespaceAdapter();
-			}
-			@Override
-			public Adapter caseModel(Model object) {
-				return createModelAdapter();
-			}
-			@Override
-			public Adapter caseReferringElement(ReferringElement object) {
-				return createReferringElementAdapter();
-			}
-			@Override
-			public Adapter caseTypedElement(TypedElement object) {
-				return createTypedElementAdapter();
-			}
-			@Override
-			public Adapter caseFeature(Feature object) {
-				return createFeatureAdapter();
-			}
-			@Override
-			public Adapter caseTemplateableElement(TemplateableElement object) {
-				return createTemplateableElementAdapter();
-			}
-			@Override
-			public Adapter caseOperation(Operation object) {
-				return createOperationAdapter();
-			}
-			@Override
-			public Adapter caseVariableDeclaration(VariableDeclaration object) {
-				return createVariableDeclarationAdapter();
-			}
-			@Override
-			public Adapter caseParameter(Parameter object) {
-				return createParameterAdapter();
-			}
-			@Override
-			public Adapter caseType(Type object) {
-				return createTypeAdapter();
-			}
-			@Override
-			public Adapter caseClass(org.eclipse.ocl.pivot.Class object) {
-				return createClassAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object) {
-				return createEObjectAdapter();
-			}
-		};
+		@Override
+		public Adapter caseBaseModel(BaseModel object) {
+			return createBaseModelAdapter();
+		}
+		@Override
+		public Adapter caseDomain(Domain object) {
+			return createDomainAdapter();
+		}
+		@Override
+		public Adapter caseFunction(Function object) {
+			return createFunctionAdapter();
+		}
+		@Override
+		public Adapter caseFunctionParameter(FunctionParameter object) {
+			return createFunctionParameterAdapter();
+		}
+		@Override
+		public Adapter casePattern(Pattern object) {
+			return createPatternAdapter();
+		}
+		@Override
+		public Adapter casePredicate(Predicate object) {
+			return createPredicateAdapter();
+		}
+		@Override
+		public Adapter caseRule(Rule object) {
+			return createRuleAdapter();
+		}
+		@Override
+		public Adapter caseTransformation(Transformation object) {
+			return createTransformationAdapter();
+		}
+		@Override
+		public Adapter caseTypedModel(TypedModel object) {
+			return createTypedModelAdapter();
+		}
+		@Override
+		public Adapter caseElement(Element object) {
+			return createElementAdapter();
+		}
+		@Override
+		public Adapter caseNamedElement(NamedElement object) {
+			return createNamedElementAdapter();
+		}
+		@Override
+		public Adapter caseNamespace(Namespace object) {
+			return createNamespaceAdapter();
+		}
+		@Override
+		public Adapter caseModel(Model object) {
+			return createModelAdapter();
+		}
+		@Override
+		public Adapter caseReferringElement(ReferringElement object) {
+			return createReferringElementAdapter();
+		}
+		@Override
+		public Adapter caseTypedElement(TypedElement object) {
+			return createTypedElementAdapter();
+		}
+		@Override
+		public Adapter caseFeature(Feature object) {
+			return createFeatureAdapter();
+		}
+		@Override
+		public Adapter caseTemplateableElement(TemplateableElement object) {
+			return createTemplateableElementAdapter();
+		}
+		@Override
+		public Adapter caseOperation(Operation object) {
+			return createOperationAdapter();
+		}
+		@Override
+		public Adapter caseVariableDeclaration(VariableDeclaration object) {
+			return createVariableDeclarationAdapter();
+		}
+		@Override
+		public Adapter caseParameter(Parameter object) {
+			return createParameterAdapter();
+		}
+		@Override
+		public Adapter caseType(Type object) {
+			return createTypeAdapter();
+		}
+		@Override
+		public Adapter caseClass(org.eclipse.ocl.pivot.Class object) {
+			return createClassAdapter();
+		}
+		@Override
+		public Adapter defaultCase(EObject object) {
+			return createEObjectAdapter();
+		}
+	};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.
@@ -339,20 +329,6 @@ public class QVTbaseAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.util.Visitable <em>Visitable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.pivot.util.Visitable
-	 * @generated
-	 */
-	public Adapter createVisitableAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.Element <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -363,20 +339,6 @@ public class QVTbaseAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.utilities.Nameable <em>Nameable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.pivot.utilities.Nameable
-	 * @generated
-	 */
-	public Adapter createNameableAdapter() {
 		return null;
 	}
 

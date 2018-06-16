@@ -51,7 +51,7 @@ Workflow {
     	excludedEClassifierName = "Model"
     	excludedEClassifierName = "Transformation"
     }
-    component = GenerateModel { resourceSet = libResourceSet skipOnErrors = true
+    component = GenerateModel { resourceSet = libResourceSet skipOnErrors = true clearResourceSet = false
     	genModel = "/org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.genmodel"
     }
     component = Model2tablesGenerator { resourceSet = libResourceSet
@@ -81,7 +81,7 @@ Workflow {
     	excludedEClassifierName = "Model"
     	excludedEClassifierName = "Transformation"
     }
-    component = GenerateModel { resourceSet = libResourceSet skipOnErrors = true
+    component = GenerateModel { resourceSet = libResourceSet skipOnErrors = true clearResourceSet = false
     	genModel = "/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperativeLibrary.genmodel"
     }
     component = Model2tablesGenerator { resourceSet = libResourceSet

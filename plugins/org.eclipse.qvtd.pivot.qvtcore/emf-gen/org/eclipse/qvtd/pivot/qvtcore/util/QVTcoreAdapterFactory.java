@@ -23,8 +23,6 @@ import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
-import org.eclipse.ocl.pivot.util.Visitable;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
@@ -101,131 +99,123 @@ public class QVTcoreAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected QVTcoreSwitch<@Nullable Adapter> modelSwitch =
 			new QVTcoreSwitch<@Nullable Adapter>() {
-			@Override
-			public Adapter caseArea(Area object) {
-				return createAreaAdapter();
-			}
-			@Override
-			public Adapter caseAssignment(Assignment object) {
-				return createAssignmentAdapter();
-			}
-			@Override
-			public Adapter caseBottomPattern(BottomPattern object) {
-				return createBottomPatternAdapter();
-			}
-			@Override
-			public Adapter caseBottomVariable(BottomVariable object) {
-				return createBottomVariableAdapter();
-			}
-			@Override
-			public Adapter caseCoreDomain(CoreDomain object) {
-				return createCoreDomainAdapter();
-			}
-			@Override
-			public Adapter caseCoreModel(CoreModel object) {
-				return createCoreModelAdapter();
-			}
-			@Override
-			public Adapter caseCorePattern(CorePattern object) {
-				return createCorePatternAdapter();
-			}
-			@Override
-			public Adapter caseEnforcementOperation(EnforcementOperation object) {
-				return createEnforcementOperationAdapter();
-			}
-			@Override
-			public Adapter caseGuardPattern(GuardPattern object) {
-				return createGuardPatternAdapter();
-			}
-			@Override
-			public Adapter caseGuardVariable(GuardVariable object) {
-				return createGuardVariableAdapter();
-			}
-			@Override
-			public Adapter caseMapping(Mapping object) {
-				return createMappingAdapter();
-			}
-			@Override
-			public Adapter caseNavigationAssignment(NavigationAssignment object) {
-				return createNavigationAssignmentAdapter();
-			}
-			@Override
-			public Adapter caseOppositePropertyAssignment(OppositePropertyAssignment object) {
-				return createOppositePropertyAssignmentAdapter();
-			}
-			@Override
-			public Adapter casePropertyAssignment(PropertyAssignment object) {
-				return createPropertyAssignmentAdapter();
-			}
-			@Override
-			public Adapter caseRealizedVariable(RealizedVariable object) {
-				return createRealizedVariableAdapter();
-			}
-			@Override
-			public Adapter caseVariableAssignment(VariableAssignment object) {
-				return createVariableAssignmentAdapter();
-			}
-			@Override
-			public Adapter caseVisitable(Visitable object) {
-				return createVisitableAdapter();
-			}
-			@Override
-			public Adapter caseElement(Element object) {
-				return createElementAdapter();
-			}
-			@Override
-			public Adapter casePattern(Pattern object) {
-				return createPatternAdapter();
-			}
-			@Override
-			public Adapter caseNameable(Nameable object) {
-				return createNameableAdapter();
-			}
-			@Override
-			public Adapter caseNamedElement(NamedElement object) {
-				return createNamedElementAdapter();
-			}
-			@Override
-			public Adapter caseTypedElement(TypedElement object) {
-				return createTypedElementAdapter();
-			}
-			@Override
-			public Adapter caseVariableDeclaration(VariableDeclaration object) {
-				return createVariableDeclarationAdapter();
-			}
-			@Override
-			public Adapter caseVariable(Variable object) {
-				return createVariableAdapter();
-			}
-			@Override
-			public Adapter caseReferringElement(ReferringElement object) {
-				return createReferringElementAdapter();
-			}
-			@Override
-			public Adapter caseDomain(Domain object) {
-				return createDomainAdapter();
-			}
-			@Override
-			public Adapter caseNamespace(Namespace object) {
-				return createNamespaceAdapter();
-			}
-			@Override
-			public Adapter caseModel(Model object) {
-				return createModelAdapter();
-			}
-			@Override
-			public Adapter caseBaseModel(BaseModel object) {
-				return createBaseModelAdapter();
-			}
-			@Override
-			public Adapter caseRule(Rule object) {
-				return createRuleAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object) {
-				return createEObjectAdapter();
-			}
-		};
+		@Override
+		public Adapter caseArea(Area object) {
+			return createAreaAdapter();
+		}
+		@Override
+		public Adapter caseAssignment(Assignment object) {
+			return createAssignmentAdapter();
+		}
+		@Override
+		public Adapter caseBottomPattern(BottomPattern object) {
+			return createBottomPatternAdapter();
+		}
+		@Override
+		public Adapter caseBottomVariable(BottomVariable object) {
+			return createBottomVariableAdapter();
+		}
+		@Override
+		public Adapter caseCoreDomain(CoreDomain object) {
+			return createCoreDomainAdapter();
+		}
+		@Override
+		public Adapter caseCoreModel(CoreModel object) {
+			return createCoreModelAdapter();
+		}
+		@Override
+		public Adapter caseCorePattern(CorePattern object) {
+			return createCorePatternAdapter();
+		}
+		@Override
+		public Adapter caseEnforcementOperation(EnforcementOperation object) {
+			return createEnforcementOperationAdapter();
+		}
+		@Override
+		public Adapter caseGuardPattern(GuardPattern object) {
+			return createGuardPatternAdapter();
+		}
+		@Override
+		public Adapter caseGuardVariable(GuardVariable object) {
+			return createGuardVariableAdapter();
+		}
+		@Override
+		public Adapter caseMapping(Mapping object) {
+			return createMappingAdapter();
+		}
+		@Override
+		public Adapter caseNavigationAssignment(NavigationAssignment object) {
+			return createNavigationAssignmentAdapter();
+		}
+		@Override
+		public Adapter caseOppositePropertyAssignment(OppositePropertyAssignment object) {
+			return createOppositePropertyAssignmentAdapter();
+		}
+		@Override
+		public Adapter casePropertyAssignment(PropertyAssignment object) {
+			return createPropertyAssignmentAdapter();
+		}
+		@Override
+		public Adapter caseRealizedVariable(RealizedVariable object) {
+			return createRealizedVariableAdapter();
+		}
+		@Override
+		public Adapter caseVariableAssignment(VariableAssignment object) {
+			return createVariableAssignmentAdapter();
+		}
+		@Override
+		public Adapter caseElement(Element object) {
+			return createElementAdapter();
+		}
+		@Override
+		public Adapter casePattern(Pattern object) {
+			return createPatternAdapter();
+		}
+		@Override
+		public Adapter caseNamedElement(NamedElement object) {
+			return createNamedElementAdapter();
+		}
+		@Override
+		public Adapter caseTypedElement(TypedElement object) {
+			return createTypedElementAdapter();
+		}
+		@Override
+		public Adapter caseVariableDeclaration(VariableDeclaration object) {
+			return createVariableDeclarationAdapter();
+		}
+		@Override
+		public Adapter caseVariable(Variable object) {
+			return createVariableAdapter();
+		}
+		@Override
+		public Adapter caseReferringElement(ReferringElement object) {
+			return createReferringElementAdapter();
+		}
+		@Override
+		public Adapter caseDomain(Domain object) {
+			return createDomainAdapter();
+		}
+		@Override
+		public Adapter caseNamespace(Namespace object) {
+			return createNamespaceAdapter();
+		}
+		@Override
+		public Adapter caseModel(Model object) {
+			return createModelAdapter();
+		}
+		@Override
+		public Adapter caseBaseModel(BaseModel object) {
+			return createBaseModelAdapter();
+		}
+		@Override
+		public Adapter caseRule(Rule object) {
+			return createRuleAdapter();
+		}
+		@Override
+		public Adapter defaultCase(EObject object) {
+			return createEObjectAdapter();
+		}
+	};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.
@@ -466,20 +456,6 @@ public class QVTcoreAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.util.Visitable <em>Visitable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.pivot.util.Visitable
-	 * @generated
-	 */
-	public Adapter createVisitableAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.Element <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -504,20 +480,6 @@ public class QVTcoreAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPatternAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.utilities.Nameable <em>Nameable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.pivot.utilities.Nameable
-	 * @generated
-	 */
-	public Adapter createNameableAdapter() {
 		return null;
 	}
 

@@ -923,27 +923,6 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 
 		// Create resource
 		createResource(eNS_URI);
-		/*		XMLResource resource = new XMIResourceImpl(URI.createURI(eNS_URI))
-		{
-			@Override
-			public Map<String, EObject> getIDToEObjectMap() {
-				// TODO Auto-generated method stub
-				return super.getIDToEObjectMap();
-			}
-
-			@Override
-			protected EObject getEObjectByID(String id) {
-				// TODO Auto-generated method stub
-				return super.getEObjectByID(id);
-			}
-
-			@Override
-			protected boolean useIDs()
-			{
-				return eObjectToIDMap != null || idToEObjectMap != null;
-			}
-		};
-		resource.getContents().add(this); */
 
 		// Create annotations
 		// http://www.eclipse.org/emf/2002/Ecore

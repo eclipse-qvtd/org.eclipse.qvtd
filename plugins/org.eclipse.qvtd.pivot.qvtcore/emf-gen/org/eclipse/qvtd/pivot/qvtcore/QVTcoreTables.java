@@ -223,13 +223,11 @@ public class QVTcoreTables
 		private static final @NonNull ExecutorFragment _Area__Element = new ExecutorFragment(Types._Area, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _Area__OclAny = new ExecutorFragment(Types._Area, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _Area__OclElement = new ExecutorFragment(Types._Area, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Area__Visitable = new ExecutorFragment(Types._Area, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _Assignment__Assignment = new ExecutorFragment(Types._Assignment, QVTcoreTables.Types._Assignment);
 		private static final @NonNull ExecutorFragment _Assignment__Element = new ExecutorFragment(Types._Assignment, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _Assignment__OclAny = new ExecutorFragment(Types._Assignment, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _Assignment__OclElement = new ExecutorFragment(Types._Assignment, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _Assignment__Visitable = new ExecutorFragment(Types._Assignment, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _BottomPattern__BottomPattern = new ExecutorFragment(Types._BottomPattern, QVTcoreTables.Types._BottomPattern);
 		private static final @NonNull ExecutorFragment _BottomPattern__CorePattern = new ExecutorFragment(Types._BottomPattern, QVTcoreTables.Types._CorePattern);
@@ -237,47 +235,39 @@ public class QVTcoreTables
 		private static final @NonNull ExecutorFragment _BottomPattern__OclAny = new ExecutorFragment(Types._BottomPattern, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _BottomPattern__OclElement = new ExecutorFragment(Types._BottomPattern, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _BottomPattern__Pattern = new ExecutorFragment(Types._BottomPattern, QVTbaseTables.Types._Pattern);
-		private static final @NonNull ExecutorFragment _BottomPattern__Visitable = new ExecutorFragment(Types._BottomPattern, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _BottomVariable__BottomVariable = new ExecutorFragment(Types._BottomVariable, QVTcoreTables.Types._BottomVariable);
 		private static final @NonNull ExecutorFragment _BottomVariable__Element = new ExecutorFragment(Types._BottomVariable, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _BottomVariable__Nameable = new ExecutorFragment(Types._BottomVariable, PivotTables.Types._Nameable);
 		private static final @NonNull ExecutorFragment _BottomVariable__NamedElement = new ExecutorFragment(Types._BottomVariable, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _BottomVariable__OclAny = new ExecutorFragment(Types._BottomVariable, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _BottomVariable__OclElement = new ExecutorFragment(Types._BottomVariable, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _BottomVariable__TypedElement = new ExecutorFragment(Types._BottomVariable, PivotTables.Types._TypedElement);
 		private static final @NonNull ExecutorFragment _BottomVariable__Variable = new ExecutorFragment(Types._BottomVariable, PivotTables.Types._Variable);
 		private static final @NonNull ExecutorFragment _BottomVariable__VariableDeclaration = new ExecutorFragment(Types._BottomVariable, PivotTables.Types._VariableDeclaration);
-		private static final @NonNull ExecutorFragment _BottomVariable__Visitable = new ExecutorFragment(Types._BottomVariable, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _CoreDomain__Area = new ExecutorFragment(Types._CoreDomain, QVTcoreTables.Types._Area);
 		private static final @NonNull ExecutorFragment _CoreDomain__CoreDomain = new ExecutorFragment(Types._CoreDomain, QVTcoreTables.Types._CoreDomain);
 		private static final @NonNull ExecutorFragment _CoreDomain__Domain = new ExecutorFragment(Types._CoreDomain, QVTbaseTables.Types._Domain);
 		private static final @NonNull ExecutorFragment _CoreDomain__Element = new ExecutorFragment(Types._CoreDomain, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _CoreDomain__Nameable = new ExecutorFragment(Types._CoreDomain, PivotTables.Types._Nameable);
 		private static final @NonNull ExecutorFragment _CoreDomain__NamedElement = new ExecutorFragment(Types._CoreDomain, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _CoreDomain__OclAny = new ExecutorFragment(Types._CoreDomain, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _CoreDomain__OclElement = new ExecutorFragment(Types._CoreDomain, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _CoreDomain__ReferringElement = new ExecutorFragment(Types._CoreDomain, PivotTables.Types._ReferringElement);
-		private static final @NonNull ExecutorFragment _CoreDomain__Visitable = new ExecutorFragment(Types._CoreDomain, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _CoreModel__BaseModel = new ExecutorFragment(Types._CoreModel, QVTbaseTables.Types._BaseModel);
 		private static final @NonNull ExecutorFragment _CoreModel__CoreModel = new ExecutorFragment(Types._CoreModel, QVTcoreTables.Types._CoreModel);
 		private static final @NonNull ExecutorFragment _CoreModel__Element = new ExecutorFragment(Types._CoreModel, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _CoreModel__Model = new ExecutorFragment(Types._CoreModel, PivotTables.Types._Model);
-		private static final @NonNull ExecutorFragment _CoreModel__Nameable = new ExecutorFragment(Types._CoreModel, PivotTables.Types._Nameable);
 		private static final @NonNull ExecutorFragment _CoreModel__NamedElement = new ExecutorFragment(Types._CoreModel, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _CoreModel__Namespace = new ExecutorFragment(Types._CoreModel, PivotTables.Types._Namespace);
 		private static final @NonNull ExecutorFragment _CoreModel__OclAny = new ExecutorFragment(Types._CoreModel, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _CoreModel__OclElement = new ExecutorFragment(Types._CoreModel, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _CoreModel__Visitable = new ExecutorFragment(Types._CoreModel, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _CorePattern__CorePattern = new ExecutorFragment(Types._CorePattern, QVTcoreTables.Types._CorePattern);
 		private static final @NonNull ExecutorFragment _CorePattern__Element = new ExecutorFragment(Types._CorePattern, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _CorePattern__OclAny = new ExecutorFragment(Types._CorePattern, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _CorePattern__OclElement = new ExecutorFragment(Types._CorePattern, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _CorePattern__Pattern = new ExecutorFragment(Types._CorePattern, QVTbaseTables.Types._Pattern);
-		private static final @NonNull ExecutorFragment _CorePattern__Visitable = new ExecutorFragment(Types._CorePattern, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _EnforcementMode__EnforcementMode = new ExecutorFragment(Types._EnforcementMode, QVTcoreTables.Types._EnforcementMode);
 		private static final @NonNull ExecutorFragment _EnforcementMode__OclAny = new ExecutorFragment(Types._EnforcementMode, OCLstdlibTables.Types._OclAny);
@@ -289,7 +279,6 @@ public class QVTcoreTables
 		private static final @NonNull ExecutorFragment _EnforcementOperation__EnforcementOperation = new ExecutorFragment(Types._EnforcementOperation, QVTcoreTables.Types._EnforcementOperation);
 		private static final @NonNull ExecutorFragment _EnforcementOperation__OclAny = new ExecutorFragment(Types._EnforcementOperation, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _EnforcementOperation__OclElement = new ExecutorFragment(Types._EnforcementOperation, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _EnforcementOperation__Visitable = new ExecutorFragment(Types._EnforcementOperation, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _GuardPattern__CorePattern = new ExecutorFragment(Types._GuardPattern, QVTcoreTables.Types._CorePattern);
 		private static final @NonNull ExecutorFragment _GuardPattern__Element = new ExecutorFragment(Types._GuardPattern, PivotTables.Types._Element);
@@ -297,35 +286,29 @@ public class QVTcoreTables
 		private static final @NonNull ExecutorFragment _GuardPattern__OclAny = new ExecutorFragment(Types._GuardPattern, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _GuardPattern__OclElement = new ExecutorFragment(Types._GuardPattern, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _GuardPattern__Pattern = new ExecutorFragment(Types._GuardPattern, QVTbaseTables.Types._Pattern);
-		private static final @NonNull ExecutorFragment _GuardPattern__Visitable = new ExecutorFragment(Types._GuardPattern, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _GuardVariable__Element = new ExecutorFragment(Types._GuardVariable, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _GuardVariable__GuardVariable = new ExecutorFragment(Types._GuardVariable, QVTcoreTables.Types._GuardVariable);
-		private static final @NonNull ExecutorFragment _GuardVariable__Nameable = new ExecutorFragment(Types._GuardVariable, PivotTables.Types._Nameable);
 		private static final @NonNull ExecutorFragment _GuardVariable__NamedElement = new ExecutorFragment(Types._GuardVariable, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _GuardVariable__OclAny = new ExecutorFragment(Types._GuardVariable, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _GuardVariable__OclElement = new ExecutorFragment(Types._GuardVariable, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _GuardVariable__TypedElement = new ExecutorFragment(Types._GuardVariable, PivotTables.Types._TypedElement);
 		private static final @NonNull ExecutorFragment _GuardVariable__Variable = new ExecutorFragment(Types._GuardVariable, PivotTables.Types._Variable);
 		private static final @NonNull ExecutorFragment _GuardVariable__VariableDeclaration = new ExecutorFragment(Types._GuardVariable, PivotTables.Types._VariableDeclaration);
-		private static final @NonNull ExecutorFragment _GuardVariable__Visitable = new ExecutorFragment(Types._GuardVariable, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _Mapping__Area = new ExecutorFragment(Types._Mapping, QVTcoreTables.Types._Area);
 		private static final @NonNull ExecutorFragment _Mapping__Element = new ExecutorFragment(Types._Mapping, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _Mapping__Mapping = new ExecutorFragment(Types._Mapping, QVTcoreTables.Types._Mapping);
-		private static final @NonNull ExecutorFragment _Mapping__Nameable = new ExecutorFragment(Types._Mapping, PivotTables.Types._Nameable);
 		private static final @NonNull ExecutorFragment _Mapping__NamedElement = new ExecutorFragment(Types._Mapping, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _Mapping__OclAny = new ExecutorFragment(Types._Mapping, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _Mapping__OclElement = new ExecutorFragment(Types._Mapping, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _Mapping__Rule = new ExecutorFragment(Types._Mapping, QVTbaseTables.Types._Rule);
-		private static final @NonNull ExecutorFragment _Mapping__Visitable = new ExecutorFragment(Types._Mapping, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _NavigationAssignment__Assignment = new ExecutorFragment(Types._NavigationAssignment, QVTcoreTables.Types._Assignment);
 		private static final @NonNull ExecutorFragment _NavigationAssignment__Element = new ExecutorFragment(Types._NavigationAssignment, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _NavigationAssignment__NavigationAssignment = new ExecutorFragment(Types._NavigationAssignment, QVTcoreTables.Types._NavigationAssignment);
 		private static final @NonNull ExecutorFragment _NavigationAssignment__OclAny = new ExecutorFragment(Types._NavigationAssignment, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _NavigationAssignment__OclElement = new ExecutorFragment(Types._NavigationAssignment, OCLstdlibTables.Types._OclElement);
-		private static final @NonNull ExecutorFragment _NavigationAssignment__Visitable = new ExecutorFragment(Types._NavigationAssignment, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _OppositePropertyAssignment__Assignment = new ExecutorFragment(Types._OppositePropertyAssignment, QVTcoreTables.Types._Assignment);
 		private static final @NonNull ExecutorFragment _OppositePropertyAssignment__Element = new ExecutorFragment(Types._OppositePropertyAssignment, PivotTables.Types._Element);
@@ -333,7 +316,6 @@ public class QVTcoreTables
 		private static final @NonNull ExecutorFragment _OppositePropertyAssignment__OclAny = new ExecutorFragment(Types._OppositePropertyAssignment, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _OppositePropertyAssignment__OclElement = new ExecutorFragment(Types._OppositePropertyAssignment, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _OppositePropertyAssignment__OppositePropertyAssignment = new ExecutorFragment(Types._OppositePropertyAssignment, QVTcoreTables.Types._OppositePropertyAssignment);
-		private static final @NonNull ExecutorFragment _OppositePropertyAssignment__Visitable = new ExecutorFragment(Types._OppositePropertyAssignment, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _PropertyAssignment__Assignment = new ExecutorFragment(Types._PropertyAssignment, QVTcoreTables.Types._Assignment);
 		private static final @NonNull ExecutorFragment _PropertyAssignment__Element = new ExecutorFragment(Types._PropertyAssignment, PivotTables.Types._Element);
@@ -341,10 +323,8 @@ public class QVTcoreTables
 		private static final @NonNull ExecutorFragment _PropertyAssignment__OclAny = new ExecutorFragment(Types._PropertyAssignment, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _PropertyAssignment__OclElement = new ExecutorFragment(Types._PropertyAssignment, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _PropertyAssignment__PropertyAssignment = new ExecutorFragment(Types._PropertyAssignment, QVTcoreTables.Types._PropertyAssignment);
-		private static final @NonNull ExecutorFragment _PropertyAssignment__Visitable = new ExecutorFragment(Types._PropertyAssignment, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _RealizedVariable__Element = new ExecutorFragment(Types._RealizedVariable, PivotTables.Types._Element);
-		private static final @NonNull ExecutorFragment _RealizedVariable__Nameable = new ExecutorFragment(Types._RealizedVariable, PivotTables.Types._Nameable);
 		private static final @NonNull ExecutorFragment _RealizedVariable__NamedElement = new ExecutorFragment(Types._RealizedVariable, PivotTables.Types._NamedElement);
 		private static final @NonNull ExecutorFragment _RealizedVariable__OclAny = new ExecutorFragment(Types._RealizedVariable, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _RealizedVariable__OclElement = new ExecutorFragment(Types._RealizedVariable, OCLstdlibTables.Types._OclElement);
@@ -352,14 +332,12 @@ public class QVTcoreTables
 		private static final @NonNull ExecutorFragment _RealizedVariable__TypedElement = new ExecutorFragment(Types._RealizedVariable, PivotTables.Types._TypedElement);
 		private static final @NonNull ExecutorFragment _RealizedVariable__Variable = new ExecutorFragment(Types._RealizedVariable, PivotTables.Types._Variable);
 		private static final @NonNull ExecutorFragment _RealizedVariable__VariableDeclaration = new ExecutorFragment(Types._RealizedVariable, PivotTables.Types._VariableDeclaration);
-		private static final @NonNull ExecutorFragment _RealizedVariable__Visitable = new ExecutorFragment(Types._RealizedVariable, PivotTables.Types._Visitable);
 
 		private static final @NonNull ExecutorFragment _VariableAssignment__Assignment = new ExecutorFragment(Types._VariableAssignment, QVTcoreTables.Types._Assignment);
 		private static final @NonNull ExecutorFragment _VariableAssignment__Element = new ExecutorFragment(Types._VariableAssignment, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _VariableAssignment__OclAny = new ExecutorFragment(Types._VariableAssignment, OCLstdlibTables.Types._OclAny);
 		private static final @NonNull ExecutorFragment _VariableAssignment__OclElement = new ExecutorFragment(Types._VariableAssignment, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _VariableAssignment__VariableAssignment = new ExecutorFragment(Types._VariableAssignment, QVTcoreTables.Types._VariableAssignment);
-		private static final @NonNull ExecutorFragment _VariableAssignment__Visitable = new ExecutorFragment(Types._VariableAssignment, PivotTables.Types._Visitable);
 
 		static {
 			Init.initEnd();
@@ -498,89 +476,79 @@ public class QVTcoreTables
 			{
 				Fragments._Area__OclAny /* 0 */,
 				Fragments._Area__OclElement /* 1 */,
-				Fragments._Area__Visitable /* 2 */,
-				Fragments._Area__Element /* 3 */,
-				Fragments._Area__Area /* 4 */
+				Fragments._Area__Element /* 2 */,
+				Fragments._Area__Area /* 3 */
 			};
-		private static final int @NonNull [] __Area = { 1,1,1,1,1 };
+		private static final int @NonNull [] __Area = { 1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Assignment =
 			{
 				Fragments._Assignment__OclAny /* 0 */,
 				Fragments._Assignment__OclElement /* 1 */,
-				Fragments._Assignment__Visitable /* 2 */,
-				Fragments._Assignment__Element /* 3 */,
-				Fragments._Assignment__Assignment /* 4 */
+				Fragments._Assignment__Element /* 2 */,
+				Fragments._Assignment__Assignment /* 3 */
 			};
-		private static final int @NonNull [] __Assignment = { 1,1,1,1,1 };
+		private static final int @NonNull [] __Assignment = { 1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _BottomPattern =
 			{
 				Fragments._BottomPattern__OclAny /* 0 */,
 				Fragments._BottomPattern__OclElement /* 1 */,
-				Fragments._BottomPattern__Visitable /* 2 */,
-				Fragments._BottomPattern__Element /* 3 */,
-				Fragments._BottomPattern__Pattern /* 4 */,
-				Fragments._BottomPattern__CorePattern /* 5 */,
-				Fragments._BottomPattern__BottomPattern /* 6 */
+				Fragments._BottomPattern__Element /* 2 */,
+				Fragments._BottomPattern__Pattern /* 3 */,
+				Fragments._BottomPattern__CorePattern /* 4 */,
+				Fragments._BottomPattern__BottomPattern /* 5 */
 			};
-		private static final int @NonNull [] __BottomPattern = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __BottomPattern = { 1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _BottomVariable =
 			{
 				Fragments._BottomVariable__OclAny /* 0 */,
 				Fragments._BottomVariable__OclElement /* 1 */,
-				Fragments._BottomVariable__Nameable /* 2 */,
-				Fragments._BottomVariable__Visitable /* 2 */,
-				Fragments._BottomVariable__Element /* 3 */,
-				Fragments._BottomVariable__NamedElement /* 4 */,
-				Fragments._BottomVariable__TypedElement /* 5 */,
-				Fragments._BottomVariable__VariableDeclaration /* 6 */,
-				Fragments._BottomVariable__Variable /* 7 */,
-				Fragments._BottomVariable__BottomVariable /* 8 */
+				Fragments._BottomVariable__Element /* 2 */,
+				Fragments._BottomVariable__NamedElement /* 3 */,
+				Fragments._BottomVariable__TypedElement /* 4 */,
+				Fragments._BottomVariable__VariableDeclaration /* 5 */,
+				Fragments._BottomVariable__Variable /* 6 */,
+				Fragments._BottomVariable__BottomVariable /* 7 */
 			};
-		private static final int @NonNull [] __BottomVariable = { 1,1,2,1,1,1,1,1,1 };
+		private static final int @NonNull [] __BottomVariable = { 1,1,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _CoreDomain =
 			{
 				Fragments._CoreDomain__OclAny /* 0 */,
 				Fragments._CoreDomain__OclElement /* 1 */,
-				Fragments._CoreDomain__Nameable /* 2 */,
+				Fragments._CoreDomain__Element /* 2 */,
 				Fragments._CoreDomain__ReferringElement /* 2 */,
-				Fragments._CoreDomain__Visitable /* 2 */,
-				Fragments._CoreDomain__Element /* 3 */,
-				Fragments._CoreDomain__Area /* 4 */,
-				Fragments._CoreDomain__NamedElement /* 4 */,
-				Fragments._CoreDomain__Domain /* 5 */,
-				Fragments._CoreDomain__CoreDomain /* 6 */
+				Fragments._CoreDomain__Area /* 3 */,
+				Fragments._CoreDomain__NamedElement /* 3 */,
+				Fragments._CoreDomain__Domain /* 4 */,
+				Fragments._CoreDomain__CoreDomain /* 5 */
 			};
-		private static final int @NonNull [] __CoreDomain = { 1,1,3,1,2,1,1 };
+		private static final int @NonNull [] __CoreDomain = { 1,1,2,2,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _CoreModel =
 			{
 				Fragments._CoreModel__OclAny /* 0 */,
 				Fragments._CoreModel__OclElement /* 1 */,
-				Fragments._CoreModel__Nameable /* 2 */,
-				Fragments._CoreModel__Visitable /* 2 */,
-				Fragments._CoreModel__Element /* 3 */,
-				Fragments._CoreModel__NamedElement /* 4 */,
-				Fragments._CoreModel__Namespace /* 5 */,
-				Fragments._CoreModel__Model /* 6 */,
-				Fragments._CoreModel__BaseModel /* 7 */,
-				Fragments._CoreModel__CoreModel /* 8 */
+				Fragments._CoreModel__Element /* 2 */,
+				Fragments._CoreModel__NamedElement /* 3 */,
+				Fragments._CoreModel__Namespace /* 4 */,
+				Fragments._CoreModel__Model /* 5 */,
+				Fragments._CoreModel__BaseModel /* 6 */,
+				Fragments._CoreModel__CoreModel /* 7 */
 			};
-		private static final int @NonNull [] __CoreModel = { 1,1,2,1,1,1,1,1,1 };
+		private static final int @NonNull [] __CoreModel = { 1,1,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _CorePattern =
 			{
 				Fragments._CorePattern__OclAny /* 0 */,
 				Fragments._CorePattern__OclElement /* 1 */,
-				Fragments._CorePattern__Visitable /* 2 */,
-				Fragments._CorePattern__Element /* 3 */,
-				Fragments._CorePattern__Pattern /* 4 */,
-				Fragments._CorePattern__CorePattern /* 5 */
+				Fragments._CorePattern__Element /* 2 */,
+				Fragments._CorePattern__Pattern /* 3 */,
+				Fragments._CorePattern__CorePattern /* 4 */
 			};
-		private static final int @NonNull [] __CorePattern = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __CorePattern = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _EnforcementMode =
 			{
@@ -596,113 +564,101 @@ public class QVTcoreTables
 			{
 				Fragments._EnforcementOperation__OclAny /* 0 */,
 				Fragments._EnforcementOperation__OclElement /* 1 */,
-				Fragments._EnforcementOperation__Visitable /* 2 */,
-				Fragments._EnforcementOperation__Element /* 3 */,
-				Fragments._EnforcementOperation__EnforcementOperation /* 4 */
+				Fragments._EnforcementOperation__Element /* 2 */,
+				Fragments._EnforcementOperation__EnforcementOperation /* 3 */
 			};
-		private static final int @NonNull [] __EnforcementOperation = { 1,1,1,1,1 };
+		private static final int @NonNull [] __EnforcementOperation = { 1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _GuardPattern =
 			{
 				Fragments._GuardPattern__OclAny /* 0 */,
 				Fragments._GuardPattern__OclElement /* 1 */,
-				Fragments._GuardPattern__Visitable /* 2 */,
-				Fragments._GuardPattern__Element /* 3 */,
-				Fragments._GuardPattern__Pattern /* 4 */,
-				Fragments._GuardPattern__CorePattern /* 5 */,
-				Fragments._GuardPattern__GuardPattern /* 6 */
+				Fragments._GuardPattern__Element /* 2 */,
+				Fragments._GuardPattern__Pattern /* 3 */,
+				Fragments._GuardPattern__CorePattern /* 4 */,
+				Fragments._GuardPattern__GuardPattern /* 5 */
 			};
-		private static final int @NonNull [] __GuardPattern = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __GuardPattern = { 1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _GuardVariable =
 			{
 				Fragments._GuardVariable__OclAny /* 0 */,
 				Fragments._GuardVariable__OclElement /* 1 */,
-				Fragments._GuardVariable__Nameable /* 2 */,
-				Fragments._GuardVariable__Visitable /* 2 */,
-				Fragments._GuardVariable__Element /* 3 */,
-				Fragments._GuardVariable__NamedElement /* 4 */,
-				Fragments._GuardVariable__TypedElement /* 5 */,
-				Fragments._GuardVariable__VariableDeclaration /* 6 */,
-				Fragments._GuardVariable__Variable /* 7 */,
-				Fragments._GuardVariable__GuardVariable /* 8 */
+				Fragments._GuardVariable__Element /* 2 */,
+				Fragments._GuardVariable__NamedElement /* 3 */,
+				Fragments._GuardVariable__TypedElement /* 4 */,
+				Fragments._GuardVariable__VariableDeclaration /* 5 */,
+				Fragments._GuardVariable__Variable /* 6 */,
+				Fragments._GuardVariable__GuardVariable /* 7 */
 			};
-		private static final int @NonNull [] __GuardVariable = { 1,1,2,1,1,1,1,1,1 };
+		private static final int @NonNull [] __GuardVariable = { 1,1,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _Mapping =
 			{
 				Fragments._Mapping__OclAny /* 0 */,
 				Fragments._Mapping__OclElement /* 1 */,
-				Fragments._Mapping__Nameable /* 2 */,
-				Fragments._Mapping__Visitable /* 2 */,
-				Fragments._Mapping__Element /* 3 */,
-				Fragments._Mapping__Area /* 4 */,
-				Fragments._Mapping__NamedElement /* 4 */,
-				Fragments._Mapping__Rule /* 5 */,
-				Fragments._Mapping__Mapping /* 6 */
+				Fragments._Mapping__Element /* 2 */,
+				Fragments._Mapping__Area /* 3 */,
+				Fragments._Mapping__NamedElement /* 3 */,
+				Fragments._Mapping__Rule /* 4 */,
+				Fragments._Mapping__Mapping /* 5 */
 			};
-		private static final int @NonNull [] __Mapping = { 1,1,2,1,2,1,1 };
+		private static final int @NonNull [] __Mapping = { 1,1,1,2,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _NavigationAssignment =
 			{
 				Fragments._NavigationAssignment__OclAny /* 0 */,
 				Fragments._NavigationAssignment__OclElement /* 1 */,
-				Fragments._NavigationAssignment__Visitable /* 2 */,
-				Fragments._NavigationAssignment__Element /* 3 */,
-				Fragments._NavigationAssignment__Assignment /* 4 */,
-				Fragments._NavigationAssignment__NavigationAssignment /* 5 */
+				Fragments._NavigationAssignment__Element /* 2 */,
+				Fragments._NavigationAssignment__Assignment /* 3 */,
+				Fragments._NavigationAssignment__NavigationAssignment /* 4 */
 			};
-		private static final int @NonNull [] __NavigationAssignment = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __NavigationAssignment = { 1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _OppositePropertyAssignment =
 			{
 				Fragments._OppositePropertyAssignment__OclAny /* 0 */,
 				Fragments._OppositePropertyAssignment__OclElement /* 1 */,
-				Fragments._OppositePropertyAssignment__Visitable /* 2 */,
-				Fragments._OppositePropertyAssignment__Element /* 3 */,
-				Fragments._OppositePropertyAssignment__Assignment /* 4 */,
-				Fragments._OppositePropertyAssignment__NavigationAssignment /* 5 */,
-				Fragments._OppositePropertyAssignment__OppositePropertyAssignment /* 6 */
+				Fragments._OppositePropertyAssignment__Element /* 2 */,
+				Fragments._OppositePropertyAssignment__Assignment /* 3 */,
+				Fragments._OppositePropertyAssignment__NavigationAssignment /* 4 */,
+				Fragments._OppositePropertyAssignment__OppositePropertyAssignment /* 5 */
 			};
-		private static final int @NonNull [] __OppositePropertyAssignment = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __OppositePropertyAssignment = { 1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _PropertyAssignment =
 			{
 				Fragments._PropertyAssignment__OclAny /* 0 */,
 				Fragments._PropertyAssignment__OclElement /* 1 */,
-				Fragments._PropertyAssignment__Visitable /* 2 */,
-				Fragments._PropertyAssignment__Element /* 3 */,
-				Fragments._PropertyAssignment__Assignment /* 4 */,
-				Fragments._PropertyAssignment__NavigationAssignment /* 5 */,
-				Fragments._PropertyAssignment__PropertyAssignment /* 6 */
+				Fragments._PropertyAssignment__Element /* 2 */,
+				Fragments._PropertyAssignment__Assignment /* 3 */,
+				Fragments._PropertyAssignment__NavigationAssignment /* 4 */,
+				Fragments._PropertyAssignment__PropertyAssignment /* 5 */
 			};
-		private static final int @NonNull [] __PropertyAssignment = { 1,1,1,1,1,1,1 };
+		private static final int @NonNull [] __PropertyAssignment = { 1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _RealizedVariable =
 			{
 				Fragments._RealizedVariable__OclAny /* 0 */,
 				Fragments._RealizedVariable__OclElement /* 1 */,
-				Fragments._RealizedVariable__Nameable /* 2 */,
-				Fragments._RealizedVariable__Visitable /* 2 */,
-				Fragments._RealizedVariable__Element /* 3 */,
-				Fragments._RealizedVariable__NamedElement /* 4 */,
-				Fragments._RealizedVariable__TypedElement /* 5 */,
-				Fragments._RealizedVariable__VariableDeclaration /* 6 */,
-				Fragments._RealizedVariable__Variable /* 7 */,
-				Fragments._RealizedVariable__RealizedVariable /* 8 */
+				Fragments._RealizedVariable__Element /* 2 */,
+				Fragments._RealizedVariable__NamedElement /* 3 */,
+				Fragments._RealizedVariable__TypedElement /* 4 */,
+				Fragments._RealizedVariable__VariableDeclaration /* 5 */,
+				Fragments._RealizedVariable__Variable /* 6 */,
+				Fragments._RealizedVariable__RealizedVariable /* 7 */
 			};
-		private static final int @NonNull [] __RealizedVariable = { 1,1,2,1,1,1,1,1,1 };
+		private static final int @NonNull [] __RealizedVariable = { 1,1,1,1,1,1,1,1 };
 
 		private static final @NonNull ExecutorFragment @NonNull [] _VariableAssignment =
 			{
 				Fragments._VariableAssignment__OclAny /* 0 */,
 				Fragments._VariableAssignment__OclElement /* 1 */,
-				Fragments._VariableAssignment__Visitable /* 2 */,
-				Fragments._VariableAssignment__Element /* 3 */,
-				Fragments._VariableAssignment__Assignment /* 4 */,
-				Fragments._VariableAssignment__VariableAssignment /* 5 */
+				Fragments._VariableAssignment__Element /* 2 */,
+				Fragments._VariableAssignment__Assignment /* 3 */,
+				Fragments._VariableAssignment__VariableAssignment /* 4 */
 			};
-		private static final int @NonNull [] __VariableAssignment = { 1,1,1,1,1,1 };
+		private static final int @NonNull [] __VariableAssignment = { 1,1,1,1,1 };
 
 		/**
 		 *	Install the fragment descriptors in the class descriptors.
@@ -775,7 +731,6 @@ public class QVTcoreTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Area__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _Assignment__Assignment = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Assignment__Element = {
@@ -808,7 +763,6 @@ public class QVTcoreTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Assignment__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _BottomPattern__BottomPattern = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _BottomPattern__CorePattern = {
@@ -845,14 +799,12 @@ public class QVTcoreTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _BottomPattern__Pattern = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _BottomPattern__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _BottomVariable__BottomVariable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _BottomVariable__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _BottomVariable__Nameable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _BottomVariable__NamedElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _BottomVariable__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
@@ -885,7 +837,6 @@ public class QVTcoreTables
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _BottomVariable__Variable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _BottomVariable__VariableDeclaration = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _BottomVariable__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _CoreDomain__CoreDomain = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _CoreDomain__Area = {};
@@ -894,7 +845,6 @@ public class QVTcoreTables
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CoreDomain__Nameable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _CoreDomain__NamedElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _CoreDomain__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
@@ -925,7 +875,6 @@ public class QVTcoreTables
 		private static final @NonNull ExecutorOperation @NonNull [] _CoreDomain__ReferringElement = {
 			PivotTables.Operations._ReferringElement__getReferredElement /* getReferredElement() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CoreDomain__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _CoreModel__CoreModel = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _CoreModel__BaseModel = {};
@@ -934,7 +883,6 @@ public class QVTcoreTables
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _CoreModel__Model = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CoreModel__Nameable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _CoreModel__NamedElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _CoreModel__Namespace = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _CoreModel__OclAny = {
@@ -963,7 +911,6 @@ public class QVTcoreTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _CoreModel__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _CorePattern__CorePattern = {
 			QVTcoreTables.Operations._CorePattern__getArea /* getArea() */
@@ -999,7 +946,6 @@ public class QVTcoreTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _CorePattern__Pattern = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _CorePattern__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _EnforcementMode__EnforcementMode = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _EnforcementMode__OclAny = {
@@ -1066,7 +1012,6 @@ public class QVTcoreTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _EnforcementOperation__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _GuardPattern__GuardPattern = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _GuardPattern__CorePattern = {
@@ -1103,14 +1048,12 @@ public class QVTcoreTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _GuardPattern__Pattern = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _GuardPattern__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _GuardVariable__GuardVariable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _GuardVariable__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _GuardVariable__Nameable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _GuardVariable__NamedElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _GuardVariable__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
@@ -1143,7 +1086,6 @@ public class QVTcoreTables
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _GuardVariable__Variable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _GuardVariable__VariableDeclaration = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _GuardVariable__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _Mapping__Mapping = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Mapping__Area = {};
@@ -1151,7 +1093,6 @@ public class QVTcoreTables
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _Mapping__Nameable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Mapping__NamedElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _Mapping__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
@@ -1180,7 +1121,6 @@ public class QVTcoreTables
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _Mapping__Rule = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _Mapping__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _NavigationAssignment__NavigationAssignment = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _NavigationAssignment__Assignment = {};
@@ -1214,7 +1154,6 @@ public class QVTcoreTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _NavigationAssignment__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _OppositePropertyAssignment__OppositePropertyAssignment = {
 			QVTcoreTables.Operations._OppositePropertyAssignment__getReferredTargetProperty /* getReferredTargetProperty() */
@@ -1251,7 +1190,6 @@ public class QVTcoreTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _OppositePropertyAssignment__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _PropertyAssignment__PropertyAssignment = {
 			QVTcoreTables.Operations._PropertyAssignment__getReferredTargetProperty /* getReferredTargetProperty() */
@@ -1288,14 +1226,12 @@ public class QVTcoreTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _PropertyAssignment__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _RealizedVariable__RealizedVariable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _RealizedVariable__Element = {
 			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
 			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _RealizedVariable__Nameable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _RealizedVariable__NamedElement = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _RealizedVariable__OclAny = {
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
@@ -1328,7 +1264,6 @@ public class QVTcoreTables
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _RealizedVariable__Variable = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _RealizedVariable__VariableDeclaration = {};
-		private static final @NonNull ExecutorOperation @NonNull [] _RealizedVariable__Visitable = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _VariableAssignment__VariableAssignment = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _VariableAssignment__Assignment = {};
@@ -1362,7 +1297,6 @@ public class QVTcoreTables
 			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
 			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
 		};
-		private static final @NonNull ExecutorOperation @NonNull [] _VariableAssignment__Visitable = {};
 
 		/*
 		 *	Install the operation descriptors in the fragment descriptors.
@@ -1372,13 +1306,11 @@ public class QVTcoreTables
 			Fragments._Area__Element.initOperations(_Area__Element);
 			Fragments._Area__OclAny.initOperations(_Area__OclAny);
 			Fragments._Area__OclElement.initOperations(_Area__OclElement);
-			Fragments._Area__Visitable.initOperations(_Area__Visitable);
 
 			Fragments._Assignment__Assignment.initOperations(_Assignment__Assignment);
 			Fragments._Assignment__Element.initOperations(_Assignment__Element);
 			Fragments._Assignment__OclAny.initOperations(_Assignment__OclAny);
 			Fragments._Assignment__OclElement.initOperations(_Assignment__OclElement);
-			Fragments._Assignment__Visitable.initOperations(_Assignment__Visitable);
 
 			Fragments._BottomPattern__BottomPattern.initOperations(_BottomPattern__BottomPattern);
 			Fragments._BottomPattern__CorePattern.initOperations(_BottomPattern__CorePattern);
@@ -1386,47 +1318,39 @@ public class QVTcoreTables
 			Fragments._BottomPattern__OclAny.initOperations(_BottomPattern__OclAny);
 			Fragments._BottomPattern__OclElement.initOperations(_BottomPattern__OclElement);
 			Fragments._BottomPattern__Pattern.initOperations(_BottomPattern__Pattern);
-			Fragments._BottomPattern__Visitable.initOperations(_BottomPattern__Visitable);
 
 			Fragments._BottomVariable__BottomVariable.initOperations(_BottomVariable__BottomVariable);
 			Fragments._BottomVariable__Element.initOperations(_BottomVariable__Element);
-			Fragments._BottomVariable__Nameable.initOperations(_BottomVariable__Nameable);
 			Fragments._BottomVariable__NamedElement.initOperations(_BottomVariable__NamedElement);
 			Fragments._BottomVariable__OclAny.initOperations(_BottomVariable__OclAny);
 			Fragments._BottomVariable__OclElement.initOperations(_BottomVariable__OclElement);
 			Fragments._BottomVariable__TypedElement.initOperations(_BottomVariable__TypedElement);
 			Fragments._BottomVariable__Variable.initOperations(_BottomVariable__Variable);
 			Fragments._BottomVariable__VariableDeclaration.initOperations(_BottomVariable__VariableDeclaration);
-			Fragments._BottomVariable__Visitable.initOperations(_BottomVariable__Visitable);
 
 			Fragments._CoreDomain__Area.initOperations(_CoreDomain__Area);
 			Fragments._CoreDomain__CoreDomain.initOperations(_CoreDomain__CoreDomain);
 			Fragments._CoreDomain__Domain.initOperations(_CoreDomain__Domain);
 			Fragments._CoreDomain__Element.initOperations(_CoreDomain__Element);
-			Fragments._CoreDomain__Nameable.initOperations(_CoreDomain__Nameable);
 			Fragments._CoreDomain__NamedElement.initOperations(_CoreDomain__NamedElement);
 			Fragments._CoreDomain__OclAny.initOperations(_CoreDomain__OclAny);
 			Fragments._CoreDomain__OclElement.initOperations(_CoreDomain__OclElement);
 			Fragments._CoreDomain__ReferringElement.initOperations(_CoreDomain__ReferringElement);
-			Fragments._CoreDomain__Visitable.initOperations(_CoreDomain__Visitable);
 
 			Fragments._CoreModel__BaseModel.initOperations(_CoreModel__BaseModel);
 			Fragments._CoreModel__CoreModel.initOperations(_CoreModel__CoreModel);
 			Fragments._CoreModel__Element.initOperations(_CoreModel__Element);
 			Fragments._CoreModel__Model.initOperations(_CoreModel__Model);
-			Fragments._CoreModel__Nameable.initOperations(_CoreModel__Nameable);
 			Fragments._CoreModel__NamedElement.initOperations(_CoreModel__NamedElement);
 			Fragments._CoreModel__Namespace.initOperations(_CoreModel__Namespace);
 			Fragments._CoreModel__OclAny.initOperations(_CoreModel__OclAny);
 			Fragments._CoreModel__OclElement.initOperations(_CoreModel__OclElement);
-			Fragments._CoreModel__Visitable.initOperations(_CoreModel__Visitable);
 
 			Fragments._CorePattern__CorePattern.initOperations(_CorePattern__CorePattern);
 			Fragments._CorePattern__Element.initOperations(_CorePattern__Element);
 			Fragments._CorePattern__OclAny.initOperations(_CorePattern__OclAny);
 			Fragments._CorePattern__OclElement.initOperations(_CorePattern__OclElement);
 			Fragments._CorePattern__Pattern.initOperations(_CorePattern__Pattern);
-			Fragments._CorePattern__Visitable.initOperations(_CorePattern__Visitable);
 
 			Fragments._EnforcementMode__EnforcementMode.initOperations(_EnforcementMode__EnforcementMode);
 			Fragments._EnforcementMode__OclAny.initOperations(_EnforcementMode__OclAny);
@@ -1438,7 +1362,6 @@ public class QVTcoreTables
 			Fragments._EnforcementOperation__EnforcementOperation.initOperations(_EnforcementOperation__EnforcementOperation);
 			Fragments._EnforcementOperation__OclAny.initOperations(_EnforcementOperation__OclAny);
 			Fragments._EnforcementOperation__OclElement.initOperations(_EnforcementOperation__OclElement);
-			Fragments._EnforcementOperation__Visitable.initOperations(_EnforcementOperation__Visitable);
 
 			Fragments._GuardPattern__CorePattern.initOperations(_GuardPattern__CorePattern);
 			Fragments._GuardPattern__Element.initOperations(_GuardPattern__Element);
@@ -1446,35 +1369,29 @@ public class QVTcoreTables
 			Fragments._GuardPattern__OclAny.initOperations(_GuardPattern__OclAny);
 			Fragments._GuardPattern__OclElement.initOperations(_GuardPattern__OclElement);
 			Fragments._GuardPattern__Pattern.initOperations(_GuardPattern__Pattern);
-			Fragments._GuardPattern__Visitable.initOperations(_GuardPattern__Visitable);
 
 			Fragments._GuardVariable__Element.initOperations(_GuardVariable__Element);
 			Fragments._GuardVariable__GuardVariable.initOperations(_GuardVariable__GuardVariable);
-			Fragments._GuardVariable__Nameable.initOperations(_GuardVariable__Nameable);
 			Fragments._GuardVariable__NamedElement.initOperations(_GuardVariable__NamedElement);
 			Fragments._GuardVariable__OclAny.initOperations(_GuardVariable__OclAny);
 			Fragments._GuardVariable__OclElement.initOperations(_GuardVariable__OclElement);
 			Fragments._GuardVariable__TypedElement.initOperations(_GuardVariable__TypedElement);
 			Fragments._GuardVariable__Variable.initOperations(_GuardVariable__Variable);
 			Fragments._GuardVariable__VariableDeclaration.initOperations(_GuardVariable__VariableDeclaration);
-			Fragments._GuardVariable__Visitable.initOperations(_GuardVariable__Visitable);
 
 			Fragments._Mapping__Area.initOperations(_Mapping__Area);
 			Fragments._Mapping__Element.initOperations(_Mapping__Element);
 			Fragments._Mapping__Mapping.initOperations(_Mapping__Mapping);
-			Fragments._Mapping__Nameable.initOperations(_Mapping__Nameable);
 			Fragments._Mapping__NamedElement.initOperations(_Mapping__NamedElement);
 			Fragments._Mapping__OclAny.initOperations(_Mapping__OclAny);
 			Fragments._Mapping__OclElement.initOperations(_Mapping__OclElement);
 			Fragments._Mapping__Rule.initOperations(_Mapping__Rule);
-			Fragments._Mapping__Visitable.initOperations(_Mapping__Visitable);
 
 			Fragments._NavigationAssignment__Assignment.initOperations(_NavigationAssignment__Assignment);
 			Fragments._NavigationAssignment__Element.initOperations(_NavigationAssignment__Element);
 			Fragments._NavigationAssignment__NavigationAssignment.initOperations(_NavigationAssignment__NavigationAssignment);
 			Fragments._NavigationAssignment__OclAny.initOperations(_NavigationAssignment__OclAny);
 			Fragments._NavigationAssignment__OclElement.initOperations(_NavigationAssignment__OclElement);
-			Fragments._NavigationAssignment__Visitable.initOperations(_NavigationAssignment__Visitable);
 
 			Fragments._OppositePropertyAssignment__Assignment.initOperations(_OppositePropertyAssignment__Assignment);
 			Fragments._OppositePropertyAssignment__Element.initOperations(_OppositePropertyAssignment__Element);
@@ -1482,7 +1399,6 @@ public class QVTcoreTables
 			Fragments._OppositePropertyAssignment__OclAny.initOperations(_OppositePropertyAssignment__OclAny);
 			Fragments._OppositePropertyAssignment__OclElement.initOperations(_OppositePropertyAssignment__OclElement);
 			Fragments._OppositePropertyAssignment__OppositePropertyAssignment.initOperations(_OppositePropertyAssignment__OppositePropertyAssignment);
-			Fragments._OppositePropertyAssignment__Visitable.initOperations(_OppositePropertyAssignment__Visitable);
 
 			Fragments._PropertyAssignment__Assignment.initOperations(_PropertyAssignment__Assignment);
 			Fragments._PropertyAssignment__Element.initOperations(_PropertyAssignment__Element);
@@ -1490,10 +1406,8 @@ public class QVTcoreTables
 			Fragments._PropertyAssignment__OclAny.initOperations(_PropertyAssignment__OclAny);
 			Fragments._PropertyAssignment__OclElement.initOperations(_PropertyAssignment__OclElement);
 			Fragments._PropertyAssignment__PropertyAssignment.initOperations(_PropertyAssignment__PropertyAssignment);
-			Fragments._PropertyAssignment__Visitable.initOperations(_PropertyAssignment__Visitable);
 
 			Fragments._RealizedVariable__Element.initOperations(_RealizedVariable__Element);
-			Fragments._RealizedVariable__Nameable.initOperations(_RealizedVariable__Nameable);
 			Fragments._RealizedVariable__NamedElement.initOperations(_RealizedVariable__NamedElement);
 			Fragments._RealizedVariable__OclAny.initOperations(_RealizedVariable__OclAny);
 			Fragments._RealizedVariable__OclElement.initOperations(_RealizedVariable__OclElement);
@@ -1501,14 +1415,12 @@ public class QVTcoreTables
 			Fragments._RealizedVariable__TypedElement.initOperations(_RealizedVariable__TypedElement);
 			Fragments._RealizedVariable__Variable.initOperations(_RealizedVariable__Variable);
 			Fragments._RealizedVariable__VariableDeclaration.initOperations(_RealizedVariable__VariableDeclaration);
-			Fragments._RealizedVariable__Visitable.initOperations(_RealizedVariable__Visitable);
 
 			Fragments._VariableAssignment__Assignment.initOperations(_VariableAssignment__Assignment);
 			Fragments._VariableAssignment__Element.initOperations(_VariableAssignment__Element);
 			Fragments._VariableAssignment__OclAny.initOperations(_VariableAssignment__OclAny);
 			Fragments._VariableAssignment__OclElement.initOperations(_VariableAssignment__OclElement);
 			Fragments._VariableAssignment__VariableAssignment.initOperations(_VariableAssignment__VariableAssignment);
-			Fragments._VariableAssignment__Visitable.initOperations(_VariableAssignment__Visitable);
 
 			Init.initEnd();
 		}

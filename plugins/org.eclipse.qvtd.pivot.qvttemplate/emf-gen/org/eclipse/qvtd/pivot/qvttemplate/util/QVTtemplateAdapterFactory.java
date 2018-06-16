@@ -21,8 +21,6 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.TypedElement;
-import org.eclipse.ocl.pivot.util.Visitable;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
@@ -85,59 +83,51 @@ public class QVTtemplateAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected QVTtemplateSwitch<@Nullable Adapter> modelSwitch =
 			new QVTtemplateSwitch<@Nullable Adapter>() {
-			@Override
-			public Adapter caseCollectionTemplateExp(CollectionTemplateExp object) {
-				return createCollectionTemplateExpAdapter();
-			}
-			@Override
-			public Adapter caseObjectTemplateExp(ObjectTemplateExp object) {
-				return createObjectTemplateExpAdapter();
-			}
-			@Override
-			public Adapter casePropertyTemplateItem(PropertyTemplateItem object) {
-				return createPropertyTemplateItemAdapter();
-			}
-			@Override
-			public Adapter caseTemplateExp(TemplateExp object) {
-				return createTemplateExpAdapter();
-			}
-			@Override
-			public Adapter caseVisitable(Visitable object) {
-				return createVisitableAdapter();
-			}
-			@Override
-			public Adapter caseElement(Element object) {
-				return createElementAdapter();
-			}
-			@Override
-			public Adapter caseNameable(Nameable object) {
-				return createNameableAdapter();
-			}
-			@Override
-			public Adapter caseNamedElement(NamedElement object) {
-				return createNamedElementAdapter();
-			}
-			@Override
-			public Adapter caseTypedElement(TypedElement object) {
-				return createTypedElementAdapter();
-			}
-			@Override
-			public Adapter caseOCLExpression(OCLExpression object) {
-				return createOCLExpressionAdapter();
-			}
-			@Override
-			public Adapter caseLiteralExp(LiteralExp object) {
-				return createLiteralExpAdapter();
-			}
-			@Override
-			public Adapter caseReferringElement(ReferringElement object) {
-				return createReferringElementAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object) {
-				return createEObjectAdapter();
-			}
-		};
+		@Override
+		public Adapter caseCollectionTemplateExp(CollectionTemplateExp object) {
+			return createCollectionTemplateExpAdapter();
+		}
+		@Override
+		public Adapter caseObjectTemplateExp(ObjectTemplateExp object) {
+			return createObjectTemplateExpAdapter();
+		}
+		@Override
+		public Adapter casePropertyTemplateItem(PropertyTemplateItem object) {
+			return createPropertyTemplateItemAdapter();
+		}
+		@Override
+		public Adapter caseTemplateExp(TemplateExp object) {
+			return createTemplateExpAdapter();
+		}
+		@Override
+		public Adapter caseElement(Element object) {
+			return createElementAdapter();
+		}
+		@Override
+		public Adapter caseNamedElement(NamedElement object) {
+			return createNamedElementAdapter();
+		}
+		@Override
+		public Adapter caseTypedElement(TypedElement object) {
+			return createTypedElementAdapter();
+		}
+		@Override
+		public Adapter caseOCLExpression(OCLExpression object) {
+			return createOCLExpressionAdapter();
+		}
+		@Override
+		public Adapter caseLiteralExp(LiteralExp object) {
+			return createLiteralExpAdapter();
+		}
+		@Override
+		public Adapter caseReferringElement(ReferringElement object) {
+			return createReferringElementAdapter();
+		}
+		@Override
+		public Adapter defaultCase(EObject object) {
+			return createEObjectAdapter();
+		}
+	};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.
@@ -210,20 +200,6 @@ public class QVTtemplateAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.util.Visitable <em>Visitable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.pivot.util.Visitable
-	 * @generated
-	 */
-	public Adapter createVisitableAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.Element <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -234,20 +210,6 @@ public class QVTtemplateAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.utilities.Nameable <em>Nameable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.pivot.utilities.Nameable
-	 * @generated
-	 */
-	public Adapter createNameableAdapter() {
 		return null;
 	}
 
