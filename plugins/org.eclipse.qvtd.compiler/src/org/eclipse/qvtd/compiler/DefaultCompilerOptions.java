@@ -1,9 +1,9 @@
 /*******************************************************************************
  * Copyright (c) 2018 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/legal/epl-v20.html
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation based on MtcBroker
@@ -109,7 +109,7 @@ public class DefaultCompilerOptions extends AbstractCompilerOptions
 	public void setQVTrGenerateOptions(@NonNull String projectName, @NonNull URI txURI,
 			@NonNull URI genModelURI, @NonNull URI javaURI, @NonNull URI classURI) throws IOException {
 		setOption(CompilerChain.GENMODEL_STEP, CompilerChain.URI_KEY, genModelURI);
-		String copyright = null; // "Copyright (c) 2015, 2016 Willink Transformations and others.\n;All rights reserved. This program and the accompanying materials\n;are made available under the terms of the Eclipse Public License v1.0\n;which accompanies this distribution, and is available at\n;http://www.eclipse.org/legal/epl-v10.html\n;\n;Contributors:\n;  E.D.Willink - Initial API and implementation");
+		String copyright = null; // "Copyright (c) 2015, 2016 Willink Transformations and others.\n;All rights reserved. This program and the accompanying materials\n;are made available under the terms of the Eclipse Public License v2.0\n;which accompanies this distribution, and is available at\n;http://www.eclipse.org/legal/epl-v20.html\n;\n;Contributors:\n;  E.D.Willink - Initial API and implementation");
 		String basePrefix = projectName;
 		Collection<@NonNull GenPackage> usedGenPackages = null;
 		setGenerateGenModelOptions(genModelURI, basePrefix, copyright, usedGenPackages);
