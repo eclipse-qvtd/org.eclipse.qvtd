@@ -36,6 +36,7 @@ import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.evaluation.EvaluationException;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
+import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
@@ -347,6 +348,7 @@ public class PivotTestCase extends TestCase
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		ASResourceImpl.CHECK_IMMUTABILITY.setState(true);
 		TEST_START.println("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
 	}
 }
