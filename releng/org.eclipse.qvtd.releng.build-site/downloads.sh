@@ -12,7 +12,7 @@
 #
 #	Promote the PUBLISH__URL to the downloads 'page'.
 #
-#    PUBLISH__URL            The zip to be published e.g. https://hudson.eclipse.org/ocl/job/qvtd-photon-master/25/artifact/releng/org.eclipse.qvtd.releng.build-site/target/org.eclipse.qvtd-0.16.0.v20171025-1600.zip
+#    PUBLISH__URL            The zip to be published e.g. https://ci.eclipse.org/ocl/job/qvtd-master/25/artifact/releng/org.eclipse.qvtd.releng.build-site/target/org.eclipse.qvtd-0.16.0.v20171025-1600.zip
 #    PUBLISH__VERSION        Unqualified version e.g. 0.16.0
 #    PUBLISH__BUILD_T        Build type N/I/S, blank suppresses promotion
 #    PUBLISH__QUALIFIER      Version qualifier e.g. v20171025-1600
