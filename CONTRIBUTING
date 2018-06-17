@@ -1,0 +1,65 @@
+# Contributing to QVT-Relations
+
+Thanks for your interest in this project.
+
+## Project description
+
+The Eclipse QVT Declarative (QVTd) component is a partial implementation of the
+Core (QVTc) and Relations (QVTr) Languages defined by the OMG standard
+specification (MOF) 2.0 Query/View/Transformation. To date the QVT Declarative
+component provides editing capabilities to support the QVT Declarative
+Languages: QVTd 2010, Helios, 0.7.0 provides QVT models and LPG based parsers
+QVTd 2011, Indigo, 0.8.0 adds IMP-based editors. QVTd 2012, Juno, 0.9.0
+re-engineers the models and editors to exploit Xtext and the OCL Pivot model.
+QVTd 2013, Kepler, 0.10.0 introduces editing and execution of the QVTi
+simplification of QVTc. QVTd 2014, Luna, 0.11.0 introduces a source debugger for
+QVTi execution. QVTd 2015, Mars, 0.12.0 provides a very preliminary Epsilon
+prototype of the QVTr to QVTc to QVTu to QVTm to QVTi chain. QVTd 2016, Neon,
+0.13.0 provides a preliminary QVTr to QVTc to QVTu to QVTm to QVTi chain. QVTd
+2017, Oxygen, 0.14.0 provides a more useable UMLX to QVTr to QVTc to QVTu to
+QVTm to QVTs to QVTi chain and so full editing, compliation, execution,
+debugging. QVTd 2018, Photon, 0.15.0 goes direct from QVTr to QVTs to start
+supporting QVTr overrides.
+
+* https://projects.eclipse.org/projects/modeling.mmt.qvtd
+
+## Developer resources
+
+Information regarding source code management, builds, coding standards, and
+more.
+
+* https://projects.eclipse.org/projects/modeling.mmt.qvtd/developer
+
+The project maintains the following source code repositories
+
+* http://git.eclipse.org/c/mmt/org.eclipse.qvtd.git
+
+This project uses Bugzilla to track ongoing development and issues.
+
+* Search for issues: https://eclipse.org/bugs/buglist.cgi?product=QVTd&
+* Create a new report: https://eclipse.org/bugs/enter_bug.cgi?product=QVTd&
+
+Be sure to search for existing bugs before you create another one. Remember that
+contributions are always welcome!
+
+## Eclipse Contributor Agreement
+
+Before your contribution can be accepted by the project team contributors must
+electronically sign the Eclipse Contributor Agreement (ECA).
+
+* http://www.eclipse.org/legal/ECA.php
+
+Commits that are provided by non-committers must have a Signed-off-by field in
+the footer indicating that the author is aware of the terms by which the
+contribution has been provided to the project. The non-committer must
+additionally have an Eclipse Foundation account and must have a signed Eclipse
+Contributor Agreement (ECA) on file.
+
+For more information, please see the Eclipse Committer Handbook:
+https://www.eclipse.org/projects/handbook/#resources-commit
+
+## Contact
+
+Contact the project developers via the project's "dev" list.
+
+* https://dev.eclipse.org/mailman/listinfo/qvtd-dev

@@ -1,0 +1,95 @@
+# Notices for QVT-Relations
+
+This content is produced and maintained by the Eclipse QVT-Relations project.
+
+* Project home: https://projects.eclipse.org/projects/modeling.mmt.qvtd
+
+## Trademarks
+
+Eclipse QVT-Relations, and QVT-Relations are trademarks of the Eclipse
+Foundation.
+
+## Copyright
+
+All content is the property of the respective authors or their employers. For
+more information regarding authorship of content, please consult the listed
+source code repository logs.
+
+## Declared Project Licenses
+
+This program and the accompanying materials are made available under the terms
+of the Eclipse Public License v. 2.0 which is available at
+http://www.eclipse.org/legal/epl-2.0.
+
+SPDX-License-Identifier: EPL-2.0
+
+## Source Code
+
+The project maintains the following source code repositories:
+
+* http://git.eclipse.org/c/mmt/org.eclipse.qvtd.git
+
+## Third-party Content
+
+ANTLR (3.1)
+
+* License: New BSD license
+
+Google Guava (14.0.1)
+
+* License: Apache License, 2.0
+
+Google Guava (15.0.0)
+
+* License: Apache License, 2.0
+
+Google Guava (17.0)
+
+* License: Apache License, 2.0
+
+Google Guava (18.0)
+
+* License: Apache License, 2.0
+
+Google Guava (19.0)
+
+* License: Apache License, 2.0
+
+Guava (11.0.2)
+
+* License: Apache License, 2.0
+
+Guava (12.0)
+
+* License: Eclipse Public License
+
+Guava (13.0.1)
+
+* License: Apache License, 2.0
+
+guava (16.0)
+
+* License: Apache License, 2.0
+
+LPG (2.0.17)
+
+* License: Eclipse Public License
+
+OMG QVT Specification (1.0)
+
+* License: Object Management Group License
+* Project: http://www.omg.org/spec/QVT/1.0/
+* Source: http://www.omg.org/docs/formal/08-04-03.pdf
+
+OMG QVT Specification and XML Files (1.1)
+
+* License: Object Management Group License
+
+## Cryptography
+
+Content may contain encryption software. The country in which you are currently
+may have restrictions on the import, possession, and use, and/or re-export to
+another country, of encryption software. BEFORE using any encryption software,
+please check the country's laws, regulations and policies concerning the import,
+possession, or use, and re-export of encryption software, to see if this is
+permitted.
