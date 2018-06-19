@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
+import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
@@ -61,6 +62,7 @@ public class LoadTestCase extends XtextTestCase
 		saveAsXMI(xtextResource, cstURI);
 		pivotResource.setURI(pivotURI);
 		assertValidationDiagnostics("Pivot validation errors", pivotResource, messages);
+		((ASResourceImpl)pivotResource).setSaveable(true);
 		pivotResource.save(DefaultCompilerOptions.defaultSavingOptions);
 		return pivotResource;
 	}

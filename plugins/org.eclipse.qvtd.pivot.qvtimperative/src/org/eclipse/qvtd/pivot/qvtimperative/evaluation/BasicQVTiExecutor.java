@@ -43,6 +43,7 @@ import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractExecutor;
 import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
+import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.labels.ILabelGenerator;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -574,6 +575,7 @@ public abstract class BasicQVTiExecutor extends AbstractExecutor implements QVTi
 		if (saveURI != null) {
 			resource.setURI(saveURI);
 		}
+		((ASResourceImpl)resource).setSaveable(true);
 		resource.save(options);
 	}
 
