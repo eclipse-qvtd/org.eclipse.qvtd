@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Model;
-import org.eclipse.ocl.pivot.internal.resource.ASResourceImpl;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
@@ -77,8 +76,8 @@ public class QVTr2QVTrTests extends AbstractDomainUsageTests
 		Model outModel = QVTrelationUtil.getModel(outResource);
 		outModel.setName(inURI.lastSegment());
 		outModel.setExternalURI(inURI.toString());
-		((ASResourceImpl)inResource).setSaveable(true);
-		((ASResourceImpl)outResource).setSaveable(true);
+		((ASResource)inResource).setSaveable(true);
+		((ASResource)outResource).setSaveable(true);
 		inResource.save(DefaultCompilerOptions.defaultSavingOptions);
 		outResource.save(DefaultCompilerOptions.defaultSavingOptions);
 		assertSameModel(inResource, outResource);
