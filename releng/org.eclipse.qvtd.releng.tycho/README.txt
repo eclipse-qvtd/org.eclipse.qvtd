@@ -43,7 +43,7 @@ chmod +x ${WORKSPACE}/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckmi
 ${WORKSPACE}/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-pre-buckminster.sh
 # NB: This script contains some shell commands which prepare the build.properties file used by buckminster.
 # It will be called before buckminster commands execution. You may check its content at the following URL:
-# https://hudson.eclipse.org/ocl/job/qvtd-oxygen-master/ws/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-pre-buckminster.sh/*view*/
+# https://ci.eclipse.org/ocl/job/qvtd-master/ws/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-pre-buckminster.sh/*view*/
 
 Buckminster job (4.5):
 
@@ -54,7 +54,7 @@ Advanced change workspace: ${WORKSPACE}/buildroot/buckminster.workspace
 Advanced JVM arguments:
 
 -Dcheckout.location=${WORKSPACE}
--Dreference.repository=https://hudson.eclipse.org/ocl/job/${JOB_NAME}/lastSuccessfulBuild/artifact/QVTd.p2.repository/
+-Dreference.repository=https://ci.eclipse.org/ocl/job/${JOB_NAME}/lastSuccessfulBuild/artifact/QVTd.p2.repository/
 -Xmx2g
 -noverify
 
@@ -64,7 +64,7 @@ chmod +x ${WORKSPACE}/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckmi
 ${WORKSPACE}/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-post-buckminster.sh
 # NB: This script contains some shell commands which will be extecuted prior to archive artifacts.
 # It will be called after buckminster commands execution. You may check its content at the following URL:
-# https://hudson.eclipse.org/ocl/job/qvtd-oxygen-master/ws/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-post-buckminster.sh/*view*/
+# https://ci.eclipse.org/ocl/job/qvtd-master/ws/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/scripts/qvtd-post-buckminster.sh/*view*/
 
 Publish JUnit test report: QVTd.test.results/**
 

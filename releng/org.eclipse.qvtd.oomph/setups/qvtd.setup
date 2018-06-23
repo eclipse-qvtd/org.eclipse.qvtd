@@ -181,7 +181,7 @@
     </setupTask>
     <setupTask
         xsi:type="mylyn:MylynBuildsTask"
-        serverURL="https://hudson.eclipse.org/ocl/"
+        serverURL="https://ci.eclipse.org/ocl/"
         userID="${bugzilla.id}"
         password="${eclipse.user.password}">
       <buildPlan
