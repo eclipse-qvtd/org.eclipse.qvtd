@@ -643,10 +643,10 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 
 	public @NonNull TypeLiteralNode createTypeLiteralNode(boolean isMatched, @NonNull Type typeValue, @NonNull TypeExp typeExp) {
 		ClassDatum classDatum = scheduleManager.getClassDatum(typeExp);
-		String typeName = PrettyPrinter.printType(QVTscheduleUtil.getCompleteClass(classDatum));
+		//		String typeName = PrettyPrinter.printType(QVTscheduleUtil.getCompleteClass(classDatum));
 		Role nodeRole = getOperationNodePhase(region, typeExp);
 		TypeLiteralNode typeLiteralNode = QVTscheduleFactory.eINSTANCE.createTypeLiteralNode();
-		typeLiteralNode.initialize(nodeRole, region, typeName, classDatum);
+		typeLiteralNode.initialize(nodeRole, region, String.valueOf(typeValue), classDatum);
 		typeLiteralNode.setMatched(isMatched);
 		typeLiteralNode.setTypeValue(typeValue);
 		typeLiteralNode.setOriginatingElement(typeExp);
