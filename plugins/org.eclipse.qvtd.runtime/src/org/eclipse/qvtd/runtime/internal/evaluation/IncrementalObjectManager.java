@@ -698,8 +698,25 @@ public class IncrementalObjectManager extends AbstractObjectManager
 	@Override
 	public synchronized void assigned(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue) {
 		assert eFeature != null;
-		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("assigned " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + LabelUtil.getLabel(eObject) + " = " + LabelUtil.getLabel(ecoreValue));
+		if (debugAssignments) {
+			boolean isOpposite = false;
+			StringBuilder s = new StringBuilder();
+			s.append("assigned ");
+			s.append(toDebugString(eObject));
+			s.append(".");
+			/*s.append(eFeature.getEContainingClass().getName() + "."); */
+			s.append(isOpposite ? "~" : "");
+			s.append(eFeature.getName());
+			s.append(" := ");
+			if (ecoreValue instanceof EObject) {
+				s.append(toDebugString(ecoreValue));
+			}
+			else {
+				//	s.append("\"");
+				s.append(LabelUtil.getLabel(ecoreValue));
+				//	s.append("\"");
+			}
+			AbstractTransformer.ASSIGNMENTS.println(s.toString());
 		}
 		Map<EStructuralFeature, BasicSlotState> objectState = getObjectState(eObject);
 		BasicSlotState slotState = objectState.get(eFeature);
@@ -908,8 +925,8 @@ public class IncrementalObjectManager extends AbstractObjectManager
 	@Override
 	public synchronized void getting(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, boolean isOpposite) {
 		assert eFeature != null;
-		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("getting " + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " for " + LabelUtil.getLabel(eObject));
+		if (debugGettings) {
+			AbstractTransformer.GETTINGS.println("getting " + toDebugString(eObject) + "." + /*eFeature.getEContainingClass().getName() + "::" +*/ (isOpposite ? "~" : "") + eFeature.getName());
 		}
 		SlotState slotState = getSlotState(eObject, eFeature);
 		slotState.getting(eObject, eFeature);

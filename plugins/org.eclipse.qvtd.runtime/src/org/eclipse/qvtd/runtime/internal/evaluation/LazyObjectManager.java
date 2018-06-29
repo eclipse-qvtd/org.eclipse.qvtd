@@ -197,7 +197,7 @@ public class LazyObjectManager extends AbstractObjectManager
 					break;
 				case ASSIGNED:
 					if (!(eFeature instanceof EOppositeReferenceImpl)) {
-						System.out.println("Re-assignment of \"" + LabelUtil.getLabel(eObject) + "\"." + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " with \"" + ecoreValue + "\"");
+						System.out.println("Re-assignment of \"" + toDebugString(eObject) + "\"." + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " with \"" + ecoreValue + "\"");
 					}
 					break;
 			}
@@ -277,7 +277,7 @@ public class LazyObjectManager extends AbstractObjectManager
 		@Override
 		public String toString() {
 			StringBuilder s = new StringBuilder();
-			s.append(LabelUtil.getLabel(debug_eObject));
+			s.append(toDebugString(debug_eObject));
 			s.append(".");
 			s.append(debug_eFeature.getEContainingClass().getName());
 			s.append("::");
@@ -794,8 +794,25 @@ public class LazyObjectManager extends AbstractObjectManager
 	@Override
 	public synchronized void assigned(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, @Nullable Object ecoreValue) {
 		assert eFeature != null;
-		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("assigned \"" + LabelUtil.getLabel(eObject) + "\"." + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + " := \"" + LabelUtil.getLabel(ecoreValue) + "\"");
+		if (debugAssignments) {
+			boolean isOpposite = false;
+			StringBuilder s = new StringBuilder();
+			s.append("assigned ");
+			s.append(toDebugString(eObject));
+			s.append(".");
+			/*s.append(eFeature.getEContainingClass().getName() + "."); */
+			s.append(isOpposite ? "~" : "");
+			s.append(eFeature.getName());
+			s.append(" := ");
+			if (ecoreValue instanceof EObject) {
+				s.append(toDebugString(ecoreValue));
+			}
+			else {
+				//	s.append("\"");
+				s.append(LabelUtil.getLabel(ecoreValue));
+				//	s.append("\"");
+			}
+			AbstractTransformer.ASSIGNMENTS.println(s.toString());
 		}
 		Map<@NonNull EStructuralFeature, @NonNull SlotState> objectState = getObjectState(eObject);
 		SlotState slotState = objectState.get(eFeature);
@@ -1100,8 +1117,8 @@ public class LazyObjectManager extends AbstractObjectManager
 	@Override
 	public synchronized void getting(@NonNull Object eObject, /*@NonNull*/ EStructuralFeature eFeature, boolean isOpposite) {
 		assert eFeature != null;
-		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("getting \"" + LabelUtil.getLabel(eObject) + "\"." + eFeature.getEContainingClass().getName() + "::" + eFeature.getName() + (isOpposite ? "<opposite> " : ""));
+		if (debugGettings) {
+			AbstractTransformer.GETTINGS.println("getting " + toDebugString(eObject) + "." + /*eFeature.getEContainingClass().getName() + "::" +*/ (isOpposite ? "~" : "") + eFeature.getName());
 		}
 		if (isOpposite) {
 			eFeature = getEOppositeReference((EReference) eFeature);

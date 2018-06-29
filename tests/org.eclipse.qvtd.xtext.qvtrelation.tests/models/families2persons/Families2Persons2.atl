@@ -6,7 +6,7 @@ module Families2Persons;
 create OUT : Persons from IN : Families;
 
 helper context Families!Member def: isFemale() : Boolean =
-	self.familyMother.oclIsUndefined();
+	true; --self.familyMother.oclIsUndefined();
 
 rule Member2Female {
 	from

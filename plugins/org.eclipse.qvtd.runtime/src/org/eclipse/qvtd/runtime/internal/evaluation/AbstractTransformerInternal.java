@@ -43,6 +43,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.SetValue;
+import org.eclipse.qvtd.runtime.evaluation.AbstractObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
@@ -465,7 +466,10 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	protected final IdResolver.@NonNull IdResolverExtension idResolver;
 	protected final @NonNull Model @NonNull [] models;
 	protected final @NonNull Map<@NonNull String, @NonNull Integer> modelIndexes = new HashMap<>();
+	protected final boolean debugAssignments = AbstractTransformer.ASSIGNMENTS.isActive();
+	protected final boolean debugCreations = AbstractTransformer.CREATIONS.isActive();
 	protected final boolean debugExceptions = AbstractTransformer.EXCEPTIONS.isActive();
+	protected final boolean debugGettings = AbstractTransformer.GETTINGS.isActive();
 	protected final boolean debugInvocations = AbstractTransformer.INVOCATIONS.isActive();
 
 	/**
@@ -846,5 +850,13 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 
 	public @NonNull Object throwInvalidEvaluationException(@NonNull String message, Object... bindings) {
 		throw new InvalidEvaluationException(message, bindings);
+	}
+
+	/**
+	 * Return the string rendering of object for use in debug messages. The default just invokes String.valueOf().
+	 * Derived implementations may provide metamodel-specific content.
+	 */
+	protected @NonNull String toDebugString(@Nullable Object object) {
+		return AbstractObjectManager.toDebugString(object);
 	}
 }

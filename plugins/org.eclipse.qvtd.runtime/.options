@@ -9,8 +9,20 @@ org.eclipse.qvtd.runtime/tx/consumes=false
 # Trace transformation output model containment count result 
 org.eclipse.qvtd.runtime/tx/containments=false
 
+# Trace transformation object slot assignments 
+org.eclipse.qvtd.runtime/tx/assignments=false
+
+# Trace transformation blocks and unblocks 
+org.eclipse.qvtd.runtime/tx/blocks=false
+
+# Trace transformation object creations 
+org.eclipse.qvtd.runtime/tx/creations=false
+
 # Trace transformation exceptions 
 org.eclipse.qvtd.runtime/tx/exceptions=false
+
+# Trace transformation object getting attempts 
+org.eclipse.qvtd.runtime/tx/gettings=false
 
 # Trace transformation invocations 
 org.eclipse.qvtd.runtime/tx/invocations=false

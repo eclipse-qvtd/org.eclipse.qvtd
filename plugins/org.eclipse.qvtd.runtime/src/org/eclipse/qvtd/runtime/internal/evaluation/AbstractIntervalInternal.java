@@ -35,6 +35,7 @@ import org.eclipse.qvtd.runtime.evaluation.StrictIncrementalConnection;
  */
 public abstract class AbstractIntervalInternal implements Interval
 {
+	protected final boolean debugBlocks = AbstractTransformer.BLOCKS.isActive();
 	protected final boolean debugInvocations = AbstractTransformer.INVOCATIONS.isActive();
 
 	protected final @NonNull InvocationManager invocationManager;
@@ -95,7 +96,7 @@ public abstract class AbstractIntervalInternal implements Interval
 		}
 		slotState.block(invocation);
 		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("block " + invocation + " for " + slotState);
+			AbstractTransformer.BLOCKS.println("block " + invocation + " for " + slotState);
 		}
 	}
 
@@ -228,8 +229,8 @@ public abstract class AbstractIntervalInternal implements Interval
 			return true;
 		}
 		do {
-			if (debugInvocations) {
-				AbstractTransformer.INVOCATIONS.println("still blocked " + blockedInvocation + " by " + blockedInvocation.debug_blockedBy);
+			if (debugBlocks) {
+				AbstractTransformer.BLOCKS.println("still blocked " + blockedInvocation + " by " + blockedInvocation.debug_blockedBy);
 			}
 			blockedInvocation = blockedInvocation.next;
 		}
@@ -299,8 +300,8 @@ public abstract class AbstractIntervalInternal implements Interval
 	@Override
 	public synchronized void queue(@NonNull Invocation invocation) {
 		assert invocation.getInterval() == this;
-		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("queue " + invocation);
+		if (debugBlocks) {
+			AbstractTransformer.BLOCKS.println("queue " + invocation);
 		}
 		AbstractInvocationInternal castInvocation = (AbstractInvocationInternal) invocation;
 		assert castInvocation.debug_blockedBy == null;
@@ -363,7 +364,7 @@ public abstract class AbstractIntervalInternal implements Interval
 	@Override
 	public synchronized void unblock(@NonNull Invocation invocation) {
 		if (debugInvocations) {
-			AbstractTransformer.INVOCATIONS.println("unblock " + invocation);
+			AbstractTransformer.BLOCKS.println("unblock " + invocation);
 		}
 		AbstractInvocationInternal castInvocation = (AbstractInvocationInternal) invocation;
 		assert castInvocation.debug_blockedBy != null;

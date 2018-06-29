@@ -40,9 +40,13 @@ public abstract class AbstractTransformer extends AbstractTransformerInternal
 	public static final @NonNull String TRACE_GENMODEL_FRAGMENT = "//qvttrace";
 
 	public static final @NonNull TracingOption APPENDS = new TracingOption(PLUGIN_ID, "tx/appends");
+	public static final @NonNull TracingOption ASSIGNMENTS = new TracingOption(PLUGIN_ID, "tx/assignments");
+	public static final @NonNull TracingOption BLOCKS = new TracingOption(PLUGIN_ID, "tx/blocks");
 	public static final @NonNull TracingOption CONSUMES = new TracingOption(PLUGIN_ID, "tx/consumes");
 	public static final @NonNull TracingOption CONTAINMENTS = new TracingOption(PLUGIN_ID, "tx/containments");
+	public static final @NonNull TracingOption CREATIONS = new TracingOption(PLUGIN_ID, "tx/creations");
 	public static final @NonNull TracingOption EXCEPTIONS = new TracingOption(PLUGIN_ID, "tx/exceptions");
+	public static final @NonNull TracingOption GETTINGS = new TracingOption(PLUGIN_ID, "tx/gettings");
 	public static final @NonNull TracingOption INVOCATIONS = new TracingOption(PLUGIN_ID, "tx/invocations");
 
 	protected AbstractTransformer(@NonNull TransformationExecutor executor, @NonNull String @NonNull [] modelNames,

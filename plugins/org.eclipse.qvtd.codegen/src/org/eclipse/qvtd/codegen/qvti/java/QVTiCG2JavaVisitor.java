@@ -297,6 +297,19 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.appendBooleanString(asNewStatement.isIsContained());
 		js.append(");\n");
 		//
+		if (isGeneratedDebug) {
+			js.append("if (debugCreations) {\n");
+			js.pushIndentation(null);
+			js.appendClassReference(AbstractTransformer.class);
+			js.append(".CREATIONS.println(\"created \"");
+			js.append(" + toDebugString(");
+			js.append(getValueName(cgRealizedVariable));
+			js.append(")");
+			js.append(");\n");
+			js.popIndentation();
+			js.append("}\n");
+		}
+		//
 		if (isIncremental) {
 			js.append(QVTiGlobalContext.OBJECT_MANAGER_NAME);
 			js.append(".created(");
@@ -1267,12 +1280,39 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			js.appendClassReference(AbstractTransformer.class);
 			js.append(".INVOCATIONS.println(\"invoke " + getMappingName(cgMapping) + "\"");
 			for (@NonNull CGGuardVariable cgGuardVariable : cgGuardVariables) {
-				if (!(cgGuardVariable instanceof ConnectionVariable)) {
-					js.append(" + ");
-					js.append("\", \"");
-					js.append(" + ");
+				if (!(cgGuardVariable instanceof CGConnectionVariable)) {
+					js.append(" +\n\t\"\\n\\t");
+					//	js.append(cgGuardVariable.getClass().getSimpleName());
+					//	js.append(", ");
+					js.append("\\\"" + cgGuardVariable.getName() + "\\\":\"");
+					js.append(" + toDebugString(");
 					js.append(getValueName(cgGuardVariable));
+					js.append(")");
+					Element ast = cgGuardVariable.getAst();
+					if (ast instanceof TypedElement) {
+						org.eclipse.ocl.pivot.Class type = PivotUtil.getClass((TypedElement)ast);
+						Property trace2dispatcherProperty = NameUtil.getNameable(PivotUtil.getOwnedProperties(type), "dispatcher");
+						if (trace2dispatcherProperty != null) {
+							js.append(" +\n\t\"\\n\\t");
+							js.append("\\\"dispatcher\\\":\"");
+							js.append(" + toDebugString(");
+							js.append(getValueName(cgGuardVariable));
+							js.append(".getDispatcher())");
+							for (Property dispatcherProperty : PivotUtil.getOwnedProperties(PivotUtil.getClass(trace2dispatcherProperty))) {
+								String name = PivotUtil.getName(dispatcherProperty);
+								if ((name.length() >= 2) && (name.charAt(0) == 'd') && Character.isDigit(name.charAt(1))) {
+									js.append(" +\n\t\"\\n\\t");
+									js.append("\\\"dispatcher." + name + "\\\":\"");
+									js.append(" + toDebugString(");
+									js.append(getValueName(cgGuardVariable));
+									js.append(".getDispatcher().get" + Character.toUpperCase(name.charAt(0)) + name.substring(1) + "())");
+
+								}
+							}
+						}
+					}
 				}
+				//				}
 			}
 			js.append(");\n");
 			js.popIndentation();

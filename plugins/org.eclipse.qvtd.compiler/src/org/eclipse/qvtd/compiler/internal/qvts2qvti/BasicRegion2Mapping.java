@@ -197,6 +197,28 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 
 		public @NonNull Iterable<@NonNull CheckedCondition> analyze() {
+			//
+			//	A dispatch input node must be checked to confirm the correct derivation.
+			//
+			Node dispatchNode = regionAnalysis.basicGetDispatchNode();
+			if (dispatchNode != null) {
+				for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(dispatchNode)) {
+					if (edge.isPredicated()) {
+						addEdge(edge);
+					}
+				}
+			}
+			//
+			//	A predicated head node success must be checked before anything else.
+			//
+			for (@NonNull Node headNode : headNodes) {
+				Edge successEdge = regionAnalysis.getSuccessEdge(headNode);
+				if ((successEdge != null) && successEdge.isPredicated()) {
+					addEdge(successEdge);
+				}
+			}
+
+
 			Set<@NonNull CheckedCondition> checkedConditions = checkedConditionAnalysis.computeCheckedConditions();
 			int checkableSize = checkedConditions.size();
 			//			if (checkableSize > 0) {
