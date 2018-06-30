@@ -10,7 +10,7 @@
     <unit id="org.eclipse.uml2.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.sirius.specifier.feature.group" version="0.0.0"/>
-    <repository location="http://download.eclipse.org/releases/photon/201711031000"/>
+    <repository location="http://download.eclipse.org/releases/photon/201806271001"/>
     <repository location="http://download.eclipse.org/mmt/atl/updates/milestones/4.0"/>
     <repository location="http://download.eclipse.org/modeling/emf/emf/builds/milestone"/>
     <repository location="https://hudson.eclipse.org/ocl/job/ocl-branch-tests/lastSuccessfulBuild/artifact/targetPlatform"/>
