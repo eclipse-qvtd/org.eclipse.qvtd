@@ -64,6 +64,11 @@ public class QVTbaseLibrary extends ASResourceImpl
 	public static final @NonNull String STDLIB_URI = "http://www.eclipse.org/qvt/2015/QVTbaseLibrary";
 
 	/**
+	 *	The URI of the AS representation of this Standard Library.
+	 */
+	public static final @NonNull URI STDLIB_AS_URI = URI.createURI("http://www.eclipse.org/qvt/2015/QVTbaseLibrary" + PivotConstants.DOT_OCL_AS_FILE_EXTENSION);
+
+	/**
 	 * Return the default http://www.eclipse.org/qvt/2015/QVTbaseLibrary standard Library Resource.
 	 *  This static definition auto-generated from /org.eclipse.qvtd.pivot.qvtbase/model/QVTbaseLibrary.oclstdlib
 	 *  is used as the default when no overriding copy is registered.
@@ -91,17 +96,21 @@ public class QVTbaseLibrary extends ASResourceImpl
 	}
 
 	/**
-	 * Install this library in the {@link StandardLibraryContribution#REGISTRY}.
+	 * Install this library in the {@link StandardLibraryContribution#REGISTRY}
+	 * and the {@link OCLASResourceFactory#REGISTRY}.
 	 * This method may be invoked by standalone applications to replicate
 	 * the registration that should appear as a standard_library plugin
 	 * extension when running within Eclipse.
 	 */
 	public static void install() {
-		StandardLibraryContribution.REGISTRY.put(STDLIB_URI, new Loader());
+		Loader contribution = new Loader();
+		StandardLibraryContribution.REGISTRY.put(STDLIB_URI, contribution);
+		OCLASResourceFactory.REGISTRY.put(STDLIB_AS_URI, contribution);
 	}
 
 	/**
 	 * Install this library in the {@link StandardLibraryContribution#REGISTRY}
+	 * and the {@link OCLASResourceFactory#REGISTRY}
 	 * unless some other library contribution has already been installed.
 	 */
 	public static void lazyInstall() {
@@ -111,12 +120,14 @@ public class QVTbaseLibrary extends ASResourceImpl
 	}
 
 	/**
-	 * Unnstall this library from the {@link StandardLibraryContribution#REGISTRY}.
+	 * Uninstall this library from the {@link StandardLibraryContribution#REGISTRY}
+	 * and the {@link OCLASResourceFactory#REGISTRY}.
 	 * This method may be invoked by standalone applications to release the library
 	 * resources for garbage collection and memory leakage detection.
 	 */
 	public static void uninstall() {
 		StandardLibraryContribution.REGISTRY.remove(STDLIB_URI);
+		OCLASResourceFactory.REGISTRY.remove(STDLIB_AS_URI);
 		INSTANCE = null;
 	}
 
@@ -140,8 +151,6 @@ public class QVTbaseLibrary extends ASResourceImpl
 
 	/**
 	 * A ReadOnly QVTbaseLibrary overrides inherited functionality to impose immutable shared behaviour.
-	 *
-	 * @since 1.5
 	 */
 	protected static class ReadOnly extends QVTbaseLibrary implements ImmutableResource
 	{
