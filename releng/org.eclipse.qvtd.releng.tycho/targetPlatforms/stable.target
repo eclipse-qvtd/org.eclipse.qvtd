@@ -13,13 +13,13 @@
     <repository location="http://download.eclipse.org/releases/photon/201806271001"/>
     <repository location="http://download.eclipse.org/mmt/atl/updates/milestones/4.0"/>
     <repository location="http://download.eclipse.org/modeling/emf/emf/builds/milestone"/>
-    <repository location="http://download.eclipse.org/modeling/mdt/ocl/updates/milestones/6.4.0"/>
-    <repository location="http://download.eclipse.org/mmt/qvto/updates/milestones/3.8.0"/>
+    <repository location="http://download.eclipse.org/modeling/mdt/ocl/updates/milestones"/>
+    <repository location="http://download.eclipse.org/mmt/qvto/updates/milestones"/>
     <!--repository location="http://download.eclipse.org/modeling/mdt/uml2/updates/5.4milestones"/-->
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.emf.examples.library" version="0.0.0"/>
-    <repository location="http://download.eclipse.org/modeling/emf/emf/builds/release/2.13"/>
+    <repository location="http://download.eclipse.org/modeling/emf/emf/builds/release/2.14"/>
     <repository location="http://download.eclipse.org/modeling/emf/emf/builds/milestone"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -29,7 +29,7 @@
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.ocl.examples.tests.feature.group" version="0.0.0"/>
-    <repository location="http://download.eclipse.org/modeling/mdt/ocl/updates/milestones/6.4.0"/>
+    <repository location="http://download.eclipse.org/modeling/mdt/ocl/updates/milestones"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.license.feature.group" version="0.0.0"/>

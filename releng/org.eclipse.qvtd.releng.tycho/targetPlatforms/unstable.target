@@ -14,12 +14,12 @@
     <repository location="http://download.eclipse.org/mmt/atl/updates/milestones/4.0"/>
     <repository location="http://download.eclipse.org/modeling/emf/emf/builds/milestone"/>
     <repository location="https://ci.eclipse.org/ocl/job/ocl-branch-tests/lastSuccessfulBuild/artifact/targetPlatform"/>
-    <repository location="http://download.eclipse.org/mmt/qvto/updates/milestones/3.8.0"/>
+    <repository location="http://download.eclipse.org/mmt/qvto/updates/milestones"/>
     <!--repository location="http://download.eclipse.org/modeling/mdt/uml2/updates/5.4milestones"/-->
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.emf.examples.library" version="0.0.0"/>
-    <repository location="http://download.eclipse.org/modeling/emf/emf/builds/release/2.13"/>
+    <repository location="http://download.eclipse.org/modeling/emf/emf/builds/release/2.14"/>
     <repository location="http://download.eclipse.org/modeling/emf/emf/builds/milestone"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
