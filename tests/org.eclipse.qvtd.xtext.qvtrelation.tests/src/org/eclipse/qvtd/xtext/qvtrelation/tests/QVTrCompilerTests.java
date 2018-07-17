@@ -19,9 +19,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.m2m.atl.dsls.core.EMFTCSInjector;
-import org.eclipse.m2m.atl.emftvm.compiler.AtlResourceFactoryImpl;
-import org.eclipse.m2m.atl.engine.parser.AtlParser;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.pivot.PivotPackage;
@@ -48,7 +45,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
-import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -186,7 +182,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		super.tearDown();
 	}
 
-	@Test
+	/*	@Test
 	public void testQVTrCompiler_ATL2QVTr_CG() throws Exception {
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
@@ -306,7 +302,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		finally {
 			myQVT4.dispose();
 		}
-	}
+	} */
 
 	/*	@Test
 	public void testQVTrCompiler_ATL2QVTr_CG_exec() throws Exception {
