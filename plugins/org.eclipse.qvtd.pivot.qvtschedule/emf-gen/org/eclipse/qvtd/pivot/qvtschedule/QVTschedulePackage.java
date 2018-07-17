@@ -198,7 +198,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getConnection()
 	 * @generated
 	 */
-	int CONNECTION = 9;
+	int CONNECTION = 10;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd <em>Connection End</em>}' class.
@@ -208,7 +208,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getConnectionEnd()
 	 * @generated
 	 */
-	int CONNECTION_END = 10;
+	int CONNECTION_END = 11;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.DatumConnectionImpl <em>Datum Connection</em>}' class.
@@ -218,7 +218,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getDatumConnection()
 	 * @generated
 	 */
-	int DATUM_CONNECTION = 11;
+	int DATUM_CONNECTION = 12;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl <em>Edge</em>}' class.
@@ -228,7 +228,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getEdge()
 	 * @generated
 	 */
-	int EDGE = 15;
+	int EDGE = 16;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeConnectionImpl <em>Edge Connection</em>}' class.
@@ -238,7 +238,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getEdgeConnection()
 	 * @generated
 	 */
-	int EDGE_CONNECTION = 16;
+	int EDGE_CONNECTION = 17;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.Role <em>Role</em>}' enum.
@@ -248,7 +248,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRole()
 	 * @generated
 	 */
-	int ROLE = 68;
+	int ROLE = 69;
 
 	/**
 	 * The meta object id for the '<em>Number</em>' data type.
@@ -258,7 +258,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNumber()
 	 * @generated
 	 */
-	int NUMBER = 69;
+	int NUMBER = 70;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl <em>Navigable Edge</em>}' class.
@@ -268,7 +268,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNavigableEdge()
 	 * @generated
 	 */
-	int NAVIGABLE_EDGE = 35;
+	int NAVIGABLE_EDGE = 36;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl <em>Node</em>}' class.
@@ -278,7 +278,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNode()
 	 * @generated
 	 */
-	int NODE = 37;
+	int NODE = 38;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeConnectionImpl <em>Node Connection</em>}' class.
@@ -288,7 +288,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNodeConnection()
 	 * @generated
 	 */
-	int NODE_CONNECTION = 38;
+	int NODE_CONNECTION = 39;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl <em>Operation Region</em>}' class.
@@ -298,7 +298,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationRegion()
 	 * @generated
 	 */
-	int OPERATION_REGION = 43;
+	int OPERATION_REGION = 44;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PropertyDatumImpl <em>Property Datum</em>}' class.
@@ -308,7 +308,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPropertyDatum()
 	 * @generated
 	 */
-	int PROPERTY_DATUM = 49;
+	int PROPERTY_DATUM = 50;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl <em>Region</em>}' class.
@@ -318,7 +318,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRegion()
 	 * @generated
 	 */
-	int REGION = 51;
+	int REGION = 52;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingRegionImpl <em>Mapping Region</em>}' class.
@@ -328,7 +328,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getMappingRegion()
 	 * @generated
 	 */
-	int MAPPING_REGION = 32;
+	int MAPPING_REGION = 33;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigationEdgeImpl <em>Navigation Edge</em>}' class.
@@ -338,7 +338,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNavigationEdge()
 	 * @generated
 	 */
-	int NAVIGATION_EDGE = 36;
+	int NAVIGATION_EDGE = 37;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CastEdgeImpl <em>Cast Edge</em>}' class.
@@ -358,7 +358,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getDependencyNode()
 	 * @generated
 	 */
-	int DEPENDENCY_NODE = 13;
+	int DEPENDENCY_NODE = 14;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ErrorNodeImpl <em>Error Node</em>}' class.
@@ -368,7 +368,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getErrorNode()
 	 * @generated
 	 */
-	int ERROR_NODE = 18;
+	int ERROR_NODE = 19;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ExpressionEdgeImpl <em>Expression Edge</em>}' class.
@@ -378,7 +378,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getExpressionEdge()
 	 * @generated
 	 */
-	int EXPRESSION_EDGE = 19;
+	int EXPRESSION_EDGE = 20;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.InputNodeImpl <em>Input Node</em>}' class.
@@ -388,7 +388,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getInputNode()
 	 * @generated
 	 */
-	int INPUT_NODE = 22;
+	int INPUT_NODE = 23;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.IteratedEdgeImpl <em>Iterated Edge</em>}' class.
@@ -398,7 +398,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getIteratedEdge()
 	 * @generated
 	 */
-	int ITERATED_EDGE = 23;
+	int ITERATED_EDGE = 24;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.VariableNodeImpl <em>Variable Node</em>}' class.
@@ -408,7 +408,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getVariableNode()
 	 * @generated
 	 */
-	int VARIABLE_NODE = 65;
+	int VARIABLE_NODE = 66;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.IteratorNodeImpl <em>Iterator Node</em>}' class.
@@ -418,7 +418,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getIteratorNode()
 	 * @generated
 	 */
-	int ITERATOR_NODE = 24;
+	int ITERATOR_NODE = 25;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ComposedNodeImpl <em>Composed Node</em>}' class.
@@ -428,7 +428,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getComposedNode()
 	 * @generated
 	 */
-	int COMPOSED_NODE = 8;
+	int COMPOSED_NODE = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl <em>Micro Mapping Region</em>}' class.
@@ -438,7 +438,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getMicroMappingRegion()
 	 * @generated
 	 */
-	int MICRO_MAPPING_REGION = 33;
+	int MICRO_MAPPING_REGION = 34;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.LoadingRegionImpl <em>Loading Region</em>}' class.
@@ -448,7 +448,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getLoadingRegion()
 	 * @generated
 	 */
-	int LOADING_REGION = 27;
+	int LOADING_REGION = 28;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl <em>Named Mapping Region</em>}' class.
@@ -458,7 +458,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNamedMappingRegion()
 	 * @generated
 	 */
-	int NAMED_MAPPING_REGION = 34;
+	int NAMED_MAPPING_REGION = 35;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationNodeImpl <em>Operation Node</em>}' class.
@@ -468,7 +468,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationNode()
 	 * @generated
 	 */
-	int OPERATION_NODE = 42;
+	int OPERATION_NODE = 43;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PatternTypedNodeImpl <em>Pattern Typed Node</em>}' class.
@@ -478,7 +478,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPatternTypedNode()
 	 * @generated
 	 */
-	int PATTERN_TYPED_NODE = 46;
+	int PATTERN_TYPED_NODE = 47;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PatternVariableNodeImpl <em>Pattern Variable Node</em>}' class.
@@ -488,7 +488,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPatternVariableNode()
 	 * @generated
 	 */
-	int PATTERN_VARIABLE_NODE = 47;
+	int PATTERN_VARIABLE_NODE = 48;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PredicateEdgeImpl <em>Predicate Edge</em>}' class.
@@ -498,7 +498,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPredicateEdge()
 	 * @generated
 	 */
-	int PREDICATE_EDGE = 48;
+	int PREDICATE_EDGE = 49;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RecursionEdgeImpl <em>Recursion Edge</em>}' class.
@@ -508,7 +508,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRecursionEdge()
 	 * @generated
 	 */
-	int RECURSION_EDGE = 50;
+	int RECURSION_EDGE = 51;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl <em>Rule Region</em>}' class.
@@ -518,7 +518,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRuleRegion()
 	 * @generated
 	 */
-	int RULE_REGION = 52;
+	int RULE_REGION = 53;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl <em>Schedule Model</em>}' class.
@@ -528,7 +528,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getScheduleModel()
 	 * @generated
 	 */
-	int SCHEDULE_MODEL = 53;
+	int SCHEDULE_MODEL = 54;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl <em>Scheduled Region</em>}' class.
@@ -538,7 +538,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getScheduledRegion()
 	 * @generated
 	 */
-	int SCHEDULED_REGION = 54;
+	int SCHEDULED_REGION = 55;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.Symbolable <em>Symbolable</em>}' class.
@@ -548,7 +548,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getSymbolable()
 	 * @generated
 	 */
-	int SYMBOLABLE = 60;
+	int SYMBOLABLE = 61;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.UnknownNodeImpl <em>Unknown Node</em>}' class.
@@ -558,7 +558,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getUnknownNode()
 	 * @generated
 	 */
-	int UNKNOWN_NODE = 64;
+	int UNKNOWN_NODE = 65;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.KeyedValueNodeImpl <em>Keyed Value Node</em>}' class.
@@ -568,7 +568,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getKeyedValueNode()
 	 * @generated
 	 */
-	int KEYED_VALUE_NODE = 26;
+	int KEYED_VALUE_NODE = 27;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.DispatchRegionImpl <em>Dispatch Region</em>}' class.
@@ -578,7 +578,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getDispatchRegion()
 	 * @generated
 	 */
-	int DISPATCH_REGION = 14;
+	int DISPATCH_REGION = 15;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -617,13 +617,22 @@ public interface QVTschedulePackage extends EPackage {
 	int EDGE__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE__CLUSTER = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE__EDGE_ROLE = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
+	int EDGE__EDGE_ROLE = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -632,7 +641,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE__NAME = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
+	int EDGE__NAME = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owning Region</b></em>' container reference.
@@ -641,7 +650,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE__OWNING_REGION = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
+	int EDGE__OWNING_REGION = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Source Node</b></em>' reference.
@@ -650,7 +659,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE__SOURCE_NODE = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+	int EDGE__SOURCE_NODE = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Target Node</b></em>' reference.
@@ -659,7 +668,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE__TARGET_NODE = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
+	int EDGE__TARGET_NODE = PivotPackage.ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Edge</em>' class.
@@ -668,7 +677,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 5;
+	int EDGE_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -732,6 +741,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int EXPRESSION_EDGE__OWNED_EXTENSIONS = EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXPRESSION_EDGE__CLUSTER = EDGE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
@@ -861,6 +879,15 @@ public interface QVTschedulePackage extends EPackage {
 	int ARGUMENT_EDGE__OWNED_EXTENSIONS = EXPRESSION_EDGE__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARGUMENT_EDGE__CLUSTER = EXPRESSION_EDGE__CLUSTER;
+
+	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -987,13 +1014,22 @@ public interface QVTschedulePackage extends EPackage {
 	int NODE__CLASS_DATUM = PivotPackage.ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE__CLUSTER = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__INCOMING_CONNECTION = PivotPackage.ELEMENT_FEATURE_COUNT + 1;
+	int NODE__INCOMING_CONNECTION = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Edges</b></em>' reference list.
@@ -1002,7 +1038,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__INCOMING_EDGES = PivotPackage.ELEMENT_FEATURE_COUNT + 2;
+	int NODE__INCOMING_EDGES = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1011,7 +1047,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__NAME = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
+	int NODE__NAME = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Node Role</b></em>' attribute.
@@ -1020,7 +1056,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__NODE_ROLE = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
+	int NODE__NODE_ROLE = PivotPackage.ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Connections</b></em>' reference list.
@@ -1029,7 +1065,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__OUTGOING_CONNECTIONS = PivotPackage.ELEMENT_FEATURE_COUNT + 5;
+	int NODE__OUTGOING_CONNECTIONS = PivotPackage.ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Outgoing Edges</b></em>' reference list.
@@ -1038,7 +1074,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__OUTGOING_EDGES = PivotPackage.ELEMENT_FEATURE_COUNT + 6;
+	int NODE__OUTGOING_EDGES = PivotPackage.ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Owning Region</b></em>' container reference.
@@ -1047,7 +1083,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE__OWNING_REGION = PivotPackage.ELEMENT_FEATURE_COUNT + 7;
+	int NODE__OWNING_REGION = PivotPackage.ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Node</em>' class.
@@ -1056,7 +1092,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 8;
+	int NODE_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -1093,7 +1129,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getMappingNode()
 	 * @generated
 	 */
-	int MAPPING_NODE = 31;
+	int MAPPING_NODE = 32;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1139,6 +1175,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_NODE__CLASS_DATUM = NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_NODE__CLUSTER = NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -1292,6 +1337,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_NODE__CLASS_DATUM = MAPPING_NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_NODE__CLUSTER = MAPPING_NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -1457,6 +1511,15 @@ public interface QVTschedulePackage extends EPackage {
 	int BOOLEAN_LITERAL_NODE__CLASS_DATUM = OPERATION_NODE__CLASS_DATUM;
 
 	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOOLEAN_LITERAL_NODE__CLUSTER = OPERATION_NODE__CLUSTER;
+
+	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1610,6 +1673,15 @@ public interface QVTschedulePackage extends EPackage {
 	int NAVIGABLE_EDGE__OWNED_EXTENSIONS = EDGE__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGABLE_EDGE__CLUSTER = EDGE__CLUSTER;
+
+	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1761,6 +1833,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int CAST_EDGE__OWNED_EXTENSIONS = NAVIGABLE_EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CAST_EDGE__CLUSTER = NAVIGABLE_EDGE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
@@ -2033,6 +2114,160 @@ public interface QVTschedulePackage extends EPackage {
 	int CLASS_DATUM_OPERATION_COUNT = ABSTRACT_DATUM_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClusterImpl <em>Cluster</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.ClusterImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getCluster()
+	 * @generated
+	 */
+	int CLUSTER = 5;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLUSTER__ANNOTATING_COMMENTS = PivotPackage.NAMED_ELEMENT__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLUSTER__OWNED_ANNOTATIONS = PivotPackage.NAMED_ELEMENT__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLUSTER__OWNED_COMMENTS = PivotPackage.NAMED_ELEMENT__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLUSTER__OWNED_EXTENSIONS = PivotPackage.NAMED_ELEMENT__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLUSTER__NAME = PivotPackage.NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Symbol Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLUSTER__SYMBOL_NAME = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owning Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLUSTER__OWNING_REGION = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Member Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLUSTER__MEMBER_NODES = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Member Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLUSTER__MEMBER_EDGES = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Preceding Clusters</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLUSTER__PRECEDING_CLUSTERS = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Succeeding Clusters</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLUSTER__SUCCEEDING_CLUSTERS = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Depth</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLUSTER__DEPTH = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of structural features of the '<em>Cluster</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLUSTER_FEATURE_COUNT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLUSTER___ALL_OWNED_ELEMENTS = PivotPackage.NAMED_ELEMENT___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLUSTER___GET_VALUE__TYPE_STRING = PivotPackage.NAMED_ELEMENT___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The number of operations of the '<em>Cluster</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLUSTER_OPERATION_COUNT = PivotPackage.NAMED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CollectionLiteralNodeImpl <em>Collection Literal Node</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2040,7 +2275,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getCollectionLiteralNode()
 	 * @generated
 	 */
-	int COLLECTION_LITERAL_NODE = 5;
+	int COLLECTION_LITERAL_NODE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2086,6 +2321,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int COLLECTION_LITERAL_NODE__CLASS_DATUM = OPERATION_NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_LITERAL_NODE__CLUSTER = OPERATION_NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -2203,7 +2447,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getCollectionPartEdge()
 	 * @generated
 	 */
-	int COLLECTION_PART_EDGE = 6;
+	int COLLECTION_PART_EDGE = 7;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2240,6 +2484,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int COLLECTION_PART_EDGE__OWNED_EXTENSIONS = ARGUMENT_EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_PART_EDGE__CLUSTER = ARGUMENT_EDGE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
@@ -2339,7 +2592,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getCollectionRangeNode()
 	 * @generated
 	 */
-	int COLLECTION_RANGE_NODE = 7;
+	int COLLECTION_RANGE_NODE = 8;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2385,6 +2638,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int COLLECTION_RANGE_NODE__CLASS_DATUM = OPERATION_NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_RANGE_NODE__CLUSTER = OPERATION_NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -2538,6 +2800,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSED_NODE__CLASS_DATUM = NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSED_NODE__CLUSTER = NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -2871,7 +3142,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getDependencyEdge()
 	 * @generated
 	 */
-	int DEPENDENCY_EDGE = 12;
+	int DEPENDENCY_EDGE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -2908,6 +3179,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int DEPENDENCY_EDGE__OWNED_EXTENSIONS = EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_EDGE__CLUSTER = EDGE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
@@ -3034,6 +3314,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int DEPENDENCY_NODE__CLASS_DATUM = NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPENDENCY_NODE__CLUSTER = NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -3189,22 +3478,31 @@ public interface QVTschedulePackage extends EPackage {
 	int REGION__SYMBOL_NAME = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Owned Edges</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REGION__OWNED_EDGES = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__OWNED_NODES = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int REGION__OWNED_NODES = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Owned Edges</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGION__OWNED_EDGES = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Owned Clusters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGION__OWNED_CLUSTERS = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Region</em>' class.
@@ -3213,7 +3511,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION_FEATURE_COUNT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int REGION_FEATURE_COUNT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -3297,6 +3595,15 @@ public interface QVTschedulePackage extends EPackage {
 	int MAPPING_REGION__SYMBOL_NAME = REGION__SYMBOL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_REGION__OWNED_NODES = REGION__OWNED_NODES;
+
+	/**
 	 * The feature id for the '<em><b>Owned Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3306,13 +3613,13 @@ public interface QVTschedulePackage extends EPackage {
 	int MAPPING_REGION__OWNED_EDGES = REGION__OWNED_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Clusters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_REGION__OWNED_NODES = REGION__OWNED_NODES;
+	int MAPPING_REGION__OWNED_CLUSTERS = REGION__OWNED_CLUSTERS;
 
 	/**
 	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
@@ -3432,6 +3739,15 @@ public interface QVTschedulePackage extends EPackage {
 	int RULE_REGION__SYMBOL_NAME = MAPPING_REGION__SYMBOL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_REGION__OWNED_NODES = MAPPING_REGION__OWNED_NODES;
+
+	/**
 	 * The feature id for the '<em><b>Owned Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3441,13 +3757,13 @@ public interface QVTschedulePackage extends EPackage {
 	int RULE_REGION__OWNED_EDGES = MAPPING_REGION__OWNED_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Clusters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RULE_REGION__OWNED_NODES = MAPPING_REGION__OWNED_NODES;
+	int RULE_REGION__OWNED_CLUSTERS = MAPPING_REGION__OWNED_CLUSTERS;
 
 	/**
 	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
@@ -3576,6 +3892,15 @@ public interface QVTschedulePackage extends EPackage {
 	int DISPATCH_REGION__SYMBOL_NAME = RULE_REGION__SYMBOL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DISPATCH_REGION__OWNED_NODES = RULE_REGION__OWNED_NODES;
+
+	/**
 	 * The feature id for the '<em><b>Owned Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3585,13 +3910,13 @@ public interface QVTschedulePackage extends EPackage {
 	int DISPATCH_REGION__OWNED_EDGES = RULE_REGION__OWNED_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Clusters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DISPATCH_REGION__OWNED_NODES = RULE_REGION__OWNED_NODES;
+	int DISPATCH_REGION__OWNED_CLUSTERS = RULE_REGION__OWNED_CLUSTERS;
 
 	/**
 	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
@@ -3808,7 +4133,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getEnumLiteralNode()
 	 * @generated
 	 */
-	int ENUM_LITERAL_NODE = 17;
+	int ENUM_LITERAL_NODE = 18;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -3854,6 +4179,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUM_LITERAL_NODE__CLASS_DATUM = OPERATION_NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUM_LITERAL_NODE__CLUSTER = OPERATION_NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -4018,6 +4352,15 @@ public interface QVTschedulePackage extends EPackage {
 	int ERROR_NODE__CLASS_DATUM = MAPPING_NODE__CLASS_DATUM;
 
 	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ERROR_NODE__CLUSTER = MAPPING_NODE__CLUSTER;
+
+	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4133,7 +4476,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getIfNode()
 	 * @generated
 	 */
-	int IF_NODE = 20;
+	int IF_NODE = 21;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -4179,6 +4522,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int IF_NODE__CLASS_DATUM = OPERATION_NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_NODE__CLUSTER = OPERATION_NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -4296,7 +4648,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getIncludesEdge()
 	 * @generated
 	 */
-	int INCLUDES_EDGE = 21;
+	int INCLUDES_EDGE = 22;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -4333,6 +4685,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int INCLUDES_EDGE__OWNED_EXTENSIONS = EXPRESSION_EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INCLUDES_EDGE__CLUSTER = EXPRESSION_EDGE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
@@ -4459,6 +4820,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int INPUT_NODE__CLASS_DATUM = NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_NODE__CLUSTER = NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -4596,6 +4966,15 @@ public interface QVTschedulePackage extends EPackage {
 	int ITERATED_EDGE__OWNED_EXTENSIONS = EDGE__OWNED_EXTENSIONS;
 
 	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATED_EDGE__CLUSTER = EDGE__CLUSTER;
+
+	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4720,6 +5099,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_NODE__CLASS_DATUM = MAPPING_NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_NODE__CLUSTER = MAPPING_NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -4884,6 +5272,15 @@ public interface QVTschedulePackage extends EPackage {
 	int ITERATOR_NODE__CLASS_DATUM = VARIABLE_NODE__CLASS_DATUM;
 
 	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ITERATOR_NODE__CLUSTER = VARIABLE_NODE__CLUSTER;
+
+	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5008,7 +5405,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getKeyPartEdge()
 	 * @generated
 	 */
-	int KEY_PART_EDGE = 25;
+	int KEY_PART_EDGE = 26;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -5045,6 +5442,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int KEY_PART_EDGE__OWNED_EXTENSIONS = ARGUMENT_EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEY_PART_EDGE__CLUSTER = ARGUMENT_EDGE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
@@ -5180,6 +5586,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int KEYED_VALUE_NODE__CLASS_DATUM = OPERATION_NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int KEYED_VALUE_NODE__CLUSTER = OPERATION_NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -5353,6 +5768,15 @@ public interface QVTschedulePackage extends EPackage {
 	int LOADING_REGION__SYMBOL_NAME = REGION__SYMBOL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOADING_REGION__OWNED_NODES = REGION__OWNED_NODES;
+
+	/**
 	 * The feature id for the '<em><b>Owned Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5362,13 +5786,13 @@ public interface QVTschedulePackage extends EPackage {
 	int LOADING_REGION__OWNED_EDGES = REGION__OWNED_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Clusters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOADING_REGION__OWNED_NODES = REGION__OWNED_NODES;
+	int LOADING_REGION__OWNED_CLUSTERS = REGION__OWNED_CLUSTERS;
 
 	/**
 	 * The feature id for the '<em><b>Owning Scheduled Region</b></em>' container reference.
@@ -5423,7 +5847,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getMapLiteralNode()
 	 * @generated
 	 */
-	int MAP_LITERAL_NODE = 28;
+	int MAP_LITERAL_NODE = 29;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -5469,6 +5893,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAP_LITERAL_NODE__CLASS_DATUM = OPERATION_NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_LITERAL_NODE__CLUSTER = OPERATION_NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -5586,7 +6019,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getMapPartEdge()
 	 * @generated
 	 */
-	int MAP_PART_EDGE = 29;
+	int MAP_PART_EDGE = 30;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -5623,6 +6056,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAP_PART_EDGE__OWNED_EXTENSIONS = ARGUMENT_EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_PART_EDGE__CLUSTER = ARGUMENT_EDGE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
@@ -5722,7 +6164,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getMapPartNode()
 	 * @generated
 	 */
-	int MAP_PART_NODE = 30;
+	int MAP_PART_NODE = 31;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -5768,6 +6210,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAP_PART_NODE__CLASS_DATUM = OPERATION_NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAP_PART_NODE__CLUSTER = OPERATION_NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -5932,6 +6383,15 @@ public interface QVTschedulePackage extends EPackage {
 	int MICRO_MAPPING_REGION__SYMBOL_NAME = MAPPING_REGION__SYMBOL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MICRO_MAPPING_REGION__OWNED_NODES = MAPPING_REGION__OWNED_NODES;
+
+	/**
 	 * The feature id for the '<em><b>Owned Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5941,13 +6401,13 @@ public interface QVTschedulePackage extends EPackage {
 	int MICRO_MAPPING_REGION__OWNED_EDGES = MAPPING_REGION__OWNED_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Clusters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MICRO_MAPPING_REGION__OWNED_NODES = MAPPING_REGION__OWNED_NODES;
+	int MICRO_MAPPING_REGION__OWNED_CLUSTERS = MAPPING_REGION__OWNED_CLUSTERS;
 
 	/**
 	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
@@ -6094,6 +6554,15 @@ public interface QVTschedulePackage extends EPackage {
 	int NAMED_MAPPING_REGION__SYMBOL_NAME = MAPPING_REGION__SYMBOL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_MAPPING_REGION__OWNED_NODES = MAPPING_REGION__OWNED_NODES;
+
+	/**
 	 * The feature id for the '<em><b>Owned Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6103,13 +6572,13 @@ public interface QVTschedulePackage extends EPackage {
 	int NAMED_MAPPING_REGION__OWNED_EDGES = MAPPING_REGION__OWNED_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Clusters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_MAPPING_REGION__OWNED_NODES = MAPPING_REGION__OWNED_NODES;
+	int NAMED_MAPPING_REGION__OWNED_CLUSTERS = MAPPING_REGION__OWNED_CLUSTERS;
 
 	/**
 	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
@@ -6218,6 +6687,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NAVIGATION_EDGE__OWNED_EXTENSIONS = NAVIGABLE_EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAVIGATION_EDGE__CLUSTER = NAVIGABLE_EDGE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
@@ -6488,7 +6966,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNullLiteralNode()
 	 * @generated
 	 */
-	int NULL_LITERAL_NODE = 39;
+	int NULL_LITERAL_NODE = 40;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -6534,6 +7012,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NULL_LITERAL_NODE__CLASS_DATUM = OPERATION_NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NULL_LITERAL_NODE__CLUSTER = OPERATION_NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -6651,7 +7138,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNumericLiteralNode()
 	 * @generated
 	 */
-	int NUMERIC_LITERAL_NODE = 40;
+	int NUMERIC_LITERAL_NODE = 41;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -6697,6 +7184,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NUMERIC_LITERAL_NODE__CLASS_DATUM = OPERATION_NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NUMERIC_LITERAL_NODE__CLUSTER = OPERATION_NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -6823,7 +7319,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationCallNode()
 	 * @generated
 	 */
-	int OPERATION_CALL_NODE = 41;
+	int OPERATION_CALL_NODE = 42;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -6869,6 +7365,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_CALL_NODE__CLASS_DATUM = OPERATION_NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_CALL_NODE__CLUSTER = OPERATION_NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -7042,6 +7547,15 @@ public interface QVTschedulePackage extends EPackage {
 	int OPERATION_REGION__SYMBOL_NAME = REGION__SYMBOL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_REGION__OWNED_NODES = REGION__OWNED_NODES;
+
+	/**
 	 * The feature id for the '<em><b>Owned Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7051,13 +7565,13 @@ public interface QVTschedulePackage extends EPackage {
 	int OPERATION_REGION__OWNED_EDGES = REGION__OWNED_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Clusters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_REGION__OWNED_NODES = REGION__OWNED_NODES;
+	int OPERATION_REGION__OWNED_CLUSTERS = REGION__OWNED_CLUSTERS;
 
 	/**
 	 * The feature id for the '<em><b>Dependency Nodes</b></em>' reference list.
@@ -7148,7 +7662,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationParameterEdge()
 	 * @generated
 	 */
-	int OPERATION_PARAMETER_EDGE = 44;
+	int OPERATION_PARAMETER_EDGE = 45;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -7185,6 +7699,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_PARAMETER_EDGE__OWNED_EXTENSIONS = ARGUMENT_EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_PARAMETER_EDGE__CLUSTER = ARGUMENT_EDGE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
@@ -7293,7 +7816,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationSelfEdge()
 	 * @generated
 	 */
-	int OPERATION_SELF_EDGE = 45;
+	int OPERATION_SELF_EDGE = 46;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -7330,6 +7853,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_SELF_EDGE__OWNED_EXTENSIONS = ARGUMENT_EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_SELF_EDGE__CLUSTER = ARGUMENT_EDGE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
@@ -7465,6 +7997,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int PATTERN_TYPED_NODE__CLASS_DATUM = MAPPING_NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN_TYPED_NODE__CLUSTER = MAPPING_NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -7620,6 +8161,15 @@ public interface QVTschedulePackage extends EPackage {
 	int PATTERN_VARIABLE_NODE__CLASS_DATUM = VARIABLE_NODE__CLASS_DATUM;
 
 	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PATTERN_VARIABLE_NODE__CLUSTER = VARIABLE_NODE__CLUSTER;
+
+	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7771,6 +8321,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int PREDICATE_EDGE__OWNED_EXTENSIONS = EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_EDGE__CLUSTER = EDGE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
@@ -8023,6 +8582,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int RECURSION_EDGE__OWNED_EXTENSIONS = EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RECURSION_EDGE__CLUSTER = EDGE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
@@ -8331,6 +8899,15 @@ public interface QVTschedulePackage extends EPackage {
 	int SCHEDULED_REGION__SYMBOL_NAME = REGION__SYMBOL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULED_REGION__OWNED_NODES = REGION__OWNED_NODES;
+
+	/**
 	 * The feature id for the '<em><b>Owned Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8340,13 +8917,13 @@ public interface QVTschedulePackage extends EPackage {
 	int SCHEDULED_REGION__OWNED_EDGES = REGION__OWNED_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Clusters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULED_REGION__OWNED_NODES = REGION__OWNED_NODES;
+	int SCHEDULED_REGION__OWNED_CLUSTERS = REGION__OWNED_CLUSTERS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Connections</b></em>' containment reference list.
@@ -8437,7 +9014,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getShadowNode()
 	 * @generated
 	 */
-	int SHADOW_NODE = 55;
+	int SHADOW_NODE = 56;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -8483,6 +9060,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int SHADOW_NODE__CLASS_DATUM = OPERATION_NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHADOW_NODE__CLUSTER = OPERATION_NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -8600,7 +9186,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getShadowPartEdge()
 	 * @generated
 	 */
-	int SHADOW_PART_EDGE = 56;
+	int SHADOW_PART_EDGE = 57;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -8637,6 +9223,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int SHADOW_PART_EDGE__OWNED_EXTENSIONS = ARGUMENT_EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SHADOW_PART_EDGE__CLUSTER = ARGUMENT_EDGE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
@@ -8736,7 +9331,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getStringLiteralNode()
 	 * @generated
 	 */
-	int STRING_LITERAL_NODE = 57;
+	int STRING_LITERAL_NODE = 58;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -8782,6 +9377,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int STRING_LITERAL_NODE__CLASS_DATUM = OPERATION_NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_LITERAL_NODE__CLUSTER = OPERATION_NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -8908,7 +9512,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getSuccessEdge()
 	 * @generated
 	 */
-	int SUCCESS_EDGE = 58;
+	int SUCCESS_EDGE = 59;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -8945,6 +9549,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int SUCCESS_EDGE__OWNED_EXTENSIONS = NAVIGATION_EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUCCESS_EDGE__CLUSTER = NAVIGATION_EDGE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
@@ -9089,7 +9702,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getSuccessNode()
 	 * @generated
 	 */
-	int SUCCESS_NODE = 59;
+	int SUCCESS_NODE = 60;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -9135,6 +9748,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int SUCCESS_NODE__CLASS_DATUM = MAPPING_NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SUCCESS_NODE__CLUSTER = MAPPING_NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -9279,7 +9901,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getTupleLiteralNode()
 	 * @generated
 	 */
-	int TUPLE_LITERAL_NODE = 61;
+	int TUPLE_LITERAL_NODE = 62;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -9325,6 +9947,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int TUPLE_LITERAL_NODE__CLASS_DATUM = OPERATION_NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_LITERAL_NODE__CLUSTER = OPERATION_NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -9442,7 +10073,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getTuplePartEdge()
 	 * @generated
 	 */
-	int TUPLE_PART_EDGE = 62;
+	int TUPLE_PART_EDGE = 63;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -9479,6 +10110,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int TUPLE_PART_EDGE__OWNED_EXTENSIONS = ARGUMENT_EDGE__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TUPLE_PART_EDGE__CLUSTER = ARGUMENT_EDGE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Edge Role</b></em>' attribute.
@@ -9578,7 +10218,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getTypeLiteralNode()
 	 * @generated
 	 */
-	int TYPE_LITERAL_NODE = 63;
+	int TYPE_LITERAL_NODE = 64;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -9624,6 +10264,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_LITERAL_NODE__CLASS_DATUM = OPERATION_NODE__CLASS_DATUM;
+
+	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_LITERAL_NODE__CLUSTER = OPERATION_NODE__CLUSTER;
 
 	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
@@ -9788,6 +10437,15 @@ public interface QVTschedulePackage extends EPackage {
 	int UNKNOWN_NODE__CLASS_DATUM = MAPPING_NODE__CLASS_DATUM;
 
 	/**
+	 * The feature id for the '<em><b>Cluster</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNKNOWN_NODE__CLUSTER = MAPPING_NODE__CLUSTER;
+
+	/**
 	 * The feature id for the '<em><b>Incoming Connection</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9903,7 +10561,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getVerdictRegion()
 	 * @generated
 	 */
-	int VERDICT_REGION = 66;
+	int VERDICT_REGION = 67;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -9960,6 +10618,15 @@ public interface QVTschedulePackage extends EPackage {
 	int VERDICT_REGION__SYMBOL_NAME = RULE_REGION__SYMBOL_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VERDICT_REGION__OWNED_NODES = RULE_REGION__OWNED_NODES;
+
+	/**
 	 * The feature id for the '<em><b>Owned Edges</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9969,13 +10636,13 @@ public interface QVTschedulePackage extends EPackage {
 	int VERDICT_REGION__OWNED_EDGES = RULE_REGION__OWNED_EDGES;
 
 	/**
-	 * The feature id for the '<em><b>Owned Nodes</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Clusters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VERDICT_REGION__OWNED_NODES = RULE_REGION__OWNED_NODES;
+	int VERDICT_REGION__OWNED_CLUSTERS = RULE_REGION__OWNED_CLUSTERS;
 
 	/**
 	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
@@ -10066,7 +10733,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getConnectionRole()
 	 * @generated
 	 */
-	int CONNECTION_ROLE = 67;
+	int CONNECTION_ROLE = 68;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum <em>Abstract Datum</em>}'.
@@ -10216,6 +10883,82 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getClassDatum_SuperClassDatums();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.Cluster <em>Cluster</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Cluster</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Cluster
+	 * @generated
+	 */
+	EClass getCluster();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtschedule.Cluster#getOwningRegion <em>Owning Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Region</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Cluster#getOwningRegion()
+	 * @see #getCluster()
+	 * @generated
+	 */
+	EReference getCluster_OwningRegion();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Cluster#getMemberNodes <em>Member Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Member Nodes</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Cluster#getMemberNodes()
+	 * @see #getCluster()
+	 * @generated
+	 */
+	EReference getCluster_MemberNodes();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Cluster#getMemberEdges <em>Member Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Member Edges</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Cluster#getMemberEdges()
+	 * @see #getCluster()
+	 * @generated
+	 */
+	EReference getCluster_MemberEdges();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Cluster#getPrecedingClusters <em>Preceding Clusters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Preceding Clusters</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Cluster#getPrecedingClusters()
+	 * @see #getCluster()
+	 * @generated
+	 */
+	EReference getCluster_PrecedingClusters();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Cluster#getSucceedingClusters <em>Succeeding Clusters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Succeeding Clusters</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Cluster#getSucceedingClusters()
+	 * @see #getCluster()
+	 * @generated
+	 */
+	EReference getCluster_SucceedingClusters();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.Cluster#getDepth <em>Depth</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Depth</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Cluster#getDepth()
+	 * @see #getCluster()
+	 * @generated
+	 */
+	EAttribute getCluster_Depth();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.CollectionLiteralNode <em>Collection Literal Node</em>}'.
@@ -10394,6 +11137,17 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getEdge();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getCluster <em>Cluster</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Cluster</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Edge#getCluster()
+	 * @see #getEdge()
+	 * @generated
+	 */
+	EReference getEdge_Cluster();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getEdgeRole <em>Edge Role</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10504,9 +11258,9 @@ public interface QVTschedulePackage extends EPackage {
 	 * Returns the meta object for data type '{@link java.lang.Number <em>Number</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-     * <!-- begin-model-doc -->
-     * A primitive type representing the mathematical concept of real or integer.
-     * <!-- end-model-doc -->
+	 * <!-- begin-model-doc -->
+	 * A primitive type representing the mathematical concept of real or integer.
+	 * <!-- end-model-doc -->
 	 * @return the meta object for data type '<em>Number</em>'.
 	 * @see java.lang.Number
 	 * @model instanceClass="java.lang.Number"
@@ -11250,6 +12004,17 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getNode_ClassDatum();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getCluster <em>Cluster</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Cluster</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Node#getCluster()
+	 * @see #getNode()
+	 * @generated
+	 */
+	EReference getNode_Cluster();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getIncomingConnection <em>Incoming Connection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11686,6 +12451,17 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getRegion_OwnedEdges();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedClusters <em>Owned Clusters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Clusters</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedClusters()
+	 * @see #getRegion()
+	 * @generated
+	 */
+	EReference getRegion_OwnedClusters();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedNodes <em>Owned Nodes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11840,6 +12616,64 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference CLASS_DATUM__SUPER_CLASS_DATUMS = eINSTANCE.getClassDatum_SuperClassDatums();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ClusterImpl <em>Cluster</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.ClusterImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getCluster()
+		 * @generated
+		 */
+		EClass CLUSTER = eINSTANCE.getCluster();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Region</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLUSTER__OWNING_REGION = eINSTANCE.getCluster_OwningRegion();
+
+		/**
+		 * The meta object literal for the '<em><b>Member Nodes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLUSTER__MEMBER_NODES = eINSTANCE.getCluster_MemberNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Member Edges</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLUSTER__MEMBER_EDGES = eINSTANCE.getCluster_MemberEdges();
+
+		/**
+		 * The meta object literal for the '<em><b>Preceding Clusters</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLUSTER__PRECEDING_CLUSTERS = eINSTANCE.getCluster_PrecedingClusters();
+
+		/**
+		 * The meta object literal for the '<em><b>Succeeding Clusters</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLUSTER__SUCCEEDING_CLUSTERS = eINSTANCE.getCluster_SucceedingClusters();
+
+		/**
+		 * The meta object literal for the '<em><b>Depth</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute CLUSTER__DEPTH = eINSTANCE.getCluster_Depth();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CollectionLiteralNodeImpl <em>Collection Literal Node</em>}' class.
@@ -11998,6 +12832,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass EDGE = eINSTANCE.getEdge();
+
+		/**
+		 * The meta object literal for the '<em><b>Cluster</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EDGE__CLUSTER = eINSTANCE.getEdge_Cluster();
 
 		/**
 		 * The meta object literal for the '<em><b>Edge Role</b></em>' attribute feature.
@@ -12726,6 +13568,14 @@ public interface QVTschedulePackage extends EPackage {
 		EReference NODE__CLASS_DATUM = eINSTANCE.getNode_ClassDatum();
 
 		/**
+		 * The meta object literal for the '<em><b>Cluster</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NODE__CLUSTER = eINSTANCE.getNode_Cluster();
+
+		/**
 		 * The meta object literal for the '<em><b>Incoming Connection</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -13082,6 +13932,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference REGION__OWNED_EDGES = eINSTANCE.getRegion_OwnedEdges();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Clusters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REGION__OWNED_CLUSTERS = eINSTANCE.getRegion_OwnedClusters();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Nodes</b></em>' containment reference list feature.

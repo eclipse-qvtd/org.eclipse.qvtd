@@ -73,6 +73,11 @@ implements QVTscheduleVisitor<Boolean>
 	}
 
 	@Override
+	public @Nullable Boolean visitCluster(@NonNull Cluster object) {
+		return visitElement(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitCollectionLiteralNode(@NonNull CollectionLiteralNode object) {
 		return visitOperationNode(object);
 	}

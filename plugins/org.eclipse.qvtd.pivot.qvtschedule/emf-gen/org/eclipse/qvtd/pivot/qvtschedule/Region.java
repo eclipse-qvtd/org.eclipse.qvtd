@@ -37,8 +37,9 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT.ToDOTable;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedEdges <em>Owned Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedNodes <em>Owned Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedEdges <em>Owned Edges</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedClusters <em>Owned Clusters</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion()
@@ -65,6 +66,25 @@ public interface Region extends NamedElement, Symbolable, ToDOTable, GraphNode
 	 * @generated
 	 */
 	EList<Edge> getOwnedEdges();
+
+	/**
+	 * Returns the value of the '<em><b>Owned Clusters</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Cluster}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Cluster#getOwningRegion <em>Owning Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Clusters</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Clusters</em>' containment reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_OwnedClusters()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Cluster#getOwningRegion
+	 * @model opposite="owningRegion" containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!ownedClusters'"
+	 * @generated
+	 */
+	EList<Cluster> getOwnedClusters();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Nodes</b></em>' containment reference list.

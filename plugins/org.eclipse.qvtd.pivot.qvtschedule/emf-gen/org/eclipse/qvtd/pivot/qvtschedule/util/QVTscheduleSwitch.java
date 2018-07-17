@@ -128,6 +128,15 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTschedulePackage.CLUSTER: {
+				Cluster cluster = (Cluster)theEObject;
+				T result = caseCluster(cluster);
+				if (result == null) result = caseNamedElement(cluster);
+				if (result == null) result = caseSymbolable(cluster);
+				if (result == null) result = caseElement(cluster);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTschedulePackage.COLLECTION_LITERAL_NODE: {
 				CollectionLiteralNode collectionLiteralNode = (CollectionLiteralNode)theEObject;
 				T result = caseCollectionLiteralNode(collectionLiteralNode);
@@ -814,6 +823,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseClassDatum(ClassDatum object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Cluster</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Cluster</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCluster(Cluster object) {
 		return null;
 	}
 

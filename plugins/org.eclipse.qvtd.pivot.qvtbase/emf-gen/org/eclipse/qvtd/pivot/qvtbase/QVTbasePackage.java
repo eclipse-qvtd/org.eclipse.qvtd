@@ -509,7 +509,7 @@ public interface QVTbasePackage extends EPackage {
 	int FUNCTION__UNSPECIALIZED_ELEMENT = PivotPackage.OPERATION__UNSPECIALIZED_ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Body Expression</b></em>' reference.
+	 * The feature id for the '<em><b>Body Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

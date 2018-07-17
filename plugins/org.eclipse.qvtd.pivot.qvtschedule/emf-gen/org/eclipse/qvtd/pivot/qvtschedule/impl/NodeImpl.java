@@ -42,6 +42,7 @@ import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.Cluster;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -65,6 +66,7 @@ import com.google.common.collect.Iterables;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getClassDatum <em>Class Datum</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getCluster <em>Cluster</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getIncomingConnection <em>Incoming Connection</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getIncomingEdges <em>Incoming Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl#getName <em>Name</em>}</li>
@@ -86,6 +88,16 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * @ordered
 	 */
 	protected ClassDatum classDatum;
+
+	/**
+	 * The cached value of the '{@link #getCluster() <em>Cluster</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCluster()
+	 * @generated
+	 * @ordered
+	 */
+	protected Cluster cluster;
 
 	/**
 	 * The cached value of the '{@link #getIncomingConnection() <em>Incoming Connection</em>}' reference.
@@ -224,6 +236,68 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		classDatum = newClassDatum;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__CLASS_DATUM, oldClassDatum, classDatum));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Cluster getCluster() {
+		if (cluster != null && cluster.eIsProxy()) {
+			InternalEObject oldCluster = (InternalEObject)cluster;
+			cluster = (Cluster)eResolveProxy(oldCluster);
+			if (cluster != oldCluster) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NODE__CLUSTER, oldCluster, cluster));
+			}
+		}
+		return cluster;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Cluster basicGetCluster() {
+		return cluster;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetCluster(Cluster newCluster, NotificationChain msgs) {
+		Cluster oldCluster = cluster;
+		cluster = newCluster;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__CLUSTER, oldCluster, newCluster);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setCluster(Cluster newCluster) {
+		if (newCluster != cluster) {
+			NotificationChain msgs = null;
+			if (cluster != null)
+				msgs = ((InternalEObject)cluster).eInverseRemove(this, QVTschedulePackage.CLUSTER__MEMBER_NODES, Cluster.class, msgs);
+			if (newCluster != null)
+				msgs = ((InternalEObject)newCluster).eInverseAdd(this, QVTschedulePackage.CLUSTER__MEMBER_NODES, Cluster.class, msgs);
+			msgs = basicSetCluster(newCluster, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__CLUSTER, newCluster, newCluster));
 	}
 
 	/**
@@ -405,6 +479,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			case QVTschedulePackage.NODE__CLASS_DATUM:
 				if (resolve) return getClassDatum();
 				return basicGetClassDatum();
+			case QVTschedulePackage.NODE__CLUSTER:
+				if (resolve) return getCluster();
+				return basicGetCluster();
 			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
 				if (resolve) return getIncomingConnection();
 				return basicGetIncomingConnection();
@@ -435,6 +512,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		switch (featureID) {
 			case QVTschedulePackage.NODE__CLASS_DATUM:
 				setClassDatum((ClassDatum)newValue);
+				return;
+			case QVTschedulePackage.NODE__CLUSTER:
+				setCluster((Cluster)newValue);
 				return;
 			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
 				setIncomingConnection((NodeConnection)newValue);
@@ -475,6 +555,9 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			case QVTschedulePackage.NODE__CLASS_DATUM:
 				setClassDatum((ClassDatum)null);
 				return;
+			case QVTschedulePackage.NODE__CLUSTER:
+				setCluster((Cluster)null);
+				return;
 			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
 				setIncomingConnection((NodeConnection)null);
 				return;
@@ -510,6 +593,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		switch (featureID) {
 			case QVTschedulePackage.NODE__CLASS_DATUM:
 				return classDatum != null;
+			case QVTschedulePackage.NODE__CLUSTER:
+				return cluster != null;
 			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
 				return incomingConnection != null;
 			case QVTschedulePackage.NODE__INCOMING_EDGES:
@@ -762,6 +847,10 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTschedulePackage.NODE__CLUSTER:
+				if (cluster != null)
+					msgs = ((InternalEObject)cluster).eInverseRemove(this, QVTschedulePackage.CLUSTER__MEMBER_NODES, Cluster.class, msgs);
+				return basicSetCluster((Cluster)otherEnd, msgs);
 			case QVTschedulePackage.NODE__INCOMING_EDGES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncomingEdges()).basicAdd(otherEnd, msgs);
 			case QVTschedulePackage.NODE__OUTGOING_EDGES:
@@ -782,6 +871,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTschedulePackage.NODE__CLUSTER:
+				return basicSetCluster(null, msgs);
 			case QVTschedulePackage.NODE__INCOMING_EDGES:
 				return ((InternalEList<?>)getIncomingEdges()).basicRemove(otherEnd, msgs);
 			case QVTschedulePackage.NODE__OUTGOING_EDGES:

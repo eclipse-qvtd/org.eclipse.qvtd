@@ -72,6 +72,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.BOOLEAN_LITERAL_NODE: return createBooleanLiteralNode();
 			case QVTschedulePackage.CAST_EDGE: return createCastEdge();
 			case QVTschedulePackage.CLASS_DATUM: return createClassDatum();
+			case QVTschedulePackage.CLUSTER: return createCluster();
 			case QVTschedulePackage.COLLECTION_LITERAL_NODE: return createCollectionLiteralNode();
 			case QVTschedulePackage.COLLECTION_PART_EDGE: return createCollectionPartEdge();
 			case QVTschedulePackage.COLLECTION_RANGE_NODE: return createCollectionRangeNode();
@@ -195,6 +196,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull ClassDatum createClassDatum() {
 		ClassDatumImpl classDatum = new ClassDatumImpl();
 		return classDatum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull Cluster createCluster() {
+		ClusterImpl cluster = new ClusterImpl();
+		return cluster;
 	}
 
 	/**

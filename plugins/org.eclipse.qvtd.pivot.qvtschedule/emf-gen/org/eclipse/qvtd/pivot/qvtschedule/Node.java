@@ -42,6 +42,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getClassDatum <em>Class Datum</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getCluster <em>Cluster</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getIncomingConnection <em>Incoming Connection</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getIncomingEdges <em>Incoming Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getName <em>Name</em>}</li>
@@ -82,6 +83,35 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * @generated
 	 */
 	void setClassDatum(ClassDatum value);
+
+	/**
+	 * Returns the value of the '<em><b>Cluster</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Cluster#getMemberNodes <em>Member Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Cluster</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Cluster</em>' reference.
+	 * @see #setCluster(Cluster)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNode_Cluster()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Cluster#getMemberNodes
+	 * @model opposite="memberNodes"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Node!cluster'"
+	 * @generated
+	 */
+	Cluster getCluster();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Node#getCluster <em>Cluster</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Cluster</em>' reference.
+	 * @see #getCluster()
+	 * @generated
+	 */
+	void setCluster(Cluster value);
 
 	/**
 	 * Returns the value of the '<em><b>Incoming Connection</b></em>' reference.

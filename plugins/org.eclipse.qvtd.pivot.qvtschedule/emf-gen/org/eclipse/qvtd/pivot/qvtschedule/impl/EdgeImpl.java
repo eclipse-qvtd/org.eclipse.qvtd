@@ -25,6 +25,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtschedule.Cluster;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
@@ -42,6 +43,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl#getCluster <em>Cluster</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl#getEdgeRole <em>Edge Role</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EdgeImpl#getOwningRegion <em>Owning Region</em>}</li>
@@ -52,6 +54,16 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * @generated
  */
 public abstract class EdgeImpl extends ElementImpl implements Edge {
+	/**
+	 * The cached value of the '{@link #getCluster() <em>Cluster</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCluster()
+	 * @generated
+	 * @ordered
+	 */
+	protected Cluster cluster;
+
 	/**
 	 * The default value of the '{@link #getEdgeRole() <em>Edge Role</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -129,6 +141,68 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTschedulePackage.Literals.EDGE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Cluster getCluster() {
+		if (cluster != null && cluster.eIsProxy()) {
+			InternalEObject oldCluster = (InternalEObject)cluster;
+			cluster = (Cluster)eResolveProxy(oldCluster);
+			if (cluster != oldCluster) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.EDGE__CLUSTER, oldCluster, cluster));
+			}
+		}
+		return cluster;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Cluster basicGetCluster() {
+		return cluster;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetCluster(Cluster newCluster, NotificationChain msgs) {
+		Cluster oldCluster = cluster;
+		cluster = newCluster;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__CLUSTER, oldCluster, newCluster);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setCluster(Cluster newCluster) {
+		if (newCluster != cluster) {
+			NotificationChain msgs = null;
+			if (cluster != null)
+				msgs = ((InternalEObject)cluster).eInverseRemove(this, QVTschedulePackage.CLUSTER__MEMBER_EDGES, Cluster.class, msgs);
+			if (newCluster != null)
+				msgs = ((InternalEObject)newCluster).eInverseAdd(this, QVTschedulePackage.CLUSTER__MEMBER_EDGES, Cluster.class, msgs);
+			msgs = basicSetCluster(newCluster, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__CLUSTER, newCluster, newCluster));
 	}
 
 	/**
@@ -352,6 +426,10 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTschedulePackage.EDGE__CLUSTER:
+				if (cluster != null)
+					msgs = ((InternalEObject)cluster).eInverseRemove(this, QVTschedulePackage.CLUSTER__MEMBER_EDGES, Cluster.class, msgs);
+				return basicSetCluster((Cluster)otherEnd, msgs);
 			case QVTschedulePackage.EDGE__OWNING_REGION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -376,6 +454,8 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTschedulePackage.EDGE__CLUSTER:
+				return basicSetCluster(null, msgs);
 			case QVTschedulePackage.EDGE__OWNING_REGION:
 				return basicSetOwningRegion(null, msgs);
 			case QVTschedulePackage.EDGE__SOURCE_NODE:
@@ -408,6 +488,9 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTschedulePackage.EDGE__CLUSTER:
+				if (resolve) return getCluster();
+				return basicGetCluster();
 			case QVTschedulePackage.EDGE__EDGE_ROLE:
 				return getEdgeRole();
 			case QVTschedulePackage.EDGE__NAME:
@@ -432,6 +515,9 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTschedulePackage.EDGE__CLUSTER:
+				setCluster((Cluster)newValue);
+				return;
 			case QVTschedulePackage.EDGE__EDGE_ROLE:
 				setEdgeRole((Role)newValue);
 				return;
@@ -459,6 +545,9 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTschedulePackage.EDGE__CLUSTER:
+				setCluster((Cluster)null);
+				return;
 			case QVTschedulePackage.EDGE__EDGE_ROLE:
 				setEdgeRole(EDGE_ROLE_EDEFAULT);
 				return;
@@ -486,6 +575,8 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTschedulePackage.EDGE__CLUSTER:
+				return cluster != null;
 			case QVTschedulePackage.EDGE__EDGE_ROLE:
 				return edgeRole != EDGE_ROLE_EDEFAULT;
 			case QVTschedulePackage.EDGE__NAME:

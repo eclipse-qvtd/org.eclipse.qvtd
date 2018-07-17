@@ -24,7 +24,22 @@ import org.eclipse.ocl.pivot.Property;
  * than just NavigationEdge and irregularly CastEdge.
  * <!-- end-user-doc -->
  *
- * @model
+ * <!-- begin-model-doc -->
+ * An edge is directed and abstracts any Node interconnection within a Region.
+ * <!-- end-model-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#getIncomingConnection <em>Incoming Connection</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#getOppositeEdge <em>Opposite Edge</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#getOutgoingConnections <em>Outgoing Connections</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge#isSecondary <em>Secondary</em>}</li>
+ * </ul>
+ *
+ * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNavigableEdge()
+ * @model abstract="true"
  * @generated
  */
 public interface NavigableEdge extends Edge, ConnectionEnd

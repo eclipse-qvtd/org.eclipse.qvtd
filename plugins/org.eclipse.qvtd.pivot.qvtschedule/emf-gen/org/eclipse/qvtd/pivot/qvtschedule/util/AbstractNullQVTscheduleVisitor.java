@@ -67,6 +67,11 @@ public abstract class AbstractNullQVTscheduleVisitor<@Nullable R, C>
 	}
 
 	@Override
+	public R visitCluster(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Cluster object) {
+		return null;
+	}
+
+	@Override
 	public R visitCollectionLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CollectionLiteralNode object) {
 		return null;
 	}

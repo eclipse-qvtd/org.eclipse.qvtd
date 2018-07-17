@@ -34,6 +34,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getCluster <em>Cluster</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getEdgeRole <em>Edge Role</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getOwningRegion <em>Owning Region</em>}</li>
@@ -46,6 +47,35 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
  * @generated
  */
 public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable, GraphEdge {
+	/**
+	 * Returns the value of the '<em><b>Cluster</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.Cluster#getMemberEdges <em>Member Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Cluster</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Cluster</em>' reference.
+	 * @see #setCluster(Cluster)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdge_Cluster()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Cluster#getMemberEdges
+	 * @model opposite="memberEdges"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Edge!cluster'"
+	 * @generated
+	 */
+	Cluster getCluster();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Edge#getCluster <em>Cluster</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Cluster</em>' reference.
+	 * @see #getCluster()
+	 * @generated
+	 */
+	void setCluster(Cluster value);
+
 	/**
 	 * Returns the value of the '<em><b>Edge Role</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.eclipse.qvtd.pivot.qvtschedule.Role}.
