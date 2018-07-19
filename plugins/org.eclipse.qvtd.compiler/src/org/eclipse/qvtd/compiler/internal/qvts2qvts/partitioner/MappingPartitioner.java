@@ -36,8 +36,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.VerdictRegion;
@@ -87,18 +87,6 @@ public class MappingPartitioner implements Nameable
 	protected final @NonNull MappingRegion region;
 
 	/**
-	 * The realized edges from the (realized) trace node to a realized (corollary) ouput node that identify what is
-	 * guaranteed to be created only speculation succeeds.
-	 */
-	private final @NonNull List<@NonNull NavigableEdge> corollaryEdges = new ArrayList<>();
-
-	/**
-	 * The realized output nodes guaranteed to be created only speculation succeeds;
-	 * the targets of corollaryEdges.
-	 */
-	private final @NonNull List<@NonNull Node> corollaryNodes = new ArrayList<>();
-
-	/**
 	 * Dynamically growing list of constant edges that have been traversed by a partition.
 	 */
 	private final @NonNull Set<@NonNull Edge> alreadyConstantEdges = new HashSet<>();
@@ -137,12 +125,6 @@ public class MappingPartitioner implements Nameable
 		this.regionAnalysis = regionAnalysis;
 		this.region = (MappingRegion) regionAnalysis.getRegion();
 		//
-		List<@NonNull Node> alreadyRealized = new ArrayList<>(getTraceNodes());
-		Node dispatchNode = basicGetDispatchNode();
-		if (dispatchNode != null) {
-			alreadyRealized.add(dispatchNode);
-		}
-		analyzeCorollaries(alreadyRealized);
 	}
 
 	public void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole, @NonNull AbstractPartition partition) {
@@ -180,30 +162,6 @@ public class MappingPartitioner implements Nameable
 
 	public boolean addRealizedNode(@NonNull Node node) {
 		return alreadyRealizedNodes.add(node);
-	}
-
-	/**
-	 * Identify what gets realized as a consequence of the mapping succeeding.
-	 */
-	private void analyzeCorollaries(@NonNull List<@NonNull Node> alreadyRealizedNodes) {
-		for (int i = 0; i < alreadyRealizedNodes.size(); i++) {
-			Node alreadyRealizedNode = alreadyRealizedNodes.get(i);
-			for (@NonNull NavigationEdge edge : alreadyRealizedNode.getRealizedNavigationEdges()) {
-				Node targetNode = QVTscheduleUtil.getTargetNode(edge);
-				if (targetNode.isRealized() && !targetNode.isSuccess()) {
-					assert !corollaryEdges.contains(edge);
-					corollaryEdges.add(edge);
-					if (!alreadyRealizedNodes.contains(targetNode)) {
-						alreadyRealizedNodes.add(targetNode);
-						assert !corollaryNodes.contains(targetNode);
-						if (!corollaryNodes.contains(targetNode)) {		// Overrides have a base and derived edge to the same rootVariable node
-							corollaryNodes.add(targetNode);
-						}
-					}
-					transformationAnalysis.addCorollary(QVTscheduleUtil.getProperty(edge), region);
-				}
-			}
-		}
 	}
 
 	public @Nullable Node basicGetDispatchNode() {
@@ -253,7 +211,7 @@ public class MappingPartitioner implements Nameable
 			Set<@NonNull Edge> missingEdgesSet = Sets.newHashSet(allPrimaryEdges);
 			missingEdgesSet.removeAll(partitionedEdges);
 			for (@NonNull Edge edge : missingEdgesSet) {
-				if (transformationAnalysis.getCorollaryOf(edge) == null) {// && !isDead(edge)) {
+				if (!(edge instanceof NavigableEdge) || (transformationAnalysis.getCorollaryOf((NavigableEdge)edge) == null)) {// && !isDead(edge)) {
 					addProblem(CompilerUtil.createRegionWarning(region, "Missing " + edge));
 				}
 			}
@@ -456,14 +414,6 @@ public class MappingPartitioner implements Nameable
 		return regionAnalysis.getConsumedTracePropertyAnalyses();
 	}
 
-	public @NonNull Iterable<@NonNull NavigableEdge> getCorollaryEdges() {
-		return corollaryEdges;
-	}
-
-	public @NonNull Iterable<@NonNull Node> getCorollaryNodes() {
-		return corollaryNodes;
-	}
-
 	public @NonNull Iterable<@NonNull Node> getExecutionNodes() {
 		return Iterables.concat(getPredicatedExecutionNodes(), getRealizedExecutionNodes());
 	}
@@ -524,7 +474,7 @@ public class MappingPartitioner implements Nameable
 		return Iterables.concat(traceNodes, constantInputNodes);
 	}
 
-	public @NonNull Iterable<@NonNull Edge> getRealizedEdges() {
+	public @NonNull Iterable<@NonNull NavigableEdge> getRealizedEdges() {
 		return regionAnalysis.getRealizedEdges();
 	}
 
@@ -545,7 +495,7 @@ public class MappingPartitioner implements Nameable
 		return regionAnalysis.getRealizedMiddleNodes();
 	}
 
-	public @NonNull Iterable<@NonNull Edge> getRealizedOutputEdges() {
+	public @NonNull Iterable<@NonNull NavigableEdge> getRealizedOutputEdges() {
 		return regionAnalysis.getRealizedOutputEdges();
 	}
 
@@ -665,7 +615,7 @@ public class MappingPartitioner implements Nameable
 		return alreadyRealizedNodes.contains(node);
 	}
 
-	public @Nullable List<@NonNull MappingRegion> getCorollaryOf(@NonNull Edge edge) {
+	public @Nullable List<@NonNull Region> getCorollaryOf(@NonNull NavigableEdge edge) {
 		return transformationAnalysis.getCorollaryOf(edge);
 	}
 
@@ -750,7 +700,7 @@ public class MappingPartitioner implements Nameable
 			//
 			//	Create an AssignmentRegion for each to-be-realized edge to an output, which may also realize most trace edges too.
 			//
-			for (@NonNull Edge outputEdge : getRealizedOutputEdges()) {
+			for (@NonNull NavigableEdge outputEdge : getRealizedOutputEdges()) {
 				if (!hasRealizedEdge(outputEdge)) {
 					newRegions.add(createAssignmentRegion(assignmentReachabilityForest, outputEdge, newRegions.size()));
 				}
@@ -758,7 +708,7 @@ public class MappingPartitioner implements Nameable
 			//
 			//	Create an AssignmentRegion for each still to-be-realized edge to an output.
 			//
-			for (@NonNull Edge edge : getRealizedEdges()) {
+			for (@NonNull NavigableEdge edge : getRealizedEdges()) {
 				if (!hasRealizedEdge(edge)) {
 					newRegions.add(createAssignmentRegion(assignmentReachabilityForest, edge, newRegions.size()));
 				}
@@ -826,7 +776,7 @@ public class MappingPartitioner implements Nameable
 			//
 			//	Create an AssignmentRegion for each to-be-realized edge to an output, which may also realize most trace edges too.
 			//
-			for (@NonNull Edge outputEdge : getRealizedOutputEdges()) {
+			for (@NonNull NavigableEdge outputEdge : getRealizedOutputEdges()) {
 				if (!hasRealizedEdge(outputEdge)) {
 					newRegions.add(createAssignmentRegion(assignmentReachabilityForest, outputEdge, newRegions.size()));
 				}
@@ -834,7 +784,7 @@ public class MappingPartitioner implements Nameable
 			//
 			//	Create an AssignmentRegion for each still to-be-realized edge to an output.
 			//
-			for (@NonNull Edge edge : getRealizedEdges()) {
+			for (@NonNull NavigableEdge edge : getRealizedEdges()) {
 				if (!hasRealizedEdge(edge)) {
 					newRegions.add(createAssignmentRegion(assignmentReachabilityForest, edge, newRegions.size()));
 				}

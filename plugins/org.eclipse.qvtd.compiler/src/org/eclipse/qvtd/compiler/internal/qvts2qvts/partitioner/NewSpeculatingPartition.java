@@ -129,7 +129,7 @@ class NewSpeculatingPartition extends AbstractPartition
 		Set<@NonNull Node> fallibleNodes = null;
 		if (isInfallible) {
 			fallibleNodes = new HashSet<>();
-			for (@NonNull Edge edge : partitioner.getRegionAnalysis().getFallibleEdges()) {
+			for (@NonNull Edge edge : regionAnalysis.getFallibleEdges()) {
 				fallibleNodes.add(QVTscheduleUtil.getTargetNode(edge));
 			}
 		}
@@ -230,7 +230,7 @@ class NewSpeculatingPartition extends AbstractPartition
 	} */
 
 	protected void resolveSuccessEdges(boolean isInfallible) {
-		Iterable<@NonNull Edge> fallibleEdges = isInfallible ? partitioner.getRegionAnalysis().getFallibleEdges() : null;
+		Iterable<@NonNull Edge> fallibleEdges = isInfallible ? regionAnalysis.getFallibleEdges() : null;
 		for (@NonNull Edge edge : partitioner.getSuccessEdges()) {
 			if (/*edge.isNew() ||*/ (fallibleEdges == null) || !Iterables.contains(fallibleEdges, edge)) {
 				Node sourceNode = edge.getEdgeSource();

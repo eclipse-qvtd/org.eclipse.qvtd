@@ -40,8 +40,6 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -92,10 +90,10 @@ public class TransformationAnalysis extends QVTbaseHelper implements Nameable
 	private final @NonNull Map<@NonNull PropertyDatum, @NonNull TracePropertyAnalysis> propertyDatum2tracePropertyAnalysis = new HashMap<>();
 
 	/**
-	 * All speculated-trace to realized node properties that are automatically assignable once their speculation
-	 * is validated mapped to the regions that speculate them.
+	 * Realization of corollary properties is deferred until speculation involving their source trace node has completed
+	 * successfully. The map identifies the regions in which a deferred realization is needed.
 	 */
-	private final @NonNull Map<@NonNull Property, @NonNull List<@NonNull MappingRegion>> corollaryProperty2regions = new HashMap<>();
+	private final @NonNull Map<@NonNull Property, @NonNull List<@NonNull Region>> corollaryProperty2regions = new HashMap<>();
 
 	/**
 	 * The analysis of cycles.
@@ -133,8 +131,19 @@ public class TransformationAnalysis extends QVTbaseHelper implements Nameable
 		return middleAnalysis;
 	}
 
-	public void addCorollary(@NonNull Property property, @NonNull MappingRegion region) {
-		List<@NonNull MappingRegion> regions = corollaryProperty2regions.get(property);
+	/**
+	 * Register edge for delayed realization after speculation of the trace node of edge's region has completed successfully.
+	 */
+	public void addCorollary(@NonNull NavigableEdge edge) {
+		assert edge.isRealized();
+		//	Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
+		Node targetNode = QVTscheduleUtil.getTargetNode(edge);
+		//	assert sourceNode.isRealized();		-- may be a loaded input of a realized where invocation
+		assert targetNode.isRealized();
+		//	assert sourceNode.isTrace() || targetNode.isTrace();	-- may be part of an extensive realized pattern
+		Region region = QVTscheduleUtil.getOwningRegion(edge);
+		Property property = QVTscheduleUtil.getProperty(edge);
+		List<@NonNull Region> regions = corollaryProperty2regions.get(property);
 		if (regions == null) {
 			regions = new ArrayList<>();
 			corollaryProperty2regions.put(property, regions);
@@ -264,11 +273,8 @@ public class TransformationAnalysis extends QVTbaseHelper implements Nameable
 		return ruleRegions;
 	}
 
-	public @Nullable List<@NonNull MappingRegion> getCorollaryOf(@NonNull Edge edge) {
-		if (!(edge.isCast() || edge.isNavigation())) {
-			return null;
-		}
-		return corollaryProperty2regions.get(((NavigableEdge)edge).getProperty());
+	public @Nullable List<@NonNull Region> getCorollaryOf(@NonNull NavigableEdge edge) {
+		return corollaryProperty2regions.get(edge.getProperty());
 	}
 
 	public @Nullable CycleAnalysis getCycleAnalysis(@NonNull ClassDatum traceClassDatum) {

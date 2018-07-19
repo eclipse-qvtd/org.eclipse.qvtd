@@ -108,7 +108,7 @@ class AssignmentPartition extends AbstractPartition
 		if (edgeRole == Role.REALIZED) {
 			AbstractPartition realizingPartition = partitioner.getRealizingPartition(edge);
 			if (realizingPartition instanceof AssignmentPartition) {
-				if (!isCorollary(QVTscheduleUtil.getTargetNode(edge))) {			// FIXME do corollaries before assigns
+				if (!regionAnalysis.isCorollary(QVTscheduleUtil.getTargetNode(edge))) {			// FIXME do corollaries before assigns
 					return null;
 				}
 			}

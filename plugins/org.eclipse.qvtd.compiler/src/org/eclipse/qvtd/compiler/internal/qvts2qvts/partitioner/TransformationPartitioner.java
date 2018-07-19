@@ -185,6 +185,12 @@ public class TransformationPartitioner
 		for (@NonNull Region region : activeRegions) {
 			if (region instanceof MappingRegion) {
 				MappingRegion mappingRegion = (MappingRegion)region;
+				transformationAnalysis.getRegionAnalysis(mappingRegion);
+			}
+		}
+		for (@NonNull Region region : activeRegions) {
+			if (region instanceof MappingRegion) {
+				MappingRegion mappingRegion = (MappingRegion)region;
 				RegionAnalysis regionAnalysis = transformationAnalysis.getRegionAnalysis(mappingRegion);
 				MappingPartitioner mappingPartitioner = new MappingPartitioner(this, regionAnalysis);
 				region2mappingPartitioner.put(mappingRegion, mappingPartitioner);

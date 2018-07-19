@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassAnalysis;
@@ -43,11 +44,11 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
 
-public class RegionAnalysis implements Nameable
+public class RegionAnalysis extends RegionHelper<@NonNull Region>implements Nameable
 {
 	protected final @NonNull TransformationAnalysis transformationAnalysis;
-	protected final @NonNull ScheduleManager scheduleManager;
-	protected final @NonNull Region region;
+	//	protected final @NonNull ScheduleManager scheduleManager;
+	//	protected final @NonNull Region region;
 
 	/**
 	 * The per-typed model predicated navigable edges for which an execution may be attempted before assignment.
@@ -106,6 +107,16 @@ public class RegionAnalysis implements Nameable
 	private final @NonNull List<@NonNull Node> constantOutputNodes = new ArrayList<>();
 
 	/**
+	 * The edges to be realized iff speculation succeeds.
+	 */
+	private final @NonNull List<@NonNull NavigableEdge> corollaryEdges = new ArrayList<>();
+
+	/**
+	 * The nodes to be realized iff speculation succeeds.
+	 */
+	private final @NonNull List<@NonNull Node> corollaryNodes = new ArrayList<>();
+
+	/**
 	 * properties that are directly realized from a middle object provided all predicates are satisfied.
 	 */
 	private final @NonNull Set<@NonNull NavigableEdge> oldPrimaryNavigableEdges = new HashSet<>();
@@ -113,10 +124,10 @@ public class RegionAnalysis implements Nameable
 	private final @NonNull List<@NonNull Edge> predicatedMiddleEdges = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> predicatedMiddleNodes = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> predicatedOutputNodes = new ArrayList<>();
-	private final @NonNull Set<@NonNull Edge> realizedEdges = new HashSet<>();
-	private final @NonNull List<@NonNull Edge> realizedMiddleEdges = new ArrayList<>();
+	private final @NonNull Set<@NonNull NavigableEdge> realizedEdges = new HashSet<>();
+	private final @NonNull List<@NonNull NavigableEdge> realizedMiddleEdges = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> realizedMiddleNodes = new ArrayList<>();
-	private final @NonNull List<@NonNull Edge> realizedOutputEdges = new ArrayList<>();
+	private final @NonNull List<@NonNull NavigableEdge> realizedOutputEdges = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> realizedOutputNodes = new ArrayList<>();
 	private final @NonNull Set<@NonNull SuccessEdge> successEdges = new HashSet<>();	// FIXME redundant wrt traceNode2successEdge.values()
 
@@ -154,15 +165,20 @@ public class RegionAnalysis implements Nameable
 	private @Nullable Iterable<@NonNull Edge> fallibleEdges = null;
 
 	public RegionAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull Region region) {
+		super(transformationAnalysis.getScheduleManager(), region);
 		this.transformationAnalysis = transformationAnalysis;
-		this.scheduleManager = transformationAnalysis.getScheduleManager();
-		this.region = region;
 		analyzeNodes();
 		for (@NonNull Node traceNode : analyzeTraceNodes()) {
 			analyzeSuccessEdge(traceNode);
 			analyzeTraceEdges(traceNode);
 		}
 		analyzeEdges();
+		List<@NonNull Node> alreadyRealized = new ArrayList<>(getTraceNodes());
+		Node dispatchNode = basicGetDispatchNode();
+		if (dispatchNode != null) {
+			alreadyRealized.add(dispatchNode);
+		}
+		analyzeCorollaries(alreadyRealized);
 	}
 
 	private void addCheckedEdge(@NonNull NavigableEdge predicatedEdge) {
@@ -277,6 +293,34 @@ public class RegionAnalysis implements Nameable
 		}
 	}
 
+	/**
+	 * Identify what gets realized as a consequence of the mapping succeeding.
+	 *<p>
+	 * The corollaries are realized nodes and edges that are logically realized at the same time as the trace node.
+	 * However since the trace node may be created speculatively to host matched and success statuses,
+	 * corollary realization is deferred until the speculation has been successfully resolved.
+	 */
+	private void analyzeCorollaries(@NonNull List<@NonNull Node> alreadyRealizedNodes) {
+		for (int i = 0; i < alreadyRealizedNodes.size(); i++) {
+			Node alreadyRealizedNode = alreadyRealizedNodes.get(i);
+			for (@NonNull NavigationEdge edge : alreadyRealizedNode.getRealizedNavigationEdges()) {
+				Node targetNode = QVTscheduleUtil.getTargetNode(edge);
+				if (targetNode.isRealized() && !targetNode.isSuccess()) {
+					assert !corollaryEdges.contains(edge);
+					corollaryEdges.add(edge);
+					if (!alreadyRealizedNodes.contains(targetNode)) {
+						alreadyRealizedNodes.add(targetNode);
+						assert !corollaryNodes.contains(targetNode);
+						if (!corollaryNodes.contains(targetNode)) {		// Overrides have a base and derived edge to the same rootVariable node
+							corollaryNodes.add(targetNode);
+						}
+					}
+					transformationAnalysis.addCorollary(edge);
+				}
+			}
+		}
+	}
+
 	private void analyzeEdges() {
 		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
 			if (!edge.isSecondary()) {
@@ -285,7 +329,8 @@ public class RegionAnalysis implements Nameable
 				}
 				if (edge.isCast() || edge.isNavigation()) {
 					if (edge.isRealized()) {
-						realizedEdges.add(edge);
+						NavigableEdge navigableEdge = (NavigableEdge)edge;
+						realizedEdges.add(navigableEdge);
 						Node sourceNode = edge.getEdgeSource();
 						Node targetNode = edge.getEdgeTarget();
 						/*if (traceNode2successEdge.containsKey(sourceNode)) {
@@ -295,7 +340,7 @@ public class RegionAnalysis implements Nameable
 						}
 						else*/ if ((sourceNode.isPredicated() || sourceNode.isRealized())) {
 							if (!traceNode2successEdge.containsKey(targetNode) && (targetNode.isPredicated() || targetNode.isRealized())) {
-								realizedOutputEdges.add(edge);
+								realizedOutputEdges.add(navigableEdge);
 							}
 						}
 						if (targetNode.isLoaded() && scheduleManager.isMiddle(sourceNode)) {
@@ -707,6 +752,14 @@ public class RegionAnalysis implements Nameable
 		return consumedTracePropertyAnalyses;
 	}
 
+	public @NonNull Iterable<@NonNull NavigableEdge> getCorollaryEdges() {
+		return corollaryEdges;
+	}
+
+	public @NonNull Iterable<@NonNull Node> getCorollaryNodes() {
+		return corollaryNodes;
+	}
+
 	public @Nullable Iterable<@NonNull NavigableEdge> getEnforcedEdges(@NonNull TypedModel typedModel, @NonNull Property asProperty) {
 		assert typedModel2property2enforcedEdges != null;
 		Map<@NonNull Property, @NonNull Set<@NonNull NavigableEdge>> property2enforcedEdge = typedModel2property2enforcedEdges.get(typedModel);
@@ -754,7 +807,7 @@ public class RegionAnalysis implements Nameable
 		return producedTracePropertyAnalyses;
 	}
 
-	public @NonNull Iterable<@NonNull Edge> getRealizedEdges() {
+	public @NonNull Iterable<@NonNull NavigableEdge> getRealizedEdges() {
 		return realizedEdges;
 	}
 
@@ -762,7 +815,7 @@ public class RegionAnalysis implements Nameable
 		return realizedMiddleNodes;
 	}
 
-	public @NonNull Iterable<@NonNull Edge> getRealizedOutputEdges() {
+	public @NonNull Iterable<@NonNull NavigableEdge> getRealizedOutputEdges() {
 		return realizedOutputEdges;
 	}
 
@@ -770,10 +823,12 @@ public class RegionAnalysis implements Nameable
 		return realizedOutputNodes;
 	}
 
+	@Override
 	public @NonNull Region getRegion() {
 		return region;
 	}
 
+	@Override
 	public @NonNull ScheduleManager getScheduleManager() {
 		return scheduleManager;
 	}
@@ -825,6 +880,33 @@ public class RegionAnalysis implements Nameable
 
 	public @NonNull List<@NonNull Node> getTraceNodes() {
 		return traceNodes;
+	}
+
+	/**
+	 * Return true if node is a corollary of some mapping.
+	 */
+	public boolean isCorollary(@NonNull Node node) {
+		if (node.isPredicated()) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+				if (edge.isPredicated() && (edge instanceof NavigableEdge)) {
+					List<@NonNull Region> corollaryOf = transformationAnalysis.getCorollaryOf((NavigableEdge)edge);
+					if (corollaryOf != null) {
+						return true;
+					}
+				}
+			}
+		}
+		else if (node.isRealized()) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+				if (edge.isRealized() && (edge instanceof NavigableEdge)) {
+					List<@NonNull Region> corollaryOf = transformationAnalysis.getCorollaryOf((NavigableEdge)edge);
+					if (corollaryOf != null) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	public void setFallibilities(@NonNull Iterable<@NonNull RegionAnalysis> fallibilities) {

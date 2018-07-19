@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule.utilities;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.util.Visitable;
@@ -118,7 +119,13 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 
 	@Override
 	public String visiting(@NonNull Visitable object) {
-		append(object.getClass().getSimpleName() + " ");
+		if (object instanceof EObject) {
+			append(((EObject)object).eClass().getName());
+		}
+		else {
+			append(object.getClass().getSimpleName());
+		}
+		append(" ");
 		if (object instanceof Nameable) {
 			appendName((Nameable) object);
 		}

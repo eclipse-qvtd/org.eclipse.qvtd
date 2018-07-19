@@ -104,7 +104,7 @@ class SpeculatedPartition extends AbstractPartition
 	}
 
 	protected void resolveRealizedEdges() {
-		for (@NonNull Edge edge : partitioner.getRealizedEdges()) {
+		for (@NonNull NavigableEdge edge : partitioner.getRealizedEdges()) {
 			if (!partitioner.hasRealizedEdge(edge) && (partitioner.getCorollaryOf(edge) == null)) {
 				Node sourceNode = edge.getEdgeSource();
 				if (!sourceNode.isPredicated() || partitioner.hasPredicatedNode(sourceNode)) { // || isLocalCorollary(sourceNode)) {
@@ -123,7 +123,7 @@ class SpeculatedPartition extends AbstractPartition
 	}
 
 	protected void resolveRealizedOutputNodes() {
-		for (@NonNull Node node : partitioner.getCorollaryNodes()) {
+		for (@NonNull Node node : regionAnalysis.getCorollaryNodes()) {
 			if (!hasNode(node) && !node.isSuccess()) {
 				addNode(node, QVTscheduleUtil.getNodeRole(node));
 			}

@@ -18,9 +18,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -75,7 +75,7 @@ class SpeculatingPartition extends AbstractPartition
 	}
 
 	private boolean isDownstreamFromCorollary(@NonNull Node node) {
-		if (isCorollary(node)) {
+		if (regionAnalysis.isCorollary(node)) {
 			return true;
 		}
 		if (node.isOperation()) {
@@ -107,11 +107,11 @@ class SpeculatingPartition extends AbstractPartition
 	private boolean isLocalCorollary(@NonNull Node node) {
 		assert node.isRealized();
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-			if (edge.isRealized() && (edge.isCast() || edge.isNavigation())) {
+			if (edge.isRealized() && (edge instanceof NavigableEdge)) {
 				// A cyclic node cannot be a corollary since we must establish that all speculating
 				// partitions are ok before the speculated region can create the full cycle.
 				if (!partitioner.isCyclic(QVTscheduleUtil.getSourceNode(edge))) {
-					List<@NonNull MappingRegion> corollaryOfRegions = partitioner.getCorollaryOf(edge);
+					List<@NonNull Region> corollaryOfRegions = partitioner.getCorollaryOf((NavigableEdge)edge);
 					if ((corollaryOfRegions != null) && (corollaryOfRegions.size() == 1) && corollaryOfRegions.contains(region)) {
 						return true;
 					}
@@ -137,16 +137,18 @@ class SpeculatingPartition extends AbstractPartition
 
 	protected void resolveMatchedPredicatedEdges() {
 		for (@NonNull Edge edge : partitioner.getPredicatedEdges()) {
-			if (edge.isMatched() && !partitioner.hasPredicatedEdge(edge) && (partitioner.getCorollaryOf(edge) == null)) {
-				Node sourceNode = edge.getEdgeSource();
-				if (!sourceNode.isRealized()) {
-					Node targetNode = edge.getEdgeTarget();
-					if (!targetNode.isRealized()) {
-						if (!hasNode(sourceNode)) {
-							addNode(sourceNode, QVTscheduleUtil.getNodeRole(sourceNode));
-						}
-						if (!hasNode(targetNode)) {
-							addNode(targetNode, QVTscheduleUtil.getNodeRole(targetNode));
+			if (edge.isMatched() && !partitioner.hasPredicatedEdge(edge)) {
+				if (!(edge instanceof NavigableEdge) || (partitioner.getCorollaryOf((NavigableEdge)edge) == null)) {
+					Node sourceNode = edge.getEdgeSource();
+					if (!sourceNode.isRealized()) {
+						Node targetNode = edge.getEdgeTarget();
+						if (!targetNode.isRealized()) {
+							if (!hasNode(sourceNode)) {
+								addNode(sourceNode, QVTscheduleUtil.getNodeRole(sourceNode));
+							}
+							if (!hasNode(targetNode)) {
+								addNode(targetNode, QVTscheduleUtil.getNodeRole(targetNode));
+							}
 						}
 					}
 				}
@@ -168,14 +170,14 @@ class SpeculatingPartition extends AbstractPartition
 
 	protected void resolvePredicatedOutputNodes() {
 		for (@NonNull Node node : partitioner.getPredicatedOutputNodes()) {
-			if (!hasNode(node) && !isCorollary(node) && !isDownstreamFromCorollary(node)) {
+			if (!hasNode(node) && !regionAnalysis.isCorollary(node) && !isDownstreamFromCorollary(node)) {
 				addNode(node, QVTscheduleUtil.getNodeRole(node));
 			}
 		}
 	}
 
 	protected void resolveRealizedEdges() {
-		for (@NonNull Edge edge : partitioner.getRealizedEdges()) {
+		for (@NonNull NavigableEdge edge : partitioner.getRealizedEdges()) {
 			if (!partitioner.hasRealizedEdge(edge) && (partitioner.getCorollaryOf(edge) == null)) {
 				Node sourceNode = edge.getEdgeSource();
 				if (!sourceNode.isRealized() || isLocalCorollary(sourceNode)) {

@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleHeadAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -41,6 +42,7 @@ abstract class AbstractPartition
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull MappingPartitioner partitioner;
 	protected final @NonNull MappingRegion region;
+	protected final @NonNull RegionAnalysis regionAnalysis;
 	protected final @NonNull String name;
 
 	/**
@@ -68,6 +70,7 @@ abstract class AbstractPartition
 		this.scheduleManager = partitioner.getScheduleManager();
 		this.partitioner = partitioner;
 		this.region = partitioner.getRegion();
+		this.regionAnalysis = partitioner.getRegionAnalysis();
 		this.name = QVTscheduleUtil.getName(region);
 		this.reachabilityForest = reachabilityForest;
 	}
@@ -340,33 +343,6 @@ abstract class AbstractPartition
 	 */
 	protected boolean isAvailable(@NonNull Node node) {
 		return node.isOld();
-	}
-
-	/**
-	 * Return true if node is a corollary of some mapping.
-	 */
-	protected boolean isCorollary(@NonNull Node node) {
-		if (node.isPredicated()) {
-			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-				if (edge.isPredicated() && (edge.isCast() || edge.isNavigation())) {
-					List<@NonNull MappingRegion> corollaryOf = partitioner.getCorollaryOf(edge);
-					if (corollaryOf != null) {
-						return true;
-					}
-				}
-			}
-		}
-		else if (node.isRealized()) {
-			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-				if (edge.isRealized() && (edge.isCast() || edge.isNavigation())) {
-					List<@NonNull MappingRegion> corollaryOf = partitioner.getCorollaryOf(edge);
-					if (corollaryOf != null) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
 	}
 
 	protected void resolveDisambiguations() {
