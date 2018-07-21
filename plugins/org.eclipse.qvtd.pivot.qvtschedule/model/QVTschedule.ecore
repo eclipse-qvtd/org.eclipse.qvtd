@@ -112,6 +112,13 @@
       <details key="documentation" value="A ConnectionEnd may be the Node/Edge at the end of a NodeConnection/EdgeConnection."/>
     </eAnnotations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CyclicMappingRegion" eSuperTypes="#//MappingRegion">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A CyclicMappingRegion provides a graphical representation of an executable micro-mapping that encapsulates a cycle of one or more mapping regions as an (externally) acyclic mapping region."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elementRegions" lowerBound="1"
+        upperBound="-1" eType="#//MappingRegion"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DatumConnection" abstract="true" eSuperTypes="#//Connection">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A DatumConnection establishes that one or more source edges/nodes are available for use by one or more target edges/nodes.&#xD;&#xA;Derivations refine the availability to edges or nodes, pass by value, optional existence or mandatory existence."/>
