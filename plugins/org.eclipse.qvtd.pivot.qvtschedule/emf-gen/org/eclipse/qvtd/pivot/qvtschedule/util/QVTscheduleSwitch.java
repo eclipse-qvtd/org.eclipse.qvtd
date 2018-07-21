@@ -192,6 +192,17 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTschedulePackage.CYCLIC_MAPPING_REGION: {
+				CyclicMappingRegion cyclicMappingRegion = (CyclicMappingRegion)theEObject;
+				T result = caseCyclicMappingRegion(cyclicMappingRegion);
+				if (result == null) result = caseMappingRegion(cyclicMappingRegion);
+				if (result == null) result = caseRegion(cyclicMappingRegion);
+				if (result == null) result = caseNamedElement(cyclicMappingRegion);
+				if (result == null) result = caseSymbolable(cyclicMappingRegion);
+				if (result == null) result = caseElement(cyclicMappingRegion);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTschedulePackage.DATUM_CONNECTION: {
 				DatumConnection<?> datumConnection = (DatumConnection<?>)theEObject;
 				T result = caseDatumConnection(datumConnection);
@@ -928,6 +939,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseConnectionEnd(ConnectionEnd object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Cyclic Mapping Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Cyclic Mapping Region</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCyclicMappingRegion(CyclicMappingRegion object) {
 		return null;
 	}
 

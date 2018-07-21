@@ -28,6 +28,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.CollectionPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.CollectionRangeNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ComposedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
+import org.eclipse.qvtd.pivot.qvtschedule.CyclicMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.DependencyEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.DependencyNode;
@@ -185,6 +186,11 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 
 	@Override
 	public String visitConnection(@NonNull Connection object) {
+		return visiting(object);
+	}
+
+	@Override
+	public String visitCyclicMappingRegion(@NonNull CyclicMappingRegion object) {
 		return visiting(object);
 	}
 

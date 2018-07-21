@@ -103,6 +103,11 @@ implements QVTscheduleVisitor<Boolean>
 	}
 
 	@Override
+	public @Nullable Boolean visitCyclicMappingRegion(@NonNull CyclicMappingRegion object) {
+		return visitMappingRegion(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitDatumConnection(@NonNull DatumConnection<?> object) {
 		return visitConnection(object);
 	}

@@ -107,6 +107,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull ComposedNode createComposedNode();
 
 	/**
+	 * Returns a new object of class '<em>Cyclic Mapping Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Cyclic Mapping Region</em>'.
+	 * @generated
+	 */
+	@NonNull CyclicMappingRegion createCyclicMappingRegion();
+
+	/**
 	 * Returns a new object of class '<em>Dependency Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

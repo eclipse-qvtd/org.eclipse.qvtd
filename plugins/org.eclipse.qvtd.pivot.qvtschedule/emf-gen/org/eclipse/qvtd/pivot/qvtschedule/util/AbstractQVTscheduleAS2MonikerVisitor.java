@@ -101,6 +101,11 @@ public abstract class AbstractQVTscheduleAS2MonikerVisitor
 	}
 
 	@Override
+	public @Nullable Object visitCyclicMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CyclicMappingRegion object) {
+		return visitMappingRegion(object);
+	}
+
+	@Override
 	public @Nullable Object visitDatumConnection(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DatumConnection<?> object) {
 		return visitConnection(object);
 	}

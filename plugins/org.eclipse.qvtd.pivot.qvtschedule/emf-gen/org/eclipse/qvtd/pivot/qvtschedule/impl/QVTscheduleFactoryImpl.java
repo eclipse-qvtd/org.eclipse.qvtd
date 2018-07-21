@@ -77,6 +77,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.COLLECTION_PART_EDGE: return createCollectionPartEdge();
 			case QVTschedulePackage.COLLECTION_RANGE_NODE: return createCollectionRangeNode();
 			case QVTschedulePackage.COMPOSED_NODE: return createComposedNode();
+			case QVTschedulePackage.CYCLIC_MAPPING_REGION: return createCyclicMappingRegion();
 			case QVTschedulePackage.DEPENDENCY_EDGE: return createDependencyEdge();
 			case QVTschedulePackage.DEPENDENCY_NODE: return createDependencyNode();
 			case QVTschedulePackage.DISPATCH_REGION: return createDispatchRegion();
@@ -251,6 +252,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull ComposedNode createComposedNode() {
 		ComposedNodeImpl composedNode = new ComposedNodeImpl();
 		return composedNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull CyclicMappingRegion createCyclicMappingRegion() {
+		CyclicMappingRegionImpl cyclicMappingRegion = new CyclicMappingRegionImpl();
+		return cyclicMappingRegion;
 	}
 
 	/**

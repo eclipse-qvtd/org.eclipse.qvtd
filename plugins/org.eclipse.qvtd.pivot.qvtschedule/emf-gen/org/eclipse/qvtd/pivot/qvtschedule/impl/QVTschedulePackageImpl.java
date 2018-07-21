@@ -41,6 +41,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ComposedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
+import org.eclipse.qvtd.pivot.qvtschedule.CyclicMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.DependencyEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.DependencyNode;
@@ -190,6 +191,13 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	private EClass connectionEndEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cyclicMappingRegionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -957,6 +965,26 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	@Override
 	public EClass getConnectionEnd() {
 		return connectionEndEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getCyclicMappingRegion() {
+		return cyclicMappingRegionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getCyclicMappingRegion_ElementRegions() {
+		return (EReference)cyclicMappingRegionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2379,6 +2407,9 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		connectionEndEClass = createEClass(CONNECTION_END);
 
+		cyclicMappingRegionEClass = createEClass(CYCLIC_MAPPING_REGION);
+		createEReference(cyclicMappingRegionEClass, CYCLIC_MAPPING_REGION__ELEMENT_REGIONS);
+
 		datumConnectionEClass = createEClass(DATUM_CONNECTION);
 		createEAttribute(datumConnectionEClass, DATUM_CONNECTION__CONNECTION_ROLE);
 		createEAttribute(datumConnectionEClass, DATUM_CONNECTION__NAME);
@@ -2623,6 +2654,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		composedNodeEClass.getESuperTypes().add(this.getNode());
 		connectionEClass.getESuperTypes().add(thePivotPackage.getElement());
 		connectionEClass.getESuperTypes().add(this.getSymbolable());
+		cyclicMappingRegionEClass.getESuperTypes().add(this.getMappingRegion());
 		datumConnectionEClass.getESuperTypes().add(this.getConnection());
 		dependencyEdgeEClass.getESuperTypes().add(this.getEdge());
 		dependencyNodeEClass.getESuperTypes().add(this.getNode());
@@ -2729,6 +2761,9 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEReference(getConnection_OwningScheduledRegion(), this.getScheduledRegion(), this.getScheduledRegion_OwnedConnections(), "owningScheduledRegion", null, 1, 1, Connection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(connectionEndEClass, ConnectionEnd.class, "ConnectionEnd", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(cyclicMappingRegionEClass, CyclicMappingRegion.class, "CyclicMappingRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCyclicMappingRegion_ElementRegions(), this.getMappingRegion(), null, "elementRegions", null, 1, -1, CyclicMappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(datumConnectionEClass, DatumConnection.class, "DatumConnection", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDatumConnection_ConnectionRole(), this.getConnectionRole(), "connectionRole", "UNDEFINED", 1, 1, DatumConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
