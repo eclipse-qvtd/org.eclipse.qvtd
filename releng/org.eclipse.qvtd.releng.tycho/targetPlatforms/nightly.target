@@ -57,16 +57,16 @@
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.ocl.master.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.ocl.examples.tests.feature.group" version="0.0.0"/>
-    <repository location="http://download.eclipse.org/modeling/mdt/ocl/updates/nightly/6.5.0"/>
-    <repository location="http://download.eclipse.org/modeling/mdt/ocl/updates/interim/6.4.0"/>
-    <repository location="http://download.eclipse.org/modeling/mdt/ocl/updates/milestones/6.4.0"/>
+    <repository location="http://download.eclipse.org/modeling/mdt/ocl/updates/nightly"/>
+    <repository location="http://download.eclipse.org/modeling/mdt/ocl/updates/interim"/>
+    <repository location="http://download.eclipse.org/modeling/mdt/ocl/updates/milestones"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.m2m.qvt.oml.runtime.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.m2m.qvt.oml.samples" version="0.0.0"/>
-    <repository location="http://download.eclipse.org/mmt/qvto/updates/nightly/3.8.0"/>
-    <repository location="http://download.eclipse.org/mmt/qvto/updates/interim/3.8.0"/>
-    <repository location="http://download.eclipse.org/mmt/qvto/updates/milestones/3.8.0"/>
+    <repository location="http://download.eclipse.org/mmt/qvto/updates/nightly"/>
+    <repository location="http://download.eclipse.org/mmt/qvto/updates/interim"/>
+    <repository location="http://download.eclipse.org/mmt/qvto/updates/milestones"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.sirius.specifier.feature.group" version="0.0.0"/>
@@ -87,9 +87,9 @@
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.uml2.sdk.feature.group" version="0.0.0"/>
-    <!--repository location="http://download.eclipse.org/modeling/mdt/uml2/updates/5.4-I-builds"/-->
-    <!--repository location="http://download.eclipse.org/modeling/mdt/uml2/updates/5.4milestones"/-->
-    <repository location="http://download.eclipse.org/modeling/mdt/uml2/updates/5.3"/>
+    <repository location="http://download.eclipse.org/modeling/mdt/uml2/updates/5.4-I-builds"/>
+    <repository location="http://download.eclipse.org/modeling/mdt/uml2/updates/5.4milestones"/>
+    <repository location="http://download.eclipse.org/modeling/mdt/uml2/updates/5.4"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.license.feature.group" version="0.0.0"/>
