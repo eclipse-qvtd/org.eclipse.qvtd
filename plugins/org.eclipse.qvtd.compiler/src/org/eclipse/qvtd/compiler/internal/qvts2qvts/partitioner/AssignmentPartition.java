@@ -16,6 +16,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
@@ -87,6 +88,13 @@ class AssignmentPartition extends AbstractPartition
 		//	Join up the edges.
 		//
 		resolveEdges();
+	}
+
+	@Override
+	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
+		String namePrefix = "«edge" + partitionNumber + "»";
+		String symbolSuffix = "_p" + partitionNumber;
+		return createMicroMappingRegion(namePrefix, symbolSuffix);
 	}
 
 	@Override

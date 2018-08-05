@@ -19,6 +19,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -69,11 +70,9 @@ class SpeculatedPartition extends AbstractPartition
 		resolveSuccessNodes();
 	}
 
-
 	@Override
-	public @NonNull MicroMappingRegion createMicroMappingRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
-		MicroMappingRegion microMappingRegion = super.createMicroMappingRegion(namePrefix, symbolSuffix);
-		return microMappingRegion;
+	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
+		return createMicroMappingRegion("«speculated»", "_p" + partitionNumber);
 	}
 
 	@Override

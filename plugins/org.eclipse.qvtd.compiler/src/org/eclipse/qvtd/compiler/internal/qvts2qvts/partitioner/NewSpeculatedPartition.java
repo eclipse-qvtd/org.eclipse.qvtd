@@ -20,6 +20,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -83,13 +84,6 @@ class NewSpeculatedPartition extends AbstractPartition
 		resolveEdges();
 	}
 
-
-	@Override
-	public @NonNull MicroMappingRegion createMicroMappingRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
-		MicroMappingRegion microMappingRegion = super.createMicroMappingRegion(namePrefix, symbolSuffix);
-		return microMappingRegion;
-	}
-
 	@Override
 	protected @NonNull PartitioningVisitor createPartitioningVisitor(@NonNull MicroMappingRegion partialRegion) {
 		return new PartitioningVisitor(new RegionHelper<>(scheduleManager, partialRegion), this)
@@ -101,6 +95,11 @@ class NewSpeculatedPartition extends AbstractPartition
 				return partialNode;
 			}
 		};
+	}
+
+	@Override
+	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
+		return createMicroMappingRegion("«speculated»", "_p" + partitionNumber);
 	}
 
 	@Override

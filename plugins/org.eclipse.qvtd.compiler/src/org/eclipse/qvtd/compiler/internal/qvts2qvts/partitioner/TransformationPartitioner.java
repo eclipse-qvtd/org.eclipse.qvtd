@@ -212,19 +212,30 @@ public class TransformationPartitioner
 		//
 		//	Perform per-mapping partitioning
 		//
-		List<@NonNull MappingRegion> partitionedRegions = new ArrayList<>();
+		List<@NonNull Partition> partitions = new ArrayList<>();
 		Set<@NonNull CycleAnalysis> partitionedCycles = new HashSet<>();
 		for (@NonNull MappingPartitioner mappingPartitioner : mappingPartitioners) {
 			CycleAnalysis cycleAnalysis = transformationAnalysis.getCycleAnalysis(mappingPartitioner.getRegionAnalysis());
 			if (Iterables.isEmpty(mappingPartitioner.getTraceNodes())) {
-				partitionedRegions.add(mappingPartitioner.getRegion());
+				partitions.add(new NonPartition(mappingPartitioner));
 			}
 			else if (cycleAnalysis == null) {
-				Iterables.addAll(partitionedRegions, mappingPartitioner.partition());
+				Iterables.addAll(partitions, mappingPartitioner.partition());
 			}
 			else if (partitionedCycles.add(cycleAnalysis)) {
-				Iterables.addAll(partitionedRegions, cycleAnalysis.partition(mappingPartitioners));
+				Iterables.addAll(partitions, cycleAnalysis.partition(mappingPartitioners));
 			}
+		}
+		List<@NonNull MappingRegion> partitionedRegions = new ArrayList<>(partitions.size());
+		int partitionNumber = 0;
+		Region currentRegion = null;
+		for(@NonNull Partition partition : partitions) {
+			Region partitionRegion = partition.getRegion();
+			if (currentRegion != partitionRegion) {
+				currentRegion = partitionRegion;
+				partitionNumber = 0;
+			}
+			partitionedRegions.add(partition.createMicroMappingRegion(partitionNumber++));
 		}
 		return partitionedRegions;
 	}

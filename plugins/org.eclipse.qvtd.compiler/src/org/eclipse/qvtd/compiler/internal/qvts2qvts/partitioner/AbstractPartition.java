@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleHeadAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -32,12 +33,13 @@ import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
-abstract class AbstractPartition
+abstract class AbstractPartition implements Partition
 {
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull MappingPartitioner partitioner;
@@ -249,7 +251,7 @@ abstract class AbstractPartition
 		}
 	}
 
-	public @NonNull MicroMappingRegion createMicroMappingRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
+	protected @NonNull MicroMappingRegion createMicroMappingRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
 		assert !(region instanceof MicroMappingRegion);
 		MicroMappingRegion partialRegion = createPartialRegion(namePrefix, symbolSuffix);
 		PartitioningVisitor partitioningVisitor = createPartitioningVisitor(partialRegion);
@@ -265,6 +267,13 @@ abstract class AbstractPartition
 		}
 		Iterable<@NonNull Node> headNodes = RuleHeadAnalysis.computeRuleHeadNodes(scheduleManager, microMappingRegion, partialPreferredHeadNodes);
 		Iterables.addAll(QVTscheduleUtil.Internal.getHeadNodesList(microMappingRegion), headNodes);
+
+
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+			scheduleManager.writeDebugGraphs(microMappingRegion, null);
+		}
+		check(microMappingRegion);
+
 		return microMappingRegion;
 	}
 
@@ -313,6 +322,11 @@ abstract class AbstractPartition
 	 */
 	protected @Nullable Iterable<@NonNull Node> getPreferredHeadNodes() {
 		return partitioner.getTraceNodes();
+	}
+
+	@Override
+	public @NonNull Region getRegion() {
+		return region;
 	}
 
 	/**

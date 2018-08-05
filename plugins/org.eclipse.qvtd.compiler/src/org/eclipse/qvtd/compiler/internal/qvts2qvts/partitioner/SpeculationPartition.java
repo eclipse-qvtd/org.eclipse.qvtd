@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
@@ -82,6 +83,11 @@ class SpeculationPartition extends AbstractPartition
 				}
 			}
 		}
+	}
+
+	@Override
+	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
+		return createMicroMappingRegion("«speculation»", "_p" + partitionNumber);
 	}
 
 	/**

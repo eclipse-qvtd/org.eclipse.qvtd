@@ -25,7 +25,6 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
@@ -34,7 +33,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -263,116 +261,57 @@ public class MappingPartitioner implements Nameable
 		return deadNodes;
 	}
 
-	private @NonNull MicroMappingRegion createActivatorRegion(int partitionNumber) {
+	private @NonNull ActivatorPartition createActivatorPartition() {
 		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		ActivatorPartition speculatingPartition = new ActivatorPartition(this, reachabilityForest);
-		MicroMappingRegion microMappingRegion = speculatingPartition.createMicroMappingRegion("«activator»", "_p" + partitionNumber);
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		}
-		speculatingPartition.check(microMappingRegion);
-		return microMappingRegion;
+		return new ActivatorPartition(this, reachabilityForest);
 	}
 
-	private @NonNull MicroMappingRegion createAssignmentRegion(@NonNull ReachabilityForest reachabilityForest, @NonNull Edge outputEdge, int partitionNumber) {
-		String namePrefix = "«edge" + partitionNumber + "»";
-		String symbolSuffix = "_p" + partitionNumber;
-		AssignmentPartition assignmentPartition = new AssignmentPartition(this, reachabilityForest, outputEdge);
-		MicroMappingRegion microMappingRegion = assignmentPartition.createMicroMappingRegion(namePrefix, symbolSuffix);
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		}
-		assignmentPartition.check(microMappingRegion);
-		return microMappingRegion;
+	private @NonNull AssignmentPartition createAssignmentPartition(@NonNull ReachabilityForest reachabilityForest, @NonNull Edge outputEdge) {
+		return new AssignmentPartition(this, reachabilityForest, outputEdge);
 	}
 
-	private @NonNull MicroMappingRegion createNewSpeculatedRegion(int partitionNumber) {
+	private @NonNull NewSpeculatedPartition createNewSpeculatedPartition() {
 		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		NewSpeculatedPartition speculatedPartition = new NewSpeculatedPartition(this, reachabilityForest);
-		MicroMappingRegion microMappingRegion = speculatedPartition.createMicroMappingRegion("«speculated»", "_p" + partitionNumber);
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		}
-		speculatedPartition.check(microMappingRegion);
-		return microMappingRegion;
+		return new NewSpeculatedPartition(this, reachabilityForest);
 	}
 
-	private @NonNull MicroMappingRegion createNewSpeculatingRegion(int partitionNumber, boolean isInfallible) {
+	private @NonNull NewSpeculatingPartition createNewSpeculatingPartition(boolean isInfallible) {
 		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		NewSpeculatingPartition speculatingPartition = new NewSpeculatingPartition(this, reachabilityForest, isInfallible);
-		MicroMappingRegion microMappingRegion = speculatingPartition.createMicroMappingRegion("«speculating»", "_p" + partitionNumber);
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		}
-		speculatingPartition.check(microMappingRegion);
-		return microMappingRegion;
+		return new NewSpeculatingPartition(this, reachabilityForest, isInfallible);
 	}
 
-	private @NonNull MicroMappingRegion createNewSpeculationRegion(int partitionNumber) {
+	private @NonNull NewSpeculationPartition createNewSpeculationPartition() {
 		ReachabilityForest reachabilityForest = new ReachabilityForest(getSpeculationReachabilityRootNodes(), getAvailableNavigableEdges());
-		NewSpeculationPartition speculationPartition = new NewSpeculationPartition(this, reachabilityForest);
-		MicroMappingRegion microMappingRegion = speculationPartition.createMicroMappingRegion("«speculation»", "_p" + partitionNumber);
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		}
-		speculationPartition.check(microMappingRegion);
-		return microMappingRegion;
+		return new NewSpeculationPartition(this, reachabilityForest);
 	}
 
-	private @NonNull MicroMappingRegion createRealizedRegion(int partitionNumber) {
+	private @NonNull NonPartition createNonPartition() {
+		return new NonPartition(this);
+	}
+
+	private @NonNull RealizedPartition createRealizedPartition() {
 		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		RealizedPartition realizedPartition = new RealizedPartition(this, reachabilityForest);
-		MicroMappingRegion microMappingRegion = realizedPartition.createMicroMappingRegion("«realized»", "_p" + partitionNumber);
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		}
-		realizedPartition.check(microMappingRegion);
-		return microMappingRegion;
+		return new RealizedPartition(this, reachabilityForest);
 	}
 
-	private @NonNull MicroMappingRegion createResidualRegion(int partitionNumber) {
+	private @NonNull ResidualPartition createResidualPartition() {
 		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		ResidualPartition realizedPartition = new ResidualPartition(this, reachabilityForest);
-		MicroMappingRegion microMappingRegion = realizedPartition.createMicroMappingRegion("«residue»", "_p" + partitionNumber);
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		}
-		realizedPartition.check(microMappingRegion);
-		return microMappingRegion;
+		return new ResidualPartition(this, reachabilityForest);
 	}
 
-	private @NonNull MicroMappingRegion createSpeculatedRegion(int partitionNumber) {
+	private @NonNull SpeculatedPartition createSpeculatedPartition() {
 		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		SpeculatedPartition speculatedPartition = new SpeculatedPartition(this, reachabilityForest);
-		MicroMappingRegion microMappingRegion = speculatedPartition.createMicroMappingRegion("«speculated»", "_p" + partitionNumber);
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		}
-		speculatedPartition.check(microMappingRegion);
-		return microMappingRegion;
+		return new SpeculatedPartition(this, reachabilityForest);
 	}
 
-	private @NonNull MicroMappingRegion createSpeculatingRegion(int partitionNumber) {
+	private @NonNull SpeculatingPartition createSpeculatingPartition() {
 		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		SpeculatingPartition speculatingPartition = new SpeculatingPartition(this, reachabilityForest);
-		MicroMappingRegion microMappingRegion = speculatingPartition.createMicroMappingRegion("«speculating»", "_p" + partitionNumber);
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		}
-		speculatingPartition.check(microMappingRegion);
-		return microMappingRegion;
+		return new SpeculatingPartition(this, reachabilityForest);
 	}
 
-	private @NonNull MicroMappingRegion createSpeculationRegion(int partitionNumber) {
+	private @NonNull SpeculationPartition createSpeculationPartition() {
 		ReachabilityForest reachabilityForest = new ReachabilityForest(getSpeculationReachabilityRootNodes(), getAvailableNavigableEdges());
-		SpeculationPartition speculationPartition = new SpeculationPartition(this, reachabilityForest);
-		MicroMappingRegion microMappingRegion = speculationPartition.createMicroMappingRegion("«speculation»", "_p" + partitionNumber);
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		}
-		//			>>>>>>> 4473ebf residue
-		speculationPartition.check(microMappingRegion);
-		return microMappingRegion;
+		return new SpeculationPartition(this, reachabilityForest);
 	}
 
 	//	public @NonNull Iterable<@NonNull Edge> getAlreadyPredicatedEdges() {
@@ -671,7 +610,7 @@ public class MappingPartitioner implements Nameable
 		return true;
 	} */
 
-	public @NonNull Iterable<@NonNull MappingRegion> partition() {
+	public @NonNull Iterable<@NonNull Partition> partition() {
 		boolean useActivators = scheduleManager.useActivators();
 		if (useActivators) {
 			return partition4qvtr();		// New algorithms with Dispatch/VerdictRegions to support overriding
@@ -681,20 +620,20 @@ public class MappingPartitioner implements Nameable
 		}
 	}
 
-	public @NonNull Iterable<@NonNull MappingRegion> partition4qvtc() {
+	public @NonNull Iterable<@NonNull Partition> partition4qvtc() {
 		boolean isCyclic = transformationAnalysis.getCycleAnalysis(regionAnalysis) != null;
-		List<@NonNull MappingRegion> newRegions = new ArrayList<>();
+		List<@NonNull Partition> newPartitions = new ArrayList<>();
 		if (!isCyclic) {	// Cycle analysis found no cycles
-			newRegions.add(region);
+			newPartitions.add(createNonPartition());
 		}
 		else {
 			if (!Iterables.isEmpty(getPredicatedMiddleNodes())) {
-				newRegions.add(createSpeculationRegion(newRegions.size()));
-				newRegions.add(createSpeculatingRegion(newRegions.size()));
-				newRegions.add(createSpeculatedRegion(newRegions.size()));
+				newPartitions.add(createSpeculationPartition());
+				newPartitions.add(createSpeculatingPartition());
+				newPartitions.add(createSpeculatedPartition());
 			}
 			else {
-				newRegions.add(createRealizedRegion(newRegions.size()));
+				newPartitions.add(createRealizedPartition());
 			}
 			ReachabilityForest assignmentReachabilityForest	= new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
 			//
@@ -702,7 +641,7 @@ public class MappingPartitioner implements Nameable
 			//
 			for (@NonNull NavigableEdge outputEdge : getRealizedOutputEdges()) {
 				if (!hasRealizedEdge(outputEdge)) {
-					newRegions.add(createAssignmentRegion(assignmentReachabilityForest, outputEdge, newRegions.size()));
+					newPartitions.add(createAssignmentPartition(assignmentReachabilityForest, outputEdge));
 				}
 			}
 			//
@@ -710,19 +649,19 @@ public class MappingPartitioner implements Nameable
 			//
 			for (@NonNull NavigableEdge edge : getRealizedEdges()) {
 				if (!hasRealizedEdge(edge)) {
-					newRegions.add(createAssignmentRegion(assignmentReachabilityForest, edge, newRegions.size()));
+					newPartitions.add(createAssignmentPartition(assignmentReachabilityForest, edge));
 				}
 			}
 		}
-		if (newRegions.size() > 1) {		// FIXME shouldn't this work anyway when no partitioning was needed?
+		if (newPartitions.size() > 1) {		// FIXME shouldn't this work anyway when no partitioning was needed?
 			check(false);
 		}
-		return newRegions;
+		return newPartitions;
 	}
 
-	public @NonNull Iterable<@NonNull MappingRegion> partition4qvtr() {
+	public @NonNull Iterable<@NonNull Partition> partition4qvtr() {
 		if ((region instanceof DispatchRegion) || (region instanceof VerdictRegion)) {
-			return Collections.singletonList(region);
+			return Collections.singletonList(createNonPartition());
 		}
 		String name = region.getName();
 		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(name)) {
@@ -747,38 +686,38 @@ public class MappingPartitioner implements Nameable
 		//
 		//	Create the partitioned regions
 		//
-		List<@NonNull MappingRegion> newRegions = new ArrayList<>();
+		List<@NonNull Partition> newPartitions = new ArrayList<>();
 		if (needsActivator) {
 			//
 			//	Create an activator to make a QVTr top relation behave as a non-top relation.
 			//
-			newRegions.add(createActivatorRegion(newRegions.size()));
+			newPartitions.add(createActivatorPartition());
 		}
 		if (!needsSpeculation) {
 			//
 			//	If speculation is not needed just add the functionality as a single region.
 			//
-			if (newRegions.isEmpty()) {		// i.e. a QVTr non top relation - re-use as is
-				newRegions.add(region);
+			if (newPartitions.isEmpty()) {		// i.e. a QVTr non top relation - re-use as is
+				newPartitions.add(createNonPartition());
 			}
 			else {							// i.e. a QVTr top relation - create a residue to finish off the activator
-				newRegions.add(createResidualRegion(newRegions.size()));
+				newPartitions.add(createResidualPartition());
 			}
 		}
 		else {								// cycles may need speculation and partitioning into isolated actions
 			//			if (isInfallible) {
 			//				regionAnalysis.getFallibilities()
 			//			}
-			newRegions.add(createNewSpeculationRegion(newRegions.size()));
-			newRegions.add(createNewSpeculatingRegion(newRegions.size(), isInfallible));
-			newRegions.add(createNewSpeculatedRegion(newRegions.size()));
+			newPartitions.add(createNewSpeculationPartition());
+			newPartitions.add(createNewSpeculatingPartition(isInfallible));
+			newPartitions.add(createNewSpeculatedPartition());
 			ReachabilityForest assignmentReachabilityForest	= new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
 			//
 			//	Create an AssignmentRegion for each to-be-realized edge to an output, which may also realize most trace edges too.
 			//
 			for (@NonNull NavigableEdge outputEdge : getRealizedOutputEdges()) {
 				if (!hasRealizedEdge(outputEdge)) {
-					newRegions.add(createAssignmentRegion(assignmentReachabilityForest, outputEdge, newRegions.size()));
+					newPartitions.add(createAssignmentPartition(assignmentReachabilityForest, outputEdge));
 				}
 			}
 			//
@@ -786,14 +725,14 @@ public class MappingPartitioner implements Nameable
 			//
 			for (@NonNull NavigableEdge edge : getRealizedEdges()) {
 				if (!hasRealizedEdge(edge)) {
-					newRegions.add(createAssignmentRegion(assignmentReachabilityForest, edge, newRegions.size()));
+					newPartitions.add(createAssignmentPartition(assignmentReachabilityForest, edge));
 				}
 			}
 		}
-		if (newRegions.size() > 1) {		// FIXME shouldn't this work anyway when no partitioning was needed?
+		if (newPartitions.size() > 1) {		// FIXME shouldn't this work anyway when no partitioning was needed?
 			check(isInfallible);
 		}
-		return newRegions;
+		return newPartitions;
 	}
 
 	@Override

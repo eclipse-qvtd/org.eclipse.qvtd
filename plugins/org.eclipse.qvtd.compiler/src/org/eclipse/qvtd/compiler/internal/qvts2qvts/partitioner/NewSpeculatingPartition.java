@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
@@ -87,6 +88,11 @@ class NewSpeculatingPartition extends AbstractPartition
 		//	Join up the edges.
 		//
 		resolveEdges();
+	}
+
+	@Override
+	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
+		return createMicroMappingRegion("«speculating»", "_p" + partitionNumber);
 	}
 
 	@Override

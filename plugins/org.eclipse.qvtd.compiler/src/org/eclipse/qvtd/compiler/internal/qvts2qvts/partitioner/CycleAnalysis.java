@@ -75,21 +75,21 @@ public class CycleAnalysis
 		return isInfallible2;
 	}
 
-	public @NonNull Iterable<@NonNull MappingRegion> partition(@NonNull Iterable<@NonNull MappingPartitioner> orderedMappingPartitioners) {
-		List<@NonNull MappingRegion> partitionedRegions = new ArrayList<>();
+	public @NonNull Iterable<@NonNull Partition> partition(@NonNull Iterable<@NonNull MappingPartitioner> orderedMappingPartitioners) {
+		List<@NonNull Partition> partitions = new ArrayList<>();
 		for (@NonNull MappingPartitioner mappingPartitioner : orderedMappingPartitioners) {
 			RegionAnalysis regionAnalysis = mappingPartitioner.getRegionAnalysis();
 			if (regionAnalyses.contains(regionAnalysis)) {
 				MappingRegion oldRegion = mappingPartitioner.getRegion();
 				ScheduledRegion scheduledRegion = oldRegion.getScheduledRegion();
-				Iterable<@NonNull MappingRegion> newRegions = mappingPartitioner.partition();
-				oldRegion.setScheduledRegion(null);
-				for (@NonNull MappingRegion newRegion : newRegions) {
-					newRegion.setScheduledRegion(scheduledRegion);
-				}
-				Iterables.addAll(partitionedRegions, newRegions);
+				Iterable<@NonNull Partition> newPartitions = mappingPartitioner.partition();
+				//	oldRegion.setScheduledRegion(null);
+				//	for (@NonNull MappingRegion newRegion : newRegions) {
+				//		newRegion.setScheduledRegion(scheduledRegion);
+				//	}
+				Iterables.addAll(partitions, newPartitions);
 			}
 		}
-		return partitionedRegions;
+		return partitions;
 	}
 }
