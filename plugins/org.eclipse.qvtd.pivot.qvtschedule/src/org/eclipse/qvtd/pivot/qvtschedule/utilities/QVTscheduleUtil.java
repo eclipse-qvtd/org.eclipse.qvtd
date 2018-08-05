@@ -676,6 +676,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(scheduleModel.getOwnedScheduledRegions());
 	}
 
+	public static @NonNull ClassDatum getOwningClassDatum(@NonNull PropertyDatum propertyDatum) {
+		return ClassUtil.nonNullState(propertyDatum.getOwningClassDatum());
+	}
+
 	public static @NonNull Region getOwningRegion(@NonNull ConnectionEnd connectionEnd) {
 		return ClassUtil.nonNullState(connectionEnd.getOwningRegion());
 	}

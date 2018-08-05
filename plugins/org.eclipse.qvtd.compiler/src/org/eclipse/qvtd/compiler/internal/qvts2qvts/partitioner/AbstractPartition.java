@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleHeadAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
@@ -45,6 +46,7 @@ abstract class AbstractPartition implements Partition
 	protected final @NonNull MappingPartitioner partitioner;
 	protected final @NonNull MappingRegion region;
 	protected final @NonNull RegionAnalysis regionAnalysis;
+	protected final @NonNull TransformationAnalysis transformationAnalysis;
 	protected final @NonNull String name;
 
 	/**
@@ -73,6 +75,7 @@ abstract class AbstractPartition implements Partition
 		this.partitioner = partitioner;
 		this.region = partitioner.getRegion();
 		this.regionAnalysis = partitioner.getRegionAnalysis();
+		this.transformationAnalysis = regionAnalysis.getTransformationAnalysis();
 		this.name = QVTscheduleUtil.getName(region);
 		this.reachabilityForest = reachabilityForest;
 	}

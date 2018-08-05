@@ -81,6 +81,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToCallGraphVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToRegionGraphVisitor;
@@ -891,39 +892,46 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public void writeDebugGraphs(@NonNull Region region, @Nullable String context) {
+	public void writeDebugGraphs(@NonNull Graphable graphable, @Nullable String context) {
 		if (doDotGraphs || doYedGraphs) {
 			String suffix = context != null ? "-" + context : null;
-			writeDOTfile(region, suffix);
-			writeGraphMLfile(region, suffix);
+			writeDOTfile(graphable, suffix);
+			writeGraphMLfile(graphable, suffix);
 		}
 	}
 
 
-	public void writeDOTfile(@NonNull Region region, @Nullable String suffix) {
+	public void writeDOTfile(@NonNull Graphable graphable, @Nullable String suffix) {
 		if (doDotGraphs) {
 			URI baseURI = getGraphsBaseURI();
-			String symbolName = region.getSymbolName();
+			String symbolName = graphable.getSymbolName();
 			if (suffix != null) {
 				symbolName = symbolName + suffix;
 			}
 			URI dotURI = URI.createURI(symbolName + ".dot").resolve(baseURI);
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
-				DOTStringBuilder s = new DOTStringBuilder();
-				region.toGraph(s);
-				outputStream.write(s.toString().getBytes());
-				outputStream.close();
+				try {
+					DOTStringBuilder s = new DOTStringBuilder();
+					graphable.toGraph(s);
+					outputStream.write(s.toString().getBytes());
+				}
+				finally {
+					try {
+						outputStream.close();
+					}
+					catch (Throwable e) {}
+				}
 			} catch (IOException e) {
 				System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 			}
 		}
 	}
 
-	public void writeGraphMLfile(@NonNull Region region, @Nullable String suffix) {
+	public void writeGraphMLfile(@NonNull Graphable graphable, @Nullable String suffix) {
 		if (doYedGraphs) {
 			URI baseURI = getGraphsBaseURI();
-			String symbolName = region.getSymbolName();
+			String symbolName = graphable.getSymbolName();
 			if (suffix != null) {
 				symbolName = symbolName + suffix;
 			}
@@ -931,9 +939,16 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 				GraphMLStringBuilder s = new GraphMLStringBuilder();
-				region.toGraph(s);
-				outputStream.write(s.toString().getBytes());
-				outputStream.close();
+				try {
+					graphable.toGraph(s);
+					outputStream.write(s.toString().getBytes());
+				}
+				finally {
+					try {
+						outputStream.close();
+					}
+					catch (Throwable e) {}
+				}
 			} catch (IOException e) {
 				System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 			}
@@ -946,10 +961,17 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_")*/ + suffix + ".dot").resolve(baseURI);
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
-				ToRegionGraphVisitor visitor = new ToRegionGraphVisitor(new DOTStringBuilder());
-				String s = visitor.visit(region);
-				outputStream.write(s.getBytes());
-				outputStream.close();
+				try {
+					ToRegionGraphVisitor visitor = new ToRegionGraphVisitor(new DOTStringBuilder());
+					String s = visitor.visit(region);
+					outputStream.write(s.getBytes());
+				}
+				finally {
+					try {
+						outputStream.close();
+					}
+					catch (Throwable e) {}
+				}
 			} catch (IOException e) {
 				System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 			}
@@ -967,10 +989,17 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_")*/ + suffix + ".graphml").resolve(baseURI);
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
-				ToRegionGraphVisitor visitor = new ToRegionGraphVisitor(new GraphMLStringBuilder());
-				String s = visitor.visit(region);
-				outputStream.write(s.getBytes());
-				outputStream.close();
+				try {
+					ToRegionGraphVisitor visitor = new ToRegionGraphVisitor(new GraphMLStringBuilder());
+					String s = visitor.visit(region);
+					outputStream.write(s.getBytes());
+				}
+				finally {
+					try {
+						outputStream.close();
+					}
+					catch (Throwable e) {}
+				}
 			} catch (IOException e) {
 				System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 			}

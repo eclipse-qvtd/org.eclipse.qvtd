@@ -47,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
 
 public interface ScheduleManager
 {
@@ -161,6 +162,6 @@ public interface ScheduleManager
 	 * Eeturn true to use the new QVTr ActivatorRegion support, false to retain the older, one day obsolete support.
 	 */
 	boolean useActivators();
-	void writeDebugGraphs(@NonNull Region region, @Nullable String context);
+	void writeDebugGraphs(@NonNull Graphable graphable, @Nullable String context);
 	void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph);
 }

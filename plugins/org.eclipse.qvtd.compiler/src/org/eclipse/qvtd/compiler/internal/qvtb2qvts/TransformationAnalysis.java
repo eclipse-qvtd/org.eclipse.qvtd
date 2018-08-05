@@ -40,6 +40,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -352,6 +353,33 @@ public class TransformationAnalysis extends QVTbaseHelper implements Nameable
 			transformationAnalysis2tracePackage = transformationAnalysis2tracePackage2 = scheduleManager.createTransformationAnalysis2TracePackage(this);
 		}
 		return transformationAnalysis2tracePackage2;
+	}
+
+	/**
+	 * Return true if node is a corollary of some mapping.
+	 */
+	public boolean isCorollary(@NonNull Node node) {
+		if (node.isPredicated()) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+				if (edge.isPredicated() && !edge.isSecondary() && (edge instanceof NavigableEdge)) {
+					List<@NonNull Region> corollaryOf = getCorollaryOf((NavigableEdge)edge);
+					if (corollaryOf != null) {
+						return true;
+					}
+				}
+			}
+		}
+		else if (node.isRealized()) {
+			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+				if (edge.isRealized() && !edge.isSecondary() && (edge instanceof NavigableEdge)) {
+					List<@NonNull Region> corollaryOf = getCorollaryOf((NavigableEdge)edge);
+					if (corollaryOf != null) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	public boolean isCyclic(@NonNull ClassDatum traceClassDatum) {

@@ -81,7 +81,7 @@ class SpeculatingPartition extends AbstractPartition
 	}
 
 	private boolean isDownstreamFromCorollary(@NonNull Node node) {
-		if (regionAnalysis.isCorollary(node)) {
+		if (transformationAnalysis.isCorollary(node)) {
 			return true;
 		}
 		if (node.isOperation()) {
@@ -176,7 +176,7 @@ class SpeculatingPartition extends AbstractPartition
 
 	protected void resolvePredicatedOutputNodes() {
 		for (@NonNull Node node : partitioner.getPredicatedOutputNodes()) {
-			if (!hasNode(node) && !regionAnalysis.isCorollary(node) && !isDownstreamFromCorollary(node)) {
+			if (!hasNode(node) && !transformationAnalysis.isCorollary(node) && !isDownstreamFromCorollary(node)) {
 				addNode(node, QVTscheduleUtil.getNodeRole(node));
 			}
 		}

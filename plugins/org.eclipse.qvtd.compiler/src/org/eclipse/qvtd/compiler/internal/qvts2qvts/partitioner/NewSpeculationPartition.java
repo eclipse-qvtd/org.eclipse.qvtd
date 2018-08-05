@@ -81,7 +81,7 @@ class NewSpeculationPartition extends AbstractPartition
 			}
 		}
 		for (@NonNull Node node : checkableOldNodes) {
-			boolean isCyclicCorollary = regionAnalysis.isCorollary(node) && partitioner.isCyclic(node);  // waiting for a cyclic corollary could deadlock
+			boolean isCyclicCorollary = transformationAnalysis.isCorollary(node) && partitioner.isCyclic(node);  // waiting for a cyclic corollary could deadlock
 			//			boolean isPredicated = node.isPredicated();
 			//			boolean isMatched = node.isMatched();
 			//			boolean isUnconditional = node.isUnconditional();

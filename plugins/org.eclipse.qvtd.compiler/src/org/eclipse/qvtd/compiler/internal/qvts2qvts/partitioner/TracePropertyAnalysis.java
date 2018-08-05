@@ -10,11 +10,14 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -36,9 +39,22 @@ public class TracePropertyAnalysis extends TraceElementAnalysis
 		return tracePropertyDatum.getName();
 	}
 
-	public Iterable getSuperTracePropertyAnalyses() {
-		// TODO Auto-generated method stub
-		return Collections.emptyList();			// FIXME
+	public @NonNull Iterable<@NonNull TracePropertyAnalysis> getSuperTracePropertyAnalyses() {
+		List<@NonNull TracePropertyAnalysis> tracePropertyAnalyses = new ArrayList<>();
+		ClassDatum traceClassDatum = QVTscheduleUtil.getOwningClassDatum(tracePropertyDatum);
+		TraceClassAnalysis traceClassAnalysis = transformationAnalysis.getTraceClassAnalysis(traceClassDatum);
+		for (@NonNull TraceClassAnalysis superTraceClassAnalysis : traceClassAnalysis.getSuperTraceClassAnalyses()) {
+			ClassDatum superTraceClassDatum = superTraceClassAnalysis.getClassDatum();
+			PropertyDatum propertyDatum = NameUtil.getNameable(superTraceClassDatum.getOwnedPropertyDatums(), getName());
+			if (propertyDatum != null) {
+				TracePropertyAnalysis tracePropertyAnalysis = transformationAnalysis.getTracePropertyAnalysis(propertyDatum);
+				if (!tracePropertyAnalyses.contains(tracePropertyAnalysis)) {
+					tracePropertyAnalyses.add(tracePropertyAnalysis);
+				}
+			}
+		}
+		assert tracePropertyAnalyses.contains(this);
+		return tracePropertyAnalyses;
 	}
 
 	public @NonNull Property getTraceProperty() {

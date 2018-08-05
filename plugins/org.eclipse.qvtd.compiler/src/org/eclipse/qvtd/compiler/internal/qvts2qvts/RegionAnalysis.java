@@ -882,31 +882,8 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region>implements Name
 		return traceNodes;
 	}
 
-	/**
-	 * Return true if node is a corollary of some mapping.
-	 */
-	public boolean isCorollary(@NonNull Node node) {
-		if (node.isPredicated()) {
-			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-				if (edge.isPredicated() && (edge instanceof NavigableEdge)) {
-					List<@NonNull Region> corollaryOf = transformationAnalysis.getCorollaryOf((NavigableEdge)edge);
-					if (corollaryOf != null) {
-						return true;
-					}
-				}
-			}
-		}
-		else if (node.isRealized()) {
-			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-				if (edge.isRealized() && (edge instanceof NavigableEdge)) {
-					List<@NonNull Region> corollaryOf = transformationAnalysis.getCorollaryOf((NavigableEdge)edge);
-					if (corollaryOf != null) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
+	public @NonNull TransformationAnalysis getTransformationAnalysis() {
+		return transformationAnalysis;
 	}
 
 	public void setFallibilities(@NonNull Iterable<@NonNull RegionAnalysis> fallibilities) {
