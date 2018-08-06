@@ -10,21 +10,15 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-
-import com.google.common.collect.Iterables;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
 
 /**
  * Each CycleAnalysis identifies one group of regionAnalyses that contribute to a cycle.
  */
-public abstract class CycleAnalysis<RA extends RegionAnalysis>
+public abstract class CycleAnalysis<RA extends PartialRegionAnalysis<@NonNull RA>>
 {
 	protected final @NonNull CyclesAnalysis<@NonNull RA> cyclesAnalysis;
 	protected final @NonNull Set<@NonNull RA> regionAnalyses;
@@ -51,23 +45,5 @@ public abstract class CycleAnalysis<RA extends RegionAnalysis>
 
 	public @NonNull Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> getTracePropertyAnalyses() {
 		return tracePropertyAnalyses;
-	}
-
-	public @NonNull Iterable<@NonNull Partition> partition(@NonNull Iterable<@NonNull MappingPartitioner> orderedMappingPartitioners) {
-		List<@NonNull Partition> partitions = new ArrayList<>();
-		for (@NonNull MappingPartitioner mappingPartitioner : orderedMappingPartitioners) {
-			RegionAnalysis regionAnalysis = mappingPartitioner.getRegionAnalysis();
-			if (regionAnalyses.contains(regionAnalysis)) {
-				MappingRegion oldRegion = mappingPartitioner.getRegion();
-				ScheduledRegion scheduledRegion = oldRegion.getScheduledRegion();
-				Iterable<@NonNull Partition> newPartitions = mappingPartitioner.partition();
-				//	oldRegion.setScheduledRegion(null);
-				//	for (@NonNull MappingRegion newRegion : newRegions) {
-				//		newRegion.setScheduledRegion(scheduledRegion);
-				//	}
-				Iterables.addAll(partitions, newPartitions);
-			}
-		}
-		return partitions;
 	}
 }

@@ -212,9 +212,9 @@ public class TransformationPartitioner
 		//	Perform per-mapping partitioning
 		//
 		List<@NonNull Partition> partitions = new ArrayList<>();
-		Set<@NonNull CycleAnalysis<RegionAnalysis>> partitionedCycles = new HashSet<>();
+		Set<@NonNull CycleAnalysis<@NonNull RegionAnalysis>> partitionedCycles = new HashSet<>();
 		for (@NonNull MappingPartitioner mappingPartitioner : mappingPartitioners) {
-			CycleAnalysis<RegionAnalysis> cycleAnalysis = transformationAnalysis.getCycleAnalysis(mappingPartitioner.getRegionAnalysis());
+			CycleRegionAnalysis cycleAnalysis = transformationAnalysis.getCycleAnalysis(mappingPartitioner.getRegionAnalysis());
 			if (Iterables.isEmpty(mappingPartitioner.getTraceNodes())) {
 				partitions.add(new NonPartition(mappingPartitioner));
 			}

@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
@@ -43,7 +42,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
 
-public class RegionAnalysis extends RegionHelper<@NonNull Region>implements Nameable
+public class RegionAnalysis extends RegionHelper<@NonNull Region> implements PartialRegionAnalysis<@NonNull RegionAnalysis>
 {
 	protected final @NonNull TransformationAnalysis transformationAnalysis;
 	//	protected final @NonNull ScheduleManager scheduleManager;
@@ -743,10 +742,12 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region>implements Name
 		return constantOutputNodes;
 	}
 
+	@Override
 	public @Nullable Iterable<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> getConsumedTraceClassAnalyses() {
 		return consumedTraceClassAnalyses;
 	}
 
+	@Override
 	public @Nullable Iterable<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> getConsumedTracePropertyAnalyses() {
 		return consumedTracePropertyAnalyses;
 	}
@@ -798,10 +799,12 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region>implements Name
 		return predicatedOutputNodes;
 	}
 
+	@Override
 	public @Nullable Iterable<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> getProducedTraceClassAnalyses() {
 		return producedTraceClassAnalyses;
 	}
 
+	@Override
 	public @Nullable Iterable<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> getProducedTracePropertyAnalyses() {
 		return producedTracePropertyAnalyses;
 	}
@@ -845,6 +848,7 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region>implements Name
 		return successEdge != null ? successEdge.getTargetNode() : null;
 	}
 
+	@Override
 	public @Nullable Iterable<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> getSuperProducedTraceClassAnalyses() {
 		List<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
 		if (producedTraceClassAnalyses2 != null) {
@@ -859,6 +863,7 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region>implements Name
 		return superProducedTraceClassAnalyses;
 	}
 
+	@Override
 	public @Nullable Iterable<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> getSuperProducedTracePropertyAnalyses() {
 		List<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> producedTracePropertyAnalyses2 = producedTracePropertyAnalyses;
 		if (producedTracePropertyAnalyses2 != null) {
@@ -867,16 +872,27 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region>implements Name
 				superProducedTracePropertyAnalyses2 = superProducedTracePropertyAnalyses = new HashSet<>();
 			}
 			for (@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis> producedTracePropertyAnalysis : producedTracePropertyAnalyses2) {
-				Iterables.addAll(superProducedTracePropertyAnalyses2, producedTracePropertyAnalysis.getSuperTracePropertyAnalyses());
+				Iterables.addAll(superProducedTracePropertyAnalyses2, producedTracePropertyAnalysis.getSuperTracePropertyAnalyses(this));
 			}
 		}
 		return superProducedTracePropertyAnalyses;
+	}
+
+	@Override
+	public @NonNull TraceClassAnalysis<@NonNull RegionAnalysis> getTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
+		return transformationAnalysis.getTraceClassAnalysis(traceClassDatum);
+	}
+
+	@Override
+	public @NonNull TracePropertyAnalysis<@NonNull RegionAnalysis> getTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
+		return transformationAnalysis.getTracePropertyAnalysis(propertyDatum);
 	}
 
 	public @Nullable Edge getTraceEdge(@NonNull Node node) {
 		return node2traceEdge.get(node);
 	}
 
+	@Override
 	public @NonNull List<@NonNull Node> getTraceNodes() {
 		return traceNodes;
 	}

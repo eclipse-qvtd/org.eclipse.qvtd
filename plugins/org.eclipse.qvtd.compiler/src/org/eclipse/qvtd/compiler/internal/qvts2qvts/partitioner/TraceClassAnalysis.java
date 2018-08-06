@@ -25,7 +25,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -37,7 +37,7 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractDispatch;
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class.
  */
-public abstract class TraceClassAnalysis<RA extends RegionAnalysis> extends TraceElementAnalysis<RA>
+public abstract class TraceClassAnalysis<RA extends PartialRegionAnalysis<@NonNull RA>> extends TraceElementAnalysis<RA>
 {
 	protected final @NonNull ClassDatum traceClassDatum;
 

@@ -22,7 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 
@@ -32,7 +32,7 @@ import com.google.common.collect.Lists;
 /**
  * The CyclesAnalysis identifies a CycleAnalysis for each group of regionAnalyses that contribute to a cycle.
  */
-public abstract class CyclesAnalysis<RA extends RegionAnalysis>
+public abstract class CyclesAnalysis<RA extends PartialRegionAnalysis<@NonNull RA>>
 {
 	protected final @NonNull TransformationAnalysis transformationAnalysis;
 	protected final @NonNull Iterable<@NonNull RA> regionAnalyses;
@@ -124,8 +124,7 @@ public abstract class CyclesAnalysis<RA extends RegionAnalysis>
 			consumer2producers.put(regionAnalysis, new HashSet<>());
 		}
 		for (@NonNull RA consumer : regionAnalyses) {
-			@SuppressWarnings("unchecked")
-			Iterable<@NonNull ? extends TraceClassAnalysis<@NonNull RA>> consumedTraceClassAnalyses = (Iterable<@NonNull ? extends TraceClassAnalysis<@NonNull RA>>)(Object)consumer.getConsumedTraceClassAnalyses();
+			Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> consumedTraceClassAnalyses = consumer.getConsumedTraceClassAnalyses();
 			if (consumedTraceClassAnalyses != null) {
 				for (@NonNull TraceClassAnalysis<@NonNull RA> consumedTraceClassAnalysis : consumedTraceClassAnalyses) {
 					for (@NonNull TraceClassAnalysis<@NonNull RA> subConsumedTraceClass : consumedTraceClassAnalysis.getSubTraceClassAnalyses()) {
@@ -137,8 +136,7 @@ public abstract class CyclesAnalysis<RA extends RegionAnalysis>
 					}
 				}
 			}
-			@SuppressWarnings("unchecked")
-			Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> consumedTracePropertyAnalyses = (Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>>)(Object)consumer.getConsumedTracePropertyAnalyses();
+			Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> consumedTracePropertyAnalyses = consumer.getConsumedTracePropertyAnalyses();
 			if (consumedTracePropertyAnalyses != null) {
 				for (@NonNull TracePropertyAnalysis<@NonNull RA> consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
 					for (@NonNull RA producer : consumedTracePropertyAnalysis.getProducers()) {
@@ -186,8 +184,7 @@ public abstract class CyclesAnalysis<RA extends RegionAnalysis>
 			producer2consumers.put(regionAnalysis, new HashSet<>());
 		}
 		for (@NonNull RA producer : regionAnalyses) {
-			@SuppressWarnings("unchecked")
-			Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> producedTraceClassAnalyses = (Iterable<@NonNull TraceClassAnalysis<@NonNull RA>>)(Object)producer.getProducedTraceClassAnalyses();
+			Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> producedTraceClassAnalyses = producer.getProducedTraceClassAnalyses();
 			if (producedTraceClassAnalyses != null) {
 				for (@NonNull TraceClassAnalysis<@NonNull RA> producedTraceClassAnalysis : producedTraceClassAnalyses) {
 					for (@NonNull TraceClassAnalysis<@NonNull RA> superProducedTraceClassAnalysis : producedTraceClassAnalysis.getSuperTraceClassAnalyses()) {
@@ -199,8 +196,7 @@ public abstract class CyclesAnalysis<RA extends RegionAnalysis>
 					}
 				}
 			}
-			@SuppressWarnings("unchecked")
-			Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> producedTracePropertyAnalyses = (Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>>)(Object)producer.getProducedTracePropertyAnalyses();
+			Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> producedTracePropertyAnalyses = producer.getProducedTracePropertyAnalyses();
 			if (producedTracePropertyAnalyses != null) {
 				for (@NonNull TracePropertyAnalysis<@NonNull RA> producedTracePropertyAnalysis : producedTracePropertyAnalyses) {
 					for (@NonNull RA consumer : producedTracePropertyAnalysis.getConsumers()) {
@@ -225,12 +221,12 @@ public abstract class CyclesAnalysis<RA extends RegionAnalysis>
 		}
 		Map<@NonNull RA, @NonNull Set<@NonNull RA>> producer2consumersClosure = CompilerUtil.computeClosure(producer2consumers);
 		if (TransformationPartitioner.SUCCESSORS.isActive()) {
-			for (@NonNull RegionAnalysis predecessor : regionAnalyses) {
+			for (@NonNull RA predecessor : regionAnalyses) {
 				StringBuilder s = new StringBuilder();
 				s.append(predecessor + ":");
-				List<@NonNull RegionAnalysis> consumers = new ArrayList<>(producer2consumersClosure.get(predecessor));
+				List<@NonNull RA> consumers = new ArrayList<>(producer2consumersClosure.get(predecessor));
 				Collections.sort(consumers, NameUtil.NAMEABLE_COMPARATOR);
-				for (@NonNull RegionAnalysis consumer : consumers) {
+				for (@NonNull RA consumer : consumers) {
 					s.append(" " + consumer);
 				}
 				TransformationPartitioner.SUCCESSORS.println(s.toString());
@@ -258,27 +254,27 @@ public abstract class CyclesAnalysis<RA extends RegionAnalysis>
 					Collections.sort(regionAnalyses2, NameUtil.NAMEABLE_COMPARATOR);
 					for (@NonNull RA regionAnalysis : regionAnalyses2) {
 						s.append("\n\t" + regionAnalysis);
-						Iterable<@NonNull ? extends TraceClassAnalysis<@NonNull RegionAnalysis>> consumedTraceClassAnalyses = regionAnalysis.getConsumedTraceClassAnalyses();
+						Iterable<@NonNull ? extends TraceClassAnalysis<@NonNull RA>> consumedTraceClassAnalyses = regionAnalysis.getConsumedTraceClassAnalyses();
 						if (consumedTraceClassAnalyses != null) {
-							for (@NonNull TraceClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis : consumedTraceClassAnalyses) {
+							for (@NonNull TraceClassAnalysis<@NonNull RA> traceClassAnalysis : consumedTraceClassAnalyses) {
 								s.append("\n\t  =>" + traceClassAnalysis);
 							}
 						}
-						Iterable<@NonNull ? extends TraceClassAnalysis<@NonNull RegionAnalysis>> producedTraceClassAnalyses = regionAnalysis.getProducedTraceClassAnalyses();
+						Iterable<@NonNull ? extends TraceClassAnalysis<@NonNull RA>> producedTraceClassAnalyses = regionAnalysis.getProducedTraceClassAnalyses();
 						if (producedTraceClassAnalyses != null) {
-							for (@NonNull TraceClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis : producedTraceClassAnalyses) {
+							for (@NonNull TraceClassAnalysis<@NonNull RA> traceClassAnalysis : producedTraceClassAnalyses) {
 								s.append("\n\t  <=" + traceClassAnalysis);
 							}
 						}
-						Iterable<@NonNull ? extends TracePropertyAnalysis<@NonNull RegionAnalysis>> consumedTracePropertyAnalyses = regionAnalysis.getConsumedTracePropertyAnalyses();
+						Iterable<@NonNull ? extends TracePropertyAnalysis<@NonNull RA>> consumedTracePropertyAnalyses = regionAnalysis.getConsumedTracePropertyAnalyses();
 						if (consumedTracePropertyAnalyses != null) {
-							for (@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis> tracePropertyAnalysis : consumedTracePropertyAnalyses) {
+							for (@NonNull TracePropertyAnalysis<@NonNull RA> tracePropertyAnalysis : consumedTracePropertyAnalyses) {
 								s.append("\n\t  =>" + tracePropertyAnalysis);
 							}
 						}
-						Iterable<@NonNull ? extends TracePropertyAnalysis<@NonNull RegionAnalysis>> producedTracePropertyAnalyses = regionAnalysis.getProducedTracePropertyAnalyses();
+						Iterable<@NonNull ? extends TracePropertyAnalysis<@NonNull RA>> producedTracePropertyAnalyses = regionAnalysis.getProducedTracePropertyAnalyses();
 						if (producedTracePropertyAnalyses != null) {
-							for (@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis> tracePropertyAnalysis : producedTracePropertyAnalyses) {
+							for (@NonNull TracePropertyAnalysis<@NonNull RA> tracePropertyAnalysis : producedTracePropertyAnalyses) {
 								s.append("\n\t  <=" + tracePropertyAnalysis);
 							}
 						}
@@ -306,18 +302,15 @@ public abstract class CyclesAnalysis<RA extends RegionAnalysis>
 		Set<@NonNull TraceClassAnalysis<@NonNull RA>> superProducedTraceClassAnalyses = new HashSet<>();
 		Set<@NonNull TracePropertyAnalysis<@NonNull RA>> consumedTracePropertyAnalyses = new HashSet<>();
 		for (@NonNull RA cyclicRegionAnalysis : cyclicRegionAnalyses) {
-			@SuppressWarnings("unchecked")
-			Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> consumedTraceClassAnalyses2 = (Iterable<@NonNull TraceClassAnalysis<@NonNull RA>>)(Object)cyclicRegionAnalysis.getConsumedTraceClassAnalyses();
+			Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> consumedTraceClassAnalyses2 = cyclicRegionAnalysis.getConsumedTraceClassAnalyses();
 			if (consumedTraceClassAnalyses2 != null) {
 				Iterables.addAll(consumedTraceClassAnalyses, consumedTraceClassAnalyses2);
 			}
-			@SuppressWarnings("unchecked")
-			Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> superProducedTraceClassAnalyses2 = (Iterable<@NonNull TraceClassAnalysis<@NonNull RA>>)(Object)cyclicRegionAnalysis.getSuperProducedTraceClassAnalyses();
+			Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> superProducedTraceClassAnalyses2 = cyclicRegionAnalysis.getSuperProducedTraceClassAnalyses();
 			if (superProducedTraceClassAnalyses2 != null) {
 				Iterables.addAll(superProducedTraceClassAnalyses, superProducedTraceClassAnalyses2);
 			}
-			@SuppressWarnings("unchecked")
-			Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> consumedTracePropertyAnalyses2 = (Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>>)(Object)cyclicRegionAnalysis.getConsumedTracePropertyAnalyses();
+			Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> consumedTracePropertyAnalyses2 = cyclicRegionAnalysis.getConsumedTracePropertyAnalyses();
 			if (consumedTracePropertyAnalyses2 != null) {
 				Iterables.addAll(consumedTracePropertyAnalyses, consumedTracePropertyAnalyses2);
 			}

@@ -16,12 +16,12 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
 
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class or property.
  */
-public abstract class TraceElementAnalysis<RA extends RegionAnalysis> implements Nameable
+public abstract class TraceElementAnalysis<RA extends PartialRegionAnalysis<@NonNull RA>> implements Nameable
 {
 	protected final @NonNull TransformationAnalysis transformationAnalysis;
 

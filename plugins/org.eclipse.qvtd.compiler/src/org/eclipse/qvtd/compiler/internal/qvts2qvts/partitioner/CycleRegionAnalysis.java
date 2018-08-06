@@ -10,18 +10,23 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+
+import com.google.common.collect.Iterables;
 
 /**
  * Each CycleAnalysis identifies one group of regionAnalyses that contribute to a cycle.
  */
 public class CycleRegionAnalysis extends CycleAnalysis<@NonNull RegionAnalysis>
 {
-	private @Nullable Boolean isInfallible = null;
+	//	private @Nullable Boolean isInfallible = null;
 
 	public CycleRegionAnalysis(@NonNull CyclesAnalysis<@NonNull RegionAnalysis> cyclesAnalysis, @NonNull Set<@NonNull RegionAnalysis> regionAnalyses,
 			@NonNull Set<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> traceClassAnalyses, @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> tracePropertyAnalyses) {
@@ -46,4 +51,22 @@ public class CycleRegionAnalysis extends CycleAnalysis<@NonNull RegionAnalysis>
 		}
 		return isInfallible2;
 	} */
+
+	public @NonNull Iterable<@NonNull Partition> partition(@NonNull Iterable<@NonNull MappingPartitioner> orderedMappingPartitioners) {
+		List<@NonNull Partition> partitions = new ArrayList<>();
+		for (@NonNull MappingPartitioner mappingPartitioner : orderedMappingPartitioners) {
+			RegionAnalysis regionAnalysis = mappingPartitioner.getRegionAnalysis();
+			if (regionAnalyses.contains(regionAnalysis)) {
+				MappingRegion oldRegion = mappingPartitioner.getRegion();
+				ScheduledRegion scheduledRegion = oldRegion.getScheduledRegion();
+				Iterable<@NonNull Partition> newPartitions = mappingPartitioner.partition();
+				//	oldRegion.setScheduledRegion(null);
+				//	for (@NonNull MappingRegion newRegion : newRegions) {
+				//		newRegion.setScheduledRegion(scheduledRegion);
+				//	}
+				Iterables.addAll(partitions, newPartitions);
+			}
+		}
+		return partitions;
+	}
 }
