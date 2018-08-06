@@ -22,8 +22,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TracePropertyAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
@@ -31,7 +29,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
-import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -392,16 +389,6 @@ public class RegionAnalysis extends AbstractPartialRegionAnalysis<@NonNull Regio
 	@Override
 	public @NonNull String getName() {
 		return String.valueOf(region);
-	}
-
-	@Override
-	public @NonNull TraceClassAnalysis<@NonNull RegionAnalysis> getTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
-		return transformationAnalysis.getTraceClassAnalysis(traceClassDatum);
-	}
-
-	@Override
-	public @NonNull TracePropertyAnalysis<@NonNull RegionAnalysis> getTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
-		return transformationAnalysis.getTracePropertyAnalysis(propertyDatum);
 	}
 
 	public @NonNull TransformationAnalysis getTransformationAnalysis() {

@@ -90,7 +90,7 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 
 	@Override
 	public @Nullable Element visitBooleanLiteralNode(@NonNull BooleanLiteralNode node) {
-		Role nodeRole = partition.getNodeRole(node);
+		Role nodeRole = partition.getRole(node);
 		if (nodeRole == null) {
 			return null;
 		}
@@ -113,7 +113,7 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 		if (partialTargetNode == null) {
 			return null;
 		}
-		Role edgeRole = partition.getEdgeRole(edge);
+		Role edgeRole = partition.getRole(edge);
 		if (edgeRole == null) {
 			return null;
 		}
@@ -155,7 +155,7 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 		if (partialTargetNode == null) {
 			return null;
 		}
-		Role edgeRole = partition.getEdgeRole(navigableEdge);
+		Role edgeRole = partition.getRole(navigableEdge);
 		if (edgeRole == null) {
 			return null;
 		}
@@ -164,7 +164,7 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 
 	@Override
 	public @Nullable Node visitNode(@NonNull Node node) {
-		Role nodeRole = partition.getNodeRole(node);
+		Role nodeRole = partition.getRole(node);
 		if (nodeRole == null) {
 			return null;
 		}
@@ -176,7 +176,7 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 			//
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 				if ((edge.isCast() || edge.isNavigation()) && edge.isRealized()) {
-					Role edgeRole = partition.getEdgeRole(edge);
+					Role edgeRole = partition.getRole(edge);
 					if ((edgeRole != null) && edgeRole == Role.PREDICATED) {
 						partialNode = regionHelper.createPredicatedStepNode(node, node.isMatched());
 						break;
@@ -193,7 +193,7 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 
 	@Override
 	public @Nullable Node visitVariableNode(@NonNull VariableNode variableNode) {
-		Role nodeRole = partition.getNodeRole(variableNode);
+		Role nodeRole = partition.getRole(variableNode);
 		if (nodeRole == null) {
 			return null;
 		};

@@ -37,7 +37,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 /**
  * A TransformationAnalysis accumulates the results of analyzing a RelationalTransformation and its contents.
  */
-public abstract class RegionsAnalysis<RA extends PartialRegionAnalysis<@NonNull RA>> extends QVTbaseHelper implements Nameable
+public abstract class RegionsAnalysis<@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> extends QVTbaseHelper implements Nameable
 {
 	/**
 	 * The supervising ScheduleManager.

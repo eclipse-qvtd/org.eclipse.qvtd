@@ -24,7 +24,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -37,7 +37,7 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractDispatch;
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class.
  */
-public abstract class TraceClassAnalysis<RA extends PartialRegionAnalysis<@NonNull RA>> extends TraceElementAnalysis<RA>
+public abstract class TraceClassAnalysis<@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> extends TraceElementAnalysis<@NonNull RA>
 {
 	protected final @NonNull ClassDatum traceClassDatum;
 
@@ -48,26 +48,26 @@ public abstract class TraceClassAnalysis<RA extends PartialRegionAnalysis<@NonNu
 	 */
 	private @Nullable List<@NonNull Property> discriminatingProperties = null;
 
-	private @NonNull List<@NonNull TraceClassAnalysis<RA>> subTraceClassAnalyses = new ArrayList<>();
-	private @NonNull List<@NonNull TraceClassAnalysis<RA>> superTraceClassAnalyses = new ArrayList<>();
+	private @NonNull List<@NonNull TraceClassAnalysis<@NonNull RA>> subTraceClassAnalyses = new ArrayList<>();
+	private @NonNull List<@NonNull TraceClassAnalysis<@NonNull RA>> superTraceClassAnalyses = new ArrayList<>();
 
 	private @Nullable Boolean isDispatcher = null;
 
-	public TraceClassAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull ClassDatum traceClassDatum) {
-		super(transformationAnalysis);
+	public TraceClassAnalysis(@NonNull RegionsAnalysis<@NonNull RA> regionsAnalysis, @NonNull ClassDatum traceClassDatum) {
+		super(regionsAnalysis);
 		this.traceClassDatum = traceClassDatum;
 		subTraceClassAnalyses.add(this);
 		superTraceClassAnalyses.add(this);
-		assert traceClassDatum.getReferredTypedModel() == transformationAnalysis.getScheduleManager().getTraceTypedModel();
+		assert traceClassDatum.getReferredTypedModel() == regionsAnalysis.getScheduleManager().getTraceTypedModel();
 	}
 
-	public void addSubTraceClassAnalysis(@NonNull TraceClassAnalysis<RA> traceClassAnalysis) {
+	public void addSubTraceClassAnalysis(@NonNull TraceClassAnalysis<@NonNull RA> traceClassAnalysis) {
 		if (!subTraceClassAnalyses.contains(traceClassAnalysis)) {
 			subTraceClassAnalyses.add(traceClassAnalysis);
 		}
 	}
 
-	public void addSuperTraceClassAnalysis(@NonNull TraceClassAnalysis<RA> traceClassAnalysis) {
+	public void addSuperTraceClassAnalysis(@NonNull TraceClassAnalysis<@NonNull RA> traceClassAnalysis) {
 		if (!superTraceClassAnalyses.contains(traceClassAnalysis)) {
 			superTraceClassAnalyses.add(traceClassAnalysis);
 		}
@@ -228,11 +228,11 @@ public abstract class TraceClassAnalysis<RA extends PartialRegionAnalysis<@NonNu
 		return traceClassDatum.getName();
 	}
 
-	public @NonNull Iterable<@NonNull TraceClassAnalysis<RA>> getSubTraceClassAnalyses() {
+	public @NonNull Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> getSubTraceClassAnalyses() {
 		return subTraceClassAnalyses;
 	}
 
-	public @NonNull Iterable<@NonNull TraceClassAnalysis<RA>> getSuperTraceClassAnalyses() {
+	public @NonNull Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> getSuperTraceClassAnalyses() {
 		return superTraceClassAnalyses;
 	}
 

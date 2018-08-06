@@ -16,7 +16,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
 //import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -26,14 +26,14 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 /**
  * Each TracePropertyAnalysis identifies the usage of one middle trace property.
  */
-public abstract class TracePropertyAnalysis<RA extends PartialRegionAnalysis<@NonNull RA>> extends TraceElementAnalysis<@NonNull RA>
+public abstract class TracePropertyAnalysis<@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> extends TraceElementAnalysis<@NonNull RA>
 {
 	protected final @NonNull PropertyDatum tracePropertyDatum;
 
-	protected TracePropertyAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
-		super(transformationAnalysis);
+	protected TracePropertyAnalysis(@NonNull RegionsAnalysis<@NonNull RA> regionsAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
+		super(regionsAnalysis);
 		this.tracePropertyDatum = tracePropertyDatum;
-		assert tracePropertyDatum.getReferredTypedModel() == transformationAnalysis.getScheduleManager().getTraceTypedModel();
+		assert tracePropertyDatum.getReferredTypedModel() == regionsAnalysis.getScheduleManager().getTraceTypedModel();
 	}
 
 	@Override

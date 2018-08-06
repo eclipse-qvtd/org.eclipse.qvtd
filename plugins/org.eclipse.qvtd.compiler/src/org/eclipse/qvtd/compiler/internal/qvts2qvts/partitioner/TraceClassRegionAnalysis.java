@@ -34,7 +34,7 @@ public class TraceClassRegionAnalysis extends TraceClassAnalysis<@NonNull Region
 		Boolean isCyclic2 = isCyclic;
 		if (isCyclic2 == null) {
 			for (@NonNull TraceClassAnalysis<@NonNull RegionAnalysis> subTraceClassAnalysis : getSubTraceClassAnalyses()) {
-				if (transformationAnalysis.getCycleAnalysis(subTraceClassAnalysis) != null) {
+				if (regionsAnalysis.getCycleAnalysis(subTraceClassAnalysis) != null) {
 					isCyclic2 = isCyclic = true;
 					return isCyclic2;
 				}

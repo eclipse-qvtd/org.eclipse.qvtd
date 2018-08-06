@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.CompilerProblem;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
@@ -67,7 +68,7 @@ public class MappingPartitioner implements Nameable
 	/**
 	 * The overall transformation partitioner providing global analysis results.
 	 */
-	//	protected final @NonNull TransformationPartitioner transformationPartitioner;
+	protected final @NonNull RegionsAnalysis<@NonNull Partition> regionsPartitionAnalysis;
 
 	/**
 	 * The overall transformation analysis results.
@@ -118,7 +119,7 @@ public class MappingPartitioner implements Nameable
 
 	public MappingPartitioner(@NonNull TransformationPartitioner transformationPartitioner, @NonNull RegionAnalysis regionAnalysis) {
 		this.scheduleManager = transformationPartitioner.getScheduleManager();
-		//		this.transformationPartitioner = transformationPartitioner;
+		this.regionsPartitionAnalysis = transformationPartitioner;
 		this.transformationAnalysis = transformationPartitioner.getTransformationAnalysis();
 		this.regionAnalysis = regionAnalysis;
 		this.region = (MappingRegion) regionAnalysis.getRegion();
@@ -345,11 +346,11 @@ public class MappingPartitioner implements Nameable
 		return regionAnalysis.getConstantOutputNodes();
 	}
 
-	public @Nullable Iterable<@NonNull TraceClassAnalysis<RegionAnalysis>> getConsumedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> getConsumedTraceClassAnalyses() {
 		return regionAnalysis.getConsumedTraceClassAnalyses();
 	}
 
-	public @Nullable Iterable<@NonNull TracePropertyAnalysis<RegionAnalysis>> getConsumedTracePropertyAnalyses() {
+	public @Nullable Iterable<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> getConsumedTracePropertyAnalyses() {
 		return regionAnalysis.getConsumedTracePropertyAnalyses();
 	}
 
@@ -399,11 +400,11 @@ public class MappingPartitioner implements Nameable
 		return predicatedWhenNodes;
 	}
 
-	public @Nullable Iterable<@NonNull TraceClassAnalysis<RegionAnalysis>> getProducedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> getProducedTraceClassAnalyses() {
 		return regionAnalysis.getProducedTraceClassAnalyses();
 	}
 
-	public @Nullable Iterable<@NonNull TracePropertyAnalysis<RegionAnalysis>> getProducedTracePropertyAnalyses() {
+	public @Nullable Iterable<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> getProducedTracePropertyAnalyses() {
 		return regionAnalysis.getProducedTracePropertyAnalyses();
 	}
 
@@ -464,6 +465,10 @@ public class MappingPartitioner implements Nameable
 		return regionAnalysis;
 	}
 
+	public @NonNull RegionsAnalysis<@NonNull Partition> getRegionsPartitionAnalysis() {
+		return regionsPartitionAnalysis;
+	}
+
 	protected @NonNull ScheduleManager getScheduleManager() {
 		return scheduleManager;
 	}
@@ -493,11 +498,11 @@ public class MappingPartitioner implements Nameable
 		return regionAnalysis.getSuccessNode(traceNode);
 	}
 
-	public @Nullable Iterable<@NonNull TraceClassAnalysis<RegionAnalysis>> getSuperProducedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> getSuperProducedTraceClassAnalyses() {
 		return regionAnalysis.getSuperProducedTraceClassAnalyses();
 	}
 
-	public @NonNull TraceClassAnalysis<RegionAnalysis> getTraceClassAnalysis(@NonNull Node traceNode) {
+	public @NonNull TraceClassAnalysis<@NonNull RegionAnalysis> getTraceClassAnalysis(@NonNull Node traceNode) {
 		ClassDatum traceClassDatum = QVTscheduleUtil.getClassDatum(traceNode);
 		return transformationAnalysis.getTraceClassAnalysis(traceClassDatum);
 	}
@@ -515,20 +520,6 @@ public class MappingPartitioner implements Nameable
 	public @NonNull List<@NonNull Node> getTraceNodes() {
 		return regionAnalysis.getTraceNodes();
 	}
-
-	//	public @NonNull TransformationPartitioner getTransformationPartitioner() {
-	//		return transformationPartitioner;
-	//	}
-
-	/*	private boolean hasNoComputationInputs(@NonNull Node node) {
-		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-			if (edge.isComputation()) {
-				return false;
-			}
-		}
-		return true;
-	} */
-
 
 	public boolean hasConstantEdge(@NonNull Edge edge) {
 		return alreadyConstantEdges.contains(edge);

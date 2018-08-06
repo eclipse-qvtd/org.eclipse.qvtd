@@ -21,7 +21,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -32,9 +32,9 @@ import com.google.common.collect.Lists;
 /**
  * The CyclesAnalysis identifies a CycleAnalysis for each group of regionAnalyses that contribute to a cycle.
  */
-public abstract class CyclesAnalysis<RA extends PartialRegionAnalysis<@NonNull RA>>
+public abstract class CyclesAnalysis<@NonNull RA extends PartialRegionAnalysis<@NonNull RA>>
 {
-	protected final @NonNull TransformationAnalysis transformationAnalysis;
+	protected final @NonNull RegionsAnalysis<@NonNull RA> regionsAnalysis;
 	protected final @NonNull Iterable<@NonNull RA> regionAnalyses;
 
 	/**
@@ -47,8 +47,8 @@ public abstract class CyclesAnalysis<RA extends PartialRegionAnalysis<@NonNull R
 	 */
 	protected final @NonNull Map<@NonNull TraceClassAnalysis<@NonNull RA>, @NonNull CycleAnalysis<@NonNull RA>> traceClassAnalysis2cycleAnalysis = new HashMap<>();
 
-	protected CyclesAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull Iterable<@NonNull RA> regionAnalyses) {
-		this.transformationAnalysis = transformationAnalysis;
+	protected CyclesAnalysis(@NonNull RegionsAnalysis<@NonNull RA> regionsAnalysis, @NonNull Iterable<@NonNull RA> regionAnalyses) {
+		this.regionsAnalysis = regionsAnalysis;
 		this.regionAnalyses = regionAnalyses;
 	}
 
@@ -342,7 +342,7 @@ public abstract class CyclesAnalysis<RA extends PartialRegionAnalysis<@NonNull R
 		return traceClassAnalysis2cycleAnalysis.get(traceClassAnalysis);
 	}
 
-	public @NonNull TransformationAnalysis getTransformationAnalysis() {
-		return transformationAnalysis;
-	}
+	//	public @NonNull TransformationAnalysis getTransformationAnalysis() {
+	//		return transformationAnalysis;
+	//	}
 }

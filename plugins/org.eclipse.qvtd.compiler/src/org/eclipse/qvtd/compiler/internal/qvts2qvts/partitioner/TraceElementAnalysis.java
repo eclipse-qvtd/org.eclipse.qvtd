@@ -15,15 +15,15 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
 
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class or property.
  */
-public abstract class TraceElementAnalysis<RA extends PartialRegionAnalysis<@NonNull RA>> implements Nameable
+public abstract class TraceElementAnalysis<@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> implements Nameable
 {
-	protected final @NonNull TransformationAnalysis transformationAnalysis;
+	protected final @NonNull RegionsAnalysis<@NonNull RA> regionsAnalysis;
 
 	/**
 	 * The partitioners that consume (predicate) the trace class.
@@ -35,8 +35,8 @@ public abstract class TraceElementAnalysis<RA extends PartialRegionAnalysis<@Non
 	 */
 	protected final @NonNull List<@NonNull RA> producers = new ArrayList<>();
 
-	public TraceElementAnalysis(@NonNull TransformationAnalysis transformationAnalysis) {
-		this.transformationAnalysis = transformationAnalysis;
+	public TraceElementAnalysis(@NonNull RegionsAnalysis<@NonNull RA> regionsAnalysis) {
+		this.regionsAnalysis = regionsAnalysis;
 	}
 
 	public void addConsumer(@NonNull RA consumer) {

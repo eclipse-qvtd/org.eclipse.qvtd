@@ -25,6 +25,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TracePropertyAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
@@ -36,7 +37,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
 
-public abstract class AbstractPartialRegionAnalysis<RA extends @NonNull PartialRegionAnalysis<@NonNull RA>> extends RegionHelper<@NonNull Region> implements PartialRegionAnalysis<@NonNull RA>
+public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull PartialRegionAnalysis<@NonNull RA>> extends RegionHelper<@NonNull Region> implements PartialRegionAnalysis<@NonNull RA>
 {
 	protected final @NonNull RegionsAnalysis<@NonNull RA> regionsAnalysis;
 	//	protected final @NonNull ScheduleManager scheduleManager;
@@ -531,6 +532,16 @@ public abstract class AbstractPartialRegionAnalysis<RA extends @NonNull PartialR
 			}
 		}
 		return superProducedTracePropertyAnalyses;
+	}
+
+	@Override
+	public @NonNull TraceClassAnalysis<@NonNull RA> getTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
+		return regionsAnalysis.getTraceClassAnalysis(traceClassDatum);
+	}
+
+	@Override
+	public @NonNull TracePropertyAnalysis<@NonNull RA> getTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
+		return regionsAnalysis.getTracePropertyAnalysis(propertyDatum);
 	}
 
 	public @Nullable Edge getTraceEdge(@NonNull Node node) {

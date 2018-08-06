@@ -18,7 +18,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
 /**
  * Each CycleAnalysis identifies one group of regionAnalyses that contribute to a cycle.
  */
-public abstract class CycleAnalysis<RA extends PartialRegionAnalysis<@NonNull RA>>
+public abstract class CycleAnalysis<@NonNull RA extends PartialRegionAnalysis<@NonNull RA>>
 {
 	protected final @NonNull CyclesAnalysis<@NonNull RA> cyclesAnalysis;
 	protected final @NonNull Set<@NonNull RA> regionAnalyses;

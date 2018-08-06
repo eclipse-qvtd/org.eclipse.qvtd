@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleHeadAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -281,20 +282,6 @@ abstract class AbstractPartialPartition extends AbstractPartition
 	}
 
 	/**
-	 * Return the role that the original region's edge plays in the partition. Null for none.
-	 */
-	public @Nullable Role getEdgeRole(@NonNull Edge edge) {
-		return edge2edgeRole.get(edge);
-	}
-
-	/**
-	 * Return the role that the original region's node plays in the partition. Null for none.
-	 */
-	public @Nullable Role getNodeRole(@NonNull Node node) {
-		return node2nodeRole.get(node);
-	}
-
-	/**
 	 * Return all the original region nodes that contribute to the partition.
 	 */
 	protected @NonNull Iterable<@NonNull Node> getNodes() {
@@ -311,6 +298,20 @@ abstract class AbstractPartialPartition extends AbstractPartition
 	 */
 	protected @Nullable Iterable<@NonNull Node> getPreferredHeadNodes() {
 		return partitioner.getTraceNodes();
+	}
+
+	/**
+	 * Return the role that the original region's edge plays in the partition. Null for none.
+	 */
+	public @Nullable Role getRole(@NonNull Edge edge) {
+		return edge2edgeRole.get(edge);
+	}
+
+	/**
+	 * Return the role that the original region's node plays in the partition. Null for none.
+	 */
+	public @Nullable Role getRole(@NonNull Node node) {
+		return node2nodeRole.get(node);
 	}
 
 	/**
@@ -345,7 +346,7 @@ abstract class AbstractPartialPartition extends AbstractPartition
 
 	protected void resolveDisambiguations() {
 		for (@NonNull Node traceNode : partitioner.getTraceNodes()) {
-			TraceClassAnalysis traceClassAnalysis = partitioner.getTraceClassAnalysis(traceNode);
+			TraceClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis = partitioner.getTraceClassAnalysis(traceNode);
 			Iterable<@NonNull Property> discriminatingProperties = traceClassAnalysis.getDiscriminatingProperties();
 			if (discriminatingProperties != null) {
 				for (@NonNull Property property : discriminatingProperties) {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2018 Willink Transformations and others.
+ * Copyright (c) 2016, 2018 Willink Transformations and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -11,13 +11,14 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 
-interface Partition extends PartialRegionAnalysis<@NonNull Partition>
+/**
+ * Each TraceClassAnalysis identifies the usage of one middle trace class.
+ */
+public class TraceClassPartitionAnalysis extends TraceClassAnalysis<@NonNull Partition>
 {
-	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber);
-
-	public @NonNull Region getRegion();
+	public TraceClassPartitionAnalysis(@NonNull TransformationPartitioner transformationAnalysis, @NonNull ClassDatum traceClassDatum) {
+		super(transformationAnalysis, traceClassDatum);
+	}
 }
