@@ -21,14 +21,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TracePropertyAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
@@ -36,17 +33,12 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
-import com.google.common.collect.Iterables;
-
-public class RegionAnalysis extends RegionHelper<@NonNull Region> implements PartialRegionAnalysis<@NonNull RegionAnalysis>
+public class RegionAnalysis extends AbstractPartialRegionAnalysis<@NonNull RegionAnalysis>
 {
 	protected final @NonNull TransformationAnalysis transformationAnalysis;
-	//	protected final @NonNull ScheduleManager scheduleManager;
-	//	protected final @NonNull Region region;
 
 	/**
 	 * The per-typed model predicated navigable edges for which an execution may be attempted before assignment.
@@ -60,51 +52,6 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region> implements Par
 	private @Nullable Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull Set<@NonNull NavigableEdge>>> typedModel2property2enforcedEdges = null;
 
 	/**
-	 * The override dispatch node if needed.
-	 */
-	private @Nullable Node dispatchNode = null;
-
-	/**
-	 * The TraceClassAnalysis instances that are consumed by this MappingPartitioner.
-	 */
-	private @Nullable List<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> consumedTraceClassAnalyses = null;
-
-	/**
-	 * The TracePropertyAnalysis instances that are consumed by this MappingPartitioner.
-	 */
-	private @Nullable List<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> consumedTracePropertyAnalyses = null;
-
-	/**
-	 * The TraceClassAnalysis instances that are produced by this MappingPartitioner.
-	 */
-	private @Nullable List<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> producedTraceClassAnalyses = null;
-
-	/**
-	 * The TracePropertyAnalysis instances that are produced by this MappingPartitioner.
-	 */
-	private @Nullable List<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> producedTracePropertyAnalyses = null;
-
-	/**
-	 * The TraceClassAnalysis instances and super instances that are produced by this MappingPartitioner.
-	 */
-	private @Nullable Set<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> superProducedTraceClassAnalyses = null;
-
-	/**
-	 * The TracePropertyAnalysis instances and super instances that are produced by this MappingPartitioner.
-	 */
-	private @Nullable Set<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> superProducedTracePropertyAnalyses = null;
-
-	/**
-	 * The constant nodes that require no computation from other nodes.
-	 */
-	private final @NonNull List<@NonNull Node> constantInputNodes = new ArrayList<>();
-
-	/**
-	 * The constant nodes that impose a check on a computation from other nodes.
-	 */
-	private final @NonNull List<@NonNull Node> constantOutputNodes = new ArrayList<>();
-
-	/**
 	 * The edges to be realized iff speculation succeeds.
 	 */
 	private final @NonNull List<@NonNull NavigableEdge> corollaryEdges = new ArrayList<>();
@@ -113,43 +60,6 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region> implements Par
 	 * The nodes to be realized iff speculation succeeds.
 	 */
 	private final @NonNull List<@NonNull Node> corollaryNodes = new ArrayList<>();
-
-	/**
-	 * properties that are directly realized from a middle object provided all predicates are satisfied.
-	 */
-	private final @NonNull Set<@NonNull NavigableEdge> oldPrimaryNavigableEdges = new HashSet<>();
-	private final @NonNull List<@NonNull Edge> predicatedEdges = new ArrayList<>();
-	private final @NonNull List<@NonNull Edge> predicatedMiddleEdges = new ArrayList<>();
-	private final @NonNull List<@NonNull Node> predicatedMiddleNodes = new ArrayList<>();
-	private final @NonNull List<@NonNull Node> predicatedOutputNodes = new ArrayList<>();
-	private final @NonNull Set<@NonNull NavigableEdge> realizedEdges = new HashSet<>();
-	private final @NonNull List<@NonNull NavigableEdge> realizedMiddleEdges = new ArrayList<>();
-	private final @NonNull List<@NonNull Node> realizedMiddleNodes = new ArrayList<>();
-	private final @NonNull List<@NonNull NavigableEdge> realizedOutputEdges = new ArrayList<>();
-	private final @NonNull List<@NonNull Node> realizedOutputNodes = new ArrayList<>();
-	private final @NonNull Set<@NonNull SuccessEdge> successEdges = new HashSet<>();	// FIXME redundant wrt traceNode2successEdge.values()
-
-	/**
-	 * The trace node(s).
-	 */
-	private final @NonNull List<@NonNull Node> traceNodes = new ArrayList<>();
-
-	/**
-	 * The map from node to the trace edge by which the node may be located by lookup in a trace node once its trace edge is realized..
-	 */
-	private final @NonNull Map<@NonNull Node, @NonNull Edge> node2traceEdge = new HashMap<>();
-
-	/**
-	 * The trace nodes and their corresponding success node.
-	 *
-	 * There should normally be exactly one trace node.
-	 *
-	 * There is no trace node for Adolfo's prematurely folded middle optimization and for manual partitionings
-	 * such as attributeColumns in testQVTcCompiler_SimpleUML2RDBMS_CG.
-	 *
-	 * There could be multiple trace nodes after an early merge results. Work in progress.
-	 */
-	private final @NonNull Map<@NonNull Node, @Nullable SuccessEdge> traceNode2successEdge = new HashMap<>();
 
 	/**
 	 * The actual and pseudo-RegionAnalysis-es that must be unconditionally successful for this RegionAnalysis
@@ -163,19 +73,9 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region> implements Par
 	private @Nullable Iterable<@NonNull Edge> fallibleEdges = null; */
 
 	public RegionAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull Region region) {
-		super(transformationAnalysis.getScheduleManager(), region);
+		super(transformationAnalysis, region);
 		this.transformationAnalysis = transformationAnalysis;
-		analyzeNodes();
-		for (@NonNull Node traceNode : analyzeTraceNodes()) {
-			analyzeSuccessEdge(traceNode);
-			analyzeTraceEdges(traceNode);
-		}
-		analyzeEdges();
-		List<@NonNull Node> alreadyRealized = new ArrayList<>(getTraceNodes());
-		Node dispatchNode = basicGetDispatchNode();
-		if (dispatchNode != null) {
-			alreadyRealized.add(dispatchNode);
-		}
+		List<@NonNull Node> alreadyRealized = analyze();
 		analyzeCorollaries(alreadyRealized);
 	}
 
@@ -194,42 +94,6 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region> implements Par
 		checkedEdges.add(predicatedEdge);
 		QVTscheduleConstants.POLLED_PROPERTIES.println("    checked " + predicatedEdge.getProperty() +
 			" at " + region.getIndexRangeText() + " in " + typedModel + " for " + region);
-	}
-
-	private void addConstantNode(@NonNull Node node) {
-		assert node.isConstant();
-		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-			if (edge.isComputation() || ((edge.isCast() || edge.isNavigation()) && !edge.isRealized())) {
-				constantOutputNodes.add(node);
-				return;
-			}
-		}
-		constantInputNodes.add(node);
-	}
-
-	private void addConsumptionOfMiddleEdge(@NonNull NavigableEdge edge) {
-		if (!predicatedMiddleEdges.contains(edge)) {
-			predicatedMiddleEdges.add(edge);
-			PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
-			TracePropertyAnalysis<@NonNull RegionAnalysis> consumedTraceAnalysis = transformationAnalysis.addConsumer(propertyDatum, this);
-			List<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> consumedTracePropertyAnalyses2 = consumedTracePropertyAnalyses;
-			if (consumedTracePropertyAnalyses2 == null) {
-				consumedTracePropertyAnalyses = consumedTracePropertyAnalyses2 = new ArrayList<>();
-			}
-			consumedTracePropertyAnalyses2.add(consumedTraceAnalysis);
-		}
-	}
-
-	private void addConsumptionOfMiddleNode(@NonNull Node node) {
-		if (!predicatedMiddleNodes.contains(node)) {
-			predicatedMiddleNodes.add(node);
-			TraceClassAnalysis<@NonNull RegionAnalysis> consumedTraceAnalysis = transformationAnalysis.addConsumer(QVTscheduleUtil.getClassDatum(node), this);
-			List<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> consumedTraceClassAnalyses2 = consumedTraceClassAnalyses;
-			if (consumedTraceClassAnalyses2 == null) {
-				consumedTraceClassAnalyses = consumedTraceClassAnalyses2 = new ArrayList<>();
-			}
-			consumedTraceClassAnalyses2.add(consumedTraceAnalysis);
-		}
 	}
 
 	private void addEnforcedEdge(@NonNull NavigableEdge realizedEdge) {
@@ -260,37 +124,6 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region> implements Par
 			" in " + typedModel + " for " + region);
 	}
 
-	private void addProductionOfMiddleEdge(@NonNull NavigableEdge edge) {
-		assert edge.isNew();
-		if (edge.isRealized() && !realizedMiddleEdges.contains(edge)) {
-			realizedMiddleEdges.add(edge);
-		}
-		PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
-		TracePropertyAnalysis<@NonNull RegionAnalysis> consumedTraceAnalysis = transformationAnalysis.addProducer(propertyDatum, this);
-		List<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> producedTracePropertyAnalyses2 = producedTracePropertyAnalyses;
-		if (producedTracePropertyAnalyses2 == null) {
-			producedTracePropertyAnalyses = producedTracePropertyAnalyses2 = new ArrayList<>();
-		}
-		if (!producedTracePropertyAnalyses2.contains(consumedTraceAnalysis)) {
-			producedTracePropertyAnalyses2.add(consumedTraceAnalysis);
-		}
-	}
-
-	private void addProductionOfMiddleNode(@NonNull Node node) {
-		assert node.isNew();
-		if (node.isRealized() && !realizedMiddleNodes.contains(node)) {
-			realizedMiddleNodes.add(node);
-		}
-		TraceClassAnalysis<@NonNull RegionAnalysis> consumedTraceAnalysis = transformationAnalysis.addProducer(QVTscheduleUtil.getClassDatum(node), this);
-		List<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
-		if (producedTraceClassAnalyses2 == null) {
-			producedTraceClassAnalyses = producedTraceClassAnalyses2 = new ArrayList<>();
-		}
-		if (!producedTraceClassAnalyses2.contains(consumedTraceAnalysis)) {
-			producedTraceClassAnalyses2.add(consumedTraceAnalysis);
-		}
-	}
-
 	/**
 	 * Identify what gets realized as a consequence of the mapping succeeding.
 	 *<p>
@@ -317,210 +150,6 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region> implements Par
 				}
 			}
 		}
-	}
-
-	private void analyzeEdges() {
-		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
-			if (!edge.isSecondary()) {
-				if (edge.isPredicated()) {
-					predicatedEdges.add(edge);
-				}
-				if (edge.isCast() || edge.isNavigation()) {
-					if (edge.isRealized()) {
-						NavigableEdge navigableEdge = (NavigableEdge)edge;
-						realizedEdges.add(navigableEdge);
-						Node sourceNode = edge.getEdgeSource();
-						Node targetNode = edge.getEdgeTarget();
-						/*if (traceNode2successEdge.containsKey(sourceNode)) {
-							if (targetNode.isRealized() && !targetNode.isSuccess()) {
-								addCorollary((NavigableEdge) edge);
-							}
-						}
-						else*/ if ((sourceNode.isPredicated() || sourceNode.isRealized())) {
-							if (!traceNode2successEdge.containsKey(targetNode) && (targetNode.isPredicated() || targetNode.isRealized())) {
-								realizedOutputEdges.add(navigableEdge);
-							}
-						}
-						if (targetNode.isLoaded() && scheduleManager.isMiddle(sourceNode)) {
-							//							navigableEdges.add(navigationEdge);
-						}
-					}
-					else if (edge.isMatched() && !edge.isCast()) {
-						assert !edge.isExpression();
-						assert !edge.isComputation();
-						Node targetNode = edge.getEdgeTarget();
-						if (!targetNode.isNullLiteral()) {
-							//							navigableEdges.add(navigationEdge);
-						}
-					}
-				}
-				/*				else if (QVTscheduleUtil.isRealizedIncludes(edge)) {
-					realizedEdges.add(edge);
-					Node sourceNode = edge.getSource();
-					if ((sourceNode != traceNode) && (sourceNode == Role.PREDICATED || sourceNode == Role.REALIZED)) {
-						Node targetNode = edge.getTarget();
-						if ((targetNode != traceNode) && (targetNode == Role.PREDICATED || targetNode == Role.REALIZED)) {
-							realizedOutputEdges.add(edge);
-						}
-					}
-					if (edge.getTarget().isLoaded() && edge.getSource().getClassDatumAnalysis().getDomainUsage().isMiddle()) {
-						//							navigableEdges.add(navigationEdge);
-					}
-				} */
-			}
-		}
-		for (@NonNull NavigableEdge edge : region.getNavigationEdges()) {
-			if (!edge.isSecondary() && !edge.isRealized()) {
-				oldPrimaryNavigableEdges.add(edge);
-			}
-			Node sourceNode = edge.getEdgeSource();
-			//			Node targetNode = edge.getEdgeTarget();
-			if (scheduleManager.isMiddle(sourceNode)) { // || scheduleManager.isMiddle(targetNode)) {
-				if (edge.isPredicated() || edge.isSpeculated()) {
-					addConsumptionOfMiddleEdge(edge);
-				}
-				else {
-					assert edge.isRealized();
-					//					addProductionOfMiddleNode(sourceNode);
-					addProductionOfMiddleEdge(edge);
-				}
-			}
-			if (edge.isSuccess()) {
-				successEdges.add((SuccessEdge) edge);
-				//				Node sourceNode = edge.getEdgeSource();
-				//				assert scheduleManager.isMiddle(sourceNode);
-				//				if (edge.isPredicated()) {
-				//					addConsumptionOfMiddleEdge(edge);
-				//				}
-				//				else {
-				//					assert edge.isRealized();
-				//					//					addProductionOfMiddleNode(sourceNode);
-				//					addProductionOfMiddleEdge(edge);
-				//				}
-			}
-		}
-	}
-
-	private void analyzeNodes() {
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
-			if (node.isNullLiteral()) {
-				addConstantNode(node);
-			}
-			else if (node.isPattern()) {
-				if (node.isConstant()) {
-				}
-				else if (node.isLoaded()) {
-					//					hasLoadedNodes  = true;
-				}
-				else if (scheduleManager.isMiddle(node)) {
-					if (node.isDispatch()) {
-						if (dispatchNode != null) {
-							throw new IllegalStateException();		// Dual dispatcher
-						}
-						dispatchNode = node;
-					}
-					else if (node.isTrace()) {
-						//						if (traceNode != null) {
-						//							throw new IllegalStateException();		// Two traces
-						//						}
-						traceNodes.add(node);
-					}
-					if (node.isPredicated()) {
-						addConsumptionOfMiddleNode(node);
-					}
-					else if (node.isSpeculated()) {
-						if (!node.isHead()) {		// Don't create a self-consumption cycle
-							addConsumptionOfMiddleNode(node);
-						}
-					}
-					else if (node.isSpeculation()) {
-						addProductionOfMiddleNode(node);
-					}
-					else if (node.isRealized()) {
-						addProductionOfMiddleNode(node);
-						//					for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
-						//						Node targetNode = edge.getTarget();
-						//						NodeRole targetNodeRole = targetNode.getNodeRole();
-						//						if (!targetNodeRole == Role.PREDICATED && !targetNodeRole == Role.REALIZED) {
-						//							tracedInputNodes.add(targetNode);
-						//						}
-						//					}
-					}
-					else if (!node.isNullLiteral()) {
-						throw new IllegalStateException("middle node must be predicated or realized : " + node);
-					}
-
-				}
-				else {
-					if (!node.isOperation()) {
-						if (node.isPredicated()) {
-							predicatedOutputNodes.add(node);
-						}
-						else if (node.isRealized()) {
-							realizedOutputNodes.add(node);
-						}
-					}
-				}
-			}
-			else if (node.isOperation()) {
-				if (node.isConstant()) {
-					addConstantNode(node);
-				}
-				else if (node.isRealized()) {
-					realizedOutputNodes.add(node);
-				}
-			}
-		}
-	}
-
-	private void analyzeSuccessEdge(@NonNull Node traceNode) {
-		SuccessEdge successEdge = null;
-		Property successProperty = scheduleManager.basicGetSuccessProperty(traceNode);
-		if (successProperty != null) {
-			NavigationEdge statusNavigationEdge = QVTscheduleUtil.basicGetNavigationEdge(traceNode, successProperty);
-			if (statusNavigationEdge != null) {
-				successEdge = (SuccessEdge) statusNavigationEdge;
-			}
-			else {		// Never needed
-				/*				if (!(region instanceof DispatchRegion) && !(region instanceof VerdictRegion)) {
-					RegionHelper<@NonNull MappingRegion> regionHelper = new RegionHelper<>(scheduleManager, (MappingRegion)region);
-					successEdge = regionHelper.createRealizedSuccess(traceNode, successProperty, null);		// FIXME This creates a premature success in a speculation
-					Node successNode = QVTscheduleUtil.getTargetNode(successEdge);
-					successNode.setUtility(Node.Utility.STRONGLY_MATCHED);		// FIXME is this really neded
-				} */
-			}
-		}
-		traceNode2successEdge.put(traceNode, successEdge);
-	}
-
-	private void analyzeTraceEdges(@NonNull Node traceNode) {
-		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(traceNode)) {
-			if (((edge.isCast() || edge.isNavigation()) && edge.isRealized())) {
-				Node tracedNode = QVTscheduleUtil.getTargetNode(edge);
-				node2traceEdge.put(tracedNode, edge);
-			}
-		}
-	}
-
-	private @NonNull Iterable<@NonNull Node> analyzeTraceNodes() {
-		/*		if (realizedMiddleNodes.size() == 0) {
-			return Collections.emptyList();
-		}
-		if (realizedMiddleNodes.size() == 1) {
-			return Collections.singletonList(realizedMiddleNodes.get(0));
-		}
-		Iterable<@NonNull Node> headNodes = RuleHeadAnalysis.computeRealizedHeadNodes(region, realizedMiddleNodes);
-		if (Iterables.size(headNodes) == 0) {
-			return Collections.emptyList();
-		}
-		else {
-			return Collections.singletonList(headNodes.iterator().next());
-		} */
-		return Iterables.concat(getPredicatedMiddleNodes(), getRealizedMiddleNodes());
-	}
-
-	public @Nullable Node basicGetDispatchNode() {
-		return dispatchNode;
 	}
 
 	public void buildNavigationEdgesIndex(@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges,
@@ -734,24 +363,6 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region> implements Par
 		return typedModel2checkedEdges.get(typedModel);
 	}
 
-	public @NonNull Iterable<@NonNull Node> getConstantInputNodes() {
-		return constantInputNodes;
-	}
-
-	public @NonNull Iterable<@NonNull Node> getConstantOutputNodes() {
-		return constantOutputNodes;
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> getConsumedTraceClassAnalyses() {
-		return consumedTraceClassAnalyses;
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> getConsumedTracePropertyAnalyses() {
-		return consumedTracePropertyAnalyses;
-	}
-
 	public @NonNull Iterable<@NonNull NavigableEdge> getCorollaryEdges() {
 		return corollaryEdges;
 	}
@@ -783,101 +394,6 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region> implements Par
 		return String.valueOf(region);
 	}
 
-	public @NonNull Iterable<@NonNull NavigableEdge> getOldPrimaryNavigableEdges() {
-		return oldPrimaryNavigableEdges;
-	}
-
-	public @NonNull Iterable<@NonNull Edge> getPredicatedEdges() {
-		return predicatedEdges;
-	}
-
-	public @NonNull Iterable<@NonNull Node> getPredicatedMiddleNodes() {
-		return predicatedMiddleNodes;
-	}
-
-	public @NonNull Iterable<@NonNull Node> getPredicatedOutputNodes() {
-		return predicatedOutputNodes;
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> getProducedTraceClassAnalyses() {
-		return producedTraceClassAnalyses;
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> getProducedTracePropertyAnalyses() {
-		return producedTracePropertyAnalyses;
-	}
-
-	public @NonNull Iterable<@NonNull NavigableEdge> getRealizedEdges() {
-		return realizedEdges;
-	}
-
-	public @NonNull Iterable<@NonNull Node> getRealizedMiddleNodes() {
-		return realizedMiddleNodes;
-	}
-
-	public @NonNull Iterable<@NonNull NavigableEdge> getRealizedOutputEdges() {
-		return realizedOutputEdges;
-	}
-
-	public @NonNull Iterable<@NonNull Node> getRealizedOutputNodes() {
-		return realizedOutputNodes;
-	}
-
-	@Override
-	public @NonNull Region getRegion() {
-		return region;
-	}
-
-	@Override
-	public @NonNull ScheduleManager getScheduleManager() {
-		return scheduleManager;
-	}
-
-	public @Nullable SuccessEdge getSuccessEdge(@NonNull Node traceNode) {
-		return traceNode2successEdge.get(traceNode);
-	}
-
-	public @NonNull Iterable<@NonNull SuccessEdge> getSuccessEdges() {
-		return successEdges;
-	}
-
-	public @Nullable Node getSuccessNode(@NonNull Node traceNode) {
-		SuccessEdge successEdge = traceNode2successEdge.get(traceNode);
-		return successEdge != null ? successEdge.getTargetNode() : null;
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> getSuperProducedTraceClassAnalyses() {
-		List<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
-		if (producedTraceClassAnalyses2 != null) {
-			Set<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> superProducedTraceClassAnalyses2 = superProducedTraceClassAnalyses;
-			if (superProducedTraceClassAnalyses2 == null) {
-				superProducedTraceClassAnalyses = superProducedTraceClassAnalyses2 = new HashSet<>();
-			}
-			for (@NonNull TraceClassAnalysis<@NonNull RegionAnalysis> producedTraceClassAnalysis : producedTraceClassAnalyses2) {
-				Iterables.addAll(superProducedTraceClassAnalyses2, producedTraceClassAnalysis.getSuperTraceClassAnalyses());
-			}
-		}
-		return superProducedTraceClassAnalyses;
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> getSuperProducedTracePropertyAnalyses() {
-		List<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> producedTracePropertyAnalyses2 = producedTracePropertyAnalyses;
-		if (producedTracePropertyAnalyses2 != null) {
-			Set<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> superProducedTracePropertyAnalyses2 = superProducedTracePropertyAnalyses;
-			if (superProducedTracePropertyAnalyses2 == null) {
-				superProducedTracePropertyAnalyses2 = superProducedTracePropertyAnalyses = new HashSet<>();
-			}
-			for (@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis> producedTracePropertyAnalysis : producedTracePropertyAnalyses2) {
-				Iterables.addAll(superProducedTracePropertyAnalyses2, producedTracePropertyAnalysis.getSuperTracePropertyAnalyses(this));
-			}
-		}
-		return superProducedTracePropertyAnalyses;
-	}
-
 	@Override
 	public @NonNull TraceClassAnalysis<@NonNull RegionAnalysis> getTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
 		return transformationAnalysis.getTraceClassAnalysis(traceClassDatum);
@@ -886,15 +402,6 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region> implements Par
 	@Override
 	public @NonNull TracePropertyAnalysis<@NonNull RegionAnalysis> getTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
 		return transformationAnalysis.getTracePropertyAnalysis(propertyDatum);
-	}
-
-	public @Nullable Edge getTraceEdge(@NonNull Node node) {
-		return node2traceEdge.get(node);
-	}
-
-	@Override
-	public @NonNull List<@NonNull Node> getTraceNodes() {
-		return traceNodes;
 	}
 
 	public @NonNull TransformationAnalysis getTransformationAnalysis() {
