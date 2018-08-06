@@ -24,16 +24,15 @@ import com.google.common.collect.Iterables;
 /**
  * Each CycleAnalysis identifies one group of regionAnalyses that contribute to a cycle.
  */
-public class CycleAnalysis
+public abstract class CycleAnalysis<RA extends RegionAnalysis>
 {
-	protected final @NonNull CyclesAnalysis cyclesAnalysis;
-	protected final @NonNull Set<@NonNull RegionAnalysis> regionAnalyses;
-	protected final @NonNull Set<@NonNull TraceClassAnalysis> traceClassAnalyses;
-	protected final @NonNull Set<@NonNull TracePropertyAnalysis> tracePropertyAnalyses;
-	//	private @Nullable Boolean isInfallible = null;
+	protected final @NonNull CyclesAnalysis<@NonNull RA> cyclesAnalysis;
+	protected final @NonNull Set<@NonNull RA> regionAnalyses;
+	protected final @NonNull Set<@NonNull TraceClassAnalysis<@NonNull RA>> traceClassAnalyses;
+	protected final @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull RA>> tracePropertyAnalyses;
 
-	public CycleAnalysis(@NonNull CyclesAnalysis cyclesAnalysis, @NonNull Set<@NonNull RegionAnalysis> regionAnalyses,
-			@NonNull Set<@NonNull TraceClassAnalysis> traceClassAnalyses, @NonNull Set<@NonNull TracePropertyAnalysis> tracePropertyAnalyses) {
+	protected CycleAnalysis(@NonNull CyclesAnalysis<@NonNull RA> cyclesAnalysis, @NonNull Set<@NonNull RA> regionAnalyses,
+			@NonNull Set<@NonNull TraceClassAnalysis<@NonNull RA>> traceClassAnalyses, @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull RA>> tracePropertyAnalyses) {
 		this.cyclesAnalysis = cyclesAnalysis;
 		this.regionAnalyses = regionAnalyses;
 		this.traceClassAnalyses = traceClassAnalyses;
@@ -42,36 +41,17 @@ public class CycleAnalysis
 		assert !traceClassAnalyses.isEmpty() || !tracePropertyAnalyses.isEmpty();
 	}
 
-	public @NonNull Iterable<@NonNull RegionAnalysis> getRegionAnalyses() {
+	public @NonNull Iterable<@NonNull RA> getRegionAnalyses() {
 		return regionAnalyses;
 	}
 
-	public @NonNull Iterable<@NonNull TraceClassAnalysis> getTraceClassAnalyses() {
+	public @NonNull Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> getTraceClassAnalyses() {
 		return traceClassAnalyses;
 	}
 
-	public @NonNull Iterable<@NonNull TracePropertyAnalysis> getTracePropertyAnalyses() {
+	public @NonNull Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> getTracePropertyAnalyses() {
 		return tracePropertyAnalyses;
 	}
-
-	/**
-	 * Return true if all sources of fallibility are within the cycle.
-	 *
-	public boolean isInfallible() {
-		Boolean isInfallible2 = isInfallible;
-		if (isInfallible2 == null) {
-			Set<@NonNull RegionAnalysis> cycleFallibilities = new HashSet<>();
-			for (@NonNull RegionAnalysis regionAnalysis : regionAnalyses) {
-				Iterables.addAll(cycleFallibilities, regionAnalysis.getFallibilities());
-			}
-			Set<@NonNull RegionAnalysis> externalFallibilities = new HashSet<>(cycleFallibilities);
-			for (@NonNull RegionAnalysis regionAnalysis : regionAnalyses) {
-				externalFallibilities.remove(regionAnalysis);
-			}
-			isInfallible = isInfallible2 = externalFallibilities.isEmpty();
-		}
-		return isInfallible2;
-	} */
 
 	public @NonNull Iterable<@NonNull Partition> partition(@NonNull Iterable<@NonNull MappingPartitioner> orderedMappingPartitioners) {
 		List<@NonNull Partition> partitions = new ArrayList<>();

@@ -21,41 +21,41 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class or property.
  */
-public abstract class TraceElementAnalysis implements Nameable
+public abstract class TraceElementAnalysis<RA extends RegionAnalysis> implements Nameable
 {
 	protected final @NonNull TransformationAnalysis transformationAnalysis;
 
 	/**
 	 * The partitioners that consume (predicate) the trace class.
 	 */
-	protected final @NonNull List<@NonNull RegionAnalysis> consumers = new ArrayList<>();
+	protected final @NonNull List<@NonNull RA> consumers = new ArrayList<>();
 
 	/**
 	 * The partitioners that produce (realize) the trace class.
 	 */
-	protected final @NonNull List<@NonNull RegionAnalysis> producers = new ArrayList<>();
+	protected final @NonNull List<@NonNull RA> producers = new ArrayList<>();
 
 	public TraceElementAnalysis(@NonNull TransformationAnalysis transformationAnalysis) {
 		this.transformationAnalysis = transformationAnalysis;
 	}
 
-	public void addConsumer(@NonNull RegionAnalysis consumer) {
+	public void addConsumer(@NonNull RA consumer) {
 		if (!consumers.contains(consumer)) {		// multi-consumption is possible
 			consumers.add(consumer);
 		}
 	}
 
-	public void addProducer(@NonNull RegionAnalysis producer) {
+	public void addProducer(@NonNull RA producer) {
 		if (!producers.contains(producer)) {		// multi-production of e.g. OclAny is possible
 			producers.add(producer);
 		}
 	}
 
-	public @NonNull Iterable<@NonNull RegionAnalysis> getConsumers() {
+	public @NonNull Iterable<@NonNull RA> getConsumers() {
 		return consumers;
 	}
 
-	public @NonNull Iterable<@NonNull RegionAnalysis> getProducers() {
+	public @NonNull Iterable<@NonNull RA> getProducers() {
 		return producers;
 	}
 }

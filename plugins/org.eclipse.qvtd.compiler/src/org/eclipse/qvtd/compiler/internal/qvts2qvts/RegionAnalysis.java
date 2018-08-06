@@ -68,32 +68,32 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region>implements Name
 	/**
 	 * The TraceClassAnalysis instances that are consumed by this MappingPartitioner.
 	 */
-	private @Nullable List<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses = null;
+	private @Nullable List<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> consumedTraceClassAnalyses = null;
 
 	/**
 	 * The TracePropertyAnalysis instances that are consumed by this MappingPartitioner.
 	 */
-	private @Nullable List<@NonNull TracePropertyAnalysis> consumedTracePropertyAnalyses = null;
+	private @Nullable List<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> consumedTracePropertyAnalyses = null;
 
 	/**
 	 * The TraceClassAnalysis instances that are produced by this MappingPartitioner.
 	 */
-	private @Nullable List<@NonNull TraceClassAnalysis> producedTraceClassAnalyses = null;
+	private @Nullable List<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> producedTraceClassAnalyses = null;
 
 	/**
 	 * The TracePropertyAnalysis instances that are produced by this MappingPartitioner.
 	 */
-	private @Nullable List<@NonNull TracePropertyAnalysis> producedTracePropertyAnalyses = null;
+	private @Nullable List<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> producedTracePropertyAnalyses = null;
 
 	/**
 	 * The TraceClassAnalysis instances and super instances that are produced by this MappingPartitioner.
 	 */
-	private @Nullable Set<@NonNull TraceClassAnalysis> superProducedTraceClassAnalyses = null;
+	private @Nullable Set<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> superProducedTraceClassAnalyses = null;
 
 	/**
 	 * The TracePropertyAnalysis instances and super instances that are produced by this MappingPartitioner.
 	 */
-	private @Nullable Set<@NonNull TracePropertyAnalysis> superProducedTracePropertyAnalyses = null;
+	private @Nullable Set<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> superProducedTracePropertyAnalyses = null;
 
 	/**
 	 * The constant nodes that require no computation from other nodes.
@@ -212,8 +212,8 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region>implements Name
 		if (!predicatedMiddleEdges.contains(edge)) {
 			predicatedMiddleEdges.add(edge);
 			PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
-			TracePropertyAnalysis consumedTraceAnalysis = transformationAnalysis.addConsumer(propertyDatum, this);
-			List<@NonNull TracePropertyAnalysis> consumedTracePropertyAnalyses2 = consumedTracePropertyAnalyses;
+			TracePropertyAnalysis<@NonNull RegionAnalysis> consumedTraceAnalysis = transformationAnalysis.addConsumer(propertyDatum, this);
+			List<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> consumedTracePropertyAnalyses2 = consumedTracePropertyAnalyses;
 			if (consumedTracePropertyAnalyses2 == null) {
 				consumedTracePropertyAnalyses = consumedTracePropertyAnalyses2 = new ArrayList<>();
 			}
@@ -224,8 +224,8 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region>implements Name
 	private void addConsumptionOfMiddleNode(@NonNull Node node) {
 		if (!predicatedMiddleNodes.contains(node)) {
 			predicatedMiddleNodes.add(node);
-			TraceClassAnalysis consumedTraceAnalysis = transformationAnalysis.addConsumer(QVTscheduleUtil.getClassDatum(node), this);
-			List<@NonNull TraceClassAnalysis> consumedTraceClassAnalyses2 = consumedTraceClassAnalyses;
+			TraceClassAnalysis<@NonNull RegionAnalysis> consumedTraceAnalysis = transformationAnalysis.addConsumer(QVTscheduleUtil.getClassDatum(node), this);
+			List<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> consumedTraceClassAnalyses2 = consumedTraceClassAnalyses;
 			if (consumedTraceClassAnalyses2 == null) {
 				consumedTraceClassAnalyses = consumedTraceClassAnalyses2 = new ArrayList<>();
 			}
@@ -267,8 +267,8 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region>implements Name
 			realizedMiddleEdges.add(edge);
 		}
 		PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
-		TracePropertyAnalysis consumedTraceAnalysis = transformationAnalysis.addProducer(propertyDatum, this);
-		List<@NonNull TracePropertyAnalysis> producedTracePropertyAnalyses2 = producedTracePropertyAnalyses;
+		TracePropertyAnalysis<@NonNull RegionAnalysis> consumedTraceAnalysis = transformationAnalysis.addProducer(propertyDatum, this);
+		List<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> producedTracePropertyAnalyses2 = producedTracePropertyAnalyses;
 		if (producedTracePropertyAnalyses2 == null) {
 			producedTracePropertyAnalyses = producedTracePropertyAnalyses2 = new ArrayList<>();
 		}
@@ -282,8 +282,8 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region>implements Name
 		if (node.isRealized() && !realizedMiddleNodes.contains(node)) {
 			realizedMiddleNodes.add(node);
 		}
-		TraceClassAnalysis consumedTraceAnalysis = transformationAnalysis.addProducer(QVTscheduleUtil.getClassDatum(node), this);
-		List<@NonNull TraceClassAnalysis> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
+		TraceClassAnalysis<@NonNull RegionAnalysis> consumedTraceAnalysis = transformationAnalysis.addProducer(QVTscheduleUtil.getClassDatum(node), this);
+		List<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
 		if (producedTraceClassAnalyses2 == null) {
 			producedTraceClassAnalyses = producedTraceClassAnalyses2 = new ArrayList<>();
 		}
@@ -743,11 +743,11 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region>implements Name
 		return constantOutputNodes;
 	}
 
-	public @Nullable Iterable<@NonNull TraceClassAnalysis> getConsumedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> getConsumedTraceClassAnalyses() {
 		return consumedTraceClassAnalyses;
 	}
 
-	public @Nullable Iterable<@NonNull TracePropertyAnalysis> getConsumedTracePropertyAnalyses() {
+	public @Nullable Iterable<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> getConsumedTracePropertyAnalyses() {
 		return consumedTracePropertyAnalyses;
 	}
 
@@ -798,11 +798,11 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region>implements Name
 		return predicatedOutputNodes;
 	}
 
-	public @Nullable Iterable<@NonNull TraceClassAnalysis> getProducedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> getProducedTraceClassAnalyses() {
 		return producedTraceClassAnalyses;
 	}
 
-	public @Nullable Iterable<@NonNull TracePropertyAnalysis> getProducedTracePropertyAnalyses() {
+	public @Nullable Iterable<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> getProducedTracePropertyAnalyses() {
 		return producedTracePropertyAnalyses;
 	}
 
@@ -845,28 +845,28 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region>implements Name
 		return successEdge != null ? successEdge.getTargetNode() : null;
 	}
 
-	public @Nullable Iterable<@NonNull TraceClassAnalysis> getSuperProducedTraceClassAnalyses() {
-		List<@NonNull TraceClassAnalysis> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
+	public @Nullable Iterable<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> getSuperProducedTraceClassAnalyses() {
+		List<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
 		if (producedTraceClassAnalyses2 != null) {
-			Set<@NonNull TraceClassAnalysis> superProducedTraceClassAnalyses2 = superProducedTraceClassAnalyses;
+			Set<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> superProducedTraceClassAnalyses2 = superProducedTraceClassAnalyses;
 			if (superProducedTraceClassAnalyses2 == null) {
 				superProducedTraceClassAnalyses = superProducedTraceClassAnalyses2 = new HashSet<>();
 			}
-			for (@NonNull TraceClassAnalysis producedTraceClassAnalysis : producedTraceClassAnalyses2) {
+			for (@NonNull TraceClassAnalysis<@NonNull RegionAnalysis> producedTraceClassAnalysis : producedTraceClassAnalyses2) {
 				Iterables.addAll(superProducedTraceClassAnalyses2, producedTraceClassAnalysis.getSuperTraceClassAnalyses());
 			}
 		}
 		return superProducedTraceClassAnalyses;
 	}
 
-	public @Nullable Iterable<@NonNull TracePropertyAnalysis> getSuperProducedTracePropertyAnalyses() {
-		List<@NonNull TracePropertyAnalysis> producedTracePropertyAnalyses2 = producedTracePropertyAnalyses;
+	public @Nullable Iterable<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> getSuperProducedTracePropertyAnalyses() {
+		List<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> producedTracePropertyAnalyses2 = producedTracePropertyAnalyses;
 		if (producedTracePropertyAnalyses2 != null) {
-			Set<@NonNull TracePropertyAnalysis> superProducedTracePropertyAnalyses2 = superProducedTracePropertyAnalyses;
+			Set<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> superProducedTracePropertyAnalyses2 = superProducedTracePropertyAnalyses;
 			if (superProducedTracePropertyAnalyses2 == null) {
-				superProducedTracePropertyAnalyses = superProducedTracePropertyAnalyses2 = new HashSet<>();
+				superProducedTracePropertyAnalyses2 = superProducedTracePropertyAnalyses = new HashSet<>();
 			}
-			for (@NonNull TracePropertyAnalysis producedTracePropertyAnalysis : producedTracePropertyAnalyses2) {
+			for (@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis> producedTracePropertyAnalysis : producedTracePropertyAnalyses2) {
 				Iterables.addAll(superProducedTracePropertyAnalyses2, producedTracePropertyAnalysis.getSuperTracePropertyAnalyses());
 			}
 		}

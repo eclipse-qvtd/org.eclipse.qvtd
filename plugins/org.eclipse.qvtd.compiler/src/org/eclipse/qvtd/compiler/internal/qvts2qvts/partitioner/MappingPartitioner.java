@@ -345,11 +345,11 @@ public class MappingPartitioner implements Nameable
 		return regionAnalysis.getConstantOutputNodes();
 	}
 
-	public @Nullable Iterable<@NonNull TraceClassAnalysis> getConsumedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull TraceClassAnalysis<RegionAnalysis>> getConsumedTraceClassAnalyses() {
 		return regionAnalysis.getConsumedTraceClassAnalyses();
 	}
 
-	public @Nullable Iterable<@NonNull TracePropertyAnalysis> getConsumedTracePropertyAnalyses() {
+	public @Nullable Iterable<@NonNull TracePropertyAnalysis<RegionAnalysis>> getConsumedTracePropertyAnalyses() {
 		return regionAnalysis.getConsumedTracePropertyAnalyses();
 	}
 
@@ -399,11 +399,11 @@ public class MappingPartitioner implements Nameable
 		return predicatedWhenNodes;
 	}
 
-	public @Nullable Iterable<@NonNull TraceClassAnalysis> getProducedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull TraceClassAnalysis<RegionAnalysis>> getProducedTraceClassAnalyses() {
 		return regionAnalysis.getProducedTraceClassAnalyses();
 	}
 
-	public @Nullable Iterable<@NonNull TracePropertyAnalysis> getProducedTracePropertyAnalyses() {
+	public @Nullable Iterable<@NonNull TracePropertyAnalysis<RegionAnalysis>> getProducedTracePropertyAnalyses() {
 		return regionAnalysis.getProducedTracePropertyAnalyses();
 	}
 
@@ -493,11 +493,11 @@ public class MappingPartitioner implements Nameable
 		return regionAnalysis.getSuccessNode(traceNode);
 	}
 
-	public @Nullable Iterable<@NonNull TraceClassAnalysis> getSuperProducedTraceClassAnalyses() {
+	public @Nullable Iterable<@NonNull TraceClassAnalysis<RegionAnalysis>> getSuperProducedTraceClassAnalyses() {
 		return regionAnalysis.getSuperProducedTraceClassAnalyses();
 	}
 
-	public @NonNull TraceClassAnalysis getTraceClassAnalysis(@NonNull Node traceNode) {
+	public @NonNull TraceClassAnalysis<RegionAnalysis> getTraceClassAnalysis(@NonNull Node traceNode) {
 		ClassDatum traceClassDatum = QVTscheduleUtil.getClassDatum(traceNode);
 		return transformationAnalysis.getTraceClassAnalysis(traceClassDatum);
 	}
@@ -667,7 +667,7 @@ public class MappingPartitioner implements Nameable
 		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(name)) {
 			getClass();
 		}
-		CycleAnalysis cycleAnalysis = transformationAnalysis.getCycleAnalysis(regionAnalysis);
+		CycleRegionAnalysis cycleAnalysis = transformationAnalysis.getCycleAnalysis(regionAnalysis);
 		boolean isCyclic = cycleAnalysis != null;
 		//	boolean isInfallible = false;
 		//	if (cycleAnalysis != null) {

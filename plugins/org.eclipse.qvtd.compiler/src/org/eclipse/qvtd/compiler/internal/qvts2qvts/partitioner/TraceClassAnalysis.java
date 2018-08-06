@@ -37,7 +37,7 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractDispatch;
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class.
  */
-public class TraceClassAnalysis extends TraceElementAnalysis
+public abstract class TraceClassAnalysis<RA extends RegionAnalysis> extends TraceElementAnalysis<RA>
 {
 	protected final @NonNull ClassDatum traceClassDatum;
 
@@ -48,10 +48,9 @@ public class TraceClassAnalysis extends TraceElementAnalysis
 	 */
 	private @Nullable List<@NonNull Property> discriminatingProperties = null;
 
-	private @NonNull List<@NonNull TraceClassAnalysis> subTraceClassAnalyses = new ArrayList<>();
-	private @NonNull List<@NonNull TraceClassAnalysis> superTraceClassAnalyses = new ArrayList<>();
+	private @NonNull List<@NonNull TraceClassAnalysis<RA>> subTraceClassAnalyses = new ArrayList<>();
+	private @NonNull List<@NonNull TraceClassAnalysis<RA>> superTraceClassAnalyses = new ArrayList<>();
 
-	private @Nullable Boolean isCyclic = null;
 	private @Nullable Boolean isDispatcher = null;
 
 	public TraceClassAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull ClassDatum traceClassDatum) {
@@ -62,13 +61,13 @@ public class TraceClassAnalysis extends TraceElementAnalysis
 		assert traceClassDatum.getReferredTypedModel() == transformationAnalysis.getScheduleManager().getTraceTypedModel();
 	}
 
-	public void addSubTraceClassAnalysis(@NonNull TraceClassAnalysis traceClassAnalysis) {
+	public void addSubTraceClassAnalysis(@NonNull TraceClassAnalysis<RA> traceClassAnalysis) {
 		if (!subTraceClassAnalyses.contains(traceClassAnalysis)) {
 			subTraceClassAnalyses.add(traceClassAnalysis);
 		}
 	}
 
-	public void addSuperTraceClassAnalysis(@NonNull TraceClassAnalysis traceClassAnalysis) {
+	public void addSuperTraceClassAnalysis(@NonNull TraceClassAnalysis<RA> traceClassAnalysis) {
 		if (!superTraceClassAnalyses.contains(traceClassAnalysis)) {
 			superTraceClassAnalyses.add(traceClassAnalysis);
 		}
@@ -89,9 +88,9 @@ public class TraceClassAnalysis extends TraceElementAnalysis
 		//
 		//	Identify the properties available for discrimination.
 		//
-		Map<@NonNull RegionAnalysis, @NonNull Map<@NonNull Property, @NonNull NavigableEdge>> partitioner2property2edge = new HashMap<>();
+		Map<@NonNull RA, @NonNull Map<@NonNull Property, @NonNull NavigableEdge>> partitioner2property2edge = new HashMap<>();
 		Set<@NonNull Property> commonProperties = null;
-		for (@NonNull RegionAnalysis producer : producers) {
+		for (@NonNull RA producer : producers) {
 			Map<@NonNull Property, @NonNull NavigableEdge> property2edge = new HashMap<>();
 			partitioner2property2edge.put(producer, property2edge);
 			for (@NonNull Node traceNode : producer.getTraceNodes()) {
@@ -119,9 +118,9 @@ public class TraceClassAnalysis extends TraceElementAnalysis
 		//
 		List<@NonNull Property> sortedProperties = new ArrayList<@NonNull Property>(commonProperties);
 		Collections.sort(sortedProperties, NameUtil.NAMEABLE_COMPARATOR);
-		Map<@NonNull Property, @Nullable Map<@Nullable CompleteClass, @NonNull List<@NonNull RegionAnalysis>>> property2completeClass2regionAnalyses  = new HashMap<>();
+		Map<@NonNull Property, @Nullable Map<@Nullable CompleteClass, @NonNull List<@NonNull RA>>> property2completeClass2regionAnalyses  = new HashMap<>();
 		for (@NonNull Property property : sortedProperties) {
-			for (@NonNull RegionAnalysis producer : producers) {
+			for (@NonNull RA producer : producers) {
 				Map<@NonNull Property, @NonNull NavigableEdge> property2edge = partitioner2property2edge.get(producer);
 				assert property2edge != null;
 				NavigableEdge edge = property2edge.get(property);
@@ -129,7 +128,7 @@ public class TraceClassAnalysis extends TraceElementAnalysis
 					property2completeClass2regionAnalyses.put(property, null);
 				}
 				else {
-					Map<@Nullable CompleteClass, @NonNull List<@NonNull RegionAnalysis>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
+					Map<@Nullable CompleteClass, @NonNull List<@NonNull RA>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
 					if (completeClass2regionAnalyses == null) {
 						completeClass2regionAnalyses = new HashMap<>();
 						property2completeClass2regionAnalyses.put(property, completeClass2regionAnalyses);
@@ -142,7 +141,7 @@ public class TraceClassAnalysis extends TraceElementAnalysis
 					else {
 						completeClass = targetNode.getCompleteClass(); // FIXME use/ignore inheritance
 					}
-					List<@NonNull RegionAnalysis> regionAnalyses = completeClass2regionAnalyses.get(completeClass);
+					List<@NonNull RA> regionAnalyses = completeClass2regionAnalyses.get(completeClass);
 					if (regionAnalyses == null) {
 						regionAnalyses = new ArrayList<>();
 						completeClass2regionAnalyses.put(completeClass, regionAnalyses);
@@ -178,7 +177,7 @@ public class TraceClassAnalysis extends TraceElementAnalysis
 		int bestSize = 0;
 		Property bestProperty = null;
 		for (@NonNull Property property : property2completeClass2regionAnalyses.keySet()) {
-			Map<@Nullable CompleteClass, @NonNull List<@NonNull RegionAnalysis>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
+			Map<@Nullable CompleteClass, @NonNull List<@NonNull RA>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
 			if (completeClass2regionAnalyses != null) {
 				int size = completeClass2regionAnalyses.size();
 				if (size > bestSize) {
@@ -192,13 +191,13 @@ public class TraceClassAnalysis extends TraceElementAnalysis
 			s.append("property->completeClass->regionAnalyses");
 			for (@NonNull Property property : property2completeClass2regionAnalyses.keySet()) {
 				s.append("\n\t" + property);
-				Map<@Nullable CompleteClass, @NonNull List<@NonNull RegionAnalysis>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
+				Map<@Nullable CompleteClass, @NonNull List<@NonNull RA>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
 				if (completeClass2regionAnalyses != null) {
 					for (@Nullable CompleteClass completeClass : completeClass2regionAnalyses.keySet()) {
 						s.append("\n\t\t" + completeClass);
-						List<@NonNull RegionAnalysis> regionAnalyses = completeClass2regionAnalyses.get(completeClass);
+						List<@NonNull RA> regionAnalyses = completeClass2regionAnalyses.get(completeClass);
 						assert regionAnalyses != null;
-						for (@NonNull RegionAnalysis regionAnalysis : regionAnalyses) {
+						for (@NonNull RA regionAnalysis : regionAnalyses) {
 							s.append("\n\t\t\t" + regionAnalysis);
 						}
 					}
@@ -229,33 +228,16 @@ public class TraceClassAnalysis extends TraceElementAnalysis
 		return traceClassDatum.getName();
 	}
 
-	public @NonNull Iterable<@NonNull TraceClassAnalysis> getSubTraceClassAnalyses() {
+	public @NonNull Iterable<@NonNull TraceClassAnalysis<RA>> getSubTraceClassAnalyses() {
 		return subTraceClassAnalyses;
 	}
 
-	public @NonNull Iterable<@NonNull TraceClassAnalysis> getSuperTraceClassAnalyses() {
+	public @NonNull Iterable<@NonNull TraceClassAnalysis<RA>> getSuperTraceClassAnalyses() {
 		return superTraceClassAnalyses;
 	}
 
 	public @NonNull CompleteClass getTraceClass() {
 		return QVTscheduleUtil.getCompleteClass(traceClassDatum);
-	}
-
-	/**
-	 * Return true if this TraceClassAnalyis participates in a production/consumption cycle of either the trace class or its trace properties.
-	 */
-	public boolean isCyclic() {
-		Boolean isCyclic2 = isCyclic;
-		if (isCyclic2 == null) {
-			for (@NonNull TraceClassAnalysis subTraceClassAnalysis : subTraceClassAnalyses) {
-				if (transformationAnalysis.getCycleAnalysis(subTraceClassAnalysis) != null) {
-					isCyclic2 = isCyclic = true;
-					return isCyclic2;
-				}
-			}
-			isCyclic2 = isCyclic = false;
-		}
-		return isCyclic2;
 	}
 
 	/**

@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -24,7 +25,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 /**
  * Each TracePropertyAnalysis identifies the usage of one middle trace property.
  */
-public class TracePropertyAnalysis extends TraceElementAnalysis
+public abstract class TracePropertyAnalysis<RA extends RegionAnalysis> extends TraceElementAnalysis<RA>
 {
 	protected final @NonNull PropertyDatum tracePropertyDatum;
 
@@ -39,15 +40,15 @@ public class TracePropertyAnalysis extends TraceElementAnalysis
 		return tracePropertyDatum.getName();
 	}
 
-	public @NonNull Iterable<@NonNull TracePropertyAnalysis> getSuperTracePropertyAnalyses() {
-		List<@NonNull TracePropertyAnalysis> tracePropertyAnalyses = new ArrayList<>();
+	public @NonNull Iterable<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> getSuperTracePropertyAnalyses() {
+		List<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> tracePropertyAnalyses = new ArrayList<>();
 		ClassDatum traceClassDatum = QVTscheduleUtil.getOwningClassDatum(tracePropertyDatum);
-		TraceClassAnalysis traceClassAnalysis = transformationAnalysis.getTraceClassAnalysis(traceClassDatum);
-		for (@NonNull TraceClassAnalysis superTraceClassAnalysis : traceClassAnalysis.getSuperTraceClassAnalyses()) {
+		TraceClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis = transformationAnalysis.getTraceClassAnalysis(traceClassDatum);
+		for (@NonNull TraceClassAnalysis<@NonNull RegionAnalysis> superTraceClassAnalysis : traceClassAnalysis.getSuperTraceClassAnalyses()) {
 			ClassDatum superTraceClassDatum = superTraceClassAnalysis.getClassDatum();
 			PropertyDatum propertyDatum = NameUtil.getNameable(superTraceClassDatum.getOwnedPropertyDatums(), getName());
 			if (propertyDatum != null) {
-				TracePropertyAnalysis tracePropertyAnalysis = transformationAnalysis.getTracePropertyAnalysis(propertyDatum);
+				TracePropertyAnalysis<@NonNull RegionAnalysis> tracePropertyAnalysis = transformationAnalysis.getTracePropertyAnalysis(propertyDatum);
 				if (!tracePropertyAnalyses.contains(tracePropertyAnalysis)) {
 					tracePropertyAnalyses.add(tracePropertyAnalysis);
 				}
