@@ -30,7 +30,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * The corollary is realized and realized edges that do not involve other speculations
  * are also realized. Realization of speculation nodes must wait for the speculated partition.
  */
-class SpeculatingPartition extends AbstractPartition
+class SpeculatingPartition extends AbstractPartialPartition
 {
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
 

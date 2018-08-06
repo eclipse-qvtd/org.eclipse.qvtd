@@ -31,7 +31,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 /**
  * The SpeculatedPartition completes the speculation by realizing the corollaries of the speculation.
  */
-class NewSpeculatedPartition extends AbstractPartition
+class NewSpeculatedPartition extends AbstractPartialPartition
 {
 	private final @NonNull Node traceNode;
 	//	private final @Nullable Node predicatedDispatchNode;

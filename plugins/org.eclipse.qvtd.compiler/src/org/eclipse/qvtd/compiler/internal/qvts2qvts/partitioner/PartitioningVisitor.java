@@ -38,10 +38,10 @@ class PartitioningVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable 
 {
 	protected final @NonNull RegionHelper<?> regionHelper;
 	protected final @NonNull MicroMappingRegion partialRegion;
-	protected final @NonNull AbstractPartition partition;
+	protected final @NonNull AbstractPartialPartition partition;
 	private final @NonNull Map<@NonNull Node, @NonNull Node> oldNode2partialNode = new HashMap<>();
 
-	protected PartitioningVisitor(@NonNull RegionHelper<?> regionHelper, @NonNull AbstractPartition partition) {
+	protected PartitioningVisitor(@NonNull RegionHelper<?> regionHelper, @NonNull AbstractPartialPartition partition) {
 		super(null);
 		this.regionHelper = regionHelper;
 		this.partialRegion = (MicroMappingRegion)regionHelper.getRegion();

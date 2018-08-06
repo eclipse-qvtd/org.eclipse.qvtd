@@ -26,7 +26,7 @@ import com.google.common.collect.Iterables;
  * The RealizedPartition identifies the nodes and edges required by an unspeculated micro-mapping
  * which directly creates the realized variables.
  */
-class RealizedPartition extends AbstractPartition
+class RealizedPartition extends AbstractPartialPartition
 {
 	public RealizedPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
 		super(partitioner, reachabilityForest);

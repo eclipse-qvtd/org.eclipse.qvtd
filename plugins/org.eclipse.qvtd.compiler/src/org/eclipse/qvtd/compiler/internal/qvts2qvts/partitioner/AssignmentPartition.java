@@ -27,7 +27,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * The AssignmentPartition identifies the nodes and edges required by an assignment micro-mapping
  * which creates the predicates and realization of a property assignment.
  */
-class AssignmentPartition extends AbstractPartition
+class AssignmentPartition extends AbstractPartialPartition
 {
 	public AssignmentPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, @NonNull Edge realizedEdge) {
 		super(partitioner, reachabilityForest);
@@ -114,7 +114,7 @@ class AssignmentPartition extends AbstractPartition
 	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
 		Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
 		if (edgeRole == Role.REALIZED) {
-			AbstractPartition realizingPartition = partitioner.getRealizingPartition(edge);
+			AbstractPartialPartition realizingPartition = partitioner.getRealizingPartition(edge);
 			if (realizingPartition instanceof AssignmentPartition) {
 				if (!transformationAnalysis.isCorollary(QVTscheduleUtil.getTargetNode(edge))) {			// FIXME do corollaries before assigns
 					return null;

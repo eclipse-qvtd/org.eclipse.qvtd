@@ -33,7 +33,7 @@ import com.google.common.collect.Sets;
 // FIXME if multiple heads are predicated, we cannot wait for all of them before speculating. Speculation
 //	may need to consider just loaded nodes.
 //
-class SpeculationPartition extends AbstractPartition
+class SpeculationPartition extends AbstractPartialPartition
 {
 	private final @NonNull Set<@NonNull Node> headNodes;
 

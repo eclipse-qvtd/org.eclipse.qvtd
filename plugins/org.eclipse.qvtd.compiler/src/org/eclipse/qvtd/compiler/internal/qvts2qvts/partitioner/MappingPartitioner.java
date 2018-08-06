@@ -107,14 +107,14 @@ public class MappingPartitioner implements Nameable
 	/**
 	 * Dynamically growing map of edges that have been realized to the partition that realizes them.
 	 */
-	private final @NonNull Map<@NonNull Edge, @NonNull AbstractPartition> alreadyRealizedEdges = new HashMap<>();
+	private final @NonNull Map<@NonNull Edge, @NonNull AbstractPartialPartition> alreadyRealizedEdges = new HashMap<>();
 
 	/**
 	 * Dynamically growing list of nodes that have been realized by a partition.
 	 */
 	private final @NonNull Set<@NonNull Node> alreadyRealizedNodes = new HashSet<>();
 
-	private final @NonNull Map<@NonNull Edge, @NonNull List<@NonNull AbstractPartition>> debugEdge2partitions = new HashMap<>();
+	private final @NonNull Map<@NonNull Edge, @NonNull List<@NonNull AbstractPartialPartition>> debugEdge2partitions = new HashMap<>();
 
 	public MappingPartitioner(@NonNull TransformationPartitioner transformationPartitioner, @NonNull RegionAnalysis regionAnalysis) {
 		this.scheduleManager = transformationPartitioner.getScheduleManager();
@@ -125,7 +125,7 @@ public class MappingPartitioner implements Nameable
 		//
 	}
 
-	public void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole, @NonNull AbstractPartition partition) {
+	public void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole, @NonNull AbstractPartialPartition partition) {
 		if (newEdgeRole == Role.CONSTANT) {
 			alreadyConstantEdges.add(edge);
 		}
@@ -141,7 +141,7 @@ public class MappingPartitioner implements Nameable
 		else if (newEdgeRole == Role.REALIZED) {
 			alreadyRealizedEdges.put(edge, partition);
 		}
-		List<@NonNull AbstractPartition> partitions = debugEdge2partitions.get(edge);
+		List<@NonNull AbstractPartialPartition> partitions = debugEdge2partitions.get(edge);
 		if (partitions == null) {
 			partitions = new ArrayList<>();
 			debugEdge2partitions.put(edge, partitions);
@@ -452,7 +452,7 @@ public class MappingPartitioner implements Nameable
 		return realizedWhereNodes;
 	}
 
-	public @Nullable AbstractPartition getRealizingPartition(@NonNull Edge edge) {
+	public @Nullable AbstractPartialPartition getRealizingPartition(@NonNull Edge edge) {
 		return alreadyRealizedEdges.get(edge);
 	}
 

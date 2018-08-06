@@ -27,7 +27,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * FIXME. This functionality should eventually be absorbed into the roor region together with
  * smart loops to resolve secondary heads from a primary head.
  */
-class ActivatorPartition extends AbstractPartition
+class ActivatorPartition extends AbstractPartialPartition
 {
 	public ActivatorPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
 		super(partitioner, reachabilityForest);
