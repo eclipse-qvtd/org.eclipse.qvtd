@@ -13,6 +13,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionsAnalysis;
 
 /**
  * The CyclesAnalysis identifies a CyclicPartition for each group of allPartitions that contribute to a cycle.
@@ -28,6 +29,10 @@ public class CyclesPartitionAnalysis extends CyclesAnalysis<@NonNull Partition>
 			@NonNull Set<@NonNull Partition> cyclicRegionAnalyses,
 			@NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> cyclicTraceClassAnalyses,
 			@NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> cyclicTracePropertyAnalyses) {
-		return new CyclePartitionAnalysis(this, cyclicRegionAnalyses, cyclicTraceClassAnalyses, cyclicTracePropertyAnalyses);
+		return new CyclicPartition(this, cyclicRegionAnalyses, cyclicTraceClassAnalyses, cyclicTracePropertyAnalyses);
+	}
+
+	public @NonNull RegionsAnalysis<@NonNull Partition> getRegionsAnalysis() {
+		return regionsAnalysis;
 	}
 }

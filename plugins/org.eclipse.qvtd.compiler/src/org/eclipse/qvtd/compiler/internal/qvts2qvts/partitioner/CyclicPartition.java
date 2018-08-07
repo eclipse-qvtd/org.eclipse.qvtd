@@ -13,25 +13,60 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.AbstractPartialRegionAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 
 /**
  * Each CycleAnalysis identifies one group of regionAnalyses that contribute to a cycle.
  */
-public class CyclePartitionAnalysis implements CycleAnalysis<@NonNull Partition>
+public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Partition> implements Partition, CycleAnalysis<@NonNull Partition>
 {
-	protected final @NonNull CyclesAnalysis<@NonNull Partition> cyclesAnalysis;
+	protected final @NonNull CyclesPartitionAnalysis cyclesAnalysis;
 	protected final @NonNull Set<@NonNull Partition> regionAnalyses;
 	protected final @NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> traceClassAnalyses;
 	protected final @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> tracePropertyAnalyses;
 
-	public CyclePartitionAnalysis(@NonNull CyclesAnalysis<@NonNull Partition> cyclesAnalysis, @NonNull Set<@NonNull Partition> regionAnalyses,
+	public CyclicPartition(@NonNull CyclesPartitionAnalysis cyclesAnalysis, @NonNull Set<@NonNull Partition> regionAnalyses,
 			@NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> traceClassAnalyses, @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> tracePropertyAnalyses) {
+		super(cyclesAnalysis.getRegionsAnalysis(), QVTscheduleFactory.eINSTANCE.createCyclicMappingRegion());	// FIXME orphan region
 		this.cyclesAnalysis = cyclesAnalysis;
 		this.regionAnalyses = regionAnalyses;
 		this.traceClassAnalyses = traceClassAnalyses;
 		this.tracePropertyAnalyses = tracePropertyAnalyses;
 		assert !regionAnalyses.isEmpty();
 		assert !traceClassAnalyses.isEmpty() || !tracePropertyAnalyses.isEmpty();
+	}
+
+	@Override
+	public void analyzePartition() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();		// FIXME
+	}
+
+	@Override
+	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();		// FIXME
+	}
+
+	@Override
+	protected @NonNull Iterable<@NonNull Edge> getPartialEdges() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();		// FIXME
+	}
+
+	@Override
+	protected @NonNull Iterable<@NonNull Node> getPartialNodes() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();		// FIXME
+	}
+
+	@Override
+	public @NonNull Partition getRA() {
+		return this;
 	}
 
 	@Override

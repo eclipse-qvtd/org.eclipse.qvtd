@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvtb2qvts;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -123,7 +124,7 @@ public abstract class RegionsAnalysis<@NonNull RA extends PartialRegionAnalysis<
 	} */
 
 		CyclesAnalysis<@NonNull RA> cyclesAnalysis = createCyclesAnalysis();
-		cyclesAnalysis.analyze();
+		List<@NonNull Set<@NonNull RA>> sortedCycleElementSets = cyclesAnalysis.analyze();
 		//
 		//	Each TraceClassAnalysis produced only by acyclic partitioners identifies an acyclic trace class
 		// ?? is this cdead ?? should it be for TracePropertyAnalysis too ??

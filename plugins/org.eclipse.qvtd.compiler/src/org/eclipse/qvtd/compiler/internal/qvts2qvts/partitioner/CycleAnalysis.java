@@ -23,4 +23,6 @@ public interface CycleAnalysis<@NonNull RA extends PartialRegionAnalysis<@NonNul
 	public @NonNull Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> getTraceClassAnalyses();
 
 	public @NonNull Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> getTracePropertyAnalyses();
+
+	public @NonNull RA getRA();
 }

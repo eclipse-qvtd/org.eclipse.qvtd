@@ -57,7 +57,7 @@ public abstract class CyclesAnalysis<@NonNull RA extends PartialRegionAnalysis<@
 	 *
 	 * NB cycles may involve trace classes and their trace class properties.
 	 */
-	public void analyze() {
+	public @Nullable List<@NonNull Set<@NonNull RA>> analyze() {
 		Iterable<@NonNull Set<@NonNull RA>> prunedCycleElements = computeCycleElementSets();
 		//
 		/*		for (@NonNull RA regionAnalysis : regionAnalyses) {
@@ -82,7 +82,10 @@ public abstract class CyclesAnalysis<@NonNull RA extends PartialRegionAnalysis<@
 		} */
 		//
 		if (prunedCycleElements != null) {
-			createCycleAnalyses(prunedCycleElements);
+			return createCycleAnalyses(prunedCycleElements);
+		}
+		else {
+			return null;
 		}
 	}
 
@@ -236,7 +239,7 @@ public abstract class CyclesAnalysis<@NonNull RA extends PartialRegionAnalysis<@
 	}
 
 
-	protected void createCycleAnalyses(@NonNull Iterable<@NonNull Set<@NonNull RA>> cycleElementSets) {
+	protected @NonNull List<@NonNull Set<@NonNull RA>> createCycleAnalyses(@NonNull Iterable<@NonNull Set<@NonNull RA>> cycleElementSets) {
 		List<@NonNull Set<@NonNull RA>> sortedCycleElementSets = Lists.newArrayList(cycleElementSets);
 		Collections.sort(sortedCycleElementSets, QVTbaseUtil.CollectionSizeComparator.INSTANCE);	// Smallest first
 		//
@@ -257,7 +260,7 @@ public abstract class CyclesAnalysis<@NonNull RA extends PartialRegionAnalysis<@
 				if (nestingCycleElements.removeAll(nestedCycleElements)) {
 					int newSize = nestingCycleElements.size();
 					assert (oldSize - newSize) == nestedCycleElements.size();
-					// 	nestingCycleElements.add(nestedCycleAnalysis.getRA());		-- FIXME
+					nestingCycleElements.add(nestedCycleAnalysis.getRA());
 				}
 			}
 		}
@@ -314,6 +317,7 @@ public abstract class CyclesAnalysis<@NonNull RA extends PartialRegionAnalysis<@
 				}
 			}
 		}
+		return sortedCycleElementSets;
 	}
 
 	protected @NonNull CycleAnalysis<@NonNull RA> createCycleAnalysis(@NonNull Set<@NonNull RA> cyclicRegionAnalyses) {
