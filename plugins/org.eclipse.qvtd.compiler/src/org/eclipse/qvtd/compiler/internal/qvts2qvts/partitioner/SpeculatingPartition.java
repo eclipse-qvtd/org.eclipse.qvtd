@@ -35,7 +35,7 @@ class SpeculatingPartition extends AbstractPartialPartition
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
 
 	public SpeculatingPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
-		super(partitioner, reachabilityForest);
+		super(partitioner, reachabilityForest, "«speculating»");
 		//
 		//	The realized middle (trace) nodes become speculated head nodes and their already realized edge ends populate tracedInputNodes.
 		//

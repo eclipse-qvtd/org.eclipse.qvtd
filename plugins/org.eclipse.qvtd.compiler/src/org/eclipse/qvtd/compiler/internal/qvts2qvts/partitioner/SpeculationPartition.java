@@ -38,7 +38,7 @@ class SpeculationPartition extends AbstractPartialPartition
 	private final @NonNull Set<@NonNull Node> headNodes;
 
 	public SpeculationPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
-		super(partitioner, reachabilityForest);
+		super(partitioner, reachabilityForest, "«speculation»");
 		this.headNodes = Sets.newHashSet(QVTscheduleUtil.getHeadNodes(region));
 		//
 		//	The realized middle (trace) nodes become speculation nodes.

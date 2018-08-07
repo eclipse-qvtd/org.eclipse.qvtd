@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -79,6 +80,11 @@ public class TransformationPartitioner extends RegionsAnalysis<@NonNull Partitio
 	 */
 	//	private @Nullable Map<@NonNull TraceClassAnalysis, @NonNull Set<@NonNull TraceClassAnalysis>> traceClassAnalysis2traceClassAnalysesClosure = null;
 
+	/**
+	 * The analysis of cycles.
+	 */
+	private @Nullable CyclesAnalysis<@NonNull Partition> cyclesPartitionAnalysis = null;
+
 	public TransformationPartitioner(@NonNull TransformationAnalysis transformationAnalysis, @NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) {
 		super(transformationAnalysis.getScheduleManager());
 		this.transformationAnalysis = transformationAnalysis;
@@ -124,6 +130,12 @@ public class TransformationPartitioner extends RegionsAnalysis<@NonNull Partitio
 	@Override
 	protected @NonNull TracePropertyPartitionAnalysis createTracePropertyAnalysis(@NonNull PropertyDatum tracePropertyDatum) {
 		return new TracePropertyPartitionAnalysis(this, tracePropertyDatum);
+	}
+
+	@Override
+	public @Nullable CycleAnalysis<@NonNull Partition> getCycleAnalysis(@NonNull TraceClassAnalysis<@NonNull Partition> traceClassAnalysis) {
+		assert cyclesPartitionAnalysis != null;
+		return cyclesPartitionAnalysis != null ? cyclesPartitionAnalysis.getCycleAnalysis(traceClassAnalysis) : null;
 	}
 
 	public @NonNull MappingPartitioner getMappingPartitioner(@NonNull MappingRegion region) {
@@ -238,6 +250,8 @@ public class TransformationPartitioner extends RegionsAnalysis<@NonNull Partitio
 				Iterables.addAll(partitions, cycleAnalysis.partition(mappingPartitioners));
 			}
 		}
+		Collections.sort(partitions, NameUtil.NAMEABLE_COMPARATOR);
+		postPartition();
 		List<@NonNull MappingRegion> partitionedRegions = new ArrayList<>(partitions.size());
 		int partitionNumber = 0;
 		Region currentRegion = null;
@@ -250,5 +264,18 @@ public class TransformationPartitioner extends RegionsAnalysis<@NonNull Partitio
 			partitionedRegions.add(partition.createMicroMappingRegion(partitionNumber++));
 		}
 		return partitionedRegions;
+	}
+
+	public void postPartition() throws CompilerChainException {
+		for(@NonNull Partition partition : partitions) {
+			partition.analyzePartition();
+		}
+		//		if (scheduleManager.needsDiscrimination()) {
+		//			computeTraceClassDiscrimination();
+		//		}
+		computeTraceClassInheritance();
+		this.cyclesPartitionAnalysis = computeCyclicTraceClasses();
+		//		this.fallibilityAnalysis = computeFallibilityAnalysis();
+
 	}
 }

@@ -61,9 +61,15 @@ abstract class AbstractPartialPartition extends AbstractPartition
 	 */
 	private final @NonNull ReachabilityForest reachabilityForest;
 
-	protected AbstractPartialPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
+	//	protected AbstractPartialPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
+	//		super(partitioner);
+	//		this.name = QVTscheduleUtil.getName(region);
+	//		this.reachabilityForest = reachabilityForest;
+	//	}
+
+	protected AbstractPartialPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, @NonNull String suffix) {
 		super(partitioner);
-		this.name = QVTscheduleUtil.getName(region);
+		this.name = QVTscheduleUtil.getName(region) + suffix;
 		this.reachabilityForest = reachabilityForest;
 	}
 
@@ -281,11 +287,26 @@ abstract class AbstractPartialPartition extends AbstractPartition
 		return new PartitioningVisitor(new RegionHelper<>(scheduleManager, partialRegion), this);
 	}
 
+	@Override
+	public @NonNull String getName() {		// FIXME Bad RegionHelper override
+		return name;
+	}
+
 	/**
 	 * Return all the original region nodes that contribute to the partition.
 	 */
 	protected @NonNull Iterable<@NonNull Node> getNodes() {
 		return node2nodeRole.keySet();
+	}
+
+	@Override
+	protected @NonNull Iterable<@NonNull Edge> getPartialEdges() {
+		return edge2edgeRole.keySet();
+	}
+
+	@Override
+	protected @NonNull Iterable<@NonNull Node> getPartialNodes() {
+		return getNodes();
 	}
 
 	protected @NonNull Iterable<@NonNull Node> getPredecessors(@NonNull Node targetNode) {

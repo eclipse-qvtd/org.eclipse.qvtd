@@ -29,7 +29,7 @@ import com.google.common.collect.Iterables;
 class RealizedPartition extends AbstractPartialPartition
 {
 	public RealizedPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
-		super(partitioner, reachabilityForest);
+		super(partitioner, reachabilityForest, "«realized»");
 		Iterable<@NonNull Node> predicatedMiddleNodes = partitioner.getPredicatedMiddleNodes();
 		assert Iterables.isEmpty(predicatedMiddleNodes);
 		//

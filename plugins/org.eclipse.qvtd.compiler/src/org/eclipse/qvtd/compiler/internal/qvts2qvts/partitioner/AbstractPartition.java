@@ -36,12 +36,17 @@ abstract class AbstractPartition extends AbstractPartialRegionAnalysis<@NonNull 
 	}
 
 	@Override
+	public void analyzePartition() {
+		analyze();
+	}
+
+	@Override
 	public @NonNull Region getRegion() {
 		return region;
 	}
 
 	@Override
-	public String toString() {
-		return partitioner.toString();
+	public @NonNull String toString() {
+		return getName();
 	}
 }

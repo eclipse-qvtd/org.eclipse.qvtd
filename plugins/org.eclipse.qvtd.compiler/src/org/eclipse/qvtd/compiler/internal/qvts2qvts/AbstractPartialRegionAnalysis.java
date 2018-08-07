@@ -213,7 +213,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 	}
 
 	private void analyzeEdges() {
-		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
+		for (@NonNull Edge edge : getPartialEdges()) {
 			if (!edge.isSecondary()) {
 				if (edge.isPredicated()) {
 					predicatedEdges.add(edge);
@@ -295,7 +295,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 	}
 
 	private void analyzeNodes() {
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
+		for (@NonNull Node node : getPartialNodes()) {
 			if (node.isNullLiteral()) {
 				addConstantNode(node);
 			}
@@ -433,6 +433,10 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 	public @Nullable Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> getConsumedTracePropertyAnalyses() {
 		return consumedTracePropertyAnalyses;
 	}
+
+	protected abstract @NonNull Iterable<@NonNull Edge> getPartialEdges();
+
+	protected abstract @NonNull Iterable<@NonNull Node> getPartialNodes();
 
 	public @NonNull Iterable<@NonNull NavigableEdge> getOldPrimaryNavigableEdges() {
 		return oldPrimaryNavigableEdges;

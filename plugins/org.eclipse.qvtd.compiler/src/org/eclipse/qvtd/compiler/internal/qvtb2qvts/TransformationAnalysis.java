@@ -22,9 +22,14 @@ import org.eclipse.ocl.pivot.CompletePackage;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CycleAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CycleRegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CyclesAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CyclesRegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TracePropertyRegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -73,6 +78,11 @@ public class TransformationAnalysis extends RegionsAnalysis<@NonNull RegionAnaly
 	 * successfully. The map identifies the regions in which a deferred realization is needed.
 	 */
 	private final @NonNull Map<@NonNull Property, @NonNull List<@NonNull Region>> corollaryProperty2regions = new HashMap<>();
+
+	/**
+	 * The analysis of cycles.
+	 */
+	private @Nullable CyclesAnalysis<@NonNull RegionAnalysis> cyclesRegionAnalysis = null;
 
 	public TransformationAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull Transformation transformation, @NonNull ScheduledRegion scheduledRegion) {
 		super(scheduleManager);
@@ -160,6 +170,17 @@ public class TransformationAnalysis extends RegionsAnalysis<@NonNull RegionAnaly
 		return corollaryProperty2regions.get(edge.getProperty());
 	}
 
+	public @Nullable CycleRegionAnalysis getCycleAnalysis(@NonNull RegionAnalysis regionAnalysis) {
+		assert cyclesRegionAnalysis != null;
+		return cyclesRegionAnalysis != null ? (CycleRegionAnalysis)cyclesRegionAnalysis.getCycleAnalysis(regionAnalysis) : null;
+	}
+
+	@Override
+	public @Nullable CycleAnalysis<@NonNull RegionAnalysis> getCycleAnalysis(@NonNull TraceClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis) {
+		assert cyclesRegionAnalysis != null;
+		return cyclesRegionAnalysis != null ? cyclesRegionAnalysis.getCycleAnalysis(traceClassAnalysis) : null;
+	}
+
 	@Override
 	public String getName() {
 		return transformation.getName();
@@ -245,6 +266,16 @@ public class TransformationAnalysis extends RegionsAnalysis<@NonNull RegionAnaly
 			return false;
 		}
 		return traceClassAnalysis.isCyclic();
+	}
+
+	public void prePartition() throws CompilerChainException {
+		if (scheduleManager.needsDiscrimination()) {
+			computeTraceClassDiscrimination();
+		}
+		computeTraceClassInheritance();
+		this.cyclesRegionAnalysis = computeCyclicTraceClasses();
+		//		this.fallibilityAnalysis = computeFallibilityAnalysis();
+
 	}
 
 	@Override

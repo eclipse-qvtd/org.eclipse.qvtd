@@ -237,10 +237,29 @@ public abstract class CyclesAnalysis<@NonNull RA extends PartialRegionAnalysis<@
 
 
 	protected void createCycleAnalyses(@NonNull Iterable<@NonNull Set<@NonNull RA>> cycleElementSets) {
+		List<@NonNull Set<@NonNull RA>> sortedCycleElementSets = Lists.newArrayList(cycleElementSets);
+		Collections.sort(sortedCycleElementSets, QVTbaseUtil.CollectionSizeComparator.INSTANCE);	// Smallest first
+		//
+		//	A nested cycle is necessarily fully contained by a nesting cycle. We can therefore steadily replace
+		//	each set of nested elements by a cyclic element in the nesting context. The mallest first lordering
+		//	does not need to be recomputed after each nesting simplification since nested candidates continue to
+		//	precede their potential nestings.
+		//
 		List<@NonNull CycleAnalysis<@NonNull RA>> cycleAnalyses = new ArrayList<>();
-		for (@NonNull Set<@NonNull RA> cycleElements : cycleElementSets) {
-			CycleAnalysis<@NonNull RA> cycleAnalysis = createCycleAnalysis(cycleElements);
-			cycleAnalyses.add(cycleAnalysis);
+		int iMax = sortedCycleElementSets.size();
+		for (int i = 0; i < iMax; i++)  {
+			Set<@NonNull RA> nestedCycleElements = sortedCycleElementSets.get(i);
+			CycleAnalysis<@NonNull RA> nestedCycleAnalysis = createCycleAnalysis(nestedCycleElements);
+			cycleAnalyses.add(nestedCycleAnalysis);
+			for (int j = i+1; j < iMax; j++)  {
+				Set<@NonNull RA> nestingCycleElements = sortedCycleElementSets.get(j);
+				int oldSize = nestingCycleElements.size();
+				if (nestingCycleElements.removeAll(nestedCycleElements)) {
+					int newSize = nestingCycleElements.size();
+					assert (oldSize - newSize) == nestedCycleElements.size();
+					// 	nestingCycleElements.add(nestedCycleAnalysis.getRA());		-- FIXME
+				}
+			}
 		}
 		if (TransformationPartitioner.CYCLES.isActive()) {
 			if (cycleAnalyses.isEmpty()) {

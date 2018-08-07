@@ -24,6 +24,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
@@ -389,6 +390,16 @@ public class RegionAnalysis extends AbstractPartialRegionAnalysis<@NonNull Regio
 	@Override
 	public @NonNull String getName() {
 		return String.valueOf(region);
+	}
+
+	@Override
+	protected @NonNull Iterable<@NonNull Edge> getPartialEdges() {
+		return QVTscheduleUtil.getOwnedEdges(region);
+	}
+
+	@Override
+	protected @NonNull Iterable<@NonNull Node> getPartialNodes() {
+		return QVTscheduleUtil.getOwnedNodes(region);
 	}
 
 	public @NonNull TransformationAnalysis getTransformationAnalysis() {

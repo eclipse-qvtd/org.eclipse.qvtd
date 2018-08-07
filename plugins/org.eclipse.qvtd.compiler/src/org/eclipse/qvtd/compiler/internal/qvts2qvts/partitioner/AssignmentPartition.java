@@ -30,7 +30,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 class AssignmentPartition extends AbstractPartialPartition
 {
 	public AssignmentPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, @NonNull Edge realizedEdge) {
-		super(partitioner, reachabilityForest);
+		super(partitioner, reachabilityForest, "«edge-" + QVTscheduleUtil.getName(realizedEdge) + "»");
 		//
 		//	The realized middle (trace) nodes become predicated head nodes.
 		//

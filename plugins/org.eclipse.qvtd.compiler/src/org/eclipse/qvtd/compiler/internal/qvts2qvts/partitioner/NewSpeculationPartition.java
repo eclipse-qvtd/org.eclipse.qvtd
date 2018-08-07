@@ -43,7 +43,7 @@ class NewSpeculationPartition extends AbstractPartialPartition
 	private final @Nullable Node dispatchNode;
 
 	public NewSpeculationPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
-		super(partitioner, reachabilityForest);
+		super(partitioner, reachabilityForest, "«speculation»");
 		this.originalHeadNodes = Sets.newHashSet(QVTscheduleUtil.getHeadNodes(region));
 		this.executionNodes = partitioner.getExecutionNodes();
 		this.dispatchNode = partitioner.basicGetDispatchNode();

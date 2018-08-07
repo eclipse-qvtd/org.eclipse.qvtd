@@ -34,7 +34,7 @@ class NewSpeculatingPartition extends AbstractPartialPartition
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
 
 	public NewSpeculatingPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest/*, boolean isInfallible*/) {
-		super(partitioner, reachabilityForest);
+		super(partitioner, reachabilityForest, "«speculating»");
 		this.executionNodes = partitioner.getExecutionNodes();
 		//
 		//	For a no-override top relation the realized middle (trace) nodes become speculated nodes.

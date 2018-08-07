@@ -30,7 +30,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 class ActivatorPartition extends AbstractPartialPartition
 {
 	public ActivatorPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
-		super(partitioner, reachabilityForest);
+		super(partitioner, reachabilityForest, "«activator»");
 		Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(region);
 		//
 		//	The realized middle (trace) nodes become speculation nodes.

@@ -22,7 +22,6 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CycleAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CycleRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CyclesAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassRegionAnalysis;
@@ -53,11 +52,6 @@ public abstract class RegionsAnalysis<@NonNull RA extends PartialRegionAnalysis<
 	 * The TracePropertyAnalysis for each trace property.
 	 */
 	private final @NonNull Map<@NonNull PropertyDatum, @NonNull TracePropertyAnalysis<@NonNull RA>> propertyDatum2tracePropertyAnalysis = new HashMap<>();
-
-	/**
-	 * The analysis of cycles.
-	 */
-	private @Nullable CyclesAnalysis<@NonNull RA> cyclesAnalysis = null;
 
 	protected RegionsAnalysis(@NonNull ScheduleManager scheduleManager) {
 		super(scheduleManager.getEnvironmentFactory());
@@ -108,7 +102,7 @@ public abstract class RegionsAnalysis<@NonNull RA extends PartialRegionAnalysis<
 		return (TraceClassRegionAnalysis)classDatum2traceClassAnalysis.get(traceClassDatum);
 	}
 
-	private @NonNull CyclesAnalysis<@NonNull RA> computeCyclicTraceClasses() {
+	protected @NonNull CyclesAnalysis<@NonNull RA> computeCyclicTraceClasses() {
 		//
 		//	Each mapping partitioner that consumes no trace class, is an acyclic producer.
 		//
@@ -147,13 +141,13 @@ public abstract class RegionsAnalysis<@NonNull RA extends PartialRegionAnalysis<
 		return cyclesAnalysis;
 	}
 
-	private void computeTraceClassDiscrimination() throws CompilerChainException {
+	protected void computeTraceClassDiscrimination() throws CompilerChainException {
 		for (@NonNull TraceClassAnalysis<@NonNull RA> traceClassAnalysis : classDatum2traceClassAnalysis.values()) {
 			traceClassAnalysis.discriminate();
 		}
 	}
 
-	private void computeTraceClassInheritance() {
+	protected void computeTraceClassInheritance() {
 		for (@NonNull TraceClassAnalysis<@NonNull RA> subTraceClassRegionAnalysis : classDatum2traceClassAnalysis.values()) {
 			ClassDatum traceClassDatum = subTraceClassRegionAnalysis.getClassDatum();
 			for (@NonNull ClassDatum superTraceClassDatum : QVTscheduleUtil.getSuperClassDatums(traceClassDatum)) {
@@ -182,17 +176,7 @@ public abstract class RegionsAnalysis<@NonNull RA extends PartialRegionAnalysis<
 		return getCycleAnalysis(traceClassAnalysis);
 	}
 
-	public @Nullable CycleRegionAnalysis getCycleAnalysis(@NonNull RA regionAnalysis) {
-		assert cyclesAnalysis != null;
-		return cyclesAnalysis != null ? (CycleRegionAnalysis)cyclesAnalysis.getCycleAnalysis(regionAnalysis) : null;
-	}
-
-	public @Nullable CycleAnalysis<@NonNull RA> getCycleAnalysis(@NonNull TraceClassAnalysis<@NonNull RA> traceClassAnalysis) {
-		assert cyclesAnalysis != null;
-		return cyclesAnalysis != null ? cyclesAnalysis.getCycleAnalysis(traceClassAnalysis) : null;
-	}
-
-	//	protected abstract @Nullable CycleAnalysis<@NonNull RA> getCycleAnalysis(@NonNull TraceClassAnalysis<@NonNull RA> traceClassAnalysis);
+	public abstract @Nullable CycleAnalysis<@NonNull RA> getCycleAnalysis(@NonNull TraceClassAnalysis<@NonNull RA> traceClassAnalysis);
 
 	protected abstract @NonNull Iterable<@NonNull RA> getPartialRegionAnalyses();
 
@@ -206,15 +190,5 @@ public abstract class RegionsAnalysis<@NonNull RA extends PartialRegionAnalysis<
 
 	public @NonNull TracePropertyAnalysis<@NonNull RA> getTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
 		return ClassUtil.nonNullState(propertyDatum2tracePropertyAnalysis.get(propertyDatum));
-	}
-
-	public void prePartition() throws CompilerChainException {
-		if (scheduleManager.needsDiscrimination()) {
-			computeTraceClassDiscrimination();
-		}
-		computeTraceClassInheritance();
-		this.cyclesAnalysis = computeCyclicTraceClasses();
-		//		this.fallibilityAnalysis = computeFallibilityAnalysis();
-
 	}
 }

@@ -17,6 +17,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 
 interface Partition extends PartialRegionAnalysis<@NonNull Partition>
 {
+	public void analyzePartition();
+
 	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber);
 
 	public @NonNull Region getRegion();

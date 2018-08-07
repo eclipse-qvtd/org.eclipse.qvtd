@@ -12,6 +12,7 @@ package org.eclipse.qvtd.pivot.qvtbase.utilities;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -57,6 +58,20 @@ public class QVTbaseUtil extends PivotUtil
 	public static final @NonNull String TRACE_CLASS_NAME = "trace";
 	public static final @NonNull String TRACE_TYPED_MODEL_NAME = "middle"; //"$trace$";
 
+	// Smallest first Collection size sort
+	public static final class CollectionSizeComparator implements Comparator<@NonNull Collection<?>>
+	{
+		public static final @NonNull CollectionSizeComparator INSTANCE = new CollectionSizeComparator();
+
+		@Override
+		public int compare(@NonNull Collection<?> o1, @NonNull Collection<?> o2) {
+			int s1 = o1.size();
+			int s2 = o2.size();
+			return s1 - s2;
+		}
+	}
+
+	// Alphabetical domain name sort
 	public static final class DomainNameComparator implements Comparator<@NonNull Domain>
 	{
 		public static final @NonNull DomainNameComparator INSTANCE = new DomainNameComparator();
