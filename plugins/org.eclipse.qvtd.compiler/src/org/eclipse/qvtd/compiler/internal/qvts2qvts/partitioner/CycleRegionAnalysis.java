@@ -26,14 +26,16 @@ import com.google.common.collect.Iterables;
  */
 public class CycleRegionAnalysis implements CycleAnalysis<@NonNull RegionAnalysis>
 {
+	protected final @NonNull String name;
 	protected final @NonNull CyclesRegionAnalysis cyclesAnalysis;
 	protected final @NonNull Set<@NonNull RegionAnalysis> regionAnalyses;
 	protected final @NonNull Set<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> traceClassAnalyses;
 	protected final @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> tracePropertyAnalyses;
 	//	private @Nullable Boolean isInfallible = null;
 
-	public CycleRegionAnalysis(@NonNull CyclesRegionAnalysis cyclesAnalysis, @NonNull Set<@NonNull RegionAnalysis> regionAnalyses,
+	public CycleRegionAnalysis(@NonNull String name, @NonNull CyclesRegionAnalysis cyclesAnalysis, @NonNull Set<@NonNull RegionAnalysis> regionAnalyses,
 			@NonNull Set<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> traceClassAnalyses, @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> tracePropertyAnalyses) {
+		this.name = name;
 		this.cyclesAnalysis = cyclesAnalysis;
 		this.regionAnalyses = regionAnalyses;
 		this.traceClassAnalyses = traceClassAnalyses;
@@ -97,5 +99,10 @@ public class CycleRegionAnalysis implements CycleAnalysis<@NonNull RegionAnalysi
 			}
 		}
 		return partitions;
+	}
+
+	@Override
+	public @NonNull String toString() {
+		return name;
 	}
 }

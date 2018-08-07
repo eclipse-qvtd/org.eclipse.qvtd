@@ -32,6 +32,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -131,9 +132,9 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 	}
 
 	private void addConstantNode(@NonNull Node node) {
-		assert node.isConstant();
+		assert isConstant(node);
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-			if (edge.isComputation() || ((edge.isCast() || edge.isNavigation()) && !edge.isRealized())) {
+			if (edge.isComputation() || ((edge.isCast() || edge.isNavigation()) && !isRealized(edge))) {
 				constantOutputNodes.add(node);
 				return;
 			}
@@ -150,7 +151,9 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 			if (consumedTracePropertyAnalyses2 == null) {
 				consumedTracePropertyAnalyses = consumedTracePropertyAnalyses2 = new ArrayList<>();
 			}
-			consumedTracePropertyAnalyses2.add(consumedTraceAnalysis);
+			if (!consumedTracePropertyAnalyses2.contains(consumedTraceAnalysis)) {
+				consumedTracePropertyAnalyses2.add(consumedTraceAnalysis);
+			}
 		}
 	}
 
@@ -162,13 +165,15 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 			if (consumedTraceClassAnalyses2 == null) {
 				consumedTraceClassAnalyses = consumedTraceClassAnalyses2 = new ArrayList<>();
 			}
-			consumedTraceClassAnalyses2.add(consumedTraceAnalysis);
+			if (!consumedTraceClassAnalyses2.contains(consumedTraceAnalysis)) {
+				consumedTraceClassAnalyses2.add(consumedTraceAnalysis);
+			}
 		}
 	}
 
 	private void addProductionOfMiddleEdge(@NonNull NavigableEdge edge) {
 		assert edge.isNew();
-		if (edge.isRealized() && !realizedMiddleEdges.contains(edge)) {
+		if (isRealized(edge) && !realizedMiddleEdges.contains(edge)) {
 			realizedMiddleEdges.add(edge);
 		}
 		PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
@@ -184,7 +189,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 
 	private void addProductionOfMiddleNode(@NonNull Node node) {
 		assert node.isNew();
-		if (node.isRealized() && !realizedMiddleNodes.contains(node)) {
+		if (isRealized(node) && !realizedMiddleNodes.contains(node)) {
 			realizedMiddleNodes.add(node);
 		}
 		TraceClassAnalysis<@NonNull RA> consumedTraceAnalysis = regionsAnalysis.addProducer(QVTscheduleUtil.getClassDatum(node), getRA());
@@ -215,26 +220,26 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 	private void analyzeEdges() {
 		for (@NonNull Edge edge : getPartialEdges()) {
 			if (!edge.isSecondary()) {
-				if (edge.isPredicated()) {
+				if (isPredicated(edge)) {
 					predicatedEdges.add(edge);
 				}
 				if (edge.isCast() || edge.isNavigation()) {
-					if (edge.isRealized()) {
+					if (isRealized(edge)) {
 						NavigableEdge navigableEdge = (NavigableEdge)edge;
 						realizedEdges.add(navigableEdge);
 						Node sourceNode = edge.getEdgeSource();
 						Node targetNode = edge.getEdgeTarget();
 						/*if (traceNode2successEdge.containsKey(sourceNode)) {
-							if (targetNode.isRealized() && !targetNode.isSuccess()) {
+							if (isRealized(targetNode) && !targetNode.isSuccess()) {
 								addCorollary((NavigableEdge) edge);
 							}
 						}
-						else*/ if ((sourceNode.isPredicated() || sourceNode.isRealized())) {
-							if (!traceNode2successEdge.containsKey(targetNode) && (targetNode.isPredicated() || targetNode.isRealized())) {
+						else*/ if ((isPredicated(sourceNode) || isRealized(sourceNode))) {
+							if (!traceNode2successEdge.containsKey(targetNode) && (isPredicated(targetNode) || isRealized(targetNode))) {
 								realizedOutputEdges.add(navigableEdge);
 							}
 						}
-						if (targetNode.isLoaded() && scheduleManager.isMiddle(sourceNode)) {
+						if (isLoaded(targetNode) && scheduleManager.isMiddle(sourceNode)) {
 							//							navigableEdges.add(navigationEdge);
 						}
 					}
@@ -256,40 +261,43 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 							realizedOutputEdges.add(edge);
 						}
 					}
-					if (edge.getTarget().isLoaded() && edge.getSource().getClassDatumAnalysis().getDomainUsage().isMiddle()) {
+					if (isLoaded(edge.getTarget()) && edge.getSource().getClassDatumAnalysis().getDomainUsage().isMiddle()) {
 						//							navigableEdges.add(navigationEdge);
 					}
 				} */
 			}
 		}
-		for (@NonNull NavigableEdge edge : region.getNavigationEdges()) {
-			if (!edge.isSecondary() && !edge.isRealized()) {
-				oldPrimaryNavigableEdges.add(edge);
-			}
-			Node sourceNode = edge.getEdgeSource();
-			//			Node targetNode = edge.getEdgeTarget();
-			if (scheduleManager.isMiddle(sourceNode)) { // || scheduleManager.isMiddle(targetNode)) {
-				if (edge.isPredicated() || edge.isSpeculated()) {
-					addConsumptionOfMiddleEdge(edge);
+		for (@NonNull Edge edge : getPartialEdges()) {
+			if (edge instanceof NavigableEdge) {
+				NavigableEdge navigableEdge = (NavigableEdge)edge;
+				if (!navigableEdge.isSecondary() && !isRealized(navigableEdge)) {
+					oldPrimaryNavigableEdges.add(navigableEdge);
 				}
-				else {
-					assert edge.isRealized();
-					//					addProductionOfMiddleNode(sourceNode);
-					addProductionOfMiddleEdge(edge);
+				Node sourceNode = navigableEdge.getEdgeSource();
+				//			Node targetNode = edge.getEdgeTarget();
+				if (scheduleManager.isMiddle(sourceNode)) { // || scheduleManager.isMiddle(targetNode)) {
+					if (isPredicated(navigableEdge) || isSpeculated(navigableEdge)) {
+						addConsumptionOfMiddleEdge(navigableEdge);
+					}
+					else {
+						assert isRealized(navigableEdge);
+						//					addProductionOfMiddleNode(sourceNode);
+						addProductionOfMiddleEdge(navigableEdge);
+					}
 				}
-			}
-			if (edge.isSuccess()) {
-				successEdges.add((SuccessEdge) edge);
-				//				Node sourceNode = edge.getEdgeSource();
-				//				assert scheduleManager.isMiddle(sourceNode);
-				//				if (edge.isPredicated()) {
-				//					addConsumptionOfMiddleEdge(edge);
-				//				}
-				//				else {
-				//					assert edge.isRealized();
-				//					//					addProductionOfMiddleNode(sourceNode);
-				//					addProductionOfMiddleEdge(edge);
-				//				}
+				if (navigableEdge.isSuccess()) {
+					successEdges.add((SuccessEdge) navigableEdge);
+					//				Node sourceNode = edge.getEdgeSource();
+					//				assert scheduleManager.isMiddle(sourceNode);
+					//				if (isPredicated(edge)) {
+					//					addConsumptionOfMiddleEdge(edge);
+					//				}
+					//				else {
+					//					assert isRealized(edge);
+					//					//					addProductionOfMiddleNode(sourceNode);
+					//					addProductionOfMiddleEdge(edge);
+					//				}
+				}
 			}
 		}
 	}
@@ -300,9 +308,9 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 				addConstantNode(node);
 			}
 			else if (node.isPattern()) {
-				if (node.isConstant()) {
+				if (isConstant(node)) {
 				}
-				else if (node.isLoaded()) {
+				else if (isLoaded(node)) {
 					//					hasLoadedNodes  = true;
 				}
 				else if (scheduleManager.isMiddle(node)) {
@@ -318,18 +326,18 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 						//						}
 						traceNodes.add(node);
 					}
-					if (node.isPredicated()) {
+					if (isPredicated(node)) {
 						addConsumptionOfMiddleNode(node);
 					}
-					else if (node.isSpeculated()) {
+					else if (isSpeculated(node)) {
 						if (!node.isHead()) {		// Don't create a self-consumption cycle
 							addConsumptionOfMiddleNode(node);
 						}
 					}
-					else if (node.isSpeculation()) {
+					else if (isSpeculation(node)) {
 						addProductionOfMiddleNode(node);
 					}
-					else if (node.isRealized()) {
+					else if (isRealized(node)) {
 						addProductionOfMiddleNode(node);
 						//					for (@NonNull NavigationEdge edge : node.getNavigationEdges()) {
 						//						Node targetNode = edge.getTarget();
@@ -346,20 +354,20 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 				}
 				else {
 					if (!node.isOperation()) {
-						if (node.isPredicated()) {
+						if (isPredicated(node)) {
 							predicatedOutputNodes.add(node);
 						}
-						else if (node.isRealized()) {
+						else if (isRealized(node)) {
 							realizedOutputNodes.add(node);
 						}
 					}
 				}
 			}
 			else if (node.isOperation()) {
-				if (node.isConstant()) {
+				if (isConstant(node)) {
 					addConstantNode(node);
 				}
-				else if (node.isRealized()) {
+				else if (isRealized(node)) {
 					realizedOutputNodes.add(node);
 				}
 			}
@@ -388,7 +396,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 
 	private void analyzeTraceEdges(@NonNull Node traceNode) {
 		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(traceNode)) {
-			if (((edge.isCast() || edge.isNavigation()) && edge.isRealized())) {
+			if (((edge.isCast() || edge.isNavigation()) && isRealized(edge))) {
 				Node tracedNode = QVTscheduleUtil.getTargetNode(edge);
 				node2traceEdge.put(tracedNode, edge);
 			}
@@ -485,9 +493,17 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 		return (@NonNull RA) this;
 	}
 
-	@Override
-	public @NonNull Region getRegion() {
-		return region;
+	//	@Override
+	//	public @NonNull Region getRegion() {
+	//		return region;
+	//	}
+
+	public @Nullable Role getRole(@NonNull Edge edge) {
+		return  edge.getEdgeRole();
+	}
+
+	public @Nullable Role getRole(@NonNull Node node) {
+		return  node.getNodeRole();
 	}
 
 	@Override
@@ -555,5 +571,41 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 	@Override
 	public @NonNull List<@NonNull Node> getTraceNodes() {
 		return traceNodes;
+	}
+
+	protected boolean isConstant(@NonNull Node node) {
+		return node.isConstant();
+	}
+
+	protected boolean isLoaded(@NonNull Node node) {
+		return node.isLoaded();
+	}
+
+	protected boolean isPredicated(@NonNull Edge edge) {
+		return edge.isPredicated();
+	}
+
+	protected boolean isPredicated(@NonNull Node node) {
+		return node.isPredicated();
+	}
+
+	protected boolean isRealized(@NonNull Edge edge) {
+		return edge.isRealized();
+	}
+
+	protected boolean isRealized(@NonNull Node node) {
+		return node.isRealized();
+	}
+
+	protected boolean isSpeculated(@NonNull Edge edge) {
+		return edge.isSpeculated();
+	}
+
+	protected boolean isSpeculated(@NonNull Node node) {
+		return node.isSpeculated();
+	}
+
+	protected boolean isSpeculation(@NonNull Node node) {
+		return node.isSpeculation();
 	}
 }

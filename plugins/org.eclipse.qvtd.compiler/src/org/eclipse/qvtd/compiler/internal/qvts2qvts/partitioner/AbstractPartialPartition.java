@@ -27,6 +27,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
@@ -276,7 +277,7 @@ abstract class AbstractPartialPartition extends AbstractPartition
 	protected @NonNull MicroMappingRegion createPartialRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
 		MicroMappingRegion partialRegion = QVTscheduleFactory.eINSTANCE.createMicroMappingRegion();
 		scheduleManager.addMappingRegion(partialRegion);
-		partialRegion.setMappingRegion(region);
+		partialRegion.setMappingRegion((MappingRegion) region);
 		partialRegion.setNamePrefix(namePrefix);
 		partialRegion.setSymbolNameSuffix(symbolSuffix);
 		partialRegion.setName(namePrefix + " " + region.getName());
@@ -324,6 +325,7 @@ abstract class AbstractPartialPartition extends AbstractPartition
 	/**
 	 * Return the role that the original region's edge plays in the partition. Null for none.
 	 */
+	@Override
 	public @Nullable Role getRole(@NonNull Edge edge) {
 		return edge2edgeRole.get(edge);
 	}
@@ -331,6 +333,7 @@ abstract class AbstractPartialPartition extends AbstractPartition
 	/**
 	 * Return the role that the original region's node plays in the partition. Null for none.
 	 */
+	@Override
 	public @Nullable Role getRole(@NonNull Node node) {
 		return node2nodeRole.get(node);
 	}
@@ -363,6 +366,65 @@ abstract class AbstractPartialPartition extends AbstractPartition
 	 */
 	protected boolean isAvailable(@NonNull Node node) {
 		return node.isOld();
+	}
+
+	@Override
+	protected boolean isConstant(@NonNull Node node) {
+		Role role = getRole(node);
+		return role != null ? role.isConstant() : false; //node.isConstant();
+	}
+
+	@Override
+	protected boolean isLoaded(@NonNull Node node) {
+		Role role = getRole(node);
+		return role != null ? role.isLoaded() : false; //node.isLoaded();
+	}
+
+	@Override
+	protected boolean isPredicated(@NonNull Edge edge) {
+		Role role = getRole(edge);
+		return role != null ? role.isPredicated() : false; //edge.isPredicated();
+	}
+
+	@Override
+	protected boolean isPredicated(@NonNull Node node) {
+		Role role = getRole(node);
+		return role != null ? role.isPredicated() : false; //node.isPredicated();
+	}
+
+	@Override
+	protected boolean isRealized(@NonNull Edge edge) {
+		Role role = getRole(edge);
+		return role != null ? role.isRealized() : false; //edge.isRealized();
+	}
+
+	@Override
+	protected boolean isRealized(@NonNull Node node) {
+		Role role = getRole(node);
+		return role != null ? role.isRealized() : false; //node.isRealized();
+	}
+
+	@Override
+	protected boolean isSpeculated(@NonNull Edge edge) {
+		Role role = getRole(edge);
+		return role != null ? role.isSpeculated() : false; //edge.isSpeculated();
+	}
+
+	@Override
+	protected boolean isSpeculated(@NonNull Node node) {
+		Role role = getRole(node);
+		return role != null ? role.isSpeculated() : false; //node.isSpeculated();
+	}
+
+	@Override
+	protected boolean isSpeculation(@NonNull Node node) {
+		Role role = getRole(node);
+		return role != null ? role.isSpeculation() : false; //node.isSpeculation();
+	}
+
+	@Override
+	public @NonNull String toString() {
+		return getName();
 	}
 
 	protected void resolveDisambiguations() {

@@ -15,6 +15,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteModel;
@@ -27,7 +29,6 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CycleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CycleRegionAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CyclesAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CyclesRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassRegionAnalysis;
@@ -82,7 +83,7 @@ public class TransformationAnalysis extends RegionsAnalysis<@NonNull RegionAnaly
 	/**
 	 * The analysis of cycles.
 	 */
-	private @Nullable CyclesAnalysis<@NonNull RegionAnalysis> cyclesRegionAnalysis = null;
+	private @Nullable CyclesRegionAnalysis cyclesRegionAnalysis = null;
 
 	public TransformationAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull Transformation transformation, @NonNull ScheduledRegion scheduledRegion) {
 		super(scheduleManager);
@@ -140,11 +141,6 @@ public class TransformationAnalysis extends RegionsAnalysis<@NonNull RegionAnaly
 		for (@NonNull RuleAnalysis ruleAnalysis : rule2ruleAnalysis.values()) {
 			ruleAnalysis.analyzeSourceModel();
 		}
-	}
-
-	@Override
-	protected @NonNull CyclesRegionAnalysis createCyclesAnalysis() {
-		return new CyclesRegionAnalysis(this, getPartialRegionAnalyses());
 	}
 
 	@Override
@@ -273,9 +269,8 @@ public class TransformationAnalysis extends RegionsAnalysis<@NonNull RegionAnaly
 			computeTraceClassDiscrimination();
 		}
 		computeTraceClassInheritance();
-		this.cyclesRegionAnalysis = computeCyclicTraceClasses();
-		//		this.fallibilityAnalysis = computeFallibilityAnalysis();
-
+		this.cyclesRegionAnalysis = new CyclesRegionAnalysis(this, getPartialRegionAnalyses());
+		List<@NonNull Set<@NonNull RegionAnalysis>> sortedCycleElementSets = cyclesRegionAnalysis.analyze();
 	}
 
 	@Override

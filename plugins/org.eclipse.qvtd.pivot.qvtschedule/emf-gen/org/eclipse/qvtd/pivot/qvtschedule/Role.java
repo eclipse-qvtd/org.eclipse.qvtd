@@ -28,7 +28,7 @@ import org.eclipse.emf.common.util.Enumerator;
  * <!-- begin-model-doc -->
  * Phase identifies the different processing phases of a mapping. The phases are ordered by decreasing
  * certainty, allowing the earlier to be chosen by a merge.
- * 
+ *
  * NEW = REALIZED || SPECULATION
  * OLD = CONSTANT || LOADED || PREDICATED || SPECULATED
  * <!-- end-model-doc -->
@@ -228,14 +228,14 @@ public enum Role implements Enumerator, Comparable<Role>
 	 */
 	private static final Role[] VALUES_ARRAY =
 			new Role[] {
-			CONSTANT,
-			LOADED,
-			REALIZED,
-			PREDICATED,
-			SPECULATION,
-			SPECULATED,
-			OTHER,
-		};
+				CONSTANT,
+				LOADED,
+				REALIZED,
+				PREDICATED,
+				SPECULATION,
+				SPECULATED,
+				OTHER,
+	};
 
 	/**
 	 * A public read-only list of all the '<em><b>Role</b></em>' enumerators.
@@ -342,7 +342,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 */
 	@Override
 	public int getValue() {
-	  return value;
+		return value;
 	}
 
 	/**
@@ -352,7 +352,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 */
 	@Override
 	public String getName() {
-	  return name;
+		return name;
 	}
 
 	/**
@@ -362,7 +362,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 */
 	@Override
 	public String getLiteral() {
-	  return literal;
+		return literal;
 	}
 
 	/**
@@ -376,11 +376,35 @@ public enum Role implements Enumerator, Comparable<Role>
 		return literal;
 	}
 
+	public boolean isConstant() {
+		return this == CONSTANT;
+	}
+
+	public boolean isLoaded() {
+		return this == LOADED;
+	}
+
 	public boolean isNew() {
 		return (this == REALIZED) || (this == SPECULATION);
 	}
 
 	public boolean isOld() {
 		return (this == CONSTANT) || (this == LOADED) || (this == PREDICATED) || (this == SPECULATED);
+	}
+
+	public boolean isPredicated() {
+		return this == PREDICATED;
+	}
+
+	public boolean isRealized() {
+		return this == REALIZED;
+	}
+
+	public boolean isSpeculated() {
+		return this == SPECULATED;
+	}
+
+	public boolean isSpeculation() {
+		return this == SPECULATION;
 	}
 }

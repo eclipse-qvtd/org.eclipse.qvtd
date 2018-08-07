@@ -26,9 +26,10 @@ public class CyclesRegionAnalysis extends CyclesAnalysis<@NonNull RegionAnalysis
 	}
 
 	@Override
-	protected @NonNull CycleAnalysis<@NonNull RegionAnalysis> createCycleAnalysis(@NonNull Set<@NonNull RegionAnalysis> cyclicRegionAnalyses,
+	protected @NonNull CycleAnalysis<@NonNull RegionAnalysis> createCycleAnalysis(@NonNull String name,
+			@NonNull Set<@NonNull RegionAnalysis> cyclicRegionAnalyses,
 			@NonNull Set<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> cyclicTraceClassAnalyses,
 			@NonNull Set<@NonNull TracePropertyAnalysis<@NonNull RegionAnalysis>> cyclicTracePropertyAnalyses) {
-		return new CycleRegionAnalysis(this, cyclicRegionAnalyses, cyclicTraceClassAnalyses, cyclicTracePropertyAnalyses);
+		return new CycleRegionAnalysis(name, this, cyclicRegionAnalyses, cyclicTraceClassAnalyses, cyclicTracePropertyAnalyses);
 	}
 }

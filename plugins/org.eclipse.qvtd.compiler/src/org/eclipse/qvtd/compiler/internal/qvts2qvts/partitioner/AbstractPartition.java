@@ -15,14 +15,11 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.AbstractPartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
 
 abstract class AbstractPartition extends AbstractPartialRegionAnalysis<@NonNull Partition> implements Partition
 {
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull MappingPartitioner partitioner;
-	protected final @NonNull MappingRegion region;
 	protected final @NonNull RegionAnalysis regionAnalysis;
 	protected final @NonNull TransformationAnalysis transformationAnalysis;
 
@@ -30,7 +27,6 @@ abstract class AbstractPartition extends AbstractPartialRegionAnalysis<@NonNull 
 		super(partitioner.getRegionsPartitionAnalysis(), partitioner.getRegion());
 		this.scheduleManager = partitioner.getScheduleManager();
 		this.partitioner = partitioner;
-		this.region = partitioner.getRegion();
 		this.regionAnalysis = partitioner.getRegionAnalysis();
 		this.transformationAnalysis = regionAnalysis.getTransformationAnalysis();
 	}
@@ -40,13 +36,13 @@ abstract class AbstractPartition extends AbstractPartialRegionAnalysis<@NonNull 
 		analyze();
 	}
 
-	@Override
-	public @NonNull Region getRegion() {
-		return region;
-	}
+	//	@Override
+	//	public @NonNull Region getRegion() {
+	//		return region;
+	//	}
 
 	@Override
-	public @NonNull String toString() {
-		return getName();
+	public String toString() {
+		return region.toString();
 	}
 }

@@ -24,7 +24,7 @@ class NonPartition extends AbstractPartition
 
 	@Override
 	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
-		return region;
+		return (MappingRegion) region;
 	}
 
 	@Override

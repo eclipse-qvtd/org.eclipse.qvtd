@@ -11,9 +11,13 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 
 interface Partition extends PartialRegionAnalysis<@NonNull Partition>
 {
@@ -22,4 +26,8 @@ interface Partition extends PartialRegionAnalysis<@NonNull Partition>
 	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber);
 
 	public @NonNull Region getRegion();
+
+	public @Nullable Role getRole(@NonNull Edge edge);
+
+	public @Nullable Role getRole(@NonNull Node node);
 }

@@ -11,11 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvtb2qvts;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -23,14 +19,11 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CycleAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CyclesAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TracePropertyAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -103,45 +96,6 @@ public abstract class RegionsAnalysis<@NonNull RA extends PartialRegionAnalysis<
 		return (TraceClassRegionAnalysis)classDatum2traceClassAnalysis.get(traceClassDatum);
 	}
 
-	protected @NonNull CyclesAnalysis<@NonNull RA> computeCyclicTraceClasses() {
-		//
-		//	Each mapping partitioner that consumes no trace class, is an acyclic producer.
-		//
-		Set<@NonNull RA> acyclicProducers = new HashSet<>();
-		for (@NonNull RA regionAnalysis : getPartialRegionAnalyses()) {
-			Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> consumedTraceClassAnalyses = regionAnalysis.getConsumedTraceClassAnalyses();
-			if (consumedTraceClassAnalyses == null) {
-				acyclicProducers.add(regionAnalysis);
-			}
-		}
-		/*		for (@NonNull TraceClassAnalysis middleAnalysis : class2middleAnalysis.values()) {
-		CompleteClass traceClass = middleAnalysis.getTraceClass();
-		for (@NonNull CompleteClass superCompleteClass : traceClass.getProperSuperCompleteClasses()) {
-			for (@NonNull RegionAnalysis producer : middleAnalysis.getProducers()) {
-				addProducer(superCompleteClass, producer);
-			}
-		}
-	} */
-
-		CyclesAnalysis<@NonNull RA> cyclesAnalysis = createCyclesAnalysis();
-		List<@NonNull Set<@NonNull RA>> sortedCycleElementSets = cyclesAnalysis.analyze();
-		//
-		//	Each TraceClassAnalysis produced only by acyclic partitioners identifies an acyclic trace class
-		// ?? is this cdead ?? should it be for TracePropertyAnalysis too ??
-		Set<@NonNull TraceClassAnalysis<@NonNull RA>> acylicAnalysis = new HashSet<>();
-		for (@NonNull RA acyclicProducer : acyclicProducers) {
-			for (@NonNull Node traceNode : acyclicProducer.getTraceNodes()) {
-				ClassDatum traceClassDatum = QVTscheduleUtil.getClassDatum(traceNode);
-				TraceClassAnalysis<@NonNull RA> middleAnalysis = classDatum2traceClassAnalysis.get(traceClassDatum);
-				assert middleAnalysis != null;
-				if (QVTbaseUtil.containsAll(acyclicProducers, middleAnalysis.getProducers())) {
-					acylicAnalysis.add(middleAnalysis);
-				}
-			}
-		}
-		return cyclesAnalysis;
-	}
-
 	protected void computeTraceClassDiscrimination() throws CompilerChainException {
 		for (@NonNull TraceClassAnalysis<@NonNull RA> traceClassAnalysis : classDatum2traceClassAnalysis.values()) {
 			traceClassAnalysis.discriminate();
@@ -163,7 +117,7 @@ public abstract class RegionsAnalysis<@NonNull RA extends PartialRegionAnalysis<
 		}
 	}
 
-	protected abstract @NonNull CyclesAnalysis<@NonNull RA> createCyclesAnalysis();
+	//	protected abstract @NonNull CyclesAnalysis<@NonNull RA> createCyclesAnalysis();
 
 	protected abstract @NonNull TraceClassAnalysis<@NonNull RA> createTraceClassAnalysis(@NonNull ClassDatum traceClassDatum);
 

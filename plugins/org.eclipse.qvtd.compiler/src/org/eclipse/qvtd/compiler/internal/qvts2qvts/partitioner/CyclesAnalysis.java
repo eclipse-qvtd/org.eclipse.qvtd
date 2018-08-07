@@ -58,38 +58,6 @@ public abstract class CyclesAnalysis<@NonNull RA extends PartialRegionAnalysis<@
 	 * NB cycles may involve trace classes and their trace class properties.
 	 */
 	public @Nullable List<@NonNull Set<@NonNull RA>> analyze() {
-		Iterable<@NonNull Set<@NonNull RA>> prunedCycleElements = computeCycleElementSets();
-		//
-		/*		for (@NonNull RA regionAnalysis : regionAnalyses) {
-			Set<@NonNull RA> newCycleElements = new HashSet<>(partitioner2predecessors.get(regionAnalysis));
-			newCycleElements.retainAll(partitioner2successors.get(regionAnalysis));
-			if (!newCycleElements.isEmpty() && !allCycleElements.contains(newCycleElements)) {
-				List<@NonNull Set<@NonNull RA>> redundantCycleElements = null;
-				for (@NonNull Set<@NonNull RA> oldCycleElements : allCycleElements) {
-					if (QVTbaseUtil.containsAny(oldCycleElements, newCycleElements)) {
-						if (redundantCycleElements == null) {
-							redundantCycleElements = new ArrayList<>();
-						}
-						redundantCycleElements.add(oldCycleElements);
-						newCycleElements.addAll(oldCycleElements);
-					}
-				}
-				if (redundantCycleElements != null) {
-					allCycleElements.removeAll(redundantCycleElements);
-				}
-				allCycleElements.add(newCycleElements);
-			}
-		} */
-		//
-		if (prunedCycleElements != null) {
-			return createCycleAnalyses(prunedCycleElements);
-		}
-		else {
-			return null;
-		}
-	}
-
-	protected @Nullable Iterable<@NonNull Set<@NonNull RA>> computeCycleElementSets() {
 		Map<@NonNull RA, @NonNull Set<@NonNull RA>> partitioner2predecessors = computeTransitivePredecessors();
 		Map<@NonNull RA, @NonNull Set<@NonNull RA>> partitioner2successors = computeTransitiveSuccessors();
 		Set<@NonNull Set<@NonNull RA>> allCycleElements = new HashSet<>();
@@ -115,7 +83,10 @@ public abstract class CyclesAnalysis<@NonNull RA extends PartialRegionAnalysis<@
 				prunedCycleElements.remove(i);
 			}
 		}
-		return prunedCycleElements.isEmpty() ? null : prunedCycleElements;
+		if (prunedCycleElements.isEmpty()) {
+			return null;
+		}
+		return createCycleAnalyses(prunedCycleElements, partitioner2predecessors);
 	}
 
 	/**
@@ -239,7 +210,8 @@ public abstract class CyclesAnalysis<@NonNull RA extends PartialRegionAnalysis<@
 	}
 
 
-	protected @NonNull List<@NonNull Set<@NonNull RA>> createCycleAnalyses(@NonNull Iterable<@NonNull Set<@NonNull RA>> cycleElementSets) {
+	protected @NonNull List<@NonNull Set<@NonNull RA>> createCycleAnalyses(@NonNull Iterable<@NonNull Set<@NonNull RA>> cycleElementSets,
+			@NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> partitioner2predecessors) {
 		List<@NonNull Set<@NonNull RA>> sortedCycleElementSets = Lists.newArrayList(cycleElementSets);
 		Collections.sort(sortedCycleElementSets, QVTbaseUtil.CollectionSizeComparator.INSTANCE);	// Smallest first
 		//
@@ -252,8 +224,11 @@ public abstract class CyclesAnalysis<@NonNull RA extends PartialRegionAnalysis<@
 		int iMax = sortedCycleElementSets.size();
 		for (int i = 0; i < iMax; i++)  {
 			Set<@NonNull RA> nestedCycleElements = sortedCycleElementSets.get(i);
-			CycleAnalysis<@NonNull RA> nestedCycleAnalysis = createCycleAnalysis(nestedCycleElements);
+			CycleAnalysis<@NonNull RA> nestedCycleAnalysis = createCycleAnalysis("«cycle-" + i + "»", nestedCycleElements, partitioner2predecessors);
 			cycleAnalyses.add(nestedCycleAnalysis);
+			//
+			//	Replace the nestedCycleElements by nestedCycleAnalysis in the potentially nesting cycles
+			//
 			for (int j = i+1; j < iMax; j++)  {
 				Set<@NonNull RA> nestingCycleElements = sortedCycleElementSets.get(j);
 				int oldSize = nestingCycleElements.size();
@@ -263,6 +238,56 @@ public abstract class CyclesAnalysis<@NonNull RA extends PartialRegionAnalysis<@
 					nestingCycleElements.add(nestedCycleAnalysis.getRA());
 				}
 			}
+
+
+
+
+
+			/*			Set<@NonNull RA> nestedSubregions = sortedCycleElementSets.get(i);
+			CycleAnalysis<@NonNull RA> nestedCycleAnalysis = createCycleAnalysis(nestedSubregions, partitioner2predecessors);
+			cycleAnalyses.add(nestedCycleAnalysis);
+			//
+			//	Replace the nestedCycleElements by nestedCycleAnalysis in the potentially nesting cycles
+			//
+			@NonNull RA cycle = nestedCycleAnalysis.getRA();
+			for (int j = i+1; j < iMax; j++)  {
+				Set<@NonNull RA> nestingCycleElements = sortedCycleElementSets.get(j);
+				int oldSize = nestingCycleElements.size();
+				if (nestingCycleElements.removeAll(nestedSubregions)) {
+					int newSize = nestingCycleElements.size();
+					assert (oldSize - newSize) == nestedSubregions.size();
+					nestingCycleElements.add(cycle);
+				}
+			}
+			//
+			//	Determine the predecessors of the new cycle, and update the predecessors within the cyckle
+			//	to retain only cycle elements.
+			//
+			Map<@NonNull RA, @NonNull Set<@NonNull RA>> cycleSubregion2predecessors = new HashMap<>();
+			Set<@NonNull RA> cyclePredecessors = new HashSet<>();
+			for (@NonNull RA cycleSubregion : nestedSubregions) {
+				Set<@NonNull RA> oldPredecessors = partitioner2predecessors.remove(cycleSubregion);
+				assert oldPredecessors != null;
+				cyclePredecessors.addAll(oldPredecessors);
+				oldPredecessors.retainAll(nestedSubregions);
+				cycleSubregion2predecessors.put(cycleSubregion, oldPredecessors);
+			}
+			cyclePredecessors.removeAll(nestedSubregions);
+			cycle2predecessors.put(cycle, cyclePredecessors);
+			Set<@NonNull RA> old = partitioner2predecessors.put(cycle, cyclePredecessors);
+			assert old == null;
+			//
+			//	Update the residual partitioner2predecessors to replace all nestedSubregions by the cycle.
+			//
+			Set<@NonNull RA> successors = new HashSet<>(partitioner2predecessors.keySet());
+			successors.removeAll(cyclePredecessors);
+			for (@NonNull RA successor : successors) {
+				Set<@NonNull RA> predecessors = partitioner2predecessors.get(successor);
+				assert predecessors != null;
+				if (predecessors.removeAll(nestedSubregions)) {
+					predecessors.add(cycle);
+				}
+			} */
 		}
 		if (TransformationPartitioner.CYCLES.isActive()) {
 			if (cycleAnalyses.isEmpty()) {
@@ -320,7 +345,7 @@ public abstract class CyclesAnalysis<@NonNull RA extends PartialRegionAnalysis<@
 		return sortedCycleElementSets;
 	}
 
-	protected @NonNull CycleAnalysis<@NonNull RA> createCycleAnalysis(@NonNull Set<@NonNull RA> cyclicRegionAnalyses) {
+	protected @NonNull CycleAnalysis<@NonNull RA> createCycleAnalysis(@NonNull String name, @NonNull Set<@NonNull RA> cyclicRegionAnalyses, @NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> partitioner2predecessors) {
 		Set<@NonNull TraceClassAnalysis<@NonNull RA>> consumedTraceClassAnalyses = new HashSet<>();
 		Set<@NonNull TraceClassAnalysis<@NonNull RA>> superProducedTraceClassAnalyses = new HashSet<>();
 		Set<@NonNull TracePropertyAnalysis<@NonNull RA>> consumedTracePropertyAnalyses = new HashSet<>();
@@ -341,7 +366,7 @@ public abstract class CyclesAnalysis<@NonNull RA extends PartialRegionAnalysis<@
 		Set<@NonNull TraceClassAnalysis<@NonNull RA>> cyclicTraceClassAnalyses = new HashSet<>(consumedTraceClassAnalyses);
 		cyclicTraceClassAnalyses.retainAll(superProducedTraceClassAnalyses);
 		Set<@NonNull TracePropertyAnalysis<@NonNull RA>> cyclicTracePropertyAnalyses = new HashSet<>(consumedTracePropertyAnalyses);
-		CycleAnalysis<@NonNull RA> cycleAnalysis = createCycleAnalysis(cyclicRegionAnalyses, cyclicTraceClassAnalyses, cyclicTracePropertyAnalyses);
+		CycleAnalysis<@NonNull RA> cycleAnalysis = createCycleAnalysis(name, cyclicRegionAnalyses, cyclicTraceClassAnalyses, cyclicTracePropertyAnalyses);
 		for (@NonNull RA cyclicRegionAnalysis : cyclicRegionAnalyses) {
 			CycleAnalysis<@NonNull RA> oldCycleAnalysis = regionAnalysis2cycleAnalysis.put(cyclicRegionAnalysis, cycleAnalysis);
 			assert oldCycleAnalysis == null;
@@ -353,7 +378,8 @@ public abstract class CyclesAnalysis<@NonNull RA extends PartialRegionAnalysis<@
 		return cycleAnalysis;
 	}
 
-	protected abstract @NonNull CycleAnalysis<@NonNull RA> createCycleAnalysis(@NonNull Set<@NonNull RA> cyclicRegionAnalyses,
+	protected abstract @NonNull CycleAnalysis<@NonNull RA> createCycleAnalysis(@NonNull String name,
+			@NonNull Set<@NonNull RA> cyclicRegionAnalyses,
 			@NonNull Set<@NonNull TraceClassAnalysis<@NonNull RA>> cyclicTraceClassAnalyses,
 			@NonNull Set<@NonNull TracePropertyAnalysis<@NonNull RA>> cyclicTracePropertyAnalyses);
 

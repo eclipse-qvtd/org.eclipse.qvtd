@@ -24,14 +24,16 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
  */
 public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Partition> implements Partition, CycleAnalysis<@NonNull Partition>
 {
+	protected final @NonNull String name;
 	protected final @NonNull CyclesPartitionAnalysis cyclesAnalysis;
 	protected final @NonNull Set<@NonNull Partition> regionAnalyses;
 	protected final @NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> traceClassAnalyses;
 	protected final @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> tracePropertyAnalyses;
 
-	public CyclicPartition(@NonNull CyclesPartitionAnalysis cyclesAnalysis, @NonNull Set<@NonNull Partition> regionAnalyses,
+	public CyclicPartition(@NonNull String name, @NonNull CyclesPartitionAnalysis cyclesAnalysis, @NonNull Set<@NonNull Partition> regionAnalyses,
 			@NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> traceClassAnalyses, @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> tracePropertyAnalyses) {
 		super(cyclesAnalysis.getRegionsAnalysis(), QVTscheduleFactory.eINSTANCE.createCyclicMappingRegion());	// FIXME orphan region
+		this.name = name;
 		this.cyclesAnalysis = cyclesAnalysis;
 		this.regionAnalyses = regionAnalyses;
 		this.traceClassAnalyses = traceClassAnalyses;
@@ -50,6 +52,11 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();		// FIXME
+	}
+
+	@Override
+	public @NonNull String getName() {
+		return name;
 	}
 
 	@Override
@@ -82,5 +89,10 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	@Override
 	public @NonNull Iterable<@NonNull TracePropertyAnalysis<@NonNull Partition>> getTracePropertyAnalyses() {
 		return tracePropertyAnalyses;
+	}
+
+	@Override
+	public @NonNull String toString() {
+		return name;
 	}
 }

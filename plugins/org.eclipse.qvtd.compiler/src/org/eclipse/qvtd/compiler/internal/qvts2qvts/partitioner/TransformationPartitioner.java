@@ -37,6 +37,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 
 /**
  * The TransformationPartitioner supervises a MappingPartitioner for each mapping region. It provides
@@ -83,7 +84,7 @@ public class TransformationPartitioner extends RegionsAnalysis<@NonNull Partitio
 	/**
 	 * The analysis of cycles.
 	 */
-	private @Nullable CyclesAnalysis<@NonNull Partition> cyclesPartitionAnalysis = null;
+	private @Nullable CyclesPartitionAnalysis cyclesPartitionAnalysis = null;
 
 	public TransformationPartitioner(@NonNull TransformationAnalysis transformationAnalysis, @NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) {
 		super(transformationAnalysis.getScheduleManager());
@@ -116,11 +117,6 @@ public class TransformationPartitioner extends RegionsAnalysis<@NonNull Partitio
 		}
 		return CycleAnalysis.createCycleAnalysis(this, cyclicMappingPartitioners, mappingPartitioner2cycleAnalysis2, traceClassAnalysis2cycleAnalysis2);
 	} */
-
-	@Override
-	protected @NonNull CyclesPartitionAnalysis createCyclesAnalysis() {
-		return new CyclesPartitionAnalysis(this, getPartialRegionAnalyses());
-	}
 
 	@Override
 	protected @NonNull TraceClassPartitionAnalysis createTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
@@ -270,12 +266,17 @@ public class TransformationPartitioner extends RegionsAnalysis<@NonNull Partitio
 		for(@NonNull Partition partition : partitions) {
 			partition.analyzePartition();
 		}
-		//		if (scheduleManager.needsDiscrimination()) {
-		//			computeTraceClassDiscrimination();
-		//		}
 		computeTraceClassInheritance();
-		this.cyclesPartitionAnalysis = computeCyclicTraceClasses();
-		//		this.fallibilityAnalysis = computeFallibilityAnalysis();
-
+		Set<@NonNull Partition> rootPartitions = Sets.newHashSet(getPartialRegionAnalyses());
+		this.cyclesPartitionAnalysis = new CyclesPartitionAnalysis(this, rootPartitions);
+		List<@NonNull Set<@NonNull Partition>> sortedCycleElementSets = cyclesPartitionAnalysis.analyze();
+		if (sortedCycleElementSets != null) {
+			Set<@NonNull Partition> nestedPartitions = new HashSet<>();
+			for (@NonNull Set<@NonNull Partition> cycleElementSet : sortedCycleElementSets) {
+				nestedPartitions.addAll(cycleElementSet);
+			}
+			rootPartitions.removeAll(nestedPartitions);
+			sortedCycleElementSets.add(rootPartitions);
+		}
 	}
 }
