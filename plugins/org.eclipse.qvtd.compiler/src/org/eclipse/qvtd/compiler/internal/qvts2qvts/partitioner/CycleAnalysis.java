@@ -10,40 +10,17 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
-import java.util.Set;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
 
 /**
  * Each CycleAnalysis identifies one group of regionAnalyses that contribute to a cycle.
  */
-public abstract class CycleAnalysis<@NonNull RA extends PartialRegionAnalysis<@NonNull RA>>
+public interface CycleAnalysis<@NonNull RA extends PartialRegionAnalysis<@NonNull RA>>
 {
-	protected final @NonNull CyclesAnalysis<@NonNull RA> cyclesAnalysis;
-	protected final @NonNull Set<@NonNull RA> regionAnalyses;
-	protected final @NonNull Set<@NonNull TraceClassAnalysis<@NonNull RA>> traceClassAnalyses;
-	protected final @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull RA>> tracePropertyAnalyses;
+	public @NonNull Iterable<@NonNull RA> getRegionAnalyses();
 
-	protected CycleAnalysis(@NonNull CyclesAnalysis<@NonNull RA> cyclesAnalysis, @NonNull Set<@NonNull RA> regionAnalyses,
-			@NonNull Set<@NonNull TraceClassAnalysis<@NonNull RA>> traceClassAnalyses, @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull RA>> tracePropertyAnalyses) {
-		this.cyclesAnalysis = cyclesAnalysis;
-		this.regionAnalyses = regionAnalyses;
-		this.traceClassAnalyses = traceClassAnalyses;
-		this.tracePropertyAnalyses = tracePropertyAnalyses;
-		assert !regionAnalyses.isEmpty();
-		assert !traceClassAnalyses.isEmpty() || !tracePropertyAnalyses.isEmpty();
-	}
+	public @NonNull Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> getTraceClassAnalyses();
 
-	public @NonNull Iterable<@NonNull RA> getRegionAnalyses() {
-		return regionAnalyses;
-	}
-
-	public @NonNull Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> getTraceClassAnalyses() {
-		return traceClassAnalyses;
-	}
-
-	public @NonNull Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> getTracePropertyAnalyses() {
-		return tracePropertyAnalyses;
-	}
+	public @NonNull Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> getTracePropertyAnalyses();
 }
