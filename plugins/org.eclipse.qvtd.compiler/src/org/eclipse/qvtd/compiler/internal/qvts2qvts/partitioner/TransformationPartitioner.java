@@ -50,7 +50,7 @@ public class TransformationPartitioner extends RegionsAnalysis<@NonNull Partitio
 	public static final @NonNull TracingOption PREDECESSORS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/partition/predecessors");
 	public static final @NonNull TracingOption SUCCESSORS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/partition/successors");
 
-	public static @NonNull Iterable<@NonNull MappingRegion> partition(@NonNull TransformationAnalysis transformationAnalysis, @NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) throws CompilerChainException {
+	public static @NonNull RootPartition partition(@NonNull TransformationAnalysis transformationAnalysis, @NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) throws CompilerChainException {
 		TransformationPartitioner transformationPartitioner = new TransformationPartitioner(transformationAnalysis, problemHandler, activeRegions);
 		return transformationPartitioner.partition();
 	}
@@ -199,7 +199,7 @@ public class TransformationPartitioner extends RegionsAnalysis<@NonNull Partitio
 		return true;
 	} */
 
-	public @NonNull Iterable<@NonNull MappingRegion> partition() throws CompilerChainException {
+	public @NonNull RootPartition partition() throws CompilerChainException {
 		//
 		//	Create the per-mapping partitioner and accumulate the local analyses
 		//
@@ -248,18 +248,7 @@ public class TransformationPartitioner extends RegionsAnalysis<@NonNull Partitio
 		}
 		Collections.sort(partitions, NameUtil.NAMEABLE_COMPARATOR);
 		postPartition();
-		List<@NonNull MappingRegion> partitionedRegions = new ArrayList<>(partitions.size());
-		int partitionNumber = 0;
-		Region currentRegion = null;
-		for(@NonNull Partition partition : partitions) {
-			Region partitionRegion = partition.getRegion();
-			if (currentRegion != partitionRegion) {
-				currentRegion = partitionRegion;
-				partitionNumber = 0;
-			}
-			partitionedRegions.add(partition.createMicroMappingRegion(partitionNumber++));
-		}
-		return partitionedRegions;
+		return new RootPartition(partitions);
 	}
 
 	public void postPartition() throws CompilerChainException {

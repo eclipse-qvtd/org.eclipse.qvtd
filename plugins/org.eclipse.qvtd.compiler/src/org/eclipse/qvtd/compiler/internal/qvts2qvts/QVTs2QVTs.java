@@ -39,6 +39,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -1132,7 +1133,8 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			TransformationAnalysis transformationAnalysis = scheduleManager.getTransformationAnalysis(transformation);
 			Iterable<? extends @NonNull MappingRegion> activeRegions = scheduledRegion2activeRegions.get(scheduledRegion);
 			assert activeRegions != null;
-			Iterable<@NonNull MappingRegion> partitionedRegions = TransformationPartitioner.partition(transformationAnalysis, problemHandler, activeRegions);
+			RootPartition rootPartition = TransformationPartitioner.partition(transformationAnalysis, problemHandler, activeRegions);
+			Iterable<@NonNull MappingRegion> partitionedRegions = rootPartition.getPartitionedRegions();
 			if (!Iterables.isEmpty(partitionedRegions)) {
 				//			for (@NonNull Region region : partitionedRegions) {
 				//				System.out.println("partitionedRegions " + region);
