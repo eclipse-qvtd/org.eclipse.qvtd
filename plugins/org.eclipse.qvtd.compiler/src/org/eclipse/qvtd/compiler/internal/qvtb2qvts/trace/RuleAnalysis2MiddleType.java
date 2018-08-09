@@ -33,6 +33,7 @@ public interface RuleAnalysis2MiddleType extends Nameable, Comparable<@NonNull R
 	//	@Nullable VariableDeclaration2TraceProperty basicGetVariableDeclaration2TraceProperty(@NonNull VariableDeclaration variable);
 	//	void createRootVariableDeclaration2TraceProperty(@Nullable TypedModel rTypedModel, @NonNull VariableDeclaration rVariable, boolean manyTraces);
 	org.eclipse.ocl.pivot.@NonNull Class getBagOfMiddleClass();
+	@NonNull Property getGlobalSuccessProperty();
 	org.eclipse.ocl.pivot.@NonNull Class getMiddleClass();
 
 	@Override
@@ -42,7 +43,6 @@ public interface RuleAnalysis2MiddleType extends Nameable, Comparable<@NonNull R
 	@NonNull Rule getRule();
 	@NonNull RuleAnalysis2TraceGroup getRuleAnalysis2TraceGroup();
 	@NonNull RuleAnalysis getRuleAnalysis();
-	@NonNull Property getSuccessProperty();
 	@NonNull TransformationAnalysis2TracePackage getTransformation2TracePackage();
 	@NonNull Property getTraceProperty(@NonNull VariableDeclaration rVariable);
 	@NonNull String getUniquePropertyName(@NonNull Element2MiddleProperty variableDeclaration2middleProperty, @NonNull String name);

@@ -61,9 +61,14 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 	private final @NonNull Map<@NonNull VariableDeclaration, @NonNull VariableDeclaration2TraceProperty> variable2variableDeclaration2traceProperty = new HashMap<>();
 
 	/**
-	 * The future Property that provides the success/failure/not-ready state of the traced mapping.
+	 * The future Property that provides the global success/failure/not-ready state of the traced mapping.
 	 */
-	private @Nullable Element2MiddleProperty relation2successProperty = null;
+	private @Nullable Element2MiddleProperty relation2globalSuccessProperty = null;
+
+	/**
+	 * The future Property that provides the local success/failure/not-ready state of the traced mapping.
+	 */
+	private @Nullable Element2MiddleProperty relation2localSuccessProperty = null;
 
 	/**
 	 * The future Property that provides the result of the invoked mapping.
@@ -122,8 +127,13 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 	}
 
 	@Override
-	public @Nullable Element2MiddleProperty basicGetRelation2SuccessProperty() {
-		return relation2successProperty;
+	public @Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty() {
+		return relation2globalSuccessProperty;
+	}
+
+	@Override
+	public @Nullable Element2MiddleProperty basicGetRelation2LocalSuccessProperty() {
+		return relation2localSuccessProperty;
 	}
 
 	@Override
@@ -155,14 +165,28 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 		relation2resultProperty = new Relation2ResultProperty(this, nameHint, getRuleAnalysis2TraceGroup().getTraceInterface());
 	}
 
-	public void createRelation2SuccessProperty(@NonNull String nameHint) {
-		assert relation2successProperty == null;
-		relation2successProperty = new Relation2SuccessProperty(this, nameHint);
+	public @NonNull Element2MiddleProperty createRelation2GlobalSuccessProperty(@NonNull String nameHint) {
+		assert relation2globalSuccessProperty == null;
+		relation2globalSuccessProperty = new Relation2SuccessProperty(this, nameHint);
+		return relation2globalSuccessProperty;
 	}
 
-	public void createRelation2SuccessProperty(@NonNull Property property) {
-		assert relation2successProperty == null;
-		relation2successProperty = new Relation2InheritedProperty(this, property);
+	public @NonNull Element2MiddleProperty createRelation2GlobalSuccessProperty(@NonNull Property property) {
+		assert relation2globalSuccessProperty == null;
+		relation2globalSuccessProperty = new Relation2InheritedProperty(this, property);
+		return relation2globalSuccessProperty;
+	}
+
+	public @NonNull Element2MiddleProperty createRelation2LocalSuccessProperty(@NonNull String nameHint) {
+		assert relation2localSuccessProperty == null;
+		relation2localSuccessProperty = new Relation2SuccessProperty(this, nameHint);
+		return relation2localSuccessProperty;
+	}
+
+	public @NonNull Element2MiddleProperty createRelation2LocalSuccessProperty(@NonNull Property property) {
+		assert relation2localSuccessProperty == null;
+		relation2localSuccessProperty = new Relation2InheritedProperty(this, property);
+		return relation2localSuccessProperty;
 	}
 
 	@Override
@@ -193,6 +217,11 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 	}
 
 	@Override
+	public @NonNull Property getGlobalSuccessProperty() {
+		return ClassUtil.nonNullState(basicGetRelation2GlobalSuccessProperty()).getTraceProperty();
+	}
+
+	@Override
 	public org.eclipse.ocl.pivot.@NonNull Class getMiddleClass() {
 		return middleClass;
 	}
@@ -211,8 +240,12 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 		return ClassUtil.nonNullState(relation2resultProperty);
 	}
 
-	public @NonNull Element2MiddleProperty getRelation2SuccessProperty() {
-		return ClassUtil.nonNullState(relation2successProperty);
+	public @NonNull Element2MiddleProperty getRelation2GlobalSuccessProperty() {
+		return ClassUtil.nonNullState(relation2globalSuccessProperty);
+	}
+
+	public @NonNull Element2MiddleProperty getRelation2LocalSuccessProperty() {
+		return ClassUtil.nonNullState(relation2localSuccessProperty);
 	}
 
 	@Override
@@ -237,11 +270,6 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 	@Override
 	public @NonNull RelationAnalysis2TraceGroup getRuleAnalysis2TraceGroup() {
 		return relationAnalysis2traceGroup;
-	}
-
-	@Override
-	public @NonNull Property getSuccessProperty() {
-		return ClassUtil.nonNullState(basicGetRelation2SuccessProperty()).getTraceProperty();
 	}
 
 	//	protected abstract @Nullable RelationAnalysis2MiddleType getSuperRuleAnalysis2MiddleType();
@@ -293,8 +321,11 @@ abstract class AbstractRelationAnalysis2MiddleType implements RelationAnalysis2M
 
 	@Override
 	public void synthesizeTraceModel() {
-		if (relation2successProperty != null) {
-			relation2successProperty.getTraceProperty();
+		if (relation2localSuccessProperty != null) {
+			relation2localSuccessProperty.getTraceProperty();
+		}
+		if (relation2globalSuccessProperty != null) {
+			relation2globalSuccessProperty.getTraceProperty();
 		}
 		if (relation2resultProperty != null) {
 			relation2resultProperty.getTraceProperty();

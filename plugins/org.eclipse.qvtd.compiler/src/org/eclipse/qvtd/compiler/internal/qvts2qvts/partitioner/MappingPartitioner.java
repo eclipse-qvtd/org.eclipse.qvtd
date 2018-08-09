@@ -167,6 +167,22 @@ public class MappingPartitioner implements Nameable
 		return regionAnalysis.basicGetDispatchNode();
 	}
 
+	public @Nullable SuccessEdge basicGetGlobalSuccessEdge(@NonNull Node traceNode) {
+		return regionAnalysis.basicGetGlobalSuccessEdge(traceNode);
+	}
+
+	public @Nullable Node basicGetGlobalSuccessNode(@NonNull Node traceNode) {
+		return regionAnalysis.basicGetGlobalSuccessNode(traceNode);
+	}
+
+	public @Nullable SuccessEdge basicGetLocalSuccessEdge(@NonNull Node traceNode) {
+		return regionAnalysis.basicGetLocalSuccessEdge(traceNode);
+	}
+
+	public @Nullable Node basicGetLocalSuccessNode(@NonNull Node traceNode) {
+		return regionAnalysis.basicGetLocalSuccessNode(traceNode);
+	}
+
 	private void check(/*boolean isInfallible*/) {
 		/*	Set<@NonNull Edge> infallibleEdges = null;
 		Set<@NonNull Node> infallibleNodes = null;
@@ -358,6 +374,22 @@ public class MappingPartitioner implements Nameable
 		return Iterables.concat(getPredicatedExecutionNodes(), getRealizedExecutionNodes());
 	}
 
+	public @NonNull SuccessEdge getGlobalSuccessEdge(@NonNull Node traceNode) {
+		return regionAnalysis.getGlobalSuccessEdge(traceNode);
+	}
+
+	public @NonNull Node getGlobalSuccessNode(@NonNull Node traceNode) {
+		return regionAnalysis.getGlobalSuccessNode(traceNode);
+	}
+
+	public @NonNull SuccessEdge getLocalSuccessEdge(@NonNull Node traceNode) {
+		return regionAnalysis.getLocalSuccessEdge(traceNode);
+	}
+
+	public @NonNull Node getLocalSuccessNode(@NonNull Node traceNode) {
+		return regionAnalysis.getLocalSuccessNode(traceNode);
+	}
+
 	@Override
 	public String getName() {
 		return region.getName();
@@ -486,16 +518,8 @@ public class MappingPartitioner implements Nameable
 		return rootNodes;
 	}
 
-	public @Nullable SuccessEdge getSuccessEdge(@NonNull Node traceNode) {
-		return regionAnalysis.getSuccessEdge(traceNode);
-	}
-
 	public @NonNull Iterable<@NonNull SuccessEdge> getSuccessEdges() {
 		return regionAnalysis.getSuccessEdges();
-	}
-
-	public @Nullable Node getSuccessNode(@NonNull Node traceNode) {
-		return regionAnalysis.getSuccessNode(traceNode);
 	}
 
 	public @Nullable Iterable<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> getSuperProducedTraceClassAnalyses() {
@@ -699,6 +723,7 @@ public class MappingPartitioner implements Nameable
 			//			if (isInfallible) {
 			//				regionAnalysis.getFallibilities()
 			//			}
+			regionAnalysis.createLocalSuccess();
 			newPartitions.add(createNewSpeculationPartition());
 			newPartitions.add(createNewSpeculatingPartition(/*isInfallible*/));
 			newPartitions.add(createNewSpeculatedPartition());

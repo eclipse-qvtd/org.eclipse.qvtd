@@ -79,7 +79,8 @@ public interface ScheduleManager
 	 */
 	@NonNull Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull RuleRegion>> analyzeTransformations();
 
-	@Nullable Property basicGetSuccessProperty(@NonNull Node node);
+	@Nullable Property basicGetGlobalSuccessProperty(@NonNull Node node);
+	@Nullable Property basicGetLocalSuccessProperty(@NonNull Node node);
 	@NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis);
 	@NonNull RuleAnalysis createRuleAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull Rule asRule);
 	@NonNull RuleAnalysis2TraceGroup createRuleAnalysis2TraceGroup(@NonNull RuleAnalysis ruleAnalysis);

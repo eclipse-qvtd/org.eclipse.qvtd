@@ -39,11 +39,13 @@ import com.google.common.collect.Sets;
 class NewSpeculationPartition extends AbstractPartialPartition
 {
 	private final @NonNull Set<@NonNull Node> originalHeadNodes;
+	private final @NonNull Node traceNode;
 	private final @NonNull Iterable<@NonNull Node> executionNodes;
 	private final @Nullable Node dispatchNode;
 
 	public NewSpeculationPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
 		super(partitioner, reachabilityForest, "«speculation»");
+		this.traceNode = partitioner.getTraceNode();
 		this.originalHeadNodes = Sets.newHashSet(QVTscheduleUtil.getHeadNodes(region));
 		this.executionNodes = partitioner.getExecutionNodes();
 		this.dispatchNode = partitioner.basicGetDispatchNode();
@@ -92,6 +94,10 @@ class NewSpeculationPartition extends AbstractPartialPartition
 				addNode(node);
 			}
 		}
+		//
+		//	The localSuccess nodes are realized to track speculating success.
+		//
+		resolveSuccessNodes();
 		//
 		//	Add the outstanding predicates that can be checked by this partition.
 		//
@@ -179,5 +185,12 @@ class NewSpeculationPartition extends AbstractPartialPartition
 			}
 		}
 		return edgeRole;
+	}
+
+	protected void resolveSuccessNodes() {
+		for (@NonNull Node traceNode : executionNodes) {
+			Node localSuccessNode = partitioner.getLocalSuccessNode(traceNode);
+			addNode(localSuccessNode, Role.REALIZED);
+		}
 	}
 }

@@ -55,7 +55,7 @@ public class RelationAnalysis2TraceInterface extends AbstractRelationAnalysis2Mi
 		//
 		// There is always a trace interface success
 		//
-		createRelation2SuccessProperty(relationAnalysis2traceGroup.getNameGenerator().createTraceSuccessPropertyName());
+		createRelation2GlobalSuccessProperty(relationAnalysis2traceGroup.getNameGenerator().createTraceGlobalSuccessPropertyName());
 		//
 		//	No result property.
 		//

@@ -15,12 +15,16 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -30,11 +34,13 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 class NewSpeculatingPartition extends AbstractPartialPartition
 {
+	private final @NonNull Node traceNode;
 	private final @NonNull Iterable<@NonNull Node> executionNodes;
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
 
 	public NewSpeculatingPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest/*, boolean isInfallible*/) {
 		super(partitioner, reachabilityForest, "«speculating»");
+		this.traceNode = partitioner.getTraceNode();
 		this.executionNodes = partitioner.getExecutionNodes();
 		//
 		//	For a no-override top relation the realized middle (trace) nodes become speculated nodes.
@@ -67,9 +73,9 @@ class NewSpeculatingPartition extends AbstractPartialPartition
 		//
 		//		resolvePredicatedOutputNodes();
 		//
-		//	The ends of the success edges are added to define the speculation problem.
+		//	The localSuccess nodes are predicated, and the globalSuccess realized to sequence speculating/speculation/speculated partitions.
 		//
-		resolveSuccessEdges(/*isInfallible*/);
+		resolveSuccessNodes();
 		//
 		//	Add the outstanding predicates that can be checked by this partition.
 		//
@@ -91,6 +97,22 @@ class NewSpeculatingPartition extends AbstractPartialPartition
 	@Override
 	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
 		return createMicroMappingRegion("«speculating»", "_p" + partitionNumber);
+	}
+
+	@Override
+	protected @NonNull PartitioningVisitor createPartitioningVisitor(@NonNull MicroMappingRegion partialRegion) {
+		return new PartitioningVisitor(new RegionHelper<>(scheduleManager, partialRegion), this)
+		{
+			@Override
+			public @Nullable Element visitSuccessNode(@NonNull SuccessNode node) {
+				if (node == partitioner.basicGetLocalSuccessNode(traceNode)) {
+					return null;			// localStatus is redundant when globalStatus in use
+				}
+				else {
+					return super.visitSuccessNode(node);
+				}
+			}
+		};
 	}
 
 	@Override
@@ -186,9 +208,15 @@ class NewSpeculatingPartition extends AbstractPartialPartition
 						edgeRole = Role.PREDICATED;
 					}
 		}
-		if (edgeRole == Role.PREDICATED) {
+		else if (edgeRole == Role.PREDICATED) {
 			if (edge instanceof SuccessEdge) {
-				edgeRole = Role.SPECULATED;
+				boolean hasRealizedEdge = partitioner.hasRealizedEdge(edge);
+				if (!hasRealizedEdge) {
+					//	Role nodeRole = getRole(QVTscheduleUtil.getTargetNode(edge));
+					//	if ((nodeRole != null) && nodeRole.isRealized()) {
+					edgeRole = Role.SPECULATED;
+					//	}
+				}
 			}
 		}
 		return edgeRole;
@@ -233,31 +261,37 @@ class NewSpeculatingPartition extends AbstractPartialPartition
 		}
 	} */
 
-	protected void resolveSuccessEdges(/*boolean isInfallible*/) {
-		//	Iterable<@NonNull Edge> fallibleEdges = isInfallible ? regionAnalysis.getFallibleEdges() : null;
-		for (@NonNull Edge edge : partitioner.getSuccessEdges()) {
-			//	if (/*edge.isNew() ||*/ (fallibleEdges == null) || !Iterables.contains(fallibleEdges, edge)) {
-			Node sourceNode = edge.getEdgeSource();
-			Node targetNode = edge.getEdgeTarget();
-			//			if (edge.isPredicated() && isAlwaysSatisfied(edge)) {
-			//				if (!hasNode(targetNode)) {
-			//					addNode(targetNode);
-			//				}
-			//				partitioner.addPredicatedNode(targetNode);
-			//				partitioner.addEdge(edge, Role.PREDICATED, this);	// FIXME this fudges inadequate speculation
-			//			}
-			//			else {
-			if (!hasNode(sourceNode)) {
-				addNode(sourceNode);
-			}
-			if (!hasNode(targetNode)) {
-				addNode(targetNode);
-			}
-			//	}
-			//	else {
-			//		System.out.println("Infallible " + edge.getEdgeSource().getName() + "." + edge.getName() + " omitted in " + region);
-			//	}
+	protected void resolveSuccessNodes() {
+		for (@NonNull Node traceNode : executionNodes) {
+			Node localSuccessNode = partitioner.getLocalSuccessNode(traceNode);
+			addNode(localSuccessNode, Role.PREDICATED);
+			Node globalSuccessNode = partitioner.getGlobalSuccessNode(traceNode);
+			addNode(globalSuccessNode, Role.REALIZED);
 		}
+		//	Iterable<@NonNull Edge> fallibleEdges = isInfallible ? regionAnalysis.getFallibleEdges() : null;
+		/*	for (@NonNull Edge edge : partitioner.getSuccessEdges()) {
+			//	if (/ *edge.isNew() ||* / (fallibleEdges == null) || !Iterables.contains(fallibleEdges, edge)) {
+				Node sourceNode = edge.getEdgeSource();
+				Node targetNode = edge.getEdgeTarget();
+				//			if (edge.isPredicated() && isAlwaysSatisfied(edge)) {
+				//				if (!hasNode(targetNode)) {
+				//					addNode(targetNode);
+				//				}
+				//				partitioner.addPredicatedNode(targetNode);
+				//				partitioner.addEdge(edge, Role.PREDICATED, this);	// FIXME this fudges inadequate speculation
+				//			}
+				//			else {
+				if (!hasNode(sourceNode)) {
+					addNode(sourceNode);
+				}
+				if (!hasNode(targetNode)) {
+					addNode(targetNode);
+				}
+				//	}
+				//	else {
+				//		System.out.println("Infallible " + edge.getEdgeSource().getName() + "." + edge.getName() + " omitted in " + region);
+				//	}
+			} */
 	}
 
 	/*	protected void resolveTraceNode() {

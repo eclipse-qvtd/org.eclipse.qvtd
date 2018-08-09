@@ -212,9 +212,13 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			//	A predicated head node success must be checked before anything else.
 			//
 			for (@NonNull Node headNode : headNodes) {
-				Edge successEdge = regionAnalysis.getSuccessEdge(headNode);
-				if ((successEdge != null) && successEdge.isPredicated()) {
-					addEdge(successEdge);
+				Edge localSuccessEdge = regionAnalysis.basicGetLocalSuccessEdge(headNode);
+				if ((localSuccessEdge != null) && localSuccessEdge.isPredicated()) {
+					addEdge(localSuccessEdge);
+				}
+				Edge globalSuccessEdge = regionAnalysis.basicGetGlobalSuccessEdge(headNode);
+				if ((globalSuccessEdge != null) && globalSuccessEdge.isPredicated()) {
+					addEdge(globalSuccessEdge);
 				}
 			}
 
@@ -1332,14 +1336,14 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		Type variableType = guardNode.getCompleteClass().getPrimaryClass();
 		ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(classDatum.getReferredTypedModel()));
 		GuardParameter guardParameter = helper.createGuardParameter(getSafeName(guardNode), iTypedModel, variableType, true);
-		Property successProperty = scheduleManager.basicGetSuccessProperty(guardNode);
-		if (successProperty != null) {
-			NavigableEdge successEdge = guardNode.getNavigableEdge(successProperty);
-			if (successEdge != null) {
-				Node successNode = QVTscheduleUtil.getTargetNode(successEdge);
-				if (successNode.isSuccess()) {
-					assert successEdge.isRealized();
-					guardParameter.setSuccessProperty(successProperty);
+		Property globalSuccessProperty = scheduleManager.basicGetGlobalSuccessProperty(guardNode);
+		if (globalSuccessProperty != null) {
+			NavigableEdge globalSuccessEdge = guardNode.getNavigableEdge(globalSuccessProperty);
+			if (globalSuccessEdge != null) {
+				Node globalSuccessNode = QVTscheduleUtil.getTargetNode(globalSuccessEdge);
+				if (globalSuccessNode.isSuccess()) {
+					assert globalSuccessEdge.isRealized();
+					guardParameter.setSuccessProperty(globalSuccessProperty);
 				}
 			}
 		}

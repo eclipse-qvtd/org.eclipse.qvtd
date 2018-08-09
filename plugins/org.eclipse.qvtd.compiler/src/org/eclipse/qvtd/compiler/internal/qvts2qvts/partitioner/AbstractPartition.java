@@ -11,21 +11,18 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.AbstractPartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 
 abstract class AbstractPartition extends AbstractPartialRegionAnalysis<@NonNull Partition> implements Partition
 {
-	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull MappingPartitioner partitioner;
 	protected final @NonNull RegionAnalysis regionAnalysis;
 	protected final @NonNull TransformationAnalysis transformationAnalysis;
 
 	protected AbstractPartition(@NonNull MappingPartitioner partitioner) {
 		super(partitioner.getRegionsPartitionAnalysis(), partitioner.getRegion());
-		this.scheduleManager = partitioner.getScheduleManager();
 		this.partitioner = partitioner;
 		this.regionAnalysis = partitioner.getRegionAnalysis();
 		this.transformationAnalysis = regionAnalysis.getTransformationAnalysis();

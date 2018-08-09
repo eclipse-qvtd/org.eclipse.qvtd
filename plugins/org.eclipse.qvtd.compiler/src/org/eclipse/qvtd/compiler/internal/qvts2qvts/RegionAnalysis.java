@@ -21,7 +21,13 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvts.RelationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationAnalysis2TraceClass;
+import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationAnalysis2TraceGroup;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -31,6 +37,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -353,6 +362,27 @@ public class RegionAnalysis extends AbstractPartialRegionAnalysis<@NonNull Regio
 					}
 				}
 			}
+		}
+	}
+
+	public void createLocalSuccess() {
+		List<@NonNull Node> traceNodes = getTraceNodes();
+		assert traceNodes.size() == 1;
+		Node traceNode = ClassUtil.nonNullState(traceNodes.get(0));
+		Rule referredRule = QVTscheduleUtil.getReferredRule((RuleRegion)getRegion());
+		RelationAnalysis relationAnalysis = (RelationAnalysis)transformationAnalysis.getRuleAnalysis(referredRule);
+		RelationAnalysis2TraceGroup relationAnalysis2traceGroup = relationAnalysis.getRuleAnalysis2TraceGroup();
+		//			relationAnalysis.synthesizeTraceLocalSuccessAssignment(relationAnalysis2traceGroup, getTraceNode());
+		RelationAnalysis2TraceClass relationAnalysis2TraceClass = relationAnalysis2traceGroup.getRuleAnalysis2TraceClass();
+		Element2MiddleProperty relation2localSuccessProperty = relationAnalysis2TraceClass.basicGetRelation2LocalSuccessProperty();
+		Property localSuccessProperty = scheduleManager.basicGetLocalSuccessProperty(traceNode);
+		if (relation2localSuccessProperty == null) {
+			String localSuccessPropertyName = relationAnalysis2traceGroup.getNameGenerator().createTraceLocalSuccessPropertyName();
+			relation2localSuccessProperty = relationAnalysis2TraceClass.createRelation2LocalSuccessProperty(localSuccessPropertyName);
+			localSuccessProperty = relation2localSuccessProperty.getTraceProperty();
+			SuccessEdge localSuccessEdge = relationAnalysis.createRealizedSuccess(traceNode, localSuccessProperty, null);
+			QVTscheduleUtil.getTargetNode(localSuccessEdge).setUtility(Utility.STRONGLY_MATCHED);
+			analyzeLocalSuccessEdge(traceNode);
 		}
 	}
 

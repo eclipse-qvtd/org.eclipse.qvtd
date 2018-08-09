@@ -67,10 +67,6 @@ class NewSpeculatedPartition extends AbstractPartialPartition
 		//
 		//		resolveTrueNodes();
 		//
-		//	Add the success predicates.
-		//
-		resolveSuccessEdges();
-		//
 		//	Ensure that the predecessors of each node are included in the partition.
 		//
 		resolvePrecedingNodes();
@@ -85,21 +81,29 @@ class NewSpeculatedPartition extends AbstractPartialPartition
 	}
 
 	@Override
+	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
+		return createMicroMappingRegion("«speculated»", "_p" + partitionNumber);
+	}
+
+	@Override
 	protected @NonNull PartitioningVisitor createPartitioningVisitor(@NonNull MicroMappingRegion partialRegion) {
 		return new PartitioningVisitor(new RegionHelper<>(scheduleManager, partialRegion), this)
 		{
 			@Override
 			public @Nullable Element visitSuccessNode(@NonNull SuccessNode node) {
-				Node partialNode = regionHelper.createBooleanLiteralNode(true);
-				addNode(node, partialNode);
-				return partialNode;
+				if (node == partitioner.basicGetGlobalSuccessNode(traceNode)) {
+					Node partialNode = regionHelper.createBooleanLiteralNode(true);
+					addNode(node, partialNode);
+					return partialNode;
+				}
+				else if (node == partitioner.basicGetLocalSuccessNode(traceNode)) {
+					return null;			// localStatus is redundant when globalStatus in use
+				}
+				else {
+					return super.visitSuccessNode(node);
+				}
 			}
 		};
-	}
-
-	@Override
-	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
-		return createMicroMappingRegion("«speculated»", "_p" + partitionNumber);
 	}
 
 	@Override
@@ -151,7 +155,8 @@ class NewSpeculatedPartition extends AbstractPartialPartition
 		}
 	}
 
-	protected void resolveSuccessEdges() {
+	/*	protected void resolveSuccessEdges() {
+		//	}
 		//		for (@NonNull Node traceNode : executionNodes) {
 		//			assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
 		//			Node successNode = partitioner.getSuccessNode(traceNode);		// FIXME only optional because trace property can be missing
@@ -180,16 +185,14 @@ class NewSpeculatedPartition extends AbstractPartialPartition
 			}
 			//			}
 		}
-	}
+	}*/
 
 	protected void resolveTraceNodes() {
 		assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
-		//		if (!hasNode(traceNode)) {
 		addNode(traceNode, Role.PREDICATED);
-		Node successNode = partitioner.getSuccessNode(traceNode);		// FIXME only optional because trace property can be missing
-		if (successNode != null) {
-			addNode(successNode, Role.PREDICATED);
-		}
+		Node globalSuccessNode = partitioner.getGlobalSuccessNode(traceNode);
+		addNode(globalSuccessNode, Role.PREDICATED);
+		//	}
 		//		}
 		//		for (@NonNull Node traceNode : executionNodes) {
 		for (@NonNull NavigableEdge edge : traceNode.getNavigableEdges()) {

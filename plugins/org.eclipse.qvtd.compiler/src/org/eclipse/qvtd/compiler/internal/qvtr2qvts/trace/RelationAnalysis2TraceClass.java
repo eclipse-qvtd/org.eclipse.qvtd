@@ -233,15 +233,15 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 		//		analyzeNonRootTemplateVariables(manyTraces);
 		//		analyzeInvocationVariables();
 		//
-		// If there is a trace interface or a when invocation then there is a trace class success.
+		// If there is a trace interface or a when invocation then there is a trace class global success.
 		//
-		analyzeSuccessNode(baseRelationAnalysis2traceInterface);
+		analyzeGlobalSuccessNode(baseRelationAnalysis2traceInterface);
 	}
 
 	//
-	// If there is a trace interface or a when invocation then there is a trace class success.
+	// If there is a trace interface or a when invocation then there is a trace class global success.
 	//
-	protected void analyzeSuccessNode(@Nullable RelationAnalysis2TraceInterface baseRelationAnalysis2traceInterface) {
+	protected void analyzeGlobalSuccessNode(@Nullable RelationAnalysis2TraceInterface baseRelationAnalysis2traceInterface) {
 		boolean hasTraceInterface = baseRelationAnalysis2traceInterface != null;
 		boolean hasWhenInvocation = getRuleAnalysis().hasIncomingWhenInvocationAnalyses();
 		if (hasTraceInterface) {
@@ -272,8 +272,8 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 			}
 		}
 		QVTrelationNameGenerator nameGenerator = relationAnalysis2traceGroup.getNameGenerator();
-		String successPropertyName = nameGenerator.createTraceSuccessPropertyName();
-		createRelation2SuccessProperty(successPropertyName);
+		String globalSuccessPropertyName = nameGenerator.createTraceGlobalSuccessPropertyName();
+		createRelation2GlobalSuccessProperty(globalSuccessPropertyName);
 	}
 
 	/*	@Override
@@ -294,15 +294,15 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 	} */
 
 	@Override
-	public @Nullable Element2MiddleProperty basicGetRelation2SuccessProperty() {
-		Element2MiddleProperty relation2SuccessProperty = super.basicGetRelation2SuccessProperty();
+	public @Nullable Element2MiddleProperty basicGetRelation2GlobalSuccessProperty() {
+		Element2MiddleProperty relation2SuccessProperty = super.basicGetRelation2GlobalSuccessProperty();
 		if (relation2SuccessProperty != null) {
 			return relation2SuccessProperty;
 		}
 		RelationAnalysis2TraceGroup baseRelationAnalysis2TraceGroup = relationAnalysis2traceGroup.getBaseRelationAnalysis2TraceGroup();
 		RelationAnalysis2TraceInterface baseRelationAnalysis2traceInterface = baseRelationAnalysis2TraceGroup.basicGetRuleAnalysis2TraceInterface();
 		if (baseRelationAnalysis2traceInterface != null) {
-			return baseRelationAnalysis2traceInterface.basicGetRelation2SuccessProperty();
+			return baseRelationAnalysis2traceInterface.basicGetRelation2GlobalSuccessProperty();
 		}
 		return null;
 	}

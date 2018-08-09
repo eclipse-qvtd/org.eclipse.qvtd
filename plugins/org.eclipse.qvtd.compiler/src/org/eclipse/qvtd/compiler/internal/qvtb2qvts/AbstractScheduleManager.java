@@ -300,12 +300,21 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public @Nullable Property basicGetSuccessProperty(@NonNull Node node) {
+	public @Nullable Property basicGetGlobalSuccessProperty(@NonNull Node node) {
 		if (!isMiddle(node)) {
 			return null;
 		}
 		CompleteClass completeClass = node.getCompleteClass();
-		return completeClass.getProperty(QVTrelationNameGenerator.TRACE_SUCCESS_PROPERTY_NAME);
+		return completeClass.getProperty(QVTrelationNameGenerator.TRACE_GLOBAL_SUCCESS_PROPERTY_NAME);
+	}
+
+	@Override
+	public @Nullable Property basicGetLocalSuccessProperty(@NonNull Node node) {
+		if (!isMiddle(node)) {
+			return null;
+		}
+		CompleteClass completeClass = node.getCompleteClass();
+		return completeClass.getProperty(QVTrelationNameGenerator.TRACE_LOCAL_SUCCESS_PROPERTY_NAME);
 	}
 
 	protected @NonNull DatumCaches createDatumCaches() {

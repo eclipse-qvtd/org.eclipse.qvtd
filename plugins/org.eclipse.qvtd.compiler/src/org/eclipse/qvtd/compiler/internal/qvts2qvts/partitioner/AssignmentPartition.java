@@ -29,16 +29,19 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 class AssignmentPartition extends AbstractPartialPartition
 {
+	private final @NonNull Node traceNode;
+
 	public AssignmentPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, @NonNull Edge realizedEdge) {
 		super(partitioner, reachabilityForest, "«edge-" + QVTscheduleUtil.getName(realizedEdge) + "»");
+		this.traceNode = partitioner.getTraceNode();
 		//
 		//	The realized middle (trace) nodes become predicated head nodes.
 		//
 		for (@NonNull Node traceNode : partitioner.getTraceNodes()) {
 			addNode(traceNode, Role.PREDICATED);
-			Node successNode = partitioner.getSuccessNode(traceNode);
-			if (successNode != null) {		// status property is not mandatory
-				addNode(successNode, Role.PREDICATED);
+			Node globalSuccessNode = partitioner.basicGetGlobalSuccessNode(traceNode);
+			if (globalSuccessNode != null) {		// status property is not mandatory
+				addNode(globalSuccessNode, Role.PREDICATED);
 			}
 		}
 		//
@@ -103,9 +106,14 @@ class AssignmentPartition extends AbstractPartialPartition
 		{
 			@Override
 			public @Nullable Element visitSuccessNode(@NonNull SuccessNode node) {
-				Node partialNode = regionHelper.createBooleanLiteralNode(true);
-				addNode(node, partialNode);
-				return partialNode;
+				if (node == partitioner.basicGetLocalSuccessNode(traceNode)) {
+					return null;			// localStatus is redundant when globalStatus in use
+				}
+				else {
+					Node partialNode = regionHelper.createBooleanLiteralNode(true);
+					addNode(node, partialNode);
+					return partialNode;
+				}
 			}
 		};
 	}

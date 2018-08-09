@@ -132,9 +132,9 @@ class SpeculatedPartition extends AbstractPartialPartition
 	protected void resolveSuccessNodes() {
 		for (@NonNull Node traceNode : partitioner.getTraceNodes()) {
 			assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
-			Node successNode = partitioner.getSuccessNode(traceNode);		// FIXME only optional because trace property can be missing
-			if (successNode != null) {
-				addNode(successNode, Role.PREDICATED);
+			Node globalSuccessNode = partitioner.basicGetGlobalSuccessNode(traceNode);		// FIXME only optional because trace property can be missing
+			if (globalSuccessNode != null) {
+				addNode(globalSuccessNode, Role.PREDICATED);
 			}
 		}
 	}
@@ -144,9 +144,9 @@ class SpeculatedPartition extends AbstractPartialPartition
 			assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
 			//		if (!hasNode(traceNode)) {
 			addNode(traceNode, Role.PREDICATED);
-			Node successNode = partitioner.getSuccessNode(traceNode);		// FIXME only optional because trace property can be missing
-			if (successNode != null) {
-				addNode(successNode, Role.PREDICATED);
+			Node globalSuccessNode = partitioner.basicGetGlobalSuccessNode(traceNode);		// FIXME only optional because trace property can be missing
+			if (globalSuccessNode != null) {
+				addNode(globalSuccessNode, Role.PREDICATED);
 			}
 		}
 		for (@NonNull Node traceNode : partitioner.getTraceNodes()) {

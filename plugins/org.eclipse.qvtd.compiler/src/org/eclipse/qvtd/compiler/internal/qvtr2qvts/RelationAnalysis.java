@@ -236,7 +236,7 @@ public class RelationAnalysis extends RuleAnalysis
 				//
 				//	Require the overriding relation to have failed.
 				//
-				Property successProperty = relationAnalysis2TraceInterface.getSuccessProperty();
+				Property successProperty = relationAnalysis2TraceInterface.getGlobalSuccessProperty();
 				createPredicatedSuccess(dispatchedNode, successProperty, false);
 			}
 		}
@@ -271,7 +271,7 @@ public class RelationAnalysis extends RuleAnalysis
 			region.getHeadNodes().add(traceNode);
 			traceNode.setHead();
 
-			Property successProperty = relationAnalysis2dispatchClass.getSuccessProperty();
+			Property successProperty = relationAnalysis2dispatchClass.getGlobalSuccessProperty();
 			createRealizedSuccess(traceNode, successProperty, false);
 
 			return traceNode;
@@ -1116,8 +1116,8 @@ public class RelationAnalysis extends RuleAnalysis
 		//
 		//	Set the dispatch node success as true.
 		//
-		Property successProperty = relationAnalysis2dispatchClass.getSuccessProperty();
-		createRealizedSuccess(dispatchNode, successProperty, true);
+		Property globalSuccessProperty = relationAnalysis2dispatchClass.getGlobalSuccessProperty();
+		createRealizedSuccess(dispatchNode, globalSuccessProperty, true);
 		//
 		//	dispatch node is the head.
 		//
@@ -1416,8 +1416,8 @@ public class RelationAnalysis extends RuleAnalysis
 				RelationAnalysis2MiddleType overridingRelationAnalysis2TraceClass = overridingRelationAnalysis2TraceGroup.getRuleAnalysis2TraceClass();
 				ClassDatum overridingClassDatum = scheduleManager2.getClassDatum(traceTypedModel, overridingRelationAnalysis2TraceInterface.getMiddleClass());
 				Node guardNode = createPredicatedNode("not_" + overridingRelation.getName(), overridingClassDatum, true);
-				Property successProperty = overridingRelationAnalysis2TraceClass.getSuccessProperty();
-				createPredicatedSuccess(guardNode, successProperty, false);
+				Property globalSuccessProperty = overridingRelationAnalysis2TraceClass.getGlobalSuccessProperty();
+				createPredicatedSuccess(guardNode, globalSuccessProperty, false);
 				for (@NonNull VariableDeclaration rootVariable : QVTrelationUtil.getRootVariables(relation)) {
 					if (isWhere || scheduleManager2.getDomainUsage(rootVariable).isInput()) {
 						Node rootVariableNode = getReferenceNode(rootVariable);
@@ -1713,13 +1713,29 @@ public class RelationAnalysis extends RuleAnalysis
 			//
 			//	Create the trace status.
 			//
-			synthesizeTraceSuccessAssignment(relationAnalysis2traceGroup, traceNode);
+			synthesizeTraceGlobalSuccessAssignment(relationAnalysis2traceGroup, traceNode);
 			//
 			//	Create the interface property and status assignments.
 			//
 			synthesizeInterfaceAssignments(relationAnalysis2traceGroup, traceNode);
 		}
 	}
+
+	protected void synthesizeTraceGlobalSuccessAssignment(@NonNull RelationAnalysis2TraceGroup relationAnalysis2traceGroup, @NonNull Node traceNode) {
+		RelationAnalysis2TraceClass relationAnalysis2TraceClass = relationAnalysis2traceGroup.getRuleAnalysis2TraceClass();
+		Element2MiddleProperty relation2globalSuccessProperty = relationAnalysis2TraceClass.basicGetRelation2GlobalSuccessProperty();
+		if (relation2globalSuccessProperty != null) {
+			createRealizedSuccess(traceNode, relation2globalSuccessProperty.getTraceProperty(), null);
+		}
+	}
+
+	/*	public void synthesizeTraceLocalSuccessAssignment(@NonNull RelationAnalysis2TraceGroup relationAnalysis2traceGroup, @NonNull Node traceNode) {
+		RelationAnalysis2TraceClass relationAnalysis2TraceClass = relationAnalysis2traceGroup.getRuleAnalysis2TraceClass();
+		Element2MiddleProperty relation2localSuccessProperty = relationAnalysis2TraceClass.basicGetRelation2LocalSuccessProperty();
+		if (relation2localSuccessProperty != null) {
+			createRealizedSuccess(traceNode, relation2localSuccessProperty.getTraceProperty(), null);
+		}
+	} */
 
 	/**
 	 *	Create the trace node
@@ -1773,14 +1789,6 @@ public class RelationAnalysis extends RuleAnalysis
 		}
 		traceNode.setUtility(Utility.TRACE);
 		return traceNode;
-	}
-
-	protected void synthesizeTraceSuccessAssignment(@NonNull RelationAnalysis2TraceGroup relationAnalysis2traceGroup, @NonNull Node traceNode) {
-		RelationAnalysis2TraceClass relationAnalysis2TraceClass = relationAnalysis2traceGroup.getRuleAnalysis2TraceClass();
-		Element2MiddleProperty relation2SuccessProperty = relationAnalysis2TraceClass.basicGetRelation2SuccessProperty();
-		if (relation2SuccessProperty != null) {
-			createRealizedSuccess(traceNode, relation2SuccessProperty.getTraceProperty(), null);
-		}
 	}
 
 	public void synthesizeVariableDeclaration(@NonNull VariableDeclaration variableDeclaration) {	// FIXME move to derived visitVariableDeclaration

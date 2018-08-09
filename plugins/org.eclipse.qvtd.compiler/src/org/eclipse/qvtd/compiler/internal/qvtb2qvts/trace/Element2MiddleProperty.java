@@ -93,7 +93,8 @@ public abstract class Element2MiddleProperty implements Nameable
 			domainAnnotation.getOwnedDetails().add(domainDetail);
 			property.getOwnedAnnotations().add(domainAnnotation);
 		}
-		property.setOwningClass(traceClass);
+		//		property.setOwningClass(traceClass);
+		traceClass.getOwnedProperties().add(property);
 		org.eclipse.ocl.pivot.Class oppositeType = type;
 		if (oppositeType instanceof CollectionType) {
 			Type elementType = ((CollectionType)oppositeType).getElementType();

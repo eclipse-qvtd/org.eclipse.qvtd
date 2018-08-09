@@ -81,9 +81,9 @@ public class RelationAnalysis2DispatchClass extends AbstractRelationAnalysis2Mid
 		//
 		// There is always a trace interface success
 		//
-		Property successProperty = NameUtil.getNameable(QVTbaseUtil.getOwnedProperties(dispatchClass), QVTrelationNameGenerator.TRACE_SUCCESS_PROPERTY_NAME);
-		assert successProperty != null;
-		createRelation2SuccessProperty(successProperty);
+		Property globalSuccessProperty = NameUtil.getNameable(QVTbaseUtil.getOwnedProperties(dispatchClass), QVTrelationNameGenerator.TRACE_GLOBAL_SUCCESS_PROPERTY_NAME);
+		assert globalSuccessProperty != null;
+		createRelation2GlobalSuccessProperty(globalSuccessProperty);
 		//
 		// If there is no invocation interface for a when invoked realtion there is an invocation class result
 		// There is always an invocation interface result

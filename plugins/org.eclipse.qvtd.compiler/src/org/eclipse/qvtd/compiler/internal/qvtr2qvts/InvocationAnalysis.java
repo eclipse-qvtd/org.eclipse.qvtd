@@ -86,10 +86,10 @@ public class InvocationAnalysis
 				Invocation2TraceProperty invokingInvocation2TraceProperty = invokingRuleAnalysis2TraceClass.getInvocation2TraceProperty(this);
 				invokingRelationAnalysis.createRealizedNavigationEdge(invokingTraceNode, invokingInvocation2TraceProperty.getTraceProperty(), invokedNode, false);
 			}
-			Element2MiddleProperty relation2SuccessProperty = invokedRelationAnalysis2InvocationInterface.basicGetRelation2SuccessProperty();
-			if (relation2SuccessProperty != null) {
-				Property statusProperty = relation2SuccessProperty.getTraceProperty();
-				invokingRelationAnalysis.createPredicatedSuccess(invokedNode, statusProperty, true);
+			Element2MiddleProperty relation2globalSuccessProperty = invokedRelationAnalysis2InvocationInterface.basicGetRelation2GlobalSuccessProperty();
+			if (relation2globalSuccessProperty != null) {
+				Property globalSuccessProperty = relation2globalSuccessProperty.getTraceProperty();
+				invokingRelationAnalysis.createPredicatedSuccess(invokedNode, globalSuccessProperty, true);
 			}
 		}
 		else {
