@@ -19,7 +19,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -70,9 +69,9 @@ public class TransformationPartitioner
 
 	/**
 	 * The analysis of cycle regions that can succeed despite edges that may fail.
-	 */
+	 *
 	@SuppressWarnings("unused")
-	private @Nullable FallibilityAnalysis fallibilityAnalysis = null;
+	private @Nullable FallibilityAnalysis fallibilityAnalysis = null; */
 
 	/**
 	 * Closure of the mapping to the trace class analyses that must succeed unconditionally for the key trace class analysis to succeed unconditionally..
@@ -90,14 +89,14 @@ public class TransformationPartitioner
 		problemHandler.addProblem(problem);
 	}
 
-	protected @NonNull FallibilityAnalysis computeFallibilityAnalysis() {
+	/*	protected @NonNull FallibilityAnalysis computeFallibilityAnalysis() {
 		FallibilityAnalysis fallibilityAnalysis = new FallibilityAnalysis(transformationAnalysis);
 		for (@NonNull MappingPartitioner mappingPartitioner : mappingPartitioners) {
 			fallibilityAnalysis.accumulate(mappingPartitioner.getRegionAnalysis());
 		}
 		fallibilityAnalysis.install();
 		return fallibilityAnalysis;
-	}
+	} */
 
 	/*	private @NonNull CycleAnalysis createCycleAnalysis(@NonNull Set<@NonNull MappingPartitioner> cyclicMappingPartitioners) {
 		Map<@NonNull MappingPartitioner, @NonNull CycleAnalysis> mappingPartitioner2cycleAnalysis2 = mappingPartitioner2cycleAnalysis;
@@ -207,7 +206,7 @@ public class TransformationPartitioner
 		//		}
 		//		transformationAnalysis.computeTraceClassInheritance();
 		//		this.cyclesAnalysis = transformationAnalysis.computeCyclicTraceClasses();
-		this.fallibilityAnalysis = computeFallibilityAnalysis();
+		//		this.fallibilityAnalysis = computeFallibilityAnalysis();
 		// FIXME check that all head nodes have trace properties
 		//
 		//	Perform per-mapping partitioning

@@ -23,8 +23,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
-import com.google.common.collect.Iterables;
-
 /**
  * The SpeculatingPartition validates the residual predictaes omitted from the speculation.
  * The corollary is realized and realized edges that do not involve other speculations
@@ -35,7 +33,7 @@ class NewSpeculatingPartition extends AbstractPartition
 	private final @NonNull Iterable<@NonNull Node> executionNodes;
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
 
-	public NewSpeculatingPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, boolean isInfallible) {
+	public NewSpeculatingPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest/*, boolean isInfallible*/) {
 		super(partitioner, reachabilityForest);
 		this.executionNodes = partitioner.getExecutionNodes();
 		//
@@ -71,11 +69,11 @@ class NewSpeculatingPartition extends AbstractPartition
 		//
 		//	The ends of the success edges are added to define the speculation problem.
 		//
-		resolveSuccessEdges(isInfallible);
+		resolveSuccessEdges(/*isInfallible*/);
 		//
 		//	Add the outstanding predicates that can be checked by this partition.
 		//
-		resolveConstantOutputNodes(isInfallible);
+		resolveConstantOutputNodes(/*isInfallible*/);
 		//
 		//	Ensure that the predecessors of each node are included in the partition.
 		//
@@ -131,20 +129,20 @@ class NewSpeculatingPartition extends AbstractPartition
 		return true;
 	} */
 
-	protected void resolveConstantOutputNodes(boolean isInfallible) {
-		Set<@NonNull Node> fallibleNodes = null;
-		if (isInfallible) {
-			fallibleNodes = new HashSet<>();
-			for (@NonNull Edge edge : regionAnalysis.getFallibleEdges()) {
-				fallibleNodes.add(QVTscheduleUtil.getTargetNode(edge));
-			}
-		}
+	protected void resolveConstantOutputNodes(/*boolean isInfallible*/) {
+		//	Set<@NonNull Node> fallibleNodes = null;
+		//	if (isInfallible) {
+		//		fallibleNodes = new HashSet<>();
+		//		for (@NonNull Edge edge : regionAnalysis.getFallibleEdges()) {
+		//			fallibleNodes.add(QVTscheduleUtil.getTargetNode(edge));
+		//		}
+		//	}
 		for (@NonNull Node constantOutputNode : partitioner.getConstantOutputNodes()) {
-			if ((fallibleNodes == null) || !Iterables.contains(fallibleNodes, constantOutputNode)) {
-				if (!partitioner.hasPredicatedNode(constantOutputNode)) {
-					addNode(constantOutputNode);
-				}
+			//	if ((fallibleNodes == null) || !Iterables.contains(fallibleNodes, constantOutputNode)) {
+			if (!partitioner.hasPredicatedNode(constantOutputNode)) {
+				addNode(constantOutputNode);
 			}
+			//	}
 		}
 	}
 
@@ -235,30 +233,30 @@ class NewSpeculatingPartition extends AbstractPartition
 		}
 	} */
 
-	protected void resolveSuccessEdges(boolean isInfallible) {
-		Iterable<@NonNull Edge> fallibleEdges = isInfallible ? regionAnalysis.getFallibleEdges() : null;
+	protected void resolveSuccessEdges(/*boolean isInfallible*/) {
+		//	Iterable<@NonNull Edge> fallibleEdges = isInfallible ? regionAnalysis.getFallibleEdges() : null;
 		for (@NonNull Edge edge : partitioner.getSuccessEdges()) {
-			if (/*edge.isNew() ||*/ (fallibleEdges == null) || !Iterables.contains(fallibleEdges, edge)) {
-				Node sourceNode = edge.getEdgeSource();
-				Node targetNode = edge.getEdgeTarget();
-				//			if (edge.isPredicated() && isAlwaysSatisfied(edge)) {
-				//				if (!hasNode(targetNode)) {
-				//					addNode(targetNode);
-				//				}
-				//				partitioner.addPredicatedNode(targetNode);
-				//				partitioner.addEdge(edge, Role.PREDICATED, this);	// FIXME this fudges inadequate speculation
-				//			}
-				//			else {
-				if (!hasNode(sourceNode)) {
-					addNode(sourceNode);
-				}
-				if (!hasNode(targetNode)) {
-					addNode(targetNode);
-				}
+			//	if (/*edge.isNew() ||*/ (fallibleEdges == null) || !Iterables.contains(fallibleEdges, edge)) {
+			Node sourceNode = edge.getEdgeSource();
+			Node targetNode = edge.getEdgeTarget();
+			//			if (edge.isPredicated() && isAlwaysSatisfied(edge)) {
+			//				if (!hasNode(targetNode)) {
+			//					addNode(targetNode);
+			//				}
+			//				partitioner.addPredicatedNode(targetNode);
+			//				partitioner.addEdge(edge, Role.PREDICATED, this);	// FIXME this fudges inadequate speculation
+			//			}
+			//			else {
+			if (!hasNode(sourceNode)) {
+				addNode(sourceNode);
 			}
-			else {
-				System.out.println("Infallible " + edge.getEdgeSource().getName() + "." + edge.getName() + " omitted in " + region);
+			if (!hasNode(targetNode)) {
+				addNode(targetNode);
 			}
+			//	}
+			//	else {
+			//		System.out.println("Infallible " + edge.getEdgeSource().getName() + "." + edge.getName() + " omitted in " + region);
+			//	}
 		}
 	}
 

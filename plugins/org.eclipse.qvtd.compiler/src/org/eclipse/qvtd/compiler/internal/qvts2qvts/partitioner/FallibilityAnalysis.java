@@ -254,7 +254,7 @@ public class FallibilityAnalysis
 				}
 			}
 		}
-		consumingRegionAnalysis.setFallibleEdges(checkedEdges);
+		//		consumingRegionAnalysis.setFallibleEdges(checkedEdges);
 		// FIXME		consumingRegionAnalysis.setFallibleNodes(checkedNodes);
 		Set<@NonNull RegionAnalysis> old = consumer2producers.put(consumingRegionAnalysis, producingRegionAnalyses);
 		assert old == null;
@@ -317,7 +317,7 @@ public class FallibilityAnalysis
 		for (@NonNull RegionAnalysis consumingRegionAnalysis : consumer2producersClosure.keySet()) {
 			Set<@NonNull RegionAnalysis> fallibilities = consumer2producersClosure.get(consumingRegionAnalysis);
 			assert fallibilities != null;
-			consumingRegionAnalysis.setFallibilities(fallibilities);
+			//			consumingRegionAnalysis.setFallibilities(fallibilities);
 		}
 		if (GLOBAL.isActive()) {
 			List<@NonNull RegionAnalysis> consumers = new ArrayList<>(consumer2producersClosure.keySet());

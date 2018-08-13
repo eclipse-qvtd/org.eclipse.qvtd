@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
@@ -156,13 +155,13 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region>implements Name
 	/**
 	 * The actual and pseudo-RegionAnalysis-es that must be unconditionally successful for this RegionAnalysis
 	 * to be unconditionally successful. null prior to determination.
-	 */
-	private @Nullable Iterable<@NonNull RegionAnalysis> fallibilities = null;
+	 *
+	private @Nullable Iterable<@NonNull RegionAnalysis> fallibilities = null; */
 
 	/**
 	 * The edges that may be left unsynthesized when this RegionAnalysis is used in an infallible cycle.
-	 */
-	private @Nullable Iterable<@NonNull Edge> fallibleEdges = null;
+	 *
+	private @Nullable Iterable<@NonNull Edge> fallibleEdges = null; */
 
 	public RegionAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull Region region) {
 		super(transformationAnalysis.getScheduleManager(), region);
@@ -770,13 +769,13 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region>implements Name
 		return null;
 	}
 
-	public @NonNull Iterable<@NonNull RegionAnalysis> getFallibilities() {
-		return ClassUtil.nonNullState(fallibilities);
-	}
+	//	public @NonNull Iterable<@NonNull RegionAnalysis> getFallibilities() {
+	//		return ClassUtil.nonNullState(fallibilities);
+	//	}
 
-	public @NonNull Iterable<@NonNull Edge> getFallibleEdges() {
-		return ClassUtil.nonNullState(fallibleEdges);
-	}
+	//	public @NonNull Iterable<@NonNull Edge> getFallibleEdges() {
+	//		return ClassUtil.nonNullState(fallibleEdges);
+	//	}
 
 	@Override
 	public @NonNull String getName() {
@@ -886,13 +885,13 @@ public class RegionAnalysis extends RegionHelper<@NonNull Region>implements Name
 		return transformationAnalysis;
 	}
 
-	public void setFallibilities(@NonNull Iterable<@NonNull RegionAnalysis> fallibilities) {
-		this.fallibilities = fallibilities;
-	}
+	//	public void setFallibilities(@NonNull Iterable<@NonNull RegionAnalysis> fallibilities) {
+	//		this.fallibilities = fallibilities;
+	//	}
 
-	public void setFallibleEdges(@NonNull Iterable<@NonNull Edge> fallibleEdges) {
-		this.fallibleEdges  = fallibleEdges;
-	}
+	//	public void setFallibleEdges(@NonNull Iterable<@NonNull Edge> fallibleEdges) {
+	//		this.fallibleEdges  = fallibleEdges;
+	//	}
 
 	@Override
 	public String toString() {

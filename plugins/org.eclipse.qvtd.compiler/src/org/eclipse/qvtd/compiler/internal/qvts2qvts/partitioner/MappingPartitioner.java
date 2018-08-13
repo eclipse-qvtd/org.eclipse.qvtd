@@ -166,8 +166,8 @@ public class MappingPartitioner implements Nameable
 		return regionAnalysis.basicGetDispatchNode();
 	}
 
-	private void check(boolean isInfallible) {
-		Set<@NonNull Edge> infallibleEdges = null;
+	private void check(/*boolean isInfallible*/) {
+		/*	Set<@NonNull Edge> infallibleEdges = null;
 		Set<@NonNull Node> infallibleNodes = null;
 		if (isInfallible) {
 			infallibleEdges = new HashSet<>();
@@ -176,12 +176,12 @@ public class MappingPartitioner implements Nameable
 				infallibleEdges.add(edge);
 				infallibleNodes.add(QVTscheduleUtil.getTargetNode(edge));
 			}
-		}
+		} */
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
 			if (((node.isSpeculated() && !node.isHead()) || node.isRealized()) && !hasRealizedNode(node)) {
-				if ((infallibleNodes == null) || !infallibleNodes.contains(node)) {
-					addProblem(CompilerUtil.createRegionError(region, "Should have realized " + node));
-				}
+				//	if ((infallibleNodes == null) || !infallibleNodes.contains(node)) {
+				addProblem(CompilerUtil.createRegionError(region, "Should have realized " + node));
+				//	}
 			}
 		}
 		Set<@NonNull Edge> allPrimaryEdges = new HashSet<>();
@@ -189,9 +189,9 @@ public class MappingPartitioner implements Nameable
 			if (!edge.isSecondary()) {
 				allPrimaryEdges.add(edge);
 				if (edge.isRealized() && !hasRealizedEdge(edge)) {
-					if ((infallibleEdges == null) || !infallibleEdges.contains(edge)) {
-						addProblem(CompilerUtil.createRegionError(region, "Should have realized " + edge));
-					}
+					//	if ((infallibleEdges == null) || !infallibleEdges.contains(edge)) {
+					addProblem(CompilerUtil.createRegionError(region, "Should have realized " + edge));
+					//	}
 				}
 			}
 		}
@@ -275,9 +275,9 @@ public class MappingPartitioner implements Nameable
 		return new NewSpeculatedPartition(this, reachabilityForest);
 	}
 
-	private @NonNull NewSpeculatingPartition createNewSpeculatingPartition(boolean isInfallible) {
+	private @NonNull NewSpeculatingPartition createNewSpeculatingPartition(/*boolean isInfallible*/) {
 		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		return new NewSpeculatingPartition(this, reachabilityForest, isInfallible);
+		return new NewSpeculatingPartition(this, reachabilityForest/*, isInfallible*/);
 	}
 
 	private @NonNull NewSpeculationPartition createNewSpeculationPartition() {
@@ -654,7 +654,7 @@ public class MappingPartitioner implements Nameable
 			}
 		}
 		if (newPartitions.size() > 1) {		// FIXME shouldn't this work anyway when no partitioning was needed?
-			check(false);
+			check(/*false*/);
 		}
 		return newPartitions;
 	}
@@ -669,10 +669,10 @@ public class MappingPartitioner implements Nameable
 		}
 		CycleAnalysis cycleAnalysis = transformationAnalysis.getCycleAnalysis(regionAnalysis);
 		boolean isCyclic = cycleAnalysis != null;
-		boolean isInfallible = false;
-		if (cycleAnalysis != null) {
-			isInfallible = cycleAnalysis.isInfallible();
-		}
+		//	boolean isInfallible = false;
+		//	if (cycleAnalysis != null) {
+		//		isInfallible = cycleAnalysis.isInfallible();
+		//	}
 		List<@NonNull Node> predicatedWhenNodes = getPredicatedWhenNodes();
 		List<@NonNull Node> realizedExecutionNodes = getRealizedExecutionNodes();
 		boolean needsActivator = false;
@@ -709,7 +709,7 @@ public class MappingPartitioner implements Nameable
 			//				regionAnalysis.getFallibilities()
 			//			}
 			newPartitions.add(createNewSpeculationPartition());
-			newPartitions.add(createNewSpeculatingPartition(isInfallible));
+			newPartitions.add(createNewSpeculatingPartition(/*isInfallible*/));
 			newPartitions.add(createNewSpeculatedPartition());
 			ReachabilityForest assignmentReachabilityForest	= new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
 			//
@@ -730,7 +730,7 @@ public class MappingPartitioner implements Nameable
 			}
 		}
 		if (newPartitions.size() > 1) {		// FIXME shouldn't this work anyway when no partitioning was needed?
-			check(isInfallible);
+			check(/*isInfallible*/);
 		}
 		return newPartitions;
 	}

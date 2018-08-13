@@ -11,12 +11,10 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
@@ -32,7 +30,7 @@ public class CycleAnalysis
 	protected final @NonNull Set<@NonNull RegionAnalysis> regionAnalyses;
 	protected final @NonNull Set<@NonNull TraceClassAnalysis> traceClassAnalyses;
 	protected final @NonNull Set<@NonNull TracePropertyAnalysis> tracePropertyAnalyses;
-	private @Nullable Boolean isInfallible = null;
+	//	private @Nullable Boolean isInfallible = null;
 
 	public CycleAnalysis(@NonNull CyclesAnalysis cyclesAnalysis, @NonNull Set<@NonNull RegionAnalysis> regionAnalyses,
 			@NonNull Set<@NonNull TraceClassAnalysis> traceClassAnalyses, @NonNull Set<@NonNull TracePropertyAnalysis> tracePropertyAnalyses) {
@@ -58,7 +56,7 @@ public class CycleAnalysis
 
 	/**
 	 * Return true if all sources of fallibility are within the cycle.
-	 */
+	 *
 	public boolean isInfallible() {
 		Boolean isInfallible2 = isInfallible;
 		if (isInfallible2 == null) {
@@ -73,7 +71,7 @@ public class CycleAnalysis
 			isInfallible = isInfallible2 = externalFallibilities.isEmpty();
 		}
 		return isInfallible2;
-	}
+	} */
 
 	public @NonNull Iterable<@NonNull Partition> partition(@NonNull Iterable<@NonNull MappingPartitioner> orderedMappingPartitioners) {
 		List<@NonNull Partition> partitions = new ArrayList<>();
