@@ -31,7 +31,6 @@ public abstract class TracePropertyAnalysis<@NonNull RA extends PartialRegionAna
 	protected final @NonNull PropertyDatum tracePropertyDatum;
 
 	protected TracePropertyAnalysis(@NonNull RegionsAnalysis<@NonNull RA> regionsAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
-		super(regionsAnalysis);
 		this.tracePropertyDatum = tracePropertyDatum;
 		assert tracePropertyDatum.getReferredTypedModel() == regionsAnalysis.getScheduleManager().getTraceTypedModel();
 	}

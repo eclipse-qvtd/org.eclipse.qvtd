@@ -15,7 +15,6 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
 
 /**
@@ -23,8 +22,6 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
  */
 public abstract class TraceElementAnalysis<@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> implements Nameable
 {
-	protected final @NonNull RegionsAnalysis<@NonNull RA> regionsAnalysis;
-
 	/**
 	 * The partitioners that consume (predicate) the trace class.
 	 */
@@ -34,10 +31,6 @@ public abstract class TraceElementAnalysis<@NonNull RA extends PartialRegionAnal
 	 * The partitioners that produce (realize) the trace class.
 	 */
 	protected final @NonNull List<@NonNull RA> producers = new ArrayList<>();
-
-	public TraceElementAnalysis(@NonNull RegionsAnalysis<@NonNull RA> regionsAnalysis) {
-		this.regionsAnalysis = regionsAnalysis;
-	}
 
 	public void addConsumer(@NonNull RA consumer) {
 		if (!consumers.contains(consumer)) {		// multi-consumption is possible

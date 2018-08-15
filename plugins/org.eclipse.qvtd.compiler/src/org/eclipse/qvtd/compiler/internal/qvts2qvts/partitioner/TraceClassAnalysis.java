@@ -24,7 +24,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionsAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -53,12 +53,11 @@ public abstract class TraceClassAnalysis<@NonNull RA extends PartialRegionAnalys
 
 	private @Nullable Boolean isDispatcher = null;
 
-	public TraceClassAnalysis(@NonNull RegionsAnalysis<@NonNull RA> regionsAnalysis, @NonNull ClassDatum traceClassDatum) {
-		super(regionsAnalysis);
+	public TraceClassAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull ClassDatum traceClassDatum) {
 		this.traceClassDatum = traceClassDatum;
 		subTraceClassAnalyses.add(this);
 		superTraceClassAnalyses.add(this);
-		assert traceClassDatum.getReferredTypedModel() == regionsAnalysis.getScheduleManager().getTraceTypedModel();
+		assert traceClassDatum.getReferredTypedModel() == scheduleManager.getTraceTypedModel();
 	}
 
 	public void addSubTraceClassAnalysis(@NonNull TraceClassAnalysis<@NonNull RA> traceClassAnalysis) {

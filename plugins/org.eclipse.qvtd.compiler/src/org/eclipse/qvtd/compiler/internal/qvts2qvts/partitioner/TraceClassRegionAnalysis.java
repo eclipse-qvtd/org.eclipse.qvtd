@@ -21,10 +21,12 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
  */
 public class TraceClassRegionAnalysis extends TraceClassAnalysis<@NonNull RegionAnalysis>
 {
+	protected final @NonNull TransformationAnalysis transformationAnalysis;
 	private @Nullable Boolean isCyclic = null;
 
 	public TraceClassRegionAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull ClassDatum traceClassDatum) {
-		super(transformationAnalysis, traceClassDatum);
+		super(transformationAnalysis.getScheduleManager(), traceClassDatum);
+		this.transformationAnalysis = transformationAnalysis;
 	}
 
 	/**
@@ -34,7 +36,7 @@ public class TraceClassRegionAnalysis extends TraceClassAnalysis<@NonNull Region
 		Boolean isCyclic2 = isCyclic;
 		if (isCyclic2 == null) {
 			for (@NonNull TraceClassAnalysis<@NonNull RegionAnalysis> subTraceClassAnalysis : getSubTraceClassAnalyses()) {
-				if (regionsAnalysis.getCycleAnalysis(subTraceClassAnalysis) != null) {
+				if (transformationAnalysis.isCyclic(subTraceClassAnalysis)) {
 					isCyclic2 = isCyclic = true;
 					return isCyclic2;
 				}

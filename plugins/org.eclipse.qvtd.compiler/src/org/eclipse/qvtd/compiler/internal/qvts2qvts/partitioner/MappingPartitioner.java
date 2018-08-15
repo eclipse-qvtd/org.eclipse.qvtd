@@ -636,7 +636,7 @@ public class MappingPartitioner implements Nameable
 	}
 
 	public @NonNull Iterable<@NonNull Partition> partition4qvtc() {
-		boolean isCyclic = transformationAnalysis.getCycleAnalysis(regionAnalysis) != null;
+		boolean isCyclic = transformationAnalysis.isCyclic(regionAnalysis);
 		List<@NonNull Partition> newPartitions = new ArrayList<>();
 		if (!isCyclic) {	// Cycle analysis found no cycles
 			newPartitions.add(createNonPartition());
@@ -682,8 +682,7 @@ public class MappingPartitioner implements Nameable
 		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(name)) {
 			getClass();
 		}
-		CycleRegionAnalysis cycleAnalysis = transformationAnalysis.getCycleAnalysis(regionAnalysis);
-		boolean isCyclic = cycleAnalysis != null;
+		boolean isCyclic = transformationAnalysis.isCyclic(regionAnalysis);
 		//	boolean isInfallible = false;
 		//	if (cycleAnalysis != null) {
 		//		isInfallible = cycleAnalysis.isInfallible();

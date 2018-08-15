@@ -18,7 +18,6 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CycleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TracePropertyAnalysis;
@@ -117,21 +116,9 @@ public abstract class RegionsAnalysis<@NonNull RA extends PartialRegionAnalysis<
 		}
 	}
 
-	//	protected abstract @NonNull CyclesAnalysis<@NonNull RA> createCyclesAnalysis();
-
 	protected abstract @NonNull TraceClassAnalysis<@NonNull RA> createTraceClassAnalysis(@NonNull ClassDatum traceClassDatum);
 
 	protected abstract @NonNull TracePropertyAnalysis<@NonNull RA> createTracePropertyAnalysis(@NonNull PropertyDatum tracePropertyDatum);
-
-	public @Nullable CycleAnalysis<@NonNull RA> getCycleAnalysis(@NonNull ClassDatum traceClassDatum) {
-		TraceClassAnalysis<@NonNull RA> traceClassAnalysis = classDatum2traceClassAnalysis.get(traceClassDatum);
-		if (traceClassAnalysis == null) {
-			return null;
-		}
-		return getCycleAnalysis(traceClassAnalysis);
-	}
-
-	public abstract @Nullable CycleAnalysis<@NonNull RA> getCycleAnalysis(@NonNull TraceClassAnalysis<@NonNull RA> traceClassAnalysis);
 
 	protected abstract @NonNull Iterable<@NonNull RA> getPartialRegionAnalyses();
 

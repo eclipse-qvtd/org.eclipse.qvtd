@@ -15,8 +15,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteModel;
@@ -27,9 +25,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CycleAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CycleRegionAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CyclesRegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CyclicRegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TracePropertyRegionAnalysis;
@@ -83,7 +79,7 @@ public class TransformationAnalysis extends RegionsAnalysis<@NonNull RegionAnaly
 	/**
 	 * The analysis of cycles.
 	 */
-	private @Nullable CyclesRegionAnalysis cyclesRegionAnalysis = null;
+	private @Nullable CyclicRegionsAnalysis cyclesRegionAnalysis = null;
 
 	public TransformationAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull Transformation transformation, @NonNull ScheduledRegion scheduledRegion) {
 		super(scheduleManager);
@@ -166,16 +162,11 @@ public class TransformationAnalysis extends RegionsAnalysis<@NonNull RegionAnaly
 		return corollaryProperty2regions.get(edge.getProperty());
 	}
 
-	public @Nullable CycleRegionAnalysis getCycleAnalysis(@NonNull RegionAnalysis regionAnalysis) {
+	/*	public @Nullable Iterable<@NonNull RegionAnalysis> getCyclicRegionAnalyses(@NonNull RegionAnalysis regionAnalysis) {
 		assert cyclesRegionAnalysis != null;
-		return cyclesRegionAnalysis != null ? (CycleRegionAnalysis)cyclesRegionAnalysis.getCycleAnalysis(regionAnalysis) : null;
-	}
-
-	@Override
-	public @Nullable CycleAnalysis<@NonNull RegionAnalysis> getCycleAnalysis(@NonNull TraceClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis) {
-		assert cyclesRegionAnalysis != null;
-		return cyclesRegionAnalysis != null ? cyclesRegionAnalysis.getCycleAnalysis(traceClassAnalysis) : null;
-	}
+		CycleRegionAnalysis cycleAnalysis = cyclesRegionAnalysis.getCycleAnalysis(regionAnalysis);
+		return cycleAnalysis != null ? cycleAnalysis.getRegionAnalyses() : null;
+	} */
 
 	@Override
 	public String getName() {
@@ -256,6 +247,16 @@ public class TransformationAnalysis extends RegionsAnalysis<@NonNull RegionAnaly
 		return false;
 	}
 
+	public boolean isCyclic(@NonNull TraceClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis) {
+		assert cyclesRegionAnalysis != null;
+		return cyclesRegionAnalysis.isCyclic(traceClassAnalysis);
+	}
+
+	public boolean isCyclic(@NonNull RegionAnalysis regionAnalysis) {
+		assert cyclesRegionAnalysis != null;
+		return cyclesRegionAnalysis.isCyclic(regionAnalysis);
+	}
+
 	public boolean isCyclic(@NonNull ClassDatum traceClassDatum) {
 		TraceClassRegionAnalysis traceClassAnalysis = basicGetTraceClassRegionAnalysis(traceClassDatum);
 		if (traceClassAnalysis == null) {
@@ -269,8 +270,7 @@ public class TransformationAnalysis extends RegionsAnalysis<@NonNull RegionAnaly
 			computeTraceClassDiscrimination();
 		}
 		computeTraceClassInheritance();
-		this.cyclesRegionAnalysis = new CyclesRegionAnalysis(this, getPartialRegionAnalyses());
-		List<@NonNull Set<@NonNull RegionAnalysis>> sortedCycleElementSets = cyclesRegionAnalysis.analyze();
+		this.cyclesRegionAnalysis = new CyclicRegionsAnalysis(getPartialRegionAnalyses());
 	}
 
 	@Override

@@ -54,6 +54,10 @@ import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionProblem;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TracePropertyAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -251,6 +255,125 @@ public class CompilerUtil extends QVTscheduleUtil
 			}
 		}
 		return to2froms;
+	}
+	/**
+	 * Return a map of the RegionAnalyses that may execute before each RA.
+	 */
+	public static <@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> @NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> computeTransitivePredecessors(@NonNull Iterable<@NonNull RA> regionAnalyses) {
+		Map<@NonNull RA, @NonNull Set<@NonNull RA>> consumer2producers = new HashMap<>();
+		for (@NonNull RA regionAnalysis : regionAnalyses) {
+			consumer2producers.put(regionAnalysis, new HashSet<>());
+		}
+		for (@NonNull RA consumer : regionAnalyses) {
+			Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> consumedTraceClassAnalyses = consumer.getConsumedTraceClassAnalyses();
+			if (consumedTraceClassAnalyses != null) {
+				for (@NonNull TraceClassAnalysis<@NonNull RA> consumedTraceClassAnalysis : consumedTraceClassAnalyses) {
+					for (@NonNull TraceClassAnalysis<@NonNull RA> subConsumedTraceClass : consumedTraceClassAnalysis.getSubTraceClassAnalyses()) {
+						for (@NonNull RA producer : subConsumedTraceClass.getProducers()) {
+							Set<@NonNull RA> producers = consumer2producers.get(consumer);
+							assert producers != null;
+							producers.add(producer);
+						}
+					}
+				}
+			}
+			Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> consumedTracePropertyAnalyses = consumer.getConsumedTracePropertyAnalyses();
+			if (consumedTracePropertyAnalyses != null) {
+				for (@NonNull TracePropertyAnalysis<@NonNull RA> consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
+					for (@NonNull RA producer : consumedTracePropertyAnalysis.getProducers()) {
+						Set<@NonNull RA> producers = consumer2producers.get(consumer);
+						assert producers != null;
+						producers.add(producer);
+					}
+				}
+			}
+		}
+		if (TransformationPartitioner.PREDECESSORS.isActive()) {
+			for (@NonNull RA successor : regionAnalyses) {
+				StringBuilder s = new StringBuilder();
+				s.append(successor + ":");
+				List<@NonNull RA> producers = new ArrayList<>(consumer2producers.get(successor));
+				Collections.sort(producers, NameUtil.NAMEABLE_COMPARATOR);
+				for (@NonNull RA producer : producers) {
+					s.append(" " + producer);
+				}
+				TransformationPartitioner.PREDECESSORS.println(s.toString());
+			}
+		}
+		Map<@NonNull RA, @NonNull Set<@NonNull RA>> consumer2producersClosure = CompilerUtil.computeClosure(consumer2producers);
+		if (TransformationPartitioner.PREDECESSORS.isActive()) {
+			for (@NonNull RA successor : regionAnalyses) {
+				StringBuilder s = new StringBuilder();
+				s.append(successor + ":");
+				List<@NonNull RA> producers = new ArrayList<>(consumer2producersClosure.get(successor));
+				Collections.sort(producers, NameUtil.NAMEABLE_COMPARATOR);
+				for (@NonNull RA producer : producers) {
+					s.append(" " + producer);
+				}
+				TransformationPartitioner.PREDECESSORS.println(s.toString());
+			}
+		}
+		return consumer2producersClosure;
+	}
+
+	/**
+	 * Return a map of the RegionAnalyses that may execute after each RA.
+	 */
+	public static <@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> @NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> computeTransitiveSuccessors(@NonNull Iterable<@NonNull RA> regionAnalyses) {
+		Map<@NonNull RA, @NonNull Set<@NonNull RA>> producer2consumers = new HashMap<>();
+		for (@NonNull RA regionAnalysis : regionAnalyses) {
+			producer2consumers.put(regionAnalysis, new HashSet<>());
+		}
+		for (@NonNull RA producer : regionAnalyses) {
+			Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> producedTraceClassAnalyses = producer.getProducedTraceClassAnalyses();
+			if (producedTraceClassAnalyses != null) {
+				for (@NonNull TraceClassAnalysis<@NonNull RA> producedTraceClassAnalysis : producedTraceClassAnalyses) {
+					for (@NonNull TraceClassAnalysis<@NonNull RA> superProducedTraceClassAnalysis : producedTraceClassAnalysis.getSuperTraceClassAnalyses()) {
+						for (@NonNull RA consumer : superProducedTraceClassAnalysis.getConsumers()) {
+							Set<@NonNull RA> consumers = producer2consumers.get(producer);
+							assert consumers != null;
+							consumers.add(consumer);
+						}
+					}
+				}
+			}
+			Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> producedTracePropertyAnalyses = producer.getProducedTracePropertyAnalyses();
+			if (producedTracePropertyAnalyses != null) {
+				for (@NonNull TracePropertyAnalysis<@NonNull RA> producedTracePropertyAnalysis : producedTracePropertyAnalyses) {
+					for (@NonNull RA consumer : producedTracePropertyAnalysis.getConsumers()) {
+						Set<@NonNull RA> consumers = producer2consumers.get(producer);
+						assert consumers != null;
+						consumers.add(consumer);
+					}
+				}
+			}
+		}
+		if (TransformationPartitioner.SUCCESSORS.isActive()) {
+			for (@NonNull RA successor : regionAnalyses) {
+				StringBuilder s = new StringBuilder();
+				s.append(successor + ":");
+				List<@NonNull RA> consumers = new ArrayList<>(producer2consumers.get(successor));
+				Collections.sort(consumers, NameUtil.NAMEABLE_COMPARATOR);
+				for (@NonNull RA consumer : consumers) {
+					s.append(" " + consumer);
+				}
+				TransformationPartitioner.SUCCESSORS.println(s.toString());
+			}
+		}
+		Map<@NonNull RA, @NonNull Set<@NonNull RA>> producer2consumersClosure = CompilerUtil.computeClosure(producer2consumers);
+		if (TransformationPartitioner.SUCCESSORS.isActive()) {
+			for (@NonNull RA predecessor : regionAnalyses) {
+				StringBuilder s = new StringBuilder();
+				s.append(predecessor + ":");
+				List<@NonNull RA> consumers = new ArrayList<>(producer2consumersClosure.get(predecessor));
+				Collections.sort(consumers, NameUtil.NAMEABLE_COMPARATOR);
+				for (@NonNull RA consumer : consumers) {
+					s.append(" " + consumer);
+				}
+				TransformationPartitioner.SUCCESSORS.println(s.toString());
+			}
+		}
+		return producer2consumersClosure;
 	}
 
 	public static @NonNull RegionProblem createRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {

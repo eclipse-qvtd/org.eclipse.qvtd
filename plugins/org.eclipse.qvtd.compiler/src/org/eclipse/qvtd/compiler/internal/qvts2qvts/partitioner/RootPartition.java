@@ -18,7 +18,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import com.google.common.collect.Iterables;
 
-public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Partition>*/ //implements Partition
+public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Partition>*/ implements InternallyAcyclicPartition
 {
 	protected final @NonNull Iterable<@NonNull Partition> partitions;
 	protected final @NonNull List<@NonNull MappingRegion> partitionedRegions;
@@ -40,5 +40,22 @@ public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Part
 
 	public @NonNull Iterable<@NonNull MappingRegion> getPartitionedRegions() {
 		return partitionedRegions;
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull Partition> getPartitions() {
+		return partitions;
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull TraceClassAnalysis<@NonNull Partition>> getTraceClassAnalyses() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull TracePropertyAnalysis<@NonNull Partition>> getTracePropertyAnalyses() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();
 	}
 }

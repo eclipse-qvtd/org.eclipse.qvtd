@@ -22,23 +22,23 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 /**
  * Each CycleAnalysis identifies one group of regionAnalyses that contribute to a cycle.
  */
-public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Partition> implements Partition, CycleAnalysis<@NonNull Partition>
+public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Partition> implements InternallyAcyclicPartition, Partition
 {
 	protected final @NonNull String name;
-	protected final @NonNull CyclesPartitionAnalysis cyclesAnalysis;
-	protected final @NonNull Set<@NonNull Partition> regionAnalyses;
+	protected final @NonNull CyclicPartitionsAnalysis cyclesAnalysis;
+	protected final @NonNull Set<@NonNull Partition> partitions;
 	protected final @NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> traceClassAnalyses;
 	protected final @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> tracePropertyAnalyses;
 
-	public CyclicPartition(@NonNull String name, @NonNull CyclesPartitionAnalysis cyclesAnalysis, @NonNull Set<@NonNull Partition> regionAnalyses,
+	public CyclicPartition(@NonNull TransformationPartitioner transformationPartitioner, @NonNull String name, @NonNull CyclicPartitionsAnalysis cyclesAnalysis, @NonNull Set<@NonNull Partition> partitions,
 			@NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> traceClassAnalyses, @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> tracePropertyAnalyses) {
-		super(cyclesAnalysis.getRegionsAnalysis(), QVTscheduleFactory.eINSTANCE.createCyclicMappingRegion());	// FIXME orphan region
+		super(transformationPartitioner, QVTscheduleFactory.eINSTANCE.createCyclicMappingRegion());	// FIXME orphan region
 		this.name = name;
 		this.cyclesAnalysis = cyclesAnalysis;
-		this.regionAnalyses = regionAnalyses;
+		this.partitions = partitions;
 		this.traceClassAnalyses = traceClassAnalyses;
 		this.tracePropertyAnalyses = tracePropertyAnalyses;
-		assert !regionAnalyses.isEmpty();
+		assert !partitions.isEmpty();
 		assert !traceClassAnalyses.isEmpty() || !tracePropertyAnalyses.isEmpty();
 	}
 
@@ -72,13 +72,8 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	}
 
 	@Override
-	public @NonNull Partition getRA() {
-		return this;
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull Partition> getRegionAnalyses() {
-		return regionAnalyses;
+	public @NonNull Iterable<@NonNull Partition> getPartitions() {
+		return partitions;
 	}
 
 	@Override
