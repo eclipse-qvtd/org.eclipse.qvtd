@@ -120,7 +120,7 @@ public abstract class RegionsAnalysis<@NonNull RA extends PartialRegionAnalysis<
 
 	protected abstract @NonNull TracePropertyAnalysis<@NonNull RA> createTracePropertyAnalysis(@NonNull PropertyDatum tracePropertyDatum);
 
-	protected abstract @NonNull Iterable<@NonNull RA> getPartialRegionAnalyses();
+	//	protected abstract @NonNull Iterable<@NonNull RA> getPartialRegionAnalyses();
 
 	public @NonNull ScheduleManager getScheduleManager() {
 		return scheduleManager;

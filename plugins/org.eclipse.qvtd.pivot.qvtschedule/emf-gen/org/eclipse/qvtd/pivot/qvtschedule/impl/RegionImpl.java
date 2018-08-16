@@ -878,6 +878,13 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		return null;
 	}
 
+	private int nextPartitionNumber = 0;			// FIXME legacy compatibility naming support
+
+	@Override
+	public int getNextPartitionNumber() {
+		return ++nextPartitionNumber;
+	}
+
 	@Override
 	public final @NonNull Iterable<@NonNull Node> getOldNodes() {
 		return Iterables.filter(QVTscheduleUtil.getOwnedNodes(this), QVTscheduleUtil.IsOldNodePredicate.INSTANCE);

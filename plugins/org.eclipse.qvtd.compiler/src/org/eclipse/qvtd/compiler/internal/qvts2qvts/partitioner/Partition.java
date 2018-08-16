@@ -19,15 +19,19 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 
-interface Partition extends PartialRegionAnalysis<@NonNull Partition>
+public interface Partition extends PartialRegionAnalysis<@NonNull Partition>
 {
 	public void analyzePartition();
 
 	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber);
+
+	public int getDepth();
 
 	public @NonNull Region getRegion();
 
 	public @Nullable Role getRole(@NonNull Edge edge);
 
 	public @Nullable Role getRole(@NonNull Node node);
+
+	public void setDepth(int parallelScheduleDepth);
 }

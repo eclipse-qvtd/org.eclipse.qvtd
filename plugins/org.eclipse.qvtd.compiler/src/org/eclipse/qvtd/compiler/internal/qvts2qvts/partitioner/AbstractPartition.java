@@ -20,6 +20,7 @@ abstract class AbstractPartition extends AbstractPartialRegionAnalysis<@NonNull 
 	protected final @NonNull MappingPartitioner partitioner;
 	protected final @NonNull RegionAnalysis regionAnalysis;
 	protected final @NonNull TransformationAnalysis transformationAnalysis;
+	private int parallelScheduleDepth = -1;
 
 	protected AbstractPartition(@NonNull MappingPartitioner partitioner) {
 		super(partitioner.getRegionsPartitionAnalysis(), partitioner.getRegion());
@@ -33,10 +34,21 @@ abstract class AbstractPartition extends AbstractPartialRegionAnalysis<@NonNull 
 		analyze();
 	}
 
+	@Override
+	public int getDepth() {
+		assert parallelScheduleDepth >= 0;
+		return parallelScheduleDepth;
+	}
+
 	//	@Override
 	//	public @NonNull Region getRegion() {
 	//		return region;
 	//	}
+
+	@Override
+	public void setDepth(int parallelScheduleDepth) {
+		this.parallelScheduleDepth = parallelScheduleDepth;
+	}
 
 	@Override
 	public String toString() {

@@ -173,10 +173,10 @@ public class TransformationAnalysis extends RegionsAnalysis<@NonNull RegionAnaly
 		return transformation.getName();
 	}
 
-	@Override
-	protected @NonNull Iterable<@NonNull RegionAnalysis> getPartialRegionAnalyses() {
-		return region2regionAnalysis.values();
-	}
+	//	@Override
+	//	protected @NonNull Iterable<@NonNull RegionAnalysis> getPartialRegionAnalyses() {
+	//		return region2regionAnalysis.values();
+	//	}
 
 	public @NonNull RegionAnalysis getRegionAnalysis(@NonNull Region region) {
 		RegionAnalysis regionAnalysis = region2regionAnalysis.get(region);
@@ -270,7 +270,7 @@ public class TransformationAnalysis extends RegionsAnalysis<@NonNull RegionAnaly
 			computeTraceClassDiscrimination();
 		}
 		computeTraceClassInheritance();
-		this.cyclesRegionAnalysis = new CyclicRegionsAnalysis(getPartialRegionAnalyses());
+		this.cyclesRegionAnalysis = new CyclicRegionsAnalysis(region2regionAnalysis.values());
 	}
 
 	@Override

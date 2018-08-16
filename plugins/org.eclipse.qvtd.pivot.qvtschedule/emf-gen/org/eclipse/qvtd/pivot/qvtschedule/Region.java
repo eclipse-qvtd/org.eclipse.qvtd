@@ -206,4 +206,6 @@ public interface Region extends NamedElement, Symbolable, Graphable, GraphNode
 	void removeCallToChild(@NonNull Region region);
 	void replaceCallToChild(@NonNull Region oldRegion, @NonNull Region newRegion);
 	void resetHead(@NonNull Node headNode);
+
+	int getNextPartitionNumber();
 } // Region

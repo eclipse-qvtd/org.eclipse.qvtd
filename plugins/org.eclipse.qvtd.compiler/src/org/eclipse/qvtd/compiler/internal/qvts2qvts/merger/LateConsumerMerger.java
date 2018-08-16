@@ -22,6 +22,7 @@ import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -251,8 +252,8 @@ public class LateConsumerMerger extends AbstractMerger
 	 *
 	 * inputRegions should be indexed to encourage consecutive indexes for regions sharing an input connection.
 	 */
-	public static @NonNull Map<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> merge(@NonNull ScheduleManager scheduleManager, @NonNull ScheduledRegion scheduledRegion) {
-		LateConsumerMerger lateMerger = new LateConsumerMerger(scheduleManager, scheduledRegion);
+	public static @NonNull Map<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> merge(@NonNull ScheduleManager scheduleManager,@NonNull RootPartition rootPartition) {
+		LateConsumerMerger lateMerger = new LateConsumerMerger(scheduleManager, rootPartition);
 		lateMerger.merge();
 		lateMerger.prune();
 		scheduleManager.writeDebugGraphs("8-late", true, true, false);
@@ -260,16 +261,16 @@ public class LateConsumerMerger extends AbstractMerger
 	}
 
 	protected final @NonNull ScheduleManager scheduleManager;
-	protected final @NonNull ScheduledRegion scheduledRegion;
+	protected final @NonNull RootPartition rootPartition;
 	protected final @NonNull List<@NonNull Region> allRegions = new ArrayList<>();
 	private /*@LazyNonNull*/ ContentsAnalysis<@NonNull MappingRegion> contentsAnalysis;
 	private final @NonNull Map<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> mergedRegion2originalRegions = new HashMap<>();
 	protected final @NonNull LateStrategy LateStrategy_INSTANCE = new LateStrategy();
 
-	public LateConsumerMerger(@NonNull ScheduleManager scheduleManager, @NonNull ScheduledRegion scheduledRegion) {
+	public LateConsumerMerger(@NonNull ScheduleManager scheduleManager, @NonNull RootPartition rootPartition) {
 		this.scheduleManager = scheduleManager;
-		this.scheduledRegion = scheduledRegion;
-		gatherRegions(scheduledRegion);
+		this.rootPartition = rootPartition;
+		gatherRegions(rootPartition.getScheduledRegion());
 
 	}
 
@@ -319,7 +320,7 @@ public class LateConsumerMerger extends AbstractMerger
 	} */
 
 	private void merge() {
-		mergeHierarchy(scheduledRegion);
+		mergeHierarchy(rootPartition.getScheduledRegion());
 		return;
 	}
 

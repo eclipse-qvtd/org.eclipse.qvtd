@@ -55,6 +55,7 @@ import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionProblem;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TracePropertyAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
@@ -256,6 +257,72 @@ public class CompilerUtil extends QVTscheduleUtil
 		}
 		return to2froms;
 	}
+
+	/**
+	 * Return a sequence of concurrencies, where each concurrency is a set of Partitions that may be executed
+	 * concurrently, after their preceding concurrencies and before their subsequent concurrencies. The index in the
+	 * sequence corresponds to the critical path length/depth from the earliest predecessor to the concurrent element.
+	 */
+	public static @NonNull List<@NonNull Iterable<@NonNull Partition>> computeParallelSchedule(	// FIXME this can be much faster with bit masks
+			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors,
+			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2successors) {
+		//
+		//	Check that inputs are consistent.
+		//
+		assert partition2predecessors.keySet().equals(partition2successors.keySet());
+		for (@NonNull Partition partition : partition2predecessors.keySet()) {
+			Set<@NonNull Partition> predecessors = partition2predecessors.get(partition);
+			assert predecessors != null;
+			for (@NonNull Partition predecessor : predecessors) {
+				Set<@NonNull Partition> successors = partition2successors.get(predecessor);
+				assert successors != null;
+				assert successors.contains(partition);
+			}
+		}
+		for (@NonNull Partition partition : partition2successors.keySet()) {
+			Set<@NonNull Partition> successors = partition2successors.get(partition);
+			assert successors != null;
+			for (@NonNull Partition successor : successors) {
+				Set<@NonNull Partition> predecessors = partition2predecessors.get(successor);
+				assert predecessors != null;
+				assert predecessors.contains(partition);
+			}
+		}
+		//
+		//	Loop over the candidates to select those with no unscheduled predecessors. On the first iteration
+		//	all partitions are considered, on subsequent iterations only successots of just scheduled partitions
+		//	are reconsidered.
+		//
+		List<@NonNull Iterable<@NonNull Partition>> parallelSchedule = new ArrayList<>();
+		Set<@NonNull Partition> scheduledPartitions = new HashSet<>();
+		Set<@NonNull Partition> scheduleCandidates = new HashSet<>(partition2predecessors.keySet());
+		while (!scheduleCandidates.isEmpty()) {
+			List<@NonNull Partition> toSchedule = new ArrayList<>();
+			Set<@NonNull Partition> nextScheduleCandidates = new HashSet<>();
+			for (@NonNull Partition partition : scheduleCandidates) {
+				Set<@NonNull Partition> predecessors = partition2predecessors.get(partition);
+				assert predecessors != null;
+				Set<@NonNull Partition> unscheduledPredecessors = new HashSet<>(predecessors);
+				assert unscheduledPredecessors != null;
+				unscheduledPredecessors.remove(partition);
+				unscheduledPredecessors.removeAll(scheduledPartitions);
+				if (unscheduledPredecessors.isEmpty()) {
+					toSchedule.add(partition);
+					partition.setDepth(parallelSchedule.size());
+					Set<@NonNull Partition> unscheduledSuccessors = partition2successors.get(partition);
+					assert unscheduledSuccessors != null;
+					nextScheduleCandidates.addAll(unscheduledSuccessors);
+				}
+			}
+			assert !toSchedule.isEmpty();
+			nextScheduleCandidates.removeAll(toSchedule);
+			parallelSchedule.add(toSchedule);
+			scheduledPartitions.addAll(toSchedule);
+			scheduleCandidates = nextScheduleCandidates;
+		}
+		return parallelSchedule;
+	}
+
 	/**
 	 * Return a map of the RegionAnalyses that may execute before each RA.
 	 */

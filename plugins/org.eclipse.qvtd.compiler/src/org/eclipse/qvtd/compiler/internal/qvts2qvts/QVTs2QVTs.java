@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -39,6 +40,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -65,6 +67,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
@@ -115,7 +118,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		this.completeModel = environmentFactory.getCompleteModel();
 	}
 
-	private void computeInputModels(@NonNull ScheduledRegion rootScheduledRegion) {
+	private void computeInputModels() {
 		for (@NonNull ClassDatum classDatum : scheduleManager.getClassDatums()) {
 			DomainUsage domainUsage = scheduleManager.getDomainUsage(classDatum);
 			if (domainUsage.isInput() && !domainUsage.isOutput()) {
@@ -154,7 +157,8 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	 * Create a RootContainmentRegion that introduces model elements directly from the input model root, or from
 	 * composition relationships that form part of an extended metamodel that is not known until run-time.
 	 */
-	private @NonNull LoadingRegion createRootContainmentRegion(@NonNull ScheduledRegion rootScheduledRegion) {
+	private @NonNull LoadingRegion createRootContainmentRegion(@NonNull RootPartition rootPartition) {
+		ScheduledRegion rootScheduledRegion = rootPartition.getScheduledRegion();
 		LoadingRegion loadingRegion = loadingRegionAnalysis.getRegion();
 		loadingRegion.setOwningScheduledRegion(rootScheduledRegion);
 		scheduleManager.writeDebugGraphs(loadingRegion, null);
@@ -164,7 +168,8 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	/**
 	 * Create the Passed and Used Connections between all introducers and their corresponding consuming nodes.
 	 */
-	private void createConnections(@NonNull ScheduledRegion rootScheduledRegion) {
+	private void createConnections(@NonNull RootPartition rootPartition) {
+		ScheduledRegion rootScheduledRegion = rootPartition.getScheduledRegion();
 		List<@NonNull Region> sortedCallableRegions = new ArrayList<>();
 		Iterables.addAll(sortedCallableRegions, rootScheduledRegion.getCallableRegions());
 		Collections.sort(sortedCallableRegions, NameUtil.NAMEABLE_COMPARATOR);
@@ -677,16 +682,16 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		}
 	} */
 
-	private void createLocalSchedule(@NonNull ScheduledRegion scheduledRegion) {
-		//
-		//	Partition single region recursive connections into base cases recursive case connections with associated region recursions.
-		//
-		//		splitConnectionVariables();
-		//
-		scheduleManager.writeDebugGraphs("5-cycled", true, true, false);
-	}
+	//	private void createLocalSchedule(@NonNull ScheduledRegion scheduledRegion) {
+	//
+	//	Partition single region recursive connections into base cases recursive case connections with associated region recursions.
+	//
+	//		splitConnectionVariables();
+	//
+	//		scheduleManager.writeDebugGraphs("5-cycled", true, true, false);
+	//	}
 
-	private void createLocalSchedule2(@NonNull ScheduledRegion scheduledRegion, @NonNull List<@NonNull Region> orderedRegions) {
+	private void createLocalSchedule2(@NonNull RootPartition rootPartition, @NonNull List<@NonNull Collection<@NonNull Region>> parallelSchedule) {
 		//		region2order.computeRegionIndexes(getCallableRegions());
 		//		Iterable<Region> sortedCallableRegions = regionOrdering;//AbstractRegion.EarliestRegionComparator.sort(getCallableRegions());
 		//
@@ -694,40 +699,44 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//
 		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges = new HashMap<>();
 		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges = new HashMap<>();
-		for (@NonNull Region region : orderedRegions) {
-			QVTscheduleConstants.POLLED_PROPERTIES.println("building indexes for " + region + " " + region.getIndexRangeText());
-			RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
-			regionAnalysis.buildNavigationEdgesIndex(typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
+		for (@NonNull Iterable<@NonNull Region> orderedRegions : parallelSchedule) {
+			for (@NonNull Region region : orderedRegions) {
+				QVTscheduleConstants.POLLED_PROPERTIES.println("building indexes for " + region + " " + region.getIndexRangeText());
+				RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
+				regionAnalysis.buildNavigationEdgesIndex(typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
+			}
 		}
 		//
 		//	Eliminate dependencies that are satisfied by the linear invocation indexes.
 		//
-		for (@NonNull Region region : orderedRegions) {
-			//			int earliestPassedConnectionSourceIndex = region.getEarliestPassedConnectionSourceIndex();
-			int earliestIndex = region.getIndexes().get(0);
-			List<@NonNull DatumConnection<?>> redundantConnections = null;
-			for (@NonNull DatumConnection<?> usedConnection : region.getIncomingConnections()) {
-				if (!usedConnection.isPassed(region)) {
-					boolean isRedundant = true;
-					for (@NonNull Region sourceRegion : usedConnection.getSourceRegions()) {
-						List<@NonNull Integer> indexes = sourceRegion.getIndexes();
-						int lastIndex = indexes.get(indexes.size()-1);
-						if (lastIndex >= earliestIndex) {
-							isRedundant = false;
-							break;
+		for (@NonNull Iterable<@NonNull Region> orderedRegions : parallelSchedule) {
+			for (@NonNull Region region : orderedRegions) {
+				//			int earliestPassedConnectionSourceIndex = region.getEarliestPassedConnectionSourceIndex();
+				int earliestIndex = region.getIndexes().get(0);
+				List<@NonNull DatumConnection<?>> redundantConnections = null;
+				for (@NonNull DatumConnection<?> usedConnection : region.getIncomingConnections()) {
+					if (!usedConnection.isPassed(region)) {
+						boolean isRedundant = true;
+						for (@NonNull Region sourceRegion : usedConnection.getSourceRegions()) {
+							List<@NonNull Integer> indexes = sourceRegion.getIndexes();
+							int lastIndex = indexes.get(indexes.size()-1);
+							if (lastIndex >= earliestIndex) {
+								isRedundant = false;
+								break;
+							}
 						}
-					}
-					if (isRedundant) {
-						if (redundantConnections == null) {
-							redundantConnections = new ArrayList<>();
+						if (isRedundant) {
+							if (redundantConnections == null) {
+								redundantConnections = new ArrayList<>();
+							}
+							redundantConnections.add(usedConnection);
 						}
-						redundantConnections.add(usedConnection);
 					}
 				}
-			}
-			if (redundantConnections != null) {
-				for (@NonNull DatumConnection<?> redundantConnection : redundantConnections) {
-					redundantConnection.removeTargetRegion(region);
+				if (redundantConnections != null) {
+					for (@NonNull DatumConnection<?> redundantConnection : redundantConnections) {
+						redundantConnection.removeTargetRegion(region);
+					}
 				}
 			}
 		}
@@ -735,12 +744,15 @@ public class QVTs2QVTs extends QVTimperativeHelper
 
 		boolean noLateConsumerMerge = scheduleManager.isNoLateConsumerMerge();
 		if (!noLateConsumerMerge) {
-			lateMerge(scheduledRegion, orderedRegions, typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
+			lateMerge(rootPartition, parallelSchedule, typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
 		}
 
-		for (@NonNull Region region : orderedRegions) {
-			getRegionAnalysis(region).computeCheckedOrEnforcedEdges(typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
+		for (@NonNull Iterable<@NonNull Region> orderedRegions : parallelSchedule) {
+			for (@NonNull Region region : orderedRegions) {
+				getRegionAnalysis(region).computeCheckedOrEnforcedEdges(typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
+			}
 		}
+
 		/*	suspended - just an optimization - needs more hierarchical consideration
 		//
 		//	Redirect ordered consumers to depend on each other's heads thereby respecting the ordering and
@@ -882,11 +894,12 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//		}
 	}
 
-	public void createSchedule1(@NonNull ScheduledRegion rootScheduledRegion) {
+	public void createSchedule1(@NonNull RootPartition rootPartition) {
+		ScheduledRegion rootScheduledRegion = rootPartition.getScheduledRegion();
 		//
 		//	Identify the input models.
 		//
-		computeInputModels(rootScheduledRegion);
+		computeInputModels();
 		if (QVTm2QVTs.DUMP_INPUT_MODEL_TO_DOMAIN_USAGE.isActive()) {
 			QVTm2QVTs.DUMP_INPUT_MODEL_TO_DOMAIN_USAGE.println(dumpInputModels().reduce("", QVTscheduleUtil.stringJoin("\n\t")));
 		}
@@ -906,20 +919,21 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//
 		//	Create the root containment region to introduce all root and otherwise contained consumed classes.
 		//
-		createRootContainmentRegion(rootScheduledRegion);
+		createRootContainmentRegion(rootPartition);
 		//
 		//	Create a connection between each consumer and the corresponding introducer/producer.
 		//
-		createConnections(rootScheduledRegion);
+		createConnections(rootPartition);
 		//		createSchedule2();
 	}
 
-	protected void createSchedule2(@NonNull ScheduledRegion rootScheduledRegion) {
+	protected void createSchedule2(@NonNull RootPartition rootPartition) {
+		ScheduledRegion rootScheduledRegion = rootPartition.getScheduledRegion();
 		//
 		//	Replace multi-region recursions by single nested region recursions.
 		//
-		List<@NonNull ScheduledRegion> allScheduledRegions = new ArrayList<>();
-		allScheduledRegions.add(rootScheduledRegion);
+		List<@NonNull RootPartition> allRootPartitions = new ArrayList<>();
+		allRootPartitions.add(rootPartition);
 		//		CyclesAnalyzer cyclesAnalyzer = new CyclesAnalyzer(rootScheduledRegion, rootScheduledRegion.getCallableRegions());
 		//		List<@NonNull RegionCycle> regionCycles = cyclesAnalyzer.getOrderedCycles();
 		//		if (regionCycles != null) {
@@ -950,13 +964,19 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//
 		//	Create the schedule for each directed acyclic scheduled region.
 		//
-		for (@NonNull ScheduledRegion scheduledRegion : allScheduledRegions) {
-			createLocalSchedule(scheduledRegion);
-		}
+		//		for (@NonNull RootPartition aRootPartition : allRootPartitions) {
+		//			ScheduledRegion scheduledRegion = aRootPartition.getScheduledRegion();
+		//			createLocalSchedule(scheduledRegion);
+		//		}
 		ScheduleIndexer scheduleIndexer = new ScheduleIndexer(scheduleManager, rootScheduledRegion);
 		scheduleIndexer.schedule(rootScheduledRegion);
-		for (@NonNull ScheduledRegion scheduledRegion : allScheduledRegions) {
-			createLocalSchedule2(scheduledRegion, scheduleIndexer.getOrdering());
+		for (@NonNull RootPartition aRootPartition : allRootPartitions) {
+			List<@NonNull Iterable<@NonNull Partition>> newParallelPartitionSchedule = aRootPartition.getPartitionSchedule();
+			List<@NonNull Collection<@NonNull Region>> oldParallelSchedule = new ArrayList<>();
+			for (@NonNull Region region : scheduleIndexer.getOrdering()) {
+				oldParallelSchedule.add(Lists.newArrayList(region));
+			}
+			createLocalSchedule2(aRootPartition, oldParallelSchedule);
 		}
 	}
 
@@ -1100,20 +1120,35 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		return true;
 	}
 
-	private void lateMerge(@NonNull ScheduledRegion scheduledRegion, @NonNull List<@NonNull Region> orderedRegions,
+	private void lateMerge(@NonNull RootPartition rootPartition, @NonNull List<@NonNull Collection<@NonNull Region>> parallelSchedule,
 			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges,
 			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges) {
-		Map<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> newRegion2oldRegions = LateConsumerMerger.merge(scheduleManager, scheduledRegion);
+		@NonNull List<@NonNull Region> zorderedRegions;
+		Map<@NonNull Region, @NonNull Integer> region2depth = new HashMap<>();
+		int parallelDepth = 0;
+		for (@NonNull Iterable<@NonNull Region> orderedRegions : parallelSchedule) {
+			for (@NonNull Region region : orderedRegions) {
+				region2depth.put(region,  parallelDepth);
+			}
+			parallelDepth++;
+		}
+		Map<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> newRegion2oldRegions = LateConsumerMerger.merge(scheduleManager, rootPartition);
 		for (Map.Entry<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> entry : newRegion2oldRegions.entrySet()) {
 			Region newRegion = entry.getKey();
 			List<@NonNull MappingRegion> oldRegions = entry.getValue();
 			assert oldRegions.size() >= 2;
-			int orderedRegionIndex = orderedRegions.indexOf(oldRegions.get(0));
+			//	int orderedRegionIndex = orderedRegions.indexOf(oldRegions.get(0));
+			Integer orderedRegionIndex = region2depth.get(oldRegions.get(0));
+			assert orderedRegionIndex != null;
 			for (@NonNull MappingRegion oldRegion : oldRegions) {
-				orderedRegions.remove(oldRegion);
+				//				orderedRegions.remove(oldRegion);
+				Integer depth = region2depth.get(oldRegion);
+				assert depth != null;
+				parallelSchedule.get(depth).remove(oldRegion);
 				scheduleManager.setScheduledRegion(oldRegion, null);
 			}
-			orderedRegions.add(orderedRegionIndex, newRegion);
+			//	orderedRegions.add(orderedRegionIndex, newRegion);
+			parallelSchedule.get(orderedRegionIndex).add(newRegion);
 			QVTscheduleConstants.POLLED_PROPERTIES.println("building indexes for " + newRegion + " " + newRegion.getIndexRangeText());
 			RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(newRegion);
 			regionAnalysis.buildNavigationEdgesIndex(typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
@@ -1127,33 +1162,38 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//			System.out.println("activeRegions " + region);
 		//		}
 		Iterable<@NonNull ScheduledRegion> scheduledRegions = scheduledRegion2activeRegions.keySet();
-		Map<@NonNull ScheduledRegion, Iterable<? extends @NonNull MappingRegion>> scheduledRegion2partitionedRegions = new HashMap<>();
+		//	Map<@NonNull ScheduledRegion, Iterable<? extends @NonNull MappingRegion>> scheduledRegion2partitionedRegions = new HashMap<>();
+		//	Map<@NonNull ScheduledRegion, @NonNull RootPartition> scheduledRegion2rootPartition = new HashMap<>();
+		List<@NonNull RootPartition> rootPartitions = new ArrayList<>();		// FXME just one
 		for (@NonNull ScheduledRegion scheduledRegion : scheduledRegions) {
 			Transformation transformation = QVTscheduleUtil.getReferredTransformation(scheduledRegion);
 			TransformationAnalysis transformationAnalysis = scheduleManager.getTransformationAnalysis(transformation);
 			Iterable<? extends @NonNull MappingRegion> activeRegions = scheduledRegion2activeRegions.get(scheduledRegion);
 			assert activeRegions != null;
 			RootPartition rootPartition = TransformationPartitioner.partition(transformationAnalysis, problemHandler, activeRegions);
-			Iterable<@NonNull MappingRegion> partitionedRegions = rootPartition.getPartitionedRegions();
-			if (!Iterables.isEmpty(partitionedRegions)) {
-				//			for (@NonNull Region region : partitionedRegions) {
-				//				System.out.println("partitionedRegions " + region);
-				//			}
-				scheduledRegion2partitionedRegions.put(scheduledRegion, partitionedRegions);
-			}
-			else {
-				scheduledRegion2partitionedRegions.put(scheduledRegion, activeRegions);
-			}
+			rootPartition.setScheduledRegion(scheduledRegion);
+			rootPartitions.add(rootPartition);
+			//	scheduledRegion2rootPartition.put(scheduledRegion, rootPartition);
+			//	Iterable<@NonNull MappingRegion> partitionedRegions = rootPartition.getPartitionedRegions();
+			//	if (!Iterables.isEmpty(partitionedRegions)) {
+			//			for (@NonNull Region region : partitionedRegions) {
+			//				System.out.println("partitionedRegions " + region);
+			//			}
+			//	scheduledRegion2partitionedRegions.put(scheduledRegion, partitionedRegions);
+			//	}
+			//	else {
+			//		scheduledRegion2partitionedRegions.put(scheduledRegion, activeRegions);
+			//	}
 		}
-		for (@NonNull ScheduledRegion scheduledRegion : scheduledRegions) {
-			List<@NonNull MappingRegion> mappingRegions = QVTscheduleUtil.Internal.getMappingRegionsList(scheduledRegion);
-			assert mappingRegions.isEmpty();
-			Iterables.addAll(mappingRegions, scheduledRegion2partitionedRegions.get(scheduledRegion));
-		}
-		for (@NonNull ScheduledRegion scheduledRegion : scheduledRegions) {
+		for (@NonNull RootPartition rootPartition : rootPartitions) {
+			//	List<@NonNull Iterable<@NonNull Partition>> partitionSchedule = rootPartition.getPartitionSchedule();
+			ScheduledRegion scheduledRegion = rootPartition.getScheduledRegion();
+			Iterable<@NonNull MappingRegion> mappingRegions = QVTscheduleUtil.getMappingRegions(scheduledRegion);
+			assert Iterables.isEmpty(mappingRegions);
+			List<@NonNull Collection<@NonNull MappingRegion>> regionSchedule = rootPartition.getRegionSchedule();
 			scheduledRegion.setOwnedLoadingRegion(loadingRegionAnalysis.getRegion());
-			createSchedule1(scheduledRegion);
-			createSchedule2(scheduledRegion);
+			createSchedule1(rootPartition);
+			createSchedule2(rootPartition);
 			//
 			if (ConnectivityChecker.CONNECTIVITY.isActive()) {
 				//			ConnectivityChecker.checkConnectivity(scheduleManager);
