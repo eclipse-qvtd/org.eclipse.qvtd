@@ -25,6 +25,7 @@ public class QVTbaseLibraryHelper
 	private final @NonNull Operation errorOperation;
 	private final @NonNull Parameter errorElementsParameter;
 	private final @NonNull Operation ifOperation;
+	private final @NonNull Parameter ifConditionParameter;
 	private final @NonNull Parameter ifThenParameter;
 	private final @NonNull Parameter ifElseParameter;
 	private final @NonNull Parameter loopBodyParameter;
@@ -51,8 +52,9 @@ public class QVTbaseLibraryHelper
 		this.errorOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "error"));
 		this.errorElementsParameter = PivotUtil.getOwnedParameter(errorOperation, 0);
 		this.ifOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "if"));
-		this.ifThenParameter = PivotUtil.getOwnedParameter(ifOperation, 0);
-		this.ifElseParameter = PivotUtil.getOwnedParameter(ifOperation, 1);
+		this.ifConditionParameter = PivotUtil.getOwnedParameter(ifOperation, 0);
+		this.ifThenParameter = PivotUtil.getOwnedParameter(ifOperation, 1);
+		this.ifElseParameter = PivotUtil.getOwnedParameter(ifOperation, 2);
 		this.loopOperation = ClassUtil.nonNullState(NameUtil.getNameable(ownedOperations, "loop"));
 		this.loopSourceParameter = PivotUtil.getOwnedParameter(loopOperation, 0);
 		this.loopIteratorsParameter = PivotUtil.getOwnedParameter(loopOperation, 1);
@@ -79,6 +81,10 @@ public class QVTbaseLibraryHelper
 
 	public @NonNull Operation getErrorOperation() {
 		return errorOperation;
+	}
+
+	public @NonNull Parameter getIfConditionParameter() {
+		return ifConditionParameter;
 	}
 
 	public @NonNull Parameter getIfElseParameter() {

@@ -35,12 +35,14 @@ import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.qvtd.compiler.AbstractCompilerOptions;
+import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
@@ -86,6 +88,7 @@ import example5.tderived.TderivedPackage;
 public class OCL2QVTiTestCases extends LoadTestCase
 {
 	//	private static final boolean CREATE_GRAPHML = false; // Note. You need Epsilon with Bug 458724 fix to have output graphml models serialised
+	private static boolean NO_MERGES = true;				// Set true to suppress the complexities of merging
 
 	protected class MyQVT extends QVTimperative
 	{
@@ -269,6 +272,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			options.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.SAVE_OPTIONS_KEY, DefaultCompilerOptions.defaultSavingOptions);
 			options.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.DEBUG_KEY, true);
 			// TODO problem when validating options.setOption(OCL2QVTiCompilerChain.DEFAULT_STEP, OCL2QVTiCompilerChain.VALIDATE_KEY, true);
+			options.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_EARLY_MERGE, NO_MERGES);
+			options.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_LATE_CONSUMER_MERGE, NO_MERGES);
 			return options;
 		}
 	}
@@ -322,9 +327,9 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		myQVT.loadGenModels("SourceMM1.genmodel", "TargetMM1.genmodel");
 		myQVT.loadEcoreFile("EnvExample1.ecore", example1.target.lookup.EnvironmentPackage.eINSTANCE);
 		Transformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("Source2Target.ocl");
-		myQVT.assertRegionCount(RuleRegionImpl.class, 19);
-		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 2);
-		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+		myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 23 : 19);
+		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 2);
+		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 0);
 		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
 		CS2ASJavaCompilerParameters cgParams = createParameters("example1.target.lookup.util.TargetLookupSolver",
 				"example1.target.lookup.util.TargetLookupResult");
@@ -409,14 +414,15 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
 		//		Scheduler.DEPENDENCY_ANALYSIS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
+		TransformationPartitioner.CYCLES.setState(true);
 		MyQVT myQVT = createQVT("SimpleClasses", "samples");
 		try {
 			myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
 			myQVT.loadEcoreFile("EnvExample2.ecore", example2.classes.lookup.EnvironmentPackage.eINSTANCE);
 			Transformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("classescs2as.ocl");
-			myQVT.assertRegionCount(RuleRegionImpl.class, 3);
-			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 2);
-			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 1);
+			myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 9 : 3);
+			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 2);
+			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 1);
 			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
 			CS2ASJavaCompilerParameters cgParams = createParameters(
 				"example2.classes.lookup.util.ClassesLookupSolver",
@@ -489,9 +495,9 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		try {
 			myQVT.loadGenModels(getModelsURI("SimpleClasses/ClassesCS.genmodel"), getModelsURI("SimpleClasses/Classes.genmodel"));
 			Transformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("classescs2asV2.ocl");
-			myQVT.assertRegionCount(RuleRegionImpl.class, 15);
-			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 5);
-			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 2);
+			myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 30 : 15);
+			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 5);
+			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 2);
 			myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
 			CS2ASJavaCompilerParameters cgParams = createParameters(
 				"example2.classes.lookup.util.ClassesLookupSolver",
@@ -592,9 +598,9 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		MyQVT myQVT = createQVT("KiamaRewrite", "samples");
 		myQVT.loadGenModels("KiamaAS.genmodel", "KiamaCS.genmodel");
 		Transformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("KiamaRewrite.ocl");
-		myQVT.assertRegionCount(RuleRegionImpl.class, 6);
-		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 1);
-		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 1);
+		myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 11 : 6);
+		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 1);
+		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 1);
 		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
 		CS2ASJavaCompilerParameters cgParams = createParameters("","");
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
@@ -648,9 +654,9 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		MyQVT myQVT = createQVT("SimplerKiama", "samples");
 		myQVT.loadGenModels("SimplerKiamaAS.genmodel", "SimplerKiamaCS.genmodel");
 		Transformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("SimplerKiama.ocl");
-		myQVT.assertRegionCount(RuleRegionImpl.class, 7);
-		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 1);
-		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+		myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 9 : 7);
+		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 1);
+		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 0);
 		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
 		CS2ASJavaCompilerParameters cgParams = createParameters("","");
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl().compileTransformation(myQVT, qvtiTransf, cgParams);
@@ -689,9 +695,9 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		MyQVT myQVT = createQVT("BaseAndDerived", "samples");
 		myQVT.loadGenModels("SourceBaseMM.genmodel", "TargetBaseMM.genmodel");
 		Transformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("Source2TargetBase.ocl");
-		myQVT.assertRegionCount(RuleRegionImpl.class, 5);
-		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 2);
-		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+		myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 9 : 5);
+		myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, NO_MERGES ? 0 : 2);
+		myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, NO_MERGES ? 0 : 0);
 		myQVT.assertRegionCount(MicroMappingRegionImpl.class, 0);
 		CS2ASJavaCompilerParameters cgParams = createParameters("", "");
 		Class<? extends Transformer> txClass = new CS2ASJavaCompilerImpl()

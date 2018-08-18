@@ -582,7 +582,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			txClass = myQVT1.buildTransformation("reverse", false);//,
 			//			Class<? extends Transformer> txClass = Forward2Reverse.class;
 			//			myQVT1.assertRegionCount(ActivatorRegionImpl.class, 2);
-			myQVT1.assertRegionCount(RuleRegionImpl.class, 1);
+			//	myQVT1.assertRegionCount(RuleRegionImpl.class, 1);
 			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
 			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 7);

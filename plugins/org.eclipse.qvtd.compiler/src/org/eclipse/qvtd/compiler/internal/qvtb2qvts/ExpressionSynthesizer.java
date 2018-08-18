@@ -211,9 +211,11 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		//		Node operationNode = nestedAnalyzer.createOperationNode(nodeName, typedElement, sourceAndArgumentNodes);
 		Node operationNode = context.createIfNode(isUnconditional(), nodeName, ifExp, sourceAndArgumentNodes);
 		org.eclipse.ocl.pivot.Class selfType = standardLibraryHelper.getStandardLibrary().getBooleanType();
+		Parameter conditionParameter = qvtbaseLibraryHelper.getIfConditionParameter();
 		Parameter thenParameter = qvtbaseLibraryHelper.getIfThenParameter();
 		Parameter elseParameter = qvtbaseLibraryHelper.getIfElseParameter();
-		createOperationSelfEdge(selfNode, selfType, operationNode);
+		//		createOperationSelfEdge(selfNode, selfType, operationNode);
+		createOperationParameterEdge(selfNode, conditionParameter, -1, operationNode);
 		createOperationParameterEdge(thenNode, thenParameter, -1, operationNode);
 		createOperationParameterEdge(elseNode, elseParameter, -1, operationNode);
 		return operationNode;

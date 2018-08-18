@@ -299,6 +299,7 @@ public class UtilityAnalysis
 					Node targetNode = outgoingEdge.getEdgeTarget();
 					if (!canBeUnconditional(targetNode)) {}
 					else if (outgoingEdge.isComputation()) {}
+					else if (outgoingEdge.isDependency()) {}
 					else if (outgoingEdge.isCast() || outgoingEdge.isNavigation()) {
 						if (targetNode.isNullLiteral()) {
 							if (unconditionalNodes.add(targetNode)) {

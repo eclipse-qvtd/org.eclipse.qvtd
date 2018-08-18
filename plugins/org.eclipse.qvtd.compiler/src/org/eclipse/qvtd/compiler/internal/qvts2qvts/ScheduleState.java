@@ -31,6 +31,7 @@ import com.google.common.collect.Iterables;
 /**
  * ScheduleCache provides the working state used during the schedule index allocation.
  */
+@Deprecated /** @deprecated pre-parallel schedule support */
 public abstract class ScheduleState extends ScheduleCache
 {
 	/**

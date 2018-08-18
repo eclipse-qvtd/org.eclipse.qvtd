@@ -28,6 +28,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassAnalys
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TracePropertyAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.IteratedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -181,7 +182,8 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 	}
 
 	private void addConsumptionOfNode(@NonNull Node node) {
-		TraceClassAnalysis<@NonNull RA> consumedTraceAnalysis = regionsAnalysis.addConsumer(QVTscheduleUtil.getClassDatum(node), getRA());
+		Node castNode = QVTscheduleUtil.getCastTarget(node);
+		TraceClassAnalysis<@NonNull RA> consumedTraceAnalysis = regionsAnalysis.addConsumer(QVTscheduleUtil.getClassDatum(castNode), getRA());
 		List<@NonNull TraceClassAnalysis<@NonNull RA>> consumedTraceClassAnalyses2 = consumedTraceClassAnalyses;
 		if (consumedTraceClassAnalyses2 == null) {
 			consumedTraceClassAnalyses = consumedTraceClassAnalyses2 = new ArrayList<>();
@@ -194,7 +196,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 	private void addConsumptionOfOutputEdge(@NonNull NavigableEdge edge) {
 		if (!predicatedOutputEdges.contains(edge)) {
 			predicatedOutputEdges.add(edge);
-			// FIXME addConsumptionOfEdge(edge);  -- gives 'should have realized' for 3*QVTc UML2RDBMS CollectionPartEdge
+			addConsumptionOfEdge(edge);  // FIXME  gives 'should have realized' for 3*QVTc UML2RDBMS CollectionPartEdge
 		}
 	}
 
@@ -322,6 +324,12 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 						}
 					}
 				}
+				else if (edge.isExpression()) {}
+				else if (edge instanceof IteratedEdge) {}
+				else if (edge.isDependency()) {}
+				else {
+					throw new IllegalStateException("unsupported analyzeEdge : " + edge);
+				}
 			}
 		}
 	}
@@ -410,7 +418,6 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 					else {
 						throw new IllegalStateException("middle node must be predicated or realized : " + node);
 					}
-
 				}
 				else { // scheduleManager.isOutput(node)
 					if (isPredicated(node)) {
@@ -423,6 +430,13 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 						throw new IllegalStateException("other node must be predicated or realized : " + node);
 					}
 				}
+			}
+			else if (node.isDependency()) {
+				addConsumptionOfOutputNode(node);
+			}
+			else if (node.isIterator()) {}
+			else {
+				throw new IllegalStateException("unsupported analyzeNode : " + node);
 			}
 		}
 	}

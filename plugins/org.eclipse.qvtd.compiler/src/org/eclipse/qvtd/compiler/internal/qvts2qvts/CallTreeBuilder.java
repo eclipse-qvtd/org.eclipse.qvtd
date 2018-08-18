@@ -45,9 +45,21 @@ public class CallTreeBuilder
 		this.scheduleCache = scheduleCache;
 	}
 
-	public void buildTree(@NonNull ScheduledRegion rootScheduledRegion, @NonNull List<@NonNull Region> orderedRegions) {
+	public void buildTree(@NonNull ScheduledRegion rootScheduledRegion, @NonNull Iterable<@NonNull ? extends Iterable<@NonNull Region>> regionSchedule) {
 		Stack<@NonNull Region> callStack = new Stack<@NonNull Region>();
 		callStack.push(rootScheduledRegion);
+		for (@NonNull Iterable<@NonNull Region> concurrency : regionSchedule) {
+			for (@NonNull Region region: concurrency) {
+				updateCallStack(callStack, region);
+			}
+		}
+		installConnections();
+	}
+
+	@Deprecated /** @deprecated pre-parallel schedule support */
+	public void buildTree(@NonNull ScheduledRegion scheduledRegion, @NonNull List<@NonNull Region> orderedRegions) {
+		Stack<@NonNull Region> callStack = new Stack<@NonNull Region>();
+		callStack.push(scheduledRegion);
 		for (@NonNull Region region: orderedRegions) {
 			updateCallStack(callStack, region);
 		}

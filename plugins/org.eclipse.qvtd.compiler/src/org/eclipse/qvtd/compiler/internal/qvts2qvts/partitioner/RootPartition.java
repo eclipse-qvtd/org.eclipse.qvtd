@@ -20,10 +20,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Partition>*/ implements InternallyAcyclicPartition
@@ -36,7 +38,7 @@ public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Part
 	protected final @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> cyclicTracePropertyAnalyses;
 	private @Nullable ScheduledRegion scheduledRegion = null;
 	private @Nullable List<@NonNull Iterable<@NonNull Partition>> partitionSchedule = null;
-	private @Nullable List<@NonNull Collection<@NonNull MappingRegion>> regionSchedule = null;
+	private @Nullable List<@NonNull Collection<@NonNull Region>> regionSchedule = null;
 
 	public RootPartition(@NonNull Iterable<@NonNull Partition> partitions,
 			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors,
@@ -97,12 +99,17 @@ public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Part
 	}
 
 	@Override
-	public @NonNull List<@NonNull Collection<@NonNull MappingRegion>> getRegionSchedule() {
-		List<@NonNull Collection<@NonNull MappingRegion>> regionSchedule2 = regionSchedule;
+	public @NonNull List<@NonNull Collection<@NonNull Region>> getRegionSchedule() {
+		List<@NonNull Collection<@NonNull Region>> regionSchedule2 = regionSchedule;
 		if (regionSchedule2 == null) {
 			regionSchedule = regionSchedule2 = new ArrayList<>();
+			assert scheduledRegion != null;
+			LoadingRegion loadingRegion = scheduledRegion.getOwnedLoadingRegion();
+			if (loadingRegion != null) {
+				regionSchedule2.add(Lists.newArrayList(loadingRegion));
+			}
 			for (@NonNull Iterable<@NonNull Partition> concurrentPartitions : getPartitionSchedule()) {
-				List<@NonNull MappingRegion> concurrentRegions = new ArrayList<>();
+				List<@NonNull Region> concurrentRegions = new ArrayList<>();
 				for (@NonNull Partition partition : concurrentPartitions) {
 					Region partitionRegion = partition.getRegion();
 					int partitionNumber = partitionRegion.getNextPartitionNumber();

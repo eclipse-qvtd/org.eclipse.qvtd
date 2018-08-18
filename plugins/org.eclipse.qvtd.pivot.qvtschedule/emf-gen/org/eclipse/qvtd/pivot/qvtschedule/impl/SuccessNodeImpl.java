@@ -68,6 +68,11 @@ public class SuccessNodeImpl extends MappingNodeImpl implements SuccessNode {
 	}
 
 	@Override
+	public boolean isPattern() {
+		return true;
+	}
+
+	@Override
 	public boolean isSuccess() {
 		return true;
 	}

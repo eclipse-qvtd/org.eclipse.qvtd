@@ -40,7 +40,6 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -67,7 +66,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
@@ -968,15 +966,17 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//			ScheduledRegion scheduledRegion = aRootPartition.getScheduledRegion();
 		//			createLocalSchedule(scheduledRegion);
 		//		}
-		ScheduleIndexer scheduleIndexer = new ScheduleIndexer(scheduleManager, rootScheduledRegion);
-		scheduleIndexer.schedule(rootScheduledRegion);
+		//	ScheduleIndexer scheduleIndexer = new ScheduleIndexer(scheduleManager, rootScheduledRegion);
+		//	scheduleIndexer.schedule(rootScheduledRegion);
+		NewScheduleState scheduleIndexer = new NewScheduleState(scheduleManager, rootPartition);
+		scheduleIndexer.schedule(rootPartition);
 		for (@NonNull RootPartition aRootPartition : allRootPartitions) {
-			List<@NonNull Iterable<@NonNull Partition>> newParallelPartitionSchedule = aRootPartition.getPartitionSchedule();
-			List<@NonNull Collection<@NonNull Region>> oldParallelSchedule = new ArrayList<>();
-			for (@NonNull Region region : scheduleIndexer.getOrdering()) {
-				oldParallelSchedule.add(Lists.newArrayList(region));
-			}
-			createLocalSchedule2(aRootPartition, oldParallelSchedule);
+			List<@NonNull Collection<@NonNull Region>> newRegionSchedule = aRootPartition.getRegionSchedule();
+			//	List<@NonNull Collection<@NonNull Region>> oldRegionSchedule = new ArrayList<>();
+			//	for (@NonNull Region region : scheduleIndexer.getOrdering()) {
+			//		oldRegionSchedule.add(Lists.newArrayList(region));
+			//	}
+			createLocalSchedule2(aRootPartition, newRegionSchedule);
 		}
 	}
 
@@ -1134,7 +1134,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		}
 		Map<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> newRegion2oldRegions = LateConsumerMerger.merge(scheduleManager, rootPartition);
 		for (Map.Entry<@NonNull MappingRegion, @NonNull List<@NonNull MappingRegion>> entry : newRegion2oldRegions.entrySet()) {
-			Region newRegion = entry.getKey();
+			MappingRegion newRegion = entry.getKey();
 			List<@NonNull MappingRegion> oldRegions = entry.getValue();
 			assert oldRegions.size() >= 2;
 			//	int orderedRegionIndex = orderedRegions.indexOf(oldRegions.get(0));
@@ -1190,8 +1190,8 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			ScheduledRegion scheduledRegion = rootPartition.getScheduledRegion();
 			Iterable<@NonNull MappingRegion> mappingRegions = QVTscheduleUtil.getMappingRegions(scheduledRegion);
 			assert Iterables.isEmpty(mappingRegions);
-			List<@NonNull Collection<@NonNull MappingRegion>> regionSchedule = rootPartition.getRegionSchedule();
 			scheduledRegion.setOwnedLoadingRegion(loadingRegionAnalysis.getRegion());
+			List<@NonNull Collection<@NonNull Region>> regionSchedule = rootPartition.getRegionSchedule();
 			createSchedule1(rootPartition);
 			createSchedule2(rootPartition);
 			//

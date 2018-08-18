@@ -64,7 +64,7 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	protected final @NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> traceClassAnalyses;
 	protected final @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> tracePropertyAnalyses;
 	private @Nullable List<@NonNull Iterable<@NonNull Partition>> partitionSchedule = null;
-	private @Nullable List<@NonNull Collection<@NonNull MappingRegion>> regionSchedule = null;
+	private @Nullable List<@NonNull Collection<@NonNull Region>> regionSchedule = null;
 
 	public CyclicPartition(@NonNull TransformationPartitioner transformationPartitioner, @NonNull String name, @NonNull CyclicPartitionsAnalysis cyclesAnalysis, @NonNull Set<@NonNull Partition> partitions,
 			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors,
@@ -156,12 +156,12 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	}
 
 	@Override
-	public @NonNull List<@NonNull Collection<@NonNull MappingRegion>> getRegionSchedule() {
-		List<@NonNull Collection<@NonNull MappingRegion>> regionSchedule2 = regionSchedule;
+	public @NonNull List<@NonNull Collection<@NonNull Region>> getRegionSchedule() {
+		List<@NonNull Collection<@NonNull Region>> regionSchedule2 = regionSchedule;
 		if (regionSchedule2 == null) {
 			regionSchedule = regionSchedule2 = new ArrayList<>();
 			for (@NonNull Iterable<@NonNull Partition> concurrentPartitions : getPartitionSchedule()) {
-				List<@NonNull MappingRegion> concurrentRegions = new ArrayList<>();
+				List<@NonNull Region> concurrentRegions = new ArrayList<>();
 				for (@NonNull Partition partition : concurrentPartitions) {
 					Region partitionRegion = partition.getRegion();
 					int partitionNumber = partitionRegion.getNextPartitionNumber();

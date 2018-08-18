@@ -457,7 +457,7 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		edge.setReferredType(type);
 		String name = "«" + PivotConstants.SELF_NAME + "»";
 		//		edge.setReferredObject(typeOrParameter);		// FIXME redundant
-		edge.initialize(edgeRole, sourceNode, "«" + name + "»", targetNode);
+		edge.initialize(edgeRole, sourceNode, name, targetNode);
 		return edge;
 	}
 

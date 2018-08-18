@@ -82,8 +82,10 @@ public class RegionAnalysis extends AbstractPartialRegionAnalysis<@NonNull Regio
 	public RegionAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull Region region) {
 		super(transformationAnalysis, region);
 		this.transformationAnalysis = transformationAnalysis;
-		List<@NonNull Node> alreadyRealized = analyze();
-		analyzeCorollaries(alreadyRealized);
+		if (!region.isLoadingRegion()) {
+			List<@NonNull Node> alreadyRealized = analyze();
+			analyzeCorollaries(alreadyRealized);
+		}
 	}
 
 	private void addCheckedEdge(@NonNull NavigableEdge predicatedEdge) {
