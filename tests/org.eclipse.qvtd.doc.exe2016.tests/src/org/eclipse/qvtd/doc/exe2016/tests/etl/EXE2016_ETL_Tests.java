@@ -22,6 +22,7 @@ import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.emc.emf.EmfModelFactory;
 import org.eclipse.epsilon.emc.emf.EmfModelFactory.AccessMode;
 import org.eclipse.epsilon.etl.EtlModule;
+import org.eclipse.epsilon.etl.execute.context.EtlContext;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.doc.exe2016.tests.AbstractEXE2016CGTests;
 import org.eclipse.qvtd.doc.exe2016.tests.DoublyLinkedListGenerator;
@@ -122,7 +123,17 @@ public class EXE2016_ETL_Tests extends AbstractEXE2016CGTests
 				 */
 				transformationLauncher.getContext().getModelRepository().dispose();
 				transformationLauncher.getContext().dispose();
-				transformationLauncher.reset();
+				//	transformationLauncher.reset(); -- following lines workaround Bug 538062/538065
+				transformationLauncher.getImports().clear();
+				transformationLauncher.getDeclaredOperations().clear();
+				transformationLauncher.getOperations().clear();
+				transformationLauncher.getDeclaredPost().clear();
+				transformationLauncher.getDeclaredPre().clear();
+				transformationLauncher.getPost().clear();
+				transformationLauncher.getPre().clear();
+				transformationLauncher.getDeclaredTransformationRules().clear();
+				transformationLauncher.getTransformationRules().clear();
+				transformationLauncher.setContext(new EtlContext());
 			}
 		}
 		finally {
