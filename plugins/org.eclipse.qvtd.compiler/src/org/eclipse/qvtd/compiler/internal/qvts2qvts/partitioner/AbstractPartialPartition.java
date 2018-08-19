@@ -369,9 +369,21 @@ abstract class AbstractPartialPartition extends AbstractPartition
 	}
 
 	@Override
+	protected boolean isConstant(@NonNull Edge edge) {
+		Role role = getRole(edge);
+		return role != null ? role.isConstant() : false; //edge.isConstant();
+	}
+
+	@Override
 	protected boolean isConstant(@NonNull Node node) {
 		Role role = getRole(node);
 		return role != null ? role.isConstant() : false; //node.isConstant();
+	}
+
+	@Override
+	protected boolean isLoaded(@NonNull Edge edge) {
+		Role role = getRole(edge);
+		return role != null ? role.isLoaded() : false; //edge.isLoaded();
 	}
 
 	@Override

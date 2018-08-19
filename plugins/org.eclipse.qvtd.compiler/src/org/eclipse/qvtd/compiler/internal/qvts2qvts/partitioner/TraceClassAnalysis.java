@@ -57,7 +57,7 @@ public abstract class TraceClassAnalysis<@NonNull RA extends PartialRegionAnalys
 		this.traceClassDatum = traceClassDatum;
 		subTraceClassAnalyses.add(this);
 		superTraceClassAnalyses.add(this);
-		assert traceClassDatum.getReferredTypedModel() == scheduleManager.getTraceTypedModel();
+		//	assert traceClassDatum.getReferredTypedModel() == scheduleManager.getTraceTypedModel();
 	}
 
 	public void addSubTraceClassAnalysis(@NonNull TraceClassAnalysis<@NonNull RA> traceClassAnalysis) {
