@@ -156,14 +156,18 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 	}
 
 	private void addConsumptionOfEdge(@NonNull NavigableEdge edge) {
-		PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
-		TracePropertyAnalysis<@NonNull RA> consumedTraceAnalysis = regionsAnalysis.addConsumer(propertyDatum, getRA());
-		List<@NonNull TracePropertyAnalysis<@NonNull RA>> consumedTracePropertyAnalyses2 = consumedTracePropertyAnalyses;
-		if (consumedTracePropertyAnalyses2 == null) {
-			consumedTracePropertyAnalyses = consumedTracePropertyAnalyses2 = new ArrayList<>();
+		Property property = QVTscheduleUtil.getProperty(edge);
+		if (property == scheduleManager.getStandardLibraryHelper().getOclContainerProperty()) {
+			Node targetNode = QVTscheduleUtil.getSourceNode(edge);
+			Node castTarget = targetNode;
+			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(castTarget);
+			for (@NonNull PropertyDatum propertyDatum : scheduleManager.getOclContainerPropertyDatums(classDatum)) {
+				addConsumptionOfPropertyDatum(propertyDatum);
+			}
 		}
-		if (!consumedTracePropertyAnalyses2.contains(consumedTraceAnalysis)) {
-			consumedTracePropertyAnalyses2.add(consumedTraceAnalysis);
+		else {
+			PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
+			addConsumptionOfPropertyDatum(propertyDatum);
 		}
 	}
 
@@ -207,8 +211,21 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 		}
 	}
 
+	private void addConsumptionOfPropertyDatum(@NonNull PropertyDatum propertyDatum) {
+		TracePropertyAnalysis<@NonNull RA> consumedTraceAnalysis = regionsAnalysis.addConsumer(propertyDatum, getRA());
+		List<@NonNull TracePropertyAnalysis<@NonNull RA>> consumedTracePropertyAnalyses2 = consumedTracePropertyAnalyses;
+		if (consumedTracePropertyAnalyses2 == null) {
+			consumedTracePropertyAnalyses = consumedTracePropertyAnalyses2 = new ArrayList<>();
+		}
+		if (!consumedTracePropertyAnalyses2.contains(consumedTraceAnalysis)) {
+			consumedTracePropertyAnalyses2.add(consumedTraceAnalysis);
+		}
+	}
+
 	private void addProductionOfEdge(@NonNull NavigableEdge edge) {
 		assert edge.isNew();
+		Property property = QVTscheduleUtil.getProperty(edge);
+		assert property != scheduleManager.getStandardLibraryHelper().getOclContainerProperty();		// oclContainer is not assignable
 		PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
 		TracePropertyAnalysis<@NonNull RA> consumedTraceAnalysis = regionsAnalysis.addProducer(propertyDatum, getRA());
 		List<@NonNull TracePropertyAnalysis<@NonNull RA>> producedTracePropertyAnalyses2 = producedTracePropertyAnalyses;
@@ -622,7 +639,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 				superProducedTracePropertyAnalyses2 = superProducedTracePropertyAnalyses = new HashSet<>();
 			}
 			for (@NonNull TracePropertyAnalysis<@NonNull RA> producedTracePropertyAnalysis : producedTracePropertyAnalyses2) {
-				Iterables.addAll(superProducedTracePropertyAnalyses2, producedTracePropertyAnalysis.getSuperTracePropertyAnalyses(getRA()));
+				Iterables.addAll(superProducedTracePropertyAnalyses2, producedTracePropertyAnalysis.getSuperTracePropertyAnalyses());
 			}
 		}
 		return superProducedTracePropertyAnalyses;

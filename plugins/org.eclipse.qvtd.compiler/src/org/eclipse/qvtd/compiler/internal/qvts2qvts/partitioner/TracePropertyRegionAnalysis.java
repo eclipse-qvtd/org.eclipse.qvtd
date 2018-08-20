@@ -20,7 +20,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
  */
 public class TracePropertyRegionAnalysis extends TracePropertyAnalysis<@NonNull RegionAnalysis>
 {
-	public TracePropertyRegionAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
-		super(transformationAnalysis, tracePropertyDatum);
+	public TracePropertyRegionAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull TraceClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
+		super(transformationAnalysis, traceClassAnalysis, tracePropertyDatum);
 	}
 }

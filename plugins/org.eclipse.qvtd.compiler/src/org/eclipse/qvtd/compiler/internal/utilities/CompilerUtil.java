@@ -347,10 +347,16 @@ public class CompilerUtil extends QVTscheduleUtil
 			Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> consumedTracePropertyAnalyses = consumer.getConsumedTracePropertyAnalyses();
 			if (consumedTracePropertyAnalyses != null) {
 				for (@NonNull TracePropertyAnalysis<@NonNull RA> consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
-					for (@NonNull RA producer : consumedTracePropertyAnalysis.getProducers()) {
-						Set<@NonNull RA> producers = consumer2producers.get(consumer);
-						assert producers != null;
-						producers.add(producer);
+					if (consumedTracePropertyAnalysis.toString().contains("oclContainer")) {
+						consumer.toString();
+					}
+					for (@NonNull TracePropertyAnalysis<@NonNull RA> superConsumedTracePropertyAnalysis : consumedTracePropertyAnalysis.getSuperTracePropertyAnalyses()) {
+						//	@NonNull TracePropertyAnalysis<@NonNull RA> superConsumedTracePropertyAnalysis = consumedTracePropertyAnalysis;
+						for (@NonNull RA producer : superConsumedTracePropertyAnalysis.getProducers()) {
+							Set<@NonNull RA> producers = consumer2producers.get(consumer);
+							assert producers != null;
+							producers.add(producer);
+						}
 					}
 				}
 			}

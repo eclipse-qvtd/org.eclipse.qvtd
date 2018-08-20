@@ -18,7 +18,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
  */
 public class TracePropertyPartitionAnalysis extends TracePropertyAnalysis<@NonNull Partition>
 {
-	public TracePropertyPartitionAnalysis(@NonNull TransformationPartitioner transformationPartitioner, @NonNull PropertyDatum tracePropertyDatum) {
-		super(transformationPartitioner, tracePropertyDatum);
+	public TracePropertyPartitionAnalysis(@NonNull TransformationPartitioner transformationPartitioner, @NonNull TraceClassAnalysis<@NonNull Partition> traceClassAnalysis,  @NonNull PropertyDatum tracePropertyDatum) {
+		super(transformationPartitioner, traceClassAnalysis, tracePropertyDatum);
 	}
 }

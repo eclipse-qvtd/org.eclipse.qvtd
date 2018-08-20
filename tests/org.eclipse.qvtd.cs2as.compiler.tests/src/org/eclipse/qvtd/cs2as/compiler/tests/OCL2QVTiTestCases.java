@@ -595,6 +595,9 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		//		Scheduler.REGION_DEPTH.setState(true);
 		//		Scheduler.REGION_ORDER.setState(true);
 		//		Scheduler.REGION_STACK.setState(true);
+		TransformationPartitioner.CYCLES.setState(true);
+		TransformationPartitioner.PREDECESSORS.setState(true);
+		TransformationPartitioner.SUCCESSORS.setState(true);
 		MyQVT myQVT = createQVT("KiamaRewrite", "samples");
 		myQVT.loadGenModels("KiamaAS.genmodel", "KiamaCS.genmodel");
 		Transformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("KiamaRewrite.ocl");

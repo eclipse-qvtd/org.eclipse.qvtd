@@ -437,4 +437,12 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 		return String.valueOf(getOwningClassDatum()) + "::" + (referredProperty != null ? referredProperty.getName() : "<null>");
 	}
 
+	@Override
+	public void setName(String newName) {
+		if ("oclContainer".equals(newName)) {
+			getClass();
+		}
+		super.setName(newName);
+	}
+
 } //PropertyDatumImpl

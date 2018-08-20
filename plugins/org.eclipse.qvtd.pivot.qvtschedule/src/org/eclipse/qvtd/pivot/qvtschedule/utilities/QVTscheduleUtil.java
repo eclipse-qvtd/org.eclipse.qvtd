@@ -700,6 +700,13 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(navigableEdge.getProperty());
 	}
 
+	//
+	//	Commented out since getCompleteClass() is usually more appropriate.
+	//
+	//	public static org.eclipse.ocl.pivot.@NonNull Class getReferredClass(@NonNull ClassDatum classDatum) {
+	//		return ClassUtil.nonNullState(classDatum.getReferredClass());
+	//	}
+
 	public static @NonNull PropertyDatum getReferredPart(@NonNull KeyPartEdge keyPartEdge) {
 		return ClassUtil.nonNullState(keyPartEdge.getReferredPart());
 	}

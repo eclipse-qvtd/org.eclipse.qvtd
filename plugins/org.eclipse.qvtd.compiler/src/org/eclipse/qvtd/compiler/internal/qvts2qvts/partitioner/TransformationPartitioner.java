@@ -120,8 +120,8 @@ public class TransformationPartitioner extends RegionsAnalysis<@NonNull Partitio
 	}
 
 	@Override
-	protected @NonNull TracePropertyPartitionAnalysis createTracePropertyAnalysis(@NonNull PropertyDatum tracePropertyDatum) {
-		return new TracePropertyPartitionAnalysis(this, tracePropertyDatum);
+	protected @NonNull TracePropertyPartitionAnalysis createTracePropertyAnalysis(@NonNull TraceClassAnalysis<@NonNull Partition> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
+		return new TracePropertyPartitionAnalysis(this, traceClassAnalysis, tracePropertyDatum);
 	}
 
 	public @NonNull MappingPartitioner getMappingPartitioner(@NonNull MappingRegion region) {

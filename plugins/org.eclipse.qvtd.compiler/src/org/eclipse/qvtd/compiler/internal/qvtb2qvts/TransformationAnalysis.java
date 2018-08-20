@@ -145,8 +145,8 @@ public class TransformationAnalysis extends RegionsAnalysis<@NonNull RegionAnaly
 	}
 
 	@Override
-	protected @NonNull TracePropertyRegionAnalysis createTracePropertyAnalysis(@NonNull PropertyDatum tracePropertyDatum) {
-		return new TracePropertyRegionAnalysis(this, tracePropertyDatum);
+	protected @NonNull TracePropertyRegionAnalysis createTracePropertyAnalysis(@NonNull TraceClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
+		return new TracePropertyRegionAnalysis(this, traceClassAnalysis, tracePropertyDatum);
 	}
 
 	public @NonNull Iterable<@NonNull RuleRegion> gatherRuleRegions() {
@@ -258,11 +258,11 @@ public class TransformationAnalysis extends RegionsAnalysis<@NonNull RegionAnaly
 	}
 
 	public boolean isCyclic(@NonNull ClassDatum traceClassDatum) {
-		TraceClassRegionAnalysis traceClassAnalysis = basicGetTraceClassRegionAnalysis(traceClassDatum);
+		TraceClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis = basicGetTraceClassAnalysis(traceClassDatum);
 		if (traceClassAnalysis == null) {
 			return false;
 		}
-		return traceClassAnalysis.isCyclic();
+		return ((TraceClassRegionAnalysis)traceClassAnalysis).isCyclic();
 	}
 
 	public void prePartition() throws CompilerChainException {

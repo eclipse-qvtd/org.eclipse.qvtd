@@ -635,6 +635,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
+	public @NonNull Iterable<@NonNull PropertyDatum> getOclContainerPropertyDatums(@NonNull ClassDatum classDatum) {
+		return datumCaches.getOclContainerPropertyDatums(classDatum);
+	}
+
+	@Override
 	public @NonNull ClassDatum getOclVoidClassDatum() {
 		ClassDatum oclVoidClassDatum2 = oclVoidClassDatum;
 		if (oclVoidClassDatum2 == null) {

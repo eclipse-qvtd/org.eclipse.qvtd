@@ -225,10 +225,10 @@ public class CyclicPartitionsAnalysis
 			if (consumedTracePropertyAnalyses2 != null) {
 				Iterables.addAll(consumedTracePropertyAnalyses, consumedTracePropertyAnalyses2);
 			}
-		// FIXME	Iterable<@NonNull TracePropertyAnalysis<@NonNull Partition>> superProducedTracePropertyAnalyses2 = nestedPartition.getSuperProducedTracePropertyAnalyses();
-		//	if (superProducedTracePropertyAnalyses2 != null) {
-		//		Iterables.addAll(superProducedTracePropertyAnalyses, superProducedTracePropertyAnalyses2);
-		//	}
+			Iterable<@NonNull TracePropertyAnalysis<@NonNull Partition>> superProducedTracePropertyAnalyses2 = nestedPartition.getSuperProducedTracePropertyAnalyses();
+			if (superProducedTracePropertyAnalyses2 != null) {
+				Iterables.addAll(superProducedTracePropertyAnalyses, superProducedTracePropertyAnalyses2);
+			}
 		}
 		Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> cyclicTracePropertyAnalyses = new HashSet<>(consumedTracePropertyAnalyses);
 		cyclicTracePropertyAnalyses.retainAll(superProducedTracePropertyAnalyses);

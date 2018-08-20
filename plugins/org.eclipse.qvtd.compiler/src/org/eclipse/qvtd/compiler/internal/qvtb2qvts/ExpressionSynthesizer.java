@@ -118,8 +118,8 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		this.scheduleManager = context.getScheduleManager();
 		this.environmentFactory = scheduleManager.getEnvironmentFactory();
 		this.helper = new QVTbaseHelper(environmentFactory);
-		this.standardLibraryHelper = new StandardLibraryHelper(environmentFactory.getStandardLibrary());
-		this.qvtbaseLibraryHelper = new QVTbaseLibraryHelper();
+		this.standardLibraryHelper = scheduleManager.getStandardLibraryHelper();
+		this.qvtbaseLibraryHelper = scheduleManager.getQVTbaseLibraryHelper();
 		//		this.operationDependencyAnalysis = getOperationDependencyAnalysis();
 	}
 

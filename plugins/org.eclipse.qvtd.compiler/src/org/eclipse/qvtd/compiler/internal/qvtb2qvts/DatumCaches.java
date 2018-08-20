@@ -11,9 +11,11 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvtb2qvts;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -61,6 +63,7 @@ import com.google.common.collect.Iterables;
 public class DatumCaches
 {
 	protected final @NonNull ScheduleManager scheduleManager;
+	protected final @NonNull Property oclContainerProperty;
 	protected final @NonNull RootDomainUsageAnalysis domainUsageAnalysis;
 	protected final @NonNull ContainmentAnalysis containmentAnalysis;
 	protected final @NonNull CompleteModel completeModel;
@@ -77,8 +80,14 @@ public class DatumCaches
 	 */
 	private @NonNull Map<@NonNull ClassDatum, @NonNull Map<@NonNull Property, @NonNull PropertyDatum>> classDatum2property2propertyDatum = new HashMap<>();
 
+	/**
+	 * The per-ClassDatum mapping from the oclContainer Property to all possible containing PropertyDatums.
+	 */
+	private @NonNull Map<@NonNull ClassDatum, @NonNull List<@NonNull PropertyDatum>> classDatum2oclContainerPropertyDatums = new HashMap<>();
+
 	protected DatumCaches(@NonNull ScheduleManager scheduleManager) {
 		this.scheduleManager = scheduleManager;
+		this.oclContainerProperty = scheduleManager.getStandardLibraryHelper().getOclContainerProperty();
 		this.domainUsageAnalysis = scheduleManager.getDomainUsageAnalysis();
 		EnvironmentFactory environmentFactory = scheduleManager.getEnvironmentFactory();
 		this.containmentAnalysis = new ContainmentAnalysis(environmentFactory);
@@ -255,6 +264,22 @@ public class DatumCaches
 		return computeContexts(source, variable2BoundContext);
 	}
 
+	public @NonNull Iterable<@NonNull PropertyDatum> getOclContainerPropertyDatums(@NonNull ClassDatum containedClassDatum) {
+		List<@NonNull PropertyDatum> oclContainerPropertyDatums = classDatum2oclContainerPropertyDatums.get(containedClassDatum);
+		if (oclContainerPropertyDatums == null) {
+			oclContainerPropertyDatums = new ArrayList<>();
+			classDatum2oclContainerPropertyDatums.put(containedClassDatum, oclContainerPropertyDatums);
+			CompleteClass containedCompleteClass = QVTscheduleUtil.getCompleteClass(containedClassDatum);
+			Iterable<@NonNull Property> containmentProperties = containmentAnalysis.getContainmentProperties(containedCompleteClass);
+			for (@NonNull Property containmentProperty : containmentProperties) {
+				//	CompleteClass containingCompleteClass = scheduleManager.getEnvironmentFactory().getCompleteModel().getCompleteClass(PivotUtil.getOwningClass(containmentProperty));
+				ClassDatum containingClassDatum = getClassDatum(containedClassDatum.getReferredTypedModel(), PivotUtil.getOwningClass(containmentProperty));
+				oclContainerPropertyDatums.add(getPropertyDatum(containingClassDatum, containmentProperty));
+			}
+		}
+		return oclContainerPropertyDatums;
+	}
+
 	public @NonNull ContainmentAnalysis getContainmentAnalysis() {
 		return containmentAnalysis;
 	}
@@ -347,8 +372,8 @@ public class DatumCaches
 	}
 
 	public @NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property) {
+		assert property != oclContainerProperty;			// Use getOclContainerPropertyDatums() to return multiple candidates
 		Iterable<@NonNull PropertyDatum> allPropertyDatums = getAllPropertyDatums(classDatum);
-
 		Map<@NonNull Property, @NonNull PropertyDatum> property2propertyDatum = classDatum2property2propertyDatum.get(classDatum);
 		if (property2propertyDatum == null) {
 			property2propertyDatum = new HashMap<>();

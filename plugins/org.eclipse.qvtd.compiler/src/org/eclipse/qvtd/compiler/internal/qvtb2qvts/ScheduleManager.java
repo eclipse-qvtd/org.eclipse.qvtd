@@ -97,6 +97,7 @@ public interface ScheduleManager
 	@NonNull ClassDatum getElementalClassDatum(@NonNull ClassDatum classDatum);
 	@NonNull EnvironmentFactory getEnvironmentFactory();
 	@NonNull NameGenerator getNameGenerator();
+	@NonNull Iterable<@NonNull PropertyDatum> getOclContainerPropertyDatums(@NonNull ClassDatum classDatum);
 	@NonNull ClassDatum getOclVoidClassDatum();
 
 	/**
