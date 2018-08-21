@@ -150,6 +150,7 @@ abstract class AbstractPartialPartition extends AbstractPartition
 				}
 				else {
 					if (newNodeRole == Role.REALIZED || newNodeRole == Role.SPECULATION) {
+						assert false;
 						return;		// FIXME redundant call
 					}
 					assert newNodeRole == Role.PREDICATED || newNodeRole == Role.SPECULATED;
@@ -472,22 +473,47 @@ abstract class AbstractPartialPartition extends AbstractPartition
 		//	Add all the edges necessary to reach each node.
 		//
 		for (@NonNull Node node : node2nodeRole.keySet()) {
-			Edge edge = reachabilityForest.getReachingEdge(node);
-			if (edge != null) {
-				assert !edge.isSecondary() && !hasEdge(edge);
-				Role sourceNodeRole = node2nodeRole.get(edge.getEdgeSource());
-				if (sourceNodeRole != null) {
-					Role targetNodeRole = node2nodeRole.get(edge.getEdgeTarget());
-					if (targetNodeRole != null) {
-						Role edgeRole = resolveEdgeRole(sourceNodeRole, edge, targetNodeRole);
-						if (edgeRole != null) {
-							if (edgeRole == Role.REALIZED) {
-								if (partitioner.hasRealizedEdge(edge)) {
-									edgeRole = null;
+			if (node.isOperation()) {
+				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+					if ((edge.isExpression() || edge.isNavigation()) && !hasEdge(edge)) {
+						Role sourceNodeRole = node2nodeRole.get(edge.getEdgeSource());
+						if (sourceNodeRole != null) {
+							Role targetNodeRole = node2nodeRole.get(edge.getEdgeTarget());
+							if (targetNodeRole != null) {
+								Role edgeRole = resolveEdgeRole(sourceNodeRole, edge, targetNodeRole);
+								if (edgeRole != null) {
+									if (edgeRole == Role.REALIZED) {
+										if (partitioner.hasRealizedEdge(edge)) {
+											edgeRole = null;
+										}
+									}
+									if (edgeRole != null) {
+										addEdge(edge, edgeRole);
+									}
 								}
 							}
+						}
+					}
+				}
+			}
+			else {
+				Edge edge = reachabilityForest.getReachingEdge(node);
+				if (edge != null) {
+					assert !edge.isSecondary() && !hasEdge(edge);
+					Role sourceNodeRole = node2nodeRole.get(edge.getEdgeSource());
+					if (sourceNodeRole != null) {
+						Role targetNodeRole = node2nodeRole.get(edge.getEdgeTarget());
+						if (targetNodeRole != null) {
+							Role edgeRole = resolveEdgeRole(sourceNodeRole, edge, targetNodeRole);
 							if (edgeRole != null) {
-								addEdge(edge, edgeRole);
+								if (edgeRole == Role.REALIZED) {
+									if (partitioner.hasRealizedEdge(edge)) {
+										edgeRole = null;
+									}
+								}
+								if (edgeRole != null) {
+									addEdge(edge, edgeRole);
+								}
 							}
 						}
 					}
@@ -552,7 +578,7 @@ abstract class AbstractPartialPartition extends AbstractPartition
 				for (@NonNull Node precedingNode : getPredecessors(node)) {
 					gotOne = true;
 					if (!hasNode(precedingNode)) {
-						addNode(precedingNode);
+						addNode(precedingNode, partitioner.hasRealizedNode(precedingNode) ? Role.PREDICATED : QVTscheduleUtil.getNodeRole(precedingNode));
 					}
 				}
 				if (!gotOne && (traceEdge != null) && traceEdge.isRealized()) {

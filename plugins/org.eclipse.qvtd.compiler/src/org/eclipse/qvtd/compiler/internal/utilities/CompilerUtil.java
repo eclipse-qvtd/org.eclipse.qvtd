@@ -65,6 +65,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 public class CompilerUtil extends QVTscheduleUtil
 {
@@ -159,6 +160,44 @@ public class CompilerUtil extends QVTscheduleUtil
 			s.append(child.getMessage());
 		}
 		assert false : s.toString();
+	}
+
+	public static <@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> void checkPredecessorsAndSuccessors(@Nullable Iterable<@NonNull RA> partitions,
+			@NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> partition2predecessors,
+			@NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> partition2successors) {
+		Set<@NonNull RA> partitionsSet = partitions instanceof Set<?> ? (Set<@NonNull RA>) partitions : partitions != null ? Sets.newHashSet(partitions) : partition2successors.keySet();
+		//
+		//	Check that inputs are consistent.
+		//
+		assert partition2predecessors.keySet().equals(partition2successors.keySet());
+		assert partitionsSet.equals(partition2predecessors.keySet());
+		assert partitionsSet.equals(partition2successors.keySet());
+		for (@NonNull RA partition : partitionsSet) {
+			Set<@NonNull RA> predecessors = partition2predecessors.get(partition);
+			assert predecessors != null;
+			for (@NonNull RA predecessor : predecessors) {
+				Set<@NonNull RA> successors = partition2successors.get(predecessor);
+				assert successors != null;
+				assert successors.contains(partition);
+			}
+		}
+		for (@NonNull RA partition : partitionsSet) {
+			Set<@NonNull RA> successors = partition2successors.get(partition);
+			assert successors != null;
+			for (@NonNull RA successor : successors) {
+				Set<@NonNull RA> predecessors = partition2predecessors.get(successor);
+				assert predecessors != null;
+				assert predecessors.contains(partition);
+			}
+		}
+		for (@NonNull RA partition : partitionsSet) {
+			Set<@NonNull RA> predecessors = partition2predecessors.get(partition);
+			assert predecessors != null;
+			assert partitionsSet.containsAll(predecessors);
+			Set<@NonNull RA> successors = partition2successors.get(partition);
+			assert successors != null;
+			assert partitionsSet.containsAll(successors);
+		}
 	}
 
 	/**
@@ -269,25 +308,7 @@ public class CompilerUtil extends QVTscheduleUtil
 		//
 		//	Check that inputs are consistent.
 		//
-		assert partition2predecessors.keySet().equals(partition2successors.keySet());
-		for (@NonNull Partition partition : partition2predecessors.keySet()) {
-			Set<@NonNull Partition> predecessors = partition2predecessors.get(partition);
-			assert predecessors != null;
-			for (@NonNull Partition predecessor : predecessors) {
-				Set<@NonNull Partition> successors = partition2successors.get(predecessor);
-				assert successors != null;
-				assert successors.contains(partition);
-			}
-		}
-		for (@NonNull Partition partition : partition2successors.keySet()) {
-			Set<@NonNull Partition> successors = partition2successors.get(partition);
-			assert successors != null;
-			for (@NonNull Partition successor : successors) {
-				Set<@NonNull Partition> predecessors = partition2predecessors.get(successor);
-				assert predecessors != null;
-				assert predecessors.contains(partition);
-			}
-		}
+		CompilerUtil.checkPredecessorsAndSuccessors(null, partition2predecessors, partition2successors);
 		//
 		//	Loop over the candidates to select those with no unscheduled predecessors. On the first iteration
 		//	all partitions are considered, on subsequent iterations only successots of just scheduled partitions
@@ -324,7 +345,9 @@ public class CompilerUtil extends QVTscheduleUtil
 	}
 
 	/**
-	 * Return a map of the RegionAnalyses that may execute before each RA.
+	 * Return a map of the RAs that may execute before each RA.
+	 *
+	 * This is a simple type-conformance exercise. Find the sources that are supertypes of the target.
 	 */
 	public static <@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> @NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> computeTransitivePredecessors(@NonNull Iterable<@NonNull RA> regionAnalyses) {
 		Map<@NonNull RA, @NonNull Set<@NonNull RA>> consumer2producers = new HashMap<>();
@@ -398,11 +421,27 @@ public class CompilerUtil extends QVTscheduleUtil
 	}
 
 	/**
-	 * Return a map of the RegionAnalyses that may execute after each RA.
+	 * Return a map of the RAs that may execute after each RA.
+	 *
+	 * This is an inconveient type-conformance exercise. Find the sources that are subtypes of the target. We therefore
+	 * require the inverse computeTransitivePredecessors's result to be provided for inversion.
 	 */
-	public static <@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> @NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> computeTransitiveSuccessors(@NonNull Iterable<@NonNull RA> regionAnalyses) {
-		Map<@NonNull RA, @NonNull Set<@NonNull RA>> producer2consumers = new HashMap<>();
-		for (@NonNull RA regionAnalysis : regionAnalyses) {
+	public static <@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> @NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> computeTransitiveSuccessors(@NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> partion2predecessors) {
+		Map<@NonNull RA, @NonNull Set<@NonNull RA>> producer2consumersClosure = new HashMap<>();
+		Iterable<@NonNull RA> partitions = partion2predecessors.keySet();
+		for (@NonNull RA predecessor : partitions) {
+			producer2consumersClosure.put(predecessor, new HashSet<>());
+		}
+		for (@NonNull RA successor : partitions) {
+			Iterable<@NonNull RA> predecessors = partion2predecessors.get(successor);
+			assert predecessors != null;
+			for (@NonNull RA predecessor : predecessors) {
+				Set<@NonNull RA> successors = producer2consumersClosure.get(predecessor);
+				assert successors != null;
+				successors.add(successor);
+			}
+		}
+		/*		for (@NonNull RA regionAnalysis : regionAnalyses) {
 			producer2consumers.put(regionAnalysis, new HashSet<>());
 		}
 		for (@NonNull RA producer : regionAnalyses) {
@@ -449,9 +488,9 @@ public class CompilerUtil extends QVTscheduleUtil
 				TransformationPartitioner.SUCCESSORS.println(s.toString());
 			}
 		}
-		Map<@NonNull RA, @NonNull Set<@NonNull RA>> producer2consumersClosure = CompilerUtil.computeClosure(producer2consumers);
+		Map<@NonNull RA, @NonNull Set<@NonNull RA>> producer2consumersClosure = CompilerUtil.computeClosure(producer2consumers); */
 		if (TransformationPartitioner.SUCCESSORS.isActive()) {
-			for (@NonNull RA predecessor : regionAnalyses) {
+			for (@NonNull RA predecessor : partitions) {
 				StringBuilder s = new StringBuilder();
 				s.append(predecessor + ":");
 				List<@NonNull RA> consumers = new ArrayList<>(producer2consumersClosure.get(predecessor));

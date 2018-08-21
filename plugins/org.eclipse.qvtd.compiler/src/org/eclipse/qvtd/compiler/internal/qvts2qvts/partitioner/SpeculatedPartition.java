@@ -135,8 +135,8 @@ class SpeculatedPartition extends AbstractPartialPartition
 
 	protected void resolveRealizedOutputNodes() {
 		for (@NonNull Node node : regionAnalysis.getCorollaryNodes()) {
-			if (!hasNode(node) && !node.isSuccess()) {
-				addNode(node, QVTscheduleUtil.getNodeRole(node));
+			if (!hasNode(node) && !node.isSuccess() && !partitioner.hasRealizedNode(node)) {
+				addNode(node);
 			}
 		}
 	}

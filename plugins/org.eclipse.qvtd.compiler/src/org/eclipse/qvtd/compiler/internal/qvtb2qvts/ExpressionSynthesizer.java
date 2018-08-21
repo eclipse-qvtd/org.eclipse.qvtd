@@ -1169,8 +1169,8 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 						if (dependencyHead == null) {
 							dependencyHead = context.createDependencyHead(classDatum);
 							createDependencyEdge(dependencyHead, QVTscheduleUtil.getName(dependencyHead), operationNode);
-							instantiate(dependencyHead, referenceNode);
 						}
+						instantiate(dependencyHead, referenceNode);
 					}
 				}
 			}

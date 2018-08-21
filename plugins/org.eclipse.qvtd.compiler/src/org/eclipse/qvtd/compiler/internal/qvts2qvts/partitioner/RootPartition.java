@@ -26,7 +26,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Partition>*/ implements InternallyAcyclicPartition
 {
@@ -48,18 +47,7 @@ public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Part
 		this.partitions = partitions;
 		this.partition2predecessors = partition2predecessors;
 		this.partition2successors = partition2successors;
-		//	assert partition2predecessors.keySet().containsAll(Sets.newHashSet(partitions));
-		Set<@NonNull Partition> partitionsSet = Sets.newHashSet(partitions);
-		assert partitionsSet.equals(partition2predecessors.keySet());
-		assert partitionsSet.equals(partition2successors.keySet());
-		for (@NonNull Partition partition : partitions) {
-			Set<@NonNull Partition> predecessors = partition2predecessors.get(partition);
-			assert predecessors != null;
-			assert partitionsSet.containsAll(predecessors);
-			Set<@NonNull Partition> successors = partition2successors.get(partition);
-			assert successors != null;
-			assert partitionsSet.containsAll(successors);
-		}
+		CompilerUtil.checkPredecessorsAndSuccessors(partitions, partition2predecessors, partition2successors);
 		//	this.partitionedRegions = new ArrayList<>(Iterables.size(partitions));
 		this.cyclicTraceClassAnalyses = cyclicTraceClassAnalyses;
 		this.cyclicTracePropertyAnalyses = cyclicTracePropertyAnalyses;

@@ -69,7 +69,8 @@ public class CyclicPartitionsAnalysis
 	 */
 	public @NonNull RootPartition analyze() {
 		Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> leafPartition2predecessors = CompilerUtil.computeTransitivePredecessors(leafPartitions);
-		Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> leafPartition2successors = CompilerUtil.computeTransitiveSuccessors(leafPartitions);
+		Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> leafPartition2successors = CompilerUtil.computeTransitiveSuccessors(leafPartition2predecessors);
+		CompilerUtil.checkPredecessorsAndSuccessors(leafPartitions, leafPartition2predecessors, leafPartition2successors);
 		Set<@NonNull Set<@NonNull Partition>> intersections = new HashSet<>();
 		for (@NonNull Partition leafPartition : leafPartitions) {
 			Set<@NonNull Partition> intersection = new HashSet<>(leafPartition2predecessors.get(leafPartition));

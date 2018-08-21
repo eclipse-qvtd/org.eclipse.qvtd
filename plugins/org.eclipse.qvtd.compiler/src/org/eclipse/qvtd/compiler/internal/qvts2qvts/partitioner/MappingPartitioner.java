@@ -205,7 +205,7 @@ public class MappingPartitioner implements Nameable
 		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
 			if (!edge.isSecondary()) {
 				allPrimaryEdges.add(edge);
-				if (edge.isRealized() && !hasRealizedEdge(edge)) {
+				if (edge.isRealized() && !hasRealizedEdge(edge) && !edge.isExpression()) {
 					//	if ((infallibleEdges == null) || !infallibleEdges.contains(edge)) {
 					addProblem(CompilerUtil.createRegionError(region, "Should have realized " + edge));
 					//	}
