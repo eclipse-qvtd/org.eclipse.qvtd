@@ -18,22 +18,27 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.FeatureFilter;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 
 /**
  * ContainmentAnalysis provides an analysis of all declared containment relationships in the EnvironmentFactory's resources. It therefore supports the compile time question:
  *
  * What declared container types could contain this declared contained type?
  *
- * The declared contained type could actually be any of its subclasses, so the containment properties must consider them all.
- * The actual container types could be the sub-class of each possible containment property.
- * The declared container types could be the super-classes too.
+ * The declared contained type could actually be any of its subtypes, so the containment properties must consider them all super-types of 'this declared container type'.
+ * The actual containing types could also be an of the subtypes of each possible containing property owner.
+ *
+ * Considering e.g. EPackage.eClassifers, the containment is declared to contain EClassifier but may also be the container of the EClass/EDataType subtypes. The container is declared
+ * to be EPackage but could be a subtype of EPackage.
+ *
+ * The more general usage of anENamedElement.eClassifiers anotherENamedElement has selective solutions when anENamedElement and anotherENamedElement are suitable derived classes,
+ * but this is a separate problem requiring oclIsKindOf guards around the attempted containment test.
  */
 public class ContainmentAnalysis
 {
@@ -57,7 +62,7 @@ public class ContainmentAnalysis
 		this.completeModel = environmentFactory.getCompleteModel();
 		this.inheritanceAnalysis = new InheritanceAnalysis(environmentFactory);
 		for (@NonNull CompleteClass completeClass : inheritanceAnalysis.getAllCompleteClasses()) {
-			computeContainedClass2ContainerClasses(completeClass);
+			computeContainedClass2containerClasses(completeClass);
 		}
 	}
 
@@ -81,16 +86,12 @@ public class ContainmentAnalysis
 		}
 	}
 
-	private void computeContainedClass2ContainerClasses(@NonNull CompleteClass containerCompleteClass) {
+	private void computeContainedClass2containerClasses(@NonNull CompleteClass containerCompleteClass) {
 		for (@NonNull Property property : containerCompleteClass.getProperties(FeatureFilter.SELECT_NON_STATIC)) {
 			if (property.isIsComposite()) {
-				Type type = property.getType();
-				if (type instanceof CollectionType) {
-					type = ((CollectionType) type).getElementType();
-				}
-				assert type != null;
+				Type type = PivotUtil.getElementalType(PivotUtil.getType(property));
 				CompleteClass containedCompleteClass = completeModel.getCompleteClass(type);
-				for (@NonNull CompleteClass containedSubCompleteClass : inheritanceAnalysis.getAllSuperAndSelfAndSubClasses(containedCompleteClass)) {
+				for (@NonNull CompleteClass containedSubCompleteClass : inheritanceAnalysis./*getAllSuperAndSelfAndSubClasses*/getAllSelfAndSubClasses(containedCompleteClass)) {
 					addContainmentForContainedClasses(containerCompleteClass, property, containedSubCompleteClass);
 				}
 			}
