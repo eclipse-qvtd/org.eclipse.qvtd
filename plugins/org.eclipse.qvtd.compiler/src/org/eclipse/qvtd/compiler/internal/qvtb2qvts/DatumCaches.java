@@ -119,8 +119,10 @@ public class DatumCaches
 			TypedModel containingTypedModel = asClass instanceof DataType ? domainUsageAnalysis.getPrimitiveTypeModel() : typedModel;
 			ClassDatum classDatum = getClassDatum(containingTypedModel, asClass);
 			for (@NonNull Property traceProperty : PivotUtil.getOwnedProperties(asClass)) {
-				@SuppressWarnings("unused")
-				PropertyDatum propertyDatumDatum = getPropertyDatum(classDatum, traceProperty);
+				if (traceProperty != oclContainerProperty) {
+					@SuppressWarnings("unused")
+					PropertyDatum propertyDatumDatum = getPropertyDatum(classDatum, traceProperty);
+				}
 			}
 		}
 	}
@@ -264,6 +266,15 @@ public class DatumCaches
 		return computeContexts(source, variable2BoundContext);
 	}
 
+	public @NonNull ContainmentAnalysis getContainmentAnalysis() {
+		return containmentAnalysis;
+	}
+
+	protected @NonNull CompleteClass getElementClass(@NonNull TypedElement typedElement) {
+		Type type = QVTbaseUtil.getElementalType(QVTbaseUtil.getType(typedElement));
+		return completeModel.getCompleteClass(type);
+	}
+
 	public @NonNull Iterable<@NonNull PropertyDatum> getOclContainerPropertyDatums(@NonNull ClassDatum containedClassDatum) {
 		List<@NonNull PropertyDatum> oclContainerPropertyDatums = classDatum2oclContainerPropertyDatums.get(containedClassDatum);
 		if (oclContainerPropertyDatums == null) {
@@ -278,15 +289,6 @@ public class DatumCaches
 			}
 		}
 		return oclContainerPropertyDatums;
-	}
-
-	public @NonNull ContainmentAnalysis getContainmentAnalysis() {
-		return containmentAnalysis;
-	}
-
-	protected @NonNull CompleteClass getElementClass(@NonNull TypedElement typedElement) {
-		Type type = QVTbaseUtil.getElementalType(QVTbaseUtil.getType(typedElement));
-		return completeModel.getCompleteClass(type);
 	}
 
 	protected @NonNull Set<@NonNull PropertyDatum> getOperationPropertyDatums(@NonNull OperationCallExp opCall, @NonNull CompleteClass context,
