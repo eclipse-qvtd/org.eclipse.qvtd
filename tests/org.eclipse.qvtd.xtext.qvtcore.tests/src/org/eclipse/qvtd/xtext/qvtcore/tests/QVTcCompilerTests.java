@@ -22,7 +22,9 @@ import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
+import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
+import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.QVTcCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
@@ -58,6 +60,8 @@ import org.junit.Test;
  */
 public class QVTcCompilerTests extends LoadTestCase
 {
+	private static boolean NO_MERGES = true;				// Set true to suppress the complexities of merging
+
 	protected class MyQVT extends AbstractTestQVT
 	{
 		protected class InstrumentedCompilerChain extends QVTcCompilerChain
@@ -87,6 +91,14 @@ public class QVTcCompilerTests extends LoadTestCase
 		@Override
 		protected @NonNull QVTcCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
 			return new InstrumentedCompilerChain(getEnvironmentFactory(), txURI, intermediateFileNamePrefixURI, options);
+		}
+
+		@Override
+		protected @NonNull DefaultCompilerOptions createCompilerChainOptions() {
+			DefaultCompilerOptions options = super.createCompilerChainOptions();
+			options.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_EARLY_MERGE, NO_MERGES);
+			options.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_LATE_CONSUMER_MERGE, NO_MERGES);
+			return options;
 		}
 
 		@Override
@@ -271,7 +283,7 @@ public class QVTcCompilerTests extends LoadTestCase
 			myQVT.executeTransformation();
 			myQVT.saveOutput("forward", getTestURI("ThreeElementList_Reverse_CG.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
 			//
-			Class<? extends Transformer> txClass = myQVT.buildTransformation("reverse", false, "List2List.genmodel");
+			/*			Class<? extends Transformer> txClass = myQVT.buildTransformation("reverse", false, "List2List.genmodel");
 			//
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("forward", getModelsURI("forward2reverse/samples/EmptyList.xmi"));
@@ -292,7 +304,7 @@ public class QVTcCompilerTests extends LoadTestCase
 			myQVT.loadInput("forward", getModelsURI("forward2reverse/samples/ThreeElementList.xmi"));
 			myQVT.executeTransformation();
 			myQVT.saveOutput("reverse", getTestURI("ThreeElementList_CG.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
-		}
+			 */		}
 		finally {
 			myQVT.dispose();
 		}

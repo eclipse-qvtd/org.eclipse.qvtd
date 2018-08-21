@@ -332,6 +332,14 @@ public class CompilerUtil extends QVTscheduleUtil
 			consumer2producers.put(regionAnalysis, new HashSet<>());
 		}
 		for (@NonNull RA consumer : regionAnalyses) {
+			Iterable<@NonNull RA> predecessors = consumer.getPredecessors();		// Used by no-success QVTc trace
+			if (predecessors != null) {
+				for (@NonNull RA predecessor : predecessors) {
+					Set<@NonNull RA> producers = consumer2producers.get(consumer);
+					assert producers != null;
+					producers.add(predecessor);
+				}
+			}
 			Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> consumedTraceClassAnalyses = consumer.getConsumedTraceClassAnalyses();
 			if (consumedTraceClassAnalyses != null) {
 				for (@NonNull TraceClassAnalysis<@NonNull RA> consumedTraceClassAnalysis : consumedTraceClassAnalyses) {
@@ -398,6 +406,14 @@ public class CompilerUtil extends QVTscheduleUtil
 			producer2consumers.put(regionAnalysis, new HashSet<>());
 		}
 		for (@NonNull RA producer : regionAnalyses) {
+			Iterable<@NonNull RA> successors = producer.getSuccessors();		// Used by no-success QVTc trace
+			if (successors != null) {
+				for (@NonNull RA successor : successors) {
+					Set<@NonNull RA> consumers = producer2consumers.get(producer);
+					assert consumers != null;
+					consumers.add(successor);
+				}
+			}
 			Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> producedTraceClassAnalyses = producer.getProducedTraceClassAnalyses();
 			if (producedTraceClassAnalyses != null) {
 				for (@NonNull TraceClassAnalysis<@NonNull RA> producedTraceClassAnalysis : producedTraceClassAnalyses) {

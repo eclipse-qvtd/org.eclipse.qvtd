@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -36,6 +38,7 @@ import com.google.common.collect.Sets;
 class SpeculationPartition extends AbstractPartialPartition
 {
 	private final @NonNull Set<@NonNull Node> headNodes;
+	private final @NonNull List<@NonNull Partition> successors = new ArrayList<>();
 
 	public SpeculationPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
 		super(partitioner, reachabilityForest, "«speculation»");
@@ -85,6 +88,10 @@ class SpeculationPartition extends AbstractPartialPartition
 		}
 	}
 
+	public void addSuccessor(@NonNull SpeculatingPartition speculatingPartition) {
+		successors.add(speculatingPartition);
+	}
+
 	@Override
 	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
 		return createMicroMappingRegion("«speculation»", "_p" + partitionNumber);
@@ -97,6 +104,11 @@ class SpeculationPartition extends AbstractPartialPartition
 	@Override
 	protected @Nullable Iterable<@NonNull Node> getPreferredHeadNodes() {
 		return null;
+	}
+
+	@Override
+	public @NonNull List<@NonNull Partition> getSuccessors() {
+		return successors;
 	}
 
 	/**

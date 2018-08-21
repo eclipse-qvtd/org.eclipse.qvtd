@@ -434,6 +434,16 @@ public class RegionAnalysis extends AbstractPartialRegionAnalysis<@NonNull Regio
 		return QVTscheduleUtil.getOwnedNodes(region);
 	}
 
+	@Override
+	public @Nullable Iterable<@NonNull RegionAnalysis> getPredecessors() {
+		return null;
+	}
+
+	@Override
+	public @Nullable Iterable<@NonNull RegionAnalysis> getSuccessors() {
+		return null;
+	}
+
 	public @NonNull TransformationAnalysis getTransformationAnalysis() {
 		return transformationAnalysis;
 	}

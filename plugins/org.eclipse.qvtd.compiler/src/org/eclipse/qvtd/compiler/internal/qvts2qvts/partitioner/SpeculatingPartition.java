@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,6 +34,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 class SpeculatingPartition extends AbstractPartialPartition
 {
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
+	private final @NonNull List<@NonNull Partition> predecessors = new ArrayList<>();
+	private final @NonNull List<@NonNull Partition> successors = new ArrayList<>();
 
 	public SpeculatingPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
 		super(partitioner, reachabilityForest, "«speculating»");
@@ -75,9 +78,27 @@ class SpeculatingPartition extends AbstractPartialPartition
 		resolveEdges();
 	}
 
+	public void addPredecessor(@NonNull SpeculationPartition speculationPartition) {
+		predecessors.add(speculationPartition);
+	}
+
+	public void addSuccessor(@NonNull SpeculatedPartition speculatedPartition) {
+		successors.add(speculatedPartition);
+	}
+
 	@Override
 	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
 		return createMicroMappingRegion("«speculating»", "_p" + partitionNumber);
+	}
+
+	@Override
+	public @NonNull List<@NonNull Partition> getPredecessors() {
+		return predecessors;
+	}
+
+	@Override
+	public @NonNull List<@NonNull Partition> getSuccessors() {
+		return successors;
 	}
 
 	private boolean isDownstreamFromCorollary(@NonNull Node node) {

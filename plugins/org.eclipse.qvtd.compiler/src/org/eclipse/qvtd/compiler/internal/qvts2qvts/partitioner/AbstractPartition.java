@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.AbstractPartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
@@ -40,10 +41,20 @@ abstract class AbstractPartition extends AbstractPartialRegionAnalysis<@NonNull 
 		return parallelScheduleDepth;
 	}
 
+	@Override
+	public @Nullable Iterable<@NonNull Partition> getPredecessors() {
+		return null;
+	}
+
 	//	@Override
 	//	public @NonNull Region getRegion() {
 	//		return region;
 	//	}
+
+	@Override
+	public @Nullable Iterable<@NonNull Partition> getSuccessors() {
+		return null;
+	}
 
 	@Override
 	public void setDepth(int parallelScheduleDepth) {

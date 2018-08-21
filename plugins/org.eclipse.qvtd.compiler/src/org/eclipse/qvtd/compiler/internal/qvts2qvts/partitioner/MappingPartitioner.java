@@ -643,9 +643,16 @@ public class MappingPartitioner implements Nameable
 		}
 		else {
 			if (!Iterables.isEmpty(getPredicatedMiddleNodes())) {
-				newPartitions.add(createSpeculationPartition());
-				newPartitions.add(createSpeculatingPartition());
-				newPartitions.add(createSpeculatedPartition());
+				SpeculationPartition speculationPartition = createSpeculationPartition();
+				SpeculatingPartition speculatingPartition = createSpeculatingPartition();
+				SpeculatedPartition speculatedPartition = createSpeculatedPartition();
+				newPartitions.add(speculationPartition);
+				newPartitions.add(speculatingPartition);
+				newPartitions.add(speculatedPartition);
+				speculationPartition.addSuccessor(speculatingPartition);
+				speculatingPartition.addPredecessor(speculationPartition);
+				speculatingPartition.addSuccessor(speculatedPartition);
+				speculatedPartition.addPredecessor(speculatingPartition);
 			}
 			else {
 				newPartitions.add(createRealizedPartition());
