@@ -1124,9 +1124,9 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		else if (QVTbaseUtil.isSameOperation(operationId, standardLibraryHelper.getOclElementOclContainerId())) {
 			return synthesizeOperationCallExp_oclContainer(sourceNode, operationCallExp);
 		}
-		else if (QVTbaseUtil.isSameOperation(operationId, standardLibraryHelper.getOclAnyOclIsKindOfId())) {
-			return synthesizeOperationCallExp_oclIsKindOf(sourceNode, operationCallExp);
-		}
+	//	else if (QVTbaseUtil.isSameOperation(operationId, standardLibraryHelper.getOclAnyOclIsKindOfId())) {
+	//		return synthesizeOperationCallExp_oclIsKindOf(sourceNode, operationCallExp);
+	//	}
 		else if ((operationCallExp.eContainer() instanceof Predicate)
 				&& (sourceNode.getCompleteClass().getPrimaryClass() instanceof CollectionType)
 				&& "includes".equals(operationName)) {
