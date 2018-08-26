@@ -220,19 +220,19 @@ public class CyclicPartitionsAnalysis
 
 	private @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> computeTracePropertyAnalysisDependencies(@NonNull Iterable<@NonNull Partition> nestedPartitions) {
 		Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> consumedTracePropertyAnalyses = new HashSet<>();
-		Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> superProducedTracePropertyAnalyses = new HashSet<>();
+		Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> producedTracePropertyAnalyses = new HashSet<>();
 		for (@NonNull Partition nestedPartition : nestedPartitions) {
 			Iterable<@NonNull TracePropertyAnalysis<@NonNull Partition>> consumedTracePropertyAnalyses2 = nestedPartition.getConsumedTracePropertyAnalyses();
 			if (consumedTracePropertyAnalyses2 != null) {
 				Iterables.addAll(consumedTracePropertyAnalyses, consumedTracePropertyAnalyses2);
 			}
-			Iterable<@NonNull TracePropertyAnalysis<@NonNull Partition>> superProducedTracePropertyAnalyses2 = nestedPartition.getSuperProducedTracePropertyAnalyses();
-			if (superProducedTracePropertyAnalyses2 != null) {
-				Iterables.addAll(superProducedTracePropertyAnalyses, superProducedTracePropertyAnalyses2);
+			Iterable<@NonNull TracePropertyAnalysis<@NonNull Partition>> producedTracePropertyAnalyses2 = nestedPartition.getProducedTracePropertyAnalyses();
+			if (producedTracePropertyAnalyses2 != null) {
+				Iterables.addAll(producedTracePropertyAnalyses, producedTracePropertyAnalyses2);
 			}
 		}
 		Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> cyclicTracePropertyAnalyses = new HashSet<>(consumedTracePropertyAnalyses);
-		cyclicTracePropertyAnalyses.retainAll(superProducedTracePropertyAnalyses);
+		cyclicTracePropertyAnalyses.retainAll(producedTracePropertyAnalyses);
 		return cyclicTracePropertyAnalyses;
 	}
 

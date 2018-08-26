@@ -134,11 +134,6 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 	 */
 	private @Nullable Set<@NonNull TraceClassAnalysis<@NonNull RA>> superProducedTraceClassAnalyses = null;
 
-	/**
-	 * The TracePropertyAnalysis instances and super instances that are produced by this MappingPartitioner.
-	 */
-	private @Nullable Set<@NonNull TracePropertyAnalysis<@NonNull RA>> superProducedTracePropertyAnalyses = null;
-
 	protected AbstractPartialRegionAnalysis(@NonNull RegionsAnalysis<@NonNull RA> regionsAnalysis, @NonNull Region region) {
 		super(regionsAnalysis.getScheduleManager(), region);
 		this.regionsAnalysis = regionsAnalysis;
@@ -226,14 +221,24 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 		assert edge.isNew();
 		Property property = QVTscheduleUtil.getProperty(edge);
 		assert property != scheduleManager.getStandardLibraryHelper().getOclContainerProperty();		// oclContainer is not assignable
+		if (property.toString().contains("toA1") || property.toString().contains("ownsB")) {
+			property.toString();
+		}
 		PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
-		TracePropertyAnalysis<@NonNull RA> consumedTraceAnalysis = regionsAnalysis.addProducer(propertyDatum, getRA());
+		TracePropertyAnalysis<@NonNull RA> producedTraceAnalysis = regionsAnalysis.addProducer(propertyDatum, getRA());
 		List<@NonNull TracePropertyAnalysis<@NonNull RA>> producedTracePropertyAnalyses2 = producedTracePropertyAnalyses;
 		if (producedTracePropertyAnalyses2 == null) {
 			producedTracePropertyAnalyses = producedTracePropertyAnalyses2 = new ArrayList<>();
 		}
-		if (!producedTracePropertyAnalyses2.contains(consumedTraceAnalysis)) {
-			producedTracePropertyAnalyses2.add(consumedTraceAnalysis);
+		if (!producedTracePropertyAnalyses2.contains(producedTraceAnalysis)) {
+			producedTracePropertyAnalyses2.add(producedTraceAnalysis);
+		}
+		PropertyDatum oppositePropertyDatum = propertyDatum.getOpposite();
+		if (oppositePropertyDatum != null) {
+			TracePropertyAnalysis<@NonNull RA> oppositeProducedTraceAnalysis = regionsAnalysis.addProducer(oppositePropertyDatum, getRA());
+			if (!producedTracePropertyAnalyses2.contains(oppositeProducedTraceAnalysis)) {
+				producedTracePropertyAnalyses2.add(oppositeProducedTraceAnalysis);
+			}
 		}
 	}
 
@@ -628,21 +633,6 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 			}
 		}
 		return superProducedTraceClassAnalyses;
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> getSuperProducedTracePropertyAnalyses() {
-		List<@NonNull TracePropertyAnalysis<@NonNull RA>> producedTracePropertyAnalyses2 = producedTracePropertyAnalyses;
-		if (producedTracePropertyAnalyses2 != null) {
-			Set<@NonNull TracePropertyAnalysis<@NonNull RA>> superProducedTracePropertyAnalyses2 = superProducedTracePropertyAnalyses;
-			if (superProducedTracePropertyAnalyses2 == null) {
-				superProducedTracePropertyAnalyses2 = superProducedTracePropertyAnalyses = new HashSet<>();
-			}
-			for (@NonNull TracePropertyAnalysis<@NonNull RA> producedTracePropertyAnalysis : producedTracePropertyAnalyses2) {
-				Iterables.addAll(superProducedTracePropertyAnalyses2, producedTracePropertyAnalysis.getSuperTracePropertyAnalyses());
-			}
-		}
-		return superProducedTracePropertyAnalyses;
 	}
 
 	@Override

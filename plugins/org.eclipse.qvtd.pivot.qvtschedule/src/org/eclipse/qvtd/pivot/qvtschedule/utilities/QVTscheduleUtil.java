@@ -624,6 +624,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		}
 	}
 
+	public static @NonNull PropertyDatum getOpposite(@NonNull PropertyDatum propertyDatum) {
+		return ClassUtil.nonNullState(propertyDatum.getOpposite());
+	}
+
 	public static @NonNull NavigableEdge getOppositeEdge(@NonNull NavigableEdge navigableEdge) {
 		return ClassUtil.nonNullState(navigableEdge.getOppositeEdge());
 	}

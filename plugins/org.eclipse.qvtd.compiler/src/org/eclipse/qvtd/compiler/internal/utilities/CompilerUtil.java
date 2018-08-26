@@ -378,16 +378,10 @@ public class CompilerUtil extends QVTscheduleUtil
 			Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> consumedTracePropertyAnalyses = consumer.getConsumedTracePropertyAnalyses();
 			if (consumedTracePropertyAnalyses != null) {
 				for (@NonNull TracePropertyAnalysis<@NonNull RA> consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
-					if (consumedTracePropertyAnalysis.toString().contains("oclContainer")) {
-						consumer.toString();
-					}
-					for (@NonNull TracePropertyAnalysis<@NonNull RA> superConsumedTracePropertyAnalysis : consumedTracePropertyAnalysis.getSuperTracePropertyAnalyses()) {
-						//	@NonNull TracePropertyAnalysis<@NonNull RA> superConsumedTracePropertyAnalysis = consumedTracePropertyAnalysis;
-						for (@NonNull RA producer : superConsumedTracePropertyAnalysis.getProducers()) {
-							Set<@NonNull RA> producers = consumer2producers.get(consumer);
-							assert producers != null;
-							producers.add(producer);
-						}
+					for (@NonNull RA producer : consumedTracePropertyAnalysis.getProducers()) {
+						Set<@NonNull RA> producers = consumer2producers.get(consumer);
+						assert producers != null;
+						producers.add(producer);
 					}
 				}
 			}
@@ -423,7 +417,7 @@ public class CompilerUtil extends QVTscheduleUtil
 	/**
 	 * Return a map of the RAs that may execute after each RA.
 	 *
-	 * This is an inconveient type-conformance exercise. Find the sources that are subtypes of the target. We therefore
+	 * This is an inconvenient type-conformance exercise. Find the sources that are subtypes of the target. We therefore
 	 * require the inverse computeTransitivePredecessors's result to be provided for inversion.
 	 */
 	public static <@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> @NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> computeTransitiveSuccessors(@NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> partion2predecessors) {
