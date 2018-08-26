@@ -49,7 +49,6 @@ public class CyclicRegionsAnalysis
 	private void analyze(@NonNull Iterable<@NonNull RegionAnalysis> regionAnalyses) {
 		Map<@NonNull RegionAnalysis, @NonNull Set<@NonNull RegionAnalysis>> partitioner2predecessors = CompilerUtil.computeTransitivePredecessors(regionAnalyses);
 		Map<@NonNull RegionAnalysis, @NonNull Set<@NonNull RegionAnalysis>> partitioner2successors = CompilerUtil.computeTransitiveSuccessors(partitioner2predecessors);
-		CompilerUtil.checkPredecessorsAndSuccessors(regionAnalyses, partitioner2predecessors, partitioner2successors);
 		for (@NonNull RegionAnalysis regionAnalysis : regionAnalyses) {
 			Set<@NonNull RegionAnalysis> intersection = new HashSet<>(partitioner2predecessors.get(regionAnalysis));
 			intersection.retainAll(partitioner2successors.get(regionAnalysis));

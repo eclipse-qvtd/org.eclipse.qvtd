@@ -70,7 +70,6 @@ public class CyclicPartitionsAnalysis
 	public @NonNull RootPartition analyze() {
 		Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> leafPartition2predecessors = CompilerUtil.computeTransitivePredecessors(leafPartitions);
 		Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> leafPartition2successors = CompilerUtil.computeTransitiveSuccessors(leafPartition2predecessors);
-		CompilerUtil.checkPredecessorsAndSuccessors(leafPartitions, leafPartition2predecessors, leafPartition2successors);
 		Set<@NonNull Set<@NonNull Partition>> intersections = new HashSet<>();
 		for (@NonNull Partition leafPartition : leafPartitions) {
 			Set<@NonNull Partition> intersection = new HashSet<>(leafPartition2predecessors.get(leafPartition));
@@ -98,7 +97,7 @@ public class CyclicPartitionsAnalysis
 			Set<@NonNull TraceClassAnalysis<@NonNull Partition>> cyclicTraceClassAnalyses = computeTraceClassAnalysisDependencies(leafPartitions);
 			Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> cyclicTracePropertyAnalyses = computeTracePropertyAnalysisDependencies(leafPartitions);
 			//			Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> localPartition2Predecessors = computePartition2Predecessors(partition2predecessors, rootPartitioning);
-			return new RootPartition(leafPartitions, leafPartition2predecessors, leafPartition2successors, cyclicTraceClassAnalyses, cyclicTracePropertyAnalyses);
+			return new RootPartition(leafPartition2predecessors, cyclicTraceClassAnalyses, cyclicTracePropertyAnalyses);
 		}
 		intersections.add(Sets.newHashSet(leafPartitions));
 		return createAcyclicPartitionHierarchy(intersections, leafPartition2predecessors, leafPartition2successors);
@@ -315,8 +314,7 @@ public class CyclicPartitionsAnalysis
 		Set<@NonNull Partition> rootPartitioning = sortedPartitionings.get(iMax-1);
 		Set<@NonNull TraceClassAnalysis<@NonNull Partition>> rootTraceClassAnalyses = computeTraceClassAnalysisDependencies(rootPartitioning);
 		Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> rootTracePropertyAnalyses = computeTracePropertyAnalysisDependencies(rootPartitioning);
-		//	Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> localPartition2Predecessors = computeLocalPartition2Predecessors(rootPartitioning, partition2predecessors);
-		RootPartition rootPartition = new RootPartition(rootPartitioning, partition2predecessors, partition2successors, rootTraceClassAnalyses, rootTracePropertyAnalyses);
+		RootPartition rootPartition = new RootPartition(partition2predecessors, rootTraceClassAnalyses, rootTracePropertyAnalyses);
 		acyclicPartitionHierarchy.add(rootPartition);
 		if (TransformationPartitioner.CYCLES.isActive()) {
 			showCycles(acyclicPartitionHierarchy);

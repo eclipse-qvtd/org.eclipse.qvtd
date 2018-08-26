@@ -65,7 +65,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 public class CompilerUtil extends QVTscheduleUtil
 {
@@ -162,44 +161,6 @@ public class CompilerUtil extends QVTscheduleUtil
 		assert false : s.toString();
 	}
 
-	public static <@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> void checkPredecessorsAndSuccessors(@Nullable Iterable<@NonNull RA> partitions,
-			@NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> partition2predecessors,
-			@NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> partition2successors) {
-		Set<@NonNull RA> partitionsSet = partitions instanceof Set<?> ? (Set<@NonNull RA>) partitions : partitions != null ? Sets.newHashSet(partitions) : partition2successors.keySet();
-		//
-		//	Check that inputs are consistent.
-		//
-		assert partition2predecessors.keySet().equals(partition2successors.keySet());
-		assert partitionsSet.equals(partition2predecessors.keySet());
-		assert partitionsSet.equals(partition2successors.keySet());
-		for (@NonNull RA partition : partitionsSet) {
-			Set<@NonNull RA> predecessors = partition2predecessors.get(partition);
-			assert predecessors != null;
-			for (@NonNull RA predecessor : predecessors) {
-				Set<@NonNull RA> successors = partition2successors.get(predecessor);
-				assert successors != null;
-				assert successors.contains(partition);
-			}
-		}
-		for (@NonNull RA partition : partitionsSet) {
-			Set<@NonNull RA> successors = partition2successors.get(partition);
-			assert successors != null;
-			for (@NonNull RA successor : successors) {
-				Set<@NonNull RA> predecessors = partition2predecessors.get(successor);
-				assert predecessors != null;
-				assert predecessors.contains(partition);
-			}
-		}
-		for (@NonNull RA partition : partitionsSet) {
-			Set<@NonNull RA> predecessors = partition2predecessors.get(partition);
-			assert predecessors != null;
-			assert partitionsSet.containsAll(predecessors);
-			Set<@NonNull RA> successors = partition2successors.get(partition);
-			assert successors != null;
-			assert partitionsSet.containsAll(successors);
-		}
-	}
-
 	/**
 	 * Return a new list of project names that need to be on the class path.
 	 */
@@ -276,6 +237,51 @@ public class CompilerUtil extends QVTscheduleUtil
 		return from2tosClosure;
 	}
 
+	/**
+	 * Return a map of the RAs that may execute immediately before each RA.
+	 *
+	 * This is a simple type-conformance exercise. Find the sources that are supertypes of the target.
+	 */
+	public static <@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> @NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> computeImmediatePredecessors(@NonNull Iterable<@NonNull RA> regionAnalyses) {
+		Map<@NonNull RA, @NonNull Set<@NonNull RA>> consumer2producers = new HashMap<>();
+		for (@NonNull RA regionAnalysis : regionAnalyses) {
+			consumer2producers.put(regionAnalysis, new HashSet<>());
+		}
+		for (@NonNull RA consumer : regionAnalyses) {
+			Iterable<@NonNull RA> predecessors = consumer.getPredecessors();		// Used by no-success QVTc trace
+			if (predecessors != null) {
+				for (@NonNull RA predecessor : predecessors) {
+					Set<@NonNull RA> producers = consumer2producers.get(consumer);
+					assert producers != null;
+					producers.add(predecessor);
+				}
+			}
+			Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> consumedTraceClassAnalyses = consumer.getConsumedTraceClassAnalyses();
+			if (consumedTraceClassAnalyses != null) {
+				for (@NonNull TraceClassAnalysis<@NonNull RA> consumedTraceClassAnalysis : consumedTraceClassAnalyses) {
+					for (@NonNull TraceClassAnalysis<@NonNull RA> subConsumedTraceClass : consumedTraceClassAnalysis.getSubTraceClassAnalyses()) {
+						for (@NonNull RA producer : subConsumedTraceClass.getProducers()) {
+							Set<@NonNull RA> producers = consumer2producers.get(consumer);
+							assert producers != null;
+							producers.add(producer);
+						}
+					}
+				}
+			}
+			Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> consumedTracePropertyAnalyses = consumer.getConsumedTracePropertyAnalyses();
+			if (consumedTracePropertyAnalyses != null) {
+				for (@NonNull TracePropertyAnalysis<@NonNull RA> consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
+					for (@NonNull RA producer : consumedTracePropertyAnalysis.getProducers()) {
+						Set<@NonNull RA> producers = consumer2producers.get(consumer);
+						assert producers != null;
+						producers.add(producer);
+					}
+				}
+			}
+		}
+		return consumer2producers;
+	}
+
 	//
 	//	Compute and return the inverse per-to closure of all froms given the from to tos closure.
 	//
@@ -303,12 +309,8 @@ public class CompilerUtil extends QVTscheduleUtil
 	 * sequence corresponds to the critical path length/depth from the earliest predecessor to the concurrent element.
 	 */
 	public static @NonNull List<@NonNull Iterable<@NonNull Partition>> computeParallelSchedule(	// FIXME this can be much faster with bit masks
-			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors,
-			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2successors) {
-		//
-		//	Check that inputs are consistent.
-		//
-		CompilerUtil.checkPredecessorsAndSuccessors(null, partition2predecessors, partition2successors);
+			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors) {
+		Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2successors = CompilerUtil.computeTransitiveSuccessors(partition2predecessors);
 		//
 		//	Loop over the candidates to select those with no unscheduled predecessors. On the first iteration
 		//	all partitions are considered, on subsequent iterations only successots of just scheduled partitions
@@ -350,42 +352,7 @@ public class CompilerUtil extends QVTscheduleUtil
 	 * This is a simple type-conformance exercise. Find the sources that are supertypes of the target.
 	 */
 	public static <@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> @NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> computeTransitivePredecessors(@NonNull Iterable<@NonNull RA> regionAnalyses) {
-		Map<@NonNull RA, @NonNull Set<@NonNull RA>> consumer2producers = new HashMap<>();
-		for (@NonNull RA regionAnalysis : regionAnalyses) {
-			consumer2producers.put(regionAnalysis, new HashSet<>());
-		}
-		for (@NonNull RA consumer : regionAnalyses) {
-			Iterable<@NonNull RA> predecessors = consumer.getPredecessors();		// Used by no-success QVTc trace
-			if (predecessors != null) {
-				for (@NonNull RA predecessor : predecessors) {
-					Set<@NonNull RA> producers = consumer2producers.get(consumer);
-					assert producers != null;
-					producers.add(predecessor);
-				}
-			}
-			Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> consumedTraceClassAnalyses = consumer.getConsumedTraceClassAnalyses();
-			if (consumedTraceClassAnalyses != null) {
-				for (@NonNull TraceClassAnalysis<@NonNull RA> consumedTraceClassAnalysis : consumedTraceClassAnalyses) {
-					for (@NonNull TraceClassAnalysis<@NonNull RA> subConsumedTraceClass : consumedTraceClassAnalysis.getSubTraceClassAnalyses()) {
-						for (@NonNull RA producer : subConsumedTraceClass.getProducers()) {
-							Set<@NonNull RA> producers = consumer2producers.get(consumer);
-							assert producers != null;
-							producers.add(producer);
-						}
-					}
-				}
-			}
-			Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> consumedTracePropertyAnalyses = consumer.getConsumedTracePropertyAnalyses();
-			if (consumedTracePropertyAnalyses != null) {
-				for (@NonNull TracePropertyAnalysis<@NonNull RA> consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
-					for (@NonNull RA producer : consumedTracePropertyAnalysis.getProducers()) {
-						Set<@NonNull RA> producers = consumer2producers.get(consumer);
-						assert producers != null;
-						producers.add(producer);
-					}
-				}
-			}
-		}
+		Map<@NonNull RA, @NonNull Set<@NonNull RA>> consumer2producers = computeImmediatePredecessors(regionAnalyses);
 		if (TransformationPartitioner.PREDECESSORS.isActive()) {
 			for (@NonNull RA successor : regionAnalyses) {
 				StringBuilder s = new StringBuilder();
@@ -420,14 +387,14 @@ public class CompilerUtil extends QVTscheduleUtil
 	 * This is an inconvenient type-conformance exercise. Find the sources that are subtypes of the target. We therefore
 	 * require the inverse computeTransitivePredecessors's result to be provided for inversion.
 	 */
-	public static <@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> @NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> computeTransitiveSuccessors(@NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> partion2predecessors) {
+	public static <@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> @NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> computeTransitiveSuccessors(@NonNull Map<@NonNull RA, @NonNull Set<@NonNull RA>> partition2predecessors) {
 		Map<@NonNull RA, @NonNull Set<@NonNull RA>> producer2consumersClosure = new HashMap<>();
-		Iterable<@NonNull RA> partitions = partion2predecessors.keySet();
+		Iterable<@NonNull RA> partitions = partition2predecessors.keySet();
 		for (@NonNull RA predecessor : partitions) {
 			producer2consumersClosure.put(predecessor, new HashSet<>());
 		}
 		for (@NonNull RA successor : partitions) {
-			Iterable<@NonNull RA> predecessors = partion2predecessors.get(successor);
+			Iterable<@NonNull RA> predecessors = partition2predecessors.get(successor);
 			assert predecessors != null;
 			for (@NonNull RA predecessor : predecessors) {
 				Set<@NonNull RA> successors = producer2consumersClosure.get(predecessor);

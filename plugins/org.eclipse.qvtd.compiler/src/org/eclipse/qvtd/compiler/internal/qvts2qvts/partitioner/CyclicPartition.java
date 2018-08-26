@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -21,12 +22,13 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.AbstractPartialRegionAnalysis;
-import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+
+import com.google.common.collect.Iterables;
 
 /**
  * Each CycleAnalysis identifies one group of regionAnalyses that contribute to a cycle.
@@ -109,6 +111,21 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 		return partitions.iterator().next().createMicroMappingRegion(partitionNumber);		// FIXME temporary fudge
 	}
 
+	public @NonNull Iterable<@NonNull MappingRegion> createMicroMappingRegions(@NonNull Region partitionRegion) {
+		getRegionSchedule();
+		List<@NonNull MappingRegion> microMappingRegions = new ArrayList<>();
+		for (@NonNull Partition partition : partitions) {		// FIXME smarter cyclic schedule
+			if (partition instanceof CyclicPartition) {
+				Iterables.addAll(microMappingRegions, ((CyclicPartition)partition).createMicroMappingRegions(partitionRegion));
+			}
+			else {
+				int partitionNumber = partitionRegion.getNextPartitionNumber();
+				microMappingRegions.add(partition.createMicroMappingRegion(partitionNumber));
+			}
+		}
+		return microMappingRegions;
+	}
+
 	@Override
 	public int getDepth() {
 		assert parallelScheduleDepth >= 0;
@@ -136,7 +153,13 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	public @NonNull List<@NonNull Iterable<@NonNull Partition>> getPartitionSchedule() {
 		List<@NonNull Iterable<@NonNull Partition>> partitionSchedule2 = partitionSchedule;
 		if (partitionSchedule2 == null) {
-			partitionSchedule = partitionSchedule2 = CompilerUtil.computeParallelSchedule(partition2predecessors, partition2successors);
+			//
+			//	The simplest cyclic schedule is dump polled. FOr small cycles the effort of
+			//	using the immediate external predecesors as region heads for an internal acyclic
+			//	schedule and integrating externally is probably not worth it.
+			//
+			Iterable<@NonNull Partition> keys = partition2predecessors.keySet();
+			partitionSchedule = partitionSchedule2 = Collections.singletonList(keys); //CompilerUtil.computeParallelSchedule(partition2predecessors);
 			for (@NonNull Partition partition : partitions) {
 				if (partition instanceof InternallyAcyclicPartition) {
 					((InternallyAcyclicPartition)partition).getPartitionSchedule();
@@ -151,6 +174,7 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 		return partitions;
 	}
 
+	@Override
 	public @NonNull Set<@NonNull Partition> getPredecessors() {
 		return externalPredecessors;
 	}
@@ -173,6 +197,7 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 		return regionSchedule2;
 	}
 
+	@Override
 	public @NonNull Set<@NonNull Partition> getSuccessors() {
 		return externalSuccessors;
 	}

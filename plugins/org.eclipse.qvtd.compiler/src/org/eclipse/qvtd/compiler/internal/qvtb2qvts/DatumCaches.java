@@ -380,35 +380,35 @@ public class DatumCaches
 		if (cachedPropertyDatum != null) {
 			return cachedPropertyDatum;
 		}
-		Iterable<@NonNull PropertyDatum> allPropertyDatums = getAllPropertyDatums(classDatum);		// FIX why is this needed / not cached
-		for (PropertyDatum propertyDatum : allPropertyDatums) {
-			if ((propertyDatum.getReferredProperty() == property) && (propertyDatum.getOwningClassDatum() == classDatum)) {
-				return propertyDatum;
+		// If not found we create it
+		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
+		CompleteClass targetCompleteClass = classDatum.getCompleteClass();
+		org.eclipse.ocl.pivot.Class owningClass = QVTbaseUtil.getOwningClass(property);
+		CompleteClass hostCompleteClass = completeModel.getCompleteClass(owningClass);
+		PropertyDatum propertyDatum = QVTscheduleFactory.eINSTANCE.createPropertyDatum();
+		propertyDatum.setReferredTypedModel(typedModel);
+		propertyDatum.setReferredProperty(property);
+		propertyDatum.setName(property.getName());
+		propertyDatum.setOwningClassDatum(classDatum);
+		assert targetCompleteClass.conformsTo(hostCompleteClass);
+		PropertyDatum oldPropertyDatum = property2propertyDatum.put(property, propertyDatum);
+		assert oldPropertyDatum == null;
+		for (@NonNull CompleteClass superCompleteClass : targetCompleteClass.getSuperCompleteClasses()) {
+			if (superCompleteClass.conformsTo(hostCompleteClass)) {
+				PropertyDatum superPropDatum = getPropertyDatum(typedModel, superCompleteClass, property);
+				propertyDatum.getSuperPropertyDatums().add(superPropDatum);
 			}
 		}
-		// If not found we create it
-		PropertyDatum propertyDatum = createPropertyDatum(classDatum, property, property2propertyDatum);
-		{
-			Property oppositeProperty = property.getOpposite();
-			if (oppositeProperty != null) {
-				//	assert oppositeProperty != oclContainerProperty;
-				ClassDatum oppositeClassDatum = getClassDatum(QVTscheduleUtil.getReferredTypedModel(classDatum), PivotUtil.getOwningClass(oppositeProperty));
-				Map<@NonNull Property, @NonNull PropertyDatum> oppositeProperty2propertyDatum = getProperty2propertyDatum(oppositeClassDatum);
-				PropertyDatum oppositePropertyDatum = oppositeProperty2propertyDatum.get(oppositeProperty);
-				if (oppositePropertyDatum == null) {
-					Iterable<@NonNull PropertyDatum> allOppositePropertyDatums = getAllPropertyDatums(oppositeClassDatum);		// FIX why is this needed / not cached
-					for (PropertyDatum aPropertyDatum : allOppositePropertyDatums) {
-						if ((aPropertyDatum.getReferredProperty() == oppositeProperty) && (aPropertyDatum.getOwningClassDatum() == oppositeClassDatum)) {
-							oppositePropertyDatum = aPropertyDatum;
-							break;
-						}
-					}
-				}
-				if (oppositePropertyDatum == null) {
-					//					oppositePropertyDatum = createPropertyDatum(oppositeClassDatum, oppositeProperty, oppositeProperty2propertyDatum);
-				}
-				//				propertyDatum.setOpposite(oppositePropertyDatum);
-				//				oppositePropertyDatum.setOpposite(propertyDatum);
+		// Lazily assign the opposite
+		Property oppositeProperty = property.getOpposite();
+		if (oppositeProperty != null) {
+			//	assert oppositeProperty != oclContainerProperty;
+			ClassDatum oppositeClassDatum = getClassDatum(QVTscheduleUtil.getReferredTypedModel(classDatum), PivotUtil.getOwningClass(oppositeProperty));
+			Map<@NonNull Property, @NonNull PropertyDatum> oppositeProperty2propertyDatum = getProperty2propertyDatum(oppositeClassDatum);
+			PropertyDatum oppositePropertyDatum = oppositeProperty2propertyDatum.get(oppositeProperty);
+			if (oppositePropertyDatum != null) {
+				propertyDatum.setOpposite(oppositePropertyDatum);
+				oppositePropertyDatum.setOpposite(propertyDatum);
 			}
 		}
 		return propertyDatum;
@@ -421,29 +421,6 @@ public class DatumCaches
 			classDatum2property2propertyDatum.put(classDatum, property2propertyDatum);
 		}
 		return property2propertyDatum;
-	}
-
-	private @NonNull PropertyDatum createPropertyDatum(@NonNull ClassDatum classDatum,@NonNull Property property,
-			@NonNull Map<@NonNull Property, @NonNull PropertyDatum> property2propertyDatum) {
-		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
-		CompleteClass targetCompleteClass = classDatum.getCompleteClass();
-		org.eclipse.ocl.pivot.Class owningClass = QVTbaseUtil.getOwningClass(property);
-		CompleteClass hostCompleteClass = completeModel.getCompleteClass(owningClass);
-		PropertyDatum propertyDatum = QVTscheduleFactory.eINSTANCE.createPropertyDatum();
-		propertyDatum.setReferredTypedModel(typedModel);
-		propertyDatum.setReferredProperty(property);
-		propertyDatum.setName(property.getName());
-		propertyDatum.setOwningClassDatum(classDatum);
-		assert targetCompleteClass.conformsTo(hostCompleteClass);
-		for (@NonNull CompleteClass superCompleteClass : targetCompleteClass.getSuperCompleteClasses()) {
-			if (superCompleteClass.conformsTo(hostCompleteClass)) {
-				PropertyDatum superPropDatum = getPropertyDatum(typedModel, superCompleteClass, property);
-				propertyDatum.getSuperPropertyDatums().add(superPropDatum);
-			}
-		}
-		PropertyDatum oldPropertyDatum = property2propertyDatum.put(property, propertyDatum);
-		assert oldPropertyDatum == null;
-		return propertyDatum;
 	}
 
 	public @NonNull PropertyDatum getSuccessPropertyDatum(@NonNull Property successProperty) {  // FIXME Could this be more regular ?? <<success>> in the QVTm ??

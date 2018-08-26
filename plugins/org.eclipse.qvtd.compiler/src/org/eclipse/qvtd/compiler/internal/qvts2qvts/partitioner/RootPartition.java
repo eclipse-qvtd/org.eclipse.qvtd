@@ -31,7 +31,7 @@ public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Part
 {
 	protected final @NonNull Iterable<@NonNull Partition> partitions;
 	protected final @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors;
-	protected final @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2successors;
+	//	protected final @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2successors;
 	//	protected final @NonNull List<@NonNull MappingRegion> partitionedRegions;
 	protected final @NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> cyclicTraceClassAnalyses;
 	protected final @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> cyclicTracePropertyAnalyses;
@@ -39,15 +39,12 @@ public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Part
 	private @Nullable List<@NonNull Iterable<@NonNull Partition>> partitionSchedule = null;
 	private @Nullable List<@NonNull Collection<@NonNull Region>> regionSchedule = null;
 
-	public RootPartition(@NonNull Iterable<@NonNull Partition> partitions,
-			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors,
-			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2successors,
+	public RootPartition(@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors,
 			@NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> cyclicTraceClassAnalyses,
 			@NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> cyclicTracePropertyAnalyses) {
-		this.partitions = partitions;
+		this.partitions = partition2predecessors.keySet();
 		this.partition2predecessors = partition2predecessors;
-		this.partition2successors = partition2successors;
-		CompilerUtil.checkPredecessorsAndSuccessors(partitions, partition2predecessors, partition2successors);
+		//		this.partition2successors = partition2successors;
 		//	this.partitionedRegions = new ArrayList<>(Iterables.size(partitions));
 		this.cyclicTraceClassAnalyses = cyclicTraceClassAnalyses;
 		this.cyclicTracePropertyAnalyses = cyclicTracePropertyAnalyses;
@@ -67,7 +64,7 @@ public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Part
 	public @NonNull List<@NonNull Iterable<@NonNull Partition>> getPartitionSchedule() {
 		List<@NonNull Iterable<@NonNull Partition>> partitionSchedule2 = partitionSchedule;
 		if (partitionSchedule2 == null) {
-			partitionSchedule = partitionSchedule2 = CompilerUtil.computeParallelSchedule(partition2predecessors, partition2successors);
+			partitionSchedule = partitionSchedule2 = CompilerUtil.computeParallelSchedule(partition2predecessors);
 			for (@NonNull Partition partition : partitions) {
 				if (partition instanceof InternallyAcyclicPartition) {
 					((InternallyAcyclicPartition)partition).getPartitionSchedule();
@@ -100,10 +97,18 @@ public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Part
 				List<@NonNull Region> concurrentRegions = new ArrayList<>();
 				for (@NonNull Partition partition : concurrentPartitions) {
 					Region partitionRegion = partition.getRegion();
-					int partitionNumber = partitionRegion.getNextPartitionNumber();
-					MappingRegion mappingRegion = partition.createMicroMappingRegion(partitionNumber);
-					getScheduledRegion().getMappingRegions().add(mappingRegion);
-					concurrentRegions.add(mappingRegion);
+					if (partition instanceof CyclicPartition) {
+						for (@NonNull MappingRegion mappingRegion : ((CyclicPartition)partition).createMicroMappingRegions(partitionRegion)) {
+							getScheduledRegion().getMappingRegions().add(mappingRegion);
+							concurrentRegions.add(mappingRegion);
+						}
+					}
+					else {
+						int partitionNumber = partitionRegion.getNextPartitionNumber();
+						MappingRegion mappingRegion = partition.createMicroMappingRegion(partitionNumber);
+						getScheduledRegion().getMappingRegions().add(mappingRegion);
+						concurrentRegions.add(mappingRegion);
+					}
 				}
 				regionSchedule2.add(concurrentRegions);
 			}
