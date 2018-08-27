@@ -39,6 +39,12 @@ import com.google.common.collect.Sets;
 
 abstract class AbstractPartialPartition extends AbstractPartition
 {
+	/**
+	 * The QVTr synthesis includes trace synthesis with activators and local/globalSuccess to interlink.
+	 * The QVTc synthesis relies on the externally provided trace.
+	 */
+	protected final boolean hasSynthesizedTrace;
+
 	protected final @NonNull String name;
 
 	/**
@@ -75,6 +81,7 @@ abstract class AbstractPartialPartition extends AbstractPartition
 
 	protected AbstractPartialPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, @NonNull String suffix) {
 		super(partitioner);
+		this.hasSynthesizedTrace = scheduleManager.useActivators();
 		this.name = QVTscheduleUtil.getName(region) + suffix;
 		this.reachabilityForest = reachabilityForest;
 	}
@@ -154,7 +161,7 @@ abstract class AbstractPartialPartition extends AbstractPartition
 			}
 			case REALIZED: {
 				if (!partitioner.hasRealizedNode(node)) {
-					assert newNodeRole == Role.REALIZED || newNodeRole == Role.SPECULATION;
+					// FIXME QVTc fudge	assert newNodeRole == Role.REALIZED || newNodeRole == Role.SPECULATION;
 					partitioner.addRealizedNode(node);
 				}
 				else {

@@ -631,7 +631,7 @@ public class MappingPartitioner implements Nameable
 			return partition4qvtr();		// New algorithms with Dispatch/VerdictRegions to support overriding
 		}
 		else {
-			return partition4qvtc();		// Old algorithms pending debugging and exploitation of new algorithms
+			return partition4qvtr();		// Old algorithms pending debugging and exploitation of new algorithms
 		}
 	}
 
@@ -684,7 +684,7 @@ public class MappingPartitioner implements Nameable
 			return Collections.singletonList(createNonPartition());
 		}
 		String name = region.getName();
-		if ("mapNavigationOrAttributeCallExp_Helper_qvtr".equals(name)) {
+		if ("associationToForeignKey".equals(name)) {
 			getClass();
 		}
 		boolean isCyclic = transformationAnalysis.isCyclic(regionAnalysis);
@@ -692,16 +692,25 @@ public class MappingPartitioner implements Nameable
 		//	if (cycleAnalysis != null) {
 		//		isInfallible = cycleAnalysis.isInfallible();
 		//	}
-		List<@NonNull Node> predicatedWhenNodes = getPredicatedWhenNodes();
-		List<@NonNull Node> realizedExecutionNodes = getRealizedExecutionNodes();
+		boolean hasPredication = false;
 		boolean needsActivator = false;
-		if (realizedExecutionNodes.size() > 0)	{			// A 'single' realized "trace" node is a boring no-override top activation.
-			needsActivator = true;
+		boolean useActivators = scheduleManager.useActivators();
+		if (useActivators) {		// QVTr
+			List<@NonNull Node> predicatedWhenNodes = getPredicatedWhenNodes();
+			hasPredication = predicatedWhenNodes.size() > 0;
+			List<@NonNull Node> realizedExecutionNodes = getRealizedExecutionNodes();
+			if (realizedExecutionNodes.size() > 0)	{			// A 'single' realized "trace" node is a boring no-override top activation.
+				needsActivator = true;
+			}
+			else {
+				needsActivator = false;
+			}
 		}
-		else {
-			needsActivator = false;
+		else {		// legacy QVTc
+			Iterable<@NonNull Node> predicatedMiddleNodes = getPredicatedMiddleNodes();
+			hasPredication = !Iterables.isEmpty(predicatedMiddleNodes);
 		}
-		boolean needsSpeculation = isCyclic && (predicatedWhenNodes.size() > 0); //(dispatchedTraceNodes2.isEmpty() ? !predicatedMiddleNodes.isEmpty() : !predicatedMiddleNodes.containsAll(dispatchedTraceNodes2));
+		boolean needsSpeculation = isCyclic && hasPredication; //(dispatchedTraceNodes2.isEmpty() ? !predicatedMiddleNodes.isEmpty() : !predicatedMiddleNodes.containsAll(dispatchedTraceNodes2));
 		//
 		//	Create the partitioned regions
 		//
@@ -727,10 +736,19 @@ public class MappingPartitioner implements Nameable
 			//			if (isInfallible) {
 			//				regionAnalysis.getFallibilities()
 			//			}
-			regionAnalysis.createLocalSuccess();
-			newPartitions.add(createNewSpeculationPartition());
-			newPartitions.add(createNewSpeculatingPartition(/*isInfallible*/));
-			newPartitions.add(createNewSpeculatedPartition());
+			if (useActivators) {
+				regionAnalysis.createLocalSuccess();
+			}
+			NewSpeculationPartition speculationPartition = createNewSpeculationPartition();
+			NewSpeculatingPartition speculatingPartition = createNewSpeculatingPartition();
+			NewSpeculatedPartition speculatedPartition = createNewSpeculatedPartition();
+			newPartitions.add(speculationPartition);
+			newPartitions.add(speculatingPartition);
+			newPartitions.add(speculatedPartition);
+			if (!useActivators) {
+				speculatingPartition.addExplicitPredecessor(speculationPartition);
+				speculatedPartition.addExplicitPredecessor(speculatingPartition);
+			}
 			ReachabilityForest assignmentReachabilityForest	= new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
 			//
 			//	Create an AssignmentRegion for each to-be-realized edge to an output, which may also realize most trace edges too.

@@ -424,10 +424,10 @@ public class QVTcCompilerTests extends LoadTestCase
 		myQVT.setSuppressFailureDiagnosis(true);					// FIXME BUG 511028
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("rdbms", false, "SimpleUML2RDBMS.genmodel");
-			myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 12 : 11);
+			myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 10 : 11);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT.assertRegionCount(MicroMappingRegionImpl.class, NO_MERGES ? 0 : 3);
+			myQVT.assertRegionCount(MicroMappingRegionImpl.class, NO_MERGES ? 9 : 3);
 			//
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("uml", getModelsURI("uml2rdbms/samples/SimplerUMLPeople.xmi"));
@@ -476,10 +476,10 @@ public class QVTcCompilerTests extends LoadTestCase
 		myQVT.setSuppressFailureDiagnosis(true);					// FIXME BUG 511028
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("rdbms", false, "SimpleUML2RDBMS.genmodel");
-			myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 12 : 11);
+			myQVT.assertRegionCount(RuleRegionImpl.class, NO_MERGES ? 10 : 11);
 			myQVT.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
 			myQVT.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT.assertRegionCount(MicroMappingRegionImpl.class, NO_MERGES ? 0 : 3);
+			myQVT.assertRegionCount(MicroMappingRegionImpl.class, NO_MERGES ? 9 : 3);
 			//
 			URI inURI = URI.createPlatformResourceURI("/" + exampleProjectName + "/model/in/SimpleUMLPeople.xmi", true);
 			URI outURI = getTestURI("SimpleRDBMSPeople_CG.xmi");

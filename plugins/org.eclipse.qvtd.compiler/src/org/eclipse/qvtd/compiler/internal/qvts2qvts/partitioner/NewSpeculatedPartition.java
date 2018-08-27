@@ -1,9 +1,9 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2017 Willink Transformations and others.
+ * Copyright (c) 2016, 2018 Willink Transformations and others.
  * All rights reserved.   This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/legal/epl-v20.html
  *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
@@ -190,8 +190,10 @@ class NewSpeculatedPartition extends AbstractPartialPartition
 	protected void resolveTraceNodes() {
 		assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
 		addNode(traceNode, Role.PREDICATED);
-		Node globalSuccessNode = partitioner.getGlobalSuccessNode(traceNode);
-		addNode(globalSuccessNode, Role.PREDICATED);
+		if (scheduleManager.useActivators()) {
+			Node globalSuccessNode = partitioner.getGlobalSuccessNode(traceNode);
+			addNode(globalSuccessNode, Role.PREDICATED);
+		}
 		//	}
 		//		}
 		//		for (@NonNull Node traceNode : executionNodes) {

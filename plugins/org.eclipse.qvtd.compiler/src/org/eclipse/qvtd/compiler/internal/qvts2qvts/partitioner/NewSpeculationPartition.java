@@ -1,9 +1,9 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2017 Willink Transformations and others.
+ * Copyright (c) 2016, 2018 Willink Transformations and others.
  * All rights reserved.   This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/legal/epl-v20.html
  *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
@@ -51,6 +51,14 @@ class NewSpeculationPartition extends AbstractPartialPartition
 		this.dispatchNode = partitioner.basicGetDispatchNode();
 
 		//
+		//	The realized middle (trace) nodes become speculation nodes.
+		//
+		if (!hasSynthesizedTrace) {
+			for (@NonNull Node traceNode : partitioner.getTraceNodes()) {
+				addNode(traceNode, Role.SPECULATION);
+			}
+		}
+		//
 		//	For a no-override top relation the realized middle (trace) nodes become speculated nodes.
 		//	For an override top relation the predicated middle (trace) nodes become speculated nodes.
 		//	For a non-top relation the predicated middle (trace) nodes become speculated nodes.
@@ -83,21 +91,28 @@ class NewSpeculationPartition extends AbstractPartialPartition
 			}
 		}
 		for (@NonNull Node node : checkableOldNodes) {
-			boolean isCyclicCorollary = transformationAnalysis.isCorollary(node) && partitioner.isCyclic(node);  // waiting for a cyclic corollary could deadlock
-			//			boolean isPredicated = node.isPredicated();
-			//			boolean isMatched = node.isMatched();
-			//			boolean isUnconditional = node.isUnconditional();
-			Utility utility = node.getUtility();
-			boolean isWeaklyMatched = utility == Utility.WEAKLY_MATCHED;
-			boolean isTraced = isTraced(node, executionNodes);
-			if (!isCyclicCorollary && (isTraced || isWeaklyMatched)) {
+			if (hasSynthesizedTrace) {
+				boolean isCyclicCorollary = transformationAnalysis.isCorollary(node) && partitioner.isCyclic(node);  // waiting for a cyclic corollary could deadlock
+				//			boolean isPredicated = node.isPredicated();
+				//			boolean isMatched = node.isMatched();
+				//			boolean isUnconditional = node.isUnconditional();
+				Utility utility = node.getUtility();
+				boolean isWeaklyMatched = utility == Utility.WEAKLY_MATCHED;
+				boolean isTraced = isTraced(node, executionNodes);
+				if (!isCyclicCorollary && (isTraced || isWeaklyMatched)) {
+					addNode(node);
+				}
+			}
+			else {
 				addNode(node);
 			}
 		}
 		//
 		//	The localSuccess nodes are realized to track speculating success.
 		//
-		resolveSuccessNodes();
+		if (hasSynthesizedTrace) {
+			resolveSuccessNodes();
+		}
 		//
 		//	Add the outstanding predicates that can be checked by this partition.
 		//
@@ -125,7 +140,6 @@ class NewSpeculationPartition extends AbstractPartialPartition
 	 * Add all old nodes, including node, that have no cyclic dependency and are reachable by to-one navigation from node.
 	 */
 	protected void gatherReachableOldAcyclicNodes(@NonNull Set<@NonNull Node> checkableOldNodes, @NonNull Node node) {
-		//		boolean isNeeded = false;
 		if (!hasNode(node) && !checkableOldNodes.contains(node) && (node.isHead() || node.isOld() && !partitioner.isCyclic(node))) {
 			checkableOldNodes.add(node);
 			for (@NonNull NavigableEdge edge : node.getNavigableEdges()) {
@@ -135,7 +149,6 @@ class NewSpeculationPartition extends AbstractPartialPartition
 				}
 			}
 		}
-		//		return isNeeded;
 	}
 
 	@Override

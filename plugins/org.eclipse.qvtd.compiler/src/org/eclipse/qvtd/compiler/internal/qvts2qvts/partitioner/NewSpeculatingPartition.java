@@ -1,9 +1,9 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2017 Willink Transformations and others.
+ * Copyright (c) 2016, 2018 Willink Transformations and others.
  * All rights reserved.   This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/legal/epl-v20.html
  *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
@@ -21,6 +21,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
@@ -42,36 +43,48 @@ class NewSpeculatingPartition extends AbstractPartialPartition
 		super(partitioner, reachabilityForest, "«speculating»");
 		this.traceNode = partitioner.getTraceNode();
 		this.executionNodes = partitioner.getExecutionNodes();
-		//
-		//	For a no-override top relation the realized middle (trace) nodes become speculated nodes.
-		//	For an override top relation the predicated middle (trace) nodes become speculated nodes.
-		//	For a non-top relation the predicated middle (trace) nodes become speculated nodes.
-		//
-		for (@NonNull Node traceNode : executionNodes) {
-			addNode(traceNode, Role.PREDICATED); //, Role.SPECULATED);
+		if (hasSynthesizedTrace) {
+			//
+			//	For a no-override top relation the realized middle (trace) nodes become speculated nodes.
+			//	For an override top relation the predicated middle (trace) nodes become speculated nodes.
+			//	For a non-top relation the predicated middle (trace) nodes become speculated nodes.
+			//
+			for (@NonNull Node traceNode : executionNodes) {
+				addNode(traceNode, Role.PREDICATED); //, Role.SPECULATED);
+			}
+			//
+			//	For an override relation the predicated middle dispatch nodes become speculated nodes.
+			//
+			Node dispatchNode = partitioner.basicGetDispatchNode();
+			if (dispatchNode != null) {
+				assert dispatchNode.isPredicated();
+				addNode(dispatchNode);
+			}
 		}
-		//
-		//	For an override relation the predicated middle dispatch nodes become speculated nodes.
-		//
-		Node dispatchNode = partitioner.basicGetDispatchNode();
-		if (dispatchNode != null) {
-			assert dispatchNode.isPredicated();
-			addNode(dispatchNode);
+		else {
+			//
+			//	The realized middle (trace) nodes become speculated head nodes and their already realized edge ends populate tracedInputNodes.
+			//
+			resolveTraceNodes();
 		}
 		//
 		//	The cyclic predicated middle nodes become speculated guard nodes and all preceding
 		//	navigations are retained as is.
 		//
-		//		resolvePredicatedMiddleNodes();
-		for (@NonNull Node whenNode : partitioner.getPredicatedWhenNodes()) {
-			if (!partitioner.hasPredicatedNode(whenNode)) {
-				addNode(whenNode); //, Role.SPECULATED);
+		if (hasSynthesizedTrace) {
+			for (@NonNull Node whenNode : partitioner.getPredicatedWhenNodes()) {
+				if (!partitioner.hasPredicatedNode(whenNode)) {
+					addNode(whenNode); //, Role.SPECULATED);
+				}
 			}
 		}
-		//
-		//	The predicated output nodes and all preceding navigations are retained as is.
-		//
-		//		resolvePredicatedOutputNodes();
+		else {
+			resolvePredicatedMiddleNodes();
+			//
+			//	The predicated output nodes and all preceding navigations are retained as is.
+			//
+			resolvePredicatedOutputNodes();
+		}
 		//
 		//	The localSuccess nodes are predicated, and the globalSuccess realized to sequence speculating/speculation/speculated partitions.
 		//
@@ -124,8 +137,8 @@ class NewSpeculatingPartition extends AbstractPartialPartition
 	//		return edge.isUnconditional(); //true;		// FIXME perform compile-time speculation resolution
 	//	}
 
-	/*	private boolean isDownstreamFromCorollary(@NonNull Node node) {
-		if (isCorollary(node)) {
+	private boolean isDownstreamFromCorollary(@NonNull Node node) {
+		if (transformationAnalysis.isCorollary(node)) {
 			return true;
 		}
 		if (node.isOperation()) {
@@ -149,7 +162,7 @@ class NewSpeculatingPartition extends AbstractPartialPartition
 			}
 		}
 		return true;
-	} */
+	}
 
 	protected void resolveConstantOutputNodes(/*boolean isInfallible*/) {
 		//	Set<@NonNull Node> fallibleNodes = null;
@@ -253,6 +266,14 @@ class NewSpeculatingPartition extends AbstractPartialPartition
 		}
 	}
 
+	protected void resolvePredicatedOutputNodes() {
+		for (@NonNull Node node : partitioner.getPredicatedOutputNodes()) {
+			if (!hasNode(node) && !transformationAnalysis.isCorollary(node) && !isDownstreamFromCorollary(node)) {
+				addNode(node, QVTscheduleUtil.getNodeRole(node));
+			}
+		}
+	}
+
 	/*	protected void resolvePredicatedOutputNodes() {
 		for (@NonNull Node node : partitioner.getPredicatedOutputNodes()) {
 			if (!hasNode(node) && !isCorollary(node) && !isDownstreamFromCorollary(node)) {
@@ -294,21 +315,21 @@ class NewSpeculatingPartition extends AbstractPartialPartition
 			} */
 	}
 
-	/*	protected void resolveTraceNode() {
+	protected void resolveTraceNodes() {
 		Iterable<@NonNull Node> traceNodes = partitioner.getTraceNodes();		// Just 1 speculated middle node
 		for (@NonNull Node traceNode : traceNodes) {
 			addNode(traceNode, Role.SPECULATED);
 		}
-		/ *		for (@NonNull Node traceNode : traceNodes) {
-			for (@NonNull NavigableEdge edge : traceNode.getNavigationEdges()) {
+		for (@NonNull Node traceNode : traceNodes) {
+			for (@NonNull NavigableEdge edge : traceNode.getNavigableEdges()) {
 				if (partitioner.hasRealizedEdge(edge)) {
 					tracedInputNodes.add(edge.getEdgeTarget());
 				}
 			}
-			Node successNode = partitioner.getSuccessNode(traceNode);		// FIXME only optional because trace property can be missing
-			if (successNode != null) {
-				addNode(successNode, Role.REALIZED);
+			Node globalSuccessNode = partitioner.basicGetGlobalSuccessNode(traceNode);		// FIXME only optional because trace property can be missing
+			if (globalSuccessNode != null) {
+				addNode(globalSuccessNode, Role.REALIZED);
 			}
-		} * /
-	} */
+		}
+	}
 }
