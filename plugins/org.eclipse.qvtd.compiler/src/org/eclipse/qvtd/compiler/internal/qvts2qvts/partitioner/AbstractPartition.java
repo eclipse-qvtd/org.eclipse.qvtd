@@ -52,11 +52,6 @@ abstract class AbstractPartition extends AbstractPartialRegionAnalysis<@NonNull 
 	//	}
 
 	@Override
-	public @Nullable Iterable<@NonNull Partition> getSuccessors() {
-		return null;
-	}
-
-	@Override
 	public void setDepth(int parallelScheduleDepth) {
 		this.parallelScheduleDepth = parallelScheduleDepth;
 	}

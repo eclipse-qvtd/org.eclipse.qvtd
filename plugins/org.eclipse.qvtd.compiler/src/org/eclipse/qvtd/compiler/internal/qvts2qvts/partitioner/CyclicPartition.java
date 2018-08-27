@@ -50,19 +50,10 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	protected final @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors = new HashMap<>();
 
 	/**
-	 *	Map of nested partition to its acyclic successors within the cyclic partition.
-	 */
-	protected final @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2successors = new HashMap<>();
-
-	/**
 	 * The predecessors of the cyclic partition outside the cyclic partition.
 	 */
 	protected final @NonNull Set<@NonNull Partition> externalPredecessors = new HashSet<>();
 
-	/**
-	 * The successors of the cyclic partition outside the cyclic partition.
-	 */
-	protected final @NonNull Set<@NonNull Partition> externalSuccessors = new HashSet<>();
 	protected final @NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> traceClassAnalyses;
 	protected final @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> tracePropertyAnalyses;
 	private @Nullable List<@NonNull Iterable<@NonNull Partition>> partitionSchedule = null;
@@ -70,7 +61,6 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 
 	public CyclicPartition(@NonNull TransformationPartitioner transformationPartitioner, @NonNull String name, @NonNull CyclicPartitionsAnalysis cyclesAnalysis, @NonNull Set<@NonNull Partition> partitions,
 			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors,
-			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2successors,
 			@NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> traceClassAnalyses,
 			@NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> tracePropertyAnalyses) {
 		super(transformationPartitioner, QVTscheduleFactory.eINSTANCE.createCyclicMappingRegion());	// FIXME orphan region
@@ -83,14 +73,8 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 			internalPredecessors.remove(partition);
 			internalPredecessors.retainAll(partitions);
 			this.partition2predecessors.put(partition, internalPredecessors);
-			Set<@NonNull Partition> internalSuccessors = new HashSet<>(partition2successors.get(partition));
-			externalSuccessors.addAll(internalSuccessors);
-			internalSuccessors.remove(partition);
-			internalSuccessors.retainAll(partitions);
-			this.partition2successors.put(partition, internalSuccessors);
 		}
 		externalPredecessors.removeAll(partitions);
-		externalSuccessors.removeAll(partitions);
 		this.traceClassAnalyses = traceClassAnalyses;
 		this.tracePropertyAnalyses = tracePropertyAnalyses;
 		assert !partitions.isEmpty();
@@ -195,11 +179,6 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 			}
 		}
 		return regionSchedule2;
-	}
-
-	@Override
-	public @NonNull Set<@NonNull Partition> getSuccessors() {
-		return externalSuccessors;
 	}
 
 	@Override

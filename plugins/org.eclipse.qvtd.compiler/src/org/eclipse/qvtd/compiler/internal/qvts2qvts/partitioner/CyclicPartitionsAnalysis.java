@@ -100,7 +100,7 @@ public class CyclicPartitionsAnalysis
 			return new RootPartition(leafPartition2predecessors, cyclicTraceClassAnalyses, cyclicTracePropertyAnalyses);
 		}
 		intersections.add(Sets.newHashSet(leafPartitions));
-		return createAcyclicPartitionHierarchy(intersections, leafPartition2predecessors, leafPartition2successors);
+		return createAcyclicPartitionHierarchy(intersections, leafPartition2predecessors);
 	}
 
 	/*	private @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> computeLocalPartition2Predecessors(@NonNull Iterable<@NonNull Partition> partitions,
@@ -243,8 +243,7 @@ public class CyclicPartitionsAnalysis
 	 * @param leafPartition2successors
 	 */
 	private @NonNull RootPartition createAcyclicPartitionHierarchy(@NonNull Iterable<@NonNull Set<@NonNull Partition>> partitionings,
-			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors,
-			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2successors) {
+			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors) {
 		List<@NonNull Set<@NonNull Partition>> sortedPartitionings = Lists.newArrayList(partitionings);
 		Collections.sort(sortedPartitionings, QVTbaseUtil.CollectionSizeComparator.INSTANCE);	// Smallest first
 		//
@@ -263,17 +262,15 @@ public class CyclicPartitionsAnalysis
 			//	CyclicPartition nestedCyclicPartition = createCyclicPartition(cycleName, nestedPartitioning, partition2predecessors, partition2successors);
 			Set<@NonNull TraceClassAnalysis<@NonNull Partition>> cyclicTraceClassAnalyses = computeTraceClassAnalysisDependencies(nestedPartitioning);
 			Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> cyclicTracePropertyAnalyses = computeTracePropertyAnalysisDependencies(nestedPartitioning);
-			CyclicPartition nestedCyclicPartition = new CyclicPartition(transformationPartitioner, cycleName, this, nestedPartitioning, partition2predecessors, partition2successors, cyclicTraceClassAnalyses, cyclicTracePropertyAnalyses);
+			CyclicPartition nestedCyclicPartition = new CyclicPartition(transformationPartitioner, cycleName, this, nestedPartitioning, partition2predecessors, cyclicTraceClassAnalyses, cyclicTracePropertyAnalyses);
 			acyclicPartitionHierarchy.add(nestedCyclicPartition);
 			//
 			for (@NonNull Partition nestedPartition : nestedPartitioning) {
 				CyclicPartition oldCycleAnalysis = partition2cyclicPartition.put(nestedPartition, nestedCyclicPartition);
 				assert oldCycleAnalysis == null;
 				partition2predecessors.remove(nestedPartition);
-				partition2successors.remove(nestedPartition);
 			}
 			partition2predecessors.put(nestedCyclicPartition, nestedCyclicPartition.getPredecessors());
-			partition2successors.put(nestedCyclicPartition, nestedCyclicPartition.getSuccessors());
 			//
 			for (@NonNull TraceClassAnalysis<@NonNull Partition> cyclicTraceClassAnalysis : cyclicTraceClassAnalyses) {
 				CyclicPartition oldCycleAnalysis = traceClassAnalysis2cyclicPartition.put(cyclicTraceClassAnalysis, nestedCyclicPartition);
@@ -300,14 +297,6 @@ public class CyclicPartitionsAnalysis
 					int newSize = predecessors.size();
 					assert (oldSize - newSize) == nestedPartitioning.size();
 					predecessors.add(nestedCyclicPartition);
-				}
-				Set<@NonNull Partition> successors = partition2successors.get(partition);
-				assert successors != null;
-				oldSize = successors.size();
-				if (successors.removeAll(nestedPartitioning)) {
-					int newSize = successors.size();
-					assert (oldSize - newSize) == nestedPartitioning.size();
-					successors.add(nestedCyclicPartition);
 				}
 			}
 		}

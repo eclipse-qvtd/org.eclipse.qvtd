@@ -649,9 +649,7 @@ public class MappingPartitioner implements Nameable
 				newPartitions.add(speculationPartition);
 				newPartitions.add(speculatingPartition);
 				newPartitions.add(speculatedPartition);
-				speculationPartition.addSuccessor(speculatingPartition);
 				speculatingPartition.addPredecessor(speculationPartition);
-				speculatingPartition.addSuccessor(speculatedPartition);
 				speculatedPartition.addPredecessor(speculatingPartition);
 			}
 			else {

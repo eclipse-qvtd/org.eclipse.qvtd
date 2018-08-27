@@ -29,8 +29,6 @@ public interface PartialRegionAnalysis<@NonNull RA extends PartialRegionAnalysis
 	@Nullable Iterable<@NonNull RA> getPredecessors();
 	@Nullable Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> getProducedTraceClassAnalyses();
 	@Nullable Iterable<@NonNull TracePropertyAnalysis<@NonNull RA>> getProducedTracePropertyAnalyses();
-	@Deprecated /** @deprecated This accommodates the lack of a success trace variable for manual trace classes */
-	@Nullable Iterable<@NonNull RA> getSuccessors();
 	@Nullable Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> getSuperProducedTraceClassAnalyses();
 	@NonNull TraceClassAnalysis<@NonNull RA> getTraceClassAnalysis(@NonNull ClassDatum traceClassDatum);
 	@NonNull TracePropertyAnalysis<@NonNull RA> getTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum);
