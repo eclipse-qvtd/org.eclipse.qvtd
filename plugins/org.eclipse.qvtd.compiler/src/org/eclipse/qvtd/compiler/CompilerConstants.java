@@ -14,6 +14,5 @@ import org.eclipse.jdt.annotation.NonNull;
 
 public class CompilerConstants
 {
-	@SuppressWarnings("null")
 	public static final @NonNull String PLUGIN_ID = CompilerConstants.class.getPackage().getName();
 }

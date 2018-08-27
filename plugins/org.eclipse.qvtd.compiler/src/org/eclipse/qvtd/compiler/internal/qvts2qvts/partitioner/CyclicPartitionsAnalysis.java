@@ -20,17 +20,8 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -131,7 +122,7 @@ public class CyclicPartitionsAnalysis
 	 *
 	 * This partition variant considers only head (trace) nodes and their DataType attributes to avoid regenerating
 	 * the cycic dependencies.
-	 */
+	 *
 	private @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> computePredecessors(@NonNull Iterable<@NonNull Partition> partitions) {
 		Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> consumer2producers = new HashMap<>();
 		for (@NonNull Partition partition : partitions) {
@@ -172,7 +163,7 @@ public class CyclicPartitionsAnalysis
 					}
 				}
 			}
-			/*			Iterable<@NonNull TraceClassAnalysis<@NonNull Partition>> consumedTraceClassAnalyses = consumer.getConsumedTraceClassAnalyses();
+			/ *			Iterable<@NonNull TraceClassAnalysis<@NonNull Partition>> consumedTraceClassAnalyses = consumer.getConsumedTraceClassAnalyses();
 			if (consumedTraceClassAnalyses != null) {
 				for (@NonNull TraceClassAnalysis<@NonNull Partition> consumedTraceClassAnalysis : consumedTraceClassAnalyses) {
 					for (@NonNull TraceClassAnalysis<@NonNull Partition> subConsumedTraceClass : consumedTraceClassAnalysis.getSubTraceClassAnalyses()) {
@@ -194,10 +185,10 @@ public class CyclicPartitionsAnalysis
 						producers.add(producer);
 					}
 				}
-			} */
+			} * /
 		}
 		return consumer2producers;
-	}
+	} */
 
 	private @NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> computeTraceClassAnalysisDependencies(@NonNull Iterable<@NonNull Partition> nestedPartitions) {
 		Set<@NonNull TraceClassAnalysis<@NonNull Partition>> consumedTraceClassAnalyses = new HashSet<>();

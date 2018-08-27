@@ -287,28 +287,8 @@ public class MappingPartitioner implements Nameable
 		return new AssignmentPartition(this, reachabilityForest, outputEdge);
 	}
 
-	private @NonNull NewSpeculatedPartition createNewSpeculatedPartition() {
-		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		return new NewSpeculatedPartition(this, reachabilityForest);
-	}
-
-	private @NonNull NewSpeculatingPartition createNewSpeculatingPartition(/*boolean isInfallible*/) {
-		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		return new NewSpeculatingPartition(this, reachabilityForest/*, isInfallible*/);
-	}
-
-	private @NonNull NewSpeculationPartition createNewSpeculationPartition() {
-		ReachabilityForest reachabilityForest = new ReachabilityForest(getSpeculationReachabilityRootNodes(), getAvailableNavigableEdges());
-		return new NewSpeculationPartition(this, reachabilityForest);
-	}
-
 	private @NonNull NonPartition createNonPartition() {
 		return new NonPartition(this);
-	}
-
-	private @NonNull RealizedPartition createRealizedPartition() {
-		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		return new RealizedPartition(this, reachabilityForest);
 	}
 
 	private @NonNull ResidualPartition createResidualPartition() {
@@ -321,9 +301,9 @@ public class MappingPartitioner implements Nameable
 		return new SpeculatedPartition(this, reachabilityForest);
 	}
 
-	private @NonNull SpeculatingPartition createSpeculatingPartition() {
+	private @NonNull SpeculatingPartition createSpeculatingPartition(/*boolean isInfallible*/) {
 		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		return new SpeculatingPartition(this, reachabilityForest);
+		return new SpeculatingPartition(this, reachabilityForest/*, isInfallible*/);
 	}
 
 	private @NonNull SpeculationPartition createSpeculationPartition() {
@@ -626,60 +606,6 @@ public class MappingPartitioner implements Nameable
 	} */
 
 	public @NonNull Iterable<@NonNull Partition> partition() {
-		boolean useActivators = scheduleManager.useActivators();
-		if (useActivators) {
-			return partition4qvtr();		// New algorithms with Dispatch/VerdictRegions to support overriding
-		}
-		else {
-			return partition4qvtr();		// Old algorithms pending debugging and exploitation of new algorithms
-		}
-	}
-
-	public @NonNull Iterable<@NonNull Partition> partition4qvtc() {
-		boolean isCyclic = transformationAnalysis.isCyclic(regionAnalysis);
-		List<@NonNull Partition> newPartitions = new ArrayList<>();
-		if (!isCyclic) {	// Cycle analysis found no cycles
-			newPartitions.add(createNonPartition());
-		}
-		else {
-			if (!Iterables.isEmpty(getPredicatedMiddleNodes())) {
-				SpeculationPartition speculationPartition = createSpeculationPartition();
-				SpeculatingPartition speculatingPartition = createSpeculatingPartition();
-				SpeculatedPartition speculatedPartition = createSpeculatedPartition();
-				newPartitions.add(speculationPartition);
-				newPartitions.add(speculatingPartition);
-				newPartitions.add(speculatedPartition);
-				speculatingPartition.addExplicitPredecessor(speculationPartition);
-				speculatedPartition.addExplicitPredecessor(speculatingPartition);
-			}
-			else {
-				newPartitions.add(createRealizedPartition());
-			}
-			ReachabilityForest assignmentReachabilityForest	= new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-			//
-			//	Create an AssignmentRegion for each to-be-realized edge to an output, which may also realize most trace edges too.
-			//
-			for (@NonNull NavigableEdge outputEdge : getRealizedOutputEdges()) {
-				if (!hasRealizedEdge(outputEdge)) {
-					newPartitions.add(createAssignmentPartition(assignmentReachabilityForest, outputEdge));
-				}
-			}
-			//
-			//	Create an AssignmentRegion for each still to-be-realized edge to an output.
-			//
-			for (@NonNull NavigableEdge edge : getRealizedEdges()) {
-				if (!hasRealizedEdge(edge)) {
-					newPartitions.add(createAssignmentPartition(assignmentReachabilityForest, edge));
-				}
-			}
-		}
-		if (newPartitions.size() > 1) {		// FIXME shouldn't this work anyway when no partitioning was needed?
-			check(/*false*/);
-		}
-		return newPartitions;
-	}
-
-	public @NonNull Iterable<@NonNull Partition> partition4qvtr() {
 		if ((region instanceof DispatchRegion) || (region instanceof VerdictRegion)) {
 			return Collections.singletonList(createNonPartition());
 		}
@@ -739,9 +665,9 @@ public class MappingPartitioner implements Nameable
 			if (useActivators) {
 				regionAnalysis.createLocalSuccess();
 			}
-			NewSpeculationPartition speculationPartition = createNewSpeculationPartition();
-			NewSpeculatingPartition speculatingPartition = createNewSpeculatingPartition();
-			NewSpeculatedPartition speculatedPartition = createNewSpeculatedPartition();
+			SpeculationPartition speculationPartition = createSpeculationPartition();
+			SpeculatingPartition speculatingPartition = createSpeculatingPartition();
+			SpeculatedPartition speculatedPartition = createSpeculatedPartition();
 			newPartitions.add(speculationPartition);
 			newPartitions.add(speculatingPartition);
 			newPartitions.add(speculatedPartition);

@@ -926,7 +926,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	}
 
 	protected void createSchedule2(@NonNull RootPartition rootPartition) {
-		ScheduledRegion rootScheduledRegion = rootPartition.getScheduledRegion();
+		//	ScheduledRegion rootScheduledRegion = rootPartition.getScheduledRegion();
 		//
 		//	Replace multi-region recursions by single nested region recursions.
 		//
@@ -968,8 +968,8 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//		}
 		//	ScheduleIndexer scheduleIndexer = new ScheduleIndexer(scheduleManager, rootScheduledRegion);
 		//	scheduleIndexer.schedule(rootScheduledRegion);
-		NewScheduleState scheduleIndexer = new NewScheduleState(scheduleManager, rootPartition);
-		scheduleIndexer.schedule(rootPartition);
+		ScheduleAnalysis scheduleAnalysis = new ScheduleAnalysis(scheduleManager, rootPartition);
+		scheduleAnalysis.schedule(rootPartition);
 		for (@NonNull RootPartition aRootPartition : allRootPartitions) {
 			List<@NonNull Collection<@NonNull Region>> newRegionSchedule = aRootPartition.getRegionSchedule();
 			//	List<@NonNull Collection<@NonNull Region>> oldRegionSchedule = new ArrayList<>();
@@ -1123,7 +1123,6 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	private void lateMerge(@NonNull RootPartition rootPartition, @NonNull List<@NonNull Collection<@NonNull Region>> parallelSchedule,
 			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges,
 			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges) {
-		@NonNull List<@NonNull Region> zorderedRegions;
 		Map<@NonNull Region, @NonNull Integer> region2depth = new HashMap<>();
 		int parallelDepth = 0;
 		for (@NonNull Iterable<@NonNull Region> orderedRegions : parallelSchedule) {
@@ -1191,6 +1190,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			Iterable<@NonNull MappingRegion> mappingRegions = QVTscheduleUtil.getMappingRegions(scheduledRegion);
 			assert Iterables.isEmpty(mappingRegions);
 			scheduledRegion.setOwnedLoadingRegion(loadingRegionAnalysis.getRegion());
+			@SuppressWarnings("unused")
 			List<@NonNull Collection<@NonNull Region>> regionSchedule = rootPartition.getRegionSchedule();
 			createSchedule1(rootPartition);
 			createSchedule2(rootPartition);

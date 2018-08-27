@@ -210,7 +210,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		}
 		//		Node operationNode = nestedAnalyzer.createOperationNode(nodeName, typedElement, sourceAndArgumentNodes);
 		Node operationNode = context.createIfNode(isUnconditional(), nodeName, ifExp, sourceAndArgumentNodes);
-		org.eclipse.ocl.pivot.Class selfType = standardLibraryHelper.getStandardLibrary().getBooleanType();
+		//	org.eclipse.ocl.pivot.Class selfType = standardLibraryHelper.getStandardLibrary().getBooleanType();
 		Parameter conditionParameter = qvtbaseLibraryHelper.getIfConditionParameter();
 		Parameter thenParameter = qvtbaseLibraryHelper.getIfThenParameter();
 		Parameter elseParameter = qvtbaseLibraryHelper.getIfElseParameter();
@@ -772,7 +772,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		} */
 	}
 
-	private @NonNull Node synthesizeOperationCallExp_oclIsKindOf(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
+	/*	private @NonNull Node synthesizeOperationCallExp_oclIsKindOf(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
 		Operation referredOperation = QVTbaseUtil.getReferredOperation(operationCallExp);
 		OCLExpression source = QVTbaseUtil.getOwnedSource(operationCallExp);
 		OCLExpression argument = QVTbaseUtil.getOwnedArgument(operationCallExp, 0);
@@ -806,7 +806,7 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 			}
 		}
 		return operationNode;
-	}
+	} */
 
 	private @NonNull Node synthesizeOperationCallExp_oclContainer(@NonNull Node sourceNode, @NonNull OperationCallExp operationCallExp) {
 		//		Type castType = QVTbaseUtil.getType(operationCallExp);
@@ -1124,9 +1124,9 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		else if (QVTbaseUtil.isSameOperation(operationId, standardLibraryHelper.getOclElementOclContainerId())) {
 			return synthesizeOperationCallExp_oclContainer(sourceNode, operationCallExp);
 		}
-	//	else if (QVTbaseUtil.isSameOperation(operationId, standardLibraryHelper.getOclAnyOclIsKindOfId())) {
-	//		return synthesizeOperationCallExp_oclIsKindOf(sourceNode, operationCallExp);
-	//	}
+		//	else if (QVTbaseUtil.isSameOperation(operationId, standardLibraryHelper.getOclAnyOclIsKindOfId())) {
+		//		return synthesizeOperationCallExp_oclIsKindOf(sourceNode, operationCallExp);
+		//	}
 		else if ((operationCallExp.eContainer() instanceof Predicate)
 				&& (sourceNode.getCompleteClass().getPrimaryClass() instanceof CollectionType)
 				&& "includes".equals(operationName)) {

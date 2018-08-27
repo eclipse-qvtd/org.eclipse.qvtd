@@ -284,7 +284,7 @@ public class DatumCaches
 			Iterable<@NonNull Property> containmentProperties = containmentAnalysis.getContainmentProperties(containedCompleteClass);
 			for (@NonNull Property containmentProperty : containmentProperties) {
 				//	CompleteClass containingCompleteClass = scheduleManager.getEnvironmentFactory().getCompleteModel().getCompleteClass(PivotUtil.getOwningClass(containmentProperty));
-				ClassDatum containingClassDatum = getClassDatum(containedClassDatum.getReferredTypedModel(), PivotUtil.getOwningClass(containmentProperty));
+				ClassDatum containingClassDatum = getClassDatum(QVTscheduleUtil.getReferredTypedModel(containedClassDatum), PivotUtil.getOwningClass(containmentProperty));
 				oclContainerPropertyDatums.add(getPropertyDatum(containingClassDatum, containmentProperty));
 			}
 		}

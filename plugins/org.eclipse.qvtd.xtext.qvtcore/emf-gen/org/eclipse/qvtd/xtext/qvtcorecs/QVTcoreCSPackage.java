@@ -1054,6 +1054,7 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
+	@Deprecated
 	int PREDICATE_CS__PRECEDENCE = EssentialOCLCSPackage.EXP_CS__PRECEDENCE;
 
 	/**
@@ -1190,6 +1191,7 @@ public interface QVTcoreCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
+	@Deprecated
 	int PREDICATE_OR_ASSIGNMENT_CS__PRECEDENCE = EssentialOCLCSPackage.EXP_CS__PRECEDENCE;
 
 	/**

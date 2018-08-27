@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015, 2017 Willink Transformations and others.
+ * Copyright (c) 2015, 2018 Willink Transformations and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -21,16 +22,21 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 
 /**
- * ScheduleCache provides the immutable caches used during the schedule index allocation.
+ * ScheduleAnalysis analyses a sequence of concurrent partitions to identofy the necessary connections.
  */
-public abstract class ScheduleCache
+public class ScheduleAnalysis
 {
+	protected final @NonNull ScheduleManager scheduleManager;
+	protected final @NonNull RootPartition rootPartition;
+
 	/**
 	 * The overall RootScheduledRegion.
 	 */
@@ -100,8 +106,10 @@ public abstract class ScheduleCache
 	 */
 	private final @NonNull Set<@NonNull Region> unpassedRegions = new HashSet<>();
 
-	protected ScheduleCache(@NonNull ScheduledRegion scheduledRegion) {
-		this.scheduledRegion = scheduledRegion;
+	protected ScheduleAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull RootPartition rootPartition) {
+		this.scheduleManager = scheduleManager;
+		this.rootPartition = rootPartition;
+		this.scheduledRegion = rootPartition.getScheduledRegion();
 		this.callableRegions = analyzeRegions(scheduledRegion, new ArrayList<>());
 		Collections.sort(this.callableRegions, NameUtil.NAMEABLE_COMPARATOR);
 		//
@@ -383,6 +391,11 @@ public abstract class ScheduleCache
 		return target2sources;
 	}
 
+	protected void buildCallTree() {
+		CallTreeBuilder callTreeBuilder = new CallTreeBuilder(this);
+		callTreeBuilder.buildTree(scheduledRegion, rootPartition.getRegionSchedule());
+	}
+
 	public Region getCommonRegion(@NonNull Region firstRegion, @NonNull Region secondRegion) {
 		Region thisRegion = firstRegion;
 		Region thatRegion = secondRegion;
@@ -469,6 +482,70 @@ public abstract class ScheduleCache
 
 	protected boolean isPassed(@NonNull Region region) {
 		return !unpassedRegions.contains(region);
+	}
+
+	private void propagateIndexes(@NonNull DatumConnection<?> connection) {
+		List<@NonNull Integer> connectionIndexes = connection.getIndexes();
+		if (connectionIndexes.size() > 0) {			// Empty for dead inputs
+			for (@NonNull Region region : getTargetRegions(connection)) {
+				int invocationIndex = region.getInvocationIndex();
+				boolean propagateThroughRegion = false;
+				for (int connectionIndex : connectionIndexes) {
+					if ((connectionIndex > invocationIndex) && region.addIndex(connectionIndex)) {
+						propagateThroughRegion = true;
+					}
+				}
+				if (propagateThroughRegion) {
+					Iterable<@NonNull DatumConnection<?>> outgoingConnections = getOutgoingConnections(region);
+					for (@NonNull DatumConnection<?> targetConnection : outgoingConnections) {
+						boolean propagateThroughConnection = false;
+						for (int connectionIndex : connectionIndexes) {
+							if (targetConnection.addIndex(connectionIndex)) {
+								propagateThroughConnection = true;
+							}
+						}
+						if (propagateThroughConnection) {
+							propagateIndexes(targetConnection);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public void schedule(@NonNull RootPartition rootPartition) {
+		//	ScheduledRegion rootScheduledRegion = rootPartition.getScheduledRegion();
+		int depth = 0;
+		//		LoadingRegion loadingRegion = rootScheduledRegion.getOwnedLoadingRegion();
+		//		if (loadingRegion != null) {
+		//			loadingRegion.addIndex(depth++);
+		//		}
+		for (@NonNull Collection<@NonNull Region> concurrency : rootPartition.getRegionSchedule()) {
+			for (@NonNull Region region : concurrency) {
+				region.addIndex(depth);
+				Iterable<@NonNull DatumConnection<?>> loopingConnections = getLoopingConnections(region);
+				assert loopingConnections != null;
+				Iterable<@NonNull DatumConnection<?>> outgoingConnections = getOutgoingConnections(region);
+				assert outgoingConnections != null;
+				//	Set<@NonNull Region> nextRegions = new HashSet<>();
+				for (@NonNull DatumConnection<?> loopingConnection : loopingConnections) {
+					loopingConnection.addIndex(depth);
+				}
+				for (@NonNull DatumConnection<?> outgoingConnection : outgoingConnections) {
+					outgoingConnection.addIndex(depth);
+				}
+			}
+			depth++;
+		}
+		//		scheduleScheduledRegion(rootScheduledRegion);
+		scheduleManager.writeDebugGraphs("6-indexed", false, true, true);
+		/**
+		 * Propagate the additional connection indexes to their outgoing connections.
+		 */
+		for (@NonNull DatumConnection<?> connection : getConnections()) {
+			propagateIndexes(connection);
+		}
+		buildCallTree();
 	}
 
 	@Override

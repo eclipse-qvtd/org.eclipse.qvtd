@@ -63,7 +63,6 @@ import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.ocl.pivot.utilities.NameUtil.ToStringComparator;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
@@ -1501,7 +1500,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//		ECollections.sort(statements, new StatementComparator(statements));
 	}
 
-	private void createRealizedIncludesAssignments() {
+	/*	private void createRealizedIncludesAssignments() {
 		List<@NonNull Edge> realizedIncludesEdges = null;
 		for (@NonNull Edge edge : region.getRealizedEdges()) {
 			//			if (QVTscheduleUtil.isRealizedIncludes(edge)) {
@@ -1518,7 +1517,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			for (@NonNull Edge edge : realizedIncludesEdges) {
 				Node sourceNode = edge.getEdgeSource();
 				Node targetNode = edge.getEdgeTarget();
-				/*				if (targetNode.isDataType()) {
+				/ *				if (targetNode.isDataType()) {
 					OCLExpression slotVariableExp = createVariableExp(sourceNode);
 					Property property = edge.getProperty();
 					OCLExpression valueExp = expressionCreator.getExpression(targetNode);
@@ -1531,11 +1530,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					}
 					else {
 						System.err.println("No assignment in " + this + " to " + slotVariableExp + "." + property);
-				 */
+	 * /
 
 			}
 		}
-	}
+	} */
 
 	private void createRealizedVariables() {
 		List<@NonNull Node> sortedNodes = Lists.newArrayList(region.getNewNodes());
@@ -1769,7 +1768,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		createRealizedVariables();					// GREEN nodes
 		createPropertyAssignments();				// GREEN edges
 		createAddStatements();						// export to append nodes
-		createRealizedIncludesAssignments();
+		//	createRealizedIncludesAssignments();
 		createObservedProperties();					// wrap observable clauses around hazardous accesses
 	}
 

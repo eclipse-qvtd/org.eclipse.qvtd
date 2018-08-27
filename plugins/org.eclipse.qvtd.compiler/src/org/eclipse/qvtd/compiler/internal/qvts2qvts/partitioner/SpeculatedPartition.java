@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,13 +33,26 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 class SpeculatedPartition extends AbstractPartialPartition
 {
+	private final @NonNull Node traceNode;
+	//	private final @Nullable Node predicatedDispatchNode;
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
 
 	public SpeculatedPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
 		super(partitioner, reachabilityForest, "«speculated»");
+		this.traceNode = partitioner.getTraceNode();
+		//		assert traceNode.isPredicated();
+		//		this.predicatedDispatchNode = partitioner.basicGetPredicatedDispatchNode();
 		//
 		//	The realized trace nodes becomes a speculated head nodes.
 		//
+		//
+		//	For a no-override top relation the realized middle (trace) nodes become predicated nodes.
+		//	For an override top relation the predicated middle (trace) nodes become predicated nodes.
+		//	For a non-top relation the predicated middle (trace) nodes become predicated nodes.
+		//
+		//		for (@NonNull Node traceNode : traceNodes) {
+		//			addNode(traceNode, Role.PREDICATED);
+		//		}
 		resolveTraceNodes();
 		//
 		//	The realized output nodes are realized as is.
@@ -64,10 +78,6 @@ class SpeculatedPartition extends AbstractPartialPartition
 		//	Join up the edges.
 		//
 		resolveEdges();
-		//
-		//	Add the success predicates.
-		//
-		resolveSuccessNodes();
 	}
 
 	@Override
@@ -81,18 +91,34 @@ class SpeculatedPartition extends AbstractPartialPartition
 		{
 			@Override
 			public @Nullable Element visitSuccessNode(@NonNull SuccessNode node) {
-				Node partialNode = regionHelper.createBooleanLiteralNode(true);
-				addNode(node, partialNode);
-				return partialNode;
+				if (node == partitioner.basicGetGlobalSuccessNode(traceNode)) {
+					Node partialNode = regionHelper.createBooleanLiteralNode(true);
+					addNode(node, partialNode);
+					return partialNode;
+				}
+				else if (node == partitioner.basicGetLocalSuccessNode(traceNode)) {
+					return null;			// localStatus is redundant when globalStatus in use
+				}
+				else {
+					return super.visitSuccessNode(node);
+				}
 			}
 		};
+	}
+
+	@Override
+	protected @Nullable Iterable<@NonNull Node> getPreferredHeadNodes() {
+		return Collections.singleton(traceNode);
 	}
 
 	@Override
 	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
 		Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
 		if (edgeRole == Role.REALIZED && partitioner.hasRealizedEdge(edge)) {
-			if (edge.getEdgeTarget().isConstant()) {
+			if (edge.isSuccess()) {
+				edgeRole = Role.PREDICATED;		// Enforce sequencing
+			}
+			else if (edge.getEdgeTarget().isConstant()) {
 				edgeRole = null;		// Constant assignment already done in speculation partition. No need to predicate it with a constant to constant connection.
 			}
 			else {
@@ -123,38 +149,59 @@ class SpeculatedPartition extends AbstractPartialPartition
 
 	protected void resolveRealizedOutputNodes() {
 		for (@NonNull Node node : regionAnalysis.getCorollaryNodes()) {
-			if (!hasNode(node) && !node.isSuccess() && !partitioner.hasRealizedNode(node)) {
+			if (!hasNode(node) && !node.isSuccess()) {
 				addNode(node);
 			}
 		}
 	}
 
-	protected void resolveSuccessNodes() {
-		for (@NonNull Node traceNode : partitioner.getTraceNodes()) {
-			assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
-			Node globalSuccessNode = partitioner.basicGetGlobalSuccessNode(traceNode);		// FIXME only optional because trace property can be missing
-			if (globalSuccessNode != null) {
-				addNode(globalSuccessNode, Role.PREDICATED);
-			}
-		}
-	}
-
-	protected void resolveTraceNodes() {
-		for (@NonNull Node traceNode : partitioner.getTraceNodes()) {
-			assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
-			//		if (!hasNode(traceNode)) {
-			addNode(traceNode, Role.PREDICATED);
-			Node globalSuccessNode = partitioner.basicGetGlobalSuccessNode(traceNode);		// FIXME only optional because trace property can be missing
-			if (globalSuccessNode != null) {
-				addNode(globalSuccessNode, Role.PREDICATED);
-			}
-		}
-		for (@NonNull Node traceNode : partitioner.getTraceNodes()) {
-			for (@NonNull NavigableEdge edge : traceNode.getNavigableEdges()) {
-				if (partitioner.hasRealizedEdge(edge)) {
-					tracedInputNodes.add(edge.getEdgeTarget());
+	/*	protected void resolveSuccessEdges() {
+		//	}
+		//		for (@NonNull Node traceNode : executionNodes) {
+		//			assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
+		//			Node successNode = partitioner.getSuccessNode(traceNode);		// FIXME only optional because trace property can be missing
+		//			if (successNode != null) {
+		//				addNode(successNode, Role.PREDICATED);
+		//			}
+		//		}
+		for (@NonNull Edge edge : partitioner.getSuccessEdges()) {
+			if (!partitioner.hasRealizedEdge(edge) && !partitioner.hasPredicatedEdge(edge)) {
+				Node sourceNode = edge.getEdgeSource();
+				Node targetNode = edge.getEdgeTarget();
+				//			if (edge.isPredicated()) {
+				//				if (!hasNode(targetNode)) {
+				//					addNode(targetNode);
+				//				}
+				//				partitioner.addPredicatedNode(targetNode);
+				//				partitioner.addEdge(edge, Role.PREDICATED, this);	// FUXME this fudges inadequate speculation
+				//			}
+				//			else {
+				if (!hasNode(sourceNode)) {
+					addNode(sourceNode);
+				}
+				if (!hasNode(targetNode)) {
+					addNode(targetNode);
 				}
 			}
+			//			}
 		}
+	}*/
+
+	protected void resolveTraceNodes() {
+		assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
+		addNode(traceNode, Role.PREDICATED);
+		if (scheduleManager.useActivators()) {
+			Node globalSuccessNode = partitioner.getGlobalSuccessNode(traceNode);
+			addNode(globalSuccessNode, Role.PREDICATED);
+		}
+		//	}
+		//		}
+		//		for (@NonNull Node traceNode : executionNodes) {
+		for (@NonNull NavigableEdge edge : traceNode.getNavigableEdges()) {
+			if (partitioner.hasRealizedEdge(edge)) {
+				tracedInputNodes.add(edge.getEdgeTarget());
+			}
+		}
+		//		}
 	}
 }

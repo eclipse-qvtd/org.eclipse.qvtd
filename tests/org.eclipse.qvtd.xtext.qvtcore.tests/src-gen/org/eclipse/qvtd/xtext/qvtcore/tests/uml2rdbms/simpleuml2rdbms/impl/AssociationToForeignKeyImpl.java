@@ -236,6 +236,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Key getKey() {
 		if (key != null && key.eIsProxy()) {
 			InternalEObject oldKey = (InternalEObject)key;
@@ -262,6 +263,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setKey(Key newKey) {
 		Key oldKey = key;
 		key = newKey;

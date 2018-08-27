@@ -34,14 +34,14 @@ import com.google.common.collect.Iterables;
  */
 public class CallTreeBuilder
 {
-	private final @NonNull ScheduleCache scheduleCache;
+	private final @NonNull ScheduleAnalysis scheduleCache;
 
 	/**
 	 * Working state: the common region for all uses of each connection.
 	 */
 	private final @NonNull Map<@NonNull NodeConnection, @NonNull Region> connection2commonRegion = new HashMap<@NonNull NodeConnection, @NonNull Region>();
 
-	public CallTreeBuilder(@NonNull ScheduleCache scheduleCache) {
+	public CallTreeBuilder(@NonNull ScheduleAnalysis scheduleCache) {
 		this.scheduleCache = scheduleCache;
 	}
 

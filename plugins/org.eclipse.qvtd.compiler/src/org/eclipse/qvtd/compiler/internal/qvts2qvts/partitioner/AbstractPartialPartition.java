@@ -107,7 +107,7 @@ abstract class AbstractPartialPartition extends AbstractPartition
 				if (!partitioner.hasRealizedEdge(edge)) {
 					assert newEdgeRole == Role.REALIZED;
 				}
-				else if (this instanceof NewSpeculatingPartition) {
+				else if (this instanceof SpeculatingPartition) {
 					assert (newEdgeRole == Role.PREDICATED) || (newEdgeRole == Role.SPECULATED);		// FIXME rationalize
 				}
 				else {
@@ -609,7 +609,7 @@ abstract class AbstractPartialPartition extends AbstractPartition
 						addNode(sourceNode);
 					}
 				}
-				Integer cost = reachabilityForest.getCost(node);
+				//	Integer cost = reachabilityForest.getCost(node);
 				//				assert cost != null;
 				/*				if (!gotOne && (cost != null) && (cost > 0)) {
 					getClass();

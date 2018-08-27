@@ -11,18 +11,21 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -32,35 +35,64 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 class SpeculatingPartition extends AbstractPartialPartition
 {
+	private final @NonNull Node traceNode;
+	private final @NonNull Iterable<@NonNull Node> executionNodes;
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
 
-	public SpeculatingPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
+	public SpeculatingPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest/*, boolean isInfallible*/) {
 		super(partitioner, reachabilityForest, "«speculating»");
-		//
-		//	The realized middle (trace) nodes become speculated head nodes and their already realized edge ends populate tracedInputNodes.
-		//
-		resolveTraceNodes();
+		this.traceNode = partitioner.getTraceNode();
+		this.executionNodes = partitioner.getExecutionNodes();
+		if (hasSynthesizedTrace) {
+			//
+			//	For a no-override top relation the realized middle (trace) nodes become speculated nodes.
+			//	For an override top relation the predicated middle (trace) nodes become speculated nodes.
+			//	For a non-top relation the predicated middle (trace) nodes become speculated nodes.
+			//
+			for (@NonNull Node traceNode : executionNodes) {
+				addNode(traceNode, Role.PREDICATED); //, Role.SPECULATED);
+			}
+			//
+			//	For an override relation the predicated middle dispatch nodes become speculated nodes.
+			//
+			Node dispatchNode = partitioner.basicGetDispatchNode();
+			if (dispatchNode != null) {
+				assert dispatchNode.isPredicated();
+				addNode(dispatchNode);
+			}
+		}
+		else {
+			//
+			//	The realized middle (trace) nodes become speculated head nodes and their already realized edge ends populate tracedInputNodes.
+			//
+			resolveTraceNodes();
+		}
 		//
 		//	The cyclic predicated middle nodes become speculated guard nodes and all preceding
 		//	navigations are retained as is.
 		//
-		resolvePredicatedMiddleNodes();
+		if (hasSynthesizedTrace) {
+			for (@NonNull Node whenNode : partitioner.getPredicatedWhenNodes()) {
+				if (!partitioner.hasPredicatedNode(whenNode)) {
+					addNode(whenNode); //, Role.SPECULATED);
+				}
+			}
+		}
+		else {
+			resolvePredicatedMiddleNodes();
+			//
+			//	The predicated output nodes and all preceding navigations are retained as is.
+			//
+			resolvePredicatedOutputNodes();
+		}
 		//
-		//	The predicated output nodes and all preceding navigations are retained as is.
+		//	The localSuccess nodes are predicated, and the globalSuccess realized to sequence speculating/speculation/speculated partitions.
 		//
-		resolvePredicatedOutputNodes();
-		//
-		//	The ends of all matched predicated edges not already matched in the Speculation partition are added as is.
-		//
-		resolveMatchedPredicatedEdges();
-		//
-		//	The non-corollary, non-realized ends of all realized edges are added as is.
-		//
-		resolveRealizedEdges();
+		resolveSuccessNodes();
 		//
 		//	Add the outstanding predicates that can be checked by this partition.
 		//
-		//		resolveTrueNodes();
+		resolveConstantOutputNodes(/*isInfallible*/);
 		//
 		//	Ensure that the predecessors of each node are included in the partition.
 		//
@@ -68,7 +100,7 @@ class SpeculatingPartition extends AbstractPartialPartition
 		//
 		//	Ensure that re-used trace classes do not lead to ambiguous mappings.
 		//
-		resolveDisambiguations();
+		//		resolveDisambiguations();
 		//
 		//	Join up the edges.
 		//
@@ -79,6 +111,31 @@ class SpeculatingPartition extends AbstractPartialPartition
 	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
 		return createMicroMappingRegion("«speculating»", "_p" + partitionNumber);
 	}
+
+	@Override
+	protected @NonNull PartitioningVisitor createPartitioningVisitor(@NonNull MicroMappingRegion partialRegion) {
+		return new PartitioningVisitor(new RegionHelper<>(scheduleManager, partialRegion), this)
+		{
+			@Override
+			public @Nullable Element visitSuccessNode(@NonNull SuccessNode node) {
+				if (node == partitioner.basicGetLocalSuccessNode(traceNode)) {
+					return null;			// localStatus is redundant when globalStatus in use
+				}
+				else {
+					return super.visitSuccessNode(node);
+				}
+			}
+		};
+	}
+
+	@Override
+	protected @Nullable Iterable<@NonNull Node> getPreferredHeadNodes() {
+		return executionNodes;
+	}
+
+	//	private boolean isAlwaysSatisfied(@NonNull Edge edge) {
+	//		return edge.isUnconditional(); //true;		// FIXME perform compile-time speculation resolution
+	//	}
 
 	private boolean isDownstreamFromCorollary(@NonNull Node node) {
 		if (transformationAnalysis.isCorollary(node)) {
@@ -107,17 +164,34 @@ class SpeculatingPartition extends AbstractPartialPartition
 		return true;
 	}
 
+	protected void resolveConstantOutputNodes(/*boolean isInfallible*/) {
+		//	Set<@NonNull Node> fallibleNodes = null;
+		//	if (isInfallible) {
+		//		fallibleNodes = new HashSet<>();
+		//		for (@NonNull Edge edge : regionAnalysis.getFallibleEdges()) {
+		//			fallibleNodes.add(QVTscheduleUtil.getTargetNode(edge));
+		//		}
+		//	}
+		for (@NonNull Node constantOutputNode : partitioner.getConstantOutputNodes()) {
+			//	if ((fallibleNodes == null) || !Iterables.contains(fallibleNodes, constantOutputNode)) {
+			if (!partitioner.hasPredicatedNode(constantOutputNode)) {
+				addNode(constantOutputNode);
+			}
+			//	}
+		}
+	}
+
 	/**
 	 * Return true if node is a corollary of this mapping.
-	 */
+	 *
 	private boolean isLocalCorollary(@NonNull Node node) {
 		assert node.isRealized();
 		for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-			if (edge.isRealized() && (edge instanceof NavigableEdge)) {
+			if (edge.isRealized() && edge.isNavigation()) {
 				// A cyclic node cannot be a corollary since we must establish that all speculating
 				// partitions are ok before the speculated region can create the full cycle.
 				if (!partitioner.isCyclic(QVTscheduleUtil.getSourceNode(edge))) {
-					List<@NonNull Region> corollaryOfRegions = partitioner.getCorollaryOf((NavigableEdge)edge);
+					List<@NonNull MappingRegion> corollaryOfRegions = partitioner.getCorollaryOf(edge);
 					if ((corollaryOfRegions != null) && (corollaryOfRegions.size() == 1) && corollaryOfRegions.contains(region)) {
 						return true;
 					}
@@ -125,68 +199,47 @@ class SpeculatingPartition extends AbstractPartialPartition
 			}
 		}
 		return false;
-	}
+	} */
+
+	/*	@Override
+	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
+		Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
+		if ((edgeRole == Role.REALIZED) && !(edge instanceof SuccessEdge)) {
+			edgeRole = null;
+		}
+		return edgeRole;
+	} */
 
 	@Override
 	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
 		Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
-		if (edgeRole == Role.REALIZED && partitioner.hasRealizedEdge(edge)) {
-			if (edge.getEdgeTarget().isConstant()) {
-				edgeRole = null;		// Constant assignment already done in speculation partition. No need to predicate it with a constant to constant connection.
-			}
-			else {
-				edgeRole = Role.PREDICATED;
+		if (edgeRole == Role.REALIZED) {
+			/* if (edge instanceof SuccessEdge) {
+						edgeRole = Role.SPECULATED;			// FIXME fudge awaiting run-time support
+					}
+					else */ if (partitioner.hasRealizedEdge(edge)) {
+						edgeRole = Role.PREDICATED;
+					}
+		}
+		else if (edgeRole == Role.PREDICATED) {
+			if (edge instanceof SuccessEdge) {
+				boolean hasRealizedEdge = partitioner.hasRealizedEdge(edge);
+				if (!hasRealizedEdge) {
+					//	Role nodeRole = getRole(QVTscheduleUtil.getTargetNode(edge));
+					//	if ((nodeRole != null) && nodeRole.isRealized()) {
+					edgeRole = Role.SPECULATED;
+					//	}
+				}
 			}
 		}
 		return edgeRole;
 	}
 
-	protected void resolveMatchedPredicatedEdges() {
+	/*	protected void resolveMatchedPredicatedEdges() {
 		for (@NonNull Edge edge : partitioner.getPredicatedEdges()) {
-			if (edge.isMatched() && !partitioner.hasPredicatedEdge(edge)) {
-				if (!(edge instanceof NavigableEdge) || (partitioner.getCorollaryOf((NavigableEdge)edge) == null)) {
-					Node sourceNode = edge.getEdgeSource();
-					if (!sourceNode.isRealized()) {
-						Node targetNode = edge.getEdgeTarget();
-						if (!targetNode.isRealized()) {
-							if (!hasNode(sourceNode)) {
-								addNode(sourceNode, QVTscheduleUtil.getNodeRole(sourceNode));
-							}
-							if (!hasNode(targetNode)) {
-								addNode(targetNode, QVTscheduleUtil.getNodeRole(targetNode));
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	protected void resolvePredicatedMiddleNodes() {
-		for (@NonNull Node node : partitioner.getPredicatedMiddleNodes()) {
-			if (!hasNode(node) && node.isMatched() && partitioner.isCyclic(node)) {
-				Role nodeRole = QVTscheduleUtil.getNodeRole(node);
-				if (node.isPattern() && node.isClass()) {
-					nodeRole = QVTscheduleUtil.asSpeculated(nodeRole);
-				}
-				addNode(node, QVTscheduleUtil.asSpeculated(nodeRole));
-			}
-		}
-	}
-
-	protected void resolvePredicatedOutputNodes() {
-		for (@NonNull Node node : partitioner.getPredicatedOutputNodes()) {
-			if (!hasNode(node) && !transformationAnalysis.isCorollary(node) && !isDownstreamFromCorollary(node)) {
-				addNode(node, QVTscheduleUtil.getNodeRole(node));
-			}
-		}
-	}
-
-	protected void resolveRealizedEdges() {
-		for (@NonNull NavigableEdge edge : partitioner.getRealizedEdges()) {
-			if (!partitioner.hasRealizedEdge(edge) && (partitioner.getCorollaryOf(edge) == null)) {
+			if (edge.isMatched() && !partitioner.hasPredicatedEdge(edge) && (partitioner.getCorollaryOf(edge) == null)) {
 				Node sourceNode = edge.getEdgeSource();
-				if (!sourceNode.isRealized() || isLocalCorollary(sourceNode)) {
+				if (!sourceNode.isRealized()) {
 					Node targetNode = edge.getEdgeTarget();
 					if (!targetNode.isRealized()) {
 						if (!hasNode(sourceNode)) {
@@ -199,10 +252,71 @@ class SpeculatingPartition extends AbstractPartialPartition
 				}
 			}
 		}
+	} */
+
+	protected void resolvePredicatedMiddleNodes() {
+		for (@NonNull Node node : partitioner.getPredicatedMiddleNodes()) {
+			if (!hasNode(node) && node.isMatched()) { // && partitioner.isCyclic(node)) {
+				Role nodeRole = QVTscheduleUtil.getNodeRole(node);
+				//				if (node.isPattern() && node.isClass()) {
+				//					nodeRole = QVTscheduleUtil.asSpeculated(nodeRole);
+				//				}
+				addNode(node, nodeRole); //QVTscheduleUtil.asSpeculated(nodeRole));
+			}
+		}
+	}
+
+	protected void resolvePredicatedOutputNodes() {
+		for (@NonNull Node node : partitioner.getPredicatedOutputNodes()) {
+			if (!hasNode(node) && !transformationAnalysis.isCorollary(node) && !isDownstreamFromCorollary(node)) {
+				addNode(node, QVTscheduleUtil.getNodeRole(node));
+			}
+		}
+	}
+
+	/*	protected void resolvePredicatedOutputNodes() {
+		for (@NonNull Node node : partitioner.getPredicatedOutputNodes()) {
+			if (!hasNode(node) && !isCorollary(node) && !isDownstreamFromCorollary(node)) {
+				addNode(node, QVTscheduleUtil.getNodeRole(node));
+			}
+		}
+	} */
+
+	protected void resolveSuccessNodes() {
+		for (@NonNull Node traceNode : executionNodes) {
+			Node localSuccessNode = partitioner.getLocalSuccessNode(traceNode);
+			addNode(localSuccessNode, Role.PREDICATED);
+			Node globalSuccessNode = partitioner.getGlobalSuccessNode(traceNode);
+			addNode(globalSuccessNode, Role.REALIZED);
+		}
+		//	Iterable<@NonNull Edge> fallibleEdges = isInfallible ? regionAnalysis.getFallibleEdges() : null;
+		/*	for (@NonNull Edge edge : partitioner.getSuccessEdges()) {
+			//	if (/ *edge.isNew() ||* / (fallibleEdges == null) || !Iterables.contains(fallibleEdges, edge)) {
+				Node sourceNode = edge.getEdgeSource();
+				Node targetNode = edge.getEdgeTarget();
+				//			if (edge.isPredicated() && isAlwaysSatisfied(edge)) {
+				//				if (!hasNode(targetNode)) {
+				//					addNode(targetNode);
+				//				}
+				//				partitioner.addPredicatedNode(targetNode);
+				//				partitioner.addEdge(edge, Role.PREDICATED, this);	// FIXME this fudges inadequate speculation
+				//			}
+				//			else {
+				if (!hasNode(sourceNode)) {
+					addNode(sourceNode);
+				}
+				if (!hasNode(targetNode)) {
+					addNode(targetNode);
+				}
+				//	}
+				//	else {
+				//		System.out.println("Infallible " + edge.getEdgeSource().getName() + "." + edge.getName() + " omitted in " + region);
+				//	}
+			} */
 	}
 
 	protected void resolveTraceNodes() {
-		Iterable<@NonNull Node> traceNodes = partitioner.getTraceNodes();
+		Iterable<@NonNull Node> traceNodes = partitioner.getTraceNodes();		// Just 1 speculated middle node
 		for (@NonNull Node traceNode : traceNodes) {
 			addNode(traceNode, Role.SPECULATED);
 		}
