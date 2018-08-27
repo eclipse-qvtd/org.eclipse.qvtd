@@ -10,9 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -35,7 +33,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 class SpeculatedPartition extends AbstractPartialPartition
 {
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
-	private final @NonNull List<@NonNull Partition> predecessors = new ArrayList<>();
 
 	public SpeculatedPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
 		super(partitioner, reachabilityForest, "«speculated»");
@@ -73,10 +70,6 @@ class SpeculatedPartition extends AbstractPartialPartition
 		resolveSuccessNodes();
 	}
 
-	public void addPredecessor(@NonNull SpeculatingPartition speculatingPartition) {
-		predecessors.add(speculatingPartition);
-	}
-
 	@Override
 	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
 		return createMicroMappingRegion("«speculated»", "_p" + partitionNumber);
@@ -93,11 +86,6 @@ class SpeculatedPartition extends AbstractPartialPartition
 				return partialNode;
 			}
 		};
-	}
-
-	@Override
-	public @NonNull List<@NonNull Partition> getPredecessors() {
-		return predecessors;
 	}
 
 	@Override

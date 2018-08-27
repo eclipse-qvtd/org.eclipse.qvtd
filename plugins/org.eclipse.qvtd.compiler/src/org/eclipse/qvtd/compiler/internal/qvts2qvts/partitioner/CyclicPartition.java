@@ -117,6 +117,11 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	}
 
 	@Override
+	public @NonNull Set<@NonNull Partition> getExplicitPredecessors() {
+		return externalPredecessors;
+	}
+
+	@Override
 	public @NonNull String getName() {
 		return name;
 	}
@@ -156,11 +161,6 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	@Override
 	public @NonNull Iterable<@NonNull Partition> getPartitions() {
 		return partitions;
-	}
-
-	@Override
-	public @NonNull Set<@NonNull Partition> getPredecessors() {
-		return externalPredecessors;
 	}
 
 	@Override

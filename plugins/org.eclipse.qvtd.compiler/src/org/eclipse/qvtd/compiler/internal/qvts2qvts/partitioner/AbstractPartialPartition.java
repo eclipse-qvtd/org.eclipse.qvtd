@@ -62,6 +62,11 @@ abstract class AbstractPartialPartition extends AbstractPartition
 	 */
 	private final @NonNull ReachabilityForest reachabilityForest;
 
+	/**
+	 * Explicitly specified predecessors for use by QVTc where there is no trace localSuccess linkage.
+	 */
+	private final @NonNull List<@NonNull Partition> explicitPredecessors = new ArrayList<>();
+
 	//	protected AbstractPartialPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
 	//		super(partitioner);
 	//		this.name = QVTscheduleUtil.getName(region);
@@ -110,6 +115,10 @@ abstract class AbstractPartialPartition extends AbstractPartition
 		partitioner.addEdge(edge, newEdgeRole, this);
 		Role displacedEdgeRole = edge2edgeRole.put(edge, newEdgeRole);
 		assert (displacedEdgeRole == null) || (displacedEdgeRole == newEdgeRole);
+	}
+
+	public void addExplicitPredecessor(@NonNull Partition speculationPartition) {
+		explicitPredecessors.add(speculationPartition);
 	}
 
 	protected void addNode(@NonNull Node node) {
@@ -287,6 +296,11 @@ abstract class AbstractPartialPartition extends AbstractPartition
 
 	protected @NonNull PartitioningVisitor createPartitioningVisitor(@NonNull MicroMappingRegion partialRegion) {
 		return new PartitioningVisitor(new RegionHelper<>(scheduleManager, partialRegion), this);
+	}
+
+	@Override
+	public @NonNull List<@NonNull Partition> getExplicitPredecessors() {
+		return explicitPredecessors;
 	}
 
 	@Override

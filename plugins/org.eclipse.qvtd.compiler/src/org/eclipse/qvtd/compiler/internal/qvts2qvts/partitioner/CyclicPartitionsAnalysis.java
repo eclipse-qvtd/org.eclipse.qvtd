@@ -270,7 +270,7 @@ public class CyclicPartitionsAnalysis
 				assert oldCycleAnalysis == null;
 				partition2predecessors.remove(nestedPartition);
 			}
-			partition2predecessors.put(nestedCyclicPartition, nestedCyclicPartition.getPredecessors());
+			partition2predecessors.put(nestedCyclicPartition, nestedCyclicPartition.getExplicitPredecessors());
 			//
 			for (@NonNull TraceClassAnalysis<@NonNull Partition> cyclicTraceClassAnalysis : cyclicTraceClassAnalyses) {
 				CyclicPartition oldCycleAnalysis = traceClassAnalysis2cyclicPartition.put(cyclicTraceClassAnalysis, nestedCyclicPartition);

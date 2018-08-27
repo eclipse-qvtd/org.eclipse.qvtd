@@ -248,7 +248,7 @@ public class CompilerUtil extends QVTscheduleUtil
 			consumer2producers.put(regionAnalysis, new HashSet<>());
 		}
 		for (@NonNull RA consumer : regionAnalyses) {
-			Iterable<@NonNull RA> predecessors = consumer.getPredecessors();		// Used by no-success QVTc trace
+			Iterable<@NonNull RA> predecessors = consumer.getExplicitPredecessors();		// Used by no-success QVTc trace
 			if (predecessors != null) {
 				for (@NonNull RA predecessor : predecessors) {
 					Set<@NonNull RA> producers = consumer2producers.get(consumer);

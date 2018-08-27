@@ -42,7 +42,7 @@ abstract class AbstractPartition extends AbstractPartialRegionAnalysis<@NonNull 
 	}
 
 	@Override
-	public @Nullable Iterable<@NonNull Partition> getPredecessors() {
+	public @Nullable Iterable<@NonNull Partition> getExplicitPredecessors() {
 		return null;
 	}
 
