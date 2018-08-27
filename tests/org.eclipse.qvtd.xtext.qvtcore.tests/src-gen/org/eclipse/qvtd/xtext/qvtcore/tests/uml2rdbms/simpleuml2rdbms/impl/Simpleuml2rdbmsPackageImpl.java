@@ -167,7 +167,7 @@ public class Simpleuml2rdbmsPackageImpl extends EPackageImpl implements Simpleum
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link Simpleuml2rdbmsPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -181,14 +181,16 @@ public class Simpleuml2rdbmsPackageImpl extends EPackageImpl implements Simpleum
 		if (isInited) return (Simpleuml2rdbmsPackage)EPackage.Registry.INSTANCE.getEPackage(Simpleuml2rdbmsPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		Simpleuml2rdbmsPackageImpl theSimpleuml2rdbmsPackage = (Simpleuml2rdbmsPackageImpl)(ePackage instanceof Simpleuml2rdbmsPackageImpl ? ePackage : new Simpleuml2rdbmsPackageImpl());
+		Object registeredSimpleuml2rdbmsPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		Simpleuml2rdbmsPackageImpl theSimpleuml2rdbmsPackage = registeredSimpleuml2rdbmsPackage instanceof Simpleuml2rdbmsPackageImpl ? (Simpleuml2rdbmsPackageImpl)registeredSimpleuml2rdbmsPackage : new Simpleuml2rdbmsPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		SimpleumlPackageImpl theSimpleumlPackage = (SimpleumlPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(SimpleumlPackage.eNS_URI) instanceof SimpleumlPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(SimpleumlPackage.eNS_URI) : SimpleumlPackage.eINSTANCE);
-		SimplerdbmsPackageImpl theSimplerdbmsPackage = (SimplerdbmsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(SimplerdbmsPackage.eNS_URI) instanceof SimplerdbmsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(SimplerdbmsPackage.eNS_URI) : SimplerdbmsPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(SimpleumlPackage.eNS_URI);
+		SimpleumlPackageImpl theSimpleumlPackage = (SimpleumlPackageImpl)(registeredPackage instanceof SimpleumlPackageImpl ? registeredPackage : SimpleumlPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(SimplerdbmsPackage.eNS_URI);
+		SimplerdbmsPackageImpl theSimplerdbmsPackage = (SimplerdbmsPackageImpl)(registeredPackage instanceof SimplerdbmsPackageImpl ? registeredPackage : SimplerdbmsPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theSimpleuml2rdbmsPackage.createPackageContents();
@@ -203,7 +205,6 @@ public class Simpleuml2rdbmsPackageImpl extends EPackageImpl implements Simpleum
 		// Mark meta-data to indicate it can't be changed
 		theSimpleuml2rdbmsPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(Simpleuml2rdbmsPackage.eNS_URI, theSimpleuml2rdbmsPackage);
 		return theSimpleuml2rdbmsPackage;
@@ -264,8 +265,7 @@ public class Simpleuml2rdbmsPackageImpl extends EPackageImpl implements Simpleum
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public EReference getAssociationToForeignKey_Owner() {
+	public EReference getAssociationToForeignKey_Key() {
 		return (EReference)associationToForeignKeyEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -275,8 +275,18 @@ public class Simpleuml2rdbmsPackageImpl extends EPackageImpl implements Simpleum
 	 * @generated
 	 */
 	@Override
-	public EReference getAssociationToForeignKey_Referenced() {
+	public EReference getAssociationToForeignKey_Owner() {
 		return (EReference)associationToForeignKeyEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAssociationToForeignKey_Referenced() {
+		return (EReference)associationToForeignKeyEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -614,6 +624,7 @@ public class Simpleuml2rdbmsPackageImpl extends EPackageImpl implements Simpleum
 		associationToForeignKeyEClass = createEClass(ASSOCIATION_TO_FOREIGN_KEY);
 		createEReference(associationToForeignKeyEClass, ASSOCIATION_TO_FOREIGN_KEY__ASSOCIATION);
 		createEReference(associationToForeignKeyEClass, ASSOCIATION_TO_FOREIGN_KEY__FOREIGN_KEY);
+		createEReference(associationToForeignKeyEClass, ASSOCIATION_TO_FOREIGN_KEY__KEY);
 		createEReference(associationToForeignKeyEClass, ASSOCIATION_TO_FOREIGN_KEY__OWNER);
 		createEReference(associationToForeignKeyEClass, ASSOCIATION_TO_FOREIGN_KEY__REFERENCED);
 
@@ -712,8 +723,9 @@ public class Simpleuml2rdbmsPackageImpl extends EPackageImpl implements Simpleum
 		initEReference(getAttributeToColumn_Type(), this.getPrimitiveToName(), null, "type", null, 0, 1, AttributeToColumn.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(associationToForeignKeyEClass, AssociationToForeignKey.class, "AssociationToForeignKey", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAssociationToForeignKey_Association(), theSimpleumlPackage.getAssociation(), null, "association", null, 0, 1, AssociationToForeignKey.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAssociationToForeignKey_Association(), theSimpleumlPackage.getAssociation(), null, "association", null, 1, 1, AssociationToForeignKey.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssociationToForeignKey_ForeignKey(), theSimplerdbmsPackage.getForeignKey(), null, "foreignKey", null, 0, 1, AssociationToForeignKey.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAssociationToForeignKey_Key(), theSimplerdbmsPackage.getKey(), null, "key", null, 1, 1, AssociationToForeignKey.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssociationToForeignKey_Owner(), this.getClassToTable(), this.getClassToTable_AssociationsToForeignKeys(), "owner", null, 1, 1, AssociationToForeignKey.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssociationToForeignKey_Referenced(), this.getClassToTable(), null, "referenced", null, 0, 1, AssociationToForeignKey.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -773,75 +785,82 @@ public class Simpleuml2rdbmsPackageImpl extends EPackageImpl implements Simpleum
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		  (getAssociationToForeignKey_Association(), 
-		   source, 
+		  (getAssociationToForeignKey_Association(),
+		   source,
 		   new String[] {
-			 "body", "middle",
-			 "upper", "1"
-		   });	
+			   "body", "middle",
+			   "upper", "1"
+		   });
 		addAnnotation
-		  (getAssociationToForeignKey_ForeignKey(), 
-		   source, 
+		  (getAssociationToForeignKey_ForeignKey(),
+		   source,
 		   new String[] {
-			 "body", "middle",
-			 "upper", "1"
-		   });	
+			   "body", "middle",
+			   "upper", "1"
+		   });
 		addAnnotation
-		  (getClassToTable_PrimaryKey(), 
-		   source, 
+		  (getAssociationToForeignKey_Key(),
+		   source,
 		   new String[] {
-			 "body", "middle",
-			 "upper", "1"
-		   });	
+			   "body", "middle",
+			   "upper", "1"
+		   });
 		addAnnotation
-		  (getClassToTable_Table(), 
-		   source, 
+		  (getClassToTable_PrimaryKey(),
+		   source,
 		   new String[] {
-			 "body", "middle"
-		   });	
+			   "body", "middle",
+			   "upper", "1"
+		   });
 		addAnnotation
-		  (getClassToTable_UmlClass(), 
-		   source, 
+		  (getClassToTable_Table(),
+		   source,
 		   new String[] {
-			 "body", "middle",
-			 "upper", "1"
-		   });	
+			   "body", "middle"
+		   });
 		addAnnotation
-		  (getFromAttribute_Attribute(), 
-		   source, 
+		  (getClassToTable_UmlClass(),
+		   source,
 		   new String[] {
-			 "body", "middle",
-			 "upper", "1"
-		   });	
+			   "body", "middle",
+			   "upper", "1"
+		   });
 		addAnnotation
-		  (getPackageToSchema_Schema(), 
-		   source, 
+		  (getFromAttribute_Attribute(),
+		   source,
 		   new String[] {
-			 "body", "middle",
-			 "upper", "1"
-		   });	
+			   "body", "middle",
+			   "upper", "1"
+		   });
 		addAnnotation
-		  (getPackageToSchema_UmlPackage(), 
-		   source, 
+		  (getPackageToSchema_Schema(),
+		   source,
 		   new String[] {
-			 "body", "middle",
-			 "upper", "1"
-		   });	
+			   "body", "middle",
+			   "upper", "1"
+		   });
 		addAnnotation
-		  (getPrimitiveToName_Primitive(), 
-		   source, 
+		  (getPackageToSchema_UmlPackage(),
+		   source,
 		   new String[] {
-			 "body", "middle",
-			 "upper", "1"
-		   });	
+			   "body", "middle",
+			   "upper", "1"
+		   });
 		addAnnotation
-		  (getToColumn_Column(), 
-		   source, 
+		  (getPrimitiveToName_Primitive(),
+		   source,
 		   new String[] {
-			 "body", "middle",
-			 "upper", "1"
+			   "body", "middle",
+			   "upper", "1"
+		   });
+		addAnnotation
+		  (getToColumn_Column(),
+		   source,
+		   new String[] {
+			   "body", "middle",
+			   "upper", "1"
 		   });
 	}
 

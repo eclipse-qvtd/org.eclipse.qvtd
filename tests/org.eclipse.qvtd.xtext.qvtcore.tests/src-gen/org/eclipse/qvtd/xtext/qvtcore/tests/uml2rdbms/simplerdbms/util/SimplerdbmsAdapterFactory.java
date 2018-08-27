@@ -16,9 +16,6 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.jdt.annotation.Nullable;
-
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simplerdbms.*;
 
 /**
@@ -75,8 +72,8 @@ public class SimplerdbmsAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SimplerdbmsSwitch<@Nullable Adapter> modelSwitch =
-		new SimplerdbmsSwitch<@Nullable Adapter>() {
+	protected SimplerdbmsSwitch<Adapter> modelSwitch =
+		new SimplerdbmsSwitch<Adapter>() {
 			@Override
 			public Adapter caseColumn(Column object) {
 				return createColumnAdapter();

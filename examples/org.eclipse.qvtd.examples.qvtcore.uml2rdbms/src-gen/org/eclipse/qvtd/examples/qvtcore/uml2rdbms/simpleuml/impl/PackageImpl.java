@@ -38,7 +38,7 @@ import org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml.SimpleumlPackage;
  *
  * @generated
  */
-public class PackageImpl extends UMLModelElementImpl implements org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml.Package {
+public class PackageImpl extends PackageElementImpl implements org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml.Package {
 	/**
 	 * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

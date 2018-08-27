@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simplerdbms.ForeignKey;
 
+import org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simplerdbms.Key;
 import org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml.Association;
 
 import org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.AssociationToForeignKey;
@@ -40,6 +41,7 @@ import org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.UmlToRdbmsMod
  *   <li>{@link org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.impl.AssociationToForeignKeyImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.impl.AssociationToForeignKeyImpl#getAssociation <em>Association</em>}</li>
  *   <li>{@link org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.impl.AssociationToForeignKeyImpl#getForeignKey <em>Foreign Key</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.impl.AssociationToForeignKeyImpl#getKey <em>Key</em>}</li>
  *   <li>{@link org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.impl.AssociationToForeignKeyImpl#getOwner <em>Owner</em>}</li>
  *   <li>{@link org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.impl.AssociationToForeignKeyImpl#getReferenced <em>Referenced</em>}</li>
  * </ul>
@@ -86,6 +88,16 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	 * @ordered
 	 */
 	protected ForeignKey foreignKey;
+
+	/**
+	 * The cached value of the '{@link #getKey() <em>Key</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected Key key;
 
 	/**
 	 * The cached value of the '{@link #getReferenced() <em>Referenced</em>}' reference.
@@ -211,6 +223,44 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 		foreignKey = newForeignKey;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__FOREIGN_KEY, oldForeignKey, foreignKey));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Key getKey() {
+		if (key != null && key.eIsProxy()) {
+			InternalEObject oldKey = (InternalEObject)key;
+			key = (Key)eResolveProxy(oldKey);
+			if (key != oldKey) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__KEY, oldKey, key));
+			}
+		}
+		return key;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Key basicGetKey() {
+		return key;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setKey(Key newKey) {
+		Key oldKey = key;
+		key = newKey;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__KEY, oldKey, key));
 	}
 
 	/**
@@ -352,6 +402,9 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__FOREIGN_KEY:
 				if (resolve) return getForeignKey();
 				return basicGetForeignKey();
+			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__KEY:
+				if (resolve) return getKey();
+				return basicGetKey();
 			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER:
 				return getOwner();
 			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__REFERENCED:
@@ -377,6 +430,9 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 				return;
 			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__FOREIGN_KEY:
 				setForeignKey((ForeignKey)newValue);
+				return;
+			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__KEY:
+				setKey((Key)newValue);
 				return;
 			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER:
 				setOwner((ClassToTable)newValue);
@@ -405,6 +461,9 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__FOREIGN_KEY:
 				setForeignKey((ForeignKey)null);
 				return;
+			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__KEY:
+				setKey((Key)null);
+				return;
 			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER:
 				setOwner((ClassToTable)null);
 				return;
@@ -429,6 +488,8 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 				return association != null;
 			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__FOREIGN_KEY:
 				return foreignKey != null;
+			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__KEY:
+				return key != null;
 			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__OWNER:
 				return getOwner() != null;
 			case Simpleuml2rdbmsPackage.ASSOCIATION_TO_FOREIGN_KEY__REFERENCED:
@@ -478,7 +539,7 @@ public class AssociationToForeignKeyImpl extends ToColumnImpl implements Associa
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(')');

@@ -314,6 +314,7 @@ map associationToForeignKey in umlRdbms refines flattening
 		a2f.association := a;
 		a2f.foreignKey := fk;
 		a2f.column := fc;
+		a2f.key := rk;
 	}
 
 	map

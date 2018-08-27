@@ -125,7 +125,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link SimpleumlPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -139,13 +139,16 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 		if (isInited) return (SimpleumlPackage)EPackage.Registry.INSTANCE.getEPackage(SimpleumlPackage.eNS_URI);
 
 		// Obtain or create and register package
-		SimpleumlPackageImpl theSimpleumlPackage = (SimpleumlPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SimpleumlPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SimpleumlPackageImpl());
+		Object registeredSimpleumlPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		SimpleumlPackageImpl theSimpleumlPackage = registeredSimpleumlPackage instanceof SimpleumlPackageImpl ? (SimpleumlPackageImpl)registeredSimpleumlPackage : new SimpleumlPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		Simpleuml2rdbmsPackageImpl theSimpleuml2rdbmsPackage = (Simpleuml2rdbmsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(Simpleuml2rdbmsPackage.eNS_URI) instanceof Simpleuml2rdbmsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(Simpleuml2rdbmsPackage.eNS_URI) : Simpleuml2rdbmsPackage.eINSTANCE);
-		SimplerdbmsPackageImpl theSimplerdbmsPackage = (SimplerdbmsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(SimplerdbmsPackage.eNS_URI) instanceof SimplerdbmsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(SimplerdbmsPackage.eNS_URI) : SimplerdbmsPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(Simpleuml2rdbmsPackage.eNS_URI);
+		Simpleuml2rdbmsPackageImpl theSimpleuml2rdbmsPackage = (Simpleuml2rdbmsPackageImpl)(registeredPackage instanceof Simpleuml2rdbmsPackageImpl ? registeredPackage : Simpleuml2rdbmsPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(SimplerdbmsPackage.eNS_URI);
+		SimplerdbmsPackageImpl theSimplerdbmsPackage = (SimplerdbmsPackageImpl)(registeredPackage instanceof SimplerdbmsPackageImpl ? registeredPackage : SimplerdbmsPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theSimpleumlPackage.createPackageContents();
@@ -160,7 +163,6 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 		// Mark meta-data to indicate it can't be changed
 		theSimpleumlPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(SimpleumlPackage.eNS_URI, theSimpleumlPackage);
 		return theSimpleumlPackage;
@@ -455,7 +457,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 		associationEClass.getESuperTypes().add(this.getPackageElement());
 		classEClass.getESuperTypes().add(this.getClassifier());
 		classifierEClass.getESuperTypes().add(this.getPackageElement());
-		packageEClass.getESuperTypes().add(this.getUMLModelElement());
+		packageEClass.getESuperTypes().add(this.getPackageElement());
 		packageElementEClass.getESuperTypes().add(this.getUMLModelElement());
 		primitiveDataTypeEClass.getESuperTypes().add(this.getClassifier());
 
@@ -482,7 +484,7 @@ public class SimpleumlPackageImpl extends EPackageImpl implements SimpleumlPacka
 		initEReference(getPackage_Elements(), this.getPackageElement(), this.getPackageElement_Namespace(), "elements", null, 0, -1, org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(packageElementEClass, PackageElement.class, "PackageElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPackageElement_Namespace(), this.getPackage(), this.getPackage_Elements(), "namespace", null, 1, 1, PackageElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPackageElement_Namespace(), this.getPackage(), this.getPackage_Elements(), "namespace", null, 0, 1, PackageElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(primitiveDataTypeEClass, PrimitiveDataType.class, "PrimitiveDataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

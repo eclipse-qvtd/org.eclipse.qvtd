@@ -6,6 +6,27 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
+			<name>org.eclipse.qvtd.xtext.qvtbase.ui.qvtdbuilder</name>
+			<arguments>
+				<dictionary>
+					<key>disabledExtensions</key>
+					<value>*</value>
+				</dictionary>
+				<dictionary>
+					<key>disabledPaths</key>
+					<value>target/**</value>
+				</dictionary>
+				<dictionary>
+					<key>enabledExtensions</key>
+					<value>qvtc,qvti,qvtr,umlx</value>
+				</dictionary>
+				<dictionary>
+					<key>enabledPaths</key>
+					<value>model/**</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
 			<name>org.eclipse.jdt.core.javabuilder</name>
 			<arguments>
 			</arguments>
@@ -24,5 +45,6 @@
 	<natures>
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.eclipse.qvtd.xtext.qvtbase.ui.qvtdnature</nature>
 	</natures>
 </projectDescription>

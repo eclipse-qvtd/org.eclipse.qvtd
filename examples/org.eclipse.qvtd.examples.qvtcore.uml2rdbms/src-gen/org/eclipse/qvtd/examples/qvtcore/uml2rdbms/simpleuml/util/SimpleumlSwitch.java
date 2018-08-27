@@ -115,6 +115,7 @@ public class SimpleumlSwitch<T> extends Switch<T> {
 			case SimpleumlPackage.PACKAGE: {
 				org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml.Package package_ = (org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml.Package)theEObject;
 				T result = casePackage(package_);
+				if (result == null) result = casePackageElement(package_);
 				if (result == null) result = caseUMLModelElement(package_);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

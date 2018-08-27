@@ -349,13 +349,22 @@ public interface Simpleuml2rdbmsPackage extends EPackage {
 	int ASSOCIATION_TO_FOREIGN_KEY__FOREIGN_KEY = TO_COLUMN_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Key</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSOCIATION_TO_FOREIGN_KEY__KEY = TO_COLUMN_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Owner</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_TO_FOREIGN_KEY__OWNER = TO_COLUMN_FEATURE_COUNT + 3;
+	int ASSOCIATION_TO_FOREIGN_KEY__OWNER = TO_COLUMN_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Referenced</b></em>' reference.
@@ -364,7 +373,7 @@ public interface Simpleuml2rdbmsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_TO_FOREIGN_KEY__REFERENCED = TO_COLUMN_FEATURE_COUNT + 4;
+	int ASSOCIATION_TO_FOREIGN_KEY__REFERENCED = TO_COLUMN_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Association To Foreign Key</em>' class.
@@ -373,7 +382,7 @@ public interface Simpleuml2rdbmsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSOCIATION_TO_FOREIGN_KEY_FEATURE_COUNT = TO_COLUMN_FEATURE_COUNT + 5;
+	int ASSOCIATION_TO_FOREIGN_KEY_FEATURE_COUNT = TO_COLUMN_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>Association To Foreign Key</em>' class.
@@ -987,6 +996,17 @@ public interface Simpleuml2rdbmsPackage extends EPackage {
 	EReference getAssociationToForeignKey_ForeignKey();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml2rdbms.AssociationToForeignKey#getKey <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Key</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml2rdbms.AssociationToForeignKey#getKey()
+	 * @see #getAssociationToForeignKey()
+	 * @generated
+	 */
+	EReference getAssociationToForeignKey_Key();
+
+	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml2rdbms.AssociationToForeignKey#getOwner <em>Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1393,6 +1413,14 @@ public interface Simpleuml2rdbmsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ASSOCIATION_TO_FOREIGN_KEY__FOREIGN_KEY = eINSTANCE.getAssociationToForeignKey_ForeignKey();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ASSOCIATION_TO_FOREIGN_KEY__KEY = eINSTANCE.getAssociationToForeignKey_Key();
 
 		/**
 		 * The meta object literal for the '<em><b>Owner</b></em>' container reference feature.

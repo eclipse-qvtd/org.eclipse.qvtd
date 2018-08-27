@@ -15,6 +15,7 @@
     <genClasses ecoreClass="SimpleUML2RDBMS.ecore#//AssociationToForeignKey">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//AssociationToForeignKey/association"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//AssociationToForeignKey/foreignKey"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//AssociationToForeignKey/key"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//AssociationToForeignKey/owner"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SimpleUML2RDBMS.ecore#//AssociationToForeignKey/referenced"/>
     </genClasses>

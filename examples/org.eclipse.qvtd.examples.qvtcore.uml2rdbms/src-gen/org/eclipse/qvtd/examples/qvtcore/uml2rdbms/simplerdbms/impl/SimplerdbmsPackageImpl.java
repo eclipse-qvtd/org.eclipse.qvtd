@@ -119,7 +119,7 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link SimplerdbmsPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -133,13 +133,16 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 		if (isInited) return (SimplerdbmsPackage)EPackage.Registry.INSTANCE.getEPackage(SimplerdbmsPackage.eNS_URI);
 
 		// Obtain or create and register package
-		SimplerdbmsPackageImpl theSimplerdbmsPackage = (SimplerdbmsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SimplerdbmsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SimplerdbmsPackageImpl());
+		Object registeredSimplerdbmsPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		SimplerdbmsPackageImpl theSimplerdbmsPackage = registeredSimplerdbmsPackage instanceof SimplerdbmsPackageImpl ? (SimplerdbmsPackageImpl)registeredSimplerdbmsPackage : new SimplerdbmsPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		Simpleuml2rdbmsPackageImpl theSimpleuml2rdbmsPackage = (Simpleuml2rdbmsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(Simpleuml2rdbmsPackage.eNS_URI) instanceof Simpleuml2rdbmsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(Simpleuml2rdbmsPackage.eNS_URI) : Simpleuml2rdbmsPackage.eINSTANCE);
-		SimpleumlPackageImpl theSimpleumlPackage = (SimpleumlPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(SimpleumlPackage.eNS_URI) instanceof SimpleumlPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(SimpleumlPackage.eNS_URI) : SimpleumlPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(Simpleuml2rdbmsPackage.eNS_URI);
+		Simpleuml2rdbmsPackageImpl theSimpleuml2rdbmsPackage = (Simpleuml2rdbmsPackageImpl)(registeredPackage instanceof Simpleuml2rdbmsPackageImpl ? registeredPackage : Simpleuml2rdbmsPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(SimpleumlPackage.eNS_URI);
+		SimpleumlPackageImpl theSimpleumlPackage = (SimpleumlPackageImpl)(registeredPackage instanceof SimpleumlPackageImpl ? registeredPackage : SimpleumlPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theSimplerdbmsPackage.createPackageContents();
@@ -154,7 +157,6 @@ public class SimplerdbmsPackageImpl extends EPackageImpl implements SimplerdbmsP
 		// Mark meta-data to indicate it can't be changed
 		theSimplerdbmsPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(SimplerdbmsPackage.eNS_URI, theSimplerdbmsPackage);
 		return theSimplerdbmsPackage;
