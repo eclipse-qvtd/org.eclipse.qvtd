@@ -283,7 +283,7 @@ public class QVTcCompilerTests extends LoadTestCase
 			myQVT.executeTransformation();
 			myQVT.saveOutput("forward", getTestURI("ThreeElementList_Reverse_CG.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
 			//
-			/*			Class<? extends Transformer> txClass = myQVT.buildTransformation("reverse", false, "List2List.genmodel");
+			Class<? extends Transformer> txClass = myQVT.buildTransformation("reverse", false, "List2List.genmodel");
 			//
 			myQVT.createGeneratedExecutor(txClass);
 			myQVT.loadInput("forward", getModelsURI("forward2reverse/samples/EmptyList.xmi"));
@@ -304,7 +304,7 @@ public class QVTcCompilerTests extends LoadTestCase
 			myQVT.loadInput("forward", getModelsURI("forward2reverse/samples/ThreeElementList.xmi"));
 			myQVT.executeTransformation();
 			myQVT.saveOutput("reverse", getTestURI("ThreeElementList_CG.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
-			 */		}
+		}
 		finally {
 			myQVT.dispose();
 		}
