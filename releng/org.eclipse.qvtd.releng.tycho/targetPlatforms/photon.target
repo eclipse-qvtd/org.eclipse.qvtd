@@ -5,7 +5,6 @@
     <unit id="org.eclipse.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.m2m.atl.sdk.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.emf.sdk.feature.group" version="0.0.0"/>
-    <unit id="org.eclipse.ocl.examples.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.m2m.qvt.oml.runtime.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.m2m.qvt.oml.samples" version="0.0.0"/>
     <unit id="org.eclipse.sirius.specifier.feature.group" version="0.0.0"/>
@@ -23,8 +22,9 @@
     <repository location="http://download.eclipse.org/epsilon/updates"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+    <unit id="org.eclipse.ocl.examples.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.ocl.examples.tests.feature.group" version="0.0.0"/>
-    <repository location="http://download.eclipse.org/modeling/mdt/ocl/updates/releases/6.4.0"/>
+    <repository location="http://download.eclipse.org/modeling/mdt/ocl/updates/milestones"/>
   </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.license.feature.group" version="0.0.0"/>
