@@ -89,10 +89,7 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 
 	@Override
 	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
-		getRegionSchedule();
-		// TODO Auto-generated method stub
-		//	throw new UnsupportedOperationException();		// FIXME
-		return partitions.iterator().next().createMicroMappingRegion(partitionNumber);		// FIXME temporary fudge
+		throw new UnsupportedOperationException();		// FIXME
 	}
 
 	public @NonNull Iterable<@NonNull MappingRegion> createMicroMappingRegions(@NonNull Region partitionRegion) {
@@ -103,8 +100,7 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 				Iterables.addAll(microMappingRegions, ((CyclicPartition)partition).createMicroMappingRegions(partitionRegion));
 			}
 			else {
-				int partitionNumber = partitionRegion.getNextPartitionNumber();
-				microMappingRegions.add(partition.createMicroMappingRegion(partitionNumber));
+				microMappingRegions.add(partition.getMicroMappingRegion());
 			}
 		}
 		return microMappingRegions;
@@ -119,6 +115,11 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	@Override
 	public @NonNull Set<@NonNull Partition> getExplicitPredecessors() {
 		return externalPredecessors;
+	}
+
+	@Override
+	public @NonNull MappingRegion getMicroMappingRegion() {
+		throw new UnsupportedOperationException();		// FIXME
 	}
 
 	@Override

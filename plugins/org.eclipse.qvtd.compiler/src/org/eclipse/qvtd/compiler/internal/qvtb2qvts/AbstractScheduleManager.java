@@ -923,6 +923,9 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 				symbolName = symbolName + suffix;
 			}
 			URI dotURI = URI.createURI(symbolName + ".dot").resolve(baseURI);
+			if (dotURI.toString().contains("mTmapIfExp__DmapOclExpression_d2qvtrExpression_glob")) {
+				getClass().toString();
+			}
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 				try {
@@ -973,6 +976,9 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		if (doDotGraphs) {
 			URI baseURI = getGraphsBaseURI();
 			URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_")*/ + suffix + ".dot").resolve(baseURI);
+			if (dotURI.toString().contains("mTmapIfExp__DmapOclExpression_d2qvtrExpression_glob")) {
+				getClass().toString();
+			}
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 				try {

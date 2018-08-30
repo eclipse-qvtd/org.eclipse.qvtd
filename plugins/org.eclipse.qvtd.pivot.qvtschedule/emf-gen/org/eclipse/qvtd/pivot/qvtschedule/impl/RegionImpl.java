@@ -147,6 +147,9 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	 */
 	@Override
 	public void setSymbolName(String newSymbolName) {
+		if ((newSymbolName != null) && newSymbolName.contains("mTmapIfExp__DmapOclExpression_d2qvtrExpression_glob")) {
+			getClass().toString();
+		}
 		String oldSymbolName = symbolName;
 		symbolName = newSymbolName;
 		if (eNotificationRequired())
@@ -1035,6 +1038,9 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 				System.err.println("Failed to reserve '" + symbolName2 + "' for " + this);
 			}
 			symbolName = symbolName2;
+			if ((symbolName != null) && symbolName.contains("mTmapIfExp__DmapOclExpression_d2qvtrExpression_glob")) {
+				getClass().toString();
+			}
 		}
 		return symbolName2;
 	}

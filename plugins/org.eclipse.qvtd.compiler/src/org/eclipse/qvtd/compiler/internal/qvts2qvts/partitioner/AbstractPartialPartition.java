@@ -20,6 +20,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleHeadAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
@@ -72,6 +73,8 @@ abstract class AbstractPartialPartition extends AbstractPartition
 	 * Explicitly specified predecessors for use by QVTc where there is no trace localSuccess linkage.
 	 */
 	private final @NonNull List<@NonNull Partition> explicitPredecessors = new ArrayList<>();
+
+	private @Nullable MicroMappingRegion microMappingRegion = null;
 
 	//	protected AbstractPartialPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
 	//		super(partitioner);
@@ -266,6 +269,7 @@ abstract class AbstractPartialPartition extends AbstractPartition
 	}
 
 	protected @NonNull MicroMappingRegion createMicroMappingRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
+		assert microMappingRegion  == null;
 		assert !(region instanceof MicroMappingRegion);
 		MicroMappingRegion partialRegion = createPartialRegion(namePrefix, symbolSuffix);
 		PartitioningVisitor partitioningVisitor = createPartitioningVisitor(partialRegion);
@@ -287,7 +291,7 @@ abstract class AbstractPartialPartition extends AbstractPartition
 			scheduleManager.writeDebugGraphs(microMappingRegion, null);
 		}
 		check(microMappingRegion);
-
+		this.microMappingRegion = microMappingRegion;
 		return microMappingRegion;
 	}
 
@@ -308,6 +312,11 @@ abstract class AbstractPartialPartition extends AbstractPartition
 	@Override
 	public @NonNull List<@NonNull Partition> getExplicitPredecessors() {
 		return explicitPredecessors;
+	}
+
+	@Override
+	public @NonNull MappingRegion getMicroMappingRegion() {
+		return ClassUtil.nonNullState(microMappingRegion);
 	}
 
 	@Override
@@ -519,8 +528,8 @@ abstract class AbstractPartialPartition extends AbstractPartition
 			}
 			else {
 				Edge edge = reachabilityForest.getReachingEdge(node);
-				if (edge != null) {
-					assert !edge.isSecondary() && !hasEdge(edge);
+				if ((edge != null) && !hasEdge(edge)) {
+					assert /*!edge.isSecondary() &&*/ !hasEdge(edge);
 					Role sourceNodeRole = node2nodeRole.get(edge.getEdgeSource());
 					if (sourceNodeRole != null) {
 						Role targetNodeRole = node2nodeRole.get(edge.getEdgeTarget());

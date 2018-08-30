@@ -221,7 +221,11 @@ public class MappingPartitioner implements Nameable
 			Set<@NonNull Edge> extraEdgesSet = Sets.newHashSet(partitionedEdges);
 			CompilerUtil.removeAll(extraEdgesSet, allPrimaryEdges);
 			for (@NonNull Edge edge : extraEdgesSet) {
-				addProblem(CompilerUtil.createRegionWarning(region, "Extra " + edge));
+				if (!edge.isSecondary()) {
+					@SuppressWarnings("unused")
+					List<@NonNull AbstractPartialPartition> extraPartitions = debugEdge2partitions.get(edge);
+					addProblem(CompilerUtil.createRegionWarning(region, "Extra " + edge));
+				}
 			}
 			Set<@NonNull Edge> missingEdgesSet = Sets.newHashSet(allPrimaryEdges);
 			missingEdgesSet.removeAll(partitionedEdges);
