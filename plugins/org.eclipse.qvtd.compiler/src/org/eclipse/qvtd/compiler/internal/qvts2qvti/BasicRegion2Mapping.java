@@ -1335,6 +1335,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		Type variableType = guardNode.getCompleteClass().getPrimaryClass();
 		ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(classDatum.getReferredTypedModel()));
 		GuardParameter guardParameter = helper.createGuardParameter(getSafeName(guardNode), iTypedModel, variableType, true);
+		Property successProperty = null;
 		Property globalSuccessProperty = scheduleManager.basicGetGlobalSuccessProperty(guardNode);
 		if (globalSuccessProperty != null) {
 			NavigableEdge globalSuccessEdge = guardNode.getNavigableEdge(globalSuccessProperty);
@@ -1342,9 +1343,24 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				Node globalSuccessNode = QVTscheduleUtil.getTargetNode(globalSuccessEdge);
 				if (globalSuccessNode.isSuccess()) {
 					assert globalSuccessEdge.isRealized();
-					guardParameter.setSuccessProperty(globalSuccessProperty);
+					successProperty = globalSuccessProperty;
 				}
 			}
+		}
+		Property localSuccessProperty = scheduleManager.basicGetLocalSuccessProperty(guardNode);
+		if (localSuccessProperty != null) {
+			NavigableEdge localSuccessEdge = guardNode.getNavigableEdge(localSuccessProperty);
+			if (localSuccessEdge != null) {
+				Node localSuccessNode = QVTscheduleUtil.getTargetNode(localSuccessEdge);
+				if (localSuccessNode.isSuccess()) {
+					assert localSuccessEdge.isRealized();
+					assert successProperty == null;
+					successProperty = localSuccessProperty;
+				}
+			}
+		}
+		if (successProperty != null) {
+			guardParameter.setSuccessProperty(successProperty);
 		}
 		mapping.getOwnedMappingParameters().add(guardParameter);
 		VariableDeclaration oldVariable = node2variable.put(guardNode, guardParameter);

@@ -126,7 +126,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				//
 				//	Save trace (occurs as part of GenModel creation)
 				//
-				if (true) {
+				if (false) {		// FIXME true for debugging but results in two same-URI resources,need to unload this temporary
 					URI ecoreURI = traceResource.getURI().trimFileExtension();
 					AS2Ecore as2ecore = new AS2Ecore(environmentFactory, ecoreURI, null);
 					XMLResource ecoreResource = as2ecore.convertResource(traceResource, ecoreURI);

@@ -196,7 +196,7 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 
 	@Override
 	public @NonNull Node createNode(@NonNull Role nodeRole, @NonNull Region region) {
-		MappingNodeImpl node = (MappingNodeImpl)super.createNode(nodeRole,  region);
+		MappingNodeImpl node = (MappingNodeImpl)super.createNode(nodeRole, region);
 		node.isRequired = isRequired;
 		node.originatingVariable = originatingVariable;
 		for (@NonNull Element typedElement : originatingElements) {

@@ -44,7 +44,7 @@ import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
 /**
- * GenModelCompilerStep activates the EMG GenModel tooling to generate the Java classes from the
+ * GenModelCompilerStep activates the EMF GenModel tooling to generate the Java classes from the
  * synthesized Ecore model for the middle/trace model.
  */
 public class GenModelGenerateCompilerStep extends AbstractCompilerStep

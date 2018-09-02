@@ -118,12 +118,15 @@ class SpeculatingPartition extends AbstractPartialPartition
 		{
 			@Override
 			public @Nullable Element visitSuccessNode(@NonNull SuccessNode node) {
-				if (node == partitioner.basicGetLocalSuccessNode(traceNode)) {
-					return null;			// localStatus is redundant when globalStatus in use
+				for (@NonNull Node traceNode : executionNodes) {
+					if (node == partitioner.basicGetLocalSuccessNode(traceNode)) {
+						RegionHelper<@NonNull MicroMappingRegion> partialRegionHelper = new RegionHelper<>(scheduleManager, partialRegion);
+						Node partialNode = partialRegionHelper.createBooleanLiteralNode(true);
+						addNode(node, partialNode);
+						return partialNode;
+					}
 				}
-				else {
-					return super.visitSuccessNode(node);
-				}
+				return super.visitSuccessNode(node);
 			}
 		};
 	}
