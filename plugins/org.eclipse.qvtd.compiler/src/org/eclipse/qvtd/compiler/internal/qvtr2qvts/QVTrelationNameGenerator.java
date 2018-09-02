@@ -25,7 +25,7 @@ public class QVTrelationNameGenerator extends NameGenerator
 	public static final @NonNull String IDENTIFIED_INSTANCE_VARIABLE_NAME = "identifiedInstance";
 	public static final @NonNull String KEYED_INSTANCE_PROPERTY_NAME = "instance";
 	public static final @NonNull String KEY2INSTANCE_VARIABLE_NAME = "key2instance";
-	public static final @NonNull String TRACE_GLOBAL_SUCCESS_PROPERTY_NAME = "globalSuccess";
+	public static final @NonNull String TRACE_GLOBAL_SUCCESS_PROPERTY_NAME = "success"; // "globalSuccess";
 	public static final @NonNull String TRACE_LOCAL_SUCCESS_PROPERTY_NAME = "localSuccess";
 	public static final @NonNull String TRACECLASS_PROPERTY_NAME = "trace";
 
