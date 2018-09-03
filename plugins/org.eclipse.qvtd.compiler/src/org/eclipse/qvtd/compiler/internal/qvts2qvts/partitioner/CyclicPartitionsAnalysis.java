@@ -88,7 +88,8 @@ public class CyclicPartitionsAnalysis
 			Set<@NonNull TraceClassAnalysis<@NonNull Partition>> cyclicTraceClassAnalyses = computeTraceClassAnalysisDependencies(leafPartitions);
 			Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> cyclicTracePropertyAnalyses = computeTracePropertyAnalysisDependencies(leafPartitions);
 			//			Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> localPartition2Predecessors = computePartition2Predecessors(partition2predecessors, rootPartitioning);
-			return new RootPartition(leafPartition2predecessors, cyclicTraceClassAnalyses, cyclicTracePropertyAnalyses);
+			String rootName = "«root»";
+			return new RootPartition(rootName, leafPartition2predecessors, cyclicTraceClassAnalyses, cyclicTracePropertyAnalyses);
 		}
 		intersections.add(Sets.newHashSet(leafPartitions));
 		return createAcyclicPartitionHierarchy(intersections, leafPartition2predecessors);
@@ -239,7 +240,7 @@ public class CyclicPartitionsAnalysis
 		Collections.sort(sortedPartitionings, QVTbaseUtil.CollectionSizeComparator.INSTANCE);	// Smallest first
 		//
 		//	A nested cycle is necessarily fully contained by a nesting cycle. We can therefore steadily replace
-		//	each set of nested elements by a cyclic element in the nesting context. The mallest first lordering
+		//	each set of nested elements by a cyclic element in the nesting context. The smallest first lordering
 		//	does not need to be recomputed after each nesting simplification since nested candidates continue to
 		//	precede their potential nestings.
 		//
@@ -294,7 +295,8 @@ public class CyclicPartitionsAnalysis
 		Set<@NonNull Partition> rootPartitioning = sortedPartitionings.get(iMax-1);
 		Set<@NonNull TraceClassAnalysis<@NonNull Partition>> rootTraceClassAnalyses = computeTraceClassAnalysisDependencies(rootPartitioning);
 		Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> rootTracePropertyAnalyses = computeTracePropertyAnalysisDependencies(rootPartitioning);
-		RootPartition rootPartition = new RootPartition(partition2predecessors, rootTraceClassAnalyses, rootTracePropertyAnalyses);
+		String rootName = "«root»";
+		RootPartition rootPartition = new RootPartition(rootName, partition2predecessors, rootTraceClassAnalyses, rootTracePropertyAnalyses);
 		acyclicPartitionHierarchy.add(rootPartition);
 		if (TransformationPartitioner.CYCLES.isActive()) {
 			showCycles(acyclicPartitionHierarchy);

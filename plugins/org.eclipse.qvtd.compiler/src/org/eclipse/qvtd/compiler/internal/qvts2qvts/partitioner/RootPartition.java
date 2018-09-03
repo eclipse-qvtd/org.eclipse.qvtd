@@ -29,6 +29,7 @@ import com.google.common.collect.Lists;
 
 public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Partition>*/ implements InternallyAcyclicPartition
 {
+	protected final @NonNull String name;
 	protected final @NonNull Iterable<@NonNull Partition> partitions;
 	protected final @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors;
 	//	protected final @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2successors;
@@ -39,9 +40,10 @@ public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Part
 	private @Nullable List<@NonNull Iterable<@NonNull Partition>> partitionSchedule = null;
 	private @Nullable List<@NonNull Collection<@NonNull Region>> regionSchedule = null;
 
-	public RootPartition(@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors,
+	public RootPartition(@NonNull String name, @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors,
 			@NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> cyclicTraceClassAnalyses,
 			@NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> cyclicTracePropertyAnalyses) {
+		this.name = name;
 		this.partitions = partition2predecessors.keySet();
 		this.partition2predecessors = partition2predecessors;
 		//		this.partition2successors = partition2successors;
@@ -132,5 +134,10 @@ public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Part
 
 	public void setScheduledRegion(@NonNull ScheduledRegion scheduledRegion) {
 		this.scheduledRegion = scheduledRegion;
+	}
+
+	@Override
+	public @NonNull String toString() {
+		return name;
 	}
 }

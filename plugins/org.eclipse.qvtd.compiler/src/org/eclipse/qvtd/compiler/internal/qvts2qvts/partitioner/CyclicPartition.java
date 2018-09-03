@@ -144,9 +144,11 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 		List<@NonNull Iterable<@NonNull Partition>> partitionSchedule2 = partitionSchedule;
 		if (partitionSchedule2 == null) {
 			//
-			//	The simplest cyclic schedule is dump polled. FOr small cycles the effort of
+			//	The simplest cyclic schedule is dumb polled. For small cycles the effort of
 			//	using the immediate external predecesors as region heads for an internal acyclic
 			//	schedule and integrating externally is probably not worth it.
+			//
+			// FIXME For ATL2QVTr the cycle is 29 partitions (and counting) with many three-level cascades. Worth improving.
 			//
 			Iterable<@NonNull Partition> keys = partition2predecessors.keySet();
 			partitionSchedule = partitionSchedule2 = Collections.singletonList(keys); //CompilerUtil.computeParallelSchedule(partition2predecessors);
