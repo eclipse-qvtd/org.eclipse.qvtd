@@ -64,7 +64,7 @@ public class QVTrelationAS2CS extends EssentialOCLAS2CS
 		}
 	}
 
-	public QVTrelationAS2CS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap, @NonNull EnvironmentFactoryInternal environmentFactory) {
+	public QVTrelationAS2CS(@NonNull Map<@NonNull ? extends BaseCSResource, @NonNull ? extends ASResource> cs2asResourceMap, @NonNull EnvironmentFactoryInternal environmentFactory) {
 		super(cs2asResourceMap, environmentFactory);
 		addFactory(Factory.INSTANCE);
 		for (BaseCSResource csResource : cs2asResourceMap.keySet()) {
