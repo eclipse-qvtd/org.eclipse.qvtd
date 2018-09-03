@@ -289,6 +289,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 		protected void createConstantCheck(@NonNull Edge edge, @NonNull OCLExpression checkExpression) {
 			if (edge.isSpeculated()) {
+				assert edge.isSuccess();
 				System.err.println("Speculation code omitted for " + region);
 			}
 			else {
@@ -1099,6 +1100,10 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		super(visitor, regionAnalysis.getRegion());
 		this.regionAnalysis = regionAnalysis;
 		this.reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
+		String name = region.getName();
+		if (name.contains("mapHelper_Attribute_qvtr")) {
+			getClass();
+		}
 		this.checkedConditionAnalysis = new CheckedConditionAnalysis(regionAnalysis, reachabilityForest);
 		this.resultNode2subexpression = computeSubexpressions();
 		//
@@ -1776,7 +1781,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	@Override
 	public void synthesizeLocalStatements() {
 		String name = region.getName();
-		if ("mapVariableExp_referredVariable_Helper_qvtr".equals(name)) {
+		if (name.contains("mapHelper_Attribute_qvtr")) {
 			getClass();
 		}
 		createHeadAndGuardNodeVariables();			// BLUE/CYAN guard/append nodes
