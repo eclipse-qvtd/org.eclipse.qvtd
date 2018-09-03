@@ -205,7 +205,7 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 			boolean didInvoke = false;
 			if (partialConsumerIndex < consumerIndex) {
 				for (currentConsumedIndex = 0; currentConsumedIndex < targetConsumedIndex; currentConsumedIndex++) {
-					didInvoke |= propagateNext(partialConsumerIndex, values);
+					didInvoke |= (propagateNext(partialConsumerIndex, values) == Boolean.TRUE);
 				}
 			}
 			else if (partialConsumerIndex == consumerIndex) {
@@ -222,7 +222,7 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 					}
 				}
 				for (currentConsumedIndex = previouslyConsumedIndex; currentConsumedIndex < targetConsumedIndex; currentConsumedIndex++) {
-					didInvoke |= propagateNext(partialConsumerIndex, values);
+					didInvoke |= (propagateNext(partialConsumerIndex, values) == Boolean.TRUE);
 				}
 			}
 			else {
