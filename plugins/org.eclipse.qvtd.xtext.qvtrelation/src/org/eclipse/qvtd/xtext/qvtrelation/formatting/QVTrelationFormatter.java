@@ -91,10 +91,10 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 		}
 		{
 			DomainCSElements a = f.getDomainCSAccess();
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_6_1(), a.getRightCurlyBracketKeyword_6_3());
-			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_6_1(), a.getRightCurlyBracketKeyword_6_3());
-			setNoSpaceLineWrap(c, a.getCommaKeyword_4_0());
-			setNoSpaceLineWrap(c, a.getSemicolonKeyword_7());
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_5_1(), a.getRightCurlyBracketKeyword_5_3());
+			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_5_1(), a.getRightCurlyBracketKeyword_5_3());
+			setNoSpaceLineWrap(c, a.getCommaKeyword_3_1_0());
+			setNoSpaceLineWrap(c, a.getSemicolonKeyword_6());
 		}
 		{
 			KeyDeclCSElements a = f.getKeyDeclCSAccess();

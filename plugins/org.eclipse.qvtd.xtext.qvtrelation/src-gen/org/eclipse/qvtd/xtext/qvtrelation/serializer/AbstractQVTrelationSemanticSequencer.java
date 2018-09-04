@@ -664,8 +664,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends QVTbaseSemant
 	 *     (
 	 *         (isCheckonly?='checkonly' | isEnforce?='enforce')?
 	 *         modelId=[TypedModel|UnrestrictedName]
-	 *         ownedPatterns+=DomainPatternCS
-	 *         ownedPatterns+=DomainPatternCS*
+	 *         (ownedPatterns+=DomainPatternCS ownedPatterns+=DomainPatternCS*)?
 	 *         implementedBy=UnrestrictedName?
 	 *         ownedDefaultValues+=DefaultValueCS*
 	 *     )

@@ -128,9 +128,10 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getCollectionTemplateCSAccess().getGroup_4_1(), "rule__CollectionTemplateCS__Group_4_1__0");
 					put(grammarAccess.getDefaultValueCSAccess().getGroup(), "rule__DefaultValueCS__Group__0");
 					put(grammarAccess.getDomainCSAccess().getGroup(), "rule__DomainCS__Group__0");
+					put(grammarAccess.getDomainCSAccess().getGroup_3(), "rule__DomainCS__Group_3__0");
+					put(grammarAccess.getDomainCSAccess().getGroup_3_1(), "rule__DomainCS__Group_3_1__0");
 					put(grammarAccess.getDomainCSAccess().getGroup_4(), "rule__DomainCS__Group_4__0");
 					put(grammarAccess.getDomainCSAccess().getGroup_5(), "rule__DomainCS__Group_5__0");
-					put(grammarAccess.getDomainCSAccess().getGroup_6(), "rule__DomainCS__Group_6__0");
 					put(grammarAccess.getKeyDeclCSAccess().getGroup(), "rule__KeyDeclCS__Group__0");
 					put(grammarAccess.getKeyDeclCSAccess().getGroup_3_1(), "rule__KeyDeclCS__Group_3_1__0");
 					put(grammarAccess.getKeyDeclCSAccess().getGroup_4(), "rule__KeyDeclCS__Group_4__0");
@@ -344,10 +345,10 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDomainCSAccess().getIsCheckonlyAssignment_0_0(), "rule__DomainCS__IsCheckonlyAssignment_0_0");
 					put(grammarAccess.getDomainCSAccess().getIsEnforceAssignment_0_1(), "rule__DomainCS__IsEnforceAssignment_0_1");
 					put(grammarAccess.getDomainCSAccess().getModelIdAssignment_2(), "rule__DomainCS__ModelIdAssignment_2");
-					put(grammarAccess.getDomainCSAccess().getOwnedPatternsAssignment_3(), "rule__DomainCS__OwnedPatternsAssignment_3");
-					put(grammarAccess.getDomainCSAccess().getOwnedPatternsAssignment_4_1(), "rule__DomainCS__OwnedPatternsAssignment_4_1");
-					put(grammarAccess.getDomainCSAccess().getImplementedByAssignment_5_1(), "rule__DomainCS__ImplementedByAssignment_5_1");
-					put(grammarAccess.getDomainCSAccess().getOwnedDefaultValuesAssignment_6_2(), "rule__DomainCS__OwnedDefaultValuesAssignment_6_2");
+					put(grammarAccess.getDomainCSAccess().getOwnedPatternsAssignment_3_0(), "rule__DomainCS__OwnedPatternsAssignment_3_0");
+					put(grammarAccess.getDomainCSAccess().getOwnedPatternsAssignment_3_1_1(), "rule__DomainCS__OwnedPatternsAssignment_3_1_1");
+					put(grammarAccess.getDomainCSAccess().getImplementedByAssignment_4_1(), "rule__DomainCS__ImplementedByAssignment_4_1");
+					put(grammarAccess.getDomainCSAccess().getOwnedDefaultValuesAssignment_5_2(), "rule__DomainCS__OwnedDefaultValuesAssignment_5_2");
 					put(grammarAccess.getDomainPatternCSAccess().getOwnedTemplateAssignment(), "rule__DomainPatternCS__OwnedTemplateAssignment");
 					put(grammarAccess.getElementTemplateCSAccess().getIdentifierAssignment(), "rule__ElementTemplateCS__IdentifierAssignment");
 					put(grammarAccess.getKeyDeclCSAccess().getOwnedPathNameAssignment_1(), "rule__KeyDeclCS__OwnedPathNameAssignment_1");

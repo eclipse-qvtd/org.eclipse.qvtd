@@ -44,7 +44,7 @@ CollectionTemplateCS: name=UnrestrictedName? ':' ownedType=CollectionTypeCS
 DefaultValueCS: propertyId=[qvtrelation::SharedVariable|UnrestrictedName] '=' ownedInitExpression=ExpCS ';';
 
 DomainCS: (isCheckonly?='checkonly' | isEnforce?='enforce' | 'replace')? 'domain' modelId=[qvtbase::TypedModel|UnrestrictedName] 
-			ownedPatterns+=DomainPatternCS (',' ownedPatterns+=DomainPatternCS)*
+			(ownedPatterns+=DomainPatternCS (',' ownedPatterns+=DomainPatternCS)*)?
              ('implementedby' implementedBy=UnrestrictedName)?
              ('default_values' '{' (ownedDefaultValues+=DefaultValueCS)+ '}')?
              ';';
