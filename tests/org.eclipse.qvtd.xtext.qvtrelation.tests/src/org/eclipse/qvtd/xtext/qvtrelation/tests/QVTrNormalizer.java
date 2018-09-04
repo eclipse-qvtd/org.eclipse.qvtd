@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase.Normalizer;
 import org.eclipse.ocl.pivot.Model;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -63,7 +64,21 @@ public class QVTrNormalizer extends PivotNormalizer
 		@SuppressWarnings("unchecked")
 		@Override
 		public void normalize() {
-			ECollections.sort((EList<@NonNull Domain>)asRelation.getDomain(), DomainComparator.INSTANCE);
+			ECollections.sort(asRelation.getDomain(), DomainComparator.INSTANCE);
+		}
+	}
+
+	protected class TransformationNormalizer extends ClassNormalizer
+	{
+		public TransformationNormalizer(@NonNull Transformation asTransformation) {
+			super(asTransformation);
+		}
+
+		@SuppressWarnings("unchecked")
+		@Override
+		public void normalize() {
+			super.normalize();
+			ECollections.sort(((Transformation)asClass).getModelParameter(), NameUtil.NAMEABLE_COMPARATOR);
 		}
 	}
 
@@ -77,6 +92,10 @@ public class QVTrNormalizer extends PivotNormalizer
 			}
 			else if (eObject instanceof org.eclipse.ocl.pivot.Package) {
 				normalizers.add(new PackageNormalizer((org.eclipse.ocl.pivot.Package)eObject));
+			}
+			else if (eObject instanceof Transformation) {
+				((Transformation)eObject).setUnspecializedElement(null);		// Suppress transient value
+				normalizers.add(new TransformationNormalizer((Transformation)eObject));
 			}
 			else if (eObject instanceof org.eclipse.ocl.pivot.Class) {
 				((org.eclipse.ocl.pivot.Class)eObject).setUnspecializedElement(null);		// Suppress transient value
