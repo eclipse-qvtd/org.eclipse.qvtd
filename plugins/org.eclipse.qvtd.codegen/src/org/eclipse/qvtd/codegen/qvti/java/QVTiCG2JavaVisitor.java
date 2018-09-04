@@ -1345,13 +1345,13 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 					js.append("(");
 					js.appendValueName(cgBody);
 					js.append(");\n");
-					js.append("if (");
-					js.appendValueName(cgBody);
-					js.append(") {\n");
-					js.pushIndentation(null);
+					//	js.append("if (");
+					//	js.appendValueName(cgBody);
+					//	js.append(") {\n");
+					//	js.pushIndentation(null);
 					doAssigned(cgGuardVariable, eStructuralFeature, cgBody);
-					js.popIndentation();
-					js.append("}\n");
+					//	js.popIndentation();
+					//	js.append("}\n");
 				}
 			}
 		}
