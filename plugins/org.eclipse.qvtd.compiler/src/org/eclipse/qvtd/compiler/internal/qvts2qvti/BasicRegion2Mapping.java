@@ -196,6 +196,10 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 
 		public @NonNull Iterable<@NonNull CheckedCondition> analyze() {
+			String name = region.getName();
+			if (name.contains("mapHelper_Operation")) {
+				getClass();
+			}
 			//
 			//	A dispatch input node must be checked to confirm the correct derivation.
 			//
@@ -210,7 +214,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			//
 			//	A predicated head node success must be checked before anything else.
 			//
-			for (@NonNull Node headNode : headNodes) {
+			for (@NonNull Node headNode : headNodes) {		// FIXME This should be redundant wrt prioritized CheckConditions
 				Edge localSuccessEdge = regionAnalysis.basicGetLocalSuccessEdge(headNode);
 				if ((localSuccessEdge != null) && localSuccessEdge.isPredicated()) {
 					addEdge(localSuccessEdge);

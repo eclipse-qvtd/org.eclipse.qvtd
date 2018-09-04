@@ -97,7 +97,10 @@ class SpeculatedPartition extends AbstractPartialPartition
 					return partialNode;
 				}
 				else if (node == partitioner.basicGetLocalSuccessNode(traceNode)) {
-					return null;			// localStatus is redundant when globalStatus in use
+					Node partialNode = regionHelper.createBooleanLiteralNode(true);
+					addNode(node, partialNode);
+					return partialNode;
+					//		return null;			// localStatus is redundant when globalStatus in use
 				}
 				else {
 					return super.visitSuccessNode(node);
@@ -191,6 +194,10 @@ class SpeculatedPartition extends AbstractPartialPartition
 		assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
 		addNode(traceNode, Role.PREDICATED);
 		if (scheduleManager.useActivators()) {
+			Node localSuccessNode = partitioner.basicGetLocalSuccessNode(traceNode);
+			if (localSuccessNode != null) {
+				addNode(localSuccessNode, Role.PREDICATED);
+			}
 			Node globalSuccessNode = partitioner.getGlobalSuccessNode(traceNode);
 			addNode(globalSuccessNode, Role.PREDICATED);
 		}

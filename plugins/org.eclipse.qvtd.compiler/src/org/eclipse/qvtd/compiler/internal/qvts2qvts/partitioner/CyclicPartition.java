@@ -150,6 +150,21 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 			//
 			// FIXME For ATL2QVTr the cycle is 29 partitions (and counting) with many three-level cascades. Worth improving.
 			//
+			// Analyzing predecessor partitions is unhelpful since they are cyclic.
+			// Analyzing the producers of each source datum is more fruitful.
+			// The partitions of the producers of each source datum are either ACYCLIC, CYCLIC or MIXED.
+			//	ACYCLIC => all partitions are external to the cyclic partition being scheduled
+			//	CYCLIC => all partitions are internal to the cyclic partition being scheduled
+			//	MIXED => some partitions are external and some are internal to the cyclic partition being scheduled
+			//
+			// A partition with 0 MIXED, 0 CYCLIC, 0 ACYCLIC producers does not occur - it is dead.
+			// A partition with 0 MIXED, 0 CYCLIC, 1+ ACYCLIC producers does not occur - it is acyclic.
+			// A partition with 0 MIXED, 1+ CYCLIC and 0+ ACYCLIC is a recursing step
+			// A partition with 1+ MIXED, 0 CYCLIC and 0+ ACYCLIC producers is a a base case.
+			// A partition with 1+ MIXED, 1+ CYCLIC and 0+ ACYCLIC producers is a recursive case
+			//
+			// The cyclic schedule is therefore {base-cases}, {recursing-steps}... {recursive-cases}
+			//
 			Iterable<@NonNull Partition> keys = partition2predecessors.keySet();
 			partitionSchedule = partitionSchedule2 = Collections.singletonList(keys); //CompilerUtil.computeParallelSchedule(partition2predecessors);
 			for (@NonNull Partition partition : partitions) {

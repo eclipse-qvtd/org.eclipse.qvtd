@@ -32,7 +32,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
- * A CheckedConditionWeightComparator supports prioritization lof condition check synthesis by sorting
+ * A CheckedConditionWeightComparator supports prioritization of condition check synthesis by sorting
  * condition according to their weight, which is the number of edges to be traversed in order to prepare
  * the inputs for the check.
  */
@@ -58,7 +58,11 @@ public class CheckedConditionWeightComparator implements CheckedConditionVisitor
 	public int compare(@NonNull CheckedCondition o1, @NonNull CheckedCondition o2) {
 		int w1 = getWeight(o1);
 		int w2 = getWeight(o2);
-		return w1 - w2;
+		int diff = w1 - w2;
+		if (diff != 0) {
+			return diff;
+		}
+		return o1.compareTo(o2);
 	}
 
 	private int getWeight(@NonNull CheckedCondition checkedCondition) {

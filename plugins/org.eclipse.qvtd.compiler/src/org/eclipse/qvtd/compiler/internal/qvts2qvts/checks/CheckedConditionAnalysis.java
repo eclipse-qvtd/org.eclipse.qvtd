@@ -45,6 +45,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
@@ -281,10 +282,14 @@ public class CheckedConditionAnalysis
 			return visiting(object);
 		}
 
-		//		@Override
-		//		public Object visitSuccessEdge(@NonNull SuccessEdge successEdge) {
-		//			return super.visitSuccessEdge(successEdge);
-		//		}
+		@Override
+		public Object visitSuccessEdge(@NonNull SuccessEdge successEdge) {
+			assert isCheckedNavigation(successEdge);
+			Property localSuccessProperty = scheduleManager.basicGetLocalSuccessProperty(QVTscheduleUtil.getSourceNode(successEdge));
+			boolean isLocalSuccess = successEdge.getReferredProperty() == localSuccessProperty;
+			context.add(new ConstantTargetCheckedCondition(successEdge, isLocalSuccess));
+			return null;
+		}
 
 		//		@Override
 		//		public Object visitSuccessNode(@NonNull SuccessNode object) {

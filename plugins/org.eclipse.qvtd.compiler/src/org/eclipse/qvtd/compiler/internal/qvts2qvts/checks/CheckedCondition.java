@@ -24,12 +24,46 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
  *
  * QVTi synthesis prioritises easily computed CheckedConditions to minimize the wasted effort in computing failures.
  */
-public abstract class CheckedCondition
+public abstract class CheckedCondition implements Comparable<@NonNull CheckedCondition>
 {
+	/**
+	 * CheckPriority defines an ordering criterion for sorting equal weight CheckedCondition instances
+	 * in a lowest priority last order.
+	 */
+	protected enum CheckPriority {
+		LOCAL_SUCCESS_EDGE,
+		GLOBAL_SUCCESS_EDGE,
+		CONSTANT_TARGET,
+		LOWEST_PRIORITY
+	}
+
 	/**
 	 * Return the result of invoking the derived-class-specific visitor method.
 	 */
 	public abstract <R> R accept(@NonNull CheckedConditionVisitor<R> visitor);
+
+	/**
+	 * CheckedCondition with a non-null getCheckPriority() are compared by that prioritu, else
+	 * they are compared by their class names else by their toString() values.
+	 */
+	@Override
+	public int compareTo(@NonNull CheckedCondition that) {
+		CheckPriority thisPriority = getCheckPriority();
+		CheckPriority thatPriority = that.getCheckPriority();
+		int thisOrdinal = thisPriority.ordinal();
+		int thatOrdinal = thatPriority.ordinal();
+		if (thisOrdinal != thatOrdinal) {
+			return thisOrdinal - thatOrdinal;
+		}
+		Class<?> thisClass = this.getClass();
+		Class<?> thatClass = that.getClass();
+		if (thisClass != thatClass) {
+			return thisClass.getName().compareTo(thatClass.getName());
+		}
+		String thisString = this.toString();
+		String thatString = that.toString();
+		return thisString.compareTo(thatString);
+	}
 
 	/**
 	 * Return a list of edges that contribute to the check, null for none.
@@ -43,6 +77,10 @@ public abstract class CheckedCondition
 	 */
 	public @Nullable Node getNode() {
 		return null;
+	}
+
+	protected @NonNull CheckPriority getCheckPriority() {
+		return CheckPriority.LOWEST_PRIORITY;
 	}
 
 	@Override

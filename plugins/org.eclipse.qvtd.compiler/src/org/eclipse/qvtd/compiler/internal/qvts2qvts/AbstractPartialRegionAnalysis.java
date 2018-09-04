@@ -285,6 +285,7 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 	protected @NonNull List<@NonNull Node> analyze() {
 		analyzeNodes();
 		for (@NonNull Node traceNode : analyzeTraceNodes()) {
+			analyzeLocalSuccessEdge(traceNode);
 			analyzeGlobalSuccessEdge(traceNode);
 			analyzeTraceEdges(traceNode);
 		}

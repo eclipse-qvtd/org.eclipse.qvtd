@@ -15,6 +15,7 @@ import java.util.Collections;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 
 /**
  * A ConstantTargetCheckedCondition identifies the failure when a computation fails to yield the required constant value.
@@ -22,14 +23,26 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 public class ConstantTargetCheckedCondition extends CheckedCondition
 {
 	protected final @NonNull NavigableEdge predicateEdge;
+	protected final @NonNull CheckPriority checkPriority;
 
 	public ConstantTargetCheckedCondition(@NonNull NavigableEdge predicateEdge) {
 		this.predicateEdge = predicateEdge;
+		checkPriority = CheckPriority.CONSTANT_TARGET;
+	}
+
+	public ConstantTargetCheckedCondition(@NonNull SuccessEdge successEdge, boolean isLocalSuccess) {
+		this.predicateEdge = successEdge;
+		checkPriority = isLocalSuccess ? CheckPriority.LOCAL_SUCCESS_EDGE : CheckPriority.GLOBAL_SUCCESS_EDGE;
 	}
 
 	@Override
 	public <R> R accept(@NonNull CheckedConditionVisitor<R> visitor) {
 		return visitor.visitConstantTargetCheckedCondition(this);
+	}
+
+	@Override
+	protected @NonNull CheckPriority getCheckPriority() {
+		return checkPriority;
 	}
 
 	@Override

@@ -35,6 +35,10 @@ class ResidualPartition extends AbstractPartialPartition
 			if (!hasNode(node)) {
 				addNode(node, Role.SPECULATED);
 			}
+			Node localSuccessNode = partitioner.basicGetLocalSuccessNode(node);
+			if (localSuccessNode != null) {		// ?? localSuccess property is not mandatory
+				addNode(localSuccessNode, Role.PREDICATED);
+			}
 		}
 		//
 		//	All other nodes are as is
