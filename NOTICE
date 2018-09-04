@@ -1,13 +1,13 @@
-# Notices for QVT-Relations
+# Notices for Eclipse QVTd
 
-This content is produced and maintained by the Eclipse QVT-Relations project.
+This content is produced and maintained by the Eclipse QVTd project.
 
 * Project home: https://projects.eclipse.org/projects/modeling.mmt.qvtd
 
 ## Trademarks
 
-Eclipse QVT-Relations, and QVT-Relations are trademarks of the Eclipse
-Foundation.
+Eclipse QVTd, QVTd, Eclipse QVT Declarative, and QVT Declarative are trademarks
+of the Eclipse Foundation.
 
 ## Copyright
 
@@ -30,6 +30,8 @@ The project maintains the following source code repositories:
 * http://git.eclipse.org/c/mmt/org.eclipse.qvtd.git
 
 ## Third-party Content
+
+This project leverages the following third party content.
 
 ANTLR (3.1)
 
