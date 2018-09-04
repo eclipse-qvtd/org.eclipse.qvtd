@@ -93,7 +93,7 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	}
 
 	public @NonNull Iterable<@NonNull MappingRegion> createMicroMappingRegions(@NonNull Region partitionRegion) {
-		getRegionSchedule();
+		//	getRegionSchedule();
 		List<@NonNull MappingRegion> microMappingRegions = new ArrayList<>();
 		for (@NonNull Partition partition : partitions) {		// FIXME smarter cyclic schedule
 			if (partition instanceof CyclicPartition) {
@@ -179,24 +179,6 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	@Override
 	public @NonNull Iterable<@NonNull Partition> getPartitions() {
 		return partitions;
-	}
-
-	@Override
-	public @NonNull List<@NonNull Collection<@NonNull Region>> getRegionSchedule() {
-		List<@NonNull Collection<@NonNull Region>> regionSchedule2 = regionSchedule;
-		if (regionSchedule2 == null) {
-			regionSchedule = regionSchedule2 = new ArrayList<>();
-			for (@NonNull Iterable<@NonNull Partition> concurrentPartitions : getPartitionSchedule()) {
-				List<@NonNull Region> concurrentRegions = new ArrayList<>();
-				for (@NonNull Partition partition : concurrentPartitions) {
-					Region partitionRegion = partition.getRegion();
-					int partitionNumber = partitionRegion.getNextPartitionNumber();
-					concurrentRegions.add(partition.createMicroMappingRegion(partitionNumber));
-				}
-				regionSchedule2.add(concurrentRegions);
-			}
-		}
-		return regionSchedule2;
 	}
 
 	@Override

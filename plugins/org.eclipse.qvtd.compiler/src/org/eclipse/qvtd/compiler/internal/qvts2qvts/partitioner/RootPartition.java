@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -20,12 +18,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-
-import com.google.common.collect.Lists;
 
 public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Partition>*/ implements InternallyAcyclicPartition
 {
@@ -38,7 +31,7 @@ public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Part
 	protected final @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> cyclicTracePropertyAnalyses;
 	private @Nullable ScheduledRegion scheduledRegion = null;
 	private @Nullable List<@NonNull Iterable<@NonNull Partition>> partitionSchedule = null;
-	private @Nullable List<@NonNull Collection<@NonNull Region>> regionSchedule = null;
+	//	private @Nullable List<@NonNull Collection<@NonNull Region>> regionSchedule = null;
 
 	public RootPartition(@NonNull String name, @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors,
 			@NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> cyclicTraceClassAnalyses,
@@ -83,39 +76,6 @@ public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Part
 	@Override
 	public @NonNull Iterable<@NonNull Partition> getPartitions() {
 		return partitions;
-	}
-
-	@Override
-	public @NonNull List<@NonNull Collection<@NonNull Region>> getRegionSchedule() {
-		List<@NonNull Collection<@NonNull Region>> regionSchedule2 = regionSchedule;
-		if (regionSchedule2 == null) {
-			regionSchedule = regionSchedule2 = new ArrayList<>();
-			assert scheduledRegion != null;
-			LoadingRegion loadingRegion = scheduledRegion.getOwnedLoadingRegion();
-			if (loadingRegion != null) {
-				regionSchedule2.add(Lists.newArrayList(loadingRegion));
-			}
-			for (@NonNull Iterable<@NonNull Partition> concurrentPartitions : getPartitionSchedule()) {
-				List<@NonNull Region> concurrentRegions = new ArrayList<>();
-				for (@NonNull Partition partition : concurrentPartitions) {
-					Region partitionRegion = partition.getRegion();
-					if (partition instanceof CyclicPartition) {
-						for (@NonNull MappingRegion mappingRegion : ((CyclicPartition)partition).createMicroMappingRegions(partitionRegion)) {
-							getScheduledRegion().getMappingRegions().add(mappingRegion);
-							concurrentRegions.add(mappingRegion);
-						}
-					}
-					else {
-						int partitionNumber = partitionRegion.getNextPartitionNumber();
-						MappingRegion mappingRegion = partition.createMicroMappingRegion(partitionNumber);
-						getScheduledRegion().getMappingRegions().add(mappingRegion);
-						concurrentRegions.add(mappingRegion);
-					}
-				}
-				regionSchedule2.add(concurrentRegions);
-			}
-		}
-		return regionSchedule2;
 	}
 
 	public @NonNull ScheduledRegion getScheduledRegion() {

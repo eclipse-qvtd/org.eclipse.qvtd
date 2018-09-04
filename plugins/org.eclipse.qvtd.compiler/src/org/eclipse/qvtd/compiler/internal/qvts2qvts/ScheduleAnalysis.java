@@ -391,9 +391,9 @@ public class ScheduleAnalysis
 		return target2sources;
 	}
 
-	protected void buildCallTree() {
+	protected void buildCallTree(@NonNull Iterable<@NonNull ? extends Iterable<@NonNull Region>> regionSchedule) {
 		CallTreeBuilder callTreeBuilder = new CallTreeBuilder(this);
-		callTreeBuilder.buildTree(scheduledRegion, rootPartition.getRegionSchedule());
+		callTreeBuilder.buildTree(scheduledRegion, regionSchedule);
 	}
 
 	public Region getCommonRegion(@NonNull Region firstRegion, @NonNull Region secondRegion) {
@@ -513,14 +513,14 @@ public class ScheduleAnalysis
 		}
 	}
 
-	public void schedule(@NonNull RootPartition rootPartition) {
+	public void schedule(@NonNull RootPartition rootPartition, @NonNull Iterable<@NonNull ? extends Collection<@NonNull Region>> regionSchedule) {
 		//	ScheduledRegion rootScheduledRegion = rootPartition.getScheduledRegion();
 		int depth = 0;
 		//		LoadingRegion loadingRegion = rootScheduledRegion.getOwnedLoadingRegion();
 		//		if (loadingRegion != null) {
 		//			loadingRegion.addIndex(depth++);
 		//		}
-		for (@NonNull Collection<@NonNull Region> concurrency : rootPartition.getRegionSchedule()) {
+		for (@NonNull Collection<@NonNull Region> concurrency : regionSchedule) {
 			for (@NonNull Region region : concurrency) {
 				region.addIndex(depth);
 				Iterable<@NonNull DatumConnection<?>> loopingConnections = getLoopingConnections(region);
@@ -545,7 +545,7 @@ public class ScheduleAnalysis
 		for (@NonNull DatumConnection<?> connection : getConnections()) {
 			propagateIndexes(connection);
 		}
-		buildCallTree();
+		buildCallTree(regionSchedule);
 	}
 
 	@Override

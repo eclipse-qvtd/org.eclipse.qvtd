@@ -10,11 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
 
 /**
  * An InternallyAcyclicPartition comprises one of more nested partitions whose inter-dependencies are acyclic.
@@ -28,7 +26,7 @@ interface InternallyAcyclicPartition
 
 	@NonNull Iterable<@NonNull Partition> getPartitions();
 
-	@NonNull List<@NonNull Collection<@NonNull Region>> getRegionSchedule();
+	//	@NonNull List<@NonNull Collection<@NonNull Region>> getRegionSchedule();
 
 	@NonNull Iterable<@NonNull TraceClassAnalysis<@NonNull Partition>> getTraceClassAnalyses();
 
