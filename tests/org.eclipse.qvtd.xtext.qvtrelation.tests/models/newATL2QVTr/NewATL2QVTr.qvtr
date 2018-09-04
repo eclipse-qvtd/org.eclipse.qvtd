@@ -374,6 +374,14 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 		}
 		
 		/**
+		 *  atl::StringExp <=> ocl::StringLiteralExp
+		 */
+		top relation mapOclType overrides mapOclExpression {
+			/*enforce*/ domain atl atlExpression : OclType {};
+			enforce domain qvtr;		-- FIXME don't really want anything
+		}
+		
+		/**
 		 *  atl::OutPattern <=> qvtr::RelationDomain (enforce)
 		 */
 		top relation mapOutPattern {
