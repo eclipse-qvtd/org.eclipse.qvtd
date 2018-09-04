@@ -2,8 +2,8 @@
 <?pde version="3.8"?><target includeMode="feature" name="Eclipse OCL Interim Build Target Platform" sequenceNumber="16">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.sdk.feature.group" version="0.0.0"/>
-<repository location="http://download.eclipse.org/eclipse/updates/4.9-I-builds"/>
+	<unit id="org.eclipse.sdk.feature.group" version="0.0.0"/>
+    <repository location="http://download.eclipse.org/eclipse/updates/4.9milestones"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.acceleo.runtime.feature.group" version="0.0.0"/>
