@@ -46,7 +46,7 @@ class SpeculationPartition extends AbstractPartialPartition
 	public SpeculationPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
 		super(partitioner, reachabilityForest, "«speculation»");
 		//	this.traceNode = partitioner.getTraceNode();
-		this.originalHeadNodes = Sets.newHashSet(QVTscheduleUtil.getHeadNodes(region));
+		this.originalHeadNodes = Sets.newHashSet(QVTscheduleUtil.getHeadNodes(originalRegion));
 		this.executionNodes = partitioner.getExecutionNodes();
 		this.dispatchNode = partitioner.basicGetDispatchNode();
 
@@ -132,7 +132,8 @@ class SpeculationPartition extends AbstractPartialPartition
 	}
 
 	@Override
-	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
+	public @NonNull MappingRegion createMicroMappingRegion() {
+		int partitionNumber = originalRegion.getNextPartitionNumber();
 		return createMicroMappingRegion("«speculation»", "_p" + partitionNumber);
 	}
 

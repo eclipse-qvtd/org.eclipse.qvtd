@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -25,7 +24,6 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.AbstractPartialRegionAnalysi
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 
 import com.google.common.collect.Iterables;
@@ -57,13 +55,13 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	protected final @NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> traceClassAnalyses;
 	protected final @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> tracePropertyAnalyses;
 	private @Nullable List<@NonNull Iterable<@NonNull Partition>> partitionSchedule = null;
-	private @Nullable List<@NonNull Collection<@NonNull Region>> regionSchedule = null;
+	//	private @Nullable List<@NonNull Collection<@NonNull Region>> regionSchedule = null;
 
 	public CyclicPartition(@NonNull TransformationPartitioner transformationPartitioner, @NonNull String name, @NonNull CyclicPartitionsAnalysis cyclesAnalysis, @NonNull Set<@NonNull Partition> partitions,
 			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors,
 			@NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> traceClassAnalyses,
 			@NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> tracePropertyAnalyses) {
-		super(transformationPartitioner, QVTscheduleFactory.eINSTANCE.createCyclicMappingRegion());	// FIXME orphan region
+		super(transformationPartitioner);
 		this.name = name;
 		this.cyclesAnalysis = cyclesAnalysis;
 		this.partitions = partitions;
@@ -88,16 +86,16 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	}
 
 	@Override
-	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
+	public @NonNull MappingRegion createMicroMappingRegion() {
 		throw new UnsupportedOperationException();		// FIXME
 	}
 
-	public @NonNull Iterable<@NonNull MappingRegion> createMicroMappingRegions(@NonNull Region partitionRegion) {
+	public @NonNull Iterable<@NonNull MappingRegion> createMicroMappingRegions() {
 		//	getRegionSchedule();
 		List<@NonNull MappingRegion> microMappingRegions = new ArrayList<>();
 		for (@NonNull Partition partition : partitions) {		// FIXME smarter cyclic schedule
 			if (partition instanceof CyclicPartition) {
-				Iterables.addAll(microMappingRegions, ((CyclicPartition)partition).createMicroMappingRegions(partitionRegion));
+				Iterables.addAll(microMappingRegions, ((CyclicPartition)partition).createMicroMappingRegions());
 			}
 			else {
 				microMappingRegions.add(partition.getMicroMappingRegion());
@@ -125,6 +123,12 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	@Override
 	public @NonNull String getName() {
 		return name;
+	}
+
+	@Override
+	public @NonNull Region getOriginalRegion() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();		// FIXME
 	}
 
 	@Override

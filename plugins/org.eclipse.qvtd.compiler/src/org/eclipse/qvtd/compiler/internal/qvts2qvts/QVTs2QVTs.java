@@ -1096,9 +1096,13 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		for (@NonNull Iterable<@NonNull Partition> concurrentPartitions : cyclicPartition.getPartitionSchedule()) {
 			List<@NonNull Region> concurrentRegions = new ArrayList<>();
 			for (@NonNull Partition partition : concurrentPartitions) {
-				Region partitionRegion = partition.getRegion();
-				int partitionNumber = partitionRegion.getNextPartitionNumber();
-				concurrentRegions.add(partition.createMicroMappingRegion(partitionNumber));	// FIXME nested cycles
+				if (partition instanceof CyclicPartition) {
+					getRegionSchedule(((CyclicPartition)partition));
+					Iterables.addAll(concurrentRegions, ((CyclicPartition)partition).createMicroMappingRegions());
+				}
+				else {
+					concurrentRegions.add(partition.createMicroMappingRegion());
+				}
 			}
 			regionSchedule.add(concurrentRegions);
 		}
@@ -1118,17 +1122,15 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		for (@NonNull Iterable<@NonNull Partition> concurrentPartitions : partitionSchedule2) {
 			List<@NonNull Region> concurrentRegions = new ArrayList<>();
 			for (@NonNull Partition partition : concurrentPartitions) {
-				Region partitionRegion = partition.getRegion();
 				if (partition instanceof CyclicPartition) {
 					getRegionSchedule(((CyclicPartition)partition));
-					for (@NonNull MappingRegion mappingRegion : ((CyclicPartition)partition).createMicroMappingRegions(partitionRegion)) {
+					for (@NonNull MappingRegion mappingRegion : ((CyclicPartition)partition).createMicroMappingRegions()) {
 						scheduledRegion.getMappingRegions().add(mappingRegion);
 						concurrentRegions.add(mappingRegion);
 					}
 				}
 				else {
-					int partitionNumber = partitionRegion.getNextPartitionNumber();
-					MappingRegion mappingRegion = partition.createMicroMappingRegion(partitionNumber);
+					MappingRegion mappingRegion = partition.createMicroMappingRegion();
 					scheduledRegion.getMappingRegions().add(mappingRegion);
 					concurrentRegions.add(mappingRegion);
 				}
@@ -1213,13 +1215,15 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			if (Iterables.size(oldConcurrency) > 1) {
 				Map<@NonNull Region, @NonNull List<@NonNull Partition>> region2partitions = new HashMap<>();
 				for (@NonNull Partition partition : oldConcurrency) {
-					Region region = partition.getRegion();
-					List<@NonNull Partition> partitions = region2partitions.get(region);
-					if (partitions == null) {
-						partitions = new ArrayList<>();
-						region2partitions.put(region, partitions);
+					if (!(partition instanceof CyclicPartition)) {
+						Region region = partition.getOriginalRegion();
+						List<@NonNull Partition> partitions = region2partitions.get(region);
+						if (partitions == null) {
+							partitions = new ArrayList<>();
+							region2partitions.put(region, partitions);
+						}
+						partitions.add(partition);
 					}
-					partitions.add(partition);
 				}
 				Set<@NonNull Partition> newConcurrency = null;
 				for (@NonNull Region region : region2partitions.keySet()) {

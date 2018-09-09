@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassAnalysis;
@@ -33,15 +32,15 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
 
-public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull PartialRegionAnalysis<@NonNull RA>> extends RegionHelper<@NonNull Region> implements PartialRegionAnalysis<@NonNull RA>
+public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull PartialRegionAnalysis<@NonNull RA>> implements PartialRegionAnalysis<@NonNull RA>
 {
+	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull RegionsAnalysis<@NonNull RA> regionsAnalysis;
 
 	/**
@@ -134,8 +133,8 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 	 */
 	private @Nullable Set<@NonNull TraceClassAnalysis<@NonNull RA>> superProducedTraceClassAnalyses = null;
 
-	protected AbstractPartialRegionAnalysis(@NonNull RegionsAnalysis<@NonNull RA> regionsAnalysis, @NonNull Region region) {
-		super(regionsAnalysis.getScheduleManager(), region);
+	protected AbstractPartialRegionAnalysis(@NonNull RegionsAnalysis<@NonNull RA> regionsAnalysis) {
+		this.scheduleManager = regionsAnalysis.getScheduleManager();
 		this.regionsAnalysis = regionsAnalysis;
 	}
 
@@ -612,7 +611,6 @@ public abstract class AbstractPartialRegionAnalysis<@NonNull RA extends @NonNull
 		return  node.getNodeRole();
 	}
 
-	@Override
 	public @NonNull ScheduleManager getScheduleManager() {
 		return scheduleManager;
 	}

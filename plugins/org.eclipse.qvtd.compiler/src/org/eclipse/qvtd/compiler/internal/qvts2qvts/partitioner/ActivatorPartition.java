@@ -31,7 +31,7 @@ class ActivatorPartition extends AbstractPartialPartition
 {
 	public ActivatorPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
 		super(partitioner, reachabilityForest, "«activator»");
-		Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(region);
+		Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(originalRegion);
 		//
 		//	The realized middle (trace) nodes become speculation nodes.
 		//
@@ -79,7 +79,8 @@ class ActivatorPartition extends AbstractPartialPartition
 	}
 
 	@Override
-	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
+	public @NonNull MappingRegion createMicroMappingRegion() {
+		int partitionNumber = originalRegion.getNextPartitionNumber();
 		return createMicroMappingRegion("«activator»", "_p" + partitionNumber);
 	}
 

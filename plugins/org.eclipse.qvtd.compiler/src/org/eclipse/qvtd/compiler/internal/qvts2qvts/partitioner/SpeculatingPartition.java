@@ -35,13 +35,13 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 class SpeculatingPartition extends AbstractPartialPartition
 {
-	private final @NonNull Node traceNode;
+	//	private final @NonNull Node traceNode;
 	private final @NonNull Iterable<@NonNull Node> executionNodes;
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
 
 	public SpeculatingPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest/*, boolean isInfallible*/) {
 		super(partitioner, reachabilityForest, "«speculating»");
-		this.traceNode = partitioner.getTraceNode();
+		//	this.traceNode = partitioner.getTraceNode();
 		this.executionNodes = partitioner.getExecutionNodes();
 		if (hasSynthesizedTrace) {
 			//
@@ -108,7 +108,8 @@ class SpeculatingPartition extends AbstractPartialPartition
 	}
 
 	@Override
-	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
+	public @NonNull MappingRegion createMicroMappingRegion() {
+		int partitionNumber = originalRegion.getNextPartitionNumber();
 		return createMicroMappingRegion("«speculating»", "_p" + partitionNumber);
 	}
 

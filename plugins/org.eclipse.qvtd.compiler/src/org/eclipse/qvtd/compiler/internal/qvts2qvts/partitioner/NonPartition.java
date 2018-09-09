@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -23,22 +24,27 @@ class NonPartition extends AbstractPartition
 	}
 
 	@Override
-	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
-		return (MappingRegion)region;
+	public @NonNull MappingRegion createMicroMappingRegion() {
+		return (MappingRegion)originalRegion;
 	}
 
 	@Override
 	public @NonNull MappingRegion getMicroMappingRegion() {
-		return (MappingRegion)region;
+		return (MappingRegion)originalRegion;
+	}
+
+	@Override
+	public @NonNull String getName() {
+		return PivotUtil.getName(originalRegion);
 	}
 
 	@Override
 	protected @NonNull Iterable<@NonNull Edge> getPartialEdges() {
-		return QVTscheduleUtil.getOwnedEdges(region);
+		return QVTscheduleUtil.getOwnedEdges(originalRegion);
 	}
 
 	@Override
 	protected @NonNull Iterable<@NonNull Node> getPartialNodes() {
-		return QVTscheduleUtil.getOwnedNodes(region);
+		return QVTscheduleUtil.getOwnedNodes(originalRegion);
 	}
 }

@@ -23,13 +23,13 @@ public interface Partition extends PartialRegionAnalysis<@NonNull Partition>
 {
 	void analyzePartition();
 
-	@NonNull MappingRegion createMicroMappingRegion(int partitionNumber);
+	@NonNull MappingRegion createMicroMappingRegion();
 
 	int getDepth();
 
 	@NonNull MappingRegion getMicroMappingRegion();
 
-	@NonNull Region getRegion();
+	@NonNull Region getOriginalRegion();
 
 	@Nullable Role getRole(@NonNull Edge edge);
 

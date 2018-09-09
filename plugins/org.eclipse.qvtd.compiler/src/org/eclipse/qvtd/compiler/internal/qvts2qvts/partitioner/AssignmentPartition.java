@@ -29,12 +29,12 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 class AssignmentPartition extends AbstractPartialPartition
 {
-	private final @NonNull Node traceNode;
+	//	private final @NonNull Node traceNode;
 
 	public AssignmentPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, @NonNull Edge realizedEdge) {
 		super(partitioner, reachabilityForest, "«edge-" + QVTscheduleUtil.getName(realizedEdge) + "»");
-		this.traceNode = partitioner.getTraceNode();
-		String name = region.getName();
+		//	this.traceNode = partitioner.getTraceNode();
+		String name = originalRegion.getName();
 		if ("mapHelper_Operation_qvtr".equals(name)) {
 			getClass();
 		}
@@ -102,7 +102,8 @@ class AssignmentPartition extends AbstractPartialPartition
 	}
 
 	@Override
-	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
+	public @NonNull MappingRegion createMicroMappingRegion() {
+		int partitionNumber = originalRegion.getNextPartitionNumber();
 		String namePrefix = "«edge" + partitionNumber + "»";
 		String symbolSuffix = "_p" + partitionNumber;
 		return createMicroMappingRegion(namePrefix, symbolSuffix);

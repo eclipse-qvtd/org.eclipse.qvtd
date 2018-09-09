@@ -46,6 +46,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 public class RegionAnalysis extends AbstractPartialRegionAnalysis<@NonNull RegionAnalysis>
 {
 	protected final @NonNull TransformationAnalysis transformationAnalysis;
+	protected final @NonNull Region region;
 
 	/**
 	 * The per-typed model predicated navigable edges for which an execution may be attempted before assignment.
@@ -80,8 +81,10 @@ public class RegionAnalysis extends AbstractPartialRegionAnalysis<@NonNull Regio
 	private @Nullable Iterable<@NonNull Edge> fallibleEdges = null; */
 
 	public RegionAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull Region region) {
-		super(transformationAnalysis, region);
+		super(transformationAnalysis);
 		this.transformationAnalysis = transformationAnalysis;
+		this.region = region;
+		// FIXME eliminate LoadingRegion, MicroMappingRegion	assert (region instanceof RuleRegion) || (region instanceof LoadingRegion);
 		if (!region.isLoadingRegion()) {
 			List<@NonNull Node> alreadyRealized = analyze();
 			analyzeCorollaries(alreadyRealized);
@@ -371,7 +374,7 @@ public class RegionAnalysis extends AbstractPartialRegionAnalysis<@NonNull Regio
 		List<@NonNull Node> traceNodes = getTraceNodes();
 		assert traceNodes.size() == 1;
 		Node traceNode = ClassUtil.nonNullState(traceNodes.get(0));
-		Rule referredRule = QVTscheduleUtil.getReferredRule((RuleRegion)getRegion());
+		Rule referredRule = QVTscheduleUtil.getReferredRule((RuleRegion) region);
 		RelationAnalysis relationAnalysis = (RelationAnalysis)transformationAnalysis.getRuleAnalysis(referredRule);
 		RelationAnalysis2TraceGroup relationAnalysis2traceGroup = relationAnalysis.getRuleAnalysis2TraceGroup();
 		//			relationAnalysis.synthesizeTraceLocalSuccessAssignment(relationAnalysis2traceGroup, getTraceNode());
@@ -437,6 +440,10 @@ public class RegionAnalysis extends AbstractPartialRegionAnalysis<@NonNull Regio
 	@Override
 	protected @NonNull Iterable<@NonNull Node> getPartialNodes() {
 		return QVTscheduleUtil.getOwnedNodes(region);
+	}
+
+	public @NonNull Region getRegion() {
+		return region;
 	}
 
 	public @NonNull TransformationAnalysis getTransformationAnalysis() {

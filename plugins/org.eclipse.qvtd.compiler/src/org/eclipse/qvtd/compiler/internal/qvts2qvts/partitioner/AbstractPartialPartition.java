@@ -85,12 +85,12 @@ abstract class AbstractPartialPartition extends AbstractPartition
 	protected AbstractPartialPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, @NonNull String suffix) {
 		super(partitioner);
 		this.hasSynthesizedTrace = scheduleManager.useActivators();
-		this.name = QVTscheduleUtil.getName(region) + suffix;
+		this.name = QVTscheduleUtil.getName(originalRegion) + suffix;
 		this.reachabilityForest = reachabilityForest;
 	}
 
 	private void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole) {
-		assert edge.getOwningRegion() == region;
+		assert edge.getOwningRegion() == originalRegion;
 		Role oldEdgeRole = QVTscheduleUtil.getEdgeRole(edge);
 		switch (oldEdgeRole)
 		{
@@ -137,7 +137,7 @@ abstract class AbstractPartialPartition extends AbstractPartition
 	}
 
 	protected void addNode(@NonNull Node node, @NonNull Role newNodeRole) {
-		assert node.getOwningRegion() == region;
+		assert node.getOwningRegion() == originalRegion;
 		Role oldNodeRole = QVTscheduleUtil.getNodeRole(node);
 		switch (oldNodeRole)
 		{
@@ -270,10 +270,10 @@ abstract class AbstractPartialPartition extends AbstractPartition
 
 	protected @NonNull MicroMappingRegion createMicroMappingRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
 		assert microMappingRegion  == null;
-		assert !(region instanceof MicroMappingRegion);
+		assert !(originalRegion instanceof MicroMappingRegion);
 		MicroMappingRegion partialRegion = createPartialRegion(namePrefix, symbolSuffix);
 		PartitioningVisitor partitioningVisitor = createPartitioningVisitor(partialRegion);
-		region.accept(partitioningVisitor);
+		originalRegion.accept(partitioningVisitor);
 		MicroMappingRegion microMappingRegion = partialRegion;//partitioningVisitor.getRegion();
 		Iterable<@NonNull Node> preferredHeadNodes = getPreferredHeadNodes();
 		List<@NonNull Node> partialPreferredHeadNodes = null;
@@ -298,10 +298,10 @@ abstract class AbstractPartialPartition extends AbstractPartition
 	protected @NonNull MicroMappingRegion createPartialRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
 		MicroMappingRegion partialRegion = QVTscheduleFactory.eINSTANCE.createMicroMappingRegion();
 		scheduleManager.addMappingRegion(partialRegion);
-		partialRegion.setMappingRegion((MappingRegion) region);
+		partialRegion.setMappingRegion((MappingRegion) originalRegion);
 		partialRegion.setNamePrefix(namePrefix);
 		partialRegion.setSymbolNameSuffix(symbolSuffix);
-		partialRegion.setName(namePrefix + " " + region.getName());
+		partialRegion.setName(namePrefix + " " + originalRegion.getName());
 		return partialRegion;
 	}
 
@@ -553,7 +553,8 @@ abstract class AbstractPartialPartition extends AbstractPartition
 		//
 		//	Add all the other edges whose redundancy must be checked, unless they have already been checked.
 		//
-		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(originalRegion)) {
+			//	for (@NonNull Edge edge : getPartialEdges()) {
 			if (!edge.isSecondary() && !hasEdge(edge)) {
 				Role sourceNodeRole = node2nodeRole.get(edge.getEdgeSource());
 				if (sourceNodeRole != null) {

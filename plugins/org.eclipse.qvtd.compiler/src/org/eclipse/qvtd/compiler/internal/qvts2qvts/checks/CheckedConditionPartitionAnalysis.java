@@ -81,7 +81,7 @@ public class CheckedConditionPartitionAnalysis
 					edge.accept(this);
 				}
 			}
-			for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(partition.getRegion())) {
+			for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(partition.getOriginalRegion())) {
 				if (isOld(node) && node.isUnconditional()) {
 					node.accept(this);
 				}
@@ -371,7 +371,7 @@ public class CheckedConditionPartitionAnalysis
 
 	private @NonNull List<@NonNull Edge> computeOldUnconditionalEdges() {
 		List<@NonNull Edge> oldEdges = new ArrayList<>();
-		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(partition.getRegion())) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(partition.getOriginalRegion())) {
 			if (isOld(edge) && edge.isUnconditional()) {
 				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
 				Node targetNode = QVTscheduleUtil.getTargetNode(edge);

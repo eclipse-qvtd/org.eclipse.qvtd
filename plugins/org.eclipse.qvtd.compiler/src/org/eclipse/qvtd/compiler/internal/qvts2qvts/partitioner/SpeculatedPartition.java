@@ -81,7 +81,8 @@ class SpeculatedPartition extends AbstractPartialPartition
 	}
 
 	@Override
-	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
+	public @NonNull MappingRegion createMicroMappingRegion() {
+		int partitionNumber = originalRegion.getNextPartitionNumber();
 		return createMicroMappingRegion("«speculated»", "_p" + partitionNumber);
 	}
 

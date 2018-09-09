@@ -59,7 +59,8 @@ class ResidualPartition extends AbstractPartialPartition
 	}
 
 	@Override
-	public @NonNull MappingRegion createMicroMappingRegion(int partitionNumber) {
+	public @NonNull MappingRegion createMicroMappingRegion() {
+		int partitionNumber = originalRegion.getNextPartitionNumber();
 		return createMicroMappingRegion("«residue»", "_p" + partitionNumber);
 	}
 
