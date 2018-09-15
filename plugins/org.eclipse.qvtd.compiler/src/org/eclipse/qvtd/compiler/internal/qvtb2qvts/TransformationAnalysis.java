@@ -23,12 +23,15 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CyclicRegionsAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TracePropertyRegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -36,6 +39,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -80,6 +84,8 @@ public class TransformationAnalysis extends RegionsAnalysis<@NonNull RegionAnaly
 	 * The analysis of cycles.
 	 */
 	private @Nullable CyclicRegionsAnalysis cyclesRegionAnalysis = null;
+
+	private @Nullable RootPartition rootPartition = null;
 
 	public TransformationAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull Transformation transformation, @NonNull ScheduledRegion scheduledRegion) {
 		super(scheduleManager);
@@ -187,6 +193,10 @@ public class TransformationAnalysis extends RegionsAnalysis<@NonNull RegionAnaly
 		return regionAnalysis;
 	}
 
+	public @NonNull RootPartition getRootPartition() {
+		return ClassUtil.nonNullState(rootPartition);
+	}
+
 	//	public @NonNull Iterable<@NonNull RuleAnalysis> getRuleAnalyses() {
 	//		return rule2ruleAnalysis.values();
 	//	}
@@ -263,6 +273,12 @@ public class TransformationAnalysis extends RegionsAnalysis<@NonNull RegionAnaly
 			return false;
 		}
 		return ((TraceClassRegionAnalysis)traceClassAnalysis).isCyclic();
+	}
+
+	public @NonNull RootPartition partition(@NonNull ProblemHandler problemHandler, @NonNull Iterable<? extends @NonNull MappingRegion> activeRegions) throws CompilerChainException {
+		assert this.rootPartition == null;
+		this.rootPartition  = TransformationPartitioner.partition(this, problemHandler, activeRegions);
+		return rootPartition;
 	}
 
 	public void prePartition() throws CompilerChainException {

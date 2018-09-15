@@ -89,7 +89,7 @@ public class CyclicPartitionsAnalysis
 			Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> cyclicTracePropertyAnalyses = computeTracePropertyAnalysisDependencies(leafPartitions);
 			//			Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> localPartition2Predecessors = computePartition2Predecessors(partition2predecessors, rootPartitioning);
 			String rootName = "«root»";
-			return new RootPartition(rootName, leafPartition2predecessors, cyclicTraceClassAnalyses, cyclicTracePropertyAnalyses);
+			return new RootPartition(transformationPartitioner.getTransformationAnalysis(), rootName, leafPartition2predecessors, cyclicTraceClassAnalyses, cyclicTracePropertyAnalyses);
 		}
 		intersections.add(Sets.newHashSet(leafPartitions));
 		return createAcyclicPartitionHierarchy(intersections, leafPartition2predecessors);
@@ -296,7 +296,7 @@ public class CyclicPartitionsAnalysis
 		Set<@NonNull TraceClassAnalysis<@NonNull Partition>> rootTraceClassAnalyses = computeTraceClassAnalysisDependencies(rootPartitioning);
 		Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> rootTracePropertyAnalyses = computeTracePropertyAnalysisDependencies(rootPartitioning);
 		String rootName = "«root»";
-		RootPartition rootPartition = new RootPartition(rootName, partition2predecessors, rootTraceClassAnalyses, rootTracePropertyAnalyses);
+		RootPartition rootPartition = new RootPartition(transformationPartitioner.getTransformationAnalysis(), rootName, partition2predecessors, rootTraceClassAnalyses, rootTracePropertyAnalyses);
 		acyclicPartitionHierarchy.add(rootPartition);
 		if (TransformationPartitioner.CYCLES.isActive()) {
 			showCycles(acyclicPartitionHierarchy);

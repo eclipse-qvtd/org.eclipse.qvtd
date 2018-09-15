@@ -17,11 +17,13 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 
 public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Partition>*/ implements InternallyAcyclicPartition
 {
+	protected final TransformationAnalysis transformationAnalysis;
 	protected final @NonNull String name;
 	protected final @NonNull Iterable<@NonNull Partition> partitions;
 	protected final @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors;
@@ -33,9 +35,10 @@ public class RootPartition /*extends AbstractPartialRegionAnalysis<@NonNull Part
 	private @Nullable List<@NonNull Iterable<@NonNull Partition>> partitionSchedule = null;
 	//	private @Nullable List<@NonNull Collection<@NonNull Region>> regionSchedule = null;
 
-	public RootPartition(@NonNull String name, @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors,
+	public RootPartition(@NonNull TransformationAnalysis transformationAnalysis, @NonNull String name, @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors,
 			@NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> cyclicTraceClassAnalyses,
 			@NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> cyclicTracePropertyAnalyses) {
+		this.transformationAnalysis = transformationAnalysis;
 		this.name = name;
 		this.partitions = partition2predecessors.keySet();
 		this.partition2predecessors = partition2predecessors;
