@@ -21,8 +21,8 @@ public abstract class DelegatingGraphStringBuilder implements GraphStringBuilder
 	}
 
 	@Override
-	public void appendAttributedEdge(@NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target) {
-		delegate.appendAttributedEdge(source, edge, target);
+	public void appendAttributedEdge(@NonNull String sourceName, @NonNull GraphEdge edge, @NonNull String targetName) {
+		delegate.appendAttributedEdge(sourceName, edge, targetName);
 	}
 
 	@Override
@@ -31,13 +31,13 @@ public abstract class DelegatingGraphStringBuilder implements GraphStringBuilder
 	}
 
 	@Override
-	public void appendEdge(@NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target) {
-		delegate.appendEdge(source, edge, target);
+	public void appendEdge(@NonNull ToGraphHelper toGraphHelper, @NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target) {
+		delegate.appendEdge(toGraphHelper, source, edge, target);
 	}
 
 	@Override
-	public @NonNull String appendNode(@NonNull GraphNode node) {
-		return delegate.appendNode(node);
+	public @NonNull String appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull GraphNode node) {
+		return delegate.appendNode(toGraphHelper, node);
 	}
 
 	@Override

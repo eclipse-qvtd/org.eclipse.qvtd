@@ -41,6 +41,7 @@ import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Cluster;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
@@ -634,7 +635,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
+	public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
+		GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
 		boolean isHead = isHead();
 		if (isHead) {
 			s.setHead();

@@ -12,10 +12,8 @@ package org.eclipse.qvtd.pivot.qvtbase.graphs;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -32,7 +30,7 @@ public class DOTStringBuilder implements GraphStringBuilder
 	private int indents = 0;
 	private boolean indentPending = false;
 	private final @NonNull Map<Object,String> node2name = new HashMap<Object,String>();
-	private final @NonNull Map<String, Set<String>> edges = new HashMap<String, Set<String>>();
+	//	private final @NonNull Map<String, Set<String>> edges = new HashMap<String, Set<String>>();
 	private final @NonNull List<String> clusterName = new ArrayList<String>();
 	private final @NonNull Map<String,String> attributes = new HashMap<String,String>();
 
@@ -83,7 +81,7 @@ public class DOTStringBuilder implements GraphStringBuilder
 	}
 
 	@Override
-	public void appendAttributedEdge(@NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target) {
+	public void appendAttributedEdge(@NonNull String sourceName, @NonNull GraphEdge edge, @NonNull String targetName) {
 	}
 
 	@Override
@@ -119,90 +117,35 @@ public class DOTStringBuilder implements GraphStringBuilder
 		attributes.clear();
 	}
 
-	public void appendEdge(@NonNull GraphNode source, @NonNull GraphNode target) {
-		String sourceName = appendNode(source);
-		String targetName = appendNode(target);
-		Set<String> edgeSet = edges.get(sourceName);
-		if (edgeSet == null) {
-			edgeSet = new HashSet<String> ();
-			edges.put(sourceName, edgeSet);
-		}
-		if (edgeSet.add(targetName)) {
-			append(sourceName);
-			append(" -> ");
-			append(targetName);
-			//			if (source instanceof DOTNode) {
-			//				attributes.clear();
-			//				((DOTNode)source).appendEdgeAttributes(this, target);
-			//				appendAttributes();
-			//			}
-			newLine();
-		}
-	}
-
 	@Override
-	public void appendEdge(@NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target) {
-		String sourceName = appendNode(source);
-		String targetName = appendNode(target);
-		//		Set<String> edgeSet = edges.get(sourceName);
-		//		if (edgeSet == null) {
-		//			edgeSet = new HashSet<String> ();
-		//			edges.put(sourceName, edgeSet);
-		//		}
-		//		if (edgeSet.add(targetName)) {
+	public void appendEdge(@NonNull ToGraphHelper toGraphHelper, @NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target) {
+		String sourceName = appendNode(toGraphHelper, source);
+		String targetName = appendNode(toGraphHelper, target);
 		append(sourceName);
 		append(" -> ");
 		append(targetName);
 		attributes.clear();
-		edge.appendEdgeAttributes(this, source, target);
+		edge.appendEdgeAttributes(this, sourceName, targetName);
 		appendAttributes();
 		newLine();
-		//		}
-	}
-
-	public void appendEdge(@NonNull GraphNode source, @NonNull GraphNode target, @Nullable String suffix) {
-		String sourceName = appendNode(source);
-		String targetName = appendNode(target);
-		Set<String> edgeSet = edges.get(sourceName);
-		if (edgeSet == null) {
-			edgeSet = new HashSet<String> ();
-			edges.put(sourceName, edgeSet);
-		}
-		if (edgeSet.add(targetName)) {
-			append(sourceName);
-			append(" -> ");
-			append(targetName);
-			if (suffix != null) {
-				append(suffix);
-			}
-			newLine();
-		}
 	}
 
 	@Override
-	public @NonNull String appendNode(@NonNull GraphNode object) {
+	public @NonNull String appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull GraphNode object) {
 		String name = node2name.get(object);
 		if (name == null) {
 			name = "a" + node2name.size();
 			node2name.put(object, name);
 			attributes.clear();
-			object.appendNode(this, name);
+			object.appendNode(toGraphHelper, name);
 			newLine();
 		}
 		return name;
 	}
 
-	public @NonNull String appendNode(@NonNull Object object, /*@NonNull*/ String label) {
-		String name = node2name.get(object);
-		if (name == null) {
-			name = "a" + node2name.size();
-			node2name.put(object, name);
-		}
-		append(name);
-		append("[label=\"" + label + "\"];");
-		newLine();
-		return name;
-	}
+	//	private @NonNull String getNodeName(@NonNull GraphNode node) {
+	//		return ClassUtil.nonNullState(node2name.get(node));
+	//	}
 
 	public void newLine() {
 		append("\n");

@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
@@ -287,7 +288,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	}
 
 	@Override
-	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
+	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull String sourceName, @NonNull String targetName) {
 		s.setColor(getConnectionRole().getColor());
 		/*		if (isRegion2Region()) {
 			String indexText = getIndexText();
@@ -304,11 +305,12 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 			s.setArrowhead(arrowhead);
 		}
 		s.setPenwidth(getConnectionRole().getPenwidth());
-		s.appendAttributedEdge(source, this, target);
+		s.appendAttributedEdge(sourceName, this, targetName);
 	}
 
 	@Override
-	public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
+	public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
+		GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
 		String name = getName();
 		String indexText = getIndexText();
 		if (indexText != null) {

@@ -38,6 +38,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.Cluster;
 import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -387,7 +388,8 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	public void addVariableNode(@NonNull VariableDeclaration variable, @NonNull Node node) {}
 
 	@Override
-	public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
+	public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
+		GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
 		String name = getSymbolName() + "\\n " + getName();
 		String indexText = getIndexText();
 		if (indexText != null) {
@@ -1038,9 +1040,9 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 				System.err.println("Failed to reserve '" + symbolName2 + "' for " + this);
 			}
 			symbolName = symbolName2;
-			if ((symbolName != null) && symbolName.contains("mTmapIfExp__DmapOclExpression_d2qvtrExpression_glob")) {
-				getClass().toString();
-			}
+			//			if ((symbolName != null) && symbolName.contains("mTmapIfExp__DmapOclExpression_d2qvtrExpression_glob")) {
+			//				getClass().toString();
+			//			}
 		}
 		return symbolName2;
 	}

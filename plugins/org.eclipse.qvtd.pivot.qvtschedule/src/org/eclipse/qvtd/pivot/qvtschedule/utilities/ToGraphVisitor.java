@@ -12,7 +12,6 @@ package org.eclipse.qvtd.pivot.qvtschedule.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
@@ -28,29 +27,23 @@ import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.NodeConnectionImpl;
-import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
 
 /** This code is rescued but has never worked properly */
-public class ToGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable String, @NonNull GraphStringBuilder>
+public class ToGraphVisitor extends AbstractToGraphVisitor
 {
 	public ToGraphVisitor(@NonNull GraphStringBuilder context) {
 		super(context);
 	}
 
-	public @NonNull String visit(@NonNull ScheduledRegion region) {
-		region.accept(this);
-		return context.toString();
-	}
-
 	@Override
 	public @Nullable String visitDatumConnection(@NonNull DatumConnection<?> datumConnection) {
-		context.appendEdge(datumConnection.getEdgeSource(), datumConnection, datumConnection.getEdgeTarget());
+		appendEdge(datumConnection.getEdgeSource(), datumConnection, datumConnection.getEdgeTarget());
 		return null;
 	}
 
 	@Override
 	public @Nullable String visitEdge(@NonNull Edge edge) {
-		context.appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
+		appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
 		return null;
 	}
 
@@ -59,17 +52,17 @@ public class ToGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullabl
 		if (edgeConnection.isEdge2Edge()) {
 			NavigableEdge sourceEdge = edgeConnection.getSourceEnds().iterator().next();
 			NavigableEdge targetEdge = edgeConnection.getTargetEdges().iterator().next();
-			context.appendEdge(sourceEdge.getEdgeTarget(), edgeConnection, targetEdge.getEdgeTarget());
+			appendEdge(sourceEdge.getEdgeTarget(), edgeConnection, targetEdge.getEdgeTarget());
 		}
 		else {
-			context.appendNode(edgeConnection);
+			appendNode(edgeConnection);
 			for (@NonNull NavigableEdge source : QVTscheduleUtil.getSourceEnds(edgeConnection)) {
-				context.appendEdge(source.getEdgeTarget(), edgeConnection, edgeConnection);
+				appendEdge(source.getEdgeTarget(), edgeConnection, edgeConnection);
 			}
 			for (@NonNull NavigableEdge target : edgeConnection.getTargetEdges()) {
 				ConnectionRole role = edgeConnection.getTargets().get(target);
 				assert role != null;
-				context.appendEdge(edgeConnection, role, target.getEdgeTarget());
+				appendEdge(edgeConnection, role, target.getEdgeTarget());
 			}
 		}
 		return null;
@@ -82,10 +75,10 @@ public class ToGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullabl
 		context.setPenwidth(QVTscheduleConstants.LINE_WIDTH);
 		context.pushCluster();
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(loadingRegion)) {
-			context.appendNode(node);
+			appendNode(node);
 		}
 		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(loadingRegion)) {
-			context.appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
+			appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
 		}
 		context.popCluster();
 		return null;
@@ -107,14 +100,14 @@ public class ToGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullabl
 			return super.visitNavigableEdge(navigableEdge);
 		}
 		else {
-			context.appendEdge(navigableEdge.getEdgeSource(), navigableEdge, navigableEdge.getEdgeTarget());
+			appendEdge(navigableEdge.getEdgeSource(), navigableEdge, navigableEdge.getEdgeTarget());
 		}
 		return null;
 	}
 
 	@Override
 	public @Nullable String visitNode(@NonNull Node object) {
-		context.appendNode(object);
+		appendNode(object);
 		return null;
 	}
 
@@ -123,17 +116,17 @@ public class ToGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullabl
 		if (nodeConnection.isNode2Node()) {
 			Node sourceNode = QVTscheduleUtil.getSourceEnds(nodeConnection).iterator().next();
 			Node targetNode = nodeConnection.getTargetNodes().iterator().next();
-			context.appendEdge(sourceNode, nodeConnection, targetNode);
+			appendEdge(sourceNode, nodeConnection, targetNode);
 		}
 		else {
-			context.appendNode(nodeConnection);
+			appendNode(nodeConnection);
 			for (@NonNull Node source : QVTscheduleUtil.getSourceEnds(nodeConnection)) {
-				context.appendEdge(source, nodeConnection, nodeConnection);
+				appendEdge(source, nodeConnection, nodeConnection);
 			}
 			for (@NonNull Node target : nodeConnection.getTargetNodes()) {
 				ConnectionRole role = ((NodeConnectionImpl)nodeConnection).getTargets().get(target);
 				assert role != null;
-				context.appendEdge(nodeConnection, role, target);
+				appendEdge(nodeConnection, role, target);
 			}
 		}
 		return null;
@@ -177,20 +170,15 @@ public class ToGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullabl
 			region.accept(this);
 		}
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(scheduledRegion)) {
-			context.appendNode(node);
+			appendNode(node);
 		}
 		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(scheduledRegion)) {
-			context.appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
+			appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
 		}
 		for (@NonNull Connection connection : QVTscheduleUtil.getOwnedConnections(scheduledRegion)) {
 			connection.accept(this);
 		}
 		context.popCluster();
 		return null;
-	}
-
-	@Override
-	public @Nullable String visiting(@NonNull Visitable visitable) {
-		throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
 	}
 }

@@ -511,7 +511,7 @@ public enum ConnectionRole implements Enumerator, GraphStringBuilder.GraphEdge {
 	}
 
 	@Override
-	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
+	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull String sourceName, @NonNull String targetName) {
 		s.setColor(getColor());
 		String style = getStyle();
 		if (style != null) {
@@ -522,7 +522,7 @@ public enum ConnectionRole implements Enumerator, GraphStringBuilder.GraphEdge {
 			s.setArrowhead(arrowhead);
 		}
 		s.setPenwidth(getPenwidth());
-		s.appendAttributedEdge(source, this, target);
+		s.appendAttributedEdge(sourceName, this, targetName);
 	}
 
 

@@ -28,10 +28,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -346,13 +344,14 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	}
 
 	@Override
-	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
+	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull String sourceName, @NonNull String targetName) {
 		s.setColor(getColor());
 		@Nullable
 		NavigableEdge oppositeEdge2 = oppositeEdge;
 		if (oppositeEdge2 != null) {
 			String oppositeLabel = oppositeEdge2.getLabel();
-			if ((oppositeLabel != null) && !oppositeEdge2.getProperty().getName().equals(((Node)source).getClassDatum().getCompleteClass().getName())) {
+			//			if ((oppositeLabel != null) && !oppositeEdge2.getProperty().getName().equals(((Node)source).getClassDatum().getCompleteClass().getName())) {
+			if ((oppositeLabel != null)) {
 				s.setTaillabel(oppositeLabel);
 			}
 		}
@@ -370,7 +369,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		}
 		s.setArrowhead("normal");
 		s.setPenwidth(getPenwidth());
-		s.appendAttributedEdge(source, this, target);
+		s.appendAttributedEdge(sourceName, this, targetName);
 	}
 
 	@Override

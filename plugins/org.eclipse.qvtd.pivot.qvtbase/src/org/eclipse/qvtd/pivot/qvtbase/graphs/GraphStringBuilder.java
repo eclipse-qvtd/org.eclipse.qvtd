@@ -16,23 +16,23 @@ public interface GraphStringBuilder
 {
 	public static interface GraphNode
 	{
-		void appendNode(@NonNull GraphStringBuilder graphStringBuilder, @NonNull String nodeName);
+		void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName);
 	}
 
 	public static interface GraphEdge
 	{
 		//		void appendEdgeAttributes(@NonNull GraphStringBuilder s);
-		void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target);
+		void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull String sourceName, @NonNull String targetName);
 		@NonNull GraphNode getEdgeSource();
 		@NonNull GraphNode getEdgeTarget();
 	}
 
 	//	void appendAttributedEdge(@NonNull GraphEdge edge);
-	void appendAttributedEdge(@NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target);
+	void appendAttributedEdge(@NonNull String sourceName, @NonNull GraphEdge edge, @NonNull String targetName);
 	void appendAttributedNode(@NonNull String nodeName);
 	//	void appendEdge(@NonNull GraphEdge edge);
-	void appendEdge(@NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target);
-	@NonNull String appendNode(@NonNull GraphNode node);
+	void appendEdge(@NonNull ToGraphHelper toGraphHelper, @NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target);
+	@NonNull String appendNode(@NonNull ToGraphHelper toGraphHelper,  @NonNull GraphNode node);
 	void popCluster();
 	void pushCluster();
 	void setArrowhead(@NonNull String arrowhead);

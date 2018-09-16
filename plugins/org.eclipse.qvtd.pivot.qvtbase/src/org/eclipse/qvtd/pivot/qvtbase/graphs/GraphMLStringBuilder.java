@@ -58,9 +58,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 	}
 
 	@Override
-	public void appendAttributedEdge(@NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target) {
-		String sourceName = appendNode(source);
-		String targetName = appendNode(target);
+	public void appendAttributedEdge(@NonNull String sourceName, @NonNull GraphEdge edge, @NonNull String targetName) {
 		String sourceId = sourceName;
 		String targetId = targetName;
 		String lineColor = color;
@@ -109,23 +107,29 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 	}
 
 	@Override
-	public void appendEdge(@NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target) {
+	public void appendEdge(@NonNull ToGraphHelper toGraphHelper, @NonNull GraphNode source, @NonNull GraphEdge edge, @NonNull GraphNode target) {
+		String sourceName = appendNode(toGraphHelper, source);
+		String targetName = appendNode(toGraphHelper, target);
 		resetAttributes();
-		edge.appendEdgeAttributes(this, source, target);
+		edge.appendEdgeAttributes(this, sourceName, targetName);
 		resetAttributes();
 	}
 
 	@Override
-	public @NonNull String appendNode(@NonNull GraphNode object) {
+	public @NonNull String appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull GraphNode object) {
 		String name = node2name.get(object);
 		if (name == null) {
 			name = "a" + node2name.size();
 			node2name.put(object, name);
 			resetAttributes();
-			object.appendNode(this, name);
+			object.appendNode(toGraphHelper, name);
 		}
 		return name;
 	}
+
+	//	private @NonNull String getNodeName(@NonNull GraphNode node) {
+	//		return ClassUtil.nonNullState(node2name.get(node));
+	//	}
 
 	@Override
 	public void popCluster() {

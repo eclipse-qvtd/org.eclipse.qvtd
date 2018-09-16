@@ -12,7 +12,6 @@ package org.eclipse.qvtd.pivot.qvtschedule.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
@@ -22,18 +21,12 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
 
 /** This code is recued but has never worked properly */
-public class ToCallGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable String, @NonNull GraphStringBuilder>
+public class ToCallGraphVisitor extends AbstractToGraphVisitor
 {
 	public ToCallGraphVisitor(@NonNull GraphStringBuilder context) {
 		super(context);
-	}
-
-	public @NonNull String visit(@NonNull ScheduledRegion region) {
-		region.accept(this);
-		return context.toString();
 	}
 
 	@Override
@@ -60,13 +53,13 @@ public class ToCallGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nul
 	@Override
 	public @Nullable String visitNodeConnection(@NonNull NodeConnection nodeConnection) {
 		if (nodeConnection.isNode2Node()) {
-			context.appendNode(nodeConnection);
+			appendNode(nodeConnection);
 			//			@SuppressWarnings("null")@NonNull Node sourceNode = sourceEnds.iterator().next();
 			//			@SuppressWarnings("null")@NonNull Node targetNode = targetEnd2role.keySet().iterator().next();
 			//			s.appendEdge(sourceNode, this, targetNode);
 		}
 		else {
-			context.appendNode(nodeConnection);
+			appendNode(nodeConnection);
 			//			for (@SuppressWarnings("null")@NonNull Node source : getSources()) {
 			//				s.appendEdge(source, this, this);
 			//			}
@@ -80,13 +73,13 @@ public class ToCallGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nul
 
 	@Override
 	public @Nullable String visitRegion(@NonNull Region region) {
-		context.appendNode(region);
+		appendNode(region);
 		for (final @NonNull Region childRegion : region.getCallableChildren()) {
 			GraphEdge graphEdge = new GraphEdge()
 			{
 				@Override
-				public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
-					s.appendAttributedEdge(source, this, target);
+				public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull String sourceName, @NonNull String targetName) {
+					s.appendAttributedEdge(sourceName, this, targetName);
 				}
 
 				@Override
@@ -99,14 +92,14 @@ public class ToCallGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nul
 					return childRegion;
 				}
 			};
-			context.appendEdge(graphEdge.getEdgeSource(), graphEdge, graphEdge.getEdgeTarget());
+			appendEdge(graphEdge.getEdgeSource(), graphEdge, graphEdge.getEdgeTarget());
 		}
 		for (final @NonNull NodeConnection connection : region.getRootConnections())
 		{
 			GraphEdge graphEdge1 = new GraphEdge() {
 				@Override
-				public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
-					s.appendAttributedEdge(source, this, target);
+				public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull String sourceName, @NonNull String targetName) {
+					s.appendAttributedEdge(sourceName, this, targetName);
 				}
 
 				@Override
@@ -119,13 +112,13 @@ public class ToCallGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nul
 					return connection;
 				}
 			};
-			context.appendEdge(graphEdge1.getEdgeSource(), graphEdge1, graphEdge1.getEdgeTarget());
+			appendEdge(graphEdge1.getEdgeSource(), graphEdge1, graphEdge1.getEdgeTarget());
 			for (final @NonNull Node targetNode : connection.getTargetNodes())
 			{
 				GraphEdge graphEdge = new GraphEdge() {
 					@Override
-					public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
-						s.appendAttributedEdge(source, this, target);
+					public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull String sourceName, @NonNull String targetName) {
+						s.appendAttributedEdge(sourceName, this, targetName);
 					}
 
 					@Override
@@ -138,7 +131,7 @@ public class ToCallGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nul
 						return QVTscheduleUtil.getOwningRegion(targetNode);
 					}
 				};
-				context.appendEdge(graphEdge.getEdgeSource(), graphEdge, graphEdge.getEdgeTarget());
+				appendEdge(graphEdge.getEdgeSource(), graphEdge, graphEdge.getEdgeTarget());
 			}
 		}
 		return null;
@@ -156,10 +149,5 @@ public class ToCallGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nul
 		}
 		context.popCluster();
 		return null;
-	}
-
-	@Override
-	public @Nullable String visiting(@NonNull Visitable visitable) {
-		throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
 	}
 }

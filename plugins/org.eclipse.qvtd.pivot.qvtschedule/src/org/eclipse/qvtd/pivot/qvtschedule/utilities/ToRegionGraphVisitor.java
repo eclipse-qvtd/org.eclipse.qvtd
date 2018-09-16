@@ -17,7 +17,6 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
@@ -27,17 +26,11 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
 
-public class ToRegionGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable String, @NonNull GraphStringBuilder>
+public class ToRegionGraphVisitor extends AbstractToGraphVisitor
 {
 	public ToRegionGraphVisitor(@NonNull GraphStringBuilder context) {
 		super(context);
-	}
-
-	public @NonNull String visit(@NonNull ScheduledRegion region) {
-		region.accept(this);
-		return context.toString();
 	}
 
 	@Override
@@ -70,22 +63,22 @@ public class ToRegionGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 		if (datumConnection.isRegion2Region(sourceRegion2count, targetRegion2roles)) {
 			Region sourceRegion = sourceRegion2count.keySet().iterator().next();
 			Region targetRegion = targetRegion2roles.keySet().iterator().next();
-			context.appendEdge(sourceRegion, datumConnection, targetRegion);
+			appendEdge(sourceRegion, datumConnection, targetRegion);
 		}
 		else {
-			context.appendNode(datumConnection);
+			appendNode(datumConnection);
 			for (@NonNull Region sourceRegion : sourceRegion2count.keySet()) {
 				Integer counts = sourceRegion2count.get(sourceRegion);
 				assert counts != null;
 				for (int i = counts; i > 0; i--) {
-					context.appendEdge(sourceRegion, datumConnection, datumConnection);
+					appendEdge(sourceRegion, datumConnection, datumConnection);
 				}
 			}
 			for (@NonNull Region targetRegion : targetRegion2roles.keySet()) {
 				List<@NonNull ConnectionRole> roles = targetRegion2roles.get(targetRegion);
 				assert roles != null;
 				for (@NonNull ConnectionRole role : roles) {
-					context.appendEdge(datumConnection, role, targetRegion);
+					appendEdge(datumConnection, role, targetRegion);
 					//				GraphNode targetNode = /*targetRegion.isCyclicRegion() ? getTarget(targetRegion) :*/ targetRegion;
 					//				for (@SuppressWarnings("null")@NonNull ConnectionRole role : targetRegion2roles.get(targetRegion)) {
 					//					s.appendEdge(this, role, targetNode);
@@ -118,7 +111,7 @@ public class ToRegionGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 					Node node = (Node)sourceEnd;
 					if (node.isHead()) {
 						headNode = node;
-						context.appendEdge(headNode, datumConnection, datumConnection);
+						appendEdge(headNode, datumConnection, datumConnection);
 					}
 				}
 			}
@@ -128,9 +121,9 @@ public class ToRegionGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 
 	@Override
 	public @Nullable String visitRegion(@NonNull Region region) {
-		context.appendNode(region);
+		appendNode(region);
 		for (@NonNull Edge edge : region.getRecursionEdges()) {
-			context.appendEdge(QVTscheduleUtil.getOwningRegion(edge.getEdgeSource()), edge, QVTscheduleUtil.getOwningRegion(edge.getEdgeTarget()));
+			appendEdge(QVTscheduleUtil.getOwningRegion(edge.getEdgeSource()), edge, QVTscheduleUtil.getOwningRegion(edge.getEdgeTarget()));
 		}
 		return null;
 	}
@@ -141,23 +134,18 @@ public class ToRegionGraphVisitor extends AbstractExtendingQVTscheduleVisitor<@N
 		context.pushCluster();
 		for (@NonNull Region region : scheduledRegion.getCallableRegions()) {
 			//			region.toRegionGraph(s);
-			context.appendNode(region);
+			appendNode(region);
 			//			for (@SuppressWarnings("null")@NonNull Edge edge : region.getRecursionEdges()) {
 			//				s.appendEdge(edge.getSource().getRegion(), edge, edge.getTarget().getRegion());
 			//			}
 		}
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(scheduledRegion)) {
-			context.appendNode(node);
+			appendNode(node);
 		}
 		for (@NonNull Connection connection : QVTscheduleUtil.getOwnedConnections(scheduledRegion)) {
 			connection.accept(this);
 		}
 		context.popCluster();
 		return null;
-	}
-
-	@Override
-	public @Nullable String visiting(@NonNull Visitable visitable) {
-		throw new UnsupportedOperationException(getClass().getSimpleName() + ": " + visitable.getClass().getSimpleName());
 	}
 }

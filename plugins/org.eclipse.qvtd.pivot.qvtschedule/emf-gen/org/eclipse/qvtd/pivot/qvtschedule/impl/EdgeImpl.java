@@ -24,7 +24,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Cluster;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -592,7 +591,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	}
 
 	@Override
-	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
+	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull String sourceName, @NonNull String targetName) {
 		s.setColor(getColor());
 		String label = getLabel();
 		if (label != null) {
@@ -611,7 +610,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 			s.setArrowtail(arrowtail);
 		}
 		s.setPenwidth(getPenwidth());
-		s.appendAttributedEdge(source, this, target);
+		s.appendAttributedEdge(sourceName, this, targetName);
 	}
 
 	/*	@Override

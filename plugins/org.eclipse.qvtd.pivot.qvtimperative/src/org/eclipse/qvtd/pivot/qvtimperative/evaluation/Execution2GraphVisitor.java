@@ -30,6 +30,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AssociationStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AttributeStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.ClassStatus;
@@ -48,7 +49,7 @@ import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 import com.google.common.collect.Iterables;
 
-public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable Object>
+public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable Object> implements ToGraphHelper
 {
 	protected static final class ExecutionEdge implements GraphEdge
 	{
@@ -65,12 +66,12 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 		}
 
 		@Override
-		public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull GraphNode source, @NonNull GraphNode target) {
+		public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull String sourceName, @NonNull String targetName) {
 			s.setColor(color);
 			if (style != null) {
 				s.setStyle(style);
 			}
-			s.appendAttributedEdge(source, this, target);
+			s.appendAttributedEdge(sourceName, this, targetName);
 		}
 
 		@Override
@@ -119,7 +120,11 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 	}
 
 	protected void appendEdge(@NonNull GraphNode sourceNode, @NonNull GraphNode targetNode, @NonNull String color, @Nullable String style) {
-		context.appendEdge(sourceNode, new ExecutionEdge(sourceNode, targetNode, color, style), targetNode);
+		context.appendEdge(this, sourceNode, new ExecutionEdge(sourceNode, targetNode, color, style), targetNode);
+	}
+
+	protected @NonNull String appendNode(@NonNull GraphNode node) {
+		return context.appendNode(this, node);
 	}
 
 	protected @NonNull String getAssociationColor(@NonNull AssociationStatus associationStatus) {
@@ -195,16 +200,17 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			node = new GraphNode()
 			{
 				@Override
-				public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
+				public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
+					GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
 					s.setLabel(label);
 					s.setShape("hexagon");
 					s.setColor("brown");
-					//					context.appendNode(mappingId, "hexagon", "#ffcc00", 30, 150, mappingId.replace("-",  "\n"));
+					//					appendNode(mappingId, "hexagon", "#ffcc00", 30, 150, mappingId.replace("-",  "\n"));
 					s.appendAttributedNode(nodeName);
 				}
 			};
 			computation2node.put(object, node);
-			context.appendNode(node);
+			appendNode(node);
 		}
 		return node;
 	}
@@ -216,7 +222,8 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			node = new GraphNode()
 			{
 				@Override
-				public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
+				public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
+					GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
 					s.setLabel(label);
 					s.setShape("ellipse");
 					s.setColor("blue");
@@ -224,7 +231,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 				}
 			};
 			connection2node.put(object, node);
-			context.appendNode(node);
+			appendNode(node);
 		}
 		return node;
 	}
@@ -241,6 +248,11 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 		}
 	}
 
+	@Override
+	public @NonNull GraphStringBuilder getGraphStringBuilder() {
+		return context;
+	}
+
 	protected @NonNull GraphNode getIntervalNode(@NonNull Interval object) {
 		GraphNode node = interval2node.get(object);
 		if (node == null) {
@@ -248,7 +260,8 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			node = new GraphNode()
 			{
 				@Override
-				public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
+				public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
+					GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
 					s.setLabel(label);
 					s.setShape("octagon");
 					s.setColor("black");
@@ -256,7 +269,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 				}
 			};
 			interval2node.put(object, node);
-			context.appendNode(node);
+			appendNode(node);
 		}
 		return node;
 	}
@@ -268,7 +281,8 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			node = new GraphNode()
 			{
 				@Override
-				public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
+				public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
+					GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
 					s.setLabel(label);
 					s.setShape("hexagon");
 					s.setColor("brown");
@@ -276,7 +290,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 				}
 			};
 			invocationConstructor2node.put(object, node);
-			context.appendNode(node);
+			appendNode(node);
 		}
 		return node;
 	}
@@ -297,16 +311,17 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			node = new GraphNode()
 			{
 				@Override
-				public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
+				public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
+					GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
 					s.setLabel(label);
 					s.setShape("hexagon");
 					s.setColor("orange");
-					//					context.appendNode(mappingId, "hexagon", "#ffcc00", 30, 150, mappingId.replace("-",  "\n"));
+					//					appendNode(mappingId, "hexagon", "#ffcc00", 30, 150, mappingId.replace("-",  "\n"));
 					s.appendAttributedNode(nodeName);
 				}
 			};
 			invocation2node.put(object, node);
-			context.appendNode(node);
+			appendNode(node);
 		}
 		return node;
 	}
@@ -326,7 +341,8 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			node = new GraphNode()
 			{
 				@Override
-				public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
+				public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
+					GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
 					s.setLabel(label);
 					s.setShape("rectangle");
 					s.setColor("blue");
@@ -334,7 +350,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 				}
 			};
 			object2node.put(object, node);
-			context.appendNode(node);
+			appendNode(node);
 		}
 		return node;
 	}
@@ -377,7 +393,8 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			node = new GraphNode()
 			{
 				@Override
-				public void appendNode(@NonNull GraphStringBuilder s, @NonNull String nodeName) {
+				public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
+					GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
 					s.setLabel(finalLabel);
 					s.setShape("rectangle");
 					if (eFeature instanceof EAttribute) {
@@ -388,7 +405,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 				}
 			};
 			slot2node.put(object, node);
-			context.appendNode(node);
+			appendNode(node);
 		}
 		return node;
 	}
@@ -438,7 +455,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 		String associationId = getAssociationId(object);
 		String fillColor = object.isIsError() ? "#ff0000" : getAssociationColor(object);
 		String label = getAssociationLabel(object);
-		context.appendNode(associationId, "rectangle", fillColor, 30, 100, label);
+		appendNode(associationId, "rectangle", fillColor, 30, 100, label);
 		for (ClassStatus classStatus : object.getFromClassStatuses()) {
 			if (classStatus != null) {
 				String classId = getClassId(classStatus);
@@ -473,7 +490,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 		if (type instanceof EDataType) {
 			label = label + "\n" + String.valueOf(object.getObject());
 		}
-		context.appendNode(attributeId, "rectangle", fillColor, 30, 50, label);
+		appendNode(attributeId, "rectangle", fillColor, 30, 50, label);
 		context.appendEdge(classId, attributeId, "#339966", "line","diamond", "none");
 		return null;
 	} */
@@ -481,7 +498,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 	/*	@Override
 	public @Nullable String visitClassStatus(@NonNull ClassStatus object) {
 		String classId = getClassId(object);
-		context.appendNode(classId, "rectangle", getClassColor(object), 30, 120, classId.replace("-",  "\n"));
+		appendNode(classId, "rectangle", getClassColor(object), 30, 120, classId.replace("-",  "\n"));
 		for (AttributeStatus attributeStatus : object.getOwnedAttributeStatuses()) {
 			attributeStatus.accept(this);
 		}
@@ -517,7 +534,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 				}
 			}
 		}
-		/*		context.appendNode(mappingId, "hexagon", "#ffcc00", 30, 150, mappingId.replace("-",  "\n"));
+		/*		appendNode(mappingId, "hexagon", "#ffcc00", 30, 150, mappingId.replace("-",  "\n"));
 			for (ElementStatus inputStatus : object.getInputs()) {
 				if (inputStatus instanceof ClassStatus) {
 					ClassStatus classStatus = (ClassStatus)inputStatus;
