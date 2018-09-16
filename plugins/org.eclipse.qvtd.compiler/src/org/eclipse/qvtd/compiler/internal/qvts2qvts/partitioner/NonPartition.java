@@ -29,6 +29,11 @@ class NonPartition extends AbstractPartition
 	}
 
 	@Override
+	protected @NonNull Iterable<@NonNull Node> getHeadNodes() {
+		return QVTscheduleUtil.getHeadNodes(originalRegion);
+	}
+
+	@Override
 	public @NonNull MappingRegion getMicroMappingRegion() {
 		return (MappingRegion)originalRegion;
 	}
@@ -39,12 +44,12 @@ class NonPartition extends AbstractPartition
 	}
 
 	@Override
-	protected @NonNull Iterable<@NonNull Edge> getPartialEdges() {
+	public @NonNull Iterable<@NonNull Edge> getPartialEdges() {
 		return QVTscheduleUtil.getOwnedEdges(originalRegion);
 	}
 
 	@Override
-	protected @NonNull Iterable<@NonNull Node> getPartialNodes() {
+	public @NonNull Iterable<@NonNull Node> getPartialNodes() {
 		return QVTscheduleUtil.getOwnedNodes(originalRegion);
 	}
 }

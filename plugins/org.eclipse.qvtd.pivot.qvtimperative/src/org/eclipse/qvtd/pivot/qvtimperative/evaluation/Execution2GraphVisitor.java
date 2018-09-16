@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
@@ -36,6 +37,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AssociationStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.AttributeStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.ClassStatus;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluationstatus.PropertyStatus;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractExecutionVisitor;
 import org.eclipse.qvtd.runtime.evaluation.Computation;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
@@ -91,6 +95,38 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			return targetNode;
 		}
 	}
+
+	protected static final class ExecutionNode implements GraphNode
+	{
+		private final @NonNull String label;
+		private final @NonNull String color;
+		private final @NonNull String shape;
+		private final @Nullable String style;
+
+		protected ExecutionNode(@NonNull String label, @NonNull String color, @NonNull String shape, @Nullable String style) {
+			this.label = label;
+			this.color = color;
+			this.shape = shape;
+			this.style = style;
+		}
+
+		@Override
+		public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
+			GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
+			s.setLabel(label);
+			s.setShape(shape);
+			if (style != null) {
+				s.setStyle(style);
+			}
+			toGraphHelper.setColor(this);
+			s.appendAttributedNode(nodeName);
+		}
+
+		@Override
+		public @NonNull String getColor() {
+			return color;
+		}
+	};
 
 	protected static @NonNull String NULL_PLACEHOLDER = "\"<null>\""; //$NON-NLS-1$
 
@@ -204,23 +240,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			//				label = object.toString().replace("@",  "\n@");
 			//				label = object.getClass().getSimpleName() + "-" + (invocation2node.size() + 1);
 			//			}
-			node = new GraphNode()
-			{
-				@Override
-				public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
-					GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
-					s.setLabel(label);
-					s.setShape("hexagon");
-					toGraphHelper.setColor(this);
-					//					appendNode(mappingId, "hexagon", "#ffcc00", 30, 150, mappingId.replace("-",  "\n"));
-					s.appendAttributedNode(nodeName);
-				}
-
-				@Override
-				public @NonNull String getColor() {
-					return "brown";
-				}
-			};
+			node = new ExecutionNode(label, "brown", "hexagon", null);
 			computation2node.put(object, node);
 			appendNode(node);
 		}
@@ -230,23 +250,8 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 	protected @NonNull GraphNode getConnectionNode(@NonNull Connection object) {
 		GraphNode node = connection2node.get(object);
 		if (node == null) {
-			final String label = object.getName();
-			node = new GraphNode()
-			{
-				@Override
-				public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
-					GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
-					s.setLabel(label);
-					s.setShape("ellipse");
-					toGraphHelper.setColor(this);
-					s.appendAttributedNode(nodeName);
-				}
-
-				@Override
-				public @NonNull String getColor() {
-					return "blue";
-				}
-			};
+			String label = QVTscheduleUtil.getName(object);
+			node = new ExecutionNode(label, "blue", "ellipse", null);
 			connection2node.put(object, node);
 			appendNode(node);
 		}
@@ -274,22 +279,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 		GraphNode node = interval2node.get(object);
 		if (node == null) {
 			final String label = "          " + object.getName() + "          ";
-			node = new GraphNode()
-			{
-				@Override
-				public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
-					GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
-					s.setLabel(label);
-					s.setShape("octagon");
-					toGraphHelper.setColor(this);
-					s.appendAttributedNode(nodeName);
-				}
-
-				@Override
-				public @NonNull String getColor() {
-					return "black";
-				}
-			};
+			node = new ExecutionNode(label, "black", "octagon", null);
 			interval2node.put(object, node);
 			appendNode(node);
 		}
@@ -300,22 +290,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 		GraphNode node = invocationConstructor2node.get(object);
 		if (node == null) {
 			final String label = object.getName();
-			node = new GraphNode()
-			{
-				@Override
-				public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
-					GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
-					s.setLabel(label);
-					s.setShape("hexagon");
-					toGraphHelper.setColor(this);
-					s.appendAttributedNode(nodeName);
-				}
-
-				@Override
-				public @NonNull String getColor() {
-					return "brown";
-				}
-			};
+			node = new ExecutionNode(label, "brown", "hexagon", null);
 			invocationConstructor2node.put(object, node);
 			appendNode(node);
 		}
@@ -335,23 +310,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			//				label = object.toString().replace("@",  "\n@");
 			//				label = object.getClass().getSimpleName() + "-" + (invocation2node.size() + 1);
 			//			}
-			node = new GraphNode()
-			{
-				@Override
-				public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
-					GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
-					s.setLabel(label);
-					s.setShape("hexagon");
-					toGraphHelper.setColor(this);
-					//					appendNode(mappingId, "hexagon", "#ffcc00", 30, 150, mappingId.replace("-",  "\n"));
-					s.appendAttributedNode(nodeName);
-				}
-
-				@Override
-				public @NonNull String getColor() {
-					return "orange";
-				}
-			};
+			node = new ExecutionNode(label, "orange", "hexagon", null);
 			invocation2node.put(object, node);
 			appendNode(node);
 		}
@@ -370,22 +329,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 				label = object.toString().replace("@",  "\n@");
 				//				label = object.getClass().getSimpleName() + "-" + (invocation2node.size() + 1);
 			}
-			node = new GraphNode()
-			{
-				@Override
-				public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
-					GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
-					s.setLabel(label);
-					s.setShape("rectangle");
-					toGraphHelper.setColor(this);
-					s.appendAttributedNode(nodeName);
-				}
-
-				@Override
-				public @NonNull String getColor() {
-					return "blue";
-				}
-			};
+			node = new ExecutionNode(label, "blue", "rectangle", null);
 			object2node.put(object, node);
 			appendNode(node);
 		}
@@ -411,7 +355,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 		GraphNode node = slot2node.get(object);
 		if (node == null) {
 			final EStructuralFeature eFeature = object.getEFeature();
-			String label = eFeature.getName();
+			String label = ClassUtil.nonNullState(eFeature.getName());
 			if (eFeature instanceof EReference) {
 				EReference eOpposite = ((EReference)eFeature).getEOpposite();
 				if (eOpposite != null) {
@@ -426,26 +370,7 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 				}
 				label += "  \n  " + stringValue;
 			}
-			final String finalLabel = label;
-			node = new GraphNode()
-			{
-				@Override
-				public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
-					GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
-					s.setLabel(finalLabel);
-					s.setShape("rectangle");
-					if (eFeature instanceof EAttribute) {
-						s.setStyle("rounded");
-					}
-					toGraphHelper.setColor(this);
-					s.appendAttributedNode(nodeName);
-				}
-
-				@Override
-				public @NonNull String getColor() {
-					return "blue";
-				}
-			};
+			node = new ExecutionNode(label, "blue", "rectangle", "rounded");
 			slot2node.put(object, node);
 			appendNode(node);
 		}
@@ -455,6 +380,30 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 	@Override
 	public void setColor(@NonNull GraphElement element) {
 		context.setColor(element.getColor());
+	}
+
+	@Override
+	public void setHead(@NonNull GraphNode graphNode) {
+		boolean isHead = false;
+		if (graphNode instanceof Node) {
+			Node node = (Node) graphNode;
+			isHead = node.isHead();
+		}
+		if (isHead) {
+			context.setHead();
+		}
+	}
+
+	@Override
+	public void setPenwidth(@NonNull GraphNode graphNode) {
+		boolean isHead = false;
+		boolean isExpression = false;
+		if (graphNode instanceof Node) {
+			Node node = (Node) graphNode;
+			isHead = node.isHead();
+			isExpression = node.isExpression();
+		}
+		context.setPenwidth(isHead ? QVTscheduleConstants.HEAD_WIDTH : !isExpression ? 2*QVTscheduleConstants.LINE_WIDTH : QVTscheduleConstants.LINE_WIDTH);
 	}
 
 	@Override

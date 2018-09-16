@@ -26,6 +26,7 @@ import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
@@ -694,6 +695,11 @@ public class MappingPartitioner implements Nameable
 			for (@NonNull NavigableEdge edge : getRealizedEdges()) {
 				if (!hasRealizedEdge(edge)) {
 					newPartitions.add(createAssignmentPartition(assignmentReachabilityForest, edge));
+				}
+			}
+			if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+				for (@NonNull Partition partition : newPartitions) {
+					scheduleManager.writeDebugGraphs(partition, null);
 				}
 			}
 		}

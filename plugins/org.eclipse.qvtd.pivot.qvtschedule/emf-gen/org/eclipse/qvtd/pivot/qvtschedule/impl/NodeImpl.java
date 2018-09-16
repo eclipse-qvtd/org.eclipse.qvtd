@@ -637,11 +637,12 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
 		GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
-		boolean isHead = isHead();
-		if (isHead) {
-			s.setHead();
-			//			s.append("{rank=source;");
-		}
+		toGraphHelper.setHead(this);
+		//	boolean isHead = isHead();
+		//	if (isHead) {
+		//		s.setHead();
+		//			s.append("{rank=source;");
+		//	}
 		setLabel(s);
 		String shape = getShape();
 		if (shape != null) {
@@ -655,7 +656,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		if (!isUnconditional()) {
 			s.setFillColor(getFillColor());
 		}
-		s.setPenwidth(getPenwidth());
+		toGraphHelper.setPenwidth(this);
 		s.appendAttributedNode(nodeName);
 		//		if (isHead) {
 		//			s.append("}");

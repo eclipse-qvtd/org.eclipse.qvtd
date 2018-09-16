@@ -128,6 +128,12 @@ class AssignmentPartition extends AbstractPartialPartition
 	}
 
 	@Override
+	protected @NonNull Iterable<@NonNull Node> getHeadNodes() {
+		// TODO Auto-generated method stub
+		return super.getHeadNodes();
+	}
+
+	@Override
 	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
 		Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
 		if (edgeRole == Role.REALIZED) {

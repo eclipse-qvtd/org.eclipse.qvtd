@@ -315,6 +315,11 @@ abstract class AbstractPartialPartition extends AbstractPartition
 	}
 
 	@Override
+	protected @NonNull Iterable<@NonNull Node> getHeadNodes() {
+		return partitioner.getTraceNodes();
+	}
+
+	@Override
 	public @NonNull MappingRegion getMicroMappingRegion() {
 		return ClassUtil.nonNullState(microMappingRegion);
 	}
@@ -332,12 +337,12 @@ abstract class AbstractPartialPartition extends AbstractPartition
 	}
 
 	@Override
-	protected @NonNull Iterable<@NonNull Edge> getPartialEdges() {
+	public @NonNull Iterable<@NonNull Edge> getPartialEdges() {
 		return edge2edgeRole.keySet();
 	}
 
 	@Override
-	protected @NonNull Iterable<@NonNull Node> getPartialNodes() {
+	public @NonNull Iterable<@NonNull Node> getPartialNodes() {
 		return getNodes();
 	}
 

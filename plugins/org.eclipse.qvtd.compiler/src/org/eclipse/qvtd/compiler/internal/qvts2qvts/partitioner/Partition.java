@@ -18,8 +18,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
 
-public interface Partition extends PartialRegionAnalysis<@NonNull Partition>
+public interface Partition extends PartialRegionAnalysis<@NonNull Partition>, Graphable
 {
 	void analyzePartition();
 
@@ -30,6 +31,10 @@ public interface Partition extends PartialRegionAnalysis<@NonNull Partition>
 	@NonNull MappingRegion getMicroMappingRegion();
 
 	@NonNull Region getOriginalRegion();
+
+	@NonNull Iterable<@NonNull Edge> getPartialEdges();
+
+	@NonNull Iterable<@NonNull Node> getPartialNodes();
 
 	@Nullable Role getRole(@NonNull Edge edge);
 

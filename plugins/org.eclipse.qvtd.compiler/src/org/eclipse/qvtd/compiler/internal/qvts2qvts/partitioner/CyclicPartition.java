@@ -21,6 +21,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.AbstractPartialRegionAnalysis;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -132,13 +133,13 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	}
 
 	@Override
-	protected @NonNull Iterable<@NonNull Edge> getPartialEdges() {
+	public @NonNull Iterable<@NonNull Edge> getPartialEdges() {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();		// FIXME
 	}
 
 	@Override
-	protected @NonNull Iterable<@NonNull Node> getPartialNodes() {
+	public @NonNull Iterable<@NonNull Node> getPartialNodes() {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();		// FIXME
 	}
@@ -186,6 +187,11 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	}
 
 	@Override
+	public @NonNull String getSymbolName() {
+		return name;
+	}
+
+	@Override
 	public @NonNull Iterable<@NonNull TraceClassAnalysis<@NonNull Partition>> getTraceClassAnalyses() {
 		return traceClassAnalyses;
 	}
@@ -198,6 +204,12 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	@Override
 	public void setDepth(int parallelScheduleDepth) {
 		this.parallelScheduleDepth = parallelScheduleDepth;
+	}
+
+	@Override
+	public void toGraph(@NonNull GraphStringBuilder s) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();		// FIXME
 	}
 
 	@Override

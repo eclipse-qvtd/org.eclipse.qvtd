@@ -18,6 +18,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphElement;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
 
@@ -41,9 +42,42 @@ public abstract class AbstractToGraphVisitor extends AbstractExtendingQVTschedul
 		return context;
 	}
 
+	protected boolean isExpression(GraphNode graphNode) {
+		boolean isExpression = false;
+		if (graphNode instanceof Node) {
+			Node node = (Node) graphNode;
+			isExpression = node.isExpression();
+		}
+		return isExpression;
+	}
+
+	protected boolean isHead(GraphNode graphNode) {
+		boolean isHead = false;
+		if (graphNode instanceof Node) {
+			Node node = (Node) graphNode;
+			isHead = node.isHead();
+		}
+		return isHead;
+	}
+
 	@Override
 	public void setColor(@NonNull GraphElement element) {
 		context.setColor(element.getColor());
+	}
+
+	@Override
+	public void setHead(@NonNull GraphNode graphNode) {
+		boolean isHead = isHead(graphNode);
+		if (isHead) {
+			context.setHead();
+		}
+	}
+
+	@Override
+	public void setPenwidth(@NonNull GraphNode graphNode) {
+		boolean isHead = isHead(graphNode);
+		boolean isExpression = isExpression(graphNode);
+		context.setPenwidth(isHead ? QVTscheduleConstants.HEAD_WIDTH : !isExpression ? 2*QVTscheduleConstants.LINE_WIDTH : QVTscheduleConstants.LINE_WIDTH);
 	}
 
 	public @NonNull String visit(@NonNull ScheduledRegion region) {

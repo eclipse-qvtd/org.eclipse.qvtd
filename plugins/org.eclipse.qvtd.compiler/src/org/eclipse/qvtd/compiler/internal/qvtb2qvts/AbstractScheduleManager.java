@@ -931,6 +931,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 				try {
 					DOTStringBuilder s = new DOTStringBuilder();
 					graphable.toGraph(s);
+					//	ToGraphVisitor visitor = new ToGraphVisitor(s);
+					//	graphable.accept(visitor);
 					outputStream.write(s.toString().getBytes());
 				}
 				finally {
@@ -955,8 +957,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			URI dotURI = URI.createURI(symbolName + ".graphml").resolve(baseURI);
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
-				GraphMLStringBuilder s = new GraphMLStringBuilder();
 				try {
+					GraphMLStringBuilder s = new GraphMLStringBuilder();
 					graphable.toGraph(s);
 					outputStream.write(s.toString().getBytes());
 				}
