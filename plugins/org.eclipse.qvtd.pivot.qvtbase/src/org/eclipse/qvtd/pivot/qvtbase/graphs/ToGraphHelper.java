@@ -11,8 +11,11 @@
 package org.eclipse.qvtd.pivot.qvtbase.graphs;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphElement;
 
 public interface ToGraphHelper
 {
 	@NonNull GraphStringBuilder getGraphStringBuilder();
+
+	void setColor(@NonNull GraphElement element);
 }

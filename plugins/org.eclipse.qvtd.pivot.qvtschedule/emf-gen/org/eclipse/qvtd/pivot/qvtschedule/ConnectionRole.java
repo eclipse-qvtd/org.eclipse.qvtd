@@ -22,6 +22,7 @@ import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
@@ -392,6 +393,7 @@ public enum ConnectionRole implements Enumerator, GraphStringBuilder.GraphEdge {
 		return null;
 	}
 
+	@Override
 	public @NonNull String getColor() {
 		switch (this) {
 			case MANDATORY_EDGE: return QVTscheduleConstants.ORDERING_COLOR;
@@ -511,8 +513,9 @@ public enum ConnectionRole implements Enumerator, GraphStringBuilder.GraphEdge {
 	}
 
 	@Override
-	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull String sourceName, @NonNull String targetName) {
-		s.setColor(getColor());
+	public void appendEdgeAttributes(@NonNull ToGraphHelper toGraphHelper, @NonNull String sourceName, @NonNull String targetName) {
+		GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
+		toGraphHelper.setColor(this);
 		String style = getStyle();
 		if (style != null) {
 			s.setStyle(style);

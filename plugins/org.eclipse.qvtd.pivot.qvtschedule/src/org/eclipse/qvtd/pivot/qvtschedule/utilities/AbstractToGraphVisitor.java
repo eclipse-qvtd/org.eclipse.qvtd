@@ -16,6 +16,7 @@ import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphElement;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
@@ -38,6 +39,11 @@ public abstract class AbstractToGraphVisitor extends AbstractExtendingQVTschedul
 	@Override
 	public @NonNull GraphStringBuilder getGraphStringBuilder() {
 		return context;
+	}
+
+	@Override
+	public void setColor(@NonNull GraphElement element) {
+		context.setColor(element.getColor());
 	}
 
 	public @NonNull String visit(@NonNull ScheduledRegion region) {

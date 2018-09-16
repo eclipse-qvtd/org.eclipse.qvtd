@@ -288,8 +288,9 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	}
 
 	@Override
-	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull String sourceName, @NonNull String targetName) {
-		s.setColor(getConnectionRole().getColor());
+	public void appendEdgeAttributes(@NonNull ToGraphHelper toGraphHelper, @NonNull String sourceName, @NonNull String targetName) {
+		GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
+		toGraphHelper.setColor(this);
 		/*		if (isRegion2Region()) {
 			String indexText = getIndexText();
 			if (indexText != null) {
@@ -322,7 +323,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 		if (style != null) {
 			s.setStyle(style);
 		}
-		s.setColor(getConnectionRole().getColor());
+		toGraphHelper.setColor(this);
 		s.setPenwidth(getConnectionRole().getPenwidth());
 		s.appendAttributedNode(nodeName);
 	}
@@ -337,6 +338,11 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 		assert connectionRoleEnum != null;
 		return connectionRoleEnum.getConnectionRole();
 	} */
+
+	@Override
+	public @NonNull String getColor() {
+		return getConnectionRole().getColor();
+	}
 
 	public @Nullable String getIndexText() {
 		StringBuilder s = null;

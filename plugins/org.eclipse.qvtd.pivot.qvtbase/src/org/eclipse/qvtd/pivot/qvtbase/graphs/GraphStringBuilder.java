@@ -14,15 +14,19 @@ import org.eclipse.jdt.annotation.NonNull;
 
 public interface GraphStringBuilder
 {
-	public static interface GraphNode
+	public static interface GraphElement
+	{
+		@NonNull String getColor();
+	}
+
+	public static interface GraphNode extends GraphElement
 	{
 		void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName);
 	}
 
-	public static interface GraphEdge
+	public static interface GraphEdge extends GraphElement
 	{
-		//		void appendEdgeAttributes(@NonNull GraphStringBuilder s);
-		void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull String sourceName, @NonNull String targetName);
+		void appendEdgeAttributes(@NonNull ToGraphHelper toGraphHelper, @NonNull String sourceName, @NonNull String targetName);
 		@NonNull GraphNode getEdgeSource();
 		@NonNull GraphNode getEdgeTarget();
 	}

@@ -28,6 +28,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -344,8 +345,9 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	}
 
 	@Override
-	public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull String sourceName, @NonNull String targetName) {
-		s.setColor(getColor());
+	public void appendEdgeAttributes(@NonNull ToGraphHelper toGraphHelper, @NonNull String sourceName, @NonNull String targetName) {
+		GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
+		toGraphHelper.setColor(this);
 		@Nullable
 		NavigableEdge oppositeEdge2 = oppositeEdge;
 		if (oppositeEdge2 != null) {

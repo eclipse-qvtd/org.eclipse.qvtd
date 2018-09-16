@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvtschedule.utilities;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
@@ -78,8 +79,14 @@ public class ToCallGraphVisitor extends AbstractToGraphVisitor
 			GraphEdge graphEdge = new GraphEdge()
 			{
 				@Override
-				public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull String sourceName, @NonNull String targetName) {
+				public void appendEdgeAttributes(@NonNull ToGraphHelper toGraphHelper, @NonNull String sourceName, @NonNull String targetName) {
+					GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
 					s.appendAttributedEdge(sourceName, this, targetName);
+				}
+
+				@Override
+				public @NonNull String getColor() {
+					return "black";
 				}
 
 				@Override
@@ -98,8 +105,14 @@ public class ToCallGraphVisitor extends AbstractToGraphVisitor
 		{
 			GraphEdge graphEdge1 = new GraphEdge() {
 				@Override
-				public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull String sourceName, @NonNull String targetName) {
+				public void appendEdgeAttributes(@NonNull ToGraphHelper toGraphHelper, @NonNull String sourceName, @NonNull String targetName) {
+					GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
 					s.appendAttributedEdge(sourceName, this, targetName);
+				}
+
+				@Override
+				public @NonNull String getColor() {
+					return "black";
 				}
 
 				@Override
@@ -117,8 +130,14 @@ public class ToCallGraphVisitor extends AbstractToGraphVisitor
 			{
 				GraphEdge graphEdge = new GraphEdge() {
 					@Override
-					public void appendEdgeAttributes(@NonNull GraphStringBuilder s, @NonNull String sourceName, @NonNull String targetName) {
+					public void appendEdgeAttributes(@NonNull ToGraphHelper toGraphHelper, @NonNull String sourceName, @NonNull String targetName) {
+						GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
 						s.appendAttributedEdge(sourceName, this, targetName);
+					}
+
+					@Override
+					public @NonNull String getColor() {
+						return "black";
 					}
 
 					@Override

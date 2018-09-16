@@ -125,7 +125,7 @@ public class DOTStringBuilder implements GraphStringBuilder
 		append(" -> ");
 		append(targetName);
 		attributes.clear();
-		edge.appendEdgeAttributes(this, sourceName, targetName);
+		edge.appendEdgeAttributes(toGraphHelper, sourceName, targetName);
 		appendAttributes();
 		newLine();
 	}

@@ -111,7 +111,7 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		String sourceName = appendNode(toGraphHelper, source);
 		String targetName = appendNode(toGraphHelper, target);
 		resetAttributes();
-		edge.appendEdgeAttributes(this, sourceName, targetName);
+		edge.appendEdgeAttributes(toGraphHelper, sourceName, targetName);
 		resetAttributes();
 	}
 

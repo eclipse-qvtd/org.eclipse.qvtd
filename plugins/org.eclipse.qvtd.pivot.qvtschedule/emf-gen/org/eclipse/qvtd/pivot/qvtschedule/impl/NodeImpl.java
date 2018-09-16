@@ -651,7 +651,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		if (style != null) {
 			s.setStyle(style);
 		}
-		s.setColor(getColor());
+		toGraphHelper.setColor(this);
 		if (!isUnconditional()) {
 			s.setFillColor(getFillColor());
 		}
@@ -745,7 +745,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		return this;
 	} */
 
-	protected @NonNull String getColor() {
+	@Override
+	public @NonNull String getColor() {
 		assert nodeRole != null;
 		return QVTscheduleUtil.getColor(nodeRole);
 	}
