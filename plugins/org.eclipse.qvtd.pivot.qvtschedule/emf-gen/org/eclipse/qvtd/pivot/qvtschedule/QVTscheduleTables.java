@@ -6019,14 +6019,18 @@ public class QVTscheduleTables
 		};
 
 		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__CONSTANT = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("CONSTANT"), Types._Role, 0);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__LOADED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("LOADED"), Types._Role, 1);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__REALIZED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("REALIZED"), Types._Role, 2);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__PREDICATED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("PREDICATED"), Types._Role, 3);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__SPECULATION = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("SPECULATION"), Types._Role, 4);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__SPECULATED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("SPECULATED"), Types._Role, 5);
-		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__OTHER = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("OTHER"), Types._Role, 6);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__CONSTANT_SUCCESS_FALSE = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("CONSTANT_SUCCESS_FALSE"), Types._Role, 1);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__CONSTANT_SUCCESS_TRUE = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("CONSTANT_SUCCESS_TRUE"), Types._Role, 2);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__LOADED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("LOADED"), Types._Role, 3);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__REALIZED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("REALIZED"), Types._Role, 4);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__PREDICATED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("PREDICATED"), Types._Role, 5);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__SPECULATION = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("SPECULATION"), Types._Role, 6);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__SPECULATED = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("SPECULATED"), Types._Role, 7);
+		public static final @NonNull EcoreExecutorEnumerationLiteral _Role__OTHER = new EcoreExecutorEnumerationLiteral(QVTschedulePackage.Literals.ROLE.getEEnumLiteral("OTHER"), Types._Role, 8);
 		private static final @NonNull EcoreExecutorEnumerationLiteral @NonNull [] _Role = {
 			_Role__CONSTANT,
+			_Role__CONSTANT_SUCCESS_FALSE,
+			_Role__CONSTANT_SUCCESS_TRUE,
 			_Role__LOADED,
 			_Role__REALIZED,
 			_Role__PREDICATED,

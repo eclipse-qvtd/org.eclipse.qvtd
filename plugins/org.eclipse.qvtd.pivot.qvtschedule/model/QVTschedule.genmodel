@@ -26,6 +26,8 @@
     </genEnums>
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="QVTschedule.ecore#//Role">
       <genEnumLiterals ecoreEnumLiteral="QVTschedule.ecore#//Role/CONSTANT"/>
+      <genEnumLiterals ecoreEnumLiteral="QVTschedule.ecore#//Role/CONSTANT_SUCCESS_FALSE"/>
+      <genEnumLiterals ecoreEnumLiteral="QVTschedule.ecore#//Role/CONSTANT_SUCCESS_TRUE"/>
       <genEnumLiterals ecoreEnumLiteral="QVTschedule.ecore#//Role/LOADED"/>
       <genEnumLiterals ecoreEnumLiteral="QVTschedule.ecore#//Role/REALIZED"/>
       <genEnumLiterals ecoreEnumLiteral="QVTschedule.ecore#//Role/PREDICATED"/>

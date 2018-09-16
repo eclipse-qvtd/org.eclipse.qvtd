@@ -243,13 +243,13 @@ public enum ConnectionRole implements Enumerator, GraphStringBuilder.GraphEdge {
 	 */
 	private static final ConnectionRole[] VALUES_ARRAY =
 			new ConnectionRole[] {
-				MANDATORY_EDGE,
-				MANDATORY_NODE,
-				PASSED,
-				PREFERRED_EDGE,
-				PREFERRED_NODE,
-				UNDEFINED,
-	};
+			MANDATORY_EDGE,
+			MANDATORY_NODE,
+			PASSED,
+			PREFERRED_EDGE,
+			PREFERRED_NODE,
+			UNDEFINED,
+		};
 
 	/**
 	 * A public read-only list of all the '<em><b>Connection Role</b></em>' enumerators.
@@ -355,7 +355,7 @@ public enum ConnectionRole implements Enumerator, GraphStringBuilder.GraphEdge {
 	 */
 	@Override
 	public int getValue() {
-		return value;
+	  return value;
 	}
 
 	/**
@@ -365,7 +365,7 @@ public enum ConnectionRole implements Enumerator, GraphStringBuilder.GraphEdge {
 	 */
 	@Override
 	public String getName() {
-		return name;
+	  return name;
 	}
 
 	/**
@@ -375,7 +375,7 @@ public enum ConnectionRole implements Enumerator, GraphStringBuilder.GraphEdge {
 	 */
 	@Override
 	public String getLiteral() {
-		return literal;
+	  return literal;
 	}
 
 	/**

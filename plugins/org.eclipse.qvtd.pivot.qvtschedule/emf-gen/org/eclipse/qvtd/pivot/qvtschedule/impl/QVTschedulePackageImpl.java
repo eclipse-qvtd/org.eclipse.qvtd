@@ -2965,6 +2965,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		initEEnum(roleEEnum, Role.class, "Role");
 		addEEnumLiteral(roleEEnum, Role.CONSTANT);
+		addEEnumLiteral(roleEEnum, Role.CONSTANT_SUCCESS_FALSE);
+		addEEnumLiteral(roleEEnum, Role.CONSTANT_SUCCESS_TRUE);
 		addEEnumLiteral(roleEEnum, Role.LOADED);
 		addEEnumLiteral(roleEEnum, Role.REALIZED);
 		addEEnumLiteral(roleEEnum, Role.PREDICATED);
@@ -2992,10 +2994,10 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	protected void createEcoreAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-		});
+		  (this,
+		   source,
+		   new String[] {
+		   });
 	}
 
 	/**

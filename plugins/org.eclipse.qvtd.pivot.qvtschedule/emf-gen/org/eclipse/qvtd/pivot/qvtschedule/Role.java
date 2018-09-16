@@ -51,6 +51,28 @@ public enum Role implements Enumerator, Comparable<Role>
 	 */
 	CONSTANT(0, "CONSTANT", "CONSTANT"),
 	/**
+	 * The '<em><b>CONSTANT SUCCESS FALSE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Unequivocably known as compile time success constant with a false value
+	 * <!-- end-model-doc -->
+	 * @see #CONSTANT_SUCCESS_FALSE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	CONSTANT_SUCCESS_FALSE(1, "CONSTANT_SUCCESS_FALSE", "CONSTANT_SUCCESS_FALSE"), /**
+	 * The '<em><b>CONSTANT SUCCESS TRUE</b></em>' literal object.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Unequivocably known as compile time success constant with a true value
+	 * <!-- end-model-doc -->
+	 * @see #CONSTANT_SUCCESS_TRUE_VALUE
+	 * @generated
+	 * @ordered
+	 */
+	CONSTANT_SUCCESS_TRUE(2, "CONSTANT_SUCCESS_TRUE", "CONSTANT_SUCCESS_TRUE"), /**
 	 * The '<em><b>LOADED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -61,7 +83,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	LOADED(1, "LOADED", "LOADED"),
+	LOADED(3, "LOADED", "LOADED"),
 	/**
 	 * The '<em><b>REALIZED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -73,7 +95,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	REALIZED(2, "REALIZED", "REALIZED"),
+	REALIZED(4, "REALIZED", "REALIZED"),
 	/**
 	 * The '<em><b>PREDICATED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -85,7 +107,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	PREDICATED(3, "PREDICATED", "PREDICATED"),
+	PREDICATED(5, "PREDICATED", "PREDICATED"),
 	/**
 	 * The '<em><b>SPECULATION</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -97,7 +119,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	SPECULATION(4, "SPECULATION", "SPECULATION"),
+	SPECULATION(6, "SPECULATION", "SPECULATION"),
 	/**
 	 * The '<em><b>SPECULATED</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -109,7 +131,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	SPECULATED(5, "SPECULATED", "SPECULATED"),
+	SPECULATED(7, "SPECULATED", "SPECULATED"),
 	/**
 	 * The '<em><b>OTHER</b></em>' literal object.
 	 * <!-- begin-user-doc -->
@@ -121,7 +143,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	OTHER(6, "OTHER", "OTHER");
+	OTHER(8, "OTHER", "OTHER");
 	/**
 	 * The '<em><b>CONSTANT</b></em>' literal value.
 	 * <!-- begin-user-doc -->
@@ -137,6 +159,34 @@ public enum Role implements Enumerator, Comparable<Role>
 	public static final int CONSTANT_VALUE = 0;
 
 	/**
+	 * The '<em><b>CONSTANT SUCCESS FALSE</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Unequivocably known as compile time success constant with a false value
+	 * <!-- end-model-doc -->
+	 * @see #CONSTANT_SUCCESS_FALSE
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CONSTANT_SUCCESS_FALSE_VALUE = 1;
+
+	/**
+	 * The '<em><b>CONSTANT SUCCESS TRUE</b></em>' literal value.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Unequivocably known as compile time success constant with a true value
+	 * <!-- end-model-doc -->
+	 * @see #CONSTANT_SUCCESS_TRUE
+	 * @model
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CONSTANT_SUCCESS_TRUE_VALUE = 2;
+
+	/**
 	 * The '<em><b>LOADED</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -148,7 +198,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	public static final int LOADED_VALUE = 1;
+	public static final int LOADED_VALUE = 3;
 
 	/**
 	 * The '<em><b>REALIZED</b></em>' literal value.
@@ -162,7 +212,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	public static final int REALIZED_VALUE = 2;
+	public static final int REALIZED_VALUE = 4;
 
 	/**
 	 * The '<em><b>PREDICATED</b></em>' literal value.
@@ -176,7 +226,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PREDICATED_VALUE = 3;
+	public static final int PREDICATED_VALUE = 5;
 
 	/**
 	 * The '<em><b>SPECULATION</b></em>' literal value.
@@ -190,7 +240,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SPECULATION_VALUE = 4;
+	public static final int SPECULATION_VALUE = 6;
 
 	/**
 	 * The '<em><b>SPECULATED</b></em>' literal value.
@@ -204,7 +254,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	public static final int SPECULATED_VALUE = 5;
+	public static final int SPECULATED_VALUE = 7;
 
 	/**
 	 * The '<em><b>OTHER</b></em>' literal value.
@@ -218,7 +268,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	 * @generated
 	 * @ordered
 	 */
-	public static final int OTHER_VALUE = 6;
+	public static final int OTHER_VALUE = 8;
 
 	/**
 	 * An array of all the '<em><b>Role</b></em>' enumerators.
@@ -229,6 +279,8 @@ public enum Role implements Enumerator, Comparable<Role>
 	private static final Role[] VALUES_ARRAY =
 			new Role[] {
 				CONSTANT,
+				CONSTANT_SUCCESS_FALSE,
+				CONSTANT_SUCCESS_TRUE,
 				LOADED,
 				REALIZED,
 				PREDICATED,
@@ -292,6 +344,8 @@ public enum Role implements Enumerator, Comparable<Role>
 	public static Role get(int value) {
 		switch (value) {
 			case CONSTANT_VALUE: return CONSTANT;
+			case CONSTANT_SUCCESS_FALSE_VALUE: return CONSTANT_SUCCESS_FALSE;
+			case CONSTANT_SUCCESS_TRUE_VALUE: return CONSTANT_SUCCESS_TRUE;
 			case LOADED_VALUE: return LOADED;
 			case REALIZED_VALUE: return REALIZED;
 			case PREDICATED_VALUE: return PREDICATED;
@@ -377,7 +431,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	}
 
 	public boolean isConstant() {
-		return this == CONSTANT;
+		return (this == CONSTANT) || (this == CONSTANT_SUCCESS_FALSE) || (this == CONSTANT_SUCCESS_TRUE);
 	}
 
 	public boolean isLoaded() {
@@ -389,7 +443,7 @@ public enum Role implements Enumerator, Comparable<Role>
 	}
 
 	public boolean isOld() {
-		return (this == CONSTANT) || (this == LOADED) || (this == PREDICATED) || (this == SPECULATED);
+		return (this == CONSTANT) || (this == CONSTANT_SUCCESS_FALSE) || (this == CONSTANT_SUCCESS_TRUE) || (this == LOADED) || (this == PREDICATED) || (this == SPECULATED);
 	}
 
 	public boolean isPredicated() {

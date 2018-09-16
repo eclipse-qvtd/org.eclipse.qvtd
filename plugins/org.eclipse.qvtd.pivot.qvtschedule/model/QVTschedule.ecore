@@ -668,32 +668,42 @@
         <details key="documentation" value="Unequivocably known as compile time constant"/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="LOADED" value="1">
+    <eLiterals name="CONSTANT_SUCCESS_FALSE" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Unequivocably known as compile time success constant with a false value"/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="CONSTANT_SUCCESS_TRUE" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Unequivocably known as compile time success constant with a true value"/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="LOADED" value="3">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Known once input models loaded"/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="REALIZED" value="2">
+    <eLiterals name="REALIZED" value="4">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Known once a mapping has realized its results"/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="PREDICATED" value="3">
+    <eLiterals name="PREDICATED" value="5">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Not known, awaiting matching"/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="SPECULATION" value="4">
+    <eLiterals name="SPECULATION" value="6">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Awaiting other mappings to speculate"/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="SPECULATED" value="5">
+    <eLiterals name="SPECULATED" value="7">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Known other mappings are speculating"/>
       </eAnnotations>
     </eLiterals>
-    <eLiterals name="OTHER" value="6">
+    <eLiterals name="OTHER" value="8">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Not known, nothing to do with mapping execution"/>
       </eAnnotations>

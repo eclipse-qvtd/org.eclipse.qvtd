@@ -674,6 +674,8 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 				boolean isDirty = scheduleManager.isDirty(property);
 				phase = isDirty ? Role.PREDICATED : Role.LOADED; break;
 			}
+			case CONSTANT_SUCCESS_FALSE: /* fall through */
+			case CONSTANT_SUCCESS_TRUE: /* fall through */
 			case CONSTANT: phase = Role.CONSTANT; break;
 			default: throw new UnsupportedOperationException();
 		}

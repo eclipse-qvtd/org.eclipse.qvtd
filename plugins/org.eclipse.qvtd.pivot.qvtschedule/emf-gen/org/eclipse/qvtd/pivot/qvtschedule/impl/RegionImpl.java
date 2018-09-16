@@ -148,9 +148,6 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	 */
 	@Override
 	public void setSymbolName(String newSymbolName) {
-		if ((newSymbolName != null) && newSymbolName.contains("mTmapIfExp__DmapOclExpression_d2qvtrExpression_glob")) {
-			getClass().toString();
-		}
 		String oldSymbolName = symbolName;
 		symbolName = newSymbolName;
 		if (eNotificationRequired())

@@ -84,6 +84,11 @@ class ActivatorPartition extends AbstractPartialPartition
 		return createMicroMappingRegion("«activator»", "_p" + partitionNumber);
 	}
 
+	@Override
+	protected @NonNull Iterable<@NonNull Node> getHeadNodes() {
+		return QVTscheduleUtil.getHeadNodes(originalRegion);
+	}
+
 	/**
 	 * Return a prioritized hint for the choice of head nodes.
 	 * The override implementation returns null for no hint.

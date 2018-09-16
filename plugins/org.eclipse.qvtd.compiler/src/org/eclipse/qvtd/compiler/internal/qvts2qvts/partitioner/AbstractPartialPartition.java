@@ -94,6 +94,8 @@ abstract class AbstractPartialPartition extends AbstractPartition
 		Role oldEdgeRole = QVTscheduleUtil.getEdgeRole(edge);
 		switch (oldEdgeRole)
 		{
+			case CONSTANT_SUCCESS_FALSE: /* fall through */
+			case CONSTANT_SUCCESS_TRUE: /* fall through */
 			case CONSTANT: {
 				assert newEdgeRole == Role.CONSTANT;
 				break;
@@ -141,6 +143,8 @@ abstract class AbstractPartialPartition extends AbstractPartition
 		Role oldNodeRole = QVTscheduleUtil.getNodeRole(node);
 		switch (oldNodeRole)
 		{
+			case CONSTANT_SUCCESS_FALSE: /* fall through */
+			case CONSTANT_SUCCESS_TRUE: /* fall through */
 			case CONSTANT: {
 				assert newNodeRole == Role.CONSTANT;
 				//				if (node.isTrue()) {
