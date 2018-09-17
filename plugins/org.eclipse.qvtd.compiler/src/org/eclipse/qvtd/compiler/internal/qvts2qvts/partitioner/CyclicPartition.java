@@ -62,7 +62,7 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors,
 			@NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> traceClassAnalyses,
 			@NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> tracePropertyAnalyses) {
-		super(transformationPartitioner);
+		super(transformationPartitioner.getPartitionedRegionsAnalysis());
 		this.name = name;
 		this.cyclesAnalysis = cyclesAnalysis;
 		this.partitions = partitions;

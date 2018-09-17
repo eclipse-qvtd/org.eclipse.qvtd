@@ -39,6 +39,7 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractDispatch;
  */
 public abstract class TraceClassAnalysis<@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> extends TraceElementAnalysis<@NonNull RA>
 {
+	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull ClassDatum traceClassDatum;
 
 	/**
@@ -54,6 +55,7 @@ public abstract class TraceClassAnalysis<@NonNull RA extends PartialRegionAnalys
 	private @Nullable Boolean isDispatcher = null;
 
 	public TraceClassAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull ClassDatum traceClassDatum) {
+		this.scheduleManager = scheduleManager;
 		this.traceClassDatum = traceClassDatum;
 		subTraceClassAnalyses.add(this);
 		superTraceClassAnalyses.add(this);
@@ -225,6 +227,10 @@ public abstract class TraceClassAnalysis<@NonNull RA extends PartialRegionAnalys
 	@Override
 	public String getName() {
 		return traceClassDatum.getName();
+	}
+
+	public @NonNull ScheduleManager getScheduleManager() {
+		return scheduleManager;
 	}
 
 	public @NonNull Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> getSubTraceClassAnalyses() {

@@ -128,13 +128,13 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	/**
 	 * The producing/consuming characteristics of each original (unpartitioned) region.
 	 */
-	private @Nullable ContentsAnalysis<@NonNull RuleRegion> originalContentsAnalysis = null;
+	private @Nullable LegacyContentsAnalysis<@NonNull RuleRegion> originalContentsAnalysis = null;
 
 	private /*@LazyNonNull */ OperationDependencyAnalysis operationDependencyAnalysis = null;
 
 	private Map<@NonNull OperationDatum, @NonNull OperationRegion> operationDatum2operationRegion = new HashMap<>();
 
-	private final @NonNull Map<@NonNull Transformation, @NonNull TransformationAnalysis> transformation2transformationAnalysis = new HashMap<>();
+	private final @NonNull Map<@NonNull Transformation, @NonNull AbstractTransformationAnalysis> transformation2transformationAnalysis = new HashMap<>();
 	private final boolean doDotGraphs;
 	private final boolean doYedGraphs;
 
@@ -186,8 +186,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public @NonNull TransformationAnalysis addTransformation(@NonNull Transformation asTransformation) {
-		TransformationAnalysis transformationAnalysis = createTransformationAnalysis(asTransformation);
+	public @NonNull AbstractTransformationAnalysis addTransformation(@NonNull Transformation asTransformation) {
+		AbstractTransformationAnalysis transformationAnalysis = createTransformationAnalysis(asTransformation);
 		TypedModel primitiveTypeModel = domainUsageAnalysis.getPrimitiveTypeModel();
 		asTransformation.getModelParameter().add(primitiveTypeModel);
 		transformation2transformationAnalysis.put(asTransformation, transformationAnalysis);
@@ -195,7 +195,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	private void analyzeCallTree() {
-		ContentsAnalysis<@NonNull RuleRegion> originalContentsAnalysis = getOriginalContentsAnalysis();
+		LegacyContentsAnalysis<@NonNull RuleRegion> originalContentsAnalysis = getOriginalContentsAnalysis();
 		Map<@NonNull Rule, @NonNull List<@NonNull Rule>> consumer2producers = new HashMap<>();
 		List<@NonNull ClassDatum> middleClassDatums = new ArrayList<>();
 		StringBuilder s = QVTm2QVTs.CALL_TREE.isActive() ? new StringBuilder() : null;
@@ -261,12 +261,19 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public @NonNull ContentsAnalysis<@NonNull RuleRegion> analyzeOriginalContents() {
-		ContentsAnalysis<@NonNull RuleRegion> contentsAnalysis = new ContentsAnalysis<@NonNull RuleRegion>(this);
+	public @NonNull LegacyContentsAnalysis<@NonNull RuleRegion> analyzeOriginalContents() {
+		LegacyContentsAnalysis<@NonNull RuleRegion> contentsAnalysis = new LegacyContentsAnalysis<@NonNull RuleRegion>(this);
 		List<@NonNull MappingRegion> mappingRegions = Lists.newArrayList(QVTscheduleUtil.getOwnedMappingRegions(getScheduleModel()));
 		Collections.sort(mappingRegions, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
 		for (@NonNull MappingRegion mappingRegion : mappingRegions) {
-			contentsAnalysis.addRegion((RuleRegion) mappingRegion);
+			RuleRegion ruleRegion = (RuleRegion) mappingRegion;
+			contentsAnalysis.addRegion(ruleRegion);
+			Transformation transformation = ruleRegion.getReferredRule().getTransformation();
+			AbstractTransformationAnalysis transformationAnalysis = getTransformationAnalysis(transformation);
+			transformationAnalysis.getRegionAnalysis(mappingRegion);
+		}
+		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : getTransformationAnalyses()) {
+			transformationAnalysis.computeTraceClassInheritance();
 		}
 		this.originalContentsAnalysis = contentsAnalysis;
 		return contentsAnalysis;
@@ -274,7 +281,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	@Override
 	public void analyzeSourceModel() {
-		for (@NonNull TransformationAnalysis transformationAnalysis : getOrderedTransformationAnalyses()) {
+		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : getOrderedTransformationAnalyses()) {
 			domainUsageAnalysis.analyzeTransformation(transformationAnalysis.getTransformation());
 			transformationAnalysis.analyzeSourceModel();
 		}
@@ -291,7 +298,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	@Override
 	public @NonNull Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull RuleRegion>> analyzeTransformations() {
 		Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull RuleRegion>> scheduledRegion2activeRegions = new HashMap<>();
-		for (@NonNull TransformationAnalysis transformationAnalysis : getOrderedTransformationAnalyses()) {
+		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : getOrderedTransformationAnalyses()) {
 			Iterable<@NonNull RuleRegion> activeRegions = transformationAnalysis.gatherRuleRegions();
 			scheduledRegion2activeRegions.put(transformationAnalysis.getScheduledRegion(), activeRegions);
 		}
@@ -497,13 +504,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		return property;
 	}
 
-	protected @NonNull TransformationAnalysis createTransformationAnalysis(@NonNull Transformation asTransformation) {
-		ScheduledRegion scheduledRegion = QVTscheduleFactory.eINSTANCE.createScheduledRegion();
-		getScheduleModel().getOwnedScheduledRegions().add(scheduledRegion);
-		scheduledRegion.setReferredTransformation(asTransformation);
-		scheduledRegion.setName(asTransformation.getName());
-		return new TransformationAnalysis(this, asTransformation, scheduledRegion);
-	}
+	protected abstract @NonNull AbstractTransformationAnalysis createTransformationAnalysis(@NonNull Transformation asTransformation);
 
 	@Override
 	public @NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum classDatum) {
@@ -675,8 +676,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	 * Return a determinstic alphabetical ordering of the TransformationAnalysis instances.
 	 */
 	@Override
-	public @NonNull Iterable<@NonNull TransformationAnalysis> getOrderedTransformationAnalyses() {
-		List<@NonNull TransformationAnalysis> transformationAnalyses = Lists.newArrayList(transformation2transformationAnalysis.values());
+	public @NonNull Iterable<@NonNull AbstractTransformationAnalysis> getOrderedTransformationAnalyses() {
+		List<@NonNull AbstractTransformationAnalysis> transformationAnalyses = Lists.newArrayList(transformation2transformationAnalysis.values());
 		if (transformationAnalyses.size() > 1) {
 			Collections.sort(transformationAnalyses, NameUtil.NAMEABLE_COMPARATOR);
 		}
@@ -684,7 +685,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public @NonNull ContentsAnalysis<@NonNull RuleRegion> getOriginalContentsAnalysis() {
+	public @NonNull LegacyContentsAnalysis<@NonNull RuleRegion> getOriginalContentsAnalysis() {
 		return ClassUtil.nonNullState(originalContentsAnalysis);
 	}
 
@@ -698,20 +699,20 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		if (region instanceof RuleRegion) {
 			Rule rule = QVTscheduleUtil.getReferredRule((RuleRegion) region);
 			Transformation transformation = QVTbaseUtil.getContainingTransformation(rule);
-			TransformationAnalysis transformationAnalysis = getTransformationAnalysis(transformation);
+			AbstractTransformationAnalysis transformationAnalysis = getTransformationAnalysis(transformation);
 			return transformationAnalysis.getRegionAnalysis(region);
 		}
 		else {
 			ScheduledRegion scheduledRegion = QVTscheduleUtil.getContainingScheduledRegion(region);
 			Transformation transformation = QVTscheduleUtil.getReferredTransformation(scheduledRegion);
-			TransformationAnalysis transformationAnalysis = getTransformationAnalysis(transformation);
+			AbstractTransformationAnalysis transformationAnalysis = getTransformationAnalysis(transformation);
 			return transformationAnalysis.getRegionAnalysis(region);
 		}
 	}
 
 	public @NonNull RuleAnalysis getRuleAnalysis(@NonNull Rule rule) {
 		Transformation transformation = QVTbaseUtil.getOwningTransformation(rule);
-		TransformationAnalysis transformationAnalysis = getTransformationAnalysis(transformation);
+		AbstractTransformationAnalysis transformationAnalysis = getTransformationAnalysis(transformation);
 		return transformationAnalysis.getRuleAnalysis(rule);
 	}
 
@@ -773,13 +774,13 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull TransformationAnalysis> getTransformationAnalyses() {
+	public @NonNull Iterable<@NonNull AbstractTransformationAnalysis> getTransformationAnalyses() {
 		return transformation2transformationAnalysis.values();
 	}
 
 	@Override
-	public @NonNull TransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation) {
-		TransformationAnalysis transformationAnalysis = transformation2transformationAnalysis.get(transformation);
+	public @NonNull AbstractTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation) {
+		AbstractTransformationAnalysis transformationAnalysis = transformation2transformationAnalysis.get(transformation);
 		return ClassUtil.nonNullState(transformationAnalysis);
 	}
 

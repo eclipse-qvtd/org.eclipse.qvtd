@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 
@@ -20,7 +20,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
  */
 public class TracePropertyRegionAnalysis extends TracePropertyAnalysis<@NonNull RegionAnalysis>
 {
-	public TracePropertyRegionAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull TraceClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
+	public TracePropertyRegionAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull TraceClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
 		super(transformationAnalysis, traceClassAnalysis, tracePropertyDatum);
 	}
 }

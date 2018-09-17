@@ -44,8 +44,7 @@ import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractQVTb2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ContentsAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
@@ -558,9 +557,9 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		//
 		scheduleManager.analyzeSourceModel();
 		//
-		Iterable<@NonNull TransformationAnalysis> transformationAnalyses = scheduleManager2.getOrderedTransformationAnalyses();
+		Iterable<@NonNull AbstractTransformationAnalysis> transformationAnalyses = scheduleManager2.getOrderedTransformationAnalyses();
 		List<@NonNull TransformationAnalysis2TracePackage> transformationAnalysis2tracePackages = new ArrayList<>();
-		for (@NonNull TransformationAnalysis transformationAnalysis : transformationAnalyses) {
+		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : transformationAnalyses) {
 			transformationAnalysis2tracePackages.add(transformationAnalysis.getTransformationAnalysis2TracePackage());
 		}
 		//
@@ -590,7 +589,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		/**
 		 * Perform the independent local analysis of each Rule.
 		 */
-		for (@NonNull TransformationAnalysis transformationAnalysis : transformationAnalyses) {
+		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : transformationAnalyses) {
 			transformationAnalysis.analyzeMappingRegions();
 		}
 		for (@NonNull MappingRegion mappingRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager2.getScheduleModel())) {
@@ -612,8 +611,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		for (@NonNull MappingRegion mappingRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager2.getScheduleModel())) {
 			scheduleManager2.writeDebugGraphs(mappingRegion, null);
 		}
-		@SuppressWarnings("unused")
-		ContentsAnalysis<@NonNull RuleRegion> originalContentsAnalysis = scheduleManager2.analyzeOriginalContents();
+		scheduleManager2.analyzeOriginalContents();
 		scheduleManager2.writeDebugGraphs("0-init", true, true, true);
 		//
 		//	Debug code to confirm that every output object is traceable to some input object.

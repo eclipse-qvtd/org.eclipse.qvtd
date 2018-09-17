@@ -59,10 +59,10 @@ public interface ScheduleManager
 	/**
 	 * Define an additional/only Transformation to be scheduled by the subsequent anayses and syntheses.
 	 */
-	@NonNull TransformationAnalysis addTransformation(@NonNull Transformation asTransformation);
+	@NonNull AbstractTransformationAnalysis addTransformation(@NonNull Transformation asTransformation);
 	void analyzeCompletePackage(@NonNull TypedModel typedModel, @NonNull CompletePackage completePackage);
 	@NonNull OperationRegion analyzeOperation(@NonNull OperationCallExp operationCallExp);
-	@NonNull ContentsAnalysis<@NonNull RuleRegion> analyzeOriginalContents();
+	@NonNull LegacyContentsAnalysis<@NonNull RuleRegion> analyzeOriginalContents();
 
 	/**
 	 * Perform the pre-analysis that relies solely on traversal of the QVTr source model.
@@ -82,9 +82,9 @@ public interface ScheduleManager
 	@Nullable Property basicGetGlobalSuccessProperty(@NonNull Node node);
 	@Nullable Property basicGetLocalSuccessProperty(@NonNull Node node);
 	@NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis);
-	@NonNull RuleAnalysis createRuleAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull Rule asRule);
+	@NonNull RuleAnalysis createRuleAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull Rule asRule);
 	@NonNull RuleAnalysis2TraceGroup createRuleAnalysis2TraceGroup(@NonNull RuleAnalysis ruleAnalysis);
-	@NonNull TransformationAnalysis2TracePackage createTransformationAnalysis2TracePackage(@NonNull TransformationAnalysis transformationAnalysis);
+	@NonNull TransformationAnalysis2TracePackage createTransformationAnalysis2TracePackage(@NonNull AbstractTransformationAnalysis transformationAnalysis);
 	@NonNull Iterable<@NonNull PropertyDatum> getAllPropertyDatums(@NonNull ClassDatum classDatum);
 	@NonNull ClassDatum getBooleanClassDatum();
 	@NonNull Property getCastProperty(@NonNull Type type);
@@ -103,12 +103,12 @@ public interface ScheduleManager
 	/**
 	 * Return a determinstic alphabetical ordereding of the TransformationAnalysis instances.
 	 */
-	@NonNull Iterable<@NonNull TransformationAnalysis> getOrderedTransformationAnalyses();
+	@NonNull Iterable<@NonNull AbstractTransformationAnalysis> getOrderedTransformationAnalyses();
 
 	/**
 	 * Return the analysis of the pre-partitioned regions consumptions and productions.
 	 */
-	@NonNull ContentsAnalysis<@NonNull RuleRegion> getOriginalContentsAnalysis();
+	@NonNull LegacyContentsAnalysis<@NonNull RuleRegion> getOriginalContentsAnalysis();
 
 	@NonNull PropertyDatum getPropertyDatum(@NonNull ClassDatum classDatum, @NonNull Property property);
 	@NonNull PropertyDatum getPropertyDatum(@NonNull NavigableEdge edge);
@@ -121,8 +121,8 @@ public interface ScheduleManager
 	@NonNull Iterable<@NonNull ClassDatum> getSuperClassDatums(@NonNull ClassDatum classDatum);
 	@NonNull TraceHelper getTraceHelper();
 	@NonNull TypedModel getTraceTypedModel();
-	@NonNull Iterable<@NonNull TransformationAnalysis> getTransformationAnalyses();
-	@NonNull TransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation);
+	@NonNull Iterable<@NonNull AbstractTransformationAnalysis> getTransformationAnalyses();
+	@NonNull AbstractTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation);
 
 	/**
 	 * Return true if a mapping may assign this property in an input model.
@@ -139,6 +139,7 @@ public interface ScheduleManager
 	 */
 	boolean isInput(@NonNull Domain domain);
 
+	boolean isInput(@NonNull TypedModel typedModel);
 	/**
 	 * Return true if node is part of the middle (traced) domain.
 	 */

@@ -18,7 +18,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
@@ -32,7 +32,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 /**
  * A RelationalTransformationAnalysis accumulates the tesults of analyzing a RelationalTransformation and its contents.
  */
-public class RelationalTransformationAnalysis extends TransformationAnalysis
+public class RelationalTransformationAnalysis extends AbstractTransformationAnalysis
 {
 	protected final @NonNull QVTrelationHelper helper;
 

@@ -18,16 +18,19 @@ import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.RuleAnalysis2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.MappingAnalysis.QVTcoreExpressionSynthesizer;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 
 public class QVTcoreScheduleManager extends AbstractScheduleManager
 {
@@ -46,7 +49,7 @@ public class QVTcoreScheduleManager extends AbstractScheduleManager
 	}
 
 	@Override
-	public @NonNull MappingAnalysis createRuleAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull Rule asRule) {
+	public @NonNull MappingAnalysis createRuleAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull Rule asRule) {
 		RuleRegion ruleRegion = QVTscheduleFactory.eINSTANCE.createRuleRegion();
 		ruleRegion.setOwningScheduleModel(scheduleModel);
 		ruleRegion.setReferredRule(asRule);
@@ -60,13 +63,27 @@ public class QVTcoreScheduleManager extends AbstractScheduleManager
 	}
 
 	@Override
-	public @NonNull TransformationAnalysis2TracePackage createTransformationAnalysis2TracePackage(@NonNull TransformationAnalysis transformationAnalysis) {
+	protected @NonNull AbstractTransformationAnalysis createTransformationAnalysis(@NonNull Transformation asTransformation) {
+		ScheduledRegion scheduledRegion = QVTscheduleFactory.eINSTANCE.createScheduledRegion();
+		getScheduleModel().getOwnedScheduledRegions().add(scheduledRegion);
+		scheduledRegion.setReferredTransformation(asTransformation);
+		scheduledRegion.setName(asTransformation.getName());
+		return new CoreTransformationAnalysis(this, asTransformation, scheduledRegion);
+	}
+
+	@Override
+	public @NonNull TransformationAnalysis2TracePackage createTransformationAnalysis2TracePackage(@NonNull AbstractTransformationAnalysis transformationAnalysis) {
 		return new TransformationAnalysis2TracePackage(this, transformationAnalysis) {};
 	}
 
 	@Override
 	public boolean isInput(@NonNull Domain domain) {
 		return domain.isIsCheckable();
+	}
+
+	@Override
+	public boolean isInput(@NonNull TypedModel typedModel) {
+		return getDomainUsage(typedModel).isInput();
 	}
 
 	@Override

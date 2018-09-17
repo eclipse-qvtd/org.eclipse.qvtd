@@ -22,7 +22,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.RelationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationAnalysis2TraceClass;
@@ -45,7 +45,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public class RegionAnalysis extends AbstractPartialRegionAnalysis<@NonNull RegionAnalysis>
 {
-	protected final @NonNull TransformationAnalysis transformationAnalysis;
+	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 	protected final @NonNull Region region;
 
 	/**
@@ -80,7 +80,7 @@ public class RegionAnalysis extends AbstractPartialRegionAnalysis<@NonNull Regio
 	 *
 	private @Nullable Iterable<@NonNull Edge> fallibleEdges = null; */
 
-	public RegionAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull Region region) {
+	public RegionAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull Region region) {
 		super(transformationAnalysis);
 		this.transformationAnalysis = transformationAnalysis;
 		this.region = region;
@@ -446,7 +446,7 @@ public class RegionAnalysis extends AbstractPartialRegionAnalysis<@NonNull Regio
 		return region;
 	}
 
-	public @NonNull TransformationAnalysis getTransformationAnalysis() {
+	public @NonNull AbstractTransformationAnalysis getTransformationAnalysis() {
 		return transformationAnalysis;
 	}
 

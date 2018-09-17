@@ -11,15 +11,17 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class.
  */
 public class TraceClassPartitionAnalysis extends TraceClassAnalysis<@NonNull Partition>
 {
-	public TraceClassPartitionAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull ClassDatum traceClassDatum) {
-		super(scheduleManager, traceClassDatum);
+	protected final @NonNull TraceClassAnalysis<@NonNull RegionAnalysis> traceClassRegionAnalysis;
+
+	public TraceClassPartitionAnalysis(@NonNull TraceClassAnalysis<@NonNull RegionAnalysis> traceClassRegionAnalysis) {
+		super(traceClassRegionAnalysis.getScheduleManager(), traceClassRegionAnalysis.getClassDatum());
+		this.traceClassRegionAnalysis = traceClassRegionAnalysis;
 	}
 }

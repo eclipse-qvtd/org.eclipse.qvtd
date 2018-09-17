@@ -20,15 +20,19 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionsAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.GenericRegionsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -39,22 +43,27 @@ import com.google.common.collect.Iterables;
  * The TransformationPartitioner supervises a MappingPartitioner for each mapping region. It provides
  * the global analysis to support the local partitioning.
  */
-public class TransformationPartitioner extends RegionsAnalysis<@NonNull Partition>
+public class TransformationPartitioner extends QVTbaseHelper implements Nameable// RegionsAnalysis<@NonNull Partition>
 {
 	public static final @NonNull TracingOption CYCLES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/partition/cycles");
 	public static final @NonNull TracingOption DISCRIMINATION = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/partition/discrimination");
 	public static final @NonNull TracingOption PREDECESSORS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/partition/predecessors");
 	public static final @NonNull TracingOption SUCCESSORS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/partition/successors");
 
-	public static @NonNull RootPartition partition(@NonNull TransformationAnalysis transformationAnalysis, @NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) throws CompilerChainException {
+	public static @NonNull RootPartition partition(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) throws CompilerChainException {
 		TransformationPartitioner transformationPartitioner = new TransformationPartitioner(transformationAnalysis, problemHandler, activeRegions);
 		return transformationPartitioner.partition();
 	}
 
-	protected final @NonNull TransformationAnalysis transformationAnalysis;
+	/**
+	 * The supervising ScheduleManager.
+	 */
+	protected final @NonNull ScheduleManager scheduleManager;
+	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 	protected final @NonNull ProblemHandler problemHandler;
 	protected final @NonNull Iterable<@NonNull ? extends Region> activeRegions;
 	private final @NonNull List<@NonNull Partition> partitions = new ArrayList<>();
+	private final @NonNull TransformationAnalysis<@NonNull Partition> partitionedRegionsAnalysis;
 
 	/**
 	 * The partitioner for each region.
@@ -82,8 +91,26 @@ public class TransformationPartitioner extends RegionsAnalysis<@NonNull Partitio
 	 */
 	private @Nullable CyclicPartitionsAnalysis cyclicPartitionsAnalysis = null;
 
-	public TransformationPartitioner(@NonNull TransformationAnalysis transformationAnalysis, @NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) {
-		super(transformationAnalysis.getScheduleManager());
+	public TransformationPartitioner(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) {
+		super(transformationAnalysis.getScheduleManager().getEnvironmentFactory());
+		this.scheduleManager = transformationAnalysis.getScheduleManager();
+		this.partitionedRegionsAnalysis = new GenericRegionsAnalysis<@NonNull Partition>(scheduleManager)
+		{
+			@Override
+			public String getName() {
+				return TransformationPartitioner.this.getName();
+			}
+
+			@Override
+			protected @NonNull TraceClassPartitionAnalysis createTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
+				return new TraceClassPartitionAnalysis(transformationAnalysis.getTraceClassAnalysis(traceClassDatum));
+			}
+
+			@Override
+			protected @NonNull TracePropertyPartitionAnalysis createTracePropertyAnalysis(@NonNull TraceClassAnalysis<@NonNull Partition> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
+				return new TracePropertyPartitionAnalysis(TransformationPartitioner.this, traceClassAnalysis, tracePropertyDatum);
+			}
+		};
 		this.transformationAnalysis = transformationAnalysis;
 		this.problemHandler = problemHandler;
 		this.activeRegions = activeRegions;
@@ -114,15 +141,6 @@ public class TransformationPartitioner extends RegionsAnalysis<@NonNull Partitio
 		return CycleAnalysis.createCycleAnalysis(this, cyclicMappingPartitioners, mappingPartitioner2cycleAnalysis2, traceClassAnalysis2cycleAnalysis2);
 	} */
 
-	@Override
-	protected @NonNull TraceClassPartitionAnalysis createTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
-		return new TraceClassPartitionAnalysis(getScheduleManager(), traceClassDatum);
-	}
-
-	@Override
-	protected @NonNull TracePropertyPartitionAnalysis createTracePropertyAnalysis(@NonNull TraceClassAnalysis<@NonNull Partition> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
-		return new TracePropertyPartitionAnalysis(this, traceClassAnalysis, tracePropertyDatum);
-	}
 
 	public @NonNull MappingPartitioner getMappingPartitioner(@NonNull MappingRegion region) {
 		return ClassUtil.nonNullState(region2mappingPartitioner.get(region));
@@ -138,6 +156,14 @@ public class TransformationPartitioner extends RegionsAnalysis<@NonNull Partitio
 	//		return partitions;
 	//	}
 
+	public @NonNull TransformationAnalysis<@NonNull Partition> getPartitionedRegionsAnalysis() {
+		return partitionedRegionsAnalysis;
+	}
+
+	public @NonNull ScheduleManager getScheduleManager() {
+		return scheduleManager;
+	}
+
 	public @NonNull PropertyDatum getSuccessPropertyDatum(@NonNull Property successProperty) {
 		return scheduleManager.getSuccessPropertyDatum(successProperty);
 	}
@@ -146,7 +172,7 @@ public class TransformationPartitioner extends RegionsAnalysis<@NonNull Partitio
 		return transformationAnalysis.getTransformation();
 	}
 
-	public @NonNull TransformationAnalysis getTransformationAnalysis() {
+	public @NonNull AbstractTransformationAnalysis getTransformationAnalysis() {
 		return transformationAnalysis;
 	}
 
@@ -193,12 +219,12 @@ public class TransformationPartitioner extends RegionsAnalysis<@NonNull Partitio
 		//
 		//	Create the per-mapping partitioner and accumulate the local analyses
 		//
-		for (@NonNull Region region : activeRegions) {
+		/*	for (@NonNull Region region : activeRegions) {
 			if (region instanceof MappingRegion) {
 				MappingRegion mappingRegion = (MappingRegion)region;
 				transformationAnalysis.getRegionAnalysis(mappingRegion);
 			}
-		}
+		} */
 		for (@NonNull Region region : activeRegions) {
 			if (region instanceof MappingRegion) {
 				MappingRegion mappingRegion = (MappingRegion)region;
@@ -235,7 +261,7 @@ public class TransformationPartitioner extends RegionsAnalysis<@NonNull Partitio
 		for (@NonNull Partition partition : partitions) {
 			partition.analyzePartition();
 		}
-		computeTraceClassInheritance();
+		partitionedRegionsAnalysis.computeTraceClassInheritance();
 		//		this.fallibilityAnalysis = computeFallibilityAnalysis();
 		//	Iterable<@NonNull Partition> leafPartitions = getPartialRegionAnalyses();
 		this.cyclicPartitionsAnalysis = new CyclicPartitionsAnalysis(this, partitions);

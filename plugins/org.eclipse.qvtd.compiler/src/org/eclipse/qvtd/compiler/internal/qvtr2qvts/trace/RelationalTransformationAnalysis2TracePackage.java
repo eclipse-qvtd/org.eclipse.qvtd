@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationScheduleManager;
@@ -42,7 +42,7 @@ public class RelationalTransformationAnalysis2TracePackage extends Transformatio
 	 */
 	private org.eclipse.ocl.pivot.@Nullable Class executionClass = null;
 
-	public RelationalTransformationAnalysis2TracePackage(@NonNull QVTrelationScheduleManager scheduleManager, @NonNull TransformationAnalysis transformationAnalysis) {
+	public RelationalTransformationAnalysis2TracePackage(@NonNull QVTrelationScheduleManager scheduleManager, @NonNull AbstractTransformationAnalysis transformationAnalysis) {
 		super(scheduleManager, transformationAnalysis);
 	}
 

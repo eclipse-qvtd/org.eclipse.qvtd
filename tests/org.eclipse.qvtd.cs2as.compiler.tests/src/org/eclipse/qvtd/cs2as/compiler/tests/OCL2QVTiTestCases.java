@@ -42,7 +42,6 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
@@ -414,7 +413,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		//		QVTs2QVTiVisitor.POLLED_PROPERTIES.setState(true);
 		//		Scheduler.DEPENDENCY_ANALYSIS.setState(true);
 		//		AbstractTransformer.INVOCATIONS.setState(true);
-		TransformationPartitioner.CYCLES.setState(true);
+		//		TransformationPartitioner.CYCLES.setState(true);
 		MyQVT myQVT = createQVT("SimpleClasses", "samples");
 		try {
 			myQVT.loadGenModels("ClassesCS.genmodel", "Classes.genmodel");
@@ -595,9 +594,9 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		//		Scheduler.REGION_DEPTH.setState(true);
 		//		Scheduler.REGION_ORDER.setState(true);
 		//		Scheduler.REGION_STACK.setState(true);
-		TransformationPartitioner.CYCLES.setState(true);
-		TransformationPartitioner.PREDECESSORS.setState(true);
-		TransformationPartitioner.SUCCESSORS.setState(true);
+		//		TransformationPartitioner.CYCLES.setState(true);
+		//		TransformationPartitioner.PREDECESSORS.setState(true);
+		//		TransformationPartitioner.SUCCESSORS.setState(true);
 		MyQVT myQVT = createQVT("KiamaRewrite", "samples");
 		myQVT.loadGenModels("KiamaAS.genmodel", "KiamaCS.genmodel");
 		Transformation qvtiTransf = myQVT.executeOCL2QVTi_CompilerChain("KiamaRewrite.ocl");

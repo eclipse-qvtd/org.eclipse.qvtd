@@ -34,10 +34,10 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ContentsAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LegacyContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LoadingRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.HorizontalPartitionMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
@@ -108,7 +108,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	/**
 	 * Analysis of the contents of the partitioned mappings, null prior to partitioning.
 	 */
-	private @Nullable ContentsAnalysis<@NonNull MappingRegion> partitionedContentsAnalysis;
+	private @Nullable LegacyContentsAnalysis<@NonNull MappingRegion> partitionedContentsAnalysis;
 
 	public QVTs2QVTs(@NonNull ProblemHandler problemHandler, @NonNull ScheduleManager qvtm2qvts, @NonNull String rootName) {
 		super(qvtm2qvts.getEnvironmentFactory());
@@ -908,7 +908,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//
 		//	Identify the content of each region.
 		//
-		ContentsAnalysis<@NonNull MappingRegion> contentsAnalysis2 = this.partitionedContentsAnalysis = new ContentsAnalysis<@NonNull MappingRegion>(scheduleManager);
+		LegacyContentsAnalysis<@NonNull MappingRegion> contentsAnalysis2 = this.partitionedContentsAnalysis = new LegacyContentsAnalysis<@NonNull MappingRegion>(scheduleManager);
 		for (@NonNull MappingRegion region : QVTscheduleUtil.getMappingRegions(rootScheduledRegion)) {
 			contentsAnalysis2.addRegion(region);
 		}
@@ -1029,7 +1029,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 
 	public @Nullable Iterable<@NonNull Node> getIntroducingOrNewNodes(@NonNull Node headNode) {
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(headNode);
-		ContentsAnalysis<@NonNull MappingRegion> partitionedContentsAnalysis = getPartitionedContentsAnalysis();
+		LegacyContentsAnalysis<@NonNull MappingRegion> partitionedContentsAnalysis = getPartitionedContentsAnalysis();
 		if (!scheduleManager.getDomainUsage(classDatum).isInput()) {
 			return partitionedContentsAnalysis.getNewNodes(classDatum);	// FIXME also dependsOn ??
 		}
@@ -1077,7 +1077,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		return connection;
 	}
 
-	public @NonNull ContentsAnalysis<@NonNull MappingRegion> getPartitionedContentsAnalysis() {
+	public @NonNull LegacyContentsAnalysis<@NonNull MappingRegion> getPartitionedContentsAnalysis() {
 		return ClassUtil.nonNullState(partitionedContentsAnalysis);
 	}
 
@@ -1269,7 +1269,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		List<@NonNull RootPartition> rootPartitions = new ArrayList<>();		// FXME just one
 		for (@NonNull ScheduledRegion scheduledRegion : scheduledRegions) {
 			Transformation transformation = QVTscheduleUtil.getReferredTransformation(scheduledRegion);
-			TransformationAnalysis transformationAnalysis = scheduleManager.getTransformationAnalysis(transformation);
+			AbstractTransformationAnalysis transformationAnalysis = scheduleManager.getTransformationAnalysis(transformation);
 			Iterable<? extends @NonNull MappingRegion> activeRegions = scheduledRegion2activeRegions.get(scheduledRegion);
 			assert activeRegions != null;
 			RootPartition rootPartition = transformationAnalysis.partition(problemHandler, activeRegions);

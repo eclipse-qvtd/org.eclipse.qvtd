@@ -12,7 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.AbstractPartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
@@ -110,7 +110,7 @@ abstract class AbstractPartition extends AbstractPartialRegionAnalysis<@NonNull 
 	protected final @NonNull MappingPartitioner partitioner;
 	protected final @NonNull RegionAnalysis regionAnalysis;
 	protected final @NonNull Region originalRegion;
-	protected final @NonNull TransformationAnalysis transformationAnalysis;
+	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 	private int parallelScheduleDepth = -1;
 
 	private @Nullable String symbolName = null;

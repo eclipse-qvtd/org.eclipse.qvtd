@@ -39,7 +39,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.UtilityAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ExpressionSynthesizer;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleHeadAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -271,7 +271,7 @@ public class MappingAnalysis extends RuleAnalysis
 	 */
 	private @NonNull Map<@NonNull VariableDeclaration, @NonNull List<@NonNull OCLExpression>> variable2expressions = new HashMap<>();
 
-	public MappingAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull RuleRegion ruleRegion) {
+	public MappingAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull RuleRegion ruleRegion) {
 		super(transformationAnalysis, ruleRegion);
 		//
 		Mapping mapping = (Mapping)QVTscheduleUtil.getReferredRule(ruleRegion);

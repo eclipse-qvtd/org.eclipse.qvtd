@@ -33,7 +33,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 {
-	protected final @NonNull TransformationAnalysis transformationAnalysis;
+	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 	protected final @NonNull Rule rule;
 	protected final @NonNull ExpressionSynthesizer expressionSynthesizer;
 
@@ -44,7 +44,7 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 	 */
 	private /*@LazyNonNull*/ List<@NonNull Node> dependencyHeadNodes = null;
 
-	protected RuleAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull RuleRegion ruleRegion) {
+	protected RuleAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull RuleRegion ruleRegion) {
 		super(transformationAnalysis.getScheduleManager(), ruleRegion);
 		this.rule = QVTscheduleUtil.getReferredRule(ruleRegion);
 		this.transformationAnalysis = transformationAnalysis;
@@ -99,7 +99,7 @@ public abstract class RuleAnalysis extends RegionHelper<@NonNull RuleRegion>
 		return relationAnalysis2traceGroup2;
 	}
 
-	public @NonNull TransformationAnalysis getTransformationAnalysis() {
+	public @NonNull AbstractTransformationAnalysis getTransformationAnalysis() {
 		return transformationAnalysis;
 	}
 

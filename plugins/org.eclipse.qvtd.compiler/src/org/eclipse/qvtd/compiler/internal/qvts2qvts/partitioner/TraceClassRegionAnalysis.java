@@ -12,7 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 
@@ -21,10 +21,10 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
  */
 public class TraceClassRegionAnalysis extends TraceClassAnalysis<@NonNull RegionAnalysis>
 {
-	protected final @NonNull TransformationAnalysis transformationAnalysis;
+	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 	private @Nullable Boolean isCyclic = null;
 
-	public TraceClassRegionAnalysis(@NonNull TransformationAnalysis transformationAnalysis, @NonNull ClassDatum traceClassDatum) {
+	public TraceClassRegionAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull ClassDatum traceClassDatum) {
 		super(transformationAnalysis.getScheduleManager(), traceClassDatum);
 		this.transformationAnalysis = transformationAnalysis;
 	}

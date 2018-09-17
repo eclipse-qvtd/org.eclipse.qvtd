@@ -23,9 +23,9 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.CompilerProblem;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionsAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
@@ -69,12 +69,12 @@ public class MappingPartitioner implements Nameable
 	/**
 	 * The overall transformation partitioner providing global analysis results.
 	 */
-	protected final @NonNull RegionsAnalysis<@NonNull Partition> regionsPartitionAnalysis;
+	protected final @NonNull TransformationAnalysis<@NonNull Partition> regionsPartitionAnalysis;
 
 	/**
 	 * The overall transformation analysis results.
 	 */
-	protected final @NonNull TransformationAnalysis transformationAnalysis;
+	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 
 	/**
 	 * The region to be partitioned.
@@ -120,7 +120,7 @@ public class MappingPartitioner implements Nameable
 
 	public MappingPartitioner(@NonNull TransformationPartitioner transformationPartitioner, @NonNull RegionAnalysis regionAnalysis) {
 		this.scheduleManager = transformationPartitioner.getScheduleManager();
-		this.regionsPartitionAnalysis = transformationPartitioner;
+		this.regionsPartitionAnalysis = transformationPartitioner.getPartitionedRegionsAnalysis();
 		this.transformationAnalysis = transformationPartitioner.getTransformationAnalysis();
 		this.regionAnalysis = regionAnalysis;
 		this.region = (MappingRegion) regionAnalysis.getRegion();
@@ -482,7 +482,7 @@ public class MappingPartitioner implements Nameable
 		return regionAnalysis;
 	}
 
-	public @NonNull RegionsAnalysis<@NonNull Partition> getRegionsPartitionAnalysis() {
+	public @NonNull TransformationAnalysis<@NonNull Partition> getRegionsPartitionAnalysis() {
 		return regionsPartitionAnalysis;
 	}
 

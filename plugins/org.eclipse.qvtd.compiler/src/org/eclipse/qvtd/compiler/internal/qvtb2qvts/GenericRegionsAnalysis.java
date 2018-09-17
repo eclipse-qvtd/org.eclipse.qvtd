@@ -19,7 +19,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassAnalysis;
@@ -32,7 +31,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 /**
  * A TransformationAnalysis accumulates the results of analyzing a RelationalTransformation and its contents.
  */
-public abstract class RegionsAnalysis<@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> extends QVTbaseHelper implements Nameable
+public abstract class GenericRegionsAnalysis<@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> extends QVTbaseHelper implements TransformationAnalysis<@NonNull RA>
 {
 	/**
 	 * The supervising ScheduleManager.
@@ -51,30 +50,34 @@ public abstract class RegionsAnalysis<@NonNull RA extends PartialRegionAnalysis<
 	 */
 	private final @NonNull Map<@NonNull PropertyDatum, @NonNull TracePropertyAnalysis<@NonNull RA>> propertyDatum2tracePropertyAnalysis = new HashMap<>();
 
-	protected RegionsAnalysis(@NonNull ScheduleManager scheduleManager) {
+	protected GenericRegionsAnalysis(@NonNull ScheduleManager scheduleManager) {
 		super(scheduleManager.getEnvironmentFactory());
 		this.scheduleManager = scheduleManager;
 		this.oclContainerProperty = scheduleManager.getStandardLibraryHelper().getOclContainerProperty();
 	}
 
+	@Override
 	public @NonNull TraceClassAnalysis<@NonNull RA> addConsumer(@NonNull ClassDatum classDatum, @NonNull RA consumer) {
 		TraceClassAnalysis<@NonNull RA> traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
 		traceClassAnalysis.addConsumer(consumer);
 		return traceClassAnalysis;
 	}
 
+	@Override
 	public @NonNull TracePropertyAnalysis<@NonNull RA> addConsumer(@NonNull PropertyDatum tracePropertyDatum, @NonNull RA consumer) {
 		TracePropertyAnalysis<@NonNull RA> tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
 		tracePropertyAnalysis.addConsumer(consumer);
 		return tracePropertyAnalysis;
 	}
 
+	@Override
 	public @NonNull TraceClassAnalysis<@NonNull RA> addProducer(@NonNull ClassDatum classDatum, @NonNull RA producer) {
 		TraceClassAnalysis<@NonNull RA> traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
 		traceClassAnalysis.addProducer(producer);
 		return traceClassAnalysis;
 	}
 
+	@Override
 	public @NonNull TracePropertyAnalysis<@NonNull RA> addProducer(@NonNull PropertyDatum tracePropertyDatum, @NonNull RA producer) {
 		TracePropertyAnalysis<@NonNull RA> tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
 		tracePropertyAnalysis.addProducer(producer);
@@ -85,6 +88,7 @@ public abstract class RegionsAnalysis<@NonNull RA extends PartialRegionAnalysis<
 		return classDatum2traceClassAnalysis.get(classDatum);
 	}
 
+	@Override
 	public @Nullable TracePropertyAnalysis<@NonNull RA> basicGetTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
 		assert QVTscheduleUtil.getReferredProperty(propertyDatum) != oclContainerProperty;
 		return propertyDatum2tracePropertyAnalysis.get(propertyDatum);
@@ -96,7 +100,8 @@ public abstract class RegionsAnalysis<@NonNull RA extends PartialRegionAnalysis<
 		}
 	}
 
-	protected void computeTraceClassInheritance() {
+	@Override
+	public void computeTraceClassInheritance() {
 		Set<@NonNull ClassDatum> missingClassDatums = new HashSet<>();
 		for (@NonNull TraceClassAnalysis<@NonNull RA> subTraceClassRegionAnalysis : classDatum2traceClassAnalysis.values()) {
 			ClassDatum classDatum = subTraceClassRegionAnalysis.getClassDatum();
@@ -131,14 +136,17 @@ public abstract class RegionsAnalysis<@NonNull RA extends PartialRegionAnalysis<
 
 	//	protected abstract @NonNull Iterable<@NonNull RA> getPartialRegionAnalyses();
 
+	@Override
 	public @NonNull ScheduleManager getScheduleManager() {
 		return scheduleManager;
 	}
 
+	@Override
 	public @NonNull TraceClassAnalysis<@NonNull RA> getTraceClassAnalysis(@NonNull ClassDatum classDatum) {
 		return ClassUtil.nonNullState(classDatum2traceClassAnalysis.get(classDatum));
 	}
 
+	@Override
 	public @NonNull TracePropertyAnalysis<@NonNull RA> getTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
 		assert QVTscheduleUtil.getReferredProperty(propertyDatum) != oclContainerProperty;
 		return ClassUtil.nonNullState(propertyDatum2tracePropertyAnalysis.get(propertyDatum));

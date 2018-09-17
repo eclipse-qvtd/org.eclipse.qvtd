@@ -24,9 +24,9 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ContentsAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LegacyContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CastEdgeCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CastInitializerCheckedCondition;
@@ -207,14 +207,14 @@ public class FallibilityAnalysis
 		}
 	}
 
-	protected final @NonNull TransformationAnalysis transformationAnalysis;
+	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 	protected final @NonNull ScheduleManager scheduleManager;
-	protected final @NonNull ContentsAnalysis<@NonNull RuleRegion> originalContentsAnalysis;
+	protected final @NonNull LegacyContentsAnalysis originalContentsAnalysis;
 	private @Nullable RegionAnalysis failSometimes = null;
 
 	private @NonNull Map<@NonNull RegionAnalysis, @NonNull Set<@NonNull RegionAnalysis>> consumer2producers = new HashMap<>();
 
-	public FallibilityAnalysis(@NonNull TransformationAnalysis transformationAnalysis) {
+	public FallibilityAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis) {
 		this.transformationAnalysis = transformationAnalysis;
 		this.scheduleManager = transformationAnalysis.getScheduleManager();
 		this.originalContentsAnalysis = scheduleManager.getOriginalContentsAnalysis();

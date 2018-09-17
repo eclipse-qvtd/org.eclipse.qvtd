@@ -27,7 +27,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -48,7 +48,7 @@ public abstract class TransformationAnalysis2TracePackage //extends QVTbaseHelpe
 {
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull NameGenerator nameGenerator;
-	protected final @NonNull TransformationAnalysis transformationAnalysis;
+	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 	protected final @NonNull Transformation transformation;
 	private final org.eclipse.ocl.pivot.@NonNull Package tracePackage;
 
@@ -107,7 +107,7 @@ public abstract class TransformationAnalysis2TracePackage //extends QVTbaseHelpe
 	 */
 	//	protected final @NonNull Map<@NonNull RelationCallExp, @NonNull List<Relation2TraceClass.@NonNull Internal>> invocation2relation2traceClasses = new HashMap<>();
 
-	protected TransformationAnalysis2TracePackage(@NonNull ScheduleManager scheduleManager, @NonNull TransformationAnalysis transformationAnalysis) {
+	protected TransformationAnalysis2TracePackage(@NonNull ScheduleManager scheduleManager, @NonNull AbstractTransformationAnalysis transformationAnalysis) {
 		//		super(scheduleManager.getEnvironmentFactory());
 		this.scheduleManager = scheduleManager;
 		this.nameGenerator = scheduleManager.getNameGenerator();
@@ -451,7 +451,7 @@ public abstract class TransformationAnalysis2TracePackage //extends QVTbaseHelpe
 		return property;
 	}
 
-	public @NonNull TransformationAnalysis getTransformationAnalysis() {
+	public @NonNull AbstractTransformationAnalysis getTransformationAnalysis() {
 		return transformationAnalysis;
 	}
 

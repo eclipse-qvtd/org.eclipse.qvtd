@@ -20,8 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractQVTb2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ContentsAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.ProblemHandler;
@@ -41,12 +40,11 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 
 	public @NonNull Map<@NonNull ScheduledRegion, Iterable<@NonNull MappingRegion>> transform() throws IOException {
 		scheduleManager.analyzeSourceModel();
-		Iterable<@NonNull TransformationAnalysis> transformationAnalyses = scheduleManager.getOrderedTransformationAnalyses();
-		for (@NonNull TransformationAnalysis transformationAnalysis : transformationAnalyses) {
+		Iterable<@NonNull AbstractTransformationAnalysis> transformationAnalyses = scheduleManager.getOrderedTransformationAnalyses();
+		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : transformationAnalyses) {
 			transformationAnalysis.analyzeMappingRegions();
 		}
-		@SuppressWarnings("unused")
-		ContentsAnalysis<@NonNull RuleRegion> originalContentsAnalysis = scheduleManager.analyzeOriginalContents();
+		scheduleManager.analyzeOriginalContents();
 		Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull RuleRegion>> scheduledRegion2activeRegions = scheduleManager.analyzeTransformations();
 		for (@NonNull MappingRegion ruleRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager.getScheduleModel())) {
 			scheduleManager.writeDebugGraphs(ruleRegion, null);
