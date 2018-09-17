@@ -643,15 +643,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		//		s.setHead();
 		//			s.append("{rank=source;");
 		//	}
-		setLabel(s);
-		String shape = getShape();
-		if (shape != null) {
-			s.setShape(shape);
-		}
-		String style = getStyle();
-		if (style != null) {
-			s.setStyle(style);
-		}
+		toGraphHelper.setLabel(this);
+		toGraphHelper.setShapeAndStyle(this);
 		toGraphHelper.setColor(this);
 		if (!isUnconditional()) {
 			s.setFillColor(getFillColor());
@@ -799,7 +792,13 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public @NonNull String getLabel() {
-		return QVTscheduleUtil.getName(this);
+		StringBuilder n = new StringBuilder();
+		n.append(getName());
+		if (!isNullLiteral() && !isSuccess()) {
+			n.append("\\n");
+			n.append(PrettyPrinter.printType(getCompleteClass().getPrimaryClass()));
+		}
+		return n.toString();
 	}
 
 	@Override
@@ -1003,11 +1002,13 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		return region.getScheduleModel();
 	} */
 
-	protected @Nullable String getShape() {
+	@Override
+	public @Nullable String getShape() {
 		return null;
 	}
 
-	protected @Nullable String getStyle() {
+	@Override
+	public @Nullable String getStyle() {
 		StringBuilder s = new StringBuilder();
 		if (isDataType()) {
 			s.append("rounded");
@@ -1272,17 +1273,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void setHead() {
 		this.isHead = true;
-	}
-
-	public void setLabel(@NonNull GraphStringBuilder s) {		// FIXME LabelVisitor
-		StringBuilder n = new StringBuilder();
-		n.append(getName());
-		if (!isNullLiteral() && !isSuccess()) {
-			n.append("\\n");
-			n.append(PrettyPrinter.printType(getCompleteClass().getPrimaryClass()));
-		}
-		@NonNull String string = n.toString();
-		s.setLabel(string);
 	}
 
 	@Override

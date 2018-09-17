@@ -22,5 +22,9 @@ public interface ToGraphHelper
 
 	void setHead(@NonNull GraphNode node);
 
+	void setLabel(@NonNull GraphNode node);
+
 	void setPenwidth(@NonNull GraphNode node);
+
+	void setShapeAndStyle(@NonNull GraphNode node);
 }

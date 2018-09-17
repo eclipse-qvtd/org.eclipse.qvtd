@@ -379,6 +379,8 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	@NonNull Iterable<@NonNull Node> getRecursionTargets();
 	@NonNull Iterable<@NonNull ? extends Edge> getResultEdges();
 	@NonNull Iterable<@NonNull Node> getUsedBindingSources();
+	@Nullable String getShape();
+	@Nullable String getStyle();
 	@NonNull Utility getUtility();
 
 	void initialize(@NonNull Role nodeRole, @NonNull Region region, /*@NonNull*/ String name, /*@NonNull*/ ClassDatum classDatum);

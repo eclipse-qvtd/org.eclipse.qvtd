@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.EnumerationLiteral;
 import org.eclipse.ocl.pivot.util.Visitor;
 
@@ -189,6 +190,16 @@ public class EnumLiteralNodeImpl extends OperationNodeImpl implements EnumLitera
 		EnumLiteralNode node = (EnumLiteralNode)super.createNode(nodeRole, region);
 		node.setEnumValue(enumValue);
 		return node;
+	}
+
+	@Override
+	public @Nullable String getShape() {
+		return null;		// rectangle
+	}
+
+	@Override
+	public @Nullable String getStyle() {
+		return "rounded";
 	}
 
 	@Override

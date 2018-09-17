@@ -16,6 +16,7 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NullLiteralNode;
@@ -66,6 +67,16 @@ public class NullLiteralNodeImpl extends OperationNodeImpl implements NullLitera
 		assert nodeRole == Role.CONSTANT;
 		NullLiteralNode node = (NullLiteralNode)super.createNode(nodeRole, region);
 		return node;
+	}
+
+	@Override
+	public @Nullable String getShape() {
+		return null;		// rectangle
+	}
+
+	@Override
+	public @Nullable String getStyle() {
+		return "rounded";
 	}
 
 	@Override

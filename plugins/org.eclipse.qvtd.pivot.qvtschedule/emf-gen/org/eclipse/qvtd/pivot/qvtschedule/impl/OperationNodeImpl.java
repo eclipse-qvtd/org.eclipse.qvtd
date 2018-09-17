@@ -15,7 +15,7 @@
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 
@@ -47,7 +47,7 @@ public abstract class OperationNodeImpl extends MappingNodeImpl implements Opera
 	}
 
 	@Override
-	public @NonNull String getShape() {
+	public @Nullable String getShape() {
 		return "ellipse";
 	}
 

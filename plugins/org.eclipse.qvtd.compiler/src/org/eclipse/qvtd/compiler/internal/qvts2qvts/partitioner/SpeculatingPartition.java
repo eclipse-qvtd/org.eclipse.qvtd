@@ -289,7 +289,7 @@ class SpeculatingPartition extends AbstractPartialPartition
 	protected void resolveSuccessNodes() {
 		for (@NonNull Node traceNode : executionNodes) {
 			Node localSuccessNode = partitioner.getLocalSuccessNode(traceNode);
-			addNode(localSuccessNode, Role.PREDICATED);
+			addNode(localSuccessNode, Role.CONSTANT_SUCCESS_TRUE);
 			Node globalSuccessNode = partitioner.getGlobalSuccessNode(traceNode);
 			addNode(globalSuccessNode, Role.REALIZED);
 		}

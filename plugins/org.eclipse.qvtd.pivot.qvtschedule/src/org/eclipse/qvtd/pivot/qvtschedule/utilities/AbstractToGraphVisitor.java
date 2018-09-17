@@ -37,9 +37,40 @@ public abstract class AbstractToGraphVisitor extends AbstractExtendingQVTschedul
 		return context.appendNode(this, node);
 	}
 
+	protected @NonNull String getColor(@NonNull GraphElement element) {
+		return element.getColor();
+	}
+
 	@Override
 	public @NonNull GraphStringBuilder getGraphStringBuilder() {
 		return context;
+	}
+
+	protected @NonNull String getLabel(@NonNull GraphNode graphNode) {
+		String label = "";
+		if (graphNode instanceof Node) {
+			Node node = (Node)graphNode;
+			label = node.getLabel();
+		}
+		return label;
+	}
+
+	protected @Nullable String getShape(@NonNull GraphNode graphNode) {
+		String shape = null;
+		if (graphNode instanceof Node) {
+			Node node = (Node)graphNode;
+			shape = node.getShape();
+		}
+		return shape;
+	}
+
+	protected @Nullable String getStyle(@NonNull GraphNode graphNode) {
+		String style = null;
+		if (graphNode instanceof Node) {
+			Node node = (Node)graphNode;
+			style = node.getStyle();
+		}
+		return style;
 	}
 
 	protected boolean isExpression(GraphNode graphNode) {
@@ -62,7 +93,8 @@ public abstract class AbstractToGraphVisitor extends AbstractExtendingQVTschedul
 
 	@Override
 	public void setColor(@NonNull GraphElement element) {
-		context.setColor(element.getColor());
+		String color = getColor(element);
+		context.setColor(color);
 	}
 
 	@Override
@@ -74,10 +106,28 @@ public abstract class AbstractToGraphVisitor extends AbstractExtendingQVTschedul
 	}
 
 	@Override
+	public void setLabel(@NonNull GraphNode graphNode) {
+		String label = getLabel(graphNode);
+		context.setLabel(label);
+	}
+
+	@Override
 	public void setPenwidth(@NonNull GraphNode graphNode) {
 		boolean isHead = isHead(graphNode);
 		boolean isExpression = isExpression(graphNode);
 		context.setPenwidth(isHead ? QVTscheduleConstants.HEAD_WIDTH : !isExpression ? 2*QVTscheduleConstants.LINE_WIDTH : QVTscheduleConstants.LINE_WIDTH);
+	}
+
+	@Override
+	public void setShapeAndStyle(@NonNull GraphNode graphNode) {
+		String shape = getShape(graphNode);
+		String style = getStyle(graphNode);
+		if (shape != null) {
+			context.setShape(shape);
+		}
+		if (style != null) {
+			context.setStyle(style);
+		}
 	}
 
 	public @NonNull String visit(@NonNull ScheduledRegion region) {

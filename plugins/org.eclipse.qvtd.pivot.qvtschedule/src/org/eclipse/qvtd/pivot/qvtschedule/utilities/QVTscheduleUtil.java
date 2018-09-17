@@ -507,6 +507,8 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	public static @NonNull String getColor(@NonNull Role role) {
 		switch (role) {
 			case CONSTANT: return QVTscheduleConstants.CONSTANT_COLOR;
+			case CONSTANT_SUCCESS_FALSE: return QVTscheduleConstants.CONSTANT_COLOR;
+			case CONSTANT_SUCCESS_TRUE: return QVTscheduleConstants.CONSTANT_COLOR;
 			case LOADED: return QVTscheduleConstants.LOADED_COLOR;
 			case PREDICATED: return QVTscheduleConstants.PREDICATED_COLOR;
 			case REALIZED: return QVTscheduleConstants.REALIZED_COLOR;

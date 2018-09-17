@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -179,6 +180,16 @@ public class StringLiteralNodeImpl extends OperationNodeImpl implements StringLi
 		StringLiteralNode node = (StringLiteralNode)super.createNode(nodeRole, region);
 		node.setStringValue(stringValue);
 		return node;
+	}
+
+	@Override
+	public @Nullable String getShape() {
+		return null;		// rectangle
+	}
+
+	@Override
+	public @Nullable String getStyle() {
+		return "rounded";
 	}
 
 	@Override

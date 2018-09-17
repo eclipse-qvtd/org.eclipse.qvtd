@@ -16,7 +16,6 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Element;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -25,7 +24,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -33,6 +31,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 class SpeculatedPartition extends AbstractPartialPartition
 {
+
 	private final @NonNull Node traceNode;
 	//	private final @Nullable Node predicatedDispatchNode;
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
@@ -88,26 +87,7 @@ class SpeculatedPartition extends AbstractPartialPartition
 
 	@Override
 	protected @NonNull PartitioningVisitor createPartitioningVisitor(@NonNull MicroMappingRegion partialRegion) {
-		return new PartitioningVisitor(new RegionHelper<>(scheduleManager, partialRegion), this)
-		{
-			@Override
-			public @Nullable Element visitSuccessNode(@NonNull SuccessNode node) {
-				if (node == partitioner.basicGetGlobalSuccessNode(traceNode)) {
-					Node partialNode = regionHelper.createBooleanLiteralNode(true);
-					addNode(node, partialNode);
-					return partialNode;
-				}
-				else if (node == partitioner.basicGetLocalSuccessNode(traceNode)) {
-					Node partialNode = regionHelper.createBooleanLiteralNode(true);
-					addNode(node, partialNode);
-					return partialNode;
-					//		return null;			// localStatus is redundant when globalStatus in use
-				}
-				else {
-					return super.visitSuccessNode(node);
-				}
-			}
-		};
+		return new PartitioningWithSuccessVisitor(new RegionHelper<>(scheduleManager, partialRegion), this);
 	}
 
 	@Override
@@ -197,10 +177,10 @@ class SpeculatedPartition extends AbstractPartialPartition
 		if (scheduleManager.useActivators()) {
 			Node localSuccessNode = partitioner.basicGetLocalSuccessNode(traceNode);
 			if (localSuccessNode != null) {
-				addNode(localSuccessNode, Role.PREDICATED);
+				addNode(localSuccessNode, Role.CONSTANT_SUCCESS_TRUE);
 			}
 			Node globalSuccessNode = partitioner.getGlobalSuccessNode(traceNode);
-			addNode(globalSuccessNode, Role.PREDICATED);
+			addNode(globalSuccessNode, Role.CONSTANT_SUCCESS_TRUE);
 		}
 		//	}
 		//		}

@@ -395,6 +395,14 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 	}
 
 	@Override
+	public void setLabel(@NonNull GraphNode graphNode) {
+		if (graphNode instanceof Node) {
+			Node node = (Node) graphNode;
+			context.setLabel(node.getLabel());
+		}
+	}
+
+	@Override
 	public void setPenwidth(@NonNull GraphNode graphNode) {
 		boolean isHead = false;
 		boolean isExpression = false;
@@ -404,6 +412,23 @@ public class Execution2GraphVisitor extends AbstractExecutionVisitor<@Nullable O
 			isExpression = node.isExpression();
 		}
 		context.setPenwidth(isHead ? QVTscheduleConstants.HEAD_WIDTH : !isExpression ? 2*QVTscheduleConstants.LINE_WIDTH : QVTscheduleConstants.LINE_WIDTH);
+	}
+
+	@Override
+	public void setShapeAndStyle(@NonNull GraphNode graphNode) {
+		String shape = null;
+		String style = null;
+		if (graphNode instanceof Node) {
+			Node node = (Node)graphNode;
+			shape = node.getShape();
+			style = node.getStyle();
+		}
+		if (shape != null) {
+			context.setShape(shape);
+		}
+		if (style != null) {
+			context.setStyle(style);
+		}
 	}
 
 	@Override

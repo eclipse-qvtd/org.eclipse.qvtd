@@ -22,8 +22,6 @@ public interface GraphStringBuilder
 	public static interface GraphNode extends GraphElement
 	{
 		void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName);
-
-		//	boolean isHead();
 	}
 
 	public static interface GraphEdge extends GraphElement

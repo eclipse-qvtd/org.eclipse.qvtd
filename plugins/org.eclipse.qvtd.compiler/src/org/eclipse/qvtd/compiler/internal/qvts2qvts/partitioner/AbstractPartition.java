@@ -37,12 +37,15 @@ abstract class AbstractPartition extends AbstractPartialRegionAnalysis<@NonNull 
 		}
 
 		@Override
-		protected boolean isHead(GraphNode graphNode) {
-			return Iterables.contains(getHeadNodes(), graphNode);
+		protected @NonNull String getColor(@NonNull GraphElement element) {
+			Role role = getGraphRole(element);
+			if (role != null) {
+				return QVTscheduleUtil.getColor(role);
+			}
+			return super.getColor(element);
 		}
 
-		@Override
-		public void setColor(@NonNull GraphElement element) {
+		protected @Nullable Role getGraphRole(GraphElement element) {
 			Role role = null;
 			if (element instanceof Node) {
 				role = getRole((Node)element);
@@ -50,10 +53,42 @@ abstract class AbstractPartition extends AbstractPartialRegionAnalysis<@NonNull 
 			else if (element instanceof Edge) {
 				role = getRole((Edge)element);
 			}
-			if (role != null) {
-				context.setColor(QVTscheduleUtil.getColor(role));
+			return role;
+		}
+
+		@Override
+		protected @NonNull String getLabel(@NonNull GraphNode graphNode) {
+			Role role = getGraphRole(graphNode);
+			if (role == Role.CONSTANT_SUCCESS_FALSE) {
+				return " false \nBoolean";
 			}
-			//	super.setColor(element);
+			else if (role == Role.CONSTANT_SUCCESS_TRUE) {
+				return "  true  \nBoolean";
+			}
+			return super.getLabel(graphNode);
+		}
+
+		@Override
+		protected @Nullable String getShape(@NonNull GraphNode graphNode) {
+			Role role = getGraphRole(graphNode);
+			if ((role == Role.CONSTANT_SUCCESS_FALSE) || (role == Role.CONSTANT_SUCCESS_TRUE)) {
+				return null;		// rectangle
+			}
+			return super.getShape(graphNode);
+		}
+
+		@Override
+		protected @Nullable String getStyle(@NonNull GraphNode graphNode) {
+			Role role = getGraphRole(graphNode);
+			if ((role == Role.CONSTANT_SUCCESS_FALSE) || (role == Role.CONSTANT_SUCCESS_TRUE)) {
+				return "rounded";
+			}
+			return super.getStyle(graphNode);
+		}
+
+		@Override
+		protected boolean isHead(GraphNode graphNode) {
+			return Iterables.contains(getHeadNodes(), graphNode);
 		}
 
 		public @Nullable String visitPartition(@NonNull Partition partition) {

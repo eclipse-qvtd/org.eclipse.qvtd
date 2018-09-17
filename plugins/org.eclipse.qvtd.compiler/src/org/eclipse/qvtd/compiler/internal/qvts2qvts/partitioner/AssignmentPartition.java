@@ -45,11 +45,11 @@ class AssignmentPartition extends AbstractPartialPartition
 			addNode(traceNode, Role.PREDICATED);
 			Node localSuccessNode = partitioner.basicGetLocalSuccessNode(traceNode);
 			if (localSuccessNode != null) {		// ?? localSuccess property is not mandatory
-				addNode(localSuccessNode, Role.PREDICATED);
+				addNode(localSuccessNode, Role.CONSTANT_SUCCESS_TRUE);
 			}
 			Node globalSuccessNode = partitioner.basicGetGlobalSuccessNode(traceNode);
 			if (globalSuccessNode != null) {		// success property is not mandatory
-				addNode(globalSuccessNode, Role.PREDICATED);
+				addNode(globalSuccessNode, Role.CONSTANT_SUCCESS_TRUE);
 			}
 		}
 		//
@@ -125,12 +125,6 @@ class AssignmentPartition extends AbstractPartialPartition
 				//	}
 			}
 		};
-	}
-
-	@Override
-	protected @NonNull Iterable<@NonNull Node> getHeadNodes() {
-		// TODO Auto-generated method stub
-		return super.getHeadNodes();
 	}
 
 	@Override

@@ -19,6 +19,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
@@ -34,12 +35,41 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 abstract class AbstractPartialPartition extends AbstractPartition
 {
+	protected class PartitioningWithSuccessVisitor extends PartitioningVisitor
+	{
+		protected PartitioningWithSuccessVisitor(@NonNull RegionHelper<?> regionHelper, @NonNull AbstractPartialPartition partition) {
+			super(regionHelper, partition);
+		}
+
+		@Override
+		public @Nullable Element visitSuccessNode(@NonNull SuccessNode node) {
+			Role role = getRole(node);
+			assert role != null;
+			switch (role) {
+				case CONSTANT_SUCCESS_FALSE: {
+					Node partialNode = regionHelper.createBooleanLiteralNode(false);
+					addNode(node, partialNode);
+					return partialNode;
+				}
+				case CONSTANT_SUCCESS_TRUE: {
+					Node partialNode = regionHelper.createBooleanLiteralNode(true);
+					addNode(node, partialNode);
+					return partialNode;
+				}
+				default:
+					return super.visitSuccessNode(node);
+
+			}
+		}
+	}
+
 	/**
 	 * The QVTr synthesis includes trace synthesis with activators and local/globalSuccess to interlink.
 	 * The QVTc synthesis relies on the externally provided trace.
@@ -172,11 +202,16 @@ abstract class AbstractPartialPartition extends AbstractPartition
 					partitioner.addRealizedNode(node);
 				}
 				else {
-					if (newNodeRole == Role.REALIZED || newNodeRole == Role.SPECULATION) {
+					if (node instanceof SuccessNode) {
+						assert newNodeRole == Role.CONSTANT_SUCCESS_TRUE;
+					}
+					else if (newNodeRole == Role.REALIZED || newNodeRole == Role.SPECULATION) {
 						assert false;
 						return;		// FIXME redundant call
 					}
-					assert newNodeRole == Role.PREDICATED || newNodeRole == Role.SPECULATED;
+					else {
+						assert newNodeRole == Role.PREDICATED || newNodeRole == Role.SPECULATED;
+					}
 				}
 				break;
 			}
