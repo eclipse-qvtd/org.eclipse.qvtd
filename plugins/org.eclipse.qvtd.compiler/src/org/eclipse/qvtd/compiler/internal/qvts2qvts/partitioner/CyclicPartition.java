@@ -20,7 +20,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.AbstractPartialRegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.AbstractPartition;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -32,7 +32,7 @@ import com.google.common.collect.Iterables;
 /**
  * Each CycleAnalysis identifies one group of regionAnalyses that contribute to a cycle.
  */
-public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Partition> implements InternallyAcyclicPartition, Partition
+public class CyclicPartition extends AbstractPartition implements InternallyAcyclicPartition, Partition
 {
 	protected final @NonNull String name;
 	protected final @NonNull CyclicPartitionsAnalysis cyclesAnalysis;
@@ -53,16 +53,16 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	 */
 	protected final @NonNull Set<@NonNull Partition> externalPredecessors = new HashSet<>();
 
-	protected final @NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> traceClassAnalyses;
-	protected final @NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> tracePropertyAnalyses;
+	protected final @NonNull Set<@NonNull TraceClassPartitionAnalysis> traceClassAnalyses;
+	protected final @NonNull Set<@NonNull TracePropertyPartitionAnalysis> tracePropertyAnalyses;
 	private @Nullable List<@NonNull Iterable<@NonNull Partition>> partitionSchedule = null;
 	//	private @Nullable List<@NonNull Collection<@NonNull Region>> regionSchedule = null;
 
 	public CyclicPartition(@NonNull TransformationPartitioner transformationPartitioner, @NonNull String name, @NonNull CyclicPartitionsAnalysis cyclesAnalysis, @NonNull Set<@NonNull Partition> partitions,
 			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors,
-			@NonNull Set<@NonNull TraceClassAnalysis<@NonNull Partition>> traceClassAnalyses,
-			@NonNull Set<@NonNull TracePropertyAnalysis<@NonNull Partition>> tracePropertyAnalyses) {
-		super(transformationPartitioner.getPartitionedRegionsAnalysis());
+			@NonNull Set<@NonNull TraceClassPartitionAnalysis> traceClassAnalyses,
+			@NonNull Set<@NonNull TracePropertyPartitionAnalysis> tracePropertyAnalyses) {
+		super(transformationPartitioner.getPartitionedTransformationAnalysis());
 		this.name = name;
 		this.cyclesAnalysis = cyclesAnalysis;
 		this.partitions = partitions;
@@ -104,6 +104,31 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 		}
 		return microMappingRegions;
 	}
+
+	/*	@Override
+	public @Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getConsumedTraceClassPartitionAnalyses() {
+		return (Iterable<@NonNull TraceClassPartitionAnalysis>)getConsumedTraceClassAnalyses();
+	}
+
+	@Override
+	public @Nullable Iterable<@NonNull TracePropertyPartitionAnalysis> getConsumedTracePropertyPartitionAnalyses() {
+		return (Iterable<@NonNull TracePropertyPartitionAnalysis>)getConsumedTracePropertyAnalyses();
+	}
+
+	@Override
+	public @Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getProducedTraceClassPartitionAnalyses() {
+		return (Iterable<@NonNull TraceClassPartitionAnalysis>)getProducedTraceClassAnalyses();
+	}
+
+	@Override
+	public @Nullable Iterable<@NonNull TracePropertyPartitionAnalysis> getProducedTracePropertyPartitionAnalyses() {
+		return (Iterable<@NonNull TracePropertyPartitionAnalysis>)getProducedTracePropertyAnalyses();
+	}
+
+	@Override
+	public @Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getSuperProducedTraceClassPartitionAnalyses() {
+		return (Iterable<@NonNull TraceClassPartitionAnalysis>)getSuperProducedTraceClassAnalyses();
+	} */
 
 	@Override
 	public int getDepth() {
@@ -192,12 +217,12 @@ public class CyclicPartition extends AbstractPartialRegionAnalysis<@NonNull Part
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull TraceClassAnalysis<@NonNull Partition>> getTraceClassAnalyses() {
+	public @NonNull Iterable<@NonNull TraceClassPartitionAnalysis> getTraceClassAnalyses() {
 		return traceClassAnalyses;
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull TracePropertyAnalysis<@NonNull Partition>> getTracePropertyAnalyses() {
+	public @NonNull Iterable<@NonNull TracePropertyPartitionAnalysis> getTracePropertyAnalyses() {
 		return tracePropertyAnalyses;
 	}
 

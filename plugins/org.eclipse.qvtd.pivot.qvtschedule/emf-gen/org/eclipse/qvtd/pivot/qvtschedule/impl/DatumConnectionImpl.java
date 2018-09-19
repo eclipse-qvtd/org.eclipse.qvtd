@@ -177,7 +177,7 @@ public abstract class DatumConnectionImpl<CE extends ConnectionEnd> extends Conn
 	 * @generated
 	 */
 	@Override
-	public EList<CE> getSourceEnds() {
+	public List<CE> getSourceEnds() {
 		if (sourceEnds == null) {
 			sourceEnds = new EObjectResolvingEList<CE>(ConnectionEnd.class, this, QVTschedulePackage.DATUM_CONNECTION__SOURCE_ENDS);
 		}

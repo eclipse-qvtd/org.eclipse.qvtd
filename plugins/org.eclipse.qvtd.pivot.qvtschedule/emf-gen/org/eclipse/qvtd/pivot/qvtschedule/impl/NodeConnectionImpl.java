@@ -17,7 +17,6 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.InternalEObject;
@@ -91,7 +90,7 @@ public class NodeConnectionImpl extends DatumConnectionImpl<Node> implements Nod
 	 * @generated
 	 */
 	@Override
-	public EList<Node> getSourceEnds() {
+	public List<Node> getSourceEnds() {
 		if (sourceEnds == null) {
 			sourceEnds = new EObjectResolvingEList<Node>(Node.class, this, QVTschedulePackage.NODE_CONNECTION__SOURCE_ENDS);
 		}

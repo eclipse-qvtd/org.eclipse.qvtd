@@ -85,7 +85,7 @@ class ActivatorPartition extends AbstractPartialPartition
 	}
 
 	@Override
-	protected @NonNull Iterable<@NonNull Node> getHeadNodes() {
+	public @NonNull Iterable<@NonNull Node> getHeadNodes() {
 		return QVTscheduleUtil.getHeadNodes(originalRegion);
 	}
 

@@ -17,7 +17,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
-class NonPartition extends AbstractPartition
+class NonPartition extends AbstractAcyclicPartition
 {
 	protected NonPartition(@NonNull MappingPartitioner partitioner) {
 		super(partitioner);

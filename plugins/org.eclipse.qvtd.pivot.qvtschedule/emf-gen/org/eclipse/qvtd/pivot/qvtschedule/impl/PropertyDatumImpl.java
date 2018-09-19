@@ -14,6 +14,7 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import java.util.Collection;
 
+import java.util.List;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -246,7 +247,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * @generated
 	 */
 	@Override
-	public EList<PropertyDatum> getSuperPropertyDatums() {
+	public List<PropertyDatum> getSuperPropertyDatums() {
 		if (superPropertyDatums == null) {
 			superPropertyDatums = new EObjectResolvingEList<PropertyDatum>(PropertyDatum.class, this, QVTschedulePackage.PROPERTY_DATUM__SUPER_PROPERTY_DATUMS);
 		}

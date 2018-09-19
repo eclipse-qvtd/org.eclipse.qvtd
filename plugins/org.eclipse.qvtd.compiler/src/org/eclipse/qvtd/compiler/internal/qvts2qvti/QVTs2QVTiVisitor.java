@@ -504,7 +504,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		//
 		List<@NonNull Region> callableRegions = new ArrayList<>();
 		callableRegions.add(QVTscheduleUtil.getOwnedLoadingRegion(scheduledRegion));
-		for (@NonNull MappingRegion region : QVTscheduleUtil.getMappingRegions(scheduledRegion)) {
+		for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(scheduledRegion)) {
 			callableRegions.add(region);
 		}
 

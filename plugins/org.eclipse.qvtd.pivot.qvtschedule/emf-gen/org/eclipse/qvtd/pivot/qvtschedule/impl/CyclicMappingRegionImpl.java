@@ -16,6 +16,7 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import java.util.Collection;
 
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -81,7 +82,7 @@ public class CyclicMappingRegionImpl extends MappingRegionImpl implements Cyclic
 	 * @generated
 	 */
 	@Override
-	public EList<MappingRegion> getElementRegions() {
+	public List<MappingRegion> getElementRegions() {
 		if (elementRegions == null) {
 			elementRegions = new EObjectResolvingEList<MappingRegion>(MappingRegion.class, this, QVTschedulePackage.CYCLIC_MAPPING_REGION__ELEMENT_REGIONS);
 		}

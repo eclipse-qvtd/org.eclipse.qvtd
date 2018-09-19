@@ -16,6 +16,7 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import java.util.Collection;
 
+import java.util.List;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -233,7 +234,7 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	 * @generated
 	 */
 	@Override
-	public EList<Node> getMemberNodes() {
+	public List<Node> getMemberNodes() {
 		if (memberNodes == null) {
 			memberNodes = new EObjectWithInverseResolvingEList<Node>(Node.class, this, QVTschedulePackage.CLUSTER__MEMBER_NODES, QVTschedulePackage.NODE__CLUSTER);
 		}
@@ -246,7 +247,7 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	 * @generated
 	 */
 	@Override
-	public EList<Edge> getMemberEdges() {
+	public List<Edge> getMemberEdges() {
 		if (memberEdges == null) {
 			memberEdges = new EObjectWithInverseResolvingEList<Edge>(Edge.class, this, QVTschedulePackage.CLUSTER__MEMBER_EDGES, QVTschedulePackage.EDGE__CLUSTER);
 		}
@@ -259,7 +260,7 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	 * @generated
 	 */
 	@Override
-	public EList<Cluster> getPrecedingClusters() {
+	public List<Cluster> getPrecedingClusters() {
 		if (precedingClusters == null) {
 			precedingClusters = new EObjectWithInverseResolvingEList.ManyInverse<Cluster>(Cluster.class, this, QVTschedulePackage.CLUSTER__PRECEDING_CLUSTERS, QVTschedulePackage.CLUSTER__SUCCEEDING_CLUSTERS);
 		}
@@ -272,7 +273,7 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	 * @generated
 	 */
 	@Override
-	public EList<Cluster> getSucceedingClusters() {
+	public List<Cluster> getSucceedingClusters() {
 		if (succeedingClusters == null) {
 			succeedingClusters = new EObjectWithInverseResolvingEList.ManyInverse<Cluster>(Cluster.class, this, QVTschedulePackage.CLUSTER__SUCCEEDING_CLUSTERS, QVTschedulePackage.CLUSTER__PRECEDING_CLUSTERS);
 		}

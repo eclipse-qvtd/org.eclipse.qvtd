@@ -370,7 +370,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * @generated
 	 */
 	@Override
-	public EList<NodeConnection> getOutgoingConnections() {
+	public List<NodeConnection> getOutgoingConnections() {
 		if (outgoingConnections == null) {
 			outgoingConnections = new EObjectResolvingEList<NodeConnection>(NodeConnection.class, this, QVTschedulePackage.NODE__OUTGOING_CONNECTIONS);
 		}
@@ -383,7 +383,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * @generated
 	 */
 	@Override
-	public EList<Edge> getIncomingEdges() {
+	public List<Edge> getIncomingEdges() {
 		if (incomingEdges == null) {
 			incomingEdges = new EObjectWithInverseResolvingEList<Edge>(Edge.class, this, QVTschedulePackage.NODE__INCOMING_EDGES, QVTschedulePackage.EDGE__TARGET_NODE);
 		}
@@ -419,7 +419,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * @generated
 	 */
 	@Override
-	public EList<Edge> getOutgoingEdges() {
+	public List<Edge> getOutgoingEdges() {
 		if (outgoingEdges == null) {
 			outgoingEdges = new EObjectWithInverseResolvingEList<Edge>(Edge.class, this, QVTschedulePackage.NODE__OUTGOING_EDGES, QVTschedulePackage.EDGE__SOURCE_NODE);
 		}

@@ -45,6 +45,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
@@ -201,7 +202,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		AbstractMerger.LATE.setState(true);
 		//		AbstractQVTb2QVTs.REGION_ORDER.setState(true);
 		//		AbstractQVTb2QVTs.REGION_STACK.setState(true);
-		//		QVTscheduleConstants.POLLED_PROPERTIES.setState(true);
+		QVTscheduleConstants.POLLED_PROPERTIES.setState(true);
 		//		QVTscheduleConstants.CONNECTION_CREATION.setState(true);
 		//		FallibilityAnalysis.LOCAL.setState(true);;
 		//		TransformationPartitioner.CYCLES.setState(true);;
@@ -579,6 +580,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		QVTr2QVTc.VARIABLES.setState(true);
 		//		QVTp2QVTs.REGION_ORDER.setState(true);
 		//		QVTr2QVTc.SYNTHESIS.setState(true);
+		QVTscheduleConstants.CONNECTION_CREATION.setState(true);
 		Class<? extends Transformer> txClass;
 		MyQVT myQVT1 = createQVT("Forward2Reverse", getModelsURI("forward2reverse/Forward2Reverse.qvtr"));
 		try {

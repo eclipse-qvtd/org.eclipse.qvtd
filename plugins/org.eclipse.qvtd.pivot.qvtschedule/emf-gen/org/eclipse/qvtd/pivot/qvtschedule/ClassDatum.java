@@ -12,7 +12,7 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 import org.eclipse.ocl.pivot.CompleteClass;
 
 /**
@@ -84,7 +84,7 @@ public interface ClassDatum extends AbstractDatum {
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!ownedPropertyDatums'"
 	 * @generated
 	 */
-	EList<PropertyDatum> getOwnedPropertyDatums();
+	List<PropertyDatum> getOwnedPropertyDatums();
 
 	/**
 	 * Returns the value of the '<em><b>Owning Schedule Model</b></em>' container reference.
@@ -160,6 +160,6 @@ public interface ClassDatum extends AbstractDatum {
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ClassDatum!superClassDatums'"
 	 * @generated
 	 */
-	EList<ClassDatum> getSuperClassDatums();
+	List<ClassDatum> getSuperClassDatums();
 
 } // ClassDatum

@@ -12,7 +12,7 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 import org.eclipse.ocl.pivot.Property;
 
 /**
@@ -139,7 +139,7 @@ public interface PropertyDatum extends AbstractDatum {
 	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!PropertyDatum!superPropertyDatums'"
 	 * @generated
 	 */
-	EList<PropertyDatum> getSuperPropertyDatums();
+	List<PropertyDatum> getSuperPropertyDatums();
 
 	/**
 	 * Returns the value of the '<em><b>Key</b></em>' attribute.

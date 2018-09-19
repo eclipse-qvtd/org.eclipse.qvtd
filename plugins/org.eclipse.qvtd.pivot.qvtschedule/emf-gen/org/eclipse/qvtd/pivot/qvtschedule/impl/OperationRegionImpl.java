@@ -16,6 +16,7 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import java.util.Collection;
 
+import java.util.List;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -114,7 +115,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	 * @generated
 	 */
 	@Override
-	public EList<Node> getDependencyNodes() {
+	public List<Node> getDependencyNodes() {
 		if (dependencyNodes == null) {
 			dependencyNodes = new EObjectResolvingEList<Node>(Node.class, this, QVTschedulePackage.OPERATION_REGION__DEPENDENCY_NODES);
 		}
@@ -127,7 +128,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	 * @generated
 	 */
 	@Override
-	public EList<Node> getHeadNodes() {
+	public List<Node> getHeadNodes() {
 		if (headNodes == null) {
 			headNodes = new EObjectResolvingEList<Node>(Node.class, this, QVTschedulePackage.OPERATION_REGION__HEAD_NODES);
 		}

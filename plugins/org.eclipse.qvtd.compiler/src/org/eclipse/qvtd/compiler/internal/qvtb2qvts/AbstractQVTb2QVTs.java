@@ -16,6 +16,7 @@ import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 
@@ -43,6 +44,14 @@ public abstract class AbstractQVTb2QVTs extends PivotHelper
 		super(scheduleManager.getEnvironmentFactory());
 		this.scheduleManager = scheduleManager;
 		this.problemHandler = problemHandler;
+	}
+
+	public void addPartitionError(@NonNull Partition partition, @NonNull String messageTemplate, Object... bindings) {
+		addProblem(CompilerUtil.createPartitionError(partition, messageTemplate, bindings));
+	}
+
+	public void addPartitionWarning(@NonNull Partition partition, @NonNull String messageTemplate, Object... bindings) {
+		addProblem(CompilerUtil.createPartitionWarning(partition, messageTemplate, bindings));
 	}
 
 	public void addProblem(@NonNull CompilerProblem problem) {

@@ -352,8 +352,8 @@ public class CheckedConditionAnalysis
 		//
 		Set<@NonNull Property> allCheckedProperties = new HashSet<>();
 		DomainUsage anyUsage = scheduleManager.getDomainUsageAnalysis().getAnyUsage();
-		for (@NonNull TypedModel qvtmTypedModel : anyUsage.getTypedModels()) {
-			Iterable<@NonNull NavigableEdge> checkedEdges = regionAnalysis.getCheckedEdges(qvtmTypedModel);
+		for (@NonNull TypedModel typedModel : anyUsage.getTypedModels()) {
+			Iterable<@NonNull NavigableEdge> checkedEdges = regionAnalysis.getCheckedEdges(typedModel);
 			if (checkedEdges != null) {
 				for (@NonNull NavigableEdge checkedEdge : checkedEdges) {
 					Property asProperty = QVTscheduleUtil.getProperty(checkedEdge);

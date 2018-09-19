@@ -14,7 +14,6 @@ package org.eclipse.qvtd.pivot.qvtschedule;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
@@ -117,7 +116,7 @@ public interface DatumConnection<CE extends ConnectionEnd> extends Connection, G
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!DatumConnection{CE}!sourceEnds'"
 	 * @generated
 	 */
-	EList<CE> getSourceEnds();
+	List<CE> getSourceEnds();
 	boolean addIndex(int index);
 	@NonNull List<@NonNull Integer> getIndexes();
 	@NonNull ConnectionEnd getSource(@NonNull Region sourceRegion);

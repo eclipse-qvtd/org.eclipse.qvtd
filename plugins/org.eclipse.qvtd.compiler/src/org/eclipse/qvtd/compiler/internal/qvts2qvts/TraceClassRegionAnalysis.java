@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,8 +24,10 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerChainException;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -37,9 +39,10 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractDispatch;
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class.
  */
-public abstract class TraceClassAnalysis<@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> extends TraceElementAnalysis<@NonNull RA>
+public class TraceClassRegionAnalysis extends TraceElementRegionAnalysis implements CompilerUtil.TraceClass<@NonNull RegionAnalysis, @NonNull TraceClassRegionAnalysis, @NonNull TracePropertyRegionAnalysis>
 {
 	protected final @NonNull ScheduleManager scheduleManager;
+	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 	protected final @NonNull ClassDatum traceClassDatum;
 
 	/**
@@ -49,26 +52,28 @@ public abstract class TraceClassAnalysis<@NonNull RA extends PartialRegionAnalys
 	 */
 	private @Nullable List<@NonNull Property> discriminatingProperties = null;
 
-	private @NonNull List<@NonNull TraceClassAnalysis<@NonNull RA>> subTraceClassAnalyses = new ArrayList<>();
-	private @NonNull List<@NonNull TraceClassAnalysis<@NonNull RA>> superTraceClassAnalyses = new ArrayList<>();
+	private @NonNull List<@NonNull TraceClassRegionAnalysis> subTraceClassAnalyses = new ArrayList<>();
+	private @NonNull List<@NonNull TraceClassRegionAnalysis> superTraceClassAnalyses = new ArrayList<>();
 
 	private @Nullable Boolean isDispatcher = null;
+	private @Nullable Boolean isCyclic = null;
 
-	public TraceClassAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull ClassDatum traceClassDatum) {
-		this.scheduleManager = scheduleManager;
+	public TraceClassRegionAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull ClassDatum traceClassDatum) {
+		this.scheduleManager = transformationAnalysis.getScheduleManager();
+		this.transformationAnalysis = transformationAnalysis;
 		this.traceClassDatum = traceClassDatum;
 		subTraceClassAnalyses.add(this);
 		superTraceClassAnalyses.add(this);
 		//	assert traceClassDatum.getReferredTypedModel() == scheduleManager.getTraceTypedModel();
 	}
 
-	public void addSubTraceClassAnalysis(@NonNull TraceClassAnalysis<@NonNull RA> traceClassAnalysis) {
+	public void addSubTraceClassAnalysis(@NonNull TraceClassRegionAnalysis traceClassAnalysis) {
 		if (!subTraceClassAnalyses.contains(traceClassAnalysis)) {
 			subTraceClassAnalyses.add(traceClassAnalysis);
 		}
 	}
 
-	public void addSuperTraceClassAnalysis(@NonNull TraceClassAnalysis<@NonNull RA> traceClassAnalysis) {
+	public void addSuperTraceClassAnalysis(@NonNull TraceClassRegionAnalysis traceClassAnalysis) {
 		if (!superTraceClassAnalyses.contains(traceClassAnalysis)) {
 			superTraceClassAnalyses.add(traceClassAnalysis);
 		}
@@ -89,9 +94,9 @@ public abstract class TraceClassAnalysis<@NonNull RA extends PartialRegionAnalys
 		//
 		//	Identify the properties available for discrimination.
 		//
-		Map<@NonNull RA, @NonNull Map<@NonNull Property, @NonNull NavigableEdge>> partitioner2property2edge = new HashMap<>();
+		Map<@NonNull RegionAnalysis, @NonNull Map<@NonNull Property, @NonNull NavigableEdge>> partitioner2property2edge = new HashMap<>();
 		Set<@NonNull Property> commonProperties = null;
-		for (@NonNull RA producer : producers) {
+		for (@NonNull RegionAnalysis producer : producers) {
 			Map<@NonNull Property, @NonNull NavigableEdge> property2edge = new HashMap<>();
 			partitioner2property2edge.put(producer, property2edge);
 			for (@NonNull Node traceNode : producer.getTraceNodes()) {
@@ -119,9 +124,9 @@ public abstract class TraceClassAnalysis<@NonNull RA extends PartialRegionAnalys
 		//
 		List<@NonNull Property> sortedProperties = new ArrayList<@NonNull Property>(commonProperties);
 		Collections.sort(sortedProperties, NameUtil.NAMEABLE_COMPARATOR);
-		Map<@NonNull Property, @Nullable Map<@Nullable CompleteClass, @NonNull List<@NonNull RA>>> property2completeClass2regionAnalyses  = new HashMap<>();
+		Map<@NonNull Property, @Nullable Map<@Nullable CompleteClass, @NonNull List<@NonNull RegionAnalysis>>> property2completeClass2regionAnalyses  = new HashMap<>();
 		for (@NonNull Property property : sortedProperties) {
-			for (@NonNull RA producer : producers) {
+			for (@NonNull RegionAnalysis producer : producers) {
 				Map<@NonNull Property, @NonNull NavigableEdge> property2edge = partitioner2property2edge.get(producer);
 				assert property2edge != null;
 				NavigableEdge edge = property2edge.get(property);
@@ -129,7 +134,7 @@ public abstract class TraceClassAnalysis<@NonNull RA extends PartialRegionAnalys
 					property2completeClass2regionAnalyses.put(property, null);
 				}
 				else {
-					Map<@Nullable CompleteClass, @NonNull List<@NonNull RA>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
+					Map<@Nullable CompleteClass, @NonNull List<@NonNull RegionAnalysis>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
 					if (completeClass2regionAnalyses == null) {
 						completeClass2regionAnalyses = new HashMap<>();
 						property2completeClass2regionAnalyses.put(property, completeClass2regionAnalyses);
@@ -142,7 +147,7 @@ public abstract class TraceClassAnalysis<@NonNull RA extends PartialRegionAnalys
 					else {
 						completeClass = targetNode.getCompleteClass(); // FIXME use/ignore inheritance
 					}
-					List<@NonNull RA> regionAnalyses = completeClass2regionAnalyses.get(completeClass);
+					List<@NonNull RegionAnalysis> regionAnalyses = completeClass2regionAnalyses.get(completeClass);
 					if (regionAnalyses == null) {
 						regionAnalyses = new ArrayList<>();
 						completeClass2regionAnalyses.put(completeClass, regionAnalyses);
@@ -178,7 +183,7 @@ public abstract class TraceClassAnalysis<@NonNull RA extends PartialRegionAnalys
 		int bestSize = 0;
 		Property bestProperty = null;
 		for (@NonNull Property property : property2completeClass2regionAnalyses.keySet()) {
-			Map<@Nullable CompleteClass, @NonNull List<@NonNull RA>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
+			Map<@Nullable CompleteClass, @NonNull List<@NonNull RegionAnalysis>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
 			if (completeClass2regionAnalyses != null) {
 				int size = completeClass2regionAnalyses.size();
 				if (size > bestSize) {
@@ -192,13 +197,13 @@ public abstract class TraceClassAnalysis<@NonNull RA extends PartialRegionAnalys
 			s.append("property->completeClass->regionAnalyses");
 			for (@NonNull Property property : property2completeClass2regionAnalyses.keySet()) {
 				s.append("\n\t" + property);
-				Map<@Nullable CompleteClass, @NonNull List<@NonNull RA>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
+				Map<@Nullable CompleteClass, @NonNull List<@NonNull RegionAnalysis>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
 				if (completeClass2regionAnalyses != null) {
 					for (@Nullable CompleteClass completeClass : completeClass2regionAnalyses.keySet()) {
 						s.append("\n\t\t" + completeClass);
-						List<@NonNull RA> regionAnalyses = completeClass2regionAnalyses.get(completeClass);
+						List<@NonNull RegionAnalysis> regionAnalyses = completeClass2regionAnalyses.get(completeClass);
 						assert regionAnalyses != null;
-						for (@NonNull RA regionAnalysis : regionAnalyses) {
+						for (@NonNull RegionAnalysis regionAnalysis : regionAnalyses) {
 							s.append("\n\t\t\t" + regionAnalysis);
 						}
 					}
@@ -233,16 +238,34 @@ public abstract class TraceClassAnalysis<@NonNull RA extends PartialRegionAnalys
 		return scheduleManager;
 	}
 
-	public @NonNull Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> getSubTraceClassAnalyses() {
+	@Override
+	public @NonNull Iterable<@NonNull TraceClassRegionAnalysis> getSubTraceClassAnalyses() {
 		return subTraceClassAnalyses;
 	}
 
-	public @NonNull Iterable<@NonNull TraceClassAnalysis<@NonNull RA>> getSuperTraceClassAnalyses() {
+	public @NonNull Iterable<@NonNull TraceClassRegionAnalysis> getSuperTraceClassAnalyses() {
 		return superTraceClassAnalyses;
 	}
 
 	public @NonNull CompleteClass getTraceClass() {
 		return QVTscheduleUtil.getCompleteClass(traceClassDatum);
+	}
+
+	/**
+	 * Return true if this TraceClassAnalyis participates in a production/consumption cycle of either the trace class or its trace properties.
+	 */
+	public boolean isCyclic() {
+		Boolean isCyclic2 = isCyclic;
+		if (isCyclic2 == null) {
+			for (@NonNull TraceClassRegionAnalysis subTraceClassAnalysis : getSubTraceClassAnalyses()) {
+				if (transformationAnalysis.isCyclic(subTraceClassAnalysis)) {
+					isCyclic2 = isCyclic = true;
+					return isCyclic2;
+				}
+			}
+			isCyclic2 = isCyclic = false;
+		}
+		return isCyclic2;
 	}
 
 	/**

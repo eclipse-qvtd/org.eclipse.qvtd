@@ -17,7 +17,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -49,10 +49,10 @@ public class LegacyContentsAnalysis<R extends Region>
 
 	public @NonNull Iterable<@NonNull R> getConsumingRegions(@NonNull ClassDatum classDatum) {
 		Iterable<@NonNull R> legacyConsumingRegions = contentsAnalysis.getConsumingRegions(classDatum);
-		TraceClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
+		TraceClassRegionAnalysis traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
 		Set<@NonNull R> consumingRegions = new HashSet<>();
 		if (traceClassAnalysis != null) {
-			for (@NonNull TraceClassAnalysis<@NonNull RegionAnalysis> subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
+			for (@NonNull TraceClassRegionAnalysis subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
 				for (@NonNull RegionAnalysis regionAnalysis : subTraceClassAnalysis.getConsumers()) {
 					consumingRegions.add((R) regionAnalysis.getRegion());
 				}
@@ -63,7 +63,7 @@ public class LegacyContentsAnalysis<R extends Region>
 				legacyConsumingRegions = contentsAnalysis.getConsumingRegions(classDatum);
 				traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
 				if (traceClassAnalysis != null) {
-					for (@NonNull TraceClassAnalysis<@NonNull RegionAnalysis> subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
+					for (@NonNull TraceClassRegionAnalysis subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
 						for (@NonNull RegionAnalysis regionAnalysis : subTraceClassAnalysis.getConsumers()) {
 							consumingRegions.add((R) regionAnalysis.getRegion());
 						}
@@ -79,10 +79,10 @@ public class LegacyContentsAnalysis<R extends Region>
 
 	public @NonNull Iterable<@NonNull R> getProducingRegions(@NonNull ClassDatum classDatum) {
 		Iterable<@NonNull R> legacyProducingRegions = contentsAnalysis.getProducingRegions(classDatum);
-		TraceClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
+		TraceClassRegionAnalysis traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
 		Set<@NonNull R> producingRegions = new HashSet<>();
 		if (traceClassAnalysis != null) {
-			for (@NonNull TraceClassAnalysis<@NonNull RegionAnalysis> subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
+			for (@NonNull TraceClassRegionAnalysis subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
 				for (@NonNull RegionAnalysis regionAnalysis : subTraceClassAnalysis.getProducers()) {
 					producingRegions.add((R) regionAnalysis.getRegion());
 				}
@@ -92,7 +92,7 @@ public class LegacyContentsAnalysis<R extends Region>
 			legacyProducingRegions = contentsAnalysis.getProducingRegions(classDatum);
 			traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
 			if (traceClassAnalysis != null) {
-				for (@NonNull TraceClassAnalysis<@NonNull RegionAnalysis> subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
+				for (@NonNull TraceClassRegionAnalysis subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
 					for (@NonNull RegionAnalysis regionAnalysis : subTraceClassAnalysis.getProducers()) {
 						producingRegions.add((R) regionAnalysis.getRegion());
 					}
@@ -119,10 +119,10 @@ public class LegacyContentsAnalysis<R extends Region>
 
 	public @Nullable Iterable<@NonNull Node> getNewNodes(@NonNull ClassDatum classDatum) {
 		Iterable<@NonNull Node> legacyNewNodes = contentsAnalysis.getNewNodes(classDatum);
-		TraceClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
+		TraceClassRegionAnalysis traceClassAnalysis = transformationAnalysis.basicGetTraceClassAnalysis(classDatum);
 		Set<@NonNull R> producingRegions = new HashSet<>();
 		if (traceClassAnalysis != null) {
-			for (@NonNull TraceClassAnalysis<@NonNull RegionAnalysis> subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
+			for (@NonNull TraceClassRegionAnalysis subTraceClassAnalysis : traceClassAnalysis.getSubTraceClassAnalyses()) {
 				for (@NonNull RegionAnalysis regionAnalysis : subTraceClassAnalysis.getProducers()) {
 					producingRegions.add((R) regionAnalysis.getRegion());
 				}

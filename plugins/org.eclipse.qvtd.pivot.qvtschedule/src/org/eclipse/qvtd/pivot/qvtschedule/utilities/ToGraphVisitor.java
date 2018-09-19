@@ -166,7 +166,7 @@ public class ToGraphVisitor extends AbstractToGraphVisitor
 		if (loadingRegion != null) {
 			loadingRegion.accept(this);
 		}
-		for (@NonNull MappingRegion region : QVTscheduleUtil.getMappingRegions(scheduledRegion)) {
+		for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(scheduledRegion)) {
 			region.accept(this);
 		}
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(scheduledRegion)) {

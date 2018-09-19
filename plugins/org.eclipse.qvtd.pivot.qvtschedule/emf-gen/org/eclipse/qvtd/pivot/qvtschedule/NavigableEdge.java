@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 
@@ -82,7 +82,7 @@ public interface NavigableEdge extends Edge, ConnectionEnd
 	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NavigableEdge!outgoingConnections'"
 	 * @generated
 	 */
-	EList<EdgeConnection> getOutgoingConnections();
+	List<EdgeConnection> getOutgoingConnections();
 	/**
 	 * Returns the value of the '<em><b>Secondary</b></em>' attribute.
 	 * The default value is <code>"false"</code>.

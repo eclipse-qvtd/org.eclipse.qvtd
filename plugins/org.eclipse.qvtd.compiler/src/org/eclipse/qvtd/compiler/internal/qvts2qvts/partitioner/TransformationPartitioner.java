@@ -26,14 +26,11 @@ import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerConstants;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.GenericRegionsAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.TransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -43,7 +40,7 @@ import com.google.common.collect.Iterables;
  * The TransformationPartitioner supervises a MappingPartitioner for each mapping region. It provides
  * the global analysis to support the local partitioning.
  */
-public class TransformationPartitioner extends QVTbaseHelper implements Nameable// RegionsAnalysis<@NonNull Partition>
+public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 {
 	public static final @NonNull TracingOption CYCLES = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/partition/cycles");
 	public static final @NonNull TracingOption DISCRIMINATION = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/partition/discrimination");
@@ -63,7 +60,7 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 	protected final @NonNull ProblemHandler problemHandler;
 	protected final @NonNull Iterable<@NonNull ? extends Region> activeRegions;
 	private final @NonNull List<@NonNull Partition> partitions = new ArrayList<>();
-	private final @NonNull TransformationAnalysis<@NonNull Partition> partitionedRegionsAnalysis;
+	private final @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis;
 
 	/**
 	 * The partitioner for each region.
@@ -94,23 +91,7 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 	public TransformationPartitioner(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) {
 		super(transformationAnalysis.getScheduleManager().getEnvironmentFactory());
 		this.scheduleManager = transformationAnalysis.getScheduleManager();
-		this.partitionedRegionsAnalysis = new GenericRegionsAnalysis<@NonNull Partition>(scheduleManager)
-		{
-			@Override
-			public String getName() {
-				return TransformationPartitioner.this.getName();
-			}
-
-			@Override
-			protected @NonNull TraceClassPartitionAnalysis createTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
-				return new TraceClassPartitionAnalysis(transformationAnalysis.getTraceClassAnalysis(traceClassDatum));
-			}
-
-			@Override
-			protected @NonNull TracePropertyPartitionAnalysis createTracePropertyAnalysis(@NonNull TraceClassAnalysis<@NonNull Partition> traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
-				return new TracePropertyPartitionAnalysis(TransformationPartitioner.this, traceClassAnalysis, tracePropertyDatum);
-			}
-		};
+		this.partitionedTransformationAnalysis = new PartitionedTransformationAnalysis(this);
 		this.transformationAnalysis = transformationAnalysis;
 		this.problemHandler = problemHandler;
 		this.activeRegions = activeRegions;
@@ -156,8 +137,8 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 	//		return partitions;
 	//	}
 
-	public @NonNull TransformationAnalysis<@NonNull Partition> getPartitionedRegionsAnalysis() {
-		return partitionedRegionsAnalysis;
+	public @NonNull PartitionedTransformationAnalysis getPartitionedTransformationAnalysis() {
+		return partitionedTransformationAnalysis;
 	}
 
 	public @NonNull ScheduleManager getScheduleManager() {
@@ -261,7 +242,7 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 		for (@NonNull Partition partition : partitions) {
 			partition.analyzePartition();
 		}
-		partitionedRegionsAnalysis.computeTraceClassInheritance();
+		partitionedTransformationAnalysis.computeTraceClassInheritance();
 		//		this.fallibilityAnalysis = computeFallibilityAnalysis();
 		//	Iterable<@NonNull Partition> leafPartitions = getPartialRegionAnalyses();
 		this.cyclicPartitionsAnalysis = new CyclicPartitionsAnalysis(this, partitions);

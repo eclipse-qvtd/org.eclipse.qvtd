@@ -28,7 +28,7 @@ interface InternallyAcyclicPartition
 
 	//	@NonNull List<@NonNull Collection<@NonNull Region>> getRegionSchedule();
 
-	@NonNull Iterable<@NonNull TraceClassAnalysis<@NonNull Partition>> getTraceClassAnalyses();
+	@NonNull Iterable<@NonNull TraceClassPartitionAnalysis> getTraceClassAnalyses();
 
-	@NonNull Iterable<@NonNull TracePropertyAnalysis<@NonNull Partition>> getTracePropertyAnalyses();
+	@NonNull Iterable<@NonNull TracePropertyPartitionAnalysis> getTracePropertyAnalyses();
 }

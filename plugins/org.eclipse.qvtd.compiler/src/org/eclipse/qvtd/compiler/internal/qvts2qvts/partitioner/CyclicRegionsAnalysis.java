@@ -16,6 +16,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
 import com.google.common.collect.Iterables;
@@ -35,7 +36,7 @@ public class CyclicRegionsAnalysis
 	/**
 	 * Mapping to the cycle analysis that identifies the cycle involving each trace class analysis.
 	 */
-	private final @NonNull Set<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> cyclicTraceClassAnalyses = new HashSet<>();
+	private final @NonNull Set<@NonNull TraceClassRegionAnalysis> cyclicTraceClassAnalyses = new HashSet<>();
 
 	public CyclicRegionsAnalysis(@NonNull Iterable<@NonNull RegionAnalysis> regionAnalyses) {
 		analyze(regionAnalyses);
@@ -57,14 +58,14 @@ public class CyclicRegionsAnalysis
 		if (cyclicRegionAnalyses.isEmpty()) {
 			return;
 		}
-		Set<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> consumedTraceClassAnalyses = new HashSet<>();
-		Set<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> superProducedTraceClassAnalyses = new HashSet<>();
+		Set<@NonNull TraceClassRegionAnalysis> consumedTraceClassAnalyses = new HashSet<>();
+		Set<@NonNull TraceClassRegionAnalysis> superProducedTraceClassAnalyses = new HashSet<>();
 		for (@NonNull RegionAnalysis cyclicRegionAnalysis : cyclicRegionAnalyses) {
-			Iterable<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> consumedTraceClassAnalyses2 = cyclicRegionAnalysis.getConsumedTraceClassAnalyses();
+			Iterable<@NonNull TraceClassRegionAnalysis> consumedTraceClassAnalyses2 = cyclicRegionAnalysis.getConsumedTraceClassAnalyses();
 			if (consumedTraceClassAnalyses2 != null) {
 				Iterables.addAll(consumedTraceClassAnalyses, consumedTraceClassAnalyses2);
 			}
-			Iterable<@NonNull TraceClassAnalysis<@NonNull RegionAnalysis>> superProducedTraceClassAnalyses2 = cyclicRegionAnalysis.getSuperProducedTraceClassAnalyses();
+			Iterable<@NonNull TraceClassRegionAnalysis> superProducedTraceClassAnalyses2 = cyclicRegionAnalysis.getSuperProducedTraceClassAnalyses();
 			if (superProducedTraceClassAnalyses2 != null) {
 				Iterables.addAll(superProducedTraceClassAnalyses, superProducedTraceClassAnalyses2);
 			}
@@ -77,7 +78,7 @@ public class CyclicRegionsAnalysis
 		return cyclicRegionAnalyses.contains(regionAnalysis);
 	}
 
-	public boolean isCyclic(@NonNull TraceClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis) {		// FIXME this might be removeable
+	public boolean isCyclic(@NonNull TraceClassRegionAnalysis traceClassAnalysis) {		// FIXME this might be removeable
 		assert cyclicTraceClassAnalyses != null;
 		return cyclicTraceClassAnalyses.contains(traceClassAnalysis);
 	}

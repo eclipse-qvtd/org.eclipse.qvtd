@@ -84,7 +84,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	private final @NonNull LoadingRegionAnalysis loadingRegionAnalysis;
 
 	protected final @NonNull CompleteModel completeModel;
-	private final @NonNull Map<@NonNull Region, org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis> region2regionAnalysis = new HashMap<>();
+	private final @NonNull Map<@NonNull Region, @NonNull RegionAnalysis> region2regionAnalysis = new HashMap<>();
 
 
 	/**
@@ -108,7 +108,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	/**
 	 * Analysis of the contents of the partitioned mappings, null prior to partitioning.
 	 */
-	private @Nullable LegacyContentsAnalysis<@NonNull MappingRegion> partitionedContentsAnalysis;
+	private @Nullable LegacyContentsAnalysis<@NonNull Region> partitionedContentsAnalysis;
 
 	public QVTs2QVTs(@NonNull ProblemHandler problemHandler, @NonNull ScheduleManager qvtm2qvts, @NonNull String rootName) {
 		super(qvtm2qvts.getEnvironmentFactory());
@@ -908,8 +908,8 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//
 		//	Identify the content of each region.
 		//
-		LegacyContentsAnalysis<@NonNull MappingRegion> contentsAnalysis2 = this.partitionedContentsAnalysis = new LegacyContentsAnalysis<@NonNull MappingRegion>(scheduleManager);
-		for (@NonNull MappingRegion region : QVTscheduleUtil.getMappingRegions(rootScheduledRegion)) {
+		LegacyContentsAnalysis<@NonNull Region> contentsAnalysis2 = this.partitionedContentsAnalysis = new LegacyContentsAnalysis<@NonNull Region>(scheduleManager);
+		for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(rootScheduledRegion)) {
 			contentsAnalysis2.addRegion(region);
 		}
 		if (QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.isActive()) {
@@ -1029,7 +1029,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 
 	public @Nullable Iterable<@NonNull Node> getIntroducingOrNewNodes(@NonNull Node headNode) {
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(headNode);
-		LegacyContentsAnalysis<@NonNull MappingRegion> partitionedContentsAnalysis = getPartitionedContentsAnalysis();
+		LegacyContentsAnalysis<@NonNull Region> partitionedContentsAnalysis = getPartitionedContentsAnalysis();
 		if (!scheduleManager.getDomainUsage(classDatum).isInput()) {
 			return partitionedContentsAnalysis.getNewNodes(classDatum);	// FIXME also dependsOn ??
 		}
@@ -1077,7 +1077,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		return connection;
 	}
 
-	public @NonNull LegacyContentsAnalysis<@NonNull MappingRegion> getPartitionedContentsAnalysis() {
+	public @NonNull LegacyContentsAnalysis<@NonNull Region> getPartitionedContentsAnalysis() {
 		return ClassUtil.nonNullState(partitionedContentsAnalysis);
 	}
 
@@ -1124,13 +1124,13 @@ public class QVTs2QVTs extends QVTimperativeHelper
 				if (partition instanceof CyclicPartition) {
 					getRegionSchedule(((CyclicPartition)partition));
 					for (@NonNull MappingRegion mappingRegion : ((CyclicPartition)partition).createMicroMappingRegions()) {
-						scheduledRegion.getMappingRegions().add(mappingRegion);
+						scheduledRegion.getActiveRegions().add(mappingRegion);
 						concurrentRegions.add(mappingRegion);
 					}
 				}
 				else {
 					MappingRegion mappingRegion = partition.createMicroMappingRegion();
-					scheduledRegion.getMappingRegions().add(mappingRegion);
+					scheduledRegion.getActiveRegions().add(mappingRegion);
 					concurrentRegions.add(mappingRegion);
 				}
 			}
@@ -1290,7 +1290,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		for (@NonNull RootPartition rootPartition : rootPartitions) {
 			//	List<@NonNull Iterable<@NonNull Partition>> partitionSchedule = rootPartition.getPartitionSchedule();
 			ScheduledRegion scheduledRegion = rootPartition.getScheduledRegion();
-			Iterable<@NonNull MappingRegion> mappingRegions = QVTscheduleUtil.getMappingRegions(scheduledRegion);
+			Iterable<@NonNull Region> mappingRegions = QVTscheduleUtil.getActiveRegions(scheduledRegion);
 			assert Iterables.isEmpty(mappingRegions);
 			scheduledRegion.setOwnedLoadingRegion(loadingRegionAnalysis.getRegion());
 			@SuppressWarnings("unused")

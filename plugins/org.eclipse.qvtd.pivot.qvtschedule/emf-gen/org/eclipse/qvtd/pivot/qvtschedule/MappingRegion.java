@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 
 /**
  * <!-- begin-model-doc -->
@@ -40,7 +40,7 @@ public interface MappingRegion extends Region
 	 * @generated
 	 */
 	@Override
-	EList<Node> getHeadNodes();
+	List<Node> getHeadNodes();
 
 	/**
 	 * Returns the value of the '<em><b>Owning Schedule Model</b></em>' container reference.
@@ -69,33 +69,4 @@ public interface MappingRegion extends Region
 	 * @generated
 	 */
 	void setOwningScheduleModel(ScheduleModel value);
-
-	/**
-	 * Returns the value of the '<em><b>Scheduled Region</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getMappingRegions <em>Mapping Regions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Scheduled Region</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Scheduled Region</em>' reference.
-	 * @see #setScheduledRegion(ScheduledRegion)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMappingRegion_ScheduledRegion()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getMappingRegions
-	 * @model opposite="mappingRegions"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!MappingRegion!scheduledRegion'"
-	 * @generated
-	 */
-	ScheduledRegion getScheduledRegion();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingRegion#getScheduledRegion <em>Scheduled Region</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Scheduled Region</em>' reference.
-	 * @see #getScheduledRegion()
-	 * @generated
-	 */
-	void setScheduledRegion(ScheduledRegion value);
 }

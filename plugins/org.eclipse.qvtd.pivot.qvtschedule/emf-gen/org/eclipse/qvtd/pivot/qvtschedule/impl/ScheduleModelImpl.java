@@ -15,6 +15,7 @@
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import java.util.Collection;
+import java.util.List;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -113,7 +114,7 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	 * @generated
 	 */
 	@Override
-	public EList<ClassDatum> getOwnedClassDatums() {
+	public List<ClassDatum> getOwnedClassDatums() {
 		if (ownedClassDatums == null) {
 			ownedClassDatums = new EObjectContainmentWithInverseEList<ClassDatum>(ClassDatum.class, this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_CLASS_DATUMS, QVTschedulePackage.CLASS_DATUM__OWNING_SCHEDULE_MODEL);
 		}
@@ -126,7 +127,7 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	 * @generated
 	 */
 	@Override
-	public EList<OperationRegion> getOwnedOperationRegions() {
+	public List<OperationRegion> getOwnedOperationRegions() {
 		if (ownedOperationRegions == null) {
 			ownedOperationRegions = new EObjectContainmentWithInverseEList<OperationRegion>(OperationRegion.class, this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_OPERATION_REGIONS, QVTschedulePackage.OPERATION_REGION__OWNING_SCHEDULE_MODEL);
 		}
@@ -139,7 +140,7 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	 * @generated
 	 */
 	@Override
-	public EList<ScheduledRegion> getOwnedScheduledRegions() {
+	public List<ScheduledRegion> getOwnedScheduledRegions() {
 		if (ownedScheduledRegions == null) {
 			ownedScheduledRegions = new EObjectContainmentWithInverseEList<ScheduledRegion>(ScheduledRegion.class, this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_SCHEDULED_REGIONS, QVTschedulePackage.SCHEDULED_REGION__OWNING_SCHEDULE_MODEL);
 		}
@@ -152,7 +153,7 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	 * @generated
 	 */
 	@Override
-	public EList<MappingRegion> getOwnedMappingRegions() {
+	public List<MappingRegion> getOwnedMappingRegions() {
 		if (ownedMappingRegions == null) {
 			ownedMappingRegions = new EObjectContainmentWithInverseEList<MappingRegion>(MappingRegion.class, this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_MAPPING_REGIONS, QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL);
 		}

@@ -25,7 +25,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleHeadAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -40,7 +40,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
-abstract class AbstractPartialPartition extends AbstractPartition
+abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 {
 	protected class PartitioningWithSuccessVisitor extends PartitioningVisitor
 	{
@@ -354,8 +354,9 @@ abstract class AbstractPartialPartition extends AbstractPartition
 	}
 
 	@Override
-	protected @NonNull Iterable<@NonNull Node> getHeadNodes() {
+	public @NonNull Iterable<@NonNull Node> getHeadNodes() {
 		return partitioner.getTraceNodes();
+		//	return getTraceNodes();
 	}
 
 	@Override
@@ -468,7 +469,7 @@ abstract class AbstractPartialPartition extends AbstractPartition
 	}
 
 	@Override
-	protected boolean isPredicated(@NonNull Edge edge) {
+	public boolean isPredicated(@NonNull Edge edge) {
 		Role role = getRole(edge);
 		return role != null ? role.isPredicated() : false; //edge.isPredicated();
 	}
@@ -516,7 +517,7 @@ abstract class AbstractPartialPartition extends AbstractPartition
 
 	protected void resolveDisambiguations() {
 		for (@NonNull Node traceNode : partitioner.getTraceNodes()) {
-			TraceClassAnalysis<@NonNull RegionAnalysis> traceClassAnalysis = partitioner.getTraceClassAnalysis(traceNode);
+			TraceClassRegionAnalysis traceClassAnalysis = partitioner.getTraceClassAnalysis(traceNode);
 			Iterable<@NonNull Property> discriminatingProperties = traceClassAnalysis.getDiscriminatingProperties();
 			if (discriminatingProperties != null) {
 				for (@NonNull Property property : discriminatingProperties) {

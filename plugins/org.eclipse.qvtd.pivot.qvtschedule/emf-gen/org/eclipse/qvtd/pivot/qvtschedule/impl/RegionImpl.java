@@ -71,6 +71,7 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl#getOwnedNodes <em>Owned Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl#getOwnedEdges <em>Owned Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl#getOwnedClusters <em>Owned Clusters</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl#getScheduledRegion <em>Scheduled Region</em>}</li>
  * </ul>
  *
  * @generated
@@ -123,6 +124,15 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	 */
 	protected EList<Cluster> ownedClusters;
 	/**
+	 * The cached value of the '{@link #getScheduledRegion() <em>Scheduled Region</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getScheduledRegion()
+	 * @generated
+	 * @ordered
+	 */
+	protected ScheduledRegion scheduledRegion;
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -160,7 +170,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	 * @generated
 	 */
 	@Override
-	public EList<Edge> getOwnedEdges() {
+	public List<Edge> getOwnedEdges() {
 		if (ownedEdges == null) {
 			ownedEdges = new EObjectContainmentWithInverseEList<Edge>(Edge.class, this, QVTschedulePackage.REGION__OWNED_EDGES, QVTschedulePackage.EDGE__OWNING_REGION);
 		}
@@ -173,7 +183,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	 * @generated
 	 */
 	@Override
-	public EList<Cluster> getOwnedClusters() {
+	public List<Cluster> getOwnedClusters() {
 		if (ownedClusters == null) {
 			ownedClusters = new EObjectContainmentWithInverseEList<Cluster>(Cluster.class, this, QVTschedulePackage.REGION__OWNED_CLUSTERS, QVTschedulePackage.CLUSTER__OWNING_REGION);
 		}
@@ -186,7 +196,69 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	 * @generated
 	 */
 	@Override
-	public EList<Node> getOwnedNodes() {
+	public ScheduledRegion getScheduledRegion() {
+		if (scheduledRegion != null && scheduledRegion.eIsProxy()) {
+			InternalEObject oldScheduledRegion = (InternalEObject)scheduledRegion;
+			scheduledRegion = (ScheduledRegion)eResolveProxy(oldScheduledRegion);
+			if (scheduledRegion != oldScheduledRegion) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.REGION__SCHEDULED_REGION, oldScheduledRegion, scheduledRegion));
+			}
+		}
+		return scheduledRegion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ScheduledRegion basicGetScheduledRegion() {
+		return scheduledRegion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetScheduledRegion(ScheduledRegion newScheduledRegion, NotificationChain msgs) {
+		ScheduledRegion oldScheduledRegion = scheduledRegion;
+		scheduledRegion = newScheduledRegion;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.REGION__SCHEDULED_REGION, oldScheduledRegion, newScheduledRegion);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setScheduledRegion(ScheduledRegion newScheduledRegion) {
+		if (newScheduledRegion != scheduledRegion) {
+			NotificationChain msgs = null;
+			if (scheduledRegion != null)
+				msgs = ((InternalEObject)scheduledRegion).eInverseRemove(this, QVTschedulePackage.SCHEDULED_REGION__ACTIVE_REGIONS, ScheduledRegion.class, msgs);
+			if (newScheduledRegion != null)
+				msgs = ((InternalEObject)newScheduledRegion).eInverseAdd(this, QVTschedulePackage.SCHEDULED_REGION__ACTIVE_REGIONS, ScheduledRegion.class, msgs);
+			msgs = basicSetScheduledRegion(newScheduledRegion, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.REGION__SCHEDULED_REGION, newScheduledRegion, newScheduledRegion));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public List<Node> getOwnedNodes() {
 		if (ownedNodes == null) {
 			ownedNodes = new EObjectContainmentWithInverseEList<Node>(Node.class, this, QVTschedulePackage.REGION__OWNED_NODES, QVTschedulePackage.NODE__OWNING_REGION);
 		}
@@ -209,6 +281,9 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 				return getOwnedEdges();
 			case QVTschedulePackage.REGION__OWNED_CLUSTERS:
 				return getOwnedClusters();
+			case QVTschedulePackage.REGION__SCHEDULED_REGION:
+				if (resolve) return getScheduledRegion();
+				return basicGetScheduledRegion();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -237,6 +312,9 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 				getOwnedClusters().clear();
 				getOwnedClusters().addAll((Collection<? extends Cluster>)newValue);
 				return;
+			case QVTschedulePackage.REGION__SCHEDULED_REGION:
+				setScheduledRegion((ScheduledRegion)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -261,6 +339,9 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 			case QVTschedulePackage.REGION__OWNED_CLUSTERS:
 				getOwnedClusters().clear();
 				return;
+			case QVTschedulePackage.REGION__SCHEDULED_REGION:
+				setScheduledRegion((ScheduledRegion)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -281,6 +362,8 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 				return ownedEdges != null && !ownedEdges.isEmpty();
 			case QVTschedulePackage.REGION__OWNED_CLUSTERS:
 				return ownedClusters != null && !ownedClusters.isEmpty();
+			case QVTschedulePackage.REGION__SCHEDULED_REGION:
+				return scheduledRegion != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -853,6 +936,10 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedEdges()).basicAdd(otherEnd, msgs);
 			case QVTschedulePackage.REGION__OWNED_CLUSTERS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedClusters()).basicAdd(otherEnd, msgs);
+			case QVTschedulePackage.REGION__SCHEDULED_REGION:
+				if (scheduledRegion != null)
+					msgs = ((InternalEObject)scheduledRegion).eInverseRemove(this, QVTschedulePackage.SCHEDULED_REGION__ACTIVE_REGIONS, ScheduledRegion.class, msgs);
+				return basicSetScheduledRegion((ScheduledRegion)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -871,6 +958,8 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 				return ((InternalEList<?>)getOwnedEdges()).basicRemove(otherEnd, msgs);
 			case QVTschedulePackage.REGION__OWNED_CLUSTERS:
 				return ((InternalEList<?>)getOwnedClusters()).basicRemove(otherEnd, msgs);
+			case QVTschedulePackage.REGION__SCHEDULED_REGION:
+				return basicSetScheduledRegion(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}

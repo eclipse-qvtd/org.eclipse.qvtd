@@ -10,9 +10,11 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -20,25 +22,20 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
 
-public interface Partition extends PartialRegionAnalysis<@NonNull Partition>, Graphable
+public interface Partition extends CompilerUtil.PartialRegion<@NonNull Partition, @NonNull TraceClassPartitionAnalysis, @NonNull TracePropertyPartitionAnalysis>, Graphable
 {
 	void analyzePartition();
-
 	@NonNull MappingRegion createMicroMappingRegion();
-
 	int getDepth();
-
 	@NonNull MappingRegion getMicroMappingRegion();
-
 	@NonNull Region getOriginalRegion();
-
 	@NonNull Iterable<@NonNull Edge> getPartialEdges();
-
 	@NonNull Iterable<@NonNull Node> getPartialNodes();
-
+	@Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getProducedTraceClassAnalyses();
+	@Nullable Iterable<@NonNull TracePropertyPartitionAnalysis> getProducedTracePropertyAnalyses();
 	@Nullable Role getRole(@NonNull Edge edge);
-
 	@Nullable Role getRole(@NonNull Node node);
-
+	@Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getSuperProducedTraceClassAnalyses();
+	@NonNull List<@NonNull Node> getTraceNodes();
 	void setDepth(int parallelScheduleDepth);
 }

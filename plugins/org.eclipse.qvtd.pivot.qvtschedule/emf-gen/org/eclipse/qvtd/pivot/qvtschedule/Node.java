@@ -14,9 +14,9 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule;
 
+import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
@@ -156,7 +156,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Node!incomingEdges'"
 	 * @generated
 	 */
-	EList<Edge> getIncomingEdges();
+	List<Edge> getIncomingEdges();
 
 	/**
 	 * Returns the value of the '<em><b>Node Role</b></em>' attribute.
@@ -202,7 +202,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Node!outgoingConnections'"
 	 * @generated
 	 */
-	EList<NodeConnection> getOutgoingConnections();
+	List<NodeConnection> getOutgoingConnections();
 
 	/**
 	 * Returns the value of the '<em><b>Outgoing Edges</b></em>' reference list.
@@ -221,7 +221,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Node!outgoingEdges'"
 	 * @generated
 	 */
-	EList<Edge> getOutgoingEdges();
+	List<Edge> getOutgoingEdges();
 
 	/**
 	 * Returns the value of the '<em><b>Owning Region</b></em>' container reference.

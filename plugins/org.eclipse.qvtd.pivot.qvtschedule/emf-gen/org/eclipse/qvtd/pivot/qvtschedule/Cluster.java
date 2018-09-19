@@ -14,8 +14,7 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule;
 
-import org.eclipse.emf.common.util.EList;
-
+import java.util.List;
 import org.eclipse.ocl.pivot.NamedElement;
 
 /**
@@ -90,7 +89,7 @@ public interface Cluster extends NamedElement, Symbolable {
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Cluster!memberNodes'"
 	 * @generated
 	 */
-	EList<Node> getMemberNodes();
+	List<Node> getMemberNodes();
 
 	/**
 	 * Returns the value of the '<em><b>Member Edges</b></em>' reference list.
@@ -109,7 +108,7 @@ public interface Cluster extends NamedElement, Symbolable {
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Cluster!memberEdges'"
 	 * @generated
 	 */
-	EList<Edge> getMemberEdges();
+	List<Edge> getMemberEdges();
 
 	/**
 	 * Returns the value of the '<em><b>Preceding Clusters</b></em>' reference list.
@@ -128,7 +127,7 @@ public interface Cluster extends NamedElement, Symbolable {
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Cluster!precedingClusters'"
 	 * @generated
 	 */
-	EList<Cluster> getPrecedingClusters();
+	List<Cluster> getPrecedingClusters();
 
 	/**
 	 * Returns the value of the '<em><b>Succeeding Clusters</b></em>' reference list.
@@ -147,7 +146,7 @@ public interface Cluster extends NamedElement, Symbolable {
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Cluster!succeedingClusters'"
 	 * @generated
 	 */
-	EList<Cluster> getSucceedingClusters();
+	List<Cluster> getSucceedingClusters();
 
 	/**
 	 * Returns the value of the '<em><b>Depth</b></em>' attribute.

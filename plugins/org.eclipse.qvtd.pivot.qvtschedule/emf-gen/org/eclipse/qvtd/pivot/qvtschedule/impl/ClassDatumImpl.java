@@ -14,6 +14,7 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import java.util.Collection;
 
+import java.util.List;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -157,7 +158,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * @generated
 	 */
 	@Override
-	public EList<PropertyDatum> getOwnedPropertyDatums() {
+	public List<PropertyDatum> getOwnedPropertyDatums() {
 		if (ownedPropertyDatums == null) {
 			ownedPropertyDatums = new EObjectContainmentWithInverseEList<PropertyDatum>(PropertyDatum.class, this, QVTschedulePackage.CLASS_DATUM__OWNED_PROPERTY_DATUMS, QVTschedulePackage.PROPERTY_DATUM__OWNING_CLASS_DATUM);
 		}
@@ -253,7 +254,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * @generated
 	 */
 	@Override
-	public EList<ClassDatum> getSuperClassDatums() {
+	public List<ClassDatum> getSuperClassDatums() {
 		if (superClassDatums == null) {
 			superClassDatums = new EObjectResolvingEList<ClassDatum>(ClassDatum.class, this, QVTschedulePackage.CLASS_DATUM__SUPER_CLASS_DATUMS);
 		}

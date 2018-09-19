@@ -28,6 +28,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.NameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.RuleAnalysis2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -52,6 +53,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
 public interface ScheduleManager
 {
 	void addMappingRegion(@NonNull MappingRegion mappingRegion);
+	void addPartitionError(@NonNull Partition partition, @NonNull String messageTemplate, Object... bindings);
+	void addPartitionWarning(@NonNull Partition partition, @NonNull String messageTemplate, Object... bindings);
 	void addProblem(@NonNull CompilerProblem problem);
 	void addRegionError(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);
 	void addRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings);

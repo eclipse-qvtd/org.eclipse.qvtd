@@ -14,7 +14,7 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 
 /**
  * <!-- begin-user-doc -->
@@ -52,6 +52,6 @@ public interface CyclicMappingRegion extends MappingRegion {
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!CyclicMappingRegion!elementRegions'"
 	 * @generated
 	 */
-	EList<MappingRegion> getElementRegions();
+	List<MappingRegion> getElementRegions();
 
 } // CyclicMappingRegion

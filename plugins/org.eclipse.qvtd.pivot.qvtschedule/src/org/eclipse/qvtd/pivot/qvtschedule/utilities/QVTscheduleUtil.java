@@ -115,6 +115,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static class Internal
 	{
+		public static @NonNull List<@NonNull Region> getActiveRegionsList(@NonNull ScheduledRegion scheduledRegion) {
+			return ClassUtil.nullFree(scheduledRegion.getActiveRegions());
+		}
+
 		public static @NonNull List<@NonNull Node> getHeadNodesList(@NonNull Region region) {
 			return ClassUtil.nullFree(region.getHeadNodes());
 		}
@@ -125,10 +129,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 		public static @NonNull List<@NonNull ClassDatum> getSuperClassDatumsList(@NonNull ClassDatum classDatum) {
 			return ClassUtil.nullFree(classDatum.getSuperClassDatums());
-		}
-
-		public static @NonNull List<@NonNull MappingRegion> getMappingRegionsList(@NonNull ScheduledRegion scheduledRegion) {
-			return ClassUtil.nullFree(scheduledRegion.getMappingRegions());
 		}
 	}
 
@@ -405,6 +405,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return true;
 	}
 
+	public static @NonNull Iterable<@NonNull Region> getActiveRegions(@NonNull ScheduledRegion scheduledRegion) {
+		return ClassUtil.nullFree(scheduledRegion.getActiveRegions());
+	}
+
 	/**
 	 * Return the edge unless it is subject to a cast chain in which case return the final cast.
 	 */
@@ -568,10 +572,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Iterable<@NonNull Edge> getIncomingEdges(@NonNull Node node) {
 		return ClassUtil.nullFree(node.getIncomingEdges());
-	}
-
-	public static @NonNull Iterable<@NonNull MappingRegion> getMappingRegions(@NonNull ScheduledRegion scheduledRegion) {
-		return ClassUtil.nullFree(scheduledRegion.getMappingRegions());
 	}
 
 	public static @NonNull String getName(@NonNull Nameable nameable) {

@@ -3109,13 +3109,22 @@ public interface QVTschedulePackage extends EPackage {
 	int REGION__OWNED_CLUSTERS = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Scheduled Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REGION__SCHEDULED_REGION = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REGION_FEATURE_COUNT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int REGION_FEATURE_COUNT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -3226,6 +3235,15 @@ public interface QVTschedulePackage extends EPackage {
 	int MAPPING_REGION__OWNED_CLUSTERS = REGION__OWNED_CLUSTERS;
 
 	/**
+	 * The feature id for the '<em><b>Scheduled Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_REGION__SCHEDULED_REGION = REGION__SCHEDULED_REGION;
+
+	/**
 	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3244,22 +3262,13 @@ public interface QVTschedulePackage extends EPackage {
 	int MAPPING_REGION__OWNING_SCHEDULE_MODEL = REGION_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Scheduled Region</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_REGION__SCHEDULED_REGION = REGION_FEATURE_COUNT + 2;
-
-	/**
 	 * The number of structural features of the '<em>Mapping Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 3;
+	int MAPPING_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -3380,6 +3389,15 @@ public interface QVTschedulePackage extends EPackage {
 	int CYCLIC_MAPPING_REGION__OWNED_CLUSTERS = MAPPING_REGION__OWNED_CLUSTERS;
 
 	/**
+	 * The feature id for the '<em><b>Scheduled Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CYCLIC_MAPPING_REGION__SCHEDULED_REGION = MAPPING_REGION__SCHEDULED_REGION;
+
+	/**
 	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3396,15 +3414,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int CYCLIC_MAPPING_REGION__OWNING_SCHEDULE_MODEL = MAPPING_REGION__OWNING_SCHEDULE_MODEL;
-
-	/**
-	 * The feature id for the '<em><b>Scheduled Region</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CYCLIC_MAPPING_REGION__SCHEDULED_REGION = MAPPING_REGION__SCHEDULED_REGION;
 
 	/**
 	 * The feature id for the '<em><b>Element Regions</b></em>' reference list.
@@ -3929,6 +3938,15 @@ public interface QVTschedulePackage extends EPackage {
 	int RULE_REGION__OWNED_CLUSTERS = MAPPING_REGION__OWNED_CLUSTERS;
 
 	/**
+	 * The feature id for the '<em><b>Scheduled Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_REGION__SCHEDULED_REGION = MAPPING_REGION__SCHEDULED_REGION;
+
+	/**
 	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3945,15 +3963,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int RULE_REGION__OWNING_SCHEDULE_MODEL = MAPPING_REGION__OWNING_SCHEDULE_MODEL;
-
-	/**
-	 * The feature id for the '<em><b>Scheduled Region</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RULE_REGION__SCHEDULED_REGION = MAPPING_REGION__SCHEDULED_REGION;
 
 	/**
 	 * The feature id for the '<em><b>Referred Rule</b></em>' reference.
@@ -4082,6 +4091,15 @@ public interface QVTschedulePackage extends EPackage {
 	int DISPATCH_REGION__OWNED_CLUSTERS = RULE_REGION__OWNED_CLUSTERS;
 
 	/**
+	 * The feature id for the '<em><b>Scheduled Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DISPATCH_REGION__SCHEDULED_REGION = RULE_REGION__SCHEDULED_REGION;
+
+	/**
 	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4098,15 +4116,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int DISPATCH_REGION__OWNING_SCHEDULE_MODEL = RULE_REGION__OWNING_SCHEDULE_MODEL;
-
-	/**
-	 * The feature id for the '<em><b>Scheduled Region</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DISPATCH_REGION__SCHEDULED_REGION = RULE_REGION__SCHEDULED_REGION;
 
 	/**
 	 * The feature id for the '<em><b>Referred Rule</b></em>' reference.
@@ -5958,6 +5967,15 @@ public interface QVTschedulePackage extends EPackage {
 	int LOADING_REGION__OWNED_CLUSTERS = REGION__OWNED_CLUSTERS;
 
 	/**
+	 * The feature id for the '<em><b>Scheduled Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOADING_REGION__SCHEDULED_REGION = REGION__SCHEDULED_REGION;
+
+	/**
 	 * The feature id for the '<em><b>Owning Scheduled Region</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6573,6 +6591,15 @@ public interface QVTschedulePackage extends EPackage {
 	int MICRO_MAPPING_REGION__OWNED_CLUSTERS = MAPPING_REGION__OWNED_CLUSTERS;
 
 	/**
+	 * The feature id for the '<em><b>Scheduled Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MICRO_MAPPING_REGION__SCHEDULED_REGION = MAPPING_REGION__SCHEDULED_REGION;
+
+	/**
 	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6589,15 +6616,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int MICRO_MAPPING_REGION__OWNING_SCHEDULE_MODEL = MAPPING_REGION__OWNING_SCHEDULE_MODEL;
-
-	/**
-	 * The feature id for the '<em><b>Scheduled Region</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MICRO_MAPPING_REGION__SCHEDULED_REGION = MAPPING_REGION__SCHEDULED_REGION;
 
 	/**
 	 * The feature id for the '<em><b>Mapping Region</b></em>' reference.
@@ -6744,6 +6762,15 @@ public interface QVTschedulePackage extends EPackage {
 	int NAMED_MAPPING_REGION__OWNED_CLUSTERS = MAPPING_REGION__OWNED_CLUSTERS;
 
 	/**
+	 * The feature id for the '<em><b>Scheduled Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_MAPPING_REGION__SCHEDULED_REGION = MAPPING_REGION__SCHEDULED_REGION;
+
+	/**
 	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6760,15 +6787,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NAMED_MAPPING_REGION__OWNING_SCHEDULE_MODEL = MAPPING_REGION__OWNING_SCHEDULE_MODEL;
-
-	/**
-	 * The feature id for the '<em><b>Scheduled Region</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_MAPPING_REGION__SCHEDULED_REGION = MAPPING_REGION__SCHEDULED_REGION;
 
 	/**
 	 * The feature id for the '<em><b>Symbol Name Suffix</b></em>' attribute.
@@ -7735,6 +7753,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATION_REGION__OWNED_CLUSTERS = REGION__OWNED_CLUSTERS;
+
+	/**
+	 * The feature id for the '<em><b>Scheduled Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_REGION__SCHEDULED_REGION = REGION__SCHEDULED_REGION;
 
 	/**
 	 * The feature id for the '<em><b>Dependency Nodes</b></em>' reference list.
@@ -9089,13 +9116,31 @@ public interface QVTschedulePackage extends EPackage {
 	int SCHEDULED_REGION__OWNED_CLUSTERS = REGION__OWNED_CLUSTERS;
 
 	/**
+	 * The feature id for the '<em><b>Scheduled Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULED_REGION__SCHEDULED_REGION = REGION__SCHEDULED_REGION;
+
+	/**
+	 * The feature id for the '<em><b>Active Regions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULED_REGION__ACTIVE_REGIONS = REGION_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Owned Connections</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULED_REGION__OWNED_CONNECTIONS = REGION_FEATURE_COUNT + 0;
+	int SCHEDULED_REGION__OWNED_CONNECTIONS = REGION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owned Loading Region</b></em>' containment reference.
@@ -9104,16 +9149,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULED_REGION__OWNED_LOADING_REGION = REGION_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Mapping Regions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SCHEDULED_REGION__MAPPING_REGIONS = REGION_FEATURE_COUNT + 2;
+	int SCHEDULED_REGION__OWNED_LOADING_REGION = REGION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owning Schedule Model</b></em>' container reference.
@@ -10808,6 +10844,15 @@ public interface QVTschedulePackage extends EPackage {
 	int VERDICT_REGION__OWNED_CLUSTERS = RULE_REGION__OWNED_CLUSTERS;
 
 	/**
+	 * The feature id for the '<em><b>Scheduled Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VERDICT_REGION__SCHEDULED_REGION = RULE_REGION__SCHEDULED_REGION;
+
+	/**
 	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10824,15 +10869,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int VERDICT_REGION__OWNING_SCHEDULE_MODEL = RULE_REGION__OWNING_SCHEDULE_MODEL;
-
-	/**
-	 * The feature id for the '<em><b>Scheduled Region</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VERDICT_REGION__SCHEDULED_REGION = RULE_REGION__SCHEDULED_REGION;
 
 	/**
 	 * The feature id for the '<em><b>Referred Rule</b></em>' reference.
@@ -11517,6 +11553,17 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getScheduledRegion();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getActiveRegions <em>Active Regions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Active Regions</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getActiveRegions()
+	 * @see #getScheduledRegion()
+	 * @generated
+	 */
+	EReference getScheduledRegion_ActiveRegions();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedConnections <em>Owned Connections</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11537,17 +11584,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getScheduledRegion_OwnedLoadingRegion();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getMappingRegions <em>Mapping Regions</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Mapping Regions</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getMappingRegions()
-	 * @see #getScheduledRegion()
-	 * @generated
-	 */
-	EReference getScheduledRegion_MappingRegions();
 
 	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwningScheduleModel <em>Owning Schedule Model</em>}'.
@@ -12004,17 +12040,6 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMappingRegion_OwningScheduleModel();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingRegion#getScheduledRegion <em>Scheduled Region</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Scheduled Region</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingRegion#getScheduledRegion()
-	 * @see #getMappingRegion()
-	 * @generated
-	 */
-	EReference getMappingRegion_ScheduledRegion();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion <em>Micro Mapping Region</em>}'.
@@ -12646,6 +12671,17 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getRegion_OwnedClusters();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getScheduledRegion <em>Scheduled Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Scheduled Region</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Region#getScheduledRegion()
+	 * @see #getRegion()
+	 * @generated
+	 */
+	EReference getRegion_ScheduledRegion();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedNodes <em>Owned Nodes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13192,6 +13228,14 @@ public interface QVTschedulePackage extends EPackage {
 		EClass SCHEDULED_REGION = eINSTANCE.getScheduledRegion();
 
 		/**
+		 * The meta object literal for the '<em><b>Active Regions</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCHEDULED_REGION__ACTIVE_REGIONS = eINSTANCE.getScheduledRegion_ActiveRegions();
+
+		/**
 		 * The meta object literal for the '<em><b>Owned Connections</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -13206,14 +13250,6 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference SCHEDULED_REGION__OWNED_LOADING_REGION = eINSTANCE.getScheduledRegion_OwnedLoadingRegion();
-
-		/**
-		 * The meta object literal for the '<em><b>Mapping Regions</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SCHEDULED_REGION__MAPPING_REGIONS = eINSTANCE.getScheduledRegion_MappingRegions();
 
 		/**
 		 * The meta object literal for the '<em><b>Owning Schedule Model</b></em>' container reference feature.
@@ -13622,14 +13658,6 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_REGION__OWNING_SCHEDULE_MODEL = eINSTANCE.getMappingRegion_OwningScheduleModel();
-
-		/**
-		 * The meta object literal for the '<em><b>Scheduled Region</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MAPPING_REGION__SCHEDULED_REGION = eINSTANCE.getMappingRegion_ScheduledRegion();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl <em>Micro Mapping Region</em>}' class.
@@ -14142,6 +14170,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference REGION__OWNED_CLUSTERS = eINSTANCE.getRegion_OwnedClusters();
+
+		/**
+		 * The meta object literal for the '<em><b>Scheduled Region</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REGION__SCHEDULED_REGION = eINSTANCE.getRegion_ScheduledRegion();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Nodes</b></em>' containment reference list feature.

@@ -280,8 +280,6 @@
         <details key="documentation" value="The overall ScheduleModel in which this MappingRegion is contained."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="scheduledRegion" eType="#//ScheduledRegion"
-        eOpposite="#//ScheduledRegion/mappingRegions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MicroMappingRegion" eSuperTypes="#//MappingRegion">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -490,6 +488,8 @@
         eType="#//Edge" containment="true" eOpposite="#//Edge/owningRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedClusters" upperBound="-1"
         eType="#//Cluster" containment="true" eOpposite="#//Cluster/owningRegion"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scheduledRegion" eType="#//ScheduledRegion"
+        eOpposite="#//ScheduledRegion/activeRegions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RuleRegion" eSuperTypes="#//MappingRegion">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -519,12 +519,12 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A ScheduledRegion is the root of a graphical representation of a Transformation."/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activeRegions" upperBound="-1"
+        eType="#//Region" eOpposite="#//Region/scheduledRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedConnections" upperBound="-1"
         eType="#//Connection" containment="true" eOpposite="#//Connection/owningScheduledRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedLoadingRegion" lowerBound="1"
         eType="#//LoadingRegion" containment="true" eOpposite="#//LoadingRegion/owningScheduledRegion"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingRegions" upperBound="-1"
-        eType="#//MappingRegion" eOpposite="#//MappingRegion/scheduledRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduleModel" lowerBound="1"
         eType="#//ScheduleModel" eOpposite="#//ScheduleModel/ownedScheduledRegions">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

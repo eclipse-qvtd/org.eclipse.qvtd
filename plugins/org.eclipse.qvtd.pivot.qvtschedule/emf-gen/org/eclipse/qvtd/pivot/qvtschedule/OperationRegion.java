@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Operation;
 
@@ -30,7 +30,7 @@ public interface OperationRegion extends Region
 	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!OperationRegion!dependencyNodes'"
 	 * @generated
 	 */
-	EList<Node> getDependencyNodes();
+	List<Node> getDependencyNodes();
 	/**
 	 * Returns the value of the '<em><b>Head Nodes</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Node}.
@@ -46,7 +46,7 @@ public interface OperationRegion extends Region
 	 * @generated
 	 */
 	@Override
-	EList<Node> getHeadNodes();
+	List<Node> getHeadNodes();
 	/**
 	 * Returns the value of the '<em><b>Referred Operation</b></em>' reference.
 	 * <!-- begin-user-doc -->

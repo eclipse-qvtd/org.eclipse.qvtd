@@ -15,40 +15,39 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.PartialRegionAnalysis;
 
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class or property.
  */
-public abstract class TraceElementAnalysis<@NonNull RA extends PartialRegionAnalysis<@NonNull RA>> implements Nameable
+public abstract class TraceElementPartitionAnalysis implements Nameable
 {
 	/**
 	 * The partitioners that consume (predicate) the trace class.
 	 */
-	protected final @NonNull List<@NonNull RA> consumers = new ArrayList<>();
+	protected final @NonNull List<@NonNull Partition> consumers = new ArrayList<>();
 
 	/**
 	 * The partitioners that produce (realize) the trace class.
 	 */
-	protected final @NonNull List<@NonNull RA> producers = new ArrayList<>();
+	protected final @NonNull List<@NonNull Partition> producers = new ArrayList<>();
 
-	public void addConsumer(@NonNull RA consumer) {
+	public void addConsumer(@NonNull Partition consumer) {
 		if (!consumers.contains(consumer)) {		// multi-consumption is possible
 			consumers.add(consumer);
 		}
 	}
 
-	public void addProducer(@NonNull RA producer) {
+	public void addProducer(@NonNull Partition producer) {
 		if (!producers.contains(producer)) {		// multi-production of e.g. OclAny is possible
 			producers.add(producer);
 		}
 	}
 
-	public @NonNull Iterable<@NonNull RA> getConsumers() {
+	public @NonNull Iterable<@NonNull Partition> getConsumers() {
 		return consumers;
 	}
 
-	public @NonNull Iterable<@NonNull RA> getProducers() {
+	public @NonNull Iterable<@NonNull Partition> getProducers() {
 		return producers;
 	}
 }

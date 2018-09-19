@@ -43,7 +43,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
-public class RegionAnalysis extends AbstractPartialRegionAnalysis<@NonNull RegionAnalysis>
+public class RegionAnalysis extends AbstractRegionAnalysis
 {
 	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 	protected final @NonNull Region region;
@@ -374,7 +374,7 @@ public class RegionAnalysis extends AbstractPartialRegionAnalysis<@NonNull Regio
 		List<@NonNull Node> traceNodes = getTraceNodes();
 		assert traceNodes.size() == 1;
 		Node traceNode = ClassUtil.nonNullState(traceNodes.get(0));
-		Rule referredRule = QVTscheduleUtil.getReferredRule((RuleRegion) region);
+		Rule referredRule = QVTscheduleUtil.getReferredRule((RuleRegion)region);
 		RelationAnalysis relationAnalysis = (RelationAnalysis)transformationAnalysis.getRuleAnalysis(referredRule);
 		RelationAnalysis2TraceGroup relationAnalysis2traceGroup = relationAnalysis.getRuleAnalysis2TraceGroup();
 		//			relationAnalysis.synthesizeTraceLocalSuccessAssignment(relationAnalysis2traceGroup, getTraceNode());

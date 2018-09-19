@@ -15,7 +15,6 @@
 package org.eclipse.qvtd.pivot.qvtschedule;
 
 import java.util.List;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.NamedElement;
@@ -40,6 +39,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedNodes <em>Owned Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedEdges <em>Owned Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedClusters <em>Owned Clusters</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getScheduledRegion <em>Scheduled Region</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion()
@@ -65,7 +65,7 @@ public interface Region extends NamedElement, Symbolable, Graphable, GraphNode
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!ownedEdges'"
 	 * @generated
 	 */
-	EList<Edge> getOwnedEdges();
+	List<Edge> getOwnedEdges();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Clusters</b></em>' containment reference list.
@@ -84,7 +84,36 @@ public interface Region extends NamedElement, Symbolable, Graphable, GraphNode
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!ownedClusters'"
 	 * @generated
 	 */
-	EList<Cluster> getOwnedClusters();
+	List<Cluster> getOwnedClusters();
+
+	/**
+	 * Returns the value of the '<em><b>Scheduled Region</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getActiveRegions <em>Active Regions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Scheduled Region</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Scheduled Region</em>' reference.
+	 * @see #setScheduledRegion(ScheduledRegion)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_ScheduledRegion()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getActiveRegions
+	 * @model opposite="activeRegions"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!scheduledRegion'"
+	 * @generated
+	 */
+	ScheduledRegion getScheduledRegion();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getScheduledRegion <em>Scheduled Region</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Scheduled Region</em>' reference.
+	 * @see #getScheduledRegion()
+	 * @generated
+	 */
+	void setScheduledRegion(ScheduledRegion value);
 
 	/**
 	 * Returns the value of the '<em><b>Owned Nodes</b></em>' containment reference list.
@@ -103,7 +132,7 @@ public interface Region extends NamedElement, Symbolable, Graphable, GraphNode
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!ownedNodes'"
 	 * @generated
 	 */
-	EList<Node> getOwnedNodes();
+	List<Node> getOwnedNodes();
 
 	void addCallToChild(@NonNull Region region);
 	boolean addIndex(int index);
@@ -135,7 +164,6 @@ public interface Region extends NamedElement, Symbolable, Graphable, GraphNode
 	 * Return the regions the call this region.
 	 */
 	@NonNull Iterable<@NonNull Region> getCallingRegions();
-	@NonNull String getColor();
 	@NonNull Iterable<@NonNull Node> getComposedNodes();
 	@Nullable ScheduledRegion getContainingScheduledRegion();
 	@NonNull Iterable<@NonNull Edge> getExpressionEdges();

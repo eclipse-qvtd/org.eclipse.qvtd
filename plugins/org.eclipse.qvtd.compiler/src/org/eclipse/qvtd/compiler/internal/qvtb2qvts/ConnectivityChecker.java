@@ -105,7 +105,7 @@ public class ConnectivityChecker
 				analyzeConnection(connection);
 			}
 			analyzeRegion(QVTscheduleUtil.getOwnedLoadingRegion(scheduledRegion));
-			for (@NonNull Region region : QVTscheduleUtil.getMappingRegions(scheduledRegion)) {
+			for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(scheduledRegion)) {
 				analyzeRegion(region);
 			}
 		}

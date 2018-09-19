@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameAdapter;
@@ -38,7 +38,7 @@ public interface ScheduleModel extends Model
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduleModel!ownedClassDatums'"
 	 * @generated
 	 */
-	EList<ClassDatum> getOwnedClassDatums();
+	List<ClassDatum> getOwnedClassDatums();
 	/**
 	 * Returns the value of the '<em><b>Owned Operation Regions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.OperationRegion}.
@@ -56,7 +56,7 @@ public interface ScheduleModel extends Model
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduleModel!ownedOperationRegions'"
 	 * @generated
 	 */
-	EList<OperationRegion> getOwnedOperationRegions();
+	List<OperationRegion> getOwnedOperationRegions();
 	/**
 	 * Returns the value of the '<em><b>Owned Scheduled Regions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion}.
@@ -74,7 +74,7 @@ public interface ScheduleModel extends Model
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduleModel!ownedScheduledRegions'"
 	 * @generated
 	 */
-	EList<ScheduledRegion> getOwnedScheduledRegions();
+	List<ScheduledRegion> getOwnedScheduledRegions();
 	/**
 	 * Returns the value of the '<em><b>Owned Mapping Regions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.MappingRegion}.
@@ -92,7 +92,7 @@ public interface ScheduleModel extends Model
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduleModel!ownedMappingRegions'"
 	 * @generated
 	 */
-	EList<MappingRegion> getOwnedMappingRegions();
+	List<MappingRegion> getOwnedMappingRegions();
 	@NonNull SymbolNameAdapter getSymbolNameAdapter();
 	@NonNull String reserveSymbolName(@NonNull SymbolNameBuilder symbolNameBuilder, @NonNull Object object);
 }

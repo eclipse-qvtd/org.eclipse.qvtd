@@ -13,7 +13,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.AbstractPartialRegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.AbstractPartition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphElement;
@@ -28,7 +28,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphVisitor;
 
 import com.google.common.collect.Iterables;
 
-abstract class AbstractPartition extends AbstractPartialRegionAnalysis<@NonNull Partition> implements Partition
+public abstract class AbstractAcyclicPartition extends AbstractPartition
 {
 	protected class ToGraphPartitionVisitor extends ToGraphVisitor
 	{
@@ -118,8 +118,8 @@ abstract class AbstractPartition extends AbstractPartialRegionAnalysis<@NonNull 
 	@SuppressWarnings("unused")			// Used in the debugger
 	private final @NonNull ToDOT toDot = new ToDOT(this){};
 
-	protected AbstractPartition(@NonNull MappingPartitioner partitioner) {
-		super(partitioner.getRegionsPartitionAnalysis());
+	protected AbstractAcyclicPartition(@NonNull MappingPartitioner partitioner) {
+		super(partitioner.getPartitionedTransformationAnalysis());
 		this.partitioner = partitioner;
 		this.regionAnalysis = partitioner.getRegionAnalysis();
 		this.originalRegion = regionAnalysis.getRegion();
@@ -130,6 +130,31 @@ abstract class AbstractPartition extends AbstractPartialRegionAnalysis<@NonNull 
 	public void analyzePartition() {
 		analyze();
 	}
+
+	/*	@Override
+	public @Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getConsumedTraceClassPartitionAnalyses() {
+		return (Iterable<@NonNull TraceClassPartitionAnalysis>)(Object)getConsumedTraceClassAnalyses();
+	}
+
+	@Override
+	public @Nullable Iterable<@NonNull TracePropertyPartitionAnalysis> getConsumedTracePropertyPartitionAnalyses() {
+		return (Iterable<@NonNull TracePropertyPartitionAnalysis>)(Object)getConsumedTracePropertyAnalyses();
+	}
+
+	@Override
+	public @Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getProducedTraceClassPartitionAnalyses() {
+		return (Iterable<@NonNull TraceClassPartitionAnalysis>)(Object)getProducedTraceClassAnalyses();
+	}
+
+	@Override
+	public @Nullable Iterable<@NonNull TracePropertyPartitionAnalysis> getProducedTracePropertyPartitionAnalyses() {
+		return (Iterable<@NonNull TracePropertyPartitionAnalysis>)(Object)getProducedTracePropertyAnalyses();
+	}
+
+	@Override
+	public @Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getSuperProducedTraceClassPartitionAnalyses() {
+		return (Iterable<@NonNull TraceClassPartitionAnalysis>)(Object)getSuperProducedTraceClassAnalyses();
+	} */
 
 	@Override
 	public int getDepth() {

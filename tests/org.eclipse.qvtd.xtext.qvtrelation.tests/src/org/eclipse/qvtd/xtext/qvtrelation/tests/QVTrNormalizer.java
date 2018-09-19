@@ -15,7 +15,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.ECollections;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -61,7 +60,6 @@ public class QVTrNormalizer extends PivotNormalizer
 			throw new UnsupportedOperationException();
 		}
 
-		@SuppressWarnings("unchecked")
 		@Override
 		public void normalize() {
 			ECollections.sort(asRelation.getDomain(), DomainComparator.INSTANCE);
@@ -74,7 +72,6 @@ public class QVTrNormalizer extends PivotNormalizer
 			super(asTransformation);
 		}
 
-		@SuppressWarnings("unchecked")
 		@Override
 		public void normalize() {
 			super.normalize();

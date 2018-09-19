@@ -168,7 +168,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	 * @generated
 	 */
 	@Override
-	public EList<EdgeConnection> getOutgoingConnections() {
+	public List<EdgeConnection> getOutgoingConnections() {
 		if (outgoingConnections == null) {
 			outgoingConnections = new EObjectResolvingEList<EdgeConnection>(EdgeConnection.class, this, QVTschedulePackage.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS);
 		}

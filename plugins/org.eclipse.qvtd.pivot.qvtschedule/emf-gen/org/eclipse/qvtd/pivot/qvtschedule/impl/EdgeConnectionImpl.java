@@ -18,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.InternalEObject;
@@ -86,7 +85,7 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 	 * @generated
 	 */
 	@Override
-	public EList<NavigableEdge> getSourceEnds() {
+	public List<NavigableEdge> getSourceEnds() {
 		if (sourceEnds == null) {
 			sourceEnds = new EObjectResolvingEList<NavigableEdge>(NavigableEdge.class, this, QVTschedulePackage.EDGE_CONNECTION__SOURCE_ENDS);
 		}
