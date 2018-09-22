@@ -38,7 +38,6 @@ public interface QVTscheduleVisitor<R> extends org.eclipse.qvtd.pivot.qvtbase.ut
 	R visitComposedNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ComposedNode object);
 	R visitConnection(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Connection object);
 	R visitCyclicMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CyclicMappingRegion object);
-	R visitDatumConnection(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DatumConnection<?> object);
 	R visitDependencyEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DependencyEdge object);
 	R visitDependencyNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DependencyNode object);
 	R visitDispatchRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DispatchRegion object);

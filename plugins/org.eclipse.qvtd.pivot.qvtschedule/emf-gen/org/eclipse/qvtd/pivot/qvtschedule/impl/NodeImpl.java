@@ -56,6 +56,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.StaticConnectionManager;
+
 import com.google.common.collect.Iterables;
 
 /**
@@ -622,7 +624,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public final void addOutgoingConnection(@NonNull NodeConnection connection) {
-		assert Iterables.contains(QVTscheduleUtil.getSourceEnds(connection), this);
+		assert Iterables.contains(StaticConnectionManager.INSTANCE.rawGetSourceEnds(connection), this);
 		//		assert edge.getRegion() == getRegion();
 		List<NodeConnection> outgoingConnections2 = getOutgoingConnections();
 		assert !outgoingConnections2.contains(connection);
@@ -782,7 +784,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public @Nullable NodeConnection getIncomingUsedConnection() {
 		NodeConnection incomingConnection2 = incomingConnection;
-		if ((incomingConnection2 != null) && incomingConnection2.isUsed(this)) {
+		if ((incomingConnection2 != null) && StaticConnectionManager.INSTANCE.rawIsUsed(incomingConnection2, this)) {
 			return incomingConnection2;
 		}
 		else {
@@ -917,7 +919,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		List<@NonNull Node> sources = new ArrayList<>();
 		NodeConnection connection = getIncomingPassedConnection();
 		if (connection != null) {
-			for (@NonNull Node source : QVTscheduleUtil.getSourceEnds(connection)) {
+			for (@NonNull Node source : StaticConnectionManager.INSTANCE.rawGetSourceEnds(connection)) {
 				if (!sources.contains(source)) {
 					sources.add(source);
 				}
@@ -930,7 +932,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	public @NonNull Iterable<@NonNull Node> getPassedBindingTargets() {
 		List<@NonNull Node> targets = new ArrayList<>();
 		for (@NonNull NodeConnection connection : getOutgoingPassedConnections()) {
-			for (@NonNull Node target : connection.getTargetNodes()) {
+			for (@NonNull Node target : StaticConnectionManager.INSTANCE.rawGetTargetNodes(connection)) {
 				if (!targets.contains(target)) {
 					targets.add(target);
 				}
@@ -1043,7 +1045,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		List<@NonNull Node> sources = new ArrayList<>();
 		NodeConnection connection = getIncomingUsedConnection();
 		if (connection != null) {
-			for (@NonNull Node source : QVTscheduleUtil.getSourceEnds(connection)) {
+			for (@NonNull Node source : StaticConnectionManager.INSTANCE.rawGetSourceEnds(connection)) {
 				if (!sources.contains(source)) {
 					sources.add(source);
 				}
@@ -1251,7 +1253,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 
 	@Override
 	public final void removeOutgoingConnection(@NonNull NodeConnection connection) {
-		assert Iterables.contains(QVTscheduleUtil.getSourceEnds(connection), this);
+		assert Iterables.contains(StaticConnectionManager.INSTANCE.rawGetSourceEnds(connection), this);
 		//		assert edge.getRegion() == getRegion();
 		List<NodeConnection> outgoingConnections2 = outgoingConnections;
 		assert outgoingConnections2 != null;

@@ -203,15 +203,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTschedulePackage.DATUM_CONNECTION: {
-				DatumConnection<?> datumConnection = (DatumConnection<?>)theEObject;
-				T result = caseDatumConnection(datumConnection);
-				if (result == null) result = caseConnection(datumConnection);
-				if (result == null) result = caseElement(datumConnection);
-				if (result == null) result = caseSymbolable(datumConnection);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTschedulePackage.DEPENDENCY_EDGE: {
 				DependencyEdge dependencyEdge = (DependencyEdge)theEObject;
 				T result = caseDependencyEdge(dependencyEdge);
@@ -251,7 +242,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 			case QVTschedulePackage.EDGE_CONNECTION: {
 				EdgeConnection edgeConnection = (EdgeConnection)theEObject;
 				T result = caseEdgeConnection(edgeConnection);
-				if (result == null) result = caseDatumConnection(edgeConnection);
 				if (result == null) result = caseConnection(edgeConnection);
 				if (result == null) result = caseElement(edgeConnection);
 				if (result == null) result = caseSymbolable(edgeConnection);
@@ -469,7 +459,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 			case QVTschedulePackage.NODE_CONNECTION: {
 				NodeConnection nodeConnection = (NodeConnection)theEObject;
 				T result = caseNodeConnection(nodeConnection);
-				if (result == null) result = caseDatumConnection(nodeConnection);
 				if (result == null) result = caseConnection(nodeConnection);
 				if (result == null) result = caseElement(nodeConnection);
 				if (result == null) result = caseSymbolable(nodeConnection);
@@ -954,21 +943,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCyclicMappingRegion(CyclicMappingRegion object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Datum Connection</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Datum Connection</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <CE extends ConnectionEnd> T caseDatumConnection(DatumConnection<CE> object) {
 		return null;
 	}
 

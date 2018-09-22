@@ -53,7 +53,7 @@ public class ToCallGraphVisitor extends AbstractToGraphVisitor
 
 	@Override
 	public @Nullable String visitNodeConnection(@NonNull NodeConnection nodeConnection) {
-		if (nodeConnection.isNode2Node()) {
+		if (StaticConnectionManager.INSTANCE.rawIsNode2Node(nodeConnection)) {
 			appendNode(nodeConnection);
 			//			@SuppressWarnings("null")@NonNull Node sourceNode = sourceEnds.iterator().next();
 			//			@SuppressWarnings("null")@NonNull Node targetNode = targetEnd2role.keySet().iterator().next();
@@ -75,7 +75,7 @@ public class ToCallGraphVisitor extends AbstractToGraphVisitor
 	@Override
 	public @Nullable String visitRegion(@NonNull Region region) {
 		appendNode(region);
-		for (final @NonNull Region childRegion : region.getCallableChildren()) {
+		for (final @NonNull Region childRegion : StaticConnectionManager.INSTANCE.rawGetCallableChildren(region)) {
 			GraphEdge graphEdge = new GraphEdge()
 			{
 				@Override
@@ -101,7 +101,7 @@ public class ToCallGraphVisitor extends AbstractToGraphVisitor
 			};
 			appendEdge(graphEdge.getEdgeSource(), graphEdge, graphEdge.getEdgeTarget());
 		}
-		for (final @NonNull NodeConnection connection : region.getRootConnections())
+		for (final @NonNull NodeConnection connection : StaticConnectionManager.INSTANCE.rawGetRootConnections(region))
 		{
 			GraphEdge graphEdge1 = new GraphEdge() {
 				@Override
@@ -126,7 +126,7 @@ public class ToCallGraphVisitor extends AbstractToGraphVisitor
 				}
 			};
 			appendEdge(graphEdge1.getEdgeSource(), graphEdge1, graphEdge1.getEdgeTarget());
-			for (final @NonNull Node targetNode : connection.getTargetNodes())
+			for (final @NonNull Node targetNode : StaticConnectionManager.INSTANCE.rawGetTargetNodes(connection))
 			{
 				GraphEdge graphEdge = new GraphEdge() {
 					@Override

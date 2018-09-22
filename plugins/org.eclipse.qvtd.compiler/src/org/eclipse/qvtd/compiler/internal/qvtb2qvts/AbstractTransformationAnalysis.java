@@ -192,7 +192,7 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 		}
 	}
 
-	protected @Nullable TraceClassRegionAnalysis basicGetTraceClassAnalysis(@NonNull ClassDatum classDatum) {
+	public @Nullable TraceClassRegionAnalysis basicGetTraceClassAnalysis(@NonNull ClassDatum classDatum) {
 		return classDatum2traceClassAnalysis.get(classDatum);
 	}
 

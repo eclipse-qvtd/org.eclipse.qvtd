@@ -32,7 +32,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.StaticConnectionManager;
 
 import com.google.common.collect.Iterables;
 
@@ -337,7 +337,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 
 	@Override
 	public final void addOutgoingConnection(@NonNull EdgeConnection edgeConnection) {
-		assert Iterables.contains(QVTscheduleUtil.getSourceEnds(edgeConnection), this);
+		assert Iterables.contains(StaticConnectionManager.INSTANCE.rawGetSourceEnds(edgeConnection), this);
 		//		assert edge.getRegion() == getRegion();
 		List<EdgeConnection> outgoingConnections2 = getOutgoingConnections();
 		assert !outgoingConnections2.contains(edgeConnection);
@@ -440,7 +440,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 
 	@Override
 	public final void removeOutgoingConnection(@NonNull EdgeConnection edgeConnection) {
-		assert Iterables.contains(QVTscheduleUtil.getSourceEnds(edgeConnection), this);
+		assert Iterables.contains(StaticConnectionManager.INSTANCE.rawGetSourceEnds(edgeConnection), this);
 		//		assert edge.getRegion() == getRegion();
 		List<EdgeConnection> outgoingConnections2 = outgoingConnections;
 		assert outgoingConnections2 != null;

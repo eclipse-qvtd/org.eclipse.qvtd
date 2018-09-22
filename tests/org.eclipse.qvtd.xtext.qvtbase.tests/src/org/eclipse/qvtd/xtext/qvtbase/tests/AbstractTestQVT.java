@@ -54,6 +54,7 @@ import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
@@ -506,7 +507,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		Class<? extends @NonNull Region> regionClass = parentRegion.getClass();
 		Integer count = regionClass2count.get(regionClass);
 		regionClass2count.put(regionClass, count == null ? 1 : count+1);
-		for (@NonNull Region childRegion : parentRegion.getCallableChildren()) {
+		for (@NonNull Region childRegion : ConnectionManager.rawGetCallableChildren(parentRegion)) {
 			instrumentRegion(childRegion);
 		}
 	}

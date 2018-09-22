@@ -66,6 +66,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedConditionAnalysis;
@@ -1227,7 +1228,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	private void createAddStatements() {
 		if (connection2variable != null) {
 			for (@NonNull NodeConnection connection : connection2variable.keySet()) {
-				Node sourceNode = connection.getSource(region);
+				Node sourceNode = ConnectionManager.rawGetSource(connection, region);
 				OCLExpression variableExpression = createVariableExp(sourceNode);
 				ConnectionVariable connectionVariable = connection2variable.get(connection);
 				assert connectionVariable != null;
@@ -1749,7 +1750,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	@Override
 	public void synthesizeCallStatements() {
 		Map<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>> calls = null;
-		for (@NonNull Region calledRegion : region.getCallableChildren()) {
+		for (@NonNull Region calledRegion : ConnectionManager.rawGetCallableChildren(region)) {
 			if (calls == null) {
 				calls = new HashMap<>();
 			}

@@ -21,7 +21,6 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
-import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -34,10 +33,10 @@ public class ToRegionGraphVisitor extends AbstractToGraphVisitor
 	}
 
 	@Override
-	public @Nullable String visitDatumConnection(@NonNull DatumConnection<?> datumConnection) {
-		ScheduledRegion scheduledRegion = datumConnection.getOwningScheduledRegion();
+	public @Nullable String visitConnection(@NonNull Connection connection) {
+		ScheduledRegion scheduledRegion = connection.getOwningScheduledRegion();
 		Map<@NonNull Region, @NonNull Integer> sourceRegion2count = new HashMap<>();
-		for (@NonNull Node source : datumConnection.getSourceNodes()) {
+		for (@NonNull Node source : StaticConnectionManager.INSTANCE.rawGetSourceNodes(connection)) {
 			Region sourceRegion = scheduledRegion.getNormalizedRegion(QVTscheduleUtil.getOwningRegion(source));
 			if (sourceRegion != null) {
 				//				Integer count = sourceRegion2count.get(sourceRegion);
@@ -45,8 +44,8 @@ public class ToRegionGraphVisitor extends AbstractToGraphVisitor
 			}
 		}
 		Map<@NonNull Region, @NonNull List<@NonNull ConnectionRole>> targetRegion2roles = new HashMap<>();
-		for (@NonNull ConnectionEnd target : datumConnection.getTargets().keySet()) {
-			ConnectionRole role = datumConnection.getTargets().get(target);
+		for (@NonNull ConnectionEnd target : StaticConnectionManager.INSTANCE.rawGetTargets(connection).keySet()) {
+			ConnectionRole role = StaticConnectionManager.INSTANCE.rawGetTargets(connection).get(target);
 			assert role != null;
 			Region targetRegion = scheduledRegion.getNormalizedRegion(QVTscheduleUtil.getOwningRegion(target));
 			if (targetRegion != null) {
@@ -60,25 +59,25 @@ public class ToRegionGraphVisitor extends AbstractToGraphVisitor
 				}
 			}
 		}
-		if (datumConnection.isRegion2Region(sourceRegion2count, targetRegion2roles)) {
+		if (StaticConnectionManager.INSTANCE.rawIsRegion2Region(connection, sourceRegion2count, targetRegion2roles)) {
 			Region sourceRegion = sourceRegion2count.keySet().iterator().next();
 			Region targetRegion = targetRegion2roles.keySet().iterator().next();
-			appendEdge(sourceRegion, datumConnection, targetRegion);
+			appendEdge(sourceRegion, connection, targetRegion);
 		}
 		else {
-			appendNode(datumConnection);
+			appendNode(connection);
 			for (@NonNull Region sourceRegion : sourceRegion2count.keySet()) {
 				Integer counts = sourceRegion2count.get(sourceRegion);
 				assert counts != null;
 				for (int i = counts; i > 0; i--) {
-					appendEdge(sourceRegion, datumConnection, datumConnection);
+					appendEdge(sourceRegion, connection, connection);
 				}
 			}
 			for (@NonNull Region targetRegion : targetRegion2roles.keySet()) {
 				List<@NonNull ConnectionRole> roles = targetRegion2roles.get(targetRegion);
 				assert roles != null;
 				for (@NonNull ConnectionRole role : roles) {
-					appendEdge(datumConnection, role, targetRegion);
+					appendEdge(connection, role, targetRegion);
 					//				GraphNode targetNode = /*targetRegion.isCyclicRegion() ? getTarget(targetRegion) :*/ targetRegion;
 					//				for (@SuppressWarnings("null")@NonNull ConnectionRole role : targetRegion2roles.get(targetRegion)) {
 					//					s.appendEdge(this, role, targetNode);
@@ -101,7 +100,7 @@ public class ToRegionGraphVisitor extends AbstractToGraphVisitor
 					}
 				} */
 				@Nullable ConnectionEnd sourceEnd = null;
-				for (@NonNull ConnectionEnd end : QVTscheduleUtil.getSourceEnds(datumConnection)) {
+				for (@NonNull ConnectionEnd end : StaticConnectionManager.INSTANCE.rawGetSourceEnds(connection)) {
 					if (end.getOwningRegion() == scheduledRegion) {
 						assert sourceEnd == null;
 						sourceEnd = end;
@@ -111,7 +110,7 @@ public class ToRegionGraphVisitor extends AbstractToGraphVisitor
 					Node node = (Node)sourceEnd;
 					if (node.isHead()) {
 						headNode = node;
-						appendEdge(headNode, datumConnection, datumConnection);
+						appendEdge(headNode, connection, connection);
 					}
 				}
 			}

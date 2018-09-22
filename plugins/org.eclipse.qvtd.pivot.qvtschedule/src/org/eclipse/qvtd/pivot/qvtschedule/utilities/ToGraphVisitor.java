@@ -15,7 +15,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
-import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
@@ -26,7 +25,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.NodeConnectionImpl;
 
 /** This code is rescued but has never worked properly */
 public class ToGraphVisitor extends AbstractToGraphVisitor
@@ -36,8 +34,8 @@ public class ToGraphVisitor extends AbstractToGraphVisitor
 	}
 
 	@Override
-	public @Nullable String visitDatumConnection(@NonNull DatumConnection<?> datumConnection) {
-		appendEdge(datumConnection.getEdgeSource(), datumConnection, datumConnection.getEdgeTarget());
+	public @Nullable String visitConnection(@NonNull Connection connection) {
+		appendEdge(connection.getEdgeSource(), connection, connection.getEdgeTarget());
 		return null;
 	}
 
@@ -49,18 +47,18 @@ public class ToGraphVisitor extends AbstractToGraphVisitor
 
 	@Override
 	public @Nullable String visitEdgeConnection(@NonNull EdgeConnection edgeConnection) {
-		if (edgeConnection.isEdge2Edge()) {
-			NavigableEdge sourceEdge = edgeConnection.getSourceEnds().iterator().next();
-			NavigableEdge targetEdge = edgeConnection.getTargetEdges().iterator().next();
+		if (StaticConnectionManager.INSTANCE.rawIsEdge2Edge(edgeConnection)) {
+			NavigableEdge sourceEdge = StaticConnectionManager.INSTANCE.rawGetSourceEnds(edgeConnection).iterator().next();
+			NavigableEdge targetEdge = StaticConnectionManager.INSTANCE.rawGetTargetEdges(edgeConnection).iterator().next();
 			appendEdge(sourceEdge.getEdgeTarget(), edgeConnection, targetEdge.getEdgeTarget());
 		}
 		else {
 			appendNode(edgeConnection);
-			for (@NonNull NavigableEdge source : QVTscheduleUtil.getSourceEnds(edgeConnection)) {
+			for (@NonNull NavigableEdge source : StaticConnectionManager.INSTANCE.rawGetSourceEnds(edgeConnection)) {
 				appendEdge(source.getEdgeTarget(), edgeConnection, edgeConnection);
 			}
-			for (@NonNull NavigableEdge target : edgeConnection.getTargetEdges()) {
-				ConnectionRole role = edgeConnection.getTargets().get(target);
+			for (@NonNull NavigableEdge target : StaticConnectionManager.INSTANCE.rawGetTargetEdges(edgeConnection)) {
+				ConnectionRole role = StaticConnectionManager.INSTANCE.rawGetTargets(edgeConnection).get(target);
 				assert role != null;
 				appendEdge(edgeConnection, role, target.getEdgeTarget());
 			}
@@ -113,18 +111,18 @@ public class ToGraphVisitor extends AbstractToGraphVisitor
 
 	@Override
 	public @Nullable String visitNodeConnection(@NonNull NodeConnection nodeConnection) {
-		if (nodeConnection.isNode2Node()) {
-			Node sourceNode = QVTscheduleUtil.getSourceEnds(nodeConnection).iterator().next();
-			Node targetNode = nodeConnection.getTargetNodes().iterator().next();
+		if (StaticConnectionManager.INSTANCE.rawIsNode2Node(nodeConnection)) {
+			Node sourceNode = StaticConnectionManager.INSTANCE.rawGetSourceEnds(nodeConnection).iterator().next();
+			Node targetNode = StaticConnectionManager.INSTANCE.rawGetTargetNodes(nodeConnection).iterator().next();
 			appendEdge(sourceNode, nodeConnection, targetNode);
 		}
 		else {
 			appendNode(nodeConnection);
-			for (@NonNull Node source : QVTscheduleUtil.getSourceEnds(nodeConnection)) {
+			for (@NonNull Node source : StaticConnectionManager.INSTANCE.rawGetSourceEnds(nodeConnection)) {
 				appendEdge(source, nodeConnection, nodeConnection);
 			}
-			for (@NonNull Node target : nodeConnection.getTargetNodes()) {
-				ConnectionRole role = ((NodeConnectionImpl)nodeConnection).getTargets().get(target);
+			for (@NonNull Node target : StaticConnectionManager.INSTANCE.rawGetTargetNodes(nodeConnection)) {
+				ConnectionRole role = StaticConnectionManager.INSTANCE.rawGetTargets(nodeConnection).get(target);
 				assert role != null;
 				appendEdge(nodeConnection, role, target);
 			}

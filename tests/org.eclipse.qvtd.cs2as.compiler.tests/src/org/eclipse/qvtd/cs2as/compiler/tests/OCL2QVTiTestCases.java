@@ -40,6 +40,7 @@ import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -209,7 +210,7 @@ public class OCL2QVTiTestCases extends LoadTestCase
 			Class<? extends @NonNull Region> regionClass = parentRegion.getClass();
 			Integer count = regionClass2count.get(regionClass);
 			regionClass2count.put(regionClass, count == null ? 1 : count+1);
-			for (@NonNull Region childRegion : parentRegion.getCallableChildren()) {
+			for (@NonNull Region childRegion : ConnectionManager.rawGetCallableChildren(parentRegion)) {
 				instrumentRegion(childRegion);
 			}
 		}

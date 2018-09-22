@@ -20,7 +20,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -117,8 +117,8 @@ public class Region2Depth
 		List<@NonNull Region> parentRegions = region2parents.get(childRegion);
 		if (parentRegions == null) {
 			parentRegions = new ArrayList<>();
-			for (@NonNull DatumConnection<?> parentConnection : childRegion.getIncomingPassedConnections()) {
-				for (@NonNull Node source : parentConnection.getSourceNodes()) {
+			for (@NonNull Connection parentConnection : ConnectionManager.rawGetIncomingPassedConnections(childRegion)) {
+				for (@NonNull Node source : ConnectionManager.rawGetSourceNodes(parentConnection)) {
 					Region sourceRegion = QVTscheduleUtil.getOwningRegion(source);
 					ScheduledRegion sourceInvokingRegion = sourceRegion.getContainingScheduledRegion();
 					int sourceInvokingRegionDepth = sourceInvokingRegion != null ? getRegionDepth(sourceInvokingRegion) : 0;

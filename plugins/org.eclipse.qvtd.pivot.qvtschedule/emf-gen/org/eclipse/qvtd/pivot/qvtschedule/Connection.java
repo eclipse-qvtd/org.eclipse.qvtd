@@ -14,26 +14,38 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule;
 
+import java.util.List;
+
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Connection</b></em>'.
- * @extends org.eclipse.ocl.pivot.utilities.Nameable
+ * @extends org.eclipse.ocl.pivot.utilities.Nameable, GraphEdge, GraphNode
  * <!-- end-user-doc -->
+ *
+ * <!-- begin-model-doc -->
+ * A Connection establishes that one or more source edges/nodes are available for use by one or more target edges/nodes.
+ * Derivations refine the availability to edges or nodes, pass by value, optional existence or mandatory existence.
+ * <!-- end-model-doc -->
  *
  * <p>
  * The following features are supported:
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getOwningScheduledRegion <em>Owning Scheduled Region</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getConnectionRole <em>Connection Role</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getName <em>Name</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection()
  * @model abstract="true"
  * @generated
  */
-public interface Connection extends Element, Symbolable, org.eclipse.ocl.pivot.utilities.Nameable
+public interface Connection extends Element, Symbolable, org.eclipse.ocl.pivot.utilities.Nameable, GraphEdge, GraphNode
 {
 	/**
 	 * Returns the value of the '<em><b>Owning Scheduled Region</b></em>' container reference.
@@ -63,6 +75,74 @@ public interface Connection extends Element, Symbolable, org.eclipse.ocl.pivot.u
 	 * @generated
 	 */
 	void setOwningScheduledRegion(ScheduledRegion value);
+	/**
+	 * Returns the value of the '<em><b>Connection Role</b></em>' attribute.
+	 * The default value is <code>"UNDEFINED"</code>.
+	 * The literals are from the enumeration {@link org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Connection Role</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Connection Role</em>' attribute.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole
+	 * @see #setConnectionRole(ConnectionRole)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection_ConnectionRole()
+	 * @model default="UNDEFINED" required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Connection!connectionRole'"
+	 * @generated
+	 */
+	ConnectionRole getConnectionRole();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getConnectionRole <em>Connection Role</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Connection Role</em>' attribute.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole
+	 * @see #getConnectionRole()
+	 * @generated
+	 */
+	void setConnectionRole(ConnectionRole value);
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection_Name()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Connection!name'"
+	 * @generated
+	 */
+	@Override
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
 
 	void destroy();
+
+	boolean addIndex(int index);
+	@NonNull List<@NonNull Integer> getIndexes();
+
+	boolean isMandatory();
+
+	/**
+	 * Return true if this connection passes a value to a region head.
+	 */
+	boolean isPassed();
 } // Connection

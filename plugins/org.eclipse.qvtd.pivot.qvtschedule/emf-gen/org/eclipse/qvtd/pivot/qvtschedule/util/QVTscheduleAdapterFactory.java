@@ -134,10 +134,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createCyclicMappingRegionAdapter();
 			}
 			@Override
-			public <CE extends ConnectionEnd> Adapter caseDatumConnection(DatumConnection<CE> object) {
-				return createDatumConnectionAdapter();
-			}
-			@Override
 			public Adapter caseDependencyEdge(DependencyEdge object) {
 				return createDependencyEdgeAdapter();
 			}
@@ -572,20 +568,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCyclicMappingRegionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.DatumConnection <em>Datum Connection</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.DatumConnection
-	 * @generated
-	 */
-	public Adapter createDatumConnectionAdapter() {
 		return null;
 	}
 

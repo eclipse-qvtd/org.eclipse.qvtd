@@ -108,11 +108,6 @@ implements QVTscheduleVisitor<Boolean>
 	}
 
 	@Override
-	public @Nullable Boolean visitDatumConnection(@NonNull DatumConnection<?> object) {
-		return visitConnection(object);
-	}
-
-	@Override
 	public @Nullable Boolean visitDependencyEdge(@NonNull DependencyEdge object) {
 		return visitEdge(object);
 	}
@@ -134,7 +129,7 @@ implements QVTscheduleVisitor<Boolean>
 
 	@Override
 	public @Nullable Boolean visitEdgeConnection(@NonNull EdgeConnection object) {
-		return visitDatumConnection(object);
+		return visitConnection(object);
 	}
 
 	@Override
@@ -244,7 +239,7 @@ implements QVTscheduleVisitor<Boolean>
 
 	@Override
 	public @Nullable Boolean visitNodeConnection(@NonNull NodeConnection object) {
-		return visitDatumConnection(object);
+		return visitConnection(object);
 	}
 
 	@Override

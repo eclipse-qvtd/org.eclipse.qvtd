@@ -98,11 +98,6 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
-	public R visitDatumConnection(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DatumConnection<?> object) {
-		return delegate.visitDatumConnection(object);
-	}
-
-	@Override
 	public R visitDependencyEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DependencyEdge object) {
 		return delegate.visitDependencyEdge(object);
 	}

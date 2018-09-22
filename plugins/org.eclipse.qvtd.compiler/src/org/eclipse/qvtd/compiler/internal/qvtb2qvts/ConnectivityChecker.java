@@ -25,9 +25,9 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerConstants;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
-import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -73,11 +73,11 @@ public class ConnectivityChecker
 	protected final @NonNull ScheduleModel scheduleModel;
 	//	protected final @NonNull ScheduledRegion scheduledRegion;
 	private final @NonNull Map<@NonNull String, @NonNull ClassDatum> name2classDatum = new HashMap<>();
-	private final @NonNull Map<@NonNull String, @NonNull DatumConnection<?>> name2connection = new HashMap<>();
+	private final @NonNull Map<@NonNull String, @NonNull Connection> name2connection = new HashMap<>();
 	private final @NonNull Map<@NonNull ClassDatum, @NonNull Set<@NonNull ClassDatum>> classDatum2subClassDatums = new HashMap<>();
 	private final @NonNull Map<@NonNull ClassDatum, @NonNull Set<@NonNull ClassDatum>> classDatum2superClassDatums = new HashMap<>();
-	private final @NonNull Map<@NonNull ClassDatum, @NonNull List<@NonNull DatumConnection<?>>> producer2connections = new HashMap<>();
-	private final @NonNull Map<@NonNull ClassDatum, @NonNull List<@NonNull DatumConnection<?>>> consumer2connections = new HashMap<>();
+	private final @NonNull Map<@NonNull ClassDatum, @NonNull List<@NonNull Connection>> producer2connections = new HashMap<>();
+	private final @NonNull Map<@NonNull ClassDatum, @NonNull List<@NonNull Connection>> consumer2connections = new HashMap<>();
 	private final @NonNull Map<@NonNull ClassDatum, @NonNull List<@NonNull Node>> producer2nodes = new HashMap<>();
 	private final @NonNull Map<@NonNull ClassDatum, @NonNull List<@NonNull Node>> consumer2nodes = new HashMap<>();
 	private final @NonNull Map<@NonNull ClassDatum, @NonNull List<@NonNull Edge>> producer2edges = new HashMap<>();
@@ -137,28 +137,27 @@ public class ConnectivityChecker
 	}
 
 	protected void analyzeConnection(@NonNull Connection connection) {
-		DatumConnection<?> datumConnection = (DatumConnection<?>) connection;
-		DatumConnection<?> oldDatumConnection = name2connection.put(QVTscheduleUtil.getName(datumConnection), datumConnection);
-		assert oldDatumConnection == null;
-		for (@NonNull Node sourceNode : datumConnection.getSourceNodes()) {
+		Connection oldConnection = name2connection.put(QVTscheduleUtil.getName(connection), connection);
+		assert oldConnection == null;
+		for (@NonNull Node sourceNode : ConnectionManager.rawGetSourceNodes(connection)) {
 			ClassDatum classDatum = addClassDatum(sourceNode);
-			List<@NonNull DatumConnection<?>> connections = producer2connections.get(classDatum);
+			List<@NonNull Connection> connections = producer2connections.get(classDatum);
 			if (connections == null) {
 				connections = new ArrayList<>();
 				producer2connections.put(classDatum, connections);
 			}
-			//				assert !connections.contains(datumConnection);
-			connections.add(datumConnection);
+			//				assert !connections.contains(connection);
+			connections.add(connection);
 		}
-		for (@NonNull Node targetNode : datumConnection.getTargetNodes()) {
+		for (@NonNull Node targetNode : ConnectionManager.rawGetTargetNodes(connection)) {
 			ClassDatum classDatum = addClassDatum(targetNode);
-			List<@NonNull DatumConnection<?>> connections = consumer2connections.get(classDatum);
+			List<@NonNull Connection> connections = consumer2connections.get(classDatum);
 			if (connections == null) {
 				connections = new ArrayList<>();
 				consumer2connections.put(classDatum, connections);
 			}
-			//				assert !connections.contains(datumConnection);
-			connections.add(datumConnection);
+			//				assert !connections.contains(connection);
+			connections.add(connection);
 		}
 	}
 
@@ -325,8 +324,8 @@ public class ConnectivityChecker
 		for (@NonNull String name : names) {
 			ClassDatum classDatum = name2classDatum.get(name);
 			assert classDatum != null;
-			List<@NonNull DatumConnection<?>> producingConnections = producer2connections.get(classDatum);
-			List<@NonNull DatumConnection<?>> consumingConnections = consumer2connections.get(classDatum);
+			List<@NonNull Connection> producingConnections = producer2connections.get(classDatum);
+			List<@NonNull Connection> consumingConnections = consumer2connections.get(classDatum);
 			int producers = producingConnections != null ? producingConnections.size() : 0;
 			int consumers = consumingConnections != null ? consumingConnections.size() : 0;
 			if ((consumers > 0) || (producers > 0)) {

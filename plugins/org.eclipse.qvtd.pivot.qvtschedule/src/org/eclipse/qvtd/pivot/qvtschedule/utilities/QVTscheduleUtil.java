@@ -46,7 +46,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
-import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
@@ -740,10 +739,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 			}
 		}
 		return ClassUtil.nonNullState(null);
-	}
-
-	public static <CE extends ConnectionEnd> @NonNull Iterable<@NonNull CE> getSourceEnds(@NonNull DatumConnection<CE> datumConnection) {
-		return ClassUtil.nullFree(datumConnection.getSourceEnds());
 	}
 
 	public static @NonNull Node getSourceNode(@NonNull Edge edge) {

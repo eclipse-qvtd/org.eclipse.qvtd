@@ -209,7 +209,7 @@ public class FallibilityAnalysis
 
 	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 	protected final @NonNull ScheduleManager scheduleManager;
-	protected final @NonNull LegacyContentsAnalysis<@NonNull RuleRegion> originalContentsAnalysis;
+	protected final @NonNull LegacyContentsAnalysis originalContentsAnalysis;
 	private @Nullable RegionAnalysis failSometimes = null;
 
 	private @NonNull Map<@NonNull RegionAnalysis, @NonNull Set<@NonNull RegionAnalysis>> consumer2producers = new HashMap<>();

@@ -22,6 +22,7 @@ import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -74,16 +75,16 @@ public class LateConsumerMerger extends AbstractMerger
 		public void install(@NonNull ContentsAnalysis<@NonNull MappingRegion> contentsAnalysis, @NonNull MappingRegion mergedRegion) {
 			MappingRegion primaryRegion = getPrimaryRegion();
 			ScheduledRegion invokingRegion = QVTscheduleUtil.getContainingScheduledRegion(primaryRegion);
-			List<@NonNull Region> callableParents = Lists.newArrayList(primaryRegion.getCallableParents());
+			List<@NonNull Region> callableParents = Lists.newArrayList(ConnectionManager.rawGetCallableParents(primaryRegion));
 			for (@NonNull MappingRegion originalRegion : getOriginalRegions()) {
 				contentsAnalysis.removeRegion(originalRegion);
 				assert invokingRegion == originalRegion.getScheduledRegion();
 				for (@NonNull Region callableParent : callableParents) {
 					if (originalRegion == primaryRegion) {
-						callableParent.replaceCallToChild(primaryRegion, mergedRegion);
+						ConnectionManager.rawReplaceCallToChild(callableParent, primaryRegion, mergedRegion);
 					}
 					else {
-						callableParent.removeCallToChild(originalRegion);
+						ConnectionManager.rawRemoveCallToChild(callableParent, originalRegion);
 					}
 				}
 				scheduleManager.setScheduledRegion(originalRegion, invokingRegion);
@@ -94,9 +95,9 @@ public class LateConsumerMerger extends AbstractMerger
 				NodeConnection incomingConnection = originalHeadNode.getIncomingConnection();
 				if (incomingConnection != null) {
 					Node mergedHeadNode = getNodeMerger(originalHeadNode).getMergedNode();
-					incomingConnection.addPassedTargetNode(mergedHeadNode);
+					ConnectionManager.rawAddPassedTargetNode(incomingConnection, mergedHeadNode);
 					for (@NonNull Region originalRegion : getOriginalRegions()) {
-						incomingConnection.removeTargetRegion(originalRegion);
+						ConnectionManager.rawRemoveTargetRegion(incomingConnection, originalRegion);
 					}
 				}
 			}
@@ -275,7 +276,7 @@ public class LateConsumerMerger extends AbstractMerger
 	}
 
 	private void gatherRegions(@NonNull Region parentRegion) {
-		for (@NonNull Region childRegion : parentRegion.getCallableChildren()) {
+		for (@NonNull Region childRegion : ConnectionManager.rawGetCallableChildren(parentRegion)) {
 			allRegions.add(childRegion);
 			gatherRegions(childRegion);
 		}
@@ -325,7 +326,7 @@ public class LateConsumerMerger extends AbstractMerger
 	}
 
 	private void mergeHierarchy(@NonNull Region parentRegion) {
-		for (@NonNull Region childRegion : parentRegion.getCallableChildren()) {
+		for (@NonNull Region childRegion : ConnectionManager.rawGetCallableChildren(parentRegion)) {
 			mergeHierarchy(childRegion);
 			mergeRegion(childRegion);
 		}
@@ -333,7 +334,7 @@ public class LateConsumerMerger extends AbstractMerger
 	}
 
 	private void mergeRegion(@NonNull Region parentRegion) {
-		for (@NonNull NodeConnection nodeConnection : parentRegion.getRootConnections()) {
+		for (@NonNull NodeConnection nodeConnection : ConnectionManager.rawGetRootConnections(parentRegion)) {
 			//			System.out.println(nodeConnection + " " + nodeConnection.getIndexes());
 			Iterable<@NonNull List<@NonNull MappingRegion>> consecutiveRegionRuns = selectConsecutiveRegionRuns(nodeConnection);
 			for (@NonNull List<@NonNull MappingRegion> consecutiveRegionRun : consecutiveRegionRuns) {
@@ -356,7 +357,7 @@ public class LateConsumerMerger extends AbstractMerger
 			if (LATE.isActive()) {
 				LATE.println("Correlating primary: " + primaryRegion + "@[" + primaryRegion.getIndexRangeText() + "]");
 			}
-			if (primaryRegion.getIntermediateConnections().size() > 0) {		// FIXME this should be allowed
+			if (ConnectionManager.rawGetIntermediateConnections(primaryRegion).size() > 0) {		// FIXME this should be allowed
 				if (FAILURE.isActive()) {
 					FAILURE.println("Intermediate connections not yet supported");
 				}
@@ -379,7 +380,7 @@ public class LateConsumerMerger extends AbstractMerger
 				if (LATE.isActive()) {
 					LATE.println("Correlating secondary: " + secondaryRegion + "@[" + secondaryRegion.getIndexRangeText() + "]");
 				}
-				if (secondaryRegion.getIntermediateConnections().size() > 0) {		// FIXME this should be allowed
+				if (ConnectionManager.rawGetIntermediateConnections(secondaryRegion).size() > 0) {		// FIXME this should be allowed
 					if (FAILURE.isActive()) {
 						FAILURE.println("Intermediate connections not yet supported");
 					}
@@ -445,7 +446,7 @@ public class LateConsumerMerger extends AbstractMerger
 	 */
 	protected @NonNull Iterable<@NonNull List<@NonNull MappingRegion>> selectConsecutiveRegionRuns(@NonNull NodeConnection nodeConnection) {
 		Map<@NonNull Integer, @NonNull MappingRegion> index2region = new HashMap<>();
-		for (@NonNull Region targetRegion : nodeConnection.getTargetRegions()) {
+		for (@NonNull Region targetRegion : ConnectionManager.rawGetTargetRegions(nodeConnection)) {
 			if (targetRegion instanceof MappingRegion) {			// FIXME ?? always a MappingRegion
 				List<@NonNull Integer> indexes = targetRegion.getIndexes();
 				index2region.put(indexes.get(indexes.size()-1), (@NonNull MappingRegion) targetRegion);

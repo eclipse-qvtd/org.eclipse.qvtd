@@ -129,7 +129,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	/**
 	 * The producing/consuming characteristics of each original (unpartitioned) region.
 	 */
-	private @Nullable LegacyContentsAnalysis<@NonNull RuleRegion> originalContentsAnalysis = null;
+	private @Nullable LegacyContentsAnalysis originalContentsAnalysis = null;
 
 	private /*@LazyNonNull */ OperationDependencyAnalysis operationDependencyAnalysis = null;
 
@@ -206,7 +206,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	private void analyzeCallTree() {
-		LegacyContentsAnalysis<@NonNull RuleRegion> originalContentsAnalysis = getOriginalContentsAnalysis();
+		LegacyContentsAnalysis originalContentsAnalysis = getOriginalContentsAnalysis();
 		Map<@NonNull Rule, @NonNull List<@NonNull Rule>> consumer2producers = new HashMap<>();
 		List<@NonNull ClassDatum> middleClassDatums = new ArrayList<>();
 		StringBuilder s = QVTm2QVTs.CALL_TREE.isActive() ? new StringBuilder() : null;
@@ -272,8 +272,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public @NonNull LegacyContentsAnalysis<@NonNull RuleRegion> analyzeOriginalContents() {
-		LegacyContentsAnalysis<@NonNull RuleRegion> contentsAnalysis = new LegacyContentsAnalysis<@NonNull RuleRegion>(this);
+	public @NonNull LegacyContentsAnalysis analyzeOriginalContents() {
+		LegacyContentsAnalysis contentsAnalysis = new LegacyContentsAnalysis(this);
 		List<@NonNull MappingRegion> mappingRegions = Lists.newArrayList(QVTscheduleUtil.getOwnedMappingRegions(getScheduleModel()));
 		Collections.sort(mappingRegions, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
 		for (@NonNull MappingRegion mappingRegion : mappingRegions) {
@@ -696,7 +696,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public @NonNull LegacyContentsAnalysis<@NonNull RuleRegion> getOriginalContentsAnalysis() {
+	public @NonNull LegacyContentsAnalysis getOriginalContentsAnalysis() {
 		return ClassUtil.nonNullState(originalContentsAnalysis);
 	}
 

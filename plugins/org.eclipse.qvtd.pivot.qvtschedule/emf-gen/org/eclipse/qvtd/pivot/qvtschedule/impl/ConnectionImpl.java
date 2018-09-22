@@ -14,6 +14,9 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
@@ -21,12 +24,18 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
-
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
+import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,6 +47,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl#getSymbolName <em>Symbol Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl#getOwningScheduledRegion <em>Owning Scheduled Region</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl#getConnectionRole <em>Connection Role</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
@@ -63,6 +74,43 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	protected String symbolName = SYMBOL_NAME_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getConnectionRole() <em>Connection Role</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConnectionRole()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final ConnectionRole CONNECTION_ROLE_EDEFAULT = ConnectionRole.UNDEFINED;
+	/**
+	 * The cached value of the '{@link #getConnectionRole() <em>Connection Role</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConnectionRole()
+	 * @generated
+	 * @ordered
+	 */
+	protected ConnectionRole connectionRole = CONNECTION_ROLE_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -79,16 +127,6 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTschedulePackage.Literals.CONNECTION;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getSymbolName() {
-		return symbolName;
 	}
 
 	/**
@@ -152,6 +190,48 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ConnectionRole getConnectionRole() {
+		return connectionRole;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setConnectionRole(ConnectionRole newConnectionRole) {
+		ConnectionRole oldConnectionRole = connectionRole;
+		connectionRole = newConnectionRole == null ? CONNECTION_ROLE_EDEFAULT : newConnectionRole;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CONNECTION__CONNECTION_ROLE, oldConnectionRole, connectionRole));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CONNECTION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -203,6 +283,10 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 				return getSymbolName();
 			case QVTschedulePackage.CONNECTION__OWNING_SCHEDULED_REGION:
 				return getOwningScheduledRegion();
+			case QVTschedulePackage.CONNECTION__CONNECTION_ROLE:
+				return getConnectionRole();
+			case QVTschedulePackage.CONNECTION__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -220,6 +304,12 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 				return;
 			case QVTschedulePackage.CONNECTION__OWNING_SCHEDULED_REGION:
 				setOwningScheduledRegion((ScheduledRegion)newValue);
+				return;
+			case QVTschedulePackage.CONNECTION__CONNECTION_ROLE:
+				setConnectionRole((ConnectionRole)newValue);
+				return;
+			case QVTschedulePackage.CONNECTION__NAME:
+				setName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -239,6 +329,12 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 			case QVTschedulePackage.CONNECTION__OWNING_SCHEDULED_REGION:
 				setOwningScheduledRegion((ScheduledRegion)null);
 				return;
+			case QVTschedulePackage.CONNECTION__CONNECTION_ROLE:
+				setConnectionRole(CONNECTION_ROLE_EDEFAULT);
+				return;
+			case QVTschedulePackage.CONNECTION__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -255,6 +351,10 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 				return SYMBOL_NAME_EDEFAULT == null ? symbolName != null : !SYMBOL_NAME_EDEFAULT.equals(symbolName);
 			case QVTschedulePackage.CONNECTION__OWNING_SCHEDULED_REGION:
 				return getOwningScheduledRegion() != null;
+			case QVTschedulePackage.CONNECTION__CONNECTION_ROLE:
+				return connectionRole != CONNECTION_ROLE_EDEFAULT;
+			case QVTschedulePackage.CONNECTION__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -291,21 +391,124 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
 
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (symbolName: ");
-		result.append(symbolName);
-		result.append(')');
-		return result.toString();
+	/**
+	 * The indexes in the overall schedule at which this connection propagates additional values.
+	 */
+	private final @NonNull List<@NonNull Integer> indexes = new ArrayList<>();
+
+	@Override
+	public boolean addIndex(int index) {
+		for (int i = 0; i < indexes.size(); i++) {
+			Integer anIndex = indexes.get(i);
+			if (index == anIndex) {
+				return false;
+			}
+			if (index < anIndex) {
+				indexes.add(i, index);
+				return true;
+			}
+		}
+		indexes.add(index);
+		return true;
 	}
 
+	@Override
+	public void appendEdgeAttributes(@NonNull ToGraphHelper toGraphHelper, @NonNull String sourceName, @NonNull String targetName) {
+		GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
+		toGraphHelper.setColor(this);
+		/*		if (isRegion2Region()) {
+			String indexText = getIndexText();
+			if (indexText != null) {
+				s.setLabel(indexText);
+			}
+		} */
+		String style = getConnectionRole().getStyle();
+		if (style != null) {
+			s.setStyle(style);
+		}
+		String arrowhead = getConnectionRole().getArrowhead();
+		if (arrowhead != null) {
+			s.setArrowhead(arrowhead);
+		}
+		s.setPenwidth(getConnectionRole().getPenwidth());
+		s.appendAttributedEdge(sourceName, this, targetName);
+	}
+
+	@Override
+	public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
+		GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
+		String name = getName();
+		String indexText = getIndexText();
+		if (indexText != null) {
+			name = name + "\\n " + indexText;
+		}
+		s.setLabel(name);
+		s.setShape(getShape());
+		String style = getStyle();
+		if (style != null) {
+			s.setStyle(style);
+		}
+		toGraphHelper.setColor(this);
+		s.setPenwidth(getConnectionRole().getPenwidth());
+		s.appendAttributedNode(nodeName);
+	}
+
+	@Override
+	public void destroy() {
+		setOwningScheduledRegion(null);
+	}
+
+	@Override
+	public @NonNull String getColor() {
+		return getConnectionRole().getColor();
+	}
+
+	public @Nullable String getIndexText() {
+		StringBuilder s = null;
+		for (@NonNull Integer index : indexes) {
+			if (s == null) {
+				s = new StringBuilder();
+			}
+			else {
+				s.append(",");
+			}
+			s.append(index.toString());
+		}
+		return s != null ? s.toString() : null;
+	}
+
+	@Override
+	public @NonNull List<@NonNull Integer> getIndexes() {
+		return indexes;
+	}
+
+	public @NonNull String getShape() {
+		return "ellipse";
+	}
+
+	@Override
+	public @NonNull GraphNode getEdgeSource() {
+		throw new UnsupportedOperationException();
+	}
+
+	public @Nullable String getStyle() {
+		return getConnectionRole().getStyle();
+	}
+
+	@Override
+	public @NonNull String getSymbolName() {
+		return QVTscheduleUtil.getName(this);
+	}
+
+	@Override
+	public @NonNull GraphNode getEdgeTarget() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public String toString() {
+		return getSymbolName();
+	}
 
 } //ConnectionImpl

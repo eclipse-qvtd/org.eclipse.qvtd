@@ -33,6 +33,7 @@ import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
@@ -78,11 +79,11 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 	}
 
 	private void createRootConnectionVariables() {
-		List<@NonNull NodeConnection> rootConnections = new ArrayList<>(region.getRootConnections());
+		List<@NonNull NodeConnection> rootConnections = new ArrayList<>(ConnectionManager.rawGetRootConnections(region));
 		Collections.sort(rootConnections, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull NodeConnection rootConnection : rootConnections) {
 			Type commonType = getConnectionSourcesType(rootConnection);
-			Node regionNode = rootConnection.basicGetSource(region);
+			Node regionNode = ConnectionManager.rawBasicGetSource(rootConnection, region);
 			String name = rootConnection.getName();
 			assert name != null;
 			if (regionNode != null) {
@@ -157,7 +158,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 
 	protected Type getType(@NonNull IdResolver idResolver, @NonNull NodeConnection rootConnection) {
 		Type commonType = null;
-		for (@NonNull Node node : QVTscheduleUtil.getSourceEnds(rootConnection)) {
+		for (@NonNull Node node : ConnectionManager.rawGetSourceEnds(rootConnection)) {
 			Type nodeType = node.getCompleteClass().getPrimaryClass();
 			if (commonType == null) {
 				commonType = nodeType;
@@ -242,7 +243,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 				}
 			} */
 		List<Statement> ownedStatements = mapping.getOwnedStatements();
-		for (@NonNull Region callableRegion : region.getCallableChildren()) {
+		for (@NonNull Region callableRegion : ConnectionManager.rawGetCallableChildren(region)) {
 			if (isInstall(callableRegion)) {
 				ownedStatements.add(createInstall(callableRegion));
 			}

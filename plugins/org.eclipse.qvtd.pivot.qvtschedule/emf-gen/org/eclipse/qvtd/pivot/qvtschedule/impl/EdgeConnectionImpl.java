@@ -14,27 +14,18 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-import com.google.common.collect.Lists;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.StaticConnectionManager;
 
 /**
  * <!-- begin-user-doc -->
@@ -49,7 +40,7 @@ import com.google.common.collect.Lists;
  *
  * @generated
  */
-public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> implements EdgeConnection {
+public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection {
 	/**
 	 * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -76,20 +67,6 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 	@Override
 	protected EClass eStaticClass() {
 		return QVTschedulePackage.Literals.EDGE_CONNECTION;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * This is specialized for the more specific element type known in this context.
-	 * @generated
-	 */
-	@Override
-	public List<NavigableEdge> getSourceEnds() {
-		if (sourceEnds == null) {
-			sourceEnds = new EObjectResolvingEList<NavigableEdge>(NavigableEdge.class, this, QVTschedulePackage.EDGE_CONNECTION__SOURCE_ENDS);
-		}
-		return sourceEnds;
 	}
 
 	/**
@@ -202,138 +179,18 @@ public class EdgeConnectionImpl extends DatumConnectionImpl<NavigableEdge> imple
 	}
 
 	@Override
-	public void addUsedTargetEdge(@NonNull NavigableEdge targetEdge, boolean mustBeLater) {
-		//		if (getSourceRegions().contains(targetEdge.getRegion())) {
-		//			System.out.println("Cyclic dependency arbitrarily ignored: " + this);
-		//			mergeRole(Connections.PREFERRED_EDGE);
-		//			return;
-		//		}
-		mergeRole(mustBeLater ? ConnectionRole.MANDATORY_EDGE : ConnectionRole.PREFERRED_EDGE);
-		assert !targetEnd2role.containsKey(targetEdge);
-		targetEnd2role.put(targetEdge, mustBeLater ? ConnectionRole.MANDATORY_EDGE : ConnectionRole.PREFERRED_EDGE);
-		targetEdge.setIncomingConnection(this);
-		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
-	}
-
-	@Override
 	public void destroy() {
-		for (@NonNull NavigableEdge sourceEdge : QVTscheduleUtil.getSourceEnds(this)) {
-			sourceEdge.removeOutgoingConnection(this);
-		}
-		for (@NonNull NavigableEdge targetNode : targetEnd2role.keySet()) {
-			targetNode.setIncomingConnection(null);
-		}
+		StaticConnectionManager.INSTANCE.rawDestroy(this);
 		super.destroy();
 	}
-
-	@Override
-	public @NonNull Iterable<@NonNull Node> getSourceNodes() {
-		List<@NonNull Node> sourceNodes = new ArrayList<>();
-		for (@NonNull NavigableEdge sourceEdge : QVTscheduleUtil.getSourceEnds(this)) {
-			sourceNodes.add(sourceEdge.getEdgeSource());
-		}
-		return sourceNodes;
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull NavigableEdge> getTargetEdges() {
-		return targetEnd2role.keySet();
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull Node> getTargetNodes() {
-		List<@NonNull Node> targetNodes = new ArrayList<>();
-		for (@NonNull NavigableEdge targetEdge : targetEnd2role.keySet()) {
-			targetNodes.add(targetEdge.getEdgeTarget());
-		}
-		return targetNodes;
-	}
-
-	@Override
-	public @NonNull Map<@NonNull NavigableEdge, @NonNull ConnectionRole> getTargets() {
-		return targetEnd2role;
-	}
-
-	/*	@Override
-	public @NonNull Type getType(@NonNull IdResolver idResolver) {
-//		System.out.println("commonType of " + this);
-		Type commonType = null;
-		for (@NonNull Node node : getSources()) {
-			Type nodeType = node.getCompleteClass().getPrimaryClass();
-//			System.out.println("  nodeType " + nodeType);
-			if (!(nodeType instanceof CollectionType)) {		// RealizedVariable accumulated on Connection
-				CompleteEnvironment environment = idResolver.getEnvironment();
-				nodeType = isOrdered() ? environment.getOrderedSetType(nodeType, true, null, null) : environment.getSetType(nodeType, true, null, null);
-			}
-			if (commonType == null) {
-				commonType = nodeType;
-			}
-			else {
-				commonType = commonType.getCommonType(idResolver, nodeType);
-			}
-		}
-//		System.out.println("=> " + commonType);
-		assert commonType != null;
-		return commonType;
-	} */
-
-	@Override
-	public boolean isEdge2Edge() {
-		return (sourceEnds.size() == 1) && (targetEnd2role.size() == 1);
-	}
-
-	//	@Override
-	//	public boolean isInput() {
-	//		return false;
-	//	}
 
 	@Override
 	public boolean isMandatory() {
 		return false;
 	}
 
-	//	@Override
-	//	public boolean isOutput() {
-	//		return false;
-	//	}
-
 	@Override
 	public boolean isPassed() {
 		return false;
-	}
-
-	@Override
-	public boolean isPassed(@NonNull Region targetRegion) {
-		return false;
-	}
-
-	/*	@Override
-	public void removeSource(@NonNull Node sourceNode) {
-		boolean wasRemoved = sourceNodes.remove(sourceNode);
-		assert wasRemoved;
-	}
-
-	@Override
-	public void removeTarget(@NonNull Node targetNode) {
-		ConnectionRole oldRole = targetNode2role.remove(targetNode);
-		assert oldRole != null;
-	} */
-
-	private void removeTarget(@NonNull NavigableEdge targetEdge) {
-		ConnectionRole oldRole = targetEnd2role.remove(targetEdge);
-		assert oldRole != null;
-	}
-
-	@Override
-	public void removeTargetRegion(@NonNull Region targetRegion) {
-		for (@NonNull NavigableEdge targetEdge : Lists.newArrayList(getTargetEdges())) {
-			if (targetEdge.getOwningRegion() == targetRegion) {
-				targetEdge.setIncomingConnection(null);
-				removeTarget(targetEdge);
-			}
-		}
-		if (targetEnd2role.isEmpty()) {
-			destroy();
-		}
 	}
 } //EdgeConnectionImpl

@@ -134,10 +134,7 @@ public interface Region extends NamedElement, Symbolable, Graphable, GraphNode
 	 */
 	List<Node> getOwnedNodes();
 
-	void addCallToChild(@NonNull Region region);
 	boolean addIndex(int index);
-	void addIntermediateConnection(@NonNull NodeConnection connection);
-	void addRootConnection(@NonNull NodeConnection connection);
 	void addVariableNode(@NonNull VariableDeclaration variable, @NonNull Node node);
 
 	/**
@@ -145,25 +142,6 @@ public interface Region extends NamedElement, Symbolable, Graphable, GraphNode
 	 */
 	@NonNull Iterable<@NonNull Node> getAncestorsOf(@NonNull Node node);
 
-	/**
-	 * Return the regions that this region can actually call directly after taking account the connection dependencies.
-	 */
-	@NonNull Iterable<@NonNull Region> getCallableChildren();
-
-	/**
-	 * Return the regions that can actually call this region directly after taking account the connection dependencies.
-	 */
-	@NonNull Iterable<@NonNull Region> getCallableParents();
-
-	/**
-	 * Return the regions that this region calls.
-	 */
-	@NonNull Iterable<@NonNull Region> getCalledRegions();
-
-	/**
-	 * Return the regions the call this region.
-	 */
-	@NonNull Iterable<@NonNull Region> getCallingRegions();
 	@NonNull Iterable<@NonNull Node> getComposedNodes();
 	@Nullable ScheduledRegion getContainingScheduledRegion();
 	@NonNull Iterable<@NonNull Edge> getExpressionEdges();
@@ -175,10 +153,6 @@ public interface Region extends NamedElement, Symbolable, Graphable, GraphNode
 	int getFirstIndex();
 
 	List<Node> getHeadNodes();
-	@NonNull Iterable<@NonNull DatumConnection<?>> getIncomingConnections();
-	@NonNull Iterable<@NonNull NodeConnection> getIncomingPassedConnections();
-	@NonNull Iterable<@NonNull NodeConnection> getIncomingUsedConnections();
-	@NonNull List<@NonNull NodeConnection> getIntermediateConnections();
 	@NonNull String getIndexRangeText();
 	@NonNull List<@NonNull Integer> getIndexes();
 
@@ -187,7 +161,6 @@ public interface Region extends NamedElement, Symbolable, Graphable, GraphNode
 	 */
 	int getInvocationIndex();
 	int getLastIndex();
-	@NonNull List<@NonNull DatumConnection<?>> getLoopingConnections();
 	/**
 	 * Return the nodes that are navigated by navigation from the region's guards.
 	 */
@@ -200,39 +173,20 @@ public interface Region extends NamedElement, Symbolable, Graphable, GraphNode
 	@NonNull Iterable<@NonNull Node> getNewNodes();
 
 	/**
-	 * Return all the next connections from this region to another region.
-	 * Where this is a hierarchical region the connections are those from the hierarchical head to its immediate internal regions.
-	 */
-	@NonNull Iterable<@NonNull DatumConnection<?>> getNextConnections();
-
-	/**
 	 * Return all nodes referenced by this region. i.e. Constant, Loaded, Predicated, Speculated nodes.
 	 */
 	@NonNull Iterable<@NonNull Node> getOldNodes();
 
-	/**
-	 * Return all connections from this (hierarchical) region to another (hierarchical) region.
-	 */
-	@NonNull Iterable<@NonNull DatumConnection<?>> getOutgoingConnections();
-	@NonNull Iterable<@NonNull NodeConnection> getOutgoingPassedConnections();
-	@NonNull Iterable<@NonNull NodeConnection> getOutgoingUsedConnections();
 	@NonNull Iterable<@NonNull Node> getPatternNodes();
 	@NonNull Iterable<@NonNull NavigationEdge> getPredicatedNavigationEdges();
 	@NonNull Iterable<@NonNull Edge> getRealizedEdges();
 	@NonNull Iterable<@NonNull NavigableEdge> getRealizedNavigationEdges();
 	@NonNull Iterable<@NonNull Edge> getRecursionEdges();
-	@NonNull List<@NonNull NodeConnection> getRootConnections();
 	@Nullable String getShape();
 	@Nullable String getStyle();
 
-	/**
-	 * Return the regions that this region uses and how many times.
-	 */
-	@NonNull List<@NonNull NodeConnection> getUsedConnections();
 	boolean isLoadingRegion();
 	boolean isOperationRegion();
-	void removeCallToChild(@NonNull Region region);
-	void replaceCallToChild(@NonNull Region oldRegion, @NonNull Region newRegion);
 	void resetHead(@NonNull Node headNode);
 
 	int getNextPartitionNumber();

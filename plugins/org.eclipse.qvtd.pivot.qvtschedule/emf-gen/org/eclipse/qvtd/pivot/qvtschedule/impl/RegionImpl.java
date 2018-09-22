@@ -40,13 +40,10 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.Cluster;
-import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
@@ -401,40 +398,13 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	}
 
 	/**
-	 * Ordered list of regions that call this region
-	 */
-	private final @NonNull List<@NonNull Region> callableParents = new ArrayList<>();
-
-	/**
-	 * Ordered list of regions that this region calls. May exclude some children whose dependencies are unsatisfied.
-	 * May include non-children whose dependencies are satisfied by earlier child calls.
-	 */
-	private final @NonNull List<@NonNull Region> callableChildren = new ArrayList<>();
-
-	/**
 	 * The indexes in the overall schedule at which this region can be executed. The first index is the index at which ALL
 	 * invocations occur. Subsequent indexes are when a referenced value may become available enabling a deferred execution.
 	 */
 	private final @NonNull List<@NonNull Integer> indexes = new ArrayList<>();
 
-	/**
-	 * The connections hosted by this region and passed to child regions.
-	 */
-	private @NonNull List<@NonNull NodeConnection> rootConnections = new ArrayList<>();
-
-	/**
-	 * The connections propagated as middle guards from a hosted by a parent region and to one or more child regions.
-	 */
-	private @NonNull List<@NonNull NodeConnection> intermediateConnections = new ArrayList<>();
-
 	@SuppressWarnings("unused")			// Used in the debugger
 	private final @NonNull ToDOT toDot = new ToDOT(this){};
-
-	@Override
-	public void addCallToChild(@NonNull Region region) {
-		callableChildren.add(region);
-		((RegionImpl)region).callableParents.add(this);
-	}
 
 	@Override
 	public boolean addIndex(int index) {
@@ -450,18 +420,6 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		}
 		indexes.add(index);
 		return true;
-	}
-
-	@Override
-	public void addIntermediateConnection(@NonNull NodeConnection connection) {
-		assert !intermediateConnections.contains(connection);
-		intermediateConnections.add(connection);
-	}
-
-	@Override
-	public void addRootConnection(@NonNull NodeConnection connection) {
-		assert !rootConnections.contains(connection);
-		rootConnections.add(connection);
 	}
 
 	@Override
@@ -696,44 +654,6 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull Region> getCallableChildren() {
-		return callableChildren;
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull Region> getCallableParents() {
-		return callableParents;
-	}
-
-	@Override
-	public @NonNull List<@NonNull Region> getCalledRegions() {
-		List<@NonNull Region> childRegions = new ArrayList<>();			// FIXME cache
-		for (@NonNull NodeConnection childConnection : getOutgoingPassedConnections()) {
-			for (@NonNull Node childNode : childConnection.getTargetNodes()) {
-				Region childRegion = QVTscheduleUtil.getOwningRegion(childNode);
-				if (!childRegions.contains(childRegion)) {
-					childRegions.add(childRegion);
-				}
-			}
-		}
-		return childRegions;
-	}
-
-	@Override
-	public @NonNull List<@NonNull Region> getCallingRegions() {
-		List<@NonNull Region> callingRegions = new ArrayList<>();			// FIXME cache
-		for (@NonNull NodeConnection callingConnection : getIncomingPassedConnections()) {
-			for (@NonNull Node callingNode : QVTscheduleUtil.getSourceEnds(callingConnection)) {
-				Region callingRegion = QVTscheduleUtil.getOwningRegion(callingNode);
-				if (!callingRegions.contains(callingRegion)) {
-					callingRegions.add(callingRegion);
-				}
-			}
-		}
-		return callingRegions;
-	}
-
-	@Override
 	public @NonNull String getColor() {
 		return "blue";
 	}
@@ -773,69 +693,6 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull DatumConnection<?>> getIncomingConnections() {		// FIXME cache
-		if ("«speculation» mapOclExpression_qvtr".equals(getName())) {
-			getClass();
-		}
-		List<@NonNull DatumConnection<?>> connections = new ArrayList<>();
-		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(this)) {
-			NodeConnection connection = headNode.getIncomingPassedConnection();
-			if ((connection != null) && !connections.contains(connection)) {
-				connections.add(connection);
-			}
-		}
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(this)) {
-			/*			if (node.isDependency() || node.isPattern()) {
-				if (node.isLoaded() || node.isSpeculated() || node.isPredicated()) {	// A DataType may be loaded but subject to an edge predication
-					NodeConnection connection = node.getIncomingUsedConnection();
-					if ((connection != null) && !connections.contains(connection)) {
-						connections.add(connection);
-					}
-				}
-			}
-			else if (node.isTrue()) {		// A <<success>> node */
-			NodeConnection connection = node.getIncomingUsedConnection();
-			if ((connection != null) && !connections.contains(connection)) {
-				connections.add(connection);
-			}
-			//			}
-		}
-		for (@NonNull NavigationEdge edge : getPredicatedNavigationEdges()) {
-			EdgeConnection connection = edge.getIncomingConnection();
-			if ((connection != null) && !connections.contains(connection)) {
-				connections.add(connection);
-			}
-		}
-		return connections;
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull NodeConnection> getIncomingPassedConnections() {		// FIXME cache
-		List<@NonNull NodeConnection> connections = new ArrayList<>();
-		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(this)) {
-			NodeConnection connection = headNode.getIncomingPassedConnection();
-			if (connection != null) {
-				connections.add(connection);
-			}
-		}
-		return connections;
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull NodeConnection> getIncomingUsedConnections() {			// FIXME cache
-		List<@NonNull NodeConnection> connections = new ArrayList<>();
-		for (@NonNull Node node : getPatternNodes()) {
-			if (node.isLoaded() || node.isSpeculated() || node.isPredicated()) {	// A DataType may be loaded but subject to an edge predication
-				NodeConnection connection = node.getIncomingUsedConnection();
-				if (connection != null) {
-					connections.add(connection);
-				}
-			}
-		}
-		return connections;
-	}
-
-	@Override
 	public @NonNull String getIndexRangeText() {
 		return getInvocationIndex() + ".." + getFinalExecutionIndex();
 	}
@@ -860,11 +717,6 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	}
 
 	@Override
-	public @NonNull List<@NonNull NodeConnection> getIntermediateConnections() {
-		return intermediateConnections;
-	}
-
-	@Override
 	public int getInvocationIndex() {
 		assert indexes.size() > 0;
 		return indexes.get(0);
@@ -875,23 +727,6 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		int size = indexes.size();
 		assert size > 0;
 		return indexes.get(size-1);
-	}
-
-	@Override
-	public @NonNull List<@NonNull DatumConnection<?>> getLoopingConnections() {
-		List<@NonNull DatumConnection<?>> loopingConnections = new ArrayList<>();
-		for (@NonNull DatumConnection<?> connection : getOutgoingConnections()) {
-			for (@NonNull Region sourceRegion : connection.getSourceRegions()) {
-				if (this == sourceRegion) {
-					for (@NonNull Region targetRegion : connection.getTargetRegions()) {
-						if ((this == targetRegion) && !loopingConnections.contains(connection)) {
-							loopingConnections.add(connection);
-						}
-					}
-				}
-			}
-		}
-		return loopingConnections;
 	}
 
 	@Override
@@ -914,11 +749,6 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public final @NonNull Iterable<@NonNull Node> getNewNodes() {
 		return Iterables.filter(QVTscheduleUtil.getOwnedNodes(this), QVTscheduleUtil.IsNewNodePredicate.INSTANCE);
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull DatumConnection<?>> getNextConnections() {
-		return getOutgoingConnections();
 	}
 
 	/**
@@ -979,47 +809,6 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public final @NonNull Iterable<@NonNull Node> getOldNodes() {
 		return Iterables.filter(QVTscheduleUtil.getOwnedNodes(this), QVTscheduleUtil.IsOldNodePredicate.INSTANCE);
-	}
-
-	@Override
-	public @NonNull List<@NonNull DatumConnection<?>> getOutgoingConnections() {			// FIXME cache
-		List<@NonNull DatumConnection<?>> connections = new ArrayList<>();
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(this)) {
-			for (@NonNull NodeConnection connection : node.getOutgoingPassedConnections()) {
-				connections.add(connection);
-			}
-			for (@NonNull NodeConnection connection : node.getOutgoingUsedBindingEdges()) {
-				connections.add(connection);
-			}
-		}
-		for (@NonNull NavigableEdge edge : getNavigationEdges()) {
-			for (@NonNull EdgeConnection connection : QVTscheduleUtil.getOutgoingConnections(edge)) {
-				connections.add(connection);
-			}
-		}
-		return connections;
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull NodeConnection> getOutgoingPassedConnections() {			// FIXME cache
-		List<@NonNull NodeConnection> connections = new ArrayList<>();
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(this)) {
-			for (@NonNull NodeConnection connection : node.getOutgoingPassedConnections()) {
-				connections.add(connection);
-			}
-		}
-		return connections;
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull NodeConnection> getOutgoingUsedConnections() {			// FIXME cache
-		List<@NonNull NodeConnection> connections = new ArrayList<>();
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(this)) {
-			for (@NonNull NodeConnection connection : node.getOutgoingUsedBindingEdges()) {
-				connections.add(connection);
-			}
-		}
-		return connections;
 	}
 
 	protected @Nullable List<@NonNull NavigableEdge> getPath(@NonNull Node sourceNode, @NonNull Node targetNode, @NonNull Set<@NonNull Edge> usedEdges) {
@@ -1092,11 +881,6 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	}
 
 	@Override
-	public @NonNull List<@NonNull NodeConnection> getRootConnections() {
-		return rootConnections;
-	}
-
-	@Override
 	public @Nullable String getShape() {
 		return null;
 	}
@@ -1139,20 +923,6 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 
 	protected String getSymbolNameSuffix() {
 		return QVTscheduleConstants.REGION_SYMBOL_NAME_SUFFIX;
-	}
-
-	@Override
-	public @NonNull List<@NonNull NodeConnection> getUsedConnections() {			// FIXME cache
-		List<@NonNull NodeConnection> usedConnections = new ArrayList<>();
-		for (@NonNull Node node : getPatternNodes()) {
-			if (node.isLoaded() || node.isSpeculated() || node.isPredicated()) {	// A DataType may be loaded but subject to an edge predication
-				NodeConnection connection = node.getIncomingUsedConnection();
-				if (connection != null) {
-					usedConnections.add(connection);
-				}
-			}
-		}
-		return usedConnections;
 	}
 
 	/*	private boolean hasEdgeConnection(@NonNull Node predicatedNode) {
@@ -1308,21 +1078,6 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 				}
 			}
 		} */
-	}
-
-	@Override
-	public void removeCallToChild(@NonNull Region region) {
-		callableChildren.remove(region);
-		((RegionImpl)region).callableParents.remove(this);
-	}
-
-	@Override
-	public void replaceCallToChild(@NonNull Region oldRegion, @NonNull Region newRegion) {
-		int index = callableChildren.indexOf(oldRegion);
-		callableChildren.remove(oldRegion);
-		callableChildren.add(index, newRegion);
-		((RegionImpl)oldRegion).callableParents.remove(this);
-		((RegionImpl)oldRegion).callableParents.add(this);
 	}
 
 	@Override

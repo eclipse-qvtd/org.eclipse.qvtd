@@ -104,8 +104,14 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComposedNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element #//Symbolable">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A Connection establishes that one or more source edges/nodes are available for use by one or more target edges/nodes.&#xD;&#xA;Derivations refine the availability to edges or nodes, pass by value, optional existence or mandatory existence."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduledRegion"
         lowerBound="1" eType="#//ScheduledRegion" eOpposite="#//ScheduledRegion/ownedConnections"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="connectionRole" lowerBound="1"
+        eType="#//ConnectionRole" defaultValueLiteral="UNDEFINED"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectionEnd" abstract="true" interface="true">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -118,21 +124,6 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="elementRegions" lowerBound="1"
         upperBound="-1" eType="#//MappingRegion"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DatumConnection" abstract="true" eSuperTypes="#//Connection">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A DatumConnection establishes that one or more source edges/nodes are available for use by one or more target edges/nodes.&#xD;&#xA;Derivations refine the availability to edges or nodes, pass by value, optional existence or mandatory existence."/>
-    </eAnnotations>
-    <eTypeParameters name="CE">
-      <eBounds eClassifier="#//ConnectionEnd"/>
-    </eTypeParameters>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="connectionRole" lowerBound="1"
-        eType="#//ConnectionRole" defaultValueLiteral="UNDEFINED"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceEnds" ordered="false"
-        upperBound="-1">
-      <eGenericType eTypeParameter="#//DatumConnection/CE"/>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DependencyEdge" eSuperTypes="#//Edge">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -167,15 +158,12 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetNode" lowerBound="1"
         eType="#//Node" eOpposite="#//Node/incomingEdges"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EdgeConnection">
+  <eClassifiers xsi:type="ecore:EClass" name="EdgeConnection" eSuperTypes="#//Connection">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An EdgeConnection supports an existence dependency between the region(s) that produce a navigation edge&#xD;&#xA;and the region(s) that consume it."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Property"/>
-    <eGenericSuperTypes eClassifier="#//DatumConnection">
-      <eTypeArguments eClassifier="#//NavigableEdge"/>
-    </eGenericSuperTypes>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EnumLiteralNode" eSuperTypes="#//OperationNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -354,7 +342,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningRegion" lowerBound="1"
         eType="#//Region" eOpposite="#//Region/ownedNodes"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NodeConnection">
+  <eClassifiers xsi:type="ecore:EClass" name="NodeConnection" eSuperTypes="#//Connection">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A NodeConnection supports a data connection from one or more source nodes to one or more target nodes.&#xD;&#xA;The data connection has a data type for the elemental value transfer through the connection.&#xD;&#xA;A passed connection may be realized by a simple transient point-to-point linkage or&#xD;&#xA;a full buffer that accumulates all possible values. A used connection is not actually realized; it just ensures that&#xD;&#xA;all source values exist before any target value consumes the value recomputed at the target."/>
     </eAnnotations>
@@ -364,9 +352,6 @@
         <details key="documentation" value="Non-null if this edge is part of a bidirectional pair."/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eGenericSuperTypes eClassifier="#//DatumConnection">
-      <eTypeArguments eClassifier="#//Node"/>
-    </eGenericSuperTypes>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NullLiteralNode" eSuperTypes="#//OperationNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

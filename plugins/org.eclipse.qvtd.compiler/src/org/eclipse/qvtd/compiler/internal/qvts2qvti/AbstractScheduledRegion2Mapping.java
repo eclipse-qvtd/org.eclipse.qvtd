@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
@@ -63,7 +64,7 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 						connectionExpression = PivotUtil.createVariableExp(connectionVariable);
 					}
 					else {
-						Node callingNode = callingConnection.getSource(region);
+						Node callingNode = ConnectionManager.rawGetSource(callingConnection, region);
 						connectionExpression = createSelectByKind(callingNode);
 					}
 				}
@@ -89,7 +90,7 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 			OCLExpression sourceExpression = PivotUtil.createVariableExp(callingConnectionVariable);
 			mappingParameterBindings.add(QVTimperativeUtil.createMappingParameterBinding(calledConnectionVariable, sourceExpression));
 		} */
-		for (@NonNull NodeConnection intermediateConnection : calledRegion.getIntermediateConnections()) {
+		for (@NonNull NodeConnection intermediateConnection : ConnectionManager.rawGetIntermediateConnections(calledRegion)) {
 			ConnectionVariable calledConnectionVariable = calledRegion2Mapping.getConnectionVariable(intermediateConnection);
 			/*			OCLExpression connectionExpression = null;
 			if (guardVariable2expression != null) {
@@ -159,7 +160,7 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractRegion2Map
 			OCLExpression sourceExpression = PivotUtil.createVariableExp(callingConnectionVariable);
 			mappingParameterBindings.add(QVTimperativeUtil.createMappingParameterBinding(calledConnectionVariable, sourceExpression));
 		} */
-		for (@NonNull NodeConnection intermediateConnection : calledRegion.getIntermediateConnections()) {
+		for (@NonNull NodeConnection intermediateConnection : ConnectionManager.rawGetIntermediateConnections(calledRegion)) {
 			ConnectionVariable calledConnectionVariable = calledRegion2Mapping.getConnectionVariable(intermediateConnection);
 			/*			OCLExpression connectionExpression = null;
 			if (guardVariable2expression != null) {

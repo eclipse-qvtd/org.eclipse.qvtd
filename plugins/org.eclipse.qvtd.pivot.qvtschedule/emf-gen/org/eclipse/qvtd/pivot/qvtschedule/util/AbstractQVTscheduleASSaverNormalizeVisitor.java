@@ -106,11 +106,6 @@ public abstract class AbstractQVTscheduleASSaverNormalizeVisitor
 	}
 
 	@Override
-	public @Nullable Object visitDatumConnection(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DatumConnection<?> object) {
-		return visitConnection(object);
-	}
-
-	@Override
 	public @Nullable Object visitDependencyEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull DependencyEdge object) {
 		return visitEdge(object);
 	}
@@ -132,7 +127,7 @@ public abstract class AbstractQVTscheduleASSaverNormalizeVisitor
 
 	@Override
 	public @Nullable Object visitEdgeConnection(org.eclipse.qvtd.pivot.qvtschedule.@NonNull EdgeConnection object) {
-		return visitDatumConnection(object);
+		return visitConnection(object);
 	}
 
 	@Override
@@ -242,7 +237,7 @@ public abstract class AbstractQVTscheduleASSaverNormalizeVisitor
 
 	@Override
 	public @Nullable Object visitNodeConnection(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NodeConnection object) {
-		return visitDatumConnection(object);
+		return visitConnection(object);
 	}
 
 	@Override

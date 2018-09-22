@@ -20,7 +20,7 @@ import java.util.Stack;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
@@ -111,24 +111,24 @@ public class CallTreeBuilder
 					}
 				}
 				for (@NonNull Region targetRegion : scheduleCache.getTargetRegions(connection)) {
-					if ((targetRegion != commonRegion) && connection.isPassed(targetRegion)) {
-						Iterable<@NonNull Region> targetRegions2 = /*targetRegion.isCyclicScheduledRegion() ? Collections.singletonList(targetRegion) :*/ targetRegion.getCallableParents();
+					if ((targetRegion != commonRegion) && ConnectionManager.rawIsPassed(connection, targetRegion)) {
+						Iterable<@NonNull Region> targetRegions2 = /*targetRegion.isCyclicScheduledRegion() ? Collections.singletonList(targetRegion) :*/ ConnectionManager.rawGetCallableParents(targetRegion);
 						installConnectionsLocateIntermediates(intermediateRegions, targetRegions2, commonRegion);
 					}
 				}
-				connection.setCommonRegion(commonRegion, intermediateRegions);
+				ConnectionManager.rawSetCommonRegion(connection, commonRegion, intermediateRegions);
 				//				Scheduler.REGION_LOCALITY.println(connection + " => " + commonRegion + " " + intermediateRegions);
 			}
 		}
 		for (@NonNull NodeConnection connection : connections) {
 			if (connection.isPassed()) {
-				Region commonRegion = connection.getCommonRegion();
+				Region commonRegion = ConnectionManager.rawGetCommonRegion(connection);
 				assert commonRegion != null;
-				List<@NonNull Region> intermediateRegions = connection.getIntermediateRegions();
+				List<@NonNull Region> intermediateRegions = ConnectionManager.rawGetIntermediateRegions(connection);
 				for (@NonNull Region intermediateRegion : intermediateRegions) {
-					Region checkCommonRegion = commonRegion.getLoopingConnections().size() > 0 ? QVTscheduleUtil.getContainingScheduledRegion(commonRegion) : commonRegion;
-					assert commonRegion.getLoopingConnections().size() > 0
-					? Iterables.contains(commonRegion.getCallableParents(), getCommonRegion(commonRegion, intermediateRegion))
+					Region checkCommonRegion = ConnectionManager.rawGetLoopingConnections(commonRegion).size() > 0 ? QVTscheduleUtil.getContainingScheduledRegion(commonRegion) : commonRegion;
+					assert ConnectionManager.rawGetLoopingConnections(commonRegion).size() > 0
+					? Iterables.contains(ConnectionManager.rawGetCallableParents(commonRegion), getCommonRegion(commonRegion, intermediateRegion))
 						: getCommonRegion(commonRegion, intermediateRegion) == checkCommonRegion;
 				}
 			}
@@ -143,7 +143,7 @@ public class CallTreeBuilder
 			if (callableParent != commonRegion) {
 				if (!intermediateRegions.contains(callableParent)) {
 					intermediateRegions.add(callableParent);
-					installConnectionsLocateIntermediates(intermediateRegions, callableParent.getCallableParents(), commonRegion);
+					installConnectionsLocateIntermediates(intermediateRegions, ConnectionManager.rawGetCallableParents(callableParent), commonRegion);
 				}
 			}
 		}
@@ -171,10 +171,10 @@ public class CallTreeBuilder
 		//
 		//	Obsolete special case: If the caller is a recursion, ensure the the caller's caller is on the stack.
 		//
-		/*		for (@NonNull DatumConnection incomingConnection1 : scheduleCache.getIncomingConnections(region)) {		// FIXME passed
+		/*		for (@NonNull Connection incomingConnection1 : scheduleCache.getIncomingConnections(region)) {		// FIXME passed
 			for (@NonNull Region sourceRegion1 : scheduleCache.getSourceRegions(incomingConnection1)) {
 				if (sourceRegion1.getLoopingConnections().size() > 0) {
-					for (@NonNull DatumConnection incomingConnection2 : scheduleCache.getIncomingConnections(sourceRegion1)) {		// FIXME passed
+					for (@NonNull Connection incomingConnection2 : scheduleCache.getIncomingConnections(sourceRegion1)) {		// FIXME passed
 						for (@NonNull Region sourceRegion2 : scheduleCache.getSourceRegions(incomingConnection2)) {
 							commonRegion = getCommonRegion(commonRegion, sourceRegion2);
 						}
@@ -182,10 +182,10 @@ public class CallTreeBuilder
 				}
 			}
 		} */
-		for (@NonNull DatumConnection<?> incomingConnection1 : scheduleCache.getIncomingConnections(region)) {
+		for (@NonNull Connection incomingConnection1 : scheduleCache.getIncomingConnections(region)) {
 			for (@NonNull Region sourceRegion1 : scheduleCache.getSourceRegions(incomingConnection1)) {
 				//				if (sourceRegion1.getLoopingConnections().size() > 0) {
-				for (@NonNull DatumConnection<?> incomingConnection2 : scheduleCache.getIncomingConnections(sourceRegion1)) {
+				for (@NonNull Connection incomingConnection2 : scheduleCache.getIncomingConnections(sourceRegion1)) {
 					for (@NonNull Region sourceRegion2 : scheduleCache.getSourceRegions(incomingConnection2)) {
 						commonRegion = getCommonRegion(commonRegion, sourceRegion2);
 					}
@@ -206,16 +206,16 @@ public class CallTreeBuilder
 		//
 		//	Ensure that passed connections are hosted by a mutually common region.
 		//
-		//		Iterable<@NonNull DatumConnection> incomingConnections = getIncomingConnections(region);
+		//		Iterable<@NonNull Connection> incomingConnections = getIncomingConnections(region);
 		//		assert incomingConnections != null;
-		for (@NonNull DatumConnection<?> incomingConnection : scheduleCache.getIncomingConnections(region)) {
-			if (incomingConnection.isPassed(region)) {
+		for (@NonNull Connection incomingConnection : scheduleCache.getIncomingConnections(region)) {
+			if (ConnectionManager.rawIsPassed(incomingConnection, region)) {
 				commonRegion = updateConnectionLocality((@NonNull NodeConnection) incomingConnection, commonRegion);
 			}
 		}
-		//		Iterable<@NonNull DatumConnection> outgoingConnections = getOutgoingConnections(region);
+		//		Iterable<@NonNull Connection> outgoingConnections = getOutgoingConnections(region);
 		//		assert outgoingConnections != null;
-		//		for (@NonNull DatumConnection outgoingConnection : outgoingConnections) {
+		//		for (@NonNull Connection outgoingConnection : outgoingConnections) {
 		//			if (outgoingConnection.isOutput()) {
 		//				commonRegion = updateConnectionLocality((@NonNull NodeConnection) outgoingConnection, commonRegion);
 		//			}
@@ -224,7 +224,7 @@ public class CallTreeBuilder
 		//	Push stack to region (without re-traversing predecessors)
 		//
 		if (topOfStack != region) {
-			topOfStack.addCallToChild(region);
+			ConnectionManager.rawAddCallToChild(topOfStack, region);
 			callStack.push(region);
 			topOfStack = region;
 		}

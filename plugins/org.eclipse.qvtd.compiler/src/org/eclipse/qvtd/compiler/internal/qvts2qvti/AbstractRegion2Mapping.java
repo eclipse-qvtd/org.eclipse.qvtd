@@ -42,6 +42,7 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -144,7 +145,7 @@ public abstract class AbstractRegion2Mapping
 	}
 
 	protected void createAppendParameters() {
-		List<@NonNull NodeConnection> intermediateConnections = region.getIntermediateConnections();
+		List<@NonNull NodeConnection> intermediateConnections = ConnectionManager.rawGetIntermediateConnections(region);
 		if (intermediateConnections.size() > 0) {
 			connection2variable = new HashMap<>();
 			for (@NonNull NodeConnection connection : intermediateConnections) {
@@ -176,7 +177,7 @@ public abstract class AbstractRegion2Mapping
 
 	protected @NonNull Type getConnectionSourcesType(@NonNull NodeConnection connection) {
 		IdResolver idResolver = environmentFactory.getIdResolver();
-		Type asType = connection.getSourcesType(idResolver);
+		Type asType = ConnectionManager.rawGetSourcesType(connection, idResolver);
 		assert asType != null;
 		return asType;
 	}

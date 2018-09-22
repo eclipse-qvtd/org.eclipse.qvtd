@@ -230,7 +230,7 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 			EdgeConnection edgeConnection = predicatedEdge.getIncomingConnection();
 			if (edgeConnection != null) {
 				boolean isChecked = false;
-				for (@NonNull NavigableEdge usedEdge : QVTscheduleUtil.getSourceEnds(edgeConnection)) {
+				for (@NonNull NavigableEdge usedEdge : ConnectionManager.rawGetSourceEnds(edgeConnection)) {
 					Region usedRegion = QVTscheduleUtil.getOwningRegion(usedEdge);
 					transformationAnalysis.getRegionAnalysis(usedRegion).addEnforcedEdge(usedEdge);
 					if (usedRegion.getFinalExecutionIndex() >= region.getInvocationIndex()) {
@@ -239,7 +239,7 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 					}
 				}
 				if (isChecked) {
-					for (@NonNull NavigableEdge usedEdge : QVTscheduleUtil.getSourceEnds(edgeConnection)) {
+					for (@NonNull NavigableEdge usedEdge : ConnectionManager.rawGetSourceEnds(edgeConnection)) {
 						Region usedRegion = QVTscheduleUtil.getOwningRegion(usedEdge);
 						scheduleManager.getRegionAnalysis(usedRegion).addEnforcedEdge(usedEdge);
 					}
@@ -251,7 +251,7 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 			Node predicatedTargetNode = predicatedEdge.getEdgeTarget();
 			NodeConnection usedConnection = predicatedTargetNode.getIncomingUsedConnection();
 			if (usedConnection != null) {
-				for (@NonNull Node usedSourceNode : QVTscheduleUtil.getSourceEnds(usedConnection)) {
+				for (@NonNull Node usedSourceNode : ConnectionManager.rawGetSourceEnds(usedConnection)) {
 					Region usedRegion = QVTscheduleUtil.getOwningRegion(usedSourceNode);
 					if (usedRegion.getFinalExecutionIndex() >= region.getInvocationIndex()) {			// FIXME =
 						CompleteClass predicatedSourceType = predicatedSourceNode.getCompleteClass();

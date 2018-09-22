@@ -18,10 +18,8 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.pivot.PivotPackage;
@@ -42,7 +40,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicMappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.DatumConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.DependencyEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.DependencyNode;
 import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
@@ -198,13 +195,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	private EClass cyclicMappingRegionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass datumConnectionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -963,6 +953,26 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
+	public EAttribute getConnection_ConnectionRole() {
+		return (EAttribute)connectionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getConnection_Name() {
+		return (EAttribute)connectionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getConnectionEnd() {
 		return connectionEndEClass;
 	}
@@ -985,46 +995,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	@Override
 	public EReference getCyclicMappingRegion_ElementRegions() {
 		return (EReference)cyclicMappingRegionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDatumConnection() {
-		return datumConnectionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getDatumConnection_ConnectionRole() {
-		return (EAttribute)datumConnectionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getDatumConnection_Name() {
-		return (EAttribute)datumConnectionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getDatumConnection_SourceEnds() {
-		return (EReference)datumConnectionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2404,16 +2374,13 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		connectionEClass = createEClass(CONNECTION);
 		createEReference(connectionEClass, CONNECTION__OWNING_SCHEDULED_REGION);
+		createEAttribute(connectionEClass, CONNECTION__CONNECTION_ROLE);
+		createEAttribute(connectionEClass, CONNECTION__NAME);
 
 		connectionEndEClass = createEClass(CONNECTION_END);
 
 		cyclicMappingRegionEClass = createEClass(CYCLIC_MAPPING_REGION);
 		createEReference(cyclicMappingRegionEClass, CYCLIC_MAPPING_REGION__ELEMENT_REGIONS);
-
-		datumConnectionEClass = createEClass(DATUM_CONNECTION);
-		createEAttribute(datumConnectionEClass, DATUM_CONNECTION__CONNECTION_ROLE);
-		createEAttribute(datumConnectionEClass, DATUM_CONNECTION__NAME);
-		createEReference(datumConnectionEClass, DATUM_CONNECTION__SOURCE_ENDS);
 
 		dependencyEdgeEClass = createEClass(DEPENDENCY_EDGE);
 
@@ -2634,11 +2601,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		QVTbasePackage theQVTbasePackage = (QVTbasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTbasePackage.eNS_URI);
 
 		// Create type parameters
-		ETypeParameter datumConnectionEClass_CE = addETypeParameter(datumConnectionEClass, "CE");
 
 		// Set bounds for type parameters
-		EGenericType g1 = createEGenericType(this.getConnectionEnd());
-		datumConnectionEClass_CE.getEBounds().add(g1);
 
 		// Add supertypes to classes
 		abstractDatumEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
@@ -2655,15 +2619,11 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		connectionEClass.getESuperTypes().add(thePivotPackage.getElement());
 		connectionEClass.getESuperTypes().add(this.getSymbolable());
 		cyclicMappingRegionEClass.getESuperTypes().add(this.getMappingRegion());
-		datumConnectionEClass.getESuperTypes().add(this.getConnection());
 		dependencyEdgeEClass.getESuperTypes().add(this.getEdge());
 		dependencyNodeEClass.getESuperTypes().add(this.getNode());
 		dispatchRegionEClass.getESuperTypes().add(this.getRuleRegion());
 		edgeEClass.getESuperTypes().add(thePivotPackage.getElement());
-		g1 = createEGenericType(this.getDatumConnection());
-		EGenericType g2 = createEGenericType(this.getNavigableEdge());
-		g1.getETypeArguments().add(g2);
-		edgeConnectionEClass.getEGenericSuperTypes().add(g1);
+		edgeConnectionEClass.getESuperTypes().add(this.getConnection());
 		enumLiteralNodeEClass.getESuperTypes().add(this.getOperationNode());
 		errorNodeEClass.getESuperTypes().add(this.getMappingNode());
 		expressionEdgeEClass.getESuperTypes().add(this.getEdge());
@@ -2687,10 +2647,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		navigationEdgeEClass.getESuperTypes().add(this.getNavigableEdge());
 		nodeEClass.getESuperTypes().add(thePivotPackage.getElement());
 		nodeEClass.getESuperTypes().add(this.getConnectionEnd());
-		g1 = createEGenericType(this.getDatumConnection());
-		g2 = createEGenericType(this.getNode());
-		g1.getETypeArguments().add(g2);
-		nodeConnectionEClass.getEGenericSuperTypes().add(g1);
+		nodeConnectionEClass.getESuperTypes().add(this.getConnection());
 		nullLiteralNodeEClass.getESuperTypes().add(this.getOperationNode());
 		numericLiteralNodeEClass.getESuperTypes().add(this.getOperationNode());
 		operationCallNodeEClass.getESuperTypes().add(this.getOperationNode());
@@ -2759,17 +2716,13 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		initEClass(connectionEClass, Connection.class, "Connection", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getConnection_OwningScheduledRegion(), this.getScheduledRegion(), this.getScheduledRegion_OwnedConnections(), "owningScheduledRegion", null, 1, 1, Connection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConnection_ConnectionRole(), this.getConnectionRole(), "connectionRole", "UNDEFINED", 1, 1, Connection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getConnection_Name(), ecorePackage.getEString(), "name", null, 1, 1, Connection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(connectionEndEClass, ConnectionEnd.class, "ConnectionEnd", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(cyclicMappingRegionEClass, CyclicMappingRegion.class, "CyclicMappingRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCyclicMappingRegion_ElementRegions(), this.getMappingRegion(), null, "elementRegions", null, 1, -1, CyclicMappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(datumConnectionEClass, DatumConnection.class, "DatumConnection", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDatumConnection_ConnectionRole(), this.getConnectionRole(), "connectionRole", "UNDEFINED", 1, 1, DatumConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDatumConnection_Name(), ecorePackage.getEString(), "name", null, 1, 1, DatumConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		g1 = createEGenericType(datumConnectionEClass_CE);
-		initEReference(getDatumConnection_SourceEnds(), g1, null, "sourceEnds", null, 0, -1, DatumConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(dependencyEdgeEClass, DependencyEdge.class, "DependencyEdge", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2994,10 +2947,10 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	protected void createEcoreAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-		});
+		  (this,
+		   source,
+		   new String[] {
+		   });
 	}
 
 	/**
