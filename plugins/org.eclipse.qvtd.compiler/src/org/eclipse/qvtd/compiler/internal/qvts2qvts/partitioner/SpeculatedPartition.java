@@ -37,7 +37,7 @@ class SpeculatedPartition extends AbstractPartialPartition
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
 
 	public SpeculatedPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
-		super(partitioner, reachabilityForest, "«speculated»");
+		super(computeName(partitioner, "speculated"), partitioner, reachabilityForest);
 		this.traceNode = partitioner.getTraceNode();
 		//		assert traceNode.isPredicated();
 		//		this.predicatedDispatchNode = partitioner.basicGetPredicatedDispatchNode();

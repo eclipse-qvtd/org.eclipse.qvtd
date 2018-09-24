@@ -14,14 +14,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
-import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
@@ -45,9 +42,9 @@ public class ToGraphVisitor extends AbstractToGraphVisitor
 		return null;
 	}
 
-	@Override
-	public @Nullable String visitEdgeConnection(@NonNull EdgeConnection edgeConnection) {
-		if (StaticConnectionManager.INSTANCE.rawIsEdge2Edge(edgeConnection)) {
+	//	@Override
+	//	public @Nullable String visitEdgeConnection(@NonNull EdgeConnection edgeConnection) {
+	/*	if (StaticConnectionManager.INSTANCE.rawIsEdge2Edge(edgeConnection)) {
 			NavigableEdge sourceEdge = StaticConnectionManager.INSTANCE.rawGetSourceEnds(edgeConnection).iterator().next();
 			NavigableEdge targetEdge = StaticConnectionManager.INSTANCE.rawGetTargetEdges(edgeConnection).iterator().next();
 			appendEdge(sourceEdge.getEdgeTarget(), edgeConnection, targetEdge.getEdgeTarget());
@@ -62,9 +59,9 @@ public class ToGraphVisitor extends AbstractToGraphVisitor
 				assert role != null;
 				appendEdge(edgeConnection, role, target.getEdgeTarget());
 			}
-		}
-		return null;
-	}
+		} */
+	//		return null;
+	//	}
 
 	@Override
 	public @Nullable String visitLoadingRegion(@NonNull LoadingRegion loadingRegion) {
@@ -109,9 +106,9 @@ public class ToGraphVisitor extends AbstractToGraphVisitor
 		return null;
 	}
 
-	@Override
-	public @Nullable String visitNodeConnection(@NonNull NodeConnection nodeConnection) {
-		if (StaticConnectionManager.INSTANCE.rawIsNode2Node(nodeConnection)) {
+	//	@Override
+	//	public @Nullable String visitNodeConnection(@NonNull NodeConnection nodeConnection) {
+	/*	if (StaticConnectionManager.INSTANCE.rawIsNode2Node(nodeConnection)) {
 			Node sourceNode = StaticConnectionManager.INSTANCE.rawGetSourceEnds(nodeConnection).iterator().next();
 			Node targetNode = StaticConnectionManager.INSTANCE.rawGetTargetNodes(nodeConnection).iterator().next();
 			appendEdge(sourceNode, nodeConnection, targetNode);
@@ -126,9 +123,9 @@ public class ToGraphVisitor extends AbstractToGraphVisitor
 				assert role != null;
 				appendEdge(nodeConnection, role, target);
 			}
-		}
-		return null;
-	}
+		} */
+	//		return null;
+	//	}
 
 	@Override
 	public @Nullable String visitOperationRegion(@NonNull OperationRegion object) {

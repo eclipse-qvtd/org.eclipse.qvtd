@@ -8,7 +8,7 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.qvts2qvts;
+package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,11 +21,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TraceClassPartitionAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TracePropertyPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratedEdge;
@@ -39,7 +37,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
 
-public abstract class AbstractPartition implements Partition
+public abstract class AbstractPartition2 extends AbstractPartition
 {
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis;
@@ -92,6 +90,7 @@ public abstract class AbstractPartition implements Partition
 	 * properties that are directly realized from a middle object provided all predicates are satisfied.
 	 */
 	private final @NonNull Set<@NonNull NavigableEdge> oldPrimaryNavigableEdges = new HashSet<>();
+	private final @NonNull List<@NonNull Node> loadedInputNodes = new ArrayList<>();
 	private final @NonNull List<@NonNull Edge> predicatedEdges = new ArrayList<>();
 	private final @NonNull List<@NonNull NavigableEdge> predicatedMiddleEdges = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> predicatedMiddleNodes = new ArrayList<>();
@@ -134,7 +133,8 @@ public abstract class AbstractPartition implements Partition
 	 */
 	private @Nullable Set<@NonNull TraceClassPartitionAnalysis> superProducedTraceClassAnalyses = null;
 
-	protected AbstractPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
+	protected AbstractPartition2(@NonNull String name, @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
+		super(name);
 		this.scheduleManager = partitionedTransformationAnalysis.getScheduleManager();
 		this.partitionedTransformationAnalysis = partitionedTransformationAnalysis;
 	}
@@ -163,6 +163,13 @@ public abstract class AbstractPartition implements Partition
 		else {
 			PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
 			addConsumptionOfPropertyDatum(propertyDatum);
+		}
+	}
+
+	private void addConsumptionOfInputNode(@NonNull Node node) {
+		if (node.isClass() && !loadedInputNodes.contains(node)) {		// DataTypes are consumed by their edge
+			loadedInputNodes.add(node);
+			addConsumptionOfNode(node);
 		}
 	}
 
@@ -218,7 +225,7 @@ public abstract class AbstractPartition implements Partition
 	}
 
 	private void addProductionOfEdge(@NonNull NavigableEdge edge) {
-		assert edge.isNew();
+		assert isNew(edge);
 		Property property = QVTscheduleUtil.getProperty(edge);
 		assert property != scheduleManager.getStandardLibraryHelper().getOclContainerProperty();		// oclContainer is not assignable
 		if (property.toString().contains("toA1") || property.toString().contains("ownsB")) {
@@ -257,7 +264,7 @@ public abstract class AbstractPartition implements Partition
 	}
 
 	private void addProductionOfNode(@NonNull Node node) {
-		assert node.isNew();
+		assert isNew(node);
 		TraceClassPartitionAnalysis consumedTraceAnalysis = partitionedTransformationAnalysis.addProducer(QVTscheduleUtil.getClassDatum(node), this);
 		List<@NonNull TraceClassPartitionAnalysis> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
 		if (producedTraceClassAnalyses2 == null) {
@@ -413,7 +420,9 @@ public abstract class AbstractPartition implements Partition
 			}
 			else if (node.isPattern()) {
 				if (isConstant(node)) {}
-				else if (isLoaded(node)) {}
+				else if (isLoaded(node)) {
+					addConsumptionOfInputNode(node);
+				}
 				else if (scheduleManager.isMiddle(node)) {
 					if (node.isDispatch()) {
 						if (dispatchNode != null) {
@@ -488,6 +497,31 @@ public abstract class AbstractPartition implements Partition
 			return Collections.singletonList(headNodes.iterator().next());
 		} */
 		return Iterables.concat(getPredicatedMiddleNodes(), getRealizedMiddleNodes());
+	}
+
+	@Override
+	public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
+		GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
+		String label = /*getSymbolName() + "\\n " +*/ getName();
+		String passesText = getPassesText();
+		if (passesText != null) {
+			label = label + "\\n " + passesText;
+		}
+		s.setLabel(label);
+		//	String shape = getShape();
+		//	if (shape != null) {
+		//		s.setShape(shape);
+		//	}
+		//	String style = getStyle();
+		//	if (style != null) {
+		//		s.setStyle(style);
+		//	}
+		s.setColor(getColor());
+		//		s.setPenwidth(getPenwidth());
+		s.appendAttributedNode(nodeName);
+		//		if (isHead) {
+		//			s.append("}");
+		//		}
 	}
 
 	public @Nullable Node basicGetDispatchNode() {
@@ -595,16 +629,6 @@ public abstract class AbstractPartition implements Partition
 	//		return region;
 	//	}
 
-	@Override
-	public @Nullable Role getRole(@NonNull Edge edge) {
-		return  edge.getEdgeRole();
-	}
-
-	@Override
-	public @Nullable Role getRole(@NonNull Node node) {
-		return  node.getNodeRole();
-	}
-
 	public @NonNull ScheduleManager getScheduleManager() {
 		return scheduleManager;
 	}
@@ -628,10 +652,6 @@ public abstract class AbstractPartition implements Partition
 		return superProducedTraceClassAnalyses;
 	}
 
-	public @NonNull TraceClassPartitionAnalysis getTraceClassAnalysis(@NonNull ClassDatum traceClassDatum) {
-		return partitionedTransformationAnalysis.getTraceClassAnalysis(traceClassDatum);
-	}
-
 	public @Nullable Edge getTraceEdge(@NonNull Node node) {
 		return node2traceEdge.get(node);
 	}
@@ -641,47 +661,89 @@ public abstract class AbstractPartition implements Partition
 		return traceNodes;
 	}
 
+	@Override
+	public boolean isAwaited(@NonNull Edge edge) {
+		Role role = getRole(edge);
+		assert role != null;
+		return role.isAwaited();
+	}
+
 	protected boolean isConstant(@NonNull Edge edge) {
-		return edge.isConstant();
+		Role role = getRole(edge);
+		assert role != null;
+		return role.isConstant();
 	}
 
 	protected boolean isConstant(@NonNull Node node) {
-		return node.isConstant();
+		Role role = getRole(node);
+		assert role != null;
+		return role.isConstant();
 	}
 
 	protected boolean isLoaded(@NonNull Edge edge) {
-		return edge.isLoaded();
+		Role role = getRole(edge);
+		assert role != null;
+		return role.isLoaded();
 	}
 
 	protected boolean isLoaded(@NonNull Node node) {
-		return node.isLoaded();
+		Role role = getRole(node);
+		assert role != null;
+		return role.isLoaded();
+	}
+
+	protected boolean isNew(@NonNull Edge edge) {
+		Role role = getRole(edge);
+		assert role != null;
+		return role.isNew();
+	}
+
+	protected boolean isNew(@NonNull Node node) {
+		Role role = getRole(node);
+		assert role != null;
+		return role.isNew();
 	}
 
 	protected boolean isPredicated(@NonNull Edge edge) {
-		return edge.isPredicated();
+		Role role = getRole(edge);
+		assert role != null;
+		return role.isPredicated();
 	}
 
 	protected boolean isPredicated(@NonNull Node node) {
-		return node.isPredicated();
+		Role role = getRole(node);
+		assert role != null;
+		return role.isPredicated();
 	}
 
-	protected boolean isRealized(@NonNull Edge edge) {
-		return edge.isRealized();
+	@Override
+	public boolean isRealized(@NonNull Edge edge) {
+		Role role = getRole(edge);
+		assert role != null;
+		return role.isRealized();
 	}
 
 	protected boolean isRealized(@NonNull Node node) {
-		return node.isRealized();
+		Role role = getRole(node);
+		assert role != null;
+		return role.isRealized();
 	}
 
 	protected boolean isSpeculated(@NonNull Edge edge) {
-		return edge.isSpeculated();
+		Role role = getRole(edge);
+		assert role != null;
+		return role.isSpeculated();
 	}
 
 	protected boolean isSpeculated(@NonNull Node node) {
-		return node.isSpeculated();
+		Role role = getRole(node);
+		assert role != null;
+		return role.isSpeculated();
 	}
 
 	protected boolean isSpeculation(@NonNull Node node) {
-		return node.isSpeculation();
+		Role role = getRole(node);
+		assert role != null;
+		return role.isSpeculation();
 	}
 }

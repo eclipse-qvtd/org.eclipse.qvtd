@@ -25,7 +25,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.StaticConnectionManager;
 
 /**
  * <!-- begin-user-doc -->
@@ -182,7 +181,7 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 	@Override
 	public void destroy() {
 		super.destroy();
-		StaticConnectionManager.INSTANCE.rawDestroy(this);
+		//	StaticConnectionManager.INSTANCE.rawDestroy(this);
 	}
 
 	@Override

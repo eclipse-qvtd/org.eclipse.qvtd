@@ -294,7 +294,7 @@ public class MappingPartitioner implements Nameable
 	}
 
 	private @NonNull NonPartition createNonPartition() {
-		return new NonPartition(this);
+		return new NonPartition(regionAnalysis.getName(), getPartitionedTransformationAnalysis(), regionAnalysis);
 	}
 
 	private @NonNull ResidualPartition createResidualPartition() {
@@ -312,9 +312,9 @@ public class MappingPartitioner implements Nameable
 		return new SpeculatingPartition(this, reachabilityForest/*, isInfallible*/);
 	}
 
-	private @NonNull SpeculationPartition createSpeculationPartition() {
+	private @NonNull SpeculationPartition createSpeculationPartition(boolean useActivators) {
 		ReachabilityForest reachabilityForest = new ReachabilityForest(getSpeculationReachabilityRootNodes(), getAvailableNavigableEdges());
-		return new SpeculationPartition(this, reachabilityForest);
+		return new SpeculationPartition(this, reachabilityForest, useActivators);
 	}
 
 	//	public @NonNull Iterable<@NonNull Edge> getAlreadyPredicatedEdges() {
@@ -671,7 +671,7 @@ public class MappingPartitioner implements Nameable
 			if (useActivators) {
 				regionAnalysis.createLocalSuccess();
 			}
-			SpeculationPartition speculationPartition = createSpeculationPartition();
+			SpeculationPartition speculationPartition = createSpeculationPartition(useActivators);
 			SpeculatingPartition speculatingPartition = createSpeculatingPartition();
 			SpeculatedPartition speculatedPartition = createSpeculatedPartition();
 			newPartitions.add(speculationPartition);

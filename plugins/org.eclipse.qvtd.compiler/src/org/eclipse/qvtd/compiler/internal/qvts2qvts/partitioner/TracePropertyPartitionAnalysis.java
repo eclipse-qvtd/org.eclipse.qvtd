@@ -31,7 +31,7 @@ public class TracePropertyPartitionAnalysis extends TraceElementPartitionAnalysi
 		this.tracePropertyDatum = tracePropertyDatum;
 		//	assert tracePropertyDatum.getReferredTypedModel() == regionsAnalysis.getScheduleManager().getTraceTypedModel();
 		//		ClassDatum traceClassDatum = QVTscheduleUtil.getOwningClassDatum(tracePropertyDatum);
-		assert partitionedTransformationAnalysis.getTraceClassAnalysis(QVTscheduleUtil.getOwningClassDatum(tracePropertyDatum)) == traceClassAnalysis;
+		//	assert partitionedTransformationAnalysis.getTraceClassAnalysis(QVTscheduleUtil.getOwningClassDatum(tracePropertyDatum)) == traceClassAnalysis;
 	}
 
 	@Override

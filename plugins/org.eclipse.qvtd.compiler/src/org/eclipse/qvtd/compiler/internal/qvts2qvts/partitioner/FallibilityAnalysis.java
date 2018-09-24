@@ -47,12 +47,11 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 /**
@@ -69,6 +68,7 @@ public class FallibilityAnalysis
 
 	protected class Visitor implements CheckedConditionVisitor<Object>
 	{
+		protected final @NonNull Partition partition;
 		protected final @NonNull RegionAnalysis regionAnalysis;
 
 		/**
@@ -77,13 +77,14 @@ public class FallibilityAnalysis
 		 */
 		protected final @NonNull Map<@NonNull CheckedCondition, @NonNull Object> check2regionOrRegions = new HashMap<>();
 
-		public Visitor(@NonNull RegionAnalysis regionAnalysis) {
+		public Visitor(@NonNull Partition partition, @NonNull RegionAnalysis regionAnalysis) {
+			this.partition = partition;
 			this.regionAnalysis = regionAnalysis;
 		}
 
 		private void addFallibility(@NonNull CheckedCondition checkedCondition, @NonNull RegionAnalysis producingRegionAnalysis) {
 			if (LOCAL.isActive()) {
-				LOCAL.println(regionAnalysis + " may fail because " + checkedCondition + " produced by " + producingRegionAnalysis);
+				LOCAL.println(partition + " may fail because " + checkedCondition + " produced by " + producingRegionAnalysis);
 			}
 			Object regionOrRegions = check2regionOrRegions.get(checkedCondition);
 			if (regionOrRegions == null) {
@@ -105,14 +106,27 @@ public class FallibilityAnalysis
 		}
 
 		public @NonNull Map<@NonNull CheckedCondition, @NonNull Object> analyze() {
-			Region region = regionAnalysis.getRegion();
-			Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(region);
-			Iterable<@NonNull Node> constantInputNodes = regionAnalysis.getConstantInputNodes();
-			Iterable<@NonNull Node> rootNodes = Iterables.concat(headNodes, constantInputNodes);
-			Iterable<@NonNull NavigableEdge> navigableEdges = regionAnalysis.getOldPrimaryNavigableEdges();
+			List<@NonNull Node> rootNodes = new ArrayList<>();
+			for (@NonNull Node node : partition.getPartialNodes()) {
+				Role nodeRole = partition.getRole(node);
+				if (nodeRole != null) {
+					if (partition.isHead(node) || nodeRole.isConstant()) {
+						rootNodes.add(node);
+					}
+				}
+			}
+			List<@NonNull NavigableEdge> navigableEdges = new ArrayList<>();
+			for (@NonNull Edge edge : partition.getPartialEdges()) {
+				if (edge.isNavigation()) {
+					Role edgeRole = partition.getRole(edge);
+					if ((edgeRole != null) && edgeRole.isOld()) {
+						navigableEdges.add((NavigableEdge) edge);
+					}
+				}
+			}
 			ReachabilityForest checkedReachabilityForest = new ReachabilityForest(rootNodes, navigableEdges);
-			RegionAnalysis regionAnalysis = transformationAnalysis.getRegionAnalysis(region);
-			CheckedConditionAnalysis analysis = new CheckedConditionAnalysis(regionAnalysis, checkedReachabilityForest)
+			//	RegionAnalysis regionAnalysis = transformationAnalysis.getRegionAnalysis(region);
+			CheckedConditionAnalysis analysis = new CheckedConditionAnalysis(partition, scheduleManager, checkedReachabilityForest)
 			{
 				@Override
 				protected @Nullable Set<@NonNull Property> computeCheckedProperties() {
@@ -220,12 +234,12 @@ public class FallibilityAnalysis
 		this.originalContentsAnalysis = scheduleManager.getOriginalContentsAnalysis();
 	}
 
-	public void accumulate(@NonNull RegionAnalysis consumingRegionAnalysis) {
+	public void accumulate(@NonNull Partition consumingPartition, @NonNull RegionAnalysis consumingRegionAnalysis) {
 		String name = consumingRegionAnalysis.getName();
 		if ("mTmapIfExp_success_t1atlCondition_t1atlElse_t1atlTh".equals(name)) {
 			getClass();
 		}
-		Visitor visitor = new Visitor(consumingRegionAnalysis);
+		Visitor visitor = new Visitor(consumingPartition, consumingRegionAnalysis);
 		Map<@NonNull CheckedCondition, @NonNull Object> check2regionOrRegions = visitor.analyze();
 		Set<@NonNull RegionAnalysis> producingRegionAnalyses = new HashSet<>();
 		Set<@NonNull Edge> checkedEdges = new HashSet<>();

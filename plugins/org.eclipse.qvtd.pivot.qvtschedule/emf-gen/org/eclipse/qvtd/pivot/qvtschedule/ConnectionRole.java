@@ -401,6 +401,7 @@ public enum ConnectionRole implements Enumerator, GraphStringBuilder.GraphEdge {
 			case PASSED: return QVTscheduleConstants.BINDING_COLOR;
 			case PREFERRED_EDGE: return QVTscheduleConstants.ORDERING_COLOR;
 			case PREFERRED_NODE: return QVTscheduleConstants.BINDING_COLOR;
+			case UNDEFINED: return QVTscheduleConstants.OTHER_COLOR;
 		}
 		throw new UnsupportedOperationException();
 	}
@@ -434,6 +435,7 @@ public enum ConnectionRole implements Enumerator, GraphStringBuilder.GraphEdge {
 			case PASSED: return null;
 			case PREFERRED_EDGE: return "dotted";
 			case PREFERRED_NODE: return "dotted";
+			case UNDEFINED: return null;
 		}
 		throw new UnsupportedOperationException();
 	}

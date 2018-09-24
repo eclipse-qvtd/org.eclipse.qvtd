@@ -43,6 +43,7 @@ import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -57,13 +58,15 @@ import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
-public abstract class AbstractRegion2Mapping
+public abstract class AbstractPartition2Mapping
 {
 	protected final @NonNull QVTs2QVTiVisitor visitor;
 	protected final @NonNull ScheduleManager scheduleManager;
+	protected final @NonNull ConnectionManager connectionManager;
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull QVTimperativeHelper helper;
-	protected final @NonNull Region region;
+	//	protected final @NonNull Region region;
+	protected final @NonNull Partition partition;
 	@SuppressWarnings("unused")private final @NonNull String regionName;
 	protected final @NonNull Mapping mapping;
 	@SuppressWarnings("unused")private final @NonNull String mappingName;
@@ -88,22 +91,24 @@ public abstract class AbstractRegion2Mapping
 	 */
 	protected Map<@NonNull NodeConnection, @NonNull ConnectionVariable> connection2variable = null;
 
-	public AbstractRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Region region) {
+	public AbstractPartition2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Partition partition) {
 		this.visitor = visitor;
 		this.scheduleManager = visitor.getScheduleManager();
+		this.connectionManager = scheduleManager.getConnectionManager();
 		this.environmentFactory = scheduleManager.getEnvironmentFactory();
 		this.helper = new QVTimperativeHelper(environmentFactory);
-		this.region = region;
-		this.regionName = QVTscheduleUtil.getName(region);
-		String mappingName = region.getSymbolName();
+		this.partition = partition;
+		this.regionName = partition.getName();
+		String mappingName = partition.getSymbolName();
 		assert mappingName != null;
 		this.mapping = helper.createMapping(mappingName);
 		this.mappingName = mappingName;
-		if (region instanceof RuleRegion) {
-			this.mapping.setIsAbstract(((RuleRegion)region).getReferredRule().isIsAbstract());
+		Region originalRegion = partition.getOriginalRegion();
+		if (originalRegion instanceof RuleRegion) {
+			this.mapping.setIsAbstract(((RuleRegion)originalRegion).getReferredRule().isIsAbstract());
 		}
 		this.names = new HashSet<>(visitor.getReservedNames());
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
+		for (@NonNull Node node : partition.getPartialNodes()) {
 			for (@NonNull Element element : node.getOriginatingElements()) {
 				Node oldNode = element2node.put(element, node);
 				assert (oldNode == null) || (oldNode == node);
@@ -145,7 +150,7 @@ public abstract class AbstractRegion2Mapping
 	}
 
 	protected void createAppendParameters() {
-		List<@NonNull NodeConnection> intermediateConnections = ConnectionManager.rawGetIntermediateConnections(region);
+		List<@NonNull NodeConnection> intermediateConnections = connectionManager.getIntermediateConnections(partition);
 		if (intermediateConnections.size() > 0) {
 			connection2variable = new HashMap<>();
 			for (@NonNull NodeConnection connection : intermediateConnections) {
@@ -177,7 +182,7 @@ public abstract class AbstractRegion2Mapping
 
 	protected @NonNull Type getConnectionSourcesType(@NonNull NodeConnection connection) {
 		IdResolver idResolver = environmentFactory.getIdResolver();
-		Type asType = ConnectionManager.rawGetSourcesType(connection, idResolver);
+		Type asType = connectionManager.getSourcesType(connection, idResolver);
 		assert asType != null;
 		return asType;
 	}
@@ -249,9 +254,9 @@ public abstract class AbstractRegion2Mapping
 		return oclIsKindOfOperation;
 	}
 
-	public @NonNull Region getRegion() {
-		return region;
-	}
+	//	public @NonNull Region getRegion() {
+	//		return region;
+	//	}
 
 	protected @NonNull Operation getRootObjectsOperation() {
 		StandardLibraryInternal standardLibrary = (StandardLibraryInternal)visitor.getStandardLibrary();

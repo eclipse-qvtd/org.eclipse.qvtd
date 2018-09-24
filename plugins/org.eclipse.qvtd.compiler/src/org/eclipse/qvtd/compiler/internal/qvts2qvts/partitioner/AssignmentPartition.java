@@ -32,7 +32,7 @@ class AssignmentPartition extends AbstractPartialPartition
 	//	private final @NonNull Node traceNode;
 
 	public AssignmentPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, @NonNull Edge realizedEdge) {
-		super(partitioner, reachabilityForest, "«edge-" + QVTscheduleUtil.getName(realizedEdge) + "»");
+		super(computeName(partitioner, "edge-" + QVTscheduleUtil.getName(realizedEdge)), partitioner, reachabilityForest);
 		//	this.traceNode = partitioner.getTraceNode();
 		String name = originalRegion.getName();
 		if ("mapHelper_Operation_qvtr".equals(name)) {

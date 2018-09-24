@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvti;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -39,7 +40,11 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.LoadingPartition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
@@ -48,14 +53,12 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
-import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
-import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -70,8 +73,27 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
 
+import com.google.common.collect.Iterables;
+
 public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable Element, @Nullable Object>
 {
+	public class EarliestPartitionComparator implements Comparator<@NonNull Partition>
+	{
+		public @NonNull List<@NonNull Partition> sort(@NonNull Iterable<@NonNull Partition> partitions) {
+			List<@NonNull Partition> sortedPartitions = new ArrayList<>();
+			Iterables.addAll(sortedPartitions, partitions);
+			Collections.sort(sortedPartitions, this);
+			return sortedPartitions;
+		}
+
+		@Override
+		public int compare(@NonNull Partition o1, @NonNull Partition o2) {
+			int i1 = o1.getFirstPass();
+			int i2 = o2.getFirstPass();
+			return i1 - i2;
+		}
+	}
+
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull QVTimperativeHelper helper;
 	protected final @NonNull EnvironmentFactory environmentFactory;
@@ -84,7 +106,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 	protected final @NonNull List<@NonNull ImperativeTypedModel> checkableTypedModels = new ArrayList<>();
 	protected final @NonNull List<@NonNull ImperativeTypedModel> checkableAndEnforceableTypedModels = new ArrayList<>();
 	protected final @NonNull List<@NonNull ImperativeTypedModel> enforceableTypedModels = new ArrayList<>();
-	protected final @NonNull Map<@NonNull Region, @NonNull AbstractRegion2Mapping> region2region2mapping = new HashMap<>();
+	protected final @NonNull Map<@NonNull Partition, @NonNull AbstractPartition2Mapping> partition2partition2mapping = new HashMap<>();
 	private @Nullable Set<@NonNull String> reservedNames = null;
 	private @NonNull Map<@NonNull Operation, @NonNull Operation> qvtmOperation2qvtiOperation = new HashMap<>();
 
@@ -240,21 +262,20 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		}
 	}
 
-	public void createRegion2Mapping(@NonNull Region region) {
-		AbstractRegion2Mapping region2mapping = region2region2mapping.get(region);
-		assert region2mapping == null : "Re-AbstractRegion2Mapping for " + region;
+	public void createPartition2Mapping(@NonNull Partition partition) {
+		AbstractPartition2Mapping partition2mapping = partition2partition2mapping.get(partition);
+		assert partition2mapping == null : "Re-AbstractPartition2Mapping for " + partition;
 		//		assert !region.isConnectionRegion();
-		if (region.isLoadingRegion()) {
-			region2mapping = new RootRegion2Mapping(this, (LoadingRegion)region);
+		if (partition instanceof LoadingPartition) {
+			partition2mapping = new LoadingPartition2Mapping(this, (LoadingPartition)partition);
 		}
 		else {
-			RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
-			region2mapping = new BasicRegion2Mapping(this, regionAnalysis);
+			partition2mapping = new BasicPartition2Mapping(this, partition);
 		}
-		region2mapping.synthesizeLocalStatements();
-		region2region2mapping.put(region, region2mapping);
-		qvtiTransformation.getRule().add(region2mapping.getMapping());
-		region.accept(this);
+		partition2mapping.synthesizeLocalStatements();
+		partition2partition2mapping.put(partition, partition2mapping);
+		qvtiTransformation.getRule().add(partition2mapping.getMapping());
+		visitPartition(partition);
 		//		for (@SuppressWarnings("null")@NonNull Region childRegion : region.getCalledRegions()) {
 		//			if (region2region2mapping.get(childRegion) == null) {
 		//				createRegion2Mapping(childRegion);
@@ -314,10 +335,10 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		}
 	}
 
-	protected @NonNull Map<@NonNull ClassDatum, Set<@NonNull PropertyDatum>> gatherKeyCalls(List<@NonNull Region> sortedRegions) {
+	protected @NonNull Map<@NonNull ClassDatum, Set<@NonNull PropertyDatum>> gatherKeyCalls(List<@NonNull Partition> sortedPartitions) {
 		Map<@NonNull ClassDatum, Set<@NonNull PropertyDatum>> keyedClassDatum2propertyDatums = new HashMap<>();
-		for (@NonNull Region region : sortedRegions) {
-			for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
+		for (@NonNull Partition partition : sortedPartitions) {
+			for (@NonNull Node node : partition.getPartialNodes()) {
 				if (node instanceof KeyedValueNode) {
 					KeyedValueNode keyedValueNode = (KeyedValueNode)node;
 					ClassDatum classDatum = keyedValueNode.getClassDatumValue();
@@ -353,6 +374,10 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		for (org.eclipse.ocl.pivot.Class asClass : asClasses) {
 			reservedNames.add(ClassUtil.nonNullState(asClass.getName()));
 		}
+	}
+
+	public @NonNull ConnectionManager getConnectionManager() {
+		return scheduleManager.getConnectionManager();
 	}
 
 	public @NonNull EnvironmentFactory getEnvironmentFactory() {
@@ -393,9 +418,9 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		return qvtmTypedModel2qvtiTypedModel.get(qvtmTypedModel);
 	}
 
-	public @NonNull AbstractRegion2Mapping getRegion2Mapping(@NonNull Region region) {
-		AbstractRegion2Mapping region2mapping = region2region2mapping.get(region);
-		assert region2mapping != null : "No AbstractRegion2Mapping for " + region;
+	public @NonNull AbstractPartition2Mapping getPartition2Mapping(@NonNull Partition partition) {
+		AbstractPartition2Mapping region2mapping = partition2partition2mapping.get(partition);
+		assert region2mapping != null : "No AbstractRegion2Mapping for " + partition;
 		return region2mapping;
 	}
 
@@ -455,9 +480,9 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		return visiting(edgeConnection);
 	}
 
-	@Override
+	/*	@Override
 	public @Nullable Element visitLoadingRegion(@NonNull LoadingRegion loadingRegion) {
-		AbstractRegion2Mapping region2mapping = getRegion2Mapping(loadingRegion);
+		AbstractPartition2Mapping region2mapping = getPartition2Mapping(scheduleManager.wipGetPartition(loadingRegion));
 		Mapping mapping = region2mapping.getMapping();
 		//		for (@SuppressWarnings("null")@NonNull List<Node> headNodes : rootContainmentRegion.getHeadNodeGroups()) {
 		//			Node headNode = selectHeadNode(headNodes);
@@ -465,12 +490,13 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		//			getGuardPattern(mapping).getVariable().add(guardVariable);
 		//		}
 		return mapping;
-	}
+	} */
 
 	@Override
 	public @Nullable Element visitMappingRegion(@NonNull MappingRegion mappingRegion) {
-		AbstractRegion2Mapping region2mapping = getRegion2Mapping(mappingRegion);
-		return region2mapping.getMapping();
+		//		AbstractPartition2Mapping partition2mapping = getPartition2Mapping(scheduleManager.wipGetPartition(mappingRegion));
+		//		return partition2mapping.getMapping();
+		return visiting(mappingRegion);
 	}
 
 	@Override
@@ -493,6 +519,26 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		return visiting(operationRegion);
 	}
 
+	public @Nullable Element visitPartition(@NonNull Partition partition) {
+		//	if (partition instanceof LoadingPartition) {
+		AbstractPartition2Mapping partition2mapping = getPartition2Mapping(partition);
+		return partition2mapping.getMapping();
+		/* }
+		if (partition instanceof AbstractPartialPartition) {
+			AbstractPartition2Mapping partition2mapping = getPartition2Mapping(partition);
+			return partition2mapping.getMapping();
+		}
+		Region r2 = partition.getOriginalRegion();
+		Region r1 = scheduleManager.wipGetRegion(partition);
+		if (r1 instanceof MappingRegion) {
+			AbstractPartition2Mapping partition2mapping = getPartition2Mapping(partition);
+			return partition2mapping.getMapping();
+
+		}
+		assert r1 == r2;
+		return scheduleManager.wipGetRegion(partition).accept(this); */
+	}
+
 	@Override
 	public Element visitRegion(@NonNull Region region) {
 		return visiting(region);
@@ -500,20 +546,25 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 
 	@Override
 	public @Nullable Element visitScheduledRegion(@NonNull ScheduledRegion scheduledRegion) {
+		RootPartition rootPartition = scheduleManager.getRootPartition(scheduledRegion);
 		//		String name = rootRegion.getName();
 		//
-		List<@NonNull Region> callableRegions = new ArrayList<>();
-		callableRegions.add(QVTscheduleUtil.getOwnedLoadingRegion(scheduledRegion));
-		for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(scheduledRegion)) {
-			callableRegions.add(region);
-		}
+		//	List<@NonNull Partition> callablePartitions = new ArrayList<>();
+		//	LoadingRegion loadingRegion = QVTscheduleUtil.getOwnedLoadingRegion(scheduledRegion);
+		//	callableRegions.add(loadingRegion);
+		//	for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(scheduledRegion)) {
+		//		callablePartitions.add(scheduleManager.wipGetPartition(region));
+		//	}
+		//	Iterable<@NonNull Partition> partitions = rootPartition.getPartitions();
+		Iterable<@NonNull Partition> allPartitions = CompilerUtil.gatherPartitions(rootPartition, new ArrayList<>());
+		//	assert Iterables.contains(partitions, scheduleManager.wipGetPartition(QVTscheduleUtil.getOwnedLoadingRegion(scheduledRegion)));
 
-		List<@NonNull Region> sortedRegions = QVTscheduleUtil.EarliestRegionComparator.sort(callableRegions);
-		Map<@NonNull ClassDatum, Set<@NonNull PropertyDatum>> keyedClassDatum2propertyDatums = gatherKeyCalls(sortedRegions);
+		List<@NonNull Partition> sortedPartitions = new EarliestPartitionComparator().sort(allPartitions);
+		Map<@NonNull ClassDatum, Set<@NonNull PropertyDatum>> keyedClassDatum2propertyDatums = gatherKeyCalls(sortedPartitions);
 		createKeyFunctions(keyedClassDatum2propertyDatums);
-		for (@NonNull Region region : sortedRegions) {
+		for (@NonNull Partition partition : sortedPartitions) {
 			//			if (!region.isConnectionRegion()) {
-			createRegion2Mapping(region);
+			createPartition2Mapping(partition);
 			//			}
 		}
 		//		Region rootRegion = regionOrdering.getRootRegion();
@@ -546,10 +597,10 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			AbstractRegion2Mapping region2Mapping = getRegion2Mapping(region);
 			region2Mapping.checkAndEnforceRealizations(typedModel2property2realizedEdges);
 		} */
-		for (@NonNull Region region : sortedRegions) {
+		for (@NonNull Partition partition : sortedPartitions) {
 			//			if (!region.isConnectionRegion()) {
-			AbstractRegion2Mapping region2Mapping = getRegion2Mapping(region);
-			region2Mapping.synthesizeCallStatements();
+			AbstractPartition2Mapping partition2Mapping = getPartition2Mapping(partition);
+			partition2Mapping.synthesizeCallStatements();
 			//			}
 		}
 		// Mappings are in schedule index order.

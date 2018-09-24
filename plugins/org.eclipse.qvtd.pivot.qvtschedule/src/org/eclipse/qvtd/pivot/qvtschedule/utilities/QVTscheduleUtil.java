@@ -65,7 +65,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
 public class QVTscheduleUtil extends QVTscheduleConstants
 {
@@ -73,7 +72,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return (a, b) -> String.valueOf(a) + delimiter + String.valueOf(b);
 	}
 
-	public static class EarliestRegionComparator implements Comparator<@NonNull Region>
+	/*	public static class EarliestRegionComparator implements Comparator<@NonNull Region>
 	{
 		public static final @NonNull EarliestRegionComparator INSTANCE = new EarliestRegionComparator();
 
@@ -86,11 +85,11 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 		@Override
 		public int compare(@NonNull Region o1, @NonNull Region o2) {
-			int i1 = o1.getInvocationIndex();
-			int i2 = o2.getInvocationIndex();
+			int i1 = scheduleManager.wipGetFirstPass(o1);
+			int i2 = scheduleManager.wipGetFirstPass(o2);
 			return i1 - i2;
 		}
-	}
+	} */
 
 	public static final class EdgeSourceFunction implements Function<@NonNull Edge, @NonNull Node>
 	{
@@ -739,6 +738,24 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 			}
 		}
 		return ClassUtil.nonNullState(null);
+	}
+
+	public static @NonNull ScheduledRegion getScheduledRegion(@NonNull Region region) {
+		return ClassUtil.nonNullState(region.getScheduledRegion());
+	}
+
+	public static @NonNull List<@NonNull ConnectionEnd> getSourceEnds(@NonNull Connection connection) {
+		return ClassUtil.nullFree(connection.getSourceEnds());
+	}
+
+	@SuppressWarnings("unchecked")
+	public static @NonNull List<@NonNull NavigableEdge> getSourceEnds(@NonNull EdgeConnection connection) {
+		return (List<@NonNull NavigableEdge>)(Object)ClassUtil.nullFree(connection.getSourceEnds());
+	}
+
+	@SuppressWarnings("unchecked")
+	public static @NonNull List<@NonNull Node> getSourceEnds(@NonNull NodeConnection connection) {
+		return (List<@NonNull Node>)(Object)ClassUtil.nullFree(connection.getSourceEnds());
 	}
 
 	public static @NonNull Node getSourceNode(@NonNull Edge edge) {

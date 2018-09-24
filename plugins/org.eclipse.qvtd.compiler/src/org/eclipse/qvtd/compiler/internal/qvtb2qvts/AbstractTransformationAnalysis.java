@@ -43,7 +43,6 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -196,6 +195,10 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 		return classDatum2traceClassAnalysis.get(classDatum);
 	}
 
+	public @Nullable RootPartition basicGetRootPartition() {
+		return rootPartition;
+	}
+
 	public @Nullable TracePropertyRegionAnalysis basicGetTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
 		assert QVTscheduleUtil.getReferredProperty(propertyDatum) != oclContainerProperty;
 		return propertyDatum2tracePropertyAnalysis.get(propertyDatum);
@@ -246,6 +249,10 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 
 	protected @NonNull TracePropertyRegionAnalysis createTracePropertyAnalysis(@NonNull TraceClassRegionAnalysis traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
 		return new TracePropertyRegionAnalysis(this, traceClassAnalysis, tracePropertyDatum);
+	}
+
+	public @Nullable RegionAnalysis basicGetRegionAnalysis(@NonNull Region region) {
+		return region2regionAnalysis.get(region);
 	}
 
 	public @NonNull Iterable<@NonNull RuleRegion> gatherRuleRegions() {
@@ -401,7 +408,7 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 		return tracePropertyAnalysis;
 	}
 
-	public @NonNull RootPartition partition(@NonNull ProblemHandler problemHandler, @NonNull Iterable<? extends @NonNull MappingRegion> activeRegions) throws CompilerChainException {
+	public @NonNull RootPartition partition(@NonNull ProblemHandler problemHandler, @NonNull Iterable<? extends @NonNull Region> activeRegions) throws CompilerChainException {
 		assert this.rootPartition == null;
 		this.rootPartition  = TransformationPartitioner.partition(this, problemHandler, activeRegions);
 		return rootPartition;

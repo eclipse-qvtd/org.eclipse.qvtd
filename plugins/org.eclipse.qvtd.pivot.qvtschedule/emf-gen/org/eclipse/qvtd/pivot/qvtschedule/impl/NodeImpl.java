@@ -14,12 +14,9 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -56,8 +53,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.StaticConnectionManager;
-
 import com.google.common.collect.Iterables;
 
 /**
@@ -623,15 +618,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	private /*@LazyNonNull*/ Utility utility = null;		// Set by post region build analysis
 
 	@Override
-	public final void addOutgoingConnection(@NonNull NodeConnection connection) {
-		assert Iterables.contains(StaticConnectionManager.INSTANCE.rawGetSourceEnds(connection), this);
-		//		assert edge.getRegion() == getRegion();
-		List<NodeConnection> outgoingConnections2 = getOutgoingConnections();
-		assert !outgoingConnections2.contains(connection);
-		outgoingConnections2.add(connection);
-	}
-
-	@Override
 	public void addOriginatingElement(@NonNull Element originatingElement) {
 		throw new UnsupportedOperationException();		// Should be MappingNode
 	}
@@ -705,18 +691,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
-	public void getAllAncestors(@NonNull Set<@NonNull Node> ancestors) {
-		if (ancestors.add(this)) {
-			Region region = QVTscheduleUtil.getOwningRegion(this);
-			for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(region)) {
-				for (@NonNull Node passedBindingSource : headNode.getPassedBindingSources()) {
-					passedBindingSource.getAllAncestors(ancestors);
-				}
-			}
-		}
-	}
-
-	@Override
 	public final @NonNull Iterable<@NonNull Edge> getArgumentEdges() {
 		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getIncomingEdges(this), QVTscheduleUtil.IsExpressionEdgePredicate.INSTANCE);
 		return filter;
@@ -774,17 +748,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	public final @Nullable NodeConnection getIncomingPassedConnection() {
 		NodeConnection incomingConnection2 = incomingConnection;
 		if ((incomingConnection2 != null) && incomingConnection2.isPassed()) {
-			return incomingConnection2;
-		}
-		else {
-			return null;
-		}
-	}
-
-	@Override
-	public @Nullable NodeConnection getIncomingUsedConnection() {
-		NodeConnection incomingConnection2 = incomingConnection;
-		if ((incomingConnection2 != null) && StaticConnectionManager.INSTANCE.rawIsUsed(incomingConnection2, this)) {
 			return incomingConnection2;
 		}
 		else {
@@ -914,21 +877,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		return filter;
 	}
 
-	@Override
-	public @NonNull Iterable<@NonNull Node> getPassedBindingSources() {
-		List<@NonNull Node> sources = new ArrayList<>();
-		NodeConnection connection = getIncomingPassedConnection();
-		if (connection != null) {
-			for (@NonNull Node source : StaticConnectionManager.INSTANCE.rawGetSourceEnds(connection)) {
-				if (!sources.contains(source)) {
-					sources.add(source);
-				}
-			}
-		}
-		return sources;
-	}
-
-	@Override
+	/*	@Override
 	public @NonNull Iterable<@NonNull Node> getPassedBindingTargets() {
 		List<@NonNull Node> targets = new ArrayList<>();
 		for (@NonNull NodeConnection connection : getOutgoingPassedConnections()) {
@@ -939,7 +888,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			}
 		}
 		return targets;
-	}
+	} */
 
 	protected @NonNull Integer getPenwidth() {
 		return isHead() ? QVTscheduleConstants.HEAD_WIDTH : !isExpression() ? 2*QVTscheduleConstants.LINE_WIDTH : QVTscheduleConstants.LINE_WIDTH;
@@ -1038,20 +987,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public @NonNull Iterable<@NonNull Element> getOriginatingElements() {
 		return Collections.emptyList();
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull Node> getUsedBindingSources() {
-		List<@NonNull Node> sources = new ArrayList<>();
-		NodeConnection connection = getIncomingUsedConnection();
-		if (connection != null) {
-			for (@NonNull Node source : StaticConnectionManager.INSTANCE.rawGetSourceEnds(connection)) {
-				if (!sources.contains(source)) {
-					sources.add(source);
-				}
-			}
-		}
-		return sources;
 	}
 
 	@Override
@@ -1250,17 +1185,6 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			return false;
 		}
 	} */
-
-	@Override
-	public final void removeOutgoingConnection(@NonNull NodeConnection connection) {
-		assert Iterables.contains(StaticConnectionManager.INSTANCE.rawGetSourceEnds(connection), this);
-		//		assert edge.getRegion() == getRegion();
-		List<NodeConnection> outgoingConnections2 = outgoingConnections;
-		assert outgoingConnections2 != null;
-		@SuppressWarnings("unused")
-		boolean wasRemoved = outgoingConnections2.remove(connection);
-		//		assert wasRemoved;
-	}
 
 	@Override
 	public void resetHead() {

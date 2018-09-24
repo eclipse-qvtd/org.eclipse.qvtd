@@ -31,11 +31,8 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
@@ -46,12 +43,10 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphVisitor;
 
 import com.google.common.collect.Iterables;
@@ -397,30 +392,8 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
-	/**
-	 * The indexes in the overall schedule at which this region can be executed. The first index is the index at which ALL
-	 * invocations occur. Subsequent indexes are when a referenced value may become available enabling a deferred execution.
-	 */
-	private final @NonNull List<@NonNull Integer> indexes = new ArrayList<>();
-
 	@SuppressWarnings("unused")			// Used in the debugger
 	private final @NonNull ToDOT toDot = new ToDOT(this){};
-
-	@Override
-	public boolean addIndex(int index) {
-		for (int i = 0; i < indexes.size(); i++) {
-			Integer anIndex = indexes.get(i);
-			if (index == anIndex) {
-				return false;
-			}
-			if (index < anIndex) {
-				indexes.add(i, index);
-				return true;
-			}
-		}
-		indexes.add(index);
-		return true;
-	}
 
 	@Override
 	public void addVariableNode(@NonNull VariableDeclaration variable, @NonNull Node node) {}
@@ -428,11 +401,11 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
 		GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
-		String name = getSymbolName() + "\\n " + getName();
-		String indexText = getIndexText();
-		if (indexText != null) {
-			name = name + "\\n " + indexText;
-		}
+		String name = /*getSymbolName() + "\\n " +*/ getName();
+		//		String indexText = StaticConnectionManager.INSTANCE.wipGetPassesText(this);
+		//		if (indexText != null) {
+		//			name = name + "\\n " + indexText;
+		//		}
 		s.setLabel(name);
 		String shape = getShape();
 		if (shape != null) {
@@ -473,7 +446,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		return true;
 	}
 
-	protected void computeSymbolName(@NonNull SymbolNameBuilder sIn) {
+	/*	protected void computeSymbolName(@NonNull SymbolNameBuilder sIn) {
 		SymbolNameBuilder s = null;
 		//		List<String> names = new ArrayList<>();
 		//		for (@NonNull MappingAction action : getMappingActions()) {
@@ -600,9 +573,9 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 				break;
 			}
 		}
-	}
+	} */
 
-	private @NonNull Set<@NonNull Node> computeToOneSubRegion(@NonNull Set<@NonNull Node> toOneSubRegion, @NonNull Node atNode) {
+	/*	private @NonNull Set<@NonNull Node> computeToOneSubRegion(@NonNull Set<@NonNull Node> toOneSubRegion, @NonNull Node atNode) {
 		if (toOneSubRegion.add(atNode)) {
 			for (@NonNull NavigableEdge edge : atNode.getNavigableEdges()) {
 				assert edge.getEdgeSource() == atNode;
@@ -613,9 +586,9 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 			}
 		}
 		return toOneSubRegion;
-	}
+	} */
 
-	@Override
+	/*	@Override
 	public @NonNull Iterable<@NonNull Node> getAncestorsOf(@NonNull Node node) {
 		List<@NonNull Node> ancestors = new ArrayList<>();
 		HashSet<@NonNull Node> ancestorSet = new HashSet<>();
@@ -626,7 +599,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 			}
 		}
 		return ancestors;
-	}
+	} */
 
 	private @NonNull NavigableEdge getBestEdge(@Nullable NavigableEdge bestEdge, @NonNull NavigableEdge candidateEdge) {
 		if (bestEdge == null) {
@@ -677,56 +650,6 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	public final @NonNull Iterable<@NonNull Edge> getExpressionEdges() {
 		@NonNull Iterable<@NonNull Edge> filter = Iterables.filter(QVTscheduleUtil.getOwnedEdges(this), QVTscheduleUtil.IsExpressionEdgePredicate.INSTANCE);
 		return filter;
-	}
-
-	@Override
-	public int getFinalExecutionIndex() {
-		assert indexes.size() > 0;
-		return indexes.get(indexes.size()-1);
-	}
-
-	@Override
-	public int getFirstIndex() {
-		int size = indexes.size();
-		assert size > 0;
-		return indexes.get(0);
-	}
-
-	@Override
-	public @NonNull String getIndexRangeText() {
-		return getInvocationIndex() + ".." + getFinalExecutionIndex();
-	}
-
-	public @Nullable String getIndexText() {
-		StringBuilder s = null;
-		for (@NonNull Integer index : indexes) {
-			if (s == null) {
-				s = new StringBuilder();
-			}
-			else {
-				s.append(",");
-			}
-			s.append(index.toString());
-		}
-		return s != null ? s.toString() : null;
-	}
-
-	@Override
-	public @NonNull List<@NonNull Integer> getIndexes() {
-		return indexes;
-	}
-
-	@Override
-	public int getInvocationIndex() {
-		assert indexes.size() > 0;
-		return indexes.get(0);
-	}
-
-	@Override
-	public int getLastIndex() {
-		int size = indexes.size();
-		assert size > 0;
-		return indexes.get(size-1);
 	}
 
 	@Override
@@ -797,6 +720,11 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public ScheduledRegion getContainingScheduledRegion() {
 		return null;
+	}
+
+	@Override
+	public @NonNull String getGraphName() {
+		return name;
 	}
 
 	private int nextPartitionNumber = 0;			// FIXME legacy compatibility naming support
@@ -891,8 +819,9 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	}
 
 	@Override
-	public final @NonNull String getSymbolName() {
-		String symbolName2 = symbolName;
+	public @Nullable String getSymbolName() {
+		return null;
+		/*		String symbolName2 = symbolName;
 		if (symbolName2 == null) {
 			SymbolNameBuilder s1 = new SymbolNameBuilder(0);			// No limit
 			SymbolNameBuilder s2 = new SymbolNameBuilder(50);			// 50 character inner limit
@@ -914,16 +843,16 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 			//				getClass().toString();
 			//			}
 		}
-		return symbolName2;
+		return symbolName2; */
 	}
 
-	protected @NonNull String getSymbolNamePrefix() {
-		return QVTscheduleConstants.REGION_SYMBOL_NAME_PREFIX;
-	}
+	//	protected @NonNull String getSymbolNamePrefix() {
+	//		return QVTscheduleConstants.REGION_SYMBOL_NAME_PREFIX;
+	//	}
 
-	protected String getSymbolNameSuffix() {
-		return QVTscheduleConstants.REGION_SYMBOL_NAME_SUFFIX;
-	}
+	//	protected String getSymbolNameSuffix() {
+	//		return QVTscheduleConstants.REGION_SYMBOL_NAME_SUFFIX;
+	//	}
 
 	/*	private boolean hasEdgeConnection(@NonNull Node predicatedNode) {
 		for (@NonNull Edge edge : predicatedNode.getIncomingEdges()) {
@@ -1114,7 +1043,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public void toGraph(@NonNull GraphStringBuilder s) {
 		ToGraphVisitor visitor = new ToGraphVisitor(s);
-		visitor.visit(this);
+		visitor.visit((Graphable)this);
 	}
 
 	@Override

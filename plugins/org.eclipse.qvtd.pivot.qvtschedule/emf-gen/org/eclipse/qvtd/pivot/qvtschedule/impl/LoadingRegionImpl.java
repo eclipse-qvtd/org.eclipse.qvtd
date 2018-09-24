@@ -30,8 +30,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
 /**
  * <!-- begin-user-doc -->
@@ -189,20 +187,20 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitLoadingRegion(this);
 	}
 
-	@Override
-	protected void computeSymbolName(@NonNull SymbolNameBuilder s) {
-		s.appendString(QVTscheduleUtil.ROOT_MAPPING_NAME);
-	}
+	//	@Override
+	//	protected void computeSymbolName(@NonNull SymbolNameBuilder s) {
+	//		s.appendString(QVTscheduleUtil.ROOT_MAPPING_NAME);
+	//	}
 
 	@Override
 	public @NonNull List<Node> getHeadNodes() {
 		return QVTscheduleConstants.EMPTY_NODE_LIST;
 	}
 
-	@Override
-	protected @NonNull String getSymbolNamePrefix() {
-		return "r_";
-	}
+	//	@Override
+	//	protected @NonNull String getSymbolNamePrefix() {
+	//		return "r_";
+	//	}
 
 	@Override
 	public boolean isLoadingRegion() {

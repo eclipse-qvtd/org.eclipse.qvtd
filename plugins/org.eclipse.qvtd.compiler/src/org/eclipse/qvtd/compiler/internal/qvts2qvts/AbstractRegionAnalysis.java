@@ -90,6 +90,7 @@ public abstract class AbstractRegionAnalysis implements CompilerUtil.PartialRegi
 	 * properties that are directly realized from a middle object provided all predicates are satisfied.
 	 */
 	private final @NonNull Set<@NonNull NavigableEdge> oldPrimaryNavigableEdges = new HashSet<>();
+	private final @NonNull List<@NonNull Node> loadedInputNodes = new ArrayList<>();
 	private final @NonNull List<@NonNull Edge> predicatedEdges = new ArrayList<>();
 	private final @NonNull List<@NonNull NavigableEdge> predicatedMiddleEdges = new ArrayList<>();
 	private final @NonNull List<@NonNull Node> predicatedMiddleNodes = new ArrayList<>();
@@ -161,6 +162,13 @@ public abstract class AbstractRegionAnalysis implements CompilerUtil.PartialRegi
 		else {
 			PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
 			addConsumptionOfPropertyDatum(propertyDatum);
+		}
+	}
+
+	private void addConsumptionOfInputNode(@NonNull Node node) {
+		if (node.isClass() && !loadedInputNodes.contains(node)) {		// DataTypes are consumed by their edge
+			loadedInputNodes.add(node);
+			addConsumptionOfNode(node);
 		}
 	}
 
@@ -411,7 +419,9 @@ public abstract class AbstractRegionAnalysis implements CompilerUtil.PartialRegi
 			}
 			else if (node.isPattern()) {
 				if (isConstant(node)) {}
-				else if (isLoaded(node)) {}
+				else if (isLoaded(node)) {
+					addConsumptionOfInputNode(node);
+				}
 				else if (scheduleManager.isMiddle(node)) {
 					if (node.isDispatch()) {
 						if (dispatchNode != null) {

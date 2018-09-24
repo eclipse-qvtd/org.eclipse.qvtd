@@ -11,16 +11,16 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
-class NonPartition extends AbstractAcyclicPartition
+public class NonPartition extends AbstractAcyclicPartition
 {
-	protected NonPartition(@NonNull MappingPartitioner partitioner) {
-		super(partitioner);
+	public NonPartition(@NonNull String name, @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull RegionAnalysis regionAnalysis) {
+		super(name, partitionedTransformationAnalysis, regionAnalysis);
 	}
 
 	@Override
@@ -29,18 +29,13 @@ class NonPartition extends AbstractAcyclicPartition
 	}
 
 	@Override
-	protected @NonNull Iterable<@NonNull Node> getHeadNodes() {
+	public @NonNull Iterable<@NonNull Node> getHeadNodes() {
 		return QVTscheduleUtil.getHeadNodes(originalRegion);
 	}
 
 	@Override
 	public @NonNull MappingRegion getMicroMappingRegion() {
 		return (MappingRegion)originalRegion;
-	}
-
-	@Override
-	public @NonNull String getName() {
-		return PivotUtil.getName(originalRegion);
 	}
 
 	@Override

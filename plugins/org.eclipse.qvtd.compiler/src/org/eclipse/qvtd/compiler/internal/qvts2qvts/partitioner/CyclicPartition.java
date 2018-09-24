@@ -20,23 +20,19 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.AbstractPartition;
-import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 
 import com.google.common.collect.Iterables;
 
 /**
  * Each CycleAnalysis identifies one group of regionAnalyses that contribute to a cycle.
  */
-public class CyclicPartition extends AbstractPartition implements InternallyAcyclicPartition, Partition
+public class CyclicPartition extends AbstractPartition2 implements InternallyAcyclicPartition
 {
-	protected final @NonNull String name;
 	protected final @NonNull CyclicPartitionsAnalysis cyclesAnalysis;
-	private int parallelScheduleDepth = -1;
 
 	/**
 	 *	The nested partitions that are encapsulated by this cyclic partition.
@@ -62,8 +58,7 @@ public class CyclicPartition extends AbstractPartition implements InternallyAcyc
 			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors,
 			@NonNull Set<@NonNull TraceClassPartitionAnalysis> traceClassAnalyses,
 			@NonNull Set<@NonNull TracePropertyPartitionAnalysis> tracePropertyAnalyses) {
-		super(transformationPartitioner.getPartitionedTransformationAnalysis());
-		this.name = name;
+		super(name, transformationPartitioner.getPartitionedTransformationAnalysis());
 		this.cyclesAnalysis = cyclesAnalysis;
 		this.partitions = partitions;
 		for (@NonNull Partition partition : partitions) {
@@ -86,11 +81,6 @@ public class CyclicPartition extends AbstractPartition implements InternallyAcyc
 		throw new UnsupportedOperationException();		// FIXME
 	}
 
-	@Override
-	public @NonNull MappingRegion createMicroMappingRegion() {
-		throw new UnsupportedOperationException();		// FIXME
-	}
-
 	public @NonNull Iterable<@NonNull MappingRegion> createMicroMappingRegions() {
 		//	getRegionSchedule();
 		List<@NonNull MappingRegion> microMappingRegions = new ArrayList<>();
@@ -105,68 +95,9 @@ public class CyclicPartition extends AbstractPartition implements InternallyAcyc
 		return microMappingRegions;
 	}
 
-	/*	@Override
-	public @Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getConsumedTraceClassPartitionAnalyses() {
-		return (Iterable<@NonNull TraceClassPartitionAnalysis>)getConsumedTraceClassAnalyses();
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull TracePropertyPartitionAnalysis> getConsumedTracePropertyPartitionAnalyses() {
-		return (Iterable<@NonNull TracePropertyPartitionAnalysis>)getConsumedTracePropertyAnalyses();
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getProducedTraceClassPartitionAnalyses() {
-		return (Iterable<@NonNull TraceClassPartitionAnalysis>)getProducedTraceClassAnalyses();
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull TracePropertyPartitionAnalysis> getProducedTracePropertyPartitionAnalyses() {
-		return (Iterable<@NonNull TracePropertyPartitionAnalysis>)getProducedTracePropertyAnalyses();
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getSuperProducedTraceClassPartitionAnalyses() {
-		return (Iterable<@NonNull TraceClassPartitionAnalysis>)getSuperProducedTraceClassAnalyses();
-	} */
-
-	@Override
-	public int getDepth() {
-		assert parallelScheduleDepth >= 0;
-		return parallelScheduleDepth;
-	}
-
 	@Override
 	public @NonNull Set<@NonNull Partition> getExplicitPredecessors() {
 		return externalPredecessors;
-	}
-
-	@Override
-	public @NonNull MappingRegion getMicroMappingRegion() {
-		throw new UnsupportedOperationException();		// FIXME
-	}
-
-	@Override
-	public @NonNull String getName() {
-		return name;
-	}
-
-	@Override
-	public @NonNull Region getOriginalRegion() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();		// FIXME
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull Edge> getPartialEdges() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();		// FIXME
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull Node> getPartialNodes() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();		// FIXME
 	}
 
 	@Override
@@ -212,11 +143,6 @@ public class CyclicPartition extends AbstractPartition implements InternallyAcyc
 	}
 
 	@Override
-	public @NonNull String getSymbolName() {
-		return name;
-	}
-
-	@Override
 	public @NonNull Iterable<@NonNull TraceClassPartitionAnalysis> getTraceClassAnalyses() {
 		return traceClassAnalyses;
 	}
@@ -224,21 +150,5 @@ public class CyclicPartition extends AbstractPartition implements InternallyAcyc
 	@Override
 	public @NonNull Iterable<@NonNull TracePropertyPartitionAnalysis> getTracePropertyAnalyses() {
 		return tracePropertyAnalyses;
-	}
-
-	@Override
-	public void setDepth(int parallelScheduleDepth) {
-		this.parallelScheduleDepth = parallelScheduleDepth;
-	}
-
-	@Override
-	public void toGraph(@NonNull GraphStringBuilder s) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();		// FIXME
-	}
-
-	@Override
-	public @NonNull String toString() {
-		return name;
 	}
 }

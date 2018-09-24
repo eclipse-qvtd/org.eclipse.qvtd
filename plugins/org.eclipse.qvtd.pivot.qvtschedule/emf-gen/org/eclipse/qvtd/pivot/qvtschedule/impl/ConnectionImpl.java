@@ -15,14 +15,17 @@
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -31,6 +34,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
+import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
@@ -49,6 +53,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl#getOwningScheduledRegion <em>Owning Scheduled Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl#getConnectionRole <em>Connection Role</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl#getSourceEnds <em>Source Ends</em>}</li>
  * </ul>
  *
  * @generated
@@ -109,6 +114,16 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getSourceEnds() <em>Source Ends</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSourceEnds()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ConnectionEnd> sourceEnds;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -190,6 +205,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ConnectionRole getConnectionRole() {
 		return connectionRole;
 	}
@@ -199,6 +215,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setConnectionRole(ConnectionRole newConnectionRole) {
 		ConnectionRole oldConnectionRole = connectionRole;
 		connectionRole = newConnectionRole == null ? CONNECTION_ROLE_EDEFAULT : newConnectionRole;
@@ -211,6 +228,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -220,11 +238,25 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CONNECTION__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public List<ConnectionEnd> getSourceEnds() {
+		if (sourceEnds == null) {
+			sourceEnds = new EObjectResolvingEList<ConnectionEnd>(ConnectionEnd.class, this, QVTschedulePackage.CONNECTION__SOURCE_ENDS);
+		}
+		return sourceEnds;
 	}
 
 	/**
@@ -287,6 +319,8 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 				return getConnectionRole();
 			case QVTschedulePackage.CONNECTION__NAME:
 				return getName();
+			case QVTschedulePackage.CONNECTION__SOURCE_ENDS:
+				return getSourceEnds();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -296,6 +330,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -310,6 +345,10 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 				return;
 			case QVTschedulePackage.CONNECTION__NAME:
 				setName((String)newValue);
+				return;
+			case QVTschedulePackage.CONNECTION__SOURCE_ENDS:
+				getSourceEnds().clear();
+				getSourceEnds().addAll((Collection<? extends ConnectionEnd>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -335,6 +374,9 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 			case QVTschedulePackage.CONNECTION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case QVTschedulePackage.CONNECTION__SOURCE_ENDS:
+				getSourceEnds().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -355,6 +397,8 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 				return connectionRole != CONNECTION_ROLE_EDEFAULT;
 			case QVTschedulePackage.CONNECTION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case QVTschedulePackage.CONNECTION__SOURCE_ENDS:
+				return sourceEnds != null && !sourceEnds.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -395,21 +439,21 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	/**
 	 * The indexes in the overall schedule at which this connection propagates additional values.
 	 */
-	private final @NonNull List<@NonNull Integer> indexes = new ArrayList<>();
+	private final @NonNull List<@NonNull Integer> passes = new ArrayList<>();
 
 	@Override
-	public boolean addIndex(int index) {
-		for (int i = 0; i < indexes.size(); i++) {
-			Integer anIndex = indexes.get(i);
-			if (index == anIndex) {
+	public boolean addPass(int pass) {
+		for (int i = 0; i < passes.size(); i++) {
+			Integer aPass = passes.get(i);
+			if (pass == aPass) {
 				return false;
 			}
-			if (index < anIndex) {
-				indexes.add(i, index);
+			if (pass < aPass) {
+				passes.add(i, pass);
 				return true;
 			}
 		}
-		indexes.add(index);
+		passes.add(pass);
 		return true;
 	}
 
@@ -466,7 +510,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 
 	public @Nullable String getIndexText() {
 		StringBuilder s = null;
-		for (@NonNull Integer index : indexes) {
+		for (@NonNull Integer index : passes) {
 			if (s == null) {
 				s = new StringBuilder();
 			}
@@ -479,8 +523,13 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	}
 
 	@Override
-	public @NonNull List<@NonNull Integer> getIndexes() {
-		return indexes;
+	public int getLastPass() {
+		return passes.get(passes.size()-1);
+	}
+
+	@Override
+	public @NonNull List<@NonNull Integer> getPasses() {
+		return passes;
 	}
 
 	public @NonNull String getShape() {

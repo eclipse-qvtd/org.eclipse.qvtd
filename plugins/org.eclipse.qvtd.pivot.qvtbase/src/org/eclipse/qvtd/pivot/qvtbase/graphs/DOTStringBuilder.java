@@ -29,12 +29,15 @@ public class DOTStringBuilder implements GraphStringBuilder
 	private final @NonNull StringBuilder s = new StringBuilder();
 	private int indents = 0;
 	private boolean indentPending = false;
-	private final @NonNull Map<Object,String> node2name = new HashMap<Object,String>();
-	//	private final @NonNull Map<String, Set<String>> edges = new HashMap<String, Set<String>>();
-	private final @NonNull List<String> clusterName = new ArrayList<String>();
-	private final @NonNull Map<String,String> attributes = new HashMap<String,String>();
+	private final @NonNull Map<@Nullable Object, @NonNull Map<@NonNull Object, @NonNull String>> scope2node2name = new HashMap<>();
+	private final @NonNull List<@NonNull String> clusterName = new ArrayList<>();
+	private final @NonNull Map<@NonNull String, @NonNull String> attributes = new HashMap<>();
+	private @NonNull Map<@NonNull Object, @NonNull String> node2name;
+	private int nameCount = 0;
 
 	public DOTStringBuilder() {
+		this.node2name = new HashMap<>();
+		scope2node2name.put(null, this.node2name);
 		append("digraph ");
 		append("schedule");
 		append(" {");
@@ -134,7 +137,12 @@ public class DOTStringBuilder implements GraphStringBuilder
 	public @NonNull String appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull GraphNode object) {
 		String name = node2name.get(object);
 		if (name == null) {
-			name = "a" + node2name.size();
+			Map<@NonNull Object, @NonNull String> globalNode2Name = scope2node2name.get(null);
+			assert globalNode2Name != null;
+			name = globalNode2Name.get(object);
+		}
+		if (name == null) {
+			name = "a" + ++nameCount;
 			node2name.put(object, name);
 			attributes.clear();
 			object.appendNode(toGraphHelper, name);
@@ -176,7 +184,7 @@ public class DOTStringBuilder implements GraphStringBuilder
 		attributes.clear();
 	}
 
-	public void pushCluster(/*@NonNull*/ String label) {
+	/*	public void pushCluster(/ *@NonNull* / String label) {
 		String name = "cluster_" + clusterName.size();
 		clusterName.add(name);
 		append("subgraph " + name + " {");
@@ -188,7 +196,7 @@ public class DOTStringBuilder implements GraphStringBuilder
 			append("label=\"" + label + "\";");
 			newLine();
 		}
-	}
+	} */
 
 	@Override
 	public void setArrowhead(@NonNull String value) {
@@ -241,6 +249,16 @@ public class DOTStringBuilder implements GraphStringBuilder
 	@Override
 	public void setPenwidth(@NonNull Integer value) {
 		attributes.put("penwidth", value.toString());
+	}
+
+	@Override
+	public void setScope(@Nullable Object scopeObject) {
+		Map<@NonNull Object, @NonNull String> entry = scope2node2name.get(scopeObject);
+		if (entry == null) {
+			entry = new HashMap<>();
+			scope2node2name.put(scopeObject, entry);
+		}
+		this.node2name = entry;
 	}
 
 	@Override

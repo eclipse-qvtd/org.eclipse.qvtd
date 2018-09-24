@@ -42,8 +42,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
-
 import com.google.common.collect.Iterables;
 
 /**
@@ -453,10 +451,10 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitScheduledRegion(this);
 	}
 
-	@Override
-	protected void computeSymbolName(@NonNull SymbolNameBuilder s) {
-		s.appendName(name);
-	}
+	//	@Override
+	//	protected void computeSymbolName(@NonNull SymbolNameBuilder s) {
+	//		s.appendName(name);
+	//	}
 
 	@Override
 	public @NonNull Iterable<@NonNull Region> getCallableRegions() {
@@ -486,11 +484,16 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 			}
 			region = invokingRegion;
 		}
-		return null;
+		return region;
 	}
 
 	@Override
-	protected @NonNull String getSymbolNamePrefix() {
-		return "s_";
+	public final @NonNull String getGraphName() {
+		return "«global»";
 	}
+
+	//	@Override
+	//	protected @NonNull String getSymbolNamePrefix() {
+	//		return "s_";
+	//	}
 } //ScheduledRegionImpl

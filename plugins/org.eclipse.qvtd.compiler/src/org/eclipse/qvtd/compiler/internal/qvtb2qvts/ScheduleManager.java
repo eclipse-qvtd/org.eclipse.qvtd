@@ -24,11 +24,14 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.CompilerProblem;
+import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.NameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.RuleAnalysis2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis2TracePackage;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -82,8 +85,10 @@ public interface ScheduleManager
 	 */
 	@NonNull Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull RuleRegion>> analyzeTransformations();
 
+	@Nullable ConnectionManager basicGetConnectionManager();
 	@Nullable Property basicGetGlobalSuccessProperty(@NonNull Node node);
 	@Nullable Property basicGetLocalSuccessProperty(@NonNull Node node);
+	@NonNull ConnectionManager createConnectionManager(@NonNull ProblemHandler problemHandler, @NonNull LoadingRegionAnalysis loadingRegionAnalysis);
 	@NonNull ExpressionSynthesizer createExpressionSynthesizer(@NonNull RuleAnalysis ruleAnalysis);
 	@NonNull RuleAnalysis createRuleAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull Rule asRule);
 	@NonNull RuleAnalysis2TraceGroup createRuleAnalysis2TraceGroup(@NonNull RuleAnalysis ruleAnalysis);
@@ -95,6 +100,7 @@ public interface ScheduleManager
 	@NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Class asType);
 	@NonNull ClassDatum getClassDatum(@NonNull TypedModel typedModel, @NonNull CompleteClass completeClass);
 	@NonNull Iterable<@NonNull ClassDatum> getClassDatums();
+	@NonNull ConnectionManager getConnectionManager();
 	@NonNull RootDomainUsageAnalysis getDomainUsageAnalysis();
 	@NonNull DomainUsage getDomainUsage(@NonNull Element element);
 	@NonNull ClassDatum getElementalClassDatum(@NonNull ClassDatum classDatum);
@@ -117,6 +123,7 @@ public interface ScheduleManager
 	@NonNull PropertyDatum getPropertyDatum(@NonNull NavigableEdge edge);
 	@NonNull QVTbaseLibraryHelper getQVTbaseLibraryHelper();
 	@NonNull RegionAnalysis getRegionAnalysis(@NonNull Region region);
+	@NonNull RootPartition getRootPartition(@NonNull ScheduledRegion scheduledRegion);
 	@NonNull ScheduleModel getScheduleModel();
 	@NonNull StandardLibrary getStandardLibrary();
 	@NonNull StandardLibraryHelper getStandardLibraryHelper();
@@ -125,6 +132,7 @@ public interface ScheduleManager
 	@NonNull TraceHelper getTraceHelper();
 	@NonNull TypedModel getTraceTypedModel();
 	@NonNull Iterable<@NonNull AbstractTransformationAnalysis> getTransformationAnalyses();
+	@NonNull AbstractTransformationAnalysis getTransformationAnalysis(@NonNull ScheduledRegion scheduledRegion);
 	@NonNull AbstractTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation);
 
 	/**
@@ -170,4 +178,8 @@ public interface ScheduleManager
 	boolean useActivators();
 	void writeDebugGraphs(@NonNull Graphable graphable, @Nullable String context);
 	void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph);
+
+	//	void wipAddPartition(@NonNull Partition partition, @NonNull Region partitionedRegion);
+	//	@NonNull Partition wipGetPartition(@NonNull Region partitionedRegion);
+	//	@NonNull Region wipGetRegion(@NonNull Partition partition);
 }

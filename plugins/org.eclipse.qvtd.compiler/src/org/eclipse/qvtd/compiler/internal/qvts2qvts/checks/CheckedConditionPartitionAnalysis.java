@@ -89,9 +89,15 @@ public class CheckedConditionPartitionAnalysis
 		}
 
 		private boolean isCheckedNavigation(@NonNull NavigationEdge edge) {
+			Role edgeRole = partition.getRole(edge);
+			assert edgeRole != null;
 			Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
+			Role sourceNodeRole = partition.getRole(sourceNode);
+			assert sourceNodeRole != null;
 			Node targetNode = QVTscheduleUtil.getTargetNode(edge);
-			return targetNode.isConstant() && !sourceNode.isNew();
+			Role targetNodeRole = partition.getRole(targetNode);
+			assert targetNodeRole != null;
+			return targetNode.isConstant() && !sourceNodeRole.isNew();
 		}
 
 		@Override
@@ -157,6 +163,8 @@ public class CheckedConditionPartitionAnalysis
 
 		@Override
 		public Object visitNavigableEdge(@NonNull NavigableEdge navigableEdge) {
+			Role navigableEdgeRole = partition.getRole(navigableEdge);
+			assert navigableEdgeRole != null;
 			NavigableEdge checkedEdge = QVTscheduleUtil.getPrimaryEdge(navigableEdge);
 			NavigableEdge oppositeEdge = checkedEdge.getOppositeEdge();
 			if (oppositeEdge != null) {
@@ -180,7 +188,7 @@ public class CheckedConditionPartitionAnalysis
 				}
 			}
 			Node targetNode = QVTscheduleUtil.getTargetNode(navigableEdge);
-			if (navigableEdge.isPredicated() && targetNode.isConstant()) {
+			if (navigableEdgeRole.isPredicated() && targetNode.isConstant()) {
 				context.add(new ConstantTargetCheckedCondition(navigableEdge));
 				//				return null;
 			}
@@ -219,7 +227,8 @@ public class CheckedConditionPartitionAnalysis
 			Edge firstEdge = null;
 			MultipleEdgeCheckedCondition checkedCondition = null;
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-				if (edge.isOld() && !edge.isExpression()) {		// FIXME why exclude expression?
+				Role edgeRole = partition.getRole(edge);
+				if ((edgeRole != null) && edgeRole.isOld() && !edge.isExpression()) {		// FIXME why exclude expression?
 					Integer sourceCost = reachabilityForest.getCost(QVTscheduleUtil.getSourceNode(edge));
 					assert sourceCost != null;
 					if (sourceCost <= targetCost) {

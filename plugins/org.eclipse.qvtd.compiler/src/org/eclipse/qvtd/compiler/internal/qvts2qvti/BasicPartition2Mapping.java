@@ -66,10 +66,10 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TreeIterable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedConditionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -120,7 +120,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
-public class BasicRegion2Mapping extends AbstractRegion2Mapping
+public class BasicPartition2Mapping extends AbstractPartition2Mapping
 {
 	/**
 	 * The OldEdgeSchedule analyses the old (constant, loaded, speculation, predicated) nodes and edges
@@ -145,10 +145,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		private final @NonNull Set<@NonNull Node> scheduledNodes;
 
 		public OldEdgeSchedule() {
-			this.scheduledNodes = Sets.newHashSet(QVTscheduleUtil.getHeadNodes(region));  // ?? leaf constants
+			this.scheduledNodes = Sets.newHashSet(partition.getHeadNodes());  // ?? leaf constants
 		}
 
 		private void addEdge(@NonNull Edge edge) {
+			assert partition.getRole(edge) != null;
 			if (scheduledEdges.add(edge)) {
 				Edge oppositeEdge = null;
 				if (edge instanceof NavigableEdge) {
@@ -159,19 +160,24 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					}
 				}
 				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
-				Node targetNode = QVTscheduleUtil.getTargetNode(edge);
-				if (!sourceNode.isDependency() && !targetNode.isDependency()) {
-					Integer sourceCost = reachabilityForest.getCost(sourceNode);
-					Integer targetCost = reachabilityForest.getCost(targetNode);
-					assert (sourceCost != null) && (targetCost != null);// && ((targetCost <= 0) || (sourceCost <= targetCost));
-					addNode(sourceNode);
-					addNode(targetNode);
-					edgeSchedule.add(edge);
+				Role sourceNodeRole = partition.getRole(sourceNode);
+				if ((sourceNodeRole != null) && !sourceNode.isDependency()) {
+					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
+					Role targetNodeRole = partition.getRole(targetNode);
+					if ((targetNodeRole != null) && !targetNode.isDependency()) {
+						Integer sourceCost = reachabilityForest.getCost(sourceNode);
+						Integer targetCost = reachabilityForest.getCost(targetNode);
+						assert (sourceCost != null) && (targetCost != null);// && ((targetCost <= 0) || (sourceCost <= targetCost));
+						addNode(sourceNode);
+						addNode(targetNode);
+						edgeSchedule.add(edge);
+					}
 				}
 			}
 		}
 
 		private void addNode(@NonNull Node targetNode) {
+			assert partition.getRole(targetNode) != null;
 			if (scheduledNodes.add(targetNode)) {
 				Subexpression subexpression = node2subexpression.get(targetNode);
 				if (subexpression != null) {
@@ -184,7 +190,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				Integer targetCost = reachabilityForest.getCost(targetNode);
 				assert targetCost != null;
 				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(targetNode)) {
-					if (edge.isOld() && edge.isUnconditional()) {
+					Role edgeRole = partition.getRole(edge);
+					if ((edgeRole != null) && edgeRole.isOld() && edge.isUnconditional()) {
 						Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
 						Integer sourceCost = reachabilityForest.getCost(sourceNode);
 						assert sourceCost != null;
@@ -197,8 +204,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 
 		public @NonNull Iterable<@NonNull CheckedCondition> analyze() {
-			String name = region.getName();
-			if (name.contains("mapHelper_Operation")) {
+			String name = partition.getName();
+			if (name.contains("list2list«edge-headElement»")) {
 				getClass();
 			}
 			//
@@ -207,7 +214,8 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			Node dispatchNode = regionAnalysis.basicGetDispatchNode();
 			if (dispatchNode != null) {
 				for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(dispatchNode)) {
-					if (edge.isPredicated()) {
+					Role edgeRole = partition.getRole(edge);
+					if ((edgeRole != null) && edgeRole.isPredicated()) {
 						addEdge(edge);
 					}
 				}
@@ -217,12 +225,18 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			//
 			for (@NonNull Node headNode : headNodes) {		// FIXME This should be redundant wrt prioritized CheckConditions
 				Edge localSuccessEdge = regionAnalysis.basicGetLocalSuccessEdge(headNode);
-				if ((localSuccessEdge != null) && localSuccessEdge.isPredicated()) {
-					addEdge(localSuccessEdge);
+				if (localSuccessEdge != null) {
+					Role localSuccessEdgeRole = partition.getRole(localSuccessEdge);
+					if ((localSuccessEdgeRole != null) && localSuccessEdgeRole.isPredicated()) {
+						addEdge(localSuccessEdge);
+					}
 				}
 				Edge globalSuccessEdge = regionAnalysis.basicGetGlobalSuccessEdge(headNode);
-				if ((globalSuccessEdge != null) && globalSuccessEdge.isPredicated()) {
-					addEdge(globalSuccessEdge);
+				if (globalSuccessEdge != null) {
+					Role globalSuccessEdgeRole = partition.getRole(globalSuccessEdge);
+					if ((globalSuccessEdgeRole != null) && globalSuccessEdgeRole.isPredicated()) {
+						addEdge(globalSuccessEdge);
+					}
 				}
 			}
 
@@ -232,7 +246,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			//			if (checkableSize > 0) {
 			List<@NonNull CheckedCondition> sortedCheckedConditions = new ArrayList<>(checkedConditions);
 			if (checkableSize > 1) {
-				Collections.sort(sortedCheckedConditions, new CheckedConditionWeightComparator(BasicRegion2Mapping.this));
+				Collections.sort(sortedCheckedConditions, new CheckedConditionWeightComparator(BasicPartition2Mapping.this));
 			}
 			for (@NonNull CheckedCondition checkedCondition : sortedCheckedConditions) {
 				Iterable<@NonNull Edge> edges = checkedCondition.getEdges();
@@ -293,9 +307,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 
 		protected void createConstantCheck(@NonNull Edge edge, @NonNull OCLExpression checkExpression) {
-			if (edge.isSpeculated()) {
+			Role edgeRole = partition.getRole(edge);
+			assert edgeRole != null;
+			if (edgeRole.isSpeculated()) {
 				assert edge.isSuccess();
-				System.err.println("Speculation code omitted for " + region);
+				System.err.println("Speculation code omitted for " + partition);
 			}
 			else {
 				createCheckStatement(checkExpression);
@@ -304,30 +320,35 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 		public void synthesize(@NonNull Iterable<@NonNull CheckedCondition> checkedConditions) {
 			for (@NonNull Edge edge : edgeSchedule) {
+				assert partition.getRole(edge) != null;;
 				assert edge.isUnconditional();
 				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
-				Node targetNode = QVTscheduleUtil.getTargetNode(edge);
 				assert sourceNode.isUnconditional();
-				assert targetNode.isUnconditional();
-				if (edge instanceof NavigableEdge) {
-					NavigableEdge navigableEdge = (NavigableEdge)edge;
-					Property property = QVTscheduleUtil.getProperty(navigableEdge);
-					OCLExpression sourceExp = createVariableExp(sourceNode);
-					Type sourceType = sourceExp.getType();
-					Type requiredType = property.getOwningClass();
-					if ((requiredType != null) && !sourceType.conformsTo(getMetamodelManager().getStandardLibrary(), requiredType)) {
-						String castName = "cast_" + sourceNode.getName(); // FIXME BUG 530033 in a closed world this is always a fail
-						DeclareStatement castStatement = createCheckedDeclareStatement(castName, sourceExp, requiredType);
-						sourceExp = helper.createVariableExp(castStatement);
-					}
-					OCLExpression source2targetExp = createCallExp(sourceExp, property);
-					if (targetNode.isNullLiteral()) {
-						createCheckStatement(source2targetExp, "=", helper.createNullLiteralExp());
-					}
-					else if (targetNode.isConstant() && !sourceNode.isNew()) {
-						//						createCheckStatement(source2targetExp);
-						VariableDeclaration nodeVariable = node2variable.get(targetNode);
-						/*if (nodeVariable == null) {
+				Role sourceNodeRole = partition.getRole(sourceNode);
+				if (sourceNodeRole != null) {
+					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
+					assert targetNode.isUnconditional();
+					Role targetNodeRole = partition.getRole(targetNode);
+					if (targetNodeRole != null) {
+						if (edge instanceof NavigableEdge) {
+							NavigableEdge navigableEdge = (NavigableEdge)edge;
+							Property property = QVTscheduleUtil.getProperty(navigableEdge);
+							OCLExpression sourceExp = createVariableExp(sourceNode);
+							Type sourceType = sourceExp.getType();
+							Type requiredType = property.getOwningClass();
+							if ((requiredType != null) && !sourceType.conformsTo(getMetamodelManager().getStandardLibrary(), requiredType)) {
+								String castName = "cast_" + sourceNode.getName(); // FIXME BUG 530033 in a closed world this is always a fail
+								DeclareStatement castStatement = createCheckedDeclareStatement(castName, sourceExp, requiredType);
+								sourceExp = helper.createVariableExp(castStatement);
+							}
+							OCLExpression source2targetExp = createCallExp(sourceExp, property);
+							if (targetNode.isNullLiteral()) {
+								createCheckStatement(source2targetExp, "=", helper.createNullLiteralExp());
+							}
+							else if (targetNodeRole.isConstant() && !sourceNodeRole.isNew()) {
+								//						createCheckStatement(source2targetExp);
+								VariableDeclaration nodeVariable = node2variable.get(targetNode);
+								/*if (nodeVariable == null) {
 							VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
 							createCheckStatement(targetVariableExp, "=", source2targetExp);
 						}
@@ -338,8 +359,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 						else if ((targetNode instanceof BooleanLiteralNode) && ((BooleanLiteralNode)targetNode).isBooleanValue()) {
 							createConstantCheck(edge, source2targetExp);
 						}
+						else if (targetNodeRole == Role.CONSTANT_SUCCESS_TRUE) {
+							createConstantCheck(edge, source2targetExp);
+						}
 						else if (nodeVariable == null) {
-							ExpressionCreator expressionCreator = new ExpressionCreator(BasicRegion2Mapping.this);
+							ExpressionCreator expressionCreator = new ExpressionCreator(BasicPartition2Mapping.this);
 							ExpressionCreator inlineExpressionCreator = expressionCreator.getInlineExpressionCreator();
 							OCLExpression targetExpression = inlineExpressionCreator.getExpression(targetNode);
 							assert targetExpression != null;
@@ -349,48 +373,51 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 							VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
 							createCheckStatement(source2targetExp, "=", targetVariableExp);
 						}
-					}
-					else {
-						VariableDeclaration nodeVariable = node2variable.get(targetNode);
-						if (nodeVariable == null) {
-							DeclareStatement declareStatement = createDeclareStatement(targetNode, source2targetExp);
-							createCastPredicates(targetNode, declareStatement);
+							}
+							else {
+								VariableDeclaration nodeVariable = node2variable.get(targetNode);
+								if (nodeVariable == null) {
+									DeclareStatement declareStatement = createDeclareStatement(targetNode, source2targetExp);
+									createCastPredicates(targetNode, declareStatement);
+								}
+								else if (navigableEdge.isPartial()) {
+									VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
+									createCheckStatement(source2targetExp, "includes", targetVariableExp);
+								}
+								else {
+									VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
+									createCheckStatement(targetVariableExp, "=", source2targetExp);
+								}
+							}
 						}
-						else if (navigableEdge.isPartial()) {
-							VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
-							createCheckStatement(source2targetExp, "includes", targetVariableExp);
+						else if (edge instanceof PredicateEdge) {
+							VariableExp sourceVariableExp = getSubexpressionVariableExp(sourceNode);
+							if (!(targetNode instanceof BooleanLiteralNode)) {
+								String edgeName = ClassUtil.nonNullState(edge.getName()).trim();
+								if (edgeName.length() >= 2) {
+									edgeName = edgeName.substring(1, edgeName.length()-1);		// Lose guillemets
+								}
+								VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
+								createCheckStatement(sourceVariableExp, edgeName, targetVariableExp);
+							}
+							else if (((BooleanLiteralNode)targetNode).isBooleanValue()) {
+								createConstantCheck(edge, sourceVariableExp);
+							}
+							else {
+								createCheckStatement(sourceVariableExp, "=", helper.createBooleanLiteralExp(false));
+							}
 						}
-						else {
-							VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
-							createCheckStatement(targetVariableExp, "=", source2targetExp);
+						else if (edge instanceof ExpressionEdge) {
+							getSubexpressionDeclaration(targetNode);
 						}
 					}
-				}
-				else if (edge instanceof PredicateEdge) {
-					VariableExp sourceVariableExp = getSubexpressionVariableExp(sourceNode);
-					if (!(targetNode instanceof BooleanLiteralNode)) {
-						String edgeName = ClassUtil.nonNullState(edge.getName()).trim();
-						if (edgeName.length() >= 2) {
-							edgeName = edgeName.substring(1, edgeName.length()-1);		// Lose guillemets
-						}
-						VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
-						createCheckStatement(sourceVariableExp, edgeName, targetVariableExp);
-					}
-					else if (((BooleanLiteralNode)targetNode).isBooleanValue()) {
-						createConstantCheck(edge, sourceVariableExp);
-					}
-					else {
-						createCheckStatement(sourceVariableExp, "=", helper.createBooleanLiteralExp(false));
-					}
-				}
-				else if (edge instanceof ExpressionEdge) {
-					getSubexpressionDeclaration(targetNode);
 				}
 			}
 			List<@NonNull Subexpression> subexpressions = new ArrayList<>(resultNode2subexpression.values());
 			Collections.sort(subexpressions);
 			for (@NonNull Subexpression subexpression : subexpressions) {
-				if (!subexpression.resultNode.isNew() && subexpression.resultNode.isUnconditional()) {
+				Role resultNodeRole = partition.getRole(subexpression.resultNode);
+				if ((resultNodeRole != null) && !resultNodeRole.isNew() && subexpression.resultNode.isUnconditional()) {
 					getSubexpressionDeclaration(subexpression.resultNode);
 				}
 			}
@@ -412,7 +439,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	}
 
 
-	private static class ExpressionCreator extends AbstractExtendingQVTbaseVisitor<@NonNull OCLExpression, @NonNull BasicRegion2Mapping>
+	private static class ExpressionCreator extends AbstractExtendingQVTbaseVisitor<@NonNull OCLExpression, @NonNull BasicPartition2Mapping>
 	{
 		protected final @NonNull QVTimperativeHelper helper;
 		protected final @NonNull Set<@NonNull Node> multiAccessedNodes = new HashSet<>();
@@ -420,7 +447,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 		private /*@LazyNonNull*/ ExpressionCreator inlineExpressionCreator = null;
 
-		public ExpressionCreator(@NonNull BasicRegion2Mapping context) {
+		public ExpressionCreator(@NonNull BasicPartition2Mapping context) {
 			super(context);
 			this.helper = context.getHelper();
 			analyzeExpressions(multiAccessedNodes, conditionalNodes);
@@ -431,8 +458,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		 */
 		private void analyzeExpressions(@NonNull Set<Node> multiAccessedNodes, @NonNull Set<Node> conditionalNodes) {
 			Set<@NonNull Node> unconditionalNodes = new HashSet<>();
-			for (@NonNull Edge edge : context.getRegion().getRealizedEdges()) {
-				analyzeIncomingPath(edge.getEdgeTarget(), unconditionalNodes, conditionalNodes, false);
+			Partition partition = context.getPartition();
+			for (@NonNull Edge edge : partition.getPartialEdges()) {
+				Role role = partition.getRole(edge);
+				if ((role != null) && role.isRealized()) {
+					analyzeIncomingPath(edge.getEdgeTarget(), unconditionalNodes, conditionalNodes, false);
+				}
 			}
 			conditionalNodes.removeAll(unconditionalNodes);
 			for (@NonNull Node node : unconditionalNodes) {
@@ -595,80 +626,90 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 			return newVariable;
 		}
 
+		private static int depth = 0;
+
 		public @Nullable OCLExpression getExpression(@NonNull Node node) {
-			//			if (node.isNullLiteral()) {
-			//				return helper.createNullLiteralExp();
-			//			}
-			VariableDeclaration variable = context.basicGetVariable(node);
-			if (variable != null) {
-				assert !node.isNullLiteral();								// null should not be cached in a variable
-				return PivotUtil.createVariableExp(variable);
+			if (++depth > 25) {
+				throw new IllegalStateException();
 			}
-			if (node.isOperation()) {
-				Element originatingElement = node.basicGetOriginatingElement();
-				if (originatingElement instanceof CollectionTemplateExp) {	// The CollectionTemplateExp synthesis has already identified the necessary operations
-					OperationCallNode operationCallNode = (OperationCallNode)node;
-					Operation operation = operationCallNode.getReferredOperation();
-					return createOperationCallExp(operation.getOperationId(), operationCallNode);
+			try {
+				//			if (node.isNullLiteral()) {
+				//				return helper.createNullLiteralExp();
+				//			}
+				VariableDeclaration variable = context.basicGetVariable(node);
+				if (variable != null) {
+					assert !node.isNullLiteral();								// null should not be cached in a variable
+					return PivotUtil.createVariableExp(variable);
 				}
-				else if (originatingElement != null) {
-					return originatingElement.accept(getInlineExpressionCreator());
-				}
-				else if (node instanceof BooleanLiteralNode) {				// This happens because synthesized nodes have no originating BooleanLiteralExp
-					return helper.createBooleanLiteralExp(((BooleanLiteralNode)node).isBooleanValue());
-				}
-				else if (node instanceof NullLiteralNode) {					// This happens because synthesized nodes have no originating BooleanLiteralExp
-					return helper.createNullLiteralExp();
-				}
-				else if (node instanceof NumericLiteralNode) {				// This never happens but we can easily support it if needed
-					Number numericValue = ClassUtil.nonNullState(((NumericLiteralNode)node).getNumericValue());
-					if ((numericValue instanceof Byte) || (numericValue instanceof Integer) || (numericValue instanceof Long) || (numericValue instanceof Short)) {
-						return helper.createIntegerLiteralExp(numericValue);
+				if (node.isOperation()) {
+					Element originatingElement = node.basicGetOriginatingElement();
+					if (originatingElement instanceof CollectionTemplateExp) {	// The CollectionTemplateExp synthesis has already identified the necessary operations
+						OperationCallNode operationCallNode = (OperationCallNode)node;
+						Operation operation = operationCallNode.getReferredOperation();
+						return createOperationCallExp(operation.getOperationId(), operationCallNode);
+					}
+					else if (originatingElement != null) {
+						return originatingElement.accept(getInlineExpressionCreator());
+					}
+					else if (node instanceof BooleanLiteralNode) {				// This happens because synthesized nodes have no originating BooleanLiteralExp
+						return helper.createBooleanLiteralExp(((BooleanLiteralNode)node).isBooleanValue());
+					}
+					else if (node instanceof NullLiteralNode) {					// This happens because synthesized nodes have no originating BooleanLiteralExp
+						return helper.createNullLiteralExp();
+					}
+					else if (node instanceof NumericLiteralNode) {				// This never happens but we can easily support it if needed
+						Number numericValue = ClassUtil.nonNullState(((NumericLiteralNode)node).getNumericValue());
+						if ((numericValue instanceof Byte) || (numericValue instanceof Integer) || (numericValue instanceof Long) || (numericValue instanceof Short)) {
+							return helper.createIntegerLiteralExp(numericValue);
+						}
+						else {
+							return helper.createRealLiteralExp(numericValue);
+						}
+					}
+					else if (node instanceof StringLiteralNode) {				// This never happens but we can easily support it if needed
+						return helper.createStringLiteralExp(ClassUtil.nonNullState(((StringLiteralNode)node).getStringValue()));
 					}
 					else {
-						return helper.createRealLiteralExp(numericValue);
+						throw new UnsupportedOperationException();
 					}
 				}
-				else if (node instanceof StringLiteralNode) {				// This never happens but we can easily support it if needed
-					return helper.createStringLiteralExp(ClassUtil.nonNullState(((StringLiteralNode)node).getStringValue()));
-				}
-				else {
-					throw new UnsupportedOperationException();
-				}
-			}
-			for (@NonNull Edge edge : node.getArgumentEdges()) {
-				Node expNode = edge.getEdgeSource();
-				OCLExpression clonedElement = create(expNode);
-				if (clonedElement instanceof VariableExp) {
-					VariableDeclaration referredVariable = ((VariableExp)clonedElement).getReferredVariable();
-					if (referredVariable instanceof Variable) {
-						context.addVariable(node, referredVariable);
+				for (@NonNull Edge edge : node.getArgumentEdges()) {
+					Node expNode = edge.getEdgeSource();
+					OCLExpression clonedElement = create(expNode);
+					if (clonedElement instanceof VariableExp) {
+						VariableDeclaration referredVariable = ((VariableExp)clonedElement).getReferredVariable();
+						if (referredVariable instanceof Variable) {
+							context.addVariable(node, referredVariable);
+						}
 					}
+					return clonedElement;
 				}
-				return clonedElement;
-			}
-			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-				if (edge.isCast() || edge.isNavigation()) {
-					Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
-					if (edgeRole == Role.LOADED) {
-						OCLExpression source = getExpression(edge.getEdgeSource());
-						if (source != null) {
+				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+					if (edge.isCast() || edge.isNavigation()) {
+						Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
+						if (edgeRole == Role.LOADED) {
+							OCLExpression source = getExpression(edge.getEdgeSource());
+							if (source != null) {
+								return helper.createNavigationCallExp(source, QVTscheduleUtil.getProperty((NavigableEdge)edge));
+							}
+						}
+						else if (edgeRole == Role.PREDICATED) {
+							OCLExpression source = create(edge.getEdgeSource());
 							return helper.createNavigationCallExp(source, QVTscheduleUtil.getProperty((NavigableEdge)edge));
 						}
 					}
-					else if (edgeRole == Role.PREDICATED) {
+				}
+				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+					if (edge.isExpression()) {
 						OCLExpression source = create(edge.getEdgeSource());
-						return helper.createNavigationCallExp(source, QVTscheduleUtil.getProperty((NavigableEdge)edge));
+						return source;
 					}
 				}
+				return null;
 			}
-			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-				if (edge.isExpression()) {
-					OCLExpression source = create(edge.getEdgeSource());
-					return source;
-				}
+			finally {
+				--depth;
 			}
-			return null;
 		}
 
 		public @NonNull ExpressionCreator getInlineExpressionCreator() {
@@ -693,7 +734,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 		@Override
 		public String toString() {
-			return getClass().getSimpleName() + " " + context.getRegion();
+			return getClass().getSimpleName() + " " + context.getPartition();
 		}
 
 		@Override
@@ -876,7 +917,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 				return PivotUtil.createVariableExp(iVariable);
 			}
 			else {
-				System.err.println("Creating unexpected variable for " + pVariable + " in " + context.getRegion());
+				System.err.println("Creating unexpected variable for " + pVariable + " in " + context.getPartition());
 				Type variableType = pVariable.getType();
 				assert variableType != null;
 				String safeName = context.getSafeName(ClassUtil.nonNullState(pVariable.getName()));
@@ -893,7 +934,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	{
 		private int debugDepth = 0;
 
-		private InlineExpressionCreator(@NonNull BasicRegion2Mapping context) {
+		private InlineExpressionCreator(@NonNull BasicPartition2Mapping context) {
 			super(context);
 		}
 
@@ -993,39 +1034,47 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 		private void computeSubexpressionContent(@NonNull Node node, @NonNull Set<@NonNull OperationNode> subexpressionResults) {
 			if (contentNodes.add(node)) {
+				Role resultNodeRole = partition.getRole(resultNode);
+				assert resultNodeRole != null;
 				node2subexpression.put(node, this);
 				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-					//					if (edge.isUnconditional()) {
-					Node sourceNode = edge.getEdgeSource();
-					if (subexpressionResults.contains(sourceNode)) {
-						if (sourceNode.isOld() || (!edge.isSecondary() && resultNode.isNew())) {
-							inputNodes.add(sourceNode);
-							if (edge.isUnconditional() && sourceNode.isUnconditional()) {
-								unconditionalInputNodes.add(sourceNode);
+					Role edgeRole = partition.getRole(edge);
+					if (edgeRole != null) {
+						//					if (edge.isUnconditional()) {
+						Node sourceNode = edge.getEdgeSource();
+						Role sourceNodeRole = partition.getRole(sourceNode);
+						if (sourceNodeRole != null) {
+							if (subexpressionResults.contains(sourceNode)) {
+								if (sourceNodeRole.isOld() || (!edge.isSecondary() && resultNodeRole.isNew())) {
+									inputNodes.add(sourceNode);
+									if (edge.isUnconditional() && sourceNode.isUnconditional()) {
+										unconditionalInputNodes.add(sourceNode);
+									}
+									//							edge2subexpression.put(edge, this);
+								}
 							}
-							//							edge2subexpression.put(edge, this);
-						}
-					}
-					else if (sourceNode.isExpression()) {
-						node2subexpression.put(sourceNode, this);
-						edge2subexpression.put(edge, this);
-						computeSubexpressionContent(sourceNode, subexpressionResults);
-					}
-					else if (!sourceNode.isUnconditional()) {
-						node2subexpression.put(sourceNode, this);
-						edge2subexpression.put(edge, this);
-						computeSubexpressionContent(sourceNode, subexpressionResults);
-					}
-					else {
-						if (sourceNode.isOld() || resultNode.isNew()) {
-							inputNodes.add(sourceNode);
-							if (edge.isUnconditional() && sourceNode.isUnconditional()) {
-								unconditionalInputNodes.add(sourceNode);
+							else if (sourceNode.isExpression()) {
+								node2subexpression.put(sourceNode, this);
+								edge2subexpression.put(edge, this);
+								computeSubexpressionContent(sourceNode, subexpressionResults);
 							}
-							//							edge2subexpression.put(edge, this);
+							else if (!sourceNode.isUnconditional()) {
+								node2subexpression.put(sourceNode, this);
+								edge2subexpression.put(edge, this);
+								computeSubexpressionContent(sourceNode, subexpressionResults);
+							}
+							else {
+								if (sourceNodeRole.isOld() || resultNodeRole.isNew()) {
+									inputNodes.add(sourceNode);
+									if (edge.isUnconditional() && sourceNode.isUnconditional()) {
+										unconditionalInputNodes.add(sourceNode);
+									}
+									//							edge2subexpression.put(edge, this);
+								}
+							}
 						}
+						//					}
 					}
-					//					}
 				}
 			}
 		}
@@ -1101,15 +1150,15 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 */
 	private final @NonNull CheckedConditionAnalysis checkedConditionAnalysis;
 
-	public BasicRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull RegionAnalysis regionAnalysis) {
-		super(visitor, regionAnalysis.getRegion());
-		this.regionAnalysis = regionAnalysis;
+	public BasicPartition2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Partition partition) {
+		super(visitor, partition);
+		this.regionAnalysis = scheduleManager.getRegionAnalysis(partition.getOriginalRegion());
+		//	String name = partition.getName();
+		//	if (name.contains("list2list«edge-headElement»")) {
+		//		getClass();
+		//	}
 		this.reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		String name = region.getName();
-		if (name.contains("mapHelper_Attribute_qvtr")) {
-			getClass();
-		}
-		this.checkedConditionAnalysis = new CheckedConditionAnalysis(regionAnalysis, reachabilityForest);
+		this.checkedConditionAnalysis = new CheckedConditionAnalysis(partition, scheduleManager, reachabilityForest);
 		this.resultNode2subexpression = computeSubexpressions();
 		//
 		//	Gather the subexpression contents.
@@ -1124,11 +1173,11 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//
 		//	The zero-cost nodes are the head nodes ...
 		//
-		List<@NonNull Node> zeroCostNodes = Lists.newArrayList(QVTscheduleUtil.getHeadNodes(region));
+		List<@NonNull Node> zeroCostNodes = Lists.newArrayList(partition.getHeadNodes());
 		//
 		//	... and the no-input constant nodes
 		//
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
+		for (@NonNull Node node : partition.getPartialNodes()) {
 			if (node.isOperation()) {
 				if (node.isConstant()) {
 					boolean hasNoComputationInputs = true;
@@ -1153,12 +1202,20 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 */
 	protected @NonNull Iterable<@NonNull NavigableEdge> getAvailableNavigableEdges() {
 		Set<@NonNull NavigableEdge> oldEdges = new HashSet<>();
-		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
-			if (edge.isOld() && (edge.isCast() || edge.isNavigation()) /*&& edge.isUnconditional()*/) {
+		for (@NonNull Edge edge : partition.getPartialEdges()) {
+			Role edgeRole = partition.getRole(edge);
+			assert edgeRole != null;
+			if (edgeRole.isOld() && (edge.isCast() || edge.isNavigation()) /*&& edge.isUnconditional()*/) {
 				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
-				Node targetNode = QVTscheduleUtil.getTargetNode(edge);
-				if (sourceNode.isOld() && targetNode.isOld()) {
-					oldEdges.add((NavigableEdge) edge);
+				Role sourceNodeRole = partition.getRole(sourceNode);
+				assert sourceNodeRole != null;
+				if (sourceNodeRole.isOld()){
+					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
+					Role targetNodeRole = partition.getRole(targetNode);
+					assert targetNodeRole != null;
+					if (targetNodeRole.isOld()) {
+						oldEdges.add((NavigableEdge) edge);
+					}
 				}
 			}
 		}
@@ -1186,34 +1243,41 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		//
 		//	Identify the subexpression result nodes
 		//
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
-			if (node.isOperation() && node.isUnconditional() && !node.isPrimitive()) {
-				OperationNode resultNode = (OperationNode) node;
-				Edge firstEdge = null;
-				boolean isSubexpression = false;
-				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-					if (edge.isNew() && !edge.isSecondary()) {
-						Node edgeSource = edge.getSourceNode();
-						if (edgeSource.isPattern()) {
-							resultNode2subexpression.put(resultNode, new Subexpression(resultNode));
-							isSubexpression = true;
-							break;
+		for (@NonNull Node node : partition.getPartialNodes()) {
+			Role nodeRole = partition.getRole(node);
+			if (nodeRole != null) {
+				if (node.isOperation() && node.isUnconditional() && !node.isPrimitive()) {
+					OperationNode resultNode = (OperationNode) node;
+					Edge firstEdge = null;
+					boolean isSubexpression = false;
+					for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
+						Role edgeRole = partition.getRole(edge);
+						if ((edgeRole != null) && edgeRole.isNew() && !edge.isSecondary()) {
+							Node edgeSource = edge.getSourceNode();
+							if (edgeSource.isPattern()) {
+								resultNode2subexpression.put(resultNode, new Subexpression(resultNode));
+								isSubexpression = true;
+								break;
+							}
 						}
 					}
-				}
-				if (!isSubexpression) {
-					for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(node)) {
-						Node edgeTarget = edge.getTargetNode();
-						if (edgeTarget.isPattern() /*|| edgeTarget.isTrue()*/) {
-							resultNode2subexpression.put(resultNode, new Subexpression(resultNode));
-							break;
-						}
-						if (firstEdge == null) {
-							firstEdge = edge;
-						}
-						else {
-							resultNode2subexpression.put(resultNode, new Subexpression(resultNode));
-							break;
+					if (!isSubexpression) {
+						for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(node)) {
+							Role edgeRole = partition.getRole(edge);
+							if (edgeRole != null) {
+								Node edgeTarget = edge.getTargetNode();
+								if (edgeTarget.isPattern() /*|| edgeTarget.isTrue()*/) {
+									resultNode2subexpression.put(resultNode, new Subexpression(resultNode));
+									break;
+								}
+								if (firstEdge == null) {
+									firstEdge = edge;
+								}
+								else {
+									resultNode2subexpression.put(resultNode, new Subexpression(resultNode));
+									break;
+								}
+							}
 						}
 					}
 				}
@@ -1228,7 +1292,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	private void createAddStatements() {
 		if (connection2variable != null) {
 			for (@NonNull NodeConnection connection : connection2variable.keySet()) {
-				Node sourceNode = ConnectionManager.rawGetSource(connection, region);
+				Node sourceNode = connectionManager.getSource(connection, partition);
 				OCLExpression variableExpression = createVariableExp(sourceNode);
 				ConnectionVariable connectionVariable = connection2variable.get(connection);
 				assert connectionVariable != null;
@@ -1237,12 +1301,12 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		}
 	}
 
-	private void createCallStatements(@NonNull Map<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>> calls) {
+	private void createCallStatements(@NonNull Map<@NonNull Partition, @NonNull Map<@NonNull Node, @NonNull Node>> calls) {
 		List<@NonNull MappingStatement> mappingStatements = new ArrayList<>();
 		Map<@NonNull LoopVariable, @NonNull OCLExpression> loopVariables = null;
-		for (Map.Entry<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>> entry : calls.entrySet()) {
-			@NonNull Region calledRegion = entry.getKey();
-			AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
+		for (Map.Entry<@NonNull Partition, @NonNull Map<@NonNull Node, @NonNull Node>> entry : calls.entrySet()) {
+			@NonNull Partition calledPartition = entry.getKey();
+			AbstractPartition2Mapping calledRegion2Mapping = visitor.getPartition2Mapping(calledPartition);
 			List<@NonNull MappingParameterBinding> mappingParameterBindings = new ArrayList<>();
 			for (Map.Entry<@NonNull Node, @NonNull Node> entry2 : entry.getValue().entrySet()) {
 				@NonNull Node sourceNode = entry2.getKey();
@@ -1350,10 +1414,13 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		if (globalSuccessProperty != null) {
 			NavigableEdge globalSuccessEdge = guardNode.getNavigableEdge(globalSuccessProperty);
 			if (globalSuccessEdge != null) {
-				Node globalSuccessNode = QVTscheduleUtil.getTargetNode(globalSuccessEdge);
-				if (globalSuccessNode.isSuccess()) {
-					assert globalSuccessEdge.isRealized();
-					successProperty = globalSuccessProperty;
+				Role globalSuccessEdgeRole = partition.getRole(globalSuccessEdge);
+				if (globalSuccessEdgeRole != null) {
+					Node globalSuccessNode = QVTscheduleUtil.getTargetNode(globalSuccessEdge);
+					if (globalSuccessNode.isSuccess() && !globalSuccessEdgeRole.isPredicated()) {		// Skip predicated success
+						assert globalSuccessEdgeRole.isRealized();
+						successProperty = globalSuccessProperty;
+					}
 				}
 			}
 		}
@@ -1361,11 +1428,14 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		if (localSuccessProperty != null) {
 			NavigableEdge localSuccessEdge = guardNode.getNavigableEdge(localSuccessProperty);
 			if (localSuccessEdge != null) {
-				Node localSuccessNode = QVTscheduleUtil.getTargetNode(localSuccessEdge);
-				if (localSuccessNode.isSuccess()) {
-					assert localSuccessEdge.isRealized();
-					assert successProperty == null;
-					successProperty = localSuccessProperty;
+				Role localSuccessEdgeRole = partition.getRole(localSuccessEdge);
+				if (localSuccessEdgeRole != null) {
+					Node localSuccessNode = QVTscheduleUtil.getTargetNode(localSuccessEdge);
+					if (localSuccessNode.isSuccess() && !localSuccessEdgeRole.isPredicated()) {		// Skip predicated local-success
+						assert localSuccessEdgeRole.isRealized();
+						assert successProperty == null;
+						successProperty = localSuccessProperty;
+					}
 				}
 			}
 		}
@@ -1383,14 +1453,14 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 */
 	private void createHeadAndGuardNodeVariables() {
 		Set<@NonNull Region> headCallingRegions = new HashSet<@NonNull Region>();
-		Iterable<@NonNull Edge> recursionEdges = region.getRecursionEdges();
-		if (Iterables.size(recursionEdges) > 0) {
-			headCallingRegions.add(region);
-		}
-		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(region)) {		// FIXME Move best bead selection to QVTs2QVTs so that diagrams show best head
+		//		Iterable<@NonNull Edge> recursionEdges = region.getRecursionEdges();
+		//		if (Iterables.size(recursionEdges) > 0) {
+		//			headCallingRegions.add(region);
+		//		}
+		for (@NonNull Node headNode : partition.getHeadNodes()) {		// FIXME Move best bead selection to QVTs2QVTs so that diagrams show best head
 			if (!headNode.isDependency()) {
 				Node bestHeadNode = null;
-				Iterable<@NonNull Node> callingSources = headNode.getPassedBindingSources();
+				Iterable<@NonNull Node> callingSources = connectionManager.getPassedBindingSources(headNode);
 				if (!Iterables.isEmpty(callingSources)) {
 					bestHeadNode = headNode;
 				}
@@ -1401,7 +1471,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 					headNodes.add(bestHeadNode);
 				}
 				else {
-					visitor.addProblem(CompilerUtil.createRegionError(region, "No best head"));
+					visitor.addProblem(CompilerUtil.createPartitionError(partition, "No best head"));
 				}
 			}
 		}
@@ -1473,7 +1543,16 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 	private void createPropertyAssignments() {
 		Map<@NonNull Node, @NonNull List<@NonNull NavigableEdge>> classAssignments = null;
-		Iterable<@NonNull NavigableEdge> sortedEdges = NavigationEdgeSorter.getSortedAssignments(region.getRealizedNavigationEdges());
+		List<@NonNull NavigableEdge> navigableEdges = new ArrayList<>();
+		for (@NonNull Edge edge : partition.getPartialEdges()) {
+			if (edge.isNavigation()) {
+				Role edgeRole = partition.getRole(edge);
+				if ((edgeRole != null) && edgeRole.isRealized()) {
+					navigableEdges.add((NavigableEdge)edge);
+				}
+			}
+		}
+		Iterable<@NonNull NavigableEdge> sortedEdges = NavigationEdgeSorter.getSortedAssignments(navigableEdges);
 		for (@NonNull NavigableEdge edge : sortedEdges) {
 			Node sourceNode = edge.getEdgeSource();
 			Node targetNode = edge.getEdgeTarget();
@@ -1563,21 +1642,22 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	} */
 
 	private void createRealizedVariables() {
-		List<@NonNull Node> sortedNodes = Lists.newArrayList(region.getNewNodes());
+		List<@NonNull Node> sortedNodes = Lists.newArrayList(partition.getPartialNodes());
 		Collections.sort(sortedNodes,NameUtil.NAMEABLE_COMPARATOR);
-		for (@NonNull Node newNode : sortedNodes) {
-			if (/*newNode.isPattern() &&*/ newNode.isClass()) {
+		for (@NonNull Node node : sortedNodes) {
+			Role nodeRole = partition.getRole(node);
+			if ((nodeRole != null) && nodeRole.isNew() && /*newNode.isPattern() &&*/ node.isClass()) {
 				ExpressionCreator expressionCreator = new ExpressionCreator(this);
 				OCLExpression constructor = null;
-				if (newNode.isOperation()) {
-					if (newNode instanceof KeyedValueNode) {
-						KeyedValueNode keyedValueNode = (KeyedValueNode)newNode;
+				if (node.isOperation()) {
+					if (node instanceof KeyedValueNode) {
+						KeyedValueNode keyedValueNode = (KeyedValueNode)node;
 						ClassDatum classDatum = keyedValueNode.getClassDatumValue();
 						assert classDatum != null;
 						Function function = visitor.getKeyFunction(classDatum);
 						VariableExp thisExp = helper.createVariableExp(QVTimperativeUtil.getContextVariable(scheduleManager.getStandardLibrary(), getTransformation()));
 						Map<@NonNull PropertyDatum, @NonNull VariableExp> propertyDatum2expression = new HashMap<>();
-						for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(newNode)) {
+						for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 							if (edge instanceof KeyPartEdge) {
 								KeyPartEdge keyPartEdge = (KeyPartEdge)edge;
 								PropertyDatum propertyDatum = QVTscheduleUtil.getReferredPart(keyPartEdge);
@@ -1598,17 +1678,17 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 						constructor = helper.createOperationCallExp(thisExp, function, asArguments);
 					}
 					if (constructor == null) {
-						constructor = ((OperationCallExp)newNode.getOriginatingElement()).accept(expressionCreator);
+						constructor = ((OperationCallExp)node.getOriginatingElement()).accept(expressionCreator);
 					}
 				}
-				ClassDatum classDatum = newNode.getClassDatum();
+				ClassDatum classDatum = node.getClassDatum();
 				TypedModel pTypedModel = classDatum.getReferredTypedModel();
 				ImperativeTypedModel iTypedModel = ClassUtil.nonNullState(visitor.getQVTiTypedModel(pTypedModel));
-				NewStatement newStatement = helper.createNewStatement(getSafeName(newNode), iTypedModel, classDatum.getCompleteClass().getPrimaryClass());
+				NewStatement newStatement = helper.createNewStatement(getSafeName(node), iTypedModel, classDatum.getCompleteClass().getPrimaryClass());
 				newStatement.setOwnedExpression(constructor);
-				newStatement.setIsContained(newNode.isContained());
+				newStatement.setIsContained(node.isContained());
 				mapping.getOwnedStatements().add(newStatement);
-				VariableDeclaration oldVariable = node2variable.put(newNode, newStatement);
+				VariableDeclaration oldVariable = node2variable.put(node, newStatement);
 				assert oldVariable == null;
 			}
 		}
@@ -1638,6 +1718,10 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 	public @NonNull QVTimperativeHelper getHelper() {
 		return helper;
+	}
+
+	public @NonNull Partition getPartition() {
+		return partition;
 	}
 
 	public @NonNull Set<@NonNull Node> getPrecedingNodes(@NonNull Node targetNode) {
@@ -1694,15 +1778,15 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 		Node sourceNode = edge.getEdgeSource();
 		Property asProperty = QVTscheduleUtil.getProperty(edge);
 		TypedModel typedModel = QVTscheduleUtil.getTypedModel(sourceNode);
-		Iterable<@NonNull NavigableEdge> enforcedEdges = regionAnalysis.getEnforcedEdges(typedModel, asProperty);
+		Iterable<@NonNull NavigableEdge> enforcedEdges = partition.getEnforcedEdges(typedModel, asProperty);
 		return enforcedEdges != null;
 	}
 
 	@Override
 	public boolean isInfinite() {
-		if (region.getRecursionEdges().iterator().hasNext()) {		// FIXME unduly pessimistic
-			return true;
-		}
+		//		if (region.getRecursionEdges().iterator().hasNext()) {		// FIXME unduly pessimistic
+		//			return true;
+		//		}
 		return false;
 	}
 
@@ -1749,26 +1833,26 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 	@Override
 	public void synthesizeCallStatements() {
-		Map<@NonNull Region, @NonNull Map<@NonNull Node, @NonNull Node>> calls = null;
-		for (@NonNull Region calledRegion : ConnectionManager.rawGetCallableChildren(region)) {
+		Map<@NonNull Partition, @NonNull Map<@NonNull Node, @NonNull Node>> calls = null;
+		for (@NonNull Partition calledPartition : connectionManager.getCallableChildren(partition)) {
 			if (calls == null) {
 				calls = new HashMap<>();
 			}
-			Map<@NonNull Node, @NonNull Node> source2target = calls.get(calledRegion);
+			Map<@NonNull Node, @NonNull Node> source2target = calls.get(calledPartition);
 			if (source2target == null) {
 				source2target = new HashMap<>();
-				calls.put(calledRegion, source2target);
+				calls.put(calledPartition, source2target);
 			}
-			AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
+			AbstractPartition2Mapping calledRegion2Mapping = visitor.getPartition2Mapping(calledPartition);
 			for (@NonNull Node calledGuardNode : calledRegion2Mapping.getGuardNodes()) {
-				for (@NonNull Node callingNode : calledGuardNode.getPassedBindingSources()) {
-					if (callingNode.getOwningRegion() == region) {
+				for (@NonNull Node callingNode : connectionManager.getPassedBindingSources(calledGuardNode)) {
+					if (partition.getRole(callingNode) != null) {
 						Node oldNode = source2target.put(callingNode, calledGuardNode);
 						assert oldNode == null;
 					}
 				}
-				for (@NonNull Node callingNode : calledGuardNode.getUsedBindingSources()) {
-					if (callingNode.getOwningRegion() == region) {
+				for (@NonNull Node callingNode : connectionManager.getUsedBindingSources(calledGuardNode)) {
+					if (partition.getRole(callingNode) != null) {
 						Node oldNode = source2target.put(callingNode, calledGuardNode);
 						assert oldNode == null;
 					}
@@ -1785,7 +1869,7 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 	 */
 	@Override
 	public void synthesizeLocalStatements() {
-		String name = region.getName();
+		String name = partition.getName();
 		if (name.contains("mapHelper_Attribute_qvtr")) {
 			getClass();
 		}
@@ -1800,6 +1884,6 @@ public class BasicRegion2Mapping extends AbstractRegion2Mapping
 
 	@Override
 	public @NonNull String toString() {
-		return String.valueOf(region);
+		return String.valueOf(partition);
 	}
 }

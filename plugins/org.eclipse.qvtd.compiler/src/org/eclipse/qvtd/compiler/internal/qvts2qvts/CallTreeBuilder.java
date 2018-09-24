@@ -19,13 +19,13 @@ import java.util.Map;
 import java.util.Stack;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.LoadingPartition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-
 import com.google.common.collect.Iterables;
 
 /**
@@ -35,47 +35,59 @@ import com.google.common.collect.Iterables;
 public class CallTreeBuilder
 {
 	private final @NonNull ScheduleAnalysis scheduleCache;
+	private final @NonNull ScheduleManager scheduleManager;
+	private final @NonNull ConnectionManager connectionManager;
 
 	/**
 	 * Working state: the common region for all uses of each connection.
 	 */
-	private final @NonNull Map<@NonNull NodeConnection, @NonNull Region> connection2commonRegion = new HashMap<@NonNull NodeConnection, @NonNull Region>();
+	private final @NonNull Map<@NonNull NodeConnection, @NonNull Partition> connection2commonPartition = new HashMap<>();
 
 	public CallTreeBuilder(@NonNull ScheduleAnalysis scheduleCache) {
 		this.scheduleCache = scheduleCache;
+		this.scheduleManager = scheduleCache.getScheduleManager();
+		this.connectionManager = scheduleCache.getConnectionManager();
 	}
 
-	public void buildTree(@NonNull ScheduledRegion rootScheduledRegion, @NonNull Iterable<@NonNull ? extends Iterable<@NonNull Region>> regionSchedule) {
-		Stack<@NonNull Region> callStack = new Stack<@NonNull Region>();
-		callStack.push(rootScheduledRegion);
-		for (@NonNull Iterable<@NonNull Region> concurrency : regionSchedule) {
-			for (@NonNull Region region: concurrency) {
-				updateCallStack(callStack, region);
+	public void buildTree(@NonNull RootPartition rootPartition, @NonNull Iterable<@NonNull ? extends Iterable<@NonNull Partition>> partitionSchedule) {
+		Stack<@NonNull Partition> callStack = new Stack<@NonNull Partition>();
+		callStack.push(rootPartition);
+		for (@NonNull Iterable<@NonNull Partition> concurrency : partitionSchedule) {
+			for (@NonNull Partition partition : concurrency) {
+				updateCallStack(callStack, partition);
 			}
 		}
 		installConnections();
 	}
 
-	@Deprecated /** @deprecated pre-parallel schedule support */
-	public void buildTree(@NonNull ScheduledRegion scheduledRegion, @NonNull List<@NonNull Region> orderedRegions) {
-		Stack<@NonNull Region> callStack = new Stack<@NonNull Region>();
-		callStack.push(scheduledRegion);
-		for (@NonNull Region region: orderedRegions) {
-			updateCallStack(callStack, region);
+	protected @NonNull Partition getCommonPartition(@NonNull Partition firstPartition, @NonNull Partition secondPartition) {
+		//		Partition commonPartition = scheduleCache.getCommonPartition(firstPartition, secondPartition);
+		//		assert commonPartition != null;
+		//		return commonPartition;
+		if (firstPartition instanceof RootPartition) {
+			return firstPartition;
 		}
-		installConnections();
+		else if (secondPartition instanceof RootPartition) {
+			return secondPartition;
+		}
+		else {
+			return scheduleCache.getLoadingPartition();
+		}
 	}
 
-	protected @NonNull Region getCommonRegion(@NonNull Region firstRegion, @NonNull Region secondRegion) {
-		Region commonRegion = scheduleCache.getCommonRegion(firstRegion, secondRegion);
-		assert commonRegion != null;
-		return commonRegion;
-	}
-
-	protected @NonNull Region getMinimumDepthParentRegion(@NonNull Region childRegion) {
-		Region minimumDepthParentRegion = scheduleCache.getMinimumDepthParentRegion(childRegion);
-		assert minimumDepthParentRegion != null;
-		return minimumDepthParentRegion;
+	protected @NonNull Partition getMinimumDepthParentPartition(@NonNull Partition childPartition) {
+		//		Partition minimumDepthParentPartition = scheduleCache.getMinimumDepthParentPartition(childPartition);
+		//		assert minimumDepthParentPartition != null;
+		//		return minimumDepthParentPartition;
+		if (childPartition instanceof RootPartition) {
+			return childPartition;
+		}
+		else if (childPartition instanceof LoadingPartition) {
+			return scheduleCache.getRootPartition();
+		}
+		else {
+			return scheduleCache.getLoadingPartition();
+		}
 	}
 
 	/**
@@ -83,13 +95,13 @@ public class CallTreeBuilder
 	 * intermediate regions between the common region and the regions that use the connection variable as a source or target.
 	 */
 	protected void installConnections() {
-		List<@NonNull NodeConnection> connections = new ArrayList<>(connection2commonRegion.keySet());
+		List<@NonNull NodeConnection> connections = new ArrayList<>(connection2commonPartition.keySet());
 		Collections.sort(connections, new Comparator<@NonNull NodeConnection>()		// impriive determinism
 			{
 			@Override
 			public int compare(@NonNull NodeConnection o1, @NonNull NodeConnection o2) {
-				List<@NonNull Integer> l1 = o1.getIndexes();
-				List<@NonNull Integer> l2 = o2.getIndexes();
+				List<@NonNull Integer> l1 = o1.getPasses();
+				List<@NonNull Integer> l2 = o2.getPasses();
 				int x1 = l1.size() > 0 ? l1.get(0) : -1;
 				int x2 = l2.size() > 0 ? l2.get(0) : -1;
 				return x1-x2;
@@ -97,39 +109,40 @@ public class CallTreeBuilder
 			});
 		for (@NonNull NodeConnection connection : connections) {
 			if (connection.isPassed()) {
-				Region commonRegion = connection2commonRegion.get(connection);
-				assert commonRegion != null;
-				List<@NonNull Region> intermediateRegions = new ArrayList<@NonNull Region>();
+				Partition commonPartition = connection2commonPartition.get(connection);
+				assert commonPartition != null;
+				List<@NonNull Partition> intermediatePartitions = new ArrayList<>();
 				//				boolean isCyclic = scheduledRegion.isCyclicScheduledRegion();
 				//				if (isCyclic) {		// FIXME should not be necessary
 				//					intermediateRegions.add(scheduledRegion);
 				//				}
-				for (@NonNull Region sourceRegion : scheduleCache.getSourceRegions(connection)) {
-					if (sourceRegion != commonRegion) { //|| sourceRegion.isCyclicScheduledRegion()) {
-						Iterable<@NonNull Region> sourceRegions = Collections.singletonList(sourceRegion);
-						installConnectionsLocateIntermediates(intermediateRegions, sourceRegions, commonRegion);
+				for (@NonNull Partition sourcePartition : scheduleCache.getSourcePartitions(connection)) {
+					if (sourcePartition != commonPartition) { //|| sourceRegion.isCyclicScheduledRegion()) {
+						Iterable<@NonNull Partition> sourcePartitions = Collections.singletonList(sourcePartition);
+						installConnectionsLocateIntermediates(intermediatePartitions, sourcePartitions, commonPartition);
 					}
 				}
-				for (@NonNull Region targetRegion : scheduleCache.getTargetRegions(connection)) {
-					if ((targetRegion != commonRegion) && ConnectionManager.rawIsPassed(connection, targetRegion)) {
-						Iterable<@NonNull Region> targetRegions2 = /*targetRegion.isCyclicScheduledRegion() ? Collections.singletonList(targetRegion) :*/ ConnectionManager.rawGetCallableParents(targetRegion);
-						installConnectionsLocateIntermediates(intermediateRegions, targetRegions2, commonRegion);
+				for (@NonNull Partition targetPartition : scheduleCache.getTargetPartitions(connection)) {
+					if ((targetPartition != commonPartition) && connectionManager.isPassed(connection, targetPartition)) {
+						Iterable<@NonNull Partition> targetPartitions2 = /*targetRegion.isCyclicScheduledRegion() ? Collections.singletonList(targetRegion) :*/ connectionManager.getCallableParents(targetPartition);
+						installConnectionsLocateIntermediates(intermediatePartitions, targetPartitions2, commonPartition);
 					}
 				}
-				ConnectionManager.rawSetCommonRegion(connection, commonRegion, intermediateRegions);
+				connectionManager.setCommonPartition(connection, commonPartition, intermediatePartitions);
 				//				Scheduler.REGION_LOCALITY.println(connection + " => " + commonRegion + " " + intermediateRegions);
 			}
 		}
 		for (@NonNull NodeConnection connection : connections) {
 			if (connection.isPassed()) {
-				Region commonRegion = ConnectionManager.rawGetCommonRegion(connection);
-				assert commonRegion != null;
-				List<@NonNull Region> intermediateRegions = ConnectionManager.rawGetIntermediateRegions(connection);
-				for (@NonNull Region intermediateRegion : intermediateRegions) {
-					Region checkCommonRegion = ConnectionManager.rawGetLoopingConnections(commonRegion).size() > 0 ? QVTscheduleUtil.getContainingScheduledRegion(commonRegion) : commonRegion;
-					assert ConnectionManager.rawGetLoopingConnections(commonRegion).size() > 0
-					? Iterables.contains(ConnectionManager.rawGetCallableParents(commonRegion), getCommonRegion(commonRegion, intermediateRegion))
-						: getCommonRegion(commonRegion, intermediateRegion) == checkCommonRegion;
+				Partition commonPartition = connectionManager.getCommonPartition(connection);
+				assert commonPartition != null;
+				Partition rootPartition = scheduleCache.getRootPartition();
+				List<@NonNull Partition> intermediatePartitions = connectionManager.getIntermediatePartitions(connection);
+				for (@NonNull Partition intermediatePartition : intermediatePartitions) {
+					Partition checkCommonPartition = connectionManager.getLoopingConnections(commonPartition).size() > 0 ? rootPartition : commonPartition;
+					assert connectionManager.getLoopingConnections(commonPartition).size() > 0
+					? Iterables.contains(connectionManager.getCallableParents(commonPartition), getCommonPartition(commonPartition, intermediatePartition))
+						: getCommonPartition(commonPartition, intermediatePartition) == checkCommonPartition;
 				}
 			}
 		}
@@ -138,12 +151,12 @@ public class CallTreeBuilder
 	/**
 	 * Recursively locate all the regions that are traversed as a call sub-tree rooted at commonRegion invokes each of callableParents.
 	 */
-	protected void installConnectionsLocateIntermediates(@NonNull List<@NonNull Region> intermediateRegions, @NonNull Iterable<@NonNull Region> callableParents, @NonNull Region commonRegion) {
-		for (@NonNull Region callableParent : callableParents) {
-			if (callableParent != commonRegion) {
-				if (!intermediateRegions.contains(callableParent)) {
-					intermediateRegions.add(callableParent);
-					installConnectionsLocateIntermediates(intermediateRegions, ConnectionManager.rawGetCallableParents(callableParent), commonRegion);
+	protected void installConnectionsLocateIntermediates(@NonNull List<@NonNull Partition> intermediatePartitions, @NonNull Iterable<@NonNull Partition> callableParents, @NonNull Partition commonPartition) {
+		for (@NonNull Partition callableParent : callableParents) {
+			if (callableParent != commonPartition) {
+				if (!intermediatePartitions.contains(callableParent)) {
+					intermediatePartitions.add(callableParent);
+					installConnectionsLocateIntermediates(intermediatePartitions, connectionManager.getCallableParents(callableParent), commonPartition);
 				}
 			}
 		}
@@ -153,14 +166,14 @@ public class CallTreeBuilder
 	 * Update the callStack so that region is at the top. Update connection2commonRegion so that all
 	 * region's incomingConnections are accessible from a commonRegion on the callStack.
 	 */
-	protected void updateCallStack(@NonNull Stack<@NonNull Region> callStack, @NonNull Region region) {
-		QVTm2QVTs.REGION_STACK.println(region.getSymbolName() + " => " + callStack);
+	protected void updateCallStack(@NonNull Stack<@NonNull Partition> callStack, @NonNull Partition partition) {
+		QVTm2QVTs.REGION_STACK.println(partition + " => " + callStack);
 		//
 		//	Pop stack to commonRegion
 		//
-		Region topOfStack = callStack.peek();
+		Partition topOfStack = callStack.peek();
 		assert topOfStack != null;
-		@NonNull Region commonRegion = getCommonRegion(topOfStack, region);
+		Partition commonPartition = getCommonPartition(topOfStack, partition);
 		//
 		//	Must identify the call point at which all source values are available.
 		//
@@ -182,24 +195,24 @@ public class CallTreeBuilder
 				}
 			}
 		} */
-		for (@NonNull Connection incomingConnection1 : scheduleCache.getIncomingConnections(region)) {
-			for (@NonNull Region sourceRegion1 : scheduleCache.getSourceRegions(incomingConnection1)) {
+		for (@NonNull Connection incomingConnection1 : scheduleCache.getIncomingConnections(partition)) {
+			for (@NonNull Partition sourcePartition1 : scheduleCache.getSourcePartitions(incomingConnection1)) {
 				//				if (sourceRegion1.getLoopingConnections().size() > 0) {
-				for (@NonNull Connection incomingConnection2 : scheduleCache.getIncomingConnections(sourceRegion1)) {
-					for (@NonNull Region sourceRegion2 : scheduleCache.getSourceRegions(incomingConnection2)) {
-						commonRegion = getCommonRegion(commonRegion, sourceRegion2);
+				for (@NonNull Connection incomingConnection2 : scheduleCache.getIncomingConnections(sourcePartition1)) {
+					for (@NonNull Partition sourcePartition2 : scheduleCache.getSourcePartitions(incomingConnection2)) {
+						commonPartition = getCommonPartition(commonPartition, sourcePartition2);
 					}
 				}
 				//				}
 			}
 		}
-		while (!callStack.contains(commonRegion)) {
-			commonRegion = getMinimumDepthParentRegion(commonRegion);
-			assert commonRegion != null;
+		while (!callStack.contains(commonPartition)) {
+			commonPartition = getMinimumDepthParentPartition(commonPartition);
+			assert commonPartition != null;
 		}
-		while ((topOfStack != commonRegion) && (topOfStack != region)) {
+		while ((topOfStack != commonPartition) && (topOfStack != partition)) {
 			callStack.pop();
-			Region topOfStack2 = callStack.peek();
+			Partition topOfStack2 = callStack.peek();
 			assert topOfStack2 != null;
 			topOfStack = topOfStack2;
 		}
@@ -208,9 +221,9 @@ public class CallTreeBuilder
 		//
 		//		Iterable<@NonNull Connection> incomingConnections = getIncomingConnections(region);
 		//		assert incomingConnections != null;
-		for (@NonNull Connection incomingConnection : scheduleCache.getIncomingConnections(region)) {
-			if (ConnectionManager.rawIsPassed(incomingConnection, region)) {
-				commonRegion = updateConnectionLocality((@NonNull NodeConnection) incomingConnection, commonRegion);
+		for (@NonNull Connection incomingConnection : scheduleCache.getIncomingConnections(partition)) {
+			if (connectionManager.isPassed(incomingConnection, partition)) {
+				commonPartition = updateConnectionLocality((@NonNull NodeConnection) incomingConnection, commonPartition);
 			}
 		}
 		//		Iterable<@NonNull Connection> outgoingConnections = getOutgoingConnections(region);
@@ -223,35 +236,35 @@ public class CallTreeBuilder
 		//
 		//	Push stack to region (without re-traversing predecessors)
 		//
-		if (topOfStack != region) {
-			ConnectionManager.rawAddCallToChild(topOfStack, region);
-			callStack.push(region);
-			topOfStack = region;
+		if (topOfStack != partition) {
+			connectionManager.addCallToChild(topOfStack, partition);
+			callStack.push(partition);
+			topOfStack = partition;
 		}
 		assert topOfStack == callStack.peek();
-		assert topOfStack == region;
+		assert topOfStack == partition;
 	}
 
 	/**
 	 * Update the connection-specific common-region of connection to be a common-region of commonStackRegion
 	 * and all source and all target regions of connection.
 	 */
-	protected @NonNull Region updateConnectionLocality(@NonNull NodeConnection connection, @NonNull Region commonStackRegion) {
+	protected @NonNull Partition updateConnectionLocality(@NonNull NodeConnection connection, @NonNull Partition commonStackPartition) {
 		assert connection.isPassed();
-		Region oldCommonRegion = connection2commonRegion.get(connection);
-		@NonNull Region commonRegion;
-		if (oldCommonRegion == null) {
-			commonRegion = commonStackRegion;
-			for (@NonNull Region sourceRegion : scheduleCache.getSourceRegions(connection)) {
-				commonRegion = getCommonRegion(commonRegion, sourceRegion);
+		Partition oldCommonPartition = connection2commonPartition.get(connection);
+		@NonNull Partition commonPartition;
+		if (oldCommonPartition == null) {
+			commonPartition = commonStackPartition;
+			for (@NonNull Partition sourcePartition : scheduleCache.getSourcePartitions(connection)) {
+				commonPartition = getCommonPartition(commonPartition, sourcePartition);
 			}
 		}
 		else {
-			commonRegion = getCommonRegion(oldCommonRegion, commonStackRegion);
+			commonPartition = getCommonPartition(oldCommonPartition, commonStackPartition);
 		}
-		if (oldCommonRegion != commonRegion) {
-			connection2commonRegion.put(connection, commonRegion);
+		if (oldCommonPartition != commonPartition) {
+			connection2commonPartition.put(connection, commonPartition);
 		}
-		return commonRegion;
+		return commonPartition;
 	}
 }

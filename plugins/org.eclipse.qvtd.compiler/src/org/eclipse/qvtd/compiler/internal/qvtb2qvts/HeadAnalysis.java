@@ -21,6 +21,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -176,6 +177,7 @@ public abstract class HeadAnalysis
 		}
 	}
 
+	//	protected final @NonNull Partition partition;
 	protected final @NonNull MappingRegion mappingRegion;
 
 	protected HeadAnalysis(@NonNull MappingRegion mappingRegion) {

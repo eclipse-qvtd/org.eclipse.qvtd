@@ -44,7 +44,7 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : transformationAnalyses) {
 			transformationAnalysis.analyzeMappingRegions();
 		}
-		scheduleManager.analyzeOriginalContents();
+		scheduleManager.analyzeOriginalContents();		// FIXME Should treat LoadingRegion uniformly
 		Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull RuleRegion>> scheduledRegion2activeRegions = scheduleManager.analyzeTransformations();
 		for (@NonNull MappingRegion ruleRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager.getScheduleModel())) {
 			scheduleManager.writeDebugGraphs(ruleRegion, null);

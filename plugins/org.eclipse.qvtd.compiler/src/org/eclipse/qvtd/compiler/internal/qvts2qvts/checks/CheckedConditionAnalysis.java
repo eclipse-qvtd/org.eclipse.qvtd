@@ -28,6 +28,7 @@ import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -44,7 +45,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
@@ -72,7 +73,7 @@ public class CheckedConditionAnalysis
 		}
 
 		public void analyze() {
-			String name = region.getName();
+			String name = partition.getName();
 			if ("mapVariableExp_referredVariable_Helper_qvtr".equals(name)) {
 				getClass();
 			}
@@ -80,8 +81,9 @@ public class CheckedConditionAnalysis
 				//				assert edge.isOld() && edge.isUnconditional();
 				edge.accept(this);
 			}
-			for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
-				if (node.isOld() && node.isUnconditional()) {
+			for (@NonNull Node node : partition.getPartialNodes()) {
+				Role nodeRole = partition.getRole(node);
+				if ((nodeRole != null) && nodeRole.isOld() && node.isUnconditional()) {
 					node.accept(this);
 				}
 			}
@@ -89,8 +91,12 @@ public class CheckedConditionAnalysis
 
 		private boolean isCheckedNavigation(@NonNull NavigationEdge edge) {
 			Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
+			Role sourceNodeRole = partition.getRole(sourceNode);
+			assert sourceNodeRole != null;
 			Node targetNode = QVTscheduleUtil.getTargetNode(edge);
-			return targetNode.isConstant() && !sourceNode.isNew();
+			Role targetNodeRole = partition.getRole(targetNode);
+			assert targetNodeRole != null;
+			return targetNodeRole.isConstant() && !sourceNodeRole.isNew();
 		}
 
 		@Override
@@ -156,6 +162,8 @@ public class CheckedConditionAnalysis
 
 		@Override
 		public Object visitNavigableEdge(@NonNull NavigableEdge navigableEdge) {
+			Role navigableEdgeRole = partition.getRole(navigableEdge);
+			assert navigableEdgeRole != null;
 			NavigableEdge checkedEdge = QVTscheduleUtil.getPrimaryEdge(navigableEdge);
 			NavigableEdge oppositeEdge = checkedEdge.getOppositeEdge();
 			if (oppositeEdge != null) {
@@ -179,7 +187,7 @@ public class CheckedConditionAnalysis
 				}
 			}
 			Node targetNode = QVTscheduleUtil.getTargetNode(navigableEdge);
-			if (navigableEdge.isPredicated() && targetNode.isConstant()) {
+			if (navigableEdgeRole.isPredicated() && targetNode.isConstant()) {
 				context.add(new ConstantTargetCheckedCondition(navigableEdge));
 				//				return null;
 			}
@@ -218,7 +226,8 @@ public class CheckedConditionAnalysis
 			Edge firstEdge = null;
 			MultipleEdgeCheckedCondition checkedCondition = null;
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-				if (edge.isOld() && !edge.isExpression()) {		// FIXME why exclude expression?
+				Role edgeRole = partition.getRole(edge);
+				if ((edgeRole != null) && edgeRole.isOld() && !edge.isExpression()) {		// FIXME why exclude expression?
 					Integer sourceCost = reachabilityForest.getCost(QVTscheduleUtil.getSourceNode(edge));
 					assert sourceCost != null;
 					if (sourceCost <= targetCost) {
@@ -302,10 +311,9 @@ public class CheckedConditionAnalysis
 		}
 	};
 
-	protected final @NonNull RegionAnalysis regionAnalysis;
+	protected final @NonNull Partition partition;
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull ReachabilityForest reachabilityForest;		// FIXME Do we really need this so early?
-	protected final @NonNull Region region;
 
 	/**
 	 * All properties (and their opposites) that need to be checked for readiness before access.
@@ -319,11 +327,10 @@ public class CheckedConditionAnalysis
 	 */
 	private final @NonNull List<@NonNull Edge> oldUnconditionalEdges;
 
-	public CheckedConditionAnalysis(@NonNull RegionAnalysis regionAnalysis, @NonNull ReachabilityForest reachabilityForest) {
-		this.regionAnalysis = regionAnalysis;
-		this.scheduleManager = regionAnalysis.getScheduleManager();
+	public CheckedConditionAnalysis(@NonNull Partition partition, @NonNull ScheduleManager scheduleManager, @NonNull ReachabilityForest reachabilityForest) {
+		this.partition = partition;
+		this.scheduleManager = scheduleManager;
 		this.reachabilityForest = reachabilityForest;
-		this.region = regionAnalysis.getRegion();
 		this.allCheckedProperties = computeCheckedProperties();
 		this.oldUnconditionalEdges = computeOldUnconditionalEdges();
 	}
@@ -332,7 +339,7 @@ public class CheckedConditionAnalysis
 	 * Return all conditions that need checking for mapping success.
 	 */
 	public @NonNull Set<@NonNull CheckedCondition> computeCheckedConditions() {
-		String name = region.getName();
+		String name = partition.getName();
 		if ("mapVariableExp_referredVariable_Helper_qvtr".equals(name)) {
 			getClass();
 		}
@@ -353,7 +360,7 @@ public class CheckedConditionAnalysis
 		Set<@NonNull Property> allCheckedProperties = new HashSet<>();
 		DomainUsage anyUsage = scheduleManager.getDomainUsageAnalysis().getAnyUsage();
 		for (@NonNull TypedModel typedModel : anyUsage.getTypedModels()) {
-			Iterable<@NonNull NavigableEdge> checkedEdges = regionAnalysis.getCheckedEdges(typedModel);
+			Iterable<@NonNull NavigableEdge> checkedEdges = partition.getCheckedEdges(typedModel);
 			if (checkedEdges != null) {
 				for (@NonNull NavigableEdge checkedEdge : checkedEdges) {
 					Property asProperty = QVTscheduleUtil.getProperty(checkedEdge);
@@ -370,12 +377,17 @@ public class CheckedConditionAnalysis
 
 	private @NonNull List<@NonNull Edge> computeOldUnconditionalEdges() {
 		List<@NonNull Edge> oldEdges = new ArrayList<>();
-		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(region)) {
-			if (edge.isOld() && edge.isUnconditional()) {
+		for (@NonNull Edge edge : partition.getPartialEdges()) {
+			Role edgeRole = partition.getRole(edge);
+			if ((edgeRole != null) && edgeRole.isOld() && edge.isUnconditional()) {
 				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
-				Node targetNode = QVTscheduleUtil.getTargetNode(edge);
-				if (sourceNode.isOld() && targetNode.isOld()) {
-					oldEdges.add(edge);
+				Role sourceNodeRole = partition.getRole(sourceNode);
+				if ((sourceNodeRole != null) && sourceNodeRole.isOld()) {
+					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
+					Role targetNodeRole = partition.getRole(targetNode);
+					if ((targetNodeRole != null) && targetNodeRole.isOld()) {
+						oldEdges.add(edge);
+					}
 				}
 			}
 		}

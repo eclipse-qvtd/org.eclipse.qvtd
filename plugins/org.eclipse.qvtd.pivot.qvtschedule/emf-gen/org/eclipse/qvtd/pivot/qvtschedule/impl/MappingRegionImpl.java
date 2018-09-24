@@ -31,6 +31,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 /**
  * <!-- begin-user-doc -->
@@ -248,7 +249,7 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 
 	@Override
 	public @NonNull String getColor() {
-		return "green";
+		return QVTscheduleConstants.REGION_COLOR;
 	}
 
 	@Override

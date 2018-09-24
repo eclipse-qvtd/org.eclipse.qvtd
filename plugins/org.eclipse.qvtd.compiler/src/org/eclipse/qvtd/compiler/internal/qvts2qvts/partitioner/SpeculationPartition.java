@@ -42,10 +42,12 @@ class SpeculationPartition extends AbstractPartialPartition
 	//	private final @NonNull Node traceNode;
 	private final @NonNull Iterable<@NonNull Node> executionNodes;
 	private final @Nullable Node dispatchNode;
+	private final boolean useActivators;
 
-	public SpeculationPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
-		super(partitioner, reachabilityForest, "«speculation»");
+	public SpeculationPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, boolean useActivators) {
+		super(computeName(partitioner, "speculation"), partitioner, reachabilityForest);
 		//	this.traceNode = partitioner.getTraceNode();
+		this.useActivators = useActivators;
 		this.originalHeadNodes = Sets.newHashSet(QVTscheduleUtil.getHeadNodes(originalRegion));
 		this.executionNodes = partitioner.getExecutionNodes();
 		this.dispatchNode = partitioner.basicGetDispatchNode();
@@ -150,6 +152,12 @@ class SpeculationPartition extends AbstractPartialPartition
 				}
 			}
 		}
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull Node> getHeadNodes() {
+		return useActivators ? executionNodes : originalHeadNodes;
+		//		return Iterables.isEmpty(executionNodes) ? originalHeadNodes : executionNodes;
 	}
 
 	@Override

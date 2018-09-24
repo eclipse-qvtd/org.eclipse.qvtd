@@ -240,6 +240,7 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	/**
 	 * Return the color with which this edge is drawn.
 	 */
+	@Override
 	@NonNull String getColor();
 
 	@NonNull String getDisplayName();

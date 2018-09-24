@@ -132,12 +132,9 @@ public interface NavigableEdge extends Edge, ConnectionEnd
 	 * @generated
 	 */
 	void setOppositeEdge(NavigableEdge value);
-	void addOutgoingConnection(@NonNull EdgeConnection edgeConnection);
 
 	@Override
 	@NonNull NavigableEdge getForwardEdge();
 
 	Property getProperty();
-
-	void removeOutgoingConnection(@NonNull EdgeConnection edgeConnection);
 }

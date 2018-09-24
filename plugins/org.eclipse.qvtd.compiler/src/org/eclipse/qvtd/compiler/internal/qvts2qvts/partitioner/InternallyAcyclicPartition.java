@@ -20,7 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
  * A derived RootPartition defines the overall schedule. A derived CyclicPartiion encapsulates a cycle as
  * internally acyclic content to be cycled externally.
  */
-interface InternallyAcyclicPartition
+public interface InternallyAcyclicPartition extends Partition
 {
 	@NonNull List<@NonNull Iterable<@NonNull Partition>> getPartitionSchedule();
 

@@ -25,7 +25,6 @@ import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.StaticConnectionManager;
 
 /**
  * <!-- begin-user-doc -->
@@ -180,7 +179,7 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 
 	@Override
 	public void destroy() {
-		StaticConnectionManager.INSTANCE.rawDestroy(this);
+		//	StaticConnectionManager.INSTANCE.rawDestroy(this);
 		super.destroy();
 	}
 
@@ -192,5 +191,13 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 	@Override
 	public boolean isPassed() {
 		return false;
+	}
+
+	@Override
+	public void setName(String newName) {
+		if ("je_Telement2element_success_1".equals(newName)) {
+			getClass();
+		}
+		super.setName(newName);
 	}
 } //EdgeConnectionImpl

@@ -134,33 +134,19 @@ public interface Region extends NamedElement, Symbolable, Graphable, GraphNode
 	 */
 	List<Node> getOwnedNodes();
 
-	boolean addIndex(int index);
 	void addVariableNode(@NonNull VariableDeclaration variable, @NonNull Node node);
 
 	/**
 	 * Return all the nodes in this region that are call-tree ancestors of node.
 	 */
-	@NonNull Iterable<@NonNull Node> getAncestorsOf(@NonNull Node node);
+	//	@NonNull Iterable<@NonNull Node> getAncestorsOf(@NonNull Node node);
 
 	@NonNull Iterable<@NonNull Node> getComposedNodes();
 	@Nullable ScheduledRegion getContainingScheduledRegion();
 	@NonNull Iterable<@NonNull Edge> getExpressionEdges();
 
-	/**
-	 * The schedule index at which the latest dependent becomes available and consequently the latest that deferred execution may occur.
-	 */
-	int getFinalExecutionIndex();
-	int getFirstIndex();
-
 	List<Node> getHeadNodes();
-	@NonNull String getIndexRangeText();
-	@NonNull List<@NonNull Integer> getIndexes();
 
-	/**
-	 * The schedule index at which ALL invocations of this region occur.
-	 */
-	int getInvocationIndex();
-	int getLastIndex();
 	/**
 	 * Return the nodes that are navigated by navigation from the region's guards.
 	 */

@@ -23,25 +23,28 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RuleHeadAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-import com.google.common.collect.Iterables;
+
 import com.google.common.collect.Sets;
 
-abstract class AbstractPartialPartition extends AbstractAcyclicPartition
+public abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 {
+	protected static @NonNull String computeName(@NonNull MappingPartitioner partitioner, @NonNull String suffix){
+		return QVTscheduleUtil.getName(partitioner.getRegionAnalysis().getRegion()) + "«" + suffix + "»";
+	}
+
 	protected class PartitioningWithSuccessVisitor extends PartitioningVisitor
 	{
 		protected PartitioningWithSuccessVisitor(@NonNull RegionHelper<?> regionHelper, @NonNull AbstractPartialPartition partition) {
@@ -70,13 +73,13 @@ abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 		}
 	}
 
+	protected final @NonNull MappingPartitioner partitioner;
+
 	/**
 	 * The QVTr synthesis includes trace synthesis with activators and local/globalSuccess to interlink.
 	 * The QVTc synthesis relies on the externally provided trace.
 	 */
 	protected final boolean hasSynthesizedTrace;
-
-	protected final @NonNull String name;
 
 	/**
 	 * The nodes of region that are required by the partition and the nodeRole that each node plays in the partition.
@@ -112,10 +115,10 @@ abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 	//		this.reachabilityForest = reachabilityForest;
 	//	}
 
-	protected AbstractPartialPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, @NonNull String suffix) {
-		super(partitioner);
+	protected AbstractPartialPartition(@NonNull String name, @NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
+		super(name, partitioner.getPartitionedTransformationAnalysis(), partitioner.getRegionAnalysis());
+		this.partitioner = partitioner;
 		this.hasSynthesizedTrace = scheduleManager.useActivators();
-		this.name = QVTscheduleUtil.getName(originalRegion) + suffix;
 		this.reachabilityForest = reachabilityForest;
 	}
 
@@ -157,6 +160,14 @@ abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 		partitioner.addEdge(edge, newEdgeRole, this);
 		Role displacedEdgeRole = edge2edgeRole.put(edge, newEdgeRole);
 		assert (displacedEdgeRole == null) || (displacedEdgeRole == newEdgeRole);
+		if (edge instanceof NavigableEdge) {
+			NavigableEdge oppositeEdge = ((NavigableEdge)edge).getOppositeEdge();
+			if (oppositeEdge != null) {
+				partitioner.addEdge(oppositeEdge, newEdgeRole, this);
+				Role displacedOppositeEdgeRole = edge2edgeRole.put(oppositeEdge, newEdgeRole);
+				assert (displacedOppositeEdgeRole == null) || (displacedOppositeEdgeRole == newEdgeRole);
+			}
+		}
 	}
 
 	public void addExplicitPredecessor(@NonNull Partition speculationPartition) {
@@ -312,9 +323,9 @@ abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 		assert !(originalRegion instanceof MicroMappingRegion);
 		MicroMappingRegion partialRegion = createPartialRegion(namePrefix, symbolSuffix);
 		PartitioningVisitor partitioningVisitor = createPartitioningVisitor(partialRegion);
-		originalRegion.accept(partitioningVisitor);
+		//	originalRegion.accept(partitioningVisitor);
 		MicroMappingRegion microMappingRegion = partialRegion;//partitioningVisitor.getRegion();
-		Iterable<@NonNull Node> preferredHeadNodes = getPreferredHeadNodes();
+		/*	Iterable<@NonNull Node> preferredHeadNodes = getPreferredHeadNodes();
 		List<@NonNull Node> partialPreferredHeadNodes = null;
 		if (preferredHeadNodes != null) {
 			partialPreferredHeadNodes = new ArrayList<>();
@@ -326,10 +337,10 @@ abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 		Iterables.addAll(QVTscheduleUtil.Internal.getHeadNodesList(microMappingRegion), headNodes);
 
 
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		}
-		check(microMappingRegion);
+		//	if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+		//		scheduleManager.writeDebugGraphs(microMappingRegion, null);
+		//	}
+		check(microMappingRegion); */
 		this.microMappingRegion = microMappingRegion;
 		return microMappingRegion;
 	}
@@ -433,7 +444,7 @@ abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 	 * The default implementation returns true for all old edges.
 	 */
 	protected boolean isAvailable(@NonNull Edge edge) {
-		return edge.isOld();
+		return isOld(edge);
 	}
 
 	/**
@@ -441,7 +452,13 @@ abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 	 * The default implementation returns true for all old nodes.
 	 */
 	protected boolean isAvailable(@NonNull Node node) {
-		return node.isOld();
+		return isOld(node);
+	}
+
+	@Override
+	public boolean isAwaited(@NonNull Edge edge) {
+		Role role = getRole(edge);
+		return role != null ? role.isAwaited() : false; //edge.isPredicated();
 	}
 
 	@Override
@@ -468,6 +485,18 @@ abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 		return role != null ? role.isLoaded() : false; //node.isLoaded();
 	}
 
+	//	@Override
+	protected boolean isOld(@NonNull Edge edge) {
+		Role role = getRole(edge);
+		return role != null ? role.isOld() : false; //edge.isOld();
+	}
+
+	//	@Override
+	protected boolean isOld(@NonNull Node node) {
+		Role role = getRole(node);
+		return role != null ? role.isOld() : false; //node.isOld();
+	}
+
 	@Override
 	public boolean isPredicated(@NonNull Edge edge) {
 		Role role = getRole(edge);
@@ -481,7 +510,7 @@ abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 	}
 
 	@Override
-	protected boolean isRealized(@NonNull Edge edge) {
+	public boolean isRealized(@NonNull Edge edge) {
 		Role role = getRole(edge);
 		return role != null ? role.isRealized() : false; //edge.isRealized();
 	}
@@ -657,7 +686,7 @@ abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 						addNode(precedingNode, partitioner.hasRealizedNode(precedingNode) ? Role.PREDICATED : QVTscheduleUtil.getNodeRole(precedingNode));
 					}
 				}
-				if (!gotOne && (traceEdge != null) && traceEdge.isRealized()) {
+				if (!gotOne && (traceEdge != null) && isRealized(traceEdge)) {
 					gotOne = true;
 					if (!hasSourceNode) {
 						assert sourceNode != null;

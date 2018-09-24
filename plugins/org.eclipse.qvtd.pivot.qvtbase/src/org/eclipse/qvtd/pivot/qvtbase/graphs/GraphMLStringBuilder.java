@@ -41,7 +41,9 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		colorName2colorCode.put("yellow", "#ffff00");
 	}
 
-	private final @NonNull Map<Object,String> node2name = new HashMap<Object,String>();
+	private final @NonNull Map<@Nullable Object, @NonNull Map<@NonNull Object, @NonNull String>> scope2node2name = new HashMap<>();
+	private @NonNull Map<@NonNull Object, @NonNull String> node2name;
+	private int nameCount = 0;
 	private int graphCount = 0;
 	private @NonNull String color = "#cccccc";
 	private @NonNull String fillColor = "#ffffff";
@@ -54,6 +56,8 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 	private @Nullable ArrowType targetArrowType = null;
 
 	public GraphMLStringBuilder() {
+		this.node2name = new HashMap<>();
+		scope2node2name.put(null, this.node2name);
 		open();
 	}
 
@@ -119,7 +123,12 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 	public @NonNull String appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull GraphNode object) {
 		String name = node2name.get(object);
 		if (name == null) {
-			name = "a" + node2name.size();
+			Map<@NonNull Object, @NonNull String> globalNode2Name = scope2node2name.get(null);
+			assert globalNode2Name != null;
+			name = globalNode2Name.get(object);
+		}
+		if (name == null) {
+			name = "a" + ++nameCount;
 			node2name.put(object, name);
 			resetAttributes();
 			object.appendNode(toGraphHelper, name);
@@ -151,6 +160,9 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 		s.appendElement("fontSize", "16");
 		s.appendElement("modelName", "sides");
 		s.appendElement("modelPosition", "n");
+		if (label == null) {
+			getClass();
+		}
 		s.appendTextEnd(label);
 		//				appendShape(shapeName);
 		s.popTag();
@@ -237,6 +249,16 @@ public class GraphMLStringBuilder extends GraphMLBuilder implements GraphStringB
 	@Override
 	public void setPenwidth(@NonNull Integer penwidth) {
 		this.penwidth = penwidth.toString();
+	}
+
+	@Override
+	public void setScope(@Nullable Object scopeObject) {
+		Map<@NonNull Object, @NonNull String> entry = scope2node2name.get(scopeObject);
+		if (entry == null) {
+			entry = new HashMap<>();
+			scope2node2name.put(scopeObject, entry);
+		}
+		this.node2name = entry;
 	}
 
 	@Override

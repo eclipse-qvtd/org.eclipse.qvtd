@@ -25,7 +25,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 class ResidualPartition extends AbstractPartialPartition
 {
 	public ResidualPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
-		super(partitioner, reachabilityForest, "«residue»");
+		super(computeName(partitioner, "residue"), partitioner, reachabilityForest);
 		//		Iterable<@NonNull Node> predicatedMiddleNodes = partitioner.getPredicatedMiddleNodes();
 		//		assert Iterables.isEmpty(predicatedMiddleNodes);
 		//

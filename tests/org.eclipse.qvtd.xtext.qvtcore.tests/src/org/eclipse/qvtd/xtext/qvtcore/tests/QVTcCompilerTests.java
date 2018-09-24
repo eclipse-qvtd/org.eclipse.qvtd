@@ -77,7 +77,7 @@ public class QVTcCompilerTests extends LoadTestCase
 					@Override
 					public @NonNull ScheduleManager execute(@NonNull Resource pResource) throws IOException {
 						ScheduleManager scheduleManager = super.execute(pResource);
-						instrumentRegion(scheduleManager);
+						instrumentPartition(scheduleManager);
 						return scheduleManager;
 					}
 				};

@@ -56,14 +56,18 @@ import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.NameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.compiler.internal.utilities.ToGraphPartitionVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.DOTStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphMLStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
@@ -71,27 +75,101 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.TraceHelper;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.AbstractToGraphVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToCallGraphVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToRegionGraphVisitor;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphVisitor;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 public abstract class AbstractScheduleManager implements ScheduleManager
 {
+	protected class ToGraphConnectableVisitor
+	extends ToGraphVisitor {
+
+		protected ToGraphConnectableVisitor(
+				@NonNull GraphStringBuilder context) {
+			super(context);
+		}
+
+		@Override
+		public @Nullable String visitEdgeConnection(@NonNull EdgeConnection edgeConnection) {
+			ConnectionManager connectionManager = AbstractScheduleManager.this.connectionManager;
+			assert connectionManager != null;
+			if (connectionManager.isEdge2Edge(edgeConnection)) {
+				NavigableEdge sourceEdge = QVTscheduleUtil.getSourceEnds(edgeConnection).iterator().next();
+				NavigableEdge targetEdge = connectionManager.getTargetEdges(edgeConnection).iterator().next();
+				appendEdge(sourceEdge.getEdgeTarget(), edgeConnection, targetEdge.getEdgeTarget());
+			}
+			else {
+				appendNode(edgeConnection);
+				for (@NonNull NavigableEdge source : QVTscheduleUtil.getSourceEnds(edgeConnection)) {
+					appendEdge(source.getEdgeTarget(), edgeConnection, edgeConnection);
+				}
+				for (@NonNull NavigableEdge target : connectionManager.getTargetEdges(edgeConnection)) {
+					ConnectionRole role = connectionManager.getTargets(edgeConnection).get(target);
+					assert role != null;
+					appendEdge(edgeConnection, role, target.getEdgeTarget());
+				}
+			}
+			return null;
+		}
+
+		@Override
+		public @Nullable String visitNodeConnection(@NonNull NodeConnection nodeConnection) {
+			ConnectionManager connectionManager = AbstractScheduleManager.this.connectionManager;
+			assert connectionManager != null;
+			if (connectionManager.isNode2Node(nodeConnection)) {
+				Node sourceNode = QVTscheduleUtil.getSourceEnds(nodeConnection).iterator().next();
+				Node targetNode = connectionManager.getTargetNodes(nodeConnection).iterator().next();
+				appendEdge(sourceNode, nodeConnection, targetNode);
+			}
+			else {
+				appendNode(nodeConnection);
+				for (@NonNull Node source : QVTscheduleUtil.getSourceEnds(nodeConnection)) {
+					appendEdge(source, nodeConnection, nodeConnection);
+				}
+				for (@NonNull Node target : connectionManager.getTargetNodes(nodeConnection)) {
+					ConnectionRole role = connectionManager.getTargets(nodeConnection).get(target);
+					assert role != null;
+					appendEdge(nodeConnection, role, target);
+				}
+			}
+			return null;
+		}
+
+		public void visitPartition(@NonNull Partition partition) {
+			context.setLabel(partition.getName());
+			context.pushCluster();
+			for (@NonNull Node node : partition.getPartialNodes()) {
+				node.accept(this);
+				//			s.appendNode(node);
+			}
+			for (@NonNull Edge edge : partition.getPartialEdges()) {
+				edge.accept(this);
+				//			s.appendEdge(edge.getSource(), edge, edge.getTarget());
+			}
+			context.popCluster();
+		}
+	}
+
 	protected final @NonNull ScheduleModel scheduleModel;
 	protected final @NonNull EnvironmentFactory environmentFactory;
 	protected final @NonNull ProblemHandler problemHandler;
@@ -138,6 +216,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	private final @NonNull Map<@NonNull Transformation, @NonNull AbstractTransformationAnalysis> transformation2transformationAnalysis = new HashMap<>();
 	private final boolean doDotGraphs;
 	private final boolean doYedGraphs;
+
+	private @Nullable ConnectionManager connectionManager = null;
 
 	//	private final @NonNull Map<@NonNull TransformationAnalysis, @NonNull TransformationAnalysis2TracePackage> transformationAnalysis2transformationAnalysis2tracePackage = new HashMap<>();
 
@@ -276,12 +356,13 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		LegacyContentsAnalysis contentsAnalysis = new LegacyContentsAnalysis(this);
 		List<@NonNull MappingRegion> mappingRegions = Lists.newArrayList(QVTscheduleUtil.getOwnedMappingRegions(getScheduleModel()));
 		Collections.sort(mappingRegions, NameUtil.NAMEABLE_COMPARATOR);		// Stabilize side effect of symbol name disambiguator suffixes
-		for (@NonNull MappingRegion mappingRegion : mappingRegions) {
+		for (@NonNull MappingRegion mappingRegion : mappingRegions) {		// FIXME Should treat LoadingRegion uniformly
 			RuleRegion ruleRegion = (RuleRegion) mappingRegion;
 			contentsAnalysis.addRegion(ruleRegion);
-			Transformation transformation = QVTbaseUtil.getOwningTransformation(QVTscheduleUtil.getReferredRule(ruleRegion));
-			AbstractTransformationAnalysis transformationAnalysis = getTransformationAnalysis(transformation);
-			transformationAnalysis.getRegionAnalysis(mappingRegion);
+			getRegionAnalysis(ruleRegion);
+			//			Transformation transformation = QVTbaseUtil.getOwningTransformation(QVTscheduleUtil.getReferredRule(ruleRegion));
+			//			AbstractTransformationAnalysis transformationAnalysis = getTransformationAnalysis(transformation);
+			//			transformationAnalysis.getRegionAnalysis(mappingRegion);
 		}
 		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : getTransformationAnalyses()) {
 			transformationAnalysis.computeTraceClassInheritance();
@@ -318,6 +399,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
+	public @Nullable ConnectionManager basicGetConnectionManager() {
+		return connectionManager;
+	}
+
+	@Override
 	public @Nullable Property basicGetGlobalSuccessProperty(@NonNull Node node) {
 		if (!isMiddle(node)) {
 			return null;
@@ -333,6 +419,12 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		}
 		CompleteClass completeClass = node.getCompleteClass();
 		return completeClass.getProperty(QVTrelationNameGenerator.TRACE_LOCAL_SUCCESS_PROPERTY_NAME);
+	}
+
+	@Override
+	public @NonNull ConnectionManager createConnectionManager(@NonNull ProblemHandler problemHandler, @NonNull LoadingRegionAnalysis loadingRegionAnalysis) {
+		this.connectionManager  = new ConnectionManager(problemHandler, this, loadingRegionAnalysis);
+		return connectionManager;
 	}
 
 	protected @NonNull DatumCaches createDatumCaches() {
@@ -585,6 +677,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		return classDatums;
 	}
 
+	@Override
+	public @NonNull ConnectionManager getConnectionManager() {
+		return ClassUtil.nonNullState(connectionManager);
+	}
+
 	public @NonNull ContainmentAnalysis getContainmentAnalysis() {
 		return datumCaches.getContainmentAnalysis();
 	}
@@ -707,18 +804,28 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	@Override
 	public @NonNull RegionAnalysis getRegionAnalysis(@NonNull Region region) {
+		Transformation transformation;
 		if (region instanceof RuleRegion) {
 			Rule rule = QVTscheduleUtil.getReferredRule((RuleRegion) region);
-			Transformation transformation = QVTbaseUtil.getContainingTransformation(rule);
-			AbstractTransformationAnalysis transformationAnalysis = getTransformationAnalysis(transformation);
-			return transformationAnalysis.getRegionAnalysis(region);
+			transformation = QVTbaseUtil.getContainingTransformation(rule);
+		}
+		else if (region instanceof LoadingRegion) {
+			ScheduledRegion scheduledRegion = QVTscheduleUtil.getScheduledRegion(region);
+			transformation = QVTscheduleUtil.getReferredTransformation(scheduledRegion);
 		}
 		else {
 			ScheduledRegion scheduledRegion = QVTscheduleUtil.getContainingScheduledRegion(region);
-			Transformation transformation = QVTscheduleUtil.getReferredTransformation(scheduledRegion);
-			AbstractTransformationAnalysis transformationAnalysis = getTransformationAnalysis(transformation);
-			return transformationAnalysis.getRegionAnalysis(region);
+			transformation = QVTscheduleUtil.getReferredTransformation(scheduledRegion);
 		}
+		AbstractTransformationAnalysis transformationAnalysis = getTransformationAnalysis(transformation);
+		return transformationAnalysis.getRegionAnalysis(region);
+
+	}
+
+	@Override
+	public @NonNull RootPartition getRootPartition(@NonNull ScheduledRegion scheduledRegion) {
+		AbstractTransformationAnalysis transformationAnalysis = getTransformationAnalysis(scheduledRegion);
+		return transformationAnalysis.getRootPartition();
 	}
 
 	public @NonNull RuleAnalysis getRuleAnalysis(@NonNull Rule rule) {
@@ -787,6 +894,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	@Override
 	public @NonNull Iterable<@NonNull AbstractTransformationAnalysis> getTransformationAnalyses() {
 		return transformation2transformationAnalysis.values();
+	}
+
+	@Override
+	public @NonNull AbstractTransformationAnalysis getTransformationAnalysis(@NonNull ScheduledRegion scheduledRegion) {
+		return getTransformationAnalysis(QVTscheduleUtil.getReferredTransformation(scheduledRegion));
 	}
 
 	@Override
@@ -864,15 +976,16 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		mappingRegion.setScheduledRegion(scheduledRegion);
 	}
 
-	public void writeCallDOTfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
+	/*	public void writeCallDOTfile(@NonNull Graphable graphable, @NonNull String suffix) {
 		if (doDotGraphs) {
 			URI baseURI = getGraphsBaseURI();
-			URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_c")*/ + suffix + ".dot").resolve(baseURI);
+			URI dotURI = URI.createURI(graphable.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_c")* / + suffix + ".dot").resolve(baseURI);
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
-				ToCallGraphVisitor visitor = new ToCallGraphVisitor(new DOTStringBuilder());
-				String s = visitor.visit(region);
-				outputStream.write(s.getBytes());
+				DOTStringBuilder context = new DOTStringBuilder();
+				AbstractToGraphVisitor visitor = getRegionGraphVisitor(graphable, context);
+				visitor.visit(graphable);
+				outputStream.write(visitor.toString().getBytes());
 				outputStream.close();
 			} catch (IOException e) {
 				System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
@@ -880,21 +993,22 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		}
 	}
 
-	public void writeCallGraphMLfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
+	public void writeCallGraphMLfile(@NonNull Graphable graphable, @NonNull String suffix) {
 		if (doYedGraphs) {
 			URI baseURI = getGraphsBaseURI();
-			URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_c")*/ + suffix + ".graphml").resolve(baseURI);
+			URI dotURI = URI.createURI(graphable.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_c")* / + suffix + ".graphml").resolve(baseURI);
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
-				ToCallGraphVisitor visitor = new ToCallGraphVisitor(new GraphMLStringBuilder());
-				String s = visitor.visit(region);
-				outputStream.write(s.getBytes());
+				GraphMLStringBuilder context = new GraphMLStringBuilder();
+				AbstractToGraphVisitor visitor = getRegionGraphVisitor(graphable, context);
+				visitor.visit(graphable);
+				outputStream.write(visitor.toString().getBytes());
 				outputStream.close();
 			} catch (IOException e) {
 				System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 			}
 		}
-	}
+	} */
 
 	@Override
 	public void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph) {
@@ -908,11 +1022,11 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 					writeRegionDOTfile(scheduledRegion, suffix);
 					writeRegionGraphMLfile(scheduledRegion, suffix);
 				}
-				if (doCallGraph) {
+				/*	if (doCallGraph) {
 					String suffix = "-c-" + context;
 					writeCallDOTfile(scheduledRegion, suffix);
 					writeCallGraphMLfile(scheduledRegion, suffix);
-				}
+				} */
 			}
 		}
 	}
@@ -930,22 +1044,20 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	public void writeDOTfile(@NonNull Graphable graphable, @Nullable String suffix) {
 		if (doDotGraphs) {
 			URI baseURI = getGraphsBaseURI();
-			String symbolName = graphable.getSymbolName();
+			String graphName = graphable.getGraphName();
 			if (suffix != null) {
-				symbolName = symbolName + suffix;
+				graphName = graphName + suffix;
 			}
-			URI dotURI = URI.createURI(symbolName + ".dot").resolve(baseURI);
-			if (dotURI.toString().contains("mTmapIfExp__DmapOclExpression_d2qvtrExpression_glob")) {
+			URI dotURI = URI.createURI(graphName + ".dot").resolve(baseURI);
+			if (dotURI.toString().contains("mElement_Telement2element")) {
 				getClass().toString();
 			}
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 				try {
-					DOTStringBuilder s = new DOTStringBuilder();
-					graphable.toGraph(s);
-					//	ToGraphVisitor visitor = new ToGraphVisitor(s);
-					//	graphable.accept(visitor);
-					outputStream.write(s.toString().getBytes());
+					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new DOTStringBuilder(), this, true);
+					visitor.visit(graphable);
+					outputStream.write(visitor.toString().getBytes());
 				}
 				finally {
 					try {
@@ -962,7 +1074,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	public void writeGraphMLfile(@NonNull Graphable graphable, @Nullable String suffix) {
 		if (doYedGraphs) {
 			URI baseURI = getGraphsBaseURI();
-			String symbolName = graphable.getSymbolName();
+			String symbolName = graphable.getGraphName();
 			if (suffix != null) {
 				symbolName = symbolName + suffix;
 			}
@@ -970,9 +1082,9 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 				try {
-					GraphMLStringBuilder s = new GraphMLStringBuilder();
-					graphable.toGraph(s);
-					outputStream.write(s.toString().getBytes());
+					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new GraphMLStringBuilder(), this, true);
+					visitor.visit(graphable);
+					outputStream.write(visitor.toString().getBytes());
 				}
 				finally {
 					try {
@@ -986,19 +1098,16 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		}
 	}
 
-	public void writeRegionDOTfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
+	public void writeRegionDOTfile(@NonNull Graphable region, @NonNull String suffix) {
 		if (doDotGraphs) {
 			URI baseURI = getGraphsBaseURI();
-			URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_")*/ + suffix + ".dot").resolve(baseURI);
-			if (dotURI.toString().contains("mTmapIfExp__DmapOclExpression_d2qvtrExpression_glob")) {
-				getClass().toString();
-			}
+			URI dotURI = URI.createURI(region.getGraphName()/*.replace("\n",  "_").replace("\\n",  "_")*/ + suffix + ".dot").resolve(baseURI);
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 				try {
-					ToRegionGraphVisitor visitor = new ToRegionGraphVisitor(new DOTStringBuilder());
-					String s = visitor.visit(region);
-					outputStream.write(s.getBytes());
+					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new DOTStringBuilder(), this, false);
+					visitor.visit(region);
+					outputStream.write(visitor.toString().getBytes());
 				}
 				finally {
 					try {
@@ -1009,24 +1118,24 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			} catch (IOException e) {
 				System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 			}
-			for (@NonNull Region nestedRegion : QVTscheduleUtil.getActiveRegions(region)) {
+			for (@NonNull Region nestedRegion : QVTscheduleUtil.getActiveRegions((ScheduledRegion)region)) {
 				if (nestedRegion instanceof ScheduledRegion) {
-					writeRegionDOTfile((@NonNull ScheduledRegion)nestedRegion, suffix);
+					writeRegionDOTfile(nestedRegion, suffix);
 				}
 			}
 		}
 	}
 
-	public void writeRegionGraphMLfile(@NonNull ScheduledRegion region, @NonNull String suffix) {
+	public void writeRegionGraphMLfile(@NonNull Graphable region, @NonNull String suffix) {
 		if (doYedGraphs) {
 			URI baseURI = getGraphsBaseURI();
-			URI dotURI = URI.createURI(region.getSymbolName()/*.replace("\n",  "_").replace("\\n",  "_")*/ + suffix + ".graphml").resolve(baseURI);
+			URI dotURI = URI.createURI(region.getGraphName()/*.replace("\n",  "_").replace("\\n",  "_")*/ + suffix + ".graphml").resolve(baseURI);
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 				try {
-					ToRegionGraphVisitor visitor = new ToRegionGraphVisitor(new GraphMLStringBuilder());
-					String s = visitor.visit(region);
-					outputStream.write(s.getBytes());
+					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new GraphMLStringBuilder(), this, false);
+					visitor.visit(region);
+					outputStream.write(visitor.toString().getBytes());
 				}
 				finally {
 					try {
@@ -1037,11 +1146,32 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			} catch (IOException e) {
 				System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 			}
-			for (@NonNull Region nestedRegion : QVTscheduleUtil.getActiveRegions(region)) {
+			for (@NonNull Region nestedRegion : QVTscheduleUtil.getActiveRegions((ScheduledRegion)region)) {
 				if (nestedRegion instanceof ScheduledRegion) {
-					writeRegionGraphMLfile((@NonNull ScheduledRegion)nestedRegion, suffix);
+					writeRegionGraphMLfile(nestedRegion, suffix);
 				}
 			}
 		}
 	}
+
+	//	private @NonNull Map<@NonNull Region, @NonNull Partition> wip_region2partition = new HashMap<>();
+	//	private @NonNull Map<@NonNull Partition, @NonNull Region> wip_partition2region = new HashMap<>();
+
+	//	@Override
+	//	public void wipAddPartition(@NonNull Partition partition, @NonNull Region partitionedRegion) {
+	//		Partition oldPartition = wip_region2partition.put(partitionedRegion, partition);
+	//		assert oldPartition == null;
+	//		Region oldRegion = wip_partition2region.put(partition, partitionedRegion);
+	//		assert oldRegion == null;
+	//	}
+
+	//	@Override
+	//	public @NonNull Partition wipGetPartition(@NonNull Region partitionedRegion) {
+	//		return ClassUtil.nonNullState(wip_region2partition.get(partitionedRegion));
+	//	}
+
+	//	@Override
+	//	public @NonNull Region wipGetRegion(@NonNull Partition partition) {
+	//		return ClassUtil.nonNullState(wip_partition2region.get(partition));
+	//	}
 }

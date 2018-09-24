@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,14 +19,13 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.LoadingPartition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 
 /**
  * ScheduleAnalysis analyses a sequence of concurrent partitions to identofy the necessary connections.
@@ -35,57 +33,59 @@ import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 public class ScheduleAnalysis
 {
 	protected final @NonNull ScheduleManager scheduleManager;
+	protected final @NonNull ConnectionManager connectionManager;
+
+	/**
+	 * The overall RootPartition.
+	 */
 	protected final @NonNull RootPartition rootPartition;
 
 	/**
-	 * The overall RootScheduledRegion.
+	 * All transitively callable partitions within the rootPartition.
 	 */
-	protected final @NonNull ScheduledRegion scheduledRegion;
+	protected final @NonNull List<@NonNull Partition> allPartitions;
 
-	/**
-	 * All transitively callable regions within the rootScheduledRegion (no OperationRegions).
-	 */
-	protected final @NonNull List<@NonNull  Region> callableRegions;
+	private final @NonNull LoadingPartition loadingPartition;
 
 	/**
 	 * Cached list of all incoming connections per-region; excludes recursions.
 	 */
-	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Connection>> region2incomingConnections = new HashMap<>();
+	private final @NonNull Map<@NonNull Partition, @NonNull List<@NonNull Connection>> partition2incomingConnections = new HashMap<>();
 
 	/**
 	 * Cached list of all recursive/looping connections per-region.
 	 */
-	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Connection>> region2loopingConnections = new HashMap<>();
+	private final @NonNull Map<@NonNull Partition, @NonNull List<@NonNull Connection>> partition2loopingConnections = new HashMap<>();
 
 	/**
 	 * Cached list of all outgoing connections per-region; excludes recursions.
 	 */
-	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Connection>> region2outgoingConnections = new HashMap<>();
+	private final @NonNull Map<@NonNull Partition, @NonNull List<@NonNull Connection>> partition2outgoingConnections = new HashMap<>();
 
 	/**
 	 * Cached list of all source regions per-connection and whether the source has unserviced content for the connection.
 	 */
-	private final @NonNull Map<@NonNull Connection, @NonNull List<@NonNull Region>> connection2sourceRegions = new HashMap<>();
+	private final @NonNull Map<@NonNull Connection, @NonNull List<@NonNull Partition>> connection2sourcePartitions = new HashMap<>();
 
 	/**
 	 * Cached list of all target regions per-connection and whether the connection has unserviced content for the target.
 	 */
-	private final @NonNull Map<@NonNull Connection, @NonNull List<@NonNull Region>> connection2targetRegions = new HashMap<>();
+	private final @NonNull Map<@NonNull Connection, @NonNull List<@NonNull Partition>> connection2targetPartitions = new HashMap<>();
 
 	/**
 	 * The immediate source region of each incoming connection.
 	 */
-	private final @NonNull Map<@NonNull Region, @NonNull Set<@NonNull Region>> target2sources;
+	//private final @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> target2sources;
 
 	/**
 	 * The immediate source regions for each set of regions forming a cycle.
 	 */
-	private final @NonNull Map<@NonNull Set<@NonNull Region>, @NonNull Set<@NonNull Region>> cycle2sources;
+	//private final @NonNull Map<@NonNull Set<@NonNull Partition>, @NonNull Set<@NonNull Partition>> cycle2sources;
 
 	/**
 	 * The cycle in which each region may participate.
 	 */
-	private final Map<@NonNull Region, @NonNull Set<@NonNull Region>> region2cycle;
+	//private final Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2cycle;
 
 	/**
 	 * Depth in the call tree of each region. For the most part all source elements are at lower depth than target elements,
@@ -94,70 +94,77 @@ public class ScheduleAnalysis
 	 * FIXME this depth analysis has evolved from when scheduling made extensive use of MappingCalls. Now that
 	 * Connections have been introduced, is the depth still useful and does it repeat some of the intervalIndex analysis?
 	 */
-	private final @NonNull Map<@NonNull Region, @NonNull Integer> region2depth;
+	//private final @NonNull Map<@NonNull Partition, @NonNull Integer> partition2pass;
 
 	/**
 	 * The parents (invokers) of each region.
 	 */
-	private final @NonNull Map<@NonNull Region, @NonNull List<@NonNull Region>> region2parents;
+	//private final @NonNull Map<@NonNull Partition, @NonNull List<@NonNull Partition>> partition2parents;
 
 	/**
 	 * The regions that have no outgoing passed connections.
 	 */
-	private final @NonNull Set<@NonNull Region> unpassedRegions = new HashSet<>();
+	// private final @NonNull Set<@NonNull Partition> unpassedPartitions = new HashSet<>();
 
-	protected ScheduleAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull RootPartition rootPartition) {
-		this.scheduleManager = scheduleManager;
+	public ScheduleAnalysis(@NonNull ConnectionManager connectionManager, @NonNull RootPartition rootPartition) {
+		this.scheduleManager = connectionManager.getScheduleManager();
 		this.rootPartition = rootPartition;
-		this.scheduledRegion = rootPartition.getScheduledRegion();
-		this.callableRegions = analyzeRegions(scheduledRegion, new ArrayList<>());
-		Collections.sort(this.callableRegions, NameUtil.NAMEABLE_COMPARATOR);
+		this.connectionManager = connectionManager;
+		this.allPartitions = CompilerUtil.gatherPartitions(rootPartition, new ArrayList<>());
+		Collections.sort(this.allPartitions, NameUtil.NAMEABLE_COMPARATOR);
 		//
 		// Initialize the incoming/looping/outgoing connection analyses of each region
 		//
-		for (@NonNull Region region : this.callableRegions) {
-			analyzeConnections(region);
+		LoadingPartition loadingPartition = null;
+		for (@NonNull Partition partition : this.allPartitions) {
+			analyzeConnections(partition);
+			if (partition instanceof LoadingPartition) {
+				assert loadingPartition == null;
+				loadingPartition = (LoadingPartition) partition;
+			}
 		}
+		assert loadingPartition != null;
+		this.loadingPartition = loadingPartition;
 		//
 		// Initialize the source/target of each connection.
 		// Compute the set of all connections that are not passed.
 		//
-		for (@NonNull Region region : this.callableRegions) {
-			analyzeSourcesAndTargets(region);
+		for (@NonNull Partition partition : this.allPartitions) {
+			analyzeSourcesAndTargets(partition);
 		}
 		//
 		//	Identify all the source regions for each target region.
 		//
-		this.target2sources = analyzeSources();
+		//	this.target2sources = analyzeSources();
 		//
 		//	Identify all the cycles and their immedite sources.
 		//
-		this.cycle2sources = analyzeCycleSources();
+		//	this.cycle2sources = analyzeCycleSources();
 		//
 		//	Identify all the region that participate in cycles.
 		//
-		this.region2cycle = analyzeCycleElements();
+		//	this.partition2cycle = analyzeCycleElements();
 		//
 		//	Determine the call tree depth of each connection / region.
 		//
-		this.region2depth = analyzeDepths();
+		//	this.partition2pass = analyzeDepths();
 		//
 		//	Determine the call tree parents of each region.
 		//
-		this.region2parents = analyzeParents();
+		//	this.partition2parents = analyzeParents();
 		//		System.out.println(toString());
 	}
 
 	/**
 	 * Initialize the incoming/looping/outgoing connection analyses of each region
 	 */
-	private void analyzeConnections(@NonNull Region region) {
+	private void analyzeConnections(@NonNull Partition partition) {
 		List<@NonNull Connection> incomingConnections = new ArrayList<>();
 		List<@NonNull Connection> loopingConnections = new ArrayList<>();
 		List<@NonNull Connection> outgoingConnections = new ArrayList<>();
-		for (@NonNull Connection connection : ConnectionManager.rawGetIncomingConnections(region)) {
-			for (@NonNull Region sourceRegion : ConnectionManager.rawGetSourceRegions(connection)) {
-				if (region == sourceRegion) {
+		for (@NonNull Connection connection : connectionManager.getIncomingConnections(partition)) {
+			for (@NonNull Partition sourcePartition : connectionManager.getSourcePartitions(connection)) {
+				if (partition == sourcePartition) {
 					if (!loopingConnections.contains(connection)) {
 						loopingConnections.add(connection);
 					}
@@ -169,9 +176,9 @@ public class ScheduleAnalysis
 				}
 			}
 		}
-		for (@NonNull Connection connection : ConnectionManager.rawGetNextConnections(region)) {
-			for (@NonNull Region targetRegion : ConnectionManager.rawGetTargetRegions(connection)) {
-				if (region == targetRegion) {
+		for (@NonNull Connection connection : connectionManager.getNextConnections(partition)) {
+			for (@NonNull Partition targetPartition : connectionManager.getTargetPartitions(connection)) {
+				if (partition == targetPartition) {
 					assert loopingConnections.contains(connection);
 					loopingConnections.add(connection);
 				}
@@ -183,186 +190,185 @@ public class ScheduleAnalysis
 		if (outgoingConnections.size() > 1) {			// Ensure that connection ordering is deterministic
 			Collections.sort(outgoingConnections, NameUtil.NAMEABLE_COMPARATOR);
 		}
-		region2incomingConnections.put(region, incomingConnections);
-		region2loopingConnections.put(region, loopingConnections);
-		region2outgoingConnections.put(region, outgoingConnections);
+		partition2incomingConnections.put(partition, incomingConnections);
+		partition2loopingConnections.put(partition, loopingConnections);
+		partition2outgoingConnections.put(partition, outgoingConnections);
 	}
 
 	//
 	//	Determine the cycles and their sources.
 	//
-	private @NonNull Map<@NonNull Region, @NonNull Set<@NonNull Region>> analyzeCycleElements() {
-		Map<@NonNull Region, @NonNull Set<@NonNull Region>> region2cycle = new HashMap<>();
-		for (@NonNull Set<@NonNull Region> cycle : cycle2sources.keySet()) {
-			for (@NonNull Region region : cycle) {
-				region2cycle.put(region, cycle);
+	/*	private @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> analyzeCycleElements() {
+		Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2cycle = new HashMap<>();
+		for (@NonNull Set<@NonNull Partition> cycle : cycle2sources.keySet()) {
+			for (@NonNull Partition partition : cycle) {
+				partition2cycle.put(partition, cycle);
 			}
 		}
-		return region2cycle;
-	}
+		return partition2cycle;
+	} */
 
 	//
 	//	Determine the cycles and their sources.
 	//
-	private @NonNull Map<@NonNull Set<@NonNull Region>, @NonNull Set<@NonNull Region>> analyzeCycleSources() {
-		Map<@NonNull Set<@NonNull Region>, @NonNull Set<@NonNull Region>> cycle2sources = new HashMap<>();
-		Map<@NonNull Region, @NonNull Set<@NonNull Region>> target2sourcesClosure = CompilerUtil.computeClosure(target2sources);
-		Map<@NonNull Region, @NonNull Set<@NonNull Region>> source2targetsClosure = CompilerUtil.computeInverseClosure(target2sourcesClosure);
-		for (@NonNull Region region : callableRegions) {
-			Set<@NonNull Region> sourceRegions = target2sourcesClosure.get(region);
-			Set<@NonNull Region> targetRegions = source2targetsClosure.get(region);
-			assert (sourceRegions != null) && (targetRegions != null);
-			Set<@NonNull Region> cyclicRegions = new HashSet<>(sourceRegions);
-			cyclicRegions.retainAll(targetRegions);
-			if (!cyclicRegions.isEmpty() && !cycle2sources.containsKey(cyclicRegions)) {
-				Set<@NonNull Region> cycleSources = new HashSet<>();
-				for (@NonNull Region cyclicRegion : cyclicRegions) {
-					Set<@NonNull Region> sources = target2sources.get(cyclicRegion);
+	/*	private @NonNull Map<@NonNull Set<@NonNull Partition>, @NonNull Set<@NonNull Partition>> analyzeCycleSources() {
+		Map<@NonNull Set<@NonNull Partition>, @NonNull Set<@NonNull Partition>> cycle2sources = new HashMap<>();
+		Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> target2sourcesClosure = CompilerUtil.computeClosure(target2sources);
+		Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> source2targetsClosure = CompilerUtil.computeInverseClosure(target2sourcesClosure);
+		for (@NonNull Partition partition : allPartitions) {
+			Set<@NonNull Partition> sourcePartitions = target2sourcesClosure.get(partition);
+			Set<@NonNull Partition> targetPartitions = source2targetsClosure.get(partition);
+			assert (sourcePartitions != null) && (targetPartitions != null);
+			Set<@NonNull Partition> cyclicPartitions = new HashSet<>(sourcePartitions);
+			cyclicPartitions.retainAll(targetPartitions);
+			if (!cyclicPartitions.isEmpty() && !cycle2sources.containsKey(cyclicPartitions)) {
+				Set<@NonNull Partition> cycleSources = new HashSet<>();
+				for (@NonNull Partition cyclicPartition : cyclicPartitions) {
+					Set<@NonNull Partition> sources = target2sources.get(cyclicPartition);
 					assert sources != null;
 					cycleSources.addAll(sources);
 				}
-				cycleSources.removeAll(cyclicRegions);
-				cycle2sources.put(cyclicRegions, cycleSources);
+				cycleSources.removeAll(cyclicPartitions);
+				cycle2sources.put(cyclicPartitions, cycleSources);
 			}
 		}
 		return cycle2sources;
-	}
+	} */
 
-	private @NonNull Map<@NonNull Region, @NonNull Integer> analyzeDepths() {
+	/*	private @NonNull Map<@NonNull Partition, @NonNull Integer> analyzeDepths() {
 		//
 		//	Loop to allocate connection/node element to each depth so that each element has as few sources at greater depth.
 		//
-		Map<@NonNull Region, @NonNull Integer> region2depth = new HashMap<>();
-		Set<@NonNull Region> allRegions = new HashSet<>(target2sources.keySet());
-		Set<@NonNull Region> pendingRegions = new HashSet<>(allRegions);
-		Set<@NonNull Set<@NonNull Region>> pendingCycles = new HashSet<>(cycle2sources.keySet());
-		region2depth.put(scheduledRegion, 0);
-		for (int depth = 1; !pendingRegions.isEmpty(); depth++) {
-			Set<@NonNull Region> readyRegions = new HashSet<>(region2depth.keySet());
-			Set<@NonNull Region> nowReadyRegions = new HashSet<>();
-			Set<@NonNull Set<@NonNull Region>> nowReadyCycles = new HashSet<>();
-			for (@NonNull Region targetRegion : pendingRegions) {
-				Set<@NonNull Region> targetSourceRegions = new HashSet<>(target2sources.get(targetRegion));
-				assert targetSourceRegions != null;
-				targetSourceRegions.removeAll(readyRegions);
-				if (targetSourceRegions.isEmpty()) {
-					nowReadyRegions.add(targetRegion);
+		Map<@NonNull Partition, @NonNull Integer> partition2pass = new HashMap<>();
+		Set<@NonNull Partition> allPartitions = new HashSet<>(target2sources.keySet());
+		//	Set<@NonNull Partition> pendingPartitions = new HashSet<>(allRegions);
+		Set<@NonNull Partition> pendingPartitions = new HashSet<>();
+		for (@NonNull Partition partition : allPartitions) {
+			pendingPartitions.add(partition);
+		}
+		//	Set<@NonNull Set<@NonNull Partition>> pendingCycles = new HashSet<>(cycle2sources.keySet());
+		Set<@NonNull Set<@NonNull Partition>> pendingCycles = new HashSet<>();
+		for (@NonNull Set<@NonNull Partition> partitions : cycle2sources.keySet()) {
+			Set<@NonNull Partition> cycle = new HashSet<>();
+			for (@NonNull Partition partition : partitions) {
+				cycle.add(partition);
+			}
+			pendingCycles.add(cycle);
+		}
+		partition2pass.put(rootPartition, 0);
+		for (int depth = 1; !pendingPartitions.isEmpty(); depth++) {
+			Set<@NonNull Partition> readyPartitions = new HashSet<>(partition2pass.keySet());
+			Set<@NonNull Partition> nowReadyPartitions = new HashSet<>();
+			Set<@NonNull Set<@NonNull Partition>> nowReadyCycles = new HashSet<>();
+			for (@NonNull Partition targetPartition : pendingPartitions) {
+				Set<@NonNull Partition> targetSourcePartitions = new HashSet<>(target2sources.get(targetPartition));
+				assert targetSourcePartitions != null;
+				targetSourcePartitions.removeAll(readyPartitions);
+				if (targetSourcePartitions.isEmpty()) {
+					nowReadyPartitions.add(targetPartition);
 				}
 			}
-			for (@NonNull Set<@NonNull Region> targetCycle : pendingCycles) {
-				Set<@NonNull Region> targetSourceRegions = new HashSet<>(cycle2sources.get(targetCycle));
-				assert targetSourceRegions != null;
-				targetSourceRegions.removeAll(readyRegions);
-				if (targetSourceRegions.isEmpty()) {
-					nowReadyRegions.addAll(targetCycle);
+			for (@NonNull Set<@NonNull Partition> targetCycle : pendingCycles) {
+				Set<@NonNull Partition> targetSourcePartitions = new HashSet<>(cycle2sources.get(targetCycle));
+				assert targetSourcePartitions != null;
+				targetSourcePartitions.removeAll(readyPartitions);
+				if (targetSourcePartitions.isEmpty()) {
+					nowReadyPartitions.addAll(targetCycle);
 					nowReadyCycles.add(targetCycle);
 				}
 			}
-			if (nowReadyRegions.size() > 0) {			// one or more elements has all sources at lower depths.
-				for (@NonNull Region nowReadyElement : nowReadyRegions) {
-					region2depth.put(nowReadyElement, depth);
-					pendingRegions.remove(nowReadyElement);
+			if (nowReadyPartitions.size() > 0) {			// one or more elements has all sources at lower depths.
+				for (@NonNull Partition nowReadyPartition : nowReadyPartitions) {
+					partition2pass.put(nowReadyPartition, depth);
+					pendingPartitions.remove(nowReadyPartition);
 				}
 				pendingCycles.removeAll(nowReadyCycles);
 			}
 			else {										// else choose an elements with fewest greater depth sources.
-				Region fewestBadSourceElement = null;
+				Partition fewestBadSourcePartition = null;
 				int badSources = Integer.MAX_VALUE;
-				for (@NonNull Region targetElement : pendingRegions) {
-					Set<@NonNull Element> targetSourceElements = new HashSet<>(target2sources.get(targetElement));
-					assert targetSourceElements != null;
-					targetSourceElements.removeAll(readyRegions);
-					int targetSourceElementsSize = targetSourceElements.size();
-					if ((fewestBadSourceElement == null) || (targetSourceElementsSize < badSources)) {
+				for (@NonNull Partition targetPartition : pendingPartitions) {
+					Set<@NonNull Partition> targetSourcePartitions = new HashSet<>(target2sources.get(targetPartition));
+					assert targetSourcePartitions != null;
+					targetSourcePartitions.removeAll(readyPartitions);
+					int targetSourceElementsSize = targetSourcePartitions.size();
+					if ((fewestBadSourcePartition == null) || (targetSourceElementsSize < badSources)) {
 						badSources = targetSourceElementsSize;
-						fewestBadSourceElement = targetElement;
+						fewestBadSourcePartition = targetPartition;
 					}
 				}
-				assert fewestBadSourceElement != null;
-				region2depth.put(fewestBadSourceElement, depth);
-				pendingRegions.remove(fewestBadSourceElement);
+				assert fewestBadSourcePartition != null;
+				partition2pass.put(fewestBadSourcePartition, depth);
+				pendingPartitions.remove(fewestBadSourcePartition);
 			}
 		}
-		return region2depth;
-	}
+		return partition2pass;
+	} */
 
-	private @NonNull Map<@NonNull Region, @NonNull List<@NonNull Region>> analyzeParents() {
-		Map<@NonNull Region, @NonNull List<@NonNull Region>> region2parents = new HashMap<>();
-		region2parents.put(scheduledRegion, Collections.emptyList());
-		for (@NonNull Region targetRegion : callableRegions) {
-			Set<@NonNull Region> parentSet = new HashSet<>();
-			Set<@NonNull Region> sourceRegions = target2sources.get(targetRegion);
-			assert sourceRegions != null;
-			for (@NonNull Region sourceRegion : sourceRegions) {
-				Set<@NonNull Region> sourceCycle = region2cycle.get(sourceRegion);
+	/*	private @NonNull Map<@NonNull Partition, @NonNull List<@NonNull Partition>> analyzeParents() {
+		Map<@NonNull Partition, @NonNull List<@NonNull Partition>> partition2parents = new HashMap<>();
+		partition2parents.put(rootPartition, Collections.emptyList());
+		for (@NonNull Partition targetPartition : allPartitions) {
+			Set<@NonNull Partition> parentSet = new HashSet<>();
+			Set<@NonNull Partition> sourcePartitions = target2sources.get(targetPartition);
+			assert sourcePartitions != null;
+			for (@NonNull Partition sourcePartition : sourcePartitions) {
+				Set<@NonNull Partition> sourceCycle = partition2cycle.get(sourcePartition);
 				if (sourceCycle != null) {
-					Set<@NonNull Region> cycleSources = cycle2sources.get(sourceCycle);
+					Set<@NonNull Partition> cycleSources = cycle2sources.get(sourceCycle);
 					assert cycleSources != null;
 					parentSet.addAll(cycleSources);
 				}
 				else {
-					parentSet.add(sourceRegion);
+					parentSet.add(sourcePartition);
 				}
 			}
 			if (parentSet.isEmpty()) {
-				parentSet.add(scheduledRegion);
+				parentSet.add(rootPartition);
 			}
-			List<@NonNull Region> parentList = new ArrayList<>(parentSet);
+			List<@NonNull Partition> parentList = new ArrayList<>(parentSet);
 			Collections.sort(parentList, NameUtil.NAMEABLE_COMPARATOR);
-			region2parents.put(targetRegion, parentList);
+			partition2parents.put(targetPartition, parentList);
 		}
-		return region2parents;
-	}
-
-	private  @NonNull List<@NonNull Region> analyzeRegions(@NonNull ScheduledRegion outerScheduledRegion, @NonNull List<@NonNull Region> allCallableRegions) {
-		for (@NonNull Region region : outerScheduledRegion.getCallableRegions()) {
-			assert !region.isOperationRegion();
-			assert !allCallableRegions.contains(region);
-			allCallableRegions.add(region);
-			if (region instanceof ScheduledRegion) {
-				ScheduledRegion innerScheduledRegion = (ScheduledRegion)region;
-				analyzeRegions(innerScheduledRegion, allCallableRegions);
-			}
-		}
-		return allCallableRegions;
-	}
+		return partition2parents;
+	} */
 
 	/**
 	 * Initialize the source/target content of each connection of each region to empty.
 	 * Compute the set of all connections that are not passed.
 	 * Compute the set of all regions that are blocked by a mandatory dependence.
 	 */
-	private void analyzeSourcesAndTargets(@NonNull Region region) {
-		boolean hasPassedConnection = false;
-		for (@NonNull Connection connection : getOutgoingConnections(region)) {
-			if (connection.isPassed()) {
-				hasPassedConnection = true;
-				break;
-			}
-		}
-		if (!hasPassedConnection) {
-			unpassedRegions.add(region);
-		}
-		for (@NonNull Connection connection : getIncomingConnections(region)) {
-			List<@NonNull Region> sourceRegions = connection2sourceRegions.get(connection);
-			if (sourceRegions == null) {
-				sourceRegions = new ArrayList<>();
-				for (@NonNull Region sourceRegion : ConnectionManager.rawGetSourceRegions(connection)) {
-					if (!sourceRegions.contains(sourceRegion)) {
-						sourceRegions.add(sourceRegion);
+	private void analyzeSourcesAndTargets(@NonNull Partition partition) {
+		//	boolean hasPassedConnection = false;
+		//	for (@NonNull Connection connection : getOutgoingConnections(partition)) {
+		//		if (connection.isPassed()) {
+		//			hasPassedConnection = true;
+		//			break;
+		//		}
+		//	}
+		// (!hasPassedConnection) {
+		//		unpassedPartitions.add(partition);
+		//	}
+		for (@NonNull Connection connection : getIncomingConnections(partition)) {
+			List<@NonNull Partition> sourcePartitions = connection2sourcePartitions.get(connection);
+			if (sourcePartitions == null) {
+				sourcePartitions = new ArrayList<>();
+				for (@NonNull Partition sourcePartition : connectionManager.getSourcePartitions(connection)) {
+					if (!sourcePartitions.contains(sourcePartition)) {
+						sourcePartitions.add(sourcePartition);
 					}
 				}
-				connection2sourceRegions.put(connection, sourceRegions);
+				connection2sourcePartitions.put(connection, sourcePartitions);
 			}
-			List<@NonNull Region> targetRegions = connection2targetRegions.get(connection);
-			if (targetRegions == null) {
-				targetRegions = new ArrayList<>();
-				for (@NonNull Region targetRegion : ConnectionManager.rawGetTargetRegions(connection)) {
-					if (!targetRegions.contains(targetRegion)) {
-						targetRegions.add(targetRegion);
+			List<@NonNull Partition> targetPartitions = connection2targetPartitions.get(connection);
+			if (targetPartitions == null) {
+				targetPartitions = new ArrayList<>();
+				for (@NonNull Partition targetPartition : connectionManager.getTargetPartitions(connection)) {
+					if (!targetPartitions.contains(targetPartition)) {
+						targetPartitions.add(targetPartition);
 					}
 				}
-				connection2targetRegions.put(connection, targetRegions);
+				connection2targetPartitions.put(connection, targetPartitions);
 			}
 		}
 	}
@@ -370,137 +376,99 @@ public class ScheduleAnalysis
 	//
 	//	Identify all the source regions for each target region.
 	//
-	private @NonNull Map<@NonNull Region, @NonNull Set<@NonNull Region>> analyzeSources() {
-		Map<@NonNull Region, @NonNull Set<@NonNull Region>> target2sources = new HashMap<>();
-		for (@NonNull Region region : callableRegions) {
-			target2sources.put(region, new HashSet<>());
+	private @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> analyzeSources() {
+		Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> target2sources = new HashMap<>();
+		for (@NonNull Partition partition : allPartitions) {
+			target2sources.put(partition, new HashSet<>());
 		}
-		for (@NonNull Region region : callableRegions) {
-			Set<@NonNull Region> sources = new HashSet<>();
-			target2sources.put(region, sources);
-			List<@NonNull Connection> incomingConnections = region2incomingConnections.get(region);
+		for (@NonNull Partition partition : allPartitions) {
+			Set<@NonNull Partition> sources = new HashSet<>();
+			target2sources.put(partition, sources);
+			List<@NonNull Connection> incomingConnections = partition2incomingConnections.get(partition);
 			//			List<@NonNull Connection> loopingConnections = region2loopingConnections.get(region);
 			//			List<@NonNull Connection> outgoingConnections = region2outgoingConnections.get(region);
 			assert incomingConnections != null;
 			for (@NonNull Connection incomingConnection : incomingConnections) {
-				List<@NonNull Region> sourceRegions = connection2sourceRegions.get(incomingConnection);
-				assert sourceRegions != null;
-				sources.addAll(sourceRegions);
+				List<@NonNull Partition> sourcePartitions = connection2sourcePartitions.get(incomingConnection);
+				assert sourcePartitions != null;
+				sources.addAll(sourcePartitions);
 			}
 		}
 		return target2sources;
 	}
 
-	protected void buildCallTree(@NonNull Iterable<@NonNull ? extends Iterable<@NonNull Region>> regionSchedule) {
+	protected void buildCallTree(@NonNull Iterable<@NonNull ? extends Iterable<@NonNull Partition>> partitionSchedule) {
 		CallTreeBuilder callTreeBuilder = new CallTreeBuilder(this);
-		callTreeBuilder.buildTree(scheduledRegion, regionSchedule);
+		callTreeBuilder.buildTree(rootPartition, partitionSchedule);
 	}
 
-	public Region getCommonRegion(@NonNull Region firstRegion, @NonNull Region secondRegion) {
-		Region thisRegion = firstRegion;
-		Region thatRegion = secondRegion;
-		while (thisRegion != thatRegion) {
-			int thisDepth = getRegionDepth(thisRegion);
-			int thatDepth = getRegionDepth(thatRegion);
-			if (thisDepth > thatDepth) {
-				thisRegion = getMinimumDepthParentRegion(thisRegion);
-				if (thisRegion == null) {
-					return null;
-				}
-			}
-			else if (thatDepth > thisDepth) {
-				thatRegion = getMinimumDepthParentRegion(thatRegion);
-				if (thatRegion == null) {
-					return null;
-				}
-			}
-			else {
-				thisRegion = getMinimumDepthParentRegion(thisRegion);
-				thatRegion = getMinimumDepthParentRegion(thatRegion);
-				if ((thisRegion == null) || (thatRegion == null)) {
-					return null;
-				}
-			}
-		}
-		return thisRegion;
+	public @NonNull ConnectionManager getConnectionManager() {
+		return connectionManager;
 	}
 
 	protected @NonNull Iterable<? extends @NonNull Connection> getConnections() {
-		return connection2targetRegions.keySet();
+		return connection2targetPartitions.keySet();
 	}
 
-	protected @NonNull Iterable<@NonNull Connection> getIncomingConnections(@NonNull Region region) {
-		List<@NonNull Connection> incomingConnections = region2incomingConnections.get(region);
+	protected @NonNull Iterable<@NonNull Connection> getIncomingConnections(@NonNull Partition partition) {
+		List<@NonNull Connection> incomingConnections = partition2incomingConnections.get(partition);
 		assert incomingConnections != null;
 		return incomingConnections;
 	}
 
-	protected @NonNull Iterable<@NonNull Connection> getLoopingConnections(@NonNull Region region) {
-		List<@NonNull Connection> loopingConnections = region2loopingConnections.get(region);
+	public @NonNull Partition getLoadingPartition() {
+		return loadingPartition;
+	}
+
+	protected @NonNull Iterable<@NonNull Connection> getLoopingConnections(@NonNull Partition partition) {
+		List<@NonNull Connection> loopingConnections = partition2loopingConnections.get(partition);
 		assert loopingConnections != null;
 		return loopingConnections;
 	}
 
-	public Region getMinimumDepthParentRegion(@NonNull Region childRegion) {
-		Region minimumDepthParentRegion = null;
-		int minimumDepth = Integer.MAX_VALUE;
-		List<@NonNull Region> parentRegions = region2parents.get(childRegion);
-		assert parentRegions != null;
-		for (@NonNull Region parentRegion : parentRegions) {
-			int parentDepth = getRegionDepth(parentRegion);
-			if ((minimumDepthParentRegion == null) || (parentDepth < minimumDepth)) {
-				minimumDepthParentRegion = parentRegion;
-				minimumDepth = parentDepth;
-			}
-		}
-		return minimumDepthParentRegion;
-	}
-
-	protected @NonNull Iterable<@NonNull Connection> getOutgoingConnections(@NonNull Region region) {
-		List<@NonNull Connection> outgoingConnections = region2outgoingConnections.get(region);
+	protected @NonNull Iterable<@NonNull Connection> getOutgoingConnections(@NonNull Partition partition) {
+		List<@NonNull Connection> outgoingConnections = partition2outgoingConnections.get(partition);
 		assert outgoingConnections != null;
 		return outgoingConnections;
 	}
 
-	private int getRegionDepth(@NonNull Region region) {
-		Integer depth = region2depth.get(region);
-		assert depth != null;
-		return depth;
+	public @NonNull RootPartition getRootPartition() {
+		return rootPartition;
 	}
 
-	protected @NonNull Iterable<@NonNull Region> getSourceRegions(@NonNull Connection connection) {
-		List<@NonNull Region> sourceRegions = connection2sourceRegions.get(connection);
+	public @NonNull ScheduleManager getScheduleManager() {
+		return scheduleManager;
+	}
+
+	protected @NonNull Iterable<@NonNull Partition> getSourcePartitions(@NonNull Connection connection) {
+		List<@NonNull Partition> sourceRegions = connection2sourcePartitions.get(connection);
 		assert sourceRegions != null;
 		return sourceRegions;
 	}
 
-	protected @NonNull Iterable<@NonNull Region> getTargetRegions(@NonNull Connection connection) {
-		List<@NonNull Region> targetRegions = connection2targetRegions.get(connection);
-		assert targetRegions != null;
-		return targetRegions;
-	}
-
-	protected boolean isPassed(@NonNull Region region) {
-		return !unpassedRegions.contains(region);
+	protected @NonNull Iterable<@NonNull Partition> getTargetPartitions(@NonNull Connection connection) {
+		List<@NonNull Partition> targetPartitions = connection2targetPartitions.get(connection);
+		assert targetPartitions != null;
+		return targetPartitions;
 	}
 
 	private void propagateIndexes(@NonNull Connection connection) {
-		List<@NonNull Integer> connectionIndexes = connection.getIndexes();
+		List<@NonNull Integer> connectionIndexes = connection.getPasses();
 		if (connectionIndexes.size() > 0) {			// Empty for dead inputs
-			for (@NonNull Region region : getTargetRegions(connection)) {
-				int invocationIndex = region.getInvocationIndex();
+			for (@NonNull Partition partition : getTargetPartitions(connection)) {
+				int invocationIndex = partition.getFirstPass();
 				boolean propagateThroughRegion = false;
 				for (int connectionIndex : connectionIndexes) {
-					if ((connectionIndex > invocationIndex) && region.addIndex(connectionIndex)) {
+					if ((connectionIndex > invocationIndex) && partition.addPass(connectionIndex)) {
 						propagateThroughRegion = true;
 					}
 				}
 				if (propagateThroughRegion) {
-					Iterable<@NonNull Connection> outgoingConnections = getOutgoingConnections(region);
+					Iterable<@NonNull Connection> outgoingConnections = getOutgoingConnections(partition);
 					for (@NonNull Connection targetConnection : outgoingConnections) {
 						boolean propagateThroughConnection = false;
 						for (int connectionIndex : connectionIndexes) {
-							if (targetConnection.addIndex(connectionIndex)) {
+							if (targetConnection.addPass(connectionIndex)) {
 								propagateThroughConnection = true;
 							}
 						}
@@ -513,51 +481,45 @@ public class ScheduleAnalysis
 		}
 	}
 
-	public void schedule(@NonNull RootPartition rootPartition, @NonNull Iterable<@NonNull ? extends Collection<@NonNull Region>> regionSchedule) {
-		//	ScheduledRegion rootScheduledRegion = rootPartition.getScheduledRegion();
+	public void schedule(@NonNull RootPartition rootPartition, @NonNull Iterable<@NonNull ? extends Iterable<@NonNull Partition>> partitionSchedule) {
 		int depth = 0;
-		//		LoadingRegion loadingRegion = rootScheduledRegion.getOwnedLoadingRegion();
-		//		if (loadingRegion != null) {
-		//			loadingRegion.addIndex(depth++);
-		//		}
-		for (@NonNull Collection<@NonNull Region> concurrency : regionSchedule) {
-			for (@NonNull Region region : concurrency) {
-				region.addIndex(depth);
-				Iterable<@NonNull Connection> loopingConnections = getLoopingConnections(region);
+		for (@NonNull Iterable<@NonNull Partition> concurrency : partitionSchedule) {
+			for (@NonNull Partition partition : concurrency) {
+				partition.setPass(depth);
+				Iterable<@NonNull Connection> loopingConnections = getLoopingConnections(partition);
 				assert loopingConnections != null;
-				Iterable<@NonNull Connection> outgoingConnections = getOutgoingConnections(region);
+				Iterable<@NonNull Connection> outgoingConnections = getOutgoingConnections(partition);
 				assert outgoingConnections != null;
-				//	Set<@NonNull Region> nextRegions = new HashSet<>();
 				for (@NonNull Connection loopingConnection : loopingConnections) {
-					loopingConnection.addIndex(depth);
+					loopingConnection.addPass(depth);
 				}
 				for (@NonNull Connection outgoingConnection : outgoingConnections) {
-					outgoingConnection.addIndex(depth);
+					outgoingConnection.addPass(depth);
 				}
 			}
 			depth++;
 		}
-		//		scheduleScheduledRegion(rootScheduledRegion);
-		scheduleManager.writeDebugGraphs("6-indexed", false, true, true);
+		scheduleManager.writeDebugGraphs("6-pass", false, true, false);
 		/**
 		 * Propagate the additional connection indexes to their outgoing connections.
 		 */
 		for (@NonNull Connection connection : getConnections()) {
 			propagateIndexes(connection);
 		}
-		buildCallTree(regionSchedule);
+		scheduleManager.writeDebugGraphs("7-passes", false, true, false);
+		buildCallTree(partitionSchedule);
 	}
 
 	@Override
 	public @NonNull String toString() {
 		StringBuilder s = new StringBuilder();
-		List<@NonNull Region> list = new ArrayList<>(region2depth.keySet());
+		List<@NonNull Partition> list = new ArrayList<>(allPartitions);
 		Collections.sort(list, NameUtil.NAMEABLE_COMPARATOR);
-		for (@NonNull Region entry : list) {
+		for (@NonNull Partition entry : list) {
 			if (s.length() > 0) {
 				s.append("\n");
 			}
-			s.append(region2depth.get(entry) + " : " + entry.getName());
+			s.append(entry.getPassRangeText() + " : " + entry.getName());
 		}
 		return s.toString();
 	}

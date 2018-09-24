@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -33,7 +34,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
 /**
  * <!-- begin-user-doc -->
@@ -430,10 +430,15 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 		getHeadNodes().add(headNode);
 	}
 
-	@Override
+	/*	@Override
 	protected void computeSymbolName(@NonNull SymbolNameBuilder s) {
 		s.appendString("o_");
 		s.appendName(name);
+	} */
+
+	@Override
+	public final @Nullable String getSymbolName() {
+		return null;
 	}
 
 	@Override

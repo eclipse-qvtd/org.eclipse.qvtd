@@ -40,7 +40,7 @@ class SpeculatingPartition extends AbstractPartialPartition
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
 
 	public SpeculatingPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest/*, boolean isInfallible*/) {
-		super(partitioner, reachabilityForest, "«speculating»");
+		super(computeName(partitioner, "speculating"), partitioner, reachabilityForest);
 		//	this.traceNode = partitioner.getTraceNode();
 		this.executionNodes = partitioner.getExecutionNodes();
 		if (hasSynthesizedTrace) {

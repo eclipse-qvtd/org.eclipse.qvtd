@@ -55,6 +55,7 @@ import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.PartitionProblem;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionProblem;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.InternallyAcyclicPartition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
@@ -357,7 +358,7 @@ public class CompilerUtil extends QVTscheduleUtil
 				unscheduledPredecessors.removeAll(scheduledPartitions);
 				if (unscheduledPredecessors.isEmpty()) {
 					toSchedule.add(partition);
-					partition.setDepth(parallelSchedule.size());
+					//	partition.setDepth(parallelSchedule.size());
 					Set<@NonNull Partition> unscheduledSuccessors = partition2successors.get(partition);
 					assert unscheduledSuccessors != null;
 					nextScheduleCandidates.addAll(unscheduledSuccessors);
@@ -509,6 +510,19 @@ public class CompilerUtil extends QVTscheduleUtil
 	public static @NonNull RegionProblem createRegionWarning(@NonNull Region region, @NonNull String messageTemplate, Object... bindings) {
 		String boundMessage = StringUtil.bind(messageTemplate, bindings);
 		return new RegionProblem(CompilerProblem.Severity.WARNING, region, boundMessage);
+	}
+
+	public static @NonNull List<@NonNull Partition> gatherPartitions(@NonNull InternallyAcyclicPartition rootPartition, @NonNull List<@NonNull Partition> allPartitions) {
+		for (@NonNull Partition partition : rootPartition.getPartitions()) {
+			assert !allPartitions.contains(partition);
+			if (partition instanceof InternallyAcyclicPartition) {
+				gatherPartitions((InternallyAcyclicPartition)partition, allPartitions);
+			}
+			else {
+				allPartitions.add(partition);
+			}
+		}
+		return allPartitions;
 	}
 
 	public static void indent(@NonNull StringBuilder s, int depth) {

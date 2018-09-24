@@ -14,14 +14,18 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
+import java.util.List;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.util.Visitor;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
@@ -283,5 +287,23 @@ public class MicroMappingRegionImpl extends MappingRegionImpl implements MicroMa
 		symbolNameSuffix = newSymbolNameSuffix;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.MICRO_MAPPING_REGION__SYMBOL_NAME_SUFFIX, oldSymbolNameSuffix, symbolNameSuffix));
+	}
+
+	@Override
+	public void resetHead(@NonNull Node headNode) {
+		throw new UnsupportedOperationException();
+		//	super.resetHead(headNode);
+	}
+
+	@Override
+	public List<Edge> getOwnedEdges() {
+		throw new UnsupportedOperationException();
+		//	return super.getOwnedEdges();
+	}
+
+	@Override
+	public List<Node> getOwnedNodes() {
+		throw new UnsupportedOperationException();
+		//	return super.getOwnedNodes();
 	}
 } //MicroMappingRegionImpl

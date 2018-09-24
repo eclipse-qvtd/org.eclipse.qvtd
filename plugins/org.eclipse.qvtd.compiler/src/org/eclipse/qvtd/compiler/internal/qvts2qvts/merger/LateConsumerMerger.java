@@ -11,31 +11,20 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.merger;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CollectionType;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
-import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.NamedMappingRegionImpl;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 
 /**
  * LateConsumerMerger replaces one list of MappingRegions by another in which each set of regions that
@@ -63,8 +52,11 @@ public class LateConsumerMerger extends AbstractMerger
 
 	protected static class LateRegionMerger extends RegionMerger
 	{
+		protected final @NonNull ConnectionManager connectionManager;
+
 		protected LateRegionMerger(@NonNull ScheduleManager scheduleManager, @NonNull MappingRegion primaryRegion) {
 			super(scheduleManager, primaryRegion);
+			this.connectionManager = scheduleManager.getConnectionManager();
 		}
 
 		@Override
@@ -73,18 +65,19 @@ public class LateConsumerMerger extends AbstractMerger
 		}
 
 		public void install(@NonNull ContentsAnalysis<@NonNull MappingRegion> contentsAnalysis, @NonNull MappingRegion mergedRegion) {
-			MappingRegion primaryRegion = getPrimaryRegion();
+			/*	MappingRegion primaryRegion = getPrimaryRegion();
+			Partition primaryPartition = scheduleManager.wipGetPartition(primaryRegion);
 			ScheduledRegion invokingRegion = QVTscheduleUtil.getContainingScheduledRegion(primaryRegion);
-			List<@NonNull Region> callableParents = Lists.newArrayList(ConnectionManager.rawGetCallableParents(primaryRegion));
+			List<@NonNull Partition> callableParents = Lists.newArrayList(connectionManager.getCallableParents(primaryPartition));
 			for (@NonNull MappingRegion originalRegion : getOriginalRegions()) {
 				contentsAnalysis.removeRegion(originalRegion);
 				assert invokingRegion == originalRegion.getScheduledRegion();
-				for (@NonNull Region callableParent : callableParents) {
+				for (@NonNull Partition callableParent : callableParents) {
 					if (originalRegion == primaryRegion) {
-						ConnectionManager.rawReplaceCallToChild(callableParent, primaryRegion, mergedRegion);
+						connectionManager.replaceCallToChild(callableParent, primaryPartition, scheduleManager.wipGetPartition(mergedRegion));
 					}
 					else {
-						ConnectionManager.rawRemoveCallToChild(callableParent, originalRegion);
+						connectionManager.removeCallToChild(callableParent, scheduleManager.wipGetPartition(originalRegion));
 					}
 				}
 				scheduleManager.setScheduledRegion(originalRegion, invokingRegion);
@@ -95,26 +88,26 @@ public class LateConsumerMerger extends AbstractMerger
 				NodeConnection incomingConnection = originalHeadNode.getIncomingConnection();
 				if (incomingConnection != null) {
 					Node mergedHeadNode = getNodeMerger(originalHeadNode).getMergedNode();
-					ConnectionManager.rawAddPassedTargetNode(incomingConnection, mergedHeadNode);
+					connectionManager.addPassedTargetNode(incomingConnection, mergedHeadNode);
 					for (@NonNull Region originalRegion : getOriginalRegions()) {
-						ConnectionManager.rawRemoveTargetRegion(incomingConnection, originalRegion);
+						connectionManager.removeTargetRegion(incomingConnection, originalRegion);
 					}
 				}
-			}
+			} */
 		}
 	}
 
 	private class LateStrategy extends Correlator.AbstractCorrelationStrategy
 	{
-		@Override
+		/*	@Override
 		public boolean navigableEdgesMatch(@Nullable EdgeMerger edgeMerger, @NonNull NavigableEdge extraEdge) { // assert same property, skip secondary properties
 			if (extraEdge.isSecondary()) {				// Ignore opposites - checked by their forward edge
 				return true;
 			}
 			Property property = extraEdge.getProperty();
 			if (edgeMerger == null) {
-				//				if (/*!extraEdge.isRequired() ||*/ !extraEdge.isUnconditional()) {
-				//				if (/*!extraEdge.isRequired() ||*/ !(QVTscheduleUtil.getSourceNode(extraEdge).isUnconditional() && (QVTscheduleUtil.getTargetNode(extraEdge).getUtility() == Utility.STRONGLY_MATCHED))) {
+				//				if (/*!extraEdge.isRequired() ||* / !extraEdge.isUnconditional()) {
+				//				if (/*!extraEdge.isRequired() ||* / !(QVTscheduleUtil.getSourceNode(extraEdge).isUnconditional() && (QVTscheduleUtil.getTargetNode(extraEdge).getUtility() == Utility.STRONGLY_MATCHED))) {
 				if (!extraEdge.isMatched()) {
 					return true;
 				}
@@ -146,10 +139,10 @@ public class LateConsumerMerger extends AbstractMerger
 					ClassDatum classDatum = QVTscheduleUtil.getClassDatum(extraEdge.getEdgeTarget());
 					Iterable<@NonNull NavigableEdge> realizedEdges = getContentsAnalysis().getNewEdges(extraEdge, classDatum);
 					if (realizedEdges != null) {
-						int firstIndex = extraEdge.getOwningRegion().getFirstIndex();
+						int firstIndex = scheduleManager.wipGetPartition(extraEdge.getOwningRegion()).getFirstPass();
 						for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
 							Region region = realizedEdge.getOwningRegion();
-							int lastIndex = region.getLastIndex();
+							int lastIndex = scheduleManager.wipGetPartition(region).getLastPass();
 							if (lastIndex >= firstIndex) {
 								if (debugFailures) {
 									FAILURE.println("Not ready : " + realizedEdge);
@@ -172,7 +165,7 @@ public class LateConsumerMerger extends AbstractMerger
 			}
 			else {
 				assert edgeMerger.getProperty() == property;
-				if (/*!edgeMerger.isRequired() ||*/ !edgeMerger.isUnconditional()) {
+				if (/*!edgeMerger.isRequired() ||* / !edgeMerger.isUnconditional()) {
 					return true;
 				}
 				if (extraEdge.isConstant() || edgeMerger.isConstant()) {
@@ -204,7 +197,7 @@ public class LateConsumerMerger extends AbstractMerger
 				}
 				return false; //super.navigableEdgesMatch(extraEdge, edgeMerger);
 			}
-		}
+		} */
 
 		@Override
 		public boolean navigableNodesMatch(@Nullable NodeMerger nodeMerger, @NonNull Node extraNode) {
@@ -262,6 +255,7 @@ public class LateConsumerMerger extends AbstractMerger
 	}
 
 	protected final @NonNull ScheduleManager scheduleManager;
+	protected final @NonNull ConnectionManager connectionManager;
 	protected final @NonNull RootPartition rootPartition;
 	protected final @NonNull List<@NonNull Region> allRegions = new ArrayList<>();
 	private /*@LazyNonNull*/ ContentsAnalysis<@NonNull MappingRegion> contentsAnalysis;
@@ -270,18 +264,20 @@ public class LateConsumerMerger extends AbstractMerger
 
 	public LateConsumerMerger(@NonNull ScheduleManager scheduleManager, @NonNull RootPartition rootPartition) {
 		this.scheduleManager = scheduleManager;
+		this.connectionManager = scheduleManager.getConnectionManager();
 		this.rootPartition = rootPartition;
-		gatherRegions(rootPartition.getScheduledRegion());
+		//	gatherPartitions(rootPartition);
 
 	}
 
-	private void gatherRegions(@NonNull Region parentRegion) {
-		for (@NonNull Region childRegion : ConnectionManager.rawGetCallableChildren(parentRegion)) {
+	/*	private void gatherPartitions(@NonNull Partition parentPartition) {
+		for (@NonNull Partition childPartition : connectionManager.getCallableChildren(parentPartition)) {
+			Region childRegion = scheduleManager.wipGetRegion(childPartition);
 			allRegions.add(childRegion);
-			gatherRegions(childRegion);
+			gatherPartitions(childPartition);
 		}
 		return;
-	}
+	} */
 
 	protected @NonNull ContentsAnalysis<@NonNull MappingRegion> getContentsAnalysis() {
 		ContentsAnalysis<@NonNull MappingRegion> contentsAnalysis2 = contentsAnalysis;
@@ -321,20 +317,20 @@ public class LateConsumerMerger extends AbstractMerger
 	} */
 
 	private void merge() {
-		mergeHierarchy(rootPartition.getScheduledRegion());
+		//	mergeHierarchy(rootPartition);
 		return;
 	}
 
-	private void mergeHierarchy(@NonNull Region parentRegion) {
-		for (@NonNull Region childRegion : ConnectionManager.rawGetCallableChildren(parentRegion)) {
-			mergeHierarchy(childRegion);
-			mergeRegion(childRegion);
+	/*	private void mergeHierarchy(@NonNull Partition parentPartition) {
+		for (@NonNull Partition childPartition : connectionManager.getCallableChildren(parentPartition)) {
+			mergeHierarchy(childPartition);
+			mergeRegion(childPartition);
 		}
 		return;
-	}
+	} */
 
-	private void mergeRegion(@NonNull Region parentRegion) {
-		for (@NonNull NodeConnection nodeConnection : ConnectionManager.rawGetRootConnections(parentRegion)) {
+	/*	private void mergeRegion(@NonNull Partition parentPartition) {
+		for (@NonNull NodeConnection nodeConnection : connectionManager.getRootConnections(parentPartition)) {
 			//			System.out.println(nodeConnection + " " + nodeConnection.getIndexes());
 			Iterable<@NonNull List<@NonNull MappingRegion>> consecutiveRegionRuns = selectConsecutiveRegionRuns(nodeConnection);
 			for (@NonNull List<@NonNull MappingRegion> consecutiveRegionRun : consecutiveRegionRuns) {
@@ -348,16 +344,17 @@ public class LateConsumerMerger extends AbstractMerger
 			}
 		}
 		return;
-	}
+	} */
 
-	protected void mergeRegions(@NonNull List<@NonNull MappingRegion> consecutiveRegionRun) {
+	/*	protected void mergeRegions(@NonNull List<@NonNull MappingRegion> consecutiveRegionRun) {
 		List<@NonNull MappingRegion> residualInputRegions = new ArrayList<>(consecutiveRegionRun);
 		while (residualInputRegions.size() >= 2) {
 			MappingRegion primaryRegion = residualInputRegions.remove(0);
+			Partition primaryPartition = scheduleManager.wipGetPartition(primaryRegion);
 			if (LATE.isActive()) {
-				LATE.println("Correlating primary: " + primaryRegion + "@[" + primaryRegion.getIndexRangeText() + "]");
+				LATE.println("Correlating primary: " + primaryRegion + "@[" + primaryPartition.getPassRangeText() + "]");
 			}
-			if (ConnectionManager.rawGetIntermediateConnections(primaryRegion).size() > 0) {		// FIXME this should be allowed
+			if (connectionManager.getIntermediateConnections(primaryPartition).size() > 0) {		// FIXME this should be allowed
 				if (FAILURE.isActive()) {
 					FAILURE.println("Intermediate connections not yet supported");
 				}
@@ -373,14 +370,15 @@ public class LateConsumerMerger extends AbstractMerger
 						return;
 					}
 				}
-			} */
+			} * /
 			LateRegionMerger regionMerger = null;
 			for (int i = 0; i < residualInputRegions.size(); i++) {
 				MappingRegion secondaryRegion = residualInputRegions.get(i);
+				Partition secondaryPartition = scheduleManager.wipGetPartition(secondaryRegion);
 				if (LATE.isActive()) {
-					LATE.println("Correlating secondary: " + secondaryRegion + "@[" + secondaryRegion.getIndexRangeText() + "]");
+					LATE.println("Correlating secondary: " + secondaryRegion + "@[" + secondaryPartition.getPassRangeText() + "]");
 				}
-				if (ConnectionManager.rawGetIntermediateConnections(secondaryRegion).size() > 0) {		// FIXME this should be allowed
+				if (connectionManager.getIntermediateConnections(secondaryPartition).size() > 0) {		// FIXME this should be allowed
 					if (FAILURE.isActive()) {
 						FAILURE.println("Intermediate connections not yet supported");
 					}
@@ -424,14 +422,14 @@ public class LateConsumerMerger extends AbstractMerger
 				mergedRegion2originalRegions.put(mergedRegion, originalRegions);
 				residualInputRegions.removeAll(originalRegions);
 				for (@NonNull Region originalRegion : originalRegions) {
-					for (int index : originalRegion.getIndexes()) {
-						mergedRegion.addIndex(index);
+					for (int index : scheduleManager.wipGetPartition(originalRegion).getPasses()) {
+						scheduleManager.wipGetPartition(mergedRegion).addPass(index);
 					}
 				}
 				scheduleManager.writeDebugGraphs(mergedRegion, null);
 			}
 		}
-	}
+	} */
 
 	private void prune() {
 		for (@NonNull List<@NonNull MappingRegion> originalRegions : mergedRegion2originalRegions.values()) {
@@ -443,13 +441,14 @@ public class LateConsumerMerger extends AbstractMerger
 
 	/**
 	 * Return the lists of child regions that have consecutive indexes.
-	 */
+	 *
 	protected @NonNull Iterable<@NonNull List<@NonNull MappingRegion>> selectConsecutiveRegionRuns(@NonNull NodeConnection nodeConnection) {
 		Map<@NonNull Integer, @NonNull MappingRegion> index2region = new HashMap<>();
-		for (@NonNull Region targetRegion : ConnectionManager.rawGetTargetRegions(nodeConnection)) {
+		for (@NonNull Partition targetPartition : connectionManager.getTargetPartitions(nodeConnection)) {
+			Region targetRegion = scheduleManager.wipGetRegion(targetPartition);
 			if (targetRegion instanceof MappingRegion) {			// FIXME ?? always a MappingRegion
-				List<@NonNull Integer> indexes = targetRegion.getIndexes();
-				index2region.put(indexes.get(indexes.size()-1), (@NonNull MappingRegion) targetRegion);
+				int lastPass = targetPartition.getLastPass();
+				index2region.put(lastPass, (MappingRegion)targetRegion);
 			}
 		}
 		List<@NonNull Integer> orderedIndexes = new ArrayList<>(index2region.keySet());
@@ -460,7 +459,7 @@ public class LateConsumerMerger extends AbstractMerger
 			for (@NonNull Integer index : orderedIndexes) {
 				MappingRegion childRegion = index2region.get(index);
 				assert childRegion != null;
-				if ((consecutiveRegionRun == null) || (consecutiveRegionRun.get(consecutiveRegionRun.size()-1).getLastIndex()+1 != index)) {
+				if ((consecutiveRegionRun == null) || (scheduleManager.wipGetPartition(consecutiveRegionRun.get(consecutiveRegionRun.size()-1)).getLastPass()+1 != index)) {
 					consecutiveRegionRun = new ArrayList<>();
 					consecutiveRegionRuns.add(consecutiveRegionRun);
 				}
@@ -474,5 +473,5 @@ public class LateConsumerMerger extends AbstractMerger
 			}
 		}
 		return consecutiveRegionRuns;
-	}
+	} */
 }

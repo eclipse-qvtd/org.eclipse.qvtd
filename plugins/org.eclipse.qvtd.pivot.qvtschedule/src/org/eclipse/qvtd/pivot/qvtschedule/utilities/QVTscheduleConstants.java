@@ -61,6 +61,7 @@ public class QVTscheduleConstants
 	public static final @NonNull String PREDICATED_COLOR = "cyan";
 	public static final @NonNull String REALIZED_COLOR = "green3";
 	public static final @NonNull String RECURSION_COLOR = "brown";
+	public static final @NonNull String REGION_COLOR = "green";
 	public static final @NonNull String SPECULATED_COLOR = "darkorange";
 	public static final @NonNull String SPECULATION_COLOR = "red";
 

@@ -18,5 +18,5 @@ public interface Graphable extends ToDOT.ToDOTable
 	/**
 	 * Return the stem for auto-generated file names.
 	 */
-	@NonNull String getSymbolName();
+	@NonNull String getGraphName();
 }

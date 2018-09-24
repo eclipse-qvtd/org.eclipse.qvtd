@@ -33,7 +33,8 @@ import org.eclipse.ocl.pivot.VoidType;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.LoadingPartition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
@@ -44,12 +45,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.Statement;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
-import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
-public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
+public class LoadingPartition2Mapping extends AbstractScheduledRegion2Mapping
 {
 	/**
 	 * Mapping from the type to allInstances variable.
@@ -64,8 +63,8 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 
 	//	private final @NonNull Map<@NonNull NodeConnection, @NonNull ConnectionVariable> connection2variable = new HashMap<@NonNull NodeConnection, @NonNull ConnectionVariable>();
 
-	public RootRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull LoadingRegion region) {
-		super(visitor, region);
+	public LoadingPartition2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull LoadingPartition partition) {
+		super(visitor, partition);
 	}
 
 	private @NonNull ConnectionVariable createRootConnectionVariable(@NonNull String name, boolean isStrict, @NonNull Type type, @Nullable OCLExpression initExpression) {
@@ -79,11 +78,11 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 	}
 
 	private void createRootConnectionVariables() {
-		List<@NonNull NodeConnection> rootConnections = new ArrayList<>(ConnectionManager.rawGetRootConnections(region));
+		List<@NonNull NodeConnection> rootConnections = new ArrayList<>(connectionManager.getRootConnections(partition));
 		Collections.sort(rootConnections, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull NodeConnection rootConnection : rootConnections) {
 			Type commonType = getConnectionSourcesType(rootConnection);
-			Node regionNode = ConnectionManager.rawBasicGetSource(rootConnection, region);
+			Node regionNode = connectionManager.basicGetSource(rootConnection, partition);
 			String name = rootConnection.getName();
 			assert name != null;
 			if (regionNode != null) {
@@ -158,7 +157,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 
 	protected Type getType(@NonNull IdResolver idResolver, @NonNull NodeConnection rootConnection) {
 		Type commonType = null;
-		for (@NonNull Node node : ConnectionManager.rawGetSourceEnds(rootConnection)) {
+		for (@NonNull Node node : QVTscheduleUtil.getSourceEnds(rootConnection)) {
 			Type nodeType = node.getCompleteClass().getPrimaryClass();
 			if (commonType == null) {
 				commonType = nodeType;
@@ -170,8 +169,8 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 		return commonType;
 	}
 
-	protected boolean isInstall(@NonNull Region calledRegion) {
-		AbstractRegion2Mapping calledRegion2Mapping = visitor.getRegion2Mapping(calledRegion);
+	protected boolean isInstall(@NonNull Partition calledPartition) {
+		AbstractPartition2Mapping calledRegion2Mapping = visitor.getPartition2Mapping(calledPartition);
 		for (@NonNull Node calledGuardNode : calledRegion2Mapping.getGuardNodes()) {
 			NodeConnection callingConnection = calledGuardNode.getIncomingPassedConnection();
 			if (callingConnection == null) {
@@ -243,12 +242,12 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 				}
 			} */
 		List<Statement> ownedStatements = mapping.getOwnedStatements();
-		for (@NonNull Region callableRegion : ConnectionManager.rawGetCallableChildren(region)) {
-			if (isInstall(callableRegion)) {
-				ownedStatements.add(createInstall(callableRegion));
+		for (@NonNull Partition callablePartition : connectionManager.getCallableChildren(partition)) {
+			if (isInstall(callablePartition)) {
+				ownedStatements.add(createInstall(callablePartition));
 			}
 			else {
-				ownedStatements.add(createCall(callableRegion, null));
+				ownedStatements.add(createCall(callablePartition, null));
 			}
 		}
 	}
@@ -259,7 +258,7 @@ public class RootRegion2Mapping extends AbstractScheduledRegion2Mapping
 		//	Create domains
 		//
 		Set<@NonNull ImperativeTypedModel> checkableTypedModels = new HashSet<>();
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
+		for (@NonNull Node node : partition.getPartialNodes()) {
 			ClassDatum classDatum = node.getClassDatum();
 			org.eclipse.ocl.pivot.Class type = classDatum.getCompleteClass().getPrimaryClass();
 			if (!(type instanceof DataType) && !(type instanceof AnyType) && !(type instanceof VoidType) && !(type instanceof InvalidType)) {

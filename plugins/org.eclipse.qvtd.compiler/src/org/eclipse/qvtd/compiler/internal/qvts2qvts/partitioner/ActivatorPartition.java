@@ -30,7 +30,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 class ActivatorPartition extends AbstractPartialPartition
 {
 	public ActivatorPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
-		super(partitioner, reachabilityForest, "«activator»");
+		super(computeName(partitioner, "activator"), partitioner, reachabilityForest);
 		Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(originalRegion);
 		//
 		//	The realized middle (trace) nodes become speculation nodes.
@@ -68,10 +68,10 @@ class ActivatorPartition extends AbstractPartialPartition
 	 * Add all old nodes, including node, that have no cyclic dependency and are reachable by to-one navigation from node.
 	 */
 	protected void addReachableOldAcyclicNodes(@NonNull Node node) {
-		if (!hasNode(node) && (node.isHead() || node.isOld() && !partitioner.isCyclic(node))) {
+		if (!hasNode(node) && (node.isHead() || isOld(node) && !partitioner.isCyclic(node))) {
 			addNode(node, QVTscheduleUtil.getNodeRole(node));
 			for (@NonNull NavigableEdge edge : node.getNavigableEdges()) {
-				if (edge.isOld()) {
+				if (isOld(edge)) {
 					addReachableOldAcyclicNodes(edge.getEdgeTarget());
 				}
 			}

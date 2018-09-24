@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtbase.graphs;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 public interface GraphStringBuilder
 {
@@ -48,6 +49,7 @@ public interface GraphStringBuilder
 	void setHeadlabel(/*@NonNull*/ String string);
 	void setLabel(/*@NonNull*/ String string);
 	void setPenwidth(@NonNull Integer penwidth);
+	void setScope(@Nullable Object scopeObject);
 	void setShape(@NonNull String shape);
 	void setStyle(@NonNull String style);
 	void setTaillabel(/*@NonNull*/ String string);

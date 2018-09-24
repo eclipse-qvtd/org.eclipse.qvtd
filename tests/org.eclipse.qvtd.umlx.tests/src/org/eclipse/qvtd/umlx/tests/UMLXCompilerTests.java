@@ -23,7 +23,9 @@ import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
+import org.eclipse.qvtd.compiler.CompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
+import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
@@ -47,6 +49,8 @@ import org.junit.Test;
  */
 public class UMLXCompilerTests extends LoadTestCase
 {
+	private static boolean NO_MERGES = true;				// Set true to suppress the complexities of merging
+
 	protected class MyQVT extends AbstractTestQVT
 	{
 		protected class InstrumentedCompilerChain extends UMLXCompilerChain
@@ -62,7 +66,7 @@ public class UMLXCompilerTests extends LoadTestCase
 					@Override
 					public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull String enforcedOutputName) throws IOException {
 						ScheduleManager scheduleManager = super.execute(qvtrResource, traceResource, enforcedOutputName);
-						instrumentRegion(scheduleManager);
+						instrumentPartition(scheduleManager);
 						return scheduleManager;
 					}
 				};
@@ -76,6 +80,14 @@ public class UMLXCompilerTests extends LoadTestCase
 		@Override
 		protected @NonNull UMLXCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull CompilerOptions options) {
 			return new InstrumentedCompilerChain(getEnvironmentFactory(), txURI, intermediateFileNamePrefixURI, options);
+		}
+
+		@Override
+		protected @NonNull DefaultCompilerOptions createCompilerChainOptions() {
+			DefaultCompilerOptions options = super.createCompilerChainOptions();
+			options.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_EARLY_MERGE, NO_MERGES);
+			options.setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_NO_LATE_CONSUMER_MERGE, NO_MERGES);
+			return options;
 		}
 
 		@Override

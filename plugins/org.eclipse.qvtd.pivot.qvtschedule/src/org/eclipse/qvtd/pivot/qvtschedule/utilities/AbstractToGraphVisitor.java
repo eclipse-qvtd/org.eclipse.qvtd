@@ -12,6 +12,7 @@ package org.eclipse.qvtd.pivot.qvtschedule.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
@@ -19,7 +20,6 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphElement;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
 
 /** This code is rescued but has never worked properly */
@@ -82,7 +82,7 @@ public abstract class AbstractToGraphVisitor extends AbstractExtendingQVTschedul
 		return isExpression;
 	}
 
-	protected boolean isHead(GraphNode graphNode) {
+	protected boolean isHead(@NonNull GraphNode graphNode) {
 		boolean isHead = false;
 		if (graphNode instanceof Node) {
 			Node node = (Node) graphNode;
@@ -130,9 +130,13 @@ public abstract class AbstractToGraphVisitor extends AbstractExtendingQVTschedul
 		}
 	}
 
-	public @NonNull String visit(@NonNull ScheduledRegion region) {
-		region.accept(this);
+	@Override
+	public @NonNull String toString() {
 		return context.toString();
+	}
+
+	public void visit(@NonNull Graphable graphable) {
+		((Element)graphable).accept(this);
 	}
 
 	@Override

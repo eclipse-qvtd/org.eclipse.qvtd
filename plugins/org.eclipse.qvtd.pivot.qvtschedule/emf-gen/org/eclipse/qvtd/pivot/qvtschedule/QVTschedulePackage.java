@@ -2972,13 +2972,22 @@ public interface QVTschedulePackage extends EPackage {
 	int CONNECTION__NAME = PivotPackage.ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Source Ends</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONNECTION__SOURCE_ENDS = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Connection</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
+	int CONNECTION_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -4133,6 +4142,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int EDGE_CONNECTION__NAME = CONNECTION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Source Ends</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE_CONNECTION__SOURCE_ENDS = CONNECTION__SOURCE_ENDS;
 
 	/**
 	 * The feature id for the '<em><b>Referred Property</b></em>' reference.
@@ -6966,6 +6984,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NODE_CONNECTION__NAME = CONNECTION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Source Ends</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_CONNECTION__SOURCE_ENDS = CONNECTION__SOURCE_ENDS;
 
 	/**
 	 * The feature id for the '<em><b>Class Datum</b></em>' reference.
@@ -11127,6 +11154,17 @@ public interface QVTschedulePackage extends EPackage {
 	EAttribute getConnection_Name();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getSourceEnds <em>Source Ends</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Source Ends</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Connection#getSourceEnds()
+	 * @see #getConnection()
+	 * @generated
+	 */
+	EReference getConnection_SourceEnds();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd <em>Connection End</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12828,6 +12866,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CONNECTION__NAME = eINSTANCE.getConnection_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Source Ends</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONNECTION__SOURCE_ENDS = eINSTANCE.getConnection_SourceEnds();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd <em>Connection End</em>}' class.

@@ -612,7 +612,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			scheduleManager2.writeDebugGraphs(mappingRegion, null);
 		}
 		scheduleManager2.analyzeOriginalContents();
-		scheduleManager2.writeDebugGraphs("0-init", true, true, true);
+		scheduleManager2.writeDebugGraphs("0-init", true, true, false);
 		//
 		//	Debug code to confirm that every output object is traceable to some input object.
 		//

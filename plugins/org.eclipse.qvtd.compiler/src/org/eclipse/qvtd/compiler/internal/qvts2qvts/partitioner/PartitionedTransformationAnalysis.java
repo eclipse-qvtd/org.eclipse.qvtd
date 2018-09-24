@@ -16,15 +16,16 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+
+import com.google.common.collect.Iterables;
 
 /**
  * A TransformationAnalysis accumulates the results of analyzing a RelationalTransformation and its contents.
@@ -72,10 +73,6 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 		TracePropertyPartitionAnalysis tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
 		tracePropertyAnalysis.addProducer(producer);
 		return tracePropertyAnalysis;
-	}
-
-	protected @Nullable TraceClassPartitionAnalysis basicGetTraceClassAnalysis(@NonNull ClassDatum classDatum) {
-		return classDatum2traceClassAnalysis.get(classDatum);
 	}
 
 	protected void computeTraceClassDiscrimination() throws CompilerChainException {
@@ -132,10 +129,6 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 		return scheduleManager;
 	}
 
-	public @NonNull TraceClassPartitionAnalysis getTraceClassAnalysis(@NonNull ClassDatum classDatum) {
-		return ClassUtil.nonNullState(classDatum2traceClassAnalysis.get(classDatum));
-	}
-
 	private @NonNull TraceClassPartitionAnalysis lazyCreateTraceClassAnalysis(@NonNull ClassDatum classDatum) {
 		TraceClassPartitionAnalysis traceClassAnalysis = classDatum2traceClassAnalysis.get(classDatum);
 		if (traceClassAnalysis == null) {
@@ -154,5 +147,19 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 			propertyDatum2tracePropertyAnalysis.put(tracePropertyDatum, tracePropertyAnalysis);
 		}
 		return tracePropertyAnalysis;
+	}
+
+	public void setLoadingRegionAnalysis(@NonNull LoadingPartition loadingPartition) {
+		for (@NonNull ClassDatum classDatum : classDatum2traceClassAnalysis.keySet()) {
+			TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
+			if (scheduleManager.isInput(typedModel)) {
+				TraceClassPartitionAnalysis classAnalysis = classDatum2traceClassAnalysis.get(classDatum);
+				assert classAnalysis != null;
+				Iterable<@NonNull Partition> producers = classAnalysis.getProducers();
+				if (Iterables.isEmpty(producers)) {
+					classAnalysis.addProducer(loadingPartition);
+				}
+			}
+		}
 	}
 }

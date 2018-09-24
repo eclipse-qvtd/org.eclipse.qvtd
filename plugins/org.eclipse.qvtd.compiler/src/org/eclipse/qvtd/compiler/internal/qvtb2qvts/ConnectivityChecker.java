@@ -139,7 +139,8 @@ public class ConnectivityChecker
 	protected void analyzeConnection(@NonNull Connection connection) {
 		Connection oldConnection = name2connection.put(QVTscheduleUtil.getName(connection), connection);
 		assert oldConnection == null;
-		for (@NonNull Node sourceNode : ConnectionManager.rawGetSourceNodes(connection)) {
+		ConnectionManager connectionManager = scheduleManager.getConnectionManager();
+		for (@NonNull Node sourceNode : connectionManager.getSourceNodes(connection)) {
 			ClassDatum classDatum = addClassDatum(sourceNode);
 			List<@NonNull Connection> connections = producer2connections.get(classDatum);
 			if (connections == null) {
@@ -149,7 +150,7 @@ public class ConnectivityChecker
 			//				assert !connections.contains(connection);
 			connections.add(connection);
 		}
-		for (@NonNull Node targetNode : ConnectionManager.rawGetTargetNodes(connection)) {
+		for (@NonNull Node targetNode : connectionManager.getTargetNodes(connection)) {
 			ClassDatum classDatum = addClassDatum(targetNode);
 			List<@NonNull Connection> connections = consumer2connections.get(classDatum);
 			if (connections == null) {

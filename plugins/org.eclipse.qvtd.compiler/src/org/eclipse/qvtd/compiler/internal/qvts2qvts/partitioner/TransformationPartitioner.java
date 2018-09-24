@@ -31,9 +31,12 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalys
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+
 import com.google.common.collect.Iterables;
 
 /**
@@ -206,13 +209,32 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 				transformationAnalysis.getRegionAnalysis(mappingRegion);
 			}
 		} */
-		for (@NonNull Region region : activeRegions) {
+		/*	for (@NonNull Region region : activeRegions) {
 			if (region instanceof MappingRegion) {
 				MappingRegion mappingRegion = (MappingRegion)region;
 				RegionAnalysis regionAnalysis = transformationAnalysis.getRegionAnalysis(mappingRegion);
 				MappingPartitioner mappingPartitioner = new MappingPartitioner(this, regionAnalysis);
 				region2mappingPartitioner.put(mappingRegion, mappingPartitioner);
 				mappingPartitioners.add(mappingPartitioner);
+			}
+		} */
+		for (@NonNull Region region : activeRegions) {
+			RegionAnalysis regionAnalysis = transformationAnalysis.getRegionAnalysis(region);
+			if (region instanceof MappingRegion) {
+				MappingRegion mappingRegion = (MappingRegion)region;
+				MappingPartitioner mappingPartitioner = new MappingPartitioner(this, regionAnalysis);
+				region2mappingPartitioner.put(mappingRegion, mappingPartitioner);
+				mappingPartitioners.add(mappingPartitioner);
+			}
+			else if (region instanceof LoadingRegion) {
+				Partition loadingPartition = new LoadingPartition(partitionedTransformationAnalysis, regionAnalysis);
+				partitions.add(loadingPartition);
+				//	scheduleManager.wipAddPartition(loadingPartition, region);
+				regionAnalysis.setPartitions(Collections.singletonList(loadingPartition));
+
+
+				ScheduledRegion scheduledRegion = transformationAnalysis.getScheduledRegion();
+				scheduledRegion.setOwnedLoadingRegion((LoadingRegion) region);
 			}
 		}
 		Collections.sort(mappingPartitioners, NameUtil.NAMEABLE_COMPARATOR);
@@ -226,22 +248,33 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 		//	Perform per-mapping partitioning
 		//
 		for (@NonNull MappingPartitioner mappingPartitioner : mappingPartitioners) {
-			//		Iterable<@NonNull RegionAnalysis> cyclicRegionAnalyses = transformationAnalysis.getCyclicRegionAnalyses(mappingPartitioner.getRegionAnalysis());
+			Iterable<@NonNull Partition> regionPartitions;
+			RegionAnalysis regionAnalysis = mappingPartitioner.getRegionAnalysis();
 			if (Iterables.isEmpty(mappingPartitioner.getTraceNodes())) {
-				partitions.add(new NonPartition(mappingPartitioner));
+				regionPartitions = Collections.singletonList(new NonPartition(regionAnalysis.getName(), mappingPartitioner.getPartitionedTransformationAnalysis(), regionAnalysis));
 			}
 			else {
-				Iterables.addAll(partitions, mappingPartitioner.partition());
+				regionPartitions = mappingPartitioner.partition();
 			}
+			regionAnalysis.setPartitions(regionPartitions);
+			Iterables.addAll(partitions, regionPartitions);
 		}
 		Collections.sort(partitions, NameUtil.NAMEABLE_COMPARATOR);
-		return postPartition();
+		RootPartition rootPartition = postPartition();
+		//	scheduleManager.wipAddPartition(rootPartition, transformationAnalysis.getScheduledRegion());
+		return rootPartition;
 	}
 
 	public @NonNull RootPartition postPartition() throws CompilerChainException {
 		for (@NonNull Partition partition : partitions) {
 			partition.analyzePartition();
 		}
+		for (@NonNull Partition partition : partitions) {
+			if (partition instanceof LoadingPartition) {
+				((LoadingPartition)partition).analyzeIntroductions();
+			}
+		}
+
 		partitionedTransformationAnalysis.computeTraceClassInheritance();
 		//		this.fallibilityAnalysis = computeFallibilityAnalysis();
 		//	Iterable<@NonNull Partition> leafPartitions = getPartialRegionAnalyses();

@@ -39,6 +39,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getOwningScheduledRegion <em>Owning Scheduled Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getConnectionRole <em>Connection Role</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getSourceEnds <em>Source Ends</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection()
@@ -134,10 +135,27 @@ public interface Connection extends Element, Symbolable, org.eclipse.ocl.pivot.u
 	 */
 	void setName(String value);
 
+	/**
+	 * Returns the value of the '<em><b>Source Ends</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The Rule represented by this RuleRegion.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Source Ends</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection_SourceEnds()
+	 * @model ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Connection!sourceEnds'"
+	 * @generated
+	 */
+	List<ConnectionEnd> getSourceEnds();
+
 	void destroy();
 
-	boolean addIndex(int index);
-	@NonNull List<@NonNull Integer> getIndexes();
+	boolean addPass(int pass);
+	int getLastPass();
+	@NonNull List<@NonNull Integer> getPasses();
 
 	boolean isMandatory();
 
@@ -145,4 +163,5 @@ public interface Connection extends Element, Symbolable, org.eclipse.ocl.pivot.u
 	 * Return true if this connection passes a value to a region head.
 	 */
 	boolean isPassed();
+
 } // Connection

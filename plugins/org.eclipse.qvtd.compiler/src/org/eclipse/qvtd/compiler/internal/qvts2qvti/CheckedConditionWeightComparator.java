@@ -38,10 +38,10 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 public class CheckedConditionWeightComparator implements CheckedConditionVisitor<@NonNull Integer>, Comparator<@NonNull CheckedCondition>
 {
-	protected final @NonNull BasicRegion2Mapping region2mapping;
+	protected final @NonNull BasicPartition2Mapping region2mapping;
 	private final @NonNull Map<@NonNull CheckedCondition, @NonNull Integer> condition2weight = new HashMap<>();
 
-	public CheckedConditionWeightComparator(@NonNull BasicRegion2Mapping region2mapping) {
+	public CheckedConditionWeightComparator(@NonNull BasicPartition2Mapping region2mapping) {
 		this.region2mapping = region2mapping;
 	}
 

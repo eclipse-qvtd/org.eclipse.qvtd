@@ -15,8 +15,6 @@
 package org.eclipse.qvtd.pivot.qvtschedule;
 
 import java.util.List;
-import java.util.Set;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
@@ -274,7 +272,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 */
 	void addOriginatingElement(@NonNull Element element);
 
-	void addOutgoingConnection(@NonNull NodeConnection connection);
+	//	void addOutgoingConnection(@NonNull NodeConnection connection);
 
 	/**
 	 * Return the element from which this node originated. May be null for a synthetic node.
@@ -297,7 +295,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 * Accumulate this node and all passed binding sources in the call-tree ancestry of this node.
 	 * On completion there is exactly one entry per region from each possible call path.
 	 */
-	void getAllAncestors(@NonNull Set<@NonNull Node> ancestors);
+	//	void getAllAncestors(@NonNull Set<@NonNull Node> ancestors);
 	@NonNull Iterable<@NonNull Edge> getArgumentEdges();
 	@NonNull Iterable<@NonNull NavigableEdge> getCastEdges();
 	@NonNull CompleteClass getCompleteClass();
@@ -331,7 +329,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	void setName(String value);
 
 	@Nullable NodeConnection getIncomingPassedConnection();
-	@Nullable NodeConnection getIncomingUsedConnection();
+	//	@Nullable NodeConnection getIncomingUsedConnection();
 	@NonNull String getLabel();
 	@Nullable NavigableEdge getNavigableEdge(@NonNull Property source2targetProperty);
 	@NonNull Iterable<@NonNull NavigableEdge> getNavigableEdges();
@@ -357,12 +355,12 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	/**
 	 * Get all sources that pass a value to this target.
 	 */
-	@NonNull Iterable<@NonNull Node> getPassedBindingSources();
+	//	@NonNull Iterable<@NonNull Node> getPassedBindingSources();
 
 	/**
 	 * Get all targets that are passed a value from this source.
 	 */
-	@NonNull Iterable<@NonNull Node> getPassedBindingTargets();
+	//	@NonNull Iterable<@NonNull Node> getPassedBindingTargets();
 	@Nullable Edge getPredicateEdge(@NonNull Property source2targetProperty);
 	@NonNull Iterable<@NonNull NavigableEdge> getPredicateEdges();
 	@NonNull Iterable<@NonNull NavigationEdge> getRealizedNavigationEdges();
@@ -378,7 +376,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 */
 	@NonNull Iterable<@NonNull Node> getRecursionTargets();
 	@NonNull Iterable<@NonNull ? extends Edge> getResultEdges();
-	@NonNull Iterable<@NonNull Node> getUsedBindingSources();
+	//	@NonNull Iterable<@NonNull Node> getUsedBindingSources();
 	@Nullable String getShape();
 	@Nullable String getStyle();
 	@NonNull Utility getUtility();
@@ -542,7 +540,7 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	 */
 	boolean isUnconditional();
 
-	void removeOutgoingConnection(@NonNull NodeConnection connection);
+	//	void removeOutgoingConnection(@NonNull NodeConnection connection);
 
 	/**
 	 * Redesignate a head node as not-a-head, typically following a multi-headed split.
