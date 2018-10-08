@@ -47,7 +47,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -584,8 +583,7 @@ public class ConnectionManager
 
 	/**
 	 * Create the Passed Node Connection between the trace node realized in an activator partition and predicated in other partitions.
-	 * Create Used Edge Connections between each head node in an activator partition and its re-use other partitions.
-	 * Create Used Edge Connections between success realizations in speculation/speculating partitions and predications on other partitions.
+	 * Create Used Edge Connections between each edge realized in the origial region and predicated in a aprtition.
 	 */
 	public void createPartitionConnections(@NonNull ScheduledRegion scheduledRegion, @NonNull Region region) {
 		RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
@@ -593,6 +591,9 @@ public class ConnectionManager
 		if (Iterables.size(partitions) <= 1) {
 			return;										// No trace connections if not actually partitioned
 		}
+		//
+		//	Every (the) trace node that is realized in the original region and is predicated in one of the partitions requires
+		//	a passed node connection.
 		//
 		Iterable <@NonNull Node> traceNodes = regionAnalysis.getTraceNodes();
 		for (@NonNull Node traceNode : traceNodes) {
@@ -620,36 +621,23 @@ public class ConnectionManager
 			}
 		}
 		//
-		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(region)) {
-			NavigableEdge headEdge = (NavigableEdge)regionAnalysis.getTraceEdge(headNode);
-			if (headEdge != null) {		// Null for dead head node
-				Property property = QVTscheduleUtil.getProperty(headEdge);
-				EdgeConnection connection = getEdgeConnection(scheduledRegion, Collections.singleton(headEdge), property);
-				addUsedTargetEdge(connection, headEdge, true);
-			}
-		}
+		//	Every edge that is realized in the original region and is predicated in one of the partitions requires
+		//	a used edge connection.
 		//
-		Iterable <@NonNull SuccessEdge> successEdges = regionAnalysis.getSuccessEdges();
-		for (@NonNull SuccessEdge successEdge : successEdges) {
-			Set<@NonNull NavigableEdge> sourceEdges = new HashSet<>();
-			for (@NonNull Partition partition : partitions) {
-				Role edgeRole = getRole(partition, successEdge);
-				if ((edgeRole != null) && edgeRole.isNew()) {
-					sourceEdges.add(successEdge);
-				}
-			}
-			if (!sourceEdges.isEmpty()) {
-				//
-				EdgeConnection connection = getEdgeConnection(scheduledRegion, sourceEdges, QVTscheduleUtil.getProperty(successEdge));
-				//
-				Set<@NonNull NavigableEdge> targetEdges = new HashSet<>();
-				for (@NonNull Partition partition : partitions) {
-					Role nodeRole = getRole(partition, successEdge);
-					if ((nodeRole != null) && nodeRole.isOld()) {
-						if (targetEdges.add(successEdge)) {
-							addUsedTargetEdge(connection, successEdge, true);
-						}
+		for (@NonNull NavigableEdge edge : region.getRealizedNavigationEdges()) {
+			if (!edge.isSecondary()) {
+				boolean isAwaited = false;
+				for (@NonNull Partition partition : regionAnalysis.getPartitions()) {
+					Role role = partition.getRole(edge);
+					if ((role != null) && role.isAwaited()) {
+						isAwaited = true;
+						break;
 					}
+				}
+				if (isAwaited) {
+					Property property = QVTscheduleUtil.getProperty(edge);
+					EdgeConnection connection = getEdgeConnection(scheduledRegion, Collections.singleton(edge), property);
+					addUsedTargetEdge(connection, edge, true);
 				}
 			}
 		}

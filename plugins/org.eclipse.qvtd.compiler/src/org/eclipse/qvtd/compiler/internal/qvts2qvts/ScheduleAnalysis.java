@@ -454,6 +454,7 @@ public class ScheduleAnalysis
 
 	private void propagateIndexes(@NonNull Connection connection) {
 		List<@NonNull Integer> connectionIndexes = connection.getPasses();
+		//	assert connectionIndexes.size() > 0;
 		if (connectionIndexes.size() > 0) {			// Empty for dead inputs
 			for (@NonNull Partition partition : getTargetPartitions(connection)) {
 				int invocationIndex = partition.getFirstPass();

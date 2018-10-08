@@ -35,6 +35,7 @@ import org.eclipse.ocl.pivot.internal.complete.StandardLibraryInternal;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.LoadingPartition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
@@ -243,11 +244,13 @@ public class LoadingPartition2Mapping extends AbstractScheduledRegion2Mapping
 			} */
 		List<Statement> ownedStatements = mapping.getOwnedStatements();
 		for (@NonNull Partition callablePartition : connectionManager.getCallableChildren(partition)) {
-			if (isInstall(callablePartition)) {
-				ownedStatements.add(createInstall(callablePartition));
-			}
-			else {
-				ownedStatements.add(createCall(callablePartition, null));
+			if (!CompilerUtil.isAbstract(callablePartition)) {
+				if (isInstall(callablePartition)) {
+					ownedStatements.add(createInstall(callablePartition));
+				}
+				else {
+					ownedStatements.add(createCall(callablePartition, null));
+				}
 			}
 		}
 	}

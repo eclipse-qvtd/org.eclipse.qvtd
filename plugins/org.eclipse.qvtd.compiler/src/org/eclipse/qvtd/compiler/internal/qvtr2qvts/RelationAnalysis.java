@@ -793,9 +793,9 @@ public class RelationAnalysis extends RuleAnalysis
 
 	@Override
 	public void gatherRuleRegions(@NonNull List<@NonNull RuleRegion> ruleRegions) {
-		if (!getRule().isIsAbstract()) {
-			super.gatherRuleRegions(ruleRegions);
-		}
+		//	if (!getRule().isIsAbstract()) {
+		super.gatherRuleRegions(ruleRegions);
+		//}
 		if (dispatch != null) {
 			dispatch.gatherRuleRegions(ruleRegions);
 		}

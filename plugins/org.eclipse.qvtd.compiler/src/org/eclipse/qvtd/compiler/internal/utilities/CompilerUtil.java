@@ -60,7 +60,10 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.VerdictRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Lists;
@@ -529,6 +532,23 @@ public class CompilerUtil extends QVTscheduleUtil
 		for (int i = 0; i < depth; i++) {
 			s.append("    ");
 		}
+	}
+
+	public static boolean isAbstract(@NonNull Partition partition) {
+		Region originalRegion = partition.getOriginalRegion();
+		if (originalRegion instanceof RuleRegion) {
+			if (originalRegion instanceof DispatchRegion) {
+				return false;
+			}
+			if (originalRegion instanceof VerdictRegion) {
+				return false;
+			}
+			return ((RuleRegion)originalRegion).getReferredRule().isIsAbstract();
+		}
+		if (originalRegion instanceof DispatchRegion) {
+			return false;
+		}
+		return false;
 	}
 
 	/**

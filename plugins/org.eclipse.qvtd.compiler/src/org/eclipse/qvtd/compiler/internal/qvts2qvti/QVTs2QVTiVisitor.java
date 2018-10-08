@@ -564,7 +564,9 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		createKeyFunctions(keyedClassDatum2propertyDatums);
 		for (@NonNull Partition partition : sortedPartitions) {
 			//			if (!region.isConnectionRegion()) {
-			createPartition2Mapping(partition);
+			if (!CompilerUtil.isAbstract(partition)) {
+				createPartition2Mapping(partition);
+			}
 			//			}
 		}
 		//		Region rootRegion = regionOrdering.getRootRegion();
@@ -598,10 +600,10 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			region2Mapping.checkAndEnforceRealizations(typedModel2property2realizedEdges);
 		} */
 		for (@NonNull Partition partition : sortedPartitions) {
-			//			if (!region.isConnectionRegion()) {
-			AbstractPartition2Mapping partition2Mapping = getPartition2Mapping(partition);
-			partition2Mapping.synthesizeCallStatements();
-			//			}
+			if (!CompilerUtil.isAbstract(partition)) {
+				AbstractPartition2Mapping partition2Mapping = getPartition2Mapping(partition);
+				partition2Mapping.synthesizeCallStatements();
+			}
 		}
 		// Mappings are in schedule index order.
 		//		ECollections.sort(qvtiTransformation.getRule(), NameUtil.NameableComparator.INSTANCE);
