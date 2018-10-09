@@ -804,8 +804,8 @@ public class ConnectionManager
 	} */
 
 	public @NonNull Iterable<@NonNull Connection> getIncomingConnections(@NonNull Partition partition) {		// FIXME cache
-		Region region = partition.getOriginalRegion();
-		/*	if (region != null) {
+		/*	Region region = partition.getOriginalRegion();
+			if (region != null) {
 			List<@NonNull Connection> connections = new ArrayList<>();
 			for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(region)) {
 				NodeConnection connection = headNode.getIncomingPassedConnection();
@@ -1387,7 +1387,9 @@ public class ConnectionManager
 			targetEnd2role = new HashMap<>();
 			connection2targetEnd2role.put(edgeConnection, targetEnd2role);
 		}
-		return (Map<@NonNull NavigableEdge, @NonNull ConnectionRole>)(Object)targetEnd2role;
+		@SuppressWarnings("unchecked")
+		Map<@NonNull NavigableEdge, @NonNull ConnectionRole> castTargetEnd2role = (Map<@NonNull NavigableEdge, @NonNull ConnectionRole>)(Object)targetEnd2role;
+		return castTargetEnd2role;
 	}
 
 	private @NonNull Map<@NonNull Node, @NonNull ConnectionRole> getTargetEnd2Role(@NonNull NodeConnection nodeConnection) {
@@ -1396,7 +1398,9 @@ public class ConnectionManager
 			targetEnd2role = new HashMap<>();
 			connection2targetEnd2role.put(nodeConnection, targetEnd2role);
 		}
-		return (Map<@NonNull Node, @NonNull ConnectionRole>)(Object)targetEnd2role;
+		@SuppressWarnings("unchecked")
+		Map<@NonNull Node, @NonNull ConnectionRole> castTargetEnd2role = (Map<@NonNull Node, @NonNull ConnectionRole>)(Object)targetEnd2role;
+		return castTargetEnd2role;
 	}
 
 	public @NonNull Iterable<@NonNull Node> getTargetNodes(@NonNull Connection connection) {

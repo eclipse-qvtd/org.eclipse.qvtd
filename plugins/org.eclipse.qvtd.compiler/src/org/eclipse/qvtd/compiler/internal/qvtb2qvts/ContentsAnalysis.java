@@ -32,8 +32,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
-import com.google.common.collect.Sets;
-
 /**
  * A ContentsAnalysis provides an analysis of many (all) regions to facilitate lookup of all producers consumers of particular types and properties.
  */
@@ -72,11 +70,7 @@ public class ContentsAnalysis<R extends Region>
 	}
 
 	private void addNewEdge(@NonNull R region, @NonNull NavigableEdge newEdge) {
-		PropertyDatum propertyDatum = basicGetPropertyDatum(newEdge);
-		if (propertyDatum == null) {
-			propertyDatum = basicGetPropertyDatum(newEdge);		// FIXME debugging
-		}
-		assert propertyDatum != null;
+		PropertyDatum propertyDatum = getPropertyDatum(newEdge);
 		addNewEdge(region,newEdge, propertyDatum);
 	}
 	private void addNewEdge(@NonNull R region, @NonNull NavigableEdge newEdge, @NonNull PropertyDatum propertyDatum) {
@@ -166,69 +160,13 @@ public class ContentsAnalysis<R extends Region>
 		}
 	}
 
-	private @Nullable PropertyDatum basicGetPropertyDatum(@NonNull NavigableEdge producedEdge) {
+	/*	private @Nullable PropertyDatum basicGetPropertyDatum(@NonNull NavigableEdge producedEdge) {
 		assert !producedEdge.isCast();				// Handled by caller
-		Property forwardProperty = producedEdge.getProperty();
+		Property forwardProperty = QVTscheduleUtil.getProperty(producedEdge);
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(producedEdge.getEdgeSource());
 		ClassDatum forwardClassDatum = scheduleManager.getElementalClassDatum(classDatum);
-		//		PropertyDatum forwardPropertyDatum = getScheduleModel().getPropertyDatum(forwardClassDatum, property);
-		//		if (forwardPropertyDatum.getClassDatum() == forwardClassDatum) {
-		//			return forwardPropertyDatum;
-		//		}
-		Iterable<@NonNull PropertyDatum> forwardPropertyDatums = scheduleManager.getAllPropertyDatums(forwardClassDatum);
-		for (PropertyDatum propertyDatum : forwardPropertyDatums) {
-			if ((propertyDatum.getReferredProperty() == forwardProperty) && (propertyDatum.getOwningClassDatum() == forwardClassDatum)) {
-				return propertyDatum;
-			}
-		}
-		PropertyDatum bestPropertyDatum = null;
-		for (PropertyDatum propertyDatum : forwardPropertyDatums) {
-			if (propertyDatum.getReferredProperty() == forwardProperty) {
-				if (bestPropertyDatum == null) {
-					bestPropertyDatum = propertyDatum;
-				}
-				else {
-					CompleteClass completeClass = propertyDatum.getOwningClassDatum().getCompleteClass();
-					assert completeClass != null;
-					Set<@NonNull CompleteClass> allSuperCompleteClasses = Sets.newHashSet(completeClass.getProperSuperCompleteClasses());
-					if (allSuperCompleteClasses.contains(bestPropertyDatum.getOwningClassDatum().getCompleteClass())) {
-						bestPropertyDatum = propertyDatum;
-					}
-				}
-			}
-		}
-		if (bestPropertyDatum != null) {
-			return bestPropertyDatum;
-		}
-		Property reverseProperty = forwardProperty.getOpposite();
-		classDatum = QVTscheduleUtil.getClassDatum(producedEdge.getEdgeTarget());
-		ClassDatum reverseClassDatum = scheduleManager.getElementalClassDatum(classDatum);
-		Iterable<@NonNull PropertyDatum> reversePropertyDatums = scheduleManager.getAllPropertyDatums(reverseClassDatum);
-		for (PropertyDatum propertyDatum : reversePropertyDatums) {
-			if ((propertyDatum.getReferredProperty() == reverseProperty) && (propertyDatum.getOwningClassDatum() == reverseClassDatum)) {
-				return propertyDatum;
-			}
-		}
-		for (PropertyDatum propertyDatum : reversePropertyDatums) {
-			if (propertyDatum.getReferredProperty() == reverseProperty) {
-				if (bestPropertyDatum == null) {
-					bestPropertyDatum = propertyDatum;
-				}
-				else {
-					CompleteClass completeClass = propertyDatum.getOwningClassDatum().getCompleteClass();
-					assert completeClass != null;
-					Set<@NonNull CompleteClass> allSuperCompleteClasses = Sets.newHashSet(completeClass.getProperSuperCompleteClasses());
-					if (allSuperCompleteClasses.contains(bestPropertyDatum.getOwningClassDatum().getCompleteClass())) {
-						bestPropertyDatum = propertyDatum;
-					}
-				}
-			}
-		}
-		if (bestPropertyDatum != null) {
-			return bestPropertyDatum;
-		}
-		return null;
-	}
+		return scheduleManager.getPropertyDatum(forwardClassDatum, forwardProperty);
+	} */
 
 	public @NonNull String dumpClass2newNode() {
 		StringBuilder s = new StringBuilder();
@@ -307,16 +245,16 @@ public class ContentsAnalysis<R extends Region>
 		if (property.eContainer() == null) {			// Ignore pseudo-properties such as «iterate»
 			return null;
 		}
-		PropertyDatum propertyDatum = basicGetPropertyDatum(edge);
-		if (propertyDatum == null) {
-			if (property == scheduleManager.getStandardLibraryHelper().getOclContainerProperty()) {
-				return getCompositeNewEdges(edge);
-			}
-			propertyDatum = basicGetPropertyDatum(edge);				// FIXME debugging
+		if (property == scheduleManager.getStandardLibraryHelper().getOclContainerProperty()) {
+			return getCompositeNewEdges(edge);
 		}
-		if (propertyDatum == null) {			// May be null for edges only used by operation dependencies
-			return null;
-		}
+		PropertyDatum propertyDatum = getPropertyDatum(edge);
+		//		if (propertyDatum == null) {
+		//			propertyDatum = basicGetPropertyDatum(edge);				// FIXME debugging
+		//		}
+		//		if (propertyDatum == null) {			// May be null for edges only used by operation dependencies
+		//			return null;
+		//		}
 		Iterable<@NonNull NavigableEdge> realizedEdges = propertyDatum2newEdges.get(propertyDatum);
 		if (realizedEdges == null) {
 			return null;
@@ -349,6 +287,14 @@ public class ContentsAnalysis<R extends Region>
 		return producingRegions != null ? producingRegions : Collections.emptyList();
 	}
 
+	private @NonNull PropertyDatum getPropertyDatum(@NonNull NavigableEdge producedEdge) {
+		assert !producedEdge.isCast();				// Handled by caller
+		Property forwardProperty = QVTscheduleUtil.getProperty(producedEdge);
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(producedEdge.getEdgeSource());
+		ClassDatum forwardClassDatum = scheduleManager.getElementalClassDatum(classDatum);
+		return scheduleManager.getPropertyDatum(forwardClassDatum, forwardProperty);
+	}
+
 	/**
 	 * Return true if this node is consumed solely by casts (or recursions) and so need not be considered as a true consumer.
 	 * The downstream usages will consume more accurately.
@@ -365,11 +311,7 @@ public class ContentsAnalysis<R extends Region>
 	}
 
 	private void removeNewEdge(@NonNull NavigableEdge newEdge) {
-		PropertyDatum propertyDatum = basicGetPropertyDatum(newEdge);
-		if (propertyDatum == null) {
-			propertyDatum = basicGetPropertyDatum(newEdge);		// FIXME debugging
-		}
-		assert propertyDatum != null;
+		PropertyDatum propertyDatum = getPropertyDatum(newEdge);
 		removeNewEdge(newEdge, propertyDatum);
 	}
 	private void removeNewEdge(@NonNull NavigableEdge newEdge, @NonNull PropertyDatum propertyDatum) {

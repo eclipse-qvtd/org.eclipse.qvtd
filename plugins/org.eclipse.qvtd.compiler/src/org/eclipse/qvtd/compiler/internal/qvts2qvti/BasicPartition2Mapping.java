@@ -1420,6 +1420,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					if (globalSuccessNode.isSuccess() && !globalSuccessEdgeRole.isPredicated()) {		// Skip predicated success
 						assert globalSuccessEdgeRole.isRealized();
 						successProperty = globalSuccessProperty;
+						//	assert !isHazardousWrite(globalSuccessEdge);
 					}
 				}
 			}
@@ -1435,6 +1436,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 						assert localSuccessEdgeRole.isRealized();
 						assert successProperty == null;
 						successProperty = localSuccessProperty;
+						//	assert !isHazardousWrite(localSuccessEdge);
 					}
 				}
 			}
@@ -1870,7 +1872,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	@Override
 	public void synthesizeLocalStatements() {
 		String name = partition.getName();
-		if (name.contains("mapHelper_Attribute_qvtr")) {
+		if (name.contains("mapNavigationOrAttributeCallExp_Helper")) {
 			getClass();
 		}
 		createHeadAndGuardNodeVariables();			// BLUE/CYAN guard/append nodes
