@@ -309,7 +309,7 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {

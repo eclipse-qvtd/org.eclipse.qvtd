@@ -160,7 +160,7 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {

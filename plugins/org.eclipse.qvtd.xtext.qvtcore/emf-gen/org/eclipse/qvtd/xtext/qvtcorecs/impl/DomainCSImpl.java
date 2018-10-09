@@ -206,7 +206,7 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {

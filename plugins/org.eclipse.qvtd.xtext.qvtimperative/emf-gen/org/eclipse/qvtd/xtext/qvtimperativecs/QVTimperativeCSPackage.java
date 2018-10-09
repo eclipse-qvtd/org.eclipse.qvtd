@@ -453,6 +453,15 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_PARAMETER_BINDING_CS__PRECEDENCE = EssentialOCLCSPackage.EXP_CS__PRECEDENCE;
 
 	/**
+	 * The feature id for the '<em><b>Precedence Order</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_PARAMETER_BINDING_CS__PRECEDENCE_ORDER = EssentialOCLCSPackage.EXP_CS__PRECEDENCE_ORDER;
+
+	/**
 	 * The feature id for the '<em><b>Owning Mapping Call</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -657,6 +666,15 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int APPEND_PARAMETER_BINDING_CS__PRECEDENCE = MAPPING_PARAMETER_BINDING_CS__PRECEDENCE;
+
+	/**
+	 * The feature id for the '<em><b>Precedence Order</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int APPEND_PARAMETER_BINDING_CS__PRECEDENCE_ORDER = MAPPING_PARAMETER_BINDING_CS__PRECEDENCE_ORDER;
 
 	/**
 	 * The feature id for the '<em><b>Owning Mapping Call</b></em>' container reference.
@@ -1380,6 +1398,15 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int GUARD_PARAMETER_BINDING_CS__PRECEDENCE = MAPPING_PARAMETER_BINDING_CS__PRECEDENCE;
 
 	/**
+	 * The feature id for the '<em><b>Precedence Order</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_PARAMETER_BINDING_CS__PRECEDENCE_ORDER = MAPPING_PARAMETER_BINDING_CS__PRECEDENCE_ORDER;
+
+	/**
 	 * The feature id for the '<em><b>Owning Mapping Call</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1649,6 +1676,15 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int LOOP_PARAMETER_BINDING_CS__PRECEDENCE = MAPPING_PARAMETER_BINDING_CS__PRECEDENCE;
+
+	/**
+	 * The feature id for the '<em><b>Precedence Order</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOP_PARAMETER_BINDING_CS__PRECEDENCE_ORDER = MAPPING_PARAMETER_BINDING_CS__PRECEDENCE_ORDER;
 
 	/**
 	 * The feature id for the '<em><b>Owning Mapping Call</b></em>' container reference.
@@ -2681,6 +2717,15 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int SIMPLE_PARAMETER_BINDING_CS__PRECEDENCE = MAPPING_PARAMETER_BINDING_CS__PRECEDENCE;
+
+	/**
+	 * The feature id for the '<em><b>Precedence Order</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_PARAMETER_BINDING_CS__PRECEDENCE_ORDER = MAPPING_PARAMETER_BINDING_CS__PRECEDENCE_ORDER;
 
 	/**
 	 * The feature id for the '<em><b>Owning Mapping Call</b></em>' container reference.

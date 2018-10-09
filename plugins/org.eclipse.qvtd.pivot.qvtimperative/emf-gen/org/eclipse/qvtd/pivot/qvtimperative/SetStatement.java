@@ -163,6 +163,9 @@ public interface SetStatement extends ObservableStatement {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * If isNotify there are ObserveableStatements that must be notified of any assignment to the targetProperty slot of the targetVariable.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Notify</em>' attribute.
 	 * @see #setIsNotify(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getSetStatement_IsNotify()

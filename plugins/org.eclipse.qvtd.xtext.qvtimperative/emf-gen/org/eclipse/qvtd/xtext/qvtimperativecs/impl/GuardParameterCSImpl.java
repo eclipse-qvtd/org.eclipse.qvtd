@@ -238,6 +238,16 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */

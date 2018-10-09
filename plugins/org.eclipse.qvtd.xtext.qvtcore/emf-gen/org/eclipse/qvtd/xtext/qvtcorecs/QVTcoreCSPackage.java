@@ -1058,6 +1058,15 @@ public interface QVTcoreCSPackage extends EPackage {
 	int PREDICATE_CS__PRECEDENCE = EssentialOCLCSPackage.EXP_CS__PRECEDENCE;
 
 	/**
+	 * The feature id for the '<em><b>Precedence Order</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_CS__PRECEDENCE_ORDER = EssentialOCLCSPackage.EXP_CS__PRECEDENCE_ORDER;
+
+	/**
 	 * The feature id for the '<em><b>Owned Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1193,6 +1202,15 @@ public interface QVTcoreCSPackage extends EPackage {
 	 */
 	@Deprecated
 	int PREDICATE_OR_ASSIGNMENT_CS__PRECEDENCE = EssentialOCLCSPackage.EXP_CS__PRECEDENCE;
+
+	/**
+	 * The feature id for the '<em><b>Precedence Order</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_OR_ASSIGNMENT_CS__PRECEDENCE_ORDER = EssentialOCLCSPackage.EXP_CS__PRECEDENCE_ORDER;
 
 	/**
 	 * The feature id for the '<em><b>Is Default</b></em>' attribute.

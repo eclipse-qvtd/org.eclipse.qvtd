@@ -207,7 +207,7 @@ public class LoopParameterBindingCSImpl extends MappingParameterBindingCSImpl im
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {

@@ -268,6 +268,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	int TEMPLATE_CS__PRECEDENCE = EssentialOCLCSPackage.EXP_CS__PRECEDENCE;
 
 	/**
+	 * The feature id for the '<em><b>Precedence Order</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_CS__PRECEDENCE_ORDER = EssentialOCLCSPackage.EXP_CS__PRECEDENCE_ORDER;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -420,6 +429,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int COLLECTION_TEMPLATE_CS__PRECEDENCE = TEMPLATE_CS__PRECEDENCE;
+
+	/**
+	 * The feature id for the '<em><b>Precedence Order</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_CS__PRECEDENCE_ORDER = TEMPLATE_CS__PRECEDENCE_ORDER;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1237,6 +1255,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int OBJECT_TEMPLATE_CS__PRECEDENCE = TEMPLATE_CS__PRECEDENCE;
+
+	/**
+	 * The feature id for the '<em><b>Precedence Order</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_CS__PRECEDENCE_ORDER = TEMPLATE_CS__PRECEDENCE_ORDER;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
