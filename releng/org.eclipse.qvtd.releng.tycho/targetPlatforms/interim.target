@@ -58,8 +58,8 @@
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.m2m.qvt.oml.runtime.feature.group" version="0.0.0"/>
     <unit id="org.eclipse.m2m.qvt.oml.samples" version="0.0.0"/>
-    <repository location="http://download.eclipse.org/mmt/qvto/updates/interim/3.8.0"/>
-    <repository location="http://download.eclipse.org/mmt/qvto/updates/milestones/3.8.0"/>
+    <repository location="http://download.eclipse.org/mmt/qvto/updates/interim"/>
+    <repository location="http://download.eclipse.org/mmt/qvto/updates/milestones"/>
   </location>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <!--unit id="org.eclipse.sirius.runtime.feature.group" version="0.0.0"/-->
