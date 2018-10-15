@@ -52,8 +52,8 @@
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.ocl.examples.tests.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.ocl.master.feature.group" version="0.0.0"/>
-<repository location="http://download.eclipse.org/modeling/mdt/ocl/updates/interim/6.5.0"/>
-<repository location="http://download.eclipse.org/modeling/mdt/ocl/updates/milestones/6.5.0"/>
+<repository location="http://download.eclipse.org/modeling/mdt/ocl/updates/interim"/>
+<repository location="http://download.eclipse.org/modeling/mdt/ocl/updates/milestones"/>
 </location>
   <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
     <unit id="org.eclipse.m2m.qvt.oml.runtime.feature.group" version="0.0.0"/>
