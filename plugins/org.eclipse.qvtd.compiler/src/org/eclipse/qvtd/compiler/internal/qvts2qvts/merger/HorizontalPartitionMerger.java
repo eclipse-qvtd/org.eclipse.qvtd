@@ -44,6 +44,7 @@ public class HorizontalPartitionMerger extends AbstractMerger
 	}
 
 	public @Nullable Map<@NonNull Partition, @Nullable Partition> merge() {
+		//	new CheckedConditionAnalysis(regionAnalysis, reachabilityForest);
 		//	this.checkedConditionAnalysis = new CheckedConditionAnalysis(regionAnalysis, reachabilityForest);
 		Map<@NonNull Partition, @Nullable Partition> old2new = new HashMap<>();
 		return null; //old2new;

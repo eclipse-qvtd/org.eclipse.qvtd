@@ -39,7 +39,6 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.NavigableEdgeCheckedC
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.NonNullInitializerCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.PredicateEdgeCheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.PredicateNavigationEdgeCheckedCondition;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -124,9 +123,7 @@ public class FallibilityAnalysis
 					}
 				}
 			}
-			ReachabilityForest checkedReachabilityForest = new ReachabilityForest(rootNodes, navigableEdges);
-			//	RegionAnalysis regionAnalysis = transformationAnalysis.getRegionAnalysis(region);
-			CheckedConditionAnalysis analysis = new CheckedConditionAnalysis(partition, scheduleManager, checkedReachabilityForest)
+			CheckedConditionAnalysis analysis = new CheckedConditionAnalysis(partition, scheduleManager)
 			{
 				@Override
 				protected @Nullable Set<@NonNull Property> computeCheckedProperties() {

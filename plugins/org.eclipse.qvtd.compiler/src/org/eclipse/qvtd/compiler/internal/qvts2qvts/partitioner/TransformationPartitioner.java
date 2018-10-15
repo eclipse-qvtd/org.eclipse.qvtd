@@ -251,7 +251,7 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 			Iterable<@NonNull Partition> regionPartitions;
 			RegionAnalysis regionAnalysis = mappingPartitioner.getRegionAnalysis();
 			if (Iterables.isEmpty(mappingPartitioner.getTraceNodes())) {
-				regionPartitions = Collections.singletonList(new NonPartition(regionAnalysis.getName(), mappingPartitioner.getPartitionedTransformationAnalysis(), regionAnalysis));
+				regionPartitions = Collections.singletonList(new NonPartition.NonPartitionFactory(mappingPartitioner).createPartition());
 			}
 			else {
 				regionPartitions = mappingPartitioner.partition();

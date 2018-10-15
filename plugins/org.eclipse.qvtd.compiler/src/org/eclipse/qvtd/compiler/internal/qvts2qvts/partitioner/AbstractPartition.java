@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
@@ -341,6 +342,11 @@ public abstract class AbstractPartition implements Partition
 			s.append(pass.toString());
 		}
 		return s != null ? s.toString() : null;
+	}
+
+	@Override
+	public @NonNull ReachabilityForest getReachabilityForest() {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

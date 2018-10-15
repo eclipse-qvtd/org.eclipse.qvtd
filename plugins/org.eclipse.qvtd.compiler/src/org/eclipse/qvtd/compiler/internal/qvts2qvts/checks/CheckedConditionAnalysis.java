@@ -326,10 +326,10 @@ public class CheckedConditionAnalysis
 	 */
 	private final @NonNull List<@NonNull Edge> oldUnconditionalEdges;
 
-	public CheckedConditionAnalysis(@NonNull Partition partition, @NonNull ScheduleManager scheduleManager, @NonNull ReachabilityForest reachabilityForest) {
+	public CheckedConditionAnalysis(@NonNull Partition partition, @NonNull ScheduleManager scheduleManager) {
 		this.partition = partition;
 		this.scheduleManager = scheduleManager;
-		this.reachabilityForest = reachabilityForest;
+		this.reachabilityForest = partition.getReachabilityForest();
 		this.allCheckedProperties = computeCheckedProperties();
 		this.oldUnconditionalEdges = computeOldUnconditionalEdges();
 	}

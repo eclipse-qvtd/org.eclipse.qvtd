@@ -480,22 +480,24 @@ public class QVTs2QVTs extends QVTimperativeHelper
 					if (!(region instanceof CyclicMappingRegion)) {
 						List<@NonNull Partition> partitions = region2partitions.get(region);
 						assert partitions != null;
-						RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
-						HorizontalPartitionMerger horizontalMerger = new HorizontalPartitionMerger(regionAnalysis, partitions);
-						Map<@NonNull Partition, @Nullable Partition> old2new = horizontalMerger.merge();
-						if (old2new != null) {
-							if (newConcurrency == null) {
-								newConcurrency = Sets.newHashSet(oldConcurrency);
+						if (partitions.size() > 1) {
+							RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
+							HorizontalPartitionMerger horizontalMerger = new HorizontalPartitionMerger(regionAnalysis, partitions);
+							Map<@NonNull Partition, @Nullable Partition> old2new = horizontalMerger.merge();
+							if (old2new != null) {
+								if (newConcurrency == null) {
+									newConcurrency = Sets.newHashSet(oldConcurrency);
+								}
+								for (@NonNull Partition oldPartition : old2new.keySet()) {
+									newConcurrency.remove(oldPartition);
+									Partition newPartition = old2new.get(oldPartition);
+									assert newPartition != null;
+									newConcurrency.add(newPartition);
+								}
 							}
-							for (@NonNull Partition oldPartition : old2new.keySet()) {
-								newConcurrency.remove(oldPartition);
-								Partition newPartition = old2new.get(oldPartition);
-								assert newPartition != null;
-								newConcurrency.add(newPartition);
+							if (newConcurrency != null) {
+								partitionSchedule.set(i, newConcurrency);
 							}
-						}
-						if (newConcurrency != null) {
-							partitionSchedule.set(i, newConcurrency);
 						}
 					}
 				}

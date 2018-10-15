@@ -39,8 +39,8 @@ public class SpeculatingPartition extends AbstractPartialPartition
 
 		@Override
 		public @NonNull SpeculatingPartition createPartition() {
-			ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(mappingPartitioner), getAvailableNavigableEdges(mappingPartitioner));
-			return new SpeculatingPartition(mappingPartitioner, reachabilityForest);
+			ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
+			return new SpeculatingPartition(computeName("speculating"), mappingPartitioner, reachabilityForest);
 		}
 	}
 
@@ -48,8 +48,8 @@ public class SpeculatingPartition extends AbstractPartialPartition
 	private final @NonNull Iterable<@NonNull Node> executionNodes;
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
 
-	protected SpeculatingPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest/*, boolean isInfallible*/) {
-		super(computeName(partitioner, "speculating"), partitioner, reachabilityForest);
+	protected SpeculatingPartition(@NonNull String name, @NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest/*, boolean isInfallible*/) {
+		super(name, partitioner, reachabilityForest);
 		//	this.traceNode = partitioner.getTraceNode();
 		this.executionNodes = partitioner.getExecutionNodes();
 		if (hasSynthesizedTrace) {

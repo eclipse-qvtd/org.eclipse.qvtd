@@ -36,18 +36,19 @@ public class AssignmentPartition extends AbstractPartialPartition
 
 		@Override
 		public @NonNull AssignmentPartition createPartition() {
-			ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(mappingPartitioner), getAvailableNavigableEdges(mappingPartitioner));
-			return new AssignmentPartition(mappingPartitioner, reachabilityForest, realizedEdge);
+			ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
+			String name = computeName("edge-" + QVTscheduleUtil.getName(realizedEdge));
+			return new AssignmentPartition(name, mappingPartitioner, reachabilityForest, realizedEdge);
 		}
 	}
 
 	//	private final @NonNull Node traceNode;
 
-	protected AssignmentPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, @NonNull Edge realizedEdge) {
-		super(computeName(partitioner, "edge-" + QVTscheduleUtil.getName(realizedEdge)), partitioner, reachabilityForest);
+	protected AssignmentPartition(@NonNull String name, @NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, @NonNull Edge realizedEdge) {
+		super(name, partitioner, reachabilityForest);
 		//	this.traceNode = partitioner.getTraceNode();
-		String name = originalRegion.getName();
-		if ("mapHelper_Operation_qvtr".equals(name)) {
+		String regionName = originalRegion.getName();
+		if ("mapHelper_Operation_qvtr".equals(regionName)) {
 			getClass();
 		}
 		//

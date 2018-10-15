@@ -32,13 +32,13 @@ public class ResidualPartition extends AbstractPartialPartition
 
 		@Override
 		public @NonNull ResidualPartition createPartition() {
-			ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(mappingPartitioner), getAvailableNavigableEdges(mappingPartitioner));
-			return new ResidualPartition(mappingPartitioner, reachabilityForest);
+			ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
+			return new ResidualPartition(computeName("residue"), mappingPartitioner, reachabilityForest);
 		}
 	}
 
-	protected ResidualPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
-		super(computeName(partitioner, "residue"), partitioner, reachabilityForest);
+	protected ResidualPartition(@NonNull String name, @NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
+		super(name, partitioner, reachabilityForest);
 		//		Iterable<@NonNull Node> predicatedMiddleNodes = partitioner.getPredicatedMiddleNodes();
 		//		assert Iterables.isEmpty(predicatedMiddleNodes);
 		//

@@ -1157,8 +1157,8 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		//	if (name.contains("list2list«edge-headElement»")) {
 		//		getClass();
 		//	}
-		this.reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		this.checkedConditionAnalysis = new CheckedConditionAnalysis(partition, scheduleManager, reachabilityForest);
+		this.reachabilityForest = partition.getReachabilityForest();
+		this.checkedConditionAnalysis = new CheckedConditionAnalysis(partition, scheduleManager);
 		this.resultNode2subexpression = computeSubexpressions();
 		//
 		//	Gather the subexpression contents.
@@ -1169,7 +1169,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		}
 	}
 
-	private @NonNull Iterable<@NonNull Node> getReachabilityRootNodes() {
+	/*	private @NonNull Iterable<@NonNull Node> getReachabilityRootNodes() {
 		//
 		//	The zero-cost nodes are the head nodes ...
 		//
@@ -1194,7 +1194,8 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			}
 		}
 		return zeroCostNodes;
-	}
+	} */
+
 	/**
 	 * Return the navigable edges that may be used by to locate nodes by this partition.
 	 * The default implementation returns all old primary navigable edges

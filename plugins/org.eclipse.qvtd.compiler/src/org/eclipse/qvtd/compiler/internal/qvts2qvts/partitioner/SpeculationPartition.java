@@ -51,15 +51,17 @@ public class SpeculationPartition extends AbstractPartialPartition
 
 		@Override
 		public @NonNull SpeculationPartition createPartition() {
-			ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(mappingPartitioner), getAvailableNavigableEdges(mappingPartitioner));
-			return new SpeculationPartition(mappingPartitioner, reachabilityForest, useActivators);
+			ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
+			return new SpeculationPartition(computeName("speculation"), mappingPartitioner, reachabilityForest, useActivators);
 		}
 
 		@Override
 		@NonNull
-		protected Iterable<@NonNull Node> getReachabilityRootNodes(@NonNull MappingPartitioner mappingPartitioner) {
+		protected Iterable<@NonNull Node> getReachabilityRootNodes() {
+			Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(mappingPartitioner.getRegion());
+			Iterable<@NonNull Node> traceNodes = mappingPartitioner.getTraceNodes();
 			List<@NonNull Node> rootNodes = new ArrayList<>();
-			for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(mappingPartitioner.getRegion())) {
+			for (@NonNull Node headNode : useActivators ? traceNodes : headNodes) {
 				if (!headNode.isDependency()) {
 					rootNodes.add(headNode);
 				}
@@ -77,8 +79,8 @@ public class SpeculationPartition extends AbstractPartialPartition
 	private final @Nullable Node dispatchNode;
 	private final boolean useActivators;
 
-	protected SpeculationPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, boolean useActivators) {
-		super(computeName(partitioner, "speculation"), partitioner, reachabilityForest);
+	protected SpeculationPartition(@NonNull String name, @NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, boolean useActivators) {
+		super(name, partitioner, reachabilityForest);
 		//	this.traceNode = partitioner.getTraceNode();
 		this.useActivators = useActivators;
 		this.originalHeadNodes = Sets.newHashSet(QVTscheduleUtil.getHeadNodes(originalRegion));

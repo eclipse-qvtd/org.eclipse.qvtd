@@ -1049,9 +1049,9 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 				graphName = graphName + suffix;
 			}
 			URI dotURI = URI.createURI(graphName + ".dot").resolve(baseURI);
-			if (dotURI.toString().contains("mElement_Telement2element")) {
-				getClass().toString();
-			}
+			//	if (dotURI.toString().contains("mElement_Telement2element")) {
+			//		getClass().toString();
+			//	}
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 				try {

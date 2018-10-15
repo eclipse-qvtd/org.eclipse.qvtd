@@ -39,10 +39,6 @@ import com.google.common.collect.Sets;
 
 public abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 {
-	protected static @NonNull String computeName(@NonNull MappingPartitioner partitioner, @NonNull String suffix){
-		return QVTscheduleUtil.getName(partitioner.getRegionAnalysis().getRegion()) + "«" + suffix + "»";
-	}
-
 	protected final @NonNull MappingPartitioner partitioner;
 
 	/**
@@ -372,6 +368,11 @@ public abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 	 */
 	protected @Nullable Iterable<@NonNull Node> getPreferredHeadNodes() {
 		return partitioner.getTraceNodes();
+	}
+
+	@Override
+	public @NonNull ReachabilityForest getReachabilityForest() {
+		return reachabilityForest;
 	}
 
 	/**

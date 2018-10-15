@@ -15,11 +15,13 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
-public class LoadingPartition extends NonPartition
+public class LoadingPartition extends AbstractAcyclicPartition
 {
 	public LoadingPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull RegionAnalysis regionAnalysis) {
 		super("«load»", partitionedTransformationAnalysis, regionAnalysis);
@@ -39,6 +41,31 @@ public class LoadingPartition extends NonPartition
 	@Override
 	protected void computeSymbolName(@NonNull SymbolNameBuilder s) {
 		s.appendString(QVTscheduleUtil.ROOT_MAPPING_NAME);
+	}
+
+	@Override
+	public @NonNull MappingRegion createMicroMappingRegion() {
+		return (MappingRegion)originalRegion;
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull Node> getHeadNodes() {
+		return QVTscheduleUtil.getHeadNodes(originalRegion);
+	}
+
+	@Override
+	public @NonNull MappingRegion getMicroMappingRegion() {
+		return (MappingRegion)originalRegion;
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull Edge> getPartialEdges() {
+		return QVTscheduleUtil.getOwnedEdges(originalRegion);
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull Node> getPartialNodes() {
+		return QVTscheduleUtil.getOwnedNodes(originalRegion);
 	}
 
 	@Override

@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -28,12 +29,16 @@ public abstract class AbstractPartitionFactory implements PartitionFactory
 		this.mappingPartitioner = mappingPartitioner;
 	}
 
+	protected @NonNull String computeName(@NonNull String suffix){
+		return QVTscheduleUtil.getName(mappingPartitioner.getRegionAnalysis().getRegion()) + "«" + suffix + "»";
+	}
+
 	/**
 	 * Return the navigable edges that may be used by to locate nodes by this partition.
 	 * The default implementation returns all old primary navigable edges
 	 * and all already realized navigable edges
 	 */
-	protected @NonNull Iterable<@NonNull NavigableEdge> getAvailableNavigableEdges(@NonNull MappingPartitioner mappingPartitioner) {
+	protected @NonNull Iterable<@NonNull NavigableEdge> getAvailableNavigableEdges() {
 		List<@NonNull NavigableEdge> navigableEdges = Lists.newArrayList(mappingPartitioner.getOldPrimaryNavigableEdges());
 		for (@NonNull Edge edge : mappingPartitioner.getAlreadyRealizedEdges()) {
 			if (edge instanceof NavigableEdge) {
@@ -43,9 +48,14 @@ public abstract class AbstractPartitionFactory implements PartitionFactory
 		return navigableEdges;
 	}
 
-	protected @NonNull Iterable<@NonNull Node> getReachabilityRootNodes(@NonNull MappingPartitioner mappingPartitioner) {
+	protected @NonNull Iterable<@NonNull Node> getReachabilityRootNodes() {
 		Iterable<@NonNull Node> traceNodes = mappingPartitioner.getTraceNodes();
 		Iterable<@NonNull Node> constantInputNodes = mappingPartitioner.getConstantInputNodes();
 		return Iterables.concat(traceNodes, constantInputNodes);
+	}
+
+	@Override
+	public @NonNull String toString() {
+		return getClass().getSimpleName() + " for " + mappingPartitioner;
 	}
 }

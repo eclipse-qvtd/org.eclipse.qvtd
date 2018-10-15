@@ -20,6 +20,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
+import com.google.common.collect.Iterables;
+
 /**
  * The ActivatorPartition creates the realized trace node ftom one (or more) head nodes
  * exploiting the uniqueness of the micromapping invocation to share duplicate attempts at realization.
@@ -37,13 +39,20 @@ public class ActivatorPartition extends AbstractPartialPartition
 
 		@Override
 		public @NonNull ActivatorPartition createPartition() {
-			ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(mappingPartitioner), getAvailableNavigableEdges(mappingPartitioner));
-			return new ActivatorPartition(mappingPartitioner, reachabilityForest);
+			ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
+			return new ActivatorPartition(computeName("activator"), mappingPartitioner, reachabilityForest);
+		}
+
+		@Override
+		protected @NonNull Iterable<@NonNull Node> getReachabilityRootNodes() {
+			Iterable<@NonNull Node> traceNodes = mappingPartitioner.getTraceNodes();
+			Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(mappingPartitioner.getRegion());
+			return Iterables.concat(traceNodes, headNodes);
 		}
 	}
 
-	protected ActivatorPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
-		super(computeName(partitioner, "activator"), partitioner, reachabilityForest);
+	protected ActivatorPartition(@NonNull String name, @NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
+		super(name, partitioner, reachabilityForest);
 		Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(originalRegion);
 		//
 		//	The realized middle (trace) nodes become speculation nodes.

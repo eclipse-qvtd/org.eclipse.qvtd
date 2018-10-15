@@ -37,8 +37,8 @@ public class SpeculatedPartition extends AbstractPartialPartition
 
 		@Override
 		public @NonNull SpeculatedPartition createPartition() {
-			ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(mappingPartitioner), getAvailableNavigableEdges(mappingPartitioner));
-			return new SpeculatedPartition(mappingPartitioner, reachabilityForest);
+			ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
+			return new SpeculatedPartition(computeName("speculated"), mappingPartitioner, reachabilityForest);
 		}
 	}
 
@@ -46,8 +46,8 @@ public class SpeculatedPartition extends AbstractPartialPartition
 	//	private final @Nullable Node predicatedDispatchNode;
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
 
-	public SpeculatedPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
-		super(computeName(partitioner, "speculated"), partitioner, reachabilityForest);
+	public SpeculatedPartition(@NonNull String name, @NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
+		super(name, partitioner, reachabilityForest);
 		this.traceNode = partitioner.getTraceNode();
 		//		assert traceNode.isPredicated();
 		//		this.predicatedDispatchNode = partitioner.basicGetPredicatedDispatchNode();
