@@ -592,9 +592,9 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : transformationAnalyses) {
 			transformationAnalysis.analyzeMappingRegions();
 		}
-		for (@NonNull MappingRegion mappingRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager2.getScheduleModel())) {
-			scheduleManager.writeDebugGraphs(mappingRegion, null);
-		}
+		//	for (@NonNull MappingRegion mappingRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager2.getScheduleModel())) {
+		//		scheduleManager.writeDebugGraphs(mappingRegion, null);
+		//	}
 		//
 		//	Create trace Model/Package/Class/Property instances
 		//

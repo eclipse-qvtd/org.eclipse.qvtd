@@ -698,10 +698,10 @@ public class MappingPartitioner implements Nameable
 					newPartitions.add(createAssignmentPartition(assignmentReachabilityForest, edge));
 				}
 			}
-			if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-				for (@NonNull Partition partition : newPartitions) {
-					scheduleManager.writeDebugGraphs(partition, null);
-				}
+		}
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+			for (@NonNull Partition partition : newPartitions) {
+				scheduleManager.writeDebugGraphs(partition, null);
 			}
 		}
 		if (newPartitions.size() > 1) {		// FIXME shouldn't this work anyway when no partitioning was needed?
