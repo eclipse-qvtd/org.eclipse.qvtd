@@ -15,17 +15,13 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Element;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
-import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -124,25 +120,6 @@ public class SpeculatingPartition extends AbstractPartialPartition
 	public @NonNull MappingRegion createMicroMappingRegion() {
 		int partitionNumber = originalRegion.getNextPartitionNumber();
 		return createMicroMappingRegion("«speculating»", "_p" + partitionNumber);
-	}
-
-	@Override
-	protected @NonNull PartitioningVisitor createPartitioningVisitor(@NonNull MicroMappingRegion partialRegion) {
-		return new PartitioningVisitor(new RegionHelper<>(scheduleManager, partialRegion), this)
-		{
-			@Override
-			public @Nullable Element visitSuccessNode(@NonNull SuccessNode node) {
-				for (@NonNull Node traceNode : executionNodes) {
-					if (node == partitioner.basicGetLocalSuccessNode(traceNode)) {
-						RegionHelper<@NonNull MicroMappingRegion> partialRegionHelper = new RegionHelper<>(scheduleManager, partialRegion);
-						Node partialNode = partialRegionHelper.createBooleanLiteralNode(true);
-						addNode(node, partialNode);
-						return partialNode;
-					}
-				}
-				return super.visitSuccessNode(node);
-			}
-		};
 	}
 
 	@Override

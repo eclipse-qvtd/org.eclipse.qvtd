@@ -12,15 +12,11 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Element;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -123,24 +119,6 @@ public class AssignmentPartition extends AbstractPartialPartition
 		String namePrefix = "«edge" + partitionNumber + "»";
 		String symbolSuffix = "_p" + partitionNumber;
 		return createMicroMappingRegion(namePrefix, symbolSuffix);
-	}
-
-	@Override
-	protected @NonNull PartitioningVisitor createPartitioningVisitor(@NonNull MicroMappingRegion partialRegion) {
-		return new PartitioningVisitor(new RegionHelper<>(scheduleManager, partialRegion), this)
-		{
-			@Override
-			public @Nullable Element visitSuccessNode(@NonNull SuccessNode node) {
-				//	if (node == partitioner.basicGetLocalSuccessNode(traceNode)) {
-				//		return null;			// localStatus is redundant when globalStatus in use
-				//	}
-				//	else {
-				Node partialNode = regionHelper.createBooleanLiteralNode(true);
-				addNode(node, partialNode);
-				return partialNode;
-				//	}
-			}
-		};
 	}
 
 	@Override

@@ -19,10 +19,8 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -43,34 +41,6 @@ public abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 {
 	protected static @NonNull String computeName(@NonNull MappingPartitioner partitioner, @NonNull String suffix){
 		return QVTscheduleUtil.getName(partitioner.getRegionAnalysis().getRegion()) + "«" + suffix + "»";
-	}
-
-	protected class PartitioningWithSuccessVisitor extends PartitioningVisitor
-	{
-		protected PartitioningWithSuccessVisitor(@NonNull RegionHelper<?> regionHelper, @NonNull AbstractPartialPartition partition) {
-			super(regionHelper, partition);
-		}
-
-		@Override
-		public @Nullable Element visitSuccessNode(@NonNull SuccessNode node) {
-			Role role = getRole(node);
-			assert role != null;
-			switch (role) {
-				case CONSTANT_SUCCESS_FALSE: {
-					Node partialNode = regionHelper.createBooleanLiteralNode(false);
-					addNode(node, partialNode);
-					return partialNode;
-				}
-				case CONSTANT_SUCCESS_TRUE: {
-					Node partialNode = regionHelper.createBooleanLiteralNode(true);
-					addNode(node, partialNode);
-					return partialNode;
-				}
-				default:
-					return super.visitSuccessNode(node);
-
-			}
-		}
 	}
 
 	protected final @NonNull MappingPartitioner partitioner;
@@ -322,7 +292,6 @@ public abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 		assert microMappingRegion  == null;
 		assert !(originalRegion instanceof MicroMappingRegion);
 		MicroMappingRegion partialRegion = createPartialRegion(namePrefix, symbolSuffix);
-		PartitioningVisitor partitioningVisitor = createPartitioningVisitor(partialRegion);
 		//	originalRegion.accept(partitioningVisitor);
 		MicroMappingRegion microMappingRegion = partialRegion;//partitioningVisitor.getRegion();
 		/*	Iterable<@NonNull Node> preferredHeadNodes = getPreferredHeadNodes();
@@ -353,10 +322,6 @@ public abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 		partialRegion.setSymbolNameSuffix(symbolSuffix);
 		partialRegion.setName(namePrefix + " " + originalRegion.getName());
 		return partialRegion;
-	}
-
-	protected @NonNull PartitioningVisitor createPartitioningVisitor(@NonNull MicroMappingRegion partialRegion) {
-		return new PartitioningVisitor(new RegionHelper<>(scheduleManager, partialRegion), this);
 	}
 
 	@Override

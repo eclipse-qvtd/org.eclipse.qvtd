@@ -16,11 +16,9 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
@@ -95,11 +93,6 @@ public class SpeculatedPartition extends AbstractPartialPartition
 	public @NonNull MappingRegion createMicroMappingRegion() {
 		int partitionNumber = originalRegion.getNextPartitionNumber();
 		return createMicroMappingRegion("«speculated»", "_p" + partitionNumber);
-	}
-
-	@Override
-	protected @NonNull PartitioningVisitor createPartitioningVisitor(@NonNull MicroMappingRegion partialRegion) {
-		return new PartitioningWithSuccessVisitor(new RegionHelper<>(scheduleManager, partialRegion), this);
 	}
 
 	@Override
