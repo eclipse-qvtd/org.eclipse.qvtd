@@ -22,9 +22,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 /**
  * The ResidualPartition copies everything adjuting to the preceding ActivatorPartotion.
  */
-class ResidualPartition extends AbstractPartialPartition
+public class ResidualPartition extends AbstractPartialPartition
 {
-	public ResidualPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
+	public static class ResidualPartitionFactory extends AbstractPartitionFactory
+	{
+		public ResidualPartitionFactory(@NonNull MappingPartitioner mappingPartitioner) {
+			super(mappingPartitioner);
+		}
+
+		@Override
+		public @NonNull ResidualPartition createPartition() {
+			ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(mappingPartitioner), getAvailableNavigableEdges(mappingPartitioner));
+			return new ResidualPartition(mappingPartitioner, reachabilityForest);
+		}
+	}
+
+	protected ResidualPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
 		super(computeName(partitioner, "residue"), partitioner, reachabilityForest);
 		//		Iterable<@NonNull Node> predicatedMiddleNodes = partitioner.getPredicatedMiddleNodes();
 		//		assert Iterables.isEmpty(predicatedMiddleNodes);

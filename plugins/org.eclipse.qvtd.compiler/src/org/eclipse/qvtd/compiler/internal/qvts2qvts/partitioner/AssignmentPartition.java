@@ -27,11 +27,27 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * The AssignmentPartition identifies the nodes and edges required by an assignment micro-mapping
  * which creates the predicates and realization of a property assignment.
  */
-class AssignmentPartition extends AbstractPartialPartition
+public class AssignmentPartition extends AbstractPartialPartition
 {
+	public static class AssignmentPartitionFactory extends AbstractPartitionFactory
+	{
+		protected final @NonNull Edge realizedEdge;
+
+		public AssignmentPartitionFactory(@NonNull MappingPartitioner mappingPartitioner, @NonNull Edge realizedEdge) {
+			super(mappingPartitioner);
+			this.realizedEdge = realizedEdge;
+		}
+
+		@Override
+		public @NonNull AssignmentPartition createPartition() {
+			ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(mappingPartitioner), getAvailableNavigableEdges(mappingPartitioner));
+			return new AssignmentPartition(mappingPartitioner, reachabilityForest, realizedEdge);
+		}
+	}
+
 	//	private final @NonNull Node traceNode;
 
-	public AssignmentPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, @NonNull Edge realizedEdge) {
+	protected AssignmentPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, @NonNull Edge realizedEdge) {
 		super(computeName(partitioner, "edge-" + QVTscheduleUtil.getName(realizedEdge)), partitioner, reachabilityForest);
 		//	this.traceNode = partitioner.getTraceNode();
 		String name = originalRegion.getName();

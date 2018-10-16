@@ -29,8 +29,20 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 /**
  * The SpeculatedPartition completes the speculation by realizing the corollaries of the speculation.
  */
-class SpeculatedPartition extends AbstractPartialPartition
+public class SpeculatedPartition extends AbstractPartialPartition
 {
+	public static class SpeculatedPartitionFactory extends AbstractPartitionFactory
+	{
+		public SpeculatedPartitionFactory(@NonNull MappingPartitioner mappingPartitioner) {
+			super(mappingPartitioner);
+		}
+
+		@Override
+		public @NonNull SpeculatedPartition createPartition() {
+			ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(mappingPartitioner), getAvailableNavigableEdges(mappingPartitioner));
+			return new SpeculatedPartition(mappingPartitioner, reachabilityForest);
+		}
+	}
 
 	private final @NonNull Node traceNode;
 	//	private final @Nullable Node predicatedDispatchNode;

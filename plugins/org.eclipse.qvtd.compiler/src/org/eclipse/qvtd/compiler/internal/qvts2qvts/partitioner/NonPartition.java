@@ -19,6 +19,20 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public class NonPartition extends AbstractAcyclicPartition
 {
+	public static class NonPartitionFactory extends AbstractPartitionFactory
+	{
+		public NonPartitionFactory(@NonNull MappingPartitioner mappingPartitioner) {
+			super(mappingPartitioner);
+		}
+
+		@Override
+		public @NonNull NonPartition createPartition() {
+			//	ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(mappingPartitioner), getAvailableNavigableEdges(mappingPartitioner));
+			RegionAnalysis regionAnalysis = mappingPartitioner.getRegionAnalysis();
+			return new NonPartition(regionAnalysis.getName(), mappingPartitioner.getPartitionedTransformationAnalysis(), regionAnalysis);
+		}
+	}
+
 	public NonPartition(@NonNull String name, @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull RegionAnalysis regionAnalysis) {
 		super(name, partitionedTransformationAnalysis, regionAnalysis);
 	}

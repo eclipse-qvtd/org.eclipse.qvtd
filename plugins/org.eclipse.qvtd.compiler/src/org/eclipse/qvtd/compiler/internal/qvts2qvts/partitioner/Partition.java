@@ -32,6 +32,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
 public interface Partition extends CompilerUtil.PartialRegion<@NonNull Partition, @NonNull TraceClassPartitionAnalysis, @NonNull TracePropertyPartitionAnalysis>, GraphNode, Graphable
 {
 	void addEnforcedEdge(@NonNull NavigableEdge usedEdge);
+	//	void addExplicitPredecessor(@NonNull Partition precedingPartition);
 	boolean addPass(int passNumber);
 	void analyzePartition();
 	void buildNavigationEdgesIndex(

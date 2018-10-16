@@ -30,7 +30,6 @@ import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.TracePropertyRegionAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
@@ -45,7 +44,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.VerdictRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
@@ -284,60 +282,12 @@ public class MappingPartitioner implements Nameable
 		return deadNodes;
 	}
 
-	private @NonNull ActivatorPartition createActivatorPartition() {
-		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		return new ActivatorPartition(this, reachabilityForest);
-	}
-
-	private @NonNull AssignmentPartition createAssignmentPartition(@NonNull ReachabilityForest reachabilityForest, @NonNull Edge outputEdge) {
-		return new AssignmentPartition(this, reachabilityForest, outputEdge);
-	}
-
-	private @NonNull NonPartition createNonPartition() {
-		return new NonPartition(regionAnalysis.getName(), getPartitionedTransformationAnalysis(), regionAnalysis);
-	}
-
-	private @NonNull ResidualPartition createResidualPartition() {
-		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		return new ResidualPartition(this, reachabilityForest);
-	}
-
-	private @NonNull SpeculatedPartition createSpeculatedPartition() {
-		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		return new SpeculatedPartition(this, reachabilityForest);
-	}
-
-	private @NonNull SpeculatingPartition createSpeculatingPartition(/*boolean isInfallible*/) {
-		ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-		return new SpeculatingPartition(this, reachabilityForest/*, isInfallible*/);
-	}
-
-	private @NonNull SpeculationPartition createSpeculationPartition(boolean useActivators) {
-		ReachabilityForest reachabilityForest = new ReachabilityForest(getSpeculationReachabilityRootNodes(), getAvailableNavigableEdges());
-		return new SpeculationPartition(this, reachabilityForest, useActivators);
-	}
-
 	//	public @NonNull Iterable<@NonNull Edge> getAlreadyPredicatedEdges() {
 	//		return alreadyPredicatedEdges;
 	//	}
 
 	public @NonNull Iterable<@NonNull Edge> getAlreadyRealizedEdges() {
 		return alreadyRealizedEdges.keySet();
-	}
-
-	/**
-	 * Return the navigable edges that may be used by to locate nodes by this partition.
-	 * The default implementation returns all old primary navigable edges
-	 * and all already realized navigable edges
-	 */
-	private @NonNull Iterable<@NonNull NavigableEdge> getAvailableNavigableEdges() {
-		List<@NonNull NavigableEdge> navigableEdges = Lists.newArrayList(getOldPrimaryNavigableEdges());
-		for (@NonNull Edge edge : getAlreadyRealizedEdges()) {
-			if (edge instanceof NavigableEdge) {
-				navigableEdges.add((NavigableEdge) edge);
-			}
-		}
-		return navigableEdges;
 	}
 
 	public @NonNull Iterable<@NonNull Node> getConstantInputNodes() {
@@ -430,12 +380,6 @@ public class MappingPartitioner implements Nameable
 		return regionAnalysis.getProducedTracePropertyAnalyses();
 	}
 
-	private @NonNull Iterable<@NonNull Node> getReachabilityRootNodes() {
-		Iterable<@NonNull Node> traceNodes = getTraceNodes();
-		Iterable<@NonNull Node> constantInputNodes = getConstantInputNodes();
-		return Iterables.concat(traceNodes, constantInputNodes);
-	}
-
 	public @NonNull Iterable<@NonNull NavigableEdge> getRealizedEdges() {
 		return regionAnalysis.getRealizedEdges();
 	}
@@ -489,19 +433,6 @@ public class MappingPartitioner implements Nameable
 
 	protected @NonNull ScheduleManager getScheduleManager() {
 		return scheduleManager;
-	}
-
-	private @NonNull Iterable<@NonNull Node> getSpeculationReachabilityRootNodes() {
-		List<@NonNull Node> rootNodes = new ArrayList<>();
-		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(region)) {
-			if (!headNode.isDependency()) {
-				rootNodes.add(headNode);
-			}
-		}
-		for (@NonNull Node constantInputNode : getConstantInputNodes()) {
-			rootNodes.add(constantInputNode);
-		}
-		return rootNodes;
 	}
 
 	public @NonNull Iterable<@NonNull SuccessEdge> getSuccessEdges() {
@@ -613,7 +544,7 @@ public class MappingPartitioner implements Nameable
 
 	public @NonNull Iterable<@NonNull Partition> partition() {
 		if ((region instanceof DispatchRegion) || (region instanceof VerdictRegion)) {
-			return Collections.singletonList(createNonPartition());
+			return Collections.singletonList(new NonPartition.NonPartitionFactory(this).createPartition());
 		}
 		String name = region.getName();
 		if ("associationToForeignKey".equals(name)) {
@@ -651,17 +582,17 @@ public class MappingPartitioner implements Nameable
 			//
 			//	Create an activator to make a QVTr top relation behave as a non-top relation.
 			//
-			newPartitions.add(createActivatorPartition());
+			newPartitions.add(new ActivatorPartition.ActivatorPartitionFactory(this).createPartition());
 		}
 		if (!needsSpeculation) {
 			//
 			//	If speculation is not needed just add the functionality as a single region.
 			//
 			if (newPartitions.isEmpty()) {		// i.e. a QVTr non top relation - re-use as is
-				newPartitions.add(createNonPartition());
+				newPartitions.add(new NonPartition.NonPartitionFactory(this).createPartition());
 			}
 			else {							// i.e. a QVTr top relation - create a residue to finish off the activator
-				newPartitions.add(createResidualPartition());
+				newPartitions.add(new ResidualPartition.ResidualPartitionFactory(this).createPartition());
 			}
 		}
 		else {								// cycles may need speculation and partitioning into isolated actions
@@ -671,9 +602,9 @@ public class MappingPartitioner implements Nameable
 			if (useActivators) {
 				regionAnalysis.createLocalSuccess();
 			}
-			SpeculationPartition speculationPartition = createSpeculationPartition(useActivators);
-			SpeculatingPartition speculatingPartition = createSpeculatingPartition();
-			SpeculatedPartition speculatedPartition = createSpeculatedPartition();
+			SpeculationPartition speculationPartition = new SpeculationPartition.SpeculationPartitionFactory(this, useActivators).createPartition();
+			SpeculatingPartition speculatingPartition = new SpeculatingPartition.SpeculatingPartitionFactory(this).createPartition();
+			SpeculatedPartition speculatedPartition = new SpeculatedPartition.SpeculatedPartitionFactory(this).createPartition();
 			newPartitions.add(speculationPartition);
 			newPartitions.add(speculatingPartition);
 			newPartitions.add(speculatedPartition);
@@ -681,13 +612,12 @@ public class MappingPartitioner implements Nameable
 				speculatingPartition.addExplicitPredecessor(speculationPartition);
 				speculatedPartition.addExplicitPredecessor(speculatingPartition);
 			}
-			ReachabilityForest assignmentReachabilityForest	= new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
 			//
 			//	Create an AssignmentRegion for each to-be-realized edge to an output, which may also realize most trace edges too.
 			//
 			for (@NonNull NavigableEdge outputEdge : getRealizedOutputEdges()) {
 				if (!hasRealizedEdge(outputEdge)) {
-					newPartitions.add(createAssignmentPartition(assignmentReachabilityForest, outputEdge));
+					newPartitions.add(new AssignmentPartition.AssignmentPartitionFactory(this, outputEdge).createPartition());
 				}
 			}
 			//
@@ -695,7 +625,7 @@ public class MappingPartitioner implements Nameable
 			//
 			for (@NonNull NavigableEdge edge : getRealizedEdges()) {
 				if (!hasRealizedEdge(edge)) {
-					newPartitions.add(createAssignmentPartition(assignmentReachabilityForest, edge));
+					newPartitions.add(new AssignmentPartition.AssignmentPartitionFactory(this, edge).createPartition());
 				}
 			}
 		}

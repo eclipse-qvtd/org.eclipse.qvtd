@@ -10,7 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -36,15 +38,46 @@ import com.google.common.collect.Sets;
 // FIXME if multiple heads are predicated, we cannot wait for all of them before speculating. Speculation
 //	may need to consider just loaded nodes.
 //
-class SpeculationPartition extends AbstractPartialPartition
+public class SpeculationPartition extends AbstractPartialPartition
 {
+	public static class SpeculationPartitionFactory extends AbstractPartitionFactory
+	{
+		protected final boolean useActivators;
+
+		public SpeculationPartitionFactory(@NonNull MappingPartitioner mappingPartitioner, boolean useActivators) {
+			super(mappingPartitioner);
+			this.useActivators = useActivators;
+		}
+
+		@Override
+		public @NonNull SpeculationPartition createPartition() {
+			ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(mappingPartitioner), getAvailableNavigableEdges(mappingPartitioner));
+			return new SpeculationPartition(mappingPartitioner, reachabilityForest, useActivators);
+		}
+
+		@Override
+		@NonNull
+		protected Iterable<@NonNull Node> getReachabilityRootNodes(@NonNull MappingPartitioner mappingPartitioner) {
+			List<@NonNull Node> rootNodes = new ArrayList<>();
+			for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(mappingPartitioner.getRegion())) {
+				if (!headNode.isDependency()) {
+					rootNodes.add(headNode);
+				}
+			}
+			for (@NonNull Node constantInputNode : mappingPartitioner.getConstantInputNodes()) {
+				rootNodes.add(constantInputNode);
+			}
+			return rootNodes;
+		}
+	}
+
 	private final @NonNull Set<@NonNull Node> originalHeadNodes;
 	//	private final @NonNull Node traceNode;
 	private final @NonNull Iterable<@NonNull Node> executionNodes;
 	private final @Nullable Node dispatchNode;
 	private final boolean useActivators;
 
-	public SpeculationPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, boolean useActivators) {
+	protected SpeculationPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, boolean useActivators) {
 		super(computeName(partitioner, "speculation"), partitioner, reachabilityForest);
 		//	this.traceNode = partitioner.getTraceNode();
 		this.useActivators = useActivators;
