@@ -29,6 +29,18 @@ public class NavigableEdgeCheckedCondition extends CheckedCondition
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof NavigableEdgeCheckedCondition)) {
+			return false;
+		}
+		NavigableEdgeCheckedCondition that = (NavigableEdgeCheckedCondition)obj;
+		return navigableEdge == that.navigableEdge;
+	}
+
+	@Override
 	public <R> R accept(@NonNull CheckedConditionVisitor<R> visitor) {
 		return visitor.visitNavigableEdgeCheckedCondition(this);
 	}
@@ -40,5 +52,10 @@ public class NavigableEdgeCheckedCondition extends CheckedCondition
 
 	public @NonNull Edge getNavigableEdge() {
 		return navigableEdge;
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode() + System.identityHashCode(navigableEdge);
 	}
 }

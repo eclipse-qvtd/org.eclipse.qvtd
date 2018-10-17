@@ -33,8 +33,25 @@ public class PredicateNavigationEdgeCheckedCondition extends CheckedCondition
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof PredicateNavigationEdgeCheckedCondition)) {
+			return false;
+		}
+		PredicateNavigationEdgeCheckedCondition that = (PredicateNavigationEdgeCheckedCondition)obj;
+		return navigationEdge == that.navigationEdge;
+	}
+
+	@Override
 	public @NonNull Iterable<@NonNull Edge> getEdges() {
 		return Collections.singletonList(navigationEdge);
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode() + System.identityHashCode(navigationEdge);
 	}
 
 	public @NonNull NavigationEdge getNavigationEdge() {

@@ -32,6 +32,18 @@ public class CastEdgeCheckedCondition extends CheckedCondition
 		return visitor.visitCastEdgeCheckedCondition(this);
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof CastEdgeCheckedCondition)) {
+			return false;
+		}
+		CastEdgeCheckedCondition that = (CastEdgeCheckedCondition)obj;
+		return castEdge == that.castEdge;
+	}
+
 	public @NonNull NavigableEdge getCastEdge() {
 		return castEdge;
 	}
@@ -39,5 +51,10 @@ public class CastEdgeCheckedCondition extends CheckedCondition
 	@Override
 	public @NonNull Iterable<@NonNull Edge> getEdges() {
 		return Collections.singletonList(castEdge);
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode() + System.identityHashCode(castEdge);
 	}
 }

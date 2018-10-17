@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.checks;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -41,6 +42,33 @@ public class MultipleEdgeCheckedCondition extends CheckedCondition
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof MultipleEdgeCheckedCondition)) {
+			return false;
+		}
+		MultipleEdgeCheckedCondition that = (MultipleEdgeCheckedCondition)obj;
+		if (node != that.node) {
+			return false;
+		}
+		int size = edges.size();
+		if (size != that.edges.size()) {
+			return false;
+		}
+		int[] these = new int[size];
+		int[] those = new int[size];
+		for (int i = 0; i < size; i++) {
+			these[i] = System.identityHashCode(edges.get(i));
+			those[i] = System.identityHashCode(that.edges.get(i));
+		}
+		Arrays.sort(these);
+		Arrays.sort(those);
+		return these.equals(those);
+	}
+
+	@Override
 	public @NonNull Iterable<@NonNull Edge> getEdges() {
 		return edges;
 	}
@@ -48,5 +76,14 @@ public class MultipleEdgeCheckedCondition extends CheckedCondition
 	@Override
 	public @NonNull Node getNode() {
 		return node;
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = getClass().hashCode() + System.identityHashCode(node);
+		for (@NonNull Edge edge : edges) {
+			hash += System.identityHashCode(edge);
+		}
+		return hash;
 	}
 }

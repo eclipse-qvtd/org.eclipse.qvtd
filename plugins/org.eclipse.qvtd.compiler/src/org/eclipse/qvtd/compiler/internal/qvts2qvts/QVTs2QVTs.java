@@ -539,6 +539,27 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		ScheduleAnalysis scheduleAnalysis = new ScheduleAnalysis(connectionManager, rootPartition);
 		scheduleAnalysis.schedule(rootPartition, partitionSchedule);
 
+		//
+		//	Index all predicated and realized edges by typed model and property.
+		//
+		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges = new HashMap<>();
+		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges = new HashMap<>();
+		for (@NonNull Iterable<@NonNull Partition> concurrency : partitionSchedule) {
+			for (@NonNull Partition partition : concurrency) {
+				QVTscheduleConstants.POLLED_PROPERTIES.println("building indexes for " + partition + " " + partition.getPassRangeText());
+				/*	Region region;
+				if (partition instanceof LoadingPartition) {
+					region = partition.getOriginalRegion();
+				}
+				else if (partition instanceof RootPartition) {
+					region = ((RootPartition)partition).getScheduledRegion().getOwnedLoadingRegion();
+				}
+				else {
+					region = partition.getMicroMappingRegion();
+				} */
+				partition.buildNavigationEdgesIndex(typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
+			}
+		}
 
 		//	Iterable<@NonNull Region> mappingRegions = QVTscheduleUtil.getActiveRegions(scheduledRegion);
 		//	assert Iterables.isEmpty(mappingRegions);
@@ -613,7 +634,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//		Iterable<Region> sortedCallableRegions = regionOrdering;//AbstractRegion.EarliestRegionComparator.sort(getCallableRegions());
 		//
 		//	Index all predicated and realized edges by typed model and property.
-		//
+		/*
 		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges = new HashMap<>();
 		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges = new HashMap<>();
 		for (@NonNull Iterable<@NonNull Partition> concurrency : partitionSchedule) {
@@ -631,7 +652,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 				}
 				partition.buildNavigationEdgesIndex(typedModel2property2predicatedEdges, typedModel2property2realizedEdges);
 			}
-		}
+		} */
 		//
 		//	Eliminate dependencies that are satisfied by the linear invocation indexes.
 		//

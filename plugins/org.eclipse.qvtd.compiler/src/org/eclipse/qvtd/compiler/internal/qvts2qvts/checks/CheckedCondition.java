@@ -65,6 +65,9 @@ public abstract class CheckedCondition implements Comparable<@NonNull CheckedCon
 		return thisString.compareTo(thatString);
 	}
 
+	@Override
+	public abstract boolean equals(Object obj);
+
 	/**
 	 * Return a list of edges that contribute to the check, null for none.
 	 */
@@ -82,6 +85,9 @@ public abstract class CheckedCondition implements Comparable<@NonNull CheckedCon
 	protected @NonNull CheckPriority getCheckPriority() {
 		return CheckPriority.LOWEST_PRIORITY;
 	}
+
+	@Override
+	public abstract int hashCode();
 
 	@Override
 	public @NonNull String toString() {

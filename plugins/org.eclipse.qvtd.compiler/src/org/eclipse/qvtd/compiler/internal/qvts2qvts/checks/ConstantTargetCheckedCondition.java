@@ -41,6 +41,18 @@ public class ConstantTargetCheckedCondition extends CheckedCondition
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof ConstantTargetCheckedCondition)) {
+			return false;
+		}
+		ConstantTargetCheckedCondition that = (ConstantTargetCheckedCondition)obj;
+		return (predicateEdge == that.predicateEdge) && (checkPriority == that.checkPriority);
+	}
+
+	@Override
 	protected @NonNull CheckPriority getCheckPriority() {
 		return checkPriority;
 	}
@@ -52,5 +64,10 @@ public class ConstantTargetCheckedCondition extends CheckedCondition
 
 	public @NonNull NavigableEdge getPredicateEdge() {
 		return predicateEdge;
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode() + checkPriority.ordinal() + System.identityHashCode(predicateEdge);
 	}
 }

@@ -33,11 +33,28 @@ public class NonNullInitializerCheckedCondition extends CheckedCondition
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof NonNullInitializerCheckedCondition)) {
+			return false;
+		}
+		NonNullInitializerCheckedCondition that = (NonNullInitializerCheckedCondition)obj;
+		return operationNode == that.operationNode;
+	}
+
+	@Override
 	public @Nullable Node getNode() {
 		return operationNode;
 	}
 
 	public @NonNull OperationNode getOperationNode() {
 		return operationNode;
+	}
+
+	@Override
+	public int hashCode() {
+		return getClass().hashCode() + System.identityHashCode(operationNode);
 	}
 }
