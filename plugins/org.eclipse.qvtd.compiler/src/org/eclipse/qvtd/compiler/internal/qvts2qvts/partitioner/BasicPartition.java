@@ -19,9 +19,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -37,15 +35,12 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Sets;
 
-public abstract class AbstractPartialPartition extends AbstractAcyclicPartition
+public class BasicPartition extends AbstractAcyclicPartition
 {
 	protected final @NonNull MappingPartitioner partitioner;
-
-	/**
-	 * The QVTr synthesis includes trace synthesis with activators and local/globalSuccess to interlink.
-	 * The QVTc synthesis relies on the externally provided trace.
-	 */
-	protected final boolean hasSynthesizedTrace;
+	protected final @NonNull Iterable<@NonNull Node> headNodes;
+	private @NonNull String namePrefix = "";
+	private @NonNull String symbolSuffix = "";
 
 	/**
 	 * The nodes of region that are required by the partition and the nodeRole that each node plays in the partition.
@@ -75,20 +70,15 @@ public abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 
 	private @Nullable MicroMappingRegion microMappingRegion = null;
 
-	//	protected AbstractPartialPartition(@NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
-	//		super(partitioner);
-	//		this.name = QVTscheduleUtil.getName(region);
-	//		this.reachabilityForest = reachabilityForest;
-	//	}
-
-	protected AbstractPartialPartition(@NonNull String name, @NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
+	protected BasicPartition(@NonNull String name, @NonNull MappingPartitioner partitioner,
+			@NonNull Iterable<@NonNull Node> headNodes, @NonNull ReachabilityForest reachabilityForest) {
 		super(name, partitioner.getPartitionedTransformationAnalysis(), partitioner.getRegionAnalysis());
 		this.partitioner = partitioner;
-		this.hasSynthesizedTrace = scheduleManager.useActivators();
+		this.headNodes = headNodes;
 		this.reachabilityForest = reachabilityForest;
 	}
 
-	private void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole) {
+	public void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole) {
 		assert edge.getOwningRegion() == originalRegion;
 		Role oldEdgeRole = QVTscheduleUtil.getEdgeRole(edge);
 		switch (oldEdgeRole)
@@ -111,9 +101,9 @@ public abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 				if (!partitioner.hasRealizedEdge(edge)) {
 					assert newEdgeRole == Role.REALIZED;
 				}
-				else if (this instanceof SpeculatingPartition) {
-					assert (newEdgeRole == Role.PREDICATED) || (newEdgeRole == Role.SPECULATED);		// FIXME rationalize
-				}
+				//				else if (this instanceof SpeculatingPartitionFactory) {
+				//					assert (newEdgeRole == Role.PREDICATED) || (newEdgeRole == Role.SPECULATED);		// FIXME rationalize
+				//				}
 				else {
 					assert newEdgeRole == Role.PREDICATED;
 				}
@@ -203,7 +193,7 @@ public abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 
 	/**
 	 * Return true of all required predecessor of targetNOde are available for use by this partition.
-	 */
+	 *
 	protected boolean allPredecessorsAreAvailable(@NonNull Node targetNode) {
 		List<@NonNull Node> requiredNodes = new ArrayList<>(nodes);
 		requiredNodes.add(targetNode);
@@ -231,9 +221,9 @@ public abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 					requiredNodes.add(precedingNode);
 				}
 			}
-		} */
+		} * /
 		return true;
-	}
+	} */
 
 	/**
 	 * Verify that all unconditional nodes in the new region are reachable from its heads.
@@ -284,7 +274,12 @@ public abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 		}
 	}
 
-	protected @NonNull MicroMappingRegion createMicroMappingRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
+	@Override
+	public final @NonNull MappingRegion createMicroMappingRegion() {
+		return createMicroMappingRegion(namePrefix, symbolSuffix);
+	}
+
+	protected final @NonNull MicroMappingRegion createMicroMappingRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
 		assert microMappingRegion  == null;
 		assert !(originalRegion instanceof MicroMappingRegion);
 		MicroMappingRegion partialRegion = createPartialRegion(namePrefix, symbolSuffix);
@@ -326,9 +321,8 @@ public abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 	}
 
 	@Override
-	public @NonNull Iterable<@NonNull Node> getHeadNodes() {
-		return partitioner.getTraceNodes();
-		//	return getTraceNodes();
+	public final @NonNull Iterable<@NonNull Node> getHeadNodes() {
+		return headNodes;
 	}
 
 	@Override
@@ -348,6 +342,10 @@ public abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 		return node2nodeRole.keySet();
 	}
 
+	public @NonNull List<@NonNull Node> getNodesList() {
+		return nodes;
+	}
+
 	@Override
 	public @NonNull Iterable<@NonNull Edge> getPartialEdges() {
 		return edge2edgeRole.keySet();
@@ -360,14 +358,6 @@ public abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 
 	protected @NonNull Iterable<@NonNull Node> getPredecessors(@NonNull Node targetNode) {
 		return reachabilityForest.getPredecessors(targetNode);
-	}
-
-	/**
-	 * Return a prioritized hint for the choice of head nodes.
-	 * The default implementation returns the trace nodes.
-	 */
-	protected @Nullable Iterable<@NonNull Node> getPreferredHeadNodes() {
-		return partitioner.getTraceNodes();
 	}
 
 	@Override
@@ -394,7 +384,7 @@ public abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 	/**
 	 * Return true if the original region edge contributes to the partition.
 	 */
-	private boolean hasEdge(@NonNull Edge edge) {
+	public boolean hasEdge(@NonNull Edge edge) {
 		return edge2edgeRole.containsKey(edge);
 	}
 
@@ -405,20 +395,9 @@ public abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 		return node2nodeRole.containsKey(node);
 	}
 
-	/**
-	 * Return true if edge is available for use by this partition.
-	 * The default implementation returns true for all old edges.
-	 */
-	protected boolean isAvailable(@NonNull Edge edge) {
-		return isOld(edge);
-	}
-
-	/**
-	 * Return true if node is available for use by this partition.
-	 * The default implementation returns true for all old nodes.
-	 */
-	protected boolean isAvailable(@NonNull Node node) {
-		return isOld(node);
+	protected void initMicroMappingRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
+		this.namePrefix = namePrefix;
+		this.symbolSuffix = symbolSuffix;
 	}
 
 	@Override
@@ -508,169 +487,5 @@ public abstract class AbstractPartialPartition extends AbstractAcyclicPartition
 	@Override
 	public @NonNull String toString() {
 		return getName();
-	}
-
-	protected void resolveDisambiguations() {
-		for (@NonNull Node traceNode : partitioner.getTraceNodes()) {
-			TraceClassRegionAnalysis traceClassAnalysis = partitioner.getTraceClassAnalysis(traceNode);
-			Iterable<@NonNull Property> discriminatingProperties = traceClassAnalysis.getDiscriminatingProperties();
-			if (discriminatingProperties != null) {
-				for (@NonNull Property property : discriminatingProperties) {
-					Node targetNode = traceNode.getNavigableTarget(property);
-					assert targetNode != null;
-					if (!hasNode(targetNode)) {
-						addNode(targetNode);
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * Determine the appropriate new edgeRole for the edge between nodes with new SourceNoeRole and targetNodeRole.
-	 * May return null for an edge that is not required.
-	 *
-	 * The default implementation accepts all edges just changing REALIZED to PREDICATED for already realized edges.
-	 */
-	protected abstract @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole);
-
-	/**
-	 * Resolve all the original region edges by adding to the partition provided the nodes at each end have already been added.
-	 * The addition is mediated by resolveEdgeRole that may adjust the edgeRole or suppress the addition.
-	 */
-	protected void resolveEdges() {
-		//
-		//	Add all the edges necessary to reach each node.
-		//
-		for (@NonNull Node node : node2nodeRole.keySet()) {
-			if (node.isOperation()) {
-				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
-					if ((edge.isExpression() || edge.isNavigation()) && !hasEdge(edge)) {
-						Role sourceNodeRole = node2nodeRole.get(edge.getEdgeSource());
-						if (sourceNodeRole != null) {
-							Role targetNodeRole = node2nodeRole.get(edge.getEdgeTarget());
-							if (targetNodeRole != null) {
-								Role edgeRole = resolveEdgeRole(sourceNodeRole, edge, targetNodeRole);
-								if (edgeRole != null) {
-									if (edgeRole == Role.REALIZED) {
-										if (partitioner.hasRealizedEdge(edge)) {
-											edgeRole = null;
-										}
-									}
-									if (edgeRole != null) {
-										addEdge(edge, edgeRole);
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-			else {
-				Edge edge = reachabilityForest.getReachingEdge(node);
-				if ((edge != null) && !hasEdge(edge)) {
-					assert /*!edge.isSecondary() &&*/ !hasEdge(edge);
-					Role sourceNodeRole = node2nodeRole.get(edge.getEdgeSource());
-					if (sourceNodeRole != null) {
-						Role targetNodeRole = node2nodeRole.get(edge.getEdgeTarget());
-						if (targetNodeRole != null) {
-							Role edgeRole = resolveEdgeRole(sourceNodeRole, edge, targetNodeRole);
-							if (edgeRole != null) {
-								if (edgeRole == Role.REALIZED) {
-									if (partitioner.hasRealizedEdge(edge)) {
-										edgeRole = null;
-									}
-								}
-								if (edgeRole != null) {
-									addEdge(edge, edgeRole);
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		//
-		//	Add all the other edges whose redundancy must be checked, unless they have already been checked.
-		//
-		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(originalRegion)) {
-			//	for (@NonNull Edge edge : getPartialEdges()) {
-			if (!edge.isSecondary() && !hasEdge(edge)) {
-				Role sourceNodeRole = node2nodeRole.get(edge.getEdgeSource());
-				if (sourceNodeRole != null) {
-					Role targetNodeRole = node2nodeRole.get(edge.getEdgeTarget());
-					if (targetNodeRole != null) {
-						Role edgeRole = resolveEdgeRole(sourceNodeRole, edge, targetNodeRole);
-						if (edgeRole != null) {
-							if (edgeRole == Role.REALIZED) {
-								if (partitioner.hasRealizedEdge(edge)) {
-									edgeRole = null;
-								}
-							}
-							else if (edge.isCast() || edge.isNavigation()) {
-								if (partitioner.hasRealizedEdge(edge)) {
-									edgeRole = null;			// A realized edge does not need to be checked
-								}
-								else if (partitioner.hasPredicatedEdge(edge)) {
-									edgeRole = null;			// An already predicated edge does not need to be checked
-								}
-								else if (partitioner.hasLoadedEdge(edge)) {
-									edgeRole = null;			// An already loaded edge does not need to be checked
-								}
-								else if (partitioner.hasConstantEdge(edge)) {
-									edgeRole = null;			// An already constant edge does not need to be checked
-								}
-								else {
-									// FIXME iff the redundant edge is provably to-1 redundant omit it
-								}
-							}
-							if (edgeRole != null) {
-								addEdge(edge, edgeRole);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	/**
-	 * Ensure that the predecessors of each node are included in the partition.
-	 */
-	protected void resolvePrecedingNodes() {
-		for (int i = 0; i < nodes.size(); i++) {
-			Node node = nodes.get(i);
-			assert node != null;
-			Edge traceEdge = partitioner.getTraceEdge(node);
-			Node sourceNode = traceEdge != null ? QVTscheduleUtil.getSourceNode(traceEdge) : null;
-			boolean hasSourceNode = (sourceNode != null) && hasNode(sourceNode);
-			if ((traceEdge == null) || !partitioner.hasRealizedEdge(traceEdge) || !hasSourceNode) {
-				boolean gotOne = false;
-				for (@NonNull Node precedingNode : getPredecessors(node)) {
-					gotOne = true;
-					if (!hasNode(precedingNode)) {
-						addNode(precedingNode, partitioner.hasRealizedNode(precedingNode) ? Role.PREDICATED : QVTscheduleUtil.getNodeRole(precedingNode));
-					}
-				}
-				if (!gotOne && (traceEdge != null) && isRealized(traceEdge)) {
-					gotOne = true;
-					if (!hasSourceNode) {
-						assert sourceNode != null;
-						addNode(sourceNode);
-					}
-				}
-				//	Integer cost = reachabilityForest.getCost(node);
-				//				assert cost != null;
-				/*				if (!gotOne && (cost != null) && (cost > 0)) {
-					getClass();
-					for (@NonNull Node precedingNode : getPredecessors(node)) {		// FIXME debugging
-						if (!hasNode(precedingNode)) {
-							addNode(precedingNode);
-						}
-					}
-					assert gotOne;
-				} */
-			}
-		}
 	}
 }

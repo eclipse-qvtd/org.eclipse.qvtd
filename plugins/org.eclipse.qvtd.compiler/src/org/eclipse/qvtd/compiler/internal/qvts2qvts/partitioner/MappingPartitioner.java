@@ -108,14 +108,14 @@ public class MappingPartitioner implements Nameable
 	/**
 	 * Dynamically growing map of edges that have been realized to the partition that realizes them.
 	 */
-	private final @NonNull Map<@NonNull Edge, @NonNull AbstractPartialPartition> alreadyRealizedEdges = new HashMap<>();
+	private final @NonNull Map<@NonNull Edge, @NonNull BasicPartition> alreadyRealizedEdges = new HashMap<>();
 
 	/**
 	 * Dynamically growing list of nodes that have been realized by a partition.
 	 */
 	private final @NonNull Set<@NonNull Node> alreadyRealizedNodes = new HashSet<>();
 
-	private final @NonNull Map<@NonNull Edge, @NonNull List<@NonNull AbstractPartialPartition>> debugEdge2partitions = new HashMap<>();
+	private final @NonNull Map<@NonNull Edge, @NonNull List<@NonNull BasicPartition>> debugEdge2partitions = new HashMap<>();
 
 	public MappingPartitioner(@NonNull TransformationPartitioner transformationPartitioner, @NonNull RegionAnalysis regionAnalysis) {
 		this.scheduleManager = transformationPartitioner.getScheduleManager();
@@ -126,7 +126,7 @@ public class MappingPartitioner implements Nameable
 		//
 	}
 
-	public void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole, @NonNull AbstractPartialPartition partition) {
+	public void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole, @NonNull BasicPartition partition) {
 		if (newEdgeRole == Role.CONSTANT) {
 			alreadyConstantEdges.add(edge);
 		}
@@ -142,7 +142,7 @@ public class MappingPartitioner implements Nameable
 		else if (newEdgeRole == Role.REALIZED) {
 			alreadyRealizedEdges.put(edge, partition);
 		}
-		List<@NonNull AbstractPartialPartition> partitions = debugEdge2partitions.get(edge);
+		List<@NonNull BasicPartition> partitions = debugEdge2partitions.get(edge);
 		if (partitions == null) {
 			partitions = new ArrayList<>();
 			debugEdge2partitions.put(edge, partitions);
@@ -223,7 +223,7 @@ public class MappingPartitioner implements Nameable
 			for (@NonNull Edge edge : extraEdgesSet) {
 				if (!edge.isSecondary()) {
 					@SuppressWarnings("unused")
-					List<@NonNull AbstractPartialPartition> extraPartitions = debugEdge2partitions.get(edge);
+					List<@NonNull BasicPartition> extraPartitions = debugEdge2partitions.get(edge);
 					addProblem(CompilerUtil.createRegionWarning(region, "Extra " + edge));
 				}
 			}
@@ -419,7 +419,7 @@ public class MappingPartitioner implements Nameable
 		return realizedWhereNodes;
 	}
 
-	public @Nullable AbstractPartialPartition getRealizingPartition(@NonNull Edge edge) {
+	public @Nullable BasicPartition getRealizingPartition(@NonNull Edge edge) {
 		return alreadyRealizedEdges.get(edge);
 	}
 
@@ -582,7 +582,7 @@ public class MappingPartitioner implements Nameable
 			//
 			//	Create an activator to make a QVTr top relation behave as a non-top relation.
 			//
-			newPartitions.add(new ActivatorPartition.ActivatorPartitionFactory(this).createPartition());
+			newPartitions.add(new ActivatorPartitionFactory(this).createPartition());
 		}
 		if (!needsSpeculation) {
 			//
@@ -592,7 +592,7 @@ public class MappingPartitioner implements Nameable
 				newPartitions.add(new NonPartition.NonPartitionFactory(this).createPartition());
 			}
 			else {							// i.e. a QVTr top relation - create a residue to finish off the activator
-				newPartitions.add(new ResidualPartition.ResidualPartitionFactory(this).createPartition());
+				newPartitions.add(new ResidualPartitionFactory(this).createPartition());
 			}
 		}
 		else {								// cycles may need speculation and partitioning into isolated actions
@@ -602,30 +602,31 @@ public class MappingPartitioner implements Nameable
 			if (useActivators) {
 				regionAnalysis.createLocalSuccess();
 			}
-			SpeculationPartition speculationPartition = new SpeculationPartition.SpeculationPartitionFactory(this, useActivators).createPartition();
-			SpeculatingPartition speculatingPartition = new SpeculatingPartition.SpeculatingPartitionFactory(this).createPartition();
-			SpeculatedPartition speculatedPartition = new SpeculatedPartition.SpeculatedPartitionFactory(this).createPartition();
-			newPartitions.add(speculationPartition);
-			newPartitions.add(speculatingPartition);
+			BasicPartition localPredicatePartition = new LocalPredicatePartitionFactory(this, useActivators).createPartition();
+			BasicPartition globalPredicatePartition = new GlobalPredicatePartitionFactory(this).createPartition();
+			BasicPartition speculatedPartition = new SpeculatedPartitionFactory(this).createPartition();
+			newPartitions.add(localPredicatePartition);
+			newPartitions.add(globalPredicatePartition);
 			newPartitions.add(speculatedPartition);
 			if (!useActivators) {
-				speculatingPartition.addExplicitPredecessor(speculationPartition);
-				speculatedPartition.addExplicitPredecessor(speculatingPartition);
+				globalPredicatePartition.addExplicitPredecessor(localPredicatePartition);
+				speculatedPartition.addExplicitPredecessor(globalPredicatePartition);
 			}
 			//
-			//	Create an AssignmentRegion for each to-be-realized edge to an output, which may also realize most trace edges too.
+			//	Create an AssignmentRegion for each still to-be-realized edge to an output which may well result
+			//  in two realized edges.
 			//
 			for (@NonNull NavigableEdge outputEdge : getRealizedOutputEdges()) {
 				if (!hasRealizedEdge(outputEdge)) {
-					newPartitions.add(new AssignmentPartition.AssignmentPartitionFactory(this, outputEdge).createPartition());
+					newPartitions.add(new AssignmentPartitionFactory(this, outputEdge).createPartition());
 				}
 			}
 			//
-			//	Create an AssignmentRegion for each still to-be-realized edge to an output.
+			//	Create an AssignmentRegion for each still to-be-realized edge.
 			//
 			for (@NonNull NavigableEdge edge : getRealizedEdges()) {
 				if (!hasRealizedEdge(edge)) {
-					newPartitions.add(new AssignmentPartition.AssignmentPartitionFactory(this, edge).createPartition());
+					newPartitions.add(new AssignmentPartitionFactory(this, edge).createPartition());
 				}
 			}
 		}

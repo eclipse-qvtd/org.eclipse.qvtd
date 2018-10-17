@@ -14,74 +14,69 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
- * The ResidualPartition copies everything adjuting to the preceding ActivatorPartotion.
+ * The Residual Partition copies everything adjuting to the preceding ActivatorPartotion.
  */
-public class ResidualPartition extends AbstractPartialPartition
+public class ResidualPartitionFactory extends AbstractPartitionFactory
 {
-	public static class ResidualPartitionFactory extends AbstractPartitionFactory
-	{
-		public ResidualPartitionFactory(@NonNull MappingPartitioner mappingPartitioner) {
-			super(mappingPartitioner);
-		}
-
-		@Override
-		public @NonNull ResidualPartition createPartition() {
-			ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-			return new ResidualPartition(computeName("residue"), mappingPartitioner, reachabilityForest);
-		}
+	public ResidualPartitionFactory(@NonNull MappingPartitioner mappingPartitioner) {
+		super(mappingPartitioner);
 	}
 
-	protected ResidualPartition(@NonNull String name, @NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest) {
-		super(name, partitioner, reachabilityForest);
+	@Override
+	public @NonNull BasicPartition createPartition() {
+		ReachabilityForest reachabilityForest = createReachabilityForest();
+		String name = computeName("residue");
+		Iterable<@NonNull Node> headNodes = mappingPartitioner.getTraceNodes();
+		BasicPartition partition = new BasicPartition(name, mappingPartitioner, headNodes, reachabilityForest);
+		int partitionNumber = region.getNextPartitionNumber();
+		partition.initMicroMappingRegion("«residue»", "_p" + partitionNumber);
+		initializePartition(partition);
+		return partition;
+	}
+
+	protected void initializePartition(@NonNull BasicPartition partition) {
 		//		Iterable<@NonNull Node> predicatedMiddleNodes = partitioner.getPredicatedMiddleNodes();
 		//		assert Iterables.isEmpty(predicatedMiddleNodes);
 		//
 		//	The trace nodes are always predicated.
 		//
-		for (@NonNull Node node : partitioner.getTraceNodes()) {
-			if (!hasNode(node)) {
-				addNode(node, Role.SPECULATED);
+		for (@NonNull Node node : mappingPartitioner.getTraceNodes()) {
+			if (!partition.hasNode(node)) {
+				partition.addNode(node, Role.SPECULATED);
 			}
-			Node localSuccessNode = partitioner.basicGetLocalSuccessNode(node);
+			Node localSuccessNode = mappingPartitioner.basicGetLocalSuccessNode(node);
 			if (localSuccessNode != null) {		// ?? localSuccess property is not mandatory
-				addNode(localSuccessNode, Role.PREDICATED);
+				partition.addNode(localSuccessNode, Role.PREDICATED);
 			}
 		}
 		//
 		//	All other nodes are as is
 		//
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(partitioner.getRegion())) {
-			if (!hasNode(node)) {
-				addNode(node);
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
+			if (!partition.hasNode(node)) {
+				partition.addNode(node);
 			}
 		}
 		//
 		//	Ensure that the predecessors of each node are included in the partition.
 		//
-		resolvePrecedingNodes();
+		resolvePrecedingNodes(partition);
 		//
 		//	Join up the edges.
 		//
-		resolveEdges();
-	}
-
-	@Override
-	public @NonNull MappingRegion createMicroMappingRegion() {
-		int partitionNumber = originalRegion.getNextPartitionNumber();
-		return createMicroMappingRegion("«residue»", "_p" + partitionNumber);
+		resolveEdges(partition);
 	}
 
 	@Override
 	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
 		Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
 		if (edgeRole == Role.REALIZED) {
-			if (partitioner.hasRealizedEdge(edge)) {
+			if (mappingPartitioner.hasRealizedEdge(edge)) {
 				edgeRole = Role.PREDICATED;
 			}
 		}

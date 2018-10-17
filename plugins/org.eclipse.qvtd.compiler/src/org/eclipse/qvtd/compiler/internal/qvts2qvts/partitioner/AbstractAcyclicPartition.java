@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.ToGraphPartitionVisitor;
@@ -45,7 +44,7 @@ public abstract class AbstractAcyclicPartition extends AbstractPartition2
 {
 	protected final @NonNull RegionAnalysis regionAnalysis;
 	protected final @NonNull Region originalRegion;
-	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
+	//	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
 
 	/**
 	 * The per-typed model predicated navigable edges for which an execution may be attempted before assignment.
@@ -65,7 +64,7 @@ public abstract class AbstractAcyclicPartition extends AbstractPartition2
 		super(name, partitionedTransformationAnalysis);
 		this.regionAnalysis = regionAnalysis;
 		this.originalRegion = regionAnalysis.getRegion();
-		this.transformationAnalysis = regionAnalysis.getTransformationAnalysis();
+		//		this.transformationAnalysis = regionAnalysis.getTransformationAnalysis();
 	}
 
 	private void addCheckedEdge(@NonNull NavigableEdge predicatedEdge) {

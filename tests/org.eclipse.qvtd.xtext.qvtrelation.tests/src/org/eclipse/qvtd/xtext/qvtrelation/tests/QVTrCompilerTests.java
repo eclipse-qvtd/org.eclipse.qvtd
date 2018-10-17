@@ -550,19 +550,19 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			ImperativeTransformation asTransformation = myQVT.compileTransformation("reverse");
 			//
-			/*			myQVT.createInterpretedExecutor(asTransformation);
+			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("forward", getModelsURI("forward2reverse/samples/EmptyList.xmi"));
 			myQVT.createModel("reverse", getTestURI("EmptyList_Interpreted.xmi"));
 			myQVT.executeTransformation();
 			myQVT.saveOutput("reverse", getTestURI("EmptyList_Interpreted.xmi"), getModelsURI("forward2reverse/samples/EmptyList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
-			 */			//
+			//
 			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("forward", getModelsURI("forward2reverse/samples/OneElementList.xmi"));
 			myQVT.createModel("reverse", getTestURI("OneElementList_Interpreted.xmi"));
 			myQVT.executeTransformation();
 			myQVT.saveOutput("reverse", getTestURI("OneElementList_Interpreted.xmi"), getModelsURI("forward2reverse/samples/OneElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
 			//
-			/*			myQVT.createInterpretedExecutor(asTransformation);
+			myQVT.createInterpretedExecutor(asTransformation);
 			myQVT.loadInput("forward", getModelsURI("forward2reverse/samples/TwoElementList.xmi"));
 			myQVT.createModel("reverse", getTestURI("TwoElementList_Interpreted.xmi"));
 			myQVT.executeTransformation();
@@ -573,7 +573,7 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT.createModel("reverse", getTestURI("ThreeElementList_Interpreted.xmi"));
 			myQVT.executeTransformation();
 			myQVT.saveOutput("reverse", getTestURI("ThreeElementList_Interpreted.xmi"), getModelsURI("forward2reverse/samples/ThreeElementList_expected.xmi"), Forward2ReverseNormalizer.INSTANCE);
-			 */		}
+		}
 		finally {
 			myQVT.dispose();
 		}

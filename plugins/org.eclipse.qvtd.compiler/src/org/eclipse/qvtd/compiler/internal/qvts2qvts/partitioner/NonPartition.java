@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -36,7 +37,7 @@ public class NonPartition extends AbstractAcyclicPartition
 
 		@Override
 		public @NonNull NonPartition createPartition() {
-			ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
+			ReachabilityForest reachabilityForest = createReachabilityForest();
 			RegionAnalysis regionAnalysis = mappingPartitioner.getRegionAnalysis();
 			return new NonPartition(regionAnalysis.getName(), mappingPartitioner.getPartitionedTransformationAnalysis(), regionAnalysis, reachabilityForest);
 		}
@@ -99,6 +100,11 @@ public class NonPartition extends AbstractAcyclicPartition
 				}
 			}
 			return zeroCostNodes;
+		}
+
+		@Override
+		protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
+			throw new UnsupportedOperationException();	// resolveEdges() should never have been invoked.
 		}
 	}
 

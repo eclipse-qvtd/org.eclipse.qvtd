@@ -19,7 +19,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
@@ -30,69 +29,82 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 
 /**
- * The SpeculationPartition identifies the nodes and edges required in a speculation micro-mapping
- * which creates the speculated trace with predicates solely on constant inputs, loaded inputs
- * and acyclic predicated nodes.
+ * The LocalPredicate Partition identifies the nodes and edges required to determine whether
+ * the local match is satisfied. This creates the speculated trace with predicates solely on
+ * constant inputs, loaded inputs and acyclic predicated nodes.
  */
 //
 // FIXME if multiple heads are predicated, we cannot wait for all of them before speculating. Speculation
 //	may need to consider just loaded nodes.
 //
-public class SpeculationPartition extends AbstractPartialPartition
+public class LocalPredicatePartitionFactory extends AbstractPartitionFactory
 {
-	public static class SpeculationPartitionFactory extends AbstractPartitionFactory
-	{
-		protected final boolean useActivators;
+	protected final boolean useActivators;
+	private final @NonNull Iterable<@NonNull Node> executionNodes;
+	private final @Nullable Node dispatchNode;
 
-		public SpeculationPartitionFactory(@NonNull MappingPartitioner mappingPartitioner, boolean useActivators) {
-			super(mappingPartitioner);
-			this.useActivators = useActivators;
-		}
+	public LocalPredicatePartitionFactory(@NonNull MappingPartitioner mappingPartitioner, boolean useActivators) {
+		super(mappingPartitioner);
+		this.executionNodes = mappingPartitioner.getExecutionNodes();
+		this.useActivators = useActivators;
+		this.dispatchNode = mappingPartitioner.basicGetDispatchNode();
+	}
 
-		@Override
-		public @NonNull SpeculationPartition createPartition() {
-			ReachabilityForest reachabilityForest = new ReachabilityForest(getReachabilityRootNodes(), getAvailableNavigableEdges());
-			return new SpeculationPartition(computeName("speculation"), mappingPartitioner, reachabilityForest, useActivators);
-		}
+	@Override
+	public @NonNull BasicPartition createPartition() {
+		ReachabilityForest reachabilityForest = createReachabilityForest();
+		String name = computeName("local");
+		Iterable<@NonNull Node> headNodes = useActivators ? executionNodes : QVTscheduleUtil.getHeadNodes(mappingPartitioner.getRegion());
+		BasicPartition partition = new BasicPartition(name, mappingPartitioner, headNodes, reachabilityForest);
+		int partitionNumber = region.getNextPartitionNumber();
+		partition.initMicroMappingRegion("«local»", "_p" + partitionNumber);
+		initializePartition(partition);
+		return partition;
+	}
 
-		@Override
-		@NonNull
-		protected Iterable<@NonNull Node> getReachabilityRootNodes() {
-			Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(mappingPartitioner.getRegion());
-			Iterable<@NonNull Node> traceNodes = mappingPartitioner.getTraceNodes();
-			List<@NonNull Node> rootNodes = new ArrayList<>();
-			for (@NonNull Node headNode : useActivators ? traceNodes : headNodes) {
-				if (!headNode.isDependency()) {
-					rootNodes.add(headNode);
+	/**
+	 * Add all old nodes, including node, that have no cyclic dependency and are reachable by to-one navigation from node.
+	 */
+	protected void gatherReachableOldAcyclicNodes(@NonNull BasicPartition partition, @NonNull Set<@NonNull Node> checkableOldNodes, @NonNull Node node) {
+		if (!partition.hasNode(node) && !checkableOldNodes.contains(node) && (node.isHead() || node.isOld() && !mappingPartitioner.isCyclic(node))) {
+			checkableOldNodes.add(node);
+			for (@NonNull NavigableEdge edge : node.getNavigableEdges()) {
+				if (edge.isOld()) {
+					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
+					gatherReachableOldAcyclicNodes(partition, checkableOldNodes, targetNode);
 				}
 			}
-			for (@NonNull Node constantInputNode : mappingPartitioner.getConstantInputNodes()) {
-				rootNodes.add(constantInputNode);
-			}
-			return rootNodes;
 		}
 	}
 
-	private final @NonNull Set<@NonNull Node> originalHeadNodes;
-	//	private final @NonNull Node traceNode;
-	private final @NonNull Iterable<@NonNull Node> executionNodes;
-	private final @Nullable Node dispatchNode;
-	private final boolean useActivators;
+	@Override
+	protected @NonNull Iterable<@NonNull Node> getReachabilityRootNodes() {
+		Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(mappingPartitioner.getRegion());
+		Iterable<@NonNull Node> traceNodes = mappingPartitioner.getTraceNodes();
+		List<@NonNull Node> rootNodes = new ArrayList<>();
+		for (@NonNull Node headNode : useActivators ? traceNodes : headNodes) {
+			if (!headNode.isDependency()) {
+				rootNodes.add(headNode);
+			}
+		}
+		for (@NonNull Node constantInputNode : mappingPartitioner.getConstantInputNodes()) {
+			rootNodes.add(constantInputNode);
+		}
+		return rootNodes;
+	}
 
-	protected SpeculationPartition(@NonNull String name, @NonNull MappingPartitioner partitioner, @NonNull ReachabilityForest reachabilityForest, boolean useActivators) {
-		super(name, partitioner, reachabilityForest);
-		//	this.traceNode = partitioner.getTraceNode();
-		this.useActivators = useActivators;
-		this.originalHeadNodes = Sets.newHashSet(QVTscheduleUtil.getHeadNodes(originalRegion));
-		this.executionNodes = partitioner.getExecutionNodes();
-		this.dispatchNode = partitioner.basicGetDispatchNode();
+	protected void initializePartition(@NonNull BasicPartition partition) {
+		//	this.traceNode = mappingPartitioner.getTraceNode();
+		//	boolean useActivators = useActivators;
+		Set<@NonNull Node> originalHeadNodes = Sets.newHashSet(QVTscheduleUtil.getHeadNodes(mappingPartitioner.getRegion()));
+		Node dispatchNode = mappingPartitioner.basicGetDispatchNode();
 
 		//
 		//	The realized middle (trace) nodes become speculation nodes.
 		//
 		if (!hasSynthesizedTrace) {
-			for (@NonNull Node traceNode : partitioner.getTraceNodes()) {
-				addNode(traceNode, Role.SPECULATION);
+			for (@NonNull Node traceNode : mappingPartitioner.getTraceNodes()) {
+				partition.addNode(traceNode, Role.SPECULATION);
 			}
 		}
 		//
@@ -101,7 +113,7 @@ public class SpeculationPartition extends AbstractPartialPartition
 		//	For a non-top relation the predicated middle (trace) nodes become speculated nodes.
 		//
 		for (@NonNull Node traceNode : executionNodes) {
-			addNode(traceNode, Role.PREDICATED); //, Role.SPECULATED);
+			partition.addNode(traceNode, Role.PREDICATED); //, Role.SPECULATED);
 		}
 		//
 		//	For an override relation the predicated middle dispatch nodes become speculated nodes.
@@ -109,7 +121,7 @@ public class SpeculationPartition extends AbstractPartialPartition
 		Node dispatchNode2 = dispatchNode;
 		if (dispatchNode2 != null) {
 			assert dispatchNode2.isPredicated();
-			addNode(dispatchNode2); //, Role.SPECULATED);
+			partition.addNode(dispatchNode2); //, Role.SPECULATED);
 		}
 		//
 		//	All old nodes reachable from heads that are not part of cycles are copied to the speculation guard.
@@ -117,19 +129,19 @@ public class SpeculationPartition extends AbstractPartialPartition
 		//
 		Set<@NonNull Node> checkableOldNodes = new HashSet<>();
 		for (@NonNull Node node : originalHeadNodes) {
-			gatherReachableOldAcyclicNodes(checkableOldNodes, node);
+			gatherReachableOldAcyclicNodes(partition, checkableOldNodes, node);
 		}
 		if (dispatchNode != null) {
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(dispatchNode)) {
 				if ((edge.isCast() || edge.isNavigation()) && edge.isOld()) {
 					Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
-					gatherReachableOldAcyclicNodes(checkableOldNodes, sourceNode);
+					gatherReachableOldAcyclicNodes(partition, checkableOldNodes, sourceNode);
 				}
 			}
 		}
 		for (@NonNull Node node : checkableOldNodes) {
 			if (hasSynthesizedTrace) {
-				boolean isCyclicCorollary = transformationAnalysis.isCorollary(node) && partitioner.isCyclic(node);  // waiting for a cyclic corollary could deadlock
+				boolean isCyclicCorollary = transformationAnalysis.isCorollary(node) && mappingPartitioner.isCyclic(node);  // waiting for a cyclic corollary could deadlock
 				//			boolean isPredicated = node.isPredicated();
 				//			boolean isMatched = node.isMatched();
 				//			boolean isUnconditional = node.isUnconditional();
@@ -137,18 +149,18 @@ public class SpeculationPartition extends AbstractPartialPartition
 				boolean isWeaklyMatched = utility == Utility.WEAKLY_MATCHED;
 				boolean isTraced = isTraced(node, executionNodes);
 				if (!isCyclicCorollary && (isTraced || isWeaklyMatched)) {
-					addNode(node);
+					partition.addNode(node);
 				}
 			}
 			else {
-				addNode(node);
+				partition.addNode(node);
 			}
 		}
 		//
 		//	The localSuccess nodes are realized to track speculating success.
 		//
 		if (hasSynthesizedTrace) {
-			resolveSuccessNodes();
+			resolveSuccessNodes(partition);
 		}
 		//
 		//	Add the outstanding predicates that can be checked by this partition.
@@ -157,64 +169,32 @@ public class SpeculationPartition extends AbstractPartialPartition
 		//
 		//	Ensure that the predecessors of each node are included in the partition.
 		//
-		resolvePrecedingNodes();
+		resolvePrecedingNodes(partition);
 		//
 		//	Ensure that re-used trace classes do not lead to ambiguous mappings.
 		//
-		resolveDisambiguations();
+		resolveDisambiguations(partition);
 		//
 		//	Join up the edges.
 		//
-		resolveEdges();
-	}
-
-	@Override
-	public @NonNull MappingRegion createMicroMappingRegion() {
-		int partitionNumber = originalRegion.getNextPartitionNumber();
-		return createMicroMappingRegion("«speculation»", "_p" + partitionNumber);
-	}
-
-	/**
-	 * Add all old nodes, including node, that have no cyclic dependency and are reachable by to-one navigation from node.
-	 */
-	protected void gatherReachableOldAcyclicNodes(@NonNull Set<@NonNull Node> checkableOldNodes, @NonNull Node node) {
-		if (!hasNode(node) && !checkableOldNodes.contains(node) && (node.isHead() || node.isOld() && !partitioner.isCyclic(node))) {
-			checkableOldNodes.add(node);
-			for (@NonNull NavigableEdge edge : node.getNavigableEdges()) {
-				if (edge.isOld()) {
-					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
-					gatherReachableOldAcyclicNodes(checkableOldNodes, targetNode);
-				}
-			}
-		}
-	}
-
-	@Override
-	public @NonNull Iterable<@NonNull Node> getHeadNodes() {
-		return useActivators ? executionNodes : originalHeadNodes;
-		//		return Iterables.isEmpty(executionNodes) ? originalHeadNodes : executionNodes;
-	}
-
-	@Override
-	protected @Nullable Iterable<@NonNull Node> getPreferredHeadNodes() {
-		return executionNodes;
+		resolveEdges(partition);
 	}
 
 	/**
 	 * Return true if edge is available for use by this partition.
 	 * The override implementation returns true for all constant and loaded edges.
 	 */
-	@Override
-	protected boolean isAvailable(@NonNull Edge edge) {
-		return edge.isConstant() || edge.isLoaded();
-	}
+	//	@Override
+	//	protected boolean isAvailable(@NonNull Edge edge) {
+	//		return edge.isConstant() || edge.isLoaded();
+	//	}
 
 	/**
 	 * Return true if node is available for use by this partition.
 	 * The override implementation returns true for all constant and loaded nodes.
 	 */
 	@Override
-	protected boolean isAvailable(@NonNull Node node) {
+	protected boolean isAvailable(@NonNull BasicPartition partition, @NonNull Node node) {
 		return node.isConstant() || node.isLoaded();
 	}
 
@@ -234,7 +214,7 @@ public class SpeculationPartition extends AbstractPartialPartition
 	protected @Nullable Role resolveEdgeRole(@NonNull Role sourceNodeRole, @NonNull Edge edge, @NonNull Role targetNodeRole) {
 		Role edgeRole = QVTscheduleUtil.getEdgeRole(edge);
 		if (edgeRole == Role.REALIZED) {
-			if (partitioner.hasRealizedEdge(edge)) {
+			if (mappingPartitioner.hasRealizedEdge(edge)) {
 				edgeRole = Role.PREDICATED;
 			}
 			else if (dispatchNode == edge.getSourceNode()) {
@@ -244,10 +224,10 @@ public class SpeculationPartition extends AbstractPartialPartition
 		return edgeRole;
 	}
 
-	protected void resolveSuccessNodes() {
+	protected void resolveSuccessNodes(@NonNull BasicPartition partition) {
 		for (@NonNull Node traceNode : executionNodes) {
-			Node localSuccessNode = partitioner.getLocalSuccessNode(traceNode);
-			addNode(localSuccessNode, Role.REALIZED);
+			Node localSuccessNode = mappingPartitioner.getLocalSuccessNode(traceNode);
+			partition.addNode(localSuccessNode, Role.REALIZED);
 		}
 	}
 }
