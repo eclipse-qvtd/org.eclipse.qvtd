@@ -32,7 +32,7 @@ public class ResidualPartitionFactory extends AbstractPartitionFactory
 		ReachabilityForest reachabilityForest = createReachabilityForest();
 		String name = computeName("residue");
 		Iterable<@NonNull Node> headNodes = mappingPartitioner.getTraceNodes();
-		BasicPartition partition = new BasicPartition(name, mappingPartitioner, headNodes, reachabilityForest);
+		BasicPartition partition = new BasicPartition(name, scheduleManager, region, headNodes, reachabilityForest);
 		int partitionNumber = region.getNextPartitionNumber();
 		partition.initMicroMappingRegion("«residue»", "_p" + partitionNumber);
 		initializePartition(partition);

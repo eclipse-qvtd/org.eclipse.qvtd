@@ -20,6 +20,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -29,6 +30,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Sets;
@@ -61,9 +63,9 @@ public class BasicPartition extends AbstractAcyclicPartition
 
 	private @Nullable MicroMappingRegion microMappingRegion = null;
 
-	protected BasicPartition(@NonNull String name, @NonNull MappingPartitioner partitioner,
+	protected BasicPartition(@NonNull String name, @NonNull ScheduleManager scheduleManager, @NonNull RuleRegion region,
 			@NonNull Iterable<@NonNull Node> headNodes, @NonNull ReachabilityForest reachabilityForest) {
-		super(name, partitioner.getPartitionedTransformationAnalysis(), partitioner.getRegion());
+		super(name, scheduleManager, region);
 		this.headNodes = headNodes;
 		this.reachabilityForest = reachabilityForest;
 	}

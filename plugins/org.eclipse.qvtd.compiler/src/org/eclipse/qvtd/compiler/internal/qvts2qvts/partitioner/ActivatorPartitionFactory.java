@@ -52,7 +52,7 @@ public class ActivatorPartitionFactory extends AbstractPartitionFactory
 		ReachabilityForest reachabilityForest = createReachabilityForest();
 		String name = computeName("activator");
 		Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(region);
-		BasicPartition partition = new BasicPartition(name, mappingPartitioner, headNodes, reachabilityForest);
+		BasicPartition partition = new BasicPartition(name, mappingPartitioner.getScheduleManager(), region, headNodes, reachabilityForest);
 		int partitionNumber = region.getNextPartitionNumber();
 		partition.initMicroMappingRegion("«activator»", "_p" + partitionNumber);
 		initializePartition(partition);

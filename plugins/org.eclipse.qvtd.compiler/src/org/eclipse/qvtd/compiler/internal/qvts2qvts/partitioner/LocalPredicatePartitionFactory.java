@@ -55,7 +55,7 @@ public class LocalPredicatePartitionFactory extends AbstractPartitionFactory
 		ReachabilityForest reachabilityForest = createReachabilityForest();
 		String name = computeName("local");
 		Iterable<@NonNull Node> headNodes = useActivators ? executionNodes : QVTscheduleUtil.getHeadNodes(mappingPartitioner.getRegion());
-		BasicPartition partition = new BasicPartition(name, mappingPartitioner, headNodes, reachabilityForest);
+		BasicPartition partition = new BasicPartition(name, scheduleManager, region, headNodes, reachabilityForest);
 		int partitionNumber = region.getNextPartitionNumber();
 		partition.initMicroMappingRegion("«local»", "_p" + partitionNumber);
 		initializePartition(partition);

@@ -19,13 +19,14 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -35,8 +36,9 @@ import com.google.common.collect.Lists;
 public abstract class AbstractPartitionFactory implements PartitionFactory
 {
 	protected final @NonNull MappingPartitioner mappingPartitioner;
+	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
-	protected final @NonNull MappingRegion region;
+	protected final @NonNull RuleRegion region;
 
 	/**
 	 * The QVTr synthesis includes trace synthesis with activators and local/globalSuccess to interlink.
@@ -52,9 +54,10 @@ public abstract class AbstractPartitionFactory implements PartitionFactory
 
 	protected AbstractPartitionFactory(@NonNull MappingPartitioner mappingPartitioner) {
 		this.mappingPartitioner = mappingPartitioner;
+		this.scheduleManager = mappingPartitioner.getScheduleManager();
 		this.transformationAnalysis = mappingPartitioner.getRegionAnalysis().getTransformationAnalysis();
-		this.region = mappingPartitioner.getRegion();
-		this.hasSynthesizedTrace = mappingPartitioner.getScheduleManager().useActivators();
+		this.region = (RuleRegion) mappingPartitioner.getRegion();
+		this.hasSynthesizedTrace = scheduleManager.useActivators();
 	}
 
 	private void addEdge(@NonNull BasicPartition partition, @NonNull Edge edge, @NonNull Role newEdgeRole) {

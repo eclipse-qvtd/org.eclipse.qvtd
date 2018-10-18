@@ -68,7 +68,7 @@ public class MappingPartitioner implements Nameable
 	/**
 	 * The overall transformation partitioner providing global analysis results.
 	 */
-	protected final @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis;
+	//	protected final @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis;
 
 	/**
 	 * The overall transformation analysis results.
@@ -119,7 +119,7 @@ public class MappingPartitioner implements Nameable
 
 	public MappingPartitioner(@NonNull TransformationPartitioner transformationPartitioner, @NonNull RegionAnalysis regionAnalysis) {
 		this.scheduleManager = transformationPartitioner.getScheduleManager();
-		this.partitionedTransformationAnalysis = transformationPartitioner.getPartitionedTransformationAnalysis();
+		//		this.partitionedTransformationAnalysis = transformationPartitioner.getPartitionedTransformationAnalysis();
 		this.transformationAnalysis = transformationPartitioner.getTransformationAnalysis();
 		this.regionAnalysis = regionAnalysis;
 		this.region = (MappingRegion) regionAnalysis.getRegion();
@@ -335,9 +335,9 @@ public class MappingPartitioner implements Nameable
 		return regionAnalysis.getOldPrimaryNavigableEdges();
 	}
 
-	public @NonNull PartitionedTransformationAnalysis getPartitionedTransformationAnalysis() {
-		return partitionedTransformationAnalysis;
-	}
+	//	public @NonNull PartitionedTransformationAnalysis getPartitionedTransformationAnalysis() {
+	//		return partitionedTransformationAnalysis;
+	//	}
 
 	public @NonNull Iterable<@NonNull Edge> getPredicatedEdges() {
 		return regionAnalysis.getPredicatedEdges();

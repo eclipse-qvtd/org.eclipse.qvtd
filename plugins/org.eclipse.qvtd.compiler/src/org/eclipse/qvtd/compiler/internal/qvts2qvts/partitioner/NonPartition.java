@@ -16,6 +16,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -38,7 +39,7 @@ public class NonPartition extends AbstractAcyclicPartition
 		public @NonNull NonPartition createPartition() {
 			ReachabilityForest reachabilityForest = createReachabilityForest();
 			MappingRegion region = mappingPartitioner.getRegion();
-			return new NonPartition(QVTscheduleUtil.getName(region), mappingPartitioner.getPartitionedTransformationAnalysis(), region, reachabilityForest);
+			return new NonPartition(QVTscheduleUtil.getName(region), mappingPartitioner.getScheduleManager(), region, reachabilityForest);
 		}
 
 		/**
@@ -112,8 +113,8 @@ public class NonPartition extends AbstractAcyclicPartition
 	 */
 	private final @NonNull ReachabilityForest reachabilityForest;
 
-	public NonPartition(@NonNull String name, @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull MappingRegion region, @NonNull ReachabilityForest reachabilityForest) {
-		super(name, partitionedTransformationAnalysis, region);
+	public NonPartition(@NonNull String name, @NonNull ScheduleManager scheduleManager, @NonNull MappingRegion region, @NonNull ReachabilityForest reachabilityForest) {
+		super(name, scheduleManager, region);
 		this.reachabilityForest = reachabilityForest;
 	}
 

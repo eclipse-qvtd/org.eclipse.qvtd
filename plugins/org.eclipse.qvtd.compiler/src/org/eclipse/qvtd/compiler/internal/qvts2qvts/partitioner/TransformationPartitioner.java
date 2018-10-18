@@ -63,7 +63,6 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 	protected final @NonNull ProblemHandler problemHandler;
 	protected final @NonNull Iterable<@NonNull ? extends Region> activeRegions;
 	private final @NonNull List<@NonNull Partition> partitions = new ArrayList<>();
-	private final @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis;
 
 	/**
 	 * The partitioner for each region.
@@ -94,7 +93,6 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 	public TransformationPartitioner(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) {
 		super(transformationAnalysis.getScheduleManager().getEnvironmentFactory());
 		this.scheduleManager = transformationAnalysis.getScheduleManager();
-		this.partitionedTransformationAnalysis = new PartitionedTransformationAnalysis(this);
 		this.transformationAnalysis = transformationAnalysis;
 		this.problemHandler = problemHandler;
 		this.activeRegions = activeRegions;
@@ -140,9 +138,9 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 	//		return partitions;
 	//	}
 
-	public @NonNull PartitionedTransformationAnalysis getPartitionedTransformationAnalysis() {
-		return partitionedTransformationAnalysis;
-	}
+	//	public @NonNull PartitionedTransformationAnalysis getPartitionedTransformationAnalysis() {
+	//		return partitionedTransformationAnalysis;
+	//	}
 
 	public @NonNull ScheduleManager getScheduleManager() {
 		return scheduleManager;
@@ -227,7 +225,7 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 				mappingPartitioners.add(mappingPartitioner);
 			}
 			else if (region instanceof LoadingRegion) {
-				Partition loadingPartition = new LoadingPartition(partitionedTransformationAnalysis, (LoadingRegion) region);
+				Partition loadingPartition = new LoadingPartition(scheduleManager, (LoadingRegion) region);
 				partitions.add(loadingPartition);
 				//	scheduleManager.wipAddPartition(loadingPartition, region);
 				regionAnalysis.setPartitions(Collections.singletonList(loadingPartition));
@@ -261,17 +259,17 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 		}
 		Collections.sort(partitions, NameUtil.NAMEABLE_COMPARATOR);
 		RootPartition rootPartition = postPartition();
-		//	scheduleManager.wipAddPartition(rootPartition, transformationAnalysis.getScheduledRegion());
 		return rootPartition;
 	}
 
 	public @NonNull RootPartition postPartition() throws CompilerChainException {
+		PartitionedTransformationAnalysis partitionedTransformationAnalysis = new PartitionedTransformationAnalysis(this);
 		for (@NonNull Partition partition : partitions) {
-			partition.analyzePartition();
+			partition.analyzePartition(partitionedTransformationAnalysis);
 		}
 		for (@NonNull Partition partition : partitions) {
 			if (partition instanceof LoadingPartition) {
-				((LoadingPartition)partition).analyzeIntroductions();
+				((LoadingPartition)partition).analyzeIntroductions(partitionedTransformationAnalysis);
 			}
 		}
 

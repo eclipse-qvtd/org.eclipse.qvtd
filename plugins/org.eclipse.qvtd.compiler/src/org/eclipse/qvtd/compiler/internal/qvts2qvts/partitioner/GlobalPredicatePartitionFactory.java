@@ -42,7 +42,7 @@ public class GlobalPredicatePartitionFactory extends AbstractPartitionFactory
 		String name = computeName("global");
 		Iterable<@NonNull Node> executionNodes = mappingPartitioner.getExecutionNodes();
 		Iterable<@NonNull Node> headNodes = mappingPartitioner.getTraceNodes();
-		BasicPartition partition = new BasicPartition(name, mappingPartitioner, headNodes, reachabilityForest);
+		BasicPartition partition = new BasicPartition(name, scheduleManager, region, headNodes, reachabilityForest);
 		int partitionNumber = region.getNextPartitionNumber();
 		partition.initMicroMappingRegion("«global»", "_p" + partitionNumber);
 		initializePartition(partition, executionNodes);

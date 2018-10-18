@@ -21,12 +21,12 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 public class TracePropertyPartitionAnalysis extends TraceElementPartitionAnalysis implements CompilerUtil.TraceProperty<@NonNull Partition, @NonNull TraceClassPartitionAnalysis, @NonNull TracePropertyPartitionAnalysis>
 {
-	protected final @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis;
+	//	protected final @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis;
 	protected final@NonNull TraceClassPartitionAnalysis traceClassAnalysis;
 	protected final @NonNull PropertyDatum tracePropertyDatum;
 
 	public TracePropertyPartitionAnalysis(@NonNull TransformationPartitioner transformationPartitioner, @NonNull TraceClassPartitionAnalysis traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
-		this.partitionedTransformationAnalysis = transformationPartitioner.getPartitionedTransformationAnalysis();
+		//		this.partitionedTransformationAnalysis = transformationPartitioner.getPartitionedTransformationAnalysis();
 		this.traceClassAnalysis = traceClassAnalysis;
 		this.tracePropertyDatum = tracePropertyDatum;
 		//	assert tracePropertyDatum.getReferredTypedModel() == regionsAnalysis.getScheduleManager().getTraceTypedModel();

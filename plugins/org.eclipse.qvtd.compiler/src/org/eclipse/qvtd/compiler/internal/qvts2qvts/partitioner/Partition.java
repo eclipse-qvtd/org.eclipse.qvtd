@@ -35,7 +35,7 @@ public interface Partition extends CompilerUtil.PartialRegion<@NonNull Partition
 	void addEnforcedEdge(@NonNull NavigableEdge usedEdge);
 	//	void addExplicitPredecessor(@NonNull Partition precedingPartition);
 	boolean addPass(int passNumber);
-	void analyzePartition();
+	void analyzePartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis);
 	void buildNavigationEdgesIndex(
 			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges,
 			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges);

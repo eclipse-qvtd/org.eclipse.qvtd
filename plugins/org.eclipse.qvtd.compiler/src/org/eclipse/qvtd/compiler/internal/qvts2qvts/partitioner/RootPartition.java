@@ -67,7 +67,7 @@ public class RootPartition extends AbstractPartition implements InternallyAcycli
 	}
 
 	@Override
-	public void analyzePartition() {
+	public void analyzePartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		throw new UnsupportedOperationException();
 	}
 

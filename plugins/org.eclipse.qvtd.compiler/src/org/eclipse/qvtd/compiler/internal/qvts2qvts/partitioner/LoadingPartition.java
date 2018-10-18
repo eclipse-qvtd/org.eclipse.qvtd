@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -23,17 +24,16 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
 public class LoadingPartition extends AbstractAcyclicPartition
 {
-	public LoadingPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull LoadingRegion region) {
-		super("«load»", partitionedTransformationAnalysis, region);
-		//		regionAnalysis.getTransformationAnalysis().setLoadingRegionAnalysis(regionAnalysis);
+	public LoadingPartition(@NonNull ScheduleManager scheduleManager, @NonNull LoadingRegion region) {
+		super("«load»", scheduleManager, region);
 	}
 
 	@Override
-	protected @NonNull List<@NonNull Node> analyze() {
+	protected @NonNull List<@NonNull Node> analyze(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		return new ArrayList<>();
 	}
 
-	public void analyzeIntroductions() {
+	public void analyzeIntroductions(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		//	regionAnalysis.getTransformationAnalysis().setLoadingRegionAnalysis(regionAnalysis);
 		partitionedTransformationAnalysis.setLoadingRegionAnalysis(this);
 	}

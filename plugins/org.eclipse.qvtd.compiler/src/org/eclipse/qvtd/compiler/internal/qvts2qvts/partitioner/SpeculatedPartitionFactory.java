@@ -39,7 +39,7 @@ public class SpeculatedPartitionFactory extends AbstractPartitionFactory
 		String name = computeName("speculated");
 		Node traceNode = mappingPartitioner.getTraceNode();
 		Iterable<@NonNull Node> headNodes = mappingPartitioner.getTraceNodes();
-		BasicPartition partition = new BasicPartition(name, mappingPartitioner, headNodes, reachabilityForest);
+		BasicPartition partition = new BasicPartition(name, scheduleManager, region, headNodes, reachabilityForest);
 		int partitionNumber = region.getNextPartitionNumber();
 		partition.initMicroMappingRegion("«speculated»", "_p" + partitionNumber);
 		initializePartition(partition, traceNode);
@@ -166,7 +166,7 @@ public class SpeculatedPartitionFactory extends AbstractPartitionFactory
 	protected void resolveTraceNodes(@NonNull BasicPartition partition, @NonNull Node traceNode) {
 		assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
 		addNode(partition, traceNode, Role.PREDICATED);
-		if (mappingPartitioner.getScheduleManager().useActivators()) {
+		if (scheduleManager.useActivators()) {
 			Node localSuccessNode = mappingPartitioner.basicGetLocalSuccessNode(traceNode);
 			if (localSuccessNode != null) {
 				addNode(partition, localSuccessNode, Role.CONSTANT_SUCCESS_TRUE);

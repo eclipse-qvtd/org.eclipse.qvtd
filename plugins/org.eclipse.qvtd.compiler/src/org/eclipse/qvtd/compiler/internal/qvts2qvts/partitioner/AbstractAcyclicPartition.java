@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.ToGraphPartitionVisitor;
@@ -58,10 +59,9 @@ public abstract class AbstractAcyclicPartition extends AbstractPartition2
 	@SuppressWarnings("unused")			// Used in the debugger
 	private final @NonNull ToDOT toDot = new ToDOT(this){};
 
-	protected AbstractAcyclicPartition(@NonNull String name, @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Region region) {
-		super(name, partitionedTransformationAnalysis);
+	protected AbstractAcyclicPartition(@NonNull String name, @NonNull ScheduleManager scheduleManager, @NonNull Region region) {
+		super(name, scheduleManager);
 		this.region = region;
-		//		this.transformationAnalysis = regionAnalysis.getTransformationAnalysis();
 	}
 
 	private void addCheckedEdge(@NonNull NavigableEdge predicatedEdge) {
@@ -111,8 +111,8 @@ public abstract class AbstractAcyclicPartition extends AbstractPartition2
 	}
 
 	@Override
-	public void analyzePartition() {
-		analyze();
+	public void analyzePartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
+		analyze(partitionedTransformationAnalysis);
 	}
 
 	@Override

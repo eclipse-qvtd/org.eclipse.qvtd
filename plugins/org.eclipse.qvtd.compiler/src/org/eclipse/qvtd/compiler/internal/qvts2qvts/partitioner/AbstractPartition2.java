@@ -40,7 +40,6 @@ import com.google.common.collect.Iterables;
 public abstract class AbstractPartition2 extends AbstractPartition
 {
 	protected final @NonNull ScheduleManager scheduleManager;
-	protected final @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis;
 
 	/**
 	 * The trace nodes and their corresponding global success node.
@@ -133,10 +132,9 @@ public abstract class AbstractPartition2 extends AbstractPartition
 	 */
 	private @Nullable Set<@NonNull TraceClassPartitionAnalysis> superProducedTraceClassAnalyses = null;
 
-	protected AbstractPartition2(@NonNull String name, @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
+	protected AbstractPartition2(@NonNull String name, @NonNull ScheduleManager scheduleManager) {
 		super(name);
-		this.scheduleManager = partitionedTransformationAnalysis.getScheduleManager();
-		this.partitionedTransformationAnalysis = partitionedTransformationAnalysis;
+		this.scheduleManager = scheduleManager;
 	}
 
 	private void addConstantNode(@NonNull Node node) {
@@ -150,44 +148,44 @@ public abstract class AbstractPartition2 extends AbstractPartition
 		constantInputNodes.add(node);
 	}
 
-	private void addConsumptionOfEdge(@NonNull NavigableEdge edge) {
+	private void addConsumptionOfEdge(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull NavigableEdge edge) {
 		Property property = QVTscheduleUtil.getProperty(edge);
 		if (property == scheduleManager.getStandardLibraryHelper().getOclContainerProperty()) {
 			Node targetNode = QVTscheduleUtil.getSourceNode(edge);
 			Node castTarget = targetNode;
 			ClassDatum classDatum = QVTscheduleUtil.getClassDatum(castTarget);
 			for (@NonNull PropertyDatum propertyDatum : scheduleManager.getOclContainerPropertyDatums(classDatum)) {
-				addConsumptionOfPropertyDatum(propertyDatum);
+				addConsumptionOfPropertyDatum(partitionedTransformationAnalysis, propertyDatum);
 			}
 		}
 		else {
 			PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
-			addConsumptionOfPropertyDatum(propertyDatum);
+			addConsumptionOfPropertyDatum(partitionedTransformationAnalysis, propertyDatum);
 		}
 	}
 
-	private void addConsumptionOfInputNode(@NonNull Node node) {
+	private void addConsumptionOfInputNode(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Node node) {
 		if (node.isClass() && !loadedInputNodes.contains(node)) {		// DataTypes are consumed by their edge
 			loadedInputNodes.add(node);
-			addConsumptionOfNode(node);
+			addConsumptionOfNode(partitionedTransformationAnalysis, node);
 		}
 	}
 
-	private void addConsumptionOfMiddleEdge(@NonNull NavigableEdge edge) {
+	private void addConsumptionOfMiddleEdge(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull NavigableEdge edge) {
 		if (!predicatedMiddleEdges.contains(edge)) {
 			predicatedMiddleEdges.add(edge);
-			addConsumptionOfEdge(edge);
+			addConsumptionOfEdge(partitionedTransformationAnalysis, edge);
 		}
 	}
 
-	private void addConsumptionOfMiddleNode(@NonNull Node node) {
+	private void addConsumptionOfMiddleNode(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Node node) {
 		if (!predicatedMiddleNodes.contains(node)) {
 			predicatedMiddleNodes.add(node);
-			addConsumptionOfNode(node);
+			addConsumptionOfNode(partitionedTransformationAnalysis, node);
 		}
 	}
 
-	private void addConsumptionOfNode(@NonNull Node node) {
+	private void addConsumptionOfNode(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Node node) {
 		Node castNode = QVTscheduleUtil.getCastTarget(node);
 		TraceClassPartitionAnalysis consumedTraceAnalysis = partitionedTransformationAnalysis.addConsumer(QVTscheduleUtil.getClassDatum(castNode), this);
 		List<@NonNull TraceClassPartitionAnalysis> consumedTraceClassAnalyses2 = consumedTraceClassAnalyses;
@@ -199,21 +197,21 @@ public abstract class AbstractPartition2 extends AbstractPartition
 		}
 	}
 
-	private void addConsumptionOfOutputEdge(@NonNull NavigableEdge edge) {
+	private void addConsumptionOfOutputEdge(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull NavigableEdge edge) {
 		if (!predicatedOutputEdges.contains(edge)) {
 			predicatedOutputEdges.add(edge);
-			addConsumptionOfEdge(edge);  // FIXME  gives 'should have realized' for 3*QVTc UML2RDBMS CollectionPartEdge
+			addConsumptionOfEdge(partitionedTransformationAnalysis, edge);  // FIXME  gives 'should have realized' for 3*QVTc UML2RDBMS CollectionPartEdge
 		}
 	}
 
-	private void addConsumptionOfOutputNode(@NonNull Node node) {
+	private void addConsumptionOfOutputNode(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Node node) {
 		if (!predicatedOutputNodes.contains(node)) {
 			predicatedOutputNodes.add(node);
-			addConsumptionOfNode(node);
+			addConsumptionOfNode(partitionedTransformationAnalysis, node);
 		}
 	}
 
-	private void addConsumptionOfPropertyDatum(@NonNull PropertyDatum propertyDatum) {
+	private void addConsumptionOfPropertyDatum(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull PropertyDatum propertyDatum) {
 		TracePropertyPartitionAnalysis consumedTraceAnalysis = partitionedTransformationAnalysis.addConsumer(propertyDatum, this);
 		List<@NonNull TracePropertyPartitionAnalysis> consumedTracePropertyAnalyses2 = consumedTracePropertyAnalyses;
 		if (consumedTracePropertyAnalyses2 == null) {
@@ -224,7 +222,7 @@ public abstract class AbstractPartition2 extends AbstractPartition
 		}
 	}
 
-	private void addProductionOfEdge(@NonNull NavigableEdge edge) {
+	private void addProductionOfEdge(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull NavigableEdge edge) {
 		assert isNew(edge);
 		Property property = QVTscheduleUtil.getProperty(edge);
 		assert property != scheduleManager.getStandardLibraryHelper().getOclContainerProperty();		// oclContainer is not assignable
@@ -249,21 +247,21 @@ public abstract class AbstractPartition2 extends AbstractPartition
 		}
 	}
 
-	private void addProductionOfMiddleEdge(@NonNull NavigableEdge edge) {
+	private void addProductionOfMiddleEdge(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull NavigableEdge edge) {
 		if (isRealized(edge) && !realizedMiddleEdges.contains(edge)) {
 			realizedMiddleEdges.add(edge);
-			addProductionOfEdge(edge);
+			addProductionOfEdge(partitionedTransformationAnalysis, edge);
 		}
 	}
 
-	private void addProductionOfMiddleNode(@NonNull Node node) {
+	private void addProductionOfMiddleNode(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Node node) {
 		if (isRealized(node) && !realizedMiddleNodes.contains(node)) {
 			realizedMiddleNodes.add(node);
-			addProductionOfNode(node);
+			addProductionOfNode(partitionedTransformationAnalysis, node);
 		}
 	}
 
-	private void addProductionOfNode(@NonNull Node node) {
+	private void addProductionOfNode(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Node node) {
 		assert isNew(node);
 		TraceClassPartitionAnalysis consumedTraceAnalysis = partitionedTransformationAnalysis.addProducer(QVTscheduleUtil.getClassDatum(node), this);
 		List<@NonNull TraceClassPartitionAnalysis> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
@@ -275,28 +273,28 @@ public abstract class AbstractPartition2 extends AbstractPartition
 		}
 	}
 
-	private void addProductionOfOutputEdge(@NonNull NavigableEdge edge) {
+	private void addProductionOfOutputEdge(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull NavigableEdge edge) {
 		if (isRealized(edge) && !realizedOutputEdges.contains(edge)) {
 			realizedOutputEdges.add(edge);
-			addProductionOfEdge(edge);
+			addProductionOfEdge(partitionedTransformationAnalysis, edge);
 		}
 	}
 
-	private void addProductionOfOutputNode(@NonNull Node node) {
+	private void addProductionOfOutputNode(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Node node) {
 		if (isRealized(node) && !realizedOutputNodes.contains(node)) {
 			realizedOutputNodes.add(node);
-			addProductionOfNode(node);
+			addProductionOfNode(partitionedTransformationAnalysis, node);
 		}
 	}
 
-	protected @NonNull List<@NonNull Node> analyze() {
-		analyzeNodes();
+	protected @NonNull List<@NonNull Node> analyze(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
+		analyzeNodes(partitionedTransformationAnalysis);
 		for (@NonNull Node traceNode : analyzeTraceNodes()) {
 			analyzeLocalSuccessEdge(traceNode);
 			analyzeGlobalSuccessEdge(traceNode);
 			analyzeTraceEdges(traceNode);
 		}
-		analyzeEdges();
+		analyzeEdges(partitionedTransformationAnalysis);
 		List<@NonNull Node> alreadyRealized = new ArrayList<>(getTraceNodes());
 		Node dispatchNode = basicGetDispatchNode();
 		if (dispatchNode != null) {
@@ -305,7 +303,7 @@ public abstract class AbstractPartition2 extends AbstractPartition
 		return alreadyRealized;
 	}
 
-	private void analyzeEdges() {
+	private void analyzeEdges(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		for (@NonNull Edge edge : getPartialEdges()) {
 			if (!edge.isSecondary()) {
 				if (isPredicated(edge)) {
@@ -330,10 +328,10 @@ public abstract class AbstractPartition2 extends AbstractPartition
 					//	Node targetNode = navigableEdge.getEdgeTarget();
 					if (scheduleManager.isMiddle(sourceNode)) { // || scheduleManager.isMiddle(targetNode)) {
 						if (isPredicated(navigableEdge) || isSpeculated(navigableEdge)) {
-							addConsumptionOfMiddleEdge(navigableEdge);
+							addConsumptionOfMiddleEdge(partitionedTransformationAnalysis, navigableEdge);
 						}
 						else if (isRealized(navigableEdge)) {
-							addProductionOfMiddleEdge(navigableEdge);
+							addProductionOfMiddleEdge(partitionedTransformationAnalysis, navigableEdge);
 						}
 						else {
 							throw new IllegalStateException("middle edge must be predicated or realized : " + navigableEdge);
@@ -343,11 +341,11 @@ public abstract class AbstractPartition2 extends AbstractPartition
 						if (isLoaded(navigableEdge) || isConstant(navigableEdge)) {}
 						else if (isPredicated(navigableEdge)) {  // || isSpeculated(navigableEdge)) {
 							if (!navigableEdge.isCast()) {
-								addConsumptionOfOutputEdge(navigableEdge);
+								addConsumptionOfOutputEdge(partitionedTransformationAnalysis, navigableEdge);
 							}
 						}
 						else if (isRealized(navigableEdge)) {
-							addProductionOfOutputEdge(navigableEdge);
+							addProductionOfOutputEdge(partitionedTransformationAnalysis, navigableEdge);
 						}
 						else {
 							throw new IllegalStateException("other edge must be predicated or realized : " + navigableEdge);
@@ -404,7 +402,7 @@ public abstract class AbstractPartition2 extends AbstractPartition
 		traceNode2localSuccessEdge.put(traceNode, localSuccessEdge);
 	}
 
-	private void analyzeNodes() {
+	private void analyzeNodes(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		for (@NonNull Node node : getPartialNodes()) {
 			if (node.isNullLiteral()) {
 				addConstantNode(node);
@@ -421,7 +419,7 @@ public abstract class AbstractPartition2 extends AbstractPartition
 			else if (node.isPattern()) {
 				if (isConstant(node)) {}
 				else if (isLoaded(node)) {
-					addConsumptionOfInputNode(node);
+					addConsumptionOfInputNode(partitionedTransformationAnalysis, node);
 				}
 				else if (scheduleManager.isMiddle(node)) {
 					if (node.isDispatch()) {
@@ -434,18 +432,18 @@ public abstract class AbstractPartition2 extends AbstractPartition
 						traceNodes.add(node);
 					}
 					if (isPredicated(node)) {
-						addConsumptionOfMiddleNode(node);
+						addConsumptionOfMiddleNode(partitionedTransformationAnalysis, node);
 					}
 					else if (isSpeculated(node)) {
 						if (!node.isHead()) {		// Don't create a self-consumption cycle
-							addConsumptionOfMiddleNode(node);
+							addConsumptionOfMiddleNode(partitionedTransformationAnalysis, node);
 						}
 					}
 					else if (isSpeculation(node)) {
-						addProductionOfMiddleNode(node);
+						addProductionOfMiddleNode(partitionedTransformationAnalysis, node);
 					}
 					else if (isRealized(node)) {
-						addProductionOfMiddleNode(node);
+						addProductionOfMiddleNode(partitionedTransformationAnalysis, node);
 					}
 					else {
 						throw new IllegalStateException("middle node must be predicated or realized : " + node);
@@ -453,10 +451,10 @@ public abstract class AbstractPartition2 extends AbstractPartition
 				}
 				else { // scheduleManager.isOutput(node)
 					if (isPredicated(node)) {
-						addConsumptionOfOutputNode(node);
+						addConsumptionOfOutputNode(partitionedTransformationAnalysis, node);
 					}
 					else if (isRealized(node)) {
-						addProductionOfOutputNode(node);
+						addProductionOfOutputNode(partitionedTransformationAnalysis, node);
 					}
 					else {
 						throw new IllegalStateException("other node must be predicated or realized : " + node);
@@ -464,7 +462,7 @@ public abstract class AbstractPartition2 extends AbstractPartition
 				}
 			}
 			else if (node.isDependency()) {
-				addConsumptionOfOutputNode(node);
+				addConsumptionOfOutputNode(partitionedTransformationAnalysis, node);
 			}
 			else if (node.isIterator()) {}
 			else {

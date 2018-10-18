@@ -54,7 +54,7 @@ public class CyclicPartition extends AbstractPartition2 implements InternallyAcy
 			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors,
 			@NonNull Set<@NonNull TraceClassPartitionAnalysis> traceClassAnalyses,
 			@NonNull Set<@NonNull TracePropertyPartitionAnalysis> tracePropertyAnalyses) {
-		super(name, transformationPartitioner.getPartitionedTransformationAnalysis());
+		super(name, transformationPartitioner.getScheduleManager());
 		this.cyclesAnalysis = cyclesAnalysis;
 		this.partitions = partitions;
 		for (@NonNull Partition partition : partitions) {
@@ -72,7 +72,7 @@ public class CyclicPartition extends AbstractPartition2 implements InternallyAcy
 	}
 
 	@Override
-	public void analyzePartition() {
+	public void analyzePartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();		// FIXME
 	}
