@@ -55,7 +55,6 @@ public interface Partition extends CompilerUtil.PartialRegion<@NonNull Partition
 	@NonNull MappingRegion getMicroMappingRegion();
 	@Override
 	@NonNull String getName();
-	@NonNull Region getOriginalRegion();
 	@NonNull Iterable<@NonNull Edge> getPartialEdges();
 	@NonNull Iterable<@NonNull Node> getPartialNodes();
 	@NonNull String getPassRangeText();
@@ -64,6 +63,7 @@ public interface Partition extends CompilerUtil.PartialRegion<@NonNull Partition
 	@Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getProducedTraceClassAnalyses();
 	@Nullable Iterable<@NonNull TracePropertyPartitionAnalysis> getProducedTracePropertyAnalyses();
 	@NonNull ReachabilityForest getReachabilityForest();
+	@NonNull Region getRegion();
 	@Nullable Role getRole(@NonNull Edge edge);
 	@Nullable Role getRole(@NonNull Node node);
 	@Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getSuperProducedTraceClassAnalyses();

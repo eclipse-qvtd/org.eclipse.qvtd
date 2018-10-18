@@ -351,7 +351,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 					concurrentRegions.add(mappingRegion);
 				}
 				else {
-					scheduledRegion.getActiveRegions().add(partition.getOriginalRegion());
+					scheduledRegion.getActiveRegions().add(partition.getRegion());
 				}
 			}
 		}
@@ -466,7 +466,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 				Map<@NonNull Region, @NonNull List<@NonNull Partition>> region2partitions = new HashMap<>();
 				for (@NonNull Partition partition : oldConcurrency) {
 					if (!(partition instanceof CyclicPartition)) {
-						Region region = partition.getOriginalRegion();
+						Region region = partition.getRegion();
 						List<@NonNull Partition> partitions = region2partitions.get(region);
 						if (partitions == null) {
 							partitions = new ArrayList<>();

@@ -103,7 +103,7 @@ public abstract class AbstractPartition2Mapping
 		assert mappingName != null;
 		this.mapping = helper.createMapping(mappingName);
 		this.mappingName = mappingName;
-		Region originalRegion = partition.getOriginalRegion();
+		Region originalRegion = partition.getRegion();
 		if (originalRegion instanceof RuleRegion) {
 			this.mapping.setIsAbstract(((RuleRegion)originalRegion).getReferredRule().isIsAbstract());
 		}

@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -23,8 +23,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
 public class LoadingPartition extends AbstractAcyclicPartition
 {
-	public LoadingPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull RegionAnalysis regionAnalysis) {
-		super("«load»", partitionedTransformationAnalysis, regionAnalysis);
+	public LoadingPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull LoadingRegion region) {
+		super("«load»", partitionedTransformationAnalysis, region);
 		//		regionAnalysis.getTransformationAnalysis().setLoadingRegionAnalysis(regionAnalysis);
 	}
 
@@ -45,27 +45,27 @@ public class LoadingPartition extends AbstractAcyclicPartition
 
 	@Override
 	public @NonNull MappingRegion createMicroMappingRegion() {
-		return (MappingRegion)originalRegion;
+		return (MappingRegion)region;
 	}
 
 	@Override
 	public @NonNull Iterable<@NonNull Node> getHeadNodes() {
-		return QVTscheduleUtil.getHeadNodes(originalRegion);
+		return QVTscheduleUtil.getHeadNodes(region);
 	}
 
 	@Override
 	public @NonNull MappingRegion getMicroMappingRegion() {
-		return (MappingRegion)originalRegion;
+		return (MappingRegion)region;
 	}
 
 	@Override
 	public @NonNull Iterable<@NonNull Edge> getPartialEdges() {
-		return QVTscheduleUtil.getOwnedEdges(originalRegion);
+		return QVTscheduleUtil.getOwnedEdges(region);
 	}
 
 	@Override
 	public @NonNull Iterable<@NonNull Node> getPartialNodes() {
-		return QVTscheduleUtil.getOwnedNodes(originalRegion);
+		return QVTscheduleUtil.getOwnedNodes(region);
 	}
 
 	@Override

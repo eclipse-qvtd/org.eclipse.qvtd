@@ -535,7 +535,7 @@ public class CompilerUtil extends QVTscheduleUtil
 	}
 
 	public static boolean isAbstract(@NonNull Partition partition) {
-		Region originalRegion = partition.getOriginalRegion();
+		Region originalRegion = partition.getRegion();
 		if (originalRegion instanceof RuleRegion) {
 			if (originalRegion instanceof DispatchRegion) {
 				return false;

@@ -35,7 +35,6 @@ import com.google.common.collect.Sets;
 
 public class BasicPartition extends AbstractAcyclicPartition
 {
-	protected final @NonNull MappingPartitioner partitioner;
 	protected final @NonNull Iterable<@NonNull Node> headNodes;
 	private @NonNull String namePrefix = "";
 	private @NonNull String symbolSuffix = "";
@@ -64,8 +63,7 @@ public class BasicPartition extends AbstractAcyclicPartition
 
 	protected BasicPartition(@NonNull String name, @NonNull MappingPartitioner partitioner,
 			@NonNull Iterable<@NonNull Node> headNodes, @NonNull ReachabilityForest reachabilityForest) {
-		super(name, partitioner.getPartitionedTransformationAnalysis(), partitioner.getRegionAnalysis());
-		this.partitioner = partitioner;
+		super(name, partitioner.getPartitionedTransformationAnalysis(), partitioner.getRegion());
 		this.headNodes = headNodes;
 		this.reachabilityForest = reachabilityForest;
 	}
@@ -111,7 +109,7 @@ public class BasicPartition extends AbstractAcyclicPartition
 	/**
 	 * Verify that all unconditional nodes in the new region are reachable from its heads.
 	 */
-	public void check(@NonNull MicroMappingRegion region) {
+	public void check(@NonNull MappingPartitioner partitioner, @NonNull MicroMappingRegion region) {
 		Set<@NonNull Node> reachableNodes = new HashSet<>();
 		for (@NonNull Node node : QVTscheduleUtil.getHeadNodes(region)) {
 			checkGatherReachables(reachableNodes, node);
@@ -164,7 +162,7 @@ public class BasicPartition extends AbstractAcyclicPartition
 
 	protected final @NonNull MicroMappingRegion createMicroMappingRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
 		assert microMappingRegion  == null;
-		assert !(originalRegion instanceof MicroMappingRegion);
+		assert !(region instanceof MicroMappingRegion);
 		MicroMappingRegion partialRegion = createPartialRegion(namePrefix, symbolSuffix);
 		//	originalRegion.accept(partitioningVisitor);
 		MicroMappingRegion microMappingRegion = partialRegion;//partitioningVisitor.getRegion();
@@ -191,10 +189,10 @@ public class BasicPartition extends AbstractAcyclicPartition
 	protected @NonNull MicroMappingRegion createPartialRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
 		MicroMappingRegion partialRegion = QVTscheduleFactory.eINSTANCE.createMicroMappingRegion();
 		scheduleManager.addMappingRegion(partialRegion);
-		partialRegion.setMappingRegion((MappingRegion) originalRegion);
+		partialRegion.setMappingRegion((MappingRegion) region);
 		partialRegion.setNamePrefix(namePrefix);
 		partialRegion.setSymbolNameSuffix(symbolSuffix);
-		partialRegion.setName(namePrefix + " " + originalRegion.getName());
+		partialRegion.setName(namePrefix + " " + region.getName());
 		return partialRegion;
 	}
 

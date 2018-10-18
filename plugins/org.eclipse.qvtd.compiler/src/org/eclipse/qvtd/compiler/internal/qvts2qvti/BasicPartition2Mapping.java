@@ -1152,7 +1152,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 
 	public BasicPartition2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Partition partition) {
 		super(visitor, partition);
-		this.regionAnalysis = scheduleManager.getRegionAnalysis(partition.getOriginalRegion());
+		this.regionAnalysis = scheduleManager.getRegionAnalysis(partition.getRegion());
 		//	String name = partition.getName();
 		//	if (name.contains("list2list«edge-headElement»")) {
 		//		getClass();

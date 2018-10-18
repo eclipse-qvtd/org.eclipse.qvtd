@@ -227,7 +227,7 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 				mappingPartitioners.add(mappingPartitioner);
 			}
 			else if (region instanceof LoadingRegion) {
-				Partition loadingPartition = new LoadingPartition(partitionedTransformationAnalysis, regionAnalysis);
+				Partition loadingPartition = new LoadingPartition(partitionedTransformationAnalysis, (LoadingRegion) region);
 				partitions.add(loadingPartition);
 				//	scheduleManager.wipAddPartition(loadingPartition, region);
 				regionAnalysis.setPartitions(Collections.singletonList(loadingPartition));

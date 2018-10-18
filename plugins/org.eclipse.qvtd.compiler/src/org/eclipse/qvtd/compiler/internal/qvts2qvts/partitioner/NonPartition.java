@@ -16,7 +16,6 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -38,8 +37,8 @@ public class NonPartition extends AbstractAcyclicPartition
 		@Override
 		public @NonNull NonPartition createPartition() {
 			ReachabilityForest reachabilityForest = createReachabilityForest();
-			RegionAnalysis regionAnalysis = mappingPartitioner.getRegionAnalysis();
-			return new NonPartition(regionAnalysis.getName(), mappingPartitioner.getPartitionedTransformationAnalysis(), regionAnalysis, reachabilityForest);
+			MappingRegion region = mappingPartitioner.getRegion();
+			return new NonPartition(QVTscheduleUtil.getName(region), mappingPartitioner.getPartitionedTransformationAnalysis(), region, reachabilityForest);
 		}
 
 		/**
@@ -113,34 +112,34 @@ public class NonPartition extends AbstractAcyclicPartition
 	 */
 	private final @NonNull ReachabilityForest reachabilityForest;
 
-	public NonPartition(@NonNull String name, @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull RegionAnalysis regionAnalysis, @NonNull ReachabilityForest reachabilityForest) {
-		super(name, partitionedTransformationAnalysis, regionAnalysis);
+	public NonPartition(@NonNull String name, @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull MappingRegion region, @NonNull ReachabilityForest reachabilityForest) {
+		super(name, partitionedTransformationAnalysis, region);
 		this.reachabilityForest = reachabilityForest;
 	}
 
 	@Override
 	public @NonNull MappingRegion createMicroMappingRegion() {
-		return (MappingRegion)originalRegion;
+		return (MappingRegion)region;
 	}
 
 	@Override
 	public @NonNull Iterable<@NonNull Node> getHeadNodes() {
-		return QVTscheduleUtil.getHeadNodes(originalRegion);
+		return QVTscheduleUtil.getHeadNodes(region);
 	}
 
 	@Override
 	public @NonNull MappingRegion getMicroMappingRegion() {
-		return (MappingRegion)originalRegion;
+		return (MappingRegion)region;
 	}
 
 	@Override
 	public @NonNull Iterable<@NonNull Edge> getPartialEdges() {
-		return QVTscheduleUtil.getOwnedEdges(originalRegion);
+		return QVTscheduleUtil.getOwnedEdges(region);
 	}
 
 	@Override
 	public @NonNull Iterable<@NonNull Node> getPartialNodes() {
-		return QVTscheduleUtil.getOwnedNodes(originalRegion);
+		return QVTscheduleUtil.getOwnedNodes(region);
 	}
 
 	@Override

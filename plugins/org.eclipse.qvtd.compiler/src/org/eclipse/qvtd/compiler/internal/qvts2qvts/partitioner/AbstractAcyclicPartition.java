@@ -42,9 +42,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public abstract class AbstractAcyclicPartition extends AbstractPartition2
 {
-	protected final @NonNull RegionAnalysis regionAnalysis;
-	protected final @NonNull Region originalRegion;
-	//	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
+	protected final @NonNull Region region;
 
 	/**
 	 * The per-typed model predicated navigable edges for which an execution may be attempted before assignment.
@@ -60,10 +58,9 @@ public abstract class AbstractAcyclicPartition extends AbstractPartition2
 	@SuppressWarnings("unused")			// Used in the debugger
 	private final @NonNull ToDOT toDot = new ToDOT(this){};
 
-	protected AbstractAcyclicPartition(@NonNull String name, @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull RegionAnalysis regionAnalysis) {
+	protected AbstractAcyclicPartition(@NonNull String name, @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Region region) {
 		super(name, partitionedTransformationAnalysis);
-		this.regionAnalysis = regionAnalysis;
-		this.originalRegion = regionAnalysis.getRegion();
+		this.region = region;
 		//		this.transformationAnalysis = regionAnalysis.getTransformationAnalysis();
 	}
 
@@ -361,8 +358,8 @@ public abstract class AbstractAcyclicPartition extends AbstractPartition2
 	}
 
 	@Override
-	public @NonNull Region getOriginalRegion() {
-		return originalRegion;
+	public @NonNull Region getRegion() {
+		return region;
 	}
 
 	@Override

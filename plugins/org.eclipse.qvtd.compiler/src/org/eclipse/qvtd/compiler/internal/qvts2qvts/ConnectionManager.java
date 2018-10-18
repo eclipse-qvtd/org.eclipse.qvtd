@@ -204,7 +204,7 @@ public class ConnectionManager
 		Set<@NonNull Region> regions = new HashSet<>();
 		for (@NonNull Iterable<@NonNull Partition> concurrency : partitionSchedule) {
 			for (@NonNull Partition partition : concurrency) {
-				regions.add(partition.getOriginalRegion());
+				regions.add(partition.getRegion());
 			}
 		}
 		//		for (@NonNull Region region : regions) {

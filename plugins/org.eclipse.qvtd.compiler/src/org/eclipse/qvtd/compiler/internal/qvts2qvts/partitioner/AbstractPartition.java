@@ -302,12 +302,6 @@ public abstract class AbstractPartition implements Partition
 	}
 
 	@Override
-	public @NonNull Region getOriginalRegion() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();		// FIXME
-	}
-
-	@Override
 	public @NonNull Iterable<@NonNull Edge> getPartialEdges() {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();		// FIXME
@@ -350,8 +344,14 @@ public abstract class AbstractPartition implements Partition
 	}
 
 	@Override
+	public @NonNull Region getRegion() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException();		// FIXME
+	}
+
+	@Override
 	public @Nullable Role getRole(@NonNull Edge edge) {
-		if (QVTscheduleUtil.getOwningRegion(QVTscheduleUtil.getTargetNode(edge)) != getOriginalRegion()) {
+		if (QVTscheduleUtil.getOwningRegion(QVTscheduleUtil.getTargetNode(edge)) != getRegion()) {
 			return null;
 		}
 		else {
@@ -361,7 +361,7 @@ public abstract class AbstractPartition implements Partition
 
 	@Override
 	public @Nullable Role getRole(@NonNull Node node) {
-		if (QVTscheduleUtil.getOwningRegion(node) != getOriginalRegion()) {
+		if (QVTscheduleUtil.getOwningRegion(node) != getRegion()) {
 			return null;
 		}
 		else {
@@ -379,7 +379,7 @@ public abstract class AbstractPartition implements Partition
 			s1.appendString(getSymbolNamePrefix());
 			s1.appendString(s2.toString());
 			s1.appendString(String.valueOf(getSymbolNameSuffix()));
-			ScheduleModel scheduleModel = QVTscheduleUtil.basicGetContainingScheduleModel(getOriginalRegion());
+			ScheduleModel scheduleModel = QVTscheduleUtil.basicGetContainingScheduleModel(getRegion());
 			if (scheduleModel != null) {
 				symbolName2 = scheduleModel.reserveSymbolName(s1, this);
 				//				System.out.println("Reserved '" + symbolName2 + "' for " + this);
