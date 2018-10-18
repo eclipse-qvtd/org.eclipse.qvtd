@@ -25,12 +25,10 @@ import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Sets;
@@ -46,12 +44,6 @@ public class BasicPartition extends AbstractAcyclicPartition
 	 * The nodes of region that are required by the partition and the nodeRole that each node plays in the partition.
 	 */
 	private final @NonNull Map<@NonNull Node, @NonNull Role> node2nodeRole = new HashMap<>();
-
-	/**
-	 * The nodes of region that are required by the partition. This is identical to node2nodeRole.keySet() but in a linear
-	 * list to facilitate recursions over all nodes so far.
-	 */
-	private final @NonNull List<@NonNull Node> nodes = new ArrayList<>();
 
 	/**
 	 * The edges of region that are required by the partition and the edgeRole that each edge plays in the partition.
@@ -78,117 +70,8 @@ public class BasicPartition extends AbstractAcyclicPartition
 		this.reachabilityForest = reachabilityForest;
 	}
 
-	public void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole) {
-		assert edge.getOwningRegion() == originalRegion;
-		Role oldEdgeRole = QVTscheduleUtil.getEdgeRole(edge);
-		switch (oldEdgeRole)
-		{
-			case CONSTANT_SUCCESS_FALSE: /* fall through */
-			case CONSTANT_SUCCESS_TRUE: /* fall through */
-			case CONSTANT: {
-				assert newEdgeRole == Role.CONSTANT;
-				break;
-			}
-			case LOADED: {
-				assert newEdgeRole == Role.LOADED;
-				break;
-			}
-			case PREDICATED: {
-				assert (newEdgeRole == Role.PREDICATED) || (newEdgeRole == Role.SPECULATED);
-				break;
-			}
-			case REALIZED: {
-				if (!partitioner.hasRealizedEdge(edge)) {
-					assert newEdgeRole == Role.REALIZED;
-				}
-				//				else if (this instanceof SpeculatingPartitionFactory) {
-				//					assert (newEdgeRole == Role.PREDICATED) || (newEdgeRole == Role.SPECULATED);		// FIXME rationalize
-				//				}
-				else {
-					assert newEdgeRole == Role.PREDICATED;
-				}
-				break;
-			}
-			default: {
-				throw new UnsupportedOperationException(getClass().getSimpleName() + ".addEdge " + edge);
-			}
-		}
-		partitioner.addEdge(edge, newEdgeRole, this);
-		Role displacedEdgeRole = edge2edgeRole.put(edge, newEdgeRole);
-		assert (displacedEdgeRole == null) || (displacedEdgeRole == newEdgeRole);
-		if (edge instanceof NavigableEdge) {
-			NavigableEdge oppositeEdge = ((NavigableEdge)edge).getOppositeEdge();
-			if (oppositeEdge != null) {
-				partitioner.addEdge(oppositeEdge, newEdgeRole, this);
-				Role displacedOppositeEdgeRole = edge2edgeRole.put(oppositeEdge, newEdgeRole);
-				assert (displacedOppositeEdgeRole == null) || (displacedOppositeEdgeRole == newEdgeRole);
-			}
-		}
-	}
-
 	public void addExplicitPredecessor(@NonNull Partition speculationPartition) {
 		explicitPredecessors.add(speculationPartition);
-	}
-
-	protected void addNode(@NonNull Node node) {
-		Role oldNodeRole = QVTscheduleUtil.getNodeRole(node);
-		addNode(node, oldNodeRole);
-	}
-
-	protected void addNode(@NonNull Node node, @NonNull Role newNodeRole) {
-		assert node.getOwningRegion() == originalRegion;
-		Role oldNodeRole = QVTscheduleUtil.getNodeRole(node);
-		switch (oldNodeRole)
-		{
-			case CONSTANT_SUCCESS_FALSE: /* fall through */
-			case CONSTANT_SUCCESS_TRUE: /* fall through */
-			case CONSTANT: {
-				assert newNodeRole == Role.CONSTANT;
-				//				if (node.isTrue()) {
-				//					partitioner.addTrueNode(node);
-				//				}
-				break;
-			}
-			case LOADED: {
-				assert newNodeRole == Role.LOADED;
-				break;
-			}
-			case SPECULATED: {
-				assert newNodeRole == Role.PREDICATED || newNodeRole == Role.SPECULATED;
-				//				partitioner.addSpeculatedNode(node);
-				break;
-			}
-			case PREDICATED: {
-				assert newNodeRole == Role.PREDICATED || newNodeRole == Role.SPECULATED;
-				partitioner.addPredicatedNode(node);
-				break;
-			}
-			case REALIZED: {
-				if (!partitioner.hasRealizedNode(node)) {
-					// FIXME QVTc fudge	assert newNodeRole == Role.REALIZED || newNodeRole == Role.SPECULATION;
-					partitioner.addRealizedNode(node);
-				}
-				else {
-					if (node instanceof SuccessNode) {
-						assert newNodeRole == Role.CONSTANT_SUCCESS_TRUE;
-					}
-					else if (newNodeRole == Role.REALIZED || newNodeRole == Role.SPECULATION) {
-						assert false;
-						return;		// FIXME redundant call
-					}
-					else {
-						assert newNodeRole == Role.PREDICATED || newNodeRole == Role.SPECULATED;
-					}
-				}
-				break;
-			}
-			default: {
-				throw new UnsupportedOperationException(getClass().getSimpleName() + ".addNode " + node);
-			}
-		}
-		Role displacedNodeRole = node2nodeRole.put(node, newNodeRole);
-		assert (displacedNodeRole == null) || (displacedNodeRole == newNodeRole);
-		nodes.add(node);
 	}
 
 	/**
@@ -342,10 +225,6 @@ public class BasicPartition extends AbstractAcyclicPartition
 		return node2nodeRole.keySet();
 	}
 
-	public @NonNull List<@NonNull Node> getNodesList() {
-		return nodes;
-	}
-
 	@Override
 	public @NonNull Iterable<@NonNull Edge> getPartialEdges() {
 		return edge2edgeRole.keySet();
@@ -482,6 +361,14 @@ public class BasicPartition extends AbstractAcyclicPartition
 	protected boolean isSpeculation(@NonNull Node node) {
 		Role role = getRole(node);
 		return role != null ? role.isSpeculation() : false; //node.isSpeculation();
+	}
+
+	public @Nullable Role putEdgeRole(@NonNull Edge edge, @NonNull Role newEdgeRole) {
+		return edge2edgeRole.put(edge, newEdgeRole);
+	}
+
+	public @Nullable Role putNodeRole(@NonNull Node node, @NonNull Role newNodeRole) {
+		return node2nodeRole.put(node, newNodeRole);
 	}
 
 	@Override

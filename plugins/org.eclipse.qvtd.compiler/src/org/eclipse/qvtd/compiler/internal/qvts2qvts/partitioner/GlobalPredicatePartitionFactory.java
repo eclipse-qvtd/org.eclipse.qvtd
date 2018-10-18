@@ -58,7 +58,7 @@ public class GlobalPredicatePartitionFactory extends AbstractPartitionFactory
 			//	For a non-top relation the predicated middle (trace) nodes become speculated nodes.
 			//
 			for (@NonNull Node traceNode : executionNodes) {
-				partition.addNode(traceNode, Role.PREDICATED); //, Role.SPECULATED);
+				addNode(partition, traceNode, Role.PREDICATED); //, Role.SPECULATED);
 			}
 			//
 			//	For an override relation the predicated middle dispatch nodes become speculated nodes.
@@ -66,7 +66,7 @@ public class GlobalPredicatePartitionFactory extends AbstractPartitionFactory
 			Node dispatchNode = mappingPartitioner.basicGetDispatchNode();
 			if (dispatchNode != null) {
 				assert dispatchNode.isPredicated();
-				partition.addNode(dispatchNode);
+				addNode(partition, dispatchNode);
 			}
 		}
 		else {
@@ -82,7 +82,7 @@ public class GlobalPredicatePartitionFactory extends AbstractPartitionFactory
 		if (hasSynthesizedTrace) {
 			for (@NonNull Node whenNode : mappingPartitioner.getPredicatedWhenNodes()) {
 				if (!mappingPartitioner.hasPredicatedNode(whenNode)) {
-					partition.addNode(whenNode); //, Role.SPECULATED);
+					addNode(partition, whenNode); //, Role.SPECULATED);
 				}
 			}
 		}
@@ -177,7 +177,7 @@ public class GlobalPredicatePartitionFactory extends AbstractPartitionFactory
 		for (@NonNull Node constantOutputNode : mappingPartitioner.getConstantOutputNodes()) {
 			//	if ((fallibleNodes == null) || !Iterables.contains(fallibleNodes, constantOutputNode)) {
 			if (!mappingPartitioner.hasPredicatedNode(constantOutputNode)) {
-				partition.addNode(constantOutputNode);
+				addNode(partition, constantOutputNode);
 			}
 			//	}
 		}
@@ -234,7 +234,7 @@ public class GlobalPredicatePartitionFactory extends AbstractPartitionFactory
 				//				if (node.isPattern() && node.isClass()) {
 				//					nodeRole = QVTscheduleUtil.asSpeculated(nodeRole);
 				//				}
-				partition.addNode(node, nodeRole); //QVTscheduleUtil.asSpeculated(nodeRole));
+				addNode(partition, node, nodeRole); //QVTscheduleUtil.asSpeculated(nodeRole));
 			}
 		}
 	}
@@ -242,7 +242,7 @@ public class GlobalPredicatePartitionFactory extends AbstractPartitionFactory
 	protected void resolvePredicatedOutputNodes(@NonNull BasicPartition partition) {
 		for (@NonNull Node node : mappingPartitioner.getPredicatedOutputNodes()) {
 			if (!partition.hasNode(node) && !transformationAnalysis.isCorollary(node) && !isDownstreamFromCorollary(partition, node)) {
-				partition.addNode(node, QVTscheduleUtil.getNodeRole(node));
+				addNode(partition, node, QVTscheduleUtil.getNodeRole(node));
 			}
 		}
 	}
@@ -258,9 +258,9 @@ public class GlobalPredicatePartitionFactory extends AbstractPartitionFactory
 	protected void resolveSuccessNodes(@NonNull BasicPartition partition, @NonNull Iterable<@NonNull Node> executionNodes) {
 		for (@NonNull Node traceNode : executionNodes) {
 			Node localSuccessNode = mappingPartitioner.getLocalSuccessNode(traceNode);
-			partition.addNode(localSuccessNode, Role.CONSTANT_SUCCESS_TRUE);
+			addNode(partition, localSuccessNode, Role.CONSTANT_SUCCESS_TRUE);
 			Node globalSuccessNode = mappingPartitioner.getGlobalSuccessNode(traceNode);
-			partition.addNode(globalSuccessNode, Role.REALIZED);
+			addNode(partition, globalSuccessNode, Role.REALIZED);
 		}
 		//	Iterable<@NonNull Edge> fallibleEdges = isInfallible ? regionAnalysis.getFallibleEdges() : null;
 		/*	for (@NonNull Edge edge : mappingPartitioner.getSuccessEdges()) {
@@ -291,7 +291,7 @@ public class GlobalPredicatePartitionFactory extends AbstractPartitionFactory
 	protected void resolveTraceNodes(@NonNull BasicPartition partition) {
 		Iterable<@NonNull Node> traceNodes = mappingPartitioner.getTraceNodes();		// Just 1 speculated middle node
 		for (@NonNull Node traceNode : traceNodes) {
-			partition.addNode(traceNode, Role.SPECULATED);
+			addNode(partition, traceNode, Role.SPECULATED);
 		}
 		for (@NonNull Node traceNode : traceNodes) {
 			for (@NonNull NavigableEdge edge : traceNode.getNavigableEdges()) {
@@ -301,7 +301,7 @@ public class GlobalPredicatePartitionFactory extends AbstractPartitionFactory
 			}
 			Node globalSuccessNode = mappingPartitioner.basicGetGlobalSuccessNode(traceNode);		// FIXME only optional because trace property can be missing
 			if (globalSuccessNode != null) {
-				partition.addNode(globalSuccessNode, Role.REALIZED);
+				addNode(partition, globalSuccessNode, Role.REALIZED);
 			}
 		}
 	}

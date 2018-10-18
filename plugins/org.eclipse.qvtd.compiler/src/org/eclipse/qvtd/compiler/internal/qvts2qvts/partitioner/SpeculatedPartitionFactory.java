@@ -112,10 +112,10 @@ public class SpeculatedPartitionFactory extends AbstractPartitionFactory
 					Node targetNode = edge.getEdgeTarget();
 					if (!targetNode.isPredicated() || mappingPartitioner.hasPredicatedNode(targetNode)) { // || isLocalCorollary(sourceNode)) {
 						if (!partition.hasNode(sourceNode)) {
-							partition.addNode(sourceNode, QVTscheduleUtil.getNodeRole(sourceNode));
+							addNode(partition, sourceNode, QVTscheduleUtil.getNodeRole(sourceNode));
 						}
 						if (!partition.hasNode(targetNode)) {
-							partition.addNode(targetNode, QVTscheduleUtil.getNodeRole(targetNode));
+							addNode(partition, targetNode, QVTscheduleUtil.getNodeRole(targetNode));
 						}
 					}
 				}
@@ -126,7 +126,7 @@ public class SpeculatedPartitionFactory extends AbstractPartitionFactory
 	protected void resolveRealizedOutputNodes(@NonNull BasicPartition partition) {
 		for (@NonNull Node node : mappingPartitioner.getRegionAnalysis().getCorollaryNodes()) {
 			if (!partition.hasNode(node) && !node.isSuccess()) {
-				partition.addNode(node);
+				addNode(partition, node);
 			}
 		}
 	}
@@ -165,14 +165,14 @@ public class SpeculatedPartitionFactory extends AbstractPartitionFactory
 
 	protected void resolveTraceNodes(@NonNull BasicPartition partition, @NonNull Node traceNode) {
 		assert traceNode.isMatched() && traceNode.isClass() && traceNode.isPattern();
-		partition.addNode(traceNode, Role.PREDICATED);
+		addNode(partition, traceNode, Role.PREDICATED);
 		if (mappingPartitioner.getScheduleManager().useActivators()) {
 			Node localSuccessNode = mappingPartitioner.basicGetLocalSuccessNode(traceNode);
 			if (localSuccessNode != null) {
-				partition.addNode(localSuccessNode, Role.CONSTANT_SUCCESS_TRUE);
+				addNode(partition, localSuccessNode, Role.CONSTANT_SUCCESS_TRUE);
 			}
 			Node globalSuccessNode = mappingPartitioner.getGlobalSuccessNode(traceNode);
-			partition.addNode(globalSuccessNode, Role.CONSTANT_SUCCESS_TRUE);
+			addNode(partition, globalSuccessNode, Role.CONSTANT_SUCCESS_TRUE);
 		}
 		//	}
 		//		}

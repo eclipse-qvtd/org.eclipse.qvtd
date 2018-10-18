@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,6 +26,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.SuccessNode;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
@@ -42,11 +44,126 @@ public abstract class AbstractPartitionFactory implements PartitionFactory
 	 */
 	protected final boolean hasSynthesizedTrace;
 
+	/**
+	 * The nodes of region that are required by the partition. This is identical to node2nodeRole.keySet() but in a linear
+	 * list to facilitate recursions over all nodes so far.
+	 */
+	private final @NonNull List<@NonNull Node> nodes = new ArrayList<>();
+
 	protected AbstractPartitionFactory(@NonNull MappingPartitioner mappingPartitioner) {
 		this.mappingPartitioner = mappingPartitioner;
 		this.transformationAnalysis = mappingPartitioner.getRegionAnalysis().getTransformationAnalysis();
 		this.region = mappingPartitioner.getRegion();
 		this.hasSynthesizedTrace = mappingPartitioner.getScheduleManager().useActivators();
+	}
+
+	private void addEdge(@NonNull BasicPartition partition, @NonNull Edge edge, @NonNull Role newEdgeRole) {
+		assert edge.getOwningRegion() == region;
+		Role oldEdgeRole = QVTscheduleUtil.getEdgeRole(edge);
+		switch (oldEdgeRole)
+		{
+			case CONSTANT_SUCCESS_FALSE: /* fall through */
+			case CONSTANT_SUCCESS_TRUE: /* fall through */
+			case CONSTANT: {
+				assert newEdgeRole == Role.CONSTANT;
+				break;
+			}
+			case LOADED: {
+				assert newEdgeRole == Role.LOADED;
+				break;
+			}
+			case PREDICATED: {
+				assert (newEdgeRole == Role.PREDICATED) || (newEdgeRole == Role.SPECULATED);
+				break;
+			}
+			case REALIZED: {
+				if (!mappingPartitioner.hasRealizedEdge(edge)) {
+					assert newEdgeRole == Role.REALIZED;
+				}
+				//				else if (this instanceof SpeculatingPartitionFactory) {
+				//					assert (newEdgeRole == Role.PREDICATED) || (newEdgeRole == Role.SPECULATED);		// FIXME rationalize
+				//				}
+				else {
+					assert newEdgeRole == Role.PREDICATED;
+				}
+				break;
+			}
+			default: {
+				throw new UnsupportedOperationException(getClass().getSimpleName() + ".addEdge " + edge);
+			}
+		}
+		mappingPartitioner.addEdge(edge, newEdgeRole, partition);
+		Role displacedEdgeRole = partition.putEdgeRole(edge, newEdgeRole);
+		assert (displacedEdgeRole == null) || (displacedEdgeRole == newEdgeRole);
+		if (edge instanceof NavigableEdge) {
+			NavigableEdge oppositeEdge = ((NavigableEdge)edge).getOppositeEdge();
+			if (oppositeEdge != null) {
+				mappingPartitioner.addEdge(oppositeEdge, newEdgeRole, partition);
+				Role displacedOppositeEdgeRole = partition.putEdgeRole(oppositeEdge, newEdgeRole);
+				assert (displacedOppositeEdgeRole == null) || (displacedOppositeEdgeRole == newEdgeRole);
+			}
+		}
+	}
+
+	protected void addNode(@NonNull BasicPartition partition, @NonNull Node node) {
+		Role oldNodeRole = QVTscheduleUtil.getNodeRole(node);
+		addNode(partition, node, oldNodeRole);
+	}
+
+	protected void addNode(@NonNull BasicPartition partition, @NonNull Node node, @NonNull Role newNodeRole) {
+		assert node.getOwningRegion() == region;
+		Role oldNodeRole = QVTscheduleUtil.getNodeRole(node);
+		switch (oldNodeRole)
+		{
+			case CONSTANT_SUCCESS_FALSE: /* fall through */
+			case CONSTANT_SUCCESS_TRUE: /* fall through */
+			case CONSTANT: {
+				assert newNodeRole == Role.CONSTANT;
+				//				if (node.isTrue()) {
+				//					mappingPartitioner.addTrueNode(node);
+				//				}
+				break;
+			}
+			case LOADED: {
+				assert newNodeRole == Role.LOADED;
+				break;
+			}
+			case SPECULATED: {
+				assert newNodeRole == Role.PREDICATED || newNodeRole == Role.SPECULATED;
+				//				mappingPartitioner.addSpeculatedNode(node);
+				break;
+			}
+			case PREDICATED: {
+				assert newNodeRole == Role.PREDICATED || newNodeRole == Role.SPECULATED;
+				mappingPartitioner.addPredicatedNode(node);
+				break;
+			}
+			case REALIZED: {
+				if (!mappingPartitioner.hasRealizedNode(node)) {
+					// FIXME QVTc fudge	assert newNodeRole == Role.REALIZED || newNodeRole == Role.SPECULATION;
+					mappingPartitioner.addRealizedNode(node);
+				}
+				else {
+					if (node instanceof SuccessNode) {
+						assert newNodeRole == Role.CONSTANT_SUCCESS_TRUE;
+					}
+					else if (newNodeRole == Role.REALIZED || newNodeRole == Role.SPECULATION) {
+						assert false;
+						return;		// FIXME redundant call
+					}
+					else {
+						assert newNodeRole == Role.PREDICATED || newNodeRole == Role.SPECULATED;
+					}
+				}
+				break;
+			}
+			default: {
+				throw new UnsupportedOperationException(getClass().getSimpleName() + ".addNode " + node);
+			}
+		}
+		Role displacedNodeRole = partition.putNodeRole(node, newNodeRole);
+		assert (displacedNodeRole == null) || (displacedNodeRole == newNodeRole);
+		nodes.add(node);
 	}
 
 	protected @NonNull String computeName(@NonNull String suffix){
@@ -104,7 +221,7 @@ public abstract class AbstractPartitionFactory implements PartitionFactory
 					Node targetNode = traceNode.getNavigableTarget(property);
 					assert targetNode != null;
 					if (!partition.hasNode(targetNode)) {
-						partition.addNode(targetNode);
+						addNode(partition, targetNode);
 					}
 				}
 			}
@@ -143,7 +260,7 @@ public abstract class AbstractPartitionFactory implements PartitionFactory
 								if (mappingPartitioner.hasRealizedEdge(reachingEdge)) {
 									edgeRole = Role.PREDICATED;
 								}
-								partition.addEdge(reachingEdge, edgeRole);
+								addEdge(partition, reachingEdge, edgeRole);
 							}
 						}
 					}
@@ -175,7 +292,7 @@ public abstract class AbstractPartitionFactory implements PartitionFactory
 										}
 									}
 									if (edgeRole != null) {
-										partition.addEdge(edge, edgeRole);
+										addEdge(partition, edge, edgeRole);
 									}
 								}
 							}
@@ -202,7 +319,7 @@ public abstract class AbstractPartitionFactory implements PartitionFactory
 									}
 								}
 								if (edgeRole != null) {
-									partition.addEdge(edge, edgeRole);
+									addEdge(partition, edge, edgeRole);
 								}
 							}
 						}
@@ -245,7 +362,7 @@ public abstract class AbstractPartitionFactory implements PartitionFactory
 								}
 							}
 							if (edgeRole != null) {
-								partition.addEdge(edge, edgeRole);
+								addEdge(partition, edge, edgeRole);
 							}
 						}
 					}
@@ -258,7 +375,6 @@ public abstract class AbstractPartitionFactory implements PartitionFactory
 	 * Ensure that the predecessors of each node are included in the partition.
 	 */
 	protected void resolvePrecedingNodes(@NonNull BasicPartition partition) {
-		List<@NonNull Node> nodes = partition.getNodesList();
 		for (int i = 0; i < nodes.size(); i++) {
 			Node node = nodes.get(i);
 			assert node != null;
@@ -270,14 +386,14 @@ public abstract class AbstractPartitionFactory implements PartitionFactory
 				for (@NonNull Node precedingNode : partition.getPredecessors(node)) {
 					gotOne = true;
 					if (!partition.hasNode(precedingNode)) {
-						partition.addNode(precedingNode, mappingPartitioner.hasRealizedNode(precedingNode) ? Role.PREDICATED : QVTscheduleUtil.getNodeRole(precedingNode));
+						addNode(partition, precedingNode, mappingPartitioner.hasRealizedNode(precedingNode) ? Role.PREDICATED : QVTscheduleUtil.getNodeRole(precedingNode));
 					}
 				}
 				if (!gotOne && (traceEdge != null) && partition.isRealized(traceEdge)) {
 					gotOne = true;
 					if (!hasSourceNode) {
 						assert sourceNode != null;
-						partition.addNode(sourceNode);
+						addNode(partition, sourceNode);
 					}
 				}
 				//	Integer cost = reachabilityForest.getCost(node);

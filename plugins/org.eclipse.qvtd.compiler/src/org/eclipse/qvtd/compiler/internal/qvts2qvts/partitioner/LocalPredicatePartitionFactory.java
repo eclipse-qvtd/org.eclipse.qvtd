@@ -104,7 +104,7 @@ public class LocalPredicatePartitionFactory extends AbstractPartitionFactory
 		//
 		if (!hasSynthesizedTrace) {
 			for (@NonNull Node traceNode : mappingPartitioner.getTraceNodes()) {
-				partition.addNode(traceNode, Role.SPECULATION);
+				addNode(partition, traceNode, Role.SPECULATION);
 			}
 		}
 		//
@@ -113,7 +113,7 @@ public class LocalPredicatePartitionFactory extends AbstractPartitionFactory
 		//	For a non-top relation the predicated middle (trace) nodes become speculated nodes.
 		//
 		for (@NonNull Node traceNode : executionNodes) {
-			partition.addNode(traceNode, Role.PREDICATED); //, Role.SPECULATED);
+			addNode(partition, traceNode, Role.PREDICATED); //, Role.SPECULATED);
 		}
 		//
 		//	For an override relation the predicated middle dispatch nodes become speculated nodes.
@@ -121,7 +121,7 @@ public class LocalPredicatePartitionFactory extends AbstractPartitionFactory
 		Node dispatchNode2 = dispatchNode;
 		if (dispatchNode2 != null) {
 			assert dispatchNode2.isPredicated();
-			partition.addNode(dispatchNode2); //, Role.SPECULATED);
+			addNode(partition, dispatchNode2); //, Role.SPECULATED);
 		}
 		//
 		//	All old nodes reachable from heads that are not part of cycles are copied to the speculation guard.
@@ -149,11 +149,11 @@ public class LocalPredicatePartitionFactory extends AbstractPartitionFactory
 				boolean isWeaklyMatched = utility == Utility.WEAKLY_MATCHED;
 				boolean isTraced = isTraced(node, executionNodes);
 				if (!isCyclicCorollary && (isTraced || isWeaklyMatched)) {
-					partition.addNode(node);
+					addNode(partition, node);
 				}
 			}
 			else {
-				partition.addNode(node);
+				addNode(partition, node);
 			}
 		}
 		//
@@ -227,7 +227,7 @@ public class LocalPredicatePartitionFactory extends AbstractPartitionFactory
 	protected void resolveSuccessNodes(@NonNull BasicPartition partition) {
 		for (@NonNull Node traceNode : executionNodes) {
 			Node localSuccessNode = mappingPartitioner.getLocalSuccessNode(traceNode);
-			partition.addNode(localSuccessNode, Role.REALIZED);
+			addNode(partition, localSuccessNode, Role.REALIZED);
 		}
 	}
 }

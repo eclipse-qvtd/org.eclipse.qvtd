@@ -47,11 +47,11 @@ public class ResidualPartitionFactory extends AbstractPartitionFactory
 		//
 		for (@NonNull Node node : mappingPartitioner.getTraceNodes()) {
 			if (!partition.hasNode(node)) {
-				partition.addNode(node, Role.SPECULATED);
+				addNode(partition, node, Role.SPECULATED);
 			}
 			Node localSuccessNode = mappingPartitioner.basicGetLocalSuccessNode(node);
 			if (localSuccessNode != null) {		// ?? localSuccess property is not mandatory
-				partition.addNode(localSuccessNode, Role.PREDICATED);
+				addNode(partition, localSuccessNode, Role.PREDICATED);
 			}
 		}
 		//
@@ -59,7 +59,7 @@ public class ResidualPartitionFactory extends AbstractPartitionFactory
 		//
 		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
 			if (!partition.hasNode(node)) {
-				partition.addNode(node);
+				addNode(partition, node);
 			}
 		}
 		//

@@ -55,14 +55,14 @@ public class AssignmentPartitionFactory extends AbstractPartitionFactory
 		//	The realized middle (trace) nodes become predicated head nodes.
 		//
 		for (@NonNull Node traceNode : mappingPartitioner.getTraceNodes()) {
-			partition.addNode(traceNode, Role.PREDICATED);
+			addNode(partition, traceNode, Role.PREDICATED);
 			Node localSuccessNode = mappingPartitioner.basicGetLocalSuccessNode(traceNode);
 			if (localSuccessNode != null) {		// ?? localSuccess property is not mandatory
-				partition.addNode(localSuccessNode, Role.CONSTANT_SUCCESS_TRUE);
+				addNode(partition, localSuccessNode, Role.CONSTANT_SUCCESS_TRUE);
 			}
 			Node globalSuccessNode = mappingPartitioner.basicGetGlobalSuccessNode(traceNode);
 			if (globalSuccessNode != null) {		// success property is not mandatory
-				partition.addNode(globalSuccessNode, Role.CONSTANT_SUCCESS_TRUE);
+				addNode(partition, globalSuccessNode, Role.CONSTANT_SUCCESS_TRUE);
 			}
 		}
 		//
@@ -74,7 +74,7 @@ public class AssignmentPartitionFactory extends AbstractPartitionFactory
 			if (sourceNodeRole == Role.REALIZED) {
 				sourceNodeRole = QVTscheduleUtil.asPredicated(sourceNodeRole);
 			}
-			partition.addNode(sourceNode, sourceNodeRole);
+			addNode(partition, sourceNode, sourceNodeRole);
 		}
 		Node targetNode = realizedEdge.getEdgeTarget();
 		if (!partition.hasNode(targetNode)) {							// very unlikely to fail; can a REALIZED edge share source/target
@@ -82,7 +82,7 @@ public class AssignmentPartitionFactory extends AbstractPartitionFactory
 			if (targetNodeRole == Role.REALIZED) {
 				targetNodeRole = QVTscheduleUtil.asPredicated(targetNodeRole);
 			}
-			partition.addNode(targetNode, targetNodeRole);
+			addNode(partition, targetNode, targetNodeRole);
 		}
 		//
 		//	Add all nodes required to reach the source/target nodes.

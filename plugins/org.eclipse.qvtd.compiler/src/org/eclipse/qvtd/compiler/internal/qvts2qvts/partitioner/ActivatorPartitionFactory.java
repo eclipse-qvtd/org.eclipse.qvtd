@@ -65,14 +65,14 @@ public class ActivatorPartitionFactory extends AbstractPartitionFactory
 		//	The realized middle (trace) nodes become speculation nodes.
 		//
 		for (@NonNull Node traceNode : mappingPartitioner.getTraceNodes()) {
-			partition.addNode(traceNode, Role.SPECULATION);
+			addNode(partition, traceNode, Role.SPECULATION);
 		}
 		//
 		//	The head nodes remain as loaded/predicated nodes.
 		//
 		for (@NonNull Node headNode : headNodes) {
 			if (!headNode.isDependency()) {
-				partition.addNode(headNode);
+				addNode(partition, headNode);
 			}
 		}
 		//
