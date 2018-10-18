@@ -67,6 +67,7 @@ public class FallibilityAnalysis
 
 	protected class Visitor implements CheckedConditionVisitor<Object>
 	{
+		protected final @NonNull BasicPartitionAnalysis partitionAnalysis;
 		protected final @NonNull Partition partition;
 		protected final @NonNull RegionAnalysis regionAnalysis;
 
@@ -76,8 +77,9 @@ public class FallibilityAnalysis
 		 */
 		protected final @NonNull Map<@NonNull CheckedCondition, @NonNull Object> check2regionOrRegions = new HashMap<>();
 
-		public Visitor(@NonNull Partition partition, @NonNull RegionAnalysis regionAnalysis) {
-			this.partition = partition;
+		public Visitor(@NonNull BasicPartitionAnalysis partitionAnalysis, @NonNull RegionAnalysis regionAnalysis) {
+			this.partitionAnalysis = partitionAnalysis;
+			this.partition = partitionAnalysis.getPartition();
 			this.regionAnalysis = regionAnalysis;
 		}
 
@@ -123,7 +125,7 @@ public class FallibilityAnalysis
 					}
 				}
 			}
-			CheckedConditionAnalysis analysis = new CheckedConditionAnalysis(partition, scheduleManager)
+			CheckedConditionAnalysis analysis = new CheckedConditionAnalysis(partitionAnalysis, scheduleManager)
 			{
 				@Override
 				protected @Nullable Set<@NonNull Property> computeCheckedProperties() {
@@ -231,7 +233,7 @@ public class FallibilityAnalysis
 		this.originalContentsAnalysis = scheduleManager.getOriginalContentsAnalysis();
 	}
 
-	public void accumulate(@NonNull Partition consumingPartition, @NonNull RegionAnalysis consumingRegionAnalysis) {
+	public void accumulate(@NonNull BasicPartitionAnalysis consumingPartition, @NonNull RegionAnalysis consumingRegionAnalysis) {
 		String name = consumingRegionAnalysis.getName();
 		if ("mTmapIfExp_success_t1atlCondition_t1atlElse_t1atlTh".equals(name)) {
 			getClass();

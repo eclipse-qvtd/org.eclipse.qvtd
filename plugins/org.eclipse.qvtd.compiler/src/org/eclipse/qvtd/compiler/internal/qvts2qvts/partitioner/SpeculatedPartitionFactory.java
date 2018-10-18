@@ -34,19 +34,20 @@ public class SpeculatedPartitionFactory extends AbstractPartitionFactory
 	}
 
 	@Override
-	public @NonNull BasicPartition createPartition() {
+	public @NonNull BasicPartition createPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		ReachabilityForest reachabilityForest = createReachabilityForest();
 		String name = computeName("speculated");
 		Node traceNode = mappingPartitioner.getTraceNode();
 		Iterable<@NonNull Node> headNodes = mappingPartitioner.getTraceNodes();
-		BasicPartition partition = new BasicPartition(name, scheduleManager, region, headNodes, reachabilityForest);
+		BasicPartition partition = new BasicPartition(name, scheduleManager, region, headNodes);
 		int partitionNumber = region.getNextPartitionNumber();
-		partition.initMicroMappingRegion("«speculated»", "_p" + partitionNumber);
-		initializePartition(partition, traceNode);
+		BasicPartitionAnalysis basicPartitionAnalysis = new BasicPartitionAnalysis(partitionedTransformationAnalysis, partition, reachabilityForest, "«speculated»", "_p" + partitionNumber);
+		initializePartition(basicPartitionAnalysis, traceNode);
 		return partition;
 	}
 
-	protected void initializePartition(@NonNull BasicPartition partition, @NonNull Node traceNode) {
+	protected void initializePartition(@NonNull BasicPartitionAnalysis partitionAnalysis, @NonNull Node traceNode) {
+		BasicPartition partition = partitionAnalysis.getPartition();
 		//		assert traceNode.isPredicated();
 		//		this.predicatedDispatchNode = mappingPartitioner.basicGetPredicatedDispatchNode();
 		//
@@ -76,7 +77,7 @@ public class SpeculatedPartitionFactory extends AbstractPartitionFactory
 		//
 		//	Ensure that the predecessors of each node are included in the partition.
 		//
-		resolvePrecedingNodes(partition);
+		resolvePrecedingNodes(partitionAnalysis);
 		//
 		//	Ensure that re-used trace classes do not lead to ambiguous mapings.
 		//
@@ -84,7 +85,7 @@ public class SpeculatedPartitionFactory extends AbstractPartitionFactory
 		//
 		//	Join up the edges.
 		//
-		resolveEdges(partition);
+		resolveEdges(partitionAnalysis);
 	}
 
 	@Override

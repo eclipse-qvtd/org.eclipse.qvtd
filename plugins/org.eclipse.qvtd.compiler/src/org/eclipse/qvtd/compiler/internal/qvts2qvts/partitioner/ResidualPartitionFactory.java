@@ -28,18 +28,19 @@ public class ResidualPartitionFactory extends AbstractPartitionFactory
 	}
 
 	@Override
-	public @NonNull BasicPartition createPartition() {
+	public @NonNull BasicPartition createPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		ReachabilityForest reachabilityForest = createReachabilityForest();
 		String name = computeName("residue");
 		Iterable<@NonNull Node> headNodes = mappingPartitioner.getTraceNodes();
-		BasicPartition partition = new BasicPartition(name, scheduleManager, region, headNodes, reachabilityForest);
+		BasicPartition partition = new BasicPartition(name, scheduleManager, region, headNodes);
 		int partitionNumber = region.getNextPartitionNumber();
-		partition.initMicroMappingRegion("«residue»", "_p" + partitionNumber);
-		initializePartition(partition);
+		BasicPartitionAnalysis basicPartitionAnalysis = new BasicPartitionAnalysis(partitionedTransformationAnalysis, partition, reachabilityForest, "«residue»", "_p" + partitionNumber);
+		initializePartition(basicPartitionAnalysis);
 		return partition;
 	}
 
-	protected void initializePartition(@NonNull BasicPartition partition) {
+	protected void initializePartition(@NonNull BasicPartitionAnalysis partitionAnalysis) {
+		BasicPartition partition = partitionAnalysis.getPartition();
 		//		Iterable<@NonNull Node> predicatedMiddleNodes = partitioner.getPredicatedMiddleNodes();
 		//		assert Iterables.isEmpty(predicatedMiddleNodes);
 		//
@@ -65,11 +66,11 @@ public class ResidualPartitionFactory extends AbstractPartitionFactory
 		//
 		//	Ensure that the predecessors of each node are included in the partition.
 		//
-		resolvePrecedingNodes(partition);
+		resolvePrecedingNodes(partitionAnalysis);
 		//
 		//	Join up the edges.
 		//
-		resolveEdges(partition);
+		resolveEdges(partitionAnalysis);
 	}
 
 	@Override

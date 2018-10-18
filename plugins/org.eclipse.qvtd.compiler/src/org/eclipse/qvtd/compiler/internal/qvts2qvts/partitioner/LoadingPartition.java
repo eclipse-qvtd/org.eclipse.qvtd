@@ -10,32 +10,18 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
-public class LoadingPartition extends AbstractAcyclicPartition
+public class LoadingPartition extends AbstractMappingPartition
 {
 	public LoadingPartition(@NonNull ScheduleManager scheduleManager, @NonNull LoadingRegion region) {
 		super("«load»", scheduleManager, region);
-	}
-
-	@Override
-	protected @NonNull List<@NonNull Node> analyze(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
-		return new ArrayList<>();
-	}
-
-	public void analyzeIntroductions(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
-		//	regionAnalysis.getTransformationAnalysis().setLoadingRegionAnalysis(regionAnalysis);
-		partitionedTransformationAnalysis.setLoadingRegionAnalysis(this);
 	}
 
 	@Override
@@ -44,18 +30,8 @@ public class LoadingPartition extends AbstractAcyclicPartition
 	}
 
 	@Override
-	public @NonNull MappingRegion createMicroMappingRegion() {
-		return (MappingRegion)region;
-	}
-
-	@Override
 	public @NonNull Iterable<@NonNull Node> getHeadNodes() {
 		return QVTscheduleUtil.getHeadNodes(region);
-	}
-
-	@Override
-	public @NonNull MappingRegion getMicroMappingRegion() {
-		return (MappingRegion)region;
 	}
 
 	@Override

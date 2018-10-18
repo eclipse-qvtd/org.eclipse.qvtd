@@ -51,14 +51,14 @@ public class LocalPredicatePartitionFactory extends AbstractPartitionFactory
 	}
 
 	@Override
-	public @NonNull BasicPartition createPartition() {
+	public @NonNull BasicPartition createPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		ReachabilityForest reachabilityForest = createReachabilityForest();
 		String name = computeName("local");
 		Iterable<@NonNull Node> headNodes = useActivators ? executionNodes : QVTscheduleUtil.getHeadNodes(mappingPartitioner.getRegion());
-		BasicPartition partition = new BasicPartition(name, scheduleManager, region, headNodes, reachabilityForest);
+		BasicPartition partition = new BasicPartition(name, scheduleManager, region, headNodes);
 		int partitionNumber = region.getNextPartitionNumber();
-		partition.initMicroMappingRegion("«local»", "_p" + partitionNumber);
-		initializePartition(partition);
+		BasicPartitionAnalysis basicPartitionAnalysis = new BasicPartitionAnalysis(partitionedTransformationAnalysis, partition, reachabilityForest, "«local»", "_p" + partitionNumber);
+		initializePartition(basicPartitionAnalysis);
 		return partition;
 	}
 
@@ -93,7 +93,8 @@ public class LocalPredicatePartitionFactory extends AbstractPartitionFactory
 		return rootNodes;
 	}
 
-	protected void initializePartition(@NonNull BasicPartition partition) {
+	protected void initializePartition(@NonNull BasicPartitionAnalysis partitionAnalysis) {
+		BasicPartition partition = partitionAnalysis.getPartition();
 		//	this.traceNode = mappingPartitioner.getTraceNode();
 		//	boolean useActivators = useActivators;
 		Set<@NonNull Node> originalHeadNodes = Sets.newHashSet(QVTscheduleUtil.getHeadNodes(mappingPartitioner.getRegion()));
@@ -169,7 +170,7 @@ public class LocalPredicatePartitionFactory extends AbstractPartitionFactory
 		//
 		//	Ensure that the predecessors of each node are included in the partition.
 		//
-		resolvePrecedingNodes(partition);
+		resolvePrecedingNodes(partitionAnalysis);
 		//
 		//	Ensure that re-used trace classes do not lead to ambiguous mappings.
 		//
@@ -177,7 +178,7 @@ public class LocalPredicatePartitionFactory extends AbstractPartitionFactory
 		//
 		//	Join up the edges.
 		//
-		resolveEdges(partition);
+		resolveEdges(partitionAnalysis);
 	}
 
 	/**

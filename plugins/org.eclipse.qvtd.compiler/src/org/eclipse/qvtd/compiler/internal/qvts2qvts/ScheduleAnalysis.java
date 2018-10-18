@@ -23,7 +23,10 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.LoadingPartition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 
@@ -32,18 +35,19 @@ import org.eclipse.qvtd.pivot.qvtschedule.Connection;
  */
 public class ScheduleAnalysis
 {
+	protected final @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis;
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull ConnectionManager connectionManager;
 
 	/**
 	 * The overall RootPartition.
 	 */
-	protected final @NonNull RootPartition rootPartition;
+	protected final @NonNull RootPartitionAnalysis rootPartitionAnalysis;
 
 	/**
 	 * All transitively callable partitions within the rootPartition.
 	 */
-	protected final @NonNull List<@NonNull Partition> allPartitions;
+	protected final @NonNull List<@NonNull PartitionAnalysis> allPartitionAnalyses;
 
 	private final @NonNull LoadingPartition loadingPartition;
 
@@ -103,21 +107,24 @@ public class ScheduleAnalysis
 
 	/**
 	 * The regions that have no outgoing passed connections.
+	 * @param partitionedTransformationAnalysis
 	 */
 	// private final @NonNull Set<@NonNull Partition> unpassedPartitions = new HashSet<>();
 
-	public ScheduleAnalysis(@NonNull ConnectionManager connectionManager, @NonNull RootPartition rootPartition) {
+	public ScheduleAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull ConnectionManager connectionManager, @NonNull RootPartitionAnalysis rootPartitionAnalysis) {
+		this.partitionedTransformationAnalysis = partitionedTransformationAnalysis;
 		this.scheduleManager = connectionManager.getScheduleManager();
-		this.rootPartition = rootPartition;
+		this.rootPartitionAnalysis = rootPartitionAnalysis;
 		this.connectionManager = connectionManager;
-		this.allPartitions = CompilerUtil.gatherPartitions(rootPartition, new ArrayList<>());
-		Collections.sort(this.allPartitions, NameUtil.NAMEABLE_COMPARATOR);
+		this.allPartitionAnalyses = CompilerUtil.gatherPartitionAnalyses(rootPartitionAnalysis, new ArrayList<>());
+		Collections.sort(this.allPartitionAnalyses, NameUtil.NAMEABLE_COMPARATOR);
 		//
 		// Initialize the incoming/looping/outgoing connection analyses of each region
 		//
 		LoadingPartition loadingPartition = null;
-		for (@NonNull Partition partition : this.allPartitions) {
-			analyzeConnections(partition);
+		for (@NonNull PartitionAnalysis partitionAnalysis : this.allPartitionAnalyses) {
+			analyzeConnections(partitionAnalysis);
+			Partition partition = partitionAnalysis.getPartition();
 			if (partition instanceof LoadingPartition) {
 				assert loadingPartition == null;
 				loadingPartition = (LoadingPartition) partition;
@@ -129,8 +136,8 @@ public class ScheduleAnalysis
 		// Initialize the source/target of each connection.
 		// Compute the set of all connections that are not passed.
 		//
-		for (@NonNull Partition partition : this.allPartitions) {
-			analyzeSourcesAndTargets(partition);
+		for (@NonNull PartitionAnalysis partitionAnalysis : this.allPartitionAnalyses) {
+			analyzeSourcesAndTargets(partitionAnalysis.getPartition());
 		}
 		//
 		//	Identify all the source regions for each target region.
@@ -158,11 +165,12 @@ public class ScheduleAnalysis
 	/**
 	 * Initialize the incoming/looping/outgoing connection analyses of each region
 	 */
-	private void analyzeConnections(@NonNull Partition partition) {
+	private void analyzeConnections(@NonNull PartitionAnalysis partitionAnalysis) {
+		Partition partition = partitionAnalysis.getPartition();
 		List<@NonNull Connection> incomingConnections = new ArrayList<>();
 		List<@NonNull Connection> loopingConnections = new ArrayList<>();
 		List<@NonNull Connection> outgoingConnections = new ArrayList<>();
-		for (@NonNull Connection connection : connectionManager.getIncomingConnections(partition)) {
+		for (@NonNull Connection connection : connectionManager.getIncomingConnections(partitionAnalysis)) {
 			for (@NonNull Partition sourcePartition : connectionManager.getSourcePartitions(connection)) {
 				if (partition == sourcePartition) {
 					if (!loopingConnections.contains(connection)) {
@@ -378,10 +386,11 @@ public class ScheduleAnalysis
 	//
 	private @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> analyzeSources() {
 		Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> target2sources = new HashMap<>();
-		for (@NonNull Partition partition : allPartitions) {
-			target2sources.put(partition, new HashSet<>());
+		for (@NonNull PartitionAnalysis partitionAnalysis : allPartitionAnalyses) {
+			target2sources.put(partitionAnalysis.getPartition(), new HashSet<>());
 		}
-		for (@NonNull Partition partition : allPartitions) {
+		for (@NonNull PartitionAnalysis partitionAnalysis : allPartitionAnalyses) {
+			Partition partition = partitionAnalysis.getPartition();
 			Set<@NonNull Partition> sources = new HashSet<>();
 			target2sources.put(partition, sources);
 			List<@NonNull Connection> incomingConnections = partition2incomingConnections.get(partition);
@@ -397,9 +406,9 @@ public class ScheduleAnalysis
 		return target2sources;
 	}
 
-	protected void buildCallTree(@NonNull Iterable<@NonNull ? extends Iterable<@NonNull Partition>> partitionSchedule) {
-		CallTreeBuilder callTreeBuilder = new CallTreeBuilder(this);
-		callTreeBuilder.buildTree(rootPartition, partitionSchedule);
+	protected void buildCallTree(@NonNull Iterable<@NonNull ? extends Iterable<@NonNull PartitionAnalysis>> partitionSchedule) {
+		CallTreeBuilder callTreeBuilder = new CallTreeBuilder(this, rootPartitionAnalysis.getPartition(), loadingPartition);
+		callTreeBuilder.buildTree(partitionSchedule);
 	}
 
 	public @NonNull ConnectionManager getConnectionManager() {
@@ -433,7 +442,7 @@ public class ScheduleAnalysis
 	}
 
 	public @NonNull RootPartition getRootPartition() {
-		return rootPartition;
+		return rootPartitionAnalysis.getPartition();
 	}
 
 	public @NonNull ScheduleManager getScheduleManager() {
@@ -482,10 +491,11 @@ public class ScheduleAnalysis
 		}
 	}
 
-	public void schedule(@NonNull RootPartition rootPartition, @NonNull Iterable<@NonNull ? extends Iterable<@NonNull Partition>> partitionSchedule) {
+	public void schedule(@NonNull RootPartition rootPartition, @NonNull Iterable<@NonNull ? extends Iterable<@NonNull PartitionAnalysis>> partitionSchedule) {
 		int depth = 0;
-		for (@NonNull Iterable<@NonNull Partition> concurrency : partitionSchedule) {
-			for (@NonNull Partition partition : concurrency) {
+		for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrency : partitionSchedule) {
+			for (@NonNull PartitionAnalysis partitionAnalysis : concurrency) {
+				Partition partition = partitionAnalysis.getPartition();
 				partition.setPass(depth);
 				Iterable<@NonNull Connection> loopingConnections = getLoopingConnections(partition);
 				assert loopingConnections != null;
@@ -514,13 +524,13 @@ public class ScheduleAnalysis
 	@Override
 	public @NonNull String toString() {
 		StringBuilder s = new StringBuilder();
-		List<@NonNull Partition> list = new ArrayList<>(allPartitions);
+		List<@NonNull PartitionAnalysis> list = new ArrayList<>(allPartitionAnalyses);
 		Collections.sort(list, NameUtil.NAMEABLE_COMPARATOR);
-		for (@NonNull Partition entry : list) {
+		for (@NonNull PartitionAnalysis entry : list) {
 			if (s.length() > 0) {
 				s.append("\n");
 			}
-			s.append(entry.getPassRangeText() + " : " + entry.getName());
+			s.append(entry.getPartition().getPassRangeText() + " : " + entry.getName());
 		}
 		return s.toString();
 	}

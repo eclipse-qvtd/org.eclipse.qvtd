@@ -30,6 +30,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LegacyContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LoadingRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -200,11 +201,11 @@ public class ConnectionManager
 	/**
 	 * Create the Passed and Used Connections between all introducers and their corresponding consuming nodes.
 	 */
-	public void createConnections(@NonNull ScheduledRegion scheduledRegion, @NonNull Iterable<@NonNull ? extends Iterable<@NonNull Partition>> partitionSchedule) {
+	public void createConnections(@NonNull ScheduledRegion scheduledRegion, @NonNull Iterable<@NonNull ? extends Iterable<@NonNull PartitionAnalysis>> partitionSchedule) {
 		Set<@NonNull Region> regions = new HashSet<>();
-		for (@NonNull Iterable<@NonNull Partition> concurrency : partitionSchedule) {
-			for (@NonNull Partition partition : concurrency) {
-				regions.add(partition.getRegion());
+		for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrency : partitionSchedule) {
+			for (@NonNull PartitionAnalysis partition : concurrency) {
+				regions.add(partition.getPartition().getRegion());
 			}
 		}
 		//		for (@NonNull Region region : regions) {
@@ -803,7 +804,8 @@ public class ConnectionManager
 		return callingRegions;
 	} */
 
-	public @NonNull Iterable<@NonNull Connection> getIncomingConnections(@NonNull Partition partition) {		// FIXME cache
+	public @NonNull Iterable<@NonNull Connection> getIncomingConnections(@NonNull PartitionAnalysis partitionAnalysis) {		// FIXME cache
+		Partition partition = partitionAnalysis.getPartition();
 		/*	Region region = partition.getOriginalRegion();
 			if (region != null) {
 			List<@NonNull Connection> connections = new ArrayList<>();
@@ -864,7 +866,7 @@ public class ConnectionManager
 			//			}
 		}
 		for (@NonNull Edge edge : partition.getPartialEdges()) {
-			if (partition.isAwaited(edge) && edge.isNavigation()) {
+			if (partitionAnalysis.isAwaited(edge) && edge.isNavigation()) {
 				NavigationEdge navigationEdge = (NavigationEdge) edge;
 				EdgeConnection connection = navigationEdge.getIncomingConnection();
 				if ((connection != null) && !connections.contains(connection)) {

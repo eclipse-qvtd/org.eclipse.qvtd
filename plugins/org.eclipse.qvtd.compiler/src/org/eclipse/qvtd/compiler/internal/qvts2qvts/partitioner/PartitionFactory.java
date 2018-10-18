@@ -22,5 +22,5 @@ import org.eclipse.jdt.annotation.NonNull;
  */
 public interface PartitionFactory
 {
-	@NonNull Partition createPartition();
+	@NonNull Partition createPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis);
 }

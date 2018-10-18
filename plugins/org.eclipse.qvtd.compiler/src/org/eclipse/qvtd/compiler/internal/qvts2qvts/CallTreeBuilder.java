@@ -19,10 +19,10 @@ import java.util.Map;
 import java.util.Stack;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.LoadingPartition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
@@ -35,26 +35,28 @@ import com.google.common.collect.Iterables;
 public class CallTreeBuilder
 {
 	private final @NonNull ScheduleAnalysis scheduleCache;
-	private final @NonNull ScheduleManager scheduleManager;
 	private final @NonNull ConnectionManager connectionManager;
+	private final @NonNull RootPartition rootPartition;
+	private final @NonNull LoadingPartition loadingPartition;
 
 	/**
 	 * Working state: the common region for all uses of each connection.
 	 */
 	private final @NonNull Map<@NonNull NodeConnection, @NonNull Partition> connection2commonPartition = new HashMap<>();
 
-	public CallTreeBuilder(@NonNull ScheduleAnalysis scheduleCache) {
+	public CallTreeBuilder(@NonNull ScheduleAnalysis scheduleCache, @NonNull RootPartition rootPartition, @NonNull LoadingPartition loadingPartition) {
 		this.scheduleCache = scheduleCache;
-		this.scheduleManager = scheduleCache.getScheduleManager();
 		this.connectionManager = scheduleCache.getConnectionManager();
+		this.rootPartition = rootPartition;
+		this.loadingPartition = loadingPartition;
 	}
 
-	public void buildTree(@NonNull RootPartition rootPartition, @NonNull Iterable<@NonNull ? extends Iterable<@NonNull Partition>> partitionSchedule) {
-		Stack<@NonNull Partition> callStack = new Stack<@NonNull Partition>();
+	public void buildTree(@NonNull Iterable<@NonNull ? extends Iterable<@NonNull PartitionAnalysis>> partitionSchedule) {
+		Stack<@NonNull Partition> callStack = new Stack<>();
 		callStack.push(rootPartition);
-		for (@NonNull Iterable<@NonNull Partition> concurrency : partitionSchedule) {
-			for (@NonNull Partition partition : concurrency) {
-				updateCallStack(callStack, partition);
+		for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrency : partitionSchedule) {
+			for (@NonNull PartitionAnalysis partition : concurrency) {
+				updateCallStack(callStack, partition.getPartition());
 			}
 		}
 		installConnections();
@@ -71,7 +73,7 @@ public class CallTreeBuilder
 			return secondPartition;
 		}
 		else {
-			return scheduleCache.getLoadingPartition();
+			return loadingPartition;
 		}
 	}
 
@@ -83,10 +85,10 @@ public class CallTreeBuilder
 			return childPartition;
 		}
 		else if (childPartition instanceof LoadingPartition) {
-			return scheduleCache.getRootPartition();
+			return rootPartition;
 		}
 		else {
-			return scheduleCache.getLoadingPartition();
+			return loadingPartition;
 		}
 	}
 

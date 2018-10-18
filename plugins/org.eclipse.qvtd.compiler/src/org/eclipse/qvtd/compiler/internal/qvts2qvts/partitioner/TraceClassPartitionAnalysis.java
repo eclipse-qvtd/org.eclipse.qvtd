@@ -38,7 +38,7 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractDispatch;
 /**
  * Each TraceClassAnalysis identifies the usage of one middle trace class.
  */
-public class TraceClassPartitionAnalysis extends TraceElementPartitionAnalysis implements CompilerUtil.TraceClass<@NonNull Partition, @NonNull TraceClassPartitionAnalysis, @NonNull TracePropertyPartitionAnalysis>
+public class TraceClassPartitionAnalysis extends TraceElementPartitionAnalysis implements CompilerUtil.TraceClass<@NonNull PartitionAnalysis, @NonNull TraceClassPartitionAnalysis, @NonNull TracePropertyPartitionAnalysis>
 {
 	protected final @NonNull TraceClassRegionAnalysis traceClassRegionAnalysis;
 	protected final @NonNull ScheduleManager scheduleManager;
@@ -92,9 +92,9 @@ public class TraceClassPartitionAnalysis extends TraceElementPartitionAnalysis i
 		//
 		//	Identify the properties available for discrimination.
 		//
-		Map<@NonNull Partition, @NonNull Map<@NonNull Property, @NonNull NavigableEdge>> partitioner2property2edge = new HashMap<>();
+		Map<@NonNull PartitionAnalysis, @NonNull Map<@NonNull Property, @NonNull NavigableEdge>> partitioner2property2edge = new HashMap<>();
 		Set<@NonNull Property> commonProperties = null;
-		for (@NonNull Partition producer : producers) {
+		for (@NonNull PartitionAnalysis producer : producers) {
 			Map<@NonNull Property, @NonNull NavigableEdge> property2edge = new HashMap<>();
 			partitioner2property2edge.put(producer, property2edge);
 			for (@NonNull Node traceNode : producer.getTraceNodes()) {
@@ -122,20 +122,20 @@ public class TraceClassPartitionAnalysis extends TraceElementPartitionAnalysis i
 		//
 		List<@NonNull Property> sortedProperties = new ArrayList<@NonNull Property>(commonProperties);
 		Collections.sort(sortedProperties, NameUtil.NAMEABLE_COMPARATOR);
-		Map<@NonNull Property, @Nullable Map<@Nullable CompleteClass, @NonNull List<@NonNull Partition>>> property2completeClass2regionAnalyses  = new HashMap<>();
+		Map<@NonNull Property, @Nullable Map<@Nullable CompleteClass, @NonNull List<@NonNull PartitionAnalysis>>> property2completeClass2partitionAnalyses  = new HashMap<>();
 		for (@NonNull Property property : sortedProperties) {
-			for (@NonNull Partition producer : producers) {
+			for (@NonNull PartitionAnalysis producer : producers) {
 				Map<@NonNull Property, @NonNull NavigableEdge> property2edge = partitioner2property2edge.get(producer);
 				assert property2edge != null;
 				NavigableEdge edge = property2edge.get(property);
 				if (edge == null) {
-					property2completeClass2regionAnalyses.put(property, null);
+					property2completeClass2partitionAnalyses.put(property, null);
 				}
 				else {
-					Map<@Nullable CompleteClass, @NonNull List<@NonNull Partition>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
-					if (completeClass2regionAnalyses == null) {
-						completeClass2regionAnalyses = new HashMap<>();
-						property2completeClass2regionAnalyses.put(property, completeClass2regionAnalyses);
+					Map<@Nullable CompleteClass, @NonNull List<@NonNull PartitionAnalysis>> completeClass2partitionAnalyses = property2completeClass2partitionAnalyses.get(property);
+					if (completeClass2partitionAnalyses == null) {
+						completeClass2partitionAnalyses = new HashMap<>();
+						property2completeClass2partitionAnalyses.put(property, completeClass2partitionAnalyses);
 					}
 					CompleteClass completeClass;
 					Node targetNode = QVTscheduleUtil.getTargetNode(edge);
@@ -145,12 +145,12 @@ public class TraceClassPartitionAnalysis extends TraceElementPartitionAnalysis i
 					else {
 						completeClass = targetNode.getCompleteClass(); // FIXME use/ignore inheritance
 					}
-					List<@NonNull Partition> regionAnalyses = completeClass2regionAnalyses.get(completeClass);
-					if (regionAnalyses == null) {
-						regionAnalyses = new ArrayList<>();
-						completeClass2regionAnalyses.put(completeClass, regionAnalyses);
+					List<@NonNull PartitionAnalysis> partitionAnalyses = completeClass2partitionAnalyses.get(completeClass);
+					if (partitionAnalyses == null) {
+						partitionAnalyses = new ArrayList<>();
+						completeClass2partitionAnalyses.put(completeClass, partitionAnalyses);
 					}
-					regionAnalyses.add(producer);
+					partitionAnalyses.add(producer);
 				}
 				/*				assert edge != null;
 
@@ -180,10 +180,10 @@ public class TraceClassPartitionAnalysis extends TraceElementPartitionAnalysis i
 		//
 		int bestSize = 0;
 		Property bestProperty = null;
-		for (@NonNull Property property : property2completeClass2regionAnalyses.keySet()) {
-			Map<@Nullable CompleteClass, @NonNull List<@NonNull Partition>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
-			if (completeClass2regionAnalyses != null) {
-				int size = completeClass2regionAnalyses.size();
+		for (@NonNull Property property : property2completeClass2partitionAnalyses.keySet()) {
+			Map<@Nullable CompleteClass, @NonNull List<@NonNull PartitionAnalysis>> completeClass2partitionAnalyses = property2completeClass2partitionAnalyses.get(property);
+			if (completeClass2partitionAnalyses != null) {
+				int size = completeClass2partitionAnalyses.size();
 				if (size > bestSize) {
 					bestSize = size;
 					bestProperty = property;
@@ -192,17 +192,17 @@ public class TraceClassPartitionAnalysis extends TraceElementPartitionAnalysis i
 		}
 		if (TransformationPartitioner.DISCRIMINATION.isActive()) {
 			StringBuilder s = new StringBuilder();
-			s.append("property->completeClass->regionAnalyses");
-			for (@NonNull Property property : property2completeClass2regionAnalyses.keySet()) {
+			s.append("property->completeClass->partitionAnalyses");
+			for (@NonNull Property property : property2completeClass2partitionAnalyses.keySet()) {
 				s.append("\n\t" + property);
-				Map<@Nullable CompleteClass, @NonNull List<@NonNull Partition>> completeClass2regionAnalyses = property2completeClass2regionAnalyses.get(property);
-				if (completeClass2regionAnalyses != null) {
-					for (@Nullable CompleteClass completeClass : completeClass2regionAnalyses.keySet()) {
+				Map<@Nullable CompleteClass, @NonNull List<@NonNull PartitionAnalysis>> completeClass2partitionAnalyses = property2completeClass2partitionAnalyses.get(property);
+				if (completeClass2partitionAnalyses != null) {
+					for (@Nullable CompleteClass completeClass : completeClass2partitionAnalyses.keySet()) {
 						s.append("\n\t\t" + completeClass);
-						List<@NonNull Partition> regionAnalyses = completeClass2regionAnalyses.get(completeClass);
-						assert regionAnalyses != null;
-						for (@NonNull Partition regionAnalysis : regionAnalyses) {
-							s.append("\n\t\t\t" + regionAnalysis);
+						List<@NonNull PartitionAnalysis> partitionAnalyses = completeClass2partitionAnalyses.get(completeClass);
+						assert partitionAnalyses != null;
+						for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {
+							s.append("\n\t\t\t" + partitionAnalysis);
 						}
 					}
 				}

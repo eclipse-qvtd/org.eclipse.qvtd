@@ -20,7 +20,8 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphElement;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
@@ -328,14 +329,15 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 
 	protected void showScheduledRegionInternals(@NonNull ScheduledRegion scheduledRegion) {
 		AbstractTransformationAnalysis transformationAnalysis = scheduleManager.getTransformationAnalysis(scheduledRegion);
-		RootPartition rootPartition = transformationAnalysis.basicGetRootPartition();
-		if (rootPartition == null) {
+		RootPartitionAnalysis rootPartitionAnalysis = transformationAnalysis.basicGetRootPartitionAnalysis();
+		if (rootPartitionAnalysis == null) {
 			for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(scheduledRegion)) {
 				region.accept(this);
 			}
 		}
 		else {
-			for (@NonNull Partition partition : CompilerUtil.gatherPartitions(rootPartition, new ArrayList<>())) {
+			for (@NonNull PartitionAnalysis partitionAnalysis : CompilerUtil.gatherPartitionAnalyses(rootPartitionAnalysis, new ArrayList<>())) {
+				Partition partition= partitionAnalysis.getPartition();
 				setScope(partition);
 				visitPartition(partition);
 			}
@@ -402,7 +404,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 
 	@Override
 	public @Nullable String visitScheduledRegion(@NonNull ScheduledRegion scheduledRegion) {
-		hasPartitions = scheduleManager.getTransformationAnalysis(scheduledRegion).basicGetRootPartition() != null;
+		hasPartitions = scheduleManager.getTransformationAnalysis(scheduledRegion).basicGetRootPartitionAnalysis() != null;
 		context.setLabel(scheduledRegion.getName());
 		context.setColor(QVTscheduleConstants.REGION_COLOR);
 		context.pushCluster();

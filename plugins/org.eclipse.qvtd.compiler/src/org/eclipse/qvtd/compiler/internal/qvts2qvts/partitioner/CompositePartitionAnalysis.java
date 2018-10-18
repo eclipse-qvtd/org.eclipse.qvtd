@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2017 Willink Transformations and others.
+ * Copyright (c) 2018 Willink Transformations and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -10,15 +10,12 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import java.util.List;
 
-/**
- * Each CyclicPartition identifies one group of regions that contribute to a cycle.
- */
-public class CyclicPartition extends AbstractPartition
+import org.eclipse.jdt.annotation.NonNull;
+
+public interface CompositePartitionAnalysis extends PartitionAnalysis
 {
-	public CyclicPartition(@NonNull String name, @NonNull ScheduleManager scheduleManager) {
-		super(name, scheduleManager);
-	}
+	@NonNull Iterable<@NonNull PartitionAnalysis>  getPartitionAnalyses();
+	@NonNull List<@NonNull Iterable<@NonNull PartitionAnalysis>> getPartitionSchedule();
 }

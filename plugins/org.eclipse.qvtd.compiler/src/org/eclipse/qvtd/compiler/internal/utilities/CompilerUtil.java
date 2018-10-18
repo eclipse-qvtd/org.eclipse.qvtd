@@ -55,8 +55,9 @@ import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.PartitionProblem;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionProblem;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.InternallyAcyclicPartition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CompositePartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
@@ -338,31 +339,31 @@ public class CompilerUtil extends QVTscheduleUtil
 	 * concurrently, after their preceding concurrencies and before their subsequent concurrencies. The index in the
 	 * sequence corresponds to the critical path length/depth from the earliest predecessor to the concurrent element.
 	 */
-	public static @NonNull List<@NonNull Iterable<@NonNull Partition>> computeParallelSchedule(	// FIXME this can be much faster with bit masks
-			@NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2predecessors) {
-		Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> partition2successors = CompilerUtil.computeTransitiveSuccessors(partition2predecessors);
+	public static @NonNull List<@NonNull Iterable<@NonNull PartitionAnalysis>> computeParallelSchedule(	// FIXME this can be much faster with bit masks
+			@NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partition2predecessors) {
+		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partition2successors = CompilerUtil.computeTransitiveSuccessors(partition2predecessors);
 		//
 		//	Loop over the candidates to select those with no unscheduled predecessors. On the first iteration
 		//	all partitions are considered, on subsequent iterations only successots of just scheduled partitions
 		//	are reconsidered.
 		//
-		List<@NonNull Iterable<@NonNull Partition>> parallelSchedule = new ArrayList<>();
-		Set<@NonNull Partition> scheduledPartitions = new HashSet<>();
-		Set<@NonNull Partition> scheduleCandidates = new HashSet<>(partition2predecessors.keySet());
+		List<@NonNull Iterable<@NonNull PartitionAnalysis>> parallelSchedule = new ArrayList<>();
+		Set<@NonNull PartitionAnalysis> scheduledPartitions = new HashSet<>();
+		Set<@NonNull PartitionAnalysis> scheduleCandidates = new HashSet<>(partition2predecessors.keySet());
 		while (!scheduleCandidates.isEmpty()) {
-			List<@NonNull Partition> toSchedule = new ArrayList<>();
-			Set<@NonNull Partition> nextScheduleCandidates = new HashSet<>();
-			for (@NonNull Partition partition : scheduleCandidates) {
-				Set<@NonNull Partition> predecessors = partition2predecessors.get(partition);
+			List<@NonNull PartitionAnalysis> toSchedule = new ArrayList<>();
+			Set<@NonNull PartitionAnalysis> nextScheduleCandidates = new HashSet<>();
+			for (@NonNull PartitionAnalysis partition : scheduleCandidates) {
+				Set<@NonNull PartitionAnalysis> predecessors = partition2predecessors.get(partition);
 				assert predecessors != null;
-				Set<@NonNull Partition> unscheduledPredecessors = new HashSet<>(predecessors);
+				Set<@NonNull PartitionAnalysis> unscheduledPredecessors = new HashSet<>(predecessors);
 				assert unscheduledPredecessors != null;
 				unscheduledPredecessors.remove(partition);
 				unscheduledPredecessors.removeAll(scheduledPartitions);
 				if (unscheduledPredecessors.isEmpty()) {
 					toSchedule.add(partition);
 					//	partition.setDepth(parallelSchedule.size());
-					Set<@NonNull Partition> unscheduledSuccessors = partition2successors.get(partition);
+					Set<@NonNull PartitionAnalysis> unscheduledSuccessors = partition2successors.get(partition);
 					assert unscheduledSuccessors != null;
 					nextScheduleCandidates.addAll(unscheduledSuccessors);
 				}
@@ -515,17 +516,17 @@ public class CompilerUtil extends QVTscheduleUtil
 		return new RegionProblem(CompilerProblem.Severity.WARNING, region, boundMessage);
 	}
 
-	public static @NonNull List<@NonNull Partition> gatherPartitions(@NonNull InternallyAcyclicPartition rootPartition, @NonNull List<@NonNull Partition> allPartitions) {
-		for (@NonNull Partition partition : rootPartition.getPartitions()) {
-			assert !allPartitions.contains(partition);
-			if (partition instanceof InternallyAcyclicPartition) {
-				gatherPartitions((InternallyAcyclicPartition)partition, allPartitions);
+	public static @NonNull List<@NonNull PartitionAnalysis> gatherPartitionAnalyses(@NonNull CompositePartitionAnalysis rootPartitionAnalysis, @NonNull List<@NonNull PartitionAnalysis> allPartitionAnalyses) {
+		for (@NonNull PartitionAnalysis partitionAnalysis : rootPartitionAnalysis.getPartitionAnalyses()) {
+			assert !allPartitionAnalyses.contains(partitionAnalysis);
+			if (partitionAnalysis instanceof CompositePartitionAnalysis) {
+				gatherPartitionAnalyses((CompositePartitionAnalysis)partitionAnalysis, allPartitionAnalyses);
 			}
 			else {
-				allPartitions.add(partition);
+				allPartitionAnalyses.add(partitionAnalysis);
 			}
 		}
-		return allPartitions;
+		return allPartitionAnalyses;
 	}
 
 	public static void indent(@NonNull StringBuilder s, int depth) {

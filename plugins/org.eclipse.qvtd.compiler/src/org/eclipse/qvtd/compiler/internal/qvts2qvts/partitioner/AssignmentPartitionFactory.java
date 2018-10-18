@@ -32,20 +32,21 @@ public class AssignmentPartitionFactory extends AbstractPartitionFactory
 	}
 
 	@Override
-	public @NonNull BasicPartition createPartition() {
+	public @NonNull BasicPartition createPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		ReachabilityForest reachabilityForest = createReachabilityForest();
 		String name = computeName("edge-" + QVTscheduleUtil.getName(realizedEdge));
 		Iterable<@NonNull Node> headNodes = mappingPartitioner.getTraceNodes();
-		BasicPartition partition = new BasicPartition(name, mappingPartitioner.getScheduleManager(), region, headNodes, reachabilityForest);
+		BasicPartition partition = new BasicPartition(name, mappingPartitioner.getScheduleManager(), region, headNodes);
 		int partitionNumber = region.getNextPartitionNumber();
 		String namePrefix = "«edge" + partitionNumber + "»";
 		String symbolSuffix = "_p" + partitionNumber;
-		partition.initMicroMappingRegion(namePrefix, symbolSuffix);
-		initializePartition(partition);
+		BasicPartitionAnalysis basicPartitionAnalysis = new BasicPartitionAnalysis(partitionedTransformationAnalysis, partition, reachabilityForest, namePrefix, symbolSuffix);
+		initializePartition(basicPartitionAnalysis);
 		return partition;
 	}
 
-	protected void initializePartition(@NonNull BasicPartition partition) {
+	protected void initializePartition(@NonNull BasicPartitionAnalysis partitionAnalysis) {
+		BasicPartition partition = partitionAnalysis.getPartition();
 		//	this.traceNode = mappingPartitioner.getTraceNode();
 		String regionName = region.getName();
 		if ("mapNavigationOrAttributeCallExp_Property_qvtr".equals(regionName)) {
@@ -87,10 +88,10 @@ public class AssignmentPartitionFactory extends AbstractPartitionFactory
 		//
 		//	Add all nodes required to reach the source/target nodes.
 		//
-		resolvePrecedingNodes(partition);
+		resolvePrecedingNodes(partitionAnalysis);
 		Node qvtrThis = null;
 		Node qvtrTransformation = null;
-		for (@NonNull Node node : partition.getNodes()) {
+		for (@NonNull Node node : partition.getPartialNodes()) {
 			if ("qvtrThisVariable".equals(node.getName())) {
 				qvtrThis = node;
 			}
@@ -102,7 +103,7 @@ public class AssignmentPartitionFactory extends AbstractPartitionFactory
 			//			Iterable<@NonNull Node> reachabilityRootNodes = getReachabilityRootNodes();
 			//			Iterable<@NonNull NavigableEdge> availableNavigableEdges = getAvailableNavigableEdges();
 			//			ReachabilityForest reachabilityForest2 = new ReachabilityForest(reachabilityRootNodes, availableNavigableEdges);
-			resolvePrecedingNodes(partition);
+			resolvePrecedingNodes(partitionAnalysis);
 		}
 		//
 		//	Ensure that re-used trace classes do not lead to ambiguous mappings.
@@ -111,7 +112,7 @@ public class AssignmentPartitionFactory extends AbstractPartitionFactory
 		//
 		//	Join up the edges.
 		//
-		resolveEdges(partition);
+		resolveEdges(partitionAnalysis);
 	}
 
 	@Override

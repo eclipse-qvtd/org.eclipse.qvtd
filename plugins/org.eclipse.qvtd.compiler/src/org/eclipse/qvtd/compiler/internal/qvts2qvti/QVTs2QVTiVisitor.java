@@ -42,8 +42,10 @@ import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.LoadingPartition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.MappingPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -77,19 +79,19 @@ import com.google.common.collect.Iterables;
 
 public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nullable Element, @Nullable Object>
 {
-	public class EarliestPartitionComparator implements Comparator<@NonNull Partition>
+	public class EarliestPartitionComparator implements Comparator<@NonNull PartitionAnalysis>
 	{
-		public @NonNull List<@NonNull Partition> sort(@NonNull Iterable<@NonNull Partition> partitions) {
-			List<@NonNull Partition> sortedPartitions = new ArrayList<>();
-			Iterables.addAll(sortedPartitions, partitions);
-			Collections.sort(sortedPartitions, this);
-			return sortedPartitions;
+		public @NonNull List<@NonNull PartitionAnalysis> sort(@NonNull Iterable<@NonNull PartitionAnalysis> partitionAnalyses) {
+			List<@NonNull PartitionAnalysis> sortedPartitionAnalyses = new ArrayList<>();
+			Iterables.addAll(sortedPartitionAnalyses, partitionAnalyses);
+			Collections.sort(sortedPartitionAnalyses, this);
+			return sortedPartitionAnalyses;
 		}
 
 		@Override
-		public int compare(@NonNull Partition o1, @NonNull Partition o2) {
-			int i1 = o1.getFirstPass();
-			int i2 = o2.getFirstPass();
+		public int compare(@NonNull PartitionAnalysis o1, @NonNull PartitionAnalysis o2) {
+			int i1 = o1.getPartition().getFirstPass();
+			int i2 = o2.getPartition().getFirstPass();
 			return i1 - i2;
 		}
 	}
@@ -262,7 +264,8 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		}
 	}
 
-	public void createPartition2Mapping(@NonNull Partition partition) {
+	public void createPartition2Mapping(@NonNull PartitionAnalysis partitionAnalysis) {
+		Partition partition = partitionAnalysis.getPartition();
 		AbstractPartition2Mapping partition2mapping = partition2partition2mapping.get(partition);
 		assert partition2mapping == null : "Re-AbstractPartition2Mapping for " + partition;
 		//		assert !region.isConnectionRegion();
@@ -270,7 +273,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			partition2mapping = new LoadingPartition2Mapping(this, (LoadingPartition)partition);
 		}
 		else {
-			partition2mapping = new BasicPartition2Mapping(this, partition);
+			partition2mapping = new BasicPartition2Mapping(this, (MappingPartitionAnalysis<?>) partitionAnalysis);
 		}
 		partition2mapping.synthesizeLocalStatements();
 		partition2partition2mapping.put(partition, partition2mapping);
@@ -335,9 +338,10 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		}
 	}
 
-	protected @NonNull Map<@NonNull ClassDatum, Set<@NonNull PropertyDatum>> gatherKeyCalls(List<@NonNull Partition> sortedPartitions) {
+	protected @NonNull Map<@NonNull ClassDatum, Set<@NonNull PropertyDatum>> gatherKeyCalls(List<@NonNull PartitionAnalysis> sortedPartitionAnalyses) {
 		Map<@NonNull ClassDatum, Set<@NonNull PropertyDatum>> keyedClassDatum2propertyDatums = new HashMap<>();
-		for (@NonNull Partition partition : sortedPartitions) {
+		for (@NonNull PartitionAnalysis partitionAnalysis : sortedPartitionAnalyses) {
+			Partition partition = partitionAnalysis.getPartition();
 			for (@NonNull Node node : partition.getPartialNodes()) {
 				if (node instanceof KeyedValueNode) {
 					KeyedValueNode keyedValueNode = (KeyedValueNode)node;
@@ -546,7 +550,7 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 
 	@Override
 	public @Nullable Element visitScheduledRegion(@NonNull ScheduledRegion scheduledRegion) {
-		RootPartition rootPartition = scheduleManager.getRootPartition(scheduledRegion);
+		RootPartitionAnalysis rootPartitionAnalysis = scheduleManager.getRootPartitionAnalysis(scheduledRegion);
 		//		String name = rootRegion.getName();
 		//
 		//	List<@NonNull Partition> callablePartitions = new ArrayList<>();
@@ -556,16 +560,17 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 		//		callablePartitions.add(scheduleManager.wipGetPartition(region));
 		//	}
 		//	Iterable<@NonNull Partition> partitions = rootPartition.getPartitions();
-		Iterable<@NonNull Partition> allPartitions = CompilerUtil.gatherPartitions(rootPartition, new ArrayList<>());
+		Iterable<@NonNull PartitionAnalysis> allPartitionAnalyses = CompilerUtil.gatherPartitionAnalyses(rootPartitionAnalysis, new ArrayList<>());
 		//	assert Iterables.contains(partitions, scheduleManager.wipGetPartition(QVTscheduleUtil.getOwnedLoadingRegion(scheduledRegion)));
 
-		List<@NonNull Partition> sortedPartitions = new EarliestPartitionComparator().sort(allPartitions);
-		Map<@NonNull ClassDatum, Set<@NonNull PropertyDatum>> keyedClassDatum2propertyDatums = gatherKeyCalls(sortedPartitions);
+		List<@NonNull PartitionAnalysis> sortedPartitionAnalyses = new EarliestPartitionComparator().sort(allPartitionAnalyses);
+		Map<@NonNull ClassDatum, Set<@NonNull PropertyDatum>> keyedClassDatum2propertyDatums = gatherKeyCalls(sortedPartitionAnalyses);
 		createKeyFunctions(keyedClassDatum2propertyDatums);
-		for (@NonNull Partition partition : sortedPartitions) {
+		for (@NonNull PartitionAnalysis partitionAnalysis : sortedPartitionAnalyses) {
 			//			if (!region.isConnectionRegion()) {
+			Partition partition = partitionAnalysis.getPartition();
 			if (!CompilerUtil.isAbstract(partition)) {
-				createPartition2Mapping(partition);
+				createPartition2Mapping(partitionAnalysis);
 			}
 			//			}
 		}
@@ -599,7 +604,8 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 			AbstractRegion2Mapping region2Mapping = getRegion2Mapping(region);
 			region2Mapping.checkAndEnforceRealizations(typedModel2property2realizedEdges);
 		} */
-		for (@NonNull Partition partition : sortedPartitions) {
+		for (@NonNull PartitionAnalysis partitionAnalysis : sortedPartitionAnalyses) {
+			Partition partition = partitionAnalysis.getPartition();
 			if (!CompilerUtil.isAbstract(partition)) {
 				AbstractPartition2Mapping partition2Mapping = getPartition2Mapping(partition);
 				partition2Mapping.synthesizeCallStatements();

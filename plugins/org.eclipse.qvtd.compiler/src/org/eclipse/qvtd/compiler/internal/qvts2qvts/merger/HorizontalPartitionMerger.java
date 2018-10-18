@@ -23,7 +23,9 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedConditionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.BasicPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 
 /**
  * LateConsumerMerger replaces one list of MappingRegions by another in which each set of regions that
@@ -42,23 +44,24 @@ public class HorizontalPartitionMerger extends AbstractMerger
 {
 	//	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull RegionAnalysis regionAnalysis;
-	protected final @NonNull Iterable<@NonNull Partition> partitions;
+	protected final @NonNull Iterable<@NonNull PartitionAnalysis> partitions;
 
-	public HorizontalPartitionMerger(@NonNull RegionAnalysis regionAnalysis, @NonNull Iterable<@NonNull Partition> partitions) {
+	public HorizontalPartitionMerger(@NonNull RegionAnalysis regionAnalysis, @NonNull Iterable<@NonNull PartitionAnalysis> partitions) {
 		//		this.scheduleManager = regionAnalysis.getScheduleManager();
 		this.regionAnalysis = regionAnalysis;
 		this.partitions = partitions;
 	}
 
-	public @Nullable Map<@NonNull Partition, @Nullable Partition> merge() {
+	public @Nullable Map<@NonNull PartitionAnalysis, @Nullable PartitionAnalysis> merge() {
 		//
 		//	Build maps of failure mechanisms of each partition.
 		//
 		ScheduleManager scheduleManager = regionAnalysis.getScheduleManager();
 		Map<@NonNull Integer, @NonNull Set<@NonNull Partition>> hash2partitions = new HashMap<>();
 		Map<@NonNull Partition, @NonNull Set<@NonNull CheckedCondition>> partion2checkedConditions = new HashMap<>();
-		for (@NonNull Partition partition : partitions) {
-			CheckedConditionAnalysis checkedConditionAnalysis = new CheckedConditionAnalysis(partition, scheduleManager);
+		for (@NonNull PartitionAnalysis partitionAnalysis : partitions) {
+			Partition partition = partitionAnalysis.getPartition();
+			CheckedConditionAnalysis checkedConditionAnalysis = new CheckedConditionAnalysis((BasicPartitionAnalysis) partitionAnalysis, scheduleManager);
 			Set<@NonNull CheckedCondition> checkedConditions = checkedConditionAnalysis.computeCheckedConditions();
 			if (checkedConditions.size() > 0) {
 				int hash = checkedConditions.hashCode();

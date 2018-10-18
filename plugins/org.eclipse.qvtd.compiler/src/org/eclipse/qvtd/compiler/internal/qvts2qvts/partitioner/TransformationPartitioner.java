@@ -50,7 +50,7 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 	public static final @NonNull TracingOption PREDECESSORS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/partition/predecessors");
 	public static final @NonNull TracingOption SUCCESSORS = new TracingOption(CompilerConstants.PLUGIN_ID, "qvts2qvts/partition/successors");
 
-	public static @NonNull RootPartition partition(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) throws CompilerChainException {
+	public static @NonNull PartitionedTransformationAnalysis partition(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull ProblemHandler problemHandler, @NonNull Iterable<@NonNull ? extends Region> activeRegions) throws CompilerChainException {
 		TransformationPartitioner transformationPartitioner = new TransformationPartitioner(transformationAnalysis, problemHandler, activeRegions);
 		return transformationPartitioner.partition();
 	}
@@ -197,25 +197,11 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 		return true;
 	} */
 
-	public @NonNull RootPartition partition() throws CompilerChainException {
+	public @NonNull PartitionedTransformationAnalysis partition() throws CompilerChainException {
+		PartitionedTransformationAnalysis partitionedTransformationAnalysis = new PartitionedTransformationAnalysis(this);
 		//
 		//	Create the per-mapping partitioner and accumulate the local analyses
 		//
-		/*	for (@NonNull Region region : activeRegions) {
-			if (region instanceof MappingRegion) {
-				MappingRegion mappingRegion = (MappingRegion)region;
-				transformationAnalysis.getRegionAnalysis(mappingRegion);
-			}
-		} */
-		/*	for (@NonNull Region region : activeRegions) {
-			if (region instanceof MappingRegion) {
-				MappingRegion mappingRegion = (MappingRegion)region;
-				RegionAnalysis regionAnalysis = transformationAnalysis.getRegionAnalysis(mappingRegion);
-				MappingPartitioner mappingPartitioner = new MappingPartitioner(this, regionAnalysis);
-				region2mappingPartitioner.put(mappingRegion, mappingPartitioner);
-				mappingPartitioners.add(mappingPartitioner);
-			}
-		} */
 		for (@NonNull Region region : activeRegions) {
 			RegionAnalysis regionAnalysis = transformationAnalysis.getRegionAnalysis(region);
 			if (region instanceof MappingRegion) {
@@ -225,12 +211,10 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 				mappingPartitioners.add(mappingPartitioner);
 			}
 			else if (region instanceof LoadingRegion) {
-				Partition loadingPartition = new LoadingPartition(scheduleManager, (LoadingRegion) region);
+				LoadingPartitionAnalysis loadingPartitionAnalysis = LoadingPartitionAnalysis.createLoadingPartitionAnalysis(partitionedTransformationAnalysis, (LoadingRegion) region);
+				LoadingPartition loadingPartition = loadingPartitionAnalysis.getPartition();
 				partitions.add(loadingPartition);
-				//	scheduleManager.wipAddPartition(loadingPartition, region);
 				regionAnalysis.setPartitions(Collections.singletonList(loadingPartition));
-
-
 				ScheduledRegion scheduledRegion = transformationAnalysis.getScheduledRegion();
 				scheduledRegion.setOwnedLoadingRegion((LoadingRegion) region);
 			}
@@ -249,34 +233,25 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 			Iterable<@NonNull Partition> regionPartitions;
 			RegionAnalysis regionAnalysis = mappingPartitioner.getRegionAnalysis();
 			if (Iterables.isEmpty(mappingPartitioner.getTraceNodes())) {
-				regionPartitions = Collections.singletonList(new NonPartition.NonPartitionFactory(mappingPartitioner).createPartition());
+				regionPartitions = Collections.singletonList(new NonPartitionFactory(mappingPartitioner).createPartition(partitionedTransformationAnalysis));
 			}
 			else {
-				regionPartitions = mappingPartitioner.partition();
+				regionPartitions = mappingPartitioner.partition(partitionedTransformationAnalysis);
 			}
 			regionAnalysis.setPartitions(regionPartitions);
 			Iterables.addAll(partitions, regionPartitions);
 		}
 		Collections.sort(partitions, NameUtil.NAMEABLE_COMPARATOR);
-		RootPartition rootPartition = postPartition();
-		return rootPartition;
+		return postPartition(partitionedTransformationAnalysis);
 	}
 
-	public @NonNull RootPartition postPartition() throws CompilerChainException {
-		PartitionedTransformationAnalysis partitionedTransformationAnalysis = new PartitionedTransformationAnalysis(this);
-		for (@NonNull Partition partition : partitions) {
-			partition.analyzePartition(partitionedTransformationAnalysis);
-		}
-		for (@NonNull Partition partition : partitions) {
-			if (partition instanceof LoadingPartition) {
-				((LoadingPartition)partition).analyzeIntroductions(partitionedTransformationAnalysis);
-			}
-		}
-
+	public @NonNull PartitionedTransformationAnalysis postPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) throws CompilerChainException {
+		partitionedTransformationAnalysis.analyzePartitions(partitions);
 		partitionedTransformationAnalysis.computeTraceClassInheritance();
 		//		this.fallibilityAnalysis = computeFallibilityAnalysis();
 		//	Iterable<@NonNull Partition> leafPartitions = getPartialRegionAnalyses();
-		this.cyclicPartitionsAnalysis = new CyclicPartitionsAnalysis(this, partitions);
-		return cyclicPartitionsAnalysis.analyze();
+		this.cyclicPartitionsAnalysis = new CyclicPartitionsAnalysis(this, partitionedTransformationAnalysis.getPartitionAnalyses(partitions));
+		cyclicPartitionsAnalysis.analyze(partitionedTransformationAnalysis);
+		return partitionedTransformationAnalysis;
 	}
 }

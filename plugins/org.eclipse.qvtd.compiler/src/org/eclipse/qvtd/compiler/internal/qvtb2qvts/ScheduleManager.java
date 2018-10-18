@@ -31,7 +31,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.TransformationAnalysis
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -123,7 +123,7 @@ public interface ScheduleManager
 	@NonNull PropertyDatum getPropertyDatum(@NonNull NavigableEdge edge);
 	@NonNull QVTbaseLibraryHelper getQVTbaseLibraryHelper();
 	@NonNull RegionAnalysis getRegionAnalysis(@NonNull Region region);
-	@NonNull RootPartition getRootPartition(@NonNull ScheduledRegion scheduledRegion);
+	@NonNull RootPartitionAnalysis getRootPartitionAnalysis(@NonNull ScheduledRegion scheduledRegion);
 	@NonNull ScheduleModel getScheduleModel();
 	@NonNull StandardLibrary getStandardLibrary();
 	@NonNull StandardLibraryHelper getStandardLibraryHelper();

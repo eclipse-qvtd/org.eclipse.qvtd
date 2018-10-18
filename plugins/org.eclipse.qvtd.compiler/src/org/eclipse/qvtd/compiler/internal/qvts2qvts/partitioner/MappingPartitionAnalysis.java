@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2018 Willink Transformations and others.
+ * Copyright (c) 2018 Willink Transformations and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -19,28 +18,31 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
-import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
 
-public abstract class AbstractPartition2 extends AbstractPartition
+public abstract class MappingPartitionAnalysis<P extends AbstractMappingPartition> extends AbstractPartitionAnalysis<P>
 {
-	protected final @NonNull ScheduleManager scheduleManager;
-
 	/**
 	 * The trace nodes and their corresponding global success node.
 	 *
@@ -50,8 +52,8 @@ public abstract class AbstractPartition2 extends AbstractPartition
 	 * such as attributeColumns in testQVTcCompiler_SimpleUML2RDBMS_CG.
 	 *
 	 * There could be multiple trace nodes after an early merge results. Work in progress.
-	 */
-	private final @NonNull Map<@NonNull Node, @Nullable SuccessEdge> traceNode2globalSuccessEdge = new HashMap<>();
+	 *
+	private final @NonNull Map<@NonNull Node, @Nullable SuccessEdge> traceNode2globalSuccessEdge = new HashMap<>(); */
 
 	/**
 	 * The trace nodes and their corresponding local success node.
@@ -62,8 +64,18 @@ public abstract class AbstractPartition2 extends AbstractPartition
 	 * such as attributeColumns in testQVTcCompiler_SimpleUML2RDBMS_CG.
 	 *
 	 * There could be multiple trace nodes after an early merge results. Work in progress.
+	 *
+	private final @NonNull Map<@NonNull Node, @Nullable SuccessEdge> traceNode2localSuccessEdge = new HashMap<>(); */
+
+	/**
+	 * The map from node to the trace edge by which the node may be located by lookup in a trace node once its trace edge is realized..
+	 *
+	private final @NonNull Map<@NonNull Node, @NonNull Edge> node2traceEdge = new HashMap<>(); */
+
+	/**
+	 * The override dispatch node if needed.
 	 */
-	private final @NonNull Map<@NonNull Node, @Nullable SuccessEdge> traceNode2localSuccessEdge = new HashMap<>();
+	private @Nullable Node dispatchNode = null;
 
 	/**
 	 * The constant nodes that require no computation from other nodes.
@@ -74,16 +86,6 @@ public abstract class AbstractPartition2 extends AbstractPartition
 	 * The constant nodes that impose a check on a computation from other nodes.
 	 */
 	private final @NonNull List<@NonNull Node> constantOutputNodes = new ArrayList<>();
-
-	/**
-	 * The override dispatch node if needed.
-	 */
-	private @Nullable Node dispatchNode = null;
-
-	/**
-	 * The map from node to the trace edge by which the node may be located by lookup in a trace node once its trace edge is realized..
-	 */
-	private final @NonNull Map<@NonNull Node, @NonNull Edge> node2traceEdge = new HashMap<>();
 
 	/**
 	 * properties that are directly realized from a middle object provided all predicates are satisfied.
@@ -132,9 +134,18 @@ public abstract class AbstractPartition2 extends AbstractPartition
 	 */
 	private @Nullable Set<@NonNull TraceClassPartitionAnalysis> superProducedTraceClassAnalyses = null;
 
-	protected AbstractPartition2(@NonNull String name, @NonNull ScheduleManager scheduleManager) {
-		super(name);
-		this.scheduleManager = scheduleManager;
+	protected MappingPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull P partition) {
+		super(partitionedTransformationAnalysis, partition);
+	}
+
+	private void addCheckedEdge(@NonNull NavigableEdge predicatedEdge) {
+		Role role = partition.getRole(predicatedEdge);
+		assert (role != null) && role.isPredicated();
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(predicatedEdge.getEdgeSource());
+		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
+		partition.addCheckedEdge(typedModel, predicatedEdge);
+		QVTscheduleConstants.POLLED_PROPERTIES.println("    checked " + predicatedEdge.getProperty() +
+			" at " + partition.getPassRangeText() + " in " + typedModel + " for " + partition);
 	}
 
 	private void addConstantNode(@NonNull Node node) {
@@ -187,7 +198,7 @@ public abstract class AbstractPartition2 extends AbstractPartition
 
 	private void addConsumptionOfNode(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Node node) {
 		Node castNode = QVTscheduleUtil.getCastTarget(node);
-		TraceClassPartitionAnalysis consumedTraceAnalysis = partitionedTransformationAnalysis.addConsumer(QVTscheduleUtil.getClassDatum(castNode), this);
+		TraceClassPartitionAnalysis consumedTraceAnalysis = partitionedTransformationAnalysis.addConsumer(QVTscheduleUtil.getClassDatum(castNode), partition);
 		List<@NonNull TraceClassPartitionAnalysis> consumedTraceClassAnalyses2 = consumedTraceClassAnalyses;
 		if (consumedTraceClassAnalyses2 == null) {
 			consumedTraceClassAnalyses = consumedTraceClassAnalyses2 = new ArrayList<>();
@@ -212,7 +223,7 @@ public abstract class AbstractPartition2 extends AbstractPartition
 	}
 
 	private void addConsumptionOfPropertyDatum(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull PropertyDatum propertyDatum) {
-		TracePropertyPartitionAnalysis consumedTraceAnalysis = partitionedTransformationAnalysis.addConsumer(propertyDatum, this);
+		TracePropertyPartitionAnalysis consumedTraceAnalysis = partitionedTransformationAnalysis.addConsumer(propertyDatum, partition);
 		List<@NonNull TracePropertyPartitionAnalysis> consumedTracePropertyAnalyses2 = consumedTracePropertyAnalyses;
 		if (consumedTracePropertyAnalyses2 == null) {
 			consumedTracePropertyAnalyses = consumedTracePropertyAnalyses2 = new ArrayList<>();
@@ -220,6 +231,18 @@ public abstract class AbstractPartition2 extends AbstractPartition
 		if (!consumedTracePropertyAnalyses2.contains(consumedTraceAnalysis)) {
 			consumedTracePropertyAnalyses2.add(consumedTraceAnalysis);
 		}
+	}
+
+	@Override
+	public void addEnforcedEdge(@NonNull NavigableEdge realizedEdge) {
+		Role role = partition.getRole(realizedEdge);
+		assert (role != null) && role.isRealized();
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(realizedEdge.getEdgeSource());
+		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
+		Property asProperty = partition.addEnforcedEdge(typedModel, realizedEdge);
+		QVTscheduleConstants.POLLED_PROPERTIES.println("    enforced " + asProperty +
+			" at " + partition.getPassRangeText() +
+			" in " + typedModel + " for " + partition);
 	}
 
 	private void addProductionOfEdge(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull NavigableEdge edge) {
@@ -230,7 +253,7 @@ public abstract class AbstractPartition2 extends AbstractPartition
 			property.toString();
 		}
 		PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
-		TracePropertyPartitionAnalysis producedTraceAnalysis = partitionedTransformationAnalysis.addProducer(propertyDatum, this);
+		TracePropertyPartitionAnalysis producedTraceAnalysis = partitionedTransformationAnalysis.addProducer(propertyDatum, partition);
 		List<@NonNull TracePropertyPartitionAnalysis> producedTracePropertyAnalyses2 = producedTracePropertyAnalyses;
 		if (producedTracePropertyAnalyses2 == null) {
 			producedTracePropertyAnalyses = producedTracePropertyAnalyses2 = new ArrayList<>();
@@ -240,7 +263,7 @@ public abstract class AbstractPartition2 extends AbstractPartition
 		}
 		PropertyDatum oppositePropertyDatum = propertyDatum.getOpposite();
 		if (oppositePropertyDatum != null) {
-			TracePropertyPartitionAnalysis oppositeProducedTraceAnalysis = partitionedTransformationAnalysis.addProducer(oppositePropertyDatum, this);
+			TracePropertyPartitionAnalysis oppositeProducedTraceAnalysis = partitionedTransformationAnalysis.addProducer(oppositePropertyDatum, partition);
 			if (!producedTracePropertyAnalyses2.contains(oppositeProducedTraceAnalysis)) {
 				producedTracePropertyAnalyses2.add(oppositeProducedTraceAnalysis);
 			}
@@ -263,7 +286,7 @@ public abstract class AbstractPartition2 extends AbstractPartition
 
 	private void addProductionOfNode(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Node node) {
 		assert isNew(node);
-		TraceClassPartitionAnalysis consumedTraceAnalysis = partitionedTransformationAnalysis.addProducer(QVTscheduleUtil.getClassDatum(node), this);
+		TraceClassPartitionAnalysis consumedTraceAnalysis = partitionedTransformationAnalysis.addProducer(QVTscheduleUtil.getClassDatum(node), partition);
 		List<@NonNull TraceClassPartitionAnalysis> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
 		if (producedTraceClassAnalyses2 == null) {
 			producedTraceClassAnalyses = producedTraceClassAnalyses2 = new ArrayList<>();
@@ -287,24 +310,8 @@ public abstract class AbstractPartition2 extends AbstractPartition
 		}
 	}
 
-	protected @NonNull List<@NonNull Node> analyze(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
-		analyzeNodes(partitionedTransformationAnalysis);
-		for (@NonNull Node traceNode : analyzeTraceNodes()) {
-			analyzeLocalSuccessEdge(traceNode);
-			analyzeGlobalSuccessEdge(traceNode);
-			analyzeTraceEdges(traceNode);
-		}
-		analyzeEdges(partitionedTransformationAnalysis);
-		List<@NonNull Node> alreadyRealized = new ArrayList<>(getTraceNodes());
-		Node dispatchNode = basicGetDispatchNode();
-		if (dispatchNode != null) {
-			alreadyRealized.add(dispatchNode);
-		}
-		return alreadyRealized;
-	}
-
 	private void analyzeEdges(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
-		for (@NonNull Edge edge : getPartialEdges()) {
+		for (@NonNull Edge edge : partition.getPartialEdges()) {
 			if (!edge.isSecondary()) {
 				if (isPredicated(edge)) {
 					predicatedEdges.add(edge);
@@ -362,7 +369,7 @@ public abstract class AbstractPartition2 extends AbstractPartition
 		}
 	}
 
-	private void analyzeGlobalSuccessEdge(@NonNull Node traceNode) {
+	/*	private void analyzeGlobalSuccessEdge(@NonNull Node traceNode) {
 		SuccessEdge globalSuccessEdge = null;
 		Property globalSuccessProperty = scheduleManager.basicGetGlobalSuccessProperty(traceNode);
 		if (globalSuccessProperty != null) {
@@ -376,13 +383,13 @@ public abstract class AbstractPartition2 extends AbstractPartition
 					successEdge = regionHelper.createRealizedSuccess(traceNode, successProperty, null);		// FIXME This creates a premature success in a speculation
 					Node successNode = QVTscheduleUtil.getTargetNode(successEdge);
 					successNode.setUtility(Node.Utility.STRONGLY_MATCHED);		// FIXME is this really neded
-				} */
+				} * /
 			}
 		}
 		traceNode2globalSuccessEdge.put(traceNode, globalSuccessEdge);
-	}
+	} */
 
-	protected void analyzeLocalSuccessEdge(@NonNull Node traceNode) {
+	/*	private void analyzeLocalSuccessEdge(@NonNull Node traceNode) {
 		SuccessEdge localSuccessEdge = null;
 		Property localSuccessProperty = scheduleManager.basicGetLocalSuccessProperty(traceNode);
 		if (localSuccessProperty != null) {
@@ -396,14 +403,18 @@ public abstract class AbstractPartition2 extends AbstractPartition
 					successEdge = regionHelper.createRealizedSuccess(traceNode, successProperty, null);		// FIXME This creates a premature success in a speculation
 					Node successNode = QVTscheduleUtil.getTargetNode(successEdge);
 					successNode.setUtility(Node.Utility.STRONGLY_MATCHED);		// FIXME is this really neded
-				} */
+				} * /
 			}
 		}
 		traceNode2localSuccessEdge.put(traceNode, localSuccessEdge);
-	}
+	} */
 
 	private void analyzeNodes(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
-		for (@NonNull Node node : getPartialNodes()) {
+		String name = getName();
+		if ("mapBooleanExp_qvtr".equals(name)) {
+			getClass();
+		}
+		for (@NonNull Node node : partition.getPartialNodes()) {
 			if (node.isNullLiteral()) {
 				addConstantNode(node);
 			}
@@ -471,16 +482,42 @@ public abstract class AbstractPartition2 extends AbstractPartition
 		}
 	}
 
-	private void analyzeTraceEdges(@NonNull Node traceNode) {
+	@Override
+	public void analyzePartition() {
+		analyzeNodes(partitionedTransformationAnalysis);
+		analyzeEdges(partitionedTransformationAnalysis);
+	}
+
+	@Override
+	public void analyzePartitionEdges() {
+		for (@NonNull Edge edge : partition.getPartialEdges()) {
+			if (edge.isNavigation()) {
+				NavigationEdge navigationEdge = (NavigationEdge) edge;
+				Node sourceNode = navigationEdge.getEdgeSource();
+				ClassDatum classDatum = QVTscheduleUtil.getClassDatum(sourceNode);
+				TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
+				if (isPredicated(edge)) {
+					assert !navigationEdge.isCast();
+					partitionedTransformationAnalysis.addPredicatedEdge(typedModel, navigationEdge);
+				}
+				else if (isRealized(edge)) {
+					partitionedTransformationAnalysis.addRealizedEdge(typedModel, navigationEdge);
+				}
+			}
+		}
+		partition.initTypedModelAnalysis();
+	}
+
+	/*	private void analyzeTraceEdges(@NonNull Node traceNode) {
 		for (@NonNull Edge edge : QVTscheduleUtil.getOutgoingEdges(traceNode)) {
-			if (((edge.isCast() || edge.isNavigation()) && isRealized(edge))) {
+			if (((edge.isCast() || edge.isNavigation()) && partition.isRealized(edge))) {
 				Node tracedNode = QVTscheduleUtil.getTargetNode(edge);
 				node2traceEdge.put(tracedNode, edge);
 			}
 		}
-	}
+	} */
 
-	private @NonNull Iterable<@NonNull Node> analyzeTraceNodes() {
+	/*	private @NonNull Iterable<@NonNull Node> analyzeTraceNodes() {
 		/*		if (realizedMiddleNodes.size() == 0) {
 			return Collections.emptyList();
 		}
@@ -493,40 +530,15 @@ public abstract class AbstractPartition2 extends AbstractPartition
 		}
 		else {
 			return Collections.singletonList(headNodes.iterator().next());
-		} */
+		} * /
 		return Iterables.concat(getPredicatedMiddleNodes(), getRealizedMiddleNodes());
-	}
-
-	@Override
-	public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
-		GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
-		String label = /*getSymbolName() + "\\n " +*/ getName();
-		String passesText = getPassesText();
-		if (passesText != null) {
-			label = label + "\\n " + passesText;
-		}
-		s.setLabel(label);
-		//	String shape = getShape();
-		//	if (shape != null) {
-		//		s.setShape(shape);
-		//	}
-		//	String style = getStyle();
-		//	if (style != null) {
-		//		s.setStyle(style);
-		//	}
-		s.setColor(getColor());
-		//		s.setPenwidth(getPenwidth());
-		s.appendAttributedNode(nodeName);
-		//		if (isHead) {
-		//			s.append("}");
-		//		}
-	}
+	} */
 
 	public @Nullable Node basicGetDispatchNode() {
 		return dispatchNode;
 	}
 
-	public @Nullable SuccessEdge basicGetGlobalSuccessEdge(@NonNull Node traceNode) {
+	/*	public @Nullable SuccessEdge basicGetGlobalSuccessEdge(@NonNull Node traceNode) {
 		return traceNode2globalSuccessEdge.get(traceNode);
 	}
 
@@ -542,6 +554,170 @@ public abstract class AbstractPartition2 extends AbstractPartition
 	public @Nullable Node basicGetLocalSuccessNode(@NonNull Node traceNode) {
 		SuccessEdge successEdge = traceNode2localSuccessEdge.get(traceNode);
 		return successEdge != null ? successEdge.getTargetNode() : null;
+	} */
+
+	@Override
+	public void computeCheckedOrEnforcedEdges() {
+		boolean doDebug = QVTscheduleConstants.POLLED_PROPERTIES.isActive();
+		if (doDebug) {
+			QVTscheduleConstants.POLLED_PROPERTIES.println("analyzing " + this + " (" + partition.getPassRangeText() + ")");
+		}
+		ConnectionManager connectionManager = scheduleManager.getConnectionManager();
+		for (@NonNull Edge edge : partition.getPartialEdges()) {
+			if (edge.isNavigation() && isPredicated(edge)) {
+				NavigationEdge predicatedEdge = (NavigationEdge) edge;
+				assert !predicatedEdge.isCast();
+				Property property = predicatedEdge.getProperty();
+				if (doDebug) {
+					QVTscheduleConstants.POLLED_PROPERTIES.println("  analyzing " + predicatedEdge.getEdgeSource().getName() + "::" + property.getName() + " : " + predicatedEdge.getEdgeSource().getCompleteClass());
+				}
+				EdgeConnection edgeConnection = predicatedEdge.getIncomingConnection();
+				if (edgeConnection != null) {
+					boolean isChecked = false;
+					for (@NonNull Partition usedPartition : connectionManager.getSourcePartitions(edgeConnection)) {
+						if (usedPartition.getLastPass() >= partition.getFirstPass()) {
+							addCheckedEdge(predicatedEdge);
+							isChecked = true;
+						}
+					}
+					if (isChecked) {
+						for (@NonNull NavigableEdge usedEdge : QVTscheduleUtil.getSourceEnds(edgeConnection)) {
+							Region sourceRegion = QVTscheduleUtil.getOwningRegion(usedEdge);
+							RegionAnalysis sourceRegionAnalysis = scheduleManager.getRegionAnalysis(sourceRegion);
+							for (@NonNull Partition sourcePartition : sourceRegionAnalysis.getPartitions()) {
+								Role sourceRole = sourcePartition.getRole(usedEdge);
+								if ((sourceRole != null) && !sourceRole.isAwaited()) {
+									AbstractPartitionAnalysis<?> sourcePartitionAnalysis = partitionedTransformationAnalysis.getPartitionAnalysis(sourcePartition);
+									sourcePartitionAnalysis.addEnforcedEdge(usedEdge);
+								}
+							}
+						}
+					}
+				}
+
+				Node laterNode = predicatedEdge.getEdgeSource();
+				Node predicatedSourceNode = predicatedEdge.getEdgeSource();
+				Node predicatedTargetNode = predicatedEdge.getEdgeTarget();
+				NodeConnection usedConnection = connectionManager.getIncomingUsedConnection(predicatedTargetNode);
+				if (usedConnection != null) {
+					for (@NonNull Partition usedPartition : connectionManager.getSourcePartitions(usedConnection)) {
+						if (usedPartition.getLastPass() >= partition.getFirstPass()) {			// FIXME =
+							CompleteClass predicatedSourceType = predicatedSourceNode.getCompleteClass();
+							CompleteClass predicatedTargetType = predicatedTargetNode.getCompleteClass();
+							ClassDatum classDatum = QVTscheduleUtil.getClassDatum(laterNode);
+							TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
+							Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> property2realizedEdges = partitionedTransformationAnalysis.getProperty2RealizedEdges(typedModel);
+							assert property2realizedEdges != null;
+							Property oclContainerProperty = scheduleManager.getStandardLibraryHelper().getOclContainerProperty();
+							if (property == oclContainerProperty) {
+								//								Node containerNode = predicatedEdge.getTarget();
+								//								Node containedNode = predicatedEdge.getSource();
+								//								CompleteClass containerType = containerNode.getCompleteClass();
+								//								CompleteClass containedType = containedNode.getCompleteClass();
+								for (@NonNull Property candidateProperty : property2realizedEdges.keySet()) {
+									if (candidateProperty.isIsComposite()) {
+										//										CompleteClass candidateContainerType = completeModel.getCompleteClass(candidateProperty.getOwningClass());
+										//										CompleteClass candidateContainedType = completeModel.getCompleteClass(candidateProperty.getType());
+										//									if (candidateContainerType.conformsTo(containerType) && containedType.conformsTo(candidateContainedType)) {
+										List<@NonNull NavigableEdge> realizedEdges = property2realizedEdges.get(candidateProperty);
+										assert realizedEdges != null;
+										for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
+											// FIXME recheck for narrower types ??
+											//												String isNotHazardous;
+											//											if (region == earlierRegion) {
+											//												isNotHazardous = "same region";	// FIXME must handle recursion
+											//											}
+											//											else if (earlierRegion.getLatestIndex() < getEarliestIndex()) {
+											//												isNotHazardous = "later";// FIXME must handle any possible reads of any possible write
+											//											}
+											//											else {
+											Node realizedSourceNode = realizedEdge.getEdgeSource();
+											Node realizedTargetNode = realizedEdge.getEdgeTarget();
+											CompleteClass realizedSourceType = realizedSourceNode.getCompleteClass();
+											CompleteClass realizedTargetType = realizedTargetNode.getCompleteClass();
+											if (realizedSourceType.conformsTo(predicatedSourceType) && realizedTargetType.conformsTo(predicatedTargetType)) {
+												assert partition.getLastPass() >= usedPartition.getFirstPass();
+												//														isNotHazardous = null;
+											}
+											else {
+												//														isNotHazardous = "incompatible";
+											}
+											assert partition.getLastPass() >= usedPartition.getFirstPass();
+											//													isNotHazardous = null;
+											//											}
+											//												if (isNotHazardous == null) {
+											addCheckedEdge(predicatedEdge);
+											AbstractPartitionAnalysis<?> usedPartitionAnalysis = partitionedTransformationAnalysis.getPartitionAnalysis(usedPartition);
+											usedPartitionAnalysis.addEnforcedEdge(realizedEdge);
+											//												}
+											//												else if (doDebug) {
+											//													QVTs2QVTiVisitor.POLLED_PROPERTIES.println("    ignored " + region + "::" + laterNode.getName() + "(" + getEarliestIndex() + ".." + getLatestIndex() + ")" +
+											//															" " + isNotHazardous + " (" + earlierRegion.getEarliestIndex() + ".." + earlierRegion.getLatestIndex() + ")" + earlierRegion + "::" + realizedEdge.getSource().getName());
+											//												}
+											//										}
+										}
+									}
+								}
+							}
+							else {
+								assert property2realizedEdges != null : "No realized typed model for " + typedModel;
+								List<@NonNull NavigableEdge> realizedEdges = property2realizedEdges.get(property);
+								if (realizedEdges == null) {
+									System.err.println("No realized edges for " + typedModel + "!" + property + " in " + this);
+								}
+								else {
+									for (@NonNull NavigableEdge realizedEdge : realizedEdges) {
+										//	Region earlierRegion = QVTscheduleUtil.getOwningRegion(realizedEdge);
+										String checkIsHazardFreeBecause;
+										String enforceIsHazardFreeBecause;
+										Node realizedSourceNode = realizedEdge.getEdgeSource();
+										Node realizedTargetNode = realizedEdge.getEdgeTarget();
+										CompleteClass realizedSourceType = realizedSourceNode.getCompleteClass();
+										CompleteClass realizedTargetType = realizedTargetNode.getCompleteClass();
+										if (!realizedSourceType.conformsTo(predicatedSourceType)) {
+											checkIsHazardFreeBecause = "incompatible-source";
+											enforceIsHazardFreeBecause = "incompatible-source";
+										}
+										else if (!QVTscheduleUtil.conformsToClassOrBehavioralClass(realizedTargetType, predicatedTargetType)) {
+											checkIsHazardFreeBecause = "incompatible-target";
+											enforceIsHazardFreeBecause = "incompatible-target";
+										}
+										//	else if (region == earlierRegion) {	// FIXME old commented out code for partitions
+										//		checkIsHazardFreeBecause = null; 		// Same region requires inter-recursion check
+										//		enforceIsHazardFreeBecause = null; 		// Same region requires inter-recursion enforce to be available for check
+										//	}
+										else if (usedPartition.getLastPass() < partition.getFirstPass()) {
+											checkIsHazardFreeBecause = "later";
+											enforceIsHazardFreeBecause = null; 		// Enforce required for later check
+										}
+										else {
+											// The QVTi AS has insufficient precision to identify which of multiple references is hazardous
+											checkIsHazardFreeBecause = null;
+											enforceIsHazardFreeBecause = null;
+										}
+										if (checkIsHazardFreeBecause == null) {
+											addCheckedEdge(predicatedEdge);
+										}
+										else if (doDebug) {
+											QVTscheduleConstants.POLLED_PROPERTIES.println("    ignored check for " + this + "::" + laterNode.getName() + "(" + partition.getPassRangeText() + ")" +
+													" " + checkIsHazardFreeBecause + " (" + usedPartition.getPassRangeText() + ")" + usedPartition + "::" + realizedEdge.getEdgeSource().getName());
+										}
+										if (enforceIsHazardFreeBecause == null) {
+											AbstractPartitionAnalysis<?> usedPartitionAnalysis = partitionedTransformationAnalysis.getPartitionAnalysis(usedPartition);
+											usedPartitionAnalysis.addEnforcedEdge(realizedEdge);
+										}
+										else if (doDebug) {
+											QVTscheduleConstants.POLLED_PROPERTIES.println("    ignored enforce " + this + "::" + laterNode.getName() + "(" + partition.getPassRangeText() + ")" +
+													" " + enforceIsHazardFreeBecause + " (" + usedPartition.getPassRangeText() + ")" + usedPartition + "::" + realizedEdge.getEdgeSource().getName());
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 	}
 
 	public @NonNull Iterable<@NonNull Node> getConstantInputNodes() {
@@ -552,17 +728,19 @@ public abstract class AbstractPartition2 extends AbstractPartition
 		return constantOutputNodes;
 	}
 
+	//		@Override
 	@Override
 	public @Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getConsumedTraceClassAnalyses() {
 		return consumedTraceClassAnalyses;
 	}
 
+	//		@Override
 	@Override
 	public @Nullable Iterable<@NonNull TracePropertyPartitionAnalysis> getConsumedTracePropertyAnalyses() {
 		return consumedTracePropertyAnalyses;
 	}
 
-	public @NonNull SuccessEdge getGlobalSuccessEdge(@NonNull Node traceNode) {
+	/*	public @NonNull SuccessEdge getGlobalSuccessEdge(@NonNull Node traceNode) {
 		return ClassUtil.nonNullState(traceNode2globalSuccessEdge.get(traceNode));
 	}
 
@@ -578,7 +756,7 @@ public abstract class AbstractPartition2 extends AbstractPartition
 	public @NonNull Node getLocalSuccessNode(@NonNull Node traceNode) {
 		SuccessEdge successEdge = ClassUtil.nonNullState(traceNode2localSuccessEdge.get(traceNode));
 		return QVTscheduleUtil.getTargetNode(successEdge);
-	}
+	} */
 
 	public @NonNull Iterable<@NonNull NavigableEdge> getOldPrimaryNavigableEdges() {
 		return oldPrimaryNavigableEdges;
@@ -606,6 +784,8 @@ public abstract class AbstractPartition2 extends AbstractPartition
 		return producedTracePropertyAnalyses;
 	}
 
+	public abstract @NonNull ReachabilityForest getReachabilityForest();
+
 	public @NonNull Iterable<@NonNull NavigableEdge> getRealizedEdges() {
 		return realizedEdges;
 	}
@@ -620,15 +800,6 @@ public abstract class AbstractPartition2 extends AbstractPartition
 
 	public @NonNull Iterable<@NonNull Node> getRealizedOutputNodes() {
 		return realizedOutputNodes;
-	}
-
-	//	@Override
-	//	public @NonNull Region getRegion() {
-	//		return region;
-	//	}
-
-	public @NonNull ScheduleManager getScheduleManager() {
-		return scheduleManager;
 	}
 
 	public @NonNull Iterable<@NonNull SuccessEdge> getSuccessEdges() {
@@ -650,97 +821,89 @@ public abstract class AbstractPartition2 extends AbstractPartition
 		return superProducedTraceClassAnalyses;
 	}
 
-	public @Nullable Edge getTraceEdge(@NonNull Node node) {
+	/*	public @Nullable Edge getTraceEdge(@NonNull Node node) {
 		return node2traceEdge.get(node);
-	}
+	} */
 
 	@Override
 	public @NonNull List<@NonNull Node> getTraceNodes() {
 		return traceNodes;
 	}
 
-	@Override
-	public boolean isAwaited(@NonNull Edge edge) {
-		Role role = getRole(edge);
-		assert role != null;
-		return role.isAwaited();
-	}
-
 	protected boolean isConstant(@NonNull Edge edge) {
-		Role role = getRole(edge);
+		Role role = partition.getRole(edge);
 		assert role != null;
 		return role.isConstant();
 	}
 
 	protected boolean isConstant(@NonNull Node node) {
-		Role role = getRole(node);
+		Role role = partition.getRole(node);
 		assert role != null;
 		return role.isConstant();
 	}
 
 	protected boolean isLoaded(@NonNull Edge edge) {
-		Role role = getRole(edge);
+		Role role = partition.getRole(edge);
 		assert role != null;
 		return role.isLoaded();
 	}
 
 	protected boolean isLoaded(@NonNull Node node) {
-		Role role = getRole(node);
+		Role role = partition.getRole(node);
 		assert role != null;
 		return role.isLoaded();
 	}
 
 	protected boolean isNew(@NonNull Edge edge) {
-		Role role = getRole(edge);
+		Role role = partition.getRole(edge);
 		assert role != null;
 		return role.isNew();
 	}
 
 	protected boolean isNew(@NonNull Node node) {
-		Role role = getRole(node);
+		Role role = partition.getRole(node);
 		assert role != null;
 		return role.isNew();
 	}
 
 	protected boolean isPredicated(@NonNull Edge edge) {
-		Role role = getRole(edge);
+		Role role = partition.getRole(edge);
 		assert role != null;
 		return role.isPredicated();
 	}
 
 	protected boolean isPredicated(@NonNull Node node) {
-		Role role = getRole(node);
+		Role role = partition.getRole(node);
 		assert role != null;
 		return role.isPredicated();
 	}
 
-	@Override
-	public boolean isRealized(@NonNull Edge edge) {
-		Role role = getRole(edge);
+	protected boolean isRealized(@NonNull Edge edge) {
+		Role role = partition.getRole(edge);
 		assert role != null;
 		return role.isRealized();
 	}
 
 	protected boolean isRealized(@NonNull Node node) {
-		Role role = getRole(node);
+		Role role = partition.getRole(node);
 		assert role != null;
 		return role.isRealized();
 	}
 
 	protected boolean isSpeculated(@NonNull Edge edge) {
-		Role role = getRole(edge);
+		Role role = partition.getRole(edge);
 		assert role != null;
 		return role.isSpeculated();
 	}
 
 	protected boolean isSpeculated(@NonNull Node node) {
-		Role role = getRole(node);
+		Role role = partition.getRole(node);
 		assert role != null;
 		return role.isSpeculated();
 	}
 
 	protected boolean isSpeculation(@NonNull Node node) {
-		Role role = getRole(node);
+		Role role = partition.getRole(node);
 		assert role != null;
 		return role.isSpeculation();
 	}

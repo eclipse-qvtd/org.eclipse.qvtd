@@ -69,6 +69,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedConditionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.MappingPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -1150,15 +1151,15 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	 */
 	private final @NonNull CheckedConditionAnalysis checkedConditionAnalysis;
 
-	public BasicPartition2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Partition partition) {
-		super(visitor, partition);
+	public BasicPartition2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull MappingPartitionAnalysis<?> partitionAnalysis) {
+		super(visitor, partitionAnalysis.getPartition());
 		this.regionAnalysis = scheduleManager.getRegionAnalysis(partition.getRegion());
 		//	String name = partition.getName();
 		//	if (name.contains("list2list«edge-headElement»")) {
 		//		getClass();
 		//	}
-		this.reachabilityForest = partition.getReachabilityForest();
-		this.checkedConditionAnalysis = new CheckedConditionAnalysis(partition, scheduleManager);
+		this.reachabilityForest = partitionAnalysis.getReachabilityForest();
+		this.checkedConditionAnalysis = new CheckedConditionAnalysis(partitionAnalysis, scheduleManager);
 		this.resultNode2subexpression = computeSubexpressions();
 		//
 		//	Gather the subexpression contents.

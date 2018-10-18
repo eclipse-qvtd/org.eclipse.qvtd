@@ -43,7 +43,7 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 import org.eclipse.qvtd.cs2as.compiler.internal.CS2ASJavaCompilerImpl;
@@ -207,8 +207,8 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		protected void instrumentPartition(@NonNull ScheduleManager scheduleManager) {
 			ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
 			for (@NonNull ScheduledRegion scheduledRegion : QVTscheduleUtil.getOwnedScheduledRegions(scheduleModel)) {
-				RootPartition rootPartition = scheduleManager.getRootPartition(scheduledRegion);
-				instrumentPartition(scheduleManager, rootPartition);
+				RootPartitionAnalysis rootPartitionAnalysis = scheduleManager.getRootPartitionAnalysis(scheduledRegion);
+				instrumentPartition(scheduleManager, rootPartitionAnalysis.getPartition());
 			}
 		}
 

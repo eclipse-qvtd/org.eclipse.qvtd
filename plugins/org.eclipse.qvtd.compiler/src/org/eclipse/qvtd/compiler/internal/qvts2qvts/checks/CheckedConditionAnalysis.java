@@ -27,6 +27,7 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.MappingPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -326,10 +327,10 @@ public class CheckedConditionAnalysis
 	 */
 	private final @NonNull List<@NonNull Edge> oldUnconditionalEdges;
 
-	public CheckedConditionAnalysis(@NonNull Partition partition, @NonNull ScheduleManager scheduleManager) {
-		this.partition = partition;
+	public CheckedConditionAnalysis(@NonNull MappingPartitionAnalysis<?> partitionAnalysis, @NonNull ScheduleManager scheduleManager) {
+		this.partition = partitionAnalysis.getPartition();
 		this.scheduleManager = scheduleManager;
-		this.reachabilityForest = partition.getReachabilityForest();
+		this.reachabilityForest = partitionAnalysis.getReachabilityForest();
 		this.allCheckedProperties = computeCheckedProperties();
 		this.oldUnconditionalEdges = computeOldUnconditionalEdges();
 	}

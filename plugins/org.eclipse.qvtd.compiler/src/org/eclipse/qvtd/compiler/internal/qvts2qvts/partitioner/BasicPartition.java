@@ -19,27 +19,21 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
-import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Sets;
 
-public class BasicPartition extends AbstractAcyclicPartition
+public class BasicPartition extends AbstractMappingPartition
 {
 	protected final @NonNull Iterable<@NonNull Node> headNodes;
-	private @NonNull String namePrefix = "";
-	private @NonNull String symbolSuffix = "";
 
 	/**
 	 * The nodes of region that are required by the partition and the nodeRole that each node plays in the partition.
@@ -52,22 +46,14 @@ public class BasicPartition extends AbstractAcyclicPartition
 	private final @NonNull Map<@NonNull Edge, @NonNull Role> edge2edgeRole = new HashMap<>();
 
 	/**
-	 * The mechanisms to reach required nodes.
-	 */
-	private final @NonNull ReachabilityForest reachabilityForest;
-
-	/**
 	 * Explicitly specified predecessors for use by QVTc where there is no trace localSuccess linkage.
 	 */
 	private final @NonNull List<@NonNull Partition> explicitPredecessors = new ArrayList<>();
 
-	private @Nullable MicroMappingRegion microMappingRegion = null;
-
 	protected BasicPartition(@NonNull String name, @NonNull ScheduleManager scheduleManager, @NonNull RuleRegion region,
-			@NonNull Iterable<@NonNull Node> headNodes, @NonNull ReachabilityForest reachabilityForest) {
+			@NonNull Iterable<@NonNull Node> headNodes) {
 		super(name, scheduleManager, region);
 		this.headNodes = headNodes;
-		this.reachabilityForest = reachabilityForest;
 	}
 
 	public void addExplicitPredecessor(@NonNull Partition speculationPartition) {
@@ -157,48 +143,6 @@ public class BasicPartition extends AbstractAcyclicPartition
 		}
 	}
 
-	@Override
-	public final @NonNull MappingRegion createMicroMappingRegion() {
-		return createMicroMappingRegion(namePrefix, symbolSuffix);
-	}
-
-	protected final @NonNull MicroMappingRegion createMicroMappingRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
-		assert microMappingRegion  == null;
-		assert !(region instanceof MicroMappingRegion);
-		MicroMappingRegion partialRegion = createPartialRegion(namePrefix, symbolSuffix);
-		//	originalRegion.accept(partitioningVisitor);
-		MicroMappingRegion microMappingRegion = partialRegion;//partitioningVisitor.getRegion();
-		/*	Iterable<@NonNull Node> preferredHeadNodes = getPreferredHeadNodes();
-		List<@NonNull Node> partialPreferredHeadNodes = null;
-		if (preferredHeadNodes != null) {
-			partialPreferredHeadNodes = new ArrayList<>();
-			for (@NonNull Node preferredNode : preferredHeadNodes) {
-				partialPreferredHeadNodes.add(partitioningVisitor.getNode(preferredNode));
-			}
-		}
-		Iterable<@NonNull Node> headNodes = RuleHeadAnalysis.computeRuleHeadNodes(scheduleManager, microMappingRegion, partialPreferredHeadNodes);
-		Iterables.addAll(QVTscheduleUtil.Internal.getHeadNodesList(microMappingRegion), headNodes);
-
-
-		//	if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-		//		scheduleManager.writeDebugGraphs(microMappingRegion, null);
-		//	}
-		check(microMappingRegion); */
-		this.microMappingRegion = microMappingRegion;
-		return microMappingRegion;
-	}
-
-	protected @NonNull MicroMappingRegion createPartialRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
-		MicroMappingRegion partialRegion = QVTscheduleFactory.eINSTANCE.createMicroMappingRegion();
-		scheduleManager.addMappingRegion(partialRegion);
-		partialRegion.setMappingRegion((MappingRegion) region);
-		partialRegion.setNamePrefix(namePrefix);
-		partialRegion.setSymbolNameSuffix(symbolSuffix);
-		partialRegion.setName(namePrefix + " " + region.getName());
-		return partialRegion;
-	}
-
-	@Override
 	public @NonNull List<@NonNull Partition> getExplicitPredecessors() {
 		return explicitPredecessors;
 	}
@@ -209,20 +153,8 @@ public class BasicPartition extends AbstractAcyclicPartition
 	}
 
 	@Override
-	public @NonNull MappingRegion getMicroMappingRegion() {
-		return ClassUtil.nonNullState(microMappingRegion);
-	}
-
-	@Override
-	public @NonNull String getName() {		// FIXME Bad RegionHelper override
+	public @NonNull String getName() {
 		return name;
-	}
-
-	/**
-	 * Return all the original region nodes that contribute to the partition.
-	 */
-	protected @NonNull Iterable<@NonNull Node> getNodes() {
-		return node2nodeRole.keySet();
 	}
 
 	@Override
@@ -232,16 +164,7 @@ public class BasicPartition extends AbstractAcyclicPartition
 
 	@Override
 	public @NonNull Iterable<@NonNull Node> getPartialNodes() {
-		return getNodes();
-	}
-
-	protected @NonNull Iterable<@NonNull Node> getPredecessors(@NonNull Node targetNode) {
-		return reachabilityForest.getPredecessors(targetNode);
-	}
-
-	@Override
-	public @NonNull ReachabilityForest getReachabilityForest() {
-		return reachabilityForest;
+		return node2nodeRole.keySet();
 	}
 
 	/**
@@ -272,95 +195,6 @@ public class BasicPartition extends AbstractAcyclicPartition
 	 */
 	protected boolean hasNode(@NonNull Node node) {
 		return node2nodeRole.containsKey(node);
-	}
-
-	protected void initMicroMappingRegion(@NonNull String namePrefix, @NonNull String symbolSuffix) {
-		this.namePrefix = namePrefix;
-		this.symbolSuffix = symbolSuffix;
-	}
-
-	@Override
-	public boolean isAwaited(@NonNull Edge edge) {
-		Role role = getRole(edge);
-		return role != null ? role.isAwaited() : false; //edge.isPredicated();
-	}
-
-	@Override
-	protected boolean isConstant(@NonNull Edge edge) {
-		Role role = getRole(edge);
-		return role != null ? role.isConstant() : false; //edge.isConstant();
-	}
-
-	@Override
-	protected boolean isConstant(@NonNull Node node) {
-		Role role = getRole(node);
-		return role != null ? role.isConstant() : false; //node.isConstant();
-	}
-
-	@Override
-	protected boolean isLoaded(@NonNull Edge edge) {
-		Role role = getRole(edge);
-		return role != null ? role.isLoaded() : false; //edge.isLoaded();
-	}
-
-	@Override
-	protected boolean isLoaded(@NonNull Node node) {
-		Role role = getRole(node);
-		return role != null ? role.isLoaded() : false; //node.isLoaded();
-	}
-
-	//	@Override
-	protected boolean isOld(@NonNull Edge edge) {
-		Role role = getRole(edge);
-		return role != null ? role.isOld() : false; //edge.isOld();
-	}
-
-	//	@Override
-	protected boolean isOld(@NonNull Node node) {
-		Role role = getRole(node);
-		return role != null ? role.isOld() : false; //node.isOld();
-	}
-
-	@Override
-	public boolean isPredicated(@NonNull Edge edge) {
-		Role role = getRole(edge);
-		return role != null ? role.isPredicated() : false; //edge.isPredicated();
-	}
-
-	@Override
-	protected boolean isPredicated(@NonNull Node node) {
-		Role role = getRole(node);
-		return role != null ? role.isPredicated() : false; //node.isPredicated();
-	}
-
-	@Override
-	public boolean isRealized(@NonNull Edge edge) {
-		Role role = getRole(edge);
-		return role != null ? role.isRealized() : false; //edge.isRealized();
-	}
-
-	@Override
-	protected boolean isRealized(@NonNull Node node) {
-		Role role = getRole(node);
-		return role != null ? role.isRealized() : false; //node.isRealized();
-	}
-
-	@Override
-	protected boolean isSpeculated(@NonNull Edge edge) {
-		Role role = getRole(edge);
-		return role != null ? role.isSpeculated() : false; //edge.isSpeculated();
-	}
-
-	@Override
-	protected boolean isSpeculated(@NonNull Node node) {
-		Role role = getRole(node);
-		return role != null ? role.isSpeculated() : false; //node.isSpeculated();
-	}
-
-	@Override
-	protected boolean isSpeculation(@NonNull Node node) {
-		Role role = getRole(node);
-		return role != null ? role.isSpeculation() : false; //node.isSpeculation();
 	}
 
 	public @Nullable Role putEdgeRole(@NonNull Edge edge, @NonNull Role newEdgeRole) {

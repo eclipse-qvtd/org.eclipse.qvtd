@@ -24,30 +24,30 @@ public abstract class TraceElementPartitionAnalysis implements Nameable
 	/**
 	 * The partitioners that consume (predicate) the trace class.
 	 */
-	protected final @NonNull List<@NonNull Partition> consumers = new ArrayList<>();
+	protected final @NonNull List<@NonNull PartitionAnalysis> consumers = new ArrayList<>();
 
 	/**
 	 * The partitioners that produce (realize) the trace class.
 	 */
-	protected final @NonNull List<@NonNull Partition> producers = new ArrayList<>();
+	protected final @NonNull List<@NonNull PartitionAnalysis> producers = new ArrayList<>();
 
-	public void addConsumer(@NonNull Partition consumer) {
+	public void addConsumer(@NonNull PartitionAnalysis consumer) {
 		if (!consumers.contains(consumer)) {		// multi-consumption is possible
 			consumers.add(consumer);
 		}
 	}
 
-	public void addProducer(@NonNull Partition producer) {
+	public void addProducer(@NonNull PartitionAnalysis producer) {
 		if (!producers.contains(producer)) {		// multi-production of e.g. OclAny is possible
 			producers.add(producer);
 		}
 	}
 
-	public @NonNull Iterable<@NonNull Partition> getConsumers() {
+	public @NonNull Iterable<@NonNull PartitionAnalysis> getConsumers() {
 		return consumers;
 	}
 
-	public @NonNull Iterable<@NonNull Partition> getProducers() {
+	public @NonNull Iterable<@NonNull PartitionAnalysis> getProducers() {
 		return producers;
 	}
 }

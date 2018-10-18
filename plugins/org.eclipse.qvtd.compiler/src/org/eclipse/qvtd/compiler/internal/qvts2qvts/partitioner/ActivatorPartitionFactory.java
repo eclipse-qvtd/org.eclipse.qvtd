@@ -48,18 +48,19 @@ public class ActivatorPartitionFactory extends AbstractPartitionFactory
 		} */
 
 	@Override
-	public @NonNull BasicPartition createPartition() {
+	public @NonNull BasicPartition createPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		ReachabilityForest reachabilityForest = createReachabilityForest();
 		String name = computeName("activator");
 		Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(region);
-		BasicPartition partition = new BasicPartition(name, mappingPartitioner.getScheduleManager(), region, headNodes, reachabilityForest);
+		BasicPartition partition = new BasicPartition(name, mappingPartitioner.getScheduleManager(), region, headNodes);
 		int partitionNumber = region.getNextPartitionNumber();
-		partition.initMicroMappingRegion("«activator»", "_p" + partitionNumber);
-		initializePartition(partition);
+		BasicPartitionAnalysis basicPartitionAnalysis = new BasicPartitionAnalysis(partitionedTransformationAnalysis, partition, reachabilityForest, "«activator»", "_p" + partitionNumber);
+		initializePartition(basicPartitionAnalysis);
 		return partition;
 	}
 
-	protected void initializePartition(@NonNull BasicPartition partition) {
+	protected void initializePartition(@NonNull BasicPartitionAnalysis partitionAnalysis) {
+		BasicPartition partition= partitionAnalysis.getPartition();
 		Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(region);
 		//
 		//	The realized middle (trace) nodes become speculation nodes.
@@ -90,7 +91,7 @@ public class ActivatorPartitionFactory extends AbstractPartitionFactory
 		//
 		//	Join up the edges.
 		//
-		resolveEdges(partition);
+		resolveEdges(partitionAnalysis);
 	}
 
 	@Override

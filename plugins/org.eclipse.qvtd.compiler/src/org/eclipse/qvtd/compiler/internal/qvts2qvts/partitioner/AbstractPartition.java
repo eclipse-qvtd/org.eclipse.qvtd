@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -22,12 +21,12 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -41,6 +40,7 @@ import com.google.common.collect.Iterables;
 public abstract class AbstractPartition implements Partition
 {
 	protected final @NonNull String name;
+	protected final @NonNull ScheduleManager scheduleManager;
 	private @Nullable String symbolName = null;
 
 	/**
@@ -49,14 +49,9 @@ public abstract class AbstractPartition implements Partition
 	 */
 	private final @NonNull List<@NonNull Integer> passes = new ArrayList<>();
 
-	protected AbstractPartition(@NonNull String name) {
+	protected AbstractPartition(@NonNull String name, @NonNull ScheduleManager scheduleManager) {
 		this.name = name;
-	}
-
-	@Override
-	public void addEnforcedEdge(@NonNull NavigableEdge usedEdge) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();		// FIXME
+		this.scheduleManager = scheduleManager;
 	}
 
 	@Override
@@ -79,20 +74,28 @@ public abstract class AbstractPartition implements Partition
 	}
 
 	@Override
-	public void buildNavigationEdgesIndex(
-			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges,
-			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();		// FIXME
-	}
-
-	@Override
-	public void computeCheckedOrEnforcedEdges(
-			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges,
-			@NonNull Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();		// FIXME
-
+	public void appendNode(@NonNull ToGraphHelper toGraphHelper, @NonNull String nodeName) {
+		GraphStringBuilder s = toGraphHelper.getGraphStringBuilder();
+		String label = /*getSymbolName() + "\\n " +*/ getName();
+		String passesText = getPassesText();
+		if (passesText != null) {
+			label = label + "\\n " + passesText;
+		}
+		s.setLabel(label);
+		//	String shape = getShape();
+		//	if (shape != null) {
+		//		s.setShape(shape);
+		//	}
+		//	String style = getStyle();
+		//	if (style != null) {
+		//		s.setStyle(style);
+		//	}
+		s.setColor(getColor());
+		//		s.setPenwidth(getPenwidth());
+		s.appendAttributedNode(nodeName);
+		//		if (isHead) {
+		//			s.append("}");
+		//		}
 	}
 
 	protected void computeSymbolName(@NonNull SymbolNameBuilder sIn) {
@@ -173,10 +176,14 @@ public abstract class AbstractPartition implements Partition
 			}
 			else {
 				for (@NonNull Edge edge : getPartialEdges()) {
-					if (edge.isNavigation() && isRealized(edge)) {
-						NavigableEdge navigableEdge = (org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge) edge;
-						String name = PivotUtil.getName(QVTscheduleUtil.getProperty(navigableEdge));
-						edgeNames.add(name);
+					if (edge.isNavigation()) {
+						Role edgeRole = getRole(edge);
+						assert edgeRole != null;
+						if (edgeRole.isRealized()) {
+							NavigableEdge navigableEdge = (org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge) edge;
+							String name = PivotUtil.getName(QVTscheduleUtil.getProperty(navigableEdge));
+							edgeNames.add(name);
+						}
 					}
 				}
 				if (edgeNames.size() > 0) {
@@ -241,11 +248,6 @@ public abstract class AbstractPartition implements Partition
 	}
 
 	@Override
-	public @NonNull MappingRegion createMicroMappingRegion() {
-		throw new UnsupportedOperationException();		// FIXME
-	}
-
-	@Override
 	public @Nullable Set<@NonNull NavigableEdge> getCheckedEdges(@NonNull TypedModel typedModel) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();		// FIXME
@@ -260,11 +262,6 @@ public abstract class AbstractPartition implements Partition
 	public @Nullable Iterable<@NonNull NavigableEdge> getEnforcedEdges(@NonNull TypedModel typedModel, @NonNull Property asProperty) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();		// FIXME
-	}
-
-	@Override
-	public @Nullable Iterable<@NonNull Partition> getExplicitPredecessors() {
-		return null;
 	}
 
 	@Override
@@ -297,19 +294,12 @@ public abstract class AbstractPartition implements Partition
 	}
 
 	@Override
-	public @NonNull MappingRegion getMicroMappingRegion() {
-		throw new UnsupportedOperationException();		// FIXME
-	}
-
-	@Override
 	public @NonNull Iterable<@NonNull Edge> getPartialEdges() {
-		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();		// FIXME
 	}
 
 	@Override
 	public @NonNull Iterable<@NonNull Node> getPartialNodes() {
-		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();		// FIXME
 	}
 
@@ -339,11 +329,6 @@ public abstract class AbstractPartition implements Partition
 	}
 
 	@Override
-	public @NonNull ReachabilityForest getReachabilityForest() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public @NonNull Region getRegion() {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();		// FIXME
@@ -367,6 +352,10 @@ public abstract class AbstractPartition implements Partition
 		else {
 			return node.getNodeRole();
 		}
+	}
+
+	public @NonNull ScheduleManager getScheduleManager() {
+		return scheduleManager;
 	}
 
 	@Override

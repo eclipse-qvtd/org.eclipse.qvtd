@@ -542,9 +542,9 @@ public class MappingPartitioner implements Nameable
 		return true;
 	} */
 
-	public @NonNull Iterable<@NonNull Partition> partition() {
+	public @NonNull Iterable<@NonNull Partition> partition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		if ((region instanceof DispatchRegion) || (region instanceof VerdictRegion)) {
-			return Collections.singletonList(new NonPartition.NonPartitionFactory(this).createPartition());
+			return Collections.singletonList(new NonPartitionFactory(this).createPartition(partitionedTransformationAnalysis));
 		}
 		String name = region.getName();
 		if ("associationToForeignKey".equals(name)) {
@@ -582,17 +582,17 @@ public class MappingPartitioner implements Nameable
 			//
 			//	Create an activator to make a QVTr top relation behave as a non-top relation.
 			//
-			newPartitions.add(new ActivatorPartitionFactory(this).createPartition());
+			newPartitions.add(new ActivatorPartitionFactory(this).createPartition(partitionedTransformationAnalysis));
 		}
 		if (!needsSpeculation) {
 			//
 			//	If speculation is not needed just add the functionality as a single region.
 			//
 			if (newPartitions.isEmpty()) {		// i.e. a QVTr non top relation - re-use as is
-				newPartitions.add(new NonPartition.NonPartitionFactory(this).createPartition());
+				newPartitions.add(new NonPartitionFactory(this).createPartition(partitionedTransformationAnalysis));
 			}
 			else {							// i.e. a QVTr top relation - create a residue to finish off the activator
-				newPartitions.add(new ResidualPartitionFactory(this).createPartition());
+				newPartitions.add(new ResidualPartitionFactory(this).createPartition(partitionedTransformationAnalysis));
 			}
 		}
 		else {								// cycles may need speculation and partitioning into isolated actions
@@ -602,9 +602,9 @@ public class MappingPartitioner implements Nameable
 			if (useActivators) {
 				regionAnalysis.createLocalSuccess();
 			}
-			BasicPartition localPredicatePartition = new LocalPredicatePartitionFactory(this, useActivators).createPartition();
-			BasicPartition globalPredicatePartition = new GlobalPredicatePartitionFactory(this).createPartition();
-			BasicPartition speculatedPartition = new SpeculatedPartitionFactory(this).createPartition();
+			BasicPartition localPredicatePartition = new LocalPredicatePartitionFactory(this, useActivators).createPartition(partitionedTransformationAnalysis);
+			BasicPartition globalPredicatePartition = new GlobalPredicatePartitionFactory(this).createPartition(partitionedTransformationAnalysis);
+			BasicPartition speculatedPartition = new SpeculatedPartitionFactory(this).createPartition(partitionedTransformationAnalysis);
 			newPartitions.add(localPredicatePartition);
 			newPartitions.add(globalPredicatePartition);
 			newPartitions.add(speculatedPartition);
@@ -618,7 +618,7 @@ public class MappingPartitioner implements Nameable
 			//
 			for (@NonNull NavigableEdge outputEdge : getRealizedOutputEdges()) {
 				if (!hasRealizedEdge(outputEdge)) {
-					newPartitions.add(new AssignmentPartitionFactory(this, outputEdge).createPartition());
+					newPartitions.add(new AssignmentPartitionFactory(this, outputEdge).createPartition(partitionedTransformationAnalysis));
 				}
 			}
 			//
@@ -626,7 +626,7 @@ public class MappingPartitioner implements Nameable
 			//
 			for (@NonNull NavigableEdge edge : getRealizedEdges()) {
 				if (!hasRealizedEdge(edge)) {
-					newPartitions.add(new AssignmentPartitionFactory(this, edge).createPartition());
+					newPartitions.add(new AssignmentPartitionFactory(this, edge).createPartition(partitionedTransformationAnalysis));
 				}
 			}
 		}

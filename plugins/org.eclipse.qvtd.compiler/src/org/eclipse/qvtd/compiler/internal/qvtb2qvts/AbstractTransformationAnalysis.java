@@ -33,7 +33,8 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.TracePropertyRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CyclicRegionsAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -105,7 +106,7 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 	 */
 	private final @NonNull Map<@NonNull Property, @NonNull List<@NonNull Region>> corollaryProperty2regions = new HashMap<>();
 
-	private @Nullable RootPartition rootPartition = null;
+	private @Nullable RootPartitionAnalysis rootPartitionAnalysis = null;
 
 	protected AbstractTransformationAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull Transformation transformation, @NonNull ScheduledRegion scheduledRegion) {
 		super(scheduleManager.getEnvironmentFactory());
@@ -195,8 +196,8 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 		return classDatum2traceClassAnalysis.get(classDatum);
 	}
 
-	public @Nullable RootPartition basicGetRootPartition() {
-		return rootPartition;
+	public @Nullable RootPartitionAnalysis basicGetRootPartitionAnalysis() {
+		return rootPartitionAnalysis;
 	}
 
 	public @Nullable TracePropertyRegionAnalysis basicGetTracePropertyAnalysis(@NonNull PropertyDatum propertyDatum) {
@@ -293,8 +294,8 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 		return regionAnalysis;
 	}
 
-	public @NonNull RootPartition getRootPartition() {
-		return ClassUtil.nonNullState(rootPartition);
+	public @NonNull RootPartitionAnalysis getRootPartitionAnalysis() {
+		return ClassUtil.nonNullState(rootPartitionAnalysis);
 	}
 
 	//	public @NonNull Iterable<@NonNull RuleAnalysis> getRuleAnalyses() {
@@ -408,10 +409,11 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 		return tracePropertyAnalysis;
 	}
 
-	public @NonNull RootPartition partition(@NonNull ProblemHandler problemHandler, @NonNull Iterable<? extends @NonNull Region> activeRegions) throws CompilerChainException {
-		assert this.rootPartition == null;
-		this.rootPartition  = TransformationPartitioner.partition(this, problemHandler, activeRegions);
-		return rootPartition;
+	public @NonNull PartitionedTransformationAnalysis partition(@NonNull ProblemHandler problemHandler, @NonNull Iterable<? extends @NonNull Region> activeRegions) throws CompilerChainException {
+		assert this.rootPartitionAnalysis == null;
+		PartitionedTransformationAnalysis partitionedTransformationAnalysis = TransformationPartitioner.partition(this, problemHandler, activeRegions);
+		this.rootPartitionAnalysis = partitionedTransformationAnalysis.getRootPartitionAnalysis();
+		return partitionedTransformationAnalysis;
 	}
 
 	public void prePartition() throws CompilerChainException {

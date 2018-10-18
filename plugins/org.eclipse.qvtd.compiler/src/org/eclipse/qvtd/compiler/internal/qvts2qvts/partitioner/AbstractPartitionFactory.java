@@ -212,7 +212,8 @@ public abstract class AbstractPartitionFactory implements PartitionFactory
 	 * The default implementation returns true for all old nodes.
 	 */
 	protected boolean isAvailable(@NonNull BasicPartition partition, @NonNull Node node) {
-		return partition.isOld(node);
+		Role role = partition.getRole(node);
+		return role != null ? role.isOld() : false;
 	}
 
 	protected void resolveDisambiguations(@NonNull BasicPartition partition) {
@@ -243,13 +244,14 @@ public abstract class AbstractPartitionFactory implements PartitionFactory
 	 * Resolve all the original region edges by adding to the partition provided the nodes at each end have already been added.
 	 * The addition is mediated by resolveEdgeRole that may adjust the edgeRole or suppress the addition.
 	 */
-	protected void resolveEdges(@NonNull BasicPartition partition) {
-		ReachabilityForest reachabilityForest = partition.getReachabilityForest();
+	protected void resolveEdges(@NonNull BasicPartitionAnalysis partitionAnalysis) {
+		BasicPartition partition = partitionAnalysis.getPartition();
+		ReachabilityForest reachabilityForest = partitionAnalysis.getReachabilityForest();
 		Set<@NonNull Edge> reachingEdges = new HashSet<>();
 		//
 		//	Add all the edges necessary to reach each node.
 		//
-		for (@NonNull Node node : partition.getNodes()) {
+		for (@NonNull Node node : partition.getPartialNodes()) {
 			Edge reachingEdge = reachabilityForest.getReachingEdge(node);
 			if (reachingEdge != null) {
 				reachingEdges.add(reachingEdge);
@@ -279,7 +281,7 @@ public abstract class AbstractPartitionFactory implements PartitionFactory
 		//
 		//	Add all the edges necessary to reach each node.
 		//
-		for (@NonNull Node node : partition.getNodes()) {
+		for (@NonNull Node node : partition.getPartialNodes()) {
 			if (node.isOperation()) {
 				for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 					if ((edge.isExpression() || edge.isNavigation()) && !partition.hasEdge(edge)) {
@@ -377,7 +379,8 @@ public abstract class AbstractPartitionFactory implements PartitionFactory
 	/**
 	 * Ensure that the predecessors of each node are included in the partition.
 	 */
-	protected void resolvePrecedingNodes(@NonNull BasicPartition partition) {
+	protected void resolvePrecedingNodes(@NonNull BasicPartitionAnalysis partitionAnalysis) {
+		BasicPartition partition = partitionAnalysis.getPartition();
 		for (int i = 0; i < nodes.size(); i++) {
 			Node node = nodes.get(i);
 			assert node != null;
@@ -386,17 +389,20 @@ public abstract class AbstractPartitionFactory implements PartitionFactory
 			boolean hasSourceNode = (sourceNode != null) && partition.hasNode(sourceNode);
 			if ((traceEdge == null) || !mappingPartitioner.hasRealizedEdge(traceEdge) || !hasSourceNode) {
 				boolean gotOne = false;
-				for (@NonNull Node precedingNode : partition.getPredecessors(node)) {
+				for (@NonNull Node precedingNode : partitionAnalysis.getPredecessors(node)) {
 					gotOne = true;
 					if (!partition.hasNode(precedingNode)) {
 						addNode(partition, precedingNode, mappingPartitioner.hasRealizedNode(precedingNode) ? Role.PREDICATED : QVTscheduleUtil.getNodeRole(precedingNode));
 					}
 				}
-				if (!gotOne && (traceEdge != null) && partition.isRealized(traceEdge)) {
-					gotOne = true;
-					if (!hasSourceNode) {
-						assert sourceNode != null;
-						addNode(partition, sourceNode);
+				if (!gotOne && (traceEdge != null)) {
+					Role edgeRole = partition.getRole(traceEdge);
+					if ((edgeRole != null) && edgeRole.isRealized()) {
+						gotOne = true;
+						if (!hasSourceNode) {
+							assert sourceNode != null;
+							addNode(partition, sourceNode);
+						}
 					}
 				}
 				//	Integer cost = reachabilityForest.getCost(node);

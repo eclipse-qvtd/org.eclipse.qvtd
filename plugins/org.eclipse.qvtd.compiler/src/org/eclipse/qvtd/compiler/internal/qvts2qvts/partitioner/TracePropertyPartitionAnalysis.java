@@ -19,7 +19,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 /**
  * Each TracePropertyAnalysis identifies the usage of one middle trace property.
  */
-public class TracePropertyPartitionAnalysis extends TraceElementPartitionAnalysis implements CompilerUtil.TraceProperty<@NonNull Partition, @NonNull TraceClassPartitionAnalysis, @NonNull TracePropertyPartitionAnalysis>
+public class TracePropertyPartitionAnalysis extends TraceElementPartitionAnalysis implements CompilerUtil.TraceProperty<@NonNull PartitionAnalysis, @NonNull TraceClassPartitionAnalysis, @NonNull TracePropertyPartitionAnalysis>
 {
 	//	protected final @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis;
 	protected final@NonNull TraceClassPartitionAnalysis traceClassAnalysis;

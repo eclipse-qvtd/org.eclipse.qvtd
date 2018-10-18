@@ -59,7 +59,7 @@ import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.ToGraphPartitionVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -823,9 +823,9 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public @NonNull RootPartition getRootPartition(@NonNull ScheduledRegion scheduledRegion) {
+	public @NonNull RootPartitionAnalysis getRootPartitionAnalysis(@NonNull ScheduledRegion scheduledRegion) {
 		AbstractTransformationAnalysis transformationAnalysis = getTransformationAnalysis(scheduledRegion);
-		return transformationAnalysis.getRootPartition();
+		return transformationAnalysis.getRootPartitionAnalysis();
 	}
 
 	public @NonNull RuleAnalysis getRuleAnalysis(@NonNull Rule rule) {

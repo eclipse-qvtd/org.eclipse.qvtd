@@ -37,19 +37,20 @@ public class GlobalPredicatePartitionFactory extends AbstractPartitionFactory
 	}
 
 	@Override
-	public @NonNull BasicPartition createPartition() {
+	public @NonNull BasicPartition createPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		ReachabilityForest reachabilityForest = createReachabilityForest();
 		String name = computeName("global");
 		Iterable<@NonNull Node> executionNodes = mappingPartitioner.getExecutionNodes();
 		Iterable<@NonNull Node> headNodes = mappingPartitioner.getTraceNodes();
-		BasicPartition partition = new BasicPartition(name, scheduleManager, region, headNodes, reachabilityForest);
+		BasicPartition partition = new BasicPartition(name, scheduleManager, region, headNodes);
 		int partitionNumber = region.getNextPartitionNumber();
-		partition.initMicroMappingRegion("«global»", "_p" + partitionNumber);
-		initializePartition(partition, executionNodes);
+		BasicPartitionAnalysis basicPartitionAnalysis = new BasicPartitionAnalysis(partitionedTransformationAnalysis, partition, reachabilityForest, "«global»", "_p" + partitionNumber);
+		initializePartition(basicPartitionAnalysis, executionNodes);
 		return partition;
 	}
 
-	protected void initializePartition(@NonNull BasicPartition partition, @NonNull Iterable<@NonNull Node> executionNodes) {
+	protected void initializePartition(@NonNull BasicPartitionAnalysis partitionAnalysis, @NonNull Iterable<@NonNull Node> executionNodes) {
+		BasicPartition partition = partitionAnalysis.getPartition();
 		//	this.traceNode = mappingPartitioner.getTraceNode();
 		if (hasSynthesizedTrace) {
 			//
@@ -91,7 +92,7 @@ public class GlobalPredicatePartitionFactory extends AbstractPartitionFactory
 			//
 			//	The predicated output nodes and all preceding navigations are retained as is.
 			//
-			resolvePredicatedOutputNodes(partition);
+			resolvePredicatedOutputNodes(partitionAnalysis);
 		}
 		//
 		//	The localSuccess nodes are predicated, and the globalSuccess realized to sequence speculating/speculation/speculated partitions.
@@ -104,7 +105,7 @@ public class GlobalPredicatePartitionFactory extends AbstractPartitionFactory
 		//
 		//	Ensure that the predecessors of each node are included in the partition.
 		//
-		resolvePrecedingNodes(partition);
+		resolvePrecedingNodes(partitionAnalysis);
 		//
 		//	Ensure that re-used trace classes do not lead to ambiguous mappings.
 		//
@@ -112,10 +113,10 @@ public class GlobalPredicatePartitionFactory extends AbstractPartitionFactory
 		//
 		//	Join up the edges.
 		//
-		resolveEdges(partition);
+		resolveEdges(partitionAnalysis);
 	}
 
-	private boolean isDownstreamFromCorollary(@NonNull BasicPartition partition, @NonNull Node node) {
+	private boolean isDownstreamFromCorollary(@NonNull BasicPartitionAnalysis partitionAnalysis, @NonNull Node node) {
 		if (transformationAnalysis.isCorollary(node)) {
 			return true;
 		}
@@ -124,7 +125,7 @@ public class GlobalPredicatePartitionFactory extends AbstractPartitionFactory
 			for (@NonNull Edge edge : QVTscheduleUtil.getIncomingEdges(node)) {
 				if (edge.isComputation()) {
 					Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
-					if (isDownstreamFromCorollary(partition, sourceNode)) {
+					if (isDownstreamFromCorollary(partitionAnalysis, sourceNode)) {
 						allReachable = false;
 						break;
 					}
@@ -134,8 +135,8 @@ public class GlobalPredicatePartitionFactory extends AbstractPartitionFactory
 				return false;
 			}
 		}
-		for (@NonNull Node precedingNode : partition.getPredecessors(node)) {
-			if (!isDownstreamFromCorollary(partition, precedingNode)) {
+		for (@NonNull Node precedingNode : partitionAnalysis.getPredecessors(node)) {
+			if (!isDownstreamFromCorollary(partitionAnalysis, precedingNode)) {
 				return false;
 			}
 		}
@@ -239,9 +240,10 @@ public class GlobalPredicatePartitionFactory extends AbstractPartitionFactory
 		}
 	}
 
-	protected void resolvePredicatedOutputNodes(@NonNull BasicPartition partition) {
+	protected void resolvePredicatedOutputNodes(@NonNull BasicPartitionAnalysis partitionAnalysis) {
+		BasicPartition partition = partitionAnalysis.getPartition();
 		for (@NonNull Node node : mappingPartitioner.getPredicatedOutputNodes()) {
-			if (!partition.hasNode(node) && !transformationAnalysis.isCorollary(node) && !isDownstreamFromCorollary(partition, node)) {
+			if (!partition.hasNode(node) && !transformationAnalysis.isCorollary(node) && !isDownstreamFromCorollary(partitionAnalysis, node)) {
 				addNode(partition, node, QVTscheduleUtil.getNodeRole(node));
 			}
 		}
