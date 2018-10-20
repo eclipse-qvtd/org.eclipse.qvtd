@@ -1014,13 +1014,22 @@ public interface QVTschedulePackage extends EPackage {
 	int PARTITION__NAME = PivotPackage.NAMED_ELEMENT__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Passes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTITION__PASSES = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Partition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARTITION_FEATURE_COUNT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int PARTITION_FEATURE_COUNT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -1105,13 +1114,31 @@ public interface QVTschedulePackage extends EPackage {
 	int MAPPING_PARTITION__NAME = PARTITION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Passes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_PARTITION__PASSES = PARTITION__PASSES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_PARTITION__REGION = PARTITION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Mapping Partition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_PARTITION_FEATURE_COUNT = PARTITION_FEATURE_COUNT + 0;
+	int MAPPING_PARTITION_FEATURE_COUNT = PARTITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -1196,13 +1223,49 @@ public interface QVTschedulePackage extends EPackage {
 	int BASIC_PARTITION__NAME = MAPPING_PARTITION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Passes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__PASSES = MAPPING_PARTITION__PASSES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__REGION = MAPPING_PARTITION__REGION;
+
+	/**
+	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__HEAD_NODES = MAPPING_PARTITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Explicit Predecessors</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__EXPLICIT_PREDECESSORS = MAPPING_PARTITION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Basic Partition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BASIC_PARTITION_FEATURE_COUNT = MAPPING_PARTITION_FEATURE_COUNT + 0;
+	int BASIC_PARTITION_FEATURE_COUNT = MAPPING_PARTITION_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -3228,6 +3291,15 @@ public interface QVTschedulePackage extends EPackage {
 	int COMPOSITE_PARTITION__NAME = PARTITION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Passes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_PARTITION__PASSES = PARTITION__PASSES;
+
+	/**
 	 * The number of structural features of the '<em>Composite Partition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3895,6 +3967,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int CYCLIC_PARTITION__NAME = COMPOSITE_PARTITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Passes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CYCLIC_PARTITION__PASSES = COMPOSITE_PARTITION__PASSES;
 
 	/**
 	 * The number of structural features of the '<em>Cyclic Partition</em>' class.
@@ -6296,6 +6377,24 @@ public interface QVTschedulePackage extends EPackage {
 	int LOADING_PARTITION__NAME = MAPPING_PARTITION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Passes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOADING_PARTITION__PASSES = MAPPING_PARTITION__PASSES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOADING_PARTITION__REGION = MAPPING_PARTITION__REGION;
+
+	/**
 	 * The number of structural features of the '<em>Loading Partition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7639,6 +7738,24 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NON_PARTITION__NAME = MAPPING_PARTITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Passes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NON_PARTITION__PASSES = MAPPING_PARTITION__PASSES;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NON_PARTITION__REGION = MAPPING_PARTITION__REGION;
 
 	/**
 	 * The number of structural features of the '<em>Non Partition</em>' class.
@@ -9463,6 +9580,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int ROOT_PARTITION__NAME = COMPOSITE_PARTITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Passes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT_PARTITION__PASSES = COMPOSITE_PARTITION__PASSES;
 
 	/**
 	 * The number of structural features of the '<em>Root Partition</em>' class.
@@ -11604,6 +11730,28 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getBasicPartition();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getHeadNodes <em>Head Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Head Nodes</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getHeadNodes()
+	 * @see #getBasicPartition()
+	 * @generated
+	 */
+	EReference getBasicPartition_HeadNodes();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getExplicitPredecessors <em>Explicit Predecessors</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Explicit Predecessors</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getExplicitPredecessors()
+	 * @see #getBasicPartition()
+	 * @generated
+	 */
+	EReference getBasicPartition_ExplicitPredecessors();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode <em>Boolean Literal Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12678,6 +12826,17 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getMappingPartition();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getRegion <em>Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Region</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getRegion()
+	 * @see #getMappingPartition()
+	 * @generated
+	 */
+	EReference getMappingPartition_Region();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingRegion <em>Mapping Region</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13190,6 +13349,17 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getPartition();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.qvtd.pivot.qvtschedule.Partition#getPasses <em>Passes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Passes</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Partition#getPasses()
+	 * @see #getPartition()
+	 * @generated
+	 */
+	EAttribute getPartition_Passes();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.PatternTypedNode <em>Pattern Typed Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13450,6 +13620,22 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass BASIC_PARTITION = eINSTANCE.getBasicPartition();
+
+		/**
+		 * The meta object literal for the '<em><b>Head Nodes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASIC_PARTITION__HEAD_NODES = eINSTANCE.getBasicPartition_HeadNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Explicit Predecessors</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASIC_PARTITION__EXPLICIT_PREDECESSORS = eINSTANCE.getBasicPartition_ExplicitPredecessors();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BooleanLiteralNodeImpl <em>Boolean Literal Node</em>}' class.
@@ -14372,6 +14558,14 @@ public interface QVTschedulePackage extends EPackage {
 		EClass MAPPING_PARTITION = eINSTANCE.getMappingPartition();
 
 		/**
+		 * The meta object literal for the '<em><b>Region</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_PARTITION__REGION = eINSTANCE.getMappingPartition_Region();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingRegionImpl <em>Mapping Region</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -14786,6 +14980,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass PARTITION = eINSTANCE.getPartition();
+
+		/**
+		 * The meta object literal for the '<em><b>Passes</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PARTITION__PASSES = eINSTANCE.getPartition_Passes();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PatternTypedNodeImpl <em>Pattern Typed Node</em>}' class.
