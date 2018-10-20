@@ -23,6 +23,7 @@
       <details key="documentation" value="An ArgumentEdge conveys an expression input to an iteration/operation/pseudo-operation."/>
     </eAnnotations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BasicPartition" eSuperTypes="#//MappingPartition"/>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteralNode" eSuperTypes="#//OperationNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A BooleanLiteralNode supports a Boolean literal value in a QVTs graph."/>
@@ -103,6 +104,8 @@
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComposedNode" eSuperTypes="#//Node"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositePartition" abstract="true"
+      eSuperTypes="#//Partition"/>
   <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element #//Symbolable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A Connection establishes that one or more source edges/nodes are available for use by one or more target edges/nodes.&#xD;&#xA;Derivations refine the availability to edges or nodes, pass by value, optional existence or mandatory existence."/>
@@ -131,6 +134,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="elementRegions" lowerBound="1"
         upperBound="-1" eType="#//MappingRegion"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CyclicPartition" eSuperTypes="#//CompositePartition"/>
   <eClassifiers xsi:type="ecore:EClass" name="DependencyEdge" eSuperTypes="#//Edge">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A DependencyEdge instantiates the dependencies of an operation in its caller."/>
@@ -227,6 +231,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LoadingPartition" eSuperTypes="#//MappingPartition"/>
   <eClassifiers xsi:type="ecore:EClass" name="LoadingRegion" eSuperTypes="#//Region">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A LoadingRegion provides a graphical representation of the model elements to be loaded from input models."/>
@@ -262,6 +267,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="matched" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingPartition" abstract="true" eSuperTypes="#//Partition"/>
   <eClassifiers xsi:type="ecore:EClass" name="MappingRegion" abstract="true" eSuperTypes="#//Region">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A MappingRegion provides a graphical representation of an executable mapping."/>
@@ -359,6 +365,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NonPartition" eSuperTypes="#//MappingPartition"/>
   <eClassifiers xsi:type="ecore:EClass" name="NullLiteralNode" eSuperTypes="#//OperationNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A NullLiteralNode supports a null literal value in a QVTs graph."/>
@@ -441,6 +448,11 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Partition" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-NamedElement">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A Partion is a sub-sub-graph with selected Nodes and Edges in the graphical representation of a Rule. Derived Partitions provide distinct forms of execution semantics."/>
+    </eAnnotations>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PatternTypedNode" eSuperTypes="#//MappingNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="PatternVariableNode" eSuperTypes="#//VariableNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="PredicateEdge" eSuperTypes="#//Edge"/>
@@ -482,6 +494,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="scheduledRegion" eType="#//ScheduledRegion"
         eOpposite="#//ScheduledRegion/activeRegions"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RootPartition" eSuperTypes="#//CompositePartition"/>
   <eClassifiers xsi:type="ecore:EClass" name="RuleRegion" eSuperTypes="#//MappingRegion">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A RuleRegion provides a graphical representation of an executable mapping defined by a Rule; QVTc Mapping or QVTr Relation."/>

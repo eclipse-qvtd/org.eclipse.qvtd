@@ -57,6 +57,11 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
+	public @Nullable Object visitBasicPartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull BasicPartition object) {
+		return visitMappingPartition(object);
+	}
+
+	@Override
 	public @Nullable Object visitBooleanLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull BooleanLiteralNode object) {
 		return visitOperationNode(object);
 	}
@@ -97,6 +102,11 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
+	public @Nullable Object visitCompositePartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CompositePartition object) {
+		return visitPartition(object);
+	}
+
+	@Override
 	public @Nullable Object visitConnection(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Connection object) {
 		return visitElement(object);
 	}
@@ -104,6 +114,11 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 	@Override
 	public @Nullable Object visitCyclicMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CyclicMappingRegion object) {
 		return visitMappingRegion(object);
+	}
+
+	@Override
+	public @Nullable Object visitCyclicPartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CyclicPartition object) {
+		return visitCompositePartition(object);
 	}
 
 	@Override
@@ -182,6 +197,11 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
+	public @Nullable Object visitLoadingPartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull LoadingPartition object) {
+		return visitMappingPartition(object);
+	}
+
+	@Override
 	public @Nullable Object visitLoadingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull LoadingRegion object) {
 		return visitRegion(object);
 	}
@@ -204,6 +224,11 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 	@Override
 	public @Nullable Object visitMappingNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingNode object) {
 		return visitNode(object);
+	}
+
+	@Override
+	public @Nullable Object visitMappingPartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingPartition object) {
+		return visitPartition(object);
 	}
 
 	@Override
@@ -242,6 +267,11 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
+	public @Nullable Object visitNonPartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NonPartition object) {
+		return visitMappingPartition(object);
+	}
+
+	@Override
 	public @Nullable Object visitNullLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NullLiteralNode object) {
 		return visitOperationNode(object);
 	}
@@ -277,6 +307,11 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
+	public @Nullable Object visitPartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Partition object) {
+		return visitNamedElement(object);
+	}
+
+	@Override
 	public @Nullable Object visitPatternTypedNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull PatternTypedNode object) {
 		return visitMappingNode(object);
 	}
@@ -304,6 +339,11 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 	@Override
 	public @Nullable Object visitRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Region object) {
 		return visitNamedElement(object);
+	}
+
+	@Override
+	public @Nullable Object visitRootPartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RootPartition object) {
+		return visitCompositePartition(object);
 	}
 
 	@Override

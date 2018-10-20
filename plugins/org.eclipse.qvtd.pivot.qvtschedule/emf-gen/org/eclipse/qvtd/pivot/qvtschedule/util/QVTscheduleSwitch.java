@@ -98,6 +98,16 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTschedulePackage.BASIC_PARTITION: {
+				BasicPartition basicPartition = (BasicPartition)theEObject;
+				T result = caseBasicPartition(basicPartition);
+				if (result == null) result = caseMappingPartition(basicPartition);
+				if (result == null) result = casePartition(basicPartition);
+				if (result == null) result = caseNamedElement(basicPartition);
+				if (result == null) result = caseElement(basicPartition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTschedulePackage.BOOLEAN_LITERAL_NODE: {
 				BooleanLiteralNode booleanLiteralNode = (BooleanLiteralNode)theEObject;
 				T result = caseBooleanLiteralNode(booleanLiteralNode);
@@ -178,6 +188,15 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTschedulePackage.COMPOSITE_PARTITION: {
+				CompositePartition compositePartition = (CompositePartition)theEObject;
+				T result = caseCompositePartition(compositePartition);
+				if (result == null) result = casePartition(compositePartition);
+				if (result == null) result = caseNamedElement(compositePartition);
+				if (result == null) result = caseElement(compositePartition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTschedulePackage.CONNECTION: {
 				Connection connection = (Connection)theEObject;
 				T result = caseConnection(connection);
@@ -200,6 +219,16 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseNamedElement(cyclicMappingRegion);
 				if (result == null) result = caseSymbolable(cyclicMappingRegion);
 				if (result == null) result = caseElement(cyclicMappingRegion);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTschedulePackage.CYCLIC_PARTITION: {
+				CyclicPartition cyclicPartition = (CyclicPartition)theEObject;
+				T result = caseCyclicPartition(cyclicPartition);
+				if (result == null) result = caseCompositePartition(cyclicPartition);
+				if (result == null) result = casePartition(cyclicPartition);
+				if (result == null) result = caseNamedElement(cyclicPartition);
+				if (result == null) result = caseElement(cyclicPartition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -346,6 +375,16 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTschedulePackage.LOADING_PARTITION: {
+				LoadingPartition loadingPartition = (LoadingPartition)theEObject;
+				T result = caseLoadingPartition(loadingPartition);
+				if (result == null) result = caseMappingPartition(loadingPartition);
+				if (result == null) result = casePartition(loadingPartition);
+				if (result == null) result = caseNamedElement(loadingPartition);
+				if (result == null) result = caseElement(loadingPartition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTschedulePackage.LOADING_REGION: {
 				LoadingRegion loadingRegion = (LoadingRegion)theEObject;
 				T result = caseLoadingRegion(loadingRegion);
@@ -394,6 +433,15 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseNode(mappingNode);
 				if (result == null) result = caseElement(mappingNode);
 				if (result == null) result = caseConnectionEnd(mappingNode);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTschedulePackage.MAPPING_PARTITION: {
+				MappingPartition mappingPartition = (MappingPartition)theEObject;
+				T result = caseMappingPartition(mappingPartition);
+				if (result == null) result = casePartition(mappingPartition);
+				if (result == null) result = caseNamedElement(mappingPartition);
+				if (result == null) result = caseElement(mappingPartition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -462,6 +510,16 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseConnection(nodeConnection);
 				if (result == null) result = caseElement(nodeConnection);
 				if (result == null) result = caseSymbolable(nodeConnection);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTschedulePackage.NON_PARTITION: {
+				NonPartition nonPartition = (NonPartition)theEObject;
+				T result = caseNonPartition(nonPartition);
+				if (result == null) result = caseMappingPartition(nonPartition);
+				if (result == null) result = casePartition(nonPartition);
+				if (result == null) result = caseNamedElement(nonPartition);
+				if (result == null) result = caseElement(nonPartition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -538,6 +596,14 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTschedulePackage.PARTITION: {
+				Partition partition = (Partition)theEObject;
+				T result = casePartition(partition);
+				if (result == null) result = caseNamedElement(partition);
+				if (result == null) result = caseElement(partition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTschedulePackage.PATTERN_TYPED_NODE: {
 				PatternTypedNode patternTypedNode = (PatternTypedNode)theEObject;
 				T result = casePatternTypedNode(patternTypedNode);
@@ -590,6 +656,16 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseNamedElement(region);
 				if (result == null) result = caseSymbolable(region);
 				if (result == null) result = caseElement(region);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTschedulePackage.ROOT_PARTITION: {
+				RootPartition rootPartition = (RootPartition)theEObject;
+				T result = caseRootPartition(rootPartition);
+				if (result == null) result = caseCompositePartition(rootPartition);
+				if (result == null) result = casePartition(rootPartition);
+				if (result == null) result = caseNamedElement(rootPartition);
+				if (result == null) result = caseElement(rootPartition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -782,6 +858,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Basic Partition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Basic Partition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBasicPartition(BasicPartition object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Boolean Literal Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -902,6 +993,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Composite Partition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Composite Partition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCompositePartition(CompositePartition object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Connection</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -943,6 +1049,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCyclicMappingRegion(CyclicMappingRegion object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Cyclic Partition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Cyclic Partition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCyclicPartition(CyclicPartition object) {
 		return null;
 	}
 
@@ -1382,6 +1503,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Loading Partition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Loading Partition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLoadingPartition(LoadingPartition object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Loading Region</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1453,6 +1589,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMappingNode(MappingNode object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Mapping Partition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Mapping Partition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMappingPartition(MappingPartition object) {
 		return null;
 	}
 
@@ -1562,6 +1713,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Non Partition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Non Partition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNonPartition(NonPartition object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Null Literal Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1667,6 +1833,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Partition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Partition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePartition(Partition object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Pattern Typed Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1753,6 +1934,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRegion(Region object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Root Partition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Root Partition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRootPartition(RootPartition object) {
 		return null;
 	}
 

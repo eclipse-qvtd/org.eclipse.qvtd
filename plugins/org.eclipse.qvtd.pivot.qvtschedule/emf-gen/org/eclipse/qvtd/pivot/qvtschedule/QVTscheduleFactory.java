@@ -35,6 +35,15 @@ public interface QVTscheduleFactory extends EFactory {
 	QVTscheduleFactory eINSTANCE = org.eclipse.qvtd.pivot.qvtschedule.impl.QVTscheduleFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Basic Partition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Basic Partition</em>'.
+	 * @generated
+	 */
+	@NonNull BasicPartition createBasicPartition();
+
+	/**
 	 * Returns a new object of class '<em>Boolean Literal Node</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -114,6 +123,15 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull CyclicMappingRegion createCyclicMappingRegion();
+
+	/**
+	 * Returns a new object of class '<em>Cyclic Partition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Cyclic Partition</em>'.
+	 * @generated
+	 */
+	@NonNull CyclicPartition createCyclicPartition();
 
 	/**
 	 * Returns a new object of class '<em>Dependency Edge</em>'.
@@ -233,6 +251,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull KeyedValueNode createKeyedValueNode();
 
 	/**
+	 * Returns a new object of class '<em>Loading Partition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Loading Partition</em>'.
+	 * @generated
+	 */
+	@NonNull LoadingPartition createLoadingPartition();
+
+	/**
 	 * Returns a new object of class '<em>Loading Region</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -303,6 +330,15 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull NodeConnection createNodeConnection();
+
+	/**
+	 * Returns a new object of class '<em>Non Partition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Non Partition</em>'.
+	 * @generated
+	 */
+	@NonNull NonPartition createNonPartition();
 
 	/**
 	 * Returns a new object of class '<em>Null Literal Node</em>'.
@@ -402,6 +438,15 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull RecursionEdge createRecursionEdge();
+
+	/**
+	 * Returns a new object of class '<em>Root Partition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Root Partition</em>'.
+	 * @generated
+	 */
+	@NonNull RootPartition createRootPartition();
 
 	/**
 	 * Returns a new object of class '<em>Rule Region</em>'.

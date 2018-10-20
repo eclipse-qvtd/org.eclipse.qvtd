@@ -90,6 +90,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createArgumentEdgeAdapter();
 			}
 			@Override
+			public Adapter caseBasicPartition(BasicPartition object) {
+				return createBasicPartitionAdapter();
+			}
+			@Override
 			public Adapter caseBooleanLiteralNode(BooleanLiteralNode object) {
 				return createBooleanLiteralNodeAdapter();
 			}
@@ -122,6 +126,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createComposedNodeAdapter();
 			}
 			@Override
+			public Adapter caseCompositePartition(CompositePartition object) {
+				return createCompositePartitionAdapter();
+			}
+			@Override
 			public Adapter caseConnection(Connection object) {
 				return createConnectionAdapter();
 			}
@@ -132,6 +140,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCyclicMappingRegion(CyclicMappingRegion object) {
 				return createCyclicMappingRegionAdapter();
+			}
+			@Override
+			public Adapter caseCyclicPartition(CyclicPartition object) {
+				return createCyclicPartitionAdapter();
 			}
 			@Override
 			public Adapter caseDependencyEdge(DependencyEdge object) {
@@ -194,6 +206,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createKeyedValueNodeAdapter();
 			}
 			@Override
+			public Adapter caseLoadingPartition(LoadingPartition object) {
+				return createLoadingPartitionAdapter();
+			}
+			@Override
 			public Adapter caseLoadingRegion(LoadingRegion object) {
 				return createLoadingRegionAdapter();
 			}
@@ -212,6 +228,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseMappingNode(MappingNode object) {
 				return createMappingNodeAdapter();
+			}
+			@Override
+			public Adapter caseMappingPartition(MappingPartition object) {
+				return createMappingPartitionAdapter();
 			}
 			@Override
 			public Adapter caseMappingRegion(MappingRegion object) {
@@ -242,6 +262,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createNodeConnectionAdapter();
 			}
 			@Override
+			public Adapter caseNonPartition(NonPartition object) {
+				return createNonPartitionAdapter();
+			}
+			@Override
 			public Adapter caseNullLiteralNode(NullLiteralNode object) {
 				return createNullLiteralNodeAdapter();
 			}
@@ -270,6 +294,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createOperationSelfEdgeAdapter();
 			}
 			@Override
+			public Adapter casePartition(Partition object) {
+				return createPartitionAdapter();
+			}
+			@Override
 			public Adapter casePatternTypedNode(PatternTypedNode object) {
 				return createPatternTypedNodeAdapter();
 			}
@@ -292,6 +320,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseRegion(Region object) {
 				return createRegionAdapter();
+			}
+			@Override
+			public Adapter caseRootPartition(RootPartition object) {
+				return createRootPartitionAdapter();
 			}
 			@Override
 			public Adapter caseRuleRegion(RuleRegion object) {
@@ -418,6 +450,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition <em>Basic Partition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition
+	 * @generated
+	 */
+	public Adapter createBasicPartitionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode <em>Boolean Literal Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -530,6 +576,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.CompositePartition <em>Composite Partition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.CompositePartition
+	 * @generated
+	 */
+	public Adapter createCompositePartitionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.Connection <em>Connection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -568,6 +628,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCyclicMappingRegionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition <em>Cyclic Partition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition
+	 * @generated
+	 */
+	public Adapter createCyclicPartitionAdapter() {
 		return null;
 	}
 
@@ -978,6 +1052,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition <em>Loading Partition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition
+	 * @generated
+	 */
+	public Adapter createLoadingPartitionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion <em>Loading Region</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1044,6 +1132,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMappingNodeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition <em>Mapping Partition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingPartition
+	 * @generated
+	 */
+	public Adapter createMappingPartitionAdapter() {
 		return null;
 	}
 
@@ -1146,6 +1248,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.NonPartition <em>Non Partition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.NonPartition
+	 * @generated
+	 */
+	public Adapter createNonPartitionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.NullLiteralNode <em>Null Literal Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1244,6 +1360,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.Partition <em>Partition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Partition
+	 * @generated
+	 */
+	public Adapter createPartitionAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.PatternTypedNode <em>Pattern Typed Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1324,6 +1454,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRegionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.RootPartition <em>Root Partition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.RootPartition
+	 * @generated
+	 */
+	public Adapter createRootPartitionAdapter() {
 		return null;
 	}
 

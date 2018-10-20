@@ -19,6 +19,7 @@ import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ArgumentEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -27,8 +28,10 @@ import org.eclipse.qvtd.pivot.qvtschedule.CollectionLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.CollectionPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.CollectionRangeNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ComposedNode;
+import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicMappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.DependencyEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.DependencyNode;
 import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
@@ -44,11 +47,13 @@ import org.eclipse.qvtd.pivot.qvtschedule.IteratedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratorNode;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MapLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.MapPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.MapPartNode;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingNode;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NamedMappingRegion;
@@ -56,6 +61,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.NonPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.NullLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.NumericLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationCallNode;
@@ -63,6 +69,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationSelfEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternTypedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PatternVariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
@@ -70,6 +77,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
@@ -144,6 +152,11 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 	}
 
 	@Override
+	public String visitBasicPartition(@NonNull BasicPartition object) {
+		return visiting(object);
+	}
+
+	@Override
 	public String visitBooleanLiteralNode(@NonNull BooleanLiteralNode object) {
 		return visiting(object);
 	}
@@ -184,12 +197,22 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 	}
 
 	@Override
+	public String visitCompositePartition(@NonNull CompositePartition object) {
+		return visiting(object);
+	}
+
+	@Override
 	public String visitConnection(@NonNull Connection object) {
 		return visiting(object);
 	}
 
 	@Override
 	public String visitCyclicMappingRegion(@NonNull CyclicMappingRegion object) {
+		return visiting(object);
+	}
+
+	@Override
+	public String visitCyclicPartition(@NonNull CyclicPartition object) {
 		return visiting(object);
 	}
 
@@ -269,6 +292,11 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 	}
 
 	@Override
+	public String visitLoadingPartition(@NonNull LoadingPartition object) {
+		return visiting(object);
+	}
+
+	@Override
 	public String visitLoadingRegion(@NonNull LoadingRegion object) {
 		return visiting(object);
 	}
@@ -290,6 +318,11 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 
 	@Override
 	public String visitMappingNode(@NonNull MappingNode object) {
+		return visiting(object);
+	}
+
+	@Override
+	public String visitMappingPartition(@NonNull MappingPartition object) {
 		return visiting(object);
 	}
 
@@ -329,6 +362,11 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 	}
 
 	@Override
+	public String visitNonPartition(@NonNull NonPartition object) {
+		return visiting(object);
+	}
+
+	@Override
 	public String visitNullLiteralNode(@NonNull NullLiteralNode object) {
 		return visiting(object);
 	}
@@ -364,6 +402,11 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 	}
 
 	@Override
+	public String visitPartition(@NonNull Partition object) {
+		return visiting(object);
+	}
+
+	@Override
 	public String visitPatternTypedNode(@NonNull PatternTypedNode object) {
 		return visiting(object);
 	}
@@ -390,6 +433,11 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 
 	@Override
 	public String visitRegion(@NonNull Region object) {
+		return visiting(object);
+	}
+
+	@Override
+	public String visitRootPartition(@NonNull RootPartition object) {
 		return visiting(object);
 	}
 

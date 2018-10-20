@@ -67,8 +67,9 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
-	public EObject create(EClass eClass) {
+	public @NonNull EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case QVTschedulePackage.BASIC_PARTITION: return createBasicPartition();
 			case QVTschedulePackage.BOOLEAN_LITERAL_NODE: return createBooleanLiteralNode();
 			case QVTschedulePackage.CAST_EDGE: return createCastEdge();
 			case QVTschedulePackage.CLASS_DATUM: return createClassDatum();
@@ -78,6 +79,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.COLLECTION_RANGE_NODE: return createCollectionRangeNode();
 			case QVTschedulePackage.COMPOSED_NODE: return createComposedNode();
 			case QVTschedulePackage.CYCLIC_MAPPING_REGION: return createCyclicMappingRegion();
+			case QVTschedulePackage.CYCLIC_PARTITION: return createCyclicPartition();
 			case QVTschedulePackage.DEPENDENCY_EDGE: return createDependencyEdge();
 			case QVTschedulePackage.DEPENDENCY_NODE: return createDependencyNode();
 			case QVTschedulePackage.DISPATCH_REGION: return createDispatchRegion();
@@ -91,6 +93,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.ITERATOR_NODE: return createIteratorNode();
 			case QVTschedulePackage.KEY_PART_EDGE: return createKeyPartEdge();
 			case QVTschedulePackage.KEYED_VALUE_NODE: return createKeyedValueNode();
+			case QVTschedulePackage.LOADING_PARTITION: return createLoadingPartition();
 			case QVTschedulePackage.LOADING_REGION: return createLoadingRegion();
 			case QVTschedulePackage.MAP_LITERAL_NODE: return createMapLiteralNode();
 			case QVTschedulePackage.MAP_PART_EDGE: return createMapPartEdge();
@@ -99,6 +102,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.NAMED_MAPPING_REGION: return createNamedMappingRegion();
 			case QVTschedulePackage.NAVIGATION_EDGE: return createNavigationEdge();
 			case QVTschedulePackage.NODE_CONNECTION: return createNodeConnection();
+			case QVTschedulePackage.NON_PARTITION: return createNonPartition();
 			case QVTschedulePackage.NULL_LITERAL_NODE: return createNullLiteralNode();
 			case QVTschedulePackage.NUMERIC_LITERAL_NODE: return createNumericLiteralNode();
 			case QVTschedulePackage.OPERATION_CALL_NODE: return createOperationCallNode();
@@ -110,6 +114,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.PREDICATE_EDGE: return createPredicateEdge();
 			case QVTschedulePackage.PROPERTY_DATUM: return createPropertyDatum();
 			case QVTschedulePackage.RECURSION_EDGE: return createRecursionEdge();
+			case QVTschedulePackage.ROOT_PARTITION: return createRootPartition();
 			case QVTschedulePackage.RULE_REGION: return createRuleRegion();
 			case QVTschedulePackage.SCHEDULE_MODEL: return createScheduleModel();
 			case QVTschedulePackage.SCHEDULED_REGION: return createScheduledRegion();
@@ -164,6 +169,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull BasicPartition createBasicPartition() {
+		BasicPartitionImpl basicPartition = new BasicPartitionImpl();
+		return basicPartition;
 	}
 
 	/**
@@ -263,6 +279,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull CyclicMappingRegion createCyclicMappingRegion() {
 		CyclicMappingRegionImpl cyclicMappingRegion = new CyclicMappingRegionImpl();
 		return cyclicMappingRegion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull CyclicPartition createCyclicPartition() {
+		CyclicPartitionImpl cyclicPartition = new CyclicPartitionImpl();
+		return cyclicPartition;
 	}
 
 	/**
@@ -414,6 +441,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
+	public @NonNull LoadingPartition createLoadingPartition() {
+		LoadingPartitionImpl loadingPartition = new LoadingPartitionImpl();
+		return loadingPartition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull LoadingRegion createLoadingRegion() {
 		LoadingRegionImpl loadingRegion = new LoadingRegionImpl();
 		return loadingRegion;
@@ -494,6 +532,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull NodeConnection createNodeConnection() {
 		NodeConnectionImpl nodeConnection = new NodeConnectionImpl();
 		return nodeConnection;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull NonPartition createNonPartition() {
+		NonPartitionImpl nonPartition = new NonPartitionImpl();
+		return nonPartition;
 	}
 
 	/**
@@ -615,6 +664,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull RecursionEdge createRecursionEdge() {
 		RecursionEdgeImpl recursionEdge = new RecursionEdgeImpl();
 		return recursionEdge;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull RootPartition createRootPartition() {
+		RootPartitionImpl rootPartition = new RootPartitionImpl();
+		return rootPartition;
 	}
 
 	/**

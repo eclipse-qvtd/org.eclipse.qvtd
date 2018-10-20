@@ -58,6 +58,11 @@ implements QVTscheduleVisitor<Boolean>
 	}
 
 	@Override
+	public @Nullable Boolean visitBasicPartition(@NonNull BasicPartition object) {
+		return visitMappingPartition(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitBooleanLiteralNode(@NonNull BooleanLiteralNode object) {
 		return visitOperationNode(object);
 	}
@@ -74,7 +79,7 @@ implements QVTscheduleVisitor<Boolean>
 
 	@Override
 	public @Nullable Boolean visitCluster(@NonNull Cluster object) {
-		return visitElement(object);
+		return visitNamedElement(object);
 	}
 
 	@Override
@@ -98,6 +103,11 @@ implements QVTscheduleVisitor<Boolean>
 	}
 
 	@Override
+	public @Nullable Boolean visitCompositePartition(@NonNull CompositePartition object) {
+		return visitPartition(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitConnection(@NonNull Connection object) {
 		return visitElement(object);
 	}
@@ -105,6 +115,11 @@ implements QVTscheduleVisitor<Boolean>
 	@Override
 	public @Nullable Boolean visitCyclicMappingRegion(@NonNull CyclicMappingRegion object) {
 		return visitMappingRegion(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitCyclicPartition(@NonNull CyclicPartition object) {
+		return visitCompositePartition(object);
 	}
 
 	@Override
@@ -174,12 +189,17 @@ implements QVTscheduleVisitor<Boolean>
 
 	@Override
 	public @Nullable Boolean visitKeyPartEdge(@NonNull KeyPartEdge object) {
-		return visitExpressionEdge(object);
+		return visitArgumentEdge(object);
 	}
 
 	@Override
 	public @Nullable Boolean visitKeyedValueNode(@NonNull KeyedValueNode object) {
 		return visitOperationNode(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitLoadingPartition(@NonNull LoadingPartition object) {
+		return visitMappingPartition(object);
 	}
 
 	@Override
@@ -203,8 +223,13 @@ implements QVTscheduleVisitor<Boolean>
 	}
 
 	@Override
-	public Boolean visitMappingNode(@NonNull MappingNode object) {
+	public @Nullable Boolean visitMappingNode(@NonNull MappingNode object) {
 		return visitNode(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitMappingPartition(@NonNull MappingPartition object) {
+		return visitPartition(object);
 	}
 
 	@Override
@@ -243,6 +268,11 @@ implements QVTscheduleVisitor<Boolean>
 	}
 
 	@Override
+	public @Nullable Boolean visitNonPartition(@NonNull NonPartition object) {
+		return visitMappingPartition(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitNullLiteralNode(@NonNull NullLiteralNode object) {
 		return visitOperationNode(object);
 	}
@@ -278,6 +308,11 @@ implements QVTscheduleVisitor<Boolean>
 	}
 
 	@Override
+	public @Nullable Boolean visitPartition(@NonNull Partition object) {
+		return visitNamedElement(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitPatternTypedNode(@NonNull PatternTypedNode object) {
 		return visitMappingNode(object);
 	}
@@ -308,6 +343,11 @@ implements QVTscheduleVisitor<Boolean>
 	}
 
 	@Override
+	public @Nullable Boolean visitRootPartition(@NonNull RootPartition object) {
+		return visitCompositePartition(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitRuleRegion(@NonNull RuleRegion object) {
 		return visitMappingRegion(object);
 	}
@@ -328,6 +368,11 @@ implements QVTscheduleVisitor<Boolean>
 	}
 
 	@Override
+	public @Nullable Boolean visitShadowPartEdge(@NonNull ShadowPartEdge object) {
+		return visitArgumentEdge(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitStringLiteralNode(@NonNull StringLiteralNode object) {
 		return visitOperationNode(object);
 	}
@@ -340,11 +385,6 @@ implements QVTscheduleVisitor<Boolean>
 	@Override
 	public @Nullable Boolean visitSuccessNode(@NonNull SuccessNode object) {
 		return visitMappingNode(object);
-	}
-
-	@Override
-	public @Nullable Boolean visitShadowPartEdge(@NonNull ShadowPartEdge object) {
-		return visitArgumentEdge(object);
 	}
 
 	@Override

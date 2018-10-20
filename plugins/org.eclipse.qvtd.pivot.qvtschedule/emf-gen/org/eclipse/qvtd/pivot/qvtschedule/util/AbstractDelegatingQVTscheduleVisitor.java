@@ -48,6 +48,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitBasicPartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull BasicPartition object) {
+		return delegate.visitBasicPartition(object);
+	}
+
+	@Override
 	public R visitBooleanLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull BooleanLiteralNode object) {
 		return delegate.visitBooleanLiteralNode(object);
 	}
@@ -88,6 +93,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitCompositePartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CompositePartition object) {
+		return delegate.visitCompositePartition(object);
+	}
+
+	@Override
 	public R visitConnection(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Connection object) {
 		return delegate.visitConnection(object);
 	}
@@ -95,6 +105,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	@Override
 	public R visitCyclicMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CyclicMappingRegion object) {
 		return delegate.visitCyclicMappingRegion(object);
+	}
+
+	@Override
+	public R visitCyclicPartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull CyclicPartition object) {
+		return delegate.visitCyclicPartition(object);
 	}
 
 	@Override
@@ -173,6 +188,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitLoadingPartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull LoadingPartition object) {
+		return delegate.visitLoadingPartition(object);
+	}
+
+	@Override
 	public R visitLoadingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull LoadingRegion object) {
 		return delegate.visitLoadingRegion(object);
 	}
@@ -195,6 +215,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	@Override
 	public R visitMappingNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingNode object) {
 		return delegate.visitMappingNode(object);
+	}
+
+	@Override
+	public R visitMappingPartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingPartition object) {
+		return delegate.visitMappingPartition(object);
 	}
 
 	@Override
@@ -233,6 +258,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitNonPartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NonPartition object) {
+		return delegate.visitNonPartition(object);
+	}
+
+	@Override
 	public R visitNullLiteralNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NullLiteralNode object) {
 		return delegate.visitNullLiteralNode(object);
 	}
@@ -268,6 +298,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitPartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Partition object) {
+		return delegate.visitPartition(object);
+	}
+
+	@Override
 	public R visitPatternTypedNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull PatternTypedNode object) {
 		return delegate.visitPatternTypedNode(object);
 	}
@@ -295,6 +330,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	@Override
 	public R visitRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull Region object) {
 		return delegate.visitRegion(object);
+	}
+
+	@Override
+	public R visitRootPartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RootPartition object) {
+		return delegate.visitRootPartition(object);
 	}
 
 	@Override
