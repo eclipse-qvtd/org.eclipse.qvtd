@@ -19,7 +19,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 
 public class RootPartitionAnalysis extends AbstractCompositePartitionAnalysis<RootPartition> implements CompositePartitionAnalysis
@@ -27,7 +29,7 @@ public class RootPartitionAnalysis extends AbstractCompositePartitionAnalysis<Ro
 	public static @NonNull RootPartitionAnalysis createRootPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis,
 			@NonNull AbstractTransformationAnalysis transformationAnalysis,
 			@NonNull String name, @NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partitionAnalysis2predecessors) {
-		RootPartition rootPartition = new RootPartition(name, transformationAnalysis.getScheduleManager());
+		RootPartition rootPartition = RegionHelper.createRootPartition(name, transformationAnalysis.getScheduleManager());
 		RootPartitionAnalysis rootPartitionAnalysis = new RootPartitionAnalysis(partitionedTransformationAnalysis, rootPartition, partitionAnalysis2predecessors);
 		return rootPartitionAnalysis;
 	}

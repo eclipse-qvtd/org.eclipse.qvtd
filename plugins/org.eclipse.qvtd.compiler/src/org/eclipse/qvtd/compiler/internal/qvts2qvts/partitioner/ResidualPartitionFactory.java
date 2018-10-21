@@ -13,6 +13,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
+import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
@@ -32,7 +33,7 @@ public class ResidualPartitionFactory extends AbstractPartitionFactory
 		ReachabilityForest reachabilityForest = createReachabilityForest();
 		String name = computeName("residue");
 		Iterable<@NonNull Node> headNodes = mappingPartitioner.getTraceNodes();
-		BasicPartition partition = new BasicPartition(name, scheduleManager, region, headNodes);
+		BasicPartition partition = createBasicPartition(name, headNodes);
 		int partitionNumber = region.getNextPartitionNumber();
 		BasicPartitionAnalysis basicPartitionAnalysis = new BasicPartitionAnalysis(partitionedTransformationAnalysis, partition, reachabilityForest, "«residue»", "_p" + partitionNumber);
 		initializePartition(basicPartitionAnalysis);

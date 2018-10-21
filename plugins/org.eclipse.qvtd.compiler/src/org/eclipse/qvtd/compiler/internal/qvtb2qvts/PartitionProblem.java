@@ -12,7 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvtb2qvts;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.AbstractCompilerProblem;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 
 public class PartitionProblem extends AbstractCompilerProblem
 {

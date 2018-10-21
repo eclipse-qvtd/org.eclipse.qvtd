@@ -13,6 +13,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
+import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
@@ -52,7 +53,7 @@ public class ActivatorPartitionFactory extends AbstractPartitionFactory
 		ReachabilityForest reachabilityForest = createReachabilityForest();
 		String name = computeName("activator");
 		Iterable<@NonNull Node> headNodes = QVTscheduleUtil.getHeadNodes(region);
-		BasicPartition partition = new BasicPartition(name, mappingPartitioner.getScheduleManager(), region, headNodes);
+		BasicPartition partition = createBasicPartition(name, headNodes);
 		int partitionNumber = region.getNextPartitionNumber();
 		BasicPartitionAnalysis basicPartitionAnalysis = new BasicPartitionAnalysis(partitionedTransformationAnalysis, partition, reachabilityForest, "«activator»", "_p" + partitionNumber);
 		initializePartition(basicPartitionAnalysis);

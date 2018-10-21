@@ -19,7 +19,6 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalys
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
@@ -32,11 +31,11 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.AbstractToGraphVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -345,16 +344,6 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 	}
 
 	@Override
-	public void visit(@NonNull Graphable graphable) {
-		if (graphable instanceof Partition) {		// FIXME Move Partition to QVTschedule model
-			visitPartition((Partition)graphable);
-		}
-		else {
-			super.visit(graphable);
-		}
-	}
-
-	@Override
 	public @Nullable String visitEdge(@NonNull Edge edge) {
 		appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
 		return null;
@@ -376,7 +365,8 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 		return null;
 	}
 
-	public void visitPartition(@NonNull Partition partition) {
+	@Override
+	public @Nullable String visitPartition(@NonNull Partition partition) {
 		assert this.partition == null;
 		try {
 			this.partition = partition;
@@ -388,6 +378,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 			//	context.setLabel(label);
 			context.setColor(QVTscheduleConstants.REGION_COLOR);
 			showPartitionInternals(partition);
+			return null;
 		}
 		finally {
 			this.partition = null;

@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 
 /**
  * A derived PartitionFactory creates an appropriately derived Partition for a partial Region implementation.

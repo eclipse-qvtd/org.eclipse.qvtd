@@ -1,20 +1,23 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2018 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtschedule;
 
 import java.util.List;
+
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 
 /**
@@ -51,6 +54,7 @@ public interface BasicPartition extends MappingPartition {
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!headNodes'"
 	 * @generated
 	 */
+	@Override
 	List<Node> getHeadNodes();
 
 	/**
@@ -68,4 +72,10 @@ public interface BasicPartition extends MappingPartition {
 	 * @generated
 	 */
 	List<MappingPartition> getExplicitPredecessors();
+
+	void addExplicitPredecessor(@NonNull BasicPartition precedingPartition);
+	boolean hasEdge(@NonNull Edge edge);
+	boolean hasNode(@NonNull Node node);
+	@Nullable Role putEdgeRole(@NonNull Edge edge, @NonNull Role newEdgeRole);
+	@Nullable Role putNodeRole(@NonNull Node node, @NonNull Role newNodeRole);
 } // BasicPartition

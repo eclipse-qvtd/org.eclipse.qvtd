@@ -35,23 +35,23 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.HorizontalPartitionMerger;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CyclicPartition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CyclicPartitionAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.LoadingPartition;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicMappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -467,7 +467,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 				for (@NonNull PartitionAnalysis partitionAnalysis : oldConcurrency) {
 					Partition partition = partitionAnalysis.getPartition();
 					if (!(partition instanceof CyclicPartition)) {
-						Region region = partition.getRegion();
+						Region region = QVTscheduleUtil.getRegion(partition);
 						List<@NonNull PartitionAnalysis> partitions = region2partitions.get(region);
 						if (partitions == null) {
 							partitions = new ArrayList<>();

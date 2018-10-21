@@ -70,7 +70,6 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedConditionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.MappingPartitionAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -109,6 +108,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NullLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.NumericLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationCallNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -146,7 +146,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		private final @NonNull Set<@NonNull Node> scheduledNodes;
 
 		public OldEdgeSchedule() {
-			this.scheduledNodes = Sets.newHashSet(partition.getHeadNodes());  // ?? leaf constants
+			this.scheduledNodes = Sets.newHashSet(QVTscheduleUtil.getHeadNodes(partition));  // ?? leaf constants
 		}
 
 		private void addEdge(@NonNull Edge edge) {
@@ -1153,7 +1153,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 
 	public BasicPartition2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull MappingPartitionAnalysis<?> partitionAnalysis) {
 		super(visitor, partitionAnalysis.getPartition());
-		this.regionAnalysis = scheduleManager.getRegionAnalysis(partition.getRegion());
+		this.regionAnalysis = scheduleManager.getRegionAnalysis(QVTscheduleUtil.getRegion(partition));
 		//	String name = partition.getName();
 		//	if (name.contains("list2list«edge-headElement»")) {
 		//		getClass();
@@ -1461,7 +1461,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		//		if (Iterables.size(recursionEdges) > 0) {
 		//			headCallingRegions.add(region);
 		//		}
-		for (@NonNull Node headNode : partition.getHeadNodes()) {		// FIXME Move best bead selection to QVTs2QVTs so that diagrams show best head
+		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(partition)) {		// FIXME Move best bead selection to QVTs2QVTs so that diagrams show best head
 			if (!headNode.isDependency()) {
 				Node bestHeadNode = null;
 				Iterable<@NonNull Node> callingSources = connectionManager.getPassedBindingSources(headNode);

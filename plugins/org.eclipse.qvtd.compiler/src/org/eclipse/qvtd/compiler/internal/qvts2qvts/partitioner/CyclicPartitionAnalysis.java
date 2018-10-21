@@ -20,9 +20,10 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-
 import com.google.common.collect.Iterables;
 
 public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<CyclicPartition> implements CompositePartitionAnalysis
@@ -45,7 +46,7 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 
 
 		ScheduleManager scheduleManager = partitionedTransformationAnalysis.getScheduleManager();
-		CyclicPartition cyclicPartition = new CyclicPartition(name, scheduleManager);
+		CyclicPartition cyclicPartition = RegionHelper.createCyclicPartition(name, scheduleManager);
 		return new CyclicPartitionAnalysis(partitionedTransformationAnalysis, cyclicPartition, nestedPartitionAnalysis2predecessors, externalPredecessors);
 	}
 

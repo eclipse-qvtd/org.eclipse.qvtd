@@ -29,7 +29,6 @@ import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LegacyContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LoadingRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -44,6 +43,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
@@ -204,8 +204,8 @@ public class ConnectionManager
 	public void createConnections(@NonNull ScheduledRegion scheduledRegion, @NonNull Iterable<@NonNull ? extends Iterable<@NonNull PartitionAnalysis>> partitionSchedule) {
 		Set<@NonNull Region> regions = new HashSet<>();
 		for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrency : partitionSchedule) {
-			for (@NonNull PartitionAnalysis partition : concurrency) {
-				regions.add(partition.getPartition().getRegion());
+			for (@NonNull PartitionAnalysis partitionAnalysis : concurrency) {
+				regions.add(QVTscheduleUtil.getRegion(partitionAnalysis.getPartition()));
 			}
 		}
 		//		for (@NonNull Region region : regions) {
@@ -841,7 +841,7 @@ public class ConnectionManager
 		}
 		else { */
 		List<@NonNull Connection> connections = new ArrayList<>();
-		for (@NonNull Node headNode : partition.getHeadNodes()) {
+		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(partition)) {
 			NodeConnection connection = headNode.getIncomingPassedConnection();
 			if ((connection != null) && !connections.contains(connection)) {
 				connections.add(connection);
@@ -896,7 +896,7 @@ public class ConnectionManager
 
 	public @NonNull Iterable<@NonNull NodeConnection> getIncomingPassedConnections(@NonNull Partition partition) {		// FIXME cache
 		List<@NonNull NodeConnection> connections = new ArrayList<>();
-		for (@NonNull Node headNode : partition.getHeadNodes()) {
+		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(partition)) {
 			NodeConnection connection = headNode.getIncomingPassedConnection();
 			if (connection != null) {
 				connections.add(connection);

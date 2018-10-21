@@ -20,12 +20,13 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 
 /**
  * PartitionAnalysis captures the analysis of a Partition.
  */
-public abstract class AbstractPartitionAnalysis<P extends AbstractPartition> implements PartitionAnalysis
+public abstract class AbstractPartitionAnalysis<P extends Partition> implements PartitionAnalysis
 {
 	protected final @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis;
 	protected final @NonNull ScheduleManager scheduleManager;

@@ -16,12 +16,14 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
+import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Sets;
 
@@ -49,7 +51,7 @@ public class BasicPartitionAnalysis extends MappingPartitionAnalysis<BasicPartit
 	@Override
 	public void analyzePartition2() {
 		super.analyzePartition2();
-		this.explicitPredecessors = Sets.newHashSet(partitionedTransformationAnalysis.getPartitionAnalyses(partition.getExplicitPredecessors()));
+		this.explicitPredecessors = Sets.newHashSet(partitionedTransformationAnalysis.getPartitionAnalyses(QVTscheduleUtil.getExplicitPredecessors(partition)));
 	}
 
 	@Override

@@ -12,6 +12,8 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 
@@ -19,7 +21,8 @@ public class LoadingPartitionAnalysis extends AbstractPartitionAnalysis<LoadingP
 {
 	public static @NonNull LoadingPartitionAnalysis createLoadingPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis,
 			@NonNull LoadingRegion loadingRegion) {
-		LoadingPartition loadingPartition = new LoadingPartition(partitionedTransformationAnalysis.getScheduleManager(), loadingRegion);
+		RegionHelper<@NonNull LoadingRegion> regionHelper = new RegionHelper<@NonNull LoadingRegion>(partitionedTransformationAnalysis.getScheduleManager(), loadingRegion);
+		LoadingPartition loadingPartition = regionHelper.createLoadingPartition();
 		return new LoadingPartitionAnalysis(partitionedTransformationAnalysis, loadingPartition);
 	}
 

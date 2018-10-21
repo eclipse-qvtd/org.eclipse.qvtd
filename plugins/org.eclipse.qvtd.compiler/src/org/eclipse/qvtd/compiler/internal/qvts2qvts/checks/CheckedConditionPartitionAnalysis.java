@@ -27,7 +27,6 @@ import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
@@ -41,6 +40,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.RecursionEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
@@ -81,7 +81,7 @@ public class CheckedConditionPartitionAnalysis
 					edge.accept(this);
 				}
 			}
-			for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(partition.getRegion())) {
+			for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(QVTscheduleUtil.getRegion(partition))) {
 				if (isOld(node) && node.isUnconditional()) {
 					node.accept(this);
 				}
@@ -380,7 +380,7 @@ public class CheckedConditionPartitionAnalysis
 
 	private @NonNull List<@NonNull Edge> computeOldUnconditionalEdges() {
 		List<@NonNull Edge> oldEdges = new ArrayList<>();
-		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(partition.getRegion())) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(QVTscheduleUtil.getRegion(partition))) {
 			if (isOld(edge) && edge.isUnconditional()) {
 				Node sourceNode = QVTscheduleUtil.getSourceNode(edge);
 				Node targetNode = QVTscheduleUtil.getTargetNode(edge);

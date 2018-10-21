@@ -1,25 +1,34 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2018 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtschedule;
 
 import java.util.List;
+import java.util.Set;
+
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
 
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Partition</b></em>'.
+ * @extends Graphable, GraphNode
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
@@ -37,7 +46,7 @@ import org.eclipse.ocl.pivot.NamedElement;
  * @model abstract="true"
  * @generated
  */
-public interface Partition extends NamedElement {
+public interface Partition extends NamedElement, Graphable, GraphNode {
 
 	/**
 	 * Returns the value of the '<em><b>Passes</b></em>' attribute list.
@@ -54,4 +63,28 @@ public interface Partition extends NamedElement {
 	 * @generated
 	 */
 	List<Integer> getPasses();
+
+	boolean addPass(int passNumber);
+	@Nullable Set<@NonNull NavigableEdge> getCheckedEdges(@NonNull TypedModel typedModel);
+	@Nullable Iterable<@NonNull NavigableEdge> getEnforcedEdges(@NonNull TypedModel typedModel, @NonNull Property asProperty);
+	int getFirstPass();
+	List<Node> getHeadNodes();
+
+	/**
+	 * The schedule index at which the latest dependent becomes available and consequently the latest that deferred execution may occur.
+	 */
+	int getLastPass();
+	@Override
+	@NonNull String getName();
+	@NonNull Iterable<@NonNull Edge> getPartialEdges();
+	@NonNull Iterable<@NonNull Node> getPartialNodes();
+	@NonNull String getPassRangeText();
+	@Nullable String getPassesText();
+	Region getRegion();
+	@Nullable Role getRole(@NonNull Edge edge);
+	@Nullable Role getRole(@NonNull Node node);
+	@NonNull String getSymbolName();
+	boolean isHead(@NonNull ConnectionEnd connectionEnd);
+	void setPass(int pass);
+
 } // Partition

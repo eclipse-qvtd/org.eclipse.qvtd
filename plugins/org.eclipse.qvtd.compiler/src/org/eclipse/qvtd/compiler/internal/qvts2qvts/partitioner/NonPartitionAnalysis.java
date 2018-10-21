@@ -13,6 +13,8 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.NonPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public class NonPartitionAnalysis extends MappingPartitionAnalysis<NonPartition>
 {
@@ -30,12 +32,12 @@ public class NonPartitionAnalysis extends MappingPartitionAnalysis<NonPartition>
 
 	@Override
 	public @NonNull MappingRegion createMicroMappingRegion() {
-		return (MappingRegion)partition.getRegion();
+		return (MappingRegion)QVTscheduleUtil.getRegion(partition);
 	}
 
 	@Override
 	public @NonNull MappingRegion getMicroMappingRegion() {
-		return (MappingRegion)partition.getRegion();
+		return (MappingRegion)QVTscheduleUtil.getRegion(partition);
 	}
 
 	@Override

@@ -19,9 +19,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
+import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -33,12 +34,12 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-public abstract class AbstractPartitionFactory implements PartitionFactory
+public abstract class AbstractPartitionFactory extends RegionHelper<@NonNull RuleRegion> implements PartitionFactory
 {
 	protected final @NonNull MappingPartitioner mappingPartitioner;
-	protected final @NonNull ScheduleManager scheduleManager;
+	//	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull AbstractTransformationAnalysis transformationAnalysis;
-	protected final @NonNull RuleRegion region;
+	//	protected final @NonNull RuleRegion region;
 
 	/**
 	 * The QVTr synthesis includes trace synthesis with activators and local/globalSuccess to interlink.
@@ -53,10 +54,11 @@ public abstract class AbstractPartitionFactory implements PartitionFactory
 	private final @NonNull List<@NonNull Node> nodes = new ArrayList<>();
 
 	protected AbstractPartitionFactory(@NonNull MappingPartitioner mappingPartitioner) {
+		super(mappingPartitioner.getScheduleManager(), (RuleRegion)mappingPartitioner.getRegion());
 		this.mappingPartitioner = mappingPartitioner;
-		this.scheduleManager = mappingPartitioner.getScheduleManager();
+		//	this.scheduleManager = mappingPartitioner.getScheduleManager();
 		this.transformationAnalysis = mappingPartitioner.getRegionAnalysis().getTransformationAnalysis();
-		this.region = (RuleRegion) mappingPartitioner.getRegion();
+		//	this.region = (RuleRegion) mappingPartitioner.getRegion();
 		this.hasSynthesizedTrace = scheduleManager.useActivators();
 	}
 

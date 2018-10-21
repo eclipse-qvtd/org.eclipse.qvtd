@@ -16,12 +16,12 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.NonPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -37,8 +37,7 @@ public class NonPartitionFactory extends AbstractPartitionFactory
 	public @NonNull NonPartition createPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		ReachabilityForest reachabilityForest = createReachabilityForest();
 		MappingRegion region = mappingPartitioner.getRegion();
-		ScheduleManager scheduleManager = partitionedTransformationAnalysis.getScheduleManager();
-		NonPartition nonPartition = new NonPartition(QVTscheduleUtil.getName(region), scheduleManager, region);
+		NonPartition nonPartition = createNonPartition(QVTscheduleUtil.getName(region));
 		NonPartitionAnalysis nonPartitionAnalysis = new NonPartitionAnalysis(partitionedTransformationAnalysis, nonPartition, reachabilityForest);
 		return nonPartitionAnalysis.getPartition();
 	}

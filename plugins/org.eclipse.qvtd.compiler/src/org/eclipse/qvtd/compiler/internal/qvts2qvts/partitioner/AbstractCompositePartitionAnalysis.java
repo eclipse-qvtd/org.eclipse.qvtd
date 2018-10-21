@@ -16,8 +16,9 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 
-public abstract class AbstractCompositePartitionAnalysis<P extends AbstractPartition> extends AbstractPartitionAnalysis<P> implements CompositePartitionAnalysis
+public abstract class AbstractCompositePartitionAnalysis<P extends Partition> extends AbstractPartitionAnalysis<P> implements CompositePartitionAnalysis
 {
 	protected final @NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partitionAnalysis2predecessors;
 	private @Nullable List<@NonNull Iterable<@NonNull PartitionAnalysis>> partitionSchedule = null;

@@ -43,6 +43,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
@@ -56,6 +57,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
@@ -115,6 +117,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	{
 		public static @NonNull List<@NonNull Region> getActiveRegionsList(@NonNull ScheduledRegion scheduledRegion) {
 			return ClassUtil.nullFree(scheduledRegion.getActiveRegions());
+		}
+
+		public static @NonNull List<@NonNull Node> getHeadNodesList(@NonNull BasicPartition basicPartition) {
+			return ClassUtil.nullFree(basicPartition.getHeadNodes());
 		}
 
 		public static @NonNull List<@NonNull Node> getHeadNodesList(@NonNull Region region) {
@@ -552,6 +558,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(edge.getEdgeRole());
 	}
 
+	public static @NonNull Iterable<? extends @NonNull Partition> getExplicitPredecessors(@NonNull BasicPartition partition) {
+		return ClassUtil.nullFree(partition.getExplicitPredecessors());
+	}
+
 	public static @NonNull String getFillColor(@NonNull Role nodeRole) {
 		switch (nodeRole) {
 			case CONSTANT: return LIGHT_CONSTANT_COLOR;
@@ -562,6 +572,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 			case SPECULATED: return LIGHT_SPECULATED_COLOR;
 			default: return LIGHT_OTHER_COLOR;
 		}
+	}
+
+	public static @NonNull Iterable<@NonNull Node> getHeadNodes(@NonNull Partition partition) {
+		return ClassUtil.nullFree(partition.getHeadNodes());
 	}
 
 	public static @NonNull Iterable<@NonNull Node> getHeadNodes(@NonNull Region region) {
@@ -729,6 +743,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull TypedModel getReferredTypedModel(@NonNull ClassDatum classDatum) {
 		return ClassUtil.nonNullState(classDatum.getReferredTypedModel());
+	}
+
+	public static @NonNull Region getRegion(@NonNull Partition partition) {
+		return ClassUtil.nonNullState(partition.getRegion());
 	}
 
 	public static @NonNull ScheduleModel getScheduleModel(@NonNull Region region) {

@@ -58,7 +58,6 @@ import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.Partition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.ToGraphPartitionVisitor;
@@ -85,6 +84,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -155,7 +155,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			return null;
 		}
 
-		public void visitPartition(@NonNull Partition partition) {
+		@Override
+		public @Nullable String visitPartition(@NonNull Partition partition) {
 			context.setLabel(partition.getName());
 			context.pushCluster();
 			for (@NonNull Node node : partition.getPartialNodes()) {
@@ -167,6 +168,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 				//			s.appendEdge(edge.getSource(), edge, edge.getTarget());
 			}
 			context.popCluster();
+			return null;
 		}
 	}
 

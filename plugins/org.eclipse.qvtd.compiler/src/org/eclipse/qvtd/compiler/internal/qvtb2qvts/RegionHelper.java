@@ -37,12 +37,14 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.CollectionLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.CollectionPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.CollectionRangeNode;
+import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.DependencyEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.DependencyNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -55,12 +57,14 @@ import org.eclipse.qvtd.pivot.qvtschedule.IteratedEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.IteratorNode;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MapLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.MapPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.MapPartNode;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.NonPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.NullLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.NumericLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationCallNode;
@@ -73,6 +77,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.ShadowNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.StringLiteralNode;
@@ -83,8 +88,15 @@ import org.eclipse.qvtd.pivot.qvtschedule.TuplePartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.TypeLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.CyclicPartitionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.LoadingPartitionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.NonPartitionImpl;
+import org.eclipse.qvtd.pivot.qvtschedule.impl.RootPartitionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+
+import com.google.common.collect.Iterables;
 
 /**
  * A RegionHelper provides stateless utility methods, mostly construction, for use within a Region
@@ -102,6 +114,15 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	public RegionHelper(@NonNull ScheduleManager scheduleManager, @NonNull R region) {
 		this.scheduleManager = scheduleManager;
 		this.region = region;
+	}
+
+	public @NonNull BasicPartition createBasicPartition(@NonNull String name, @NonNull Iterable<@NonNull Node> headNodes) {
+		BasicPartition basicPartition = QVTscheduleFactory.eINSTANCE.createBasicPartition();
+		basicPartition.setName(name);
+		((BasicPartitionImpl)basicPartition).setScheduleManager(scheduleManager);;
+		basicPartition.setRegion(region);
+		Iterables.addAll(QVTscheduleUtil.Internal.getHeadNodesList(basicPartition), headNodes);
+		return basicPartition;
 	}
 
 	public @NonNull BooleanLiteralNode createBooleanLiteralNode(boolean isTrue) {
@@ -157,6 +178,16 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		node.setMatched(isMatched);
 		node.setOriginatingElement(collectionRange);
 		return node;
+	}
+
+	/** FIXME make non-static */
+	public static @NonNull CyclicPartition createCyclicPartition(@NonNull String name, @NonNull Object scheduleManager) {
+		CyclicPartition cyclicPartition = QVTscheduleFactory.eINSTANCE.createCyclicPartition();
+		cyclicPartition.setName(name);
+		((CyclicPartitionImpl)cyclicPartition).setScheduleManager(scheduleManager);;
+		//		cyclicPartition.setRegion(region);
+		//		Iterables.addAll(cyclicPartition.getHeadNodes(), headNodes);
+		return cyclicPartition;
 	}
 
 	public @NonNull Node createDataTypeNode(@NonNull String name, @NonNull Node sourceNode, @NonNull NavigationCallExp navigationCallExp) {
@@ -341,6 +372,15 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		return node;
 	}
 
+	public @NonNull LoadingPartition createLoadingPartition() {
+		LoadingPartition loadingPartition = QVTscheduleFactory.eINSTANCE.createLoadingPartition();
+		loadingPartition.setName(region.getName());
+		((LoadingPartitionImpl)loadingPartition).setScheduleManager(scheduleManager);;
+		loadingPartition.setRegion(region);
+		//		Iterables.addAll(loadingPartition.getHeadNodes(), headNodes);
+		return loadingPartition;
+	}
+
 	public @NonNull MapLiteralNode createMapLiteralNode(boolean isMatched, @NonNull String name, @NonNull MapLiteralExp mapLiteralExp, @NonNull Node @NonNull [] partNodes) {
 		Role nodeRole = getOperationNodePhase(region, mapLiteralExp, partNodes);
 		MapLiteralNode node = QVTscheduleFactory.eINSTANCE.createMapLiteralNode();
@@ -376,6 +416,15 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		edge.initialize(edgeRole, sourceNode, source2targetProperty.getName(), targetNode);
 		edge.initializeProperty(source2targetProperty, isPartial);
 		return edge;
+	}
+
+	public @NonNull NonPartition createNonPartition(@NonNull String name) {
+		NonPartition nonPartition = QVTscheduleFactory.eINSTANCE.createNonPartition();
+		nonPartition.setName(name);
+		((NonPartitionImpl)nonPartition).setScheduleManager(scheduleManager);;
+		nonPartition.setRegion(region);
+		//		Iterables.addAll(nonPartition.getHeadNodes(), headNodes);
+		return nonPartition;
 	}
 
 	public @NonNull Node createNullLiteralNode(boolean isMatched, @Nullable NullLiteralExp nullLiteralExp) {
@@ -560,6 +609,16 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		edge.initialize(Role.REALIZED, sourceNode, source2targetProperty.getName(), node);
 		edge.initializeProperty(source2targetProperty, false);
 		return edge;
+	}
+
+	/** FIXME make non-static */
+	public static @NonNull RootPartition createRootPartition(@NonNull String name, @NonNull Object scheduleManager) {
+		RootPartition rootPartition = QVTscheduleFactory.eINSTANCE.createRootPartition();
+		rootPartition.setName(name);
+		((RootPartitionImpl)rootPartition).setScheduleManager(scheduleManager);;
+		//		rootPartition.setRegion(region);
+		//		Iterables.addAll(rootPartition.getHeadNodes(), headNodes);
+		return rootPartition;
 	}
 
 	/*	public @NonNull Edge createRecursionEdge(@NonNull Node sourceNode, @NonNull Node targetNode, boolean isPrimary) {

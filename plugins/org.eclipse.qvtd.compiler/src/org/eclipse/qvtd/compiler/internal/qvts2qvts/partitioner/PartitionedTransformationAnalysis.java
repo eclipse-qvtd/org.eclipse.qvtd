@@ -27,8 +27,10 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -214,7 +216,7 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 		return transformationPartitioner.getName();
 	}
 
-	public @NonNull Iterable<@NonNull PartitionAnalysis> getPartitionAnalyses(@NonNull Iterable<@NonNull Partition> partitions) {
+	public @NonNull Iterable<@NonNull PartitionAnalysis> getPartitionAnalyses(@NonNull Iterable<? extends @NonNull Partition> partitions) {
 		List<@NonNull PartitionAnalysis> partitionAnalyses = new ArrayList<>();
 		for (@NonNull Partition partition : partitions) {
 			partitionAnalyses.add(getPartitionAnalysis(partition));
