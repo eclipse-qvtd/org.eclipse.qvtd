@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -31,6 +30,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 
@@ -42,13 +42,124 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getHeadNodes <em>Head Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getConstantEdges <em>Constant Edges</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getConstantNodes <em>Constant Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getConstantSuccessFalseNodes <em>Constant Success False Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getConstantSuccessTrueNodes <em>Constant Success True Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getExplicitPredecessors <em>Explicit Predecessors</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getHeadNodes <em>Head Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getLoadedEdges <em>Loaded Edges</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getLoadedNodes <em>Loaded Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getPredicatedEdges <em>Predicated Edges</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getPredicatedNodes <em>Predicated Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getRealizedEdges <em>Realized Edges</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getRealizedNodes <em>Realized Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getSpeculatedEdges <em>Speculated Edges</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getSpeculatedNodes <em>Speculated Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getSpeculationNodes <em>Speculation Nodes</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPartition {
+public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPartition
+{
+	/**
+	 * EdgeList duplicates changes to the lists-of-edges to the 'redundant' edge-to-role map.
+	 */
+	@SuppressWarnings("serial")
+	protected static class EdgeList extends EObjectResolvingEList<@NonNull Edge>
+	{
+		protected final @NonNull Role edgeRole;
+		private final @NonNull Map<@NonNull Edge, @NonNull Role> edge2edgeRole;
+
+		protected EdgeList(@NonNull BasicPartitionImpl owner, int featureID, @NonNull Role edgeRole) {
+			super(Edge.class, owner, featureID);
+			this.edgeRole = edgeRole;
+			this.edge2edgeRole = owner.edge2edgeRole;
+		}
+
+		@Override
+		protected void didAdd(int index, @NonNull Edge newObject) {
+			edge2edgeRole.put(newObject, edgeRole);
+		}
+
+		@Override
+		protected void didRemove(int index, @NonNull Edge oldObject) {
+			edge2edgeRole.remove(oldObject);
+		}
+	}
+
+	/**
+	 * NodeList duplicates changes to the lists-of-nodes to the 'redundant' node-to-role map.
+	 */
+	@SuppressWarnings("serial")
+	protected static class NodeList extends EObjectResolvingEList<@NonNull Node>
+	{
+		private final @NonNull Role nodeRole;
+		private final @NonNull Map<@NonNull Node, @NonNull Role> node2nodeRole;
+
+		protected NodeList(@NonNull BasicPartitionImpl owner, int featureID, @NonNull Role nodeRole) {
+			super(Node.class, owner, featureID);
+			this.nodeRole = nodeRole;
+			this.node2nodeRole = owner.node2nodeRole;
+		}
+
+		@Override
+		protected void didAdd(int index, @NonNull Node newObject) {
+			node2nodeRole.put(newObject, nodeRole);
+		}
+
+		@Override
+		protected void didRemove(int index, @NonNull Node oldObject) {
+			node2nodeRole.remove(oldObject);
+		}
+	}
+
+	/**
+	 * The cached value of the '{@link #getConstantEdges() <em>Constant Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstantEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Edge> constantEdges;
+	/**
+	 * The cached value of the '{@link #getConstantNodes() <em>Constant Nodes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstantNodes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Node> constantNodes;
+	/**
+	 * The cached value of the '{@link #getConstantSuccessFalseNodes() <em>Constant Success False Nodes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstantSuccessFalseNodes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Node> constantSuccessFalseNodes;
+	/**
+	 * The cached value of the '{@link #getConstantSuccessTrueNodes() <em>Constant Success True Nodes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstantSuccessTrueNodes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Node> constantSuccessTrueNodes;
+	/**
+	 * The cached value of the '{@link #getExplicitPredecessors() <em>Explicit Predecessors</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExplicitPredecessors()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<MappingPartition> explicitPredecessors;
 	/**
 	 * The cached value of the '{@link #getHeadNodes() <em>Head Nodes</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -59,14 +170,87 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	 */
 	protected EList<Node> headNodes;
 	/**
-	 * The cached value of the '{@link #getExplicitPredecessors() <em>Explicit Predecessors</em>}' reference list.
+	 * The cached value of the '{@link #getLoadedEdges() <em>Loaded Edges</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExplicitPredecessors()
+	 * @see #getLoadedEdges()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<MappingPartition> explicitPredecessors;
+	protected EList<Edge> loadedEdges;
+	/**
+	 * The cached value of the '{@link #getLoadedNodes() <em>Loaded Nodes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLoadedNodes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Node> loadedNodes;
+	/**
+	 * The cached value of the '{@link #getPredicatedEdges() <em>Predicated Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPredicatedEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Edge> predicatedEdges;
+	/**
+	 * The cached value of the '{@link #getPredicatedNodes() <em>Predicated Nodes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPredicatedNodes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Node> predicatedNodes;
+	/**
+	 * The cached value of the '{@link #getRealizedEdges() <em>Realized Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRealizedEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Edge> realizedEdges;
+	/**
+	 * The cached value of the '{@link #getRealizedNodes() <em>Realized Nodes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRealizedNodes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Node> realizedNodes;
+	/**
+	 * The cached value of the '{@link #getSpeculatedEdges() <em>Speculated Edges</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSpeculatedEdges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Edge> speculatedEdges;
+	/**
+	 * The cached value of the '{@link #getSpeculatedNodes() <em>Speculated Nodes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSpeculatedNodes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Node> speculatedNodes;
+
+	/**
+	 * The cached value of the '{@link #getSpeculationNodes() <em>Speculation Nodes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSpeculationNodes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Node> speculationNodes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -90,6 +274,58 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public List<Edge> getConstantEdges() {
+		if (constantEdges == null) {
+			constantEdges = new EdgeList(this, QVTschedulePackage.BASIC_PARTITION__CONSTANT_EDGES, Role.CONSTANT);
+		}
+		return constantEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public List<Node> getConstantNodes() {
+		if (constantNodes == null) {
+			constantNodes = new NodeList(this, QVTschedulePackage.BASIC_PARTITION__CONSTANT_NODES, Role.CONSTANT);
+		}
+		return constantNodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public List<Node> getConstantSuccessFalseNodes() {
+		if (constantSuccessFalseNodes == null) {
+			constantSuccessFalseNodes = new NodeList(this, QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES, Role.CONSTANT_SUCCESS_FALSE);
+		}
+		return constantSuccessFalseNodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public List<Node> getConstantSuccessTrueNodes() {
+		if (constantSuccessTrueNodes == null) {
+			constantSuccessTrueNodes = new NodeList(this, QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES, Role.CONSTANT_SUCCESS_TRUE);
+		}
+		return constantSuccessTrueNodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -98,6 +334,123 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 			headNodes = new EObjectResolvingEList<Node>(Node.class, this, QVTschedulePackage.BASIC_PARTITION__HEAD_NODES);
 		}
 		return headNodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public List<Edge> getLoadedEdges() {
+		if (loadedEdges == null) {
+			loadedEdges = new EdgeList(this, QVTschedulePackage.BASIC_PARTITION__LOADED_EDGES, Role.LOADED);
+		}
+		return loadedEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public List<Node> getLoadedNodes() {
+		if (loadedNodes == null) {
+			loadedNodes = new NodeList(this, QVTschedulePackage.BASIC_PARTITION__LOADED_NODES, Role.LOADED);
+		}
+		return loadedNodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public List<Edge> getPredicatedEdges() {
+		if (predicatedEdges == null) {
+			predicatedEdges = new EdgeList(this, QVTschedulePackage.BASIC_PARTITION__PREDICATED_EDGES, Role.PREDICATED);
+		}
+		return predicatedEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public List<Node> getPredicatedNodes() {
+		if (predicatedNodes == null) {
+			predicatedNodes = new NodeList(this, QVTschedulePackage.BASIC_PARTITION__PREDICATED_NODES, Role.PREDICATED);
+		}
+		return predicatedNodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public List<Edge> getRealizedEdges() {
+		if (realizedEdges == null) {
+			realizedEdges = new EdgeList(this, QVTschedulePackage.BASIC_PARTITION__REALIZED_EDGES, Role.REALIZED);
+		}
+		return realizedEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public List<Node> getRealizedNodes() {
+		if (realizedNodes == null) {
+			realizedNodes = new NodeList(this, QVTschedulePackage.BASIC_PARTITION__REALIZED_NODES, Role.REALIZED);
+		}
+		return realizedNodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public List<Edge> getSpeculatedEdges() {
+		if (speculatedEdges == null) {
+			speculatedEdges = new EdgeList(this, QVTschedulePackage.BASIC_PARTITION__SPECULATED_EDGES, Role.SPECULATED);
+		}
+		return speculatedEdges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public List<Node> getSpeculatedNodes() {
+		if (speculatedNodes == null) {
+			speculatedNodes = new NodeList(this, QVTschedulePackage.BASIC_PARTITION__SPECULATED_NODES, Role.SPECULATED);
+		}
+		return speculatedNodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	@Override
+	public List<Node> getSpeculationNodes() {
+		if (speculationNodes == null) {
+			speculationNodes = new NodeList(this, QVTschedulePackage.BASIC_PARTITION__SPECULATION_NODES, Role.SPECULATION);
+		}
+		return speculationNodes;
 	}
 
 	/**
@@ -121,10 +474,36 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.BASIC_PARTITION__HEAD_NODES:
-				return getHeadNodes();
+			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_EDGES:
+				return getConstantEdges();
+			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_NODES:
+				return getConstantNodes();
+			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES:
+				return getConstantSuccessFalseNodes();
+			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES:
+				return getConstantSuccessTrueNodes();
 			case QVTschedulePackage.BASIC_PARTITION__EXPLICIT_PREDECESSORS:
 				return getExplicitPredecessors();
+			case QVTschedulePackage.BASIC_PARTITION__HEAD_NODES:
+				return getHeadNodes();
+			case QVTschedulePackage.BASIC_PARTITION__LOADED_EDGES:
+				return getLoadedEdges();
+			case QVTschedulePackage.BASIC_PARTITION__LOADED_NODES:
+				return getLoadedNodes();
+			case QVTschedulePackage.BASIC_PARTITION__PREDICATED_EDGES:
+				return getPredicatedEdges();
+			case QVTschedulePackage.BASIC_PARTITION__PREDICATED_NODES:
+				return getPredicatedNodes();
+			case QVTschedulePackage.BASIC_PARTITION__REALIZED_EDGES:
+				return getRealizedEdges();
+			case QVTschedulePackage.BASIC_PARTITION__REALIZED_NODES:
+				return getRealizedNodes();
+			case QVTschedulePackage.BASIC_PARTITION__SPECULATED_EDGES:
+				return getSpeculatedEdges();
+			case QVTschedulePackage.BASIC_PARTITION__SPECULATED_NODES:
+				return getSpeculatedNodes();
+			case QVTschedulePackage.BASIC_PARTITION__SPECULATION_NODES:
+				return getSpeculationNodes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -138,13 +517,65 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.BASIC_PARTITION__HEAD_NODES:
-				getHeadNodes().clear();
-				getHeadNodes().addAll((Collection<? extends Node>)newValue);
+			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_EDGES:
+				getConstantEdges().clear();
+				getConstantEdges().addAll((Collection<? extends Edge>)newValue);
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_NODES:
+				getConstantNodes().clear();
+				getConstantNodes().addAll((Collection<? extends Node>)newValue);
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES:
+				getConstantSuccessFalseNodes().clear();
+				getConstantSuccessFalseNodes().addAll((Collection<? extends Node>)newValue);
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES:
+				getConstantSuccessTrueNodes().clear();
+				getConstantSuccessTrueNodes().addAll((Collection<? extends Node>)newValue);
 				return;
 			case QVTschedulePackage.BASIC_PARTITION__EXPLICIT_PREDECESSORS:
 				getExplicitPredecessors().clear();
 				getExplicitPredecessors().addAll((Collection<? extends MappingPartition>)newValue);
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__HEAD_NODES:
+				getHeadNodes().clear();
+				getHeadNodes().addAll((Collection<? extends Node>)newValue);
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__LOADED_EDGES:
+				getLoadedEdges().clear();
+				getLoadedEdges().addAll((Collection<? extends Edge>)newValue);
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__LOADED_NODES:
+				getLoadedNodes().clear();
+				getLoadedNodes().addAll((Collection<? extends Node>)newValue);
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__PREDICATED_EDGES:
+				getPredicatedEdges().clear();
+				getPredicatedEdges().addAll((Collection<? extends Edge>)newValue);
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__PREDICATED_NODES:
+				getPredicatedNodes().clear();
+				getPredicatedNodes().addAll((Collection<? extends Node>)newValue);
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__REALIZED_EDGES:
+				getRealizedEdges().clear();
+				getRealizedEdges().addAll((Collection<? extends Edge>)newValue);
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__REALIZED_NODES:
+				getRealizedNodes().clear();
+				getRealizedNodes().addAll((Collection<? extends Node>)newValue);
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__SPECULATED_EDGES:
+				getSpeculatedEdges().clear();
+				getSpeculatedEdges().addAll((Collection<? extends Edge>)newValue);
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__SPECULATED_NODES:
+				getSpeculatedNodes().clear();
+				getSpeculatedNodes().addAll((Collection<? extends Node>)newValue);
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__SPECULATION_NODES:
+				getSpeculationNodes().clear();
+				getSpeculationNodes().addAll((Collection<? extends Node>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -158,11 +589,50 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.BASIC_PARTITION__HEAD_NODES:
-				getHeadNodes().clear();
+			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_EDGES:
+				getConstantEdges().clear();
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_NODES:
+				getConstantNodes().clear();
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES:
+				getConstantSuccessFalseNodes().clear();
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES:
+				getConstantSuccessTrueNodes().clear();
 				return;
 			case QVTschedulePackage.BASIC_PARTITION__EXPLICIT_PREDECESSORS:
 				getExplicitPredecessors().clear();
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__HEAD_NODES:
+				getHeadNodes().clear();
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__LOADED_EDGES:
+				getLoadedEdges().clear();
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__LOADED_NODES:
+				getLoadedNodes().clear();
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__PREDICATED_EDGES:
+				getPredicatedEdges().clear();
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__PREDICATED_NODES:
+				getPredicatedNodes().clear();
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__REALIZED_EDGES:
+				getRealizedEdges().clear();
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__REALIZED_NODES:
+				getRealizedNodes().clear();
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__SPECULATED_EDGES:
+				getSpeculatedEdges().clear();
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__SPECULATED_NODES:
+				getSpeculatedNodes().clear();
+				return;
+			case QVTschedulePackage.BASIC_PARTITION__SPECULATION_NODES:
+				getSpeculationNodes().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -176,10 +646,36 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.BASIC_PARTITION__HEAD_NODES:
-				return headNodes != null && !headNodes.isEmpty();
+			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_EDGES:
+				return constantEdges != null && !constantEdges.isEmpty();
+			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_NODES:
+				return constantNodes != null && !constantNodes.isEmpty();
+			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES:
+				return constantSuccessFalseNodes != null && !constantSuccessFalseNodes.isEmpty();
+			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES:
+				return constantSuccessTrueNodes != null && !constantSuccessTrueNodes.isEmpty();
 			case QVTschedulePackage.BASIC_PARTITION__EXPLICIT_PREDECESSORS:
 				return explicitPredecessors != null && !explicitPredecessors.isEmpty();
+			case QVTschedulePackage.BASIC_PARTITION__HEAD_NODES:
+				return headNodes != null && !headNodes.isEmpty();
+			case QVTschedulePackage.BASIC_PARTITION__LOADED_EDGES:
+				return loadedEdges != null && !loadedEdges.isEmpty();
+			case QVTschedulePackage.BASIC_PARTITION__LOADED_NODES:
+				return loadedNodes != null && !loadedNodes.isEmpty();
+			case QVTschedulePackage.BASIC_PARTITION__PREDICATED_EDGES:
+				return predicatedEdges != null && !predicatedEdges.isEmpty();
+			case QVTschedulePackage.BASIC_PARTITION__PREDICATED_NODES:
+				return predicatedNodes != null && !predicatedNodes.isEmpty();
+			case QVTschedulePackage.BASIC_PARTITION__REALIZED_EDGES:
+				return realizedEdges != null && !realizedEdges.isEmpty();
+			case QVTschedulePackage.BASIC_PARTITION__REALIZED_NODES:
+				return realizedNodes != null && !realizedNodes.isEmpty();
+			case QVTschedulePackage.BASIC_PARTITION__SPECULATED_EDGES:
+				return speculatedEdges != null && !speculatedEdges.isEmpty();
+			case QVTschedulePackage.BASIC_PARTITION__SPECULATED_NODES:
+				return speculatedNodes != null && !speculatedNodes.isEmpty();
+			case QVTschedulePackage.BASIC_PARTITION__SPECULATION_NODES:
+				return speculationNodes != null && !speculationNodes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -207,6 +703,11 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public void addExplicitPredecessor(@NonNull BasicPartition speculationPartition) {
 		getExplicitPredecessors().add(speculationPartition);
+	}
+
+	@Override
+	public Region basicGetRegion() {
+		return getReferedMappingRegion();
 	}
 
 	/**
@@ -341,12 +842,36 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 
 	@Override
 	public @Nullable Role putEdgeRole(@NonNull Edge edge, @NonNull Role newEdgeRole) {
-		return edge2edgeRole.put(edge, newEdgeRole);
+		Role oldEdgeRole = edge2edgeRole.get(edge);
+		switch (newEdgeRole) {
+			case CONSTANT: getConstantEdges().add(edge); break;
+			//	case CONSTANT_SUCCESS_FALSE: getConstantSuccessFalseEdges().add(edge); break;
+			//	case CONSTANT_SUCCESS_TRUE: getConstantSuccessTrueEdges().add(edge); break;
+			case LOADED: getLoadedEdges().add(edge); break;
+			case PREDICATED: getPredicatedEdges().add(edge); break;
+			case REALIZED: getRealizedEdges().add(edge); break;
+			case SPECULATED: getSpeculatedEdges().add(edge); break;
+			//	case SPECULATION: getSpeculationEdges().add(edge); break;
+			default: throw new UnsupportedOperationException(newEdgeRole.toString());
+		}
+		return oldEdgeRole;
 	}
 
 	@Override
 	public @Nullable Role putNodeRole(@NonNull Node node, @NonNull Role newNodeRole) {
-		return node2nodeRole.put(node, newNodeRole);
+		Role oldNodeRole = node2nodeRole.get(node);
+		switch (newNodeRole) {
+			case CONSTANT: getConstantNodes().add(node); break;
+			case CONSTANT_SUCCESS_FALSE: getConstantSuccessFalseNodes().add(node); break;
+			case CONSTANT_SUCCESS_TRUE: getConstantSuccessTrueNodes().add(node); break;
+			case LOADED: getLoadedNodes().add(node); break;
+			case PREDICATED: getPredicatedNodes().add(node); break;
+			case REALIZED: getRealizedNodes().add(node); break;
+			case SPECULATED: getSpeculatedNodes().add(node); break;
+			case SPECULATION: getSpeculationNodes().add(node); break;
+			default: throw new UnsupportedOperationException(newNodeRole.toString());
+		}
+		return oldNodeRole;
 	}
 
 	@Override

@@ -133,6 +133,33 @@ public interface ScheduledRegion extends Region
 	 * @generated
 	 */
 	void setReferredTransformation(Transformation value);
+	/**
+	 * Returns the value of the '<em><b>Owned Root Partition</b></em>' containment reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.RootPartition#getOwningRootRegion <em>Owning Root Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Root Partition</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Root Partition</em>' containment reference.
+	 * @see #setOwnedRootPartition(RootPartition)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getScheduledRegion_OwnedRootPartition()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.RootPartition#getOwningRootRegion
+	 * @model opposite="owningRootRegion" containment="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!ScheduledRegion!ownedRootPartition'"
+	 * @generated
+	 */
+	RootPartition getOwnedRootPartition();
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedRootPartition <em>Owned Root Partition</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owned Root Partition</em>' containment reference.
+	 * @see #getOwnedRootPartition()
+	 * @generated
+	 */
+	void setOwnedRootPartition(RootPartition value);
 	@NonNull Iterable<@NonNull Region> getCallableRegions();
 	@Nullable Region getNormalizedRegion(@NonNull Region region);
 }

@@ -20,19 +20,24 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT;
+import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -43,21 +48,34 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingPartitionImpl#getOwningCompositePartition <em>Owning Composite Partition</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingPartitionImpl#getReferedMappingRegion <em>Refered Mapping Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingPartitionImpl#getRegion <em>Region</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingPartitionImpl#getRootPartition <em>Root Partition</em>}</li>
  * </ul>
  *
  * @generated
  */
 public abstract class MappingPartitionImpl extends PartitionImpl implements MappingPartition {
 	/**
-	 * The cached value of the '{@link #getRegion() <em>Region</em>}' reference.
+	 * The cached value of the '{@link #getReferedMappingRegion() <em>Refered Mapping Region</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRegion()
+	 * @see #getReferedMappingRegion()
 	 * @generated
 	 * @ordered
 	 */
-	protected Region region;
+	protected MappingRegion referedMappingRegion;
+
+	/**
+	 * The cached value of the '{@link #getRootPartition() <em>Root Partition</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRootPartition()
+	 * @generated
+	 * @ordered
+	 */
+	protected RootPartition rootPartition;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -83,17 +101,111 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public Region getRegion() {
-		if (region != null && region.eIsProxy()) {
-			InternalEObject oldRegion = (InternalEObject)region;
-			region = (Region)eResolveProxy(oldRegion);
-			if (region != oldRegion) {
+	public CompositePartition getOwningCompositePartition() {
+		if (eContainerFeatureID() != QVTschedulePackage.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION) return null;
+		return (CompositePartition)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwningCompositePartition(CompositePartition newOwningCompositePartition, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningCompositePartition, QVTschedulePackage.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOwningCompositePartition(CompositePartition newOwningCompositePartition) {
+		if (newOwningCompositePartition != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION && newOwningCompositePartition != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningCompositePartition))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newOwningCompositePartition != null)
+				msgs = ((InternalEObject)newOwningCompositePartition).eInverseAdd(this, QVTschedulePackage.COMPOSITE_PARTITION__OWNED_MAPPING_PARTITIONS, CompositePartition.class, msgs);
+			msgs = basicSetOwningCompositePartition(newOwningCompositePartition, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION, newOwningCompositePartition, newOwningCompositePartition));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MappingRegion getReferedMappingRegion() {
+		if (referedMappingRegion != null && referedMappingRegion.eIsProxy()) {
+			InternalEObject oldReferedMappingRegion = (InternalEObject)referedMappingRegion;
+			referedMappingRegion = (MappingRegion)eResolveProxy(oldReferedMappingRegion);
+			if (referedMappingRegion != oldReferedMappingRegion) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.MAPPING_PARTITION__REGION, oldRegion, region));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.MAPPING_PARTITION__REFERED_MAPPING_REGION, oldReferedMappingRegion, referedMappingRegion));
 			}
 		}
-		return region;
+		return referedMappingRegion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MappingRegion basicGetReferedMappingRegion() {
+		return referedMappingRegion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetReferedMappingRegion(MappingRegion newReferedMappingRegion, NotificationChain msgs) {
+		MappingRegion oldReferedMappingRegion = referedMappingRegion;
+		referedMappingRegion = newReferedMappingRegion;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.MAPPING_PARTITION__REFERED_MAPPING_REGION, oldReferedMappingRegion, newReferedMappingRegion);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReferedMappingRegion(MappingRegion newReferedMappingRegion) {
+		if (newReferedMappingRegion != referedMappingRegion) {
+			NotificationChain msgs = null;
+			if (referedMappingRegion != null)
+				msgs = ((InternalEObject)referedMappingRegion).eInverseRemove(this, QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS, MappingRegion.class, msgs);
+			if (newReferedMappingRegion != null)
+				msgs = ((InternalEObject)newReferedMappingRegion).eInverseAdd(this, QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS, MappingRegion.class, msgs);
+			msgs = basicSetReferedMappingRegion(newReferedMappingRegion, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.MAPPING_PARTITION__REFERED_MAPPING_REGION, newReferedMappingRegion, newReferedMappingRegion));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Region getRegion() {
+		Region region = basicGetRegion();
+		return region != null && region.eIsProxy() ? (Region)eResolveProxy((InternalEObject)region) : region;
 	}
 
 	/**
@@ -102,7 +214,33 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 	 * @generated
 	 */
 	public Region basicGetRegion() {
-		return region;
+		throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!MappingPartition!region
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RootPartition getRootPartition() {
+		if (rootPartition != null && rootPartition.eIsProxy()) {
+			InternalEObject oldRootPartition = (InternalEObject)rootPartition;
+			rootPartition = (RootPartition)eResolveProxy(oldRootPartition);
+			if (rootPartition != oldRootPartition) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.MAPPING_PARTITION__ROOT_PARTITION, oldRootPartition, rootPartition));
+			}
+		}
+		return rootPartition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RootPartition basicGetRootPartition() {
+		return rootPartition;
 	}
 
 	/**
@@ -111,11 +249,48 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 	 * @generated
 	 */
 	@Override
-	public void setRegion(Region newRegion) {
-		Region oldRegion = region;
-		region = newRegion;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.MAPPING_PARTITION__REGION, oldRegion, region));
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTschedulePackage.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetOwningCompositePartition((CompositePartition)otherEnd, msgs);
+			case QVTschedulePackage.MAPPING_PARTITION__REFERED_MAPPING_REGION:
+				if (referedMappingRegion != null)
+					msgs = ((InternalEObject)referedMappingRegion).eInverseRemove(this, QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS, MappingRegion.class, msgs);
+				return basicSetReferedMappingRegion((MappingRegion)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTschedulePackage.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION:
+				return basicSetOwningCompositePartition(null, msgs);
+			case QVTschedulePackage.MAPPING_PARTITION__REFERED_MAPPING_REGION:
+				return basicSetReferedMappingRegion(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case QVTschedulePackage.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION:
+				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.COMPOSITE_PARTITION__OWNED_MAPPING_PARTITIONS, CompositePartition.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -126,9 +301,17 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTschedulePackage.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION:
+				return getOwningCompositePartition();
+			case QVTschedulePackage.MAPPING_PARTITION__REFERED_MAPPING_REGION:
+				if (resolve) return getReferedMappingRegion();
+				return basicGetReferedMappingRegion();
 			case QVTschedulePackage.MAPPING_PARTITION__REGION:
 				if (resolve) return getRegion();
 				return basicGetRegion();
+			case QVTschedulePackage.MAPPING_PARTITION__ROOT_PARTITION:
+				if (resolve) return getRootPartition();
+				return basicGetRootPartition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -141,8 +324,11 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.MAPPING_PARTITION__REGION:
-				setRegion((Region)newValue);
+			case QVTschedulePackage.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION:
+				setOwningCompositePartition((CompositePartition)newValue);
+				return;
+			case QVTschedulePackage.MAPPING_PARTITION__REFERED_MAPPING_REGION:
+				setReferedMappingRegion((MappingRegion)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -156,8 +342,11 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.MAPPING_PARTITION__REGION:
-				setRegion((Region)null);
+			case QVTschedulePackage.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION:
+				setOwningCompositePartition((CompositePartition)null);
+				return;
+			case QVTschedulePackage.MAPPING_PARTITION__REFERED_MAPPING_REGION:
+				setReferedMappingRegion((MappingRegion)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -171,8 +360,14 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTschedulePackage.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION:
+				return getOwningCompositePartition() != null;
+			case QVTschedulePackage.MAPPING_PARTITION__REFERED_MAPPING_REGION:
+				return referedMappingRegion != null;
 			case QVTschedulePackage.MAPPING_PARTITION__REGION:
-				return region != null;
+				return basicGetRegion() != null;
+			case QVTschedulePackage.MAPPING_PARTITION__ROOT_PARTITION:
+				return rootPartition != null;
 		}
 		return super.eIsSet(featureID);
 	}

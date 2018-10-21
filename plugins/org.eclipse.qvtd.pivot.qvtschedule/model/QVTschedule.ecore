@@ -24,10 +24,36 @@
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BasicPartition" eSuperTypes="#//MappingPartition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constantEdges" ordered="false"
+        upperBound="-1" eType="#//Edge"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constantNodes" ordered="false"
+        upperBound="-1" eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constantSuccessFalseNodes"
+        ordered="false" upperBound="-1" eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constantSuccessTrueNodes"
+        ordered="false" upperBound="-1" eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="explicitPredecessors" ordered="false"
+        upperBound="-1" eType="#//MappingPartition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="headNodes" lowerBound="1"
         upperBound="-1" eType="#//Node"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="explicitPredecessors" upperBound="-1"
-        eType="#//MappingPartition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loadedEdges" ordered="false"
+        upperBound="-1" eType="#//Edge"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loadedNodes" ordered="false"
+        upperBound="-1" eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="predicatedEdges" ordered="false"
+        upperBound="-1" eType="#//Edge"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="predicatedNodes" ordered="false"
+        upperBound="-1" eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="realizedEdges" ordered="false"
+        upperBound="-1" eType="#//Edge"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="realizedNodes" ordered="false"
+        upperBound="-1" eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="speculatedEdges" ordered="false"
+        upperBound="-1" eType="#//Edge"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="speculatedNodes" ordered="false"
+        upperBound="-1" eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="speculationNodes" ordered="false"
+        upperBound="-1" eType="#//Node"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteralNode" eSuperTypes="#//OperationNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -110,7 +136,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ComposedNode" eSuperTypes="#//Node"/>
   <eClassifiers xsi:type="ecore:EClass" name="CompositePartition" abstract="true"
-      eSuperTypes="#//Partition"/>
+      eSuperTypes="#//Partition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMappingPartitions"
+        upperBound="-1" eType="#//MappingPartition" containment="true" eOpposite="#//MappingPartition/owningCompositePartition"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Connection" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element #//Symbolable">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A Connection establishes that one or more source edges/nodes are available for use by one or more target edges/nodes.&#xD;&#xA;Derivations refine the availability to edges or nodes, pass by value, optional existence or mandatory existence."/>
@@ -139,7 +168,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="elementRegions" lowerBound="1"
         upperBound="-1" eType="#//MappingRegion"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="CyclicPartition" eSuperTypes="#//CompositePartition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CyclicPartition" eSuperTypes="#//CompositePartition #//MappingPartition"/>
   <eClassifiers xsi:type="ecore:EClass" name="DependencyEdge" eSuperTypes="#//Edge">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A DependencyEdge instantiates the dependencies of an operation in its caller."/>
@@ -236,11 +265,16 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="LoadingPartition" eSuperTypes="#//MappingPartition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LoadingPartition" eSuperTypes="#//MappingPartition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredLoadingRegion"
+        lowerBound="1" eType="#//LoadingRegion" eOpposite="#//LoadingRegion/loadingPartition"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LoadingRegion" eSuperTypes="#//Region">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A LoadingRegion provides a graphical representation of the model elements to be loaded from input models."/>
     </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loadingPartition" lowerBound="1"
+        eType="#//LoadingPartition" eOpposite="#//LoadingPartition/referredLoadingRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduledRegion"
         lowerBound="1" eType="#//ScheduledRegion" eOpposite="#//ScheduledRegion/ownedLoadingRegion"/>
   </eClassifiers>
@@ -273,8 +307,14 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingPartition" abstract="true" eSuperTypes="#//Partition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningCompositePartition"
+        eType="#//CompositePartition" eOpposite="#//CompositePartition/ownedMappingPartitions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referedMappingRegion" eType="#//MappingRegion"
+        eOpposite="#//MappingRegion/mappingPartitions"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="region" lowerBound="1"
-        eType="#//Region"/>
+        eType="#//Region" changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rootPartition" lowerBound="1"
+        eType="#//RootPartition" changeable="false" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingRegion" abstract="true" eSuperTypes="#//Region">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -282,6 +322,8 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="headNodes" upperBound="-1"
         eType="#//Node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingPartitions" upperBound="-1"
+        eType="#//MappingPartition" eOpposite="#//MappingPartition/referedMappingRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduleModel" eType="#//ScheduleModel"
         eOpposite="#//ScheduleModel/ownedMappingRegions">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -504,7 +546,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="scheduledRegion" eType="#//ScheduledRegion"
         eOpposite="#//ScheduledRegion/activeRegions"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RootPartition" eSuperTypes="#//CompositePartition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RootPartition" eSuperTypes="#//CompositePartition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningRootRegion" lowerBound="1"
+        eType="#//ScheduledRegion" eOpposite="#//ScheduledRegion/ownedRootPartition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loadingPartition" eType="#//LoadingPartition"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RuleRegion" eSuperTypes="#//MappingRegion">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A RuleRegion provides a graphical representation of an executable mapping defined by a Rule; QVTc Mapping or QVTr Relation."/>
@@ -551,6 +597,8 @@
         <details key="documentation" value="The Transformation represented by this ScheduledRegion."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRootPartition" eType="#//RootPartition"
+        containment="true" eOpposite="#//RootPartition/owningRootRegion"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ShadowNode" eSuperTypes="#//OperationNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

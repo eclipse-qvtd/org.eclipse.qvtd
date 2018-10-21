@@ -10,30 +10,28 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.utilities;
 
-import java.util.ArrayList;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphElement;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
+import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
+import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.AbstractToGraphVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
@@ -164,8 +162,10 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 				appendNode(connection);
 				for (@NonNull ConnectionEnd sourceEnd : QVTscheduleUtil.getSourceEnds(connection)) {
 					Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
-					RegionAnalysis sourceRegionAnalysis = scheduleManager.getRegionAnalysis(sourceRegion);
-					Iterable<@NonNull Partition> partitions = sourceRegionAnalysis.basicGetPartitions();
+					Iterable<@NonNull MappingPartition> partitions = null;
+					if (sourceRegion instanceof MappingRegion) {
+						partitions = ((MappingRegion)sourceRegion).getMappingPartitions();
+					}
 					if (partitions != null) {
 						for (@NonNull Partition sourcePartition : partitions) {
 							Role sourceRole = connectionManager.getRole(sourcePartition, sourceEnd);
@@ -203,28 +203,33 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 					assert connectionRole != null;
 					Region targetRegion = scheduledRegion.getNormalizedRegion(QVTscheduleUtil.getOwningRegion(target));
 					if (targetRegion != null) {
-						RegionAnalysis targetRegionAnalysis = scheduleManager.getRegionAnalysis(targetRegion);
-						for (@NonNull Partition targetPartition : targetRegionAnalysis.getPartitions()) {
-							ConnectionRole targetConnectionRole = connectionRole;
-							Role role;
-							Node targetGraphNode;
-							if (target instanceof Node) {
-								Node targetNode = (Node)target;
-								role = targetPartition.getRole(targetNode);
-								targetGraphNode = targetNode;
-								if (!targetPartition.isHead(targetNode)) {
-									targetConnectionRole = ClassUtil.nonNullState(ConnectionRole.PREFERRED_NODE);
+						Iterable<@NonNull MappingPartition> partitions = null;
+						if (targetRegion instanceof MappingRegion) {
+							partitions = ((MappingRegion)targetRegion).getMappingPartitions();
+						}
+						if (partitions != null) {
+							for (@NonNull Partition targetPartition : partitions) {
+								ConnectionRole targetConnectionRole = connectionRole;
+								Role role;
+								Node targetGraphNode;
+								if (target instanceof Node) {
+									Node targetNode = (Node)target;
+									role = targetPartition.getRole(targetNode);
+									targetGraphNode = targetNode;
+									if (!targetPartition.isHead(targetNode)) {
+										targetConnectionRole = ClassUtil.nonNullState(ConnectionRole.PREFERRED_NODE);
+									}
 								}
-							}
-							else {
-								@NonNull NavigableEdge targetEdge = (NavigableEdge)target;
-								role = targetPartition.getRole(targetEdge);
-								targetGraphNode = QVTscheduleUtil.getTargetNode(targetEdge);
-							}
-							if ((role != null) && role.isOld()) {
-								setScope(targetPartition);
-								assert targetConnectionRole != null;
-								appendEdge(connection, targetConnectionRole, targetGraphNode);
+								else {
+									@NonNull NavigableEdge targetEdge = (NavigableEdge)target;
+									role = targetPartition.getRole(targetEdge);
+									targetGraphNode = QVTscheduleUtil.getTargetNode(targetEdge);
+								}
+								if ((role != null) && role.isOld()) {
+									setScope(targetPartition);
+									assert targetConnectionRole != null;
+									appendEdge(connection, targetConnectionRole, targetGraphNode);
+								}
 							}
 						}
 					}
@@ -327,20 +332,24 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 	protected abstract void showRegionInternals(@NonNull Region region);
 
 	protected void showScheduledRegionInternals(@NonNull ScheduledRegion scheduledRegion) {
-		AbstractTransformationAnalysis transformationAnalysis = scheduleManager.getTransformationAnalysis(scheduledRegion);
-		RootPartitionAnalysis rootPartitionAnalysis = transformationAnalysis.basicGetRootPartitionAnalysis();
-		if (rootPartitionAnalysis == null) {
+		RootPartition rootPartition = scheduledRegion.getOwnedRootPartition();
+		if (rootPartition == null) {
 			for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(scheduledRegion)) {
 				region.accept(this);
 			}
 		}
 		else {
-			for (@NonNull PartitionAnalysis partitionAnalysis : CompilerUtil.gatherPartitionAnalyses(rootPartitionAnalysis, new ArrayList<>())) {
-				Partition partition= partitionAnalysis.getPartition();
-				setScope(partition);
-				visitPartition(partition);
-			}
+			rootPartition.accept(this);
 		}
+	}
+
+	@Override
+	public @Nullable String visitCyclicPartition(@NonNull CyclicPartition cyclicPartition) {
+		for (@NonNull MappingPartition partition : QVTscheduleUtil.getOwnedMappingPartitions(cyclicPartition)) {
+			setScope(partition);
+			partition.accept(this);
+		}
+		return null;
 	}
 
 	@Override
@@ -383,6 +392,15 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 		finally {
 			this.partition = null;
 		}
+	}
+
+	@Override
+	public @Nullable String visitRootPartition(@NonNull RootPartition rootPartition) {
+		for (@NonNull MappingPartition partition : QVTscheduleUtil.getOwnedMappingPartitions(rootPartition)) {
+			setScope(partition);
+			partition.accept(this);
+		}
+		return null;
 	}
 
 	@Override

@@ -226,6 +226,7 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				CyclicPartition cyclicPartition = (CyclicPartition)theEObject;
 				T result = caseCyclicPartition(cyclicPartition);
 				if (result == null) result = caseCompositePartition(cyclicPartition);
+				if (result == null) result = caseMappingPartition(cyclicPartition);
 				if (result == null) result = casePartition(cyclicPartition);
 				if (result == null) result = caseNamedElement(cyclicPartition);
 				if (result == null) result = caseElement(cyclicPartition);

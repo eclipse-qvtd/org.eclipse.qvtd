@@ -45,12 +45,14 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
@@ -672,6 +674,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull LoadingRegion getOwnedLoadingRegion(@NonNull ScheduledRegion scheduledRegion) {
 		return ClassUtil.nonNullState(scheduledRegion.getOwnedLoadingRegion());
+	}
+
+	public static @NonNull Iterable<@NonNull MappingPartition> getOwnedMappingPartitions(@NonNull CompositePartition composedPartition) {
+		return ClassUtil.nullFree(composedPartition.getOwnedMappingPartitions());
 	}
 
 	public static @NonNull Iterable<@NonNull Node> getOwnedNodes(@NonNull Region region) {

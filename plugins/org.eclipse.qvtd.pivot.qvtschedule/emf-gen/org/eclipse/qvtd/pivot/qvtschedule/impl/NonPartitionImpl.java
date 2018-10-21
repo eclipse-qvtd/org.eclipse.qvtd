@@ -25,7 +25,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NonPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
-
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -64,6 +64,11 @@ public class NonPartitionImpl extends MappingPartitionImpl implements NonPartiti
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
 		return (R) ((QVTscheduleVisitor<?>)visitor).visitNonPartition(this);
+	}
+
+	@Override
+	public Region basicGetRegion() {
+		return getReferedMappingRegion();
 	}
 
 	@Override

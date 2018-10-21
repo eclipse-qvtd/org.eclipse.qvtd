@@ -23,9 +23,12 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -42,6 +45,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingRegionImpl#getHeadNodes <em>Head Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingRegionImpl#getMappingPartitions <em>Mapping Partitions</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingRegionImpl#getOwningScheduleModel <em>Owning Schedule Model</em>}</li>
  * </ul>
  *
@@ -57,6 +61,16 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	 * @ordered
 	 */
 	protected EList<Node> headNodes;
+
+	/**
+	 * The cached value of the '{@link #getMappingPartitions() <em>Mapping Partitions</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMappingPartitions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<MappingPartition> mappingPartitions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -88,6 +102,18 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 			headNodes = new EObjectResolvingEList<Node>(Node.class, this, QVTschedulePackage.MAPPING_REGION__HEAD_NODES);
 		}
 		return headNodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public List<MappingPartition> getMappingPartitions() {
+		if (mappingPartitions == null) {
+			mappingPartitions = new EObjectWithInverseResolvingEList<MappingPartition>(MappingPartition.class, this, QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS, QVTschedulePackage.MAPPING_PARTITION__REFERED_MAPPING_REGION);
+		}
+		return mappingPartitions;
 	}
 
 	/**
@@ -138,9 +164,12 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMappingPartitions()).basicAdd(otherEnd, msgs);
 			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -157,6 +186,8 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS:
+				return ((InternalEList<?>)getMappingPartitions()).basicRemove(otherEnd, msgs);
 			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
 				return basicSetOwningScheduleModel(null, msgs);
 		}
@@ -187,6 +218,8 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 		switch (featureID) {
 			case QVTschedulePackage.MAPPING_REGION__HEAD_NODES:
 				return getHeadNodes();
+			case QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS:
+				return getMappingPartitions();
 			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
 				return getOwningScheduleModel();
 		}
@@ -206,6 +239,10 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 				getHeadNodes().clear();
 				getHeadNodes().addAll((Collection<? extends Node>)newValue);
 				return;
+			case QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS:
+				getMappingPartitions().clear();
+				getMappingPartitions().addAll((Collection<? extends MappingPartition>)newValue);
+				return;
 			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
 				setOwningScheduleModel((ScheduleModel)newValue);
 				return;
@@ -224,6 +261,9 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 			case QVTschedulePackage.MAPPING_REGION__HEAD_NODES:
 				getHeadNodes().clear();
 				return;
+			case QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS:
+				getMappingPartitions().clear();
+				return;
 			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
 				setOwningScheduleModel((ScheduleModel)null);
 				return;
@@ -241,6 +281,8 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 		switch (featureID) {
 			case QVTschedulePackage.MAPPING_REGION__HEAD_NODES:
 				return headNodes != null && !headNodes.isEmpty();
+			case QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS:
+				return mappingPartitions != null && !mappingPartitions.isEmpty();
 			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
 				return getOwningScheduleModel() != null;
 		}

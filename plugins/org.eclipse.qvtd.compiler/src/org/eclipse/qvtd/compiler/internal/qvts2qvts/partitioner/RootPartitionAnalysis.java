@@ -30,6 +30,7 @@ public class RootPartitionAnalysis extends AbstractCompositePartitionAnalysis<Ro
 			@NonNull AbstractTransformationAnalysis transformationAnalysis,
 			@NonNull String name, @NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partitionAnalysis2predecessors) {
 		RootPartition rootPartition = RegionHelper.createRootPartition(name, transformationAnalysis.getScheduleManager());
+		transformationAnalysis.getScheduledRegion().setOwnedRootPartition(rootPartition);
 		RootPartitionAnalysis rootPartitionAnalysis = new RootPartitionAnalysis(partitionedTransformationAnalysis, rootPartition, partitionAnalysis2predecessors);
 		return rootPartitionAnalysis;
 	}

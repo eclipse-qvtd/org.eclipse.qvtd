@@ -20,10 +20,45 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  * A representation of the model object '<em><b>Loading Partition</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * </p>
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition#getReferredLoadingRegion <em>Referred Loading Region</em>}</li>
+ * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getLoadingPartition()
  * @model
  * @generated
  */
 public interface LoadingPartition extends MappingPartition {
+
+	/**
+	 * Returns the value of the '<em><b>Referred Loading Region</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getLoadingPartition <em>Loading Partition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Referred Loading Region</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Referred Loading Region</em>' reference.
+	 * @see #setReferredLoadingRegion(LoadingRegion)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getLoadingPartition_ReferredLoadingRegion()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getLoadingPartition
+	 * @model opposite="loadingPartition" required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!LoadingPartition!referredLoadingRegion'"
+	 * @generated
+	 */
+	LoadingRegion getReferredLoadingRegion();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition#getReferredLoadingRegion <em>Referred Loading Region</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Referred Loading Region</em>' reference.
+	 * @see #getReferredLoadingRegion()
+	 * @generated
+	 */
+	void setReferredLoadingRegion(LoadingRegion value);
 } // LoadingPartition

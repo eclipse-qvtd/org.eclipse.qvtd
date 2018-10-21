@@ -522,14 +522,4 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 	public @NonNull String toString() {
 		return ClassUtil.nonNullState(name);
 	}
-
-	private Object scheduleManager = null;
-
-	public @NonNull Object getScheduleManager() {
-		return ClassUtil.nonNullState(scheduleManager);
-	}
-
-	public void setScheduleManager(@NonNull Object scheduleManager) {
-		this.scheduleManager = scheduleManager;
-	}
 } //PartitionImpl

@@ -16,9 +16,10 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.pivot.qvtschedule.Partition;
+import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 
-public abstract class AbstractCompositePartitionAnalysis<P extends Partition> extends AbstractPartitionAnalysis<P> implements CompositePartitionAnalysis
+public abstract class AbstractCompositePartitionAnalysis<P extends CompositePartition> extends AbstractPartitionAnalysis<P> implements CompositePartitionAnalysis
 {
 	protected final @NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partitionAnalysis2predecessors;
 	private @Nullable List<@NonNull Iterable<@NonNull PartitionAnalysis>> partitionSchedule = null;
@@ -27,6 +28,9 @@ public abstract class AbstractCompositePartitionAnalysis<P extends Partition> ex
 			@NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partitionAnalysis2predecessors) {
 		super(partitionedTransformationAnalysis, controlPartition);
 		this.partitionAnalysis2predecessors = partitionAnalysis2predecessors;
+		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalysis2predecessors.keySet()) {
+			controlPartition.getOwnedMappingPartitions().add((MappingPartition) partitionAnalysis.getPartition());
+		}
 	}
 
 	protected abstract @NonNull List<@NonNull Iterable<@NonNull PartitionAnalysis>> createPartitionSchedule();

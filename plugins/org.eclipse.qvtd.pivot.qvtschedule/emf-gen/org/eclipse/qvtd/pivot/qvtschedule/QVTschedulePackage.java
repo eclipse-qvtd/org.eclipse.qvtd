@@ -1123,13 +1123,40 @@ public interface QVTschedulePackage extends EPackage {
 	int MAPPING_PARTITION__PASSES = PARTITION__PASSES;
 
 	/**
+	 * The feature id for the '<em><b>Owning Composite Partition</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION = PARTITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Refered Mapping Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_PARTITION__REFERED_MAPPING_REGION = PARTITION_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Region</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_PARTITION__REGION = PARTITION_FEATURE_COUNT + 0;
+	int MAPPING_PARTITION__REGION = PARTITION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Root Partition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_PARTITION__ROOT_PARTITION = PARTITION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Mapping Partition</em>' class.
@@ -1138,7 +1165,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_PARTITION_FEATURE_COUNT = PARTITION_FEATURE_COUNT + 1;
+	int MAPPING_PARTITION_FEATURE_COUNT = PARTITION_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -1232,6 +1259,24 @@ public interface QVTschedulePackage extends EPackage {
 	int BASIC_PARTITION__PASSES = MAPPING_PARTITION__PASSES;
 
 	/**
+	 * The feature id for the '<em><b>Owning Composite Partition</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__OWNING_COMPOSITE_PARTITION = MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION;
+
+	/**
+	 * The feature id for the '<em><b>Refered Mapping Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__REFERED_MAPPING_REGION = MAPPING_PARTITION__REFERED_MAPPING_REGION;
+
+	/**
 	 * The feature id for the '<em><b>Region</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1241,13 +1286,49 @@ public interface QVTschedulePackage extends EPackage {
 	int BASIC_PARTITION__REGION = MAPPING_PARTITION__REGION;
 
 	/**
-	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
+	 * The feature id for the '<em><b>Root Partition</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BASIC_PARTITION__HEAD_NODES = MAPPING_PARTITION_FEATURE_COUNT + 0;
+	int BASIC_PARTITION__ROOT_PARTITION = MAPPING_PARTITION__ROOT_PARTITION;
+
+	/**
+	 * The feature id for the '<em><b>Constant Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__CONSTANT_EDGES = MAPPING_PARTITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Constant Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__CONSTANT_NODES = MAPPING_PARTITION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Constant Success False Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES = MAPPING_PARTITION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Constant Success True Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES = MAPPING_PARTITION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Explicit Predecessors</b></em>' reference list.
@@ -1256,7 +1337,97 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BASIC_PARTITION__EXPLICIT_PREDECESSORS = MAPPING_PARTITION_FEATURE_COUNT + 1;
+	int BASIC_PARTITION__EXPLICIT_PREDECESSORS = MAPPING_PARTITION_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__HEAD_NODES = MAPPING_PARTITION_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Loaded Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__LOADED_EDGES = MAPPING_PARTITION_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Loaded Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__LOADED_NODES = MAPPING_PARTITION_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Predicated Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__PREDICATED_EDGES = MAPPING_PARTITION_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Predicated Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__PREDICATED_NODES = MAPPING_PARTITION_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Realized Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__REALIZED_EDGES = MAPPING_PARTITION_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Realized Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__REALIZED_NODES = MAPPING_PARTITION_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Speculated Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__SPECULATED_EDGES = MAPPING_PARTITION_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>Speculated Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__SPECULATED_NODES = MAPPING_PARTITION_FEATURE_COUNT + 13;
+
+	/**
+	 * The feature id for the '<em><b>Speculation Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__SPECULATION_NODES = MAPPING_PARTITION_FEATURE_COUNT + 14;
 
 	/**
 	 * The number of structural features of the '<em>Basic Partition</em>' class.
@@ -1265,7 +1436,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BASIC_PARTITION_FEATURE_COUNT = MAPPING_PARTITION_FEATURE_COUNT + 2;
+	int BASIC_PARTITION_FEATURE_COUNT = MAPPING_PARTITION_FEATURE_COUNT + 15;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -3300,13 +3471,22 @@ public interface QVTschedulePackage extends EPackage {
 	int COMPOSITE_PARTITION__PASSES = PARTITION__PASSES;
 
 	/**
+	 * The feature id for the '<em><b>Owned Mapping Partitions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_PARTITION__OWNED_MAPPING_PARTITIONS = PARTITION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Composite Partition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_PARTITION_FEATURE_COUNT = PARTITION_FEATURE_COUNT + 0;
+	int COMPOSITE_PARTITION_FEATURE_COUNT = PARTITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -3706,13 +3886,22 @@ public interface QVTschedulePackage extends EPackage {
 	int MAPPING_REGION__HEAD_NODES = REGION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Mapping Partitions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_REGION__MAPPING_PARTITIONS = REGION_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Owning Schedule Model</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_REGION__OWNING_SCHEDULE_MODEL = REGION_FEATURE_COUNT + 1;
+	int MAPPING_REGION__OWNING_SCHEDULE_MODEL = REGION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Mapping Region</em>' class.
@@ -3721,7 +3910,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 2;
+	int MAPPING_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -3860,6 +4049,15 @@ public interface QVTschedulePackage extends EPackage {
 	int CYCLIC_MAPPING_REGION__HEAD_NODES = MAPPING_REGION__HEAD_NODES;
 
 	/**
+	 * The feature id for the '<em><b>Mapping Partitions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CYCLIC_MAPPING_REGION__MAPPING_PARTITIONS = MAPPING_REGION__MAPPING_PARTITIONS;
+
+	/**
 	 * The feature id for the '<em><b>Owning Schedule Model</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3978,13 +4176,58 @@ public interface QVTschedulePackage extends EPackage {
 	int CYCLIC_PARTITION__PASSES = COMPOSITE_PARTITION__PASSES;
 
 	/**
+	 * The feature id for the '<em><b>Owned Mapping Partitions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CYCLIC_PARTITION__OWNED_MAPPING_PARTITIONS = COMPOSITE_PARTITION__OWNED_MAPPING_PARTITIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Composite Partition</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CYCLIC_PARTITION__OWNING_COMPOSITE_PARTITION = COMPOSITE_PARTITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Refered Mapping Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CYCLIC_PARTITION__REFERED_MAPPING_REGION = COMPOSITE_PARTITION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CYCLIC_PARTITION__REGION = COMPOSITE_PARTITION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Root Partition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CYCLIC_PARTITION__ROOT_PARTITION = COMPOSITE_PARTITION_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Cyclic Partition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CYCLIC_PARTITION_FEATURE_COUNT = COMPOSITE_PARTITION_FEATURE_COUNT + 0;
+	int CYCLIC_PARTITION_FEATURE_COUNT = COMPOSITE_PARTITION_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -4392,6 +4635,15 @@ public interface QVTschedulePackage extends EPackage {
 	int RULE_REGION__HEAD_NODES = MAPPING_REGION__HEAD_NODES;
 
 	/**
+	 * The feature id for the '<em><b>Mapping Partitions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE_REGION__MAPPING_PARTITIONS = MAPPING_REGION__MAPPING_PARTITIONS;
+
+	/**
 	 * The feature id for the '<em><b>Owning Schedule Model</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4543,6 +4795,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int DISPATCH_REGION__HEAD_NODES = RULE_REGION__HEAD_NODES;
+
+	/**
+	 * The feature id for the '<em><b>Mapping Partitions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DISPATCH_REGION__MAPPING_PARTITIONS = RULE_REGION__MAPPING_PARTITIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owning Schedule Model</b></em>' container reference.
@@ -6386,6 +6647,24 @@ public interface QVTschedulePackage extends EPackage {
 	int LOADING_PARTITION__PASSES = MAPPING_PARTITION__PASSES;
 
 	/**
+	 * The feature id for the '<em><b>Owning Composite Partition</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOADING_PARTITION__OWNING_COMPOSITE_PARTITION = MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION;
+
+	/**
+	 * The feature id for the '<em><b>Refered Mapping Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOADING_PARTITION__REFERED_MAPPING_REGION = MAPPING_PARTITION__REFERED_MAPPING_REGION;
+
+	/**
 	 * The feature id for the '<em><b>Region</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6395,13 +6674,31 @@ public interface QVTschedulePackage extends EPackage {
 	int LOADING_PARTITION__REGION = MAPPING_PARTITION__REGION;
 
 	/**
+	 * The feature id for the '<em><b>Root Partition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOADING_PARTITION__ROOT_PARTITION = MAPPING_PARTITION__ROOT_PARTITION;
+
+	/**
+	 * The feature id for the '<em><b>Referred Loading Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOADING_PARTITION__REFERRED_LOADING_REGION = MAPPING_PARTITION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Loading Partition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOADING_PARTITION_FEATURE_COUNT = MAPPING_PARTITION_FEATURE_COUNT + 0;
+	int LOADING_PARTITION_FEATURE_COUNT = MAPPING_PARTITION_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -6521,13 +6818,22 @@ public interface QVTschedulePackage extends EPackage {
 	int LOADING_REGION__SCHEDULED_REGION = REGION__SCHEDULED_REGION;
 
 	/**
+	 * The feature id for the '<em><b>Loading Partition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOADING_REGION__LOADING_PARTITION = REGION_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Owning Scheduled Region</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOADING_REGION__OWNING_SCHEDULED_REGION = REGION_FEATURE_COUNT + 0;
+	int LOADING_REGION__OWNING_SCHEDULED_REGION = REGION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Loading Region</em>' class.
@@ -6536,7 +6842,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOADING_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 1;
+	int LOADING_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -7154,6 +7460,15 @@ public interface QVTschedulePackage extends EPackage {
 	int MICRO_MAPPING_REGION__HEAD_NODES = MAPPING_REGION__HEAD_NODES;
 
 	/**
+	 * The feature id for the '<em><b>Mapping Partitions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MICRO_MAPPING_REGION__MAPPING_PARTITIONS = MAPPING_REGION__MAPPING_PARTITIONS;
+
+	/**
 	 * The feature id for the '<em><b>Owning Schedule Model</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7323,6 +7638,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NAMED_MAPPING_REGION__HEAD_NODES = MAPPING_REGION__HEAD_NODES;
+
+	/**
+	 * The feature id for the '<em><b>Mapping Partitions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_MAPPING_REGION__MAPPING_PARTITIONS = MAPPING_REGION__MAPPING_PARTITIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owning Schedule Model</b></em>' container reference.
@@ -7749,6 +8073,24 @@ public interface QVTschedulePackage extends EPackage {
 	int NON_PARTITION__PASSES = MAPPING_PARTITION__PASSES;
 
 	/**
+	 * The feature id for the '<em><b>Owning Composite Partition</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NON_PARTITION__OWNING_COMPOSITE_PARTITION = MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION;
+
+	/**
+	 * The feature id for the '<em><b>Refered Mapping Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NON_PARTITION__REFERED_MAPPING_REGION = MAPPING_PARTITION__REFERED_MAPPING_REGION;
+
+	/**
 	 * The feature id for the '<em><b>Region</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7756,6 +8098,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NON_PARTITION__REGION = MAPPING_PARTITION__REGION;
+
+	/**
+	 * The feature id for the '<em><b>Root Partition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NON_PARTITION__ROOT_PARTITION = MAPPING_PARTITION__ROOT_PARTITION;
 
 	/**
 	 * The number of structural features of the '<em>Non Partition</em>' class.
@@ -9591,13 +9942,40 @@ public interface QVTschedulePackage extends EPackage {
 	int ROOT_PARTITION__PASSES = COMPOSITE_PARTITION__PASSES;
 
 	/**
+	 * The feature id for the '<em><b>Owned Mapping Partitions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT_PARTITION__OWNED_MAPPING_PARTITIONS = COMPOSITE_PARTITION__OWNED_MAPPING_PARTITIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Root Region</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT_PARTITION__OWNING_ROOT_REGION = COMPOSITE_PARTITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Loading Partition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT_PARTITION__LOADING_PARTITION = COMPOSITE_PARTITION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Root Partition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_PARTITION_FEATURE_COUNT = COMPOSITE_PARTITION_FEATURE_COUNT + 0;
+	int ROOT_PARTITION_FEATURE_COUNT = COMPOSITE_PARTITION_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -9924,13 +10302,22 @@ public interface QVTschedulePackage extends EPackage {
 	int SCHEDULED_REGION__REFERRED_TRANSFORMATION = REGION_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Owned Root Partition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULED_REGION__OWNED_ROOT_PARTITION = REGION_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Scheduled Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULED_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 5;
+	int SCHEDULED_REGION_FEATURE_COUNT = REGION_FEATURE_COUNT + 6;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -11616,6 +12003,15 @@ public interface QVTschedulePackage extends EPackage {
 	int VERDICT_REGION__HEAD_NODES = RULE_REGION__HEAD_NODES;
 
 	/**
+	 * The feature id for the '<em><b>Mapping Partitions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VERDICT_REGION__MAPPING_PARTITIONS = RULE_REGION__MAPPING_PARTITIONS;
+
+	/**
 	 * The feature id for the '<em><b>Owning Schedule Model</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11730,6 +12126,50 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getBasicPartition();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getConstantEdges <em>Constant Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Constant Edges</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getConstantEdges()
+	 * @see #getBasicPartition()
+	 * @generated
+	 */
+	EReference getBasicPartition_ConstantEdges();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getConstantNodes <em>Constant Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Constant Nodes</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getConstantNodes()
+	 * @see #getBasicPartition()
+	 * @generated
+	 */
+	EReference getBasicPartition_ConstantNodes();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getConstantSuccessFalseNodes <em>Constant Success False Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Constant Success False Nodes</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getConstantSuccessFalseNodes()
+	 * @see #getBasicPartition()
+	 * @generated
+	 */
+	EReference getBasicPartition_ConstantSuccessFalseNodes();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getConstantSuccessTrueNodes <em>Constant Success True Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Constant Success True Nodes</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getConstantSuccessTrueNodes()
+	 * @see #getBasicPartition()
+	 * @generated
+	 */
+	EReference getBasicPartition_ConstantSuccessTrueNodes();
+
+	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getHeadNodes <em>Head Nodes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11739,6 +12179,105 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBasicPartition_HeadNodes();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getLoadedEdges <em>Loaded Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Loaded Edges</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getLoadedEdges()
+	 * @see #getBasicPartition()
+	 * @generated
+	 */
+	EReference getBasicPartition_LoadedEdges();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getLoadedNodes <em>Loaded Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Loaded Nodes</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getLoadedNodes()
+	 * @see #getBasicPartition()
+	 * @generated
+	 */
+	EReference getBasicPartition_LoadedNodes();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getPredicatedEdges <em>Predicated Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Predicated Edges</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getPredicatedEdges()
+	 * @see #getBasicPartition()
+	 * @generated
+	 */
+	EReference getBasicPartition_PredicatedEdges();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getPredicatedNodes <em>Predicated Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Predicated Nodes</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getPredicatedNodes()
+	 * @see #getBasicPartition()
+	 * @generated
+	 */
+	EReference getBasicPartition_PredicatedNodes();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getRealizedEdges <em>Realized Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Realized Edges</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getRealizedEdges()
+	 * @see #getBasicPartition()
+	 * @generated
+	 */
+	EReference getBasicPartition_RealizedEdges();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getRealizedNodes <em>Realized Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Realized Nodes</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getRealizedNodes()
+	 * @see #getBasicPartition()
+	 * @generated
+	 */
+	EReference getBasicPartition_RealizedNodes();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getSpeculatedEdges <em>Speculated Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Speculated Edges</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getSpeculatedEdges()
+	 * @see #getBasicPartition()
+	 * @generated
+	 */
+	EReference getBasicPartition_SpeculatedEdges();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getSpeculatedNodes <em>Speculated Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Speculated Nodes</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getSpeculatedNodes()
+	 * @see #getBasicPartition()
+	 * @generated
+	 */
+	EReference getBasicPartition_SpeculatedNodes();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getSpeculationNodes <em>Speculation Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Speculation Nodes</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getSpeculationNodes()
+	 * @see #getBasicPartition()
+	 * @generated
+	 */
+	EReference getBasicPartition_SpeculationNodes();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getExplicitPredecessors <em>Explicit Predecessors</em>}'.
@@ -12005,6 +12544,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getCompositePartition();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.CompositePartition#getOwnedMappingPartitions <em>Owned Mapping Partitions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Mapping Partitions</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.CompositePartition#getOwnedMappingPartitions()
+	 * @see #getCompositePartition()
+	 * @generated
+	 */
+	EReference getCompositePartition_OwnedMappingPartitions();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.Connection <em>Connection</em>}'.
@@ -12404,6 +12954,17 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getScheduledRegion_ReferredTransformation();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedRootPartition <em>Owned Root Partition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Root Partition</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedRootPartition()
+	 * @see #getScheduledRegion()
+	 * @generated
+	 */
+	EReference getScheduledRegion_OwnedRootPartition();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.ShadowNode <em>Shadow Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12733,6 +13294,17 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getLoadingPartition();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition#getReferredLoadingRegion <em>Referred Loading Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referred Loading Region</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition#getReferredLoadingRegion()
+	 * @see #getLoadingPartition()
+	 * @generated
+	 */
+	EReference getLoadingPartition_ReferredLoadingRegion();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion <em>Loading Region</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12741,6 +13313,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getLoadingRegion();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getLoadingPartition <em>Loading Partition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Loading Partition</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getLoadingPartition()
+	 * @see #getLoadingRegion()
+	 * @generated
+	 */
+	EReference getLoadingRegion_LoadingPartition();
 
 	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getOwningScheduledRegion <em>Owning Scheduled Region</em>}'.
@@ -12826,6 +13409,28 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getMappingPartition();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getOwningCompositePartition <em>Owning Composite Partition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Composite Partition</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getOwningCompositePartition()
+	 * @see #getMappingPartition()
+	 * @generated
+	 */
+	EReference getMappingPartition_OwningCompositePartition();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getReferedMappingRegion <em>Refered Mapping Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Refered Mapping Region</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getReferedMappingRegion()
+	 * @see #getMappingPartition()
+	 * @generated
+	 */
+	EReference getMappingPartition_ReferedMappingRegion();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getRegion <em>Region</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12835,6 +13440,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMappingPartition_Region();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getRootPartition <em>Root Partition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Root Partition</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getRootPartition()
+	 * @see #getMappingPartition()
+	 * @generated
+	 */
+	EReference getMappingPartition_RootPartition();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingRegion <em>Mapping Region</em>}'.
@@ -12856,6 +13472,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMappingRegion_HeadNodes();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingRegion#getMappingPartitions <em>Mapping Partitions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Mapping Partitions</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingRegion#getMappingPartitions()
+	 * @see #getMappingRegion()
+	 * @generated
+	 */
+	EReference getMappingRegion_MappingPartitions();
 
 	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingRegion#getOwningScheduleModel <em>Owning Schedule Model</em>}'.
@@ -13550,6 +14177,28 @@ public interface QVTschedulePackage extends EPackage {
 	EClass getRootPartition();
 
 	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtschedule.RootPartition#getOwningRootRegion <em>Owning Root Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Root Region</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.RootPartition#getOwningRootRegion()
+	 * @see #getRootPartition()
+	 * @generated
+	 */
+	EReference getRootPartition_OwningRootRegion();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.RootPartition#getLoadingPartition <em>Loading Partition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Loading Partition</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.RootPartition#getLoadingPartition()
+	 * @see #getRootPartition()
+	 * @generated
+	 */
+	EReference getRootPartition_LoadingPartition();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedNodes <em>Owned Nodes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13622,12 +14271,116 @@ public interface QVTschedulePackage extends EPackage {
 		EClass BASIC_PARTITION = eINSTANCE.getBasicPartition();
 
 		/**
+		 * The meta object literal for the '<em><b>Constant Edges</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASIC_PARTITION__CONSTANT_EDGES = eINSTANCE.getBasicPartition_ConstantEdges();
+
+		/**
+		 * The meta object literal for the '<em><b>Constant Nodes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASIC_PARTITION__CONSTANT_NODES = eINSTANCE.getBasicPartition_ConstantNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Constant Success False Nodes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES = eINSTANCE.getBasicPartition_ConstantSuccessFalseNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Constant Success True Nodes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES = eINSTANCE.getBasicPartition_ConstantSuccessTrueNodes();
+
+		/**
 		 * The meta object literal for the '<em><b>Head Nodes</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference BASIC_PARTITION__HEAD_NODES = eINSTANCE.getBasicPartition_HeadNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Loaded Edges</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASIC_PARTITION__LOADED_EDGES = eINSTANCE.getBasicPartition_LoadedEdges();
+
+		/**
+		 * The meta object literal for the '<em><b>Loaded Nodes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASIC_PARTITION__LOADED_NODES = eINSTANCE.getBasicPartition_LoadedNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Predicated Edges</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASIC_PARTITION__PREDICATED_EDGES = eINSTANCE.getBasicPartition_PredicatedEdges();
+
+		/**
+		 * The meta object literal for the '<em><b>Predicated Nodes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASIC_PARTITION__PREDICATED_NODES = eINSTANCE.getBasicPartition_PredicatedNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Realized Edges</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASIC_PARTITION__REALIZED_EDGES = eINSTANCE.getBasicPartition_RealizedEdges();
+
+		/**
+		 * The meta object literal for the '<em><b>Realized Nodes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASIC_PARTITION__REALIZED_NODES = eINSTANCE.getBasicPartition_RealizedNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Speculated Edges</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASIC_PARTITION__SPECULATED_EDGES = eINSTANCE.getBasicPartition_SpeculatedEdges();
+
+		/**
+		 * The meta object literal for the '<em><b>Speculated Nodes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASIC_PARTITION__SPECULATED_NODES = eINSTANCE.getBasicPartition_SpeculatedNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Speculation Nodes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASIC_PARTITION__SPECULATION_NODES = eINSTANCE.getBasicPartition_SpeculationNodes();
 
 		/**
 		 * The meta object literal for the '<em><b>Explicit Predecessors</b></em>' reference list feature.
@@ -13846,6 +14599,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass COMPOSITE_PARTITION = eINSTANCE.getCompositePartition();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Mapping Partitions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPOSITE_PARTITION__OWNED_MAPPING_PARTITIONS = eINSTANCE.getCompositePartition_OwnedMappingPartitions();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl <em>Connection</em>}' class.
@@ -14172,6 +14933,14 @@ public interface QVTschedulePackage extends EPackage {
 		EReference SCHEDULED_REGION__REFERRED_TRANSFORMATION = eINSTANCE.getScheduledRegion_ReferredTransformation();
 
 		/**
+		 * The meta object literal for the '<em><b>Owned Root Partition</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SCHEDULED_REGION__OWNED_ROOT_PARTITION = eINSTANCE.getScheduledRegion_OwnedRootPartition();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ShadowNodeImpl <em>Shadow Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -14474,6 +15243,14 @@ public interface QVTschedulePackage extends EPackage {
 		EClass LOADING_PARTITION = eINSTANCE.getLoadingPartition();
 
 		/**
+		 * The meta object literal for the '<em><b>Referred Loading Region</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOADING_PARTITION__REFERRED_LOADING_REGION = eINSTANCE.getLoadingPartition_ReferredLoadingRegion();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.LoadingRegionImpl <em>Loading Region</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -14482,6 +15259,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass LOADING_REGION = eINSTANCE.getLoadingRegion();
+
+		/**
+		 * The meta object literal for the '<em><b>Loading Partition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOADING_REGION__LOADING_PARTITION = eINSTANCE.getLoadingRegion_LoadingPartition();
 
 		/**
 		 * The meta object literal for the '<em><b>Owning Scheduled Region</b></em>' container reference feature.
@@ -14558,12 +15343,36 @@ public interface QVTschedulePackage extends EPackage {
 		EClass MAPPING_PARTITION = eINSTANCE.getMappingPartition();
 
 		/**
+		 * The meta object literal for the '<em><b>Owning Composite Partition</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION = eINSTANCE.getMappingPartition_OwningCompositePartition();
+
+		/**
+		 * The meta object literal for the '<em><b>Refered Mapping Region</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_PARTITION__REFERED_MAPPING_REGION = eINSTANCE.getMappingPartition_ReferedMappingRegion();
+
+		/**
 		 * The meta object literal for the '<em><b>Region</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference MAPPING_PARTITION__REGION = eINSTANCE.getMappingPartition_Region();
+
+		/**
+		 * The meta object literal for the '<em><b>Root Partition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_PARTITION__ROOT_PARTITION = eINSTANCE.getMappingPartition_RootPartition();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingRegionImpl <em>Mapping Region</em>}' class.
@@ -14582,6 +15391,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_REGION__HEAD_NODES = eINSTANCE.getMappingRegion_HeadNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Mapping Partitions</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_REGION__MAPPING_PARTITIONS = eINSTANCE.getMappingRegion_MappingPartitions();
 
 		/**
 		 * The meta object literal for the '<em><b>Owning Schedule Model</b></em>' container reference feature.
@@ -15148,6 +15965,22 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass ROOT_PARTITION = eINSTANCE.getRootPartition();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Root Region</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROOT_PARTITION__OWNING_ROOT_REGION = eINSTANCE.getRootPartition_OwningRootRegion();
+
+		/**
+		 * The meta object literal for the '<em><b>Loading Partition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ROOT_PARTITION__LOADING_PARTITION = eINSTANCE.getRootPartition_LoadingPartition();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Nodes</b></em>' containment reference list feature.

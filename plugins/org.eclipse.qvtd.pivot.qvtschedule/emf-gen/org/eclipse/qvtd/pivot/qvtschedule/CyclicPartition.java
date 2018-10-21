@@ -25,5 +25,5 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  * @model
  * @generated
  */
-public interface CyclicPartition extends CompositePartition {
+public interface CyclicPartition extends CompositePartition, MappingPartition {
 } // CyclicPartition

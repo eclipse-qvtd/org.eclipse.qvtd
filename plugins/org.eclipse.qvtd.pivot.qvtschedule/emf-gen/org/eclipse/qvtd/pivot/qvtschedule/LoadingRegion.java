@@ -28,6 +28,7 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getLoadingPartition <em>Loading Partition</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getOwningScheduledRegion <em>Owning Scheduled Region</em>}</li>
  * </ul>
  *
@@ -36,6 +37,35 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  * @generated
  */
 public interface LoadingRegion extends Region {
+
+	/**
+	 * Returns the value of the '<em><b>Loading Partition</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition#getReferredLoadingRegion <em>Referred Loading Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Loading Partition</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Loading Partition</em>' reference.
+	 * @see #setLoadingPartition(LoadingPartition)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getLoadingRegion_LoadingPartition()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition#getReferredLoadingRegion
+	 * @model opposite="referredLoadingRegion" required="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!LoadingRegion!loadingPartition'"
+	 * @generated
+	 */
+	LoadingPartition getLoadingPartition();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getLoadingPartition <em>Loading Partition</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Loading Partition</em>' reference.
+	 * @see #getLoadingPartition()
+	 * @generated
+	 */
+	void setLoadingPartition(LoadingPartition value);
 
 	/**
 	 * Returns the value of the '<em><b>Owning Scheduled Region</b></em>' container reference.

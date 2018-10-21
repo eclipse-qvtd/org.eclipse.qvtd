@@ -58,9 +58,11 @@ import org.eclipse.qvtd.pivot.qvtschedule.IteratorNode;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyedValueNode;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MapLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.MapPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.MapPartNode;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -88,11 +90,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.TuplePartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.TypeLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.UnknownNode;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.CyclicPartitionImpl;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.LoadingPartitionImpl;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.NonPartitionImpl;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.RootPartitionImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -119,8 +116,8 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	public @NonNull BasicPartition createBasicPartition(@NonNull String name, @NonNull Iterable<@NonNull Node> headNodes) {
 		BasicPartition basicPartition = QVTscheduleFactory.eINSTANCE.createBasicPartition();
 		basicPartition.setName(name);
-		((BasicPartitionImpl)basicPartition).setScheduleManager(scheduleManager);;
-		basicPartition.setRegion(region);
+		//	basicPartition.setRegion(region);
+		((MappingRegion)region).getMappingPartitions().add(basicPartition);
 		Iterables.addAll(QVTscheduleUtil.Internal.getHeadNodesList(basicPartition), headNodes);
 		return basicPartition;
 	}
@@ -184,7 +181,6 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	public static @NonNull CyclicPartition createCyclicPartition(@NonNull String name, @NonNull Object scheduleManager) {
 		CyclicPartition cyclicPartition = QVTscheduleFactory.eINSTANCE.createCyclicPartition();
 		cyclicPartition.setName(name);
-		((CyclicPartitionImpl)cyclicPartition).setScheduleManager(scheduleManager);;
 		//		cyclicPartition.setRegion(region);
 		//		Iterables.addAll(cyclicPartition.getHeadNodes(), headNodes);
 		return cyclicPartition;
@@ -375,8 +371,8 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	public @NonNull LoadingPartition createLoadingPartition() {
 		LoadingPartition loadingPartition = QVTscheduleFactory.eINSTANCE.createLoadingPartition();
 		loadingPartition.setName(region.getName());
-		((LoadingPartitionImpl)loadingPartition).setScheduleManager(scheduleManager);;
-		loadingPartition.setRegion(region);
+		//	loadingPartition.setRegion(region);
+		((LoadingRegion)region).setLoadingPartition(loadingPartition);
 		//		Iterables.addAll(loadingPartition.getHeadNodes(), headNodes);
 		return loadingPartition;
 	}
@@ -421,8 +417,8 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	public @NonNull NonPartition createNonPartition(@NonNull String name) {
 		NonPartition nonPartition = QVTscheduleFactory.eINSTANCE.createNonPartition();
 		nonPartition.setName(name);
-		((NonPartitionImpl)nonPartition).setScheduleManager(scheduleManager);;
-		nonPartition.setRegion(region);
+		//	nonPartition.setRegion(region);
+		((MappingRegion)region).getMappingPartitions().add(nonPartition);
 		//		Iterables.addAll(nonPartition.getHeadNodes(), headNodes);
 		return nonPartition;
 	}
@@ -615,7 +611,6 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 	public static @NonNull RootPartition createRootPartition(@NonNull String name, @NonNull Object scheduleManager) {
 		RootPartition rootPartition = QVTscheduleFactory.eINSTANCE.createRootPartition();
 		rootPartition.setName(name);
-		((RootPartitionImpl)rootPartition).setScheduleManager(scheduleManager);;
 		//		rootPartition.setRegion(region);
 		//		Iterables.addAll(rootPartition.getHeadNodes(), headNodes);
 		return rootPartition;

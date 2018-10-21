@@ -43,6 +43,25 @@ public interface MappingRegion extends Region
 	List<Node> getHeadNodes();
 
 	/**
+	 * Returns the value of the '<em><b>Mapping Partitions</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getReferedMappingRegion <em>Refered Mapping Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Mapping Partitions</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Mapping Partitions</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMappingRegion_MappingPartitions()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getReferedMappingRegion
+	 * @model opposite="referedMappingRegion"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!MappingRegion!mappingPartitions'"
+	 * @generated
+	 */
+	List<MappingPartition> getMappingPartitions();
+
+	/**
 	 * Returns the value of the '<em><b>Owning Schedule Model</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel#getOwnedMappingRegions <em>Owned Mapping Regions</em>}'.
 	 * <!-- begin-user-doc -->

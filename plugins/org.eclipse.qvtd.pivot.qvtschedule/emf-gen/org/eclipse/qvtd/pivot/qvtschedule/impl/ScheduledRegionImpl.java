@@ -37,6 +37,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
@@ -57,6 +58,7 @@ import com.google.common.collect.Iterables;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getOwnedLoadingRegion <em>Owned Loading Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getOwningScheduleModel <em>Owning Schedule Model</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getReferredTransformation <em>Referred Transformation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getOwnedRootPartition <em>Owned Root Partition</em>}</li>
  * </ul>
  *
  * @generated
@@ -101,6 +103,16 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	 * @ordered
 	 */
 	protected Transformation referredTransformation;
+
+	/**
+	 * The cached value of the '{@link #getOwnedRootPartition() <em>Owned Root Partition</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedRootPartition()
+	 * @generated
+	 * @ordered
+	 */
+	protected RootPartition ownedRootPartition;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -280,6 +292,49 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public RootPartition getOwnedRootPartition() {
+		return ownedRootPartition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedRootPartition(RootPartition newOwnedRootPartition, NotificationChain msgs) {
+		RootPartition oldOwnedRootPartition = ownedRootPartition;
+		ownedRootPartition = newOwnedRootPartition;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SCHEDULED_REGION__OWNED_ROOT_PARTITION, oldOwnedRootPartition, newOwnedRootPartition);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOwnedRootPartition(RootPartition newOwnedRootPartition) {
+		if (newOwnedRootPartition != ownedRootPartition) {
+			NotificationChain msgs = null;
+			if (ownedRootPartition != null)
+				msgs = ((InternalEObject)ownedRootPartition).eInverseRemove(this, QVTschedulePackage.ROOT_PARTITION__OWNING_ROOT_REGION, RootPartition.class, msgs);
+			if (newOwnedRootPartition != null)
+				msgs = ((InternalEObject)newOwnedRootPartition).eInverseAdd(this, QVTschedulePackage.ROOT_PARTITION__OWNING_ROOT_REGION, RootPartition.class, msgs);
+			msgs = basicSetOwnedRootPartition(newOwnedRootPartition, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SCHEDULED_REGION__OWNED_ROOT_PARTITION, newOwnedRootPartition, newOwnedRootPartition));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -296,6 +351,10 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningScheduleModel((ScheduleModel)otherEnd, msgs);
+			case QVTschedulePackage.SCHEDULED_REGION__OWNED_ROOT_PARTITION:
+				if (ownedRootPartition != null)
+					msgs = ((InternalEObject)ownedRootPartition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTschedulePackage.SCHEDULED_REGION__OWNED_ROOT_PARTITION, null, msgs);
+				return basicSetOwnedRootPartition((RootPartition)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -316,6 +375,8 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 				return basicSetOwnedLoadingRegion(null, msgs);
 			case QVTschedulePackage.SCHEDULED_REGION__OWNING_SCHEDULE_MODEL:
 				return basicSetOwningScheduleModel(null, msgs);
+			case QVTschedulePackage.SCHEDULED_REGION__OWNED_ROOT_PARTITION:
+				return basicSetOwnedRootPartition(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -353,6 +414,8 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 			case QVTschedulePackage.SCHEDULED_REGION__REFERRED_TRANSFORMATION:
 				if (resolve) return getReferredTransformation();
 				return basicGetReferredTransformation();
+			case QVTschedulePackage.SCHEDULED_REGION__OWNED_ROOT_PARTITION:
+				return getOwnedRootPartition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -383,6 +446,9 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 			case QVTschedulePackage.SCHEDULED_REGION__REFERRED_TRANSFORMATION:
 				setReferredTransformation((Transformation)newValue);
 				return;
+			case QVTschedulePackage.SCHEDULED_REGION__OWNED_ROOT_PARTITION:
+				setOwnedRootPartition((RootPartition)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -410,6 +476,9 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 			case QVTschedulePackage.SCHEDULED_REGION__REFERRED_TRANSFORMATION:
 				setReferredTransformation((Transformation)null);
 				return;
+			case QVTschedulePackage.SCHEDULED_REGION__OWNED_ROOT_PARTITION:
+				setOwnedRootPartition((RootPartition)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -432,6 +501,8 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 				return getOwningScheduleModel() != null;
 			case QVTschedulePackage.SCHEDULED_REGION__REFERRED_TRANSFORMATION:
 				return referredTransformation != null;
+			case QVTschedulePackage.SCHEDULED_REGION__OWNED_ROOT_PARTITION:
+				return ownedRootPartition != null;
 		}
 		return super.eIsSet(featureID);
 	}
