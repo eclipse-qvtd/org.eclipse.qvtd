@@ -10,6 +10,11 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule;
 
+import java.util.List;
+import java.util.Set;
+
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 
 /**
@@ -42,4 +47,43 @@ public interface EdgeConnection extends Connection
 	 * @generated
 	 */
 	void setReferredProperty(Property value);
+
+	/**
+	 * Returns the value of the '<em><b>Mandatory Target Edges</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Mandatory Target Edges</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Mandatory Target Edges</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdgeConnection_MandatoryTargetEdges()
+	 * @model ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!EdgeConnection!mandatoryTargetEdges'"
+	 * @generated
+	 */
+	List<NavigableEdge> getMandatoryTargetEdges();
+	/**
+	 * Returns the value of the '<em><b>Preferred Target Edges</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Preferred Target Edges</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Preferred Target Edges</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getEdgeConnection_PreferredTargetEdges()
+	 * @model ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!EdgeConnection!preferredTargetEdges'"
+	 * @generated
+	 */
+	List<NavigableEdge> getPreferredTargetEdges();
+	@Override
+	@NonNull Set<@NonNull NavigableEdge> getTargetKeys();
+
+	@Nullable ConnectionRole removeTarget(@NonNull NavigableEdge targetEdge);
+
+	ConnectionRole setTargetRole(@NonNull NavigableEdge targetEdge, @NonNull ConnectionRole newConnectionRole);
 }

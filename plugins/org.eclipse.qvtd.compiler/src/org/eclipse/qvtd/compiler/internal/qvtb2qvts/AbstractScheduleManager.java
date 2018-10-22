@@ -124,7 +124,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 					appendEdge(source.getEdgeTarget(), edgeConnection, edgeConnection);
 				}
 				for (@NonNull NavigableEdge target : connectionManager.getTargetEdges(edgeConnection)) {
-					ConnectionRole role = connectionManager.getTargets(edgeConnection).get(target);
+					ConnectionRole role = edgeConnection.getTargetRole(target);
 					assert role != null;
 					appendEdge(edgeConnection, role, target.getEdgeTarget());
 				}
@@ -147,7 +147,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 					appendEdge(source, nodeConnection, nodeConnection);
 				}
 				for (@NonNull Node target : connectionManager.getTargetNodes(nodeConnection)) {
-					ConnectionRole role = connectionManager.getTargets(nodeConnection).get(target);
+					ConnectionRole role = nodeConnection.getTargetRole(target);
 					assert role != null;
 					appendEdge(nodeConnection, role, target);
 				}

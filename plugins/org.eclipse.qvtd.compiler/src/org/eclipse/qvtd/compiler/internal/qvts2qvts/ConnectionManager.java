@@ -98,8 +98,6 @@ public class ConnectionManager
 	 */
 	private @NonNull Map<@NonNull NodeConnection, @Nullable List<@NonNull Partition>> connection2intermediatePartitions = new HashMap<>();
 
-	private final @NonNull Map<@NonNull Connection, @NonNull Map<@NonNull ConnectionEnd, @NonNull ConnectionRole>> connection2targetEnd2role = new HashMap<>();
-
 	/**
 	 * Ordered list of regions that call this region
 	 */
@@ -125,9 +123,9 @@ public class ConnectionManager
 
 	public void addPassedTargetNode(@NonNull NodeConnection nodeConnection, @NonNull Node targetNode) {
 		mergeRole(nodeConnection, ConnectionRole.PASSED);
-		Map<@NonNull Node, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(nodeConnection);
-		assert !targetEnd2role.containsKey(targetNode);
-		targetEnd2role.put(targetNode, ConnectionRole.PASSED);
+		ConnectionRole targetRole = nodeConnection.getTargetRole(targetNode);
+		assert targetRole == null;
+		nodeConnection.setTargetRole(targetNode, ConnectionRole.PASSED);
 		targetNode.setIncomingConnection(nodeConnection);
 		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
 	}
@@ -139,22 +137,21 @@ public class ConnectionManager
 		//			return;
 		//		}
 		mergeRole(edgeConnection, mustBeLater ? ConnectionRole.MANDATORY_EDGE : ConnectionRole.PREFERRED_EDGE);
-		Map<@NonNull NavigableEdge, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(edgeConnection);
-		assert !targetEnd2role.containsKey(targetEdge);
-		targetEnd2role.put(targetEdge, mustBeLater ? ConnectionRole.MANDATORY_EDGE : ConnectionRole.PREFERRED_EDGE);
+		ConnectionRole targetRole = edgeConnection.getTargetRole(targetEdge);
+		assert targetRole == null;
+		edgeConnection.setTargetRole(targetEdge, mustBeLater ? ConnectionRole.MANDATORY_EDGE : ConnectionRole.PREFERRED_EDGE);
 		targetEdge.setIncomingConnection(edgeConnection);
 		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
 	}
 
 	public void addUsedTargetNode(@NonNull NodeConnection nodeConnection, @NonNull Node targetNode, boolean mustBeLater) {
-		Map<@NonNull Node, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(nodeConnection);
 		ConnectionRole newConnectionRole = mustBeLater ? ConnectionRole.MANDATORY_NODE : ConnectionRole.PREFERRED_NODE;
-		ConnectionRole oldConnectionRole = targetEnd2role.get(targetNode);
+		ConnectionRole oldConnectionRole = nodeConnection.getTargetRole(targetNode);
 		if ((oldConnectionRole != null) && (oldConnectionRole != newConnectionRole)) {
 			newConnectionRole = newConnectionRole.merge(oldConnectionRole);
 		}
 		mergeRole(nodeConnection, newConnectionRole);
-		targetEnd2role.put(targetNode, newConnectionRole);
+		nodeConnection.setTargetRole(targetNode, newConnectionRole);
 		assert targetNode.getIncomingConnection() == null;
 		targetNode.setIncomingConnection(nodeConnection);
 		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
@@ -631,51 +628,6 @@ public class ConnectionManager
 			createIncomingConnections(region);
 		}
 	} */
-
-	public void destroy(@NonNull Connection connection) {
-		if (connection instanceof EdgeConnection) {
-			destroyEdgeConnection((EdgeConnection)connection);
-		}
-		else {
-			destroyNodeConnection((NodeConnection)connection);
-		}
-		connection2commonPartition.remove(connection);
-		connection2intermediatePartitions.remove(connection);
-		connection.getSourceEnds().clear();
-		connection2targetEnd2role.remove(connection);
-		connection.setOwningScheduledRegion(null);
-	}
-
-	private void destroyEdgeConnection(@NonNull EdgeConnection edgeConnection) {
-		for (@NonNull NavigableEdge sourceEdge : QVTscheduleUtil.getSourceEnds(edgeConnection)) {
-			assert Iterables.contains(QVTscheduleUtil.getSourceEnds(edgeConnection), sourceEdge);
-			//		assert edge.getRegion() == getRegion();
-			List<EdgeConnection> outgoingConnections2 = sourceEdge.getOutgoingConnections();
-			assert outgoingConnections2 != null;
-			@SuppressWarnings("unused")boolean wasRemoved = outgoingConnections2.remove(edgeConnection);
-			//			assert wasRemoved;   -- destroy subverts this
-		}
-		Map<@NonNull NavigableEdge, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(edgeConnection);
-		for (@NonNull NavigableEdge targetNode : targetEnd2role.keySet()) {
-			targetNode.setIncomingConnection(null);
-		}
-	}
-
-	private void destroyNodeConnection(@NonNull NodeConnection nodeConnection) {
-		for (@NonNull Node sourceNode : QVTscheduleUtil.getSourceEnds(nodeConnection)) {
-			assert Iterables.contains(QVTscheduleUtil.getSourceEnds(nodeConnection), sourceNode);
-			//		assert edge.getRegion() == getRegion();
-			List<NodeConnection> outgoingConnections2 = sourceNode.getOutgoingConnections();
-			assert outgoingConnections2 != null;
-			@SuppressWarnings("unused")
-			boolean wasRemoved = outgoingConnections2.remove(nodeConnection);
-			//		assert wasRemoved;
-		}
-		Map<@NonNull Node, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(nodeConnection);
-		for (@NonNull Node targetNode : targetEnd2role.keySet()) {
-			targetNode.setIncomingConnection(null);
-		}
-	}
 
 	private @NonNull EdgeConnection getAttributeConnection(@NonNull ScheduledRegion scheduledRegion, @NonNull Iterable<@NonNull NavigableEdge> sourceEdges, @NonNull List<@NonNull String> partialNames, @NonNull Property property) {
 		Set<@NonNull NavigableEdge> sourceSet = Sets.newHashSet(sourceEdges);
@@ -1290,8 +1242,7 @@ public class ConnectionManager
 
 	public @NonNull Iterable<@NonNull ConnectionEnd> getTargetConnectionEnds(@NonNull Connection connection, @NonNull Partition targetPartition) {
 		List<@NonNull ConnectionEnd> targetConnectionEnds = new ArrayList<>();
-		Map<@NonNull ? extends ConnectionEnd, @NonNull ConnectionRole> target2role = getTargets(connection);
-		for (@NonNull ConnectionEnd targetConnectionEnd : target2role.keySet()) {
+		for (@NonNull ConnectionEnd targetConnectionEnd : connection.getTargetKeys()) {
 			//	Region region = QVTscheduleUtil.getOwningRegion(targetConnectionEnd);
 			//	RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
 			//	Iterable<@NonNull Partition> partitions = regionAnalysis.getPartitions();
@@ -1306,8 +1257,7 @@ public class ConnectionManager
 	}
 
 	public @NonNull ConnectionRole getTargetConnectionRole(@NonNull Connection connection, @NonNull Partition targetPartition, @NonNull ConnectionEnd connectionEnd) {
-		Map<@NonNull ? extends ConnectionEnd, @NonNull ConnectionRole> target2role = getTargets(connection);
-		ConnectionRole connectionRole = target2role.get(connectionEnd);
+		ConnectionRole connectionRole = connection.getTargetRole(connectionEnd);
 		assert connectionRole != null;
 		if (connectionRole.isPassed()) {
 			boolean isHead = targetPartition.isHead(connectionEnd);
@@ -1319,39 +1269,7 @@ public class ConnectionManager
 	}
 
 	public @NonNull Iterable<@NonNull NavigableEdge> getTargetEdges(@NonNull EdgeConnection edgeConnection) {
-		Map<@NonNull NavigableEdge, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(edgeConnection);
-		return targetEnd2role.keySet();
-	}
-
-	private @NonNull Map<@NonNull ConnectionEnd, @NonNull ConnectionRole> getTargetEnd2Role(@NonNull Connection connection) {
-		Map<@NonNull ConnectionEnd, @NonNull ConnectionRole> targetEnd2role = connection2targetEnd2role.get(connection);
-		if (targetEnd2role == null) {
-			targetEnd2role = new HashMap<>();
-			connection2targetEnd2role.put(connection, targetEnd2role);
-		}
-		return targetEnd2role;
-	}
-
-	private @NonNull Map<@NonNull NavigableEdge, @NonNull ConnectionRole> getTargetEnd2Role(@NonNull EdgeConnection edgeConnection) {
-		Map<@NonNull ConnectionEnd, @NonNull ConnectionRole> targetEnd2role = connection2targetEnd2role.get(edgeConnection);
-		if (targetEnd2role == null) {
-			targetEnd2role = new HashMap<>();
-			connection2targetEnd2role.put(edgeConnection, targetEnd2role);
-		}
-		@SuppressWarnings("unchecked")
-		Map<@NonNull NavigableEdge, @NonNull ConnectionRole> castTargetEnd2role = (Map<@NonNull NavigableEdge, @NonNull ConnectionRole>)(Object)targetEnd2role;
-		return castTargetEnd2role;
-	}
-
-	private @NonNull Map<@NonNull Node, @NonNull ConnectionRole> getTargetEnd2Role(@NonNull NodeConnection nodeConnection) {
-		Map<@NonNull ConnectionEnd, @NonNull ConnectionRole> targetEnd2role = connection2targetEnd2role.get(nodeConnection);
-		if (targetEnd2role == null) {
-			targetEnd2role = new HashMap<>();
-			connection2targetEnd2role.put(nodeConnection, targetEnd2role);
-		}
-		@SuppressWarnings("unchecked")
-		Map<@NonNull Node, @NonNull ConnectionRole> castTargetEnd2role = (Map<@NonNull Node, @NonNull ConnectionRole>)(Object)targetEnd2role;
-		return castTargetEnd2role;
+		return edgeConnection.getTargetKeys();
 	}
 
 	public @NonNull Iterable<@NonNull Node> getTargetNodes(@NonNull Connection connection) {
@@ -1364,17 +1282,15 @@ public class ConnectionManager
 	}
 
 	public @NonNull Iterable<@NonNull Node> getTargetNodes(@NonNull EdgeConnection edgeConnection) {
-		Map<@NonNull NavigableEdge, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(edgeConnection);
 		List<@NonNull Node> targetNodes = new ArrayList<>();
-		for (@NonNull NavigableEdge targetEdge : targetEnd2role.keySet()) {
+		for (@NonNull NavigableEdge targetEdge : edgeConnection.getTargetKeys()) {
 			targetNodes.add(targetEdge.getEdgeTarget());
 		}
 		return targetNodes;
 	}
 
 	public @NonNull Iterable<@NonNull Node> getTargetNodes(@NonNull NodeConnection nodeConnection) {
-		Map<@NonNull Node, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(nodeConnection);
-		return targetEnd2role.keySet();
+		return nodeConnection.getTargetKeys();
 	}
 
 	/*	public @NonNull Set<@NonNull Partition> getTargetPartitions(@NonNull Connection connection) {
@@ -1387,7 +1303,7 @@ public class ConnectionManager
 	} */
 	public @NonNull Iterable<@NonNull Partition> getTargetPartitions(@NonNull Connection connection) {
 		List<@NonNull Partition> targetPartitions = new ArrayList<>();
-		for (@NonNull ConnectionEnd target : getTargets(connection).keySet()) {
+		for (@NonNull ConnectionEnd target : connection.getTargetKeys()) {
 			Region region = QVTscheduleUtil.getOwningRegion(target);
 			RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
 			Iterable<@NonNull Partition> partitions = regionAnalysis.getPartitions();
@@ -1407,14 +1323,6 @@ public class ConnectionManager
 			}
 		}
 		return targetPartitions;
-	}
-
-	public @NonNull Map<@NonNull ConnectionEnd, @NonNull ConnectionRole> getTargets(@NonNull Connection connection) {
-		//		if (connection instanceof NodeConnection) {
-		//			return (Map<@NonNull CE, @NonNull ConnectionRole>) getTargets((NodeConnection)connection);
-		//		}
-		Map<@NonNull ConnectionEnd, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(connection);
-		return targetEnd2role;
 	}
 
 	//	public static @NonNull Map<@NonNull Node, @NonNull ConnectionRole> getTargets(@NonNull EdgeConnection edgeConnection) {
@@ -1499,14 +1407,14 @@ public class ConnectionManager
 
 	public boolean isEdge2Edge(@NonNull EdgeConnection edgeConnection) {
 		List<NavigableEdge> sourceEnds = QVTscheduleUtil.getSourceEnds(edgeConnection);
-		Map<@NonNull NavigableEdge, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(edgeConnection);
-		return (sourceEnds.size() == 1) && (targetEnd2role.size() == 1);
+		Set<@NonNull NavigableEdge> targetEdges = edgeConnection.getTargetKeys();
+		return (sourceEnds.size() == 1) && (targetEdges.size() == 1);
 	}
 
 	public boolean isNode2Node(@NonNull NodeConnection nodeConnection) {
 		List<Node> sourceEnds = QVTscheduleUtil.getSourceEnds(nodeConnection);
-		Map<@NonNull Node, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(nodeConnection);
-		return (sourceEnds.size() == 1) && (targetEnd2role.size() == 1);
+		Set<@NonNull Node> targetNodes = nodeConnection.getTargetKeys();
+		return (sourceEnds.size() == 1) && (targetNodes.size() == 1);
 	}
 
 	//	public static @NonNull Map<@NonNull Node, @NonNull ConnectionRole> getTargets(@NonNull EdgeConnection edgeConnection) {
@@ -1529,10 +1437,10 @@ public class ConnectionManager
 			if (Iterables.contains(getIncomingPassedConnections(targetPartition), connection)) {		// FIXME unify cyclic/non-cyclic
 				return true;
 			}
-			Map<@NonNull Node, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role((NodeConnection)connection);
-			for (@NonNull Node targetNode : targetEnd2role.keySet()) {
+			NodeConnection nodeConnection = (NodeConnection)connection;
+			for (@NonNull Node targetNode : nodeConnection.getTargetKeys()) {
 				if (!targetNode.isDependency() && targetPartition.isHead(targetNode)) {
-					ConnectionRole role = targetEnd2role.get(targetNode);
+					ConnectionRole role = nodeConnection.getTargetRole(targetNode);
 					assert role != null;
 					assert role.isPassed();
 					return true;
@@ -1621,8 +1529,7 @@ public class ConnectionManager
 	}
 
 	public boolean isUsed(@NonNull NodeConnection nodeConnection, @NonNull Node targetNode) {
-		Map<@NonNull Node, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(nodeConnection);
-		ConnectionRole targetConnectionRole = targetEnd2role.get(targetNode);
+		ConnectionRole targetConnectionRole = nodeConnection.getTargetRole(targetNode);
 		assert targetConnectionRole != null;
 		return targetConnectionRole.isPreferred();
 	}
@@ -1648,14 +1555,12 @@ public class ConnectionManager
 	} */
 
 	private void removeTarget(@NonNull EdgeConnection edgeConnection, @NonNull NavigableEdge targetEdge) {
-		Map<@NonNull NavigableEdge, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(edgeConnection);
-		ConnectionRole oldRole = targetEnd2role.remove(targetEdge);
+		ConnectionRole oldRole = edgeConnection.removeTarget(targetEdge);
 		assert oldRole != null;
 	}
 
 	public void removeTarget(@NonNull NodeConnection nodeConnection, @NonNull Node targetNode) {
-		Map<@NonNull Node, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(nodeConnection);
-		ConnectionRole oldRole = targetEnd2role.remove(targetNode);
+		ConnectionRole oldRole = nodeConnection.removeTarget(targetNode);
 		assert oldRole != null;
 	}
 
@@ -1675,22 +1580,20 @@ public class ConnectionManager
 				removeTarget(edgeConnection, targetEdge);
 			}
 		}
-		Map<@NonNull NavigableEdge, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(edgeConnection);
-		if (targetEnd2role.isEmpty()) {
-			destroy(edgeConnection);
+		if (edgeConnection.getTargetKeys().isEmpty()) {
+			edgeConnection.destroy();
 		}
 	}
 
 	public void removeTargetRegion(@NonNull NodeConnection nodeConnection, @NonNull Region targetRegion) {
-		Map<@NonNull Node, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(nodeConnection);
-		for (@NonNull Node targetNode : Lists.newArrayList(getTargetNodes(nodeConnection))) {
+		for (@NonNull Node targetNode : Lists.newArrayList(nodeConnection.getTargetKeys())) {
 			if (targetNode.getOwningRegion() == targetRegion) {
 				targetNode.setIncomingConnection(null);
 				removeTarget(nodeConnection, targetNode);
 			}
 		}
-		if (targetEnd2role.isEmpty()) {
-			destroy(nodeConnection);
+		if (nodeConnection.getTargetKeys().isEmpty()) {
+			nodeConnection.destroy();
 		}
 	}
 

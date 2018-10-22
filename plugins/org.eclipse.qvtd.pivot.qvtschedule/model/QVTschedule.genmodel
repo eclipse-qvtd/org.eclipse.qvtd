@@ -116,6 +116,8 @@
     </genClasses>
     <genClasses ecoreClass="QVTschedule.ecore#//EdgeConnection">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//EdgeConnection/referredProperty"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//EdgeConnection/mandatoryTargetEdges"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//EdgeConnection/preferredTargetEdges"/>
     </genClasses>
     <genClasses ecoreClass="QVTschedule.ecore#//EnumLiteralNode">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//EnumLiteralNode/enumValue"/>
@@ -190,6 +192,9 @@
     </genClasses>
     <genClasses ecoreClass="QVTschedule.ecore#//NodeConnection">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//NodeConnection/classDatum"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//NodeConnection/mandatoryTargetNodes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//NodeConnection/passedTargetNodes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//NodeConnection/preferredTargetNodes"/>
     </genClasses>
     <genClasses ecoreClass="QVTschedule.ecore#//NonPartition"/>
     <genClasses ecoreClass="QVTschedule.ecore#//NullLiteralNode"/>

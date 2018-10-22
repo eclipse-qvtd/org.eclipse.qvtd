@@ -98,8 +98,8 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 						appendEdge(sourceRegion, connection, connection);
 					}
 				}
-				for (@NonNull ConnectionEnd target : connectionManager.getTargets(connection).keySet()) {
-					ConnectionRole role = connectionManager.getTargets(connection).get(target);
+				for (@NonNull ConnectionEnd target : connection.getTargetKeys()) {
+					ConnectionRole role = connection.getTargetRole(target);
 					assert role != null;
 					Region targetRegion = scheduledRegion.getNormalizedRegion(QVTscheduleUtil.getOwningRegion(target));
 					if (targetRegion != null) {
@@ -164,7 +164,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 					Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
 					Iterable<@NonNull MappingPartition> partitions = null;
 					if (sourceRegion instanceof MappingRegion) {
-						partitions = ((MappingRegion)sourceRegion).getMappingPartitions();
+						partitions = QVTscheduleUtil.getMappingPartitions(((MappingRegion)sourceRegion));
 					}
 					if (partitions != null) {
 						for (@NonNull Partition sourcePartition : partitions) {
@@ -175,7 +175,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 									sourceNode = QVTscheduleUtil.getTargetNode((Edge) sourceEnd);
 								}
 								else {
-									sourceNode = (Node) sourceEnd;
+									sourceNode = (@NonNull Node) sourceEnd;
 								}
 								setScope(sourcePartition);
 								appendEdge(sourceNode, connection, connection);
@@ -198,14 +198,14 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 						}
 					}
 				}
-				for (@NonNull ConnectionEnd target : connectionManager.getTargets(connection).keySet()) {
-					ConnectionRole connectionRole = connectionManager.getTargets(connection).get(target);
+				for (@NonNull ConnectionEnd target : connection.getTargetKeys()) {
+					ConnectionRole connectionRole = connection.getTargetRole(target);
 					assert connectionRole != null;
 					Region targetRegion = scheduledRegion.getNormalizedRegion(QVTscheduleUtil.getOwningRegion(target));
 					if (targetRegion != null) {
 						Iterable<@NonNull MappingPartition> partitions = null;
 						if (targetRegion instanceof MappingRegion) {
-							partitions = ((MappingRegion)targetRegion).getMappingPartitions();
+							partitions = QVTscheduleUtil.getMappingPartitions((MappingRegion)targetRegion);
 						}
 						if (partitions != null) {
 							for (@NonNull Partition targetPartition : partitions) {
@@ -241,8 +241,8 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 				for (@NonNull Node sourceNode : connectionManager.getSourceNodes(connection)) {
 					appendEdge(sourceNode, connection, connection);
 				}
-				for (@NonNull ConnectionEnd target : connectionManager.getTargets(connection).keySet()) {
-					ConnectionRole role = connectionManager.getTargets(connection).get(target);
+				for (@NonNull ConnectionEnd target : connection.getTargetKeys()) {
+					ConnectionRole role = connection.getTargetRole(target);
 					assert role != null;
 					if (target instanceof Node) {
 						appendEdge(connection, role, (Node)target);

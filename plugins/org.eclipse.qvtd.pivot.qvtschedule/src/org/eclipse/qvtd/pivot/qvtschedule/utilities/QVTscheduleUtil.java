@@ -588,8 +588,16 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(node.getIncomingEdges());
 	}
 
-	public static List<@NonNull NodeConnection> getIntermediateConnections(@NonNull Partition partition) {
+	public static @NonNull List<@NonNull NodeConnection> getIntermediateConnections(@NonNull Partition partition) {
 		return ClassUtil.nullFree(partition.getIntermediateConnections());
+	}
+
+	public static @NonNull List<@NonNull Partition> getIntermediatePartitions(@NonNull NodeConnection connection) {
+		return ClassUtil.nullFree(connection.getIntermediatePartitions());
+	}
+
+	public static @NonNull Iterable<@NonNull MappingPartition> getMappingPartitions(@NonNull MappingRegion mappingRegion) {
+		return ClassUtil.nullFree(mappingRegion.getMappingPartitions());
 	}
 
 	public static @NonNull String getName(@NonNull Nameable nameable) {

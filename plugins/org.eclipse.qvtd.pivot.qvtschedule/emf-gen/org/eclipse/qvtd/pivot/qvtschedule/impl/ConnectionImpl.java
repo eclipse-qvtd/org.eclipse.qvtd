@@ -17,7 +17,6 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -597,6 +596,9 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 
 	@Override
 	public void destroy() {
+		setCommonPartition(null);
+		getIntermediatePartitions().clear();
+		getSourceEnds().clear();
 		setOwningScheduledRegion(null);
 	}
 
@@ -657,4 +659,15 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 		return getSymbolName();
 	}
 
+	//	protected abstract @NonNull Map<? extends @NonNull ConnectionEnd, @NonNull ConnectionRole> getTargetEnd2Role();
+
+	//	@Override
+	//	public @NonNull Set<? extends @NonNull ConnectionEnd> getTargetKeys() {
+	//		return getTargetEnd2Role().keySet();
+	//	}
+
+	//	@Override
+	//	public @NonNull ConnectionRole getTargetRole(@NonNull ConnectionEnd connectionEnd) {
+	//		return ClassUtil.nonNullState(getTargetEnd2Role().get(connectionEnd));
+	//	}
 } //ConnectionImpl

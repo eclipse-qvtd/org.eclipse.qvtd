@@ -556,7 +556,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		}
 		if (redundantConnections != null) {
 			for (@NonNull Connection redundantConnection : redundantConnections) {
-				connectionManager.destroy(redundantConnection);
+				redundantConnection.destroy();
 				//				connectionManager.removeTargetRegion(redundantConnection, scheduleManager.wipGetRegion(partition));
 			}
 		}

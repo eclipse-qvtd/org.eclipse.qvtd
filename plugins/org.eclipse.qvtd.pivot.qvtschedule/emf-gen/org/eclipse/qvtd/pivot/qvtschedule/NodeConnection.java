@@ -10,6 +10,12 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtschedule;
 
+import java.util.List;
+import java.util.Set;
+
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+
 /**
  * @generated
  */
@@ -41,7 +47,62 @@ public interface NodeConnection extends Connection
 	void setClassDatum(ClassDatum value);
 
 	/**
+	 * Returns the value of the '<em><b>Mandatory Target Nodes</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Node}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Mandatory Target Nodes</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Mandatory Target Nodes</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNodeConnection_MandatoryTargetNodes()
+	 * @model ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NodeConnection!mandatoryTargetNodes'"
+	 * @generated
+	 */
+	List<Node> getMandatoryTargetNodes();
+	/**
+	 * Returns the value of the '<em><b>Passed Target Nodes</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Node}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Passed Target Nodes</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Passed Target Nodes</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNodeConnection_PassedTargetNodes()
+	 * @model ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NodeConnection!passedTargetNodes'"
+	 * @generated
+	 */
+	List<Node> getPassedTargetNodes();
+	/**
+	 * Returns the value of the '<em><b>Preferred Target Nodes</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Node}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Preferred Target Nodes</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Preferred Target Nodes</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getNodeConnection_PreferredTargetNodes()
+	 * @model ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!NodeConnection!preferredTargetNodes'"
+	 * @generated
+	 */
+	List<Node> getPreferredTargetNodes();
+	/**
 	 * Return true if this connection is for an available value.
 	 */
 	boolean isUsed();
+
+	@Override
+	@NonNull Set<@NonNull Node> getTargetKeys();
+
+	@Nullable ConnectionRole removeTarget(@NonNull Node targetNode);
+
+	ConnectionRole setTargetRole(@NonNull Node targetNode, @NonNull ConnectionRole newConnectionRole);
 }

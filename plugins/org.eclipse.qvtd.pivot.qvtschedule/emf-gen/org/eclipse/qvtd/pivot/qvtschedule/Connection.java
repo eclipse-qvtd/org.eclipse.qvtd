@@ -15,8 +15,10 @@
 package org.eclipse.qvtd.pivot.qvtschedule;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphEdge;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
@@ -200,6 +202,8 @@ public interface Connection extends Element, Symbolable, org.eclipse.ocl.pivot.u
 	boolean addPass(int pass);
 	int getLastPass();
 	@NonNull List<@NonNull Integer> getPasses();
+	@NonNull Set<? extends @NonNull ConnectionEnd> getTargetKeys();
+	@Nullable ConnectionRole getTargetRole(@NonNull ConnectionEnd connectionEnd);
 
 	boolean isMandatory();
 
@@ -207,5 +211,6 @@ public interface Connection extends Element, Symbolable, org.eclipse.ocl.pivot.u
 	 * Return true if this connection passes a value to a region head.
 	 */
 	boolean isPassed();
+
 
 } // Connection

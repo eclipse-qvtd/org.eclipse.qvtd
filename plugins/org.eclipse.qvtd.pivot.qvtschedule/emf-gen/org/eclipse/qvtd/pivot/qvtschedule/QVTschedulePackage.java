@@ -5085,13 +5085,31 @@ public interface QVTschedulePackage extends EPackage {
 	int EDGE_CONNECTION__REFERRED_PROPERTY = CONNECTION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Mandatory Target Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE_CONNECTION__MANDATORY_TARGET_EDGES = CONNECTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Preferred Target Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE_CONNECTION__PREFERRED_TARGET_EDGES = CONNECTION_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Edge Connection</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EDGE_CONNECTION_FEATURE_COUNT = CONNECTION_FEATURE_COUNT + 1;
+	int EDGE_CONNECTION_FEATURE_COUNT = CONNECTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -8135,13 +8153,40 @@ public interface QVTschedulePackage extends EPackage {
 	int NODE_CONNECTION__CLASS_DATUM = CONNECTION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Mandatory Target Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_CONNECTION__MANDATORY_TARGET_NODES = CONNECTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Passed Target Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_CONNECTION__PASSED_TARGET_NODES = CONNECTION_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Preferred Target Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_CONNECTION__PREFERRED_TARGET_NODES = CONNECTION_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Node Connection</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NODE_CONNECTION_FEATURE_COUNT = CONNECTION_FEATURE_COUNT + 1;
+	int NODE_CONNECTION_FEATURE_COUNT = CONNECTION_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -13010,6 +13055,28 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getEdgeConnection_ReferredProperty();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection#getMandatoryTargetEdges <em>Mandatory Target Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Mandatory Target Edges</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection#getMandatoryTargetEdges()
+	 * @see #getEdgeConnection()
+	 * @generated
+	 */
+	EReference getEdgeConnection_MandatoryTargetEdges();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection#getPreferredTargetEdges <em>Preferred Target Edges</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Preferred Target Edges</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection#getPreferredTargetEdges()
+	 * @see #getEdgeConnection()
+	 * @generated
+	 */
+	EReference getEdgeConnection_PreferredTargetEdges();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.EnumLiteralNode <em>Enum Literal Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -13994,6 +14061,39 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getNodeConnection_ClassDatum();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.NodeConnection#getMandatoryTargetNodes <em>Mandatory Target Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Mandatory Target Nodes</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.NodeConnection#getMandatoryTargetNodes()
+	 * @see #getNodeConnection()
+	 * @generated
+	 */
+	EReference getNodeConnection_MandatoryTargetNodes();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.NodeConnection#getPassedTargetNodes <em>Passed Target Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Passed Target Nodes</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.NodeConnection#getPassedTargetNodes()
+	 * @see #getNodeConnection()
+	 * @generated
+	 */
+	EReference getNodeConnection_PassedTargetNodes();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.NodeConnection#getPreferredTargetNodes <em>Preferred Target Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Preferred Target Nodes</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.NodeConnection#getPreferredTargetNodes()
+	 * @see #getNodeConnection()
+	 * @generated
+	 */
+	EReference getNodeConnection_PreferredTargetNodes();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.NonPartition <em>Non Partition</em>}'.
@@ -15061,6 +15161,22 @@ public interface QVTschedulePackage extends EPackage {
 		EReference EDGE_CONNECTION__REFERRED_PROPERTY = eINSTANCE.getEdgeConnection_ReferredProperty();
 
 		/**
+		 * The meta object literal for the '<em><b>Mandatory Target Edges</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EDGE_CONNECTION__MANDATORY_TARGET_EDGES = eINSTANCE.getEdgeConnection_MandatoryTargetEdges();
+
+		/**
+		 * The meta object literal for the '<em><b>Preferred Target Edges</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EDGE_CONNECTION__PREFERRED_TARGET_EDGES = eINSTANCE.getEdgeConnection_PreferredTargetEdges();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.EnumLiteralNodeImpl <em>Enum Literal Node</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -15885,6 +16001,30 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference NODE_CONNECTION__CLASS_DATUM = eINSTANCE.getNodeConnection_ClassDatum();
+
+		/**
+		 * The meta object literal for the '<em><b>Mandatory Target Nodes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NODE_CONNECTION__MANDATORY_TARGET_NODES = eINSTANCE.getNodeConnection_MandatoryTargetNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Passed Target Nodes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NODE_CONNECTION__PASSED_TARGET_NODES = eINSTANCE.getNodeConnection_PassedTargetNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Preferred Target Nodes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NODE_CONNECTION__PREFERRED_TARGET_NODES = eINSTANCE.getNodeConnection_PreferredTargetNodes();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NonPartitionImpl <em>Non Partition</em>}' class.

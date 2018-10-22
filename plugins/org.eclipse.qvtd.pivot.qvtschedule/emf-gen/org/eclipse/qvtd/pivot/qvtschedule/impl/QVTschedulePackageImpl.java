@@ -1417,6 +1417,26 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
+	public EReference getEdgeConnection_MandatoryTargetEdges() {
+		return (EReference)edgeConnectionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getEdgeConnection_PreferredTargetEdges() {
+		return (EReference)edgeConnectionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getEnumLiteralNode() {
 		return enumLiteralNodeEClass;
 	}
@@ -2347,6 +2367,36 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
+	public EReference getNodeConnection_MandatoryTargetNodes() {
+		return (EReference)nodeConnectionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getNodeConnection_PassedTargetNodes() {
+		return (EReference)nodeConnectionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getNodeConnection_PreferredTargetNodes() {
+		return (EReference)nodeConnectionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getNonPartition() {
 		return nonPartitionEClass;
 	}
@@ -2888,6 +2938,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		edgeConnectionEClass = createEClass(EDGE_CONNECTION);
 		createEReference(edgeConnectionEClass, EDGE_CONNECTION__REFERRED_PROPERTY);
+		createEReference(edgeConnectionEClass, EDGE_CONNECTION__MANDATORY_TARGET_EDGES);
+		createEReference(edgeConnectionEClass, EDGE_CONNECTION__PREFERRED_TARGET_EDGES);
 
 		enumLiteralNodeEClass = createEClass(ENUM_LITERAL_NODE);
 		createEReference(enumLiteralNodeEClass, ENUM_LITERAL_NODE__ENUM_VALUE);
@@ -2971,6 +3023,9 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		nodeConnectionEClass = createEClass(NODE_CONNECTION);
 		createEReference(nodeConnectionEClass, NODE_CONNECTION__CLASS_DATUM);
+		createEReference(nodeConnectionEClass, NODE_CONNECTION__MANDATORY_TARGET_NODES);
+		createEReference(nodeConnectionEClass, NODE_CONNECTION__PASSED_TARGET_NODES);
+		createEReference(nodeConnectionEClass, NODE_CONNECTION__PREFERRED_TARGET_NODES);
 
 		nonPartitionEClass = createEClass(NON_PARTITION);
 
@@ -3287,6 +3342,8 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		initEClass(edgeConnectionEClass, EdgeConnection.class, "EdgeConnection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEdgeConnection_ReferredProperty(), thePivotPackage.getProperty(), null, "referredProperty", null, 1, 1, EdgeConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getEdgeConnection_MandatoryTargetEdges(), this.getNavigableEdge(), null, "mandatoryTargetEdges", null, 0, -1, EdgeConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getEdgeConnection_PreferredTargetEdges(), this.getNavigableEdge(), null, "preferredTargetEdges", null, 0, -1, EdgeConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(enumLiteralNodeEClass, EnumLiteralNode.class, "EnumLiteralNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEnumLiteralNode_EnumValue(), thePivotPackage.getEnumerationLiteral(), null, "enumValue", null, 1, 1, EnumLiteralNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3370,6 +3427,9 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 
 		initEClass(nodeConnectionEClass, NodeConnection.class, "NodeConnection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNodeConnection_ClassDatum(), this.getClassDatum(), null, "classDatum", null, 1, 1, NodeConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getNodeConnection_MandatoryTargetNodes(), this.getNode(), null, "mandatoryTargetNodes", null, 0, -1, NodeConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getNodeConnection_PassedTargetNodes(), this.getNode(), null, "passedTargetNodes", null, 0, -1, NodeConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getNodeConnection_PreferredTargetNodes(), this.getNode(), null, "preferredTargetNodes", null, 0, -1, NodeConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(nonPartitionEClass, NonPartition.class, "NonPartition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -3516,10 +3576,10 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	protected void createEcoreAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this,
-		   source,
-		   new String[] {
-		   });
+		(this,
+			source,
+			new String[] {
+		});
 	}
 
 	/**
