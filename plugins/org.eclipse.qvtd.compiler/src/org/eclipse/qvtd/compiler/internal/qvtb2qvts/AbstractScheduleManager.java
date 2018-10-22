@@ -60,7 +60,6 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
-import org.eclipse.qvtd.compiler.internal.utilities.ToGraphPartitionVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -94,6 +93,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.AbstractToGraphVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphPartitionVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphVisitor;
 
 import com.google.common.collect.Iterables;
@@ -113,9 +113,9 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		public @Nullable String visitEdgeConnection(@NonNull EdgeConnection edgeConnection) {
 			ConnectionManager connectionManager = AbstractScheduleManager.this.connectionManager;
 			assert connectionManager != null;
-			if (connectionManager.isEdge2Edge(edgeConnection)) {
+			if (edgeConnection.isEdge2Edge()) {
 				NavigableEdge sourceEdge = QVTscheduleUtil.getSourceEnds(edgeConnection).iterator().next();
-				NavigableEdge targetEdge = connectionManager.getTargetEdges(edgeConnection).iterator().next();
+				NavigableEdge targetEdge = edgeConnection.getTargetEdges().iterator().next();
 				appendEdge(sourceEdge.getEdgeTarget(), edgeConnection, targetEdge.getEdgeTarget());
 			}
 			else {
@@ -123,7 +123,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 				for (@NonNull NavigableEdge source : QVTscheduleUtil.getSourceEnds(edgeConnection)) {
 					appendEdge(source.getEdgeTarget(), edgeConnection, edgeConnection);
 				}
-				for (@NonNull NavigableEdge target : connectionManager.getTargetEdges(edgeConnection)) {
+				for (@NonNull NavigableEdge target : edgeConnection.getTargetEdges()) {
 					ConnectionRole role = edgeConnection.getTargetRole(target);
 					assert role != null;
 					appendEdge(edgeConnection, role, target.getEdgeTarget());
@@ -136,9 +136,9 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		public @Nullable String visitNodeConnection(@NonNull NodeConnection nodeConnection) {
 			ConnectionManager connectionManager = AbstractScheduleManager.this.connectionManager;
 			assert connectionManager != null;
-			if (connectionManager.isNode2Node(nodeConnection)) {
+			if (nodeConnection.isNode2Node()) {
 				Node sourceNode = QVTscheduleUtil.getSourceEnds(nodeConnection).iterator().next();
-				Node targetNode = connectionManager.getTargetNodes(nodeConnection).iterator().next();
+				Node targetNode = nodeConnection.getTargetNodes().iterator().next();
 				appendEdge(sourceNode, nodeConnection, targetNode);
 			}
 			else {
@@ -146,7 +146,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 				for (@NonNull Node source : QVTscheduleUtil.getSourceEnds(nodeConnection)) {
 					appendEdge(source, nodeConnection, nodeConnection);
 				}
-				for (@NonNull Node target : connectionManager.getTargetNodes(nodeConnection)) {
+				for (@NonNull Node target : nodeConnection.getTargetNodes()) {
 					ConnectionRole role = nodeConnection.getTargetRole(target);
 					assert role != null;
 					appendEdge(nodeConnection, role, target);
@@ -1057,7 +1057,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 				try {
-					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new DOTStringBuilder(), this, true);
+					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new DOTStringBuilder(), true);
 					visitor.visit(graphable);
 					outputStream.write(visitor.toString().getBytes());
 				}
@@ -1084,7 +1084,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 				try {
-					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new GraphMLStringBuilder(), this, true);
+					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new GraphMLStringBuilder(), true);
 					visitor.visit(graphable);
 					outputStream.write(visitor.toString().getBytes());
 				}
@@ -1107,7 +1107,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 				try {
-					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new DOTStringBuilder(), this, false);
+					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new DOTStringBuilder(), false);
 					visitor.visit(region);
 					outputStream.write(visitor.toString().getBytes());
 				}
@@ -1135,7 +1135,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 				try {
-					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new GraphMLStringBuilder(), this, false);
+					AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(new GraphMLStringBuilder(), false);
 					visitor.visit(region);
 					outputStream.write(visitor.toString().getBytes());
 				}

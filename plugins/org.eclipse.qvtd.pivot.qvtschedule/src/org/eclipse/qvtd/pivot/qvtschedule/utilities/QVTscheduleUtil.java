@@ -767,6 +767,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(partition.getRegion());
 	}
 
+	public static @Nullable Role getRole(@NonNull Partition partition, @NonNull ConnectionEnd connectionEnd) {
+		return connectionEnd instanceof Node ? partition.getRole((Node)connectionEnd) : connectionEnd instanceof Edge ? partition.getRole((Edge)connectionEnd) : null;
+	}
+
 	public static List<@NonNull NodeConnection> getRootConnections(@NonNull Partition partition) {
 		return ClassUtil.nullFree(partition.getRootConnections());
 	}

@@ -15,6 +15,8 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 
 /**
  * @generated
@@ -99,10 +101,17 @@ public interface NodeConnection extends Connection
 	 */
 	boolean isUsed();
 
+	void addPassedTargetNode(@NonNull Node targetNode);
+	void addUsedTargetNode(@NonNull Node targetNode, boolean mustBeLater);
+	@Nullable Node basicGetSource(@NonNull Partition sourcePartition);
 	@Override
-	@NonNull Set<@NonNull Node> getTargetKeys();
-
+	@NonNull Node getSource(@NonNull Partition sourcePartition);
+	@NonNull Type getSourcesType(@NonNull IdResolver idResolver);
+	@Override
+	@NonNull Set<@NonNull Node> getTargetNodes();
+	boolean isNode2Node();
+	boolean isUsed(@NonNull Node targetNode);
+	@Nullable ConnectionRole putTargetRole(@NonNull Node targetNode, @NonNull ConnectionRole newConnectionRole);
 	@Nullable ConnectionRole removeTarget(@NonNull Node targetNode);
-
-	ConnectionRole setTargetRole(@NonNull Node targetNode, @NonNull ConnectionRole newConnectionRole);
+	void setCommonPartition(@NonNull Partition commonPartition, @NonNull List<@NonNull Partition> intermediatePartitions);
 }

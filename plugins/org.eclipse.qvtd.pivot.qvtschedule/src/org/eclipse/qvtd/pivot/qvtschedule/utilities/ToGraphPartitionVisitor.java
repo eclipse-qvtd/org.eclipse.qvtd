@@ -8,13 +8,11 @@
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.compiler.internal.utilities;
+package org.eclipse.qvtd.pivot.qvtschedule.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphElement;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
@@ -33,28 +31,25 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.AbstractToGraphVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
-import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
  * ToGraphPartitionVisitor refines ToGraphVisitor to display <<success>> nodes in the partition-specific form.
  */
 public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 {
-	public static @NonNull AbstractToGraphVisitor createVisitor(@NonNull GraphStringBuilder s, @NonNull ScheduleManager scheduleManager, boolean showInternals) {
+	public static @NonNull AbstractToGraphVisitor createVisitor(@NonNull GraphStringBuilder s, boolean showInternals) {
 		if (showInternals) {
-			return new ShowInternals(s, scheduleManager);
+			return new ShowInternals(s);
 		}
 		else {
-			return new HideInternals(s, scheduleManager);
+			return new HideInternals(s);
 		}
 	}
 
 	private static class HideInternals extends ToGraphPartitionVisitor
 	{
-		protected HideInternals(@NonNull GraphStringBuilder context, @NonNull ScheduleManager scheduleManager) {
-			super(context, scheduleManager);
+		protected HideInternals(@NonNull GraphStringBuilder context) {
+			super(context);
 		}
 
 		@Override
@@ -74,17 +69,16 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 
 		@Override
 		public @Nullable String visitConnection(@NonNull Connection connection) {
-			ConnectionManager connectionManager = scheduleManager.getConnectionManager();
 			if (hasPartitions) {			// Partition-to-Partition within ScheduledRegion
 				appendNode(connection);
-				for (@NonNull Partition sourcePartition : connectionManager.getSourcePartitions(connection)) {
+				for (@NonNull Partition sourcePartition : connection.getSourcePartitions()) {
 					appendEdge(sourcePartition, connection, connection);
 				}
-				Iterable<@NonNull Partition> targetPartitions = connectionManager.getTargetPartitions(connection);
+				Iterable<@NonNull Partition> targetPartitions = connection.getTargetPartitions();
 				for (@NonNull Partition targetPartition : targetPartitions) {
-					Iterable<@NonNull ConnectionEnd> connectionEnds = connectionManager.getTargetConnectionEnds(connection, targetPartition);
+					Iterable<@NonNull ConnectionEnd> connectionEnds = connection.getTargetConnectionEnds(targetPartition);
 					for (@NonNull ConnectionEnd connectionEnd : connectionEnds) {
-						ConnectionRole connectionRole = connectionManager.getTargetConnectionRole(connection, targetPartition, connectionEnd);
+						ConnectionRole connectionRole = connection.getTargetConnectionRole(targetPartition, connectionEnd);
 						appendEdge(connection, connectionRole, targetPartition);
 					}
 				}
@@ -92,13 +86,13 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 			else {							// Region-to-Region within ScheduledRegion
 				ScheduledRegion scheduledRegion = connection.getOwningScheduledRegion();
 				appendNode(connection);
-				for (@NonNull Node sourceNode : connectionManager.getSourceNodes(connection)) {
+				for (@NonNull Node sourceNode : connection.getSourceNodes()) {
 					Region sourceRegion = scheduledRegion.getNormalizedRegion(QVTscheduleUtil.getOwningRegion(sourceNode));
 					if (sourceRegion != null) {
 						appendEdge(sourceRegion, connection, connection);
 					}
 				}
-				for (@NonNull ConnectionEnd target : connection.getTargetKeys()) {
+				for (@NonNull ConnectionEnd target : connection.getTargetEnds()) {
 					ConnectionRole role = connection.getTargetRole(target);
 					assert role != null;
 					Region targetRegion = scheduledRegion.getNormalizedRegion(QVTscheduleUtil.getOwningRegion(target));
@@ -113,8 +107,8 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 
 	private static class ShowInternals extends ToGraphPartitionVisitor
 	{
-		protected ShowInternals(@NonNull GraphStringBuilder context, @NonNull ScheduleManager scheduleManager) {
-			super(context, scheduleManager);
+		protected ShowInternals(@NonNull GraphStringBuilder context) {
+			super(context);
 		}
 
 		@Override
@@ -155,7 +149,6 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 
 		@Override
 		public @Nullable String visitConnection(@NonNull Connection connection) {
-			ConnectionManager connectionManager = scheduleManager.getConnectionManager();
 			if (hasPartitions) {			// Node-to-Node within Partition within ScheduledRegion
 				setScope(null);
 				ScheduledRegion scheduledRegion = connection.getOwningScheduledRegion();
@@ -168,7 +161,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 					}
 					if (partitions != null) {
 						for (@NonNull Partition sourcePartition : partitions) {
-							Role sourceRole = connectionManager.getRole(sourcePartition, sourceEnd);
+							Role sourceRole = QVTscheduleUtil.getRole(sourcePartition, sourceEnd);
 							if ((sourceRole != null) && !sourceRole.isAwaited()) { // (sourceRole.isNew() || sourceRole.isLoaded())) {
 								Node sourceNode;
 								if (sourceEnd instanceof Edge) {
@@ -198,7 +191,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 						}
 					}
 				}
-				for (@NonNull ConnectionEnd target : connection.getTargetKeys()) {
+				for (@NonNull ConnectionEnd target : connection.getTargetEnds()) {
 					ConnectionRole connectionRole = connection.getTargetRole(target);
 					assert connectionRole != null;
 					Region targetRegion = scheduledRegion.getNormalizedRegion(QVTscheduleUtil.getOwningRegion(target));
@@ -238,10 +231,10 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 			}
 			else {							// Node-to-Node within Region within ScheduledRegion
 				appendNode(connection);
-				for (@NonNull Node sourceNode : connectionManager.getSourceNodes(connection)) {
+				for (@NonNull Node sourceNode : connection.getSourceNodes()) {
 					appendEdge(sourceNode, connection, connection);
 				}
-				for (@NonNull ConnectionEnd target : connection.getTargetKeys()) {
+				for (@NonNull ConnectionEnd target : connection.getTargetEnds()) {
 					ConnectionRole role = connection.getTargetRole(target);
 					assert role != null;
 					if (target instanceof Node) {
@@ -256,13 +249,11 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 		}
 	}
 
-	protected final @NonNull ScheduleManager scheduleManager;
 	protected boolean hasPartitions = false;
 	protected @Nullable Partition partition = null;
 
-	protected ToGraphPartitionVisitor(@NonNull GraphStringBuilder context, @NonNull ScheduleManager scheduleManager) {
+	protected ToGraphPartitionVisitor(@NonNull GraphStringBuilder context) {
 		super(context);
-		this.scheduleManager = scheduleManager;
 	}
 
 	@Override
@@ -413,7 +404,8 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 
 	@Override
 	public @Nullable String visitScheduledRegion(@NonNull ScheduledRegion scheduledRegion) {
-		hasPartitions = scheduleManager.getTransformationAnalysis(scheduledRegion).basicGetRootPartitionAnalysis() != null;
+		RootPartition rootPartition = scheduledRegion.getOwnedRootPartition();
+		hasPartitions = rootPartition != null;
 		context.setLabel(scheduledRegion.getName());
 		context.setColor(QVTscheduleConstants.REGION_COLOR);
 		context.pushCluster();

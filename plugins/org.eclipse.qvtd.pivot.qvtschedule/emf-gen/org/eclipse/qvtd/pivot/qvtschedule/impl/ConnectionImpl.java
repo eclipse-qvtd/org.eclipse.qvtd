@@ -16,7 +16,12 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -35,11 +40,19 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+
+import com.google.common.collect.Iterables;
 
 /**
  * <!-- begin-user-doc -->
@@ -659,15 +672,119 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 		return getSymbolName();
 	}
 
-	//	protected abstract @NonNull Map<? extends @NonNull ConnectionEnd, @NonNull ConnectionRole> getTargetEnd2Role();
+	protected static @NonNull Iterable<@NonNull MappingPartition> getRegionPartitions(@NonNull Region region) {
+		Iterable<@NonNull MappingPartition> sourceRegionPartitions;
+		if (region instanceof LoadingRegion) {
+			sourceRegionPartitions = Collections.singletonList(((LoadingRegion)region).getLoadingPartition());
+		}
+		else if (region instanceof MappingRegion) {
+			sourceRegionPartitions = ((MappingRegion)region).getMappingPartitions();
+		}
+		else {
+			throw new UnsupportedOperationException();
+		}
+		return sourceRegionPartitions;
+	}
 
-	//	@Override
-	//	public @NonNull Set<? extends @NonNull ConnectionEnd> getTargetKeys() {
-	//		return getTargetEnd2Role().keySet();
-	//	}
+	@Override
+	public @NonNull ConnectionEnd getSource(@NonNull Partition sourcePartition) {
+		@Nullable ConnectionEnd theSourceEnd = null;
+		for (@NonNull ConnectionEnd sourceEnd : QVTscheduleUtil.getSourceEnds(this)) {
+			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
+			Iterable<@NonNull MappingPartition> sourceRegionPartitions = getRegionPartitions(sourceRegion);
+			if (Iterables.contains(sourceRegionPartitions, sourcePartition)) {
+				Role sourceRole = QVTscheduleUtil.getRole(sourcePartition, sourceEnd);
+				if ((sourceRole != null) && !sourceRole.isAwaited()) { //(sourceRole.isNew() || sourceRole.isLoaded())) {
+					assert theSourceEnd == null;
+					theSourceEnd = sourceEnd;
+				}
+			}
+		}
+		assert theSourceEnd != null;
+		return theSourceEnd;
+	}
 
-	//	@Override
-	//	public @NonNull ConnectionRole getTargetRole(@NonNull ConnectionEnd connectionEnd) {
-	//		return ClassUtil.nonNullState(getTargetEnd2Role().get(connectionEnd));
-	//	}
+	@Override
+	public @NonNull Iterable<@NonNull Partition> getSourcePartitions() {
+		Set<@NonNull Partition> sourcePartitions = new HashSet<>();
+		for (@NonNull ConnectionEnd sourceEnd : QVTscheduleUtil.getSourceEnds(this)) {
+			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
+			Iterable<@NonNull MappingPartition> sourceRegionPartitions = getRegionPartitions(sourceRegion);
+			for (@NonNull Partition sourcePartition : sourceRegionPartitions) {
+				Role sourceRole = QVTscheduleUtil.getRole(sourcePartition, sourceEnd);
+				if ((sourceRole != null) && !sourceRole.isAwaited()) { // (sourceRole.isNew() || sourceRole.isLoaded())) {
+					sourcePartitions.add(sourcePartition);
+				}
+			}
+		}
+		return sourcePartitions;
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull ConnectionEnd> getTargetConnectionEnds(@NonNull Partition targetPartition) {
+		List<@NonNull ConnectionEnd> targetConnectionEnds = new ArrayList<>();
+		for (@NonNull ConnectionEnd targetConnectionEnd : getTargetEnds()) {
+			//	Region region = QVTscheduleUtil.getOwningRegion(targetConnectionEnd);
+			//	RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
+			//	Iterable<@NonNull Partition> partitions = regionAnalysis.getPartitions();
+			//	for (@NonNull Partition partition : partitions) {
+			Role role = QVTscheduleUtil.getRole(targetPartition, targetConnectionEnd);
+			if ((role != null) && role.isOld()) {
+				targetConnectionEnds.add(targetConnectionEnd);
+			}
+			//	}
+		}
+		return targetConnectionEnds;
+	}
+
+	@Override
+	public @NonNull ConnectionRole getTargetConnectionRole(@NonNull Partition targetPartition, @NonNull ConnectionEnd connectionEnd) {
+		ConnectionRole connectionRole = getTargetRole(connectionEnd);
+		assert connectionRole != null;
+		if (connectionRole.isPassed()) {
+			boolean isHead = targetPartition.isHead(connectionEnd);
+			if (!isHead) {
+				connectionRole = ConnectionRole.PREFERRED_NODE;
+			}
+		}
+		return connectionRole;
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull Partition> getTargetPartitions() {
+		List<@NonNull Partition> targetPartitions = new ArrayList<>();
+		for (@NonNull ConnectionEnd target : getTargetEnds()) {
+			Region region = QVTscheduleUtil.getOwningRegion(target);
+			Iterable<@NonNull MappingPartition> partitions = getRegionPartitions(region);
+			for (@NonNull Partition partition : partitions) {
+				Role role = QVTscheduleUtil.getRole(partition, target);
+				if ((role != null) && role.isOld() && !targetPartitions.contains(partition)) {
+					boolean skipPartionedHead = false;
+					if (target instanceof Node) {
+						if (((Node)target).isHead() && !partition.isHead(target)) {
+							skipPartionedHead = true;
+						}
+					}
+					if (!skipPartionedHead) {
+						targetPartitions.add(partition);
+					}
+				}
+			}
+		}
+		return targetPartitions;
+	}
+
+	public boolean isRegion2Region(@NonNull Map<@NonNull Region, @NonNull Integer> sourceRegion2count, @NonNull Map<@NonNull Region, @NonNull List<@NonNull ConnectionRole>> targetRegion2roles) {
+		return (sourceRegion2count.size() == 1) && (targetRegion2roles.size() == 1) && (targetRegion2roles.values().iterator().next().size() == 1); //(targetEnd2role.size() == 1);
+	}
+
+	protected void mergeRole(@NonNull ConnectionRole connectionRoleEnum) {
+		//		assert connectionRole != null;
+		if (getConnectionRole() == ConnectionRole.UNDEFINED) {
+			setConnectionRole(connectionRoleEnum);
+		}
+		else if (getConnectionRole() != connectionRoleEnum) {
+			setConnectionRole(getConnectionRole().merge(connectionRoleEnum));
+		}
+	}
 } //ConnectionImpl

@@ -28,14 +28,22 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
@@ -342,6 +350,47 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 	private final @NonNull Map<@NonNull Node, @NonNull ConnectionRole> targetEnd2role = new HashMap<>();
 
 	@Override
+	public void addPassedTargetNode(@NonNull Node targetNode) {
+		mergeRole(ConnectionRole.PASSED);
+		ConnectionRole targetRole = getTargetRole(targetNode);
+		assert targetRole == null;
+		putTargetRole(targetNode, ConnectionRole.PASSED);
+		targetNode.setIncomingConnection(this);
+		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
+	}
+
+	@Override
+	public void addUsedTargetNode(@NonNull Node targetNode, boolean mustBeLater) {
+		ConnectionRole newConnectionRole = mustBeLater ? ConnectionRole.MANDATORY_NODE : ConnectionRole.PREFERRED_NODE;
+		ConnectionRole oldConnectionRole = getTargetRole(targetNode);
+		if ((oldConnectionRole != null) && (oldConnectionRole != newConnectionRole)) {
+			newConnectionRole = newConnectionRole.merge(oldConnectionRole);
+		}
+		mergeRole(newConnectionRole);
+		putTargetRole(targetNode, newConnectionRole);
+		assert targetNode.getIncomingConnection() == null;
+		targetNode.setIncomingConnection(this);
+		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
+	}
+
+	@Override
+	public @Nullable Node basicGetSource(@NonNull Partition sourcePartition) {
+		Node sourceNode = null;
+		for (@NonNull Node sourceEnd : QVTscheduleUtil.getSourceEnds(this)) {
+			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
+			Iterable<@NonNull MappingPartition> sourceRegionPartitions = getRegionPartitions(sourceRegion);
+			if (Iterables.contains(sourceRegionPartitions, sourcePartition)) {
+				Role sourceRole = QVTscheduleUtil.getRole(sourcePartition, sourceEnd);
+				if ((sourceRole != null) && !sourceRole.isAwaited()) { //(sourceRole.isNew() || sourceRole.isLoaded())) {
+					assert sourceNode == null;
+					sourceNode = sourceEnd;
+				}
+			}
+		}
+		return sourceNode;
+	}
+
+	@Override
 	public void destroy() {
 		for (@NonNull Node sourceNode : QVTscheduleUtil.getSourceEnds(this)) {
 			assert Iterables.contains(QVTscheduleUtil.getSourceEnds(this), sourceNode);
@@ -360,13 +409,97 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 	}
 
 	@Override
-	public @NonNull Set<@NonNull Node> getTargetKeys() {
+	public @NonNull Node getSource(@NonNull Partition sourcePartition) {
+		return (Node) super.getSource(sourcePartition);
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull Node> getSourceNodes() {
+		return QVTscheduleUtil.getSourceEnds(this);
+	}
+
+	@Override
+	public @NonNull Type getSourcesType(@NonNull IdResolver idResolver) {
+		//		System.out.println("commonType of " + this);
+		Type commonType = null;
+		for (@NonNull Node node : QVTscheduleUtil.getSourceEnds(this)) {
+			Type nodeType = node.getCompleteClass().getPrimaryClass();
+			if (nodeType instanceof CollectionType) {
+				nodeType = ((CollectionType)nodeType).getElementType();		// FIXME needed for composed source nodes
+				assert nodeType != null;
+			}
+			//			System.out.println("  nodeType " + nodeType);
+			//			CompleteEnvironment environment = idResolver.getEnvironment();
+			//			if (!(nodeType instanceof CollectionType)) {		// RealizedVariable accumulated on Connection
+			//				nodeType = isOrdered() ? environment.getOrderedSetType(nodeType, true, null, null) : environment.getSetType(nodeType, true, null, null);
+			//			}
+			if (commonType == null) {
+				commonType = nodeType;
+			}
+			else if (nodeType != commonType) {
+				commonType = commonType.getCommonType(idResolver, nodeType);
+			}
+		}
+		//		System.out.println("=> " + commonType);
+		assert commonType != null;
+		return commonType;
+	}
+
+	@Override
+	public @NonNull Set<@NonNull Node> getTargetEnds() {
+		return targetEnd2role.keySet();
+	}
+
+	@Override
+	public @NonNull Set<@NonNull Node> getTargetNodes() {
 		return targetEnd2role.keySet();
 	}
 
 	@Override
 	public @Nullable ConnectionRole getTargetRole(@NonNull ConnectionEnd connectionEnd) {
 		return targetEnd2role.get(connectionEnd);
+	}
+
+	@Override
+	public boolean isNode2Node() {
+		List<Node> sourceEnds = QVTscheduleUtil.getSourceEnds(this);
+		Set<@NonNull Node> targetNodes = getTargetNodes();
+		return (sourceEnds.size() == 1) && (targetNodes.size() == 1);
+	}
+
+	public boolean isPassed(@NonNull Partition targetPartition) {
+		if (Iterables.contains(targetPartition.getIncomingPassedConnections(), this)) {		// FIXME unify cyclic/non-cyclic
+			return true;
+		}
+		for (@NonNull Node targetNode : getTargetNodes()) {
+			if (!targetNode.isDependency() && targetPartition.isHead(targetNode)) {
+				ConnectionRole role = getTargetRole(targetNode);
+				assert role != null;
+				assert role.isPassed();
+				return true;
+
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isUsed(@NonNull Node targetNode) {
+		ConnectionRole targetConnectionRole = getTargetRole(targetNode);
+		assert targetConnectionRole != null;
+		return targetConnectionRole.isPreferred();
+	}
+
+	@Override
+	public @Nullable ConnectionRole putTargetRole(@NonNull Node targetNode, @NonNull ConnectionRole newConnectionRole) {
+		ConnectionRole oldConnectionRole = targetEnd2role.get(targetNode);
+		switch (newConnectionRole) {
+			case MANDATORY_NODE: getMandatoryTargetNodes().add(targetNode); break;
+			case PASSED: getPassedTargetNodes().add(targetNode); break;
+			case PREFERRED_NODE: getPreferredTargetNodes().add(targetNode); break;
+			default: throw new UnsupportedOperationException(newConnectionRole.toString());
+		}
+		return oldConnectionRole;
 	}
 
 	@Override
@@ -385,20 +518,36 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 		}
 	}
 
-	@Override
-	public ConnectionRole setTargetRole(@NonNull Node targetNode, @NonNull ConnectionRole newConnectionRole) {
-		ConnectionRole oldConnectionRole = targetEnd2role.get(targetNode);
-		switch (newConnectionRole) {
-			case MANDATORY_NODE: getMandatoryTargetNodes().add(targetNode); break;
-			case PASSED: getPassedTargetNodes().add(targetNode); break;
-			case PREFERRED_NODE: getPreferredTargetNodes().add(targetNode); break;
-			default: throw new UnsupportedOperationException(newConnectionRole.toString());
+	/*	@Override
+	public void removeTargetRegion(@NonNull Region targetRegion) {
+		for (@NonNull Node targetNode : Lists.newArrayList(getTargetNodes())) {
+			if (targetNode.getOwningRegion() == targetRegion) {
+				targetNode.setIncomingConnection(null);
+				removeTarget(targetNode);
+			}
 		}
-		return oldConnectionRole;
-	}
+		if (getTargetNodes().isEmpty()) {
+			destroy();
+		}
+	} */
 
-	//	@Override
-	//	public @NonNull Map<@NonNull Node, @NonNull ConnectionRole> getTargetEnd2Role() {
-	//		return targetEnd2role;
-	//	}
+	@Override
+	public void setCommonPartition(@NonNull Partition commonPartition, @NonNull List<@NonNull Partition> intermediatePartitions) {
+		assert getCommonPartition() == null;
+		assert getIntermediatePartitions().isEmpty();
+		setCommonPartition(commonPartition);
+		getIntermediatePartitions().addAll(intermediatePartitions);
+		commonPartition.addRootConnection(this);
+		for (@NonNull Partition intermediatePartition : intermediatePartitions) {
+			intermediatePartition.addIntermediateConnection(this);
+		}
+		if (QVTscheduleConstants.CONNECTION_ROUTING.isActive()) {
+			StringBuilder s = new StringBuilder();
+			s.append(getSymbolName() + " common: " + commonPartition + " intermediate:");
+			for (@NonNull Partition intermediatePartition : intermediatePartitions) {
+				s.append(" " + intermediatePartition);
+			}
+			QVTscheduleConstants.CONNECTION_ROUTING.println(s.toString());
+		}
+	}
 } //NodeConnectionImpl

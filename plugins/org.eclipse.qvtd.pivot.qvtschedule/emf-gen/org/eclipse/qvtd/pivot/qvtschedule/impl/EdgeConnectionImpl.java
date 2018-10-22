@@ -33,12 +33,18 @@ import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -309,6 +315,21 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 	private final @NonNull Map<@NonNull NavigableEdge, @NonNull ConnectionRole> targetEnd2role = new HashMap<>();
 
 	@Override
+	public void addUsedTargetEdge(@NonNull NavigableEdge targetEdge, boolean mustBeLater) {
+		//		if (getSourceRegions().contains(targetEdge.getRegion())) {
+		//			System.out.println("Cyclic dependency arbitrarily ignored: " + this);
+		//			mergeRole(Connections.PREFERRED_EDGE);
+		//			return;
+		//		}
+		mergeRole(mustBeLater ? ConnectionRole.MANDATORY_EDGE : ConnectionRole.PREFERRED_EDGE);
+		ConnectionRole targetRole = getTargetRole(targetEdge);
+		assert targetRole == null;
+		putTargetRole(targetEdge, mustBeLater ? ConnectionRole.MANDATORY_EDGE : ConnectionRole.PREFERRED_EDGE);
+		targetEdge.setIncomingConnection(this);
+		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
+	}
+
+	@Override
 	public void destroy() {
 		for (@NonNull NavigableEdge sourceEdge : QVTscheduleUtil.getSourceEnds(this)) {
 			assert Iterables.contains(QVTscheduleUtil.getSourceEnds(this), sourceEdge);
@@ -326,13 +347,73 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 	}
 
 	@Override
-	public @NonNull Set<@NonNull NavigableEdge> getTargetKeys() {
+	public @NonNull Iterable<@NonNull Node> getSourceNodes() {
+		List<@NonNull Node> sourceNodes = new ArrayList<>();
+		for (@NonNull NavigableEdge sourceEdge : QVTscheduleUtil.getSourceEnds(this)) {
+			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEdge);
+			Iterable<@NonNull MappingPartition> partitions = getRegionPartitions(sourceRegion);
+			if (!Iterables.isEmpty(partitions)) {
+				for (@NonNull Partition sourcePartition : partitions) {
+					Role sourceRole = QVTscheduleUtil.getRole(sourcePartition, sourceEdge);
+					if ((sourceRole != null) &&!sourceRole.isAwaited()) { // (sourceRole.isNew() || sourceRole.isLoaded())) {
+						sourceNodes.add(QVTscheduleUtil.getTargetNode(sourceEdge));
+					}
+				}
+			}
+			else {
+				Role sourceRole = sourceEdge.getEdgeRole();
+				if (!sourceRole.isAwaited()) { //sourceRole.isNew() || sourceRole.isLoaded()) {
+					sourceNodes.add(QVTscheduleUtil.getTargetNode(sourceEdge));
+				}
+			}
+		}
+		return sourceNodes;
+	}
+
+	@Override
+	public @NonNull Set<@NonNull NavigableEdge> getTargetEdges() {
 		return targetEnd2role.keySet();
+	}
+
+	@Override
+	public @NonNull Set<@NonNull NavigableEdge> getTargetEnds() {
+		return targetEnd2role.keySet();
+	}
+
+	@Override
+	public @NonNull Iterable<@NonNull Node> getTargetNodes() {
+		List<@NonNull Node> targetNodes = new ArrayList<>();
+		for (@NonNull NavigableEdge targetEdge : getTargetEdges()) {
+			targetNodes.add(targetEdge.getEdgeTarget());
+		}
+		return targetNodes;
 	}
 
 	@Override
 	public @Nullable ConnectionRole getTargetRole(@NonNull ConnectionEnd connectionEnd) {
 		return targetEnd2role.get(connectionEnd);
+	}
+
+	@Override
+	public boolean isEdge2Edge() {
+		List<NavigableEdge> sourceEnds = QVTscheduleUtil.getSourceEnds(this);
+		Set<@NonNull NavigableEdge> targetEdges = getTargetEdges();
+		return (sourceEnds.size() == 1) && (targetEdges.size() == 1);
+	}
+
+	public boolean isPassed(@NonNull Partition targetPartition) {
+		return false;
+	}
+
+	@Override
+	public @Nullable ConnectionRole putTargetRole(@NonNull NavigableEdge targetEdge, @NonNull ConnectionRole newConnectionRole) {
+		ConnectionRole oldConnectionRole = targetEnd2role.get(targetEdge);
+		switch (newConnectionRole) {
+			case MANDATORY_EDGE: getMandatoryTargetEdges().add(targetEdge); break;
+			case PREFERRED_EDGE: getPreferredTargetEdges().add(targetEdge); break;
+			default: throw new UnsupportedOperationException(newConnectionRole.toString());
+		}
+		return oldConnectionRole;
 	}
 
 	@Override
@@ -348,14 +429,16 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 		}
 	}
 
-	@Override
-	public ConnectionRole setTargetRole(@NonNull NavigableEdge targetEdge, @NonNull ConnectionRole newConnectionRole) {
-		ConnectionRole oldConnectionRole = targetEnd2role.get(targetEdge);
-		switch (newConnectionRole) {
-			case MANDATORY_EDGE: getMandatoryTargetEdges().add(targetEdge); break;
-			case PREFERRED_EDGE: getPreferredTargetEdges().add(targetEdge); break;
-			default: throw new UnsupportedOperationException(newConnectionRole.toString());
+	/*	@Override
+	public void removeTargetRegion(@NonNull Region targetRegion) {
+		for (@NonNull NavigableEdge targetEdge : Lists.newArrayList(getTargetEdges())) {
+			if (targetEdge.getOwningRegion() == targetRegion) {
+				targetEdge.setIncomingConnection(null);
+				removeTarget(targetEdge);
+			}
 		}
-		return oldConnectionRole;
-	}
+		if (getTargetEdges().isEmpty()) {
+			destroy();
+		}
+	} */
 } //EdgeConnectionImpl

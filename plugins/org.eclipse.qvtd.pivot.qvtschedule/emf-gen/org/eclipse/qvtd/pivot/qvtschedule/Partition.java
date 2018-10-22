@@ -105,6 +105,7 @@ public interface Partition extends NamedElement, Graphable, GraphNode {
 	@Nullable Iterable<@NonNull NavigableEdge> getEnforcedEdges(@NonNull TypedModel typedModel, @NonNull Property asProperty);
 	int getFirstPass();
 	List<Node> getHeadNodes();
+	@NonNull Iterable<@NonNull NodeConnection> getIncomingPassedConnections();
 
 	/**
 	 * The schedule index at which the latest dependent becomes available and consequently the latest that deferred execution may occur.

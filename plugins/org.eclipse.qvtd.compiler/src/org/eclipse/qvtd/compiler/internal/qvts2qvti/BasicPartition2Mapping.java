@@ -1294,7 +1294,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	private void createAddStatements() {
 		if (connection2variable != null) {
 			for (@NonNull NodeConnection connection : connection2variable.keySet()) {
-				Node sourceNode = connectionManager.getSource(connection, partition);
+				Node sourceNode = connection.getSource(partition);
 				OCLExpression variableExpression = createVariableExp(sourceNode);
 				ConnectionVariable connectionVariable = connection2variable.get(connection);
 				assert connectionVariable != null;

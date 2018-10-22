@@ -576,7 +576,7 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 				EdgeConnection edgeConnection = predicatedEdge.getIncomingConnection();
 				if (edgeConnection != null) {
 					boolean isChecked = false;
-					for (@NonNull Partition usedPartition : connectionManager.getSourcePartitions(edgeConnection)) {
+					for (@NonNull Partition usedPartition : edgeConnection.getSourcePartitions()) {
 						if (usedPartition.getLastPass() >= partition.getFirstPass()) {
 							addCheckedEdge(predicatedEdge);
 							isChecked = true;
@@ -602,7 +602,7 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 				Node predicatedTargetNode = predicatedEdge.getEdgeTarget();
 				NodeConnection usedConnection = connectionManager.getIncomingUsedConnection(predicatedTargetNode);
 				if (usedConnection != null) {
-					for (@NonNull Partition usedPartition : connectionManager.getSourcePartitions(usedConnection)) {
+					for (@NonNull Partition usedPartition : usedConnection.getSourcePartitions()) {
 						if (usedPartition.getLastPass() >= partition.getFirstPass()) {			// FIXME =
 							CompleteClass predicatedSourceType = predicatedSourceNode.getCompleteClass();
 							CompleteClass predicatedTargetType = predicatedTargetNode.getCompleteClass();

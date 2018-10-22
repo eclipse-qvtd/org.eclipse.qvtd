@@ -539,7 +539,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			if (!connection.isPassed() && !connection.isMandatory()) {
 				boolean isRedundant = true;
 				int lastPass = connection.getLastPass();
-				for (@NonNull Partition targetPartition : connectionManager.getTargetPartitions(connection)) {
+				for (@NonNull Partition targetPartition : connection.getTargetPartitions()) {
 					int firstPass = targetPartition.getFirstPass();
 					if (firstPass <= lastPass) {
 						isRedundant = false;

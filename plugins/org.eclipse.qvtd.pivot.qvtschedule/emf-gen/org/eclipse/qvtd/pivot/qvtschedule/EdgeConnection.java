@@ -80,10 +80,10 @@ public interface EdgeConnection extends Connection
 	 * @generated
 	 */
 	List<NavigableEdge> getPreferredTargetEdges();
-	@Override
-	@NonNull Set<@NonNull NavigableEdge> getTargetKeys();
 
+	void addUsedTargetEdge(@NonNull NavigableEdge targetEdge, boolean mustBeLater);
+	@NonNull Set<@NonNull NavigableEdge> getTargetEdges();
+	boolean isEdge2Edge();
+	@Nullable ConnectionRole putTargetRole(@NonNull NavigableEdge targetEdge, @NonNull ConnectionRole newConnectionRole);
 	@Nullable ConnectionRole removeTarget(@NonNull NavigableEdge targetEdge);
-
-	ConnectionRole setTargetRole(@NonNull NavigableEdge targetEdge, @NonNull ConnectionRole newConnectionRole);
 }

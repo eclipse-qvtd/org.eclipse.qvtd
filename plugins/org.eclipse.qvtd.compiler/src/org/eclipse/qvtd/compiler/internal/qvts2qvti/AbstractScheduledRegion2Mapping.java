@@ -64,7 +64,7 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractPartition2
 						connectionExpression = PivotUtil.createVariableExp(connectionVariable);
 					}
 					else {
-						Node callingNode = connectionManager.getSource(callingConnection, partition);
+						Node callingNode = callingConnection.getSource(partition);
 						connectionExpression = createSelectByKind(callingNode);
 					}
 				}

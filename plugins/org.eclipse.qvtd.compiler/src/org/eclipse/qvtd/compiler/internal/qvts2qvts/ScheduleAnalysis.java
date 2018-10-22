@@ -171,7 +171,7 @@ public class ScheduleAnalysis
 		List<@NonNull Connection> loopingConnections = new ArrayList<>();
 		List<@NonNull Connection> outgoingConnections = new ArrayList<>();
 		for (@NonNull Connection connection : connectionManager.getIncomingConnections(partitionAnalysis)) {
-			for (@NonNull Partition sourcePartition : connectionManager.getSourcePartitions(connection)) {
+			for (@NonNull Partition sourcePartition : connection.getSourcePartitions()) {
 				if (partition == sourcePartition) {
 					if (!loopingConnections.contains(connection)) {
 						loopingConnections.add(connection);
@@ -185,7 +185,7 @@ public class ScheduleAnalysis
 			}
 		}
 		for (@NonNull Connection connection : connectionManager.getNextConnections(partition)) {
-			for (@NonNull Partition targetPartition : connectionManager.getTargetPartitions(connection)) {
+			for (@NonNull Partition targetPartition : connection.getTargetPartitions()) {
 				if (partition == targetPartition) {
 					assert loopingConnections.contains(connection);
 					loopingConnections.add(connection);
@@ -361,7 +361,7 @@ public class ScheduleAnalysis
 			List<@NonNull Partition> sourcePartitions = connection2sourcePartitions.get(connection);
 			if (sourcePartitions == null) {
 				sourcePartitions = new ArrayList<>();
-				for (@NonNull Partition sourcePartition : connectionManager.getSourcePartitions(connection)) {
+				for (@NonNull Partition sourcePartition : connection.getSourcePartitions()) {
 					if (!sourcePartitions.contains(sourcePartition)) {
 						sourcePartitions.add(sourcePartition);
 					}
@@ -371,7 +371,7 @@ public class ScheduleAnalysis
 			List<@NonNull Partition> targetPartitions = connection2targetPartitions.get(connection);
 			if (targetPartitions == null) {
 				targetPartitions = new ArrayList<>();
-				for (@NonNull Partition targetPartition : connectionManager.getTargetPartitions(connection)) {
+				for (@NonNull Partition targetPartition : connection.getTargetPartitions()) {
 					if (!targetPartitions.contains(targetPartition)) {
 						targetPartitions.add(targetPartition);
 					}

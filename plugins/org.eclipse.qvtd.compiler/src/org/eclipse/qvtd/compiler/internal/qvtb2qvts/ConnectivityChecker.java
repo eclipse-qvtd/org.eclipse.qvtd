@@ -25,7 +25,6 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.TracingOption;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerConstants;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -139,8 +138,7 @@ public class ConnectivityChecker
 	protected void analyzeConnection(@NonNull Connection connection) {
 		Connection oldConnection = name2connection.put(QVTscheduleUtil.getName(connection), connection);
 		assert oldConnection == null;
-		ConnectionManager connectionManager = scheduleManager.getConnectionManager();
-		for (@NonNull Node sourceNode : connectionManager.getSourceNodes(connection)) {
+		for (@NonNull Node sourceNode : connection.getSourceNodes()) {
 			ClassDatum classDatum = addClassDatum(sourceNode);
 			List<@NonNull Connection> connections = producer2connections.get(classDatum);
 			if (connections == null) {
@@ -150,7 +148,7 @@ public class ConnectivityChecker
 			//				assert !connections.contains(connection);
 			connections.add(connection);
 		}
-		for (@NonNull Node targetNode : connectionManager.getTargetNodes(connection)) {
+		for (@NonNull Node targetNode : connection.getTargetNodes()) {
 			ClassDatum classDatum = addClassDatum(targetNode);
 			List<@NonNull Connection> connections = consumer2connections.get(classDatum);
 			if (connections == null) {

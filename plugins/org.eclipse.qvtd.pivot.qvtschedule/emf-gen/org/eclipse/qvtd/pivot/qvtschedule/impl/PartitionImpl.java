@@ -484,6 +484,18 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 	}
 
 	@Override
+	public @NonNull Iterable<@NonNull NodeConnection> getIncomingPassedConnections() {		// FIXME cache
+		List<@NonNull NodeConnection> connections = new ArrayList<>();
+		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(this)) {
+			NodeConnection connection = headNode.getIncomingPassedConnection();
+			if (connection != null) {
+				connections.add(connection);
+			}
+		}
+		return connections;
+	}
+
+	@Override
 	public int getLastPass() {
 		List<@NonNull Integer> passes2 = ClassUtil.nullFree(getPasses());
 		assert passes2.size() > 0;

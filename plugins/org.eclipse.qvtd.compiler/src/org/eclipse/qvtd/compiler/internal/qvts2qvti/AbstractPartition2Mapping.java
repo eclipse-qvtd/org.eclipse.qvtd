@@ -182,7 +182,7 @@ public abstract class AbstractPartition2Mapping
 
 	protected @NonNull Type getConnectionSourcesType(@NonNull NodeConnection connection) {
 		IdResolver idResolver = environmentFactory.getIdResolver();
-		Type asType = connectionManager.getSourcesType(connection, idResolver);
+		Type asType = connection.getSourcesType(idResolver);
 		assert asType != null;
 		return asType;
 	}

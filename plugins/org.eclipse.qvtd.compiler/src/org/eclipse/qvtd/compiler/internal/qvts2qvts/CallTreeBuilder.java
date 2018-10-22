@@ -26,6 +26,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Iterables;
 
@@ -126,21 +127,21 @@ public class CallTreeBuilder
 					}
 				}
 				for (@NonNull Partition targetPartition : scheduleCache.getTargetPartitions(connection)) {
-					if ((targetPartition != commonPartition) && connectionManager.isPassed(connection, targetPartition)) {
+					if ((targetPartition != commonPartition) && connection.isPassed(targetPartition)) {
 						Iterable<@NonNull Partition> targetPartitions2 = /*targetRegion.isCyclicScheduledRegion() ? Collections.singletonList(targetRegion) :*/ connectionManager.getCallableParents(targetPartition);
 						installConnectionsLocateIntermediates(intermediatePartitions, targetPartitions2, commonPartition);
 					}
 				}
-				connectionManager.setCommonPartition(connection, commonPartition, intermediatePartitions);
+				connection.setCommonPartition(commonPartition, intermediatePartitions);
 				//				Scheduler.REGION_LOCALITY.println(connection + " => " + commonRegion + " " + intermediateRegions);
 			}
 		}
 		for (@NonNull NodeConnection connection : connections) {
 			if (connection.isPassed()) {
-				Partition commonPartition = connectionManager.getCommonPartition(connection);
+				Partition commonPartition = connection.getCommonPartition();
 				assert commonPartition != null;
 				Partition rootPartition = scheduleCache.getRootPartition();
-				List<@NonNull Partition> intermediatePartitions = connectionManager.getIntermediatePartitions(connection);
+				List<@NonNull Partition> intermediatePartitions = QVTscheduleUtil.getIntermediatePartitions(connection);
 				for (@NonNull Partition intermediatePartition : intermediatePartitions) {
 					Partition checkCommonPartition = connectionManager.getLoopingConnections(commonPartition).size() > 0 ? rootPartition : commonPartition;
 					assert connectionManager.getLoopingConnections(commonPartition).size() > 0
@@ -225,7 +226,7 @@ public class CallTreeBuilder
 		//		Iterable<@NonNull Connection> incomingConnections = getIncomingConnections(region);
 		//		assert incomingConnections != null;
 		for (@NonNull Connection incomingConnection : scheduleCache.getIncomingConnections(partition)) {
-			if (connectionManager.isPassed(incomingConnection, partition)) {
+			if (incomingConnection.isPassed(partition)) {
 				commonPartition = updateConnectionLocality((@NonNull NodeConnection) incomingConnection, commonPartition);
 			}
 		}

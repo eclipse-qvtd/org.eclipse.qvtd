@@ -83,7 +83,7 @@ public class LoadingPartition2Mapping extends AbstractScheduledRegion2Mapping
 		Collections.sort(rootConnections, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull NodeConnection rootConnection : rootConnections) {
 			Type commonType = getConnectionSourcesType(rootConnection);
-			Node regionNode = connectionManager.basicGetSource(rootConnection, partition);
+			Node regionNode = rootConnection.basicGetSource(partition);
 			String name = rootConnection.getName();
 			assert name != null;
 			if (regionNode != null) {

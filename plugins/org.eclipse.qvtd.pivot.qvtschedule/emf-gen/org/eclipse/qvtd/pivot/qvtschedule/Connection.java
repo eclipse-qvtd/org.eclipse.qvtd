@@ -202,7 +202,14 @@ public interface Connection extends Element, Symbolable, org.eclipse.ocl.pivot.u
 	boolean addPass(int pass);
 	int getLastPass();
 	@NonNull List<@NonNull Integer> getPasses();
-	@NonNull Set<? extends @NonNull ConnectionEnd> getTargetKeys();
+	@NonNull ConnectionEnd getSource(@NonNull Partition sourcePartition);
+	@NonNull Iterable<@NonNull Node> getSourceNodes();
+	@NonNull Iterable<@NonNull Partition> getSourcePartitions();
+	@NonNull Iterable<@NonNull ConnectionEnd> getTargetConnectionEnds(@NonNull Partition targetPartition);
+	@NonNull ConnectionRole getTargetConnectionRole(@NonNull Partition targetPartition, @NonNull ConnectionEnd connectionEnd);
+	@NonNull Set<? extends @NonNull ConnectionEnd> getTargetEnds();
+	@NonNull Iterable<@NonNull Node> getTargetNodes();
+	@NonNull Iterable<@NonNull Partition> getTargetPartitions();
 	@Nullable ConnectionRole getTargetRole(@NonNull ConnectionEnd connectionEnd);
 
 	boolean isMandatory();
@@ -212,5 +219,8 @@ public interface Connection extends Element, Symbolable, org.eclipse.ocl.pivot.u
 	 */
 	boolean isPassed();
 
+	boolean isPassed(@NonNull Partition targetPartition);
+
+	//	void removeTargetRegion(@NonNull Region targetRegion);
 
 } // Connection

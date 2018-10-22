@@ -20,11 +20,8 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Property;
-import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LegacyContentsAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LoadingRegionAnalysis;
@@ -34,11 +31,11 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
-import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
-import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -54,7 +51,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
@@ -89,16 +85,6 @@ public class ConnectionManager
 	private final @NonNull LegacyContentsAnalysis originalContentsAnalysis;
 
 	/**
-	 * The region that manages the data structures for the Connection.
-	 */
-	private final @NonNull Map<@NonNull NodeConnection, @Nullable Partition> connection2commonPartition = new HashMap<>();
-
-	/**
-	 * The regions other than the common, source and target regions through which the Connection is passed.
-	 */
-	private @NonNull Map<@NonNull NodeConnection, @Nullable List<@NonNull Partition>> connection2intermediatePartitions = new HashMap<>();
-
-	/**
 	 * Ordered list of regions that call this region
 	 */
 	private final @NonNull Map<@NonNull Partition, @NonNull List<@NonNull Partition>> partition2parents = new HashMap<>();
@@ -121,56 +107,21 @@ public class ConnectionManager
 		getCallableParents(childPartition).add(parentPartition);
 	}
 
-	public void addPassedTargetNode(@NonNull NodeConnection nodeConnection, @NonNull Node targetNode) {
-		mergeRole(nodeConnection, ConnectionRole.PASSED);
-		ConnectionRole targetRole = nodeConnection.getTargetRole(targetNode);
-		assert targetRole == null;
-		nodeConnection.setTargetRole(targetNode, ConnectionRole.PASSED);
-		targetNode.setIncomingConnection(nodeConnection);
-		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
-	}
-
-	public void addUsedTargetEdge(@NonNull EdgeConnection edgeConnection, @NonNull NavigableEdge targetEdge, boolean mustBeLater) {
-		//		if (getSourceRegions().contains(targetEdge.getRegion())) {
-		//			System.out.println("Cyclic dependency arbitrarily ignored: " + this);
-		//			mergeRole(Connections.PREFERRED_EDGE);
-		//			return;
-		//		}
-		mergeRole(edgeConnection, mustBeLater ? ConnectionRole.MANDATORY_EDGE : ConnectionRole.PREFERRED_EDGE);
-		ConnectionRole targetRole = edgeConnection.getTargetRole(targetEdge);
-		assert targetRole == null;
-		edgeConnection.setTargetRole(targetEdge, mustBeLater ? ConnectionRole.MANDATORY_EDGE : ConnectionRole.PREFERRED_EDGE);
-		targetEdge.setIncomingConnection(edgeConnection);
-		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
-	}
-
-	public void addUsedTargetNode(@NonNull NodeConnection nodeConnection, @NonNull Node targetNode, boolean mustBeLater) {
-		ConnectionRole newConnectionRole = mustBeLater ? ConnectionRole.MANDATORY_NODE : ConnectionRole.PREFERRED_NODE;
-		ConnectionRole oldConnectionRole = nodeConnection.getTargetRole(targetNode);
-		if ((oldConnectionRole != null) && (oldConnectionRole != newConnectionRole)) {
-			newConnectionRole = newConnectionRole.merge(oldConnectionRole);
+	protected @NonNull Iterable<@NonNull Partition> getRegionPartitions1(@NonNull Region region) {
+		RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
+		Iterable<@NonNull Partition> sourceRegionPartitions1 = regionAnalysis.getPartitions();
+		Iterable<@NonNull MappingPartition> sourceRegionPartitions2;
+		if (region instanceof LoadingRegion) {
+			sourceRegionPartitions2 = Collections.singletonList(((LoadingRegion)region).getLoadingPartition());
 		}
-		mergeRole(nodeConnection, newConnectionRole);
-		nodeConnection.setTargetRole(targetNode, newConnectionRole);
-		assert targetNode.getIncomingConnection() == null;
-		targetNode.setIncomingConnection(nodeConnection);
-		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
-	}
-
-	public @Nullable Node basicGetSource(@NonNull NodeConnection nodeConnection, @NonNull Partition sourcePartition) {
-		Node sourceNode = null;
-		for (@NonNull Node sourceEnd : QVTscheduleUtil.getSourceEnds(nodeConnection)) {
-			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
-			RegionAnalysis sourceRegionAnalysis = scheduleManager.getRegionAnalysis(sourceRegion);
-			if (Iterables.contains(sourceRegionAnalysis.getPartitions(), sourcePartition)) {
-				Role sourceRole = getRole(sourcePartition, sourceEnd);
-				if ((sourceRole != null) && !sourceRole.isAwaited()) { //(sourceRole.isNew() || sourceRole.isLoaded())) {
-					assert sourceNode == null;
-					sourceNode = sourceEnd;
-				}
-			}
+		else if (region instanceof MappingRegion) {
+			sourceRegionPartitions2 = ((MappingRegion)region).getMappingPartitions();
 		}
-		return sourceNode;
+		else {
+			throw new UnsupportedOperationException();
+		}
+		assert Sets.newHashSet(sourceRegionPartitions1).equals(Sets.newHashSet(sourceRegionPartitions2));
+		return sourceRegionPartitions1;
 	}
 
 	/**
@@ -191,15 +142,6 @@ public class ConnectionManager
 		//			region.checkIncomingConnections();
 		//		}
 	}
-
-	/*	public void createConnections(@NonNull Iterable<@NonNull Iterable<@NonNull Partition>> partitionSchedule) {
-		for (@NonNull Iterable<@NonNull Partition> partitions : partitionSchedule) {
-			for (@NonNull Partition partition : partitions) {
-				createIncomingConnections(partition);
-			}
-		}
-		scheduleManager.writeDebugGraphs("45-bindings", true, true, false);
-	} */
 
 	/**
 	 * Create an EdgeConnection for the predicatedEdge and/or its target node.
@@ -234,7 +176,7 @@ public class ConnectionManager
 			}
 			if (attributeConnectionSourceEdges != null) {
 				EdgeConnection edgeConnection = getAttributeConnection(invokingRegion2, attributeConnectionSourceEdges, partialNames, predicatedProperty);
-				addUsedTargetEdge(edgeConnection, predicatedEdge, false);
+				edgeConnection.addUsedTargetEdge(predicatedEdge, false);
 				if (QVTscheduleConstants.CONNECTION_CREATION.isActive()) {
 					QVTscheduleConstants.CONNECTION_CREATION.println("  Attribute EdgeConnection \"" + edgeConnection + "\" to " + castTarget);
 					//					Scheduler.CONNECTIONS.println("    classDatumAnalysis " + classDatumAnalysis);
@@ -305,8 +247,8 @@ public class ConnectionManager
 						if (QVTscheduleConstants.CONNECTION_CREATION.isActive()) {
 							QVTscheduleConstants.CONNECTION_CREATION.println("  EdgeConnection \"" + edgeConnection + "\" to " + predicatedEdge);
 						}
-						if (!Iterables.contains(getTargetEdges(edgeConnection), castEdge)) {
-							addUsedTargetEdge(edgeConnection, castEdge, false);
+						if (!Iterables.contains(edgeConnection.getTargetEdges(), castEdge)) {
+							edgeConnection.addUsedTargetEdge(castEdge, false);
 							if (QVTscheduleConstants.CONNECTION_CREATION.isActive()) {
 								for (@NonNull NavigableEdge thatEdge : thoseEdges) {
 									QVTscheduleConstants.CONNECTION_CREATION.println("    from " + thatEdge.getOwningRegion() + "  : " + thatEdge);
@@ -329,7 +271,7 @@ public class ConnectionManager
 						//			 && !hasEdgeConnection(predicatedNode)
 						) {
 					NodeConnection predicatedConnection = getNodeConnection(invokingRegion2, sourceNodes, classDatum, scheduleManager.getDomainUsage(classDatum));
-					addUsedTargetNode(predicatedConnection, castTarget, false);
+					predicatedConnection.addUsedTargetNode(castTarget, false);
 					if (QVTscheduleConstants.CONNECTION_CREATION.isActive()) {
 						QVTscheduleConstants.CONNECTION_CREATION.println("  NodeConnection \"" + predicatedConnection + "\" to " + castTarget);
 						for (@NonNull Node sourceNode : sourceNodes) {
@@ -429,10 +371,10 @@ public class ConnectionManager
 		//
 		NodeConnection headConnection = getNodeConnection(invokingRegion2, headSources, classDatum, scheduleManager.getDomainUsage(classDatum));
 		if (headNode.isDependency()) {
-			addUsedTargetNode(headConnection, headNode, false);
+			headConnection.addUsedTargetNode(headNode, false);
 		}
 		else {
-			addPassedTargetNode(headConnection, headNode);
+			headConnection.addPassedTargetNode(headNode);
 		}
 		if (QVTscheduleConstants.CONNECTION_CREATION.isActive()) {
 			QVTscheduleConstants.CONNECTION_CREATION.println((headNode.isDependency() ? "  Extra NodeConnection " : "  Head NodeConnection \"") + headConnection + "\" to " + headNode);
@@ -562,8 +504,8 @@ public class ConnectionManager
 	 * Create Used Edge Connections between each edge realized in the origial region and predicated in a aprtition.
 	 */
 	public void createPartitionConnections(@NonNull ScheduledRegion scheduledRegion, @NonNull Region region) {
+		Iterable<@NonNull Partition> partitions = getRegionPartitions1(region);
 		RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
-		Iterable<@NonNull Partition> partitions = regionAnalysis.getPartitions();
 		if (Iterables.size(partitions) <= 1) {
 			return;										// No trace connections if not actually partitioned
 		}
@@ -575,7 +517,7 @@ public class ConnectionManager
 		for (@NonNull Node traceNode : traceNodes) {
 			Set<@NonNull Node> sourceNodes = new HashSet<>();
 			for (@NonNull Partition partition : partitions) {
-				Role nodeRole = getRole(partition, traceNode);
+				Role nodeRole = QVTscheduleUtil.getRole(partition, traceNode);
 				if ((nodeRole != null) && nodeRole.isNew()) {
 					sourceNodes.add(traceNode);
 				}
@@ -587,10 +529,10 @@ public class ConnectionManager
 				//
 				Set<@NonNull Node> targetNodes = new HashSet<>();
 				for (@NonNull Partition partition : partitions) {
-					Role nodeRole = getRole(partition, traceNode);
+					Role nodeRole = QVTscheduleUtil.getRole(partition, traceNode);
 					if ((nodeRole != null) && nodeRole.isOld()) {
 						if (targetNodes.add(traceNode)) {
-							addPassedTargetNode(connection, traceNode);
+							connection.addPassedTargetNode(traceNode);
 						}
 					}
 				}
@@ -613,7 +555,7 @@ public class ConnectionManager
 				if (isAwaited) {
 					Property property = QVTscheduleUtil.getProperty(edge);
 					EdgeConnection connection = getEdgeConnection(scheduledRegion, Collections.singleton(edge), property);
-					addUsedTargetEdge(connection, edge, true);
+					connection.addUsedTargetEdge(edge, true);
 				}
 			}
 		}
@@ -669,10 +611,6 @@ public class ConnectionManager
 		return parents;
 	}
 
-	public @Nullable Partition getCommonPartition(@NonNull NodeConnection nodeConnection) {
-		return connection2commonPartition.get(nodeConnection);
-	}
-
 	private @NonNull EdgeConnection getEdgeConnection(@NonNull ScheduledRegion scheduledRegion, @NonNull Iterable<@NonNull NavigableEdge> sourceEdges, @NonNull Property property) {
 		Set<@NonNull NavigableEdge> sourceSet = Sets.newHashSet(sourceEdges);
 		EdgeConnection connection = edges2edgeConnection.get(sourceSet);
@@ -687,40 +625,6 @@ public class ConnectionManager
 		}
 		return connection;
 	}
-
-
-
-	/**
-	 * Return the regions that this region calls.
-	 *
-	public static @NonNull List<@NonNull Region> getCalledRegions(@NonNull Region region) {
-		List<@NonNull Region> childRegions = new ArrayList<>();			// FIXME cache
-		for (@NonNull NodeConnection childConnection : getOutgoingPassedConnections(region)) {
-			for (@NonNull Node childNode : getTargetNodes(childConnection)) {
-				Region childRegion = QVTscheduleUtil.getOwningRegion(childNode);
-				if (!childRegions.contains(childRegion)) {
-					childRegions.add(childRegion);
-				}
-			}
-		}
-		return childRegions;
-	} */
-
-	/**
-	 * Return the regions the call this region.
-	 *
-	public @NonNull List<@NonNull Region> getCallingRegions(@NonNull Region region) {
-		List<@NonNull Region> callingRegions = new ArrayList<>();			// FIXME cache
-		for (@NonNull NodeConnection callingConnection : getIncomingPassedConnections(region)) {
-			for (@NonNull Node callingNode : getSourceEnds(callingConnection)) {
-				Region callingRegion = QVTscheduleUtil.getOwningRegion(callingNode);
-				if (!callingRegions.contains(callingRegion)) {
-					callingRegions.add(callingRegion);
-				}
-			}
-		}
-		return callingRegions;
-	} */
 
 	public @NonNull Iterable<@NonNull Connection> getIncomingConnections(@NonNull PartitionAnalysis partitionAnalysis) {		// FIXME cache
 		Partition partition = partitionAnalysis.getPartition();
@@ -796,46 +700,14 @@ public class ConnectionManager
 		//	}
 	}
 
-	/**
-	 * Return the regions that this region calls.
-	 *
-	public static @NonNull List<@NonNull Region> getCalledRegions(@NonNull Region region) {
-		List<@NonNull Region> childRegions = new ArrayList<>();			// FIXME cache
-		for (@NonNull NodeConnection childConnection : getOutgoingPassedConnections(region)) {
-			for (@NonNull Node childNode : getTargetNodes(childConnection)) {
-				Region childRegion = QVTscheduleUtil.getOwningRegion(childNode);
-				if (!childRegions.contains(childRegion)) {
-					childRegions.add(childRegion);
-				}
-			}
-		}
-		return childRegions;
-	} */
-
-	public @NonNull Iterable<@NonNull NodeConnection> getIncomingPassedConnections(@NonNull Partition partition) {		// FIXME cache
-		List<@NonNull NodeConnection> connections = new ArrayList<>();
-		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(partition)) {
-			NodeConnection connection = headNode.getIncomingPassedConnection();
-			if (connection != null) {
-				connections.add(connection);
-			}
-		}
-		return connections;
-	}
-
 	public @Nullable NodeConnection getIncomingUsedConnection(@NonNull Node node) {
-		NodeConnection incomingConnection2 = node.getIncomingConnection();
-		if ((incomingConnection2 != null) && isUsed(incomingConnection2, node)) {
-			return incomingConnection2;
+		NodeConnection incomingConnection = node.getIncomingConnection();
+		if ((incomingConnection != null) && incomingConnection.isUsed(node)) {
+			return incomingConnection;
 		}
 		else {
 			return null;
 		}
-	}
-
-	public @NonNull List<@NonNull Partition> getIntermediatePartitions(@NonNull NodeConnection nodeConnection) {
-		List<@NonNull Partition> intermediatePartitions = connection2intermediatePartitions.get(nodeConnection);
-		return intermediatePartitions != null ? intermediatePartitions :EMPTY_PARTITION_LIST;
 	}
 
 	private @Nullable Iterable<@NonNull Node> getIntroducingOrNewNodes(@NonNull Node headNode) {
@@ -862,9 +734,9 @@ public class ConnectionManager
 	public @NonNull List<@NonNull Connection> getLoopingConnections(@NonNull Partition partition) {
 		List<@NonNull Connection> loopingConnections = new ArrayList<>();
 		for (@NonNull Connection connection : getOutgoingConnections(partition)) {
-			for (@NonNull Partition sourcePartition : getSourcePartitions(connection)) {
+			for (@NonNull Partition sourcePartition : connection.getSourcePartitions()) {
 				if (partition == sourcePartition) {
-					for (@NonNull Partition targetPartition : getTargetPartitions(connection)) {
+					for (@NonNull Partition targetPartition : connection.getTargetPartitions()) {
 						if ((partition == targetPartition) && !loopingConnections.contains(connection)) {
 							loopingConnections.add(connection);
 						}
@@ -882,19 +754,6 @@ public class ConnectionManager
 	private @Nullable Iterable<@NonNull Node> getNewNodes(@NonNull ClassDatum classDatum) {
 		return originalContentsAnalysis.getNewNodes(classDatum);
 	}
-
-	/*	public @NonNull Iterable<@NonNull NodeConnection> getIncomingUsedConnections(@NonNull Region region) {			// FIXME cache
-		List<@NonNull NodeConnection> connections = new ArrayList<>();
-		for (@NonNull Node node : region.getPatternNodes()) {
-			if (node.isLoaded() || node.isSpeculated() || node.isPredicated()) {	// A DataType may be loaded but subject to an edge predication
-				NodeConnection connection = getIncomingUsedConnection(node);
-				if (connection != null) {
-					connections.add(connection);
-				}
-			}
-		}
-		return connections;
-	} */
 
 	/**
 	 * Return all the next connections from this region to another region.
@@ -922,19 +781,6 @@ public class ConnectionManager
 		}
 		return connection;
 	}
-
-	/*	public @NonNull Iterable<@NonNull NodeConnection> getIncomingUsedConnections(@NonNull Region region) {			// FIXME cache
-		List<@NonNull NodeConnection> connections = new ArrayList<>();
-		for (@NonNull Node node : region.getPatternNodes()) {
-			if (node.isLoaded() || node.isSpeculated() || node.isPredicated()) {	// A DataType may be loaded but subject to an edge predication
-				NodeConnection connection = getIncomingUsedConnection(node);
-				if (connection != null) {
-					connections.add(connection);
-				}
-			}
-		}
-		return connections;
-	} */
 
 	/**
 	 * Return all connections from this (hierarchical) region to another (hierarchical) region.
@@ -967,38 +813,6 @@ public class ConnectionManager
 		return connections;
 	}
 
-	/*	public @NonNull Iterable<@NonNull NodeConnection> getOutgoingPassedConnections(@NonNull Region region) {			// FIXME cache
-		List<@NonNull NodeConnection> connections = new ArrayList<>();
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
-			for (@NonNull NodeConnection connection : node.getOutgoingPassedConnections()) {
-				connections.add(connection);
-			}
-		}
-		return connections;
-	} */
-
-	/*	public @NonNull Iterable<@NonNull NodeConnection> getOutgoingUsedConnections(@NonNull Region region) {			// FIXME cache
-		List<@NonNull NodeConnection> connections = new ArrayList<>();
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
-			for (@NonNull NodeConnection connection : node.getOutgoingUsedBindingEdges()) {
-				connections.add(connection);
-			}
-		}
-		return connections;
-	} */
-
-	//	public @NonNull PartitionedContentsAnalysis getPartitionedContentsAnalysis() {
-	//		PartitionedContentsAnalysis partitionedContentsAnalysis2 = partitionedContentsAnalysis;
-	//		if (partitionedContentsAnalysis2 == null) {
-	//			partitionedContentsAnalysis = partitionedContentsAnalysis2 = new PartitionedContentsAnalysis(scheduleManager);
-	//		}
-	//		return partitionedContentsAnalysis2;
-	//	}
-
-	public @Nullable Role getRole(@NonNull Partition partition, @NonNull ConnectionEnd connectionEnd) {
-		return connectionEnd instanceof Node ? partition.getRole((Node)connectionEnd) : connectionEnd instanceof Edge ? partition.getRole((Edge)connectionEnd) : null;
-	}
-
 	public @NonNull ScheduleManager getScheduleManager() {
 		return scheduleManager;
 	}
@@ -1015,327 +829,6 @@ public class ConnectionManager
 		}
 		return sources;
 	}
-
-	public @NonNull ConnectionEnd getSource(@NonNull Connection connection, @NonNull Partition sourcePartition) {
-		@Nullable ConnectionEnd theSourceEnd = null;
-		for (@NonNull ConnectionEnd sourceEnd : QVTscheduleUtil.getSourceEnds(connection)) {
-			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
-			RegionAnalysis sourceRegionAnalysis = scheduleManager.getRegionAnalysis(sourceRegion);
-			if (Iterables.contains(sourceRegionAnalysis.getPartitions(), sourcePartition)) {
-				Role sourceRole = getRole(sourcePartition, sourceEnd);
-				if ((sourceRole != null) && !sourceRole.isAwaited()) { //(sourceRole.isNew() || sourceRole.isLoaded())) {
-					assert theSourceEnd == null;
-					theSourceEnd = sourceEnd;
-				}
-			}
-		}
-		assert theSourceEnd != null;
-		return theSourceEnd;
-	}
-
-	public @NonNull Node getSource(@NonNull NodeConnection nodeConnection, @NonNull Partition sourcePartition) {
-		return (Node) getSource((Connection)nodeConnection, sourcePartition);
-	}
-
-	public @NonNull List<@NonNull ConnectionEnd> getSourceEnds(@NonNull Connection connection) {
-		List<@NonNull ConnectionEnd> sourceEnds = QVTscheduleUtil.getSourceEnds(connection);
-		return sourceEnds;
-	}
-
-	//	public @NonNull List<@NonNull NavigableEdge> getSourceEnds(@NonNull EdgeConnection edgeConnection) {
-	//		return (List<@NonNull NavigableEdge>)(Object)getSourceEnds((Connection)edgeConnection);
-	//	}
-
-	//	public @NonNull List<@NonNull Node> getSourceEnds(@NonNull NodeConnection nodeConnection) {
-	//		return (List<@NonNull Node>)(Object)getSourceEnds((Connection)nodeConnection);
-	//	}
-
-	public @NonNull Iterable<@NonNull Node> getSourceNodes(@NonNull Connection connection) {
-		if (connection instanceof EdgeConnection) {
-			return getSourceNodes((EdgeConnection)connection);
-		}
-		else {
-			return getSourceNodes((NodeConnection)connection);
-		}
-	}
-
-	public @NonNull Iterable<@NonNull Node> getSourceNodes(@NonNull EdgeConnection edgeConnection) {
-		List<@NonNull Node> sourceNodes = new ArrayList<>();
-		for (@NonNull NavigableEdge sourceEdge : QVTscheduleUtil.getSourceEnds(edgeConnection)) {
-			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEdge);
-			RegionAnalysis sourceRegionAnalysis = scheduleManager.getRegionAnalysis(sourceRegion);
-			Iterable<@NonNull Partition> partitions = sourceRegionAnalysis.basicGetPartitions();
-			if (partitions != null) {
-				for (@NonNull Partition sourcePartition : partitions) {
-					Role sourceRole = getRole(sourcePartition, sourceEdge);
-					if ((sourceRole != null) &&!sourceRole.isAwaited()) { // (sourceRole.isNew() || sourceRole.isLoaded())) {
-						sourceNodes.add(QVTscheduleUtil.getTargetNode(sourceEdge));
-					}
-				}
-			}
-			else {
-				Role sourceRole = sourceEdge.getEdgeRole();
-				if (!sourceRole.isAwaited()) { //sourceRole.isNew() || sourceRole.isLoaded()) {
-					sourceNodes.add(QVTscheduleUtil.getTargetNode(sourceEdge));
-				}
-			}
-		}
-		/*			edgeConnection.get
-		for (@NonNull Partition sourcePartition : getSourcePartitions(edgeConnection)) {
-			Role role = sourcePartition.getRole(sourceNode);
-			if ((role != null) && (role.isNew() || role.isLoaded())) {
-
-		}
-
-		for (@NonNull NavigableEdge sourceEdge : QVTscheduleUtil.getSourceEnds(edgeConnection)) {
-			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEdge);
-			if (sourceRegion != null) {
-			Role role = sourcePartition.getRole(sourceNode);
-			if ((role != null) && (role.isNew() || role.isLoaded())) {
-			sourceNodes.add(sourceEdge.getEdgeTarget());
-		} */
-		return sourceNodes;
-	}
-
-	public @NonNull Iterable<@NonNull Node> getSourceNodes(@NonNull NodeConnection nodeConnection) {
-		return QVTscheduleUtil.getSourceEnds(nodeConnection);
-	}
-
-	public @NonNull Iterable<@NonNull Partition> getSourcePartitions(@NonNull Connection connection) {
-		Set<@NonNull Partition> sourcePartitions = new HashSet<>();
-		for (@NonNull ConnectionEnd sourceEnd : QVTscheduleUtil.getSourceEnds(connection)) {
-			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
-			RegionAnalysis sourceRegionAnalysis = scheduleManager.getRegionAnalysis(sourceRegion);
-			for (@NonNull Partition sourcePartition : sourceRegionAnalysis.getPartitions()) {
-				Role sourceRole = getRole(sourcePartition, sourceEnd);
-				if ((sourceRole != null) && !sourceRole.isAwaited()) { // (sourceRole.isNew() || sourceRole.isLoaded())) {
-					sourcePartitions.add(sourcePartition);
-				}
-			}
-		}
-		return sourcePartitions;
-	}
-
-	/*	public @NonNull Iterable<@NonNull Region> getSourceRegions(@NonNull Connection connection, @NonNull ScheduledRegion scheduledRegion) {
-		Set<@NonNull Region> sourceRegions = new HashSet<>();
-		for (@NonNull ConnectionEnd sourceEnd : getSourceEnds(connection)) {
-			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
-			sourceRegion = scheduledRegion.getNormalizedRegion(sourceRegion);
-			if (sourceRegion != null) {
-				sourceRegions.add(sourceRegion);
-			}
-		}
-		return sourceRegions;
-	} */
-
-	//	public @NonNull Iterable<@NonNull ? extends ConnectionEnd> getSources(@NonNull Connection connection) {
-	//		return getSourceEnds(connection);
-	//	}
-
-	//	public @NonNull Iterable<@NonNull NavigableEdge> getSources(@NonNull EdgeConnection edgeConnection) {
-	//		return getSourceEnds(edgeConnection);
-	//	}
-
-	//	public @NonNull Iterable<@NonNull Node> getSources(@NonNull NodeConnection nodeConnection) {
-	//		return getSourceEnds(nodeConnection);
-	//	}
-
-	//	public @NonNull Iterable<@NonNull ? extends ConnectionEnd> getSources(@NonNull Connection connection) {
-	//		return getSourceEnds(connection);
-	//	}
-
-	//	public @NonNull Iterable<@NonNull NavigableEdge> getSources(@NonNull EdgeConnection edgeConnection) {
-	//		return getSourceEnds(edgeConnection);
-	//	}
-
-	//	public @NonNull Iterable<@NonNull Node> getSources(@NonNull NodeConnection nodeConnection) {
-	//		return getSourceEnds(nodeConnection);
-	//	}
-
-	/*	public @NonNull Iterable<@NonNull Region> getSourceRegions(@NonNull Connection connection, @NonNull ScheduledRegion scheduledRegion) {
-		Set<@NonNull Region> sourceRegions = new HashSet<>();
-		for (@NonNull ConnectionEnd sourceEnd : getSourceEnds(connection)) {
-			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
-			sourceRegion = scheduledRegion.getNormalizedRegion(sourceRegion);
-			if (sourceRegion != null) {
-				sourceRegions.add(sourceRegion);
-			}
-		}
-		return sourceRegions;
-	} */
-
-	public @NonNull Type getSourcesType(@NonNull NodeConnection nodeConnection, @NonNull IdResolver idResolver) {
-		//		System.out.println("commonType of " + this);
-		Type commonType = null;
-		for (@NonNull Node node : QVTscheduleUtil.getSourceEnds(nodeConnection)) {
-			Type nodeType = node.getCompleteClass().getPrimaryClass();
-			if (nodeType instanceof CollectionType) {
-				nodeType = ((CollectionType)nodeType).getElementType();		// FIXME needed for composed source nodes
-				assert nodeType != null;
-			}
-			//			System.out.println("  nodeType " + nodeType);
-			//			CompleteEnvironment environment = idResolver.getEnvironment();
-			//			if (!(nodeType instanceof CollectionType)) {		// RealizedVariable accumulated on Connection
-			//				nodeType = isOrdered() ? environment.getOrderedSetType(nodeType, true, null, null) : environment.getSetType(nodeType, true, null, null);
-			//			}
-			if (commonType == null) {
-				commonType = nodeType;
-			}
-			else if (nodeType != commonType) {
-				commonType = commonType.getCommonType(idResolver, nodeType);
-			}
-		}
-		//		System.out.println("=> " + commonType);
-		assert commonType != null;
-		return commonType;
-	}
-
-	//	public @NonNull Iterable<@NonNull ? extends ConnectionEnd> getSources(@NonNull Connection connection) {
-	//		return getSourceEnds(connection);
-	//	}
-
-	//	public @NonNull Iterable<@NonNull NavigableEdge> getSources(@NonNull EdgeConnection edgeConnection) {
-	//		return getSourceEnds(edgeConnection);
-	//	}
-
-	//	public @NonNull Iterable<@NonNull Node> getSources(@NonNull NodeConnection nodeConnection) {
-	//		return getSourceEnds(nodeConnection);
-	//	}
-
-	/*	public @NonNull Iterable<@NonNull Region> getSourceRegions(@NonNull Connection connection, @NonNull ScheduledRegion scheduledRegion) {
-		Set<@NonNull Region> sourceRegions = new HashSet<>();
-		for (@NonNull ConnectionEnd sourceEnd : getSourceEnds(connection)) {
-			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
-			sourceRegion = scheduledRegion.getNormalizedRegion(sourceRegion);
-			if (sourceRegion != null) {
-				sourceRegions.add(sourceRegion);
-			}
-		}
-		return sourceRegions;
-	} */
-
-	/*	public @NonNull ConnectionEnd getTarget(@NonNull Connection connection, @NonNull Region targetRegion) {
-		Map<@NonNull ConnectionEnd, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(connection);
-		@Nullable ConnectionEnd targetEnd = null;
-		for (@NonNull ConnectionEnd end : targetEnd2role.keySet()) {
-			if (end.getOwningRegion() == targetRegion) {
-				assert targetEnd == null;
-				targetEnd = end;
-			}
-		}
-		assert targetEnd != null;
-		return targetEnd;
-	} */
-
-	/*	public @NonNull ConnectionEnd getTarget(@NonNull Connection connection, @NonNull Region targetRegion) {
-		Map<@NonNull ConnectionEnd, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(connection);
-		@Nullable ConnectionEnd targetEnd = null;
-		for (@NonNull ConnectionEnd end : targetEnd2role.keySet()) {
-			if (end.getOwningRegion() == targetRegion) {
-				assert targetEnd == null;
-				targetEnd = end;
-			}
-		}
-		assert targetEnd != null;
-		return targetEnd;
-	} */
-
-	public @NonNull Iterable<@NonNull ConnectionEnd> getTargetConnectionEnds(@NonNull Connection connection, @NonNull Partition targetPartition) {
-		List<@NonNull ConnectionEnd> targetConnectionEnds = new ArrayList<>();
-		for (@NonNull ConnectionEnd targetConnectionEnd : connection.getTargetKeys()) {
-			//	Region region = QVTscheduleUtil.getOwningRegion(targetConnectionEnd);
-			//	RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
-			//	Iterable<@NonNull Partition> partitions = regionAnalysis.getPartitions();
-			//	for (@NonNull Partition partition : partitions) {
-			Role role = getRole(targetPartition, targetConnectionEnd);
-			if ((role != null) && role.isOld()) {
-				targetConnectionEnds.add(targetConnectionEnd);
-			}
-			//	}
-		}
-		return targetConnectionEnds;
-	}
-
-	public @NonNull ConnectionRole getTargetConnectionRole(@NonNull Connection connection, @NonNull Partition targetPartition, @NonNull ConnectionEnd connectionEnd) {
-		ConnectionRole connectionRole = connection.getTargetRole(connectionEnd);
-		assert connectionRole != null;
-		if (connectionRole.isPassed()) {
-			boolean isHead = targetPartition.isHead(connectionEnd);
-			if (!isHead) {
-				connectionRole = ConnectionRole.PREFERRED_NODE;
-			}
-		}
-		return connectionRole;
-	}
-
-	public @NonNull Iterable<@NonNull NavigableEdge> getTargetEdges(@NonNull EdgeConnection edgeConnection) {
-		return edgeConnection.getTargetKeys();
-	}
-
-	public @NonNull Iterable<@NonNull Node> getTargetNodes(@NonNull Connection connection) {
-		if (connection instanceof EdgeConnection) {
-			return getTargetNodes((EdgeConnection)connection);
-		}
-		else {
-			return getTargetNodes((NodeConnection)connection);
-		}
-	}
-
-	public @NonNull Iterable<@NonNull Node> getTargetNodes(@NonNull EdgeConnection edgeConnection) {
-		List<@NonNull Node> targetNodes = new ArrayList<>();
-		for (@NonNull NavigableEdge targetEdge : edgeConnection.getTargetKeys()) {
-			targetNodes.add(targetEdge.getEdgeTarget());
-		}
-		return targetNodes;
-	}
-
-	public @NonNull Iterable<@NonNull Node> getTargetNodes(@NonNull NodeConnection nodeConnection) {
-		return nodeConnection.getTargetKeys();
-	}
-
-	/*	public @NonNull Set<@NonNull Partition> getTargetPartitions(@NonNull Connection connection) {
-		Set<@NonNull Partition> targetPartitions = new HashSet<>();
-		for (@NonNull ConnectionEnd targetEnd : getTargets(connection).keySet()) {
-			Region targetRegion = QVTscheduleUtil.getOwningRegion(targetEnd);
-			targetPartitions.add(scheduleManager.wipGetPartition(targetRegion));
-		}
-		return targetPartitions;
-	} */
-	public @NonNull Iterable<@NonNull Partition> getTargetPartitions(@NonNull Connection connection) {
-		List<@NonNull Partition> targetPartitions = new ArrayList<>();
-		for (@NonNull ConnectionEnd target : connection.getTargetKeys()) {
-			Region region = QVTscheduleUtil.getOwningRegion(target);
-			RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
-			Iterable<@NonNull Partition> partitions = regionAnalysis.getPartitions();
-			for (@NonNull Partition partition : partitions) {
-				Role role = getRole(partition, target);
-				if ((role != null) && role.isOld() && !targetPartitions.contains(partition)) {
-					boolean skipPartionedHead = false;
-					if (target instanceof Node) {
-						if (((Node)target).isHead() && !partition.isHead(target)) {
-							skipPartionedHead = true;
-						}
-					}
-					if (!skipPartionedHead) {
-						targetPartitions.add(partition);
-					}
-				}
-			}
-		}
-		return targetPartitions;
-	}
-
-	//	public static @NonNull Map<@NonNull Node, @NonNull ConnectionRole> getTargets(@NonNull EdgeConnection edgeConnection) {
-	//		Map<@NonNull NavigableEdge, @NonNull ConnectionRole> targetEnd2role = (Map<@NonNull NavigableEdge, @NonNull ConnectionRole>)(Object)connection2targetEnd2role.get(nodeConnection);
-	//		assert targetEnd2role != null;
-	//		return targetEnd2role;
-	//	}
-
-	//	public static @NonNull Map<@NonNull Node, @NonNull ConnectionRole> getTargets(@NonNull NodeConnection nodeConnection) {
-	//		Map<@NonNull Node, @NonNull ConnectionRole> targetEnd2role = (Map<@NonNull Node, @NonNull ConnectionRole>)(Object)connection2targetEnd2role.get(nodeConnection);
-	//		assert targetEnd2role != null;
-	//		return targetEnd2role;
-	//	}
 
 	public @NonNull Iterable<@NonNull Node> getUsedBindingSources(@NonNull Node node) {
 		List<@NonNull Node> sources = new ArrayList<>();
@@ -1377,224 +870,9 @@ public class ConnectionManager
 		return true;
 	}
 
-	//	public static @NonNull Map<@NonNull Node, @NonNull ConnectionRole> getTargets(@NonNull EdgeConnection edgeConnection) {
-	//		Map<@NonNull NavigableEdge, @NonNull ConnectionRole> targetEnd2role = (Map<@NonNull NavigableEdge, @NonNull ConnectionRole>)(Object)connection2targetEnd2role.get(nodeConnection);
-	//		assert targetEnd2role != null;
-	//		return targetEnd2role;
-	//	}
-
-	//	public static @NonNull Map<@NonNull Node, @NonNull ConnectionRole> getTargets(@NonNull NodeConnection nodeConnection) {
-	//		Map<@NonNull Node, @NonNull ConnectionRole> targetEnd2role = (Map<@NonNull Node, @NonNull ConnectionRole>)(Object)connection2targetEnd2role.get(nodeConnection);
-	//		assert targetEnd2role != null;
-	//		return targetEnd2role;
-	//	}
-
-	/**
-	 * Return the regions that this region uses and how many times.
-	 *
-	public static @NonNull List<@NonNull NodeConnection> getUsedConnections(@NonNull Region region) {			// FIXME cache
-		List<@NonNull NodeConnection> usedConnections = new ArrayList<>();
-		for (@NonNull Node node : region.getPatternNodes()) {
-			if (node.isLoaded() || node.isSpeculated() || node.isPredicated()) {	// A DataType may be loaded but subject to an edge predication
-				NodeConnection connection = node.getIncomingUsedConnection();
-				if (connection != null) {
-					usedConnections.add(connection);
-				}
-			}
-		}
-		return usedConnections;
-	} */
-
-	public boolean isEdge2Edge(@NonNull EdgeConnection edgeConnection) {
-		List<NavigableEdge> sourceEnds = QVTscheduleUtil.getSourceEnds(edgeConnection);
-		Set<@NonNull NavigableEdge> targetEdges = edgeConnection.getTargetKeys();
-		return (sourceEnds.size() == 1) && (targetEdges.size() == 1);
-	}
-
-	public boolean isNode2Node(@NonNull NodeConnection nodeConnection) {
-		List<Node> sourceEnds = QVTscheduleUtil.getSourceEnds(nodeConnection);
-		Set<@NonNull Node> targetNodes = nodeConnection.getTargetKeys();
-		return (sourceEnds.size() == 1) && (targetNodes.size() == 1);
-	}
-
-	//	public static @NonNull Map<@NonNull Node, @NonNull ConnectionRole> getTargets(@NonNull EdgeConnection edgeConnection) {
-	//		Map<@NonNull NavigableEdge, @NonNull ConnectionRole> targetEnd2role = (Map<@NonNull NavigableEdge, @NonNull ConnectionRole>)(Object)connection2targetEnd2role.get(nodeConnection);
-	//		assert targetEnd2role != null;
-	//		return targetEnd2role;
-	//	}
-
-	//	public static @NonNull Map<@NonNull Node, @NonNull ConnectionRole> getTargets(@NonNull NodeConnection nodeConnection) {
-	//		Map<@NonNull Node, @NonNull ConnectionRole> targetEnd2role = (Map<@NonNull Node, @NonNull ConnectionRole>)(Object)connection2targetEnd2role.get(nodeConnection);
-	//		assert targetEnd2role != null;
-	//		return targetEnd2role;
-	//	}
-
-	public boolean isPassed(@NonNull Connection connection, @NonNull Partition targetPartition) {
-		if (connection instanceof EdgeConnection) {
-			return false;
-		}
-		else {
-			if (Iterables.contains(getIncomingPassedConnections(targetPartition), connection)) {		// FIXME unify cyclic/non-cyclic
-				return true;
-			}
-			NodeConnection nodeConnection = (NodeConnection)connection;
-			for (@NonNull Node targetNode : nodeConnection.getTargetKeys()) {
-				if (!targetNode.isDependency() && targetPartition.isHead(targetNode)) {
-					ConnectionRole role = nodeConnection.getTargetRole(targetNode);
-					assert role != null;
-					assert role.isPassed();
-					return true;
-
-				}
-			}
-			return false;
-		}
-	}
-
-	/*	public @NonNull Iterable<@NonNull NodeConnection> getOutgoingPassedConnections(@NonNull Region region) {			// FIXME cache
-		List<@NonNull NodeConnection> connections = new ArrayList<>();
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
-			for (@NonNull NodeConnection connection : node.getOutgoingPassedConnections()) {
-				connections.add(connection);
-			}
-		}
-		return connections;
-	} */
-
-	/*	public @NonNull Iterable<@NonNull NodeConnection> getOutgoingUsedConnections(@NonNull Region region) {			// FIXME cache
-		List<@NonNull NodeConnection> connections = new ArrayList<>();
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
-			for (@NonNull NodeConnection connection : node.getOutgoingUsedBindingEdges()) {
-				connections.add(connection);
-			}
-		}
-		return connections;
-	} */
-
-
-
-	//	public @NonNull Iterable<@NonNull ? extends ConnectionEnd> getSources(@NonNull Connection connection) {
-	//		return getSourceEnds(connection);
-	//	}
-
-	//	public @NonNull Iterable<@NonNull NavigableEdge> getSources(@NonNull EdgeConnection edgeConnection) {
-	//		return getSourceEnds(edgeConnection);
-	//	}
-
-	//	public @NonNull Iterable<@NonNull Node> getSources(@NonNull NodeConnection nodeConnection) {
-	//		return getSourceEnds(nodeConnection);
-	//	}
-
-	/*	public @NonNull Iterable<@NonNull Region> getSourceRegions(@NonNull Connection connection, @NonNull ScheduledRegion scheduledRegion) {
-		Set<@NonNull Region> sourceRegions = new HashSet<>();
-		for (@NonNull ConnectionEnd sourceEnd : getSourceEnds(connection)) {
-			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
-			sourceRegion = scheduledRegion.getNormalizedRegion(sourceRegion);
-			if (sourceRegion != null) {
-				sourceRegions.add(sourceRegion);
-			}
-		}
-		return sourceRegions;
-	} */
-
-	/*	public @NonNull ConnectionEnd getTarget(@NonNull Connection connection, @NonNull Region targetRegion) {
-		Map<@NonNull ConnectionEnd, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(connection);
-		@Nullable ConnectionEnd targetEnd = null;
-		for (@NonNull ConnectionEnd end : targetEnd2role.keySet()) {
-			if (end.getOwningRegion() == targetRegion) {
-				assert targetEnd == null;
-				targetEnd = end;
-			}
-		}
-		assert targetEnd != null;
-		return targetEnd;
-	} */
-
-
-
-	//	public static @NonNull Map<@NonNull Node, @NonNull ConnectionRole> getTargets(@NonNull EdgeConnection edgeConnection) {
-	//		Map<@NonNull NavigableEdge, @NonNull ConnectionRole> targetEnd2role = (Map<@NonNull NavigableEdge, @NonNull ConnectionRole>)(Object)connection2targetEnd2role.get(nodeConnection);
-	//		assert targetEnd2role != null;
-	//		return targetEnd2role;
-	//	}
-
-	//	public static @NonNull Map<@NonNull Node, @NonNull ConnectionRole> getTargets(@NonNull NodeConnection nodeConnection) {
-	//		Map<@NonNull Node, @NonNull ConnectionRole> targetEnd2role = (Map<@NonNull Node, @NonNull ConnectionRole>)(Object)connection2targetEnd2role.get(nodeConnection);
-	//		assert targetEnd2role != null;
-	//		return targetEnd2role;
-	//	}
-
-	public boolean isRegion2Region(@NonNull Connection connection, @NonNull Map<@NonNull Region, @NonNull Integer> sourceRegion2count, @NonNull Map<@NonNull Region, @NonNull List<@NonNull ConnectionRole>> targetRegion2roles) {
-		return (sourceRegion2count.size() == 1) && (targetRegion2roles.size() == 1) && (targetRegion2roles.values().iterator().next().size() == 1); //(targetEnd2role.size() == 1);
-	}
-
-	public boolean isUsed(@NonNull NodeConnection nodeConnection, @NonNull Node targetNode) {
-		ConnectionRole targetConnectionRole = nodeConnection.getTargetRole(targetNode);
-		assert targetConnectionRole != null;
-		return targetConnectionRole.isPreferred();
-	}
-
-	private void mergeRole(@NonNull Connection connection, @NonNull ConnectionRole connectionRoleEnum) {
-		//		assert connectionRole != null;
-		if (connection.getConnectionRole() == ConnectionRole.UNDEFINED) {
-			connection.setConnectionRole(connectionRoleEnum);
-		}
-		else if (connection.getConnectionRole() != connectionRoleEnum) {
-			connection.setConnectionRole(connection.getConnectionRole().merge(connectionRoleEnum));
-		}
-	}
-
 	public void removeCallToChild(@NonNull Partition parentPartition, @NonNull Partition childPartition) {
 		getCallableChildren(parentPartition).remove(childPartition);
 		getCallableParents(childPartition).remove(parentPartition);
-	}
-
-	/* 	public void removeSource(@NonNull NodeConnection nodeConnection, @NonNull Node sourceNode) {
-		boolean wasRemoved = getSourceEnds(nodeConnection).remove(sourceNode);
-		assert wasRemoved;
-	} */
-
-	private void removeTarget(@NonNull EdgeConnection edgeConnection, @NonNull NavigableEdge targetEdge) {
-		ConnectionRole oldRole = edgeConnection.removeTarget(targetEdge);
-		assert oldRole != null;
-	}
-
-	public void removeTarget(@NonNull NodeConnection nodeConnection, @NonNull Node targetNode) {
-		ConnectionRole oldRole = nodeConnection.removeTarget(targetNode);
-		assert oldRole != null;
-	}
-
-	public void removeTargetRegion(@NonNull Connection connection, @NonNull Region targetRegion) {
-		if (connection instanceof EdgeConnection) {
-			removeTargetRegion((EdgeConnection)connection, targetRegion);
-		}
-		else {
-			removeTargetRegion((NodeConnection)connection, targetRegion);
-		}
-	}
-
-	public void removeTargetRegion(@NonNull EdgeConnection edgeConnection, @NonNull Region targetRegion) {
-		for (@NonNull NavigableEdge targetEdge : Lists.newArrayList(getTargetEdges(edgeConnection))) {
-			if (targetEdge.getOwningRegion() == targetRegion) {
-				targetEdge.setIncomingConnection(null);
-				removeTarget(edgeConnection, targetEdge);
-			}
-		}
-		if (edgeConnection.getTargetKeys().isEmpty()) {
-			edgeConnection.destroy();
-		}
-	}
-
-	public void removeTargetRegion(@NonNull NodeConnection nodeConnection, @NonNull Region targetRegion) {
-		for (@NonNull Node targetNode : Lists.newArrayList(nodeConnection.getTargetKeys())) {
-			if (targetNode.getOwningRegion() == targetRegion) {
-				targetNode.setIncomingConnection(null);
-				removeTarget(nodeConnection, targetNode);
-			}
-		}
-		if (nodeConnection.getTargetKeys().isEmpty()) {
-			nodeConnection.destroy();
-		}
 	}
 
 	public void replaceCallToChild(@NonNull Partition parentPartition, @NonNull Partition oldPartition, @NonNull Partition newPartition) {
@@ -1605,24 +883,5 @@ public class ConnectionManager
 		List<@NonNull Partition> oldPartitionCallableParents = getCallableParents(oldPartition);
 		oldPartitionCallableParents.remove(parentPartition);
 		oldPartitionCallableParents.add(parentPartition);
-	}
-
-	public void setCommonPartition(@NonNull NodeConnection nodeConnection, @NonNull Partition commonPartition, @NonNull List<@NonNull Partition> intermediatePartitions) {
-		assert !connection2commonPartition.containsKey(nodeConnection);
-		assert !connection2intermediatePartitions.containsKey(nodeConnection);
-		connection2commonPartition.put(nodeConnection, commonPartition);
-		connection2intermediatePartitions.put(nodeConnection, new ArrayList<>(intermediatePartitions));
-		commonPartition.addRootConnection(nodeConnection);
-		for (@NonNull Partition intermediatePartition : intermediatePartitions) {
-			intermediatePartition.addIntermediateConnection(nodeConnection);
-		}
-		if (QVTscheduleConstants.CONNECTION_ROUTING.isActive()) {
-			StringBuilder s = new StringBuilder();
-			s.append(nodeConnection.getSymbolName() + " common: " + commonPartition + " intermediate:");
-			for (@NonNull Partition intermediatePartition : intermediatePartitions) {
-				s.append(" " + intermediatePartition);
-			}
-			QVTscheduleConstants.CONNECTION_ROUTING.println(s.toString());
-		}
 	}
 }
