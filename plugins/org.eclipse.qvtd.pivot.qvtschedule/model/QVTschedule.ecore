@@ -504,6 +504,18 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="passes" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="intermediateConnections"
+        ordered="false" upperBound="-1" eType="#//NodeConnection">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The connections propagated as middle guards from a hosted by a parent partition and to one or more child partitions."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rootConnections" ordered="false"
+        upperBound="-1" eType="#//NodeConnection">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The connections hosted by this partition and passed to child partitions."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PatternTypedNode" eSuperTypes="#//MappingNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="PatternVariableNode" eSuperTypes="#//VariableNode"/>

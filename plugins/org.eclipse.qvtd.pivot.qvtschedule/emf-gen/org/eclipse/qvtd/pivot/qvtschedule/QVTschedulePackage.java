@@ -1023,13 +1023,31 @@ public interface QVTschedulePackage extends EPackage {
 	int PARTITION__PASSES = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Intermediate Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTITION__INTERMEDIATE_CONNECTIONS = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Root Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARTITION__ROOT_CONNECTIONS = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Partition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARTITION_FEATURE_COUNT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int PARTITION_FEATURE_COUNT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -1121,6 +1139,24 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_PARTITION__PASSES = PARTITION__PASSES;
+
+	/**
+	 * The feature id for the '<em><b>Intermediate Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_PARTITION__INTERMEDIATE_CONNECTIONS = PARTITION__INTERMEDIATE_CONNECTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Root Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_PARTITION__ROOT_CONNECTIONS = PARTITION__ROOT_CONNECTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owning Composite Partition</b></em>' container reference.
@@ -1257,6 +1293,24 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int BASIC_PARTITION__PASSES = MAPPING_PARTITION__PASSES;
+
+	/**
+	 * The feature id for the '<em><b>Intermediate Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__INTERMEDIATE_CONNECTIONS = MAPPING_PARTITION__INTERMEDIATE_CONNECTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Root Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__ROOT_CONNECTIONS = MAPPING_PARTITION__ROOT_CONNECTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owning Composite Partition</b></em>' container reference.
@@ -3471,6 +3525,24 @@ public interface QVTschedulePackage extends EPackage {
 	int COMPOSITE_PARTITION__PASSES = PARTITION__PASSES;
 
 	/**
+	 * The feature id for the '<em><b>Intermediate Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_PARTITION__INTERMEDIATE_CONNECTIONS = PARTITION__INTERMEDIATE_CONNECTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Root Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_PARTITION__ROOT_CONNECTIONS = PARTITION__ROOT_CONNECTIONS;
+
+	/**
 	 * The feature id for the '<em><b>Owned Mapping Partitions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4174,6 +4246,24 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int CYCLIC_PARTITION__PASSES = COMPOSITE_PARTITION__PASSES;
+
+	/**
+	 * The feature id for the '<em><b>Intermediate Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CYCLIC_PARTITION__INTERMEDIATE_CONNECTIONS = COMPOSITE_PARTITION__INTERMEDIATE_CONNECTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Root Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CYCLIC_PARTITION__ROOT_CONNECTIONS = COMPOSITE_PARTITION__ROOT_CONNECTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Mapping Partitions</b></em>' containment reference list.
@@ -6647,6 +6737,24 @@ public interface QVTschedulePackage extends EPackage {
 	int LOADING_PARTITION__PASSES = MAPPING_PARTITION__PASSES;
 
 	/**
+	 * The feature id for the '<em><b>Intermediate Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOADING_PARTITION__INTERMEDIATE_CONNECTIONS = MAPPING_PARTITION__INTERMEDIATE_CONNECTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Root Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOADING_PARTITION__ROOT_CONNECTIONS = MAPPING_PARTITION__ROOT_CONNECTIONS;
+
+	/**
 	 * The feature id for the '<em><b>Owning Composite Partition</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8071,6 +8179,24 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NON_PARTITION__PASSES = MAPPING_PARTITION__PASSES;
+
+	/**
+	 * The feature id for the '<em><b>Intermediate Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NON_PARTITION__INTERMEDIATE_CONNECTIONS = MAPPING_PARTITION__INTERMEDIATE_CONNECTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Root Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NON_PARTITION__ROOT_CONNECTIONS = MAPPING_PARTITION__ROOT_CONNECTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owning Composite Partition</b></em>' container reference.
@@ -9940,6 +10066,24 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int ROOT_PARTITION__PASSES = COMPOSITE_PARTITION__PASSES;
+
+	/**
+	 * The feature id for the '<em><b>Intermediate Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT_PARTITION__INTERMEDIATE_CONNECTIONS = COMPOSITE_PARTITION__INTERMEDIATE_CONNECTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Root Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ROOT_PARTITION__ROOT_CONNECTIONS = COMPOSITE_PARTITION__ROOT_CONNECTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Mapping Partitions</b></em>' containment reference list.
@@ -13987,6 +14131,28 @@ public interface QVTschedulePackage extends EPackage {
 	EAttribute getPartition_Passes();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Partition#getIntermediateConnections <em>Intermediate Connections</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Intermediate Connections</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Partition#getIntermediateConnections()
+	 * @see #getPartition()
+	 * @generated
+	 */
+	EReference getPartition_IntermediateConnections();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Partition#getRootConnections <em>Root Connections</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Root Connections</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Partition#getRootConnections()
+	 * @see #getPartition()
+	 * @generated
+	 */
+	EReference getPartition_RootConnections();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.PatternTypedNode <em>Pattern Typed Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15805,6 +15971,22 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute PARTITION__PASSES = eINSTANCE.getPartition_Passes();
+
+		/**
+		 * The meta object literal for the '<em><b>Intermediate Connections</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARTITION__INTERMEDIATE_CONNECTIONS = eINSTANCE.getPartition_IntermediateConnections();
+
+		/**
+		 * The meta object literal for the '<em><b>Root Connections</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PARTITION__ROOT_CONNECTIONS = eINSTANCE.getPartition_RootConnections();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PatternTypedNodeImpl <em>Pattern Typed Node</em>}' class.

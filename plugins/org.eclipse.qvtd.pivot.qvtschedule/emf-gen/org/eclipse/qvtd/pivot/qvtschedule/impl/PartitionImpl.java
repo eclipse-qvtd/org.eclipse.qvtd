@@ -25,6 +25,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
@@ -38,6 +39,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -58,6 +60,8 @@ import com.google.common.collect.Iterables;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PartitionImpl#getPasses <em>Passes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PartitionImpl#getIntermediateConnections <em>Intermediate Connections</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PartitionImpl#getRootConnections <em>Root Connections</em>}</li>
  * </ul>
  *
  * @generated
@@ -72,6 +76,25 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 	 * @ordered
 	 */
 	protected EList<Integer> passes;
+
+	/**
+	 * The cached value of the '{@link #getIntermediateConnections() <em>Intermediate Connections</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIntermediateConnections()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<NodeConnection> intermediateConnections;
+	/**
+	 * The cached value of the '{@link #getRootConnections() <em>Root Connections</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRootConnections()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<NodeConnection> rootConnections;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -111,10 +134,40 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 	 * @generated
 	 */
 	@Override
+	public List<NodeConnection> getIntermediateConnections() {
+		if (intermediateConnections == null) {
+			intermediateConnections = new EObjectResolvingEList<NodeConnection>(NodeConnection.class, this, QVTschedulePackage.PARTITION__INTERMEDIATE_CONNECTIONS);
+		}
+		return intermediateConnections;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public List<NodeConnection> getRootConnections() {
+		if (rootConnections == null) {
+			rootConnections = new EObjectResolvingEList<NodeConnection>(NodeConnection.class, this, QVTschedulePackage.PARTITION__ROOT_CONNECTIONS);
+		}
+		return rootConnections;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTschedulePackage.PARTITION__PASSES:
 				return getPasses();
+			case QVTschedulePackage.PARTITION__INTERMEDIATE_CONNECTIONS:
+				return getIntermediateConnections();
+			case QVTschedulePackage.PARTITION__ROOT_CONNECTIONS:
+				return getRootConnections();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -132,6 +185,14 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 				getPasses().clear();
 				getPasses().addAll((Collection<? extends Integer>)newValue);
 				return;
+			case QVTschedulePackage.PARTITION__INTERMEDIATE_CONNECTIONS:
+				getIntermediateConnections().clear();
+				getIntermediateConnections().addAll((Collection<? extends NodeConnection>)newValue);
+				return;
+			case QVTschedulePackage.PARTITION__ROOT_CONNECTIONS:
+				getRootConnections().clear();
+				getRootConnections().addAll((Collection<? extends NodeConnection>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -147,6 +208,12 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 			case QVTschedulePackage.PARTITION__PASSES:
 				getPasses().clear();
 				return;
+			case QVTschedulePackage.PARTITION__INTERMEDIATE_CONNECTIONS:
+				getIntermediateConnections().clear();
+				return;
+			case QVTschedulePackage.PARTITION__ROOT_CONNECTIONS:
+				getRootConnections().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -161,12 +228,23 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 		switch (featureID) {
 			case QVTschedulePackage.PARTITION__PASSES:
 				return passes != null && !passes.isEmpty();
+			case QVTschedulePackage.PARTITION__INTERMEDIATE_CONNECTIONS:
+				return intermediateConnections != null && !intermediateConnections.isEmpty();
+			case QVTschedulePackage.PARTITION__ROOT_CONNECTIONS:
+				return rootConnections != null && !rootConnections.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
 
 	private @Nullable String symbolName = null;
+
+	@Override
+	public void addIntermediateConnection(@NonNull NodeConnection connection) {
+		List<NodeConnection> intermediateConnections = getIntermediateConnections();
+		assert !intermediateConnections.contains(connection);
+		intermediateConnections.add(connection);
+	}
 
 	@Override
 	public boolean addPass(int passNumber) {
@@ -186,6 +264,13 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 		}
 		passes2.add(passNumber);
 		return true;
+	}
+
+	@Override
+	public void addRootConnection(@NonNull NodeConnection connection) {
+		List<NodeConnection> rootConnections = getRootConnections();
+		assert !rootConnections.contains(connection);
+		rootConnections.add(connection);
 	}
 
 	@Override

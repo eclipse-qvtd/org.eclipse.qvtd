@@ -588,6 +588,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(node.getIncomingEdges());
 	}
 
+	public static List<@NonNull NodeConnection> getIntermediateConnections(@NonNull Partition partition) {
+		return ClassUtil.nullFree(partition.getIntermediateConnections());
+	}
+
 	public static @NonNull String getName(@NonNull Nameable nameable) {
 		return ClassUtil.nonNullState(nameable.getName());
 	}
@@ -753,6 +757,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Region getRegion(@NonNull Partition partition) {
 		return ClassUtil.nonNullState(partition.getRegion());
+	}
+
+	public static List<@NonNull NodeConnection> getRootConnections(@NonNull Partition partition) {
+		return ClassUtil.nullFree(partition.getRootConnections());
 	}
 
 	public static @NonNull ScheduleModel getScheduleModel(@NonNull Region region) {

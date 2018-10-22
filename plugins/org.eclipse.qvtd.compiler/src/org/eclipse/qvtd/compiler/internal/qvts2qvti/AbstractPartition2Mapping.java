@@ -150,7 +150,7 @@ public abstract class AbstractPartition2Mapping
 	}
 
 	protected void createAppendParameters() {
-		List<@NonNull NodeConnection> intermediateConnections = connectionManager.getIntermediateConnections(partition);
+		List<@NonNull NodeConnection> intermediateConnections = QVTscheduleUtil.getIntermediateConnections(partition);
 		if (intermediateConnections.size() > 0) {
 			connection2variable = new HashMap<>();
 			for (@NonNull NodeConnection connection : intermediateConnections) {

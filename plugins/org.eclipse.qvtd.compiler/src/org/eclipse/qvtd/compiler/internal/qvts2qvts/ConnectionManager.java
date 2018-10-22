@@ -111,16 +111,6 @@ public class ConnectionManager
 	 */
 	private final @NonNull Map<@NonNull Partition, @NonNull List<@NonNull Partition>> partition2children = new HashMap<>();
 
-	/**
-	 * The connections propagated as middle guards from a hosted by a parent region and to one or more child regions.
-	 */
-	private final @NonNull Map<@NonNull Partition, @NonNull List<@NonNull NodeConnection>> partition2intermediateConnections = new HashMap<>();
-
-	/**
-	 * The connections hosted by this region and passed to child regions.
-	 */
-	private final @NonNull Map<@NonNull Partition, @NonNull List<@NonNull NodeConnection>> partition2rootConnections = new HashMap<>();
-
 	public ConnectionManager(@NonNull ProblemHandler problemHandler, @NonNull ScheduleManager scheduleManager, @NonNull LoadingRegionAnalysis loadingRegionAnalysis) {
 		//	super(qvtm2qvts.getEnvironmentFactory());
 		this.scheduleManager = scheduleManager;
@@ -133,12 +123,6 @@ public class ConnectionManager
 		getCallableParents(childPartition).add(parentPartition);
 	}
 
-	public void addIntermediateConnection(@NonNull Partition partition, @NonNull NodeConnection connection) {
-		List<@NonNull NodeConnection> intermediateConnections = getIntermediateConnections(partition);
-		assert !intermediateConnections.contains(connection);
-		intermediateConnections.add(connection);
-	}
-
 	public void addPassedTargetNode(@NonNull NodeConnection nodeConnection, @NonNull Node targetNode) {
 		mergeRole(nodeConnection, ConnectionRole.PASSED);
 		Map<@NonNull Node, @NonNull ConnectionRole> targetEnd2role = getTargetEnd2Role(nodeConnection);
@@ -146,12 +130,6 @@ public class ConnectionManager
 		targetEnd2role.put(targetNode, ConnectionRole.PASSED);
 		targetNode.setIncomingConnection(nodeConnection);
 		//		assert Sets.intersection(getSourceRegions(), getTargetRegions()).isEmpty();
-	}
-
-	public void addRootConnection(@NonNull Partition partition, @NonNull NodeConnection connection) {
-		List<@NonNull NodeConnection> rootConnections = getRootConnections(partition);
-		assert !rootConnections.contains(connection);
-		rootConnections.add(connection);
 	}
 
 	public void addUsedTargetEdge(@NonNull EdgeConnection edgeConnection, @NonNull NavigableEdge targetEdge, boolean mustBeLater) {
@@ -743,20 +721,6 @@ public class ConnectionManager
 		return connection2commonPartition.get(nodeConnection);
 	}
 
-	public @NonNull List<@NonNull NodeConnection> getIntermediateConnections(@NonNull Partition partition) {
-		List<@NonNull NodeConnection> intermediateConnections = partition2intermediateConnections.get(partition);
-		if (intermediateConnections == null) {
-			intermediateConnections = new ArrayList<>();
-			partition2intermediateConnections.put(partition, intermediateConnections);
-		}
-		return intermediateConnections;
-	}
-
-	public @NonNull List<@NonNull Partition> getIntermediatePartitions(@NonNull NodeConnection nodeConnection) {
-		List<@NonNull Partition> intermediatePartitions = connection2intermediatePartitions.get(nodeConnection);
-		return intermediatePartitions != null ? intermediatePartitions :EMPTY_PARTITION_LIST;
-	}
-
 	private @NonNull EdgeConnection getEdgeConnection(@NonNull ScheduledRegion scheduledRegion, @NonNull Iterable<@NonNull NavigableEdge> sourceEdges, @NonNull Property property) {
 		Set<@NonNull NavigableEdge> sourceSet = Sets.newHashSet(sourceEdges);
 		EdgeConnection connection = edges2edgeConnection.get(sourceSet);
@@ -771,6 +735,8 @@ public class ConnectionManager
 		}
 		return connection;
 	}
+
+
 
 	/**
 	 * Return the regions that this region calls.
@@ -915,18 +881,10 @@ public class ConnectionManager
 		}
 	}
 
-	/*	public @NonNull Iterable<@NonNull NodeConnection> getIncomingUsedConnections(@NonNull Region region) {			// FIXME cache
-		List<@NonNull NodeConnection> connections = new ArrayList<>();
-		for (@NonNull Node node : region.getPatternNodes()) {
-			if (node.isLoaded() || node.isSpeculated() || node.isPredicated()) {	// A DataType may be loaded but subject to an edge predication
-				NodeConnection connection = getIncomingUsedConnection(node);
-				if (connection != null) {
-					connections.add(connection);
-				}
-			}
-		}
-		return connections;
-	} */
+	public @NonNull List<@NonNull Partition> getIntermediatePartitions(@NonNull NodeConnection nodeConnection) {
+		List<@NonNull Partition> intermediatePartitions = connection2intermediatePartitions.get(nodeConnection);
+		return intermediatePartitions != null ? intermediatePartitions :EMPTY_PARTITION_LIST;
+	}
 
 	private @Nullable Iterable<@NonNull Node> getIntroducingOrNewNodes(@NonNull Node headNode) {
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(headNode);
@@ -1087,15 +1045,6 @@ public class ConnectionManager
 
 	public @Nullable Role getRole(@NonNull Partition partition, @NonNull ConnectionEnd connectionEnd) {
 		return connectionEnd instanceof Node ? partition.getRole((Node)connectionEnd) : connectionEnd instanceof Edge ? partition.getRole((Edge)connectionEnd) : null;
-	}
-
-	public @NonNull List<@NonNull NodeConnection> getRootConnections(@NonNull Partition partition) {
-		List<@NonNull NodeConnection> rootConnections = partition2rootConnections.get(partition);
-		if (rootConnections == null) {
-			rootConnections = new ArrayList<>();
-			partition2rootConnections.put(partition, rootConnections);
-		}
-		return rootConnections;
 	}
 
 	public @NonNull ScheduleManager getScheduleManager() {
@@ -1760,9 +1709,9 @@ public class ConnectionManager
 		assert !connection2intermediatePartitions.containsKey(nodeConnection);
 		connection2commonPartition.put(nodeConnection, commonPartition);
 		connection2intermediatePartitions.put(nodeConnection, new ArrayList<>(intermediatePartitions));
-		addRootConnection(commonPartition, nodeConnection);
+		commonPartition.addRootConnection(nodeConnection);
 		for (@NonNull Partition intermediatePartition : intermediatePartitions) {
-			addIntermediateConnection(intermediatePartition, nodeConnection);
+			intermediatePartition.addIntermediateConnection(nodeConnection);
 		}
 		if (QVTscheduleConstants.CONNECTION_ROUTING.isActive()) {
 			StringBuilder s = new StringBuilder();

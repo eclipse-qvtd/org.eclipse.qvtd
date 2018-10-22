@@ -79,7 +79,7 @@ public class LoadingPartition2Mapping extends AbstractScheduledRegion2Mapping
 	}
 
 	private void createRootConnectionVariables() {
-		List<@NonNull NodeConnection> rootConnections = new ArrayList<>(connectionManager.getRootConnections(partition));
+		List<@NonNull NodeConnection> rootConnections = new ArrayList<>(QVTscheduleUtil.getRootConnections(partition));
 		Collections.sort(rootConnections, NameUtil.NAMEABLE_COMPARATOR);
 		for (@NonNull NodeConnection rootConnection : rootConnections) {
 			Type commonType = getConnectionSourcesType(rootConnection);

@@ -35,6 +35,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public abstract class AbstractScheduledRegion2Mapping extends AbstractPartition2Mapping
 {
@@ -89,7 +90,7 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractPartition2
 			OCLExpression sourceExpression = PivotUtil.createVariableExp(callingConnectionVariable);
 			mappingParameterBindings.add(QVTimperativeUtil.createMappingParameterBinding(calledConnectionVariable, sourceExpression));
 		} */
-		for (@NonNull NodeConnection intermediateConnection : connectionManager.getIntermediateConnections(calledPartition)) {
+		for (@NonNull NodeConnection intermediateConnection : QVTscheduleUtil.getIntermediateConnections(calledPartition)) {
 			ConnectionVariable calledConnectionVariable = calledPartition2Mapping.getConnectionVariable(intermediateConnection);
 			/*			OCLExpression connectionExpression = null;
 			if (guardVariable2expression != null) {
@@ -159,7 +160,7 @@ public abstract class AbstractScheduledRegion2Mapping extends AbstractPartition2
 			OCLExpression sourceExpression = PivotUtil.createVariableExp(callingConnectionVariable);
 			mappingParameterBindings.add(QVTimperativeUtil.createMappingParameterBinding(calledConnectionVariable, sourceExpression));
 		} */
-		for (@NonNull NodeConnection intermediateConnection : connectionManager.getIntermediateConnections(calledPartition)) {
+		for (@NonNull NodeConnection intermediateConnection : QVTscheduleUtil.getIntermediateConnections(calledPartition)) {
 			ConnectionVariable calledConnectionVariable = calledRegion2Mapping.getConnectionVariable(intermediateConnection);
 			/*			OCLExpression connectionExpression = null;
 			if (guardVariable2expression != null) {

@@ -302,7 +302,8 @@ public interface BasicPartition extends MappingPartition {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Explicit Predecessors</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicPartition_ExplicitPredecessors()
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!explicitPredecessors'"
+	 * @model ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!explicitPredecessors'"
 	 * @generated
 	 */
 	List<MappingPartition> getExplicitPredecessors();

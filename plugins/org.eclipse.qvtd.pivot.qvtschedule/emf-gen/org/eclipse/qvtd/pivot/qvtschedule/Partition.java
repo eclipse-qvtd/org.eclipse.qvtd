@@ -40,6 +40,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Partition#getPasses <em>Passes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Partition#getIntermediateConnections <em>Intermediate Connections</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Partition#getRootConnections <em>Root Connections</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPartition()
@@ -64,7 +66,41 @@ public interface Partition extends NamedElement, Graphable, GraphNode {
 	 */
 	List<Integer> getPasses();
 
+	/**
+	 * Returns the value of the '<em><b>Intermediate Connections</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.NodeConnection}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The connections propagated as middle guards from a hosted by a parent partition and to one or more child partitions.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Intermediate Connections</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPartition_IntermediateConnections()
+	 * @model ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Partition!intermediateConnections'"
+	 * @generated
+	 */
+	List<NodeConnection> getIntermediateConnections();
+
+	/**
+	 * Returns the value of the '<em><b>Root Connections</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.NodeConnection}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The connections hosted by this partition and passed to child partitions.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Root Connections</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getPartition_RootConnections()
+	 * @model ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Partition!rootConnections'"
+	 * @generated
+	 */
+	List<NodeConnection> getRootConnections();
+
+	void addIntermediateConnection(@NonNull NodeConnection connection);
 	boolean addPass(int passNumber);
+	void addRootConnection(@NonNull NodeConnection connection);
 	@Nullable Set<@NonNull NavigableEdge> getCheckedEdges(@NonNull TypedModel typedModel);
 	@Nullable Iterable<@NonNull NavigableEdge> getEnforcedEdges(@NonNull TypedModel typedModel, @NonNull Property asProperty);
 	int getFirstPass();
