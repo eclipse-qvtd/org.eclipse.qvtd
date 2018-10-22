@@ -1,15 +1,15 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2013, 2018 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
@@ -81,6 +81,7 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ScheduledRegion getOwningRootRegion() {
 		if (eContainerFeatureID() != QVTschedulePackage.ROOT_PARTITION__OWNING_ROOT_REGION) return null;
 		return (ScheduledRegion)eInternalContainer();
@@ -101,6 +102,7 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwningRootRegion(ScheduledRegion newOwningRootRegion) {
 		if (newOwningRootRegion != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.ROOT_PARTITION__OWNING_ROOT_REGION && newOwningRootRegion != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningRootRegion))
@@ -122,6 +124,7 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LoadingPartition getLoadingPartition() {
 		if (loadingPartition != null && loadingPartition.eIsProxy()) {
 			InternalEObject oldLoadingPartition = (InternalEObject)loadingPartition;
@@ -148,6 +151,7 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLoadingPartition(LoadingPartition newLoadingPartition) {
 		LoadingPartition oldLoadingPartition = loadingPartition;
 		loadingPartition = newLoadingPartition;

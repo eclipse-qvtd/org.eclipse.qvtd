@@ -378,7 +378,7 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 		Node sourceNode = null;
 		for (@NonNull Node sourceEnd : QVTscheduleUtil.getSourceEnds(this)) {
 			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
-			Iterable<@NonNull MappingPartition> sourceRegionPartitions = getRegionPartitions(sourceRegion);
+			Iterable<@NonNull MappingPartition> sourceRegionPartitions = QVTscheduleUtil.getRegionPartitions(sourceRegion);
 			if (Iterables.contains(sourceRegionPartitions, sourcePartition)) {
 				Role sourceRole = QVTscheduleUtil.getRole(sourcePartition, sourceEnd);
 				if ((sourceRole != null) && !sourceRole.isAwaited()) { //(sourceRole.isNew() || sourceRole.isLoaded())) {
@@ -467,6 +467,7 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 		return (sourceEnds.size() == 1) && (targetNodes.size() == 1);
 	}
 
+	@Override
 	public boolean isPassed(@NonNull Partition targetPartition) {
 		if (Iterables.contains(targetPartition.getIncomingPassedConnections(), this)) {		// FIXME unify cyclic/non-cyclic
 			return true;

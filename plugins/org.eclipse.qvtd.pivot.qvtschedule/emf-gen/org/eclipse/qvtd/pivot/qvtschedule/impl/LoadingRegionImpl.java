@@ -81,6 +81,7 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LoadingPartition getLoadingPartition() {
 		if (loadingPartition != null && loadingPartition.eIsProxy()) {
 			InternalEObject oldLoadingPartition = (InternalEObject)loadingPartition;
@@ -122,6 +123,7 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLoadingPartition(LoadingPartition newLoadingPartition) {
 		if (newLoadingPartition != loadingPartition) {
 			NotificationChain msgs = null;

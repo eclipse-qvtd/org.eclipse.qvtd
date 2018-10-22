@@ -16,7 +16,6 @@ package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -40,9 +39,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
-import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -672,26 +669,12 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 		return getSymbolName();
 	}
 
-	protected static @NonNull Iterable<@NonNull MappingPartition> getRegionPartitions(@NonNull Region region) {
-		Iterable<@NonNull MappingPartition> sourceRegionPartitions;
-		if (region instanceof LoadingRegion) {
-			sourceRegionPartitions = Collections.singletonList(((LoadingRegion)region).getLoadingPartition());
-		}
-		else if (region instanceof MappingRegion) {
-			sourceRegionPartitions = ((MappingRegion)region).getMappingPartitions();
-		}
-		else {
-			throw new UnsupportedOperationException();
-		}
-		return sourceRegionPartitions;
-	}
-
 	@Override
 	public @NonNull ConnectionEnd getSource(@NonNull Partition sourcePartition) {
 		@Nullable ConnectionEnd theSourceEnd = null;
 		for (@NonNull ConnectionEnd sourceEnd : QVTscheduleUtil.getSourceEnds(this)) {
 			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
-			Iterable<@NonNull MappingPartition> sourceRegionPartitions = getRegionPartitions(sourceRegion);
+			Iterable<@NonNull MappingPartition> sourceRegionPartitions = QVTscheduleUtil.getRegionPartitions(sourceRegion);
 			if (Iterables.contains(sourceRegionPartitions, sourcePartition)) {
 				Role sourceRole = QVTscheduleUtil.getRole(sourcePartition, sourceEnd);
 				if ((sourceRole != null) && !sourceRole.isAwaited()) { //(sourceRole.isNew() || sourceRole.isLoaded())) {
@@ -709,7 +692,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 		Set<@NonNull Partition> sourcePartitions = new HashSet<>();
 		for (@NonNull ConnectionEnd sourceEnd : QVTscheduleUtil.getSourceEnds(this)) {
 			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
-			Iterable<@NonNull MappingPartition> sourceRegionPartitions = getRegionPartitions(sourceRegion);
+			Iterable<@NonNull MappingPartition> sourceRegionPartitions = QVTscheduleUtil.getRegionPartitions(sourceRegion);
 			for (@NonNull Partition sourcePartition : sourceRegionPartitions) {
 				Role sourceRole = QVTscheduleUtil.getRole(sourcePartition, sourceEnd);
 				if ((sourceRole != null) && !sourceRole.isAwaited()) { // (sourceRole.isNew() || sourceRole.isLoaded())) {
@@ -755,7 +738,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 		List<@NonNull Partition> targetPartitions = new ArrayList<>();
 		for (@NonNull ConnectionEnd target : getTargetEnds()) {
 			Region region = QVTscheduleUtil.getOwningRegion(target);
-			Iterable<@NonNull MappingPartition> partitions = getRegionPartitions(region);
+			Iterable<@NonNull MappingPartition> partitions = QVTscheduleUtil.getRegionPartitions(region);
 			for (@NonNull Partition partition : partitions) {
 				Role role = QVTscheduleUtil.getRole(partition, target);
 				if ((role != null) && role.isOld() && !targetPartitions.contains(partition)) {

@@ -101,6 +101,7 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CompositePartition getOwningCompositePartition() {
 		if (eContainerFeatureID() != QVTschedulePackage.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION) return null;
 		return (CompositePartition)eInternalContainer();
@@ -121,6 +122,7 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwningCompositePartition(CompositePartition newOwningCompositePartition) {
 		if (newOwningCompositePartition != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION && newOwningCompositePartition != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningCompositePartition))
@@ -142,6 +144,7 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MappingRegion getReferedMappingRegion() {
 		if (referedMappingRegion != null && referedMappingRegion.eIsProxy()) {
 			InternalEObject oldReferedMappingRegion = (InternalEObject)referedMappingRegion;
@@ -183,6 +186,7 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferedMappingRegion(MappingRegion newReferedMappingRegion) {
 		if (newReferedMappingRegion != referedMappingRegion) {
 			NotificationChain msgs = null;
@@ -222,6 +226,7 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RootPartition getRootPartition() {
 		if (rootPartition != null && rootPartition.eIsProxy()) {
 			InternalEObject oldRootPartition = (InternalEObject)rootPartition;

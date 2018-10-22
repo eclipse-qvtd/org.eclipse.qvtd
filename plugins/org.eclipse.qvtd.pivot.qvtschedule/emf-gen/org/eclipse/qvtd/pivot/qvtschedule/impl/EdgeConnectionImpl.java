@@ -351,7 +351,7 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 		List<@NonNull Node> sourceNodes = new ArrayList<>();
 		for (@NonNull NavigableEdge sourceEdge : QVTscheduleUtil.getSourceEnds(this)) {
 			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEdge);
-			Iterable<@NonNull MappingPartition> partitions = getRegionPartitions(sourceRegion);
+			Iterable<@NonNull MappingPartition> partitions = QVTscheduleUtil.getRegionPartitions(sourceRegion);
 			if (!Iterables.isEmpty(partitions)) {
 				for (@NonNull Partition sourcePartition : partitions) {
 					Role sourceRole = QVTscheduleUtil.getRole(sourcePartition, sourceEdge);
@@ -401,6 +401,7 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 		return (sourceEnds.size() == 1) && (targetEdges.size() == 1);
 	}
 
+	@Override
 	public boolean isPassed(@NonNull Partition targetPartition) {
 		return false;
 	}

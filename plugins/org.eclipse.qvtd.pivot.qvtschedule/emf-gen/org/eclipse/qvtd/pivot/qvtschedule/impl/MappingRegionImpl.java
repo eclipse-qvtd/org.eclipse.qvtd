@@ -109,6 +109,7 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<MappingPartition> getMappingPartitions() {
 		if (mappingPartitions == null) {
 			mappingPartitions = new EObjectWithInverseResolvingEList<MappingPartition>(MappingPartition.class, this, QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS, QVTschedulePackage.MAPPING_PARTITION__REFERED_MAPPING_REGION);

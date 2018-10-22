@@ -35,7 +35,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -105,23 +104,6 @@ public class ConnectionManager
 	public void addCallToChild(@NonNull Partition parentPartition, @NonNull Partition childPartition) {
 		getCallableChildren(parentPartition).add(childPartition);
 		getCallableParents(childPartition).add(parentPartition);
-	}
-
-	protected @NonNull Iterable<@NonNull Partition> getRegionPartitions1(@NonNull Region region) {
-		RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
-		Iterable<@NonNull Partition> sourceRegionPartitions1 = regionAnalysis.getPartitions();
-		Iterable<@NonNull MappingPartition> sourceRegionPartitions2;
-		if (region instanceof LoadingRegion) {
-			sourceRegionPartitions2 = Collections.singletonList(((LoadingRegion)region).getLoadingPartition());
-		}
-		else if (region instanceof MappingRegion) {
-			sourceRegionPartitions2 = ((MappingRegion)region).getMappingPartitions();
-		}
-		else {
-			throw new UnsupportedOperationException();
-		}
-		assert Sets.newHashSet(sourceRegionPartitions1).equals(Sets.newHashSet(sourceRegionPartitions2));
-		return sourceRegionPartitions1;
 	}
 
 	/**
@@ -504,7 +486,7 @@ public class ConnectionManager
 	 * Create Used Edge Connections between each edge realized in the origial region and predicated in a aprtition.
 	 */
 	public void createPartitionConnections(@NonNull ScheduledRegion scheduledRegion, @NonNull Region region) {
-		Iterable<@NonNull Partition> partitions = getRegionPartitions1(region);
+		Iterable<@NonNull MappingPartition> partitions = QVTscheduleUtil.getRegionPartitions(region);
 		RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
 		if (Iterables.size(partitions) <= 1) {
 			return;										// No trace connections if not actually partitioned
@@ -560,16 +542,6 @@ public class ConnectionManager
 			}
 		}
 	}
-
-	/**
-	 * Create the Passed and Used Connections between all introducers and their corresponding consuming nodes
-	 * for the original regions.
-	 *
-	public void createRegionConnections() {
-		for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(scheduledRegion)) {
-			createIncomingConnections(region);
-		}
-	} */
 
 	private @NonNull EdgeConnection getAttributeConnection(@NonNull ScheduledRegion scheduledRegion, @NonNull Iterable<@NonNull NavigableEdge> sourceEdges, @NonNull List<@NonNull String> partialNames, @NonNull Property property) {
 		Set<@NonNull NavigableEdge> sourceSet = Sets.newHashSet(sourceEdges);

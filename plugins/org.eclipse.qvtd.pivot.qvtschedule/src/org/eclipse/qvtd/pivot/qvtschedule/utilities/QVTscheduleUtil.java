@@ -51,6 +51,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EdgeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.KeyPartEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -596,6 +597,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(connection.getIntermediatePartitions());
 	}
 
+	public static @NonNull LoadingPartition getLoadingPartition(@NonNull LoadingRegion loadingRegion) {
+		return ClassUtil.nonNullState(loadingRegion.getLoadingPartition());
+	}
+
 	public static @NonNull Iterable<@NonNull MappingPartition> getMappingPartitions(@NonNull MappingRegion mappingRegion) {
 		return ClassUtil.nullFree(mappingRegion.getMappingPartitions());
 	}
@@ -765,6 +770,20 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Region getRegion(@NonNull Partition partition) {
 		return ClassUtil.nonNullState(partition.getRegion());
+	}
+
+	public static @NonNull Iterable<@NonNull MappingPartition> getRegionPartitions(@NonNull Region region) {
+		Iterable<@NonNull MappingPartition> sourceRegionPartitions;
+		if (region instanceof LoadingRegion) {
+			sourceRegionPartitions = Collections.singletonList(getLoadingPartition((LoadingRegion)region));
+		}
+		else if (region instanceof MappingRegion) {
+			sourceRegionPartitions = getMappingPartitions((MappingRegion)region);
+		}
+		else {
+			throw new UnsupportedOperationException();
+		}
+		return sourceRegionPartitions;
 	}
 
 	public static @Nullable Role getRole(@NonNull Partition partition, @NonNull ConnectionEnd connectionEnd) {

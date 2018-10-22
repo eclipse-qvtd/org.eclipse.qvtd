@@ -292,6 +292,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RootPartition getOwnedRootPartition() {
 		return ownedRootPartition;
 	}
@@ -316,6 +317,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOwnedRootPartition(RootPartition newOwnedRootPartition) {
 		if (newOwnedRootPartition != ownedRootPartition) {
 			NotificationChain msgs = null;
