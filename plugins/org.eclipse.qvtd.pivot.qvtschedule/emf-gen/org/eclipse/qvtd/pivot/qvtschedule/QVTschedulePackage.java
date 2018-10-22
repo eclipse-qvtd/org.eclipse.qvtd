@@ -3669,13 +3669,31 @@ public interface QVTschedulePackage extends EPackage {
 	int CONNECTION__SOURCE_ENDS = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Intermediate Partitions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONNECTION__INTERMEDIATE_PARTITIONS = PivotPackage.ELEMENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Common Partition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONNECTION__COMMON_PARTITION = PivotPackage.ELEMENT_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Connection</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONNECTION_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 5;
+	int CONNECTION_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -5038,6 +5056,24 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int EDGE_CONNECTION__SOURCE_ENDS = CONNECTION__SOURCE_ENDS;
+
+	/**
+	 * The feature id for the '<em><b>Intermediate Partitions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE_CONNECTION__INTERMEDIATE_PARTITIONS = CONNECTION__INTERMEDIATE_PARTITIONS;
+
+	/**
+	 * The feature id for the '<em><b>Common Partition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EDGE_CONNECTION__COMMON_PARTITION = CONNECTION__COMMON_PARTITION;
 
 	/**
 	 * The feature id for the '<em><b>Referred Property</b></em>' reference.
@@ -8070,6 +8106,24 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NODE_CONNECTION__SOURCE_ENDS = CONNECTION__SOURCE_ENDS;
+
+	/**
+	 * The feature id for the '<em><b>Intermediate Partitions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_CONNECTION__INTERMEDIATE_PARTITIONS = CONNECTION__INTERMEDIATE_PARTITIONS;
+
+	/**
+	 * The feature id for the '<em><b>Common Partition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NODE_CONNECTION__COMMON_PARTITION = CONNECTION__COMMON_PARTITION;
 
 	/**
 	 * The feature id for the '<em><b>Class Datum</b></em>' reference.
@@ -12755,6 +12809,28 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getConnection_SourceEnds();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getIntermediatePartitions <em>Intermediate Partitions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Intermediate Partitions</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Connection#getIntermediatePartitions()
+	 * @see #getConnection()
+	 * @generated
+	 */
+	EReference getConnection_IntermediatePartitions();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getCommonPartition <em>Common Partition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Common Partition</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.Connection#getCommonPartition()
+	 * @see #getConnection()
+	 * @generated
+	 */
+	EReference getConnection_CommonPartition();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd <em>Connection End</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14815,6 +14891,22 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference CONNECTION__SOURCE_ENDS = eINSTANCE.getConnection_SourceEnds();
+
+		/**
+		 * The meta object literal for the '<em><b>Intermediate Partitions</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONNECTION__INTERMEDIATE_PARTITIONS = eINSTANCE.getConnection_IntermediatePartitions();
+
+		/**
+		 * The meta object literal for the '<em><b>Common Partition</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CONNECTION__COMMON_PARTITION = eINSTANCE.getConnection_CommonPartition();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd <em>Connection End</em>}' class.

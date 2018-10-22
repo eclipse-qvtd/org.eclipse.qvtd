@@ -93,6 +93,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//Connection/connectionRole"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTschedule.ecore#//Connection/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//Connection/sourceEnds"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//Connection/intermediatePartitions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//Connection/commonPartition"/>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTschedule.ecore#//ConnectionEnd"/>
     <genClasses ecoreClass="QVTschedule.ecore#//CyclicMappingRegion">

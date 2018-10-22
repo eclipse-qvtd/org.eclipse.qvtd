@@ -36,6 +36,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
@@ -54,6 +55,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl#getConnectionRole <em>Connection Role</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl#getSourceEnds <em>Source Ends</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl#getIntermediatePartitions <em>Intermediate Partitions</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl#getCommonPartition <em>Common Partition</em>}</li>
  * </ul>
  *
  * @generated
@@ -124,6 +127,25 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	 * @ordered
 	 */
 	protected EList<ConnectionEnd> sourceEnds;
+
+	/**
+	 * The cached value of the '{@link #getIntermediatePartitions() <em>Intermediate Partitions</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIntermediatePartitions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Partition> intermediatePartitions;
+	/**
+	 * The cached value of the '{@link #getCommonPartition() <em>Common Partition</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCommonPartition()
+	 * @generated
+	 * @ordered
+	 */
+	protected Partition commonPartition;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -265,6 +287,59 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	 * @generated
 	 */
 	@Override
+	public List<Partition> getIntermediatePartitions() {
+		if (intermediatePartitions == null) {
+			intermediatePartitions = new EObjectResolvingEList<Partition>(Partition.class, this, QVTschedulePackage.CONNECTION__INTERMEDIATE_PARTITIONS);
+		}
+		return intermediatePartitions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Partition getCommonPartition() {
+		if (commonPartition != null && commonPartition.eIsProxy()) {
+			InternalEObject oldCommonPartition = (InternalEObject)commonPartition;
+			commonPartition = (Partition)eResolveProxy(oldCommonPartition);
+			if (commonPartition != oldCommonPartition) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.CONNECTION__COMMON_PARTITION, oldCommonPartition, commonPartition));
+			}
+		}
+		return commonPartition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Partition basicGetCommonPartition() {
+		return commonPartition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setCommonPartition(Partition newCommonPartition) {
+		Partition oldCommonPartition = commonPartition;
+		commonPartition = newCommonPartition;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CONNECTION__COMMON_PARTITION, oldCommonPartition, commonPartition));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTschedulePackage.CONNECTION__OWNING_SCHEDULED_REGION:
@@ -321,6 +396,11 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 				return getName();
 			case QVTschedulePackage.CONNECTION__SOURCE_ENDS:
 				return getSourceEnds();
+			case QVTschedulePackage.CONNECTION__INTERMEDIATE_PARTITIONS:
+				return getIntermediatePartitions();
+			case QVTschedulePackage.CONNECTION__COMMON_PARTITION:
+				if (resolve) return getCommonPartition();
+				return basicGetCommonPartition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -350,6 +430,13 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 				getSourceEnds().clear();
 				getSourceEnds().addAll((Collection<? extends ConnectionEnd>)newValue);
 				return;
+			case QVTschedulePackage.CONNECTION__INTERMEDIATE_PARTITIONS:
+				getIntermediatePartitions().clear();
+				getIntermediatePartitions().addAll((Collection<? extends Partition>)newValue);
+				return;
+			case QVTschedulePackage.CONNECTION__COMMON_PARTITION:
+				setCommonPartition((Partition)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -377,6 +464,12 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 			case QVTschedulePackage.CONNECTION__SOURCE_ENDS:
 				getSourceEnds().clear();
 				return;
+			case QVTschedulePackage.CONNECTION__INTERMEDIATE_PARTITIONS:
+				getIntermediatePartitions().clear();
+				return;
+			case QVTschedulePackage.CONNECTION__COMMON_PARTITION:
+				setCommonPartition((Partition)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -399,6 +492,10 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case QVTschedulePackage.CONNECTION__SOURCE_ENDS:
 				return sourceEnds != null && !sourceEnds.isEmpty();
+			case QVTschedulePackage.CONNECTION__INTERMEDIATE_PARTITIONS:
+				return intermediatePartitions != null && !intermediatePartitions.isEmpty();
+			case QVTschedulePackage.CONNECTION__COMMON_PARTITION:
+				return commonPartition != null;
 		}
 		return super.eIsSet(featureID);
 	}

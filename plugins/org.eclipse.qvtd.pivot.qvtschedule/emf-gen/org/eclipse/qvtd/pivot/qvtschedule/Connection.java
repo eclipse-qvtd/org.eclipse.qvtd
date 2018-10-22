@@ -40,6 +40,8 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getConnectionRole <em>Connection Role</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getSourceEnds <em>Source Ends</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getIntermediatePartitions <em>Intermediate Partitions</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getCommonPartition <em>Common Partition</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection()
@@ -150,6 +152,48 @@ public interface Connection extends Element, Symbolable, org.eclipse.ocl.pivot.u
 	 * @generated
 	 */
 	List<ConnectionEnd> getSourceEnds();
+
+	/**
+	 * Returns the value of the '<em><b>Intermediate Partitions</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.Partition}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The partitions other than the common, source and target partitions through which the Connection is passed.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Intermediate Partitions</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection_IntermediatePartitions()
+	 * @model ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Connection!intermediatePartitions'"
+	 * @generated
+	 */
+	List<Partition> getIntermediatePartitions();
+
+	/**
+	 * Returns the value of the '<em><b>Common Partition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The partition that manages the data structures for the Connection.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Common Partition</em>' reference.
+	 * @see #setCommonPartition(Partition)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection_CommonPartition()
+	 * @model ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Connection!commonPartition'"
+	 * @generated
+	 */
+	Partition getCommonPartition();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getCommonPartition <em>Common Partition</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Common Partition</em>' reference.
+	 * @see #getCommonPartition()
+	 * @generated
+	 */
+	void setCommonPartition(Partition value);
 
 	void destroy();
 

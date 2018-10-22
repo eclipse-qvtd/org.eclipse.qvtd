@@ -155,6 +155,7 @@ public class QVTscheduleTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_MappingPartition = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_MappingPartition);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_Node = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_Node);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_NodeConnection = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_NodeConnection);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_Partition = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_Partition);
 
 	/**
 	 *	The type parameters for templated types and operations.
@@ -1089,10 +1090,12 @@ public class QVTscheduleTables
 
 		public static final @NonNull ExecutorProperty _CompositePartition__ownedMappingPartitions = new EcoreExecutorProperty(QVTschedulePackage.Literals.COMPOSITE_PARTITION__OWNED_MAPPING_PARTITIONS, Types._CompositePartition, 0);
 
-		public static final @NonNull ExecutorProperty _Connection__connectionRole = new EcoreExecutorProperty(QVTschedulePackage.Literals.CONNECTION__CONNECTION_ROLE, Types._Connection, 0);
-		public static final @NonNull ExecutorProperty _Connection__name = new EcoreExecutorProperty(QVTschedulePackage.Literals.CONNECTION__NAME, Types._Connection, 1);
-		public static final @NonNull ExecutorProperty _Connection__owningScheduledRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.CONNECTION__OWNING_SCHEDULED_REGION, Types._Connection, 2);
-		public static final @NonNull ExecutorProperty _Connection__sourceEnds = new EcoreExecutorProperty(QVTschedulePackage.Literals.CONNECTION__SOURCE_ENDS, Types._Connection, 3);
+		public static final @NonNull ExecutorProperty _Connection__commonPartition = new EcoreExecutorProperty(QVTschedulePackage.Literals.CONNECTION__COMMON_PARTITION, Types._Connection, 0);
+		public static final @NonNull ExecutorProperty _Connection__connectionRole = new EcoreExecutorProperty(QVTschedulePackage.Literals.CONNECTION__CONNECTION_ROLE, Types._Connection, 1);
+		public static final @NonNull ExecutorProperty _Connection__intermediatePartitions = new EcoreExecutorProperty(QVTschedulePackage.Literals.CONNECTION__INTERMEDIATE_PARTITIONS, Types._Connection, 2);
+		public static final @NonNull ExecutorProperty _Connection__name = new EcoreExecutorProperty(QVTschedulePackage.Literals.CONNECTION__NAME, Types._Connection, 3);
+		public static final @NonNull ExecutorProperty _Connection__owningScheduledRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.CONNECTION__OWNING_SCHEDULED_REGION, Types._Connection, 4);
+		public static final @NonNull ExecutorProperty _Connection__sourceEnds = new EcoreExecutorProperty(QVTschedulePackage.Literals.CONNECTION__SOURCE_ENDS, Types._Connection, 5);
 
 		public static final @NonNull ExecutorProperty _ConnectionEnd__Connection__sourceEnds = new ExecutorPropertyWithImplementation("Connection", Types._ConnectionEnd, 0, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.CONNECTION__SOURCE_ENDS));
 
@@ -1206,6 +1209,8 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _Partition__intermediateConnections = new EcoreExecutorProperty(QVTschedulePackage.Literals.PARTITION__INTERMEDIATE_CONNECTIONS, Types._Partition, 0);
 		public static final @NonNull ExecutorProperty _Partition__passes = new EcoreExecutorProperty(QVTschedulePackage.Literals.PARTITION__PASSES, Types._Partition, 1);
 		public static final @NonNull ExecutorProperty _Partition__rootConnections = new EcoreExecutorProperty(QVTschedulePackage.Literals.PARTITION__ROOT_CONNECTIONS, Types._Partition, 2);
+		public static final @NonNull ExecutorProperty _Partition__Connection__commonPartition = new ExecutorPropertyWithImplementation("Connection", Types._Partition, 3, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.CONNECTION__COMMON_PARTITION));
+		public static final @NonNull ExecutorProperty _Partition__Connection__intermediatePartitions = new ExecutorPropertyWithImplementation("Connection", Types._Partition, 4, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.CONNECTION__INTERMEDIATE_PARTITIONS));
 
 		public static final @NonNull ExecutorProperty _PropertyDatum__key = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__KEY, Types._PropertyDatum, 0);
 		public static final @NonNull ExecutorProperty _PropertyDatum__opposite = new EcoreExecutorProperty(QVTschedulePackage.Literals.PROPERTY_DATUM__OPPOSITE, Types._PropertyDatum, 1);
@@ -5794,7 +5799,9 @@ public class QVTscheduleTables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Connection = {
+			QVTscheduleTables.Properties._Connection__commonPartition,
 			QVTscheduleTables.Properties._Connection__connectionRole,
+			QVTscheduleTables.Properties._Connection__intermediatePartitions,
 			QVTscheduleTables.Properties._Connection__name,
 			QVTscheduleTables.Properties._Connection__owningScheduledRegion,
 			QVTscheduleTables.Properties._Connection__sourceEnds,
@@ -5872,7 +5879,9 @@ public class QVTscheduleTables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _EdgeConnection = {
+			QVTscheduleTables.Properties._Connection__commonPartition,
 			QVTscheduleTables.Properties._Connection__connectionRole,
+			QVTscheduleTables.Properties._Connection__intermediatePartitions,
 			QVTscheduleTables.Properties._Connection__name,
 			QVTscheduleTables.Properties._Connection__owningScheduledRegion,
 			QVTscheduleTables.Properties._EdgeConnection__referredProperty,
@@ -6156,7 +6165,9 @@ public class QVTscheduleTables
 
 		private static final @NonNull ExecutorProperty @NonNull [] _NodeConnection = {
 			QVTscheduleTables.Properties._NodeConnection__classDatum,
+			QVTscheduleTables.Properties._Connection__commonPartition,
 			QVTscheduleTables.Properties._Connection__connectionRole,
+			QVTscheduleTables.Properties._Connection__intermediatePartitions,
 			QVTscheduleTables.Properties._Connection__name,
 			QVTscheduleTables.Properties._Connection__owningScheduledRegion,
 			QVTscheduleTables.Properties._Connection__sourceEnds,
