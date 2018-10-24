@@ -2067,6 +2067,16 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
+	public EReference getMappingPartition_ExplicitSuccessors() {
+		return (EReference)mappingPartitionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getMappingRegion() {
 		return mappingRegionEClass;
 	}
@@ -2986,6 +2996,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEReference(mappingPartitionEClass, MAPPING_PARTITION__REFERED_MAPPING_REGION);
 		createEReference(mappingPartitionEClass, MAPPING_PARTITION__REGION);
 		createEReference(mappingPartitionEClass, MAPPING_PARTITION__ROOT_PARTITION);
+		createEReference(mappingPartitionEClass, MAPPING_PARTITION__EXPLICIT_SUCCESSORS);
 
 		mappingRegionEClass = createEClass(MAPPING_REGION);
 		createEReference(mappingRegionEClass, MAPPING_REGION__HEAD_NODES);
@@ -3264,7 +3275,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEReference(getBasicPartition_ConstantNodes(), this.getNode(), null, "constantNodes", null, 0, -1, BasicPartition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getBasicPartition_ConstantSuccessFalseNodes(), this.getNode(), null, "constantSuccessFalseNodes", null, 0, -1, BasicPartition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getBasicPartition_ConstantSuccessTrueNodes(), this.getNode(), null, "constantSuccessTrueNodes", null, 0, -1, BasicPartition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getBasicPartition_ExplicitPredecessors(), this.getMappingPartition(), null, "explicitPredecessors", null, 0, -1, BasicPartition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getBasicPartition_ExplicitPredecessors(), this.getMappingPartition(), this.getMappingPartition_ExplicitSuccessors(), "explicitPredecessors", null, 0, -1, BasicPartition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getBasicPartition_HeadNodes(), this.getNode(), null, "headNodes", null, 1, -1, BasicPartition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBasicPartition_LoadedEdges(), this.getEdge(), null, "loadedEdges", null, 0, -1, BasicPartition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getBasicPartition_LoadedNodes(), this.getNode(), null, "loadedNodes", null, 0, -1, BasicPartition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -3390,6 +3401,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEReference(getMappingPartition_ReferedMappingRegion(), this.getMappingRegion(), this.getMappingRegion_MappingPartitions(), "referedMappingRegion", null, 0, 1, MappingPartition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingPartition_Region(), this.getRegion(), null, "region", null, 1, 1, MappingPartition.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingPartition_RootPartition(), this.getRootPartition(), null, "rootPartition", null, 1, 1, MappingPartition.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingPartition_ExplicitSuccessors(), this.getBasicPartition(), this.getBasicPartition_ExplicitPredecessors(), "explicitSuccessors", null, 0, -1, MappingPartition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(mappingRegionEClass, MappingRegion.class, "MappingRegion", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingRegion_HeadNodes(), this.getNode(), null, "headNodes", null, 0, -1, MappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3576,10 +3588,10 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	protected void createEcoreAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-		});
+		  (this,
+		   source,
+		   new String[] {
+		   });
 	}
 
 	/**

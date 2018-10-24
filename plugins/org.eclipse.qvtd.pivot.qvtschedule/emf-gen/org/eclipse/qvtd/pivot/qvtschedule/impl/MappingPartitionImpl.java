@@ -14,23 +14,29 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT;
+import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -52,6 +58,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingPartitionImpl#getReferedMappingRegion <em>Refered Mapping Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingPartitionImpl#getRegion <em>Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingPartitionImpl#getRootPartition <em>Root Partition</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingPartitionImpl#getExplicitSuccessors <em>Explicit Successors</em>}</li>
  * </ul>
  *
  * @generated
@@ -76,6 +83,16 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 	 * @ordered
 	 */
 	protected RootPartition rootPartition;
+
+	/**
+	 * The cached value of the '{@link #getExplicitSuccessors() <em>Explicit Successors</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExplicitSuccessors()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BasicPartition> explicitSuccessors;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -254,6 +271,20 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 	 * @generated
 	 */
 	@Override
+	public List<BasicPartition> getExplicitSuccessors() {
+		if (explicitSuccessors == null) {
+			explicitSuccessors = new EObjectWithInverseResolvingEList.ManyInverse<BasicPartition>(BasicPartition.class, this, QVTschedulePackage.MAPPING_PARTITION__EXPLICIT_SUCCESSORS, QVTschedulePackage.BASIC_PARTITION__EXPLICIT_PREDECESSORS);
+		}
+		return explicitSuccessors;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTschedulePackage.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION:
@@ -264,6 +295,8 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 				if (referedMappingRegion != null)
 					msgs = ((InternalEObject)referedMappingRegion).eInverseRemove(this, QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS, MappingRegion.class, msgs);
 				return basicSetReferedMappingRegion((MappingRegion)otherEnd, msgs);
+			case QVTschedulePackage.MAPPING_PARTITION__EXPLICIT_SUCCESSORS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExplicitSuccessors()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -280,6 +313,8 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 				return basicSetOwningCompositePartition(null, msgs);
 			case QVTschedulePackage.MAPPING_PARTITION__REFERED_MAPPING_REGION:
 				return basicSetReferedMappingRegion(null, msgs);
+			case QVTschedulePackage.MAPPING_PARTITION__EXPLICIT_SUCCESSORS:
+				return ((InternalEList<?>)getExplicitSuccessors()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -317,6 +352,8 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 			case QVTschedulePackage.MAPPING_PARTITION__ROOT_PARTITION:
 				if (resolve) return getRootPartition();
 				return basicGetRootPartition();
+			case QVTschedulePackage.MAPPING_PARTITION__EXPLICIT_SUCCESSORS:
+				return getExplicitSuccessors();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -326,6 +363,7 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -334,6 +372,10 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 				return;
 			case QVTschedulePackage.MAPPING_PARTITION__REFERED_MAPPING_REGION:
 				setReferedMappingRegion((MappingRegion)newValue);
+				return;
+			case QVTschedulePackage.MAPPING_PARTITION__EXPLICIT_SUCCESSORS:
+				getExplicitSuccessors().clear();
+				getExplicitSuccessors().addAll((Collection<? extends BasicPartition>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -352,6 +394,9 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 				return;
 			case QVTschedulePackage.MAPPING_PARTITION__REFERED_MAPPING_REGION:
 				setReferedMappingRegion((MappingRegion)null);
+				return;
+			case QVTschedulePackage.MAPPING_PARTITION__EXPLICIT_SUCCESSORS:
+				getExplicitSuccessors().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -373,6 +418,8 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 				return basicGetRegion() != null;
 			case QVTschedulePackage.MAPPING_PARTITION__ROOT_PARTITION:
 				return rootPartition != null;
+			case QVTschedulePackage.MAPPING_PARTITION__EXPLICIT_SUCCESSORS:
+				return explicitSuccessors != null && !explicitSuccessors.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -14,6 +14,7 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule;
 
+import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -31,6 +32,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getReferedMappingRegion <em>Refered Mapping Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getRegion <em>Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getRootPartition <em>Root Partition</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getExplicitSuccessors <em>Explicit Successors</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMappingPartition()
@@ -129,6 +131,25 @@ public interface MappingPartition extends Partition {
 	 * @generated
 	 */
 	RootPartition getRootPartition();
+
+	/**
+	 * Returns the value of the '<em><b>Explicit Successors</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getExplicitPredecessors <em>Explicit Predecessors</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Explicit Successors</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Explicit Successors</em>' reference list.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getMappingPartition_ExplicitSuccessors()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getExplicitPredecessors
+	 * @model opposite="explicitPredecessors" ordered="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!MappingPartition!explicitSuccessors'"
+	 * @generated
+	 */
+	List<BasicPartition> getExplicitSuccessors();
 
 	void addCheckedEdge(@NonNull TypedModel typedModel, @NonNull NavigableEdge predicatedEdge);
 	@NonNull Property addEnforcedEdge(@NonNull TypedModel typedModel,@NonNull NavigableEdge realizedEdge);

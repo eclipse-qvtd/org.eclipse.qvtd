@@ -18,9 +18,13 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.util.Visitor;
@@ -458,10 +462,39 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTschedulePackage.BASIC_PARTITION__EXPLICIT_PREDECESSORS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExplicitPredecessors()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTschedulePackage.BASIC_PARTITION__EXPLICIT_PREDECESSORS:
+				return ((InternalEList<?>)getExplicitPredecessors()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public List<MappingPartition> getExplicitPredecessors() {
 		if (explicitPredecessors == null) {
-			explicitPredecessors = new EObjectResolvingEList<MappingPartition>(MappingPartition.class, this, QVTschedulePackage.BASIC_PARTITION__EXPLICIT_PREDECESSORS);
+			explicitPredecessors = new EObjectWithInverseResolvingEList.ManyInverse<MappingPartition>(MappingPartition.class, this, QVTschedulePackage.BASIC_PARTITION__EXPLICIT_PREDECESSORS, QVTschedulePackage.MAPPING_PARTITION__EXPLICIT_SUCCESSORS);
 		}
 		return explicitPredecessors;
 	}

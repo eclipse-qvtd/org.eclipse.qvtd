@@ -1195,13 +1195,22 @@ public interface QVTschedulePackage extends EPackage {
 	int MAPPING_PARTITION__ROOT_PARTITION = PARTITION_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Explicit Successors</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_PARTITION__EXPLICIT_SUCCESSORS = PARTITION_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Mapping Partition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_PARTITION_FEATURE_COUNT = PARTITION_FEATURE_COUNT + 4;
+	int MAPPING_PARTITION_FEATURE_COUNT = PARTITION_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -1347,6 +1356,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int BASIC_PARTITION__ROOT_PARTITION = MAPPING_PARTITION__ROOT_PARTITION;
+
+	/**
+	 * The feature id for the '<em><b>Explicit Successors</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__EXPLICIT_SUCCESSORS = MAPPING_PARTITION__EXPLICIT_SUCCESSORS;
 
 	/**
 	 * The feature id for the '<em><b>Constant Edges</b></em>' reference list.
@@ -4329,13 +4347,22 @@ public interface QVTschedulePackage extends EPackage {
 	int CYCLIC_PARTITION__ROOT_PARTITION = COMPOSITE_PARTITION_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Explicit Successors</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CYCLIC_PARTITION__EXPLICIT_SUCCESSORS = COMPOSITE_PARTITION_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Cyclic Partition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CYCLIC_PARTITION_FEATURE_COUNT = COMPOSITE_PARTITION_FEATURE_COUNT + 4;
+	int CYCLIC_PARTITION_FEATURE_COUNT = COMPOSITE_PARTITION_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -6845,6 +6872,15 @@ public interface QVTschedulePackage extends EPackage {
 	int LOADING_PARTITION__ROOT_PARTITION = MAPPING_PARTITION__ROOT_PARTITION;
 
 	/**
+	 * The feature id for the '<em><b>Explicit Successors</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOADING_PARTITION__EXPLICIT_SUCCESSORS = MAPPING_PARTITION__EXPLICIT_SUCCESSORS;
+
+	/**
 	 * The feature id for the '<em><b>Referred Loading Region</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8332,6 +8368,15 @@ public interface QVTschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int NON_PARTITION__ROOT_PARTITION = MAPPING_PARTITION__ROOT_PARTITION;
+
+	/**
+	 * The feature id for the '<em><b>Explicit Successors</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NON_PARTITION__EXPLICIT_SUCCESSORS = MAPPING_PARTITION__EXPLICIT_SUCCESSORS;
 
 	/**
 	 * The number of structural features of the '<em>Non Partition</em>' class.
@@ -13740,6 +13785,17 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getMappingPartition_RootPartition();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getExplicitSuccessors <em>Explicit Successors</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Explicit Successors</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MappingPartition#getExplicitSuccessors()
+	 * @see #getMappingPartition()
+	 * @generated
+	 */
+	EReference getMappingPartition_ExplicitSuccessors();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.MappingRegion <em>Mapping Region</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -15747,6 +15803,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_PARTITION__ROOT_PARTITION = eINSTANCE.getMappingPartition_RootPartition();
+
+		/**
+		 * The meta object literal for the '<em><b>Explicit Successors</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_PARTITION__EXPLICIT_SUCCESSORS = eINSTANCE.getMappingPartition_ExplicitSuccessors();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingRegionImpl <em>Mapping Region</em>}' class.

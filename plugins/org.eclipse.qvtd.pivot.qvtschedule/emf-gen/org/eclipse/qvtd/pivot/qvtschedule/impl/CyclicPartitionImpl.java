@@ -14,17 +14,23 @@
  */
 package org.eclipse.qvtd.pivot.qvtschedule.impl;
 
+import java.util.Collection;
+import java.util.List;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
@@ -48,6 +54,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CyclicPartitionImpl#getReferedMappingRegion <em>Refered Mapping Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CyclicPartitionImpl#getRegion <em>Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CyclicPartitionImpl#getRootPartition <em>Root Partition</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CyclicPartitionImpl#getExplicitSuccessors <em>Explicit Successors</em>}</li>
  * </ul>
  *
  * @generated
@@ -71,6 +78,16 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	 * @ordered
 	 */
 	protected RootPartition rootPartition;
+
+	/**
+	 * The cached value of the '{@link #getExplicitSuccessors() <em>Explicit Successors</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExplicitSuccessors()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BasicPartition> explicitSuccessors;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -240,6 +257,20 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	 * @generated
 	 */
 	@Override
+	public List<BasicPartition> getExplicitSuccessors() {
+		if (explicitSuccessors == null) {
+			explicitSuccessors = new EObjectWithInverseResolvingEList.ManyInverse<BasicPartition>(BasicPartition.class, this, QVTschedulePackage.CYCLIC_PARTITION__EXPLICIT_SUCCESSORS, QVTschedulePackage.BASIC_PARTITION__EXPLICIT_PREDECESSORS);
+		}
+		return explicitSuccessors;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTschedulePackage.CYCLIC_PARTITION__OWNING_COMPOSITE_PARTITION:
@@ -250,6 +281,8 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 				if (referedMappingRegion != null)
 					msgs = ((InternalEObject)referedMappingRegion).eInverseRemove(this, QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS, MappingRegion.class, msgs);
 				return basicSetReferedMappingRegion((MappingRegion)otherEnd, msgs);
+			case QVTschedulePackage.CYCLIC_PARTITION__EXPLICIT_SUCCESSORS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExplicitSuccessors()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -266,6 +299,8 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 				return basicSetOwningCompositePartition(null, msgs);
 			case QVTschedulePackage.CYCLIC_PARTITION__REFERED_MAPPING_REGION:
 				return basicSetReferedMappingRegion(null, msgs);
+			case QVTschedulePackage.CYCLIC_PARTITION__EXPLICIT_SUCCESSORS:
+				return ((InternalEList<?>)getExplicitSuccessors()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -303,6 +338,8 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 			case QVTschedulePackage.CYCLIC_PARTITION__ROOT_PARTITION:
 				if (resolve) return getRootPartition();
 				return basicGetRootPartition();
+			case QVTschedulePackage.CYCLIC_PARTITION__EXPLICIT_SUCCESSORS:
+				return getExplicitSuccessors();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -312,6 +349,7 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -320,6 +358,10 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 				return;
 			case QVTschedulePackage.CYCLIC_PARTITION__REFERED_MAPPING_REGION:
 				setReferedMappingRegion((MappingRegion)newValue);
+				return;
+			case QVTschedulePackage.CYCLIC_PARTITION__EXPLICIT_SUCCESSORS:
+				getExplicitSuccessors().clear();
+				getExplicitSuccessors().addAll((Collection<? extends BasicPartition>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -338,6 +380,9 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 				return;
 			case QVTschedulePackage.CYCLIC_PARTITION__REFERED_MAPPING_REGION:
 				setReferedMappingRegion((MappingRegion)null);
+				return;
+			case QVTschedulePackage.CYCLIC_PARTITION__EXPLICIT_SUCCESSORS:
+				getExplicitSuccessors().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -359,6 +404,8 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 				return basicGetRegion() != null;
 			case QVTschedulePackage.CYCLIC_PARTITION__ROOT_PARTITION:
 				return rootPartition != null;
+			case QVTschedulePackage.CYCLIC_PARTITION__EXPLICIT_SUCCESSORS:
+				return explicitSuccessors != null && !explicitSuccessors.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -376,6 +423,7 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 				case QVTschedulePackage.CYCLIC_PARTITION__REFERED_MAPPING_REGION: return QVTschedulePackage.MAPPING_PARTITION__REFERED_MAPPING_REGION;
 				case QVTschedulePackage.CYCLIC_PARTITION__REGION: return QVTschedulePackage.MAPPING_PARTITION__REGION;
 				case QVTschedulePackage.CYCLIC_PARTITION__ROOT_PARTITION: return QVTschedulePackage.MAPPING_PARTITION__ROOT_PARTITION;
+				case QVTschedulePackage.CYCLIC_PARTITION__EXPLICIT_SUCCESSORS: return QVTschedulePackage.MAPPING_PARTITION__EXPLICIT_SUCCESSORS;
 				default: return -1;
 			}
 		}
@@ -395,6 +443,7 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 				case QVTschedulePackage.MAPPING_PARTITION__REFERED_MAPPING_REGION: return QVTschedulePackage.CYCLIC_PARTITION__REFERED_MAPPING_REGION;
 				case QVTschedulePackage.MAPPING_PARTITION__REGION: return QVTschedulePackage.CYCLIC_PARTITION__REGION;
 				case QVTschedulePackage.MAPPING_PARTITION__ROOT_PARTITION: return QVTschedulePackage.CYCLIC_PARTITION__ROOT_PARTITION;
+				case QVTschedulePackage.MAPPING_PARTITION__EXPLICIT_SUCCESSORS: return QVTschedulePackage.CYCLIC_PARTITION__EXPLICIT_SUCCESSORS;
 				default: return -1;
 			}
 		}

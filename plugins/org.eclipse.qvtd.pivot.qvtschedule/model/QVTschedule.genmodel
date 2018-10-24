@@ -155,6 +155,7 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//MappingPartition/referedMappingRegion"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//MappingPartition/region"/>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTschedule.ecore#//MappingPartition/rootPartition"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//MappingPartition/explicitSuccessors"/>
     </genClasses>
     <genClasses ecoreClass="QVTschedule.ecore#//MappingRegion">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTschedule.ecore#//MappingRegion/headNodes"/>
