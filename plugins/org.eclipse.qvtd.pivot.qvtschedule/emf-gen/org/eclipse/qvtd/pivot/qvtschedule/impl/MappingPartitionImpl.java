@@ -444,17 +444,9 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 		return null;
 	}
 
-
 	@Override
 	public void initTypedModelAnalysis() {
 		typedModel2checkedEdges = new HashMap<>();
 		typedModel2property2enforcedEdges = new HashMap<>();
 	}
-
-	//	@Override
-	//	public void toGraph(@NonNull GraphStringBuilder s) {
-	//		AbstractToGraphVisitor visitor = ToGraphPartitionVisitor.createVisitor(s, getScheduleManager(), true);
-	//		visitor.visit(this);
-	//	}
-
 } //MappingPartitionImpl

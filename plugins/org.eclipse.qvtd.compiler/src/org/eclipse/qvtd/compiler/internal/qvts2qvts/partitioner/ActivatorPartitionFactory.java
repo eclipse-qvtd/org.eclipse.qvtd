@@ -28,7 +28,7 @@ import com.google.common.collect.Iterables;
  * FIXME. This functionality should eventually be absorbed into the roor region together with
  * smart loops to resolve secondary heads from a primary head.
  */
-public class ActivatorPartitionFactory extends AbstractPartitionFactory
+public class ActivatorPartitionFactory extends AbstractSimplePartitionFactory
 {
 	public ActivatorPartitionFactory(@NonNull MappingPartitioner mappingPartitioner) {
 		super(mappingPartitioner);

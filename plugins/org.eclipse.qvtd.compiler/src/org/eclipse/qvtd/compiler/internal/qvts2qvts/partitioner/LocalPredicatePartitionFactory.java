@@ -38,7 +38,7 @@ import com.google.common.collect.Sets;
 // FIXME if multiple heads are predicated, we cannot wait for all of them before speculating. Speculation
 //	may need to consider just loaded nodes.
 //
-public class LocalPredicatePartitionFactory extends AbstractPartitionFactory
+public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFactory
 {
 	protected final boolean useActivators;
 	private final @NonNull Iterable<@NonNull Node> executionNodes;

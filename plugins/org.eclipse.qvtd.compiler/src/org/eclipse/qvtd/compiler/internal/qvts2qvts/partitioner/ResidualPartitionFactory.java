@@ -22,7 +22,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 /**
  * The Residual Partition copies everything adjuting to the preceding ActivatorPartotion.
  */
-public class ResidualPartitionFactory extends AbstractPartitionFactory
+public class ResidualPartitionFactory extends AbstractSimplePartitionFactory
 {
 	public ResidualPartitionFactory(@NonNull MappingPartitioner mappingPartitioner) {
 		super(mappingPartitioner);

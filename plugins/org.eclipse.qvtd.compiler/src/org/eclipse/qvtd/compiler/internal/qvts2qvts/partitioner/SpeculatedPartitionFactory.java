@@ -26,7 +26,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 /**
  * The Speculated Partition completes the speculation by realizing the corollaries of the speculation.
  */
-public class SpeculatedPartitionFactory extends AbstractPartitionFactory
+public class SpeculatedPartitionFactory extends AbstractSimplePartitionFactory
 {
 	private final @NonNull Set<@NonNull Node> tracedInputNodes = new HashSet<>();
 

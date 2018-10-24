@@ -45,9 +45,11 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.ToGraphVisitor;
 
 import com.google.common.collect.Iterables;
 
@@ -611,8 +613,8 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 
 	@Override
 	public void toGraph(@NonNull GraphStringBuilder s) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();		// FIXME
+		ToGraphVisitor visitor = new ToGraphVisitor(s);
+		visitor.visit((Graphable)this);
 	}
 
 	@Override

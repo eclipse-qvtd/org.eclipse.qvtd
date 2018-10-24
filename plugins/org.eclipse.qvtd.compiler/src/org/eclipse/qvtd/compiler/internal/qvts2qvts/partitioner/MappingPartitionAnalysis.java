@@ -868,6 +868,12 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 		return role.isNew();
 	}
 
+	protected boolean isOld(@NonNull Edge edge) {
+		Role role = partition.getRole(edge);
+		assert role != null;
+		return role.isOld();
+	}
+
 	protected boolean isPredicated(@NonNull Edge edge) {
 		Role role = partition.getRole(edge);
 		assert role != null;

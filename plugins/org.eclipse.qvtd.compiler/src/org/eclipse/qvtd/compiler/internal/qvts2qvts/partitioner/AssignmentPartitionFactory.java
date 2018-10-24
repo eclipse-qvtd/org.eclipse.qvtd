@@ -23,7 +23,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * The Assignment Partition identifies the nodes and edges required by an assignment micro-mapping
  * which creates the predicates and realization of a property assignment.
  */
-public class AssignmentPartitionFactory extends AbstractPartitionFactory
+public class AssignmentPartitionFactory extends AbstractSimplePartitionFactory
 {
 	protected final @NonNull Edge realizedEdge;
 

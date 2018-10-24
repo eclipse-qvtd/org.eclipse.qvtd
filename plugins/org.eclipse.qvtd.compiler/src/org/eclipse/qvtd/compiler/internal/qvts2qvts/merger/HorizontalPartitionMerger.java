@@ -24,8 +24,13 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedConditionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.BasicPartitionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.MergedPartitionFactory;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
-import org.eclipse.qvtd.pivot.qvtschedule.Partition;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
+import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 
 /**
  * LateConsumerMerger replaces one list of MappingRegions by another in which each set of regions that
@@ -42,12 +47,12 @@ import org.eclipse.qvtd.pivot.qvtschedule.Partition;
  */
 public class HorizontalPartitionMerger extends AbstractMerger
 {
-	//	protected final @NonNull ScheduleManager scheduleManager;
+	protected final @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis;
 	protected final @NonNull RegionAnalysis regionAnalysis;
 	protected final @NonNull Iterable<@NonNull PartitionAnalysis> partitions;
 
-	public HorizontalPartitionMerger(@NonNull RegionAnalysis regionAnalysis, @NonNull Iterable<@NonNull PartitionAnalysis> partitions) {
-		//		this.scheduleManager = regionAnalysis.getScheduleManager();
+	public HorizontalPartitionMerger(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull RegionAnalysis regionAnalysis, @NonNull Iterable<@NonNull PartitionAnalysis> partitions) {
+		this.partitionedTransformationAnalysis = partitionedTransformationAnalysis;
 		this.regionAnalysis = regionAnalysis;
 		this.partitions = partitions;
 	}
@@ -57,54 +62,82 @@ public class HorizontalPartitionMerger extends AbstractMerger
 		//	Build maps of failure mechanisms of each partition.
 		//
 		ScheduleManager scheduleManager = regionAnalysis.getScheduleManager();
-		Map<@NonNull Integer, @NonNull Set<@NonNull Partition>> hash2partitions = new HashMap<>();
-		Map<@NonNull Partition, @NonNull Set<@NonNull CheckedCondition>> partion2checkedConditions = new HashMap<>();
+		Map<@NonNull Integer, @NonNull Set<@NonNull BasicPartitionAnalysis>> hash2partitionAnalyses = new HashMap<>();
+		Map<@NonNull BasicPartitionAnalysis, @NonNull Set<@NonNull CheckedCondition>> partion2checkedConditions = new HashMap<>();
 		for (@NonNull PartitionAnalysis partitionAnalysis : partitions) {
-			Partition partition = partitionAnalysis.getPartition();
-			CheckedConditionAnalysis checkedConditionAnalysis = new CheckedConditionAnalysis((BasicPartitionAnalysis) partitionAnalysis, scheduleManager);
+			BasicPartitionAnalysis basicPartitionAnalysis = (BasicPartitionAnalysis) partitionAnalysis;
+			CheckedConditionAnalysis checkedConditionAnalysis = new CheckedConditionAnalysis(basicPartitionAnalysis, scheduleManager);
 			Set<@NonNull CheckedCondition> checkedConditions = checkedConditionAnalysis.computeCheckedConditions();
 			if (checkedConditions.size() > 0) {
 				int hash = checkedConditions.hashCode();
-				partion2checkedConditions.put(partition, checkedConditions);
-				Set<@NonNull Partition> hashPartitions = hash2partitions.get(hash);
-				if (hashPartitions == null) {
-					hashPartitions = new HashSet<>();
-					hash2partitions.put(hash, hashPartitions);
+				partion2checkedConditions.put(basicPartitionAnalysis, checkedConditions);
+				Set<@NonNull BasicPartitionAnalysis> hashPartitionAnalyses = hash2partitionAnalyses.get(hash);
+				if (hashPartitionAnalyses == null) {
+					hashPartitionAnalyses = new HashSet<>();
+					hash2partitionAnalyses.put(hash, hashPartitionAnalyses);
 				}
-				hashPartitions.add(partition);
+				hashPartitionAnalyses.add(basicPartitionAnalysis);
 			}
 		}
 		//
-		//	Select partitions with identical failure mechanisms for merging.
+		//	Select partitions with identical container, passes and failure mechanisms for merging.
 		//
-		for (@NonNull Set<@NonNull Partition> hashPartitions : hash2partitions.values()) {
-			if (hashPartitions.size() > 1) {
-				List<@NonNull Partition> merges = null;
-				List<@NonNull Partition> residualHashPartitions = new ArrayList<>(hashPartitions);
-				for (int i = 0; i < residualHashPartitions.size(); i++) {		// Tolerate concurrent later removes
-					Partition iPartition = residualHashPartitions.get(i);
-					Set<@NonNull CheckedCondition> iCheckedConditions = partion2checkedConditions.get(iPartition);
+		Map<@NonNull PartitionAnalysis, @Nullable PartitionAnalysis> old2new = new HashMap<>();
+		for (@NonNull Set<@NonNull BasicPartitionAnalysis> hashPartitionAnalyses : hash2partitionAnalyses.values()) {
+			if (hashPartitionAnalyses.size() > 1) {
+				List<@NonNull BasicPartitionAnalysis> merges = null;
+				List<@NonNull BasicPartitionAnalysis> residualHashPartitionAnalyses = new ArrayList<>(hashPartitionAnalyses);
+				for (int i = 0; i < residualHashPartitionAnalyses.size(); i++) {		// Tolerate concurrent later removes
+					BasicPartitionAnalysis iPartitionAnalysis = residualHashPartitionAnalyses.get(i);
+					BasicPartition iPartition = iPartitionAnalysis.getPartition();
+					CompositePartition iContainer = iPartition.getOwningCompositePartition();
+					List<Integer> iPasses = iPartition.getPasses();
+					Set<@NonNull CheckedCondition> iCheckedConditions = partion2checkedConditions.get(iPartitionAnalysis);
 					assert iCheckedConditions != null;
-					for (int j = residualHashPartitions.size(); --j > i; ) {		// Tolerate concurrent later removes
-						Partition jPartition = residualHashPartitions.get(j);
-						Set<@NonNull CheckedCondition> jCheckedConditions = partion2checkedConditions.get(jPartition);
-						assert jCheckedConditions != null;
-						if (iCheckedConditions.equals(jCheckedConditions)) {
-							if (merges == null) {
-								merges = new ArrayList<>();
-								merges.add(iPartition);
+					for (int j = residualHashPartitionAnalyses.size(); --j > i; ) {		// Tolerate concurrent later removes
+						BasicPartitionAnalysis jPartitionAnalysis = residualHashPartitionAnalyses.get(j);
+						BasicPartition jPartition = jPartitionAnalysis.getPartition();
+						CompositePartition jContainer = jPartition.getOwningCompositePartition();
+						List<Integer> jPasses = jPartition.getPasses();
+						if ((iContainer == jContainer) && iPasses.equals(jPasses)) {
+							Set<@NonNull CheckedCondition> jCheckedConditions = partion2checkedConditions.get(jPartitionAnalysis);
+							assert jCheckedConditions != null;
+							if (iCheckedConditions.equals(jCheckedConditions)) {
+								if (merges == null) {
+									merges = new ArrayList<>();
+									merges.add(iPartitionAnalysis);
+								}
+								merges.add(jPartitionAnalysis);
+								residualHashPartitionAnalyses.remove(j);
 							}
-							merges.add(jPartition);
-							residualHashPartitions.remove(j);
 						}
 					}
 				}
 				if (merges != null) {
 					System.out.println("Merge " + merges);
+					MergedPartitionFactory mergedPartitionFactory = new MergedPartitionFactory(regionAnalysis, merges);
+					BasicPartition mergedPartition = mergedPartitionFactory.createPartition(partitionedTransformationAnalysis);
+					MappingRegion mappingRegion = (MappingRegion)regionAnalysis.getRegion();
+					List<MappingPartition> ownedMappingPartitions = merges.get(0).getPartition().getOwningCompositePartition().getOwnedMappingPartitions();
+					List<MappingPartition> mappingPartitions = mappingRegion.getMappingPartitions();
+					for (@NonNull BasicPartitionAnalysis partitionAnalysis : merges) {
+						BasicPartition oldPartition = partitionAnalysis.getPartition();
+						boolean wasRemoved1 = ownedMappingPartitions.remove(oldPartition);
+						assert wasRemoved1;
+						old2new.put(partitionAnalysis, partitionedTransformationAnalysis.getPartitionAnalysis(mergedPartition));
+						boolean wasRemoved2 = mappingPartitions.remove(oldPartition);
+						assert wasRemoved2;
+						mergedPartition.getExplicitPredecessors().addAll(oldPartition.getExplicitPredecessors());
+						oldPartition.getExplicitPredecessors().clear();
+					}
+					for (int pass : merges.iterator().next().getPartition().getPasses()) {
+						mergedPartition.addPass(pass);
+					}
+					scheduleManager.writeDebugGraphs(mergedPartition, null);
+					ownedMappingPartitions.add(mergedPartition);
 				}
 			}
 		}
-		Map<@NonNull Partition, @Nullable Partition> old2new = new HashMap<>();
-		return null; //old2new;
+		return old2new;
 	}
 }

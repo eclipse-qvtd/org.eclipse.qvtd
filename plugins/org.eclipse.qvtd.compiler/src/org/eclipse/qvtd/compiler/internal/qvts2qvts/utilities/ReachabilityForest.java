@@ -269,6 +269,10 @@ public class ReachabilityForest
 		return nodeCostComparator2;
 	}
 
+	public @NonNull Iterable<@NonNull Node> getNodes() {
+		return node2reachingEdge.keySet();
+	}
+
 	public @NonNull Iterable<@NonNull Node> getPredecessors(@NonNull Node targetNode) {
 		Set<@NonNull Node> precedingNodes = new HashSet<@NonNull Node>();
 		getPredecessors(precedingNodes, targetNode);

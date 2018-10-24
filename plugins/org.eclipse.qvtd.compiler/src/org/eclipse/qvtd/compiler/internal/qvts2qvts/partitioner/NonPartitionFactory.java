@@ -27,7 +27,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Lists;
 
-public class NonPartitionFactory extends AbstractPartitionFactory
+public class NonPartitionFactory extends AbstractSimplePartitionFactory
 {
 	public NonPartitionFactory(@NonNull MappingPartitioner mappingPartitioner) {
 		super(mappingPartitioner);

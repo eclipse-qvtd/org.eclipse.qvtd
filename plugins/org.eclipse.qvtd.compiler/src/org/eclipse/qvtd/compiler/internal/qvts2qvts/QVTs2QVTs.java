@@ -326,12 +326,12 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		return entries.sorted();
 	}
 
-	public @NonNull List<@NonNull Iterable<@NonNull PartitionAnalysis>> getMergedPartitionSchedule(@NonNull RootPartitionAnalysis rootPartitionAnalysis) {
+	public @NonNull List<@NonNull Iterable<@NonNull PartitionAnalysis>> getMergedPartitionSchedule(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull RootPartitionAnalysis rootPartitionAnalysis) {
 		ScheduledRegion scheduledRegion = rootPartitionAnalysis.getScheduledRegion();
 		assert scheduledRegion != null;
 		List<Region> activeRegions = scheduledRegion.getActiveRegions();
 		activeRegions.clear();
-		List<@NonNull Iterable<@NonNull PartitionAnalysis>> partitionSchedule1 = mergePartitionsHorizontally(rootPartitionAnalysis.getPartitionSchedule());
+		List<@NonNull Iterable<@NonNull PartitionAnalysis>> partitionSchedule1 = mergePartitionsHorizontally(partitionedTransformationAnalysis, rootPartitionAnalysis.getPartitionSchedule());
 		List<@NonNull Iterable<@NonNull PartitionAnalysis>> partitionSchedule2 = mergePartitionsVertically(partitionSchedule1);
 		for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrentPartitions : partitionSchedule2) {
 			List<@NonNull Region> concurrentRegions = new ArrayList<>();
@@ -459,7 +459,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		}
 	} */
 
-	private @NonNull List<@NonNull Iterable<@NonNull PartitionAnalysis>> mergePartitionsHorizontally(@NonNull List<@NonNull Iterable<@NonNull PartitionAnalysis>> partitionSchedule) {
+	private @NonNull List<@NonNull Iterable<@NonNull PartitionAnalysis>> mergePartitionsHorizontally(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull List<@NonNull Iterable<@NonNull PartitionAnalysis>> partitionSchedule) {
 		for (int i = 0; i < partitionSchedule.size(); i++) {
 			Iterable<@NonNull PartitionAnalysis> oldConcurrency = partitionSchedule.get(i);
 			if (Iterables.size(oldConcurrency) > 1) {
@@ -482,8 +482,9 @@ public class QVTs2QVTs extends QVTimperativeHelper
 						List<@NonNull PartitionAnalysis> partitions = region2partitions.get(region);
 						assert partitions != null;
 						if (partitions.size() > 1) {
+							//							partitionedTransformationAnalysis.getMappingPartitioner(region);
 							RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
-							HorizontalPartitionMerger horizontalMerger = new HorizontalPartitionMerger(regionAnalysis, partitions);
+							HorizontalPartitionMerger horizontalMerger = new HorizontalPartitionMerger(partitionedTransformationAnalysis, regionAnalysis, partitions);
 							Map<@NonNull PartitionAnalysis, @Nullable PartitionAnalysis> old2new = horizontalMerger.merge();
 							if (old2new != null) {
 								if (newConcurrency == null) {
@@ -582,7 +583,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 
 		//	Iterable<@NonNull Region> mappingRegions = QVTscheduleUtil.getActiveRegions(scheduledRegion);
 		//	assert Iterables.isEmpty(mappingRegions);
-		List<@NonNull Iterable<@NonNull PartitionAnalysis>> mergedPartitionSchedule = getMergedPartitionSchedule(rootPartitionAnalysis);		// FIXME separate side effects
+		List<@NonNull Iterable<@NonNull PartitionAnalysis>> mergedPartitionSchedule = getMergedPartitionSchedule(partitionedTransformationAnalysis, rootPartitionAnalysis);		// FIXME separate side effects
 		//
 		//	Identify the input models.
 		//
