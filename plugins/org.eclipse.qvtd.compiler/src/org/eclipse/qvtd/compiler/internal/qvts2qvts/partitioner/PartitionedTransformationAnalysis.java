@@ -134,7 +134,7 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 		QVTscheduleConstants.POLLED_PROPERTIES.println("  " + typedModel + " realized for " + property);
 	}
 
-	public void analyzePartitionEdges(@NonNull Iterable<@NonNull Iterable<@NonNull PartitionAnalysis>> partitionSchedule) {
+	public void analyzePartitionEdges(@NonNull Iterable<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule) {
 		typedModel2property2predicatedEdges = new HashMap<>();
 		typedModel2property2realizedEdges = new HashMap<>();
 		for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrency : partitionSchedule) {
@@ -156,7 +156,7 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 		}
 	}
 
-	public void computeCheckedOrEnforcedEdges(@NonNull Iterable<@NonNull Iterable<@NonNull PartitionAnalysis>> mergedPartitionSchedule) {
+	public void computeCheckedOrEnforcedEdges(@NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> mergedPartitionSchedule) {
 		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges2 = typedModel2property2realizedEdges;
 		assert typedModel2property2realizedEdges2 != null;
 		for (@NonNull Iterable<@NonNull PartitionAnalysis> orderedPartitions : mergedPartitionSchedule) {

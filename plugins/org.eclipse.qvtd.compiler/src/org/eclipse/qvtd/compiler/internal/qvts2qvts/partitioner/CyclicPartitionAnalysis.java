@@ -78,7 +78,7 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 	}
 
 	@Override
-	protected @NonNull List<@NonNull Iterable<@NonNull PartitionAnalysis>> createPartitionSchedule() {
+	protected @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> createPartitionSchedule() {
 		//
 		//	The simplest cyclic schedule is dumb polled. For small cycles the effort of
 		//	using the immediate external predecesors as region heads for an internal acyclic
@@ -101,8 +101,8 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 		//
 		// The cyclic schedule is therefore {base-cases}, {recursing-steps}... {recursive-cases}
 		//
-		Iterable<@NonNull PartitionAnalysis> keys = partitionAnalysis2predecessors.keySet();
-		List<@NonNull Iterable<@NonNull PartitionAnalysis>> partitionSchedule = Collections.singletonList(keys); //CompilerUtil.computeParallelSchedule(partition2predecessors);
+		Set<@NonNull PartitionAnalysis> keys = partitionAnalysis2predecessors.keySet();
+		List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule = Collections.singletonList(keys); //CompilerUtil.computeParallelSchedule(partition2predecessors);
 		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalysis2predecessors.keySet()) {
 			if (partitionAnalysis instanceof CompositePartitionAnalysis) {
 				((CompositePartitionAnalysis)partitionAnalysis).getPartitionSchedule();

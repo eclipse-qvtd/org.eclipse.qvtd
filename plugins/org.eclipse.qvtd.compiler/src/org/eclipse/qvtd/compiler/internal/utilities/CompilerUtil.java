@@ -339,7 +339,7 @@ public class CompilerUtil extends QVTscheduleUtil
 	 * concurrently, after their preceding concurrencies and before their subsequent concurrencies. The index in the
 	 * sequence corresponds to the critical path length/depth from the earliest predecessor to the concurrent element.
 	 */
-	public static @NonNull List<@NonNull Iterable<@NonNull PartitionAnalysis>> computeParallelSchedule(	// FIXME this can be much faster with bit masks
+	public static @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> computeParallelSchedule(	// FIXME this can be much faster with bit masks
 			@NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partition2predecessors) {
 		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partition2successors = CompilerUtil.computeTransitiveSuccessors(partition2predecessors);
 		//
@@ -347,11 +347,11 @@ public class CompilerUtil extends QVTscheduleUtil
 		//	all partitions are considered, on subsequent iterations only successots of just scheduled partitions
 		//	are reconsidered.
 		//
-		List<@NonNull Iterable<@NonNull PartitionAnalysis>> parallelSchedule = new ArrayList<>();
+		List<@NonNull Set<@NonNull PartitionAnalysis>> parallelSchedule = new ArrayList<>();
 		Set<@NonNull PartitionAnalysis> scheduledPartitions = new HashSet<>();
 		Set<@NonNull PartitionAnalysis> scheduleCandidates = new HashSet<>(partition2predecessors.keySet());
 		while (!scheduleCandidates.isEmpty()) {
-			List<@NonNull PartitionAnalysis> toSchedule = new ArrayList<>();
+			Set<@NonNull PartitionAnalysis> toSchedule = new HashSet<>();
 			Set<@NonNull PartitionAnalysis> nextScheduleCandidates = new HashSet<>();
 			for (@NonNull PartitionAnalysis partition : scheduleCandidates) {
 				Set<@NonNull PartitionAnalysis> predecessors = partition2predecessors.get(partition);

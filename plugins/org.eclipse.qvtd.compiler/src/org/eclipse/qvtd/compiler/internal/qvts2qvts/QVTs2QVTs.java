@@ -326,14 +326,14 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		return entries.sorted();
 	}
 
-	public @NonNull List<@NonNull Iterable<@NonNull PartitionAnalysis>> getMergedPartitionSchedule(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull RootPartitionAnalysis rootPartitionAnalysis) {
+	public @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> getMergedPartitionSchedule(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull RootPartitionAnalysis rootPartitionAnalysis) {
 		ScheduledRegion scheduledRegion = rootPartitionAnalysis.getScheduledRegion();
 		assert scheduledRegion != null;
 		List<Region> activeRegions = scheduledRegion.getActiveRegions();
 		activeRegions.clear();
-		List<@NonNull Iterable<@NonNull PartitionAnalysis>> partitionSchedule1 = mergePartitionsHorizontally(partitionedTransformationAnalysis, rootPartitionAnalysis.getPartitionSchedule());
-		List<@NonNull Iterable<@NonNull PartitionAnalysis>> partitionSchedule2 = mergePartitionsVertically(partitionSchedule1);
-		for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrentPartitions : partitionSchedule2) {
+		List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule1 = mergePartitionsHorizontally(partitionedTransformationAnalysis, rootPartitionAnalysis.getPartitionSchedule());
+		List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule2 = mergePartitionsVertically(partitionSchedule1);
+		for (@NonNull Set<@NonNull PartitionAnalysis> concurrentPartitions : partitionSchedule2) {
 			List<@NonNull Region> concurrentRegions = new ArrayList<>();
 			for (@NonNull PartitionAnalysis partitionAnalysis : concurrentPartitions) {
 				Partition partition = partitionAnalysis.getPartition();
@@ -459,7 +459,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		}
 	} */
 
-	private @NonNull List<@NonNull Iterable<@NonNull PartitionAnalysis>> mergePartitionsHorizontally(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull List<@NonNull Iterable<@NonNull PartitionAnalysis>> partitionSchedule) {
+	private @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> mergePartitionsHorizontally(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule) {
 		for (int i = 0; i < partitionSchedule.size(); i++) {
 			Iterable<@NonNull PartitionAnalysis> oldConcurrency = partitionSchedule.get(i);
 			if (Iterables.size(oldConcurrency) > 1) {
@@ -508,7 +508,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		return partitionSchedule;
 	}
 
-	private @NonNull List<@NonNull Iterable<@NonNull PartitionAnalysis>> mergePartitionsVertically(@NonNull List<@NonNull Iterable<@NonNull PartitionAnalysis>> partitionSchedule) {
+	private @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> mergePartitionsVertically(@NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule) {
 		return partitionSchedule;
 	}
 
@@ -568,7 +568,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		RootPartition rootPartition = rootPartitionAnalysis.getPartition();
 		ScheduledRegion scheduledRegion = rootPartitionAnalysis.getScheduledRegion();
 		ConnectionManager connectionManager = scheduleManager.getConnectionManager();
-		List<@NonNull Iterable<@NonNull PartitionAnalysis>> partitionSchedule = rootPartitionAnalysis.getPartitionSchedule();
+		List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule = rootPartitionAnalysis.getPartitionSchedule();
 		//
 		//	Create a connection between each consumer and the corresponding introducer/producer.
 		//
@@ -583,7 +583,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 
 		//	Iterable<@NonNull Region> mappingRegions = QVTscheduleUtil.getActiveRegions(scheduledRegion);
 		//	assert Iterables.isEmpty(mappingRegions);
-		List<@NonNull Iterable<@NonNull PartitionAnalysis>> mergedPartitionSchedule = getMergedPartitionSchedule(partitionedTransformationAnalysis, rootPartitionAnalysis);		// FIXME separate side effects
+		List<@NonNull Set<@NonNull PartitionAnalysis>> mergedPartitionSchedule = getMergedPartitionSchedule(partitionedTransformationAnalysis, rootPartitionAnalysis);		// FIXME separate side effects
 		//
 		//	Identify the input models.
 		//

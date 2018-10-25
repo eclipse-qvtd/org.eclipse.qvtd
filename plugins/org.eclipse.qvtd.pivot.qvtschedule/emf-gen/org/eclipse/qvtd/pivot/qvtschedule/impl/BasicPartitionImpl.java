@@ -910,6 +910,14 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	}
 
 	@Override
+	public void destroy() {
+		setOwningCompositePartition(null);
+		setReferedMappingRegion(null);
+		getExplicitPredecessors().clear();
+		getExplicitSuccessors().clear();
+	}
+
+	@Override
 	public @NonNull Iterable<@NonNull Edge> getPartialEdges() {
 		return edge2edgeRole.keySet();
 	}

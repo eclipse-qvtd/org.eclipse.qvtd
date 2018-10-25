@@ -341,6 +341,7 @@ public interface BasicPartition extends MappingPartition {
 	List<MappingPartition> getExplicitPredecessors();
 
 	void addExplicitPredecessor(@NonNull BasicPartition precedingPartition);
+	void destroy();
 	boolean hasEdge(@NonNull Edge edge);
 	boolean hasNode(@NonNull Node node);
 	@Nullable Role putEdgeRole(@NonNull Edge edge, @NonNull Role newEdgeRole);

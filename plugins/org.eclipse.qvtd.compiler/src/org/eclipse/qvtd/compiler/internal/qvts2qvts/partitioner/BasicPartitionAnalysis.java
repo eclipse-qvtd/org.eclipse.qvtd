@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -21,6 +22,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -67,6 +69,14 @@ public class BasicPartitionAnalysis extends MappingPartitionAnalysis<BasicPartit
 		this.microMappingRegion = partialRegion;
 		/*	check(microMappingRegion); */
 		return microMappingRegion;
+	}
+
+	public void merge(@NonNull Map<@NonNull PartitionAnalysis, @Nullable PartitionAnalysis> old2new) {
+		for (@NonNull PartitionAnalysis oldPartitionAnalysis : old2new.keySet()) {
+			Partition oldPartition = oldPartitionAnalysis.getPartition();
+			partition.destroy();
+		}
+		partitionedTransformationAnalysis.getRootPartitionAnalysis().merge(old2new);
 	}
 
 	@Override

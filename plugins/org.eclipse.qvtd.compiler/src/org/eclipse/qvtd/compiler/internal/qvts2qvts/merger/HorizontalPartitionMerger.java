@@ -30,7 +30,6 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTrans
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 
 /**
  * LateConsumerMerger replaces one list of MappingRegions by another in which each set of regions that
@@ -115,20 +114,24 @@ public class HorizontalPartitionMerger extends AbstractMerger
 				}
 				if (merges != null) {
 					System.out.println("Merge " + merges);
+					CompositePartition owningCompositePartition = merges.get(0).getPartition().getOwningCompositePartition();
+					List<MappingPartition> ownedMappingPartitions = owningCompositePartition.getOwnedMappingPartitions();
 					MergedPartitionFactory mergedPartitionFactory = new MergedPartitionFactory(regionAnalysis, merges);
 					BasicPartition mergedPartition = mergedPartitionFactory.createPartition(partitionedTransformationAnalysis);
-					MappingRegion mappingRegion = (MappingRegion)regionAnalysis.getRegion();
-					List<MappingPartition> ownedMappingPartitions = merges.get(0).getPartition().getOwningCompositePartition().getOwnedMappingPartitions();
-					List<MappingPartition> mappingPartitions = mappingRegion.getMappingPartitions();
+					//					MappingRegion mappingRegion = (MappingRegion)regionAnalysis.getRegion();
+					//					List<MappingPartition> mappingPartitions = mappingRegion.getMappingPartitions();
 					for (@NonNull BasicPartitionAnalysis partitionAnalysis : merges) {
-						BasicPartition oldPartition = partitionAnalysis.getPartition();
-						boolean wasRemoved1 = ownedMappingPartitions.remove(oldPartition);
-						assert wasRemoved1;
+						//						mergedPartition.getExplicitPredecessors().addAll(oldPartition.getExplicitPredecessors());
+						//						partitionAnalysis.destroy();
+						//						BasicPartition oldPartition = partitionAnalysis.getPartition();
+						//						boolean wasRemoved1 = ownedMappingPartitions.remove(oldPartition);
+						//						assert wasRemoved1;
+						//						boolean wasRemoved2 = mappingPartitions.remove(oldPartition);
+						//						assert wasRemoved2;
+						//						mergedPartition.getExplicitSuccessors().addAll(oldPartition.getExplicitSuccessors());
+						//						oldPartition.getExplicitPredecessors().clear();
+						//						oldPartition.getExplicitSuccessors().clear();
 						old2new.put(partitionAnalysis, partitionedTransformationAnalysis.getPartitionAnalysis(mergedPartition));
-						boolean wasRemoved2 = mappingPartitions.remove(oldPartition);
-						assert wasRemoved2;
-						mergedPartition.getExplicitPredecessors().addAll(oldPartition.getExplicitPredecessors());
-						oldPartition.getExplicitPredecessors().clear();
 					}
 					for (int pass : merges.iterator().next().getPartition().getPasses()) {
 						mergedPartition.addPass(pass);

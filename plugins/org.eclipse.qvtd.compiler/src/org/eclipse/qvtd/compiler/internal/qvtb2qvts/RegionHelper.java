@@ -63,6 +63,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MapLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.MapPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.MapPartNode;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.MergedPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -403,6 +404,15 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		node.setMatched(isMatched);
 		node.setOriginatingElement(mapLiteralPart);
 		return node;
+	}
+
+	public @NonNull MergedPartition createMergedPartition(@NonNull String name, @NonNull Iterable<@NonNull Node> headNodes) {
+		MergedPartition mergedPartition = QVTscheduleFactory.eINSTANCE.createMergedPartition();
+		mergedPartition.setName(name);
+		//	basicPartition.setRegion(region);
+		((MappingRegion)region).getMappingPartitions().add(mergedPartition);
+		Iterables.addAll(QVTscheduleUtil.Internal.getHeadNodesList(mergedPartition), headNodes);
+		return mergedPartition;
 	}
 
 	public @NonNull NavigableEdge createNavigationEdge(@NonNull Node sourceNode, @NonNull Property source2targetProperty, @NonNull Node targetNode, @Nullable Boolean isPartial) {

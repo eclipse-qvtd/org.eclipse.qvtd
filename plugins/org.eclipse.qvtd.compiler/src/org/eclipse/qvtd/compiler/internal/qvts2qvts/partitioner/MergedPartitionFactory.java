@@ -15,10 +15,12 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.MergedPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -68,17 +70,31 @@ public class MergedPartitionFactory extends AbstractPartitionFactory<@NonNull Re
 
 	@Override
 	public @NonNull BasicPartition createPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
-		ReachabilityForest reachabilityForest = createReachabilityForest();
 		Iterable<@NonNull Node> headNodes = subPartitionAnalyses.iterator().next().getTraceNodes();
-		BasicPartition basicPartition = createBasicPartition(computeName(), headNodes);
+		MergedPartition mergedPartition = createMergedPartition(computeName(), headNodes);
+		for (@NonNull BasicPartitionAnalysis subPartitionAnalysis : subPartitionAnalyses) {
+			BasicPartition subPartition = subPartitionAnalysis.getPartition();
+			PivotUtilInternal.resetContainer(subPartition);
+			mergedPartition.getOwnedMergedPartitions().add(subPartition);
+			mergedPartition.getExplicitPredecessors().addAll(subPartition.getExplicitPredecessors());
+			mergedPartition.getExplicitSuccessors().addAll(subPartition.getExplicitSuccessors());
+		}
+		mergedPartition.initTypedModelAnalysis();
+		createPartitionAnalysis(partitionedTransformationAnalysis, mergedPartition);
+		return mergedPartition;
+	}
+
+	protected void createPartitionAnalysis(
+			PartitionedTransformationAnalysis partitionedTransformationAnalysis,
+			MergedPartition mergedPartition) {
+		ReachabilityForest reachabilityForest = createReachabilityForest();
 		int partitionNumber = region.getNextPartitionNumber();
 		String namePrefix = "«merge" + partitionNumber + "»";
 		String symbolSuffix = "_p" + partitionNumber;
-		BasicPartitionAnalysis basicPartitionAnalysis = new BasicPartitionAnalysis(partitionedTransformationAnalysis, basicPartition, reachabilityForest, namePrefix, symbolSuffix);
+		BasicPartitionAnalysis basicPartitionAnalysis = new BasicPartitionAnalysis(partitionedTransformationAnalysis, mergedPartition, reachabilityForest, namePrefix, symbolSuffix);
 		initializePartition(basicPartitionAnalysis);
-		basicPartition.initTypedModelAnalysis();
-		// FIXME explicitPredecessors
-		return basicPartition;
+		basicPartitionAnalysis.analyzePartition();
+		basicPartitionAnalysis.analyzePartition2();
 	}
 
 	@Override
