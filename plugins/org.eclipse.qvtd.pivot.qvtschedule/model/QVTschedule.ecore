@@ -146,8 +146,8 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A Connection establishes that one or more source edges/nodes are available for use by one or more target edges/nodes.&#xD;&#xA;Derivations refine the availability to edges or nodes, pass by value, optional existence or mandatory existence."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduledRegion"
-        lowerBound="1" eType="#//ScheduledRegion" eOpposite="#//ScheduledRegion/ownedConnections"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningRootRegion" lowerBound="1"
+        eType="#//RootRegion" eOpposite="#//RootRegion/ownedConnections"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="connectionRole" lowerBound="1"
         eType="#//ConnectionRole" defaultValueLiteral="UNDEFINED"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -293,8 +293,8 @@
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="loadingPartition" lowerBound="1"
         eType="#//LoadingPartition" eOpposite="#//LoadingPartition/referredLoadingRegion"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduledRegion"
-        lowerBound="1" eType="#//ScheduledRegion" eOpposite="#//ScheduledRegion/ownedLoadingRegion"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningRootRegion" lowerBound="1"
+        eType="#//RootRegion" eOpposite="#//RootRegion/ownedLoadingRegion"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MapLiteralNode" eSuperTypes="#//OperationNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -570,13 +570,38 @@
         eType="#//Edge" containment="true" eOpposite="#//Edge/owningRegion"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedClusters" upperBound="-1"
         eType="#//Cluster" containment="true" eOpposite="#//Cluster/owningRegion"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="scheduledRegion" eType="#//ScheduledRegion"
-        eOpposite="#//ScheduledRegion/activeRegions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rootRegion" eType="#//RootRegion"
+        eOpposite="#//RootRegion/activeRegions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RootPartition" eSuperTypes="#//CompositePartition">
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningRootRegion" lowerBound="1"
-        eType="#//ScheduledRegion" eOpposite="#//ScheduledRegion/ownedRootPartition"/>
+        eType="#//RootRegion" eOpposite="#//RootRegion/ownedRootPartition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="loadingPartition" eType="#//LoadingPartition"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RootRegion" eSuperTypes="#//Region">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A RootRegion is the root of a graphical representation of a Transformation."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activeRegions" upperBound="-1"
+        eType="#//Region" eOpposite="#//Region/rootRegion"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedConnections" upperBound="-1"
+        eType="#//Connection" containment="true" eOpposite="#//Connection/owningRootRegion"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedLoadingRegion" lowerBound="1"
+        eType="#//LoadingRegion" containment="true" eOpposite="#//LoadingRegion/owningRootRegion"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduleModel" lowerBound="1"
+        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/ownedRootRegions">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The overall ScheduleModel in which this RootRegion is contained."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referredTransformation"
+        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Transformation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The Transformation represented by this RootRegion."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRootPartition" eType="#//RootPartition"
+        containment="true" eOpposite="#//RootPartition/owningRootRegion"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RuleRegion" eSuperTypes="#//MappingRegion">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -599,33 +624,8 @@
         eType="#//MappingRegion" containment="true" eOpposite="#//MappingRegion/owningScheduleModel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperationRegions"
         upperBound="-1" eType="#//OperationRegion" containment="true" eOpposite="#//OperationRegion/owningScheduleModel"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedScheduledRegions"
-        upperBound="-1" eType="#//ScheduledRegion" containment="true" eOpposite="#//ScheduledRegion/owningScheduleModel"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ScheduledRegion" eSuperTypes="#//Region">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A ScheduledRegion is the root of a graphical representation of a Transformation."/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="activeRegions" upperBound="-1"
-        eType="#//Region" eOpposite="#//Region/scheduledRegion"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedConnections" upperBound="-1"
-        eType="#//Connection" containment="true" eOpposite="#//Connection/owningScheduledRegion"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedLoadingRegion" lowerBound="1"
-        eType="#//LoadingRegion" containment="true" eOpposite="#//LoadingRegion/owningScheduledRegion"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="owningScheduleModel" lowerBound="1"
-        eType="#//ScheduleModel" eOpposite="#//ScheduleModel/ownedScheduledRegions">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The overall ScheduleModel in which this ScheduledRegion is contained."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="referredTransformation"
-        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#T-qvtbase-Transformation">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="The Transformation represented by this ScheduledRegion."/>
-      </eAnnotations>
-    </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRootPartition" eType="#//RootPartition"
-        containment="true" eOpposite="#//RootPartition/owningRootRegion"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRootRegions" upperBound="-1"
+        eType="#//RootRegion" containment="true" eOpposite="#//RootRegion/owningScheduleModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ShadowNode" eSuperTypes="#//OperationNode">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

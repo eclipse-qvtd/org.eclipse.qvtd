@@ -48,7 +48,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 /**
@@ -67,9 +67,9 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 	protected final @NonNull Transformation transformation;
 
 	/**
-	 * The ScheduledRegion that implements the transformation.
+	 * The RootRegion that implements the transformation.
 	 */
-	protected final @NonNull ScheduledRegion scheduledRegion;
+	protected final @NonNull RootRegion rootRegion;
 
 	protected final @NonNull Property oclContainerProperty;
 
@@ -108,11 +108,11 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 
 	private @Nullable RootPartitionAnalysis rootPartitionAnalysis = null;
 
-	protected AbstractTransformationAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull Transformation transformation, @NonNull ScheduledRegion scheduledRegion) {
+	protected AbstractTransformationAnalysis(@NonNull ScheduleManager scheduleManager, @NonNull Transformation transformation, @NonNull RootRegion rootRegion) {
 		super(scheduleManager.getEnvironmentFactory());
 		this.scheduleManager = scheduleManager;
 		this.transformation = transformation;
-		this.scheduledRegion = scheduledRegion;
+		this.rootRegion = rootRegion;
 		this.oclContainerProperty = scheduleManager.getStandardLibraryHelper().getOclContainerProperty();
 		for (@NonNull Rule asRule : QVTbaseUtil.getOwnedRules(transformation)) {
 			RuleAnalysis ruleAnalysis = scheduleManager.createRuleAnalysis(this, asRule);
@@ -319,8 +319,8 @@ public abstract class AbstractTransformationAnalysis extends QVTbaseHelper imple
 		return scheduleManager;
 	}
 
-	public @NonNull ScheduledRegion getScheduledRegion() {
-		return scheduledRegion;
+	public @NonNull RootRegion getRootRegion() {
+		return rootRegion;
 	}
 
 	public @NonNull TraceClassRegionAnalysis getTraceClassAnalysis(@NonNull ClassDatum classDatum) {

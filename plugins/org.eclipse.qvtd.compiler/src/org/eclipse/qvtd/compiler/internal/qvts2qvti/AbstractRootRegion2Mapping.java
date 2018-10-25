@@ -37,9 +37,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
-public abstract class AbstractScheduledRegion2Mapping extends AbstractPartition2Mapping
+public abstract class AbstractRootRegion2Mapping extends AbstractPartition2Mapping
 {
-	protected AbstractScheduledRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Partition partition) {
+	protected AbstractRootRegion2Mapping(@NonNull QVTs2QVTiVisitor visitor, @NonNull Partition partition) {
 		super(visitor, partition);
 		connection2variable = new HashMap<>();
 	}

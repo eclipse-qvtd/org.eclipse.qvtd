@@ -742,6 +742,18 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
+	public R visitRootRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RootRegion object) {
+		@Nullable P prologue = preVisit(object);
+		try {
+			R result = delegate.visitRootRegion(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public R visitRuleRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RuleRegion object) {
 		@Nullable P prologue = preVisit(object);
 		try {
@@ -758,18 +770,6 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitScheduleModel(object);
-			return postVisit(object, prologue, result);
-		}
-		catch (Throwable e) {
-			return badVisit(object, prologue, e);
-		}
-	}
-
-	@Override
-	public R visitScheduledRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduledRegion object) {
-		@Nullable P prologue = preVisit(object);
-		try {
-			R result = delegate.visitScheduledRegion(object);
 			return postVisit(object, prologue, result);
 		}
 		catch (Throwable e) {

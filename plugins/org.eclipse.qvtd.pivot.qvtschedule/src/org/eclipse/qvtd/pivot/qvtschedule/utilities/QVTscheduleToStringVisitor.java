@@ -79,7 +79,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ShadowNode;
 import org.eclipse.qvtd.pivot.qvtschedule.ShadowPartEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.StringLiteralNode;
@@ -436,17 +436,17 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 	}
 
 	@Override
+	public String visitRootRegion(@NonNull RootRegion object) {
+		return visiting(object);
+	}
+
+	@Override
 	public String visitRuleRegion(@NonNull RuleRegion object) {
 		return visiting(object);
 	}
 
 	@Override
 	public String visitScheduleModel(@NonNull ScheduleModel object) {
-		return visiting(object);
-	}
-
-	@Override
-	public String visitScheduledRegion(@NonNull ScheduledRegion object) {
 		return visiting(object);
 	}
 

@@ -49,7 +49,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
 
@@ -83,7 +83,7 @@ public interface ScheduleManager
 	/**
 	 * Perform the interdependent global analysis of each Rule within its Transformation.
 	 */
-	@NonNull Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull RuleRegion>> analyzeTransformations();
+	@NonNull Map<@NonNull RootRegion, @NonNull Iterable<@NonNull RuleRegion>> analyzeTransformations();
 
 	@Nullable ConnectionManager basicGetConnectionManager();
 	@Nullable Property basicGetGlobalSuccessProperty(@NonNull Node node);
@@ -123,7 +123,7 @@ public interface ScheduleManager
 	@NonNull PropertyDatum getPropertyDatum(@NonNull NavigableEdge edge);
 	@NonNull QVTbaseLibraryHelper getQVTbaseLibraryHelper();
 	@NonNull RegionAnalysis getRegionAnalysis(@NonNull Region region);
-	@NonNull RootPartitionAnalysis getRootPartitionAnalysis(@NonNull ScheduledRegion scheduledRegion);
+	@NonNull RootPartitionAnalysis getRootPartitionAnalysis(@NonNull RootRegion rootRegion);
 	@NonNull ScheduleModel getScheduleModel();
 	@NonNull StandardLibrary getStandardLibrary();
 	@NonNull StandardLibraryHelper getStandardLibraryHelper();
@@ -132,7 +132,7 @@ public interface ScheduleManager
 	@NonNull TraceHelper getTraceHelper();
 	@NonNull TypedModel getTraceTypedModel();
 	@NonNull Iterable<@NonNull AbstractTransformationAnalysis> getTransformationAnalyses();
-	@NonNull AbstractTransformationAnalysis getTransformationAnalysis(@NonNull ScheduledRegion scheduledRegion);
+	@NonNull AbstractTransformationAnalysis getTransformationAnalysis(@NonNull RootRegion rootRegion);
 	@NonNull AbstractTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation);
 
 	/**
@@ -170,7 +170,7 @@ public interface ScheduleManager
 	 */
 	boolean needsDiscrimination();
 
-	void setScheduledRegion(@NonNull MappingRegion mappingRegion, @Nullable ScheduledRegion scheduledRegion);
+	void setRootRegion(@NonNull MappingRegion mappingRegion, @Nullable RootRegion rootRegion);
 
 	/**
 	 * Eeturn true to use the new QVTr ActivatorRegion support, false to retain the older, one day obsolete support.

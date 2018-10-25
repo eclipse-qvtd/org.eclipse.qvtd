@@ -116,19 +116,19 @@ public class CallTreeBuilder
 				Partition commonPartition = connection2commonPartition.get(connection);
 				assert commonPartition != null;
 				List<@NonNull Partition> intermediatePartitions = new ArrayList<>();
-				//				boolean isCyclic = scheduledRegion.isCyclicScheduledRegion();
+				//				boolean isCyclic = rootRegion.isCyclicRootRegion();
 				//				if (isCyclic) {		// FIXME should not be necessary
-				//					intermediateRegions.add(scheduledRegion);
+				//					intermediateRegions.add(rootRegion);
 				//				}
 				for (@NonNull Partition sourcePartition : scheduleCache.getSourcePartitions(connection)) {
-					if (sourcePartition != commonPartition) { //|| sourceRegion.isCyclicScheduledRegion()) {
+					if (sourcePartition != commonPartition) { //|| sourceRegion.isCyclicRootRegion()) {
 						Iterable<@NonNull Partition> sourcePartitions = Collections.singletonList(sourcePartition);
 						installConnectionsLocateIntermediates(intermediatePartitions, sourcePartitions, commonPartition);
 					}
 				}
 				for (@NonNull Partition targetPartition : scheduleCache.getTargetPartitions(connection)) {
 					if ((targetPartition != commonPartition) && connection.isPassed(targetPartition)) {
-						Iterable<@NonNull Partition> targetPartitions2 = /*targetRegion.isCyclicScheduledRegion() ? Collections.singletonList(targetRegion) :*/ connectionManager.getCallableParents(targetPartition);
+						Iterable<@NonNull Partition> targetPartitions2 = /*targetRegion.isCyclicRootRegion() ? Collections.singletonList(targetRegion) :*/ connectionManager.getCallableParents(targetPartition);
 						installConnectionsLocateIntermediates(intermediatePartitions, targetPartitions2, commonPartition);
 					}
 				}

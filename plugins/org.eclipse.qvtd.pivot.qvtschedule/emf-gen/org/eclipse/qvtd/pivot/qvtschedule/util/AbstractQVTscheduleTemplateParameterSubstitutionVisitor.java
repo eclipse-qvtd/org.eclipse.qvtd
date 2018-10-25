@@ -342,6 +342,11 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
+	public @Nullable Object visitRootRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RootRegion object) {
+		return visitRegion(object);
+	}
+
+	@Override
 	public @Nullable Object visitRuleRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull RuleRegion object) {
 		return visitMappingRegion(object);
 	}
@@ -349,11 +354,6 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 	@Override
 	public @Nullable Object visitScheduleModel(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduleModel object) {
 		return visitModel(object);
-	}
-
-	@Override
-	public @Nullable Object visitScheduledRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull ScheduledRegion object) {
-		return visitRegion(object);
 	}
 
 	@Override

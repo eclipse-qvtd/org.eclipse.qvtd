@@ -23,7 +23,7 @@ import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 import com.google.common.collect.Lists;
@@ -35,33 +35,33 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 		super(new QVTcoreScheduleManager(environmentFactory, problemHandler, schedulerOptions), problemHandler);
 	}
 
-	public @NonNull Map<@NonNull ScheduledRegion, Iterable<@NonNull MappingRegion>> transform() throws IOException {
+	public @NonNull Map<@NonNull RootRegion, Iterable<@NonNull MappingRegion>> transform() throws IOException {
 		scheduleManager.analyzeSourceModel();
 		Iterable<@NonNull AbstractTransformationAnalysis> transformationAnalyses = scheduleManager.getOrderedTransformationAnalyses();
 		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : transformationAnalyses) {
 			transformationAnalysis.analyzeMappingRegions();
 		}
 		scheduleManager.analyzeOriginalContents();		// FIXME Should treat LoadingRegion uniformly
-		Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull RuleRegion>> scheduledRegion2activeRegions = scheduleManager.analyzeTransformations();
+		Map<@NonNull RootRegion, @NonNull Iterable<@NonNull RuleRegion>> rootRegion2activeRegions = scheduleManager.analyzeTransformations();
 		for (@NonNull MappingRegion ruleRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager.getScheduleModel())) {
 			scheduleManager.writeDebugGraphs(ruleRegion, null);
 		}
-		Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull MappingRegion>> scheduledRegion2mergedRegions = new HashMap<>();
+		Map<@NonNull RootRegion, @NonNull Iterable<@NonNull MappingRegion>> rootRegion2mergedRegions = new HashMap<>();
 		/*		if (!scheduleManager.isNoEarlyMerge()) {
-			for (@NonNull ScheduledRegion scheduledRegion : scheduledRegion2activeRegions.keySet()) {
-				Iterable<@NonNull RuleRegion> activeRegions = scheduledRegion2activeRegions.get(scheduledRegion);
+			for (@NonNull RootRegion rootRegion : rootRegion2activeRegions.keySet()) {
+				Iterable<@NonNull RuleRegion> activeRegions = rootRegion2activeRegions.get(rootRegion);
 				assert activeRegions != null;
 				List<@NonNull MappingRegion> mergedRegions = new ArrayList<>(EarlyMerger.merge(scheduleManager, activeRegions));
-				scheduledRegion2mergedRegions.put(scheduledRegion, mergedRegions);
+				rootRegion2mergedRegions.put(rootRegion, mergedRegions);
 			}
 		}
 		else { */
-		for (@NonNull ScheduledRegion scheduledRegion : scheduledRegion2activeRegions.keySet()) {
-			Iterable<@NonNull RuleRegion> activeRegions = scheduledRegion2activeRegions.get(scheduledRegion);
+		for (@NonNull RootRegion rootRegion : rootRegion2activeRegions.keySet()) {
+			Iterable<@NonNull RuleRegion> activeRegions = rootRegion2activeRegions.get(rootRegion);
 			assert activeRegions != null;
-			scheduledRegion2mergedRegions.put(scheduledRegion, Lists.newArrayList(activeRegions));
+			rootRegion2mergedRegions.put(rootRegion, Lists.newArrayList(activeRegions));
 		}
 		//		}
-		return scheduledRegion2mergedRegions;
+		return rootRegion2mergedRegions;
 	}
 }

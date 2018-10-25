@@ -39,7 +39,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedNodes <em>Owned Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedEdges <em>Owned Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getOwnedClusters <em>Owned Clusters</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getScheduledRegion <em>Scheduled Region</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getRootRegion <em>Root Region</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion()
@@ -87,33 +87,33 @@ public interface Region extends NamedElement, Symbolable, Graphable, GraphNode
 	List<Cluster> getOwnedClusters();
 
 	/**
-	 * Returns the value of the '<em><b>Scheduled Region</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getActiveRegions <em>Active Regions</em>}'.
+	 * Returns the value of the '<em><b>Root Region</b></em>' reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.RootRegion#getActiveRegions <em>Active Regions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Scheduled Region</em>' reference isn't clear,
+	 * If the meaning of the '<em>Root Region</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Scheduled Region</em>' reference.
-	 * @see #setScheduledRegion(ScheduledRegion)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_ScheduledRegion()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getActiveRegions
+	 * @return the value of the '<em>Root Region</em>' reference.
+	 * @see #setRootRegion(RootRegion)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRegion_RootRegion()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.RootRegion#getActiveRegions
 	 * @model opposite="activeRegions"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!scheduledRegion'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Region!rootRegion'"
 	 * @generated
 	 */
-	ScheduledRegion getScheduledRegion();
+	RootRegion getRootRegion();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getScheduledRegion <em>Scheduled Region</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Region#getRootRegion <em>Root Region</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Scheduled Region</em>' reference.
-	 * @see #getScheduledRegion()
+	 * @param value the new value of the '<em>Root Region</em>' reference.
+	 * @see #getRootRegion()
 	 * @generated
 	 */
-	void setScheduledRegion(ScheduledRegion value);
+	void setRootRegion(RootRegion value);
 
 	/**
 	 * Returns the value of the '<em><b>Owned Nodes</b></em>' containment reference list.
@@ -142,7 +142,7 @@ public interface Region extends NamedElement, Symbolable, Graphable, GraphNode
 	//	@NonNull Iterable<@NonNull Node> getAncestorsOf(@NonNull Node node);
 
 	@NonNull Iterable<@NonNull Node> getComposedNodes();
-	@Nullable ScheduledRegion getContainingScheduledRegion();
+	@Nullable RootRegion getContainingRootRegion();
 	@NonNull Iterable<@NonNull Edge> getExpressionEdges();
 
 	List<Node> getHeadNodes();

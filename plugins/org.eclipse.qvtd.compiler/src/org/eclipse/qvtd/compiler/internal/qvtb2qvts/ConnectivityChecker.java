@@ -31,7 +31,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -70,7 +70,7 @@ public class ConnectivityChecker
 
 	protected final @NonNull ScheduleManager scheduleManager;
 	protected final @NonNull ScheduleModel scheduleModel;
-	//	protected final @NonNull ScheduledRegion scheduledRegion;
+	//	protected final @NonNull RootRegion rootRegion;
 	private final @NonNull Map<@NonNull String, @NonNull ClassDatum> name2classDatum = new HashMap<>();
 	private final @NonNull Map<@NonNull String, @NonNull Connection> name2connection = new HashMap<>();
 	private final @NonNull Map<@NonNull ClassDatum, @NonNull Set<@NonNull ClassDatum>> classDatum2subClassDatums = new HashMap<>();
@@ -99,12 +99,12 @@ public class ConnectivityChecker
 		for (@NonNull ClassDatum classDatum : QVTscheduleUtil.getOwnedClassDatums(scheduleModel)) {
 			analyzeClassDatums(classDatum);
 		}
-		for (@NonNull ScheduledRegion scheduledRegion : QVTscheduleUtil.getOwnedScheduledRegions(scheduleModel)) {
-			for (@NonNull Connection connection : QVTscheduleUtil.getOwnedConnections(scheduledRegion)) {
+		for (@NonNull RootRegion rootRegion : QVTscheduleUtil.getOwnedRootRegions(scheduleModel)) {
+			for (@NonNull Connection connection : QVTscheduleUtil.getOwnedConnections(rootRegion)) {
 				analyzeConnection(connection);
 			}
-			analyzeRegion(QVTscheduleUtil.getOwnedLoadingRegion(scheduledRegion));
-			for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(scheduledRegion)) {
+			analyzeRegion(QVTscheduleUtil.getOwnedLoadingRegion(rootRegion));
+			for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(rootRegion)) {
 				analyzeRegion(region);
 			}
 		}

@@ -343,6 +343,11 @@ implements QVTscheduleVisitor<Boolean>
 	}
 
 	@Override
+	public @Nullable Boolean visitRootRegion(@NonNull RootRegion object) {
+		return visitRegion(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitRuleRegion(@NonNull RuleRegion object) {
 		return visitMappingRegion(object);
 	}
@@ -350,11 +355,6 @@ implements QVTscheduleVisitor<Boolean>
 	@Override
 	public @Nullable Boolean visitScheduleModel(@NonNull ScheduleModel object) {
 		return visitModel(object);
-	}
-
-	@Override
-	public @Nullable Boolean visitScheduledRegion(@NonNull ScheduledRegion object) {
-		return visitRegion(object);
 	}
 
 	@Override

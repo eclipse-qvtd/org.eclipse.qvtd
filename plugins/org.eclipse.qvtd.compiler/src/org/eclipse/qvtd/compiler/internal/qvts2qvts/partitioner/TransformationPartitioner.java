@@ -35,7 +35,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -215,8 +215,8 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 				LoadingPartitionAnalysis loadingPartitionAnalysis = LoadingPartitionAnalysis.createLoadingPartitionAnalysis(partitionedTransformationAnalysis, (LoadingRegion) region);
 				partitionAnalyses.add(loadingPartitionAnalysis);
 				regionAnalysis.setPartitionAnalyses(Collections.singletonList(loadingPartitionAnalysis));
-				ScheduledRegion scheduledRegion = transformationAnalysis.getScheduledRegion();
-				scheduledRegion.setOwnedLoadingRegion((LoadingRegion) region);
+				RootRegion rootRegion = transformationAnalysis.getRootRegion();
+				rootRegion.setOwnedLoadingRegion((LoadingRegion) region);
 			}
 		}
 		Collections.sort(mappingPartitioners, NameUtil.NAMEABLE_COMPARATOR);

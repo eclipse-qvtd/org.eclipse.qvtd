@@ -30,7 +30,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.ComposedNode;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 
 /**
- * A LoadingRegionAnalysis provides an analysis of what is externally introduced to the ScheduledRegion.
+ * A LoadingRegionAnalysis provides an analysis of what is externally introduced to the RootRegion.
  */
 public class LoadingRegionAnalysis extends RegionHelper<@NonNull LoadingRegion>
 {

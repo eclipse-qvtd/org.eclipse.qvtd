@@ -21,7 +21,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 
 /** This code is rescued but has never worked properly */
 public class ToGraphVisitor extends AbstractToGraphVisitor
@@ -151,26 +151,26 @@ public class ToGraphVisitor extends AbstractToGraphVisitor
 	}
 
 	@Override
-	public @Nullable String visitScheduledRegion(@NonNull ScheduledRegion scheduledRegion) {
-		context.setLabel(scheduledRegion.getName());
+	public @Nullable String visitRootRegion(@NonNull RootRegion rootRegion) {
+		context.setLabel(rootRegion.getName());
 		context.pushCluster();
-		for (@NonNull OperationRegion region : QVTscheduleUtil.getOwnedOperationRegions(QVTscheduleUtil.getOwningScheduleModel(scheduledRegion))) {
+		for (@NonNull OperationRegion region : QVTscheduleUtil.getOwnedOperationRegions(QVTscheduleUtil.getOwningScheduleModel(rootRegion))) {
 			region.accept(this);
 		}
-		LoadingRegion loadingRegion = scheduledRegion.getOwnedLoadingRegion();
+		LoadingRegion loadingRegion = rootRegion.getOwnedLoadingRegion();
 		if (loadingRegion != null) {
 			loadingRegion.accept(this);
 		}
-		for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(scheduledRegion)) {
+		for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(rootRegion)) {
 			region.accept(this);
 		}
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(scheduledRegion)) {
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(rootRegion)) {
 			appendNode(node);
 		}
-		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(scheduledRegion)) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(rootRegion)) {
 			appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
 		}
-		for (@NonNull Connection connection : QVTscheduleUtil.getOwnedConnections(scheduledRegion)) {
+		for (@NonNull Connection connection : QVTscheduleUtil.getOwnedConnections(rootRegion)) {
 			connection.accept(this);
 		}
 		context.popCluster();

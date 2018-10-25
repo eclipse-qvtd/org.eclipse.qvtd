@@ -38,7 +38,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameReservation;
 
@@ -131,11 +131,11 @@ public class QVTs2QVTi extends QVTimperativeHelper
 		}
 	}
 
-	protected void resolveTransformation(@NonNull Model model, @NonNull ScheduledRegion scheduledRegion) {
+	protected void resolveTransformation(@NonNull Model model, @NonNull RootRegion rootRegion) {
 		SymbolNameReservation symbolNameReservation = scheduleManager.getScheduleModel().getSymbolNameAdapter();
-		Transformation transformation = QVTscheduleUtil.getReferredTransformation(scheduledRegion);
+		Transformation transformation = QVTscheduleUtil.getReferredTransformation(rootRegion);
 		QVTs2QVTiVisitor visitor = new QVTs2QVTiVisitor(scheduleManager, problemHandler, this, transformation, symbolNameReservation);
-		Transformation qvtiTransformation = (Transformation)scheduledRegion.accept(visitor);
+		Transformation qvtiTransformation = (Transformation)rootRegion.accept(visitor);
 		NamedElement qvtiChild = qvtiTransformation;
 		for (org.eclipse.ocl.pivot.Package qvtmPackage = transformation.getOwningPackage(); qvtmPackage != null; qvtmPackage = qvtmPackage.getOwningPackage()) {
 			org.eclipse.ocl.pivot.@NonNull Package qvtiPackage = createPackage(ClassUtil.nonNull(qvtmPackage.getName()), qvtmPackage.getNsPrefix(), qvtmPackage.getURI());
@@ -150,8 +150,8 @@ public class QVTs2QVTi extends QVTimperativeHelper
 		model.getOwnedPackages().add((org.eclipse.ocl.pivot.Package)qvtiChild);
 	}
 
-	public @NonNull Model transform(@NonNull Model model, @NonNull ScheduledRegion scheduledRegion) {
-		resolveTransformation(model, scheduledRegion);
+	public @NonNull Model transform(@NonNull Model model, @NonNull RootRegion rootRegion) {
+		resolveTransformation(model, rootRegion);
 		resolveImports(model);
 		return model;
 	}

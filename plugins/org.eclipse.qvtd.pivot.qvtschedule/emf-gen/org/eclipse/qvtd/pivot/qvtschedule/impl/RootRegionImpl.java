@@ -39,7 +39,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -53,17 +53,17 @@ import com.google.common.collect.Iterables;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getActiveRegions <em>Active Regions</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getOwnedConnections <em>Owned Connections</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getOwnedLoadingRegion <em>Owned Loading Region</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getOwningScheduleModel <em>Owning Schedule Model</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getReferredTransformation <em>Referred Transformation</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl#getOwnedRootPartition <em>Owned Root Partition</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RootRegionImpl#getActiveRegions <em>Active Regions</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RootRegionImpl#getOwnedConnections <em>Owned Connections</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RootRegionImpl#getOwnedLoadingRegion <em>Owned Loading Region</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RootRegionImpl#getOwningScheduleModel <em>Owning Schedule Model</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RootRegionImpl#getReferredTransformation <em>Referred Transformation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RootRegionImpl#getOwnedRootPartition <em>Owned Root Partition</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
+public class RootRegionImpl extends RegionImpl implements RootRegion {
 	/**
 	 * The cached value of the '{@link #getActiveRegions() <em>Active Regions</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -119,7 +119,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ScheduledRegionImpl() {
+	protected RootRegionImpl() {
 		super();
 	}
 
@@ -130,7 +130,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTschedulePackage.Literals.SCHEDULED_REGION;
+		return QVTschedulePackage.Literals.ROOT_REGION;
 	}
 
 	/**
@@ -141,7 +141,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	public List<Region> getActiveRegions() {
 		if (activeRegions == null) {
-			activeRegions = new EObjectWithInverseResolvingEList<Region>(Region.class, this, QVTschedulePackage.SCHEDULED_REGION__ACTIVE_REGIONS, QVTschedulePackage.REGION__SCHEDULED_REGION);
+			activeRegions = new EObjectWithInverseResolvingEList<Region>(Region.class, this, QVTschedulePackage.ROOT_REGION__ACTIVE_REGIONS, QVTschedulePackage.REGION__ROOT_REGION);
 		}
 		return activeRegions;
 	}
@@ -154,7 +154,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	public List<Connection> getOwnedConnections() {
 		if (ownedConnections == null) {
-			ownedConnections = new EObjectContainmentWithInverseEList<Connection>(Connection.class, this, QVTschedulePackage.SCHEDULED_REGION__OWNED_CONNECTIONS, QVTschedulePackage.CONNECTION__OWNING_SCHEDULED_REGION);
+			ownedConnections = new EObjectContainmentWithInverseEList<Connection>(Connection.class, this, QVTschedulePackage.ROOT_REGION__OWNED_CONNECTIONS, QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION);
 		}
 		return ownedConnections;
 	}
@@ -178,7 +178,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		LoadingRegion oldOwnedLoadingRegion = ownedLoadingRegion;
 		ownedLoadingRegion = newOwnedLoadingRegion;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SCHEDULED_REGION__OWNED_LOADING_REGION, oldOwnedLoadingRegion, newOwnedLoadingRegion);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.ROOT_REGION__OWNED_LOADING_REGION, oldOwnedLoadingRegion, newOwnedLoadingRegion);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -194,14 +194,14 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		if (newOwnedLoadingRegion != ownedLoadingRegion) {
 			NotificationChain msgs = null;
 			if (ownedLoadingRegion != null)
-				msgs = ((InternalEObject)ownedLoadingRegion).eInverseRemove(this, QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION, LoadingRegion.class, msgs);
+				msgs = ((InternalEObject)ownedLoadingRegion).eInverseRemove(this, QVTschedulePackage.LOADING_REGION__OWNING_ROOT_REGION, LoadingRegion.class, msgs);
 			if (newOwnedLoadingRegion != null)
-				msgs = ((InternalEObject)newOwnedLoadingRegion).eInverseAdd(this, QVTschedulePackage.LOADING_REGION__OWNING_SCHEDULED_REGION, LoadingRegion.class, msgs);
+				msgs = ((InternalEObject)newOwnedLoadingRegion).eInverseAdd(this, QVTschedulePackage.LOADING_REGION__OWNING_ROOT_REGION, LoadingRegion.class, msgs);
 			msgs = basicSetOwnedLoadingRegion(newOwnedLoadingRegion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SCHEDULED_REGION__OWNED_LOADING_REGION, newOwnedLoadingRegion, newOwnedLoadingRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.ROOT_REGION__OWNED_LOADING_REGION, newOwnedLoadingRegion, newOwnedLoadingRegion));
 	}
 
 	/**
@@ -211,7 +211,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	 */
 	@Override
 	public ScheduleModel getOwningScheduleModel() {
-		if (eContainerFeatureID() != QVTschedulePackage.SCHEDULED_REGION__OWNING_SCHEDULE_MODEL) return null;
+		if (eContainerFeatureID() != QVTschedulePackage.ROOT_REGION__OWNING_SCHEDULE_MODEL) return null;
 		return (ScheduleModel)eInternalContainer();
 	}
 
@@ -221,7 +221,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningScheduleModel(ScheduleModel newOwningScheduleModel, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningScheduleModel, QVTschedulePackage.SCHEDULED_REGION__OWNING_SCHEDULE_MODEL, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningScheduleModel, QVTschedulePackage.ROOT_REGION__OWNING_SCHEDULE_MODEL, msgs);
 		return msgs;
 	}
 
@@ -232,19 +232,19 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	 */
 	@Override
 	public void setOwningScheduleModel(ScheduleModel newOwningScheduleModel) {
-		if (newOwningScheduleModel != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.SCHEDULED_REGION__OWNING_SCHEDULE_MODEL && newOwningScheduleModel != null)) {
+		if (newOwningScheduleModel != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.ROOT_REGION__OWNING_SCHEDULE_MODEL && newOwningScheduleModel != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningScheduleModel))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningScheduleModel != null)
-				msgs = ((InternalEObject)newOwningScheduleModel).eInverseAdd(this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_SCHEDULED_REGIONS, ScheduleModel.class, msgs);
+				msgs = ((InternalEObject)newOwningScheduleModel).eInverseAdd(this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_ROOT_REGIONS, ScheduleModel.class, msgs);
 			msgs = basicSetOwningScheduleModel(newOwningScheduleModel, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SCHEDULED_REGION__OWNING_SCHEDULE_MODEL, newOwningScheduleModel, newOwningScheduleModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.ROOT_REGION__OWNING_SCHEDULE_MODEL, newOwningScheduleModel, newOwningScheduleModel));
 	}
 
 	/**
@@ -259,7 +259,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 			referredTransformation = (Transformation)eResolveProxy(oldReferredTransformation);
 			if (referredTransformation != oldReferredTransformation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.SCHEDULED_REGION__REFERRED_TRANSFORMATION, oldReferredTransformation, referredTransformation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.ROOT_REGION__REFERRED_TRANSFORMATION, oldReferredTransformation, referredTransformation));
 			}
 		}
 		return referredTransformation;
@@ -284,7 +284,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		Transformation oldReferredTransformation = referredTransformation;
 		referredTransformation = newReferredTransformation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SCHEDULED_REGION__REFERRED_TRANSFORMATION, oldReferredTransformation, referredTransformation));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.ROOT_REGION__REFERRED_TRANSFORMATION, oldReferredTransformation, referredTransformation));
 	}
 
 	/**
@@ -306,7 +306,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		RootPartition oldOwnedRootPartition = ownedRootPartition;
 		ownedRootPartition = newOwnedRootPartition;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SCHEDULED_REGION__OWNED_ROOT_PARTITION, oldOwnedRootPartition, newOwnedRootPartition);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.ROOT_REGION__OWNED_ROOT_PARTITION, oldOwnedRootPartition, newOwnedRootPartition);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -329,7 +329,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SCHEDULED_REGION__OWNED_ROOT_PARTITION, newOwnedRootPartition, newOwnedRootPartition));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.ROOT_REGION__OWNED_ROOT_PARTITION, newOwnedRootPartition, newOwnedRootPartition));
 	}
 
 	/**
@@ -341,21 +341,21 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.SCHEDULED_REGION__ACTIVE_REGIONS:
+			case QVTschedulePackage.ROOT_REGION__ACTIVE_REGIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getActiveRegions()).basicAdd(otherEnd, msgs);
-			case QVTschedulePackage.SCHEDULED_REGION__OWNED_CONNECTIONS:
+			case QVTschedulePackage.ROOT_REGION__OWNED_CONNECTIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedConnections()).basicAdd(otherEnd, msgs);
-			case QVTschedulePackage.SCHEDULED_REGION__OWNED_LOADING_REGION:
+			case QVTschedulePackage.ROOT_REGION__OWNED_LOADING_REGION:
 				if (ownedLoadingRegion != null)
-					msgs = ((InternalEObject)ownedLoadingRegion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTschedulePackage.SCHEDULED_REGION__OWNED_LOADING_REGION, null, msgs);
+					msgs = ((InternalEObject)ownedLoadingRegion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTschedulePackage.ROOT_REGION__OWNED_LOADING_REGION, null, msgs);
 				return basicSetOwnedLoadingRegion((LoadingRegion)otherEnd, msgs);
-			case QVTschedulePackage.SCHEDULED_REGION__OWNING_SCHEDULE_MODEL:
+			case QVTschedulePackage.ROOT_REGION__OWNING_SCHEDULE_MODEL:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningScheduleModel((ScheduleModel)otherEnd, msgs);
-			case QVTschedulePackage.SCHEDULED_REGION__OWNED_ROOT_PARTITION:
+			case QVTschedulePackage.ROOT_REGION__OWNED_ROOT_PARTITION:
 				if (ownedRootPartition != null)
-					msgs = ((InternalEObject)ownedRootPartition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTschedulePackage.SCHEDULED_REGION__OWNED_ROOT_PARTITION, null, msgs);
+					msgs = ((InternalEObject)ownedRootPartition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTschedulePackage.ROOT_REGION__OWNED_ROOT_PARTITION, null, msgs);
 				return basicSetOwnedRootPartition((RootPartition)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -369,15 +369,15 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.SCHEDULED_REGION__ACTIVE_REGIONS:
+			case QVTschedulePackage.ROOT_REGION__ACTIVE_REGIONS:
 				return ((InternalEList<?>)getActiveRegions()).basicRemove(otherEnd, msgs);
-			case QVTschedulePackage.SCHEDULED_REGION__OWNED_CONNECTIONS:
+			case QVTschedulePackage.ROOT_REGION__OWNED_CONNECTIONS:
 				return ((InternalEList<?>)getOwnedConnections()).basicRemove(otherEnd, msgs);
-			case QVTschedulePackage.SCHEDULED_REGION__OWNED_LOADING_REGION:
+			case QVTschedulePackage.ROOT_REGION__OWNED_LOADING_REGION:
 				return basicSetOwnedLoadingRegion(null, msgs);
-			case QVTschedulePackage.SCHEDULED_REGION__OWNING_SCHEDULE_MODEL:
+			case QVTschedulePackage.ROOT_REGION__OWNING_SCHEDULE_MODEL:
 				return basicSetOwningScheduleModel(null, msgs);
-			case QVTschedulePackage.SCHEDULED_REGION__OWNED_ROOT_PARTITION:
+			case QVTschedulePackage.ROOT_REGION__OWNED_ROOT_PARTITION:
 				return basicSetOwnedRootPartition(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -391,8 +391,8 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTschedulePackage.SCHEDULED_REGION__OWNING_SCHEDULE_MODEL:
-				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_SCHEDULED_REGIONS, ScheduleModel.class, msgs);
+			case QVTschedulePackage.ROOT_REGION__OWNING_SCHEDULE_MODEL:
+				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_ROOT_REGIONS, ScheduleModel.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -405,18 +405,18 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.SCHEDULED_REGION__ACTIVE_REGIONS:
+			case QVTschedulePackage.ROOT_REGION__ACTIVE_REGIONS:
 				return getActiveRegions();
-			case QVTschedulePackage.SCHEDULED_REGION__OWNED_CONNECTIONS:
+			case QVTschedulePackage.ROOT_REGION__OWNED_CONNECTIONS:
 				return getOwnedConnections();
-			case QVTschedulePackage.SCHEDULED_REGION__OWNED_LOADING_REGION:
+			case QVTschedulePackage.ROOT_REGION__OWNED_LOADING_REGION:
 				return getOwnedLoadingRegion();
-			case QVTschedulePackage.SCHEDULED_REGION__OWNING_SCHEDULE_MODEL:
+			case QVTschedulePackage.ROOT_REGION__OWNING_SCHEDULE_MODEL:
 				return getOwningScheduleModel();
-			case QVTschedulePackage.SCHEDULED_REGION__REFERRED_TRANSFORMATION:
+			case QVTschedulePackage.ROOT_REGION__REFERRED_TRANSFORMATION:
 				if (resolve) return getReferredTransformation();
 				return basicGetReferredTransformation();
-			case QVTschedulePackage.SCHEDULED_REGION__OWNED_ROOT_PARTITION:
+			case QVTschedulePackage.ROOT_REGION__OWNED_ROOT_PARTITION:
 				return getOwnedRootPartition();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -431,24 +431,24 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.SCHEDULED_REGION__ACTIVE_REGIONS:
+			case QVTschedulePackage.ROOT_REGION__ACTIVE_REGIONS:
 				getActiveRegions().clear();
 				getActiveRegions().addAll((Collection<? extends Region>)newValue);
 				return;
-			case QVTschedulePackage.SCHEDULED_REGION__OWNED_CONNECTIONS:
+			case QVTschedulePackage.ROOT_REGION__OWNED_CONNECTIONS:
 				getOwnedConnections().clear();
 				getOwnedConnections().addAll((Collection<? extends Connection>)newValue);
 				return;
-			case QVTschedulePackage.SCHEDULED_REGION__OWNED_LOADING_REGION:
+			case QVTschedulePackage.ROOT_REGION__OWNED_LOADING_REGION:
 				setOwnedLoadingRegion((LoadingRegion)newValue);
 				return;
-			case QVTschedulePackage.SCHEDULED_REGION__OWNING_SCHEDULE_MODEL:
+			case QVTschedulePackage.ROOT_REGION__OWNING_SCHEDULE_MODEL:
 				setOwningScheduleModel((ScheduleModel)newValue);
 				return;
-			case QVTschedulePackage.SCHEDULED_REGION__REFERRED_TRANSFORMATION:
+			case QVTschedulePackage.ROOT_REGION__REFERRED_TRANSFORMATION:
 				setReferredTransformation((Transformation)newValue);
 				return;
-			case QVTschedulePackage.SCHEDULED_REGION__OWNED_ROOT_PARTITION:
+			case QVTschedulePackage.ROOT_REGION__OWNED_ROOT_PARTITION:
 				setOwnedRootPartition((RootPartition)newValue);
 				return;
 		}
@@ -463,22 +463,22 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.SCHEDULED_REGION__ACTIVE_REGIONS:
+			case QVTschedulePackage.ROOT_REGION__ACTIVE_REGIONS:
 				getActiveRegions().clear();
 				return;
-			case QVTschedulePackage.SCHEDULED_REGION__OWNED_CONNECTIONS:
+			case QVTschedulePackage.ROOT_REGION__OWNED_CONNECTIONS:
 				getOwnedConnections().clear();
 				return;
-			case QVTschedulePackage.SCHEDULED_REGION__OWNED_LOADING_REGION:
+			case QVTschedulePackage.ROOT_REGION__OWNED_LOADING_REGION:
 				setOwnedLoadingRegion((LoadingRegion)null);
 				return;
-			case QVTschedulePackage.SCHEDULED_REGION__OWNING_SCHEDULE_MODEL:
+			case QVTschedulePackage.ROOT_REGION__OWNING_SCHEDULE_MODEL:
 				setOwningScheduleModel((ScheduleModel)null);
 				return;
-			case QVTschedulePackage.SCHEDULED_REGION__REFERRED_TRANSFORMATION:
+			case QVTschedulePackage.ROOT_REGION__REFERRED_TRANSFORMATION:
 				setReferredTransformation((Transformation)null);
 				return;
-			case QVTschedulePackage.SCHEDULED_REGION__OWNED_ROOT_PARTITION:
+			case QVTschedulePackage.ROOT_REGION__OWNED_ROOT_PARTITION:
 				setOwnedRootPartition((RootPartition)null);
 				return;
 		}
@@ -493,17 +493,17 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.SCHEDULED_REGION__ACTIVE_REGIONS:
+			case QVTschedulePackage.ROOT_REGION__ACTIVE_REGIONS:
 				return activeRegions != null && !activeRegions.isEmpty();
-			case QVTschedulePackage.SCHEDULED_REGION__OWNED_CONNECTIONS:
+			case QVTschedulePackage.ROOT_REGION__OWNED_CONNECTIONS:
 				return ownedConnections != null && !ownedConnections.isEmpty();
-			case QVTschedulePackage.SCHEDULED_REGION__OWNED_LOADING_REGION:
+			case QVTschedulePackage.ROOT_REGION__OWNED_LOADING_REGION:
 				return ownedLoadingRegion != null;
-			case QVTschedulePackage.SCHEDULED_REGION__OWNING_SCHEDULE_MODEL:
+			case QVTschedulePackage.ROOT_REGION__OWNING_SCHEDULE_MODEL:
 				return getOwningScheduleModel() != null;
-			case QVTschedulePackage.SCHEDULED_REGION__REFERRED_TRANSFORMATION:
+			case QVTschedulePackage.ROOT_REGION__REFERRED_TRANSFORMATION:
 				return referredTransformation != null;
-			case QVTschedulePackage.SCHEDULED_REGION__OWNED_ROOT_PARTITION:
+			case QVTschedulePackage.ROOT_REGION__OWNED_ROOT_PARTITION:
 				return ownedRootPartition != null;
 		}
 		return super.eIsSet(featureID);
@@ -521,7 +521,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(@NonNull Visitor<R> visitor) {
-		return (R) ((QVTscheduleVisitor<?>)visitor).visitScheduledRegion(this);
+		return (R) ((QVTscheduleVisitor<?>)visitor).visitRootRegion(this);
 	}
 
 	//	@Override
@@ -551,7 +551,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 		if (region == this) {
 			return null;
 		}
-		for (Region invokingRegion; (invokingRegion = region.getContainingScheduledRegion()) != null; ) {
+		for (Region invokingRegion; (invokingRegion = region.getContainingRootRegion()) != null; ) {
 			if (invokingRegion == this) {
 				return region;
 			}
@@ -569,4 +569,4 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 	//	protected @NonNull String getSymbolNamePrefix() {
 	//		return "s_";
 	//	}
-} //ScheduledRegionImpl
+} //RootRegionImpl

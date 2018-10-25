@@ -38,7 +38,7 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getOwningScheduledRegion <em>Owning Scheduled Region</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getOwningRootRegion <em>Owning Root Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getConnectionRole <em>Connection Role</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getSourceEnds <em>Source Ends</em>}</li>
@@ -53,33 +53,34 @@ import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
 public interface Connection extends Element, Symbolable, org.eclipse.ocl.pivot.utilities.Nameable, GraphEdge, GraphNode
 {
 	/**
-	 * Returns the value of the '<em><b>Owning Scheduled Region</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedConnections <em>Owned Connections</em>}'.
+	 * Returns the value of the '<em><b>Owning Root Region</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.RootRegion#getOwnedConnections <em>Owned Connections</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Owning Scheduled Region</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Owning Root Region</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owning Scheduled Region</em>' container reference.
-	 * @see #setOwningScheduledRegion(ScheduledRegion)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection_OwningScheduledRegion()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedConnections
+	 * @return the value of the '<em>Owning Root Region</em>' container reference.
+	 * @see #setOwningRootRegion(RootRegion)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getConnection_OwningRootRegion()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.RootRegion#getOwnedConnections
 	 * @model opposite="ownedConnections" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Connection!owningScheduledRegion'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!Connection!owningRootRegion'"
 	 * @generated
 	 */
-	ScheduledRegion getOwningScheduledRegion();
+	RootRegion getOwningRootRegion();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getOwningScheduledRegion <em>Owning Scheduled Region</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.Connection#getOwningRootRegion <em>Owning Root Region</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Scheduled Region</em>' container reference.
-	 * @see #getOwningScheduledRegion()
+	 * @param value the new value of the '<em>Owning Root Region</em>' container reference.
+	 * @see #getOwningRootRegion()
 	 * @generated
 	 */
-	void setOwningScheduledRegion(ScheduledRegion value);
+	void setOwningRootRegion(RootRegion value);
+
 	/**
 	 * Returns the value of the '<em><b>Connection Role</b></em>' attribute.
 	 * The default value is <code>"UNDEFINED"</code>.

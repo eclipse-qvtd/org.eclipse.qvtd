@@ -33,7 +33,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 /**
@@ -296,8 +296,8 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	}
 
 	@Override
-	public @Nullable ScheduledRegion getContainingScheduledRegion() {
-		return getScheduledRegion();
+	public @Nullable RootRegion getContainingRootRegion() {
+		return getRootRegion();
 	}
 
 	@Override

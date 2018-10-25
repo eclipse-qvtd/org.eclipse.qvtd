@@ -114,9 +114,9 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.PROPERTY_DATUM: return createPropertyDatum();
 			case QVTschedulePackage.RECURSION_EDGE: return createRecursionEdge();
 			case QVTschedulePackage.ROOT_PARTITION: return createRootPartition();
+			case QVTschedulePackage.ROOT_REGION: return createRootRegion();
 			case QVTschedulePackage.RULE_REGION: return createRuleRegion();
 			case QVTschedulePackage.SCHEDULE_MODEL: return createScheduleModel();
-			case QVTschedulePackage.SCHEDULED_REGION: return createScheduledRegion();
 			case QVTschedulePackage.SHADOW_NODE: return createShadowNode();
 			case QVTschedulePackage.SHADOW_PART_EDGE: return createShadowPartEdge();
 			case QVTschedulePackage.STRING_LITERAL_NODE: return createStringLiteralNode();
@@ -671,6 +671,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	 * @generated
 	 */
 	@Override
+	public @NonNull RootRegion createRootRegion() {
+		RootRegionImpl rootRegion = new RootRegionImpl();
+		return rootRegion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public @NonNull RuleRegion createRuleRegion() {
 		RuleRegionImpl ruleRegion = new RuleRegionImpl();
 		return ruleRegion;
@@ -685,17 +696,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull ScheduleModel createScheduleModel() {
 		ScheduleModelImpl scheduleModel = new ScheduleModelImpl();
 		return scheduleModel;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull ScheduledRegion createScheduledRegion() {
-		ScheduledRegionImpl scheduledRegion = new ScheduledRegionImpl();
-		return scheduledRegion;
 	}
 
 	/**

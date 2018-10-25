@@ -43,7 +43,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -109,7 +109,7 @@ public class ConnectionManager
 	/**
 	 * Create the Passed and Used Connections between all introducers and their corresponding consuming nodes.
 	 */
-	public void createConnections(@NonNull ScheduledRegion scheduledRegion, @NonNull Iterable<@NonNull ? extends Iterable<@NonNull PartitionAnalysis>> partitionSchedule) {
+	public void createConnections(@NonNull RootRegion rootRegion, @NonNull Iterable<@NonNull ? extends Iterable<@NonNull PartitionAnalysis>> partitionSchedule) {
 		Set<@NonNull Region> regions = new HashSet<>();
 		for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrency : partitionSchedule) {
 			for (@NonNull PartitionAnalysis partitionAnalysis : concurrency) {
@@ -117,7 +117,7 @@ public class ConnectionManager
 			}
 		}
 		//		for (@NonNull Region region : regions) {
-		//			createIncomingConnections(scheduledRegion, region);
+		//			createIncomingConnections(rootRegion, region);
 		//		}
 		//		scheduleManager.writeDebugGraphs("4-bindings", true, true, false);
 		//		for (Region region : sortedCallableRegions) {
@@ -128,8 +128,8 @@ public class ConnectionManager
 	/**
 	 * Create an EdgeConnection for the predicatedEdge and/or its target node.
 	 */
-	private void createAttributeEdgeConnection(@NonNull ScheduledRegion scheduledRegion, @NonNull Region region, @NonNull Node castTargetNode, @NonNull Iterable<@NonNull NavigableEdge> predicatedEdges) {
-		ScheduledRegion invokingRegion2 = scheduledRegion;
+	private void createAttributeEdgeConnection(@NonNull RootRegion rootRegion, @NonNull Region region, @NonNull Node castTargetNode, @NonNull Iterable<@NonNull NavigableEdge> predicatedEdges) {
+		RootRegion invokingRegion2 = rootRegion;
 		assert invokingRegion2 != null;
 		Node castTarget = castTargetNode;
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(castTarget);
@@ -177,8 +177,8 @@ public class ConnectionManager
 	/**
 	 * Create an EdgeConnection for the predicatedEdge and/or its target node.
 	 */
-	private void createClassEdgeConnection(@NonNull ScheduledRegion scheduledRegion, @NonNull Region region, @NonNull Node castTargetNode, @NonNull Iterable<@NonNull NavigableEdge> predicatedEdges) {
-		ScheduledRegion invokingRegion2 = scheduledRegion;
+	private void createClassEdgeConnection(@NonNull RootRegion rootRegion, @NonNull Region region, @NonNull Node castTargetNode, @NonNull Iterable<@NonNull NavigableEdge> predicatedEdges) {
+		RootRegion invokingRegion2 = rootRegion;
 		assert invokingRegion2 != null;
 		Node castTarget = castTargetNode;
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(castTarget);
@@ -249,7 +249,7 @@ public class ConnectionManager
 						&& !castTarget.isOperation()
 						&& (castTarget.getIncomingConnection() == null)
 						//			 && !castTarget.isAttributeNode()
-						//			 && !rootScheduledRegion.isOnlyCastOrRecursed(predicatedNode)
+						//			 && !rootRootRegion.isOnlyCastOrRecursed(predicatedNode)
 						//			 && !hasEdgeConnection(predicatedNode)
 						) {
 					NodeConnection predicatedConnection = getNodeConnection(invokingRegion2, sourceNodes, classDatum, scheduleManager.getDomainUsage(classDatum));
@@ -266,17 +266,17 @@ public class ConnectionManager
 		}
 	}
 
-	private @NonNull EdgeConnection createEdgeConnection(@NonNull ScheduledRegion scheduledRegion, @NonNull  Set<@NonNull NavigableEdge> sourceSet, @NonNull Property property, @NonNull SymbolNameBuilder s) {
+	private @NonNull EdgeConnection createEdgeConnection(@NonNull RootRegion rootRegion, @NonNull  Set<@NonNull NavigableEdge> sourceSet, @NonNull Property property, @NonNull SymbolNameBuilder s) {
 		assert !property.isIsImplicit();
 		EdgeConnection edgeConnection = QVTscheduleFactory.eINSTANCE.createEdgeConnection();
 
-		//		protected ConnectionImpl(@NonNull ScheduledRegion region, @NonNull Set<@NonNull CE> sourceEnds, @NonNull String name) {
-		edgeConnection.setOwningScheduledRegion(scheduledRegion);
+		//		protected ConnectionImpl(@NonNull RootRegion region, @NonNull Set<@NonNull CE> sourceEnds, @NonNull String name) {
+		edgeConnection.setOwningRootRegion(rootRegion);
 		edgeConnection.setName(scheduleManager.getScheduleModel().reserveSymbolName(s, edgeConnection));
 		QVTscheduleUtil.getSourceEnds(edgeConnection).addAll(sourceSet);
 		//		}
 
-		//		public EdgeConnectionImpl(@NonNull ScheduledRegion region, @NonNull Set<@NonNull NavigableEdge> sourceEdges, @NonNull String name, @NonNull Property property) {
+		//		public EdgeConnectionImpl(@NonNull RootRegion region, @NonNull Set<@NonNull NavigableEdge> sourceEdges, @NonNull String name, @NonNull Property property) {
 		//			super(region, sourceEdges, name);
 		edgeConnection.setReferredProperty(property);
 		for (@NonNull NavigableEdge sourceEdge : sourceSet) {
@@ -296,8 +296,8 @@ public class ConnectionManager
 	 * Returns null if the pattern surrounding the headNode conflicts with the pattern
 	 * surrounding all possible sources.
 	 */
-	private @Nullable NodeConnection createHeadConnection(@NonNull ScheduledRegion scheduledRegion, @NonNull Region region, @NonNull Node headNode) {
-		ScheduledRegion invokingRegion2 = scheduledRegion;
+	private @Nullable NodeConnection createHeadConnection(@NonNull RootRegion rootRegion, @NonNull Region region, @NonNull Node headNode) {
+		RootRegion invokingRegion2 = rootRegion;
 		List<@NonNull Node> headSources = null;
 		//
 		//	Locate compatible introducers and non-recursive producers
@@ -371,17 +371,17 @@ public class ConnectionManager
 	 * Return the Connections to each of the head nodes. Returns null if the pattern surrounding any headNode conflicts with the pattern
 	 * surrounding all its possible sources. (Any head with no sources is a non-invocation.)
 	 */
-	private @Nullable Iterable<@NonNull NodeConnection> createHeadConnections(@NonNull ScheduledRegion scheduledRegion, @NonNull Region region) {
+	private @Nullable Iterable<@NonNull NodeConnection> createHeadConnections(@NonNull RootRegion rootRegion, @NonNull Region region) {
 		List<@NonNull NodeConnection> headConnections = null;
 		for (@NonNull Node headNode : QVTscheduleUtil.getHeadNodes(region)) {
 			if (headNode.isDependency()) {
-				createHeadConnection(scheduledRegion, region, headNode);	/** Dependency nodes have extra not-head connections. */
+				createHeadConnection(rootRegion, region, headNode);	/** Dependency nodes have extra not-head connections. */
 			}
 			else {
-				NodeConnection headConnection = createHeadConnection(scheduledRegion, region, headNode);
+				NodeConnection headConnection = createHeadConnection(rootRegion, region, headNode);
 				if (headConnection == null) {
 					scheduleManager.addRegionWarning(region, "No incoming connections for " + headNode.getName());
-					headConnection = createHeadConnection(scheduledRegion, region, headNode);	// FIXME debugging
+					headConnection = createHeadConnection(rootRegion, region, headNode);	// FIXME debugging
 					return null;										//  so matching only fails for unmatchable real heads
 				}
 				else {
@@ -424,12 +424,12 @@ public class ConnectionManager
 	 * Edges dependent on realization elsewhere are represented by connection from all head nodes of the dependent region
 	 * to all heads of the realizing region.
 	 */
-	public void createIncomingConnections(@NonNull ScheduledRegion scheduledRegion, @NonNull Region region) {
+	public void createIncomingConnections(@NonNull RootRegion rootRegion, @NonNull Region region) {
 		if (QVTscheduleConstants.CONNECTION_CREATION.isActive()) {
 			QVTscheduleConstants.CONNECTION_CREATION.println("connecting " + region);
 		}
 		assert !(region instanceof LoadingRegion);
-		Iterable<@NonNull NodeConnection> headConnections = createHeadConnections(scheduledRegion, region);
+		Iterable<@NonNull NodeConnection> headConnections = createHeadConnections(rootRegion, region);
 		assert (headConnections != null);// {
 		//
 		//	Gather multiple edges sharing the same target to avoid multiple incoming connections -- FIXME no need to gather
@@ -455,18 +455,18 @@ public class ConnectionManager
 			List<@NonNull NavigableEdge> predicatedEdges = castTargetNode2predicatedEdges.get(castTargetNode);
 			assert predicatedEdges != null;
 			if (castTargetNode.isClass()) {
-				createClassEdgeConnection(scheduledRegion, region, castTargetNode, predicatedEdges);
+				createClassEdgeConnection(rootRegion, region, castTargetNode, predicatedEdges);
 			}
 			else {
-				createAttributeEdgeConnection(scheduledRegion, region, castTargetNode, predicatedEdges);
+				createAttributeEdgeConnection(rootRegion, region, castTargetNode, predicatedEdges);
 			}
 		}
 		//}
 	}
 
-	private @NonNull NodeConnection createNodeConnection(@NonNull ScheduledRegion scheduledRegion, @NonNull Set<@NonNull Node> sourceSet, @NonNull ClassDatum classDatum, @NonNull SymbolNameBuilder s) {
+	private @NonNull NodeConnection createNodeConnection(@NonNull RootRegion rootRegion, @NonNull Set<@NonNull Node> sourceSet, @NonNull ClassDatum classDatum, @NonNull SymbolNameBuilder s) {
 		NodeConnection connection = QVTscheduleFactory.eINSTANCE.createNodeConnection();
-		connection.setOwningScheduledRegion(scheduledRegion);
+		connection.setOwningRootRegion(rootRegion);
 		QVTscheduleUtil.getSourceEnds(connection).addAll(sourceSet);
 		connection.setName(scheduleManager.getScheduleModel().reserveSymbolName(s, connection));
 		connection.setClassDatum(classDatum);
@@ -485,7 +485,7 @@ public class ConnectionManager
 	 * Create the Passed Node Connection between the trace node realized in an activator partition and predicated in other partitions.
 	 * Create Used Edge Connections between each edge realized in the origial region and predicated in a aprtition.
 	 */
-	public void createPartitionConnections(@NonNull ScheduledRegion scheduledRegion, @NonNull Region region) {
+	public void createPartitionConnections(@NonNull RootRegion rootRegion, @NonNull Region region) {
 		Iterable<@NonNull MappingPartition> partitions = QVTscheduleUtil.getRegionPartitions(region);
 		RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
 		if (Iterables.size(partitions) <= 1) {
@@ -507,7 +507,7 @@ public class ConnectionManager
 			//
 			if (!sourceNodes.isEmpty()) {
 				ClassDatum classDatum = QVTscheduleUtil.getClassDatum(traceNode);
-				NodeConnection connection = getNodeConnection(scheduledRegion, sourceNodes, classDatum, scheduleManager.getDomainUsage(classDatum));
+				NodeConnection connection = getNodeConnection(rootRegion, sourceNodes, classDatum, scheduleManager.getDomainUsage(classDatum));
 				//
 				Set<@NonNull Node> targetNodes = new HashSet<>();
 				for (@NonNull Partition partition : partitions) {
@@ -536,14 +536,14 @@ public class ConnectionManager
 				}
 				if (isAwaited) {
 					Property property = QVTscheduleUtil.getProperty(edge);
-					EdgeConnection connection = getEdgeConnection(scheduledRegion, Collections.singleton(edge), property);
+					EdgeConnection connection = getEdgeConnection(rootRegion, Collections.singleton(edge), property);
 					connection.addUsedTargetEdge(edge, true);
 				}
 			}
 		}
 	}
 
-	private @NonNull EdgeConnection getAttributeConnection(@NonNull ScheduledRegion scheduledRegion, @NonNull Iterable<@NonNull NavigableEdge> sourceEdges, @NonNull List<@NonNull String> partialNames, @NonNull Property property) {
+	private @NonNull EdgeConnection getAttributeConnection(@NonNull RootRegion rootRegion, @NonNull Iterable<@NonNull NavigableEdge> sourceEdges, @NonNull List<@NonNull String> partialNames, @NonNull Property property) {
 		Set<@NonNull NavigableEdge> sourceSet = Sets.newHashSet(sourceEdges);
 		EdgeConnection connection = edges2edgeConnection.get(sourceSet);
 		if (connection == null) {
@@ -553,7 +553,7 @@ public class ConnectionManager
 				s.appendString("_");
 				s.appendName(partialName);
 			}
-			connection = createEdgeConnection(scheduledRegion, sourceSet, property, s);
+			connection = createEdgeConnection(rootRegion, sourceSet, property, s);
 			edges2edgeConnection.put(sourceSet, connection);
 		}
 		return connection;
@@ -583,7 +583,7 @@ public class ConnectionManager
 		return parents;
 	}
 
-	private @NonNull EdgeConnection getEdgeConnection(@NonNull ScheduledRegion scheduledRegion, @NonNull Iterable<@NonNull NavigableEdge> sourceEdges, @NonNull Property property) {
+	private @NonNull EdgeConnection getEdgeConnection(@NonNull RootRegion rootRegion, @NonNull Iterable<@NonNull NavigableEdge> sourceEdges, @NonNull Property property) {
 		Set<@NonNull NavigableEdge> sourceSet = Sets.newHashSet(sourceEdges);
 		EdgeConnection connection = edges2edgeConnection.get(sourceSet);
 		if (connection == null) {
@@ -592,7 +592,7 @@ public class ConnectionManager
 			s.appendName(property.getOwningClass().getName());
 			s.appendString("_");
 			s.appendName(property.getName());
-			connection = createEdgeConnection(scheduledRegion, sourceSet, property, s);
+			connection = createEdgeConnection(rootRegion, sourceSet, property, s);
 			edges2edgeConnection.put(sourceSet, connection);
 		}
 		return connection;
@@ -735,7 +735,7 @@ public class ConnectionManager
 		return getOutgoingConnections(partition);
 	}
 
-	private @NonNull NodeConnection getNodeConnection(@NonNull ScheduledRegion scheduledRegion, @NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatum classDatum, @NonNull DomainUsage domainUsage) {
+	private @NonNull NodeConnection getNodeConnection(@NonNull RootRegion rootRegion, @NonNull Iterable<@NonNull Node> sourceNodes, @NonNull ClassDatum classDatum, @NonNull DomainUsage domainUsage) {
 		Map<@NonNull Set<@NonNull Node>, @NonNull NodeConnection> nodes2connection = classDatum2nodes2nodeConnections.get(classDatum);
 		if (nodes2connection == null) {
 			nodes2connection = new HashMap<>();
@@ -748,7 +748,7 @@ public class ConnectionManager
 			s.appendString(domainUsage.isInput() ? JOIN_INPUT_PREFIX : domainUsage.isOutput() ? JOIN_OUTPUT_PREFIX : JOIN_MIDDLE_PREFIX);
 			s.appendString("_");
 			s.appendName(classDatum.getCompleteClass().getName());
-			connection = createNodeConnection(scheduledRegion, sourceSet, classDatum, s);
+			connection = createNodeConnection(rootRegion, sourceSet, classDatum, s);
 			nodes2connection.put(sourceSet, connection);
 		}
 		return connection;

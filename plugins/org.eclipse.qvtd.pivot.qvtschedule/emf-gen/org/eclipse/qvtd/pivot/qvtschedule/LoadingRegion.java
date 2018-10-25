@@ -29,7 +29,7 @@ package org.eclipse.qvtd.pivot.qvtschedule;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getLoadingPartition <em>Loading Partition</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getOwningScheduledRegion <em>Owning Scheduled Region</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getOwningRootRegion <em>Owning Root Region</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getLoadingRegion()
@@ -68,31 +68,31 @@ public interface LoadingRegion extends Region {
 	void setLoadingPartition(LoadingPartition value);
 
 	/**
-	 * Returns the value of the '<em><b>Owning Scheduled Region</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedLoadingRegion <em>Owned Loading Region</em>}'.
+	 * Returns the value of the '<em><b>Owning Root Region</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.RootRegion#getOwnedLoadingRegion <em>Owned Loading Region</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Owning Scheduled Region</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Owning Root Region</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owning Scheduled Region</em>' container reference.
-	 * @see #setOwningScheduledRegion(ScheduledRegion)
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getLoadingRegion_OwningScheduledRegion()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedLoadingRegion
+	 * @return the value of the '<em>Owning Root Region</em>' container reference.
+	 * @see #setOwningRootRegion(RootRegion)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getLoadingRegion_OwningRootRegion()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.RootRegion#getOwnedLoadingRegion
 	 * @model opposite="ownedLoadingRegion" required="true" transient="false"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!LoadingRegion!owningScheduledRegion'"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!LoadingRegion!owningRootRegion'"
 	 * @generated
 	 */
-	ScheduledRegion getOwningScheduledRegion();
+	RootRegion getOwningRootRegion();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getOwningScheduledRegion <em>Owning Scheduled Region</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion#getOwningRootRegion <em>Owning Root Region</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owning Scheduled Region</em>' container reference.
-	 * @see #getOwningScheduledRegion()
+	 * @param value the new value of the '<em>Owning Root Region</em>' container reference.
+	 * @see #getOwningRootRegion()
 	 * @generated
 	 */
-	void setOwningScheduledRegion(ScheduledRegion value);
+	void setOwningRootRegion(RootRegion value);
 } // RootCompositionRegion

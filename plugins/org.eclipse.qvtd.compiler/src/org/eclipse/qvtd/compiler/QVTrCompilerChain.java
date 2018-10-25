@@ -63,7 +63,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 /**
@@ -122,7 +122,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				//				if (traceNsURI != null) {
 				//					t.setTraceNsURI(traceNsURI);
 				//				}
-				Map<@NonNull ScheduledRegion, Iterable<@NonNull MappingRegion>> scheduledRegion2activeRegions = qvtr2qvts.transform(qvtrResource, qvtsResource, traceNsURI, traceResource);
+				Map<@NonNull RootRegion, Iterable<@NonNull MappingRegion>> rootRegion2activeRegions = qvtr2qvts.transform(qvtrResource, qvtsResource, traceNsURI, traceResource);
 				//
 				//	Save trace (occurs as part of GenModel creation)
 				//
@@ -139,7 +139,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				//				List<@NonNull MappingRegion> activeRegions = qvtr2qvts.getActiveRegions();
 				String rootName = ClassUtil.nonNullState(qvtrResource.getURI().trimFileExtension().trimFileExtension().lastSegment());
 				QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, scheduleManager, rootName);
-				qvts2qvts.transform(scheduleManager, scheduledRegion2activeRegions);
+				qvts2qvts.transform(scheduleManager, rootRegion2activeRegions);
 				throwCompilerChainExceptionForErrors();
 				saveResource(qvtsResource);
 				return scheduleManager;

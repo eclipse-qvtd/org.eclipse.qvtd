@@ -17,7 +17,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
 
 /**
@@ -67,7 +67,7 @@ public class CyclesAnalyzer
 		}
 
 		/*		private void check(@NonNull List<@NonNull RegionStatus> unblockedRegionStatuses, int orderedThreshold) {
-			if (region instanceof CyclicScheduledRegion) {
+			if (region instanceof CyclicRootRegion) {
 				computeDepth();
 			}
 			Integer checkDepth = computeDepth();
@@ -306,7 +306,7 @@ public class CyclesAnalyzer
 		}
 	}
 
-	protected final @NonNull ScheduledRegion scheduledRegion;
+	protected final @NonNull RootRegion rootRegion;
 
 	/**
 	 * Working representation: one RegionStatus per schedulable Region.
@@ -320,8 +320,8 @@ public class CyclesAnalyzer
 
 	//	private final @NonNull Set<@NonNull RegionStatus> blockedRegions;
 
-	public CyclesAnalyzer(@NonNull ScheduledRegion scheduledRegion, @NonNull Iterable<@NonNull Region> regions) {
-		this.scheduledRegion = scheduledRegion;
+	public CyclesAnalyzer(@NonNull RootRegion rootRegion, @NonNull Iterable<@NonNull Region> regions) {
+		this.rootRegion = rootRegion;
 		//
 		//	Create the RegionStatuses.
 		//
@@ -371,7 +371,7 @@ public class CyclesAnalyzer
 					debugOldPreviousRegions.addAll(getPreviousRegions(debugOldRegion));
 					debugOldNextRegions.addAll(getNextRegions(debugOldRegion));
 				}
-				CyclicScheduledRegion cyclicRegion = scheduledRegion.createCyclicScheduledRegion(oldRegions);
+				CyclicRootRegion cyclicRegion = rootRegion.createCyclicRootRegion(oldRegions);
 
 
 				showNew(cyclicRegion);
@@ -475,7 +475,7 @@ public class CyclesAnalyzer
 		Set<@NonNull Region> previousRegions = new HashSet<@NonNull Region>();
 		for (@NonNull NodeConnection incomingConnection : region.getIncomingPassedConnections()) {
 			for (@NonNull Region sourceRegion : incomingConnection.getSourceRegions()) {
-				for (Region parentRegion; (parentRegion = sourceRegion.getInvokingRegion()) instanceof CyclicScheduledRegion; ) {
+				for (Region parentRegion; (parentRegion = sourceRegion.getInvokingRegion()) instanceof CyclicRootRegion; ) {
 					sourceRegion = parentRegion;		// FIXME ?? which one of multiple nested Cyclic regions
 				}
 				previousRegions.add(sourceRegion);
@@ -564,7 +564,7 @@ public class CyclesAnalyzer
 		}
 	} */
 
-	/*	private void showNew(@NonNull CyclicScheduledRegion cyclicRegion) {
+	/*	private void showNew(@NonNull CyclicRootRegion cyclicRegion) {
 		Set<@NonNull NodeConnection> externalConnections = new HashSet<@NonNull NodeConnection>();
 		QVTp2QVTs.REGION_CYCLES.println("New Region: " + cyclicRegion);
 		@NonNull

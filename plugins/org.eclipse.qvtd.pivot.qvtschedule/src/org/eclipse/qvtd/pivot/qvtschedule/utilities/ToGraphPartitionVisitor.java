@@ -30,7 +30,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 
 /**
  * ToGraphPartitionVisitor refines ToGraphVisitor to display <<success>> nodes in the partition-specific form.
@@ -69,7 +69,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 
 		@Override
 		public @Nullable String visitConnection(@NonNull Connection connection) {
-			if (hasPartitions) {			// Partition-to-Partition within ScheduledRegion
+			if (hasPartitions) {			// Partition-to-Partition within RootRegion
 				appendNode(connection);
 				for (@NonNull Partition sourcePartition : connection.getSourcePartitions()) {
 					appendEdge(sourcePartition, connection, connection);
@@ -83,11 +83,11 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 					}
 				}
 			}
-			else {							// Region-to-Region within ScheduledRegion
-				ScheduledRegion scheduledRegion = connection.getOwningScheduledRegion();
+			else {							// Region-to-Region within RootRegion
+				RootRegion rootRegion = connection.getOwningRootRegion();
 				appendNode(connection);
 				for (@NonNull Node sourceNode : connection.getSourceNodes()) {
-					Region sourceRegion = scheduledRegion.getNormalizedRegion(QVTscheduleUtil.getOwningRegion(sourceNode));
+					Region sourceRegion = rootRegion.getNormalizedRegion(QVTscheduleUtil.getOwningRegion(sourceNode));
 					if (sourceRegion != null) {
 						appendEdge(sourceRegion, connection, connection);
 					}
@@ -95,7 +95,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 				for (@NonNull ConnectionEnd target : connection.getTargetEnds()) {
 					ConnectionRole role = connection.getTargetRole(target);
 					assert role != null;
-					Region targetRegion = scheduledRegion.getNormalizedRegion(QVTscheduleUtil.getOwningRegion(target));
+					Region targetRegion = rootRegion.getNormalizedRegion(QVTscheduleUtil.getOwningRegion(target));
 					if (targetRegion != null) {
 						appendEdge(connection, role, targetRegion);
 					}
@@ -149,9 +149,9 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 
 		@Override
 		public @Nullable String visitConnection(@NonNull Connection connection) {
-			if (hasPartitions) {			// Node-to-Node within Partition within ScheduledRegion
+			if (hasPartitions) {			// Node-to-Node within Partition within RootRegion
 				setScope(null);
-				ScheduledRegion scheduledRegion = connection.getOwningScheduledRegion();
+				RootRegion rootRegion = connection.getOwningRootRegion();
 				appendNode(connection);
 				for (@NonNull ConnectionEnd sourceEnd : QVTscheduleUtil.getSourceEnds(connection)) {
 					Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
@@ -194,7 +194,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 				for (@NonNull ConnectionEnd target : connection.getTargetEnds()) {
 					ConnectionRole connectionRole = connection.getTargetRole(target);
 					assert connectionRole != null;
-					Region targetRegion = scheduledRegion.getNormalizedRegion(QVTscheduleUtil.getOwningRegion(target));
+					Region targetRegion = rootRegion.getNormalizedRegion(QVTscheduleUtil.getOwningRegion(target));
 					if (targetRegion != null) {
 						Iterable<@NonNull MappingPartition> partitions = null;
 						if (targetRegion instanceof MappingRegion) {
@@ -229,7 +229,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 				}
 				setScope(null);
 			}
-			else {							// Node-to-Node within Region within ScheduledRegion
+			else {							// Node-to-Node within Region within RootRegion
 				appendNode(connection);
 				for (@NonNull Node sourceNode : connection.getSourceNodes()) {
 					appendEdge(sourceNode, connection, connection);
@@ -322,10 +322,10 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 
 	protected abstract void showRegionInternals(@NonNull Region region);
 
-	protected void showScheduledRegionInternals(@NonNull ScheduledRegion scheduledRegion) {
-		RootPartition rootPartition = scheduledRegion.getOwnedRootPartition();
+	protected void showRootRegionInternals(@NonNull RootRegion rootRegion) {
+		RootPartition rootPartition = rootRegion.getOwnedRootPartition();
 		if (rootPartition == null) {
-			for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(scheduledRegion)) {
+			for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(rootRegion)) {
 				region.accept(this);
 			}
 		}
@@ -403,27 +403,27 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 	}
 
 	@Override
-	public @Nullable String visitScheduledRegion(@NonNull ScheduledRegion scheduledRegion) {
-		RootPartition rootPartition = scheduledRegion.getOwnedRootPartition();
+	public @Nullable String visitRootRegion(@NonNull RootRegion rootRegion) {
+		RootPartition rootPartition = rootRegion.getOwnedRootPartition();
 		hasPartitions = rootPartition != null;
-		context.setLabel(scheduledRegion.getName());
+		context.setLabel(rootRegion.getName());
 		context.setColor(QVTscheduleConstants.REGION_COLOR);
 		context.pushCluster();
-		for (@NonNull OperationRegion region : QVTscheduleUtil.getOwnedOperationRegions(QVTscheduleUtil.getOwningScheduleModel(scheduledRegion))) {
+		for (@NonNull OperationRegion region : QVTscheduleUtil.getOwnedOperationRegions(QVTscheduleUtil.getOwningScheduleModel(rootRegion))) {
 			region.accept(this);
 		}
-		//	LoadingRegion loadingRegion = scheduledRegion.getOwnedLoadingRegion();
+		//	LoadingRegion loadingRegion = rootRegion.getOwnedLoadingRegion();
 		//	if (loadingRegion != null) {
 		//		loadingRegion.accept(this);
 		//	}
-		showScheduledRegionInternals(scheduledRegion);
-		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(scheduledRegion)) {
+		showRootRegionInternals(rootRegion);
+		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(rootRegion)) {
 			appendNode(node);
 		}
-		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(scheduledRegion)) {
+		for (@NonNull Edge edge : QVTscheduleUtil.getOwnedEdges(rootRegion)) {
 			appendEdge(edge.getEdgeSource(), edge, edge.getEdgeTarget());
 		}
-		for (@NonNull Connection connection : QVTscheduleUtil.getOwnedConnections(scheduledRegion)) {
+		for (@NonNull Connection connection : QVTscheduleUtil.getOwnedConnections(rootRegion)) {
 			connection.accept(this);
 		}
 		context.popCluster();

@@ -68,7 +68,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
 import org.eclipse.qvtd.pivot.qvtschedule.util.AbstractExtendingQVTscheduleVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
@@ -550,19 +550,19 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 	}
 
 	@Override
-	public @Nullable Element visitScheduledRegion(@NonNull ScheduledRegion scheduledRegion) {
-		RootPartitionAnalysis rootPartitionAnalysis = scheduleManager.getRootPartitionAnalysis(scheduledRegion);
+	public @Nullable Element visitRootRegion(@NonNull RootRegion rootRegion) {
+		RootPartitionAnalysis rootPartitionAnalysis = scheduleManager.getRootPartitionAnalysis(rootRegion);
 		//		String name = rootRegion.getName();
 		//
 		//	List<@NonNull Partition> callablePartitions = new ArrayList<>();
-		//	LoadingRegion loadingRegion = QVTscheduleUtil.getOwnedLoadingRegion(scheduledRegion);
+		//	LoadingRegion loadingRegion = QVTscheduleUtil.getOwnedLoadingRegion(rootRegion);
 		//	callableRegions.add(loadingRegion);
-		//	for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(scheduledRegion)) {
+		//	for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(rootRegion)) {
 		//		callablePartitions.add(scheduleManager.wipGetPartition(region));
 		//	}
 		//	Iterable<@NonNull Partition> partitions = rootPartition.getPartitions();
 		Iterable<@NonNull PartitionAnalysis> allPartitionAnalyses = CompilerUtil.gatherPartitionAnalyses(rootPartitionAnalysis, new ArrayList<>());
-		//	assert Iterables.contains(partitions, scheduleManager.wipGetPartition(QVTscheduleUtil.getOwnedLoadingRegion(scheduledRegion)));
+		//	assert Iterables.contains(partitions, scheduleManager.wipGetPartition(QVTscheduleUtil.getOwnedLoadingRegion(rootRegion)));
 
 		List<@NonNull PartitionAnalysis> sortedPartitionAnalyses = new EarliestPartitionComparator().sort(allPartitionAnalyses);
 		Map<@NonNull ClassDatum, Set<@NonNull PropertyDatum>> keyedClassDatum2propertyDatums = gatherKeyCalls(sortedPartitionAnalyses);

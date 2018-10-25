@@ -45,7 +45,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Symbolable;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
@@ -60,7 +60,7 @@ import com.google.common.collect.Iterables;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl#getSymbolName <em>Symbol Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl#getOwningScheduledRegion <em>Owning Scheduled Region</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl#getOwningRootRegion <em>Owning Root Region</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl#getConnectionRole <em>Connection Role</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ConnectionImpl#getSourceEnds <em>Source Ends</em>}</li>
@@ -194,9 +194,9 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	 * @generated
 	 */
 	@Override
-	public ScheduledRegion getOwningScheduledRegion() {
-		if (eContainerFeatureID() != QVTschedulePackage.CONNECTION__OWNING_SCHEDULED_REGION) return null;
-		return (ScheduledRegion)eInternalContainer();
+	public RootRegion getOwningRootRegion() {
+		if (eContainerFeatureID() != QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION) return null;
+		return (RootRegion)eInternalContainer();
 	}
 
 	/**
@@ -204,8 +204,8 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwningScheduledRegion(ScheduledRegion newOwningScheduledRegion, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningScheduledRegion, QVTschedulePackage.CONNECTION__OWNING_SCHEDULED_REGION, msgs);
+	public NotificationChain basicSetOwningRootRegion(RootRegion newOwningRootRegion, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningRootRegion, QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION, msgs);
 		return msgs;
 	}
 
@@ -215,20 +215,20 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	 * @generated
 	 */
 	@Override
-	public void setOwningScheduledRegion(ScheduledRegion newOwningScheduledRegion) {
-		if (newOwningScheduledRegion != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.CONNECTION__OWNING_SCHEDULED_REGION && newOwningScheduledRegion != null)) {
-			if (EcoreUtil.isAncestor(this, newOwningScheduledRegion))
+	public void setOwningRootRegion(RootRegion newOwningRootRegion) {
+		if (newOwningRootRegion != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION && newOwningRootRegion != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningRootRegion))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newOwningScheduledRegion != null)
-				msgs = ((InternalEObject)newOwningScheduledRegion).eInverseAdd(this, QVTschedulePackage.SCHEDULED_REGION__OWNED_CONNECTIONS, ScheduledRegion.class, msgs);
-			msgs = basicSetOwningScheduledRegion(newOwningScheduledRegion, msgs);
+			if (newOwningRootRegion != null)
+				msgs = ((InternalEObject)newOwningRootRegion).eInverseAdd(this, QVTschedulePackage.ROOT_REGION__OWNED_CONNECTIONS, RootRegion.class, msgs);
+			msgs = basicSetOwningRootRegion(newOwningRootRegion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CONNECTION__OWNING_SCHEDULED_REGION, newOwningScheduledRegion, newOwningScheduledRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION, newOwningRootRegion, newOwningRootRegion));
 	}
 
 	/**
@@ -351,10 +351,10 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.CONNECTION__OWNING_SCHEDULED_REGION:
+			case QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningScheduledRegion((ScheduledRegion)otherEnd, msgs);
+				return basicSetOwningRootRegion((RootRegion)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -367,8 +367,8 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.CONNECTION__OWNING_SCHEDULED_REGION:
-				return basicSetOwningScheduledRegion(null, msgs);
+			case QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION:
+				return basicSetOwningRootRegion(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -381,8 +381,8 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTschedulePackage.CONNECTION__OWNING_SCHEDULED_REGION:
-				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.SCHEDULED_REGION__OWNED_CONNECTIONS, ScheduledRegion.class, msgs);
+			case QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION:
+				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.ROOT_REGION__OWNED_CONNECTIONS, RootRegion.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -397,8 +397,8 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 		switch (featureID) {
 			case QVTschedulePackage.CONNECTION__SYMBOL_NAME:
 				return getSymbolName();
-			case QVTschedulePackage.CONNECTION__OWNING_SCHEDULED_REGION:
-				return getOwningScheduledRegion();
+			case QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION:
+				return getOwningRootRegion();
 			case QVTschedulePackage.CONNECTION__CONNECTION_ROLE:
 				return getConnectionRole();
 			case QVTschedulePackage.CONNECTION__NAME:
@@ -426,8 +426,8 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 			case QVTschedulePackage.CONNECTION__SYMBOL_NAME:
 				setSymbolName((String)newValue);
 				return;
-			case QVTschedulePackage.CONNECTION__OWNING_SCHEDULED_REGION:
-				setOwningScheduledRegion((ScheduledRegion)newValue);
+			case QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION:
+				setOwningRootRegion((RootRegion)newValue);
 				return;
 			case QVTschedulePackage.CONNECTION__CONNECTION_ROLE:
 				setConnectionRole((ConnectionRole)newValue);
@@ -461,8 +461,8 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 			case QVTschedulePackage.CONNECTION__SYMBOL_NAME:
 				setSymbolName(SYMBOL_NAME_EDEFAULT);
 				return;
-			case QVTschedulePackage.CONNECTION__OWNING_SCHEDULED_REGION:
-				setOwningScheduledRegion((ScheduledRegion)null);
+			case QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION:
+				setOwningRootRegion((RootRegion)null);
 				return;
 			case QVTschedulePackage.CONNECTION__CONNECTION_ROLE:
 				setConnectionRole(CONNECTION_ROLE_EDEFAULT);
@@ -493,8 +493,8 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 		switch (featureID) {
 			case QVTschedulePackage.CONNECTION__SYMBOL_NAME:
 				return SYMBOL_NAME_EDEFAULT == null ? symbolName != null : !SYMBOL_NAME_EDEFAULT.equals(symbolName);
-			case QVTschedulePackage.CONNECTION__OWNING_SCHEDULED_REGION:
-				return getOwningScheduledRegion() != null;
+			case QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION:
+				return getOwningRootRegion() != null;
 			case QVTschedulePackage.CONNECTION__CONNECTION_ROLE:
 				return connectionRole != CONNECTION_ROLE_EDEFAULT;
 			case QVTschedulePackage.CONNECTION__NAME:
@@ -609,7 +609,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 		setCommonPartition(null);
 		getIntermediatePartitions().clear();
 		getSourceEnds().clear();
-		setOwningScheduledRegion(null);
+		setOwningRootRegion(null);
 	}
 
 	@Override

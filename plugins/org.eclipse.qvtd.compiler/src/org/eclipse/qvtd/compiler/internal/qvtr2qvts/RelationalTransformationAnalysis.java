@@ -27,7 +27,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationHelper;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 
 /**
  * A RelationalTransformationAnalysis accumulates the tesults of analyzing a RelationalTransformation and its contents.
@@ -50,8 +50,8 @@ public class RelationalTransformationAnalysis extends AbstractTransformationAnal
 	 */
 	private final @NonNull Map<@NonNull CompleteClass, @Nullable Key> completeClass2key  = new HashMap<>();
 
-	public RelationalTransformationAnalysis(@NonNull QVTrelationScheduleManager scheduleManager, @NonNull RelationalTransformation transformation, @NonNull ScheduledRegion scheduledRegion) {
-		super(scheduleManager, transformation, scheduledRegion);
+	public RelationalTransformationAnalysis(@NonNull QVTrelationScheduleManager scheduleManager, @NonNull RelationalTransformation transformation, @NonNull RootRegion rootRegion) {
+		super(scheduleManager, transformation, rootRegion);
 		this.helper = new QVTrelationHelper(scheduleManager.getEnvironmentFactory());
 		transformation.getModelParameter().add(0, scheduleManager.getDomainUsageAnalysis().getPrimitiveTypeModel());		// FIXME move to source
 	}

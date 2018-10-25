@@ -659,6 +659,16 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTschedulePackage.ROOT_REGION: {
+				RootRegion rootRegion = (RootRegion)theEObject;
+				T result = caseRootRegion(rootRegion);
+				if (result == null) result = caseRegion(rootRegion);
+				if (result == null) result = caseNamedElement(rootRegion);
+				if (result == null) result = caseSymbolable(rootRegion);
+				if (result == null) result = caseElement(rootRegion);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTschedulePackage.RULE_REGION: {
 				RuleRegion ruleRegion = (RuleRegion)theEObject;
 				T result = caseRuleRegion(ruleRegion);
@@ -677,16 +687,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseNamespace(scheduleModel);
 				if (result == null) result = caseNamedElement(scheduleModel);
 				if (result == null) result = caseElement(scheduleModel);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTschedulePackage.SCHEDULED_REGION: {
-				ScheduledRegion scheduledRegion = (ScheduledRegion)theEObject;
-				T result = caseScheduledRegion(scheduledRegion);
-				if (result == null) result = caseRegion(scheduledRegion);
-				if (result == null) result = caseNamedElement(scheduledRegion);
-				if (result == null) result = caseSymbolable(scheduledRegion);
-				if (result == null) result = caseElement(scheduledRegion);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1159,21 +1159,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseScheduleModel(ScheduleModel object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Scheduled Region</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Scheduled Region</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseScheduledRegion(ScheduledRegion object) {
 		return null;
 	}
 
@@ -1924,6 +1909,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRootPartition(RootPartition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Root Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Root Region</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRootRegion(RootRegion object) {
 		return null;
 	}
 

@@ -67,7 +67,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
@@ -503,8 +503,8 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	protected void instrumentPartition(@NonNull ScheduleManager scheduleManager) {
 		ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
-		for (@NonNull ScheduledRegion scheduledRegion : QVTscheduleUtil.getOwnedScheduledRegions(scheduleModel)) {
-			RootPartitionAnalysis rootPartitionAnalysis = scheduleManager.getRootPartitionAnalysis(scheduledRegion);
+		for (@NonNull RootRegion rootRegion : QVTscheduleUtil.getOwnedRootRegions(scheduleModel)) {
+			RootPartitionAnalysis rootPartitionAnalysis = scheduleManager.getRootPartitionAnalysis(rootRegion);
 			instrumentPartition(scheduleManager, rootPartitionAnalysis.getPartition());
 		}
 	}

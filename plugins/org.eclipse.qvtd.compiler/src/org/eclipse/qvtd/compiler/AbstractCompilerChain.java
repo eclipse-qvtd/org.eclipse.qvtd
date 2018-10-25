@@ -61,7 +61,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
@@ -243,13 +243,13 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				ScheduleManager scheduleManager = qvtm2qvts.getScheduleManager();
 				sResource.getContents().add(scheduleManager.getScheduleModel());
 				scheduleManager.addTransformation(asTransformation);
-				Map<@NonNull ScheduledRegion, Iterable<@NonNull MappingRegion>> scheduledRegion2activeRegions = qvtm2qvts.transform();
+				Map<@NonNull RootRegion, Iterable<@NonNull MappingRegion>> rootRegion2activeRegions = qvtm2qvts.transform();
 				throwCompilerChainExceptionForErrors();
 				String rootName = ClassUtil.nonNullState(pResource.getURI().trimFileExtension().trimFileExtension().lastSegment());
 				QVTs2QVTs qvts2qvts = new QVTs2QVTs(this, scheduleManager, rootName);
-				Iterable<@NonNull ScheduledRegion> scheduledRegions = qvts2qvts.transform(scheduleManager, scheduledRegion2activeRegions);
-				for (@NonNull ScheduledRegion scheduledRegion : scheduledRegions) {
-					scheduledRegion.setReferredTransformation(asTransformation);
+				Iterable<@NonNull RootRegion> rootRegions = qvts2qvts.transform(scheduleManager, rootRegion2activeRegions);
+				for (@NonNull RootRegion rootRegion : rootRegions) {
+					rootRegion.setReferredTransformation(asTransformation);
 				}
 				throwCompilerChainExceptionForErrors();
 				saveResource(sResource);
@@ -273,8 +273,8 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			ScheduleModel scheduleModel = scheduleManager.getScheduleModel();
 			QVTs2QVTi tx = new QVTs2QVTi(scheduleManager, this, environmentFactory);
 			Model model = PivotUtil.createModel(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, null);
-			for (@NonNull ScheduledRegion scheduledRegion : QVTscheduleUtil.getOwnedScheduledRegions(scheduleModel)) {
-				tx.transform(model, scheduledRegion);
+			for (@NonNull RootRegion rootRegion : QVTscheduleUtil.getOwnedRootRegions(scheduleModel)) {
+				tx.transform(model, rootRegion);
 			}
 			iResource.getContents().add(model);
 			saveResource(iResource);

@@ -30,7 +30,7 @@ import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.RootDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 
 public class QVTcoreScheduleManager extends AbstractScheduleManager
 {
@@ -64,11 +64,11 @@ public class QVTcoreScheduleManager extends AbstractScheduleManager
 
 	@Override
 	protected @NonNull AbstractTransformationAnalysis createTransformationAnalysis(@NonNull Transformation asTransformation) {
-		ScheduledRegion scheduledRegion = QVTscheduleFactory.eINSTANCE.createScheduledRegion();
-		getScheduleModel().getOwnedScheduledRegions().add(scheduledRegion);
-		scheduledRegion.setReferredTransformation(asTransformation);
-		scheduledRegion.setName(asTransformation.getName());
-		return new CoreTransformationAnalysis(this, asTransformation, scheduledRegion);
+		RootRegion rootRegion = QVTscheduleFactory.eINSTANCE.createRootRegion();
+		getScheduleModel().getOwnedRootRegions().add(rootRegion);
+		rootRegion.setReferredTransformation(asTransformation);
+		rootRegion.setName(asTransformation.getName());
+		return new CoreTransformationAnalysis(this, asTransformation, rootRegion);
 	}
 
 	@Override

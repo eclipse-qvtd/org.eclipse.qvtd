@@ -322,16 +322,16 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createRootPartitionAdapter();
 			}
 			@Override
+			public Adapter caseRootRegion(RootRegion object) {
+				return createRootRegionAdapter();
+			}
+			@Override
 			public Adapter caseRuleRegion(RuleRegion object) {
 				return createRuleRegionAdapter();
 			}
 			@Override
 			public Adapter caseScheduleModel(ScheduleModel object) {
 				return createScheduleModelAdapter();
-			}
-			@Override
-			public Adapter caseScheduledRegion(ScheduledRegion object) {
-				return createScheduledRegionAdapter();
 			}
 			@Override
 			public Adapter caseShadowNode(ShadowNode object) {
@@ -736,20 +736,6 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createScheduleModelAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion <em>Scheduled Region</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion
-	 * @generated
-	 */
-	public Adapter createScheduledRegionAdapter() {
 		return null;
 	}
 
@@ -1450,6 +1436,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRootPartitionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.RootRegion <em>Root Region</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.RootRegion
+	 * @generated
+	 */
+	public Adapter createRootRegionAdapter() {
 		return null;
 	}
 

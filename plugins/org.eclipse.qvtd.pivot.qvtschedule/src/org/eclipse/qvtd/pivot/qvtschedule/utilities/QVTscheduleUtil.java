@@ -65,7 +65,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
 
 import com.google.common.base.Function;
@@ -118,8 +118,8 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static class Internal
 	{
-		public static @NonNull List<@NonNull Region> getActiveRegionsList(@NonNull ScheduledRegion scheduledRegion) {
-			return ClassUtil.nullFree(scheduledRegion.getActiveRegions());
+		public static @NonNull List<@NonNull Region> getActiveRegionsList(@NonNull RootRegion rootRegion) {
+			return ClassUtil.nullFree(rootRegion.getActiveRegions());
 		}
 
 		public static @NonNull List<@NonNull Node> getHeadNodesList(@NonNull BasicPartition basicPartition) {
@@ -130,8 +130,8 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 			return ClassUtil.nullFree(region.getHeadNodes());
 		}
 
-		public static List<@NonNull ScheduledRegion> getOwnedScheduledRegionsList(@NonNull ScheduleModel scheduleModel) {
-			return ClassUtil.nullFree(scheduleModel.getOwnedScheduledRegions());
+		public static List<@NonNull RootRegion> getOwnedRootRegionsList(@NonNull ScheduleModel scheduleModel) {
+			return ClassUtil.nullFree(scheduleModel.getOwnedRootRegions());
 		}
 
 		public static @NonNull List<@NonNull ClassDatum> getSuperClassDatumsList(@NonNull ClassDatum classDatum) {
@@ -412,8 +412,8 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return true;
 	}
 
-	public static @NonNull Iterable<@NonNull Region> getActiveRegions(@NonNull ScheduledRegion scheduledRegion) {
-		return ClassUtil.nullFree(scheduledRegion.getActiveRegions());
+	public static @NonNull Iterable<@NonNull Region> getActiveRegions(@NonNull RootRegion rootRegion) {
+		return ClassUtil.nullFree(rootRegion.getActiveRegions());
 	}
 
 	/**
@@ -549,8 +549,8 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return completeClass2nodes;
 	}
 
-	public static @NonNull ScheduledRegion getContainingScheduledRegion(@NonNull Region region) {
-		return ClassUtil.nonNullState(region.getContainingScheduledRegion());
+	public static @NonNull RootRegion getContainingRootRegion(@NonNull Region region) {
+		return ClassUtil.nonNullState(region.getContainingRootRegion());
 	}
 
 	public static @NonNull Iterable<@NonNull Node> getDependencyNodes(@NonNull OperationRegion operationRegion) {
@@ -681,16 +681,16 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(scheduleModel.getOwnedClassDatums());
 	}
 
-	public static @NonNull Iterable<@NonNull Connection> getOwnedConnections(@NonNull ScheduledRegion scheduledRegion) {
-		return ClassUtil.nullFree(scheduledRegion.getOwnedConnections());
+	public static @NonNull Iterable<@NonNull Connection> getOwnedConnections(@NonNull RootRegion rootRegion) {
+		return ClassUtil.nullFree(rootRegion.getOwnedConnections());
 	}
 
 	public static @NonNull Iterable<@NonNull Edge> getOwnedEdges(@NonNull Region region) {
 		return ClassUtil.nullFree(region.getOwnedEdges());
 	}
 
-	public static @NonNull LoadingRegion getOwnedLoadingRegion(@NonNull ScheduledRegion scheduledRegion) {
-		return ClassUtil.nonNullState(scheduledRegion.getOwnedLoadingRegion());
+	public static @NonNull LoadingRegion getOwnedLoadingRegion(@NonNull RootRegion rootRegion) {
+		return ClassUtil.nonNullState(rootRegion.getOwnedLoadingRegion());
 	}
 
 	public static @NonNull Iterable<@NonNull MappingPartition> getOwnedMappingPartitions(@NonNull CompositePartition composedPartition) {
@@ -713,8 +713,8 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(scheduleModel.getOwnedOperationRegions());
 	}
 
-	public static @NonNull Iterable<@NonNull ScheduledRegion> getOwnedScheduledRegions(@NonNull ScheduleModel scheduleModel) {
-		return ClassUtil.nullFree(scheduleModel.getOwnedScheduledRegions());
+	public static @NonNull Iterable<@NonNull RootRegion> getOwnedRootRegions(@NonNull ScheduleModel scheduleModel) {
+		return ClassUtil.nullFree(scheduleModel.getOwnedRootRegions());
 	}
 
 	public static @NonNull ClassDatum getOwningClassDatum(@NonNull PropertyDatum propertyDatum) {
@@ -729,8 +729,8 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(node.getOwningRegion());
 	}
 
-	public static @NonNull ScheduleModel getOwningScheduleModel(@NonNull ScheduledRegion scheduledRegion) {
-		return ClassUtil.nonNullState(scheduledRegion.getOwningScheduleModel());
+	public static @NonNull ScheduleModel getOwningScheduleModel(@NonNull RootRegion rootRegion) {
+		return ClassUtil.nonNullState(rootRegion.getOwningScheduleModel());
 	}
 
 	public static @NonNull NavigableEdge getPrimaryEdge(@NonNull NavigableEdge navigableEdge) {
@@ -760,8 +760,8 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(ruleRegion.getReferredRule());
 	}
 
-	public static @NonNull Transformation getReferredTransformation(@NonNull ScheduledRegion scheduledRegion) {
-		return ClassUtil.nonNullState(scheduledRegion.getReferredTransformation());
+	public static @NonNull Transformation getReferredTransformation(@NonNull RootRegion rootRegion) {
+		return ClassUtil.nonNullState(rootRegion.getReferredTransformation());
 	}
 
 	public static @NonNull TypedModel getReferredTypedModel(@NonNull ClassDatum classDatum) {
@@ -794,6 +794,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nullFree(partition.getRootConnections());
 	}
 
+	public static @NonNull RootRegion getRootRegion(@NonNull Region region) {
+		return ClassUtil.nonNullState(region.getRootRegion());
+	}
+
 	public static @NonNull ScheduleModel getScheduleModel(@NonNull Region region) {
 		for (EObject eObject = region; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof ScheduleModel) {
@@ -801,10 +805,6 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 			}
 		}
 		return ClassUtil.nonNullState(null);
-	}
-
-	public static @NonNull ScheduledRegion getScheduledRegion(@NonNull Region region) {
-		return ClassUtil.nonNullState(region.getScheduledRegion());
 	}
 
 	public static @NonNull List<@NonNull ConnectionEnd> getSourceEnds(@NonNull Connection connection) {

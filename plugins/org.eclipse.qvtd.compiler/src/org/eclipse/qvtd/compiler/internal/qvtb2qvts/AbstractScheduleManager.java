@@ -88,7 +88,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.AbstractToGraphVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.Graphable;
@@ -390,14 +390,14 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public @NonNull Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull RuleRegion>> analyzeTransformations() {
-		Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull RuleRegion>> scheduledRegion2activeRegions = new HashMap<>();
+	public @NonNull Map<@NonNull RootRegion, @NonNull Iterable<@NonNull RuleRegion>> analyzeTransformations() {
+		Map<@NonNull RootRegion, @NonNull Iterable<@NonNull RuleRegion>> rootRegion2activeRegions = new HashMap<>();
 		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : getOrderedTransformationAnalyses()) {
 			Iterable<@NonNull RuleRegion> activeRegions = transformationAnalysis.gatherRuleRegions();
-			scheduledRegion2activeRegions.put(transformationAnalysis.getScheduledRegion(), activeRegions);
+			rootRegion2activeRegions.put(transformationAnalysis.getRootRegion(), activeRegions);
 		}
 		analyzeCallTree();
-		return scheduledRegion2activeRegions;
+		return rootRegion2activeRegions;
 	}
 
 	@Override
@@ -818,12 +818,12 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			transformation = QVTbaseUtil.getContainingTransformation(rule);
 		}
 		else if (region instanceof LoadingRegion) {
-			ScheduledRegion scheduledRegion = QVTscheduleUtil.getScheduledRegion(region);
-			transformation = QVTscheduleUtil.getReferredTransformation(scheduledRegion);
+			RootRegion rootRegion = QVTscheduleUtil.getRootRegion(region);
+			transformation = QVTscheduleUtil.getReferredTransformation(rootRegion);
 		}
 		else {
-			ScheduledRegion scheduledRegion = QVTscheduleUtil.getContainingScheduledRegion(region);
-			transformation = QVTscheduleUtil.getReferredTransformation(scheduledRegion);
+			RootRegion rootRegion = QVTscheduleUtil.getContainingRootRegion(region);
+			transformation = QVTscheduleUtil.getReferredTransformation(rootRegion);
 		}
 		AbstractTransformationAnalysis transformationAnalysis = getTransformationAnalysis(transformation);
 		return transformationAnalysis.getRegionAnalysis(region);
@@ -831,8 +831,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public @NonNull RootPartitionAnalysis getRootPartitionAnalysis(@NonNull ScheduledRegion scheduledRegion) {
-		AbstractTransformationAnalysis transformationAnalysis = getTransformationAnalysis(scheduledRegion);
+	public @NonNull RootPartitionAnalysis getRootPartitionAnalysis(@NonNull RootRegion rootRegion) {
+		AbstractTransformationAnalysis transformationAnalysis = getTransformationAnalysis(rootRegion);
 		return transformationAnalysis.getRootPartitionAnalysis();
 	}
 
@@ -905,8 +905,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public @NonNull AbstractTransformationAnalysis getTransformationAnalysis(@NonNull ScheduledRegion scheduledRegion) {
-		return getTransformationAnalysis(QVTscheduleUtil.getReferredTransformation(scheduledRegion));
+	public @NonNull AbstractTransformationAnalysis getTransformationAnalysis(@NonNull RootRegion rootRegion) {
+		return getTransformationAnalysis(QVTscheduleUtil.getReferredTransformation(rootRegion));
 	}
 
 	@Override
@@ -980,8 +980,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	}
 
 	@Override
-	public void setScheduledRegion(@NonNull MappingRegion mappingRegion, @Nullable ScheduledRegion scheduledRegion) {
-		mappingRegion.setScheduledRegion(scheduledRegion);
+	public void setRootRegion(@NonNull MappingRegion mappingRegion, @Nullable RootRegion rootRegion) {
+		mappingRegion.setRootRegion(rootRegion);
 	}
 
 	/*	public void writeCallDOTfile(@NonNull Graphable graphable, @NonNull String suffix) {
@@ -1021,19 +1021,19 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	@Override
 	public void writeDebugGraphs(@NonNull String context, boolean doNodesGraph, boolean doRegionGraph, boolean doCallGraph) {
 		if (doDotGraphs || doYedGraphs) {
-			for (@NonNull ScheduledRegion scheduledRegion : QVTscheduleUtil.getOwnedScheduledRegions(scheduleModel)) {
+			for (@NonNull RootRegion rootRegion : QVTscheduleUtil.getOwnedRootRegions(scheduleModel)) {
 				if (doNodesGraph) {
-					writeDebugGraphs(scheduledRegion, context);
+					writeDebugGraphs(rootRegion, context);
 				}
 				if (doRegionGraph) {
 					String suffix = "-r-" + context;
-					writeRegionDOTfile(scheduledRegion, suffix);
-					writeRegionGraphMLfile(scheduledRegion, suffix);
+					writeRegionDOTfile(rootRegion, suffix);
+					writeRegionGraphMLfile(rootRegion, suffix);
 				}
 				/*	if (doCallGraph) {
 					String suffix = "-c-" + context;
-					writeCallDOTfile(scheduledRegion, suffix);
-					writeCallGraphMLfile(scheduledRegion, suffix);
+					writeCallDOTfile(rootRegion, suffix);
+					writeCallGraphMLfile(rootRegion, suffix);
 				} */
 			}
 		}
@@ -1115,8 +1115,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			} catch (IOException e) {
 				System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 			}
-			for (@NonNull Region nestedRegion : QVTscheduleUtil.getActiveRegions((ScheduledRegion)region)) {
-				if (nestedRegion instanceof ScheduledRegion) {
+			for (@NonNull Region nestedRegion : QVTscheduleUtil.getActiveRegions((RootRegion)region)) {
+				if (nestedRegion instanceof RootRegion) {
 					writeRegionDOTfile(nestedRegion, suffix);
 				}
 			}
@@ -1142,8 +1142,8 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 			} catch (IOException e) {
 				System.err.println("Failed to generate '" + dotURI + "' : " + e.getLocalizedMessage());
 			}
-			for (@NonNull Region nestedRegion : QVTscheduleUtil.getActiveRegions((ScheduledRegion)region)) {
-				if (nestedRegion instanceof ScheduledRegion) {
+			for (@NonNull Region nestedRegion : QVTscheduleUtil.getActiveRegions((RootRegion)region)) {
+				if (nestedRegion instanceof RootRegion) {
 					writeRegionGraphMLfile(nestedRegion, suffix);
 				}
 			}

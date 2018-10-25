@@ -440,6 +440,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull RootPartition createRootPartition();
 
 	/**
+	 * Returns a new object of class '<em>Root Region</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Root Region</em>'.
+	 * @generated
+	 */
+	RootRegion createRootRegion();
+
+	/**
 	 * Returns a new object of class '<em>Rule Region</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -456,15 +465,6 @@ public interface QVTscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull ScheduleModel createScheduleModel();
-
-	/**
-	 * Returns a new object of class '<em>Scheduled Region</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Scheduled Region</em>'.
-	 * @generated
-	 */
-	@NonNull ScheduledRegion createScheduledRegion();
 
 	/**
 	 * Returns a new object of class '<em>Shadow Node</em>'.

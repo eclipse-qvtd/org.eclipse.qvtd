@@ -49,7 +49,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
-public class LoadingPartition2Mapping extends AbstractScheduledRegion2Mapping
+public class LoadingPartition2Mapping extends AbstractRootRegion2Mapping
 {
 	/**
 	 * Mapping from the type to allInstances variable.

@@ -64,7 +64,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
@@ -118,11 +118,11 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			}
 			for (org.eclipse.ocl.pivot.@NonNull Class cIn : PivotUtil.getOwnedClasses(pIn)) {
 				cIn.accept(this);
-				//				if (cOut instanceof ScheduledRegion) {
-				//					if (mOut.getOwnedScheduledRegion() != null) {
+				//				if (cOut instanceof RootRegion) {
+				//					if (mOut.getOwnedRootRegion() != null) {
 				//						context.addProblem(new CompilerChainException("Multiple scheduled regions"));
 				//					}
-				//					mOut.setOwnedScheduledRegion((ScheduledRegion) cOut);
+				//					mOut.setOwnedRootRegion((RootRegion) cOut);
 				//				}
 			}
 		}
@@ -345,7 +345,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 					doPackage(p, mOut);
 				}
 			}
-			//			if (mOut.getOwnedScheduledRegion() == null) {
+			//			if (mOut.getOwnedRootRegion() == null) {
 			//				context.addProblem(new CompilerChainException("No scheduled region"));
 			//			}
 			createAll(mIn.getOwnedComments(), mOut.getOwnedComments());
@@ -354,8 +354,8 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		}
 
 		@Override
-		public @NonNull ScheduledRegion visitRelationalTransformation(@NonNull RelationalTransformation tIn) {
-			ScheduledRegion tOut = scheduleManager.getTransformationAnalysis(tIn).getScheduledRegion();
+		public @NonNull RootRegion visitRelationalTransformation(@NonNull RelationalTransformation tIn) {
+			RootRegion tOut = scheduleManager.getTransformationAnalysis(tIn).getRootRegion();
 			context.addTrace(tIn, tOut);
 			//			tOut.setOwnedContext(create(tIn.getOwnedContext()));
 			//			createAll(tIn.getOwnedOperations(), tOut.getOwnedOperations());
@@ -535,7 +535,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 	//		this.debugSource =  debugSource;
 	//	}
 
-	public @NonNull Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull MappingRegion>> transform(@NonNull Resource source, @NonNull Resource target, @Nullable String traceNsURI, @NonNull Resource traceResource) throws IOException {
+	public @NonNull Map<@NonNull RootRegion, @NonNull Iterable<@NonNull MappingRegion>> transform(@NonNull Resource source, @NonNull Resource target, @Nullable String traceNsURI, @NonNull Resource traceResource) throws IOException {
 		// FIXME the following lines should go obsolete
 		List<OperationCallExp> missingOperationCallSources = QVTbaseUtil.rewriteMissingOperationCallSources(environmentFactory, target);
 		if (missingOperationCallSources != null) {
@@ -624,7 +624,7 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 			}
 		}
 
-		Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull RuleRegion>> scheduledRegion2activeRegions = scheduleManager2.analyzeTransformations();
+		Map<@NonNull RootRegion, @NonNull Iterable<@NonNull RuleRegion>> rootRegion2activeRegions = scheduleManager2.analyzeTransformations();
 		//
 		//		List<@NonNull MappingRegion> orderedRegions = new ArrayList<>();
 		//		for (@NonNull MappingRegion ruleRegion : QVTscheduleUtil.getOwnedMappingRegions(scheduleManager2.getScheduleModel())) {
@@ -634,22 +634,22 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 		//			orderedRegions.add(ruleRegion);
 		//			mappingRegion.resolveRecursion();
 		//		}
-		Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull MappingRegion>> scheduledRegion2mergedRegions = new HashMap<>();
+		Map<@NonNull RootRegion, @NonNull Iterable<@NonNull MappingRegion>> rootRegion2mergedRegions = new HashMap<>();
 		/*		if (!scheduleManager.isNoEarlyMerge()) {
-			for (@NonNull ScheduledRegion scheduledRegion : scheduledRegion2activeRegions.keySet()) {
-				Iterable<@NonNull RuleRegion> activeRegions = scheduledRegion2activeRegions.get(scheduledRegion);
+			for (@NonNull RootRegion rootRegion : rootRegion2activeRegions.keySet()) {
+				Iterable<@NonNull RuleRegion> activeRegions = rootRegion2activeRegions.get(rootRegion);
 				assert activeRegions != null;
 				List<@NonNull MappingRegion> mergedRegions = new ArrayList<>(EarlyMerger.merge(scheduleManager, activeRegions));
-				scheduledRegion2mergedRegions.put(scheduledRegion, mergedRegions);
+				rootRegion2mergedRegions.put(rootRegion, mergedRegions);
 			}
 		}
 		else { */
-		for (@NonNull ScheduledRegion scheduledRegion : scheduledRegion2activeRegions.keySet()) {
-			Iterable<@NonNull RuleRegion> activeRegions = scheduledRegion2activeRegions.get(scheduledRegion);
+		for (@NonNull RootRegion rootRegion : rootRegion2activeRegions.keySet()) {
+			Iterable<@NonNull RuleRegion> activeRegions = rootRegion2activeRegions.get(rootRegion);
 			assert activeRegions != null;
-			scheduledRegion2mergedRegions.put(scheduledRegion, Lists.newArrayList(activeRegions));
+			rootRegion2mergedRegions.put(rootRegion, Lists.newArrayList(activeRegions));
 		}
 		//		}
-		return scheduledRegion2mergedRegions;
+		return rootRegion2mergedRegions;
 	}
 }

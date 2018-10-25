@@ -23,7 +23,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalys
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
-import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 
 public class RootPartitionAnalysis extends AbstractCompositePartitionAnalysis<RootPartition> implements CompositePartitionAnalysis
 {
@@ -31,12 +31,12 @@ public class RootPartitionAnalysis extends AbstractCompositePartitionAnalysis<Ro
 			@NonNull AbstractTransformationAnalysis transformationAnalysis,
 			@NonNull String name, @NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partitionAnalysis2predecessors) {
 		RootPartition rootPartition = RegionHelper.createRootPartition(name, transformationAnalysis.getScheduleManager());
-		transformationAnalysis.getScheduledRegion().setOwnedRootPartition(rootPartition);
+		transformationAnalysis.getRootRegion().setOwnedRootPartition(rootPartition);
 		RootPartitionAnalysis rootPartitionAnalysis = new RootPartitionAnalysis(partitionedTransformationAnalysis, rootPartition, partitionAnalysis2predecessors);
 		return rootPartitionAnalysis;
 	}
 
-	private @Nullable ScheduledRegion scheduledRegion = null;
+	private @Nullable RootRegion rootRegion = null;
 
 	private RootPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull RootPartition rootPartition,
 			@NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partitionAnalysis2predecessors) {
@@ -70,12 +70,12 @@ public class RootPartitionAnalysis extends AbstractCompositePartitionAnalysis<Ro
 		return flatPartitionSchedule;
 	}
 
-	public @NonNull ScheduledRegion getScheduledRegion() {
-		return ClassUtil.nonNullState(scheduledRegion);
+	public @NonNull RootRegion getRootRegion() {
+		return ClassUtil.nonNullState(rootRegion);
 	}
 
-	public void setScheduledRegion(@NonNull ScheduledRegion scheduledRegion) {
-		this.scheduledRegion = scheduledRegion;
+	public void setRootRegion(@NonNull RootRegion rootRegion) {
+		this.rootRegion = rootRegion;
 	}
 
 	//		@Override

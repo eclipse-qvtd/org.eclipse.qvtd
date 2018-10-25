@@ -36,7 +36,7 @@ public interface RootPartition extends CompositePartition {
 
 	/**
 	 * Returns the value of the '<em><b>Owning Root Region</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedRootPartition <em>Owned Root Partition</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.RootRegion#getOwnedRootPartition <em>Owned Root Partition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owning Root Region</em>' container reference isn't clear,
@@ -44,14 +44,14 @@ public interface RootPartition extends CompositePartition {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owning Root Region</em>' container reference.
-	 * @see #setOwningRootRegion(ScheduledRegion)
+	 * @see #setOwningRootRegion(RootRegion)
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getRootPartition_OwningRootRegion()
-	 * @see org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion#getOwnedRootPartition
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.RootRegion#getOwnedRootPartition
 	 * @model opposite="ownedRootPartition" required="true" transient="false"
 	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!RootPartition!owningRootRegion'"
 	 * @generated
 	 */
-	ScheduledRegion getOwningRootRegion();
+	RootRegion getOwningRootRegion();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.RootPartition#getOwningRootRegion <em>Owning Root Region</em>}' container reference.
@@ -61,7 +61,7 @@ public interface RootPartition extends CompositePartition {
 	 * @see #getOwningRootRegion()
 	 * @generated
 	 */
-	void setOwningRootRegion(ScheduledRegion value);
+	void setOwningRootRegion(RootRegion value);
 
 	/**
 	 * Returns the value of the '<em><b>Loading Partition</b></em>' reference.
