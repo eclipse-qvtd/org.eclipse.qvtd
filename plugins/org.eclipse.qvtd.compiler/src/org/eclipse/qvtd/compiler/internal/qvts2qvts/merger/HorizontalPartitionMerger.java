@@ -132,7 +132,7 @@ public class HorizontalPartitionMerger extends AbstractMerger
 						//						mergedPartition.getExplicitSuccessors().addAll(oldPartition.getExplicitSuccessors());
 						//						oldPartition.getExplicitPredecessors().clear();
 						//						oldPartition.getExplicitSuccessors().clear();
-						old2new.put(partitionAnalysis, partitionedTransformationAnalysis.getPartitionAnalysis(mergedPartition));
+						old2new.put(partitionAnalysis, mergedPartitionAnalysis);
 					}
 					for (int pass : merges.iterator().next().getPartition().getPasses()) {
 						mergedPartition.addPass(pass);

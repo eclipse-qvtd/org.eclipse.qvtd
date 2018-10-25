@@ -241,16 +241,6 @@ public abstract class AbstractQVTscheduleASSaverNormalizeVisitor
 	}
 
 	@Override
-	public @Nullable Object visitMicroMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MicroMappingRegion object) {
-		return visitMappingRegion(object);
-	}
-
-	@Override
-	public @Nullable Object visitNamedMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NamedMappingRegion object) {
-		return visitMappingRegion(object);
-	}
-
-	@Override
 	public @Nullable Object visitNavigableEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NavigableEdge object) {
 		return visitEdge(object);
 	}

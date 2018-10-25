@@ -11,9 +11,7 @@
 package org.eclipse.qvtd.compiler.internal.qvtm2qvts;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -21,7 +19,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractQVTb2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -50,7 +47,7 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 			scheduleManager.writeDebugGraphs(ruleRegion, null);
 		}
 		Map<@NonNull ScheduledRegion, @NonNull Iterable<@NonNull MappingRegion>> scheduledRegion2mergedRegions = new HashMap<>();
-		if (!scheduleManager.isNoEarlyMerge()) {
+		/*		if (!scheduleManager.isNoEarlyMerge()) {
 			for (@NonNull ScheduledRegion scheduledRegion : scheduledRegion2activeRegions.keySet()) {
 				Iterable<@NonNull RuleRegion> activeRegions = scheduledRegion2activeRegions.get(scheduledRegion);
 				assert activeRegions != null;
@@ -58,13 +55,13 @@ public class QVTm2QVTs extends AbstractQVTb2QVTs
 				scheduledRegion2mergedRegions.put(scheduledRegion, mergedRegions);
 			}
 		}
-		else {
-			for (@NonNull ScheduledRegion scheduledRegion : scheduledRegion2activeRegions.keySet()) {
-				Iterable<@NonNull RuleRegion> activeRegions = scheduledRegion2activeRegions.get(scheduledRegion);
-				assert activeRegions != null;
-				scheduledRegion2mergedRegions.put(scheduledRegion, Lists.newArrayList(activeRegions));
-			}
+		else { */
+		for (@NonNull ScheduledRegion scheduledRegion : scheduledRegion2activeRegions.keySet()) {
+			Iterable<@NonNull RuleRegion> activeRegions = scheduledRegion2activeRegions.get(scheduledRegion);
+			assert activeRegions != null;
+			scheduledRegion2mergedRegions.put(scheduledRegion, Lists.newArrayList(activeRegions));
 		}
+		//		}
 		return scheduledRegion2mergedRegions;
 	}
 }

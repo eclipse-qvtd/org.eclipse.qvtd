@@ -15,7 +15,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 
 public class LoadingPartitionAnalysis extends AbstractPartitionAnalysis<LoadingPartition>
 {
@@ -33,12 +32,7 @@ public class LoadingPartitionAnalysis extends AbstractPartitionAnalysis<LoadingP
 
 	@Override
 	public void analyzePartition2() {
-		partitionedTransformationAnalysis.setLoadingRegionAnalysis(partition);
-	}
-
-	@Override
-	public @NonNull MappingRegion createMicroMappingRegion() {
-		return (MappingRegion)partition.getRegion();
+		partitionedTransformationAnalysis.setLoadingRegionAnalysis(this);
 	}
 
 	@Override
@@ -49,11 +43,6 @@ public class LoadingPartitionAnalysis extends AbstractPartitionAnalysis<LoadingP
 	@Override
 	public @Nullable Iterable<@NonNull TracePropertyPartitionAnalysis> getConsumedTracePropertyAnalyses() {
 		return null;
-	}
-
-	@Override
-	public @NonNull MappingRegion getMicroMappingRegion() {
-		return (MappingRegion)partition.getRegion();
 	}
 
 	@Override

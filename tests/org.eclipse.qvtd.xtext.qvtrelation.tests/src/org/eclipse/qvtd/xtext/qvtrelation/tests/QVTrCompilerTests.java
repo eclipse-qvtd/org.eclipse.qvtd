@@ -38,8 +38,6 @@ import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ConnectivityChecker;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.EarlyMerger;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.LateConsumerMerger;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
@@ -48,7 +46,6 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateToStringVisitor;
-import org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -295,9 +292,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			txClass3 = myQVT3.buildTransformation("Persons", false);//,
 			myQVT3.assertRegionCount(RuleRegionImpl.class, 0);
-			myQVT3.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
-			myQVT3.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT3.assertRegionCount(MicroMappingRegionImpl.class, 4);
+			//			myQVT3.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+			//			myQVT3.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			//			myQVT3.assertRegionCount(MicroMappingRegionImpl.class, 4);
 		}
 		finally {
 			myQVT3.dispose();
@@ -469,9 +466,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			txClass = myQVT1.buildTransformation("Persons", false);//,
 			myQVT1.assertRegionCount(RuleRegionImpl.class, 0);
-			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
-			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 4);
+			//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+			//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 4);
 		}
 		finally {
 			myQVT1.dispose();
@@ -598,9 +595,9 @@ public class QVTrCompilerTests extends LoadTestCase
 			//			Class<? extends Transformer> txClass = Forward2Reverse.class;
 			//			myQVT1.assertRegionCount(ActivatorRegionImpl.class, 2);
 			//	myQVT1.assertRegionCount(RuleRegionImpl.class, 1);
-			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
-			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 7);
+			//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+			//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 7);
 		}
 		finally {
 			myQVT1.dispose();
@@ -684,9 +681,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			txClass = myQVT1.buildTransformation("flat", false);//,
 			myQVT1.assertRegionCount(RuleRegionImpl.class, 0);
-			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
-			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 6);
+			//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+			//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 6);
 		}
 		finally {
 			myQVT1.dispose();
@@ -732,9 +729,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			txClass = myQVT1.buildTransformation("flat", false);//,
 			myQVT1.assertRegionCount(RuleRegionImpl.class, 0);
-			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
-			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 6);
+			//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+			//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 6);
 		}
 		finally {
 			myQVT1.dispose();
@@ -961,9 +958,9 @@ public class QVTrCompilerTests extends LoadTestCase
 			//					"SeqMM.SeqMMPackage", "PSeqToStm.PSeqToStmPackage");
 			//
 			myQVT1.assertRegionCount(RuleRegionImpl.class, 0);
-			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
-			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 10);
+			//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+			//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 10);
 		}
 		finally {
 			myQVT1.dispose();

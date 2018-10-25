@@ -14,7 +14,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
@@ -27,8 +26,6 @@ public interface PartitionAnalysis extends CompilerUtil.PartialRegion<@NonNull P
 	void addEnforcedEdge(@NonNull NavigableEdge realizedEdge);
 	void analyzePartitionEdges();
 	void computeCheckedOrEnforcedEdges();
-	@NonNull MappingRegion createMicroMappingRegion();
-	@NonNull MappingRegion getMicroMappingRegion();
 	@NonNull Partition getPartition();
 	boolean isAwaited(@NonNull Edge edge);
 	@Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getProducedTraceClassAnalyses();

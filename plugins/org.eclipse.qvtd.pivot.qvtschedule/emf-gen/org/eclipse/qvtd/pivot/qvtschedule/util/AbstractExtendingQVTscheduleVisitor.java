@@ -237,16 +237,6 @@ public abstract class AbstractExtendingQVTscheduleVisitor<R, C>
 	}
 
 	@Override
-	public R visitMicroMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MicroMappingRegion object) {
-		return visitMappingRegion(object);
-	}
-
-	@Override
-	public R visitNamedMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NamedMappingRegion object) {
-		return visitMappingRegion(object);
-	}
-
-	@Override
 	public R visitNavigableEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NavigableEdge object) {
 		return visitEdge(object);
 	}

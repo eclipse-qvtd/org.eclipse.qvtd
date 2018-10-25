@@ -467,28 +467,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTschedulePackage.MICRO_MAPPING_REGION: {
-				MicroMappingRegion microMappingRegion = (MicroMappingRegion)theEObject;
-				T result = caseMicroMappingRegion(microMappingRegion);
-				if (result == null) result = caseMappingRegion(microMappingRegion);
-				if (result == null) result = caseRegion(microMappingRegion);
-				if (result == null) result = caseNamedElement(microMappingRegion);
-				if (result == null) result = caseSymbolable(microMappingRegion);
-				if (result == null) result = caseElement(microMappingRegion);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTschedulePackage.NAMED_MAPPING_REGION: {
-				NamedMappingRegion namedMappingRegion = (NamedMappingRegion)theEObject;
-				T result = caseNamedMappingRegion(namedMappingRegion);
-				if (result == null) result = caseMappingRegion(namedMappingRegion);
-				if (result == null) result = caseRegion(namedMappingRegion);
-				if (result == null) result = caseNamedElement(namedMappingRegion);
-				if (result == null) result = caseSymbolable(namedMappingRegion);
-				if (result == null) result = caseElement(namedMappingRegion);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTschedulePackage.NAVIGABLE_EDGE: {
 				NavigableEdge navigableEdge = (NavigableEdge)theEObject;
 				T result = caseNavigableEdge(navigableEdge);
@@ -1646,36 +1624,6 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMergedPartition(MergedPartition object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Micro Mapping Region</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Micro Mapping Region</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMicroMappingRegion(MicroMappingRegion object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Named Mapping Region</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Named Mapping Region</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNamedMappingRegion(NamedMappingRegion object) {
 		return null;
 	}
 

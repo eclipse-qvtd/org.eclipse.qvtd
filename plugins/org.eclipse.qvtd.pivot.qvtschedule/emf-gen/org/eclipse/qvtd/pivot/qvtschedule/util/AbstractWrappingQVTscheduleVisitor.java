@@ -502,30 +502,6 @@ public abstract class AbstractWrappingQVTscheduleVisitor<R, C, @NonNull D extend
 	}
 
 	@Override
-	public R visitMicroMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MicroMappingRegion object) {
-		@Nullable P prologue = preVisit(object);
-		try {
-			R result = delegate.visitMicroMappingRegion(object);
-			return postVisit(object, prologue, result);
-		}
-		catch (Throwable e) {
-			return badVisit(object, prologue, e);
-		}
-	}
-
-	@Override
-	public R visitNamedMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NamedMappingRegion object) {
-		@Nullable P prologue = preVisit(object);
-		try {
-			R result = delegate.visitNamedMappingRegion(object);
-			return postVisit(object, prologue, result);
-		}
-		catch (Throwable e) {
-			return badVisit(object, prologue, e);
-		}
-	}
-
-	@Override
 	public R visitNavigableEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NavigableEdge object) {
 		@Nullable P prologue = preVisit(object);
 		try {

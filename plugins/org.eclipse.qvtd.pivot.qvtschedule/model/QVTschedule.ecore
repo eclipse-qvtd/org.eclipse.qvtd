@@ -355,21 +355,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMergedPartitions"
         upperBound="-1" eType="#//BasicPartition" containment="true" eOpposite="#//BasicPartition/owningMergedPartition"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MicroMappingRegion" eSuperTypes="#//MappingRegion">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A MappingRegion provides a graphical representation of an executable micro-mapping; a partial mapping free from dependency hazards."/>
-    </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingRegion" lowerBound="1"
-        eType="#//MappingRegion"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="namePrefix" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolNameSuffix" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NamedMappingRegion" eSuperTypes="#//MappingRegion">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbolNameSuffix" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NavigableEdge" abstract="true" eSuperTypes="#//Edge #//ConnectionEnd">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An edge is directed and abstracts any Node interconnection within a Region."/>

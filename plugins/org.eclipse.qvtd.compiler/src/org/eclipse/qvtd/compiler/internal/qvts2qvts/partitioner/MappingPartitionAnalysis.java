@@ -200,7 +200,7 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 
 	private void addConsumptionOfNode(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Node node) {
 		Node castNode = QVTscheduleUtil.getCastTarget(node);
-		TraceClassPartitionAnalysis consumedTraceAnalysis = partitionedTransformationAnalysis.addConsumer(QVTscheduleUtil.getClassDatum(castNode), partition);
+		TraceClassPartitionAnalysis consumedTraceAnalysis = partitionedTransformationAnalysis.addConsumer(QVTscheduleUtil.getClassDatum(castNode), this);
 		List<@NonNull TraceClassPartitionAnalysis> consumedTraceClassAnalyses2 = consumedTraceClassAnalyses;
 		if (consumedTraceClassAnalyses2 == null) {
 			consumedTraceClassAnalyses = consumedTraceClassAnalyses2 = new ArrayList<>();
@@ -225,7 +225,7 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 	}
 
 	private void addConsumptionOfPropertyDatum(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull PropertyDatum propertyDatum) {
-		TracePropertyPartitionAnalysis consumedTraceAnalysis = partitionedTransformationAnalysis.addConsumer(propertyDatum, partition);
+		TracePropertyPartitionAnalysis consumedTraceAnalysis = partitionedTransformationAnalysis.addConsumer(propertyDatum, this);
 		List<@NonNull TracePropertyPartitionAnalysis> consumedTracePropertyAnalyses2 = consumedTracePropertyAnalyses;
 		if (consumedTracePropertyAnalyses2 == null) {
 			consumedTracePropertyAnalyses = consumedTracePropertyAnalyses2 = new ArrayList<>();
@@ -255,7 +255,7 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 			property.toString();
 		}
 		PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
-		TracePropertyPartitionAnalysis producedTraceAnalysis = partitionedTransformationAnalysis.addProducer(propertyDatum, partition);
+		TracePropertyPartitionAnalysis producedTraceAnalysis = partitionedTransformationAnalysis.addProducer(propertyDatum, this);
 		List<@NonNull TracePropertyPartitionAnalysis> producedTracePropertyAnalyses2 = producedTracePropertyAnalyses;
 		if (producedTracePropertyAnalyses2 == null) {
 			producedTracePropertyAnalyses = producedTracePropertyAnalyses2 = new ArrayList<>();
@@ -265,7 +265,7 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 		}
 		PropertyDatum oppositePropertyDatum = propertyDatum.getOpposite();
 		if (oppositePropertyDatum != null) {
-			TracePropertyPartitionAnalysis oppositeProducedTraceAnalysis = partitionedTransformationAnalysis.addProducer(oppositePropertyDatum, partition);
+			TracePropertyPartitionAnalysis oppositeProducedTraceAnalysis = partitionedTransformationAnalysis.addProducer(oppositePropertyDatum, this);
 			if (!producedTracePropertyAnalyses2.contains(oppositeProducedTraceAnalysis)) {
 				producedTracePropertyAnalyses2.add(oppositeProducedTraceAnalysis);
 			}
@@ -288,7 +288,7 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 
 	private void addProductionOfNode(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Node node) {
 		assert isNew(node);
-		TraceClassPartitionAnalysis consumedTraceAnalysis = partitionedTransformationAnalysis.addProducer(QVTscheduleUtil.getClassDatum(node), partition);
+		TraceClassPartitionAnalysis consumedTraceAnalysis = partitionedTransformationAnalysis.addProducer(QVTscheduleUtil.getClassDatum(node), this);
 		List<@NonNull TraceClassPartitionAnalysis> producedTraceClassAnalyses2 = producedTraceClassAnalyses;
 		if (producedTraceClassAnalyses2 == null) {
 			producedTraceClassAnalyses = producedTraceClassAnalyses2 = new ArrayList<>();

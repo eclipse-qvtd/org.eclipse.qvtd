@@ -33,6 +33,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToDOT;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
@@ -724,7 +725,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 
 	@Override
 	public @NonNull String getGraphName() {
-		return name;
+		return ClassUtil.nonNullState(name);
 	}
 
 	private int nextPartitionNumber = 0;			// FIXME legacy compatibility naming support

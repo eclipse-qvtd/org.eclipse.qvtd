@@ -56,8 +56,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingNode;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MergedPartition;
-import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.NamedMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -334,16 +332,6 @@ public class QVTscheduleToStringVisitor extends QVTbaseToStringVisitor implement
 
 	@Override
 	public String visitMergedPartition(@NonNull MergedPartition object) {
-		return visiting(object);
-	}
-
-	@Override
-	public String visitMicroMappingRegion(@NonNull MicroMappingRegion object) {
-		return visiting(object);
-	}
-
-	@Override
-	public String visitNamedMappingRegion(@NonNull NamedMappingRegion object) {
 		return visiting(object);
 	}
 

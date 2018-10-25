@@ -27,7 +27,6 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
-import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
@@ -70,15 +69,15 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 		this.scheduleManager = transformationPartitioner.getScheduleManager();
 	}
 
-	public @NonNull TraceClassPartitionAnalysis addConsumer(@NonNull ClassDatum classDatum, @NonNull Partition consumer) {
+	public @NonNull TraceClassPartitionAnalysis addConsumer(@NonNull ClassDatum classDatum, @NonNull PartitionAnalysis consumer) {
 		TraceClassPartitionAnalysis traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
-		traceClassAnalysis.addConsumer(getPartitionAnalysis(consumer));
+		traceClassAnalysis.addConsumer(consumer);
 		return traceClassAnalysis;
 	}
 
-	public @NonNull TracePropertyPartitionAnalysis addConsumer(@NonNull PropertyDatum tracePropertyDatum, @NonNull Partition consumer) {
+	public @NonNull TracePropertyPartitionAnalysis addConsumer(@NonNull PropertyDatum tracePropertyDatum, @NonNull PartitionAnalysis consumer) {
 		TracePropertyPartitionAnalysis tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
-		tracePropertyAnalysis.addConsumer(getPartitionAnalysis(consumer));
+		tracePropertyAnalysis.addConsumer(consumer);
 		return tracePropertyAnalysis;
 	}
 
@@ -104,15 +103,15 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 		QVTscheduleConstants.POLLED_PROPERTIES.println("  " + typedModel + " predicated for " + property);
 	}
 
-	public @NonNull TraceClassPartitionAnalysis addProducer(@NonNull ClassDatum classDatum, @NonNull Partition producer) {
+	public @NonNull TraceClassPartitionAnalysis addProducer(@NonNull ClassDatum classDatum, @NonNull PartitionAnalysis producer) {
 		TraceClassPartitionAnalysis traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
-		traceClassAnalysis.addProducer(getPartitionAnalysis(producer));
+		traceClassAnalysis.addProducer(producer);
 		return traceClassAnalysis;
 	}
 
-	public @NonNull TracePropertyPartitionAnalysis addProducer(@NonNull PropertyDatum tracePropertyDatum, @NonNull Partition producer) {
+	public @NonNull TracePropertyPartitionAnalysis addProducer(@NonNull PropertyDatum tracePropertyDatum, @NonNull PartitionAnalysis producer) {
 		TracePropertyPartitionAnalysis tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
-		tracePropertyAnalysis.addProducer(getPartitionAnalysis(producer));
+		tracePropertyAnalysis.addProducer(producer);
 		return tracePropertyAnalysis;
 	}
 
@@ -215,32 +214,8 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 		return transformationPartitioner.getName();
 	}
 
-	public @NonNull Iterable<@NonNull PartitionAnalysis> getPartitionAnalyses(@NonNull Iterable<? extends @NonNull Partition> partitions) {
-		List<@NonNull PartitionAnalysis> partitionAnalyses = new ArrayList<>();
-		for (@NonNull Partition partition : partitions) {
-			partitionAnalyses.add(getPartitionAnalysis(partition));
-		}
-		return partitionAnalyses;
-	}
-
 	public @NonNull AbstractPartitionAnalysis<?> getPartitionAnalysis(@NonNull Partition partition) {
 		return ClassUtil.nonNullState(partition2partitionAnalysis.get(partition));
-	}
-
-	public static @NonNull Set<@NonNull Partition> getPartitionSet(@NonNull Iterable<@NonNull PartitionAnalysis> partitionAnalyses) {
-		Set<@NonNull Partition> partitions = new HashSet<>();
-		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {
-			partitions.add(partitionAnalysis.getPartition());
-		}
-		return partitions;
-	}
-
-	public static @NonNull Iterable<@NonNull Partition> getPartitions(@NonNull Iterable<@NonNull PartitionAnalysis> partitionAnalyses) {
-		List<@NonNull Partition> partitions = new ArrayList<>();
-		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {
-			partitions.add(partitionAnalysis.getPartition());
-		}
-		return partitions;
 	}
 
 	public @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>> getProperty2RealizedEdges(@NonNull TypedModel typedModel) {
@@ -277,7 +252,7 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 		return tracePropertyAnalysis;
 	}
 
-	public void setLoadingRegionAnalysis(@NonNull LoadingPartition loadingPartition) {
+	public void setLoadingRegionAnalysis(@NonNull LoadingPartitionAnalysis loadingPartitionAnalysis) {
 		for (@NonNull ClassDatum classDatum : classDatum2traceClassAnalysis.keySet()) {
 			TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
 			if (scheduleManager.isInput(typedModel)) {
@@ -285,7 +260,7 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 				assert classAnalysis != null;
 				Iterable<@NonNull PartitionAnalysis> producers = classAnalysis.getProducers();
 				if (Iterables.isEmpty(producers)) {
-					classAnalysis.addProducer(getPartitionAnalysis(loadingPartition));
+					classAnalysis.addProducer(loadingPartitionAnalysis);
 				}
 			}
 		}

@@ -99,8 +99,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.MAP_PART_EDGE: return createMapPartEdge();
 			case QVTschedulePackage.MAP_PART_NODE: return createMapPartNode();
 			case QVTschedulePackage.MERGED_PARTITION: return createMergedPartition();
-			case QVTschedulePackage.MICRO_MAPPING_REGION: return createMicroMappingRegion();
-			case QVTschedulePackage.NAMED_MAPPING_REGION: return createNamedMappingRegion();
 			case QVTschedulePackage.NAVIGATION_EDGE: return createNavigationEdge();
 			case QVTschedulePackage.NODE_CONNECTION: return createNodeConnection();
 			case QVTschedulePackage.NON_PARTITION: return createNonPartition();
@@ -500,28 +498,6 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull MergedPartition createMergedPartition() {
 		MergedPartitionImpl mergedPartition = new MergedPartitionImpl();
 		return mergedPartition;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull MicroMappingRegion createMicroMappingRegion() {
-		MicroMappingRegionImpl microMappingRegion = new MicroMappingRegionImpl();
-		return microMappingRegion;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public @NonNull NamedMappingRegion createNamedMappingRegion() {
-		NamedMappingRegionImpl namedMappingRegion = new NamedMappingRegionImpl();
-		return namedMappingRegion;
 	}
 
 	/**

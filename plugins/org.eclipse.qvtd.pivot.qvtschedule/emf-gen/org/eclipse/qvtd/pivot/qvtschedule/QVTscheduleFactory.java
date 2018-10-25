@@ -305,24 +305,6 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull MergedPartition createMergedPartition();
 
 	/**
-	 * Returns a new object of class '<em>Micro Mapping Region</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Micro Mapping Region</em>'.
-	 * @generated
-	 */
-	@NonNull MicroMappingRegion createMicroMappingRegion();
-
-	/**
-	 * Returns a new object of class '<em>Named Mapping Region</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Named Mapping Region</em>'.
-	 * @generated
-	 */
-	@NonNull NamedMappingRegion createNamedMappingRegion();
-
-	/**
 	 * Returns a new object of class '<em>Navigation Edge</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

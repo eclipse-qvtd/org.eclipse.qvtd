@@ -67,8 +67,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.MappingNode;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MergedPartition;
-import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.NamedMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -512,20 +510,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	private EClass mergedPartitionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass microMappingRegionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass namedMappingRegionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2155,66 +2139,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
-	public EClass getMicroMappingRegion() {
-		return microMappingRegionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getMicroMappingRegion_MappingRegion() {
-		return (EReference)microMappingRegionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getMicroMappingRegion_NamePrefix() {
-		return (EAttribute)microMappingRegionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getMicroMappingRegion_SymbolNameSuffix() {
-		return (EAttribute)microMappingRegionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getNamedMappingRegion() {
-		return namedMappingRegionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EAttribute getNamedMappingRegion_SymbolNameSuffix() {
-		return (EAttribute)namedMappingRegionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getNavigableEdge() {
 		return navigableEdgeEClass;
 	}
@@ -3045,14 +2969,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		mergedPartitionEClass = createEClass(MERGED_PARTITION);
 		createEReference(mergedPartitionEClass, MERGED_PARTITION__OWNED_MERGED_PARTITIONS);
 
-		microMappingRegionEClass = createEClass(MICRO_MAPPING_REGION);
-		createEReference(microMappingRegionEClass, MICRO_MAPPING_REGION__MAPPING_REGION);
-		createEAttribute(microMappingRegionEClass, MICRO_MAPPING_REGION__NAME_PREFIX);
-		createEAttribute(microMappingRegionEClass, MICRO_MAPPING_REGION__SYMBOL_NAME_SUFFIX);
-
-		namedMappingRegionEClass = createEClass(NAMED_MAPPING_REGION);
-		createEAttribute(namedMappingRegionEClass, NAMED_MAPPING_REGION__SYMBOL_NAME_SUFFIX);
-
 		navigableEdgeEClass = createEClass(NAVIGABLE_EDGE);
 		createEReference(navigableEdgeEClass, NAVIGABLE_EDGE__INCOMING_CONNECTION);
 		createEReference(navigableEdgeEClass, NAVIGABLE_EDGE__OPPOSITE_EDGE);
@@ -3267,8 +3183,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		mappingPartitionEClass.getESuperTypes().add(this.getPartition());
 		mappingRegionEClass.getESuperTypes().add(this.getRegion());
 		mergedPartitionEClass.getESuperTypes().add(this.getBasicPartition());
-		microMappingRegionEClass.getESuperTypes().add(this.getMappingRegion());
-		namedMappingRegionEClass.getESuperTypes().add(this.getMappingRegion());
 		navigableEdgeEClass.getESuperTypes().add(this.getEdge());
 		navigableEdgeEClass.getESuperTypes().add(this.getConnectionEnd());
 		navigationEdgeEClass.getESuperTypes().add(this.getNavigableEdge());
@@ -3455,14 +3369,6 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEClass(mergedPartitionEClass, MergedPartition.class, "MergedPartition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMergedPartition_OwnedMergedPartitions(), this.getBasicPartition(), this.getBasicPartition_OwningMergedPartition(), "ownedMergedPartitions", null, 0, -1, MergedPartition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(microMappingRegionEClass, MicroMappingRegion.class, "MicroMappingRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMicroMappingRegion_MappingRegion(), this.getMappingRegion(), null, "mappingRegion", null, 1, 1, MicroMappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMicroMappingRegion_NamePrefix(), ecorePackage.getEString(), "namePrefix", null, 1, 1, MicroMappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMicroMappingRegion_SymbolNameSuffix(), ecorePackage.getEString(), "symbolNameSuffix", null, 1, 1, MicroMappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(namedMappingRegionEClass, NamedMappingRegion.class, "NamedMappingRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getNamedMappingRegion_SymbolNameSuffix(), ecorePackage.getEString(), "symbolNameSuffix", "", 1, 1, NamedMappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(navigableEdgeEClass, NavigableEdge.class, "NavigableEdge", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getNavigableEdge_IncomingConnection(), this.getEdgeConnection(), null, "incomingConnection", null, 0, 1, NavigableEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getNavigableEdge_OppositeEdge(), this.getNavigableEdge(), null, "oppositeEdge", null, 0, 1, NavigableEdge.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3635,10 +3541,10 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	protected void createEcoreAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this,
-		   source,
-		   new String[] {
-		   });
+		(this,
+			source,
+			new String[] {
+		});
 	}
 
 	/**

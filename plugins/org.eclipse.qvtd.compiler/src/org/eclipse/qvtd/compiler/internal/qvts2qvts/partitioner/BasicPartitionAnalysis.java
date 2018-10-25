@@ -10,24 +10,19 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
-import org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-
-import com.google.common.collect.Sets;
 
 public class BasicPartitionAnalysis extends MappingPartitionAnalysis<BasicPartition>
 {
@@ -37,9 +32,8 @@ public class BasicPartitionAnalysis extends MappingPartitionAnalysis<BasicPartit
 	private final @NonNull ReachabilityForest reachabilityForest;
 
 	private @Nullable Set<@NonNull PartitionAnalysis> explicitPredecessors = null;
-	private @Nullable MicroMappingRegion microMappingRegion = null;
-	private @NonNull String namePrefix = "";
-	private @NonNull String symbolSuffix = "";
+	private final @NonNull String namePrefix;
+	private final @NonNull String symbolSuffix;
 
 	public BasicPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull BasicPartition partition,
 			@NonNull ReachabilityForest reachabilityForest, @NonNull String namePrefix, @NonNull String symbolSuffix) {
@@ -62,22 +56,11 @@ public class BasicPartitionAnalysis extends MappingPartitionAnalysis<BasicPartit
 	@Override
 	public void analyzePartition2() {
 		super.analyzePartition2();
-		this.explicitPredecessors = Sets.newHashSet(partitionedTransformationAnalysis.getPartitionAnalyses(QVTscheduleUtil.getExplicitPredecessors(partition)));
-	}
-
-	@Override
-	public @NonNull MappingRegion createMicroMappingRegion() {
-		assert microMappingRegion  == null;
-		assert !(partition.getRegion() instanceof MicroMappingRegion);
-		MicroMappingRegion partialRegion = QVTscheduleFactory.eINSTANCE.createMicroMappingRegion();
-		scheduleManager.addMappingRegion(partialRegion);
-		partialRegion.setMappingRegion((MappingRegion) partition.getRegion());
-		partialRegion.setNamePrefix(namePrefix);
-		partialRegion.setSymbolNameSuffix(symbolSuffix);
-		partialRegion.setName(namePrefix + " " + partition.getRegion().getName());
-		this.microMappingRegion = partialRegion;
-		/*	check(microMappingRegion); */
-		return microMappingRegion;
+		Set<@NonNull PartitionAnalysis> partitionAnalyses = new HashSet<>();
+		for (@NonNull Partition partition : QVTscheduleUtil.getExplicitPredecessors(partition)) {
+			partitionAnalyses.add(partitionedTransformationAnalysis.getPartitionAnalysis(partition));
+		}
+		this.explicitPredecessors = partitionAnalyses;
 	}
 
 	public void merge(@NonNull Map<@NonNull PartitionAnalysis, @Nullable PartitionAnalysis> old2new) {
@@ -91,11 +74,6 @@ public class BasicPartitionAnalysis extends MappingPartitionAnalysis<BasicPartit
 	@Override
 	public @Nullable Set<@NonNull PartitionAnalysis> getExplicitPredecessors() {
 		return explicitPredecessors;
-	}
-
-	@Override
-	public @NonNull MappingRegion getMicroMappingRegion() {
-		return ClassUtil.nonNullState(microMappingRegion);
 	}
 
 	protected @NonNull Iterable<@NonNull Node> getPredecessors(@NonNull Node targetNode) {

@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,8 +22,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
-import com.google.common.collect.Iterables;
 
 public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<CyclicPartition> implements CompositePartitionAnalysis
 {
@@ -61,20 +58,6 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 		super(partitionedTransformationAnalysis, cyclicPartition, partitionAnalysis2predecessors);
 		this.externalPredecessors = externalPredecessors;
 		partitionedTransformationAnalysis.addPartitionAnalysis(this);
-	}
-
-	public @NonNull Iterable<@NonNull MappingRegion> createMicroMappingRegions() {
-		Set<@NonNull PartitionAnalysis> partitionAnalyses = partitionAnalysis2predecessors.keySet();
-		List<@NonNull MappingRegion> microMappingRegions = new ArrayList<>();
-		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {		// FIXME smarter cyclic schedule
-			if (partitionAnalysis instanceof CyclicPartitionAnalysis) {
-				Iterables.addAll(microMappingRegions, ((CyclicPartitionAnalysis)partitionAnalysis).createMicroMappingRegions());
-			}
-			else {
-				microMappingRegions.add(partitionAnalysis.getMicroMappingRegion());
-			}
-		}
-		return microMappingRegions;
 	}
 
 	@Override

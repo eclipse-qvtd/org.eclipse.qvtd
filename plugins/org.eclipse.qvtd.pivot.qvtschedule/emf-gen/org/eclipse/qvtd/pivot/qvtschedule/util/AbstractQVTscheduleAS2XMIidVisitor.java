@@ -243,16 +243,6 @@ implements QVTscheduleVisitor<Boolean>
 	}
 
 	@Override
-	public @Nullable Boolean visitMicroMappingRegion(@NonNull MicroMappingRegion object) {
-		return visitMappingRegion(object);
-	}
-
-	@Override
-	public @Nullable Boolean visitNamedMappingRegion(@NonNull NamedMappingRegion object) {
-		return visitMappingRegion(object);
-	}
-
-	@Override
 	public @Nullable Boolean visitNavigableEdge(@NonNull NavigableEdge object) {
 		return visitEdge(object);
 	}

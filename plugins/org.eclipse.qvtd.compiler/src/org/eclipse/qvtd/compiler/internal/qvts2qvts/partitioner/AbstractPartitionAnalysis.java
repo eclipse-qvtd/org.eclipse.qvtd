@@ -17,7 +17,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
-import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
@@ -56,11 +55,6 @@ public abstract class AbstractPartitionAnalysis<P extends Partition> implements 
 	public void computeCheckedOrEnforcedEdges() {}
 
 	@Override
-	public @NonNull MappingRegion createMicroMappingRegion() {
-		throw new UnsupportedOperationException();
-	}
-
-	@Override
 	public @Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getConsumedTraceClassAnalyses() {
 		throw new UnsupportedOperationException();
 	}
@@ -73,11 +67,6 @@ public abstract class AbstractPartitionAnalysis<P extends Partition> implements 
 	@Override
 	public @Nullable Set<@NonNull PartitionAnalysis> getExplicitPredecessors() {
 		return null;
-	}
-
-	@Override
-	public @NonNull MappingRegion getMicroMappingRegion() {
-		throw new UnsupportedOperationException();		// FIXME
 	}
 
 	@Override

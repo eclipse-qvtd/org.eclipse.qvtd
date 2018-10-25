@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +34,6 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.HorizontalPartitionMerger;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CyclicPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
@@ -45,7 +43,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
-import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
@@ -333,28 +330,28 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		activeRegions.clear();
 		List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule1 = mergePartitionsHorizontally(partitionedTransformationAnalysis, rootPartitionAnalysis.getPartitionSchedule());
 		List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule2 = mergePartitionsVertically(partitionSchedule1);
-		for (@NonNull Set<@NonNull PartitionAnalysis> concurrentPartitions : partitionSchedule2) {
-			List<@NonNull Region> concurrentRegions = new ArrayList<>();
+		/*	for (@NonNull Set<@NonNull PartitionAnalysis> concurrentPartitions : partitionSchedule2) {
+			//	List<@NonNull Region> concurrentRegions = new ArrayList<>();
 			for (@NonNull PartitionAnalysis partitionAnalysis : concurrentPartitions) {
 				Partition partition = partitionAnalysis.getPartition();
 				if (partitionAnalysis instanceof CyclicPartitionAnalysis) {
 					getRegionSchedule(((CyclicPartitionAnalysis)partitionAnalysis));
 					for (@NonNull MappingRegion mappingRegion : ((CyclicPartitionAnalysis)partitionAnalysis).createMicroMappingRegions()) {
 						activeRegions.add(mappingRegion);
-						concurrentRegions.add(mappingRegion);
+						//				concurrentRegions.add(mappingRegion);
 					}
 				}
 				else if (!(partition instanceof LoadingPartition)) {
 					MappingRegion mappingRegion = partitionAnalysis.createMicroMappingRegion();
 					//	scheduleManager.wipAddPartition(partition, mappingRegion);
 					activeRegions.add(mappingRegion);
-					concurrentRegions.add(mappingRegion);
+					//			concurrentRegions.add(mappingRegion);
 				}
 				else {
 					activeRegions.add(partition.getRegion());
 				}
 			}
-		}
+		} */
 		return partitionSchedule2;
 	}
 
@@ -367,7 +364,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		return regionAnalysis;
 	}
 
-	public @NonNull List<@NonNull Collection<@NonNull Region>> getRegionSchedule(@NonNull CyclicPartitionAnalysis cyclicPartitionAnalysis) {
+	/*	public @NonNull List<@NonNull Collection<@NonNull Region>> getRegionSchedule(@NonNull CyclicPartitionAnalysis cyclicPartitionAnalysis) {
 		List<@NonNull Collection<@NonNull Region>> regionSchedule = new ArrayList<>();
 		for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrentPartitions : cyclicPartitionAnalysis.getPartitionSchedule()) {
 			List<@NonNull Region> concurrentRegions = new ArrayList<>();
@@ -385,7 +382,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 			regionSchedule.add(concurrentRegions);
 		}
 		return regionSchedule;
-	}
+	} */
 
 	/*	public @NonNull List<@NonNull Collection<@NonNull Region>> getRegionSchedule2(@NonNull RootPartitionAnalysis rootPartitionAnalysis, @NonNull List<@NonNull Iterable<@NonNull Partition>> partitionSchedule) {
 		ScheduledRegion scheduledRegion = rootPartitionAnalysis.getScheduledRegion();
