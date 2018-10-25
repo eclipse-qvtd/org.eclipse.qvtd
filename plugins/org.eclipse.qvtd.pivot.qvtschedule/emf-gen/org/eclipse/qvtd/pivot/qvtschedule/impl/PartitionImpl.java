@@ -301,6 +301,10 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 	}
 
 	protected void computeSymbolName(@NonNull SymbolNameBuilder sIn) {
+		sIn.appendName(name.replace('«', '_').replace('-', '_').replace(',', '_').replace('»', '_'));
+	}
+
+	protected void computeSymbolName2(@NonNull SymbolNameBuilder sIn) {
 		SymbolNameBuilder s = null;
 		//		List<String> names = new ArrayList<>();
 		//		for (@NonNull MappingAction action : getMappingActions()) {
@@ -574,7 +578,7 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 			computeSymbolName(s2);
 			s1.appendString(getSymbolNamePrefix());
 			s1.appendString(s2.toString());
-			s1.appendString(String.valueOf(getSymbolNameSuffix()));
+			//			s1.appendString(String.valueOf(getSymbolNameSuffix()));
 			ScheduleModel scheduleModel = QVTscheduleUtil.basicGetContainingScheduleModel(QVTscheduleUtil.getRegion(this));
 			if (scheduleModel != null) {
 				symbolName2 = scheduleModel.reserveSymbolName(s1, this);

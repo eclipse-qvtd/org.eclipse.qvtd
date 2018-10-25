@@ -48,7 +48,7 @@ public class RootPartitionAnalysis extends AbstractCompositePartitionAnalysis<Ro
 	@Override
 	protected @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> createPartitionSchedule() {
 		List<@NonNull Set<@NonNull PartitionAnalysis>> flatPartitionSchedule;
-		List<@NonNull Set<@NonNull PartitionAnalysis>> parallelSchedule = CompilerUtil.computeParallelSchedule(partitionAnalysis2predecessors);
+		List<@NonNull Set<@NonNull PartitionAnalysis>> parallelSchedule = CompilerUtil.computeParallelSchedule(originalPartitionAnalysis2predecessors);
 		flatPartitionSchedule = new ArrayList<>();
 		for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrency : parallelSchedule) {
 			Set<@NonNull PartitionAnalysis> flatConcurrency = new HashSet<>();

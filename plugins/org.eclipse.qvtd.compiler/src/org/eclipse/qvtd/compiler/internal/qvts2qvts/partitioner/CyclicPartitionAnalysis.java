@@ -84,9 +84,8 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 		//
 		// The cyclic schedule is therefore {base-cases}, {recursing-steps}... {recursive-cases}
 		//
-		Set<@NonNull PartitionAnalysis> keys = partitionAnalysis2predecessors.keySet();
-		List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule = Collections.singletonList(keys); //CompilerUtil.computeParallelSchedule(partition2predecessors);
-		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalysis2predecessors.keySet()) {
+		List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule = Collections.singletonList(partitionAnalyses); //CompilerUtil.computeParallelSchedule(partition2predecessors);
+		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {
 			if (partitionAnalysis instanceof CompositePartitionAnalysis) {
 				((CompositePartitionAnalysis)partitionAnalysis).getPartitionSchedule();
 			}

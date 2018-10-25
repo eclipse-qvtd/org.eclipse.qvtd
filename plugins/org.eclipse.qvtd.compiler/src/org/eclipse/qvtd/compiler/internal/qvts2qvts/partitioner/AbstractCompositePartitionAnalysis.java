@@ -17,21 +17,23 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 
 public abstract class AbstractCompositePartitionAnalysis<P extends CompositePartition> extends AbstractPartitionAnalysis<P> implements CompositePartitionAnalysis
 {
-	protected final @NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partitionAnalysis2predecessors;
+	protected final @NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> originalPartitionAnalysis2predecessors;
+	protected final @NonNull Set<@NonNull PartitionAnalysis> partitionAnalyses;
 	private @Nullable List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule = null;
 
 	protected AbstractCompositePartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull P controlPartition,
 			@NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partitionAnalysis2predecessors) {
 		super(partitionedTransformationAnalysis, controlPartition);
-		this.partitionAnalysis2predecessors = partitionAnalysis2predecessors;
-		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalysis2predecessors.keySet()) {
-			controlPartition.getOwnedMappingPartitions().add((MappingPartition) partitionAnalysis.getPartition());
+		this.originalPartitionAnalysis2predecessors = partitionAnalysis2predecessors;
+		this.partitionAnalyses = new HashSet<>(partitionAnalysis2predecessors.keySet());
+		List<MappingPartition> ownedMappingPartitions = controlPartition.getOwnedMappingPartitions();
+		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {
+			ownedMappingPartitions.add((MappingPartition) partitionAnalysis.getPartition());
 		}
 	}
 
@@ -39,7 +41,7 @@ public abstract class AbstractCompositePartitionAnalysis<P extends CompositePart
 
 	@Override
 	public @NonNull Iterable<@NonNull PartitionAnalysis> getPartitionAnalyses() {
-		return partitionAnalysis2predecessors.keySet();
+		return partitionAnalyses;
 	}
 
 	@Override
@@ -52,11 +54,22 @@ public abstract class AbstractCompositePartitionAnalysis<P extends CompositePart
 	}
 
 	public void merge(@NonNull Map<@NonNull PartitionAnalysis, @Nullable PartitionAnalysis> old2new) {
-		Set<@NonNull PartitionAnalysis> oldKeys = partitionAnalysis2predecessors.keySet();
+		/*		Set<@NonNull PartitionAnalysis> oldKeys = partitionAnalysis2predecessors.keySet();
 		if (QVTbaseUtil.containsAny(oldKeys, old2new.keySet())) {
 			Set<@NonNull PartitionAnalysis> keys = new HashSet<>(oldKeys);
 
 			// TODO Auto-generated method stub
+		} */
+		List<MappingPartition> ownedMappingPartitions = partition.getOwnedMappingPartitions();
+		for (@NonNull PartitionAnalysis oldPartitionAnalysis : new HashSet<>(old2new.keySet())) {
+			boolean wasRemoved = partitionAnalyses.remove(oldPartitionAnalysis);
+			assert wasRemoved;
+			assert !ownedMappingPartitions.contains(oldPartitionAnalysis.getPartition());
+			PartitionAnalysis newPartitionAnalysis = old2new.get(oldPartitionAnalysis);
+			if (newPartitionAnalysis != null) {
+				partitionAnalyses.add(newPartitionAnalysis);
+				assert ownedMappingPartitions.contains(newPartitionAnalysis.getPartition());
+			}
 		}
 
 	}

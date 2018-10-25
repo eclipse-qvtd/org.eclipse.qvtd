@@ -245,8 +245,8 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 	}
 
 	@Override
-	protected void computeSymbolName(@NonNull SymbolNameBuilder s) {
-		s.appendString(QVTscheduleUtil.ROOT_MAPPING_NAME);
+	protected void computeSymbolName(@NonNull SymbolNameBuilder sIn) {
+		sIn.appendName(name.replace('«', '_').replace('-', '_').replace(',', '_').replace('»', '_'));
 	}
 
 	@Override
