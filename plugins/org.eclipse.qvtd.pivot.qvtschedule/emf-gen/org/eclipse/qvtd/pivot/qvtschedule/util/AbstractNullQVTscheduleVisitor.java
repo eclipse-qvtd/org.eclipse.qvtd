@@ -232,6 +232,11 @@ public abstract class AbstractNullQVTscheduleVisitor<@Nullable R, C>
 	}
 
 	@Override
+	public R visitMergedPartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MergedPartition object) {
+		return null;
+	}
+
+	@Override
 	public R visitMicroMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MicroMappingRegion object) {
 		return null;
 	}

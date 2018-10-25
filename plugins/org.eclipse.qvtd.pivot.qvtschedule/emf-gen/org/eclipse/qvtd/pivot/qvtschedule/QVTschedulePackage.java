@@ -238,7 +238,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRole()
 	 * @generated
 	 */
-	int ROLE = 77;
+	int ROLE = 78;
 
 	/**
 	 * The meta object id for the '<em>Number</em>' data type.
@@ -248,7 +248,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNumber()
 	 * @generated
 	 */
-	int NUMBER = 78;
+	int NUMBER = 79;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NavigableEdgeImpl <em>Navigable Edge</em>}' class.
@@ -258,7 +258,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNavigableEdge()
 	 * @generated
 	 */
-	int NAVIGABLE_EDGE = 41;
+	int NAVIGABLE_EDGE = 42;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeImpl <em>Node</em>}' class.
@@ -268,7 +268,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNode()
 	 * @generated
 	 */
-	int NODE = 43;
+	int NODE = 44;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.NodeConnectionImpl <em>Node Connection</em>}' class.
@@ -278,7 +278,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNodeConnection()
 	 * @generated
 	 */
-	int NODE_CONNECTION = 44;
+	int NODE_CONNECTION = 45;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationRegionImpl <em>Operation Region</em>}' class.
@@ -288,7 +288,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationRegion()
 	 * @generated
 	 */
-	int OPERATION_REGION = 50;
+	int OPERATION_REGION = 51;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PropertyDatumImpl <em>Property Datum</em>}' class.
@@ -298,7 +298,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPropertyDatum()
 	 * @generated
 	 */
-	int PROPERTY_DATUM = 57;
+	int PROPERTY_DATUM = 58;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RegionImpl <em>Region</em>}' class.
@@ -308,7 +308,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRegion()
 	 * @generated
 	 */
-	int REGION = 59;
+	int REGION = 60;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MappingRegionImpl <em>Mapping Region</em>}' class.
@@ -328,7 +328,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNavigationEdge()
 	 * @generated
 	 */
-	int NAVIGATION_EDGE = 42;
+	int NAVIGATION_EDGE = 43;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.CastEdgeImpl <em>Cast Edge</em>}' class.
@@ -398,7 +398,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getVariableNode()
 	 * @generated
 	 */
-	int VARIABLE_NODE = 74;
+	int VARIABLE_NODE = 75;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.IteratorNodeImpl <em>Iterator Node</em>}' class.
@@ -428,7 +428,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getMicroMappingRegion()
 	 * @generated
 	 */
-	int MICRO_MAPPING_REGION = 39;
+	int MICRO_MAPPING_REGION = 40;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.LoadingRegionImpl <em>Loading Region</em>}' class.
@@ -448,7 +448,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNamedMappingRegion()
 	 * @generated
 	 */
-	int NAMED_MAPPING_REGION = 40;
+	int NAMED_MAPPING_REGION = 41;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.OperationNodeImpl <em>Operation Node</em>}' class.
@@ -458,7 +458,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationNode()
 	 * @generated
 	 */
-	int OPERATION_NODE = 49;
+	int OPERATION_NODE = 50;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PatternTypedNodeImpl <em>Pattern Typed Node</em>}' class.
@@ -468,7 +468,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPatternTypedNode()
 	 * @generated
 	 */
-	int PATTERN_TYPED_NODE = 54;
+	int PATTERN_TYPED_NODE = 55;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PatternVariableNodeImpl <em>Pattern Variable Node</em>}' class.
@@ -478,7 +478,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPatternVariableNode()
 	 * @generated
 	 */
-	int PATTERN_VARIABLE_NODE = 55;
+	int PATTERN_VARIABLE_NODE = 56;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.PredicateEdgeImpl <em>Predicate Edge</em>}' class.
@@ -488,7 +488,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPredicateEdge()
 	 * @generated
 	 */
-	int PREDICATE_EDGE = 56;
+	int PREDICATE_EDGE = 57;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RecursionEdgeImpl <em>Recursion Edge</em>}' class.
@@ -498,7 +498,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRecursionEdge()
 	 * @generated
 	 */
-	int RECURSION_EDGE = 58;
+	int RECURSION_EDGE = 59;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl <em>Rule Region</em>}' class.
@@ -508,7 +508,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRuleRegion()
 	 * @generated
 	 */
-	int RULE_REGION = 61;
+	int RULE_REGION = 62;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduleModelImpl <em>Schedule Model</em>}' class.
@@ -518,7 +518,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getScheduleModel()
 	 * @generated
 	 */
-	int SCHEDULE_MODEL = 62;
+	int SCHEDULE_MODEL = 63;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.ScheduledRegionImpl <em>Scheduled Region</em>}' class.
@@ -528,7 +528,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getScheduledRegion()
 	 * @generated
 	 */
-	int SCHEDULED_REGION = 63;
+	int SCHEDULED_REGION = 64;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.Symbolable <em>Symbolable</em>}' class.
@@ -538,7 +538,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getSymbolable()
 	 * @generated
 	 */
-	int SYMBOLABLE = 69;
+	int SYMBOLABLE = 70;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.UnknownNodeImpl <em>Unknown Node</em>}' class.
@@ -548,7 +548,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getUnknownNode()
 	 * @generated
 	 */
-	int UNKNOWN_NODE = 73;
+	int UNKNOWN_NODE = 74;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.KeyedValueNodeImpl <em>Keyed Value Node</em>}' class.
@@ -966,7 +966,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getPartition()
 	 * @generated
 	 */
-	int PARTITION = 53;
+	int PARTITION = 54;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -1502,13 +1502,22 @@ public interface QVTschedulePackage extends EPackage {
 	int BASIC_PARTITION__SPECULATION_NODES = MAPPING_PARTITION_FEATURE_COUNT + 14;
 
 	/**
+	 * The feature id for the '<em><b>Owning Merged Partition</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BASIC_PARTITION__OWNING_MERGED_PARTITION = MAPPING_PARTITION_FEATURE_COUNT + 15;
+
+	/**
 	 * The number of structural features of the '<em>Basic Partition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BASIC_PARTITION_FEATURE_COUNT = MAPPING_PARTITION_FEATURE_COUNT + 15;
+	int BASIC_PARTITION_FEATURE_COUNT = MAPPING_PARTITION_FEATURE_COUNT + 16;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -7559,6 +7568,322 @@ public interface QVTschedulePackage extends EPackage {
 	int MAP_PART_NODE_OPERATION_COUNT = OPERATION_NODE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MergedPartitionImpl <em>Merged Partition</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.MergedPartitionImpl
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getMergedPartition()
+	 * @generated
+	 */
+	int MERGED_PARTITION = 39;
+
+	/**
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__ANNOTATING_COMMENTS = BASIC_PARTITION__ANNOTATING_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__OWNED_ANNOTATIONS = BASIC_PARTITION__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__OWNED_COMMENTS = BASIC_PARTITION__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__OWNED_EXTENSIONS = BASIC_PARTITION__OWNED_EXTENSIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__NAME = BASIC_PARTITION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Passes</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__PASSES = BASIC_PARTITION__PASSES;
+
+	/**
+	 * The feature id for the '<em><b>Intermediate Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__INTERMEDIATE_CONNECTIONS = BASIC_PARTITION__INTERMEDIATE_CONNECTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Root Connections</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__ROOT_CONNECTIONS = BASIC_PARTITION__ROOT_CONNECTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Composite Partition</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__OWNING_COMPOSITE_PARTITION = BASIC_PARTITION__OWNING_COMPOSITE_PARTITION;
+
+	/**
+	 * The feature id for the '<em><b>Refered Mapping Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__REFERED_MAPPING_REGION = BASIC_PARTITION__REFERED_MAPPING_REGION;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__REGION = BASIC_PARTITION__REGION;
+
+	/**
+	 * The feature id for the '<em><b>Root Partition</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__ROOT_PARTITION = BASIC_PARTITION__ROOT_PARTITION;
+
+	/**
+	 * The feature id for the '<em><b>Explicit Successors</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__EXPLICIT_SUCCESSORS = BASIC_PARTITION__EXPLICIT_SUCCESSORS;
+
+	/**
+	 * The feature id for the '<em><b>Constant Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__CONSTANT_EDGES = BASIC_PARTITION__CONSTANT_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Constant Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__CONSTANT_NODES = BASIC_PARTITION__CONSTANT_NODES;
+
+	/**
+	 * The feature id for the '<em><b>Constant Success False Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__CONSTANT_SUCCESS_FALSE_NODES = BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES;
+
+	/**
+	 * The feature id for the '<em><b>Constant Success True Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__CONSTANT_SUCCESS_TRUE_NODES = BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES;
+
+	/**
+	 * The feature id for the '<em><b>Explicit Predecessors</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__EXPLICIT_PREDECESSORS = BASIC_PARTITION__EXPLICIT_PREDECESSORS;
+
+	/**
+	 * The feature id for the '<em><b>Head Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__HEAD_NODES = BASIC_PARTITION__HEAD_NODES;
+
+	/**
+	 * The feature id for the '<em><b>Loaded Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__LOADED_EDGES = BASIC_PARTITION__LOADED_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Loaded Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__LOADED_NODES = BASIC_PARTITION__LOADED_NODES;
+
+	/**
+	 * The feature id for the '<em><b>Predicated Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__PREDICATED_EDGES = BASIC_PARTITION__PREDICATED_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Predicated Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__PREDICATED_NODES = BASIC_PARTITION__PREDICATED_NODES;
+
+	/**
+	 * The feature id for the '<em><b>Realized Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__REALIZED_EDGES = BASIC_PARTITION__REALIZED_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Realized Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__REALIZED_NODES = BASIC_PARTITION__REALIZED_NODES;
+
+	/**
+	 * The feature id for the '<em><b>Speculated Edges</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__SPECULATED_EDGES = BASIC_PARTITION__SPECULATED_EDGES;
+
+	/**
+	 * The feature id for the '<em><b>Speculated Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__SPECULATED_NODES = BASIC_PARTITION__SPECULATED_NODES;
+
+	/**
+	 * The feature id for the '<em><b>Speculation Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__SPECULATION_NODES = BASIC_PARTITION__SPECULATION_NODES;
+
+	/**
+	 * The feature id for the '<em><b>Owning Merged Partition</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__OWNING_MERGED_PARTITION = BASIC_PARTITION__OWNING_MERGED_PARTITION;
+
+	/**
+	 * The feature id for the '<em><b>Owned Merged Partitions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION__OWNED_MERGED_PARTITIONS = BASIC_PARTITION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Merged Partition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION_FEATURE_COUNT = BASIC_PARTITION_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>All Owned Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION___ALL_OWNED_ELEMENTS = BASIC_PARTITION___ALL_OWNED_ELEMENTS;
+
+	/**
+	 * The operation id for the '<em>Get Value</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION___GET_VALUE__TYPE_STRING = BASIC_PARTITION___GET_VALUE__TYPE_STRING;
+
+	/**
+	 * The number of operations of the '<em>Merged Partition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MERGED_PARTITION_OPERATION_COUNT = BASIC_PARTITION_OPERATION_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8259,7 +8584,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNonPartition()
 	 * @generated
 	 */
-	int NON_PARTITION = 45;
+	int NON_PARTITION = 46;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -8422,7 +8747,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNullLiteralNode()
 	 * @generated
 	 */
-	int NULL_LITERAL_NODE = 46;
+	int NULL_LITERAL_NODE = 47;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -8594,7 +8919,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getNumericLiteralNode()
 	 * @generated
 	 */
-	int NUMERIC_LITERAL_NODE = 47;
+	int NUMERIC_LITERAL_NODE = 48;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -8775,7 +9100,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationCallNode()
 	 * @generated
 	 */
-	int OPERATION_CALL_NODE = 48;
+	int OPERATION_CALL_NODE = 49;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -9127,7 +9452,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationParameterEdge()
 	 * @generated
 	 */
-	int OPERATION_PARAMETER_EDGE = 51;
+	int OPERATION_PARAMETER_EDGE = 52;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -9281,7 +9606,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getOperationSelfEdge()
 	 * @generated
 	 */
-	int OPERATION_SELF_EDGE = 52;
+	int OPERATION_SELF_EDGE = 53;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -10155,7 +10480,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getRootPartition()
 	 * @generated
 	 */
-	int ROOT_PARTITION = 60;
+	int ROOT_PARTITION = 61;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -10642,7 +10967,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getShadowNode()
 	 * @generated
 	 */
-	int SHADOW_NODE = 64;
+	int SHADOW_NODE = 65;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -10814,7 +11139,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getShadowPartEdge()
 	 * @generated
 	 */
-	int SHADOW_PART_EDGE = 65;
+	int SHADOW_PART_EDGE = 66;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -10959,7 +11284,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getStringLiteralNode()
 	 * @generated
 	 */
-	int STRING_LITERAL_NODE = 66;
+	int STRING_LITERAL_NODE = 67;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -11140,7 +11465,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getSuccessEdge()
 	 * @generated
 	 */
-	int SUCCESS_EDGE = 67;
+	int SUCCESS_EDGE = 68;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -11330,7 +11655,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getSuccessNode()
 	 * @generated
 	 */
-	int SUCCESS_NODE = 68;
+	int SUCCESS_NODE = 69;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -11529,7 +11854,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getTupleLiteralNode()
 	 * @generated
 	 */
-	int TUPLE_LITERAL_NODE = 70;
+	int TUPLE_LITERAL_NODE = 71;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -11701,7 +12026,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getTuplePartEdge()
 	 * @generated
 	 */
-	int TUPLE_PART_EDGE = 71;
+	int TUPLE_PART_EDGE = 72;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -11846,7 +12171,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getTypeLiteralNode()
 	 * @generated
 	 */
-	int TYPE_LITERAL_NODE = 72;
+	int TYPE_LITERAL_NODE = 73;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -12189,7 +12514,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getVerdictRegion()
 	 * @generated
 	 */
-	int VERDICT_REGION = 75;
+	int VERDICT_REGION = 76;
 
 	/**
 	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
@@ -12370,7 +12695,7 @@ public interface QVTschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getConnectionRole()
 	 * @generated
 	 */
-	int CONNECTION_ROLE = 76;
+	int CONNECTION_ROLE = 77;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum <em>Abstract Datum</em>}'.
@@ -12566,6 +12891,17 @@ public interface QVTschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBasicPartition_SpeculationNodes();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getOwningMergedPartition <em>Owning Merged Partition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Merged Partition</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getOwningMergedPartition()
+	 * @see #getBasicPartition()
+	 * @generated
+	 */
+	EReference getBasicPartition_OwningMergedPartition();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getExplicitPredecessors <em>Explicit Predecessors</em>}'.
@@ -13839,6 +14175,27 @@ public interface QVTschedulePackage extends EPackage {
 	EReference getMappingRegion_OwningScheduleModel();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.MergedPartition <em>Merged Partition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Merged Partition</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MergedPartition
+	 * @generated
+	 */
+	EClass getMergedPartition();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtschedule.MergedPartition#getOwnedMergedPartitions <em>Owned Merged Partitions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Merged Partitions</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MergedPartition#getOwnedMergedPartitions()
+	 * @see #getMergedPartition()
+	 * @generated
+	 */
+	EReference getMergedPartition_OwnedMergedPartitions();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion <em>Micro Mapping Region</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -14779,6 +15136,14 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference BASIC_PARTITION__SPECULATION_NODES = eINSTANCE.getBasicPartition_SpeculationNodes();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Merged Partition</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BASIC_PARTITION__OWNING_MERGED_PARTITION = eINSTANCE.getBasicPartition_OwningMergedPartition();
 
 		/**
 		 * The meta object literal for the '<em><b>Explicit Predecessors</b></em>' reference list feature.
@@ -15845,6 +16210,24 @@ public interface QVTschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_REGION__OWNING_SCHEDULE_MODEL = eINSTANCE.getMappingRegion_OwningScheduleModel();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MergedPartitionImpl <em>Merged Partition</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.MergedPartitionImpl
+		 * @see org.eclipse.qvtd.pivot.qvtschedule.impl.QVTschedulePackageImpl#getMergedPartition()
+		 * @generated
+		 */
+		EClass MERGED_PARTITION = eINSTANCE.getMergedPartition();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Merged Partitions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MERGED_PARTITION__OWNED_MERGED_PARTITIONS = eINSTANCE.getMergedPartition_OwnedMergedPartitions();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtschedule.impl.MicroMappingRegionImpl <em>Micro Mapping Region</em>}' class.

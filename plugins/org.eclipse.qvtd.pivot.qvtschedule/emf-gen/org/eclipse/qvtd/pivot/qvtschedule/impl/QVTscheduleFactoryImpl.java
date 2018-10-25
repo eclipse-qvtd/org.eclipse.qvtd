@@ -98,6 +98,7 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 			case QVTschedulePackage.MAP_LITERAL_NODE: return createMapLiteralNode();
 			case QVTschedulePackage.MAP_PART_EDGE: return createMapPartEdge();
 			case QVTschedulePackage.MAP_PART_NODE: return createMapPartNode();
+			case QVTschedulePackage.MERGED_PARTITION: return createMergedPartition();
 			case QVTschedulePackage.MICRO_MAPPING_REGION: return createMicroMappingRegion();
 			case QVTschedulePackage.NAMED_MAPPING_REGION: return createNamedMappingRegion();
 			case QVTschedulePackage.NAVIGATION_EDGE: return createNavigationEdge();
@@ -488,6 +489,17 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	public @NonNull MapPartNode createMapPartNode() {
 		MapPartNodeImpl mapPartNode = new MapPartNodeImpl();
 		return mapPartNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public @NonNull MergedPartition createMergedPartition() {
+		MergedPartitionImpl mergedPartition = new MergedPartitionImpl();
+		return mergedPartition;
 	}
 
 	/**

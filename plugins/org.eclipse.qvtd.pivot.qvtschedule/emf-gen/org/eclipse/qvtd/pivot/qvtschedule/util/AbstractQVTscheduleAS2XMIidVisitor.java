@@ -238,6 +238,11 @@ implements QVTscheduleVisitor<Boolean>
 	}
 
 	@Override
+	public @Nullable Boolean visitMergedPartition(@NonNull MergedPartition object) {
+		return visitBasicPartition(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitMicroMappingRegion(@NonNull MicroMappingRegion object) {
 		return visitMappingRegion(object);
 	}

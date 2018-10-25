@@ -456,6 +456,17 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTschedulePackage.MERGED_PARTITION: {
+				MergedPartition mergedPartition = (MergedPartition)theEObject;
+				T result = caseMergedPartition(mergedPartition);
+				if (result == null) result = caseBasicPartition(mergedPartition);
+				if (result == null) result = caseMappingPartition(mergedPartition);
+				if (result == null) result = casePartition(mergedPartition);
+				if (result == null) result = caseNamedElement(mergedPartition);
+				if (result == null) result = caseElement(mergedPartition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTschedulePackage.MICRO_MAPPING_REGION: {
 				MicroMappingRegion microMappingRegion = (MicroMappingRegion)theEObject;
 				T result = caseMicroMappingRegion(microMappingRegion);
@@ -1620,6 +1631,21 @@ public class QVTscheduleSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMappingRegion(MappingRegion object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Merged Partition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Merged Partition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMergedPartition(MergedPartition object) {
 		return null;
 	}
 

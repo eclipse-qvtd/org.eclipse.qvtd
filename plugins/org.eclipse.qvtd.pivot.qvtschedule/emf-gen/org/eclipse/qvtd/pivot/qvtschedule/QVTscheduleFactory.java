@@ -296,6 +296,15 @@ public interface QVTscheduleFactory extends EFactory {
 	@NonNull MapPartNode createMapPartNode();
 
 	/**
+	 * Returns a new object of class '<em>Merged Partition</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Merged Partition</em>'.
+	 * @generated
+	 */
+	@NonNull MergedPartition createMergedPartition();
+
+	/**
 	 * Returns a new object of class '<em>Micro Mapping Region</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

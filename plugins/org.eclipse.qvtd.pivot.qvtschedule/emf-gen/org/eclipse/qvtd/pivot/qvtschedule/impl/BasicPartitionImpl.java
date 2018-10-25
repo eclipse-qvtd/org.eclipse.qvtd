@@ -18,12 +18,15 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -32,6 +35,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.MergedPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -61,6 +65,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getSpeculatedEdges <em>Speculated Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getSpeculatedNodes <em>Speculated Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getSpeculationNodes <em>Speculation Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.impl.BasicPartitionImpl#getOwningMergedPartition <em>Owning Merged Partition</em>}</li>
  * </ul>
  *
  * @generated
@@ -462,12 +467,59 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public MergedPartition getOwningMergedPartition() {
+		if (eContainerFeatureID() != QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION) return null;
+		return (MergedPartition)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwningMergedPartition(MergedPartition newOwningMergedPartition, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningMergedPartition, QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwningMergedPartition(MergedPartition newOwningMergedPartition) {
+		if (newOwningMergedPartition != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION && newOwningMergedPartition != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningMergedPartition))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newOwningMergedPartition != null)
+				msgs = ((InternalEObject)newOwningMergedPartition).eInverseAdd(this, QVTschedulePackage.MERGED_PARTITION__OWNED_MERGED_PARTITIONS, MergedPartition.class, msgs);
+			msgs = basicSetOwningMergedPartition(newOwningMergedPartition, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION, newOwningMergedPartition, newOwningMergedPartition));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTschedulePackage.BASIC_PARTITION__EXPLICIT_PREDECESSORS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExplicitPredecessors()).basicAdd(otherEnd, msgs);
+			case QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetOwningMergedPartition((MergedPartition)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -482,8 +534,24 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 		switch (featureID) {
 			case QVTschedulePackage.BASIC_PARTITION__EXPLICIT_PREDECESSORS:
 				return ((InternalEList<?>)getExplicitPredecessors()).basicRemove(otherEnd, msgs);
+			case QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION:
+				return basicSetOwningMergedPartition(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
+		switch (eContainerFeatureID()) {
+			case QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION:
+				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.MERGED_PARTITION__OWNED_MERGED_PARTITIONS, MergedPartition.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -537,6 +605,8 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 				return getSpeculatedNodes();
 			case QVTschedulePackage.BASIC_PARTITION__SPECULATION_NODES:
 				return getSpeculationNodes();
+			case QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION:
+				return getOwningMergedPartition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -610,6 +680,9 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 				getSpeculationNodes().clear();
 				getSpeculationNodes().addAll((Collection<? extends Node>)newValue);
 				return;
+			case QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION:
+				setOwningMergedPartition((MergedPartition)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -667,6 +740,9 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 			case QVTschedulePackage.BASIC_PARTITION__SPECULATION_NODES:
 				getSpeculationNodes().clear();
 				return;
+			case QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION:
+				setOwningMergedPartition((MergedPartition)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -709,6 +785,8 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 				return speculatedNodes != null && !speculatedNodes.isEmpty();
 			case QVTschedulePackage.BASIC_PARTITION__SPECULATION_NODES:
 				return speculationNodes != null && !speculationNodes.isEmpty();
+			case QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION:
+				return getOwningMergedPartition() != null;
 		}
 		return super.eIsSet(featureID);
 	}

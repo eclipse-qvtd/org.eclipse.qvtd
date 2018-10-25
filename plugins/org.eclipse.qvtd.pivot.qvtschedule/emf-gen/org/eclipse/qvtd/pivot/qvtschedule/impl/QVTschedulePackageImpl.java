@@ -66,6 +66,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.MapPartNode;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingNode;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.MergedPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MicroMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NamedMappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -510,6 +511,13 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass mergedPartitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass microMappingRegionEClass = null;
 
 	/**
@@ -909,6 +917,16 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	@Override
 	public EReference getBasicPartition_SpeculationNodes() {
 		return (EReference)basicPartitionEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getBasicPartition_OwningMergedPartition() {
+		return (EReference)basicPartitionEClass.getEStructuralFeatures().get(15);
 	}
 
 	/**
@@ -2117,6 +2135,26 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 	 * @generated
 	 */
 	@Override
+	public EClass getMergedPartition() {
+		return mergedPartitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getMergedPartition_OwnedMergedPartitions() {
+		return (EReference)mergedPartitionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getMicroMappingRegion() {
 		return microMappingRegionEClass;
 	}
@@ -2881,6 +2919,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEReference(basicPartitionEClass, BASIC_PARTITION__SPECULATED_EDGES);
 		createEReference(basicPartitionEClass, BASIC_PARTITION__SPECULATED_NODES);
 		createEReference(basicPartitionEClass, BASIC_PARTITION__SPECULATION_NODES);
+		createEReference(basicPartitionEClass, BASIC_PARTITION__OWNING_MERGED_PARTITION);
 
 		booleanLiteralNodeEClass = createEClass(BOOLEAN_LITERAL_NODE);
 		createEAttribute(booleanLiteralNodeEClass, BOOLEAN_LITERAL_NODE__BOOLEAN_VALUE);
@@ -3002,6 +3041,9 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		createEReference(mappingRegionEClass, MAPPING_REGION__HEAD_NODES);
 		createEReference(mappingRegionEClass, MAPPING_REGION__MAPPING_PARTITIONS);
 		createEReference(mappingRegionEClass, MAPPING_REGION__OWNING_SCHEDULE_MODEL);
+
+		mergedPartitionEClass = createEClass(MERGED_PARTITION);
+		createEReference(mergedPartitionEClass, MERGED_PARTITION__OWNED_MERGED_PARTITIONS);
 
 		microMappingRegionEClass = createEClass(MICRO_MAPPING_REGION);
 		createEReference(microMappingRegionEClass, MICRO_MAPPING_REGION__MAPPING_REGION);
@@ -3224,6 +3266,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		mappingNodeEClass.getESuperTypes().add(this.getNode());
 		mappingPartitionEClass.getESuperTypes().add(this.getPartition());
 		mappingRegionEClass.getESuperTypes().add(this.getRegion());
+		mergedPartitionEClass.getESuperTypes().add(this.getBasicPartition());
 		microMappingRegionEClass.getESuperTypes().add(this.getMappingRegion());
 		namedMappingRegionEClass.getESuperTypes().add(this.getMappingRegion());
 		navigableEdgeEClass.getESuperTypes().add(this.getEdge());
@@ -3286,6 +3329,7 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEReference(getBasicPartition_SpeculatedEdges(), this.getEdge(), null, "speculatedEdges", null, 0, -1, BasicPartition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getBasicPartition_SpeculatedNodes(), this.getNode(), null, "speculatedNodes", null, 0, -1, BasicPartition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getBasicPartition_SpeculationNodes(), this.getNode(), null, "speculationNodes", null, 0, -1, BasicPartition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getBasicPartition_OwningMergedPartition(), this.getMergedPartition(), this.getMergedPartition_OwnedMergedPartitions(), "owningMergedPartition", null, 0, 1, BasicPartition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(booleanLiteralNodeEClass, BooleanLiteralNode.class, "BooleanLiteralNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBooleanLiteralNode_BooleanValue(), thePivotPackage.getBoolean(), "booleanValue", null, 1, 1, BooleanLiteralNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3407,6 +3451,9 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		initEReference(getMappingRegion_HeadNodes(), this.getNode(), null, "headNodes", null, 0, -1, MappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingRegion_MappingPartitions(), this.getMappingPartition(), this.getMappingPartition_ReferedMappingRegion(), "mappingPartitions", null, 0, -1, MappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingRegion_OwningScheduleModel(), this.getScheduleModel(), this.getScheduleModel_OwnedMappingRegions(), "owningScheduleModel", null, 0, 1, MappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(mergedPartitionEClass, MergedPartition.class, "MergedPartition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMergedPartition_OwnedMergedPartitions(), this.getBasicPartition(), this.getBasicPartition_OwningMergedPartition(), "ownedMergedPartitions", null, 0, -1, MergedPartition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(microMappingRegionEClass, MicroMappingRegion.class, "MicroMappingRegion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMicroMappingRegion_MappingRegion(), this.getMappingRegion(), null, "mappingRegion", null, 1, 1, MicroMappingRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

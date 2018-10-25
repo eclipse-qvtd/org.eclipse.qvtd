@@ -228,6 +228,11 @@ public abstract class AbstractDelegatingQVTscheduleVisitor<R, C, @NonNull D exte
 	}
 
 	@Override
+	public R visitMergedPartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MergedPartition object) {
+		return delegate.visitMergedPartition(object);
+	}
+
+	@Override
 	public R visitMicroMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MicroMappingRegion object) {
 		return delegate.visitMicroMappingRegion(object);
 	}

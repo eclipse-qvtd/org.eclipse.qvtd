@@ -237,6 +237,11 @@ public abstract class AbstractQVTscheduleTemplateParameterSubstitutionVisitor
 	}
 
 	@Override
+	public @Nullable Object visitMergedPartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MergedPartition object) {
+		return visitBasicPartition(object);
+	}
+
+	@Override
 	public @Nullable Object visitMicroMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MicroMappingRegion object) {
 		return visitMappingRegion(object);
 	}

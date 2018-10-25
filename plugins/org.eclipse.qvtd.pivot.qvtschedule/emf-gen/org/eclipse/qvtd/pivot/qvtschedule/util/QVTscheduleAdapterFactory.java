@@ -238,6 +238,10 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createMappingRegionAdapter();
 			}
 			@Override
+			public Adapter caseMergedPartition(MergedPartition object) {
+				return createMergedPartitionAdapter();
+			}
+			@Override
 			public Adapter caseMicroMappingRegion(MicroMappingRegion object) {
 				return createMicroMappingRegionAdapter();
 			}
@@ -1160,6 +1164,20 @@ public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMappingRegionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtschedule.MergedPartition <em>Merged Partition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MergedPartition
+	 * @generated
+	 */
+	public Adapter createMergedPartitionAdapter() {
 		return null;
 	}
 

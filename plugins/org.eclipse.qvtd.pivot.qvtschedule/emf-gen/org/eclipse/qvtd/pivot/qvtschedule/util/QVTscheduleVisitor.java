@@ -64,6 +64,7 @@ public interface QVTscheduleVisitor<R> extends org.eclipse.qvtd.pivot.qvtbase.ut
 	R visitMappingNode(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingNode object);
 	R visitMappingPartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingPartition object);
 	R visitMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MappingRegion object);
+	R visitMergedPartition(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MergedPartition object);
 	R visitMicroMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull MicroMappingRegion object);
 	R visitNamedMappingRegion(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NamedMappingRegion object);
 	R visitNavigableEdge(org.eclipse.qvtd.pivot.qvtschedule.@NonNull NavigableEdge object);

@@ -44,6 +44,7 @@ import org.eclipse.jdt.annotation.Nullable;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getSpeculatedEdges <em>Speculated Edges</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getSpeculatedNodes <em>Speculated Nodes</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getSpeculationNodes <em>Speculation Nodes</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getOwningMergedPartition <em>Owning Merged Partition</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicPartition()
@@ -290,6 +291,35 @@ public interface BasicPartition extends MappingPartition {
 	 * @generated
 	 */
 	List<Node> getSpeculationNodes();
+
+	/**
+	 * Returns the value of the '<em><b>Owning Merged Partition</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtschedule.MergedPartition#getOwnedMergedPartitions <em>Owned Merged Partitions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owning Merged Partition</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owning Merged Partition</em>' container reference.
+	 * @see #setOwningMergedPartition(MergedPartition)
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage#getBasicPartition_OwningMergedPartition()
+	 * @see org.eclipse.qvtd.pivot.qvtschedule.MergedPartition#getOwnedMergedPartitions
+	 * @model opposite="ownedMergedPartitions" transient="false"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2017/QVTschedule!BasicPartition!owningMergedPartition'"
+	 * @generated
+	 */
+	MergedPartition getOwningMergedPartition();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtschedule.BasicPartition#getOwningMergedPartition <em>Owning Merged Partition</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owning Merged Partition</em>' container reference.
+	 * @see #getOwningMergedPartition()
+	 * @generated
+	 */
+	void setOwningMergedPartition(MergedPartition value);
 
 	/**
 	 * Returns the value of the '<em><b>Explicit Predecessors</b></em>' reference list.

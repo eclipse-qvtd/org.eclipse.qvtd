@@ -90,6 +90,7 @@ public class QVTscheduleTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_MapLiteralPart = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_$metamodel$.getClassId("MapLiteralPart", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_MappingPartition = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("MappingPartition", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_MappingRegion = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("MappingRegion", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_MergedPartition = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("MergedPartition", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_MicroMappingRegion = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("MicroMappingRegion", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_NavigableEdge = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("NavigableEdge", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Node = org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2017_s_QVTschedule.getClassId("Node", 0);
@@ -137,6 +138,7 @@ public class QVTscheduleTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_PropertyDatum = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_PropertyDatum);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_RootPartition = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_RootPartition);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_VerdictRegion = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_VerdictRegion);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_BasicPartition = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_BasicPartition);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_ClassDatum = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_ClassDatum);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Cluster = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_Cluster);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Connection = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.pivot.qvtschedule.QVTscheduleTables.CLSSid_Connection);
@@ -228,6 +230,7 @@ public class QVTscheduleTables
 		public static final @NonNull EcoreExecutorType _MappingNode = new EcoreExecutorType(QVTschedulePackage.Literals.MAPPING_NODE, PACKAGE, 0 | ExecutorType.ABSTRACT);
 		public static final @NonNull EcoreExecutorType _MappingPartition = new EcoreExecutorType(QVTschedulePackage.Literals.MAPPING_PARTITION, PACKAGE, 0 | ExecutorType.ABSTRACT);
 		public static final @NonNull EcoreExecutorType _MappingRegion = new EcoreExecutorType(QVTschedulePackage.Literals.MAPPING_REGION, PACKAGE, 0 | ExecutorType.ABSTRACT);
+		public static final @NonNull EcoreExecutorType _MergedPartition = new EcoreExecutorType(QVTschedulePackage.Literals.MERGED_PARTITION, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _MicroMappingRegion = new EcoreExecutorType(QVTschedulePackage.Literals.MICRO_MAPPING_REGION, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _NamedMappingRegion = new EcoreExecutorType(QVTschedulePackage.Literals.NAMED_MAPPING_REGION, PACKAGE, 0);
 		public static final @NonNull EcoreExecutorType _NavigableEdge = new EcoreExecutorType(QVTschedulePackage.Literals.NAVIGABLE_EDGE, PACKAGE, 0 | ExecutorType.ABSTRACT);
@@ -309,6 +312,7 @@ public class QVTscheduleTables
 			_MappingNode,
 			_MappingPartition,
 			_MappingRegion,
+			_MergedPartition,
 			_MicroMappingRegion,
 			_NamedMappingRegion,
 			_NavigableEdge,
@@ -675,6 +679,15 @@ public class QVTscheduleTables
 		private static final @NonNull ExecutorFragment _MappingRegion__OclElement = new ExecutorFragment(Types._MappingRegion, OCLstdlibTables.Types._OclElement);
 		private static final @NonNull ExecutorFragment _MappingRegion__Region = new ExecutorFragment(Types._MappingRegion, QVTscheduleTables.Types._Region);
 		private static final @NonNull ExecutorFragment _MappingRegion__Symbolable = new ExecutorFragment(Types._MappingRegion, QVTscheduleTables.Types._Symbolable);
+
+		private static final @NonNull ExecutorFragment _MergedPartition__BasicPartition = new ExecutorFragment(Types._MergedPartition, QVTscheduleTables.Types._BasicPartition);
+		private static final @NonNull ExecutorFragment _MergedPartition__Element = new ExecutorFragment(Types._MergedPartition, PivotTables.Types._Element);
+		private static final @NonNull ExecutorFragment _MergedPartition__MappingPartition = new ExecutorFragment(Types._MergedPartition, QVTscheduleTables.Types._MappingPartition);
+		private static final @NonNull ExecutorFragment _MergedPartition__MergedPartition = new ExecutorFragment(Types._MergedPartition, QVTscheduleTables.Types._MergedPartition);
+		private static final @NonNull ExecutorFragment _MergedPartition__NamedElement = new ExecutorFragment(Types._MergedPartition, PivotTables.Types._NamedElement);
+		private static final @NonNull ExecutorFragment _MergedPartition__OclAny = new ExecutorFragment(Types._MergedPartition, OCLstdlibTables.Types._OclAny);
+		private static final @NonNull ExecutorFragment _MergedPartition__OclElement = new ExecutorFragment(Types._MergedPartition, OCLstdlibTables.Types._OclElement);
+		private static final @NonNull ExecutorFragment _MergedPartition__Partition = new ExecutorFragment(Types._MergedPartition, QVTscheduleTables.Types._Partition);
 
 		private static final @NonNull ExecutorFragment _MicroMappingRegion__Element = new ExecutorFragment(Types._MicroMappingRegion, PivotTables.Types._Element);
 		private static final @NonNull ExecutorFragment _MicroMappingRegion__MappingRegion = new ExecutorFragment(Types._MicroMappingRegion, QVTscheduleTables.Types._MappingRegion);
@@ -1059,13 +1072,14 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _BasicPartition__headNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__HEAD_NODES, Types._BasicPartition, 5);
 		public static final @NonNull ExecutorProperty _BasicPartition__loadedEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_EDGES, Types._BasicPartition, 6);
 		public static final @NonNull ExecutorProperty _BasicPartition__loadedNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_NODES, Types._BasicPartition, 7);
-		public static final @NonNull ExecutorProperty _BasicPartition__predicatedEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_EDGES, Types._BasicPartition, 8);
-		public static final @NonNull ExecutorProperty _BasicPartition__predicatedNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_NODES, Types._BasicPartition, 9);
-		public static final @NonNull ExecutorProperty _BasicPartition__realizedEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_EDGES, Types._BasicPartition, 10);
-		public static final @NonNull ExecutorProperty _BasicPartition__realizedNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_NODES, Types._BasicPartition, 11);
-		public static final @NonNull ExecutorProperty _BasicPartition__speculatedEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_EDGES, Types._BasicPartition, 12);
-		public static final @NonNull ExecutorProperty _BasicPartition__speculatedNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_NODES, Types._BasicPartition, 13);
-		public static final @NonNull ExecutorProperty _BasicPartition__speculationNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATION_NODES, Types._BasicPartition, 14);
+		public static final @NonNull ExecutorProperty _BasicPartition__owningMergedPartition = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__OWNING_MERGED_PARTITION, Types._BasicPartition, 8);
+		public static final @NonNull ExecutorProperty _BasicPartition__predicatedEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_EDGES, Types._BasicPartition, 9);
+		public static final @NonNull ExecutorProperty _BasicPartition__predicatedNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_NODES, Types._BasicPartition, 10);
+		public static final @NonNull ExecutorProperty _BasicPartition__realizedEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_EDGES, Types._BasicPartition, 11);
+		public static final @NonNull ExecutorProperty _BasicPartition__realizedNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_NODES, Types._BasicPartition, 12);
+		public static final @NonNull ExecutorProperty _BasicPartition__speculatedEdges = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_EDGES, Types._BasicPartition, 13);
+		public static final @NonNull ExecutorProperty _BasicPartition__speculatedNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_NODES, Types._BasicPartition, 14);
+		public static final @NonNull ExecutorProperty _BasicPartition__speculationNodes = new EcoreExecutorProperty(QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATION_NODES, Types._BasicPartition, 15);
 
 		public static final @NonNull ExecutorProperty _BooleanLiteralNode__booleanValue = new EcoreExecutorProperty(QVTschedulePackage.Literals.BOOLEAN_LITERAL_NODE__BOOLEAN_VALUE, Types._BooleanLiteralNode, 0);
 
@@ -1151,6 +1165,8 @@ public class QVTscheduleTables
 		public static final @NonNull ExecutorProperty _MappingRegion__owningScheduleModel = new EcoreExecutorProperty(QVTschedulePackage.Literals.MAPPING_REGION__OWNING_SCHEDULE_MODEL, Types._MappingRegion, 2);
 		public static final @NonNull ExecutorProperty _MappingRegion__CyclicMappingRegion__elementRegions = new ExecutorPropertyWithImplementation("CyclicMappingRegion", Types._MappingRegion, 3, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.CYCLIC_MAPPING_REGION__ELEMENT_REGIONS));
 		public static final @NonNull ExecutorProperty _MappingRegion__MicroMappingRegion__mappingRegion = new ExecutorPropertyWithImplementation("MicroMappingRegion", Types._MappingRegion, 4, new EcoreLibraryOppositeProperty(QVTschedulePackage.Literals.MICRO_MAPPING_REGION__MAPPING_REGION));
+
+		public static final @NonNull ExecutorProperty _MergedPartition__ownedMergedPartitions = new EcoreExecutorProperty(QVTschedulePackage.Literals.MERGED_PARTITION__OWNED_MERGED_PARTITIONS, Types._MergedPartition, 0);
 
 		public static final @NonNull ExecutorProperty _MicroMappingRegion__mappingRegion = new EcoreExecutorProperty(QVTschedulePackage.Literals.MICRO_MAPPING_REGION__MAPPING_REGION, Types._MicroMappingRegion, 0);
 		public static final @NonNull ExecutorProperty _MicroMappingRegion__namePrefix = new EcoreExecutorProperty(QVTschedulePackage.Literals.MICRO_MAPPING_REGION__NAME_PREFIX, Types._MicroMappingRegion, 1);
@@ -1757,6 +1773,19 @@ public class QVTscheduleTables
 			};
 		private static final int @NonNull [] __MappingRegion = { 1,1,2,1,1,1 };
 
+		private static final @NonNull ExecutorFragment @NonNull [] _MergedPartition =
+			{
+				Fragments._MergedPartition__OclAny /* 0 */,
+				Fragments._MergedPartition__OclElement /* 1 */,
+				Fragments._MergedPartition__Element /* 2 */,
+				Fragments._MergedPartition__NamedElement /* 3 */,
+				Fragments._MergedPartition__Partition /* 4 */,
+				Fragments._MergedPartition__MappingPartition /* 5 */,
+				Fragments._MergedPartition__BasicPartition /* 6 */,
+				Fragments._MergedPartition__MergedPartition /* 7 */
+			};
+		private static final int @NonNull [] __MergedPartition = { 1,1,1,1,1,1,1,1 };
+
 		private static final @NonNull ExecutorFragment @NonNull [] _MicroMappingRegion =
 			{
 				Fragments._MicroMappingRegion__OclAny /* 0 */,
@@ -2260,6 +2289,7 @@ public class QVTscheduleTables
 			Types._MappingNode.initFragments(_MappingNode, __MappingNode);
 			Types._MappingPartition.initFragments(_MappingPartition, __MappingPartition);
 			Types._MappingRegion.initFragments(_MappingRegion, __MappingRegion);
+			Types._MergedPartition.initFragments(_MergedPartition, __MergedPartition);
 			Types._MicroMappingRegion.initFragments(_MicroMappingRegion, __MicroMappingRegion);
 			Types._NamedMappingRegion.initFragments(_NamedMappingRegion, __NamedMappingRegion);
 			Types._NavigableEdge.initFragments(_NavigableEdge, __NavigableEdge);
@@ -3698,6 +3728,42 @@ public class QVTscheduleTables
 		};
 		private static final @NonNull ExecutorOperation @NonNull [] _MappingRegion__Region = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _MappingRegion__Symbolable = {};
+
+		private static final @NonNull ExecutorOperation @NonNull [] _MergedPartition__MergedPartition = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _MergedPartition__BasicPartition = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _MergedPartition__Element = {
+			PivotTables.Operations._Element__allOwnedElements /* allOwnedElements() */,
+			PivotTables.Operations._Element__getValue /* getValue(Type[1],String[1]) */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _MergedPartition__MappingPartition = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _MergedPartition__NamedElement = {};
+		private static final @NonNull ExecutorOperation @NonNull [] _MergedPartition__OclAny = {
+			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
+			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
+			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
+			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclType /* oclType() */,
+			OCLstdlibTables.Operations._OclAny__oclTypes /* oclTypes() */,
+			OCLstdlibTables.Operations._OclAny__toString /* toString() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _MergedPartition__OclElement = {
+			OCLstdlibTables.Operations._OclElement__allInstances /* allInstances() */,
+			OCLstdlibTables.Operations._OclElement__oclAsModelType /* oclAsModelType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclElement__oclContainer /* oclContainer() */,
+			OCLstdlibTables.Operations._OclElement__oclContents /* oclContents() */,
+			OCLstdlibTables.Operations._OclElement__oclIsModelKindOf /* oclIsModelKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclElement__oclModelType /* oclModelType() */,
+			OCLstdlibTables.Operations._OclElement__oclModelTypes /* oclModelTypes() */
+		};
+		private static final @NonNull ExecutorOperation @NonNull [] _MergedPartition__Partition = {};
 
 		private static final @NonNull ExecutorOperation @NonNull [] _MicroMappingRegion__MicroMappingRegion = {};
 		private static final @NonNull ExecutorOperation @NonNull [] _MicroMappingRegion__Element = {
@@ -5349,6 +5415,15 @@ public class QVTscheduleTables
 			Fragments._MappingRegion__Region.initOperations(_MappingRegion__Region);
 			Fragments._MappingRegion__Symbolable.initOperations(_MappingRegion__Symbolable);
 
+			Fragments._MergedPartition__BasicPartition.initOperations(_MergedPartition__BasicPartition);
+			Fragments._MergedPartition__Element.initOperations(_MergedPartition__Element);
+			Fragments._MergedPartition__MappingPartition.initOperations(_MergedPartition__MappingPartition);
+			Fragments._MergedPartition__MergedPartition.initOperations(_MergedPartition__MergedPartition);
+			Fragments._MergedPartition__NamedElement.initOperations(_MergedPartition__NamedElement);
+			Fragments._MergedPartition__OclAny.initOperations(_MergedPartition__OclAny);
+			Fragments._MergedPartition__OclElement.initOperations(_MergedPartition__OclElement);
+			Fragments._MergedPartition__Partition.initOperations(_MergedPartition__Partition);
+
 			Fragments._MicroMappingRegion__Element.initOperations(_MicroMappingRegion__Element);
 			Fragments._MicroMappingRegion__MappingRegion.initOperations(_MicroMappingRegion__MappingRegion);
 			Fragments._MicroMappingRegion__MicroMappingRegion.initOperations(_MicroMappingRegion__MicroMappingRegion);
@@ -5695,6 +5770,7 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._BasicPartition__loadedEdges,
 			QVTscheduleTables.Properties._BasicPartition__loadedNodes,
 			QVTscheduleTables.Properties._MappingPartition__owningCompositePartition,
+			QVTscheduleTables.Properties._BasicPartition__owningMergedPartition,
 			QVTscheduleTables.Properties._Partition__passes,
 			QVTscheduleTables.Properties._BasicPartition__predicatedEdges,
 			QVTscheduleTables.Properties._BasicPartition__predicatedNodes,
@@ -6114,6 +6190,34 @@ public class QVTscheduleTables
 			QVTscheduleTables.Properties._MappingRegion__owningScheduleModel,
 			QVTscheduleTables.Properties._Region__scheduledRegion,
 			QVTscheduleTables.Properties._Symbolable__symbolName
+		};
+
+		private static final @NonNull ExecutorProperty @NonNull [] _MergedPartition = {
+			QVTscheduleTables.Properties._BasicPartition__constantEdges,
+			QVTscheduleTables.Properties._BasicPartition__constantNodes,
+			QVTscheduleTables.Properties._BasicPartition__constantSuccessFalseNodes,
+			QVTscheduleTables.Properties._BasicPartition__constantSuccessTrueNodes,
+			QVTscheduleTables.Properties._BasicPartition__explicitPredecessors,
+			QVTscheduleTables.Properties._MappingPartition__explicitSuccessors,
+			QVTscheduleTables.Properties._BasicPartition__headNodes,
+			QVTscheduleTables.Properties._Partition__intermediateConnections,
+			QVTscheduleTables.Properties._BasicPartition__loadedEdges,
+			QVTscheduleTables.Properties._BasicPartition__loadedNodes,
+			QVTscheduleTables.Properties._MergedPartition__ownedMergedPartitions,
+			QVTscheduleTables.Properties._MappingPartition__owningCompositePartition,
+			QVTscheduleTables.Properties._BasicPartition__owningMergedPartition,
+			QVTscheduleTables.Properties._Partition__passes,
+			QVTscheduleTables.Properties._BasicPartition__predicatedEdges,
+			QVTscheduleTables.Properties._BasicPartition__predicatedNodes,
+			QVTscheduleTables.Properties._BasicPartition__realizedEdges,
+			QVTscheduleTables.Properties._BasicPartition__realizedNodes,
+			QVTscheduleTables.Properties._MappingPartition__referedMappingRegion,
+			QVTscheduleTables.Properties._MappingPartition__region,
+			QVTscheduleTables.Properties._Partition__rootConnections,
+			QVTscheduleTables.Properties._MappingPartition__rootPartition,
+			QVTscheduleTables.Properties._BasicPartition__speculatedEdges,
+			QVTscheduleTables.Properties._BasicPartition__speculatedNodes,
+			QVTscheduleTables.Properties._BasicPartition__speculationNodes
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _MicroMappingRegion = {
@@ -6600,6 +6704,7 @@ public class QVTscheduleTables
 			Fragments._MappingNode__MappingNode.initProperties(_MappingNode);
 			Fragments._MappingPartition__MappingPartition.initProperties(_MappingPartition);
 			Fragments._MappingRegion__MappingRegion.initProperties(_MappingRegion);
+			Fragments._MergedPartition__MergedPartition.initProperties(_MergedPartition);
 			Fragments._MicroMappingRegion__MicroMappingRegion.initProperties(_MicroMappingRegion);
 			Fragments._NamedMappingRegion__NamedMappingRegion.initProperties(_NamedMappingRegion);
 			Fragments._NavigableEdge__NavigableEdge.initProperties(_NavigableEdge);
