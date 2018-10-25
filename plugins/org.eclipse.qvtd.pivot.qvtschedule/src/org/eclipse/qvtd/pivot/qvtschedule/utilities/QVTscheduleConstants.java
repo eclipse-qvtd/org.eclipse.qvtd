@@ -36,8 +36,9 @@ public class QVTscheduleConstants
 	public static final @NonNull TracingOption CONNECTION_ROUTING = new TracingOption(PLUGIN_ID, "qvtm2qvts/connectionRouting");
 	public static final @NonNull TracingOption POLLED_PROPERTIES = new TracingOption(PLUGIN_ID, "qvts2qvti/polledProperties");	// FIXME
 
-	/** The name of the root mapping */
-	public static final @NonNull String ROOT_MAPPING_NAME = "__root__";
+	public static final @NonNull String GLABAL_MAPPING_NAME = "«global»";
+	public static final @NonNull String LOAD_MAPPING_NAME = "«load»";
+	public static final @NonNull String ROOT_MAPPING_NAME = "«root»";
 	public static final @NonNull String MIDDLE_DOMAIN_NAME = QVTbaseUtil.TRACE_TYPED_MODEL_NAME; //"middle";
 
 	public static final @NonNull String REGION_SYMBOL_NAME_PREFIX = "m";

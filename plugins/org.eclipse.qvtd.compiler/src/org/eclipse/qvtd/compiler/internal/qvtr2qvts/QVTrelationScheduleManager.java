@@ -10,7 +10,6 @@
  */
 package org.eclipse.qvtd.compiler.internal.qvtr2qvts;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
@@ -97,11 +96,6 @@ public class QVTrelationScheduleManager extends AbstractScheduleManager
 	@Override
 	public @NonNull QVTrelationDomainUsageAnalysis getDomainUsageAnalysis() {
 		return (QVTrelationDomainUsageAnalysis) super.getDomainUsageAnalysis();
-	}
-
-	@Override
-	protected @NonNull URI getGraphsBaseURI() {
-		return getScheduleModel().eResource().getURI().trimSegments(1).appendSegment("graphs").appendSegment("");
 	}
 
 	//	public @NonNull QVTuConfiguration getQVTuConfiguration() {

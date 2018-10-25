@@ -51,6 +51,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduledRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
@@ -163,7 +164,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 
 	protected @NonNull LoadingRegion createLoadingRegion() {
 		LoadingRegion loadingRegion = QVTscheduleFactory.eINSTANCE.createLoadingRegion();
-		loadingRegion.setName("«load»"); //__root__ _QVTscheduleConstants.ROOT_MAPPING_NAME);
+		loadingRegion.setName(rootName + "-" + QVTscheduleConstants.LOAD_MAPPING_NAME);
 		SymbolNameBuilder s = new SymbolNameBuilder();
 		s.appendString("__load__"); //QVTscheduleUtil.ROOT_MAPPING_NAME);
 		loadingRegion.setSymbolName(scheduleManager.getScheduleModel().reserveSymbolName(s, loadingRegion));

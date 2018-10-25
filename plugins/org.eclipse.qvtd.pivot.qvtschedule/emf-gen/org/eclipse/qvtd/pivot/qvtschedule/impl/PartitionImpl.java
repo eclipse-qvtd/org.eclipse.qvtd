@@ -475,8 +475,8 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 	}
 
 	@Override
-	public @NonNull String getGraphName() {
-		return ClassUtil.nonNullState(name);
+	public final @NonNull String getGraphName() {
+		return getName();
 	}
 
 	@Override

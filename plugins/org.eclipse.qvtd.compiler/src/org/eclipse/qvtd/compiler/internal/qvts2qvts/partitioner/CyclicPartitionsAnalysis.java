@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -73,7 +74,7 @@ public class CyclicPartitionsAnalysis
 		if (intersections.isEmpty()) {
 			//	Set<@NonNull TraceClassPartitionAnalysis> cyclicTraceClassAnalyses = computeTraceClassAnalysisDependencies(partitionedTransformationAnalysis, leafPartitionAnalyses);
 			//	Set<@NonNull TracePropertyPartitionAnalysis> cyclicTracePropertyAnalyses = computeTracePropertyAnalysisDependencies(partitionedTransformationAnalysis, leafPartitionAnalyses);
-			String rootName = "«root»";
+			String rootName = QVTscheduleConstants.ROOT_MAPPING_NAME;
 			return RootPartitionAnalysis.createRootPartitionAnalysis(partitionedTransformationAnalysis, transformationPartitioner.getTransformationAnalysis(), rootName, leafPartitionAnalysis2predecessors);
 		}
 		intersections.add(Sets.newHashSet(leafPartitionAnalyses));
@@ -186,7 +187,7 @@ public class CyclicPartitionsAnalysis
 		//	Set<@NonNull PartitionAnalysis> rootPartitioning = sortedPartitionings.get(iMax-1);
 		//	Set<@NonNull TraceClassPartitionAnalysis> rootTraceClassAnalyses = computeTraceClassAnalysisDependencies(partitionedTransformationAnalysis, rootPartitioning);
 		//	Set<@NonNull TracePropertyPartitionAnalysis> rootTracePropertyAnalyses = computeTracePropertyAnalysisDependencies(partitionedTransformationAnalysis, rootPartitioning);
-		String rootName = "«root»";
+		String rootName = QVTscheduleConstants.ROOT_MAPPING_NAME;
 		RootPartitionAnalysis rootPartitionAnalysis = RootPartitionAnalysis.createRootPartitionAnalysis(partitionedTransformationAnalysis, transformationPartitioner.getTransformationAnalysis(), rootName, partition2predecessors);
 		acyclicPartitionHierarchy.add(rootPartitionAnalysis);
 		if (TransformationPartitioner.CYCLES.isActive()) {

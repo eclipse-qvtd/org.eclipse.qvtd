@@ -562,7 +562,7 @@ public class ScheduledRegionImpl extends RegionImpl implements ScheduledRegion {
 
 	@Override
 	public final @NonNull String getGraphName() {
-		return "«global»";
+		return name + "-" + QVTscheduleConstants.GLABAL_MAPPING_NAME;
 	}
 
 	//	@Override

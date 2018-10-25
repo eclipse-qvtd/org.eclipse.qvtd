@@ -31,7 +31,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
@@ -903,11 +902,6 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 			}
 		}
 	} */
-
-	@Override
-	public @NonNull String getName() {
-		return ClassUtil.nonNullState(name);
-	}
 
 	@Override
 	public void destroy() {

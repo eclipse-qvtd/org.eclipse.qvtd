@@ -727,8 +727,14 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 		return environmentFactory;
 	}
 
-	protected @NonNull URI getGraphsBaseURI() {
-		return scheduleModel.eResource().getURI().trimSegments(1).appendSegment("graphs").appendSegment("");
+	protected @NonNull URI getGraphURI(@NonNull Graphable graphable, @Nullable String suffix, @NonNull String fileExtension) {
+		URI baseURI = scheduleModel.eResource().getURI().trimSegments(1).appendSegment("graphs").appendSegment("");
+		String symbolName = graphable.getGraphName();
+		if (suffix != null) {
+			symbolName = symbolName + suffix;
+		}
+		symbolName = symbolName.replace("::", "!!");
+		return URI.createURI(symbolName + fileExtension).resolve(baseURI);
 	}
 
 	public @NonNull Property getIterateProperty(@NonNull Type type) {
@@ -1045,12 +1051,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	public void writeDOTfile(@NonNull Graphable graphable, @Nullable String suffix) {
 		if (doDotGraphs) {
-			URI baseURI = getGraphsBaseURI();
-			String graphName = graphable.getGraphName();
-			if (suffix != null) {
-				graphName = graphName + suffix;
-			}
-			URI dotURI = URI.createURI(graphName + ".dot").resolve(baseURI);
+			URI dotURI = getGraphURI(graphable, suffix, ".dot");
 			//	if (dotURI.toString().contains("mElement_Telement2element")) {
 			//		getClass().toString();
 			//	}
@@ -1075,12 +1076,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	public void writeGraphMLfile(@NonNull Graphable graphable, @Nullable String suffix) {
 		if (doYedGraphs) {
-			URI baseURI = getGraphsBaseURI();
-			String symbolName = graphable.getGraphName();
-			if (suffix != null) {
-				symbolName = symbolName + suffix;
-			}
-			URI dotURI = URI.createURI(symbolName + ".graphml").resolve(baseURI);
+			URI dotURI = getGraphURI(graphable, suffix, ".graphml");
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 				try {
@@ -1102,8 +1098,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	public void writeRegionDOTfile(@NonNull Graphable region, @NonNull String suffix) {
 		if (doDotGraphs) {
-			URI baseURI = getGraphsBaseURI();
-			URI dotURI = URI.createURI(region.getGraphName()/*.replace("\n",  "_").replace("\\n",  "_")*/ + suffix + ".dot").resolve(baseURI);
+			URI dotURI = getGraphURI(region, suffix, ".dot");
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 				try {
@@ -1130,8 +1125,7 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	public void writeRegionGraphMLfile(@NonNull Graphable region, @NonNull String suffix) {
 		if (doYedGraphs) {
-			URI baseURI = getGraphsBaseURI();
-			URI dotURI = URI.createURI(region.getGraphName()/*.replace("\n",  "_").replace("\\n",  "_")*/ + suffix + ".graphml").resolve(baseURI);
+			URI dotURI = getGraphURI(region, suffix, ".graphml");
 			try {
 				OutputStream outputStream = environmentFactory.getResourceSet().getURIConverter().createOutputStream(dotURI);
 				try {
