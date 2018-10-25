@@ -527,8 +527,8 @@ public class ConnectionManager
 		for (@NonNull NavigableEdge edge : region.getRealizedNavigationEdges()) {
 			if (!edge.isSecondary()) {
 				boolean isAwaited = false;
-				for (@NonNull Partition partition : regionAnalysis.getPartitions()) {
-					Role role = partition.getRole(edge);
+				for (@NonNull PartitionAnalysis partitionAnalysis : regionAnalysis.getPartitionAnalyses()) {
+					Role role = partitionAnalysis.getPartition().getRole(edge);
 					if ((role != null) && role.isAwaited()) {
 						isAwaited = true;
 						break;

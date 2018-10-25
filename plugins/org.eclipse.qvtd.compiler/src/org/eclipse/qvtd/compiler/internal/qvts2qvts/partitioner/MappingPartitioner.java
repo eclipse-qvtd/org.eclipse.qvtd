@@ -38,7 +38,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
-import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.Role;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
@@ -544,9 +543,9 @@ public class MappingPartitioner implements Nameable
 		return true;
 	} */
 
-	public @NonNull Iterable<@NonNull Partition> partition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
+	public @NonNull Iterable<@NonNull PartitionAnalysis> partition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		if ((region instanceof DispatchRegion) || (region instanceof VerdictRegion)) {
-			return Collections.singletonList(new NonPartitionFactory(this).createPartition(partitionedTransformationAnalysis));
+			return Collections.singletonList(new NonPartitionFactory(this).createPartitionAnalysis(partitionedTransformationAnalysis));
 		}
 		String name = region.getName();
 		if ("associationToForeignKey".equals(name)) {
@@ -579,22 +578,22 @@ public class MappingPartitioner implements Nameable
 		//
 		//	Create the partitioned regions
 		//
-		List<@NonNull Partition> newPartitions = new ArrayList<>();
+		List<@NonNull PartitionAnalysis> newPartitionAnalyses = new ArrayList<>();
 		if (needsActivator) {
 			//
 			//	Create an activator to make a QVTr top relation behave as a non-top relation.
 			//
-			newPartitions.add(new ActivatorPartitionFactory(this).createPartition(partitionedTransformationAnalysis));
+			newPartitionAnalyses.add(new ActivatorPartitionFactory(this).createPartitionAnalysis(partitionedTransformationAnalysis));
 		}
 		if (!needsSpeculation) {
 			//
 			//	If speculation is not needed just add the functionality as a single region.
 			//
-			if (newPartitions.isEmpty()) {		// i.e. a QVTr non top relation - re-use as is
-				newPartitions.add(new NonPartitionFactory(this).createPartition(partitionedTransformationAnalysis));
+			if (newPartitionAnalyses.isEmpty()) {		// i.e. a QVTr non top relation - re-use as is
+				newPartitionAnalyses.add(new NonPartitionFactory(this).createPartitionAnalysis(partitionedTransformationAnalysis));
 			}
 			else {							// i.e. a QVTr top relation - create a residue to finish off the activator
-				newPartitions.add(new ResidualPartitionFactory(this).createPartition(partitionedTransformationAnalysis));
+				newPartitionAnalyses.add(new ResidualPartitionFactory(this).createPartitionAnalysis(partitionedTransformationAnalysis));
 			}
 		}
 		else {								// cycles may need speculation and partitioning into isolated actions
@@ -604,12 +603,12 @@ public class MappingPartitioner implements Nameable
 			if (useActivators) {
 				regionAnalysis.createLocalSuccess();
 			}
-			BasicPartition localPredicatePartition = new LocalPredicatePartitionFactory(this, useActivators).createPartition(partitionedTransformationAnalysis);
-			BasicPartition globalPredicatePartition = new GlobalPredicatePartitionFactory(this).createPartition(partitionedTransformationAnalysis);
-			BasicPartition speculatedPartition = new SpeculatedPartitionFactory(this).createPartition(partitionedTransformationAnalysis);
-			newPartitions.add(localPredicatePartition);
-			newPartitions.add(globalPredicatePartition);
-			newPartitions.add(speculatedPartition);
+			BasicPartitionAnalysis localPredicatePartition = new LocalPredicatePartitionFactory(this, useActivators).createPartitionAnalysis(partitionedTransformationAnalysis);
+			BasicPartitionAnalysis globalPredicatePartition = new GlobalPredicatePartitionFactory(this).createPartitionAnalysis(partitionedTransformationAnalysis);
+			BasicPartitionAnalysis speculatedPartition = new SpeculatedPartitionFactory(this).createPartitionAnalysis(partitionedTransformationAnalysis);
+			newPartitionAnalyses.add(localPredicatePartition);
+			newPartitionAnalyses.add(globalPredicatePartition);
+			newPartitionAnalyses.add(speculatedPartition);
 			if (!useActivators) {
 				globalPredicatePartition.addExplicitPredecessor(localPredicatePartition);
 				speculatedPartition.addExplicitPredecessor(globalPredicatePartition);
@@ -620,7 +619,7 @@ public class MappingPartitioner implements Nameable
 			//
 			for (@NonNull NavigableEdge outputEdge : getRealizedOutputEdges()) {
 				if (!hasRealizedEdge(outputEdge)) {
-					newPartitions.add(new AssignmentPartitionFactory(this, outputEdge).createPartition(partitionedTransformationAnalysis));
+					newPartitionAnalyses.add(new AssignmentPartitionFactory(this, outputEdge).createPartitionAnalysis(partitionedTransformationAnalysis));
 				}
 			}
 			//
@@ -628,19 +627,19 @@ public class MappingPartitioner implements Nameable
 			//
 			for (@NonNull NavigableEdge edge : getRealizedEdges()) {
 				if (!hasRealizedEdge(edge)) {
-					newPartitions.add(new AssignmentPartitionFactory(this, edge).createPartition(partitionedTransformationAnalysis));
+					newPartitionAnalyses.add(new AssignmentPartitionFactory(this, edge).createPartitionAnalysis(partitionedTransformationAnalysis));
 				}
 			}
 		}
 		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			for (@NonNull Partition partition : newPartitions) {
-				scheduleManager.writeDebugGraphs(partition, null);
+			for (@NonNull PartitionAnalysis partitionAnalysis : newPartitionAnalyses) {
+				scheduleManager.writeDebugGraphs(partitionAnalysis.getPartition(), null);
 			}
 		}
-		if (newPartitions.size() > 1) {		// FIXME shouldn't this work anyway when no partitioning was needed?
+		if (newPartitionAnalyses.size() > 1) {		// FIXME shouldn't this work anyway when no partitioning was needed?
 			check(/*isInfallible*/);
 		}
-		return newPartitions;
+		return newPartitionAnalyses;
 	}
 
 	@Override

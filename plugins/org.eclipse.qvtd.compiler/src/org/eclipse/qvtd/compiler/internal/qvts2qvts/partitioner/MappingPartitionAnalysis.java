@@ -586,10 +586,9 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 						for (@NonNull NavigableEdge usedEdge : QVTscheduleUtil.getSourceEnds(edgeConnection)) {
 							Region sourceRegion = QVTscheduleUtil.getOwningRegion(usedEdge);
 							RegionAnalysis sourceRegionAnalysis = scheduleManager.getRegionAnalysis(sourceRegion);
-							for (@NonNull Partition sourcePartition : sourceRegionAnalysis.getPartitions()) {
-								Role sourceRole = sourcePartition.getRole(usedEdge);
+							for (@NonNull PartitionAnalysis sourcePartitionAnalysis : sourceRegionAnalysis.getPartitionAnalyses()) {
+								Role sourceRole = sourcePartitionAnalysis.getPartition().getRole(usedEdge);
 								if ((sourceRole != null) && !sourceRole.isAwaited()) {
-									AbstractPartitionAnalysis<?> sourcePartitionAnalysis = partitionedTransformationAnalysis.getPartitionAnalysis(sourcePartition);
 									sourcePartitionAnalysis.addEnforcedEdge(usedEdge);
 								}
 							}

@@ -39,7 +39,8 @@ public abstract class AbstractPartitionAnalysis<P extends Partition> implements 
 
 	}
 
-	void addEnforcedEdge(@NonNull NavigableEdge realizedEdge) {}
+	@Override
+	public void addEnforcedEdge(@NonNull NavigableEdge realizedEdge) {}
 
 	public void analyzePartition() {}
 

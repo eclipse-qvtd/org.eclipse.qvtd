@@ -146,8 +146,7 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 		}
 	}
 
-	public void analyzePartitions(@NonNull Iterable<@NonNull Partition> partitions) {
-		Iterable<@NonNull PartitionAnalysis> partitionAnalyses = getPartitionAnalyses(partitions);
+	public void analyzePartitions(@NonNull Iterable<@NonNull PartitionAnalysis> partitionAnalyses) {
 		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {
 			((AbstractPartitionAnalysis<?>)partitionAnalysis).analyzePartition();
 		}

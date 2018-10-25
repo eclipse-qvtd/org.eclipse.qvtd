@@ -35,7 +35,7 @@ public class SpeculatedPartitionFactory extends AbstractSimplePartitionFactory
 	}
 
 	@Override
-	public @NonNull BasicPartition createPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
+	public @NonNull BasicPartitionAnalysis createPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		ReachabilityForest reachabilityForest = createReachabilityForest();
 		String name = computeName("speculated");
 		Node traceNode = mappingPartitioner.getTraceNode();
@@ -44,7 +44,7 @@ public class SpeculatedPartitionFactory extends AbstractSimplePartitionFactory
 		int partitionNumber = region.getNextPartitionNumber();
 		BasicPartitionAnalysis basicPartitionAnalysis = new BasicPartitionAnalysis(partitionedTransformationAnalysis, partition, reachabilityForest, "«speculated»", "_p" + partitionNumber);
 		initializePartition(basicPartitionAnalysis, traceNode);
-		return partition;
+		return basicPartitionAnalysis;
 	}
 
 	protected void initializePartition(@NonNull BasicPartitionAnalysis partitionAnalysis, @NonNull Node traceNode) {

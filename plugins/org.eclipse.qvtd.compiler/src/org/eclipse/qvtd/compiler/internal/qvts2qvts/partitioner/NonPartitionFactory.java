@@ -34,12 +34,12 @@ public class NonPartitionFactory extends AbstractSimplePartitionFactory
 	}
 
 	@Override
-	public @NonNull NonPartition createPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
+	public @NonNull NonPartitionAnalysis createPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		ReachabilityForest reachabilityForest = createReachabilityForest();
 		MappingRegion region = mappingPartitioner.getRegion();
 		NonPartition nonPartition = createNonPartition(QVTscheduleUtil.getName(region));
 		NonPartitionAnalysis nonPartitionAnalysis = new NonPartitionAnalysis(partitionedTransformationAnalysis, nonPartition, reachabilityForest);
-		return nonPartitionAnalysis.getPartition();
+		return nonPartitionAnalysis;
 	}
 
 	/**

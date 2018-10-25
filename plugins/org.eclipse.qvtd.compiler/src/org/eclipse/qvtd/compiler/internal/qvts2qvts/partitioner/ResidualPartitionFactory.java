@@ -29,7 +29,7 @@ public class ResidualPartitionFactory extends AbstractSimplePartitionFactory
 	}
 
 	@Override
-	public @NonNull BasicPartition createPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
+	public @NonNull BasicPartitionAnalysis createPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		ReachabilityForest reachabilityForest = createReachabilityForest();
 		String name = computeName("residue");
 		Iterable<@NonNull Node> headNodes = mappingPartitioner.getTraceNodes();
@@ -37,7 +37,7 @@ public class ResidualPartitionFactory extends AbstractSimplePartitionFactory
 		int partitionNumber = region.getNextPartitionNumber();
 		BasicPartitionAnalysis basicPartitionAnalysis = new BasicPartitionAnalysis(partitionedTransformationAnalysis, partition, reachabilityForest, "«residue»", "_p" + partitionNumber);
 		initializePartition(basicPartitionAnalysis);
-		return partition;
+		return basicPartitionAnalysis;
 	}
 
 	protected void initializePartition(@NonNull BasicPartitionAnalysis partitionAnalysis) {

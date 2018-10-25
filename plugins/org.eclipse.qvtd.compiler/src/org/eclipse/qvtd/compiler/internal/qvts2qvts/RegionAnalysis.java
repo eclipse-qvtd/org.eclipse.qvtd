@@ -21,6 +21,7 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.Element2MiddleProperty
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.RelationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationAnalysis2TraceClass;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationAnalysis2TraceGroup;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -30,15 +31,12 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.SuccessEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node.Utility;
-import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-
-import com.google.common.collect.Lists;
 
 public class RegionAnalysis extends AbstractRegionAnalysis
 {
 	protected final @NonNull Region region;
-	private @Nullable Iterable<@NonNull Partition> partitions = null;
+	private @Nullable Iterable<@NonNull PartitionAnalysis> partitionAnalyses = null;
 
 	/**
 	 * The edges to be realized iff speculation succeeds.
@@ -49,17 +47,6 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 	 * The nodes to be realized iff speculation succeeds.
 	 */
 	private final @NonNull List<@NonNull Node> corollaryNodes = new ArrayList<>();
-
-	/**
-	 * The actual and pseudo-RegionAnalysis-es that must be unconditionally successful for this RegionAnalysis
-	 * to be unconditionally successful. null prior to determination.
-	 *
-	private @Nullable Iterable<@NonNull RegionAnalysis> fallibilities = null; */
-
-	/**
-	 * The edges that may be left unsynthesized when this RegionAnalysis is used in an infallible cycle.
-	 *
-	private @Nullable Iterable<@NonNull Edge> fallibleEdges = null; */
 
 	public RegionAnalysis(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull Region region) {
 		super(transformationAnalysis);
@@ -99,8 +86,8 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 		}
 	}
 
-	public @Nullable Iterable<@NonNull Partition> basicGetPartitions() {
-		return partitions;
+	public @Nullable Iterable<@NonNull PartitionAnalysis> basicGetPartitionAnalyses() {
+		return partitionAnalyses;
 	}
 
 	public void createLocalSuccess() {
@@ -137,14 +124,6 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 		return null;
 	}
 
-	//	public @NonNull Iterable<@NonNull RegionAnalysis> getFallibilities() {
-	//		return ClassUtil.nonNullState(fallibilities);
-	//	}
-
-	//	public @NonNull Iterable<@NonNull Edge> getFallibleEdges() {
-	//		return ClassUtil.nonNullState(fallibleEdges);
-	//	}
-
 	@Override
 	public @NonNull String getName() {
 		return String.valueOf(region);
@@ -160,8 +139,8 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 		return QVTscheduleUtil.getOwnedNodes(region);
 	}
 
-	public @NonNull Iterable<@NonNull Partition> getPartitions() {
-		return ClassUtil.nonNullState(partitions);
+	public @NonNull Iterable<@NonNull PartitionAnalysis> getPartitionAnalyses() {
+		return ClassUtil.nonNullState(partitionAnalyses);
 	}
 
 	public @NonNull Region getRegion() {
@@ -172,17 +151,9 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 		return transformationAnalysis;
 	}
 
-	//	public void setFallibilities(@NonNull Iterable<@NonNull RegionAnalysis> fallibilities) {
-	//		this.fallibilities = fallibilities;
-	//	}
-
-	//	public void setFallibleEdges(@NonNull Iterable<@NonNull Edge> fallibleEdges) {
-	//		this.fallibleEdges  = fallibleEdges;
-	//	}
-
-	public void setPartitions(@NonNull Iterable<@NonNull Partition> partitions) {
-		assert this.partitions == null;
-		this.partitions  = Lists.newArrayList(partitions);
+	public void setPartitionAnalyses(@NonNull Iterable<@NonNull PartitionAnalysis> partitionAnalyses) {
+		assert this.partitionAnalyses == null;
+		this.partitionAnalyses = partitionAnalyses;
 	}
 
 	@Override

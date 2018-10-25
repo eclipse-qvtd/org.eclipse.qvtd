@@ -52,7 +52,7 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 	}
 
 	@Override
-	public @NonNull BasicPartition createPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
+	public @NonNull BasicPartitionAnalysis createPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		ReachabilityForest reachabilityForest = createReachabilityForest();
 		String name = computeName("local");
 		Iterable<@NonNull Node> headNodes = useActivators ? executionNodes : QVTscheduleUtil.getHeadNodes(mappingPartitioner.getRegion());
@@ -60,7 +60,7 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 		int partitionNumber = region.getNextPartitionNumber();
 		BasicPartitionAnalysis basicPartitionAnalysis = new BasicPartitionAnalysis(partitionedTransformationAnalysis, partition, reachabilityForest, "«local»", "_p" + partitionNumber);
 		initializePartition(basicPartitionAnalysis);
-		return partition;
+		return basicPartitionAnalysis;
 	}
 
 	/**

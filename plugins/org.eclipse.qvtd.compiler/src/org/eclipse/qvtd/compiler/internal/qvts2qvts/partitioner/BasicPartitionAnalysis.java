@@ -50,6 +50,15 @@ public class BasicPartitionAnalysis extends MappingPartitionAnalysis<BasicPartit
 		partitionedTransformationAnalysis.addPartitionAnalysis(this);
 	}
 
+	public void addExplicitPredecessor(@NonNull BasicPartitionAnalysis precedingPartitionAnalysis) {
+		getPartition().addExplicitPredecessor(precedingPartitionAnalysis.getPartition());
+		//	Set<@NonNull PartitionAnalysis> explicitPredecessors2 = this.explicitPredecessors;
+		//	if (explicitPredecessors2 == null) {
+		//		explicitPredecessors2 = new HashSet<>();
+		//	}
+		//	explicitPredecessors2.add(precedingPartitionAnalysis);
+	}
+
 	@Override
 	public void analyzePartition2() {
 		super.analyzePartition2();

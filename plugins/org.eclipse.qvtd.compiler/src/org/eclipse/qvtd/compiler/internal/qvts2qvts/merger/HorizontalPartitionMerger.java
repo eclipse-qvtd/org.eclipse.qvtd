@@ -117,7 +117,8 @@ public class HorizontalPartitionMerger extends AbstractMerger
 					CompositePartition owningCompositePartition = merges.get(0).getPartition().getOwningCompositePartition();
 					List<MappingPartition> ownedMappingPartitions = owningCompositePartition.getOwnedMappingPartitions();
 					MergedPartitionFactory mergedPartitionFactory = new MergedPartitionFactory(regionAnalysis, merges);
-					BasicPartition mergedPartition = mergedPartitionFactory.createPartition(partitionedTransformationAnalysis);
+					BasicPartitionAnalysis mergedPartitionAnalysis = mergedPartitionFactory.createPartitionAnalysis(partitionedTransformationAnalysis);
+					BasicPartition mergedPartition = mergedPartitionAnalysis.getPartition();
 					//					MappingRegion mappingRegion = (MappingRegion)regionAnalysis.getRegion();
 					//					List<MappingPartition> mappingPartitions = mappingRegion.getMappingPartitions();
 					for (@NonNull BasicPartitionAnalysis partitionAnalysis : merges) {

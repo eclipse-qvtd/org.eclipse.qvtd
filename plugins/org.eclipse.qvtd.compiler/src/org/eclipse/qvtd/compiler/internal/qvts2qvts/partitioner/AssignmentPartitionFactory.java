@@ -33,7 +33,7 @@ public class AssignmentPartitionFactory extends AbstractSimplePartitionFactory
 	}
 
 	@Override
-	public @NonNull BasicPartition createPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
+	public @NonNull BasicPartitionAnalysis createPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		ReachabilityForest reachabilityForest = createReachabilityForest();
 		String name = computeName("edge-" + QVTscheduleUtil.getName(realizedEdge));
 		Iterable<@NonNull Node> headNodes = mappingPartitioner.getTraceNodes();
@@ -43,7 +43,7 @@ public class AssignmentPartitionFactory extends AbstractSimplePartitionFactory
 		String symbolSuffix = "_p" + partitionNumber;
 		BasicPartitionAnalysis basicPartitionAnalysis = new BasicPartitionAnalysis(partitionedTransformationAnalysis, partition, reachabilityForest, namePrefix, symbolSuffix);
 		initializePartition(basicPartitionAnalysis);
-		return partition;
+		return basicPartitionAnalysis;
 	}
 
 	protected void initializePartition(@NonNull BasicPartitionAnalysis partitionAnalysis) {

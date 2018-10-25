@@ -38,7 +38,7 @@ public class GlobalPredicatePartitionFactory extends AbstractSimplePartitionFact
 	}
 
 	@Override
-	public @NonNull BasicPartition createPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
+	public @NonNull BasicPartitionAnalysis createPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		ReachabilityForest reachabilityForest = createReachabilityForest();
 		String name = computeName("global");
 		Iterable<@NonNull Node> executionNodes = mappingPartitioner.getExecutionNodes();
@@ -47,7 +47,7 @@ public class GlobalPredicatePartitionFactory extends AbstractSimplePartitionFact
 		int partitionNumber = region.getNextPartitionNumber();
 		BasicPartitionAnalysis basicPartitionAnalysis = new BasicPartitionAnalysis(partitionedTransformationAnalysis, partition, reachabilityForest, "«global»", "_p" + partitionNumber);
 		initializePartition(basicPartitionAnalysis, executionNodes);
-		return partition;
+		return basicPartitionAnalysis;
 	}
 
 	protected void initializePartition(@NonNull BasicPartitionAnalysis partitionAnalysis, @NonNull Iterable<@NonNull Node> executionNodes) {

@@ -69,7 +69,7 @@ public class MergedPartitionFactory extends AbstractPartitionFactory<@NonNull Re
 	}
 
 	@Override
-	public @NonNull BasicPartition createPartition(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
+	public @NonNull BasicPartitionAnalysis createPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		Iterable<@NonNull Node> headNodes = subPartitionAnalyses.iterator().next().getTraceNodes();
 		MergedPartition mergedPartition = createMergedPartition(computeName(), headNodes);
 		for (@NonNull BasicPartitionAnalysis subPartitionAnalysis : subPartitionAnalyses) {
@@ -80,13 +80,10 @@ public class MergedPartitionFactory extends AbstractPartitionFactory<@NonNull Re
 			mergedPartition.getExplicitSuccessors().addAll(subPartition.getExplicitSuccessors());
 		}
 		mergedPartition.initTypedModelAnalysis();
-		createPartitionAnalysis(partitionedTransformationAnalysis, mergedPartition);
-		return mergedPartition;
+		return createPartitionAnalysis(partitionedTransformationAnalysis, mergedPartition);
 	}
 
-	protected void createPartitionAnalysis(
-			PartitionedTransformationAnalysis partitionedTransformationAnalysis,
-			MergedPartition mergedPartition) {
+	protected @NonNull BasicPartitionAnalysis createPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull MergedPartition mergedPartition) {
 		ReachabilityForest reachabilityForest = createReachabilityForest();
 		int partitionNumber = region.getNextPartitionNumber();
 		String namePrefix = "«merge" + partitionNumber + "»";
@@ -95,6 +92,7 @@ public class MergedPartitionFactory extends AbstractPartitionFactory<@NonNull Re
 		initializePartition(basicPartitionAnalysis);
 		basicPartitionAnalysis.analyzePartition();
 		basicPartitionAnalysis.analyzePartition2();
+		return basicPartitionAnalysis;
 	}
 
 	@Override
