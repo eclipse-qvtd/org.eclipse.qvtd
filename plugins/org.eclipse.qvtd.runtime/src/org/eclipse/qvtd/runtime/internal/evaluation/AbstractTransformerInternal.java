@@ -70,7 +70,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		}
 
 		@Override
-		protected @NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
+		protected @NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict, int firstPass, int lastPass) {
 			return invocationManager.getRootInterval().createIncrementalConnection(name, typeId, isStrict);
 		}
 
@@ -183,7 +183,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		private @Nullable Boolean trackAdditions = null;
 
 		public Model(@NonNull AbstractTransformerInternal transformer, @NonNull String name, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
-				@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
+				@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) { // FIXME Bug 540500 per-model classIndex2classId etc
 			this.transformer = transformer;
 			this.name = name;
 			//
@@ -194,7 +194,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			for (int i = 0; i < classIds; i++) {
 				@NonNull ClassId classId = classIndex2classId[i];
 				String connectionName = name + "!" + classId.getName();
-				classIndex2connection[i] = transformer.createConnection(connectionName, classId, false);
+				classIndex2connection[i] = transformer.createConnection(connectionName, classId, false, 0, 0);
 			}
 		}
 
@@ -532,7 +532,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		for (int i = 0; i < modelNames.length; i++) {
 			String modelName = modelNames[i];
 			models[i] = createModel(modelName, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
-			modelIndexes.put(modelName,  i);
+			modelIndexes.put(modelName, i);
 		}
 		//
 		//	Prepare the unnavigable opposite property fields
@@ -590,7 +590,13 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		getTypedModelInstance(modelName).addRootObjects(eRootObjects);
 	}
 
+	@Deprecated /* @deprecated provide first/lastPass arguments */
 	protected @NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
+		return invocationManager.getRootInterval().createConnection(name, typeId, isStrict);
+	}
+
+	protected @NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict, int firstPass, int lastPass) {
+		//		return invocationManager.getInterval(firstPass, lastPass).createConnection(name, typeId, isStrict);
 		return invocationManager.getRootInterval().createConnection(name, typeId, isStrict);
 	}
 

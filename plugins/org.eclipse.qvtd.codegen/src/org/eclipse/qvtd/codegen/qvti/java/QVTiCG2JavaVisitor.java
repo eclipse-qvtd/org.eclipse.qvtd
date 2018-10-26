@@ -1383,7 +1383,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 	}
 
 	public @NonNull Boolean doMappingCall_Class(@NonNull CGMappingCall cgMappingCall) {
-		js.append("invocationManager.flush();\n");
+		js.append("invocationManager.flush(); /*1*/\n");
 		MappingCall pMappingCall = QVTiCGUtil.getAST(cgMappingCall);
 		Mapping pReferredMapping = QVTimperativeUtil.getReferredMapping(pMappingCall);
 		CGMapping cgReferredMapping = analyzer.getMapping(pReferredMapping);
@@ -1465,7 +1465,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 				}
 			}
 		}
-		js.append("invocationManager.flush();\n");
+		js.append("invocationManager.flush(); /*2*/\n");
 		return true;
 	}
 
@@ -2052,10 +2052,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.append(")");
 		if (isIncremental || useClass(cgRootMapping)) {
 			js.append(";\n");
-			js.append("return invocationManager.flush();\n");
+			js.append("return invocationManager.flush(); /*3a*/\n");
 		}
 		else {
-			js.append(" && invocationManager.flush();\n");
+			js.append(" && invocationManager.flush(); /*3b*/\n");
 		}
 		js.popIndentation();
 		js.append("}\n");
@@ -2842,7 +2842,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 			}
 		}
 		if (needsFlush) {
-			js.append("invocationManager.flush();\n");
+			js.append("invocationManager.flush(); /*4*/\n");
 		}
 		return true;
 	}
