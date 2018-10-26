@@ -107,6 +107,12 @@ public abstract class AbstractPartition2Mapping
 		if (originalRegion instanceof RuleRegion) {
 			this.mapping.setIsAbstract(((RuleRegion)originalRegion).getReferredRule().isIsAbstract());
 		}
+		int firstPass = partition.getFirstPass();
+		int lastPass = partition.getLastPass();
+		this.mapping.setFirstPass(firstPass);
+		if (lastPass > firstPass) {
+			this.mapping.setLastPass(lastPass);
+		}
 		this.names = new HashSet<>(visitor.getReservedNames());
 		for (@NonNull Node node : partition.getPartialNodes()) {
 			for (@NonNull Element element : node.getOriginatingElements()) {

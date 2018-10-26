@@ -37,7 +37,6 @@ import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.Statement;
@@ -68,7 +67,7 @@ public class LoadingPartition2Mapping extends AbstractRootRegion2Mapping
 		super(visitor, partition);
 	}
 
-	private @NonNull ConnectionVariable createRootConnectionVariable(@NonNull String name, boolean isStrict, @NonNull Type type, @Nullable OCLExpression initExpression) {
+	private @NonNull BufferStatement createRootConnectionVariable(@NonNull String name, boolean isStrict, @NonNull Type type, @Nullable OCLExpression initExpression) {
 		//		Type variableType = visitor.getEnvironmentFactory().getCompleteEnvironment().getSetType(node.getCompleteClass().getPrimaryClass(), true, null, null);
 		//		assert variableType != null;
 		BufferStatement variable = helper.createBufferStatement(getSafeName(name), isStrict, type, true, initExpression);
@@ -102,7 +101,14 @@ public class LoadingPartition2Mapping extends AbstractRootRegion2Mapping
 				connection2variable.put(rootConnection, allInstancesVariable);
 			}
 			else {
-				connection2variable.put(rootConnection, createRootConnectionVariable(name, false, commonType, null));
+				BufferStatement rootConnectionVariable = createRootConnectionVariable(name, false, commonType, null);
+				int firstPass = rootConnection.getFirstPass();
+				int lastPass = rootConnection.getLastPass();
+				rootConnectionVariable.setFirstPass(firstPass);
+				if (lastPass > firstPass) {
+					rootConnectionVariable.setLastPass(lastPass);
+				}
+				connection2variable.put(rootConnection, rootConnectionVariable);
 			}
 		}
 	}

@@ -239,7 +239,9 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	@Override
 	public Continuation<?> visitBufferStatementCS(@NonNull BufferStatementCS csElement) {
 		BufferStatement pivotElement = refreshNamedElement(BufferStatement.class, QVTimperativePackage.Literals.BUFFER_STATEMENT, csElement);
+		pivotElement.setFirstPass(csElement.getFirstPass());
 		pivotElement.setIsStrict(csElement.isIsStrict());
+		pivotElement.setLastPass(csElement.getLastPass());
 		return null;
 	}
 
@@ -293,7 +295,9 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		Mapping pivotElement = refreshNamedElement(Mapping.class, QVTimperativePackage.Literals.MAPPING, csElement);
 		context.refreshPivotList(MappingParameter.class, pivotElement.getOwnedMappingParameters(), csElement.getOwnedParameters());
 		context.refreshPivotList(Statement.class, pivotElement.getOwnedStatements(), csElement.getOwnedStatements());
+		pivotElement.setFirstPass(csElement.getFirstPass());
 		pivotElement.setIsStrict(csElement.isIsStrict());
+		pivotElement.setLastPass(csElement.getLastPass());
 		return null;
 	}
 

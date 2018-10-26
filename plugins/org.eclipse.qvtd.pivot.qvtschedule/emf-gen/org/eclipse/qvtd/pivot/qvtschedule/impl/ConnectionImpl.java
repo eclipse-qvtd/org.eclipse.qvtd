@@ -617,6 +617,11 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 		return getConnectionRole().getColor();
 	}
 
+	@Override
+	public int getFirstPass() {
+		return passes.get(0);
+	}
+
 	public @Nullable String getIndexText() {
 		StringBuilder s = null;
 		for (@NonNull Integer index : passes) {

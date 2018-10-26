@@ -397,7 +397,9 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 	public ElementCS visitBufferStatement(@NonNull BufferStatement asVariable) {
 		BufferStatementCS csVariable = context.refreshTypedElement(BufferStatementCS.class, QVTimperativeCSPackage.Literals.BUFFER_STATEMENT_CS, asVariable);
 		csVariable.setOwnedExpression(context.visitDeclaration(ExpCS.class, asVariable.getOwnedExpression()));
+		csVariable.setFirstPass(asVariable.getFirstPass());
 		csVariable.setIsStrict(asVariable.isIsStrict());
+		csVariable.setLastPass(asVariable.getLastPass());
 		return csVariable;
 	}
 
@@ -604,7 +606,9 @@ public class QVTimperativeDeclarationVisitor extends QVTbaseDeclarationVisitor i
 		refreshOwnedInTransformation(csMapping, asMapping);
 		context.refreshList(csMapping.getOwnedParameters(), context.visitDeclarations(MappingParameterCS.class, asMapping.getOwnedMappingParameters(), null));
 		context.refreshList(csMapping.getOwnedStatements(), context.visitDeclarations(StatementCS.class, asMapping.getOwnedStatements(), null));
+		csMapping.setFirstPass(asMapping.getFirstPass());
 		csMapping.setIsStrict(asMapping.isIsStrict());
+		csMapping.setLastPass(asMapping.getLastPass());
 		return csMapping;
 	}
 
