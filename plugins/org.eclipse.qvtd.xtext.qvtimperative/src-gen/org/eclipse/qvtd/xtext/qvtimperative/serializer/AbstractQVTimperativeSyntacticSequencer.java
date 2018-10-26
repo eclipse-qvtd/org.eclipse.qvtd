@@ -1630,7 +1630,7 @@ public abstract class AbstractQVTimperativeSyntacticSequencer extends AbstractSy
 
 	/**
 	 * Ambiguous syntax:
-	 *     ';' | ('{' '}')
+	 *     ('{' '}') | ';'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     instanceClassName=SINGLE_QUOTED_STRING ('{' '!serializable'? '}')? (ambiguity) (rule end)
@@ -1647,9 +1647,9 @@ public abstract class AbstractQVTimperativeSyntacticSequencer extends AbstractSy
 	 *     ('{' '!serializable'? '}')?
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     instanceClassName=SINGLE_QUOTED_STRING (ambiguity) (';' | ('{' '}')) (rule end)
-	 *     name=UnrestrictedName (ambiguity) (';' | ('{' '}')) (rule end)
-	 *     ownedSignature=TemplateSignatureCS (ambiguity) (';' | ('{' '}')) (rule end)
+	 *     instanceClassName=SINGLE_QUOTED_STRING (ambiguity) (('{' '}') | ';') (rule end)
+	 *     name=UnrestrictedName (ambiguity) (('{' '}') | ';') (rule end)
+	 *     ownedSignature=TemplateSignatureCS (ambiguity) (('{' '}') | ';') (rule end)
 	 */
 	protected void emit_DataTypeCS___LeftCurlyBracketKeyword_5_0_SerializableKeyword_5_1_1_q_RightCurlyBracketKeyword_5_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -1657,7 +1657,7 @@ public abstract class AbstractQVTimperativeSyntacticSequencer extends AbstractSy
 
 	/**
 	 * Ambiguous syntax:
-	 *     ';' | ('{' '}')
+	 *     ('{' '}') | ';'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     instanceClassName=SINGLE_QUOTED_STRING ('{' '!serializable'? '}')? (ambiguity) (rule end)
@@ -1675,11 +1675,11 @@ public abstract class AbstractQVTimperativeSyntacticSequencer extends AbstractSy
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     instanceClassName=SINGLE_QUOTED_STRING (ambiguity) '{' ownedLiterals+=EnumerationLiteralCS
-	 *     instanceClassName=SINGLE_QUOTED_STRING (ambiguity) (';' | ('{' '}')) (rule end)
+	 *     instanceClassName=SINGLE_QUOTED_STRING (ambiguity) (('{' '}') | ';') (rule end)
 	 *     name=UnrestrictedName (ambiguity) '{' ownedLiterals+=EnumerationLiteralCS
-	 *     name=UnrestrictedName (ambiguity) (';' | ('{' '}')) (rule end)
+	 *     name=UnrestrictedName (ambiguity) (('{' '}') | ';') (rule end)
 	 *     ownedSignature=TemplateSignatureCS (ambiguity) '{' ownedLiterals+=EnumerationLiteralCS
-	 *     ownedSignature=TemplateSignatureCS (ambiguity) (';' | ('{' '}')) (rule end)
+	 *     ownedSignature=TemplateSignatureCS (ambiguity) (('{' '}') | ';') (rule end)
 	 */
 	protected void emit_EnumerationCS___LeftCurlyBracketKeyword_4_0_SerializableKeyword_4_1_1_q_RightCurlyBracketKeyword_4_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -3494,7 +3494,7 @@ public abstract class AbstractQVTimperativeSyntacticSequencer extends AbstractSy
 
 	/**
 	 * Ambiguous syntax:
-	 *     ';' | ('{' '}')
+	 *     ('{' '}') | ';'
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     instanceClassName=SINGLE_QUOTED_STRING ('{' '}')? (ambiguity) (rule end)
@@ -3514,16 +3514,16 @@ public abstract class AbstractQVTimperativeSyntacticSequencer extends AbstractSy
 	 * This ambiguous syntax occurs at:
 	 *     instanceClassName=SINGLE_QUOTED_STRING (ambiguity) '{' ownedOperations+=OperationCS
 	 *     instanceClassName=SINGLE_QUOTED_STRING (ambiguity) '{' ownedProperties+=StructuralFeatureCS
-	 *     instanceClassName=SINGLE_QUOTED_STRING (ambiguity) (';' | ('{' '}')) (rule end)
+	 *     instanceClassName=SINGLE_QUOTED_STRING (ambiguity) (('{' '}') | ';') (rule end)
 	 *     name=UnrestrictedName (ambiguity) '{' ownedOperations+=OperationCS
 	 *     name=UnrestrictedName (ambiguity) '{' ownedProperties+=StructuralFeatureCS
-	 *     name=UnrestrictedName (ambiguity) (';' | ('{' '}')) (rule end)
+	 *     name=UnrestrictedName (ambiguity) (('{' '}') | ';') (rule end)
 	 *     ownedSignature=TemplateSignatureCS (ambiguity) '{' ownedOperations+=OperationCS
 	 *     ownedSignature=TemplateSignatureCS (ambiguity) '{' ownedProperties+=StructuralFeatureCS
-	 *     ownedSignature=TemplateSignatureCS (ambiguity) (';' | ('{' '}')) (rule end)
+	 *     ownedSignature=TemplateSignatureCS (ambiguity) (('{' '}') | ';') (rule end)
 	 *     ownedSuperTypes+=TypedRefCS (ambiguity) '{' ownedOperations+=OperationCS
 	 *     ownedSuperTypes+=TypedRefCS (ambiguity) '{' ownedProperties+=StructuralFeatureCS
-	 *     ownedSuperTypes+=TypedRefCS (ambiguity) (';' | ('{' '}')) (rule end)
+	 *     ownedSuperTypes+=TypedRefCS (ambiguity) (('{' '}') | ';') (rule end)
 	 */
 	protected void emit_StructuredClassCS___LeftCurlyBracketKeyword_6_0_RightCurlyBracketKeyword_6_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

@@ -99,7 +99,9 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 		{
 			BufferStatementCSElements a = f.getBufferStatementCSAccess();
 			c.setLinewrap(1).before(a.getGroup());
-			c.setNoSpace().before(a.getSemicolonKeyword_5());
+			c.setNoSpace().around(a.getColonKeyword_2_0());
+			c.setNoSpace().around(a.getFullStopFullStopKeyword_2_2_0());
+			c.setNoSpace().before(a.getSemicolonKeyword_6());
 		}
 		{
 			CheckStatementCSElements a = f.getCheckStatementCSAccess();
@@ -149,7 +151,9 @@ public class QVTimperativeFormatter extends AbstractEssentialOCLFormatter
 		{
 			MappingCallCSElements a = f.getMappingCallCSAccess();
 			c.setLinewrap(1).before(a.getGroup());
-			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
+			c.setNoSpace().around(a.getColonKeyword_2_0());
+			c.setNoSpace().around(a.getFullStopFullStopKeyword_2_2_0());
+			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_6());
 			//		    c.setIndentation(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
 		}
 		{

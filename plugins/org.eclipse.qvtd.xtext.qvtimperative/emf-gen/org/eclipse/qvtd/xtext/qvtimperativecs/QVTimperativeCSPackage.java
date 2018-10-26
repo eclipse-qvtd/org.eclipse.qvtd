@@ -1002,13 +1002,31 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int BUFFER_STATEMENT_CS__OWNED_EXPRESSION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>First Pass</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUFFER_STATEMENT_CS__FIRST_PASS = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Last Pass</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUFFER_STATEMENT_CS__LAST_PASS = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Buffer Statement CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUFFER_STATEMENT_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int BUFFER_STATEMENT_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1822,13 +1840,31 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_CS__OWNED_STATEMENTS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>First Pass</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CS__FIRST_PASS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Last Pass</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CS__LAST_PASS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>Mapping CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
+	int MAPPING_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -3223,6 +3259,28 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EReference getBufferStatementCS_OwnedExpression();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS#getFirstPass <em>First Pass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>First Pass</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS#getFirstPass()
+	 * @see #getBufferStatementCS()
+	 * @generated
+	 */
+	EAttribute getBufferStatementCS_FirstPass();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS#getLastPass <em>Last Pass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Last Pass</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.BufferStatementCS#getLastPass()
+	 * @see #getBufferStatementCS()
+	 * @generated
+	 */
+	EAttribute getBufferStatementCS_LastPass();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS <em>Check Statement CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3489,6 +3547,28 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMappingCS_OwnedStatements();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getFirstPass <em>First Pass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>First Pass</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getFirstPass()
+	 * @see #getMappingCS()
+	 * @generated
+	 */
+	EAttribute getMappingCS_FirstPass();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getLastPass <em>Last Pass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Last Pass</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getLastPass()
+	 * @see #getMappingCS()
+	 * @generated
+	 */
+	EAttribute getMappingCS_LastPass();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS <em>Mapping Call CS</em>}'.
@@ -4103,6 +4183,22 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EReference BUFFER_STATEMENT_CS__OWNED_EXPRESSION = eINSTANCE.getBufferStatementCS_OwnedExpression();
 
 		/**
+		 * The meta object literal for the '<em><b>First Pass</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BUFFER_STATEMENT_CS__FIRST_PASS = eINSTANCE.getBufferStatementCS_FirstPass();
+
+		/**
+		 * The meta object literal for the '<em><b>Last Pass</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BUFFER_STATEMENT_CS__LAST_PASS = eINSTANCE.getBufferStatementCS_LastPass();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.CheckStatementCSImpl <em>Check Statement CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4315,6 +4411,22 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_CS__OWNED_STATEMENTS = eINSTANCE.getMappingCS_OwnedStatements();
+
+		/**
+		 * The meta object literal for the '<em><b>First Pass</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MAPPING_CS__FIRST_PASS = eINSTANCE.getMappingCS_FirstPass();
+
+		/**
+		 * The meta object literal for the '<em><b>Last Pass</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MAPPING_CS__LAST_PASS = eINSTANCE.getMappingCS_LastPass();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl <em>Mapping Call CS</em>}' class.

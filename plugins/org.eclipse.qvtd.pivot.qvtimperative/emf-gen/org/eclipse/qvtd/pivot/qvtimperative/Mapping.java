@@ -33,6 +33,8 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#isIsStrict <em>Is Strict</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedMappingParameters <em>Owned Mapping Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getOwnedStatements <em>Owned Statements</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getFirstPass <em>First Pass</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getLastPass <em>Last Pass</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping()
@@ -46,7 +48,7 @@ public interface Mapping extends Rule {
 	 * <!-- end-user-doc -->
 	 * <!-- begin-model-doc -->
 	 * Repeated invocations of a strict Mapping are suppressed at run-time.
-	 * 
+	 *
 	 * Repeated invocations of a not-strict Mapping are guaranteed not to occur.
 	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Is Strict</em>' attribute.
@@ -97,6 +99,54 @@ public interface Mapping extends Rule {
 	 * @generated
 	 */
 	EList<Statement> getOwnedStatements();
+
+	/**
+	 * Returns the value of the '<em><b>First Pass</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The earliest (inclusive) pass in which this Mapping executes.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>First Pass</em>' attribute.
+	 * @see #setFirstPass(Integer)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping_FirstPass()
+	 * @generated
+	 */
+	Integer getFirstPass();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getFirstPass <em>First Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>First Pass</em>' attribute.
+	 * @see #getFirstPass()
+	 * @generated
+	 */
+	void setFirstPass(Integer value);
+
+	/**
+	 * Returns the value of the '<em><b>Last Pass</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The latest (inclusive) pass in which this Mapping executes.
+	 * <!-- end-model-doc -->
+	 * @return the value of the '<em>Last Pass</em>' attribute.
+	 * @see #setLastPass(Integer)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping_LastPass()
+	 * @generated
+	 */
+	Integer getLastPass();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getLastPass <em>Last Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Last Pass</em>' attribute.
+	 * @see #getLastPass()
+	 * @generated
+	 */
+	void setLastPass(Integer value);
 
 	/**
 	 * <!-- begin-user-doc -->

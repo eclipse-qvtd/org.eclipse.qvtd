@@ -69,6 +69,7 @@ public class QVTimperativeTables
 	 *	Constants used by auto-generated code.
 	 */
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_$metamodel$ = org.eclipse.ocl.pivot.ids.IdManager.getRootPackageId("$metamodel$");
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://www.eclipse.org/emf/2002/Ecore", null, org.eclipse.emf.ecore.EcorePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTbase", null, org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2016/QVTimperative", null, org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage.eINSTANCE);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_PRIMid_String = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.ocl.pivot.ids.TypeId.STRING);
@@ -108,6 +109,7 @@ public class QVTimperativeTables
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_VariableDeclaration = org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.PACKid_$metamodel$.getClassId("VariableDeclaration", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_VariableExp = org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.PACKid_$metamodel$.getClassId("VariableExp", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_VariableStatement = org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_QVTimperative.getClassId("VariableStatement", 0);
+	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull DataTypeId DATAid_EIntegerObject = org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getDataTypeId("EIntegerObject", 0);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue INT_0 = org.eclipse.ocl.pivot.utilities.ValueUtil.integerValueOf("0");
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_PRIMid_String = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.ocl.pivot.ids.TypeId.STRING);
 	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull TuplePartId PARTid_ = org.eclipse.ocl.pivot.ids.IdManager.getTuplePartId(0, "message", org.eclipse.ocl.pivot.ids.TypeId.STRING);
@@ -583,7 +585,9 @@ public class QVTimperativeTables
 
 		public static final @NonNull ExecutorProperty _AppendParameterBinding__value = new EcoreExecutorProperty(QVTimperativePackage.Literals.APPEND_PARAMETER_BINDING__VALUE, Types._AppendParameterBinding, 0);
 
-		public static final @NonNull ExecutorProperty _BufferStatement__ownedExpression = new EcoreExecutorProperty(QVTimperativePackage.Literals.BUFFER_STATEMENT__OWNED_EXPRESSION, Types._BufferStatement, 0);
+		public static final @NonNull ExecutorProperty _BufferStatement__firstPass = new EcoreExecutorProperty(QVTimperativePackage.Literals.BUFFER_STATEMENT__FIRST_PASS, Types._BufferStatement, 0);
+		public static final @NonNull ExecutorProperty _BufferStatement__lastPass = new EcoreExecutorProperty(QVTimperativePackage.Literals.BUFFER_STATEMENT__LAST_PASS, Types._BufferStatement, 1);
+		public static final @NonNull ExecutorProperty _BufferStatement__ownedExpression = new EcoreExecutorProperty(QVTimperativePackage.Literals.BUFFER_STATEMENT__OWNED_EXPRESSION, Types._BufferStatement, 2);
 
 		public static final @NonNull ExecutorProperty _CheckStatement__ownedExpression = new EcoreExecutorProperty(QVTimperativePackage.Literals.CHECK_STATEMENT__OWNED_EXPRESSION, Types._CheckStatement, 0);
 
@@ -614,10 +618,12 @@ public class QVTimperativeTables
 		public static final @NonNull ExecutorProperty _LoopVariable__owningMappingLoop = new EcoreExecutorProperty(QVTimperativePackage.Literals.LOOP_VARIABLE__OWNING_MAPPING_LOOP, Types._LoopVariable, 0);
 		public static final @NonNull ExecutorProperty _LoopVariable__LoopParameterBinding__value = new ExecutorPropertyWithImplementation("LoopParameterBinding", Types._LoopVariable, 1, new EcoreLibraryOppositeProperty(QVTimperativePackage.Literals.LOOP_PARAMETER_BINDING__VALUE));
 
-		public static final @NonNull ExecutorProperty _Mapping__isStrict = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING__IS_STRICT, Types._Mapping, 0);
-		public static final @NonNull ExecutorProperty _Mapping__ownedMappingParameters = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING__OWNED_MAPPING_PARAMETERS, Types._Mapping, 1);
-		public static final @NonNull ExecutorProperty _Mapping__ownedStatements = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING__OWNED_STATEMENTS, Types._Mapping, 2);
-		public static final @NonNull ExecutorProperty _Mapping__MappingCall__referredMapping = new ExecutorPropertyWithImplementation("MappingCall", Types._Mapping, 3, new EcoreLibraryOppositeProperty(QVTimperativePackage.Literals.MAPPING_CALL__REFERRED_MAPPING));
+		public static final @NonNull ExecutorProperty _Mapping__firstPass = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING__FIRST_PASS, Types._Mapping, 0);
+		public static final @NonNull ExecutorProperty _Mapping__isStrict = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING__IS_STRICT, Types._Mapping, 1);
+		public static final @NonNull ExecutorProperty _Mapping__lastPass = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING__LAST_PASS, Types._Mapping, 2);
+		public static final @NonNull ExecutorProperty _Mapping__ownedMappingParameters = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING__OWNED_MAPPING_PARAMETERS, Types._Mapping, 3);
+		public static final @NonNull ExecutorProperty _Mapping__ownedStatements = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING__OWNED_STATEMENTS, Types._Mapping, 4);
+		public static final @NonNull ExecutorProperty _Mapping__MappingCall__referredMapping = new ExecutorPropertyWithImplementation("MappingCall", Types._Mapping, 5, new EcoreLibraryOppositeProperty(QVTimperativePackage.Literals.MAPPING_CALL__REFERRED_MAPPING));
 
 		public static final @NonNull ExecutorProperty _MappingCall__isInstall = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_CALL__IS_INSTALL, Types._MappingCall, 0);
 		public static final @NonNull ExecutorProperty _MappingCall__isInvoke = new EcoreExecutorProperty(QVTimperativePackage.Literals.MAPPING_CALL__IS_INVOKE, Types._MappingCall, 1);
@@ -2328,7 +2334,9 @@ public class QVTimperativeTables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _BufferStatement = {
+			QVTimperativeTables.Properties._BufferStatement__firstPass,
 			QVTimperativeTables.Properties._ConnectionVariable__isStrict,
+			QVTimperativeTables.Properties._BufferStatement__lastPass,
 			QVTimperativeTables.Properties._ObservableStatement__observedProperties,
 			QVTimperativeTables.Properties._BufferStatement__ownedExpression
 		};
@@ -2383,7 +2391,9 @@ public class QVTimperativeTables
 		};
 
 		private static final @NonNull ExecutorProperty @NonNull [] _Mapping = {
+			QVTimperativeTables.Properties._Mapping__firstPass,
 			QVTimperativeTables.Properties._Mapping__isStrict,
+			QVTimperativeTables.Properties._Mapping__lastPass,
 			QVTimperativeTables.Properties._Mapping__ownedMappingParameters,
 			QVTimperativeTables.Properties._Mapping__ownedStatements
 		};

@@ -58,6 +58,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#isIsStrict <em>Is Strict</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getOwnedMappingParameters <em>Owned Mapping Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getOwnedStatements <em>Owned Statements</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getFirstPass <em>First Pass</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getLastPass <em>Last Pass</em>}</li>
  * </ul>
  *
  * @generated
@@ -102,6 +104,46 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @ordered
 	 */
 	protected EList<Statement> ownedStatements;
+
+	/**
+	 * The default value of the '{@link #getFirstPass() <em>First Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFirstPass()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer FIRST_PASS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getFirstPass() <em>First Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFirstPass()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer firstPass = FIRST_PASS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLastPass() <em>Last Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLastPass()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer LAST_PASS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLastPass() <em>Last Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLastPass()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer lastPass = LAST_PASS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -169,6 +211,52 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			ownedStatements = new EObjectContainmentEList<Statement>(Statement.class, this, QVTimperativePackage.MAPPING__OWNED_STATEMENTS);
 		}
 		return ownedStatements;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Integer getFirstPass() {
+		return firstPass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setFirstPass(Integer newFirstPass) {
+		Integer oldFirstPass = firstPass;
+		firstPass = newFirstPass;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING__FIRST_PASS, oldFirstPass, firstPass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Integer getLastPass() {
+		return lastPass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setLastPass(Integer newLastPass) {
+		Integer oldLastPass = lastPass;
+		lastPass = newLastPass;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING__LAST_PASS, oldLastPass, lastPass));
 	}
 
 	/**
@@ -409,6 +497,10 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return getOwnedMappingParameters();
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				return getOwnedStatements();
+			case QVTimperativePackage.MAPPING__FIRST_PASS:
+				return getFirstPass();
+			case QVTimperativePackage.MAPPING__LAST_PASS:
+				return getLastPass();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -433,6 +525,12 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				getOwnedStatements().clear();
 				getOwnedStatements().addAll((Collection<? extends Statement>)newValue);
 				return;
+			case QVTimperativePackage.MAPPING__FIRST_PASS:
+				setFirstPass((Integer)newValue);
+				return;
+			case QVTimperativePackage.MAPPING__LAST_PASS:
+				setLastPass((Integer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -454,6 +552,12 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				getOwnedStatements().clear();
 				return;
+			case QVTimperativePackage.MAPPING__FIRST_PASS:
+				setFirstPass(FIRST_PASS_EDEFAULT);
+				return;
+			case QVTimperativePackage.MAPPING__LAST_PASS:
+				setLastPass(LAST_PASS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -472,6 +576,10 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return ownedMappingParameters != null && !ownedMappingParameters.isEmpty();
 			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
 				return ownedStatements != null && !ownedStatements.isEmpty();
+			case QVTimperativePackage.MAPPING__FIRST_PASS:
+				return FIRST_PASS_EDEFAULT == null ? firstPass != null : !FIRST_PASS_EDEFAULT.equals(firstPass);
+			case QVTimperativePackage.MAPPING__LAST_PASS:
+				return LAST_PASS_EDEFAULT == null ? lastPass != null : !LAST_PASS_EDEFAULT.equals(lastPass);
 		}
 		return super.eIsSet(featureID);
 	}

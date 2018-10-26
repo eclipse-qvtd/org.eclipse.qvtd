@@ -27,6 +27,8 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedInPathName <em>Owned In Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedParameters <em>Owned Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedStatements <em>Owned Statements</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getFirstPass <em>First Pass</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getLastPass <em>Last Pass</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS()
@@ -118,5 +120,57 @@ public interface MappingCS extends NamedElementCS {
 	 * @generated
 	 */
 	EList<StatementCS> getOwnedStatements();
+
+	/**
+	 * Returns the value of the '<em><b>First Pass</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>First Pass</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>First Pass</em>' attribute.
+	 * @see #setFirstPass(Integer)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS_FirstPass()
+	 * @model
+	 * @generated
+	 */
+	Integer getFirstPass();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getFirstPass <em>First Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>First Pass</em>' attribute.
+	 * @see #getFirstPass()
+	 * @generated
+	 */
+	void setFirstPass(Integer value);
+
+	/**
+	 * Returns the value of the '<em><b>Last Pass</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Last Pass</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Last Pass</em>' attribute.
+	 * @see #setLastPass(Integer)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS_LastPass()
+	 * @model
+	 * @generated
+	 */
+	Integer getLastPass();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getLastPass <em>Last Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Last Pass</em>' attribute.
+	 * @see #getLastPass()
+	 * @generated
+	 */
+	void setLastPass(Integer value);
 
 } // MappingCS

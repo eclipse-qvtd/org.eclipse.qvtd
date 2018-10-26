@@ -42,6 +42,8 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedInPathName <em>Owned In Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedParameters <em>Owned Parameters</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedStatements <em>Owned Statements</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getFirstPass <em>First Pass</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getLastPass <em>Last Pass</em>}</li>
  * </ul>
  *
  * @generated
@@ -92,6 +94,42 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	 * @ordered
 	 */
 	protected EList<StatementCS> ownedStatements;
+	/**
+	 * The default value of the '{@link #getFirstPass() <em>First Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFirstPass()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer FIRST_PASS_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getFirstPass() <em>First Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFirstPass()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer firstPass = FIRST_PASS_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getLastPass() <em>Last Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLastPass()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer LAST_PASS_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getLastPass() <em>Last Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLastPass()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer lastPass = LAST_PASS_EDEFAULT;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -208,6 +246,52 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Integer getFirstPass() {
+		return firstPass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setFirstPass(Integer newFirstPass) {
+		Integer oldFirstPass = firstPass;
+		firstPass = newFirstPass;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__FIRST_PASS, oldFirstPass, firstPass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Integer getLastPass() {
+		return lastPass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setLastPass(Integer newLastPass) {
+		Integer oldLastPass = lastPass;
+		lastPass = newLastPass;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__LAST_PASS, oldLastPass, lastPass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	@Override
@@ -249,6 +333,10 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 				return getOwnedParameters();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
 				return getOwnedStatements();
+			case QVTimperativeCSPackage.MAPPING_CS__FIRST_PASS:
+				return getFirstPass();
+			case QVTimperativeCSPackage.MAPPING_CS__LAST_PASS:
+				return getLastPass();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -276,6 +364,12 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 				getOwnedStatements().clear();
 				getOwnedStatements().addAll((Collection<? extends StatementCS>)newValue);
 				return;
+			case QVTimperativeCSPackage.MAPPING_CS__FIRST_PASS:
+				setFirstPass((Integer)newValue);
+				return;
+			case QVTimperativeCSPackage.MAPPING_CS__LAST_PASS:
+				setLastPass((Integer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -300,6 +394,12 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
 				getOwnedStatements().clear();
 				return;
+			case QVTimperativeCSPackage.MAPPING_CS__FIRST_PASS:
+				setFirstPass(FIRST_PASS_EDEFAULT);
+				return;
+			case QVTimperativeCSPackage.MAPPING_CS__LAST_PASS:
+				setLastPass(LAST_PASS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -320,6 +420,10 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 				return ownedParameters != null && !ownedParameters.isEmpty();
 			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
 				return ownedStatements != null && !ownedStatements.isEmpty();
+			case QVTimperativeCSPackage.MAPPING_CS__FIRST_PASS:
+				return FIRST_PASS_EDEFAULT == null ? firstPass != null : !FIRST_PASS_EDEFAULT.equals(firstPass);
+			case QVTimperativeCSPackage.MAPPING_CS__LAST_PASS:
+				return LAST_PASS_EDEFAULT == null ? lastPass != null : !LAST_PASS_EDEFAULT.equals(lastPass);
 		}
 		return super.eIsSet(featureID);
 	}

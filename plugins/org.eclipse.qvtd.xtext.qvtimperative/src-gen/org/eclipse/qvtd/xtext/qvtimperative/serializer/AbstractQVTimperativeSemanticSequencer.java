@@ -583,7 +583,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     GuardStatementCS returns BufferStatementCS
 	 *
 	 * Constraint:
-	 *     (isStrict?='strict'? name=UnrestrictedName ownedType=TypeExpCS? ownedExpression=ExpCS?)
+	 *     (isStrict?='strict'? (firstPass=LOWER lastPass=LOWER?)? name=UnrestrictedName ownedType=TypeExpCS? ownedExpression=ExpCS?)
 	 */
 	protected void sequence_BufferStatementCS(ISerializationContext context, BufferStatementCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -707,6 +707,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 * Constraint:
 	 *     (
 	 *         isStrict?='strict'?
+	 *         (firstPass=LOWER lastPass=LOWER?)?
 	 *         name=UnrestrictedName
 	 *         ownedInPathName=PathNameCS?
 	 *         ownedParameters+=MappingParameterCS*

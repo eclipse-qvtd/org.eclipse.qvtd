@@ -62,6 +62,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.BufferStatementImpl#getObservedProperties <em>Observed Properties</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.BufferStatementImpl#getOwnedExpression <em>Owned Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.BufferStatementImpl#getFirstPass <em>First Pass</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.BufferStatementImpl#getLastPass <em>Last Pass</em>}</li>
  * </ul>
  *
  * @generated
@@ -86,6 +88,46 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	 * @ordered
 	 */
 	protected OCLExpression ownedExpression;
+
+	/**
+	 * The default value of the '{@link #getFirstPass() <em>First Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFirstPass()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer FIRST_PASS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getFirstPass() <em>First Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFirstPass()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer firstPass = FIRST_PASS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getLastPass() <em>Last Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLastPass()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer LAST_PASS_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getLastPass() <em>Last Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLastPass()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer lastPass = LAST_PASS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -162,6 +204,52 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Integer getFirstPass() {
+		return firstPass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setFirstPass(Integer newFirstPass) {
+		Integer oldFirstPass = firstPass;
+		firstPass = newFirstPass;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.BUFFER_STATEMENT__FIRST_PASS, oldFirstPass, firstPass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Integer getLastPass() {
+		return lastPass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setLastPass(Integer newLastPass) {
+		Integer oldLastPass = lastPass;
+		lastPass = newLastPass;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.BUFFER_STATEMENT__LAST_PASS, oldLastPass, lastPass));
 	}
 
 	/**
@@ -302,6 +390,10 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 				return getObservedProperties();
 			case QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION:
 				return getOwnedExpression();
+			case QVTimperativePackage.BUFFER_STATEMENT__FIRST_PASS:
+				return getFirstPass();
+			case QVTimperativePackage.BUFFER_STATEMENT__LAST_PASS:
+				return getLastPass();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -322,6 +414,12 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 			case QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION:
 				setOwnedExpression((OCLExpression)newValue);
 				return;
+			case QVTimperativePackage.BUFFER_STATEMENT__FIRST_PASS:
+				setFirstPass((Integer)newValue);
+				return;
+			case QVTimperativePackage.BUFFER_STATEMENT__LAST_PASS:
+				setLastPass((Integer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -340,6 +438,12 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 			case QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION:
 				setOwnedExpression((OCLExpression)null);
 				return;
+			case QVTimperativePackage.BUFFER_STATEMENT__FIRST_PASS:
+				setFirstPass(FIRST_PASS_EDEFAULT);
+				return;
+			case QVTimperativePackage.BUFFER_STATEMENT__LAST_PASS:
+				setLastPass(LAST_PASS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -356,6 +460,10 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 				return observedProperties != null && !observedProperties.isEmpty();
 			case QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION:
 				return ownedExpression != null;
+			case QVTimperativePackage.BUFFER_STATEMENT__FIRST_PASS:
+				return FIRST_PASS_EDEFAULT == null ? firstPass != null : !FIRST_PASS_EDEFAULT.equals(firstPass);
+			case QVTimperativePackage.BUFFER_STATEMENT__LAST_PASS:
+				return LAST_PASS_EDEFAULT == null ? lastPass != null : !LAST_PASS_EDEFAULT.equals(lastPass);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -453,6 +561,24 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 				return joinNames((EList<String>)arguments.get(0));
 		}
 		return super.eInvoke(operationID, arguments);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (firstPass: ");
+		result.append(firstPass);
+		result.append(", lastPass: ");
+		result.append(lastPass);
+		result.append(')');
+		return result.toString();
 	}
 
 	/**

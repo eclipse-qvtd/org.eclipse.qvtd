@@ -37,6 +37,8 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.BufferStatementCSImpl#isIsStrict <em>Is Strict</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.BufferStatementCSImpl#getOwnedExpression <em>Owned Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.BufferStatementCSImpl#getFirstPass <em>First Pass</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.BufferStatementCSImpl#getLastPass <em>Last Pass</em>}</li>
  * </ul>
  *
  * @generated
@@ -69,6 +71,43 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 	 * @ordered
 	 */
 	protected ExpCS ownedExpression;
+
+	/**
+	 * The default value of the '{@link #getFirstPass() <em>First Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFirstPass()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer FIRST_PASS_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getFirstPass() <em>First Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFirstPass()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer firstPass = FIRST_PASS_EDEFAULT;
+	/**
+	 * The default value of the '{@link #getLastPass() <em>Last Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLastPass()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Integer LAST_PASS_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getLastPass() <em>Last Pass</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getLastPass()
+	 * @generated
+	 * @ordered
+	 */
+	protected Integer lastPass = LAST_PASS_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -160,6 +199,52 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Integer getFirstPass() {
+		return firstPass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setFirstPass(Integer newFirstPass) {
+		Integer oldFirstPass = firstPass;
+		firstPass = newFirstPass;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.BUFFER_STATEMENT_CS__FIRST_PASS, oldFirstPass, firstPass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Integer getLastPass() {
+		return lastPass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setLastPass(Integer newLastPass) {
+		Integer oldLastPass = lastPass;
+		lastPass = newLastPass;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.BUFFER_STATEMENT_CS__LAST_PASS, oldLastPass, lastPass));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	@Override
@@ -193,6 +278,10 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 				return isIsStrict();
 			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION:
 				return getOwnedExpression();
+			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__FIRST_PASS:
+				return getFirstPass();
+			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__LAST_PASS:
+				return getLastPass();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -210,6 +299,12 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 				return;
 			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION:
 				setOwnedExpression((ExpCS)newValue);
+				return;
+			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__FIRST_PASS:
+				setFirstPass((Integer)newValue);
+				return;
+			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__LAST_PASS:
+				setLastPass((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -229,6 +324,12 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION:
 				setOwnedExpression((ExpCS)null);
 				return;
+			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__FIRST_PASS:
+				setFirstPass(FIRST_PASS_EDEFAULT);
+				return;
+			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__LAST_PASS:
+				setLastPass(LAST_PASS_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -245,6 +346,10 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 				return isStrict != IS_STRICT_EDEFAULT;
 			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION:
 				return ownedExpression != null;
+			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__FIRST_PASS:
+				return FIRST_PASS_EDEFAULT == null ? firstPass != null : !FIRST_PASS_EDEFAULT.equals(firstPass);
+			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__LAST_PASS:
+				return LAST_PASS_EDEFAULT == null ? lastPass != null : !LAST_PASS_EDEFAULT.equals(lastPass);
 		}
 		return super.eIsSet(featureID);
 	}

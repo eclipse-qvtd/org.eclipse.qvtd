@@ -32,17 +32,17 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
  * <!-- end-user-doc -->
  * <!-- begin-model-doc -->
  * The Package for an Imperative QVT transformation.
- *
+ * 
  * An Imperative QVT trabsformation is expected to be created by an autogenerator that observes the following run-time restrictions:
- *
+ * 
  * A mapping that my be re-invoked must have MappingCall.isInfinite set for every possible invocation.
- *
+ * 
  * A mapping that reads object slots before they are guaranteed to have been assigned must declare the slots property in a corresponding ImperativeArea.checkedProperties entry.
- *
+ * 
  * A mapping that assigns an object slot that any mapping may access before assignment is guaranteed must declare declare the slots property in a corresponding ImperativeArea.enforcedProperties entry.
- *
+ * 
  * All reads by Functions/Queries must be guaranteed to succeed; i.e. the invoking mapping must check readiness before calling the query.
- *
+ * 
  * All writes to multi-valued properties must be guaranteed to occur before any read of the property.
  * <!-- end-model-doc -->
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory
@@ -1263,13 +1263,31 @@ public interface QVTimperativePackage extends EPackage {
 	int BUFFER_STATEMENT__OWNED_EXPRESSION = CONNECTION_VARIABLE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>First Pass</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUFFER_STATEMENT__FIRST_PASS = CONNECTION_VARIABLE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Last Pass</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BUFFER_STATEMENT__LAST_PASS = CONNECTION_VARIABLE_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Buffer Statement</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BUFFER_STATEMENT_FEATURE_COUNT = CONNECTION_VARIABLE_FEATURE_COUNT + 2;
+	int BUFFER_STATEMENT_FEATURE_COUNT = CONNECTION_VARIABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -3488,13 +3506,31 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING__OWNED_STATEMENTS = QVTbasePackage.RULE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>First Pass</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING__FIRST_PASS = QVTbasePackage.RULE_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Last Pass</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING__LAST_PASS = QVTbasePackage.RULE_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>Mapping</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_FEATURE_COUNT = QVTbasePackage.RULE_FEATURE_COUNT + 3;
+	int MAPPING_FEATURE_COUNT = QVTbasePackage.RULE_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -4758,6 +4794,28 @@ public interface QVTimperativePackage extends EPackage {
 	EReference getBufferStatement_OwnedExpression();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.BufferStatement#getFirstPass <em>First Pass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>First Pass</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.BufferStatement#getFirstPass()
+	 * @see #getBufferStatement()
+	 * @generated
+	 */
+	EAttribute getBufferStatement_FirstPass();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.BufferStatement#getLastPass <em>Last Pass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Last Pass</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.BufferStatement#getLastPass()
+	 * @see #getBufferStatement()
+	 * @generated
+	 */
+	EAttribute getBufferStatement_LastPass();
+
+	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.BufferStatement#validateCompatibleTypeForValue(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Compatible Type For Value</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5113,6 +5171,28 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMapping_OwnedStatements();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getFirstPass <em>First Pass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>First Pass</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.Mapping#getFirstPass()
+	 * @see #getMapping()
+	 * @generated
+	 */
+	EAttribute getMapping_FirstPass();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getLastPass <em>Last Pass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Last Pass</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.Mapping#getLastPass()
+	 * @see #getMapping()
+	 * @generated
+	 */
+	EAttribute getMapping_LastPass();
 
 	/**
 	 * Returns the meta object for the '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#validateNameIsNotNull(org.eclipse.emf.common.util.DiagnosticChain, java.util.Map) <em>Validate Name Is Not Null</em>}' operation.
@@ -5801,6 +5881,22 @@ public interface QVTimperativePackage extends EPackage {
 		EReference BUFFER_STATEMENT__OWNED_EXPRESSION = eINSTANCE.getBufferStatement_OwnedExpression();
 
 		/**
+		 * The meta object literal for the '<em><b>First Pass</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BUFFER_STATEMENT__FIRST_PASS = eINSTANCE.getBufferStatement_FirstPass();
+
+		/**
+		 * The meta object literal for the '<em><b>Last Pass</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BUFFER_STATEMENT__LAST_PASS = eINSTANCE.getBufferStatement_LastPass();
+
+		/**
 		 * The meta object literal for the '<em><b>Validate Compatible Type For Value</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -6093,6 +6189,22 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING__OWNED_STATEMENTS = eINSTANCE.getMapping_OwnedStatements();
+
+		/**
+		 * The meta object literal for the '<em><b>First Pass</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MAPPING__FIRST_PASS = eINSTANCE.getMapping_FirstPass();
+
+		/**
+		 * The meta object literal for the '<em><b>Last Pass</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MAPPING__LAST_PASS = eINSTANCE.getMapping_LastPass();
 
 		/**
 		 * The meta object literal for the '<em><b>Validate Name Is Not Null</b></em>' operation.
