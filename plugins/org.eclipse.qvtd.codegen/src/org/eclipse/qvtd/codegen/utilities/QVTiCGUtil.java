@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGAccumulator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGEcorePropertyCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGLetExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
@@ -33,8 +34,10 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -93,6 +96,10 @@ public class QVTiCGUtil extends CGUtil
 		return ClassUtil.nonNullState((ImperativeTypedModel)cgTypedModel.getAst());
 	}
 
+	public static @NonNull CGValuedElement getBody(@NonNull CGMappingLoop cgMappingLoop) {
+		return ClassUtil.nonNullState(cgMappingLoop.getBody());
+	}
+
 	public static @NonNull CGMapping getContainingCGMapping(@NonNull CGElement cgElement) {
 		return ClassUtil.nonNullState(basicGetContainingCGMapping(cgElement));
 	}
@@ -107,6 +114,10 @@ public class QVTiCGUtil extends CGUtil
 
 	public static @NonNull EStructuralFeature getEStructuralFeature(@NonNull CGEcorePropertyCallExp cgPropertyCallExp) {
 		return ClassUtil.nonNullState(cgPropertyCallExp.getEStructuralFeature());
+	}
+
+	public static @NonNull CGValuedElement getIn(@NonNull CGLetExp cgLetExp) {	// FIXME move to CGUtil
+		return ClassUtil.nonNullState(cgLetExp.getIn());
 	}
 
 	public static @NonNull String getName(@NonNull CGAccumulator cgAccumulator) {
@@ -155,6 +166,10 @@ public class QVTiCGUtil extends CGUtil
 
 	public static @NonNull CGValuedElement getOwnedSlotValue(@NonNull CGPropertyAssignment cgPropertyAssignment) {
 		return ClassUtil.nonNullState(cgPropertyAssignment.getOwnedSlotValue());
+	}
+
+	public static @NonNull Iterable<@NonNull CGValuedElement> getOwnedStatements(@NonNull CGSequence cgSequence) {
+		return ClassUtil.nullFree(cgSequence.getOwnedStatements());
 	}
 
 	public static @NonNull Iterable<@NonNull CGTypedModel> getOwnedTypedModels(@NonNull CGTransformation cgTransformation) {

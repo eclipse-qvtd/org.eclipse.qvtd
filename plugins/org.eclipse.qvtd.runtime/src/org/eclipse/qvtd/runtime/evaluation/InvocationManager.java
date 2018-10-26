@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.runtime.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 
 /**
@@ -23,14 +24,17 @@ import org.eclipse.ocl.pivot.evaluation.Executor;
 public interface InvocationManager extends ExecutionVisitable
 {
 	void addInvoker(@NonNull InvocationConstructor constructor);
+	@Nullable Interval basicGetInterval(int intervalIndex);
 	@NonNull Interval createInterval();
 	void diagnoseWorkLists(@NonNull StringBuilder s);
 	boolean flush();
 	@NonNull Executor getExecutor();
 	@NonNull Iterable<@NonNull Interval> getIntervals();
+	int getIntervalsSize();
 	@NonNull Iterable<@NonNull InvocationConstructor> getInvokers();
 	@NonNull Interval getRootInterval();
 	//	@Nullable Transformer getTransformer();
+	@NonNull Interval lazyCreateInterval(int intervalIndex);
 	void setInterval(@NonNull Interval interval);
 	void setWorkToDoAt(int intervalIndex);
 }

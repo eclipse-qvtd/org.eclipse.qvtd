@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocationManager;
 import org.eclipse.qvtd.runtime.evaluation.DefaultInterval;
@@ -51,6 +52,16 @@ public abstract class AbstractInvocationManagerInternal extends AbstractInvocati
 	public void addInvoker(@NonNull InvocationConstructor constructor) {
 		assert !invokers.contains(constructor);
 		invokers.add(constructor);
+	}
+
+	@Override
+	public @Nullable Interval basicGetInterval(int intervalIndex) {
+		if ((0 <= intervalIndex) && (intervalIndex < intervals.size())) {
+			return intervals.get(intervalIndex);
+		}
+		else {
+			return null;
+		}
 	}
 
 	@Override
@@ -114,6 +125,11 @@ public abstract class AbstractInvocationManagerInternal extends AbstractInvocati
 	}
 
 	@Override
+	public int getIntervalsSize() {
+		return intervals.size();
+	}
+
+	@Override
 	public @NonNull Iterable<@NonNull InvocationConstructor> getInvokers() {
 		return invokers;
 	}
@@ -124,6 +140,17 @@ public abstract class AbstractInvocationManagerInternal extends AbstractInvocati
 			createInterval();
 		}
 		return intervals.get(0);
+	}
+
+	@Override
+	public @NonNull Interval lazyCreateInterval(int intervalIndex) {
+		if (intervalIndex < 0) {
+			return createInterval();
+		}
+		while (intervals.size() <= intervalIndex) {
+			new DefaultInterval(this, intervals.size());
+		}
+		return intervals.get(intervalIndex);
 	}
 
 	@Override

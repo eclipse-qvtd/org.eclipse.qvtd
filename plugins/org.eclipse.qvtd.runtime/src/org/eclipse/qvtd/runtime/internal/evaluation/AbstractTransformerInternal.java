@@ -47,6 +47,7 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
+import org.eclipse.qvtd.runtime.evaluation.DefaultInterval;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitable;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitor;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
@@ -554,9 +555,10 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		this.objectManager = createObjectManager();
 		this.evaluationCache = createEvaluationCache();
 		this.models = new @NonNull Model @NonNull [modelNames.length];
+		Interval rootInterval = lazyCreateInterval(0);
 		for (int i = 0; i < modelNames.length; i++) {
 			String modelName = modelNames[i];
-			models[i] = createModel(modelName, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
+			models[i] = createModel(modelName, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes, rootInterval);
 			modelIndexes.put(modelName, i);
 		}
 		//
@@ -631,6 +633,10 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		return new EvaluationCache(executor);
 	}
 
+	protected @NonNull Interval createInterval(int intervalIndex) {
+		return new DefaultInterval(getInvocationManager(), intervalIndex);
+	}
+
 	/**
 	 * Create the InvocationManager. Creates a LazyInvocationManager by default.
 	 */
@@ -638,7 +644,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		return new LazyInvocationManager(executor);
 	}
 
-	@Deprecated /* @deprecated pass explit root interval */
+	@Deprecated /* @deprecated pass explicit root interval */
 	protected @NonNull Model createModel(@NonNull String modelName, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
 			@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
 		return new Model(this, modelName, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes, getInvocationManager().getRootInterval());
@@ -877,6 +883,17 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			constructor.addAppendedConnection(appendedConnection);
 		}
 	} */
+
+	protected @NonNull Interval lazyCreateInterval(int intervalIndex) {
+		if (intervalIndex < 0) {
+			return invocationManager.createInterval();		// Obsolete functionality
+		}
+		for (int i = invocationManager.getIntervalsSize(); i < intervalIndex; i++) {
+			createInterval(i);
+		}
+		Interval interval = invocationManager.basicGetInterval(intervalIndex);
+		return interval != null ? interval : createInterval(intervalIndex);
+	}
 
 	@Override
 	public void setExternalURI(@NonNull String modelName, @NonNull URI modelURI) {

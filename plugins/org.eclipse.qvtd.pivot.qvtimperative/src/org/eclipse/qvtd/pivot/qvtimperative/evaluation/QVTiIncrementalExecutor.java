@@ -77,7 +77,7 @@ public class QVTiIncrementalExecutor extends BasicQVTiExecutor
 
 		public InterpretedInvocationConstructor(@NonNull QVTiIncrementalExecutor executor, @NonNull Mapping asMapping,
 				@NonNull MappingCall mappingCall, @NonNull EvaluationVisitor undecoratedVisitor) {
-			super(executor.getInvocationManager(), QVTimperativeUtil.getName(asMapping));
+			super(executor.getInvocationManager(), QVTimperativeUtil.getName(asMapping), executor.getInvocationManager().createInterval());
 			this.executor = executor;
 			this.mappingCall = mappingCall;
 			this.undecoratedVisitor = undecoratedVisitor;

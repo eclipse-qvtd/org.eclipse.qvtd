@@ -37,8 +37,8 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 		 */
 		private final @NonNull List<Connection.@NonNull Incremental> consumedConnections = new ArrayList<>();
 
-		public Incremental(@NonNull InvocationManager invocationManager, @NonNull String name) {
-			super(invocationManager, name, true);
+		public Incremental(@NonNull InvocationManager invocationManager, @NonNull String name, @NonNull Interval interval) {
+			super(invocationManager, name, true, interval);
 		}
 
 		@Override
@@ -309,7 +309,11 @@ public abstract class AbstractInvocationConstructor implements InvocationConstru
 	private boolean repropagate = false;
 
 	protected AbstractInvocationConstructor(@NonNull InvocationManager invocationManager, @NonNull String name, boolean isStrict) {
-		this.interval = invocationManager.createInterval();
+		this(invocationManager, name, isStrict, invocationManager.createInterval());
+	}
+
+	protected AbstractInvocationConstructor(@NonNull InvocationManager invocationManager, @NonNull String name, boolean isStrict, @NonNull Interval interval) {
+		this.interval = interval;
 		Executor executor = invocationManager.getExecutor();
 		this.idResolver = (IdResolver.IdResolverExtension)executor.getIdResolver();
 		this.name = name;
