@@ -19,6 +19,8 @@
         defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExpression" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstPass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastPass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CheckStatementCS" eSuperTypes="#//StatementCS #//ObservableStatementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedCondition" lowerBound="1"
@@ -66,6 +68,8 @@
         eType="#//MappingParameterCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedStatements" upperBound="-1"
         eType="#//StatementCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstPass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastPass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingCallCS" eSuperTypes="#//MappingStatementCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isInstall" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"

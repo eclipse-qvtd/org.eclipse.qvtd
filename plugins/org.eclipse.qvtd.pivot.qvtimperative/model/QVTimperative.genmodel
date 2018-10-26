@@ -32,6 +32,8 @@
     </genClasses>
     <genClasses ecoreClass="QVTimperative.ecore#T-qvtimperative-BufferStatement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-BufferStatement-ownedExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-BufferStatement-firstPass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-BufferStatement-lastPass"/>
       <genOperations ecoreOperation="QVTimperative.ecore#//BufferStatement/validateCompatibleTypeForValue">
         <genParameters ecoreParameter="QVTimperative.ecore#//BufferStatement/validateCompatibleTypeForValue/diagnostics"/>
         <genParameters ecoreParameter="QVTimperative.ecore#//BufferStatement/validateCompatibleTypeForValue/context"/>
@@ -94,6 +96,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-Mapping-isStrict"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-Mapping-ownedMappingParameters"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperative.ecore#F-qvtimperative-Mapping-ownedStatements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-Mapping-firstPass"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperative.ecore#F-qvtimperative-Mapping-lastPass"/>
       <genOperations ecoreOperation="QVTimperative.ecore#//Mapping/validateNameIsNotNull">
         <genParameters ecoreParameter="QVTimperative.ecore#//Mapping/validateNameIsNotNull/diagnostics"/>
         <genParameters ecoreParameter="QVTimperative.ecore#//Mapping/validateNameIsNotNull/context"/>

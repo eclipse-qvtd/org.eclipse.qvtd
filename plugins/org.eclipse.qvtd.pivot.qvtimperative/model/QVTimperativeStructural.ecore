@@ -56,6 +56,16 @@
         <details key="documentation" value="The optional expression computing initial content values."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstPass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The earliest (inclusive) pass in which this buffer is written to."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastPass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The latest (inclusive) pass in which this buffer is written to."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="CheckStatement" eSuperTypes="#//ObservableStatement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -192,6 +202,16 @@
         eOpposite="#//MappingParameter/owningMapping"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedStatements" upperBound="-1"
         eType="#//Statement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstPass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The earliest (inclusive) pass in which this Mapping executes."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lastPass" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The latest (inclusive) pass in which this Mapping executes."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingCall" eSuperTypes="#//MappingStatement ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-ReferringElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
