@@ -192,9 +192,9 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			int classIds = classIndex2classId.length;
 			this.classIndex2connection = new @NonNull Connection [classIds];
 			for (int i = 0; i < classIds; i++) {
-				@NonNull
-				ClassId classId = classIndex2classId[i];
-				classIndex2connection[i] = transformer.createConnection(name /*+ "-" + classId*/, classId, false);
+				@NonNull ClassId classId = classIndex2classId[i];
+				String connectionName = name + "!" + classId.getName();
+				classIndex2connection[i] = transformer.createConnection(connectionName, classId, false);
 			}
 		}
 
