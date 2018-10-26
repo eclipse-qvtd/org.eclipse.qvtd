@@ -36,6 +36,7 @@ import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
+import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
@@ -698,10 +699,12 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 		for (@NonNull ConnectionEnd sourceEnd : QVTscheduleUtil.getSourceEnds(this)) {
 			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
 			Iterable<@NonNull MappingPartition> sourceRegionPartitions = QVTscheduleUtil.getRegionPartitions(sourceRegion);
-			for (@NonNull Partition sourcePartition : sourceRegionPartitions) {
-				Role sourceRole = QVTscheduleUtil.getRole(sourcePartition, sourceEnd);
-				if ((sourceRole != null) && !sourceRole.isAwaited()) { // (sourceRole.isNew() || sourceRole.isLoaded())) {
-					sourcePartitions.add(sourcePartition);
+			for (@NonNull MappingPartition sourcePartition : sourceRegionPartitions) {
+				if (!(sourcePartition instanceof BasicPartition) || (((BasicPartition)sourcePartition).getOwningMergedPartition() == null)) {
+					Role sourceRole = QVTscheduleUtil.getRole(sourcePartition, sourceEnd);
+					if ((sourceRole != null) && !sourceRole.isAwaited()) { // (sourceRole.isNew() || sourceRole.isLoaded())) {
+						sourcePartitions.add(sourcePartition);
+					}
 				}
 			}
 		}
@@ -745,16 +748,18 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 			Region region = QVTscheduleUtil.getOwningRegion(target);
 			Iterable<@NonNull MappingPartition> partitions = QVTscheduleUtil.getRegionPartitions(region);
 			for (@NonNull Partition partition : partitions) {
-				Role role = QVTscheduleUtil.getRole(partition, target);
-				if ((role != null) && role.isOld() && !targetPartitions.contains(partition)) {
-					boolean skipPartionedHead = false;
-					if (target instanceof Node) {
-						if (((Node)target).isHead() && !partition.isHead(target)) {
-							skipPartionedHead = true;
+				if (!(partition instanceof BasicPartition) || (((BasicPartition)partition).getOwningMergedPartition() == null)) {
+					Role role = QVTscheduleUtil.getRole(partition, target);
+					if ((role != null) && role.isOld() && !targetPartitions.contains(partition)) {
+						boolean skipPartionedHead = false;
+						if (target instanceof Node) {
+							if (((Node)target).isHead() && !partition.isHead(target)) {
+								skipPartionedHead = true;
+							}
 						}
-					}
-					if (!skipPartionedHead) {
-						targetPartitions.add(partition);
+						if (!skipPartionedHead) {
+							targetPartitions.add(partition);
+						}
 					}
 				}
 			}
