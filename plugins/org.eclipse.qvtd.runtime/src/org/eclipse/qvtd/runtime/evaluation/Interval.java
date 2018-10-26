@@ -22,8 +22,12 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
  */
 public interface Interval extends ExecutionVisitable, Nameable
 {
+	@NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict, @NonNull ModeFactory modeFactory);
+
+	@Deprecated /* @deprecated provide isIncremental argument */
 	@NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict);
 
+	@Deprecated /* @deprecated provide isIncremental argument */
 	Connection.@NonNull Incremental createIncrementalConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict);
 
 	void diagnoseWorkLists(@NonNull StringBuilder s);

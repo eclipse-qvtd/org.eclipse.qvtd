@@ -49,9 +49,11 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractTypedModelInstance;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitable;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitor;
+import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.InvalidEvaluationException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
+import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.runtime.evaluation.ObjectManager;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
@@ -70,8 +72,14 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		}
 
 		@Override
-		protected @NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict, int firstPass, int lastPass) {
-			return invocationManager.getRootInterval().createIncrementalConnection(name, typeId, isStrict);
+		@Deprecated /* @deprecated pass interval */
+		protected @NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
+			return createConnection(invocationManager.getRootInterval(), name, typeId, isStrict, ModeFactory.NON_INCREMENTAL);
+		}
+
+		@Override
+		protected @NonNull Connection createConnection(@NonNull Interval interval, @NonNull String name, @NonNull TypeId typeId, boolean isStrict, @NonNull ModeFactory modeFactory) {
+			return interval.createConnection(name, typeId, isStrict, modeFactory);
 		}
 
 		@Override
@@ -80,14 +88,27 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		}
 
 		@Override
+		@Deprecated /* @deprecated pass explit root interval */
 		protected @NonNull Model createModel(@NonNull String modelName, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
 				@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
-			return new Model.Incremental(this, modelName, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
+			return new Model.Incremental(this, modelName, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes, getInvocationManager().getRootInterval());
+		}
+
+		@Override
+		protected @NonNull Model createModel(@NonNull String modelName, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
+				@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes, @NonNull Interval rootInterval) {
+			return new Model.Incremental(this, modelName, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes, rootInterval);
 		}
 
 		@Override
 		protected @NonNull ObjectManager createObjectManager() {
 			return new IncrementalObjectManager((IncrementalInvocationManager)invocationManager);
+		}
+
+		@Override
+		@NonNull
+		public ModeFactory getModeFactory() {
+			return ModeFactory.INCREMENTAL;
 		}
 	}
 
@@ -99,8 +120,8 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		public static class Incremental extends Model
 		{
 			public Incremental(@NonNull AbstractTransformerInternal transformer, @NonNull String name, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
-					@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
-				super(transformer, name, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
+					@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes, @NonNull Interval rootInterval) {
+				super(transformer, name, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes, rootInterval);
 			}
 
 			public void remove(@NonNull EObject eObject) {
@@ -183,7 +204,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		private @Nullable Boolean trackAdditions = null;
 
 		public Model(@NonNull AbstractTransformerInternal transformer, @NonNull String name, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
-				@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) { // FIXME Bug 540500 per-model classIndex2classId etc
+				@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes, @NonNull Interval rootInterval) { // FIXME Bug 540500 per-model classIndex2classId etc
 			this.transformer = transformer;
 			this.name = name;
 			//
@@ -194,7 +215,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 			for (int i = 0; i < classIds; i++) {
 				@NonNull ClassId classId = classIndex2classId[i];
 				String connectionName = name + "!" + classId.getName();
-				classIndex2connection[i] = transformer.createConnection(connectionName, classId, false, 0, 0);
+				classIndex2connection[i] = rootInterval.createConnection(connectionName, classId, false, transformer.getModeFactory());
 			}
 		}
 
@@ -310,6 +331,10 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 				}
 			}
 		}
+
+		//	protected @NonNull Connection createConnection(@NonNull Interval rootInterval, @NonNull ClassId classId, @NonNull String connectionName, boolean isStrict, boolean isIncremental) {
+		//		return rootInterval.createConnection(connectionName, classId, isStrict, isIncremental);
+		//	}
 
 		/**
 		 * This is solely used by the Model::allObjects Operation which is not needed by synthesized QVTr.
@@ -590,14 +615,13 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		getTypedModelInstance(modelName).addRootObjects(eRootObjects);
 	}
 
-	@Deprecated /* @deprecated provide first/lastPass arguments */
+	@Deprecated /* @deprecated pass interval */
 	protected @NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
-		return invocationManager.getRootInterval().createConnection(name, typeId, isStrict);
+		return createConnection(invocationManager.getRootInterval(), name, typeId, isStrict, getModeFactory());
 	}
 
-	protected @NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict, int firstPass, int lastPass) {
-		//		return invocationManager.getInterval(firstPass, lastPass).createConnection(name, typeId, isStrict);
-		return invocationManager.getRootInterval().createConnection(name, typeId, isStrict);
+	protected @NonNull Connection createConnection(@NonNull Interval interval, @NonNull String name, @NonNull TypeId typeId, boolean isStrict, @NonNull ModeFactory modeFactory) {
+		return interval.createConnection(name, typeId, isStrict, modeFactory);
 	}
 
 	/**
@@ -614,9 +638,15 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 		return new LazyInvocationManager(executor);
 	}
 
+	@Deprecated /* @deprecated pass explit root interval */
 	protected @NonNull Model createModel(@NonNull String modelName, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
 			@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes) {
-		return new Model(this, modelName, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes);
+		return new Model(this, modelName, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes, getInvocationManager().getRootInterval());
+	}
+
+	protected @NonNull Model createModel(@NonNull String modelName, @NonNull PropertyId @Nullable [] propertyIndex2propertyId,
+			@NonNull ClassId @NonNull [] classIndex2classId, int @Nullable [] @NonNull [] classIndex2allClassIndexes, @NonNull Interval rootInterval) {
+		return new Model(this, modelName, propertyIndex2propertyId, classIndex2classId, classIndex2allClassIndexes, rootInterval);
 	}
 
 	@Deprecated // Use createConnection
@@ -689,6 +719,10 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 	@Override
 	public @NonNull InvocationManager getInvocationManager() {
 		return invocationManager;
+	}
+
+	public @NonNull ModeFactory getModeFactory() {
+		return ModeFactory.NON_INCREMENTAL;
 	}
 
 	@Override

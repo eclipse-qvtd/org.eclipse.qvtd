@@ -132,8 +132,10 @@ import org.eclipse.qvtd.runtime.evaluation.AbstractComputation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocation;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
+import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.InvalidEvaluationException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
+import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.runtime.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.runtime.internal.evaluation.AbstractComputationConstructor;
@@ -2684,19 +2686,33 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		CGMapping cgMapping = QVTiCGUtil.getContainingCGMapping(cgMappingExp);
 		Iterable<@NonNull CGAccumulator> cgAccumulators = QVTiCGUtil.getOwnedAccumulators(cgMappingExp);
 		if (!Iterables.isEmpty(cgAccumulators)) {
+			js.append("// interval variables\n");
+			String modeFactoryName = "modeFactory";
+			String rootIntervalName = "rootInterval";
+			js.append("final ");
+			js.appendClassReference(true, ModeFactory.class);
+			js.append(" " + modeFactoryName + " = getModeFactory();\n");
+			js.append("final @NonNull ");
+			js.appendClassReference(Interval.class);
+			js.append(" " + rootIntervalName + " = getInvocationManager().getRootInterval();\n");
 			js.append("// connection variables\n");
 			for (@NonNull CGAccumulator cgAccumulator : cgAccumulators) {
 				Element ast = cgAccumulator.getAst();
 				js.append("final ");
-				js.appendClassReference(true, isIncremental ? Connection.Incremental.class : Connection.class);
+				//	js.appendClassReference(true, isIncremental ? Connection.Incremental.class : Connection.class);
+				js.appendClassReference(true, Connection.class);
 				js.append(" ");
 				js.appendValueName(cgAccumulator);
-				js.append(isIncremental ? " = createIncrementalConnection(" : " = createConnection(");
+				js.append(" = ");
+				js.append(rootIntervalName);
+				js.append(".createConnection(");
 				js.appendString(QVTiCGUtil.getName(cgAccumulator));
 				js.append(", ");
 				js.appendValueName(cgAccumulator.getTypeId());
 				js.append(", ");
 				js.appendBooleanString((ast instanceof BufferStatement) && ((BufferStatement)ast).isIsStrict());
+				js.append(", ");
+				js.append(modeFactoryName);
 				js.append(");\n");
 				/*
 				if ((ast instanceof ConnectionVariable) && (((ConnectionVariable)ast).getType() instanceof SetType)) {

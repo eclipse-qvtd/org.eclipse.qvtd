@@ -31,5 +31,6 @@ public interface InvocationManager extends ExecutionVisitable
 	@NonNull Iterable<@NonNull InvocationConstructor> getInvokers();
 	@NonNull Interval getRootInterval();
 	//	@Nullable Transformer getTransformer();
+	void setInterval(@NonNull Interval interval);
 	void setWorkToDoAt(int intervalIndex);
 }

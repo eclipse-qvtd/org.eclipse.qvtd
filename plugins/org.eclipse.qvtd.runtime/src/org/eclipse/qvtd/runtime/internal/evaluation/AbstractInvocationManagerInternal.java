@@ -56,7 +56,7 @@ public abstract class AbstractInvocationManagerInternal extends AbstractInvocati
 	@Override
 	public @NonNull Interval createInterval() {
 		Interval interval = new DefaultInterval(this, intervals.size());
-		intervals.add(interval);
+		//		intervals.add(interval);
 		return interval;
 	}
 
@@ -124,6 +124,16 @@ public abstract class AbstractInvocationManagerInternal extends AbstractInvocati
 			createInterval();
 		}
 		return intervals.get(0);
+	}
+
+	@Override
+	public void setInterval(@NonNull Interval interval) {
+		int intervalIndex = interval.getIndex();
+		assert intervalIndex <= intervals.size();
+		if (intervalIndex == intervals.size()) {
+			intervals.add(interval);
+		}
+		assert interval == intervals.get(intervalIndex);
 	}
 
 	//	@Override

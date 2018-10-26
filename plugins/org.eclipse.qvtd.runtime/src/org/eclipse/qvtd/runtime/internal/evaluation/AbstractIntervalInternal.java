@@ -19,16 +19,14 @@ import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.qvtd.runtime.evaluation.AbstractConnection;
 import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
+import org.eclipse.qvtd.runtime.evaluation.Connection.Incremental;
 import org.eclipse.qvtd.runtime.evaluation.ExecutionVisitor;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
 import org.eclipse.qvtd.runtime.evaluation.InvocationManager;
-import org.eclipse.qvtd.runtime.evaluation.SimpleConnection;
-import org.eclipse.qvtd.runtime.evaluation.SimpleIncrementalConnection;
+import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 import org.eclipse.qvtd.runtime.evaluation.SlotState;
-import org.eclipse.qvtd.runtime.evaluation.StrictConnection;
-import org.eclipse.qvtd.runtime.evaluation.StrictIncrementalConnection;
 
 /**
  * AbstractIntervalInternal provides the shared implementation of the intrusive blocked/waiting linked list functionality.
@@ -72,6 +70,7 @@ public abstract class AbstractIntervalInternal implements Interval
 	public AbstractIntervalInternal(@NonNull InvocationManager invocationManager, int intervalIndex) {
 		this.invocationManager = invocationManager;
 		this.intervalIndex = intervalIndex;
+		invocationManager.setInterval(this);
 	}
 
 	@Override
@@ -101,29 +100,22 @@ public abstract class AbstractIntervalInternal implements Interval
 	}
 
 	@Override
-	public @NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
-		Connection connection;
-		if (isStrict) {
-			connection = new StrictConnection(this, name, typeId);
-		}
-		else {
-			connection = new SimpleConnection(this, name, typeId);
-		}
+	public @NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict, @NonNull ModeFactory modeFactory) {
+		Connection connection = modeFactory.createConnection(this, name, typeId, isStrict);
 		connections.add(connection);
 		return connection;
 	}
 
+	@Deprecated /* @deprecated provide isIncremental argument */
+	@Override
+	public @NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
+		return createConnection(name, typeId, isStrict, ModeFactory.NON_INCREMENTAL);
+	}
+
+	@Deprecated /* @deprecated provide isIncremental argument */
 	@Override
 	public Connection.@NonNull Incremental createIncrementalConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
-		Connection.Incremental connection;
-		if (isStrict) {
-			connection = new StrictIncrementalConnection(this, name, typeId);
-		}
-		else {
-			connection = new SimpleIncrementalConnection(this, name, typeId);
-		}
-		connections.add(connection);
-		return connection;
+		return (Incremental) createConnection(name, typeId, isStrict, ModeFactory.INCREMENTAL);
 	}
 
 	public synchronized void destroy(@NonNull Invocation invocation) {

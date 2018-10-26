@@ -72,12 +72,18 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 			writeSlot.addSourceInternal(this);
 		}
 
+		@Deprecated /* @deprecated pass an interval argument */
 		protected @NonNull Connection createConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
-			return constructor.getInterval().createConnection(name, typeId, isStrict);
+			return createConnection(constructor.getInterval(), name, typeId, isStrict, ModeFactory.NON_INCREMENTAL);
 		}
 
+		protected @NonNull Connection createConnection(@NonNull Interval interval, @NonNull String name, @NonNull TypeId typeId, boolean isStrict, @NonNull ModeFactory modeFactory) {
+			return interval.createConnection(name, typeId, isStrict, modeFactory);
+		}
+
+		@Deprecated /* @deprecated pass an interval argument */
 		protected Connection.@NonNull Incremental createIncrementalConnection(@NonNull String name, @NonNull TypeId typeId, boolean isStrict) {
-			return constructor.getInterval().createIncrementalConnection(name, typeId, isStrict);
+			return (Connection.Incremental) createConnection(constructor.getInterval(), name, typeId, isStrict, ModeFactory.INCREMENTAL);
 		}
 
 		@Override
