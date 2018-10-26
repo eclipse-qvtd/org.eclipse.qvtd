@@ -55,6 +55,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.MergedPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -603,6 +604,18 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 
 	public static @NonNull Iterable<@NonNull MappingPartition> getMappingPartitions(@NonNull MappingRegion mappingRegion) {
 		return ClassUtil.nullFree(mappingRegion.getMappingPartitions());
+	}
+
+	/**
+	 * Return the merged partition that replaces this or this if not merged.
+	 */
+	public static @Nullable Partition getMergedPartition(@NonNull Partition partition) {
+		if (partition instanceof BasicPartition) {
+			for (MergedPartition mergedPartition; (mergedPartition = ((BasicPartition)partition).getOwningMergedPartition()) != null;  ) {
+				partition = mergedPartition;
+			}
+		}
+		return partition;
 	}
 
 	public static @NonNull String getName(@NonNull Nameable nameable) {

@@ -58,7 +58,6 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 
 		@Override
 		protected void showPartitionInternals(@NonNull Partition partition) {
-			String name = partition.getName();
 			setScope(null);
 			appendNode(partition);
 		}
@@ -74,22 +73,20 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 			if (hasPartitions) {			// Partition-to-Partition within RootRegion
 				appendNode(connection);
 				for (@NonNull Partition sourcePartition : connection.getSourcePartitions()) {
-					while ((sourcePartition instanceof BasicPartition) && (((BasicPartition)sourcePartition).getOwningMergedPartition() != null)) {
-						sourcePartition = ((BasicPartition)sourcePartition).getOwningMergedPartition();
+					Partition mergedSourcePartition = QVTscheduleUtil.getMergedPartition(sourcePartition);
+					if (mergedSourcePartition == sourcePartition) {
+						appendEdge(sourcePartition, connection, connection);
 					}
-					assert !(sourcePartition instanceof BasicPartition) || (((BasicPartition)sourcePartition).getOwningMergedPartition() == null);
-					appendEdge(sourcePartition, connection, connection);
 				}
 				Iterable<@NonNull Partition> targetPartitions = connection.getTargetPartitions();
 				for (@NonNull Partition targetPartition : targetPartitions) {
-					while ((targetPartition instanceof BasicPartition) && (((BasicPartition)targetPartition).getOwningMergedPartition() != null)) {
-						targetPartition = ((BasicPartition)targetPartition).getOwningMergedPartition();
-					}
-					assert !(targetPartition instanceof BasicPartition) || (((BasicPartition)targetPartition).getOwningMergedPartition() == null);
-					Iterable<@NonNull ConnectionEnd> connectionEnds = connection.getTargetConnectionEnds(targetPartition);
-					for (@NonNull ConnectionEnd connectionEnd : connectionEnds) {
-						ConnectionRole connectionRole = connection.getTargetConnectionRole(targetPartition, connectionEnd);
-						appendEdge(connection, connectionRole, targetPartition);
+					Partition mergedTargetPartition = QVTscheduleUtil.getMergedPartition(targetPartition);
+					if (mergedTargetPartition == targetPartition) {
+						Iterable<@NonNull ConnectionEnd> connectionEnds = connection.getTargetConnectionEnds(targetPartition);
+						for (@NonNull ConnectionEnd connectionEnd : connectionEnds) {
+							ConnectionRole connectionRole = connection.getTargetConnectionRole(targetPartition, connectionEnd);
+							appendEdge(connection, connectionRole, targetPartition);
+						}
 					}
 				}
 			}

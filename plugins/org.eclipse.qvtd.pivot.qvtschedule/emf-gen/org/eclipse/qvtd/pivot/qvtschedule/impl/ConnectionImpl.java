@@ -36,7 +36,6 @@ import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
-import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
@@ -700,7 +699,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 			Region sourceRegion = QVTscheduleUtil.getOwningRegion(sourceEnd);
 			Iterable<@NonNull MappingPartition> sourceRegionPartitions = QVTscheduleUtil.getRegionPartitions(sourceRegion);
 			for (@NonNull MappingPartition sourcePartition : sourceRegionPartitions) {
-				if (!(sourcePartition instanceof BasicPartition) || (((BasicPartition)sourcePartition).getOwningMergedPartition() == null)) {
+				if (QVTscheduleUtil.getMergedPartition(sourcePartition) == sourcePartition) {
 					Role sourceRole = QVTscheduleUtil.getRole(sourcePartition, sourceEnd);
 					if ((sourceRole != null) && !sourceRole.isAwaited()) { // (sourceRole.isNew() || sourceRole.isLoaded())) {
 						sourcePartitions.add(sourcePartition);
@@ -747,18 +746,18 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 		for (@NonNull ConnectionEnd target : getTargetEnds()) {
 			Region region = QVTscheduleUtil.getOwningRegion(target);
 			Iterable<@NonNull MappingPartition> partitions = QVTscheduleUtil.getRegionPartitions(region);
-			for (@NonNull Partition partition : partitions) {
-				if (!(partition instanceof BasicPartition) || (((BasicPartition)partition).getOwningMergedPartition() == null)) {
-					Role role = QVTscheduleUtil.getRole(partition, target);
-					if ((role != null) && role.isOld() && !targetPartitions.contains(partition)) {
+			for (@NonNull MappingPartition targetPartition : partitions) {
+				if (QVTscheduleUtil.getMergedPartition(targetPartition) == targetPartition) {
+					Role role = QVTscheduleUtil.getRole(targetPartition, target);
+					if ((role != null) && role.isOld() && !targetPartitions.contains(targetPartition)) {
 						boolean skipPartionedHead = false;
 						if (target instanceof Node) {
-							if (((Node)target).isHead() && !partition.isHead(target)) {
+							if (((Node)target).isHead() && !targetPartition.isHead(target)) {
 								skipPartionedHead = true;
 							}
 						}
 						if (!skipPartionedHead) {
-							targetPartitions.add(partition);
+							targetPartitions.add(targetPartition);
 						}
 					}
 				}

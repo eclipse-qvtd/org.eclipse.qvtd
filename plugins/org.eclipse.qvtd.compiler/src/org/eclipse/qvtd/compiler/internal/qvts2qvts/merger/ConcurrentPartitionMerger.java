@@ -20,47 +20,91 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedConditionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.AbstractCompositePartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.BasicPartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.MergedPartitionFactory;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
+import org.eclipse.qvtd.pivot.qvtschedule.CyclicMappingRegion;
+import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
+import org.eclipse.qvtd.pivot.qvtschedule.Region;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Sets;
 
 /**
- * LateConsumerMerger replaces one list of MappingRegions by another in which each set of regions that
- * share a consumption and can be merged exploiting knowledge of the schedule is replaced by an
- * equivalent merged region.
- *
- * Preconditions:
- *
- * Late consumer merge must occur at all possible merge sites, or none. That is, a merged region that consumes
- * some node and surrounding predicates at its head must merge with all other regions that consume that
- * head node with non-conflicting predicates.
- *
- * Every predicated edge/node of a late merged region must be shared with or satisfied by the other region.
+ * ConcurrentPartitionMerger replaces partitions that occur at the same depth in the parallel schedule and
+ * which have identical failure mechanisms by an equivalent merged partition..
  */
-public class HorizontalPartitionMerger extends AbstractMerger
+public class ConcurrentPartitionMerger extends AbstractMerger
 {
+	public static @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> merge(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule) {
+		for (int i = 0; i < partitionSchedule.size(); i++) {
+			Iterable<@NonNull PartitionAnalysis> oldConcurrency = partitionSchedule.get(i);
+			if (Iterables.size(oldConcurrency) > 1) {
+				Map<@NonNull Region, @NonNull List<@NonNull PartitionAnalysis>> region2partitions = new HashMap<>();
+				for (@NonNull PartitionAnalysis partitionAnalysis : oldConcurrency) {
+					Partition partition = partitionAnalysis.getPartition();
+					if (!(partition instanceof CyclicPartition)) {
+						Region region = QVTscheduleUtil.getRegion(partition);
+						List<@NonNull PartitionAnalysis> partitions = region2partitions.get(region);
+						if (partitions == null) {
+							partitions = new ArrayList<>();
+							region2partitions.put(region, partitions);
+						}
+						partitions.add(partitionAnalysis);
+					}
+				}
+				Set<@NonNull PartitionAnalysis> newConcurrency = null;
+				for (@NonNull Region region : region2partitions.keySet()) {
+					if (!(region instanceof CyclicMappingRegion)) {
+						List<@NonNull PartitionAnalysis> partitions = region2partitions.get(region);
+						assert partitions != null;
+						if (partitions.size() > 1) {
+							ConcurrentPartitionMerger concurrentMerger = new ConcurrentPartitionMerger(partitionedTransformationAnalysis, partitions);
+							Map<@NonNull PartitionAnalysis, @Nullable PartitionAnalysis> old2new = concurrentMerger.merge();
+							if (old2new != null) {
+								if (newConcurrency == null) {
+									newConcurrency = Sets.newHashSet(oldConcurrency);
+								}
+								for (@NonNull PartitionAnalysis oldPartition : old2new.keySet()) {
+									newConcurrency.remove(oldPartition);
+									PartitionAnalysis newPartition = old2new.get(oldPartition);
+									assert newPartition != null;
+									newConcurrency.add(newPartition);
+								}
+							}
+							if (newConcurrency != null) {
+								partitionSchedule.set(i, newConcurrency);
+							}
+						}
+					}
+				}
+			}
+		}
+		return partitionSchedule;
+	}
+
 	protected final @NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis;
-	protected final @NonNull RegionAnalysis regionAnalysis;
 	protected final @NonNull Iterable<@NonNull PartitionAnalysis> partitions;
 
-	public HorizontalPartitionMerger(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull RegionAnalysis regionAnalysis, @NonNull Iterable<@NonNull PartitionAnalysis> partitions) {
+	protected ConcurrentPartitionMerger(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull Iterable<@NonNull PartitionAnalysis> partitions) {
 		this.partitionedTransformationAnalysis = partitionedTransformationAnalysis;
-		this.regionAnalysis = regionAnalysis;
 		this.partitions = partitions;
 	}
 
-	public @Nullable Map<@NonNull PartitionAnalysis, @Nullable PartitionAnalysis> merge() {
+	protected @Nullable Map<@NonNull PartitionAnalysis, @Nullable PartitionAnalysis> merge() {
 		//
 		//	Build maps of failure mechanisms of each partition.
 		//
-		ScheduleManager scheduleManager = regionAnalysis.getScheduleManager();
+		ScheduleManager scheduleManager = partitionedTransformationAnalysis.getScheduleManager();
 		Map<@NonNull Integer, @NonNull Set<@NonNull BasicPartitionAnalysis>> hash2partitionAnalyses = new HashMap<>();
 		Map<@NonNull BasicPartitionAnalysis, @NonNull Set<@NonNull CheckedCondition>> partion2checkedConditions = new HashMap<>();
 		for (@NonNull PartitionAnalysis partitionAnalysis : partitions) {
@@ -113,10 +157,12 @@ public class HorizontalPartitionMerger extends AbstractMerger
 					}
 				}
 				if (merges != null) {
-					System.out.println("Merge " + merges);
-					CompositePartition owningCompositePartition = merges.get(0).getPartition().getOwningCompositePartition();
+					System.out.println("Concurrent Merge " + merges);
+					BasicPartition firstPartition = merges.get(0).getPartition();
+					CompositePartition owningCompositePartition = firstPartition.getOwningCompositePartition();
+					AbstractCompositePartitionAnalysis<CompositePartition> compositePartitionAnalysis = (AbstractCompositePartitionAnalysis<CompositePartition>)partitionedTransformationAnalysis.getPartitionAnalysis(owningCompositePartition);
 					List<MappingPartition> ownedMappingPartitions = owningCompositePartition.getOwnedMappingPartitions();
-					MergedPartitionFactory mergedPartitionFactory = new MergedPartitionFactory(regionAnalysis, merges);
+					MergedPartitionFactory mergedPartitionFactory = new MergedPartitionFactory(scheduleManager, QVTscheduleUtil.getRegion(firstPartition), merges);
 					BasicPartitionAnalysis mergedPartitionAnalysis = mergedPartitionFactory.createPartitionAnalysis(partitionedTransformationAnalysis);
 					BasicPartition mergedPartition = mergedPartitionAnalysis.getPartition();
 					//					MappingRegion mappingRegion = (MappingRegion)regionAnalysis.getRegion();
@@ -139,6 +185,7 @@ public class HorizontalPartitionMerger extends AbstractMerger
 					}
 					scheduleManager.writeDebugGraphs(mergedPartition, null);
 					ownedMappingPartitions.add(mergedPartition);
+					compositePartitionAnalysis.merge(old2new);
 				}
 			}
 		}

@@ -19,7 +19,6 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteModel;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Type;
@@ -33,7 +32,8 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.LoadingRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.HorizontalPartitionMerger;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.ConcurrentPartitionMerger;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.SequentialPartitionMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
@@ -41,8 +41,6 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.Connection;
-import org.eclipse.qvtd.pivot.qvtschedule.CyclicMappingRegion;
-import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
@@ -56,7 +54,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
 
 /**
  * QVTs2QVTi supervises the serialization of a QVTs schedule as a QVTi transformation.
@@ -324,38 +321,6 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		return entries.sorted();
 	}
 
-	public @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> getMergedPartitionSchedule(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull RootPartitionAnalysis rootPartitionAnalysis) {
-		RootRegion rootRegion = rootPartitionAnalysis.getRootRegion();
-		assert rootRegion != null;
-		List<Region> activeRegions = rootRegion.getActiveRegions();
-		activeRegions.clear();
-		List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule1 = mergePartitionsHorizontally(partitionedTransformationAnalysis, rootPartitionAnalysis.getPartitionSchedule());
-		List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule2 = mergePartitionsVertically(partitionSchedule1);
-		/*	for (@NonNull Set<@NonNull PartitionAnalysis> concurrentPartitions : partitionSchedule2) {
-			//	List<@NonNull Region> concurrentRegions = new ArrayList<>();
-			for (@NonNull PartitionAnalysis partitionAnalysis : concurrentPartitions) {
-				Partition partition = partitionAnalysis.getPartition();
-				if (partitionAnalysis instanceof CyclicPartitionAnalysis) {
-					getRegionSchedule(((CyclicPartitionAnalysis)partitionAnalysis));
-					for (@NonNull MappingRegion mappingRegion : ((CyclicPartitionAnalysis)partitionAnalysis).createMicroMappingRegions()) {
-						activeRegions.add(mappingRegion);
-						//				concurrentRegions.add(mappingRegion);
-					}
-				}
-				else if (!(partition instanceof LoadingPartition)) {
-					MappingRegion mappingRegion = partitionAnalysis.createMicroMappingRegion();
-					//	scheduleManager.wipAddPartition(partition, mappingRegion);
-					activeRegions.add(mappingRegion);
-					//			concurrentRegions.add(mappingRegion);
-				}
-				else {
-					activeRegions.add(partition.getRegion());
-				}
-			}
-		} */
-		return partitionSchedule2;
-	}
-
 	public @NonNull RegionAnalysis getRegionAnalysis(@NonNull Region region) {
 		RegionAnalysis regionAnalysis = region2regionAnalysis.get(region);
 		if (regionAnalysis == null) {
@@ -457,56 +422,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		}
 	} */
 
-	private @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> mergePartitionsHorizontally(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule) {
-		for (int i = 0; i < partitionSchedule.size(); i++) {
-			Iterable<@NonNull PartitionAnalysis> oldConcurrency = partitionSchedule.get(i);
-			if (Iterables.size(oldConcurrency) > 1) {
-				Map<@NonNull Region, @NonNull List<@NonNull PartitionAnalysis>> region2partitions = new HashMap<>();
-				for (@NonNull PartitionAnalysis partitionAnalysis : oldConcurrency) {
-					Partition partition = partitionAnalysis.getPartition();
-					if (!(partition instanceof CyclicPartition)) {
-						Region region = QVTscheduleUtil.getRegion(partition);
-						List<@NonNull PartitionAnalysis> partitions = region2partitions.get(region);
-						if (partitions == null) {
-							partitions = new ArrayList<>();
-							region2partitions.put(region, partitions);
-						}
-						partitions.add(partitionAnalysis);
-					}
-				}
-				Set<@NonNull PartitionAnalysis> newConcurrency = null;
-				for (@NonNull Region region : region2partitions.keySet()) {
-					if (!(region instanceof CyclicMappingRegion)) {
-						List<@NonNull PartitionAnalysis> partitions = region2partitions.get(region);
-						assert partitions != null;
-						if (partitions.size() > 1) {
-							//							partitionedTransformationAnalysis.getMappingPartitioner(region);
-							RegionAnalysis regionAnalysis = scheduleManager.getRegionAnalysis(region);
-							HorizontalPartitionMerger horizontalMerger = new HorizontalPartitionMerger(partitionedTransformationAnalysis, regionAnalysis, partitions);
-							Map<@NonNull PartitionAnalysis, @Nullable PartitionAnalysis> old2new = horizontalMerger.merge();
-							if (old2new != null) {
-								if (newConcurrency == null) {
-									newConcurrency = Sets.newHashSet(oldConcurrency);
-								}
-								for (@NonNull PartitionAnalysis oldPartition : old2new.keySet()) {
-									newConcurrency.remove(oldPartition);
-									PartitionAnalysis newPartition = old2new.get(oldPartition);
-									assert newPartition != null;
-									newConcurrency.add(newPartition);
-								}
-							}
-							if (newConcurrency != null) {
-								partitionSchedule.set(i, newConcurrency);
-							}
-						}
-					}
-				}
-			}
-		}
-		return partitionSchedule;
-	}
-
-	private @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> mergePartitionsVertically(@NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule) {
+	private @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> mergeSequentialPartitions(@NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule) {
 		return partitionSchedule;
 	}
 
@@ -578,10 +494,11 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		//	Index all predicated and realized edges by typed model and property.
 		//
 		partitionedTransformationAnalysis.analyzePartitionEdges(partitionSchedule);
-
-		//	Iterable<@NonNull Region> mappingRegions = QVTscheduleUtil.getActiveRegions(rootRegion);
-		//	assert Iterables.isEmpty(mappingRegions);
-		List<@NonNull Set<@NonNull PartitionAnalysis>> mergedPartitionSchedule = getMergedPartitionSchedule(partitionedTransformationAnalysis, rootPartitionAnalysis);		// FIXME separate side effects
+		List<Region> activeRegions = rootRegion.getActiveRegions();
+		activeRegions.clear();
+		List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule1 = ConcurrentPartitionMerger.merge(partitionedTransformationAnalysis, rootPartitionAnalysis.getPartitionSchedule());
+		List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule2 = SequentialPartitionMerger.merge(partitionedTransformationAnalysis, partitionSchedule1);
+		List<@NonNull Set<@NonNull PartitionAnalysis>> mergedPartitionSchedule = partitionSchedule2;
 		//
 		//	Identify the input models.
 		//
@@ -727,43 +644,4 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		scheduleManager.writeDebugGraphs("9-final", true, true, false);
 		return rootRegions;
 	}
-	/*	public @NonNull Iterable<@NonNull RootRegion> ztransform(@NonNull ScheduleManager scheduleManager, @NonNull Map<@NonNull RootRegion, Iterable<@NonNull MappingRegion>> rootRegion2activeRegions) throws CompilerChainException {
-		LoadingRegion loadingRegion = loadingRegionAnalysis.getRegion();
-		Iterable<@NonNull RootRegion> rootRegions = rootRegion2activeRegions.keySet();
-		List<@NonNull RootPartition> rootPartitions = new ArrayList<>();
-		for (@NonNull RootRegion rootRegion : rootRegions) {
-			assert rootRegion.getActiveRegions().isEmpty();
-			Iterable<? extends @NonNull MappingRegion> activeRegions = rootRegion2activeRegions.get(rootRegion);
-			assert activeRegions != null;
-			List<Region> mappingRegions = Lists.newArrayList(activeRegions);
-			mappingRegions.add(loadingRegion);
-			Collections.sort(mappingRegions, NameUtil.NAMEABLE_COMPARATOR);
-			Iterables.addAll(rootRegion.getActiveRegions(), mappingRegions);
-			//
-			//	Create a connection between each consumer and the corresponding introducer/producer.
-			//
-			ConnectionManager connectionManager = getConnectionManager(rootRegion);
-			for (@NonNull Region region : mappingRegions) {
-				connectionManager.createIncomingConnections(region);
-			}
-		}
-		scheduleManager.writeDebugGraphs("4-pre-partition", true, true, false);
-		//
-		for (@NonNull RootRegion rootRegion : rootRegions) {
-			RootPartition rootPartition = partition(scheduleManager, rootRegion);
-			rootPartitions.add(rootPartition);
-			ConnectionManager connectionManager = getConnectionManager(rootRegion);
-			for (@NonNull Region region : QVTscheduleUtil.getActiveRegions(rootRegion)) {
-				connectionManager.createPartitionConnections(region);
-			}
-		}
-		//		getRegionAnalysis(loadingRegion).setPartitions(Collections.singletonList(new NonPartition(loadingRegion));
-		scheduleManager.writeDebugGraphs("5-post-partition", true, true, false);
-		//
-		for (@NonNull RootPartition rootPartition : rootPartitions) {
-			schedule(rootPartition);
-		}
-		scheduleManager.writeDebugGraphs("9-final", true, true, false);
-		return rootRegions;
-	} */
 }

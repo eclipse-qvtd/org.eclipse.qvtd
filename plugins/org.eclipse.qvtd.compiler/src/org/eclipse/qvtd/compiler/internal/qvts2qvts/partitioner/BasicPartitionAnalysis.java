@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -63,13 +62,13 @@ public class BasicPartitionAnalysis extends MappingPartitionAnalysis<BasicPartit
 		this.explicitPredecessors = partitionAnalyses;
 	}
 
-	public void merge(@NonNull Map<@NonNull PartitionAnalysis, @Nullable PartitionAnalysis> old2new) {
+	/*	public void merge(@NonNull Map<@NonNull PartitionAnalysis, @Nullable PartitionAnalysis> old2new) {
 		for (@NonNull PartitionAnalysis oldPartitionAnalysis : old2new.keySet()) {
 			Partition oldPartition = oldPartitionAnalysis.getPartition();
 			partition.destroy();
 		}
 		partitionedTransformationAnalysis.getRootPartitionAnalysis().merge(old2new);
-	}
+	} */
 
 	@Override
 	public @Nullable Set<@NonNull PartitionAnalysis> getExplicitPredecessors() {

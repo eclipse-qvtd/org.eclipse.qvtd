@@ -264,9 +264,11 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 				}
 			}
 		}
+		partition2partitionAnalysis.put(loadingPartitionAnalysis.getPartition(), loadingPartitionAnalysis);
 	}
 
 	public void setRootPartitionAnalysis(@NonNull RootPartitionAnalysis rootPartitionAnalysis) {
 		this.rootPartitionAnalysis = rootPartitionAnalysis;
+		partition2partitionAnalysis.put(rootPartitionAnalysis.getPartition(), rootPartitionAnalysis);
 	}
 }

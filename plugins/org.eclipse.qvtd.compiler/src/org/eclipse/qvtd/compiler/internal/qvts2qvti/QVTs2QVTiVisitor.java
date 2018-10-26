@@ -423,8 +423,9 @@ public class QVTs2QVTiVisitor extends AbstractExtendingQVTscheduleVisitor<@Nulla
 	}
 
 	public @NonNull AbstractPartition2Mapping getPartition2Mapping(@NonNull Partition partition) {
-		AbstractPartition2Mapping region2mapping = partition2partition2mapping.get(partition);
-		assert region2mapping != null : "No AbstractRegion2Mapping for " + partition;
+		Partition mergedPartition = QVTscheduleUtil.getMergedPartition(partition);
+		AbstractPartition2Mapping region2mapping = partition2partition2mapping.get(mergedPartition);
+		assert region2mapping != null : "No AbstractRegion2Mapping for " + mergedPartition;
 		return region2mapping;
 	}
 

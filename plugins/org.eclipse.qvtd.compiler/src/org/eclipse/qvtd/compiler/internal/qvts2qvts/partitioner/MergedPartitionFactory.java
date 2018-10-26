@@ -16,7 +16,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -34,8 +34,8 @@ public class MergedPartitionFactory extends AbstractPartitionFactory<@NonNull Re
 {
 	protected final @NonNull Iterable<@NonNull BasicPartitionAnalysis> subPartitionAnalyses;
 
-	public MergedPartitionFactory(@NonNull RegionAnalysis regionAnalysis, @NonNull Iterable<@NonNull BasicPartitionAnalysis> subPartitionAnalyses) {
-		super(regionAnalysis.getScheduleManager(), regionAnalysis.getRegion());
+	public MergedPartitionFactory(@NonNull ScheduleManager scheduleManager, @NonNull Region region, @NonNull Iterable<@NonNull BasicPartitionAnalysis> subPartitionAnalyses) {
+		super(scheduleManager, region);
 		this.subPartitionAnalyses = subPartitionAnalyses;
 	}
 
@@ -70,7 +70,7 @@ public class MergedPartitionFactory extends AbstractPartitionFactory<@NonNull Re
 
 	@Override
 	public @NonNull BasicPartitionAnalysis createPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
-		Iterable<@NonNull Node> headNodes = subPartitionAnalyses.iterator().next().getTraceNodes();
+		Iterable<@NonNull Node> headNodes = subPartitionAnalyses.iterator().next().getPartition().getHeadNodes();
 		MergedPartition mergedPartition = createMergedPartition(computeName(), headNodes);
 		for (@NonNull BasicPartitionAnalysis subPartitionAnalysis : subPartitionAnalyses) {
 			BasicPartition subPartition = subPartitionAnalysis.getPartition();
@@ -214,6 +214,7 @@ public class MergedPartitionFactory extends AbstractPartitionFactory<@NonNull Re
 		boolean isPredicated = false;
 		boolean isRealized = false;
 		boolean isSpeculated = false;
+		boolean isSpeculation = false;
 		for (@NonNull BasicPartitionAnalysis subPartitionAnalysis : subPartitionAnalyses) {
 			Role role = subPartitionAnalysis.getPartition().getRole(node);
 			if (role != null) {
@@ -225,6 +226,7 @@ public class MergedPartitionFactory extends AbstractPartitionFactory<@NonNull Re
 					case PREDICATED: isPredicated = true; break;
 					case REALIZED: isRealized = true; break;
 					case SPECULATED: isSpeculated = true; break;
+					case SPECULATION: isSpeculation = true; break;
 					default: throw new UnsupportedOperationException();
 				}
 			}
@@ -243,6 +245,9 @@ public class MergedPartitionFactory extends AbstractPartitionFactory<@NonNull Re
 		}
 		else if (isRealized) {
 			addNode(partition, node, Role.REALIZED);
+		}
+		else if (isSpeculation) {
+			addNode(partition, node, isSpeculated ? Role.REALIZED : Role.SPECULATION);
 		}
 		else if (isSpeculated) {
 			addNode(partition, node, Role.SPECULATED);
