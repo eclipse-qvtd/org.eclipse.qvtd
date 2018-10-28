@@ -85,8 +85,7 @@ public interface RelationDomain extends Domain {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Root Variable</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationDomain_RootVariable()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!RelationDomain!rootVariable'"
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://www.eclipse.org/qvt/2015/QVTrelation!RelationDomain!rootVariable'"
 	 * @generated
 	 */
 	@NonNull EList<Variable> getRootVariable();

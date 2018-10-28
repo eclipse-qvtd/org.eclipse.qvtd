@@ -295,8 +295,8 @@
         ordered="false" upperBound="-1" eType="#T-qvtrelation-RelationDomainAssignment" containment="true" eOpposite="#F-qvtrelation-RelationDomainAssignment-owner"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtrelation-RelationDomain-pattern" name="pattern" upperBound="-1" eType="#T-qvtrelation-DomainPattern"
         containment="true" eOpposite="#F-qvtrelation-DomainPattern-relationDomain"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtrelation-RelationDomain-rootVariable" name="rootVariable" lowerBound="1"
-        upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="F-qvtrelation-RelationDomain-rootVariable" name="rootVariable" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Variable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="T-qvtrelation-RelationDomainAssignment" name="RelationDomainAssignment" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#T-pivot-Element">
     <eOperations name="validateCompatibleTypeForValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
