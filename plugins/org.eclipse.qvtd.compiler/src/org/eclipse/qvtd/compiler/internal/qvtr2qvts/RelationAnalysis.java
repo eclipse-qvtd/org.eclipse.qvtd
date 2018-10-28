@@ -442,10 +442,9 @@ public class RelationAnalysis extends RuleAnalysis
 		}
 	}
 
-	protected @NonNull Set<@NonNull VariableDeclaration> analyzeKeyedOutputVariables(@NonNull RelationDomain relationDomain) {
+	protected void analyzeKeyedOutputVariables(@NonNull RelationDomain relationDomain, @NonNull Set<@NonNull VariableDeclaration> keyedOutputVariables) {
 		RelationalTransformationAnalysis transformationAnalysis2 = getTransformationAnalysis();
 		Set<@NonNull VariableDeclaration> whenedOutputVariables = getWhenedOutputVariables();
-		Set<@NonNull VariableDeclaration> keyedOutputVariables = new HashSet<>();
 		for (@NonNull DomainPattern domainPattern : QVTrelationUtil.getOwnedPatterns(relationDomain)) {
 			TemplateExp templateExpression = QVTrelationUtil.getOwnedTemplateExpression(domainPattern);
 			for (@NonNull EObject eObject : new TreeIterable(templateExpression, true)) {
@@ -461,7 +460,6 @@ public class RelationAnalysis extends RuleAnalysis
 				}
 			}
 		}
-		return keyedOutputVariables;
 	}
 
 	/*	private void addIncomingRelation(@NonNull RelationCallExp relationInvocation) {
@@ -587,8 +585,7 @@ public class RelationAnalysis extends RuleAnalysis
 		outgoingWhereInvocations2.add(relationInvocation);
 	} */
 
-	protected @NonNull Set<@NonNull VariableDeclaration> analyzeRealizedOutputVariables(@NonNull RelationDomain relationDomain) {
-		Set<@NonNull VariableDeclaration> realizedOutputVariables = new HashSet<>();
+	protected void analyzeRealizedOutputVariables(@NonNull RelationDomain relationDomain, @NonNull Set<@NonNull VariableDeclaration> realizedOutputVariables) {
 		for (@NonNull DomainPattern domainPattern : QVTrelationUtil.getOwnedPatterns(relationDomain)) {
 			TemplateExp templateExpression = QVTrelationUtil.getOwnedTemplateExpression(domainPattern);
 			for (@NonNull EObject eObject : new TreeIterable(templateExpression, true)) {
@@ -599,7 +596,6 @@ public class RelationAnalysis extends RuleAnalysis
 				}
 			}
 		}
-		return realizedOutputVariables;
 	}
 
 	@Override
@@ -608,13 +604,15 @@ public class RelationAnalysis extends RuleAnalysis
 		baseRelationAnalysis = getScheduleManager().getRuleAnalysis(QVTrelationUtil.getBaseRelation(relation));
 		variable2templateExp = analyzeVariable2TemplateExp();
 		whenedOutputVariables = analyzeWhenedOutputVariables();
+		Set<@NonNull VariableDeclaration> keyedOutputVariables = this.keyedOutputVariables = new HashSet<>();
+		Set<@NonNull VariableDeclaration> realizedOutputVariables = this.realizedOutputVariables = new HashSet<>();
 		for (@NonNull RelationDomain relationDomain : QVTrelationUtil.getOwnedDomains(relation)) {
 			DomainUsage domainUsage = scheduleManager.getDomainUsage(relationDomain);
 			if (domainUsage.isOutput()) {
-				assert keyedOutputVariables == null;
-				keyedOutputVariables = analyzeKeyedOutputVariables(relationDomain);
-				assert realizedOutputVariables == null;
-				realizedOutputVariables = analyzeRealizedOutputVariables(relationDomain);
+				//	assert keyedOutputVariables == null;	-- The assumption of a single output domain does not seem to  be justified
+				analyzeKeyedOutputVariables(relationDomain, keyedOutputVariables);
+				//	assert realizedOutputVariables == null;	-- The assumption of a single output domain does not seem to  be justified
+				analyzeRealizedOutputVariables(relationDomain, realizedOutputVariables);
 			}
 		}
 	}
