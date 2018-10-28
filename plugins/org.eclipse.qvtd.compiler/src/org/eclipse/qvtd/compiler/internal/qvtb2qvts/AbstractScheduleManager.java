@@ -54,6 +54,7 @@ import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.ProblemHandler;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.trace.NameGenerator;
+import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTrelationNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.ConnectionManager;
@@ -375,8 +376,10 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 
 	@Override
 	public void analyzeSourceModel() {
+		QVTuConfiguration qvtuConfiguration = getQVTuConfiguration();
+		Iterable<@NonNull TypedModel> outputTypedModels = qvtuConfiguration != null ? qvtuConfiguration.getOutputTypedModels() : null;
 		for (@NonNull AbstractTransformationAnalysis transformationAnalysis : getOrderedTransformationAnalyses()) {
-			domainUsageAnalysis.analyzeTransformation(transformationAnalysis.getTransformation());
+			domainUsageAnalysis.analyzeTransformation(transformationAnalysis.getTransformation(), outputTypedModels);
 			transformationAnalysis.analyzeSourceModel();
 		}
 	}
@@ -808,6 +811,10 @@ public abstract class AbstractScheduleManager implements ScheduleManager
 	@Override
 	public @NonNull QVTbaseLibraryHelper getQVTbaseLibraryHelper() {
 		return qvtbaseLibraryHelper;
+	}
+
+	protected @Nullable QVTuConfiguration getQVTuConfiguration() {
+		return null;
 	}
 
 	@Override

@@ -99,7 +99,7 @@ public class TransformationAnalysis extends QVTrelationHelper implements Nameabl
 		QVTrelationDomainUsageAnalysis domainUsageAnalysis2 = domainUsageAnalysis;
 		if (domainUsageAnalysis2 == null) {
 			domainUsageAnalysis = domainUsageAnalysis2 = new QVTrelationDomainUsageAnalysis(environmentFactory);
-			domainUsageAnalysis2.analyzeTransformation(transformation);
+			domainUsageAnalysis2.analyzeTransformation(transformation, null);
 		}
 		return domainUsageAnalysis2;
 	}

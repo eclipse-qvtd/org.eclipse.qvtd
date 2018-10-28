@@ -61,8 +61,8 @@ public class UMLXCompilerTests extends LoadTestCase
 				return new QVTr2QVTsCompilerStep(this)
 				{
 					@Override
-					public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull String enforcedOutputName) throws IOException {
-						ScheduleManager scheduleManager = super.execute(qvtrResource, traceResource, enforcedOutputName);
+					public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull Iterable<@NonNull String> enforcedOutputNames) throws IOException {
+						ScheduleManager scheduleManager = super.execute(qvtrResource, traceResource, enforcedOutputNames);
 						instrumentPartition(scheduleManager);
 						return scheduleManager;
 					}

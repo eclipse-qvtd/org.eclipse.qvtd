@@ -108,6 +108,11 @@ public class QVTrelationScheduleManager extends AbstractScheduleManager
 	}
 
 	@Override
+	protected @Nullable QVTuConfiguration getQVTuConfiguration() {
+		return qvtuConfiguration;
+	}
+
+	@Override
 	public @NonNull RelationAnalysis getRuleAnalysis(@NonNull Rule relation) {
 		return (RelationAnalysis) super.getRuleAnalysis(relation);
 	}

@@ -65,6 +65,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
+import com.google.common.collect.Iterables;
+
 public abstract class AbstractCompilerChain extends CompilerUtil implements CompilerChain
 {
 	private static final @NonNull Map<@NonNull String, @NonNull String> step2fileExtension = new HashMap<>();
@@ -421,7 +423,9 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	}
 
 	@Override
-	public abstract @NonNull ImperativeTransformation compile(@NonNull String enforcedOutputName) throws IOException;
+	public final @NonNull ImperativeTransformation compile(@NonNull String outputName) throws IOException {
+		return compile(Collections.singletonList(outputName));
+	}
 
 	@Override
 	public void compiled(@NonNull String stepKey, @NonNull Object object) {
@@ -458,6 +462,10 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	}
 
 	protected @NonNull QVTuConfiguration createQVTuConfiguration(@NonNull Resource cResource, QVTuConfiguration.Mode mode, @NonNull String enforcedOutputName) throws IOException {
+		return createQVTuConfiguration(cResource, mode, Collections.singletonList(enforcedOutputName));
+	}
+
+	protected @NonNull QVTuConfiguration createQVTuConfiguration(@NonNull Resource cResource, QVTuConfiguration.Mode mode, @NonNull Iterable<@NonNull String> enforcedOutputNames) throws IOException {
 		Transformation transformation = getTransformation(cResource);
 		List<@NonNull TypedModel> inputTypedModels = new ArrayList<>();
 		List<@NonNull TypedModel> outputTypedModels = new ArrayList<>();
@@ -465,9 +473,10 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		for (@NonNull TypedModel typedModel : QVTcoreUtil.getModelParameters(transformation)) {
 			if (!typedModel.isIsTrace()) {
 				String modelName = typedModel.getName();
-				if (enforcedOutputName.equals(modelName)) {
+				if (Iterables.contains(enforcedOutputNames, modelName)) {
 					if (outputTypedModels.size() > 1) {
-						throw new CompilerChainException("Ambiguous output domain ''{0}''", enforcedOutputName);
+						//	throw new CompilerChainException("Ambiguous output domain(s) ''{0}''", enforcedOutputNames);
+						System.out.println("Ambiguous output domain(s) " + enforcedOutputNames);
 					}
 					outputTypedModels.add(typedModel);
 				}
@@ -483,7 +492,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			}
 		}
 		if (outputTypedModels.isEmpty()) {
-			throw new CompilerChainException("Unknown output domain ''{0}''", enforcedOutputName);
+			throw new CompilerChainException("Unknown output domain(s) ''{0}''", enforcedOutputNames);
 		}
 		inputTypedModels.removeAll(intermediateTypedModels);
 		return new QVTuConfiguration(QVTuConfiguration.Mode.ENFORCE, inputTypedModels, intermediateTypedModels, outputTypedModels);

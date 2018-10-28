@@ -48,7 +48,7 @@ public class QVTiCompilerChain extends AbstractCompilerChain
 	}
 
 	@Override
-	public @NonNull ImperativeTransformation compile(@NonNull String unusedEnforcedOutputName) throws IOException {
+	public @NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull String> unusedEnforcedOutputNames) throws IOException {
 		return xtext2qvtiCompilerStep.execute(txURI);
 	}
 

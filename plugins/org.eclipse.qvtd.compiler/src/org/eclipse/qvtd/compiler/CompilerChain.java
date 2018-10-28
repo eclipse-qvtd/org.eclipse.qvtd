@@ -81,7 +81,8 @@ public interface CompilerChain
 	CompilerOptions.@Nullable StepOptions basicGetOptions(@NonNull String stepKey);
 	@Nullable URI basicGetURI(@NonNull String stepKey, CompilerOptions.@NonNull Key<URI> uriKey);
 	@NonNull Class<? extends Transformer> build(@NonNull String outputName, @NonNull String ... genModelFiles) throws Exception;
-	@NonNull ImperativeTransformation compile(@NonNull String outputName) throws Exception;
+	@NonNull ImperativeTransformation compile(@NonNull String outputName) throws IOException;
+	@NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull String> outputNames) throws IOException;
 	void compiled(@NonNull String stepKey, @NonNull Object object);
 	@NonNull Resource createResource(@NonNull URI uri) throws IOException;
 	void dispose();

@@ -49,6 +49,8 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 
+import com.google.common.collect.Iterables;
+
 public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAnalysis implements DomainUsageAnalysis.Root
 {
 	protected abstract class AbstractDomainUsage implements DomainUsage.Internal
@@ -367,7 +369,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 
 	public void analyzeTracePackage(@NonNull TypedModel typedModel, org.eclipse.ocl.pivot.@NonNull Package tracePackage) {}
 
-	public @NonNull Map<Element, DomainUsage> analyzeTransformation(@NonNull Transformation transformation) {
+	public @NonNull Map<Element, DomainUsage> analyzeTransformation(@NonNull Transformation transformation, @Nullable Iterable<@NonNull TypedModel> outputTypedModels) {
 		int unenforceableMask = 0;
 		int enforceableMask = 0;
 		CompleteModel completeModel = context.getCompleteModel();
@@ -388,7 +390,7 @@ public abstract class RootDomainUsageAnalysis extends AbstractBaseDomainUsageAna
 			for (Rule rule : transformation.getRule()) {
 				for (Domain domain : rule.getDomain()) {
 					if (domain.getTypedModel() == typedModel) {
-						if (domain.isIsEnforceable()) {
+						if (domain.isIsEnforceable() && ((outputTypedModels == null) || Iterables.contains(outputTypedModels, typedModel))) {
 							isEnforceable = true;
 						}
 						else {

@@ -54,6 +54,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.google.common.collect.Lists;
+
 /**
  * Tests that QVTc files can be compiled and executed.
  */
@@ -74,8 +76,8 @@ public class QVTrCompilerTests extends LoadTestCase
 				return new QVTr2QVTsCompilerStep(this)
 				{
 					@Override
-					public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull String enforcedOutputName) throws IOException {
-						ScheduleManager scheduleManager = super.execute(qvtrResource, traceResource, enforcedOutputName);
+					public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull Iterable<@NonNull String> enforcedOutputNames) throws IOException {
+						ScheduleManager scheduleManager = super.execute(qvtrResource, traceResource, enforcedOutputNames);
 						instrumentPartition(scheduleManager);
 						return scheduleManager;
 					}
@@ -814,7 +816,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT1 = createQVT("Iterated2Iterated", getModelsURI("iterated2iterated/Iterated2Iterated.qvtr"));
 		myQVT1.addUsedGenPackage("org.eclipse.emf.ecore/model/Ecore.genmodel", "//ecore");
 		try {
-			txClass = myQVT1.buildTransformation("to", false);
+			txClass = myQVT1.buildTransformation(Lists.newArrayList("to", "via"), false);
 		}
 		finally {
 			myQVT1.dispose();

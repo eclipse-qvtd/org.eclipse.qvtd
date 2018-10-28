@@ -102,12 +102,12 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			AbstractQVTb2QVTs.DEBUG_GRAPHS.setState(basicGetOption(CompilerChain.DEBUG_KEY) == Boolean.TRUE);
 		}
 
-		public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull String enforcedOutputName) throws IOException {
+		public @NonNull ScheduleManager execute(@NonNull Resource qvtrResource, @NonNull Resource traceResource, @NonNull Iterable<@NonNull String> enforcedOutputNames) throws IOException {
 			CreateStrategy savedStrategy = environmentFactory.setCreateStrategy(QVTrEnvironmentFactory.CREATE_STRATEGY);
 			try {
 				CompilerOptions.StepOptions schedulerOptions = compilerChain.basicGetOptions(CompilerChain.QVTS_STEP);
 				Transformation asTransformation = AbstractCompilerChain.getTransformation(qvtrResource);
-				QVTuConfiguration qvtuConfiguration = ((AbstractCompilerChain)compilerChain).createQVTuConfiguration(qvtrResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputName);
+				QVTuConfiguration qvtuConfiguration = ((AbstractCompilerChain)compilerChain).createQVTuConfiguration(qvtrResource, QVTuConfiguration.Mode.ENFORCE, enforcedOutputNames);
 				//				>>>>>>> fd5dac8 [529130] Change to QVTr-to-QVTs+trace in CompilerChain
 				QVTr2QVTs qvtr2qvts = new QVTr2QVTs(environmentFactory, this, qvtuConfiguration, schedulerOptions);
 				ScheduleManager scheduleManager = qvtr2qvts.getScheduleManager();
@@ -126,7 +126,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				//
 				//	Save trace (occurs as part of GenModel creation)
 				//
-				if (false) {		// FIXME true for debugging but results in two same-URI resources,need to unload this temporary
+				if (false) {		// FIXME true for debugging but results in two same-URI resources, need to unload this temporary
 					URI ecoreURI = traceResource.getURI().trimFileExtension();
 					AS2Ecore as2ecore = new AS2Ecore(environmentFactory, ecoreURI, null);
 					XMLResource ecoreResource = as2ecore.convertResource(traceResource, ecoreURI);
@@ -356,16 +356,16 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 	}
 
 	@Override
-	public @NonNull ImperativeTransformation compile(@NonNull String enforcedOutputName) throws IOException {
+	public @NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull String> enforcedOutputNames) throws IOException {
 		Resource qvtrResource = xtext2qvtrCompilerStep.execute(txURI);
-		return qvtr2qvti(qvtrResource, enforcedOutputName);
+		return qvtr2qvti(qvtrResource, enforcedOutputNames);
 	}
 
-	public @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull String enforcedOutputName) throws IOException {
+	public @NonNull ImperativeTransformation qvtr2qvti(@NonNull Resource qvtrResource, @NonNull Iterable<@NonNull String> enforcedOutputNames) throws IOException {
 		URI ecoreTraceURI = getURI(TRACE_STEP, URI_KEY);
 		URI traceURI = PivotUtilInternal.getASURI(ecoreTraceURI);
 		Resource traceResource = createResource(traceURI);
-		ScheduleManager scheduleManager = qvtr2qvtsCompilerStep.execute(qvtrResource, traceResource, enforcedOutputName);
+		ScheduleManager scheduleManager = qvtr2qvtsCompilerStep.execute(qvtrResource, traceResource, enforcedOutputNames);
 		createGenModelCompilerStep.execute(traceResource);
 		return qvts2qvtiCompilerStep.execute(scheduleManager);
 	}

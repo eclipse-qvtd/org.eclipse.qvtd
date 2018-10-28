@@ -55,7 +55,7 @@ public abstract class AbstractDomainUsageTests extends LoadTestCase
 		}
 
 		public void checkAnalysis(@NonNull Transformation asTransformation, boolean showAnalysis) {
-			Map<Element, DomainUsage> analysis = domainAnalysis.analyzeTransformation(asTransformation);
+			Map<Element, DomainUsage> analysis = domainAnalysis.analyzeTransformation(asTransformation, null);
 			Map<DomainUsage, List<Element>> usage2elements = new HashMap<DomainUsage, List<Element>>();
 			List<@NonNull Operation> operations = new ArrayList<>();
 			for (TreeIterator<EObject> tit = asTransformation.eAllContents(); tit.hasNext(); ) {

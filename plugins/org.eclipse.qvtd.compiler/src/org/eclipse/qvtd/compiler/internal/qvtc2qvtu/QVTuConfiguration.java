@@ -40,6 +40,10 @@ public class QVTuConfiguration
 		this.outputTypedModels = outputTypedModels;
 	}
 
+	public @NonNull Iterable<@NonNull TypedModel> getOutputTypedModels() {
+		return outputTypedModels;
+	}
+
 	/**
 	 * Checks if is check mode.
 	 */

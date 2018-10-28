@@ -63,9 +63,9 @@ public class UMLXCompilerChain extends QVTrCompilerChain
 	}
 
 	@Override
-	public @NonNull ImperativeTransformation compile(@NonNull String enforcedOutputName) throws IOException {
+	public @NonNull ImperativeTransformation compile(@NonNull Iterable<@NonNull String> enforcedOutputNames) throws IOException {
 		Resource rResource = umlx2qvtrCompilerStep.execute(txURI);
-		return qvtr2qvti(rResource, enforcedOutputName);
+		return qvtr2qvti(rResource, enforcedOutputNames);
 	}
 
 	protected @NonNull UMLX2QVTrCompilerStep createUMLX2QVTrCompilerStep() {
