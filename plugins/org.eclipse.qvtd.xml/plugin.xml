@@ -6,6 +6,11 @@
 
 <plugin>
 
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser type="xmlmodel"
+            class="org.eclipse.qvtd.xml.utilities.XMLmodelResourceFactoryImpl"/>
+   </extension>
+
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated XMLmodel -->
       <package
