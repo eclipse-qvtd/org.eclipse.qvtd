@@ -14,6 +14,8 @@
  */
 package org.eclipse.qvtd.xml;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -26,6 +28,7 @@ package org.eclipse.qvtd.xml;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xml.Attribute#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xml.Attribute#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xml.Attribute#getEcoreFeature <em>Ecore Feature</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xml.XMLmodelPackage#getAttribute()
@@ -84,5 +87,20 @@ public interface Attribute extends Node {
 	 * @generated
 	 */
 	void setValue(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Ecore Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Ecore Feature</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Ecore Feature</em>' reference.
+	 * @see org.eclipse.qvtd.xml.XMLmodelPackage#getAttribute_EcoreFeature()
+	 * @model resolveProxies="false" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	EStructuralFeature getEcoreFeature();
 
 } // Attribute

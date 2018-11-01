@@ -71,8 +71,12 @@ public class XMLmodelFactoryImpl extends EFactoryImpl implements XMLmodelFactory
 			case XMLmodelPackage.ATTRIBUTE: return createAttribute();
 			case XMLmodelPackage.CDATA: return createCDATA();
 			case XMLmodelPackage.CHARACTERS: return createCharacters();
+			case XMLmodelPackage.CLASS_ATTRIBUTE: return createClassAttribute();
+			case XMLmodelPackage.CLASS_ELEMENT: return createClassElement();
 			case XMLmodelPackage.COMMENT: return createComment();
 			case XMLmodelPackage.DTD: return createDTD();
+			case XMLmodelPackage.DATA_TYPE_ATTRIBUTE: return createDataTypeAttribute();
+			case XMLmodelPackage.DATA_TYPE_ELEMENT: return createDataTypeElement();
 			case XMLmodelPackage.DOCUMENT: return createDocument();
 			case XMLmodelPackage.ELEMENT: return createElement();
 			case XMLmodelPackage.ENTITY: return createEntity();
@@ -118,6 +122,26 @@ public class XMLmodelFactoryImpl extends EFactoryImpl implements XMLmodelFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ClassAttribute createClassAttribute() {
+		ClassAttributeImpl classAttribute = new ClassAttributeImpl();
+		return classAttribute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ClassElement createClassElement() {
+		ClassElementImpl classElement = new ClassElementImpl();
+		return classElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Comment createComment() {
 		CommentImpl comment = new CommentImpl();
 		return comment;
@@ -131,6 +155,26 @@ public class XMLmodelFactoryImpl extends EFactoryImpl implements XMLmodelFactory
 	public DTD createDTD() {
 		DTDImpl dtd = new DTDImpl();
 		return dtd;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DataTypeAttribute createDataTypeAttribute() {
+		DataTypeAttributeImpl dataTypeAttribute = new DataTypeAttributeImpl();
+		return dataTypeAttribute;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DataTypeElement createDataTypeElement() {
+		DataTypeElementImpl dataTypeElement = new DataTypeElementImpl();
+		return dataTypeElement;
 	}
 
 	/**

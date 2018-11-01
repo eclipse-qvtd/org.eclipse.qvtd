@@ -20,8 +20,6 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.xml.*;
 
 /**
@@ -78,8 +76,8 @@ public class XMLmodelAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected XMLmodelSwitch<@Nullable Adapter> modelSwitch =
-		new XMLmodelSwitch<@Nullable Adapter>() {
+	protected XMLmodelSwitch<Adapter> modelSwitch =
+		new XMLmodelSwitch<Adapter>() {
 			@Override
 			public Adapter caseAttribute(Attribute object) {
 				return createAttributeAdapter();
@@ -93,12 +91,28 @@ public class XMLmodelAdapterFactory extends AdapterFactoryImpl {
 				return createCharactersAdapter();
 			}
 			@Override
+			public Adapter caseClassAttribute(ClassAttribute object) {
+				return createClassAttributeAdapter();
+			}
+			@Override
+			public Adapter caseClassElement(ClassElement object) {
+				return createClassElementAdapter();
+			}
+			@Override
 			public Adapter caseComment(Comment object) {
 				return createCommentAdapter();
 			}
 			@Override
 			public Adapter caseDTD(DTD object) {
 				return createDTDAdapter();
+			}
+			@Override
+			public Adapter caseDataTypeAttribute(DataTypeAttribute object) {
+				return createDataTypeAttributeAdapter();
+			}
+			@Override
+			public Adapter caseDataTypeElement(DataTypeElement object) {
+				return createDataTypeElementAdapter();
 			}
 			@Override
 			public Adapter caseDocument(Document object) {
@@ -187,6 +201,34 @@ public class XMLmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xml.ClassAttribute <em>Class Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xml.ClassAttribute
+	 * @generated
+	 */
+	public Adapter createClassAttributeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xml.ClassElement <em>Class Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xml.ClassElement
+	 * @generated
+	 */
+	public Adapter createClassElementAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xml.Comment <em>Comment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -211,6 +253,34 @@ public class XMLmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDTDAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xml.DataTypeAttribute <em>Data Type Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xml.DataTypeAttribute
+	 * @generated
+	 */
+	public Adapter createDataTypeAttributeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xml.DataTypeElement <em>Data Type Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xml.DataTypeElement
+	 * @generated
+	 */
+	public Adapter createDataTypeElementAdapter() {
 		return null;
 	}
 

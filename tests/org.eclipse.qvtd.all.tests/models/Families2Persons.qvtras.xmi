@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qvtr:RelationModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
+    xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase" xmlns:qvtr="http://www.eclipse.org/qvt/2015/QVTrelation" xmlns:qvtt="http://www.eclipse.org/qvt/2015/QVTtemplate"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTrelation java://org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage http://www.eclipse.org/qvt/2015/QVTtemplate java://org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage"
+    xmi:id="AAAAA" externalURI="platform:/resource/_QVTd_QVTrCompilerTests__testQVTrCompiler_ATL2QVTr_CG/Families2Persons_CG.qvtras"
+    name="Families2Persons_CG.qvtras" xmiidVersion="1">
+  <ownedPackages xmi:id="6Fh3I" name="">
+    <ownedClasses xsi:type="qvtr:RelationalTransformation" xmi:id="lSZ2I" name="Families2Persons">
+      <modelParameter xmi:id="mAGsf" isTrace="true" name="middle"/>
+      <modelParameter xmi:id="z2sgS" name="Families" usedPackage="Families.ecore.oclas#ci1p7"/>
+      <modelParameter xmi:id="v4ega" name="Persons" usedPackage="Persons.ecore.oclas#YknpD"/>
+      <ownedContext xsi:type="pivot:ParameterVariable" xmi:id="DqXtJ" name="this" type="#lSZ2I"/>
+      <ownedOperations xsi:type="qvtb:Function" xmi:id="Gr4OV" name="familyName" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
+        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="lcaR4" name="self" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+        <queryExpression xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
+          <ownedCondition xsi:type="pivot:OperationCallExp" name="not" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#DH5kA"
+              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
+            <ownedSource xsi:type="pivot:OperationCallExp" name="oclIsUndefined" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#aSwFn"
+                type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
+              <ownedSource xsi:type="pivot:PropertyCallExp" name="familyFather" referredProperty="Families.ecore.oclas#31gsl"
+                  type="pivot:Class Families.ecore.oclas#151KI">
+                <ownedSource xsi:type="pivot:VariableExp" name="self" referredVariable="#lcaR4" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+              </ownedSource>
+            </ownedSource>
+          </ownedCondition>
+          <ownedElse xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
+            <ownedCondition xsi:type="pivot:OperationCallExp" name="not" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#DH5kA"
+                type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
+              <ownedSource xsi:type="pivot:OperationCallExp" name="oclIsUndefined" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#aSwFn"
+                  type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
+                <ownedSource xsi:type="pivot:PropertyCallExp" name="familyMother" referredProperty="Families.ecore.oclas#eLUay"
+                    type="pivot:Class Families.ecore.oclas#151KI">
+                  <ownedSource xsi:type="pivot:VariableExp" name="self" referredVariable="#lcaR4" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+                </ownedSource>
+              </ownedSource>
+            </ownedCondition>
+            <ownedElse xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
+              <ownedCondition xsi:type="pivot:OperationCallExp" name="not" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#DH5kA"
+                  type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
+                <ownedSource xsi:type="pivot:OperationCallExp" name="oclIsUndefined" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#aSwFn"
+                    type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
+                  <ownedSource xsi:type="pivot:PropertyCallExp" name="familySon" referredProperty="Families.ecore.oclas#lstD1"
+                      type="pivot:Class Families.ecore.oclas#151KI">
+                    <ownedSource xsi:type="pivot:VariableExp" name="self" referredVariable="#lcaR4" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+                  </ownedSource>
+                </ownedSource>
+              </ownedCondition>
+              <ownedElse xsi:type="pivot:PropertyCallExp" name="lastName" referredProperty="Families.ecore.oclas#6dF3q"
+                  type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
+                <ownedSource xsi:type="pivot:PropertyCallExp" name="familyDaughter" referredProperty="Families.ecore.oclas#j4ucQ"
+                    type="pivot:Class Families.ecore.oclas#151KI">
+                  <ownedSource xsi:type="pivot:VariableExp" name="self" referredVariable="#lcaR4" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+                </ownedSource>
+              </ownedElse>
+              <ownedThen xsi:type="pivot:PropertyCallExp" name="lastName" referredProperty="Families.ecore.oclas#6dF3q"
+                  type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
+                <ownedSource xsi:type="pivot:PropertyCallExp" name="familySon" referredProperty="Families.ecore.oclas#lstD1"
+                    type="pivot:Class Families.ecore.oclas#151KI">
+                  <ownedSource xsi:type="pivot:VariableExp" name="self" referredVariable="#lcaR4" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+                </ownedSource>
+              </ownedThen>
+            </ownedElse>
+            <ownedThen xsi:type="pivot:PropertyCallExp" name="lastName" referredProperty="Families.ecore.oclas#6dF3q"
+                type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
+              <ownedSource xsi:type="pivot:PropertyCallExp" name="familyMother" referredProperty="Families.ecore.oclas#eLUay"
+                  type="pivot:Class Families.ecore.oclas#151KI">
+                <ownedSource xsi:type="pivot:VariableExp" name="self" referredVariable="#lcaR4" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+              </ownedSource>
+            </ownedThen>
+          </ownedElse>
+          <ownedThen xsi:type="pivot:PropertyCallExp" name="lastName" referredProperty="Families.ecore.oclas#6dF3q"
+              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
+            <ownedSource xsi:type="pivot:PropertyCallExp" name="familyFather" referredProperty="Families.ecore.oclas#31gsl"
+                type="pivot:Class Families.ecore.oclas#151KI">
+              <ownedSource xsi:type="pivot:VariableExp" name="self" referredVariable="#lcaR4" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+            </ownedSource>
+          </ownedThen>
+        </queryExpression>
+      </ownedOperations>
+      <ownedOperations xsi:type="qvtb:Function" xmi:id="N,BoB" name="isFemale" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
+        <ownedParameters xsi:type="qvtb:FunctionParameter" xmi:id="QQAbF" name="self" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+        <queryExpression xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
+          <ownedCondition xsi:type="pivot:OperationCallExp" name="not" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#DH5kA"
+              type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
+            <ownedSource xsi:type="pivot:OperationCallExp" name="oclIsUndefined" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#aSwFn"
+                type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
+              <ownedSource xsi:type="pivot:PropertyCallExp" name="familyMother" referredProperty="Families.ecore.oclas#eLUay"
+                  type="pivot:Class Families.ecore.oclas#151KI">
+                <ownedSource xsi:type="pivot:VariableExp" name="self" referredVariable="#QQAbF" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+              </ownedSource>
+            </ownedSource>
+          </ownedCondition>
+          <ownedElse xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
+            <ownedCondition xsi:type="pivot:OperationCallExp" name="not" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#DH5kA"
+                type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
+              <ownedSource xsi:type="pivot:OperationCallExp" name="oclIsUndefined" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#aSwFn"
+                  type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
+                <ownedSource xsi:type="pivot:PropertyCallExp" name="familyDaughter" referredProperty="Families.ecore.oclas#j4ucQ"
+                    type="pivot:Class Families.ecore.oclas#151KI">
+                  <ownedSource xsi:type="pivot:VariableExp" name="self" referredVariable="#QQAbF" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+                </ownedSource>
+              </ownedSource>
+            </ownedCondition>
+            <ownedElse xsi:type="pivot:BooleanLiteralExp" booleanSymbol="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs"/>
+            <ownedThen xsi:type="pivot:BooleanLiteralExp" booleanSymbol="true" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs"/>
+          </ownedElse>
+          <ownedThen xsi:type="pivot:BooleanLiteralExp" booleanSymbol="true" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs"/>
+        </queryExpression>
+      </ownedOperations>
+      <rule xsi:type="qvtr:Relation" xmi:id="hcUQQ" isTopLevel="true" name="Member2Female">
+        <domain xsi:type="qvtr:RelationDomain" isCheckable="true" isEnforceable="false" rootVariable="#8tM8f" typedModel="#z2sgS">
+          <pattern>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#8tM8f" referredClass="Families.ecore.oclas#r2YVU"
+                type="pivot:Class Families.ecore.oclas#r2YVU"/>
+          </pattern>
+        </domain>
+        <domain xsi:type="qvtr:RelationDomain" isCheckable="false" isEnforceable="true" rootVariable="#9tM8f" typedModel="#v4ega">
+          <pattern>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#9tM8f" referredClass="Persons.ecore.oclas#pzC6s"
+                type="pivot:Class Persons.ecore.oclas#pzC6s">
+              <part referredProperty="Persons.ecore.oclas#8tc+u">
+                <value xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#gJ7dJ"
+                    type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
+                  <ownedArguments xsi:type="pivot:OperationCallExp" name="familyName" referredOperation="#Gr4OV" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
+                    <ownedArguments xsi:type="pivot:VariableExp" name="s" referredVariable="#8tM8f" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+                    <ownedSource xsi:type="pivot:VariableExp" name="this" referredVariable="#DqXtJ" type="#lSZ2I"/>
+                  </ownedArguments>
+                  <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#gJ7dJ"
+                      type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
+                    <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol=" " type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
+                    <ownedSource xsi:type="pivot:PropertyCallExp" name="firstName" referredProperty="Families.ecore.oclas#yTUBO"
+                        type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
+                      <ownedSource xsi:type="pivot:VariableExp" name="s" referredVariable="#8tM8f" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+                    </ownedSource>
+                  </ownedSource>
+                </value>
+              </part>
+            </templateExpression>
+          </pattern>
+        </domain>
+        <variable xsi:type="qvtr:TemplateVariable" xmi:id="8tM8f" name="s" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+        <variable xsi:type="qvtr:TemplateVariable" xmi:id="9tM8f" name="t" type="pivot:Class Persons.ecore.oclas#pzC6s"/>
+        <variable xsi:type="qvtr:SharedVariable" isImplicit="true" name="trace" type="pivot:Class platform:/resource/org.eclipse.qvtd.runtime/model/QVTtrace.ecore.oclas#MdKgS"/>
+        <when>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="isFemale" referredOperation="#N,BoB" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
+              <ownedArguments xsi:type="pivot:VariableExp" name="s" referredVariable="#8tM8f" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+              <ownedSource xsi:type="pivot:VariableExp" name="this" referredVariable="#DqXtJ" type="#lSZ2I"/>
+            </conditionExpression>
+          </predicate>
+        </when>
+      </rule>
+      <rule xsi:type="qvtr:Relation" xmi:id="ifoLA" isTopLevel="true" name="Member2Male">
+        <domain xsi:type="qvtr:RelationDomain" isCheckable="true" isEnforceable="false" rootVariable="#50ALF" typedModel="#z2sgS">
+          <pattern>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#50ALF" referredClass="Families.ecore.oclas#r2YVU"
+                type="pivot:Class Families.ecore.oclas#r2YVU"/>
+          </pattern>
+        </domain>
+        <domain xsi:type="qvtr:RelationDomain" isCheckable="false" isEnforceable="true" rootVariable="#60ALF" typedModel="#v4ega">
+          <pattern>
+            <templateExpression xsi:type="qvtt:ObjectTemplateExp" bindsTo="#60ALF" referredClass="Persons.ecore.oclas#q+x1v"
+                type="pivot:Class Persons.ecore.oclas#q+x1v">
+              <part referredProperty="Persons.ecore.oclas#8tc+u">
+                <value xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#gJ7dJ"
+                    type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
+                  <ownedArguments xsi:type="pivot:OperationCallExp" name="familyName" referredOperation="#Gr4OV" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
+                    <ownedArguments xsi:type="pivot:VariableExp" name="s" referredVariable="#50ALF" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+                    <ownedSource xsi:type="pivot:VariableExp" name="this" referredVariable="#DqXtJ" type="#lSZ2I"/>
+                  </ownedArguments>
+                  <ownedSource xsi:type="pivot:OperationCallExp" name="+" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#gJ7dJ"
+                      type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
+                    <ownedArguments xsi:type="pivot:StringLiteralExp" stringSymbol=" " type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ"/>
+                    <ownedSource xsi:type="pivot:PropertyCallExp" name="firstName" referredProperty="Families.ecore.oclas#yTUBO"
+                        type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#AlwVZ">
+                      <ownedSource xsi:type="pivot:VariableExp" name="s" referredVariable="#50ALF" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+                    </ownedSource>
+                  </ownedSource>
+                </value>
+              </part>
+            </templateExpression>
+          </pattern>
+        </domain>
+        <variable xsi:type="qvtr:TemplateVariable" xmi:id="50ALF" name="s" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+        <variable xsi:type="qvtr:TemplateVariable" xmi:id="60ALF" name="t" type="pivot:Class Persons.ecore.oclas#q+x1v"/>
+        <variable xsi:type="qvtr:SharedVariable" isImplicit="true" name="trace" type="pivot:Class platform:/resource/org.eclipse.qvtd.runtime/model/QVTtrace.ecore.oclas#MdKgS"/>
+        <when>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="not" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#DH5kA"
+                type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
+              <ownedSource xsi:type="pivot:OperationCallExp" name="isFemale" referredOperation="#N,BoB" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#XEMMs">
+                <ownedArguments xsi:type="pivot:VariableExp" name="s" referredVariable="#50ALF" type="pivot:Class Families.ecore.oclas#r2YVU"/>
+                <ownedSource xsi:type="pivot:VariableExp" name="this" referredVariable="#DqXtJ" type="#lSZ2I"/>
+              </ownedSource>
+            </conditionExpression>
+          </predicate>
+        </when>
+      </rule>
+    </ownedClasses>
+  </ownedPackages>
+</qvtr:RelationModel>

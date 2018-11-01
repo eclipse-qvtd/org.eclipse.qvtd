@@ -77,7 +77,7 @@ public interface XMLmodelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xml.impl.XMLmodelPackageImpl#getNode()
 	 * @generated
 	 */
-	int NODE = 8;
+	int NODE = 12;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -144,13 +144,22 @@ public interface XMLmodelPackage extends EPackage {
 	int ATTRIBUTE__VALUE = NODE_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Ecore Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ATTRIBUTE__ECORE_FEATURE = NODE_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Attribute</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ATTRIBUTE_FEATURE_COUNT = NODE_FEATURE_COUNT + 2;
+	int ATTRIBUTE_FEATURE_COUNT = NODE_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Attribute</em>' class.
@@ -245,6 +254,88 @@ public interface XMLmodelPackage extends EPackage {
 	int CHARACTERS_OPERATION_COUNT = NODE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xml.impl.ClassAttributeImpl <em>Class Attribute</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xml.impl.ClassAttributeImpl
+	 * @see org.eclipse.qvtd.xml.impl.XMLmodelPackageImpl#getClassAttribute()
+	 * @generated
+	 */
+	int CLASS_ATTRIBUTE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_ATTRIBUTE__CHILDREN = ATTRIBUTE__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_ATTRIBUTE__NAME = ATTRIBUTE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_ATTRIBUTE__VALUE = ATTRIBUTE__VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Ecore Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_ATTRIBUTE__ECORE_FEATURE = ATTRIBUTE__ECORE_FEATURE;
+
+	/**
+	 * The feature id for the '<em><b>Ecore Reference</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_ATTRIBUTE__ECORE_REFERENCE = ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>EObjects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_ATTRIBUTE__EOBJECTS = ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Class Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_ATTRIBUTE_FEATURE_COUNT = ATTRIBUTE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Class Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_ATTRIBUTE_OPERATION_COUNT = ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xml.impl.CommentImpl <em>Comment</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -252,7 +343,202 @@ public interface XMLmodelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xml.impl.XMLmodelPackageImpl#getComment()
 	 * @generated
 	 */
-	int COMMENT = 3;
+	int COMMENT = 5;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xml.impl.DTDImpl <em>DTD</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xml.impl.DTDImpl
+	 * @see org.eclipse.qvtd.xml.impl.XMLmodelPackageImpl#getDTD()
+	 * @generated
+	 */
+	int DTD = 6;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xml.impl.DataTypeAttributeImpl <em>Data Type Attribute</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xml.impl.DataTypeAttributeImpl
+	 * @see org.eclipse.qvtd.xml.impl.XMLmodelPackageImpl#getDataTypeAttribute()
+	 * @generated
+	 */
+	int DATA_TYPE_ATTRIBUTE = 7;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xml.impl.DataTypeElementImpl <em>Data Type Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xml.impl.DataTypeElementImpl
+	 * @see org.eclipse.qvtd.xml.impl.XMLmodelPackageImpl#getDataTypeElement()
+	 * @generated
+	 */
+	int DATA_TYPE_ELEMENT = 8;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xml.impl.DocumentImpl <em>Document</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xml.impl.DocumentImpl
+	 * @see org.eclipse.qvtd.xml.impl.XMLmodelPackageImpl#getDocument()
+	 * @generated
+	 */
+	int DOCUMENT = 9;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xml.impl.ElementImpl <em>Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xml.impl.ElementImpl
+	 * @see org.eclipse.qvtd.xml.impl.XMLmodelPackageImpl#getElement()
+	 * @generated
+	 */
+	int ELEMENT = 10;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT__CHILDREN = NODE__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Local Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT__LOCAL_NAME = NODE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>QName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT__QNAME = NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT__URI = NODE_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Ecore Classifier</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT__ECORE_CLASSIFIER = NODE_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_FEATURE_COUNT = NODE_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ELEMENT_OPERATION_COUNT = NODE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xml.impl.ClassElementImpl <em>Class Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xml.impl.ClassElementImpl
+	 * @see org.eclipse.qvtd.xml.impl.XMLmodelPackageImpl#getClassElement()
+	 * @generated
+	 */
+	int CLASS_ELEMENT = 4;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_ELEMENT__CHILDREN = ELEMENT__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Local Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_ELEMENT__LOCAL_NAME = ELEMENT__LOCAL_NAME;
+
+	/**
+	 * The feature id for the '<em><b>QName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_ELEMENT__QNAME = ELEMENT__QNAME;
+
+	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_ELEMENT__URI = ELEMENT__URI;
+
+	/**
+	 * The feature id for the '<em><b>Ecore Classifier</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_ELEMENT__ECORE_CLASSIFIER = ELEMENT__ECORE_CLASSIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Ecore Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_ELEMENT__ECORE_CLASS = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Class Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_ELEMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Class Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_ELEMENT_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -289,16 +575,6 @@ public interface XMLmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMMENT_OPERATION_COUNT = NODE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xml.impl.DTDImpl <em>DTD</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xml.impl.DTDImpl
-	 * @see org.eclipse.qvtd.xml.impl.XMLmodelPackageImpl#getDTD()
-	 * @generated
-	 */
-	int DTD = 4;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -355,14 +631,139 @@ public interface XMLmodelPackage extends EPackage {
 	int DTD_OPERATION_COUNT = NODE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xml.impl.DocumentImpl <em>Document</em>}' class.
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xml.impl.DocumentImpl
-	 * @see org.eclipse.qvtd.xml.impl.XMLmodelPackageImpl#getDocument()
 	 * @generated
+	 * @ordered
 	 */
-	int DOCUMENT = 5;
+	int DATA_TYPE_ATTRIBUTE__CHILDREN = ATTRIBUTE__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE_ATTRIBUTE__NAME = ATTRIBUTE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE_ATTRIBUTE__VALUE = ATTRIBUTE__VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Ecore Feature</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE_ATTRIBUTE__ECORE_FEATURE = ATTRIBUTE__ECORE_FEATURE;
+
+	/**
+	 * The feature id for the '<em><b>Ecore Attribute</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE_ATTRIBUTE__ECORE_ATTRIBUTE = ATTRIBUTE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Data Type Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE_ATTRIBUTE_FEATURE_COUNT = ATTRIBUTE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Data Type Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE_ATTRIBUTE_OPERATION_COUNT = ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE_ELEMENT__CHILDREN = ELEMENT__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Local Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE_ELEMENT__LOCAL_NAME = ELEMENT__LOCAL_NAME;
+
+	/**
+	 * The feature id for the '<em><b>QName</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE_ELEMENT__QNAME = ELEMENT__QNAME;
+
+	/**
+	 * The feature id for the '<em><b>Uri</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE_ELEMENT__URI = ELEMENT__URI;
+
+	/**
+	 * The feature id for the '<em><b>Ecore Classifier</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE_ELEMENT__ECORE_CLASSIFIER = ELEMENT__ECORE_CLASSIFIER;
+
+	/**
+	 * The feature id for the '<em><b>Ecore Data Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE_ELEMENT__ECORE_DATA_TYPE = ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Data Type Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE_ELEMENT_FEATURE_COUNT = ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Data Type Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_TYPE_ELEMENT_OPERATION_COUNT = ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -392,70 +793,6 @@ public interface XMLmodelPackage extends EPackage {
 	int DOCUMENT_OPERATION_COUNT = NODE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xml.impl.ElementImpl <em>Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xml.impl.ElementImpl
-	 * @see org.eclipse.qvtd.xml.impl.XMLmodelPackageImpl#getElement()
-	 * @generated
-	 */
-	int ELEMENT = 6;
-
-	/**
-	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ELEMENT__CHILDREN = NODE__CHILDREN;
-
-	/**
-	 * The feature id for the '<em><b>Local Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ELEMENT__LOCAL_NAME = NODE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>QName</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ELEMENT__QNAME = NODE_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Uri</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ELEMENT__URI = NODE_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ELEMENT_FEATURE_COUNT = NODE_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of operations of the '<em>Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ELEMENT_OPERATION_COUNT = NODE_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xml.impl.EntityImpl <em>Entity</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -463,7 +800,7 @@ public interface XMLmodelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xml.impl.XMLmodelPackageImpl#getEntity()
 	 * @generated
 	 */
-	int ENTITY = 7;
+	int ENTITY = 11;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -509,7 +846,7 @@ public interface XMLmodelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xml.impl.XMLmodelPackageImpl#getPrefixMapping()
 	 * @generated
 	 */
-	int PREFIX_MAPPING = 9;
+	int PREFIX_MAPPING = 13;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -564,7 +901,7 @@ public interface XMLmodelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xml.impl.XMLmodelPackageImpl#getProcessingInstruction()
 	 * @generated
 	 */
-	int PROCESSING_INSTRUCTION = 10;
+	int PROCESSING_INSTRUCTION = 14;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -645,6 +982,17 @@ public interface XMLmodelPackage extends EPackage {
 	EAttribute getAttribute_Value();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xml.Attribute#getEcoreFeature <em>Ecore Feature</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ecore Feature</em>'.
+	 * @see org.eclipse.qvtd.xml.Attribute#getEcoreFeature()
+	 * @see #getAttribute()
+	 * @generated
+	 */
+	EReference getAttribute_EcoreFeature();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xml.CDATA <em>CDATA</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -674,6 +1022,59 @@ public interface XMLmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getCharacters_Data();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xml.ClassAttribute <em>Class Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Class Attribute</em>'.
+	 * @see org.eclipse.qvtd.xml.ClassAttribute
+	 * @generated
+	 */
+	EClass getClassAttribute();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xml.ClassAttribute#getEcoreReference <em>Ecore Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ecore Reference</em>'.
+	 * @see org.eclipse.qvtd.xml.ClassAttribute#getEcoreReference()
+	 * @see #getClassAttribute()
+	 * @generated
+	 */
+	EReference getClassAttribute_EcoreReference();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xml.ClassAttribute#getEObjects <em>EObjects</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>EObjects</em>'.
+	 * @see org.eclipse.qvtd.xml.ClassAttribute#getEObjects()
+	 * @see #getClassAttribute()
+	 * @generated
+	 */
+	EReference getClassAttribute_EObjects();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xml.ClassElement <em>Class Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Class Element</em>'.
+	 * @see org.eclipse.qvtd.xml.ClassElement
+	 * @generated
+	 */
+	EClass getClassElement();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xml.ClassElement#getEcoreClass <em>Ecore Class</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ecore Class</em>'.
+	 * @see org.eclipse.qvtd.xml.ClassElement#getEcoreClass()
+	 * @see #getClassElement()
+	 * @generated
+	 */
+	EReference getClassElement_EcoreClass();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xml.Comment <em>Comment</em>}'.
@@ -740,6 +1141,48 @@ public interface XMLmodelPackage extends EPackage {
 	EAttribute getDTD_SystemId();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xml.DataTypeAttribute <em>Data Type Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Data Type Attribute</em>'.
+	 * @see org.eclipse.qvtd.xml.DataTypeAttribute
+	 * @generated
+	 */
+	EClass getDataTypeAttribute();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xml.DataTypeAttribute#getEcoreAttribute <em>Ecore Attribute</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ecore Attribute</em>'.
+	 * @see org.eclipse.qvtd.xml.DataTypeAttribute#getEcoreAttribute()
+	 * @see #getDataTypeAttribute()
+	 * @generated
+	 */
+	EReference getDataTypeAttribute_EcoreAttribute();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xml.DataTypeElement <em>Data Type Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Data Type Element</em>'.
+	 * @see org.eclipse.qvtd.xml.DataTypeElement
+	 * @generated
+	 */
+	EClass getDataTypeElement();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xml.DataTypeElement#getEcoreDataType <em>Ecore Data Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ecore Data Type</em>'.
+	 * @see org.eclipse.qvtd.xml.DataTypeElement#getEcoreDataType()
+	 * @see #getDataTypeElement()
+	 * @generated
+	 */
+	EReference getDataTypeElement_EcoreDataType();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xml.Document <em>Document</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -791,6 +1234,17 @@ public interface XMLmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getElement_Uri();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xml.Element#getEcoreClassifier <em>Ecore Classifier</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ecore Classifier</em>'.
+	 * @see org.eclipse.qvtd.xml.Element#getEcoreClassifier()
+	 * @see #getElement()
+	 * @generated
+	 */
+	EReference getElement_EcoreClassifier();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xml.Entity <em>Entity</em>}'.
@@ -948,6 +1402,14 @@ public interface XMLmodelPackage extends EPackage {
 		EAttribute ATTRIBUTE__VALUE = eINSTANCE.getAttribute_Value();
 
 		/**
+		 * The meta object literal for the '<em><b>Ecore Feature</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ATTRIBUTE__ECORE_FEATURE = eINSTANCE.getAttribute_EcoreFeature();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xml.impl.CDATAImpl <em>CDATA</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -974,6 +1436,50 @@ public interface XMLmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute CHARACTERS__DATA = eINSTANCE.getCharacters_Data();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xml.impl.ClassAttributeImpl <em>Class Attribute</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xml.impl.ClassAttributeImpl
+		 * @see org.eclipse.qvtd.xml.impl.XMLmodelPackageImpl#getClassAttribute()
+		 * @generated
+		 */
+		EClass CLASS_ATTRIBUTE = eINSTANCE.getClassAttribute();
+
+		/**
+		 * The meta object literal for the '<em><b>Ecore Reference</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_ATTRIBUTE__ECORE_REFERENCE = eINSTANCE.getClassAttribute_EcoreReference();
+
+		/**
+		 * The meta object literal for the '<em><b>EObjects</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_ATTRIBUTE__EOBJECTS = eINSTANCE.getClassAttribute_EObjects();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xml.impl.ClassElementImpl <em>Class Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xml.impl.ClassElementImpl
+		 * @see org.eclipse.qvtd.xml.impl.XMLmodelPackageImpl#getClassElement()
+		 * @generated
+		 */
+		EClass CLASS_ELEMENT = eINSTANCE.getClassElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Ecore Class</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_ELEMENT__ECORE_CLASS = eINSTANCE.getClassElement_EcoreClass();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xml.impl.CommentImpl <em>Comment</em>}' class.
@@ -1028,6 +1534,42 @@ public interface XMLmodelPackage extends EPackage {
 		EAttribute DTD__SYSTEM_ID = eINSTANCE.getDTD_SystemId();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xml.impl.DataTypeAttributeImpl <em>Data Type Attribute</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xml.impl.DataTypeAttributeImpl
+		 * @see org.eclipse.qvtd.xml.impl.XMLmodelPackageImpl#getDataTypeAttribute()
+		 * @generated
+		 */
+		EClass DATA_TYPE_ATTRIBUTE = eINSTANCE.getDataTypeAttribute();
+
+		/**
+		 * The meta object literal for the '<em><b>Ecore Attribute</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DATA_TYPE_ATTRIBUTE__ECORE_ATTRIBUTE = eINSTANCE.getDataTypeAttribute_EcoreAttribute();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xml.impl.DataTypeElementImpl <em>Data Type Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xml.impl.DataTypeElementImpl
+		 * @see org.eclipse.qvtd.xml.impl.XMLmodelPackageImpl#getDataTypeElement()
+		 * @generated
+		 */
+		EClass DATA_TYPE_ELEMENT = eINSTANCE.getDataTypeElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Ecore Data Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DATA_TYPE_ELEMENT__ECORE_DATA_TYPE = eINSTANCE.getDataTypeElement_EcoreDataType();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xml.impl.DocumentImpl <em>Document</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1070,6 +1612,14 @@ public interface XMLmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ELEMENT__URI = eINSTANCE.getElement_Uri();
+
+		/**
+		 * The meta object literal for the '<em><b>Ecore Classifier</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ELEMENT__ECORE_CLASSIFIER = eINSTANCE.getElement_EcoreClassifier();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xml.impl.EntityImpl <em>Entity</em>}' class.

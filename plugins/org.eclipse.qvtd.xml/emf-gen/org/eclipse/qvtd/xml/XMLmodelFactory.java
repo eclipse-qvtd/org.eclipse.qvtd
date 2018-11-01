@@ -61,6 +61,24 @@ public interface XMLmodelFactory extends EFactory {
 	Characters createCharacters();
 
 	/**
+	 * Returns a new object of class '<em>Class Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Class Attribute</em>'.
+	 * @generated
+	 */
+	ClassAttribute createClassAttribute();
+
+	/**
+	 * Returns a new object of class '<em>Class Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Class Element</em>'.
+	 * @generated
+	 */
+	ClassElement createClassElement();
+
+	/**
 	 * Returns a new object of class '<em>Comment</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -77,6 +95,24 @@ public interface XMLmodelFactory extends EFactory {
 	 * @generated
 	 */
 	DTD createDTD();
+
+	/**
+	 * Returns a new object of class '<em>Data Type Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data Type Attribute</em>'.
+	 * @generated
+	 */
+	DataTypeAttribute createDataTypeAttribute();
+
+	/**
+	 * Returns a new object of class '<em>Data Type Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data Type Element</em>'.
+	 * @generated
+	 */
+	DataTypeElement createDataTypeElement();
 
 	/**
 	 * Returns a new object of class '<em>Document</em>'.

@@ -23,7 +23,11 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.qvtd.xml.Attribute;
 import org.eclipse.qvtd.xml.Characters;
+import org.eclipse.qvtd.xml.ClassAttribute;
+import org.eclipse.qvtd.xml.ClassElement;
 import org.eclipse.qvtd.xml.Comment;
+import org.eclipse.qvtd.xml.DataTypeAttribute;
+import org.eclipse.qvtd.xml.DataTypeElement;
 import org.eclipse.qvtd.xml.Document;
 import org.eclipse.qvtd.xml.Element;
 import org.eclipse.qvtd.xml.Entity;
@@ -66,6 +70,20 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass classAttributeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass classElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass commentEClass = null;
 
 	/**
@@ -74,6 +92,20 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * @generated
 	 */
 	private EClass dtdEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dataTypeAttributeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dataTypeElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -210,6 +242,15 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAttribute_EcoreFeature() {
+		return (EReference)attributeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCDATA() {
 		return cdataEClass;
 	}
@@ -230,6 +271,51 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 */
 	public EAttribute getCharacters_Data() {
 		return (EAttribute)charactersEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getClassAttribute() {
+		return classAttributeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getClassAttribute_EcoreReference() {
+		return (EReference)classAttributeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getClassAttribute_EObjects() {
+		return (EReference)classAttributeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getClassElement() {
+		return classElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getClassElement_EcoreClass() {
+		return (EReference)classElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -291,6 +377,42 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDataTypeAttribute() {
+		return dataTypeAttributeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDataTypeAttribute_EcoreAttribute() {
+		return (EReference)dataTypeAttributeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDataTypeElement() {
+		return dataTypeElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDataTypeElement_EcoreDataType() {
+		return (EReference)dataTypeElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDocument() {
 		return documentEClass;
 	}
@@ -329,6 +451,15 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 */
 	public EAttribute getElement_Uri() {
 		return (EAttribute)elementEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getElement_EcoreClassifier() {
+		return (EReference)elementEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -452,11 +583,19 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 		attributeEClass = createEClass(ATTRIBUTE);
 		createEAttribute(attributeEClass, ATTRIBUTE__NAME);
 		createEAttribute(attributeEClass, ATTRIBUTE__VALUE);
+		createEReference(attributeEClass, ATTRIBUTE__ECORE_FEATURE);
 
 		cdataEClass = createEClass(CDATA);
 
 		charactersEClass = createEClass(CHARACTERS);
 		createEAttribute(charactersEClass, CHARACTERS__DATA);
+
+		classAttributeEClass = createEClass(CLASS_ATTRIBUTE);
+		createEReference(classAttributeEClass, CLASS_ATTRIBUTE__ECORE_REFERENCE);
+		createEReference(classAttributeEClass, CLASS_ATTRIBUTE__EOBJECTS);
+
+		classElementEClass = createEClass(CLASS_ELEMENT);
+		createEReference(classElementEClass, CLASS_ELEMENT__ECORE_CLASS);
 
 		commentEClass = createEClass(COMMENT);
 		createEAttribute(commentEClass, COMMENT__DATA);
@@ -466,12 +605,19 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 		createEAttribute(dtdEClass, DTD__PUBLIC_ID);
 		createEAttribute(dtdEClass, DTD__SYSTEM_ID);
 
+		dataTypeAttributeEClass = createEClass(DATA_TYPE_ATTRIBUTE);
+		createEReference(dataTypeAttributeEClass, DATA_TYPE_ATTRIBUTE__ECORE_ATTRIBUTE);
+
+		dataTypeElementEClass = createEClass(DATA_TYPE_ELEMENT);
+		createEReference(dataTypeElementEClass, DATA_TYPE_ELEMENT__ECORE_DATA_TYPE);
+
 		documentEClass = createEClass(DOCUMENT);
 
 		elementEClass = createEClass(ELEMENT);
 		createEAttribute(elementEClass, ELEMENT__LOCAL_NAME);
 		createEAttribute(elementEClass, ELEMENT__QNAME);
 		createEAttribute(elementEClass, ELEMENT__URI);
+		createEReference(elementEClass, ELEMENT__ECORE_CLASSIFIER);
 
 		entityEClass = createEClass(ENTITY);
 		createEAttribute(entityEClass, ENTITY__NAME);
@@ -519,8 +665,12 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 		attributeEClass.getESuperTypes().add(this.getNode());
 		cdataEClass.getESuperTypes().add(this.getNode());
 		charactersEClass.getESuperTypes().add(this.getNode());
+		classAttributeEClass.getESuperTypes().add(this.getAttribute());
+		classElementEClass.getESuperTypes().add(this.getElement());
 		commentEClass.getESuperTypes().add(this.getNode());
 		dtdEClass.getESuperTypes().add(this.getNode());
+		dataTypeAttributeEClass.getESuperTypes().add(this.getAttribute());
+		dataTypeElementEClass.getESuperTypes().add(this.getElement());
 		documentEClass.getESuperTypes().add(this.getNode());
 		elementEClass.getESuperTypes().add(this.getNode());
 		entityEClass.getESuperTypes().add(this.getNode());
@@ -531,11 +681,19 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 		initEClass(attributeEClass, Attribute.class, "Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getAttribute_Name(), ecorePackage.getEString(), "name", null, 1, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getAttribute_Value(), ecorePackage.getEString(), "value", null, 1, 1, Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getAttribute_EcoreFeature(), ecorePackage.getEStructuralFeature(), null, "ecoreFeature", null, 0, 1, Attribute.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(cdataEClass, org.eclipse.qvtd.xml.CDATA.class, "CDATA", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(charactersEClass, Characters.class, "Characters", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getCharacters_Data(), ecorePackage.getEString(), "data", null, 1, 1, Characters.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		initEClass(classAttributeEClass, ClassAttribute.class, "ClassAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getClassAttribute_EcoreReference(), ecorePackage.getEReference(), null, "ecoreReference", null, 1, 1, ClassAttribute.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getClassAttribute_EObjects(), ecorePackage.getEObject(), null, "eObjects", null, 1, -1, ClassAttribute.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(classElementEClass, ClassElement.class, "ClassElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getClassElement_EcoreClass(), ecorePackage.getEClass(), null, "ecoreClass", null, 1, 1, ClassElement.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(commentEClass, Comment.class, "Comment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getComment_Data(), ecorePackage.getEString(), "data", null, 1, 1, Comment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
@@ -545,12 +703,19 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 		initEAttribute(getDTD_PublicId(), ecorePackage.getEString(), "publicId", null, 1, 1, org.eclipse.qvtd.xml.DTD.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getDTD_SystemId(), ecorePackage.getEString(), "systemId", null, 1, 1, org.eclipse.qvtd.xml.DTD.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
+		initEClass(dataTypeAttributeEClass, DataTypeAttribute.class, "DataTypeAttribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDataTypeAttribute_EcoreAttribute(), ecorePackage.getEAttribute(), null, "ecoreAttribute", null, 1, 1, DataTypeAttribute.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(dataTypeElementEClass, DataTypeElement.class, "DataTypeElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDataTypeElement_EcoreDataType(), ecorePackage.getEDataType(), null, "ecoreDataType", null, 1, 1, DataTypeElement.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(documentEClass, Document.class, "Document", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(elementEClass, Element.class, "Element", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getElement_LocalName(), ecorePackage.getEString(), "localName", null, 1, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getElement_QName(), ecorePackage.getEString(), "qName", null, 1, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEAttribute(getElement_Uri(), ecorePackage.getEString(), "uri", null, 1, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getElement_EcoreClassifier(), ecorePackage.getEClassifier(), null, "ecoreClassifier", null, 0, 1, Element.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getEntity_Name(), ecorePackage.getEString(), "name", null, 1, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

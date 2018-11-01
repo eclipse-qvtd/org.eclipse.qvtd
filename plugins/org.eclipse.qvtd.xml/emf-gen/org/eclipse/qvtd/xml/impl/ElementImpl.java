@@ -1,26 +1,27 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2018 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.xml.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.xml.DataTypeAttribute;
 import org.eclipse.qvtd.xml.Element;
+import org.eclipse.qvtd.xml.Node;
 import org.eclipse.qvtd.xml.XMLmodelPackage;
 
 /**
@@ -34,6 +35,7 @@ import org.eclipse.qvtd.xml.XMLmodelPackage;
  *   <li>{@link org.eclipse.qvtd.xml.impl.ElementImpl#getLocalName <em>Local Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xml.impl.ElementImpl#getQName <em>QName</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xml.impl.ElementImpl#getUri <em>Uri</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xml.impl.ElementImpl#getEcoreClassifier <em>Ecore Classifier</em>}</li>
  * </ul>
  *
  * @generated
@@ -123,6 +125,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getLocalName() {
 		return localName;
 	}
@@ -132,6 +135,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setLocalName(String newLocalName) {
 		String oldLocalName = localName;
 		localName = newLocalName;
@@ -144,6 +148,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getQName() {
 		return qName;
 	}
@@ -153,6 +158,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setQName(String newQName) {
 		String oldQName = qName;
 		qName = newQName;
@@ -165,6 +171,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getUri() {
 		return uri;
 	}
@@ -174,6 +181,7 @@ public class ElementImpl extends NodeImpl implements Element {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUri(String newUri) {
 		String oldUri = uri;
 		uri = newUri;
@@ -195,6 +203,8 @@ public class ElementImpl extends NodeImpl implements Element {
 				return getQName();
 			case XMLmodelPackage.ELEMENT__URI:
 				return getUri();
+			case XMLmodelPackage.ELEMENT__ECORE_CLASSIFIER:
+				return getEcoreClassifier();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -255,13 +265,30 @@ public class ElementImpl extends NodeImpl implements Element {
 				return QNAME_EDEFAULT == null ? qName != null : !QNAME_EDEFAULT.equals(qName);
 			case XMLmodelPackage.ELEMENT__URI:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
+			case XMLmodelPackage.ELEMENT__ECORE_CLASSIFIER:
+				return getEcoreClassifier() != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	@Override
+	public EClassifier getEcoreClassifier() {
+		return null;
+	}
+
+	@Override
 	public String toString() {
-		return "<" + qName + " ... />";
+		StringBuilder s = new StringBuilder();
+		s.append("<");
+		s.append(qName);
+		for (@NonNull Node node : children) {
+			if (node instanceof DataTypeAttribute) {
+				s.append(" ");
+				s.append(node.toString());
+			}
+		}
+		s.append(" ... />");
+		return s.toString();
 	}
 
 } //ElementImpl

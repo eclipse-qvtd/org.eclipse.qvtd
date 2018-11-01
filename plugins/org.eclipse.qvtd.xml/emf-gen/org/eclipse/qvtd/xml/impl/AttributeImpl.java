@@ -1,25 +1,23 @@
 /**
  * <copyright>
- * 
+ *
  * Copyright (c) 2018 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
- * 
+ *
  * </copyright>
  */
 package org.eclipse.qvtd.xml.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.qvtd.xml.Attribute;
 import org.eclipse.qvtd.xml.XMLmodelPackage;
 
@@ -33,6 +31,7 @@ import org.eclipse.qvtd.xml.XMLmodelPackage;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xml.impl.AttributeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xml.impl.AttributeImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xml.impl.AttributeImpl#getEcoreFeature <em>Ecore Feature</em>}</li>
  * </ul>
  *
  * @generated
@@ -102,6 +101,7 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -111,6 +111,7 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
@@ -123,6 +124,7 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getValue() {
 		return value;
 	}
@@ -132,6 +134,7 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(String newValue) {
 		String oldValue = value;
 		value = newValue;
@@ -151,6 +154,8 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 				return getName();
 			case XMLmodelPackage.ATTRIBUTE__VALUE:
 				return getValue();
+			case XMLmodelPackage.ATTRIBUTE__ECORE_FEATURE:
+				return getEcoreFeature();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -203,8 +208,15 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case XMLmodelPackage.ATTRIBUTE__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case XMLmodelPackage.ATTRIBUTE__ECORE_FEATURE:
+				return getEcoreFeature() != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	@Override
+	public EStructuralFeature getEcoreFeature() {
+		return null;
 	}
 
 	@Override

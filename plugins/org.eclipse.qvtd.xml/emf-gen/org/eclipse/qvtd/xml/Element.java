@@ -14,6 +14,8 @@
  */
 package org.eclipse.qvtd.xml;
 
+import org.eclipse.emf.ecore.EClassifier;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -27,6 +29,7 @@ package org.eclipse.qvtd.xml;
  *   <li>{@link org.eclipse.qvtd.xml.Element#getLocalName <em>Local Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xml.Element#getQName <em>QName</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xml.Element#getUri <em>Uri</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xml.Element#getEcoreClassifier <em>Ecore Classifier</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xml.XMLmodelPackage#getElement()
@@ -111,5 +114,20 @@ public interface Element extends Node {
 	 * @generated
 	 */
 	void setUri(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Ecore Classifier</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Ecore Classifier</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Ecore Classifier</em>' reference.
+	 * @see org.eclipse.qvtd.xml.XMLmodelPackage#getElement_EcoreClassifier()
+	 * @model resolveProxies="false" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	EClassifier getEcoreClassifier();
 
 } // Element

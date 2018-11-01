@@ -18,8 +18,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
-
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.xml.*;
 
 /**
@@ -35,7 +33,7 @@ import org.eclipse.qvtd.xml.*;
  * @see org.eclipse.qvtd.xml.XMLmodelPackage
  * @generated
  */
-public class XMLmodelSwitch<@Nullable T> extends Switch<T> {
+public class XMLmodelSwitch<T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -100,6 +98,22 @@ public class XMLmodelSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case XMLmodelPackage.CLASS_ATTRIBUTE: {
+				ClassAttribute classAttribute = (ClassAttribute)theEObject;
+				T result = caseClassAttribute(classAttribute);
+				if (result == null) result = caseAttribute(classAttribute);
+				if (result == null) result = caseNode(classAttribute);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XMLmodelPackage.CLASS_ELEMENT: {
+				ClassElement classElement = (ClassElement)theEObject;
+				T result = caseClassElement(classElement);
+				if (result == null) result = caseElement(classElement);
+				if (result == null) result = caseNode(classElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case XMLmodelPackage.COMMENT: {
 				Comment comment = (Comment)theEObject;
 				T result = caseComment(comment);
@@ -111,6 +125,22 @@ public class XMLmodelSwitch<@Nullable T> extends Switch<T> {
 				DTD dtd = (DTD)theEObject;
 				T result = caseDTD(dtd);
 				if (result == null) result = caseNode(dtd);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XMLmodelPackage.DATA_TYPE_ATTRIBUTE: {
+				DataTypeAttribute dataTypeAttribute = (DataTypeAttribute)theEObject;
+				T result = caseDataTypeAttribute(dataTypeAttribute);
+				if (result == null) result = caseAttribute(dataTypeAttribute);
+				if (result == null) result = caseNode(dataTypeAttribute);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XMLmodelPackage.DATA_TYPE_ELEMENT: {
+				DataTypeElement dataTypeElement = (DataTypeElement)theEObject;
+				T result = caseDataTypeElement(dataTypeElement);
+				if (result == null) result = caseElement(dataTypeElement);
+				if (result == null) result = caseNode(dataTypeElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -205,6 +235,36 @@ public class XMLmodelSwitch<@Nullable T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Class Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Class Attribute</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseClassAttribute(ClassAttribute object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Class Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Class Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseClassElement(ClassElement object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Comment</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -231,6 +291,36 @@ public class XMLmodelSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDTD(DTD object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Type Attribute</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Type Attribute</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataTypeAttribute(DataTypeAttribute object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Type Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Type Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataTypeElement(DataTypeElement object) {
 		return null;
 	}
 
