@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description:Group xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:description="http://www.eclipse.org/sirius/description/1.1.0" xmlns:description_1="http://www.eclipse.org/sirius/diagram/description/1.1.0" xmlns:style="http://www.eclipse.org/sirius/diagram/description/style/1.1.0" name="xml" version="12.0.0.2017041100">
+  <ownedViewpoints name="org.eclipse.qvtd.xml" label="XML" modelFileExtension="xmlmodel">
+    <ownedRepresentations xsi:type="description_1:DiagramDescription" name="org.eclipse.qvtd.xml.diagram" label="XML Elements Diagram" initialisation="true" domainClass="xml.Document">
+      <metamodel href="../../org.eclipse.qvtd.xml/model/XMLmodel.ecore#/"/>
+      <defaultLayer name="Default">
+        <edgeMappings name="org.eclipse.qvtd.xml.element2elementContainment" label="Element2ElementContainment" sourceMapping="//@ownedViewpoints[name='org.eclipse.qvtd.xml']/@ownedRepresentations[name='org.eclipse.qvtd.xml.diagram']/@defaultLayer/@containerMappings[name='org.eclipse.qvtd.xml.element-container']" targetMapping="//@ownedViewpoints[name='org.eclipse.qvtd.xml']/@ownedRepresentations[name='org.eclipse.qvtd.xml.diagram']/@defaultLayer/@containerMappings[name='org.eclipse.qvtd.xml.element-container']" targetFinderExpression="service:xmlElement2ElementContainmentTargetFinderExpression">
+          <style sourceArrow="InputArrow" targetArrow="FillDiamond" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <beginLabelStyleDescription showIcon="false" labelExpression="service:xmlElement2ElementContainmentBeginLabel">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </beginLabelStyleDescription>
+            <endLabelStyleDescription showIcon="false" labelExpression="service:xmlElement2ElementContainmentEndLabel">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </endLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="org.eclipse.qvtd.xml.element2elementReference2" label="Element2ElementReference2" semanticCandidatesExpression="service:xmlElement2ElementReference2SemanticCandidatesExpression" sourceMapping="//@ownedViewpoints[name='org.eclipse.qvtd.xml']/@ownedRepresentations[name='org.eclipse.qvtd.xml.diagram']/@defaultLayer/@containerMappings[name='org.eclipse.qvtd.xml.element-container']" targetMapping="//@ownedViewpoints[name='org.eclipse.qvtd.xml']/@ownedRepresentations[name='org.eclipse.qvtd.xml.diagram']/@defaultLayer/@containerMappings[name='org.eclipse.qvtd.xml.element-container']" targetFinderExpression="service:xmlElement2ElementReferenceTargetFinderExpression" sourceFinderExpression="service:xmlElement2ElementReferenceSourceFinderExpression" domainClass="xml.ClassAttribute" useDomainElement="true">
+          <style lineStyle="dash" sourceArrow="InputArrow" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <beginLabelStyleDescription showIcon="false" labelExpression="service:xmlElement2ElementReferenceBeginLabel">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </beginLabelStyleDescription>
+            <endLabelStyleDescription showIcon="false" labelExpression="service:xmlElement2ElementReferenceEndLabel">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </endLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <edgeMappings name="org.eclipse.qvtd.xml.element2elementReference1" label="Element2ElementReference1" semanticCandidatesExpression="service:xmlElement2ElementReference1SemanticCandidatesExpression" sourceMapping="//@ownedViewpoints[name='org.eclipse.qvtd.xml']/@ownedRepresentations[name='org.eclipse.qvtd.xml.diagram']/@defaultLayer/@containerMappings[name='org.eclipse.qvtd.xml.element-container']" targetMapping="//@ownedViewpoints[name='org.eclipse.qvtd.xml']/@ownedRepresentations[name='org.eclipse.qvtd.xml.diagram']/@defaultLayer/@containerMappings[name='org.eclipse.qvtd.xml.element-container']" targetFinderExpression="service:xmlElement2ElementReferenceTargetFinderExpression" sourceFinderExpression="service:xmlElement2ElementReferenceSourceFinderExpression" domainClass="xml.ClassAttribute" useDomainElement="true">
+          <style lineStyle="dot" sourceArrow="InputArrow" targetArrow="NoDecoration" sizeComputationExpression="2">
+            <strokeColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='gray']"/>
+            <beginLabelStyleDescription showIcon="false" labelExpression="service:xmlElement2ElementReferenceBeginLabel">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </beginLabelStyleDescription>
+            <endLabelStyleDescription showIcon="false" labelExpression="service:xmlElement2ElementReferenceEndLabel">
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            </endLabelStyleDescription>
+          </style>
+        </edgeMappings>
+        <containerMappings name="org.eclipse.qvtd.xml.element-container" label="ElementContainer" semanticCandidatesExpression="service:xmlElementSemanticsCandidatesExpression" domainClass="xml.Element" childrenPresentation="List">
+          <subNodeMappings name="org.eclipse.qvtd.xml.attribute" label="Attribute" semanticCandidatesExpression="service:xmlAttributeSemanticsCandidatesExpression" domainClass="xml.Attribute">
+            <style xsi:type="style:SquareDescription" showIcon="false" labelExpression="service:xmlAttributeLabel" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_blue']"/>
+            </style>
+          </subNodeMappings>
+          <subNodeMappings name="org.eclipse.qvtd.xml.characters" label="Characters" semanticCandidatesExpression="service:xmlCharactersSemanticsCandidatesExpression" domainClass="xml.Characters">
+            <style xsi:type="style:SquareDescription" showIcon="false" labelExpression="service:xmlCharactersLabel" labelPosition="node" resizeKind="NSEW">
+              <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <labelFormat>italic</labelFormat>
+              <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+              <color xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_blue']"/>
+            </style>
+          </subNodeMappings>
+          <style xsi:type="style:FlatContainerStyleDescription" borderSizeComputationExpression="1" showIcon="false" labelExpression="service:xmlElementLabel">
+            <borderColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <labelColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='black']"/>
+            <backgroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_orange']"/>
+            <foregroundColor xsi:type="description:SystemColor" href="environment:/viewpoint#//@systemColors/@entries[name='light_yellow']"/>
+          </style>
+        </containerMappings>
+      </defaultLayer>
+    </ownedRepresentations>
+    <ownedJavaExtensions qualifiedClassName="org.eclipse.qvtd.xml.utilities.XMLServices"/>
+  </ownedViewpoints>
+</description:Group>

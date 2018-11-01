@@ -34,6 +34,7 @@
     <module>org.eclipse.qvtd.umlx.design</module>
     <module>org.eclipse.qvtd.umlx.ui</module>
     <module>org.eclipse.qvtd.xml</module>
+    <module>org.eclipse.qvtd.xml.design</module>
     <module>org.eclipse.qvtd.xtext.qvtbase</module>
     <module>org.eclipse.qvtd.xtext.qvtbase.ui</module>
     <module>org.eclipse.qvtd.xtext.qvtcore</module>
