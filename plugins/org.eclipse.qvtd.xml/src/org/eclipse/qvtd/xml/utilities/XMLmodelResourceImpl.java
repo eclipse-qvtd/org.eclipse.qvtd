@@ -14,6 +14,9 @@
  */
 package org.eclipse.qvtd.xml.utilities;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +38,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.BasicEObjectImpl;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.ExtendedMetaData;
@@ -84,7 +88,7 @@ public class XMLmodelResourceImpl extends XMIResourceImpl
 	 */
 	public static final @NonNull String IGNORE_ECORE = "ignore-ecore";
 
-	public static class XMLmodelLoadImpl extends XMILoadImpl
+	protected static class XMLmodelLoadImpl extends XMILoadImpl
 	{
 		private SAXParser makeParser = null;
 
@@ -110,7 +114,7 @@ public class XMLmodelResourceImpl extends XMIResourceImpl
 		}
 	}
 
-	public static class XMLmodelHandler extends DefaultHandler implements LexicalHandler
+	protected static class XMLmodelHandler extends DefaultHandler implements LexicalHandler
 	{
 		private ResourceSet resourceSet = new ResourceSetImpl();
 		private XMLResource xmlResource;
@@ -759,20 +763,198 @@ public class XMLmodelResourceImpl extends XMIResourceImpl
 		}
 	}
 
-	public static class XMLmodelSave extends XMISaveImpl
+	/**
+	 *  The XMLString inherited by XMLSaveImpl is very close to what is required, but its handling of mixed content is
+	 *  hard to understand. Some of the whitespacing around characters is not quite right. XMLStringBuilder is significantly
+	 *  simpler, mostly with justofiication, but sometimes through naivety.
+	 */
+	protected static class XMLStringBuilder
 	{
-		// FIXME The inherited use of XMLString from XMLSaveImpl is very close to what is required, but
-		//  its handling of mixed content is hard to understand. Some of the whitespacing around characters
-		//  is not quite right. Perhaps a simpler custom variant of XMLString is needed - it is not overrideable.
+		protected enum XMLstate {
+			OUTSIDE,					// e.g at "@<xx/>" or <xx/>@"
+			HAS_ELEMENT_OPEN,			// e.g at "<xx ... @>
+			HAS_ELEMENT_CLOSE			// e.g at "<xx>...@<xx/>
+		};
+		private StringBuilder s = new StringBuilder();
+		private int currentColumn = 0;
+		//		private int indentColumn = 0;
+		private Stack<@NonNull String> elementNameStack = new Stack<>();
+		//	private boolean hasAttributes = false;
+		private StringBuilder attributeBuilder = new StringBuilder(256);
+		private @NonNull String lineSeparator;
+		private int lineWidth;
+		//	private boolean hasElements = false;
+		private XMLstate xmlState = XMLstate.OUTSIDE;
+
+		public XMLStringBuilder(@NonNull String lineSeparator, int lineWidth) {
+			this.lineSeparator = lineSeparator;
+			this.lineWidth = lineWidth;
+		}
+
+		public void add(@NonNull String string) {
+			append(string);
+		}
+
+		public void addAttributeContent(@NonNull String content) {
+			assert attributeBuilder.length() > 0;
+			attributeBuilder.append(content);
+		}
+
+		public void addCDATA(@NonNull String characters) {
+			appendOuterElementClose();
+			s.append("<![CDATA[");
+			s.append(characters);
+			s.append("]]>");
+			addLine();
+		}
+
+		public void addCharacters(@NonNull String characters) {
+			appendOuterElementClose();
+			append(characters);
+		}
+
+		public void addComment(@NonNull String string) {
+			appendOuterElementClose();
+			addLine();
+			append("<!--" + string + "-->");
+			addLine();
+		}
+
+		public void addLine() {
+			if (currentColumn > 0) {
+				s.append(lineSeparator);
+				currentColumn = 0;
+			}
+		}
+
+		public void addProcessingInstruction(@Nullable String target, @Nullable String data) {
+			appendOuterElementClose();
+			addLine();
+			s.append("<?");
+			s.append(target == null ? "_" : target);
+			if (data != null) {
+				s.append(" ");
+				s.append(data);		// FIXME line wrap at new-lines
+			}
+			s.append("?>");
+			addLine();
+		}
+
+		protected void append(@NonNull String string) {
+			int length = string.length();
+			if (length > 0) {
+				int indentColumn = (elementNameStack.size() + (attributeBuilder.length() > 0 ? 1 : 0)) * 2;
+				for ( ; currentColumn < indentColumn; currentColumn++) {
+					s.append(' ');
+				}
+				s.append(string);
+				currentColumn += length;
+			}
+		}
+
+		protected void appendOuterElementClose() {
+			assert attributeBuilder.length() <= 0;
+			assert xmlState != XMLstate.OUTSIDE;
+			if (xmlState == XMLstate.HAS_ELEMENT_OPEN) {
+				append(">");
+				xmlState = XMLstate.HAS_ELEMENT_CLOSE;
+			}
+		}
+
+		public void endAttribute() {
+			assert attributeBuilder.length() > 0;
+			attributeBuilder.append("\"");
+			int length = attributeBuilder.length();
+			if (currentColumn + 1 + length > lineWidth) {
+				addLine();
+			}
+			else {
+				append(" ");
+			}
+			append(attributeBuilder.toString());
+			attributeBuilder.replace(0, length, "");
+		}
+
+		public void endContentElement(@NonNull String contentElement) {
+			append(">");
+			addLine();
+		}
+
+		public void endElement() {
+			assert xmlState != XMLstate.OUTSIDE;
+			assert attributeBuilder.length() <= 0;
+			String qName = elementNameStack.pop();
+			append(xmlState == XMLstate.HAS_ELEMENT_CLOSE ? "</" + qName + ">" : "/>");
+			addLine();
+			xmlState = elementNameStack.isEmpty() ? XMLstate.OUTSIDE : XMLstate.HAS_ELEMENT_CLOSE;
+		}
+
+		public void startAttribute(@NonNull String name) {
+			assert xmlState == XMLstate.HAS_ELEMENT_OPEN;
+			assert attributeBuilder.length() <= 0;
+			attributeBuilder.append(name);
+			attributeBuilder.append("=\"");
+		}
+
+		public void startElement(@NonNull String qName) {
+			if (xmlState != XMLstate.OUTSIDE) {
+				appendOuterElementClose();
+			}
+			addLine();
+			append("<" + qName);
+			elementNameStack.push(qName);
+			xmlState = XMLstate.HAS_ELEMENT_OPEN;
+		}
+
+		public void write(@NonNull Writer os, int flushThreshold) throws IOException {
+			String s2 = s.toString();
+			assert xmlState == XMLstate.OUTSIDE;
+			os.write(s2);
+		}
+
+		public void writeAscii(@NonNull OutputStream os, int flushThreshold) throws IOException {
+			String s2 = s.toString();
+			assert xmlState == XMLstate.OUTSIDE;
+			os.write(s2.getBytes());		// No encoding necessary
+		}
+	}
+
+	protected static class XMLmodelSave extends XMISaveImpl
+	{
+		// The inherited doc is never intentionally used.
+		private XMLStringBuilder doc2;
+
 		public XMLmodelSave(XMLHelper helper) {
 			super(helper);
 		}
 
+		private @NonNull String getCharacters(@NonNull Node node) {
+			StringBuilder s = new StringBuilder();
+			for (@NonNull Node child : node.getChildren()) {
+				if (child instanceof Characters) {
+					s.append(((Characters)child).getData());
+				}
+			}
+			return s.toString();
+		}
+
+		@Override
+		protected void init(XMLResource resource, Map<?, ?> options) {
+			Integer lineWidth = (Integer)options.get(XMLResource.OPTION_LINE_WIDTH);
+			if (lineWidth == null) {
+				lineWidth = Integer.MAX_VALUE;
+			}
+			String lineSeparator = (String)options.get(Resource.OPTION_LINE_DELIMITER);
+			if (lineSeparator == null || lineSeparator.equals(Resource.OPTION_LINE_DELIMITER_UNSPECIFIED)) {
+				lineSeparator = System.getProperty("line.separator");
+			}
+			super.init(resource, options);
+			this.doc2 = new XMLStringBuilder(lineSeparator, lineWidth);
+		}
+
 		@Override
 		public void traverse(List<? extends EObject> contents) {
-			doc.add("<?xml version=\"" + xmlVersion + "\" encoding=\"" + encoding + "\"?>");
-			doc.addLine();
-			doc.setMixed(true);
+			doc2.add("<?xml version=\"" + xmlVersion + "\" encoding=\"" + encoding + "\"?>");
 			traverseElements(contents);
 		}
 
@@ -783,53 +965,54 @@ public class XMLmodelResourceImpl extends XMIResourceImpl
 				}
 				else if (eObject instanceof Element) {
 					Element element = (Element)eObject;
-					doc.startElement(element.getQName());
-					List<Node> children = element.getChildren();
-					if ((children.size() == 1) && (children.get(0) instanceof Characters)) {
-						Characters characters = (Characters)children.get(0);
-						String data = characters.getData();
-						doc.endContentElement(escape.convert(data));
-					}
-					else {
-						traverseElements(children);
-						doc.endElement();
-					}
+					doc2.startElement(element.getQName());
+					traverseElements(element.getChildren());
+					doc2.endElement();
 				}
 				else if (eObject instanceof Attribute) {
 					Attribute attribute = (Attribute)eObject;
-					doc.startAttribute(attribute.getName());
-					doc.addAttributeContent(escape.convert(attribute.getValue()));
-					doc.endAttribute();
+					doc2.startAttribute(attribute.getName());
+					doc2.addAttributeContent(escape.convert(attribute.getValue()));
+					doc2.endAttribute();
 				}
 				else if (eObject instanceof Comment) {
 					Comment comment = (Comment)eObject;
-					doc.addComment(comment.getData());
-					doc.addLine();
+					doc2.addComment(comment.getData());
 				}
 				else if (eObject instanceof Characters) {
 					Characters characters = (Characters)eObject;
 					String data = characters.getData();
-					doc.addText(data);
+					doc2.addCharacters(data);
 				}
 				else if (eObject instanceof CDATA) {
 					CDATA cdata = (CDATA)eObject;
-					doc.addCDATA(getCharacters(cdata));
+					doc2.addCDATA(getCharacters(cdata));
+				}
+				else if (eObject instanceof DTD) {
+					DTD dtd = (DTD)eObject;
+					//	doc2.addDTD(dtd.getName(), dtd.getPublicId(), dtd.getSystemId());
+				}
+				else if (eObject instanceof Entity) {
+					Entity entity = (Entity)eObject;
+					//	doc2.addEntity(entity.getName());
 				}
 				else if (eObject instanceof ProcessingInstruction) {
 					ProcessingInstruction processingInstruction = (ProcessingInstruction)eObject;
-					doc.addProcessingInstruction(processingInstruction.getTarget(), processingInstruction.getData());
+					doc2.addProcessingInstruction(processingInstruction.getTarget(), processingInstruction.getData());
 				}
 			}
 		}
 
-		private String getCharacters(Node node) {
-			StringBuilder s = new StringBuilder();
-			for (@NonNull Node child : node.getChildren()) {
-				if (child instanceof Characters) {
-					s.append(((Characters)child).getData());
-				}
-			}
-			return s.toString();
+		@Override
+		public void write(Writer os) throws IOException {
+			doc2.write(os, flushThreshold);
+			os.flush();
+		}
+
+		@Override
+		public void writeAscii(OutputStream os) throws IOException {
+			doc2.writeAscii(os, flushThreshold);
+			os.flush();
 		}
 	}
 
