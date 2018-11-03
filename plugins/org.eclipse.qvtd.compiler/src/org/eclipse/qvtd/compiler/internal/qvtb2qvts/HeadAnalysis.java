@@ -243,10 +243,11 @@ public abstract class HeadAnalysis
 	/*
 	 *	Pick the first element of each headNodeGroup as a headNode.
 	 */
-	protected @NonNull List<@NonNull Node> selectHeadNodes(@NonNull List<@NonNull HeadNodeGroup> headNodeGroups) {
+	protected @NonNull List<@NonNull Node> selectHeadNodes(@NonNull List<@NonNull HeadNodeGroup> headNodeGroups,
+			@Nullable Iterable<@NonNull Node> preferredHeadNodes) {
 		List<@NonNull Node> headNodes = new ArrayList<>();
 		for (@NonNull HeadNodeGroup headNodeGroup : headNodeGroups) {
-			Node headNode = headNodeGroup.getPreferredHeadNode();
+			Node headNode = headNodeGroup.getPreferredHeadNode(preferredHeadNodes);
 			assert !headNodes.contains(headNode);
 			headNodes.add(headNode);
 		}

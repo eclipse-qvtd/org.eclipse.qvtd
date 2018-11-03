@@ -529,7 +529,15 @@ public class RelationAnalysis extends RuleAnalysis
 		//		analyzeComplexPredicates();
 		//		analyzeContainments();
 		//
-		List<@NonNull Node> preferredHeadNodes = Lists.newArrayList(QVTscheduleUtil.getHeadNodes(region));
+		List<@NonNull Node> preferredHeadNodes = Lists.newArrayList(QVTscheduleUtil.getHeadNodes(region));  // FIXME Use domain roots as preferred heads
+		if (preferredHeadNodes.isEmpty()) {
+			for (@NonNull Variable rootVariable : QVTrelationUtil.getRootVariables(getRule())) {
+				Node rootNode = region.getNode(rootVariable);
+				if (rootNode != null) {
+					preferredHeadNodes.add(rootNode);
+				}
+			};
+		}
 		Iterable<@NonNull Node> headNodes = RuleHeadAnalysis.computeRuleHeadNodes(scheduleManager, region, preferredHeadNodes);
 		List<@NonNull Node> headNodesList = QVTscheduleUtil.Internal.getHeadNodesList(region);
 		headNodesList.clear();

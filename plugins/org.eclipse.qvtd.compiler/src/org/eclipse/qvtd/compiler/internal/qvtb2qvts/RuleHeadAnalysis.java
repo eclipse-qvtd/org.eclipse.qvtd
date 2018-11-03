@@ -98,7 +98,7 @@ public class RuleHeadAnalysis extends HeadAnalysis
 		//
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> sourceToTargetsClosure = CompilerUtil.computeInverseClosure(targetFromSourcesClosure);
 		List<@NonNull HeadNodeGroup> headNodeGroups = computeHeadNodeGroups(targetFromSourcesClosure, sourceToTargetsClosure, preferredHeadNodes);
-		List<@NonNull Node> headNodes = selectHeadNodes(headNodeGroups);
+		List<@NonNull Node> headNodes = selectHeadNodes(headNodeGroups, preferredHeadNodes);
 		//
 		//	Add the pseudo-heads for true and dependency nodes.
 		//

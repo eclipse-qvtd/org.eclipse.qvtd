@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
@@ -24,6 +25,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+
+import com.google.common.collect.Iterables;
 
 /**
  * A HeadNodeGroup identifies a set of mutually one to one navigable nodes from which many nodes can be navigated.
@@ -137,7 +140,14 @@ public class HeadNodeGroup
 		return headGroupNodes;
 	}
 
-	public @NonNull Node getPreferredHeadNode() {
+	public @NonNull Node getPreferredHeadNode(@Nullable Iterable<@NonNull Node> preferredHeadNodes) {
+		if (preferredHeadNodes != null) {
+			for (@NonNull Node node : headGroupNodes) {
+				if (Iterables.contains(preferredHeadNodes, node)) {
+					return node;
+				}
+			}
+		}
 		return headGroupNodes.get(0);
 	}
 
