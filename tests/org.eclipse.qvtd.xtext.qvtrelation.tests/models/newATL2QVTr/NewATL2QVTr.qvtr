@@ -253,7 +253,8 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 			qvtrTransformation : qvtrMM::RelationalTransformation;
 			enforce domain atl matchedRule : MatchedRule {
 				module = atlModule,
-				name = ruleName
+				name = ruleName,
+				outPattern = atlOutPattern : OutPattern {}
 			};
 			enforce domain qvtr qvtrRelation : Relation {
 				name = ruleName,
@@ -382,35 +383,6 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 		}
 		
 		/**
-		 *  atl::OutPattern <=> qvtr::RelationDomain (enforce)
-		 */
-		top relation mapOutPattern {
---			atlModule : atlMM::Module;
-			qvtrTypedModel : qvtbMM::TypedModel;
-			enforce domain atl atlPattern : OutPattern {
-				rule = atlRule : MatchedRule{
---					module = atlModule
-				}
-			};
-			enforce domain qvtr qvtrDomain : RelationDomain {
-				rule = qvtrRelation : Relation {
---					transformation = qvtrTransformation : RelationalTransformation{}
-				},
-				isCheckable = false,
-				isEnforceable = true,
-				typedModel = qvtrTypedModel
---				typedModel = getTypedModel(atlPattern.elements->collect(e | e.type)->selectByKind(atloclMM::OclModelElement)->any(y | true).model, qvtrTransformation)
-			};
-			when {
-				mapOclMetamodel(atlPattern.elements.type->selectByKind(atloclMM::OclModelElement)->any(true).model, qvtrTypedModel);
-				mapMatchedRule(atlRule, qvtrRelation);
-			}
-			where {
---				mapOutPattern2Relation(atlPattern, qvtrRelation);
-			}
-		}
-		
-		/**
 		 *  atl::SimpleInPatternElement <=> qvtr::DomainPattern,ObjectTemplateExp,TemplateVariable
 		 */
 		top relation mapSimpleInPatternElement {
@@ -450,38 +422,41 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 		}
 		
 		/**
-		 *  atl::SimpleOutPatternElement <=> qvtr::DomainPattern,ObjectTemplateExp,TemplateVariable
+		 *  atl::SimpleOutPatternElement <=> qvtr::RelationDomain,DomainPattern,ObjectTemplateExp,TemplateVariable
 		 */
 		top relation mapSimpleOutPatternElement {
 			elementName : String;
-			atlRule : atlMM::MatchedRule;
---			qvtrDomain : qvtrMM::RelationDomain;
-			qvtrRelation : qvtrMM::Relation;
+			qvtrType : pivotMM::Type = getType(atlType);
 			enforce domain atl atlElement : atlMM::SimpleOutPatternElement {
 				varName = elementName,
+				type = atlType : OclModelElement{
+					model = atlMetamodel : OclModel{}
+				},
 				outPattern = atlPattern : OutPattern{
-					rule = atlRule	
+					rule = atlRule : MatchedRule{}
 				}
 			};
 			enforce domain qvtr qvtrTemplate : ObjectTemplateExp{
 				bindsTo = qvtrVariable : TemplateVariable{
 					name = elementName,
-					type = getType(atlElement.type),
-					Relation = qvtrRelation,
+					type = qvtrType,
+					Relation = qvtrRelation : Relation{},
 					RelationDomain = qvtrDomain : RelationDomain{
---FIXME					rule = qvtrRelation,
+						isCheckable = false,
+						isEnforceable = true,
+						typedModel = qvtrTypedModel : TypedModel{},
+						rule = qvtrRelation,
 						pattern = qvtrPattern : DomainPattern{
 							templateExpression = qvtrTemplate
 						}
 					}
 				},
-				referredClass = getType(atlElement.type),
-				type = getType(atlElement.type)
-			};
+				referredClass = qvtrType,
+				type = qvtrType
+			}/*{ qvtrType = getType(atlElement.type)}*/;
 			when {
+				mapOclMetamodel(atlMetamodel, qvtrTypedModel);
 				mapMatchedRule(atlRule, qvtrRelation);
-				mapOutPattern(atlPattern, qvtrDomain);
---				mapOclExpression(atlExpression, qvtrExpression);
 			}
 			where {
 				mapVariable(atlElement, qvtrVariable);
