@@ -100,7 +100,7 @@
     </extension>
     <extension point="org.eclipse.ui.menus">
         <menuContribution
-            locationURI="popup:#TextEditorContext?after=group.edit">
+            locationURI="popup:#QVTrelationEditorContext?after=group.edit">
              <command
                  commandId="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.validate"
                  style="push"
@@ -114,7 +114,7 @@
          </menuContribution>
     </extension>
     <extension point="org.eclipse.ui.menus">
-		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+		<menuContribution locationURI="popup:#QVTrelationEditorContext?endof=group.find">
 			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
 				<visibleWhen checkEnabled="false">
                 	<reference definitionId="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.Editor.opened">
@@ -183,7 +183,7 @@
 	</extension>
 	<extension point="org.eclipse.ui.menus">
 		<menuContribution
-			locationURI="popup:#TextEditorContext?after=group.open">
+			locationURI="popup:#QVTrelationEditorContext?after=group.open">
 			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
 				style="push"
 				tooltip="MF_QuickOutline">
