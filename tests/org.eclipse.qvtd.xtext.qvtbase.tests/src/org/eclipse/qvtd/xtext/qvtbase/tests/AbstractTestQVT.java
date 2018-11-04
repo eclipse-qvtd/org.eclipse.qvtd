@@ -75,6 +75,7 @@ import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.xtext.resource.XtextResource;
 
+import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 
 public abstract class AbstractTestQVT extends QVTimperative
@@ -407,12 +408,22 @@ public abstract class AbstractTestQVT extends QVTimperative
 			ASResource asResource = loadQVTiAS(ocl, inputURI);
 			LoadTestCase.assertNoResourceErrors("Serializing to " + serializedURI, asResource);
 			LoadTestCase.assertNoUnresolvedProxies("Serializing to " + serializedURI, asResource);
-			LoadTestCase.assertNoValidationErrors("Serializing to " + serializedURI, asResource);
-			//
-			//	Pivot to CS
-			//
-			XtextResource xtextResource = as2cs(ocl, resourceSet, asResource, serializedURI, QVTimperativeCSPackage.eCONTENT_TYPE);
-			resourceSet.getResources().clear();
+			XtextResource xtextResource = null;
+			try {
+				LoadTestCase.assertNoValidationErrors("Serializing to " + serializedURI, asResource);
+				//
+				//	Pivot to CS
+				//
+				xtextResource = as2cs(ocl, resourceSet, asResource, serializedURI, QVTimperativeCSPackage.eCONTENT_TYPE);
+				resourceSet.getResources().clear();
+			}
+			catch (AssertionFailedError e) {
+				try {	// Try and serialize anyway so that a *.qvti is available even on on obsolete installation
+					as2cs(ocl, resourceSet, asResource, serializedURI, QVTimperativeCSPackage.eCONTENT_TYPE);
+				}
+				catch (Throwable t) {}
+				throw e;
+			}
 
 			QVTimperative qvti = QVTimperative.newInstance(getTestProjectManager(), null);
 			try {
