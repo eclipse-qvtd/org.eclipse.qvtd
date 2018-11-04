@@ -146,6 +146,9 @@ public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor imple
 
 	@Override
 	public String visitRelationDomainAssignment(@NonNull RelationDomainAssignment object) {
+		appendName(object.getVariable());
+		append("=");
+		safeVisit(object.getValueExp());
 		return null;
 	}
 

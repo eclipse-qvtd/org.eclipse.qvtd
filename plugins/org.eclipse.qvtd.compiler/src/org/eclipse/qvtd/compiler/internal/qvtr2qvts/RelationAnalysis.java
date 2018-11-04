@@ -56,6 +56,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.TemplateVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
@@ -1096,6 +1097,24 @@ public class RelationAnalysis extends RuleAnalysis
 		}
 		else if (!synthesizeSingleInputCollectionTemplate(collectionTemplateExp)) {
 			synthesizeMultipleInputCollectionTemplate(collectionTemplateExp);
+		}
+	}
+
+	public void synthesizeDefaultValue(@NonNull RelationDomainAssignment relationDomainAssignment) {
+		Variable variable = QVTrelationUtil.getVariable(relationDomainAssignment);
+		OCLExpression valueExp = QVTrelationUtil.getValueExp(relationDomainAssignment);
+		Node variableNode = region.getNode(variable);
+		if (variableNode != null) {
+			scheduleManager.addRegionWarning(region, "Conflicting default assignment " + relationDomainAssignment);
+		}
+		else if (!(variable instanceof SharedVariable)) {
+			scheduleManager.addRegionError(region, "Non-SharedVariable for " + relationDomainAssignment);
+		}
+		else if (variable.getOwnedInit() != null) {
+			scheduleManager.addRegionError(region, "Default assignment for initialized variable: " + relationDomainAssignment);
+		}
+		else {
+			variableNode = getReferenceNodeForSharedVariable((SharedVariable)variable, valueExp);
 		}
 	}
 

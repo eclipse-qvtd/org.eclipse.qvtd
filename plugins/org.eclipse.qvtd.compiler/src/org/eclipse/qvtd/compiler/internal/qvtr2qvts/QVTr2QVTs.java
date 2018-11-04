@@ -54,6 +54,7 @@ import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
@@ -329,7 +330,16 @@ public class QVTr2QVTs extends AbstractQVTb2QVTs
 
 		@Override
 		public Element visitRelationDomain(@NonNull RelationDomain rdIn) {
+			if (scheduleManager.isOutput(rdIn)) {
+				acceptAll(QVTrelationUtil.getDefaultAssignments(rdIn));
+			}
 			acceptAll(QVTrelationUtil.getOwnedPatterns(rdIn));
+			return null;
+		}
+
+		@Override
+		public Element visitRelationDomainAssignment(@NonNull RelationDomainAssignment rdaIn) {
+			getRelationAnalysis().synthesizeDefaultValue(rdaIn);
 			return null;
 		}
 

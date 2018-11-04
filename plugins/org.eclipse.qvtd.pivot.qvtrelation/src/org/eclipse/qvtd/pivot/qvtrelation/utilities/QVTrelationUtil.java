@@ -44,6 +44,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
@@ -176,6 +177,10 @@ public class QVTrelationUtil extends QVTtemplateUtil
 			}
 		}
 		throw new IllegalStateException();
+	}
+
+	public static @NonNull Iterable<@NonNull RelationDomainAssignment> getDefaultAssignments(@NonNull RelationDomain rRelationDomain) {
+		return ClassUtil.nullFree(rRelationDomain.getDefaultAssignment());
 	}
 
 	public static org.eclipse.ocl.pivot.@NonNull Class getIdentifies(@NonNull Key rKey) {
@@ -326,6 +331,14 @@ public class QVTrelationUtil extends QVTtemplateUtil
 
 	public static @NonNull RelationalTransformation getTransformation(@NonNull Relation rRelation) {
 		return (RelationalTransformation) ClassUtil.nonNullState(rRelation.getTransformation());
+	}
+
+	public static @NonNull OCLExpression getValueExp(@NonNull RelationDomainAssignment relationDomainAssignment) {
+		return ClassUtil.nonNullState(relationDomainAssignment.getValueExp());
+	}
+
+	public static @NonNull Variable getVariable(@NonNull RelationDomainAssignment relationDomainAssignment) {
+		return ClassUtil.nonNullState(relationDomainAssignment.getVariable());
 	}
 
 	/**
