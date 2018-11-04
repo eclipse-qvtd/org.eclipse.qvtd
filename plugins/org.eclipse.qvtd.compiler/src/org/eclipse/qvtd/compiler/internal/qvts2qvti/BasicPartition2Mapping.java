@@ -398,6 +398,9 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 								if (edgeName.length() >= 2) {
 									edgeName = edgeName.substring(1, edgeName.length()-1);		// Lose guillemets
 								}
+								if ("equals".equals(edgeName)) {
+									edgeName = "=";								// FIXME regularize
+								}
 								VariableExp targetVariableExp = getSubexpressionVariableExp(targetNode);
 								createCheckStatement(sourceVariableExp, edgeName, targetVariableExp);
 							}
