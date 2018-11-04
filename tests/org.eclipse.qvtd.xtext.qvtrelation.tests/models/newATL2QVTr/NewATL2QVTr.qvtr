@@ -437,19 +437,19 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 				}
 			};
 			enforce domain qvtr qvtrTemplate : ObjectTemplateExp{
-				bindsTo = qvtrVariable : TemplateVariable{
-					name = elementName,
-					type = qvtrType,
-					Relation = qvtrRelation : Relation{},
-					RelationDomain = qvtrDomain : RelationDomain{
+				DomainPattern = qvtrPattern : DomainPattern{
+					relationDomain = qvtrDomain : RelationDomain{
 						isCheckable = false,
 						isEnforceable = true,
 						typedModel = qvtrTypedModel : TypedModel{},
-						rule = qvtrRelation,
-						pattern = qvtrPattern : DomainPattern{
-							templateExpression = qvtrTemplate
-						}
+						rule = qvtrRelation : Relation{}
 					}
+				}, 
+				bindsTo = qvtrVariable : TemplateVariable{
+					name = elementName,
+					type = qvtrType,
+					RelationDomain = qvtrDomain,
+					Relation = qvtrRelation
 				},
 				referredClass = qvtrType,
 				type = qvtrType
