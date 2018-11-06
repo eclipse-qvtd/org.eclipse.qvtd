@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -92,6 +93,9 @@ public class MergedPartitionFactory extends AbstractPartitionFactory<@NonNull Re
 		initializePartition(basicPartitionAnalysis);
 		basicPartitionAnalysis.analyzePartition();
 		basicPartitionAnalysis.analyzePartition2();
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+			scheduleManager.writeDebugGraphs(basicPartitionAnalysis.getPartition(), null);
+		}
 		return basicPartitionAnalysis;
 	}
 

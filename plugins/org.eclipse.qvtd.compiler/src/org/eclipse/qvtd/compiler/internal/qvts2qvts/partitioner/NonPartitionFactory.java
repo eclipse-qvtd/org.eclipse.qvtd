@@ -16,6 +16,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -39,6 +40,9 @@ public class NonPartitionFactory extends AbstractSimplePartitionFactory
 		MappingRegion region = mappingPartitioner.getRegion();
 		NonPartition nonPartition = createNonPartition(QVTscheduleUtil.getName(region));
 		NonPartitionAnalysis nonPartitionAnalysis = new NonPartitionAnalysis(partitionedTransformationAnalysis, nonPartition, reachabilityForest);
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+			scheduleManager.writeDebugGraphs(nonPartition, null);
+		}
 		return nonPartitionAnalysis;
 	}
 

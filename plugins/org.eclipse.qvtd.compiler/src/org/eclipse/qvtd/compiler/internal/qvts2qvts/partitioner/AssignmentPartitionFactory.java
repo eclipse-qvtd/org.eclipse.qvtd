@@ -12,6 +12,7 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -43,6 +44,9 @@ public class AssignmentPartitionFactory extends AbstractSimplePartitionFactory
 		String symbolSuffix = "_p" + partitionNumber;
 		BasicPartitionAnalysis basicPartitionAnalysis = new BasicPartitionAnalysis(partitionedTransformationAnalysis, partition, reachabilityForest, namePrefix, symbolSuffix);
 		initializePartition(basicPartitionAnalysis);
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+			scheduleManager.writeDebugGraphs(partition, null);
+		}
 		return basicPartitionAnalysis;
 	}
 

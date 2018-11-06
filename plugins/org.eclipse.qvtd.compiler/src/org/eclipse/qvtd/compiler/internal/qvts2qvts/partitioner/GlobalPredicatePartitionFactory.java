@@ -15,6 +15,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -47,6 +48,9 @@ public class GlobalPredicatePartitionFactory extends AbstractSimplePartitionFact
 		int partitionNumber = region.getNextPartitionNumber();
 		BasicPartitionAnalysis basicPartitionAnalysis = new BasicPartitionAnalysis(partitionedTransformationAnalysis, partition, reachabilityForest, "«global»", "_p" + partitionNumber);
 		initializePartition(basicPartitionAnalysis, executionNodes);
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+			scheduleManager.writeDebugGraphs(partition, null);
+		}
 		return basicPartitionAnalysis;
 	}
 

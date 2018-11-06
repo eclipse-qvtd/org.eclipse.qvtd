@@ -17,6 +17,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -60,6 +61,9 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 		int partitionNumber = region.getNextPartitionNumber();
 		BasicPartitionAnalysis basicPartitionAnalysis = new BasicPartitionAnalysis(partitionedTransformationAnalysis, partition, reachabilityForest, "«local»", "_p" + partitionNumber);
 		initializePartition(basicPartitionAnalysis);
+		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+			scheduleManager.writeDebugGraphs(partition, null);
+		}
 		return basicPartitionAnalysis;
 	}
 
@@ -168,6 +172,10 @@ public class LocalPredicatePartitionFactory extends AbstractSimplePartitionFacto
 		//	Add the outstanding predicates that can be checked by this partition.
 		//
 		//		resolveTrueNodes();
+		String name = region.getName();
+		if ("mapOclModel_IN_atl".equals(name)) {
+			getClass();
+		}
 		//
 		//	Ensure that the predecessors of each node are included in the partition.
 		//

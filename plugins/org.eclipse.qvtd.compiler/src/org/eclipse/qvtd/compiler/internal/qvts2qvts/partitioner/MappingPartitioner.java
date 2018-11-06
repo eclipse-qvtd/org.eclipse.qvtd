@@ -25,7 +25,6 @@ import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
-import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTrNameGenerator;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.TraceClassRegionAnalysis;
@@ -548,7 +547,7 @@ public class MappingPartitioner implements Nameable
 			return Collections.singletonList(new NonPartitionFactory(this).createPartitionAnalysis(partitionedTransformationAnalysis));
 		}
 		String name = region.getName();
-		if ("associationToForeignKey".equals(name)) {
+		if ("mapOclModel_IN_atl".equals(name)) {
 			getClass();
 		}
 		boolean isCyclic = transformationAnalysis.isCyclic(regionAnalysis);
@@ -631,11 +630,11 @@ public class MappingPartitioner implements Nameable
 				}
 			}
 		}
-		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
-			for (@NonNull PartitionAnalysis partitionAnalysis : newPartitionAnalyses) {
-				scheduleManager.writeDebugGraphs(partitionAnalysis.getPartition(), null);
-			}
-		}
+		//		if (QVTm2QVTs.DEBUG_GRAPHS.isActive()) {
+		//			for (@NonNull PartitionAnalysis partitionAnalysis : newPartitionAnalyses) {
+		//				scheduleManager.writeDebugGraphs(partitionAnalysis.getPartition(), null);
+		//			}
+		//		}
 		if (newPartitionAnalyses.size() > 1) {		// FIXME shouldn't this work anyway when no partitioning was needed?
 			check(/*isInfallible*/);
 		}
