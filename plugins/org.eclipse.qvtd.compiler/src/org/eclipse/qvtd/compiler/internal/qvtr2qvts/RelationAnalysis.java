@@ -48,6 +48,7 @@ import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.Relation2ResultPropert
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationAnalysis2DispatchClass;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationAnalysis2MiddleType;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationAnalysis2TraceClass;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -1521,6 +1522,10 @@ public class RelationAnalysis extends RuleAnalysis
 	} */
 
 	protected void synthesizePredicate(@NonNull OCLExpression predicateExpression) {
+		Domain asDomain = QVTrelationUtil.basicGetContainingDomain(predicateExpression);
+		if ((asDomain != null) && scheduleManager.isOutput(asDomain)) {
+			return;
+		}
 		if (synthesizeEqualsPredicate(predicateExpression)) {
 			return;
 		}
