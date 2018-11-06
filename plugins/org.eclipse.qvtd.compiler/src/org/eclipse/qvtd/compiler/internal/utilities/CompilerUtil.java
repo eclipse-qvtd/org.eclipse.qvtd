@@ -386,8 +386,10 @@ public class CompilerUtil extends QVTscheduleUtil
 	 */
 	public static <@NonNull PR extends PartialRegion<PR, TC, TP>, @NonNull TC extends TraceClass<PR, TC, TP>, @NonNull TP extends TraceProperty<PR, TC, TP>> @NonNull Map<@NonNull PR, @NonNull Set<@NonNull PR>> computeTransitivePredecessors(@NonNull Iterable<@NonNull PR> regionAnalyses) {
 		Map<@NonNull PR, @NonNull Set<@NonNull PR>> consumer2producers = computeImmediatePredecessors(regionAnalyses);
+		List<@NonNull PR> successors = Lists.newArrayList(regionAnalyses);
+		Collections.sort(successors, NameUtil.NAMEABLE_COMPARATOR);
 		if (TransformationPartitioner.PREDECESSORS.isActive()) {
-			for (@NonNull PR successor : regionAnalyses) {
+			for (@NonNull PR successor : successors) {
 				StringBuilder s = new StringBuilder();
 				s.append(successor + ":");
 				List<@NonNull PR> producers = new ArrayList<>(consumer2producers.get(successor));
@@ -400,7 +402,7 @@ public class CompilerUtil extends QVTscheduleUtil
 		}
 		Map<@NonNull PR, @NonNull Set<@NonNull PR>> consumer2producersClosure = CompilerUtil.computeClosure(consumer2producers);
 		if (TransformationPartitioner.PREDECESSORS.isActive()) {
-			for (@NonNull PR successor : regionAnalyses) {
+			for (@NonNull PR successor : successors) {
 				StringBuilder s = new StringBuilder();
 				s.append(successor + ":");
 				List<@NonNull PR> producers = new ArrayList<>(consumer2producersClosure.get(successor));
@@ -484,7 +486,9 @@ public class CompilerUtil extends QVTscheduleUtil
 		}
 		Map<@NonNull PR, @NonNull Set<@NonNull PR>> producer2consumersClosure = CompilerUtil.computeClosure(producer2consumers); */
 		if (TransformationPartitioner.SUCCESSORS.isActive()) {
-			for (@NonNull PR predecessor : partitions) {
+			List<@NonNull PR> predecessors = Lists.newArrayList(partitions);
+			Collections.sort(predecessors, NameUtil.NAMEABLE_COMPARATOR);
+			for (@NonNull PR predecessor : predecessors) {
 				StringBuilder s = new StringBuilder();
 				s.append(predecessor + ":");
 				List<@NonNull PR> consumers = new ArrayList<>(producer2consumersClosure.get(predecessor));

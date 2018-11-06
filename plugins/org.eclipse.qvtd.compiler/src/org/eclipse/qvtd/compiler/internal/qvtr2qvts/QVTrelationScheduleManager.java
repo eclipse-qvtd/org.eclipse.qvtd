@@ -139,7 +139,7 @@ public class QVTrelationScheduleManager extends AbstractScheduleManager
 
 	@Override
 	public boolean needsDiscrimination() {
-		return false;
+		return false;			// FIXME Bug 488647 discriminate cyclic QVTr output classes too
 	}
 
 	@Override

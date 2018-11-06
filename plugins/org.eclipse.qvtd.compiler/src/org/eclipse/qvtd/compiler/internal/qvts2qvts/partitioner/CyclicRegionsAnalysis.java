@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.TraceClassRegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -72,6 +73,9 @@ public class CyclicRegionsAnalysis
 		}
 		cyclicTraceClassAnalyses.addAll(consumedTraceClassAnalyses);
 		cyclicTraceClassAnalyses.retainAll(superProducedTraceClassAnalyses);
+		if (TransformationPartitioner.CYCLES.isActive()) {
+			showCycles(cyclicRegionAnalyses.iterator().next().getTransformationAnalysis(), cyclicRegionAnalyses);
+		}
 	}
 
 	public boolean isCyclic(@NonNull RegionAnalysis regionAnalysis) {
@@ -81,5 +85,85 @@ public class CyclicRegionsAnalysis
 	public boolean isCyclic(@NonNull TraceClassRegionAnalysis traceClassAnalysis) {		// FIXME this might be removeable
 		assert cyclicTraceClassAnalyses != null;
 		return cyclicTraceClassAnalyses.contains(traceClassAnalysis);
+	}
+
+	protected void showCycles(@NonNull AbstractTransformationAnalysis transformationAnalysis, @NonNull Set<@NonNull RegionAnalysis> cyclicRegionAnalyses) {
+		if (TransformationPartitioner.CYCLES.isActive()) {
+			if (cyclicRegionAnalyses.isEmpty()) {
+				TransformationPartitioner.CYCLES.println("No cycles");
+			}
+			else {
+				for (@NonNull RegionAnalysis cyclicRegionAnalysis : cyclicRegionAnalyses) {
+					StringBuilder s = new StringBuilder();
+					s.append(cyclicRegionAnalysis.getName());
+					Iterable<@NonNull TraceClassRegionAnalysis> consumedTraceClassAnalyses = cyclicRegionAnalysis.getConsumedTraceClassAnalyses();
+					if (consumedTraceClassAnalyses != null) {
+						s.append("\n  ConsumedTraceClassAnalyses:");
+						for (@NonNull TraceClassRegionAnalysis consumedTraceClassAnalysis : consumedTraceClassAnalyses) {
+							s.append("\n\t" + consumedTraceClassAnalysis);
+						}
+					}
+					Iterable<@NonNull TraceClassRegionAnalysis> superProducedTraceClassAnalyses = cyclicRegionAnalysis.getSuperProducedTraceClassAnalyses();
+					if (superProducedTraceClassAnalyses != null) {
+						s.append("\n  ProducedTraceClassAnalyses:");
+						for (@NonNull TraceClassRegionAnalysis producedTraceClassAnalysis : superProducedTraceClassAnalyses) {
+							s.append("\n\t" + producedTraceClassAnalysis);
+						}
+					}
+					TransformationPartitioner.CYCLES.println(s.toString());
+				}
+			}
+		}
+		/*	if (Iterables.isEmpty(cyclicRegionAnalyses)) {
+			TransformationPartitioner.CYCLES.println("No cycles");
+		}
+		else {
+			for (@NonNull TraceClassRegionAnalysis cyclicRegionAnalysis : cyclicRegionAnalyses) {
+				StringBuilder s = new StringBuilder();
+				s.append("\n  Regions:");
+								List<@NonNull PartitionAnalysis> partitions2 = Lists.newArrayList(cyclicPartitionAnalysis.getPartitionAnalyses());
+				Collections.sort(partitions2, NameUtil.NAMEABLE_COMPARATOR);
+				for (@NonNull PartitionAnalysis partition : partitions2) {
+					s.append("\n\t" + partition);
+					Iterable<@NonNull ? extends TraceClassPartitionAnalysis> consumedTraceClassAnalyses = cyclicRegionAnalysis.getConsumers();
+					if (consumedTraceClassAnalyses != null) {
+						for (@NonNull TraceClassPartitionAnalysis traceClassAnalysis : consumedTraceClassAnalyses) {
+							s.append("\n\t  =>" + traceClassAnalysis);
+						}
+					}
+					Iterable<@NonNull ? extends TraceClassPartitionAnalysis> producedTraceClassAnalyses = cyclicPartitionAnalysis.getProducedTraceClassAnalyses();
+					if (producedTraceClassAnalyses != null) {
+						for (@NonNull TraceClassPartitionAnalysis traceClassAnalysis : producedTraceClassAnalyses) {
+							s.append("\n\t  <=" + traceClassAnalysis);
+						}
+					}
+					Iterable<@NonNull ? extends TracePropertyPartitionAnalysis> consumedTracePropertyAnalyses = cyclicPartitionAnalysis.getConsumedTracePropertyAnalyses();
+					if (consumedTracePropertyAnalyses != null) {
+						for (@NonNull TracePropertyPartitionAnalysis tracePropertyAnalysis : consumedTracePropertyAnalyses) {
+							s.append("\n\t  =>" + tracePropertyAnalysis);
+						}
+					}
+					Iterable<@NonNull ? extends TracePropertyPartitionAnalysis> producedTracePropertyAnalyses = cyclicPartitionAnalysis.getProducedTracePropertyAnalyses();
+					if (producedTracePropertyAnalyses != null) {
+						for (@NonNull TracePropertyPartitionAnalysis tracePropertyAnalysis : producedTracePropertyAnalyses) {
+							s.append("\n\t  <=" + tracePropertyAnalysis);
+						}
+					}
+				}
+				s.append("\n  TraceClassAnalyses:");
+				List<@NonNull TraceClassPartitionAnalysis> traceClassAnalyses = Lists.newArrayList(cyclicPartitionAnalysis.getTraceClassAnalyses());
+				Collections.sort(traceClassAnalyses, NameUtil.NAMEABLE_COMPARATOR);
+				for (@NonNull TraceClassPartitionAnalysis traceClassAnalysis : traceClassAnalyses) {
+					s.append("\n\t" + traceClassAnalysis);
+				}
+				s.append("\n  TracePropertyAnalyses:");
+				List<@NonNull TracePropertyPartitionAnalysis> tracePropertyAnalyses = Lists.newArrayList(cyclicPartitionAnalysis.getTracePropertyAnalyses());
+				Collections.sort(tracePropertyAnalyses, NameUtil.NAMEABLE_COMPARATOR);
+				for (@NonNull TracePropertyPartitionAnalysis tracePropertyAnalysis : tracePropertyAnalyses) {
+					s.append("\n\t" + tracePropertyAnalysis);
+				}
+				TransformationPartitioner.CYCLES.println(s.toString());
+			}
+		} */
 	}
 }
