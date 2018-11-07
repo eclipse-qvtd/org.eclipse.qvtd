@@ -51,9 +51,9 @@
          Eclipse QVT Declarative developer tests.
       </description>
    </category-def>
-   <category-def name="qvtd.umlx" label="QVTd for UMLX">
+   <category-def name="qvtd.umlx" label="QVTd for UMLX and XML">
       <description>
-         Eclipse QVT Declarative support for UMLX.
+         Eclipse QVT Declarative support for UMLX and XML.
       </description>
    </category-def>
 </site>
