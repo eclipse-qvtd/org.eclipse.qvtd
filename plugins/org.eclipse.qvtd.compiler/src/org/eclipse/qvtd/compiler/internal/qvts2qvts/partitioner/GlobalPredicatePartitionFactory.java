@@ -264,10 +264,20 @@ public class GlobalPredicatePartitionFactory extends AbstractSimplePartitionFact
 
 	protected void resolveSuccessNodes(@NonNull BasicPartition partition, @NonNull Iterable<@NonNull Node> executionNodes) {
 		for (@NonNull Node traceNode : executionNodes) {
-			Node localSuccessNode = mappingPartitioner.getLocalSuccessNode(traceNode);
-			addNode(partition, localSuccessNode, Role.CONSTANT_SUCCESS_TRUE);
-			Node globalSuccessNode = mappingPartitioner.getGlobalSuccessNode(traceNode);
-			addNode(partition, globalSuccessNode, Role.REALIZED);
+			Node localSuccessNode = mappingPartitioner.basicGetLocalSuccessNode(traceNode);
+			if (localSuccessNode != null) {
+				addNode(partition, localSuccessNode, Role.CONSTANT_SUCCESS_TRUE);
+			}
+			else {
+				scheduleManager.addPartitionError(partition, "Missing localSuccess");
+			}
+			Node globalSuccessNode = mappingPartitioner.basicGetGlobalSuccessNode(traceNode);
+			if (globalSuccessNode != null) {
+				addNode(partition, globalSuccessNode, Role.REALIZED);
+			}
+			else {
+				scheduleManager.addPartitionError(partition, "Missing globalSuccess");
+			}
 		}
 		//	Iterable<@NonNull Edge> fallibleEdges = isInfallible ? regionAnalysis.getFallibleEdges() : null;
 		/*	for (@NonNull Edge edge : mappingPartitioner.getSuccessEdges()) {
