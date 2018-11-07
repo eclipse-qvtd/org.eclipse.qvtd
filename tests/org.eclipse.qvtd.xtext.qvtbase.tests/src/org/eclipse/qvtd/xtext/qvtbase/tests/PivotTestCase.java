@@ -348,6 +348,7 @@ public class PivotTestCase extends TestCase
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		TracingOption.resetAll();
 		ASResourceImpl.CHECK_IMMUTABILITY.setState(true);
 		TEST_START.println("-----Starting " + getClass().getSimpleName() + "." + getName() + "-----");
 		startTime = System.nanoTime();
