@@ -281,12 +281,12 @@ public class RelationAnalysis extends RuleAnalysis
 	}
 
 	/**
-	 * Sythesizer for the dispatch execution region of an override hierarchy.
+	 * Synthesizer for the dispatch execution region of an override hierarchy.
 	 */
 	private final @Nullable Dispatch dispatch;
 
 	/**
-	 * Sythesizer for the override verdict region.
+	 * Synthesizer for the override verdict region.
 	 */
 	private final @Nullable Verdict verdict;
 
@@ -1426,7 +1426,7 @@ public class RelationAnalysis extends RuleAnalysis
 	/**
 	 *	Create the guards for overriding relations.
 	 */
-	protected void synthesizeOverridingGuards(Node traceNode) {
+	protected void synthesizeOverridingGuards(@Nullable Node dispatchNode, @NonNull Node traceNode) {
 		Relation relation = getRule();
 		QVTrelationScheduleManager scheduleManager2 = getScheduleManager();
 		TypedModel traceTypedModel = scheduleManager2.getTraceTypedModel();
@@ -1446,8 +1446,14 @@ public class RelationAnalysis extends RuleAnalysis
 				Node guardNode = createPredicatedNode("not_" + overridingRelation.getName(), overridingClassDatum, true);
 				Property globalSuccessProperty = overridingRelationAnalysis2TraceClass.getGlobalSuccessProperty();
 				createPredicatedSuccess(guardNode, globalSuccessProperty, false);
-				for (@NonNull VariableDeclaration rootVariable : QVTrelationUtil.getRootVariables(relation)) {
-					if (isWhere /*|| scheduleManager2.getDomainUsage(rootVariable).isInput()*/) {
+				if (dispatchNode != null) {
+					RelationAnalysis2DispatchClass relationAnalysis2dispatchClass = overriddenRelationAnalysis.getRuleAnalysis2TraceGroup().getRuleAnalysis2DispatchClass();
+					DispatchClass2TraceProperty dispatchClass2TraceProperty = relationAnalysis2dispatchClass.getDispatchClass2TraceProperty(overridingRelation);
+					Property guardProperty = dispatchClass2TraceProperty.getTraceProperty();
+					createNavigationEdge(dispatchNode, guardProperty, guardNode, false);
+				}
+				if (isWhere /*|| scheduleManager2.getDomainUsage(rootVariable).isInput()*/) {
+					for (@NonNull VariableDeclaration rootVariable : QVTrelationUtil.getRootVariables(relation)) {
 						Node rootVariableNode = getReferenceNode(rootVariable);
 						VariableDeclaration overridingRootVariable = QVTrelationUtil.getOverriddenVariable(overridingRelation, rootVariable);
 						Property invocationProperty = overridingRelationAnalysis2TraceInterface.getTraceProperty(overridingRootVariable);
@@ -1741,7 +1747,7 @@ public class RelationAnalysis extends RuleAnalysis
 			//
 			//	Create the guards for overriding relations.
 			//
-			synthesizeOverridingGuards(traceNode);
+			synthesizeOverridingGuards(dispatchNode, traceNode);
 			//
 			//	Create the trace status.
 			//
