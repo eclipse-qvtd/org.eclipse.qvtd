@@ -686,8 +686,8 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 		 */
 		top relation mapOperatorCallExp overrides mapOperationCallExp {
 			operationName : String;
-			atlModule : atlMM::Module = getModule(atlExpression);
-			qvtrTransformation : qvtrMM::RelationalTransformation;
+		--	atlModule : atlMM::Module = getModule(atlExpression);
+		--	qvtrTransformation : qvtrMM::RelationalTransformation;
 			qvtrOperation : pivotMM::Operation = getOperation(qvtrSource.type, operationName);
 			enforce domain atl atlExpression : OperatorCallExp {
 				source = atlSource : OclExpression{},
@@ -700,7 +700,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 				name = operationName			-- debug/readability aid
 			};
 			when {
-				mapModule(atlModule, qvtrTransformation);
+		--		mapModule(atlModule, qvtrTransformation);
 				mapOclExpression(atlSource, qvtrSource);
 			}
 		}
