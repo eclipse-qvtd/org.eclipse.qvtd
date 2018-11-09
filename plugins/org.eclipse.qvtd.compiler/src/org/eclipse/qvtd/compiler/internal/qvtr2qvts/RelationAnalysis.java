@@ -540,7 +540,13 @@ public class RelationAnalysis extends RuleAnalysis
 				}
 			};
 		}
-		Iterable<@NonNull Node> headNodes = RuleHeadAnalysis.computeRuleHeadNodes(scheduleManager, region, preferredHeadNodes);
+		Iterable<@NonNull Node> headNodes;
+		if (getBaseRelationAnalysis() != this) {
+			headNodes = preferredHeadNodes;
+		}
+		else {
+			headNodes = RuleHeadAnalysis.computeRuleHeadNodes(scheduleManager, region, preferredHeadNodes);
+		}
 		List<@NonNull Node> headNodesList = QVTscheduleUtil.Internal.getHeadNodesList(region);
 		headNodesList.clear();
 		Iterables.addAll(headNodesList, headNodes);
