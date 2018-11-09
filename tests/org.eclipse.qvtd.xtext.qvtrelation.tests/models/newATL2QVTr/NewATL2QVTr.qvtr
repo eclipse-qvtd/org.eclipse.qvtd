@@ -622,7 +622,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 			enforce domain atl atlExpression : OperationCallExp {
 				source = atlSource : OclExpression{},
 				operationName = operationName
-			} {not atlExpression.oclIsKindOf(OperatorCallExp)};
+			}; -- {not atlExpression.oclIsKindOf(OperatorCallExp)};
 			enforce domain qvtr qvtrExpression : OperationCallExp {
 				ownedSource = qvtrSource : VariableExp{
 					referredVariable = qvtrThisVariable,
@@ -649,7 +649,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 			enforce domain atl atlExpression : OperationCallExp {
 				source = atlSource : OclExpression{},
 				operationName = operationName
-			} {not atlExpression.oclIsKindOf(OperatorCallExp)}
+			} --{not atlExpression.oclIsKindOf(OperatorCallExp)}
 			default_values {
 				atlOperations = Sequence{};
 			};
@@ -689,7 +689,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 		/**
 		 *  atl::OperatorCallExp <=> ocl::OperationCallExp
 		 */
-		top relation mapOperatorCallExp overrides mapOperationCallExp {
+		top relation mapOperatorCallExp overrides mapOperationCallExp_Operation {
 			operationName : String;
 		--	atlModule : atlMM::Module = getModule(atlExpression);
 		--	qvtrTransformation : qvtrMM::RelationalTransformation;
