@@ -643,13 +643,16 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 		}
 		top relation mapOperationCallExp_Operation overrides mapOperationCallExp {
 			operationName : String;
-			atlModule : atlMM::Module = getModule(atlExpression);
+			atlModule : atlMM::Module;
 			atlOperations : Sequence(atloclMM::Operation);
-			qvtrOperation : pivotMM::Operation = getOperation(qvtrSource.type, operationName);
+			qvtrOperation : pivotMM::Operation;
 			enforce domain atl atlExpression : OperationCallExp {
 				source = atlSource : OclExpression{},
 				operationName = operationName
-			} {not atlExpression.oclIsKindOf(OperatorCallExp)};
+			} {not atlExpression.oclIsKindOf(OperatorCallExp)}
+			default_values {
+				atlOperations = Sequence{};
+			};
 			enforce domain qvtr qvtrExpression : OperationCallExp {
 				ownedSource = qvtrSource : OCLExpression{},
 				referredOperation = qvtrOperation,
@@ -657,7 +660,9 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 				name = operationName			-- debug/readability aid
 			}
 			default_values {
+				atlModule = getModule(atlExpression);
 				atlOperations = atlModule.elements->selectByKind(atlMM::Helper)._definition.feature->selectByKind(atloclMM::Operation)->select(name=operationName);
+				qvtrOperation = getOperation(qvtrSource.type, operationName);
 			};
 			when {
 				atlOperations->isEmpty();
