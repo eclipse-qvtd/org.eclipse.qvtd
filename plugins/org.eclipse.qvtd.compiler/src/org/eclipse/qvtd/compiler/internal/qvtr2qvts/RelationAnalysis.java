@@ -1447,7 +1447,7 @@ public class RelationAnalysis extends RuleAnalysis
 				Property globalSuccessProperty = overridingRelationAnalysis2TraceClass.getGlobalSuccessProperty();
 				createPredicatedSuccess(guardNode, globalSuccessProperty, false);
 				for (@NonNull VariableDeclaration rootVariable : QVTrelationUtil.getRootVariables(relation)) {
-					if (isWhere || scheduleManager2.getDomainUsage(rootVariable).isInput()) {
+					if (isWhere /*|| scheduleManager2.getDomainUsage(rootVariable).isInput()*/) {
 						Node rootVariableNode = getReferenceNode(rootVariable);
 						VariableDeclaration overridingRootVariable = QVTrelationUtil.getOverriddenVariable(overridingRelation, rootVariable);
 						Property invocationProperty = overridingRelationAnalysis2TraceInterface.getTraceProperty(overridingRootVariable);
