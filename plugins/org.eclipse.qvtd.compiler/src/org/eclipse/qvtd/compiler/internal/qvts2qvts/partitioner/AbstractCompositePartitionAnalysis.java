@@ -37,6 +37,31 @@ public abstract class AbstractCompositePartitionAnalysis<P extends CompositePart
 		}
 	}
 
+	/**
+	 * Append additional concurrencies to partitionSchedule.
+	 *
+	 * All non-composite partitionAnalyses are added to a first additional concurrency.
+	 *
+	 * For composite partitionAnalyses, their first concurrency is folded into the first additional concurrency. Further concurrencies contribute
+	 * to further additional concurrencies similarly merged concurrencies.
+	 */
+	protected void appendConcurrency(@NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule,
+			@NonNull Iterable<@NonNull PartitionAnalysis> partitionAnalyses) {
+		int initialPass = partitionSchedule.size();
+		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {
+			if (partitionAnalysis instanceof CompositePartitionAnalysis) {
+				Iterable<@NonNull Set<@NonNull PartitionAnalysis>> nestedConcurrencies = ((CompositePartitionAnalysis)partitionAnalysis).getPartitionSchedule();
+				overlayConcurrency(partitionSchedule, initialPass, nestedConcurrencies);
+			}
+			else {
+				if (partitionSchedule.size() <= initialPass) {
+					partitionSchedule.add(new HashSet<>());
+				}
+				partitionSchedule.get(initialPass).add(partitionAnalysis);
+			}
+		}
+	}
+
 	protected abstract @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> createPartitionSchedule();
 
 	@Override
@@ -71,6 +96,27 @@ public abstract class AbstractCompositePartitionAnalysis<P extends CompositePart
 				assert ownedMappingPartitions.contains(newPartitionAnalysis.getPartition());
 			}
 		}
+	}
 
+	/**
+	 * Add additional concurrencies of non-composite partitionAnalyses to partitionSchedule.
+	 *
+	 * All non-composite partitionAnalyses are added to a first additional concurrency.
+	 *
+	 * For composite partitionAnalyses, their first concurrency is folded into the first additional concurrency. Further concurrencies contribute
+	 * to further additional concurrencies similarly merged concurrencies.
+	 */
+	private void overlayConcurrency(@NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule,
+			int initialPass, @NonNull Iterable<@NonNull Set<@NonNull PartitionAnalysis>> concurrencies) {
+		int mergePass = initialPass;
+		for (@NonNull Set<@NonNull PartitionAnalysis> concurrency : concurrencies) {
+			assert concurrency.size() > 0;
+			if (partitionSchedule.size() <= mergePass) {
+				partitionSchedule.add(new HashSet<>());
+			}
+			assert mergePass < partitionSchedule.size();
+			partitionSchedule.get(mergePass).addAll(concurrency);
+			mergePass++;
+		}
 	}
 }

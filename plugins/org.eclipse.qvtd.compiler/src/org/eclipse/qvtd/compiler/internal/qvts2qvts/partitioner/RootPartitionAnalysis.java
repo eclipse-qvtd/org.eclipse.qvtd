@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -47,25 +46,10 @@ public class RootPartitionAnalysis extends AbstractCompositePartitionAnalysis<Ro
 
 	@Override
 	protected @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> createPartitionSchedule() {
-		List<@NonNull Set<@NonNull PartitionAnalysis>> flatPartitionSchedule;
-		List<@NonNull Set<@NonNull PartitionAnalysis>> parallelSchedule = CompilerUtil.computeParallelSchedule(originalPartitionAnalysis2predecessors);
-		flatPartitionSchedule = new ArrayList<>();
+		List<@NonNull Set<@NonNull PartitionAnalysis>>  flatPartitionSchedule = new ArrayList<>();
+		Iterable<@NonNull Set<@NonNull PartitionAnalysis>> parallelSchedule = CompilerUtil.computeParallelSchedule(originalPartitionAnalysis2predecessors);
 		for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrency : parallelSchedule) {
-			Set<@NonNull PartitionAnalysis> flatConcurrency = new HashSet<>();
-			for (@NonNull PartitionAnalysis partitionAnalysis : concurrency) {
-				if (partitionAnalysis instanceof CompositePartitionAnalysis) {
-					List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule2 = ((CompositePartitionAnalysis)partitionAnalysis).getPartitionSchedule();
-					for (@NonNull Set<@NonNull PartitionAnalysis> concurrency2 : partitionSchedule2) {	// FIXME Avoid flattening
-						for (@NonNull PartitionAnalysis partition2 : concurrency2) {
-							flatConcurrency.add(partition2);
-						}
-					}
-				}
-				else {
-					flatConcurrency.add(partitionAnalysis);
-				}
-			}
-			flatPartitionSchedule.add(flatConcurrency);
+			appendConcurrency(flatPartitionSchedule, concurrency);
 		}
 		return flatPartitionSchedule;
 	}

@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -62,6 +62,7 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 
 	@Override
 	protected @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> createPartitionSchedule() {
+		assert partitionAnalyses.equals(originalPartitionAnalysis2predecessors.keySet());
 		//
 		//	The simplest cyclic schedule is dumb polled. For small cycles the effort of
 		//	using the immediate external predecesors as region heads for an internal acyclic
@@ -84,12 +85,116 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 		//
 		// The cyclic schedule is therefore {base-cases}, {recursing-steps}... {recursive-cases}
 		//
-		List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule = Collections.singletonList(partitionAnalyses); //CompilerUtil.computeParallelSchedule(partition2predecessors);
-		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {
-			if (partitionAnalysis instanceof CompositePartitionAnalysis) {
-				((CompositePartitionAnalysis)partitionAnalysis).getPartitionSchedule();
+		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull TraceElementPartitionAnalysis>> partitionAnalysis2acyclicTraceClassAnalyses = new HashMap<>();
+		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull TraceElementPartitionAnalysis>> partitionAnalysis2cyclicTraceClassAnalyses = new HashMap<>();
+		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull TraceElementPartitionAnalysis>> partitionAnalysis2mixedTraceClassAnalyses = new HashMap<>();
+		for (@NonNull PartitionAnalysis consumingPartitionAnalysis : partitionAnalyses) {
+			assert !externalPredecessors.contains(consumingPartitionAnalysis);
+			Iterable<@NonNull TraceClassPartitionAnalysis> consumedTraceClassAnalyses = consumingPartitionAnalysis.getConsumedTraceClassAnalyses();
+			if (consumedTraceClassAnalyses != null) {
+				for (@NonNull TraceClassPartitionAnalysis consumedTraceClassAnalysis : consumedTraceClassAnalyses) {
+					Iterable<@NonNull PartitionAnalysis> producingPartitionAnalyses = consumedTraceClassAnalysis.getProducers();
+					boolean isExternal = false;
+					boolean isInternal = false;
+					for (@NonNull PartitionAnalysis producingPartitionAnalysis : producingPartitionAnalyses) {
+						if (partitionAnalyses.contains(producingPartitionAnalysis)) {
+							isInternal = true;
+						}
+						else {
+							isExternal = true;
+						}
+					}
+					Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull TraceElementPartitionAnalysis>> partitionAnalysis2traceClassAnalyses;
+					if (!isInternal) {
+						partitionAnalysis2traceClassAnalyses = partitionAnalysis2acyclicTraceClassAnalyses;
+					}
+					else if (!isExternal) {
+						partitionAnalysis2traceClassAnalyses = partitionAnalysis2cyclicTraceClassAnalyses;
+					}
+					else {
+						partitionAnalysis2traceClassAnalyses = partitionAnalysis2mixedTraceClassAnalyses;
+					}
+					Set<@NonNull TraceElementPartitionAnalysis> traceClassAnalyses = partitionAnalysis2traceClassAnalyses.get(consumingPartitionAnalysis);
+					if (traceClassAnalyses == null) {
+						traceClassAnalyses = new HashSet<>();
+						partitionAnalysis2traceClassAnalyses.put(consumingPartitionAnalysis, traceClassAnalyses);
+					}
+					traceClassAnalyses.add(consumedTraceClassAnalysis);
+				}
+			}
+			Iterable<@NonNull TracePropertyPartitionAnalysis> consumedTracePropertyAnalyses = consumingPartitionAnalysis.getConsumedTracePropertyAnalyses();
+			if (consumedTracePropertyAnalyses != null) {
+				for (@NonNull TracePropertyPartitionAnalysis consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
+					Iterable<@NonNull PartitionAnalysis> producingPartitionAnalyses = consumedTracePropertyAnalysis.getProducers();
+					boolean isExternal = false;
+					boolean isInternal = false;
+					for (@NonNull PartitionAnalysis producingPartitionAnalysis : producingPartitionAnalyses) {
+						boolean isInternallyContained = partitionAnalyses.contains(producingPartitionAnalysis);
+						boolean isExternallyContained = externalPredecessors.contains(producingPartitionAnalysis);
+						//	assert isInternallyContained != isExternallyContained;
+						assert !isInternallyContained || !isExternallyContained;		// externalPredecessors does not include cyclic ancestors
+						if (isInternallyContained) {
+							isInternal = true;
+						}
+						else {
+							isExternal = true;
+						}
+					}
+					Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull TraceElementPartitionAnalysis>> partitionAnalysis2traceClassAnalyses;
+					if (!isInternal) {
+						partitionAnalysis2traceClassAnalyses = partitionAnalysis2acyclicTraceClassAnalyses;
+					}
+					else if (!isExternal) {
+						partitionAnalysis2traceClassAnalyses = partitionAnalysis2cyclicTraceClassAnalyses;
+					}
+					else {
+						partitionAnalysis2traceClassAnalyses = partitionAnalysis2mixedTraceClassAnalyses;
+					}
+					Set<@NonNull TraceElementPartitionAnalysis> traceClassAnalyses = partitionAnalysis2traceClassAnalyses.get(consumingPartitionAnalysis);
+					if (traceClassAnalyses == null) {
+						traceClassAnalyses = new HashSet<>();
+						partitionAnalysis2traceClassAnalyses.put(consumingPartitionAnalysis, traceClassAnalyses);
+					}
+					traceClassAnalyses.add(consumedTracePropertyAnalysis);
+				}
 			}
 		}
+		Set<@NonNull PartitionAnalysis> baseCases = new HashSet<>();
+		Set<@NonNull PartitionAnalysis> recursiveCases = new HashSet<>();
+		Set<@NonNull PartitionAnalysis> recursingSteps = new HashSet<>();
+		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {
+			Set<@NonNull TraceElementPartitionAnalysis> acyclicTraceClassAnalyses = partitionAnalysis2acyclicTraceClassAnalyses.get(partitionAnalysis);
+			Set<@NonNull TraceElementPartitionAnalysis> cyclicTraceClassAnalyses = partitionAnalysis2cyclicTraceClassAnalyses.get(partitionAnalysis);
+			Set<@NonNull TraceElementPartitionAnalysis> mixedTraceClassAnalyses = partitionAnalysis2mixedTraceClassAnalyses.get(partitionAnalysis);
+			if (mixedTraceClassAnalyses == null) {
+				if (cyclicTraceClassAnalyses == null) {
+					if (acyclicTraceClassAnalyses == null) {
+						assert false; // dead does not occur
+					}
+					else {
+						assert false; // acyclic does not occur
+					}
+				}
+				else {
+					recursingSteps.add(partitionAnalysis);
+				}
+			}
+			else {
+				if (cyclicTraceClassAnalyses == null) {
+					baseCases.add(partitionAnalysis);
+				}
+				else {
+					recursiveCases.add(partitionAnalysis);
+				}
+			}
+		}
+
+
+		List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule = new ArrayList<>();
+		appendConcurrency(partitionSchedule, baseCases);		// Maybe empty for recursingSteps-only cycles
+		//	if (!recursingSteps.isEmpty()) {								// Maybe empty
+		appendConcurrency(partitionSchedule, recursingSteps);		// FIXME sequence recursingSteps
+		appendConcurrency(partitionSchedule, recursiveCases);	// Maybe empty for recursingSteps-only cycles
 		return partitionSchedule;
 	}
 

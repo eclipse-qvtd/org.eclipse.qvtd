@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -18,5 +17,5 @@ import org.eclipse.jdt.annotation.NonNull;
 public interface CompositePartitionAnalysis extends PartitionAnalysis
 {
 	@NonNull Iterable<@NonNull PartitionAnalysis>  getPartitionAnalyses();
-	@NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> getPartitionSchedule();
+	@NonNull Iterable<@NonNull Set<@NonNull PartitionAnalysis>> getPartitionSchedule();
 }

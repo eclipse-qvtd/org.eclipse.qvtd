@@ -344,7 +344,7 @@ public class CompilerUtil extends QVTscheduleUtil
 		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partition2successors = CompilerUtil.computeTransitiveSuccessors(partition2predecessors);
 		//
 		//	Loop over the candidates to select those with no unscheduled predecessors. On the first iteration
-		//	all partitions are considered, on subsequent iterations only successots of just scheduled partitions
+		//	all partitions are considered, on subsequent iterations only successors of just scheduled partitions
 		//	are reconsidered.
 		//
 		List<@NonNull Set<@NonNull PartitionAnalysis>> parallelSchedule = new ArrayList<>();
