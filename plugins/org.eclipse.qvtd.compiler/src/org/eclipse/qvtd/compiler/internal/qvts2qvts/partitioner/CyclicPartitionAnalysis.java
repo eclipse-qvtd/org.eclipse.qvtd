@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
 
 public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<CyclicPartition> implements CompositePartitionAnalysis
@@ -60,15 +61,24 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 		partitionedTransformationAnalysis.addPartitionAnalysis(this);
 	}
 
+	/**
+	 * Return an acyclic schedule for the recursingSteps by ignoring the baseCase/recursingCase partitions that
+	 * cause the cycles.
+	 */
+	protected @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> computeRecursiveSchedule(@NonNull Set<@NonNull PartitionAnalysis> recursingSteps) {
+		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> immediatePredecessors = CompilerUtil.computeImmediatePredecessors(recursingSteps);
+		for (@NonNull PartitionAnalysis partitionAnalysis : recursingSteps) {
+			Set<@NonNull PartitionAnalysis> predecessors = immediatePredecessors.get(partitionAnalysis);
+			assert predecessors != null;
+			predecessors.retainAll(recursingSteps);
+		}
+		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partitionAnalysis2predecessors = CompilerUtil.computeClosure(immediatePredecessors);
+		return CompilerUtil.computeParallelSchedule(partitionAnalysis2predecessors);
+	}
+
 	@Override
 	protected @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> createPartitionSchedule() {
 		assert partitionAnalyses.equals(originalPartitionAnalysis2predecessors.keySet());
-		//
-		//	The simplest cyclic schedule is dumb polled. For small cycles the effort of
-		//	using the immediate external predecesors as region heads for an internal acyclic
-		//	schedule and integrating externally is probably not worth it.
-		//
-		// FIXME For ATL2QVTr the cycle is 29 partitions (and counting) with many three-level cascades. Worth improving.
 		//
 		// Analyzing predecessor partitions is unhelpful since they are cyclic.
 		// Analyzing the producers of each source datum is more fruitful.
@@ -188,12 +198,19 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 				}
 			}
 		}
-
-
+		//
+		//	Append the baseCases, then the recursingCzases in dependency order and finally the recursingCases to the schedule.
+		//
 		List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule = new ArrayList<>();
 		appendConcurrency(partitionSchedule, baseCases);		// Maybe empty for recursingSteps-only cycles
-		//	if (!recursingSteps.isEmpty()) {								// Maybe empty
-		appendConcurrency(partitionSchedule, recursingSteps);		// FIXME sequence recursingSteps
+		if (recursingSteps.size() <= 1) {
+			appendConcurrency(partitionSchedule, recursingSteps);
+		}
+		else {
+			for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrency : computeRecursiveSchedule(recursingSteps)) {
+				appendConcurrency(partitionSchedule, concurrency);
+			}
+		}
 		appendConcurrency(partitionSchedule, recursiveCases);	// Maybe empty for recursingSteps-only cycles
 		return partitionSchedule;
 	}
