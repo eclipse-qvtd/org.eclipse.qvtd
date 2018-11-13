@@ -25,6 +25,7 @@ Require-Bundle: org.eclipse.qvtd.xtext.qvtbase.tests;bundle-version="[0.17.0,1.0
  org.eclipse.m2m.atl.engine,
  org.eclipse.m2m.atl.dsls,
  org.eclipse.equinox.ds;resolution:=optional,
- javax.annotation;resolution:=optional
+ javax.annotation;resolution:=optional,
+ _QVTd_QVTrCompilerTests__testQVTrCompiler_ATL2QVTr_CG;bundle-version="1.0.0"
 Export-Package: org.eclipse.qvtd.xtext.qvtrelation.tests
 Automatic-Module-Name: org.eclipse.qvtd.xtext.qvtrelation.tests

@@ -47,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateToStringVisitor;
+import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -447,7 +448,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		} */
 	}
 
-	/*	@Test
+	@Test
 	public void testQVTrCompiler_ATL2QVTr_CG_exec() throws Exception {
 		//		Splitter.GROUPS.setState(true);
 		//		Splitter.RESULT.setState(true);
@@ -505,9 +506,9 @@ public class QVTrCompilerTests extends LoadTestCase
 		try {
 			txClass3 = myQVT3.buildTransformation("Persons", false);//,
 			myQVT3.assertRegionCount(RuleRegionImpl.class, 2);
-			myQVT3.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
-			myQVT3.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
-			myQVT3.assertRegionCount(MicroMappingRegionImpl.class, 0);
+			//	myQVT3.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+			//	myQVT3.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			//	myQVT3.assertRegionCount(MicroMappingRegionImpl.class, 0);
 		}
 		finally {
 			myQVT3.dispose();
@@ -526,7 +527,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		finally {
 			myQVT4.dispose();
 		}
-	} */
+	}
 
 	@Test
 	public void testQVTrCompiler_Ecore2Pivot_CG() throws Exception {
