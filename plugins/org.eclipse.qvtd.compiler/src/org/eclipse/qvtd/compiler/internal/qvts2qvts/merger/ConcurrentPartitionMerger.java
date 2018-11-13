@@ -37,6 +37,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
+import com.google.common.collect.Iterables;
+
 /**
  * ConcurrentPartitionMerger replaces partitions that occur at the same depth in the parallel schedule and
  * which have identical failure mechanisms by an equivalent merged partition..
@@ -60,7 +62,7 @@ public class ConcurrentPartitionMerger extends AbstractMerger
 						partitions.add(partitionAnalysis);
 					}
 				}
-				Concurrency newConcurrency = null;
+				Set<@NonNull PartitionAnalysis> concurrentPartitionAnalyses = null;
 				for (@NonNull Region region : region2partitions.keySet()) {
 					if (!(region instanceof CyclicMappingRegion)) {
 						List<@NonNull PartitionAnalysis> partitions = region2partitions.get(region);
@@ -69,18 +71,23 @@ public class ConcurrentPartitionMerger extends AbstractMerger
 							ConcurrentPartitionMerger concurrentMerger = new ConcurrentPartitionMerger(partitionedTransformationAnalysis, partitions);
 							Map<@NonNull PartitionAnalysis, @Nullable PartitionAnalysis> old2new = concurrentMerger.merge();
 							if (old2new != null) {
-								if (newConcurrency == null) {
-									newConcurrency = new Concurrency(oldConcurrency);
+								if (concurrentPartitionAnalyses == null) {
+									concurrentPartitionAnalyses = new HashSet<>();
+									Iterables.addAll(concurrentPartitionAnalyses, oldConcurrency.getPartitionAnalyses());
 								}
 								for (@NonNull PartitionAnalysis oldPartition : old2new.keySet()) {
-									newConcurrency.remove(oldPartition);
+									concurrentPartitionAnalyses.remove(oldPartition);
 									PartitionAnalysis newPartition = old2new.get(oldPartition);
 									assert newPartition != null;
-									newConcurrency.add(newPartition);
+									concurrentPartitionAnalyses.add(newPartition);
 								}
 							}
-							if (newConcurrency != null) {
-								partitionSchedule.set(i, newConcurrency);
+							if (concurrentPartitionAnalyses != null) {
+								Concurrency concurrency = new Concurrency();
+								for (@NonNull PartitionAnalysis partitionAnalysis : concurrentPartitionAnalyses) {
+									concurrency.add(partitionAnalysis);
+								}
+								partitionSchedule.set(i, concurrency);
 							}
 						}
 					}

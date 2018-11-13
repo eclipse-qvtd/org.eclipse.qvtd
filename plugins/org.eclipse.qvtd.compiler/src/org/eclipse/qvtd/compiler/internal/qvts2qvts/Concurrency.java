@@ -15,9 +15,8 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
-
-import com.google.common.collect.Sets;
 
 /**
  * A Concurrency identifies the PartitionAnalysis instances that may be executed concurrently as
@@ -25,42 +24,93 @@ import com.google.common.collect.Sets;
  */
 public class Concurrency implements Iterable<@NonNull PartitionAnalysis>
 {
+	/**
+	 * The concurrently executable partitionAnalyses defining the schedule pass.
+	 */
 	protected final @NonNull Set<@NonNull PartitionAnalysis> partitionAnalyses;
+
+	/**
+	 * The concurrencies that may resume after exdecjution of this concurrency.
+	 */
+	//	private @Nullable List<@NonNull Concurrency> startConcurrencies = null;
+	private boolean isCycleStart = false;
+	private boolean isCycleEnd = false;
+
+	/**
+	 * The sequentual pass number within the overall schedule.
+	 */
+	private @Nullable Integer passNumber = null;
 
 	public Concurrency() {
 		this.partitionAnalyses = new HashSet<>();
 	}
 
-	public Concurrency(@NonNull Concurrency oldConcurrency) {
-		this.partitionAnalyses = new HashSet<>(oldConcurrency.partitionAnalyses);
-	}
-
-	public Concurrency(@NonNull Iterable<@NonNull PartitionAnalysis> partitionAnalyses) {
-		this.partitionAnalyses = Sets.newHashSet(partitionAnalyses);
-	}
-
+	/**
+	 * Add an additional partitionAnalysis to the set of concurrent partitionAnalyses.
+	 */
 	public boolean add(@NonNull PartitionAnalysis partitionAnalysis) {
 		return partitionAnalyses.add(partitionAnalysis);
 	}
 
-	public boolean addAll(@NonNull Concurrency concurrency) {
-		return partitionAnalyses.addAll(concurrency.partitionAnalyses);
+	public void addPass(int cyclePass) {
+		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {
+			partitionAnalysis.getPartition().addPass(cyclePass);
+		}
 	}
 
-	//	public @NonNull Iterable<@NonNull PartitionAnalysis> getPartitionAnalyses() {
-	//		return partitionAnalyses;
-	//	}
+	public @NonNull Iterable<@NonNull PartitionAnalysis> getPartitionAnalyses() {
+		return partitionAnalyses;
+	}
+
+	public boolean isCycleEnd() {
+		return isCycleEnd;
+	}
+
+	public boolean isCycleStart() {
+		return isCycleStart;
+	}
 
 	@Override
 	public @NonNull Iterator<@NonNull PartitionAnalysis> iterator() {
 		return partitionAnalyses.iterator();
 	}
 
-	public boolean remove(@NonNull PartitionAnalysis partitionAnalysis) {
-		return partitionAnalyses.add(partitionAnalysis);
+	void setPass(int passNumber) {
+		assert this.passNumber == null;
+		this.passNumber = passNumber;
+		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {
+			partitionAnalysis.getPartition().setPass(passNumber);
+		}
 	}
 
 	public int size() {
 		return partitionAnalyses.size();
+	}
+
+	public void setCycleStart() {
+		this.isCycleStart = true;
+	}
+
+	public void setCycleEnd() {
+		this.isCycleEnd = true;
+	}
+
+	@Override
+	public @NonNull String toString() {
+		StringBuilder s = new StringBuilder();
+		s.append("[");
+		s.append(passNumber);
+		if (isCycleStart) {
+			s.append(", «start»");
+		}
+		if (isCycleEnd) {
+			s.append(", «end»");
+		}
+		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {
+			s.append(", ");
+			s.append(partitionAnalysis);
+		}
+		s.append("]");
+		return s.toString();
 	}
 }

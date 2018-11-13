@@ -46,8 +46,7 @@ public abstract class AbstractCompositePartitionAnalysis<P extends CompositePart
 	 * For composite partitionAnalyses, their first concurrency is folded into the first additional concurrency. Further concurrencies contribute
 	 * to further additional concurrencies similarly merged concurrencies.
 	 */
-	protected void appendConcurrency(@NonNull List<@NonNull Concurrency> partitionSchedule,
-			@NonNull Iterable<@NonNull PartitionAnalysis> partitionAnalyses) {
+	protected void appendConcurrency(@NonNull List<@NonNull Concurrency> partitionSchedule, @NonNull Iterable<@NonNull PartitionAnalysis> partitionAnalyses) {
 		int initialPass = partitionSchedule.size();
 		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {
 			if (partitionAnalysis instanceof CompositePartitionAnalysis) {
@@ -108,15 +107,24 @@ public abstract class AbstractCompositePartitionAnalysis<P extends CompositePart
 	 * to further additional concurrencies similarly merged concurrencies.
 	 */
 	private void overlayConcurrency(@NonNull List<@NonNull Concurrency> partitionSchedule,
-			int initialPass, @NonNull Iterable<@NonNull Concurrency> concurrencies) {
+			int initialPass, @NonNull Iterable<@NonNull Concurrency> newConcurrencies) {
 		int mergePass = initialPass;
-		for (@NonNull Concurrency concurrency : concurrencies) {
-			assert concurrency.size() > 0;
+		for (@NonNull Concurrency newConcurrency : newConcurrencies) {
+			assert newConcurrency.size() > 0;
 			if (partitionSchedule.size() <= mergePass) {
 				partitionSchedule.add(new Concurrency());
 			}
 			assert mergePass < partitionSchedule.size();
-			partitionSchedule.get(mergePass).addAll(concurrency);
+			Concurrency concurrency = partitionSchedule.get(mergePass);
+			if (newConcurrency.isCycleStart()) {
+				concurrency.setCycleStart();
+			}
+			if (newConcurrency.isCycleEnd()) {
+				concurrency.setCycleEnd();
+			}
+			for (@NonNull PartitionAnalysis partitionAnalysis : newConcurrency) {
+				concurrency.add(partitionAnalysis);
+			}
 			mergePass++;
 		}
 	}

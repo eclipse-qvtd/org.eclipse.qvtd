@@ -341,38 +341,39 @@ public class CompilerUtil extends QVTscheduleUtil
 	 * sequence corresponds to the critical path length/depth from the earliest predecessor to the concurrent element.
 	 */
 	public static @NonNull List<@NonNull Concurrency> computeParallelSchedule(	// FIXME this can be much faster with bit masks
-			@NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partition2predecessors) {
-		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partition2successors = CompilerUtil.computeTransitiveSuccessors(partition2predecessors);
+			@NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partitionAnalysis2predecessors) {
+		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partition2successors = CompilerUtil.computeTransitiveSuccessors(partitionAnalysis2predecessors);
 		//
 		//	Loop over the candidates to select those with no unscheduled predecessors. On the first iteration
 		//	all partitions are considered, on subsequent iterations only successors of just scheduled partitions
 		//	are reconsidered.
 		//
 		List<@NonNull Concurrency> parallelSchedule = new ArrayList<>();
-		Set<@NonNull PartitionAnalysis> scheduledPartitions = new HashSet<>();
-		Set<@NonNull PartitionAnalysis> scheduleCandidates = new HashSet<>(partition2predecessors.keySet());
+		Set<@NonNull PartitionAnalysis> scheduledPartitionAnalyses = new HashSet<>();
+		Set<@NonNull PartitionAnalysis> scheduleCandidates = new HashSet<>(partitionAnalysis2predecessors.keySet());
 		while (!scheduleCandidates.isEmpty()) {
-			Set<@NonNull PartitionAnalysis> toSchedule = new HashSet<>();
+			Concurrency nextConcurrency = new Concurrency();
 			Set<@NonNull PartitionAnalysis> nextScheduleCandidates = new HashSet<>();
-			for (@NonNull PartitionAnalysis partition : scheduleCandidates) {
-				Set<@NonNull PartitionAnalysis> predecessors = partition2predecessors.get(partition);
+			for (@NonNull PartitionAnalysis partitionAnalysis : scheduleCandidates) {
+				Set<@NonNull PartitionAnalysis> predecessors = partitionAnalysis2predecessors.get(partitionAnalysis);
 				assert predecessors != null;
 				Set<@NonNull PartitionAnalysis> unscheduledPredecessors = new HashSet<>(predecessors);
 				assert unscheduledPredecessors != null;
-				unscheduledPredecessors.remove(partition);
-				unscheduledPredecessors.removeAll(scheduledPartitions);
+				unscheduledPredecessors.remove(partitionAnalysis);
+				unscheduledPredecessors.removeAll(scheduledPartitionAnalyses);
 				if (unscheduledPredecessors.isEmpty()) {
-					toSchedule.add(partition);
-					//	partition.setDepth(parallelSchedule.size());
-					Set<@NonNull PartitionAnalysis> unscheduledSuccessors = partition2successors.get(partition);
+					nextConcurrency.add(partitionAnalysis);
+					Set<@NonNull PartitionAnalysis> unscheduledSuccessors = partition2successors.get(partitionAnalysis);
 					assert unscheduledSuccessors != null;
 					nextScheduleCandidates.addAll(unscheduledSuccessors);
 				}
 			}
-			assert !toSchedule.isEmpty();
-			nextScheduleCandidates.removeAll(toSchedule);
-			parallelSchedule.add(new Concurrency(toSchedule));
-			scheduledPartitions.addAll(toSchedule);
+			assert nextConcurrency.size() > 0;
+			parallelSchedule.add(nextConcurrency);
+			for (@NonNull PartitionAnalysis partitionAnalysis : nextConcurrency) {
+				nextScheduleCandidates.remove(partitionAnalysis);
+				scheduledPartitionAnalyses.add(partitionAnalysis);
+			}
 			scheduleCandidates = nextScheduleCandidates;
 		}
 		return parallelSchedule;

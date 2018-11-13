@@ -488,25 +488,42 @@ public class ScheduleAnalysis
 		}
 	}
 
-	public void schedule(@NonNull RootPartition rootPartition, @NonNull Iterable<@NonNull Concurrency> partitionSchedule) {
-		int depth = 0;
+	public void schedule(@NonNull RootPartition rootPartition, @NonNull List<@NonNull Concurrency> partitionSchedule) {
+		int passNumber = 0;
+		int cycleDepth = 0;
+		int cycleStart = 0;
 		for (@NonNull Concurrency concurrency : partitionSchedule) {
+			concurrency.setPass(passNumber);
+			if (concurrency.isCycleStart()) {
+				cycleDepth++;
+				if (cycleDepth == 1) {
+					cycleStart = passNumber;
+				}
+			}
 			for (@NonNull PartitionAnalysis partitionAnalysis : concurrency) {
 				Partition partition = partitionAnalysis.getPartition();
-				partition.setPass(depth);
 				Iterable<@NonNull Connection> loopingConnections = getLoopingConnections(partition);
 				assert loopingConnections != null;
 				Iterable<@NonNull Connection> outgoingConnections = getOutgoingConnections(partition);
 				assert outgoingConnections != null;
 				for (@NonNull Connection loopingConnection : loopingConnections) {
-					loopingConnection.addPass(depth);
+					loopingConnection.addPass(passNumber);
 				}
 				for (@NonNull Connection outgoingConnection : outgoingConnections) {
-					outgoingConnection.addPass(depth);
+					outgoingConnection.addPass(passNumber);
 				}
 			}
-			depth++;
+			if (concurrency.isCycleEnd()) {
+				cycleDepth--;
+				if (cycleDepth == 0) {
+					for (int cyclePass = cycleStart; cyclePass < passNumber; cyclePass++) {
+						partitionSchedule.get(cyclePass).addPass(passNumber);
+					}
+				}
+			}
+			passNumber++;
 		}
+		assert cycleDepth == 0;
 		scheduleManager.writeDebugGraphs("6-pass", false, true, false);
 		/**
 		 * Propagate the additional connection indexes to their outgoing connections.

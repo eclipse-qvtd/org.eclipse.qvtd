@@ -200,7 +200,7 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 			}
 		}
 		//
-		//	Append the baseCases, then the recursingCzases in dependency order and finally the recursingCases to the schedule.
+		//	Append the baseCases, then the recursingCases in dependency order and finally the recursingCases to the schedule.
 		//
 		List<@NonNull Concurrency> partitionSchedule = new ArrayList<>();
 		appendConcurrency(partitionSchedule, baseCases);		// Maybe empty for recursingSteps-only cycles
@@ -213,6 +213,8 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 			}
 		}
 		appendConcurrency(partitionSchedule, recursiveCases);	// Maybe empty for recursingSteps-only cycles
+		partitionSchedule.get(0).setCycleStart();
+		partitionSchedule.get(partitionSchedule.size()-1).setCycleEnd();
 		return partitionSchedule;
 	}
 
