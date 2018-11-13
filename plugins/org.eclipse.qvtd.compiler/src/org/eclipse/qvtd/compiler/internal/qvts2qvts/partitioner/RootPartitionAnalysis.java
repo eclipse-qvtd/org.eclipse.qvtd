@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
@@ -45,9 +46,9 @@ public class RootPartitionAnalysis extends AbstractCompositePartitionAnalysis<Ro
 	}
 
 	@Override
-	protected @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> createPartitionSchedule() {
-		List<@NonNull Set<@NonNull PartitionAnalysis>>  flatPartitionSchedule = new ArrayList<>();
-		Iterable<@NonNull Set<@NonNull PartitionAnalysis>> parallelSchedule = CompilerUtil.computeParallelSchedule(originalPartitionAnalysis2predecessors);
+	protected @NonNull List<@NonNull Concurrency> createPartitionSchedule() {
+		List<@NonNull Concurrency>  flatPartitionSchedule = new ArrayList<>();
+		Iterable<@NonNull Concurrency> parallelSchedule = CompilerUtil.computeParallelSchedule(originalPartitionAnalysis2predecessors);
 		for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrency : parallelSchedule) {
 			appendConcurrency(flatPartitionSchedule, concurrency);
 		}

@@ -13,11 +13,8 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
@@ -383,7 +380,7 @@ public class ScheduleAnalysis
 
 	//
 	//	Identify all the source regions for each target region.
-	//
+	/*
 	private @NonNull Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> analyzeSources() {
 		Map<@NonNull Partition, @NonNull Set<@NonNull Partition>> target2sources = new HashMap<>();
 		for (@NonNull PartitionAnalysis partitionAnalysis : allPartitionAnalyses) {
@@ -404,9 +401,9 @@ public class ScheduleAnalysis
 			}
 		}
 		return target2sources;
-	}
+	} */
 
-	protected void buildCallTree(@NonNull Iterable<@NonNull ? extends Iterable<@NonNull PartitionAnalysis>> partitionSchedule) {
+	protected void buildCallTree(@NonNull Iterable<@NonNull Concurrency> partitionSchedule) {
 		CallTreeBuilder callTreeBuilder = new CallTreeBuilder(this, rootPartitionAnalysis.getPartition(), loadingPartition);
 		callTreeBuilder.buildTree(partitionSchedule);
 	}
@@ -491,9 +488,9 @@ public class ScheduleAnalysis
 		}
 	}
 
-	public void schedule(@NonNull RootPartition rootPartition, @NonNull Iterable<@NonNull ? extends Iterable<@NonNull PartitionAnalysis>> partitionSchedule) {
+	public void schedule(@NonNull RootPartition rootPartition, @NonNull Iterable<@NonNull Concurrency> partitionSchedule) {
 		int depth = 0;
-		for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrency : partitionSchedule) {
+		for (@NonNull Concurrency concurrency : partitionSchedule) {
 			for (@NonNull PartitionAnalysis partitionAnalysis : concurrency) {
 				Partition partition = partitionAnalysis.getPartition();
 				partition.setPass(depth);

@@ -24,6 +24,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -133,10 +134,10 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 		QVTscheduleConstants.POLLED_PROPERTIES.println("  " + typedModel + " realized for " + property);
 	}
 
-	public void analyzePartitionEdges(@NonNull Iterable<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule) {
+	public void analyzePartitionEdges(@NonNull Iterable<@NonNull Concurrency> partitionSchedule) {
 		typedModel2property2predicatedEdges = new HashMap<>();
 		typedModel2property2realizedEdges = new HashMap<>();
-		for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrency : partitionSchedule) {
+		for (@NonNull Concurrency concurrency : partitionSchedule) {
 			for (@NonNull PartitionAnalysis partitionAnalysis : concurrency) {
 				Partition partition = partitionAnalysis.getPartition();
 				QVTscheduleConstants.POLLED_PROPERTIES.println("building indexes for " + partition + " " + partition.getPassRangeText());
@@ -154,11 +155,11 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 		}
 	}
 
-	public void computeCheckedOrEnforcedEdges(@NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> mergedPartitionSchedule) {
+	public void computeCheckedOrEnforcedEdges(@NonNull List<@NonNull Concurrency> mergedPartitionSchedule) {
 		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2realizedEdges2 = typedModel2property2realizedEdges;
 		assert typedModel2property2realizedEdges2 != null;
-		for (@NonNull Iterable<@NonNull PartitionAnalysis> orderedPartitions : mergedPartitionSchedule) {
-			for (@NonNull PartitionAnalysis partitionAnalysis : orderedPartitions) {
+		for (@NonNull Concurrency concurrency : mergedPartitionSchedule) {
+			for (@NonNull PartitionAnalysis partitionAnalysis : concurrency) {
 				partitionAnalysis.computeCheckedOrEnforcedEdges();
 			}
 		}

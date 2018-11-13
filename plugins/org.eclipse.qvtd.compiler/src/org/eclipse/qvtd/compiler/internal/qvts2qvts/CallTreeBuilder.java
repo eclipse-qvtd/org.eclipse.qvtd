@@ -53,10 +53,10 @@ public class CallTreeBuilder
 		this.loadingPartition = loadingPartition;
 	}
 
-	public void buildTree(@NonNull Iterable<@NonNull ? extends Iterable<@NonNull PartitionAnalysis>> partitionSchedule) {
+	public void buildTree(@NonNull Iterable<@NonNull Concurrency> partitionSchedule) {
 		Stack<@NonNull Partition> callStack = new Stack<>();
 		callStack.push(rootPartition);
-		for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrency : partitionSchedule) {
+		for (@NonNull Concurrency concurrency : partitionSchedule) {
 			for (@NonNull PartitionAnalysis partition : concurrency) {
 				updateCallStack(callStack, partition.getPartition());
 			}

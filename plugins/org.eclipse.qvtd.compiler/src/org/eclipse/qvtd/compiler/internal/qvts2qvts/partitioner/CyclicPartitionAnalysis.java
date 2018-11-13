@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
 
@@ -65,7 +66,7 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 	 * Return an acyclic schedule for the recursingSteps by ignoring the baseCase/recursingCase partitions that
 	 * cause the cycles.
 	 */
-	protected @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> computeRecursiveSchedule(@NonNull Set<@NonNull PartitionAnalysis> recursingSteps) {
+	protected @NonNull List<@NonNull Concurrency> computeRecursiveSchedule(@NonNull Set<@NonNull PartitionAnalysis> recursingSteps) {
 		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> immediatePredecessors = CompilerUtil.computeImmediatePredecessors(recursingSteps);
 		for (@NonNull PartitionAnalysis partitionAnalysis : recursingSteps) {
 			Set<@NonNull PartitionAnalysis> predecessors = immediatePredecessors.get(partitionAnalysis);
@@ -77,7 +78,7 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 	}
 
 	@Override
-	protected @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> createPartitionSchedule() {
+	protected @NonNull List<@NonNull Concurrency> createPartitionSchedule() {
 		assert partitionAnalyses.equals(originalPartitionAnalysis2predecessors.keySet());
 		//
 		// Analyzing predecessor partitions is unhelpful since they are cyclic.
@@ -201,7 +202,7 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 		//
 		//	Append the baseCases, then the recursingCzases in dependency order and finally the recursingCases to the schedule.
 		//
-		List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule = new ArrayList<>();
+		List<@NonNull Concurrency> partitionSchedule = new ArrayList<>();
 		appendConcurrency(partitionSchedule, baseCases);		// Maybe empty for recursingSteps-only cycles
 		if (recursingSteps.size() <= 1) {
 			appendConcurrency(partitionSchedule, recursingSteps);

@@ -10,12 +10,11 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner;
 
-import java.util.Set;
-
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
 
 public interface CompositePartitionAnalysis extends PartitionAnalysis
 {
 	@NonNull Iterable<@NonNull PartitionAnalysis>  getPartitionAnalyses();
-	@NonNull Iterable<@NonNull Set<@NonNull PartitionAnalysis>> getPartitionSchedule();
+	@NonNull Iterable<@NonNull Concurrency> getPartitionSchedule();
 }

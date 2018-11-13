@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -34,7 +33,6 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.AbstractTransformationAnalys
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.ConcurrentPartitionMerger;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.merger.SequentialPartitionMerger;
-import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.RootPartitionAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.StandardLibraryHelper;
@@ -422,10 +420,6 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		}
 	} */
 
-	private @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> mergeSequentialPartitions(@NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule) {
-		return partitionSchedule;
-	}
-
 	protected @NonNull PartitionedTransformationAnalysis partition(ScheduleManager scheduleManager, @NonNull RootRegion rootRegion, @NonNull Iterable<? extends @NonNull Region> activeRegions) throws CompilerChainException {
 		AbstractTransformationAnalysis transformationAnalysis = scheduleManager.getTransformationAnalysis(rootRegion);
 		PartitionedTransformationAnalysis partitionedTransformationAnalysis = transformationAnalysis.partition(problemHandler, activeRegions);
@@ -482,7 +476,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		RootPartition rootPartition = rootPartitionAnalysis.getPartition();
 		RootRegion rootRegion = rootPartitionAnalysis.getRootRegion();
 		ConnectionManager connectionManager = scheduleManager.getConnectionManager();
-		List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule = rootPartitionAnalysis.getPartitionSchedule();
+		List<@NonNull Concurrency> partitionSchedule = rootPartitionAnalysis.getPartitionSchedule();
 		//
 		//	Create a connection between each consumer and the corresponding introducer/producer.
 		//
@@ -496,9 +490,9 @@ public class QVTs2QVTs extends QVTimperativeHelper
 		partitionedTransformationAnalysis.analyzePartitionEdges(partitionSchedule);
 		List<Region> activeRegions = rootRegion.getActiveRegions();
 		activeRegions.clear();
-		List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule1 = ConcurrentPartitionMerger.merge(partitionedTransformationAnalysis, rootPartitionAnalysis.getPartitionSchedule());
-		List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule2 = SequentialPartitionMerger.merge(partitionedTransformationAnalysis, partitionSchedule1);
-		List<@NonNull Set<@NonNull PartitionAnalysis>> mergedPartitionSchedule = partitionSchedule2;
+		List<@NonNull Concurrency> partitionSchedule1 = ConcurrentPartitionMerger.merge(partitionedTransformationAnalysis, rootPartitionAnalysis.getPartitionSchedule());
+		List<@NonNull Concurrency> partitionSchedule2 = SequentialPartitionMerger.merge(partitionedTransformationAnalysis, partitionSchedule1);
+		List<@NonNull Concurrency> mergedPartitionSchedule = partitionSchedule2;
 		//
 		//	Identify the input models.
 		//

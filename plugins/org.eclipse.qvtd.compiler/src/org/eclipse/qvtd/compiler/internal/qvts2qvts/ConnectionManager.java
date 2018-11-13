@@ -109,9 +109,9 @@ public class ConnectionManager
 	/**
 	 * Create the Passed and Used Connections between all introducers and their corresponding consuming nodes.
 	 */
-	public void createConnections(@NonNull RootRegion rootRegion, @NonNull Iterable<@NonNull ? extends Iterable<@NonNull PartitionAnalysis>> partitionSchedule) {
+	public void createConnections(@NonNull RootRegion rootRegion, @NonNull Iterable<@NonNull Concurrency> partitionSchedule) {
 		Set<@NonNull Region> regions = new HashSet<>();
-		for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrency : partitionSchedule) {
+		for (@NonNull Concurrency concurrency : partitionSchedule) {
 			for (@NonNull PartitionAnalysis partitionAnalysis : concurrency) {
 				regions.add(QVTscheduleUtil.getRegion(partitionAnalysis.getPartition()));
 			}

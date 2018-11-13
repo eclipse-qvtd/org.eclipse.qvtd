@@ -55,6 +55,7 @@ import org.eclipse.qvtd.compiler.CompilerChainException;
 import org.eclipse.qvtd.compiler.CompilerProblem;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.PartitionProblem;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionProblem;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.CompositePartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.TransformationPartitioner;
@@ -339,7 +340,7 @@ public class CompilerUtil extends QVTscheduleUtil
 	 * concurrently, after their preceding concurrencies and before their subsequent concurrencies. The index in the
 	 * sequence corresponds to the critical path length/depth from the earliest predecessor to the concurrent element.
 	 */
-	public static @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> computeParallelSchedule(	// FIXME this can be much faster with bit masks
+	public static @NonNull List<@NonNull Concurrency> computeParallelSchedule(	// FIXME this can be much faster with bit masks
 			@NonNull Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partition2predecessors) {
 		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> partition2successors = CompilerUtil.computeTransitiveSuccessors(partition2predecessors);
 		//
@@ -347,7 +348,7 @@ public class CompilerUtil extends QVTscheduleUtil
 		//	all partitions are considered, on subsequent iterations only successors of just scheduled partitions
 		//	are reconsidered.
 		//
-		List<@NonNull Set<@NonNull PartitionAnalysis>> parallelSchedule = new ArrayList<>();
+		List<@NonNull Concurrency> parallelSchedule = new ArrayList<>();
 		Set<@NonNull PartitionAnalysis> scheduledPartitions = new HashSet<>();
 		Set<@NonNull PartitionAnalysis> scheduleCandidates = new HashSet<>(partition2predecessors.keySet());
 		while (!scheduleCandidates.isEmpty()) {
@@ -370,7 +371,7 @@ public class CompilerUtil extends QVTscheduleUtil
 			}
 			assert !toSchedule.isEmpty();
 			nextScheduleCandidates.removeAll(toSchedule);
-			parallelSchedule.add(toSchedule);
+			parallelSchedule.add(new Concurrency(toSchedule));
 			scheduledPartitions.addAll(toSchedule);
 			scheduleCandidates = nextScheduleCandidates;
 		}

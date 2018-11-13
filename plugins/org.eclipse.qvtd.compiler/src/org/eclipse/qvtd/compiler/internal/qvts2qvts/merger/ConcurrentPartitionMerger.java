@@ -20,6 +20,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedConditionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.AbstractCompositePartitionAnalysis;
@@ -36,19 +37,16 @@ import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
-
 /**
  * ConcurrentPartitionMerger replaces partitions that occur at the same depth in the parallel schedule and
  * which have identical failure mechanisms by an equivalent merged partition..
  */
 public class ConcurrentPartitionMerger extends AbstractMerger
 {
-	public static @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> merge(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule) {
+	public static @NonNull List<@NonNull Concurrency> merge(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull List<@NonNull Concurrency> partitionSchedule) {
 		for (int i = 0; i < partitionSchedule.size(); i++) {
-			Iterable<@NonNull PartitionAnalysis> oldConcurrency = partitionSchedule.get(i);
-			if (Iterables.size(oldConcurrency) > 1) {
+			Concurrency oldConcurrency = partitionSchedule.get(i);
+			if (oldConcurrency.size() > 1) {
 				Map<@NonNull Region, @NonNull List<@NonNull PartitionAnalysis>> region2partitions = new HashMap<>();
 				for (@NonNull PartitionAnalysis partitionAnalysis : oldConcurrency) {
 					Partition partition = partitionAnalysis.getPartition();
@@ -62,7 +60,7 @@ public class ConcurrentPartitionMerger extends AbstractMerger
 						partitions.add(partitionAnalysis);
 					}
 				}
-				Set<@NonNull PartitionAnalysis> newConcurrency = null;
+				Concurrency newConcurrency = null;
 				for (@NonNull Region region : region2partitions.keySet()) {
 					if (!(region instanceof CyclicMappingRegion)) {
 						List<@NonNull PartitionAnalysis> partitions = region2partitions.get(region);
@@ -72,7 +70,7 @@ public class ConcurrentPartitionMerger extends AbstractMerger
 							Map<@NonNull PartitionAnalysis, @Nullable PartitionAnalysis> old2new = concurrentMerger.merge();
 							if (old2new != null) {
 								if (newConcurrency == null) {
-									newConcurrency = Sets.newHashSet(oldConcurrency);
+									newConcurrency = new Concurrency(oldConcurrency);
 								}
 								for (@NonNull PartitionAnalysis oldPartition : old2new.keySet()) {
 									newConcurrency.remove(oldPartition);
@@ -160,7 +158,8 @@ public class ConcurrentPartitionMerger extends AbstractMerger
 					System.out.println("Concurrent Merge " + merges);
 					BasicPartition firstPartition = merges.get(0).getPartition();
 					CompositePartition owningCompositePartition = firstPartition.getOwningCompositePartition();
-					AbstractCompositePartitionAnalysis<CompositePartition> compositePartitionAnalysis = (AbstractCompositePartitionAnalysis<CompositePartition>)partitionedTransformationAnalysis.getPartitionAnalysis(owningCompositePartition);
+					assert owningCompositePartition != null;
+					AbstractCompositePartitionAnalysis<?> compositePartitionAnalysis = (AbstractCompositePartitionAnalysis<?>)partitionedTransformationAnalysis.getPartitionAnalysis(owningCompositePartition);
 					List<MappingPartition> ownedMappingPartitions = owningCompositePartition.getOwnedMappingPartitions();
 					MergedPartitionFactory mergedPartitionFactory = new MergedPartitionFactory(scheduleManager, QVTscheduleUtil.getRegion(firstPartition), merges);
 					BasicPartitionAnalysis mergedPartitionAnalysis = mergedPartitionFactory.createPartitionAnalysis(partitionedTransformationAnalysis);

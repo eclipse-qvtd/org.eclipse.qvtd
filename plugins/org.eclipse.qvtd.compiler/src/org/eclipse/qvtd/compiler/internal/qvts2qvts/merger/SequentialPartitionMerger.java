@@ -19,6 +19,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedConditionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.AbstractCompositePartitionAnalysis;
@@ -52,7 +53,7 @@ import com.google.common.collect.Iterables;
  */
 public class SequentialPartitionMerger extends AbstractMerger
 {
-	public static @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> merge(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull List<@NonNull Set<@NonNull PartitionAnalysis>> partitionSchedule) {
+	public static @NonNull List<@NonNull Concurrency> merge(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull List<@NonNull Concurrency> partitionSchedule) {
 		RootPartitionAnalysis rootPartitionAnalysis = partitionedTransformationAnalysis.getRootPartitionAnalysis();
 		ScheduleManager scheduleManager = partitionedTransformationAnalysis.getScheduleManager();
 		for (@NonNull Connection connection : QVTscheduleUtil.getOwnedConnections(rootPartitionAnalysis.getRootRegion())) {
@@ -123,7 +124,8 @@ public class SequentialPartitionMerger extends AbstractMerger
 		Map<@NonNull PartitionAnalysis, @Nullable PartitionAnalysis> old2new = new HashMap<>();
 		BasicPartition firstPartition = mergeablePartitionAnalyses.get(0).getPartition();
 		CompositePartition owningCompositePartition = firstPartition.getOwningCompositePartition();
-		AbstractCompositePartitionAnalysis<CompositePartition> compositePartitionAnalysis = (AbstractCompositePartitionAnalysis<CompositePartition>)partitionedTransformationAnalysis.getPartitionAnalysis(owningCompositePartition);
+		assert owningCompositePartition != null;
+		AbstractCompositePartitionAnalysis<?> compositePartitionAnalysis = (AbstractCompositePartitionAnalysis<?>)partitionedTransformationAnalysis.getPartitionAnalysis(owningCompositePartition);
 		List<MappingPartition> ownedMappingPartitions = owningCompositePartition.getOwnedMappingPartitions();
 		MergedPartitionFactory mergedPartitionFactory = new MergedPartitionFactory(scheduleManager, QVTscheduleUtil.getRegion(firstPartition), mergeablePartitionAnalyses);
 		BasicPartitionAnalysis mergedPartitionAnalysis = mergedPartitionFactory.createPartitionAnalysis(partitionedTransformationAnalysis);
