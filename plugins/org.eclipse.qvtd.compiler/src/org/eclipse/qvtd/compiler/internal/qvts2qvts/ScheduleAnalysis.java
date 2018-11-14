@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
@@ -408,6 +409,32 @@ public class ScheduleAnalysis
 		callTreeBuilder.buildTree(partitionSchedule);
 	}
 
+	private void checkPassNumbers(@NonNull Connection connection) {
+		int firstPass = connection.getFirstPass();
+		int lastPass = connection.getLastPass();
+		for (@NonNull Partition sourcePartition : connection.getSourcePartitions()) {
+			//	assert sourcePartition.getFirstPass() <= firstPass;
+			assert sourcePartition.getLastPass() <= lastPass;
+		}
+		for (@NonNull Partition targetPartition : connection.getTargetPartitions()) {
+			//	boolean isCyclic = false;
+			//	for (EObject eObject = targetPartition; eObject instanceof Partition; eObject = eObject.eContainer()) {
+			//		if (eObject instanceof CyclicPartition) {
+			//			isCyclic = true;
+			//			break;
+			//		}
+			//	}
+			//	if (isCyclic) {
+			//	assert firstPass <= targetPartition.getFirstPass();
+			assert lastPass <= targetPartition.getLastPass();
+			//	}
+			//	else {
+			//		assert firstPass < targetPartition.getFirstPass();
+			//		assert lastPass < targetPartition.getLastPass();
+			//	}
+		}
+	}
+
 	public @NonNull ConnectionManager getConnectionManager() {
 		return connectionManager;
 	}
@@ -458,7 +485,7 @@ public class ScheduleAnalysis
 		return targetPartitions;
 	}
 
-	private void propagateIndexes(@NonNull Connection connection) {
+	private void propagatePassNumbers(@NonNull Connection connection) {
 		List<@NonNull Integer> connectionIndexes = connection.getPasses();
 		//	assert connectionIndexes.size() > 0;
 		if (connectionIndexes.size() > 0) {			// Empty for dead inputs
@@ -475,12 +502,12 @@ public class ScheduleAnalysis
 					for (@NonNull Connection targetConnection : outgoingConnections) {
 						boolean propagateThroughConnection = false;
 						for (int connectionIndex : connectionIndexes) {
-							if (targetConnection.addPass(connectionIndex)) {
+							if ((connectionIndex > invocationIndex) && targetConnection.addPass(connectionIndex)) {
 								propagateThroughConnection = true;
 							}
 						}
 						if (propagateThroughConnection) {
-							propagateIndexes(targetConnection);
+							propagatePassNumbers(targetConnection);
 						}
 					}
 				}
@@ -529,9 +556,12 @@ public class ScheduleAnalysis
 		 * Propagate the additional connection indexes to their outgoing connections.
 		 */
 		for (@NonNull Connection connection : getConnections()) {
-			propagateIndexes(connection);
+			propagatePassNumbers(connection);
 		}
 		scheduleManager.writeDebugGraphs("7-passes", false, true, false);
+		for (@NonNull Connection connection : getConnections()) {
+			checkPassNumbers(connection);
+		}
 		buildCallTree(partitionSchedule);
 	}
 
