@@ -556,7 +556,21 @@ public class ScheduleAnalysis
 		assert cycleDepth == 0;
 		scheduleManager.writeDebugGraphs("6-pass", false, true, false);
 		/**
+<<<<<<< Upstream, based on master
 		 * Propagate the partition passnumbers through their outgoing connections.
+=======
+		 * Ensure connection responds to all sources.
+		 */
+		for (@NonNull Connection connection : getConnections()) {
+			for (@NonNull Partition sourcePartition : getSourcePartitions(connection)) {
+				for (int sourcePass : sourcePartition.getPasses()) {
+					connection.addPass(sourcePass);
+				}
+			}
+		}
+		/**
+		 * Propagate the additional connection indexes to their outgoing connections.
+>>>>>>> a70c1c9 wip
 		 */
 		Set<@NonNull Connection> changedConnections = Sets.newHashSet(getConnections());
 		while (!changedPartitions.isEmpty()) {

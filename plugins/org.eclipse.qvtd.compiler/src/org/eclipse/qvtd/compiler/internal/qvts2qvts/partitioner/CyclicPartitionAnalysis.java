@@ -65,7 +65,21 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 	/**
 	 * Return an acyclic schedule for the recursingSteps by ignoring the baseCase/recursingCase partitions that
 	 * cause the cycles.
+	 * @param recursiveCases
 	 */
+	protected @NonNull Set<@NonNull PartitionAnalysis> computeBaseRecursingSteps(@NonNull Set<@NonNull PartitionAnalysis> recursingSteps, @NonNull Set<@NonNull PartitionAnalysis> badPredecessors) {
+		Set<@NonNull PartitionAnalysis> baseRecursingSteps = new HashSet<>();
+		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> immediatePredecessors = CompilerUtil.computeImmediatePredecessors(recursingSteps);
+		for (@NonNull PartitionAnalysis partitionAnalysis : recursingSteps) {
+			Set<@NonNull PartitionAnalysis> predecessors = immediatePredecessors.get(partitionAnalysis);
+			assert predecessors != null;
+			if (!predecessors.removeAll(badPredecessors)) {
+				baseRecursingSteps.add(partitionAnalysis);
+			}
+		}
+		return baseRecursingSteps;
+	}
+
 	protected @NonNull List<@NonNull Concurrency> computeRecursiveSchedule(@NonNull Set<@NonNull PartitionAnalysis> recursingSteps) {
 		Map<@NonNull PartitionAnalysis, @NonNull Set<@NonNull PartitionAnalysis>> immediatePredecessors = CompilerUtil.computeImmediatePredecessors(recursingSteps);
 		for (@NonNull PartitionAnalysis partitionAnalysis : recursingSteps) {
@@ -204,15 +218,31 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 		//
 		List<@NonNull Concurrency> partitionSchedule = new ArrayList<>();
 		appendConcurrency(partitionSchedule, baseCases);		// Maybe empty for recursingSteps-only cycles
-		if (recursingSteps.size() <= 1) {
-			appendConcurrency(partitionSchedule, recursingSteps);
-		}
-		else {
-			for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrency : computeRecursiveSchedule(recursingSteps)) {
-				appendConcurrency(partitionSchedule, concurrency);
+
+		Set<@NonNull PartitionAnalysis> residualSteps = null;
+		if (recursingSteps.size() > 0) {
+			Set<@NonNull PartitionAnalysis> baseRecursingSteps = computeBaseRecursingSteps(recursingSteps, recursiveCases);
+			residualSteps = new HashSet<>(recursingSteps);
+			if (baseRecursingSteps.size() > 0) {
+				residualSteps.removeAll(baseRecursingSteps);
+				if (baseRecursingSteps.size() <= 1) {
+					appendConcurrency(partitionSchedule, baseRecursingSteps);
+				}
+				else {
+					List<@NonNull Concurrency> baseRecursiveSchedule = computeRecursiveSchedule(baseRecursingSteps);
+					for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrency : baseRecursiveSchedule) {
+						appendConcurrency(partitionSchedule, concurrency);
+					}
+				}
 			}
 		}
 		appendConcurrency(partitionSchedule, recursiveCases);	// Maybe empty for recursingSteps-only cycles
+		if ((residualSteps != null) && !residualSteps.isEmpty()) {
+			List<@NonNull Concurrency> residualSchedule = computeRecursiveSchedule(residualSteps);
+			for (@NonNull Iterable<@NonNull PartitionAnalysis> concurrency : residualSchedule) {
+				appendConcurrency(partitionSchedule, concurrency);
+			}
+		}
 		partitionSchedule.get(0).setCycleStart();
 		partitionSchedule.get(partitionSchedule.size()-1).setCycleEnd();
 		return partitionSchedule;

@@ -250,6 +250,9 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 
 	@Override
 	public boolean addPass(int passNumber) {
+		if ("mapHelper_Attribute_qvtr«speculated»".equals(name)) {
+			getClass();
+		}
 		List<@NonNull Integer> passes2 = ClassUtil.nullFree(getPasses());
 		if (passes2.size() > 0) {
 			assert passNumber > passes2.get(0);		// Should not move earlier, or repeatedly first
