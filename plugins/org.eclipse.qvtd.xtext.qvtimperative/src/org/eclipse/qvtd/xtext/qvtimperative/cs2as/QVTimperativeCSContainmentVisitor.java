@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -32,6 +33,7 @@ import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
+import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
@@ -409,7 +411,14 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 	@Override
 	public Continuation<?> visitVariableCS(@NonNull VariableCS csElement) {
-		refreshNamedElement(LoopVariable.class, QVTimperativePackage.Literals.LOOP_VARIABLE, csElement);
-		return null;
+		EReference eContainmentFeature = csElement.eContainmentFeature();
+		if (eContainmentFeature == EssentialOCLCSPackage.Literals.NAVIGATING_ARG_CS__OWNED_CO_ITERATOR) {
+			//			refreshNamedElement(Variable.class, PivotPackage.Literals.VARIABLE, csElement);
+			return super.visitVariableCS(csElement);
+		}
+		else {
+			refreshNamedElement(LoopVariable.class, QVTimperativePackage.Literals.LOOP_VARIABLE, csElement);
+			return null;
+		}
 	}
 }
