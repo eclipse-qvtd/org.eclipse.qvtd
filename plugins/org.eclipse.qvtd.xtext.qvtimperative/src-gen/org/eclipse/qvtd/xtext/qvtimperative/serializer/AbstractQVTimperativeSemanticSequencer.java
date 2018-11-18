@@ -189,6 +189,10 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 					sequence_ScopeNameCS(context, (PathNameCS) semanticObject);
 					return;
 				}
+				else if (rule == grammarAccess.getSimplePathNameCSRule()) {
+					sequence_SimplePathNameCS(context, (PathNameCS) semanticObject);
+					return;
+				}
 				else if (rule == grammarAccess.getURIPathNameCSRule()) {
 					sequence_URIPathNameCS(context, (PathNameCS) semanticObject);
 					return;
@@ -441,8 +445,15 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 				sequence_UnlimitedNaturalLiteralExpCS(context, (UnlimitedNaturalLiteralExpCS) semanticObject);
 				return;
 			case EssentialOCLCSPackage.VARIABLE_CS:
-				sequence_MappingIteratorCS(context, (VariableCS) semanticObject);
-				return;
+				if (rule == grammarAccess.getCoIteratorVariableCSRule()) {
+					sequence_CoIteratorVariableCS(context, (VariableCS) semanticObject);
+					return;
+				}
+				else if (rule == grammarAccess.getMappingIteratorCSRule()) {
+					sequence_MappingIteratorCS(context, (VariableCS) semanticObject);
+					return;
+				}
+				else break;
 			}
 		else if (epackage == QVTbaseCSPackage.eINSTANCE)
 			switch (semanticObject.eClass().getClassifierID()) {

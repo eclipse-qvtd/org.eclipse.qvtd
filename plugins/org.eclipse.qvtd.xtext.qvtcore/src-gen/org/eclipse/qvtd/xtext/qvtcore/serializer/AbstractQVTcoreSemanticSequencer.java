@@ -74,6 +74,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.TupleLiteralPartCS;
 import org.eclipse.ocl.xtext.essentialoclcs.TypeLiteralExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.TypeNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.UnlimitedNaturalLiteralExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.xtext.qvtbase.serializer.QVTbaseSemanticSequencer;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QualifiedPackageCS;
@@ -178,6 +179,10 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 				}
 				else if (rule == grammarAccess.getScopeNameCSRule()) {
 					sequence_ScopeNameCS(context, (PathNameCS) semanticObject);
+					return;
+				}
+				else if (rule == grammarAccess.getSimplePathNameCSRule()) {
+					sequence_SimplePathNameCS(context, (PathNameCS) semanticObject);
 					return;
 				}
 				else if (rule == grammarAccess.getURIPathNameCSRule()) {
@@ -430,6 +435,9 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTbaseSemanticSe
 				else break;
 			case EssentialOCLCSPackage.UNLIMITED_NATURAL_LITERAL_EXP_CS:
 				sequence_UnlimitedNaturalLiteralExpCS(context, (UnlimitedNaturalLiteralExpCS) semanticObject);
+				return;
+			case EssentialOCLCSPackage.VARIABLE_CS:
+				sequence_CoIteratorVariableCS(context, (VariableCS) semanticObject);
 				return;
 			}
 		else if (epackage == QVTbaseCSPackage.eINSTANCE)

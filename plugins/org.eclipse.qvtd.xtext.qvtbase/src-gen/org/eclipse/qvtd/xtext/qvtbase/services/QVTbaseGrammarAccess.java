@@ -2354,6 +2354,16 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 		return getURIFirstPathElementCSAccess().getRule();
 	}
 
+	//SimplePathNameCS base::PathNameCS:
+	//	ownedPathElements+=FirstPathElementCS;
+	public EssentialOCLGrammarAccess.SimplePathNameCSElements getSimplePathNameCSAccess() {
+		return gaEssentialOCL.getSimplePathNameCSAccess();
+	}
+
+	public ParserRule getSimplePathNameCSRule() {
+		return getSimplePathNameCSAccess().getRule();
+	}
+
 	////---------------------------------------------------------------------
 	// //  Types
 	//
@@ -2776,8 +2786,10 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 	///* A navigating argument is a generalized rule for the first argument in a round bracket clause. This is typically the first operation
 	// * parameter or an iterator. */
 	//NavigatingArgCS:
-	//	ownedNameExpression=NavigatingArgExpCS (':' ownedType=TypeExpCS ('=' ownedInitExpression=ExpCS)? | (':'
-	//	ownedType=TypeExpCS)? 'in' ownedInitExpression=ExpCS)? | ':' ownedType=TypeExpCS;
+	//	ownedNameExpression=NavigatingArgExpCS ('<-' ownedCoIterator=CoIteratorVariableCS ('=' ownedInitExpression=ExpCS)? |
+	//	':' ownedType=TypeExpCS ('<-' ownedCoIterator=CoIteratorVariableCS)? ('=' ownedInitExpression=ExpCS)? | (':'
+	//	ownedType=TypeExpCS)? ('<-' ownedCoIterator=CoIteratorVariableCS)? 'in' ownedInitExpression=ExpCS)? | ':'
+	//	ownedType=TypeExpCS;
 	public EssentialOCLGrammarAccess.NavigatingArgCSElements getNavigatingArgCSAccess() {
 		return gaEssentialOCL.getNavigatingArgCSAccess();
 	}
@@ -2804,8 +2816,10 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 	///* A navigating comma argument is a generalized rule for non-first argument in a round bracket clause. These are typically non-first operation
 	// * parameters or a second iterator. */
 	//NavigatingCommaArgCS NavigatingArgCS:
-	//	prefix=',' ownedNameExpression=NavigatingArgExpCS (':' ownedType=TypeExpCS ('=' ownedInitExpression=ExpCS)? | (':'
-	//	ownedType=TypeExpCS)? 'in' ownedInitExpression=ExpCS)?;
+	//	prefix=',' ownedNameExpression=NavigatingArgExpCS ('<-' ownedCoIterator=CoIteratorVariableCS ('='
+	//	ownedInitExpression=ExpCS)? | ':' ownedType=TypeExpCS ('<-' ownedCoIterator=CoIteratorVariableCS)? ('='
+	//	ownedInitExpression=ExpCS)? | (':' ownedType=TypeExpCS)? ('<-' ownedCoIterator=CoIteratorVariableCS)? 'in'
+	//	ownedInitExpression=ExpCS)?;
 	public EssentialOCLGrammarAccess.NavigatingCommaArgCSElements getNavigatingCommaArgCSAccess() {
 		return gaEssentialOCL.getNavigatingCommaArgCSAccess();
 	}
@@ -2837,6 +2851,16 @@ public class QVTbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 	public ParserRule getNavigatingArgExpCSRule() {
 		return getNavigatingArgExpCSAccess().getRule();
+	}
+
+	//CoIteratorVariableCS VariableCS:
+	//	name=UnrestrictedName (':' ownedType=TypeExpCS)?;
+	public EssentialOCLGrammarAccess.CoIteratorVariableCSElements getCoIteratorVariableCSAccess() {
+		return gaEssentialOCL.getCoIteratorVariableCSAccess();
+	}
+
+	public ParserRule getCoIteratorVariableCSRule() {
+		return getCoIteratorVariableCSAccess().getRule();
 	}
 
 	//IfExpCS:
