@@ -50,7 +50,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage;
 /**
  * QVTcoreDomainUsageAnalysis provides shared functionality for the overall analysis and for nested operational analyses.
  */
-public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTcoreVisitor<org.eclipse.qvtd.pivot.qvtschedule.utilities.DomainUsage>
+public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTcoreVisitor<org.eclipse.qvtd.pivot.qvtschedule.utilities.@NonNull DomainUsage>
 {
 	public QVTcoreDomainUsageAnalysis(@NonNull EnvironmentFactory environmentFactory) {
 		super(environmentFactory);
