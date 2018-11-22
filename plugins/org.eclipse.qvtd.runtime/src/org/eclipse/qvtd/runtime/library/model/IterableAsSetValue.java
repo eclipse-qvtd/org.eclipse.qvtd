@@ -25,6 +25,7 @@ import org.eclipse.ocl.pivot.internal.values.ValueImpl;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.CollectionValue;
 import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.IterableValue;
 import org.eclipse.ocl.pivot.values.OrderedCollectionValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
@@ -65,6 +66,11 @@ class IterableAsSetValue<T> extends ValueImpl implements SetValue
 	@Override
 	public <T1> @Nullable List<T1> asEcoreObjects(@NonNull IdResolver idResolver, @Nullable Class<T1> instanceClass) {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public @NonNull IterableValue asIterableValue() {
+		return this;
 	}
 
 	@Override
