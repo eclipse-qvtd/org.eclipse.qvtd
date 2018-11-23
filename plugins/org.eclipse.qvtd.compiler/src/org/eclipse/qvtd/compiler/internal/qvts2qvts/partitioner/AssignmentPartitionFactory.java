@@ -36,10 +36,10 @@ public class AssignmentPartitionFactory extends AbstractSimplePartitionFactory
 	@Override
 	public @NonNull BasicPartitionAnalysis createPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis) {
 		ReachabilityForest reachabilityForest = createReachabilityForest();
-		String name = computeName("edge-" + QVTscheduleUtil.getName(realizedEdge));
+		int partitionNumber = region.getNextPartitionNumber();
+		String name = computeName("edge" + partitionNumber + "-" + QVTscheduleUtil.getName(realizedEdge));
 		Iterable<@NonNull Node> headNodes = mappingPartitioner.getTraceNodes();
 		BasicPartition partition = createBasicPartition(name, headNodes);
-		int partitionNumber = region.getNextPartitionNumber();
 		String namePrefix = "«edge" + partitionNumber + "»";
 		String symbolSuffix = "_p" + partitionNumber;
 		BasicPartitionAnalysis basicPartitionAnalysis = new BasicPartitionAnalysis(partitionedTransformationAnalysis, partition, reachabilityForest, namePrefix, symbolSuffix);
