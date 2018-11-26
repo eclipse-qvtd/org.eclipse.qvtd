@@ -15,11 +15,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
+import org.eclipse.ocl.pivot.internal.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
-import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.model.QVTbaseLibrary;
 
-public class QVTbaseEnvironmentFactory extends AbstractEnvironmentFactory
+public class QVTbaseEnvironmentFactory extends PivotEnvironmentFactory
 {
 	public static abstract class CreateStrategy
 	{
