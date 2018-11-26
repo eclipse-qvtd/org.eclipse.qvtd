@@ -871,10 +871,6 @@ public class RelationAnalysis extends RuleAnalysis
 				return null;
 			}
 		}
-		String name = variable.getName();
-		if ("qvtrThisVariable".equals(name)) {
-			getClass();
-		}
 		ExpressionSynthesizer expressionSynthesizer2 = expressionSynthesizer;
 		if (variable.isIsRequired()) {
 			expressionSynthesizer2 = expressionSynthesizer.getRequiredExpressionSynthesizer();
@@ -883,7 +879,7 @@ public class RelationAnalysis extends RuleAnalysis
 		assert bestInitNode != null;
 		if (variable.isIsRequired()) {
 			assert bestInitNode.isRequired();
-			//	assert bestInitNode.isMatched();
+			//	assert bestInitNode.isMatched();  --not satisfied by a cast to-non-null ATL2QVTr local variable
 		}
 		/*		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {
 			if (QVTbaseUtil.isIdentification(((OperationCallExp)ownedInit).getReferredOperation())) {

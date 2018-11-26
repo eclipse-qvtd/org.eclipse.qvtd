@@ -81,6 +81,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.CollectionLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.EnumLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.MapLiteralNode;
+import org.eclipse.qvtd.pivot.qvtschedule.MappingNode;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -305,12 +306,12 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		return navigationEdge;
 	}
 
-	protected @NonNull Node createNullLiteralNode(@NonNull NullLiteralExp nullLiteralExp) {
-		return context.createNullLiteralNode(isUnconditional(), nullLiteralExp);
+	protected @NonNull Node createNullLiteralNode() {
+		return context.createNullLiteralNode(isUnconditional(), null);
 	}
 
-	protected @NonNull Node createNullLiteralNode2() {
-		return context.createNullLiteralNode(isUnconditional(), null);
+	protected @NonNull Node createNullLiteralNode(@NonNull NullLiteralExp nullLiteralExp) {
+		return context.createNullLiteralNode(isUnconditional(), nullLiteralExp);
 	}
 
 	protected @NonNull Node createNumericLiteralNode(@NonNull Number numberValue, @NonNull NumericLiteralExp numericLiteralExp) {
@@ -591,17 +592,17 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		assert !(unsafeType instanceof MapType);
 		if (unsafeType instanceof CollectionType)  {
 			Operation excludingOperation = standardLibraryHelper.getCollectionExcludingOperation();
-			Node nullNode = createNullLiteralNode2();
+			Node nullNode = createNullLiteralNode();
 			Node excludingNode = createOperationCallNode2("safe"+navigationNode.getName(), QVTscheduleUtil.getNodeRole(navigationNode), excludingOperation, QVTscheduleUtil.getClassDatum(navigationNode), navigationNode, nullNode);
 			return excludingNode;
 		}
 		else {
 			Operation equalsOperation = standardLibraryHelper.getOclAnyEqualsOperation();
-			Node nullNode1 = createNullLiteralNode2();
+			Node nullNode1 = createNullLiteralNode();
 			Node isNonNullNode = createOperationCallNode2("equals"/*"isSafe"+navigationNode.getName()*/, QVTscheduleUtil.getNodeRole(navigationNode), equalsOperation, scheduleManager.getBooleanClassDatum(), sourceNode, nullNode1);
 			createOperationSelfEdge(sourceNode, QVTbaseUtil.getType(QVTbaseUtil.getOwnedSource(callExp)), isNonNullNode);
 			createOperationParameterEdge(nullNode1, QVTbaseUtil.getOwnedParameter(equalsOperation, 0), -1, isNonNullNode);
-			Node nullNode2 = createNullLiteralNode2();
+			Node nullNode2 = createNullLiteralNode();
 			Operation ifOperation = qvtbaseLibraryHelper.getIfOperation();
 			@NonNull Node [] sourceAndArgumentNodes = new @NonNull Node[] { isNonNullNode, navigationNode, nullNode2 };
 			String nodeName = QVTbaseUtil.getName(ifOperation);
@@ -961,6 +962,12 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		String name = "a" + castType.getName();
 		//		assert name != null;
 		Node castNode = createStepNode(name, operationCallExp, sourceNode);
+		if (castIsRequired) {
+			castNode.setRequired();
+			if ((castNode instanceof MappingNode) && sourceNode.isMatched()) {
+				((MappingNode)castNode).setMatched(true);
+			}
+		}
 		castEdge = createCastEdge(sourceNode, castProperty, castNode);
 		OCLExpression argument = operationCallExp.getOwnedArguments().get(0);
 		if (!(argument instanceof TypeExp)) {
