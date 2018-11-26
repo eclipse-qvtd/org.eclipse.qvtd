@@ -251,9 +251,9 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 		assert isNew(edge);
 		Property property = QVTscheduleUtil.getProperty(edge);
 		assert property != scheduleManager.getStandardLibraryHelper().getOclContainerProperty();		// oclContainer is not assignable
-		if (property.toString().contains("toA1") || property.toString().contains("ownsB")) {
-			property.toString();
-		}
+		//	if (property.toString().contains("toA1") || property.toString().contains("ownsB")) {
+		//		property.toString();
+		//	}
 		PropertyDatum propertyDatum = scheduleManager.getPropertyDatum(edge);
 		TracePropertyPartitionAnalysis producedTraceAnalysis = partitionedTransformationAnalysis.addProducer(propertyDatum, this);
 		List<@NonNull TracePropertyPartitionAnalysis> producedTracePropertyAnalyses2 = producedTracePropertyAnalyses;

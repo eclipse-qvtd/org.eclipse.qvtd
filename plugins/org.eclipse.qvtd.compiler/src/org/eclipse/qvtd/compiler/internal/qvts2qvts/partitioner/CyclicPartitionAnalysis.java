@@ -19,11 +19,18 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.Edge;
+import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.Node;
+import org.eclipse.qvtd.pivot.qvtschedule.Partition;
+import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
 
 public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<CyclicPartition>
 {
@@ -60,6 +67,47 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 		super(partitionedTransformationAnalysis, cyclicPartition, partitionAnalysis2predecessors);
 		this.externalPredecessors = externalPredecessors;
 		partitionedTransformationAnalysis.addPartitionAnalysis(this);
+
+
+
+		Set<@NonNull PartitionAnalysis> cyclicPartitionAnalyses = partitionAnalysis2predecessors.keySet();
+		Set<@NonNull TracePropertyPartitionAnalysis> containmentTracePropertyPartitionAnalyses = new HashSet<>();
+		Set<@NonNull TracePropertyPartitionAnalysis> containerTracePropertyPartitionAnalyses = new HashSet<>();
+		for (@NonNull PartitionAnalysis consumer : cyclicPartitionAnalyses) {
+			Iterable<@NonNull TracePropertyPartitionAnalysis> consumedTracePropertyAnalyses = consumer.getConsumedTracePropertyAnalyses();
+			if (consumedTracePropertyAnalyses != null) {
+				for (@NonNull TracePropertyPartitionAnalysis consumedTracePropertyAnalysis : consumedTracePropertyAnalyses) {
+					PropertyDatum propertyDatum = consumedTracePropertyAnalysis.getPropertyDatum();
+					Property consumedProperty = propertyDatum.getReferredProperty();
+					boolean isContainment = consumedProperty.isIsComposite();
+					Property consumedOppositeProperty = consumedProperty.getOpposite();
+					boolean isContainer = (consumedOppositeProperty != null) && consumedOppositeProperty.isIsComposite();
+					if (isContainment || isContainer) {
+						for (@NonNull PartitionAnalysis producer : consumedTracePropertyAnalysis.getProducers()) {
+							if (cyclicPartitionAnalyses.contains(producer)) {
+								Partition producingPartition = producer.getPartition();
+								for (@NonNull Edge edge : producingPartition.getPartialEdges()) {
+									Node targetNode = QVTscheduleUtil.getTargetNode(edge);
+									if (targetNode.isRealized() && edge.isRealized() && edge.isNavigation()) {
+										NavigableEdge navigableEdge = (NavigableEdge)edge;
+										if (navigableEdge.getProperty() == consumedProperty) {
+											if (isContainment) {
+												containmentTracePropertyPartitionAnalyses.add(consumedTracePropertyAnalysis);
+											}
+											if (isContainer) {
+												containerTracePropertyPartitionAnalyses.add(consumedTracePropertyAnalysis);
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		System.out.println("Containment: " + containmentTracePropertyPartitionAnalyses);
+		System.out.println("Container: " + containerTracePropertyPartitionAnalyses);
 	}
 
 	/**
