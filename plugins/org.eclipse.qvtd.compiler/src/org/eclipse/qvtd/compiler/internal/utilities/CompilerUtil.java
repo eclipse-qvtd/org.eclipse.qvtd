@@ -151,7 +151,7 @@ public class CompilerUtil extends QVTscheduleUtil
 
 	public static void assertNoValidationErrors(@NonNull String prefix, @NonNull Resource resource) {
 		for (EObject eObject : resource.getContents()) {
-			assertNoValidationErrors(prefix, eObject);
+			assertNoValidationErrors(prefix + " of '" + resource.getURI() + "'", eObject);
 		}
 	}
 
@@ -163,7 +163,7 @@ public class CompilerUtil extends QVTscheduleUtil
 			return;
 		}
 		StringBuilder s = new StringBuilder();
-		s.append(children.size() + " validation errors");
+		s.append(string + ": " + children.size() + " validation errors");
 		for (Diagnostic child : children){
 			s.append("\n\t");
 			if (child.getData().size() > 0) {
