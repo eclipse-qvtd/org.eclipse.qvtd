@@ -308,6 +308,13 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		node.setOriginatingElement(ifExp);
 		return node;
 	}
+	public @NonNull IfNode createIfNode2(boolean isMatched, @NonNull String name, @NonNull ClassDatum classDatum, @NonNull Node @NonNull [] argNodes) {
+		Role nodeRole = getOperationNodePhase(region, null, argNodes);
+		IfNode node = QVTscheduleFactory.eINSTANCE.createIfNode();
+		node.initialize(nodeRole, region, name, classDatum);
+		node.setMatched(isMatched);
+		return node;
+	}
 
 	public @NonNull Node createInputNode(@NonNull Role nodeRole, @NonNull String name, @NonNull ClassDatum classDatum) {
 		InputNode node = QVTscheduleFactory.eINSTANCE.createInputNode();
@@ -483,6 +490,18 @@ public class RegionHelper<R extends Region> extends QVTscheduleUtil implements N
 		node.initialize(nodeRole, region, name, scheduleManager.getClassDatum(callExpOrCollectionTemplateExp));
 		node.setMatched(isMatched);
 		node.setOriginatingElement(callExpOrCollectionTemplateExp);
+		node.setReferredOperation(operation);
+		return node;
+	}
+	public @NonNull OperationCallNode createOperationCallNode2(@NonNull Role nodeRole, boolean isMatched, @Nullable String nameHint, @NonNull Operation operation, @NonNull ClassDatum classDatum, @NonNull Node ... argNodes) {
+		String name = nameHint;
+		if (name == null) {
+			name = QVTbaseUtil.getName(operation);
+		}
+		assert nodeRole != null;
+		OperationCallNode node = QVTscheduleFactory.eINSTANCE.createOperationCallNode();
+		node.initialize(nodeRole, region, name, classDatum);
+		node.setMatched(isMatched);
 		node.setReferredOperation(operation);
 		return node;
 	}

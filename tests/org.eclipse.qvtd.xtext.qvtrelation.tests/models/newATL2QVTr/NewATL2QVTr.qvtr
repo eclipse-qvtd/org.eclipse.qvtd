@@ -10,7 +10,7 @@
  *******************************************************************************/
 import atlMM : 'platform:/resource/org.eclipse.m2m.atl.common/model/ATL.ecore#/0'; 
 import atloclMM : 'platform:/resource/org.eclipse.m2m.atl.common/model/ATL.ecore#/1'; 
-import atlprimsMM : 'platform:/resource/org.eclipse.m2m.atl.common/model/ATL.ecore#/2'; 
+import atlprimsMM : 'platform:/resource/org.eclipse.m2m.atl.common/model/ATL.ecore#/2';
 --import atlMM : 'http://www.eclipse.org/gmt/2005/ATL'; 
 --import atloclMM : 'http://www.eclipse.org/gmt/2005/OCL'; 
 --import atlprimsMM : 'http://www.eclipse.org/gmt/2005/ATL-PrimitiveTypes'; 
@@ -566,7 +566,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 			when {
 				mapModule(atlModule, qvtrTransformation);
 				atlAttributes->notEmpty();
-				mapHelper_Attribute(atlAttributes->any(true)._definition.Helper, qvtrOperation);
+				mapHelper_Attribute(atlAttributes->any(true)._definition?.Helper, qvtrOperation);
 				mapOclExpression(atlSource, qvtrSourceArgument);
 			}
 		}
@@ -637,7 +637,7 @@ package org::eclipse::qvtd::xtext::qvtrelation::tests::newatl2qvtr {
 			when {
 				mapModule(atlModule, qvtrTransformation);
 				atlOperations->notEmpty();
-				mapHelper_Operation(atlOperations->any(true)._definition.Helper, qvtrOperation);
+				mapHelper_Operation(atlOperations->any(true)._definition?.Helper, qvtrOperation);
 				mapOclExpression(atlSource, qvtrSourceArgument);
 			}
 		}

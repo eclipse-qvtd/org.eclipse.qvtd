@@ -29,6 +29,7 @@ public class StandardLibraryHelper
 	private final @NonNull Operation collectionExcluding;
 	private final @NonNull Operation collectionIsEmpty;
 	private final @NonNull OperationId collectionSelectByKindId;
+	private final @NonNull Operation oclAnyEquals;
 	private final @NonNull OperationId oclAnyEqualsId;
 	private final @NonNull OperationId oclAnyOclAsSetId;
 	private final @NonNull OperationId oclAnyOclAsTypeId;
@@ -43,6 +44,7 @@ public class StandardLibraryHelper
 		org.eclipse.ocl.pivot.Class oclElementType = standardLibrary.getOclElementType();
 		Operation operation1 = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "=");
 		assert operation1 != null;
+		oclAnyEquals = operation1;
 		oclAnyEqualsId = operation1.getOperationId();
 		Operation operation2 = NameUtil.getNameable(oclAnyType.getOwnedOperations(), "oclAsType");
 		assert operation2 != null;
@@ -81,6 +83,10 @@ public class StandardLibraryHelper
 
 	public @NonNull OperationId getCollectionSelectByKindId() {
 		return collectionSelectByKindId;
+	}
+
+	public @NonNull Operation getOclAnyEqualsOperation() {
+		return oclAnyEquals;
 	}
 
 	public @NonNull OperationId getOclAnyEqualsId() {

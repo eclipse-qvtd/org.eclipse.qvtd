@@ -60,6 +60,7 @@ import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigationEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NodeConnection;
+import org.eclipse.qvtd.pivot.qvtschedule.OperationCallNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -630,7 +631,7 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(node.getNodeRole());
 	}
 
-	public static @NonNull Role getOperationNodePhase(@NonNull Region region, @NonNull TypedElement typedElement, @NonNull Node... argNodes) {
+	public static @NonNull Role getOperationNodePhase(@NonNull Region region, @Nullable TypedElement typedElement, @NonNull Node... argNodes) {
 		boolean isLoaded = false;
 		boolean isPredicated = false;
 		boolean isRealized = false;
@@ -760,6 +761,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 	//	public static org.eclipse.ocl.pivot.@NonNull Class getReferredClass(@NonNull ClassDatum classDatum) {
 	//		return ClassUtil.nonNullState(classDatum.getReferredClass());
 	//	}
+
+	public static @NonNull Operation getReferredOperation(@NonNull OperationCallNode operationCallNode) {
+		return ClassUtil.nonNullState(operationCallNode.getReferredOperation());		// FIXME should be declared as [1..1]
+	}
 
 	public static @NonNull PropertyDatum getReferredPart(@NonNull KeyPartEdge keyPartEdge) {
 		return ClassUtil.nonNullState(keyPartEdge.getReferredPart());

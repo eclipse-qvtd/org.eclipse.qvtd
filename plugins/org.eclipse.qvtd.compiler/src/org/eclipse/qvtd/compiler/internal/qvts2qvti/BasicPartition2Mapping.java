@@ -43,6 +43,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
+import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.PrimitiveLiteralExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
@@ -76,6 +77,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.util.AbstractExtendingQVTbaseVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseLibraryHelper;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -108,6 +110,8 @@ import org.eclipse.qvtd.pivot.qvtschedule.NullLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.NumericLiteralNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationCallNode;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationNode;
+import org.eclipse.qvtd.pivot.qvtschedule.OperationParameterEdge;
+import org.eclipse.qvtd.pivot.qvtschedule.OperationSelfEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.PredicateEdge;
 import org.eclipse.qvtd.pivot.qvtschedule.PropertyDatum;
@@ -446,6 +450,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 	private static class ExpressionCreator extends AbstractExtendingQVTbaseVisitor<@NonNull OCLExpression, @NonNull BasicPartition2Mapping>
 	{
 		protected final @NonNull QVTimperativeHelper helper;
+		protected final @NonNull QVTbaseLibraryHelper qvtbaseLibraryHelper;
 		protected final @NonNull Set<@NonNull Node> multiAccessedNodes = new HashSet<>();
 		protected final @NonNull Set<@NonNull Node> conditionalNodes = new HashSet<>();
 
@@ -454,6 +459,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		public ExpressionCreator(@NonNull BasicPartition2Mapping context) {
 			super(context);
 			this.helper = context.getHelper();
+			this.qvtbaseLibraryHelper = context.getQVTbaseLibraryHelper();
 			analyzeExpressions(multiAccessedNodes, conditionalNodes);
 		}
 
@@ -632,6 +638,104 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 
 		private static int depth = 0;
 
+		protected @Nullable OCLExpression doBooleanLiteralNode(@NonNull BooleanLiteralNode node) {
+			return helper.createBooleanLiteralExp(node.isBooleanValue());
+		}
+
+		protected @Nullable OCLExpression doIfNode(@NonNull IfNode node) {
+			OCLExpression conditionExp = null;
+			OCLExpression thenExp = null;
+			OCLExpression elseExp = null;
+			Parameter conditionParameter = qvtbaseLibraryHelper.getIfConditionParameter();
+			Parameter thenParameter = qvtbaseLibraryHelper.getIfThenParameter();
+			Parameter elseParameter = qvtbaseLibraryHelper.getIfElseParameter();
+			for (@NonNull Edge edge : node.getArgumentEdges()) {
+				if (edge instanceof OperationParameterEdge) {
+					OperationParameterEdge operationParameterEdge = (OperationParameterEdge)edge;
+					Node expNode = operationParameterEdge.getEdgeSource();
+					OCLExpression nestedExp = getExpression(expNode);
+					if (nestedExp == null) {
+						return null;
+					}
+					Parameter parameter = operationParameterEdge.getReferredParameter();
+					if (parameter == conditionParameter) {
+						conditionExp = nestedExp;
+					}
+					else if (parameter == thenParameter) {
+						thenExp = nestedExp;
+					}
+					else if (parameter == elseParameter) {
+						elseExp = nestedExp;
+					}
+				}
+			}
+			if ((conditionExp != null) && (thenExp != null) && (elseExp != null)) {
+				return helper.createIfExp(conditionExp, thenExp, elseExp);
+			}
+			return null;
+		}
+
+		protected @Nullable OCLExpression doNumericLiteralNode(@NonNull NumericLiteralNode node) {
+			Number numericValue = ClassUtil.nonNullState(node.getNumericValue());
+			if ((numericValue instanceof Byte) || (numericValue instanceof Integer) || (numericValue instanceof Long) || (numericValue instanceof Short)) {
+				return helper.createIntegerLiteralExp(numericValue);
+			}
+			else {
+				return helper.createRealLiteralExp(numericValue);
+			}
+		}
+
+		protected @Nullable OCLExpression doNullLiteralNode(@NonNull NullLiteralNode node) {
+			return helper.createNullLiteralExp();
+		}
+
+		protected @Nullable OCLExpression doOperationCallNode(@NonNull OperationCallNode node) {
+			Operation referredOperation = QVTscheduleUtil.getReferredOperation(node);
+			OCLExpression sourceExp = null;
+			List<@NonNull Parameter> parameters = QVTbaseUtil.Internal.getOwnedParametersList(referredOperation);
+			List<@Nullable OCLExpression> argExps = new ArrayList<>(parameters.size());
+			for (int i = 0; i < parameters.size(); i++) {
+				argExps.add(null);
+			}
+			for (@NonNull Edge edge : node.getArgumentEdges()) {
+				if (edge instanceof OperationSelfEdge) {
+					OperationSelfEdge operationSelfEdge = (OperationSelfEdge)edge;
+					Node expNode = operationSelfEdge.getEdgeSource();
+					OCLExpression nestedExp = getExpression(expNode);
+					if (nestedExp == null) {
+						return null;
+					}
+					sourceExp = nestedExp;
+				}
+				else if (edge instanceof OperationParameterEdge) {
+					OperationParameterEdge operationParameterEdge = (OperationParameterEdge)edge;
+					Node expNode = operationParameterEdge.getEdgeSource();
+					OCLExpression nestedExp = getExpression(expNode);
+					if (nestedExp == null) {
+						return null;
+					}
+					int index = parameters.indexOf(operationParameterEdge.getReferredParameter());
+					if (0 <= index) {
+						OCLExpression oldExpression = argExps.set(index, nestedExp);
+						assert oldExpression == null;
+					}
+				}
+			}
+			for (OCLExpression exp : argExps) {
+				if (exp == null) {
+					return null;
+				}
+			}
+			if (sourceExp != null) {
+				return helper.createOperationCallExp(sourceExp, referredOperation, ClassUtil.nullFree(argExps));
+			}
+			return null;
+		}
+
+		protected @Nullable OCLExpression doStringLiteralNode(@NonNull StringLiteralNode node) {
+			return helper.createStringLiteralExp(ClassUtil.nonNullState(node.getStringValue()));
+		}
+
 		public @Nullable OCLExpression getExpression(@NonNull Node node) {
 			if (++depth > 25) {
 				throw new IllegalStateException();
@@ -646,6 +750,7 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					return PivotUtil.createVariableExp(variable);
 				}
 				if (node.isOperation()) {
+					// FIXME phase out use of originatingElement and use a Visitor now that the Node hierarchy is more relevant
 					Element originatingElement = node.basicGetOriginatingElement();
 					if (originatingElement instanceof CollectionTemplateExp) {	// The CollectionTemplateExp synthesis has already identified the necessary operations
 						OperationCallNode operationCallNode = (OperationCallNode)node;
@@ -655,23 +760,23 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 					else if (originatingElement != null) {
 						return originatingElement.accept(getInlineExpressionCreator());
 					}
-					else if (node instanceof BooleanLiteralNode) {				// This happens because synthesized nodes have no originating BooleanLiteralExp
-						return helper.createBooleanLiteralExp(((BooleanLiteralNode)node).isBooleanValue());
+					else if (node instanceof BooleanLiteralNode) {
+						return doBooleanLiteralNode((BooleanLiteralNode)node);
 					}
-					else if (node instanceof NullLiteralNode) {					// This happens because synthesized nodes have no originating BooleanLiteralExp
-						return helper.createNullLiteralExp();
+					else if (node instanceof IfNode) {
+						return doIfNode((IfNode)node);
 					}
-					else if (node instanceof NumericLiteralNode) {				// This never happens but we can easily support it if needed
-						Number numericValue = ClassUtil.nonNullState(((NumericLiteralNode)node).getNumericValue());
-						if ((numericValue instanceof Byte) || (numericValue instanceof Integer) || (numericValue instanceof Long) || (numericValue instanceof Short)) {
-							return helper.createIntegerLiteralExp(numericValue);
-						}
-						else {
-							return helper.createRealLiteralExp(numericValue);
-						}
+					else if (node instanceof NullLiteralNode) {
+						return doNullLiteralNode((NullLiteralNode)node);
 					}
-					else if (node instanceof StringLiteralNode) {				// This never happens but we can easily support it if needed
-						return helper.createStringLiteralExp(ClassUtil.nonNullState(((StringLiteralNode)node).getStringValue()));
+					else if (node instanceof NumericLiteralNode) {
+						return doNumericLiteralNode((NumericLiteralNode)node);
+					}
+					else if (node instanceof OperationCallNode) {
+						return doOperationCallNode((OperationCallNode)node);
+					}
+					else if (node instanceof StringLiteralNode) {
+						return doStringLiteralNode((StringLiteralNode)node);
 					}
 					else {
 						throw new UnsupportedOperationException();
@@ -1747,6 +1852,10 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		}
 		assert precedingNodes.size() > 0;
 		return precedingNodes;
+	}
+
+	public @NonNull QVTbaseLibraryHelper getQVTbaseLibraryHelper() {
+		return scheduleManager.getQVTbaseLibraryHelper();
 	}
 
 	private @NonNull VariableDeclaration getSubexpressionDeclaration(@NonNull Node node) {
