@@ -27,7 +27,7 @@ transformation org::eclipse::qvtd::examples::qvtrelation::hstm2fstm::Hierarchica
 	 * Return the leafStates of a given hierarchicalState.
 	 */
 	query getLeafStates(hierarchicalState : hierMM::State[1]) : Set(hierMM::State) {
-		hierarchicalState->closure(nestedStates)->select(nestedStates->isEmpty())
+		hierarchicalState->closure(nestedStates)?->select(nestedStates->isEmpty())
 	}
 
 	/**
