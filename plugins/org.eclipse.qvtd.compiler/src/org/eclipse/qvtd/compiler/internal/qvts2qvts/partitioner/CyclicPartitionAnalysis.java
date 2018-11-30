@@ -25,7 +25,7 @@ import org.eclipse.qvtd.compiler.internal.qvts2qvts.Concurrency;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicPartition;
 
-public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<CyclicPartition> implements CompositePartitionAnalysis
+public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<CyclicPartition>
 {
 	public static @NonNull CyclicPartitionAnalysis createCyclicPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis,
 			@NonNull String name, @NonNull Set<@NonNull PartitionAnalysis> partitionAnalyses,

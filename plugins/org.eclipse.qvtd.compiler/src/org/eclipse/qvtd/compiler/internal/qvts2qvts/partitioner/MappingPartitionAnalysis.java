@@ -560,6 +560,7 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 
 	@Override
 	public void computeCheckedOrEnforcedEdges() {
+		//	String name = getName();
 		boolean doDebug = QVTscheduleConstants.POLLED_PROPERTIES.isActive();
 		if (doDebug) {
 			QVTscheduleConstants.POLLED_PROPERTIES.println("analyzing " + this + " (" + partition.getPassRangeText() + ")");

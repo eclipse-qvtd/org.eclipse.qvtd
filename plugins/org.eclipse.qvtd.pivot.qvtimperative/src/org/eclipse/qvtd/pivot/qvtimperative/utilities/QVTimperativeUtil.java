@@ -136,6 +136,10 @@ public class QVTimperativeUtil extends QVTbaseUtil
 		return ClassUtil.nonNullState(asParameter.getName());
 	}
 
+	public static @NonNull Iterable<@NonNull Property> getObservedProperties(@NonNull ObservableStatement observableStatement) {
+		return ClassUtil.nullFree(observableStatement.getObservedProperties());
+	}
+
 	public static @NonNull Mapping getOwnedMapping(@NonNull ImperativeTransformation transformation, @Nullable String name) {
 		return ClassUtil.nonNullState(NameUtil.getNameable(getOwnedMappings(transformation), name));
 	}

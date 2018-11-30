@@ -607,16 +607,10 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTbaseSema
 	 *     GuardStatementCS returns CheckStatementCS
 	 *
 	 * Constraint:
-	 *     ownedCondition=ExpCS
+	 *     ((observedProperties+=PathNameCS observedProperties+=PathNameCS*)? ownedCondition=ExpCS)
 	 */
 	protected void sequence_CheckStatementCS(ISerializationContext context, CheckStatementCS semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, QVTimperativeCSPackage.Literals.CHECK_STATEMENT_CS__OWNED_CONDITION) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, QVTimperativeCSPackage.Literals.CHECK_STATEMENT_CS__OWNED_CONDITION));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getCheckStatementCSAccess().getOwnedConditionExpCSParserRuleCall_1_0(), semanticObject.getOwnedCondition());
-		feeder.finish();
+		genericSequencer.createSequence(context, semanticObject);
 	}
 
 

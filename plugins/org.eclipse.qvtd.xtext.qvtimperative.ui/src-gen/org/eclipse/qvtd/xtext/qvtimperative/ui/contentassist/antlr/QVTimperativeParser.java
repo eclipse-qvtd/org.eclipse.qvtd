@@ -126,6 +126,8 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBufferStatementCSAccess().getGroup_4(), "rule__BufferStatementCS__Group_4__0");
 					put(grammarAccess.getBufferStatementCSAccess().getGroup_5(), "rule__BufferStatementCS__Group_5__0");
 					put(grammarAccess.getCheckStatementCSAccess().getGroup(), "rule__CheckStatementCS__Group__0");
+					put(grammarAccess.getCheckStatementCSAccess().getGroup_0(), "rule__CheckStatementCS__Group_0__0");
+					put(grammarAccess.getCheckStatementCSAccess().getGroup_0_2(), "rule__CheckStatementCS__Group_0_2__0");
 					put(grammarAccess.getDeclareStatementCSAccess().getGroup(), "rule__DeclareStatementCS__Group__0");
 					put(grammarAccess.getDeclareStatementCSAccess().getGroup_0(), "rule__DeclareStatementCS__Group_0__0");
 					put(grammarAccess.getDeclareStatementCSAccess().getGroup_0_2(), "rule__DeclareStatementCS__Group_0_2__0");
@@ -354,7 +356,9 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBufferStatementCSAccess().getNameAssignment_3(), "rule__BufferStatementCS__NameAssignment_3");
 					put(grammarAccess.getBufferStatementCSAccess().getOwnedTypeAssignment_4_1(), "rule__BufferStatementCS__OwnedTypeAssignment_4_1");
 					put(grammarAccess.getBufferStatementCSAccess().getOwnedExpressionAssignment_5_1(), "rule__BufferStatementCS__OwnedExpressionAssignment_5_1");
-					put(grammarAccess.getCheckStatementCSAccess().getOwnedConditionAssignment_1(), "rule__CheckStatementCS__OwnedConditionAssignment_1");
+					put(grammarAccess.getCheckStatementCSAccess().getObservedPropertiesAssignment_0_1(), "rule__CheckStatementCS__ObservedPropertiesAssignment_0_1");
+					put(grammarAccess.getCheckStatementCSAccess().getObservedPropertiesAssignment_0_2_1(), "rule__CheckStatementCS__ObservedPropertiesAssignment_0_2_1");
+					put(grammarAccess.getCheckStatementCSAccess().getOwnedConditionAssignment_2(), "rule__CheckStatementCS__OwnedConditionAssignment_2");
 					put(grammarAccess.getDeclareStatementCSAccess().getObservedPropertiesAssignment_0_1(), "rule__DeclareStatementCS__ObservedPropertiesAssignment_0_1");
 					put(grammarAccess.getDeclareStatementCSAccess().getObservedPropertiesAssignment_0_2_1(), "rule__DeclareStatementCS__ObservedPropertiesAssignment_0_2_1");
 					put(grammarAccess.getDeclareStatementCSAccess().getIsCheckAssignment_1(), "rule__DeclareStatementCS__IsCheckAssignment_1");

@@ -445,6 +445,7 @@ public class QVTs2QVTs extends QVTimperativeHelper
 	protected void pruneRedundantConnections(@NonNull ConnectionManager connectionManager, @NonNull RootRegion rootRegion) {
 		List<@NonNull Connection> redundantConnections = null;
 		for (@NonNull Connection connection : QVTscheduleUtil.getOwnedConnections(rootRegion)) {
+			//	String name = connection.getName();
 			if (!connection.isPassed() && !connection.isMandatory()) {
 				boolean isRedundant = true;
 				int lastPass = connection.getLastPass();

@@ -353,6 +353,7 @@ public class CheckedConditionAnalysis
 	 * Return all properties (and their opposites) that need checking for readiness prior to access.
 	 */
 	protected @Nullable Set<@NonNull Property> computeCheckedProperties() {
+		@SuppressWarnings("unused") String name = partition.getName();
 		//
 		// Better, we would not be pessimistic about input/output typedModel ambiguity in endogeneous
 		// mappings, but that incurs many typedModel accuracy issues.
@@ -360,7 +361,7 @@ public class CheckedConditionAnalysis
 		Set<@NonNull Property> allCheckedProperties = new HashSet<>();
 		DomainUsage anyUsage = scheduleManager.getDomainUsageAnalysis().getAnyUsage();
 		for (@NonNull TypedModel typedModel : anyUsage.getTypedModels()) {
-			Iterable<@NonNull NavigableEdge> checkedEdges = partition.getCheckedEdges(typedModel);
+			Iterable<@NonNull NavigableEdge> checkedEdges = partition.getCheckedEdges(typedModel);		// FIXME ensure this has been cached
 			if (checkedEdges != null) {
 				for (@NonNull NavigableEdge checkedEdge : checkedEdges) {
 					Property asProperty = QVTscheduleUtil.getProperty(checkedEdge);

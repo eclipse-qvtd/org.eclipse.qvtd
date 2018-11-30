@@ -647,31 +647,75 @@ ruleCheckStatementCS returns [EObject current=null]
     @init { enterRule();
     }
     @after { leaveRule(); }:
-(	otherlv_0='check'
+((	otherlv_0='observe'
     {
-    	newLeafNode(otherlv_0, grammarAccess.getCheckStatementCSAccess().getCheckKeyword_0());
+    	newLeafNode(otherlv_0, grammarAccess.getCheckStatementCSAccess().getObserveKeyword_0_0());
     }
 (
 (
 		{
-	        newCompositeNode(grammarAccess.getCheckStatementCSAccess().getOwnedConditionExpCSParserRuleCall_1_0());
+	        newCompositeNode(grammarAccess.getCheckStatementCSAccess().getObservedPropertiesPathNameCSParserRuleCall_0_1_0());
 	    }
-		lv_ownedCondition_1_0=ruleExpCS		{
+		lv_observedProperties_1_0=rulePathNameCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getCheckStatementCSRule());
+	        }
+       		add(
+       			$current,
+       			"observedProperties",
+        		lv_observedProperties_1_0,
+        		"org.eclipse.ocl.xtext.base.Base.PathNameCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_2=','
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getCheckStatementCSAccess().getCommaKeyword_0_2_0());
+    }
+(
+(
+		{
+	        newCompositeNode(grammarAccess.getCheckStatementCSAccess().getObservedPropertiesPathNameCSParserRuleCall_0_2_1_0());
+	    }
+		lv_observedProperties_3_0=rulePathNameCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getCheckStatementCSRule());
+	        }
+       		add(
+       			$current,
+       			"observedProperties",
+        		lv_observedProperties_3_0,
+        		"org.eclipse.ocl.xtext.base.Base.PathNameCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*)?	otherlv_4='check'
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getCheckStatementCSAccess().getCheckKeyword_1());
+    }
+(
+(
+		{
+	        newCompositeNode(grammarAccess.getCheckStatementCSAccess().getOwnedConditionExpCSParserRuleCall_2_0());
+	    }
+		lv_ownedCondition_5_0=ruleExpCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getCheckStatementCSRule());
 	        }
        		set(
        			$current,
        			"ownedCondition",
-        		lv_ownedCondition_1_0,
+        		lv_ownedCondition_5_0,
         		"org.eclipse.ocl.xtext.essentialocl.EssentialOCL.ExpCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_2=';'
+)	otherlv_6=';'
     {
-    	newLeafNode(otherlv_2, grammarAccess.getCheckStatementCSAccess().getSemicolonKeyword_2());
+    	newLeafNode(otherlv_6, grammarAccess.getCheckStatementCSAccess().getSemicolonKeyword_3());
     }
 )
 ;

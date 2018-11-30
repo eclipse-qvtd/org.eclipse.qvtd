@@ -375,29 +375,61 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	public class CheckStatementCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvtd.xtext.qvtimperative.QVTimperative.CheckStatementCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cCheckKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cOwnedConditionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cOwnedConditionExpCSParserRuleCall_1_0 = (RuleCall)cOwnedConditionAssignment_1.eContents().get(0);
-		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
+		private final Keyword cObserveKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
+		private final Assignment cObservedPropertiesAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cObservedPropertiesPathNameCSParserRuleCall_0_1_0 = (RuleCall)cObservedPropertiesAssignment_0_1.eContents().get(0);
+		private final Group cGroup_0_2 = (Group)cGroup_0.eContents().get(2);
+		private final Keyword cCommaKeyword_0_2_0 = (Keyword)cGroup_0_2.eContents().get(0);
+		private final Assignment cObservedPropertiesAssignment_0_2_1 = (Assignment)cGroup_0_2.eContents().get(1);
+		private final RuleCall cObservedPropertiesPathNameCSParserRuleCall_0_2_1_0 = (RuleCall)cObservedPropertiesAssignment_0_2_1.eContents().get(0);
+		private final Keyword cCheckKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cOwnedConditionAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cOwnedConditionExpCSParserRuleCall_2_0 = (RuleCall)cOwnedConditionAssignment_2.eContents().get(0);
+		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 
 		//CheckStatementCS:
-		//	'check' ownedCondition=ExpCS ';';
+		//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? 'check' ownedCondition=ExpCS ';';
 		@Override public ParserRule getRule() { return rule; }
 
-		//'check' ownedCondition=ExpCS ';'
+		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? 'check' ownedCondition=ExpCS ';'
 		public Group getGroup() { return cGroup; }
 
+		//('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+		public Group getGroup_0() { return cGroup_0; }
+
+		//'observe'
+		public Keyword getObserveKeyword_0_0() { return cObserveKeyword_0_0; }
+
+		//observedProperties+=PathNameCS
+		public Assignment getObservedPropertiesAssignment_0_1() { return cObservedPropertiesAssignment_0_1; }
+
+		//PathNameCS
+		public RuleCall getObservedPropertiesPathNameCSParserRuleCall_0_1_0() { return cObservedPropertiesPathNameCSParserRuleCall_0_1_0; }
+
+		//(',' observedProperties+=PathNameCS)*
+		public Group getGroup_0_2() { return cGroup_0_2; }
+
+		//','
+		public Keyword getCommaKeyword_0_2_0() { return cCommaKeyword_0_2_0; }
+
+		//observedProperties+=PathNameCS
+		public Assignment getObservedPropertiesAssignment_0_2_1() { return cObservedPropertiesAssignment_0_2_1; }
+
+		//PathNameCS
+		public RuleCall getObservedPropertiesPathNameCSParserRuleCall_0_2_1_0() { return cObservedPropertiesPathNameCSParserRuleCall_0_2_1_0; }
+
 		//'check'
-		public Keyword getCheckKeyword_0() { return cCheckKeyword_0; }
+		public Keyword getCheckKeyword_1() { return cCheckKeyword_1; }
 
 		//ownedCondition=ExpCS
-		public Assignment getOwnedConditionAssignment_1() { return cOwnedConditionAssignment_1; }
+		public Assignment getOwnedConditionAssignment_2() { return cOwnedConditionAssignment_2; }
 
 		//ExpCS
-		public RuleCall getOwnedConditionExpCSParserRuleCall_1_0() { return cOwnedConditionExpCSParserRuleCall_1_0; }
+		public RuleCall getOwnedConditionExpCSParserRuleCall_2_0() { return cOwnedConditionExpCSParserRuleCall_2_0; }
 
 		//';'
-		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
+		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 
 	public class ControlStatementCSElements extends AbstractParserRuleElementFinder {
@@ -2309,7 +2341,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//CheckStatementCS:
-	//	'check' ownedCondition=ExpCS ';';
+	//	('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)? 'check' ownedCondition=ExpCS ';';
 	public CheckStatementCSElements getCheckStatementCSAccess() {
 		return pCheckStatementCS;
 	}

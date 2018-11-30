@@ -556,7 +556,7 @@ public class ScheduleAnalysis
 		assert cycleDepth == 0;
 		scheduleManager.writeDebugGraphs("6-pass", false, true, false);
 		/**
-		 * Propagate the additional connection indexes to their outgoing connections.
+		 * Propagate the partition passnumbers through their outgoing connections.
 		 */
 		Set<@NonNull Connection> changedConnections = Sets.newHashSet(getConnections());
 		while (!changedPartitions.isEmpty()) {
@@ -569,13 +569,6 @@ public class ScheduleAnalysis
 			}
 			changedConnections.clear();
 		}
-		//	for (@NonNull Connection connection : getConnections()) {
-		//		String name = connection.getName();
-		//		if ("ja_DmapOclExpression_success".equals(name)) {
-		//			getClass();
-		//		}
-		//		propagatePassNumbers(connection);
-		//	}
 		scheduleManager.writeDebugGraphs("7-passes", false, true, false);
 		for (@NonNull Connection connection : getConnections()) {
 			checkPassNumbers(connection);
