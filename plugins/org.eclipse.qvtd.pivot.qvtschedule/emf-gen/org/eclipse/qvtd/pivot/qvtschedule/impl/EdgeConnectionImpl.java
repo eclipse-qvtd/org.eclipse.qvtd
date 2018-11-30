@@ -355,14 +355,14 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 			if (!Iterables.isEmpty(partitions)) {
 				for (@NonNull Partition sourcePartition : partitions) {
 					Role sourceRole = QVTscheduleUtil.getRole(sourcePartition, sourceEdge);
-					if ((sourceRole != null) &&!sourceRole.isAwaited()) { // (sourceRole.isNew() || sourceRole.isLoaded())) {
+					if ((sourceRole != null) &&!sourceRole.isChecked()) { // (sourceRole.isNew() || sourceRole.isLoaded())) {
 						sourceNodes.add(QVTscheduleUtil.getTargetNode(sourceEdge));
 					}
 				}
 			}
 			else {
 				Role sourceRole = sourceEdge.getEdgeRole();
-				if (!sourceRole.isAwaited()) { //sourceRole.isNew() || sourceRole.isLoaded()) {
+				if (!sourceRole.isChecked()) { //sourceRole.isNew() || sourceRole.isLoaded()) {
 					sourceNodes.add(QVTscheduleUtil.getTargetNode(sourceEdge));
 				}
 			}

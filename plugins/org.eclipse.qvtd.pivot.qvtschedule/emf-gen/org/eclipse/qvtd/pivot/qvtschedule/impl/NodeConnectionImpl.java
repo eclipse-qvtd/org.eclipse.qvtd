@@ -381,7 +381,7 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 			Iterable<@NonNull MappingPartition> sourceRegionPartitions = QVTscheduleUtil.getRegionPartitions(sourceRegion);
 			if (Iterables.contains(sourceRegionPartitions, sourcePartition)) {
 				Role sourceRole = QVTscheduleUtil.getRole(sourcePartition, sourceEnd);
-				if ((sourceRole != null) && !sourceRole.isAwaited()) { //(sourceRole.isNew() || sourceRole.isLoaded())) {
+				if ((sourceRole != null) && !sourceRole.isChecked()) { //(sourceRole.isNew() || sourceRole.isLoaded())) {
 					assert sourceNode == null;
 					sourceNode = sourceEnd;
 				}

@@ -169,7 +169,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 					if (partitions != null) {
 						for (@NonNull Partition sourcePartition : partitions) {
 							Role sourceRole = QVTscheduleUtil.getRole(sourcePartition, sourceEnd);
-							if ((sourceRole != null) && !sourceRole.isAwaited()) { // (sourceRole.isNew() || sourceRole.isLoaded())) {
+							if ((sourceRole != null) && !sourceRole.isChecked()) { // (sourceRole.isNew() || sourceRole.isLoaded())) {
 								Node sourceNode;
 								if (sourceEnd instanceof Edge) {
 									sourceNode = QVTscheduleUtil.getTargetNode((Edge) sourceEnd);
@@ -193,7 +193,7 @@ public abstract class ToGraphPartitionVisitor extends AbstractToGraphVisitor
 							sourceNode = (Node) sourceEnd;
 							sourceRole = ((Node)sourceEnd).getNodeRole();
 						}
-						if (!sourceRole.isAwaited()) { //sourceRole.isNew() || sourceRole.isLoaded()) {
+						if (!sourceRole.isChecked()) { //sourceRole.isNew() || sourceRole.isLoaded()) {
 							appendEdge(sourceNode, connection, connection);
 						}
 					}

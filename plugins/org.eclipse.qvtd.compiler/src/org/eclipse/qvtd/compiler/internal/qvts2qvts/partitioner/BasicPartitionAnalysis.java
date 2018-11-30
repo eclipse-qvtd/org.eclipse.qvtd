@@ -31,15 +31,15 @@ public class BasicPartitionAnalysis extends MappingPartitionAnalysis<BasicPartit
 	private final @NonNull ReachabilityForest reachabilityForest;
 
 	private @Nullable Set<@NonNull PartitionAnalysis> explicitPredecessors = null;
-	private final @NonNull String namePrefix;
-	private final @NonNull String symbolSuffix;
+	//	private final @NonNull String namePrefix;
+	//	private final @NonNull String symbolSuffix;
 
 	public BasicPartitionAnalysis(@NonNull PartitionedTransformationAnalysis partitionedTransformationAnalysis, @NonNull BasicPartition partition,
 			@NonNull ReachabilityForest reachabilityForest, @NonNull String namePrefix, @NonNull String symbolSuffix) {
 		super(partitionedTransformationAnalysis, partition);
 		this.reachabilityForest = reachabilityForest;
-		this.namePrefix = namePrefix;
-		this.symbolSuffix = symbolSuffix;
+		//	this.namePrefix = namePrefix;
+		//	this.symbolSuffix = symbolSuffix;
 		partitionedTransformationAnalysis.addPartitionAnalysis(this);
 	}
 
@@ -86,8 +86,8 @@ public class BasicPartitionAnalysis extends MappingPartitionAnalysis<BasicPartit
 	}
 
 	@Override
-	public boolean isAwaited(@NonNull Edge edge) {
+	public boolean isChecked(@NonNull Edge edge) {
 		Role role = partition.getRole(edge);
-		return role != null ? role.isAwaited() : false; //edge.isPredicated();
+		return role != null ? role.isChecked() : false; //edge.isPredicated();
 	}
 }

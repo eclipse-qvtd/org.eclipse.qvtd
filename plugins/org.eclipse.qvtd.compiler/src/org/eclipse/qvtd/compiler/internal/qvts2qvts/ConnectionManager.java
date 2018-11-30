@@ -529,7 +529,7 @@ public class ConnectionManager
 				boolean isAwaited = false;
 				for (@NonNull PartitionAnalysis partitionAnalysis : regionAnalysis.getPartitionAnalyses()) {
 					Role role = partitionAnalysis.getPartition().getRole(edge);
-					if ((role != null) && role.isAwaited()) {
+					if ((role != null) && role.isChecked()) {
 						isAwaited = true;
 						break;
 					}
@@ -660,7 +660,7 @@ public class ConnectionManager
 			//			}
 		}
 		for (@NonNull Edge edge : partition.getPartialEdges()) {
-			if (partitionAnalysis.isAwaited(edge) && edge.isNavigation()) {
+			if (partitionAnalysis.isChecked(edge) && edge.isNavigation()) {
 				NavigationEdge navigationEdge = (NavigationEdge) edge;
 				EdgeConnection connection = navigationEdge.getIncomingConnection();
 				if ((connection != null) && !connections.contains(connection)) {
@@ -762,7 +762,7 @@ public class ConnectionManager
 		//		for (@NonNull Node node : QVTscheduleUtil.getOwnedNodes(region)) {
 		for (@NonNull Node node : partition.getPartialNodes()) {
 			Role role = partition.getRole(node);
-			if ((role != null) && !role.isAwaited()) { //(role.isNew() || role.isLoaded())) {
+			if ((role != null) && !role.isChecked()) { //(role.isNew() || role.isLoaded())) {
 				for (@NonNull NodeConnection connection : node.getOutgoingPassedConnections()) {
 					connections.add(connection);
 				}
@@ -775,7 +775,7 @@ public class ConnectionManager
 		for (@NonNull Edge edge : partition.getPartialEdges()) {
 			if (edge.isNavigation()) {
 				Role role = partition.getRole(edge);
-				if ((role != null) && !role.isAwaited()) { // (role.isNew() || role.isLoaded())) {
+				if ((role != null) && !role.isChecked()) { // (role.isNew() || role.isLoaded())) {
 					for (@NonNull EdgeConnection connection : QVTscheduleUtil.getOutgoingConnections((NavigableEdge) edge)) {
 						connections.add(connection);
 					}

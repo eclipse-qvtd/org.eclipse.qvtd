@@ -110,10 +110,10 @@ public abstract class AbstractPartitionAnalysis<P extends Partition> implements 
 	}
 
 	@Override
-	public boolean isAwaited(@NonNull Edge edge) {
+	public boolean isChecked(@NonNull Edge edge) {
 		Role role = partition.getRole(edge);
 		assert role != null;
-		return role.isAwaited();
+		return role.isChecked();
 	}
 
 	@Override

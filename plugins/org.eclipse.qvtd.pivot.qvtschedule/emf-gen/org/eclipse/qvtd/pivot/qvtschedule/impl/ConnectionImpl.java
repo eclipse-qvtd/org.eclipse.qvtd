@@ -682,7 +682,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 			Iterable<@NonNull MappingPartition> sourceRegionPartitions = QVTscheduleUtil.getRegionPartitions(sourceRegion);
 			if (Iterables.contains(sourceRegionPartitions, sourcePartition)) {
 				Role sourceRole = QVTscheduleUtil.getRole(sourcePartition, sourceEnd);
-				if ((sourceRole != null) && !sourceRole.isAwaited()) { //(sourceRole.isNew() || sourceRole.isLoaded())) {
+				if ((sourceRole != null) && !sourceRole.isChecked()) { //(sourceRole.isNew() || sourceRole.isLoaded())) {
 					assert theSourceEnd == null;
 					theSourceEnd = sourceEnd;
 				}
@@ -701,7 +701,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 			for (@NonNull MappingPartition sourcePartition : sourceRegionPartitions) {
 				if (QVTscheduleUtil.getMergedPartition(sourcePartition) == sourcePartition) {
 					Role sourceRole = QVTscheduleUtil.getRole(sourcePartition, sourceEnd);
-					if ((sourceRole != null) && !sourceRole.isAwaited()) { // (sourceRole.isNew() || sourceRole.isLoaded())) {
+					if ((sourceRole != null) && !sourceRole.isChecked()) { // (sourceRole.isNew() || sourceRole.isLoaded())) {
 						sourcePartitions.add(sourcePartition);
 					}
 				}

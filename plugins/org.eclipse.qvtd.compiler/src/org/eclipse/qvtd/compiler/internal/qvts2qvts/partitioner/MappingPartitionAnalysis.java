@@ -588,7 +588,7 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 							RegionAnalysis sourceRegionAnalysis = scheduleManager.getRegionAnalysis(sourceRegion);
 							for (@NonNull PartitionAnalysis sourcePartitionAnalysis : sourceRegionAnalysis.getPartitionAnalyses()) {
 								Role sourceRole = sourcePartitionAnalysis.getPartition().getRole(usedEdge);
-								if ((sourceRole != null) && !sourceRole.isAwaited()) {
+								if ((sourceRole != null) && !sourceRole.isChecked()) {
 									sourcePartitionAnalysis.addEnforcedEdge(usedEdge);
 								}
 							}
