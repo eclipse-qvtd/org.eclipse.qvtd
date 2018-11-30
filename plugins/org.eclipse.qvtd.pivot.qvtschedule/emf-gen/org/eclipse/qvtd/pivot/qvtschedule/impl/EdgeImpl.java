@@ -741,6 +741,12 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	}
 
 	@Override
+	public boolean isChecked() {
+		assert edgeRole != null;
+		return edgeRole.isChecked();
+	}
+
+	@Override
 	public boolean isComputation() {
 		return false;
 	}

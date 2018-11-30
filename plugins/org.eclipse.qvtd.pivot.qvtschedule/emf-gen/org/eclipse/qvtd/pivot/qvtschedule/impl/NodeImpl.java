@@ -1006,6 +1006,12 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	}
 
 	@Override
+	public boolean isChecked() {
+		assert nodeRole != null;
+		return nodeRole.isChecked();
+	}
+
+	@Override
 	public final boolean isClass() {
 		return !isDataType;
 	}

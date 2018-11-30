@@ -172,7 +172,7 @@ public class ConnectivityChecker
 				assert !nodes.contains(node);
 				nodes.add(node);
 			}
-			if (node.isPredicated() || node.isSpeculated()) {
+			if (node.isChecked()) {
 				ClassDatum classDatum = addClassDatum(node);
 				List<@NonNull Node> nodes = consumer2nodes.get(classDatum);
 				if (nodes == null) {

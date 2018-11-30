@@ -141,7 +141,7 @@ public class RuleHeadAnalysis extends HeadAnalysis
 		Map<@NonNull Node, @NonNull Set<@NonNull Node>> targetFromSources = new HashMap<>();
 		for (@NonNull Node sourceNode : QVTscheduleUtil.getOwnedNodes(mappingRegion)) {
 			if (sourceNode.isPattern() && sourceNode.isMatched() && sourceNode.isClass() && !sourceNode.isConstant() && !sourceNode.isOperation()) {	// Excludes, null, attributes, constants, operations
-				if (sourceNode.isLoaded() || sourceNode.isPredicated() || sourceNode.isSpeculated()) {
+				if (sourceNode.isLoaded() || sourceNode.isChecked()) {
 					Set<@NonNull Node> sources1 = targetFromSources.get(sourceNode);
 					if (sources1 == null) {
 						sources1 = Sets.newHashSet(sourceNode);

@@ -322,7 +322,7 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 		}
 		if (bestNamingNode == null) {
 			for (@NonNull Node node : getPartialNodes()) {
-				if (node.isNew() || node.isPredicated() || node.isSpeculated()) {
+				if (node.isNew() || node.isChecked()) {
 					Set<@NonNull Node> toOneSubRegion = computeToOneSubRegion(new HashSet<>(), node);
 					int toOneSubRegionSize = toOneSubRegion.size();
 					Boolean isBetter = null;

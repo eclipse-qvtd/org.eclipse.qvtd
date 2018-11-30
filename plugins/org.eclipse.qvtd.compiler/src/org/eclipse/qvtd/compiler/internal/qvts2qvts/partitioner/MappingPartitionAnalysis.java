@@ -142,7 +142,7 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 
 	private void addCheckedEdge(@NonNull NavigableEdge predicatedEdge) {
 		Role role = partition.getRole(predicatedEdge);
-		assert (role != null) && role.isPredicated();
+		assert (role != null) && role.isChecked();
 		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(predicatedEdge.getEdgeSource());
 		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
 		partition.addCheckedEdge(typedModel, predicatedEdge);
@@ -336,7 +336,7 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 					Node sourceNode = navigableEdge.getEdgeSource();
 					//	Node targetNode = navigableEdge.getEdgeTarget();
 					if (scheduleManager.isMiddle(sourceNode)) { // || scheduleManager.isMiddle(targetNode)) {
-						if (isPredicated(navigableEdge) || isSpeculated(navigableEdge)) {
+						if (isChecked(navigableEdge)) {
 							addConsumptionOfMiddleEdge(partitionedTransformationAnalysis, navigableEdge);
 						}
 						else if (isRealized(navigableEdge)) {
@@ -348,7 +348,7 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 					}
 					else { // || scheduleManager.isOutput(targetNode)) {
 						if (isLoaded(navigableEdge) || isConstant(navigableEdge)) {}
-						else if (isPredicated(navigableEdge)) {  // || isSpeculated(navigableEdge)) {
+						else if (isChecked(navigableEdge)) {  // || isSpeculated(navigableEdge)) {
 							if (!navigableEdge.isCast()) {
 								addConsumptionOfOutputEdge(partitionedTransformationAnalysis, navigableEdge);
 							}
@@ -566,7 +566,7 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 		}
 		ConnectionManager connectionManager = scheduleManager.getConnectionManager();
 		for (@NonNull Edge edge : partition.getPartialEdges()) {
-			if (edge.isNavigation() && isPredicated(edge)) {
+			if (edge.isNavigation() && isChecked(edge)) {
 				NavigationEdge predicatedEdge = (NavigationEdge) edge;
 				assert !predicatedEdge.isCast();
 				Property property = predicatedEdge.getProperty();

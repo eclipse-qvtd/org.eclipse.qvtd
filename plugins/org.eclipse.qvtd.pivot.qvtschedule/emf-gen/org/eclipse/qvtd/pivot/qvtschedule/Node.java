@@ -384,6 +384,11 @@ public interface Node extends Element, ConnectionEnd, org.eclipse.ocl.pivot.util
 	void initialize(@NonNull Role nodeRole, @NonNull Region region, /*@NonNull*/ String name, /*@NonNull*/ ClassDatum classDatum);
 
 	/**
+	 * Return true if this node is checked; i.e. isPredicated() or isSpeculated().
+	 */
+	boolean isChecked();
+
+	/**
 	 * Return true if this node is a Class object.
 	 */
 	boolean isClass();

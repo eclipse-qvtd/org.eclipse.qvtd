@@ -275,6 +275,11 @@ public interface Edge extends Element, org.eclipse.ocl.pivot.utilities.Nameable,
 	boolean isCast();
 
 	/**
+	 * Return true if this edge is checked; i.e. isPredicated() or isSpeculated().
+	 */
+	boolean isChecked();
+
+	/**
 	 * Return true if this node is part of the computation functionality of the region.
 	 */
 	boolean isComputation();
