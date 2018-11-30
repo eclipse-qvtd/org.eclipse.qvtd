@@ -36,7 +36,7 @@ class IterableAsSet<T> implements Set<T>
 	}
 
 	@Override
-	public boolean addAll(@NonNull Collection<? extends T> c) {
+	public boolean addAll(Collection<? extends T> c) {
 		throw new UnsupportedOperationException();
 	}
 
