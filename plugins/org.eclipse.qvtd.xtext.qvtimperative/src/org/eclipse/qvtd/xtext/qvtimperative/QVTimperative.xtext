@@ -37,7 +37,8 @@ BufferStatementCS: isStrict?='strict'? 'buffer' (':' firstPass=LOWER ('..' lastP
 
 CommitStatementCS returns StatementCS:	NewStatementCS | SetStatementCS;
 	
-CheckStatementCS: 'check' ownedCondition=ExpCS ';';
+CheckStatementCS: ('observe' observedProperties+=PathNameCS (',' observedProperties+=PathNameCS)*)?
+	'check' ownedCondition=ExpCS ';';
 	
 ControlStatementCS returns MappingStatementCS: AddStatementCS | MappingCallCS | MappingLoopCS;
 
