@@ -872,7 +872,7 @@ public class RelationAnalysis extends RuleAnalysis
 			}
 		}
 		String name = variable.getName();
-		if ("atlHelper".equals(name)) {
+		if ("qvtrThisVariable".equals(name)) {
 			getClass();
 		}
 		ExpressionSynthesizer expressionSynthesizer2 = expressionSynthesizer;
@@ -883,7 +883,7 @@ public class RelationAnalysis extends RuleAnalysis
 		assert bestInitNode != null;
 		if (variable.isIsRequired()) {
 			assert bestInitNode.isRequired();
-			assert bestInitNode.isMatched();
+			//	assert bestInitNode.isMatched();
 		}
 		/*		if ((ownedInit instanceof OperationCallExp) && initNode.isOperation()) {
 			if (QVTbaseUtil.isIdentification(((OperationCallExp)ownedInit).getReferredOperation())) {

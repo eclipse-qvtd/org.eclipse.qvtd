@@ -935,9 +935,11 @@ public abstract class ExpressionSynthesizer extends AbstractExtendingQVTbaseVisi
 		//			return sourceNode;
 		//		}
 		Type castType = QVTbaseUtil.getType(operationCallExp);
+		boolean castIsRequired = operationCallExp.isIsRequired();
 		CompleteClass requiredClass = environmentFactory.getCompleteModel().getCompleteClass(castType);
 		CompleteClass predicatedClass = sourceNode.getCompleteClass();
-		if (predicatedClass.conformsTo(requiredClass)) {
+		boolean sourceIsRequired = sourceNode.isRequired();
+		if (predicatedClass.conformsTo(requiredClass) && (sourceIsRequired || !castIsRequired)) {
 			sourceNode.addOriginatingElement(operationCallExp);
 			return sourceNode;											// Skip cast if already conformant, typically a redundant cast daisy chain
 		}
