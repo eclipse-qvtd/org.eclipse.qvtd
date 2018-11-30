@@ -151,7 +151,7 @@ public interface MappingPartition extends Partition {
 	 */
 	List<BasicPartition> getExplicitSuccessors();
 
-	void addCheckedEdge(@NonNull TypedModel typedModel, @NonNull NavigableEdge predicatedEdge);
+	void addCheckedEdge(@NonNull TypedModel typedModel, @NonNull NavigableEdge checkedEdge);
 	@NonNull Property addEnforcedEdge(@NonNull TypedModel typedModel,@NonNull NavigableEdge realizedEdge);
 	void initTypedModelAnalysis();
 } // MappingPartition

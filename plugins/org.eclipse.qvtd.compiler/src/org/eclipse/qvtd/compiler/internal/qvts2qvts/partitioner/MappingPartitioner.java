@@ -96,14 +96,14 @@ public class MappingPartitioner implements Nameable
 	private final @NonNull Set<@NonNull Edge> alreadyLoadedEdges = new HashSet<>();
 
 	/**
-	 * Dynamically growing list of edges that have been predicated by a partition.
+	 * Dynamically growing list of edges that have been checked (predicated or speculated) by a partition.
 	 */
-	private final @NonNull Set<@NonNull Edge> alreadyPredicatedEdges = new HashSet<>();
+	private final @NonNull Set<@NonNull Edge> alreadyCheckedEdges = new HashSet<>();
 
 	/**
-	 * Dynamically growing list of nodes that have been predicated by a partition.
+	 * Dynamically growing list of nodes that have been checked (predicated or speculated) by a partition.
 	 */
-	private final @NonNull Set<@NonNull Node> alreadyPredicatedNodes = new HashSet<>();
+	private final @NonNull Set<@NonNull Node> alreadyCheckedNodes = new HashSet<>();
 
 	/**
 	 * Dynamically growing map of edges that have been realized to the partition that realizes them.
@@ -126,6 +126,10 @@ public class MappingPartitioner implements Nameable
 		//
 	}
 
+	public boolean addCheckedNode(@NonNull Node node) {
+		return alreadyCheckedNodes.add(node);
+	}
+
 	public void addEdge(@NonNull Edge edge, @NonNull Role newEdgeRole, @NonNull BasicPartition partition) {
 		if (newEdgeRole == Role.CONSTANT) {
 			alreadyConstantEdges.add(edge);
@@ -134,10 +138,10 @@ public class MappingPartitioner implements Nameable
 			alreadyLoadedEdges.add(edge);
 		}
 		else if (newEdgeRole == Role.PREDICATED) {
-			alreadyPredicatedEdges.add(edge);
+			alreadyCheckedEdges.add(edge);
 		}
 		else if (newEdgeRole == Role.SPECULATED) {
-			alreadyPredicatedEdges.add(edge);
+			alreadyCheckedEdges.add(edge);
 		}
 		else if (newEdgeRole == Role.REALIZED) {
 			alreadyRealizedEdges.put(edge, partition);
@@ -149,10 +153,6 @@ public class MappingPartitioner implements Nameable
 		}
 		assert !partitions.contains(partition);
 		partitions.add(partition);
-	}
-
-	public boolean addPredicatedNode(@NonNull Node node) {
-		return alreadyPredicatedNodes.add(node);
 	}
 
 	public void addProblem(@NonNull CompilerProblem problem) {
@@ -462,20 +462,20 @@ public class MappingPartitioner implements Nameable
 		return regionAnalysis.getTraceNodes();
 	}
 
+	public boolean hasCheckedEdge(@NonNull Edge edge) {
+		return alreadyCheckedEdges.contains(edge);
+	}
+
+	public boolean hasCheckedNode(@NonNull Node node) {
+		return alreadyCheckedNodes.contains(node);
+	}
+
 	public boolean hasConstantEdge(@NonNull Edge edge) {
 		return alreadyConstantEdges.contains(edge);
 	}
 
 	public boolean hasLoadedEdge(@NonNull Edge edge) {
 		return alreadyLoadedEdges.contains(edge);
-	}
-
-	public boolean hasPredicatedEdge(@NonNull Edge edge) {
-		return alreadyPredicatedEdges.contains(edge);
-	}
-
-	public boolean hasPredicatedNode(@NonNull Node node) {
-		return alreadyPredicatedNodes.contains(node);
 	}
 
 	public boolean hasRealizedEdge(@NonNull Edge edge) {

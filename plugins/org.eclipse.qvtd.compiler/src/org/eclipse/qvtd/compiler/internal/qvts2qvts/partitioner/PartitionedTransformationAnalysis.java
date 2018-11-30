@@ -70,23 +70,7 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 		this.scheduleManager = transformationPartitioner.getScheduleManager();
 	}
 
-	public @NonNull TraceClassPartitionAnalysis addConsumer(@NonNull ClassDatum classDatum, @NonNull PartitionAnalysis consumer) {
-		TraceClassPartitionAnalysis traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
-		traceClassAnalysis.addConsumer(consumer);
-		return traceClassAnalysis;
-	}
-
-	public @NonNull TracePropertyPartitionAnalysis addConsumer(@NonNull PropertyDatum tracePropertyDatum, @NonNull PartitionAnalysis consumer) {
-		TracePropertyPartitionAnalysis tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
-		tracePropertyAnalysis.addConsumer(consumer);
-		return tracePropertyAnalysis;
-	}
-
-	public void addPartitionAnalysis(@NonNull AbstractPartitionAnalysis<?> partitionAnalysis) {
-		partition2partitionAnalysis.put(partitionAnalysis.getPartition(), partitionAnalysis);
-	}
-
-	public void addPredicatedEdge(@NonNull TypedModel typedModel, @NonNull NavigationEdge predicatedEdge) {
+	public void addCheckedEdge(@NonNull TypedModel typedModel, @NonNull NavigationEdge predicatedEdge) {
 		Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges2 = typedModel2property2predicatedEdges;
 		assert typedModel2property2predicatedEdges2 != null;
 		Property property = QVTscheduleUtil.getProperty(predicatedEdge);
@@ -102,6 +86,22 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 		}
 		predicatedEdges.add(predicatedEdge);
 		QVTscheduleConstants.POLLED_PROPERTIES.println("  " + typedModel + " predicated for " + property);
+	}
+
+	public @NonNull TraceClassPartitionAnalysis addConsumer(@NonNull ClassDatum classDatum, @NonNull PartitionAnalysis consumer) {
+		TraceClassPartitionAnalysis traceClassAnalysis = lazyCreateTraceClassAnalysis(classDatum);
+		traceClassAnalysis.addConsumer(consumer);
+		return traceClassAnalysis;
+	}
+
+	public @NonNull TracePropertyPartitionAnalysis addConsumer(@NonNull PropertyDatum tracePropertyDatum, @NonNull PartitionAnalysis consumer) {
+		TracePropertyPartitionAnalysis tracePropertyAnalysis = lazyCreateTracePropertyAnalysis(tracePropertyDatum);
+		tracePropertyAnalysis.addConsumer(consumer);
+		return tracePropertyAnalysis;
+	}
+
+	public void addPartitionAnalysis(@NonNull AbstractPartitionAnalysis<?> partitionAnalysis) {
+		partition2partitionAnalysis.put(partitionAnalysis.getPartition(), partitionAnalysis);
 	}
 
 	public @NonNull TraceClassPartitionAnalysis addProducer(@NonNull ClassDatum classDatum, @NonNull PartitionAnalysis producer) {

@@ -127,14 +127,14 @@ public abstract class AbstractSimplePartitionFactory extends AbstractPartitionFa
 				assert newNodeRole == Role.LOADED;
 				break;
 			}
-			case SPECULATED: {
-				assert newNodeRole == Role.PREDICATED || newNodeRole == Role.SPECULATED;
-				//				mappingPartitioner.addSpeculatedNode(node);
-				break;
-			}
+			case SPECULATED: //  {
+				//		assert newNodeRole == Role.PREDICATED || newNodeRole == Role.SPECULATED;
+				//		//				mappingPartitioner.addSpeculatedNode(node);
+				//		break;
+				//	}
 			case PREDICATED: {
 				assert newNodeRole == Role.PREDICATED || newNodeRole == Role.SPECULATED;
-				mappingPartitioner.addPredicatedNode(node);
+				mappingPartitioner.addCheckedNode(node);
 				break;
 			}
 			case REALIZED: {
@@ -217,8 +217,8 @@ public abstract class AbstractSimplePartitionFactory extends AbstractPartitionFa
 			if (mappingPartitioner.hasRealizedEdge(edge)) {
 				return null;			// A realized edge does not need to be checked
 			}
-			else if (mappingPartitioner.hasPredicatedEdge(edge)) {
-				return null;			// An already predicated edge does not need to be checked
+			else if (mappingPartitioner.hasCheckedEdge(edge)) {
+				return null;			// An already checked edge does not need to be checked
 			}
 			else if (mappingPartitioner.hasLoadedEdge(edge)) {
 				return null;			// An already loaded edge does not need to be checked

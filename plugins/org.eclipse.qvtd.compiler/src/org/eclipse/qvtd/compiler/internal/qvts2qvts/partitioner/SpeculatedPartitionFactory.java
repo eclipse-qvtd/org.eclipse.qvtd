@@ -114,9 +114,9 @@ public class SpeculatedPartitionFactory extends AbstractSimplePartitionFactory
 		for (@NonNull NavigableEdge edge : mappingPartitioner.getRealizedEdges()) {
 			if (!mappingPartitioner.hasRealizedEdge(edge) && (mappingPartitioner.getCorollaryOf(edge) == null)) {
 				Node sourceNode = edge.getEdgeSource();
-				if (!sourceNode.isPredicated() || mappingPartitioner.hasPredicatedNode(sourceNode)) { // || isLocalCorollary(sourceNode)) {
+				if (!sourceNode.isPredicated() || mappingPartitioner.hasCheckedNode(sourceNode)) { // || isLocalCorollary(sourceNode)) {
 					Node targetNode = edge.getEdgeTarget();
-					if (!targetNode.isPredicated() || mappingPartitioner.hasPredicatedNode(targetNode)) { // || isLocalCorollary(sourceNode)) {
+					if (!targetNode.isPredicated() || mappingPartitioner.hasCheckedNode(targetNode)) { // || isLocalCorollary(sourceNode)) {
 						if (!partition.hasNode(sourceNode)) {
 							addNode(partition, sourceNode, QVTscheduleUtil.getNodeRole(sourceNode));
 						}
@@ -154,7 +154,7 @@ public class SpeculatedPartitionFactory extends AbstractSimplePartitionFactory
 					//				if (!hasNode(targetNode)) {
 					//					addNode(targetNode);
 					//				}
-					//				mappingPartitioner.addPredicatedNode(targetNode);
+					//				mappingPartitioner.addCheckedNode(targetNode);
 					//				mappingPartitioner.addEdge(edge, Role.PREDICATED, this);	// FUXME this fudges inadequate speculation
 					//			}
 					//			else {

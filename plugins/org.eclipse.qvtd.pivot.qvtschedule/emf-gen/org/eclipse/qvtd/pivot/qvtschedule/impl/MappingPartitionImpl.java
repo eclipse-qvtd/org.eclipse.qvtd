@@ -440,7 +440,7 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 	private final @NonNull ToDOT toDot = new ToDOT(this){};
 
 	@Override
-	public void addCheckedEdge(@NonNull TypedModel typedModel, @NonNull NavigableEdge predicatedEdge) {
+	public void addCheckedEdge(@NonNull TypedModel typedModel, @NonNull NavigableEdge checkedEdge) {
 		Map<@NonNull TypedModel, @NonNull Set<@NonNull NavigableEdge>> typedModel2checkedEdges2 = typedModel2checkedEdges;
 		assert typedModel2checkedEdges2 != null;
 		Set<@NonNull NavigableEdge> checkedEdges = typedModel2checkedEdges2.get(typedModel);
@@ -448,7 +448,7 @@ public abstract class MappingPartitionImpl extends PartitionImpl implements Mapp
 			checkedEdges = new HashSet<>();
 			typedModel2checkedEdges2.put(typedModel, checkedEdges);
 		}
-		checkedEdges.add(predicatedEdge);
+		checkedEdges.add(checkedEdge);
 	}
 
 	@Override

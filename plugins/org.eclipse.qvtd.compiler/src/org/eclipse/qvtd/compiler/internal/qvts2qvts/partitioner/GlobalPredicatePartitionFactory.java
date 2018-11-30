@@ -87,7 +87,7 @@ public class GlobalPredicatePartitionFactory extends AbstractSimplePartitionFact
 		//
 		if (hasSynthesizedTrace) {
 			for (@NonNull Node whenNode : mappingPartitioner.getPredicatedWhenNodes()) {
-				if (!mappingPartitioner.hasPredicatedNode(whenNode)) {
+				if (!mappingPartitioner.hasCheckedNode(whenNode)) {
 					addNode(partition, whenNode); //, Role.SPECULATED);
 				}
 			}
@@ -182,7 +182,7 @@ public class GlobalPredicatePartitionFactory extends AbstractSimplePartitionFact
 		//	}
 		for (@NonNull Node constantOutputNode : mappingPartitioner.getConstantOutputNodes()) {
 			//	if ((fallibleNodes == null) || !Iterables.contains(fallibleNodes, constantOutputNode)) {
-			if (!mappingPartitioner.hasPredicatedNode(constantOutputNode)) {
+			if (!mappingPartitioner.hasCheckedNode(constantOutputNode)) {
 				addNode(partition, constantOutputNode);
 			}
 			//	}
@@ -278,7 +278,7 @@ public class GlobalPredicatePartitionFactory extends AbstractSimplePartitionFact
 					//				if (!hasNode(targetNode)) {
 					//					addNode(targetNode);
 					//				}
-					//				mappingPartitioner.addPredicatedNode(targetNode);
+					//				mappingPartitioner.addCheckedEdge(targetNode);
 					//				mappingPartitioner.addEdge(edge, Role.PREDICATED, this);	// FIXME this fudges inadequate speculation
 					//			}
 					//			else {

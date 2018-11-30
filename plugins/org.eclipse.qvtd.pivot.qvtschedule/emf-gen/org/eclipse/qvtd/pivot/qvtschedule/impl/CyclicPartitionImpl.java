@@ -461,7 +461,7 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	}
 
 	@Override
-	public void addCheckedEdge(@NonNull TypedModel typedModel, @NonNull NavigableEdge predicatedEdge) {
+	public void addCheckedEdge(@NonNull TypedModel typedModel, @NonNull NavigableEdge checkedEdge) {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}

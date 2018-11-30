@@ -140,13 +140,13 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 		super(partitionedTransformationAnalysis, partition);
 	}
 
-	private void addCheckedEdge(@NonNull NavigableEdge predicatedEdge) {
-		Role role = partition.getRole(predicatedEdge);
+	private void addCheckedEdge(@NonNull NavigableEdge checkedEdge) {
+		Role role = partition.getRole(checkedEdge);
 		assert (role != null) && role.isChecked();
-		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(predicatedEdge.getEdgeSource());
+		ClassDatum classDatum = QVTscheduleUtil.getClassDatum(checkedEdge.getEdgeSource());
 		TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
-		partition.addCheckedEdge(typedModel, predicatedEdge);
-		QVTscheduleConstants.POLLED_PROPERTIES.println("    checked " + predicatedEdge.getProperty() +
+		partition.addCheckedEdge(typedModel, checkedEdge);
+		QVTscheduleConstants.POLLED_PROPERTIES.println("    checked " + checkedEdge.getProperty() +
 			" at " + partition.getPassRangeText() + " in " + typedModel + " for " + partition);
 	}
 
@@ -500,7 +500,7 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 				TypedModel typedModel = QVTscheduleUtil.getReferredTypedModel(classDatum);
 				if (isPredicated(edge)) {
 					assert !navigationEdge.isCast();
-					partitionedTransformationAnalysis.addPredicatedEdge(typedModel, navigationEdge);
+					partitionedTransformationAnalysis.addCheckedEdge(typedModel, navigationEdge);
 				}
 				else if (isRealized(edge)) {
 					partitionedTransformationAnalysis.addRealizedEdge(typedModel, navigationEdge);
@@ -567,18 +567,18 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 		ConnectionManager connectionManager = scheduleManager.getConnectionManager();
 		for (@NonNull Edge edge : partition.getPartialEdges()) {
 			if (edge.isNavigation() && isChecked(edge)) {
-				NavigationEdge predicatedEdge = (NavigationEdge) edge;
-				assert !predicatedEdge.isCast();
-				Property property = predicatedEdge.getProperty();
+				NavigationEdge checkedEdge = (NavigationEdge) edge;
+				assert !checkedEdge.isCast();
+				Property property = checkedEdge.getProperty();
 				if (doDebug) {
-					QVTscheduleConstants.POLLED_PROPERTIES.println("  analyzing " + predicatedEdge.getEdgeSource().getName() + "::" + property.getName() + " : " + predicatedEdge.getEdgeSource().getCompleteClass());
+					QVTscheduleConstants.POLLED_PROPERTIES.println("  analyzing " + checkedEdge.getEdgeSource().getName() + "::" + property.getName() + " : " + checkedEdge.getEdgeSource().getCompleteClass());
 				}
-				EdgeConnection edgeConnection = predicatedEdge.getIncomingConnection();
+				EdgeConnection edgeConnection = checkedEdge.getIncomingConnection();
 				if (edgeConnection != null) {
 					boolean isChecked = false;
 					for (@NonNull Partition usedPartition : edgeConnection.getSourcePartitions()) {
 						if (usedPartition.getLastPass() >= partition.getFirstPass()) {
-							addCheckedEdge(predicatedEdge);
+							addCheckedEdge(checkedEdge);
 							isChecked = true;
 						}
 					}
@@ -596,9 +596,9 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 					}
 				}
 
-				Node laterNode = predicatedEdge.getEdgeSource();
-				Node predicatedSourceNode = predicatedEdge.getEdgeSource();
-				Node predicatedTargetNode = predicatedEdge.getEdgeTarget();
+				Node laterNode = checkedEdge.getEdgeSource();
+				Node predicatedSourceNode = checkedEdge.getEdgeSource();
+				Node predicatedTargetNode = checkedEdge.getEdgeTarget();
 				NodeConnection usedConnection = connectionManager.getIncomingUsedConnection(predicatedTargetNode);
 				if (usedConnection != null) {
 					for (@NonNull Partition usedPartition : usedConnection.getSourcePartitions()) {
@@ -647,7 +647,7 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 											//													isNotHazardous = null;
 											//											}
 											//												if (isNotHazardous == null) {
-											addCheckedEdge(predicatedEdge);
+											addCheckedEdge(checkedEdge);
 											AbstractPartitionAnalysis<?> usedPartitionAnalysis = partitionedTransformationAnalysis.getPartitionAnalysis(usedPartition);
 											usedPartitionAnalysis.addEnforcedEdge(realizedEdge);
 											//												}
@@ -697,7 +697,7 @@ public abstract class MappingPartitionAnalysis<P extends MappingPartition> exten
 											enforceIsHazardFreeBecause = null;
 										}
 										if (checkIsHazardFreeBecause == null) {
-											addCheckedEdge(predicatedEdge);
+											addCheckedEdge(checkedEdge);
 										}
 										else if (doDebug) {
 											QVTscheduleConstants.POLLED_PROPERTIES.println("    ignored check for " + this + "::" + laterNode.getName() + "(" + partition.getPassRangeText() + ")" +
