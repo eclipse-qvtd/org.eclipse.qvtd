@@ -747,6 +747,10 @@ public class QVTscheduleUtil extends QVTscheduleConstants
 		return ClassUtil.nonNullState(rootRegion.getOwningScheduleModel());
 	}
 
+	public static @NonNull Iterable<@NonNull Integer> getPasses(@NonNull Partition partition) {
+		return ClassUtil.nullFree(partition.getPasses());
+	}
+
 	public static @NonNull NavigableEdge getPrimaryEdge(@NonNull NavigableEdge navigableEdge) {
 		return navigableEdge.isSecondary() ? getOppositeEdge(navigableEdge) : navigableEdge;
 	}

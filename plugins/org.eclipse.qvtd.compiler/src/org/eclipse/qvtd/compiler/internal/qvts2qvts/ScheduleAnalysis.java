@@ -13,8 +13,10 @@ package org.eclipse.qvtd.compiler.internal.qvts2qvts;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -27,6 +29,9 @@ import org.eclipse.qvtd.pivot.qvtschedule.Connection;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Partition;
 import org.eclipse.qvtd.pivot.qvtschedule.RootPartition;
+import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
+
+import com.google.common.collect.Sets;
 
 /**
  * ScheduleAnalysis analyses a sequence of concurrent partitions to identofy the necessary connections.
@@ -410,7 +415,7 @@ public class ScheduleAnalysis
 	}
 
 	private void checkPassNumbers(@NonNull Connection connection) {
-		int firstPass = connection.getFirstPass();
+		@SuppressWarnings("unused") int firstPass = connection.getFirstPass();
 		int lastPass = connection.getLastPass();
 		for (@NonNull Partition sourcePartition : connection.getSourcePartitions()) {
 			//	assert sourcePartition.getFirstPass() <= firstPass;
@@ -485,32 +490,33 @@ public class ScheduleAnalysis
 		return targetPartitions;
 	}
 
-	private void propagatePassNumbers(@NonNull Connection connection) {
-		List<@NonNull Integer> connectionIndexes = connection.getPasses();
-		//	assert connectionIndexes.size() > 0;
-		if (connectionIndexes.size() > 0) {			// Empty for dead inputs
-			for (@NonNull Partition partition : getTargetPartitions(connection)) {
-				int invocationIndex = partition.getFirstPass();
-				boolean propagateThroughRegion = false;
-				for (int connectionIndex : connectionIndexes) {
-					if ((connectionIndex > invocationIndex) && partition.addPass(connectionIndex)) {
-						propagateThroughRegion = true;
-					}
+	private void propagatePassNumbers(@NonNull Partition sourcePartition, @NonNull Set<@NonNull Connection> changedConnections) {
+		Iterable<@NonNull Integer> sourcePasses = QVTscheduleUtil.getPasses(sourcePartition);
+		for (@NonNull Connection outgoingConnection : getOutgoingConnections(sourcePartition)) {
+			boolean isChanged = false;
+			for (int sourcePass : sourcePasses) {
+				if (outgoingConnection.addPass(sourcePass)) {
+					isChanged = true;
 				}
-				if (propagateThroughRegion) {
-					Iterable<@NonNull Connection> outgoingConnections = getOutgoingConnections(partition);
-					for (@NonNull Connection targetConnection : outgoingConnections) {
-						boolean propagateThroughConnection = false;
-						for (int connectionIndex : connectionIndexes) {
-							if ((connectionIndex > invocationIndex) && targetConnection.addPass(connectionIndex)) {
-								propagateThroughConnection = true;
-							}
-						}
-						if (propagateThroughConnection) {
-							propagatePassNumbers(targetConnection);
-						}
-					}
+			}
+			if (isChanged) {
+				changedConnections.add(outgoingConnection);
+			}
+		}
+	}
+
+	private void propagatePassNumbers(@NonNull Connection incomingConnection, @NonNull Set<@NonNull Partition> changedPartitions) {
+		List<@NonNull Integer> connectionPasses = incomingConnection.getPasses();
+		for (@NonNull Partition targetPartition : getTargetPartitions(incomingConnection)) {
+			boolean isChanged = false;
+			int lastPass = targetPartition.getLastPass();
+			for (int connectionPass : connectionPasses) {
+				if ((connectionPass > lastPass) && targetPartition.addPass(connectionPass)) {
+					isChanged = true;
 				}
+			}
+			if (isChanged) {
+				changedPartitions.add(targetPartition);
 			}
 		}
 	}
@@ -519,6 +525,7 @@ public class ScheduleAnalysis
 		int passNumber = 0;
 		int cycleDepth = 0;
 		int cycleStart = 0;
+		Set<@NonNull Partition> changedPartitions = new HashSet<>();
 		for (@NonNull Concurrency concurrency : partitionSchedule) {
 			concurrency.setPass(passNumber);
 			if (concurrency.isCycleStart()) {
@@ -529,15 +536,11 @@ public class ScheduleAnalysis
 			}
 			for (@NonNull PartitionAnalysis partitionAnalysis : concurrency) {
 				Partition partition = partitionAnalysis.getPartition();
+				changedPartitions.add(partition);
 				Iterable<@NonNull Connection> loopingConnections = getLoopingConnections(partition);
 				assert loopingConnections != null;
-				Iterable<@NonNull Connection> outgoingConnections = getOutgoingConnections(partition);
-				assert outgoingConnections != null;
 				for (@NonNull Connection loopingConnection : loopingConnections) {
 					loopingConnection.addPass(passNumber);
-				}
-				for (@NonNull Connection outgoingConnection : outgoingConnections) {
-					outgoingConnection.addPass(passNumber);
 				}
 			}
 			if (concurrency.isCycleEnd()) {
@@ -555,9 +558,24 @@ public class ScheduleAnalysis
 		/**
 		 * Propagate the additional connection indexes to their outgoing connections.
 		 */
-		for (@NonNull Connection connection : getConnections()) {
-			propagatePassNumbers(connection);
+		Set<@NonNull Connection> changedConnections = Sets.newHashSet(getConnections());
+		while (!changedPartitions.isEmpty()) {
+			for (@NonNull Partition changedPartition : changedPartitions) {
+				propagatePassNumbers(changedPartition, changedConnections);
+			}
+			changedPartitions.clear();
+			for (@NonNull Connection changedConnection : changedConnections) {
+				propagatePassNumbers(changedConnection, changedPartitions);
+			}
+			changedConnections.clear();
 		}
+		//	for (@NonNull Connection connection : getConnections()) {
+		//		String name = connection.getName();
+		//		if ("ja_DmapOclExpression_success".equals(name)) {
+		//			getClass();
+		//		}
+		//		propagatePassNumbers(connection);
+		//	}
 		scheduleManager.writeDebugGraphs("7-passes", false, true, false);
 		for (@NonNull Connection connection : getConnections()) {
 			checkPassNumbers(connection);
