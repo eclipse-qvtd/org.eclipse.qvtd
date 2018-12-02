@@ -22,24 +22,30 @@ group="modeling.mmt.qvtd"
 localZip="qvtd.zip"
 projectRepoName="QVTd"
 manageComposite="/shared/common/apache-ant-latest/bin/ant -f /shared/modeling/tools/promotion/manage-composite.xml"
+externalUpdatesFolder="http://download.eclipse.org/mmt/qvtd/updates/"
 
 if [ -n "${PUBLISH__BUILD_T}" ]
 then
 
+  tQualifier="${PUBLISH__BUILD_T}${PUBLISH__QUALIFIER:1:8}${PUBLISH__QUALIFIER:10:4}"
   if [ "${PUBLISH__BUILD_T}" = "N" ]
   then
     buildFolder="${updatesFolder}nightly"
     buildRepoName="Nightly"
+    externalFolder="${externalUpdatesFolder}nightly/${PUBLISH__VERSION}"
   elif [ "${PUBLISH__BUILD_T}" = "I" ]
   then
     buildFolder="${updatesFolder}interim"
     buildRepoName="Interim"
+    externalFolder="${externalUpdatesFolder}interim/${PUBLISH__VERSION}"
   elif [ "${PUBLISH__BUILD_T}" = "S" ]
   then
     buildFolder="${updatesFolder}milestones"
     buildRepoName="Milestones"
+    externalFolder="${externalUpdatesFolder}milestones/${PUBLISH__VERSION}/${tQualifier}"
   else
     buildFolder="${updatesFolder}other"
+    externalFolder="${externalUpdatesFolder}other/${PUBLISH__VERSION}"
     buildRepoName="Other"
   fi
 
@@ -78,7 +84,6 @@ then
     then
       pushd ${buildFolder}/${PUBLISH__VERSION}
 
-        tQualifier="${PUBLISH__BUILD_T}${PUBLISH__QUALIFIER:1:8}${PUBLISH__QUALIFIER:10:4}"
         versionFolder="${buildFolder}/${tQualifier}"
         if [ ! -d "${tQualifier}" ]
         then
@@ -92,9 +97,20 @@ then
         chgrp -R ${group} ${tQualifier}
         chmod -R g+w ${tQualifier}
         ${manageComposite} add -Dchild.repository=${tQualifier} -Dcomposite.name="${projectRepoName} ${PUBLISH__VERSION} ${buildRepoName} Repository"
-
       popd
+
     fi
+
+    mkdir ${buildFolder}/newlatest
+    pushd ${buildFolder}/newlatest
+      ${manageComposite} add -Dchild.repository=${externalFolder} -Dcomposite.name="${projectRepoName} Latest ${PUBLISH__VERSION} ${buildRepoName} Repository"
+    popd
+    if [ -d "latest" ]
+    then
+      mv latest oldlatest
+    fi
+    mv newlatest latest
+    rm -rf oldlatest
    
   popd
 
