@@ -27,6 +27,7 @@ public interface PartitionAnalysis extends CompilerUtil.PartialRegion<@NonNull P
 	void analyzePartitionEdges();
 	void computeCheckedOrEnforcedEdges();
 	@NonNull Partition getPartition();
+	@NonNull PartitionedTransformationAnalysis getPartitionedTransformationAnalysis();
 	@Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getProducedTraceClassAnalyses();
 	@Nullable Iterable<@NonNull TracePropertyPartitionAnalysis> getProducedTracePropertyAnalyses();
 	@NonNull Iterable<@NonNull TraceClassPartitionAnalysis> getTraceClassAnalyses();

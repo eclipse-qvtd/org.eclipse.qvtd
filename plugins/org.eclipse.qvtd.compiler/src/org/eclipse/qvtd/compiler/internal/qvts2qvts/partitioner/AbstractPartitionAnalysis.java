@@ -80,6 +80,11 @@ public abstract class AbstractPartitionAnalysis<P extends Partition> implements 
 	}
 
 	@Override
+	public @NonNull PartitionedTransformationAnalysis getPartitionedTransformationAnalysis() {
+		return partitionedTransformationAnalysis;
+	}
+
+	@Override
 	public @Nullable Iterable<@NonNull TraceClassPartitionAnalysis> getProducedTraceClassAnalyses() {
 		throw new UnsupportedOperationException();
 	}

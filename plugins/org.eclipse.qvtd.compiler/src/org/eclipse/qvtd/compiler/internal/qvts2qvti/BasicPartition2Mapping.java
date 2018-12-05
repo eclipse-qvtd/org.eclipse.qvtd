@@ -70,7 +70,9 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.RegionHelper;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.RegionAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedCondition;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.checks.CheckedConditionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.FallibilityAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.MappingPartitionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.utilities.ReachabilityForest;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -316,7 +318,17 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 			assert edgeRole != null;
 			if (edgeRole.isSpeculated()) {
 				assert edge.isSuccess();
-				System.err.println("Speculation code omitted for " + partition);
+				boolean isInfallible = isInfallible();
+				boolean isTerminating = isTerminating();
+				if (isInfallible) {				// If cycles are guaranteed not to fail (e.g. Forward2Reverse)
+					// Speculation code can be omitted.
+				}
+				else if (isTerminating) {		// If cycles are guaranteed to terminate (e.g. ATL2QVTr containment ascent)
+					createCheckStatement(checkExpression);
+				}
+				else {
+					System.err.println("Speculation code omitted for " + partition);
+				}
 			}
 			else {
 				createCheckStatement(checkExpression);
@@ -1898,12 +1910,16 @@ public class BasicPartition2Mapping extends AbstractPartition2Mapping
 		return enforcedEdges != null;
 	}
 
-	@Override
-	public boolean isInfinite() {
-		//		if (region.getRecursionEdges().iterator().hasNext()) {		// FIXME unduly pessimistic
-		//			return true;
-		//		}
-		return false;
+	private boolean isInfallible() {
+		PartitionedTransformationAnalysis partitionedTransformationAnalysis = regionAnalysis.getPartitionedTransformationAnalysis();
+		FallibilityAnalysis fallibilityAnalysis = partitionedTransformationAnalysis.getFallibilityAnalysis(partition);
+		return fallibilityAnalysis.isInfallible();
+	}
+
+	private boolean isTerminating() {
+		PartitionedTransformationAnalysis partitionedTransformationAnalysis = regionAnalysis.getPartitionedTransformationAnalysis();
+		FallibilityAnalysis fallibilityAnalysis = partitionedTransformationAnalysis.getFallibilityAnalysis(partition);
+		return fallibilityAnalysis.isTerminating();
 	}
 
 	/**

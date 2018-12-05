@@ -22,6 +22,7 @@ import org.eclipse.qvtd.compiler.internal.qvtr2qvts.RelationAnalysis;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationAnalysis2TraceClass;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.trace.RelationAnalysis2TraceGroup;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionAnalysis;
+import org.eclipse.qvtd.compiler.internal.qvts2qvts.partitioner.PartitionedTransformationAnalysis;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -141,6 +142,10 @@ public class RegionAnalysis extends AbstractRegionAnalysis
 
 	public @NonNull Iterable<@NonNull PartitionAnalysis> getPartitionAnalyses() {
 		return ClassUtil.nonNullState(partitionAnalyses);
+	}
+
+	public @NonNull PartitionedTransformationAnalysis getPartitionedTransformationAnalysis() {
+		return getPartitionAnalyses().iterator().next().getPartitionedTransformationAnalysis();
 	}
 
 	public @NonNull Region getRegion() {

@@ -252,7 +252,8 @@ public class TransformationPartitioner extends QVTbaseHelper implements Nameable
 		//		this.fallibilityAnalysis = computeFallibilityAnalysis();
 		//	Iterable<@NonNull Partition> leafPartitions = getPartialRegionAnalyses();
 		this.cyclicPartitionsAnalysis = new CyclicPartitionsAnalysis(this, partitionAnalyses);
-		cyclicPartitionsAnalysis.analyze(partitionedTransformationAnalysis);
+		RootPartitionAnalysis rootPartitionAnalysis = cyclicPartitionsAnalysis.analyze(partitionedTransformationAnalysis);
+		partitionedTransformationAnalysis.analyzeFallibilities(rootPartitionAnalysis);
 		return partitionedTransformationAnalysis;
 	}
 }

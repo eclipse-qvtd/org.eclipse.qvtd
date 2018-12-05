@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2017 Willink Transformations and others.
+ * Copyright (c) 2017, 2018 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -56,9 +56,14 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 	private final @NonNull Map<@NonNull PropertyDatum, @NonNull TracePropertyPartitionAnalysis> propertyDatum2tracePropertyAnalysis = new HashMap<>();
 
 	/**
-	 * The TracePropertyAnalysis for each trace property.
+	 * The PartitionAnalysis for each Partition.
 	 */
 	private final @NonNull Map<@NonNull Partition, @NonNull AbstractPartitionAnalysis<?>> partition2partitionAnalysis = new HashMap<>();
+
+	/**
+	 * The FallibilityAnalysis for each Partition.
+	 */
+	private final @NonNull Map<@NonNull Partition, @NonNull AbstractFallibilityAnalysis> partition2fallibilityAnalysis = new HashMap<>();
 
 	private @Nullable RootPartitionAnalysis rootPartitionAnalysis = null;
 	private @Nullable Map<@NonNull TypedModel, @NonNull Map<@NonNull Property, @NonNull List<@NonNull NavigableEdge>>> typedModel2property2predicatedEdges = null;
@@ -134,6 +139,55 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 		QVTscheduleConstants.POLLED_PROPERTIES.println("  " + typedModel + " realized for " + property);
 	}
 
+	public void analyzeFallibilities(@NonNull RootPartitionAnalysis rootPartitionAnalysis) {
+		for (@NonNull PartitionAnalysis nestedPartitionAnalysis : rootPartitionAnalysis.getPartitionAnalyses()) {
+			if (nestedPartitionAnalysis instanceof CyclicPartitionAnalysis) {
+				analyzeFallibilities((CyclicPartitionAnalysis)nestedPartitionAnalysis);
+			}
+			else if (nestedPartitionAnalysis instanceof LoadingPartitionAnalysis) {
+				;
+			}
+			else if (nestedPartitionAnalysis instanceof MappingPartitionAnalysis<?>) {
+				;
+			}
+			else {
+				throw new UnsupportedOperationException();
+			}
+		}
+	}
+
+	protected @NonNull AbstractFallibilityAnalysis analyzeFallibilities(@NonNull CyclicPartitionAnalysis partitionAnalysis) {
+		Iterable<@NonNull PartitionAnalysis> partitionAnalyses = partitionAnalysis.getPartitionAnalyses();
+		if (Iterables.size(partitionAnalyses) == 1) {
+			PartitionAnalysis nestedPartitionAnalysis = partitionAnalyses.iterator().next();
+			if (nestedPartitionAnalysis instanceof CyclicPartitionAnalysis) {
+				return analyzeFallibilities((CyclicPartitionAnalysis)nestedPartitionAnalysis);
+			}
+			else {
+				assert nestedPartitionAnalysis instanceof MappingPartitionAnalysis<?>;
+				return getFallibilityAnalysis(nestedPartitionAnalysis.getPartition());
+			}
+		}
+		CyclicFallibilityAnalysis cyclicFallibilityAnalysis = new CyclicFallibilityAnalysis(partitionAnalysis);
+		for (@NonNull PartitionAnalysis nestedPartitionAnalysis : partitionAnalyses) {
+			if (nestedPartitionAnalysis instanceof CyclicPartitionAnalysis) {
+				AbstractFallibilityAnalysis nestedFallibilityAnalysis = analyzeFallibilities((CyclicPartitionAnalysis)nestedPartitionAnalysis);
+				cyclicFallibilityAnalysis.analyze(nestedFallibilityAnalysis);
+			}
+			else {
+				assert nestedPartitionAnalysis instanceof MappingPartitionAnalysis<?>;
+				Partition nestedPartition = nestedPartitionAnalysis.getPartition();
+				FallibilityAnalysis fallibilityAnalysis = partition2fallibilityAnalysis.get(nestedPartition);
+				assert fallibilityAnalysis == null;
+				cyclicFallibilityAnalysis.analyze(nestedPartitionAnalysis);
+				FallibilityAnalysis oldFallibilityAnalysis = partition2fallibilityAnalysis.put(nestedPartition, cyclicFallibilityAnalysis);
+				assert oldFallibilityAnalysis == null;
+			}
+		}
+		cyclicFallibilityAnalysis.analyze();
+		return cyclicFallibilityAnalysis;
+	}
+
 	public void analyzePartitionEdges(@NonNull Iterable<@NonNull Concurrency> partitionSchedule) {
 		typedModel2property2predicatedEdges = new HashMap<>();
 		typedModel2property2realizedEdges = new HashMap<>();
@@ -206,6 +260,15 @@ public class PartitionedTransformationAnalysis extends QVTbaseHelper implements 
 
 	protected @NonNull TracePropertyPartitionAnalysis createTracePropertyAnalysis(@NonNull TraceClassPartitionAnalysis traceClassAnalysis, @NonNull PropertyDatum tracePropertyDatum) {
 		return new TracePropertyPartitionAnalysis(transformationPartitioner, traceClassAnalysis, tracePropertyDatum);
+	}
+
+	public @NonNull AbstractFallibilityAnalysis getFallibilityAnalysis(@NonNull Partition partition) {
+		AbstractFallibilityAnalysis fallibilityAnalysis = partition2fallibilityAnalysis.get(partition);
+		if (fallibilityAnalysis == null) {
+			PartitionAnalysis partitionAnalysis = getPartitionAnalysis(partition);
+			fallibilityAnalysis = new SelfCyclicFallibilityAnalysis((MappingPartitionAnalysis<?>) partitionAnalysis);
+		}
+		return fallibilityAnalysis;
 	}
 
 	//	protected abstract @NonNull Iterable<@NonNull Partition> getPartialRegionAnalyses();

@@ -299,10 +299,6 @@ public abstract class AbstractPartition2Mapping
 		return selectByKindOperation;
 	}
 
-	public boolean isInfinite() {
-		return false;
-	}
-
 	public abstract void synthesizeCallStatements();
 	public abstract void synthesizeLocalStatements();
 
