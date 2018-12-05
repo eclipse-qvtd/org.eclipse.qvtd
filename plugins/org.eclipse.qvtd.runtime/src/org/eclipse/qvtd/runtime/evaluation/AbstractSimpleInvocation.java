@@ -42,4 +42,9 @@ public abstract class AbstractSimpleInvocation extends AbstractInvocationInterna
 	public boolean isEqual(@NonNull IdResolver idResolver, @NonNull Object @NonNull [] thoseValues) {
 		throw new IllegalStateException();			// SimpleInvocation should alwaysbe a simgleton
 	}
+
+	@Override
+	public String toString() {
+		return "«install»@" + interval.getIndex() + " " + name;
+	}
 }

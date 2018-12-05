@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.qvtd.runtime.evaluation.AbstractInvocationManager;
+import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.DefaultInterval;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
@@ -104,6 +105,7 @@ public abstract class AbstractInvocationManagerInternal extends AbstractInvocati
 		for (int index = nextIndex; index < intervals.size(); index = nextIndex) {
 			nextIndex = index+1;
 			Interval nextInterval = intervals.get(index);
+			AbstractTransformer.INVOCATIONS.println("--------" + index + "--------");
 			nextInterval.flush();				// May set nextIndex back to 'same' or even earlier
 		}
 		for (@NonNull Interval interval : intervals) {

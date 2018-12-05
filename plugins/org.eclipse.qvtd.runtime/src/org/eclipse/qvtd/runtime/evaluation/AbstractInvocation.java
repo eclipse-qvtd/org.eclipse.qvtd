@@ -172,6 +172,12 @@ public abstract class AbstractInvocation extends AbstractInvocationInternal
 
 	@Override
 	public @NonNull String getName() {
-		return toString().replace("@",  "\n@");
+		//		return toString().replace("@",  "\n@");
+		return getClass().getSimpleName() + "\n@" + Integer.toHexString(System.identityHashCode(this));
+	}
+
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "@" + Integer.toHexString(System.identityHashCode(this));
 	}
 }
