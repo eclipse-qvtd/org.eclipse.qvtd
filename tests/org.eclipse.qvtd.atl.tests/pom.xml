@@ -4,12 +4,12 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.qvtd-tests</groupId>
   <artifactId>org.eclipse.qvtd.atl.tests</artifactId>
-  <version>0.17.0-SNAPSHOT</version>
+  <version>0.18.0-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
   <parent>
     <groupId>org.eclipse.qvtd-tests</groupId>
     <artifactId>org.eclipse.qvtd.tests-folder</artifactId>
-    <version>0.17.0-SNAPSHOT</version>
+    <version>0.18.0-SNAPSHOT</version>
   </parent>
   <build>
     <plugins>

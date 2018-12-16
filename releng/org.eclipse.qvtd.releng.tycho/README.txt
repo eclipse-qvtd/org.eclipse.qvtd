@@ -1,30 +1,36 @@
 The Tycho build automatically promotes downloads and updates, so no cron job help is necessary.
 
 The updates can be checked by looking for the new entry on http://www.eclipse.org/mmt/downloads/?project=qvtd
-or installing new software from e.g. http://download.eclipse.org/mmt/qvtd/updates/milestones/0.16.0/S201408191819
+or installing new software from e.g. http://download.eclipse.org/mmt/qvtd/updates/milestones/0.18.0/S201408191819
 
 However operations on composite repositories are not automated, partly because they are sufficiently important to deserve manual attention. 
 
 A new milestone build can be added to the composite repository by:
 
 logon to build.eclipse.org
-cd downloads/mmt/qvtd/updates/milestones/0.16.0
-ant -f /shared/modeling/tools/promotion/manage-composite.xml add -Dchild.repository=S201408191819 -Dcomposite.name="QVTd 0.16.0 milestones"
+cd ~/downloads/mmt/qvtd/updates/milestones/0.18.0
+ant -f /shared/modeling/tools/promotion/manage-composite.xml add -Dchild.repository=S201408191819 -Dcomposite.name="QVTd 0.18.0 milestones"
 
-(This can be checked by installing new software from e.g. http://download.eclipse.org/mmt/qvtd/updates/milestones/0.16.0)
+(This can be checked by installing new software from e.g. http://download.eclipse.org/mmt/qvtd/updates/milestones/0.18.0)
 
 The SimRel aggregator is configured by GIT\org.eclipse.simrel.build\qvtd.aggrcon to use an explicit milestone entry
 
 So edit qvtd.aggrcon to update 
-location="http://download.eclipse.org/mmt/qvtd/updates/milestones/0.16.0/S201408191819"
+location="http://download.eclipse.org/mmt/qvtd/updates/milestones/0.18.0/S201408191819"
 push first to Getrrit refs/for/master and if successful to refs/head/master and start a new build at https://ci.eclipse.org/simrel/job/simrel.photon.runaggregator/
 
 Once a release has been promoted update qvtd.aggrcon to the final release
-location="http://download.eclipse.org/mmt/qvtd/updates/releases/0.16.0"
+location="http://download.eclipse.org/mmt/qvtd/updates/releases/0.18.0"
 
 After each first repo contribution, remember to update the aggregates e.g.
-cd downloads/mmt/qvtd/updates/milestones
-ant -f /shared/modeling/tools/promotion/manage-composite.xml add -Dchild.repository=0.16.0
+cd ~/downloads/mmt/qvtd/updates/milestones
+ant -f /shared/modeling/tools/promotion/manage-composite.xml add -Dchild.repository=0.18.0
+
+Downloads are accessible at
+cd ~/downloads/mmt/qvtd/downloads/drops/0.18.0
+
+Archives are accessible at
+cd /home/data/httpd/archive.eclipse.org/mmt/qvtd/downloads/drops
 
 --------
 
