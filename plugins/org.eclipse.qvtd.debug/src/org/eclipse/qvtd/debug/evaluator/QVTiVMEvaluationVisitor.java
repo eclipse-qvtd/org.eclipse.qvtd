@@ -49,17 +49,17 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 		this.vmEvaluationStepper = vmEvaluationStepper;
 		nestedEvaluationVisitor.setUndecoratedVisitor(this);
 	}
-	
+
 	/** @deprecated Evaluator no longer nests */
 	@Deprecated
-	@Override	
+	@Override
 	public @NonNull EvaluationVisitor createNestedEvaluator() {
 		return evaluationVisitor.createNestedEvaluator();
 	}
-	
+
 	/** @deprecated Evaluator no longer nests */
 	@Deprecated
-	@Override	
+	@Override
 	public void dispose() {
 		evaluationVisitor.dispose();
 	}
@@ -80,7 +80,7 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 	@Deprecated
 	@Override
 	public int getDiagnosticSeverity(int severityPreference, @Nullable Object resultValue) {
-        return context.getDiagnosticSeverity(severityPreference, resultValue);
+		return context.getDiagnosticSeverity(severityPreference, resultValue);
 	}
 
 	@Override
@@ -107,31 +107,31 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 
 	/** @deprecated moved to Evaluator */
 	@Deprecated
-    @Override
+	@Override
 	public @NonNull IdResolver getIdResolver() {
 		return context.getIdResolver();
 	}
 
 	/** @deprecated moved to Evaluator */
 	@Deprecated
-    @Override
+	@Override
 	public @Nullable EvaluationLogger getLogger() {
 		return context.getLogger();
 	}
 
 	/** @deprecated moved to Evaluator */
 	@Deprecated
-    @Override
+	@Override
 	public @NonNull MetamodelManager getMetamodelManager() {
-        return context.getMetamodelManager();
-    }
+		return context.getMetamodelManager();
+	}
 
 	/** @deprecated moved to Evaluator */
 	@Deprecated
-    @Override
+	@Override
 	public @NonNull ModelManager getModelManager() {
-        return context.getModelManager();
-    }
+		return context.getModelManager();
+	}
 
 	@Override
 	public @Nullable Monitor getMonitor() {
@@ -144,16 +144,16 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 
 	/** @deprecated moved to Evaluator */
 	@Deprecated
-    @Override
+	@Override
 	public @NonNull Pattern getRegexPattern(@NonNull String regex) {
-        return context.getRegexPattern(regex);
+		return context.getRegexPattern(regex);
 	}
 
 	/** @deprecated moved to Evaluator */
 	@Deprecated
 	@Override
 	public int getSeverity(@Nullable Object validationKey) {
-        return context.getSeverity(validationKey);
+		return context.getSeverity(validationKey);
 	}
 
 	/** @deprecated moved to Evaluator */
@@ -166,14 +166,14 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 	/** @deprecated moved to Evaluator */
 	@Deprecated
 	@Override
-	public org.eclipse.ocl.pivot.@NonNull Class getStaticTypeOf(@Nullable Object value) {	
+	public org.eclipse.ocl.pivot.@NonNull Class getStaticTypeOf(@Nullable Object value) {
 		return context.getStaticTypeOf(value);
 	}
 
 	/** @deprecated moved to Evaluator */
 	@Deprecated
 	@Override
-	public org.eclipse.ocl.pivot.@NonNull Class getStaticTypeOf(@Nullable Object value, @NonNull Object... values) {
+	public org.eclipse.ocl.pivot.@NonNull Class getStaticTypeOf(@Nullable Object value, @Nullable Object... values) {
 		return context.getStaticTypeOf(value, values);
 	}
 
@@ -229,10 +229,10 @@ public class QVTiVMEvaluationVisitor extends AbstractMergedQVTimperativeVisitor<
 	public Object visitVariable(@NonNull Variable vd) {
 		Object result = super.visitVariable(vd);
 		Type declaredType = vd.getType();
-//		String name = vd.getName();
+		//		String name = vd.getName();
 		EvaluationEnvironment env = getEvaluationEnvironment();
 		env.replace(vd, declaredType);
-//		env.replace(name, env.getValueOf(name), declaredType);
+		//		env.replace(name, env.getValueOf(name), declaredType);
 
 		return result;
 	}

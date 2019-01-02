@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *     E.D.Willink - initial API and implementation
  ******************************************************************************/
@@ -123,10 +123,10 @@ public class QVTiTracingEvaluationVisitor extends AbstractMergedQVTimperativeVis
 
 	/** @deprecated moved to Evaluator */
 	@Deprecated
-    @Override
+	@Override
 	public @NonNull MetamodelManager getMetamodelManager() {
-        return context.getMetamodelManager();
-    }
+		return context.getMetamodelManager();
+	}
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -224,7 +224,7 @@ public class QVTiTracingEvaluationVisitor extends AbstractMergedQVTimperativeVis
 	/** @deprecated moved to Executor. */
 	@Deprecated
 	@Override
-	public @NonNull Class getStaticTypeOf(@Nullable Object value, @NonNull Object... values) {
+	public @NonNull Class getStaticTypeOf(@Nullable Object value, @Nullable Object... values) {
 		return context.getStaticTypeOf(value, values);
 	}
 

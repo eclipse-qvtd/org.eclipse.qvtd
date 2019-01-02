@@ -17,7 +17,6 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -32,6 +31,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGModelFactory;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
+import org.eclipse.ocl.examples.codegen.java.ImportNameManager;
 import org.eclipse.ocl.examples.codegen.java.ImportUtils;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
@@ -152,8 +152,8 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		List<@NonNull CGValuedElement> sortedGlobals = prepareGlobals();
 		QVTiCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage2, sortedGlobals);
 		generator.safeVisit(cgPackage2);
-		Set<String> allImports = generator.getAllImports();
-		Map<@NonNull String, @Nullable String> long2ShortImportNames = ImportUtils.getLong2ShortImportNames(allImports);
+		ImportNameManager importNameManager = generator.getImportNameManager();
+		Map<@NonNull String, @Nullable String> long2ShortImportNames = importNameManager.getLong2ShortImportNames();
 		javaSourceCode2 = ImportUtils.resolveImports(generator.toString(), long2ShortImportNames, false);
 		return javaSourceCode2;
 	}
