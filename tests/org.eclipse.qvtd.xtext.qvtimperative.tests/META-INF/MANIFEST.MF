@@ -24,5 +24,20 @@ Require-Bundle: org.junit,
  org.eclipse.qvtd.xtext.qvtbase.tests;bundle-version="[0.18.0,1.0.0)";visibility:=reexport,
  org.eclipse.equinox.ds;resolution:=optional,
  javax.annotation;resolution:=optional
-Export-Package: org.eclipse.qvtd.xtext.qvtimperative.tests
+Export-Package: classes,
+ classescs,
+ classescstraces,
+ manualuml2rdbms.rdbms,
+ manualuml2rdbms.uml,
+ manualuml2rdbms.uml2rdbms,
+ org.eclipse.qvtd.xtext.qvtimperative.tests,
+ simpleuml2rdbms.rdbms,
+ simpleuml2rdbms.uml,
+ simpleuml2rdbms.uml2rdbms,
+ test.hsl.HSLTree,
+ test.hsv.HSVTree,
+ test.middle.HSV2HSL,
+ tree2talltree.talltree,
+ tree2talltree.tree,
+ tree2talltree.tree2talltree
 Automatic-Module-Name: org.eclipse.qvtd.xtext.qvtimperative.tests
