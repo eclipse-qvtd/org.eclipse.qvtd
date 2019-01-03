@@ -20,6 +20,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.CompleteModel;
+import org.eclipse.ocl.pivot.MapType;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
@@ -90,9 +91,11 @@ public class ContainmentAnalysis
 		for (@NonNull Property property : containerCompleteClass.getProperties(FeatureFilter.SELECT_NON_STATIC)) {
 			if (property.isIsComposite()) {
 				Type type = PivotUtil.getElementalType(PivotUtil.getType(property));
-				CompleteClass containedCompleteClass = completeModel.getCompleteClass(type);
-				for (@NonNull CompleteClass containedSubCompleteClass : inheritanceAnalysis./*getAllSuperAndSelfAndSubClasses*/getAllSelfAndSubClasses(containedCompleteClass)) {
-					addContainmentForContainedClasses(containerCompleteClass, property, containedSubCompleteClass);
+				if (!(type instanceof MapType)) {		// FIXME why?
+					CompleteClass containedCompleteClass = completeModel.getCompleteClass(type);
+					for (@NonNull CompleteClass containedSubCompleteClass : inheritanceAnalysis./*getAllSuperAndSelfAndSubClasses*/getAllSelfAndSubClasses(containedCompleteClass)) {
+						addContainmentForContainedClasses(containerCompleteClass, property, containedSubCompleteClass);
+					}
 				}
 			}
 		}
