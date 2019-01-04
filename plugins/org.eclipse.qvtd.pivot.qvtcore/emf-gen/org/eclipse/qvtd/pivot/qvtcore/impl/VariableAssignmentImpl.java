@@ -28,8 +28,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
@@ -41,6 +44,8 @@ import org.eclipse.ocl.pivot.library.string.StringConcatOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.TupleValue;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
@@ -161,10 +166,10 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 		 *         'VariableAssignment::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_VariableAssignment_c_c_CompatibleTypeForValue);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_VariableAssignment_c_c_CompatibleTypeForValue);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
-		/*@NonInvalid*/ java.lang.@NonNull Object symbol_2;
+		/*@NonInvalid*/ @NonNull Object symbol_2;
 		if (le) {
 			symbol_2 = ValueUtil.TRUE_VALUE;
 		}
@@ -174,11 +179,11 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 				/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
 				try {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Variable targetVariable = this.getTargetVariable();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = targetVariable.getType();
+					final /*@NonInvalid*/ @NonNull Variable targetVariable = this.getTargetVariable();
+					final /*@NonInvalid*/ @Nullable Type type = targetVariable.getType();
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value = this.getValue();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = value.getType();
+					final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
+					final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
 					final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 					CAUGHT_conformsTo = conformsTo;
 				}
@@ -188,55 +193,55 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 				/*@Caught*/ @NonNull Object CAUGHT_conformsTo_0;
 				try {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value_0 = this.getValue();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_1 = value_0.getType();
+					final /*@NonInvalid*/ @NonNull OCLExpression value_0 = this.getValue();
+					final /*@NonInvalid*/ @Nullable Type type_1 = value_0.getType();
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Variable targetVariable_0 = this.getTargetVariable();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_2 = targetVariable_0.getType();
+					final /*@NonInvalid*/ @NonNull Variable targetVariable_0 = this.getTargetVariable();
+					final /*@NonInvalid*/ @Nullable Type type_2 = targetVariable_0.getType();
 					final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type_1, type_2).booleanValue();
 					CAUGHT_conformsTo_0 = conformsTo_0;
 				}
 				catch (Exception e) {
 					CAUGHT_conformsTo_0 = ValueUtil.createInvalidValue(e);
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_conformsTo, CAUGHT_conformsTo_0);
+				final /*@Thrown*/ @Nullable Boolean status = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_conformsTo, CAUGHT_conformsTo_0);
 				final /*@Thrown*/ boolean eq = status == Boolean.TRUE;
-				/*@Thrown*/ java.lang.@NonNull Object symbol_1;
+				/*@Thrown*/ @NonNull Object symbol_1;
 				if (eq) {
 					symbol_1 = ValueUtil.TRUE_VALUE;
 				}
 				else {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value_1 = this.getValue();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_3 = value_1.getType();
+					final /*@NonInvalid*/ @NonNull OCLExpression value_1 = this.getValue();
+					final /*@NonInvalid*/ @Nullable Type type_3 = value_1.getType();
 					final /*@NonInvalid*/ @NonNull Object name = type_3 == null;
-					/*@Thrown*/ java.lang.@Nullable String safe_name_source;
+					/*@Thrown*/ @Nullable String safe_name_source;
 					if (name == Boolean.TRUE) {
 						safe_name_source = null;
 					}
 					else {
 						assert type_3 != null;
-						final /*@Thrown*/ java.lang.@Nullable String name_0 = type_3.getName();
+						final /*@Thrown*/ @Nullable String name_0 = type_3.getName();
 						safe_name_source = name_0;
 					}
-					final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTcoreTables.STR_VariableAssignment_c_c_CompatibleTypeForValue_c_32, safe_name_source);
-					final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTcoreTables.STR__32_must_32_conform_32_to_32);
+					final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTcoreTables.STR_VariableAssignment_c_c_CompatibleTypeForValue_c_32, safe_name_source);
+					final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTcoreTables.STR__32_must_32_conform_32_to_32);
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Variable targetVariable_1 = this.getTargetVariable();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_4 = targetVariable_1.getType();
+					final /*@NonInvalid*/ @NonNull Variable targetVariable_1 = this.getTargetVariable();
+					final /*@NonInvalid*/ @Nullable Type type_4 = targetVariable_1.getType();
 					final /*@NonInvalid*/ @NonNull Object name_1 = type_4 == null;
-					/*@Thrown*/ java.lang.@Nullable String safe_name_source_0;
+					/*@Thrown*/ @Nullable String safe_name_source_0;
 					if (name_1 == Boolean.TRUE) {
 						safe_name_source_0 = null;
 					}
 					else {
 						assert type_4 != null;
-						final /*@Thrown*/ java.lang.@Nullable String name_2 = type_4.getName();
+						final /*@Thrown*/ @Nullable String name_2 = type_4.getName();
 						safe_name_source_0 = name_2;
 					}
-					final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, safe_name_source_0);
-					final /*@Thrown*/ java.lang.@NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTcoreTables.STR__32_or_32_vice_m_versa);
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTcoreTables.TUPLid_, sum_2, status);
+					final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, safe_name_source_0);
+					final /*@Thrown*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTcoreTables.STR__32_or_32_vice_m_versa);
+					final /*@Thrown*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTcoreTables.TUPLid_, sum_2, status);
 					symbol_1 = symbol_0;
 				}
 				CAUGHT_symbol_1 = symbol_1;

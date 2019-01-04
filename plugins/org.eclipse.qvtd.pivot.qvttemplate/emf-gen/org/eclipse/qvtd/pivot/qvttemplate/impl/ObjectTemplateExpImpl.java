@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -26,6 +27,10 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
@@ -33,7 +38,9 @@ import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.SetValue;
+import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
@@ -169,9 +176,9 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 		 *         'ObjectTemplateExp::PartPropertyIsUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_ObjectTemplateExp_c_c_PartPropertyIsUnique);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_ObjectTemplateExp_c_c_PartPropertyIsUnique);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
@@ -179,9 +186,9 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 		}
 		else {
 			@SuppressWarnings("null")
-			final /*@NonInvalid*/ java.util.@NonNull List<PropertyTemplateItem> part = this.getPart();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_part = idResolver.createSetOfAll(QVTtemplateTables.SET_CLSSid_PropertyTemplateItem, part);
-			/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTtemplateTables.SET_CLSSid_PropertyTemplateItem);
+			final /*@NonInvalid*/ @NonNull List<PropertyTemplateItem> part = this.getPart();
+			final /*@NonInvalid*/ @NonNull SetValue BOXED_part = idResolver.createSetOfAll(QVTtemplateTables.SET_CLSSid_PropertyTemplateItem, part);
+			/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTtemplateTables.SET_CLSSid_PropertyTemplateItem);
 			@NonNull Iterator<Object> ITERATOR__1 = BOXED_part.iterator();
 			/*@NonInvalid*/ boolean result;
 			while (true) {
@@ -190,12 +197,12 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 					break;
 				}
 				@SuppressWarnings("null")
-				/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvttemplate.@NonNull PropertyTemplateItem _1 = (PropertyTemplateItem)ITERATOR__1.next();
+				/*@NonInvalid*/ @NonNull PropertyTemplateItem _1 = (@NonNull PropertyTemplateItem)ITERATOR__1.next();
 				/**
 				 * resolvedProperty
 				 */
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property resolvedProperty = _1.getResolvedProperty();
+				final /*@NonInvalid*/ @NonNull Property resolvedProperty = _1.getResolvedProperty();
 				//
 				if (accumulator.includes(resolvedProperty) == ValueUtil.TRUE_VALUE) {
 					result = ValueUtil.FALSE_VALUE;			// Abort after second find
@@ -232,15 +239,15 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 		 *         'ObjectTemplateExp::TypeisObjectType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_ObjectTemplateExp_c_c_TypeisObjectType);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_ObjectTemplateExp_c_c_TypeisObjectType);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = this.getType();
+			final /*@NonInvalid*/ @Nullable Type type = this.getType();
 			@SuppressWarnings("null")
 			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class referredClass = this.getReferredClass();
 			final /*@NonInvalid*/ boolean result = (type != null) ? (type.getTypeId() == referredClass.getTypeId()) : false;

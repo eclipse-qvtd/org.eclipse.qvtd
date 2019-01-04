@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvtbase.impl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -28,13 +29,15 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
-import org.eclipse.ocl.pivot.library.LibraryIteration;
+import org.eclipse.ocl.pivot.library.LibraryIteration.LibraryIterationExtension;
 import org.eclipse.ocl.pivot.library.collection.CollectionExcludesOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionIncludesOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsSetOperation;
@@ -43,11 +46,13 @@ import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
+import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
@@ -315,9 +320,9 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		 *         'Rule::DomainNameIsUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Rule_c_c_DomainNameIsUnique);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Rule_c_c_DomainNameIsUnique);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
@@ -327,9 +332,9 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ java.util.@NonNull List<Domain> domain = this.getDomain();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain);
-				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTbaseTables.ORD_CLSSid_Domain);
+				final /*@NonInvalid*/ @NonNull List<Domain> domain = this.getDomain();
+				final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain);
+				/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTbaseTables.ORD_CLSSid_Domain);
 				@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
 				/*@Thrown*/ boolean result;
 				while (true) {
@@ -338,11 +343,11 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 						break;
 					}
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain _1 = (Domain)ITERATOR__1.next();
+					/*@NonInvalid*/ @NonNull Domain _1 = (@NonNull Domain)ITERATOR__1.next();
 					/**
 					 * name
 					 */
-					final /*@NonInvalid*/ java.lang.@Nullable String name = _1.getName();
+					final /*@NonInvalid*/ @Nullable String name = _1.getName();
 					//
 					if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
 						result = ValueUtil.FALSE_VALUE;			// Abort after second find
@@ -385,10 +390,10 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		 *         'Rule::NoOverridesCycle'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Rule_c_c_NoOverridesCycle);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Rule_c_c_NoOverridesCycle);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_1;
 		if (le) {
@@ -397,10 +402,10 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		else {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Rule overridden = this.getOverridden();
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTbaseTables.SET_CLSSid_Rule, overridden);
+				final /*@NonInvalid*/ @Nullable Rule overridden = this.getOverridden();
+				final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTbaseTables.SET_CLSSid_Rule, overridden);
 				final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
-				final LibraryIteration.@org.eclipse.jdt.annotation.NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIteration.LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
+				final @NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 				final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, QVTbaseTables.SET_CLSSid_Rule, QVTbaseTables.CLSSid_Rule);
 				/**
 				 * Implementation of the iterator body.
@@ -410,17 +415,18 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 					 * overridden
 					 */
 					@Override
-					public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ java.lang.@Nullable Object _1) {
-						final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Rule symbol_0 = (Rule)_1;
+					public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
+						final /*@NonInvalid*/ @Nullable Rule symbol_0 = (Rule)_1;
 						if (symbol_0 == null) {
 							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Rule::overridden\'");
 						}
-						final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Rule overridden_0 = symbol_0.getOverridden();
+						final /*@Thrown*/ @Nullable Rule overridden_0 = symbol_0.getOverridden();
 						return overridden_0;
 					}
 				};
-				final @NonNull  ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, QVTbaseTables.SET_CLSSid_Rule, BODY_closure_0, oclAsSet, ACC_closure_0);
-				final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue closure = ClassUtil.nonNullState((SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0));
+				final @NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, QVTbaseTables.SET_CLSSid_Rule, BODY_closure_0, oclAsSet, ACC_closure_0);
+				@SuppressWarnings("null")
+				final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0);
 				final /*@Thrown*/ boolean result = CollectionExcludesOperation.INSTANCE.evaluate(closure, this).booleanValue();
 				CAUGHT_result = result;
 			}
@@ -456,30 +462,30 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		 *         'Rule::OverridingRuleOverridesAllDomains'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Rule_c_c_OverridingRuleOverridesAllDomains);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Rule_c_c_OverridingRuleOverridesAllDomains);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_result;
+			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
-				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Rule overridden = this.getOverridden();
+				final /*@NonInvalid*/ @Nullable Rule overridden = this.getOverridden();
 				final /*@NonInvalid*/ boolean ne = overridden != null;
-				/*@Thrown*/ boolean result;
+				/*@Thrown*/ @Nullable Boolean result;
 				if (ne) {
 					if (overridden == null) {
 						throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Rule::domain\'");
 					}
 					@SuppressWarnings("null")
-					final /*@Thrown*/ java.util.@NonNull List<Domain> domain = overridden.getDomain();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain);
-					/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
+					final /*@Thrown*/ @NonNull List<Domain> domain = overridden.getDomain();
+					final /*@Thrown*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain);
+					/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 					@NonNull Iterator<Object> ITERATOR_od = BOXED_domain.iterator();
-					/*@Thrown*/ boolean forAll;
+					/*@Thrown*/ @Nullable Boolean forAll;
 					while (true) {
 						if (!ITERATOR_od.hasNext()) {
 							if (accumulator == ValueUtil.TRUE_VALUE) {
@@ -491,33 +497,33 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 							break;
 						}
 						@SuppressWarnings("null")
-						/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain od = (Domain)ITERATOR_od.next();
+						/*@NonInvalid*/ @NonNull Domain od = (@NonNull Domain)ITERATOR_od.next();
 						/**
 						 * self.domain.name->includes(od.name)
 						 */
 						/*@Caught*/ @NonNull Object CAUGHT_includes;
 						try {
 							@SuppressWarnings("null")
-							final /*@NonInvalid*/ java.util.@NonNull List<Domain> domain_0 = this.getDomain();
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_domain_0 = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain_0);
-							/*@Thrown*/ SequenceValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(QVTbaseTables.SEQ_PRIMid_String);
+							final /*@NonInvalid*/ @NonNull List<Domain> domain_0 = this.getDomain();
+							final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain_0 = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Domain, domain_0);
+							/*@Thrown*/ org.eclipse.ocl.pivot.values.SequenceValue.@NonNull Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(QVTbaseTables.SEQ_PRIMid_String);
 							@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain_0.iterator();
-							/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue collect;
+							/*@Thrown*/ @NonNull SequenceValue collect;
 							while (true) {
 								if (!ITERATOR__1.hasNext()) {
 									collect = accumulator_0;
 									break;
 								}
 								@SuppressWarnings("null")
-								/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain _1 = (Domain)ITERATOR__1.next();
+								/*@NonInvalid*/ @NonNull Domain _1 = (@NonNull Domain)ITERATOR__1.next();
 								/**
 								 * name
 								 */
-								final /*@NonInvalid*/ java.lang.@Nullable String name = _1.getName();
+								final /*@NonInvalid*/ @Nullable String name = _1.getName();
 								//
 								accumulator_0.add(name);
 							}
-							final /*@NonInvalid*/ java.lang.@Nullable String name_0 = od.getName();
+							final /*@NonInvalid*/ @Nullable String name_0 = od.getName();
 							final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(collect, name_0).booleanValue();
 							CAUGHT_includes = includes;
 						}

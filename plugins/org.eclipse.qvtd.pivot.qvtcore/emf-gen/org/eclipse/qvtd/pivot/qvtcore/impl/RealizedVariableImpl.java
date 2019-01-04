@@ -21,6 +21,9 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.VariableImpl;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
@@ -31,6 +34,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables;
 import org.eclipse.qvtd.pivot.qvtcore.RealizedVariable;
@@ -84,9 +88,9 @@ public class RealizedVariableImpl extends VariableImpl implements RealizedVariab
 		 *         'RealizedVariable::NonDataTypeForType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_RealizedVariable_c_c_NonDataTypeForType);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_RealizedVariable_c_c_NonDataTypeForType);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
@@ -96,14 +100,14 @@ public class RealizedVariableImpl extends VariableImpl implements RealizedVariab
 			/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
 			try {
 				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_DataType = idResolver.getClass(QVTcoreTables.CLSSid_DataType, null);
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = this.getType();
+				final /*@NonInvalid*/ @Nullable Type type = this.getType();
 				final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_DataType).booleanValue();
 				CAUGHT_oclIsKindOf = oclIsKindOf;
 			}
 			catch (Exception e) {
 				CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ java.lang.@Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf);
+			final /*@NonInvalid*/ @Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf);
 			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_RealizedVariable_c_c_NonDataTypeForType, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTcoreTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}

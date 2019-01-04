@@ -30,6 +30,7 @@ import org.eclipse.ocl.pivot.PivotPackage;
  * <!-- end-user-doc -->
  * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateFactory
  * @model kind="package"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore"
  * @generated
  */
 public interface QVTtemplatePackage extends EPackage {

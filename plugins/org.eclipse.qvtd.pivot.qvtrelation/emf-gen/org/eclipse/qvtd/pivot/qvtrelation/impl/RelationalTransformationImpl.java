@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvtrelation.impl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -24,6 +25,8 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
@@ -33,7 +36,9 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
@@ -120,20 +125,20 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 		 *         'RelationalTransformation::RulesAreRelations'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_RelationalTransformation_c_c_RulesAreRelations);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_RelationalTransformation_c_c_RulesAreRelations);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			final /*@NonInvalid*/ java.util.@NonNull List<Rule> rule = this.getRule();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Rule, rule);
-			/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
+			final /*@NonInvalid*/ @NonNull List<Rule> rule = this.getRule();
+			final /*@NonInvalid*/ @NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Rule, rule);
+			/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 			@NonNull Iterator<Object> ITERATOR__1 = BOXED_rule.iterator();
-			/*@NonInvalid*/ boolean result;
+			/*@NonInvalid*/ @Nullable Boolean result;
 			while (true) {
 				if (!ITERATOR__1.hasNext()) {
 					if (accumulator == ValueUtil.TRUE_VALUE) {
@@ -145,7 +150,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 					break;
 				}
 				@SuppressWarnings("null")
-				/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule _1 = (Rule)ITERATOR__1.next();
+				/*@NonInvalid*/ @NonNull Rule _1 = (@NonNull Rule)ITERATOR__1.next();
 				/**
 				 * oclIsKindOf(Relation)
 				 */

@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -25,6 +26,8 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
@@ -32,7 +35,9 @@ import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.SetValue;
+import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
 import org.eclipse.qvtd.pivot.qvtbase.impl.DomainImpl;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
@@ -169,18 +174,18 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 		 *         'RelationDomain::RelationDomainAssignmentsAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_RelationDomain_c_c_RelationDomainAssignmentsAreUnique);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_RelationDomain_c_c_RelationDomainAssignmentsAreUnique);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			final /*@NonInvalid*/ java.util.@NonNull List<RelationDomainAssignment> defaultAssignment = this.getDefaultAssignment();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_defaultAssignment = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_RelationDomainAssignment, defaultAssignment);
-			/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_CLSSid_RelationDomainAssignment);
+			final /*@NonInvalid*/ @NonNull List<RelationDomainAssignment> defaultAssignment = this.getDefaultAssignment();
+			final /*@NonInvalid*/ @NonNull SetValue BOXED_defaultAssignment = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_RelationDomainAssignment, defaultAssignment);
+			/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTrelationTables.SET_CLSSid_RelationDomainAssignment);
 			@NonNull Iterator<Object> ITERATOR__1 = BOXED_defaultAssignment.iterator();
 			/*@NonInvalid*/ boolean result;
 			while (true) {
@@ -189,12 +194,12 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 					break;
 				}
 				@SuppressWarnings("null")
-				/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtrelation.@NonNull RelationDomainAssignment _1 = (RelationDomainAssignment)ITERATOR__1.next();
+				/*@NonInvalid*/ @NonNull RelationDomainAssignment _1 = (@NonNull RelationDomainAssignment)ITERATOR__1.next();
 				/**
 				 * variable
 				 */
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Variable variable = _1.getVariable();
+				final /*@NonInvalid*/ @NonNull Variable variable = _1.getVariable();
 				//
 				if (accumulator.includes(variable) == ValueUtil.TRUE_VALUE) {
 					result = ValueUtil.FALSE_VALUE;			// Abort after second find

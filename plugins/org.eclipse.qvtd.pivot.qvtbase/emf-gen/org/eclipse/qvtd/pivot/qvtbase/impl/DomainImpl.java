@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtbase.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -26,6 +27,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.ReferringElement;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
@@ -38,9 +41,10 @@ import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
@@ -355,8 +359,8 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 		 *         'Domain::NameIsTypedModelName'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Domain_c_c_NameIsTypedModelName);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Domain_c_c_NameIsTypedModelName);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
@@ -365,15 +369,15 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 		else {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable TypedModel typedModel = this.getTypedModel();
+				final /*@NonInvalid*/ @Nullable TypedModel typedModel = this.getTypedModel();
 				final /*@NonInvalid*/ boolean ne = typedModel != null;
 				/*@Thrown*/ boolean result;
 				if (ne) {
-					final /*@NonInvalid*/ java.lang.@Nullable String name = this.getName();
+					final /*@NonInvalid*/ @Nullable String name = this.getName();
 					if (typedModel == null) {
 						throw new InvalidValueException("Null source for \'NamedElement::name\'");
 					}
-					final /*@Thrown*/ java.lang.@Nullable String name_0 = typedModel.getName();
+					final /*@Thrown*/ @Nullable String name_0 = typedModel.getName();
 					final /*@Thrown*/ boolean eq = (name != null) ? name.equals(name_0) : (name_0 == null);
 					result = eq;
 				}
@@ -417,9 +421,9 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 		 *         'Domain::TypedModelIsTransformationModelParameter'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Domain_c_c_TypedModelIsTransformationModelParameter);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Domain_c_c_TypedModelIsTransformationModelParameter);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
@@ -433,16 +437,16 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 					/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
 					try {
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtbase_c_c_Transformation = idResolver.getClass(QVTbaseTables.CLSSid_Transformation, null);
-						final /*@NonInvalid*/ java.lang.@Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, this);
+						final /*@NonInvalid*/ @Nullable Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, this);
 						final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, oclContainer, TYP_qvtbase_c_c_Transformation).booleanValue();
 						CAUGHT_oclIsKindOf = oclIsKindOf;
 					}
 					catch (Exception e) {
 						CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
 					}
-					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable TypedModel typedModel = this.getTypedModel();
+					final /*@NonInvalid*/ @Nullable TypedModel typedModel = this.getTypedModel();
 					final /*@NonInvalid*/ boolean ne = typedModel != null;
-					final /*@Thrown*/ java.lang.@Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf, ne);
+					final /*@Thrown*/ @Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf, ne);
 					CAUGHT_and = and;
 				}
 				catch (Exception e) {
@@ -451,18 +455,19 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 				/*@Caught*/ @NonNull Object CAUGHT_includes;
 				try {
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtbase_c_c_Transformation_0 = idResolver.getClass(QVTbaseTables.CLSSid_Transformation, null);
-					final /*@NonInvalid*/ java.lang.@Nullable Object oclContainer_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, this);
-					final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull Transformation oclAsType = ClassUtil.nonNullState((Transformation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer_0, TYP_qvtbase_c_c_Transformation_0));
-					final /*@Thrown*/ java.util.@NonNull List<TypedModel> modelParameter = oclAsType.getModelParameter();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
-					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable TypedModel typedModel_0 = this.getTypedModel();
+					final /*@NonInvalid*/ @Nullable Object oclContainer_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, this);
+					@SuppressWarnings("null")
+					final /*@Thrown*/ @NonNull Transformation oclAsType = (@NonNull Transformation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer_0, TYP_qvtbase_c_c_Transformation_0);
+					final /*@Thrown*/ @NonNull List<TypedModel> modelParameter = oclAsType.getModelParameter();
+					final /*@Thrown*/ @NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
+					final /*@NonInvalid*/ @Nullable TypedModel typedModel_0 = this.getTypedModel();
 					final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_modelParameter, typedModel_0).booleanValue();
 					CAUGHT_includes = includes;
 				}
 				catch (Exception e) {
 					CAUGHT_includes = ValueUtil.createInvalidValue(e);
 				}
-				final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_includes);
+				final /*@Thrown*/ @Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_includes);
 				CAUGHT_result = result;
 			}
 			catch (Exception e) {

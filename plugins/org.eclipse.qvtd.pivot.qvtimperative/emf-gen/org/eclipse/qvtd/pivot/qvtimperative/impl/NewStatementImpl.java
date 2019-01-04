@@ -30,6 +30,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
@@ -40,6 +43,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
@@ -277,8 +281,8 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 		 *         'NewStatement::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_NewStatement_c_c_CompatibleTypeForValue);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_NewStatement_c_c_CompatibleTypeForValue);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
@@ -287,15 +291,15 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 		else {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable OCLExpression ownedExpression = this.getOwnedExpression();
+				final /*@NonInvalid*/ @Nullable OCLExpression ownedExpression = this.getOwnedExpression();
 				final /*@NonInvalid*/ boolean ne = ownedExpression != null;
 				/*@Thrown*/ boolean result;
 				if (ne) {
 					if (ownedExpression == null) {
 						throw new InvalidValueException("Null source for \'TypedElement::type\'");
 					}
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = ownedExpression.getType();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = this.getType();
+					final /*@Thrown*/ @Nullable Type type = ownedExpression.getType();
+					final /*@NonInvalid*/ @Nullable Type type_0 = this.getType();
 					final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 					result = conformsTo;
 				}
@@ -333,9 +337,9 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 		 *         'NewStatement::NonDataTypeForType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_NewStatement_c_c_NonDataTypeForType);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_NewStatement_c_c_NonDataTypeForType);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
@@ -345,14 +349,14 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 			/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
 			try {
 				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_DataType = idResolver.getClass(QVTimperativeTables.CLSSid_DataType, null);
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = this.getType();
+				final /*@NonInvalid*/ @Nullable Type type = this.getType();
 				final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_DataType).booleanValue();
 				CAUGHT_oclIsKindOf = oclIsKindOf;
 			}
 			catch (Exception e) {
 				CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
 			}
-			final /*@NonInvalid*/ java.lang.@Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf);
+			final /*@NonInvalid*/ @Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf);
 			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_NewStatement_c_c_NonDataTypeForType, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;
 		}

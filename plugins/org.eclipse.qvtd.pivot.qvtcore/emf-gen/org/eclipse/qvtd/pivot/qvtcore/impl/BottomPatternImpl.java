@@ -18,6 +18,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -39,6 +40,8 @@ import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
@@ -49,7 +52,9 @@ import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -231,9 +236,9 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 		 *         'BottomPattern::VariablesAreBottomVariables'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_BottomPattern_c_c_VariablesAreBottomVariables);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_BottomPattern_c_c_VariablesAreBottomVariables);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
@@ -241,11 +246,11 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 		}
 		else {
 			@SuppressWarnings("null")
-			final /*@NonInvalid*/ java.util.@NonNull List<Variable> variable = this.getVariable();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_variable = idResolver.createSetOfAll(QVTcoreTables.SET_CLSSid_Variable, variable);
-			/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
+			final /*@NonInvalid*/ @NonNull List<Variable> variable = this.getVariable();
+			final /*@NonInvalid*/ @NonNull SetValue BOXED_variable = idResolver.createSetOfAll(QVTcoreTables.SET_CLSSid_Variable, variable);
+			/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 			@NonNull Iterator<Object> ITERATOR__1 = BOXED_variable.iterator();
-			/*@NonInvalid*/ boolean result;
+			/*@NonInvalid*/ @Nullable Boolean result;
 			while (true) {
 				if (!ITERATOR__1.hasNext()) {
 					if (accumulator == ValueUtil.TRUE_VALUE) {
@@ -257,7 +262,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 					break;
 				}
 				@SuppressWarnings("null")
-				/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Variable _1 = (Variable)ITERATOR__1.next();
+				/*@NonInvalid*/ @NonNull Variable _1 = (@NonNull Variable)ITERATOR__1.next();
 				/**
 				 * oclIsKindOf(BottomVariable)
 				 */

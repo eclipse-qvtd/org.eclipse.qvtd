@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -28,7 +29,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
@@ -38,7 +42,9 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables;
@@ -225,23 +231,23 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 		 *         'CollectionTemplateExp::MemberTypeisCollectionElementType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_CollectionTemplateExp_c_c_MemberTypeisCollectionElementType);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_CollectionTemplateExp_c_c_MemberTypeisCollectionElementType);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			/*@Caught*/ @NonNull Object CAUGHT_result;
+			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ java.util.@NonNull List<OCLExpression> member = this.getMember();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_member = idResolver.createSetOfAll(QVTtemplateTables.SET_CLSSid_OCLExpression, member);
-				/*@Thrown*/ java.lang.@Nullable Object accumulator = ValueUtil.TRUE_VALUE;
+				final /*@NonInvalid*/ @NonNull List<OCLExpression> member = this.getMember();
+				final /*@NonInvalid*/ @NonNull SetValue BOXED_member = idResolver.createSetOfAll(QVTtemplateTables.SET_CLSSid_OCLExpression, member);
+				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
 				@NonNull Iterator<Object> ITERATOR__1 = BOXED_member.iterator();
-				/*@Thrown*/ boolean result;
+				/*@Thrown*/ @Nullable Boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
 						if (accumulator == ValueUtil.TRUE_VALUE) {
@@ -253,18 +259,18 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 						break;
 					}
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression _1 = (OCLExpression)ITERATOR__1.next();
+					/*@NonInvalid*/ @NonNull OCLExpression _1 = (@NonNull OCLExpression)ITERATOR__1.next();
 					/**
 					 *
 					 * type.conformsTo(referredCollectionType.elementType)
 					 */
 					/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
 					try {
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = _1.getType();
+						final /*@NonInvalid*/ @Nullable Type type = _1.getType();
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull CollectionType referredCollectionType = this.getReferredCollectionType();
+						final /*@NonInvalid*/ @NonNull CollectionType referredCollectionType = this.getReferredCollectionType();
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Type elementType = referredCollectionType.getElementType();
+						final /*@NonInvalid*/ @NonNull Type elementType = referredCollectionType.getElementType();
 						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, elementType).booleanValue();
 						CAUGHT_conformsTo = conformsTo;
 					}
@@ -318,8 +324,8 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 		 *         'CollectionTemplateExp::RestTypeisCollectionType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_CollectionTemplateExp_c_c_RestTypeisCollectionType);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_CollectionTemplateExp_c_c_RestTypeisCollectionType);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
@@ -328,16 +334,16 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 		else {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Variable rest = this.getRest();
+				final /*@NonInvalid*/ @Nullable Variable rest = this.getRest();
 				final /*@NonInvalid*/ boolean ne = rest != null;
 				/*@Thrown*/ boolean result;
 				if (ne) {
 					if (rest == null) {
 						throw new InvalidValueException("Null source for \'TypedElement::type\'");
 					}
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = rest.getType();
+					final /*@Thrown*/ @Nullable Type type = rest.getType();
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull CollectionType referredCollectionType = this.getReferredCollectionType();
+					final /*@NonInvalid*/ @NonNull CollectionType referredCollectionType = this.getReferredCollectionType();
 					final /*@Thrown*/ boolean eq = (type != null) ? (type.getTypeId() == referredCollectionType.getTypeId()) : false;
 					result = eq;
 				}
@@ -376,17 +382,17 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 		 *         'CollectionTemplateExp::TypeisCollectionType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_CollectionTemplateExp_c_c_TypeisCollectionType);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_CollectionTemplateExp_c_c_TypeisCollectionType);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
 			symbol_0 = ValueUtil.TRUE_VALUE;
 		}
 		else {
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = this.getType();
+			final /*@NonInvalid*/ @Nullable Type type = this.getType();
 			@SuppressWarnings("null")
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull CollectionType referredCollectionType = this.getReferredCollectionType();
+			final /*@NonInvalid*/ @NonNull CollectionType referredCollectionType = this.getReferredCollectionType();
 			final /*@NonInvalid*/ boolean result = (type != null) ? (type.getTypeId() == referredCollectionType.getTypeId()) : false;
 			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_CollectionTemplateExp_c_c_TypeisCollectionType, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTtemplateTables.INT_0).booleanValue();
 			symbol_0 = logDiagnostic;

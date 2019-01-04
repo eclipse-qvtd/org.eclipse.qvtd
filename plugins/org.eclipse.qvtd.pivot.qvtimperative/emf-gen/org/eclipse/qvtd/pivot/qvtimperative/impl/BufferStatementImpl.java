@@ -32,6 +32,9 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
@@ -41,9 +44,10 @@ import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.library.string.StringConcatOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
@@ -275,9 +279,9 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		 *         'BufferStatement::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_BufferStatement_c_c_CompatibleTypeForValue);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_BufferStatement_c_c_CompatibleTypeForValue);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
@@ -286,7 +290,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		else {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable OCLExpression ownedExpression = this.getOwnedExpression();
+				final /*@NonInvalid*/ @Nullable OCLExpression ownedExpression = this.getOwnedExpression();
 				final /*@NonInvalid*/ boolean ne = ownedExpression != null;
 				/*@Thrown*/ boolean result;
 				if (ne) {
@@ -294,11 +298,12 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 					if (ownedExpression == null) {
 						throw new InvalidValueException("Null source for \'TypedElement::type\'");
 					}
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = ownedExpression.getType();
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull CollectionType oclAsType = ClassUtil.nonNullState((CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType));
+					final /*@Thrown*/ @Nullable Type type = ownedExpression.getType();
 					@SuppressWarnings("null")
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Type elementType = oclAsType.getElementType();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = this.getType();
+					final /*@Thrown*/ @NonNull CollectionType oclAsType = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType);
+					@SuppressWarnings("null")
+					final /*@Thrown*/ @NonNull Type elementType = oclAsType.getElementType();
+					final /*@NonInvalid*/ @Nullable Type type_0 = this.getType();
 					final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, elementType, type_0).booleanValue();
 					result = conformsTo;
 				}
@@ -330,37 +335,37 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		 *   else s + ';' + n
 		 *   endif) + '}'
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_names = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_PRIMid_String, names);
-		/*@NonInvalid*/ java.lang.@NonNull String s = QVTimperativeTables.STR_;
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_names = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_PRIMid_String, names);
+		/*@NonInvalid*/ @NonNull String s = QVTimperativeTables.STR_;
 		@NonNull Iterator<Object> ITERATOR_n = BOXED_names.iterator();
-		/*@NonInvalid*/ java.lang.@Nullable String iterate;
+		/*@NonInvalid*/ @Nullable String iterate;
 		while (true) {
 			if (!ITERATOR_n.hasNext()) {
 				iterate = s;
 				break;
 			}
 			@SuppressWarnings("null")
-			/*@NonInvalid*/ java.lang.@NonNull String n = (String)ITERATOR_n.next();
+			/*@NonInvalid*/ @NonNull String n = (@NonNull String)ITERATOR_n.next();
 			/**
 			 * if s = '' then n else s + ';' + n endif
 			 */
 			final /*@NonInvalid*/ boolean eq = s.equals(QVTimperativeTables.STR_);
-			/*@NonInvalid*/ java.lang.@NonNull String symbol_0;
+			/*@NonInvalid*/ @NonNull String symbol_0;
 			if (eq) {
 				symbol_0 = n;
 			}
 			else {
-				final /*@NonInvalid*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(s, QVTimperativeTables.STR__59);
-				final /*@NonInvalid*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, n);
+				final /*@NonInvalid*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(s, QVTimperativeTables.STR__59);
+				final /*@NonInvalid*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, n);
 				symbol_0 = sum_0;
 			}
 			//
 			s = symbol_0;
 		}
-		final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR__123, iterate);
-		final /*@Thrown*/ java.lang.@NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTimperativeTables.STR__125);
+		final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR__123, iterate);
+		final /*@Thrown*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTimperativeTables.STR__125);
 		return sum_2;
 	}
 

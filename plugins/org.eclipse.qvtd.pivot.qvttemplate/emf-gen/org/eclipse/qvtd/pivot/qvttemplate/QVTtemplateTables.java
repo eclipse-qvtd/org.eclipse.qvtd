@@ -23,8 +23,17 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvttemplate;
 
+import java.lang.String;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.PivotTables;
+import org.eclipse.ocl.pivot.ids.ClassId;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.NsURIPackageId;
+import org.eclipse.ocl.pivot.ids.RootPackageId;
+import org.eclipse.ocl.pivot.ids.TuplePartId;
+import org.eclipse.ocl.pivot.ids.TupleTypeId;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorProperty;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorType;
@@ -34,6 +43,9 @@ import org.eclipse.ocl.pivot.internal.library.executor.ExecutorProperty;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorType;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables;
 
 /**
@@ -61,36 +73,36 @@ public class QVTtemplateTables
 	/**
 	 *	Constants used by auto-generated code.
 	 */
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_$metamodel$ = org.eclipse.ocl.pivot.ids.IdManager.getRootPackageId("$metamodel$");
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTtemplate", null, org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage.eINSTANCE);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Class = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_$metamodel$.getClassId("Class", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CollectionTemplateExp = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("CollectionTemplateExp", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CollectionType = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_$metamodel$.getClassId("CollectionType", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_OCLExpression = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_$metamodel$.getClassId("OCLExpression", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_ObjectTemplateExp = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("ObjectTemplateExp", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Property = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_$metamodel$.getClassId("Property", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_PropertyTemplateItem = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("PropertyTemplateItem", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TemplateExp = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("TemplateExp", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Type = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_$metamodel$.getClassId("Type", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Variable = org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PACKid_$metamodel$.getClassId("Variable", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue INT_0 = org.eclipse.ocl.pivot.utilities.ValueUtil.integerValueOf("0");
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull TuplePartId PARTid_ = org.eclipse.ocl.pivot.ids.IdManager.getTuplePartId(0, "message", org.eclipse.ocl.pivot.ids.TypeId.STRING);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull TuplePartId PARTid__0 = org.eclipse.ocl.pivot.ids.IdManager.getTuplePartId(1, "status", org.eclipse.ocl.pivot.ids.TypeId.BOOLEAN);
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_CollectionTemplateExp_c_c_MemberTypeisCollectionElementType = "CollectionTemplateExp::MemberTypeisCollectionElementType";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_CollectionTemplateExp_c_c_RestTypeisCollectionType = "CollectionTemplateExp::RestTypeisCollectionType";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_CollectionTemplateExp_c_c_TypeisCollectionType = "CollectionTemplateExp::TypeisCollectionType";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_ObjectTemplateExp_c_c_PartPropertyIsUnique = "ObjectTemplateExp::PartPropertyIsUnique";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_ObjectTemplateExp_c_c_TypeisObjectType = "ObjectTemplateExp::TypeisObjectType";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_PropertyTemplateItem_c_c_CompatibleClassForProperty = "PropertyTemplateItem::CompatibleClassForProperty";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_PropertyTemplateItem_c_c_CompatibleTypeForCollectionElementValue = "PropertyTemplateItem::CompatibleTypeForCollectionElementValue";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_PropertyTemplateItem_c_c_CompatibleTypeForCollectionValue = "PropertyTemplateItem::CompatibleTypeForCollectionValue";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_PropertyTemplateItem_c_c_CompatibleTypeForObjectValue = "PropertyTemplateItem::CompatibleTypeForObjectValue";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TemplateExp_c_c_WhereIsBoolean = "TemplateExp::WhereIsBoolean";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR__32_must_32_conform_32_to_32 = " must conform to ";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR__32_or_32_vice_m_versa = " or vice-versa";
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_OCLExpression = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.CLSSid_OCLExpression);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_PropertyTemplateItem = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.CLSSid_PropertyTemplateItem);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull TupleTypeId TUPLid_ = org.eclipse.ocl.pivot.ids.IdManager.getTupleTypeId("Tuple", org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PARTid_, org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables.PARTid__0);
+	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2015/QVTtemplate", null, QVTtemplatePackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Class = QVTtemplateTables.PACKid_$metamodel$.getClassId("Class", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CollectionTemplateExp = QVTtemplateTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("CollectionTemplateExp", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CollectionType = QVTtemplateTables.PACKid_$metamodel$.getClassId("CollectionType", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OCLExpression = QVTtemplateTables.PACKid_$metamodel$.getClassId("OCLExpression", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_ObjectTemplateExp = QVTtemplateTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("ObjectTemplateExp", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Property = QVTtemplateTables.PACKid_$metamodel$.getClassId("Property", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_PropertyTemplateItem = QVTtemplateTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("PropertyTemplateItem", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TemplateExp = QVTtemplateTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTtemplate.getClassId("TemplateExp", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Type = QVTtemplateTables.PACKid_$metamodel$.getClassId("Type", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Variable = QVTtemplateTables.PACKid_$metamodel$.getClassId("Variable", 0);
+	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_0 = ValueUtil.integerValueOf("0");
+	public static final /*@NonInvalid*/ @NonNull TuplePartId PARTid_ = IdManager.getTuplePartId(0, "message", TypeId.STRING);
+	public static final /*@NonInvalid*/ @NonNull TuplePartId PARTid__0 = IdManager.getTuplePartId(1, "status", TypeId.BOOLEAN);
+	public static final /*@NonInvalid*/ @NonNull String STR_CollectionTemplateExp_c_c_MemberTypeisCollectionElementType = "CollectionTemplateExp::MemberTypeisCollectionElementType";
+	public static final /*@NonInvalid*/ @NonNull String STR_CollectionTemplateExp_c_c_RestTypeisCollectionType = "CollectionTemplateExp::RestTypeisCollectionType";
+	public static final /*@NonInvalid*/ @NonNull String STR_CollectionTemplateExp_c_c_TypeisCollectionType = "CollectionTemplateExp::TypeisCollectionType";
+	public static final /*@NonInvalid*/ @NonNull String STR_ObjectTemplateExp_c_c_PartPropertyIsUnique = "ObjectTemplateExp::PartPropertyIsUnique";
+	public static final /*@NonInvalid*/ @NonNull String STR_ObjectTemplateExp_c_c_TypeisObjectType = "ObjectTemplateExp::TypeisObjectType";
+	public static final /*@NonInvalid*/ @NonNull String STR_PropertyTemplateItem_c_c_CompatibleClassForProperty = "PropertyTemplateItem::CompatibleClassForProperty";
+	public static final /*@NonInvalid*/ @NonNull String STR_PropertyTemplateItem_c_c_CompatibleTypeForCollectionElementValue = "PropertyTemplateItem::CompatibleTypeForCollectionElementValue";
+	public static final /*@NonInvalid*/ @NonNull String STR_PropertyTemplateItem_c_c_CompatibleTypeForCollectionValue = "PropertyTemplateItem::CompatibleTypeForCollectionValue";
+	public static final /*@NonInvalid*/ @NonNull String STR_PropertyTemplateItem_c_c_CompatibleTypeForObjectValue = "PropertyTemplateItem::CompatibleTypeForObjectValue";
+	public static final /*@NonInvalid*/ @NonNull String STR_TemplateExp_c_c_WhereIsBoolean = "TemplateExp::WhereIsBoolean";
+	public static final /*@NonInvalid*/ @NonNull String STR__32_must_32_conform_32_to_32 = " must conform to ";
+	public static final /*@NonInvalid*/ @NonNull String STR__32_or_32_vice_m_versa = " or vice-versa";
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_OCLExpression = TypeId.SET.getSpecializedId(QVTtemplateTables.CLSSid_OCLExpression);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_PropertyTemplateItem = TypeId.SET.getSpecializedId(QVTtemplateTables.CLSSid_PropertyTemplateItem);
+	public static final /*@NonInvalid*/ @NonNull TupleTypeId TUPLid_ = IdManager.getTupleTypeId("Tuple", QVTtemplateTables.PARTid_, QVTtemplateTables.PARTid__0);
 
 	/**
 	 *	The type parameters for templated types and operations.
@@ -393,12 +405,12 @@ public class QVTtemplateTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -438,12 +450,12 @@ public class QVTtemplateTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -477,12 +489,12 @@ public class QVTtemplateTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -518,12 +530,12 @@ public class QVTtemplateTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,

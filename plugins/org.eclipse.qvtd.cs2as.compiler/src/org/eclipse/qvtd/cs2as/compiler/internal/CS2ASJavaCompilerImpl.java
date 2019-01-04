@@ -196,9 +196,9 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 			String resultClassName = params.getLookupResultClassName();
 			String resultSymbol = getSymbolName(resultClassName + cgCall.hashCode(), "_lookupResult");
 
-			js.appendClassReference(resultClassName);
+			js.appendClassReference(null, resultClassName);
 			js.append("<");
-			js.appendClassReference(context.getUnboxedDescriptor(ClassUtil.nonNullState(cgCall.getTypeId().getElementId())));
+			js.appendClassReference(null, context.getUnboxedDescriptor(ClassUtil.nonNullState(cgCall.getTypeId().getElementId())));
 			js.append(">");
 			js.append(" ");
 			js.append(resultSymbol);
@@ -223,7 +223,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 			}
 			js.append(");\n");
 
-			js.appendClassReference(typeDescriptor);
+			js.appendClassReference(null, typeDescriptor);
 			js.append(" ");
 			js.appendReferenceTo(cgCall);
 			js.append( " = null;\n");
@@ -262,11 +262,11 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 
 			if (!"".equals(lookupSolver)) {
 				js.append("private final ");
-				js.appendClassReference(lookupSolver);
+				js.appendClassReference(null, lookupSolver);
 				js.append(" ");
 				js.append(LOOKUP_SOLVER_FIELD_NAME);
 				js.append(" = new ");
-				js.appendClassReference(lookupSolver);
+				js.appendClassReference(null, lookupSolver);
 				js.append("(");
 				js.append(JavaConstants.EXECUTOR_NAME);
 				js.append(");\n");

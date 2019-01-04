@@ -25,9 +25,9 @@ import org.eclipse.ocl.pivot.OCLExpression;
  *
  * <!-- begin-model-doc -->
  * A BufferStatement declares a connection buffer and optionally assigns initial content.
- *
+ * 
  * syntax: oclText[buffer name : type := expression;]
- *
+ * 
  * oclText[type] or oclText[expression] but not both may be omitted. An omitted type is deduced from the initial expression values.
  * <!-- end-model-doc -->
  *

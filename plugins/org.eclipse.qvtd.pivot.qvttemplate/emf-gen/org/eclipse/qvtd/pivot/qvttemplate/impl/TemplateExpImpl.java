@@ -25,7 +25,10 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.ReferringElement;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.LiteralExpImpl;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
@@ -33,6 +36,7 @@ import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables;
@@ -197,9 +201,9 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 		 *         'TemplateExp::WhereIsBoolean'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_TemplateExp_c_c_WhereIsBoolean);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_TemplateExp_c_c_WhereIsBoolean);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
@@ -208,7 +212,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 		else {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable OCLExpression where = this.getWhere();
+				final /*@NonInvalid*/ @Nullable OCLExpression where = this.getWhere();
 				final /*@NonInvalid*/ boolean ne = where != null;
 				/*@Thrown*/ boolean result;
 				if (ne) {
@@ -216,7 +220,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 					if (where == null) {
 						throw new InvalidValueException("Null source for \'TypedElement::type\'");
 					}
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = where.getType();
+					final /*@Thrown*/ @Nullable Type type = where.getType();
 					final /*@Thrown*/ boolean eq = (type != null) ? (type.getTypeId() == TYP_Boolean.getTypeId()) : false;
 					result = eq;
 				}

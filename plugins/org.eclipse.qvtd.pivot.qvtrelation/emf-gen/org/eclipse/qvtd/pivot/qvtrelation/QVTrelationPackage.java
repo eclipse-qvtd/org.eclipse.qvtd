@@ -32,6 +32,7 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
  * <!-- end-user-doc -->
  * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationFactory
  * @model kind="package"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore"
  * @generated
  */
 public interface QVTrelationPackage extends EPackage {

@@ -25,6 +25,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.VariableImpl;
 
@@ -36,6 +39,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
@@ -149,8 +153,8 @@ public class SharedVariableImpl extends VariableImpl implements SharedVariable {
 		 *         'SharedVariable::CompatibleTypeForInitializer'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_SharedVariable_c_c_CompatibleTypeForInitializer);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_SharedVariable_c_c_CompatibleTypeForInitializer);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
@@ -159,14 +163,14 @@ public class SharedVariableImpl extends VariableImpl implements SharedVariable {
 		else {
 			/*@Caught*/ @Nullable Object CAUGHT_result;
 			try {
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable OCLExpression ownedInit = this.getOwnedInit();
+				final /*@NonInvalid*/ @Nullable OCLExpression ownedInit = this.getOwnedInit();
 				final /*@NonInvalid*/ boolean ne = ownedInit != null;
-				/*@Thrown*/ java.lang.@Nullable Boolean result;
+				/*@Thrown*/ @Nullable Boolean result;
 				if (ne) {
 					if (ownedInit == null) {
 						throw new InvalidValueException("Null source for \'TypedElement::type\'");
 					}
-					final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = ownedInit.getType();
+					final /*@Thrown*/ @Nullable Type type = ownedInit.getType();
 					/*@Caught*/ @Nullable Object CAUGHT_type;
 					try {
 						CAUGHT_type = type;
@@ -175,12 +179,12 @@ public class SharedVariableImpl extends VariableImpl implements SharedVariable {
 						CAUGHT_type = ValueUtil.createInvalidValue(e);
 					}
 					final /*@NonInvalid*/ @NonNull Object conformsTo = CAUGHT_type == null;
-					/*@Thrown*/ java.lang.@Nullable Boolean safe_conformsTo_source;
+					/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
 					if (conformsTo == Boolean.TRUE) {
 						safe_conformsTo_source = null;
 					}
 					else {
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = this.getType();
+						final /*@NonInvalid*/ @Nullable Type type_0 = this.getType();
 						final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 						safe_conformsTo_source = conformsTo_0;
 					}
@@ -221,8 +225,8 @@ public class SharedVariableImpl extends VariableImpl implements SharedVariable {
 		 *         'SharedVariable::CompatibleNullityForInitializer'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_SharedVariable_c_c_CompatibleNullityForInitializer);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_SharedVariable_c_c_CompatibleNullityForInitializer);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
@@ -231,7 +235,7 @@ public class SharedVariableImpl extends VariableImpl implements SharedVariable {
 		else {
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable OCLExpression ownedInit = this.getOwnedInit();
+				final /*@NonInvalid*/ @Nullable OCLExpression ownedInit = this.getOwnedInit();
 				final /*@NonInvalid*/ boolean ne = ownedInit != null;
 				/*@Thrown*/ boolean result;
 				if (ne) {

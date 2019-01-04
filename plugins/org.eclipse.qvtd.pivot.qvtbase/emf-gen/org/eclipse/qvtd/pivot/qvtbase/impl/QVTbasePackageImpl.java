@@ -162,13 +162,13 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-		(theQVTbasePackage,
-			new EValidator.Descriptor() {
-			@Override
-			public EValidator getEValidator() {
-				return QVTbaseValidator.INSTANCE;
-			}
-		});
+			(theQVTbasePackage,
+			 new EValidator.Descriptor() {
+				 @Override
+				 public EValidator getEValidator() {
+					 return QVTbaseValidator.INSTANCE;
+				 }
+			 });
 
 		// Mark meta-data to indicate it can't be changed
 		theQVTbasePackage.freeze();
@@ -966,10 +966,10 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	protected void createEcoreAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-		});
+		  (this,
+		   source,
+		   new String[] {
+		   });
 	}
 
 	/**
@@ -981,23 +981,23 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	protected void createEmofAnnotations() {
 		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		(getPredicate_ConditionExpression(),
-			source,
-			new String[] {
-				"body", "predicate"
-		});
+		  (getPredicate_ConditionExpression(),
+		   source,
+		   new String[] {
+			   "body", "predicate"
+		   });
 		addAnnotation
-		(getTransformation_Extends(),
-			source,
-			new String[] {
-				"body", "extendedBy"
-		});
+		  (getTransformation_Extends(),
+		   source,
+		   new String[] {
+			   "body", "extendedBy"
+		   });
 		addAnnotation
-		(getTypedModel_DependsOn(),
-			source,
-			new String[] {
-				"body", "dependent"
-		});
+		  (getTypedModel_DependsOn(),
+		   source,
+		   new String[] {
+			   "body", "dependent"
+		   });
 	}
 
 	/**
@@ -1009,77 +1009,77 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	protected void createUMLAnnotations() {
 		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
 		addAnnotation
-		(getDomain__ValidateNameIsTypedModelName__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "NameIsTypedModelName"
-		});
+		  (getDomain__ValidateNameIsTypedModelName__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "NameIsTypedModelName"
+		   });
 		addAnnotation
-		(getDomain__ValidateTypedModelIsTransformationModelParameter__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "TypedModelIsTransformationModelParameter"
-		});
+		  (getDomain__ValidateTypedModelIsTransformationModelParameter__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "TypedModelIsTransformationModelParameter"
+		   });
 		addAnnotation
-		(getFunction__ValidateParametersAreFunctionParameter__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "ParametersAreFunctionParameter"
-		});
+		  (getFunction__ValidateParametersAreFunctionParameter__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "ParametersAreFunctionParameter"
+		   });
 		addAnnotation
-		(getFunction__ValidateReturnTypeIsQueryType__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "ReturnTypeIsQueryType"
-		});
+		  (getFunction__ValidateReturnTypeIsQueryType__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "ReturnTypeIsQueryType"
+		   });
 		addAnnotation
-		(getPredicate__ValidateConditionIsBoolean__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "ConditionIsBoolean"
-		});
+		  (getPredicate__ValidateConditionIsBoolean__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "ConditionIsBoolean"
+		   });
 		addAnnotation
-		(getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "DomainNameIsUnique"
-		});
+		  (getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "DomainNameIsUnique"
+		   });
 		addAnnotation
-		(getRule__ValidateNoOverridesCycle__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "NoOverridesCycle"
-		});
+		  (getRule__ValidateNoOverridesCycle__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "NoOverridesCycle"
+		   });
 		addAnnotation
-		(getRule__ValidateOverridingRuleOverridesAllDomains__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "OverridingRuleOverridesAllDomains"
-		});
+		  (getRule__ValidateOverridingRuleOverridesAllDomains__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "OverridingRuleOverridesAllDomains"
+		   });
 		addAnnotation
-		(getTransformation__ValidateContextTypeIsTransformation__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "ContextTypeIsTransformation"
-		});
+		  (getTransformation__ValidateContextTypeIsTransformation__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "ContextTypeIsTransformation"
+		   });
 		addAnnotation
-		(getTransformation__ValidateExtendedTypedModelIsExtended__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "ExtendedTypedModelIsExtended"
-		});
+		  (getTransformation__ValidateExtendedTypedModelIsExtended__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "ExtendedTypedModelIsExtended"
+		   });
 		addAnnotation
-		(getTransformation__ValidateModelParameterIsUnique__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "ModelParameterIsUnique"
-		});
+		  (getTransformation__ValidateModelParameterIsUnique__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "ModelParameterIsUnique"
+		   });
 		addAnnotation
-		(getTransformation__ValidateNoExtendsCycle__DiagnosticChain_Map(),
-			source,
-			new String[] {
-				"originalName", "NoExtendsCycle"
-		});
+		  (getTransformation__ValidateNoExtendsCycle__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "originalName", "NoExtendsCycle"
+		   });
 	}
 
 	/**

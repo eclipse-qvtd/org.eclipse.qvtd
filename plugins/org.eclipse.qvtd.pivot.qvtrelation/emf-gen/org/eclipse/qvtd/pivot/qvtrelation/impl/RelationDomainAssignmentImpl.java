@@ -23,7 +23,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
@@ -33,6 +35,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationTables;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
@@ -244,8 +247,8 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 		 *         'RelationDomainAssignment::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 		 *     endif
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_RelationDomainAssignment_c_c_CompatibleTypeForValue);
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_RelationDomainAssignment_c_c_CompatibleTypeForValue);
 		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 		/*@NonInvalid*/ boolean symbol_0;
 		if (le) {
@@ -255,11 +258,11 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 			/*@Caught*/ @NonNull Object CAUGHT_result;
 			try {
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression valueExp = this.getValueExp();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = valueExp.getType();
+				final /*@NonInvalid*/ @NonNull OCLExpression valueExp = this.getValueExp();
+				final /*@NonInvalid*/ @Nullable Type type = valueExp.getType();
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Variable variable = this.getVariable();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = variable.getType();
+				final /*@NonInvalid*/ @NonNull Variable variable = this.getVariable();
+				final /*@NonInvalid*/ @Nullable Type type_0 = variable.getType();
 				final /*@Thrown*/ boolean result = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 				CAUGHT_result = result;
 			}
