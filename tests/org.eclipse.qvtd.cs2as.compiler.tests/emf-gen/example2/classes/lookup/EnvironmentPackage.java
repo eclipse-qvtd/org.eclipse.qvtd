@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see example2.classes.lookup.EnvironmentFactory
  * @model kind="package"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore"
  * @generated
  */
 public interface EnvironmentPackage extends EPackage {

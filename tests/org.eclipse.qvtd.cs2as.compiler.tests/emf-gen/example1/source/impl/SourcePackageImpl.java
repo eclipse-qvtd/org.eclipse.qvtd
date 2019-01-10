@@ -124,7 +124,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link SourcePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -138,8 +138,8 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 		if (isInited) return (SourcePackage)EPackage.Registry.INSTANCE.getEPackage(SourcePackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		SourcePackageImpl theSourcePackage = (SourcePackageImpl)(ePackage instanceof SourcePackageImpl ? ePackage : new SourcePackageImpl());
+		Object registeredSourcePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		SourcePackageImpl theSourcePackage = registeredSourcePackage instanceof SourcePackageImpl ? (SourcePackageImpl)registeredSourcePackage : new SourcePackageImpl();
 
 		isInited = true;
 
@@ -155,7 +155,6 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 		// Mark meta-data to indicate it can't be changed
 		theSourcePackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(SourcePackage.eNS_URI, theSourcePackage);
 		return theSourcePackage;

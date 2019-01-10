@@ -102,7 +102,7 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link TbasePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -116,8 +116,8 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 		if (isInited) return (TbasePackage)EPackage.Registry.INSTANCE.getEPackage(TbasePackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		TbasePackageImpl theTbasePackage = (TbasePackageImpl)(ePackage instanceof TbasePackageImpl ? ePackage : new TbasePackageImpl());
+		Object registeredTbasePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		TbasePackageImpl theTbasePackage = registeredTbasePackage instanceof TbasePackageImpl ? (TbasePackageImpl)registeredTbasePackage : new TbasePackageImpl();
 
 		isInited = true;
 
@@ -130,7 +130,6 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 		// Mark meta-data to indicate it can't be changed
 		theTbasePackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(TbasePackage.eNS_URI, theTbasePackage);
 		return theTbasePackage;
@@ -348,14 +347,14 @@ public class TbasePackageImpl extends EPackageImpl implements TbasePackage {
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";	
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this, 
-		   source, 
+		  (this,
+		   source,
 		   new String[] {
-			 "invocationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
-			 "settingDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
-			 "validationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"
+			   "invocationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
+			   "settingDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
+			   "validationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"
 		   });
 	}
 

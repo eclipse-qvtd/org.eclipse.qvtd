@@ -1,31 +1,36 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2018 Willink Transformations and others.
+ * Copyright (c) 2014, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
-/*******************************************************************************
+ *   E.D.Willink - Initial API and implementation
  *************************************************************************
  * This code is 100% auto-generated
  * from:
- *   /org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/cs2as/compiler/tests/models/example1/EnvExample1.ecore
+ *   /org.eclipse.qvtd.cs2as.compiler.tests/models/Source2Target/EnvExample1.ecore
  * using:
- *   /org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/cs2as/compiler/tests/models/example1/EnvExample1.genmodel
+ *   /org.eclipse.qvtd.cs2as.compiler.tests/models/Source2Target/EnvExample1.genmodel
  *   org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreTables
  *
  * Do not edit it.
  *******************************************************************************/
 package example1.target.lookup;
 
+import example1.target.TargetPackage;
 import example1.target.TargetTables;
+import example1.target.lookup.EnvironmentPackage;
 import example1.target.lookup.EnvironmentTables;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.ParameterTypes;
 import org.eclipse.ocl.pivot.TemplateParameters;
+import org.eclipse.ocl.pivot.ids.ClassId;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.NsURIPackageId;
+import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorProperty;
@@ -67,17 +72,16 @@ public class EnvironmentTables
 	/**
 	 *	Constants used by auto-generated code.
 	 */
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId COL_PRIMid_OclAny = org.eclipse.ocl.pivot.ids.TypeId.COLLECTION.getSpecializedId(org.eclipse.ocl.pivot.ids.TypeId.OCL_ANY);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId COL_TMPLid_ = org.eclipse.ocl.pivot.ids.TypeId.COLLECTION.getSpecializedId(org.eclipse.ocl.pivot.ids.IdManager.getTemplateParameterId(0));
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0 = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://cs2as/tests/example1/env/1.0", null, example1.target.lookup.EnvironmentPackage.eINSTANCE);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0 = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://cs2as/tests/example1/targetMM/1.0", null, example1.target.TargetPackage.eINSTANCE);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Executor = example1.target.lookup.EnvironmentTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0.getClassId("Executor", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_LookupEnvironment = example1.target.lookup.EnvironmentTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0.getClassId("LookupEnvironment", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_NamedElement = example1.target.lookup.EnvironmentTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("NamedElement", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_LookupEnvironment = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(example1.target.lookup.EnvironmentTables.CLSSid_LookupEnvironment);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_NamedElement = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(example1.target.lookup.EnvironmentTables.CLSSid_NamedElement);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull PropertyId PROPid_namedElements = example1.target.lookup.EnvironmentTables.CLSSid_LookupEnvironment.getPropertyId("namedElements");
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull PropertyId PROPid_parentEnv = example1.target.lookup.EnvironmentTables.CLSSid_LookupEnvironment.getPropertyId("parentEnv");
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId COL_TMPLid_ = TypeId.COLLECTION.getSpecializedId(IdManager.getTemplateParameterId(0));
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example1/env/1.0", null, EnvironmentPackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example1/targetMM/1.0", null, TargetPackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Executor = EnvironmentTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0.getClassId("Executor", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_LookupEnvironment = EnvironmentTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0.getClassId("LookupEnvironment", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_NamedElement = EnvironmentTables.PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("NamedElement", 0);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_LookupEnvironment = TypeId.BAG.getSpecializedId(EnvironmentTables.CLSSid_LookupEnvironment);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_NamedElement = TypeId.ORDERED_SET.getSpecializedId(EnvironmentTables.CLSSid_NamedElement);
+	public static final /*@NonInvalid*/ @NonNull PropertyId PROPid_namedElements = EnvironmentTables.CLSSid_LookupEnvironment.getPropertyId("namedElements");
+	public static final /*@NonInvalid*/ @NonNull PropertyId PROPid_parentEnv = EnvironmentTables.CLSSid_LookupEnvironment.getPropertyId("parentEnv");
 
 	/**
 	 *	The type parameters for templated types and operations.
@@ -318,12 +322,12 @@ public class EnvironmentTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -346,12 +350,12 @@ public class EnvironmentTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -381,12 +385,12 @@ public class EnvironmentTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,

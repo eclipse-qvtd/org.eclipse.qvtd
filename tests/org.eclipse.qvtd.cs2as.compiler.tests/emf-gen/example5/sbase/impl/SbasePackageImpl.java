@@ -95,7 +95,7 @@ public class SbasePackageImpl extends EPackageImpl implements SbasePackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link SbasePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -109,8 +109,8 @@ public class SbasePackageImpl extends EPackageImpl implements SbasePackage {
 		if (isInited) return (SbasePackage)EPackage.Registry.INSTANCE.getEPackage(SbasePackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		SbasePackageImpl theSbasePackage = (SbasePackageImpl)(ePackage instanceof SbasePackageImpl ? ePackage : new SbasePackageImpl());
+		Object registeredSbasePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		SbasePackageImpl theSbasePackage = registeredSbasePackage instanceof SbasePackageImpl ? (SbasePackageImpl)registeredSbasePackage : new SbasePackageImpl();
 
 		isInited = true;
 
@@ -126,7 +126,6 @@ public class SbasePackageImpl extends EPackageImpl implements SbasePackage {
 		// Mark meta-data to indicate it can't be changed
 		theSbasePackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(SbasePackage.eNS_URI, theSbasePackage);
 		return theSbasePackage;

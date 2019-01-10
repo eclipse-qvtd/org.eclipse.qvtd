@@ -71,7 +71,7 @@ public class TalltreePackageImpl extends EPackageImpl implements TalltreePackage
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link TalltreePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -85,14 +85,16 @@ public class TalltreePackageImpl extends EPackageImpl implements TalltreePackage
 		if (isInited) return (TalltreePackage)EPackage.Registry.INSTANCE.getEPackage(TalltreePackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		TalltreePackageImpl theTalltreePackage = (TalltreePackageImpl)(ePackage instanceof TalltreePackageImpl ? ePackage : new TalltreePackageImpl());
+		Object registeredTalltreePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		TalltreePackageImpl theTalltreePackage = registeredTalltreePackage instanceof TalltreePackageImpl ? (TalltreePackageImpl)registeredTalltreePackage : new TalltreePackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		Tree2talltreePackageImpl theTree2talltreePackage = (Tree2talltreePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(Tree2talltreePackage.eNS_URI) instanceof Tree2talltreePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(Tree2talltreePackage.eNS_URI) : Tree2talltreePackage.eINSTANCE);
-		TreePackageImpl theTreePackage = (TreePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TreePackage.eNS_URI) instanceof TreePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TreePackage.eNS_URI) : TreePackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(Tree2talltreePackage.eNS_URI);
+		Tree2talltreePackageImpl theTree2talltreePackage = (Tree2talltreePackageImpl)(registeredPackage instanceof Tree2talltreePackageImpl ? registeredPackage : Tree2talltreePackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(TreePackage.eNS_URI);
+		TreePackageImpl theTreePackage = (TreePackageImpl)(registeredPackage instanceof TreePackageImpl ? registeredPackage : TreePackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theTalltreePackage.createPackageContents();
@@ -107,7 +109,6 @@ public class TalltreePackageImpl extends EPackageImpl implements TalltreePackage
 		// Mark meta-data to indicate it can't be changed
 		theTalltreePackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(TalltreePackage.eNS_URI, theTalltreePackage);
 		return theTalltreePackage;

@@ -368,7 +368,7 @@ public class HSLNodeImpl extends MinimalEObjectImpl.Container implements HSLNode
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (hsl: ");
 		result.append(hsl);
 		result.append(", name: ");

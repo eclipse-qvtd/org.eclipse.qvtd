@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Association;
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Attribute;
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Classifier;
@@ -35,7 +36,7 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.UMLModelElement;
  * @see org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.SimpleumlPackage
  * @generated
  */
-public class SimpleumlSwitch<T> extends Switch<T> {
+public class SimpleumlSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

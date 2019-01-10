@@ -79,7 +79,7 @@ public class FamiliesPackageImpl extends EPackageImpl implements FamiliesPackage
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link FamiliesPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -93,14 +93,16 @@ public class FamiliesPackageImpl extends EPackageImpl implements FamiliesPackage
 		if (isInited) return (FamiliesPackage)EPackage.Registry.INSTANCE.getEPackage(FamiliesPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		FamiliesPackageImpl theFamiliesPackage = (FamiliesPackageImpl)(ePackage instanceof FamiliesPackageImpl ? ePackage : new FamiliesPackageImpl());
+		Object registeredFamiliesPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		FamiliesPackageImpl theFamiliesPackage = registeredFamiliesPackage instanceof FamiliesPackageImpl ? (FamiliesPackageImpl)registeredFamiliesPackage : new FamiliesPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		Families2PersonsPackageImpl theFamilies2PersonsPackage = (Families2PersonsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(Families2PersonsPackage.eNS_URI) instanceof Families2PersonsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(Families2PersonsPackage.eNS_URI) : Families2PersonsPackage.eINSTANCE);
-		PersonsPackageImpl thePersonsPackage = (PersonsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(PersonsPackage.eNS_URI) instanceof PersonsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(PersonsPackage.eNS_URI) : PersonsPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(Families2PersonsPackage.eNS_URI);
+		Families2PersonsPackageImpl theFamilies2PersonsPackage = (Families2PersonsPackageImpl)(registeredPackage instanceof Families2PersonsPackageImpl ? registeredPackage : Families2PersonsPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(PersonsPackage.eNS_URI);
+		PersonsPackageImpl thePersonsPackage = (PersonsPackageImpl)(registeredPackage instanceof PersonsPackageImpl ? registeredPackage : PersonsPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theFamiliesPackage.createPackageContents();
@@ -115,7 +117,6 @@ public class FamiliesPackageImpl extends EPackageImpl implements FamiliesPackage
 		// Mark meta-data to indicate it can't be changed
 		theFamiliesPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(FamiliesPackage.eNS_URI, theFamiliesPackage);
 		return theFamiliesPackage;

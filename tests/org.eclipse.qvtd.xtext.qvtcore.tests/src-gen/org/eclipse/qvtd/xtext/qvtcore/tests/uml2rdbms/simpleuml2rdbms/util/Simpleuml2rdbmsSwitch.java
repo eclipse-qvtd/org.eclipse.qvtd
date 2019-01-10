@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml2rdbms.*;
 
 /**
@@ -29,7 +30,7 @@ import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml2rdbms.*;
  * @see org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml2rdbms.Simpleuml2rdbmsPackage
  * @generated
  */
-public class Simpleuml2rdbmsSwitch<T> extends Switch<T> {
+public class Simpleuml2rdbmsSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

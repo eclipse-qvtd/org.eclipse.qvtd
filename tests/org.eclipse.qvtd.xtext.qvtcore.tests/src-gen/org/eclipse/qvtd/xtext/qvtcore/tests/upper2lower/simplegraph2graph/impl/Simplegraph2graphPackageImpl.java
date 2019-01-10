@@ -91,7 +91,7 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link Simplegraph2graphPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -105,13 +105,14 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 		if (isInited) return (Simplegraph2graphPackage)EPackage.Registry.INSTANCE.getEPackage(Simplegraph2graphPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		Simplegraph2graphPackageImpl theSimplegraph2graphPackage = (Simplegraph2graphPackageImpl)(ePackage instanceof Simplegraph2graphPackageImpl ? ePackage : new Simplegraph2graphPackageImpl());
+		Object registeredSimplegraph2graphPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		Simplegraph2graphPackageImpl theSimplegraph2graphPackage = registeredSimplegraph2graphPackage instanceof Simplegraph2graphPackageImpl ? (Simplegraph2graphPackageImpl)registeredSimplegraph2graphPackage : new Simplegraph2graphPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		SimplegraphPackageImpl theSimplegraphPackage = (SimplegraphPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(SimplegraphPackage.eNS_URI) instanceof SimplegraphPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(SimplegraphPackage.eNS_URI) : SimplegraphPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(SimplegraphPackage.eNS_URI);
+		SimplegraphPackageImpl theSimplegraphPackage = (SimplegraphPackageImpl)(registeredPackage instanceof SimplegraphPackageImpl ? registeredPackage : SimplegraphPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theSimplegraph2graphPackage.createPackageContents();
@@ -124,7 +125,6 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 		// Mark meta-data to indicate it can't be changed
 		theSimplegraph2graphPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(Simplegraph2graphPackage.eNS_URI, theSimplegraph2graphPackage);
 		return theSimplegraph2graphPackage;
@@ -412,48 +412,48 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		  (getGraph2Graph_Graph1(), 
-		   source, 
+		  (getGraph2Graph_Graph1(),
+		   source,
 		   new String[] {
-			 "body", "middle1",
-			 "upper", "1"
-		   });	
+			   "body", "middle1",
+			   "upper", "1"
+		   });
 		addAnnotation
-		  (getGraph2Graph_Graph2(), 
-		   source, 
+		  (getGraph2Graph_Graph2(),
+		   source,
 		   new String[] {
-			 "body", "middle2",
-			 "upper", "1"
-		   });	
+			   "body", "middle2",
+			   "upper", "1"
+		   });
 		addAnnotation
-		  (getEdge2Edge_Edge1(), 
-		   source, 
+		  (getEdge2Edge_Edge1(),
+		   source,
 		   new String[] {
-			 "body", "middle1",
-			 "upper", "1"
-		   });	
+			   "body", "middle1",
+			   "upper", "1"
+		   });
 		addAnnotation
-		  (getEdge2Edge_Edge2(), 
-		   source, 
+		  (getEdge2Edge_Edge2(),
+		   source,
 		   new String[] {
-			 "body", "middle2",
-			 "upper", "1"
-		   });	
+			   "body", "middle2",
+			   "upper", "1"
+		   });
 		addAnnotation
-		  (getNode2Node_Node1(), 
-		   source, 
+		  (getNode2Node_Node1(),
+		   source,
 		   new String[] {
-			 "body", "middle1",
-			 "upper", "1"
-		   });	
+			   "body", "middle1",
+			   "upper", "1"
+		   });
 		addAnnotation
-		  (getNode2Node_Node2(), 
-		   source, 
+		  (getNode2Node_Node2(),
+		   source,
 		   new String[] {
-			 "body", "middle2",
-			 "upper", "1"
+			   "body", "middle2",
+			   "upper", "1"
 		   });
 	}
 
@@ -464,42 +464,42 @@ public class Simplegraph2graphPackageImpl extends EPackageImpl implements Simple
 	 * @generated
 	 */
 	protected void createQvtDomainsAnnotations() {
-		String source = "http://www.eclipse.org/qvt#Domains";	
+		String source = "http://www.eclipse.org/qvt#Domains";
 		addAnnotation
-		  (getGraph2Graph_Graph1(), 
-		   source, 
+		  (getGraph2Graph_Graph1(),
+		   source,
 		   new String[] {
-			 "referredDomain", "upperGraph"
-		   });	
+			   "referredDomain", "upperGraph"
+		   });
 		addAnnotation
-		  (getGraph2Graph_Graph2(), 
-		   source, 
+		  (getGraph2Graph_Graph2(),
+		   source,
 		   new String[] {
-			 "referredDomain", "lowerGraph"
-		   });	
+			   "referredDomain", "lowerGraph"
+		   });
 		addAnnotation
-		  (getEdge2Edge_Edge1(), 
-		   source, 
+		  (getEdge2Edge_Edge1(),
+		   source,
 		   new String[] {
-			 "referredDomain", "upperGraph"
-		   });	
+			   "referredDomain", "upperGraph"
+		   });
 		addAnnotation
-		  (getEdge2Edge_Edge2(), 
-		   source, 
+		  (getEdge2Edge_Edge2(),
+		   source,
 		   new String[] {
-			 "referredDomain", "lowerGraph"
-		   });	
+			   "referredDomain", "lowerGraph"
+		   });
 		addAnnotation
-		  (getNode2Node_Node1(), 
-		   source, 
+		  (getNode2Node_Node1(),
+		   source,
 		   new String[] {
-			 "referredDomain", "upperGraph"
-		   });	
+			   "referredDomain", "upperGraph"
+		   });
 		addAnnotation
-		  (getNode2Node_Node2(), 
-		   source, 
+		  (getNode2Node_Node2(),
+		   source,
 		   new String[] {
-			 "referredDomain", "lowerGraph"
+			   "referredDomain", "lowerGraph"
 		   });
 	}
 

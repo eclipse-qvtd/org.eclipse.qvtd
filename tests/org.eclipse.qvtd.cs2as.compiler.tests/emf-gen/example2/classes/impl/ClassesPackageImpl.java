@@ -177,7 +177,7 @@ public class ClassesPackageImpl extends EPackageImpl implements ClassesPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link ClassesPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -191,8 +191,8 @@ public class ClassesPackageImpl extends EPackageImpl implements ClassesPackage {
 		if (isInited) return (ClassesPackage)EPackage.Registry.INSTANCE.getEPackage(ClassesPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		ClassesPackageImpl theClassesPackage = (ClassesPackageImpl)(ePackage instanceof ClassesPackageImpl ? ePackage : new ClassesPackageImpl());
+		Object registeredClassesPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		ClassesPackageImpl theClassesPackage = registeredClassesPackage instanceof ClassesPackageImpl ? (ClassesPackageImpl)registeredClassesPackage : new ClassesPackageImpl();
 
 		isInited = true;
 
@@ -200,7 +200,8 @@ public class ClassesPackageImpl extends EPackageImpl implements ClassesPackage {
 		OCLstdlibPackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
-		EnvironmentPackageImpl theEnvironmentPackage = (EnvironmentPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(EnvironmentPackage.eNS_URI) instanceof EnvironmentPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(EnvironmentPackage.eNS_URI) : EnvironmentPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(EnvironmentPackage.eNS_URI);
+		EnvironmentPackageImpl theEnvironmentPackage = (EnvironmentPackageImpl)(registeredPackage instanceof EnvironmentPackageImpl ? registeredPackage : EnvironmentPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theClassesPackage.createPackageContents();
@@ -213,7 +214,6 @@ public class ClassesPackageImpl extends EPackageImpl implements ClassesPackage {
 		// Mark meta-data to indicate it can't be changed
 		theClassesPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(ClassesPackage.eNS_URI, theClassesPackage);
 		return theClassesPackage;
@@ -701,10 +701,10 @@ public class ClassesPackageImpl extends EPackageImpl implements ClassesPackage {
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";	
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this, 
-		   source, 
+		  (this,
+		   source,
 		   new String[] {
 		   });
 	}

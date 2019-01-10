@@ -74,7 +74,7 @@ public class HSLTreePackageImpl extends EPackageImpl implements HSLTreePackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link HSLTreePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -88,14 +88,16 @@ public class HSLTreePackageImpl extends EPackageImpl implements HSLTreePackage {
 		if (isInited) return (HSLTreePackage)EPackage.Registry.INSTANCE.getEPackage(HSLTreePackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		HSLTreePackageImpl theHSLTreePackage = (HSLTreePackageImpl)(ePackage instanceof HSLTreePackageImpl ? ePackage : new HSLTreePackageImpl());
+		Object registeredHSLTreePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		HSLTreePackageImpl theHSLTreePackage = registeredHSLTreePackage instanceof HSLTreePackageImpl ? (HSLTreePackageImpl)registeredHSLTreePackage : new HSLTreePackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		HSV2HSLPackageImpl theHSV2HSLPackage = (HSV2HSLPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(HSV2HSLPackage.eNS_URI) instanceof HSV2HSLPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(HSV2HSLPackage.eNS_URI) : HSV2HSLPackage.eINSTANCE);
-		HSVTreePackageImpl theHSVTreePackage = (HSVTreePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(HSVTreePackage.eNS_URI) instanceof HSVTreePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(HSVTreePackage.eNS_URI) : HSVTreePackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(HSV2HSLPackage.eNS_URI);
+		HSV2HSLPackageImpl theHSV2HSLPackage = (HSV2HSLPackageImpl)(registeredPackage instanceof HSV2HSLPackageImpl ? registeredPackage : HSV2HSLPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(HSVTreePackage.eNS_URI);
+		HSVTreePackageImpl theHSVTreePackage = (HSVTreePackageImpl)(registeredPackage instanceof HSVTreePackageImpl ? registeredPackage : HSVTreePackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theHSLTreePackage.createPackageContents();
@@ -110,7 +112,6 @@ public class HSLTreePackageImpl extends EPackageImpl implements HSLTreePackage {
 		// Mark meta-data to indicate it can't be changed
 		theHSLTreePackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(HSLTreePackage.eNS_URI, theHSLTreePackage);
 		return theHSLTreePackage;

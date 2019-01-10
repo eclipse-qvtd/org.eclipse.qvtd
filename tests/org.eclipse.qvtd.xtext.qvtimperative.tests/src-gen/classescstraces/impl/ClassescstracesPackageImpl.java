@@ -88,7 +88,7 @@ public class ClassescstracesPackageImpl extends EPackageImpl implements Classesc
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link ClassescstracesPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -102,14 +102,16 @@ public class ClassescstracesPackageImpl extends EPackageImpl implements Classesc
 		if (isInited) return (ClassescstracesPackage)EPackage.Registry.INSTANCE.getEPackage(ClassescstracesPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		ClassescstracesPackageImpl theClassescstracesPackage = (ClassescstracesPackageImpl)(ePackage instanceof ClassescstracesPackageImpl ? ePackage : new ClassescstracesPackageImpl());
+		Object registeredClassescstracesPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		ClassescstracesPackageImpl theClassescstracesPackage = registeredClassescstracesPackage instanceof ClassescstracesPackageImpl ? (ClassescstracesPackageImpl)registeredClassescstracesPackage : new ClassescstracesPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		ClassescsPackageImpl theClassescsPackage = (ClassescsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ClassescsPackage.eNS_URI) instanceof ClassescsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ClassescsPackage.eNS_URI) : ClassescsPackage.eINSTANCE);
-		ClassesPackageImpl theClassesPackage = (ClassesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ClassesPackage.eNS_URI) instanceof ClassesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ClassesPackage.eNS_URI) : ClassesPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(ClassescsPackage.eNS_URI);
+		ClassescsPackageImpl theClassescsPackage = (ClassescsPackageImpl)(registeredPackage instanceof ClassescsPackageImpl ? registeredPackage : ClassescsPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(ClassesPackage.eNS_URI);
+		ClassesPackageImpl theClassesPackage = (ClassesPackageImpl)(registeredPackage instanceof ClassesPackageImpl ? registeredPackage : ClassesPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theClassescstracesPackage.createPackageContents();
@@ -124,7 +126,6 @@ public class ClassescstracesPackageImpl extends EPackageImpl implements Classesc
 		// Mark meta-data to indicate it can't be changed
 		theClassescstracesPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(ClassescstracesPackage.eNS_URI, theClassescstracesPackage);
 		return theClassescstracesPackage;
@@ -323,13 +324,13 @@ public class ClassescstracesPackageImpl extends EPackageImpl implements Classesc
 	 * @generated
 	 */
 	protected void createImportAnnotations() {
-		String source = "http://www.eclipse.org/OCL/Import";	
+		String source = "http://www.eclipse.org/OCL/Import";
 		addAnnotation
-		  (this, 
-		   source, 
+		  (this,
+		   source,
 		   new String[] {
-			 "classes", "Classes.ecore#/",
-			 "classescs", "ClassesCS.ecore#/"
+			   "classes", "Classes.ecore#/",
+			   "classescs", "ClassesCS.ecore#/"
 		   });
 	}
 

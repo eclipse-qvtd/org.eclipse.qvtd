@@ -91,7 +91,7 @@ public class SimplegraphPackageImpl extends EPackageImpl implements SimplegraphP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link SimplegraphPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -105,13 +105,14 @@ public class SimplegraphPackageImpl extends EPackageImpl implements SimplegraphP
 		if (isInited) return (SimplegraphPackage)EPackage.Registry.INSTANCE.getEPackage(SimplegraphPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		SimplegraphPackageImpl theSimplegraphPackage = (SimplegraphPackageImpl)(ePackage instanceof SimplegraphPackageImpl ? ePackage : new SimplegraphPackageImpl());
+		Object registeredSimplegraphPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		SimplegraphPackageImpl theSimplegraphPackage = registeredSimplegraphPackage instanceof SimplegraphPackageImpl ? (SimplegraphPackageImpl)registeredSimplegraphPackage : new SimplegraphPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		Simplegraph2graphPackageImpl theSimplegraph2graphPackage = (Simplegraph2graphPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(Simplegraph2graphPackage.eNS_URI) instanceof Simplegraph2graphPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(Simplegraph2graphPackage.eNS_URI) : Simplegraph2graphPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(Simplegraph2graphPackage.eNS_URI);
+		Simplegraph2graphPackageImpl theSimplegraph2graphPackage = (Simplegraph2graphPackageImpl)(registeredPackage instanceof Simplegraph2graphPackageImpl ? registeredPackage : Simplegraph2graphPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theSimplegraphPackage.createPackageContents();
@@ -124,7 +125,6 @@ public class SimplegraphPackageImpl extends EPackageImpl implements SimplegraphP
 		// Mark meta-data to indicate it can't be changed
 		theSimplegraphPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(SimplegraphPackage.eNS_URI, theSimplegraphPackage);
 		return theSimplegraphPackage;

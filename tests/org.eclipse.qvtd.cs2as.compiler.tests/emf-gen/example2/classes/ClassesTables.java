@@ -1,28 +1,33 @@
 /*******************************************************************************
- * Copyright (c) 2017, 2018 Willink Transformations and others.
+ * Copyright (c) 2014, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *******************************************************************************/
-/*******************************************************************************
+ *   E.D.Willink - Initial API and implementation
  *************************************************************************
  * This code is 100% auto-generated
  * from:
- *   /org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/cs2as/compiler/tests/models/example2/Classes.ecore
+ *   /org.eclipse.qvtd.cs2as.compiler.tests/models/SimpleClasses/Classes.ecore
+ *   /org.eclipse.qvtd.cs2as.compiler.tests/models/SimpleClasses/EnvExample2.ecore
  * using:
- *   /org.eclipse.qvtd.cs2as.compiler.tests/src/org/eclipse/qvtd/cs2as/compiler/tests/models/example2/Classes.genmodel
+ *   /org.eclipse.qvtd.cs2as.compiler.tests/models/SimpleClasses/Classes.genmodel
  *   org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreTables
  *
  * Do not edit it.
  *******************************************************************************/
 package example2.classes;
 
+import example2.classes.ClassesPackage;
 import example2.classes.ClassesTables;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.ids.ClassId;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.NsURIPackageId;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorProperty;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorType;
@@ -60,29 +65,29 @@ public class ClassesTables
 	/**
 	 *	Constants used by auto-generated code.
 	 */
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0 = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://cs2as/tests/example2/classes/1.0", null, example2.classes.ClassesPackage.eINSTANCE);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Argument = example2.classes.ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Argument", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_CallExp = example2.classes.ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("CallExp", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Class = example2.classes.ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Class", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Operation = example2.classes.ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Operation", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_OperationCallExp = example2.classes.ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("OperationCallExp", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Package = example2.classes.ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Package", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Parameter = example2.classes.ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Parameter", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Property = example2.classes.ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Property", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_PropertyCallExp = example2.classes.ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("PropertyCallExp", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Root = example2.classes.ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Root", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TypedElement = example2.classes.ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("TypedElement", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_Class = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(example2.classes.ClassesTables.CLSSid_Class);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_OperationCallExp = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(example2.classes.ClassesTables.CLSSid_OperationCallExp);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_PropertyCallExp = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(example2.classes.ClassesTables.CLSSid_PropertyCallExp);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_TypedElement = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(example2.classes.ClassesTables.CLSSid_TypedElement);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Argument = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(example2.classes.ClassesTables.CLSSid_Argument);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_CallExp = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(example2.classes.ClassesTables.CLSSid_CallExp);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Class = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(example2.classes.ClassesTables.CLSSid_Class);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Operation = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(example2.classes.ClassesTables.CLSSid_Operation);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Package = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(example2.classes.ClassesTables.CLSSid_Package);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Parameter = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(example2.classes.ClassesTables.CLSSid_Parameter);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Property = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(example2.classes.ClassesTables.CLSSid_Property);
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example2/classes/1.0", null, ClassesPackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Argument = ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Argument", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_CallExp = ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("CallExp", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Class = ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Class", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Operation = ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Operation", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_OperationCallExp = ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("OperationCallExp", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Package = ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Package", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Parameter = ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Parameter", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Property = ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Property", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_PropertyCallExp = ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("PropertyCallExp", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Root = ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Root", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TypedElement = ClassesTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("TypedElement", 0);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_Class = TypeId.BAG.getSpecializedId(ClassesTables.CLSSid_Class);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_OperationCallExp = TypeId.BAG.getSpecializedId(ClassesTables.CLSSid_OperationCallExp);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_PropertyCallExp = TypeId.BAG.getSpecializedId(ClassesTables.CLSSid_PropertyCallExp);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_TypedElement = TypeId.BAG.getSpecializedId(ClassesTables.CLSSid_TypedElement);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Argument = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_Argument);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_CallExp = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_CallExp);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Class = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_Class);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Operation = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_Operation);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Package = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_Package);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Parameter = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_Parameter);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Property = TypeId.ORDERED_SET.getSpecializedId(ClassesTables.CLSSid_Property);
 
 	/**
 	 *	The type parameters for templated types and operations.
@@ -603,12 +608,12 @@ public class ClassesTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -633,12 +638,12 @@ public class ClassesTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -665,12 +670,12 @@ public class ClassesTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -694,12 +699,12 @@ public class ClassesTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -724,12 +729,12 @@ public class ClassesTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -754,12 +759,12 @@ public class ClassesTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -785,12 +790,12 @@ public class ClassesTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -817,12 +822,12 @@ public class ClassesTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -850,12 +855,12 @@ public class ClassesTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -881,12 +886,12 @@ public class ClassesTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -912,12 +917,12 @@ public class ClassesTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -944,12 +949,12 @@ public class ClassesTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -975,12 +980,12 @@ public class ClassesTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -1005,12 +1010,12 @@ public class ClassesTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -1034,12 +1039,12 @@ public class ClassesTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,

@@ -428,7 +428,7 @@ public abstract class FromAttributeImpl extends MinimalEObjectImpl.Container imp
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (name: ");
 		result.append(name);
 		result.append(", kind: ");

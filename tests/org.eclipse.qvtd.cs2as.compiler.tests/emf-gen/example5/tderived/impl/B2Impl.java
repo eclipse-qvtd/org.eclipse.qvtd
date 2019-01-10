@@ -166,7 +166,7 @@ public class B2Impl extends BImpl implements B2 {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (anotherName: ");
 		result.append(anotherName);
 		result.append(')');

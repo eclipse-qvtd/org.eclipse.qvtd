@@ -74,7 +74,7 @@ public class List2listPackageImpl extends EPackageImpl implements List2listPacka
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link List2listPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -88,13 +88,14 @@ public class List2listPackageImpl extends EPackageImpl implements List2listPacka
 		if (isInited) return (List2listPackage)EPackage.Registry.INSTANCE.getEPackage(List2listPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		List2listPackageImpl theList2listPackage = (List2listPackageImpl)(ePackage instanceof List2listPackageImpl ? ePackage : new List2listPackageImpl());
+		Object registeredList2listPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		List2listPackageImpl theList2listPackage = registeredList2listPackage instanceof List2listPackageImpl ? (List2listPackageImpl)registeredList2listPackage : new List2listPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		DoublylinkedlistPackageImpl theDoublylinkedlistPackage = (DoublylinkedlistPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(DoublylinkedlistPackage.eNS_URI) instanceof DoublylinkedlistPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(DoublylinkedlistPackage.eNS_URI) : DoublylinkedlistPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DoublylinkedlistPackage.eNS_URI);
+		DoublylinkedlistPackageImpl theDoublylinkedlistPackage = (DoublylinkedlistPackageImpl)(registeredPackage instanceof DoublylinkedlistPackageImpl ? registeredPackage : DoublylinkedlistPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theList2listPackage.createPackageContents();
@@ -107,7 +108,6 @@ public class List2listPackageImpl extends EPackageImpl implements List2listPacka
 		// Mark meta-data to indicate it can't be changed
 		theList2listPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(List2listPackage.eNS_URI, theList2listPackage);
 		return theList2listPackage;
@@ -317,38 +317,38 @@ public class List2listPackageImpl extends EPackageImpl implements List2listPacka
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		  (getList2List_List1(), 
-		   source, 
+		  (getList2List_List1(),
+		   source,
 		   new String[] {
-			 "body", "middle1",
-			 "lower", "1",
-			 "upper", "1"
-		   });	
+			   "body", "middle1",
+			   "lower", "1",
+			   "upper", "1"
+		   });
 		addAnnotation
-		  (getList2List_List2(), 
-		   source, 
+		  (getList2List_List2(),
+		   source,
 		   new String[] {
-			 "body", "middle2",
-			 "lower", "1",
-			 "upper", "1"
-		   });	
+			   "body", "middle2",
+			   "lower", "1",
+			   "upper", "1"
+		   });
 		addAnnotation
-		  (getElement2Element_Element1(), 
-		   source, 
+		  (getElement2Element_Element1(),
+		   source,
 		   new String[] {
-			 "body", "middle1",
-			 "lower", "1",
-			 "upper", "1"
-		   });	
+			   "body", "middle1",
+			   "lower", "1",
+			   "upper", "1"
+		   });
 		addAnnotation
-		  (getElement2Element_Element2(), 
-		   source, 
+		  (getElement2Element_Element2(),
+		   source,
 		   new String[] {
-			 "body", "middle2",
-			 "lower", "1",
-			 "upper", "1"
+			   "body", "middle2",
+			   "lower", "1",
+			   "upper", "1"
 		   });
 	}
 
@@ -359,30 +359,30 @@ public class List2listPackageImpl extends EPackageImpl implements List2listPacka
 	 * @generated
 	 */
 	protected void createQvtDomainsAnnotations() {
-		String source = "http://www.eclipse.org/qvt#Domains";	
+		String source = "http://www.eclipse.org/qvt#Domains";
 		addAnnotation
-		  (getList2List_List1(), 
-		   source, 
+		  (getList2List_List1(),
+		   source,
 		   new String[] {
-			 "referredDomain", "forward"
-		   });	
+			   "referredDomain", "forward"
+		   });
 		addAnnotation
-		  (getList2List_List2(), 
-		   source, 
+		  (getList2List_List2(),
+		   source,
 		   new String[] {
-			 "referredDomain", "reverse"
-		   });	
+			   "referredDomain", "reverse"
+		   });
 		addAnnotation
-		  (getElement2Element_Element1(), 
-		   source, 
+		  (getElement2Element_Element1(),
+		   source,
 		   new String[] {
-			 "referredDomain", "forward"
-		   });	
+			   "referredDomain", "forward"
+		   });
 		addAnnotation
-		  (getElement2Element_Element2(), 
-		   source, 
+		  (getElement2Element_Element2(),
+		   source,
 		   new String[] {
-			 "referredDomain", "reverse"
+			   "referredDomain", "reverse"
 		   });
 	}
 

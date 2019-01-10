@@ -343,7 +343,7 @@ public class XImpl extends SElementImpl implements X {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (isA1: ");
 		result.append(isA1);
 		result.append(", isA2: ");

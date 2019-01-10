@@ -365,7 +365,7 @@ public class HSVNodeImpl extends MinimalEObjectImpl.Container implements HSVNode
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (hsv: ");
 		result.append(hsv);
 		result.append(", name: ");

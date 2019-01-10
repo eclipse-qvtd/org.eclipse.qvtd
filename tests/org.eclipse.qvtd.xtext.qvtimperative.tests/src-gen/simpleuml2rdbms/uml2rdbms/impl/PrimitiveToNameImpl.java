@@ -331,7 +331,7 @@ public abstract class PrimitiveToNameImpl extends UmlToRdbmsModelElementImpl imp
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (typeName: ");
 		result.append(typeName);
 		result.append(')');

@@ -153,7 +153,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link ClassescsPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -167,8 +167,8 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 		if (isInited) return (ClassescsPackage)EPackage.Registry.INSTANCE.getEPackage(ClassescsPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		ClassescsPackageImpl theClassescsPackage = (ClassescsPackageImpl)(ePackage instanceof ClassescsPackageImpl ? ePackage : new ClassescsPackageImpl());
+		Object registeredClassescsPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		ClassescsPackageImpl theClassescsPackage = registeredClassescsPackage instanceof ClassescsPackageImpl ? (ClassescsPackageImpl)registeredClassescsPackage : new ClassescsPackageImpl();
 
 		isInited = true;
 
@@ -184,7 +184,6 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 		// Mark meta-data to indicate it can't be changed
 		theClassescsPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(ClassescsPackage.eNS_URI, theClassescsPackage);
 		return theClassescsPackage;

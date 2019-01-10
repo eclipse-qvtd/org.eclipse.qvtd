@@ -788,81 +788,81 @@ public class Simpleuml2rdbmsPackageImpl extends EPackageImpl implements Simpleum
 	protected void createEmofAnnotations() {
 		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		(getAssociationToForeignKey_Association(),
-			source,
-			new String[] {
-				"body", "middle",
-				"upper", "1"
-		});
+		  (getAssociationToForeignKey_Association(),
+		   source,
+		   new String[] {
+			   "body", "middle",
+			   "upper", "1"
+		   });
 		addAnnotation
-		(getAssociationToForeignKey_ForeignKey(),
-			source,
-			new String[] {
-				"body", "middle",
-				"upper", "1"
-		});
+		  (getAssociationToForeignKey_ForeignKey(),
+		   source,
+		   new String[] {
+			   "body", "middle",
+			   "upper", "1"
+		   });
 		addAnnotation
-		(getAssociationToForeignKey_Key(),
-			source,
-			new String[] {
-				"body", "middle",
-				"upper", "1"
-		});
+		  (getAssociationToForeignKey_Key(),
+		   source,
+		   new String[] {
+			   "body", "middle",
+			   "upper", "1"
+		   });
 		addAnnotation
-		(getClassToTable_PrimaryKey(),
-			source,
-			new String[] {
-				"body", "middle",
-				"upper", "1"
-		});
+		  (getClassToTable_PrimaryKey(),
+		   source,
+		   new String[] {
+			   "body", "middle",
+			   "upper", "1"
+		   });
 		addAnnotation
-		(getClassToTable_Table(),
-			source,
-			new String[] {
-				"body", "middle"
-		});
+		  (getClassToTable_Table(),
+		   source,
+		   new String[] {
+			   "body", "middle"
+		   });
 		addAnnotation
-		(getClassToTable_UmlClass(),
-			source,
-			new String[] {
-				"body", "middle",
-				"upper", "1"
-		});
+		  (getClassToTable_UmlClass(),
+		   source,
+		   new String[] {
+			   "body", "middle",
+			   "upper", "1"
+		   });
 		addAnnotation
-		(getFromAttribute_Attribute(),
-			source,
-			new String[] {
-				"body", "middle",
-				"upper", "1"
-		});
+		  (getFromAttribute_Attribute(),
+		   source,
+		   new String[] {
+			   "body", "middle",
+			   "upper", "1"
+		   });
 		addAnnotation
-		(getPackageToSchema_Schema(),
-			source,
-			new String[] {
-				"body", "middle",
-				"upper", "1"
-		});
+		  (getPackageToSchema_Schema(),
+		   source,
+		   new String[] {
+			   "body", "middle",
+			   "upper", "1"
+		   });
 		addAnnotation
-		(getPackageToSchema_UmlPackage(),
-			source,
-			new String[] {
-				"body", "middle",
-				"upper", "1"
-		});
+		  (getPackageToSchema_UmlPackage(),
+		   source,
+		   new String[] {
+			   "body", "middle",
+			   "upper", "1"
+		   });
 		addAnnotation
-		(getPrimitiveToName_Primitive(),
-			source,
-			new String[] {
-				"body", "middle",
-				"upper", "1"
-		});
+		  (getPrimitiveToName_Primitive(),
+		   source,
+		   new String[] {
+			   "body", "middle",
+			   "upper", "1"
+		   });
 		addAnnotation
-		(getToColumn_Column(),
-			source,
-			new String[] {
-				"body", "middle",
-				"upper", "1"
-		});
+		  (getToColumn_Column(),
+		   source,
+		   new String[] {
+			   "body", "middle",
+			   "upper", "1"
+		   });
 	}
 
 } //Simpleuml2rdbmsPackageImpl

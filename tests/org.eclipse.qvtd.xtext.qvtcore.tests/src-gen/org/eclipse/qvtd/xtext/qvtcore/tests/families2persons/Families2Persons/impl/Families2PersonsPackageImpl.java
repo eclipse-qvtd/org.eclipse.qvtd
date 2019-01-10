@@ -87,7 +87,7 @@ public class Families2PersonsPackageImpl extends EPackageImpl implements Familie
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link Families2PersonsPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -101,14 +101,16 @@ public class Families2PersonsPackageImpl extends EPackageImpl implements Familie
 		if (isInited) return (Families2PersonsPackage)EPackage.Registry.INSTANCE.getEPackage(Families2PersonsPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		Families2PersonsPackageImpl theFamilies2PersonsPackage = (Families2PersonsPackageImpl)(ePackage instanceof Families2PersonsPackageImpl ? ePackage : new Families2PersonsPackageImpl());
+		Object registeredFamilies2PersonsPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		Families2PersonsPackageImpl theFamilies2PersonsPackage = registeredFamilies2PersonsPackage instanceof Families2PersonsPackageImpl ? (Families2PersonsPackageImpl)registeredFamilies2PersonsPackage : new Families2PersonsPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		FamiliesPackageImpl theFamiliesPackage = (FamiliesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(FamiliesPackage.eNS_URI) instanceof FamiliesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(FamiliesPackage.eNS_URI) : FamiliesPackage.eINSTANCE);
-		PersonsPackageImpl thePersonsPackage = (PersonsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(PersonsPackage.eNS_URI) instanceof PersonsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(PersonsPackage.eNS_URI) : PersonsPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(FamiliesPackage.eNS_URI);
+		FamiliesPackageImpl theFamiliesPackage = (FamiliesPackageImpl)(registeredPackage instanceof FamiliesPackageImpl ? registeredPackage : FamiliesPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(PersonsPackage.eNS_URI);
+		PersonsPackageImpl thePersonsPackage = (PersonsPackageImpl)(registeredPackage instanceof PersonsPackageImpl ? registeredPackage : PersonsPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theFamilies2PersonsPackage.createPackageContents();
@@ -123,7 +125,6 @@ public class Families2PersonsPackageImpl extends EPackageImpl implements Familie
 		// Mark meta-data to indicate it can't be changed
 		theFamilies2PersonsPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(Families2PersonsPackage.eNS_URI, theFamilies2PersonsPackage);
 		return theFamilies2PersonsPackage;
@@ -300,20 +301,20 @@ public class Families2PersonsPackageImpl extends EPackageImpl implements Familie
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		  (getMemberToPerson_Member(), 
-		   source, 
+		  (getMemberToPerson_Member(),
+		   source,
 		   new String[] {
-			 "body", "middle",
-			 "upper", "1"
-		   });	
+			   "body", "middle",
+			   "upper", "1"
+		   });
 		addAnnotation
-		  (getMemberToPerson_Person(), 
-		   source, 
+		  (getMemberToPerson_Person(),
+		   source,
 		   new String[] {
-			 "body", "middle",
-			 "upper", "1"
+			   "body", "middle",
+			   "upper", "1"
 		   });
 	}
 

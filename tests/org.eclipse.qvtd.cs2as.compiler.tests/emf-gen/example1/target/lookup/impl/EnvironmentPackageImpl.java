@@ -85,7 +85,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link EnvironmentPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -99,8 +99,8 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		if (isInited) return (EnvironmentPackage)EPackage.Registry.INSTANCE.getEPackage(EnvironmentPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		EnvironmentPackageImpl theEnvironmentPackage = (EnvironmentPackageImpl)(ePackage instanceof EnvironmentPackageImpl ? ePackage : new EnvironmentPackageImpl());
+		Object registeredEnvironmentPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		EnvironmentPackageImpl theEnvironmentPackage = registeredEnvironmentPackage instanceof EnvironmentPackageImpl ? (EnvironmentPackageImpl)registeredEnvironmentPackage : new EnvironmentPackageImpl();
 
 		isInited = true;
 
@@ -108,7 +108,8 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		OCLstdlibPackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
-		TargetPackageImpl theTargetPackage = (TargetPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TargetPackage.eNS_URI) instanceof TargetPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TargetPackage.eNS_URI) : TargetPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(TargetPackage.eNS_URI);
+		TargetPackageImpl theTargetPackage = (TargetPackageImpl)(registeredPackage instanceof TargetPackageImpl ? registeredPackage : TargetPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theEnvironmentPackage.createPackageContents();
@@ -121,7 +122,6 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		// Mark meta-data to indicate it can't be changed
 		theEnvironmentPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(EnvironmentPackage.eNS_URI, theEnvironmentPackage);
 		return theEnvironmentPackage;
@@ -333,10 +333,10 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * @generated
 	 */
 	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";	
+		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		  (this, 
-		   source, 
+		  (this,
+		   source,
 		   new String[] {
 		   });
 	}

@@ -121,7 +121,7 @@ public class RDBMSPackageImpl extends EPackageImpl implements RDBMSPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link RDBMSPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -135,14 +135,16 @@ public class RDBMSPackageImpl extends EPackageImpl implements RDBMSPackage {
 		if (isInited) return (RDBMSPackage)EPackage.Registry.INSTANCE.getEPackage(RDBMSPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		RDBMSPackageImpl theRDBMSPackage = (RDBMSPackageImpl)(ePackage instanceof RDBMSPackageImpl ? ePackage : new RDBMSPackageImpl());
+		Object registeredRDBMSPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		RDBMSPackageImpl theRDBMSPackage = registeredRDBMSPackage instanceof RDBMSPackageImpl ? (RDBMSPackageImpl)registeredRDBMSPackage : new RDBMSPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		UML2RDBMSPackageImpl theUML2RDBMSPackage = (UML2RDBMSPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(UML2RDBMSPackage.eNS_URI) instanceof UML2RDBMSPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(UML2RDBMSPackage.eNS_URI) : UML2RDBMSPackage.eINSTANCE);
-		UMLPackageImpl theUMLPackage = (UMLPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(UMLPackage.eNS_URI) instanceof UMLPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(UMLPackage.eNS_URI) : UMLPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(UML2RDBMSPackage.eNS_URI);
+		UML2RDBMSPackageImpl theUML2RDBMSPackage = (UML2RDBMSPackageImpl)(registeredPackage instanceof UML2RDBMSPackageImpl ? registeredPackage : UML2RDBMSPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(UMLPackage.eNS_URI);
+		UMLPackageImpl theUMLPackage = (UMLPackageImpl)(registeredPackage instanceof UMLPackageImpl ? registeredPackage : UMLPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theRDBMSPackage.createPackageContents();
@@ -157,7 +159,6 @@ public class RDBMSPackageImpl extends EPackageImpl implements RDBMSPackage {
 		// Mark meta-data to indicate it can't be changed
 		theRDBMSPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(RDBMSPackage.eNS_URI, theRDBMSPackage);
 		return theRDBMSPackage;

@@ -89,7 +89,7 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link KiamaasPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -103,8 +103,8 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 		if (isInited) return (KiamaasPackage)EPackage.Registry.INSTANCE.getEPackage(KiamaasPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		KiamaasPackageImpl theKiamaasPackage = (KiamaasPackageImpl)(ePackage instanceof KiamaasPackageImpl ? ePackage : new KiamaasPackageImpl());
+		Object registeredKiamaasPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		KiamaasPackageImpl theKiamaasPackage = registeredKiamaasPackage instanceof KiamaasPackageImpl ? (KiamaasPackageImpl)registeredKiamaasPackage : new KiamaasPackageImpl();
 
 		isInited = true;
 
@@ -117,7 +117,6 @@ public class KiamaasPackageImpl extends EPackageImpl implements KiamaasPackage {
 		// Mark meta-data to indicate it can't be changed
 		theKiamaasPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(KiamaasPackage.eNS_URI, theKiamaasPackage);
 		return theKiamaasPackage;

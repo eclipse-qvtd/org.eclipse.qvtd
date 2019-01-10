@@ -16,6 +16,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Association;
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Attribute;
 import org.eclipse.qvtd.xtext.qvtcore.tests.uml2rdbms.simpleuml.Classifier;
@@ -78,8 +79,8 @@ public class SimpleumlAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected SimpleumlSwitch<Adapter> modelSwitch =
-		new SimpleumlSwitch<Adapter>() {
+	protected SimpleumlSwitch<@Nullable Adapter> modelSwitch =
+		new SimpleumlSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseAttribute(Attribute object) {
 				return createAttributeAdapter();

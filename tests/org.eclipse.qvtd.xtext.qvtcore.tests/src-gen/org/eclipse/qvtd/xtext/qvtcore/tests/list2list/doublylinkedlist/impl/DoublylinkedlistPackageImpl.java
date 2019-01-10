@@ -74,7 +74,7 @@ public class DoublylinkedlistPackageImpl extends EPackageImpl implements Doublyl
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link DoublylinkedlistPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -88,13 +88,14 @@ public class DoublylinkedlistPackageImpl extends EPackageImpl implements Doublyl
 		if (isInited) return (DoublylinkedlistPackage)EPackage.Registry.INSTANCE.getEPackage(DoublylinkedlistPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		DoublylinkedlistPackageImpl theDoublylinkedlistPackage = (DoublylinkedlistPackageImpl)(ePackage instanceof DoublylinkedlistPackageImpl ? ePackage : new DoublylinkedlistPackageImpl());
+		Object registeredDoublylinkedlistPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		DoublylinkedlistPackageImpl theDoublylinkedlistPackage = registeredDoublylinkedlistPackage instanceof DoublylinkedlistPackageImpl ? (DoublylinkedlistPackageImpl)registeredDoublylinkedlistPackage : new DoublylinkedlistPackageImpl();
 
 		isInited = true;
 
 		// Obtain or create and register interdependencies
-		List2listPackageImpl theList2listPackage = (List2listPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(List2listPackage.eNS_URI) instanceof List2listPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(List2listPackage.eNS_URI) : List2listPackage.eINSTANCE);
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(List2listPackage.eNS_URI);
+		List2listPackageImpl theList2listPackage = (List2listPackageImpl)(registeredPackage instanceof List2listPackageImpl ? registeredPackage : List2listPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theDoublylinkedlistPackage.createPackageContents();
@@ -107,7 +108,6 @@ public class DoublylinkedlistPackageImpl extends EPackageImpl implements Doublyl
 		// Mark meta-data to indicate it can't be changed
 		theDoublylinkedlistPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(DoublylinkedlistPackage.eNS_URI, theDoublylinkedlistPackage);
 		return theDoublylinkedlistPackage;

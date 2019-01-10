@@ -81,7 +81,7 @@ public class SderivedPackageImpl extends EPackageImpl implements SderivedPackage
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link SderivedPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -95,8 +95,8 @@ public class SderivedPackageImpl extends EPackageImpl implements SderivedPackage
 		if (isInited) return (SderivedPackage)EPackage.Registry.INSTANCE.getEPackage(SderivedPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		SderivedPackageImpl theSderivedPackage = (SderivedPackageImpl)(ePackage instanceof SderivedPackageImpl ? ePackage : new SderivedPackageImpl());
+		Object registeredSderivedPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		SderivedPackageImpl theSderivedPackage = registeredSderivedPackage instanceof SderivedPackageImpl ? (SderivedPackageImpl)registeredSderivedPackage : new SderivedPackageImpl();
 
 		isInited = true;
 
@@ -113,7 +113,6 @@ public class SderivedPackageImpl extends EPackageImpl implements SderivedPackage
 		// Mark meta-data to indicate it can't be changed
 		theSderivedPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(SderivedPackage.eNS_URI, theSderivedPackage);
 		return theSderivedPackage;
