@@ -339,7 +339,7 @@ public class AnalysisTests extends XtextTestCase
 		Set<@NonNull List<@NonNull Element>> actualHiddens = toElements(analyze.getHiddenPaths());
 		//		Set<@NonNull List<@NonNull Element>> expectedHiddens = toExpected(Lists.newArrayList(employeeClass.getPrimaryClass()));
 		//	assertEquals(187, actualHiddens.size());
-		assertEquals(17, actualHiddens.size());
+		assertEquals(16, actualHiddens.size());				// Used to be 17 before accurate template lower bounds eliminated OclAny
 		//
 		//	"1_.getEmployees()" where 1_ is a department
 		//
