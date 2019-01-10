@@ -651,7 +651,7 @@ public class ConnectionManager
 					}
 				}
 				else if (node.isTrue()) {		// A <<success>> node */
-			if (!node.isHead()) {
+			if (!node.isHead() || node.isDependency()) {
 				NodeConnection connection = getIncomingUsedConnection(node);
 				if ((connection != null) && !connections.contains(connection)) {
 					connections.add(connection);
