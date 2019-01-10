@@ -17,7 +17,7 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*
 
 var projectName = "org.eclipse.qvtd.cs2as.compiler.tests"
-var examplesFolder = "src/org/eclipse/qvtd/cs2as/compiler/tests/models/example5"
+var examplesFolder = "models/BaseAndDerived"
 
 Workflow {
 	bean = ResourceSetImpl : resourceSet {}
@@ -25,19 +25,19 @@ Workflow {
     bean = EcoreGenModelSetup { resourceSet = resourceSet }
 
 	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-    	genModel = "/${projectName}/${examplesFolder}/SourceBaseMM.genmodel"
+    	genModel = "/${projectName}/${examplesFolder}/SourceBaseMM.genmodel" clearResourceSet = false
     }
     
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-    	genModel = "/${projectName}/${examplesFolder}/SourceDerivedMM.genmodel"
+    	genModel = "/${projectName}/${examplesFolder}/SourceDerivedMM.genmodel" clearResourceSet = false
     }
     
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-    	genModel = "/${projectName}/${examplesFolder}/TargetBaseMM.genmodel"
+    	genModel = "/${projectName}/${examplesFolder}/TargetBaseMM.genmodel" clearResourceSet = false
     }
     
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-    	genModel = "/${projectName}/${examplesFolder}/TargetDerivedMM.genmodel"
+    	genModel = "/${projectName}/${examplesFolder}/TargetDerivedMM.genmodel" clearResourceSet = false
     }
 
 

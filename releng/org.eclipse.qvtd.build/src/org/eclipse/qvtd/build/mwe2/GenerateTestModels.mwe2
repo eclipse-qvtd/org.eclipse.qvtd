@@ -27,36 +27,36 @@ Workflow {
     component = @org.eclipse.qvtd.build.mwe2.GenerateExample4Models {}
     component = @org.eclipse.qvtd.build.mwe2.GenerateExample5Models {}
   
-	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
-    	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/families2persons/Families2Persons.genmodel"
+	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true clearResourceSet = false
+    	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/models/families2persons/Families2Persons.genmodel"
     }
-	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
-    	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/forward2reverse/List2List.genmodel"
+	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true clearResourceSet = false
+    	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/models/forward2reverse/List2List.genmodel"
     }
-	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
-    	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/hsv2hsl/HSV2HSL.genmodel"
+	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true clearResourceSet = false
+    	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/models/hsv2hsl/HSV2HSL.genmodel"
     }
-	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
-    	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/uml2rdbms/SimpleUML2RDBMS.genmodel"
+	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true clearResourceSet = false
+    	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/models/uml2rdbms/SimpleUML2RDBMS.genmodel"
     }
-	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
-    	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/upper2lower/SimpleGraph2Graph.genmodel"
+	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true clearResourceSet = false
+    	genModel = "/org.eclipse.qvtd.xtext.qvtcore.tests/models/upper2lower/SimpleGraph2Graph.genmodel"
     }
 
-    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-    	genModel = "/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassesCS2AS/ClassesCS2AS.genmodel"
+    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true clearResourceSet = false
+    	genModel = "/org.eclipse.qvtd.xtext.qvtimperative.tests/models/ClassesCS2AS/ClassesCS2AS.genmodel"
     }
- 	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-    	genModel = "/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/ManualUML2RDBMS/ManualUML2RDBMS.genmodel"
+ 	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true clearResourceSet = false
+    	genModel = "/org.eclipse.qvtd.xtext.qvtimperative.tests/models/ManualUML2RDBMS/ManualUML2RDBMS.genmodel"
     }
-	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
-    	genModel = "/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/SimpleUML2RDBMS/SimpleUML2RDBMS.genmodel"
+	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true clearResourceSet = false
+    	genModel = "/org.eclipse.qvtd.xtext.qvtimperative.tests/models/SimpleUML2RDBMS/SimpleUML2RDBMS.genmodel"
     }
-	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
-    	genModel = "/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/Tree2TallTree/Tree2TallTree.genmodel"
+	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true clearResourceSet = false
+    	genModel = "/org.eclipse.qvtd.xtext.qvtimperative.tests/models/Tree2TallTree/Tree2TallTree.genmodel"
     }
-	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 
-    	genModel = "/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/HSV2HSL/HSV2HSL.genmodel"
+	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true clearResourceSet = false
+    	genModel = "/org.eclipse.qvtd.xtext.qvtimperative.tests/models/HSV2HSL/HSV2HSL.genmodel"
     }
 
 //	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true 

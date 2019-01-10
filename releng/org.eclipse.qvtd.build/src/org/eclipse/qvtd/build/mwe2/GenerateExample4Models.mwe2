@@ -17,7 +17,7 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*
 
 var projectName = "org.eclipse.qvtd.cs2as.compiler.tests"
-var examplesFolder = "src/org/eclipse/qvtd/cs2as/compiler/tests/models/example4"
+var examplesFolder = "models/SimplerKiama"
 
 Workflow {
 	bean = ResourceSetImpl : resourceSet {}
@@ -25,11 +25,11 @@ Workflow {
     bean = EcoreGenModelSetup { resourceSet = resourceSet }
 
 	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-    	genModel = "/${projectName}/${examplesFolder}/SimplerKiamaAS.genmodel"
+    	genModel = "/${projectName}/${examplesFolder}/SimplerKiamaAS.genmodel" clearResourceSet = false
     }
     
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-    	genModel = "/${projectName}/${examplesFolder}/SimplerKiamaCS.genmodel"
+    	genModel = "/${projectName}/${examplesFolder}/SimplerKiamaCS.genmodel" clearResourceSet = false
     }   
 }
 

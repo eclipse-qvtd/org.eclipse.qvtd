@@ -16,7 +16,7 @@ import org.eclipse.ocl.examples.build.xtend.*
 import org.eclipse.emf.ecore.resource.impl.*
 
 var projectName = "org.eclipse.qvtd.cs2as.compiler.tests"
-var examplesFolder = "src/org/eclipse/qvtd/cs2as/compiler/tests/models/example1"
+var examplesFolder = "models/Source2Target"
 
 Workflow {
 	bean = ResourceSetImpl : resourceSet {}
@@ -24,15 +24,15 @@ Workflow {
     bean = EcoreGenModelSetup { resourceSet = resourceSet }
     
 	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-    	genModel = "/${projectName}/${examplesFolder}/SourceMM1.genmodel"
+    	genModel = "/${projectName}/${examplesFolder}/SourceMM1.genmodel" clearResourceSet = false
     }
     
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-    	genModel = "/${projectName}/${examplesFolder}/TargetMM1.genmodel"
+    	genModel = "/${projectName}/${examplesFolder}/TargetMM1.genmodel" clearResourceSet = false
     }
     
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-    	genModel = "/${projectName}/${examplesFolder}/EnvExample1.genmodel"
+    	genModel = "/${projectName}/${examplesFolder}/EnvExample1.genmodel" clearResourceSet = false
     }
 
     component = GenerateASVisitors { resourceSet = resourceSet
