@@ -12,8 +12,6 @@ package org.eclipse.qvtd.pivot.qvtbase.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -29,11 +27,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Annotation;
-import org.eclipse.ocl.pivot.StandardLibrary;
-import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.evaluation.Executor;
-import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ClassImpl;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSingleIterationManager;
@@ -51,12 +45,7 @@ import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.OrderedSetValue;
-import org.eclipse.ocl.pivot.values.OrderedSetValue.Accumulator;
-import org.eclipse.ocl.pivot.values.SequenceValue;
-import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
@@ -483,53 +472,58 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 */
 	@Override
 	public boolean validateContextTypeIsTransformation(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
-		/**
-		 *
-		 * inv ContextTypeIsTransformation:
-		 *   let
-		 *     severity : Integer[1] = 'Transformation::ContextTypeIsTransformation'.getSeverity()
-		 *   in
-		 *     if severity <= 0
-		 *     then true
-		 *     else
-		 *       let result : Boolean[?] = ownedContext <> null implies ownedContext.type = self
-		 *       in
-		 *         'Transformation::ContextTypeIsTransformation'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
-		 *     endif
-		 */
-		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Transformation_c_c_ContextTypeIsTransformation);
-		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
-		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
-		}
-		else {
-			/*@Caught*/ @NonNull Object CAUGHT_result;
-			try {
-				final /*@NonInvalid*/ @Nullable Variable ownedContext = this.getOwnedContext();
-				final /*@NonInvalid*/ boolean ne = ownedContext != null;
-				/*@Thrown*/ boolean result;
-				if (ne) {
-					if (ownedContext == null) {
-						throw new InvalidValueException("Null source for \'TypedElement::type\'");
+		try {
+			/**
+			 *
+			 * inv ContextTypeIsTransformation:
+			 *   let
+			 *     severity : Integer[1] = 'Transformation::ContextTypeIsTransformation'.getSeverity()
+			 *   in
+			 *     if severity <= 0
+			 *     then true
+			 *     else
+			 *       let result : Boolean[?] = ownedContext <> null implies ownedContext.type = self
+			 *       in
+			 *         'Transformation::ContextTypeIsTransformation'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *     endif
+			 */
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Transformation_c_c_ContextTypeIsTransformation);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_0;
+			if (le) {
+				symbol_0 = ValueUtil.TRUE_VALUE;
+			}
+			else {
+				/*@Caught*/ @NonNull Object CAUGHT_result;
+				try {
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Variable ownedContext = this.getOwnedContext();
+					final /*@NonInvalid*/ boolean ne = ownedContext != null;
+					/*@Thrown*/ boolean result;
+					if (ne) {
+						if (ownedContext == null) {
+							throw new InvalidValueException("Null source for \'TypedElement::type\'");
+						}
+						final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = ownedContext.getType();
+						final /*@Thrown*/ boolean eq = (type != null) ? (type.getTypeId() == this.getTypeId()) : false;
+						result = eq;
 					}
-					final /*@Thrown*/ @Nullable Type type = ownedContext.getType();
-					final /*@Thrown*/ boolean eq = (type != null) ? (type.getTypeId() == this.getTypeId()) : false;
-					result = eq;
+					else {
+						result = ValueUtil.TRUE_VALUE;
+					}
+					CAUGHT_result = result;
 				}
-				else {
-					result = ValueUtil.TRUE_VALUE;
+				catch (Exception e) {
+					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				CAUGHT_result = result;
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Transformation_c_c_ContextTypeIsTransformation, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
+				symbol_0 = logDiagnostic;
 			}
-			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
-			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Transformation_c_c_ContextTypeIsTransformation, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+			return Boolean.TRUE == symbol_0;
 		}
-		return Boolean.TRUE == symbol_0;
+		catch (Throwable e) {
+			return ValueUtil.validationFailedDiagnostic("Transformation::ContextTypeIsTransformation", this, diagnostics, context, e);
+		}
 	}
 
 	/**
@@ -539,135 +533,140 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 */
 	@Override
 	public boolean validateExtendedTypedModelIsExtended(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
-		/**
-		 *
-		 * inv ExtendedTypedModelIsExtended:
-		 *   let
-		 *     severity : Integer[1] = 'Transformation::ExtendedTypedModelIsExtended'.getSeverity()
-		 *   in
-		 *     if severity <= 0
-		 *     then true
-		 *     else
-		 *       let result : Boolean[?] = extends <> null implies
-		 *         extends.modelParameter->forAll(etm |
-		 *           self.modelParameter->select(name = etm.name)
-		 *           .usedPackage->includesAll(etm.usedPackage))
-		 *       in
-		 *         'Transformation::ExtendedTypedModelIsExtended'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
-		 *     endif
-		 */
-		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Transformation_c_c_ExtendedTypedModelIsExtended);
-		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_2;
-		if (le) {
-			symbol_2 = ValueUtil.TRUE_VALUE;
-		}
-		else {
-			/*@Caught*/ @Nullable Object CAUGHT_result;
-			try {
-				final /*@NonInvalid*/ @Nullable Transformation symbol_0 = this.getExtends();
-				final /*@NonInvalid*/ boolean ne = symbol_0 != null;
-				/*@Thrown*/ @Nullable Boolean result;
-				if (ne) {
-					if (symbol_0 == null) {
-						throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Transformation::modelParameter\'");
-					}
-					final /*@Thrown*/ @NonNull List<TypedModel> modelParameter = symbol_0.getModelParameter();
-					final /*@Thrown*/ @NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
-					/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-					@NonNull Iterator<Object> ITERATOR_etm = BOXED_modelParameter.iterator();
-					/*@Thrown*/ @Nullable Boolean forAll;
-					while (true) {
-						if (!ITERATOR_etm.hasNext()) {
-							if (accumulator == ValueUtil.TRUE_VALUE) {
-								forAll = ValueUtil.TRUE_VALUE;
-							}
-							else {
-								throw (InvalidValueException)accumulator;
-							}
-							break;
+		try {
+			/**
+			 *
+			 * inv ExtendedTypedModelIsExtended:
+			 *   let
+			 *     severity : Integer[1] = 'Transformation::ExtendedTypedModelIsExtended'.getSeverity()
+			 *   in
+			 *     if severity <= 0
+			 *     then true
+			 *     else
+			 *       let result : Boolean[?] = extends <> null implies
+			 *         extends.modelParameter->forAll(etm |
+			 *           self.modelParameter->select(name = etm.name)
+			 *           .usedPackage->includesAll(etm.usedPackage))
+			 *       in
+			 *         'Transformation::ExtendedTypedModelIsExtended'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *     endif
+			 */
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Transformation_c_c_ExtendedTypedModelIsExtended);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_2;
+			if (le) {
+				symbol_2 = ValueUtil.TRUE_VALUE;
+			}
+			else {
+				/*@Caught*/ @Nullable Object CAUGHT_result;
+				try {
+					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation symbol_0 = this.getExtends();
+					final /*@NonInvalid*/ boolean ne = symbol_0 != null;
+					/*@Thrown*/ java.lang.@Nullable Boolean result;
+					if (ne) {
+						if (symbol_0 == null) {
+							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Transformation::modelParameter\'");
 						}
-						@SuppressWarnings("null")
-						/*@NonInvalid*/ @NonNull TypedModel etm = (@NonNull TypedModel)ITERATOR_etm.next();
-						/**
-						 *
-						 * self.modelParameter->select(name = etm.name)
-						 * .usedPackage->includesAll(etm.usedPackage)
-						 */
-						final /*@NonInvalid*/ @NonNull List<TypedModel> modelParameter_0 = this.getModelParameter();
-						final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_modelParameter_0 = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter_0);
-						/*@Thrown*/ @NonNull Accumulator accumulator_0 = ValueUtil.createOrderedSetAccumulatorValue(QVTbaseTables.ORD_CLSSid_TypedModel);
-						@NonNull Iterator<Object> ITERATOR__1 = BOXED_modelParameter_0.iterator();
-						/*@NonInvalid*/ @NonNull OrderedSetValue select;
+						final /*@Thrown*/ java.util.@NonNull List<TypedModel> modelParameter = symbol_0.getModelParameter();
+						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
+						/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
+						java.util.@NonNull Iterator<Object> ITERATOR_etm = BOXED_modelParameter.iterator();
+						/*@Thrown*/ java.lang.@Nullable Boolean forAll;
 						while (true) {
-							if (!ITERATOR__1.hasNext()) {
-								select = accumulator_0;
+							if (!ITERATOR_etm.hasNext()) {
+								if (accumulator == ValueUtil.TRUE_VALUE) {
+									forAll = ValueUtil.TRUE_VALUE;
+								}
+								else {
+									throw (InvalidValueException)accumulator;
+								}
 								break;
 							}
 							@SuppressWarnings("null")
-							/*@NonInvalid*/ @NonNull TypedModel _1 = (@NonNull TypedModel)ITERATOR__1.next();
+							/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull TypedModel etm = (org.eclipse.qvtd.pivot.qvtbase.@NonNull TypedModel)ITERATOR_etm.next();
 							/**
-							 * name = etm.name
+							 *
+							 * self.modelParameter->select(name = etm.name)
+							 * .usedPackage->includesAll(etm.usedPackage)
 							 */
-							final /*@NonInvalid*/ @Nullable String name = _1.getName();
-							final /*@NonInvalid*/ @Nullable String name_0 = etm.getName();
-							final /*@NonInvalid*/ boolean eq = (name != null) ? name.equals(name_0) : (name_0 == null);
+							final /*@NonInvalid*/ java.util.@NonNull List<TypedModel> modelParameter_0 = this.getModelParameter();
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_modelParameter_0 = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter_0);
+							/*@Thrown*/ org.eclipse.ocl.pivot.values.OrderedSetValue.@NonNull Accumulator accumulator_0 = ValueUtil.createOrderedSetAccumulatorValue(QVTbaseTables.ORD_CLSSid_TypedModel);
+							java.util.@NonNull Iterator<Object> ITERATOR__1 = BOXED_modelParameter_0.iterator();
+							/*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue select;
+							while (true) {
+								if (!ITERATOR__1.hasNext()) {
+									select = accumulator_0;
+									break;
+								}
+								@SuppressWarnings("null")
+								/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull TypedModel _1 = (org.eclipse.qvtd.pivot.qvtbase.@NonNull TypedModel)ITERATOR__1.next();
+								/**
+								 * name = etm.name
+								 */
+								final /*@NonInvalid*/ java.lang.@Nullable String name = _1.getName();
+								final /*@NonInvalid*/ java.lang.@Nullable String name_0 = etm.getName();
+								final /*@NonInvalid*/ boolean eq = (name != null) ? name.equals(name_0) : (name_0 == null);
+								//
+								if (eq == ValueUtil.TRUE_VALUE) {
+									accumulator_0.add(_1);
+								}
+							}
+							/*@Thrown*/ org.eclipse.ocl.pivot.values.SequenceValue.@NonNull Accumulator accumulator_1 = ValueUtil.createSequenceAccumulatorValue(QVTbaseTables.SEQ_CLSSid_Package);
+							java.util.@NonNull Iterator<Object> ITERATOR__1_0 = select.iterator();
+							/*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue collect;
+							while (true) {
+								if (!ITERATOR__1_0.hasNext()) {
+									collect = accumulator_1;
+									break;
+								}
+								@SuppressWarnings("null")
+								/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull TypedModel _1_0 = (org.eclipse.qvtd.pivot.qvtbase.@NonNull TypedModel)ITERATOR__1_0.next();
+								/**
+								 * usedPackage
+								 */
+								final /*@NonInvalid*/ java.util.@NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = _1_0.getUsedPackage();
+								final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_usedPackage = idResolver.createSetOfAll(QVTbaseTables.SET_CLSSid_Package, usedPackage);
+								//
+								for (Object value : BOXED_usedPackage.flatten().getElements()) {
+									accumulator_1.add(value);
+								}
+							}
+							final /*@NonInvalid*/ java.util.@NonNull List<org.eclipse.ocl.pivot.Package> usedPackage_0 = etm.getUsedPackage();
+							final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_usedPackage_0 = idResolver.createSetOfAll(QVTbaseTables.SET_CLSSid_Package, usedPackage_0);
+							final /*@NonInvalid*/ boolean includesAll = CollectionIncludesAllOperation.INSTANCE.evaluate(collect, BOXED_usedPackage_0).booleanValue();
 							//
-							if (eq == ValueUtil.TRUE_VALUE) {
-								accumulator_0.add(_1);
+							if (includesAll == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+								forAll = ValueUtil.FALSE_VALUE;
+								break;														// Stop immediately
+							}
+							else if (includesAll == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+								;															// Carry on
+							}
+							else {															// Impossible badly typed result
+								accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
 							}
 						}
-						/*@Thrown*/ org.eclipse.ocl.pivot.values.SequenceValue.@NonNull Accumulator accumulator_1 = ValueUtil.createSequenceAccumulatorValue(QVTbaseTables.SEQ_CLSSid_Package);
-						@NonNull Iterator<Object> ITERATOR__1_0 = select.iterator();
-						/*@NonInvalid*/ @NonNull SequenceValue collect;
-						while (true) {
-							if (!ITERATOR__1_0.hasNext()) {
-								collect = accumulator_1;
-								break;
-							}
-							@SuppressWarnings("null")
-							/*@NonInvalid*/ @NonNull TypedModel _1_0 = (@NonNull TypedModel)ITERATOR__1_0.next();
-							/**
-							 * usedPackage
-							 */
-							final /*@NonInvalid*/ @NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = _1_0.getUsedPackage();
-							final /*@NonInvalid*/ @NonNull SetValue BOXED_usedPackage = idResolver.createSetOfAll(QVTbaseTables.SET_CLSSid_Package, usedPackage);
-							//
-							for (Object value : BOXED_usedPackage.flatten().getElements()) {
-								accumulator_1.add(value);
-							}
-						}
-						final /*@NonInvalid*/ @NonNull List<org.eclipse.ocl.pivot.Package> usedPackage_0 = etm.getUsedPackage();
-						final /*@NonInvalid*/ @NonNull SetValue BOXED_usedPackage_0 = idResolver.createSetOfAll(QVTbaseTables.SET_CLSSid_Package, usedPackage_0);
-						final /*@NonInvalid*/ boolean includesAll = CollectionIncludesAllOperation.INSTANCE.evaluate(collect, BOXED_usedPackage_0).booleanValue();
-						//
-						if (includesAll == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
-							forAll = ValueUtil.FALSE_VALUE;
-							break;														// Stop immediately
-						}
-						else if (includesAll == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
-							;															// Carry on
-						}
-						else {															// Impossible badly typed result
-							accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
-						}
+						result = forAll;
 					}
-					result = forAll;
+					else {
+						result = ValueUtil.TRUE_VALUE;
+					}
+					CAUGHT_result = result;
 				}
-				else {
-					result = ValueUtil.TRUE_VALUE;
+				catch (Exception e) {
+					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				CAUGHT_result = result;
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Transformation_c_c_ExtendedTypedModelIsExtended, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
+				symbol_2 = logDiagnostic;
 			}
-			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
-			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Transformation_c_c_ExtendedTypedModelIsExtended, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
-			symbol_2 = logDiagnostic;
+			return Boolean.TRUE == symbol_2;
 		}
-		return Boolean.TRUE == symbol_2;
+		catch (Throwable e) {
+			return ValueUtil.validationFailedDiagnostic("Transformation::ExtendedTypedModelIsExtended", this, diagnostics, context, e);
+		}
 	}
 
 	/**
@@ -677,65 +676,70 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 */
 	@Override
 	public boolean validateModelParameterIsUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
-		/**
-		 *
-		 * inv ModelParameterIsUnique:
-		 *   let
-		 *     severity : Integer[1] = 'Transformation::ModelParameterIsUnique'.getSeverity()
-		 *   in
-		 *     if severity <= 0
-		 *     then true
-		 *     else
-		 *       let result : Boolean[1] = modelParameter->isUnique(name)
-		 *       in
-		 *         'Transformation::ModelParameterIsUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
-		 *     endif
-		 */
-		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Transformation_c_c_ModelParameterIsUnique);
-		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
-		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
-		}
-		else {
-			/*@Caught*/ @NonNull Object CAUGHT_result;
-			try {
-				final /*@NonInvalid*/ @NonNull List<TypedModel> modelParameter = this.getModelParameter();
-				final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
-				/*@Thrown*/ org.eclipse.ocl.pivot.values.SetValue.@NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTbaseTables.ORD_CLSSid_TypedModel);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_modelParameter.iterator();
-				/*@Thrown*/ boolean result;
-				while (true) {
-					if (!ITERATOR__1.hasNext()) {
-						result = ValueUtil.TRUE_VALUE;
-						break;
+		try {
+			/**
+			 *
+			 * inv ModelParameterIsUnique:
+			 *   let
+			 *     severity : Integer[1] = 'Transformation::ModelParameterIsUnique'.getSeverity()
+			 *   in
+			 *     if severity <= 0
+			 *     then true
+			 *     else
+			 *       let result : Boolean[1] = modelParameter->isUnique(name)
+			 *       in
+			 *         'Transformation::ModelParameterIsUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *     endif
+			 */
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Transformation_c_c_ModelParameterIsUnique);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_0;
+			if (le) {
+				symbol_0 = ValueUtil.TRUE_VALUE;
+			}
+			else {
+				/*@Caught*/ @NonNull Object CAUGHT_result;
+				try {
+					final /*@NonInvalid*/ java.util.@NonNull List<TypedModel> modelParameter = this.getModelParameter();
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
+					/*@Thrown*/ org.eclipse.ocl.pivot.values.SetValue.@NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTbaseTables.ORD_CLSSid_TypedModel);
+					java.util.@NonNull Iterator<Object> ITERATOR__1 = BOXED_modelParameter.iterator();
+					/*@Thrown*/ boolean result;
+					while (true) {
+						if (!ITERATOR__1.hasNext()) {
+							result = ValueUtil.TRUE_VALUE;
+							break;
+						}
+						@SuppressWarnings("null")
+						/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull TypedModel _1 = (org.eclipse.qvtd.pivot.qvtbase.@NonNull TypedModel)ITERATOR__1.next();
+						/**
+						 * name
+						 */
+						final /*@NonInvalid*/ java.lang.@Nullable String name = _1.getName();
+						//
+						if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
+							result = ValueUtil.FALSE_VALUE;			// Abort after second find
+							break;
+						}
+						else {
+							accumulator.add(name);
+						}
 					}
-					@SuppressWarnings("null")
-					/*@NonInvalid*/ @NonNull TypedModel _1 = (@NonNull TypedModel)ITERATOR__1.next();
-					/**
-					 * name
-					 */
-					final /*@NonInvalid*/ @Nullable String name = _1.getName();
-					//
-					if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
-						result = ValueUtil.FALSE_VALUE;			// Abort after second find
-						break;
-					}
-					else {
-						accumulator.add(name);
-					}
+					CAUGHT_result = result;
 				}
-				CAUGHT_result = result;
+				catch (Exception e) {
+					CAUGHT_result = ValueUtil.createInvalidValue(e);
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Transformation_c_c_ModelParameterIsUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
+				symbol_0 = logDiagnostic;
 			}
-			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
-			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Transformation_c_c_ModelParameterIsUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+			return Boolean.TRUE == symbol_0;
 		}
-		return Boolean.TRUE == symbol_0;
+		catch (Throwable e) {
+			return ValueUtil.validationFailedDiagnostic("Transformation::ModelParameterIsUnique", this, diagnostics, context, e);
+		}
 	}
 
 	/**
@@ -745,67 +749,71 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 */
 	@Override
 	public boolean validateNoExtendsCycle(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
-		/**
-		 *
-		 * inv NoExtendsCycle:
-		 *   let severity : Integer[1] = 'Transformation::NoExtendsCycle'.getSeverity()
-		 *   in
-		 *     if severity <= 0
-		 *     then true
-		 *     else
-		 *       let
-		 *         result : Boolean[1] = extends->closure(extends)
-		 *         ->excludes(self)
-		 *       in
-		 *         'Transformation::NoExtendsCycle'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
-		 *     endif
-		 */
-		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
-		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Transformation_c_c_NoExtendsCycle);
-		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_3;
-		if (le) {
-			symbol_3 = ValueUtil.TRUE_VALUE;
-		}
-		else {
-			/*@Caught*/ @NonNull Object CAUGHT_result;
-			try {
-				final /*@NonInvalid*/ @Nullable Transformation symbol_0 = this.getExtends();
-				final /*@Thrown*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTbaseTables.SET_CLSSid_Transformation, symbol_0);
-				final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
-				final @NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
-				final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, QVTbaseTables.SET_CLSSid_Transformation, QVTbaseTables.CLSSid_Transformation);
-				/**
-				 * Implementation of the iterator body.
-				 */
-				final @NonNull AbstractBinaryOperation BODY_closure_0 = new AbstractBinaryOperation() {
+		try {
+			/**
+			 *
+			 * inv NoExtendsCycle:
+			 *   let severity : Integer[1] = 'Transformation::NoExtendsCycle'.getSeverity()
+			 *   in
+			 *     if severity <= 0
+			 *     then true
+			 *     else
+			 *       let
+			 *         result : Boolean[1] = extends->closure(extends)
+			 *         ->excludes(self)
+			 *       in
+			 *         'Transformation::NoExtendsCycle'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *     endif
+			 */
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Transformation_c_c_NoExtendsCycle);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_3;
+			if (le) {
+				symbol_3 = ValueUtil.TRUE_VALUE;
+			}
+			else {
+				/*@Caught*/ @NonNull Object CAUGHT_result;
+				try {
+					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation symbol_0 = this.getExtends();
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTbaseTables.SET_CLSSid_Transformation, symbol_0);
+					final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
+					final org.eclipse.ocl.pivot.library.LibraryIteration.@NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
+					final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, QVTbaseTables.SET_CLSSid_Transformation, QVTbaseTables.CLSSid_Transformation);
 					/**
-					 * extends
+					 * Implementation of the iterator body.
 					 */
-					@Override
-					public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
-						final /*@NonInvalid*/ @Nullable Transformation symbol_1 = (Transformation)_1;
-						if (symbol_1 == null) {
-							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Transformation::extends\'");
+					final org.eclipse.ocl.pivot.library.@NonNull AbstractBinaryOperation BODY_closure_0 = new AbstractBinaryOperation() {
+						/**
+						 * extends
+						 */
+						@Override
+						public @Nullable Object evaluate(final org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor, final org.eclipse.ocl.pivot.ids.@NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object _1) {
+							final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation symbol_1 = (Transformation)_1;
+							if (symbol_1 == null) {
+								throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Transformation::extends\'");
+							}
+							final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation symbol_2 = symbol_1.getExtends();
+							return symbol_2;
 						}
-						final /*@Thrown*/ @Nullable Transformation symbol_2 = symbol_1.getExtends();
-						return symbol_2;
-					}
-				};
-				final @NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, QVTbaseTables.SET_CLSSid_Transformation, BODY_closure_0, oclAsSet, ACC_closure_0);
-				@SuppressWarnings("null")
-				final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0);
-				final /*@Thrown*/ boolean result = CollectionExcludesOperation.INSTANCE.evaluate(closure, this).booleanValue();
-				CAUGHT_result = result;
+					};
+					final org.eclipse.ocl.pivot.internal.library.executor.@NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, QVTbaseTables.SET_CLSSid_Transformation, BODY_closure_0, oclAsSet, ACC_closure_0);
+					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue closure = (org.eclipse.ocl.pivot.values.@NonNull SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0);
+					final /*@Thrown*/ boolean result = CollectionExcludesOperation.INSTANCE.evaluate(closure, this).booleanValue();
+					CAUGHT_result = result;
+				}
+				catch (Exception e) {
+					CAUGHT_result = ValueUtil.createInvalidValue(e);
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Transformation_c_c_NoExtendsCycle, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
+				symbol_3 = logDiagnostic;
 			}
-			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
-			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Transformation_c_c_NoExtendsCycle, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
-			symbol_3 = logDiagnostic;
+			return Boolean.TRUE == symbol_3;
 		}
-		return Boolean.TRUE == symbol_3;
+		catch (Throwable e) {
+			return ValueUtil.validationFailedDiagnostic("Transformation::NoExtendsCycle", this, diagnostics, context, e);
+		}
 	}
 } //TransformationImpl

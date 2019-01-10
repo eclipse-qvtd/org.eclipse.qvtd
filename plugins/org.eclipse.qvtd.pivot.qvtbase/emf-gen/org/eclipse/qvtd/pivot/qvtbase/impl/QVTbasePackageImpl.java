@@ -953,6 +953,8 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		createEcoreAnnotations();
 		// http://www.eclipse.org/uml2/2.0.0/UML
 		createUMLAnnotations();
+		// http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot
+		createPivotAnnotations();
 		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
 		createEmofAnnotations();
 	}
@@ -1079,6 +1081,88 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		   source,
 		   new String[] {
 			   "originalName", "NoExtendsCycle"
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createPivotAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot";
+		addAnnotation
+		  (getDomain__ValidateNameIsTypedModelName__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\ttypedModel <> null implies name = typedModel.name\n\n"
+		   });
+		addAnnotation
+		  (getDomain__ValidateTypedModelIsTransformationModelParameter__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\toclContainer().oclIsKindOf(Transformation) and typedModel <> null implies\n\toclContainer().oclAsType(Transformation).modelParameter->includes(typedModel)\n\n"
+		   });
+		addAnnotation
+		  (getFunction__ValidateParametersAreFunctionParameter__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\townedParameters->forAll(oclIsKindOf(FunctionParameter))\n\n"
+		   });
+		addAnnotation
+		  (getFunction__ValidateReturnTypeIsQueryType__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tqueryExpression <> null implies queryExpression.type.conformsTo(type)\n\n"
+		   });
+		addAnnotation
+		  (getPredicate__ValidateConditionIsBoolean__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\nconditionExpression.type = Boolean\n\n"
+		   });
+		addAnnotation
+		  (getRule__ValidateDomainNameIsUnique__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tdomain->isUnique(name)\n\n"
+		   });
+		addAnnotation
+		  (getRule__ValidateNoOverridesCycle__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\toverridden->closure(overridden)->excludes(self)\n\n"
+		   });
+		addAnnotation
+		  (getRule__ValidateOverridingRuleOverridesAllDomains__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\toverridden <> null implies\n\toverridden.domain->forAll(od | self.domain.name->includes(od.name))\n\n"
+		   });
+		addAnnotation
+		  (getTransformation__ValidateContextTypeIsTransformation__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\townedContext <> null implies ownedContext.type = self\n\n"
+		   });
+		addAnnotation
+		  (getTransformation__ValidateExtendedTypedModelIsExtended__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\t_extends <> null implies\n\t_extends.modelParameter->forAll(etm |\n\t\tself.modelParameter->select(name = etm.name).usedPackage->includesAll(etm.usedPackage)\n\t)\n\t\n"
+		   });
+		addAnnotation
+		  (getTransformation__ValidateModelParameterIsUnique__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tmodelParameter->isUnique(name)\n\n"
+		   });
+		addAnnotation
+		  (getTransformation__ValidateNoExtendsCycle__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\t_extends->closure(_extends)->excludes(self)\n\n"
 		   });
 	}
 

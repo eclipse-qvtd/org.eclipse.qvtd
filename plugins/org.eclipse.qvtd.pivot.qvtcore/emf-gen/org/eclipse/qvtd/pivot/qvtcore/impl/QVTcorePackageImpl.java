@@ -1219,6 +1219,8 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		createEmofAnnotations();
 		// http://www.eclipse.org/uml2/2.0.0/UML
 		createUMLAnnotations();
+		// http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot
+		createPivotAnnotations();
 	}
 
 	/**
@@ -1385,6 +1387,130 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		   source,
 		   new String[] {
 			   "originalName", "CompatibleTypeForValue"
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createPivotAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot";
+		addAnnotation
+		  (getBottomPattern__ValidateVariablesAreBottomVariables__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tvariable->forAll(oclIsKindOf(BottomVariable))\n\n"
+		   });
+		addAnnotation
+		  (getBottomVariable__ValidateCompatibleTypeForInitializer__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "ownedInit <> null implies ownedInit.type?.conformsTo(type)\n"
+		   });
+		addAnnotation
+		  (getGuardPattern__ValidateVariablesAreGuardVariables__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tvariable->forAll(oclIsKindOf(GuardVariable))\n\n"
+		   });
+		addAnnotation
+		  (getGuardVariable__ValidateNoInitializer__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "ownedInit = null\n\n"
+		   });
+		addAnnotation
+		  (getMapping__ValidateDomainsAreCoreDomains__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tdomain->forAll(oclIsKindOf(CoreDomain))\n\n"
+		   });
+		addAnnotation
+		  (getMapping__ValidateNestedNameIsNull__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\t_context <> null implies name = null\n\n"
+		   });
+		addAnnotation
+		  (getMapping__ValidateRootNameIsNotNull__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\ttransformation <> null implies name <> null\n\n"
+		   });
+		addAnnotation
+		  (getOppositePropertyAssignment__GetReferredTargetProperty(),
+		   source,
+		   new String[] {
+			   "body", "targetProperty.opposite\n\n"
+		   });
+		addAnnotation
+		  (getOppositePropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tisPartial implies\n\t\tlet propertyType = getReferredTargetProperty().type.oclAsType(ocl::CollectionType).elementType in\n\t\tlet valueType = value.type in\n\t\tTuple{\n\t\t\tstatus : Boolean = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),\n\t\t\tmessage : String = \'OppositePropertyAssignment::CompatibleTypeForPartialValue: \' + valueType?.name + \' must conform to \' + propertyType.name + \' or vice-versa\'\n\t\t}.status\n\n"
+		   });
+		addAnnotation
+		  (getOppositePropertyAssignment__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tnot isPartial implies\n\t\tlet propertyType = getReferredTargetProperty().type in\n\t\tlet valueType = value.type in\n\t\tTuple{\n\t\t\tstatus : Boolean = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),\n\t\t\tmessage : String = \'OppositePropertyAssignment::CompatibleTypeForTotalValue: \' + valueType?.name + \' must conform to \' + propertyType?.name + \' or vice-versa\'\n\t\t}.status\n\n"
+		   });
+		addAnnotation
+		  (getOppositePropertyAssignment__ValidateOppositePropertyIsImplicit__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tgetReferredTargetProperty().isImplicit\n\t\n"
+		   });
+		addAnnotation
+		  (getOppositePropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tslotExpression.type.conformsTo(getReferredTargetProperty().owningClass)\n\n"
+		   });
+		addAnnotation
+		  (getPropertyAssignment__GetReferredTargetProperty(),
+		   source,
+		   new String[] {
+			   "body", "targetProperty\n\n"
+		   });
+		addAnnotation
+		  (getPropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tisPartial implies\n\t\tlet propertyType = getReferredTargetProperty().type.oclAsType(ocl::CollectionType).elementType in\n\t\tlet valueType = value.type in\n\t\tTuple{\n\t\t\tstatus : Boolean = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),\n\t\t\tmessage : String = \'PropertyAssignment::CompatibleTypeForPartialValue: \' + valueType?.name + \' must conform to \' + propertyType.name + \' or vice-versa\'\n\t\t}.status\n\n"
+		   });
+		addAnnotation
+		  (getPropertyAssignment__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tnot isPartial implies\n\t\tlet propertyType = getReferredTargetProperty().type in\n\t\tlet valueType = value.type in\n\t\tTuple{\n\t\t\tstatus : Boolean = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),\n\t\t\tmessage : String = \'PropertyAssignment::CompatibleTypeForTotalValue: \' + valueType?.name + \' must conform to \' + propertyType?.name + \' or vice-versa\'\n\t\t}.status\n\n"
+		   });
+		addAnnotation
+		  (getPropertyAssignment__ValidatePropertyIsNotImplicit__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tnot targetProperty.isImplicit\n\n"
+		   });
+		addAnnotation
+		  (getPropertyAssignment__ValidateTargetPropertyIsSlotProperty__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tslotExpression.type.conformsTo(getReferredTargetProperty().owningClass)\n\n"
+		   });
+		addAnnotation
+		  (getRealizedVariable__ValidateNonDataTypeForType__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "not type.oclIsKindOf(ocl::DataType)\n\n"
+		   });
+		addAnnotation
+		  (getVariableAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "Tuple {\n\tmessage : String = \'VariableAssignment::CompatibleTypeForValue: \' + value.type?.name + \' must conform to \' + targetVariable.type?.name + \' or vice-versa\',\n\tstatus : Boolean = \n\ttargetVariable.type.conformsTo(value.type)\n\tor value.type.conformsTo(targetVariable.type)\n\n\n}.status"
 		   });
 	}
 

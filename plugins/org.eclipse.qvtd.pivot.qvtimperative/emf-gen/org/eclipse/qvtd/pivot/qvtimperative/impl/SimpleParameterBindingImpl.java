@@ -26,8 +26,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
@@ -38,8 +36,6 @@ import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.IntegerValue;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
@@ -184,55 +180,60 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 	 */
 	@Override
 	public boolean validateCompatibleTypeForCheckedValue(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
-		/**
-		 *
-		 * inv CompatibleTypeForCheckedValue:
-		 *   let
-		 *     severity : Integer[1] = 'SimpleParameterBinding::CompatibleTypeForCheckedValue'.getSeverity()
-		 *   in
-		 *     if severity <= 0
-		 *     then true
-		 *     else
-		 *       let result : Boolean[?] = isCheck implies
-		 *         boundVariable.type.conformsTo(value.type)
-		 *       in
-		 *         'SimpleParameterBinding::CompatibleTypeForCheckedValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
-		 *     endif
-		 */
-		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SimpleParameterBinding_c_c_CompatibleTypeForCheckedValue);
-		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
-		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
-		}
-		else {
-			/*@Caught*/ @NonNull Object CAUGHT_result;
-			try {
-				final /*@NonInvalid*/ boolean isCheck = this.isIsCheck();
-				/*@Thrown*/ boolean result;
-				if (isCheck) {
-					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull MappingParameter boundVariable = this.getBoundVariable();
-					final /*@NonInvalid*/ @Nullable Type type = boundVariable.getType();
-					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
-					final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
-					final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-					result = conformsTo;
-				}
-				else {
-					result = ValueUtil.TRUE_VALUE;
-				}
-				CAUGHT_result = result;
+		try {
+			/**
+			 *
+			 * inv CompatibleTypeForCheckedValue:
+			 *   let
+			 *     severity : Integer[1] = 'SimpleParameterBinding::CompatibleTypeForCheckedValue'.getSeverity()
+			 *   in
+			 *     if severity <= 0
+			 *     then true
+			 *     else
+			 *       let result : Boolean[?] = isCheck implies
+			 *         boundVariable.type.conformsTo(value.type)
+			 *       in
+			 *         'SimpleParameterBinding::CompatibleTypeForCheckedValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *     endif
+			 */
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SimpleParameterBinding_c_c_CompatibleTypeForCheckedValue);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_0;
+			if (le) {
+				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
-			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
+			else {
+				/*@Caught*/ @NonNull Object CAUGHT_result;
+				try {
+					final /*@NonInvalid*/ boolean isCheck = this.isIsCheck();
+					/*@Thrown*/ boolean result;
+					if (isCheck) {
+						@SuppressWarnings("null")
+						final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameter boundVariable = this.getBoundVariable();
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = boundVariable.getType();
+						@SuppressWarnings("null")
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value = this.getValue();
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = value.getType();
+						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+						result = conformsTo;
+					}
+					else {
+						result = ValueUtil.TRUE_VALUE;
+					}
+					CAUGHT_result = result;
+				}
+				catch (Exception e) {
+					CAUGHT_result = ValueUtil.createInvalidValue(e);
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_SimpleParameterBinding_c_c_CompatibleTypeForCheckedValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
+				symbol_0 = logDiagnostic;
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_SimpleParameterBinding_c_c_CompatibleTypeForCheckedValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+			return Boolean.TRUE == symbol_0;
 		}
-		return Boolean.TRUE == symbol_0;
+		catch (Throwable e) {
+			return ValueUtil.validationFailedDiagnostic("SimpleParameterBinding::CompatibleTypeForCheckedValue", this, diagnostics, context, e);
+		}
 	}
 
 	/**
@@ -242,57 +243,62 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 	 */
 	@Override
 	public boolean validateCompatibleTypeForUncheckedValue(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
-		/**
-		 *
-		 * inv CompatibleTypeForUncheckedValue:
-		 *   let
-		 *     severity : Integer[1] = 'SimpleParameterBinding::CompatibleTypeForUncheckedValue'.getSeverity()
-		 *   in
-		 *     if severity <= 0
-		 *     then true
-		 *     else
-		 *       let result : Boolean[?] = not isCheck implies
-		 *         value.type.conformsTo(boundVariable.type)
-		 *       in
-		 *         'SimpleParameterBinding::CompatibleTypeForUncheckedValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
-		 *     endif
-		 */
-		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SimpleParameterBinding_c_c_CompatibleTypeForUncheckedValue);
-		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
-		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
-		}
-		else {
-			/*@Caught*/ @Nullable Object CAUGHT_result;
-			try {
-				final /*@NonInvalid*/ boolean isCheck = this.isIsCheck();
-				final /*@NonInvalid*/ @Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isCheck);
-				/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+		try {
+			/**
+			 *
+			 * inv CompatibleTypeForUncheckedValue:
+			 *   let
+			 *     severity : Integer[1] = 'SimpleParameterBinding::CompatibleTypeForUncheckedValue'.getSeverity()
+			 *   in
+			 *     if severity <= 0
+			 *     then true
+			 *     else
+			 *       let result : Boolean[?] = not isCheck implies
+			 *         value.type.conformsTo(boundVariable.type)
+			 *       in
+			 *         'SimpleParameterBinding::CompatibleTypeForUncheckedValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *     endif
+			 */
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SimpleParameterBinding_c_c_CompatibleTypeForUncheckedValue);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_0;
+			if (le) {
+				symbol_0 = ValueUtil.TRUE_VALUE;
+			}
+			else {
+				/*@Caught*/ @Nullable Object CAUGHT_result;
 				try {
-					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
-					final /*@NonInvalid*/ @Nullable Type type = value.getType();
-					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull MappingParameter boundVariable = this.getBoundVariable();
-					final /*@NonInvalid*/ @Nullable Type type_0 = boundVariable.getType();
-					final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-					CAUGHT_conformsTo = conformsTo;
+					final /*@NonInvalid*/ boolean isCheck = this.isIsCheck();
+					final /*@NonInvalid*/ java.lang.@Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isCheck);
+					/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+					try {
+						@SuppressWarnings("null")
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value = this.getValue();
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = value.getType();
+						@SuppressWarnings("null")
+						final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameter boundVariable = this.getBoundVariable();
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = boundVariable.getType();
+						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+						CAUGHT_conformsTo = conformsTo;
+					}
+					catch (Exception e) {
+						CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
+					}
+					final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(not, CAUGHT_conformsTo);
+					CAUGHT_result = result;
 				}
 				catch (Exception e) {
-					CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
+					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@Thrown*/ @Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(not, CAUGHT_conformsTo);
-				CAUGHT_result = result;
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_SimpleParameterBinding_c_c_CompatibleTypeForUncheckedValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
+				symbol_0 = logDiagnostic;
 			}
-			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
-			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_SimpleParameterBinding_c_c_CompatibleTypeForUncheckedValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+			return Boolean.TRUE == symbol_0;
 		}
-		return Boolean.TRUE == symbol_0;
+		catch (Throwable e) {
+			return ValueUtil.validationFailedDiagnostic("SimpleParameterBinding::CompatibleTypeForUncheckedValue", this, diagnostics, context, e);
+		}
 	}
 
 	/**

@@ -11,8 +11,6 @@
 package org.eclipse.qvtd.pivot.qvtbase.impl;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -30,8 +28,6 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.evaluation.Executor;
-import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ExpressionInOCLImpl;
 import org.eclipse.ocl.pivot.internal.OperationImpl;
@@ -44,9 +40,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
@@ -148,69 +142,74 @@ public class FunctionImpl extends OperationImpl implements Function {
 	 */
 	@Override
 	public boolean validateParametersAreFunctionParameter(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
-		/**
-		 *
-		 * inv ParametersAreFunctionParameter:
-		 *   let
-		 *     severity : Integer[1] = 'Function::ParametersAreFunctionParameter'.getSeverity()
-		 *   in
-		 *     if severity <= 0
-		 *     then true
-		 *     else
-		 *       let
-		 *         result : Boolean[?] = ownedParameters->forAll(
-		 *           oclIsKindOf(FunctionParameter))
-		 *       in
-		 *         'Function::ParametersAreFunctionParameter'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
-		 *     endif
-		 */
-		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Function_c_c_ParametersAreFunctionParameter);
-		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
-		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
-		}
-		else {
-			final /*@NonInvalid*/ @NonNull List<Parameter> ownedParameters = this.getOwnedParameters();
-			final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownedParameters = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Parameter, ownedParameters);
-			/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-			@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedParameters.iterator();
-			/*@NonInvalid*/ @Nullable Boolean result;
-			while (true) {
-				if (!ITERATOR__1.hasNext()) {
-					if (accumulator == ValueUtil.TRUE_VALUE) {
-						result = ValueUtil.TRUE_VALUE;
-					}
-					else {
-						throw (InvalidValueException)accumulator;
-					}
-					break;
-				}
-				@SuppressWarnings("null")
-				/*@NonInvalid*/ @NonNull Parameter _1 = (@NonNull Parameter)ITERATOR__1.next();
-				/**
-				 * oclIsKindOf(FunctionParameter)
-				 */
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtbase_c_c_FunctionParameter = idResolver.getClass(QVTbaseTables.CLSSid_FunctionParameter, null);
-				final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtbase_c_c_FunctionParameter).booleanValue();
-				//
-				if (oclIsKindOf == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
-					result = ValueUtil.FALSE_VALUE;
-					break;														// Stop immediately
-				}
-				else if (oclIsKindOf == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
-					;															// Carry on
-				}
-				else {															// Impossible badly typed result
-					accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
-				}
+		try {
+			/**
+			 *
+			 * inv ParametersAreFunctionParameter:
+			 *   let
+			 *     severity : Integer[1] = 'Function::ParametersAreFunctionParameter'.getSeverity()
+			 *   in
+			 *     if severity <= 0
+			 *     then true
+			 *     else
+			 *       let
+			 *         result : Boolean[?] = ownedParameters->forAll(
+			 *           oclIsKindOf(FunctionParameter))
+			 *       in
+			 *         'Function::ParametersAreFunctionParameter'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *     endif
+			 */
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Function_c_c_ParametersAreFunctionParameter);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_0;
+			if (le) {
+				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Function_c_c_ParametersAreFunctionParameter, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTbaseTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+			else {
+				final /*@NonInvalid*/ java.util.@NonNull List<Parameter> ownedParameters = this.getOwnedParameters();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedParameters = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Parameter, ownedParameters);
+				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
+				java.util.@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedParameters.iterator();
+				/*@NonInvalid*/ java.lang.@Nullable Boolean result;
+				while (true) {
+					if (!ITERATOR__1.hasNext()) {
+						if (accumulator == ValueUtil.TRUE_VALUE) {
+							result = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							throw (InvalidValueException)accumulator;
+						}
+						break;
+					}
+					@SuppressWarnings("null")
+					/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Parameter _1 = (org.eclipse.ocl.pivot.@NonNull Parameter)ITERATOR__1.next();
+					/**
+					 * oclIsKindOf(FunctionParameter)
+					 */
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtbase_c_c_FunctionParameter = idResolver.getClass(QVTbaseTables.CLSSid_FunctionParameter, null);
+					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtbase_c_c_FunctionParameter).booleanValue();
+					//
+					if (oclIsKindOf == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+						result = ValueUtil.FALSE_VALUE;
+						break;														// Stop immediately
+					}
+					else if (oclIsKindOf == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+						;															// Carry on
+					}
+					else {															// Impossible badly typed result
+						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
+					}
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Function_c_c_ParametersAreFunctionParameter, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTbaseTables.INT_0).booleanValue();
+				symbol_0 = logDiagnostic;
+			}
+			return Boolean.TRUE == symbol_0;
 		}
-		return Boolean.TRUE == symbol_0;
+		catch (Throwable e) {
+			return ValueUtil.validationFailedDiagnostic("Function::ParametersAreFunctionParameter", this, diagnostics, context, e);
+		}
 	}
 
 	/**
@@ -220,54 +219,59 @@ public class FunctionImpl extends OperationImpl implements Function {
 	 */
 	@Override
 	public boolean validateReturnTypeIsQueryType(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
-		/**
-		 *
-		 * inv ReturnTypeIsQueryType:
-		 *   let severity : Integer[1] = 'Function::ReturnTypeIsQueryType'.getSeverity()
-		 *   in
-		 *     if severity <= 0
-		 *     then true
-		 *     else
-		 *       let result : Boolean[?] = queryExpression <> null implies
-		 *         queryExpression.type.conformsTo(type)
-		 *       in
-		 *         'Function::ReturnTypeIsQueryType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
-		 *     endif
-		 */
-		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Function_c_c_ReturnTypeIsQueryType);
-		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
-		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
-		}
-		else {
-			/*@Caught*/ @NonNull Object CAUGHT_result;
-			try {
-				final /*@NonInvalid*/ @Nullable OCLExpression queryExpression = this.getQueryExpression();
-				final /*@NonInvalid*/ boolean ne = queryExpression != null;
-				/*@Thrown*/ boolean result;
-				if (ne) {
-					if (queryExpression == null) {
-						throw new InvalidValueException("Null source for \'TypedElement::type\'");
+		try {
+			/**
+			 *
+			 * inv ReturnTypeIsQueryType:
+			 *   let severity : Integer[1] = 'Function::ReturnTypeIsQueryType'.getSeverity()
+			 *   in
+			 *     if severity <= 0
+			 *     then true
+			 *     else
+			 *       let result : Boolean[?] = queryExpression <> null implies
+			 *         queryExpression.type.conformsTo(type)
+			 *       in
+			 *         'Function::ReturnTypeIsQueryType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *     endif
+			 */
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Function_c_c_ReturnTypeIsQueryType);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_0;
+			if (le) {
+				symbol_0 = ValueUtil.TRUE_VALUE;
+			}
+			else {
+				/*@Caught*/ @NonNull Object CAUGHT_result;
+				try {
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable OCLExpression queryExpression = this.getQueryExpression();
+					final /*@NonInvalid*/ boolean ne = queryExpression != null;
+					/*@Thrown*/ boolean result;
+					if (ne) {
+						if (queryExpression == null) {
+							throw new InvalidValueException("Null source for \'TypedElement::type\'");
+						}
+						final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = queryExpression.getType();
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = this.getType();
+						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+						result = conformsTo;
 					}
-					final /*@Thrown*/ @Nullable Type type = queryExpression.getType();
-					final /*@NonInvalid*/ @Nullable Type type_0 = this.getType();
-					final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-					result = conformsTo;
+					else {
+						result = ValueUtil.TRUE_VALUE;
+					}
+					CAUGHT_result = result;
 				}
-				else {
-					result = ValueUtil.TRUE_VALUE;
+				catch (Exception e) {
+					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				CAUGHT_result = result;
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Function_c_c_ReturnTypeIsQueryType, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
+				symbol_0 = logDiagnostic;
 			}
-			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
-			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Function_c_c_ReturnTypeIsQueryType, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTbaseTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+			return Boolean.TRUE == symbol_0;
 		}
-		return Boolean.TRUE == symbol_0;
+		catch (Throwable e) {
+			return ValueUtil.validationFailedDiagnostic("Function::ReturnTypeIsQueryType", this, diagnostics, context, e);
+		}
 	}
 
 	/**

@@ -13,8 +13,6 @@ package org.eclipse.qvtd.pivot.qvtcore.impl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -29,8 +27,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.Executor;
-import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
@@ -40,11 +36,8 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -252,68 +245,73 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 */
 	@Override
 	public boolean validateDomainsAreCoreDomains(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
-		/**
-		 *
-		 * inv DomainsAreCoreDomains:
-		 *   let severity : Integer[1] = 'Mapping::DomainsAreCoreDomains'.getSeverity()
-		 *   in
-		 *     if severity <= 0
-		 *     then true
-		 *     else
-		 *       let
-		 *         result : Boolean[?] = domain->forAll(oclIsKindOf(CoreDomain))
-		 *       in
-		 *         'Mapping::DomainsAreCoreDomains'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
-		 *     endif
-		 */
-		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_Mapping_c_c_DomainsAreCoreDomains);
-		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
-		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
-		}
-		else {
-			@SuppressWarnings("null")
-			final /*@NonInvalid*/ @NonNull List<Domain> domain = this.getDomain();
-			final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTcoreTables.ORD_CLSSid_Domain, domain);
-			/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-			@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
-			/*@NonInvalid*/ @Nullable Boolean result;
-			while (true) {
-				if (!ITERATOR__1.hasNext()) {
-					if (accumulator == ValueUtil.TRUE_VALUE) {
-						result = ValueUtil.TRUE_VALUE;
-					}
-					else {
-						throw (InvalidValueException)accumulator;
-					}
-					break;
-				}
-				@SuppressWarnings("null")
-				/*@NonInvalid*/ @NonNull Domain _1 = (@NonNull Domain)ITERATOR__1.next();
-				/**
-				 * oclIsKindOf(CoreDomain)
-				 */
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtcore_c_c_CoreDomain = idResolver.getClass(QVTcoreTables.CLSSid_CoreDomain, null);
-				final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtcore_c_c_CoreDomain).booleanValue();
-				//
-				if (oclIsKindOf == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
-					result = ValueUtil.FALSE_VALUE;
-					break;														// Stop immediately
-				}
-				else if (oclIsKindOf == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
-					;															// Carry on
-				}
-				else {															// Impossible badly typed result
-					accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
-				}
+		try {
+			/**
+			 *
+			 * inv DomainsAreCoreDomains:
+			 *   let severity : Integer[1] = 'Mapping::DomainsAreCoreDomains'.getSeverity()
+			 *   in
+			 *     if severity <= 0
+			 *     then true
+			 *     else
+			 *       let
+			 *         result : Boolean[?] = domain->forAll(oclIsKindOf(CoreDomain))
+			 *       in
+			 *         'Mapping::DomainsAreCoreDomains'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *     endif
+			 */
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_Mapping_c_c_DomainsAreCoreDomains);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_0;
+			if (le) {
+				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_Mapping_c_c_DomainsAreCoreDomains, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTcoreTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+			else {
+				@SuppressWarnings("null")
+				final /*@NonInvalid*/ java.util.@NonNull List<Domain> domain = this.getDomain();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTcoreTables.ORD_CLSSid_Domain, domain);
+				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
+				java.util.@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
+				/*@NonInvalid*/ java.lang.@Nullable Boolean result;
+				while (true) {
+					if (!ITERATOR__1.hasNext()) {
+						if (accumulator == ValueUtil.TRUE_VALUE) {
+							result = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							throw (InvalidValueException)accumulator;
+						}
+						break;
+					}
+					@SuppressWarnings("null")
+					/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain _1 = (org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain)ITERATOR__1.next();
+					/**
+					 * oclIsKindOf(CoreDomain)
+					 */
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtcore_c_c_CoreDomain = idResolver.getClass(QVTcoreTables.CLSSid_CoreDomain, null);
+					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtcore_c_c_CoreDomain).booleanValue();
+					//
+					if (oclIsKindOf == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+						result = ValueUtil.FALSE_VALUE;
+						break;														// Stop immediately
+					}
+					else if (oclIsKindOf == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+						;															// Carry on
+					}
+					else {															// Impossible badly typed result
+						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
+					}
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_Mapping_c_c_DomainsAreCoreDomains, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTcoreTables.INT_0).booleanValue();
+				symbol_0 = logDiagnostic;
+			}
+			return Boolean.TRUE == symbol_0;
 		}
-		return Boolean.TRUE == symbol_0;
+		catch (Throwable e) {
+			return ValueUtil.validationFailedDiagnostic("Mapping::DomainsAreCoreDomains", this, diagnostics, context, e);
+		}
 	}
 
 	/**
@@ -323,42 +321,47 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 */
 	@Override
 	public boolean validateNestedNameIsNull(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
-		/**
-		 *
-		 * inv NestedNameIsNull:
-		 *   let severity : Integer[1] = 'Mapping::NestedNameIsNull'.getSeverity()
-		 *   in
-		 *     if severity <= 0
-		 *     then true
-		 *     else
-		 *       let result : Boolean[?] = context <> null implies name = null
-		 *       in
-		 *         'Mapping::NestedNameIsNull'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
-		 *     endif
-		 */
-		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_Mapping_c_c_NestedNameIsNull);
-		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
-		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
-		}
-		else {
-			final /*@NonInvalid*/ @Nullable Mapping context_0 = this.getContext();
-			final /*@NonInvalid*/ boolean ne = context_0 != null;
-			/*@NonInvalid*/ boolean result;
-			if (ne) {
-				final /*@NonInvalid*/ @Nullable String name = this.getName();
-				final /*@NonInvalid*/ boolean eq = name == null;
-				result = eq;
+		try {
+			/**
+			 *
+			 * inv NestedNameIsNull:
+			 *   let severity : Integer[1] = 'Mapping::NestedNameIsNull'.getSeverity()
+			 *   in
+			 *     if severity <= 0
+			 *     then true
+			 *     else
+			 *       let result : Boolean[?] = context <> null implies name = null
+			 *       in
+			 *         'Mapping::NestedNameIsNull'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *     endif
+			 */
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_Mapping_c_c_NestedNameIsNull);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_0;
+			if (le) {
+				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				result = ValueUtil.TRUE_VALUE;
+				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtcore.@Nullable Mapping context_0 = this.getContext();
+				final /*@NonInvalid*/ boolean ne = context_0 != null;
+				/*@NonInvalid*/ boolean result;
+				if (ne) {
+					final /*@NonInvalid*/ java.lang.@Nullable String name = this.getName();
+					final /*@NonInvalid*/ boolean eq = name == null;
+					result = eq;
+				}
+				else {
+					result = ValueUtil.TRUE_VALUE;
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_Mapping_c_c_NestedNameIsNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTcoreTables.INT_0).booleanValue();
+				symbol_0 = logDiagnostic;
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_Mapping_c_c_NestedNameIsNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTcoreTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+			return Boolean.TRUE == symbol_0;
 		}
-		return Boolean.TRUE == symbol_0;
+		catch (Throwable e) {
+			return ValueUtil.validationFailedDiagnostic("Mapping::NestedNameIsNull", this, diagnostics, context, e);
+		}
 	}
 
 	/**
@@ -368,42 +371,47 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 */
 	@Override
 	public boolean validateRootNameIsNotNull(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
-		/**
-		 *
-		 * inv RootNameIsNotNull:
-		 *   let severity : Integer[1] = 'Mapping::RootNameIsNotNull'.getSeverity()
-		 *   in
-		 *     if severity <= 0
-		 *     then true
-		 *     else
-		 *       let result : Boolean[?] = transformation <> null implies name <> null
-		 *       in
-		 *         'Mapping::RootNameIsNotNull'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
-		 *     endif
-		 */
-		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_Mapping_c_c_RootNameIsNotNull);
-		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
-		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
-		}
-		else {
-			final /*@NonInvalid*/ @Nullable Transformation transformation = this.getTransformation();
-			final /*@NonInvalid*/ boolean ne = transformation != null;
-			/*@NonInvalid*/ boolean result;
-			if (ne) {
-				final /*@NonInvalid*/ @Nullable String name = this.getName();
-				final /*@NonInvalid*/ boolean ne_0 = name != null;
-				result = ne_0;
+		try {
+			/**
+			 *
+			 * inv RootNameIsNotNull:
+			 *   let severity : Integer[1] = 'Mapping::RootNameIsNotNull'.getSeverity()
+			 *   in
+			 *     if severity <= 0
+			 *     then true
+			 *     else
+			 *       let result : Boolean[?] = transformation <> null implies name <> null
+			 *       in
+			 *         'Mapping::RootNameIsNotNull'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *     endif
+			 */
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_Mapping_c_c_RootNameIsNotNull);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_0;
+			if (le) {
+				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				result = ValueUtil.TRUE_VALUE;
+				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation transformation = this.getTransformation();
+				final /*@NonInvalid*/ boolean ne = transformation != null;
+				/*@NonInvalid*/ boolean result;
+				if (ne) {
+					final /*@NonInvalid*/ java.lang.@Nullable String name = this.getName();
+					final /*@NonInvalid*/ boolean ne_0 = name != null;
+					result = ne_0;
+				}
+				else {
+					result = ValueUtil.TRUE_VALUE;
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_Mapping_c_c_RootNameIsNotNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTcoreTables.INT_0).booleanValue();
+				symbol_0 = logDiagnostic;
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_Mapping_c_c_RootNameIsNotNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTcoreTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+			return Boolean.TRUE == symbol_0;
 		}
-		return Boolean.TRUE == symbol_0;
+		catch (Throwable e) {
+			return ValueUtil.validationFailedDiagnostic("Mapping::RootNameIsNotNull", this, diagnostics, context, e);
+		}
 	}
 
 	/**

@@ -1104,6 +1104,8 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		createEcoreAnnotations();
 		// http://www.eclipse.org/uml2/2.0.0/UML
 		createUMLAnnotations();
+		// http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot
+		createPivotAnnotations();
 		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
 		createEmofAnnotations();
 	}
@@ -1308,6 +1310,130 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		   source,
 		   new String[] {
 			   "originalName", "CompatibleNullityForInitializer"
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createPivotAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot";
+		addAnnotation
+		  (getKey__ValidateIdentifiesIsNotAbstract__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\t\t\t-- see Bugzilla 512532 discussion\n\tnot identifies.isAbstract\n\n"
+		   });
+		addAnnotation
+		  (getKey__ValidateIdentifiesIsAUsedPackageClass__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\ttransformation<> null implies transformation.modelParameter.usedPackage->includes(identifies.owningPackage)\n\n"
+		   });
+		addAnnotation
+		  (getKey__ValidateNoSuperKeys__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\t\t\t-- see Bugzilla 512532 discussion\n\ttransformation<> null implies \n\tlet superClasses = identifies.superClasses->closure(superClasses) in\n\tlet otherKeys = transformation.ownedKey->excluding(self) in\n\totherKeys.identifies->excludesAll(superClasses)\n\n"
+		   });
+		addAnnotation
+		  (getKey__ValidateIdentifiesIsUnique__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\ttransformation<> null implies \n\tlet otherKeys = transformation.ownedKey->excluding(self) in\n\totherKeys.identifies->excludes(identifies)\n\n"
+		   });
+		addAnnotation
+		  (getKey__ValidateOppositePartsHaveOpposites__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\toppositePart->forAll(opposite <> null)\n\n"
+		   });
+		addAnnotation
+		  (getKey__ValidateOppositePartsAreOppositeParts__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\toppositePart->forAll(self.identifies.conformsTo(type))\n\n"
+		   });
+		addAnnotation
+		  (getKey__ValidatePartsAreParts__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tpart->forAll(self.identifies.conformsTo(owningClass))\n\n"
+		   });
+		addAnnotation
+		  (getKey__ValidatePartsAreUnique__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tpart->excludesAll(oppositePart.opposite)\n\n"
+		   });
+		addAnnotation
+		  (getRelation__ValidateDomainsAreRelationDomains__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tdomain->forAll(oclIsKindOf(RelationDomain))\n"
+		   });
+		addAnnotation
+		  (getRelation__ValidateTopRelationOverriddenByTopRelation__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\toverridden <> null and not overridden.oclAsType(Relation).isTopLevel implies not isTopLevel\n\n"
+		   });
+		addAnnotation
+		  (getRelation__ValidateTransformationIsRelationalTransformation__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\ttransformation.oclIsKindOf(RelationalTransformation)\n\n"
+		   });
+		addAnnotation
+		  (getRelationCallExp__ValidateMatchingArgumentCount__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tself.argument->size() = self.referredRelation.domain.oclAsType(RelationDomain).rootVariable->size()\n"
+		   });
+		addAnnotation
+		  (getRelationCallExp__ValidateWhereInvocationIsANonTopRelation__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tlet pattern : qvtbase::Pattern = self->asOrderedSet()->closure(e : ocl::OclElement | e.oclContainer())->selectByKind(qvtbase::Pattern)->first() in\n    let relation : Relation = pattern->asOrderedSet()->closure(e : ocl::OclElement | e.oclContainer())->selectByKind(Relation)->first() in\n\trelation._where = pattern implies not referredRelation.isTopLevel\n"
+		   });
+		addAnnotation
+		  (getRelationCallExp__ValidateDataTypeInvocationIsANonTopRelation__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tself.argument->exists(type.oclIsKindOf(pivot::DataType) and not type.oclIsKindOf(pivot::CollectionType))\n\timplies not referredRelation.isTopLevel\n\t\n"
+		   });
+		addAnnotation
+		  (getRelationDomain__ValidateRelationDomainAssignmentsAreUnique__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tdefaultAssignment->isUnique(variable)\n\n"
+		   });
+		addAnnotation
+		  (getRelationDomainAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tvalueExp.type.conformsTo(variable.type)\n\n"
+		   });
+		addAnnotation
+		  (getRelationalTransformation__ValidateRulesAreRelations__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\trule->forAll(oclIsKindOf(Relation))\n\n"
+		   });
+		addAnnotation
+		  (getSharedVariable__ValidateCompatibleTypeForInitializer__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "ownedInit <> null implies ownedInit.type?.conformsTo(type)\n"
+		   });
+		addAnnotation
+		  (getSharedVariable__ValidateCompatibleNullityForInitializer__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "ownedInit <> null implies ownedInit.isRequired = isRequired\n\n"
 		   });
 	}
 

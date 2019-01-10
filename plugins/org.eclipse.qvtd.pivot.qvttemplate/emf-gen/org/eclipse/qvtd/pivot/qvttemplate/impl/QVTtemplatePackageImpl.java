@@ -615,6 +615,8 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 		createEcoreAnnotations();
 		// http://www.eclipse.org/uml2/2.0.0/UML
 		createUMLAnnotations();
+		// http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot
+		createPivotAnnotations();
 		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
 		createEmofAnnotations();
 	}
@@ -747,6 +749,76 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 		   source,
 		   new String[] {
 			   "originalName", "WhereIsBoolean"
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createPivotAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot";
+		addAnnotation
+		  (getCollectionTemplateExp__ValidateMemberTypeisCollectionElementType__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tmember->forAll(type.conformsTo(referredCollectionType.elementType))\n\n"
+		   });
+		addAnnotation
+		  (getCollectionTemplateExp__ValidateRestTypeisCollectionType__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\trest <> null implies\n\t\trest.type = referredCollectionType\n\n"
+		   });
+		addAnnotation
+		  (getCollectionTemplateExp__ValidateTypeisCollectionType__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\ttype = referredCollectionType\n\n"
+		   });
+		addAnnotation
+		  (getObjectTemplateExp__ValidatePartPropertyIsUnique__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\tpart->isUnique(resolvedProperty)\n\n"
+		   });
+		addAnnotation
+		  (getObjectTemplateExp__ValidateTypeisObjectType__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\ttype = referredClass\n\n"
+		   });
+		addAnnotation
+		  (getPropertyTemplateItem__ValidateCompatibleClassForProperty__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "Tuple {\n\tmessage : String = objContainer.referredClass.name + \' must conform to \' + resolvedProperty.owningClass?.name,\n\tstatus : Boolean = \n\tobjContainer.referredClass.conformsTo(resolvedProperty.owningClass)\n\n\n}.status"
+		   });
+		addAnnotation
+		  (getPropertyTemplateItem__ValidateCompatibleTypeForObjectValue__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "Tuple {\n\tmessage : String = value.type?.name + \' must conform to \' + resolvedProperty.type?.name + \' or vice-versa\',\n\tstatus : Boolean = \n\tnot resolvedProperty.type.oclIsKindOf(ocl::CollectionType) implies\n\t\tlet propertyType = resolvedProperty.type in\n\t\tlet valueType = value.type in\n\t\t\tvalueType.conformsTo(propertyType)\n\t\t\tor propertyType.conformsTo(valueType)\n\n\n}.status"
+		   });
+		addAnnotation
+		  (getPropertyTemplateItem__ValidateCompatibleTypeForCollectionElementValue__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "Tuple {\n\tmessage : String = value.type?.name + \' must conform to \' + resolvedProperty.type.oclAsType(ocl::CollectionType).elementType.name + \' or vice-versa\',\n\tstatus : Boolean = \n\tresolvedProperty.type.oclIsKindOf(ocl::CollectionType)\n\tand not value.type.oclIsKindOf(ocl::CollectionType) implies\n\t\tlet propertyType = resolvedProperty.type.oclAsType(ocl::CollectionType).elementType in\n\t\tlet valueType = value.type in\n\t\t\tvalueType.conformsTo(propertyType)\n\t\t\tor propertyType.conformsTo(valueType)\n\n\n}.status"
+		   });
+		addAnnotation
+		  (getPropertyTemplateItem__ValidateCompatibleTypeForCollectionValue__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "Tuple {\n\tmessage : String = value.type.oclAsType(ocl::CollectionType).elementType.name + \' must conform to \' + resolvedProperty.type.oclAsType(ocl::CollectionType).elementType.name + \' or vice-versa\',\n\tstatus : Boolean = \n\tresolvedProperty.type.oclIsKindOf(ocl::CollectionType)\n\tand value.type.oclIsKindOf(ocl::CollectionType) implies\n\t\tlet propertyType = resolvedProperty.type.oclAsType(ocl::CollectionType).elementType in\n\t\tlet valueType = value.type.oclAsType(ocl::CollectionType).elementType in\n--\t\tTuple {\n--\t\t\tmessage : String = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),\n\t\t\t/*status : Boolean =*/ valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType)\n\n}.status"
+		   });
+		addAnnotation
+		  (getTemplateExp__ValidateWhereIsBoolean__DiagnosticChain_Map(),
+		   source,
+		   new String[] {
+			   "body", "\n\twhere <> null implies\n\t\twhere.type = Boolean\n\n"
 		   });
 	}
 

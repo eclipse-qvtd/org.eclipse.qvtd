@@ -15,8 +15,6 @@
 package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
@@ -25,8 +23,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.Executor;
-import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
@@ -37,9 +33,7 @@ import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
-import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl;
 
@@ -83,68 +77,73 @@ public class ImperativeTransformationImpl extends TransformationImpl implements 
 	 */
 	@Override
 	public boolean validateallRulesAreMappings(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
-		/**
-		 *
-		 * inv allRulesAreMappings:
-		 *   let
-		 *     severity : Integer[1] = 'ImperativeTransformation::allRulesAreMappings'.getSeverity()
-		 *   in
-		 *     if severity <= 0
-		 *     then true
-		 *     else
-		 *       let
-		 *         result : Boolean[?] = rule->forAll(oclIsKindOf(Mapping))
-		 *       in
-		 *         'ImperativeTransformation::allRulesAreMappings'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
-		 *     endif
-		 */
-		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_ImperativeTransformation_c_c_allRulesAreMappings);
-		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
-		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
-		}
-		else {
-			final /*@NonInvalid*/ @NonNull List<Rule> rule = this.getRule();
-			final /*@NonInvalid*/ @NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_Rule, rule);
-			/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-			@NonNull Iterator<Object> ITERATOR__1 = BOXED_rule.iterator();
-			/*@NonInvalid*/ @Nullable Boolean result;
-			while (true) {
-				if (!ITERATOR__1.hasNext()) {
-					if (accumulator == ValueUtil.TRUE_VALUE) {
-						result = ValueUtil.TRUE_VALUE;
-					}
-					else {
-						throw (InvalidValueException)accumulator;
-					}
-					break;
-				}
-				@SuppressWarnings("null")
-				/*@NonInvalid*/ @NonNull Rule _1 = (@NonNull Rule)ITERATOR__1.next();
-				/**
-				 * oclIsKindOf(Mapping)
-				 */
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_Mapping = idResolver.getClass(QVTimperativeTables.CLSSid_Mapping, null);
-				final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtimperative_c_c_Mapping).booleanValue();
-				//
-				if (oclIsKindOf == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
-					result = ValueUtil.FALSE_VALUE;
-					break;														// Stop immediately
-				}
-				else if (oclIsKindOf == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
-					;															// Carry on
-				}
-				else {															// Impossible badly typed result
-					accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
-				}
+		try {
+			/**
+			 *
+			 * inv allRulesAreMappings:
+			 *   let
+			 *     severity : Integer[1] = 'ImperativeTransformation::allRulesAreMappings'.getSeverity()
+			 *   in
+			 *     if severity <= 0
+			 *     then true
+			 *     else
+			 *       let
+			 *         result : Boolean[?] = rule->forAll(oclIsKindOf(Mapping))
+			 *       in
+			 *         'ImperativeTransformation::allRulesAreMappings'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *     endif
+			 */
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_ImperativeTransformation_c_c_allRulesAreMappings);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_0;
+			if (le) {
+				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_ImperativeTransformation_c_c_allRulesAreMappings, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+			else {
+				final /*@NonInvalid*/ java.util.@NonNull List<Rule> rule = this.getRule();
+				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_Rule, rule);
+				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
+				java.util.@NonNull Iterator<Object> ITERATOR__1 = BOXED_rule.iterator();
+				/*@NonInvalid*/ java.lang.@Nullable Boolean result;
+				while (true) {
+					if (!ITERATOR__1.hasNext()) {
+						if (accumulator == ValueUtil.TRUE_VALUE) {
+							result = ValueUtil.TRUE_VALUE;
+						}
+						else {
+							throw (InvalidValueException)accumulator;
+						}
+						break;
+					}
+					@SuppressWarnings("null")
+					/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule _1 = (org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule)ITERATOR__1.next();
+					/**
+					 * oclIsKindOf(Mapping)
+					 */
+					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_Mapping = idResolver.getClass(QVTimperativeTables.CLSSid_Mapping, null);
+					final /*@NonInvalid*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, _1, TYP_qvtimperative_c_c_Mapping).booleanValue();
+					//
+					if (oclIsKindOf == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+						result = ValueUtil.FALSE_VALUE;
+						break;														// Stop immediately
+					}
+					else if (oclIsKindOf == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+						;															// Carry on
+					}
+					else {															// Impossible badly typed result
+						accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");
+					}
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_ImperativeTransformation_c_c_allRulesAreMappings, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
+				symbol_0 = logDiagnostic;
+			}
+			return Boolean.TRUE == symbol_0;
 		}
-		return Boolean.TRUE == symbol_0;
+		catch (Throwable e) {
+			return ValueUtil.validationFailedDiagnostic("ImperativeTransformation::allRulesAreMappings", this, diagnostics, context, e);
+		}
 	}
 
 	/**

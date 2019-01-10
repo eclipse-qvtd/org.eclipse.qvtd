@@ -324,6 +324,8 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		// Create annotations
 		// http://www.eclipse.org/emf/2002/Ecore
 		createEcoreAnnotations();
+		// http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot
+		createPivotAnnotations();
 	}
 
 	/**
@@ -338,6 +340,28 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		  (this,
 		   source,
 		   new String[] {
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createPivotAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot";
+		addAnnotation
+		  (getLookupEnvironment__AddElements__Collection(),
+		   source,
+		   new String[] {
+			   "body", "LookupEnvironment{\n\t\t\t\t\t\tnamedElements = namedElements->includingAll(elements),\n\t\t\t\t\t\tparentEnv = parentEnv\t\n\t\t\t\t}"
+		   });
+		addAnnotation
+		  (getLookupEnvironment__AddElement__NamedElement(),
+		   source,
+		   new String[] {
+			   "body", "LookupEnvironment{\n\t\t\t\t\t\tnamedElements = namedElements->including(element),\n\t\t\t\t\t\tparentEnv = parentEnv\n\t\t\t\t\t}"
 		   });
 	}
 
