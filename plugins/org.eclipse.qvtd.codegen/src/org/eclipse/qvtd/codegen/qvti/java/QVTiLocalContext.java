@@ -33,7 +33,7 @@ public class QVTiLocalContext extends JavaLocalContext<@NonNull QVTiCodeGenerato
 	}
 
 	@Override
-	public @Nullable CGValuedElement createExecutorVariable() {
+	public @Nullable CGValuedElement createExecutorVariable(@Nullable String contextName) {
 		return null;
 	}
 
