@@ -6,8 +6,7 @@ Bundle-Version: 0.18.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Comment: org.eclipse.equinox.ds is a workaround to Bug 539655,
- javax.annotation is a workaround to Bug 539038
+Comment: javax.annotation is a workaround to Bug 539038
 Require-Bundle: org.junit,
  org.eclipse.osgi,
  org.eclipse.ocl.xtext.completeocl;bundle-version="[1.7.0,1.8.0)",
@@ -16,7 +15,6 @@ Require-Bundle: org.junit,
  org.eclipse.qvtd.cs2as.compiler;bundle-version="[0.18.0,1.0.0)",
  org.eclipse.qvtd.xtext.qvtimperative.tests,
  org.eclipse.qvtd.xtext.qvtcore.tests,
- org.eclipse.equinox.ds;resolution:=optional,
  javax.annotation;resolution:=optional
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
