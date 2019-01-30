@@ -216,7 +216,7 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 	@Override
 	public List<Node> getMandatoryTargetNodes() {
 		if (mandatoryTargetNodes == null) {
-			mandatoryTargetNodes = new NodeList(this, QVTschedulePackage.NODE_CONNECTION__MANDATORY_TARGET_NODES, ConnectionRole.MANDATORY_NODE);
+			mandatoryTargetNodes = new NodeList(this, QVTschedulePackage.Literals.NODE_CONNECTION__MANDATORY_TARGET_NODES.getFeatureID(), ConnectionRole.MANDATORY_NODE);
 		}
 		return mandatoryTargetNodes;
 	}
@@ -229,7 +229,7 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 	@Override
 	public List<Node> getPassedTargetNodes() {
 		if (passedTargetNodes == null) {
-			passedTargetNodes = new NodeList(this, QVTschedulePackage.NODE_CONNECTION__PASSED_TARGET_NODES, ConnectionRole.PASSED);
+			passedTargetNodes = new NodeList(this, QVTschedulePackage.Literals.NODE_CONNECTION__PASSED_TARGET_NODES.getFeatureID(), ConnectionRole.PASSED);
 		}
 		return passedTargetNodes;
 	}
@@ -242,7 +242,7 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 	@Override
 	public List<Node> getPreferredTargetNodes() {
 		if (preferredTargetNodes == null) {
-			preferredTargetNodes = new NodeList(this, QVTschedulePackage.NODE_CONNECTION__PREFERRED_TARGET_NODES, ConnectionRole.PREFERRED_NODE);
+			preferredTargetNodes = new NodeList(this, QVTschedulePackage.Literals.NODE_CONNECTION__PREFERRED_TARGET_NODES.getFeatureID(), ConnectionRole.PREFERRED_NODE);
 		}
 		return preferredTargetNodes;
 	}

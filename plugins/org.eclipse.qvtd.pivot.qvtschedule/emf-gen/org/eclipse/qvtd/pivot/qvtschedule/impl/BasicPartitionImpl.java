@@ -304,7 +304,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public List<Edge> getConstantEdges() {
 		if (constantEdges == null) {
-			constantEdges = new EdgeList(this, QVTschedulePackage.BASIC_PARTITION__CONSTANT_EDGES, Role.CONSTANT);
+			constantEdges = new EdgeList(this, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_EDGES.getFeatureID(), Role.CONSTANT);
 		}
 		return constantEdges;
 	}
@@ -317,7 +317,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public List<Node> getConstantNodes() {
 		if (constantNodes == null) {
-			constantNodes = new NodeList(this, QVTschedulePackage.BASIC_PARTITION__CONSTANT_NODES, Role.CONSTANT);
+			constantNodes = new NodeList(this, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_NODES.getFeatureID(), Role.CONSTANT);
 		}
 		return constantNodes;
 	}
@@ -330,7 +330,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public List<Node> getConstantSuccessFalseNodes() {
 		if (constantSuccessFalseNodes == null) {
-			constantSuccessFalseNodes = new NodeList(this, QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES, Role.CONSTANT_SUCCESS_FALSE);
+			constantSuccessFalseNodes = new NodeList(this, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES.getFeatureID(), Role.CONSTANT_SUCCESS_FALSE);
 		}
 		return constantSuccessFalseNodes;
 	}
@@ -343,7 +343,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public List<Node> getConstantSuccessTrueNodes() {
 		if (constantSuccessTrueNodes == null) {
-			constantSuccessTrueNodes = new NodeList(this, QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES, Role.CONSTANT_SUCCESS_TRUE);
+			constantSuccessTrueNodes = new NodeList(this, QVTschedulePackage.Literals.BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES.getFeatureID(), Role.CONSTANT_SUCCESS_TRUE);
 		}
 		return constantSuccessTrueNodes;
 	}
@@ -369,7 +369,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public List<Edge> getLoadedEdges() {
 		if (loadedEdges == null) {
-			loadedEdges = new EdgeList(this, QVTschedulePackage.BASIC_PARTITION__LOADED_EDGES, Role.LOADED);
+			loadedEdges = new EdgeList(this, QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_EDGES.getFeatureID(), Role.LOADED);
 		}
 		return loadedEdges;
 	}
@@ -382,7 +382,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public List<Node> getLoadedNodes() {
 		if (loadedNodes == null) {
-			loadedNodes = new NodeList(this, QVTschedulePackage.BASIC_PARTITION__LOADED_NODES, Role.LOADED);
+			loadedNodes = new NodeList(this, QVTschedulePackage.Literals.BASIC_PARTITION__LOADED_NODES.getFeatureID(), Role.LOADED);
 		}
 		return loadedNodes;
 	}
@@ -395,7 +395,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public List<Edge> getPredicatedEdges() {
 		if (predicatedEdges == null) {
-			predicatedEdges = new EdgeList(this, QVTschedulePackage.BASIC_PARTITION__PREDICATED_EDGES, Role.PREDICATED);
+			predicatedEdges = new EdgeList(this, QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_EDGES.getFeatureID(), Role.PREDICATED);
 		}
 		return predicatedEdges;
 	}
@@ -408,7 +408,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public List<Node> getPredicatedNodes() {
 		if (predicatedNodes == null) {
-			predicatedNodes = new NodeList(this, QVTschedulePackage.BASIC_PARTITION__PREDICATED_NODES, Role.PREDICATED);
+			predicatedNodes = new NodeList(this, QVTschedulePackage.Literals.BASIC_PARTITION__PREDICATED_NODES.getFeatureID(), Role.PREDICATED);
 		}
 		return predicatedNodes;
 	}
@@ -421,7 +421,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public List<Edge> getRealizedEdges() {
 		if (realizedEdges == null) {
-			realizedEdges = new EdgeList(this, QVTschedulePackage.BASIC_PARTITION__REALIZED_EDGES, Role.REALIZED);
+			realizedEdges = new EdgeList(this, QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_EDGES.getFeatureID(), Role.REALIZED);
 		}
 		return realizedEdges;
 	}
@@ -434,7 +434,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public List<Node> getRealizedNodes() {
 		if (realizedNodes == null) {
-			realizedNodes = new NodeList(this, QVTschedulePackage.BASIC_PARTITION__REALIZED_NODES, Role.REALIZED);
+			realizedNodes = new NodeList(this, QVTschedulePackage.Literals.BASIC_PARTITION__REALIZED_NODES.getFeatureID(), Role.REALIZED);
 		}
 		return realizedNodes;
 	}
@@ -447,7 +447,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public List<Edge> getSpeculatedEdges() {
 		if (speculatedEdges == null) {
-			speculatedEdges = new EdgeList(this, QVTschedulePackage.BASIC_PARTITION__SPECULATED_EDGES, Role.SPECULATED);
+			speculatedEdges = new EdgeList(this, QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_EDGES.getFeatureID(), Role.SPECULATED);
 		}
 		return speculatedEdges;
 	}
@@ -460,7 +460,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public List<Node> getSpeculatedNodes() {
 		if (speculatedNodes == null) {
-			speculatedNodes = new NodeList(this, QVTschedulePackage.BASIC_PARTITION__SPECULATED_NODES, Role.SPECULATED);
+			speculatedNodes = new NodeList(this, QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATED_NODES.getFeatureID(), Role.SPECULATED);
 		}
 		return speculatedNodes;
 	}
@@ -473,7 +473,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public List<Node> getSpeculationNodes() {
 		if (speculationNodes == null) {
-			speculationNodes = new NodeList(this, QVTschedulePackage.BASIC_PARTITION__SPECULATION_NODES, Role.SPECULATION);
+			speculationNodes = new NodeList(this, QVTschedulePackage.Literals.BASIC_PARTITION__SPECULATION_NODES.getFeatureID(), Role.SPECULATION);
 		}
 		return speculationNodes;
 	}

@@ -201,7 +201,7 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 	@Override
 	public List<NavigableEdge> getMandatoryTargetEdges() {
 		if (mandatoryTargetEdges == null) {
-			mandatoryTargetEdges = new EdgeList(this, QVTschedulePackage.EDGE_CONNECTION__MANDATORY_TARGET_EDGES, ConnectionRole.MANDATORY_EDGE);
+			mandatoryTargetEdges = new EdgeList(this, QVTschedulePackage.Literals.EDGE_CONNECTION__MANDATORY_TARGET_EDGES.getFeatureID(), ConnectionRole.MANDATORY_EDGE);
 		}
 		return mandatoryTargetEdges;
 	}
@@ -214,7 +214,7 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 	@Override
 	public List<NavigableEdge> getPreferredTargetEdges() {
 		if (preferredTargetEdges == null) {
-			preferredTargetEdges = new EdgeList(this, QVTschedulePackage.EDGE_CONNECTION__PREFERRED_TARGET_EDGES, ConnectionRole.PREFERRED_EDGE);
+			preferredTargetEdges = new EdgeList(this, QVTschedulePackage.Literals.EDGE_CONNECTION__PREFERRED_TARGET_EDGES.getFeatureID(), ConnectionRole.PREFERRED_EDGE);
 		}
 		return preferredTargetEdges;
 	}
