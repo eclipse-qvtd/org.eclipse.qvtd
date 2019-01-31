@@ -33,6 +33,23 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class PatternVariableNodeImpl extends VariableNodeImpl implements PatternVariableNode {
 	/**
+	 * The number of structural features of the '<em>Pattern Variable Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PATTERN_VARIABLE_NODE_FEATURE_COUNT = VariableNodeImpl.VARIABLE_NODE_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Pattern Variable Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PATTERN_VARIABLE_NODE_OPERATION_COUNT = VariableNodeImpl.VARIABLE_NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

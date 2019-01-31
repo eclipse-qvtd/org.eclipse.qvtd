@@ -17,6 +17,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.impl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
+import java.util.Iterator;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -28,9 +29,14 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
@@ -40,7 +46,9 @@ import org.eclipse.ocl.pivot.library.string.StringConcatOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.qvtd.pivot.qvtimperative.BufferStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
@@ -66,6 +74,24 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * @generated
  */
 public class BufferStatementImpl extends ConnectionVariableImpl implements BufferStatement {
+	/**
+	 * The number of structural features of the '<em>Buffer Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BUFFER_STATEMENT_FEATURE_COUNT = ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Buffer Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BUFFER_STATEMENT_OPERATION_COUNT = ConnectionVariableImpl.CONNECTION_VARIABLE_OPERATION_COUNT + 2;
+
 	/**
 	 * The cached value of the '{@link #getObservedProperties() <em>Observed Properties</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -153,7 +179,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	@Override
 	public EList<Property> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, QVTimperativePackage.BUFFER_STATEMENT__OBSERVED_PROPERTIES);
+			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0);
 		}
 		return observedProperties;
 	}
@@ -177,7 +203,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		OCLExpression oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -193,14 +219,14 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -223,7 +249,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		Integer oldFirstPass = firstPass;
 		firstPass = newFirstPass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.BUFFER_STATEMENT__FIRST_PASS, oldFirstPass, firstPass));
+			eNotify(new ENotificationImpl(this, Notification.SET, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 2, oldFirstPass, firstPass));
 	}
 
 	/**
@@ -246,7 +272,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		Integer oldLastPass = lastPass;
 		lastPass = newLastPass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.BUFFER_STATEMENT__LAST_PASS, oldLastPass, lastPass));
+			eNotify(new ENotificationImpl(this, Notification.SET, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 3, oldLastPass, lastPass));
 	}
 
 	/**
@@ -273,9 +299,9 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 			 *         'BufferStatement::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_BufferStatement_c_c_CompatibleTypeForValue);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_BufferStatement_c_c_CompatibleTypeForValue);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -284,7 +310,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
 				try {
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable OCLExpression ownedExpression = this.getOwnedExpression();
+					final /*@NonInvalid*/ @Nullable OCLExpression ownedExpression = this.getOwnedExpression();
 					final /*@NonInvalid*/ boolean ne = ownedExpression != null;
 					/*@Thrown*/ boolean result;
 					if (ne) {
@@ -292,12 +318,12 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 						if (ownedExpression == null) {
 							throw new InvalidValueException("Null source for \'TypedElement::type\'");
 						}
-						final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = ownedExpression.getType();
+						final /*@Thrown*/ @Nullable Type type = ownedExpression.getType();
 						@SuppressWarnings("null")
-						final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull CollectionType oclAsType = (org.eclipse.ocl.pivot.@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType);
+						final /*@Thrown*/ @NonNull CollectionType oclAsType = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType);
 						@SuppressWarnings("null")
-						final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Type elementType = oclAsType.getElementType();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = this.getType();
+						final /*@Thrown*/ @NonNull Type elementType = oclAsType.getElementType();
+						final /*@NonInvalid*/ @Nullable Type type_0 = this.getType();
 						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, elementType, type_0).booleanValue();
 						result = conformsTo;
 					}
@@ -333,37 +359,38 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		 *   else s + ';' + n
 		 *   endif) + '}'
 		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_names = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_PRIMid_String, names);
-		/*@NonInvalid*/ java.lang.@NonNull String s = QVTimperativeTables.STR_;
-		java.util.@NonNull Iterator<Object> ITERATOR_n = BOXED_names.iterator();
-		/*@NonInvalid*/ java.lang.@Nullable String iterate;
+		assert names != null;
+		final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this);
+		final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+		final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_names = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_PRIMid_String, names);
+		/*@NonInvalid*/ @NonNull String s = QVTimperativeTables.STR_;
+		@NonNull Iterator<Object> ITERATOR_n = BOXED_names.iterator();
+		/*@NonInvalid*/ @Nullable String iterate;
 		while (true) {
 			if (!ITERATOR_n.hasNext()) {
 				iterate = s;
 				break;
 			}
 			@SuppressWarnings("null")
-			/*@NonInvalid*/ java.lang.@NonNull String n = (java.lang.@NonNull String)ITERATOR_n.next();
+			/*@NonInvalid*/ @NonNull String n = (@NonNull String)ITERATOR_n.next();
 			/**
 			 * if s = '' then n else s + ';' + n endif
 			 */
 			final /*@NonInvalid*/ boolean eq = s.equals(QVTimperativeTables.STR_);
-			/*@NonInvalid*/ java.lang.@NonNull String symbol_0;
+			/*@NonInvalid*/ @NonNull String symbol_0;
 			if (eq) {
 				symbol_0 = n;
 			}
 			else {
-				final /*@NonInvalid*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(s, QVTimperativeTables.STR__59);
-				final /*@NonInvalid*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, n);
+				final /*@NonInvalid*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(s, QVTimperativeTables.STR__59);
+				final /*@NonInvalid*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, n);
 				symbol_0 = sum_0;
 			}
 			//
 			s = symbol_0;
 		}
-		final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR__123, iterate);
-		final /*@Thrown*/ java.lang.@NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTimperativeTables.STR__125);
+		final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR__123, iterate);
+		final /*@Thrown*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTimperativeTables.STR__125);
 		return sum_2;
 	}
 
@@ -375,7 +402,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -389,13 +416,13 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.BUFFER_STATEMENT__OBSERVED_PROPERTIES:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
 				return getObservedProperties();
-			case QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1:
 				return getOwnedExpression();
-			case QVTimperativePackage.BUFFER_STATEMENT__FIRST_PASS:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 2:
 				return getFirstPass();
-			case QVTimperativePackage.BUFFER_STATEMENT__LAST_PASS:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 3:
 				return getLastPass();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -410,17 +437,17 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.BUFFER_STATEMENT__OBSERVED_PROPERTIES:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
-			case QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1:
 				setOwnedExpression((OCLExpression)newValue);
 				return;
-			case QVTimperativePackage.BUFFER_STATEMENT__FIRST_PASS:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 2:
 				setFirstPass((Integer)newValue);
 				return;
-			case QVTimperativePackage.BUFFER_STATEMENT__LAST_PASS:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 3:
 				setLastPass((Integer)newValue);
 				return;
 		}
@@ -435,16 +462,16 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.BUFFER_STATEMENT__OBSERVED_PROPERTIES:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				return;
-			case QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1:
 				setOwnedExpression((OCLExpression)null);
 				return;
-			case QVTimperativePackage.BUFFER_STATEMENT__FIRST_PASS:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 2:
 				setFirstPass(FIRST_PASS_EDEFAULT);
 				return;
-			case QVTimperativePackage.BUFFER_STATEMENT__LAST_PASS:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 3:
 				setLastPass(LAST_PASS_EDEFAULT);
 				return;
 		}
@@ -459,13 +486,13 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.BUFFER_STATEMENT__OBSERVED_PROPERTIES:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
 				return observedProperties != null && !observedProperties.isEmpty();
-			case QVTimperativePackage.BUFFER_STATEMENT__OWNED_EXPRESSION:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1:
 				return ownedExpression != null;
-			case QVTimperativePackage.BUFFER_STATEMENT__FIRST_PASS:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 2:
 				return FIRST_PASS_EDEFAULT == null ? firstPass != null : !FIRST_PASS_EDEFAULT.equals(firstPass);
-			case QVTimperativePackage.BUFFER_STATEMENT__LAST_PASS:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 3:
 				return LAST_PASS_EDEFAULT == null ? lastPass != null : !LAST_PASS_EDEFAULT.equals(lastPass);
 		}
 		return super.eIsSet(featureID);
@@ -490,7 +517,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		}
 		if (baseClass == ObservableStatement.class) {
 			switch (derivedFeatureID) {
-				case QVTimperativePackage.BUFFER_STATEMENT__OBSERVED_PROPERTIES: return QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES;
+				case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0: return StatementImpl.STATEMENT_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -516,7 +543,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		}
 		if (baseClass == ObservableStatement.class) {
 			switch (baseFeatureID) {
-				case QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES: return QVTimperativePackage.BUFFER_STATEMENT__OBSERVED_PROPERTIES;
+				case StatementImpl.STATEMENT_FEATURE_COUNT + 0: return ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -532,7 +559,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
 		if (baseClass == Statement.class) {
 			switch (baseOperationID) {
-				case QVTimperativePackage.STATEMENT___JOIN_NAMES__ELIST: return QVTimperativePackage.BUFFER_STATEMENT___JOIN_NAMES__ELIST;
+				case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0: return ConnectionVariableImpl.CONNECTION_VARIABLE_OPERATION_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -558,9 +585,9 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTimperativePackage.BUFFER_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_OPERATION_COUNT + 1:
 				return validateCompatibleTypeForValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTimperativePackage.BUFFER_STATEMENT___JOIN_NAMES__ELIST:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_OPERATION_COUNT + 0:
 				return joinNames((EList<String>)arguments.get(0));
 		}
 		return super.eInvoke(operationID, arguments);

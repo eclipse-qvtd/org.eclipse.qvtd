@@ -12,6 +12,8 @@ package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -26,7 +28,11 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
 import org.eclipse.ocl.pivot.library.collection.CollectionSelectByKindOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionUnionOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
@@ -35,6 +41,10 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.OrderedSetValue;
+import org.eclipse.ocl.pivot.values.SetValue;
+import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
 import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
@@ -61,6 +71,24 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * @generated
  */
 public class MappingImpl extends RuleImpl implements Mapping {
+	/**
+	 * The number of structural features of the '<em>Mapping</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_FEATURE_COUNT = RuleImpl.RULE_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of operations of the '<em>Mapping</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_OPERATION_COUNT = RuleImpl.RULE_OPERATION_COUNT + 3;
+
 	/**
 	 * The default value of the '{@link #isIsStrict() <em>Is Strict</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -180,7 +208,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		boolean oldIsStrict = isStrict;
 		isStrict = newIsStrict;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING__IS_STRICT, oldIsStrict, isStrict));
+			eNotify(new ENotificationImpl(this, Notification.SET, RuleImpl.RULE_FEATURE_COUNT + 0, oldIsStrict, isStrict));
 	}
 
 	/**
@@ -191,7 +219,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public EList<MappingParameter> getOwnedMappingParameters() {
 		if (ownedMappingParameters == null) {
-			ownedMappingParameters = new EObjectContainmentWithInverseEList<MappingParameter>(MappingParameter.class, this, QVTimperativePackage.MAPPING__OWNED_MAPPING_PARAMETERS, QVTimperativePackage.MAPPING_PARAMETER__OWNING_MAPPING);
+			ownedMappingParameters = new EObjectContainmentWithInverseEList<MappingParameter>(MappingParameter.class, this, RuleImpl.RULE_FEATURE_COUNT + 1, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0);
 		}
 		return ownedMappingParameters;
 	}
@@ -204,7 +232,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public EList<Statement> getOwnedStatements() {
 		if (ownedStatements == null) {
-			ownedStatements = new EObjectContainmentEList<Statement>(Statement.class, this, QVTimperativePackage.MAPPING__OWNED_STATEMENTS);
+			ownedStatements = new EObjectContainmentEList<Statement>(Statement.class, this, RuleImpl.RULE_FEATURE_COUNT + 2);
 		}
 		return ownedStatements;
 	}
@@ -229,7 +257,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		Integer oldFirstPass = firstPass;
 		firstPass = newFirstPass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING__FIRST_PASS, oldFirstPass, firstPass));
+			eNotify(new ENotificationImpl(this, Notification.SET, RuleImpl.RULE_FEATURE_COUNT + 3, oldFirstPass, firstPass));
 	}
 
 	/**
@@ -252,7 +280,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		Integer oldLastPass = lastPass;
 		lastPass = newLastPass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING__LAST_PASS, oldLastPass, lastPass));
+			eNotify(new ENotificationImpl(this, Notification.SET, RuleImpl.RULE_FEATURE_COUNT + 4, oldLastPass, lastPass));
 	}
 
 	/**
@@ -276,15 +304,15 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			 *         'Mapping::NameIsNotNull'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_Mapping_c_c_NameIsNotNull);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_Mapping_c_c_NameIsNotNull);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				final /*@NonInvalid*/ java.lang.@Nullable String name = this.getName();
+				final /*@NonInvalid*/ @Nullable String name = this.getName();
 				final /*@NonInvalid*/ boolean result = name != null;
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_Mapping_c_c_NameIsNotNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
@@ -318,9 +346,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			 *         'Mapping::MappingParameterNamesAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_Mapping_c_c_MappingParameterNamesAreUnique);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_Mapping_c_c_MappingParameterNamesAreUnique);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -330,10 +358,10 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
 				try {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ java.util.@NonNull List<MappingParameter> ownedMappingParameters = this.getOwnedMappingParameters();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
-					/*@Thrown*/ org.eclipse.ocl.pivot.values.SetValue.@NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_MappingParameter);
-					java.util.@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameters.iterator();
+					final /*@NonInvalid*/ @NonNull List<MappingParameter> ownedMappingParameters = this.getOwnedMappingParameters();
+					final /*@NonInvalid*/ @NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
+					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_MappingParameter);
+					@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedMappingParameters.iterator();
 					/*@Thrown*/ boolean result;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
@@ -341,11 +369,11 @@ public class MappingImpl extends RuleImpl implements Mapping {
 							break;
 						}
 						@SuppressWarnings("null")
-						/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameter _1 = (org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameter)ITERATOR__1.next();
+						/*@NonInvalid*/ @NonNull MappingParameter _1 = (@NonNull MappingParameter)ITERATOR__1.next();
 						/**
 						 * name
 						 */
-						final /*@NonInvalid*/ java.lang.@Nullable String name = _1.getName();
+						final /*@NonInvalid*/ @Nullable String name = _1.getName();
 						//
 						if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
 							result = ValueUtil.FALSE_VALUE;			// Abort after second find
@@ -395,9 +423,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			 *         'Mapping::LocalVariableNamesAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_Mapping_c_c_LocalVariableNamesAreUnique);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_Mapping_c_c_LocalVariableNamesAreUnique);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -408,15 +436,15 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				try {
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_VariableStatement = idResolver.getClass(QVTimperativeTables.CLSSid_VariableStatement, null);
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ java.util.@NonNull List<MappingParameter> ownedMappingParameters = this.getOwnedMappingParameters();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
+					final /*@NonInvalid*/ @NonNull List<MappingParameter> ownedMappingParameters = this.getOwnedMappingParameters();
+					final /*@NonInvalid*/ @NonNull SetValue BOXED_ownedMappingParameters = idResolver.createSetOfAll(QVTimperativeTables.SET_CLSSid_MappingParameter, ownedMappingParameters);
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ java.util.@NonNull List<Statement> ownedStatements = this.getOwnedStatements();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedStatements = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_CLSSid_Statement, ownedStatements);
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue selectByKind = (org.eclipse.ocl.pivot.values.@Nullable OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_ownedStatements, TYP_qvtimperative_c_c_VariableStatement);
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue union = (org.eclipse.ocl.pivot.values.@Nullable SetValue)CollectionUnionOperation.INSTANCE.evaluate(BOXED_ownedMappingParameters, selectByKind);
-					/*@Thrown*/ org.eclipse.ocl.pivot.values.SetValue.@NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_VariableDeclaration);
-					java.util.@NonNull Iterator<Object> ITERATOR__1 = union.iterator();
+					final /*@NonInvalid*/ @NonNull List<Statement> ownedStatements = this.getOwnedStatements();
+					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownedStatements = idResolver.createOrderedSetOfAll(QVTimperativeTables.ORD_CLSSid_Statement, ownedStatements);
+					final /*@NonInvalid*/ @NonNull OrderedSetValue selectByKind = (@Nullable OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, BOXED_ownedStatements, TYP_qvtimperative_c_c_VariableStatement);
+					final /*@NonInvalid*/ @NonNull SetValue union = (@Nullable SetValue)CollectionUnionOperation.INSTANCE.evaluate(BOXED_ownedMappingParameters, selectByKind);
+					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_VariableDeclaration);
+					@NonNull Iterator<Object> ITERATOR__1 = union.iterator();
 					/*@Thrown*/ boolean result;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
@@ -424,11 +452,11 @@ public class MappingImpl extends RuleImpl implements Mapping {
 							break;
 						}
 						@SuppressWarnings("null")
-						/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull VariableDeclaration _1 = (org.eclipse.ocl.pivot.@NonNull VariableDeclaration)ITERATOR__1.next();
+						/*@NonInvalid*/ @NonNull VariableDeclaration _1 = (@NonNull VariableDeclaration)ITERATOR__1.next();
 						/**
 						 * name
 						 */
-						final /*@NonInvalid*/ java.lang.@Nullable String name = _1.getName();
+						final /*@NonInvalid*/ @Nullable String name = _1.getName();
 						//
 						if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
 							result = ValueUtil.FALSE_VALUE;			// Abort after second find
@@ -462,7 +490,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING__OWNED_MAPPING_PARAMETERS:
+			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedMappingParameters()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -486,9 +514,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING__OWNED_MAPPING_PARAMETERS:
+			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				return ((InternalEList<?>)getOwnedMappingParameters()).basicRemove(otherEnd, msgs);
-			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
+			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getOwnedStatements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -502,15 +530,15 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING__IS_STRICT:
+			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				return isIsStrict();
-			case QVTimperativePackage.MAPPING__OWNED_MAPPING_PARAMETERS:
+			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				return getOwnedMappingParameters();
-			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
+			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				return getOwnedStatements();
-			case QVTimperativePackage.MAPPING__FIRST_PASS:
+			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				return getFirstPass();
-			case QVTimperativePackage.MAPPING__LAST_PASS:
+			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				return getLastPass();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -525,21 +553,21 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING__IS_STRICT:
+			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				setIsStrict((Boolean)newValue);
 				return;
-			case QVTimperativePackage.MAPPING__OWNED_MAPPING_PARAMETERS:
+			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				getOwnedMappingParameters().clear();
 				getOwnedMappingParameters().addAll((Collection<? extends MappingParameter>)newValue);
 				return;
-			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
+			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				getOwnedStatements().clear();
 				getOwnedStatements().addAll((Collection<? extends Statement>)newValue);
 				return;
-			case QVTimperativePackage.MAPPING__FIRST_PASS:
+			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				setFirstPass((Integer)newValue);
 				return;
-			case QVTimperativePackage.MAPPING__LAST_PASS:
+			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				setLastPass((Integer)newValue);
 				return;
 		}
@@ -554,19 +582,19 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING__IS_STRICT:
+			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				setIsStrict(IS_STRICT_EDEFAULT);
 				return;
-			case QVTimperativePackage.MAPPING__OWNED_MAPPING_PARAMETERS:
+			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				getOwnedMappingParameters().clear();
 				return;
-			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
+			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				getOwnedStatements().clear();
 				return;
-			case QVTimperativePackage.MAPPING__FIRST_PASS:
+			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				setFirstPass(FIRST_PASS_EDEFAULT);
 				return;
-			case QVTimperativePackage.MAPPING__LAST_PASS:
+			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				setLastPass(LAST_PASS_EDEFAULT);
 				return;
 		}
@@ -581,15 +609,15 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING__IS_STRICT:
+			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				return isStrict != IS_STRICT_EDEFAULT;
-			case QVTimperativePackage.MAPPING__OWNED_MAPPING_PARAMETERS:
+			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				return ownedMappingParameters != null && !ownedMappingParameters.isEmpty();
-			case QVTimperativePackage.MAPPING__OWNED_STATEMENTS:
+			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				return ownedStatements != null && !ownedStatements.isEmpty();
-			case QVTimperativePackage.MAPPING__FIRST_PASS:
+			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				return FIRST_PASS_EDEFAULT == null ? firstPass != null : !FIRST_PASS_EDEFAULT.equals(firstPass);
-			case QVTimperativePackage.MAPPING__LAST_PASS:
+			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				return LAST_PASS_EDEFAULT == null ? lastPass != null : !LAST_PASS_EDEFAULT.equals(lastPass);
 		}
 		return super.eIsSet(featureID);
@@ -604,11 +632,11 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTimperativePackage.MAPPING___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP:
+			case RuleImpl.RULE_OPERATION_COUNT + 0:
 				return validateNameIsNotNull((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTimperativePackage.MAPPING___VALIDATE_MAPPING_PARAMETER_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP:
+			case RuleImpl.RULE_OPERATION_COUNT + 1:
 				return validateMappingParameterNamesAreUnique((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTimperativePackage.MAPPING___VALIDATE_LOCAL_VARIABLE_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP:
+			case RuleImpl.RULE_OPERATION_COUNT + 2:
 				return validateLocalVariableNamesAreUnique((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

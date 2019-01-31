@@ -42,6 +42,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
  */
 public abstract class CompositePartitionImpl extends PartitionImpl implements CompositePartition {
 	/**
+	 * The number of structural features of the '<em>Composite Partition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COMPOSITE_PARTITION_FEATURE_COUNT = PartitionImpl.PARTITION_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Composite Partition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COMPOSITE_PARTITION_OPERATION_COUNT = PartitionImpl.PARTITION_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getOwnedMappingPartitions() <em>Owned Mapping Partitions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -77,7 +93,7 @@ public abstract class CompositePartitionImpl extends PartitionImpl implements Co
 	@Override
 	public List<MappingPartition> getOwnedMappingPartitions() {
 		if (ownedMappingPartitions == null) {
-			ownedMappingPartitions = new EObjectContainmentWithInverseEList<MappingPartition>(MappingPartition.class, this, QVTschedulePackage.COMPOSITE_PARTITION__OWNED_MAPPING_PARTITIONS, QVTschedulePackage.MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION);
+			ownedMappingPartitions = new EObjectContainmentWithInverseEList<MappingPartition>(MappingPartition.class, this, PartitionImpl.PARTITION_FEATURE_COUNT + 0, PartitionImpl.PARTITION_FEATURE_COUNT + 0);
 		}
 		return ownedMappingPartitions;
 	}
@@ -91,7 +107,7 @@ public abstract class CompositePartitionImpl extends PartitionImpl implements Co
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.COMPOSITE_PARTITION__OWNED_MAPPING_PARTITIONS:
+			case PartitionImpl.PARTITION_FEATURE_COUNT + 0:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedMappingPartitions()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -105,7 +121,7 @@ public abstract class CompositePartitionImpl extends PartitionImpl implements Co
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.COMPOSITE_PARTITION__OWNED_MAPPING_PARTITIONS:
+			case PartitionImpl.PARTITION_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedMappingPartitions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -119,7 +135,7 @@ public abstract class CompositePartitionImpl extends PartitionImpl implements Co
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.COMPOSITE_PARTITION__OWNED_MAPPING_PARTITIONS:
+			case PartitionImpl.PARTITION_FEATURE_COUNT + 0:
 				return getOwnedMappingPartitions();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -134,7 +150,7 @@ public abstract class CompositePartitionImpl extends PartitionImpl implements Co
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.COMPOSITE_PARTITION__OWNED_MAPPING_PARTITIONS:
+			case PartitionImpl.PARTITION_FEATURE_COUNT + 0:
 				getOwnedMappingPartitions().clear();
 				getOwnedMappingPartitions().addAll((Collection<? extends MappingPartition>)newValue);
 				return;
@@ -150,7 +166,7 @@ public abstract class CompositePartitionImpl extends PartitionImpl implements Co
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.COMPOSITE_PARTITION__OWNED_MAPPING_PARTITIONS:
+			case PartitionImpl.PARTITION_FEATURE_COUNT + 0:
 				getOwnedMappingPartitions().clear();
 				return;
 		}
@@ -165,7 +181,7 @@ public abstract class CompositePartitionImpl extends PartitionImpl implements Co
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.COMPOSITE_PARTITION__OWNED_MAPPING_PARTITIONS:
+			case PartitionImpl.PARTITION_FEATURE_COUNT + 0:
 				return ownedMappingPartitions != null && !ownedMappingPartitions.isEmpty();
 		}
 		return super.eIsSet(featureID);

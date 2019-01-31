@@ -99,7 +99,7 @@ public class QVTrelationSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case QVTrelationPackage.DOMAIN_PATTERN: {
+			case 0: {
 				DomainPattern domainPattern = (DomainPattern)theEObject;
 				T result = caseDomainPattern(domainPattern);
 				if (result == null) result = casePattern(domainPattern);
@@ -107,14 +107,14 @@ public class QVTrelationSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationPackage.KEY: {
+			case 1: {
 				Key key = (Key)theEObject;
 				T result = caseKey(key);
 				if (result == null) result = caseElement(key);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationPackage.RELATION: {
+			case 2: {
 				Relation relation = (Relation)theEObject;
 				T result = caseRelation(relation);
 				if (result == null) result = caseRule(relation);
@@ -123,7 +123,7 @@ public class QVTrelationSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationPackage.RELATION_CALL_EXP: {
+			case 3: {
 				RelationCallExp relationCallExp = (RelationCallExp)theEObject;
 				T result = caseRelationCallExp(relationCallExp);
 				if (result == null) result = caseOCLExpression(relationCallExp);
@@ -133,7 +133,7 @@ public class QVTrelationSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationPackage.RELATION_DOMAIN: {
+			case 4: {
 				RelationDomain relationDomain = (RelationDomain)theEObject;
 				T result = caseRelationDomain(relationDomain);
 				if (result == null) result = caseDomain(relationDomain);
@@ -143,21 +143,21 @@ public class QVTrelationSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT: {
+			case 5: {
 				RelationDomainAssignment relationDomainAssignment = (RelationDomainAssignment)theEObject;
 				T result = caseRelationDomainAssignment(relationDomainAssignment);
 				if (result == null) result = caseElement(relationDomainAssignment);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationPackage.RELATION_IMPLEMENTATION: {
+			case 6: {
 				RelationImplementation relationImplementation = (RelationImplementation)theEObject;
 				T result = caseRelationImplementation(relationImplementation);
 				if (result == null) result = caseElement(relationImplementation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationPackage.RELATION_MODEL: {
+			case 7: {
 				RelationModel relationModel = (RelationModel)theEObject;
 				T result = caseRelationModel(relationModel);
 				if (result == null) result = caseBaseModel(relationModel);
@@ -168,7 +168,7 @@ public class QVTrelationSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationPackage.RELATIONAL_TRANSFORMATION: {
+			case 8: {
 				RelationalTransformation relationalTransformation = (RelationalTransformation)theEObject;
 				T result = caseRelationalTransformation(relationalTransformation);
 				if (result == null) result = caseTransformation(relationalTransformation);
@@ -181,7 +181,7 @@ public class QVTrelationSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationPackage.SHARED_VARIABLE: {
+			case 9: {
 				SharedVariable sharedVariable = (SharedVariable)theEObject;
 				T result = caseSharedVariable(sharedVariable);
 				if (result == null) result = caseVariable(sharedVariable);
@@ -192,7 +192,7 @@ public class QVTrelationSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationPackage.TEMPLATE_VARIABLE: {
+			case 10: {
 				TemplateVariable templateVariable = (TemplateVariable)theEObject;
 				T result = caseTemplateVariable(templateVariable);
 				if (result == null) result = caseVariable(templateVariable);

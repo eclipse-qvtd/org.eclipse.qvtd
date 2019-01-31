@@ -15,6 +15,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -24,6 +25,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
@@ -32,6 +34,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
@@ -54,6 +57,24 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * @generated
  */
 public class ImperativeTypedModelImpl extends TypedModelImpl implements ImperativeTypedModel {
+	/**
+	 * The number of structural features of the '<em>Imperative Typed Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int IMPERATIVE_TYPED_MODEL_FEATURE_COUNT = TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Imperative Typed Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int IMPERATIVE_TYPED_MODEL_OPERATION_COUNT = TypedModelImpl.TYPED_MODEL_OPERATION_COUNT + 2;
+
 	/**
 	 * The default value of the '{@link #isIsChecked() <em>Is Checked</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -133,7 +154,7 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 		boolean oldIsChecked = isChecked;
 		isChecked = newIsChecked;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.IMPERATIVE_TYPED_MODEL__IS_CHECKED, oldIsChecked, isChecked));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 0, oldIsChecked, isChecked));
 	}
 
 	/**
@@ -156,7 +177,7 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 		boolean oldIsEnforced = isEnforced;
 		isEnforced = newIsEnforced;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.IMPERATIVE_TYPED_MODEL__IS_ENFORCED, oldIsEnforced, isEnforced));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 1, oldIsEnforced, isEnforced));
 	}
 
 	/**
@@ -169,7 +190,7 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 		/**
 		 * usedPackage
 		 */
-		final /*@NonInvalid*/ java.util.@NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = this.getUsedPackage();
+		final /*@NonInvalid*/ @NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = this.getUsedPackage();
 		return (EList<org.eclipse.ocl.pivot.Package>)usedPackage;
 	}
 
@@ -195,15 +216,15 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 			 *         'ImperativeTypedModel::NameIsNotNull'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_ImperativeTypedModel_c_c_NameIsNotNull);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_ImperativeTypedModel_c_c_NameIsNotNull);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				final /*@NonInvalid*/ java.lang.@Nullable String name = this.getName();
+				final /*@NonInvalid*/ @Nullable String name = this.getName();
 				final /*@NonInvalid*/ boolean result = name != null;
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_ImperativeTypedModel_c_c_NameIsNotNull, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
@@ -237,8 +258,8 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 			 *         'ImperativeTypedModel::NotBothCheckedAndEnforced'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_ImperativeTypedModel_c_c_NotBothCheckedAndEnforced);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_ImperativeTypedModel_c_c_NotBothCheckedAndEnforced);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -254,7 +275,7 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 				else {
 					and = ValueUtil.FALSE_VALUE;
 				}
-				final /*@NonInvalid*/ java.lang.@Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(and);
+				final /*@NonInvalid*/ @Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(and);
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_ImperativeTypedModel_c_c_NotBothCheckedAndEnforced, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
@@ -283,11 +304,11 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL__IS_CHECKED:
+			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 0:
 				return isIsChecked();
-			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL__IS_ENFORCED:
+			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 1:
 				return isIsEnforced();
-			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL__ALL_USED_PACKAGES:
+			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 2:
 				return getAllUsedPackages();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -301,10 +322,10 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL__IS_CHECKED:
+			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 0:
 				setIsChecked((Boolean)newValue);
 				return;
-			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL__IS_ENFORCED:
+			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 1:
 				setIsEnforced((Boolean)newValue);
 				return;
 		}
@@ -319,10 +340,10 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL__IS_CHECKED:
+			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 0:
 				setIsChecked(IS_CHECKED_EDEFAULT);
 				return;
-			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL__IS_ENFORCED:
+			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 1:
 				setIsEnforced(IS_ENFORCED_EDEFAULT);
 				return;
 		}
@@ -337,11 +358,11 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL__IS_CHECKED:
+			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 0:
 				return isChecked != IS_CHECKED_EDEFAULT;
-			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL__IS_ENFORCED:
+			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 1:
 				return isEnforced != IS_ENFORCED_EDEFAULT;
-			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL__ALL_USED_PACKAGES:
+			case TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 2:
 				return !getAllUsedPackages().isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -356,9 +377,9 @@ public class ImperativeTypedModelImpl extends TypedModelImpl implements Imperati
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP:
+			case TypedModelImpl.TYPED_MODEL_OPERATION_COUNT + 0:
 				return validateNameIsNotNull((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL___VALIDATE_NOT_BOTH_CHECKED_AND_ENFORCED__DIAGNOSTICCHAIN_MAP:
+			case TypedModelImpl.TYPED_MODEL_OPERATION_COUNT + 1:
 				return validateNotBothCheckedAndEnforced((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

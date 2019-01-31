@@ -51,6 +51,24 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
  */
 public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdge {
 	/**
+	 * The number of structural features of the '<em>Navigable Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NAVIGABLE_EDGE_FEATURE_COUNT = EdgeImpl.EDGE_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Navigable Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NAVIGABLE_EDGE_OPERATION_COUNT = EdgeImpl.EDGE_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getIncomingConnection() <em>Incoming Connection</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -131,7 +149,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 			incomingConnection = (EdgeConnection)eResolveProxy(oldIncomingConnection);
 			if (incomingConnection != oldIncomingConnection) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NAVIGABLE_EDGE__INCOMING_CONNECTION, oldIncomingConnection, incomingConnection));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EdgeImpl.EDGE_FEATURE_COUNT + 0, oldIncomingConnection, incomingConnection));
 			}
 		}
 		return incomingConnection;
@@ -156,7 +174,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		EdgeConnection oldIncomingConnection = incomingConnection;
 		incomingConnection = newIncomingConnection;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NAVIGABLE_EDGE__INCOMING_CONNECTION, oldIncomingConnection, incomingConnection));
+			eNotify(new ENotificationImpl(this, Notification.SET, EdgeImpl.EDGE_FEATURE_COUNT + 0, oldIncomingConnection, incomingConnection));
 	}
 
 	/**
@@ -167,7 +185,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	@Override
 	public List<EdgeConnection> getOutgoingConnections() {
 		if (outgoingConnections == null) {
-			outgoingConnections = new EObjectResolvingEList<EdgeConnection>(EdgeConnection.class, this, QVTschedulePackage.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS);
+			outgoingConnections = new EObjectResolvingEList<EdgeConnection>(EdgeConnection.class, this, EdgeImpl.EDGE_FEATURE_COUNT + 2);
 		}
 		return outgoingConnections;
 	}
@@ -192,7 +210,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		boolean oldSecondary = secondary;
 		secondary = newSecondary;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NAVIGABLE_EDGE__SECONDARY, oldSecondary, secondary));
+			eNotify(new ENotificationImpl(this, Notification.SET, EdgeImpl.EDGE_FEATURE_COUNT + 3, oldSecondary, secondary));
 	}
 
 	/**
@@ -207,7 +225,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 			oppositeEdge = (NavigableEdge)eResolveProxy(oldOppositeEdge);
 			if (oppositeEdge != oldOppositeEdge) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NAVIGABLE_EDGE__OPPOSITE_EDGE, oldOppositeEdge, oppositeEdge));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EdgeImpl.EDGE_FEATURE_COUNT + 1, oldOppositeEdge, oppositeEdge));
 			}
 		}
 		return oppositeEdge;
@@ -232,7 +250,7 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 		NavigableEdge oldOppositeEdge = oppositeEdge;
 		oppositeEdge = newOppositeEdge;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NAVIGABLE_EDGE__OPPOSITE_EDGE, oldOppositeEdge, oppositeEdge));
+			eNotify(new ENotificationImpl(this, Notification.SET, EdgeImpl.EDGE_FEATURE_COUNT + 1, oldOppositeEdge, oppositeEdge));
 	}
 
 	/**
@@ -243,15 +261,15 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.NAVIGABLE_EDGE__INCOMING_CONNECTION:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 0:
 				if (resolve) return getIncomingConnection();
 				return basicGetIncomingConnection();
-			case QVTschedulePackage.NAVIGABLE_EDGE__OPPOSITE_EDGE:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 1:
 				if (resolve) return getOppositeEdge();
 				return basicGetOppositeEdge();
-			case QVTschedulePackage.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 2:
 				return getOutgoingConnections();
-			case QVTschedulePackage.NAVIGABLE_EDGE__SECONDARY:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 3:
 				return isSecondary();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -266,17 +284,17 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.NAVIGABLE_EDGE__INCOMING_CONNECTION:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 0:
 				setIncomingConnection((EdgeConnection)newValue);
 				return;
-			case QVTschedulePackage.NAVIGABLE_EDGE__OPPOSITE_EDGE:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 1:
 				setOppositeEdge((NavigableEdge)newValue);
 				return;
-			case QVTschedulePackage.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 2:
 				getOutgoingConnections().clear();
 				getOutgoingConnections().addAll((Collection<? extends EdgeConnection>)newValue);
 				return;
-			case QVTschedulePackage.NAVIGABLE_EDGE__SECONDARY:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 3:
 				setSecondary((Boolean)newValue);
 				return;
 		}
@@ -291,16 +309,16 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.NAVIGABLE_EDGE__INCOMING_CONNECTION:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 0:
 				setIncomingConnection((EdgeConnection)null);
 				return;
-			case QVTschedulePackage.NAVIGABLE_EDGE__OPPOSITE_EDGE:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 1:
 				setOppositeEdge((NavigableEdge)null);
 				return;
-			case QVTschedulePackage.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 2:
 				getOutgoingConnections().clear();
 				return;
-			case QVTschedulePackage.NAVIGABLE_EDGE__SECONDARY:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 3:
 				setSecondary(SECONDARY_EDEFAULT);
 				return;
 		}
@@ -315,13 +333,13 @@ public abstract class NavigableEdgeImpl extends EdgeImpl implements NavigableEdg
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.NAVIGABLE_EDGE__INCOMING_CONNECTION:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 0:
 				return incomingConnection != null;
-			case QVTschedulePackage.NAVIGABLE_EDGE__OPPOSITE_EDGE:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 1:
 				return oppositeEdge != null;
-			case QVTschedulePackage.NAVIGABLE_EDGE__OUTGOING_CONNECTIONS:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 2:
 				return outgoingConnections != null && !outgoingConnections.isEmpty();
-			case QVTschedulePackage.NAVIGABLE_EDGE__SECONDARY:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 3:
 				return secondary != SECONDARY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

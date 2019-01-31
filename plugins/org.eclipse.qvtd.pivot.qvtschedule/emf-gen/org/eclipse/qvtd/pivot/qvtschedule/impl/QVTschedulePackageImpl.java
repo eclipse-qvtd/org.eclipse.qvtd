@@ -23,6 +23,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.internal.ModelImpl;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.internal.utilities.LazyXMIidAssigningResourceImpl;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.AbstractDatum;
@@ -2822,291 +2825,291 @@ public class QVTschedulePackageImpl extends EPackageImpl implements QVTscheduleP
 		isCreated = true;
 
 		// Create classes and their features
-		abstractDatumEClass = createEClass(ABSTRACT_DATUM);
-		createEReference(abstractDatumEClass, ABSTRACT_DATUM__REFERRED_TYPED_MODEL);
-
-		argumentEdgeEClass = createEClass(ARGUMENT_EDGE);
+		abstractDatumEClass = createEClass(0);
+		createEReference(abstractDatumEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
+
+		argumentEdgeEClass = createEClass(1);
 
-		basicPartitionEClass = createEClass(BASIC_PARTITION);
-		createEReference(basicPartitionEClass, BASIC_PARTITION__CONSTANT_EDGES);
-		createEReference(basicPartitionEClass, BASIC_PARTITION__CONSTANT_NODES);
-		createEReference(basicPartitionEClass, BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES);
-		createEReference(basicPartitionEClass, BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES);
-		createEReference(basicPartitionEClass, BASIC_PARTITION__EXPLICIT_PREDECESSORS);
-		createEReference(basicPartitionEClass, BASIC_PARTITION__HEAD_NODES);
-		createEReference(basicPartitionEClass, BASIC_PARTITION__LOADED_EDGES);
-		createEReference(basicPartitionEClass, BASIC_PARTITION__LOADED_NODES);
-		createEReference(basicPartitionEClass, BASIC_PARTITION__PREDICATED_EDGES);
-		createEReference(basicPartitionEClass, BASIC_PARTITION__PREDICATED_NODES);
-		createEReference(basicPartitionEClass, BASIC_PARTITION__REALIZED_EDGES);
-		createEReference(basicPartitionEClass, BASIC_PARTITION__REALIZED_NODES);
-		createEReference(basicPartitionEClass, BASIC_PARTITION__SPECULATED_EDGES);
-		createEReference(basicPartitionEClass, BASIC_PARTITION__SPECULATED_NODES);
-		createEReference(basicPartitionEClass, BASIC_PARTITION__SPECULATION_NODES);
-		createEReference(basicPartitionEClass, BASIC_PARTITION__OWNING_MERGED_PARTITION);
+		basicPartitionEClass = createEClass(2);
+		createEReference(basicPartitionEClass, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0);
+		createEReference(basicPartitionEClass, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 1);
+		createEReference(basicPartitionEClass, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 2);
+		createEReference(basicPartitionEClass, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 3);
+		createEReference(basicPartitionEClass, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 4);
+		createEReference(basicPartitionEClass, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 5);
+		createEReference(basicPartitionEClass, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 6);
+		createEReference(basicPartitionEClass, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 7);
+		createEReference(basicPartitionEClass, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 8);
+		createEReference(basicPartitionEClass, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 9);
+		createEReference(basicPartitionEClass, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 10);
+		createEReference(basicPartitionEClass, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 11);
+		createEReference(basicPartitionEClass, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 12);
+		createEReference(basicPartitionEClass, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 13);
+		createEReference(basicPartitionEClass, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 14);
+		createEReference(basicPartitionEClass, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15);
 
-		booleanLiteralNodeEClass = createEClass(BOOLEAN_LITERAL_NODE);
-		createEAttribute(booleanLiteralNodeEClass, BOOLEAN_LITERAL_NODE__BOOLEAN_VALUE);
+		booleanLiteralNodeEClass = createEClass(3);
+		createEAttribute(booleanLiteralNodeEClass, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0);
 
-		castEdgeEClass = createEClass(CAST_EDGE);
-		createEReference(castEdgeEClass, CAST_EDGE__PROPERTY);
-		createEReference(castEdgeEClass, CAST_EDGE__REFERRED_CLASS);
+		castEdgeEClass = createEClass(4);
+		createEReference(castEdgeEClass, NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 0);
+		createEReference(castEdgeEClass, NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1);
 
-		classDatumEClass = createEClass(CLASS_DATUM);
-		createEReference(classDatumEClass, CLASS_DATUM__COMPLETE_CLASS);
-		createEReference(classDatumEClass, CLASS_DATUM__OWNED_PROPERTY_DATUMS);
-		createEReference(classDatumEClass, CLASS_DATUM__OWNING_SCHEDULE_MODEL);
-		createEReference(classDatumEClass, CLASS_DATUM__REFERRED_CLASS);
-		createEReference(classDatumEClass, CLASS_DATUM__SUPER_CLASS_DATUMS);
+		classDatumEClass = createEClass(5);
+		createEReference(classDatumEClass, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 0);
+		createEReference(classDatumEClass, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 1);
+		createEReference(classDatumEClass, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 2);
+		createEReference(classDatumEClass, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 3);
+		createEReference(classDatumEClass, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 4);
 
-		clusterEClass = createEClass(CLUSTER);
-		createEReference(clusterEClass, CLUSTER__OWNING_REGION);
-		createEReference(clusterEClass, CLUSTER__MEMBER_NODES);
-		createEReference(clusterEClass, CLUSTER__MEMBER_EDGES);
-		createEReference(clusterEClass, CLUSTER__PRECEDING_CLUSTERS);
-		createEReference(clusterEClass, CLUSTER__SUCCEEDING_CLUSTERS);
-		createEAttribute(clusterEClass, CLUSTER__DEPTH);
+		clusterEClass = createEClass(6);
+		createEReference(clusterEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
+		createEReference(clusterEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
+		createEReference(clusterEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
+		createEReference(clusterEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
+		createEReference(clusterEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
+		createEAttribute(clusterEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6);
 
-		collectionLiteralNodeEClass = createEClass(COLLECTION_LITERAL_NODE);
+		collectionLiteralNodeEClass = createEClass(7);
 
-		collectionPartEdgeEClass = createEClass(COLLECTION_PART_EDGE);
-		createEReference(collectionPartEdgeEClass, COLLECTION_PART_EDGE__REFERRED_PART);
+		collectionPartEdgeEClass = createEClass(8);
+		createEReference(collectionPartEdgeEClass, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0);
 
-		collectionRangeNodeEClass = createEClass(COLLECTION_RANGE_NODE);
+		collectionRangeNodeEClass = createEClass(9);
 
-		composedNodeEClass = createEClass(COMPOSED_NODE);
+		composedNodeEClass = createEClass(10);
 
-		compositePartitionEClass = createEClass(COMPOSITE_PARTITION);
-		createEReference(compositePartitionEClass, COMPOSITE_PARTITION__OWNED_MAPPING_PARTITIONS);
+		compositePartitionEClass = createEClass(11);
+		createEReference(compositePartitionEClass, PartitionImpl.PARTITION_FEATURE_COUNT + 0);
 
-		connectionEClass = createEClass(CONNECTION);
-		createEReference(connectionEClass, CONNECTION__OWNING_ROOT_REGION);
-		createEAttribute(connectionEClass, CONNECTION__CONNECTION_ROLE);
-		createEAttribute(connectionEClass, CONNECTION__NAME);
-		createEReference(connectionEClass, CONNECTION__SOURCE_ENDS);
-		createEReference(connectionEClass, CONNECTION__INTERMEDIATE_PARTITIONS);
-		createEReference(connectionEClass, CONNECTION__COMMON_PARTITION);
+		connectionEClass = createEClass(12);
+		createEReference(connectionEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
+		createEAttribute(connectionEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
+		createEAttribute(connectionEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
+		createEReference(connectionEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 4);
+		createEReference(connectionEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 5);
+		createEReference(connectionEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 6);
 
-		connectionEndEClass = createEClass(CONNECTION_END);
+		connectionEndEClass = createEClass(13);
 
-		cyclicMappingRegionEClass = createEClass(CYCLIC_MAPPING_REGION);
-		createEReference(cyclicMappingRegionEClass, CYCLIC_MAPPING_REGION__ELEMENT_REGIONS);
+		cyclicMappingRegionEClass = createEClass(14);
+		createEReference(cyclicMappingRegionEClass, MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0);
 
-		cyclicPartitionEClass = createEClass(CYCLIC_PARTITION);
+		cyclicPartitionEClass = createEClass(15);
 
-		dependencyEdgeEClass = createEClass(DEPENDENCY_EDGE);
-
-		dependencyNodeEClass = createEClass(DEPENDENCY_NODE);
+		dependencyEdgeEClass = createEClass(16);
+
+		dependencyNodeEClass = createEClass(17);
 
-		dispatchRegionEClass = createEClass(DISPATCH_REGION);
-		createEReference(dispatchRegionEClass, DISPATCH_REGION__REFERRED_RULE_REGION);
+		dispatchRegionEClass = createEClass(18);
+		createEReference(dispatchRegionEClass, RuleRegionImpl.RULE_REGION_FEATURE_COUNT + 0);
 
-		edgeEClass = createEClass(EDGE);
-		createEReference(edgeEClass, EDGE__CLUSTER);
-		createEAttribute(edgeEClass, EDGE__EDGE_ROLE);
-		createEAttribute(edgeEClass, EDGE__NAME);
-		createEReference(edgeEClass, EDGE__OWNING_REGION);
-		createEReference(edgeEClass, EDGE__SOURCE_NODE);
-		createEReference(edgeEClass, EDGE__TARGET_NODE);
+		edgeEClass = createEClass(19);
+		createEReference(edgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
+		createEAttribute(edgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
+		createEAttribute(edgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
+		createEReference(edgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
+		createEReference(edgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 4);
+		createEReference(edgeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 5);
 
-		edgeConnectionEClass = createEClass(EDGE_CONNECTION);
-		createEReference(edgeConnectionEClass, EDGE_CONNECTION__REFERRED_PROPERTY);
-		createEReference(edgeConnectionEClass, EDGE_CONNECTION__MANDATORY_TARGET_EDGES);
-		createEReference(edgeConnectionEClass, EDGE_CONNECTION__PREFERRED_TARGET_EDGES);
+		edgeConnectionEClass = createEClass(20);
+		createEReference(edgeConnectionEClass, ConnectionImpl.CONNECTION_FEATURE_COUNT + 0);
+		createEReference(edgeConnectionEClass, ConnectionImpl.CONNECTION_FEATURE_COUNT + 1);
+		createEReference(edgeConnectionEClass, ConnectionImpl.CONNECTION_FEATURE_COUNT + 2);
 
-		enumLiteralNodeEClass = createEClass(ENUM_LITERAL_NODE);
-		createEReference(enumLiteralNodeEClass, ENUM_LITERAL_NODE__ENUM_VALUE);
+		enumLiteralNodeEClass = createEClass(21);
+		createEReference(enumLiteralNodeEClass, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0);
 
-		errorNodeEClass = createEClass(ERROR_NODE);
+		errorNodeEClass = createEClass(22);
 
-		expressionEdgeEClass = createEClass(EXPRESSION_EDGE);
+		expressionEdgeEClass = createEClass(23);
 
-		ifNodeEClass = createEClass(IF_NODE);
+		ifNodeEClass = createEClass(24);
 
-		includesEdgeEClass = createEClass(INCLUDES_EDGE);
+		includesEdgeEClass = createEClass(25);
 
-		inputNodeEClass = createEClass(INPUT_NODE);
+		inputNodeEClass = createEClass(26);
 
-		iteratedEdgeEClass = createEClass(ITERATED_EDGE);
+		iteratedEdgeEClass = createEClass(27);
 
-		iteratorNodeEClass = createEClass(ITERATOR_NODE);
+		iteratorNodeEClass = createEClass(28);
 
-		keyPartEdgeEClass = createEClass(KEY_PART_EDGE);
-		createEReference(keyPartEdgeEClass, KEY_PART_EDGE__REFERRED_PART);
+		keyPartEdgeEClass = createEClass(29);
+		createEReference(keyPartEdgeEClass, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0);
 
-		keyedValueNodeEClass = createEClass(KEYED_VALUE_NODE);
-		createEReference(keyedValueNodeEClass, KEYED_VALUE_NODE__CLASS_DATUM_VALUE);
+		keyedValueNodeEClass = createEClass(30);
+		createEReference(keyedValueNodeEClass, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0);
 
-		loadingPartitionEClass = createEClass(LOADING_PARTITION);
-		createEReference(loadingPartitionEClass, LOADING_PARTITION__REFERRED_LOADING_REGION);
+		loadingPartitionEClass = createEClass(31);
+		createEReference(loadingPartitionEClass, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0);
 
-		loadingRegionEClass = createEClass(LOADING_REGION);
-		createEReference(loadingRegionEClass, LOADING_REGION__LOADING_PARTITION);
-		createEReference(loadingRegionEClass, LOADING_REGION__OWNING_ROOT_REGION);
+		loadingRegionEClass = createEClass(32);
+		createEReference(loadingRegionEClass, RegionImpl.REGION_FEATURE_COUNT + 0);
+		createEReference(loadingRegionEClass, RegionImpl.REGION_FEATURE_COUNT + 1);
 
-		mapLiteralNodeEClass = createEClass(MAP_LITERAL_NODE);
+		mapLiteralNodeEClass = createEClass(33);
 
-		mapPartEdgeEClass = createEClass(MAP_PART_EDGE);
-		createEReference(mapPartEdgeEClass, MAP_PART_EDGE__REFERRED_PART);
+		mapPartEdgeEClass = createEClass(34);
+		createEReference(mapPartEdgeEClass, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0);
 
-		mapPartNodeEClass = createEClass(MAP_PART_NODE);
+		mapPartNodeEClass = createEClass(35);
 
-		mappingNodeEClass = createEClass(MAPPING_NODE);
-		createEAttribute(mappingNodeEClass, MAPPING_NODE__MATCHED);
+		mappingNodeEClass = createEClass(36);
+		createEAttribute(mappingNodeEClass, NodeImpl.NODE_FEATURE_COUNT + 0);
 
-		mappingPartitionEClass = createEClass(MAPPING_PARTITION);
-		createEReference(mappingPartitionEClass, MAPPING_PARTITION__OWNING_COMPOSITE_PARTITION);
-		createEReference(mappingPartitionEClass, MAPPING_PARTITION__REFERED_MAPPING_REGION);
-		createEReference(mappingPartitionEClass, MAPPING_PARTITION__REGION);
-		createEReference(mappingPartitionEClass, MAPPING_PARTITION__ROOT_PARTITION);
-		createEReference(mappingPartitionEClass, MAPPING_PARTITION__EXPLICIT_SUCCESSORS);
+		mappingPartitionEClass = createEClass(37);
+		createEReference(mappingPartitionEClass, PartitionImpl.PARTITION_FEATURE_COUNT + 0);
+		createEReference(mappingPartitionEClass, PartitionImpl.PARTITION_FEATURE_COUNT + 1);
+		createEReference(mappingPartitionEClass, PartitionImpl.PARTITION_FEATURE_COUNT + 2);
+		createEReference(mappingPartitionEClass, PartitionImpl.PARTITION_FEATURE_COUNT + 3);
+		createEReference(mappingPartitionEClass, PartitionImpl.PARTITION_FEATURE_COUNT + 4);
 
-		mappingRegionEClass = createEClass(MAPPING_REGION);
-		createEReference(mappingRegionEClass, MAPPING_REGION__HEAD_NODES);
-		createEReference(mappingRegionEClass, MAPPING_REGION__MAPPING_PARTITIONS);
-		createEReference(mappingRegionEClass, MAPPING_REGION__OWNING_SCHEDULE_MODEL);
+		mappingRegionEClass = createEClass(38);
+		createEReference(mappingRegionEClass, RegionImpl.REGION_FEATURE_COUNT + 0);
+		createEReference(mappingRegionEClass, RegionImpl.REGION_FEATURE_COUNT + 1);
+		createEReference(mappingRegionEClass, RegionImpl.REGION_FEATURE_COUNT + 2);
 
-		mergedPartitionEClass = createEClass(MERGED_PARTITION);
-		createEReference(mergedPartitionEClass, MERGED_PARTITION__OWNED_MERGED_PARTITIONS);
+		mergedPartitionEClass = createEClass(39);
+		createEReference(mergedPartitionEClass, BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 0);
 
-		navigableEdgeEClass = createEClass(NAVIGABLE_EDGE);
-		createEReference(navigableEdgeEClass, NAVIGABLE_EDGE__INCOMING_CONNECTION);
-		createEReference(navigableEdgeEClass, NAVIGABLE_EDGE__OPPOSITE_EDGE);
-		createEReference(navigableEdgeEClass, NAVIGABLE_EDGE__OUTGOING_CONNECTIONS);
-		createEAttribute(navigableEdgeEClass, NAVIGABLE_EDGE__SECONDARY);
+		navigableEdgeEClass = createEClass(40);
+		createEReference(navigableEdgeEClass, EdgeImpl.EDGE_FEATURE_COUNT + 0);
+		createEReference(navigableEdgeEClass, EdgeImpl.EDGE_FEATURE_COUNT + 1);
+		createEReference(navigableEdgeEClass, EdgeImpl.EDGE_FEATURE_COUNT + 2);
+		createEAttribute(navigableEdgeEClass, EdgeImpl.EDGE_FEATURE_COUNT + 3);
 
-		navigationEdgeEClass = createEClass(NAVIGATION_EDGE);
-		createEAttribute(navigationEdgeEClass, NAVIGATION_EDGE__PARTIAL);
-		createEReference(navigationEdgeEClass, NAVIGATION_EDGE__REFERRED_PROPERTY);
+		navigationEdgeEClass = createEClass(41);
+		createEAttribute(navigationEdgeEClass, NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 0);
+		createEReference(navigationEdgeEClass, NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1);
 
-		nodeEClass = createEClass(NODE);
-		createEReference(nodeEClass, NODE__CLASS_DATUM);
-		createEReference(nodeEClass, NODE__CLUSTER);
-		createEReference(nodeEClass, NODE__INCOMING_CONNECTION);
-		createEReference(nodeEClass, NODE__INCOMING_EDGES);
-		createEAttribute(nodeEClass, NODE__NAME);
-		createEAttribute(nodeEClass, NODE__NODE_ROLE);
-		createEReference(nodeEClass, NODE__OUTGOING_CONNECTIONS);
-		createEReference(nodeEClass, NODE__OUTGOING_EDGES);
-		createEReference(nodeEClass, NODE__OWNING_REGION);
+		nodeEClass = createEClass(42);
+		createEReference(nodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
+		createEReference(nodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
+		createEReference(nodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
+		createEReference(nodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
+		createEAttribute(nodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 4);
+		createEAttribute(nodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 5);
+		createEReference(nodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 6);
+		createEReference(nodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 7);
+		createEReference(nodeEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 8);
 
-		nodeConnectionEClass = createEClass(NODE_CONNECTION);
-		createEReference(nodeConnectionEClass, NODE_CONNECTION__CLASS_DATUM);
-		createEReference(nodeConnectionEClass, NODE_CONNECTION__MANDATORY_TARGET_NODES);
-		createEReference(nodeConnectionEClass, NODE_CONNECTION__PASSED_TARGET_NODES);
-		createEReference(nodeConnectionEClass, NODE_CONNECTION__PREFERRED_TARGET_NODES);
+		nodeConnectionEClass = createEClass(43);
+		createEReference(nodeConnectionEClass, ConnectionImpl.CONNECTION_FEATURE_COUNT + 0);
+		createEReference(nodeConnectionEClass, ConnectionImpl.CONNECTION_FEATURE_COUNT + 1);
+		createEReference(nodeConnectionEClass, ConnectionImpl.CONNECTION_FEATURE_COUNT + 2);
+		createEReference(nodeConnectionEClass, ConnectionImpl.CONNECTION_FEATURE_COUNT + 3);
 
-		nonPartitionEClass = createEClass(NON_PARTITION);
+		nonPartitionEClass = createEClass(44);
 
-		nullLiteralNodeEClass = createEClass(NULL_LITERAL_NODE);
+		nullLiteralNodeEClass = createEClass(45);
 
-		numericLiteralNodeEClass = createEClass(NUMERIC_LITERAL_NODE);
-		createEAttribute(numericLiteralNodeEClass, NUMERIC_LITERAL_NODE__NUMERIC_VALUE);
+		numericLiteralNodeEClass = createEClass(46);
+		createEAttribute(numericLiteralNodeEClass, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0);
 
-		operationCallNodeEClass = createEClass(OPERATION_CALL_NODE);
-		createEReference(operationCallNodeEClass, OPERATION_CALL_NODE__REFERRED_OPERATION);
+		operationCallNodeEClass = createEClass(47);
+		createEReference(operationCallNodeEClass, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0);
 
-		operationNodeEClass = createEClass(OPERATION_NODE);
+		operationNodeEClass = createEClass(48);
 
-		operationRegionEClass = createEClass(OPERATION_REGION);
-		createEReference(operationRegionEClass, OPERATION_REGION__DEPENDENCY_NODES);
-		createEReference(operationRegionEClass, OPERATION_REGION__HEAD_NODES);
-		createEReference(operationRegionEClass, OPERATION_REGION__REFERRED_OPERATION);
-		createEReference(operationRegionEClass, OPERATION_REGION__RESULT_NODE);
-		createEReference(operationRegionEClass, OPERATION_REGION__OWNING_SCHEDULE_MODEL);
+		operationRegionEClass = createEClass(49);
+		createEReference(operationRegionEClass, RegionImpl.REGION_FEATURE_COUNT + 0);
+		createEReference(operationRegionEClass, RegionImpl.REGION_FEATURE_COUNT + 1);
+		createEReference(operationRegionEClass, RegionImpl.REGION_FEATURE_COUNT + 2);
+		createEReference(operationRegionEClass, RegionImpl.REGION_FEATURE_COUNT + 3);
+		createEReference(operationRegionEClass, RegionImpl.REGION_FEATURE_COUNT + 4);
 
-		operationParameterEdgeEClass = createEClass(OPERATION_PARAMETER_EDGE);
-		createEReference(operationParameterEdgeEClass, OPERATION_PARAMETER_EDGE__REFERRED_PARAMETER);
-		createEAttribute(operationParameterEdgeEClass, OPERATION_PARAMETER_EDGE__PARAMETER_INDEX);
+		operationParameterEdgeEClass = createEClass(50);
+		createEReference(operationParameterEdgeEClass, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0);
+		createEAttribute(operationParameterEdgeEClass, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 1);
 
-		operationSelfEdgeEClass = createEClass(OPERATION_SELF_EDGE);
-		createEReference(operationSelfEdgeEClass, OPERATION_SELF_EDGE__REFERRED_TYPE);
+		operationSelfEdgeEClass = createEClass(51);
+		createEReference(operationSelfEdgeEClass, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0);
 
-		partitionEClass = createEClass(PARTITION);
-		createEAttribute(partitionEClass, PARTITION__PASSES);
-		createEReference(partitionEClass, PARTITION__INTERMEDIATE_CONNECTIONS);
-		createEReference(partitionEClass, PARTITION__ROOT_CONNECTIONS);
+		partitionEClass = createEClass(52);
+		createEAttribute(partitionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
+		createEReference(partitionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
+		createEReference(partitionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
 
-		patternTypedNodeEClass = createEClass(PATTERN_TYPED_NODE);
+		patternTypedNodeEClass = createEClass(53);
 
-		patternVariableNodeEClass = createEClass(PATTERN_VARIABLE_NODE);
+		patternVariableNodeEClass = createEClass(54);
 
-		predicateEdgeEClass = createEClass(PREDICATE_EDGE);
+		predicateEdgeEClass = createEClass(55);
 
-		propertyDatumEClass = createEClass(PROPERTY_DATUM);
-		createEReference(propertyDatumEClass, PROPERTY_DATUM__OPPOSITE);
-		createEReference(propertyDatumEClass, PROPERTY_DATUM__OWNING_CLASS_DATUM);
-		createEReference(propertyDatumEClass, PROPERTY_DATUM__REFERRED_PROPERTY);
-		createEReference(propertyDatumEClass, PROPERTY_DATUM__SUPER_PROPERTY_DATUMS);
-		createEAttribute(propertyDatumEClass, PROPERTY_DATUM__KEY);
+		propertyDatumEClass = createEClass(56);
+		createEReference(propertyDatumEClass, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 0);
+		createEReference(propertyDatumEClass, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 1);
+		createEReference(propertyDatumEClass, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 2);
+		createEReference(propertyDatumEClass, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 3);
+		createEAttribute(propertyDatumEClass, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 4);
 
-		recursionEdgeEClass = createEClass(RECURSION_EDGE);
-		createEAttribute(recursionEdgeEClass, RECURSION_EDGE__PRIMARY);
+		recursionEdgeEClass = createEClass(57);
+		createEAttribute(recursionEdgeEClass, EdgeImpl.EDGE_FEATURE_COUNT + 0);
 
-		regionEClass = createEClass(REGION);
-		createEReference(regionEClass, REGION__OWNED_NODES);
-		createEReference(regionEClass, REGION__OWNED_EDGES);
-		createEReference(regionEClass, REGION__OWNED_CLUSTERS);
-		createEReference(regionEClass, REGION__ROOT_REGION);
+		regionEClass = createEClass(58);
+		createEReference(regionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
+		createEReference(regionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
+		createEReference(regionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
+		createEReference(regionEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
 
-		rootPartitionEClass = createEClass(ROOT_PARTITION);
-		createEReference(rootPartitionEClass, ROOT_PARTITION__OWNING_ROOT_REGION);
-		createEReference(rootPartitionEClass, ROOT_PARTITION__LOADING_PARTITION);
+		rootPartitionEClass = createEClass(59);
+		createEReference(rootPartitionEClass, CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0);
+		createEReference(rootPartitionEClass, CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1);
 
-		rootRegionEClass = createEClass(ROOT_REGION);
-		createEReference(rootRegionEClass, ROOT_REGION__ACTIVE_REGIONS);
-		createEReference(rootRegionEClass, ROOT_REGION__OWNED_CONNECTIONS);
-		createEReference(rootRegionEClass, ROOT_REGION__OWNED_LOADING_REGION);
-		createEReference(rootRegionEClass, ROOT_REGION__OWNING_SCHEDULE_MODEL);
-		createEReference(rootRegionEClass, ROOT_REGION__REFERRED_TRANSFORMATION);
-		createEReference(rootRegionEClass, ROOT_REGION__OWNED_ROOT_PARTITION);
+		rootRegionEClass = createEClass(60);
+		createEReference(rootRegionEClass, RegionImpl.REGION_FEATURE_COUNT + 0);
+		createEReference(rootRegionEClass, RegionImpl.REGION_FEATURE_COUNT + 1);
+		createEReference(rootRegionEClass, RegionImpl.REGION_FEATURE_COUNT + 2);
+		createEReference(rootRegionEClass, RegionImpl.REGION_FEATURE_COUNT + 3);
+		createEReference(rootRegionEClass, RegionImpl.REGION_FEATURE_COUNT + 4);
+		createEReference(rootRegionEClass, RegionImpl.REGION_FEATURE_COUNT + 5);
 
-		ruleRegionEClass = createEClass(RULE_REGION);
-		createEReference(ruleRegionEClass, RULE_REGION__REFERRED_RULE);
+		ruleRegionEClass = createEClass(61);
+		createEReference(ruleRegionEClass, MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0);
 
-		scheduleModelEClass = createEClass(SCHEDULE_MODEL);
-		createEReference(scheduleModelEClass, SCHEDULE_MODEL__OWNED_CLASS_DATUMS);
-		createEReference(scheduleModelEClass, SCHEDULE_MODEL__OWNED_MAPPING_REGIONS);
-		createEReference(scheduleModelEClass, SCHEDULE_MODEL__OWNED_OPERATION_REGIONS);
-		createEReference(scheduleModelEClass, SCHEDULE_MODEL__OWNED_ROOT_REGIONS);
+		scheduleModelEClass = createEClass(62);
+		createEReference(scheduleModelEClass, ModelImpl.MODEL_FEATURE_COUNT + 0);
+		createEReference(scheduleModelEClass, ModelImpl.MODEL_FEATURE_COUNT + 1);
+		createEReference(scheduleModelEClass, ModelImpl.MODEL_FEATURE_COUNT + 2);
+		createEReference(scheduleModelEClass, ModelImpl.MODEL_FEATURE_COUNT + 3);
 
-		shadowNodeEClass = createEClass(SHADOW_NODE);
+		shadowNodeEClass = createEClass(63);
 
-		shadowPartEdgeEClass = createEClass(SHADOW_PART_EDGE);
-		createEReference(shadowPartEdgeEClass, SHADOW_PART_EDGE__REFERRED_PART);
+		shadowPartEdgeEClass = createEClass(64);
+		createEReference(shadowPartEdgeEClass, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0);
 
-		stringLiteralNodeEClass = createEClass(STRING_LITERAL_NODE);
-		createEAttribute(stringLiteralNodeEClass, STRING_LITERAL_NODE__STRING_VALUE);
+		stringLiteralNodeEClass = createEClass(65);
+		createEAttribute(stringLiteralNodeEClass, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0);
 
-		successEdgeEClass = createEClass(SUCCESS_EDGE);
+		successEdgeEClass = createEClass(66);
 
-		successNodeEClass = createEClass(SUCCESS_NODE);
+		successNodeEClass = createEClass(67);
 
-		symbolableEClass = createEClass(SYMBOLABLE);
-		createEAttribute(symbolableEClass, SYMBOLABLE__SYMBOL_NAME);
+		symbolableEClass = createEClass(68);
+		createEAttribute(symbolableEClass, 0);
 
-		tupleLiteralNodeEClass = createEClass(TUPLE_LITERAL_NODE);
+		tupleLiteralNodeEClass = createEClass(69);
 
-		tuplePartEdgeEClass = createEClass(TUPLE_PART_EDGE);
-		createEReference(tuplePartEdgeEClass, TUPLE_PART_EDGE__REFERRED_PART);
+		tuplePartEdgeEClass = createEClass(70);
+		createEReference(tuplePartEdgeEClass, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0);
 
-		typeLiteralNodeEClass = createEClass(TYPE_LITERAL_NODE);
-		createEReference(typeLiteralNodeEClass, TYPE_LITERAL_NODE__TYPE_VALUE);
+		typeLiteralNodeEClass = createEClass(71);
+		createEReference(typeLiteralNodeEClass, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0);
 
-		unknownNodeEClass = createEClass(UNKNOWN_NODE);
+		unknownNodeEClass = createEClass(72);
 
-		variableNodeEClass = createEClass(VARIABLE_NODE);
-		createEReference(variableNodeEClass, VARIABLE_NODE__REFERRED_VARIABLE);
+		variableNodeEClass = createEClass(73);
+		createEReference(variableNodeEClass, MappingNodeImpl.MAPPING_NODE_FEATURE_COUNT + 0);
 
-		verdictRegionEClass = createEClass(VERDICT_REGION);
-		createEReference(verdictRegionEClass, VERDICT_REGION__REFERRED_RULE_REGION);
+		verdictRegionEClass = createEClass(74);
+		createEReference(verdictRegionEClass, RuleRegionImpl.RULE_REGION_FEATURE_COUNT + 0);
 
 		// Create enums
-		connectionRoleEEnum = createEEnum(CONNECTION_ROLE);
-		roleEEnum = createEEnum(ROLE);
+		connectionRoleEEnum = createEEnum(75);
+		roleEEnum = createEEnum(76);
 
 		// Create data types
-		numberEDataType = createEDataType(NUMBER);
+		numberEDataType = createEDataType(77);
 	}
 
 	/**

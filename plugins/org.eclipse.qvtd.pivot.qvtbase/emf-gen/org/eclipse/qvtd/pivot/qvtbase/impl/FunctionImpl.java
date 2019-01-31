@@ -11,6 +11,8 @@
 package org.eclipse.qvtd.pivot.qvtbase.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -28,6 +30,8 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ExpressionInOCLImpl;
 import org.eclipse.ocl.pivot.internal.OperationImpl;
@@ -40,7 +44,9 @@ import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
@@ -61,6 +67,22 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  */
 public class FunctionImpl extends OperationImpl implements Function {
 
+	/**
+	 * The number of structural features of the '<em>Function</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FUNCTION_FEATURE_COUNT = OperationImpl.OPERATION_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Function</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FUNCTION_OPERATION_COUNT = OperationImpl.OPERATION_OPERATION_COUNT + 2;
 	/**
 	 * The cached value of the '{@link #getQueryExpression() <em>Query Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -109,7 +131,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 		OCLExpression oldQueryExpression = queryExpression;
 		queryExpression = newQueryExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTbasePackage.FUNCTION__QUERY_EXPRESSION, oldQueryExpression, newQueryExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, OperationImpl.OPERATION_FEATURE_COUNT + 0, oldQueryExpression, newQueryExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -125,14 +147,14 @@ public class FunctionImpl extends OperationImpl implements Function {
 		if (newQueryExpression != queryExpression) {
 			NotificationChain msgs = null;
 			if (queryExpression != null)
-				msgs = ((InternalEObject)queryExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTbasePackage.FUNCTION__QUERY_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)queryExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (OperationImpl.OPERATION_FEATURE_COUNT + 0), null, msgs);
 			if (newQueryExpression != null)
-				msgs = ((InternalEObject)newQueryExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTbasePackage.FUNCTION__QUERY_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newQueryExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (OperationImpl.OPERATION_FEATURE_COUNT + 0), null, msgs);
 			msgs = basicSetQueryExpression(newQueryExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.FUNCTION__QUERY_EXPRESSION, newQueryExpression, newQueryExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, OperationImpl.OPERATION_FEATURE_COUNT + 0, newQueryExpression, newQueryExpression));
 	}
 
 	/**
@@ -159,20 +181,20 @@ public class FunctionImpl extends OperationImpl implements Function {
 			 *         'Function::ParametersAreFunctionParameter'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Function_c_c_ParametersAreFunctionParameter);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Function_c_c_ParametersAreFunctionParameter);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				final /*@NonInvalid*/ java.util.@NonNull List<Parameter> ownedParameters = this.getOwnedParameters();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedParameters = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Parameter, ownedParameters);
+				final /*@NonInvalid*/ @NonNull List<Parameter> ownedParameters = this.getOwnedParameters();
+				final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownedParameters = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_Parameter, ownedParameters);
 				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				java.util.@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedParameters.iterator();
-				/*@NonInvalid*/ java.lang.@Nullable Boolean result;
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedParameters.iterator();
+				/*@NonInvalid*/ @Nullable Boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
 						if (accumulator == ValueUtil.TRUE_VALUE) {
@@ -184,7 +206,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 						break;
 					}
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Parameter _1 = (org.eclipse.ocl.pivot.@NonNull Parameter)ITERATOR__1.next();
+					/*@NonInvalid*/ @NonNull Parameter _1 = (@NonNull Parameter)ITERATOR__1.next();
 					/**
 					 * oclIsKindOf(FunctionParameter)
 					 */
@@ -234,8 +256,8 @@ public class FunctionImpl extends OperationImpl implements Function {
 			 *         'Function::ReturnTypeIsQueryType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Function_c_c_ReturnTypeIsQueryType);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Function_c_c_ReturnTypeIsQueryType);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -244,15 +266,15 @@ public class FunctionImpl extends OperationImpl implements Function {
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
 				try {
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable OCLExpression queryExpression = this.getQueryExpression();
+					final /*@NonInvalid*/ @Nullable OCLExpression queryExpression = this.getQueryExpression();
 					final /*@NonInvalid*/ boolean ne = queryExpression != null;
 					/*@Thrown*/ boolean result;
 					if (ne) {
 						if (queryExpression == null) {
 							throw new InvalidValueException("Null source for \'TypedElement::type\'");
 						}
-						final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = queryExpression.getType();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = this.getType();
+						final /*@Thrown*/ @Nullable Type type = queryExpression.getType();
+						final /*@NonInvalid*/ @Nullable Type type_0 = this.getType();
 						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 						result = conformsTo;
 					}
@@ -282,7 +304,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTbasePackage.FUNCTION__QUERY_EXPRESSION:
+			case OperationImpl.OPERATION_FEATURE_COUNT + 0:
 				return basicSetQueryExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -296,7 +318,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTbasePackage.FUNCTION__QUERY_EXPRESSION:
+			case OperationImpl.OPERATION_FEATURE_COUNT + 0:
 				return getQueryExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -310,7 +332,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTbasePackage.FUNCTION__QUERY_EXPRESSION:
+			case OperationImpl.OPERATION_FEATURE_COUNT + 0:
 				setQueryExpression((OCLExpression)newValue);
 				return;
 		}
@@ -325,7 +347,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTbasePackage.FUNCTION__QUERY_EXPRESSION:
+			case OperationImpl.OPERATION_FEATURE_COUNT + 0:
 				setQueryExpression((OCLExpression)null);
 				return;
 		}
@@ -340,7 +362,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTbasePackage.FUNCTION__QUERY_EXPRESSION:
+			case OperationImpl.OPERATION_FEATURE_COUNT + 0:
 				return queryExpression != null;
 		}
 		return super.eIsSet(featureID);
@@ -355,9 +377,9 @@ public class FunctionImpl extends OperationImpl implements Function {
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTbasePackage.FUNCTION___VALIDATE_PARAMETERS_ARE_FUNCTION_PARAMETER__DIAGNOSTICCHAIN_MAP:
+			case OperationImpl.OPERATION_OPERATION_COUNT + 0:
 				return validateParametersAreFunctionParameter((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTbasePackage.FUNCTION___VALIDATE_RETURN_TYPE_IS_QUERY_TYPE__DIAGNOSTICCHAIN_MAP:
+			case OperationImpl.OPERATION_OPERATION_COUNT + 1:
 				return validateReturnTypeIsQueryType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

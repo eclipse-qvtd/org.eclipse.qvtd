@@ -34,6 +34,23 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class NullLiteralNodeImpl extends OperationNodeImpl implements NullLiteralNode {
 	/**
+	 * The number of structural features of the '<em>Null Literal Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NULL_LITERAL_NODE_FEATURE_COUNT = OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Null Literal Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NULL_LITERAL_NODE_OPERATION_COUNT = OperationNodeImpl.OPERATION_NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

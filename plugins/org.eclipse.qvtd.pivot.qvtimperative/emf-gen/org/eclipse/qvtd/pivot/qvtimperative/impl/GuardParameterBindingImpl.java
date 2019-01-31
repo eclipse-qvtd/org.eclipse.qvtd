@@ -41,6 +41,24 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  */
 public class GuardParameterBindingImpl extends MappingParameterBindingImpl implements GuardParameterBinding {
 	/**
+	 * The number of structural features of the '<em>Guard Parameter Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GUARD_PARAMETER_BINDING_FEATURE_COUNT = MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Guard Parameter Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GUARD_PARAMETER_BINDING_OPERATION_COUNT = MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -101,7 +119,7 @@ public class GuardParameterBindingImpl extends MappingParameterBindingImpl imple
 			value = (ConnectionVariable)eResolveProxy(oldValue);
 			if (value != oldValue) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativePackage.GUARD_PARAMETER_BINDING__VALUE, oldValue, value));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0, oldValue, value));
 			}
 		}
 		return value;
@@ -126,7 +144,7 @@ public class GuardParameterBindingImpl extends MappingParameterBindingImpl imple
 		ConnectionVariable oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.GUARD_PARAMETER_BINDING__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0, oldValue, value));
 	}
 
 	/**
@@ -149,7 +167,7 @@ public class GuardParameterBindingImpl extends MappingParameterBindingImpl imple
 		boolean oldIsCheck = isCheck;
 		isCheck = newIsCheck;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.GUARD_PARAMETER_BINDING__IS_CHECK, oldIsCheck, isCheck));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1, oldIsCheck, isCheck));
 	}
 
 	/**
@@ -170,10 +188,10 @@ public class GuardParameterBindingImpl extends MappingParameterBindingImpl imple
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.GUARD_PARAMETER_BINDING__VALUE:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
 				if (resolve) return getValue();
 				return basicGetValue();
-			case QVTimperativePackage.GUARD_PARAMETER_BINDING__IS_CHECK:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1:
 				return isIsCheck();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -187,10 +205,10 @@ public class GuardParameterBindingImpl extends MappingParameterBindingImpl imple
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.GUARD_PARAMETER_BINDING__VALUE:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
 				setValue((ConnectionVariable)newValue);
 				return;
-			case QVTimperativePackage.GUARD_PARAMETER_BINDING__IS_CHECK:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1:
 				setIsCheck((Boolean)newValue);
 				return;
 		}
@@ -205,10 +223,10 @@ public class GuardParameterBindingImpl extends MappingParameterBindingImpl imple
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.GUARD_PARAMETER_BINDING__VALUE:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
 				setValue((ConnectionVariable)null);
 				return;
-			case QVTimperativePackage.GUARD_PARAMETER_BINDING__IS_CHECK:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1:
 				setIsCheck(IS_CHECK_EDEFAULT);
 				return;
 		}
@@ -223,9 +241,9 @@ public class GuardParameterBindingImpl extends MappingParameterBindingImpl imple
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.GUARD_PARAMETER_BINDING__VALUE:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
 				return value != null;
-			case QVTimperativePackage.GUARD_PARAMETER_BINDING__IS_CHECK:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1:
 				return isCheck != IS_CHECK_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

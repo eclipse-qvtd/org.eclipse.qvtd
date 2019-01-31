@@ -56,6 +56,24 @@ import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
  */
 public class EnforcementOperationImpl extends ElementImpl implements EnforcementOperation {
 	/**
+	 * The number of structural features of the '<em>Enforcement Operation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ENFORCEMENT_OPERATION_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Enforcement Operation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ENFORCEMENT_OPERATION_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getEnforcementMode() <em>Enforcement Mode</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -124,7 +142,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 		EnforcementMode oldEnforcementMode = enforcementMode;
 		enforcementMode = newEnforcementMode == null ? ENFORCEMENT_MODE_EDEFAULT : newEnforcementMode;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcorePackage.ENFORCEMENT_OPERATION__ENFORCEMENT_MODE, oldEnforcementMode, enforcementMode));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 0, oldEnforcementMode, enforcementMode));
 	}
 
 	/**
@@ -134,7 +152,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	 */
 	@Override
 	public BottomPattern getBottomPattern() {
-		if (eContainerFeatureID() != QVTcorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN) return null;
+		if (eContainerFeatureID() != (ElementImpl.ELEMENT_FEATURE_COUNT + 1)) return null;
 		return (BottomPattern)eInternalContainer();
 	}
 
@@ -144,7 +162,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	 * @generated
 	 */
 	public NotificationChain basicSetBottomPattern(BottomPattern newBottomPattern, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newBottomPattern, QVTcorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newBottomPattern, ElementImpl.ELEMENT_FEATURE_COUNT + 1, msgs);
 		return msgs;
 	}
 
@@ -155,19 +173,19 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	 */
 	@Override
 	public void setBottomPattern(BottomPattern newBottomPattern) {
-		if (newBottomPattern != eInternalContainer() || (eContainerFeatureID() != QVTcorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN && newBottomPattern != null)) {
+		if (newBottomPattern != eInternalContainer() || (eContainerFeatureID() != (ElementImpl.ELEMENT_FEATURE_COUNT + 1) && newBottomPattern != null)) {
 			if (EcoreUtil.isAncestor(this, newBottomPattern))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newBottomPattern != null)
-				msgs = ((InternalEObject)newBottomPattern).eInverseAdd(this, QVTcorePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION, BottomPattern.class, msgs);
+				msgs = ((InternalEObject)newBottomPattern).eInverseAdd(this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2, BottomPattern.class, msgs);
 			msgs = basicSetBottomPattern(newBottomPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN, newBottomPattern, newBottomPattern));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 1, newBottomPattern, newBottomPattern));
 	}
 
 	/**
@@ -189,7 +207,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 		OperationCallExp oldOperationCallExp = operationCallExp;
 		operationCallExp = newOperationCallExp;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcorePackage.ENFORCEMENT_OPERATION__OPERATION_CALL_EXP, oldOperationCallExp, newOperationCallExp);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 2, oldOperationCallExp, newOperationCallExp);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -205,14 +223,14 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 		if (newOperationCallExp != operationCallExp) {
 			NotificationChain msgs = null;
 			if (operationCallExp != null)
-				msgs = ((InternalEObject)operationCallExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcorePackage.ENFORCEMENT_OPERATION__OPERATION_CALL_EXP, null, msgs);
+				msgs = ((InternalEObject)operationCallExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ElementImpl.ELEMENT_FEATURE_COUNT + 2), null, msgs);
 			if (newOperationCallExp != null)
-				msgs = ((InternalEObject)newOperationCallExp).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcorePackage.ENFORCEMENT_OPERATION__OPERATION_CALL_EXP, null, msgs);
+				msgs = ((InternalEObject)newOperationCallExp).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ElementImpl.ELEMENT_FEATURE_COUNT + 2), null, msgs);
 			msgs = basicSetOperationCallExp(newOperationCallExp, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcorePackage.ENFORCEMENT_OPERATION__OPERATION_CALL_EXP, newOperationCallExp, newOperationCallExp));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 2, newOperationCallExp, newOperationCallExp));
 	}
 
 	/**
@@ -233,7 +251,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetBottomPattern((BottomPattern)otherEnd, msgs);
@@ -249,9 +267,9 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return basicSetBottomPattern(null, msgs);
-			case QVTcorePackage.ENFORCEMENT_OPERATION__OPERATION_CALL_EXP:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return basicSetOperationCallExp(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -265,8 +283,8 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTcorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN:
-				return eInternalContainer().eInverseRemove(this, QVTcorePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION, BottomPattern.class, msgs);
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
+				return eInternalContainer().eInverseRemove(this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2, BottomPattern.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -279,11 +297,11 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcorePackage.ENFORCEMENT_OPERATION__ENFORCEMENT_MODE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return getEnforcementMode();
-			case QVTcorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return getBottomPattern();
-			case QVTcorePackage.ENFORCEMENT_OPERATION__OPERATION_CALL_EXP:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return getOperationCallExp();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -297,13 +315,13 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcorePackage.ENFORCEMENT_OPERATION__ENFORCEMENT_MODE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setEnforcementMode((EnforcementMode)newValue);
 				return;
-			case QVTcorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setBottomPattern((BottomPattern)newValue);
 				return;
-			case QVTcorePackage.ENFORCEMENT_OPERATION__OPERATION_CALL_EXP:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setOperationCallExp((OperationCallExp)newValue);
 				return;
 		}
@@ -318,13 +336,13 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcorePackage.ENFORCEMENT_OPERATION__ENFORCEMENT_MODE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setEnforcementMode(ENFORCEMENT_MODE_EDEFAULT);
 				return;
-			case QVTcorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setBottomPattern((BottomPattern)null);
 				return;
-			case QVTcorePackage.ENFORCEMENT_OPERATION__OPERATION_CALL_EXP:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setOperationCallExp((OperationCallExp)null);
 				return;
 		}
@@ -339,11 +357,11 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcorePackage.ENFORCEMENT_OPERATION__ENFORCEMENT_MODE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return enforcementMode != ENFORCEMENT_MODE_EDEFAULT;
-			case QVTcorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return getBottomPattern() != null;
-			case QVTcorePackage.ENFORCEMENT_OPERATION__OPERATION_CALL_EXP:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return operationCallExp != null;
 		}
 		return super.eIsSet(featureID);

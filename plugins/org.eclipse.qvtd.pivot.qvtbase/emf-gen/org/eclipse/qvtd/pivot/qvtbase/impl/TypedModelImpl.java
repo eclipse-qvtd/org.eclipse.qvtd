@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.internal.ClassImpl;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
@@ -48,6 +49,24 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  * @generated
  */
 public class TypedModelImpl extends NamedElementImpl implements TypedModel {
+	/**
+	 * The number of structural features of the '<em>Typed Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TYPED_MODEL_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of operations of the '<em>Typed Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TYPED_MODEL_OPERATION_COUNT = NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0;
+
 	/**
 	 * The cached value of the '{@link #getUsedPackage() <em>Used Package</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -144,7 +163,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 */
 	@Override
 	public Transformation getTransformation() {
-		if (eContainerFeatureID() != QVTbasePackage.TYPED_MODEL__TRANSFORMATION) return null;
+		if (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0)) return null;
 		return (Transformation)eInternalContainer();
 	}
 
@@ -154,7 +173,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * @generated
 	 */
 	public NotificationChain basicSetTransformation(Transformation newTransformation, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newTransformation, QVTbasePackage.TYPED_MODEL__TRANSFORMATION, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newTransformation, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0, msgs);
 		return msgs;
 	}
 
@@ -165,19 +184,19 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 */
 	@Override
 	public void setTransformation(Transformation newTransformation) {
-		if (newTransformation != eInternalContainer() || (eContainerFeatureID() != QVTbasePackage.TYPED_MODEL__TRANSFORMATION && newTransformation != null)) {
+		if (newTransformation != eInternalContainer() || (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0) && newTransformation != null)) {
 			if (EcoreUtil.isAncestor(this, newTransformation))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newTransformation != null)
-				msgs = ((InternalEObject)newTransformation).eInverseAdd(this, QVTbasePackage.TRANSFORMATION__MODEL_PARAMETER, Transformation.class, msgs);
+				msgs = ((InternalEObject)newTransformation).eInverseAdd(this, ClassImpl.CLASS_FEATURE_COUNT + 1, Transformation.class, msgs);
 			msgs = basicSetTransformation(newTransformation, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.TYPED_MODEL__TRANSFORMATION, newTransformation, newTransformation));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0, newTransformation, newTransformation));
 	}
 
 	/**
@@ -189,7 +208,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	@Override
 	public @NonNull EList<org.eclipse.ocl.pivot.Package> getUsedPackage() {
 		if (usedPackage == null) {
-			usedPackage = new EObjectResolvingEList<org.eclipse.ocl.pivot.Package>(org.eclipse.ocl.pivot.Package.class, this, QVTbasePackage.TYPED_MODEL__USED_PACKAGE);
+			usedPackage = new EObjectResolvingEList<org.eclipse.ocl.pivot.Package>(org.eclipse.ocl.pivot.Package.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		}
 		return usedPackage;
 	}
@@ -203,7 +222,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	@Override
 	public @NonNull EList<TypedModel> getDependsOn() {
 		if (dependsOn == null) {
-			dependsOn = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, QVTbasePackage.TYPED_MODEL__DEPENDS_ON);
+			dependsOn = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
 		}
 		return dependsOn;
 	}
@@ -227,7 +246,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 		Variable oldOwnedContext = ownedContext;
 		ownedContext = newOwnedContext;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT, oldOwnedContext, newOwnedContext);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, oldOwnedContext, newOwnedContext);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -243,14 +262,14 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 		if (newOwnedContext != ownedContext) {
 			NotificationChain msgs = null;
 			if (ownedContext != null)
-				msgs = ((InternalEObject)ownedContext).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT, null, msgs);
+				msgs = ((InternalEObject)ownedContext).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3), null, msgs);
 			if (newOwnedContext != null)
-				msgs = ((InternalEObject)newOwnedContext).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT, null, msgs);
+				msgs = ((InternalEObject)newOwnedContext).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3), null, msgs);
 			msgs = basicSetOwnedContext(newOwnedContext, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT, newOwnedContext, newOwnedContext));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, newOwnedContext, newOwnedContext));
 	}
 
 	/**
@@ -273,7 +292,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 		boolean oldIsPrimitive = isPrimitive;
 		isPrimitive = newIsPrimitive;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.TYPED_MODEL__IS_PRIMITIVE, oldIsPrimitive, isPrimitive));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4, oldIsPrimitive, isPrimitive));
 	}
 
 	/**
@@ -296,7 +315,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 		boolean oldIsTrace = isTrace;
 		isTrace = newIsTrace;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.TYPED_MODEL__IS_TRACE, oldIsTrace, isTrace));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, oldIsTrace, isTrace));
 	}
 
 	/**
@@ -307,7 +326,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTbasePackage.TYPED_MODEL__TRANSFORMATION:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetTransformation((Transformation)otherEnd, msgs);
@@ -323,9 +342,9 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTbasePackage.TYPED_MODEL__TRANSFORMATION:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return basicSetTransformation(null, msgs);
-			case QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return basicSetOwnedContext(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -339,8 +358,8 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTbasePackage.TYPED_MODEL__TRANSFORMATION:
-				return eInternalContainer().eInverseRemove(this, QVTbasePackage.TRANSFORMATION__MODEL_PARAMETER, Transformation.class, msgs);
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
+				return eInternalContainer().eInverseRemove(this, ClassImpl.CLASS_FEATURE_COUNT + 1, Transformation.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -353,17 +372,17 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTbasePackage.TYPED_MODEL__TRANSFORMATION:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return getTransformation();
-			case QVTbasePackage.TYPED_MODEL__USED_PACKAGE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return getUsedPackage();
-			case QVTbasePackage.TYPED_MODEL__DEPENDS_ON:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return getDependsOn();
-			case QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return getOwnedContext();
-			case QVTbasePackage.TYPED_MODEL__IS_PRIMITIVE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return isIsPrimitive();
-			case QVTbasePackage.TYPED_MODEL__IS_TRACE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return isIsTrace();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -378,24 +397,24 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTbasePackage.TYPED_MODEL__TRANSFORMATION:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setTransformation((Transformation)newValue);
 				return;
-			case QVTbasePackage.TYPED_MODEL__USED_PACKAGE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getUsedPackage().clear();
 				getUsedPackage().addAll((Collection<? extends org.eclipse.ocl.pivot.Package>)newValue);
 				return;
-			case QVTbasePackage.TYPED_MODEL__DEPENDS_ON:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getDependsOn().clear();
 				getDependsOn().addAll((Collection<? extends TypedModel>)newValue);
 				return;
-			case QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setOwnedContext((Variable)newValue);
 				return;
-			case QVTbasePackage.TYPED_MODEL__IS_PRIMITIVE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setIsPrimitive((Boolean)newValue);
 				return;
-			case QVTbasePackage.TYPED_MODEL__IS_TRACE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setIsTrace((Boolean)newValue);
 				return;
 		}
@@ -410,22 +429,22 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTbasePackage.TYPED_MODEL__TRANSFORMATION:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setTransformation((Transformation)null);
 				return;
-			case QVTbasePackage.TYPED_MODEL__USED_PACKAGE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getUsedPackage().clear();
 				return;
-			case QVTbasePackage.TYPED_MODEL__DEPENDS_ON:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getDependsOn().clear();
 				return;
-			case QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setOwnedContext((Variable)null);
 				return;
-			case QVTbasePackage.TYPED_MODEL__IS_PRIMITIVE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setIsPrimitive(IS_PRIMITIVE_EDEFAULT);
 				return;
-			case QVTbasePackage.TYPED_MODEL__IS_TRACE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setIsTrace(IS_TRACE_EDEFAULT);
 				return;
 		}
@@ -440,17 +459,17 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTbasePackage.TYPED_MODEL__TRANSFORMATION:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return getTransformation() != null;
-			case QVTbasePackage.TYPED_MODEL__USED_PACKAGE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return usedPackage != null && !usedPackage.isEmpty();
-			case QVTbasePackage.TYPED_MODEL__DEPENDS_ON:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return dependsOn != null && !dependsOn.isEmpty();
-			case QVTbasePackage.TYPED_MODEL__OWNED_CONTEXT:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return ownedContext != null;
-			case QVTbasePackage.TYPED_MODEL__IS_PRIMITIVE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return isPrimitive != IS_PRIMITIVE_EDEFAULT;
-			case QVTbasePackage.TYPED_MODEL__IS_TRACE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return isTrace != IS_TRACE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

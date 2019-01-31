@@ -26,6 +26,9 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
@@ -33,6 +36,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.qvtd.pivot.qvtimperative.CheckStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables;
@@ -52,6 +56,22 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * @generated
  */
 public class CheckStatementImpl extends ObservableStatementImpl implements CheckStatement {
+	/**
+	 * The number of structural features of the '<em>Check Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CHECK_STATEMENT_FEATURE_COUNT = ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Check Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CHECK_STATEMENT_OPERATION_COUNT = ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 1;
 	/**
 	 * The cached value of the '{@link #getOwnedExpression() <em>Owned Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -99,7 +119,7 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 		OCLExpression oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.CHECK_STATEMENT__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -115,14 +135,14 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.CHECK_STATEMENT__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.CHECK_STATEMENT__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.CHECK_STATEMENT__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -146,9 +166,9 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 			 *         'CheckStatement::TypeIsBoolean'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_CheckStatement_c_c_TypeIsBoolean);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_CheckStatement_c_c_TypeIsBoolean);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -157,8 +177,8 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 			else {
 				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_Boolean = idResolver.getClass(TypeId.BOOLEAN, null);
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression ownedExpression = this.getOwnedExpression();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = ownedExpression.getType();
+				final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
+				final /*@NonInvalid*/ @Nullable Type type = ownedExpression.getType();
 				final /*@NonInvalid*/ boolean result = (type != null) ? (type.getTypeId() == TYP_Boolean.getTypeId()) : false;
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_CheckStatement_c_c_TypeIsBoolean, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
@@ -178,7 +198,7 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.CHECK_STATEMENT__OWNED_EXPRESSION:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -192,7 +212,7 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.CHECK_STATEMENT__OWNED_EXPRESSION:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0:
 				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -206,7 +226,7 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.CHECK_STATEMENT__OWNED_EXPRESSION:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0:
 				setOwnedExpression((OCLExpression)newValue);
 				return;
 		}
@@ -221,7 +241,7 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.CHECK_STATEMENT__OWNED_EXPRESSION:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0:
 				setOwnedExpression((OCLExpression)null);
 				return;
 		}
@@ -236,7 +256,7 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.CHECK_STATEMENT__OWNED_EXPRESSION:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0:
 				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
@@ -251,7 +271,7 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTimperativePackage.CHECK_STATEMENT___VALIDATE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 0:
 				return validateTypeIsBoolean((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

@@ -48,6 +48,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
  */
 public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	/**
+	 * The number of structural features of the '<em>Loading Region</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LOADING_REGION_FEATURE_COUNT = RegionImpl.REGION_FEATURE_COUNT + 2;
+	/**
+	 * The number of operations of the '<em>Loading Region</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LOADING_REGION_OPERATION_COUNT = RegionImpl.REGION_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getLoadingPartition() <em>Loading Partition</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -88,7 +104,7 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 			loadingPartition = (LoadingPartition)eResolveProxy(oldLoadingPartition);
 			if (loadingPartition != oldLoadingPartition) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.LOADING_REGION__LOADING_PARTITION, oldLoadingPartition, loadingPartition));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RegionImpl.REGION_FEATURE_COUNT + 0, oldLoadingPartition, loadingPartition));
 			}
 		}
 		return loadingPartition;
@@ -112,7 +128,7 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 		LoadingPartition oldLoadingPartition = loadingPartition;
 		loadingPartition = newLoadingPartition;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.LOADING_REGION__LOADING_PARTITION, oldLoadingPartition, newLoadingPartition);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 0, oldLoadingPartition, newLoadingPartition);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -128,14 +144,14 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 		if (newLoadingPartition != loadingPartition) {
 			NotificationChain msgs = null;
 			if (loadingPartition != null)
-				msgs = ((InternalEObject)loadingPartition).eInverseRemove(this, QVTschedulePackage.LOADING_PARTITION__REFERRED_LOADING_REGION, LoadingPartition.class, msgs);
+				msgs = ((InternalEObject)loadingPartition).eInverseRemove(this, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0, LoadingPartition.class, msgs);
 			if (newLoadingPartition != null)
-				msgs = ((InternalEObject)newLoadingPartition).eInverseAdd(this, QVTschedulePackage.LOADING_PARTITION__REFERRED_LOADING_REGION, LoadingPartition.class, msgs);
+				msgs = ((InternalEObject)newLoadingPartition).eInverseAdd(this, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0, LoadingPartition.class, msgs);
 			msgs = basicSetLoadingPartition(newLoadingPartition, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.LOADING_REGION__LOADING_PARTITION, newLoadingPartition, newLoadingPartition));
+			eNotify(new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 0, newLoadingPartition, newLoadingPartition));
 	}
 
 	/**
@@ -145,7 +161,7 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	 */
 	@Override
 	public RootRegion getOwningRootRegion() {
-		if (eContainerFeatureID() != QVTschedulePackage.LOADING_REGION__OWNING_ROOT_REGION) return null;
+		if (eContainerFeatureID() != (RegionImpl.REGION_FEATURE_COUNT + 1)) return null;
 		return (RootRegion)eInternalContainer();
 	}
 
@@ -155,7 +171,7 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningRootRegion(RootRegion newOwningRootRegion, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningRootRegion, QVTschedulePackage.LOADING_REGION__OWNING_ROOT_REGION, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningRootRegion, RegionImpl.REGION_FEATURE_COUNT + 1, msgs);
 		return msgs;
 	}
 
@@ -166,19 +182,19 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	 */
 	@Override
 	public void setOwningRootRegion(RootRegion newOwningRootRegion) {
-		if (newOwningRootRegion != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.LOADING_REGION__OWNING_ROOT_REGION && newOwningRootRegion != null)) {
+		if (newOwningRootRegion != eInternalContainer() || (eContainerFeatureID() != (RegionImpl.REGION_FEATURE_COUNT + 1) && newOwningRootRegion != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningRootRegion))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningRootRegion != null)
-				msgs = ((InternalEObject)newOwningRootRegion).eInverseAdd(this, QVTschedulePackage.ROOT_REGION__OWNED_LOADING_REGION, RootRegion.class, msgs);
+				msgs = ((InternalEObject)newOwningRootRegion).eInverseAdd(this, RegionImpl.REGION_FEATURE_COUNT + 2, RootRegion.class, msgs);
 			msgs = basicSetOwningRootRegion(newOwningRootRegion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.LOADING_REGION__OWNING_ROOT_REGION, newOwningRootRegion, newOwningRootRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 1, newOwningRootRegion, newOwningRootRegion));
 	}
 
 	/**
@@ -189,11 +205,11 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.LOADING_REGION__LOADING_PARTITION:
+			case RegionImpl.REGION_FEATURE_COUNT + 0:
 				if (loadingPartition != null)
-					msgs = ((InternalEObject)loadingPartition).eInverseRemove(this, QVTschedulePackage.LOADING_PARTITION__REFERRED_LOADING_REGION, LoadingPartition.class, msgs);
+					msgs = ((InternalEObject)loadingPartition).eInverseRemove(this, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0, LoadingPartition.class, msgs);
 				return basicSetLoadingPartition((LoadingPartition)otherEnd, msgs);
-			case QVTschedulePackage.LOADING_REGION__OWNING_ROOT_REGION:
+			case RegionImpl.REGION_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningRootRegion((RootRegion)otherEnd, msgs);
@@ -209,9 +225,9 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.LOADING_REGION__LOADING_PARTITION:
+			case RegionImpl.REGION_FEATURE_COUNT + 0:
 				return basicSetLoadingPartition(null, msgs);
-			case QVTschedulePackage.LOADING_REGION__OWNING_ROOT_REGION:
+			case RegionImpl.REGION_FEATURE_COUNT + 1:
 				return basicSetOwningRootRegion(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -225,8 +241,8 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTschedulePackage.LOADING_REGION__OWNING_ROOT_REGION:
-				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.ROOT_REGION__OWNED_LOADING_REGION, RootRegion.class, msgs);
+			case RegionImpl.REGION_FEATURE_COUNT + 1:
+				return eInternalContainer().eInverseRemove(this, RegionImpl.REGION_FEATURE_COUNT + 2, RootRegion.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -239,10 +255,10 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.LOADING_REGION__LOADING_PARTITION:
+			case RegionImpl.REGION_FEATURE_COUNT + 0:
 				if (resolve) return getLoadingPartition();
 				return basicGetLoadingPartition();
-			case QVTschedulePackage.LOADING_REGION__OWNING_ROOT_REGION:
+			case RegionImpl.REGION_FEATURE_COUNT + 1:
 				return getOwningRootRegion();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -256,10 +272,10 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.LOADING_REGION__LOADING_PARTITION:
+			case RegionImpl.REGION_FEATURE_COUNT + 0:
 				setLoadingPartition((LoadingPartition)newValue);
 				return;
-			case QVTschedulePackage.LOADING_REGION__OWNING_ROOT_REGION:
+			case RegionImpl.REGION_FEATURE_COUNT + 1:
 				setOwningRootRegion((RootRegion)newValue);
 				return;
 		}
@@ -274,10 +290,10 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.LOADING_REGION__LOADING_PARTITION:
+			case RegionImpl.REGION_FEATURE_COUNT + 0:
 				setLoadingPartition((LoadingPartition)null);
 				return;
-			case QVTschedulePackage.LOADING_REGION__OWNING_ROOT_REGION:
+			case RegionImpl.REGION_FEATURE_COUNT + 1:
 				setOwningRootRegion((RootRegion)null);
 				return;
 		}
@@ -292,9 +308,9 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.LOADING_REGION__LOADING_PARTITION:
+			case RegionImpl.REGION_FEATURE_COUNT + 0:
 				return loadingPartition != null;
-			case QVTschedulePackage.LOADING_REGION__OWNING_ROOT_REGION:
+			case RegionImpl.REGION_FEATURE_COUNT + 1:
 				return getOwningRootRegion() != null;
 		}
 		return super.eIsSet(featureID);

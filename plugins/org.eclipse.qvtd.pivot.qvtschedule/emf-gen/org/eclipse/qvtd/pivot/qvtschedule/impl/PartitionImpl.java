@@ -70,6 +70,24 @@ import com.google.common.collect.Iterables;
  */
 public abstract class PartitionImpl extends NamedElementImpl implements Partition {
 	/**
+	 * The number of structural features of the '<em>Partition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PARTITION_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Partition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PARTITION_OPERATION_COUNT = NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getPasses() <em>Passes</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -125,7 +143,7 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 	@Override
 	public List<Integer> getPasses() {
 		if (passes == null) {
-			passes = new EDataTypeUniqueEList<Integer>(Integer.class, this, QVTschedulePackage.PARTITION__PASSES);
+			passes = new EDataTypeUniqueEList<Integer>(Integer.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 		}
 		return passes;
 	}
@@ -138,7 +156,7 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 	@Override
 	public List<NodeConnection> getIntermediateConnections() {
 		if (intermediateConnections == null) {
-			intermediateConnections = new EObjectResolvingEList<NodeConnection>(NodeConnection.class, this, QVTschedulePackage.PARTITION__INTERMEDIATE_CONNECTIONS);
+			intermediateConnections = new EObjectResolvingEList<NodeConnection>(NodeConnection.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		}
 		return intermediateConnections;
 	}
@@ -151,7 +169,7 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 	@Override
 	public List<NodeConnection> getRootConnections() {
 		if (rootConnections == null) {
-			rootConnections = new EObjectResolvingEList<NodeConnection>(NodeConnection.class, this, QVTschedulePackage.PARTITION__ROOT_CONNECTIONS);
+			rootConnections = new EObjectResolvingEList<NodeConnection>(NodeConnection.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
 		}
 		return rootConnections;
 	}
@@ -164,11 +182,11 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.PARTITION__PASSES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return getPasses();
-			case QVTschedulePackage.PARTITION__INTERMEDIATE_CONNECTIONS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return getIntermediateConnections();
-			case QVTschedulePackage.PARTITION__ROOT_CONNECTIONS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return getRootConnections();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -183,15 +201,15 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.PARTITION__PASSES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getPasses().clear();
 				getPasses().addAll((Collection<? extends Integer>)newValue);
 				return;
-			case QVTschedulePackage.PARTITION__INTERMEDIATE_CONNECTIONS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getIntermediateConnections().clear();
 				getIntermediateConnections().addAll((Collection<? extends NodeConnection>)newValue);
 				return;
-			case QVTschedulePackage.PARTITION__ROOT_CONNECTIONS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getRootConnections().clear();
 				getRootConnections().addAll((Collection<? extends NodeConnection>)newValue);
 				return;
@@ -207,13 +225,13 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.PARTITION__PASSES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getPasses().clear();
 				return;
-			case QVTschedulePackage.PARTITION__INTERMEDIATE_CONNECTIONS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getIntermediateConnections().clear();
 				return;
-			case QVTschedulePackage.PARTITION__ROOT_CONNECTIONS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getRootConnections().clear();
 				return;
 		}
@@ -228,11 +246,11 @@ public abstract class PartitionImpl extends NamedElementImpl implements Partitio
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.PARTITION__PASSES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return passes != null && !passes.isEmpty();
-			case QVTschedulePackage.PARTITION__INTERMEDIATE_CONNECTIONS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return intermediateConnections != null && !intermediateConnections.isEmpty();
-			case QVTschedulePackage.PARTITION__ROOT_CONNECTIONS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return rootConnections != null && !rootConnections.isEmpty();
 		}
 		return super.eIsSet(featureID);

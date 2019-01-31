@@ -17,6 +17,8 @@ package org.eclipse.qvtd.pivot.qvtcore.impl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -38,7 +40,10 @@ import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
@@ -48,7 +53,9 @@ import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -76,6 +83,24 @@ import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
  * @generated
  */
 public class BottomPatternImpl extends CorePatternImpl implements BottomPattern {
+	/**
+	 * The number of structural features of the '<em>Bottom Pattern</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BOTTOM_PATTERN_FEATURE_COUNT = CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Bottom Pattern</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BOTTOM_PATTERN_OPERATION_COUNT = CorePatternImpl.CORE_PATTERN_OPERATION_COUNT + 1;
+
 	/**
 	 * The cached value of the '{@link #getAssignment() <em>Assignment</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -132,7 +157,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 */
 	@Override
 	public Area getArea() {
-		if (eContainerFeatureID() != QVTcorePackage.BOTTOM_PATTERN__AREA) return null;
+		if (eContainerFeatureID() != (CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0)) return null;
 		return (Area)eInternalContainer();
 	}
 
@@ -142,7 +167,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * @generated
 	 */
 	public NotificationChain basicSetArea(Area newArea, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newArea, QVTcorePackage.BOTTOM_PATTERN__AREA, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newArea, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0, msgs);
 		return msgs;
 	}
 
@@ -153,19 +178,19 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 */
 	@Override
 	public void setArea(Area newArea) {
-		if (newArea != eInternalContainer() || (eContainerFeatureID() != QVTcorePackage.BOTTOM_PATTERN__AREA && newArea != null)) {
+		if (newArea != eInternalContainer() || (eContainerFeatureID() != (CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0) && newArea != null)) {
 			if (EcoreUtil.isAncestor(this, newArea))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newArea != null)
-				msgs = ((InternalEObject)newArea).eInverseAdd(this, QVTcorePackage.AREA__BOTTOM_PATTERN, Area.class, msgs);
+				msgs = ((InternalEObject)newArea).eInverseAdd(this, ElementImpl.ELEMENT_FEATURE_COUNT + 1, Area.class, msgs);
 			msgs = basicSetArea(newArea, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcorePackage.BOTTOM_PATTERN__AREA, newArea, newArea));
+			eNotify(new ENotificationImpl(this, Notification.SET, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0, newArea, newArea));
 	}
 
 	/**
@@ -176,7 +201,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public EList<Assignment> getAssignment() {
 		if (assignment == null) {
-			assignment = new EObjectContainmentWithInverseEList<Assignment>(Assignment.class, this, QVTcorePackage.BOTTOM_PATTERN__ASSIGNMENT, QVTcorePackage.ASSIGNMENT__BOTTOM_PATTERN);
+			assignment = new EObjectContainmentWithInverseEList<Assignment>(Assignment.class, this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 1, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
 		}
 		return assignment;
 	}
@@ -189,7 +214,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public EList<EnforcementOperation> getEnforcementOperation() {
 		if (enforcementOperation == null) {
-			enforcementOperation = new EObjectContainmentWithInverseEList<EnforcementOperation>(EnforcementOperation.class, this, QVTcorePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION, QVTcorePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN);
+			enforcementOperation = new EObjectContainmentWithInverseEList<EnforcementOperation>(EnforcementOperation.class, this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
 		}
 		return enforcementOperation;
 	}
@@ -202,7 +227,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public EList<RealizedVariable> getRealizedVariable() {
 		if (realizedVariable == null) {
-			realizedVariable = new EObjectContainmentEList<RealizedVariable>(RealizedVariable.class, this, QVTcorePackage.BOTTOM_PATTERN__REALIZED_VARIABLE);
+			realizedVariable = new EObjectContainmentEList<RealizedVariable>(RealizedVariable.class, this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 3);
 		}
 		return realizedVariable;
 	}
@@ -231,9 +256,9 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 			 *         'BottomPattern::VariablesAreBottomVariables'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_BottomPattern_c_c_VariablesAreBottomVariables);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_BottomPattern_c_c_VariablesAreBottomVariables);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -241,11 +266,11 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 			}
 			else {
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ java.util.@NonNull List<Variable> variable = this.getVariable();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_variable = idResolver.createSetOfAll(QVTcoreTables.SET_CLSSid_Variable, variable);
+				final /*@NonInvalid*/ @NonNull List<Variable> variable = this.getVariable();
+				final /*@NonInvalid*/ @NonNull SetValue BOXED_variable = idResolver.createSetOfAll(QVTcoreTables.SET_CLSSid_Variable, variable);
 				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				java.util.@NonNull Iterator<Object> ITERATOR__1 = BOXED_variable.iterator();
-				/*@NonInvalid*/ java.lang.@Nullable Boolean result;
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_variable.iterator();
+				/*@NonInvalid*/ @Nullable Boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
 						if (accumulator == ValueUtil.TRUE_VALUE) {
@@ -257,7 +282,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 						break;
 					}
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Variable _1 = (org.eclipse.ocl.pivot.@NonNull Variable)ITERATOR__1.next();
+					/*@NonInvalid*/ @NonNull Variable _1 = (@NonNull Variable)ITERATOR__1.next();
 					/**
 					 * oclIsKindOf(BottomVariable)
 					 */
@@ -294,13 +319,13 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcorePackage.BOTTOM_PATTERN__AREA:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetArea((Area)otherEnd, msgs);
-			case QVTcorePackage.BOTTOM_PATTERN__ASSIGNMENT:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAssignment()).basicAdd(otherEnd, msgs);
-			case QVTcorePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEnforcementOperation()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -314,13 +339,13 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcorePackage.BOTTOM_PATTERN__AREA:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
 				return basicSetArea(null, msgs);
-			case QVTcorePackage.BOTTOM_PATTERN__ASSIGNMENT:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 1:
 				return ((InternalEList<?>)getAssignment()).basicRemove(otherEnd, msgs);
-			case QVTcorePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getEnforcementOperation()).basicRemove(otherEnd, msgs);
-			case QVTcorePackage.BOTTOM_PATTERN__REALIZED_VARIABLE:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 3:
 				return ((InternalEList<?>)getRealizedVariable()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -334,8 +359,8 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTcorePackage.BOTTOM_PATTERN__AREA:
-				return eInternalContainer().eInverseRemove(this, QVTcorePackage.AREA__BOTTOM_PATTERN, Area.class, msgs);
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
+				return eInternalContainer().eInverseRemove(this, ElementImpl.ELEMENT_FEATURE_COUNT + 1, Area.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -348,13 +373,13 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcorePackage.BOTTOM_PATTERN__AREA:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
 				return getArea();
-			case QVTcorePackage.BOTTOM_PATTERN__ASSIGNMENT:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 1:
 				return getAssignment();
-			case QVTcorePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2:
 				return getEnforcementOperation();
-			case QVTcorePackage.BOTTOM_PATTERN__REALIZED_VARIABLE:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 3:
 				return getRealizedVariable();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -369,18 +394,18 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcorePackage.BOTTOM_PATTERN__AREA:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
 				setArea((Area)newValue);
 				return;
-			case QVTcorePackage.BOTTOM_PATTERN__ASSIGNMENT:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 1:
 				getAssignment().clear();
 				getAssignment().addAll((Collection<? extends Assignment>)newValue);
 				return;
-			case QVTcorePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2:
 				getEnforcementOperation().clear();
 				getEnforcementOperation().addAll((Collection<? extends EnforcementOperation>)newValue);
 				return;
-			case QVTcorePackage.BOTTOM_PATTERN__REALIZED_VARIABLE:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 3:
 				getRealizedVariable().clear();
 				getRealizedVariable().addAll((Collection<? extends RealizedVariable>)newValue);
 				return;
@@ -396,16 +421,16 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcorePackage.BOTTOM_PATTERN__AREA:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
 				setArea((Area)null);
 				return;
-			case QVTcorePackage.BOTTOM_PATTERN__ASSIGNMENT:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 1:
 				getAssignment().clear();
 				return;
-			case QVTcorePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2:
 				getEnforcementOperation().clear();
 				return;
-			case QVTcorePackage.BOTTOM_PATTERN__REALIZED_VARIABLE:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 3:
 				getRealizedVariable().clear();
 				return;
 		}
@@ -420,13 +445,13 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcorePackage.BOTTOM_PATTERN__AREA:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
 				return getArea() != null;
-			case QVTcorePackage.BOTTOM_PATTERN__ASSIGNMENT:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 1:
 				return assignment != null && !assignment.isEmpty();
-			case QVTcorePackage.BOTTOM_PATTERN__ENFORCEMENT_OPERATION:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2:
 				return enforcementOperation != null && !enforcementOperation.isEmpty();
-			case QVTcorePackage.BOTTOM_PATTERN__REALIZED_VARIABLE:
+			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 3:
 				return realizedVariable != null && !realizedVariable.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -441,7 +466,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTcorePackage.BOTTOM_PATTERN___VALIDATE_VARIABLES_ARE_BOTTOM_VARIABLES__DIAGNOSTICCHAIN_MAP:
+			case CorePatternImpl.CORE_PATTERN_OPERATION_COUNT + 0:
 				return validateVariablesAreBottomVariables((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

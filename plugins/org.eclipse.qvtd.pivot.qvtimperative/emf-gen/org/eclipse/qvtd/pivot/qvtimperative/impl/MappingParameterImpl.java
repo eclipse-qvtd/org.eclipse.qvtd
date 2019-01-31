@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
+import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
@@ -39,6 +40,23 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
  * @generated
  */
 public abstract class MappingParameterImpl extends VariableDeclarationImpl implements MappingParameter {
+	/**
+	 * The number of structural features of the '<em>Mapping Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_PARAMETER_FEATURE_COUNT = VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Mapping Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_PARAMETER_OPERATION_COUNT = VariableDeclarationImpl.VARIABLE_DECLARATION_OPERATION_COUNT + 0;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -65,7 +83,7 @@ public abstract class MappingParameterImpl extends VariableDeclarationImpl imple
 	 */
 	@Override
 	public Mapping getOwningMapping() {
-		if (eContainerFeatureID() != QVTimperativePackage.MAPPING_PARAMETER__OWNING_MAPPING) return null;
+		if (eContainerFeatureID() != (VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0)) return null;
 		return (Mapping)eInternalContainer();
 	}
 
@@ -75,7 +93,7 @@ public abstract class MappingParameterImpl extends VariableDeclarationImpl imple
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningMapping(Mapping newOwningMapping, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningMapping, QVTimperativePackage.MAPPING_PARAMETER__OWNING_MAPPING, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningMapping, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0, msgs);
 		return msgs;
 	}
 
@@ -86,19 +104,19 @@ public abstract class MappingParameterImpl extends VariableDeclarationImpl imple
 	 */
 	@Override
 	public void setOwningMapping(Mapping newOwningMapping) {
-		if (newOwningMapping != eInternalContainer() || (eContainerFeatureID() != QVTimperativePackage.MAPPING_PARAMETER__OWNING_MAPPING && newOwningMapping != null)) {
+		if (newOwningMapping != eInternalContainer() || (eContainerFeatureID() != (VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0) && newOwningMapping != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningMapping))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningMapping != null)
-				msgs = ((InternalEObject)newOwningMapping).eInverseAdd(this, QVTimperativePackage.MAPPING__OWNED_MAPPING_PARAMETERS, Mapping.class, msgs);
+				msgs = ((InternalEObject)newOwningMapping).eInverseAdd(this, RuleImpl.RULE_FEATURE_COUNT + 1, Mapping.class, msgs);
 			msgs = basicSetOwningMapping(newOwningMapping, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING_PARAMETER__OWNING_MAPPING, newOwningMapping, newOwningMapping));
+			eNotify(new ENotificationImpl(this, Notification.SET, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0, newOwningMapping, newOwningMapping));
 	}
 
 	/**
@@ -109,7 +127,7 @@ public abstract class MappingParameterImpl extends VariableDeclarationImpl imple
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_PARAMETER__OWNING_MAPPING:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningMapping((Mapping)otherEnd, msgs);
@@ -125,7 +143,7 @@ public abstract class MappingParameterImpl extends VariableDeclarationImpl imple
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_PARAMETER__OWNING_MAPPING:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				return basicSetOwningMapping(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -139,8 +157,8 @@ public abstract class MappingParameterImpl extends VariableDeclarationImpl imple
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTimperativePackage.MAPPING_PARAMETER__OWNING_MAPPING:
-				return eInternalContainer().eInverseRemove(this, QVTimperativePackage.MAPPING__OWNED_MAPPING_PARAMETERS, Mapping.class, msgs);
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
+				return eInternalContainer().eInverseRemove(this, RuleImpl.RULE_FEATURE_COUNT + 1, Mapping.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -153,7 +171,7 @@ public abstract class MappingParameterImpl extends VariableDeclarationImpl imple
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_PARAMETER__OWNING_MAPPING:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				return getOwningMapping();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -167,7 +185,7 @@ public abstract class MappingParameterImpl extends VariableDeclarationImpl imple
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_PARAMETER__OWNING_MAPPING:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				setOwningMapping((Mapping)newValue);
 				return;
 		}
@@ -182,7 +200,7 @@ public abstract class MappingParameterImpl extends VariableDeclarationImpl imple
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_PARAMETER__OWNING_MAPPING:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				setOwningMapping((Mapping)null);
 				return;
 		}
@@ -197,7 +215,7 @@ public abstract class MappingParameterImpl extends VariableDeclarationImpl imple
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_PARAMETER__OWNING_MAPPING:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				return getOwningMapping() != null;
 		}
 		return super.eIsSet(featureID);

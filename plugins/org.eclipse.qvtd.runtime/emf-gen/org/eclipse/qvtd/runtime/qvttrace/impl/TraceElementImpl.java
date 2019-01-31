@@ -32,6 +32,23 @@ import org.eclipse.qvtd.runtime.qvttrace.util.QVTtraceVisitor;
  */
 public abstract class TraceElementImpl extends EObjectImpl implements TraceElement {
 	/**
+	 * The number of structural features of the '<em>Trace Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TRACE_ELEMENT_FEATURE_COUNT = 0;
+	/**
+	 * The number of operations of the '<em>Trace Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TRACE_ELEMENT_OPERATION_COUNT = 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

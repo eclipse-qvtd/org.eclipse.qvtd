@@ -30,6 +30,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
@@ -40,6 +43,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.NewStatement;
@@ -65,6 +69,24 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * @generated
  */
 public class NewStatementImpl extends VariableStatementImpl implements NewStatement {
+	/**
+	 * The number of structural features of the '<em>New Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NEW_STATEMENT_FEATURE_COUNT = VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>New Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NEW_STATEMENT_OPERATION_COUNT = VariableStatementImpl.VARIABLE_STATEMENT_OPERATION_COUNT + 2;
+
 	/**
 	 * The cached value of the '{@link #getObservedProperties() <em>Observed Properties</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -142,7 +164,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	@Override
 	public EList<Property> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, QVTimperativePackage.NEW_STATEMENT__OBSERVED_PROPERTIES);
+			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0);
 		}
 		return observedProperties;
 	}
@@ -167,7 +189,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 		boolean oldIsContained = isContained;
 		isContained = newIsContained;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.NEW_STATEMENT__IS_CONTAINED, oldIsContained, isContained));
+			eNotify(new ENotificationImpl(this, Notification.SET, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 1, oldIsContained, isContained));
 	}
 
 	/**
@@ -182,7 +204,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 			referredTypedModel = (ImperativeTypedModel)eResolveProxy(oldReferredTypedModel);
 			if (referredTypedModel != oldReferredTypedModel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativePackage.NEW_STATEMENT__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2, oldReferredTypedModel, referredTypedModel));
 			}
 		}
 		return referredTypedModel;
@@ -207,7 +229,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 		ImperativeTypedModel oldReferredTypedModel = referredTypedModel;
 		referredTypedModel = newReferredTypedModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.NEW_STATEMENT__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2, oldReferredTypedModel, referredTypedModel));
 	}
 
 	/**
@@ -229,7 +251,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 		OCLExpression oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.NEW_STATEMENT__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -245,14 +267,14 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.NEW_STATEMENT__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.NEW_STATEMENT__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.NEW_STATEMENT__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -278,8 +300,8 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 			 *         'NewStatement::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_NewStatement_c_c_CompatibleTypeForValue);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_NewStatement_c_c_CompatibleTypeForValue);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -288,15 +310,15 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
 				try {
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable OCLExpression ownedExpression = this.getOwnedExpression();
+					final /*@NonInvalid*/ @Nullable OCLExpression ownedExpression = this.getOwnedExpression();
 					final /*@NonInvalid*/ boolean ne = ownedExpression != null;
 					/*@Thrown*/ boolean result;
 					if (ne) {
 						if (ownedExpression == null) {
 							throw new InvalidValueException("Null source for \'TypedElement::type\'");
 						}
-						final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = ownedExpression.getType();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = this.getType();
+						final /*@Thrown*/ @Nullable Type type = ownedExpression.getType();
+						final /*@NonInvalid*/ @Nullable Type type_0 = this.getType();
 						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 						result = conformsTo;
 					}
@@ -339,9 +361,9 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 			 *         'NewStatement::NonDataTypeForType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_NewStatement_c_c_NonDataTypeForType);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_NewStatement_c_c_NonDataTypeForType);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -351,14 +373,14 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 				/*@Caught*/ @NonNull Object CAUGHT_oclIsKindOf;
 				try {
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_DataType = idResolver.getClass(QVTimperativeTables.CLSSid_DataType, null);
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = this.getType();
+					final /*@NonInvalid*/ @Nullable Type type = this.getType();
 					final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, type, TYP_DataType).booleanValue();
 					CAUGHT_oclIsKindOf = oclIsKindOf;
 				}
 				catch (Exception e) {
 					CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ java.lang.@Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf);
+				final /*@NonInvalid*/ @Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf);
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_NewStatement_c_c_NonDataTypeForType, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
@@ -377,7 +399,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.NEW_STATEMENT__OWNED_EXPRESSION:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -391,14 +413,14 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.NEW_STATEMENT__OBSERVED_PROPERTIES:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0:
 				return getObservedProperties();
-			case QVTimperativePackage.NEW_STATEMENT__IS_CONTAINED:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 1:
 				return isIsContained();
-			case QVTimperativePackage.NEW_STATEMENT__REFERRED_TYPED_MODEL:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2:
 				if (resolve) return getReferredTypedModel();
 				return basicGetReferredTypedModel();
-			case QVTimperativePackage.NEW_STATEMENT__OWNED_EXPRESSION:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3:
 				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -413,17 +435,17 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.NEW_STATEMENT__OBSERVED_PROPERTIES:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
-			case QVTimperativePackage.NEW_STATEMENT__IS_CONTAINED:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 1:
 				setIsContained((Boolean)newValue);
 				return;
-			case QVTimperativePackage.NEW_STATEMENT__REFERRED_TYPED_MODEL:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2:
 				setReferredTypedModel((ImperativeTypedModel)newValue);
 				return;
-			case QVTimperativePackage.NEW_STATEMENT__OWNED_EXPRESSION:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)newValue);
 				return;
 		}
@@ -438,16 +460,16 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.NEW_STATEMENT__OBSERVED_PROPERTIES:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				return;
-			case QVTimperativePackage.NEW_STATEMENT__IS_CONTAINED:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 1:
 				setIsContained(IS_CONTAINED_EDEFAULT);
 				return;
-			case QVTimperativePackage.NEW_STATEMENT__REFERRED_TYPED_MODEL:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2:
 				setReferredTypedModel((ImperativeTypedModel)null);
 				return;
-			case QVTimperativePackage.NEW_STATEMENT__OWNED_EXPRESSION:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)null);
 				return;
 		}
@@ -462,13 +484,13 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.NEW_STATEMENT__OBSERVED_PROPERTIES:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0:
 				return observedProperties != null && !observedProperties.isEmpty();
-			case QVTimperativePackage.NEW_STATEMENT__IS_CONTAINED:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 1:
 				return isContained != IS_CONTAINED_EDEFAULT;
-			case QVTimperativePackage.NEW_STATEMENT__REFERRED_TYPED_MODEL:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2:
 				return referredTypedModel != null;
-			case QVTimperativePackage.NEW_STATEMENT__OWNED_EXPRESSION:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3:
 				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
@@ -483,7 +505,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatement.class) {
 			switch (derivedFeatureID) {
-				case QVTimperativePackage.NEW_STATEMENT__OBSERVED_PROPERTIES: return QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES;
+				case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0: return StatementImpl.STATEMENT_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -499,7 +521,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatement.class) {
 			switch (baseFeatureID) {
-				case QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES: return QVTimperativePackage.NEW_STATEMENT__OBSERVED_PROPERTIES;
+				case StatementImpl.STATEMENT_FEATURE_COUNT + 0: return VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -515,9 +537,9 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTimperativePackage.NEW_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP:
+			case VariableStatementImpl.VARIABLE_STATEMENT_OPERATION_COUNT + 0:
 				return validateCompatibleTypeForValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTimperativePackage.NEW_STATEMENT___VALIDATE_NON_DATA_TYPE_FOR_TYPE__DIAGNOSTICCHAIN_MAP:
+			case VariableStatementImpl.VARIABLE_STATEMENT_OPERATION_COUNT + 1:
 				return validateNonDataTypeForType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

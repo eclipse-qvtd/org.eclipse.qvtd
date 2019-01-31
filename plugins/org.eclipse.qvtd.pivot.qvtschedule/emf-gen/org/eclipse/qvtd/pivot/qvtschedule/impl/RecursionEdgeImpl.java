@@ -43,6 +43,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
  */
 public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 	/**
+	 * The number of structural features of the '<em>Recursion Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RECURSION_EDGE_FEATURE_COUNT = EdgeImpl.EDGE_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Recursion Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RECURSION_EDGE_OPERATION_COUNT = EdgeImpl.EDGE_OPERATION_COUNT + 0;
+	/**
 	 * The default value of the '{@link #isPrimary() <em>Primary</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -100,7 +116,7 @@ public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 		boolean oldPrimary = primary;
 		primary = newPrimary;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.RECURSION_EDGE__PRIMARY, oldPrimary, primary));
+			eNotify(new ENotificationImpl(this, Notification.SET, EdgeImpl.EDGE_FEATURE_COUNT + 0, oldPrimary, primary));
 	}
 
 	/**
@@ -111,7 +127,7 @@ public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.RECURSION_EDGE__PRIMARY:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 0:
 				return isPrimary();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -125,7 +141,7 @@ public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.RECURSION_EDGE__PRIMARY:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 0:
 				setPrimary((Boolean)newValue);
 				return;
 		}
@@ -140,7 +156,7 @@ public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.RECURSION_EDGE__PRIMARY:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 0:
 				setPrimary(PRIMARY_EDEFAULT);
 				return;
 		}
@@ -155,7 +171,7 @@ public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.RECURSION_EDGE__PRIMARY:
+			case EdgeImpl.EDGE_FEATURE_COUNT + 0:
 				return primary != PRIMARY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

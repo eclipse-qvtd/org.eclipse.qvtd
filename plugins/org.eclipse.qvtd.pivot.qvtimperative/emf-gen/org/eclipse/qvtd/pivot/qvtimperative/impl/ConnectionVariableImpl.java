@@ -36,6 +36,22 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
  */
 public abstract class ConnectionVariableImpl extends VariableDeclarationImpl implements ConnectionVariable {
 	/**
+	 * The number of structural features of the '<em>Connection Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CONNECTION_VARIABLE_FEATURE_COUNT = VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Connection Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CONNECTION_VARIABLE_OPERATION_COUNT = VariableDeclarationImpl.VARIABLE_DECLARATION_OPERATION_COUNT + 0;
+	/**
 	 * The default value of the '{@link #isIsStrict() <em>Is Strict</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -93,7 +109,7 @@ public abstract class ConnectionVariableImpl extends VariableDeclarationImpl imp
 		boolean oldIsStrict = isStrict;
 		isStrict = newIsStrict;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.CONNECTION_VARIABLE__IS_STRICT, oldIsStrict, isStrict));
+			eNotify(new ENotificationImpl(this, Notification.SET, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0, oldIsStrict, isStrict));
 	}
 
 	/**
@@ -114,7 +130,7 @@ public abstract class ConnectionVariableImpl extends VariableDeclarationImpl imp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.CONNECTION_VARIABLE__IS_STRICT:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				return isIsStrict();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -128,7 +144,7 @@ public abstract class ConnectionVariableImpl extends VariableDeclarationImpl imp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.CONNECTION_VARIABLE__IS_STRICT:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				setIsStrict((Boolean)newValue);
 				return;
 		}
@@ -143,7 +159,7 @@ public abstract class ConnectionVariableImpl extends VariableDeclarationImpl imp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.CONNECTION_VARIABLE__IS_STRICT:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				setIsStrict(IS_STRICT_EDEFAULT);
 				return;
 		}
@@ -158,7 +174,7 @@ public abstract class ConnectionVariableImpl extends VariableDeclarationImpl imp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.CONNECTION_VARIABLE__IS_STRICT:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				return isStrict != IS_STRICT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

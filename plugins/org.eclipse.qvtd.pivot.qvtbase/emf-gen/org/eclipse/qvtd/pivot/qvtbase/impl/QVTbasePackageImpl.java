@@ -20,6 +20,10 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.internal.ClassImpl;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
+import org.eclipse.ocl.pivot.internal.OperationImpl;
 import org.eclipse.ocl.pivot.internal.utilities.LazyXMIidAssigningResourceImpl;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -687,62 +691,62 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		isCreated = true;
 
 		// Create classes and their features
-		baseModelEClass = createEClass(BASE_MODEL);
+		baseModelEClass = createEClass(0);
 
-		domainEClass = createEClass(DOMAIN);
-		createEAttribute(domainEClass, DOMAIN__IS_CHECKABLE);
-		createEAttribute(domainEClass, DOMAIN__IS_ENFORCEABLE);
-		createEReference(domainEClass, DOMAIN__RULE);
-		createEReference(domainEClass, DOMAIN__TYPED_MODEL);
-		createEOperation(domainEClass, DOMAIN___VALIDATE_NAME_IS_TYPED_MODEL_NAME__DIAGNOSTICCHAIN_MAP);
-		createEOperation(domainEClass, DOMAIN___VALIDATE_TYPED_MODEL_IS_TRANSFORMATION_MODEL_PARAMETER__DIAGNOSTICCHAIN_MAP);
+		domainEClass = createEClass(1);
+		createEAttribute(domainEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
+		createEAttribute(domainEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
+		createEReference(domainEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
+		createEReference(domainEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
+		createEOperation(domainEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 1);
+		createEOperation(domainEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 2);
 
-		functionEClass = createEClass(FUNCTION);
-		createEReference(functionEClass, FUNCTION__QUERY_EXPRESSION);
-		createEOperation(functionEClass, FUNCTION___VALIDATE_PARAMETERS_ARE_FUNCTION_PARAMETER__DIAGNOSTICCHAIN_MAP);
-		createEOperation(functionEClass, FUNCTION___VALIDATE_RETURN_TYPE_IS_QUERY_TYPE__DIAGNOSTICCHAIN_MAP);
+		functionEClass = createEClass(2);
+		createEReference(functionEClass, OperationImpl.OPERATION_FEATURE_COUNT + 0);
+		createEOperation(functionEClass, OperationImpl.OPERATION_OPERATION_COUNT + 0);
+		createEOperation(functionEClass, OperationImpl.OPERATION_OPERATION_COUNT + 1);
 
-		functionParameterEClass = createEClass(FUNCTION_PARAMETER);
+		functionParameterEClass = createEClass(3);
 
-		patternEClass = createEClass(PATTERN);
-		createEReference(patternEClass, PATTERN__PREDICATE);
-		createEReference(patternEClass, PATTERN__BINDS_TO);
+		patternEClass = createEClass(4);
+		createEReference(patternEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
+		createEReference(patternEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
 
-		predicateEClass = createEClass(PREDICATE);
-		createEReference(predicateEClass, PREDICATE__CONDITION_EXPRESSION);
-		createEReference(predicateEClass, PREDICATE__PATTERN);
-		createEOperation(predicateEClass, PREDICATE___VALIDATE_CONDITION_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
+		predicateEClass = createEClass(5);
+		createEReference(predicateEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
+		createEReference(predicateEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
+		createEOperation(predicateEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 0);
 
-		ruleEClass = createEClass(RULE);
-		createEReference(ruleEClass, RULE__DOMAIN);
-		createEAttribute(ruleEClass, RULE__IS_ABSTRACT);
-		createEReference(ruleEClass, RULE__OVERRIDDEN);
-		createEReference(ruleEClass, RULE__OVERRIDES);
-		createEReference(ruleEClass, RULE__TRANSFORMATION);
-		createEOperation(ruleEClass, RULE___VALIDATE_DOMAIN_NAME_IS_UNIQUE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(ruleEClass, RULE___VALIDATE_NO_OVERRIDES_CYCLE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(ruleEClass, RULE___VALIDATE_OVERRIDING_RULE_OVERRIDES_ALL_DOMAINS__DIAGNOSTICCHAIN_MAP);
+		ruleEClass = createEClass(6);
+		createEReference(ruleEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
+		createEAttribute(ruleEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
+		createEReference(ruleEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
+		createEReference(ruleEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
+		createEReference(ruleEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
+		createEOperation(ruleEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0);
+		createEOperation(ruleEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 1);
+		createEOperation(ruleEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 2);
 
-		transformationEClass = createEClass(TRANSFORMATION);
-		createEReference(transformationEClass, TRANSFORMATION__OWNED_TAG);
-		createEReference(transformationEClass, TRANSFORMATION__MODEL_PARAMETER);
-		createEReference(transformationEClass, TRANSFORMATION__RULE);
-		createEReference(transformationEClass, TRANSFORMATION__EXTENDS);
-		createEReference(transformationEClass, TRANSFORMATION__OWNED_CONTEXT);
-		createEOperation(transformationEClass, TRANSFORMATION___GET_FUNCTION__STRING);
-		createEOperation(transformationEClass, TRANSFORMATION___GET_MODEL_PARAMETER__STRING);
-		createEOperation(transformationEClass, TRANSFORMATION___VALIDATE_CONTEXT_TYPE_IS_TRANSFORMATION__DIAGNOSTICCHAIN_MAP);
-		createEOperation(transformationEClass, TRANSFORMATION___VALIDATE_EXTENDED_TYPED_MODEL_IS_EXTENDED__DIAGNOSTICCHAIN_MAP);
-		createEOperation(transformationEClass, TRANSFORMATION___VALIDATE_MODEL_PARAMETER_IS_UNIQUE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(transformationEClass, TRANSFORMATION___VALIDATE_NO_EXTENDS_CYCLE__DIAGNOSTICCHAIN_MAP);
+		transformationEClass = createEClass(7);
+		createEReference(transformationEClass, ClassImpl.CLASS_FEATURE_COUNT + 0);
+		createEReference(transformationEClass, ClassImpl.CLASS_FEATURE_COUNT + 1);
+		createEReference(transformationEClass, ClassImpl.CLASS_FEATURE_COUNT + 2);
+		createEReference(transformationEClass, ClassImpl.CLASS_FEATURE_COUNT + 3);
+		createEReference(transformationEClass, ClassImpl.CLASS_FEATURE_COUNT + 4);
+		createEOperation(transformationEClass, ClassImpl.CLASS_OPERATION_COUNT + 0);
+		createEOperation(transformationEClass, ClassImpl.CLASS_OPERATION_COUNT + 1);
+		createEOperation(transformationEClass, ClassImpl.CLASS_OPERATION_COUNT + 2);
+		createEOperation(transformationEClass, ClassImpl.CLASS_OPERATION_COUNT + 3);
+		createEOperation(transformationEClass, ClassImpl.CLASS_OPERATION_COUNT + 4);
+		createEOperation(transformationEClass, ClassImpl.CLASS_OPERATION_COUNT + 5);
 
-		typedModelEClass = createEClass(TYPED_MODEL);
-		createEReference(typedModelEClass, TYPED_MODEL__TRANSFORMATION);
-		createEReference(typedModelEClass, TYPED_MODEL__USED_PACKAGE);
-		createEReference(typedModelEClass, TYPED_MODEL__DEPENDS_ON);
-		createEReference(typedModelEClass, TYPED_MODEL__OWNED_CONTEXT);
-		createEAttribute(typedModelEClass, TYPED_MODEL__IS_PRIMITIVE);
-		createEAttribute(typedModelEClass, TYPED_MODEL__IS_TRACE);
+		typedModelEClass = createEClass(8);
+		createEReference(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
+		createEReference(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
+		createEReference(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
+		createEReference(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
+		createEAttribute(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
+		createEAttribute(typedModelEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
 	}
 
 	/**

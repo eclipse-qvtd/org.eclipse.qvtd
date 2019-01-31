@@ -66,9 +66,9 @@ public class QVTtemplateFactoryImpl extends EFactoryImpl implements QVTtemplateF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP: return createCollectionTemplateExp();
-			case QVTtemplatePackage.OBJECT_TEMPLATE_EXP: return createObjectTemplateExp();
-			case QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM: return createPropertyTemplateItem();
+			case 0: return createCollectionTemplateExp();
+			case 1: return createObjectTemplateExp();
+			case 2: return createPropertyTemplateItem();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

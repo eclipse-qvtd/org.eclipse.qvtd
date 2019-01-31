@@ -270,27 +270,27 @@ public class QVTrelationValidator extends EObjectValidator {
 	@Override
 	protected boolean validate(int classifierID, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		switch (classifierID) {
-			case QVTrelationPackage.DOMAIN_PATTERN:
+			case 0:
 				return validateDomainPattern((DomainPattern)value, diagnostics, context);
-			case QVTrelationPackage.KEY:
+			case 1:
 				return validateKey((Key)value, diagnostics, context);
-			case QVTrelationPackage.RELATION:
+			case 2:
 				return validateRelation((Relation)value, diagnostics, context);
-			case QVTrelationPackage.RELATION_CALL_EXP:
+			case 3:
 				return validateRelationCallExp((RelationCallExp)value, diagnostics, context);
-			case QVTrelationPackage.RELATION_DOMAIN:
+			case 4:
 				return validateRelationDomain((RelationDomain)value, diagnostics, context);
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT:
+			case 5:
 				return validateRelationDomainAssignment((RelationDomainAssignment)value, diagnostics, context);
-			case QVTrelationPackage.RELATION_IMPLEMENTATION:
+			case 6:
 				return validateRelationImplementation((RelationImplementation)value, diagnostics, context);
-			case QVTrelationPackage.RELATION_MODEL:
+			case 7:
 				return validateRelationModel((RelationModel)value, diagnostics, context);
-			case QVTrelationPackage.RELATIONAL_TRANSFORMATION:
+			case 8:
 				return validateRelationalTransformation((RelationalTransformation)value, diagnostics, context);
-			case QVTrelationPackage.SHARED_VARIABLE:
+			case 9:
 				return validateSharedVariable((SharedVariable)value, diagnostics, context);
-			case QVTrelationPackage.TEMPLATE_VARIABLE:
+			case 10:
 				return validateTemplateVariable((TemplateVariable)value, diagnostics, context);
 			default:
 				return true;

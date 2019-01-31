@@ -27,6 +27,23 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  */
 public class BaseModelImpl extends ModelImpl implements BaseModel {
 	/**
+	 * The number of structural features of the '<em>Base Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BASE_MODEL_FEATURE_COUNT = ModelImpl.MODEL_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Base Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BASE_MODEL_OPERATION_COUNT = ModelImpl.MODEL_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

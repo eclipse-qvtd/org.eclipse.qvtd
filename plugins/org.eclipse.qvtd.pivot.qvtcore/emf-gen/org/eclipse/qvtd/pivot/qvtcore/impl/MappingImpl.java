@@ -13,6 +13,8 @@ package org.eclipse.qvtd.pivot.qvtcore.impl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -27,7 +29,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
@@ -36,8 +41,11 @@ import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -66,6 +74,24 @@ import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
  * @generated
  */
 public class MappingImpl extends RuleImpl implements Mapping {
+	/**
+	 * The number of structural features of the '<em>Mapping</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_FEATURE_COUNT = RuleImpl.RULE_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of operations of the '<em>Mapping</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_OPERATION_COUNT = RuleImpl.RULE_OPERATION_COUNT + 3;
+
 	/**
 	 * The cached value of the '{@link #getGuardPattern() <em>Guard Pattern</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -154,7 +180,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		GuardPattern oldGuardPattern = guardPattern;
 		guardPattern = newGuardPattern;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcorePackage.MAPPING__GUARD_PATTERN, oldGuardPattern, newGuardPattern);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RuleImpl.RULE_FEATURE_COUNT + 0, oldGuardPattern, newGuardPattern);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -170,14 +196,14 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		if (newGuardPattern != guardPattern) {
 			NotificationChain msgs = null;
 			if (guardPattern != null)
-				msgs = ((InternalEObject)guardPattern).eInverseRemove(this, QVTcorePackage.GUARD_PATTERN__AREA, GuardPattern.class, msgs);
+				msgs = ((InternalEObject)guardPattern).eInverseRemove(this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0, GuardPattern.class, msgs);
 			if (newGuardPattern != null)
-				msgs = ((InternalEObject)newGuardPattern).eInverseAdd(this, QVTcorePackage.GUARD_PATTERN__AREA, GuardPattern.class, msgs);
+				msgs = ((InternalEObject)newGuardPattern).eInverseAdd(this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0, GuardPattern.class, msgs);
 			msgs = basicSetGuardPattern(newGuardPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcorePackage.MAPPING__GUARD_PATTERN, newGuardPattern, newGuardPattern));
+			eNotify(new ENotificationImpl(this, Notification.SET, RuleImpl.RULE_FEATURE_COUNT + 0, newGuardPattern, newGuardPattern));
 	}
 
 	/**
@@ -199,7 +225,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		BottomPattern oldBottomPattern = bottomPattern;
 		bottomPattern = newBottomPattern;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcorePackage.MAPPING__BOTTOM_PATTERN, oldBottomPattern, newBottomPattern);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RuleImpl.RULE_FEATURE_COUNT + 1, oldBottomPattern, newBottomPattern);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -215,14 +241,14 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		if (newBottomPattern != bottomPattern) {
 			NotificationChain msgs = null;
 			if (bottomPattern != null)
-				msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, QVTcorePackage.BOTTOM_PATTERN__AREA, BottomPattern.class, msgs);
+				msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0, BottomPattern.class, msgs);
 			if (newBottomPattern != null)
-				msgs = ((InternalEObject)newBottomPattern).eInverseAdd(this, QVTcorePackage.BOTTOM_PATTERN__AREA, BottomPattern.class, msgs);
+				msgs = ((InternalEObject)newBottomPattern).eInverseAdd(this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0, BottomPattern.class, msgs);
 			msgs = basicSetBottomPattern(newBottomPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcorePackage.MAPPING__BOTTOM_PATTERN, newBottomPattern, newBottomPattern));
+			eNotify(new ENotificationImpl(this, Notification.SET, RuleImpl.RULE_FEATURE_COUNT + 1, newBottomPattern, newBottomPattern));
 	}
 
 	/**
@@ -233,7 +259,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public EList<Mapping> getSpecification() {
 		if (specification == null) {
-			specification = new EObjectWithInverseResolvingEList.ManyInverse<Mapping>(Mapping.class, this, QVTcorePackage.MAPPING__SPECIFICATION, QVTcorePackage.MAPPING__REFINEMENT);
+			specification = new EObjectWithInverseResolvingEList.ManyInverse<Mapping>(Mapping.class, this, RuleImpl.RULE_FEATURE_COUNT + 5, RuleImpl.RULE_FEATURE_COUNT + 4);
 		}
 		return specification;
 	}
@@ -260,9 +286,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			 *         'Mapping::DomainsAreCoreDomains'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_Mapping_c_c_DomainsAreCoreDomains);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_Mapping_c_c_DomainsAreCoreDomains);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -270,11 +296,11 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			}
 			else {
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ java.util.@NonNull List<Domain> domain = this.getDomain();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTcoreTables.ORD_CLSSid_Domain, domain);
+				final /*@NonInvalid*/ @NonNull List<Domain> domain = this.getDomain();
+				final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTcoreTables.ORD_CLSSid_Domain, domain);
 				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				java.util.@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
-				/*@NonInvalid*/ java.lang.@Nullable Boolean result;
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
+				/*@NonInvalid*/ @Nullable Boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
 						if (accumulator == ValueUtil.TRUE_VALUE) {
@@ -286,7 +312,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 						break;
 					}
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain _1 = (org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain)ITERATOR__1.next();
+					/*@NonInvalid*/ @NonNull Domain _1 = (@NonNull Domain)ITERATOR__1.next();
 					/**
 					 * oclIsKindOf(CoreDomain)
 					 */
@@ -335,19 +361,19 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			 *         'Mapping::NestedNameIsNull'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_Mapping_c_c_NestedNameIsNull);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_Mapping_c_c_NestedNameIsNull);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtcore.@Nullable Mapping context_0 = this.getContext();
+				final /*@NonInvalid*/ @Nullable Mapping context_0 = this.getContext();
 				final /*@NonInvalid*/ boolean ne = context_0 != null;
 				/*@NonInvalid*/ boolean result;
 				if (ne) {
-					final /*@NonInvalid*/ java.lang.@Nullable String name = this.getName();
+					final /*@NonInvalid*/ @Nullable String name = this.getName();
 					final /*@NonInvalid*/ boolean eq = name == null;
 					result = eq;
 				}
@@ -385,19 +411,19 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			 *         'Mapping::RootNameIsNotNull'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_Mapping_c_c_RootNameIsNotNull);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_Mapping_c_c_RootNameIsNotNull);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation transformation = this.getTransformation();
+				final /*@NonInvalid*/ @Nullable Transformation transformation = this.getTransformation();
 				final /*@NonInvalid*/ boolean ne = transformation != null;
 				/*@NonInvalid*/ boolean result;
 				if (ne) {
-					final /*@NonInvalid*/ java.lang.@Nullable String name = this.getName();
+					final /*@NonInvalid*/ @Nullable String name = this.getName();
 					final /*@NonInvalid*/ boolean ne_0 = name != null;
 					result = ne_0;
 				}
@@ -422,7 +448,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public EList<Mapping> getLocal() {
 		if (local == null) {
-			local = new EObjectContainmentWithInverseEList<Mapping>(Mapping.class, this, QVTcorePackage.MAPPING__LOCAL, QVTcorePackage.MAPPING__CONTEXT);
+			local = new EObjectContainmentWithInverseEList<Mapping>(Mapping.class, this, RuleImpl.RULE_FEATURE_COUNT + 3, RuleImpl.RULE_FEATURE_COUNT + 2);
 		}
 		return local;
 	}
@@ -434,7 +460,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 */
 	@Override
 	public Mapping getContext() {
-		if (eContainerFeatureID() != QVTcorePackage.MAPPING__CONTEXT) return null;
+		if (eContainerFeatureID() != (RuleImpl.RULE_FEATURE_COUNT + 2)) return null;
 		return (Mapping)eInternalContainer();
 	}
 
@@ -444,7 +470,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * @generated
 	 */
 	public NotificationChain basicSetContext(Mapping newContext, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newContext, QVTcorePackage.MAPPING__CONTEXT, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newContext, RuleImpl.RULE_FEATURE_COUNT + 2, msgs);
 		return msgs;
 	}
 
@@ -455,19 +481,19 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 */
 	@Override
 	public void setContext(Mapping newContext) {
-		if (newContext != eInternalContainer() || (eContainerFeatureID() != QVTcorePackage.MAPPING__CONTEXT && newContext != null)) {
+		if (newContext != eInternalContainer() || (eContainerFeatureID() != (RuleImpl.RULE_FEATURE_COUNT + 2) && newContext != null)) {
 			if (EcoreUtil.isAncestor(this, newContext))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newContext != null)
-				msgs = ((InternalEObject)newContext).eInverseAdd(this, QVTcorePackage.MAPPING__LOCAL, Mapping.class, msgs);
+				msgs = ((InternalEObject)newContext).eInverseAdd(this, RuleImpl.RULE_FEATURE_COUNT + 3, Mapping.class, msgs);
 			msgs = basicSetContext(newContext, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcorePackage.MAPPING__CONTEXT, newContext, newContext));
+			eNotify(new ENotificationImpl(this, Notification.SET, RuleImpl.RULE_FEATURE_COUNT + 2, newContext, newContext));
 	}
 
 	/**
@@ -478,7 +504,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public EList<Mapping> getRefinement() {
 		if (refinement == null) {
-			refinement = new EObjectWithInverseResolvingEList.ManyInverse<Mapping>(Mapping.class, this, QVTcorePackage.MAPPING__REFINEMENT, QVTcorePackage.MAPPING__SPECIFICATION);
+			refinement = new EObjectWithInverseResolvingEList.ManyInverse<Mapping>(Mapping.class, this, RuleImpl.RULE_FEATURE_COUNT + 4, RuleImpl.RULE_FEATURE_COUNT + 5);
 		}
 		return refinement;
 	}
@@ -492,23 +518,23 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcorePackage.MAPPING__GUARD_PATTERN:
+			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				if (guardPattern != null)
-					msgs = ((InternalEObject)guardPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcorePackage.MAPPING__GUARD_PATTERN, null, msgs);
+					msgs = ((InternalEObject)guardPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (RuleImpl.RULE_FEATURE_COUNT + 0), null, msgs);
 				return basicSetGuardPattern((GuardPattern)otherEnd, msgs);
-			case QVTcorePackage.MAPPING__BOTTOM_PATTERN:
+			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				if (bottomPattern != null)
-					msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcorePackage.MAPPING__BOTTOM_PATTERN, null, msgs);
+					msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (RuleImpl.RULE_FEATURE_COUNT + 1), null, msgs);
 				return basicSetBottomPattern((BottomPattern)otherEnd, msgs);
-			case QVTcorePackage.MAPPING__CONTEXT:
+			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetContext((Mapping)otherEnd, msgs);
-			case QVTcorePackage.MAPPING__LOCAL:
+			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getLocal()).basicAdd(otherEnd, msgs);
-			case QVTcorePackage.MAPPING__REFINEMENT:
+			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRefinement()).basicAdd(otherEnd, msgs);
-			case QVTcorePackage.MAPPING__SPECIFICATION:
+			case RuleImpl.RULE_FEATURE_COUNT + 5:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSpecification()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -522,17 +548,17 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcorePackage.MAPPING__GUARD_PATTERN:
+			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				return basicSetGuardPattern(null, msgs);
-			case QVTcorePackage.MAPPING__BOTTOM_PATTERN:
+			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				return basicSetBottomPattern(null, msgs);
-			case QVTcorePackage.MAPPING__CONTEXT:
+			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				return basicSetContext(null, msgs);
-			case QVTcorePackage.MAPPING__LOCAL:
+			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				return ((InternalEList<?>)getLocal()).basicRemove(otherEnd, msgs);
-			case QVTcorePackage.MAPPING__REFINEMENT:
+			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				return ((InternalEList<?>)getRefinement()).basicRemove(otherEnd, msgs);
-			case QVTcorePackage.MAPPING__SPECIFICATION:
+			case RuleImpl.RULE_FEATURE_COUNT + 5:
 				return ((InternalEList<?>)getSpecification()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -546,8 +572,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTcorePackage.MAPPING__CONTEXT:
-				return eInternalContainer().eInverseRemove(this, QVTcorePackage.MAPPING__LOCAL, Mapping.class, msgs);
+			case RuleImpl.RULE_FEATURE_COUNT + 2:
+				return eInternalContainer().eInverseRemove(this, RuleImpl.RULE_FEATURE_COUNT + 3, Mapping.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -560,17 +586,17 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcorePackage.MAPPING__GUARD_PATTERN:
+			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				return getGuardPattern();
-			case QVTcorePackage.MAPPING__BOTTOM_PATTERN:
+			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				return getBottomPattern();
-			case QVTcorePackage.MAPPING__CONTEXT:
+			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				return getContext();
-			case QVTcorePackage.MAPPING__LOCAL:
+			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				return getLocal();
-			case QVTcorePackage.MAPPING__REFINEMENT:
+			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				return getRefinement();
-			case QVTcorePackage.MAPPING__SPECIFICATION:
+			case RuleImpl.RULE_FEATURE_COUNT + 5:
 				return getSpecification();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -585,24 +611,24 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcorePackage.MAPPING__GUARD_PATTERN:
+			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				setGuardPattern((GuardPattern)newValue);
 				return;
-			case QVTcorePackage.MAPPING__BOTTOM_PATTERN:
+			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				setBottomPattern((BottomPattern)newValue);
 				return;
-			case QVTcorePackage.MAPPING__CONTEXT:
+			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				setContext((Mapping)newValue);
 				return;
-			case QVTcorePackage.MAPPING__LOCAL:
+			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				getLocal().clear();
 				getLocal().addAll((Collection<? extends Mapping>)newValue);
 				return;
-			case QVTcorePackage.MAPPING__REFINEMENT:
+			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				getRefinement().clear();
 				getRefinement().addAll((Collection<? extends Mapping>)newValue);
 				return;
-			case QVTcorePackage.MAPPING__SPECIFICATION:
+			case RuleImpl.RULE_FEATURE_COUNT + 5:
 				getSpecification().clear();
 				getSpecification().addAll((Collection<? extends Mapping>)newValue);
 				return;
@@ -618,22 +644,22 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcorePackage.MAPPING__GUARD_PATTERN:
+			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				setGuardPattern((GuardPattern)null);
 				return;
-			case QVTcorePackage.MAPPING__BOTTOM_PATTERN:
+			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				setBottomPattern((BottomPattern)null);
 				return;
-			case QVTcorePackage.MAPPING__CONTEXT:
+			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				setContext((Mapping)null);
 				return;
-			case QVTcorePackage.MAPPING__LOCAL:
+			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				getLocal().clear();
 				return;
-			case QVTcorePackage.MAPPING__REFINEMENT:
+			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				getRefinement().clear();
 				return;
-			case QVTcorePackage.MAPPING__SPECIFICATION:
+			case RuleImpl.RULE_FEATURE_COUNT + 5:
 				getSpecification().clear();
 				return;
 		}
@@ -648,17 +674,17 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcorePackage.MAPPING__GUARD_PATTERN:
+			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				return guardPattern != null;
-			case QVTcorePackage.MAPPING__BOTTOM_PATTERN:
+			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				return bottomPattern != null;
-			case QVTcorePackage.MAPPING__CONTEXT:
+			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				return getContext() != null;
-			case QVTcorePackage.MAPPING__LOCAL:
+			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				return local != null && !local.isEmpty();
-			case QVTcorePackage.MAPPING__REFINEMENT:
+			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				return refinement != null && !refinement.isEmpty();
-			case QVTcorePackage.MAPPING__SPECIFICATION:
+			case RuleImpl.RULE_FEATURE_COUNT + 5:
 				return specification != null && !specification.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -673,8 +699,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == Area.class) {
 			switch (derivedFeatureID) {
-				case QVTcorePackage.MAPPING__GUARD_PATTERN: return QVTcorePackage.AREA__GUARD_PATTERN;
-				case QVTcorePackage.MAPPING__BOTTOM_PATTERN: return QVTcorePackage.AREA__BOTTOM_PATTERN;
+				case RuleImpl.RULE_FEATURE_COUNT + 0: return ElementImpl.ELEMENT_FEATURE_COUNT + 0;
+				case RuleImpl.RULE_FEATURE_COUNT + 1: return ElementImpl.ELEMENT_FEATURE_COUNT + 1;
 				default: return -1;
 			}
 		}
@@ -690,8 +716,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == Area.class) {
 			switch (baseFeatureID) {
-				case QVTcorePackage.AREA__GUARD_PATTERN: return QVTcorePackage.MAPPING__GUARD_PATTERN;
-				case QVTcorePackage.AREA__BOTTOM_PATTERN: return QVTcorePackage.MAPPING__BOTTOM_PATTERN;
+				case ElementImpl.ELEMENT_FEATURE_COUNT + 0: return RuleImpl.RULE_FEATURE_COUNT + 0;
+				case ElementImpl.ELEMENT_FEATURE_COUNT + 1: return RuleImpl.RULE_FEATURE_COUNT + 1;
 				default: return -1;
 			}
 		}
@@ -707,11 +733,11 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTcorePackage.MAPPING___VALIDATE_DOMAINS_ARE_CORE_DOMAINS__DIAGNOSTICCHAIN_MAP:
+			case RuleImpl.RULE_OPERATION_COUNT + 0:
 				return validateDomainsAreCoreDomains((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTcorePackage.MAPPING___VALIDATE_NESTED_NAME_IS_NULL__DIAGNOSTICCHAIN_MAP:
+			case RuleImpl.RULE_OPERATION_COUNT + 1:
 				return validateNestedNameIsNull((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTcorePackage.MAPPING___VALIDATE_ROOT_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP:
+			case RuleImpl.RULE_OPERATION_COUNT + 2:
 				return validateRootNameIsNotNull((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

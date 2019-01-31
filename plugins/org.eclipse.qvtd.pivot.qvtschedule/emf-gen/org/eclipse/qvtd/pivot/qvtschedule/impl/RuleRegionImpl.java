@@ -47,6 +47,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
 	/**
+	 * The number of structural features of the '<em>Rule Region</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RULE_REGION_FEATURE_COUNT = MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Rule Region</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RULE_REGION_OPERATION_COUNT = MappingRegionImpl.MAPPING_REGION_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getReferredRule() <em>Referred Rule</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,7 +99,7 @@ public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.RULE_REGION__REFERRED_RULE:
+			case MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0:
 				if (resolve) return getReferredRule();
 				return basicGetReferredRule();
 		}
@@ -98,7 +114,7 @@ public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.RULE_REGION__REFERRED_RULE:
+			case MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0:
 				setReferredRule((Rule)newValue);
 				return;
 		}
@@ -113,7 +129,7 @@ public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.RULE_REGION__REFERRED_RULE:
+			case MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0:
 				setReferredRule((Rule)null);
 				return;
 		}
@@ -128,7 +144,7 @@ public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.RULE_REGION__REFERRED_RULE:
+			case MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0:
 				return referredRule != null;
 		}
 		return super.eIsSet(featureID);
@@ -166,7 +182,7 @@ public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
 			referredRule = (Rule)eResolveProxy(oldReferredRule);
 			if (referredRule != oldReferredRule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.RULE_REGION__REFERRED_RULE, oldReferredRule, referredRule));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0, oldReferredRule, referredRule));
 			}
 		}
 		return referredRule;
@@ -191,7 +207,7 @@ public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
 		Rule oldReferredRule = referredRule;
 		referredRule = newReferredRule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.RULE_REGION__REFERRED_RULE, oldReferredRule, referredRule));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0, oldReferredRule, referredRule));
 	}
 
 	@Override

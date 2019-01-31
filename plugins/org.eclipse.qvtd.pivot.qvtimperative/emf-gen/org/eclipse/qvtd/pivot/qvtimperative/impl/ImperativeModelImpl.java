@@ -27,6 +27,23 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  */
 public class ImperativeModelImpl extends BaseModelImpl implements ImperativeModel {
 	/**
+	 * The number of structural features of the '<em>Imperative Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int IMPERATIVE_MODEL_FEATURE_COUNT = BaseModelImpl.BASE_MODEL_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Imperative Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int IMPERATIVE_MODEL_OPERATION_COUNT = BaseModelImpl.BASE_MODEL_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

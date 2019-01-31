@@ -49,6 +49,24 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements OperationParameterEdge {
 	/**
+	 * The number of structural features of the '<em>Operation Parameter Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_PARAMETER_EDGE_FEATURE_COUNT = ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Operation Parameter Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_PARAMETER_EDGE_OPERATION_COUNT = ArgumentEdgeImpl.ARGUMENT_EDGE_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getReferredParameter() <em>Referred Parameter</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -109,7 +127,7 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 			referredParameter = (Parameter)eResolveProxy(oldReferredParameter);
 			if (referredParameter != oldReferredParameter) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.OPERATION_PARAMETER_EDGE__REFERRED_PARAMETER, oldReferredParameter, referredParameter));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0, oldReferredParameter, referredParameter));
 			}
 		}
 		return referredParameter;
@@ -134,7 +152,7 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 		Parameter oldReferredParameter = referredParameter;
 		referredParameter = newReferredParameter;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.OPERATION_PARAMETER_EDGE__REFERRED_PARAMETER, oldReferredParameter, referredParameter));
+			eNotify(new ENotificationImpl(this, Notification.SET, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0, oldReferredParameter, referredParameter));
 	}
 
 	/**
@@ -157,7 +175,7 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 		int oldParameterIndex = parameterIndex;
 		parameterIndex = newParameterIndex;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.OPERATION_PARAMETER_EDGE__PARAMETER_INDEX, oldParameterIndex, parameterIndex));
+			eNotify(new ENotificationImpl(this, Notification.SET, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 1, oldParameterIndex, parameterIndex));
 	}
 
 	/**
@@ -168,10 +186,10 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_PARAMETER_EDGE__REFERRED_PARAMETER:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				if (resolve) return getReferredParameter();
 				return basicGetReferredParameter();
-			case QVTschedulePackage.OPERATION_PARAMETER_EDGE__PARAMETER_INDEX:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 1:
 				return getParameterIndex();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -185,10 +203,10 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_PARAMETER_EDGE__REFERRED_PARAMETER:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				setReferredParameter((Parameter)newValue);
 				return;
-			case QVTschedulePackage.OPERATION_PARAMETER_EDGE__PARAMETER_INDEX:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 1:
 				setParameterIndex((Integer)newValue);
 				return;
 		}
@@ -203,10 +221,10 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_PARAMETER_EDGE__REFERRED_PARAMETER:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				setReferredParameter((Parameter)null);
 				return;
-			case QVTschedulePackage.OPERATION_PARAMETER_EDGE__PARAMETER_INDEX:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 1:
 				setParameterIndex(PARAMETER_INDEX_EDEFAULT);
 				return;
 		}
@@ -221,9 +239,9 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_PARAMETER_EDGE__REFERRED_PARAMETER:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				return referredParameter != null;
-			case QVTschedulePackage.OPERATION_PARAMETER_EDGE__PARAMETER_INDEX:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 1:
 				return parameterIndex != PARAMETER_INDEX_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

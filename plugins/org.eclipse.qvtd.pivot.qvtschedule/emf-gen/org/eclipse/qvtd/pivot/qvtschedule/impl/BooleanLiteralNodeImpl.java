@@ -48,6 +48,24 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 public class BooleanLiteralNodeImpl extends OperationNodeImpl implements BooleanLiteralNode {
 	/**
+	 * The number of structural features of the '<em>Boolean Literal Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BOOLEAN_LITERAL_NODE_FEATURE_COUNT = OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Boolean Literal Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BOOLEAN_LITERAL_NODE_OPERATION_COUNT = OperationNodeImpl.OPERATION_NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #isBooleanValue() <em>Boolean Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -106,7 +124,7 @@ public class BooleanLiteralNodeImpl extends OperationNodeImpl implements Boolean
 		boolean oldBooleanValue = booleanValue;
 		booleanValue = newBooleanValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.BOOLEAN_LITERAL_NODE__BOOLEAN_VALUE, oldBooleanValue, booleanValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldBooleanValue, booleanValue));
 	}
 
 	/**
@@ -117,7 +135,7 @@ public class BooleanLiteralNodeImpl extends OperationNodeImpl implements Boolean
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.BOOLEAN_LITERAL_NODE__BOOLEAN_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				return isBooleanValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -131,7 +149,7 @@ public class BooleanLiteralNodeImpl extends OperationNodeImpl implements Boolean
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.BOOLEAN_LITERAL_NODE__BOOLEAN_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				setBooleanValue((Boolean)newValue);
 				return;
 		}
@@ -146,7 +164,7 @@ public class BooleanLiteralNodeImpl extends OperationNodeImpl implements Boolean
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.BOOLEAN_LITERAL_NODE__BOOLEAN_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				setBooleanValue(BOOLEAN_VALUE_EDEFAULT);
 				return;
 		}
@@ -161,7 +179,7 @@ public class BooleanLiteralNodeImpl extends OperationNodeImpl implements Boolean
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.BOOLEAN_LITERAL_NODE__BOOLEAN_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				return booleanValue != BOOLEAN_VALUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

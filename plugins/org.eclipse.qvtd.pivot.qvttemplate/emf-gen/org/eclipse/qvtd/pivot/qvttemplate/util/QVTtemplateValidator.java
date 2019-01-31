@@ -187,13 +187,13 @@ public class QVTtemplateValidator extends EObjectValidator {
 	@Override
 	protected boolean validate(int classifierID, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		switch (classifierID) {
-			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP:
+			case 0:
 				return validateCollectionTemplateExp((CollectionTemplateExp)value, diagnostics, context);
-			case QVTtemplatePackage.OBJECT_TEMPLATE_EXP:
+			case 1:
 				return validateObjectTemplateExp((ObjectTemplateExp)value, diagnostics, context);
-			case QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM:
+			case 2:
 				return validatePropertyTemplateItem((PropertyTemplateItem)value, diagnostics, context);
-			case QVTtemplatePackage.TEMPLATE_EXP:
+			case 3:
 				return validateTemplateExp((TemplateExp)value, diagnostics, context);
 			default:
 				return true;

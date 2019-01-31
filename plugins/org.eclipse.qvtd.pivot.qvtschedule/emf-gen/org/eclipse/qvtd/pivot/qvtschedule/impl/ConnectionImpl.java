@@ -72,6 +72,22 @@ import com.google.common.collect.Iterables;
  */
 public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	/**
+	 * The number of structural features of the '<em>Connection</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CONNECTION_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 7;
+	/**
+	 * The number of operations of the '<em>Connection</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CONNECTION_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 0;
+	/**
 	 * The default value of the '{@link #getSymbolName() <em>Symbol Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -185,7 +201,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 		String oldSymbolName = symbolName;
 		symbolName = newSymbolName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CONNECTION__SYMBOL_NAME, oldSymbolName, symbolName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 0, oldSymbolName, symbolName));
 	}
 
 	/**
@@ -195,7 +211,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	 */
 	@Override
 	public RootRegion getOwningRootRegion() {
-		if (eContainerFeatureID() != QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION) return null;
+		if (eContainerFeatureID() != (ElementImpl.ELEMENT_FEATURE_COUNT + 1)) return null;
 		return (RootRegion)eInternalContainer();
 	}
 
@@ -205,7 +221,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningRootRegion(RootRegion newOwningRootRegion, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningRootRegion, QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningRootRegion, ElementImpl.ELEMENT_FEATURE_COUNT + 1, msgs);
 		return msgs;
 	}
 
@@ -216,19 +232,19 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	 */
 	@Override
 	public void setOwningRootRegion(RootRegion newOwningRootRegion) {
-		if (newOwningRootRegion != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION && newOwningRootRegion != null)) {
+		if (newOwningRootRegion != eInternalContainer() || (eContainerFeatureID() != (ElementImpl.ELEMENT_FEATURE_COUNT + 1) && newOwningRootRegion != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningRootRegion))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningRootRegion != null)
-				msgs = ((InternalEObject)newOwningRootRegion).eInverseAdd(this, QVTschedulePackage.ROOT_REGION__OWNED_CONNECTIONS, RootRegion.class, msgs);
+				msgs = ((InternalEObject)newOwningRootRegion).eInverseAdd(this, RegionImpl.REGION_FEATURE_COUNT + 1, RootRegion.class, msgs);
 			msgs = basicSetOwningRootRegion(newOwningRootRegion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION, newOwningRootRegion, newOwningRootRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 1, newOwningRootRegion, newOwningRootRegion));
 	}
 
 	/**
@@ -251,7 +267,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 		ConnectionRole oldConnectionRole = connectionRole;
 		connectionRole = newConnectionRole == null ? CONNECTION_ROLE_EDEFAULT : newConnectionRole;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CONNECTION__CONNECTION_ROLE, oldConnectionRole, connectionRole));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 2, oldConnectionRole, connectionRole));
 	}
 
 	/**
@@ -274,7 +290,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CONNECTION__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 3, oldName, name));
 	}
 
 	/**
@@ -285,7 +301,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	@Override
 	public List<ConnectionEnd> getSourceEnds() {
 		if (sourceEnds == null) {
-			sourceEnds = new EObjectResolvingEList<ConnectionEnd>(ConnectionEnd.class, this, QVTschedulePackage.CONNECTION__SOURCE_ENDS);
+			sourceEnds = new EObjectResolvingEList<ConnectionEnd>(ConnectionEnd.class, this, ElementImpl.ELEMENT_FEATURE_COUNT + 4);
 		}
 		return sourceEnds;
 	}
@@ -298,7 +314,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	@Override
 	public List<Partition> getIntermediatePartitions() {
 		if (intermediatePartitions == null) {
-			intermediatePartitions = new EObjectResolvingEList<Partition>(Partition.class, this, QVTschedulePackage.CONNECTION__INTERMEDIATE_PARTITIONS);
+			intermediatePartitions = new EObjectResolvingEList<Partition>(Partition.class, this, ElementImpl.ELEMENT_FEATURE_COUNT + 5);
 		}
 		return intermediatePartitions;
 	}
@@ -315,7 +331,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 			commonPartition = (Partition)eResolveProxy(oldCommonPartition);
 			if (commonPartition != oldCommonPartition) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.CONNECTION__COMMON_PARTITION, oldCommonPartition, commonPartition));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 6, oldCommonPartition, commonPartition));
 			}
 		}
 		return commonPartition;
@@ -340,7 +356,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 		Partition oldCommonPartition = commonPartition;
 		commonPartition = newCommonPartition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CONNECTION__COMMON_PARTITION, oldCommonPartition, commonPartition));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 6, oldCommonPartition, commonPartition));
 	}
 
 	/**
@@ -351,7 +367,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningRootRegion((RootRegion)otherEnd, msgs);
@@ -367,7 +383,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return basicSetOwningRootRegion(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -381,8 +397,8 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION:
-				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.ROOT_REGION__OWNED_CONNECTIONS, RootRegion.class, msgs);
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
+				return eInternalContainer().eInverseRemove(this, RegionImpl.REGION_FEATURE_COUNT + 1, RootRegion.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -395,19 +411,19 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.CONNECTION__SYMBOL_NAME:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return getSymbolName();
-			case QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return getOwningRootRegion();
-			case QVTschedulePackage.CONNECTION__CONNECTION_ROLE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return getConnectionRole();
-			case QVTschedulePackage.CONNECTION__NAME:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return getName();
-			case QVTschedulePackage.CONNECTION__SOURCE_ENDS:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				return getSourceEnds();
-			case QVTschedulePackage.CONNECTION__INTERMEDIATE_PARTITIONS:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				return getIntermediatePartitions();
-			case QVTschedulePackage.CONNECTION__COMMON_PARTITION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				if (resolve) return getCommonPartition();
 				return basicGetCommonPartition();
 		}
@@ -423,27 +439,27 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.CONNECTION__SYMBOL_NAME:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setSymbolName((String)newValue);
 				return;
-			case QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setOwningRootRegion((RootRegion)newValue);
 				return;
-			case QVTschedulePackage.CONNECTION__CONNECTION_ROLE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setConnectionRole((ConnectionRole)newValue);
 				return;
-			case QVTschedulePackage.CONNECTION__NAME:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setName((String)newValue);
 				return;
-			case QVTschedulePackage.CONNECTION__SOURCE_ENDS:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				getSourceEnds().clear();
 				getSourceEnds().addAll((Collection<? extends ConnectionEnd>)newValue);
 				return;
-			case QVTschedulePackage.CONNECTION__INTERMEDIATE_PARTITIONS:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				getIntermediatePartitions().clear();
 				getIntermediatePartitions().addAll((Collection<? extends Partition>)newValue);
 				return;
-			case QVTschedulePackage.CONNECTION__COMMON_PARTITION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setCommonPartition((Partition)newValue);
 				return;
 		}
@@ -458,25 +474,25 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.CONNECTION__SYMBOL_NAME:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setSymbolName(SYMBOL_NAME_EDEFAULT);
 				return;
-			case QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setOwningRootRegion((RootRegion)null);
 				return;
-			case QVTschedulePackage.CONNECTION__CONNECTION_ROLE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setConnectionRole(CONNECTION_ROLE_EDEFAULT);
 				return;
-			case QVTschedulePackage.CONNECTION__NAME:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setName(NAME_EDEFAULT);
 				return;
-			case QVTschedulePackage.CONNECTION__SOURCE_ENDS:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				getSourceEnds().clear();
 				return;
-			case QVTschedulePackage.CONNECTION__INTERMEDIATE_PARTITIONS:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				getIntermediatePartitions().clear();
 				return;
-			case QVTschedulePackage.CONNECTION__COMMON_PARTITION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setCommonPartition((Partition)null);
 				return;
 		}
@@ -491,19 +507,19 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.CONNECTION__SYMBOL_NAME:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return SYMBOL_NAME_EDEFAULT == null ? symbolName != null : !SYMBOL_NAME_EDEFAULT.equals(symbolName);
-			case QVTschedulePackage.CONNECTION__OWNING_ROOT_REGION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return getOwningRootRegion() != null;
-			case QVTschedulePackage.CONNECTION__CONNECTION_ROLE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return connectionRole != CONNECTION_ROLE_EDEFAULT;
-			case QVTschedulePackage.CONNECTION__NAME:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case QVTschedulePackage.CONNECTION__SOURCE_ENDS:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				return sourceEnds != null && !sourceEnds.isEmpty();
-			case QVTschedulePackage.CONNECTION__INTERMEDIATE_PARTITIONS:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				return intermediatePartitions != null && !intermediatePartitions.isEmpty();
-			case QVTschedulePackage.CONNECTION__COMMON_PARTITION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				return commonPartition != null;
 		}
 		return super.eIsSet(featureID);
@@ -518,7 +534,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == Symbolable.class) {
 			switch (derivedFeatureID) {
-				case QVTschedulePackage.CONNECTION__SYMBOL_NAME: return QVTschedulePackage.SYMBOLABLE__SYMBOL_NAME;
+				case ElementImpl.ELEMENT_FEATURE_COUNT + 0: return 0;
 				default: return -1;
 			}
 		}
@@ -534,7 +550,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == Symbolable.class) {
 			switch (baseFeatureID) {
-				case QVTschedulePackage.SYMBOLABLE__SYMBOL_NAME: return QVTschedulePackage.CONNECTION__SYMBOL_NAME;
+				case 0: return ElementImpl.ELEMENT_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}

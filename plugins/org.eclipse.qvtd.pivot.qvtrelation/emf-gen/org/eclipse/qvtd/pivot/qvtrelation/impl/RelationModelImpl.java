@@ -27,6 +27,23 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  */
 public class RelationModelImpl extends BaseModelImpl implements RelationModel {
 	/**
+	 * The number of structural features of the '<em>Relation Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RELATION_MODEL_FEATURE_COUNT = BaseModelImpl.BASE_MODEL_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Relation Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RELATION_MODEL_OPERATION_COUNT = BaseModelImpl.BASE_MODEL_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

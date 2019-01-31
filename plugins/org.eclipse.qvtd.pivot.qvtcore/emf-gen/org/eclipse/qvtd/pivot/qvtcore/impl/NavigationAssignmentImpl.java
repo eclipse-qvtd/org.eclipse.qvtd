@@ -42,6 +42,22 @@ import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
  */
 public abstract class NavigationAssignmentImpl extends AssignmentImpl implements NavigationAssignment {
 	/**
+	 * The number of structural features of the '<em>Navigation Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NAVIGATION_ASSIGNMENT_FEATURE_COUNT = AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Navigation Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NAVIGATION_ASSIGNMENT_OPERATION_COUNT = AssignmentImpl.ASSIGNMENT_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getSlotExpression() <em>Slot Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -89,7 +105,7 @@ public abstract class NavigationAssignmentImpl extends AssignmentImpl implements
 		OCLExpression oldSlotExpression = slotExpression;
 		slotExpression = newSlotExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcorePackage.NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION, oldSlotExpression, newSlotExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0, oldSlotExpression, newSlotExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -105,14 +121,14 @@ public abstract class NavigationAssignmentImpl extends AssignmentImpl implements
 		if (newSlotExpression != slotExpression) {
 			NotificationChain msgs = null;
 			if (slotExpression != null)
-				msgs = ((InternalEObject)slotExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcorePackage.NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)slotExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0), null, msgs);
 			if (newSlotExpression != null)
-				msgs = ((InternalEObject)newSlotExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcorePackage.NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newSlotExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0), null, msgs);
 			msgs = basicSetSlotExpression(newSlotExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcorePackage.NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION, newSlotExpression, newSlotExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0, newSlotExpression, newSlotExpression));
 	}
 
 	/**
@@ -123,7 +139,7 @@ public abstract class NavigationAssignmentImpl extends AssignmentImpl implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcorePackage.NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION:
+			case AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0:
 				return basicSetSlotExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -137,7 +153,7 @@ public abstract class NavigationAssignmentImpl extends AssignmentImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcorePackage.NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION:
+			case AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0:
 				return getSlotExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -151,7 +167,7 @@ public abstract class NavigationAssignmentImpl extends AssignmentImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcorePackage.NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION:
+			case AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0:
 				setSlotExpression((OCLExpression)newValue);
 				return;
 		}
@@ -166,7 +182,7 @@ public abstract class NavigationAssignmentImpl extends AssignmentImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcorePackage.NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION:
+			case AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0:
 				setSlotExpression((OCLExpression)null);
 				return;
 		}
@@ -181,7 +197,7 @@ public abstract class NavigationAssignmentImpl extends AssignmentImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcorePackage.NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION:
+			case AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0:
 				return slotExpression != null;
 		}
 		return super.eIsSet(featureID);

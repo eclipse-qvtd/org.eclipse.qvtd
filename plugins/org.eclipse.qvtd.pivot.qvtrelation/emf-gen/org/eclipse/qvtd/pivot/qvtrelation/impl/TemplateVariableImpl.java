@@ -36,6 +36,23 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  */
 public class TemplateVariableImpl extends VariableImpl implements TemplateVariable {
 	/**
+	 * The number of structural features of the '<em>Template Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TEMPLATE_VARIABLE_FEATURE_COUNT = VariableImpl.VARIABLE_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Template Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TEMPLATE_VARIABLE_OPERATION_COUNT = VariableImpl.VARIABLE_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

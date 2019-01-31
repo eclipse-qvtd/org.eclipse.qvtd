@@ -45,6 +45,24 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class StringLiteralNodeImpl extends OperationNodeImpl implements StringLiteralNode {
 	/**
+	 * The number of structural features of the '<em>String Literal Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int STRING_LITERAL_NODE_FEATURE_COUNT = OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>String Literal Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int STRING_LITERAL_NODE_OPERATION_COUNT = OperationNodeImpl.OPERATION_NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getStringValue() <em>String Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -103,7 +121,7 @@ public class StringLiteralNodeImpl extends OperationNodeImpl implements StringLi
 		String oldStringValue = stringValue;
 		stringValue = newStringValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.STRING_LITERAL_NODE__STRING_VALUE, oldStringValue, stringValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldStringValue, stringValue));
 	}
 
 	/**
@@ -114,7 +132,7 @@ public class StringLiteralNodeImpl extends OperationNodeImpl implements StringLi
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.STRING_LITERAL_NODE__STRING_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				return getStringValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -128,7 +146,7 @@ public class StringLiteralNodeImpl extends OperationNodeImpl implements StringLi
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.STRING_LITERAL_NODE__STRING_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				setStringValue((String)newValue);
 				return;
 		}
@@ -143,7 +161,7 @@ public class StringLiteralNodeImpl extends OperationNodeImpl implements StringLi
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.STRING_LITERAL_NODE__STRING_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				setStringValue(STRING_VALUE_EDEFAULT);
 				return;
 		}
@@ -158,7 +176,7 @@ public class StringLiteralNodeImpl extends OperationNodeImpl implements StringLi
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.STRING_LITERAL_NODE__STRING_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				return STRING_VALUE_EDEFAULT == null ? stringValue != null : !STRING_VALUE_EDEFAULT.equals(stringValue);
 		}
 		return super.eIsSet(featureID);

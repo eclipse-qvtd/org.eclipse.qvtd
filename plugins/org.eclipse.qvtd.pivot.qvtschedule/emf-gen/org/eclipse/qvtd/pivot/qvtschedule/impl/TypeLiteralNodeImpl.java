@@ -47,6 +47,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class TypeLiteralNodeImpl extends OperationNodeImpl implements TypeLiteralNode {
 	/**
+	 * The number of structural features of the '<em>Type Literal Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TYPE_LITERAL_NODE_FEATURE_COUNT = OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Type Literal Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TYPE_LITERAL_NODE_OPERATION_COUNT = OperationNodeImpl.OPERATION_NODE_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getTypeValue() <em>Type Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -87,7 +103,7 @@ public class TypeLiteralNodeImpl extends OperationNodeImpl implements TypeLitera
 			typeValue = (Type)eResolveProxy(oldTypeValue);
 			if (typeValue != oldTypeValue) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.TYPE_LITERAL_NODE__TYPE_VALUE, oldTypeValue, typeValue));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldTypeValue, typeValue));
 			}
 		}
 		return typeValue;
@@ -112,7 +128,7 @@ public class TypeLiteralNodeImpl extends OperationNodeImpl implements TypeLitera
 		Type oldTypeValue = typeValue;
 		typeValue = newTypeValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.TYPE_LITERAL_NODE__TYPE_VALUE, oldTypeValue, typeValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldTypeValue, typeValue));
 	}
 
 	/**
@@ -123,7 +139,7 @@ public class TypeLiteralNodeImpl extends OperationNodeImpl implements TypeLitera
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.TYPE_LITERAL_NODE__TYPE_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				if (resolve) return getTypeValue();
 				return basicGetTypeValue();
 		}
@@ -138,7 +154,7 @@ public class TypeLiteralNodeImpl extends OperationNodeImpl implements TypeLitera
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.TYPE_LITERAL_NODE__TYPE_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				setTypeValue((Type)newValue);
 				return;
 		}
@@ -153,7 +169,7 @@ public class TypeLiteralNodeImpl extends OperationNodeImpl implements TypeLitera
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.TYPE_LITERAL_NODE__TYPE_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				setTypeValue((Type)null);
 				return;
 		}
@@ -168,7 +184,7 @@ public class TypeLiteralNodeImpl extends OperationNodeImpl implements TypeLitera
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.TYPE_LITERAL_NODE__TYPE_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				return typeValue != null;
 		}
 		return super.eIsSet(featureID);

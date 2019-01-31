@@ -46,6 +46,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class OperationCallNodeImpl extends OperationNodeImpl implements OperationCallNode {
 	/**
+	 * The number of structural features of the '<em>Operation Call Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_CALL_NODE_FEATURE_COUNT = OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Operation Call Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_CALL_NODE_OPERATION_COUNT = OperationNodeImpl.OPERATION_NODE_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getReferredOperation() <em>Referred Operation</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -86,7 +102,7 @@ public class OperationCallNodeImpl extends OperationNodeImpl implements Operatio
 			referredOperation = (Operation)eResolveProxy(oldReferredOperation);
 			if (referredOperation != oldReferredOperation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.OPERATION_CALL_NODE__REFERRED_OPERATION, oldReferredOperation, referredOperation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldReferredOperation, referredOperation));
 			}
 		}
 		return referredOperation;
@@ -111,7 +127,7 @@ public class OperationCallNodeImpl extends OperationNodeImpl implements Operatio
 		Operation oldReferredOperation = referredOperation;
 		referredOperation = newReferredOperation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.OPERATION_CALL_NODE__REFERRED_OPERATION, oldReferredOperation, referredOperation));
+			eNotify(new ENotificationImpl(this, Notification.SET, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldReferredOperation, referredOperation));
 	}
 
 	/**
@@ -122,7 +138,7 @@ public class OperationCallNodeImpl extends OperationNodeImpl implements Operatio
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_CALL_NODE__REFERRED_OPERATION:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				if (resolve) return getReferredOperation();
 				return basicGetReferredOperation();
 		}
@@ -137,7 +153,7 @@ public class OperationCallNodeImpl extends OperationNodeImpl implements Operatio
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_CALL_NODE__REFERRED_OPERATION:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				setReferredOperation((Operation)newValue);
 				return;
 		}
@@ -152,7 +168,7 @@ public class OperationCallNodeImpl extends OperationNodeImpl implements Operatio
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_CALL_NODE__REFERRED_OPERATION:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				setReferredOperation((Operation)null);
 				return;
 		}
@@ -167,7 +183,7 @@ public class OperationCallNodeImpl extends OperationNodeImpl implements Operatio
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_CALL_NODE__REFERRED_OPERATION:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				return referredOperation != null;
 		}
 		return super.eIsSet(featureID);

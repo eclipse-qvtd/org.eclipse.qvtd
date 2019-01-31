@@ -68,6 +68,24 @@ import java.util.Collection;
 public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 {
 	/**
+	 * The number of structural features of the '<em>Node Connection</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NODE_CONNECTION_FEATURE_COUNT = ConnectionImpl.CONNECTION_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Node Connection</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NODE_CONNECTION_OPERATION_COUNT = ConnectionImpl.CONNECTION_OPERATION_COUNT + 0;
+
+	/**
 	 * NodeList duplicates changes to the lists-of-nodes to the 'redundant' node-to-role map.
 	 */
 	@SuppressWarnings("serial")
@@ -162,7 +180,7 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 			classDatum = (ClassDatum)eResolveProxy(oldClassDatum);
 			if (classDatum != oldClassDatum) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM, oldClassDatum, classDatum));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ConnectionImpl.CONNECTION_FEATURE_COUNT + 0, oldClassDatum, classDatum));
 			}
 		}
 		return classDatum;
@@ -187,7 +205,7 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 		ClassDatum oldClassDatum = classDatum;
 		classDatum = newClassDatum;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM, oldClassDatum, classDatum));
+			eNotify(new ENotificationImpl(this, Notification.SET, ConnectionImpl.CONNECTION_FEATURE_COUNT + 0, oldClassDatum, classDatum));
 	}
 
 	/**
@@ -237,14 +255,14 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 0:
 				if (resolve) return getClassDatum();
 				return basicGetClassDatum();
-			case QVTschedulePackage.NODE_CONNECTION__MANDATORY_TARGET_NODES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 1:
 				return getMandatoryTargetNodes();
-			case QVTschedulePackage.NODE_CONNECTION__PASSED_TARGET_NODES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 2:
 				return getPassedTargetNodes();
-			case QVTschedulePackage.NODE_CONNECTION__PREFERRED_TARGET_NODES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 3:
 				return getPreferredTargetNodes();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -259,18 +277,18 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 0:
 				setClassDatum((ClassDatum)newValue);
 				return;
-			case QVTschedulePackage.NODE_CONNECTION__MANDATORY_TARGET_NODES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 1:
 				getMandatoryTargetNodes().clear();
 				getMandatoryTargetNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case QVTschedulePackage.NODE_CONNECTION__PASSED_TARGET_NODES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 2:
 				getPassedTargetNodes().clear();
 				getPassedTargetNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case QVTschedulePackage.NODE_CONNECTION__PREFERRED_TARGET_NODES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 3:
 				getPreferredTargetNodes().clear();
 				getPreferredTargetNodes().addAll((Collection<? extends Node>)newValue);
 				return;
@@ -286,16 +304,16 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 0:
 				setClassDatum((ClassDatum)null);
 				return;
-			case QVTschedulePackage.NODE_CONNECTION__MANDATORY_TARGET_NODES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 1:
 				getMandatoryTargetNodes().clear();
 				return;
-			case QVTschedulePackage.NODE_CONNECTION__PASSED_TARGET_NODES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 2:
 				getPassedTargetNodes().clear();
 				return;
-			case QVTschedulePackage.NODE_CONNECTION__PREFERRED_TARGET_NODES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 3:
 				getPreferredTargetNodes().clear();
 				return;
 		}
@@ -310,13 +328,13 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE_CONNECTION__CLASS_DATUM:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 0:
 				return classDatum != null;
-			case QVTschedulePackage.NODE_CONNECTION__MANDATORY_TARGET_NODES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 1:
 				return mandatoryTargetNodes != null && !mandatoryTargetNodes.isEmpty();
-			case QVTschedulePackage.NODE_CONNECTION__PASSED_TARGET_NODES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 2:
 				return passedTargetNodes != null && !passedTargetNodes.isEmpty();
-			case QVTschedulePackage.NODE_CONNECTION__PREFERRED_TARGET_NODES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 3:
 				return preferredTargetNodes != null && !preferredTargetNodes.isEmpty();
 		}
 		return super.eIsSet(featureID);

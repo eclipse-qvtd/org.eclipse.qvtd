@@ -252,19 +252,19 @@ public class QVTtracePackageImpl extends EPackageImpl implements QVTtracePackage
 		isCreated = true;
 
 		// Create classes and their features
-		dispatchEClass = createEClass(DISPATCH);
-		createEAttribute(dispatchEClass, DISPATCH__SUCCESS);
+		dispatchEClass = createEClass(0);
+		createEAttribute(dispatchEClass, TraceInstanceImpl.TRACE_INSTANCE_FEATURE_COUNT + 0);
 
-		executionEClass = createEClass(EXECUTION);
+		executionEClass = createEClass(1);
 
-		traceElementEClass = createEClass(TRACE_ELEMENT);
+		traceElementEClass = createEClass(2);
 
-		traceInstanceEClass = createEClass(TRACE_INSTANCE);
-		createEReference(traceInstanceEClass, TRACE_INSTANCE__OWNING_MODEL);
+		traceInstanceEClass = createEClass(3);
+		createEReference(traceInstanceEClass, TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0);
 
-		traceModelEClass = createEClass(TRACE_MODEL);
-		createEReference(traceModelEClass, TRACE_MODEL__OWNED_TRACES);
-		createEAttribute(traceModelEClass, TRACE_MODEL__NAME);
+		traceModelEClass = createEClass(4);
+		createEReference(traceModelEClass, TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0);
+		createEAttribute(traceModelEClass, TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 1);
 	}
 
 	/**

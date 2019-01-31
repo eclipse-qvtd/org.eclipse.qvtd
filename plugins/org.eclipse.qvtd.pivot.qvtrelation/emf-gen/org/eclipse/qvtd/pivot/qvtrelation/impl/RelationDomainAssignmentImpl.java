@@ -23,7 +23,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
@@ -33,6 +35,8 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.qvtd.pivot.qvtbase.impl.DomainImpl;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationTables;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
@@ -55,6 +59,24 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  * @generated
  */
 public class RelationDomainAssignmentImpl extends ElementImpl implements RelationDomainAssignment {
+	/**
+	 * The number of structural features of the '<em>Relation Domain Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RELATION_DOMAIN_ASSIGNMENT_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Relation Domain Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RELATION_DOMAIN_ASSIGNMENT_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 1;
+
 	/**
 	 * The cached value of the '{@link #getValueExp() <em>Value Exp</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -101,7 +123,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	 */
 	@Override
 	public RelationDomain getOwner() {
-		if (eContainerFeatureID() != QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER) return null;
+		if (eContainerFeatureID() != (ElementImpl.ELEMENT_FEATURE_COUNT + 0)) return null;
 		return (RelationDomain)eInternalContainer();
 	}
 
@@ -111,7 +133,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	 * @generated
 	 */
 	public NotificationChain basicSetOwner(RelationDomain newOwner, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwner, QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwner, ElementImpl.ELEMENT_FEATURE_COUNT + 0, msgs);
 		return msgs;
 	}
 
@@ -122,19 +144,19 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	 */
 	@Override
 	public void setOwner(RelationDomain newOwner) {
-		if (newOwner != eInternalContainer() || (eContainerFeatureID() != QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER && newOwner != null)) {
+		if (newOwner != eInternalContainer() || (eContainerFeatureID() != (ElementImpl.ELEMENT_FEATURE_COUNT + 0) && newOwner != null)) {
 			if (EcoreUtil.isAncestor(this, newOwner))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwner != null)
-				msgs = ((InternalEObject)newOwner).eInverseAdd(this, QVTrelationPackage.RELATION_DOMAIN__DEFAULT_ASSIGNMENT, RelationDomain.class, msgs);
+				msgs = ((InternalEObject)newOwner).eInverseAdd(this, DomainImpl.DOMAIN_FEATURE_COUNT + 0, RelationDomain.class, msgs);
 			msgs = basicSetOwner(newOwner, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER, newOwner, newOwner));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 0, newOwner, newOwner));
 	}
 
 	/**
@@ -156,7 +178,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 		OCLExpression oldValueExp = valueExp;
 		valueExp = newValueExp;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP, oldValueExp, newValueExp);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 1, oldValueExp, newValueExp);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -172,14 +194,14 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 		if (newValueExp != valueExp) {
 			NotificationChain msgs = null;
 			if (valueExp != null)
-				msgs = ((InternalEObject)valueExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP, null, msgs);
+				msgs = ((InternalEObject)valueExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ElementImpl.ELEMENT_FEATURE_COUNT + 1), null, msgs);
 			if (newValueExp != null)
-				msgs = ((InternalEObject)newValueExp).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP, null, msgs);
+				msgs = ((InternalEObject)newValueExp).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ElementImpl.ELEMENT_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetValueExp(newValueExp, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP, newValueExp, newValueExp));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 1, newValueExp, newValueExp));
 	}
 
 	/**
@@ -194,7 +216,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 			variable = (Variable)eResolveProxy(oldVariable);
 			if (variable != oldVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VARIABLE, oldVariable, variable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 2, oldVariable, variable));
 			}
 		}
 		return variable;
@@ -219,7 +241,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 		Variable oldVariable = variable;
 		variable = newVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VARIABLE, oldVariable, variable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 2, oldVariable, variable));
 	}
 
 	/**
@@ -245,8 +267,8 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 			 *         'RelationDomainAssignment::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_RelationDomainAssignment_c_c_CompatibleTypeForValue);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_RelationDomainAssignment_c_c_CompatibleTypeForValue);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -256,11 +278,11 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 				/*@Caught*/ @NonNull Object CAUGHT_result;
 				try {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression valueExp = this.getValueExp();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = valueExp.getType();
+					final /*@NonInvalid*/ @NonNull OCLExpression valueExp = this.getValueExp();
+					final /*@NonInvalid*/ @Nullable Type type = valueExp.getType();
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Variable variable = this.getVariable();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = variable.getType();
+					final /*@NonInvalid*/ @NonNull Variable variable = this.getVariable();
+					final /*@NonInvalid*/ @Nullable Type type_0 = variable.getType();
 					final /*@Thrown*/ boolean result = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 					CAUGHT_result = result;
 				}
@@ -285,7 +307,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwner((RelationDomain)otherEnd, msgs);
@@ -301,9 +323,9 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return basicSetOwner(null, msgs);
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return basicSetValueExp(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -317,8 +339,8 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER:
-				return eInternalContainer().eInverseRemove(this, QVTrelationPackage.RELATION_DOMAIN__DEFAULT_ASSIGNMENT, RelationDomain.class, msgs);
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
+				return eInternalContainer().eInverseRemove(this, DomainImpl.DOMAIN_FEATURE_COUNT + 0, RelationDomain.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -331,11 +353,11 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return getOwner();
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return getValueExp();
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VARIABLE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				if (resolve) return getVariable();
 				return basicGetVariable();
 		}
@@ -350,13 +372,13 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setOwner((RelationDomain)newValue);
 				return;
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setValueExp((OCLExpression)newValue);
 				return;
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VARIABLE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setVariable((Variable)newValue);
 				return;
 		}
@@ -371,13 +393,13 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setOwner((RelationDomain)null);
 				return;
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setValueExp((OCLExpression)null);
 				return;
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VARIABLE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setVariable((Variable)null);
 				return;
 		}
@@ -392,11 +414,11 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__OWNER:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return getOwner() != null;
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return valueExp != null;
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT__VARIABLE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return variable != null;
 		}
 		return super.eIsSet(featureID);
@@ -411,7 +433,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP:
+			case ElementImpl.ELEMENT_OPERATION_COUNT + 0:
 				return validateCompatibleTypeForValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

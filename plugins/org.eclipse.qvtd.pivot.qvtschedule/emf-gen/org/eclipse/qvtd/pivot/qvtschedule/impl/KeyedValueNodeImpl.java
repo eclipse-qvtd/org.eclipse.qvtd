@@ -48,6 +48,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class KeyedValueNodeImpl extends OperationNodeImpl implements KeyedValueNode {
 	/**
+	 * The number of structural features of the '<em>Keyed Value Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int KEYED_VALUE_NODE_FEATURE_COUNT = OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Keyed Value Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int KEYED_VALUE_NODE_OPERATION_COUNT = OperationNodeImpl.OPERATION_NODE_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getClassDatumValue() <em>Class Datum Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -88,7 +104,7 @@ public class KeyedValueNodeImpl extends OperationNodeImpl implements KeyedValueN
 			classDatumValue = (ClassDatum)eResolveProxy(oldClassDatumValue);
 			if (classDatumValue != oldClassDatumValue) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.KEYED_VALUE_NODE__CLASS_DATUM_VALUE, oldClassDatumValue, classDatumValue));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldClassDatumValue, classDatumValue));
 			}
 		}
 		return classDatumValue;
@@ -113,7 +129,7 @@ public class KeyedValueNodeImpl extends OperationNodeImpl implements KeyedValueN
 		ClassDatum oldClassDatumValue = classDatumValue;
 		classDatumValue = newClassDatumValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.KEYED_VALUE_NODE__CLASS_DATUM_VALUE, oldClassDatumValue, classDatumValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldClassDatumValue, classDatumValue));
 	}
 
 	/**
@@ -124,7 +140,7 @@ public class KeyedValueNodeImpl extends OperationNodeImpl implements KeyedValueN
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.KEYED_VALUE_NODE__CLASS_DATUM_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				if (resolve) return getClassDatumValue();
 				return basicGetClassDatumValue();
 		}
@@ -139,7 +155,7 @@ public class KeyedValueNodeImpl extends OperationNodeImpl implements KeyedValueN
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.KEYED_VALUE_NODE__CLASS_DATUM_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				setClassDatumValue((ClassDatum)newValue);
 				return;
 		}
@@ -154,7 +170,7 @@ public class KeyedValueNodeImpl extends OperationNodeImpl implements KeyedValueN
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.KEYED_VALUE_NODE__CLASS_DATUM_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				setClassDatumValue((ClassDatum)null);
 				return;
 		}
@@ -169,7 +185,7 @@ public class KeyedValueNodeImpl extends OperationNodeImpl implements KeyedValueN
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.KEYED_VALUE_NODE__CLASS_DATUM_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				return classDatumValue != null;
 		}
 		return super.eIsSet(featureID);

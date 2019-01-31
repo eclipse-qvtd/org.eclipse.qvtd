@@ -49,6 +49,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class MergedPartitionImpl extends BasicPartitionImpl implements MergedPartition {
 	/**
+	 * The number of structural features of the '<em>Merged Partition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MERGED_PARTITION_FEATURE_COUNT = BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Merged Partition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MERGED_PARTITION_OPERATION_COUNT = BasicPartitionImpl.BASIC_PARTITION_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getOwnedMergedPartitions() <em>Owned Merged Partitions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -85,7 +101,7 @@ public class MergedPartitionImpl extends BasicPartitionImpl implements MergedPar
 	@Override
 	public List<BasicPartition> getOwnedMergedPartitions() {
 		if (ownedMergedPartitions == null) {
-			ownedMergedPartitions = new EObjectContainmentWithInverseEList<BasicPartition>(BasicPartition.class, this, QVTschedulePackage.MERGED_PARTITION__OWNED_MERGED_PARTITIONS, QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION);
+			ownedMergedPartitions = new EObjectContainmentWithInverseEList<BasicPartition>(BasicPartition.class, this, BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 0, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15);
 		}
 		return ownedMergedPartitions;
 	}
@@ -99,7 +115,7 @@ public class MergedPartitionImpl extends BasicPartitionImpl implements MergedPar
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.MERGED_PARTITION__OWNED_MERGED_PARTITIONS:
+			case BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 0:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedMergedPartitions()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -113,7 +129,7 @@ public class MergedPartitionImpl extends BasicPartitionImpl implements MergedPar
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.MERGED_PARTITION__OWNED_MERGED_PARTITIONS:
+			case BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedMergedPartitions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -127,7 +143,7 @@ public class MergedPartitionImpl extends BasicPartitionImpl implements MergedPar
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.MERGED_PARTITION__OWNED_MERGED_PARTITIONS:
+			case BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 0:
 				return getOwnedMergedPartitions();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -142,7 +158,7 @@ public class MergedPartitionImpl extends BasicPartitionImpl implements MergedPar
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.MERGED_PARTITION__OWNED_MERGED_PARTITIONS:
+			case BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 0:
 				getOwnedMergedPartitions().clear();
 				getOwnedMergedPartitions().addAll((Collection<? extends BasicPartition>)newValue);
 				return;
@@ -158,7 +174,7 @@ public class MergedPartitionImpl extends BasicPartitionImpl implements MergedPar
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.MERGED_PARTITION__OWNED_MERGED_PARTITIONS:
+			case BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 0:
 				getOwnedMergedPartitions().clear();
 				return;
 		}
@@ -173,7 +189,7 @@ public class MergedPartitionImpl extends BasicPartitionImpl implements MergedPar
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.MERGED_PARTITION__OWNED_MERGED_PARTITIONS:
+			case BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 0:
 				return ownedMergedPartitions != null && !ownedMergedPartitions.isEmpty();
 		}
 		return super.eIsSet(featureID);

@@ -47,6 +47,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class KeyPartEdgeImpl extends ArgumentEdgeImpl implements KeyPartEdge {
 	/**
+	 * The number of structural features of the '<em>Key Part Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int KEY_PART_EDGE_FEATURE_COUNT = ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Key Part Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int KEY_PART_EDGE_OPERATION_COUNT = ArgumentEdgeImpl.ARGUMENT_EDGE_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getReferredPart() <em>Referred Part</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -87,7 +103,7 @@ public class KeyPartEdgeImpl extends ArgumentEdgeImpl implements KeyPartEdge {
 			referredPart = (PropertyDatum)eResolveProxy(oldReferredPart);
 			if (referredPart != oldReferredPart) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.KEY_PART_EDGE__REFERRED_PART, oldReferredPart, referredPart));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0, oldReferredPart, referredPart));
 			}
 		}
 		return referredPart;
@@ -112,7 +128,7 @@ public class KeyPartEdgeImpl extends ArgumentEdgeImpl implements KeyPartEdge {
 		PropertyDatum oldReferredPart = referredPart;
 		referredPart = newReferredPart;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.KEY_PART_EDGE__REFERRED_PART, oldReferredPart, referredPart));
+			eNotify(new ENotificationImpl(this, Notification.SET, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0, oldReferredPart, referredPart));
 	}
 
 	/**
@@ -123,7 +139,7 @@ public class KeyPartEdgeImpl extends ArgumentEdgeImpl implements KeyPartEdge {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.KEY_PART_EDGE__REFERRED_PART:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				if (resolve) return getReferredPart();
 				return basicGetReferredPart();
 		}
@@ -138,7 +154,7 @@ public class KeyPartEdgeImpl extends ArgumentEdgeImpl implements KeyPartEdge {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.KEY_PART_EDGE__REFERRED_PART:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				setReferredPart((PropertyDatum)newValue);
 				return;
 		}
@@ -153,7 +169,7 @@ public class KeyPartEdgeImpl extends ArgumentEdgeImpl implements KeyPartEdge {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.KEY_PART_EDGE__REFERRED_PART:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				setReferredPart((PropertyDatum)null);
 				return;
 		}
@@ -168,7 +184,7 @@ public class KeyPartEdgeImpl extends ArgumentEdgeImpl implements KeyPartEdge {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.KEY_PART_EDGE__REFERRED_PART:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				return referredPart != null;
 		}
 		return super.eIsSet(featureID);

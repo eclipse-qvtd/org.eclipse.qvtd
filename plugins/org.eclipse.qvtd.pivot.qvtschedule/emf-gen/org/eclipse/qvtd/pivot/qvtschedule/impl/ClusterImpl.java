@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 
 import org.eclipse.ocl.pivot.util.Visitor;
@@ -63,6 +64,24 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  * @generated
  */
 public class ClusterImpl extends NamedElementImpl implements Cluster {
+	/**
+	 * The number of structural features of the '<em>Cluster</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLUSTER_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The number of operations of the '<em>Cluster</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLUSTER_OPERATION_COUNT = NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0;
+
 	/**
 	 * The default value of the '{@link #getSymbolName() <em>Symbol Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -182,7 +201,7 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 		String oldSymbolName = symbolName;
 		symbolName = newSymbolName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CLUSTER__SYMBOL_NAME, oldSymbolName, symbolName));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0, oldSymbolName, symbolName));
 	}
 
 	/**
@@ -192,7 +211,7 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	 */
 	@Override
 	public Region getOwningRegion() {
-		if (eContainerFeatureID() != QVTschedulePackage.CLUSTER__OWNING_REGION) return null;
+		if (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1)) return null;
 		return (Region)eInternalContainer();
 	}
 
@@ -202,7 +221,7 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningRegion(Region newOwningRegion, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningRegion, QVTschedulePackage.CLUSTER__OWNING_REGION, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningRegion, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, msgs);
 		return msgs;
 	}
 
@@ -213,19 +232,19 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	 */
 	@Override
 	public void setOwningRegion(Region newOwningRegion) {
-		if (newOwningRegion != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.CLUSTER__OWNING_REGION && newOwningRegion != null)) {
+		if (newOwningRegion != eInternalContainer() || (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1) && newOwningRegion != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningRegion))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningRegion != null)
-				msgs = ((InternalEObject)newOwningRegion).eInverseAdd(this, QVTschedulePackage.REGION__OWNED_CLUSTERS, Region.class, msgs);
+				msgs = ((InternalEObject)newOwningRegion).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, Region.class, msgs);
 			msgs = basicSetOwningRegion(newOwningRegion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CLUSTER__OWNING_REGION, newOwningRegion, newOwningRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, newOwningRegion, newOwningRegion));
 	}
 
 	/**
@@ -236,7 +255,7 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	@Override
 	public List<Node> getMemberNodes() {
 		if (memberNodes == null) {
-			memberNodes = new EObjectWithInverseResolvingEList<Node>(Node.class, this, QVTschedulePackage.CLUSTER__MEMBER_NODES, QVTschedulePackage.NODE__CLUSTER);
+			memberNodes = new EObjectWithInverseResolvingEList<Node>(Node.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
 		}
 		return memberNodes;
 	}
@@ -249,7 +268,7 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	@Override
 	public List<Edge> getMemberEdges() {
 		if (memberEdges == null) {
-			memberEdges = new EObjectWithInverseResolvingEList<Edge>(Edge.class, this, QVTschedulePackage.CLUSTER__MEMBER_EDGES, QVTschedulePackage.EDGE__CLUSTER);
+			memberEdges = new EObjectWithInverseResolvingEList<Edge>(Edge.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
 		}
 		return memberEdges;
 	}
@@ -262,7 +281,7 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	@Override
 	public List<Cluster> getPrecedingClusters() {
 		if (precedingClusters == null) {
-			precedingClusters = new EObjectWithInverseResolvingEList.ManyInverse<Cluster>(Cluster.class, this, QVTschedulePackage.CLUSTER__PRECEDING_CLUSTERS, QVTschedulePackage.CLUSTER__SUCCEEDING_CLUSTERS);
+			precedingClusters = new EObjectWithInverseResolvingEList.ManyInverse<Cluster>(Cluster.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
 		}
 		return precedingClusters;
 	}
@@ -275,7 +294,7 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	@Override
 	public List<Cluster> getSucceedingClusters() {
 		if (succeedingClusters == null) {
-			succeedingClusters = new EObjectWithInverseResolvingEList.ManyInverse<Cluster>(Cluster.class, this, QVTschedulePackage.CLUSTER__SUCCEEDING_CLUSTERS, QVTschedulePackage.CLUSTER__PRECEDING_CLUSTERS);
+			succeedingClusters = new EObjectWithInverseResolvingEList.ManyInverse<Cluster>(Cluster.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
 		}
 		return succeedingClusters;
 	}
@@ -300,7 +319,7 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 		Integer oldDepth = depth;
 		depth = newDepth;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CLUSTER__DEPTH, oldDepth, depth));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6, oldDepth, depth));
 	}
 
 	/**
@@ -312,17 +331,17 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.CLUSTER__OWNING_REGION:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningRegion((Region)otherEnd, msgs);
-			case QVTschedulePackage.CLUSTER__MEMBER_NODES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMemberNodes()).basicAdd(otherEnd, msgs);
-			case QVTschedulePackage.CLUSTER__MEMBER_EDGES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMemberEdges()).basicAdd(otherEnd, msgs);
-			case QVTschedulePackage.CLUSTER__PRECEDING_CLUSTERS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPrecedingClusters()).basicAdd(otherEnd, msgs);
-			case QVTschedulePackage.CLUSTER__SUCCEEDING_CLUSTERS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSucceedingClusters()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -336,15 +355,15 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.CLUSTER__OWNING_REGION:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return basicSetOwningRegion(null, msgs);
-			case QVTschedulePackage.CLUSTER__MEMBER_NODES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getMemberNodes()).basicRemove(otherEnd, msgs);
-			case QVTschedulePackage.CLUSTER__MEMBER_EDGES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return ((InternalEList<?>)getMemberEdges()).basicRemove(otherEnd, msgs);
-			case QVTschedulePackage.CLUSTER__PRECEDING_CLUSTERS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return ((InternalEList<?>)getPrecedingClusters()).basicRemove(otherEnd, msgs);
-			case QVTschedulePackage.CLUSTER__SUCCEEDING_CLUSTERS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return ((InternalEList<?>)getSucceedingClusters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -358,8 +377,8 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTschedulePackage.CLUSTER__OWNING_REGION:
-				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.REGION__OWNED_CLUSTERS, Region.class, msgs);
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
+				return eInternalContainer().eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, Region.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -372,19 +391,19 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.CLUSTER__SYMBOL_NAME:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return getSymbolName();
-			case QVTschedulePackage.CLUSTER__OWNING_REGION:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return getOwningRegion();
-			case QVTschedulePackage.CLUSTER__MEMBER_NODES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return getMemberNodes();
-			case QVTschedulePackage.CLUSTER__MEMBER_EDGES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return getMemberEdges();
-			case QVTschedulePackage.CLUSTER__PRECEDING_CLUSTERS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return getPrecedingClusters();
-			case QVTschedulePackage.CLUSTER__SUCCEEDING_CLUSTERS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return getSucceedingClusters();
-			case QVTschedulePackage.CLUSTER__DEPTH:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return getDepth();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -399,29 +418,29 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.CLUSTER__SYMBOL_NAME:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setSymbolName((String)newValue);
 				return;
-			case QVTschedulePackage.CLUSTER__OWNING_REGION:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setOwningRegion((Region)newValue);
 				return;
-			case QVTschedulePackage.CLUSTER__MEMBER_NODES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getMemberNodes().clear();
 				getMemberNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case QVTschedulePackage.CLUSTER__MEMBER_EDGES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getMemberEdges().clear();
 				getMemberEdges().addAll((Collection<? extends Edge>)newValue);
 				return;
-			case QVTschedulePackage.CLUSTER__PRECEDING_CLUSTERS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				getPrecedingClusters().clear();
 				getPrecedingClusters().addAll((Collection<? extends Cluster>)newValue);
 				return;
-			case QVTschedulePackage.CLUSTER__SUCCEEDING_CLUSTERS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				getSucceedingClusters().clear();
 				getSucceedingClusters().addAll((Collection<? extends Cluster>)newValue);
 				return;
-			case QVTschedulePackage.CLUSTER__DEPTH:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				setDepth((Integer)newValue);
 				return;
 		}
@@ -436,25 +455,25 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.CLUSTER__SYMBOL_NAME:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setSymbolName(SYMBOL_NAME_EDEFAULT);
 				return;
-			case QVTschedulePackage.CLUSTER__OWNING_REGION:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setOwningRegion((Region)null);
 				return;
-			case QVTschedulePackage.CLUSTER__MEMBER_NODES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getMemberNodes().clear();
 				return;
-			case QVTschedulePackage.CLUSTER__MEMBER_EDGES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getMemberEdges().clear();
 				return;
-			case QVTschedulePackage.CLUSTER__PRECEDING_CLUSTERS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				getPrecedingClusters().clear();
 				return;
-			case QVTschedulePackage.CLUSTER__SUCCEEDING_CLUSTERS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				getSucceedingClusters().clear();
 				return;
-			case QVTschedulePackage.CLUSTER__DEPTH:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				setDepth(DEPTH_EDEFAULT);
 				return;
 		}
@@ -469,19 +488,19 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.CLUSTER__SYMBOL_NAME:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return SYMBOL_NAME_EDEFAULT == null ? symbolName != null : !SYMBOL_NAME_EDEFAULT.equals(symbolName);
-			case QVTschedulePackage.CLUSTER__OWNING_REGION:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return getOwningRegion() != null;
-			case QVTschedulePackage.CLUSTER__MEMBER_NODES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return memberNodes != null && !memberNodes.isEmpty();
-			case QVTschedulePackage.CLUSTER__MEMBER_EDGES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return memberEdges != null && !memberEdges.isEmpty();
-			case QVTschedulePackage.CLUSTER__PRECEDING_CLUSTERS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return precedingClusters != null && !precedingClusters.isEmpty();
-			case QVTschedulePackage.CLUSTER__SUCCEEDING_CLUSTERS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return succeedingClusters != null && !succeedingClusters.isEmpty();
-			case QVTschedulePackage.CLUSTER__DEPTH:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return DEPTH_EDEFAULT == null ? depth != null : !DEPTH_EDEFAULT.equals(depth);
 		}
 		return super.eIsSet(featureID);
@@ -496,7 +515,7 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == Symbolable.class) {
 			switch (derivedFeatureID) {
-				case QVTschedulePackage.CLUSTER__SYMBOL_NAME: return QVTschedulePackage.SYMBOLABLE__SYMBOL_NAME;
+				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0: return 0;
 				default: return -1;
 			}
 		}
@@ -512,7 +531,7 @@ public class ClusterImpl extends NamedElementImpl implements Cluster {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == Symbolable.class) {
 			switch (baseFeatureID) {
-				case QVTschedulePackage.SYMBOLABLE__SYMBOL_NAME: return QVTschedulePackage.CLUSTER__SYMBOL_NAME;
+				case 0: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}

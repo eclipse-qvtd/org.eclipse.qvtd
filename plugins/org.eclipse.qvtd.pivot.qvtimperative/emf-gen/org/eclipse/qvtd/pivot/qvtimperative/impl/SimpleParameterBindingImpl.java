@@ -26,6 +26,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanImpliesOperation;
@@ -36,6 +38,8 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameterBinding;
@@ -56,6 +60,24 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * @generated
  */
 public class SimpleParameterBindingImpl extends MappingParameterBindingImpl implements SimpleParameterBinding {
+	/**
+	 * The number of structural features of the '<em>Simple Parameter Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SIMPLE_PARAMETER_BINDING_FEATURE_COUNT = MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Simple Parameter Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SIMPLE_PARAMETER_BINDING_OPERATION_COUNT = MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_OPERATION_COUNT + 2;
+
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -124,7 +146,7 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 		OCLExpression oldValue = value;
 		value = newValue;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SIMPLE_PARAMETER_BINDING__VALUE, oldValue, newValue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0, oldValue, newValue);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -140,14 +162,14 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 		if (newValue != value) {
 			NotificationChain msgs = null;
 			if (value != null)
-				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.SIMPLE_PARAMETER_BINDING__VALUE, null, msgs);
+				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0), null, msgs);
 			if (newValue != null)
-				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.SIMPLE_PARAMETER_BINDING__VALUE, null, msgs);
+				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0), null, msgs);
 			msgs = basicSetValue(newValue, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SIMPLE_PARAMETER_BINDING__VALUE, newValue, newValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0, newValue, newValue));
 	}
 
 	/**
@@ -170,7 +192,7 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 		boolean oldIsCheck = isCheck;
 		isCheck = newIsCheck;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SIMPLE_PARAMETER_BINDING__IS_CHECK, oldIsCheck, isCheck));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1, oldIsCheck, isCheck));
 	}
 
 	/**
@@ -196,8 +218,8 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 			 *         'SimpleParameterBinding::CompatibleTypeForCheckedValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SimpleParameterBinding_c_c_CompatibleTypeForCheckedValue);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SimpleParameterBinding_c_c_CompatibleTypeForCheckedValue);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -210,11 +232,11 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 					/*@Thrown*/ boolean result;
 					if (isCheck) {
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameter boundVariable = this.getBoundVariable();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = boundVariable.getType();
+						final /*@NonInvalid*/ @NonNull MappingParameter boundVariable = this.getBoundVariable();
+						final /*@NonInvalid*/ @Nullable Type type = boundVariable.getType();
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value = this.getValue();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = value.getType();
+						final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
+						final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
 						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 						result = conformsTo;
 					}
@@ -259,8 +281,8 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 			 *         'SimpleParameterBinding::CompatibleTypeForUncheckedValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SimpleParameterBinding_c_c_CompatibleTypeForUncheckedValue);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SimpleParameterBinding_c_c_CompatibleTypeForUncheckedValue);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -270,22 +292,22 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 				/*@Caught*/ @Nullable Object CAUGHT_result;
 				try {
 					final /*@NonInvalid*/ boolean isCheck = this.isIsCheck();
-					final /*@NonInvalid*/ java.lang.@Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isCheck);
+					final /*@NonInvalid*/ @Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isCheck);
 					/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
 					try {
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value = this.getValue();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = value.getType();
+						final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
+						final /*@NonInvalid*/ @Nullable Type type = value.getType();
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull MappingParameter boundVariable = this.getBoundVariable();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = boundVariable.getType();
+						final /*@NonInvalid*/ @NonNull MappingParameter boundVariable = this.getBoundVariable();
+						final /*@NonInvalid*/ @Nullable Type type_0 = boundVariable.getType();
 						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 						CAUGHT_conformsTo = conformsTo;
 					}
 					catch (Exception e) {
 						CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
 					}
-					final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(not, CAUGHT_conformsTo);
+					final /*@Thrown*/ @Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(not, CAUGHT_conformsTo);
 					CAUGHT_result = result;
 				}
 				catch (Exception e) {
@@ -319,7 +341,7 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.SIMPLE_PARAMETER_BINDING__VALUE:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
 				return basicSetValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -333,9 +355,9 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.SIMPLE_PARAMETER_BINDING__VALUE:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
 				return getValue();
-			case QVTimperativePackage.SIMPLE_PARAMETER_BINDING__IS_CHECK:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1:
 				return isIsCheck();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -349,10 +371,10 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.SIMPLE_PARAMETER_BINDING__VALUE:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
 				setValue((OCLExpression)newValue);
 				return;
-			case QVTimperativePackage.SIMPLE_PARAMETER_BINDING__IS_CHECK:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1:
 				setIsCheck((Boolean)newValue);
 				return;
 		}
@@ -367,10 +389,10 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.SIMPLE_PARAMETER_BINDING__VALUE:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
 				setValue((OCLExpression)null);
 				return;
-			case QVTimperativePackage.SIMPLE_PARAMETER_BINDING__IS_CHECK:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1:
 				setIsCheck(IS_CHECK_EDEFAULT);
 				return;
 		}
@@ -385,9 +407,9 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.SIMPLE_PARAMETER_BINDING__VALUE:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
 				return value != null;
-			case QVTimperativePackage.SIMPLE_PARAMETER_BINDING__IS_CHECK:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1:
 				return isCheck != IS_CHECK_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -402,9 +424,9 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTimperativePackage.SIMPLE_PARAMETER_BINDING___VALIDATE_COMPATIBLE_TYPE_FOR_CHECKED_VALUE__DIAGNOSTICCHAIN_MAP:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_OPERATION_COUNT + 0:
 				return validateCompatibleTypeForCheckedValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTimperativePackage.SIMPLE_PARAMETER_BINDING___VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE__DIAGNOSTICCHAIN_MAP:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_OPERATION_COUNT + 1:
 				return validateCompatibleTypeForUncheckedValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

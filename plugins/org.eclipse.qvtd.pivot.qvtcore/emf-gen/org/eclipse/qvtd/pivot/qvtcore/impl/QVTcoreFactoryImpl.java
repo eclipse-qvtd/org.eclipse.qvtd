@@ -67,19 +67,19 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case QVTcorePackage.BOTTOM_PATTERN: return createBottomPattern();
-			case QVTcorePackage.BOTTOM_VARIABLE: return createBottomVariable();
-			case QVTcorePackage.CORE_DOMAIN: return createCoreDomain();
-			case QVTcorePackage.CORE_MODEL: return createCoreModel();
-			case QVTcorePackage.CORE_PATTERN: return createCorePattern();
-			case QVTcorePackage.ENFORCEMENT_OPERATION: return createEnforcementOperation();
-			case QVTcorePackage.GUARD_PATTERN: return createGuardPattern();
-			case QVTcorePackage.GUARD_VARIABLE: return createGuardVariable();
-			case QVTcorePackage.MAPPING: return createMapping();
-			case QVTcorePackage.OPPOSITE_PROPERTY_ASSIGNMENT: return createOppositePropertyAssignment();
-			case QVTcorePackage.PROPERTY_ASSIGNMENT: return createPropertyAssignment();
-			case QVTcorePackage.REALIZED_VARIABLE: return createRealizedVariable();
-			case QVTcorePackage.VARIABLE_ASSIGNMENT: return createVariableAssignment();
+			case 2: return createBottomPattern();
+			case 3: return createBottomVariable();
+			case 4: return createCoreDomain();
+			case 5: return createCoreModel();
+			case 6: return createCorePattern();
+			case 7: return createEnforcementOperation();
+			case 8: return createGuardPattern();
+			case 9: return createGuardVariable();
+			case 10: return createMapping();
+			case 12: return createOppositePropertyAssignment();
+			case 13: return createPropertyAssignment();
+			case 14: return createRealizedVariable();
+			case 15: return createVariableAssignment();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -93,7 +93,7 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case QVTcorePackage.ENFORCEMENT_MODE:
+			case 16:
 				return createEnforcementModeFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -108,7 +108,7 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case QVTcorePackage.ENFORCEMENT_MODE:
+			case 16:
 				return convertEnforcementModeToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");

@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
@@ -70,6 +71,22 @@ import com.google.common.collect.Iterables;
  * @generated
  */
 public abstract class RegionImpl extends NamedElementImpl implements Region {
+	/**
+	 * The number of structural features of the '<em>Region</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int REGION_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5;
+	/**
+	 * The number of operations of the '<em>Region</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int REGION_OPERATION_COUNT = NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0;
 	/**
 	 * The default value of the '{@link #getSymbolName() <em>Symbol Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -154,7 +171,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		String oldSymbolName = symbolName;
 		symbolName = newSymbolName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.REGION__SYMBOL_NAME, oldSymbolName, symbolName));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0, oldSymbolName, symbolName));
 	}
 
 	/**
@@ -165,7 +182,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public List<Edge> getOwnedEdges() {
 		if (ownedEdges == null) {
-			ownedEdges = new EObjectContainmentWithInverseEList<Edge>(Edge.class, this, QVTschedulePackage.REGION__OWNED_EDGES, QVTschedulePackage.EDGE__OWNING_REGION);
+			ownedEdges = new EObjectContainmentWithInverseEList<Edge>(Edge.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
 		}
 		return ownedEdges;
 	}
@@ -178,7 +195,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public List<Cluster> getOwnedClusters() {
 		if (ownedClusters == null) {
-			ownedClusters = new EObjectContainmentWithInverseEList<Cluster>(Cluster.class, this, QVTschedulePackage.REGION__OWNED_CLUSTERS, QVTschedulePackage.CLUSTER__OWNING_REGION);
+			ownedClusters = new EObjectContainmentWithInverseEList<Cluster>(Cluster.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
 		}
 		return ownedClusters;
 	}
@@ -195,7 +212,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 			rootRegion = (RootRegion)eResolveProxy(oldRootRegion);
 			if (rootRegion != oldRootRegion) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.REGION__ROOT_REGION, oldRootRegion, rootRegion));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4, oldRootRegion, rootRegion));
 			}
 		}
 		return rootRegion;
@@ -219,7 +236,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		RootRegion oldRootRegion = rootRegion;
 		rootRegion = newRootRegion;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.REGION__ROOT_REGION, oldRootRegion, newRootRegion);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4, oldRootRegion, newRootRegion);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -235,14 +252,14 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		if (newRootRegion != rootRegion) {
 			NotificationChain msgs = null;
 			if (rootRegion != null)
-				msgs = ((InternalEObject)rootRegion).eInverseRemove(this, QVTschedulePackage.ROOT_REGION__ACTIVE_REGIONS, RootRegion.class, msgs);
+				msgs = ((InternalEObject)rootRegion).eInverseRemove(this, RegionImpl.REGION_FEATURE_COUNT + 0, RootRegion.class, msgs);
 			if (newRootRegion != null)
-				msgs = ((InternalEObject)newRootRegion).eInverseAdd(this, QVTschedulePackage.ROOT_REGION__ACTIVE_REGIONS, RootRegion.class, msgs);
+				msgs = ((InternalEObject)newRootRegion).eInverseAdd(this, RegionImpl.REGION_FEATURE_COUNT + 0, RootRegion.class, msgs);
 			msgs = basicSetRootRegion(newRootRegion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.REGION__ROOT_REGION, newRootRegion, newRootRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4, newRootRegion, newRootRegion));
 	}
 
 	/**
@@ -253,7 +270,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public List<Node> getOwnedNodes() {
 		if (ownedNodes == null) {
-			ownedNodes = new EObjectContainmentWithInverseEList<Node>(Node.class, this, QVTschedulePackage.REGION__OWNED_NODES, QVTschedulePackage.NODE__OWNING_REGION);
+			ownedNodes = new EObjectContainmentWithInverseEList<Node>(Node.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, ElementImpl.ELEMENT_FEATURE_COUNT + 8);
 		}
 		return ownedNodes;
 	}
@@ -266,15 +283,15 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.REGION__SYMBOL_NAME:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return getSymbolName();
-			case QVTschedulePackage.REGION__OWNED_NODES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return getOwnedNodes();
-			case QVTschedulePackage.REGION__OWNED_EDGES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return getOwnedEdges();
-			case QVTschedulePackage.REGION__OWNED_CLUSTERS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return getOwnedClusters();
-			case QVTschedulePackage.REGION__ROOT_REGION:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				if (resolve) return getRootRegion();
 				return basicGetRootRegion();
 		}
@@ -290,22 +307,22 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.REGION__SYMBOL_NAME:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setSymbolName((String)newValue);
 				return;
-			case QVTschedulePackage.REGION__OWNED_NODES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getOwnedNodes().clear();
 				getOwnedNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case QVTschedulePackage.REGION__OWNED_EDGES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getOwnedEdges().clear();
 				getOwnedEdges().addAll((Collection<? extends Edge>)newValue);
 				return;
-			case QVTschedulePackage.REGION__OWNED_CLUSTERS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getOwnedClusters().clear();
 				getOwnedClusters().addAll((Collection<? extends Cluster>)newValue);
 				return;
-			case QVTschedulePackage.REGION__ROOT_REGION:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setRootRegion((RootRegion)newValue);
 				return;
 		}
@@ -320,19 +337,19 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.REGION__SYMBOL_NAME:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setSymbolName(SYMBOL_NAME_EDEFAULT);
 				return;
-			case QVTschedulePackage.REGION__OWNED_NODES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getOwnedNodes().clear();
 				return;
-			case QVTschedulePackage.REGION__OWNED_EDGES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getOwnedEdges().clear();
 				return;
-			case QVTschedulePackage.REGION__OWNED_CLUSTERS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getOwnedClusters().clear();
 				return;
-			case QVTschedulePackage.REGION__ROOT_REGION:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setRootRegion((RootRegion)null);
 				return;
 		}
@@ -347,15 +364,15 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.REGION__SYMBOL_NAME:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return SYMBOL_NAME_EDEFAULT == null ? symbolName != null : !SYMBOL_NAME_EDEFAULT.equals(symbolName);
-			case QVTschedulePackage.REGION__OWNED_NODES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return ownedNodes != null && !ownedNodes.isEmpty();
-			case QVTschedulePackage.REGION__OWNED_EDGES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return ownedEdges != null && !ownedEdges.isEmpty();
-			case QVTschedulePackage.REGION__OWNED_CLUSTERS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return ownedClusters != null && !ownedClusters.isEmpty();
-			case QVTschedulePackage.REGION__ROOT_REGION:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return rootRegion != null;
 		}
 		return super.eIsSet(featureID);
@@ -370,7 +387,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == Symbolable.class) {
 			switch (derivedFeatureID) {
-				case QVTschedulePackage.REGION__SYMBOL_NAME: return QVTschedulePackage.SYMBOLABLE__SYMBOL_NAME;
+				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0: return 0;
 				default: return -1;
 			}
 		}
@@ -386,7 +403,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == Symbolable.class) {
 			switch (baseFeatureID) {
-				case QVTschedulePackage.SYMBOLABLE__SYMBOL_NAME: return QVTschedulePackage.REGION__SYMBOL_NAME;
+				case 0: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -684,15 +701,15 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.REGION__OWNED_NODES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedNodes()).basicAdd(otherEnd, msgs);
-			case QVTschedulePackage.REGION__OWNED_EDGES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedEdges()).basicAdd(otherEnd, msgs);
-			case QVTschedulePackage.REGION__OWNED_CLUSTERS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedClusters()).basicAdd(otherEnd, msgs);
-			case QVTschedulePackage.REGION__ROOT_REGION:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				if (rootRegion != null)
-					msgs = ((InternalEObject)rootRegion).eInverseRemove(this, QVTschedulePackage.ROOT_REGION__ACTIVE_REGIONS, RootRegion.class, msgs);
+					msgs = ((InternalEObject)rootRegion).eInverseRemove(this, RegionImpl.REGION_FEATURE_COUNT + 0, RootRegion.class, msgs);
 				return basicSetRootRegion((RootRegion)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -706,13 +723,13 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.REGION__OWNED_NODES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return ((InternalEList<?>)getOwnedNodes()).basicRemove(otherEnd, msgs);
-			case QVTschedulePackage.REGION__OWNED_EDGES:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getOwnedEdges()).basicRemove(otherEnd, msgs);
-			case QVTschedulePackage.REGION__OWNED_CLUSTERS:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return ((InternalEList<?>)getOwnedClusters()).basicRemove(otherEnd, msgs);
-			case QVTschedulePackage.REGION__ROOT_REGION:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return basicSetRootRegion(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);

@@ -20,8 +20,15 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.internal.OCLExpressionImpl;
+import org.eclipse.ocl.pivot.internal.VariableImpl;
 import org.eclipse.ocl.pivot.internal.utilities.LazyXMIidAssigningResourceImpl;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+import org.eclipse.qvtd.pivot.qvtbase.impl.DomainImpl;
+import org.eclipse.qvtd.pivot.qvtbase.impl.PatternImpl;
+import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
+import org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationFactory;
@@ -767,70 +774,70 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		isCreated = true;
 
 		// Create classes and their features
-		domainPatternEClass = createEClass(DOMAIN_PATTERN);
-		createEReference(domainPatternEClass, DOMAIN_PATTERN__RELATION_DOMAIN);
-		createEReference(domainPatternEClass, DOMAIN_PATTERN__TEMPLATE_EXPRESSION);
+		domainPatternEClass = createEClass(0);
+		createEReference(domainPatternEClass, PatternImpl.PATTERN_FEATURE_COUNT + 0);
+		createEReference(domainPatternEClass, PatternImpl.PATTERN_FEATURE_COUNT + 1);
 
-		keyEClass = createEClass(KEY);
-		createEReference(keyEClass, KEY__IDENTIFIES);
-		createEReference(keyEClass, KEY__OPPOSITE_PART);
-		createEReference(keyEClass, KEY__PART);
-		createEReference(keyEClass, KEY__TRANSFORMATION);
-		createEOperation(keyEClass, KEY___VALIDATE_IDENTIFIES_IS_NOT_ABSTRACT__DIAGNOSTICCHAIN_MAP);
-		createEOperation(keyEClass, KEY___VALIDATE_IDENTIFIES_IS_AUSED_PACKAGE_CLASS__DIAGNOSTICCHAIN_MAP);
-		createEOperation(keyEClass, KEY___VALIDATE_NO_SUPER_KEYS__DIAGNOSTICCHAIN_MAP);
-		createEOperation(keyEClass, KEY___VALIDATE_IDENTIFIES_IS_UNIQUE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(keyEClass, KEY___VALIDATE_OPPOSITE_PARTS_HAVE_OPPOSITES__DIAGNOSTICCHAIN_MAP);
-		createEOperation(keyEClass, KEY___VALIDATE_OPPOSITE_PARTS_ARE_OPPOSITE_PARTS__DIAGNOSTICCHAIN_MAP);
-		createEOperation(keyEClass, KEY___VALIDATE_PARTS_ARE_PARTS__DIAGNOSTICCHAIN_MAP);
-		createEOperation(keyEClass, KEY___VALIDATE_PARTS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
+		keyEClass = createEClass(1);
+		createEReference(keyEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
+		createEReference(keyEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
+		createEReference(keyEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
+		createEReference(keyEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
+		createEOperation(keyEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 0);
+		createEOperation(keyEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 1);
+		createEOperation(keyEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 2);
+		createEOperation(keyEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 3);
+		createEOperation(keyEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 4);
+		createEOperation(keyEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 5);
+		createEOperation(keyEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 6);
+		createEOperation(keyEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 7);
 
-		relationEClass = createEClass(RELATION);
-		createEAttribute(relationEClass, RELATION__IS_TOP_LEVEL);
-		createEReference(relationEClass, RELATION__OPERATIONAL_IMPL);
-		createEReference(relationEClass, RELATION__VARIABLE);
-		createEReference(relationEClass, RELATION__WHEN);
-		createEReference(relationEClass, RELATION__WHERE);
-		createEOperation(relationEClass, RELATION___VALIDATE_DOMAINS_ARE_RELATION_DOMAINS__DIAGNOSTICCHAIN_MAP);
-		createEOperation(relationEClass, RELATION___VALIDATE_TOP_RELATION_OVERRIDDEN_BY_TOP_RELATION__DIAGNOSTICCHAIN_MAP);
-		createEOperation(relationEClass, RELATION___VALIDATE_TRANSFORMATION_IS_RELATIONAL_TRANSFORMATION__DIAGNOSTICCHAIN_MAP);
+		relationEClass = createEClass(2);
+		createEAttribute(relationEClass, RuleImpl.RULE_FEATURE_COUNT + 0);
+		createEReference(relationEClass, RuleImpl.RULE_FEATURE_COUNT + 1);
+		createEReference(relationEClass, RuleImpl.RULE_FEATURE_COUNT + 2);
+		createEReference(relationEClass, RuleImpl.RULE_FEATURE_COUNT + 3);
+		createEReference(relationEClass, RuleImpl.RULE_FEATURE_COUNT + 4);
+		createEOperation(relationEClass, RuleImpl.RULE_OPERATION_COUNT + 0);
+		createEOperation(relationEClass, RuleImpl.RULE_OPERATION_COUNT + 1);
+		createEOperation(relationEClass, RuleImpl.RULE_OPERATION_COUNT + 2);
 
-		relationCallExpEClass = createEClass(RELATION_CALL_EXP);
-		createEReference(relationCallExpEClass, RELATION_CALL_EXP__ARGUMENT);
-		createEReference(relationCallExpEClass, RELATION_CALL_EXP__REFERRED_RELATION);
-		createEOperation(relationCallExpEClass, RELATION_CALL_EXP___VALIDATE_MATCHING_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP);
-		createEOperation(relationCallExpEClass, RELATION_CALL_EXP___VALIDATE_WHERE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP);
-		createEOperation(relationCallExpEClass, RELATION_CALL_EXP___VALIDATE_DATA_TYPE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP);
+		relationCallExpEClass = createEClass(3);
+		createEReference(relationCallExpEClass, OCLExpressionImpl.OCL_EXPRESSION_FEATURE_COUNT + 0);
+		createEReference(relationCallExpEClass, OCLExpressionImpl.OCL_EXPRESSION_FEATURE_COUNT + 1);
+		createEOperation(relationCallExpEClass, OCLExpressionImpl.OCL_EXPRESSION_OPERATION_COUNT + 0);
+		createEOperation(relationCallExpEClass, OCLExpressionImpl.OCL_EXPRESSION_OPERATION_COUNT + 1);
+		createEOperation(relationCallExpEClass, OCLExpressionImpl.OCL_EXPRESSION_OPERATION_COUNT + 2);
 
-		relationDomainEClass = createEClass(RELATION_DOMAIN);
-		createEReference(relationDomainEClass, RELATION_DOMAIN__DEFAULT_ASSIGNMENT);
-		createEReference(relationDomainEClass, RELATION_DOMAIN__PATTERN);
-		createEReference(relationDomainEClass, RELATION_DOMAIN__ROOT_VARIABLE);
-		createEOperation(relationDomainEClass, RELATION_DOMAIN___VALIDATE_RELATION_DOMAIN_ASSIGNMENTS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
+		relationDomainEClass = createEClass(4);
+		createEReference(relationDomainEClass, DomainImpl.DOMAIN_FEATURE_COUNT + 0);
+		createEReference(relationDomainEClass, DomainImpl.DOMAIN_FEATURE_COUNT + 1);
+		createEReference(relationDomainEClass, DomainImpl.DOMAIN_FEATURE_COUNT + 2);
+		createEOperation(relationDomainEClass, DomainImpl.DOMAIN_OPERATION_COUNT + 0);
 
-		relationDomainAssignmentEClass = createEClass(RELATION_DOMAIN_ASSIGNMENT);
-		createEReference(relationDomainAssignmentEClass, RELATION_DOMAIN_ASSIGNMENT__OWNER);
-		createEReference(relationDomainAssignmentEClass, RELATION_DOMAIN_ASSIGNMENT__VALUE_EXP);
-		createEReference(relationDomainAssignmentEClass, RELATION_DOMAIN_ASSIGNMENT__VARIABLE);
-		createEOperation(relationDomainAssignmentEClass, RELATION_DOMAIN_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
+		relationDomainAssignmentEClass = createEClass(5);
+		createEReference(relationDomainAssignmentEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
+		createEReference(relationDomainAssignmentEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
+		createEReference(relationDomainAssignmentEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
+		createEOperation(relationDomainAssignmentEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 0);
 
-		relationImplementationEClass = createEClass(RELATION_IMPLEMENTATION);
-		createEReference(relationImplementationEClass, RELATION_IMPLEMENTATION__IMPL);
-		createEReference(relationImplementationEClass, RELATION_IMPLEMENTATION__IN_DIRECTION_OF);
-		createEReference(relationImplementationEClass, RELATION_IMPLEMENTATION__RELATION);
+		relationImplementationEClass = createEClass(6);
+		createEReference(relationImplementationEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
+		createEReference(relationImplementationEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
+		createEReference(relationImplementationEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
 
-		relationModelEClass = createEClass(RELATION_MODEL);
+		relationModelEClass = createEClass(7);
 
-		relationalTransformationEClass = createEClass(RELATIONAL_TRANSFORMATION);
-		createEReference(relationalTransformationEClass, RELATIONAL_TRANSFORMATION__OWNED_KEY);
-		createEOperation(relationalTransformationEClass, RELATIONAL_TRANSFORMATION___VALIDATE_RULES_ARE_RELATIONS__DIAGNOSTICCHAIN_MAP);
+		relationalTransformationEClass = createEClass(8);
+		createEReference(relationalTransformationEClass, TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0);
+		createEOperation(relationalTransformationEClass, TransformationImpl.TRANSFORMATION_OPERATION_COUNT + 0);
 
-		sharedVariableEClass = createEClass(SHARED_VARIABLE);
-		createEReference(sharedVariableEClass, SHARED_VARIABLE__TYPED_MODEL);
-		createEOperation(sharedVariableEClass, SHARED_VARIABLE___VALIDATE_COMPATIBLE_TYPE_FOR_INITIALIZER__DIAGNOSTICCHAIN_MAP);
-		createEOperation(sharedVariableEClass, SHARED_VARIABLE___VALIDATE_COMPATIBLE_NULLITY_FOR_INITIALIZER__DIAGNOSTICCHAIN_MAP);
+		sharedVariableEClass = createEClass(9);
+		createEReference(sharedVariableEClass, VariableImpl.VARIABLE_FEATURE_COUNT + 0);
+		createEOperation(sharedVariableEClass, VariableImpl.VARIABLE_OPERATION_COUNT + 0);
+		createEOperation(sharedVariableEClass, VariableImpl.VARIABLE_OPERATION_COUNT + 1);
 
-		templateVariableEClass = createEClass(TEMPLATE_VARIABLE);
+		templateVariableEClass = createEClass(10);
 	}
 
 	/**

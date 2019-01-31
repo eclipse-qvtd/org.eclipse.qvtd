@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.internal.ModelImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
@@ -53,6 +54,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  * @generated
  */
 public class OperationRegionImpl extends RegionImpl implements OperationRegion {
+	/**
+	 * The number of structural features of the '<em>Operation Region</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_REGION_FEATURE_COUNT = RegionImpl.REGION_FEATURE_COUNT + 5;
+	/**
+	 * The number of operations of the '<em>Operation Region</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_REGION_OPERATION_COUNT = RegionImpl.REGION_OPERATION_COUNT + 0;
 	/**
 	 * The cached value of the '{@link #getDependencyNodes() <em>Dependency Nodes</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -117,7 +134,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@Override
 	public List<Node> getDependencyNodes() {
 		if (dependencyNodes == null) {
-			dependencyNodes = new EObjectResolvingEList<Node>(Node.class, this, QVTschedulePackage.OPERATION_REGION__DEPENDENCY_NODES);
+			dependencyNodes = new EObjectResolvingEList<Node>(Node.class, this, RegionImpl.REGION_FEATURE_COUNT + 0);
 		}
 		return dependencyNodes;
 	}
@@ -130,7 +147,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@Override
 	public List<Node> getHeadNodes() {
 		if (headNodes == null) {
-			headNodes = new EObjectResolvingEList<Node>(Node.class, this, QVTschedulePackage.OPERATION_REGION__HEAD_NODES);
+			headNodes = new EObjectResolvingEList<Node>(Node.class, this, RegionImpl.REGION_FEATURE_COUNT + 1);
 		}
 		return headNodes;
 	}
@@ -147,7 +164,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 			referredOperation = (Operation)eResolveProxy(oldReferredOperation);
 			if (referredOperation != oldReferredOperation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.OPERATION_REGION__REFERRED_OPERATION, oldReferredOperation, referredOperation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RegionImpl.REGION_FEATURE_COUNT + 2, oldReferredOperation, referredOperation));
 			}
 		}
 		return referredOperation;
@@ -172,7 +189,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 		Operation oldReferredOperation = referredOperation;
 		referredOperation = newReferredOperation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.OPERATION_REGION__REFERRED_OPERATION, oldReferredOperation, referredOperation));
+			eNotify(new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 2, oldReferredOperation, referredOperation));
 	}
 
 	/**
@@ -187,7 +204,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 			resultNode = (Node)eResolveProxy(oldResultNode);
 			if (resultNode != oldResultNode) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.OPERATION_REGION__RESULT_NODE, oldResultNode, resultNode));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RegionImpl.REGION_FEATURE_COUNT + 3, oldResultNode, resultNode));
 			}
 		}
 		return resultNode;
@@ -212,7 +229,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 		Node oldResultNode = resultNode;
 		resultNode = newResultNode;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.OPERATION_REGION__RESULT_NODE, oldResultNode, resultNode));
+			eNotify(new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 3, oldResultNode, resultNode));
 	}
 
 	/**
@@ -222,7 +239,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	 */
 	@Override
 	public ScheduleModel getOwningScheduleModel() {
-		if (eContainerFeatureID() != QVTschedulePackage.OPERATION_REGION__OWNING_SCHEDULE_MODEL) return null;
+		if (eContainerFeatureID() != (RegionImpl.REGION_FEATURE_COUNT + 4)) return null;
 		return (ScheduleModel)eInternalContainer();
 	}
 
@@ -232,7 +249,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningScheduleModel(ScheduleModel newOwningScheduleModel, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningScheduleModel, QVTschedulePackage.OPERATION_REGION__OWNING_SCHEDULE_MODEL, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningScheduleModel, RegionImpl.REGION_FEATURE_COUNT + 4, msgs);
 		return msgs;
 	}
 
@@ -243,19 +260,19 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	 */
 	@Override
 	public void setOwningScheduleModel(ScheduleModel newOwningScheduleModel) {
-		if (newOwningScheduleModel != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.OPERATION_REGION__OWNING_SCHEDULE_MODEL && newOwningScheduleModel != null)) {
+		if (newOwningScheduleModel != eInternalContainer() || (eContainerFeatureID() != (RegionImpl.REGION_FEATURE_COUNT + 4) && newOwningScheduleModel != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningScheduleModel))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningScheduleModel != null)
-				msgs = ((InternalEObject)newOwningScheduleModel).eInverseAdd(this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_OPERATION_REGIONS, ScheduleModel.class, msgs);
+				msgs = ((InternalEObject)newOwningScheduleModel).eInverseAdd(this, ModelImpl.MODEL_FEATURE_COUNT + 2, ScheduleModel.class, msgs);
 			msgs = basicSetOwningScheduleModel(newOwningScheduleModel, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.OPERATION_REGION__OWNING_SCHEDULE_MODEL, newOwningScheduleModel, newOwningScheduleModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 4, newOwningScheduleModel, newOwningScheduleModel));
 	}
 
 	/**
@@ -266,7 +283,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_REGION__OWNING_SCHEDULE_MODEL:
+			case RegionImpl.REGION_FEATURE_COUNT + 4:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningScheduleModel((ScheduleModel)otherEnd, msgs);
@@ -282,7 +299,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_REGION__OWNING_SCHEDULE_MODEL:
+			case RegionImpl.REGION_FEATURE_COUNT + 4:
 				return basicSetOwningScheduleModel(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -296,8 +313,8 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTschedulePackage.OPERATION_REGION__OWNING_SCHEDULE_MODEL:
-				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_OPERATION_REGIONS, ScheduleModel.class, msgs);
+			case RegionImpl.REGION_FEATURE_COUNT + 4:
+				return eInternalContainer().eInverseRemove(this, ModelImpl.MODEL_FEATURE_COUNT + 2, ScheduleModel.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -310,17 +327,17 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_REGION__DEPENDENCY_NODES:
+			case RegionImpl.REGION_FEATURE_COUNT + 0:
 				return getDependencyNodes();
-			case QVTschedulePackage.OPERATION_REGION__HEAD_NODES:
+			case RegionImpl.REGION_FEATURE_COUNT + 1:
 				return getHeadNodes();
-			case QVTschedulePackage.OPERATION_REGION__REFERRED_OPERATION:
+			case RegionImpl.REGION_FEATURE_COUNT + 2:
 				if (resolve) return getReferredOperation();
 				return basicGetReferredOperation();
-			case QVTschedulePackage.OPERATION_REGION__RESULT_NODE:
+			case RegionImpl.REGION_FEATURE_COUNT + 3:
 				if (resolve) return getResultNode();
 				return basicGetResultNode();
-			case QVTschedulePackage.OPERATION_REGION__OWNING_SCHEDULE_MODEL:
+			case RegionImpl.REGION_FEATURE_COUNT + 4:
 				return getOwningScheduleModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -335,21 +352,21 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_REGION__DEPENDENCY_NODES:
+			case RegionImpl.REGION_FEATURE_COUNT + 0:
 				getDependencyNodes().clear();
 				getDependencyNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case QVTschedulePackage.OPERATION_REGION__HEAD_NODES:
+			case RegionImpl.REGION_FEATURE_COUNT + 1:
 				getHeadNodes().clear();
 				getHeadNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case QVTschedulePackage.OPERATION_REGION__REFERRED_OPERATION:
+			case RegionImpl.REGION_FEATURE_COUNT + 2:
 				setReferredOperation((Operation)newValue);
 				return;
-			case QVTschedulePackage.OPERATION_REGION__RESULT_NODE:
+			case RegionImpl.REGION_FEATURE_COUNT + 3:
 				setResultNode((Node)newValue);
 				return;
-			case QVTschedulePackage.OPERATION_REGION__OWNING_SCHEDULE_MODEL:
+			case RegionImpl.REGION_FEATURE_COUNT + 4:
 				setOwningScheduleModel((ScheduleModel)newValue);
 				return;
 		}
@@ -364,19 +381,19 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_REGION__DEPENDENCY_NODES:
+			case RegionImpl.REGION_FEATURE_COUNT + 0:
 				getDependencyNodes().clear();
 				return;
-			case QVTschedulePackage.OPERATION_REGION__HEAD_NODES:
+			case RegionImpl.REGION_FEATURE_COUNT + 1:
 				getHeadNodes().clear();
 				return;
-			case QVTschedulePackage.OPERATION_REGION__REFERRED_OPERATION:
+			case RegionImpl.REGION_FEATURE_COUNT + 2:
 				setReferredOperation((Operation)null);
 				return;
-			case QVTschedulePackage.OPERATION_REGION__RESULT_NODE:
+			case RegionImpl.REGION_FEATURE_COUNT + 3:
 				setResultNode((Node)null);
 				return;
-			case QVTschedulePackage.OPERATION_REGION__OWNING_SCHEDULE_MODEL:
+			case RegionImpl.REGION_FEATURE_COUNT + 4:
 				setOwningScheduleModel((ScheduleModel)null);
 				return;
 		}
@@ -391,15 +408,15 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_REGION__DEPENDENCY_NODES:
+			case RegionImpl.REGION_FEATURE_COUNT + 0:
 				return dependencyNodes != null && !dependencyNodes.isEmpty();
-			case QVTschedulePackage.OPERATION_REGION__HEAD_NODES:
+			case RegionImpl.REGION_FEATURE_COUNT + 1:
 				return headNodes != null && !headNodes.isEmpty();
-			case QVTschedulePackage.OPERATION_REGION__REFERRED_OPERATION:
+			case RegionImpl.REGION_FEATURE_COUNT + 2:
 				return referredOperation != null;
-			case QVTschedulePackage.OPERATION_REGION__RESULT_NODE:
+			case RegionImpl.REGION_FEATURE_COUNT + 3:
 				return resultNode != null;
-			case QVTschedulePackage.OPERATION_REGION__OWNING_SCHEDULE_MODEL:
+			case RegionImpl.REGION_FEATURE_COUNT + 4:
 				return getOwningScheduleModel() != null;
 		}
 		return super.eIsSet(featureID);

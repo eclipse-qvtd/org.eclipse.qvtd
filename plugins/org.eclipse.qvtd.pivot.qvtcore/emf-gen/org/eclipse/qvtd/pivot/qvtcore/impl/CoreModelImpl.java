@@ -27,6 +27,23 @@ import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
  */
 public class CoreModelImpl extends BaseModelImpl implements CoreModel {
 	/**
+	 * The number of structural features of the '<em>Core Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CORE_MODEL_FEATURE_COUNT = BaseModelImpl.BASE_MODEL_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Core Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CORE_MODEL_OPERATION_COUNT = BaseModelImpl.BASE_MODEL_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

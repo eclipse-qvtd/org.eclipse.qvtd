@@ -40,6 +40,22 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  */
 public class AppendParameterBindingImpl extends MappingParameterBindingImpl implements AppendParameterBinding {
 	/**
+	 * The number of structural features of the '<em>Append Parameter Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int APPEND_PARAMETER_BINDING_FEATURE_COUNT = MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Append Parameter Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int APPEND_PARAMETER_BINDING_OPERATION_COUNT = MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -80,7 +96,7 @@ public class AppendParameterBindingImpl extends MappingParameterBindingImpl impl
 			value = (ConnectionVariable)eResolveProxy(oldValue);
 			if (value != oldValue) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativePackage.APPEND_PARAMETER_BINDING__VALUE, oldValue, value));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0, oldValue, value));
 			}
 		}
 		return value;
@@ -105,7 +121,7 @@ public class AppendParameterBindingImpl extends MappingParameterBindingImpl impl
 		ConnectionVariable oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.APPEND_PARAMETER_BINDING__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0, oldValue, value));
 	}
 
 	/**
@@ -116,7 +132,7 @@ public class AppendParameterBindingImpl extends MappingParameterBindingImpl impl
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.APPEND_PARAMETER_BINDING__VALUE:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
 				if (resolve) return getValue();
 				return basicGetValue();
 		}
@@ -131,7 +147,7 @@ public class AppendParameterBindingImpl extends MappingParameterBindingImpl impl
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.APPEND_PARAMETER_BINDING__VALUE:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
 				setValue((ConnectionVariable)newValue);
 				return;
 		}
@@ -146,7 +162,7 @@ public class AppendParameterBindingImpl extends MappingParameterBindingImpl impl
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.APPEND_PARAMETER_BINDING__VALUE:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
 				setValue((ConnectionVariable)null);
 				return;
 		}
@@ -161,7 +177,7 @@ public class AppendParameterBindingImpl extends MappingParameterBindingImpl impl
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.APPEND_PARAMETER_BINDING__VALUE:
+			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
 				return value != null;
 		}
 		return super.eIsSet(featureID);

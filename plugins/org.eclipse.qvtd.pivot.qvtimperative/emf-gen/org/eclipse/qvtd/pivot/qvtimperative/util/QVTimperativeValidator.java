@@ -325,59 +325,59 @@ public class QVTimperativeValidator extends EObjectValidator {
 	@Override
 	protected boolean validate(int classifierID, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		switch (classifierID) {
-			case QVTimperativePackage.ADD_STATEMENT:
+			case 0:
 				return validateAddStatement((AddStatement)value, diagnostics, context);
-			case QVTimperativePackage.APPEND_PARAMETER:
+			case 1:
 				return validateAppendParameter((AppendParameter)value, diagnostics, context);
-			case QVTimperativePackage.APPEND_PARAMETER_BINDING:
+			case 2:
 				return validateAppendParameterBinding((AppendParameterBinding)value, diagnostics, context);
-			case QVTimperativePackage.BUFFER_STATEMENT:
+			case 3:
 				return validateBufferStatement((BufferStatement)value, diagnostics, context);
-			case QVTimperativePackage.CHECK_STATEMENT:
+			case 4:
 				return validateCheckStatement((CheckStatement)value, diagnostics, context);
-			case QVTimperativePackage.CONNECTION_VARIABLE:
+			case 5:
 				return validateConnectionVariable((ConnectionVariable)value, diagnostics, context);
-			case QVTimperativePackage.DECLARE_STATEMENT:
+			case 6:
 				return validateDeclareStatement((DeclareStatement)value, diagnostics, context);
-			case QVTimperativePackage.GUARD_PARAMETER:
+			case 7:
 				return validateGuardParameter((GuardParameter)value, diagnostics, context);
-			case QVTimperativePackage.GUARD_PARAMETER_BINDING:
+			case 8:
 				return validateGuardParameterBinding((GuardParameterBinding)value, diagnostics, context);
-			case QVTimperativePackage.IMPERATIVE_MODEL:
+			case 9:
 				return validateImperativeModel((ImperativeModel)value, diagnostics, context);
-			case QVTimperativePackage.IMPERATIVE_TRANSFORMATION:
+			case 10:
 				return validateImperativeTransformation((ImperativeTransformation)value, diagnostics, context);
-			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL:
+			case 11:
 				return validateImperativeTypedModel((ImperativeTypedModel)value, diagnostics, context);
-			case QVTimperativePackage.LOOP_PARAMETER_BINDING:
+			case 12:
 				return validateLoopParameterBinding((LoopParameterBinding)value, diagnostics, context);
-			case QVTimperativePackage.LOOP_VARIABLE:
+			case 13:
 				return validateLoopVariable((LoopVariable)value, diagnostics, context);
-			case QVTimperativePackage.MAPPING:
+			case 14:
 				return validateMapping((Mapping)value, diagnostics, context);
-			case QVTimperativePackage.MAPPING_CALL:
+			case 15:
 				return validateMappingCall((MappingCall)value, diagnostics, context);
-			case QVTimperativePackage.MAPPING_LOOP:
+			case 16:
 				return validateMappingLoop((MappingLoop)value, diagnostics, context);
-			case QVTimperativePackage.MAPPING_PARAMETER:
+			case 17:
 				return validateMappingParameter((MappingParameter)value, diagnostics, context);
-			case QVTimperativePackage.MAPPING_PARAMETER_BINDING:
+			case 18:
 				return validateMappingParameterBinding((MappingParameterBinding)value, diagnostics, context);
-			case QVTimperativePackage.MAPPING_STATEMENT:
+			case 19:
 				return validateMappingStatement((MappingStatement)value, diagnostics, context);
-			case QVTimperativePackage.NEW_STATEMENT:
+			case 20:
 				return validateNewStatement((NewStatement)value, diagnostics, context);
-			case QVTimperativePackage.OBSERVABLE_STATEMENT:
+			case 21:
 				return validateObservableStatement((ObservableStatement)value, diagnostics, context);
-			case QVTimperativePackage.SET_STATEMENT:
+			case 22:
 				return validateSetStatement((SetStatement)value, diagnostics, context);
-			case QVTimperativePackage.SIMPLE_PARAMETER:
+			case 23:
 				return validateSimpleParameter((SimpleParameter)value, diagnostics, context);
-			case QVTimperativePackage.SIMPLE_PARAMETER_BINDING:
+			case 24:
 				return validateSimpleParameterBinding((SimpleParameterBinding)value, diagnostics, context);
-			case QVTimperativePackage.STATEMENT:
+			case 25:
 				return validateStatement((Statement)value, diagnostics, context);
-			case QVTimperativePackage.VARIABLE_STATEMENT:
+			case 26:
 				return validateVariableStatement((VariableStatement)value, diagnostics, context);
 			default:
 				return true;

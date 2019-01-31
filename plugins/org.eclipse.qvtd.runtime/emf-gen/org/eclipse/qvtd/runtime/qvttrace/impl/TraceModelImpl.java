@@ -51,6 +51,24 @@ import org.eclipse.qvtd.runtime.qvttrace.util.QVTtraceVisitor;
  */
 public class TraceModelImpl extends TraceElementImpl implements TraceModel {
 	/**
+	 * The number of structural features of the '<em>Trace Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TRACE_MODEL_FEATURE_COUNT = TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Trace Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TRACE_MODEL_OPERATION_COUNT = TraceElementImpl.TRACE_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getOwnedTraces() <em>Owned Traces</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -107,7 +125,7 @@ public class TraceModelImpl extends TraceElementImpl implements TraceModel {
 	@Override
 	public EList<TraceInstance> getOwnedTraces() {
 		if (ownedTraces == null) {
-			ownedTraces = new EObjectContainmentWithInverseEList<TraceInstance>(TraceInstance.class, this, QVTtracePackage.TRACE_MODEL__OWNED_TRACES, QVTtracePackage.TRACE_INSTANCE__OWNING_MODEL);
+			ownedTraces = new EObjectContainmentWithInverseEList<TraceInstance>(TraceInstance.class, this, TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0, TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0);
 		}
 		return ownedTraces;
 	}
@@ -132,7 +150,7 @@ public class TraceModelImpl extends TraceElementImpl implements TraceModel {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTtracePackage.TRACE_MODEL__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 1, oldName, name));
 	}
 
 	/**
@@ -144,7 +162,7 @@ public class TraceModelImpl extends TraceElementImpl implements TraceModel {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTtracePackage.TRACE_MODEL__OWNED_TRACES:
+			case TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTraces()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -158,7 +176,7 @@ public class TraceModelImpl extends TraceElementImpl implements TraceModel {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTtracePackage.TRACE_MODEL__OWNED_TRACES:
+			case TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedTraces()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -172,9 +190,9 @@ public class TraceModelImpl extends TraceElementImpl implements TraceModel {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTtracePackage.TRACE_MODEL__OWNED_TRACES:
+			case TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0:
 				return getOwnedTraces();
-			case QVTtracePackage.TRACE_MODEL__NAME:
+			case TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 1:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -189,11 +207,11 @@ public class TraceModelImpl extends TraceElementImpl implements TraceModel {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTtracePackage.TRACE_MODEL__OWNED_TRACES:
+			case TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0:
 				getOwnedTraces().clear();
 				getOwnedTraces().addAll((Collection<? extends TraceInstance>)newValue);
 				return;
-			case QVTtracePackage.TRACE_MODEL__NAME:
+			case TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 1:
 				setName((String)newValue);
 				return;
 		}
@@ -208,10 +226,10 @@ public class TraceModelImpl extends TraceElementImpl implements TraceModel {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTtracePackage.TRACE_MODEL__OWNED_TRACES:
+			case TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0:
 				getOwnedTraces().clear();
 				return;
-			case QVTtracePackage.TRACE_MODEL__NAME:
+			case TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 1:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -226,9 +244,9 @@ public class TraceModelImpl extends TraceElementImpl implements TraceModel {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTtracePackage.TRACE_MODEL__OWNED_TRACES:
+			case TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0:
 				return ownedTraces != null && !ownedTraces.isEmpty();
-			case QVTtracePackage.TRACE_MODEL__NAME:
+			case TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 1:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);

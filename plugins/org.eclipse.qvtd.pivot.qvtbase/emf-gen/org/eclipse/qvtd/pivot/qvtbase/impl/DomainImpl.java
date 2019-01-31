@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtbase.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -24,8 +25,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.ReferringElement;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.library.classifier.ClassifierOclContainerOperation;
@@ -39,11 +41,14 @@ import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseTables;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
@@ -63,6 +68,24 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * @generated
  */
 public abstract class DomainImpl extends NamedElementImpl implements Domain {
+	/**
+	 * The number of structural features of the '<em>Domain</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DOMAIN_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Domain</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DOMAIN_OPERATION_COUNT = NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 3;
+
 	/**
 	 * The default value of the '{@link #isIsCheckable() <em>Is Checkable</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -172,7 +195,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 		boolean oldIsCheckableESet = isCheckableESet;
 		isCheckableESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.DOMAIN__IS_CHECKABLE, oldIsCheckable, isCheckable, !oldIsCheckableESet));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0, oldIsCheckable, isCheckable, !oldIsCheckableESet));
 	}
 
 	/**
@@ -187,7 +210,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 		isCheckable = IS_CHECKABLE_EDEFAULT;
 		isCheckableESet = false;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, QVTbasePackage.DOMAIN__IS_CHECKABLE, oldIsCheckable, IS_CHECKABLE_EDEFAULT, oldIsCheckableESet));
+			eNotify(new ENotificationImpl(this, Notification.UNSET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0, oldIsCheckable, IS_CHECKABLE_EDEFAULT, oldIsCheckableESet));
 	}
 
 	/**
@@ -222,7 +245,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 		boolean oldIsEnforceableESet = isEnforceableESet;
 		isEnforceableESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.DOMAIN__IS_ENFORCEABLE, oldIsEnforceable, isEnforceable, !oldIsEnforceableESet));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, oldIsEnforceable, isEnforceable, !oldIsEnforceableESet));
 	}
 
 	/**
@@ -237,7 +260,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 		isEnforceable = IS_ENFORCEABLE_EDEFAULT;
 		isEnforceableESet = false;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, QVTbasePackage.DOMAIN__IS_ENFORCEABLE, oldIsEnforceable, IS_ENFORCEABLE_EDEFAULT, oldIsEnforceableESet));
+			eNotify(new ENotificationImpl(this, Notification.UNSET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, oldIsEnforceable, IS_ENFORCEABLE_EDEFAULT, oldIsEnforceableESet));
 	}
 
 	/**
@@ -257,7 +280,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 */
 	@Override
 	public Rule getRule() {
-		if (eContainerFeatureID() != QVTbasePackage.DOMAIN__RULE) return null;
+		if (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2)) return null;
 		return (Rule)eInternalContainer();
 	}
 
@@ -267,7 +290,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 * @generated
 	 */
 	public NotificationChain basicSetRule(Rule newRule, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newRule, QVTbasePackage.DOMAIN__RULE, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newRule, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, msgs);
 		return msgs;
 	}
 
@@ -278,19 +301,19 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 */
 	@Override
 	public void setRule(Rule newRule) {
-		if (newRule != eInternalContainer() || (eContainerFeatureID() != QVTbasePackage.DOMAIN__RULE && newRule != null)) {
+		if (newRule != eInternalContainer() || (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2) && newRule != null)) {
 			if (EcoreUtil.isAncestor(this, newRule))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newRule != null)
-				msgs = ((InternalEObject)newRule).eInverseAdd(this, QVTbasePackage.RULE__DOMAIN, Rule.class, msgs);
+				msgs = ((InternalEObject)newRule).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0, Rule.class, msgs);
 			msgs = basicSetRule(newRule, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.DOMAIN__RULE, newRule, newRule));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, newRule, newRule));
 	}
 
 	/**
@@ -305,7 +328,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 			typedModel = (TypedModel)eResolveProxy(oldTypedModel);
 			if (typedModel != oldTypedModel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTbasePackage.DOMAIN__TYPED_MODEL, oldTypedModel, typedModel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, oldTypedModel, typedModel));
 			}
 		}
 		return typedModel;
@@ -330,7 +353,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 		TypedModel oldTypedModel = typedModel;
 		typedModel = newTypedModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.DOMAIN__TYPED_MODEL, oldTypedModel, typedModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, oldTypedModel, typedModel));
 	}
 
 	/**
@@ -354,8 +377,8 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 			 *         'Domain::NameIsTypedModelName'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Domain_c_c_NameIsTypedModelName);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Domain_c_c_NameIsTypedModelName);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -364,15 +387,15 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
 				try {
-					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable TypedModel typedModel = this.getTypedModel();
+					final /*@NonInvalid*/ @Nullable TypedModel typedModel = this.getTypedModel();
 					final /*@NonInvalid*/ boolean ne = typedModel != null;
 					/*@Thrown*/ boolean result;
 					if (ne) {
-						final /*@NonInvalid*/ java.lang.@Nullable String name = this.getName();
+						final /*@NonInvalid*/ @Nullable String name = this.getName();
 						if (typedModel == null) {
 							throw new InvalidValueException("Null source for \'NamedElement::name\'");
 						}
-						final /*@Thrown*/ java.lang.@Nullable String name_0 = typedModel.getName();
+						final /*@Thrown*/ @Nullable String name_0 = typedModel.getName();
 						final /*@Thrown*/ boolean eq = (name != null) ? name.equals(name_0) : (name_0 == null);
 						result = eq;
 					}
@@ -421,9 +444,9 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 			 *         'Domain::TypedModelIsTransformationModelParameter'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Domain_c_c_TypedModelIsTransformationModelParameter);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Domain_c_c_TypedModelIsTransformationModelParameter);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -444,9 +467,9 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 						catch (Exception e) {
 							CAUGHT_oclIsKindOf = ValueUtil.createInvalidValue(e);
 						}
-						final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable TypedModel typedModel = this.getTypedModel();
+						final /*@NonInvalid*/ @Nullable TypedModel typedModel = this.getTypedModel();
 						final /*@NonInvalid*/ boolean ne = typedModel != null;
-						final /*@Thrown*/ java.lang.@Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf, ne);
+						final /*@Thrown*/ @Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf, ne);
 						CAUGHT_and = and;
 					}
 					catch (Exception e) {
@@ -457,17 +480,17 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtbase_c_c_Transformation_0 = idResolver.getClass(QVTbaseTables.CLSSid_Transformation, null);
 						final /*@NonInvalid*/ @Nullable Object oclContainer_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, this);
 						@SuppressWarnings("null")
-						final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull Transformation oclAsType = (org.eclipse.qvtd.pivot.qvtbase.@NonNull Transformation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer_0, TYP_qvtbase_c_c_Transformation_0);
-						final /*@Thrown*/ java.util.@NonNull List<TypedModel> modelParameter = oclAsType.getModelParameter();
-						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
-						final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable TypedModel typedModel_0 = this.getTypedModel();
+						final /*@Thrown*/ @NonNull Transformation oclAsType = (@NonNull Transformation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer_0, TYP_qvtbase_c_c_Transformation_0);
+						final /*@Thrown*/ @NonNull List<TypedModel> modelParameter = oclAsType.getModelParameter();
+						final /*@Thrown*/ @NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTbaseTables.ORD_CLSSid_TypedModel, modelParameter);
+						final /*@NonInvalid*/ @Nullable TypedModel typedModel_0 = this.getTypedModel();
 						final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_modelParameter, typedModel_0).booleanValue();
 						CAUGHT_includes = includes;
 					}
 					catch (Exception e) {
 						CAUGHT_includes = ValueUtil.createInvalidValue(e);
 					}
-					final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_includes);
+					final /*@Thrown*/ @Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(CAUGHT_and, CAUGHT_includes);
 					CAUGHT_result = result;
 				}
 				catch (Exception e) {
@@ -501,7 +524,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTbasePackage.DOMAIN__RULE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetRule((Rule)otherEnd, msgs);
@@ -517,7 +540,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTbasePackage.DOMAIN__RULE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return basicSetRule(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -531,8 +554,8 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTbasePackage.DOMAIN__RULE:
-				return eInternalContainer().eInverseRemove(this, QVTbasePackage.RULE__DOMAIN, Rule.class, msgs);
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
+				return eInternalContainer().eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0, Rule.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -545,13 +568,13 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTbasePackage.DOMAIN__IS_CHECKABLE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return isIsCheckable();
-			case QVTbasePackage.DOMAIN__IS_ENFORCEABLE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return isIsEnforceable();
-			case QVTbasePackage.DOMAIN__RULE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return getRule();
-			case QVTbasePackage.DOMAIN__TYPED_MODEL:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				if (resolve) return getTypedModel();
 				return basicGetTypedModel();
 		}
@@ -566,16 +589,16 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTbasePackage.DOMAIN__IS_CHECKABLE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setIsCheckable((Boolean)newValue);
 				return;
-			case QVTbasePackage.DOMAIN__IS_ENFORCEABLE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setIsEnforceable((Boolean)newValue);
 				return;
-			case QVTbasePackage.DOMAIN__RULE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setRule((Rule)newValue);
 				return;
-			case QVTbasePackage.DOMAIN__TYPED_MODEL:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setTypedModel((TypedModel)newValue);
 				return;
 		}
@@ -590,16 +613,16 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTbasePackage.DOMAIN__IS_CHECKABLE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				unsetIsCheckable();
 				return;
-			case QVTbasePackage.DOMAIN__IS_ENFORCEABLE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				unsetIsEnforceable();
 				return;
-			case QVTbasePackage.DOMAIN__RULE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setRule((Rule)null);
 				return;
-			case QVTbasePackage.DOMAIN__TYPED_MODEL:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setTypedModel((TypedModel)null);
 				return;
 		}
@@ -614,13 +637,13 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTbasePackage.DOMAIN__IS_CHECKABLE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return isSetIsCheckable();
-			case QVTbasePackage.DOMAIN__IS_ENFORCEABLE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return isSetIsEnforceable();
-			case QVTbasePackage.DOMAIN__RULE:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return getRule() != null;
-			case QVTbasePackage.DOMAIN__TYPED_MODEL:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return typedModel != null;
 		}
 		return super.eIsSet(featureID);
@@ -635,7 +658,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
 		if (baseClass == ReferringElement.class) {
 			switch (baseOperationID) {
-				case PivotPackage.REFERRING_ELEMENT___GET_REFERRED_ELEMENT: return QVTbasePackage.DOMAIN___GET_REFERRED_ELEMENT;
+				case 0: return NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -651,11 +674,11 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTbasePackage.DOMAIN___VALIDATE_NAME_IS_TYPED_MODEL_NAME__DIAGNOSTICCHAIN_MAP:
+			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 1:
 				return validateNameIsTypedModelName((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTbasePackage.DOMAIN___VALIDATE_TYPED_MODEL_IS_TRANSFORMATION_MODEL_PARAMETER__DIAGNOSTICCHAIN_MAP:
+			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 2:
 				return validateTypedModelIsTransformationModelParameter((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTbasePackage.DOMAIN___GET_REFERRED_ELEMENT:
+			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0:
 				return getReferredElement();
 		}
 		return super.eInvoke(operationID, arguments);

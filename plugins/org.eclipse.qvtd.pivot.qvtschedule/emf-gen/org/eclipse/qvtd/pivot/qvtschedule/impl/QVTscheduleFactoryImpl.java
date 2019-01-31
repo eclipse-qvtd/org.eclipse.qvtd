@@ -69,64 +69,64 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	@Override
 	public @NonNull EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case QVTschedulePackage.BASIC_PARTITION: return createBasicPartition();
-			case QVTschedulePackage.BOOLEAN_LITERAL_NODE: return createBooleanLiteralNode();
-			case QVTschedulePackage.CAST_EDGE: return createCastEdge();
-			case QVTschedulePackage.CLASS_DATUM: return createClassDatum();
-			case QVTschedulePackage.CLUSTER: return createCluster();
-			case QVTschedulePackage.COLLECTION_LITERAL_NODE: return createCollectionLiteralNode();
-			case QVTschedulePackage.COLLECTION_PART_EDGE: return createCollectionPartEdge();
-			case QVTschedulePackage.COLLECTION_RANGE_NODE: return createCollectionRangeNode();
-			case QVTschedulePackage.COMPOSED_NODE: return createComposedNode();
-			case QVTschedulePackage.CYCLIC_MAPPING_REGION: return createCyclicMappingRegion();
-			case QVTschedulePackage.CYCLIC_PARTITION: return createCyclicPartition();
-			case QVTschedulePackage.DEPENDENCY_EDGE: return createDependencyEdge();
-			case QVTschedulePackage.DEPENDENCY_NODE: return createDependencyNode();
-			case QVTschedulePackage.DISPATCH_REGION: return createDispatchRegion();
-			case QVTschedulePackage.EDGE_CONNECTION: return createEdgeConnection();
-			case QVTschedulePackage.ENUM_LITERAL_NODE: return createEnumLiteralNode();
-			case QVTschedulePackage.ERROR_NODE: return createErrorNode();
-			case QVTschedulePackage.IF_NODE: return createIfNode();
-			case QVTschedulePackage.INCLUDES_EDGE: return createIncludesEdge();
-			case QVTschedulePackage.INPUT_NODE: return createInputNode();
-			case QVTschedulePackage.ITERATED_EDGE: return createIteratedEdge();
-			case QVTschedulePackage.ITERATOR_NODE: return createIteratorNode();
-			case QVTschedulePackage.KEY_PART_EDGE: return createKeyPartEdge();
-			case QVTschedulePackage.KEYED_VALUE_NODE: return createKeyedValueNode();
-			case QVTschedulePackage.LOADING_PARTITION: return createLoadingPartition();
-			case QVTschedulePackage.LOADING_REGION: return createLoadingRegion();
-			case QVTschedulePackage.MAP_LITERAL_NODE: return createMapLiteralNode();
-			case QVTschedulePackage.MAP_PART_EDGE: return createMapPartEdge();
-			case QVTschedulePackage.MAP_PART_NODE: return createMapPartNode();
-			case QVTschedulePackage.MERGED_PARTITION: return createMergedPartition();
-			case QVTschedulePackage.NAVIGATION_EDGE: return createNavigationEdge();
-			case QVTschedulePackage.NODE_CONNECTION: return createNodeConnection();
-			case QVTschedulePackage.NON_PARTITION: return createNonPartition();
-			case QVTschedulePackage.NULL_LITERAL_NODE: return createNullLiteralNode();
-			case QVTschedulePackage.NUMERIC_LITERAL_NODE: return createNumericLiteralNode();
-			case QVTschedulePackage.OPERATION_CALL_NODE: return createOperationCallNode();
-			case QVTschedulePackage.OPERATION_REGION: return createOperationRegion();
-			case QVTschedulePackage.OPERATION_PARAMETER_EDGE: return createOperationParameterEdge();
-			case QVTschedulePackage.OPERATION_SELF_EDGE: return createOperationSelfEdge();
-			case QVTschedulePackage.PATTERN_TYPED_NODE: return createPatternTypedNode();
-			case QVTschedulePackage.PATTERN_VARIABLE_NODE: return createPatternVariableNode();
-			case QVTschedulePackage.PREDICATE_EDGE: return createPredicateEdge();
-			case QVTschedulePackage.PROPERTY_DATUM: return createPropertyDatum();
-			case QVTschedulePackage.RECURSION_EDGE: return createRecursionEdge();
-			case QVTschedulePackage.ROOT_PARTITION: return createRootPartition();
-			case QVTschedulePackage.ROOT_REGION: return createRootRegion();
-			case QVTschedulePackage.RULE_REGION: return createRuleRegion();
-			case QVTschedulePackage.SCHEDULE_MODEL: return createScheduleModel();
-			case QVTschedulePackage.SHADOW_NODE: return createShadowNode();
-			case QVTschedulePackage.SHADOW_PART_EDGE: return createShadowPartEdge();
-			case QVTschedulePackage.STRING_LITERAL_NODE: return createStringLiteralNode();
-			case QVTschedulePackage.SUCCESS_EDGE: return createSuccessEdge();
-			case QVTschedulePackage.SUCCESS_NODE: return createSuccessNode();
-			case QVTschedulePackage.TUPLE_LITERAL_NODE: return createTupleLiteralNode();
-			case QVTschedulePackage.TUPLE_PART_EDGE: return createTuplePartEdge();
-			case QVTschedulePackage.TYPE_LITERAL_NODE: return createTypeLiteralNode();
-			case QVTschedulePackage.UNKNOWN_NODE: return createUnknownNode();
-			case QVTschedulePackage.VERDICT_REGION: return createVerdictRegion();
+			case 2: return createBasicPartition();
+			case 3: return createBooleanLiteralNode();
+			case 4: return createCastEdge();
+			case 5: return createClassDatum();
+			case 6: return createCluster();
+			case 7: return createCollectionLiteralNode();
+			case 8: return createCollectionPartEdge();
+			case 9: return createCollectionRangeNode();
+			case 10: return createComposedNode();
+			case 14: return createCyclicMappingRegion();
+			case 15: return createCyclicPartition();
+			case 16: return createDependencyEdge();
+			case 17: return createDependencyNode();
+			case 18: return createDispatchRegion();
+			case 20: return createEdgeConnection();
+			case 21: return createEnumLiteralNode();
+			case 22: return createErrorNode();
+			case 24: return createIfNode();
+			case 25: return createIncludesEdge();
+			case 26: return createInputNode();
+			case 27: return createIteratedEdge();
+			case 28: return createIteratorNode();
+			case 29: return createKeyPartEdge();
+			case 30: return createKeyedValueNode();
+			case 31: return createLoadingPartition();
+			case 32: return createLoadingRegion();
+			case 33: return createMapLiteralNode();
+			case 34: return createMapPartEdge();
+			case 35: return createMapPartNode();
+			case 39: return createMergedPartition();
+			case 41: return createNavigationEdge();
+			case 43: return createNodeConnection();
+			case 44: return createNonPartition();
+			case 45: return createNullLiteralNode();
+			case 46: return createNumericLiteralNode();
+			case 47: return createOperationCallNode();
+			case 49: return createOperationRegion();
+			case 50: return createOperationParameterEdge();
+			case 51: return createOperationSelfEdge();
+			case 53: return createPatternTypedNode();
+			case 54: return createPatternVariableNode();
+			case 55: return createPredicateEdge();
+			case 56: return createPropertyDatum();
+			case 57: return createRecursionEdge();
+			case 59: return createRootPartition();
+			case 60: return createRootRegion();
+			case 61: return createRuleRegion();
+			case 62: return createScheduleModel();
+			case 63: return createShadowNode();
+			case 64: return createShadowPartEdge();
+			case 65: return createStringLiteralNode();
+			case 66: return createSuccessEdge();
+			case 67: return createSuccessNode();
+			case 69: return createTupleLiteralNode();
+			case 70: return createTuplePartEdge();
+			case 71: return createTypeLiteralNode();
+			case 72: return createUnknownNode();
+			case 74: return createVerdictRegion();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -140,11 +140,11 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case QVTschedulePackage.CONNECTION_ROLE:
+			case 75:
 				return createConnectionRoleFromString(eDataType, initialValue);
-			case QVTschedulePackage.ROLE:
+			case 76:
 				return createRoleFromString(eDataType, initialValue);
-			case QVTschedulePackage.NUMBER:
+			case 77:
 				return createNumberFromString(eDataType, initialValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
@@ -159,11 +159,11 @@ public class QVTscheduleFactoryImpl extends EFactoryImpl implements QVTscheduleF
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case QVTschedulePackage.CONNECTION_ROLE:
+			case 75:
 				return convertConnectionRoleToString(eDataType, instanceValue);
-			case QVTschedulePackage.ROLE:
+			case 76:
 				return convertRoleToString(eDataType, instanceValue);
-			case QVTschedulePackage.NUMBER:
+			case 77:
 				return convertNumberToString(eDataType, instanceValue);
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");

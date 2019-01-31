@@ -50,6 +50,24 @@ import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
  */
 public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	/**
+	 * The number of structural features of the '<em>Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ASSIGNMENT_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ASSIGNMENT_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -143,7 +161,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 */
 	@Override
 	public BottomPattern getBottomPattern() {
-		if (eContainerFeatureID() != QVTcorePackage.ASSIGNMENT__BOTTOM_PATTERN) return null;
+		if (eContainerFeatureID() != (ElementImpl.ELEMENT_FEATURE_COUNT + 0)) return null;
 		return (BottomPattern)eInternalContainer();
 	}
 
@@ -153,7 +171,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * @generated
 	 */
 	public NotificationChain basicSetBottomPattern(BottomPattern newBottomPattern, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newBottomPattern, QVTcorePackage.ASSIGNMENT__BOTTOM_PATTERN, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newBottomPattern, ElementImpl.ELEMENT_FEATURE_COUNT + 0, msgs);
 		return msgs;
 	}
 
@@ -164,19 +182,19 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 */
 	@Override
 	public void setBottomPattern(BottomPattern newBottomPattern) {
-		if (newBottomPattern != eInternalContainer() || (eContainerFeatureID() != QVTcorePackage.ASSIGNMENT__BOTTOM_PATTERN && newBottomPattern != null)) {
+		if (newBottomPattern != eInternalContainer() || (eContainerFeatureID() != (ElementImpl.ELEMENT_FEATURE_COUNT + 0) && newBottomPattern != null)) {
 			if (EcoreUtil.isAncestor(this, newBottomPattern))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newBottomPattern != null)
-				msgs = ((InternalEObject)newBottomPattern).eInverseAdd(this, QVTcorePackage.BOTTOM_PATTERN__ASSIGNMENT, BottomPattern.class, msgs);
+				msgs = ((InternalEObject)newBottomPattern).eInverseAdd(this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 1, BottomPattern.class, msgs);
 			msgs = basicSetBottomPattern(newBottomPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcorePackage.ASSIGNMENT__BOTTOM_PATTERN, newBottomPattern, newBottomPattern));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 0, newBottomPattern, newBottomPattern));
 	}
 
 	/**
@@ -198,7 +216,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 		OCLExpression oldValue = value;
 		value = newValue;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcorePackage.ASSIGNMENT__VALUE, oldValue, newValue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 1, oldValue, newValue);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -214,14 +232,14 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 		if (newValue != value) {
 			NotificationChain msgs = null;
 			if (value != null)
-				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcorePackage.ASSIGNMENT__VALUE, null, msgs);
+				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ElementImpl.ELEMENT_FEATURE_COUNT + 1), null, msgs);
 			if (newValue != null)
-				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcorePackage.ASSIGNMENT__VALUE, null, msgs);
+				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ElementImpl.ELEMENT_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetValue(newValue, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcorePackage.ASSIGNMENT__VALUE, newValue, newValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 1, newValue, newValue));
 	}
 
 	/**
@@ -246,7 +264,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 		boolean oldIsDefaultESet = isDefaultESet;
 		isDefaultESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcorePackage.ASSIGNMENT__IS_DEFAULT, oldIsDefault, isDefault, !oldIsDefaultESet));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 2, oldIsDefault, isDefault, !oldIsDefaultESet));
 	}
 
 	/**
@@ -261,7 +279,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 		isDefault = IS_DEFAULT_EDEFAULT;
 		isDefaultESet = false;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, QVTcorePackage.ASSIGNMENT__IS_DEFAULT, oldIsDefault, IS_DEFAULT_EDEFAULT, oldIsDefaultESet));
+			eNotify(new ENotificationImpl(this, Notification.UNSET, ElementImpl.ELEMENT_FEATURE_COUNT + 2, oldIsDefault, IS_DEFAULT_EDEFAULT, oldIsDefaultESet));
 	}
 
 	/**
@@ -296,7 +314,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 		boolean oldIsPartialESet = isPartialESet;
 		isPartialESet = true;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcorePackage.ASSIGNMENT__IS_PARTIAL, oldIsPartial, isPartial, !oldIsPartialESet));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 3, oldIsPartial, isPartial, !oldIsPartialESet));
 	}
 
 	/**
@@ -311,7 +329,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 		isPartial = IS_PARTIAL_EDEFAULT;
 		isPartialESet = false;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, QVTcorePackage.ASSIGNMENT__IS_PARTIAL, oldIsPartial, IS_PARTIAL_EDEFAULT, oldIsPartialESet));
+			eNotify(new ENotificationImpl(this, Notification.UNSET, ElementImpl.ELEMENT_FEATURE_COUNT + 3, oldIsPartial, IS_PARTIAL_EDEFAULT, oldIsPartialESet));
 	}
 
 	/**
@@ -342,7 +360,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcorePackage.ASSIGNMENT__BOTTOM_PATTERN:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetBottomPattern((BottomPattern)otherEnd, msgs);
@@ -358,9 +376,9 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcorePackage.ASSIGNMENT__BOTTOM_PATTERN:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return basicSetBottomPattern(null, msgs);
-			case QVTcorePackage.ASSIGNMENT__VALUE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return basicSetValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -374,8 +392,8 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTcorePackage.ASSIGNMENT__BOTTOM_PATTERN:
-				return eInternalContainer().eInverseRemove(this, QVTcorePackage.BOTTOM_PATTERN__ASSIGNMENT, BottomPattern.class, msgs);
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
+				return eInternalContainer().eInverseRemove(this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 1, BottomPattern.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -388,13 +406,13 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcorePackage.ASSIGNMENT__BOTTOM_PATTERN:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return getBottomPattern();
-			case QVTcorePackage.ASSIGNMENT__VALUE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return getValue();
-			case QVTcorePackage.ASSIGNMENT__IS_DEFAULT:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return isIsDefault();
-			case QVTcorePackage.ASSIGNMENT__IS_PARTIAL:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return isIsPartial();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -408,16 +426,16 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcorePackage.ASSIGNMENT__BOTTOM_PATTERN:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setBottomPattern((BottomPattern)newValue);
 				return;
-			case QVTcorePackage.ASSIGNMENT__VALUE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setValue((OCLExpression)newValue);
 				return;
-			case QVTcorePackage.ASSIGNMENT__IS_DEFAULT:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setIsDefault((Boolean)newValue);
 				return;
-			case QVTcorePackage.ASSIGNMENT__IS_PARTIAL:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setIsPartial((Boolean)newValue);
 				return;
 		}
@@ -432,16 +450,16 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcorePackage.ASSIGNMENT__BOTTOM_PATTERN:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setBottomPattern((BottomPattern)null);
 				return;
-			case QVTcorePackage.ASSIGNMENT__VALUE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setValue((OCLExpression)null);
 				return;
-			case QVTcorePackage.ASSIGNMENT__IS_DEFAULT:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				unsetIsDefault();
 				return;
-			case QVTcorePackage.ASSIGNMENT__IS_PARTIAL:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				unsetIsPartial();
 				return;
 		}
@@ -456,13 +474,13 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcorePackage.ASSIGNMENT__BOTTOM_PATTERN:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return getBottomPattern() != null;
-			case QVTcorePackage.ASSIGNMENT__VALUE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return value != null;
-			case QVTcorePackage.ASSIGNMENT__IS_DEFAULT:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return isSetIsDefault();
-			case QVTcorePackage.ASSIGNMENT__IS_PARTIAL:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return isSetIsPartial();
 		}
 		return super.eIsSet(featureID);

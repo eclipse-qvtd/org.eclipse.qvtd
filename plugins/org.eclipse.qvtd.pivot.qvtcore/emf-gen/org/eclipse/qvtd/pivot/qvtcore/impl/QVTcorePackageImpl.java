@@ -21,8 +21,12 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.internal.VariableImpl;
 import org.eclipse.ocl.pivot.internal.utilities.LazyXMIidAssigningResourceImpl;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+import org.eclipse.qvtd.pivot.qvtbase.impl.PatternImpl;
+import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -859,83 +863,83 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		isCreated = true;
 
 		// Create classes and their features
-		areaEClass = createEClass(AREA);
-		createEReference(areaEClass, AREA__GUARD_PATTERN);
-		createEReference(areaEClass, AREA__BOTTOM_PATTERN);
+		areaEClass = createEClass(0);
+		createEReference(areaEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
+		createEReference(areaEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
 
-		assignmentEClass = createEClass(ASSIGNMENT);
-		createEReference(assignmentEClass, ASSIGNMENT__BOTTOM_PATTERN);
-		createEReference(assignmentEClass, ASSIGNMENT__VALUE);
-		createEAttribute(assignmentEClass, ASSIGNMENT__IS_DEFAULT);
-		createEAttribute(assignmentEClass, ASSIGNMENT__IS_PARTIAL);
+		assignmentEClass = createEClass(1);
+		createEReference(assignmentEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
+		createEReference(assignmentEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
+		createEAttribute(assignmentEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
+		createEAttribute(assignmentEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
 
-		bottomPatternEClass = createEClass(BOTTOM_PATTERN);
-		createEReference(bottomPatternEClass, BOTTOM_PATTERN__AREA);
-		createEReference(bottomPatternEClass, BOTTOM_PATTERN__ASSIGNMENT);
-		createEReference(bottomPatternEClass, BOTTOM_PATTERN__ENFORCEMENT_OPERATION);
-		createEReference(bottomPatternEClass, BOTTOM_PATTERN__REALIZED_VARIABLE);
-		createEOperation(bottomPatternEClass, BOTTOM_PATTERN___VALIDATE_VARIABLES_ARE_BOTTOM_VARIABLES__DIAGNOSTICCHAIN_MAP);
+		bottomPatternEClass = createEClass(2);
+		createEReference(bottomPatternEClass, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0);
+		createEReference(bottomPatternEClass, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 1);
+		createEReference(bottomPatternEClass, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2);
+		createEReference(bottomPatternEClass, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 3);
+		createEOperation(bottomPatternEClass, CorePatternImpl.CORE_PATTERN_OPERATION_COUNT + 0);
 
-		bottomVariableEClass = createEClass(BOTTOM_VARIABLE);
-		createEOperation(bottomVariableEClass, BOTTOM_VARIABLE___VALIDATE_COMPATIBLE_TYPE_FOR_INITIALIZER__DIAGNOSTICCHAIN_MAP);
+		bottomVariableEClass = createEClass(3);
+		createEOperation(bottomVariableEClass, VariableImpl.VARIABLE_OPERATION_COUNT + 0);
 
-		coreDomainEClass = createEClass(CORE_DOMAIN);
+		coreDomainEClass = createEClass(4);
 
-		coreModelEClass = createEClass(CORE_MODEL);
+		coreModelEClass = createEClass(5);
 
-		corePatternEClass = createEClass(CORE_PATTERN);
-		createEReference(corePatternEClass, CORE_PATTERN__VARIABLE);
-		createEOperation(corePatternEClass, CORE_PATTERN___GET_AREA);
+		corePatternEClass = createEClass(6);
+		createEReference(corePatternEClass, PatternImpl.PATTERN_FEATURE_COUNT + 0);
+		createEOperation(corePatternEClass, PatternImpl.PATTERN_OPERATION_COUNT + 0);
 
-		enforcementOperationEClass = createEClass(ENFORCEMENT_OPERATION);
-		createEAttribute(enforcementOperationEClass, ENFORCEMENT_OPERATION__ENFORCEMENT_MODE);
-		createEReference(enforcementOperationEClass, ENFORCEMENT_OPERATION__BOTTOM_PATTERN);
-		createEReference(enforcementOperationEClass, ENFORCEMENT_OPERATION__OPERATION_CALL_EXP);
+		enforcementOperationEClass = createEClass(7);
+		createEAttribute(enforcementOperationEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
+		createEReference(enforcementOperationEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
+		createEReference(enforcementOperationEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
 
-		guardPatternEClass = createEClass(GUARD_PATTERN);
-		createEReference(guardPatternEClass, GUARD_PATTERN__AREA);
-		createEOperation(guardPatternEClass, GUARD_PATTERN___VALIDATE_VARIABLES_ARE_GUARD_VARIABLES__DIAGNOSTICCHAIN_MAP);
+		guardPatternEClass = createEClass(8);
+		createEReference(guardPatternEClass, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0);
+		createEOperation(guardPatternEClass, CorePatternImpl.CORE_PATTERN_OPERATION_COUNT + 0);
 
-		guardVariableEClass = createEClass(GUARD_VARIABLE);
-		createEOperation(guardVariableEClass, GUARD_VARIABLE___VALIDATE_NO_INITIALIZER__DIAGNOSTICCHAIN_MAP);
+		guardVariableEClass = createEClass(9);
+		createEOperation(guardVariableEClass, VariableImpl.VARIABLE_OPERATION_COUNT + 0);
 
-		mappingEClass = createEClass(MAPPING);
-		createEReference(mappingEClass, MAPPING__CONTEXT);
-		createEReference(mappingEClass, MAPPING__LOCAL);
-		createEReference(mappingEClass, MAPPING__REFINEMENT);
-		createEReference(mappingEClass, MAPPING__SPECIFICATION);
-		createEOperation(mappingEClass, MAPPING___VALIDATE_DOMAINS_ARE_CORE_DOMAINS__DIAGNOSTICCHAIN_MAP);
-		createEOperation(mappingEClass, MAPPING___VALIDATE_NESTED_NAME_IS_NULL__DIAGNOSTICCHAIN_MAP);
-		createEOperation(mappingEClass, MAPPING___VALIDATE_ROOT_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP);
+		mappingEClass = createEClass(10);
+		createEReference(mappingEClass, RuleImpl.RULE_FEATURE_COUNT + 2);
+		createEReference(mappingEClass, RuleImpl.RULE_FEATURE_COUNT + 3);
+		createEReference(mappingEClass, RuleImpl.RULE_FEATURE_COUNT + 4);
+		createEReference(mappingEClass, RuleImpl.RULE_FEATURE_COUNT + 5);
+		createEOperation(mappingEClass, RuleImpl.RULE_OPERATION_COUNT + 0);
+		createEOperation(mappingEClass, RuleImpl.RULE_OPERATION_COUNT + 1);
+		createEOperation(mappingEClass, RuleImpl.RULE_OPERATION_COUNT + 2);
 
-		navigationAssignmentEClass = createEClass(NAVIGATION_ASSIGNMENT);
-		createEReference(navigationAssignmentEClass, NAVIGATION_ASSIGNMENT__SLOT_EXPRESSION);
+		navigationAssignmentEClass = createEClass(11);
+		createEReference(navigationAssignmentEClass, AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0);
 
-		oppositePropertyAssignmentEClass = createEClass(OPPOSITE_PROPERTY_ASSIGNMENT);
-		createEReference(oppositePropertyAssignmentEClass, OPPOSITE_PROPERTY_ASSIGNMENT__TARGET_PROPERTY);
-		createEOperation(oppositePropertyAssignmentEClass, OPPOSITE_PROPERTY_ASSIGNMENT___GET_REFERRED_TARGET_PROPERTY);
-		createEOperation(oppositePropertyAssignmentEClass, OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(oppositePropertyAssignmentEClass, OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(oppositePropertyAssignmentEClass, OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_OPPOSITE_PROPERTY_IS_IMPLICIT__DIAGNOSTICCHAIN_MAP);
-		createEOperation(oppositePropertyAssignmentEClass, OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP);
+		oppositePropertyAssignmentEClass = createEClass(12);
+		createEReference(oppositePropertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_FEATURE_COUNT + 0);
+		createEOperation(oppositePropertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 0);
+		createEOperation(oppositePropertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 1);
+		createEOperation(oppositePropertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 2);
+		createEOperation(oppositePropertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 3);
+		createEOperation(oppositePropertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 4);
 
-		propertyAssignmentEClass = createEClass(PROPERTY_ASSIGNMENT);
-		createEReference(propertyAssignmentEClass, PROPERTY_ASSIGNMENT__TARGET_PROPERTY);
-		createEOperation(propertyAssignmentEClass, PROPERTY_ASSIGNMENT___GET_REFERRED_TARGET_PROPERTY);
-		createEOperation(propertyAssignmentEClass, PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(propertyAssignmentEClass, PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(propertyAssignmentEClass, PROPERTY_ASSIGNMENT___VALIDATE_PROPERTY_IS_NOT_IMPLICIT__DIAGNOSTICCHAIN_MAP);
-		createEOperation(propertyAssignmentEClass, PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPERTY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP);
+		propertyAssignmentEClass = createEClass(13);
+		createEReference(propertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_FEATURE_COUNT + 0);
+		createEOperation(propertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 0);
+		createEOperation(propertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 1);
+		createEOperation(propertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 2);
+		createEOperation(propertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 3);
+		createEOperation(propertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 4);
 
-		realizedVariableEClass = createEClass(REALIZED_VARIABLE);
-		createEOperation(realizedVariableEClass, REALIZED_VARIABLE___VALIDATE_NON_DATA_TYPE_FOR_TYPE__DIAGNOSTICCHAIN_MAP);
+		realizedVariableEClass = createEClass(14);
+		createEOperation(realizedVariableEClass, VariableImpl.VARIABLE_OPERATION_COUNT + 0);
 
-		variableAssignmentEClass = createEClass(VARIABLE_ASSIGNMENT);
-		createEReference(variableAssignmentEClass, VARIABLE_ASSIGNMENT__TARGET_VARIABLE);
-		createEOperation(variableAssignmentEClass, VARIABLE_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
+		variableAssignmentEClass = createEClass(15);
+		createEReference(variableAssignmentEClass, AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0);
+		createEOperation(variableAssignmentEClass, AssignmentImpl.ASSIGNMENT_OPERATION_COUNT + 0);
 
 		// Create enums
-		enforcementModeEEnum = createEEnum(ENFORCEMENT_MODE);
+		enforcementModeEEnum = createEEnum(16);
 	}
 
 	/**

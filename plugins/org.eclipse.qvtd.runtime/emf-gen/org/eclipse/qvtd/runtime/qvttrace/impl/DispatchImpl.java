@@ -38,6 +38,24 @@ import org.eclipse.qvtd.runtime.qvttrace.QVTtracePackage;
  */
 public abstract class DispatchImpl extends TraceInstanceImpl implements Dispatch {
 	/**
+	 * The number of structural features of the '<em>Dispatch</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DISPATCH_FEATURE_COUNT = TraceInstanceImpl.TRACE_INSTANCE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Dispatch</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DISPATCH_OPERATION_COUNT = TraceInstanceImpl.TRACE_INSTANCE_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getSuccess() <em>Success</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -96,7 +114,7 @@ public abstract class DispatchImpl extends TraceInstanceImpl implements Dispatch
 		Boolean oldSuccess = success;
 		success = newSuccess;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTtracePackage.DISPATCH__SUCCESS, oldSuccess, success));
+			eNotify(new ENotificationImpl(this, Notification.SET, TraceInstanceImpl.TRACE_INSTANCE_FEATURE_COUNT + 0, oldSuccess, success));
 	}
 
 	/**
@@ -107,7 +125,7 @@ public abstract class DispatchImpl extends TraceInstanceImpl implements Dispatch
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTtracePackage.DISPATCH__SUCCESS:
+			case TraceInstanceImpl.TRACE_INSTANCE_FEATURE_COUNT + 0:
 				return getSuccess();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -121,7 +139,7 @@ public abstract class DispatchImpl extends TraceInstanceImpl implements Dispatch
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTtracePackage.DISPATCH__SUCCESS:
+			case TraceInstanceImpl.TRACE_INSTANCE_FEATURE_COUNT + 0:
 				setSuccess((Boolean)newValue);
 				return;
 		}
@@ -136,7 +154,7 @@ public abstract class DispatchImpl extends TraceInstanceImpl implements Dispatch
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTtracePackage.DISPATCH__SUCCESS:
+			case TraceInstanceImpl.TRACE_INSTANCE_FEATURE_COUNT + 0:
 				setSuccess(SUCCESS_EDEFAULT);
 				return;
 		}
@@ -151,7 +169,7 @@ public abstract class DispatchImpl extends TraceInstanceImpl implements Dispatch
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTtracePackage.DISPATCH__SUCCESS:
+			case TraceInstanceImpl.TRACE_INSTANCE_FEATURE_COUNT + 0:
 				return SUCCESS_EDEFAULT == null ? success != null : !SUCCESS_EDEFAULT.equals(success);
 		}
 		return super.eIsSet(featureID);

@@ -21,7 +21,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
+import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingParameter;
@@ -42,6 +44,23 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * @generated
  */
 public class AppendParameterImpl extends ConnectionVariableImpl implements AppendParameter {
+	/**
+	 * The number of structural features of the '<em>Append Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int APPEND_PARAMETER_FEATURE_COUNT = ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Append Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int APPEND_PARAMETER_OPERATION_COUNT = ConnectionVariableImpl.CONNECTION_VARIABLE_OPERATION_COUNT + 0;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -68,7 +87,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	 */
 	@Override
 	public Mapping getOwningMapping() {
-		if (eContainerFeatureID() != QVTimperativePackage.APPEND_PARAMETER__OWNING_MAPPING) return null;
+		if (eContainerFeatureID() != (ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0)) return null;
 		return (Mapping)eInternalContainer();
 	}
 
@@ -78,7 +97,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningMapping(Mapping newOwningMapping, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningMapping, QVTimperativePackage.APPEND_PARAMETER__OWNING_MAPPING, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningMapping, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0, msgs);
 		return msgs;
 	}
 
@@ -89,19 +108,19 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	 */
 	@Override
 	public void setOwningMapping(Mapping newOwningMapping) {
-		if (newOwningMapping != eInternalContainer() || (eContainerFeatureID() != QVTimperativePackage.APPEND_PARAMETER__OWNING_MAPPING && newOwningMapping != null)) {
+		if (newOwningMapping != eInternalContainer() || (eContainerFeatureID() != (ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0) && newOwningMapping != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningMapping))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningMapping != null)
-				msgs = ((InternalEObject)newOwningMapping).eInverseAdd(this, QVTimperativePackage.MAPPING__OWNED_MAPPING_PARAMETERS, Mapping.class, msgs);
+				msgs = ((InternalEObject)newOwningMapping).eInverseAdd(this, RuleImpl.RULE_FEATURE_COUNT + 1, Mapping.class, msgs);
 			msgs = basicSetOwningMapping(newOwningMapping, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.APPEND_PARAMETER__OWNING_MAPPING, newOwningMapping, newOwningMapping));
+			eNotify(new ENotificationImpl(this, Notification.SET, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0, newOwningMapping, newOwningMapping));
 	}
 
 	/**
@@ -112,7 +131,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.APPEND_PARAMETER__OWNING_MAPPING:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningMapping((Mapping)otherEnd, msgs);
@@ -128,7 +147,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.APPEND_PARAMETER__OWNING_MAPPING:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
 				return basicSetOwningMapping(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -142,8 +161,8 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTimperativePackage.APPEND_PARAMETER__OWNING_MAPPING:
-				return eInternalContainer().eInverseRemove(this, QVTimperativePackage.MAPPING__OWNED_MAPPING_PARAMETERS, Mapping.class, msgs);
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
+				return eInternalContainer().eInverseRemove(this, RuleImpl.RULE_FEATURE_COUNT + 1, Mapping.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -156,7 +175,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.APPEND_PARAMETER__OWNING_MAPPING:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
 				return getOwningMapping();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -170,7 +189,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.APPEND_PARAMETER__OWNING_MAPPING:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
 				setOwningMapping((Mapping)newValue);
 				return;
 		}
@@ -185,7 +204,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.APPEND_PARAMETER__OWNING_MAPPING:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
 				setOwningMapping((Mapping)null);
 				return;
 		}
@@ -200,7 +219,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.APPEND_PARAMETER__OWNING_MAPPING:
+			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
 				return getOwningMapping() != null;
 		}
 		return super.eIsSet(featureID);
@@ -215,7 +234,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == MappingParameter.class) {
 			switch (derivedFeatureID) {
-				case QVTimperativePackage.APPEND_PARAMETER__OWNING_MAPPING: return QVTimperativePackage.MAPPING_PARAMETER__OWNING_MAPPING;
+				case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0: return VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -231,7 +250,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == MappingParameter.class) {
 			switch (baseFeatureID) {
-				case QVTimperativePackage.MAPPING_PARAMETER__OWNING_MAPPING: return QVTimperativePackage.APPEND_PARAMETER__OWNING_MAPPING;
+				case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0: return ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}

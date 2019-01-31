@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
@@ -50,6 +51,24 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * @generated
  */
 public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop {
+	/**
+	 * The number of structural features of the '<em>Mapping Loop</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_LOOP_FEATURE_COUNT = MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Mapping Loop</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_LOOP_OPERATION_COUNT = MappingStatementImpl.MAPPING_STATEMENT_OPERATION_COUNT + 0;
+
 	/**
 	 * The cached value of the '{@link #getObservedProperties() <em>Observed Properties</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -117,7 +136,7 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	@Override
 	public EList<Property> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, QVTimperativePackage.MAPPING_LOOP__OBSERVED_PROPERTIES);
+			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0);
 		}
 		return observedProperties;
 	}
@@ -130,7 +149,7 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	@Override
 	public EList<LoopVariable> getOwnedIterators() {
 		if (ownedIterators == null) {
-			ownedIterators = new EObjectContainmentWithInverseEList<LoopVariable>(LoopVariable.class, this, QVTimperativePackage.MAPPING_LOOP__OWNED_ITERATORS, QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP);
+			ownedIterators = new EObjectContainmentWithInverseEList<LoopVariable>(LoopVariable.class, this, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0);
 		}
 		return ownedIterators;
 	}
@@ -143,7 +162,7 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	@Override
 	public EList<MappingStatement> getOwnedMappingStatements() {
 		if (ownedMappingStatements == null) {
-			ownedMappingStatements = new EObjectContainmentEList<MappingStatement>(MappingStatement.class, this, QVTimperativePackage.MAPPING_LOOP__OWNED_MAPPING_STATEMENTS);
+			ownedMappingStatements = new EObjectContainmentEList<MappingStatement>(MappingStatement.class, this, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2);
 		}
 		return ownedMappingStatements;
 	}
@@ -167,7 +186,7 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 		OCLExpression oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING_LOOP__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -183,14 +202,14 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.MAPPING_LOOP__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.MAPPING_LOOP__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING_LOOP__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -202,7 +221,7 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_LOOP__OWNED_ITERATORS:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedIterators()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -216,11 +235,11 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_LOOP__OWNED_ITERATORS:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
 				return ((InternalEList<?>)getOwnedIterators()).basicRemove(otherEnd, msgs);
-			case QVTimperativePackage.MAPPING_LOOP__OWNED_MAPPING_STATEMENTS:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getOwnedMappingStatements()).basicRemove(otherEnd, msgs);
-			case QVTimperativePackage.MAPPING_LOOP__OWNED_EXPRESSION:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -234,13 +253,13 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_LOOP__OBSERVED_PROPERTIES:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
 				return getObservedProperties();
-			case QVTimperativePackage.MAPPING_LOOP__OWNED_ITERATORS:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
 				return getOwnedIterators();
-			case QVTimperativePackage.MAPPING_LOOP__OWNED_MAPPING_STATEMENTS:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
 				return getOwnedMappingStatements();
-			case QVTimperativePackage.MAPPING_LOOP__OWNED_EXPRESSION:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
 				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -255,19 +274,19 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_LOOP__OBSERVED_PROPERTIES:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
-			case QVTimperativePackage.MAPPING_LOOP__OWNED_ITERATORS:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
 				getOwnedIterators().clear();
 				getOwnedIterators().addAll((Collection<? extends LoopVariable>)newValue);
 				return;
-			case QVTimperativePackage.MAPPING_LOOP__OWNED_MAPPING_STATEMENTS:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
 				getOwnedMappingStatements().clear();
 				getOwnedMappingStatements().addAll((Collection<? extends MappingStatement>)newValue);
 				return;
-			case QVTimperativePackage.MAPPING_LOOP__OWNED_EXPRESSION:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)newValue);
 				return;
 		}
@@ -282,16 +301,16 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_LOOP__OBSERVED_PROPERTIES:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				return;
-			case QVTimperativePackage.MAPPING_LOOP__OWNED_ITERATORS:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
 				getOwnedIterators().clear();
 				return;
-			case QVTimperativePackage.MAPPING_LOOP__OWNED_MAPPING_STATEMENTS:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
 				getOwnedMappingStatements().clear();
 				return;
-			case QVTimperativePackage.MAPPING_LOOP__OWNED_EXPRESSION:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)null);
 				return;
 		}
@@ -306,13 +325,13 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.MAPPING_LOOP__OBSERVED_PROPERTIES:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
 				return observedProperties != null && !observedProperties.isEmpty();
-			case QVTimperativePackage.MAPPING_LOOP__OWNED_ITERATORS:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
 				return ownedIterators != null && !ownedIterators.isEmpty();
-			case QVTimperativePackage.MAPPING_LOOP__OWNED_MAPPING_STATEMENTS:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
 				return ownedMappingStatements != null && !ownedMappingStatements.isEmpty();
-			case QVTimperativePackage.MAPPING_LOOP__OWNED_EXPRESSION:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
 				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
@@ -327,7 +346,7 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatement.class) {
 			switch (derivedFeatureID) {
-				case QVTimperativePackage.MAPPING_LOOP__OBSERVED_PROPERTIES: return QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES;
+				case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0: return StatementImpl.STATEMENT_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -343,7 +362,7 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatement.class) {
 			switch (baseFeatureID) {
-				case QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES: return QVTimperativePackage.MAPPING_LOOP__OBSERVED_PROPERTIES;
+				case StatementImpl.STATEMENT_FEATURE_COUNT + 0: return MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}

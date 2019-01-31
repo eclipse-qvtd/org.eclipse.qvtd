@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.util.Visitor;
+import org.eclipse.qvtd.pivot.qvtbase.impl.DomainImpl;
 import org.eclipse.qvtd.pivot.qvtbase.impl.PatternImpl;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
@@ -40,6 +41,22 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
  * @generated
  */
 public class DomainPatternImpl extends PatternImpl implements DomainPattern {
+	/**
+	 * The number of structural features of the '<em>Domain Pattern</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DOMAIN_PATTERN_FEATURE_COUNT = PatternImpl.PATTERN_FEATURE_COUNT + 2;
+	/**
+	 * The number of operations of the '<em>Domain Pattern</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DOMAIN_PATTERN_OPERATION_COUNT = PatternImpl.PATTERN_OPERATION_COUNT + 0;
 	/**
 	 * The cached value of the '{@link #getTemplateExpression() <em>Template Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -76,7 +93,7 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 	 */
 	@Override
 	public RelationDomain getRelationDomain() {
-		if (eContainerFeatureID() != QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN) return null;
+		if (eContainerFeatureID() != (PatternImpl.PATTERN_FEATURE_COUNT + 0)) return null;
 		return (RelationDomain)eInternalContainer();
 	}
 
@@ -86,7 +103,7 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 	 * @generated
 	 */
 	public NotificationChain basicSetRelationDomain(RelationDomain newRelationDomain, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newRelationDomain, QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newRelationDomain, PatternImpl.PATTERN_FEATURE_COUNT + 0, msgs);
 		return msgs;
 	}
 
@@ -97,19 +114,19 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 	 */
 	@Override
 	public void setRelationDomain(RelationDomain newRelationDomain) {
-		if (newRelationDomain != eInternalContainer() || (eContainerFeatureID() != QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN && newRelationDomain != null)) {
+		if (newRelationDomain != eInternalContainer() || (eContainerFeatureID() != (PatternImpl.PATTERN_FEATURE_COUNT + 0) && newRelationDomain != null)) {
 			if (EcoreUtil.isAncestor(this, newRelationDomain))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newRelationDomain != null)
-				msgs = ((InternalEObject)newRelationDomain).eInverseAdd(this, QVTrelationPackage.RELATION_DOMAIN__PATTERN, RelationDomain.class, msgs);
+				msgs = ((InternalEObject)newRelationDomain).eInverseAdd(this, DomainImpl.DOMAIN_FEATURE_COUNT + 1, RelationDomain.class, msgs);
 			msgs = basicSetRelationDomain(newRelationDomain, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN, newRelationDomain, newRelationDomain));
+			eNotify(new ENotificationImpl(this, Notification.SET, PatternImpl.PATTERN_FEATURE_COUNT + 0, newRelationDomain, newRelationDomain));
 	}
 
 	/**
@@ -131,7 +148,7 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 		TemplateExp oldTemplateExpression = templateExpression;
 		templateExpression = newTemplateExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationPackage.DOMAIN_PATTERN__TEMPLATE_EXPRESSION, oldTemplateExpression, newTemplateExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PatternImpl.PATTERN_FEATURE_COUNT + 1, oldTemplateExpression, newTemplateExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -147,14 +164,14 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 		if (newTemplateExpression != templateExpression) {
 			NotificationChain msgs = null;
 			if (templateExpression != null)
-				msgs = ((InternalEObject)templateExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationPackage.DOMAIN_PATTERN__TEMPLATE_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)templateExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (PatternImpl.PATTERN_FEATURE_COUNT + 1), null, msgs);
 			if (newTemplateExpression != null)
-				msgs = ((InternalEObject)newTemplateExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationPackage.DOMAIN_PATTERN__TEMPLATE_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newTemplateExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (PatternImpl.PATTERN_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetTemplateExpression(newTemplateExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.DOMAIN_PATTERN__TEMPLATE_EXPRESSION, newTemplateExpression, newTemplateExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, PatternImpl.PATTERN_FEATURE_COUNT + 1, newTemplateExpression, newTemplateExpression));
 	}
 
 	/**
@@ -165,7 +182,7 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetRelationDomain((RelationDomain)otherEnd, msgs);
@@ -181,9 +198,9 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 0:
 				return basicSetRelationDomain(null, msgs);
-			case QVTrelationPackage.DOMAIN_PATTERN__TEMPLATE_EXPRESSION:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 1:
 				return basicSetTemplateExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -197,8 +214,8 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN:
-				return eInternalContainer().eInverseRemove(this, QVTrelationPackage.RELATION_DOMAIN__PATTERN, RelationDomain.class, msgs);
+			case PatternImpl.PATTERN_FEATURE_COUNT + 0:
+				return eInternalContainer().eInverseRemove(this, DomainImpl.DOMAIN_FEATURE_COUNT + 1, RelationDomain.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -211,9 +228,9 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 0:
 				return getRelationDomain();
-			case QVTrelationPackage.DOMAIN_PATTERN__TEMPLATE_EXPRESSION:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 1:
 				return getTemplateExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -227,10 +244,10 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 0:
 				setRelationDomain((RelationDomain)newValue);
 				return;
-			case QVTrelationPackage.DOMAIN_PATTERN__TEMPLATE_EXPRESSION:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 1:
 				setTemplateExpression((TemplateExp)newValue);
 				return;
 		}
@@ -245,10 +262,10 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 0:
 				setRelationDomain((RelationDomain)null);
 				return;
-			case QVTrelationPackage.DOMAIN_PATTERN__TEMPLATE_EXPRESSION:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 1:
 				setTemplateExpression((TemplateExp)null);
 				return;
 		}
@@ -263,9 +280,9 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationPackage.DOMAIN_PATTERN__RELATION_DOMAIN:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 0:
 				return getRelationDomain() != null;
-			case QVTrelationPackage.DOMAIN_PATTERN__TEMPLATE_EXPRESSION:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 1:
 				return templateExpression != null;
 		}
 		return super.eIsSet(featureID);

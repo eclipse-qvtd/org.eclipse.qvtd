@@ -30,6 +30,23 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class InputNodeImpl extends NodeImpl implements InputNode {
 	/**
+	 * The number of structural features of the '<em>Input Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INPUT_NODE_FEATURE_COUNT = NodeImpl.NODE_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Input Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INPUT_NODE_OPERATION_COUNT = NodeImpl.NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

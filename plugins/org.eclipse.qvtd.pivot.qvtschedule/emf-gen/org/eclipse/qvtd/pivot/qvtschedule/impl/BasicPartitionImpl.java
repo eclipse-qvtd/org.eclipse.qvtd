@@ -72,6 +72,23 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
 public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPartition
 {
 	/**
+	 * The number of structural features of the '<em>Basic Partition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BASIC_PARTITION_FEATURE_COUNT = MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 16;
+	/**
+	 * The number of operations of the '<em>Basic Partition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BASIC_PARTITION_OPERATION_COUNT = MappingPartitionImpl.MAPPING_PARTITION_OPERATION_COUNT + 0;
+
+	/**
 	 * EdgeList duplicates changes to the lists-of-edges to the 'redundant' edge-to-role map.
 	 */
 	@SuppressWarnings("serial")
@@ -339,7 +356,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public List<Node> getHeadNodes() {
 		if (headNodes == null) {
-			headNodes = new EObjectResolvingEList<Node>(Node.class, this, QVTschedulePackage.BASIC_PARTITION__HEAD_NODES);
+			headNodes = new EObjectResolvingEList<Node>(Node.class, this, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 5);
 		}
 		return headNodes;
 	}
@@ -468,7 +485,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	 */
 	@Override
 	public MergedPartition getOwningMergedPartition() {
-		if (eContainerFeatureID() != QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION) return null;
+		if (eContainerFeatureID() != (MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15)) return null;
 		return (MergedPartition)eInternalContainer();
 	}
 
@@ -478,7 +495,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningMergedPartition(MergedPartition newOwningMergedPartition, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningMergedPartition, QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningMergedPartition, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15, msgs);
 		return msgs;
 	}
 
@@ -489,19 +506,19 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	 */
 	@Override
 	public void setOwningMergedPartition(MergedPartition newOwningMergedPartition) {
-		if (newOwningMergedPartition != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION && newOwningMergedPartition != null)) {
+		if (newOwningMergedPartition != eInternalContainer() || (eContainerFeatureID() != (MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15) && newOwningMergedPartition != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningMergedPartition))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningMergedPartition != null)
-				msgs = ((InternalEObject)newOwningMergedPartition).eInverseAdd(this, QVTschedulePackage.MERGED_PARTITION__OWNED_MERGED_PARTITIONS, MergedPartition.class, msgs);
+				msgs = ((InternalEObject)newOwningMergedPartition).eInverseAdd(this, BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 0, MergedPartition.class, msgs);
 			msgs = basicSetOwningMergedPartition(newOwningMergedPartition, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION, newOwningMergedPartition, newOwningMergedPartition));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15, newOwningMergedPartition, newOwningMergedPartition));
 	}
 
 	/**
@@ -513,9 +530,9 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.BASIC_PARTITION__EXPLICIT_PREDECESSORS:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 4:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExplicitPredecessors()).basicAdd(otherEnd, msgs);
-			case QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningMergedPartition((MergedPartition)otherEnd, msgs);
@@ -531,9 +548,9 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.BASIC_PARTITION__EXPLICIT_PREDECESSORS:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 4:
 				return ((InternalEList<?>)getExplicitPredecessors()).basicRemove(otherEnd, msgs);
-			case QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15:
 				return basicSetOwningMergedPartition(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -547,8 +564,8 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION:
-				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.MERGED_PARTITION__OWNED_MERGED_PARTITIONS, MergedPartition.class, msgs);
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15:
+				return eInternalContainer().eInverseRemove(this, BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 0, MergedPartition.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -561,7 +578,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public List<MappingPartition> getExplicitPredecessors() {
 		if (explicitPredecessors == null) {
-			explicitPredecessors = new EObjectWithInverseResolvingEList.ManyInverse<MappingPartition>(MappingPartition.class, this, QVTschedulePackage.BASIC_PARTITION__EXPLICIT_PREDECESSORS, QVTschedulePackage.MAPPING_PARTITION__EXPLICIT_SUCCESSORS);
+			explicitPredecessors = new EObjectWithInverseResolvingEList.ManyInverse<MappingPartition>(MappingPartition.class, this, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 4, PartitionImpl.PARTITION_FEATURE_COUNT + 4);
 		}
 		return explicitPredecessors;
 	}
@@ -574,37 +591,37 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
 				return getConstantEdges();
-			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 1:
 				return getConstantNodes();
-			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 2:
 				return getConstantSuccessFalseNodes();
-			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 3:
 				return getConstantSuccessTrueNodes();
-			case QVTschedulePackage.BASIC_PARTITION__EXPLICIT_PREDECESSORS:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 4:
 				return getExplicitPredecessors();
-			case QVTschedulePackage.BASIC_PARTITION__HEAD_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 5:
 				return getHeadNodes();
-			case QVTschedulePackage.BASIC_PARTITION__LOADED_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 6:
 				return getLoadedEdges();
-			case QVTschedulePackage.BASIC_PARTITION__LOADED_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 7:
 				return getLoadedNodes();
-			case QVTschedulePackage.BASIC_PARTITION__PREDICATED_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 8:
 				return getPredicatedEdges();
-			case QVTschedulePackage.BASIC_PARTITION__PREDICATED_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 9:
 				return getPredicatedNodes();
-			case QVTschedulePackage.BASIC_PARTITION__REALIZED_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 10:
 				return getRealizedEdges();
-			case QVTschedulePackage.BASIC_PARTITION__REALIZED_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 11:
 				return getRealizedNodes();
-			case QVTschedulePackage.BASIC_PARTITION__SPECULATED_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 12:
 				return getSpeculatedEdges();
-			case QVTschedulePackage.BASIC_PARTITION__SPECULATED_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 13:
 				return getSpeculatedNodes();
-			case QVTschedulePackage.BASIC_PARTITION__SPECULATION_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 14:
 				return getSpeculationNodes();
-			case QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15:
 				return getOwningMergedPartition();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -619,67 +636,67 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
 				getConstantEdges().clear();
 				getConstantEdges().addAll((Collection<? extends Edge>)newValue);
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 1:
 				getConstantNodes().clear();
 				getConstantNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 2:
 				getConstantSuccessFalseNodes().clear();
 				getConstantSuccessFalseNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 3:
 				getConstantSuccessTrueNodes().clear();
 				getConstantSuccessTrueNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__EXPLICIT_PREDECESSORS:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 4:
 				getExplicitPredecessors().clear();
 				getExplicitPredecessors().addAll((Collection<? extends MappingPartition>)newValue);
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__HEAD_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 5:
 				getHeadNodes().clear();
 				getHeadNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__LOADED_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 6:
 				getLoadedEdges().clear();
 				getLoadedEdges().addAll((Collection<? extends Edge>)newValue);
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__LOADED_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 7:
 				getLoadedNodes().clear();
 				getLoadedNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__PREDICATED_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 8:
 				getPredicatedEdges().clear();
 				getPredicatedEdges().addAll((Collection<? extends Edge>)newValue);
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__PREDICATED_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 9:
 				getPredicatedNodes().clear();
 				getPredicatedNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__REALIZED_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 10:
 				getRealizedEdges().clear();
 				getRealizedEdges().addAll((Collection<? extends Edge>)newValue);
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__REALIZED_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 11:
 				getRealizedNodes().clear();
 				getRealizedNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__SPECULATED_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 12:
 				getSpeculatedEdges().clear();
 				getSpeculatedEdges().addAll((Collection<? extends Edge>)newValue);
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__SPECULATED_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 13:
 				getSpeculatedNodes().clear();
 				getSpeculatedNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__SPECULATION_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 14:
 				getSpeculationNodes().clear();
 				getSpeculationNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15:
 				setOwningMergedPartition((MergedPartition)newValue);
 				return;
 		}
@@ -694,52 +711,52 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
 				getConstantEdges().clear();
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 1:
 				getConstantNodes().clear();
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 2:
 				getConstantSuccessFalseNodes().clear();
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 3:
 				getConstantSuccessTrueNodes().clear();
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__EXPLICIT_PREDECESSORS:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 4:
 				getExplicitPredecessors().clear();
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__HEAD_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 5:
 				getHeadNodes().clear();
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__LOADED_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 6:
 				getLoadedEdges().clear();
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__LOADED_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 7:
 				getLoadedNodes().clear();
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__PREDICATED_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 8:
 				getPredicatedEdges().clear();
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__PREDICATED_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 9:
 				getPredicatedNodes().clear();
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__REALIZED_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 10:
 				getRealizedEdges().clear();
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__REALIZED_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 11:
 				getRealizedNodes().clear();
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__SPECULATED_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 12:
 				getSpeculatedEdges().clear();
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__SPECULATED_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 13:
 				getSpeculatedNodes().clear();
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__SPECULATION_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 14:
 				getSpeculationNodes().clear();
 				return;
-			case QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15:
 				setOwningMergedPartition((MergedPartition)null);
 				return;
 		}
@@ -754,37 +771,37 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
 				return constantEdges != null && !constantEdges.isEmpty();
-			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 1:
 				return constantNodes != null && !constantNodes.isEmpty();
-			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_FALSE_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 2:
 				return constantSuccessFalseNodes != null && !constantSuccessFalseNodes.isEmpty();
-			case QVTschedulePackage.BASIC_PARTITION__CONSTANT_SUCCESS_TRUE_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 3:
 				return constantSuccessTrueNodes != null && !constantSuccessTrueNodes.isEmpty();
-			case QVTschedulePackage.BASIC_PARTITION__EXPLICIT_PREDECESSORS:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 4:
 				return explicitPredecessors != null && !explicitPredecessors.isEmpty();
-			case QVTschedulePackage.BASIC_PARTITION__HEAD_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 5:
 				return headNodes != null && !headNodes.isEmpty();
-			case QVTschedulePackage.BASIC_PARTITION__LOADED_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 6:
 				return loadedEdges != null && !loadedEdges.isEmpty();
-			case QVTschedulePackage.BASIC_PARTITION__LOADED_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 7:
 				return loadedNodes != null && !loadedNodes.isEmpty();
-			case QVTschedulePackage.BASIC_PARTITION__PREDICATED_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 8:
 				return predicatedEdges != null && !predicatedEdges.isEmpty();
-			case QVTschedulePackage.BASIC_PARTITION__PREDICATED_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 9:
 				return predicatedNodes != null && !predicatedNodes.isEmpty();
-			case QVTschedulePackage.BASIC_PARTITION__REALIZED_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 10:
 				return realizedEdges != null && !realizedEdges.isEmpty();
-			case QVTschedulePackage.BASIC_PARTITION__REALIZED_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 11:
 				return realizedNodes != null && !realizedNodes.isEmpty();
-			case QVTschedulePackage.BASIC_PARTITION__SPECULATED_EDGES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 12:
 				return speculatedEdges != null && !speculatedEdges.isEmpty();
-			case QVTschedulePackage.BASIC_PARTITION__SPECULATED_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 13:
 				return speculatedNodes != null && !speculatedNodes.isEmpty();
-			case QVTschedulePackage.BASIC_PARTITION__SPECULATION_NODES:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 14:
 				return speculationNodes != null && !speculationNodes.isEmpty();
-			case QVTschedulePackage.BASIC_PARTITION__OWNING_MERGED_PARTITION:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15:
 				return getOwningMergedPartition() != null;
 		}
 		return super.eIsSet(featureID);

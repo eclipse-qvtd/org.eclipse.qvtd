@@ -46,6 +46,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class VerdictRegionImpl extends RuleRegionImpl implements VerdictRegion {
 	/**
+	 * The number of structural features of the '<em>Verdict Region</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int VERDICT_REGION_FEATURE_COUNT = RuleRegionImpl.RULE_REGION_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Verdict Region</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int VERDICT_REGION_OPERATION_COUNT = RuleRegionImpl.RULE_REGION_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getReferredRuleRegion() <em>Referred Rule Region</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -86,7 +102,7 @@ public class VerdictRegionImpl extends RuleRegionImpl implements VerdictRegion {
 			referredRuleRegion = (RuleRegion)eResolveProxy(oldReferredRuleRegion);
 			if (referredRuleRegion != oldReferredRuleRegion) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.VERDICT_REGION__REFERRED_RULE_REGION, oldReferredRuleRegion, referredRuleRegion));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RuleRegionImpl.RULE_REGION_FEATURE_COUNT + 0, oldReferredRuleRegion, referredRuleRegion));
 			}
 		}
 		return referredRuleRegion;
@@ -111,7 +127,7 @@ public class VerdictRegionImpl extends RuleRegionImpl implements VerdictRegion {
 		RuleRegion oldReferredRuleRegion = referredRuleRegion;
 		referredRuleRegion = newReferredRuleRegion;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.VERDICT_REGION__REFERRED_RULE_REGION, oldReferredRuleRegion, referredRuleRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, RuleRegionImpl.RULE_REGION_FEATURE_COUNT + 0, oldReferredRuleRegion, referredRuleRegion));
 	}
 
 	/**
@@ -122,7 +138,7 @@ public class VerdictRegionImpl extends RuleRegionImpl implements VerdictRegion {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.VERDICT_REGION__REFERRED_RULE_REGION:
+			case RuleRegionImpl.RULE_REGION_FEATURE_COUNT + 0:
 				if (resolve) return getReferredRuleRegion();
 				return basicGetReferredRuleRegion();
 		}
@@ -137,7 +153,7 @@ public class VerdictRegionImpl extends RuleRegionImpl implements VerdictRegion {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.VERDICT_REGION__REFERRED_RULE_REGION:
+			case RuleRegionImpl.RULE_REGION_FEATURE_COUNT + 0:
 				setReferredRuleRegion((RuleRegion)newValue);
 				return;
 		}
@@ -152,7 +168,7 @@ public class VerdictRegionImpl extends RuleRegionImpl implements VerdictRegion {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.VERDICT_REGION__REFERRED_RULE_REGION:
+			case RuleRegionImpl.RULE_REGION_FEATURE_COUNT + 0:
 				setReferredRuleRegion((RuleRegion)null);
 				return;
 		}
@@ -167,7 +183,7 @@ public class VerdictRegionImpl extends RuleRegionImpl implements VerdictRegion {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.VERDICT_REGION__REFERRED_RULE_REGION:
+			case RuleRegionImpl.RULE_REGION_FEATURE_COUNT + 0:
 				return referredRuleRegion != null;
 		}
 		return super.eIsSet(featureID);

@@ -28,6 +28,23 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
  */
 public abstract class MappingStatementImpl extends StatementImpl implements MappingStatement {
 	/**
+	 * The number of structural features of the '<em>Mapping Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_STATEMENT_FEATURE_COUNT = StatementImpl.STATEMENT_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Mapping Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_STATEMENT_OPERATION_COUNT = StatementImpl.STATEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

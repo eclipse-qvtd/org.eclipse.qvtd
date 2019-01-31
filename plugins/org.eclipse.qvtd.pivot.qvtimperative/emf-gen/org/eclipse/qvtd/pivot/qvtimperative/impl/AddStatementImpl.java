@@ -30,6 +30,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
@@ -38,6 +40,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
@@ -62,6 +65,24 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * @generated
  */
 public class AddStatementImpl extends MappingStatementImpl implements AddStatement {
+	/**
+	 * The number of structural features of the '<em>Add Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ADD_STATEMENT_FEATURE_COUNT = MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Add Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ADD_STATEMENT_OPERATION_COUNT = MappingStatementImpl.MAPPING_STATEMENT_OPERATION_COUNT + 1;
+
 	/**
 	 * The cached value of the '{@link #getObservedProperties() <em>Observed Properties</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -139,7 +160,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	@Override
 	public EList<Property> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, QVTimperativePackage.ADD_STATEMENT__OBSERVED_PROPERTIES);
+			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0);
 		}
 		return observedProperties;
 	}
@@ -156,7 +177,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 			targetVariable = (ConnectionVariable)eResolveProxy(oldTargetVariable);
 			if (targetVariable != oldTargetVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativePackage.ADD_STATEMENT__TARGET_VARIABLE, oldTargetVariable, targetVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1, oldTargetVariable, targetVariable));
 			}
 		}
 		return targetVariable;
@@ -181,7 +202,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 		ConnectionVariable oldTargetVariable = targetVariable;
 		targetVariable = newTargetVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.ADD_STATEMENT__TARGET_VARIABLE, oldTargetVariable, targetVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1, oldTargetVariable, targetVariable));
 	}
 
 	/**
@@ -204,7 +225,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 		boolean oldIsEnforcedUnique = isEnforcedUnique;
 		isEnforcedUnique = newIsEnforcedUnique;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.ADD_STATEMENT__IS_ENFORCED_UNIQUE, oldIsEnforcedUnique, isEnforcedUnique));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2, oldIsEnforcedUnique, isEnforcedUnique));
 	}
 
 	/**
@@ -226,7 +247,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 		OCLExpression oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.ADD_STATEMENT__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -242,14 +263,14 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.ADD_STATEMENT__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.ADD_STATEMENT__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.ADD_STATEMENT__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -275,8 +296,8 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 			 *         'AddStatement::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_AddStatement_c_c_CompatibleTypeForValue);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_AddStatement_c_c_CompatibleTypeForValue);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -286,11 +307,11 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 				/*@Caught*/ @NonNull Object CAUGHT_result;
 				try {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression ownedExpression = this.getOwnedExpression();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = ownedExpression.getType();
+					final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
+					final /*@NonInvalid*/ @Nullable Type type = ownedExpression.getType();
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtimperative.@NonNull ConnectionVariable targetVariable = this.getTargetVariable();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = targetVariable.getType();
+					final /*@NonInvalid*/ @NonNull ConnectionVariable targetVariable = this.getTargetVariable();
+					final /*@NonInvalid*/ @Nullable Type type_0 = targetVariable.getType();
 					final /*@Thrown*/ boolean result = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 					CAUGHT_result = result;
 				}
@@ -325,7 +346,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.ADD_STATEMENT__OWNED_EXPRESSION:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -339,14 +360,14 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.ADD_STATEMENT__OBSERVED_PROPERTIES:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
 				return getObservedProperties();
-			case QVTimperativePackage.ADD_STATEMENT__TARGET_VARIABLE:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
 				if (resolve) return getTargetVariable();
 				return basicGetTargetVariable();
-			case QVTimperativePackage.ADD_STATEMENT__IS_ENFORCED_UNIQUE:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
 				return isIsEnforcedUnique();
-			case QVTimperativePackage.ADD_STATEMENT__OWNED_EXPRESSION:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
 				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -361,17 +382,17 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.ADD_STATEMENT__OBSERVED_PROPERTIES:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
-			case QVTimperativePackage.ADD_STATEMENT__TARGET_VARIABLE:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
 				setTargetVariable((ConnectionVariable)newValue);
 				return;
-			case QVTimperativePackage.ADD_STATEMENT__IS_ENFORCED_UNIQUE:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
 				setIsEnforcedUnique((Boolean)newValue);
 				return;
-			case QVTimperativePackage.ADD_STATEMENT__OWNED_EXPRESSION:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)newValue);
 				return;
 		}
@@ -386,16 +407,16 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.ADD_STATEMENT__OBSERVED_PROPERTIES:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				return;
-			case QVTimperativePackage.ADD_STATEMENT__TARGET_VARIABLE:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
 				setTargetVariable((ConnectionVariable)null);
 				return;
-			case QVTimperativePackage.ADD_STATEMENT__IS_ENFORCED_UNIQUE:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
 				setIsEnforcedUnique(IS_ENFORCED_UNIQUE_EDEFAULT);
 				return;
-			case QVTimperativePackage.ADD_STATEMENT__OWNED_EXPRESSION:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)null);
 				return;
 		}
@@ -410,13 +431,13 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.ADD_STATEMENT__OBSERVED_PROPERTIES:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
 				return observedProperties != null && !observedProperties.isEmpty();
-			case QVTimperativePackage.ADD_STATEMENT__TARGET_VARIABLE:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
 				return targetVariable != null;
-			case QVTimperativePackage.ADD_STATEMENT__IS_ENFORCED_UNIQUE:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
 				return isEnforcedUnique != IS_ENFORCED_UNIQUE_EDEFAULT;
-			case QVTimperativePackage.ADD_STATEMENT__OWNED_EXPRESSION:
+			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
 				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
@@ -431,7 +452,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatement.class) {
 			switch (derivedFeatureID) {
-				case QVTimperativePackage.ADD_STATEMENT__OBSERVED_PROPERTIES: return QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES;
+				case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0: return StatementImpl.STATEMENT_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -447,7 +468,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatement.class) {
 			switch (baseFeatureID) {
-				case QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES: return QVTimperativePackage.ADD_STATEMENT__OBSERVED_PROPERTIES;
+				case StatementImpl.STATEMENT_FEATURE_COUNT + 0: return MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -463,7 +484,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTimperativePackage.ADD_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP:
+			case MappingStatementImpl.MAPPING_STATEMENT_OPERATION_COUNT + 0:
 				return validateCompatibleTypeForValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

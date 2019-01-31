@@ -29,6 +29,23 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
  */
 public abstract class ArgumentEdgeImpl extends ExpressionEdgeImpl implements ArgumentEdge {
 	/**
+	 * The number of structural features of the '<em>Argument Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ARGUMENT_EDGE_FEATURE_COUNT = ExpressionEdgeImpl.EXPRESSION_EDGE_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Argument Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ARGUMENT_EDGE_OPERATION_COUNT = ExpressionEdgeImpl.EXPRESSION_EDGE_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

@@ -48,6 +48,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class MapPartEdgeImpl extends ArgumentEdgeImpl implements MapPartEdge {
 	/**
+	 * The number of structural features of the '<em>Map Part Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAP_PART_EDGE_FEATURE_COUNT = ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Map Part Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAP_PART_EDGE_OPERATION_COUNT = ArgumentEdgeImpl.ARGUMENT_EDGE_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getReferredPart() <em>Referred Part</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -88,7 +104,7 @@ public class MapPartEdgeImpl extends ArgumentEdgeImpl implements MapPartEdge {
 			referredPart = (MapLiteralPart)eResolveProxy(oldReferredPart);
 			if (referredPart != oldReferredPart) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.MAP_PART_EDGE__REFERRED_PART, oldReferredPart, referredPart));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0, oldReferredPart, referredPart));
 			}
 		}
 		return referredPart;
@@ -113,7 +129,7 @@ public class MapPartEdgeImpl extends ArgumentEdgeImpl implements MapPartEdge {
 		MapLiteralPart oldReferredPart = referredPart;
 		referredPart = newReferredPart;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.MAP_PART_EDGE__REFERRED_PART, oldReferredPart, referredPart));
+			eNotify(new ENotificationImpl(this, Notification.SET, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0, oldReferredPart, referredPart));
 	}
 
 	/**
@@ -124,7 +140,7 @@ public class MapPartEdgeImpl extends ArgumentEdgeImpl implements MapPartEdge {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.MAP_PART_EDGE__REFERRED_PART:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				if (resolve) return getReferredPart();
 				return basicGetReferredPart();
 		}
@@ -139,7 +155,7 @@ public class MapPartEdgeImpl extends ArgumentEdgeImpl implements MapPartEdge {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.MAP_PART_EDGE__REFERRED_PART:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				setReferredPart((MapLiteralPart)newValue);
 				return;
 		}
@@ -154,7 +170,7 @@ public class MapPartEdgeImpl extends ArgumentEdgeImpl implements MapPartEdge {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.MAP_PART_EDGE__REFERRED_PART:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				setReferredPart((MapLiteralPart)null);
 				return;
 		}
@@ -169,7 +185,7 @@ public class MapPartEdgeImpl extends ArgumentEdgeImpl implements MapPartEdge {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.MAP_PART_EDGE__REFERRED_PART:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				return referredPart != null;
 		}
 		return super.eIsSet(featureID);

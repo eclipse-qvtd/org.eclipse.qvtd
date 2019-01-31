@@ -70,13 +70,13 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case QVTbasePackage.BASE_MODEL: return createBaseModel();
-			case QVTbasePackage.FUNCTION: return createFunction();
-			case QVTbasePackage.FUNCTION_PARAMETER: return createFunctionParameter();
-			case QVTbasePackage.PATTERN: return createPattern();
-			case QVTbasePackage.PREDICATE: return createPredicate();
-			case QVTbasePackage.TRANSFORMATION: return createTransformation();
-			case QVTbasePackage.TYPED_MODEL: return createTypedModel();
+			case 0: return createBaseModel();
+			case 2: return createFunction();
+			case 3: return createFunctionParameter();
+			case 4: return createPattern();
+			case 5: return createPredicate();
+			case 7: return createTransformation();
+			case 8: return createTypedModel();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

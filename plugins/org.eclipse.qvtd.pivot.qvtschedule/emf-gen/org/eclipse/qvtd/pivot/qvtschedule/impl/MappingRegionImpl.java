@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.internal.ModelImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -52,6 +53,24 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
  * @generated
  */
 public abstract class MappingRegionImpl extends RegionImpl implements MappingRegion {
+	/**
+	 * The number of structural features of the '<em>Mapping Region</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_REGION_FEATURE_COUNT = RegionImpl.REGION_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Mapping Region</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_REGION_OPERATION_COUNT = RegionImpl.REGION_OPERATION_COUNT + 0;
+
 	/**
 	 * The cached value of the '{@link #getHeadNodes() <em>Head Nodes</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -99,7 +118,7 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public List<Node> getHeadNodes() {
 		if (headNodes == null) {
-			headNodes = new EObjectResolvingEList<Node>(Node.class, this, QVTschedulePackage.MAPPING_REGION__HEAD_NODES);
+			headNodes = new EObjectResolvingEList<Node>(Node.class, this, RegionImpl.REGION_FEATURE_COUNT + 0);
 		}
 		return headNodes;
 	}
@@ -112,7 +131,7 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public List<MappingPartition> getMappingPartitions() {
 		if (mappingPartitions == null) {
-			mappingPartitions = new EObjectWithInverseResolvingEList<MappingPartition>(MappingPartition.class, this, QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS, QVTschedulePackage.MAPPING_PARTITION__REFERED_MAPPING_REGION);
+			mappingPartitions = new EObjectWithInverseResolvingEList<MappingPartition>(MappingPartition.class, this, RegionImpl.REGION_FEATURE_COUNT + 1, PartitionImpl.PARTITION_FEATURE_COUNT + 1);
 		}
 		return mappingPartitions;
 	}
@@ -124,7 +143,7 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	 */
 	@Override
 	public ScheduleModel getOwningScheduleModel() {
-		if (eContainerFeatureID() != QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL) return null;
+		if (eContainerFeatureID() != (RegionImpl.REGION_FEATURE_COUNT + 2)) return null;
 		return (ScheduleModel)eInternalContainer();
 	}
 
@@ -134,7 +153,7 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningScheduleModel(ScheduleModel newOwningScheduleModel, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningScheduleModel, QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningScheduleModel, RegionImpl.REGION_FEATURE_COUNT + 2, msgs);
 		return msgs;
 	}
 
@@ -145,19 +164,19 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	 */
 	@Override
 	public void setOwningScheduleModel(ScheduleModel newOwningScheduleModel) {
-		if (newOwningScheduleModel != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL && newOwningScheduleModel != null)) {
+		if (newOwningScheduleModel != eInternalContainer() || (eContainerFeatureID() != (RegionImpl.REGION_FEATURE_COUNT + 2) && newOwningScheduleModel != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningScheduleModel))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningScheduleModel != null)
-				msgs = ((InternalEObject)newOwningScheduleModel).eInverseAdd(this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_MAPPING_REGIONS, ScheduleModel.class, msgs);
+				msgs = ((InternalEObject)newOwningScheduleModel).eInverseAdd(this, ModelImpl.MODEL_FEATURE_COUNT + 1, ScheduleModel.class, msgs);
 			msgs = basicSetOwningScheduleModel(newOwningScheduleModel, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL, newOwningScheduleModel, newOwningScheduleModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 2, newOwningScheduleModel, newOwningScheduleModel));
 	}
 
 	/**
@@ -169,9 +188,9 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS:
+			case RegionImpl.REGION_FEATURE_COUNT + 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMappingPartitions()).basicAdd(otherEnd, msgs);
-			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
+			case RegionImpl.REGION_FEATURE_COUNT + 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningScheduleModel((ScheduleModel)otherEnd, msgs);
@@ -187,9 +206,9 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS:
+			case RegionImpl.REGION_FEATURE_COUNT + 1:
 				return ((InternalEList<?>)getMappingPartitions()).basicRemove(otherEnd, msgs);
-			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
+			case RegionImpl.REGION_FEATURE_COUNT + 2:
 				return basicSetOwningScheduleModel(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -203,8 +222,8 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
-				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_MAPPING_REGIONS, ScheduleModel.class, msgs);
+			case RegionImpl.REGION_FEATURE_COUNT + 2:
+				return eInternalContainer().eInverseRemove(this, ModelImpl.MODEL_FEATURE_COUNT + 1, ScheduleModel.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -217,11 +236,11 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.MAPPING_REGION__HEAD_NODES:
+			case RegionImpl.REGION_FEATURE_COUNT + 0:
 				return getHeadNodes();
-			case QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS:
+			case RegionImpl.REGION_FEATURE_COUNT + 1:
 				return getMappingPartitions();
-			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
+			case RegionImpl.REGION_FEATURE_COUNT + 2:
 				return getOwningScheduleModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -236,15 +255,15 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.MAPPING_REGION__HEAD_NODES:
+			case RegionImpl.REGION_FEATURE_COUNT + 0:
 				getHeadNodes().clear();
 				getHeadNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS:
+			case RegionImpl.REGION_FEATURE_COUNT + 1:
 				getMappingPartitions().clear();
 				getMappingPartitions().addAll((Collection<? extends MappingPartition>)newValue);
 				return;
-			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
+			case RegionImpl.REGION_FEATURE_COUNT + 2:
 				setOwningScheduleModel((ScheduleModel)newValue);
 				return;
 		}
@@ -259,13 +278,13 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.MAPPING_REGION__HEAD_NODES:
+			case RegionImpl.REGION_FEATURE_COUNT + 0:
 				getHeadNodes().clear();
 				return;
-			case QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS:
+			case RegionImpl.REGION_FEATURE_COUNT + 1:
 				getMappingPartitions().clear();
 				return;
-			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
+			case RegionImpl.REGION_FEATURE_COUNT + 2:
 				setOwningScheduleModel((ScheduleModel)null);
 				return;
 		}
@@ -280,11 +299,11 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.MAPPING_REGION__HEAD_NODES:
+			case RegionImpl.REGION_FEATURE_COUNT + 0:
 				return headNodes != null && !headNodes.isEmpty();
-			case QVTschedulePackage.MAPPING_REGION__MAPPING_PARTITIONS:
+			case RegionImpl.REGION_FEATURE_COUNT + 1:
 				return mappingPartitions != null && !mappingPartitions.isEmpty();
-			case QVTschedulePackage.MAPPING_REGION__OWNING_SCHEDULE_MODEL:
+			case RegionImpl.REGION_FEATURE_COUNT + 2:
 				return getOwningScheduleModel() != null;
 		}
 		return super.eIsSet(featureID);

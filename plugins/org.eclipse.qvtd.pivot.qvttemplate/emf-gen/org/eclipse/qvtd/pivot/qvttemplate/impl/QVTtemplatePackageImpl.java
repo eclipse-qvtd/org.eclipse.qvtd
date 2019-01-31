@@ -20,6 +20,8 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.internal.LiteralExpImpl;
 import org.eclipse.ocl.pivot.internal.utilities.LazyXMIidAssigningResourceImpl;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
@@ -427,35 +429,35 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 		isCreated = true;
 
 		// Create classes and their features
-		collectionTemplateExpEClass = createEClass(COLLECTION_TEMPLATE_EXP);
-		createEReference(collectionTemplateExpEClass, COLLECTION_TEMPLATE_EXP__MEMBER);
-		createEReference(collectionTemplateExpEClass, COLLECTION_TEMPLATE_EXP__REFERRED_COLLECTION_TYPE);
-		createEReference(collectionTemplateExpEClass, COLLECTION_TEMPLATE_EXP__REST);
-		createEOperation(collectionTemplateExpEClass, COLLECTION_TEMPLATE_EXP___VALIDATE_MEMBER_TYPEIS_COLLECTION_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(collectionTemplateExpEClass, COLLECTION_TEMPLATE_EXP___VALIDATE_REST_TYPEIS_COLLECTION_TYPE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(collectionTemplateExpEClass, COLLECTION_TEMPLATE_EXP___VALIDATE_TYPEIS_COLLECTION_TYPE__DIAGNOSTICCHAIN_MAP);
+		collectionTemplateExpEClass = createEClass(0);
+		createEReference(collectionTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0);
+		createEReference(collectionTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1);
+		createEReference(collectionTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 2);
+		createEOperation(collectionTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 0);
+		createEOperation(collectionTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 1);
+		createEOperation(collectionTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 2);
 
-		objectTemplateExpEClass = createEClass(OBJECT_TEMPLATE_EXP);
-		createEReference(objectTemplateExpEClass, OBJECT_TEMPLATE_EXP__PART);
-		createEReference(objectTemplateExpEClass, OBJECT_TEMPLATE_EXP__REFERRED_CLASS);
-		createEOperation(objectTemplateExpEClass, OBJECT_TEMPLATE_EXP___VALIDATE_PART_PROPERTY_IS_UNIQUE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(objectTemplateExpEClass, OBJECT_TEMPLATE_EXP___VALIDATE_TYPEIS_OBJECT_TYPE__DIAGNOSTICCHAIN_MAP);
+		objectTemplateExpEClass = createEClass(1);
+		createEReference(objectTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0);
+		createEReference(objectTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1);
+		createEOperation(objectTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 0);
+		createEOperation(objectTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 1);
 
-		propertyTemplateItemEClass = createEClass(PROPERTY_TEMPLATE_ITEM);
-		createEReference(propertyTemplateItemEClass, PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER);
-		createEReference(propertyTemplateItemEClass, PROPERTY_TEMPLATE_ITEM__REFERRED_PROPERTY);
-		createEReference(propertyTemplateItemEClass, PROPERTY_TEMPLATE_ITEM__VALUE);
-		createEAttribute(propertyTemplateItemEClass, PROPERTY_TEMPLATE_ITEM__IS_OPPOSITE);
-		createEReference(propertyTemplateItemEClass, PROPERTY_TEMPLATE_ITEM__RESOLVED_PROPERTY);
-		createEOperation(propertyTemplateItemEClass, PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY__DIAGNOSTICCHAIN_MAP);
-		createEOperation(propertyTemplateItemEClass, PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_OBJECT_VALUE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(propertyTemplateItemEClass, PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_COLLECTION_ELEMENT_VALUE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(propertyTemplateItemEClass, PROPERTY_TEMPLATE_ITEM___VALIDATE_COMPATIBLE_TYPE_FOR_COLLECTION_VALUE__DIAGNOSTICCHAIN_MAP);
+		propertyTemplateItemEClass = createEClass(2);
+		createEReference(propertyTemplateItemEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
+		createEReference(propertyTemplateItemEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
+		createEReference(propertyTemplateItemEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
+		createEAttribute(propertyTemplateItemEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
+		createEReference(propertyTemplateItemEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 4);
+		createEOperation(propertyTemplateItemEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 1);
+		createEOperation(propertyTemplateItemEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 2);
+		createEOperation(propertyTemplateItemEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 3);
+		createEOperation(propertyTemplateItemEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 4);
 
-		templateExpEClass = createEClass(TEMPLATE_EXP);
-		createEReference(templateExpEClass, TEMPLATE_EXP__BINDS_TO);
-		createEReference(templateExpEClass, TEMPLATE_EXP__WHERE);
-		createEOperation(templateExpEClass, TEMPLATE_EXP___VALIDATE_WHERE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
+		templateExpEClass = createEClass(3);
+		createEReference(templateExpEClass, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 0);
+		createEReference(templateExpEClass, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 1);
+		createEOperation(templateExpEClass, LiteralExpImpl.LITERAL_EXP_OPERATION_COUNT + 1);
 	}
 
 	/**

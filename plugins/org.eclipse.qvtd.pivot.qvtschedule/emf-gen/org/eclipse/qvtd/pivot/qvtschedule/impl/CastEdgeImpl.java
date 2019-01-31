@@ -49,6 +49,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  */
 public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	/**
+	 * The number of structural features of the '<em>Cast Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CAST_EDGE_FEATURE_COUNT = NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 2;
+	/**
+	 * The number of operations of the '<em>Cast Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CAST_EDGE_OPERATION_COUNT = NavigableEdgeImpl.NAVIGABLE_EDGE_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getReferredClass() <em>Referred Class</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -84,9 +100,9 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.CAST_EDGE__PROPERTY:
+			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 0:
 				return getProperty();
-			case QVTschedulePackage.CAST_EDGE__REFERRED_CLASS:
+			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1:
 				if (resolve) return getReferredClass();
 				return basicGetReferredClass();
 		}
@@ -101,7 +117,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.CAST_EDGE__REFERRED_CLASS:
+			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1:
 				setReferredClass((org.eclipse.ocl.pivot.Class)newValue);
 				return;
 		}
@@ -116,7 +132,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.CAST_EDGE__REFERRED_CLASS:
+			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1:
 				setReferredClass((org.eclipse.ocl.pivot.Class)null);
 				return;
 		}
@@ -131,9 +147,9 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.CAST_EDGE__PROPERTY:
+			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 0:
 				return getProperty() != null;
-			case QVTschedulePackage.CAST_EDGE__REFERRED_CLASS:
+			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1:
 				return referredClass != null;
 		}
 		return super.eIsSet(featureID);
@@ -175,7 +191,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 			referredClass = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldReferredClass);
 			if (referredClass != oldReferredClass) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.CAST_EDGE__REFERRED_CLASS, oldReferredClass, referredClass));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1, oldReferredClass, referredClass));
 			}
 		}
 		return referredClass;
@@ -200,7 +216,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 		org.eclipse.ocl.pivot.Class oldReferredClass = referredClass;
 		referredClass = newReferredClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CAST_EDGE__REFERRED_CLASS, oldReferredClass, referredClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1, oldReferredClass, referredClass));
 	}
 
 	@Override

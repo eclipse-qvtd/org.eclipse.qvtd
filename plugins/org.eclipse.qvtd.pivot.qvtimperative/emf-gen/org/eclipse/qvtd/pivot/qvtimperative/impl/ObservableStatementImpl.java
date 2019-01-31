@@ -38,6 +38,22 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
  */
 public abstract class ObservableStatementImpl extends StatementImpl implements ObservableStatement {
 	/**
+	 * The number of structural features of the '<em>Observable Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OBSERVABLE_STATEMENT_FEATURE_COUNT = StatementImpl.STATEMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Observable Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OBSERVABLE_STATEMENT_OPERATION_COUNT = StatementImpl.STATEMENT_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getObservedProperties() <em>Observed Properties</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -74,7 +90,7 @@ public abstract class ObservableStatementImpl extends StatementImpl implements O
 	@Override
 	public EList<Property> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES);
+			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, StatementImpl.STATEMENT_FEATURE_COUNT + 0);
 		}
 		return observedProperties;
 	}
@@ -87,7 +103,7 @@ public abstract class ObservableStatementImpl extends StatementImpl implements O
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES:
+			case StatementImpl.STATEMENT_FEATURE_COUNT + 0:
 				return getObservedProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -102,7 +118,7 @@ public abstract class ObservableStatementImpl extends StatementImpl implements O
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES:
+			case StatementImpl.STATEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
@@ -118,7 +134,7 @@ public abstract class ObservableStatementImpl extends StatementImpl implements O
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES:
+			case StatementImpl.STATEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				return;
 		}
@@ -133,7 +149,7 @@ public abstract class ObservableStatementImpl extends StatementImpl implements O
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES:
+			case StatementImpl.STATEMENT_FEATURE_COUNT + 0:
 				return observedProperties != null && !observedProperties.isEmpty();
 		}
 		return super.eIsSet(featureID);

@@ -35,6 +35,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
@@ -77,6 +78,24 @@ import com.google.common.collect.Iterables;
  * @generated
  */
 public abstract class NodeImpl extends ElementImpl implements Node {
+	/**
+	 * The number of structural features of the '<em>Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NODE_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 9;
+
+	/**
+	 * The number of operations of the '<em>Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NODE_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 0;
+
 	/**
 	 * The cached value of the '{@link #getClassDatum() <em>Class Datum</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -208,7 +227,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			classDatum = (ClassDatum)eResolveProxy(oldClassDatum);
 			if (classDatum != oldClassDatum) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NODE__CLASS_DATUM, oldClassDatum, classDatum));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 0, oldClassDatum, classDatum));
 			}
 		}
 		return classDatum;
@@ -233,7 +252,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		ClassDatum oldClassDatum = classDatum;
 		classDatum = newClassDatum;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__CLASS_DATUM, oldClassDatum, classDatum));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 0, oldClassDatum, classDatum));
 	}
 
 	/**
@@ -248,7 +267,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			cluster = (Cluster)eResolveProxy(oldCluster);
 			if (cluster != oldCluster) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NODE__CLUSTER, oldCluster, cluster));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 1, oldCluster, cluster));
 			}
 		}
 		return cluster;
@@ -272,7 +291,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		Cluster oldCluster = cluster;
 		cluster = newCluster;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__CLUSTER, oldCluster, newCluster);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 1, oldCluster, newCluster);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -288,14 +307,14 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		if (newCluster != cluster) {
 			NotificationChain msgs = null;
 			if (cluster != null)
-				msgs = ((InternalEObject)cluster).eInverseRemove(this, QVTschedulePackage.CLUSTER__MEMBER_NODES, Cluster.class, msgs);
+				msgs = ((InternalEObject)cluster).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, Cluster.class, msgs);
 			if (newCluster != null)
-				msgs = ((InternalEObject)newCluster).eInverseAdd(this, QVTschedulePackage.CLUSTER__MEMBER_NODES, Cluster.class, msgs);
+				msgs = ((InternalEObject)newCluster).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, Cluster.class, msgs);
 			msgs = basicSetCluster(newCluster, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__CLUSTER, newCluster, newCluster));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 1, newCluster, newCluster));
 	}
 
 	/**
@@ -310,7 +329,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 			incomingConnection = (NodeConnection)eResolveProxy(oldIncomingConnection);
 			if (incomingConnection != oldIncomingConnection) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.NODE__INCOMING_CONNECTION, oldIncomingConnection, incomingConnection));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 2, oldIncomingConnection, incomingConnection));
 			}
 		}
 		return incomingConnection;
@@ -335,7 +354,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		NodeConnection oldIncomingConnection = incomingConnection;
 		incomingConnection = newIncomingConnection;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__INCOMING_CONNECTION, oldIncomingConnection, incomingConnection));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 2, oldIncomingConnection, incomingConnection));
 	}
 
 	/**
@@ -358,7 +377,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		Role oldNodeRole = nodeRole;
 		nodeRole = newNodeRole == null ? NODE_ROLE_EDEFAULT : newNodeRole;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__NODE_ROLE, oldNodeRole, nodeRole));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 5, oldNodeRole, nodeRole));
 	}
 
 	/**
@@ -369,7 +388,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public List<NodeConnection> getOutgoingConnections() {
 		if (outgoingConnections == null) {
-			outgoingConnections = new EObjectResolvingEList<NodeConnection>(NodeConnection.class, this, QVTschedulePackage.NODE__OUTGOING_CONNECTIONS);
+			outgoingConnections = new EObjectResolvingEList<NodeConnection>(NodeConnection.class, this, ElementImpl.ELEMENT_FEATURE_COUNT + 6);
 		}
 		return outgoingConnections;
 	}
@@ -382,7 +401,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public List<Edge> getIncomingEdges() {
 		if (incomingEdges == null) {
-			incomingEdges = new EObjectWithInverseResolvingEList<Edge>(Edge.class, this, QVTschedulePackage.NODE__INCOMING_EDGES, QVTschedulePackage.EDGE__TARGET_NODE);
+			incomingEdges = new EObjectWithInverseResolvingEList<Edge>(Edge.class, this, ElementImpl.ELEMENT_FEATURE_COUNT + 3, ElementImpl.ELEMENT_FEATURE_COUNT + 5);
 		}
 		return incomingEdges;
 	}
@@ -407,7 +426,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 4, oldName, name));
 	}
 
 	/**
@@ -418,7 +437,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public List<Edge> getOutgoingEdges() {
 		if (outgoingEdges == null) {
-			outgoingEdges = new EObjectWithInverseResolvingEList<Edge>(Edge.class, this, QVTschedulePackage.NODE__OUTGOING_EDGES, QVTschedulePackage.EDGE__SOURCE_NODE);
+			outgoingEdges = new EObjectWithInverseResolvingEList<Edge>(Edge.class, this, ElementImpl.ELEMENT_FEATURE_COUNT + 7, ElementImpl.ELEMENT_FEATURE_COUNT + 4);
 		}
 		return outgoingEdges;
 	}
@@ -430,7 +449,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 */
 	@Override
 	public Region getOwningRegion() {
-		if (eContainerFeatureID() != QVTschedulePackage.NODE__OWNING_REGION) return null;
+		if (eContainerFeatureID() != (ElementImpl.ELEMENT_FEATURE_COUNT + 8)) return null;
 		return (Region)eInternalContainer();
 	}
 
@@ -440,7 +459,7 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningRegion(Region newOwningRegion, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningRegion, QVTschedulePackage.NODE__OWNING_REGION, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningRegion, ElementImpl.ELEMENT_FEATURE_COUNT + 8, msgs);
 		return msgs;
 	}
 
@@ -451,19 +470,19 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	 */
 	@Override
 	public void setOwningRegion(Region newOwningRegion) {
-		if (newOwningRegion != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.NODE__OWNING_REGION && newOwningRegion != null)) {
+		if (newOwningRegion != eInternalContainer() || (eContainerFeatureID() != (ElementImpl.ELEMENT_FEATURE_COUNT + 8) && newOwningRegion != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningRegion))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningRegion != null)
-				msgs = ((InternalEObject)newOwningRegion).eInverseAdd(this, QVTschedulePackage.REGION__OWNED_NODES, Region.class, msgs);
+				msgs = ((InternalEObject)newOwningRegion).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, Region.class, msgs);
 			msgs = basicSetOwningRegion(newOwningRegion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.NODE__OWNING_REGION, newOwningRegion, newOwningRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 8, newOwningRegion, newOwningRegion));
 	}
 
 	/**
@@ -474,26 +493,26 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE__CLASS_DATUM:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				if (resolve) return getClassDatum();
 				return basicGetClassDatum();
-			case QVTschedulePackage.NODE__CLUSTER:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				if (resolve) return getCluster();
 				return basicGetCluster();
-			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				if (resolve) return getIncomingConnection();
 				return basicGetIncomingConnection();
-			case QVTschedulePackage.NODE__INCOMING_EDGES:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return getIncomingEdges();
-			case QVTschedulePackage.NODE__NAME:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				return getName();
-			case QVTschedulePackage.NODE__NODE_ROLE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				return getNodeRole();
-			case QVTschedulePackage.NODE__OUTGOING_CONNECTIONS:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				return getOutgoingConnections();
-			case QVTschedulePackage.NODE__OUTGOING_EDGES:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				return getOutgoingEdges();
-			case QVTschedulePackage.NODE__OWNING_REGION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return getOwningRegion();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -508,34 +527,34 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE__CLASS_DATUM:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setClassDatum((ClassDatum)newValue);
 				return;
-			case QVTschedulePackage.NODE__CLUSTER:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setCluster((Cluster)newValue);
 				return;
-			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setIncomingConnection((NodeConnection)newValue);
 				return;
-			case QVTschedulePackage.NODE__INCOMING_EDGES:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				getIncomingEdges().clear();
 				getIncomingEdges().addAll((Collection<? extends Edge>)newValue);
 				return;
-			case QVTschedulePackage.NODE__NAME:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				setName((String)newValue);
 				return;
-			case QVTschedulePackage.NODE__NODE_ROLE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				setNodeRole((Role)newValue);
 				return;
-			case QVTschedulePackage.NODE__OUTGOING_CONNECTIONS:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				getOutgoingConnections().clear();
 				getOutgoingConnections().addAll((Collection<? extends NodeConnection>)newValue);
 				return;
-			case QVTschedulePackage.NODE__OUTGOING_EDGES:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				getOutgoingEdges().clear();
 				getOutgoingEdges().addAll((Collection<? extends Edge>)newValue);
 				return;
-			case QVTschedulePackage.NODE__OWNING_REGION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				setOwningRegion((Region)newValue);
 				return;
 		}
@@ -550,31 +569,31 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE__CLASS_DATUM:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setClassDatum((ClassDatum)null);
 				return;
-			case QVTschedulePackage.NODE__CLUSTER:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setCluster((Cluster)null);
 				return;
-			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setIncomingConnection((NodeConnection)null);
 				return;
-			case QVTschedulePackage.NODE__INCOMING_EDGES:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				getIncomingEdges().clear();
 				return;
-			case QVTschedulePackage.NODE__NAME:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				setName(NAME_EDEFAULT);
 				return;
-			case QVTschedulePackage.NODE__NODE_ROLE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				setNodeRole(NODE_ROLE_EDEFAULT);
 				return;
-			case QVTschedulePackage.NODE__OUTGOING_CONNECTIONS:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				getOutgoingConnections().clear();
 				return;
-			case QVTschedulePackage.NODE__OUTGOING_EDGES:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				getOutgoingEdges().clear();
 				return;
-			case QVTschedulePackage.NODE__OWNING_REGION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				setOwningRegion((Region)null);
 				return;
 		}
@@ -589,23 +608,23 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE__CLASS_DATUM:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return classDatum != null;
-			case QVTschedulePackage.NODE__CLUSTER:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return cluster != null;
-			case QVTschedulePackage.NODE__INCOMING_CONNECTION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return incomingConnection != null;
-			case QVTschedulePackage.NODE__INCOMING_EDGES:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return incomingEdges != null && !incomingEdges.isEmpty();
-			case QVTschedulePackage.NODE__NAME:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case QVTschedulePackage.NODE__NODE_ROLE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				return nodeRole != NODE_ROLE_EDEFAULT;
-			case QVTschedulePackage.NODE__OUTGOING_CONNECTIONS:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				return outgoingConnections != null && !outgoingConnections.isEmpty();
-			case QVTschedulePackage.NODE__OUTGOING_EDGES:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				return outgoingEdges != null && !outgoingEdges.isEmpty();
-			case QVTschedulePackage.NODE__OWNING_REGION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return getOwningRegion() != null;
 		}
 		return super.eIsSet(featureID);
@@ -815,15 +834,15 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE__CLUSTER:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				if (cluster != null)
-					msgs = ((InternalEObject)cluster).eInverseRemove(this, QVTschedulePackage.CLUSTER__MEMBER_NODES, Cluster.class, msgs);
+					msgs = ((InternalEObject)cluster).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, Cluster.class, msgs);
 				return basicSetCluster((Cluster)otherEnd, msgs);
-			case QVTschedulePackage.NODE__INCOMING_EDGES:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getIncomingEdges()).basicAdd(otherEnd, msgs);
-			case QVTschedulePackage.NODE__OUTGOING_EDGES:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOutgoingEdges()).basicAdd(otherEnd, msgs);
-			case QVTschedulePackage.NODE__OWNING_REGION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningRegion((Region)otherEnd, msgs);
@@ -839,13 +858,13 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.NODE__CLUSTER:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return basicSetCluster(null, msgs);
-			case QVTschedulePackage.NODE__INCOMING_EDGES:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return ((InternalEList<?>)getIncomingEdges()).basicRemove(otherEnd, msgs);
-			case QVTschedulePackage.NODE__OUTGOING_EDGES:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				return ((InternalEList<?>)getOutgoingEdges()).basicRemove(otherEnd, msgs);
-			case QVTschedulePackage.NODE__OWNING_REGION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return basicSetOwningRegion(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -859,8 +878,8 @@ public abstract class NodeImpl extends ElementImpl implements Node {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTschedulePackage.NODE__OWNING_REGION:
-				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.REGION__OWNED_NODES, Region.class, msgs);
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
+				return eInternalContainer().eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, Region.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

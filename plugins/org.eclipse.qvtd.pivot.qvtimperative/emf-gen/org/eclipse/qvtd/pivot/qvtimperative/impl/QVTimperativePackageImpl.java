@@ -20,8 +20,14 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
+import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
 import org.eclipse.ocl.pivot.internal.utilities.LazyXMIidAssigningResourceImpl;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
+import org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl;
+import org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.AddStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.AppendParameterBinding;
@@ -1383,135 +1389,135 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		isCreated = true;
 
 		// Create classes and their features
-		addStatementEClass = createEClass(ADD_STATEMENT);
-		createEReference(addStatementEClass, ADD_STATEMENT__TARGET_VARIABLE);
-		createEAttribute(addStatementEClass, ADD_STATEMENT__IS_ENFORCED_UNIQUE);
-		createEReference(addStatementEClass, ADD_STATEMENT__OWNED_EXPRESSION);
-		createEOperation(addStatementEClass, ADD_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
+		addStatementEClass = createEClass(0);
+		createEReference(addStatementEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1);
+		createEAttribute(addStatementEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2);
+		createEReference(addStatementEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3);
+		createEOperation(addStatementEClass, MappingStatementImpl.MAPPING_STATEMENT_OPERATION_COUNT + 0);
 
-		appendParameterEClass = createEClass(APPEND_PARAMETER);
+		appendParameterEClass = createEClass(1);
 
-		appendParameterBindingEClass = createEClass(APPEND_PARAMETER_BINDING);
-		createEReference(appendParameterBindingEClass, APPEND_PARAMETER_BINDING__VALUE);
+		appendParameterBindingEClass = createEClass(2);
+		createEReference(appendParameterBindingEClass, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0);
 
-		bufferStatementEClass = createEClass(BUFFER_STATEMENT);
-		createEReference(bufferStatementEClass, BUFFER_STATEMENT__OWNED_EXPRESSION);
-		createEAttribute(bufferStatementEClass, BUFFER_STATEMENT__FIRST_PASS);
-		createEAttribute(bufferStatementEClass, BUFFER_STATEMENT__LAST_PASS);
-		createEOperation(bufferStatementEClass, BUFFER_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
+		bufferStatementEClass = createEClass(3);
+		createEReference(bufferStatementEClass, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1);
+		createEAttribute(bufferStatementEClass, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 2);
+		createEAttribute(bufferStatementEClass, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 3);
+		createEOperation(bufferStatementEClass, ConnectionVariableImpl.CONNECTION_VARIABLE_OPERATION_COUNT + 1);
 
-		checkStatementEClass = createEClass(CHECK_STATEMENT);
-		createEReference(checkStatementEClass, CHECK_STATEMENT__OWNED_EXPRESSION);
-		createEOperation(checkStatementEClass, CHECK_STATEMENT___VALIDATE_TYPE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP);
+		checkStatementEClass = createEClass(4);
+		createEReference(checkStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0);
+		createEOperation(checkStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 0);
 
-		connectionVariableEClass = createEClass(CONNECTION_VARIABLE);
-		createEAttribute(connectionVariableEClass, CONNECTION_VARIABLE__IS_STRICT);
+		connectionVariableEClass = createEClass(5);
+		createEAttribute(connectionVariableEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0);
 
-		declareStatementEClass = createEClass(DECLARE_STATEMENT);
-		createEAttribute(declareStatementEClass, DECLARE_STATEMENT__IS_CHECK);
-		createEReference(declareStatementEClass, DECLARE_STATEMENT__OWNED_EXPRESSION);
-		createEOperation(declareStatementEClass, DECLARE_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE__DIAGNOSTICCHAIN_MAP);
+		declareStatementEClass = createEClass(6);
+		createEAttribute(declareStatementEClass, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 1);
+		createEReference(declareStatementEClass, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2);
+		createEOperation(declareStatementEClass, VariableStatementImpl.VARIABLE_STATEMENT_OPERATION_COUNT + 0);
 
-		guardParameterEClass = createEClass(GUARD_PARAMETER);
-		createEReference(guardParameterEClass, GUARD_PARAMETER__REFERRED_TYPED_MODEL);
-		createEReference(guardParameterEClass, GUARD_PARAMETER__SUCCESS_PROPERTY);
+		guardParameterEClass = createEClass(7);
+		createEReference(guardParameterEClass, MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0);
+		createEReference(guardParameterEClass, MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 1);
 
-		guardParameterBindingEClass = createEClass(GUARD_PARAMETER_BINDING);
-		createEReference(guardParameterBindingEClass, GUARD_PARAMETER_BINDING__VALUE);
-		createEAttribute(guardParameterBindingEClass, GUARD_PARAMETER_BINDING__IS_CHECK);
+		guardParameterBindingEClass = createEClass(8);
+		createEReference(guardParameterBindingEClass, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0);
+		createEAttribute(guardParameterBindingEClass, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1);
 
-		imperativeModelEClass = createEClass(IMPERATIVE_MODEL);
+		imperativeModelEClass = createEClass(9);
 
-		imperativeTransformationEClass = createEClass(IMPERATIVE_TRANSFORMATION);
-		createEOperation(imperativeTransformationEClass, IMPERATIVE_TRANSFORMATION___VALIDATEALL_RULES_ARE_MAPPINGS__DIAGNOSTICCHAIN_MAP);
+		imperativeTransformationEClass = createEClass(10);
+		createEOperation(imperativeTransformationEClass, TransformationImpl.TRANSFORMATION_OPERATION_COUNT + 0);
 
-		imperativeTypedModelEClass = createEClass(IMPERATIVE_TYPED_MODEL);
-		createEAttribute(imperativeTypedModelEClass, IMPERATIVE_TYPED_MODEL__IS_CHECKED);
-		createEAttribute(imperativeTypedModelEClass, IMPERATIVE_TYPED_MODEL__IS_ENFORCED);
-		createEReference(imperativeTypedModelEClass, IMPERATIVE_TYPED_MODEL__ALL_USED_PACKAGES);
-		createEOperation(imperativeTypedModelEClass, IMPERATIVE_TYPED_MODEL___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP);
-		createEOperation(imperativeTypedModelEClass, IMPERATIVE_TYPED_MODEL___VALIDATE_NOT_BOTH_CHECKED_AND_ENFORCED__DIAGNOSTICCHAIN_MAP);
+		imperativeTypedModelEClass = createEClass(11);
+		createEAttribute(imperativeTypedModelEClass, TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 0);
+		createEAttribute(imperativeTypedModelEClass, TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 1);
+		createEReference(imperativeTypedModelEClass, TypedModelImpl.TYPED_MODEL_FEATURE_COUNT + 2);
+		createEOperation(imperativeTypedModelEClass, TypedModelImpl.TYPED_MODEL_OPERATION_COUNT + 0);
+		createEOperation(imperativeTypedModelEClass, TypedModelImpl.TYPED_MODEL_OPERATION_COUNT + 1);
 
-		loopParameterBindingEClass = createEClass(LOOP_PARAMETER_BINDING);
-		createEReference(loopParameterBindingEClass, LOOP_PARAMETER_BINDING__VALUE);
-		createEAttribute(loopParameterBindingEClass, LOOP_PARAMETER_BINDING__IS_CHECK);
+		loopParameterBindingEClass = createEClass(12);
+		createEReference(loopParameterBindingEClass, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0);
+		createEAttribute(loopParameterBindingEClass, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1);
 
-		loopVariableEClass = createEClass(LOOP_VARIABLE);
-		createEReference(loopVariableEClass, LOOP_VARIABLE__OWNING_MAPPING_LOOP);
+		loopVariableEClass = createEClass(13);
+		createEReference(loopVariableEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0);
 
-		mappingEClass = createEClass(MAPPING);
-		createEAttribute(mappingEClass, MAPPING__IS_STRICT);
-		createEReference(mappingEClass, MAPPING__OWNED_MAPPING_PARAMETERS);
-		createEReference(mappingEClass, MAPPING__OWNED_STATEMENTS);
-		createEAttribute(mappingEClass, MAPPING__FIRST_PASS);
-		createEAttribute(mappingEClass, MAPPING__LAST_PASS);
-		createEOperation(mappingEClass, MAPPING___VALIDATE_NAME_IS_NOT_NULL__DIAGNOSTICCHAIN_MAP);
-		createEOperation(mappingEClass, MAPPING___VALIDATE_MAPPING_PARAMETER_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(mappingEClass, MAPPING___VALIDATE_LOCAL_VARIABLE_NAMES_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP);
+		mappingEClass = createEClass(14);
+		createEAttribute(mappingEClass, RuleImpl.RULE_FEATURE_COUNT + 0);
+		createEReference(mappingEClass, RuleImpl.RULE_FEATURE_COUNT + 1);
+		createEReference(mappingEClass, RuleImpl.RULE_FEATURE_COUNT + 2);
+		createEAttribute(mappingEClass, RuleImpl.RULE_FEATURE_COUNT + 3);
+		createEAttribute(mappingEClass, RuleImpl.RULE_FEATURE_COUNT + 4);
+		createEOperation(mappingEClass, RuleImpl.RULE_OPERATION_COUNT + 0);
+		createEOperation(mappingEClass, RuleImpl.RULE_OPERATION_COUNT + 1);
+		createEOperation(mappingEClass, RuleImpl.RULE_OPERATION_COUNT + 2);
 
-		mappingCallEClass = createEClass(MAPPING_CALL);
-		createEReference(mappingCallEClass, MAPPING_CALL__OWNED_MAPPING_PARAMETER_BINDINGS);
-		createEAttribute(mappingCallEClass, MAPPING_CALL__IS_INSTALL);
-		createEAttribute(mappingCallEClass, MAPPING_CALL__IS_INVOKE);
-		createEReference(mappingCallEClass, MAPPING_CALL__REFERRED_MAPPING);
-		createEAttribute(mappingCallEClass, MAPPING_CALL__REFERRED_NAMES);
-		createEAttribute(mappingCallEClass, MAPPING_CALL__REFERRING_NAMES);
-		createEOperation(mappingCallEClass, MAPPING_CALL___VALIDATE_MATCHING_CALL_BINDINGS__DIAGNOSTICCHAIN_MAP);
-		createEOperation(mappingCallEClass, MAPPING_CALL___VALIDATE_NOT_BOTH_INSTALL_AND_INVOKE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(mappingCallEClass, MAPPING_CALL___VALIDATE_UNIQUE_CALL_BINDINGS__DIAGNOSTICCHAIN_MAP);
+		mappingCallEClass = createEClass(15);
+		createEReference(mappingCallEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0);
+		createEAttribute(mappingCallEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1);
+		createEAttribute(mappingCallEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2);
+		createEReference(mappingCallEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3);
+		createEAttribute(mappingCallEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 4);
+		createEAttribute(mappingCallEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 5);
+		createEOperation(mappingCallEClass, MappingStatementImpl.MAPPING_STATEMENT_OPERATION_COUNT + 1);
+		createEOperation(mappingCallEClass, MappingStatementImpl.MAPPING_STATEMENT_OPERATION_COUNT + 2);
+		createEOperation(mappingCallEClass, MappingStatementImpl.MAPPING_STATEMENT_OPERATION_COUNT + 3);
 
-		mappingLoopEClass = createEClass(MAPPING_LOOP);
-		createEReference(mappingLoopEClass, MAPPING_LOOP__OWNED_ITERATORS);
-		createEReference(mappingLoopEClass, MAPPING_LOOP__OWNED_MAPPING_STATEMENTS);
-		createEReference(mappingLoopEClass, MAPPING_LOOP__OWNED_EXPRESSION);
+		mappingLoopEClass = createEClass(16);
+		createEReference(mappingLoopEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1);
+		createEReference(mappingLoopEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2);
+		createEReference(mappingLoopEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3);
 
-		mappingParameterEClass = createEClass(MAPPING_PARAMETER);
-		createEReference(mappingParameterEClass, MAPPING_PARAMETER__OWNING_MAPPING);
+		mappingParameterEClass = createEClass(17);
+		createEReference(mappingParameterEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0);
 
-		mappingParameterBindingEClass = createEClass(MAPPING_PARAMETER_BINDING);
-		createEReference(mappingParameterBindingEClass, MAPPING_PARAMETER_BINDING__OWNING_MAPPING_CALL);
-		createEReference(mappingParameterBindingEClass, MAPPING_PARAMETER_BINDING__BOUND_VARIABLE);
-		createEOperation(mappingParameterBindingEClass, MAPPING_PARAMETER_BINDING___VALIDATE_PARAMETER_IS_MAPPING_PARAMETER__DIAGNOSTICCHAIN_MAP);
+		mappingParameterBindingEClass = createEClass(18);
+		createEReference(mappingParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
+		createEReference(mappingParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
+		createEOperation(mappingParameterBindingEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 0);
 
-		mappingStatementEClass = createEClass(MAPPING_STATEMENT);
+		mappingStatementEClass = createEClass(19);
 
-		newStatementEClass = createEClass(NEW_STATEMENT);
-		createEAttribute(newStatementEClass, NEW_STATEMENT__IS_CONTAINED);
-		createEReference(newStatementEClass, NEW_STATEMENT__REFERRED_TYPED_MODEL);
-		createEReference(newStatementEClass, NEW_STATEMENT__OWNED_EXPRESSION);
-		createEOperation(newStatementEClass, NEW_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(newStatementEClass, NEW_STATEMENT___VALIDATE_NON_DATA_TYPE_FOR_TYPE__DIAGNOSTICCHAIN_MAP);
+		newStatementEClass = createEClass(20);
+		createEAttribute(newStatementEClass, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 1);
+		createEReference(newStatementEClass, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2);
+		createEReference(newStatementEClass, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3);
+		createEOperation(newStatementEClass, VariableStatementImpl.VARIABLE_STATEMENT_OPERATION_COUNT + 0);
+		createEOperation(newStatementEClass, VariableStatementImpl.VARIABLE_STATEMENT_OPERATION_COUNT + 1);
 
-		observableStatementEClass = createEClass(OBSERVABLE_STATEMENT);
-		createEReference(observableStatementEClass, OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES);
+		observableStatementEClass = createEClass(21);
+		createEReference(observableStatementEClass, StatementImpl.STATEMENT_FEATURE_COUNT + 0);
 
-		setStatementEClass = createEClass(SET_STATEMENT);
-		createEReference(setStatementEClass, SET_STATEMENT__TARGET_VARIABLE);
-		createEReference(setStatementEClass, SET_STATEMENT__TARGET_PROPERTY);
-		createEAttribute(setStatementEClass, SET_STATEMENT__IS_PARTIAL);
-		createEAttribute(setStatementEClass, SET_STATEMENT__IS_NOTIFY);
-		createEAttribute(setStatementEClass, SET_STATEMENT__IS_OPPOSITE);
-		createEReference(setStatementEClass, SET_STATEMENT__OWNED_EXPRESSION);
-		createEReference(setStatementEClass, SET_STATEMENT__RESOLVED_PROPERTY);
-		createEOperation(setStatementEClass, SET_STATEMENT___VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY__DIAGNOSTICCHAIN_MAP);
-		createEOperation(setStatementEClass, SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(setStatementEClass, SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(setStatementEClass, SET_STATEMENT___VALIDATE_VALUE_DOES_NOT_NAVIGATE_FROM_REALIZED_VARIABLES__DIAGNOSTICCHAIN_MAP);
-		createEOperation(setStatementEClass, SET_STATEMENT___VALIDATE_TARGET_PROPERTY_IS_NOT_READ_ONLY__DIAGNOSTICCHAIN_MAP);
+		setStatementEClass = createEClass(22);
+		createEReference(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0);
+		createEReference(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 1);
+		createEAttribute(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 2);
+		createEAttribute(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 3);
+		createEAttribute(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 4);
+		createEReference(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5);
+		createEReference(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 6);
+		createEOperation(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 0);
+		createEOperation(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 1);
+		createEOperation(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 2);
+		createEOperation(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 3);
+		createEOperation(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 4);
 
-		simpleParameterEClass = createEClass(SIMPLE_PARAMETER);
-		createEReference(simpleParameterEClass, SIMPLE_PARAMETER__REFERRED_TYPED_MODEL);
+		simpleParameterEClass = createEClass(23);
+		createEReference(simpleParameterEClass, MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0);
 
-		simpleParameterBindingEClass = createEClass(SIMPLE_PARAMETER_BINDING);
-		createEReference(simpleParameterBindingEClass, SIMPLE_PARAMETER_BINDING__VALUE);
-		createEAttribute(simpleParameterBindingEClass, SIMPLE_PARAMETER_BINDING__IS_CHECK);
-		createEOperation(simpleParameterBindingEClass, SIMPLE_PARAMETER_BINDING___VALIDATE_COMPATIBLE_TYPE_FOR_CHECKED_VALUE__DIAGNOSTICCHAIN_MAP);
-		createEOperation(simpleParameterBindingEClass, SIMPLE_PARAMETER_BINDING___VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE__DIAGNOSTICCHAIN_MAP);
+		simpleParameterBindingEClass = createEClass(24);
+		createEReference(simpleParameterBindingEClass, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0);
+		createEAttribute(simpleParameterBindingEClass, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1);
+		createEOperation(simpleParameterBindingEClass, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_OPERATION_COUNT + 0);
+		createEOperation(simpleParameterBindingEClass, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_OPERATION_COUNT + 1);
 
-		statementEClass = createEClass(STATEMENT);
-		createEOperation(statementEClass, STATEMENT___JOIN_NAMES__ELIST);
+		statementEClass = createEClass(25);
+		createEOperation(statementEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0);
 
-		variableStatementEClass = createEClass(VARIABLE_STATEMENT);
+		variableStatementEClass = createEClass(26);
 	}
 
 	/**

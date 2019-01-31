@@ -73,17 +73,17 @@ public class QVTrelationFactoryImpl extends EFactoryImpl implements QVTrelationF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case QVTrelationPackage.DOMAIN_PATTERN: return createDomainPattern();
-			case QVTrelationPackage.KEY: return createKey();
-			case QVTrelationPackage.RELATION: return createRelation();
-			case QVTrelationPackage.RELATION_CALL_EXP: return createRelationCallExp();
-			case QVTrelationPackage.RELATION_DOMAIN: return createRelationDomain();
-			case QVTrelationPackage.RELATION_DOMAIN_ASSIGNMENT: return createRelationDomainAssignment();
-			case QVTrelationPackage.RELATION_IMPLEMENTATION: return createRelationImplementation();
-			case QVTrelationPackage.RELATION_MODEL: return createRelationModel();
-			case QVTrelationPackage.RELATIONAL_TRANSFORMATION: return createRelationalTransformation();
-			case QVTrelationPackage.SHARED_VARIABLE: return createSharedVariable();
-			case QVTrelationPackage.TEMPLATE_VARIABLE: return createTemplateVariable();
+			case 0: return createDomainPattern();
+			case 1: return createKey();
+			case 2: return createRelation();
+			case 3: return createRelationCallExp();
+			case 4: return createRelationDomain();
+			case 5: return createRelationDomainAssignment();
+			case 6: return createRelationImplementation();
+			case 7: return createRelationModel();
+			case 8: return createRelationalTransformation();
+			case 9: return createSharedVariable();
+			case 10: return createTemplateVariable();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

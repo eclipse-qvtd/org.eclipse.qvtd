@@ -12,6 +12,8 @@ package org.eclipse.qvtd.pivot.qvtrelation.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -23,7 +25,10 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
@@ -32,7 +37,9 @@ import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
@@ -55,6 +62,22 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  * @generated
  */
 public class RelationalTransformationImpl extends TransformationImpl implements RelationalTransformation {
+	/**
+	 * The number of structural features of the '<em>Relational Transformation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RELATIONAL_TRANSFORMATION_FEATURE_COUNT = TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Relational Transformation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RELATIONAL_TRANSFORMATION_OPERATION_COUNT = TransformationImpl.TRANSFORMATION_OPERATION_COUNT + 1;
 	/**
 	 * The cached value of the '{@link #getOwnedKey() <em>Owned Key</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -92,7 +115,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 	@Override
 	public EList<Key> getOwnedKey() {
 		if (ownedKey == null) {
-			ownedKey = new EObjectContainmentWithInverseEList<Key>(Key.class, this, QVTrelationPackage.RELATIONAL_TRANSFORMATION__OWNED_KEY, QVTrelationPackage.KEY__TRANSFORMATION);
+			ownedKey = new EObjectContainmentWithInverseEList<Key>(Key.class, this, TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
 		}
 		return ownedKey;
 	}
@@ -120,20 +143,20 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 			 *         'RelationalTransformation::RulesAreRelations'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_RelationalTransformation_c_c_RulesAreRelations);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_RelationalTransformation_c_c_RulesAreRelations);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				final /*@NonInvalid*/ java.util.@NonNull List<Rule> rule = this.getRule();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Rule, rule);
+				final /*@NonInvalid*/ @NonNull List<Rule> rule = this.getRule();
+				final /*@NonInvalid*/ @NonNull SetValue BOXED_rule = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Rule, rule);
 				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				java.util.@NonNull Iterator<Object> ITERATOR__1 = BOXED_rule.iterator();
-				/*@NonInvalid*/ java.lang.@Nullable Boolean result;
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_rule.iterator();
+				/*@NonInvalid*/ @Nullable Boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
 						if (accumulator == ValueUtil.TRUE_VALUE) {
@@ -145,7 +168,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 						break;
 					}
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule _1 = (org.eclipse.qvtd.pivot.qvtbase.@NonNull Rule)ITERATOR__1.next();
+					/*@NonInvalid*/ @NonNull Rule _1 = (@NonNull Rule)ITERATOR__1.next();
 					/**
 					 * oclIsKindOf(Relation)
 					 */
@@ -182,7 +205,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATIONAL_TRANSFORMATION__OWNED_KEY:
+			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedKey()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -196,7 +219,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATIONAL_TRANSFORMATION__OWNED_KEY:
+			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedKey()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -210,7 +233,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATIONAL_TRANSFORMATION__OWNED_KEY:
+			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
 				return getOwnedKey();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -225,7 +248,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATIONAL_TRANSFORMATION__OWNED_KEY:
+			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
 				getOwnedKey().clear();
 				getOwnedKey().addAll((Collection<? extends Key>)newValue);
 				return;
@@ -241,7 +264,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATIONAL_TRANSFORMATION__OWNED_KEY:
+			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
 				getOwnedKey().clear();
 				return;
 		}
@@ -256,7 +279,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATIONAL_TRANSFORMATION__OWNED_KEY:
+			case TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0:
 				return ownedKey != null && !ownedKey.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -271,7 +294,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTrelationPackage.RELATIONAL_TRANSFORMATION___VALIDATE_RULES_ARE_RELATIONS__DIAGNOSTICCHAIN_MAP:
+			case TransformationImpl.TRANSFORMATION_OPERATION_COUNT + 0:
 				return validateRulesAreRelations((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

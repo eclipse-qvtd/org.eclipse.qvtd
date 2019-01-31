@@ -43,6 +43,23 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  */
 public class LoopVariableImpl extends VariableDeclarationImpl implements LoopVariable {
 	/**
+	 * The number of structural features of the '<em>Loop Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LOOP_VARIABLE_FEATURE_COUNT = VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Loop Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LOOP_VARIABLE_OPERATION_COUNT = VariableDeclarationImpl.VARIABLE_DECLARATION_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -68,7 +85,7 @@ public class LoopVariableImpl extends VariableDeclarationImpl implements LoopVar
 	 */
 	@Override
 	public MappingLoop getOwningMappingLoop() {
-		if (eContainerFeatureID() != QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP) return null;
+		if (eContainerFeatureID() != (VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0)) return null;
 		return (MappingLoop)eInternalContainer();
 	}
 
@@ -78,7 +95,7 @@ public class LoopVariableImpl extends VariableDeclarationImpl implements LoopVar
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningMappingLoop(MappingLoop newOwningMappingLoop, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningMappingLoop, QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningMappingLoop, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0, msgs);
 		return msgs;
 	}
 
@@ -89,19 +106,19 @@ public class LoopVariableImpl extends VariableDeclarationImpl implements LoopVar
 	 */
 	@Override
 	public void setOwningMappingLoop(MappingLoop newOwningMappingLoop) {
-		if (newOwningMappingLoop != eInternalContainer() || (eContainerFeatureID() != QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP && newOwningMappingLoop != null)) {
+		if (newOwningMappingLoop != eInternalContainer() || (eContainerFeatureID() != (VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0) && newOwningMappingLoop != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningMappingLoop))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningMappingLoop != null)
-				msgs = ((InternalEObject)newOwningMappingLoop).eInverseAdd(this, QVTimperativePackage.MAPPING_LOOP__OWNED_ITERATORS, MappingLoop.class, msgs);
+				msgs = ((InternalEObject)newOwningMappingLoop).eInverseAdd(this, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1, MappingLoop.class, msgs);
 			msgs = basicSetOwningMappingLoop(newOwningMappingLoop, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP, newOwningMappingLoop, newOwningMappingLoop));
+			eNotify(new ENotificationImpl(this, Notification.SET, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0, newOwningMappingLoop, newOwningMappingLoop));
 	}
 
 	/**
@@ -112,7 +129,7 @@ public class LoopVariableImpl extends VariableDeclarationImpl implements LoopVar
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningMappingLoop((MappingLoop)otherEnd, msgs);
@@ -128,7 +145,7 @@ public class LoopVariableImpl extends VariableDeclarationImpl implements LoopVar
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				return basicSetOwningMappingLoop(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -142,8 +159,8 @@ public class LoopVariableImpl extends VariableDeclarationImpl implements LoopVar
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP:
-				return eInternalContainer().eInverseRemove(this, QVTimperativePackage.MAPPING_LOOP__OWNED_ITERATORS, MappingLoop.class, msgs);
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
+				return eInternalContainer().eInverseRemove(this, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1, MappingLoop.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -156,7 +173,7 @@ public class LoopVariableImpl extends VariableDeclarationImpl implements LoopVar
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				return getOwningMappingLoop();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -170,7 +187,7 @@ public class LoopVariableImpl extends VariableDeclarationImpl implements LoopVar
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				setOwningMappingLoop((MappingLoop)newValue);
 				return;
 		}
@@ -185,7 +202,7 @@ public class LoopVariableImpl extends VariableDeclarationImpl implements LoopVar
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				setOwningMappingLoop((MappingLoop)null);
 				return;
 		}
@@ -200,7 +217,7 @@ public class LoopVariableImpl extends VariableDeclarationImpl implements LoopVar
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.LOOP_VARIABLE__OWNING_MAPPING_LOOP:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				return getOwningMappingLoop() != null;
 		}
 		return super.eIsSet(featureID);

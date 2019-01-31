@@ -13,6 +13,8 @@ package org.eclipse.qvtd.pivot.qvttemplate.impl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -27,7 +29,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
@@ -37,7 +42,9 @@ import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables;
@@ -59,6 +66,24 @@ import org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateVisitor;
  * @generated
  */
 public class CollectionTemplateExpImpl extends TemplateExpImpl implements CollectionTemplateExp {
+	/**
+	 * The number of structural features of the '<em>Collection Template Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COLLECTION_TEMPLATE_EXP_FEATURE_COUNT = TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Collection Template Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COLLECTION_TEMPLATE_EXP_OPERATION_COUNT = TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 3;
+
 	/**
 	 * The cached value of the '{@link #getMember() <em>Member</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -116,7 +141,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	@Override
 	public EList<OCLExpression> getMember() {
 		if (member == null) {
-			member = new EObjectContainmentEList<OCLExpression>(OCLExpression.class, this, QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__MEMBER);
+			member = new EObjectContainmentEList<OCLExpression>(OCLExpression.class, this, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0);
 		}
 		return member;
 	}
@@ -133,7 +158,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 			referredCollectionType = (CollectionType)eResolveProxy(oldReferredCollectionType);
 			if (referredCollectionType != oldReferredCollectionType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__REFERRED_COLLECTION_TYPE, oldReferredCollectionType, referredCollectionType));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1, oldReferredCollectionType, referredCollectionType));
 			}
 		}
 		return referredCollectionType;
@@ -158,7 +183,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 		CollectionType oldReferredCollectionType = referredCollectionType;
 		referredCollectionType = newReferredCollectionType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__REFERRED_COLLECTION_TYPE, oldReferredCollectionType, referredCollectionType));
+			eNotify(new ENotificationImpl(this, Notification.SET, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1, oldReferredCollectionType, referredCollectionType));
 	}
 
 	/**
@@ -173,7 +198,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 			rest = (Variable)eResolveProxy(oldRest);
 			if (rest != oldRest) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__REST, oldRest, rest));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 2, oldRest, rest));
 			}
 		}
 		return rest;
@@ -198,7 +223,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 		Variable oldRest = rest;
 		rest = newRest;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__REST, oldRest, rest));
+			eNotify(new ENotificationImpl(this, Notification.SET, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 2, oldRest, rest));
 	}
 
 	/**
@@ -225,9 +250,9 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 			 *         'CollectionTemplateExp::MemberTypeisCollectionElementType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_CollectionTemplateExp_c_c_MemberTypeisCollectionElementType);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_CollectionTemplateExp_c_c_MemberTypeisCollectionElementType);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -237,11 +262,11 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 				/*@Caught*/ @Nullable Object CAUGHT_result;
 				try {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ java.util.@NonNull List<OCLExpression> member = this.getMember();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_member = idResolver.createSetOfAll(QVTtemplateTables.SET_CLSSid_OCLExpression, member);
+					final /*@NonInvalid*/ @NonNull List<OCLExpression> member = this.getMember();
+					final /*@NonInvalid*/ @NonNull SetValue BOXED_member = idResolver.createSetOfAll(QVTtemplateTables.SET_CLSSid_OCLExpression, member);
 					/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-					java.util.@NonNull Iterator<Object> ITERATOR__1 = BOXED_member.iterator();
-					/*@Thrown*/ java.lang.@Nullable Boolean result;
+					@NonNull Iterator<Object> ITERATOR__1 = BOXED_member.iterator();
+					/*@Thrown*/ @Nullable Boolean result;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
 							if (accumulator == ValueUtil.TRUE_VALUE) {
@@ -253,18 +278,18 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 							break;
 						}
 						@SuppressWarnings("null")
-						/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression _1 = (org.eclipse.ocl.pivot.@NonNull OCLExpression)ITERATOR__1.next();
+						/*@NonInvalid*/ @NonNull OCLExpression _1 = (@NonNull OCLExpression)ITERATOR__1.next();
 						/**
 						 *
 						 * type.conformsTo(referredCollectionType.elementType)
 						 */
 						/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
 						try {
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = _1.getType();
+							final /*@NonInvalid*/ @Nullable Type type = _1.getType();
 							@SuppressWarnings("null")
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull CollectionType referredCollectionType = this.getReferredCollectionType();
+							final /*@NonInvalid*/ @NonNull CollectionType referredCollectionType = this.getReferredCollectionType();
 							@SuppressWarnings("null")
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Type elementType = referredCollectionType.getElementType();
+							final /*@NonInvalid*/ @NonNull Type elementType = referredCollectionType.getElementType();
 							final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, elementType).booleanValue();
 							CAUGHT_conformsTo = conformsTo;
 						}
@@ -323,8 +348,8 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 			 *         'CollectionTemplateExp::RestTypeisCollectionType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_CollectionTemplateExp_c_c_RestTypeisCollectionType);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_CollectionTemplateExp_c_c_RestTypeisCollectionType);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -333,16 +358,16 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
 				try {
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Variable rest = this.getRest();
+					final /*@NonInvalid*/ @Nullable Variable rest = this.getRest();
 					final /*@NonInvalid*/ boolean ne = rest != null;
 					/*@Thrown*/ boolean result;
 					if (ne) {
 						if (rest == null) {
 							throw new InvalidValueException("Null source for \'TypedElement::type\'");
 						}
-						final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = rest.getType();
+						final /*@Thrown*/ @Nullable Type type = rest.getType();
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull CollectionType referredCollectionType = this.getReferredCollectionType();
+						final /*@NonInvalid*/ @NonNull CollectionType referredCollectionType = this.getReferredCollectionType();
 						final /*@Thrown*/ boolean eq = (type != null) ? (type.getTypeId() == referredCollectionType.getTypeId()) : false;
 						result = eq;
 					}
@@ -386,17 +411,17 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 			 *         'CollectionTemplateExp::TypeisCollectionType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_CollectionTemplateExp_c_c_TypeisCollectionType);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_CollectionTemplateExp_c_c_TypeisCollectionType);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = this.getType();
+				final /*@NonInvalid*/ @Nullable Type type = this.getType();
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull CollectionType referredCollectionType = this.getReferredCollectionType();
+				final /*@NonInvalid*/ @NonNull CollectionType referredCollectionType = this.getReferredCollectionType();
 				final /*@NonInvalid*/ boolean result = (type != null) ? (type.getTypeId() == referredCollectionType.getTypeId()) : false;
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTtemplateTables.STR_CollectionTemplateExp_c_c_TypeisCollectionType, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTtemplateTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
@@ -416,7 +441,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__MEMBER:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getMember()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -430,12 +455,12 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__MEMBER:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
 				return getMember();
-			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__REFERRED_COLLECTION_TYPE:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1:
 				if (resolve) return getReferredCollectionType();
 				return basicGetReferredCollectionType();
-			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__REST:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 2:
 				if (resolve) return getRest();
 				return basicGetRest();
 		}
@@ -451,14 +476,14 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__MEMBER:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
 				getMember().clear();
 				getMember().addAll((Collection<? extends OCLExpression>)newValue);
 				return;
-			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__REFERRED_COLLECTION_TYPE:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1:
 				setReferredCollectionType((CollectionType)newValue);
 				return;
-			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__REST:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 2:
 				setRest((Variable)newValue);
 				return;
 		}
@@ -473,13 +498,13 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__MEMBER:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
 				getMember().clear();
 				return;
-			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__REFERRED_COLLECTION_TYPE:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1:
 				setReferredCollectionType((CollectionType)null);
 				return;
-			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__REST:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 2:
 				setRest((Variable)null);
 				return;
 		}
@@ -494,11 +519,11 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__MEMBER:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
 				return member != null && !member.isEmpty();
-			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__REFERRED_COLLECTION_TYPE:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1:
 				return referredCollectionType != null;
-			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__REST:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 2:
 				return rest != null;
 		}
 		return super.eIsSet(featureID);
@@ -513,11 +538,11 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP___VALIDATE_MEMBER_TYPEIS_COLLECTION_ELEMENT_TYPE__DIAGNOSTICCHAIN_MAP:
+			case TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 0:
 				return validateMemberTypeisCollectionElementType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP___VALIDATE_REST_TYPEIS_COLLECTION_TYPE__DIAGNOSTICCHAIN_MAP:
+			case TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 1:
 				return validateRestTypeisCollectionType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP___VALIDATE_TYPEIS_COLLECTION_TYPE__DIAGNOSTICCHAIN_MAP:
+			case TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 2:
 				return validateTypeisCollectionType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

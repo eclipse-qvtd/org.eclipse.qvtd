@@ -80,7 +80,7 @@ public class QVTtraceSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case QVTtracePackage.DISPATCH: {
+			case 0: {
 				Dispatch dispatch = (Dispatch)theEObject;
 				T result = caseDispatch(dispatch);
 				if (result == null) result = caseTraceInstance(dispatch);
@@ -88,7 +88,7 @@ public class QVTtraceSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTtracePackage.EXECUTION: {
+			case 1: {
 				Execution execution = (Execution)theEObject;
 				T result = caseExecution(execution);
 				if (result == null) result = caseTraceInstance(execution);
@@ -96,20 +96,20 @@ public class QVTtraceSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTtracePackage.TRACE_ELEMENT: {
+			case 2: {
 				TraceElement traceElement = (TraceElement)theEObject;
 				T result = caseTraceElement(traceElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTtracePackage.TRACE_INSTANCE: {
+			case 3: {
 				TraceInstance traceInstance = (TraceInstance)theEObject;
 				T result = caseTraceInstance(traceInstance);
 				if (result == null) result = caseTraceElement(traceInstance);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTtracePackage.TRACE_MODEL: {
+			case 4: {
 				TraceModel traceModel = (TraceModel)theEObject;
 				T result = caseTraceModel(traceModel);
 				if (result == null) result = caseTraceElement(traceModel);

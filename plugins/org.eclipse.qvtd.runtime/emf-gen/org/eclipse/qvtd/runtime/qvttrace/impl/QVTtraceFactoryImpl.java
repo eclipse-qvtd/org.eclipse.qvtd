@@ -68,7 +68,7 @@ public class QVTtraceFactoryImpl extends EFactoryImpl implements QVTtraceFactory
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case QVTtracePackage.TRACE_MODEL: return createTraceModel();
+			case 4: return createTraceModel();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

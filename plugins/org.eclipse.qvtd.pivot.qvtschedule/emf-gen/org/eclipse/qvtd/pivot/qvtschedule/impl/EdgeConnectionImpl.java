@@ -65,6 +65,23 @@ import java.util.Collection;
 public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 {
 	/**
+	 * The number of structural features of the '<em>Edge Connection</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int EDGE_CONNECTION_FEATURE_COUNT = ConnectionImpl.CONNECTION_FEATURE_COUNT + 3;
+	/**
+	 * The number of operations of the '<em>Edge Connection</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int EDGE_CONNECTION_OPERATION_COUNT = ConnectionImpl.CONNECTION_OPERATION_COUNT + 0;
+
+	/**
 	 * EdgeList duplicates changes to the lists-of-edges to the 'redundant' edge-to-role map.
 	 */
 	@SuppressWarnings("serial")
@@ -148,7 +165,7 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 			referredProperty = (Property)eResolveProxy(oldReferredProperty);
 			if (referredProperty != oldReferredProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.EDGE_CONNECTION__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ConnectionImpl.CONNECTION_FEATURE_COUNT + 0, oldReferredProperty, referredProperty));
 			}
 		}
 		return referredProperty;
@@ -173,7 +190,7 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 		Property oldReferredProperty = referredProperty;
 		referredProperty = newReferredProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE_CONNECTION__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, ConnectionImpl.CONNECTION_FEATURE_COUNT + 0, oldReferredProperty, referredProperty));
 	}
 
 	/**
@@ -210,12 +227,12 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.EDGE_CONNECTION__REFERRED_PROPERTY:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 0:
 				if (resolve) return getReferredProperty();
 				return basicGetReferredProperty();
-			case QVTschedulePackage.EDGE_CONNECTION__MANDATORY_TARGET_EDGES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 1:
 				return getMandatoryTargetEdges();
-			case QVTschedulePackage.EDGE_CONNECTION__PREFERRED_TARGET_EDGES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 2:
 				return getPreferredTargetEdges();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -230,14 +247,14 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.EDGE_CONNECTION__REFERRED_PROPERTY:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 0:
 				setReferredProperty((Property)newValue);
 				return;
-			case QVTschedulePackage.EDGE_CONNECTION__MANDATORY_TARGET_EDGES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 1:
 				getMandatoryTargetEdges().clear();
 				getMandatoryTargetEdges().addAll((Collection<? extends NavigableEdge>)newValue);
 				return;
-			case QVTschedulePackage.EDGE_CONNECTION__PREFERRED_TARGET_EDGES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 2:
 				getPreferredTargetEdges().clear();
 				getPreferredTargetEdges().addAll((Collection<? extends NavigableEdge>)newValue);
 				return;
@@ -253,13 +270,13 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.EDGE_CONNECTION__REFERRED_PROPERTY:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 0:
 				setReferredProperty((Property)null);
 				return;
-			case QVTschedulePackage.EDGE_CONNECTION__MANDATORY_TARGET_EDGES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 1:
 				getMandatoryTargetEdges().clear();
 				return;
-			case QVTschedulePackage.EDGE_CONNECTION__PREFERRED_TARGET_EDGES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 2:
 				getPreferredTargetEdges().clear();
 				return;
 		}
@@ -274,11 +291,11 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.EDGE_CONNECTION__REFERRED_PROPERTY:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 0:
 				return referredProperty != null;
-			case QVTschedulePackage.EDGE_CONNECTION__MANDATORY_TARGET_EDGES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 1:
 				return mandatoryTargetEdges != null && !mandatoryTargetEdges.isEmpty();
-			case QVTschedulePackage.EDGE_CONNECTION__PREFERRED_TARGET_EDGES:
+			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 2:
 				return preferredTargetEdges != null && !preferredTargetEdges.isEmpty();
 		}
 		return super.eIsSet(featureID);

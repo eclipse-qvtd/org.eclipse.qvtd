@@ -56,6 +56,22 @@ import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
  */
 public class CorePatternImpl extends PatternImpl implements CorePattern {
 	/**
+	 * The number of structural features of the '<em>Core Pattern</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CORE_PATTERN_FEATURE_COUNT = PatternImpl.PATTERN_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Core Pattern</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CORE_PATTERN_OPERATION_COUNT = PatternImpl.PATTERN_OPERATION_COUNT + 1;
+	/**
 	 * The cached value of the '{@link #getVariable() <em>Variable</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -92,7 +108,7 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	@Override
 	public EList<Variable> getVariable() {
 		if (variable == null) {
-			variable = new EObjectContainmentEList<Variable>(Variable.class, this, QVTcorePackage.CORE_PATTERN__VARIABLE);
+			variable = new EObjectContainmentEList<Variable>(Variable.class, this, PatternImpl.PATTERN_FEATURE_COUNT + 0);
 		}
 		return variable;
 	}
@@ -115,7 +131,7 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcorePackage.CORE_PATTERN__VARIABLE:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getVariable()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -129,7 +145,7 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcorePackage.CORE_PATTERN__VARIABLE:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 0:
 				return getVariable();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -144,7 +160,7 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcorePackage.CORE_PATTERN__VARIABLE:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 0:
 				getVariable().clear();
 				getVariable().addAll((Collection<? extends Variable>)newValue);
 				return;
@@ -160,7 +176,7 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcorePackage.CORE_PATTERN__VARIABLE:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 0:
 				getVariable().clear();
 				return;
 		}
@@ -175,7 +191,7 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcorePackage.CORE_PATTERN__VARIABLE:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 0:
 				return variable != null && !variable.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -189,7 +205,7 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTcorePackage.CORE_PATTERN___GET_AREA:
+			case PatternImpl.PATTERN_OPERATION_COUNT + 0:
 				return getArea();
 		}
 		return super.eInvoke(operationID, arguments);

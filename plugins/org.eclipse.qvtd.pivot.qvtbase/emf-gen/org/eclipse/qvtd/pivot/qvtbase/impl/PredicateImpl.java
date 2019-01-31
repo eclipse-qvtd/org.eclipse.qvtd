@@ -24,6 +24,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
@@ -32,6 +35,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
@@ -53,6 +57,22 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  * @generated
  */
 public class PredicateImpl extends ElementImpl implements Predicate {
+	/**
+	 * The number of structural features of the '<em>Predicate</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PREDICATE_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 2;
+	/**
+	 * The number of operations of the '<em>Predicate</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PREDICATE_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 1;
 	/**
 	 * The cached value of the '{@link #getConditionExpression() <em>Condition Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -101,7 +121,7 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 		OCLExpression oldConditionExpression = conditionExpression;
 		conditionExpression = newConditionExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTbasePackage.PREDICATE__CONDITION_EXPRESSION, oldConditionExpression, newConditionExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 0, oldConditionExpression, newConditionExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -117,14 +137,14 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 		if (newConditionExpression != conditionExpression) {
 			NotificationChain msgs = null;
 			if (conditionExpression != null)
-				msgs = ((InternalEObject)conditionExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTbasePackage.PREDICATE__CONDITION_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)conditionExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ElementImpl.ELEMENT_FEATURE_COUNT + 0), null, msgs);
 			if (newConditionExpression != null)
-				msgs = ((InternalEObject)newConditionExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTbasePackage.PREDICATE__CONDITION_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newConditionExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ElementImpl.ELEMENT_FEATURE_COUNT + 0), null, msgs);
 			msgs = basicSetConditionExpression(newConditionExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.PREDICATE__CONDITION_EXPRESSION, newConditionExpression, newConditionExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 0, newConditionExpression, newConditionExpression));
 	}
 
 	/**
@@ -134,7 +154,7 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	 */
 	@Override
 	public Pattern getPattern() {
-		if (eContainerFeatureID() != QVTbasePackage.PREDICATE__PATTERN) return null;
+		if (eContainerFeatureID() != (ElementImpl.ELEMENT_FEATURE_COUNT + 1)) return null;
 		return (Pattern)eInternalContainer();
 	}
 
@@ -144,7 +164,7 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	 * @generated
 	 */
 	public NotificationChain basicSetPattern(Pattern newPattern, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newPattern, QVTbasePackage.PREDICATE__PATTERN, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newPattern, ElementImpl.ELEMENT_FEATURE_COUNT + 1, msgs);
 		return msgs;
 	}
 
@@ -155,19 +175,19 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	 */
 	@Override
 	public void setPattern(Pattern newPattern) {
-		if (newPattern != eInternalContainer() || (eContainerFeatureID() != QVTbasePackage.PREDICATE__PATTERN && newPattern != null)) {
+		if (newPattern != eInternalContainer() || (eContainerFeatureID() != (ElementImpl.ELEMENT_FEATURE_COUNT + 1) && newPattern != null)) {
 			if (EcoreUtil.isAncestor(this, newPattern))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newPattern != null)
-				msgs = ((InternalEObject)newPattern).eInverseAdd(this, QVTbasePackage.PATTERN__PREDICATE, Pattern.class, msgs);
+				msgs = ((InternalEObject)newPattern).eInverseAdd(this, ElementImpl.ELEMENT_FEATURE_COUNT + 0, Pattern.class, msgs);
 			msgs = basicSetPattern(newPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.PREDICATE__PATTERN, newPattern, newPattern));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 1, newPattern, newPattern));
 	}
 
 	/**
@@ -191,9 +211,9 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 			 *         'Predicate::ConditionIsBoolean'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Predicate_c_c_ConditionIsBoolean);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTbaseTables.STR_Predicate_c_c_ConditionIsBoolean);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTbaseTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -202,8 +222,8 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 			else {
 				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_Boolean = idResolver.getClass(TypeId.BOOLEAN, null);
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression conditionExpression = this.getConditionExpression();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = conditionExpression.getType();
+				final /*@NonInvalid*/ @NonNull OCLExpression conditionExpression = this.getConditionExpression();
+				final /*@NonInvalid*/ @Nullable Type type = conditionExpression.getType();
 				final /*@NonInvalid*/ boolean result = (type != null) ? (type.getTypeId() == TYP_Boolean.getTypeId()) : false;
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTbaseTables.STR_Predicate_c_c_ConditionIsBoolean, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTbaseTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
@@ -223,7 +243,7 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTbasePackage.PREDICATE__PATTERN:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetPattern((Pattern)otherEnd, msgs);
@@ -239,9 +259,9 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTbasePackage.PREDICATE__CONDITION_EXPRESSION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return basicSetConditionExpression(null, msgs);
-			case QVTbasePackage.PREDICATE__PATTERN:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return basicSetPattern(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -255,8 +275,8 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTbasePackage.PREDICATE__PATTERN:
-				return eInternalContainer().eInverseRemove(this, QVTbasePackage.PATTERN__PREDICATE, Pattern.class, msgs);
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
+				return eInternalContainer().eInverseRemove(this, ElementImpl.ELEMENT_FEATURE_COUNT + 0, Pattern.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -269,9 +289,9 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTbasePackage.PREDICATE__CONDITION_EXPRESSION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return getConditionExpression();
-			case QVTbasePackage.PREDICATE__PATTERN:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return getPattern();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -285,10 +305,10 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTbasePackage.PREDICATE__CONDITION_EXPRESSION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setConditionExpression((OCLExpression)newValue);
 				return;
-			case QVTbasePackage.PREDICATE__PATTERN:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setPattern((Pattern)newValue);
 				return;
 		}
@@ -303,10 +323,10 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTbasePackage.PREDICATE__CONDITION_EXPRESSION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setConditionExpression((OCLExpression)null);
 				return;
-			case QVTbasePackage.PREDICATE__PATTERN:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setPattern((Pattern)null);
 				return;
 		}
@@ -321,9 +341,9 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTbasePackage.PREDICATE__CONDITION_EXPRESSION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return conditionExpression != null;
-			case QVTbasePackage.PREDICATE__PATTERN:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return getPattern() != null;
 		}
 		return super.eIsSet(featureID);
@@ -338,7 +358,7 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTbasePackage.PREDICATE___VALIDATE_CONDITION_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP:
+			case ElementImpl.ELEMENT_OPERATION_COUNT + 0:
 				return validateConditionIsBoolean((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

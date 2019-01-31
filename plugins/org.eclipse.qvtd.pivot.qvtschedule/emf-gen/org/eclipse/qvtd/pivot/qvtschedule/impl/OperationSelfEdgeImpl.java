@@ -47,6 +47,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class OperationSelfEdgeImpl extends ArgumentEdgeImpl implements OperationSelfEdge {
 	/**
+	 * The number of structural features of the '<em>Operation Self Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_SELF_EDGE_FEATURE_COUNT = ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Operation Self Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_SELF_EDGE_OPERATION_COUNT = ArgumentEdgeImpl.ARGUMENT_EDGE_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getReferredType() <em>Referred Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -87,7 +103,7 @@ public class OperationSelfEdgeImpl extends ArgumentEdgeImpl implements Operation
 			referredType = (Type)eResolveProxy(oldReferredType);
 			if (referredType != oldReferredType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.OPERATION_SELF_EDGE__REFERRED_TYPE, oldReferredType, referredType));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0, oldReferredType, referredType));
 			}
 		}
 		return referredType;
@@ -112,7 +128,7 @@ public class OperationSelfEdgeImpl extends ArgumentEdgeImpl implements Operation
 		Type oldReferredType = referredType;
 		referredType = newReferredType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.OPERATION_SELF_EDGE__REFERRED_TYPE, oldReferredType, referredType));
+			eNotify(new ENotificationImpl(this, Notification.SET, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0, oldReferredType, referredType));
 	}
 
 	/**
@@ -123,7 +139,7 @@ public class OperationSelfEdgeImpl extends ArgumentEdgeImpl implements Operation
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_SELF_EDGE__REFERRED_TYPE:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				if (resolve) return getReferredType();
 				return basicGetReferredType();
 		}
@@ -138,7 +154,7 @@ public class OperationSelfEdgeImpl extends ArgumentEdgeImpl implements Operation
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_SELF_EDGE__REFERRED_TYPE:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				setReferredType((Type)newValue);
 				return;
 		}
@@ -153,7 +169,7 @@ public class OperationSelfEdgeImpl extends ArgumentEdgeImpl implements Operation
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_SELF_EDGE__REFERRED_TYPE:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				setReferredType((Type)null);
 				return;
 		}
@@ -168,7 +184,7 @@ public class OperationSelfEdgeImpl extends ArgumentEdgeImpl implements Operation
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.OPERATION_SELF_EDGE__REFERRED_TYPE:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				return referredType != null;
 		}
 		return super.eIsSet(featureID);

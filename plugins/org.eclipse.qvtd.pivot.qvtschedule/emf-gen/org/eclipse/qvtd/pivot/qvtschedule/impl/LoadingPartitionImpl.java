@@ -50,6 +50,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.SymbolNameBuilder;
  */
 public class LoadingPartitionImpl extends MappingPartitionImpl implements LoadingPartition {
 	/**
+	 * The number of structural features of the '<em>Loading Partition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LOADING_PARTITION_FEATURE_COUNT = MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Loading Partition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LOADING_PARTITION_OPERATION_COUNT = MappingPartitionImpl.MAPPING_PARTITION_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getReferredLoadingRegion() <em>Referred Loading Region</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,7 +106,7 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 			referredLoadingRegion = (LoadingRegion)eResolveProxy(oldReferredLoadingRegion);
 			if (referredLoadingRegion != oldReferredLoadingRegion) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.LOADING_PARTITION__REFERRED_LOADING_REGION, oldReferredLoadingRegion, referredLoadingRegion));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0, oldReferredLoadingRegion, referredLoadingRegion));
 			}
 		}
 		return referredLoadingRegion;
@@ -114,7 +130,7 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 		LoadingRegion oldReferredLoadingRegion = referredLoadingRegion;
 		referredLoadingRegion = newReferredLoadingRegion;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.LOADING_PARTITION__REFERRED_LOADING_REGION, oldReferredLoadingRegion, newReferredLoadingRegion);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0, oldReferredLoadingRegion, newReferredLoadingRegion);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -130,14 +146,14 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 		if (newReferredLoadingRegion != referredLoadingRegion) {
 			NotificationChain msgs = null;
 			if (referredLoadingRegion != null)
-				msgs = ((InternalEObject)referredLoadingRegion).eInverseRemove(this, QVTschedulePackage.LOADING_REGION__LOADING_PARTITION, LoadingRegion.class, msgs);
+				msgs = ((InternalEObject)referredLoadingRegion).eInverseRemove(this, RegionImpl.REGION_FEATURE_COUNT + 0, LoadingRegion.class, msgs);
 			if (newReferredLoadingRegion != null)
-				msgs = ((InternalEObject)newReferredLoadingRegion).eInverseAdd(this, QVTschedulePackage.LOADING_REGION__LOADING_PARTITION, LoadingRegion.class, msgs);
+				msgs = ((InternalEObject)newReferredLoadingRegion).eInverseAdd(this, RegionImpl.REGION_FEATURE_COUNT + 0, LoadingRegion.class, msgs);
 			msgs = basicSetReferredLoadingRegion(newReferredLoadingRegion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.LOADING_PARTITION__REFERRED_LOADING_REGION, newReferredLoadingRegion, newReferredLoadingRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0, newReferredLoadingRegion, newReferredLoadingRegion));
 	}
 
 	/**
@@ -148,9 +164,9 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.LOADING_PARTITION__REFERRED_LOADING_REGION:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
 				if (referredLoadingRegion != null)
-					msgs = ((InternalEObject)referredLoadingRegion).eInverseRemove(this, QVTschedulePackage.LOADING_REGION__LOADING_PARTITION, LoadingRegion.class, msgs);
+					msgs = ((InternalEObject)referredLoadingRegion).eInverseRemove(this, RegionImpl.REGION_FEATURE_COUNT + 0, LoadingRegion.class, msgs);
 				return basicSetReferredLoadingRegion((LoadingRegion)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -164,7 +180,7 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.LOADING_PARTITION__REFERRED_LOADING_REGION:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
 				return basicSetReferredLoadingRegion(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -178,7 +194,7 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.LOADING_PARTITION__REFERRED_LOADING_REGION:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
 				if (resolve) return getReferredLoadingRegion();
 				return basicGetReferredLoadingRegion();
 		}
@@ -193,7 +209,7 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.LOADING_PARTITION__REFERRED_LOADING_REGION:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
 				setReferredLoadingRegion((LoadingRegion)newValue);
 				return;
 		}
@@ -208,7 +224,7 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.LOADING_PARTITION__REFERRED_LOADING_REGION:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
 				setReferredLoadingRegion((LoadingRegion)null);
 				return;
 		}
@@ -223,7 +239,7 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.LOADING_PARTITION__REFERRED_LOADING_REGION:
+			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
 				return referredLoadingRegion != null;
 		}
 		return super.eIsSet(featureID);

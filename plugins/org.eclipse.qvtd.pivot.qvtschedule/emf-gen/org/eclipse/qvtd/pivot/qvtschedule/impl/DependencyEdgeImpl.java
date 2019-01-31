@@ -34,6 +34,23 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class DependencyEdgeImpl extends EdgeImpl implements DependencyEdge {
 	/**
+	 * The number of structural features of the '<em>Dependency Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DEPENDENCY_EDGE_FEATURE_COUNT = EdgeImpl.EDGE_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Dependency Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DEPENDENCY_EDGE_OPERATION_COUNT = EdgeImpl.EDGE_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

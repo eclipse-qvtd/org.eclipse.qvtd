@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtschedule.Cluster;
@@ -54,6 +55,24 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
  * @generated
  */
 public abstract class EdgeImpl extends ElementImpl implements Edge {
+	/**
+	 * The number of structural features of the '<em>Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int EDGE_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of operations of the '<em>Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int EDGE_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 0;
+
 	/**
 	 * The cached value of the '{@link #getCluster() <em>Cluster</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -155,7 +174,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 			cluster = (Cluster)eResolveProxy(oldCluster);
 			if (cluster != oldCluster) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.EDGE__CLUSTER, oldCluster, cluster));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 0, oldCluster, cluster));
 			}
 		}
 		return cluster;
@@ -179,7 +198,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		Cluster oldCluster = cluster;
 		cluster = newCluster;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__CLUSTER, oldCluster, newCluster);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 0, oldCluster, newCluster);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -195,14 +214,14 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		if (newCluster != cluster) {
 			NotificationChain msgs = null;
 			if (cluster != null)
-				msgs = ((InternalEObject)cluster).eInverseRemove(this, QVTschedulePackage.CLUSTER__MEMBER_EDGES, Cluster.class, msgs);
+				msgs = ((InternalEObject)cluster).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, Cluster.class, msgs);
 			if (newCluster != null)
-				msgs = ((InternalEObject)newCluster).eInverseAdd(this, QVTschedulePackage.CLUSTER__MEMBER_EDGES, Cluster.class, msgs);
+				msgs = ((InternalEObject)newCluster).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, Cluster.class, msgs);
 			msgs = basicSetCluster(newCluster, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__CLUSTER, newCluster, newCluster));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 0, newCluster, newCluster));
 	}
 
 	/**
@@ -225,7 +244,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		Role oldEdgeRole = edgeRole;
 		edgeRole = newEdgeRole == null ? EDGE_ROLE_EDEFAULT : newEdgeRole;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__EDGE_ROLE, oldEdgeRole, edgeRole));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 1, oldEdgeRole, edgeRole));
 	}
 
 	/**
@@ -248,7 +267,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 2, oldName, name));
 	}
 
 	/**
@@ -258,7 +277,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	 */
 	@Override
 	public Region getOwningRegion() {
-		if (eContainerFeatureID() != QVTschedulePackage.EDGE__OWNING_REGION) return null;
+		if (eContainerFeatureID() != (ElementImpl.ELEMENT_FEATURE_COUNT + 3)) return null;
 		return (Region)eInternalContainer();
 	}
 
@@ -268,7 +287,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningRegion(Region newOwningRegion, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningRegion, QVTschedulePackage.EDGE__OWNING_REGION, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningRegion, ElementImpl.ELEMENT_FEATURE_COUNT + 3, msgs);
 		return msgs;
 	}
 
@@ -279,19 +298,19 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	 */
 	@Override
 	public void setOwningRegion(Region newOwningRegion) {
-		if (newOwningRegion != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.EDGE__OWNING_REGION && newOwningRegion != null)) {
+		if (newOwningRegion != eInternalContainer() || (eContainerFeatureID() != (ElementImpl.ELEMENT_FEATURE_COUNT + 3) && newOwningRegion != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningRegion))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningRegion != null)
-				msgs = ((InternalEObject)newOwningRegion).eInverseAdd(this, QVTschedulePackage.REGION__OWNED_EDGES, Region.class, msgs);
+				msgs = ((InternalEObject)newOwningRegion).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, Region.class, msgs);
 			msgs = basicSetOwningRegion(newOwningRegion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__OWNING_REGION, newOwningRegion, newOwningRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 3, newOwningRegion, newOwningRegion));
 	}
 
 	/**
@@ -306,7 +325,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 			sourceNode = (Node)eResolveProxy(oldSourceNode);
 			if (sourceNode != oldSourceNode) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.EDGE__SOURCE_NODE, oldSourceNode, sourceNode));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 4, oldSourceNode, sourceNode));
 			}
 		}
 		return sourceNode;
@@ -330,7 +349,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		Node oldSourceNode = sourceNode;
 		sourceNode = newSourceNode;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__SOURCE_NODE, oldSourceNode, newSourceNode);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 4, oldSourceNode, newSourceNode);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -346,14 +365,14 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		if (newSourceNode != sourceNode) {
 			NotificationChain msgs = null;
 			if (sourceNode != null)
-				msgs = ((InternalEObject)sourceNode).eInverseRemove(this, QVTschedulePackage.NODE__OUTGOING_EDGES, Node.class, msgs);
+				msgs = ((InternalEObject)sourceNode).eInverseRemove(this, ElementImpl.ELEMENT_FEATURE_COUNT + 7, Node.class, msgs);
 			if (newSourceNode != null)
-				msgs = ((InternalEObject)newSourceNode).eInverseAdd(this, QVTschedulePackage.NODE__OUTGOING_EDGES, Node.class, msgs);
+				msgs = ((InternalEObject)newSourceNode).eInverseAdd(this, ElementImpl.ELEMENT_FEATURE_COUNT + 7, Node.class, msgs);
 			msgs = basicSetSourceNode(newSourceNode, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__SOURCE_NODE, newSourceNode, newSourceNode));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 4, newSourceNode, newSourceNode));
 	}
 
 	/**
@@ -368,7 +387,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 			targetNode = (Node)eResolveProxy(oldTargetNode);
 			if (targetNode != oldTargetNode) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.EDGE__TARGET_NODE, oldTargetNode, targetNode));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 5, oldTargetNode, targetNode));
 			}
 		}
 		return targetNode;
@@ -392,7 +411,7 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		Node oldTargetNode = targetNode;
 		targetNode = newTargetNode;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__TARGET_NODE, oldTargetNode, newTargetNode);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 5, oldTargetNode, newTargetNode);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -408,14 +427,14 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 		if (newTargetNode != targetNode) {
 			NotificationChain msgs = null;
 			if (targetNode != null)
-				msgs = ((InternalEObject)targetNode).eInverseRemove(this, QVTschedulePackage.NODE__INCOMING_EDGES, Node.class, msgs);
+				msgs = ((InternalEObject)targetNode).eInverseRemove(this, ElementImpl.ELEMENT_FEATURE_COUNT + 3, Node.class, msgs);
 			if (newTargetNode != null)
-				msgs = ((InternalEObject)newTargetNode).eInverseAdd(this, QVTschedulePackage.NODE__INCOMING_EDGES, Node.class, msgs);
+				msgs = ((InternalEObject)newTargetNode).eInverseAdd(this, ElementImpl.ELEMENT_FEATURE_COUNT + 3, Node.class, msgs);
 			msgs = basicSetTargetNode(newTargetNode, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.EDGE__TARGET_NODE, newTargetNode, newTargetNode));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 5, newTargetNode, newTargetNode));
 	}
 
 	/**
@@ -426,21 +445,21 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.EDGE__CLUSTER:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				if (cluster != null)
-					msgs = ((InternalEObject)cluster).eInverseRemove(this, QVTschedulePackage.CLUSTER__MEMBER_EDGES, Cluster.class, msgs);
+					msgs = ((InternalEObject)cluster).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, Cluster.class, msgs);
 				return basicSetCluster((Cluster)otherEnd, msgs);
-			case QVTschedulePackage.EDGE__OWNING_REGION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningRegion((Region)otherEnd, msgs);
-			case QVTschedulePackage.EDGE__SOURCE_NODE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				if (sourceNode != null)
-					msgs = ((InternalEObject)sourceNode).eInverseRemove(this, QVTschedulePackage.NODE__OUTGOING_EDGES, Node.class, msgs);
+					msgs = ((InternalEObject)sourceNode).eInverseRemove(this, ElementImpl.ELEMENT_FEATURE_COUNT + 7, Node.class, msgs);
 				return basicSetSourceNode((Node)otherEnd, msgs);
-			case QVTschedulePackage.EDGE__TARGET_NODE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				if (targetNode != null)
-					msgs = ((InternalEObject)targetNode).eInverseRemove(this, QVTschedulePackage.NODE__INCOMING_EDGES, Node.class, msgs);
+					msgs = ((InternalEObject)targetNode).eInverseRemove(this, ElementImpl.ELEMENT_FEATURE_COUNT + 3, Node.class, msgs);
 				return basicSetTargetNode((Node)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -454,13 +473,13 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.EDGE__CLUSTER:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return basicSetCluster(null, msgs);
-			case QVTschedulePackage.EDGE__OWNING_REGION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return basicSetOwningRegion(null, msgs);
-			case QVTschedulePackage.EDGE__SOURCE_NODE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				return basicSetSourceNode(null, msgs);
-			case QVTschedulePackage.EDGE__TARGET_NODE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				return basicSetTargetNode(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -474,8 +493,8 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTschedulePackage.EDGE__OWNING_REGION:
-				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.REGION__OWNED_EDGES, Region.class, msgs);
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
+				return eInternalContainer().eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, Region.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -488,19 +507,19 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.EDGE__CLUSTER:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				if (resolve) return getCluster();
 				return basicGetCluster();
-			case QVTschedulePackage.EDGE__EDGE_ROLE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return getEdgeRole();
-			case QVTschedulePackage.EDGE__NAME:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return getName();
-			case QVTschedulePackage.EDGE__OWNING_REGION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return getOwningRegion();
-			case QVTschedulePackage.EDGE__SOURCE_NODE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				if (resolve) return getSourceNode();
 				return basicGetSourceNode();
-			case QVTschedulePackage.EDGE__TARGET_NODE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				if (resolve) return getTargetNode();
 				return basicGetTargetNode();
 		}
@@ -515,22 +534,22 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.EDGE__CLUSTER:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setCluster((Cluster)newValue);
 				return;
-			case QVTschedulePackage.EDGE__EDGE_ROLE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setEdgeRole((Role)newValue);
 				return;
-			case QVTschedulePackage.EDGE__NAME:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setName((String)newValue);
 				return;
-			case QVTschedulePackage.EDGE__OWNING_REGION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setOwningRegion((Region)newValue);
 				return;
-			case QVTschedulePackage.EDGE__SOURCE_NODE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				setSourceNode((Node)newValue);
 				return;
-			case QVTschedulePackage.EDGE__TARGET_NODE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				setTargetNode((Node)newValue);
 				return;
 		}
@@ -545,22 +564,22 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.EDGE__CLUSTER:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setCluster((Cluster)null);
 				return;
-			case QVTschedulePackage.EDGE__EDGE_ROLE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setEdgeRole(EDGE_ROLE_EDEFAULT);
 				return;
-			case QVTschedulePackage.EDGE__NAME:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setName(NAME_EDEFAULT);
 				return;
-			case QVTschedulePackage.EDGE__OWNING_REGION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setOwningRegion((Region)null);
 				return;
-			case QVTschedulePackage.EDGE__SOURCE_NODE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				setSourceNode((Node)null);
 				return;
-			case QVTschedulePackage.EDGE__TARGET_NODE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				setTargetNode((Node)null);
 				return;
 		}
@@ -575,17 +594,17 @@ public abstract class EdgeImpl extends ElementImpl implements Edge {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.EDGE__CLUSTER:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return cluster != null;
-			case QVTschedulePackage.EDGE__EDGE_ROLE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return edgeRole != EDGE_ROLE_EDEFAULT;
-			case QVTschedulePackage.EDGE__NAME:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case QVTschedulePackage.EDGE__OWNING_REGION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return getOwningRegion() != null;
-			case QVTschedulePackage.EDGE__SOURCE_NODE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				return sourceNode != null;
-			case QVTschedulePackage.EDGE__TARGET_NODE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				return targetNode != null;
 		}
 		return super.eIsSet(featureID);

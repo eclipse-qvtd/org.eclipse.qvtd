@@ -28,6 +28,23 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
  */
 public abstract class OperationNodeImpl extends MappingNodeImpl implements OperationNode {
 	/**
+	 * The number of structural features of the '<em>Operation Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_NODE_FEATURE_COUNT = MappingNodeImpl.MAPPING_NODE_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Operation Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OPERATION_NODE_OPERATION_COUNT = MappingNodeImpl.MAPPING_NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

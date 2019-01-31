@@ -49,6 +49,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class ShadowPartEdgeImpl extends ArgumentEdgeImpl implements ShadowPartEdge {
 	/**
+	 * The number of structural features of the '<em>Shadow Part Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SHADOW_PART_EDGE_FEATURE_COUNT = ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Shadow Part Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SHADOW_PART_EDGE_OPERATION_COUNT = ArgumentEdgeImpl.ARGUMENT_EDGE_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getReferredPart() <em>Referred Part</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -89,7 +105,7 @@ public class ShadowPartEdgeImpl extends ArgumentEdgeImpl implements ShadowPartEd
 			referredPart = (ShadowPart)eResolveProxy(oldReferredPart);
 			if (referredPart != oldReferredPart) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.SHADOW_PART_EDGE__REFERRED_PART, oldReferredPart, referredPart));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0, oldReferredPart, referredPart));
 			}
 		}
 		return referredPart;
@@ -114,7 +130,7 @@ public class ShadowPartEdgeImpl extends ArgumentEdgeImpl implements ShadowPartEd
 		ShadowPart oldReferredPart = referredPart;
 		referredPart = newReferredPart;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SHADOW_PART_EDGE__REFERRED_PART, oldReferredPart, referredPart));
+			eNotify(new ENotificationImpl(this, Notification.SET, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0, oldReferredPart, referredPart));
 	}
 
 	/**
@@ -125,7 +141,7 @@ public class ShadowPartEdgeImpl extends ArgumentEdgeImpl implements ShadowPartEd
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.SHADOW_PART_EDGE__REFERRED_PART:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				if (resolve) return getReferredPart();
 				return basicGetReferredPart();
 		}
@@ -140,7 +156,7 @@ public class ShadowPartEdgeImpl extends ArgumentEdgeImpl implements ShadowPartEd
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.SHADOW_PART_EDGE__REFERRED_PART:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				setReferredPart((ShadowPart)newValue);
 				return;
 		}
@@ -155,7 +171,7 @@ public class ShadowPartEdgeImpl extends ArgumentEdgeImpl implements ShadowPartEd
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.SHADOW_PART_EDGE__REFERRED_PART:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				setReferredPart((ShadowPart)null);
 				return;
 		}
@@ -170,7 +186,7 @@ public class ShadowPartEdgeImpl extends ArgumentEdgeImpl implements ShadowPartEd
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.SHADOW_PART_EDGE__REFERRED_PART:
+			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
 				return referredPart != null;
 		}
 		return super.eIsSet(featureID);

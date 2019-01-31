@@ -83,7 +83,7 @@ public class QVTtemplateSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case QVTtemplatePackage.COLLECTION_TEMPLATE_EXP: {
+			case 0: {
 				CollectionTemplateExp collectionTemplateExp = (CollectionTemplateExp)theEObject;
 				T result = caseCollectionTemplateExp(collectionTemplateExp);
 				if (result == null) result = caseTemplateExp(collectionTemplateExp);
@@ -96,7 +96,7 @@ public class QVTtemplateSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTtemplatePackage.OBJECT_TEMPLATE_EXP: {
+			case 1: {
 				ObjectTemplateExp objectTemplateExp = (ObjectTemplateExp)theEObject;
 				T result = caseObjectTemplateExp(objectTemplateExp);
 				if (result == null) result = caseTemplateExp(objectTemplateExp);
@@ -109,7 +109,7 @@ public class QVTtemplateSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM: {
+			case 2: {
 				PropertyTemplateItem propertyTemplateItem = (PropertyTemplateItem)theEObject;
 				T result = casePropertyTemplateItem(propertyTemplateItem);
 				if (result == null) result = caseElement(propertyTemplateItem);
@@ -117,7 +117,7 @@ public class QVTtemplateSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTtemplatePackage.TEMPLATE_EXP: {
+			case 3: {
 				TemplateExp templateExp = (TemplateExp)theEObject;
 				T result = caseTemplateExp(templateExp);
 				if (result == null) result = caseLiteralExp(templateExp);

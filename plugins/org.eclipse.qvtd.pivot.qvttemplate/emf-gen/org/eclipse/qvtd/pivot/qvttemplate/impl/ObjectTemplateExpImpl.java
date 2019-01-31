@@ -13,6 +13,8 @@ package org.eclipse.qvtd.pivot.qvttemplate.impl;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -25,13 +27,21 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.SetValue;
+import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
@@ -53,6 +63,24 @@ import org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateVisitor;
  * @generated
  */
 public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemplateExp {
+	/**
+	 * The number of structural features of the '<em>Object Template Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OBJECT_TEMPLATE_EXP_FEATURE_COUNT = TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Object Template Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OBJECT_TEMPLATE_EXP_OPERATION_COUNT = TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 2;
+
 	/**
 	 * The cached value of the '{@link #getPart() <em>Part</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -100,7 +128,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	@Override
 	public EList<PropertyTemplateItem> getPart() {
 		if (part == null) {
-			part = new EObjectContainmentWithInverseEList<PropertyTemplateItem>(PropertyTemplateItem.class, this, QVTtemplatePackage.OBJECT_TEMPLATE_EXP__PART, QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER);
+			part = new EObjectContainmentWithInverseEList<PropertyTemplateItem>(PropertyTemplateItem.class, this, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
 		}
 		return part;
 	}
@@ -117,7 +145,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 			referredClass = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldReferredClass);
 			if (referredClass != oldReferredClass) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTtemplatePackage.OBJECT_TEMPLATE_EXP__REFERRED_CLASS, oldReferredClass, referredClass));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1, oldReferredClass, referredClass));
 			}
 		}
 		return referredClass;
@@ -142,7 +170,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 		org.eclipse.ocl.pivot.Class oldReferredClass = referredClass;
 		referredClass = newReferredClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTtemplatePackage.OBJECT_TEMPLATE_EXP__REFERRED_CLASS, oldReferredClass, referredClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1, oldReferredClass, referredClass));
 	}
 
 	/**
@@ -168,9 +196,9 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 			 *         'ObjectTemplateExp::PartPropertyIsUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_ObjectTemplateExp_c_c_PartPropertyIsUnique);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_ObjectTemplateExp_c_c_PartPropertyIsUnique);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -178,10 +206,10 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 			}
 			else {
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ java.util.@NonNull List<PropertyTemplateItem> part = this.getPart();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_part = idResolver.createSetOfAll(QVTtemplateTables.SET_CLSSid_PropertyTemplateItem, part);
-				/*@Thrown*/ org.eclipse.ocl.pivot.values.SetValue.@NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTtemplateTables.SET_CLSSid_PropertyTemplateItem);
-				java.util.@NonNull Iterator<Object> ITERATOR__1 = BOXED_part.iterator();
+				final /*@NonInvalid*/ @NonNull List<PropertyTemplateItem> part = this.getPart();
+				final /*@NonInvalid*/ @NonNull SetValue BOXED_part = idResolver.createSetOfAll(QVTtemplateTables.SET_CLSSid_PropertyTemplateItem, part);
+				/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTtemplateTables.SET_CLSSid_PropertyTemplateItem);
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_part.iterator();
 				/*@NonInvalid*/ boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
@@ -189,12 +217,12 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 						break;
 					}
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvttemplate.@NonNull PropertyTemplateItem _1 = (org.eclipse.qvtd.pivot.qvttemplate.@NonNull PropertyTemplateItem)ITERATOR__1.next();
+					/*@NonInvalid*/ @NonNull PropertyTemplateItem _1 = (@NonNull PropertyTemplateItem)ITERATOR__1.next();
 					/**
 					 * resolvedProperty
 					 */
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property resolvedProperty = _1.getResolvedProperty();
+					final /*@NonInvalid*/ @NonNull Property resolvedProperty = _1.getResolvedProperty();
 					//
 					if (accumulator.includes(resolvedProperty) == ValueUtil.TRUE_VALUE) {
 						result = ValueUtil.FALSE_VALUE;			// Abort after second find
@@ -236,15 +264,15 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 			 *         'ObjectTemplateExp::TypeisObjectType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_ObjectTemplateExp_c_c_TypeisObjectType);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_ObjectTemplateExp_c_c_TypeisObjectType);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = this.getType();
+				final /*@NonInvalid*/ @Nullable Type type = this.getType();
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class referredClass = this.getReferredClass();
 				final /*@NonInvalid*/ boolean result = (type != null) ? (type.getTypeId() == referredClass.getTypeId()) : false;
@@ -267,7 +295,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTtemplatePackage.OBJECT_TEMPLATE_EXP__PART:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPart()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -281,7 +309,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTtemplatePackage.OBJECT_TEMPLATE_EXP__PART:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getPart()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -295,9 +323,9 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTtemplatePackage.OBJECT_TEMPLATE_EXP__PART:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
 				return getPart();
-			case QVTtemplatePackage.OBJECT_TEMPLATE_EXP__REFERRED_CLASS:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1:
 				if (resolve) return getReferredClass();
 				return basicGetReferredClass();
 		}
@@ -313,11 +341,11 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTtemplatePackage.OBJECT_TEMPLATE_EXP__PART:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
 				getPart().clear();
 				getPart().addAll((Collection<? extends PropertyTemplateItem>)newValue);
 				return;
-			case QVTtemplatePackage.OBJECT_TEMPLATE_EXP__REFERRED_CLASS:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1:
 				setReferredClass((org.eclipse.ocl.pivot.Class)newValue);
 				return;
 		}
@@ -332,10 +360,10 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTtemplatePackage.OBJECT_TEMPLATE_EXP__PART:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
 				getPart().clear();
 				return;
-			case QVTtemplatePackage.OBJECT_TEMPLATE_EXP__REFERRED_CLASS:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1:
 				setReferredClass((org.eclipse.ocl.pivot.Class)null);
 				return;
 		}
@@ -350,9 +378,9 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTtemplatePackage.OBJECT_TEMPLATE_EXP__PART:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
 				return part != null && !part.isEmpty();
-			case QVTtemplatePackage.OBJECT_TEMPLATE_EXP__REFERRED_CLASS:
+			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1:
 				return referredClass != null;
 		}
 		return super.eIsSet(featureID);
@@ -367,9 +395,9 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTtemplatePackage.OBJECT_TEMPLATE_EXP___VALIDATE_PART_PROPERTY_IS_UNIQUE__DIAGNOSTICCHAIN_MAP:
+			case TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 0:
 				return validatePartPropertyIsUnique((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTtemplatePackage.OBJECT_TEMPLATE_EXP___VALIDATE_TYPEIS_OBJECT_TYPE__DIAGNOSTICCHAIN_MAP:
+			case TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 1:
 				return validateTypeisObjectType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

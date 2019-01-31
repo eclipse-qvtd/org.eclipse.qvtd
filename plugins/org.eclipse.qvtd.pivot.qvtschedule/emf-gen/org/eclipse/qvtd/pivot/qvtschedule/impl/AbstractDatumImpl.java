@@ -36,6 +36,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
  */
 public abstract class AbstractDatumImpl extends NamedElementImpl implements AbstractDatum {
 	/**
+	 * The number of structural features of the '<em>Abstract Datum</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ABSTRACT_DATUM_FEATURE_COUNT = NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Abstract Datum</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ABSTRACT_DATUM_OPERATION_COUNT = NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getReferredTypedModel() <em>Referred Typed Model</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -76,7 +92,7 @@ public abstract class AbstractDatumImpl extends NamedElementImpl implements Abst
 			referredTypedModel = (TypedModel)eResolveProxy(oldReferredTypedModel);
 			if (referredTypedModel != oldReferredTypedModel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.ABSTRACT_DATUM__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
 			}
 		}
 		return referredTypedModel;
@@ -101,7 +117,7 @@ public abstract class AbstractDatumImpl extends NamedElementImpl implements Abst
 		TypedModel oldReferredTypedModel = referredTypedModel;
 		referredTypedModel = newReferredTypedModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.ABSTRACT_DATUM__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
 	}
 
 	/**
@@ -112,7 +128,7 @@ public abstract class AbstractDatumImpl extends NamedElementImpl implements Abst
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.ABSTRACT_DATUM__REFERRED_TYPED_MODEL:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				if (resolve) return getReferredTypedModel();
 				return basicGetReferredTypedModel();
 		}
@@ -127,7 +143,7 @@ public abstract class AbstractDatumImpl extends NamedElementImpl implements Abst
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.ABSTRACT_DATUM__REFERRED_TYPED_MODEL:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setReferredTypedModel((TypedModel)newValue);
 				return;
 		}
@@ -142,7 +158,7 @@ public abstract class AbstractDatumImpl extends NamedElementImpl implements Abst
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.ABSTRACT_DATUM__REFERRED_TYPED_MODEL:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setReferredTypedModel((TypedModel)null);
 				return;
 		}
@@ -157,7 +173,7 @@ public abstract class AbstractDatumImpl extends NamedElementImpl implements Abst
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.ABSTRACT_DATUM__REFERRED_TYPED_MODEL:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return referredTypedModel != null;
 		}
 		return super.eIsSet(featureID);

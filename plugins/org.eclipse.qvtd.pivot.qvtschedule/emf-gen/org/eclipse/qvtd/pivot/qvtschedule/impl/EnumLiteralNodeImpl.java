@@ -48,6 +48,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class EnumLiteralNodeImpl extends OperationNodeImpl implements EnumLiteralNode {
 	/**
+	 * The number of structural features of the '<em>Enum Literal Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ENUM_LITERAL_NODE_FEATURE_COUNT = OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Enum Literal Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ENUM_LITERAL_NODE_OPERATION_COUNT = OperationNodeImpl.OPERATION_NODE_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getEnumValue() <em>Enum Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -88,7 +104,7 @@ public class EnumLiteralNodeImpl extends OperationNodeImpl implements EnumLitera
 			enumValue = (EnumerationLiteral)eResolveProxy(oldEnumValue);
 			if (enumValue != oldEnumValue) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.ENUM_LITERAL_NODE__ENUM_VALUE, oldEnumValue, enumValue));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldEnumValue, enumValue));
 			}
 		}
 		return enumValue;
@@ -113,7 +129,7 @@ public class EnumLiteralNodeImpl extends OperationNodeImpl implements EnumLitera
 		EnumerationLiteral oldEnumValue = enumValue;
 		enumValue = newEnumValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.ENUM_LITERAL_NODE__ENUM_VALUE, oldEnumValue, enumValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldEnumValue, enumValue));
 	}
 
 	/**
@@ -124,7 +140,7 @@ public class EnumLiteralNodeImpl extends OperationNodeImpl implements EnumLitera
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.ENUM_LITERAL_NODE__ENUM_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				if (resolve) return getEnumValue();
 				return basicGetEnumValue();
 		}
@@ -139,7 +155,7 @@ public class EnumLiteralNodeImpl extends OperationNodeImpl implements EnumLitera
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.ENUM_LITERAL_NODE__ENUM_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				setEnumValue((EnumerationLiteral)newValue);
 				return;
 		}
@@ -154,7 +170,7 @@ public class EnumLiteralNodeImpl extends OperationNodeImpl implements EnumLitera
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.ENUM_LITERAL_NODE__ENUM_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				setEnumValue((EnumerationLiteral)null);
 				return;
 		}
@@ -169,7 +185,7 @@ public class EnumLiteralNodeImpl extends OperationNodeImpl implements EnumLitera
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.ENUM_LITERAL_NODE__ENUM_VALUE:
+			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
 				return enumValue != null;
 		}
 		return super.eIsSet(featureID);

@@ -15,6 +15,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Iterator;
 import java.util.Map;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -25,9 +26,16 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.CallExp;
+import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.StandardLibrary;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
@@ -50,7 +58,11 @@ import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.SetValue;
+import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
+import org.eclipse.ocl.pivot.values.TupleValue;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeTables;
 import org.eclipse.qvtd.pivot.qvtimperative.SetStatement;
@@ -76,6 +88,24 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * @generated
  */
 public class SetStatementImpl extends ObservableStatementImpl implements SetStatement {
+	/**
+	 * The number of structural features of the '<em>Set Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SET_STATEMENT_FEATURE_COUNT = ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 7;
+
+	/**
+	 * The number of operations of the '<em>Set Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SET_STATEMENT_OPERATION_COUNT = ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 5;
+
 	/**
 	 * The cached value of the '{@link #getTargetVariable() <em>Target Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -197,7 +227,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			targetVariable = (VariableDeclaration)eResolveProxy(oldTargetVariable);
 			if (targetVariable != oldTargetVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativePackage.SET_STATEMENT__TARGET_VARIABLE, oldTargetVariable, targetVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0, oldTargetVariable, targetVariable));
 			}
 		}
 		return targetVariable;
@@ -222,7 +252,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		VariableDeclaration oldTargetVariable = targetVariable;
 		targetVariable = newTargetVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SET_STATEMENT__TARGET_VARIABLE, oldTargetVariable, targetVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0, oldTargetVariable, targetVariable));
 	}
 
 	/**
@@ -237,7 +267,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			targetProperty = (Property)eResolveProxy(oldTargetProperty);
 			if (targetProperty != oldTargetProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativePackage.SET_STATEMENT__TARGET_PROPERTY, oldTargetProperty, targetProperty));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 1, oldTargetProperty, targetProperty));
 			}
 		}
 		return targetProperty;
@@ -262,7 +292,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		Property oldTargetProperty = targetProperty;
 		targetProperty = newTargetProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SET_STATEMENT__TARGET_PROPERTY, oldTargetProperty, targetProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 1, oldTargetProperty, targetProperty));
 	}
 
 	/**
@@ -285,7 +315,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		boolean oldIsPartial = isPartial;
 		isPartial = newIsPartial;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SET_STATEMENT__IS_PARTIAL, oldIsPartial, isPartial));
+			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 2, oldIsPartial, isPartial));
 	}
 
 	/**
@@ -308,7 +338,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		boolean oldIsOpposite = isOpposite;
 		isOpposite = newIsOpposite;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE, oldIsOpposite, isOpposite));
+			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 4, oldIsOpposite, isOpposite));
 	}
 
 	/**
@@ -331,7 +361,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		boolean oldIsNotify = isNotify;
 		isNotify = newIsNotify;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SET_STATEMENT__IS_NOTIFY, oldIsNotify, isNotify));
+			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 3, oldIsNotify, isNotify));
 	}
 
 	/**
@@ -353,7 +383,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		OCLExpression oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -369,14 +399,14 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -390,11 +420,11 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		 * if isOpposite then targetProperty.opposite else targetProperty endif
 		 */
 		@SuppressWarnings("null")
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property targetProperty_0 = this.getTargetProperty();
+		final /*@NonInvalid*/ @NonNull Property targetProperty_0 = this.getTargetProperty();
 		final /*@NonInvalid*/ boolean isOpposite = this.isIsOpposite();
-		/*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Property symbol_0;
+		/*@NonInvalid*/ @Nullable Property symbol_0;
 		if (isOpposite) {
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Property opposite = targetProperty_0.getOpposite();
+			final /*@NonInvalid*/ @Nullable Property opposite = targetProperty_0.getOpposite();
 			symbol_0 = opposite;
 		}
 		else {
@@ -441,8 +471,8 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			 *         'SetStatement::CompatibleClassForProperty'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SetStatement_c_c_CompatibleClassForProperty);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SetStatement_c_c_CompatibleClassForProperty);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ @NonNull Object symbol_2;
 			if (le) {
@@ -452,11 +482,11 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 				/*@Caught*/ @NonNull Object CAUGHT_symbol_1;
 				try {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property resolvedProperty = this.getResolvedProperty();
+					final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class requiredType = resolvedProperty.getOwningClass();
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull VariableDeclaration targetVariable = this.getTargetVariable();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type actualType = targetVariable.getType();
+					final /*@NonInvalid*/ @NonNull VariableDeclaration targetVariable = this.getTargetVariable();
+					final /*@NonInvalid*/ @Nullable Type actualType = targetVariable.getType();
 					final /*@Thrown*/ boolean status = OclTypeConformsToOperation.INSTANCE.evaluate(executor, actualType, requiredType).booleanValue();
 					/*@Thrown*/ @NonNull Object symbol_1;
 					if (status) {
@@ -464,29 +494,29 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 					}
 					else {
 						final /*@NonInvalid*/ @NonNull Object name = actualType == null;
-						/*@Thrown*/ java.lang.@Nullable String safe_name_source;
+						/*@Thrown*/ @Nullable String safe_name_source;
 						if (name == Boolean.TRUE) {
 							safe_name_source = null;
 						}
 						else {
 							assert actualType != null;
-							final /*@Thrown*/ java.lang.@Nullable String name_0 = actualType.getName();
+							final /*@Thrown*/ @Nullable String name_0 = actualType.getName();
 							safe_name_source = name_0;
 						}
-						final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR_SetStatement_c_c_CompatibleClassForProperty_c_32, safe_name_source);
-						final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTimperativeTables.STR__32_must_32_conform_32_to_32);
+						final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR_SetStatement_c_c_CompatibleClassForProperty_c_32, safe_name_source);
+						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTimperativeTables.STR__32_must_32_conform_32_to_32);
 						final /*@NonInvalid*/ @NonNull Object name_1 = requiredType == null;
-						/*@Thrown*/ java.lang.@Nullable String safe_name_source_0;
+						/*@Thrown*/ @Nullable String safe_name_source_0;
 						if (name_1 == Boolean.TRUE) {
 							safe_name_source_0 = null;
 						}
 						else {
 							assert requiredType != null;
-							final /*@Thrown*/ java.lang.@Nullable String name_2 = requiredType.getName();
+							final /*@Thrown*/ @Nullable String name_2 = requiredType.getName();
 							safe_name_source_0 = name_2;
 						}
-						final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, safe_name_source_0);
-						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, status);
+						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, safe_name_source_0);
+						final /*@Thrown*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, status);
 						symbol_1 = symbol_0;
 					}
 					CAUGHT_symbol_1 = symbol_1;
@@ -544,9 +574,9 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			 *         'SetStatement::CompatibleTypeForPartialValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SetStatement_c_c_CompatibleTypeForPartialValue);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SetStatement_c_c_CompatibleTypeForPartialValue);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ @NonNull Object symbol_2;
 			if (le) {
@@ -560,15 +590,15 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 					if (isPartial) {
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CollectionType_0 = idResolver.getClass(QVTimperativeTables.CLSSid_CollectionType, null);
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property resolvedProperty = this.getResolvedProperty();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = resolvedProperty.getType();
+						final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
+						final /*@NonInvalid*/ @Nullable Type type = resolvedProperty.getType();
 						@SuppressWarnings("null")
-						final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull CollectionType oclAsType = (org.eclipse.ocl.pivot.@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType_0);
+						final /*@Thrown*/ @NonNull CollectionType oclAsType = (@NonNull CollectionType)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, type, TYP_CollectionType_0);
 						@SuppressWarnings("null")
-						final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull Type requiredType = oclAsType.getElementType();
+						final /*@Thrown*/ @NonNull Type requiredType = oclAsType.getElementType();
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression ownedExpression = this.getOwnedExpression();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type actualType = ownedExpression.getType();
+						final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
+						final /*@NonInvalid*/ @Nullable Type actualType = ownedExpression.getType();
 						final /*@Thrown*/ boolean status = OclTypeConformsToOperation.INSTANCE.evaluate(executor, actualType, requiredType).booleanValue();
 						/*@Thrown*/ @NonNull Object symbol_1;
 						if (status) {
@@ -576,20 +606,20 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 						}
 						else {
 							final /*@NonInvalid*/ @NonNull Object name = actualType == null;
-							/*@Thrown*/ java.lang.@Nullable String safe_name_source;
+							/*@Thrown*/ @Nullable String safe_name_source;
 							if (name == Boolean.TRUE) {
 								safe_name_source = null;
 							}
 							else {
 								assert actualType != null;
-								final /*@Thrown*/ java.lang.@Nullable String name_0 = actualType.getName();
+								final /*@Thrown*/ @Nullable String name_0 = actualType.getName();
 								safe_name_source = name_0;
 							}
-							final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR_SetStatement_c_c_CompatibleTypeForPartialValue_c_32, safe_name_source);
-							final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTimperativeTables.STR__32_must_32_conform_32_to_32);
-							final /*@Thrown*/ java.lang.@Nullable String name_1 = requiredType.getName();
-							final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, name_1);
-							final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, status);
+							final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR_SetStatement_c_c_CompatibleTypeForPartialValue_c_32, safe_name_source);
+							final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTimperativeTables.STR__32_must_32_conform_32_to_32);
+							final /*@Thrown*/ @Nullable String name_1 = requiredType.getName();
+							final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, name_1);
+							final /*@Thrown*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, status);
 							symbol_1 = symbol_0;
 						}
 						result = symbol_1;
@@ -651,8 +681,8 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			 *         'SetStatement::CompatibleTypeForTotalValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SetStatement_c_c_CompatibleTypeForTotalValue);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SetStatement_c_c_CompatibleTypeForTotalValue);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ @NonNull Object symbol_2;
 			if (le) {
@@ -662,18 +692,18 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 				/*@Caught*/ @NonNull Object CAUGHT_result;
 				try {
 					final /*@NonInvalid*/ boolean isPartial = this.isIsPartial();
-					final /*@NonInvalid*/ java.lang.@Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isPartial);
+					final /*@NonInvalid*/ @Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isPartial);
 					if (not == null) {
 						throw new InvalidValueException("Null if condition");
 					}
 					/*@Thrown*/ @NonNull Object result;
 					if (not) {
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property resolvedProperty = this.getResolvedProperty();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type requiredType = resolvedProperty.getType();
+						final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
+						final /*@NonInvalid*/ @Nullable Type requiredType = resolvedProperty.getType();
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression ownedExpression = this.getOwnedExpression();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type actualType = ownedExpression.getType();
+						final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
+						final /*@NonInvalid*/ @Nullable Type actualType = ownedExpression.getType();
 						final /*@Thrown*/ boolean status = OclTypeConformsToOperation.INSTANCE.evaluate(executor, actualType, requiredType).booleanValue();
 						/*@Thrown*/ @NonNull Object symbol_1;
 						if (status) {
@@ -681,29 +711,29 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 						}
 						else {
 							final /*@NonInvalid*/ @NonNull Object name = actualType == null;
-							/*@Thrown*/ java.lang.@Nullable String safe_name_source;
+							/*@Thrown*/ @Nullable String safe_name_source;
 							if (name == Boolean.TRUE) {
 								safe_name_source = null;
 							}
 							else {
 								assert actualType != null;
-								final /*@Thrown*/ java.lang.@Nullable String name_0 = actualType.getName();
+								final /*@Thrown*/ @Nullable String name_0 = actualType.getName();
 								safe_name_source = name_0;
 							}
-							final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR_SetStatement_c_c_CompatibleTypeForTotalValue_c_32, safe_name_source);
-							final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTimperativeTables.STR__32_must_32_conform_32_to_32);
+							final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTimperativeTables.STR_SetStatement_c_c_CompatibleTypeForTotalValue_c_32, safe_name_source);
+							final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTimperativeTables.STR__32_must_32_conform_32_to_32);
 							final /*@NonInvalid*/ @NonNull Object name_1 = requiredType == null;
-							/*@Thrown*/ java.lang.@Nullable String safe_name_source_0;
+							/*@Thrown*/ @Nullable String safe_name_source_0;
 							if (name_1 == Boolean.TRUE) {
 								safe_name_source_0 = null;
 							}
 							else {
 								assert requiredType != null;
-								final /*@Thrown*/ java.lang.@Nullable String name_2 = requiredType.getName();
+								final /*@Thrown*/ @Nullable String name_2 = requiredType.getName();
 								safe_name_source_0 = name_2;
 							}
-							final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, safe_name_source_0);
-							final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, status);
+							final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, safe_name_source_0);
+							final /*@Thrown*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, status);
 							symbol_1 = symbol_0;
 						}
 						result = symbol_1;
@@ -757,10 +787,10 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			 *         'SetStatement::ValueDoesNotNavigateFromRealizedVariables'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SetStatement_c_c_ValueDoesNotNavigateFromRealizedVariables);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SetStatement_c_c_ValueDoesNotNavigateFromRealizedVariables);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -771,58 +801,59 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 				try {
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_VariableExp = idResolver.getClass(QVTimperativeTables.CLSSid_VariableExp, null);
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression ownedExpression = this.getOwnedExpression();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTimperativeTables.SET_CLSSid_OCLExpression, ownedExpression);
-					final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOf(oclAsSet);
-					final org.eclipse.ocl.pivot.library.LibraryIteration.@NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
+					final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
+					final /*@NonInvalid*/ @NonNull SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(executor, QVTimperativeTables.SET_CLSSid_OCLExpression, ownedExpression);
+					final org.eclipse.ocl.pivot.@NonNull Class TYPE_closure_0 = executor.getStaticTypeOfValue(null, oclAsSet);
+					final @NonNull LibraryIterationExtension IMPL_closure_0 = (LibraryIterationExtension)TYPE_closure_0.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 					final @NonNull Object ACC_closure_0 = IMPL_closure_0.createAccumulatorValue(executor, QVTimperativeTables.SET_CLSSid_OclElement, QVTimperativeTables.SET_CLSSid_OclElement);
 					/**
 					 * Implementation of the iterator body.
 					 */
-					final org.eclipse.ocl.pivot.library.@NonNull AbstractBinaryOperation BODY_closure_0 = new AbstractBinaryOperation() {
+					final @NonNull AbstractBinaryOperation BODY_closure_0 = new AbstractBinaryOperation() {
 						/**
 						 * e.oclContents()
 						 */
 						@Override
-						public @Nullable Object evaluate(final org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor, final org.eclipse.ocl.pivot.ids.@NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object e_0) {
-							final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue oclContents = ClassifierOclContentsOperation.INSTANCE.evaluate(executor, QVTimperativeTables.SET_CLSSid_OclElement, e_0);
+						public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object oclAsSet, final /*@NonInvalid*/ @Nullable Object e_0) {
+							final /*@Thrown*/ @NonNull SetValue oclContents = ClassifierOclContentsOperation.INSTANCE.evaluate(executor, QVTimperativeTables.SET_CLSSid_OclElement, e_0);
 							return oclContents;
 						}
 					};
-					final org.eclipse.ocl.pivot.internal.library.executor.@NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, QVTimperativeTables.SET_CLSSid_OclElement, BODY_closure_0, oclAsSet, ACC_closure_0);
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue closure = (org.eclipse.ocl.pivot.values.@NonNull SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0);
-					final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue selectByKind = (org.eclipse.ocl.pivot.values.@Nullable SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure, TYP_VariableExp);
-					/*@Thrown*/ org.eclipse.ocl.pivot.values.SetValue.@NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_VariableExp);
-					java.util.@NonNull Iterator<Object> ITERATOR__1 = selectByKind.iterator();
-					/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue select_0;
+					final @NonNull ExecutorSingleIterationManager MGR_closure_0 = new ExecutorSingleIterationManager(executor, QVTimperativeTables.SET_CLSSid_OclElement, BODY_closure_0, oclAsSet, ACC_closure_0);
+					@SuppressWarnings("null")
+					final /*@Thrown*/ @NonNull SetValue closure = (@NonNull SetValue)IMPL_closure_0.evaluateIteration(MGR_closure_0);
+					final /*@Thrown*/ @NonNull SetValue selectByKind = (@Nullable SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(executor, closure, TYP_VariableExp);
+					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_VariableExp);
+					@NonNull Iterator<Object> ITERATOR__1 = selectByKind.iterator();
+					/*@Thrown*/ @NonNull SetValue select_0;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
 							select_0 = accumulator;
 							break;
 						}
 						@SuppressWarnings("null")
-						/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull VariableExp _1 = (org.eclipse.ocl.pivot.@NonNull VariableExp)ITERATOR__1.next();
+						/*@NonInvalid*/ @NonNull VariableExp _1 = (@NonNull VariableExp)ITERATOR__1.next();
 						/**
 						 * referredVariable.oclIsKindOf(NewStatement)
 						 */
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtimperative_c_c_NewStatement = idResolver.getClass(QVTimperativeTables.CLSSid_NewStatement, null);
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable VariableDeclaration referredVariable = _1.getReferredVariable();
+						final /*@NonInvalid*/ @Nullable VariableDeclaration referredVariable = _1.getReferredVariable();
 						final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, referredVariable, TYP_qvtimperative_c_c_NewStatement).booleanValue();
 						//
 						if (oclIsKindOf == ValueUtil.TRUE_VALUE) {
 							accumulator.add(_1);
 						}
 					}
-					/*@Thrown*/ org.eclipse.ocl.pivot.values.SetValue.@NonNull Accumulator accumulator_0 = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_VariableExp);
-					java.util.@NonNull Iterator<Object> ITERATOR_s = select_0.iterator();
-					/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue select;
+					/*@Thrown*/ @NonNull Accumulator accumulator_0 = ValueUtil.createSetAccumulatorValue(QVTimperativeTables.SET_CLSSid_VariableExp);
+					@NonNull Iterator<Object> ITERATOR_s = select_0.iterator();
+					/*@Thrown*/ @NonNull SetValue select;
 					while (true) {
 						if (!ITERATOR_s.hasNext()) {
 							select = accumulator_0;
 							break;
 						}
 						@SuppressWarnings("null")
-						/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull VariableExp s = (org.eclipse.ocl.pivot.@NonNull VariableExp)ITERATOR_s.next();
+						/*@NonInvalid*/ @NonNull VariableExp s = (@NonNull VariableExp)ITERATOR_s.next();
 						/**
 						 *
 						 * s.oclContainer()
@@ -845,15 +876,15 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_CallExp_0 = idResolver.getClass(QVTimperativeTables.CLSSid_CallExp, null);
 							final /*@NonInvalid*/ @Nullable Object oclContainer_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(executor, s);
 							@SuppressWarnings("null")
-							final /*@Thrown*/ org.eclipse.ocl.pivot.@NonNull CallExp oclAsType = (org.eclipse.ocl.pivot.@NonNull CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer_0, TYP_CallExp_0);
-							final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable OCLExpression ownedSource = oclAsType.getOwnedSource();
+							final /*@Thrown*/ @NonNull CallExp oclAsType = (@NonNull CallExp)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, oclContainer_0, TYP_CallExp_0);
+							final /*@Thrown*/ @Nullable OCLExpression ownedSource = oclAsType.getOwnedSource();
 							final /*@Thrown*/ boolean eq = s.equals(ownedSource);
 							CAUGHT_eq = eq;
 						}
 						catch (Exception e) {
 							CAUGHT_eq = ValueUtil.createInvalidValue(e);
 						}
-						final /*@Thrown*/ java.lang.@Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf_0, CAUGHT_eq);
+						final /*@Thrown*/ @Nullable Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_oclIsKindOf_0, CAUGHT_eq);
 						if (and == null) {
 							throw new InvalidValueException("Null body for \'Set(T).select(Set.T[?] | Lambda T() : Boolean[1]) : Set(T)\'");
 						}
@@ -900,8 +931,8 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			 *         'SetStatement::TargetPropertyIsNotReadOnly'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SetStatement_c_c_TargetPropertyIsNotReadOnly);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_SetStatement_c_c_TargetPropertyIsNotReadOnly);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -909,9 +940,9 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			}
 			else {
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property resolvedProperty = this.getResolvedProperty();
+				final /*@NonInvalid*/ @NonNull Property resolvedProperty = this.getResolvedProperty();
 				final /*@NonInvalid*/ boolean isReadOnly = resolvedProperty.isIsReadOnly();
-				final /*@NonInvalid*/ java.lang.@Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(isReadOnly);
+				final /*@NonInvalid*/ @Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(isReadOnly);
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_SetStatement_c_c_TargetPropertyIsNotReadOnly, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
@@ -940,7 +971,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -954,21 +985,21 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.SET_STATEMENT__TARGET_VARIABLE:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0:
 				if (resolve) return getTargetVariable();
 				return basicGetTargetVariable();
-			case QVTimperativePackage.SET_STATEMENT__TARGET_PROPERTY:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 1:
 				if (resolve) return getTargetProperty();
 				return basicGetTargetProperty();
-			case QVTimperativePackage.SET_STATEMENT__IS_PARTIAL:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 2:
 				return isIsPartial();
-			case QVTimperativePackage.SET_STATEMENT__IS_NOTIFY:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 3:
 				return isIsNotify();
-			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 4:
 				return isIsOpposite();
-			case QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5:
 				return getOwnedExpression();
-			case QVTimperativePackage.SET_STATEMENT__RESOLVED_PROPERTY:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 6:
 				return getResolvedProperty();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -982,22 +1013,22 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.SET_STATEMENT__TARGET_VARIABLE:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0:
 				setTargetVariable((VariableDeclaration)newValue);
 				return;
-			case QVTimperativePackage.SET_STATEMENT__TARGET_PROPERTY:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 1:
 				setTargetProperty((Property)newValue);
 				return;
-			case QVTimperativePackage.SET_STATEMENT__IS_PARTIAL:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 2:
 				setIsPartial((Boolean)newValue);
 				return;
-			case QVTimperativePackage.SET_STATEMENT__IS_NOTIFY:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 3:
 				setIsNotify((Boolean)newValue);
 				return;
-			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 4:
 				setIsOpposite((Boolean)newValue);
 				return;
-			case QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5:
 				setOwnedExpression((OCLExpression)newValue);
 				return;
 		}
@@ -1012,22 +1043,22 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.SET_STATEMENT__TARGET_VARIABLE:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0:
 				setTargetVariable((VariableDeclaration)null);
 				return;
-			case QVTimperativePackage.SET_STATEMENT__TARGET_PROPERTY:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 1:
 				setTargetProperty((Property)null);
 				return;
-			case QVTimperativePackage.SET_STATEMENT__IS_PARTIAL:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 2:
 				setIsPartial(IS_PARTIAL_EDEFAULT);
 				return;
-			case QVTimperativePackage.SET_STATEMENT__IS_NOTIFY:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 3:
 				setIsNotify(IS_NOTIFY_EDEFAULT);
 				return;
-			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 4:
 				setIsOpposite(IS_OPPOSITE_EDEFAULT);
 				return;
-			case QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5:
 				setOwnedExpression((OCLExpression)null);
 				return;
 		}
@@ -1042,19 +1073,19 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.SET_STATEMENT__TARGET_VARIABLE:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0:
 				return targetVariable != null;
-			case QVTimperativePackage.SET_STATEMENT__TARGET_PROPERTY:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 1:
 				return targetProperty != null;
-			case QVTimperativePackage.SET_STATEMENT__IS_PARTIAL:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 2:
 				return isPartial != IS_PARTIAL_EDEFAULT;
-			case QVTimperativePackage.SET_STATEMENT__IS_NOTIFY:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 3:
 				return isNotify != IS_NOTIFY_EDEFAULT;
-			case QVTimperativePackage.SET_STATEMENT__IS_OPPOSITE:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 4:
 				return isOpposite != IS_OPPOSITE_EDEFAULT;
-			case QVTimperativePackage.SET_STATEMENT__OWNED_EXPRESSION:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5:
 				return ownedExpression != null;
-			case QVTimperativePackage.SET_STATEMENT__RESOLVED_PROPERTY:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 6:
 				return getResolvedProperty() != null;
 		}
 		return super.eIsSet(featureID);
@@ -1069,15 +1100,15 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTimperativePackage.SET_STATEMENT___VALIDATE_COMPATIBLE_CLASS_FOR_PROPERTY__DIAGNOSTICCHAIN_MAP:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 0:
 				return validateCompatibleClassForProperty((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTimperativePackage.SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 1:
 				return validateCompatibleTypeForPartialValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTimperativePackage.SET_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 2:
 				return validateCompatibleTypeForTotalValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTimperativePackage.SET_STATEMENT___VALIDATE_VALUE_DOES_NOT_NAVIGATE_FROM_REALIZED_VARIABLES__DIAGNOSTICCHAIN_MAP:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 3:
 				return validateValueDoesNotNavigateFromRealizedVariables((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTimperativePackage.SET_STATEMENT___VALIDATE_TARGET_PROPERTY_IS_NOT_READ_ONLY__DIAGNOSTICCHAIN_MAP:
+			case ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 4:
 				return validateTargetPropertyIsNotReadOnly((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

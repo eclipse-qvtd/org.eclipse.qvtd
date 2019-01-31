@@ -42,6 +42,24 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  */
 public class GuardParameterImpl extends MappingParameterImpl implements GuardParameter {
 	/**
+	 * The number of structural features of the '<em>Guard Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GUARD_PARAMETER_FEATURE_COUNT = MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Guard Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GUARD_PARAMETER_OPERATION_COUNT = MappingParameterImpl.MAPPING_PARAMETER_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getReferredTypedModel() <em>Referred Typed Model</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -92,7 +110,7 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 			referredTypedModel = (ImperativeTypedModel)eResolveProxy(oldReferredTypedModel);
 			if (referredTypedModel != oldReferredTypedModel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativePackage.GUARD_PARAMETER__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
 			}
 		}
 		return referredTypedModel;
@@ -117,7 +135,7 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 		ImperativeTypedModel oldReferredTypedModel = referredTypedModel;
 		referredTypedModel = newReferredTypedModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.GUARD_PARAMETER__REFERRED_TYPED_MODEL, oldReferredTypedModel, referredTypedModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
 	}
 
 	/**
@@ -132,7 +150,7 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 			successProperty = (Property)eResolveProxy(oldSuccessProperty);
 			if (successProperty != oldSuccessProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativePackage.GUARD_PARAMETER__SUCCESS_PROPERTY, oldSuccessProperty, successProperty));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 1, oldSuccessProperty, successProperty));
 			}
 		}
 		return successProperty;
@@ -157,7 +175,7 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 		Property oldSuccessProperty = successProperty;
 		successProperty = newSuccessProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.GUARD_PARAMETER__SUCCESS_PROPERTY, oldSuccessProperty, successProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 1, oldSuccessProperty, successProperty));
 	}
 
 	/**
@@ -168,10 +186,10 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.GUARD_PARAMETER__REFERRED_TYPED_MODEL:
+			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0:
 				if (resolve) return getReferredTypedModel();
 				return basicGetReferredTypedModel();
-			case QVTimperativePackage.GUARD_PARAMETER__SUCCESS_PROPERTY:
+			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 1:
 				if (resolve) return getSuccessProperty();
 				return basicGetSuccessProperty();
 		}
@@ -186,10 +204,10 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.GUARD_PARAMETER__REFERRED_TYPED_MODEL:
+			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0:
 				setReferredTypedModel((ImperativeTypedModel)newValue);
 				return;
-			case QVTimperativePackage.GUARD_PARAMETER__SUCCESS_PROPERTY:
+			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 1:
 				setSuccessProperty((Property)newValue);
 				return;
 		}
@@ -204,10 +222,10 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.GUARD_PARAMETER__REFERRED_TYPED_MODEL:
+			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0:
 				setReferredTypedModel((ImperativeTypedModel)null);
 				return;
-			case QVTimperativePackage.GUARD_PARAMETER__SUCCESS_PROPERTY:
+			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 1:
 				setSuccessProperty((Property)null);
 				return;
 		}
@@ -222,9 +240,9 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.GUARD_PARAMETER__REFERRED_TYPED_MODEL:
+			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0:
 				return referredTypedModel != null;
-			case QVTimperativePackage.GUARD_PARAMETER__SUCCESS_PROPERTY:
+			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 1:
 				return successProperty != null;
 		}
 		return super.eIsSet(featureID);

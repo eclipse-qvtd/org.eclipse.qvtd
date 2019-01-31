@@ -30,6 +30,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanImpliesOperation;
@@ -40,6 +42,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.qvtd.pivot.qvtimperative.DeclareStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
@@ -62,6 +65,24 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * @generated
  */
 public class DeclareStatementImpl extends VariableStatementImpl implements DeclareStatement {
+	/**
+	 * The number of structural features of the '<em>Declare Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DECLARE_STATEMENT_FEATURE_COUNT = VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Declare Statement</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DECLARE_STATEMENT_OPERATION_COUNT = VariableStatementImpl.VARIABLE_STATEMENT_OPERATION_COUNT + 1;
+
 	/**
 	 * The cached value of the '{@link #getObservedProperties() <em>Observed Properties</em>}' reference list.
 	 * <!-- begin-user-doc -->
@@ -129,7 +150,7 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	@Override
 	public EList<Property> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, QVTimperativePackage.DECLARE_STATEMENT__OBSERVED_PROPERTIES);
+			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0);
 		}
 		return observedProperties;
 	}
@@ -154,7 +175,7 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 		boolean oldIsCheck = isCheck;
 		isCheck = newIsCheck;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.DECLARE_STATEMENT__IS_CHECK, oldIsCheck, isCheck));
+			eNotify(new ENotificationImpl(this, Notification.SET, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 1, oldIsCheck, isCheck));
 	}
 
 	/**
@@ -176,7 +197,7 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 		OCLExpression oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -192,14 +213,14 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -225,8 +246,8 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 			 *         'DeclareStatement::CompatibleTypeForUncheckedValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_DeclareStatement_c_c_CompatibleTypeForUncheckedValue);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_DeclareStatement_c_c_CompatibleTypeForUncheckedValue);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -236,20 +257,20 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 				/*@Caught*/ @Nullable Object CAUGHT_result;
 				try {
 					final /*@NonInvalid*/ boolean isCheck = this.isIsCheck();
-					final /*@NonInvalid*/ java.lang.@Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isCheck);
+					final /*@NonInvalid*/ @Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isCheck);
 					/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
 					try {
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression ownedExpression = this.getOwnedExpression();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = ownedExpression.getType();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = this.getType();
+						final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
+						final /*@NonInvalid*/ @Nullable Type type = ownedExpression.getType();
+						final /*@NonInvalid*/ @Nullable Type type_0 = this.getType();
 						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 						CAUGHT_conformsTo = conformsTo;
 					}
 					catch (Exception e) {
 						CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
 					}
-					final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(not, CAUGHT_conformsTo);
+					final /*@Thrown*/ @Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(not, CAUGHT_conformsTo);
 					CAUGHT_result = result;
 				}
 				catch (Exception e) {
@@ -283,7 +304,7 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -297,11 +318,11 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativePackage.DECLARE_STATEMENT__OBSERVED_PROPERTIES:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0:
 				return getObservedProperties();
-			case QVTimperativePackage.DECLARE_STATEMENT__IS_CHECK:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 1:
 				return isIsCheck();
-			case QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2:
 				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -316,14 +337,14 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativePackage.DECLARE_STATEMENT__OBSERVED_PROPERTIES:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
-			case QVTimperativePackage.DECLARE_STATEMENT__IS_CHECK:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 1:
 				setIsCheck((Boolean)newValue);
 				return;
-			case QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2:
 				setOwnedExpression((OCLExpression)newValue);
 				return;
 		}
@@ -338,13 +359,13 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.DECLARE_STATEMENT__OBSERVED_PROPERTIES:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				return;
-			case QVTimperativePackage.DECLARE_STATEMENT__IS_CHECK:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 1:
 				setIsCheck(IS_CHECK_EDEFAULT);
 				return;
-			case QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2:
 				setOwnedExpression((OCLExpression)null);
 				return;
 		}
@@ -359,11 +380,11 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativePackage.DECLARE_STATEMENT__OBSERVED_PROPERTIES:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0:
 				return observedProperties != null && !observedProperties.isEmpty();
-			case QVTimperativePackage.DECLARE_STATEMENT__IS_CHECK:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 1:
 				return isCheck != IS_CHECK_EDEFAULT;
-			case QVTimperativePackage.DECLARE_STATEMENT__OWNED_EXPRESSION:
+			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2:
 				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
@@ -378,7 +399,7 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatement.class) {
 			switch (derivedFeatureID) {
-				case QVTimperativePackage.DECLARE_STATEMENT__OBSERVED_PROPERTIES: return QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES;
+				case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0: return StatementImpl.STATEMENT_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -394,7 +415,7 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatement.class) {
 			switch (baseFeatureID) {
-				case QVTimperativePackage.OBSERVABLE_STATEMENT__OBSERVED_PROPERTIES: return QVTimperativePackage.DECLARE_STATEMENT__OBSERVED_PROPERTIES;
+				case StatementImpl.STATEMENT_FEATURE_COUNT + 0: return VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -410,7 +431,7 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTimperativePackage.DECLARE_STATEMENT___VALIDATE_COMPATIBLE_TYPE_FOR_UNCHECKED_VALUE__DIAGNOSTICCHAIN_MAP:
+			case VariableStatementImpl.VARIABLE_STATEMENT_OPERATION_COUNT + 0:
 				return validateCompatibleTypeForUncheckedValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

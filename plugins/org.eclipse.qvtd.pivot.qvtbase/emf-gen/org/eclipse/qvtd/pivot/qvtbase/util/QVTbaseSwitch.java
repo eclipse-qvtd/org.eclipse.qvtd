@@ -94,7 +94,7 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case QVTbasePackage.BASE_MODEL: {
+			case 0: {
 				BaseModel baseModel = (BaseModel)theEObject;
 				T result = caseBaseModel(baseModel);
 				if (result == null) result = caseModel(baseModel);
@@ -104,7 +104,7 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTbasePackage.DOMAIN: {
+			case 1: {
 				Domain domain = (Domain)theEObject;
 				T result = caseDomain(domain);
 				if (result == null) result = caseNamedElement(domain);
@@ -113,7 +113,7 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTbasePackage.FUNCTION: {
+			case 2: {
 				Function function = (Function)theEObject;
 				T result = caseFunction(function);
 				if (result == null) result = caseOperation(function);
@@ -126,7 +126,7 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTbasePackage.FUNCTION_PARAMETER: {
+			case 3: {
 				FunctionParameter functionParameter = (FunctionParameter)theEObject;
 				T result = caseFunctionParameter(functionParameter);
 				if (result == null) result = caseParameter(functionParameter);
@@ -137,21 +137,21 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTbasePackage.PATTERN: {
+			case 4: {
 				Pattern pattern = (Pattern)theEObject;
 				T result = casePattern(pattern);
 				if (result == null) result = caseElement(pattern);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTbasePackage.PREDICATE: {
+			case 5: {
 				Predicate predicate = (Predicate)theEObject;
 				T result = casePredicate(predicate);
 				if (result == null) result = caseElement(predicate);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTbasePackage.RULE: {
+			case 6: {
 				Rule rule = (Rule)theEObject;
 				T result = caseRule(rule);
 				if (result == null) result = caseNamedElement(rule);
@@ -159,7 +159,7 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTbasePackage.TRANSFORMATION: {
+			case 7: {
 				Transformation transformation = (Transformation)theEObject;
 				T result = caseTransformation(transformation);
 				if (result == null) result = caseClass(transformation);
@@ -171,7 +171,7 @@ public class QVTbaseSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTbasePackage.TYPED_MODEL: {
+			case 8: {
 				TypedModel typedModel = (TypedModel)theEObject;
 				T result = caseTypedModel(typedModel);
 				if (result == null) result = caseNamedElement(typedModel);

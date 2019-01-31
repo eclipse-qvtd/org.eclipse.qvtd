@@ -31,6 +31,23 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class IteratorNodeImpl extends VariableNodeImpl implements IteratorNode {
 	/**
+	 * The number of structural features of the '<em>Iterator Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ITERATOR_NODE_FEATURE_COUNT = VariableNodeImpl.VARIABLE_NODE_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Iterator Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ITERATOR_NODE_OPERATION_COUNT = VariableNodeImpl.VARIABLE_NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

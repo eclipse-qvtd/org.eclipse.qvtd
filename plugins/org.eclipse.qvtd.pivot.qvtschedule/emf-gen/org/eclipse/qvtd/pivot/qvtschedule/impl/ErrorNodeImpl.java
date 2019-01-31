@@ -33,6 +33,23 @@ import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleConstants;
  */
 public class ErrorNodeImpl extends MappingNodeImpl implements ErrorNode {
 	/**
+	 * The number of structural features of the '<em>Error Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ERROR_NODE_FEATURE_COUNT = MappingNodeImpl.MAPPING_NODE_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Error Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ERROR_NODE_OPERATION_COUNT = MappingNodeImpl.MAPPING_NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

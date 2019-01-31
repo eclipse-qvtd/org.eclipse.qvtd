@@ -41,6 +41,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.VariableNode;
  */
 public abstract class VariableNodeImpl extends MappingNodeImpl implements VariableNode {
 	/**
+	 * The number of structural features of the '<em>Variable Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int VARIABLE_NODE_FEATURE_COUNT = MappingNodeImpl.MAPPING_NODE_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Variable Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int VARIABLE_NODE_OPERATION_COUNT = MappingNodeImpl.MAPPING_NODE_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getReferredVariable() <em>Referred Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -80,7 +96,7 @@ public abstract class VariableNodeImpl extends MappingNodeImpl implements Variab
 			referredVariable = (VariableDeclaration)eResolveProxy(oldReferredVariable);
 			if (referredVariable != oldReferredVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.VARIABLE_NODE__REFERRED_VARIABLE, oldReferredVariable, referredVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingNodeImpl.MAPPING_NODE_FEATURE_COUNT + 0, oldReferredVariable, referredVariable));
 			}
 		}
 		return referredVariable;
@@ -105,7 +121,7 @@ public abstract class VariableNodeImpl extends MappingNodeImpl implements Variab
 		VariableDeclaration oldReferredVariable = referredVariable;
 		referredVariable = newReferredVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.VARIABLE_NODE__REFERRED_VARIABLE, oldReferredVariable, referredVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingNodeImpl.MAPPING_NODE_FEATURE_COUNT + 0, oldReferredVariable, referredVariable));
 	}
 
 	/**
@@ -116,7 +132,7 @@ public abstract class VariableNodeImpl extends MappingNodeImpl implements Variab
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.VARIABLE_NODE__REFERRED_VARIABLE:
+			case MappingNodeImpl.MAPPING_NODE_FEATURE_COUNT + 0:
 				if (resolve) return getReferredVariable();
 				return basicGetReferredVariable();
 		}
@@ -131,7 +147,7 @@ public abstract class VariableNodeImpl extends MappingNodeImpl implements Variab
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.VARIABLE_NODE__REFERRED_VARIABLE:
+			case MappingNodeImpl.MAPPING_NODE_FEATURE_COUNT + 0:
 				setReferredVariable((VariableDeclaration)newValue);
 				return;
 		}
@@ -146,7 +162,7 @@ public abstract class VariableNodeImpl extends MappingNodeImpl implements Variab
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.VARIABLE_NODE__REFERRED_VARIABLE:
+			case MappingNodeImpl.MAPPING_NODE_FEATURE_COUNT + 0:
 				setReferredVariable((VariableDeclaration)null);
 				return;
 		}
@@ -161,7 +177,7 @@ public abstract class VariableNodeImpl extends MappingNodeImpl implements Variab
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.VARIABLE_NODE__REFERRED_VARIABLE:
+			case MappingNodeImpl.MAPPING_NODE_FEATURE_COUNT + 0:
 				return referredVariable != null;
 		}
 		return super.eIsSet(featureID);

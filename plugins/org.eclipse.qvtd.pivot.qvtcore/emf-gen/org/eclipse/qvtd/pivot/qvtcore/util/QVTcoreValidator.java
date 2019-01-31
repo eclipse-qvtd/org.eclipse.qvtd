@@ -254,39 +254,39 @@ public class QVTcoreValidator extends EObjectValidator {
 	@Override
 	protected boolean validate(int classifierID, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		switch (classifierID) {
-			case QVTcorePackage.AREA:
+			case 0:
 				return validateArea((Area)value, diagnostics, context);
-			case QVTcorePackage.ASSIGNMENT:
+			case 1:
 				return validateAssignment((Assignment)value, diagnostics, context);
-			case QVTcorePackage.BOTTOM_PATTERN:
+			case 2:
 				return validateBottomPattern((BottomPattern)value, diagnostics, context);
-			case QVTcorePackage.BOTTOM_VARIABLE:
+			case 3:
 				return validateBottomVariable((BottomVariable)value, diagnostics, context);
-			case QVTcorePackage.CORE_DOMAIN:
+			case 4:
 				return validateCoreDomain((CoreDomain)value, diagnostics, context);
-			case QVTcorePackage.CORE_MODEL:
+			case 5:
 				return validateCoreModel((CoreModel)value, diagnostics, context);
-			case QVTcorePackage.CORE_PATTERN:
+			case 6:
 				return validateCorePattern((CorePattern)value, diagnostics, context);
-			case QVTcorePackage.ENFORCEMENT_OPERATION:
+			case 7:
 				return validateEnforcementOperation((EnforcementOperation)value, diagnostics, context);
-			case QVTcorePackage.GUARD_PATTERN:
+			case 8:
 				return validateGuardPattern((GuardPattern)value, diagnostics, context);
-			case QVTcorePackage.GUARD_VARIABLE:
+			case 9:
 				return validateGuardVariable((GuardVariable)value, diagnostics, context);
-			case QVTcorePackage.MAPPING:
+			case 10:
 				return validateMapping((Mapping)value, diagnostics, context);
-			case QVTcorePackage.NAVIGATION_ASSIGNMENT:
+			case 11:
 				return validateNavigationAssignment((NavigationAssignment)value, diagnostics, context);
-			case QVTcorePackage.OPPOSITE_PROPERTY_ASSIGNMENT:
+			case 12:
 				return validateOppositePropertyAssignment((OppositePropertyAssignment)value, diagnostics, context);
-			case QVTcorePackage.PROPERTY_ASSIGNMENT:
+			case 13:
 				return validatePropertyAssignment((PropertyAssignment)value, diagnostics, context);
-			case QVTcorePackage.REALIZED_VARIABLE:
+			case 14:
 				return validateRealizedVariable((RealizedVariable)value, diagnostics, context);
-			case QVTcorePackage.VARIABLE_ASSIGNMENT:
+			case 15:
 				return validateVariableAssignment((VariableAssignment)value, diagnostics, context);
-			case QVTcorePackage.ENFORCEMENT_MODE:
+			case 16:
 				return validateEnforcementMode((EnforcementMode)value, diagnostics, context);
 			default:
 				return true;

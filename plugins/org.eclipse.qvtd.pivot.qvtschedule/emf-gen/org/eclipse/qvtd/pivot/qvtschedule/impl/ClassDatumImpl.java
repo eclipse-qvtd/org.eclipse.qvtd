@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.CompleteClass;
+import org.eclipse.ocl.pivot.internal.ModelImpl;
 import org.eclipse.ocl.pivot.internal.utilities.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -53,6 +54,24 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  * @generated
  */
 public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
+	/**
+	 * The number of structural features of the '<em>Class Datum</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_DATUM_FEATURE_COUNT = AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of operations of the '<em>Class Datum</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_DATUM_OPERATION_COUNT = AbstractDatumImpl.ABSTRACT_DATUM_OPERATION_COUNT + 0;
+
 	/**
 	 * The cached value of the '{@link #getCompleteClass() <em>Complete Class</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -124,7 +143,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 			completeClass = (CompleteClass)eResolveProxy(oldCompleteClass);
 			if (completeClass != oldCompleteClass) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.CLASS_DATUM__COMPLETE_CLASS, oldCompleteClass, completeClass));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 0, oldCompleteClass, completeClass));
 			}
 		}
 		return completeClass;
@@ -149,7 +168,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 		CompleteClass oldCompleteClass = completeClass;
 		completeClass = newCompleteClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CLASS_DATUM__COMPLETE_CLASS, oldCompleteClass, completeClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 0, oldCompleteClass, completeClass));
 	}
 
 	/**
@@ -160,7 +179,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public List<PropertyDatum> getOwnedPropertyDatums() {
 		if (ownedPropertyDatums == null) {
-			ownedPropertyDatums = new EObjectContainmentWithInverseEList<PropertyDatum>(PropertyDatum.class, this, QVTschedulePackage.CLASS_DATUM__OWNED_PROPERTY_DATUMS, QVTschedulePackage.PROPERTY_DATUM__OWNING_CLASS_DATUM);
+			ownedPropertyDatums = new EObjectContainmentWithInverseEList<PropertyDatum>(PropertyDatum.class, this, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 1, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 1);
 		}
 		return ownedPropertyDatums;
 	}
@@ -172,7 +191,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 */
 	@Override
 	public ScheduleModel getOwningScheduleModel() {
-		if (eContainerFeatureID() != QVTschedulePackage.CLASS_DATUM__OWNING_SCHEDULE_MODEL) return null;
+		if (eContainerFeatureID() != (AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 2)) return null;
 		return (ScheduleModel)eInternalContainer();
 	}
 
@@ -182,7 +201,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningScheduleModel(ScheduleModel newOwningScheduleModel, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningScheduleModel, QVTschedulePackage.CLASS_DATUM__OWNING_SCHEDULE_MODEL, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningScheduleModel, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 2, msgs);
 		return msgs;
 	}
 
@@ -193,19 +212,19 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 */
 	@Override
 	public void setOwningScheduleModel(ScheduleModel newOwningScheduleModel) {
-		if (newOwningScheduleModel != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.CLASS_DATUM__OWNING_SCHEDULE_MODEL && newOwningScheduleModel != null)) {
+		if (newOwningScheduleModel != eInternalContainer() || (eContainerFeatureID() != (AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 2) && newOwningScheduleModel != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningScheduleModel))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningScheduleModel != null)
-				msgs = ((InternalEObject)newOwningScheduleModel).eInverseAdd(this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_CLASS_DATUMS, ScheduleModel.class, msgs);
+				msgs = ((InternalEObject)newOwningScheduleModel).eInverseAdd(this, ModelImpl.MODEL_FEATURE_COUNT + 0, ScheduleModel.class, msgs);
 			msgs = basicSetOwningScheduleModel(newOwningScheduleModel, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CLASS_DATUM__OWNING_SCHEDULE_MODEL, newOwningScheduleModel, newOwningScheduleModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 2, newOwningScheduleModel, newOwningScheduleModel));
 	}
 
 	/**
@@ -220,7 +239,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 			referredClass = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldReferredClass);
 			if (referredClass != oldReferredClass) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.CLASS_DATUM__REFERRED_CLASS, oldReferredClass, referredClass));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 3, oldReferredClass, referredClass));
 			}
 		}
 		return referredClass;
@@ -245,7 +264,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 		org.eclipse.ocl.pivot.Class oldReferredClass = referredClass;
 		referredClass = newReferredClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.CLASS_DATUM__REFERRED_CLASS, oldReferredClass, referredClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 3, oldReferredClass, referredClass));
 	}
 
 	/**
@@ -256,7 +275,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public List<ClassDatum> getSuperClassDatums() {
 		if (superClassDatums == null) {
-			superClassDatums = new EObjectResolvingEList<ClassDatum>(ClassDatum.class, this, QVTschedulePackage.CLASS_DATUM__SUPER_CLASS_DATUMS);
+			superClassDatums = new EObjectResolvingEList<ClassDatum>(ClassDatum.class, this, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 4);
 		}
 		return superClassDatums;
 	}
@@ -270,9 +289,9 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.CLASS_DATUM__OWNED_PROPERTY_DATUMS:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedPropertyDatums()).basicAdd(otherEnd, msgs);
-			case QVTschedulePackage.CLASS_DATUM__OWNING_SCHEDULE_MODEL:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningScheduleModel((ScheduleModel)otherEnd, msgs);
@@ -288,9 +307,9 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.CLASS_DATUM__OWNED_PROPERTY_DATUMS:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 1:
 				return ((InternalEList<?>)getOwnedPropertyDatums()).basicRemove(otherEnd, msgs);
-			case QVTschedulePackage.CLASS_DATUM__OWNING_SCHEDULE_MODEL:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 2:
 				return basicSetOwningScheduleModel(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -304,8 +323,8 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTschedulePackage.CLASS_DATUM__OWNING_SCHEDULE_MODEL:
-				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.SCHEDULE_MODEL__OWNED_CLASS_DATUMS, ScheduleModel.class, msgs);
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 2:
+				return eInternalContainer().eInverseRemove(this, ModelImpl.MODEL_FEATURE_COUNT + 0, ScheduleModel.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -318,17 +337,17 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.CLASS_DATUM__COMPLETE_CLASS:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 0:
 				if (resolve) return getCompleteClass();
 				return basicGetCompleteClass();
-			case QVTschedulePackage.CLASS_DATUM__OWNED_PROPERTY_DATUMS:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 1:
 				return getOwnedPropertyDatums();
-			case QVTschedulePackage.CLASS_DATUM__OWNING_SCHEDULE_MODEL:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 2:
 				return getOwningScheduleModel();
-			case QVTschedulePackage.CLASS_DATUM__REFERRED_CLASS:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 3:
 				if (resolve) return getReferredClass();
 				return basicGetReferredClass();
-			case QVTschedulePackage.CLASS_DATUM__SUPER_CLASS_DATUMS:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 4:
 				return getSuperClassDatums();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -343,20 +362,20 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.CLASS_DATUM__COMPLETE_CLASS:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 0:
 				setCompleteClass((CompleteClass)newValue);
 				return;
-			case QVTschedulePackage.CLASS_DATUM__OWNED_PROPERTY_DATUMS:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 1:
 				getOwnedPropertyDatums().clear();
 				getOwnedPropertyDatums().addAll((Collection<? extends PropertyDatum>)newValue);
 				return;
-			case QVTschedulePackage.CLASS_DATUM__OWNING_SCHEDULE_MODEL:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 2:
 				setOwningScheduleModel((ScheduleModel)newValue);
 				return;
-			case QVTschedulePackage.CLASS_DATUM__REFERRED_CLASS:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 3:
 				setReferredClass((org.eclipse.ocl.pivot.Class)newValue);
 				return;
-			case QVTschedulePackage.CLASS_DATUM__SUPER_CLASS_DATUMS:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 4:
 				getSuperClassDatums().clear();
 				getSuperClassDatums().addAll((Collection<? extends ClassDatum>)newValue);
 				return;
@@ -372,19 +391,19 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.CLASS_DATUM__COMPLETE_CLASS:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 0:
 				setCompleteClass((CompleteClass)null);
 				return;
-			case QVTschedulePackage.CLASS_DATUM__OWNED_PROPERTY_DATUMS:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 1:
 				getOwnedPropertyDatums().clear();
 				return;
-			case QVTschedulePackage.CLASS_DATUM__OWNING_SCHEDULE_MODEL:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 2:
 				setOwningScheduleModel((ScheduleModel)null);
 				return;
-			case QVTschedulePackage.CLASS_DATUM__REFERRED_CLASS:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 3:
 				setReferredClass((org.eclipse.ocl.pivot.Class)null);
 				return;
-			case QVTschedulePackage.CLASS_DATUM__SUPER_CLASS_DATUMS:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 4:
 				getSuperClassDatums().clear();
 				return;
 		}
@@ -399,15 +418,15 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.CLASS_DATUM__COMPLETE_CLASS:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 0:
 				return completeClass != null;
-			case QVTschedulePackage.CLASS_DATUM__OWNED_PROPERTY_DATUMS:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 1:
 				return ownedPropertyDatums != null && !ownedPropertyDatums.isEmpty();
-			case QVTschedulePackage.CLASS_DATUM__OWNING_SCHEDULE_MODEL:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 2:
 				return getOwningScheduleModel() != null;
-			case QVTschedulePackage.CLASS_DATUM__REFERRED_CLASS:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 3:
 				return referredClass != null;
-			case QVTschedulePackage.CLASS_DATUM__SUPER_CLASS_DATUMS:
+			case AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 4:
 				return superClassDatums != null && !superClassDatums.isEmpty();
 		}
 		return super.eIsSet(featureID);

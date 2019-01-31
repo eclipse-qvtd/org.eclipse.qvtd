@@ -50,6 +50,24 @@ import org.eclipse.qvtd.pivot.qvtschedule.Role;
  */
 public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 	/**
+	 * The number of structural features of the '<em>Mapping Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_NODE_FEATURE_COUNT = NodeImpl.NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Mapping Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_NODE_OPERATION_COUNT = NodeImpl.NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #isMatched() <em>Matched</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -108,7 +126,7 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 		boolean oldMatched = matched;
 		matched = newMatched;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.MAPPING_NODE__MATCHED, oldMatched, matched));
+			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 0, oldMatched, matched));
 	}
 
 	/**
@@ -119,7 +137,7 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.MAPPING_NODE__MATCHED:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				return isMatched();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -133,7 +151,7 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.MAPPING_NODE__MATCHED:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				setMatched((Boolean)newValue);
 				return;
 		}
@@ -148,7 +166,7 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.MAPPING_NODE__MATCHED:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				setMatched(MATCHED_EDEFAULT);
 				return;
 		}
@@ -163,7 +181,7 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.MAPPING_NODE__MATCHED:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				return matched != MATCHED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

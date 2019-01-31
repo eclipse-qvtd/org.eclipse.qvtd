@@ -23,9 +23,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.ReferringElement;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.LiteralExpImpl;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
@@ -33,6 +35,7 @@ import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplateTables;
@@ -53,6 +56,24 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
  * @generated
  */
 public abstract class TemplateExpImpl extends LiteralExpImpl implements TemplateExp {
+	/**
+	 * The number of structural features of the '<em>Template Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TEMPLATE_EXP_FEATURE_COUNT = LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Template Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TEMPLATE_EXP_OPERATION_COUNT = LiteralExpImpl.LITERAL_EXP_OPERATION_COUNT + 2;
+
 	/**
 	 * The cached value of the '{@link #getBindsTo() <em>Binds To</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -104,7 +125,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 			bindsTo = (Variable)eResolveProxy(oldBindsTo);
 			if (bindsTo != oldBindsTo) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTtemplatePackage.TEMPLATE_EXP__BINDS_TO, oldBindsTo, bindsTo));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 0, oldBindsTo, bindsTo));
 			}
 		}
 		return bindsTo;
@@ -129,7 +150,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 		Variable oldBindsTo = bindsTo;
 		bindsTo = newBindsTo;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTtemplatePackage.TEMPLATE_EXP__BINDS_TO, oldBindsTo, bindsTo));
+			eNotify(new ENotificationImpl(this, Notification.SET, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 0, oldBindsTo, bindsTo));
 	}
 
 	/**
@@ -151,7 +172,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 		OCLExpression oldWhere = where;
 		where = newWhere;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTtemplatePackage.TEMPLATE_EXP__WHERE, oldWhere, newWhere);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 1, oldWhere, newWhere);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -167,14 +188,14 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 		if (newWhere != where) {
 			NotificationChain msgs = null;
 			if (where != null)
-				msgs = ((InternalEObject)where).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTtemplatePackage.TEMPLATE_EXP__WHERE, null, msgs);
+				msgs = ((InternalEObject)where).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 1), null, msgs);
 			if (newWhere != null)
-				msgs = ((InternalEObject)newWhere).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTtemplatePackage.TEMPLATE_EXP__WHERE, null, msgs);
+				msgs = ((InternalEObject)newWhere).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetWhere(newWhere, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTtemplatePackage.TEMPLATE_EXP__WHERE, newWhere, newWhere));
+			eNotify(new ENotificationImpl(this, Notification.SET, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 1, newWhere, newWhere));
 	}
 
 	/**
@@ -198,9 +219,9 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 			 *         'TemplateExp::WhereIsBoolean'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_TemplateExp_c_c_WhereIsBoolean);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTtemplateTables.STR_TemplateExp_c_c_WhereIsBoolean);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTtemplateTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -209,7 +230,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
 				try {
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable OCLExpression where = this.getWhere();
+					final /*@NonInvalid*/ @Nullable OCLExpression where = this.getWhere();
 					final /*@NonInvalid*/ boolean ne = where != null;
 					/*@Thrown*/ boolean result;
 					if (ne) {
@@ -217,7 +238,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 						if (where == null) {
 							throw new InvalidValueException("Null source for \'TypedElement::type\'");
 						}
-						final /*@Thrown*/ org.eclipse.ocl.pivot.@Nullable Type type = where.getType();
+						final /*@Thrown*/ @Nullable Type type = where.getType();
 						final /*@Thrown*/ boolean eq = (type != null) ? (type.getTypeId() == TYP_Boolean.getTypeId()) : false;
 						result = eq;
 					}
@@ -247,7 +268,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTtemplatePackage.TEMPLATE_EXP__WHERE:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 1:
 				return basicSetWhere(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -261,10 +282,10 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTtemplatePackage.TEMPLATE_EXP__BINDS_TO:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 0:
 				if (resolve) return getBindsTo();
 				return basicGetBindsTo();
-			case QVTtemplatePackage.TEMPLATE_EXP__WHERE:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 1:
 				return getWhere();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -278,10 +299,10 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTtemplatePackage.TEMPLATE_EXP__BINDS_TO:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 0:
 				setBindsTo((Variable)newValue);
 				return;
-			case QVTtemplatePackage.TEMPLATE_EXP__WHERE:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 1:
 				setWhere((OCLExpression)newValue);
 				return;
 		}
@@ -296,10 +317,10 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTtemplatePackage.TEMPLATE_EXP__BINDS_TO:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 0:
 				setBindsTo((Variable)null);
 				return;
-			case QVTtemplatePackage.TEMPLATE_EXP__WHERE:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 1:
 				setWhere((OCLExpression)null);
 				return;
 		}
@@ -314,9 +335,9 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTtemplatePackage.TEMPLATE_EXP__BINDS_TO:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 0:
 				return bindsTo != null;
-			case QVTtemplatePackage.TEMPLATE_EXP__WHERE:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 1:
 				return where != null;
 		}
 		return super.eIsSet(featureID);
@@ -331,7 +352,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
 		if (baseClass == ReferringElement.class) {
 			switch (baseOperationID) {
-				case PivotPackage.REFERRING_ELEMENT___GET_REFERRED_ELEMENT: return QVTtemplatePackage.TEMPLATE_EXP___GET_REFERRED_ELEMENT;
+				case 0: return LiteralExpImpl.LITERAL_EXP_OPERATION_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -347,9 +368,9 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTtemplatePackage.TEMPLATE_EXP___VALIDATE_WHERE_IS_BOOLEAN__DIAGNOSTICCHAIN_MAP:
+			case LiteralExpImpl.LITERAL_EXP_OPERATION_COUNT + 1:
 				return validateWhereIsBoolean((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTtemplatePackage.TEMPLATE_EXP___GET_REFERRED_ELEMENT:
+			case LiteralExpImpl.LITERAL_EXP_OPERATION_COUNT + 0:
 				return getReferredElement();
 		}
 		return super.eInvoke(operationID, arguments);

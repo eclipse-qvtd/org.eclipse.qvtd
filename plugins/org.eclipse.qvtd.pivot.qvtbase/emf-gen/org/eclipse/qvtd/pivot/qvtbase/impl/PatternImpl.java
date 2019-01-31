@@ -44,6 +44,24 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  */
 public class PatternImpl extends ElementImpl implements Pattern {
 	/**
+	 * The number of structural features of the '<em>Pattern</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PATTERN_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Pattern</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PATTERN_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getPredicate() <em>Predicate</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -91,7 +109,7 @@ public class PatternImpl extends ElementImpl implements Pattern {
 	@SuppressWarnings("null")
 	public @NonNull EList<Predicate> getPredicate() {
 		if (predicate == null) {
-			predicate = new EObjectContainmentWithInverseEList<Predicate>(Predicate.class, this, QVTbasePackage.PATTERN__PREDICATE, QVTbasePackage.PREDICATE__PATTERN);
+			predicate = new EObjectContainmentWithInverseEList<Predicate>(Predicate.class, this, ElementImpl.ELEMENT_FEATURE_COUNT + 0, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
 		}
 		return predicate;
 	}
@@ -105,7 +123,7 @@ public class PatternImpl extends ElementImpl implements Pattern {
 	@SuppressWarnings("null")
 	public @NonNull EList<Variable> getBindsTo() {
 		if (bindsTo == null) {
-			bindsTo = new EObjectResolvingEList<Variable>(Variable.class, this, QVTbasePackage.PATTERN__BINDS_TO);
+			bindsTo = new EObjectResolvingEList<Variable>(Variable.class, this, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
 		}
 		return bindsTo;
 	}
@@ -119,7 +137,7 @@ public class PatternImpl extends ElementImpl implements Pattern {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTbasePackage.PATTERN__PREDICATE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPredicate()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -133,7 +151,7 @@ public class PatternImpl extends ElementImpl implements Pattern {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTbasePackage.PATTERN__PREDICATE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getPredicate()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -147,9 +165,9 @@ public class PatternImpl extends ElementImpl implements Pattern {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTbasePackage.PATTERN__PREDICATE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return getPredicate();
-			case QVTbasePackage.PATTERN__BINDS_TO:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return getBindsTo();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -164,11 +182,11 @@ public class PatternImpl extends ElementImpl implements Pattern {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTbasePackage.PATTERN__PREDICATE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				getPredicate().clear();
 				getPredicate().addAll((Collection<? extends Predicate>)newValue);
 				return;
-			case QVTbasePackage.PATTERN__BINDS_TO:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				getBindsTo().clear();
 				getBindsTo().addAll((Collection<? extends Variable>)newValue);
 				return;
@@ -184,10 +202,10 @@ public class PatternImpl extends ElementImpl implements Pattern {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTbasePackage.PATTERN__PREDICATE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				getPredicate().clear();
 				return;
-			case QVTbasePackage.PATTERN__BINDS_TO:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				getBindsTo().clear();
 				return;
 		}
@@ -202,9 +220,9 @@ public class PatternImpl extends ElementImpl implements Pattern {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTbasePackage.PATTERN__PREDICATE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return predicate != null && !predicate.isEmpty();
-			case QVTbasePackage.PATTERN__BINDS_TO:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return bindsTo != null && !bindsTo.isEmpty();
 		}
 		return super.eIsSet(featureID);

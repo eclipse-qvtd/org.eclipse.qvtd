@@ -28,6 +28,23 @@ import org.eclipse.qvtd.runtime.qvttrace.QVTtracePackage;
  */
 public abstract class ExecutionImpl extends TraceInstanceImpl implements Execution {
 	/**
+	 * The number of structural features of the '<em>Execution</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int EXECUTION_FEATURE_COUNT = TraceInstanceImpl.TRACE_INSTANCE_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Execution</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int EXECUTION_OPERATION_COUNT = TraceInstanceImpl.TRACE_INSTANCE_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

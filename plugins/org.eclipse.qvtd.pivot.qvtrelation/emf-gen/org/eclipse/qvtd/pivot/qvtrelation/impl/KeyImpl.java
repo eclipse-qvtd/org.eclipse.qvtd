@@ -12,6 +12,8 @@ package org.eclipse.qvtd.pivot.qvtrelation.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -26,6 +28,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.StandardLibrary;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSingleIterationManager;
@@ -45,8 +51,15 @@ import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.BagValue;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.OrderedSetValue;
+import org.eclipse.ocl.pivot.values.SequenceValue;
+import org.eclipse.ocl.pivot.values.SequenceValue.Accumulator;
+import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationTables;
@@ -70,6 +83,24 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  * @generated
  */
 public class KeyImpl extends ElementImpl implements Key {
+	/**
+	 * The number of structural features of the '<em>Key</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int KEY_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Key</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int KEY_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 8;
+
 	/**
 	 * The cached value of the '{@link #getIdentifies() <em>Identifies</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -131,7 +162,7 @@ public class KeyImpl extends ElementImpl implements Key {
 			identifies = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldIdentifies);
 			if (identifies != oldIdentifies) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTrelationPackage.KEY__IDENTIFIES, oldIdentifies, identifies));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 0, oldIdentifies, identifies));
 			}
 		}
 		return identifies;
@@ -156,7 +187,7 @@ public class KeyImpl extends ElementImpl implements Key {
 		org.eclipse.ocl.pivot.Class oldIdentifies = identifies;
 		identifies = newIdentifies;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.KEY__IDENTIFIES, oldIdentifies, identifies));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 0, oldIdentifies, identifies));
 	}
 
 	/**
@@ -167,7 +198,7 @@ public class KeyImpl extends ElementImpl implements Key {
 	@Override
 	public EList<Property> getPart() {
 		if (part == null) {
-			part = new EObjectResolvingEList<Property>(Property.class, this, QVTrelationPackage.KEY__PART);
+			part = new EObjectResolvingEList<Property>(Property.class, this, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
 		}
 		return part;
 	}
@@ -179,7 +210,7 @@ public class KeyImpl extends ElementImpl implements Key {
 	 */
 	@Override
 	public RelationalTransformation getTransformation() {
-		if (eContainerFeatureID() != QVTrelationPackage.KEY__TRANSFORMATION) return null;
+		if (eContainerFeatureID() != (ElementImpl.ELEMENT_FEATURE_COUNT + 3)) return null;
 		return (RelationalTransformation)eInternalContainer();
 	}
 
@@ -189,7 +220,7 @@ public class KeyImpl extends ElementImpl implements Key {
 	 * @generated
 	 */
 	public NotificationChain basicSetTransformation(RelationalTransformation newTransformation, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newTransformation, QVTrelationPackage.KEY__TRANSFORMATION, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newTransformation, ElementImpl.ELEMENT_FEATURE_COUNT + 3, msgs);
 		return msgs;
 	}
 
@@ -200,19 +231,19 @@ public class KeyImpl extends ElementImpl implements Key {
 	 */
 	@Override
 	public void setTransformation(RelationalTransformation newTransformation) {
-		if (newTransformation != eInternalContainer() || (eContainerFeatureID() != QVTrelationPackage.KEY__TRANSFORMATION && newTransformation != null)) {
+		if (newTransformation != eInternalContainer() || (eContainerFeatureID() != (ElementImpl.ELEMENT_FEATURE_COUNT + 3) && newTransformation != null)) {
 			if (EcoreUtil.isAncestor(this, newTransformation))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newTransformation != null)
-				msgs = ((InternalEObject)newTransformation).eInverseAdd(this, QVTrelationPackage.RELATIONAL_TRANSFORMATION__OWNED_KEY, RelationalTransformation.class, msgs);
+				msgs = ((InternalEObject)newTransformation).eInverseAdd(this, TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0, RelationalTransformation.class, msgs);
 			msgs = basicSetTransformation(newTransformation, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.KEY__TRANSFORMATION, newTransformation, newTransformation));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 3, newTransformation, newTransformation));
 	}
 
 	/**
@@ -236,8 +267,8 @@ public class KeyImpl extends ElementImpl implements Key {
 			 *         'Key::IdentifiesIsNotAbstract'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Key_c_c_IdentifiesIsNotAbstract);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Key_c_c_IdentifiesIsNotAbstract);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -247,7 +278,7 @@ public class KeyImpl extends ElementImpl implements Key {
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class identifies = this.getIdentifies();
 				final /*@NonInvalid*/ boolean isAbstract = identifies.isIsAbstract();
-				final /*@NonInvalid*/ java.lang.@Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(isAbstract);
+				final /*@NonInvalid*/ @Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(isAbstract);
 				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_Key_c_c_IdentifiesIsNotAbstract, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTrelationTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
@@ -281,9 +312,9 @@ public class KeyImpl extends ElementImpl implements Key {
 			 *         'Key::IdentifiesIsAUsedPackageClass'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Key_c_c_IdentifiesIsAUsedPackageClass);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Key_c_c_IdentifiesIsAUsedPackageClass);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -292,30 +323,30 @@ public class KeyImpl extends ElementImpl implements Key {
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
 				try {
-					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtrelation.@Nullable RelationalTransformation transformation = this.getTransformation();
+					final /*@NonInvalid*/ @Nullable RelationalTransformation transformation = this.getTransformation();
 					final /*@NonInvalid*/ boolean ne = transformation != null;
 					/*@Thrown*/ boolean result;
 					if (ne) {
 						if (transformation == null) {
 							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTbase\'::Transformation::modelParameter\'");
 						}
-						final /*@Thrown*/ java.util.@NonNull List<TypedModel> modelParameter = transformation.getModelParameter();
-						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_TypedModel, modelParameter);
-						/*@Thrown*/ org.eclipse.ocl.pivot.values.SequenceValue.@NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(QVTrelationTables.SEQ_CLSSid_Package);
-						java.util.@NonNull Iterator<Object> ITERATOR__1 = BOXED_modelParameter.iterator();
-						/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SequenceValue collect;
+						final /*@Thrown*/ @NonNull List<TypedModel> modelParameter = transformation.getModelParameter();
+						final /*@Thrown*/ @NonNull OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_TypedModel, modelParameter);
+						/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(QVTrelationTables.SEQ_CLSSid_Package);
+						@NonNull Iterator<Object> ITERATOR__1 = BOXED_modelParameter.iterator();
+						/*@Thrown*/ @NonNull SequenceValue collect;
 						while (true) {
 							if (!ITERATOR__1.hasNext()) {
 								collect = accumulator;
 								break;
 							}
 							@SuppressWarnings("null")
-							/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull TypedModel _1 = (org.eclipse.qvtd.pivot.qvtbase.@NonNull TypedModel)ITERATOR__1.next();
+							/*@NonInvalid*/ @NonNull TypedModel _1 = (@NonNull TypedModel)ITERATOR__1.next();
 							/**
 							 * usedPackage
 							 */
-							final /*@NonInvalid*/ java.util.@NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = _1.getUsedPackage();
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_usedPackage = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Package, usedPackage);
+							final /*@NonInvalid*/ @NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = _1.getUsedPackage();
+							final /*@NonInvalid*/ @NonNull SetValue BOXED_usedPackage = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Package, usedPackage);
 							//
 							for (Object value : BOXED_usedPackage.flatten().getElements()) {
 								accumulator.add(value);
@@ -372,10 +403,10 @@ public class KeyImpl extends ElementImpl implements Key {
 			 *         'Key::NoSuperKeys'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Key_c_c_NoSuperKeys);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Key_c_c_NoSuperKeys);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_1;
 			if (le) {
@@ -384,54 +415,55 @@ public class KeyImpl extends ElementImpl implements Key {
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
 				try {
-					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtrelation.@Nullable RelationalTransformation transformation = this.getTransformation();
+					final /*@NonInvalid*/ @Nullable RelationalTransformation transformation = this.getTransformation();
 					final /*@NonInvalid*/ boolean ne = transformation != null;
 					/*@Thrown*/ boolean result;
 					if (ne) {
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class identifies = this.getIdentifies();
-						final /*@NonInvalid*/ java.util.@NonNull List<org.eclipse.ocl.pivot.Class> superClasses_0 = identifies.getSuperClasses();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_superClasses_0 = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Class, superClasses_0);
-						final org.eclipse.ocl.pivot.@NonNull Class TYPE_superClasses_2 = executor.getStaticTypeOf(BOXED_superClasses_0);
-						final org.eclipse.ocl.pivot.library.LibraryIteration.@NonNull LibraryIterationExtension IMPL_superClasses_2 = (LibraryIterationExtension)TYPE_superClasses_2.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
+						final /*@NonInvalid*/ @NonNull List<org.eclipse.ocl.pivot.Class> superClasses_0 = identifies.getSuperClasses();
+						final /*@NonInvalid*/ @NonNull SetValue BOXED_superClasses_0 = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Class, superClasses_0);
+						final org.eclipse.ocl.pivot.@NonNull Class TYPE_superClasses_2 = executor.getStaticTypeOfValue(null, BOXED_superClasses_0);
+						final @NonNull LibraryIterationExtension IMPL_superClasses_2 = (LibraryIterationExtension)TYPE_superClasses_2.lookupImplementation(standardLibrary, OCLstdlibTables.Operations._Set__closure);
 						final @NonNull Object ACC_superClasses_2 = IMPL_superClasses_2.createAccumulatorValue(executor, QVTrelationTables.SET_CLSSid_Class, QVTrelationTables.SET_CLSSid_Class);
 						/**
 						 * Implementation of the iterator body.
 						 */
-						final org.eclipse.ocl.pivot.library.@NonNull AbstractBinaryOperation BODY_superClasses_2 = new AbstractBinaryOperation() {
+						final @NonNull AbstractBinaryOperation BODY_superClasses_2 = new AbstractBinaryOperation() {
 							/**
 							 * superClasses
 							 */
 							@Override
-							public @Nullable Object evaluate(final org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor, final org.eclipse.ocl.pivot.ids.@NonNull TypeId typeId, final @Nullable Object BOXED_superClasses_0, final /*@NonInvalid*/ @Nullable Object _1) {
+							public @Nullable Object evaluate(final @NonNull Executor executor, final @NonNull TypeId typeId, final @Nullable Object BOXED_superClasses_0, final /*@NonInvalid*/ @Nullable Object _1) {
 								final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class symbol_0 = (org.eclipse.ocl.pivot.Class)_1;
 								if (symbol_0 == null) {
 									throw new InvalidValueException("Null source for \'Class::superClasses\'");
 								}
-								final /*@Thrown*/ java.util.@NonNull List<org.eclipse.ocl.pivot.Class> superClasses_1 = symbol_0.getSuperClasses();
-								final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_superClasses_1 = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Class, superClasses_1);
+								final /*@Thrown*/ @NonNull List<org.eclipse.ocl.pivot.Class> superClasses_1 = symbol_0.getSuperClasses();
+								final /*@Thrown*/ @NonNull SetValue BOXED_superClasses_1 = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Class, superClasses_1);
 								return BOXED_superClasses_1;
 							}
 						};
-						final org.eclipse.ocl.pivot.internal.library.executor.@NonNull ExecutorSingleIterationManager MGR_superClasses_2 = new ExecutorSingleIterationManager(executor, QVTrelationTables.SET_CLSSid_Class, BODY_superClasses_2, BOXED_superClasses_0, ACC_superClasses_2);
-						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue superClasses = (org.eclipse.ocl.pivot.values.@NonNull SetValue)IMPL_superClasses_2.evaluateIteration(MGR_superClasses_2);
+						final @NonNull ExecutorSingleIterationManager MGR_superClasses_2 = new ExecutorSingleIterationManager(executor, QVTrelationTables.SET_CLSSid_Class, BODY_superClasses_2, BOXED_superClasses_0, ACC_superClasses_2);
+						@SuppressWarnings("null")
+						final /*@Thrown*/ @NonNull SetValue superClasses = (@NonNull SetValue)IMPL_superClasses_2.evaluateIteration(MGR_superClasses_2);
 						if (transformation == null) {
 							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTrelation\'::RelationalTransformation::ownedKey\'");
 						}
 						@SuppressWarnings("null")
-						final /*@Thrown*/ java.util.@NonNull List<Key> ownedKey = transformation.getOwnedKey();
-						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_ownedKey = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Key, ownedKey);
-						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue otherKeys = (org.eclipse.ocl.pivot.values.@Nullable SetValue)CollectionExcludingOperation.INSTANCE.evaluate(BOXED_ownedKey, this);
+						final /*@Thrown*/ @NonNull List<Key> ownedKey = transformation.getOwnedKey();
+						final /*@Thrown*/ @NonNull SetValue BOXED_ownedKey = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Key, ownedKey);
+						final /*@Thrown*/ @NonNull SetValue otherKeys = (@Nullable SetValue)CollectionExcludingOperation.INSTANCE.evaluate(BOXED_ownedKey, this);
 						/*@Thrown*/ org.eclipse.ocl.pivot.values.BagValue.@NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTrelationTables.BAG_CLSSid_Class);
-						java.util.@NonNull Iterator<Object> ITERATOR__1_0 = otherKeys.iterator();
-						/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull BagValue collect;
+						@NonNull Iterator<Object> ITERATOR__1_0 = otherKeys.iterator();
+						/*@Thrown*/ @NonNull BagValue collect;
 						while (true) {
 							if (!ITERATOR__1_0.hasNext()) {
 								collect = accumulator;
 								break;
 							}
 							@SuppressWarnings("null")
-							/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtrelation.@NonNull Key _1_0 = (org.eclipse.qvtd.pivot.qvtrelation.@NonNull Key)ITERATOR__1_0.next();
+							/*@NonInvalid*/ @NonNull Key _1_0 = (@NonNull Key)ITERATOR__1_0.next();
 							/**
 							 * identifies
 							 */
@@ -485,9 +517,9 @@ public class KeyImpl extends ElementImpl implements Key {
 			 *         'Key::IdentifiesIsUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Key_c_c_IdentifiesIsUnique);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Key_c_c_IdentifiesIsUnique);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -496,7 +528,7 @@ public class KeyImpl extends ElementImpl implements Key {
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
 				try {
-					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtrelation.@Nullable RelationalTransformation transformation = this.getTransformation();
+					final /*@NonInvalid*/ @Nullable RelationalTransformation transformation = this.getTransformation();
 					final /*@NonInvalid*/ boolean ne = transformation != null;
 					/*@Thrown*/ boolean result;
 					if (ne) {
@@ -504,19 +536,19 @@ public class KeyImpl extends ElementImpl implements Key {
 							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTrelation\'::RelationalTransformation::ownedKey\'");
 						}
 						@SuppressWarnings("null")
-						final /*@Thrown*/ java.util.@NonNull List<Key> ownedKey = transformation.getOwnedKey();
-						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_ownedKey = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Key, ownedKey);
-						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull SetValue otherKeys = (org.eclipse.ocl.pivot.values.@Nullable SetValue)CollectionExcludingOperation.INSTANCE.evaluate(BOXED_ownedKey, this);
+						final /*@Thrown*/ @NonNull List<Key> ownedKey = transformation.getOwnedKey();
+						final /*@Thrown*/ @NonNull SetValue BOXED_ownedKey = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Key, ownedKey);
+						final /*@Thrown*/ @NonNull SetValue otherKeys = (@Nullable SetValue)CollectionExcludingOperation.INSTANCE.evaluate(BOXED_ownedKey, this);
 						/*@Thrown*/ org.eclipse.ocl.pivot.values.BagValue.@NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTrelationTables.BAG_CLSSid_Class);
-						java.util.@NonNull Iterator<Object> ITERATOR__1 = otherKeys.iterator();
-						/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull BagValue collect;
+						@NonNull Iterator<Object> ITERATOR__1 = otherKeys.iterator();
+						/*@Thrown*/ @NonNull BagValue collect;
 						while (true) {
 							if (!ITERATOR__1.hasNext()) {
 								collect = accumulator;
 								break;
 							}
 							@SuppressWarnings("null")
-							/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtrelation.@NonNull Key _1 = (org.eclipse.qvtd.pivot.qvtrelation.@NonNull Key)ITERATOR__1.next();
+							/*@NonInvalid*/ @NonNull Key _1 = (@NonNull Key)ITERATOR__1.next();
 							/**
 							 * identifies
 							 */
@@ -570,9 +602,9 @@ public class KeyImpl extends ElementImpl implements Key {
 			 *         'Key::OppositePartsHaveOpposites'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Key_c_c_OppositePartsHaveOpposites);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Key_c_c_OppositePartsHaveOpposites);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -580,11 +612,11 @@ public class KeyImpl extends ElementImpl implements Key {
 			}
 			else {
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ java.util.@NonNull List<Property> oppositePart = this.getOppositePart();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
+				final /*@NonInvalid*/ @NonNull List<Property> oppositePart = this.getOppositePart();
+				final /*@NonInvalid*/ @NonNull SetValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
 				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				java.util.@NonNull Iterator<Object> ITERATOR__1 = BOXED_oppositePart.iterator();
-				/*@NonInvalid*/ java.lang.@Nullable Boolean result;
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_oppositePart.iterator();
+				/*@NonInvalid*/ @Nullable Boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
 						if (accumulator == ValueUtil.TRUE_VALUE) {
@@ -596,11 +628,11 @@ public class KeyImpl extends ElementImpl implements Key {
 						break;
 					}
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property _1 = (org.eclipse.ocl.pivot.@NonNull Property)ITERATOR__1.next();
+					/*@NonInvalid*/ @NonNull Property _1 = (@NonNull Property)ITERATOR__1.next();
 					/**
 					 * opposite <> null
 					 */
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Property opposite = _1.getOpposite();
+					final /*@NonInvalid*/ @Nullable Property opposite = _1.getOpposite();
 					final /*@NonInvalid*/ boolean ne = opposite != null;
 					//
 					if (ne == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
@@ -648,9 +680,9 @@ public class KeyImpl extends ElementImpl implements Key {
 			 *         'Key::OppositePartsAreOppositeParts'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Key_c_c_OppositePartsAreOppositeParts);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Key_c_c_OppositePartsAreOppositeParts);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -660,11 +692,11 @@ public class KeyImpl extends ElementImpl implements Key {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
 				try {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ java.util.@NonNull List<Property> oppositePart = this.getOppositePart();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
+					final /*@NonInvalid*/ @NonNull List<Property> oppositePart = this.getOppositePart();
+					final /*@NonInvalid*/ @NonNull SetValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
 					/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-					java.util.@NonNull Iterator<Object> ITERATOR__1 = BOXED_oppositePart.iterator();
-					/*@Thrown*/ java.lang.@Nullable Boolean result;
+					@NonNull Iterator<Object> ITERATOR__1 = BOXED_oppositePart.iterator();
+					/*@Thrown*/ @Nullable Boolean result;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
 							if (accumulator == ValueUtil.TRUE_VALUE) {
@@ -676,7 +708,7 @@ public class KeyImpl extends ElementImpl implements Key {
 							break;
 						}
 						@SuppressWarnings("null")
-						/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property _1 = (org.eclipse.ocl.pivot.@NonNull Property)ITERATOR__1.next();
+						/*@NonInvalid*/ @NonNull Property _1 = (@NonNull Property)ITERATOR__1.next();
 						/**
 						 * self.identifies.conformsTo(type)
 						 */
@@ -684,7 +716,7 @@ public class KeyImpl extends ElementImpl implements Key {
 						try {
 							@SuppressWarnings("null")
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class identifies = this.getIdentifies();
-							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = _1.getType();
+							final /*@NonInvalid*/ @Nullable Type type = _1.getType();
 							final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, identifies, type).booleanValue();
 							CAUGHT_conformsTo = conformsTo;
 						}
@@ -744,9 +776,9 @@ public class KeyImpl extends ElementImpl implements Key {
 			 *         'Key::PartsAreParts'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Key_c_c_PartsAreParts);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Key_c_c_PartsAreParts);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -756,11 +788,11 @@ public class KeyImpl extends ElementImpl implements Key {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
 				try {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ java.util.@NonNull List<Property> part = this.getPart();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_part = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, part);
+					final /*@NonInvalid*/ @NonNull List<Property> part = this.getPart();
+					final /*@NonInvalid*/ @NonNull SetValue BOXED_part = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, part);
 					/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-					java.util.@NonNull Iterator<Object> ITERATOR__1 = BOXED_part.iterator();
-					/*@Thrown*/ java.lang.@Nullable Boolean result;
+					@NonNull Iterator<Object> ITERATOR__1 = BOXED_part.iterator();
+					/*@Thrown*/ @Nullable Boolean result;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
 							if (accumulator == ValueUtil.TRUE_VALUE) {
@@ -772,7 +804,7 @@ public class KeyImpl extends ElementImpl implements Key {
 							break;
 						}
 						@SuppressWarnings("null")
-						/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property _1 = (org.eclipse.ocl.pivot.@NonNull Property)ITERATOR__1.next();
+						/*@NonInvalid*/ @NonNull Property _1 = (@NonNull Property)ITERATOR__1.next();
 						/**
 						 * self.identifies.conformsTo(owningClass)
 						 */
@@ -839,9 +871,9 @@ public class KeyImpl extends ElementImpl implements Key {
 			 *         'Key::PartsAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Key_c_c_PartsAreUnique);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Key_c_c_PartsAreUnique);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -851,25 +883,25 @@ public class KeyImpl extends ElementImpl implements Key {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
 				try {
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ java.util.@NonNull List<Property> part = this.getPart();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_part = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, part);
+					final /*@NonInvalid*/ @NonNull List<Property> part = this.getPart();
+					final /*@NonInvalid*/ @NonNull SetValue BOXED_part = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, part);
 					@SuppressWarnings("null")
-					final /*@NonInvalid*/ java.util.@NonNull List<Property> oppositePart = this.getOppositePart();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull SetValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
+					final /*@NonInvalid*/ @NonNull List<Property> oppositePart = this.getOppositePart();
+					final /*@NonInvalid*/ @NonNull SetValue BOXED_oppositePart = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Property, oppositePart);
 					/*@Thrown*/ org.eclipse.ocl.pivot.values.BagValue.@NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTrelationTables.BAG_CLSSid_Property);
-					java.util.@NonNull Iterator<Object> ITERATOR__1 = BOXED_oppositePart.iterator();
-					/*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull BagValue collect;
+					@NonNull Iterator<Object> ITERATOR__1 = BOXED_oppositePart.iterator();
+					/*@Thrown*/ @NonNull BagValue collect;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
 							collect = accumulator;
 							break;
 						}
 						@SuppressWarnings("null")
-						/*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Property _1 = (org.eclipse.ocl.pivot.@NonNull Property)ITERATOR__1.next();
+						/*@NonInvalid*/ @NonNull Property _1 = (@NonNull Property)ITERATOR__1.next();
 						/**
 						 * opposite
 						 */
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Property opposite = _1.getOpposite();
+						final /*@NonInvalid*/ @Nullable Property opposite = _1.getOpposite();
 						//
 						accumulator.add(opposite);
 					}
@@ -897,7 +929,7 @@ public class KeyImpl extends ElementImpl implements Key {
 	@Override
 	public EList<Property> getOppositePart() {
 		if (oppositePart == null) {
-			oppositePart = new EObjectResolvingEList<Property>(Property.class, this, QVTrelationPackage.KEY__OPPOSITE_PART);
+			oppositePart = new EObjectResolvingEList<Property>(Property.class, this, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
 		}
 		return oppositePart;
 	}
@@ -910,7 +942,7 @@ public class KeyImpl extends ElementImpl implements Key {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationPackage.KEY__TRANSFORMATION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetTransformation((RelationalTransformation)otherEnd, msgs);
@@ -926,7 +958,7 @@ public class KeyImpl extends ElementImpl implements Key {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationPackage.KEY__TRANSFORMATION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return basicSetTransformation(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -940,8 +972,8 @@ public class KeyImpl extends ElementImpl implements Key {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTrelationPackage.KEY__TRANSFORMATION:
-				return eInternalContainer().eInverseRemove(this, QVTrelationPackage.RELATIONAL_TRANSFORMATION__OWNED_KEY, RelationalTransformation.class, msgs);
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
+				return eInternalContainer().eInverseRemove(this, TransformationImpl.TRANSFORMATION_FEATURE_COUNT + 0, RelationalTransformation.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -954,14 +986,14 @@ public class KeyImpl extends ElementImpl implements Key {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationPackage.KEY__IDENTIFIES:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				if (resolve) return getIdentifies();
 				return basicGetIdentifies();
-			case QVTrelationPackage.KEY__OPPOSITE_PART:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return getOppositePart();
-			case QVTrelationPackage.KEY__PART:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return getPart();
-			case QVTrelationPackage.KEY__TRANSFORMATION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return getTransformation();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -976,18 +1008,18 @@ public class KeyImpl extends ElementImpl implements Key {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationPackage.KEY__IDENTIFIES:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setIdentifies((org.eclipse.ocl.pivot.Class)newValue);
 				return;
-			case QVTrelationPackage.KEY__OPPOSITE_PART:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				getOppositePart().clear();
 				getOppositePart().addAll((Collection<? extends Property>)newValue);
 				return;
-			case QVTrelationPackage.KEY__PART:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				getPart().clear();
 				getPart().addAll((Collection<? extends Property>)newValue);
 				return;
-			case QVTrelationPackage.KEY__TRANSFORMATION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setTransformation((RelationalTransformation)newValue);
 				return;
 		}
@@ -1002,16 +1034,16 @@ public class KeyImpl extends ElementImpl implements Key {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationPackage.KEY__IDENTIFIES:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setIdentifies((org.eclipse.ocl.pivot.Class)null);
 				return;
-			case QVTrelationPackage.KEY__OPPOSITE_PART:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				getOppositePart().clear();
 				return;
-			case QVTrelationPackage.KEY__PART:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				getPart().clear();
 				return;
-			case QVTrelationPackage.KEY__TRANSFORMATION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setTransformation((RelationalTransformation)null);
 				return;
 		}
@@ -1026,13 +1058,13 @@ public class KeyImpl extends ElementImpl implements Key {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationPackage.KEY__IDENTIFIES:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return identifies != null;
-			case QVTrelationPackage.KEY__OPPOSITE_PART:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return oppositePart != null && !oppositePart.isEmpty();
-			case QVTrelationPackage.KEY__PART:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return part != null && !part.isEmpty();
-			case QVTrelationPackage.KEY__TRANSFORMATION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return getTransformation() != null;
 		}
 		return super.eIsSet(featureID);
@@ -1047,21 +1079,21 @@ public class KeyImpl extends ElementImpl implements Key {
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTrelationPackage.KEY___VALIDATE_IDENTIFIES_IS_NOT_ABSTRACT__DIAGNOSTICCHAIN_MAP:
+			case ElementImpl.ELEMENT_OPERATION_COUNT + 0:
 				return validateIdentifiesIsNotAbstract((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTrelationPackage.KEY___VALIDATE_IDENTIFIES_IS_AUSED_PACKAGE_CLASS__DIAGNOSTICCHAIN_MAP:
+			case ElementImpl.ELEMENT_OPERATION_COUNT + 1:
 				return validateIdentifiesIsAUsedPackageClass((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTrelationPackage.KEY___VALIDATE_NO_SUPER_KEYS__DIAGNOSTICCHAIN_MAP:
+			case ElementImpl.ELEMENT_OPERATION_COUNT + 2:
 				return validateNoSuperKeys((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTrelationPackage.KEY___VALIDATE_IDENTIFIES_IS_UNIQUE__DIAGNOSTICCHAIN_MAP:
+			case ElementImpl.ELEMENT_OPERATION_COUNT + 3:
 				return validateIdentifiesIsUnique((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTrelationPackage.KEY___VALIDATE_OPPOSITE_PARTS_HAVE_OPPOSITES__DIAGNOSTICCHAIN_MAP:
+			case ElementImpl.ELEMENT_OPERATION_COUNT + 4:
 				return validateOppositePartsHaveOpposites((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTrelationPackage.KEY___VALIDATE_OPPOSITE_PARTS_ARE_OPPOSITE_PARTS__DIAGNOSTICCHAIN_MAP:
+			case ElementImpl.ELEMENT_OPERATION_COUNT + 5:
 				return validateOppositePartsAreOppositeParts((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTrelationPackage.KEY___VALIDATE_PARTS_ARE_PARTS__DIAGNOSTICCHAIN_MAP:
+			case ElementImpl.ELEMENT_OPERATION_COUNT + 6:
 				return validatePartsAreParts((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTrelationPackage.KEY___VALIDATE_PARTS_ARE_UNIQUE__DIAGNOSTICCHAIN_MAP:
+			case ElementImpl.ELEMENT_OPERATION_COUNT + 7:
 				return validatePartsAreUnique((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

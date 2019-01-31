@@ -99,21 +99,21 @@ public class QVTcoreSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case QVTcorePackage.AREA: {
+			case 0: {
 				Area area = (Area)theEObject;
 				T result = caseArea(area);
 				if (result == null) result = caseElement(area);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcorePackage.ASSIGNMENT: {
+			case 1: {
 				Assignment assignment = (Assignment)theEObject;
 				T result = caseAssignment(assignment);
 				if (result == null) result = caseElement(assignment);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcorePackage.BOTTOM_PATTERN: {
+			case 2: {
 				BottomPattern bottomPattern = (BottomPattern)theEObject;
 				T result = caseBottomPattern(bottomPattern);
 				if (result == null) result = caseCorePattern(bottomPattern);
@@ -122,7 +122,7 @@ public class QVTcoreSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcorePackage.BOTTOM_VARIABLE: {
+			case 3: {
 				BottomVariable bottomVariable = (BottomVariable)theEObject;
 				T result = caseBottomVariable(bottomVariable);
 				if (result == null) result = caseVariable(bottomVariable);
@@ -133,7 +133,7 @@ public class QVTcoreSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcorePackage.CORE_DOMAIN: {
+			case 4: {
 				CoreDomain coreDomain = (CoreDomain)theEObject;
 				T result = caseCoreDomain(coreDomain);
 				if (result == null) result = caseDomain(coreDomain);
@@ -144,7 +144,7 @@ public class QVTcoreSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcorePackage.CORE_MODEL: {
+			case 5: {
 				CoreModel coreModel = (CoreModel)theEObject;
 				T result = caseCoreModel(coreModel);
 				if (result == null) result = caseBaseModel(coreModel);
@@ -155,7 +155,7 @@ public class QVTcoreSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcorePackage.CORE_PATTERN: {
+			case 6: {
 				CorePattern corePattern = (CorePattern)theEObject;
 				T result = caseCorePattern(corePattern);
 				if (result == null) result = casePattern(corePattern);
@@ -163,14 +163,14 @@ public class QVTcoreSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcorePackage.ENFORCEMENT_OPERATION: {
+			case 7: {
 				EnforcementOperation enforcementOperation = (EnforcementOperation)theEObject;
 				T result = caseEnforcementOperation(enforcementOperation);
 				if (result == null) result = caseElement(enforcementOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcorePackage.GUARD_PATTERN: {
+			case 8: {
 				GuardPattern guardPattern = (GuardPattern)theEObject;
 				T result = caseGuardPattern(guardPattern);
 				if (result == null) result = caseCorePattern(guardPattern);
@@ -179,7 +179,7 @@ public class QVTcoreSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcorePackage.GUARD_VARIABLE: {
+			case 9: {
 				GuardVariable guardVariable = (GuardVariable)theEObject;
 				T result = caseGuardVariable(guardVariable);
 				if (result == null) result = caseVariable(guardVariable);
@@ -190,7 +190,7 @@ public class QVTcoreSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcorePackage.MAPPING: {
+			case 10: {
 				Mapping mapping = (Mapping)theEObject;
 				T result = caseMapping(mapping);
 				if (result == null) result = caseRule(mapping);
@@ -200,7 +200,7 @@ public class QVTcoreSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcorePackage.NAVIGATION_ASSIGNMENT: {
+			case 11: {
 				NavigationAssignment navigationAssignment = (NavigationAssignment)theEObject;
 				T result = caseNavigationAssignment(navigationAssignment);
 				if (result == null) result = caseAssignment(navigationAssignment);
@@ -208,7 +208,7 @@ public class QVTcoreSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcorePackage.OPPOSITE_PROPERTY_ASSIGNMENT: {
+			case 12: {
 				OppositePropertyAssignment oppositePropertyAssignment = (OppositePropertyAssignment)theEObject;
 				T result = caseOppositePropertyAssignment(oppositePropertyAssignment);
 				if (result == null) result = caseNavigationAssignment(oppositePropertyAssignment);
@@ -217,7 +217,7 @@ public class QVTcoreSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcorePackage.PROPERTY_ASSIGNMENT: {
+			case 13: {
 				PropertyAssignment propertyAssignment = (PropertyAssignment)theEObject;
 				T result = casePropertyAssignment(propertyAssignment);
 				if (result == null) result = caseNavigationAssignment(propertyAssignment);
@@ -226,7 +226,7 @@ public class QVTcoreSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcorePackage.REALIZED_VARIABLE: {
+			case 14: {
 				RealizedVariable realizedVariable = (RealizedVariable)theEObject;
 				T result = caseRealizedVariable(realizedVariable);
 				if (result == null) result = caseVariable(realizedVariable);
@@ -237,7 +237,7 @@ public class QVTcoreSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcorePackage.VARIABLE_ASSIGNMENT: {
+			case 15: {
 				VariableAssignment variableAssignment = (VariableAssignment)theEObject;
 				T result = caseVariableAssignment(variableAssignment);
 				if (result == null) result = caseAssignment(variableAssignment);

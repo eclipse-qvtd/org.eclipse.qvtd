@@ -209,23 +209,23 @@ public class QVTbaseValidator extends EObjectValidator {
 	@Override
 	protected boolean validate(int classifierID, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		switch (classifierID) {
-			case QVTbasePackage.BASE_MODEL:
+			case 0:
 				return validateBaseModel((BaseModel)value, diagnostics, context);
-			case QVTbasePackage.DOMAIN:
+			case 1:
 				return validateDomain((Domain)value, diagnostics, context);
-			case QVTbasePackage.FUNCTION:
+			case 2:
 				return validateFunction((Function)value, diagnostics, context);
-			case QVTbasePackage.FUNCTION_PARAMETER:
+			case 3:
 				return validateFunctionParameter((FunctionParameter)value, diagnostics, context);
-			case QVTbasePackage.PATTERN:
+			case 4:
 				return validatePattern((Pattern)value, diagnostics, context);
-			case QVTbasePackage.PREDICATE:
+			case 5:
 				return validatePredicate((Predicate)value, diagnostics, context);
-			case QVTbasePackage.RULE:
+			case 6:
 				return validateRule((Rule)value, diagnostics, context);
-			case QVTbasePackage.TRANSFORMATION:
+			case 7:
 				return validateTransformation((Transformation)value, diagnostics, context);
-			case QVTbasePackage.TYPED_MODEL:
+			case 8:
 				return validateTypedModel((TypedModel)value, diagnostics, context);
 			default:
 				return true;

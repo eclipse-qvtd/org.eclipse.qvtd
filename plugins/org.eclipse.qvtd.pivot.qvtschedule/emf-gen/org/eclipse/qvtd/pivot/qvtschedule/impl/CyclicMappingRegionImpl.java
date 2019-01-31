@@ -48,6 +48,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class CyclicMappingRegionImpl extends MappingRegionImpl implements CyclicMappingRegion {
 	/**
+	 * The number of structural features of the '<em>Cyclic Mapping Region</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CYCLIC_MAPPING_REGION_FEATURE_COUNT = MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Cyclic Mapping Region</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CYCLIC_MAPPING_REGION_OPERATION_COUNT = MappingRegionImpl.MAPPING_REGION_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getElementRegions() <em>Element Regions</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -84,7 +100,7 @@ public class CyclicMappingRegionImpl extends MappingRegionImpl implements Cyclic
 	@Override
 	public List<MappingRegion> getElementRegions() {
 		if (elementRegions == null) {
-			elementRegions = new EObjectResolvingEList<MappingRegion>(MappingRegion.class, this, QVTschedulePackage.CYCLIC_MAPPING_REGION__ELEMENT_REGIONS);
+			elementRegions = new EObjectResolvingEList<MappingRegion>(MappingRegion.class, this, MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0);
 		}
 		return elementRegions;
 	}
@@ -97,7 +113,7 @@ public class CyclicMappingRegionImpl extends MappingRegionImpl implements Cyclic
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.CYCLIC_MAPPING_REGION__ELEMENT_REGIONS:
+			case MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0:
 				return getElementRegions();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -112,7 +128,7 @@ public class CyclicMappingRegionImpl extends MappingRegionImpl implements Cyclic
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.CYCLIC_MAPPING_REGION__ELEMENT_REGIONS:
+			case MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0:
 				getElementRegions().clear();
 				getElementRegions().addAll((Collection<? extends MappingRegion>)newValue);
 				return;
@@ -128,7 +144,7 @@ public class CyclicMappingRegionImpl extends MappingRegionImpl implements Cyclic
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.CYCLIC_MAPPING_REGION__ELEMENT_REGIONS:
+			case MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0:
 				getElementRegions().clear();
 				return;
 		}
@@ -143,7 +159,7 @@ public class CyclicMappingRegionImpl extends MappingRegionImpl implements Cyclic
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.CYCLIC_MAPPING_REGION__ELEMENT_REGIONS:
+			case MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0:
 				return elementRegions != null && !elementRegions.isEmpty();
 		}
 		return super.eIsSet(featureID);

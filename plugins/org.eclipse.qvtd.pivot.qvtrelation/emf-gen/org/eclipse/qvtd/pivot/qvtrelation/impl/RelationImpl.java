@@ -12,6 +12,8 @@ package org.eclipse.qvtd.pivot.qvtrelation.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -27,7 +29,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.library.logical.BooleanImpliesOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
@@ -39,9 +44,13 @@ import org.eclipse.ocl.pivot.messages.PivotMessages;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationTables;
@@ -67,6 +76,24 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  * @generated
  */
 public class RelationImpl extends RuleImpl implements Relation {
+	/**
+	 * The number of structural features of the '<em>Relation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RELATION_FEATURE_COUNT = RuleImpl.RULE_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of operations of the '<em>Relation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RELATION_OPERATION_COUNT = RuleImpl.RULE_OPERATION_COUNT + 3;
+
 	/**
 	 * The default value of the '{@link #isIsTopLevel() <em>Is Top Level</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -166,7 +193,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 		boolean oldIsTopLevel = isTopLevel;
 		isTopLevel = newIsTopLevel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.RELATION__IS_TOP_LEVEL, oldIsTopLevel, isTopLevel));
+			eNotify(new ENotificationImpl(this, Notification.SET, RuleImpl.RULE_FEATURE_COUNT + 0, oldIsTopLevel, isTopLevel));
 	}
 
 	/**
@@ -177,7 +204,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 	@Override
 	public EList<RelationImplementation> getOperationalImpl() {
 		if (operationalImpl == null) {
-			operationalImpl = new EObjectContainmentWithInverseEList<RelationImplementation>(RelationImplementation.class, this, QVTrelationPackage.RELATION__OPERATIONAL_IMPL, QVTrelationPackage.RELATION_IMPLEMENTATION__RELATION);
+			operationalImpl = new EObjectContainmentWithInverseEList<RelationImplementation>(RelationImplementation.class, this, RuleImpl.RULE_FEATURE_COUNT + 1, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
 		}
 		return operationalImpl;
 	}
@@ -190,7 +217,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 	@Override
 	public EList<Variable> getVariable() {
 		if (variable == null) {
-			variable = new EObjectContainmentEList<Variable>(Variable.class, this, QVTrelationPackage.RELATION__VARIABLE);
+			variable = new EObjectContainmentEList<Variable>(Variable.class, this, RuleImpl.RULE_FEATURE_COUNT + 2);
 		}
 		return variable;
 	}
@@ -214,7 +241,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 		Pattern oldWhen = when;
 		when = newWhen;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationPackage.RELATION__WHEN, oldWhen, newWhen);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RuleImpl.RULE_FEATURE_COUNT + 3, oldWhen, newWhen);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -230,14 +257,14 @@ public class RelationImpl extends RuleImpl implements Relation {
 		if (newWhen != when) {
 			NotificationChain msgs = null;
 			if (when != null)
-				msgs = ((InternalEObject)when).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationPackage.RELATION__WHEN, null, msgs);
+				msgs = ((InternalEObject)when).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (RuleImpl.RULE_FEATURE_COUNT + 3), null, msgs);
 			if (newWhen != null)
-				msgs = ((InternalEObject)newWhen).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationPackage.RELATION__WHEN, null, msgs);
+				msgs = ((InternalEObject)newWhen).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (RuleImpl.RULE_FEATURE_COUNT + 3), null, msgs);
 			msgs = basicSetWhen(newWhen, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.RELATION__WHEN, newWhen, newWhen));
+			eNotify(new ENotificationImpl(this, Notification.SET, RuleImpl.RULE_FEATURE_COUNT + 3, newWhen, newWhen));
 	}
 
 	/**
@@ -259,7 +286,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 		Pattern oldWhere = where;
 		where = newWhere;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationPackage.RELATION__WHERE, oldWhere, newWhere);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RuleImpl.RULE_FEATURE_COUNT + 4, oldWhere, newWhere);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -275,14 +302,14 @@ public class RelationImpl extends RuleImpl implements Relation {
 		if (newWhere != where) {
 			NotificationChain msgs = null;
 			if (where != null)
-				msgs = ((InternalEObject)where).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationPackage.RELATION__WHERE, null, msgs);
+				msgs = ((InternalEObject)where).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (RuleImpl.RULE_FEATURE_COUNT + 4), null, msgs);
 			if (newWhere != null)
-				msgs = ((InternalEObject)newWhere).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationPackage.RELATION__WHERE, null, msgs);
+				msgs = ((InternalEObject)newWhere).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (RuleImpl.RULE_FEATURE_COUNT + 4), null, msgs);
 			msgs = basicSetWhere(newWhere, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.RELATION__WHERE, newWhere, newWhere));
+			eNotify(new ENotificationImpl(this, Notification.SET, RuleImpl.RULE_FEATURE_COUNT + 4, newWhere, newWhere));
 	}
 
 	/**
@@ -309,9 +336,9 @@ public class RelationImpl extends RuleImpl implements Relation {
 			 *         'Relation::DomainsAreRelationDomains'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Relation_c_c_DomainsAreRelationDomains);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Relation_c_c_DomainsAreRelationDomains);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -319,11 +346,11 @@ public class RelationImpl extends RuleImpl implements Relation {
 			}
 			else {
 				@SuppressWarnings("null")
-				final /*@NonInvalid*/ java.util.@NonNull List<Domain> domain = this.getDomain();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_Domain, domain);
+				final /*@NonInvalid*/ @NonNull List<Domain> domain = this.getDomain();
+				final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_domain = idResolver.createOrderedSetOfAll(QVTrelationTables.ORD_CLSSid_Domain, domain);
 				/*@Thrown*/ @Nullable Object accumulator = ValueUtil.TRUE_VALUE;
-				java.util.@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
-				/*@NonInvalid*/ java.lang.@Nullable Boolean result;
+				@NonNull Iterator<Object> ITERATOR__1 = BOXED_domain.iterator();
+				/*@NonInvalid*/ @Nullable Boolean result;
 				while (true) {
 					if (!ITERATOR__1.hasNext()) {
 						if (accumulator == ValueUtil.TRUE_VALUE) {
@@ -335,7 +362,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 						break;
 					}
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain _1 = (org.eclipse.qvtd.pivot.qvtbase.@NonNull Domain)ITERATOR__1.next();
+					/*@NonInvalid*/ @NonNull Domain _1 = (@NonNull Domain)ITERATOR__1.next();
 					/**
 					 * oclIsKindOf(RelationDomain)
 					 */
@@ -386,9 +413,9 @@ public class RelationImpl extends RuleImpl implements Relation {
 			 *         'Relation::TopRelationOverriddenByTopRelation'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Relation_c_c_TopRelationOverriddenByTopRelation);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Relation_c_c_TopRelationOverriddenByTopRelation);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -397,30 +424,30 @@ public class RelationImpl extends RuleImpl implements Relation {
 			else {
 				/*@Caught*/ @Nullable Object CAUGHT_result;
 				try {
-					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Rule overridden = this.getOverridden();
+					final /*@NonInvalid*/ @Nullable Rule overridden = this.getOverridden();
 					final /*@NonInvalid*/ boolean ne = overridden != null;
-					/*@NonInvalid*/ java.lang.@Nullable Boolean and;
+					/*@NonInvalid*/ @Nullable Boolean and;
 					if (ne) {
 						/*@Caught*/ @NonNull Object CAUGHT_isTopLevel;
 						try {
 							final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_Relation = idResolver.getClass(QVTrelationTables.CLSSid_Relation, null);
 							@SuppressWarnings("null")
-							final /*@Thrown*/ org.eclipse.qvtd.pivot.qvtrelation.@NonNull Relation oclAsType = (org.eclipse.qvtd.pivot.qvtrelation.@NonNull Relation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, overridden, TYP_qvtrelation_c_c_Relation);
+							final /*@Thrown*/ @NonNull Relation oclAsType = (@NonNull Relation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, overridden, TYP_qvtrelation_c_c_Relation);
 							final /*@Thrown*/ boolean isTopLevel = oclAsType.isIsTopLevel();
 							CAUGHT_isTopLevel = isTopLevel;
 						}
 						catch (Exception e) {
 							CAUGHT_isTopLevel = ValueUtil.createInvalidValue(e);
 						}
-						final /*@NonInvalid*/ java.lang.@Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_isTopLevel);
+						final /*@NonInvalid*/ @Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(CAUGHT_isTopLevel);
 						and = not;
 					}
 					else {
 						and = ValueUtil.FALSE_VALUE;
 					}
 					final /*@NonInvalid*/ boolean isTopLevel_0 = this.isIsTopLevel();
-					final /*@NonInvalid*/ java.lang.@Nullable Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(isTopLevel_0);
-					final /*@Thrown*/ java.lang.@Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(and, not_0);
+					final /*@NonInvalid*/ @Nullable Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(isTopLevel_0);
+					final /*@Thrown*/ @Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(and, not_0);
 					CAUGHT_result = result;
 				}
 				catch (Exception e) {
@@ -459,9 +486,9 @@ public class RelationImpl extends RuleImpl implements Relation {
 			 *         'Relation::TransformationIsRelationalTransformation'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Relation_c_c_TransformationIsRelationalTransformation);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_Relation_c_c_TransformationIsRelationalTransformation);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
@@ -471,7 +498,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 				/*@Caught*/ @NonNull Object CAUGHT_result;
 				try {
 					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Class TYP_qvtrelation_c_c_RelationalTransformation = idResolver.getClass(QVTrelationTables.CLSSid_RelationalTransformation, null);
-					final /*@NonInvalid*/ org.eclipse.qvtd.pivot.qvtbase.@Nullable Transformation transformation = this.getTransformation();
+					final /*@NonInvalid*/ @Nullable Transformation transformation = this.getTransformation();
 					final /*@Thrown*/ boolean result = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(executor, transformation, TYP_qvtrelation_c_c_RelationalTransformation).booleanValue();
 					CAUGHT_result = result;
 				}
@@ -507,7 +534,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATION__OPERATIONAL_IMPL:
+			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOperationalImpl()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -521,13 +548,13 @@ public class RelationImpl extends RuleImpl implements Relation {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATION__OPERATIONAL_IMPL:
+			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				return ((InternalEList<?>)getOperationalImpl()).basicRemove(otherEnd, msgs);
-			case QVTrelationPackage.RELATION__VARIABLE:
+			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getVariable()).basicRemove(otherEnd, msgs);
-			case QVTrelationPackage.RELATION__WHEN:
+			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				return basicSetWhen(null, msgs);
-			case QVTrelationPackage.RELATION__WHERE:
+			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				return basicSetWhere(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -541,15 +568,15 @@ public class RelationImpl extends RuleImpl implements Relation {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATION__IS_TOP_LEVEL:
+			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				return isIsTopLevel();
-			case QVTrelationPackage.RELATION__OPERATIONAL_IMPL:
+			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				return getOperationalImpl();
-			case QVTrelationPackage.RELATION__VARIABLE:
+			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				return getVariable();
-			case QVTrelationPackage.RELATION__WHEN:
+			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				return getWhen();
-			case QVTrelationPackage.RELATION__WHERE:
+			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				return getWhere();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -564,21 +591,21 @@ public class RelationImpl extends RuleImpl implements Relation {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATION__IS_TOP_LEVEL:
+			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				setIsTopLevel((Boolean)newValue);
 				return;
-			case QVTrelationPackage.RELATION__OPERATIONAL_IMPL:
+			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				getOperationalImpl().clear();
 				getOperationalImpl().addAll((Collection<? extends RelationImplementation>)newValue);
 				return;
-			case QVTrelationPackage.RELATION__VARIABLE:
+			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				getVariable().clear();
 				getVariable().addAll((Collection<? extends Variable>)newValue);
 				return;
-			case QVTrelationPackage.RELATION__WHEN:
+			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				setWhen((Pattern)newValue);
 				return;
-			case QVTrelationPackage.RELATION__WHERE:
+			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				setWhere((Pattern)newValue);
 				return;
 		}
@@ -593,19 +620,19 @@ public class RelationImpl extends RuleImpl implements Relation {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATION__IS_TOP_LEVEL:
+			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				setIsTopLevel(IS_TOP_LEVEL_EDEFAULT);
 				return;
-			case QVTrelationPackage.RELATION__OPERATIONAL_IMPL:
+			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				getOperationalImpl().clear();
 				return;
-			case QVTrelationPackage.RELATION__VARIABLE:
+			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				getVariable().clear();
 				return;
-			case QVTrelationPackage.RELATION__WHEN:
+			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				setWhen((Pattern)null);
 				return;
-			case QVTrelationPackage.RELATION__WHERE:
+			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				setWhere((Pattern)null);
 				return;
 		}
@@ -620,15 +647,15 @@ public class RelationImpl extends RuleImpl implements Relation {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATION__IS_TOP_LEVEL:
+			case RuleImpl.RULE_FEATURE_COUNT + 0:
 				return isTopLevel != IS_TOP_LEVEL_EDEFAULT;
-			case QVTrelationPackage.RELATION__OPERATIONAL_IMPL:
+			case RuleImpl.RULE_FEATURE_COUNT + 1:
 				return operationalImpl != null && !operationalImpl.isEmpty();
-			case QVTrelationPackage.RELATION__VARIABLE:
+			case RuleImpl.RULE_FEATURE_COUNT + 2:
 				return variable != null && !variable.isEmpty();
-			case QVTrelationPackage.RELATION__WHEN:
+			case RuleImpl.RULE_FEATURE_COUNT + 3:
 				return when != null;
-			case QVTrelationPackage.RELATION__WHERE:
+			case RuleImpl.RULE_FEATURE_COUNT + 4:
 				return where != null;
 		}
 		return super.eIsSet(featureID);
@@ -643,11 +670,11 @@ public class RelationImpl extends RuleImpl implements Relation {
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTrelationPackage.RELATION___VALIDATE_DOMAINS_ARE_RELATION_DOMAINS__DIAGNOSTICCHAIN_MAP:
+			case RuleImpl.RULE_OPERATION_COUNT + 0:
 				return validateDomainsAreRelationDomains((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTrelationPackage.RELATION___VALIDATE_TOP_RELATION_OVERRIDDEN_BY_TOP_RELATION__DIAGNOSTICCHAIN_MAP:
+			case RuleImpl.RULE_OPERATION_COUNT + 1:
 				return validateTopRelationOverriddenByTopRelation((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case QVTrelationPackage.RELATION___VALIDATE_TRANSFORMATION_IS_RELATIONAL_TRANSFORMATION__DIAGNOSTICCHAIN_MAP:
+			case RuleImpl.RULE_OPERATION_COUNT + 2:
 				return validateTransformationIsRelationalTransformation((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

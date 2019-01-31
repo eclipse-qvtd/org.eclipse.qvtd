@@ -21,6 +21,7 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation;
@@ -42,6 +43,24 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  * @generated
  */
 public class RelationImplementationImpl extends ElementImpl implements RelationImplementation {
+	/**
+	 * The number of structural features of the '<em>Relation Implementation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RELATION_IMPLEMENTATION_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Relation Implementation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int RELATION_IMPLEMENTATION_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 0;
+
 	/**
 	 * The cached value of the '{@link #getImpl() <em>Impl</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -93,7 +112,7 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 			impl = (Operation)eResolveProxy(oldImpl);
 			if (impl != oldImpl) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTrelationPackage.RELATION_IMPLEMENTATION__IMPL, oldImpl, impl));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 0, oldImpl, impl));
 			}
 		}
 		return impl;
@@ -118,7 +137,7 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 		Operation oldImpl = impl;
 		impl = newImpl;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.RELATION_IMPLEMENTATION__IMPL, oldImpl, impl));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 0, oldImpl, impl));
 	}
 
 	/**
@@ -133,7 +152,7 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 			inDirectionOf = (TypedModel)eResolveProxy(oldInDirectionOf);
 			if (inDirectionOf != oldInDirectionOf) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTrelationPackage.RELATION_IMPLEMENTATION__IN_DIRECTION_OF, oldInDirectionOf, inDirectionOf));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 1, oldInDirectionOf, inDirectionOf));
 			}
 		}
 		return inDirectionOf;
@@ -158,7 +177,7 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 		TypedModel oldInDirectionOf = inDirectionOf;
 		inDirectionOf = newInDirectionOf;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.RELATION_IMPLEMENTATION__IN_DIRECTION_OF, oldInDirectionOf, inDirectionOf));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 1, oldInDirectionOf, inDirectionOf));
 	}
 
 	/**
@@ -168,7 +187,7 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 	 */
 	@Override
 	public Relation getRelation() {
-		if (eContainerFeatureID() != QVTrelationPackage.RELATION_IMPLEMENTATION__RELATION) return null;
+		if (eContainerFeatureID() != (ElementImpl.ELEMENT_FEATURE_COUNT + 2)) return null;
 		return (Relation)eInternalContainer();
 	}
 
@@ -178,7 +197,7 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 	 * @generated
 	 */
 	public NotificationChain basicSetRelation(Relation newRelation, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newRelation, QVTrelationPackage.RELATION_IMPLEMENTATION__RELATION, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newRelation, ElementImpl.ELEMENT_FEATURE_COUNT + 2, msgs);
 		return msgs;
 	}
 
@@ -189,19 +208,19 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 	 */
 	@Override
 	public void setRelation(Relation newRelation) {
-		if (newRelation != eInternalContainer() || (eContainerFeatureID() != QVTrelationPackage.RELATION_IMPLEMENTATION__RELATION && newRelation != null)) {
+		if (newRelation != eInternalContainer() || (eContainerFeatureID() != (ElementImpl.ELEMENT_FEATURE_COUNT + 2) && newRelation != null)) {
 			if (EcoreUtil.isAncestor(this, newRelation))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newRelation != null)
-				msgs = ((InternalEObject)newRelation).eInverseAdd(this, QVTrelationPackage.RELATION__OPERATIONAL_IMPL, Relation.class, msgs);
+				msgs = ((InternalEObject)newRelation).eInverseAdd(this, RuleImpl.RULE_FEATURE_COUNT + 1, Relation.class, msgs);
 			msgs = basicSetRelation(newRelation, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.RELATION_IMPLEMENTATION__RELATION, newRelation, newRelation));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 2, newRelation, newRelation));
 	}
 
 	/**
@@ -212,7 +231,7 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATION_IMPLEMENTATION__RELATION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetRelation((Relation)otherEnd, msgs);
@@ -228,7 +247,7 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATION_IMPLEMENTATION__RELATION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return basicSetRelation(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -242,8 +261,8 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTrelationPackage.RELATION_IMPLEMENTATION__RELATION:
-				return eInternalContainer().eInverseRemove(this, QVTrelationPackage.RELATION__OPERATIONAL_IMPL, Relation.class, msgs);
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
+				return eInternalContainer().eInverseRemove(this, RuleImpl.RULE_FEATURE_COUNT + 1, Relation.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -256,13 +275,13 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATION_IMPLEMENTATION__IMPL:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				if (resolve) return getImpl();
 				return basicGetImpl();
-			case QVTrelationPackage.RELATION_IMPLEMENTATION__IN_DIRECTION_OF:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				if (resolve) return getInDirectionOf();
 				return basicGetInDirectionOf();
-			case QVTrelationPackage.RELATION_IMPLEMENTATION__RELATION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return getRelation();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -276,13 +295,13 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATION_IMPLEMENTATION__IMPL:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setImpl((Operation)newValue);
 				return;
-			case QVTrelationPackage.RELATION_IMPLEMENTATION__IN_DIRECTION_OF:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setInDirectionOf((TypedModel)newValue);
 				return;
-			case QVTrelationPackage.RELATION_IMPLEMENTATION__RELATION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setRelation((Relation)newValue);
 				return;
 		}
@@ -297,13 +316,13 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATION_IMPLEMENTATION__IMPL:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setImpl((Operation)null);
 				return;
-			case QVTrelationPackage.RELATION_IMPLEMENTATION__IN_DIRECTION_OF:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				setInDirectionOf((TypedModel)null);
 				return;
-			case QVTrelationPackage.RELATION_IMPLEMENTATION__RELATION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setRelation((Relation)null);
 				return;
 		}
@@ -318,11 +337,11 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationPackage.RELATION_IMPLEMENTATION__IMPL:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return impl != null;
-			case QVTrelationPackage.RELATION_IMPLEMENTATION__IN_DIRECTION_OF:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
 				return inDirectionOf != null;
-			case QVTrelationPackage.RELATION_IMPLEMENTATION__RELATION:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return getRelation() != null;
 		}
 		return super.eIsSet(featureID);

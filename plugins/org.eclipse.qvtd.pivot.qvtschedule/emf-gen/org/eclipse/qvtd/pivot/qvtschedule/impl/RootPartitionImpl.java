@@ -48,6 +48,22 @@ import org.eclipse.qvtd.pivot.qvtschedule.util.QVTscheduleVisitor;
  */
 public class RootPartitionImpl extends CompositePartitionImpl implements RootPartition {
 	/**
+	 * The number of structural features of the '<em>Root Partition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ROOT_PARTITION_FEATURE_COUNT = CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 2;
+	/**
+	 * The number of operations of the '<em>Root Partition</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ROOT_PARTITION_OPERATION_COUNT = CompositePartitionImpl.COMPOSITE_PARTITION_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getLoadingPartition() <em>Loading Partition</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,7 +99,7 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	 */
 	@Override
 	public RootRegion getOwningRootRegion() {
-		if (eContainerFeatureID() != QVTschedulePackage.ROOT_PARTITION__OWNING_ROOT_REGION) return null;
+		if (eContainerFeatureID() != (CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0)) return null;
 		return (RootRegion)eInternalContainer();
 	}
 
@@ -93,7 +109,7 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningRootRegion(RootRegion newOwningRootRegion, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningRootRegion, QVTschedulePackage.ROOT_PARTITION__OWNING_ROOT_REGION, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningRootRegion, CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0, msgs);
 		return msgs;
 	}
 
@@ -104,19 +120,19 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	 */
 	@Override
 	public void setOwningRootRegion(RootRegion newOwningRootRegion) {
-		if (newOwningRootRegion != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.ROOT_PARTITION__OWNING_ROOT_REGION && newOwningRootRegion != null)) {
+		if (newOwningRootRegion != eInternalContainer() || (eContainerFeatureID() != (CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0) && newOwningRootRegion != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningRootRegion))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningRootRegion != null)
-				msgs = ((InternalEObject)newOwningRootRegion).eInverseAdd(this, QVTschedulePackage.ROOT_REGION__OWNED_ROOT_PARTITION, RootRegion.class, msgs);
+				msgs = ((InternalEObject)newOwningRootRegion).eInverseAdd(this, RegionImpl.REGION_FEATURE_COUNT + 5, RootRegion.class, msgs);
 			msgs = basicSetOwningRootRegion(newOwningRootRegion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.ROOT_PARTITION__OWNING_ROOT_REGION, newOwningRootRegion, newOwningRootRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0, newOwningRootRegion, newOwningRootRegion));
 	}
 
 	/**
@@ -131,7 +147,7 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 			loadingPartition = (LoadingPartition)eResolveProxy(oldLoadingPartition);
 			if (loadingPartition != oldLoadingPartition) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.ROOT_PARTITION__LOADING_PARTITION, oldLoadingPartition, loadingPartition));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1, oldLoadingPartition, loadingPartition));
 			}
 		}
 		return loadingPartition;
@@ -156,7 +172,7 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 		LoadingPartition oldLoadingPartition = loadingPartition;
 		loadingPartition = newLoadingPartition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.ROOT_PARTITION__LOADING_PARTITION, oldLoadingPartition, loadingPartition));
+			eNotify(new ENotificationImpl(this, Notification.SET, CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1, oldLoadingPartition, loadingPartition));
 	}
 
 	/**
@@ -167,7 +183,7 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.ROOT_PARTITION__OWNING_ROOT_REGION:
+			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningRootRegion((RootRegion)otherEnd, msgs);
@@ -183,7 +199,7 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTschedulePackage.ROOT_PARTITION__OWNING_ROOT_REGION:
+			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
 				return basicSetOwningRootRegion(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -197,8 +213,8 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTschedulePackage.ROOT_PARTITION__OWNING_ROOT_REGION:
-				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.ROOT_REGION__OWNED_ROOT_PARTITION, RootRegion.class, msgs);
+			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
+				return eInternalContainer().eInverseRemove(this, RegionImpl.REGION_FEATURE_COUNT + 5, RootRegion.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -211,9 +227,9 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTschedulePackage.ROOT_PARTITION__OWNING_ROOT_REGION:
+			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
 				return getOwningRootRegion();
-			case QVTschedulePackage.ROOT_PARTITION__LOADING_PARTITION:
+			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1:
 				if (resolve) return getLoadingPartition();
 				return basicGetLoadingPartition();
 		}
@@ -228,10 +244,10 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTschedulePackage.ROOT_PARTITION__OWNING_ROOT_REGION:
+			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
 				setOwningRootRegion((RootRegion)newValue);
 				return;
-			case QVTschedulePackage.ROOT_PARTITION__LOADING_PARTITION:
+			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1:
 				setLoadingPartition((LoadingPartition)newValue);
 				return;
 		}
@@ -246,10 +262,10 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.ROOT_PARTITION__OWNING_ROOT_REGION:
+			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
 				setOwningRootRegion((RootRegion)null);
 				return;
-			case QVTschedulePackage.ROOT_PARTITION__LOADING_PARTITION:
+			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1:
 				setLoadingPartition((LoadingPartition)null);
 				return;
 		}
@@ -264,9 +280,9 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTschedulePackage.ROOT_PARTITION__OWNING_ROOT_REGION:
+			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
 				return getOwningRootRegion() != null;
-			case QVTschedulePackage.ROOT_PARTITION__LOADING_PARTITION:
+			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1:
 				return loadingPartition != null;
 		}
 		return super.eIsSet(featureID);

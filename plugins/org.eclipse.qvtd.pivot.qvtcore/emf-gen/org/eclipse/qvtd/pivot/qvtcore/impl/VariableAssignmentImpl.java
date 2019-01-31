@@ -28,8 +28,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 
+import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanOrOperation;
@@ -41,6 +44,8 @@ import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.TupleValue;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreTables;
 import org.eclipse.qvtd.pivot.qvtcore.VariableAssignment;
@@ -61,6 +66,22 @@ import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
  * @generated
  */
 public class VariableAssignmentImpl extends AssignmentImpl implements VariableAssignment {
+	/**
+	 * The number of structural features of the '<em>Variable Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int VARIABLE_ASSIGNMENT_FEATURE_COUNT = AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Variable Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int VARIABLE_ASSIGNMENT_OPERATION_COUNT = AssignmentImpl.ASSIGNMENT_OPERATION_COUNT + 1;
 	/**
 	 * The cached value of the '{@link #getTargetVariable() <em>Target Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -102,7 +123,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 			targetVariable = (Variable)eResolveProxy(oldTargetVariable);
 			if (targetVariable != oldTargetVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTcorePackage.VARIABLE_ASSIGNMENT__TARGET_VARIABLE, oldTargetVariable, targetVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0, oldTargetVariable, targetVariable));
 			}
 		}
 		return targetVariable;
@@ -127,7 +148,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 		Variable oldTargetVariable = targetVariable;
 		targetVariable = newTargetVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcorePackage.VARIABLE_ASSIGNMENT__TARGET_VARIABLE, oldTargetVariable, targetVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0, oldTargetVariable, targetVariable));
 	}
 
 	/**
@@ -162,8 +183,8 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 			 *         'VariableAssignment::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_VariableAssignment_c_c_CompatibleTypeForValue);
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_VariableAssignment_c_c_CompatibleTypeForValue);
 			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ @NonNull Object symbol_2;
 			if (le) {
@@ -175,11 +196,11 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 					/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
 					try {
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Variable targetVariable = this.getTargetVariable();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type = targetVariable.getType();
+						final /*@NonInvalid*/ @NonNull Variable targetVariable = this.getTargetVariable();
+						final /*@NonInvalid*/ @Nullable Type type = targetVariable.getType();
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value = this.getValue();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_0 = value.getType();
+						final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
+						final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
 						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
 						CAUGHT_conformsTo = conformsTo;
 					}
@@ -189,18 +210,18 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 					/*@Caught*/ @NonNull Object CAUGHT_conformsTo_0;
 					try {
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value_0 = this.getValue();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_1 = value_0.getType();
+						final /*@NonInvalid*/ @NonNull OCLExpression value_0 = this.getValue();
+						final /*@NonInvalid*/ @Nullable Type type_1 = value_0.getType();
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Variable targetVariable_0 = this.getTargetVariable();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_2 = targetVariable_0.getType();
+						final /*@NonInvalid*/ @NonNull Variable targetVariable_0 = this.getTargetVariable();
+						final /*@NonInvalid*/ @Nullable Type type_2 = targetVariable_0.getType();
 						final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type_1, type_2).booleanValue();
 						CAUGHT_conformsTo_0 = conformsTo_0;
 					}
 					catch (Exception e) {
 						CAUGHT_conformsTo_0 = ValueUtil.createInvalidValue(e);
 					}
-					final /*@Thrown*/ java.lang.@Nullable Boolean status = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_conformsTo, CAUGHT_conformsTo_0);
+					final /*@Thrown*/ @Nullable Boolean status = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_conformsTo, CAUGHT_conformsTo_0);
 					final /*@Thrown*/ boolean eq = status == Boolean.TRUE;
 					/*@Thrown*/ @NonNull Object symbol_1;
 					if (eq) {
@@ -208,36 +229,36 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 					}
 					else {
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull OCLExpression value_1 = this.getValue();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_3 = value_1.getType();
+						final /*@NonInvalid*/ @NonNull OCLExpression value_1 = this.getValue();
+						final /*@NonInvalid*/ @Nullable Type type_3 = value_1.getType();
 						final /*@NonInvalid*/ @NonNull Object name = type_3 == null;
-						/*@Thrown*/ java.lang.@Nullable String safe_name_source;
+						/*@Thrown*/ @Nullable String safe_name_source;
 						if (name == Boolean.TRUE) {
 							safe_name_source = null;
 						}
 						else {
 							assert type_3 != null;
-							final /*@Thrown*/ java.lang.@Nullable String name_0 = type_3.getName();
+							final /*@Thrown*/ @Nullable String name_0 = type_3.getName();
 							safe_name_source = name_0;
 						}
-						final /*@Thrown*/ java.lang.@NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTcoreTables.STR_VariableAssignment_c_c_CompatibleTypeForValue_c_32, safe_name_source);
-						final /*@Thrown*/ java.lang.@NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTcoreTables.STR__32_must_32_conform_32_to_32);
+						final /*@Thrown*/ @NonNull String sum = StringConcatOperation.INSTANCE.evaluate(QVTcoreTables.STR_VariableAssignment_c_c_CompatibleTypeForValue_c_32, safe_name_source);
+						final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTcoreTables.STR__32_must_32_conform_32_to_32);
 						@SuppressWarnings("null")
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@NonNull Variable targetVariable_1 = this.getTargetVariable();
-						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Type type_4 = targetVariable_1.getType();
+						final /*@NonInvalid*/ @NonNull Variable targetVariable_1 = this.getTargetVariable();
+						final /*@NonInvalid*/ @Nullable Type type_4 = targetVariable_1.getType();
 						final /*@NonInvalid*/ @NonNull Object name_1 = type_4 == null;
-						/*@Thrown*/ java.lang.@Nullable String safe_name_source_0;
+						/*@Thrown*/ @Nullable String safe_name_source_0;
 						if (name_1 == Boolean.TRUE) {
 							safe_name_source_0 = null;
 						}
 						else {
 							assert type_4 != null;
-							final /*@Thrown*/ java.lang.@Nullable String name_2 = type_4.getName();
+							final /*@Thrown*/ @Nullable String name_2 = type_4.getName();
 							safe_name_source_0 = name_2;
 						}
-						final /*@Thrown*/ java.lang.@NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, safe_name_source_0);
-						final /*@Thrown*/ java.lang.@NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTcoreTables.STR__32_or_32_vice_m_versa);
-						final /*@Thrown*/ org.eclipse.ocl.pivot.values.@NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTcoreTables.TUPLid_, sum_2, status);
+						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, safe_name_source_0);
+						final /*@Thrown*/ @NonNull String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, QVTcoreTables.STR__32_or_32_vice_m_versa);
+						final /*@Thrown*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTcoreTables.TUPLid_, sum_2, status);
 						symbol_1 = symbol_0;
 					}
 					CAUGHT_symbol_1 = symbol_1;
@@ -263,7 +284,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcorePackage.VARIABLE_ASSIGNMENT__TARGET_VARIABLE:
+			case AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0:
 				if (resolve) return getTargetVariable();
 				return basicGetTargetVariable();
 		}
@@ -278,7 +299,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcorePackage.VARIABLE_ASSIGNMENT__TARGET_VARIABLE:
+			case AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0:
 				setTargetVariable((Variable)newValue);
 				return;
 		}
@@ -293,7 +314,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcorePackage.VARIABLE_ASSIGNMENT__TARGET_VARIABLE:
+			case AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0:
 				setTargetVariable((Variable)null);
 				return;
 		}
@@ -308,7 +329,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcorePackage.VARIABLE_ASSIGNMENT__TARGET_VARIABLE:
+			case AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0:
 				return targetVariable != null;
 		}
 		return super.eIsSet(featureID);
@@ -323,7 +344,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case QVTcorePackage.VARIABLE_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_VALUE__DIAGNOSTICCHAIN_MAP:
+			case AssignmentImpl.ASSIGNMENT_OPERATION_COUNT + 0:
 				return validateCompatibleTypeForValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

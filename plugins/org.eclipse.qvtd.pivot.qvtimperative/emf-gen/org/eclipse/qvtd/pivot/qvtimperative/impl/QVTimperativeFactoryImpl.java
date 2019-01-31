@@ -82,26 +82,26 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case QVTimperativePackage.ADD_STATEMENT: return createAddStatement();
-			case QVTimperativePackage.APPEND_PARAMETER: return createAppendParameter();
-			case QVTimperativePackage.APPEND_PARAMETER_BINDING: return createAppendParameterBinding();
-			case QVTimperativePackage.BUFFER_STATEMENT: return createBufferStatement();
-			case QVTimperativePackage.CHECK_STATEMENT: return createCheckStatement();
-			case QVTimperativePackage.DECLARE_STATEMENT: return createDeclareStatement();
-			case QVTimperativePackage.GUARD_PARAMETER: return createGuardParameter();
-			case QVTimperativePackage.GUARD_PARAMETER_BINDING: return createGuardParameterBinding();
-			case QVTimperativePackage.IMPERATIVE_MODEL: return createImperativeModel();
-			case QVTimperativePackage.IMPERATIVE_TRANSFORMATION: return createImperativeTransformation();
-			case QVTimperativePackage.IMPERATIVE_TYPED_MODEL: return createImperativeTypedModel();
-			case QVTimperativePackage.LOOP_PARAMETER_BINDING: return createLoopParameterBinding();
-			case QVTimperativePackage.LOOP_VARIABLE: return createLoopVariable();
-			case QVTimperativePackage.MAPPING: return createMapping();
-			case QVTimperativePackage.MAPPING_CALL: return createMappingCall();
-			case QVTimperativePackage.MAPPING_LOOP: return createMappingLoop();
-			case QVTimperativePackage.NEW_STATEMENT: return createNewStatement();
-			case QVTimperativePackage.SET_STATEMENT: return createSetStatement();
-			case QVTimperativePackage.SIMPLE_PARAMETER: return createSimpleParameter();
-			case QVTimperativePackage.SIMPLE_PARAMETER_BINDING: return createSimpleParameterBinding();
+			case 0: return createAddStatement();
+			case 1: return createAppendParameter();
+			case 2: return createAppendParameterBinding();
+			case 3: return createBufferStatement();
+			case 4: return createCheckStatement();
+			case 6: return createDeclareStatement();
+			case 7: return createGuardParameter();
+			case 8: return createGuardParameterBinding();
+			case 9: return createImperativeModel();
+			case 10: return createImperativeTransformation();
+			case 11: return createImperativeTypedModel();
+			case 12: return createLoopParameterBinding();
+			case 13: return createLoopVariable();
+			case 14: return createMapping();
+			case 15: return createMappingCall();
+			case 16: return createMappingLoop();
+			case 20: return createNewStatement();
+			case 22: return createSetStatement();
+			case 23: return createSimpleParameter();
+			case 24: return createSimpleParameterBinding();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

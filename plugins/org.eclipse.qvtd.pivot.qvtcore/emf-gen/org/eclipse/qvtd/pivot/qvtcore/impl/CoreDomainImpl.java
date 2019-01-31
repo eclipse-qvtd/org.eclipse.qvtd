@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.qvtd.pivot.qvtbase.impl.DomainImpl;
@@ -51,6 +52,24 @@ import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
  * @generated
  */
 public class CoreDomainImpl extends DomainImpl implements CoreDomain {
+	/**
+	 * The number of structural features of the '<em>Core Domain</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CORE_DOMAIN_FEATURE_COUNT = DomainImpl.DOMAIN_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Core Domain</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CORE_DOMAIN_OPERATION_COUNT = DomainImpl.DOMAIN_OPERATION_COUNT + 0;
+
 	/**
 	 * The cached value of the '{@link #getGuardPattern() <em>Guard Pattern</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -109,7 +128,7 @@ public class CoreDomainImpl extends DomainImpl implements CoreDomain {
 		GuardPattern oldGuardPattern = guardPattern;
 		guardPattern = newGuardPattern;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcorePackage.CORE_DOMAIN__GUARD_PATTERN, oldGuardPattern, newGuardPattern);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DomainImpl.DOMAIN_FEATURE_COUNT + 0, oldGuardPattern, newGuardPattern);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -125,14 +144,14 @@ public class CoreDomainImpl extends DomainImpl implements CoreDomain {
 		if (newGuardPattern != guardPattern) {
 			NotificationChain msgs = null;
 			if (guardPattern != null)
-				msgs = ((InternalEObject)guardPattern).eInverseRemove(this, QVTcorePackage.GUARD_PATTERN__AREA, GuardPattern.class, msgs);
+				msgs = ((InternalEObject)guardPattern).eInverseRemove(this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0, GuardPattern.class, msgs);
 			if (newGuardPattern != null)
-				msgs = ((InternalEObject)newGuardPattern).eInverseAdd(this, QVTcorePackage.GUARD_PATTERN__AREA, GuardPattern.class, msgs);
+				msgs = ((InternalEObject)newGuardPattern).eInverseAdd(this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0, GuardPattern.class, msgs);
 			msgs = basicSetGuardPattern(newGuardPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcorePackage.CORE_DOMAIN__GUARD_PATTERN, newGuardPattern, newGuardPattern));
+			eNotify(new ENotificationImpl(this, Notification.SET, DomainImpl.DOMAIN_FEATURE_COUNT + 0, newGuardPattern, newGuardPattern));
 	}
 
 	/**
@@ -154,7 +173,7 @@ public class CoreDomainImpl extends DomainImpl implements CoreDomain {
 		BottomPattern oldBottomPattern = bottomPattern;
 		bottomPattern = newBottomPattern;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcorePackage.CORE_DOMAIN__BOTTOM_PATTERN, oldBottomPattern, newBottomPattern);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DomainImpl.DOMAIN_FEATURE_COUNT + 1, oldBottomPattern, newBottomPattern);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -170,14 +189,14 @@ public class CoreDomainImpl extends DomainImpl implements CoreDomain {
 		if (newBottomPattern != bottomPattern) {
 			NotificationChain msgs = null;
 			if (bottomPattern != null)
-				msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, QVTcorePackage.BOTTOM_PATTERN__AREA, BottomPattern.class, msgs);
+				msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0, BottomPattern.class, msgs);
 			if (newBottomPattern != null)
-				msgs = ((InternalEObject)newBottomPattern).eInverseAdd(this, QVTcorePackage.BOTTOM_PATTERN__AREA, BottomPattern.class, msgs);
+				msgs = ((InternalEObject)newBottomPattern).eInverseAdd(this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0, BottomPattern.class, msgs);
 			msgs = basicSetBottomPattern(newBottomPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcorePackage.CORE_DOMAIN__BOTTOM_PATTERN, newBottomPattern, newBottomPattern));
+			eNotify(new ENotificationImpl(this, Notification.SET, DomainImpl.DOMAIN_FEATURE_COUNT + 1, newBottomPattern, newBottomPattern));
 	}
 
 	/**
@@ -188,13 +207,13 @@ public class CoreDomainImpl extends DomainImpl implements CoreDomain {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcorePackage.CORE_DOMAIN__GUARD_PATTERN:
+			case DomainImpl.DOMAIN_FEATURE_COUNT + 0:
 				if (guardPattern != null)
-					msgs = ((InternalEObject)guardPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcorePackage.CORE_DOMAIN__GUARD_PATTERN, null, msgs);
+					msgs = ((InternalEObject)guardPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (DomainImpl.DOMAIN_FEATURE_COUNT + 0), null, msgs);
 				return basicSetGuardPattern((GuardPattern)otherEnd, msgs);
-			case QVTcorePackage.CORE_DOMAIN__BOTTOM_PATTERN:
+			case DomainImpl.DOMAIN_FEATURE_COUNT + 1:
 				if (bottomPattern != null)
-					msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcorePackage.CORE_DOMAIN__BOTTOM_PATTERN, null, msgs);
+					msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (DomainImpl.DOMAIN_FEATURE_COUNT + 1), null, msgs);
 				return basicSetBottomPattern((BottomPattern)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -208,9 +227,9 @@ public class CoreDomainImpl extends DomainImpl implements CoreDomain {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcorePackage.CORE_DOMAIN__GUARD_PATTERN:
+			case DomainImpl.DOMAIN_FEATURE_COUNT + 0:
 				return basicSetGuardPattern(null, msgs);
-			case QVTcorePackage.CORE_DOMAIN__BOTTOM_PATTERN:
+			case DomainImpl.DOMAIN_FEATURE_COUNT + 1:
 				return basicSetBottomPattern(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -224,9 +243,9 @@ public class CoreDomainImpl extends DomainImpl implements CoreDomain {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcorePackage.CORE_DOMAIN__GUARD_PATTERN:
+			case DomainImpl.DOMAIN_FEATURE_COUNT + 0:
 				return getGuardPattern();
-			case QVTcorePackage.CORE_DOMAIN__BOTTOM_PATTERN:
+			case DomainImpl.DOMAIN_FEATURE_COUNT + 1:
 				return getBottomPattern();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -240,10 +259,10 @@ public class CoreDomainImpl extends DomainImpl implements CoreDomain {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcorePackage.CORE_DOMAIN__GUARD_PATTERN:
+			case DomainImpl.DOMAIN_FEATURE_COUNT + 0:
 				setGuardPattern((GuardPattern)newValue);
 				return;
-			case QVTcorePackage.CORE_DOMAIN__BOTTOM_PATTERN:
+			case DomainImpl.DOMAIN_FEATURE_COUNT + 1:
 				setBottomPattern((BottomPattern)newValue);
 				return;
 		}
@@ -258,10 +277,10 @@ public class CoreDomainImpl extends DomainImpl implements CoreDomain {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcorePackage.CORE_DOMAIN__GUARD_PATTERN:
+			case DomainImpl.DOMAIN_FEATURE_COUNT + 0:
 				setGuardPattern((GuardPattern)null);
 				return;
-			case QVTcorePackage.CORE_DOMAIN__BOTTOM_PATTERN:
+			case DomainImpl.DOMAIN_FEATURE_COUNT + 1:
 				setBottomPattern((BottomPattern)null);
 				return;
 		}
@@ -276,9 +295,9 @@ public class CoreDomainImpl extends DomainImpl implements CoreDomain {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcorePackage.CORE_DOMAIN__GUARD_PATTERN:
+			case DomainImpl.DOMAIN_FEATURE_COUNT + 0:
 				return guardPattern != null;
-			case QVTcorePackage.CORE_DOMAIN__BOTTOM_PATTERN:
+			case DomainImpl.DOMAIN_FEATURE_COUNT + 1:
 				return bottomPattern != null;
 		}
 		return super.eIsSet(featureID);
@@ -293,8 +312,8 @@ public class CoreDomainImpl extends DomainImpl implements CoreDomain {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == Area.class) {
 			switch (derivedFeatureID) {
-				case QVTcorePackage.CORE_DOMAIN__GUARD_PATTERN: return QVTcorePackage.AREA__GUARD_PATTERN;
-				case QVTcorePackage.CORE_DOMAIN__BOTTOM_PATTERN: return QVTcorePackage.AREA__BOTTOM_PATTERN;
+				case DomainImpl.DOMAIN_FEATURE_COUNT + 0: return ElementImpl.ELEMENT_FEATURE_COUNT + 0;
+				case DomainImpl.DOMAIN_FEATURE_COUNT + 1: return ElementImpl.ELEMENT_FEATURE_COUNT + 1;
 				default: return -1;
 			}
 		}
@@ -310,8 +329,8 @@ public class CoreDomainImpl extends DomainImpl implements CoreDomain {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == Area.class) {
 			switch (baseFeatureID) {
-				case QVTcorePackage.AREA__GUARD_PATTERN: return QVTcorePackage.CORE_DOMAIN__GUARD_PATTERN;
-				case QVTcorePackage.AREA__BOTTOM_PATTERN: return QVTcorePackage.CORE_DOMAIN__BOTTOM_PATTERN;
+				case ElementImpl.ELEMENT_FEATURE_COUNT + 0: return DomainImpl.DOMAIN_FEATURE_COUNT + 0;
+				case ElementImpl.ELEMENT_FEATURE_COUNT + 1: return DomainImpl.DOMAIN_FEATURE_COUNT + 1;
 				default: return -1;
 			}
 		}
