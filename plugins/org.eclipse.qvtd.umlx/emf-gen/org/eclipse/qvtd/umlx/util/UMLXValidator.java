@@ -317,45 +317,45 @@ public class UMLXValidator extends EObjectValidator {
 	@Override
 	protected boolean validate(int classifierID, Object value, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		switch (classifierID) {
-			case UMLXPackage.REL_DIAGRAM:
+			case 0:
 				return validateRelDiagram((RelDiagram)value, diagnostics, context);
-			case UMLXPackage.REL_DOMAIN_NODE:
+			case 1:
 				return validateRelDomainNode((RelDomainNode)value, diagnostics, context);
-			case UMLXPackage.REL_EDGE:
+			case 2:
 				return validateRelEdge((RelEdge)value, diagnostics, context);
-			case UMLXPackage.REL_INVOCATION_EDGE:
+			case 3:
 				return validateRelInvocationEdge((RelInvocationEdge)value, diagnostics, context);
-			case UMLXPackage.REL_INVOCATION_NODE:
+			case 4:
 				return validateRelInvocationNode((RelInvocationNode)value, diagnostics, context);
-			case UMLXPackage.REL_NODE:
+			case 5:
 				return validateRelNode((RelNode)value, diagnostics, context);
-			case UMLXPackage.REL_PATTERN_EDGE:
+			case 6:
 				return validateRelPatternEdge((RelPatternEdge)value, diagnostics, context);
-			case UMLXPackage.REL_PATTERN_NODE:
+			case 7:
 				return validateRelPatternNode((RelPatternNode)value, diagnostics, context);
-			case UMLXPackage.TX_DIAGRAM:
+			case 8:
 				return validateTxDiagram((TxDiagram)value, diagnostics, context);
-			case UMLXPackage.TX_KEY_NODE:
+			case 9:
 				return validateTxKeyNode((TxKeyNode)value, diagnostics, context);
-			case UMLXPackage.TX_NODE:
+			case 10:
 				return validateTxNode((TxNode)value, diagnostics, context);
-			case UMLXPackage.TX_PACKAGE_NODE:
+			case 11:
 				return validateTxPackageNode((TxPackageNode)value, diagnostics, context);
-			case UMLXPackage.TX_PARAMETER_NODE:
+			case 12:
 				return validateTxParameterNode((TxParameterNode)value, diagnostics, context);
-			case UMLXPackage.TX_PART_NODE:
+			case 13:
 				return validateTxPartNode((TxPartNode)value, diagnostics, context);
-			case UMLXPackage.TX_QUERY_NODE:
+			case 14:
 				return validateTxQueryNode((TxQueryNode)value, diagnostics, context);
-			case UMLXPackage.TX_TYPED_MODEL_NODE:
+			case 15:
 				return validateTxTypedModelNode((TxTypedModelNode)value, diagnostics, context);
-			case UMLXPackage.UMLX_ELEMENT:
+			case 16:
 				return validateUMLXElement((UMLXElement)value, diagnostics, context);
-			case UMLXPackage.UMLX_MODEL:
+			case 17:
 				return validateUMLXModel((UMLXModel)value, diagnostics, context);
-			case UMLXPackage.UMLX_NAMED_ELEMENT:
+			case 18:
 				return validateUMLXNamedElement((UMLXNamedElement)value, diagnostics, context);
-			case UMLXPackage.UMLX_TYPED_ELEMENT:
+			case 19:
 				return validateUMLXTypedElement((UMLXTypedElement)value, diagnostics, context);
 			default:
 				return true;

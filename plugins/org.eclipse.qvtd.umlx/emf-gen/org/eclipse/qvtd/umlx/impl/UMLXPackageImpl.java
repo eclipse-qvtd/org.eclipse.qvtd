@@ -231,8 +231,8 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		if (isInited) return (UMLXPackage)EPackage.Registry.INSTANCE.getEPackage(UMLXPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		UMLXPackageImpl theUMLXPackage = (UMLXPackageImpl)(ePackage instanceof UMLXPackageImpl ? ePackage : new UMLXPackageImpl());
+		Object registeredUMLXPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		UMLXPackageImpl theUMLXPackage = registeredUMLXPackage instanceof UMLXPackageImpl ? (UMLXPackageImpl)registeredUMLXPackage : new UMLXPackageImpl();
 
 		isInited = true;
 
@@ -244,17 +244,16 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
-		(theUMLXPackage,
-			new EValidator.Descriptor() {
-			@Override
-			public EValidator getEValidator() {
-				return UMLXValidator.INSTANCE;
-			}
-		});
+			(theUMLXPackage,
+			 new EValidator.Descriptor() {
+				 @Override
+				 public EValidator getEValidator() {
+					 return UMLXValidator.INSTANCE;
+				 }
+			 });
 
 		// Mark meta-data to indicate it can't be changed
 		theUMLXPackage.freeze();
-
 
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(UMLXPackage.eNS_URI, theUMLXPackage);
@@ -1110,107 +1109,107 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		relDiagramEClass = createEClass(REL_DIAGRAM);
-		createEAttribute(relDiagramEClass, REL_DIAGRAM__IS_ABSTRACT);
-		createEAttribute(relDiagramEClass, REL_DIAGRAM__IS_TOP);
-		createEReference(relDiagramEClass, REL_DIAGRAM__OWNED_REL_DOMAIN_NODES);
-		createEReference(relDiagramEClass, REL_DIAGRAM__OWNED_REL_INVOCATION_NODES);
-		createEReference(relDiagramEClass, REL_DIAGRAM__OWNING_TX_DIAGRAM);
+		relDiagramEClass = createEClass(0);
+		createEAttribute(relDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0);
+		createEAttribute(relDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1);
+		createEReference(relDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2);
+		createEReference(relDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3);
+		createEReference(relDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4);
 
-		relDomainNodeEClass = createEClass(REL_DOMAIN_NODE);
-		createEAttribute(relDomainNodeEClass, REL_DOMAIN_NODE__IS_ENFORCED);
-		createEReference(relDomainNodeEClass, REL_DOMAIN_NODE__OWNED_REL_PATTERN_EDGES);
-		createEReference(relDomainNodeEClass, REL_DOMAIN_NODE__OWNED_REL_PATTERN_NODES);
-		createEReference(relDomainNodeEClass, REL_DOMAIN_NODE__OWNING_REL_DIAGRAM);
-		createEReference(relDomainNodeEClass, REL_DOMAIN_NODE__REFERRED_TX_TYPED_MODEL_NODE);
+		relDomainNodeEClass = createEClass(1);
+		createEAttribute(relDomainNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 0);
+		createEReference(relDomainNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 1);
+		createEReference(relDomainNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 2);
+		createEReference(relDomainNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 3);
+		createEReference(relDomainNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 4);
 
-		relEdgeEClass = createEClass(REL_EDGE);
+		relEdgeEClass = createEClass(2);
 
-		relInvocationEdgeEClass = createEClass(REL_INVOCATION_EDGE);
-		createEReference(relInvocationEdgeEClass, REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE);
-		createEReference(relInvocationEdgeEClass, REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE);
-		createEReference(relInvocationEdgeEClass, REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE);
+		relInvocationEdgeEClass = createEClass(3);
+		createEReference(relInvocationEdgeEClass, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0);
+		createEReference(relInvocationEdgeEClass, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1);
+		createEReference(relInvocationEdgeEClass, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2);
 
-		relInvocationNodeEClass = createEClass(REL_INVOCATION_NODE);
-		createEAttribute(relInvocationNodeEClass, REL_INVOCATION_NODE__IS_THEN);
-		createEReference(relInvocationNodeEClass, REL_INVOCATION_NODE__OWNING_REL_DIAGRAM);
-		createEReference(relInvocationNodeEClass, REL_INVOCATION_NODE__OWNED_REL_INVOCATION_EDGES);
-		createEReference(relInvocationNodeEClass, REL_INVOCATION_NODE__REFERRED_REL_DIAGRAM);
+		relInvocationNodeEClass = createEClass(4);
+		createEAttribute(relInvocationNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 0);
+		createEReference(relInvocationNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 1);
+		createEReference(relInvocationNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 2);
+		createEReference(relInvocationNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 3);
 
-		relNodeEClass = createEClass(REL_NODE);
+		relNodeEClass = createEClass(5);
 
-		relPatternEdgeEClass = createEClass(REL_PATTERN_EDGE);
-		createEReference(relPatternEdgeEClass, REL_PATTERN_EDGE__OWNING_REL_DOMAIN_NODE);
-		createEReference(relPatternEdgeEClass, REL_PATTERN_EDGE__REFERRED_ESTRUCTURAL_FEATURE);
-		createEReference(relPatternEdgeEClass, REL_PATTERN_EDGE__SOURCE);
-		createEAttribute(relPatternEdgeEClass, REL_PATTERN_EDGE__SOURCE_INDEX);
-		createEReference(relPatternEdgeEClass, REL_PATTERN_EDGE__TARGET);
+		relPatternEdgeEClass = createEClass(6);
+		createEReference(relPatternEdgeEClass, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0);
+		createEReference(relPatternEdgeEClass, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1);
+		createEReference(relPatternEdgeEClass, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2);
+		createEAttribute(relPatternEdgeEClass, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 3);
+		createEReference(relPatternEdgeEClass, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 4);
 
-		relPatternNodeEClass = createEClass(REL_PATTERN_NODE);
-		createEReference(relPatternNodeEClass, REL_PATTERN_NODE__INCOMING);
-		createEAttribute(relPatternNodeEClass, REL_PATTERN_NODE__INIT_EXPRESSION_LINES);
-		createEReference(relPatternNodeEClass, REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES);
-		createEAttribute(relPatternNodeEClass, REL_PATTERN_NODE__IS_ANON);
-		createEAttribute(relPatternNodeEClass, REL_PATTERN_NODE__IS_ROOT);
-		createEReference(relPatternNodeEClass, REL_PATTERN_NODE__OUTGOING);
-		createEReference(relPatternNodeEClass, REL_PATTERN_NODE__OWNING_REL_DOMAIN_NODE);
+		relPatternNodeEClass = createEClass(7);
+		createEReference(relPatternNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 7);
+		createEAttribute(relPatternNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 8);
+		createEReference(relPatternNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 9);
+		createEAttribute(relPatternNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 10);
+		createEAttribute(relPatternNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 11);
+		createEReference(relPatternNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 12);
+		createEReference(relPatternNodeEClass, RelNodeImpl.REL_NODE_FEATURE_COUNT + 13);
 
-		txDiagramEClass = createEClass(TX_DIAGRAM);
-		createEReference(txDiagramEClass, TX_DIAGRAM__OWNED_REL_DIAGRAMS);
-		createEReference(txDiagramEClass, TX_DIAGRAM__OWNED_TX_KEY_NODES);
-		createEReference(txDiagramEClass, TX_DIAGRAM__OWNED_TX_PACKAGE_NODES);
-		createEReference(txDiagramEClass, TX_DIAGRAM__OWNED_TX_QUERY_NODES);
-		createEReference(txDiagramEClass, TX_DIAGRAM__OWNED_TX_TYPED_MODEL_NODES);
-		createEAttribute(txDiagramEClass, TX_DIAGRAM__PACKAGE);
+		txDiagramEClass = createEClass(8);
+		createEReference(txDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0);
+		createEReference(txDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1);
+		createEReference(txDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2);
+		createEReference(txDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3);
+		createEReference(txDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4);
+		createEAttribute(txDiagramEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5);
 
-		txKeyNodeEClass = createEClass(TX_KEY_NODE);
-		createEReference(txKeyNodeEClass, TX_KEY_NODE__OWNED_TX_PART_NODES);
-		createEReference(txKeyNodeEClass, TX_KEY_NODE__OWNING_TX_DIAGRAM);
-		createEReference(txKeyNodeEClass, TX_KEY_NODE__REFERRED_ECLASS);
+		txKeyNodeEClass = createEClass(9);
+		createEReference(txKeyNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 0);
+		createEReference(txKeyNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 1);
+		createEReference(txKeyNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 2);
 
-		txNodeEClass = createEClass(TX_NODE);
+		txNodeEClass = createEClass(10);
 
-		txPackageNodeEClass = createEClass(TX_PACKAGE_NODE);
-		createEAttribute(txPackageNodeEClass, TX_PACKAGE_NODE__IMPORT_ALIASES);
-		createEReference(txPackageNodeEClass, TX_PACKAGE_NODE__OWNING_TX_DIAGRAM);
-		createEReference(txPackageNodeEClass, TX_PACKAGE_NODE__REFERRED_EPACKAGE);
+		txPackageNodeEClass = createEClass(11);
+		createEAttribute(txPackageNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 0);
+		createEReference(txPackageNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 1);
+		createEReference(txPackageNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 2);
 
-		txParameterNodeEClass = createEClass(TX_PARAMETER_NODE);
-		createEReference(txParameterNodeEClass, TX_PARAMETER_NODE__OWNING_TX_QUERY_NODE);
+		txParameterNodeEClass = createEClass(12);
+		createEReference(txParameterNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 7);
 
-		txPartNodeEClass = createEClass(TX_PART_NODE);
-		createEReference(txPartNodeEClass, TX_PART_NODE__OWNING_TX_KEY_NODE);
-		createEAttribute(txPartNodeEClass, TX_PART_NODE__IS_OPPOSITE);
-		createEReference(txPartNodeEClass, TX_PART_NODE__REFERRED_ESTRUCTURAL_FEATURE);
+		txPartNodeEClass = createEClass(13);
+		createEReference(txPartNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 0);
+		createEAttribute(txPartNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 1);
+		createEReference(txPartNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 2);
 
-		txQueryNodeEClass = createEClass(TX_QUERY_NODE);
-		createEAttribute(txQueryNodeEClass, TX_QUERY_NODE__INIT_EXPRESSION_LINES);
-		createEReference(txQueryNodeEClass, TX_QUERY_NODE__OWNED_TX_PARAMETER_NODES);
-		createEReference(txQueryNodeEClass, TX_QUERY_NODE__OWNING_TX_DIAGRAM);
+		txQueryNodeEClass = createEClass(14);
+		createEAttribute(txQueryNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 7);
+		createEReference(txQueryNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 8);
+		createEReference(txQueryNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 9);
 
-		txTypedModelNodeEClass = createEClass(TX_TYPED_MODEL_NODE);
-		createEAttribute(txTypedModelNodeEClass, TX_TYPED_MODEL_NODE__CHECK);
-		createEReference(txTypedModelNodeEClass, TX_TYPED_MODEL_NODE__DEPENDS_ONS);
-		createEAttribute(txTypedModelNodeEClass, TX_TYPED_MODEL_NODE__ENFORCE);
-		createEReference(txTypedModelNodeEClass, TX_TYPED_MODEL_NODE__OWNING_TX_DIAGRAM);
-		createEReference(txTypedModelNodeEClass, TX_TYPED_MODEL_NODE__USED_TX_PACKAGE_NODES);
+		txTypedModelNodeEClass = createEClass(15);
+		createEAttribute(txTypedModelNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 1);
+		createEReference(txTypedModelNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 2);
+		createEAttribute(txTypedModelNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 3);
+		createEReference(txTypedModelNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 4);
+		createEReference(txTypedModelNodeEClass, TxNodeImpl.TX_NODE_FEATURE_COUNT + 5);
 
-		umlxElementEClass = createEClass(UMLX_ELEMENT);
-		createEAttribute(umlxElementEClass, UMLX_ELEMENT__COMMENTS);
+		umlxElementEClass = createEClass(16);
+		createEAttribute(umlxElementEClass, 0);
 
-		umlxModelEClass = createEClass(UMLX_MODEL);
-		createEReference(umlxModelEClass, UMLX_MODEL__OWNED_TX_DIAGRAMS);
+		umlxModelEClass = createEClass(17);
+		createEReference(umlxModelEClass, UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0);
 
-		umlxNamedElementEClass = createEClass(UMLX_NAMED_ELEMENT);
-		createEAttribute(umlxNamedElementEClass, UMLX_NAMED_ELEMENT__NAME);
+		umlxNamedElementEClass = createEClass(18);
+		createEAttribute(umlxNamedElementEClass, UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0);
 
-		umlxTypedElementEClass = createEClass(UMLX_TYPED_ELEMENT);
-		createEAttribute(umlxTypedElementEClass, UMLX_TYPED_ELEMENT__IS_MANY);
-		createEAttribute(umlxTypedElementEClass, UMLX_TYPED_ELEMENT__IS_NULL_FREE);
-		createEAttribute(umlxTypedElementEClass, UMLX_TYPED_ELEMENT__IS_ORDERED);
-		createEAttribute(umlxTypedElementEClass, UMLX_TYPED_ELEMENT__IS_REQUIRED);
-		createEAttribute(umlxTypedElementEClass, UMLX_TYPED_ELEMENT__IS_UNIQUE);
-		createEReference(umlxTypedElementEClass, UMLX_TYPED_ELEMENT__REFERRED_ECLASSIFIER);
+		umlxTypedElementEClass = createEClass(19);
+		createEAttribute(umlxTypedElementEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0);
+		createEAttribute(umlxTypedElementEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1);
+		createEAttribute(umlxTypedElementEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2);
+		createEAttribute(umlxTypedElementEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3);
+		createEAttribute(umlxTypedElementEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4);
+		createEReference(umlxTypedElementEClass, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5);
 	}
 
 	/**
@@ -1630,6 +1629,8 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 		createEcoreAnnotations();
 		// http://www.eclipse.org/uml2/2.0.0/UML
 		createUMLAnnotations();
+		// http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot
+		createPivotAnnotations();
 	}
 
 	/**
@@ -1641,70 +1642,70 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	protected void createEcoreAnnotations() {
 		String source = "http://www.eclipse.org/emf/2002/Ecore";
 		addAnnotation
-		(this,
-			source,
-			new String[] {
-		});
+		  (this,
+		   source,
+		   new String[] {
+		   });
 		addAnnotation
-		(relDiagramEClass,
-			source,
-			new String[] {
-				"constraints", "validateRelPatternNodeNamesAreUnique"
-		});
+		  (relDiagramEClass,
+		   source,
+		   new String[] {
+			   "constraints", "validateRelPatternNodeNamesAreUnique"
+		   });
 		addAnnotation
-		(relInvocationNodeEClass,
-			source,
-			new String[] {
-				"constraints", "validateCompatibleEdges"
-		});
+		  (relInvocationNodeEClass,
+		   source,
+		   new String[] {
+			   "constraints", "validateCompatibleEdges"
+		   });
 		addAnnotation
-		(relPatternEdgeEClass,
-			source,
-			new String[] {
-				"constraints", "validateCompatibleMemberPropertyTarget"
-		});
+		  (relPatternEdgeEClass,
+		   source,
+		   new String[] {
+			   "constraints", "validateCompatibleMemberPropertyTarget"
+		   });
 		addAnnotation
-		(relPatternNodeEClass,
-			source,
-			new String[] {
-				"constraints", "validateEClassifierIsInTypedModel"
-		});
+		  (relPatternNodeEClass,
+		   source,
+		   new String[] {
+			   "constraints", "validateEClassifierIsInTypedModel"
+		   });
 		addAnnotation
-		(txDiagramEClass,
-			source,
-			new String[] {
-				"constraints", "validateTxTypedModelNodeNamesAreUnique"
-		});
+		  (txDiagramEClass,
+		   source,
+		   new String[] {
+			   "constraints", "validateTxTypedModelNodeNamesAreUnique"
+		   });
 		addAnnotation
-		(txKeyNodeEClass,
-			source,
-			new String[] {
-				"constraints", "validatePartsAreUnique"
-		});
+		  (txKeyNodeEClass,
+		   source,
+		   new String[] {
+			   "constraints", "validatePartsAreUnique"
+		   });
 		addAnnotation
-		(txParameterNodeEClass,
-			source,
-			new String[] {
-				"constraints", "validateTypeIsRequired"
-		});
+		  (txParameterNodeEClass,
+		   source,
+		   new String[] {
+			   "constraints", "validateTypeIsRequired"
+		   });
 		addAnnotation
-		(txPartNodeEClass,
-			source,
-			new String[] {
-				"constraints", "validatePartIsPropertyOfKey"
-		});
+		  (txPartNodeEClass,
+		   source,
+		   new String[] {
+			   "constraints", "validatePartIsPropertyOfKey"
+		   });
 		addAnnotation
-		(txQueryNodeEClass,
-			source,
-			new String[] {
-				"constraints", "validateParametersAreUnique"
-		});
+		  (txQueryNodeEClass,
+		   source,
+		   new String[] {
+			   "constraints", "validateParametersAreUnique"
+		   });
 		addAnnotation
-		(txTypedModelNodeEClass,
-			source,
-			new String[] {
-				"constraints", "validateNameIsRequired"
-		});
+		  (txTypedModelNodeEClass,
+		   source,
+		   new String[] {
+			   "constraints", "validateNameIsRequired"
+		   });
 	}
 
 	/**
@@ -1716,173 +1717,357 @@ public class UMLXPackageImpl extends EPackageImpl implements UMLXPackage {
 	protected void createUMLAnnotations() {
 		String source = "http://www.eclipse.org/uml2/2.0.0/UML";
 		addAnnotation
-		(relDiagramEClass.getEOperations().get(0),
-			source,
-			new String[] {
-				"originalName", "NameIsRequired"
-		});
+		  (relDiagramEClass.getEOperations().get(0),
+		   source,
+		   new String[] {
+			   "originalName", "NameIsRequired"
+		   });
 		addAnnotation
-		(relDiagramEClass.getEOperations().get(1),
-			source,
-			new String[] {
-				"originalName", "RelPatternNodeNamesAreUnique"
-		});
+		  (relDiagramEClass.getEOperations().get(1),
+		   source,
+		   new String[] {
+			   "originalName", "RelPatternNodeNamesAreUnique"
+		   });
 		addAnnotation
-		(relInvocationNodeEClass.getEOperations().get(0),
-			source,
-			new String[] {
-				"originalName", "CompatibleEdges"
-		});
+		  (relInvocationNodeEClass.getEOperations().get(0),
+		   source,
+		   new String[] {
+			   "originalName", "CompatibleEdges"
+		   });
 		addAnnotation
-		(relPatternEdgeEClass.getEOperations().get(0),
-			source,
-			new String[] {
-				"originalName", "SourceIsEClass"
-		});
+		  (relPatternEdgeEClass.getEOperations().get(0),
+		   source,
+		   new String[] {
+			   "originalName", "SourceIsEClass"
+		   });
 		addAnnotation
-		(relPatternEdgeEClass.getEOperations().get(1),
-			source,
-			new String[] {
-				"originalName", "SourceIsClassNode"
-		});
+		  (relPatternEdgeEClass.getEOperations().get(1),
+		   source,
+		   new String[] {
+			   "originalName", "SourceIsClassNode"
+		   });
 		addAnnotation
-		(relPatternEdgeEClass.getEOperations().get(2),
-			source,
-			new String[] {
-				"originalName", "CompatibleEAttributePropertyTarget"
-		});
+		  (relPatternEdgeEClass.getEOperations().get(2),
+		   source,
+		   new String[] {
+			   "originalName", "CompatibleEAttributePropertyTarget"
+		   });
 		addAnnotation
-		(relPatternEdgeEClass.getEOperations().get(3),
-			source,
-			new String[] {
-				"originalName", "CompatibleSourceMultiplicity"
-		});
+		  (relPatternEdgeEClass.getEOperations().get(3),
+		   source,
+		   new String[] {
+			   "originalName", "CompatibleSourceMultiplicity"
+		   });
 		addAnnotation
-		(relPatternEdgeEClass.getEOperations().get(4),
-			source,
-			new String[] {
-				"originalName", "CompatibleEReferencePropertyTarget"
-		});
+		  (relPatternEdgeEClass.getEOperations().get(4),
+		   source,
+		   new String[] {
+			   "originalName", "CompatibleEReferencePropertyTarget"
+		   });
 		addAnnotation
-		(relPatternEdgeEClass.getEOperations().get(5),
-			source,
-			new String[] {
-				"originalName", "CompatiblePropertySource"
-		});
+		  (relPatternEdgeEClass.getEOperations().get(5),
+		   source,
+		   new String[] {
+			   "originalName", "CompatiblePropertySource"
+		   });
 		addAnnotation
-		(relPatternEdgeEClass.getEOperations().get(6),
-			source,
-			new String[] {
-				"originalName", "CompatibleSourceIndex"
-		});
+		  (relPatternEdgeEClass.getEOperations().get(6),
+		   source,
+		   new String[] {
+			   "originalName", "CompatibleSourceIndex"
+		   });
 		addAnnotation
-		(relPatternEdgeEClass.getEOperations().get(7),
-			source,
-			new String[] {
-				"originalName", "CompatibleRestPropertyTarget"
-		});
+		  (relPatternEdgeEClass.getEOperations().get(7),
+		   source,
+		   new String[] {
+			   "originalName", "CompatibleRestPropertyTarget"
+		   });
 		addAnnotation
-		(relPatternEdgeEClass.getEOperations().get(8),
-			source,
-			new String[] {
-				"originalName", "CompatibleMemberPropertyTarget"
-		});
+		  (relPatternEdgeEClass.getEOperations().get(8),
+		   source,
+		   new String[] {
+			   "originalName", "CompatibleMemberPropertyTarget"
+		   });
 		addAnnotation
-		(relPatternNodeEClass.getEOperations().get(1),
-			source,
-			new String[] {
-				"originalName", "AnonIsUnnamed"
-		});
+		  (relPatternNodeEClass.getEOperations().get(1),
+		   source,
+		   new String[] {
+			   "originalName", "AnonIsUnnamed"
+		   });
 		addAnnotation
-		(relPatternNodeEClass.getEOperations().get(2),
-			source,
-			new String[] {
-				"originalName", "TypeIsRequired"
-		});
+		  (relPatternNodeEClass.getEOperations().get(2),
+		   source,
+		   new String[] {
+			   "originalName", "TypeIsRequired"
+		   });
 		addAnnotation
-		(relPatternNodeEClass.getEOperations().get(3),
-			source,
-			new String[] {
-				"originalName", "EClassifierIsInTypedModel"
-		});
+		  (relPatternNodeEClass.getEOperations().get(3),
+		   source,
+		   new String[] {
+			   "originalName", "EClassifierIsInTypedModel"
+		   });
 		addAnnotation
-		(txDiagramEClass.getEOperations().get(0),
-			source,
-			new String[] {
-				"originalName", "TxQueryNodeNamesAreUnique"
-		});
+		  (txDiagramEClass.getEOperations().get(0),
+		   source,
+		   new String[] {
+			   "originalName", "TxQueryNodeNamesAreUnique"
+		   });
 		addAnnotation
-		(txDiagramEClass.getEOperations().get(1),
-			source,
-			new String[] {
-				"originalName", "RelDiagramNamesAreUnique"
-		});
+		  (txDiagramEClass.getEOperations().get(1),
+		   source,
+		   new String[] {
+			   "originalName", "RelDiagramNamesAreUnique"
+		   });
 		addAnnotation
-		(txDiagramEClass.getEOperations().get(2),
-			source,
-			new String[] {
-				"originalName", "NameIsRequired"
-		});
+		  (txDiagramEClass.getEOperations().get(2),
+		   source,
+		   new String[] {
+			   "originalName", "NameIsRequired"
+		   });
 		addAnnotation
-		(txDiagramEClass.getEOperations().get(3),
-			source,
-			new String[] {
-				"originalName", "TxTypedModelNodeNamesAreUnique"
-		});
+		  (txDiagramEClass.getEOperations().get(3),
+		   source,
+		   new String[] {
+			   "originalName", "TxTypedModelNodeNamesAreUnique"
+		   });
 		addAnnotation
-		(txKeyNodeEClass.getEOperations().get(0),
-			source,
-			new String[] {
-				"originalName", "PartsAreUnique"
-		});
+		  (txKeyNodeEClass.getEOperations().get(0),
+		   source,
+		   new String[] {
+			   "originalName", "PartsAreUnique"
+		   });
 		addAnnotation
-		(txParameterNodeEClass.getEOperations().get(0),
-			source,
-			new String[] {
-				"originalName", "NameIsRequired"
-		});
+		  (txParameterNodeEClass.getEOperations().get(0),
+		   source,
+		   new String[] {
+			   "originalName", "NameIsRequired"
+		   });
 		addAnnotation
-		(txParameterNodeEClass.getEOperations().get(1),
-			source,
-			new String[] {
-				"originalName", "TypeIsRequired"
-		});
+		  (txParameterNodeEClass.getEOperations().get(1),
+		   source,
+		   new String[] {
+			   "originalName", "TypeIsRequired"
+		   });
 		addAnnotation
-		(txPartNodeEClass.getEOperations().get(0),
-			source,
-			new String[] {
-				"originalName", "PartIsPropertyOfKey"
-		});
+		  (txPartNodeEClass.getEOperations().get(0),
+		   source,
+		   new String[] {
+			   "originalName", "PartIsPropertyOfKey"
+		   });
 		addAnnotation
-		(txQueryNodeEClass.getEOperations().get(0),
-			source,
-			new String[] {
-				"originalName", "NameIsRequired"
-		});
+		  (txQueryNodeEClass.getEOperations().get(0),
+		   source,
+		   new String[] {
+			   "originalName", "NameIsRequired"
+		   });
 		addAnnotation
-		(txQueryNodeEClass.getEOperations().get(1),
-			source,
-			new String[] {
-				"originalName", "TypeIsRequired"
-		});
+		  (txQueryNodeEClass.getEOperations().get(1),
+		   source,
+		   new String[] {
+			   "originalName", "TypeIsRequired"
+		   });
 		addAnnotation
-		(txQueryNodeEClass.getEOperations().get(2),
-			source,
-			new String[] {
-				"originalName", "ParametersAreUnique"
-		});
+		  (txQueryNodeEClass.getEOperations().get(2),
+		   source,
+		   new String[] {
+			   "originalName", "ParametersAreUnique"
+		   });
 		addAnnotation
-		(txTypedModelNodeEClass.getEOperations().get(0),
-			source,
-			new String[] {
-				"originalName", "TxPackageNodePackagesAreUnique"
-		});
+		  (txTypedModelNodeEClass.getEOperations().get(0),
+		   source,
+		   new String[] {
+			   "originalName", "TxPackageNodePackagesAreUnique"
+		   });
 		addAnnotation
-		(txTypedModelNodeEClass.getEOperations().get(1),
-			source,
-			new String[] {
-				"originalName", "NameIsRequired"
-		});
+		  (txTypedModelNodeEClass.getEOperations().get(1),
+		   source,
+		   new String[] {
+			   "originalName", "NameIsRequired"
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createPivotAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot";
+		addAnnotation
+		  (relDiagramEClass.getEOperations().get(0),
+		   source,
+		   new String[] {
+			   "body", "name <> null"
+		   });
+		addAnnotation
+		  (relDiagramEClass.getEOperations().get(1),
+		   source,
+		   new String[] {
+			   "body", "let allNames = ownedRelDomainNodes.ownedRelPatternNodes->select(not isExpression())->select(not isAnon).name in\n\t\tTuple{status : Boolean = allNames->isUnique(n | n),\n\t\t\tmessage : String = let repeatedNames = allNames->select(n | allNames->count(n) > 1)->asSet() in\n\t\t\trepeatedNames->iterate(n; acc:String = \'RelDiagram::RelPatternNodeNamesAreUnique:\' | acc + \' \\\'\' + n + \'\\\'\') + \' are not unique for \' + name\n\t\t}.status"
+		   });
+		addAnnotation
+		  (relInvocationNodeEClass.getEOperations().get(0),
+		   source,
+		   new String[] {
+			   "body", "\n\t\t\tlet expectedNodes = referredRelDiagram.ownedRelDomainNodes.ownedRelPatternNodes->select(isRoot)->asSet() in\n\t\t\tlet actualNodes = ownedRelInvocationEdges.referredRelPatternNode->asSet() in\t\t\n\t\t\tTuple{status : Boolean = expectedNodes = actualNodes,\n\t\t\t\tmessage : String = \'RelInvocationNode::CompatibleEdges \' + expectedNodes->size().toString() + \'/\' + expectedNodes->size().toString()\n\t\t\t}.status"
+		   });
+		addAnnotation
+		  (relPatternEdgeEClass.getEOperations().get(0),
+		   source,
+		   new String[] {
+			   "body", "\n\t\t\tnot source.isExpression() implies\n\t\t\tsource.referredEClassifier.oclIsKindOf(ecore::EClassifier)"
+		   });
+		addAnnotation
+		  (relPatternEdgeEClass.getEOperations().get(1),
+		   source,
+		   new String[] {
+			   "body", "\n\t\t\tnot source.isExpression()"
+		   });
+		addAnnotation
+		  (relPatternEdgeEClass.getEOperations().get(2),
+		   source,
+		   new String[] {
+			   "body", "\n\t\t\treferredEStructuralFeature <> null and\n\t\t\treferredEStructuralFeature.oclIsKindOf(ecore::EAttribute) and\n\t\t\tnot target.isExpression() implies\n\t\t\treferredEStructuralFeature.eType = target.referredEClassifier"
+		   });
+		addAnnotation
+		  (relPatternEdgeEClass.getEOperations().get(3),
+		   source,
+		   new String[] {
+			   "body", "\n\t\t\t(referredEStructuralFeature = null) = source.isMany"
+		   });
+		addAnnotation
+		  (relPatternEdgeEClass.getEOperations().get(4),
+		   source,
+		   new String[] {
+			   "body", "\n\t\t\treferredEStructuralFeature <> null and\n\t\t\treferredEStructuralFeature.oclIsKindOf(ecore::EReference) and\n\t\t\tnot target.isExpression() implies\n\t\t\tlet sourceEClass = target.referredEClassifier.oclAsType(ecore::EClass) in\n\t\t\tsourceEClass->closure(eSuperTypes)->includes(referredEStructuralFeature.eType)"
+		   });
+		addAnnotation
+		  (relPatternEdgeEClass.getEOperations().get(5),
+		   source,
+		   new String[] {
+			   "body", "\n\t\t\treferredEStructuralFeature <> null implies\n\t\t\tsource.referredEClassifier.oclAsType(ecore::EClass)->closure(eSuperTypes)->includes(referredEStructuralFeature.eContainingClass)"
+		   });
+		addAnnotation
+		  (relPatternEdgeEClass.getEOperations().get(6),
+		   source,
+		   new String[] {
+			   "body", "\n\t\t\t(referredEStructuralFeature <> null) = (sourceIndex = 0)"
+		   });
+		addAnnotation
+		  (relPatternEdgeEClass.getEOperations().get(7),
+		   source,
+		   new String[] {
+			   "body", "\n\t\t\treferredEStructuralFeature = null and\n\t\t\tsourceIndex < 0 and\n\t\t\tnot target.isExpression() implies\n\t\t\tlet sourceEClass = source.referredEClassifier.oclAsType(ecore::EClass) in\n\t\t\tlet targetEClass = target.referredEClassifier.oclAsType(ecore::EClass) in\n\t\t\tsourceEClass = targetEClass and\n\t\t\tsource.isMany = target.isMany and\n\t\t\tsource.isNullFree = target.isNullFree and\n\t\t\tsource.isOrdered = target.isOrdered and\n\t\t\tsource.isUnique = target.isUnique"
+		   });
+		addAnnotation
+		  (relPatternEdgeEClass.getEOperations().get(8),
+		   source,
+		   new String[] {
+			   "body", "\n\t\t\treferredEStructuralFeature = null and\n\t\t\tsourceIndex > 0 and\n\t\t\tnot target.isExpression() implies\n\t\t\tlet sourceEClass = source.referredEClassifier.oclAsType(ecore::EClass) in\n\t\t\tlet targetEClass = target.referredEClassifier.oclAsType(ecore::EClass) in\n\t\t\tsourceEClass->closure(eSuperTypes)->includes(targetEClass) or targetEClass->closure(eSuperTypes)->includes(sourceEClass)"
+		   });
+		addAnnotation
+		  (relPatternNodeEClass.getEOperations().get(0),
+		   source,
+		   new String[] {
+			   "body", "name = null and initExpressionLines->notEmpty()"
+		   });
+		addAnnotation
+		  (relPatternNodeEClass.getEOperations().get(1),
+		   source,
+		   new String[] {
+			   "body", "\n\t\tnot isExpression() implies\n\t\tisAnon = (name = \'\')"
+		   });
+		addAnnotation
+		  (relPatternNodeEClass.getEOperations().get(2),
+		   source,
+		   new String[] {
+			   "body", "\n\t\tnot isExpression() implies\n\t\treferredEClassifier <> null"
+		   });
+		addAnnotation
+		  (relPatternNodeEClass.getEOperations().get(3),
+		   source,
+		   new String[] {
+			   "body", "\n\t\tnot isExpression() implies\n\t\tlet txTypedModelNode = owningRelDomainNode.referredTxTypedModelNode in\n\t\ttxTypedModelNode <> null implies\n\t\ttxTypedModelNode.usedTxPackageNodes.referredEPackage.eClassifiers->includes(referredEClassifier)"
+		   });
+		addAnnotation
+		  (txDiagramEClass.getEOperations().get(0),
+		   source,
+		   new String[] {
+			   "body", "ownedTxQueryNodes->isUnique(name)"
+		   });
+		addAnnotation
+		  (txDiagramEClass.getEOperations().get(1),
+		   source,
+		   new String[] {
+			   "body", "ownedRelDiagrams->isUnique(name)"
+		   });
+		addAnnotation
+		  (txDiagramEClass.getEOperations().get(2),
+		   source,
+		   new String[] {
+			   "body", "name <> null"
+		   });
+		addAnnotation
+		  (txDiagramEClass.getEOperations().get(3),
+		   source,
+		   new String[] {
+			   "body", "ownedTxTypedModelNodes->isUnique(name)"
+		   });
+		addAnnotation
+		  (txKeyNodeEClass.getEOperations().get(0),
+		   source,
+		   new String[] {
+			   "body", "ownedTxPartNodes->isUnique(referredEStructuralFeature)"
+		   });
+		addAnnotation
+		  (txParameterNodeEClass.getEOperations().get(0),
+		   source,
+		   new String[] {
+			   "body", "name <> null"
+		   });
+		addAnnotation
+		  (txParameterNodeEClass.getEOperations().get(1),
+		   source,
+		   new String[] {
+			   "body", "referredEClassifier <> null"
+		   });
+		addAnnotation
+		  (txPartNodeEClass.getEOperations().get(0),
+		   source,
+		   new String[] {
+			   "body", "owningTxKeyNode.referredEClass.oclAsType(ecore::EClass)->closure(eSuperTypes)->includes(referredEStructuralFeature.eContainingClass)"
+		   });
+		addAnnotation
+		  (txQueryNodeEClass.getEOperations().get(0),
+		   source,
+		   new String[] {
+			   "body", "name <> null"
+		   });
+		addAnnotation
+		  (txQueryNodeEClass.getEOperations().get(1),
+		   source,
+		   new String[] {
+			   "body", "referredEClassifier <> null"
+		   });
+		addAnnotation
+		  (txQueryNodeEClass.getEOperations().get(2),
+		   source,
+		   new String[] {
+			   "body", "ownedTxParameterNodes->isUnique(name)"
+		   });
+		addAnnotation
+		  (txTypedModelNodeEClass.getEOperations().get(0),
+		   source,
+		   new String[] {
+			   "body", "usedTxPackageNodes->isUnique(referredEPackage)"
+		   });
+		addAnnotation
+		  (txTypedModelNodeEClass.getEOperations().get(1),
+		   source,
+		   new String[] {
+			   "body", "name <> null"
+		   });
 	}
 
 } //UMLXPackageImpl

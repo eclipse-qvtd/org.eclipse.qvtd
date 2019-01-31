@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.umlx.UMLXElement;
 import org.eclipse.qvtd.umlx.UMLXPackage;
 import org.eclipse.qvtd.umlx.util.UMLXVisitor;
-import org.eclipse.qvtd.umlx.utilities.UMLXToStringVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,6 +36,14 @@ import org.eclipse.qvtd.umlx.utilities.UMLXToStringVisitor;
  * @generated
  */
 public abstract class UMLXElementImpl extends MinimalEObjectImpl.Container implements UMLXElement {
+	/**
+	 * The number of structural features of the '<em>Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int UMLX_ELEMENT_FEATURE_COUNT = 1;
 	/**
 	 * The cached value of the '{@link #getComments() <em>Comments</em>}' attribute list.
 	 * <!-- begin-user-doc -->
@@ -74,7 +81,7 @@ public abstract class UMLXElementImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public EList<String> getComments() {
 		if (comments == null) {
-			comments = new EDataTypeUniqueEList<String>(String.class, this, UMLXPackage.UMLX_ELEMENT__COMMENTS);
+			comments = new EDataTypeUniqueEList<String>(String.class, this, 0);
 		}
 		return comments;
 	}
@@ -86,7 +93,13 @@ public abstract class UMLXElementImpl extends MinimalEObjectImpl.Container imple
 	 */
 	@Override
 	public String toString() {
-		return UMLXToStringVisitor.toString(this);
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (comments: ");
+		result.append(comments);
+		result.append(')');
+		return result.toString();
 	}
 
 	@Override
@@ -106,7 +119,7 @@ public abstract class UMLXElementImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLXPackage.UMLX_ELEMENT__COMMENTS:
+			case 0:
 				return getComments();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -121,7 +134,7 @@ public abstract class UMLXElementImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLXPackage.UMLX_ELEMENT__COMMENTS:
+			case 0:
 				getComments().clear();
 				getComments().addAll((Collection<? extends String>)newValue);
 				return;
@@ -137,7 +150,7 @@ public abstract class UMLXElementImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.UMLX_ELEMENT__COMMENTS:
+			case 0:
 				getComments().clear();
 				return;
 		}
@@ -152,7 +165,7 @@ public abstract class UMLXElementImpl extends MinimalEObjectImpl.Container imple
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.UMLX_ELEMENT__COMMENTS:
+			case 0:
 				return comments != null && !comments.isEmpty();
 		}
 		return super.eIsSet(featureID);

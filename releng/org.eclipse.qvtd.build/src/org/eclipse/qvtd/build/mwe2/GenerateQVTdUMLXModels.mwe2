@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.resource.impl.*
  */
 Workflow {
 	bean = ResourceSetImpl : umlxResourceSet {}
+    bean = ProjectMapSetup { resourceSet = umlxResourceSet }
     bean = StandaloneSetup { resourceSet = umlxResourceSet
     	platformUri = ".."
     	scanClassPath = true

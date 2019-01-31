@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2018 Willink Transformations and others.
+ * Copyright (c) 2016, 2019 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -19,8 +19,19 @@
  *******************************************************************************/
 package org.eclipse.qvtd.umlx;
 
+import java.lang.String;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.TemplateParameters;
+import org.eclipse.ocl.pivot.ids.ClassId;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.ids.DataTypeId;
+import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.NsURIPackageId;
+import org.eclipse.ocl.pivot.ids.RootPackageId;
+import org.eclipse.ocl.pivot.ids.TuplePartId;
+import org.eclipse.ocl.pivot.ids.TupleTypeId;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorPackage;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorProperty;
 import org.eclipse.ocl.pivot.internal.library.ecore.EcoreExecutorType;
@@ -33,6 +44,9 @@ import org.eclipse.ocl.pivot.internal.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorType;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.TypeUtil;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.qvtd.umlx.UMLXPackage;
 import org.eclipse.qvtd.umlx.UMLXTables;
 
 /**
@@ -60,98 +74,98 @@ public class UMLXTables
 	/**
 	 *	Constants used by auto-generated code.
 	 */
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_$metamodel$ = org.eclipse.ocl.pivot.ids.IdManager.getRootPackageId("$metamodel$");
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://www.eclipse.org/emf/2002/Ecore", null, org.eclipse.emf.ecore.EcorePackage.eINSTANCE);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX = org.eclipse.ocl.pivot.ids.IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2016/UMLX", null, org.eclipse.qvtd.umlx.UMLXPackage.eINSTANCE);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Class = org.eclipse.qvtd.umlx.UMLXTables.PACKid_$metamodel$.getClassId("Class", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_EAttribute = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EAttribute", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_EClass = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EClass", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_EClassifier = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EClassifier", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_EPackage = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EPackage", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_EReference = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EReference", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_EStructuralFeature = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EStructuralFeature", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_RelDiagram = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("RelDiagram", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_RelDomainNode = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("RelDomainNode", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_RelInvocationEdge = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("RelInvocationEdge", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_RelInvocationNode = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("RelInvocationNode", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_RelPatternEdge = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("RelPatternEdge", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_RelPatternNode = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("RelPatternNode", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TxDiagram = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxDiagram", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TxKeyNode = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxKeyNode", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TxPackageNode = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxPackageNode", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TxParameterNode = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxParameterNode", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TxPartNode = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxPartNode", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TxQueryNode = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxQueryNode", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_TxTypedModelNode = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxTypedModelNode", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_UMLXModel = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("UMLXModel", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull DataTypeId DATAid_EInt = org.eclipse.qvtd.umlx.UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getDataTypeId("EInt", 0);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue INT_0 = org.eclipse.ocl.pivot.utilities.ValueUtil.integerValueOf("0");
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue INT_1 = org.eclipse.ocl.pivot.utilities.ValueUtil.integerValueOf("1");
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_PRIMid_String = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.ocl.pivot.ids.TypeId.STRING);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull TuplePartId PARTid_ = org.eclipse.ocl.pivot.ids.IdManager.getTuplePartId(1, "status", org.eclipse.ocl.pivot.ids.TypeId.BOOLEAN);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull TuplePartId PARTid__0 = org.eclipse.ocl.pivot.ids.IdManager.getTuplePartId(0, "message", org.eclipse.ocl.pivot.ids.TypeId.STRING);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SEQ_PRIMid_String = org.eclipse.ocl.pivot.ids.TypeId.SEQUENCE.getSpecializedId(org.eclipse.ocl.pivot.ids.TypeId.STRING);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_PRIMid_String = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.ocl.pivot.ids.TypeId.STRING);
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_ = "";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelDiagram_c_c_NameIsRequired = "RelDiagram::NameIsRequired";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelDiagram_c_c_RelPatternNodeNamesAreUnique = "RelDiagram::RelPatternNodeNamesAreUnique";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelDiagram_c_c_RelPatternNodeNamesAreUnique_c = "RelDiagram::RelPatternNodeNamesAreUnique:";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelInvocationNode_c_c_CompatibleEdges = "RelInvocationNode::CompatibleEdges";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelInvocationNode_c_c_CompatibleEdges_32 = "RelInvocationNode::CompatibleEdges ";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_CompatibleEAttributePropertyTarget = "RelPatternEdge::CompatibleEAttributePropertyTarget";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_CompatibleEReferencePropertyTarget = "RelPatternEdge::CompatibleEReferencePropertyTarget";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_CompatibleMemberPropertyTarget = "RelPatternEdge::CompatibleMemberPropertyTarget";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_CompatiblePropertySource = "RelPatternEdge::CompatiblePropertySource";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_CompatibleRestPropertyTarget = "RelPatternEdge::CompatibleRestPropertyTarget";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_CompatibleSourceIndex = "RelPatternEdge::CompatibleSourceIndex";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_CompatibleSourceMultiplicity = "RelPatternEdge::CompatibleSourceMultiplicity";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_SourceIsClassNode = "RelPatternEdge::SourceIsClassNode";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternEdge_c_c_SourceIsEClass = "RelPatternEdge::SourceIsEClass";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternNode_c_c_AnonIsUnnamed = "RelPatternNode::AnonIsUnnamed";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternNode_c_c_EClassifierIsInTypedModel = "RelPatternNode::EClassifierIsInTypedModel";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_RelPatternNode_c_c_TypeIsRequired = "RelPatternNode::TypeIsRequired";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxDiagram_c_c_NameIsRequired = "TxDiagram::NameIsRequired";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxDiagram_c_c_RelDiagramNamesAreUnique = "TxDiagram::RelDiagramNamesAreUnique";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxDiagram_c_c_TxQueryNodeNamesAreUnique = "TxDiagram::TxQueryNodeNamesAreUnique";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxDiagram_c_c_TxTypedModelNodeNamesAreUnique = "TxDiagram::TxTypedModelNodeNamesAreUnique";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxKeyNode_c_c_PartsAreUnique = "TxKeyNode::PartsAreUnique";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxParameterNode_c_c_NameIsRequired = "TxParameterNode::NameIsRequired";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxParameterNode_c_c_TypeIsRequired = "TxParameterNode::TypeIsRequired";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxPartNode_c_c_PartIsPropertyOfKey = "TxPartNode::PartIsPropertyOfKey";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxQueryNode_c_c_NameIsRequired = "TxQueryNode::NameIsRequired";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxQueryNode_c_c_ParametersAreUnique = "TxQueryNode::ParametersAreUnique";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxQueryNode_c_c_TypeIsRequired = "TxQueryNode::TypeIsRequired";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxTypedModelNode_c_c_NameIsRequired = "TxTypedModelNode::NameIsRequired";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_TxTypedModelNode_c_c_TxPackageNodePackagesAreUnique = "TxTypedModelNode::TxPackageNodePackagesAreUnique";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR__32_39 = " \'";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR__32_are_32_not_32_unique_32_for_32 = " are not unique for ";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR__39 = "\'";
-	public static final /*@NonInvalid*/ java.lang.@org.eclipse.jdt.annotation.NonNull String STR_quot = "/";
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_RelDomainNode = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelDomainNode);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_RelInvocationEdge = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelInvocationEdge);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_RelInvocationNode = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelInvocationNode);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId BAG_CLSSid_TxTypedModelNode = org.eclipse.ocl.pivot.ids.TypeId.BAG.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_TxTypedModelNode);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_EClass = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_EClass);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_EClassifier = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_EClassifier);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_RelDiagram = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelDiagram);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_RelDomainNode = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelDomainNode);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_RelInvocationEdge = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelInvocationEdge);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_RelInvocationNode = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelInvocationNode);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_RelPatternEdge = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelPatternEdge);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_RelPatternNode = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelPatternNode);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_TxDiagram = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_TxDiagram);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_TxKeyNode = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_TxKeyNode);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_TxPackageNode = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_TxPackageNode);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_TxParameterNode = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_TxParameterNode);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_TxPartNode = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_TxPartNode);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_TxQueryNode = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_TxQueryNode);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_TxTypedModelNode = org.eclipse.ocl.pivot.ids.TypeId.ORDERED_SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_TxTypedModelNode);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SEQ_CLSSid_EClassifier = org.eclipse.ocl.pivot.ids.TypeId.SEQUENCE.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_EClassifier);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SEQ_CLSSid_EPackage = org.eclipse.ocl.pivot.ids.TypeId.SEQUENCE.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_EPackage);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SEQ_CLSSid_RelPatternNode = org.eclipse.ocl.pivot.ids.TypeId.SEQUENCE.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelPatternNode);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_EClass = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_EClass);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId SET_CLSSid_RelPatternNode = org.eclipse.ocl.pivot.ids.TypeId.SET.getSpecializedId(org.eclipse.qvtd.umlx.UMLXTables.CLSSid_RelPatternNode);
-	public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull TupleTypeId TUPLid_ = org.eclipse.ocl.pivot.ids.IdManager.getTupleTypeId("Tuple", org.eclipse.qvtd.umlx.UMLXTables.PARTid__0, org.eclipse.qvtd.umlx.UMLXTables.PARTid_);
+	public static final /*@NonInvalid*/ @NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore = IdManager.getNsURIPackageId("http://www.eclipse.org/emf/2002/Ecore", null, EcorePackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/2016/UMLX", null, UMLXPackage.eINSTANCE);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Class = UMLXTables.PACKid_$metamodel$.getClassId("Class", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_EAttribute = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EAttribute", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_EClass = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EClass", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_EClassifier = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EClassifier", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_EPackage = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EPackage", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_EReference = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EReference", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_EStructuralFeature = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EStructuralFeature", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RelDiagram = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("RelDiagram", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RelDomainNode = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("RelDomainNode", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RelInvocationEdge = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("RelInvocationEdge", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RelInvocationNode = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("RelInvocationNode", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RelPatternEdge = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("RelPatternEdge", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_RelPatternNode = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("RelPatternNode", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TxDiagram = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxDiagram", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TxKeyNode = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxKeyNode", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TxPackageNode = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxPackageNode", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TxParameterNode = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxParameterNode", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TxPartNode = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxPartNode", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TxQueryNode = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxQueryNode", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TxTypedModelNode = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("TxTypedModelNode", 0);
+	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_UMLXModel = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2016_s_UMLX.getClassId("UMLXModel", 0);
+	public static final /*@NonInvalid*/ @NonNull DataTypeId DATAid_EInt = UMLXTables.PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getDataTypeId("EInt", 0);
+	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_0 = ValueUtil.integerValueOf("0");
+	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_1 = ValueUtil.integerValueOf("1");
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_PRIMid_String = TypeId.ORDERED_SET.getSpecializedId(TypeId.STRING);
+	public static final /*@NonInvalid*/ @NonNull TuplePartId PARTid_ = IdManager.getTuplePartId(1, "status", TypeId.BOOLEAN);
+	public static final /*@NonInvalid*/ @NonNull TuplePartId PARTid__0 = IdManager.getTuplePartId(0, "message", TypeId.STRING);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_PRIMid_String = TypeId.SEQUENCE.getSpecializedId(TypeId.STRING);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_PRIMid_String = TypeId.SET.getSpecializedId(TypeId.STRING);
+	public static final /*@NonInvalid*/ @NonNull String STR_ = "";
+	public static final /*@NonInvalid*/ @NonNull String STR_RelDiagram_c_c_NameIsRequired = "RelDiagram::NameIsRequired";
+	public static final /*@NonInvalid*/ @NonNull String STR_RelDiagram_c_c_RelPatternNodeNamesAreUnique = "RelDiagram::RelPatternNodeNamesAreUnique";
+	public static final /*@NonInvalid*/ @NonNull String STR_RelDiagram_c_c_RelPatternNodeNamesAreUnique_c = "RelDiagram::RelPatternNodeNamesAreUnique:";
+	public static final /*@NonInvalid*/ @NonNull String STR_RelInvocationNode_c_c_CompatibleEdges = "RelInvocationNode::CompatibleEdges";
+	public static final /*@NonInvalid*/ @NonNull String STR_RelInvocationNode_c_c_CompatibleEdges_32 = "RelInvocationNode::CompatibleEdges ";
+	public static final /*@NonInvalid*/ @NonNull String STR_RelPatternEdge_c_c_CompatibleEAttributePropertyTarget = "RelPatternEdge::CompatibleEAttributePropertyTarget";
+	public static final /*@NonInvalid*/ @NonNull String STR_RelPatternEdge_c_c_CompatibleEReferencePropertyTarget = "RelPatternEdge::CompatibleEReferencePropertyTarget";
+	public static final /*@NonInvalid*/ @NonNull String STR_RelPatternEdge_c_c_CompatibleMemberPropertyTarget = "RelPatternEdge::CompatibleMemberPropertyTarget";
+	public static final /*@NonInvalid*/ @NonNull String STR_RelPatternEdge_c_c_CompatiblePropertySource = "RelPatternEdge::CompatiblePropertySource";
+	public static final /*@NonInvalid*/ @NonNull String STR_RelPatternEdge_c_c_CompatibleRestPropertyTarget = "RelPatternEdge::CompatibleRestPropertyTarget";
+	public static final /*@NonInvalid*/ @NonNull String STR_RelPatternEdge_c_c_CompatibleSourceIndex = "RelPatternEdge::CompatibleSourceIndex";
+	public static final /*@NonInvalid*/ @NonNull String STR_RelPatternEdge_c_c_CompatibleSourceMultiplicity = "RelPatternEdge::CompatibleSourceMultiplicity";
+	public static final /*@NonInvalid*/ @NonNull String STR_RelPatternEdge_c_c_SourceIsClassNode = "RelPatternEdge::SourceIsClassNode";
+	public static final /*@NonInvalid*/ @NonNull String STR_RelPatternEdge_c_c_SourceIsEClass = "RelPatternEdge::SourceIsEClass";
+	public static final /*@NonInvalid*/ @NonNull String STR_RelPatternNode_c_c_AnonIsUnnamed = "RelPatternNode::AnonIsUnnamed";
+	public static final /*@NonInvalid*/ @NonNull String STR_RelPatternNode_c_c_EClassifierIsInTypedModel = "RelPatternNode::EClassifierIsInTypedModel";
+	public static final /*@NonInvalid*/ @NonNull String STR_RelPatternNode_c_c_TypeIsRequired = "RelPatternNode::TypeIsRequired";
+	public static final /*@NonInvalid*/ @NonNull String STR_TxDiagram_c_c_NameIsRequired = "TxDiagram::NameIsRequired";
+	public static final /*@NonInvalid*/ @NonNull String STR_TxDiagram_c_c_RelDiagramNamesAreUnique = "TxDiagram::RelDiagramNamesAreUnique";
+	public static final /*@NonInvalid*/ @NonNull String STR_TxDiagram_c_c_TxQueryNodeNamesAreUnique = "TxDiagram::TxQueryNodeNamesAreUnique";
+	public static final /*@NonInvalid*/ @NonNull String STR_TxDiagram_c_c_TxTypedModelNodeNamesAreUnique = "TxDiagram::TxTypedModelNodeNamesAreUnique";
+	public static final /*@NonInvalid*/ @NonNull String STR_TxKeyNode_c_c_PartsAreUnique = "TxKeyNode::PartsAreUnique";
+	public static final /*@NonInvalid*/ @NonNull String STR_TxParameterNode_c_c_NameIsRequired = "TxParameterNode::NameIsRequired";
+	public static final /*@NonInvalid*/ @NonNull String STR_TxParameterNode_c_c_TypeIsRequired = "TxParameterNode::TypeIsRequired";
+	public static final /*@NonInvalid*/ @NonNull String STR_TxPartNode_c_c_PartIsPropertyOfKey = "TxPartNode::PartIsPropertyOfKey";
+	public static final /*@NonInvalid*/ @NonNull String STR_TxQueryNode_c_c_NameIsRequired = "TxQueryNode::NameIsRequired";
+	public static final /*@NonInvalid*/ @NonNull String STR_TxQueryNode_c_c_ParametersAreUnique = "TxQueryNode::ParametersAreUnique";
+	public static final /*@NonInvalid*/ @NonNull String STR_TxQueryNode_c_c_TypeIsRequired = "TxQueryNode::TypeIsRequired";
+	public static final /*@NonInvalid*/ @NonNull String STR_TxTypedModelNode_c_c_NameIsRequired = "TxTypedModelNode::NameIsRequired";
+	public static final /*@NonInvalid*/ @NonNull String STR_TxTypedModelNode_c_c_TxPackageNodePackagesAreUnique = "TxTypedModelNode::TxPackageNodePackagesAreUnique";
+	public static final /*@NonInvalid*/ @NonNull String STR__32_39 = " \'";
+	public static final /*@NonInvalid*/ @NonNull String STR__32_are_32_not_32_unique_32_for_32 = " are not unique for ";
+	public static final /*@NonInvalid*/ @NonNull String STR__39 = "\'";
+	public static final /*@NonInvalid*/ @NonNull String STR_quot = "/";
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_RelDomainNode = TypeId.BAG.getSpecializedId(UMLXTables.CLSSid_RelDomainNode);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_RelInvocationEdge = TypeId.BAG.getSpecializedId(UMLXTables.CLSSid_RelInvocationEdge);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_RelInvocationNode = TypeId.BAG.getSpecializedId(UMLXTables.CLSSid_RelInvocationNode);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_TxTypedModelNode = TypeId.BAG.getSpecializedId(UMLXTables.CLSSid_TxTypedModelNode);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_EClass = TypeId.ORDERED_SET.getSpecializedId(UMLXTables.CLSSid_EClass);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_EClassifier = TypeId.ORDERED_SET.getSpecializedId(UMLXTables.CLSSid_EClassifier);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_RelDiagram = TypeId.ORDERED_SET.getSpecializedId(UMLXTables.CLSSid_RelDiagram);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_RelDomainNode = TypeId.ORDERED_SET.getSpecializedId(UMLXTables.CLSSid_RelDomainNode);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_RelInvocationEdge = TypeId.ORDERED_SET.getSpecializedId(UMLXTables.CLSSid_RelInvocationEdge);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_RelInvocationNode = TypeId.ORDERED_SET.getSpecializedId(UMLXTables.CLSSid_RelInvocationNode);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_RelPatternEdge = TypeId.ORDERED_SET.getSpecializedId(UMLXTables.CLSSid_RelPatternEdge);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_RelPatternNode = TypeId.ORDERED_SET.getSpecializedId(UMLXTables.CLSSid_RelPatternNode);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_TxDiagram = TypeId.ORDERED_SET.getSpecializedId(UMLXTables.CLSSid_TxDiagram);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_TxKeyNode = TypeId.ORDERED_SET.getSpecializedId(UMLXTables.CLSSid_TxKeyNode);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_TxPackageNode = TypeId.ORDERED_SET.getSpecializedId(UMLXTables.CLSSid_TxPackageNode);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_TxParameterNode = TypeId.ORDERED_SET.getSpecializedId(UMLXTables.CLSSid_TxParameterNode);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_TxPartNode = TypeId.ORDERED_SET.getSpecializedId(UMLXTables.CLSSid_TxPartNode);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_TxQueryNode = TypeId.ORDERED_SET.getSpecializedId(UMLXTables.CLSSid_TxQueryNode);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_TxTypedModelNode = TypeId.ORDERED_SET.getSpecializedId(UMLXTables.CLSSid_TxTypedModelNode);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_CLSSid_EClassifier = TypeId.SEQUENCE.getSpecializedId(UMLXTables.CLSSid_EClassifier);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_CLSSid_EPackage = TypeId.SEQUENCE.getSpecializedId(UMLXTables.CLSSid_EPackage);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_CLSSid_RelPatternNode = TypeId.SEQUENCE.getSpecializedId(UMLXTables.CLSSid_RelPatternNode);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_EClass = TypeId.SET.getSpecializedId(UMLXTables.CLSSid_EClass);
+	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_RelPatternNode = TypeId.SET.getSpecializedId(UMLXTables.CLSSid_RelPatternNode);
+	public static final /*@NonInvalid*/ @NonNull TupleTypeId TUPLid_ = IdManager.getTupleTypeId("Tuple", UMLXTables.PARTid__0, UMLXTables.PARTid_);
 
 	/**
 	 *	The type parameters for templated types and operations.
@@ -792,12 +806,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -822,12 +836,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -852,12 +866,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -881,12 +895,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -911,12 +925,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -941,12 +955,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -970,12 +984,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -1002,12 +1016,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -1034,12 +1048,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -1064,12 +1078,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -1094,12 +1108,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -1123,12 +1137,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -1153,12 +1167,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -1185,12 +1199,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -1215,12 +1229,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -1247,12 +1261,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -1278,12 +1292,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -1306,12 +1320,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -1335,12 +1349,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,
@@ -1364,12 +1378,12 @@ public class UMLXTables
 			OCLstdlibTables.Operations._OclAny___lt__gt_ /* _'<>'(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny___eq_ /* _'='(OclSelf[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclAsSet /* oclAsSet() */,
-			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclAsType /* oclAsType(TT)(TT[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInState /* oclIsInState(OclState[?]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsInvalid /* oclIsInvalid() */,
-			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsKindOf /* oclIsKindOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsNew /* oclIsNew() */,
-			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[?]) */,
+			OCLstdlibTables.Operations._OclAny__oclIsTypeOf /* oclIsTypeOf(OclType[1]) */,
 			OCLstdlibTables.Operations._OclAny__oclIsUndefined /* oclIsUndefined() */,
 			OCLstdlibTables.Operations._OclAny__0_oclLog /* oclLog() */,
 			OCLstdlibTables.Operations._OclAny__1_oclLog /* oclLog(String[?]) */,

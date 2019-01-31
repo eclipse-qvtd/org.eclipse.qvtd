@@ -41,6 +41,15 @@ import org.eclipse.qvtd.umlx.UMLXTypedElement;
  */
 public abstract class UMLXTypedElementImpl extends UMLXNamedElementImpl implements UMLXTypedElement {
 	/**
+	 * The number of structural features of the '<em>Typed Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int UMLX_TYPED_ELEMENT_FEATURE_COUNT = UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
 	 * The default value of the '{@link #isIsMany() <em>Is Many</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -189,7 +198,7 @@ public abstract class UMLXTypedElementImpl extends UMLXNamedElementImpl implemen
 		boolean oldIsMany = isMany;
 		isMany = newIsMany;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.UMLX_TYPED_ELEMENT__IS_MANY, oldIsMany, isMany));
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0, oldIsMany, isMany));
 	}
 
 	/**
@@ -212,7 +221,7 @@ public abstract class UMLXTypedElementImpl extends UMLXNamedElementImpl implemen
 		boolean oldIsNullFree = isNullFree;
 		isNullFree = newIsNullFree;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.UMLX_TYPED_ELEMENT__IS_NULL_FREE, oldIsNullFree, isNullFree));
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1, oldIsNullFree, isNullFree));
 	}
 
 	/**
@@ -235,7 +244,7 @@ public abstract class UMLXTypedElementImpl extends UMLXNamedElementImpl implemen
 		boolean oldIsOrdered = isOrdered;
 		isOrdered = newIsOrdered;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.UMLX_TYPED_ELEMENT__IS_ORDERED, oldIsOrdered, isOrdered));
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2, oldIsOrdered, isOrdered));
 	}
 
 	/**
@@ -258,7 +267,7 @@ public abstract class UMLXTypedElementImpl extends UMLXNamedElementImpl implemen
 		boolean oldIsRequired = isRequired;
 		isRequired = newIsRequired;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.UMLX_TYPED_ELEMENT__IS_REQUIRED, oldIsRequired, isRequired));
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3, oldIsRequired, isRequired));
 	}
 
 	/**
@@ -281,7 +290,7 @@ public abstract class UMLXTypedElementImpl extends UMLXNamedElementImpl implemen
 		boolean oldIsUnique = isUnique;
 		isUnique = newIsUnique;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.UMLX_TYPED_ELEMENT__IS_UNIQUE, oldIsUnique, isUnique));
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4, oldIsUnique, isUnique));
 	}
 
 	/**
@@ -296,7 +305,7 @@ public abstract class UMLXTypedElementImpl extends UMLXNamedElementImpl implemen
 			referredEClassifier = (EClassifier)eResolveProxy(oldReferredEClassifier);
 			if (referredEClassifier != oldReferredEClassifier) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.UMLX_TYPED_ELEMENT__REFERRED_ECLASSIFIER, oldReferredEClassifier, referredEClassifier));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5, oldReferredEClassifier, referredEClassifier));
 			}
 		}
 		return referredEClassifier;
@@ -321,7 +330,7 @@ public abstract class UMLXTypedElementImpl extends UMLXNamedElementImpl implemen
 		EClassifier oldReferredEClassifier = referredEClassifier;
 		referredEClassifier = newReferredEClassifier;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.UMLX_TYPED_ELEMENT__REFERRED_ECLASSIFIER, oldReferredEClassifier, referredEClassifier));
+			eNotify(new ENotificationImpl(this, Notification.SET, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5, oldReferredEClassifier, referredEClassifier));
 	}
 
 	/**
@@ -331,7 +340,21 @@ public abstract class UMLXTypedElementImpl extends UMLXNamedElementImpl implemen
 	 */
 	@Override
 	public String toString() {
-		return super.toString();
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (isMany: ");
+		result.append(isMany);
+		result.append(", isNullFree: ");
+		result.append(isNullFree);
+		result.append(", isOrdered: ");
+		result.append(isOrdered);
+		result.append(", isRequired: ");
+		result.append(isRequired);
+		result.append(", isUnique: ");
+		result.append(isUnique);
+		result.append(')');
+		return result.toString();
 	}
 
 	/**
@@ -342,17 +365,17 @@ public abstract class UMLXTypedElementImpl extends UMLXNamedElementImpl implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_MANY:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return isIsMany();
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_NULL_FREE:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return isIsNullFree();
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_ORDERED:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return isIsOrdered();
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_REQUIRED:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return isIsRequired();
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_UNIQUE:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return isIsUnique();
-			case UMLXPackage.UMLX_TYPED_ELEMENT__REFERRED_ECLASSIFIER:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5:
 				if (resolve) return getReferredEClassifier();
 				return basicGetReferredEClassifier();
 		}
@@ -367,22 +390,22 @@ public abstract class UMLXTypedElementImpl extends UMLXNamedElementImpl implemen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_MANY:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setIsMany((Boolean)newValue);
 				return;
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_NULL_FREE:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setIsNullFree((Boolean)newValue);
 				return;
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_ORDERED:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setIsOrdered((Boolean)newValue);
 				return;
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_REQUIRED:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setIsRequired((Boolean)newValue);
 				return;
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_UNIQUE:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setIsUnique((Boolean)newValue);
 				return;
-			case UMLXPackage.UMLX_TYPED_ELEMENT__REFERRED_ECLASSIFIER:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setReferredEClassifier((EClassifier)newValue);
 				return;
 		}
@@ -397,22 +420,22 @@ public abstract class UMLXTypedElementImpl extends UMLXNamedElementImpl implemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_MANY:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setIsMany(IS_MANY_EDEFAULT);
 				return;
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_NULL_FREE:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setIsNullFree(IS_NULL_FREE_EDEFAULT);
 				return;
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_ORDERED:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setIsOrdered(IS_ORDERED_EDEFAULT);
 				return;
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_REQUIRED:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
 				return;
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_UNIQUE:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setIsUnique(IS_UNIQUE_EDEFAULT);
 				return;
-			case UMLXPackage.UMLX_TYPED_ELEMENT__REFERRED_ECLASSIFIER:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setReferredEClassifier((EClassifier)null);
 				return;
 		}
@@ -427,17 +450,17 @@ public abstract class UMLXTypedElementImpl extends UMLXNamedElementImpl implemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_MANY:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return isMany != IS_MANY_EDEFAULT;
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_NULL_FREE:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return isNullFree != IS_NULL_FREE_EDEFAULT;
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_ORDERED:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return isOrdered != IS_ORDERED_EDEFAULT;
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_REQUIRED:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return isRequired != IS_REQUIRED_EDEFAULT;
-			case UMLXPackage.UMLX_TYPED_ELEMENT__IS_UNIQUE:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return isUnique != IS_UNIQUE_EDEFAULT;
-			case UMLXPackage.UMLX_TYPED_ELEMENT__REFERRED_ECLASSIFIER:
+			case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return referredEClassifier != null;
 		}
 		return super.eIsSet(featureID);

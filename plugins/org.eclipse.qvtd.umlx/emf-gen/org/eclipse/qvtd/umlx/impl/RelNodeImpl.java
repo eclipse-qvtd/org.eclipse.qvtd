@@ -24,6 +24,15 @@ import org.eclipse.qvtd.umlx.UMLXPackage;
  */
 public abstract class RelNodeImpl extends UMLXElementImpl implements RelNode {
 	/**
+	 * The number of structural features of the '<em>Rel Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int REL_NODE_FEATURE_COUNT = UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

@@ -25,6 +25,15 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  */
 public class TxNodeImpl extends UMLXElementImpl implements TxNode {
 	/**
+	 * The number of structural features of the '<em>Tx Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TX_NODE_FEATURE_COUNT = UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

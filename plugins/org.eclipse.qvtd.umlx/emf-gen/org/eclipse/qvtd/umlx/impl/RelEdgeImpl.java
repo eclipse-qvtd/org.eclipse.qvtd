@@ -23,6 +23,15 @@ import org.eclipse.qvtd.umlx.UMLXPackage;
  */
 public abstract class RelEdgeImpl extends UMLXElementImpl implements RelEdge {
 	/**
+	 * The number of structural features of the '<em>Rel Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int REL_EDGE_FEATURE_COUNT = UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

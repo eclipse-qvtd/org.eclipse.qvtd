@@ -74,7 +74,7 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case UMLXPackage.REL_DIAGRAM: {
+			case 0: {
 				RelDiagram relDiagram = (RelDiagram)theEObject;
 				T result = caseRelDiagram(relDiagram);
 				if (result == null) result = caseUMLXNamedElement(relDiagram);
@@ -82,7 +82,7 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.REL_DOMAIN_NODE: {
+			case 1: {
 				RelDomainNode relDomainNode = (RelDomainNode)theEObject;
 				T result = caseRelDomainNode(relDomainNode);
 				if (result == null) result = caseRelNode(relDomainNode);
@@ -90,14 +90,14 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.REL_EDGE: {
+			case 2: {
 				RelEdge relEdge = (RelEdge)theEObject;
 				T result = caseRelEdge(relEdge);
 				if (result == null) result = caseUMLXElement(relEdge);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.REL_INVOCATION_EDGE: {
+			case 3: {
 				RelInvocationEdge relInvocationEdge = (RelInvocationEdge)theEObject;
 				T result = caseRelInvocationEdge(relInvocationEdge);
 				if (result == null) result = caseRelEdge(relInvocationEdge);
@@ -105,7 +105,7 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.REL_INVOCATION_NODE: {
+			case 4: {
 				RelInvocationNode relInvocationNode = (RelInvocationNode)theEObject;
 				T result = caseRelInvocationNode(relInvocationNode);
 				if (result == null) result = caseRelNode(relInvocationNode);
@@ -113,14 +113,14 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.REL_NODE: {
+			case 5: {
 				RelNode relNode = (RelNode)theEObject;
 				T result = caseRelNode(relNode);
 				if (result == null) result = caseUMLXElement(relNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.REL_PATTERN_EDGE: {
+			case 6: {
 				RelPatternEdge relPatternEdge = (RelPatternEdge)theEObject;
 				T result = caseRelPatternEdge(relPatternEdge);
 				if (result == null) result = caseRelEdge(relPatternEdge);
@@ -128,7 +128,7 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.REL_PATTERN_NODE: {
+			case 7: {
 				RelPatternNode relPatternNode = (RelPatternNode)theEObject;
 				T result = caseRelPatternNode(relPatternNode);
 				if (result == null) result = caseRelNode(relPatternNode);
@@ -138,7 +138,7 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.TX_DIAGRAM: {
+			case 8: {
 				TxDiagram txDiagram = (TxDiagram)theEObject;
 				T result = caseTxDiagram(txDiagram);
 				if (result == null) result = caseUMLXNamedElement(txDiagram);
@@ -146,7 +146,7 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.TX_KEY_NODE: {
+			case 9: {
 				TxKeyNode txKeyNode = (TxKeyNode)theEObject;
 				T result = caseTxKeyNode(txKeyNode);
 				if (result == null) result = caseTxNode(txKeyNode);
@@ -154,14 +154,14 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.TX_NODE: {
+			case 10: {
 				TxNode txNode = (TxNode)theEObject;
 				T result = caseTxNode(txNode);
 				if (result == null) result = caseUMLXElement(txNode);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.TX_PACKAGE_NODE: {
+			case 11: {
 				TxPackageNode txPackageNode = (TxPackageNode)theEObject;
 				T result = caseTxPackageNode(txPackageNode);
 				if (result == null) result = caseTxNode(txPackageNode);
@@ -169,7 +169,7 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.TX_PARAMETER_NODE: {
+			case 12: {
 				TxParameterNode txParameterNode = (TxParameterNode)theEObject;
 				T result = caseTxParameterNode(txParameterNode);
 				if (result == null) result = caseTxNode(txParameterNode);
@@ -179,7 +179,7 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.TX_PART_NODE: {
+			case 13: {
 				TxPartNode txPartNode = (TxPartNode)theEObject;
 				T result = caseTxPartNode(txPartNode);
 				if (result == null) result = caseTxNode(txPartNode);
@@ -187,7 +187,7 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.TX_QUERY_NODE: {
+			case 14: {
 				TxQueryNode txQueryNode = (TxQueryNode)theEObject;
 				T result = caseTxQueryNode(txQueryNode);
 				if (result == null) result = caseTxNode(txQueryNode);
@@ -197,7 +197,7 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.TX_TYPED_MODEL_NODE: {
+			case 15: {
 				TxTypedModelNode txTypedModelNode = (TxTypedModelNode)theEObject;
 				T result = caseTxTypedModelNode(txTypedModelNode);
 				if (result == null) result = caseTxNode(txTypedModelNode);
@@ -206,27 +206,27 @@ public class UMLXSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.UMLX_ELEMENT: {
+			case 16: {
 				UMLXElement umlxElement = (UMLXElement)theEObject;
 				T result = caseUMLXElement(umlxElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.UMLX_MODEL: {
+			case 17: {
 				UMLXModel umlxModel = (UMLXModel)theEObject;
 				T result = caseUMLXModel(umlxModel);
 				if (result == null) result = caseUMLXElement(umlxModel);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.UMLX_NAMED_ELEMENT: {
+			case 18: {
 				UMLXNamedElement umlxNamedElement = (UMLXNamedElement)theEObject;
 				T result = caseUMLXNamedElement(umlxNamedElement);
 				if (result == null) result = caseUMLXElement(umlxNamedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case UMLXPackage.UMLX_TYPED_ELEMENT: {
+			case 19: {
 				UMLXTypedElement umlxTypedElement = (UMLXTypedElement)theEObject;
 				T result = caseUMLXTypedElement(umlxTypedElement);
 				if (result == null) result = caseUMLXNamedElement(umlxTypedElement);

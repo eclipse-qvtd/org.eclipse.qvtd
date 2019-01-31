@@ -64,21 +64,21 @@ public class UMLXFactoryImpl extends EFactoryImpl implements UMLXFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case UMLXPackage.REL_DIAGRAM: return createRelDiagram();
-			case UMLXPackage.REL_DOMAIN_NODE: return createRelDomainNode();
-			case UMLXPackage.REL_INVOCATION_EDGE: return createRelInvocationEdge();
-			case UMLXPackage.REL_INVOCATION_NODE: return createRelInvocationNode();
-			case UMLXPackage.REL_PATTERN_EDGE: return createRelPatternEdge();
-			case UMLXPackage.REL_PATTERN_NODE: return createRelPatternNode();
-			case UMLXPackage.TX_DIAGRAM: return createTxDiagram();
-			case UMLXPackage.TX_KEY_NODE: return createTxKeyNode();
-			case UMLXPackage.TX_NODE: return createTxNode();
-			case UMLXPackage.TX_PACKAGE_NODE: return createTxPackageNode();
-			case UMLXPackage.TX_PARAMETER_NODE: return createTxParameterNode();
-			case UMLXPackage.TX_PART_NODE: return createTxPartNode();
-			case UMLXPackage.TX_QUERY_NODE: return createTxQueryNode();
-			case UMLXPackage.TX_TYPED_MODEL_NODE: return createTxTypedModelNode();
-			case UMLXPackage.UMLX_MODEL: return createUMLXModel();
+			case 0: return createRelDiagram();
+			case 1: return createRelDomainNode();
+			case 3: return createRelInvocationEdge();
+			case 4: return createRelInvocationNode();
+			case 6: return createRelPatternEdge();
+			case 7: return createRelPatternNode();
+			case 8: return createTxDiagram();
+			case 9: return createTxKeyNode();
+			case 10: return createTxNode();
+			case 11: return createTxPackageNode();
+			case 12: return createTxParameterNode();
+			case 13: return createTxPartNode();
+			case 14: return createTxQueryNode();
+			case 15: return createTxTypedModelNode();
+			case 17: return createUMLXModel();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

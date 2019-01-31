@@ -12,6 +12,7 @@ package org.eclipse.qvtd.umlx.impl;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -34,13 +35,17 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.evaluation.Executor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.SetValue;
+import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.OrderedSetValue;
+import org.eclipse.ocl.pivot.values.SetValue.Accumulator;
 import org.eclipse.qvtd.umlx.TxDiagram;
 import org.eclipse.qvtd.umlx.TxParameterNode;
 import org.eclipse.qvtd.umlx.TxQueryNode;
@@ -74,6 +79,15 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  * @generated
  */
 public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
+	/**
+	 * The number of structural features of the '<em>Tx Query Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TX_QUERY_NODE_FEATURE_COUNT = TxNodeImpl.TX_NODE_FEATURE_COUNT + 10;
+
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -263,7 +277,7 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_QUERY_NODE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, TxNodeImpl.TX_NODE_FEATURE_COUNT + 0, oldName, name));
 	}
 
 	/**
@@ -286,7 +300,7 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 		boolean oldIsMany = isMany;
 		isMany = newIsMany;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_QUERY_NODE__IS_MANY, oldIsMany, isMany));
+			eNotify(new ENotificationImpl(this, Notification.SET, TxNodeImpl.TX_NODE_FEATURE_COUNT + 1, oldIsMany, isMany));
 	}
 
 	/**
@@ -309,7 +323,7 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 		boolean oldIsNullFree = isNullFree;
 		isNullFree = newIsNullFree;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_QUERY_NODE__IS_NULL_FREE, oldIsNullFree, isNullFree));
+			eNotify(new ENotificationImpl(this, Notification.SET, TxNodeImpl.TX_NODE_FEATURE_COUNT + 2, oldIsNullFree, isNullFree));
 	}
 
 	/**
@@ -332,7 +346,7 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 		boolean oldIsOrdered = isOrdered;
 		isOrdered = newIsOrdered;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_QUERY_NODE__IS_ORDERED, oldIsOrdered, isOrdered));
+			eNotify(new ENotificationImpl(this, Notification.SET, TxNodeImpl.TX_NODE_FEATURE_COUNT + 3, oldIsOrdered, isOrdered));
 	}
 
 	/**
@@ -355,7 +369,7 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 		boolean oldIsRequired = isRequired;
 		isRequired = newIsRequired;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_QUERY_NODE__IS_REQUIRED, oldIsRequired, isRequired));
+			eNotify(new ENotificationImpl(this, Notification.SET, TxNodeImpl.TX_NODE_FEATURE_COUNT + 4, oldIsRequired, isRequired));
 	}
 
 	/**
@@ -378,7 +392,7 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 		boolean oldIsUnique = isUnique;
 		isUnique = newIsUnique;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_QUERY_NODE__IS_UNIQUE, oldIsUnique, isUnique));
+			eNotify(new ENotificationImpl(this, Notification.SET, TxNodeImpl.TX_NODE_FEATURE_COUNT + 5, oldIsUnique, isUnique));
 	}
 
 	/**
@@ -393,7 +407,7 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 			referredEClassifier = (EClassifier)eResolveProxy(oldReferredEClassifier);
 			if (referredEClassifier != oldReferredEClassifier) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.TX_QUERY_NODE__REFERRED_ECLASSIFIER, oldReferredEClassifier, referredEClassifier));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TxNodeImpl.TX_NODE_FEATURE_COUNT + 6, oldReferredEClassifier, referredEClassifier));
 			}
 		}
 		return referredEClassifier;
@@ -418,7 +432,7 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 		EClassifier oldReferredEClassifier = referredEClassifier;
 		referredEClassifier = newReferredEClassifier;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_QUERY_NODE__REFERRED_ECLASSIFIER, oldReferredEClassifier, referredEClassifier));
+			eNotify(new ENotificationImpl(this, Notification.SET, TxNodeImpl.TX_NODE_FEATURE_COUNT + 6, oldReferredEClassifier, referredEClassifier));
 	}
 
 	/**
@@ -429,7 +443,7 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 	@Override
 	public EList<String> getInitExpressionLines() {
 		if (initExpressionLines == null) {
-			initExpressionLines = new EDataTypeUniqueEList<String>(String.class, this, UMLXPackage.TX_QUERY_NODE__INIT_EXPRESSION_LINES);
+			initExpressionLines = new EDataTypeUniqueEList<String>(String.class, this, TxNodeImpl.TX_NODE_FEATURE_COUNT + 7);
 		}
 		return initExpressionLines;
 	}
@@ -442,7 +456,7 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 	@Override
 	public EList<TxParameterNode> getOwnedTxParameterNodes() {
 		if (ownedTxParameterNodes == null) {
-			ownedTxParameterNodes = new EObjectContainmentWithInverseEList<TxParameterNode>(TxParameterNode.class, this, UMLXPackage.TX_QUERY_NODE__OWNED_TX_PARAMETER_NODES, UMLXPackage.TX_PARAMETER_NODE__OWNING_TX_QUERY_NODE);
+			ownedTxParameterNodes = new EObjectContainmentWithInverseEList<TxParameterNode>(TxParameterNode.class, this, TxNodeImpl.TX_NODE_FEATURE_COUNT + 8, TxNodeImpl.TX_NODE_FEATURE_COUNT + 7);
 		}
 		return ownedTxParameterNodes;
 	}
@@ -454,7 +468,7 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 	 */
 	@Override
 	public TxDiagram getOwningTxDiagram() {
-		if (eContainerFeatureID() != UMLXPackage.TX_QUERY_NODE__OWNING_TX_DIAGRAM) return null;
+		if (eContainerFeatureID() != (TxNodeImpl.TX_NODE_FEATURE_COUNT + 9)) return null;
 		return (TxDiagram)eInternalContainer();
 	}
 
@@ -464,7 +478,7 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningTxDiagram(TxDiagram newOwningTxDiagram, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningTxDiagram, UMLXPackage.TX_QUERY_NODE__OWNING_TX_DIAGRAM, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningTxDiagram, TxNodeImpl.TX_NODE_FEATURE_COUNT + 9, msgs);
 		return msgs;
 	}
 
@@ -475,19 +489,19 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 	 */
 	@Override
 	public void setOwningTxDiagram(TxDiagram newOwningTxDiagram) {
-		if (newOwningTxDiagram != eInternalContainer() || (eContainerFeatureID() != UMLXPackage.TX_QUERY_NODE__OWNING_TX_DIAGRAM && newOwningTxDiagram != null)) {
+		if (newOwningTxDiagram != eInternalContainer() || (eContainerFeatureID() != (TxNodeImpl.TX_NODE_FEATURE_COUNT + 9) && newOwningTxDiagram != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningTxDiagram))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningTxDiagram != null)
-				msgs = ((InternalEObject)newOwningTxDiagram).eInverseAdd(this, UMLXPackage.TX_DIAGRAM__OWNED_TX_QUERY_NODES, TxDiagram.class, msgs);
+				msgs = ((InternalEObject)newOwningTxDiagram).eInverseAdd(this, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3, TxDiagram.class, msgs);
 			msgs = basicSetOwningTxDiagram(newOwningTxDiagram, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.TX_QUERY_NODE__OWNING_TX_DIAGRAM, newOwningTxDiagram, newOwningTxDiagram));
+			eNotify(new ENotificationImpl(this, Notification.SET, TxNodeImpl.TX_NODE_FEATURE_COUNT + 9, newOwningTxDiagram, newOwningTxDiagram));
 	}
 
 	/**
@@ -497,33 +511,38 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 	 */
 	@Override
 	public boolean validateNameIsRequired(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
-		/**
-		 *
-		 * inv NameIsRequired:
-		 *   let severity : Integer[1] = 'TxQueryNode::NameIsRequired'.getSeverity()
-		 *   in
-		 *     if severity <= 0
-		 *     then true
-		 *     else
-		 *       let result : Boolean[1] = name <> null
-		 *       in
-		 *         'TxQueryNode::NameIsRequired'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
-		 *     endif
-		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_TxQueryNode_c_c_NameIsRequired);
-		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
-		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
+		try {
+			/**
+			 *
+			 * inv NameIsRequired:
+			 *   let severity : Integer[1] = 'TxQueryNode::NameIsRequired'.getSeverity()
+			 *   in
+			 *     if severity <= 0
+			 *     then true
+			 *     else
+			 *       let result : Boolean[1] = name <> null
+			 *       in
+			 *         'TxQueryNode::NameIsRequired'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *     endif
+			 */
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_TxQueryNode_c_c_NameIsRequired);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_0;
+			if (le) {
+				symbol_0 = ValueUtil.TRUE_VALUE;
+			}
+			else {
+				final /*@NonInvalid*/ @Nullable String name = this.getName();
+				final /*@NonInvalid*/ boolean result = name != null;
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_TxQueryNode_c_c_NameIsRequired, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
+				symbol_0 = logDiagnostic;
+			}
+			return Boolean.TRUE == symbol_0;
 		}
-		else {
-			final /*@NonInvalid*/ java.lang.@Nullable String name = this.getName();
-			final /*@NonInvalid*/ boolean result = name != null;
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_TxQueryNode_c_c_NameIsRequired, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+		catch (Throwable e) {
+			return ValueUtil.validationFailedDiagnostic("TxQueryNode::NameIsRequired", this, diagnostics, context, e);
 		}
-		return Boolean.TRUE == symbol_0;
 	}
 
 	/**
@@ -533,33 +552,38 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 	 */
 	@Override
 	public boolean validateTypeIsRequired(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
-		/**
-		 *
-		 * inv TypeIsRequired:
-		 *   let severity : Integer[1] = 'TxQueryNode::TypeIsRequired'.getSeverity()
-		 *   in
-		 *     if severity <= 0
-		 *     then true
-		 *     else
-		 *       let result : Boolean[1] = referredEClassifier <> null
-		 *       in
-		 *         'TxQueryNode::TypeIsRequired'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
-		 *     endif
-		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_TxQueryNode_c_c_TypeIsRequired);
-		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
-		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
+		try {
+			/**
+			 *
+			 * inv TypeIsRequired:
+			 *   let severity : Integer[1] = 'TxQueryNode::TypeIsRequired'.getSeverity()
+			 *   in
+			 *     if severity <= 0
+			 *     then true
+			 *     else
+			 *       let result : Boolean[1] = referredEClassifier <> null
+			 *       in
+			 *         'TxQueryNode::TypeIsRequired'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *     endif
+			 */
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_TxQueryNode_c_c_TypeIsRequired);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_0;
+			if (le) {
+				symbol_0 = ValueUtil.TRUE_VALUE;
+			}
+			else {
+				final /*@NonInvalid*/ @Nullable EClassifier referredEClassifier = this.getReferredEClassifier();
+				final /*@NonInvalid*/ boolean result = referredEClassifier != null;
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_TxQueryNode_c_c_TypeIsRequired, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
+				symbol_0 = logDiagnostic;
+			}
+			return Boolean.TRUE == symbol_0;
 		}
-		else {
-			final /*@NonInvalid*/ org.eclipse.emf.ecore.@Nullable EClassifier referredEClassifier = this.getReferredEClassifier();
-			final /*@NonInvalid*/ boolean result = referredEClassifier != null;
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_TxQueryNode_c_c_TypeIsRequired, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, UMLXTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+		catch (Throwable e) {
+			return ValueUtil.validationFailedDiagnostic("TxQueryNode::TypeIsRequired", this, diagnostics, context, e);
 		}
-		return Boolean.TRUE == symbol_0;
 	}
 
 	/**
@@ -569,65 +593,70 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 	 */
 	@Override
 	public boolean validateParametersAreUnique(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
-		/**
-		 *
-		 * inv ParametersAreUnique:
-		 *   let severity : Integer[1] = 'TxQueryNode::ParametersAreUnique'.getSeverity()
-		 *   in
-		 *     if severity <= 0
-		 *     then true
-		 *     else
-		 *       let result : Boolean[1] = ownedTxParameterNodes->isUnique(name)
-		 *       in
-		 *         'TxQueryNode::ParametersAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
-		 *     endif
-		 */
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.evaluation.@NonNull Executor executor = PivotUtilInternal.getExecutor(this);
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@NonNull IdResolver idResolver = executor.getIdResolver();
-		final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_TxQueryNode_c_c_ParametersAreUnique);
-		final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
-		/*@NonInvalid*/ boolean symbol_0;
-		if (le) {
-			symbol_0 = ValueUtil.TRUE_VALUE;
-		}
-		else {
-			/*@Caught*/ @NonNull Object CAUGHT_result;
-			try {
-				@SuppressWarnings("null")
-				final /*@NonInvalid*/ java.util.@NonNull List<TxParameterNode> ownedTxParameterNodes = this.getOwnedTxParameterNodes();
-				final /*@NonInvalid*/ org.eclipse.ocl.pivot.values.@NonNull OrderedSetValue BOXED_ownedTxParameterNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxParameterNode, ownedTxParameterNodes);
-				/*@Thrown*/ SetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_TxParameterNode);
-				@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedTxParameterNodes.iterator();
-				/*@Thrown*/ boolean result;
-				while (true) {
-					if (!ITERATOR__1.hasNext()) {
-						result = ValueUtil.TRUE_VALUE;
-						break;
-					}
+		try {
+			/**
+			 *
+			 * inv ParametersAreUnique:
+			 *   let severity : Integer[1] = 'TxQueryNode::ParametersAreUnique'.getSeverity()
+			 *   in
+			 *     if severity <= 0
+			 *     then true
+			 *     else
+			 *       let result : Boolean[1] = ownedTxParameterNodes->isUnique(name)
+			 *       in
+			 *         'TxQueryNode::ParametersAreUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *     endif
+			 */
+			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
+			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
+			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, UMLXTables.STR_TxQueryNode_c_c_ParametersAreUnique);
+			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, UMLXTables.INT_0).booleanValue();
+			/*@NonInvalid*/ boolean symbol_0;
+			if (le) {
+				symbol_0 = ValueUtil.TRUE_VALUE;
+			}
+			else {
+				/*@Caught*/ @NonNull Object CAUGHT_result;
+				try {
 					@SuppressWarnings("null")
-					/*@NonInvalid*/ org.eclipse.qvtd.umlx.@NonNull TxParameterNode _1 = (TxParameterNode)ITERATOR__1.next();
-					/**
-					 * name
-					 */
-					final /*@NonInvalid*/ java.lang.@Nullable String name = _1.getName();
-					//
-					if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
-						result = ValueUtil.FALSE_VALUE;			// Abort after second find
-						break;
+					final /*@NonInvalid*/ @NonNull List<TxParameterNode> ownedTxParameterNodes = this.getOwnedTxParameterNodes();
+					final /*@NonInvalid*/ @NonNull OrderedSetValue BOXED_ownedTxParameterNodes = idResolver.createOrderedSetOfAll(UMLXTables.ORD_CLSSid_TxParameterNode, ownedTxParameterNodes);
+					/*@Thrown*/ @NonNull Accumulator accumulator = ValueUtil.createSetAccumulatorValue(UMLXTables.ORD_CLSSid_TxParameterNode);
+					@NonNull Iterator<Object> ITERATOR__1 = BOXED_ownedTxParameterNodes.iterator();
+					/*@Thrown*/ boolean result;
+					while (true) {
+						if (!ITERATOR__1.hasNext()) {
+							result = ValueUtil.TRUE_VALUE;
+							break;
+						}
+						@SuppressWarnings("null")
+						/*@NonInvalid*/ @NonNull TxParameterNode _1 = (@NonNull TxParameterNode)ITERATOR__1.next();
+						/**
+						 * name
+						 */
+						final /*@NonInvalid*/ @Nullable String name = _1.getName();
+						//
+						if (accumulator.includes(name) == ValueUtil.TRUE_VALUE) {
+							result = ValueUtil.FALSE_VALUE;			// Abort after second find
+							break;
+						}
+						else {
+							accumulator.add(name);
+						}
 					}
-					else {
-						accumulator.add(name);
-					}
+					CAUGHT_result = result;
 				}
-				CAUGHT_result = result;
+				catch (Exception e) {
+					CAUGHT_result = ValueUtil.createInvalidValue(e);
+				}
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_TxQueryNode_c_c_ParametersAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
+				symbol_0 = logDiagnostic;
 			}
-			catch (Exception e) {
-				CAUGHT_result = ValueUtil.createInvalidValue(e);
-			}
-			final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, UMLXTables.STR_TxQueryNode_c_c_ParametersAreUnique, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, UMLXTables.INT_0).booleanValue();
-			symbol_0 = logDiagnostic;
+			return Boolean.TRUE == symbol_0;
 		}
-		return Boolean.TRUE == symbol_0;
+		catch (Throwable e) {
+			return ValueUtil.validationFailedDiagnostic("TxQueryNode::ParametersAreUnique", this, diagnostics, context, e);
+		}
 	}
 
 	/**
@@ -637,7 +666,25 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 	 */
 	@Override
 	public String toString() {
-		return super.toString();
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", isMany: ");
+		result.append(isMany);
+		result.append(", isNullFree: ");
+		result.append(isNullFree);
+		result.append(", isOrdered: ");
+		result.append(isOrdered);
+		result.append(", isRequired: ");
+		result.append(isRequired);
+		result.append(", isUnique: ");
+		result.append(isUnique);
+		result.append(", initExpressionLines: ");
+		result.append(initExpressionLines);
+		result.append(')');
+		return result.toString();
 	}
 
 	/**
@@ -649,9 +696,9 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.TX_QUERY_NODE__OWNED_TX_PARAMETER_NODES:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 8:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTxParameterNodes()).basicAdd(otherEnd, msgs);
-			case UMLXPackage.TX_QUERY_NODE__OWNING_TX_DIAGRAM:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 9:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningTxDiagram((TxDiagram)otherEnd, msgs);
@@ -667,9 +714,9 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.TX_QUERY_NODE__OWNED_TX_PARAMETER_NODES:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 8:
 				return ((InternalEList<?>)getOwnedTxParameterNodes()).basicRemove(otherEnd, msgs);
-			case UMLXPackage.TX_QUERY_NODE__OWNING_TX_DIAGRAM:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 9:
 				return basicSetOwningTxDiagram(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -683,8 +730,8 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case UMLXPackage.TX_QUERY_NODE__OWNING_TX_DIAGRAM:
-				return eInternalContainer().eInverseRemove(this, UMLXPackage.TX_DIAGRAM__OWNED_TX_QUERY_NODES, TxDiagram.class, msgs);
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 9:
+				return eInternalContainer().eInverseRemove(this, UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3, TxDiagram.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -697,26 +744,26 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLXPackage.TX_QUERY_NODE__NAME:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
 				return getName();
-			case UMLXPackage.TX_QUERY_NODE__IS_MANY:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
 				return isIsMany();
-			case UMLXPackage.TX_QUERY_NODE__IS_NULL_FREE:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
 				return isIsNullFree();
-			case UMLXPackage.TX_QUERY_NODE__IS_ORDERED:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 3:
 				return isIsOrdered();
-			case UMLXPackage.TX_QUERY_NODE__IS_REQUIRED:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 4:
 				return isIsRequired();
-			case UMLXPackage.TX_QUERY_NODE__IS_UNIQUE:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 5:
 				return isIsUnique();
-			case UMLXPackage.TX_QUERY_NODE__REFERRED_ECLASSIFIER:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 6:
 				if (resolve) return getReferredEClassifier();
 				return basicGetReferredEClassifier();
-			case UMLXPackage.TX_QUERY_NODE__INIT_EXPRESSION_LINES:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 7:
 				return getInitExpressionLines();
-			case UMLXPackage.TX_QUERY_NODE__OWNED_TX_PARAMETER_NODES:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 8:
 				return getOwnedTxParameterNodes();
-			case UMLXPackage.TX_QUERY_NODE__OWNING_TX_DIAGRAM:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 9:
 				return getOwningTxDiagram();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -731,36 +778,36 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLXPackage.TX_QUERY_NODE__NAME:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
 				setName((String)newValue);
 				return;
-			case UMLXPackage.TX_QUERY_NODE__IS_MANY:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
 				setIsMany((Boolean)newValue);
 				return;
-			case UMLXPackage.TX_QUERY_NODE__IS_NULL_FREE:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
 				setIsNullFree((Boolean)newValue);
 				return;
-			case UMLXPackage.TX_QUERY_NODE__IS_ORDERED:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 3:
 				setIsOrdered((Boolean)newValue);
 				return;
-			case UMLXPackage.TX_QUERY_NODE__IS_REQUIRED:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 4:
 				setIsRequired((Boolean)newValue);
 				return;
-			case UMLXPackage.TX_QUERY_NODE__IS_UNIQUE:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 5:
 				setIsUnique((Boolean)newValue);
 				return;
-			case UMLXPackage.TX_QUERY_NODE__REFERRED_ECLASSIFIER:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 6:
 				setReferredEClassifier((EClassifier)newValue);
 				return;
-			case UMLXPackage.TX_QUERY_NODE__INIT_EXPRESSION_LINES:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 7:
 				getInitExpressionLines().clear();
 				getInitExpressionLines().addAll((Collection<? extends String>)newValue);
 				return;
-			case UMLXPackage.TX_QUERY_NODE__OWNED_TX_PARAMETER_NODES:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 8:
 				getOwnedTxParameterNodes().clear();
 				getOwnedTxParameterNodes().addAll((Collection<? extends TxParameterNode>)newValue);
 				return;
-			case UMLXPackage.TX_QUERY_NODE__OWNING_TX_DIAGRAM:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 9:
 				setOwningTxDiagram((TxDiagram)newValue);
 				return;
 		}
@@ -775,34 +822,34 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.TX_QUERY_NODE__NAME:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
 				setName(NAME_EDEFAULT);
 				return;
-			case UMLXPackage.TX_QUERY_NODE__IS_MANY:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
 				setIsMany(IS_MANY_EDEFAULT);
 				return;
-			case UMLXPackage.TX_QUERY_NODE__IS_NULL_FREE:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
 				setIsNullFree(IS_NULL_FREE_EDEFAULT);
 				return;
-			case UMLXPackage.TX_QUERY_NODE__IS_ORDERED:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 3:
 				setIsOrdered(IS_ORDERED_EDEFAULT);
 				return;
-			case UMLXPackage.TX_QUERY_NODE__IS_REQUIRED:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 4:
 				setIsRequired(IS_REQUIRED_EDEFAULT);
 				return;
-			case UMLXPackage.TX_QUERY_NODE__IS_UNIQUE:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 5:
 				setIsUnique(IS_UNIQUE_EDEFAULT);
 				return;
-			case UMLXPackage.TX_QUERY_NODE__REFERRED_ECLASSIFIER:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 6:
 				setReferredEClassifier((EClassifier)null);
 				return;
-			case UMLXPackage.TX_QUERY_NODE__INIT_EXPRESSION_LINES:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 7:
 				getInitExpressionLines().clear();
 				return;
-			case UMLXPackage.TX_QUERY_NODE__OWNED_TX_PARAMETER_NODES:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 8:
 				getOwnedTxParameterNodes().clear();
 				return;
-			case UMLXPackage.TX_QUERY_NODE__OWNING_TX_DIAGRAM:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 9:
 				setOwningTxDiagram((TxDiagram)null);
 				return;
 		}
@@ -817,25 +864,25 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.TX_QUERY_NODE__NAME:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case UMLXPackage.TX_QUERY_NODE__IS_MANY:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1:
 				return isMany != IS_MANY_EDEFAULT;
-			case UMLXPackage.TX_QUERY_NODE__IS_NULL_FREE:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2:
 				return isNullFree != IS_NULL_FREE_EDEFAULT;
-			case UMLXPackage.TX_QUERY_NODE__IS_ORDERED:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 3:
 				return isOrdered != IS_ORDERED_EDEFAULT;
-			case UMLXPackage.TX_QUERY_NODE__IS_REQUIRED:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 4:
 				return isRequired != IS_REQUIRED_EDEFAULT;
-			case UMLXPackage.TX_QUERY_NODE__IS_UNIQUE:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 5:
 				return isUnique != IS_UNIQUE_EDEFAULT;
-			case UMLXPackage.TX_QUERY_NODE__REFERRED_ECLASSIFIER:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 6:
 				return referredEClassifier != null;
-			case UMLXPackage.TX_QUERY_NODE__INIT_EXPRESSION_LINES:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 7:
 				return initExpressionLines != null && !initExpressionLines.isEmpty();
-			case UMLXPackage.TX_QUERY_NODE__OWNED_TX_PARAMETER_NODES:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 8:
 				return ownedTxParameterNodes != null && !ownedTxParameterNodes.isEmpty();
-			case UMLXPackage.TX_QUERY_NODE__OWNING_TX_DIAGRAM:
+			case TxNodeImpl.TX_NODE_FEATURE_COUNT + 9:
 				return getOwningTxDiagram() != null;
 		}
 		return super.eIsSet(featureID);
@@ -850,18 +897,18 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == UMLXNamedElement.class) {
 			switch (derivedFeatureID) {
-				case UMLXPackage.TX_QUERY_NODE__NAME: return UMLXPackage.UMLX_NAMED_ELEMENT__NAME;
+				case TxNodeImpl.TX_NODE_FEATURE_COUNT + 0: return UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
 		if (baseClass == UMLXTypedElement.class) {
 			switch (derivedFeatureID) {
-				case UMLXPackage.TX_QUERY_NODE__IS_MANY: return UMLXPackage.UMLX_TYPED_ELEMENT__IS_MANY;
-				case UMLXPackage.TX_QUERY_NODE__IS_NULL_FREE: return UMLXPackage.UMLX_TYPED_ELEMENT__IS_NULL_FREE;
-				case UMLXPackage.TX_QUERY_NODE__IS_ORDERED: return UMLXPackage.UMLX_TYPED_ELEMENT__IS_ORDERED;
-				case UMLXPackage.TX_QUERY_NODE__IS_REQUIRED: return UMLXPackage.UMLX_TYPED_ELEMENT__IS_REQUIRED;
-				case UMLXPackage.TX_QUERY_NODE__IS_UNIQUE: return UMLXPackage.UMLX_TYPED_ELEMENT__IS_UNIQUE;
-				case UMLXPackage.TX_QUERY_NODE__REFERRED_ECLASSIFIER: return UMLXPackage.UMLX_TYPED_ELEMENT__REFERRED_ECLASSIFIER;
+				case TxNodeImpl.TX_NODE_FEATURE_COUNT + 1: return UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0;
+				case TxNodeImpl.TX_NODE_FEATURE_COUNT + 2: return UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1;
+				case TxNodeImpl.TX_NODE_FEATURE_COUNT + 3: return UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2;
+				case TxNodeImpl.TX_NODE_FEATURE_COUNT + 4: return UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3;
+				case TxNodeImpl.TX_NODE_FEATURE_COUNT + 5: return UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4;
+				case TxNodeImpl.TX_NODE_FEATURE_COUNT + 6: return UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5;
 				default: return -1;
 			}
 		}
@@ -877,18 +924,18 @@ public class TxQueryNodeImpl extends TxNodeImpl implements TxQueryNode {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == UMLXNamedElement.class) {
 			switch (baseFeatureID) {
-				case UMLXPackage.UMLX_NAMED_ELEMENT__NAME: return UMLXPackage.TX_QUERY_NODE__NAME;
+				case UMLXElementImpl.UMLX_ELEMENT_FEATURE_COUNT + 0: return TxNodeImpl.TX_NODE_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
 		if (baseClass == UMLXTypedElement.class) {
 			switch (baseFeatureID) {
-				case UMLXPackage.UMLX_TYPED_ELEMENT__IS_MANY: return UMLXPackage.TX_QUERY_NODE__IS_MANY;
-				case UMLXPackage.UMLX_TYPED_ELEMENT__IS_NULL_FREE: return UMLXPackage.TX_QUERY_NODE__IS_NULL_FREE;
-				case UMLXPackage.UMLX_TYPED_ELEMENT__IS_ORDERED: return UMLXPackage.TX_QUERY_NODE__IS_ORDERED;
-				case UMLXPackage.UMLX_TYPED_ELEMENT__IS_REQUIRED: return UMLXPackage.TX_QUERY_NODE__IS_REQUIRED;
-				case UMLXPackage.UMLX_TYPED_ELEMENT__IS_UNIQUE: return UMLXPackage.TX_QUERY_NODE__IS_UNIQUE;
-				case UMLXPackage.UMLX_TYPED_ELEMENT__REFERRED_ECLASSIFIER: return UMLXPackage.TX_QUERY_NODE__REFERRED_ECLASSIFIER;
+				case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 0: return TxNodeImpl.TX_NODE_FEATURE_COUNT + 1;
+				case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 1: return TxNodeImpl.TX_NODE_FEATURE_COUNT + 2;
+				case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 2: return TxNodeImpl.TX_NODE_FEATURE_COUNT + 3;
+				case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 3: return TxNodeImpl.TX_NODE_FEATURE_COUNT + 4;
+				case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 4: return TxNodeImpl.TX_NODE_FEATURE_COUNT + 5;
+				case UMLXNamedElementImpl.UMLX_NAMED_ELEMENT_FEATURE_COUNT + 5: return TxNodeImpl.TX_NODE_FEATURE_COUNT + 6;
 				default: return -1;
 			}
 		}

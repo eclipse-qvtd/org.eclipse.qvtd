@@ -40,6 +40,15 @@ import org.eclipse.qvtd.umlx.util.UMLXVisitor;
  */
 public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationEdge {
 	/**
+	 * The number of structural features of the '<em>Rel Invocation Edge</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int REL_INVOCATION_EDGE_FEATURE_COUNT = RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 3;
+
+	/**
 	 * The cached value of the '{@link #getInvokingRelPatternNode() <em>Invoking Rel Pattern Node</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,7 +99,7 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 			referredRelPatternNode = (RelPatternNode)eResolveProxy(oldReferredRelPatternNode);
 			if (referredRelPatternNode != oldReferredRelPatternNode) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE, oldReferredRelPatternNode, referredRelPatternNode));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2, oldReferredRelPatternNode, referredRelPatternNode));
 			}
 		}
 		return referredRelPatternNode;
@@ -115,7 +124,7 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 		RelPatternNode oldReferredRelPatternNode = referredRelPatternNode;
 		referredRelPatternNode = newReferredRelPatternNode;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE, oldReferredRelPatternNode, referredRelPatternNode));
+			eNotify(new ENotificationImpl(this, Notification.SET, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2, oldReferredRelPatternNode, referredRelPatternNode));
 	}
 
 	/**
@@ -125,7 +134,7 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	 */
 	@Override
 	public RelInvocationNode getOwningRelInvocationNode() {
-		if (eContainerFeatureID() != UMLXPackage.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE) return null;
+		if (eContainerFeatureID() != (RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1)) return null;
 		return (RelInvocationNode)eInternalContainer();
 	}
 
@@ -135,7 +144,7 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningRelInvocationNode(RelInvocationNode newOwningRelInvocationNode, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningRelInvocationNode, UMLXPackage.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningRelInvocationNode, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1, msgs);
 		return msgs;
 	}
 
@@ -146,19 +155,19 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	 */
 	@Override
 	public void setOwningRelInvocationNode(RelInvocationNode newOwningRelInvocationNode) {
-		if (newOwningRelInvocationNode != eInternalContainer() || (eContainerFeatureID() != UMLXPackage.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE && newOwningRelInvocationNode != null)) {
+		if (newOwningRelInvocationNode != eInternalContainer() || (eContainerFeatureID() != (RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1) && newOwningRelInvocationNode != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningRelInvocationNode))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningRelInvocationNode != null)
-				msgs = ((InternalEObject)newOwningRelInvocationNode).eInverseAdd(this, UMLXPackage.REL_INVOCATION_NODE__OWNED_REL_INVOCATION_EDGES, RelInvocationNode.class, msgs);
+				msgs = ((InternalEObject)newOwningRelInvocationNode).eInverseAdd(this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 2, RelInvocationNode.class, msgs);
 			msgs = basicSetOwningRelInvocationNode(newOwningRelInvocationNode, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE, newOwningRelInvocationNode, newOwningRelInvocationNode));
+			eNotify(new ENotificationImpl(this, Notification.SET, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1, newOwningRelInvocationNode, newOwningRelInvocationNode));
 	}
 
 	/**
@@ -173,7 +182,7 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 			invokingRelPatternNode = (RelPatternNode)eResolveProxy(oldInvokingRelPatternNode);
 			if (invokingRelPatternNode != oldInvokingRelPatternNode) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE, oldInvokingRelPatternNode, invokingRelPatternNode));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0, oldInvokingRelPatternNode, invokingRelPatternNode));
 			}
 		}
 		return invokingRelPatternNode;
@@ -197,7 +206,7 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 		RelPatternNode oldInvokingRelPatternNode = invokingRelPatternNode;
 		invokingRelPatternNode = newInvokingRelPatternNode;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE, oldInvokingRelPatternNode, newInvokingRelPatternNode);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0, oldInvokingRelPatternNode, newInvokingRelPatternNode);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -213,14 +222,14 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 		if (newInvokingRelPatternNode != invokingRelPatternNode) {
 			NotificationChain msgs = null;
 			if (invokingRelPatternNode != null)
-				msgs = ((InternalEObject)invokingRelPatternNode).eInverseRemove(this, UMLXPackage.REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES, RelPatternNode.class, msgs);
+				msgs = ((InternalEObject)invokingRelPatternNode).eInverseRemove(this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 9, RelPatternNode.class, msgs);
 			if (newInvokingRelPatternNode != null)
-				msgs = ((InternalEObject)newInvokingRelPatternNode).eInverseAdd(this, UMLXPackage.REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES, RelPatternNode.class, msgs);
+				msgs = ((InternalEObject)newInvokingRelPatternNode).eInverseAdd(this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 9, RelPatternNode.class, msgs);
 			msgs = basicSetInvokingRelPatternNode(newInvokingRelPatternNode, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE, newInvokingRelPatternNode, newInvokingRelPatternNode));
+			eNotify(new ENotificationImpl(this, Notification.SET, RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0, newInvokingRelPatternNode, newInvokingRelPatternNode));
 	}
 
 	/**
@@ -231,11 +240,11 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE:
+			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0:
 				if (invokingRelPatternNode != null)
-					msgs = ((InternalEObject)invokingRelPatternNode).eInverseRemove(this, UMLXPackage.REL_PATTERN_NODE__INVOKING_REL_INVOCATION_EDGES, RelPatternNode.class, msgs);
+					msgs = ((InternalEObject)invokingRelPatternNode).eInverseRemove(this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 9, RelPatternNode.class, msgs);
 				return basicSetInvokingRelPatternNode((RelPatternNode)otherEnd, msgs);
-			case UMLXPackage.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE:
+			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningRelInvocationNode((RelInvocationNode)otherEnd, msgs);
@@ -251,9 +260,9 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE:
+			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0:
 				return basicSetInvokingRelPatternNode(null, msgs);
-			case UMLXPackage.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE:
+			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1:
 				return basicSetOwningRelInvocationNode(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -267,8 +276,8 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case UMLXPackage.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE:
-				return eInternalContainer().eInverseRemove(this, UMLXPackage.REL_INVOCATION_NODE__OWNED_REL_INVOCATION_EDGES, RelInvocationNode.class, msgs);
+			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1:
+				return eInternalContainer().eInverseRemove(this, RelNodeImpl.REL_NODE_FEATURE_COUNT + 2, RelInvocationNode.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -281,12 +290,12 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE:
+			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0:
 				if (resolve) return getInvokingRelPatternNode();
 				return basicGetInvokingRelPatternNode();
-			case UMLXPackage.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE:
+			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1:
 				return getOwningRelInvocationNode();
-			case UMLXPackage.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE:
+			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2:
 				if (resolve) return getReferredRelPatternNode();
 				return basicGetReferredRelPatternNode();
 		}
@@ -301,13 +310,13 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE:
+			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0:
 				setInvokingRelPatternNode((RelPatternNode)newValue);
 				return;
-			case UMLXPackage.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE:
+			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1:
 				setOwningRelInvocationNode((RelInvocationNode)newValue);
 				return;
-			case UMLXPackage.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE:
+			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2:
 				setReferredRelPatternNode((RelPatternNode)newValue);
 				return;
 		}
@@ -322,13 +331,13 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE:
+			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0:
 				setInvokingRelPatternNode((RelPatternNode)null);
 				return;
-			case UMLXPackage.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE:
+			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1:
 				setOwningRelInvocationNode((RelInvocationNode)null);
 				return;
-			case UMLXPackage.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE:
+			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2:
 				setReferredRelPatternNode((RelPatternNode)null);
 				return;
 		}
@@ -343,11 +352,11 @@ public class RelInvocationEdgeImpl extends RelEdgeImpl implements RelInvocationE
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case UMLXPackage.REL_INVOCATION_EDGE__INVOKING_REL_PATTERN_NODE:
+			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 0:
 				return invokingRelPatternNode != null;
-			case UMLXPackage.REL_INVOCATION_EDGE__OWNING_REL_INVOCATION_NODE:
+			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 1:
 				return getOwningRelInvocationNode() != null;
-			case UMLXPackage.REL_INVOCATION_EDGE__REFERRED_REL_PATTERN_NODE:
+			case RelEdgeImpl.REL_EDGE_FEATURE_COUNT + 2:
 				return referredRelPatternNode != null;
 		}
 		return super.eIsSet(featureID);
