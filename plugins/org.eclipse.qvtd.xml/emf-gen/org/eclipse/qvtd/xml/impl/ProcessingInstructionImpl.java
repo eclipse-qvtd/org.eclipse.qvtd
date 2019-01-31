@@ -39,6 +39,24 @@ import org.eclipse.qvtd.xml.XMLmodelPackage;
  */
 public class ProcessingInstructionImpl extends NodeImpl implements ProcessingInstruction {
 	/**
+	 * The number of structural features of the '<em>Processing Instruction</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PROCESSING_INSTRUCTION_FEATURE_COUNT = NodeImpl.NODE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Processing Instruction</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PROCESSING_INSTRUCTION_OPERATION_COUNT = NodeImpl.NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getTarget() <em>Target</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -102,6 +120,7 @@ public class ProcessingInstructionImpl extends NodeImpl implements ProcessingIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getTarget() {
 		return target;
 	}
@@ -111,11 +130,12 @@ public class ProcessingInstructionImpl extends NodeImpl implements ProcessingIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTarget(String newTarget) {
 		String oldTarget = target;
 		target = newTarget;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XMLmodelPackage.PROCESSING_INSTRUCTION__TARGET, oldTarget, target));
+			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 0, oldTarget, target));
 	}
 
 	/**
@@ -123,6 +143,7 @@ public class ProcessingInstructionImpl extends NodeImpl implements ProcessingIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getData() {
 		return data;
 	}
@@ -132,11 +153,12 @@ public class ProcessingInstructionImpl extends NodeImpl implements ProcessingIns
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setData(String newData) {
 		String oldData = data;
 		data = newData;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XMLmodelPackage.PROCESSING_INSTRUCTION__DATA, oldData, data));
+			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 1, oldData, data));
 	}
 
 	/**
@@ -147,9 +169,9 @@ public class ProcessingInstructionImpl extends NodeImpl implements ProcessingIns
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case XMLmodelPackage.PROCESSING_INSTRUCTION__TARGET:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				return getTarget();
-			case XMLmodelPackage.PROCESSING_INSTRUCTION__DATA:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				return getData();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -163,10 +185,10 @@ public class ProcessingInstructionImpl extends NodeImpl implements ProcessingIns
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case XMLmodelPackage.PROCESSING_INSTRUCTION__TARGET:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				setTarget((String)newValue);
 				return;
-			case XMLmodelPackage.PROCESSING_INSTRUCTION__DATA:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				setData((String)newValue);
 				return;
 		}
@@ -181,10 +203,10 @@ public class ProcessingInstructionImpl extends NodeImpl implements ProcessingIns
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.PROCESSING_INSTRUCTION__TARGET:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				setTarget(TARGET_EDEFAULT);
 				return;
-			case XMLmodelPackage.PROCESSING_INSTRUCTION__DATA:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				setData(DATA_EDEFAULT);
 				return;
 		}
@@ -199,9 +221,9 @@ public class ProcessingInstructionImpl extends NodeImpl implements ProcessingIns
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.PROCESSING_INSTRUCTION__TARGET:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				return TARGET_EDEFAULT == null ? target != null : !TARGET_EDEFAULT.equals(target);
-			case XMLmodelPackage.PROCESSING_INSTRUCTION__DATA:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				return DATA_EDEFAULT == null ? data != null : !DATA_EDEFAULT.equals(data);
 		}
 		return super.eIsSet(featureID);

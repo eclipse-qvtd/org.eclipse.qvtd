@@ -37,6 +37,22 @@ import org.eclipse.qvtd.xml.XMLmodelPackage;
  */
 public class DataTypeAttributeImpl extends AttributeImpl implements DataTypeAttribute {
 	/**
+	 * The number of structural features of the '<em>Data Type Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DATA_TYPE_ATTRIBUTE_FEATURE_COUNT = AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Data Type Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DATA_TYPE_ATTRIBUTE_OPERATION_COUNT = AttributeImpl.ATTRIBUTE_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getEcoreAttribute() <em>Ecore Attribute</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -85,7 +101,7 @@ public class DataTypeAttributeImpl extends AttributeImpl implements DataTypeAttr
 		EAttribute oldEcoreAttribute = ecoreAttribute;
 		ecoreAttribute = newEcoreAttribute;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XMLmodelPackage.DATA_TYPE_ATTRIBUTE__ECORE_ATTRIBUTE, oldEcoreAttribute, ecoreAttribute));
+			eNotify(new ENotificationImpl(this, Notification.SET, AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0, oldEcoreAttribute, ecoreAttribute));
 	}
 
 	/**
@@ -96,7 +112,7 @@ public class DataTypeAttributeImpl extends AttributeImpl implements DataTypeAttr
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case XMLmodelPackage.DATA_TYPE_ATTRIBUTE__ECORE_ATTRIBUTE:
+			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0:
 				return getEcoreAttribute();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -110,7 +126,7 @@ public class DataTypeAttributeImpl extends AttributeImpl implements DataTypeAttr
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case XMLmodelPackage.DATA_TYPE_ATTRIBUTE__ECORE_ATTRIBUTE:
+			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0:
 				setEcoreAttribute((EAttribute)newValue);
 				return;
 		}
@@ -125,7 +141,7 @@ public class DataTypeAttributeImpl extends AttributeImpl implements DataTypeAttr
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.DATA_TYPE_ATTRIBUTE__ECORE_ATTRIBUTE:
+			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0:
 				setEcoreAttribute((EAttribute)null);
 				return;
 		}
@@ -140,7 +156,7 @@ public class DataTypeAttributeImpl extends AttributeImpl implements DataTypeAttr
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.DATA_TYPE_ATTRIBUTE__ECORE_ATTRIBUTE:
+			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0:
 				return ecoreAttribute != null;
 		}
 		return super.eIsSet(featureID);

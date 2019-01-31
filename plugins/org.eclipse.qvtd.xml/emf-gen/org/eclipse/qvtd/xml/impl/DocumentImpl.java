@@ -27,6 +27,23 @@ import org.eclipse.qvtd.xml.XMLmodelPackage;
  */
 public class DocumentImpl extends NodeImpl implements Document {
 	/**
+	 * The number of structural features of the '<em>Document</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DOCUMENT_FEATURE_COUNT = NodeImpl.NODE_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>Document</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DOCUMENT_OPERATION_COUNT = NodeImpl.NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

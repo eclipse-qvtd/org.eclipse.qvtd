@@ -42,6 +42,24 @@ import org.eclipse.qvtd.xml.XMLmodelPackage;
  */
 public class ClassAttributeImpl extends AttributeImpl implements ClassAttribute {
 	/**
+	 * The number of structural features of the '<em>Class Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_ATTRIBUTE_FEATURE_COUNT = AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Class Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_ATTRIBUTE_OPERATION_COUNT = AttributeImpl.ATTRIBUTE_OPERATION_COUNT + 0;
+
+	/**
 	 * The cached value of the '{@link #getEcoreReference() <em>Ecore Reference</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -100,7 +118,7 @@ public class ClassAttributeImpl extends AttributeImpl implements ClassAttribute 
 		EReference oldEcoreReference = ecoreReference;
 		ecoreReference = newEcoreReference;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XMLmodelPackage.CLASS_ATTRIBUTE__ECORE_REFERENCE, oldEcoreReference, ecoreReference));
+			eNotify(new ENotificationImpl(this, Notification.SET, AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0, oldEcoreReference, ecoreReference));
 	}
 
 	/**
@@ -108,9 +126,10 @@ public class ClassAttributeImpl extends AttributeImpl implements ClassAttribute 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<EObject> getEObjects() {
 		if (eObjects == null) {
-			eObjects = new EObjectEList<EObject>(EObject.class, this, XMLmodelPackage.CLASS_ATTRIBUTE__EOBJECTS);
+			eObjects = new EObjectEList<EObject>(EObject.class, this, AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 1);
 		}
 		return eObjects;
 	}
@@ -123,9 +142,9 @@ public class ClassAttributeImpl extends AttributeImpl implements ClassAttribute 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case XMLmodelPackage.CLASS_ATTRIBUTE__ECORE_REFERENCE:
+			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0:
 				return getEcoreReference();
-			case XMLmodelPackage.CLASS_ATTRIBUTE__EOBJECTS:
+			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 1:
 				return getEObjects();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -140,10 +159,10 @@ public class ClassAttributeImpl extends AttributeImpl implements ClassAttribute 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case XMLmodelPackage.CLASS_ATTRIBUTE__ECORE_REFERENCE:
+			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0:
 				setEcoreReference((EReference)newValue);
 				return;
-			case XMLmodelPackage.CLASS_ATTRIBUTE__EOBJECTS:
+			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 1:
 				getEObjects().clear();
 				getEObjects().addAll((Collection<? extends EObject>)newValue);
 				return;
@@ -159,10 +178,10 @@ public class ClassAttributeImpl extends AttributeImpl implements ClassAttribute 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.CLASS_ATTRIBUTE__ECORE_REFERENCE:
+			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0:
 				setEcoreReference((EReference)null);
 				return;
-			case XMLmodelPackage.CLASS_ATTRIBUTE__EOBJECTS:
+			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 1:
 				getEObjects().clear();
 				return;
 		}
@@ -177,9 +196,9 @@ public class ClassAttributeImpl extends AttributeImpl implements ClassAttribute 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.CLASS_ATTRIBUTE__ECORE_REFERENCE:
+			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0:
 				return ecoreReference != null;
-			case XMLmodelPackage.CLASS_ATTRIBUTE__EOBJECTS:
+			case AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 1:
 				return eObjects != null && !eObjects.isEmpty();
 		}
 		return super.eIsSet(featureID);

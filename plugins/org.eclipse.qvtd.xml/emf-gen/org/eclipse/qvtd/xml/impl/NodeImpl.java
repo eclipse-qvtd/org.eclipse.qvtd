@@ -46,6 +46,22 @@ import org.eclipse.qvtd.xml.XMLmodelPackage;
  */
 public abstract class NodeImpl extends MinimalEObjectImpl.Container implements Node {
 	/**
+	 * The number of structural features of the '<em>Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NODE_FEATURE_COUNT = 1;
+	/**
+	 * The number of operations of the '<em>Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int NODE_OPERATION_COUNT = 0;
+	/**
 	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -79,9 +95,10 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Node> getChildren() {
 		if (children == null) {
-			children = new EObjectContainmentEList<Node>(Node.class, this, XMLmodelPackage.NODE__CHILDREN);
+			children = new EObjectContainmentEList<Node>(Node.class, this, 0);
 		}
 		return children;
 	}
@@ -94,7 +111,7 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case XMLmodelPackage.NODE__CHILDREN:
+			case 0:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -108,7 +125,7 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case XMLmodelPackage.NODE__CHILDREN:
+			case 0:
 				return getChildren();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -123,7 +140,7 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case XMLmodelPackage.NODE__CHILDREN:
+			case 0:
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends Node>)newValue);
 				return;
@@ -139,7 +156,7 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.NODE__CHILDREN:
+			case 0:
 				getChildren().clear();
 				return;
 		}
@@ -154,7 +171,7 @@ public abstract class NodeImpl extends MinimalEObjectImpl.Container implements N
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.NODE__CHILDREN:
+			case 0:
 				return children != null && !children.isEmpty();
 		}
 		return super.eIsSet(featureID);

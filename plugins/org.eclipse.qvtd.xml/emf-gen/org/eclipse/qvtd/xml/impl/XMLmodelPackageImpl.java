@@ -215,6 +215,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAttribute() {
 		return attributeEClass;
 	}
@@ -224,6 +225,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttribute_Name() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(0);
 	}
@@ -233,6 +235,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAttribute_Value() {
 		return (EAttribute)attributeEClass.getEStructuralFeatures().get(1);
 	}
@@ -242,6 +245,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAttribute_EcoreFeature() {
 		return (EReference)attributeEClass.getEStructuralFeatures().get(2);
 	}
@@ -251,6 +255,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCDATA() {
 		return cdataEClass;
 	}
@@ -260,6 +265,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCharacters() {
 		return charactersEClass;
 	}
@@ -269,6 +275,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCharacters_Data() {
 		return (EAttribute)charactersEClass.getEStructuralFeatures().get(0);
 	}
@@ -278,6 +285,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getClassAttribute() {
 		return classAttributeEClass;
 	}
@@ -287,6 +295,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClassAttribute_EcoreReference() {
 		return (EReference)classAttributeEClass.getEStructuralFeatures().get(0);
 	}
@@ -296,6 +305,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClassAttribute_EObjects() {
 		return (EReference)classAttributeEClass.getEStructuralFeatures().get(1);
 	}
@@ -305,6 +315,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getClassElement() {
 		return classElementEClass;
 	}
@@ -314,6 +325,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getClassElement_EcoreClass() {
 		return (EReference)classElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -323,6 +335,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getComment() {
 		return commentEClass;
 	}
@@ -332,6 +345,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getComment_Data() {
 		return (EAttribute)commentEClass.getEStructuralFeatures().get(0);
 	}
@@ -341,6 +355,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDTD() {
 		return dtdEClass;
 	}
@@ -350,6 +365,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDTD_Name() {
 		return (EAttribute)dtdEClass.getEStructuralFeatures().get(0);
 	}
@@ -359,6 +375,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDTD_PublicId() {
 		return (EAttribute)dtdEClass.getEStructuralFeatures().get(1);
 	}
@@ -368,6 +385,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDTD_SystemId() {
 		return (EAttribute)dtdEClass.getEStructuralFeatures().get(2);
 	}
@@ -377,6 +395,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDataTypeAttribute() {
 		return dataTypeAttributeEClass;
 	}
@@ -386,6 +405,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDataTypeAttribute_EcoreAttribute() {
 		return (EReference)dataTypeAttributeEClass.getEStructuralFeatures().get(0);
 	}
@@ -395,6 +415,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDataTypeElement() {
 		return dataTypeElementEClass;
 	}
@@ -404,6 +425,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDataTypeElement_EcoreDataType() {
 		return (EReference)dataTypeElementEClass.getEStructuralFeatures().get(0);
 	}
@@ -413,6 +435,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDocument() {
 		return documentEClass;
 	}
@@ -422,6 +445,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getElement() {
 		return elementEClass;
 	}
@@ -431,6 +455,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getElement_LocalName() {
 		return (EAttribute)elementEClass.getEStructuralFeatures().get(0);
 	}
@@ -440,6 +465,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getElement_QName() {
 		return (EAttribute)elementEClass.getEStructuralFeatures().get(1);
 	}
@@ -449,6 +475,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getElement_Uri() {
 		return (EAttribute)elementEClass.getEStructuralFeatures().get(2);
 	}
@@ -458,6 +485,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getElement_EcoreClassifier() {
 		return (EReference)elementEClass.getEStructuralFeatures().get(3);
 	}
@@ -467,6 +495,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEntity() {
 		return entityEClass;
 	}
@@ -476,6 +505,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getEntity_Name() {
 		return (EAttribute)entityEClass.getEStructuralFeatures().get(0);
 	}
@@ -485,6 +515,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getNode() {
 		return nodeEClass;
 	}
@@ -494,6 +525,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getNode_Children() {
 		return (EReference)nodeEClass.getEStructuralFeatures().get(0);
 	}
@@ -503,6 +535,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPrefixMapping() {
 		return prefixMappingEClass;
 	}
@@ -512,6 +545,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPrefixMapping_Prefix() {
 		return (EAttribute)prefixMappingEClass.getEStructuralFeatures().get(0);
 	}
@@ -521,6 +555,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPrefixMapping_Uri() {
 		return (EAttribute)prefixMappingEClass.getEStructuralFeatures().get(1);
 	}
@@ -530,6 +565,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getProcessingInstruction() {
 		return processingInstructionEClass;
 	}
@@ -539,6 +575,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getProcessingInstruction_Target() {
 		return (EAttribute)processingInstructionEClass.getEStructuralFeatures().get(0);
 	}
@@ -548,6 +585,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getProcessingInstruction_Data() {
 		return (EAttribute)processingInstructionEClass.getEStructuralFeatures().get(1);
 	}
@@ -557,6 +595,7 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XMLmodelFactory getXMLmodelFactory() {
 		return (XMLmodelFactory)getEFactoryInstance();
 	}
@@ -580,58 +619,58 @@ public class XMLmodelPackageImpl extends EPackageImpl implements XMLmodelPackage
 		isCreated = true;
 
 		// Create classes and their features
-		attributeEClass = createEClass(ATTRIBUTE);
-		createEAttribute(attributeEClass, ATTRIBUTE__NAME);
-		createEAttribute(attributeEClass, ATTRIBUTE__VALUE);
-		createEReference(attributeEClass, ATTRIBUTE__ECORE_FEATURE);
+		attributeEClass = createEClass(0);
+		createEAttribute(attributeEClass, NodeImpl.NODE_FEATURE_COUNT + 0);
+		createEAttribute(attributeEClass, NodeImpl.NODE_FEATURE_COUNT + 1);
+		createEReference(attributeEClass, NodeImpl.NODE_FEATURE_COUNT + 2);
 
-		cdataEClass = createEClass(CDATA);
+		cdataEClass = createEClass(1);
 
-		charactersEClass = createEClass(CHARACTERS);
-		createEAttribute(charactersEClass, CHARACTERS__DATA);
+		charactersEClass = createEClass(2);
+		createEAttribute(charactersEClass, NodeImpl.NODE_FEATURE_COUNT + 0);
 
-		classAttributeEClass = createEClass(CLASS_ATTRIBUTE);
-		createEReference(classAttributeEClass, CLASS_ATTRIBUTE__ECORE_REFERENCE);
-		createEReference(classAttributeEClass, CLASS_ATTRIBUTE__EOBJECTS);
+		classAttributeEClass = createEClass(3);
+		createEReference(classAttributeEClass, AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0);
+		createEReference(classAttributeEClass, AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 1);
 
-		classElementEClass = createEClass(CLASS_ELEMENT);
-		createEReference(classElementEClass, CLASS_ELEMENT__ECORE_CLASS);
+		classElementEClass = createEClass(4);
+		createEReference(classElementEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
 
-		commentEClass = createEClass(COMMENT);
-		createEAttribute(commentEClass, COMMENT__DATA);
+		commentEClass = createEClass(5);
+		createEAttribute(commentEClass, NodeImpl.NODE_FEATURE_COUNT + 0);
 
-		dtdEClass = createEClass(DTD);
-		createEAttribute(dtdEClass, DTD__NAME);
-		createEAttribute(dtdEClass, DTD__PUBLIC_ID);
-		createEAttribute(dtdEClass, DTD__SYSTEM_ID);
+		dtdEClass = createEClass(6);
+		createEAttribute(dtdEClass, NodeImpl.NODE_FEATURE_COUNT + 0);
+		createEAttribute(dtdEClass, NodeImpl.NODE_FEATURE_COUNT + 1);
+		createEAttribute(dtdEClass, NodeImpl.NODE_FEATURE_COUNT + 2);
 
-		dataTypeAttributeEClass = createEClass(DATA_TYPE_ATTRIBUTE);
-		createEReference(dataTypeAttributeEClass, DATA_TYPE_ATTRIBUTE__ECORE_ATTRIBUTE);
+		dataTypeAttributeEClass = createEClass(7);
+		createEReference(dataTypeAttributeEClass, AttributeImpl.ATTRIBUTE_FEATURE_COUNT + 0);
 
-		dataTypeElementEClass = createEClass(DATA_TYPE_ELEMENT);
-		createEReference(dataTypeElementEClass, DATA_TYPE_ELEMENT__ECORE_DATA_TYPE);
+		dataTypeElementEClass = createEClass(8);
+		createEReference(dataTypeElementEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
 
-		documentEClass = createEClass(DOCUMENT);
+		documentEClass = createEClass(9);
 
-		elementEClass = createEClass(ELEMENT);
-		createEAttribute(elementEClass, ELEMENT__LOCAL_NAME);
-		createEAttribute(elementEClass, ELEMENT__QNAME);
-		createEAttribute(elementEClass, ELEMENT__URI);
-		createEReference(elementEClass, ELEMENT__ECORE_CLASSIFIER);
+		elementEClass = createEClass(10);
+		createEAttribute(elementEClass, NodeImpl.NODE_FEATURE_COUNT + 0);
+		createEAttribute(elementEClass, NodeImpl.NODE_FEATURE_COUNT + 1);
+		createEAttribute(elementEClass, NodeImpl.NODE_FEATURE_COUNT + 2);
+		createEReference(elementEClass, NodeImpl.NODE_FEATURE_COUNT + 3);
 
-		entityEClass = createEClass(ENTITY);
-		createEAttribute(entityEClass, ENTITY__NAME);
+		entityEClass = createEClass(11);
+		createEAttribute(entityEClass, NodeImpl.NODE_FEATURE_COUNT + 0);
 
-		nodeEClass = createEClass(NODE);
-		createEReference(nodeEClass, NODE__CHILDREN);
+		nodeEClass = createEClass(12);
+		createEReference(nodeEClass, 0);
 
-		prefixMappingEClass = createEClass(PREFIX_MAPPING);
-		createEAttribute(prefixMappingEClass, PREFIX_MAPPING__PREFIX);
-		createEAttribute(prefixMappingEClass, PREFIX_MAPPING__URI);
+		prefixMappingEClass = createEClass(13);
+		createEAttribute(prefixMappingEClass, NodeImpl.NODE_FEATURE_COUNT + 0);
+		createEAttribute(prefixMappingEClass, NodeImpl.NODE_FEATURE_COUNT + 1);
 
-		processingInstructionEClass = createEClass(PROCESSING_INSTRUCTION);
-		createEAttribute(processingInstructionEClass, PROCESSING_INSTRUCTION__TARGET);
-		createEAttribute(processingInstructionEClass, PROCESSING_INSTRUCTION__DATA);
+		processingInstructionEClass = createEClass(14);
+		createEAttribute(processingInstructionEClass, NodeImpl.NODE_FEATURE_COUNT + 0);
+		createEAttribute(processingInstructionEClass, NodeImpl.NODE_FEATURE_COUNT + 1);
 	}
 
 	/**

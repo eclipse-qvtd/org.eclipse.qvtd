@@ -37,6 +37,22 @@ import org.eclipse.qvtd.xml.XMLmodelPackage;
  */
 public class DataTypeElementImpl extends ElementImpl implements DataTypeElement {
 	/**
+	 * The number of structural features of the '<em>Data Type Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DATA_TYPE_ELEMENT_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Data Type Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DATA_TYPE_ELEMENT_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getEcoreDataType() <em>Ecore Data Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -85,7 +101,7 @@ public class DataTypeElementImpl extends ElementImpl implements DataTypeElement 
 		EDataType oldEcoreDataType = ecoreDataType;
 		ecoreDataType = newEcoreDataType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XMLmodelPackage.DATA_TYPE_ELEMENT__ECORE_DATA_TYPE, oldEcoreDataType, ecoreDataType));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 0, oldEcoreDataType, ecoreDataType));
 	}
 
 	/**
@@ -96,7 +112,7 @@ public class DataTypeElementImpl extends ElementImpl implements DataTypeElement 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case XMLmodelPackage.DATA_TYPE_ELEMENT__ECORE_DATA_TYPE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return getEcoreDataType();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -110,7 +126,7 @@ public class DataTypeElementImpl extends ElementImpl implements DataTypeElement 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case XMLmodelPackage.DATA_TYPE_ELEMENT__ECORE_DATA_TYPE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setEcoreDataType((EDataType)newValue);
 				return;
 		}
@@ -125,7 +141,7 @@ public class DataTypeElementImpl extends ElementImpl implements DataTypeElement 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.DATA_TYPE_ELEMENT__ECORE_DATA_TYPE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setEcoreDataType((EDataType)null);
 				return;
 		}
@@ -140,7 +156,7 @@ public class DataTypeElementImpl extends ElementImpl implements DataTypeElement 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.DATA_TYPE_ELEMENT__ECORE_DATA_TYPE:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return ecoreDataType != null;
 		}
 		return super.eIsSet(featureID);

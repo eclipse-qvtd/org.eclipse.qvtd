@@ -42,6 +42,24 @@ import org.eclipse.qvtd.xml.XMLmodelPackage;
  */
 public class ElementImpl extends NodeImpl implements Element {
 	/**
+	 * The number of structural features of the '<em>Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ELEMENT_FEATURE_COUNT = NodeImpl.NODE_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ELEMENT_OPERATION_COUNT = NodeImpl.NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getLocalName() <em>Local Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -140,7 +158,7 @@ public class ElementImpl extends NodeImpl implements Element {
 		String oldLocalName = localName;
 		localName = newLocalName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XMLmodelPackage.ELEMENT__LOCAL_NAME, oldLocalName, localName));
+			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 0, oldLocalName, localName));
 	}
 
 	/**
@@ -163,7 +181,7 @@ public class ElementImpl extends NodeImpl implements Element {
 		String oldQName = qName;
 		qName = newQName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XMLmodelPackage.ELEMENT__QNAME, oldQName, qName));
+			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 1, oldQName, qName));
 	}
 
 	/**
@@ -186,7 +204,7 @@ public class ElementImpl extends NodeImpl implements Element {
 		String oldUri = uri;
 		uri = newUri;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XMLmodelPackage.ELEMENT__URI, oldUri, uri));
+			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 2, oldUri, uri));
 	}
 
 	/**
@@ -197,13 +215,13 @@ public class ElementImpl extends NodeImpl implements Element {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case XMLmodelPackage.ELEMENT__LOCAL_NAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				return getLocalName();
-			case XMLmodelPackage.ELEMENT__QNAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				return getQName();
-			case XMLmodelPackage.ELEMENT__URI:
+			case NodeImpl.NODE_FEATURE_COUNT + 2:
 				return getUri();
-			case XMLmodelPackage.ELEMENT__ECORE_CLASSIFIER:
+			case NodeImpl.NODE_FEATURE_COUNT + 3:
 				return getEcoreClassifier();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -217,13 +235,13 @@ public class ElementImpl extends NodeImpl implements Element {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case XMLmodelPackage.ELEMENT__LOCAL_NAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				setLocalName((String)newValue);
 				return;
-			case XMLmodelPackage.ELEMENT__QNAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				setQName((String)newValue);
 				return;
-			case XMLmodelPackage.ELEMENT__URI:
+			case NodeImpl.NODE_FEATURE_COUNT + 2:
 				setUri((String)newValue);
 				return;
 		}
@@ -238,13 +256,13 @@ public class ElementImpl extends NodeImpl implements Element {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.ELEMENT__LOCAL_NAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				setLocalName(LOCAL_NAME_EDEFAULT);
 				return;
-			case XMLmodelPackage.ELEMENT__QNAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				setQName(QNAME_EDEFAULT);
 				return;
-			case XMLmodelPackage.ELEMENT__URI:
+			case NodeImpl.NODE_FEATURE_COUNT + 2:
 				setUri(URI_EDEFAULT);
 				return;
 		}
@@ -259,13 +277,13 @@ public class ElementImpl extends NodeImpl implements Element {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.ELEMENT__LOCAL_NAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				return LOCAL_NAME_EDEFAULT == null ? localName != null : !LOCAL_NAME_EDEFAULT.equals(localName);
-			case XMLmodelPackage.ELEMENT__QNAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				return QNAME_EDEFAULT == null ? qName != null : !QNAME_EDEFAULT.equals(qName);
-			case XMLmodelPackage.ELEMENT__URI:
+			case NodeImpl.NODE_FEATURE_COUNT + 2:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
-			case XMLmodelPackage.ELEMENT__ECORE_CLASSIFIER:
+			case NodeImpl.NODE_FEATURE_COUNT + 3:
 				return getEcoreClassifier() != null;
 		}
 		return super.eIsSet(featureID);

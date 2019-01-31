@@ -68,20 +68,20 @@ public class XMLmodelFactoryImpl extends EFactoryImpl implements XMLmodelFactory
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case XMLmodelPackage.ATTRIBUTE: return createAttribute();
-			case XMLmodelPackage.CDATA: return createCDATA();
-			case XMLmodelPackage.CHARACTERS: return createCharacters();
-			case XMLmodelPackage.CLASS_ATTRIBUTE: return createClassAttribute();
-			case XMLmodelPackage.CLASS_ELEMENT: return createClassElement();
-			case XMLmodelPackage.COMMENT: return createComment();
-			case XMLmodelPackage.DTD: return createDTD();
-			case XMLmodelPackage.DATA_TYPE_ATTRIBUTE: return createDataTypeAttribute();
-			case XMLmodelPackage.DATA_TYPE_ELEMENT: return createDataTypeElement();
-			case XMLmodelPackage.DOCUMENT: return createDocument();
-			case XMLmodelPackage.ELEMENT: return createElement();
-			case XMLmodelPackage.ENTITY: return createEntity();
-			case XMLmodelPackage.PREFIX_MAPPING: return createPrefixMapping();
-			case XMLmodelPackage.PROCESSING_INSTRUCTION: return createProcessingInstruction();
+			case 0: return createAttribute();
+			case 1: return createCDATA();
+			case 2: return createCharacters();
+			case 3: return createClassAttribute();
+			case 4: return createClassElement();
+			case 5: return createComment();
+			case 6: return createDTD();
+			case 7: return createDataTypeAttribute();
+			case 8: return createDataTypeElement();
+			case 9: return createDocument();
+			case 10: return createElement();
+			case 11: return createEntity();
+			case 13: return createPrefixMapping();
+			case 14: return createProcessingInstruction();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -92,6 +92,7 @@ public class XMLmodelFactoryImpl extends EFactoryImpl implements XMLmodelFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Attribute createAttribute() {
 		AttributeImpl attribute = new AttributeImpl();
 		return attribute;
@@ -102,6 +103,7 @@ public class XMLmodelFactoryImpl extends EFactoryImpl implements XMLmodelFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CDATA createCDATA() {
 		CDATAImpl cdata = new CDATAImpl();
 		return cdata;
@@ -112,6 +114,7 @@ public class XMLmodelFactoryImpl extends EFactoryImpl implements XMLmodelFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Characters createCharacters() {
 		CharactersImpl characters = new CharactersImpl();
 		return characters;
@@ -122,6 +125,7 @@ public class XMLmodelFactoryImpl extends EFactoryImpl implements XMLmodelFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ClassAttribute createClassAttribute() {
 		ClassAttributeImpl classAttribute = new ClassAttributeImpl();
 		return classAttribute;
@@ -132,6 +136,7 @@ public class XMLmodelFactoryImpl extends EFactoryImpl implements XMLmodelFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ClassElement createClassElement() {
 		ClassElementImpl classElement = new ClassElementImpl();
 		return classElement;
@@ -142,6 +147,7 @@ public class XMLmodelFactoryImpl extends EFactoryImpl implements XMLmodelFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Comment createComment() {
 		CommentImpl comment = new CommentImpl();
 		return comment;
@@ -152,6 +158,7 @@ public class XMLmodelFactoryImpl extends EFactoryImpl implements XMLmodelFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DTD createDTD() {
 		DTDImpl dtd = new DTDImpl();
 		return dtd;
@@ -162,6 +169,7 @@ public class XMLmodelFactoryImpl extends EFactoryImpl implements XMLmodelFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DataTypeAttribute createDataTypeAttribute() {
 		DataTypeAttributeImpl dataTypeAttribute = new DataTypeAttributeImpl();
 		return dataTypeAttribute;
@@ -172,6 +180,7 @@ public class XMLmodelFactoryImpl extends EFactoryImpl implements XMLmodelFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DataTypeElement createDataTypeElement() {
 		DataTypeElementImpl dataTypeElement = new DataTypeElementImpl();
 		return dataTypeElement;
@@ -182,6 +191,7 @@ public class XMLmodelFactoryImpl extends EFactoryImpl implements XMLmodelFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Document createDocument() {
 		DocumentImpl document = new DocumentImpl();
 		return document;
@@ -192,6 +202,7 @@ public class XMLmodelFactoryImpl extends EFactoryImpl implements XMLmodelFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Element createElement() {
 		ElementImpl element = new ElementImpl();
 		return element;
@@ -202,6 +213,7 @@ public class XMLmodelFactoryImpl extends EFactoryImpl implements XMLmodelFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Entity createEntity() {
 		EntityImpl entity = new EntityImpl();
 		return entity;
@@ -212,6 +224,7 @@ public class XMLmodelFactoryImpl extends EFactoryImpl implements XMLmodelFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PrefixMapping createPrefixMapping() {
 		PrefixMappingImpl prefixMapping = new PrefixMappingImpl();
 		return prefixMapping;
@@ -222,6 +235,7 @@ public class XMLmodelFactoryImpl extends EFactoryImpl implements XMLmodelFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ProcessingInstruction createProcessingInstruction() {
 		ProcessingInstructionImpl processingInstruction = new ProcessingInstructionImpl();
 		return processingInstruction;
@@ -232,6 +246,7 @@ public class XMLmodelFactoryImpl extends EFactoryImpl implements XMLmodelFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public XMLmodelPackage getXMLmodelPackage() {
 		return (XMLmodelPackage)getEPackage();
 	}

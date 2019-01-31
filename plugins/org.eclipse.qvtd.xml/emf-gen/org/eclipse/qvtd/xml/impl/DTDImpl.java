@@ -40,6 +40,24 @@ import org.eclipse.qvtd.xml.XMLmodelPackage;
  */
 public class DTDImpl extends NodeImpl implements DTD {
 	/**
+	 * The number of structural features of the '<em>DTD</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DTD_FEATURE_COUNT = NodeImpl.NODE_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>DTD</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DTD_OPERATION_COUNT = NodeImpl.NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -123,6 +141,7 @@ public class DTDImpl extends NodeImpl implements DTD {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -132,11 +151,12 @@ public class DTDImpl extends NodeImpl implements DTD {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XMLmodelPackage.DTD__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 0, oldName, name));
 	}
 
 	/**
@@ -144,6 +164,7 @@ public class DTDImpl extends NodeImpl implements DTD {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPublicId() {
 		return publicId;
 	}
@@ -153,11 +174,12 @@ public class DTDImpl extends NodeImpl implements DTD {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPublicId(String newPublicId) {
 		String oldPublicId = publicId;
 		publicId = newPublicId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XMLmodelPackage.DTD__PUBLIC_ID, oldPublicId, publicId));
+			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 1, oldPublicId, publicId));
 	}
 
 	/**
@@ -165,6 +187,7 @@ public class DTDImpl extends NodeImpl implements DTD {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getSystemId() {
 		return systemId;
 	}
@@ -174,11 +197,12 @@ public class DTDImpl extends NodeImpl implements DTD {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSystemId(String newSystemId) {
 		String oldSystemId = systemId;
 		systemId = newSystemId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XMLmodelPackage.DTD__SYSTEM_ID, oldSystemId, systemId));
+			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 2, oldSystemId, systemId));
 	}
 
 	/**
@@ -189,11 +213,11 @@ public class DTDImpl extends NodeImpl implements DTD {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case XMLmodelPackage.DTD__NAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				return getName();
-			case XMLmodelPackage.DTD__PUBLIC_ID:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				return getPublicId();
-			case XMLmodelPackage.DTD__SYSTEM_ID:
+			case NodeImpl.NODE_FEATURE_COUNT + 2:
 				return getSystemId();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -207,13 +231,13 @@ public class DTDImpl extends NodeImpl implements DTD {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case XMLmodelPackage.DTD__NAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				setName((String)newValue);
 				return;
-			case XMLmodelPackage.DTD__PUBLIC_ID:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				setPublicId((String)newValue);
 				return;
-			case XMLmodelPackage.DTD__SYSTEM_ID:
+			case NodeImpl.NODE_FEATURE_COUNT + 2:
 				setSystemId((String)newValue);
 				return;
 		}
@@ -228,13 +252,13 @@ public class DTDImpl extends NodeImpl implements DTD {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.DTD__NAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				setName(NAME_EDEFAULT);
 				return;
-			case XMLmodelPackage.DTD__PUBLIC_ID:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				setPublicId(PUBLIC_ID_EDEFAULT);
 				return;
-			case XMLmodelPackage.DTD__SYSTEM_ID:
+			case NodeImpl.NODE_FEATURE_COUNT + 2:
 				setSystemId(SYSTEM_ID_EDEFAULT);
 				return;
 		}
@@ -249,11 +273,11 @@ public class DTDImpl extends NodeImpl implements DTD {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.DTD__NAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case XMLmodelPackage.DTD__PUBLIC_ID:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				return PUBLIC_ID_EDEFAULT == null ? publicId != null : !PUBLIC_ID_EDEFAULT.equals(publicId);
-			case XMLmodelPackage.DTD__SYSTEM_ID:
+			case NodeImpl.NODE_FEATURE_COUNT + 2:
 				return SYSTEM_ID_EDEFAULT == null ? systemId != null : !SYSTEM_ID_EDEFAULT.equals(systemId);
 		}
 		return super.eIsSet(featureID);

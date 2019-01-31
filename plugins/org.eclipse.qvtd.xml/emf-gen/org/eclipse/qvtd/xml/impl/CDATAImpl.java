@@ -28,6 +28,23 @@ import org.eclipse.qvtd.xml.XMLmodelPackage;
  */
 public class CDATAImpl extends NodeImpl implements CDATA {
 	/**
+	 * The number of structural features of the '<em>CDATA</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CDATA_FEATURE_COUNT = NodeImpl.NODE_FEATURE_COUNT + 0;
+	/**
+	 * The number of operations of the '<em>CDATA</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CDATA_OPERATION_COUNT = NodeImpl.NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

@@ -38,6 +38,24 @@ import org.eclipse.qvtd.xml.XMLmodelPackage;
  */
 public class AttributeImpl extends NodeImpl implements Attribute {
 	/**
+	 * The number of structural features of the '<em>Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ATTRIBUTE_FEATURE_COUNT = NodeImpl.NODE_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Attribute</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ATTRIBUTE_OPERATION_COUNT = NodeImpl.NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -116,7 +134,7 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XMLmodelPackage.ATTRIBUTE__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 0, oldName, name));
 	}
 
 	/**
@@ -139,7 +157,7 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 		String oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XMLmodelPackage.ATTRIBUTE__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 1, oldValue, value));
 	}
 
 	/**
@@ -150,11 +168,11 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case XMLmodelPackage.ATTRIBUTE__NAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				return getName();
-			case XMLmodelPackage.ATTRIBUTE__VALUE:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				return getValue();
-			case XMLmodelPackage.ATTRIBUTE__ECORE_FEATURE:
+			case NodeImpl.NODE_FEATURE_COUNT + 2:
 				return getEcoreFeature();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -168,10 +186,10 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case XMLmodelPackage.ATTRIBUTE__NAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				setName((String)newValue);
 				return;
-			case XMLmodelPackage.ATTRIBUTE__VALUE:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				setValue((String)newValue);
 				return;
 		}
@@ -186,10 +204,10 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.ATTRIBUTE__NAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				setName(NAME_EDEFAULT);
 				return;
-			case XMLmodelPackage.ATTRIBUTE__VALUE:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				setValue(VALUE_EDEFAULT);
 				return;
 		}
@@ -204,11 +222,11 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.ATTRIBUTE__NAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case XMLmodelPackage.ATTRIBUTE__VALUE:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
-			case XMLmodelPackage.ATTRIBUTE__ECORE_FEATURE:
+			case NodeImpl.NODE_FEATURE_COUNT + 2:
 				return getEcoreFeature() != null;
 		}
 		return super.eIsSet(featureID);

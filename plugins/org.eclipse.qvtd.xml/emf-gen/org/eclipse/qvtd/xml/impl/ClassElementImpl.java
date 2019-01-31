@@ -36,6 +36,22 @@ import org.eclipse.qvtd.xml.XMLmodelPackage;
  */
 public class ClassElementImpl extends ElementImpl implements ClassElement {
 	/**
+	 * The number of structural features of the '<em>Class Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_ELEMENT_FEATURE_COUNT = ElementImpl.ELEMENT_FEATURE_COUNT + 1;
+	/**
+	 * The number of operations of the '<em>Class Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CLASS_ELEMENT_OPERATION_COUNT = ElementImpl.ELEMENT_OPERATION_COUNT + 0;
+	/**
 	 * The cached value of the '{@link #getEcoreClass() <em>Ecore Class</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -84,7 +100,7 @@ public class ClassElementImpl extends ElementImpl implements ClassElement {
 		EClass oldEcoreClass = ecoreClass;
 		ecoreClass = newEcoreClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XMLmodelPackage.CLASS_ELEMENT__ECORE_CLASS, oldEcoreClass, ecoreClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 0, oldEcoreClass, ecoreClass));
 	}
 
 	/**
@@ -95,7 +111,7 @@ public class ClassElementImpl extends ElementImpl implements ClassElement {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case XMLmodelPackage.CLASS_ELEMENT__ECORE_CLASS:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return getEcoreClass();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -109,7 +125,7 @@ public class ClassElementImpl extends ElementImpl implements ClassElement {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case XMLmodelPackage.CLASS_ELEMENT__ECORE_CLASS:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setEcoreClass((EClass)newValue);
 				return;
 		}
@@ -124,7 +140,7 @@ public class ClassElementImpl extends ElementImpl implements ClassElement {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.CLASS_ELEMENT__ECORE_CLASS:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				setEcoreClass((EClass)null);
 				return;
 		}
@@ -139,7 +155,7 @@ public class ClassElementImpl extends ElementImpl implements ClassElement {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.CLASS_ELEMENT__ECORE_CLASS:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
 				return ecoreClass != null;
 		}
 		return super.eIsSet(featureID);

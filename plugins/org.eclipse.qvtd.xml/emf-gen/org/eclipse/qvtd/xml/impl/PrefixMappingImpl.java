@@ -39,6 +39,24 @@ import org.eclipse.qvtd.xml.XMLmodelPackage;
  */
 public class PrefixMappingImpl extends NodeImpl implements PrefixMapping {
 	/**
+	 * The number of structural features of the '<em>Prefix Mapping</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PREFIX_MAPPING_FEATURE_COUNT = NodeImpl.NODE_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Prefix Mapping</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PREFIX_MAPPING_OPERATION_COUNT = NodeImpl.NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getPrefix() <em>Prefix</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -102,6 +120,7 @@ public class PrefixMappingImpl extends NodeImpl implements PrefixMapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPrefix() {
 		return prefix;
 	}
@@ -111,11 +130,12 @@ public class PrefixMappingImpl extends NodeImpl implements PrefixMapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPrefix(String newPrefix) {
 		String oldPrefix = prefix;
 		prefix = newPrefix;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XMLmodelPackage.PREFIX_MAPPING__PREFIX, oldPrefix, prefix));
+			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 0, oldPrefix, prefix));
 	}
 
 	/**
@@ -123,6 +143,7 @@ public class PrefixMappingImpl extends NodeImpl implements PrefixMapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getUri() {
 		return uri;
 	}
@@ -132,11 +153,12 @@ public class PrefixMappingImpl extends NodeImpl implements PrefixMapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUri(String newUri) {
 		String oldUri = uri;
 		uri = newUri;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XMLmodelPackage.PREFIX_MAPPING__URI, oldUri, uri));
+			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 1, oldUri, uri));
 	}
 
 	/**
@@ -147,9 +169,9 @@ public class PrefixMappingImpl extends NodeImpl implements PrefixMapping {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case XMLmodelPackage.PREFIX_MAPPING__PREFIX:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				return getPrefix();
-			case XMLmodelPackage.PREFIX_MAPPING__URI:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				return getUri();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -163,10 +185,10 @@ public class PrefixMappingImpl extends NodeImpl implements PrefixMapping {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case XMLmodelPackage.PREFIX_MAPPING__PREFIX:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				setPrefix((String)newValue);
 				return;
-			case XMLmodelPackage.PREFIX_MAPPING__URI:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				setUri((String)newValue);
 				return;
 		}
@@ -181,10 +203,10 @@ public class PrefixMappingImpl extends NodeImpl implements PrefixMapping {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.PREFIX_MAPPING__PREFIX:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				setPrefix(PREFIX_EDEFAULT);
 				return;
-			case XMLmodelPackage.PREFIX_MAPPING__URI:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				setUri(URI_EDEFAULT);
 				return;
 		}
@@ -199,9 +221,9 @@ public class PrefixMappingImpl extends NodeImpl implements PrefixMapping {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.PREFIX_MAPPING__PREFIX:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				return PREFIX_EDEFAULT == null ? prefix != null : !PREFIX_EDEFAULT.equals(prefix);
-			case XMLmodelPackage.PREFIX_MAPPING__URI:
+			case NodeImpl.NODE_FEATURE_COUNT + 1:
 				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
 		}
 		return super.eIsSet(featureID);

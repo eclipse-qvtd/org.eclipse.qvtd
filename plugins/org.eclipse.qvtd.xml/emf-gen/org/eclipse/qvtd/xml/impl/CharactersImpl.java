@@ -38,6 +38,24 @@ import org.eclipse.qvtd.xml.XMLmodelPackage;
  */
 public class CharactersImpl extends NodeImpl implements Characters {
 	/**
+	 * The number of structural features of the '<em>Characters</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CHARACTERS_FEATURE_COUNT = NodeImpl.NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Characters</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CHARACTERS_OPERATION_COUNT = NodeImpl.NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getData() <em>Data</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -81,6 +99,7 @@ public class CharactersImpl extends NodeImpl implements Characters {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getData() {
 		return data;
 	}
@@ -90,11 +109,12 @@ public class CharactersImpl extends NodeImpl implements Characters {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setData(String newData) {
 		String oldData = data;
 		data = newData;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XMLmodelPackage.CHARACTERS__DATA, oldData, data));
+			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 0, oldData, data));
 	}
 
 	/**
@@ -105,7 +125,7 @@ public class CharactersImpl extends NodeImpl implements Characters {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case XMLmodelPackage.CHARACTERS__DATA:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				return getData();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -119,7 +139,7 @@ public class CharactersImpl extends NodeImpl implements Characters {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case XMLmodelPackage.CHARACTERS__DATA:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				setData((String)newValue);
 				return;
 		}
@@ -134,7 +154,7 @@ public class CharactersImpl extends NodeImpl implements Characters {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.CHARACTERS__DATA:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				setData(DATA_EDEFAULT);
 				return;
 		}
@@ -149,7 +169,7 @@ public class CharactersImpl extends NodeImpl implements Characters {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.CHARACTERS__DATA:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				return DATA_EDEFAULT == null ? data != null : !DATA_EDEFAULT.equals(data);
 		}
 		return super.eIsSet(featureID);

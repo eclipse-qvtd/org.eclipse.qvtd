@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.xml.*;
 
 /**
@@ -33,7 +34,7 @@ import org.eclipse.qvtd.xml.*;
  * @see org.eclipse.qvtd.xml.XMLmodelPackage
  * @generated
  */
-public class XMLmodelSwitch<T> extends Switch<T> {
+public class XMLmodelSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -77,28 +78,28 @@ public class XMLmodelSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case XMLmodelPackage.ATTRIBUTE: {
+			case 0: {
 				Attribute attribute = (Attribute)theEObject;
 				T result = caseAttribute(attribute);
 				if (result == null) result = caseNode(attribute);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XMLmodelPackage.CDATA: {
+			case 1: {
 				CDATA cdata = (CDATA)theEObject;
 				T result = caseCDATA(cdata);
 				if (result == null) result = caseNode(cdata);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XMLmodelPackage.CHARACTERS: {
+			case 2: {
 				Characters characters = (Characters)theEObject;
 				T result = caseCharacters(characters);
 				if (result == null) result = caseNode(characters);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XMLmodelPackage.CLASS_ATTRIBUTE: {
+			case 3: {
 				ClassAttribute classAttribute = (ClassAttribute)theEObject;
 				T result = caseClassAttribute(classAttribute);
 				if (result == null) result = caseAttribute(classAttribute);
@@ -106,7 +107,7 @@ public class XMLmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XMLmodelPackage.CLASS_ELEMENT: {
+			case 4: {
 				ClassElement classElement = (ClassElement)theEObject;
 				T result = caseClassElement(classElement);
 				if (result == null) result = caseElement(classElement);
@@ -114,21 +115,21 @@ public class XMLmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XMLmodelPackage.COMMENT: {
+			case 5: {
 				Comment comment = (Comment)theEObject;
 				T result = caseComment(comment);
 				if (result == null) result = caseNode(comment);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XMLmodelPackage.DTD: {
+			case 6: {
 				DTD dtd = (DTD)theEObject;
 				T result = caseDTD(dtd);
 				if (result == null) result = caseNode(dtd);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XMLmodelPackage.DATA_TYPE_ATTRIBUTE: {
+			case 7: {
 				DataTypeAttribute dataTypeAttribute = (DataTypeAttribute)theEObject;
 				T result = caseDataTypeAttribute(dataTypeAttribute);
 				if (result == null) result = caseAttribute(dataTypeAttribute);
@@ -136,7 +137,7 @@ public class XMLmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XMLmodelPackage.DATA_TYPE_ELEMENT: {
+			case 8: {
 				DataTypeElement dataTypeElement = (DataTypeElement)theEObject;
 				T result = caseDataTypeElement(dataTypeElement);
 				if (result == null) result = caseElement(dataTypeElement);
@@ -144,41 +145,41 @@ public class XMLmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XMLmodelPackage.DOCUMENT: {
+			case 9: {
 				Document document = (Document)theEObject;
 				T result = caseDocument(document);
 				if (result == null) result = caseNode(document);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XMLmodelPackage.ELEMENT: {
+			case 10: {
 				Element element = (Element)theEObject;
 				T result = caseElement(element);
 				if (result == null) result = caseNode(element);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XMLmodelPackage.ENTITY: {
+			case 11: {
 				Entity entity = (Entity)theEObject;
 				T result = caseEntity(entity);
 				if (result == null) result = caseNode(entity);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XMLmodelPackage.NODE: {
+			case 12: {
 				Node node = (Node)theEObject;
 				T result = caseNode(node);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XMLmodelPackage.PREFIX_MAPPING: {
+			case 13: {
 				PrefixMapping prefixMapping = (PrefixMapping)theEObject;
 				T result = casePrefixMapping(prefixMapping);
 				if (result == null) result = caseNode(prefixMapping);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XMLmodelPackage.PROCESSING_INSTRUCTION: {
+			case 14: {
 				ProcessingInstruction processingInstruction = (ProcessingInstruction)theEObject;
 				T result = caseProcessingInstruction(processingInstruction);
 				if (result == null) result = caseNode(processingInstruction);

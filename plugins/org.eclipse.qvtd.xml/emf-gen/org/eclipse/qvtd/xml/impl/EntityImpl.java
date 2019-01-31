@@ -38,6 +38,24 @@ import org.eclipse.qvtd.xml.XMLmodelPackage;
  */
 public class EntityImpl extends NodeImpl implements Entity {
 	/**
+	 * The number of structural features of the '<em>Entity</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ENTITY_FEATURE_COUNT = NodeImpl.NODE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Entity</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ENTITY_OPERATION_COUNT = NodeImpl.NODE_OPERATION_COUNT + 0;
+
+	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -81,6 +99,7 @@ public class EntityImpl extends NodeImpl implements Entity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -90,11 +109,12 @@ public class EntityImpl extends NodeImpl implements Entity {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setName(String newName) {
 		String oldName = name;
 		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XMLmodelPackage.ENTITY__NAME, oldName, name));
+			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 0, oldName, name));
 	}
 
 	/**
@@ -105,7 +125,7 @@ public class EntityImpl extends NodeImpl implements Entity {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case XMLmodelPackage.ENTITY__NAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -119,7 +139,7 @@ public class EntityImpl extends NodeImpl implements Entity {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case XMLmodelPackage.ENTITY__NAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				setName((String)newValue);
 				return;
 		}
@@ -134,7 +154,7 @@ public class EntityImpl extends NodeImpl implements Entity {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.ENTITY__NAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				setName(NAME_EDEFAULT);
 				return;
 		}
@@ -149,7 +169,7 @@ public class EntityImpl extends NodeImpl implements Entity {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case XMLmodelPackage.ENTITY__NAME:
+			case NodeImpl.NODE_FEATURE_COUNT + 0:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
