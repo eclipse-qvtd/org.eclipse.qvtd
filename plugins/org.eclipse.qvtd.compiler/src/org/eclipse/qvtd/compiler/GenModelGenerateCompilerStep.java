@@ -30,6 +30,7 @@ import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory.Descripto
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
+import org.eclipse.emf.codegen.ecore.genmodel.generator.GenModelGeneratorAdapterFactory;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.Monitor;
@@ -39,7 +40,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreGeneratorAdapterFactory;
-import org.eclipse.qvtd.compiler.internal.genmodel.QVTdGenModelGeneratorAdapterFactory;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
@@ -55,7 +55,8 @@ public class GenModelGenerateCompilerStep extends AbstractCompilerStep
 
 		public Generator() {
 			// Replacement for EMF to fix BUG 485764, BUG 485089
-			addAdapterFactoryDescriptor(QVTdGenModelGeneratorAdapterFactory.DESCRIPTOR);
+			//addAdapterFactoryDescriptor(QVTdGenModelGeneratorAdapterFactory.DESCRIPTOR);
+			addAdapterFactoryDescriptor(GenModelGeneratorAdapterFactory.DESCRIPTOR);
 			// OCLinEcore embedded support
 			addAdapterFactoryDescriptor(OCLinEcoreGeneratorAdapterFactory.DESCRIPTOR);
 		}

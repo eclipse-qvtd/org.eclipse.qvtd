@@ -256,6 +256,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			genModel.setImportOrganizing(true);
 			genModel.setRootExtendsClass(MinimalEObjectImpl.Container.class.getName());
 			genModel.setPluginKey("");
+			genModel.setTemplateDirectory("/org.eclipse.ocl.examples.codegen/templates");
 			genmodelResource.getContents().add(genModel);
 			String basePrefix = genModelOptions != null ? genModelOptions.get(CompilerChain.GENMODEL_BASE_PREFIX) : null;
 			List<GenPackage> genPackages = genModel.getGenPackages();
