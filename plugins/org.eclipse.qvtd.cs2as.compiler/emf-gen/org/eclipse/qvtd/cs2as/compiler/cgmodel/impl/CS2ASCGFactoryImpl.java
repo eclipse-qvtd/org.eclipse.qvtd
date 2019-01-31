@@ -66,7 +66,7 @@ public class CS2ASCGFactoryImpl extends EFactoryImpl implements CS2ASCGFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case CS2ASCGPackage.CG_LOOKUP_CALL_EXP: return createCGLookupCallExp();
+			case 0: return createCGLookupCallExp();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

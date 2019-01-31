@@ -29,6 +29,15 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  */
 public class CGFunctionImpl extends CGOperationImpl implements CGFunction {
 	/**
+	 * The number of structural features of the '<em>CG Function</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CG_FUNCTION_FEATURE_COUNT = CGOperationImpl.CG_OPERATION_FEATURE_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

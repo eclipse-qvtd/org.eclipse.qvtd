@@ -16,6 +16,12 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGClassImpl;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNamedElementImpl;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationCallExpImpl;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGParameterImpl;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGVariableImpl;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGConnectionVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreContainerAssignment;
@@ -847,82 +853,82 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		isCreated = true;
 
 		// Create classes and their features
-		cgConnectionAssignmentEClass = createEClass(CG_CONNECTION_ASSIGNMENT);
-		createEReference(cgConnectionAssignmentEClass, CG_CONNECTION_ASSIGNMENT__CONNECTION_VARIABLE);
-		createEReference(cgConnectionAssignmentEClass, CG_CONNECTION_ASSIGNMENT__OWNED_INIT_VALUE);
-		createEReference(cgConnectionAssignmentEClass, CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING);
+		cgConnectionAssignmentEClass = createEClass(0);
+		createEReference(cgConnectionAssignmentEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
+		createEReference(cgConnectionAssignmentEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1);
+		createEReference(cgConnectionAssignmentEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2);
 
-		cgConnectionVariableEClass = createEClass(CG_CONNECTION_VARIABLE);
+		cgConnectionVariableEClass = createEClass(1);
 
-		cgEcoreContainerAssignmentEClass = createEClass(CG_ECORE_CONTAINER_ASSIGNMENT);
-		createEReference(cgEcoreContainerAssignmentEClass, CG_ECORE_CONTAINER_ASSIGNMENT__ESTRUCTURAL_FEATURE);
+		cgEcoreContainerAssignmentEClass = createEClass(2);
+		createEReference(cgEcoreContainerAssignmentEClass, CGPropertyAssignmentImpl.CG_PROPERTY_ASSIGNMENT_FEATURE_COUNT + 0);
 
-		cgEcorePropertyAssignmentEClass = createEClass(CG_ECORE_PROPERTY_ASSIGNMENT);
-		createEReference(cgEcorePropertyAssignmentEClass, CG_ECORE_PROPERTY_ASSIGNMENT__ESTRUCTURAL_FEATURE);
+		cgEcorePropertyAssignmentEClass = createEClass(3);
+		createEReference(cgEcorePropertyAssignmentEClass, CGPropertyAssignmentImpl.CG_PROPERTY_ASSIGNMENT_FEATURE_COUNT + 0);
 
-		cgEcoreRealizedVariableEClass = createEClass(CG_ECORE_REALIZED_VARIABLE);
-		createEReference(cgEcoreRealizedVariableEClass, CG_ECORE_REALIZED_VARIABLE__ECLASSIFIER);
+		cgEcoreRealizedVariableEClass = createEClass(4);
+		createEReference(cgEcoreRealizedVariableEClass, CGRealizedVariableImpl.CG_REALIZED_VARIABLE_FEATURE_COUNT + 0);
 
-		cgFunctionEClass = createEClass(CG_FUNCTION);
+		cgFunctionEClass = createEClass(5);
 
-		cgFunctionCallExpEClass = createEClass(CG_FUNCTION_CALL_EXP);
-		createEReference(cgFunctionCallExpEClass, CG_FUNCTION_CALL_EXP__FUNCTION);
+		cgFunctionCallExpEClass = createEClass(6);
+		createEReference(cgFunctionCallExpEClass, CGOperationCallExpImpl.CG_OPERATION_CALL_EXP_FEATURE_COUNT + 0);
 
-		cgFunctionParameterEClass = createEClass(CG_FUNCTION_PARAMETER);
-		createEReference(cgFunctionParameterEClass, CG_FUNCTION_PARAMETER__FUNCTION);
+		cgFunctionParameterEClass = createEClass(7);
+		createEReference(cgFunctionParameterEClass, CGParameterImpl.CG_PARAMETER_FEATURE_COUNT + 0);
 
-		cgGuardVariableEClass = createEClass(CG_GUARD_VARIABLE);
-		createEReference(cgGuardVariableEClass, CG_GUARD_VARIABLE__OWNING_MAPPING);
-		createEReference(cgGuardVariableEClass, CG_GUARD_VARIABLE__TYPED_MODEL);
+		cgGuardVariableEClass = createEClass(8);
+		createEReference(cgGuardVariableEClass, CGParameterImpl.CG_PARAMETER_FEATURE_COUNT + 0);
+		createEReference(cgGuardVariableEClass, CGParameterImpl.CG_PARAMETER_FEATURE_COUNT + 1);
 
-		cgMappingEClass = createEClass(CG_MAPPING);
-		createEReference(cgMappingEClass, CG_MAPPING__OWNED_ASSIGNMENTS);
-		createEReference(cgMappingEClass, CG_MAPPING__OWNED_BODY);
-		createEReference(cgMappingEClass, CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS);
-		createEReference(cgMappingEClass, CG_MAPPING__OWNED_GUARD_VARIABLES);
-		createEReference(cgMappingEClass, CG_MAPPING__OWNED_REALIZED_VARIABLES);
-		createEReference(cgMappingEClass, CG_MAPPING__OWNING_TRANSFORMATION);
-		createEAttribute(cgMappingEClass, CG_MAPPING__USE_CLASS);
+		cgMappingEClass = createEClass(9);
+		createEReference(cgMappingEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0);
+		createEReference(cgMappingEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1);
+		createEReference(cgMappingEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 2);
+		createEReference(cgMappingEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 3);
+		createEReference(cgMappingEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 4);
+		createEReference(cgMappingEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 5);
+		createEAttribute(cgMappingEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 6);
 
-		cgMappingCallEClass = createEClass(CG_MAPPING_CALL);
-		createEReference(cgMappingCallEClass, CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS);
+		cgMappingCallEClass = createEClass(10);
+		createEReference(cgMappingCallEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
 
-		cgMappingCallBindingEClass = createEClass(CG_MAPPING_CALL_BINDING);
-		createEReference(cgMappingCallBindingEClass, CG_MAPPING_CALL_BINDING__OWNED_VALUE);
-		createEReference(cgMappingCallBindingEClass, CG_MAPPING_CALL_BINDING__OWNING_MAPPING_CALL);
+		cgMappingCallBindingEClass = createEClass(11);
+		createEReference(cgMappingCallBindingEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
+		createEReference(cgMappingCallBindingEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1);
 
-		cgMappingExpEClass = createEClass(CG_MAPPING_EXP);
-		createEReference(cgMappingExpEClass, CG_MAPPING_EXP__OWNED_ACCUMULATORS);
-		createEReference(cgMappingExpEClass, CG_MAPPING_EXP__OWNED_BODY);
+		cgMappingExpEClass = createEClass(12);
+		createEReference(cgMappingExpEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
+		createEReference(cgMappingExpEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1);
 
-		cgMappingLoopEClass = createEClass(CG_MAPPING_LOOP);
+		cgMappingLoopEClass = createEClass(13);
 
-		cgMiddlePropertyAssignmentEClass = createEClass(CG_MIDDLE_PROPERTY_ASSIGNMENT);
+		cgMiddlePropertyAssignmentEClass = createEClass(14);
 
-		cgMiddlePropertyCallExpEClass = createEClass(CG_MIDDLE_PROPERTY_CALL_EXP);
+		cgMiddlePropertyCallExpEClass = createEClass(15);
 
-		cgPropertyAssignmentEClass = createEClass(CG_PROPERTY_ASSIGNMENT);
-		createEReference(cgPropertyAssignmentEClass, CG_PROPERTY_ASSIGNMENT__EXECUTOR_PROPERTY);
-		createEReference(cgPropertyAssignmentEClass, CG_PROPERTY_ASSIGNMENT__OWNED_INIT_VALUE);
-		createEReference(cgPropertyAssignmentEClass, CG_PROPERTY_ASSIGNMENT__OWNED_SLOT_VALUE);
-		createEReference(cgPropertyAssignmentEClass, CG_PROPERTY_ASSIGNMENT__OWNING_MAPPING);
-		createEAttribute(cgPropertyAssignmentEClass, CG_PROPERTY_ASSIGNMENT__REFERRED_PROPERTY);
+		cgPropertyAssignmentEClass = createEClass(16);
+		createEReference(cgPropertyAssignmentEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
+		createEReference(cgPropertyAssignmentEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1);
+		createEReference(cgPropertyAssignmentEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2);
+		createEReference(cgPropertyAssignmentEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3);
+		createEAttribute(cgPropertyAssignmentEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 4);
 
-		cgRealizedVariableEClass = createEClass(CG_REALIZED_VARIABLE);
-		createEReference(cgRealizedVariableEClass, CG_REALIZED_VARIABLE__EXECUTOR_TYPE);
-		createEReference(cgRealizedVariableEClass, CG_REALIZED_VARIABLE__OWNING_MAPPING);
-		createEReference(cgRealizedVariableEClass, CG_REALIZED_VARIABLE__TYPED_MODEL);
+		cgRealizedVariableEClass = createEClass(17);
+		createEReference(cgRealizedVariableEClass, CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 0);
+		createEReference(cgRealizedVariableEClass, CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 1);
+		createEReference(cgRealizedVariableEClass, CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 2);
 
-		cgSequenceEClass = createEClass(CG_SEQUENCE);
-		createEReference(cgSequenceEClass, CG_SEQUENCE__OWNED_STATEMENTS);
+		cgSequenceEClass = createEClass(18);
+		createEReference(cgSequenceEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
 
-		cgTransformationEClass = createEClass(CG_TRANSFORMATION);
-		createEReference(cgTransformationEClass, CG_TRANSFORMATION__OWNED_MAPPINGS);
-		createEReference(cgTransformationEClass, CG_TRANSFORMATION__OWNED_TYPED_MODELS);
+		cgTransformationEClass = createEClass(19);
+		createEReference(cgTransformationEClass, CGClassImpl.CG_CLASS_FEATURE_COUNT + 0);
+		createEReference(cgTransformationEClass, CGClassImpl.CG_CLASS_FEATURE_COUNT + 1);
 
-		cgTypedModelEClass = createEClass(CG_TYPED_MODEL);
-		createEAttribute(cgTypedModelEClass, CG_TYPED_MODEL__MODEL_INDEX);
-		createEReference(cgTypedModelEClass, CG_TYPED_MODEL__OWNING_TRANSFORMATION);
+		cgTypedModelEClass = createEClass(20);
+		createEAttribute(cgTypedModelEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0);
+		createEReference(cgTypedModelEClass, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1);
 	}
 
 	/**

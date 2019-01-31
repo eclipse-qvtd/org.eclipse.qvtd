@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGClassImpl;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNamedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
@@ -43,6 +44,15 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * @generated
  */
 public class CGTransformationImpl extends CGClassImpl implements CGTransformation {
+	/**
+	 * The number of structural features of the '<em>CG Transformation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CG_TRANSFORMATION_FEATURE_COUNT = CGClassImpl.CG_CLASS_FEATURE_COUNT + 2;
+
 	/**
 	 * The cached value of the '{@link #getOwnedMappings() <em>Owned Mappings</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -90,7 +100,7 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	@Override
 	public List<CGMapping> getOwnedMappings() {
 		if (ownedMappings == null) {
-			ownedMappings = new EObjectContainmentWithInverseEList<CGMapping>(CGMapping.class, this, QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_MAPPINGS, QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION);
+			ownedMappings = new EObjectContainmentWithInverseEList<CGMapping>(CGMapping.class, this, CGClassImpl.CG_CLASS_FEATURE_COUNT + 0, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 5);
 		}
 		return ownedMappings;
 	}
@@ -103,7 +113,7 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	@Override
 	public List<CGTypedModel> getOwnedTypedModels() {
 		if (ownedTypedModels == null) {
-			ownedTypedModels = new EObjectContainmentWithInverseEList<CGTypedModel>(CGTypedModel.class, this, QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_TYPED_MODELS, QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION);
+			ownedTypedModels = new EObjectContainmentWithInverseEList<CGTypedModel>(CGTypedModel.class, this, CGClassImpl.CG_CLASS_FEATURE_COUNT + 1, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1);
 		}
 		return ownedTypedModels;
 	}
@@ -117,9 +127,9 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_MAPPINGS:
+			case CGClassImpl.CG_CLASS_FEATURE_COUNT + 0:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedMappings()).basicAdd(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_TYPED_MODELS:
+			case CGClassImpl.CG_CLASS_FEATURE_COUNT + 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedTypedModels()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -133,9 +143,9 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_MAPPINGS:
+			case CGClassImpl.CG_CLASS_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedMappings()).basicRemove(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_TYPED_MODELS:
+			case CGClassImpl.CG_CLASS_FEATURE_COUNT + 1:
 				return ((InternalEList<?>)getOwnedTypedModels()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -149,9 +159,9 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_MAPPINGS:
+			case CGClassImpl.CG_CLASS_FEATURE_COUNT + 0:
 				return getOwnedMappings();
-			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_TYPED_MODELS:
+			case CGClassImpl.CG_CLASS_FEATURE_COUNT + 1:
 				return getOwnedTypedModels();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -166,11 +176,11 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_MAPPINGS:
+			case CGClassImpl.CG_CLASS_FEATURE_COUNT + 0:
 				getOwnedMappings().clear();
 				getOwnedMappings().addAll((Collection<? extends CGMapping>)newValue);
 				return;
-			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_TYPED_MODELS:
+			case CGClassImpl.CG_CLASS_FEATURE_COUNT + 1:
 				getOwnedTypedModels().clear();
 				getOwnedTypedModels().addAll((Collection<? extends CGTypedModel>)newValue);
 				return;
@@ -186,10 +196,10 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_MAPPINGS:
+			case CGClassImpl.CG_CLASS_FEATURE_COUNT + 0:
 				getOwnedMappings().clear();
 				return;
-			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_TYPED_MODELS:
+			case CGClassImpl.CG_CLASS_FEATURE_COUNT + 1:
 				getOwnedTypedModels().clear();
 				return;
 		}
@@ -204,9 +214,9 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_MAPPINGS:
+			case CGClassImpl.CG_CLASS_FEATURE_COUNT + 0:
 				return ownedMappings != null && !ownedMappings.isEmpty();
-			case QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_TYPED_MODELS:
+			case CGClassImpl.CG_CLASS_FEATURE_COUNT + 1:
 				return ownedTypedModels != null && !ownedTypedModels.isEmpty();
 		}
 		return super.eIsSet(featureID);

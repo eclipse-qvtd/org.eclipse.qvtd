@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGClassImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNamedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
@@ -39,6 +40,15 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * @generated
  */
 public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel {
+	/**
+	 * The number of structural features of the '<em>CG Typed Model</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CG_TYPED_MODEL_FEATURE_COUNT = CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 2;
+
 	/**
 	 * The default value of the '{@link #getModelIndex() <em>Model Index</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -98,7 +108,7 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 		int oldModelIndex = modelIndex;
 		modelIndex = newModelIndex;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_TYPED_MODEL__MODEL_INDEX, oldModelIndex, modelIndex));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0, oldModelIndex, modelIndex));
 	}
 
 	/**
@@ -108,7 +118,7 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	 */
 	@Override
 	public CGTransformation getOwningTransformation() {
-		if (eContainerFeatureID() != QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION) return null;
+		if (eContainerFeatureID() != (CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1)) return null;
 		return (CGTransformation)eInternalContainer();
 	}
 
@@ -118,7 +128,7 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningTransformation(CGTransformation newOwningTransformation, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningTransformation, QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningTransformation, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1, msgs);
 		return msgs;
 	}
 
@@ -129,19 +139,19 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	 */
 	@Override
 	public void setOwningTransformation(CGTransformation newOwningTransformation) {
-		if (newOwningTransformation != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION && newOwningTransformation != null)) {
+		if (newOwningTransformation != eInternalContainer() || (eContainerFeatureID() != (CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1) && newOwningTransformation != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningTransformation))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningTransformation != null)
-				msgs = ((InternalEObject)newOwningTransformation).eInverseAdd(this, QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_TYPED_MODELS, CGTransformation.class, msgs);
+				msgs = ((InternalEObject)newOwningTransformation).eInverseAdd(this, CGClassImpl.CG_CLASS_FEATURE_COUNT + 1, CGTransformation.class, msgs);
 			msgs = basicSetOwningTransformation(newOwningTransformation, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION, newOwningTransformation, newOwningTransformation));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1, newOwningTransformation, newOwningTransformation));
 	}
 
 	/**
@@ -151,7 +161,13 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	 */
 	@Override
 	public String toString() {
-		return super.toString();
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (modelIndex: ");
+		result.append(modelIndex);
+		result.append(')');
+		return result.toString();
 	}
 
 	/**
@@ -162,7 +178,7 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningTransformation((CGTransformation)otherEnd, msgs);
@@ -178,7 +194,7 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return basicSetOwningTransformation(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -192,8 +208,8 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION:
-				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_TYPED_MODELS, CGTransformation.class, msgs);
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1:
+				return eInternalContainer().eInverseRemove(this, CGClassImpl.CG_CLASS_FEATURE_COUNT + 1, CGTransformation.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -206,9 +222,9 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TYPED_MODEL__MODEL_INDEX:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return getModelIndex();
-			case QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return getOwningTransformation();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -222,10 +238,10 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TYPED_MODEL__MODEL_INDEX:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setModelIndex((Integer)newValue);
 				return;
-			case QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setOwningTransformation((CGTransformation)newValue);
 				return;
 		}
@@ -240,10 +256,10 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TYPED_MODEL__MODEL_INDEX:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0:
 				setModelIndex(MODEL_INDEX_EDEFAULT);
 				return;
-			case QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setOwningTransformation((CGTransformation)null);
 				return;
 		}
@@ -258,9 +274,9 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_TYPED_MODEL__MODEL_INDEX:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return modelIndex != MODEL_INDEX_EDEFAULT;
-			case QVTiCGModelPackage.CG_TYPED_MODEL__OWNING_TRANSFORMATION:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return getOwningTransformation() != null;
 		}
 		return super.eIsSet(featureID);

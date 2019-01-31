@@ -29,6 +29,15 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  */
 public class CGMappingLoopImpl extends CGIterationCallExpImpl implements CGMappingLoop {
 	/**
+	 * The number of structural features of the '<em>CG Mapping Loop</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CG_MAPPING_LOOP_FEATURE_COUNT = CGIterationCallExpImpl.CG_ITERATION_CALL_EXP_FEATURE_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

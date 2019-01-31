@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorType;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNamedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGVariableImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
@@ -44,6 +45,15 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * @generated
  */
 public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealizedVariable {
+	/**
+	 * The number of structural features of the '<em>CG Realized Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CG_REALIZED_VARIABLE_FEATURE_COUNT = CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3;
+
 	/**
 	 * The cached value of the '{@link #getExecutorType() <em>Executor Type</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -103,7 +113,7 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 		CGTypedModel oldTypedModel = typedModel;
 		typedModel = newTypedModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_REALIZED_VARIABLE__TYPED_MODEL, oldTypedModel, typedModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 2, oldTypedModel, typedModel));
 	}
 
 	/**
@@ -114,7 +124,7 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__OWNING_MAPPING:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningMapping((CGMapping)otherEnd, msgs);
@@ -130,7 +140,7 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__OWNING_MAPPING:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 1:
 				return basicSetOwningMapping(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -144,8 +154,8 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__OWNING_MAPPING:
-				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_MAPPING__OWNED_REALIZED_VARIABLES, CGMapping.class, msgs);
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 1:
+				return eInternalContainer().eInverseRemove(this, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 4, CGMapping.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -170,7 +180,7 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 		CGExecutorType oldExecutorType = executorType;
 		executorType = newExecutorType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_REALIZED_VARIABLE__EXECUTOR_TYPE, oldExecutorType, executorType));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 0, oldExecutorType, executorType));
 	}
 
 	/**
@@ -180,7 +190,7 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	 */
 	@Override
 	public CGMapping getOwningMapping() {
-		if (eContainerFeatureID() != QVTiCGModelPackage.CG_REALIZED_VARIABLE__OWNING_MAPPING) return null;
+		if (eContainerFeatureID() != (CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 1)) return null;
 		return (CGMapping)eInternalContainer();
 	}
 
@@ -190,7 +200,7 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningMapping(CGMapping newOwningMapping, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningMapping, QVTiCGModelPackage.CG_REALIZED_VARIABLE__OWNING_MAPPING, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningMapping, CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 1, msgs);
 		return msgs;
 	}
 
@@ -201,19 +211,19 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	 */
 	@Override
 	public void setOwningMapping(CGMapping newOwningMapping) {
-		if (newOwningMapping != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_REALIZED_VARIABLE__OWNING_MAPPING && newOwningMapping != null)) {
+		if (newOwningMapping != eInternalContainer() || (eContainerFeatureID() != (CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 1) && newOwningMapping != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningMapping))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningMapping != null)
-				msgs = ((InternalEObject)newOwningMapping).eInverseAdd(this, QVTiCGModelPackage.CG_MAPPING__OWNED_REALIZED_VARIABLES, CGMapping.class, msgs);
+				msgs = ((InternalEObject)newOwningMapping).eInverseAdd(this, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 4, CGMapping.class, msgs);
 			msgs = basicSetOwningMapping(newOwningMapping, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_REALIZED_VARIABLE__OWNING_MAPPING, newOwningMapping, newOwningMapping));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 1, newOwningMapping, newOwningMapping));
 	}
 
 	/**
@@ -224,11 +234,11 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__EXECUTOR_TYPE:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 0:
 				return getExecutorType();
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__OWNING_MAPPING:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 1:
 				return getOwningMapping();
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__TYPED_MODEL:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 2:
 				return getTypedModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -242,13 +252,13 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__EXECUTOR_TYPE:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 0:
 				setExecutorType((CGExecutorType)newValue);
 				return;
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__OWNING_MAPPING:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 1:
 				setOwningMapping((CGMapping)newValue);
 				return;
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__TYPED_MODEL:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 2:
 				setTypedModel((CGTypedModel)newValue);
 				return;
 		}
@@ -263,13 +273,13 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__EXECUTOR_TYPE:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 0:
 				setExecutorType((CGExecutorType)null);
 				return;
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__OWNING_MAPPING:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 1:
 				setOwningMapping((CGMapping)null);
 				return;
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__TYPED_MODEL:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 2:
 				setTypedModel((CGTypedModel)null);
 				return;
 		}
@@ -284,11 +294,11 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__EXECUTOR_TYPE:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 0:
 				return executorType != null;
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__OWNING_MAPPING:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 1:
 				return getOwningMapping() != null;
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE__TYPED_MODEL:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 2:
 				return typedModel != null;
 		}
 		return super.eIsSet(featureID);

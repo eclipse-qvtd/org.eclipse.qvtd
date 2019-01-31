@@ -43,6 +43,14 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  */
 public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGMappingCallBinding {
 	/**
+	 * The number of structural features of the '<em>CG Mapping Call Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CG_MAPPING_CALL_BINDING_FEATURE_COUNT = CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
+	/**
 	 * The cached value of the '{@link #getOwnedValue() <em>Owned Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -89,7 +97,7 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 		CGValuedElement oldOwnedValue = ownedValue;
 		ownedValue = newOwnedValue;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNED_VALUE, oldOwnedValue, newOwnedValue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0, oldOwnedValue, newOwnedValue);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -105,14 +113,14 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 		if (newOwnedValue != ownedValue) {
 			NotificationChain msgs = null;
 			if (ownedValue != null)
-				msgs = ((InternalEObject)ownedValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNED_VALUE, null, msgs);
+				msgs = ((InternalEObject)ownedValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0), null, msgs);
 			if (newOwnedValue != null)
-				msgs = ((InternalEObject)newOwnedValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNED_VALUE, null, msgs);
+				msgs = ((InternalEObject)newOwnedValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0), null, msgs);
 			msgs = basicSetOwnedValue(newOwnedValue, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNED_VALUE, newOwnedValue, newOwnedValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0, newOwnedValue, newOwnedValue));
 	}
 
 	/**
@@ -122,7 +130,7 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 */
 	@Override
 	public CGMappingCall getOwningMappingCall() {
-		if (eContainerFeatureID() != QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNING_MAPPING_CALL) return null;
+		if (eContainerFeatureID() != (CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1)) return null;
 		return (CGMappingCall)eInternalContainer();
 	}
 
@@ -132,7 +140,7 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningMappingCall(CGMappingCall newOwningMappingCall, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningMappingCall, QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNING_MAPPING_CALL, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningMappingCall, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1, msgs);
 		return msgs;
 	}
 
@@ -143,19 +151,19 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 */
 	@Override
 	public void setOwningMappingCall(CGMappingCall newOwningMappingCall) {
-		if (newOwningMappingCall != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNING_MAPPING_CALL && newOwningMappingCall != null)) {
+		if (newOwningMappingCall != eInternalContainer() || (eContainerFeatureID() != (CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1) && newOwningMappingCall != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningMappingCall))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningMappingCall != null)
-				msgs = ((InternalEObject)newOwningMappingCall).eInverseAdd(this, QVTiCGModelPackage.CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS, CGMappingCall.class, msgs);
+				msgs = ((InternalEObject)newOwningMappingCall).eInverseAdd(this, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0, CGMappingCall.class, msgs);
 			msgs = basicSetOwningMappingCall(newOwningMappingCall, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNING_MAPPING_CALL, newOwningMappingCall, newOwningMappingCall));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1, newOwningMappingCall, newOwningMappingCall));
 	}
 
 	/**
@@ -166,7 +174,7 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNING_MAPPING_CALL:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningMappingCall((CGMappingCall)otherEnd, msgs);
@@ -182,9 +190,9 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNED_VALUE:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				return basicSetOwnedValue(null, msgs);
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNING_MAPPING_CALL:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				return basicSetOwningMappingCall(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -198,8 +206,8 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNING_MAPPING_CALL:
-				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS, CGMappingCall.class, msgs);
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
+				return eInternalContainer().eInverseRemove(this, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0, CGMappingCall.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -212,9 +220,9 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNED_VALUE:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				return getOwnedValue();
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNING_MAPPING_CALL:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				return getOwningMappingCall();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -228,10 +236,10 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNED_VALUE:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				setOwnedValue((CGValuedElement)newValue);
 				return;
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNING_MAPPING_CALL:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				setOwningMappingCall((CGMappingCall)newValue);
 				return;
 		}
@@ -246,10 +254,10 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNED_VALUE:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				setOwnedValue((CGValuedElement)null);
 				return;
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNING_MAPPING_CALL:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				setOwningMappingCall((CGMappingCall)null);
 				return;
 		}
@@ -264,9 +272,9 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNED_VALUE:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				return ownedValue != null;
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNING_MAPPING_CALL:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				return getOwningMappingCall() != null;
 		}
 		return super.eIsSet(featureID);

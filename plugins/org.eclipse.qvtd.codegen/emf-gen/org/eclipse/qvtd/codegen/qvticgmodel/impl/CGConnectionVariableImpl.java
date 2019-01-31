@@ -30,6 +30,15 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  */
 public class CGConnectionVariableImpl extends CGGuardVariableImpl implements CGConnectionVariable {
 	/**
+	 * The number of structural features of the '<em>CG Connection Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CG_CONNECTION_VARIABLE_FEATURE_COUNT = CGGuardVariableImpl.CG_GUARD_VARIABLE_FEATURE_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

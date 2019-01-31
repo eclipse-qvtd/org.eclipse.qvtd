@@ -24,7 +24,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 
-import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.*;
 
 /**
@@ -84,7 +83,7 @@ public class CS2ASCGSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case CS2ASCGPackage.CG_LOOKUP_CALL_EXP: {
+			case 0: {
 				CGLookupCallExp cgLookupCallExp = (CGLookupCallExp)theEObject;
 				T result = caseCGLookupCallExp(cgLookupCallExp);
 				if (result == null) result = caseCGOperationCallExp(cgLookupCallExp);
@@ -93,7 +92,6 @@ public class CS2ASCGSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = caseCGTypedElement(cgLookupCallExp);
 				if (result == null) result = caseCGNamedElement(cgLookupCallExp);
 				if (result == null) result = caseCGElement(cgLookupCallExp);
-				if (result == null) result = caseNameable(cgLookupCallExp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -128,21 +126,6 @@ public class CS2ASCGSwitch<@Nullable T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGElement(CGElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Nameable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Nameable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNameable(Nameable object) {
 		return null;
 	}
 

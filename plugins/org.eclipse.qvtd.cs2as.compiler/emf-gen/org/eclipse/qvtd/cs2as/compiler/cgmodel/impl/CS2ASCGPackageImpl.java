@@ -62,7 +62,7 @@ public class CS2ASCGPackageImpl extends EPackageImpl implements CS2ASCGPackage {
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link CS2ASCGPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -76,8 +76,8 @@ public class CS2ASCGPackageImpl extends EPackageImpl implements CS2ASCGPackage {
 		if (isInited) return (CS2ASCGPackage)EPackage.Registry.INSTANCE.getEPackage(CS2ASCGPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		CS2ASCGPackageImpl theCS2ASCGPackage = (CS2ASCGPackageImpl)(ePackage instanceof CS2ASCGPackageImpl ? ePackage : new CS2ASCGPackageImpl());
+		Object registeredCS2ASCGPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		CS2ASCGPackageImpl theCS2ASCGPackage = registeredCS2ASCGPackage instanceof CS2ASCGPackageImpl ? (CS2ASCGPackageImpl)registeredCS2ASCGPackage : new CS2ASCGPackageImpl();
 
 		isInited = true;
 
@@ -93,7 +93,6 @@ public class CS2ASCGPackageImpl extends EPackageImpl implements CS2ASCGPackage {
 		// Mark meta-data to indicate it can't be changed
 		theCS2ASCGPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(CS2ASCGPackage.eNS_URI, theCS2ASCGPackage);
 		return theCS2ASCGPackage;
@@ -138,7 +137,7 @@ public class CS2ASCGPackageImpl extends EPackageImpl implements CS2ASCGPackage {
 		isCreated = true;
 
 		// Create classes and their features
-		cgLookupCallExpEClass = createEClass(CG_LOOKUP_CALL_EXP);
+		cgLookupCallExpEClass = createEClass(0);
 	}
 
 	/**

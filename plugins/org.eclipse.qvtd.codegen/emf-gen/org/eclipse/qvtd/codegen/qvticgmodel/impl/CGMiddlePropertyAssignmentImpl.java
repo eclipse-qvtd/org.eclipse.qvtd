@@ -26,6 +26,15 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  */
 public class CGMiddlePropertyAssignmentImpl extends CGEcorePropertyAssignmentImpl implements CGMiddlePropertyAssignment {
 	/**
+	 * The number of structural features of the '<em>CG Middle Property Assignment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CG_MIDDLE_PROPERTY_ASSIGNMENT_FEATURE_COUNT = CGEcorePropertyAssignmentImpl.CG_ECORE_PROPERTY_ASSIGNMENT_FEATURE_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

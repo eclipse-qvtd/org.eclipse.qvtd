@@ -35,6 +35,14 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  */
 public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implements CGEcoreRealizedVariable {
 	/**
+	 * The number of structural features of the '<em>CG Ecore Realized Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CG_ECORE_REALIZED_VARIABLE_FEATURE_COUNT = CGRealizedVariableImpl.CG_REALIZED_VARIABLE_FEATURE_COUNT + 1;
+	/**
 	 * The cached value of the '{@link #getEClassifier() <em>EClassifier</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,7 +91,7 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 		EClassifier oldEClassifier = eClassifier;
 		eClassifier = newEClassifier;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_ECORE_REALIZED_VARIABLE__ECLASSIFIER, oldEClassifier, eClassifier));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGRealizedVariableImpl.CG_REALIZED_VARIABLE_FEATURE_COUNT + 0, oldEClassifier, eClassifier));
 	}
 
 	/**
@@ -94,7 +102,7 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_ECORE_REALIZED_VARIABLE__ECLASSIFIER:
+			case CGRealizedVariableImpl.CG_REALIZED_VARIABLE_FEATURE_COUNT + 0:
 				return getEClassifier();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -108,7 +116,7 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_ECORE_REALIZED_VARIABLE__ECLASSIFIER:
+			case CGRealizedVariableImpl.CG_REALIZED_VARIABLE_FEATURE_COUNT + 0:
 				setEClassifier((EClassifier)newValue);
 				return;
 		}
@@ -123,7 +131,7 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_ECORE_REALIZED_VARIABLE__ECLASSIFIER:
+			case CGRealizedVariableImpl.CG_REALIZED_VARIABLE_FEATURE_COUNT + 0:
 				setEClassifier((EClassifier)null);
 				return;
 		}
@@ -138,7 +146,7 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_ECORE_REALIZED_VARIABLE__ECLASSIFIER:
+			case CGRealizedVariableImpl.CG_REALIZED_VARIABLE_FEATURE_COUNT + 0:
 				return eClassifier != null;
 		}
 		return super.eIsSet(featureID);

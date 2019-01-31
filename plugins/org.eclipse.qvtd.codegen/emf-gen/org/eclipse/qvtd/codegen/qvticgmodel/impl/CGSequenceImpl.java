@@ -52,6 +52,14 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  */
 public class CGSequenceImpl extends CGValuedElementImpl implements CGSequence {
 	/**
+	 * The number of structural features of the '<em>CG Sequence</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CG_SEQUENCE_FEATURE_COUNT = CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
+	/**
 	 * The cached value of the '{@link #getOwnedStatements() <em>Owned Statements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -87,7 +95,7 @@ public class CGSequenceImpl extends CGValuedElementImpl implements CGSequence {
 	@Override
 	public List<CGValuedElement> getOwnedStatements() {
 		if (ownedStatements == null) {
-			ownedStatements = new EObjectContainmentEList<CGValuedElement>(CGValuedElement.class, this, QVTiCGModelPackage.CG_SEQUENCE__OWNED_STATEMENTS);
+			ownedStatements = new EObjectContainmentEList<CGValuedElement>(CGValuedElement.class, this, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
 		}
 		return ownedStatements;
 	}
@@ -100,7 +108,7 @@ public class CGSequenceImpl extends CGValuedElementImpl implements CGSequence {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_SEQUENCE__OWNED_STATEMENTS:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedStatements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -114,7 +122,7 @@ public class CGSequenceImpl extends CGValuedElementImpl implements CGSequence {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_SEQUENCE__OWNED_STATEMENTS:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				return getOwnedStatements();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -129,7 +137,7 @@ public class CGSequenceImpl extends CGValuedElementImpl implements CGSequence {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_SEQUENCE__OWNED_STATEMENTS:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				getOwnedStatements().clear();
 				getOwnedStatements().addAll((Collection<? extends CGValuedElement>)newValue);
 				return;
@@ -145,7 +153,7 @@ public class CGSequenceImpl extends CGValuedElementImpl implements CGSequence {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_SEQUENCE__OWNED_STATEMENTS:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				getOwnedStatements().clear();
 				return;
 		}
@@ -160,7 +168,7 @@ public class CGSequenceImpl extends CGValuedElementImpl implements CGSequence {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_SEQUENCE__OWNED_STATEMENTS:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				return ownedStatements != null && !ownedStatements.isEmpty();
 		}
 		return super.eIsSet(featureID);

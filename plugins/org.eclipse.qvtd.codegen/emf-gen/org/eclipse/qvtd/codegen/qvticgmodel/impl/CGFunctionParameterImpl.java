@@ -38,6 +38,14 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  */
 public class CGFunctionParameterImpl extends CGParameterImpl implements CGFunctionParameter {
 	/**
+	 * The number of structural features of the '<em>CG Function Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CG_FUNCTION_PARAMETER_FEATURE_COUNT = CGParameterImpl.CG_PARAMETER_FEATURE_COUNT + 1;
+	/**
 	 * The cached value of the '{@link #getFunction() <em>Function</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -86,7 +94,7 @@ public class CGFunctionParameterImpl extends CGParameterImpl implements CGFuncti
 		CGFunction oldFunction = function;
 		function = newFunction;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_FUNCTION_PARAMETER__FUNCTION, oldFunction, function));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGParameterImpl.CG_PARAMETER_FEATURE_COUNT + 0, oldFunction, function));
 	}
 
 	/**
@@ -97,7 +105,7 @@ public class CGFunctionParameterImpl extends CGParameterImpl implements CGFuncti
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_FUNCTION_PARAMETER__FUNCTION:
+			case CGParameterImpl.CG_PARAMETER_FEATURE_COUNT + 0:
 				return getFunction();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -111,7 +119,7 @@ public class CGFunctionParameterImpl extends CGParameterImpl implements CGFuncti
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_FUNCTION_PARAMETER__FUNCTION:
+			case CGParameterImpl.CG_PARAMETER_FEATURE_COUNT + 0:
 				setFunction((CGFunction)newValue);
 				return;
 		}
@@ -126,7 +134,7 @@ public class CGFunctionParameterImpl extends CGParameterImpl implements CGFuncti
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_FUNCTION_PARAMETER__FUNCTION:
+			case CGParameterImpl.CG_PARAMETER_FEATURE_COUNT + 0:
 				setFunction((CGFunction)null);
 				return;
 		}
@@ -141,7 +149,7 @@ public class CGFunctionParameterImpl extends CGParameterImpl implements CGFuncti
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_FUNCTION_PARAMETER__FUNCTION:
+			case CGParameterImpl.CG_PARAMETER_FEATURE_COUNT + 0:
 				return function != null;
 		}
 		return super.eIsSet(featureID);

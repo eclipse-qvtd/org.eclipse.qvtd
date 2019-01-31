@@ -29,6 +29,15 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  */
 public class CGMiddlePropertyCallExpImpl extends CGOppositePropertyCallExpImpl implements CGMiddlePropertyCallExp {
 	/**
+	 * The number of structural features of the '<em>CG Middle Property Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CG_MIDDLE_PROPERTY_CALL_EXP_FEATURE_COUNT = CGOppositePropertyCallExpImpl.CG_OPPOSITE_PROPERTY_CALL_EXP_FEATURE_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

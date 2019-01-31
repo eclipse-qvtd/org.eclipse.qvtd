@@ -14,6 +14,8 @@ package org.eclipse.qvtd.cs2as.compiler.cgmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationCallExpImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.qvtd.cs2as.compiler.cgmodel.CGLookupCallExp;
@@ -28,6 +30,15 @@ import org.eclipse.qvtd.cs2as.compiler.cgmodel.util.CS2ASCGModelVisitor;
  * @generated
  */
 public class CGLookupCallExpImpl extends CGOperationCallExpImpl implements CGLookupCallExp {
+	/**
+	 * The number of structural features of the '<em>CG Lookup Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CG_LOOKUP_CALL_EXP_FEATURE_COUNT = CGOperationCallExpImpl.CG_OPERATION_CALL_EXP_FEATURE_COUNT + 0;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -53,7 +64,7 @@ public class CGLookupCallExpImpl extends CGOperationCallExpImpl implements CGLoo
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public <R> R accept(CGModelVisitor<R> visitor) {
+	public <R> R accept(@NonNull CGModelVisitor<R> visitor) {
 		return (R) ((CS2ASCGModelVisitor<?>)visitor).visitCGLookupCallExp(this);
 	}
 
@@ -61,6 +72,7 @@ public class CGLookupCallExpImpl extends CGOperationCallExpImpl implements CGLoo
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Nullable
 	@Override
 	public EClassifier getEcoreClassifier() {
 		return null;

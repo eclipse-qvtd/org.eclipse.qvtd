@@ -44,6 +44,14 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  */
 public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingCall {
 	/**
+	 * The number of structural features of the '<em>CG Mapping Call</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CG_MAPPING_CALL_FEATURE_COUNT = CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
+	/**
 	 * The cached value of the '{@link #getOwnedMappingCallBindings() <em>Owned Mapping Call Bindings</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -79,7 +87,7 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	@Override
 	public List<CGMappingCallBinding> getOwnedMappingCallBindings() {
 		if (ownedMappingCallBindings == null) {
-			ownedMappingCallBindings = new EObjectContainmentWithInverseEList<CGMappingCallBinding>(CGMappingCallBinding.class, this, QVTiCGModelPackage.CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS, QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__OWNING_MAPPING_CALL);
+			ownedMappingCallBindings = new EObjectContainmentWithInverseEList<CGMappingCallBinding>(CGMappingCallBinding.class, this, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1);
 		}
 		return ownedMappingCallBindings;
 	}
@@ -93,7 +101,7 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedMappingCallBindings()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -107,7 +115,7 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedMappingCallBindings()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -121,7 +129,7 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				return getOwnedMappingCallBindings();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -136,7 +144,7 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				getOwnedMappingCallBindings().clear();
 				getOwnedMappingCallBindings().addAll((Collection<? extends CGMappingCallBinding>)newValue);
 				return;
@@ -152,7 +160,7 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				getOwnedMappingCallBindings().clear();
 				return;
 		}
@@ -167,7 +175,7 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL__OWNED_MAPPING_CALL_BINDINGS:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				return ownedMappingCallBindings != null && !ownedMappingCallBindings.isEmpty();
 		}
 		return super.eIsSet(featureID);

@@ -80,27 +80,27 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT: return createCGConnectionAssignment();
-			case QVTiCGModelPackage.CG_CONNECTION_VARIABLE: return createCGConnectionVariable();
-			case QVTiCGModelPackage.CG_ECORE_CONTAINER_ASSIGNMENT: return createCGEcoreContainerAssignment();
-			case QVTiCGModelPackage.CG_ECORE_PROPERTY_ASSIGNMENT: return createCGEcorePropertyAssignment();
-			case QVTiCGModelPackage.CG_ECORE_REALIZED_VARIABLE: return createCGEcoreRealizedVariable();
-			case QVTiCGModelPackage.CG_FUNCTION: return createCGFunction();
-			case QVTiCGModelPackage.CG_FUNCTION_CALL_EXP: return createCGFunctionCallExp();
-			case QVTiCGModelPackage.CG_FUNCTION_PARAMETER: return createCGFunctionParameter();
-			case QVTiCGModelPackage.CG_GUARD_VARIABLE: return createCGGuardVariable();
-			case QVTiCGModelPackage.CG_MAPPING: return createCGMapping();
-			case QVTiCGModelPackage.CG_MAPPING_CALL: return createCGMappingCall();
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING: return createCGMappingCallBinding();
-			case QVTiCGModelPackage.CG_MAPPING_EXP: return createCGMappingExp();
-			case QVTiCGModelPackage.CG_MAPPING_LOOP: return createCGMappingLoop();
-			case QVTiCGModelPackage.CG_MIDDLE_PROPERTY_ASSIGNMENT: return createCGMiddlePropertyAssignment();
-			case QVTiCGModelPackage.CG_MIDDLE_PROPERTY_CALL_EXP: return createCGMiddlePropertyCallExp();
-			case QVTiCGModelPackage.CG_PROPERTY_ASSIGNMENT: return createCGPropertyAssignment();
-			case QVTiCGModelPackage.CG_REALIZED_VARIABLE: return createCGRealizedVariable();
-			case QVTiCGModelPackage.CG_SEQUENCE: return createCGSequence();
-			case QVTiCGModelPackage.CG_TRANSFORMATION: return createCGTransformation();
-			case QVTiCGModelPackage.CG_TYPED_MODEL: return createCGTypedModel();
+			case 0: return createCGConnectionAssignment();
+			case 1: return createCGConnectionVariable();
+			case 2: return createCGEcoreContainerAssignment();
+			case 3: return createCGEcorePropertyAssignment();
+			case 4: return createCGEcoreRealizedVariable();
+			case 5: return createCGFunction();
+			case 6: return createCGFunctionCallExp();
+			case 7: return createCGFunctionParameter();
+			case 8: return createCGGuardVariable();
+			case 9: return createCGMapping();
+			case 10: return createCGMappingCall();
+			case 11: return createCGMappingCallBinding();
+			case 12: return createCGMappingExp();
+			case 13: return createCGMappingLoop();
+			case 14: return createCGMiddlePropertyAssignment();
+			case 15: return createCGMiddlePropertyCallExp();
+			case 16: return createCGPropertyAssignment();
+			case 17: return createCGRealizedVariable();
+			case 18: return createCGSequence();
+			case 19: return createCGTransformation();
+			case 20: return createCGTypedModel();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

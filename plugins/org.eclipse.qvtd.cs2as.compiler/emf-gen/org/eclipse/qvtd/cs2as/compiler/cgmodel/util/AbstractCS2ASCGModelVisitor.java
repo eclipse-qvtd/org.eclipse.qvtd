@@ -28,7 +28,7 @@ public abstract class AbstractCS2ASCGModelVisitor<R, C>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractCS2ASCGModelVisitor(C context) {

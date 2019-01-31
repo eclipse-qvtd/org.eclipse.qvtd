@@ -27,7 +27,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGClassImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGNamedElementImpl;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGParameterImpl;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGVariableImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.ocl.examples.codegen.cse.AbstractPlace;
 import org.eclipse.ocl.examples.codegen.cse.OuterStackPlace;
@@ -60,6 +64,15 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * @generated
  */
 public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
+	/**
+	 * The number of structural features of the '<em>CG Mapping</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CG_MAPPING_FEATURE_COUNT = CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 7;
+
 	/**
 	 * The cached value of the '{@link #getOwnedAssignments() <em>Owned Assignments</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -157,7 +170,7 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	@Override
 	public List<CGPropertyAssignment> getOwnedAssignments() {
 		if (ownedAssignments == null) {
-			ownedAssignments = new EObjectContainmentWithInverseEList<CGPropertyAssignment>(CGPropertyAssignment.class, this, QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS, QVTiCGModelPackage.CG_PROPERTY_ASSIGNMENT__OWNING_MAPPING);
+			ownedAssignments = new EObjectContainmentWithInverseEList<CGPropertyAssignment>(CGPropertyAssignment.class, this, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 3);
 		}
 		return ownedAssignments;
 	}
@@ -181,7 +194,7 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 		CGValuedElement oldOwnedBody = ownedBody;
 		ownedBody = newOwnedBody;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING__OWNED_BODY, oldOwnedBody, newOwnedBody);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1, oldOwnedBody, newOwnedBody);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -197,14 +210,14 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 		if (newOwnedBody != ownedBody) {
 			NotificationChain msgs = null;
 			if (ownedBody != null)
-				msgs = ((InternalEObject)ownedBody).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING__OWNED_BODY, null, msgs);
+				msgs = ((InternalEObject)ownedBody).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1), null, msgs);
 			if (newOwnedBody != null)
-				msgs = ((InternalEObject)newOwnedBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING__OWNED_BODY, null, msgs);
+				msgs = ((InternalEObject)newOwnedBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetOwnedBody(newOwnedBody, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING__OWNED_BODY, newOwnedBody, newOwnedBody));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1, newOwnedBody, newOwnedBody));
 	}
 
 	/**
@@ -215,7 +228,7 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	@Override
 	public List<CGConnectionAssignment> getOwnedConnectionAssignments() {
 		if (ownedConnectionAssignments == null) {
-			ownedConnectionAssignments = new EObjectContainmentWithInverseEList<CGConnectionAssignment>(CGConnectionAssignment.class, this, QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS, QVTiCGModelPackage.CG_CONNECTION_ASSIGNMENT__OWNING_MAPPING);
+			ownedConnectionAssignments = new EObjectContainmentWithInverseEList<CGConnectionAssignment>(CGConnectionAssignment.class, this, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 2, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2);
 		}
 		return ownedConnectionAssignments;
 	}
@@ -228,7 +241,7 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	@Override
 	public List<CGGuardVariable> getOwnedGuardVariables() {
 		if (ownedGuardVariables == null) {
-			ownedGuardVariables = new EObjectContainmentWithInverseEList<CGGuardVariable>(CGGuardVariable.class, this, QVTiCGModelPackage.CG_MAPPING__OWNED_GUARD_VARIABLES, QVTiCGModelPackage.CG_GUARD_VARIABLE__OWNING_MAPPING);
+			ownedGuardVariables = new EObjectContainmentWithInverseEList<CGGuardVariable>(CGGuardVariable.class, this, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 3, CGParameterImpl.CG_PARAMETER_FEATURE_COUNT + 0);
 		}
 		return ownedGuardVariables;
 	}
@@ -241,7 +254,7 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	@Override
 	public List<CGRealizedVariable> getOwnedRealizedVariables() {
 		if (ownedRealizedVariables == null) {
-			ownedRealizedVariables = new EObjectContainmentWithInverseEList<CGRealizedVariable>(CGRealizedVariable.class, this, QVTiCGModelPackage.CG_MAPPING__OWNED_REALIZED_VARIABLES, QVTiCGModelPackage.CG_REALIZED_VARIABLE__OWNING_MAPPING);
+			ownedRealizedVariables = new EObjectContainmentWithInverseEList<CGRealizedVariable>(CGRealizedVariable.class, this, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 4, CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 1);
 		}
 		return ownedRealizedVariables;
 	}
@@ -253,7 +266,7 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 */
 	@Override
 	public CGTransformation getOwningTransformation() {
-		if (eContainerFeatureID() != QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION) return null;
+		if (eContainerFeatureID() != (CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 5)) return null;
 		return (CGTransformation)eInternalContainer();
 	}
 
@@ -263,7 +276,7 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningTransformation(CGTransformation newOwningTransformation, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningTransformation, QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningTransformation, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 5, msgs);
 		return msgs;
 	}
 
@@ -274,19 +287,19 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 */
 	@Override
 	public void setOwningTransformation(CGTransformation newOwningTransformation) {
-		if (newOwningTransformation != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION && newOwningTransformation != null)) {
+		if (newOwningTransformation != eInternalContainer() || (eContainerFeatureID() != (CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 5) && newOwningTransformation != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningTransformation))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningTransformation != null)
-				msgs = ((InternalEObject)newOwningTransformation).eInverseAdd(this, QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_MAPPINGS, CGTransformation.class, msgs);
+				msgs = ((InternalEObject)newOwningTransformation).eInverseAdd(this, CGClassImpl.CG_CLASS_FEATURE_COUNT + 0, CGTransformation.class, msgs);
 			msgs = basicSetOwningTransformation(newOwningTransformation, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION, newOwningTransformation, newOwningTransformation));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 5, newOwningTransformation, newOwningTransformation));
 	}
 
 	/**
@@ -309,7 +322,7 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 		boolean oldUseClass = useClass;
 		useClass = newUseClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING__USE_CLASS, oldUseClass, useClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 6, oldUseClass, useClass));
 	}
 
 	/**
@@ -319,7 +332,13 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 */
 	@Override
 	public String toString() {
-		return super.toString();
+		if (eIsProxy()) return super.toString();
+
+		StringBuilder result = new StringBuilder(super.toString());
+		result.append(" (useClass: ");
+		result.append(useClass);
+		result.append(')');
+		return result.toString();
 	}
 
 	/**
@@ -331,15 +350,15 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedAssignments()).basicAdd(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedConnectionAssignments()).basicAdd(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_GUARD_VARIABLES:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedGuardVariables()).basicAdd(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_REALIZED_VARIABLES:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedRealizedVariables()).basicAdd(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 5:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningTransformation((CGTransformation)otherEnd, msgs);
@@ -355,17 +374,17 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedAssignments()).basicRemove(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_BODY:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return basicSetOwnedBody(null, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getOwnedConnectionAssignments()).basicRemove(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_GUARD_VARIABLES:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return ((InternalEList<?>)getOwnedGuardVariables()).basicRemove(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_REALIZED_VARIABLES:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return ((InternalEList<?>)getOwnedRealizedVariables()).basicRemove(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return basicSetOwningTransformation(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -379,8 +398,8 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION:
-				return eInternalContainer().eInverseRemove(this, QVTiCGModelPackage.CG_TRANSFORMATION__OWNED_MAPPINGS, CGTransformation.class, msgs);
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 5:
+				return eInternalContainer().eInverseRemove(this, CGClassImpl.CG_CLASS_FEATURE_COUNT + 0, CGTransformation.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -393,19 +412,19 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return getOwnedAssignments();
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_BODY:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return getOwnedBody();
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return getOwnedConnectionAssignments();
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_GUARD_VARIABLES:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return getOwnedGuardVariables();
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_REALIZED_VARIABLES:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return getOwnedRealizedVariables();
-			case QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return getOwningTransformation();
-			case QVTiCGModelPackage.CG_MAPPING__USE_CLASS:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return isUseClass();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -420,29 +439,29 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getOwnedAssignments().clear();
 				getOwnedAssignments().addAll((Collection<? extends CGPropertyAssignment>)newValue);
 				return;
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_BODY:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setOwnedBody((CGValuedElement)newValue);
 				return;
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getOwnedConnectionAssignments().clear();
 				getOwnedConnectionAssignments().addAll((Collection<? extends CGConnectionAssignment>)newValue);
 				return;
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_GUARD_VARIABLES:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getOwnedGuardVariables().clear();
 				getOwnedGuardVariables().addAll((Collection<? extends CGGuardVariable>)newValue);
 				return;
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_REALIZED_VARIABLES:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 4:
 				getOwnedRealizedVariables().clear();
 				getOwnedRealizedVariables().addAll((Collection<? extends CGRealizedVariable>)newValue);
 				return;
-			case QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setOwningTransformation((CGTransformation)newValue);
 				return;
-			case QVTiCGModelPackage.CG_MAPPING__USE_CLASS:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 6:
 				setUseClass((Boolean)newValue);
 				return;
 		}
@@ -457,25 +476,25 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getOwnedAssignments().clear();
 				return;
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_BODY:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setOwnedBody((CGValuedElement)null);
 				return;
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getOwnedConnectionAssignments().clear();
 				return;
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_GUARD_VARIABLES:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getOwnedGuardVariables().clear();
 				return;
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_REALIZED_VARIABLES:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 4:
 				getOwnedRealizedVariables().clear();
 				return;
-			case QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setOwningTransformation((CGTransformation)null);
 				return;
-			case QVTiCGModelPackage.CG_MAPPING__USE_CLASS:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 6:
 				setUseClass(USE_CLASS_EDEFAULT);
 				return;
 		}
@@ -490,19 +509,19 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_ASSIGNMENTS:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return ownedAssignments != null && !ownedAssignments.isEmpty();
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_BODY:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return ownedBody != null;
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_CONNECTION_ASSIGNMENTS:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return ownedConnectionAssignments != null && !ownedConnectionAssignments.isEmpty();
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_GUARD_VARIABLES:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return ownedGuardVariables != null && !ownedGuardVariables.isEmpty();
-			case QVTiCGModelPackage.CG_MAPPING__OWNED_REALIZED_VARIABLES:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return ownedRealizedVariables != null && !ownedRealizedVariables.isEmpty();
-			case QVTiCGModelPackage.CG_MAPPING__OWNING_TRANSFORMATION:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return getOwningTransformation() != null;
-			case QVTiCGModelPackage.CG_MAPPING__USE_CLASS:
+			case CGNamedElementImpl.CG_NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return useClass != USE_CLASS_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

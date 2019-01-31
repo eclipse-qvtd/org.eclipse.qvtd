@@ -54,6 +54,15 @@ import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtil;
  */
 public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingExp {
 	/**
+	 * The number of structural features of the '<em>CG Mapping Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CG_MAPPING_EXP_FEATURE_COUNT = CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The cached value of the '{@link #getOwnedAccumulators() <em>Owned Accumulators</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -100,7 +109,7 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	@Override
 	public List<CGAccumulator> getOwnedAccumulators() {
 		if (ownedAccumulators == null) {
-			ownedAccumulators = new EObjectContainmentEList<CGAccumulator>(CGAccumulator.class, this, QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_ACCUMULATORS);
+			ownedAccumulators = new EObjectContainmentEList<CGAccumulator>(CGAccumulator.class, this, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0);
 		}
 		return ownedAccumulators;
 	}
@@ -124,7 +133,7 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 		CGValuedElement oldOwnedBody = ownedBody;
 		ownedBody = newOwnedBody;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_BODY, oldOwnedBody, newOwnedBody);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1, oldOwnedBody, newOwnedBody);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -140,14 +149,14 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 		if (newOwnedBody != ownedBody) {
 			NotificationChain msgs = null;
 			if (ownedBody != null)
-				msgs = ((InternalEObject)ownedBody).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_BODY, null, msgs);
+				msgs = ((InternalEObject)ownedBody).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1), null, msgs);
 			if (newOwnedBody != null)
-				msgs = ((InternalEObject)newOwnedBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_BODY, null, msgs);
+				msgs = ((InternalEObject)newOwnedBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetOwnedBody(newOwnedBody, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_BODY, newOwnedBody, newOwnedBody));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1, newOwnedBody, newOwnedBody));
 	}
 
 	/**
@@ -158,9 +167,9 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_ACCUMULATORS:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedAccumulators()).basicRemove(otherEnd, msgs);
-			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_BODY:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				return basicSetOwnedBody(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -174,9 +183,9 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_ACCUMULATORS:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				return getOwnedAccumulators();
-			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_BODY:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				return getOwnedBody();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -191,11 +200,11 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_ACCUMULATORS:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				getOwnedAccumulators().clear();
 				getOwnedAccumulators().addAll((Collection<? extends CGAccumulator>)newValue);
 				return;
-			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_BODY:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				setOwnedBody((CGValuedElement)newValue);
 				return;
 		}
@@ -210,10 +219,10 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_ACCUMULATORS:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				getOwnedAccumulators().clear();
 				return;
-			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_BODY:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				setOwnedBody((CGValuedElement)null);
 				return;
 		}
@@ -228,9 +237,9 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_ACCUMULATORS:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 0:
 				return ownedAccumulators != null && !ownedAccumulators.isEmpty();
-			case QVTiCGModelPackage.CG_MAPPING_EXP__OWNED_BODY:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 1:
 				return ownedBody != null;
 		}
 		return super.eIsSet(featureID);

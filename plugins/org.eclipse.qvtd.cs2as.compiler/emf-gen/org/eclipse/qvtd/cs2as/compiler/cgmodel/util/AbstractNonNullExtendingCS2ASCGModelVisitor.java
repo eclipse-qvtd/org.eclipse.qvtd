@@ -27,7 +27,7 @@ import org.eclipse.jdt.annotation.NonNull;
  * suitable first super class, the method delegates to visiting().
  * The return is annotated as @NonNull.
  *
- * @deprecated Explicit 'NonNull' functionality is obsolete with Java 8 @NonNull annotations.  
+ * @deprecated Explicit 'NonNull' functionality is obsolete with Java 8 @NonNull annotations.
  */
  @Deprecated
 public abstract class AbstractNonNullExtendingCS2ASCGModelVisitor<R, C>
@@ -36,12 +36,12 @@ public abstract class AbstractNonNullExtendingCS2ASCGModelVisitor<R, C>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractNonNullExtendingCS2ASCGModelVisitor(C context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public @NonNull R visitCGLookupCallExp(org.eclipse.qvtd.cs2as.compiler.cgmodel.@NonNull CGLookupCallExp object) {
