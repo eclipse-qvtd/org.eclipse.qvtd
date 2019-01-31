@@ -54,6 +54,24 @@ import org.eclipse.qvtd.text.TextModelPackage;
  */
 public class StringNodeImpl extends MinimalEObjectImpl.Container implements StringNode {
 	/**
+	 * The number of structural features of the '<em>String Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int STRING_NODE_FEATURE_COUNT = 9;
+
+	/**
+	 * The number of operations of the '<em>String Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int STRING_NODE_OPERATION_COUNT = 0;
+
+	/**
 	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -230,7 +248,7 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	@Override
 	public EList<StringNode> getChildren() {
 		if (children == null) {
-			children = new EObjectContainmentWithInverseEList<StringNode>(StringNode.class, this, TextModelPackage.STRING_NODE__CHILDREN, TextModelPackage.STRING_NODE__PARENT);
+			children = new EObjectContainmentWithInverseEList<StringNode>(StringNode.class, this, 0, 4);
 		}
 		return children;
 	}
@@ -240,6 +258,7 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getEndText() {
 		return endText;
 	}
@@ -249,11 +268,12 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEndText(String newEndText) {
 		String oldEndText = endText;
 		endText = newEndText;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TextModelPackage.STRING_NODE__END_TEXT, oldEndText, endText));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldEndText, endText));
 	}
 
 	/**
@@ -276,7 +296,7 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 		String oldIndent = indent;
 		indent = newIndent;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TextModelPackage.STRING_NODE__INDENT, oldIndent, indent));
+			eNotify(new ENotificationImpl(this, Notification.SET, 2, oldIndent, indent));
 	}
 
 	/**
@@ -284,6 +304,7 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public char getNonBreakingSpace() {
 		return nonBreakingSpace;
 	}
@@ -293,11 +314,12 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setNonBreakingSpace(char newNonBreakingSpace) {
 		char oldNonBreakingSpace = nonBreakingSpace;
 		nonBreakingSpace = newNonBreakingSpace;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TextModelPackage.STRING_NODE__NON_BREAKING_SPACE, oldNonBreakingSpace, nonBreakingSpace));
+			eNotify(new ENotificationImpl(this, Notification.SET, 3, oldNonBreakingSpace, nonBreakingSpace));
 	}
 
 	/**
@@ -307,7 +329,7 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	 */
 	@Override
 	public StringNode getParent() {
-		if (eContainerFeatureID() != TextModelPackage.STRING_NODE__PARENT) return null;
+		if (eContainerFeatureID() != (4)) return null;
 		return (StringNode)eInternalContainer();
 	}
 
@@ -317,7 +339,7 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	 * @generated
 	 */
 	public NotificationChain basicSetParent(StringNode newParent, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newParent, TextModelPackage.STRING_NODE__PARENT, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newParent, 4, msgs);
 		return msgs;
 	}
 
@@ -328,19 +350,19 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	 */
 	@Override
 	public void setParent(StringNode newParent) {
-		if (newParent != eInternalContainer() || (eContainerFeatureID() != TextModelPackage.STRING_NODE__PARENT && newParent != null)) {
+		if (newParent != eInternalContainer() || (eContainerFeatureID() != (4) && newParent != null)) {
 			if (EcoreUtil.isAncestor(this, newParent))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newParent != null)
-				msgs = ((InternalEObject)newParent).eInverseAdd(this, TextModelPackage.STRING_NODE__CHILDREN, StringNode.class, msgs);
+				msgs = ((InternalEObject)newParent).eInverseAdd(this, 0, StringNode.class, msgs);
 			msgs = basicSetParent(newParent, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TextModelPackage.STRING_NODE__PARENT, newParent, newParent));
+			eNotify(new ENotificationImpl(this, Notification.SET, 4, newParent, newParent));
 	}
 
 	/**
@@ -363,7 +385,7 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 		String oldPrefix = prefix;
 		prefix = newPrefix;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TextModelPackage.STRING_NODE__PREFIX, oldPrefix, prefix));
+			eNotify(new ENotificationImpl(this, Notification.SET, 5, oldPrefix, prefix));
 	}
 
 	/**
@@ -386,7 +408,7 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 		String oldSeparator = separator;
 		separator = newSeparator;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TextModelPackage.STRING_NODE__SEPARATOR, oldSeparator, separator));
+			eNotify(new ENotificationImpl(this, Notification.SET, 6, oldSeparator, separator));
 	}
 
 	/**
@@ -409,7 +431,7 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 		String oldSuffix = suffix;
 		suffix = newSuffix;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TextModelPackage.STRING_NODE__SUFFIX, oldSuffix, suffix));
+			eNotify(new ENotificationImpl(this, Notification.SET, 7, oldSuffix, suffix));
 	}
 
 	/**
@@ -432,7 +454,7 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 		String oldText = text;
 		text = newText;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TextModelPackage.STRING_NODE__TEXT, oldText, text));
+			eNotify(new ENotificationImpl(this, Notification.SET, 8, oldText, text));
 	}
 
 	/**
@@ -444,9 +466,9 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TextModelPackage.STRING_NODE__CHILDREN:
+			case 0:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getChildren()).basicAdd(otherEnd, msgs);
-			case TextModelPackage.STRING_NODE__PARENT:
+			case 4:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetParent((StringNode)otherEnd, msgs);
@@ -462,9 +484,9 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TextModelPackage.STRING_NODE__CHILDREN:
+			case 0:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
-			case TextModelPackage.STRING_NODE__PARENT:
+			case 4:
 				return basicSetParent(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -478,8 +500,8 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case TextModelPackage.STRING_NODE__PARENT:
-				return eInternalContainer().eInverseRemove(this, TextModelPackage.STRING_NODE__CHILDREN, StringNode.class, msgs);
+			case 4:
+				return eInternalContainer().eInverseRemove(this, 0, StringNode.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -492,23 +514,23 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TextModelPackage.STRING_NODE__CHILDREN:
+			case 0:
 				return getChildren();
-			case TextModelPackage.STRING_NODE__END_TEXT:
+			case 1:
 				return getEndText();
-			case TextModelPackage.STRING_NODE__INDENT:
+			case 2:
 				return getIndent();
-			case TextModelPackage.STRING_NODE__NON_BREAKING_SPACE:
+			case 3:
 				return getNonBreakingSpace();
-			case TextModelPackage.STRING_NODE__PARENT:
+			case 4:
 				return getParent();
-			case TextModelPackage.STRING_NODE__PREFIX:
+			case 5:
 				return getPrefix();
-			case TextModelPackage.STRING_NODE__SEPARATOR:
+			case 6:
 				return getSeparator();
-			case TextModelPackage.STRING_NODE__SUFFIX:
+			case 7:
 				return getSuffix();
-			case TextModelPackage.STRING_NODE__TEXT:
+			case 8:
 				return getText();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -523,32 +545,32 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TextModelPackage.STRING_NODE__CHILDREN:
+			case 0:
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends StringNode>)newValue);
 				return;
-			case TextModelPackage.STRING_NODE__END_TEXT:
+			case 1:
 				setEndText((String)newValue);
 				return;
-			case TextModelPackage.STRING_NODE__INDENT:
+			case 2:
 				setIndent((String)newValue);
 				return;
-			case TextModelPackage.STRING_NODE__NON_BREAKING_SPACE:
+			case 3:
 				setNonBreakingSpace((Character)newValue);
 				return;
-			case TextModelPackage.STRING_NODE__PARENT:
+			case 4:
 				setParent((StringNode)newValue);
 				return;
-			case TextModelPackage.STRING_NODE__PREFIX:
+			case 5:
 				setPrefix((String)newValue);
 				return;
-			case TextModelPackage.STRING_NODE__SEPARATOR:
+			case 6:
 				setSeparator((String)newValue);
 				return;
-			case TextModelPackage.STRING_NODE__SUFFIX:
+			case 7:
 				setSuffix((String)newValue);
 				return;
-			case TextModelPackage.STRING_NODE__TEXT:
+			case 8:
 				setText((String)newValue);
 				return;
 		}
@@ -563,31 +585,31 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TextModelPackage.STRING_NODE__CHILDREN:
+			case 0:
 				getChildren().clear();
 				return;
-			case TextModelPackage.STRING_NODE__END_TEXT:
+			case 1:
 				setEndText(END_TEXT_EDEFAULT);
 				return;
-			case TextModelPackage.STRING_NODE__INDENT:
+			case 2:
 				setIndent(INDENT_EDEFAULT);
 				return;
-			case TextModelPackage.STRING_NODE__NON_BREAKING_SPACE:
+			case 3:
 				setNonBreakingSpace(NON_BREAKING_SPACE_EDEFAULT);
 				return;
-			case TextModelPackage.STRING_NODE__PARENT:
+			case 4:
 				setParent((StringNode)null);
 				return;
-			case TextModelPackage.STRING_NODE__PREFIX:
+			case 5:
 				setPrefix(PREFIX_EDEFAULT);
 				return;
-			case TextModelPackage.STRING_NODE__SEPARATOR:
+			case 6:
 				setSeparator(SEPARATOR_EDEFAULT);
 				return;
-			case TextModelPackage.STRING_NODE__SUFFIX:
+			case 7:
 				setSuffix(SUFFIX_EDEFAULT);
 				return;
-			case TextModelPackage.STRING_NODE__TEXT:
+			case 8:
 				setText(TEXT_EDEFAULT);
 				return;
 		}
@@ -602,23 +624,23 @@ public class StringNodeImpl extends MinimalEObjectImpl.Container implements Stri
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TextModelPackage.STRING_NODE__CHILDREN:
+			case 0:
 				return children != null && !children.isEmpty();
-			case TextModelPackage.STRING_NODE__END_TEXT:
+			case 1:
 				return END_TEXT_EDEFAULT == null ? endText != null : !END_TEXT_EDEFAULT.equals(endText);
-			case TextModelPackage.STRING_NODE__INDENT:
+			case 2:
 				return INDENT_EDEFAULT == null ? indent != null : !INDENT_EDEFAULT.equals(indent);
-			case TextModelPackage.STRING_NODE__NON_BREAKING_SPACE:
+			case 3:
 				return nonBreakingSpace != NON_BREAKING_SPACE_EDEFAULT;
-			case TextModelPackage.STRING_NODE__PARENT:
+			case 4:
 				return getParent() != null;
-			case TextModelPackage.STRING_NODE__PREFIX:
+			case 5:
 				return PREFIX_EDEFAULT == null ? prefix != null : !PREFIX_EDEFAULT.equals(prefix);
-			case TextModelPackage.STRING_NODE__SEPARATOR:
+			case 6:
 				return SEPARATOR_EDEFAULT == null ? separator != null : !SEPARATOR_EDEFAULT.equals(separator);
-			case TextModelPackage.STRING_NODE__SUFFIX:
+			case 7:
 				return SUFFIX_EDEFAULT == null ? suffix != null : !SUFFIX_EDEFAULT.equals(suffix);
-			case TextModelPackage.STRING_NODE__TEXT:
+			case 8:
 				return TEXT_EDEFAULT == null ? text != null : !TEXT_EDEFAULT.equals(text);
 		}
 		return super.eIsSet(featureID);

@@ -105,6 +105,7 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getStringNode() {
 		return stringNodeEClass;
 	}
@@ -114,6 +115,7 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStringNode_Children() {
 		return (EReference)stringNodeEClass.getEStructuralFeatures().get(0);
 	}
@@ -123,6 +125,7 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStringNode_EndText() {
 		return (EAttribute)stringNodeEClass.getEStructuralFeatures().get(1);
 	}
@@ -132,6 +135,7 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStringNode_Indent() {
 		return (EAttribute)stringNodeEClass.getEStructuralFeatures().get(2);
 	}
@@ -141,6 +145,7 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStringNode_NonBreakingSpace() {
 		return (EAttribute)stringNodeEClass.getEStructuralFeatures().get(3);
 	}
@@ -150,6 +155,7 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getStringNode_Parent() {
 		return (EReference)stringNodeEClass.getEStructuralFeatures().get(4);
 	}
@@ -159,6 +165,7 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStringNode_Prefix() {
 		return (EAttribute)stringNodeEClass.getEStructuralFeatures().get(5);
 	}
@@ -168,6 +175,7 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStringNode_Separator() {
 		return (EAttribute)stringNodeEClass.getEStructuralFeatures().get(6);
 	}
@@ -177,6 +185,7 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStringNode_Suffix() {
 		return (EAttribute)stringNodeEClass.getEStructuralFeatures().get(7);
 	}
@@ -186,6 +195,7 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getStringNode_Text() {
 		return (EAttribute)stringNodeEClass.getEStructuralFeatures().get(8);
 	}
@@ -195,6 +205,7 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TextModelFactory getTextModelFactory() {
 		return (TextModelFactory)getEFactoryInstance();
 	}
@@ -218,16 +229,16 @@ public class TextModelPackageImpl extends EPackageImpl implements TextModelPacka
 		isCreated = true;
 
 		// Create classes and their features
-		stringNodeEClass = createEClass(STRING_NODE);
-		createEReference(stringNodeEClass, STRING_NODE__CHILDREN);
-		createEAttribute(stringNodeEClass, STRING_NODE__END_TEXT);
-		createEAttribute(stringNodeEClass, STRING_NODE__INDENT);
-		createEAttribute(stringNodeEClass, STRING_NODE__NON_BREAKING_SPACE);
-		createEReference(stringNodeEClass, STRING_NODE__PARENT);
-		createEAttribute(stringNodeEClass, STRING_NODE__PREFIX);
-		createEAttribute(stringNodeEClass, STRING_NODE__SEPARATOR);
-		createEAttribute(stringNodeEClass, STRING_NODE__SUFFIX);
-		createEAttribute(stringNodeEClass, STRING_NODE__TEXT);
+		stringNodeEClass = createEClass(0);
+		createEReference(stringNodeEClass, 0);
+		createEAttribute(stringNodeEClass, 1);
+		createEAttribute(stringNodeEClass, 2);
+		createEAttribute(stringNodeEClass, 3);
+		createEReference(stringNodeEClass, 4);
+		createEAttribute(stringNodeEClass, 5);
+		createEAttribute(stringNodeEClass, 6);
+		createEAttribute(stringNodeEClass, 7);
+		createEAttribute(stringNodeEClass, 8);
 	}
 
 	/**

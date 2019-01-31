@@ -79,7 +79,7 @@ public class TextModelSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case TextModelPackage.STRING_NODE: {
+			case 0: {
 				StringNode stringNode = (StringNode)theEObject;
 				T result = caseStringNode(stringNode);
 				if (result == null) result = defaultCase(theEObject);

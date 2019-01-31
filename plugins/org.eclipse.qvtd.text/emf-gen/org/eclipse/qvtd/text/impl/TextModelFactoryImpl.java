@@ -68,7 +68,7 @@ public class TextModelFactoryImpl extends EFactoryImpl implements TextModelFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case TextModelPackage.STRING_NODE: return createStringNode();
+			case 0: return createStringNode();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -79,6 +79,7 @@ public class TextModelFactoryImpl extends EFactoryImpl implements TextModelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public StringNode createStringNode() {
 		StringNodeImpl stringNode = new StringNodeImpl();
 		return stringNode;
@@ -89,6 +90,7 @@ public class TextModelFactoryImpl extends EFactoryImpl implements TextModelFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TextModelPackage getTextModelPackage() {
 		return (TextModelPackage)getEPackage();
 	}
