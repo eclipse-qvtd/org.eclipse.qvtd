@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2015, 2018 Willink Transformations and others.
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/legal/epl-v20.html
  * 
  * Contributors:
  *   E.D.Willink - Initial API and implementation
@@ -48,6 +48,25 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.DispatchImpl;
  * @generated
  */
 public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
+	/**
+	 * The number of structural features of the '<em>Dmap Helper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DMAP_HELPER_FEATURE_COUNT = DispatchImpl.DISPATCH_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of operations of the '<em>Dmap Helper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DMAP_HELPER_OPERATION_COUNT = DispatchImpl.DISPATCH_OPERATION_COUNT + 0;
+
+
 	/**
 	 * The cached value of the '{@link #getD1atlHelper() <em>D1atl Helper</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -125,11 +144,11 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	@Override
 	public Helper getD1atlHelper() {
 		if (d1atlHelper != null && d1atlHelper.eIsProxy()) {
-			InternalEObject oldD1atlHelper = (InternalEObject)d1atlHelper;
+			InternalEObject oldD1atlHelper = d1atlHelper;
 			d1atlHelper = (Helper)eResolveProxy(oldD1atlHelper);
 			if (d1atlHelper != oldD1atlHelper) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.DMAP_HELPER__D1ATL_HELPER, oldD1atlHelper, d1atlHelper));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 0, oldD1atlHelper, d1atlHelper));
 			}
 		}
 		return d1atlHelper;
@@ -154,7 +173,7 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 		Helper oldD1atlHelper = d1atlHelper;
 		d1atlHelper = newD1atlHelper;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.DMAP_HELPER__D1ATL_HELPER, oldD1atlHelper, d1atlHelper));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 0, oldD1atlHelper, d1atlHelper));
 	}
 
 	/**
@@ -169,7 +188,7 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 			d2qvtrFunction = (Function)eResolveProxy(oldD2qvtrFunction);
 			if (d2qvtrFunction != oldD2qvtrFunction) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.DMAP_HELPER__D2QVTR_FUNCTION, oldD2qvtrFunction, d2qvtrFunction));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 1, oldD2qvtrFunction, d2qvtrFunction));
 			}
 		}
 		return d2qvtrFunction;
@@ -194,7 +213,7 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 		Function oldD2qvtrFunction = d2qvtrFunction;
 		d2qvtrFunction = newD2qvtrFunction;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.DMAP_HELPER__D2QVTR_FUNCTION, oldD2qvtrFunction, d2qvtrFunction));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 1, oldD2qvtrFunction, d2qvtrFunction));
 	}
 
 	/**
@@ -216,7 +235,7 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 		TmapHelper_Attribute oldDomapHelper_Attribute = domapHelper_Attribute;
 		domapHelper_Attribute = newDomapHelper_Attribute;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.DMAP_HELPER__DOMAP_HELPER_ATTRIBUTE, oldDomapHelper_Attribute, newDomapHelper_Attribute);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 2, oldDomapHelper_Attribute, newDomapHelper_Attribute);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -232,14 +251,14 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 		if (newDomapHelper_Attribute != domapHelper_Attribute) {
 			NotificationChain msgs = null;
 			if (domapHelper_Attribute != null)
-				msgs = ((InternalEObject)domapHelper_Attribute).eInverseRemove(this, trace_ATL2QVTrPackage.TMAP_HELPER_ATTRIBUTE__DISPATCHER, TmapHelper_Attribute.class, msgs);
+				msgs = ((InternalEObject)domapHelper_Attribute).eInverseRemove(this, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0, TmapHelper_Attribute.class, msgs);
 			if (newDomapHelper_Attribute != null)
-				msgs = ((InternalEObject)newDomapHelper_Attribute).eInverseAdd(this, trace_ATL2QVTrPackage.TMAP_HELPER_ATTRIBUTE__DISPATCHER, TmapHelper_Attribute.class, msgs);
+				msgs = ((InternalEObject)newDomapHelper_Attribute).eInverseAdd(this, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0, TmapHelper_Attribute.class, msgs);
 			msgs = basicSetDomapHelper_Attribute(newDomapHelper_Attribute, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.DMAP_HELPER__DOMAP_HELPER_ATTRIBUTE, newDomapHelper_Attribute, newDomapHelper_Attribute));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 2, newDomapHelper_Attribute, newDomapHelper_Attribute));
 	}
 
 	/**
@@ -261,7 +280,7 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 		TmapHelper_Operation oldDomapHelper_Operation = domapHelper_Operation;
 		domapHelper_Operation = newDomapHelper_Operation;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.DMAP_HELPER__DOMAP_HELPER_OPERATION, oldDomapHelper_Operation, newDomapHelper_Operation);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 3, oldDomapHelper_Operation, newDomapHelper_Operation);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -277,14 +296,14 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 		if (newDomapHelper_Operation != domapHelper_Operation) {
 			NotificationChain msgs = null;
 			if (domapHelper_Operation != null)
-				msgs = ((InternalEObject)domapHelper_Operation).eInverseRemove(this, trace_ATL2QVTrPackage.TMAP_HELPER_OPERATION__DISPATCHER, TmapHelper_Operation.class, msgs);
+				msgs = ((InternalEObject)domapHelper_Operation).eInverseRemove(this, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0, TmapHelper_Operation.class, msgs);
 			if (newDomapHelper_Operation != null)
-				msgs = ((InternalEObject)newDomapHelper_Operation).eInverseAdd(this, trace_ATL2QVTrPackage.TMAP_HELPER_OPERATION__DISPATCHER, TmapHelper_Operation.class, msgs);
+				msgs = ((InternalEObject)newDomapHelper_Operation).eInverseAdd(this, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0, TmapHelper_Operation.class, msgs);
 			msgs = basicSetDomapHelper_Operation(newDomapHelper_Operation, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.DMAP_HELPER__DOMAP_HELPER_OPERATION, newDomapHelper_Operation, newDomapHelper_Operation));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 3, newDomapHelper_Operation, newDomapHelper_Operation));
 	}
 
 	/**
@@ -299,7 +318,7 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 			result = (ImapHelper)eResolveProxy(oldResult);
 			if (result != oldResult) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.DMAP_HELPER__RESULT, oldResult, result));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 4, oldResult, result));
 			}
 		}
 		return result;
@@ -324,7 +343,7 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 		ImapHelper oldResult = result;
 		result = newResult;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.DMAP_HELPER__RESULT, oldResult, result));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 4, oldResult, result));
 	}
 
 	/**
@@ -335,13 +354,13 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.DMAP_HELPER__DOMAP_HELPER_ATTRIBUTE:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				if (domapHelper_Attribute != null)
-					msgs = ((InternalEObject)domapHelper_Attribute).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - trace_ATL2QVTrPackage.DMAP_HELPER__DOMAP_HELPER_ATTRIBUTE, null, msgs);
+					msgs = ((InternalEObject)domapHelper_Attribute).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (DispatchImpl.DISPATCH_FEATURE_COUNT + 2), null, msgs);
 				return basicSetDomapHelper_Attribute((TmapHelper_Attribute)otherEnd, msgs);
-			case trace_ATL2QVTrPackage.DMAP_HELPER__DOMAP_HELPER_OPERATION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 3:
 				if (domapHelper_Operation != null)
-					msgs = ((InternalEObject)domapHelper_Operation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - trace_ATL2QVTrPackage.DMAP_HELPER__DOMAP_HELPER_OPERATION, null, msgs);
+					msgs = ((InternalEObject)domapHelper_Operation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (DispatchImpl.DISPATCH_FEATURE_COUNT + 3), null, msgs);
 				return basicSetDomapHelper_Operation((TmapHelper_Operation)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -355,9 +374,9 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.DMAP_HELPER__DOMAP_HELPER_ATTRIBUTE:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				return basicSetDomapHelper_Attribute(null, msgs);
-			case trace_ATL2QVTrPackage.DMAP_HELPER__DOMAP_HELPER_OPERATION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 3:
 				return basicSetDomapHelper_Operation(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -371,17 +390,17 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.DMAP_HELPER__D1ATL_HELPER:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
 				if (resolve) return getD1atlHelper();
 				return basicGetD1atlHelper();
-			case trace_ATL2QVTrPackage.DMAP_HELPER__D2QVTR_FUNCTION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
 				if (resolve) return getD2qvtrFunction();
 				return basicGetD2qvtrFunction();
-			case trace_ATL2QVTrPackage.DMAP_HELPER__DOMAP_HELPER_ATTRIBUTE:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				return getDomapHelper_Attribute();
-			case trace_ATL2QVTrPackage.DMAP_HELPER__DOMAP_HELPER_OPERATION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 3:
 				return getDomapHelper_Operation();
-			case trace_ATL2QVTrPackage.DMAP_HELPER__RESULT:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 4:
 				if (resolve) return getResult();
 				return basicGetResult();
 		}
@@ -396,19 +415,19 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.DMAP_HELPER__D1ATL_HELPER:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
 				setD1atlHelper((Helper)newValue);
 				return;
-			case trace_ATL2QVTrPackage.DMAP_HELPER__D2QVTR_FUNCTION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
 				setD2qvtrFunction((Function)newValue);
 				return;
-			case trace_ATL2QVTrPackage.DMAP_HELPER__DOMAP_HELPER_ATTRIBUTE:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				setDomapHelper_Attribute((TmapHelper_Attribute)newValue);
 				return;
-			case trace_ATL2QVTrPackage.DMAP_HELPER__DOMAP_HELPER_OPERATION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 3:
 				setDomapHelper_Operation((TmapHelper_Operation)newValue);
 				return;
-			case trace_ATL2QVTrPackage.DMAP_HELPER__RESULT:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 4:
 				setResult((ImapHelper)newValue);
 				return;
 		}
@@ -423,19 +442,19 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.DMAP_HELPER__D1ATL_HELPER:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
 				setD1atlHelper((Helper)null);
 				return;
-			case trace_ATL2QVTrPackage.DMAP_HELPER__D2QVTR_FUNCTION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
 				setD2qvtrFunction((Function)null);
 				return;
-			case trace_ATL2QVTrPackage.DMAP_HELPER__DOMAP_HELPER_ATTRIBUTE:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				setDomapHelper_Attribute((TmapHelper_Attribute)null);
 				return;
-			case trace_ATL2QVTrPackage.DMAP_HELPER__DOMAP_HELPER_OPERATION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 3:
 				setDomapHelper_Operation((TmapHelper_Operation)null);
 				return;
-			case trace_ATL2QVTrPackage.DMAP_HELPER__RESULT:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 4:
 				setResult((ImapHelper)null);
 				return;
 		}
@@ -450,18 +469,19 @@ public class DmapHelperImpl extends DispatchImpl implements DmapHelper {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.DMAP_HELPER__D1ATL_HELPER:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
 				return d1atlHelper != null;
-			case trace_ATL2QVTrPackage.DMAP_HELPER__D2QVTR_FUNCTION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
 				return d2qvtrFunction != null;
-			case trace_ATL2QVTrPackage.DMAP_HELPER__DOMAP_HELPER_ATTRIBUTE:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				return domapHelper_Attribute != null;
-			case trace_ATL2QVTrPackage.DMAP_HELPER__DOMAP_HELPER_OPERATION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 3:
 				return domapHelper_Operation != null;
-			case trace_ATL2QVTrPackage.DMAP_HELPER__RESULT:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 4:
 				return result != null;
 		}
 		return super.eIsSet(featureID);
 	}
+
 
 } //DmapHelperImpl

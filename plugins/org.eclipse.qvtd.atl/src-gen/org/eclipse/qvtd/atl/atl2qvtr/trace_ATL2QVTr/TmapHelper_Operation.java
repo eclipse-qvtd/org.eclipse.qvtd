@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2015, 2018 Willink Transformations and others.
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/legal/epl-v20.html
  * 
  * Contributors:
  *   E.D.Willink - Initial API and implementation
@@ -40,6 +40,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Operation#getWmapHelper_Context <em>Wmap Helper Context</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Operation#getWmapModule <em>Wmap Module</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Operation#getWmapOclExpression <em>Wmap Ocl Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Operation#getLocalSuccess <em>Local Success</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapHelper_Operation()
@@ -368,5 +369,31 @@ public interface TmapHelper_Operation extends ImapHelper {
 	 * @generated
 	 */
 	void setWmapOclExpression(DmapOclExpression value);
+
+	/**
+	 * Returns the value of the '<em><b>Local Success</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Local Success</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Local Success</em>' attribute.
+	 * @see #setLocalSuccess(Boolean)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapHelper_Operation_LocalSuccess()
+	 * @model
+	 * @generated
+	 */
+	Boolean getLocalSuccess();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapHelper_Operation#getLocalSuccess <em>Local Success</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Local Success</em>' attribute.
+	 * @see #getLocalSuccess()
+	 * @generated
+	 */
+	void setLocalSuccess(Boolean value);
 
 } // TmapHelper_Operation

@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2015, 2018 Willink Transformations and others.
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/legal/epl-v20.html
  * 
  * Contributors:
  *   E.D.Willink - Initial API and implementation
@@ -46,6 +46,25 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * @generated
  */
 public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatchedRule_super {
+	/**
+	 * The number of structural features of the '<em>Tmap Matched Rule super</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_MATCHED_RULE_SUPER_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of operations of the '<em>Tmap Matched Rule super</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_MATCHED_RULE_SUPER_OPERATION_COUNT = ExecutionImpl.EXECUTION_OPERATION_COUNT + 0;
+
+
 	/**
 	 * The cached value of the '{@link #getT1atlChildRule() <em>T1atl Child Rule</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -133,11 +152,11 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 	@Override
 	public MatchedRule getT1atlChildRule() {
 		if (t1atlChildRule != null && t1atlChildRule.eIsProxy()) {
-			InternalEObject oldT1atlChildRule = (InternalEObject)t1atlChildRule;
+			InternalEObject oldT1atlChildRule = t1atlChildRule;
 			t1atlChildRule = (MatchedRule)eResolveProxy(oldT1atlChildRule);
 			if (t1atlChildRule != oldT1atlChildRule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T1ATL_CHILD_RULE, oldT1atlChildRule, t1atlChildRule));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldT1atlChildRule, t1atlChildRule));
 			}
 		}
 		return t1atlChildRule;
@@ -162,7 +181,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 		MatchedRule oldT1atlChildRule = t1atlChildRule;
 		t1atlChildRule = newT1atlChildRule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T1ATL_CHILD_RULE, oldT1atlChildRule, t1atlChildRule));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldT1atlChildRule, t1atlChildRule));
 	}
 
 	/**
@@ -173,11 +192,11 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 	@Override
 	public MatchedRule getT1atlSuperRule() {
 		if (t1atlSuperRule != null && t1atlSuperRule.eIsProxy()) {
-			InternalEObject oldT1atlSuperRule = (InternalEObject)t1atlSuperRule;
+			InternalEObject oldT1atlSuperRule = t1atlSuperRule;
 			t1atlSuperRule = (MatchedRule)eResolveProxy(oldT1atlSuperRule);
 			if (t1atlSuperRule != oldT1atlSuperRule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T1ATL_SUPER_RULE, oldT1atlSuperRule, t1atlSuperRule));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlSuperRule, t1atlSuperRule));
 			}
 		}
 		return t1atlSuperRule;
@@ -202,7 +221,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 		MatchedRule oldT1atlSuperRule = t1atlSuperRule;
 		t1atlSuperRule = newT1atlSuperRule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T1ATL_SUPER_RULE, oldT1atlSuperRule, t1atlSuperRule));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlSuperRule, t1atlSuperRule));
 	}
 
 	/**
@@ -217,7 +236,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 			t2qvtrOverriddenRelation = (Relation)eResolveProxy(oldT2qvtrOverriddenRelation);
 			if (t2qvtrOverriddenRelation != oldT2qvtrOverriddenRelation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T2QVTR_OVERRIDDEN_RELATION, oldT2qvtrOverriddenRelation, t2qvtrOverriddenRelation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT2qvtrOverriddenRelation, t2qvtrOverriddenRelation));
 			}
 		}
 		return t2qvtrOverriddenRelation;
@@ -242,7 +261,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 		Relation oldT2qvtrOverriddenRelation = t2qvtrOverriddenRelation;
 		t2qvtrOverriddenRelation = newT2qvtrOverriddenRelation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T2QVTR_OVERRIDDEN_RELATION, oldT2qvtrOverriddenRelation, t2qvtrOverriddenRelation));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT2qvtrOverriddenRelation, t2qvtrOverriddenRelation));
 	}
 
 	/**
@@ -257,7 +276,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 			t2qvtrOverridesRelation = (Relation)eResolveProxy(oldT2qvtrOverridesRelation);
 			if (t2qvtrOverridesRelation != oldT2qvtrOverridesRelation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T2QVTR_OVERRIDES_RELATION, oldT2qvtrOverridesRelation, t2qvtrOverridesRelation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT2qvtrOverridesRelation, t2qvtrOverridesRelation));
 			}
 		}
 		return t2qvtrOverridesRelation;
@@ -282,7 +301,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 		Relation oldT2qvtrOverridesRelation = t2qvtrOverridesRelation;
 		t2qvtrOverridesRelation = newT2qvtrOverridesRelation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T2QVTR_OVERRIDES_RELATION, oldT2qvtrOverridesRelation, t2qvtrOverridesRelation));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT2qvtrOverridesRelation, t2qvtrOverridesRelation));
 	}
 
 	/**
@@ -297,7 +316,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 			wmapMatchedRule = (TmapMatchedRule)eResolveProxy(oldWmapMatchedRule);
 			if (wmapMatchedRule != oldWmapMatchedRule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__WMAP_MATCHED_RULE, oldWmapMatchedRule, wmapMatchedRule));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldWmapMatchedRule, wmapMatchedRule));
 			}
 		}
 		return wmapMatchedRule;
@@ -322,7 +341,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 		TmapMatchedRule oldWmapMatchedRule = wmapMatchedRule;
 		wmapMatchedRule = newWmapMatchedRule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__WMAP_MATCHED_RULE, oldWmapMatchedRule, wmapMatchedRule));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldWmapMatchedRule, wmapMatchedRule));
 	}
 
 	/**
@@ -337,7 +356,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 			wmapMatchedRule1 = (TmapMatchedRule)eResolveProxy(oldWmapMatchedRule1);
 			if (wmapMatchedRule1 != oldWmapMatchedRule1) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__WMAP_MATCHED_RULE1, oldWmapMatchedRule1, wmapMatchedRule1));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldWmapMatchedRule1, wmapMatchedRule1));
 			}
 		}
 		return wmapMatchedRule1;
@@ -362,7 +381,7 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 		TmapMatchedRule oldWmapMatchedRule1 = wmapMatchedRule1;
 		wmapMatchedRule1 = newWmapMatchedRule1;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__WMAP_MATCHED_RULE1, oldWmapMatchedRule1, wmapMatchedRule1));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldWmapMatchedRule1, wmapMatchedRule1));
 	}
 
 	/**
@@ -373,22 +392,22 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T1ATL_CHILD_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				if (resolve) return getT1atlChildRule();
 				return basicGetT1atlChildRule();
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T1ATL_SUPER_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				if (resolve) return getT1atlSuperRule();
 				return basicGetT1atlSuperRule();
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T2QVTR_OVERRIDDEN_RELATION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				if (resolve) return getT2qvtrOverriddenRelation();
 				return basicGetT2qvtrOverriddenRelation();
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T2QVTR_OVERRIDES_RELATION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				if (resolve) return getT2qvtrOverridesRelation();
 				return basicGetT2qvtrOverridesRelation();
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__WMAP_MATCHED_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				if (resolve) return getWmapMatchedRule();
 				return basicGetWmapMatchedRule();
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__WMAP_MATCHED_RULE1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				if (resolve) return getWmapMatchedRule1();
 				return basicGetWmapMatchedRule1();
 		}
@@ -403,22 +422,22 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T1ATL_CHILD_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				setT1atlChildRule((MatchedRule)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T1ATL_SUPER_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setT1atlSuperRule((MatchedRule)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T2QVTR_OVERRIDDEN_RELATION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT2qvtrOverriddenRelation((Relation)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T2QVTR_OVERRIDES_RELATION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT2qvtrOverridesRelation((Relation)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__WMAP_MATCHED_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setWmapMatchedRule((TmapMatchedRule)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__WMAP_MATCHED_RULE1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				setWmapMatchedRule1((TmapMatchedRule)newValue);
 				return;
 		}
@@ -433,22 +452,22 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T1ATL_CHILD_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				setT1atlChildRule((MatchedRule)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T1ATL_SUPER_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setT1atlSuperRule((MatchedRule)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T2QVTR_OVERRIDDEN_RELATION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT2qvtrOverriddenRelation((Relation)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T2QVTR_OVERRIDES_RELATION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT2qvtrOverridesRelation((Relation)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__WMAP_MATCHED_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setWmapMatchedRule((TmapMatchedRule)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__WMAP_MATCHED_RULE1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				setWmapMatchedRule1((TmapMatchedRule)null);
 				return;
 		}
@@ -463,20 +482,21 @@ public class TmapMatchedRule_superImpl extends ExecutionImpl implements TmapMatc
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T1ATL_CHILD_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				return t1atlChildRule != null;
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T1ATL_SUPER_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return t1atlSuperRule != null;
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T2QVTR_OVERRIDDEN_RELATION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				return t2qvtrOverriddenRelation != null;
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__T2QVTR_OVERRIDES_RELATION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				return t2qvtrOverridesRelation != null;
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__WMAP_MATCHED_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				return wmapMatchedRule != null;
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER__WMAP_MATCHED_RULE1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				return wmapMatchedRule1 != null;
 		}
 		return super.eIsSet(featureID);
 	}
+
 
 } //TmapMatchedRule_superImpl

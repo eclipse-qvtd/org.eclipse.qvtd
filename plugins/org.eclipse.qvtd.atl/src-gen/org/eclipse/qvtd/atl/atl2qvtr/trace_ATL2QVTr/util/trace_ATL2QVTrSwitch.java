@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2018 Willink Transformations and others.
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -81,7 +81,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case trace_ATL2QVTrPackage.CMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER: {
+			case 0: {
 				CmapVariableExp_referredVariable_Helper cmapVariableExp_referredVariable_Helper = (CmapVariableExp_referredVariable_Helper)theEObject;
 				T result = caseCmapVariableExp_referredVariable_Helper(cmapVariableExp_referredVariable_Helper);
 				if (result == null) result = caseDmapVariableExp_referredVariable(cmapVariableExp_referredVariable_Helper);
@@ -91,7 +91,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.CMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION: {
+			case 1: {
 				CmapVariableExp_referredVariable_VariableDeclaration cmapVariableExp_referredVariable_VariableDeclaration = (CmapVariableExp_referredVariable_VariableDeclaration)theEObject;
 				T result = caseCmapVariableExp_referredVariable_VariableDeclaration(cmapVariableExp_referredVariable_VariableDeclaration);
 				if (result == null) result = caseDmapVariableExp_referredVariable(cmapVariableExp_referredVariable_VariableDeclaration);
@@ -101,7 +101,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.DMAP_HELPER: {
+			case 2: {
 				DmapHelper dmapHelper = (DmapHelper)theEObject;
 				T result = caseDmapHelper(dmapHelper);
 				if (result == null) result = caseDispatch(dmapHelper);
@@ -110,7 +110,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.DMAP_OCL_EXPRESSION: {
+			case 3: {
 				DmapOclExpression dmapOclExpression = (DmapOclExpression)theEObject;
 				T result = caseDmapOclExpression(dmapOclExpression);
 				if (result == null) result = caseDispatch(dmapOclExpression);
@@ -119,7 +119,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE: {
+			case 4: {
 				DmapVariableExp_referredVariable dmapVariableExp_referredVariable = (DmapVariableExp_referredVariable)theEObject;
 				T result = caseDmapVariableExp_referredVariable(dmapVariableExp_referredVariable);
 				if (result == null) result = caseDispatch(dmapVariableExp_referredVariable);
@@ -128,7 +128,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.IMAP_HELPER: {
+			case 5: {
 				ImapHelper imapHelper = (ImapHelper)theEObject;
 				T result = caseImapHelper(imapHelper);
 				if (result == null) result = caseExecution(imapHelper);
@@ -137,7 +137,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.IMAP_OCL_EXPRESSION: {
+			case 6: {
 				ImapOclExpression imapOclExpression = (ImapOclExpression)theEObject;
 				T result = caseImapOclExpression(imapOclExpression);
 				if (result == null) result = caseExecution(imapOclExpression);
@@ -146,7 +146,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.IMAP_VARIABLE_EXP_REFERRED_VARIABLE: {
+			case 7: {
 				ImapVariableExp_referredVariable imapVariableExp_referredVariable = (ImapVariableExp_referredVariable)theEObject;
 				T result = caseImapVariableExp_referredVariable(imapVariableExp_referredVariable);
 				if (result == null) result = caseExecution(imapVariableExp_referredVariable);
@@ -155,7 +155,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_BINDING: {
+			case 8: {
 				TmapBinding tmapBinding = (TmapBinding)theEObject;
 				T result = caseTmapBinding(tmapBinding);
 				if (result == null) result = caseExecution(tmapBinding);
@@ -164,7 +164,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_BOOLEAN_EXP: {
+			case 9: {
 				TmapBooleanExp tmapBooleanExp = (TmapBooleanExp)theEObject;
 				T result = caseTmapBooleanExp(tmapBooleanExp);
 				if (result == null) result = caseImapOclExpression(tmapBooleanExp);
@@ -174,7 +174,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_HELPER_ATTRIBUTE: {
+			case 10: {
 				TmapHelper_Attribute tmapHelper_Attribute = (TmapHelper_Attribute)theEObject;
 				T result = caseTmapHelper_Attribute(tmapHelper_Attribute);
 				if (result == null) result = caseImapHelper(tmapHelper_Attribute);
@@ -184,7 +184,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT: {
+			case 11: {
 				TmapHelper_Context tmapHelper_Context = (TmapHelper_Context)theEObject;
 				T result = caseTmapHelper_Context(tmapHelper_Context);
 				if (result == null) result = caseExecution(tmapHelper_Context);
@@ -193,7 +193,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_HELPER_OPERATION: {
+			case 12: {
 				TmapHelper_Operation tmapHelper_Operation = (TmapHelper_Operation)theEObject;
 				T result = caseTmapHelper_Operation(tmapHelper_Operation);
 				if (result == null) result = caseImapHelper(tmapHelper_Operation);
@@ -203,7 +203,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_IF_EXP: {
+			case 13: {
 				TmapIfExp tmapIfExp = (TmapIfExp)theEObject;
 				T result = caseTmapIfExp(tmapIfExp);
 				if (result == null) result = caseImapOclExpression(tmapIfExp);
@@ -213,7 +213,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN: {
+			case 14: {
 				TmapInPattern tmapInPattern = (TmapInPattern)theEObject;
 				T result = caseTmapInPattern(tmapInPattern);
 				if (result == null) result = caseExecution(tmapInPattern);
@@ -222,7 +222,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN_FILTER: {
+			case 15: {
 				TmapInPattern_filter tmapInPattern_filter = (TmapInPattern_filter)theEObject;
 				T result = caseTmapInPattern_filter(tmapInPattern_filter);
 				if (result == null) result = caseExecution(tmapInPattern_filter);
@@ -231,7 +231,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_INTEGER_EXP: {
+			case 16: {
 				TmapIntegerExp tmapIntegerExp = (TmapIntegerExp)theEObject;
 				T result = caseTmapIntegerExp(tmapIntegerExp);
 				if (result == null) result = caseImapOclExpression(tmapIntegerExp);
@@ -241,7 +241,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE: {
+			case 17: {
 				TmapMatchedRule tmapMatchedRule = (TmapMatchedRule)theEObject;
 				T result = caseTmapMatchedRule(tmapMatchedRule);
 				if (result == null) result = caseExecution(tmapMatchedRule);
@@ -250,7 +250,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER: {
+			case 18: {
 				TmapMatchedRule_super tmapMatchedRule_super = (TmapMatchedRule_super)theEObject;
 				T result = caseTmapMatchedRule_super(tmapMatchedRule_super);
 				if (result == null) result = caseExecution(tmapMatchedRule_super);
@@ -259,7 +259,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_MODULE: {
+			case 19: {
 				TmapModule tmapModule = (TmapModule)theEObject;
 				T result = caseTmapModule(tmapModule);
 				if (result == null) result = caseExecution(tmapModule);
@@ -268,7 +268,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER: {
+			case 20: {
 				TmapNavigationOrAttributeCallExp_Helper tmapNavigationOrAttributeCallExp_Helper = (TmapNavigationOrAttributeCallExp_Helper)theEObject;
 				T result = caseTmapNavigationOrAttributeCallExp_Helper(tmapNavigationOrAttributeCallExp_Helper);
 				if (result == null) result = caseImapOclExpression(tmapNavigationOrAttributeCallExp_Helper);
@@ -278,7 +278,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY: {
+			case 21: {
 				TmapNavigationOrAttributeCallExp_Property tmapNavigationOrAttributeCallExp_Property = (TmapNavigationOrAttributeCallExp_Property)theEObject;
 				T result = caseTmapNavigationOrAttributeCallExp_Property(tmapNavigationOrAttributeCallExp_Property);
 				if (result == null) result = caseImapOclExpression(tmapNavigationOrAttributeCallExp_Property);
@@ -288,7 +288,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL: {
+			case 22: {
 				TmapOclMetamodel tmapOclMetamodel = (TmapOclMetamodel)theEObject;
 				T result = caseTmapOclMetamodel(tmapOclMetamodel);
 				if (result == null) result = caseExecution(tmapOclMetamodel);
@@ -297,7 +297,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_OCL_MODEL_IN: {
+			case 23: {
 				TmapOclModel_IN tmapOclModel_IN = (TmapOclModel_IN)theEObject;
 				T result = caseTmapOclModel_IN(tmapOclModel_IN);
 				if (result == null) result = caseExecution(tmapOclModel_IN);
@@ -306,7 +306,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_OCL_MODEL_OUT: {
+			case 24: {
 				TmapOclModel_OUT tmapOclModel_OUT = (TmapOclModel_OUT)theEObject;
 				T result = caseTmapOclModel_OUT(tmapOclModel_OUT);
 				if (result == null) result = caseExecution(tmapOclModel_OUT);
@@ -315,7 +315,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_HELPER: {
+			case 25: {
 				TmapOperationCallExp_Helper tmapOperationCallExp_Helper = (TmapOperationCallExp_Helper)theEObject;
 				T result = caseTmapOperationCallExp_Helper(tmapOperationCallExp_Helper);
 				if (result == null) result = caseImapOclExpression(tmapOperationCallExp_Helper);
@@ -325,7 +325,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_OPERATION: {
+			case 26: {
 				TmapOperationCallExp_Operation tmapOperationCallExp_Operation = (TmapOperationCallExp_Operation)theEObject;
 				T result = caseTmapOperationCallExp_Operation(tmapOperationCallExp_Operation);
 				if (result == null) result = caseImapOclExpression(tmapOperationCallExp_Operation);
@@ -335,7 +335,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT: {
+			case 27: {
 				TmapOperationCallExp_argument tmapOperationCallExp_argument = (TmapOperationCallExp_argument)theEObject;
 				T result = caseTmapOperationCallExp_argument(tmapOperationCallExp_argument);
 				if (result == null) result = caseExecution(tmapOperationCallExp_argument);
@@ -344,7 +344,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_OPERATOR_CALL_EXP: {
+			case 28: {
 				TmapOperatorCallExp tmapOperatorCallExp = (TmapOperatorCallExp)theEObject;
 				T result = caseTmapOperatorCallExp(tmapOperatorCallExp);
 				if (result == null) result = caseImapOclExpression(tmapOperatorCallExp);
@@ -354,7 +354,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_OUT_PATTERN: {
+			case 29: {
 				TmapOutPattern tmapOutPattern = (TmapOutPattern)theEObject;
 				T result = caseTmapOutPattern(tmapOutPattern);
 				if (result == null) result = caseExecution(tmapOutPattern);
@@ -363,7 +363,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_IN_PATTERN_ELEMENT: {
+			case 30: {
 				TmapSimpleInPatternElement tmapSimpleInPatternElement = (TmapSimpleInPatternElement)theEObject;
 				T result = caseTmapSimpleInPatternElement(tmapSimpleInPatternElement);
 				if (result == null) result = caseExecution(tmapSimpleInPatternElement);
@@ -372,7 +372,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT: {
+			case 31: {
 				TmapSimpleOutPatternElement tmapSimpleOutPatternElement = (TmapSimpleOutPatternElement)theEObject;
 				T result = caseTmapSimpleOutPatternElement(tmapSimpleOutPatternElement);
 				if (result == null) result = caseExecution(tmapSimpleOutPatternElement);
@@ -381,7 +381,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_STRING_EXP: {
+			case 32: {
 				TmapStringExp tmapStringExp = (TmapStringExp)theEObject;
 				T result = caseTmapStringExp(tmapStringExp);
 				if (result == null) result = caseImapOclExpression(tmapStringExp);
@@ -391,7 +391,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE: {
+			case 33: {
 				TmapVariable tmapVariable = (TmapVariable)theEObject;
 				T result = caseTmapVariable(tmapVariable);
 				if (result == null) result = caseExecution(tmapVariable);
@@ -400,7 +400,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP: {
+			case 34: {
 				TmapVariableExp tmapVariableExp = (TmapVariableExp)theEObject;
 				T result = caseTmapVariableExp(tmapVariableExp);
 				if (result == null) result = caseImapOclExpression(tmapVariableExp);
@@ -410,7 +410,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER: {
+			case 35: {
 				TmapVariableExp_referredVariable_Helper tmapVariableExp_referredVariable_Helper = (TmapVariableExp_referredVariable_Helper)theEObject;
 				T result = caseTmapVariableExp_referredVariable_Helper(tmapVariableExp_referredVariable_Helper);
 				if (result == null) result = caseImapVariableExp_referredVariable(tmapVariableExp_referredVariable_Helper);
@@ -420,7 +420,7 @@ public class trace_ATL2QVTrSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION: {
+			case 36: {
 				TmapVariableExp_referredVariable_VariableDeclaration tmapVariableExp_referredVariable_VariableDeclaration = (TmapVariableExp_referredVariable_VariableDeclaration)theEObject;
 				T result = caseTmapVariableExp_referredVariable_VariableDeclaration(tmapVariableExp_referredVariable_VariableDeclaration);
 				if (result == null) result = caseImapVariableExp_referredVariable(tmapVariableExp_referredVariable_VariableDeclaration);

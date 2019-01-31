@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2015, 2018 Willink Transformations and others.
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/legal/epl-v20.html
  * 
  * Contributors:
  *   E.D.Willink - Initial API and implementation
@@ -42,6 +42,25 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * @generated
  */
 public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamodel {
+	/**
+	 * The number of structural features of the '<em>Tmap Ocl Metamodel</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_OCL_METAMODEL_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Tmap Ocl Metamodel</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_OCL_METAMODEL_OPERATION_COUNT = ExecutionImpl.EXECUTION_OPERATION_COUNT + 0;
+
+
 	/**
 	 * The default value of the '{@link #getT0tmName() <em>T0tm Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -121,7 +140,7 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 		String oldT0tmName = t0tmName;
 		t0tmName = newT0tmName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL__T0TM_NAME, oldT0tmName, t0tmName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldT0tmName, t0tmName));
 	}
 
 	/**
@@ -132,11 +151,11 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	@Override
 	public OclModel getT1oclMetamodel() {
 		if (t1oclMetamodel != null && t1oclMetamodel.eIsProxy()) {
-			InternalEObject oldT1oclMetamodel = (InternalEObject)t1oclMetamodel;
+			InternalEObject oldT1oclMetamodel = t1oclMetamodel;
 			t1oclMetamodel = (OclModel)eResolveProxy(oldT1oclMetamodel);
 			if (t1oclMetamodel != oldT1oclMetamodel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL__T1OCL_METAMODEL, oldT1oclMetamodel, t1oclMetamodel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1oclMetamodel, t1oclMetamodel));
 			}
 		}
 		return t1oclMetamodel;
@@ -161,7 +180,7 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 		OclModel oldT1oclMetamodel = t1oclMetamodel;
 		t1oclMetamodel = newT1oclMetamodel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL__T1OCL_METAMODEL, oldT1oclMetamodel, t1oclMetamodel));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1oclMetamodel, t1oclMetamodel));
 	}
 
 	/**
@@ -176,7 +195,7 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 			t2qvtrTypedModel = (TypedModel)eResolveProxy(oldT2qvtrTypedModel);
 			if (t2qvtrTypedModel != oldT2qvtrTypedModel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL__T2QVTR_TYPED_MODEL, oldT2qvtrTypedModel, t2qvtrTypedModel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT2qvtrTypedModel, t2qvtrTypedModel));
 			}
 		}
 		return t2qvtrTypedModel;
@@ -201,7 +220,7 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 		TypedModel oldT2qvtrTypedModel = t2qvtrTypedModel;
 		t2qvtrTypedModel = newT2qvtrTypedModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL__T2QVTR_TYPED_MODEL, oldT2qvtrTypedModel, t2qvtrTypedModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT2qvtrTypedModel, t2qvtrTypedModel));
 	}
 
 	/**
@@ -212,12 +231,12 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL__T0TM_NAME:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				return getT0tmName();
-			case trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL__T1OCL_METAMODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				if (resolve) return getT1oclMetamodel();
 				return basicGetT1oclMetamodel();
-			case trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL__T2QVTR_TYPED_MODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				if (resolve) return getT2qvtrTypedModel();
 				return basicGetT2qvtrTypedModel();
 		}
@@ -232,13 +251,13 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL__T0TM_NAME:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				setT0tmName((String)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL__T1OCL_METAMODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setT1oclMetamodel((OclModel)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL__T2QVTR_TYPED_MODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT2qvtrTypedModel((TypedModel)newValue);
 				return;
 		}
@@ -253,13 +272,13 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL__T0TM_NAME:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				setT0tmName(T0TM_NAME_EDEFAULT);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL__T1OCL_METAMODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setT1oclMetamodel((OclModel)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL__T2QVTR_TYPED_MODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT2qvtrTypedModel((TypedModel)null);
 				return;
 		}
@@ -274,11 +293,11 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL__T0TM_NAME:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				return T0TM_NAME_EDEFAULT == null ? t0tmName != null : !T0TM_NAME_EDEFAULT.equals(t0tmName);
-			case trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL__T1OCL_METAMODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return t1oclMetamodel != null;
-			case trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL__T2QVTR_TYPED_MODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				return t2qvtrTypedModel != null;
 		}
 		return super.eIsSet(featureID);
@@ -299,5 +318,6 @@ public class TmapOclMetamodelImpl extends ExecutionImpl implements TmapOclMetamo
 		result.append(')');
 		return result.toString();
 	}
+
 
 } //TmapOclMetamodelImpl

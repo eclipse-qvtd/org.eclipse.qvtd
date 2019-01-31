@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2015, 2018 Willink Transformations and others.
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/legal/epl-v20.html
  * 
  * Contributors:
  *   E.D.Willink - Initial API and implementation
@@ -47,6 +47,25 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * @generated
  */
 public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements TmapOperationCallExp_argument {
+	/**
+	 * The number of structural features of the '<em>Tmap Operation Call Exp argument</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_OPERATION_CALL_EXP_ARGUMENT_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 6;
+
+	/**
+	 * The number of operations of the '<em>Tmap Operation Call Exp argument</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_OPERATION_CALL_EXP_ARGUMENT_OPERATION_COUNT = ExecutionImpl.EXECUTION_OPERATION_COUNT + 0;
+
+
 	/**
 	 * The cached value of the '{@link #getT1atlArgument() <em>T1atl Argument</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -134,11 +153,11 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	@Override
 	public OclExpression getT1atlArgument() {
 		if (t1atlArgument != null && t1atlArgument.eIsProxy()) {
-			InternalEObject oldT1atlArgument = (InternalEObject)t1atlArgument;
+			InternalEObject oldT1atlArgument = t1atlArgument;
 			t1atlArgument = (OclExpression)eResolveProxy(oldT1atlArgument);
 			if (t1atlArgument != oldT1atlArgument) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T1ATL_ARGUMENT, oldT1atlArgument, t1atlArgument));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldT1atlArgument, t1atlArgument));
 			}
 		}
 		return t1atlArgument;
@@ -163,7 +182,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 		OclExpression oldT1atlArgument = t1atlArgument;
 		t1atlArgument = newT1atlArgument;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T1ATL_ARGUMENT, oldT1atlArgument, t1atlArgument));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldT1atlArgument, t1atlArgument));
 	}
 
 	/**
@@ -174,11 +193,11 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	@Override
 	public OperationCallExp getT1atlParent() {
 		if (t1atlParent != null && t1atlParent.eIsProxy()) {
-			InternalEObject oldT1atlParent = (InternalEObject)t1atlParent;
+			InternalEObject oldT1atlParent = t1atlParent;
 			t1atlParent = (OperationCallExp)eResolveProxy(oldT1atlParent);
 			if (t1atlParent != oldT1atlParent) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T1ATL_PARENT, oldT1atlParent, t1atlParent));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlParent, t1atlParent));
 			}
 		}
 		return t1atlParent;
@@ -203,7 +222,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 		OperationCallExp oldT1atlParent = t1atlParent;
 		t1atlParent = newT1atlParent;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T1ATL_PARENT, oldT1atlParent, t1atlParent));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlParent, t1atlParent));
 	}
 
 	/**
@@ -218,7 +237,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 			t2qvtrArgument = (OCLExpression)eResolveProxy(oldT2qvtrArgument);
 			if (t2qvtrArgument != oldT2qvtrArgument) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T2QVTR_ARGUMENT, oldT2qvtrArgument, t2qvtrArgument));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT2qvtrArgument, t2qvtrArgument));
 			}
 		}
 		return t2qvtrArgument;
@@ -243,7 +262,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 		OCLExpression oldT2qvtrArgument = t2qvtrArgument;
 		t2qvtrArgument = newT2qvtrArgument;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T2QVTR_ARGUMENT, oldT2qvtrArgument, t2qvtrArgument));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT2qvtrArgument, t2qvtrArgument));
 	}
 
 	/**
@@ -258,7 +277,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 			t2qvtrParent = (org.eclipse.ocl.pivot.OperationCallExp)eResolveProxy(oldT2qvtrParent);
 			if (t2qvtrParent != oldT2qvtrParent) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T2QVTR_PARENT, oldT2qvtrParent, t2qvtrParent));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT2qvtrParent, t2qvtrParent));
 			}
 		}
 		return t2qvtrParent;
@@ -283,7 +302,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 		org.eclipse.ocl.pivot.OperationCallExp oldT2qvtrParent = t2qvtrParent;
 		t2qvtrParent = newT2qvtrParent;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T2QVTR_PARENT, oldT2qvtrParent, t2qvtrParent));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT2qvtrParent, t2qvtrParent));
 	}
 
 	/**
@@ -298,7 +317,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 			wmapOclExpression = (DmapOclExpression)eResolveProxy(oldWmapOclExpression);
 			if (wmapOclExpression != oldWmapOclExpression) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__WMAP_OCL_EXPRESSION, oldWmapOclExpression, wmapOclExpression));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldWmapOclExpression, wmapOclExpression));
 			}
 		}
 		return wmapOclExpression;
@@ -323,7 +342,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 		DmapOclExpression oldWmapOclExpression = wmapOclExpression;
 		wmapOclExpression = newWmapOclExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__WMAP_OCL_EXPRESSION, oldWmapOclExpression, wmapOclExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldWmapOclExpression, wmapOclExpression));
 	}
 
 	/**
@@ -338,7 +357,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 			wmapOclExpression1 = (DmapOclExpression)eResolveProxy(oldWmapOclExpression1);
 			if (wmapOclExpression1 != oldWmapOclExpression1) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__WMAP_OCL_EXPRESSION1, oldWmapOclExpression1, wmapOclExpression1));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldWmapOclExpression1, wmapOclExpression1));
 			}
 		}
 		return wmapOclExpression1;
@@ -363,7 +382,7 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 		DmapOclExpression oldWmapOclExpression1 = wmapOclExpression1;
 		wmapOclExpression1 = newWmapOclExpression1;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__WMAP_OCL_EXPRESSION1, oldWmapOclExpression1, wmapOclExpression1));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldWmapOclExpression1, wmapOclExpression1));
 	}
 
 	/**
@@ -374,22 +393,22 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T1ATL_ARGUMENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				if (resolve) return getT1atlArgument();
 				return basicGetT1atlArgument();
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T1ATL_PARENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				if (resolve) return getT1atlParent();
 				return basicGetT1atlParent();
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T2QVTR_ARGUMENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				if (resolve) return getT2qvtrArgument();
 				return basicGetT2qvtrArgument();
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T2QVTR_PARENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				if (resolve) return getT2qvtrParent();
 				return basicGetT2qvtrParent();
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__WMAP_OCL_EXPRESSION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				if (resolve) return getWmapOclExpression();
 				return basicGetWmapOclExpression();
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__WMAP_OCL_EXPRESSION1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				if (resolve) return getWmapOclExpression1();
 				return basicGetWmapOclExpression1();
 		}
@@ -404,22 +423,22 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T1ATL_ARGUMENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				setT1atlArgument((OclExpression)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T1ATL_PARENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setT1atlParent((OperationCallExp)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T2QVTR_ARGUMENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT2qvtrArgument((OCLExpression)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T2QVTR_PARENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT2qvtrParent((org.eclipse.ocl.pivot.OperationCallExp)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__WMAP_OCL_EXPRESSION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setWmapOclExpression((DmapOclExpression)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__WMAP_OCL_EXPRESSION1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				setWmapOclExpression1((DmapOclExpression)newValue);
 				return;
 		}
@@ -434,22 +453,22 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T1ATL_ARGUMENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				setT1atlArgument((OclExpression)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T1ATL_PARENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setT1atlParent((OperationCallExp)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T2QVTR_ARGUMENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT2qvtrArgument((OCLExpression)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T2QVTR_PARENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT2qvtrParent((org.eclipse.ocl.pivot.OperationCallExp)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__WMAP_OCL_EXPRESSION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setWmapOclExpression((DmapOclExpression)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__WMAP_OCL_EXPRESSION1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				setWmapOclExpression1((DmapOclExpression)null);
 				return;
 		}
@@ -464,20 +483,21 @@ public class TmapOperationCallExp_argumentImpl extends ExecutionImpl implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T1ATL_ARGUMENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				return t1atlArgument != null;
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T1ATL_PARENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return t1atlParent != null;
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T2QVTR_ARGUMENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				return t2qvtrArgument != null;
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__T2QVTR_PARENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				return t2qvtrParent != null;
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__WMAP_OCL_EXPRESSION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				return wmapOclExpression != null;
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT__WMAP_OCL_EXPRESSION1:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				return wmapOclExpression1 != null;
 		}
 		return super.eIsSet(featureID);
 	}
+
 
 } //TmapOperationCallExp_argumentImpl

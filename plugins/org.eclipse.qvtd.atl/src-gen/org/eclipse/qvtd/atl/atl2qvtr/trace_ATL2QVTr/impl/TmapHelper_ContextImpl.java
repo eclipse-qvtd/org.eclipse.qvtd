@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2015, 2018 Willink Transformations and others.
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/legal/epl-v20.html
  * 
  * Contributors:
  *   E.D.Willink - Initial API and implementation
@@ -52,6 +52,25 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * @generated
  */
 public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_Context {
+	/**
+	 * The number of structural features of the '<em>Tmap Helper Context</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_HELPER_CONTEXT_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 7;
+
+	/**
+	 * The number of operations of the '<em>Tmap Helper Context</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_HELPER_CONTEXT_OPERATION_COUNT = ExecutionImpl.EXECUTION_OPERATION_COUNT + 0;
+
+
 	/**
 	 * The cached value of the '{@link #getT1atlContext() <em>T1atl Context</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -149,11 +168,11 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	@Override
 	public OclContextDefinition getT1atlContext() {
 		if (t1atlContext != null && t1atlContext.eIsProxy()) {
-			InternalEObject oldT1atlContext = (InternalEObject)t1atlContext;
+			InternalEObject oldT1atlContext = t1atlContext;
 			t1atlContext = (OclContextDefinition)eResolveProxy(oldT1atlContext);
 			if (t1atlContext != oldT1atlContext) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_CONTEXT, oldT1atlContext, t1atlContext));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldT1atlContext, t1atlContext));
 			}
 		}
 		return t1atlContext;
@@ -178,7 +197,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 		OclContextDefinition oldT1atlContext = t1atlContext;
 		t1atlContext = newT1atlContext;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_CONTEXT, oldT1atlContext, t1atlContext));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldT1atlContext, t1atlContext));
 	}
 
 	/**
@@ -189,11 +208,11 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	@Override
 	public OclFeatureDefinition getT1atlDefinition() {
 		if (t1atlDefinition != null && t1atlDefinition.eIsProxy()) {
-			InternalEObject oldT1atlDefinition = (InternalEObject)t1atlDefinition;
+			InternalEObject oldT1atlDefinition = t1atlDefinition;
 			t1atlDefinition = (OclFeatureDefinition)eResolveProxy(oldT1atlDefinition);
 			if (t1atlDefinition != oldT1atlDefinition) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_DEFINITION, oldT1atlDefinition, t1atlDefinition));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlDefinition, t1atlDefinition));
 			}
 		}
 		return t1atlDefinition;
@@ -218,7 +237,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 		OclFeatureDefinition oldT1atlDefinition = t1atlDefinition;
 		t1atlDefinition = newT1atlDefinition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_DEFINITION, oldT1atlDefinition, t1atlDefinition));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlDefinition, t1atlDefinition));
 	}
 
 	/**
@@ -229,11 +248,11 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	@Override
 	public Helper getT1atlHelper() {
 		if (t1atlHelper != null && t1atlHelper.eIsProxy()) {
-			InternalEObject oldT1atlHelper = (InternalEObject)t1atlHelper;
+			InternalEObject oldT1atlHelper = t1atlHelper;
 			t1atlHelper = (Helper)eResolveProxy(oldT1atlHelper);
 			if (t1atlHelper != oldT1atlHelper) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_HELPER, oldT1atlHelper, t1atlHelper));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlHelper, t1atlHelper));
 			}
 		}
 		return t1atlHelper;
@@ -258,7 +277,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 		Helper oldT1atlHelper = t1atlHelper;
 		t1atlHelper = newT1atlHelper;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_HELPER, oldT1atlHelper, t1atlHelper));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlHelper, t1atlHelper));
 	}
 
 	/**
@@ -269,11 +288,11 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	@Override
 	public OclType getT1atlReturnType() {
 		if (t1atlReturnType != null && t1atlReturnType.eIsProxy()) {
-			InternalEObject oldT1atlReturnType = (InternalEObject)t1atlReturnType;
+			InternalEObject oldT1atlReturnType = t1atlReturnType;
 			t1atlReturnType = (OclType)eResolveProxy(oldT1atlReturnType);
 			if (t1atlReturnType != oldT1atlReturnType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_RETURN_TYPE, oldT1atlReturnType, t1atlReturnType));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlReturnType, t1atlReturnType));
 			}
 		}
 		return t1atlReturnType;
@@ -298,7 +317,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 		OclType oldT1atlReturnType = t1atlReturnType;
 		t1atlReturnType = newT1atlReturnType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_RETURN_TYPE, oldT1atlReturnType, t1atlReturnType));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlReturnType, t1atlReturnType));
 	}
 
 	/**
@@ -313,7 +332,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 			t2qvtrFunction = (Function)eResolveProxy(oldT2qvtrFunction);
 			if (t2qvtrFunction != oldT2qvtrFunction) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T2QVTR_FUNCTION, oldT2qvtrFunction, t2qvtrFunction));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2qvtrFunction, t2qvtrFunction));
 			}
 		}
 		return t2qvtrFunction;
@@ -338,7 +357,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 		Function oldT2qvtrFunction = t2qvtrFunction;
 		t2qvtrFunction = newT2qvtrFunction;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T2QVTR_FUNCTION, oldT2qvtrFunction, t2qvtrFunction));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2qvtrFunction, t2qvtrFunction));
 	}
 
 	/**
@@ -353,7 +372,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 			t2qvtrParameter = (FunctionParameter)eResolveProxy(oldT2qvtrParameter);
 			if (t2qvtrParameter != oldT2qvtrParameter) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T2QVTR_PARAMETER, oldT2qvtrParameter, t2qvtrParameter));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2qvtrParameter, t2qvtrParameter));
 			}
 		}
 		return t2qvtrParameter;
@@ -378,7 +397,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 		FunctionParameter oldT2qvtrParameter = t2qvtrParameter;
 		t2qvtrParameter = newT2qvtrParameter;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T2QVTR_PARAMETER, oldT2qvtrParameter, t2qvtrParameter));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2qvtrParameter, t2qvtrParameter));
 	}
 
 	/**
@@ -393,7 +412,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 			wmapVariable = (TmapVariable)eResolveProxy(oldWmapVariable);
 			if (wmapVariable != oldWmapVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__WMAP_VARIABLE, oldWmapVariable, wmapVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldWmapVariable, wmapVariable));
 			}
 		}
 		return wmapVariable;
@@ -418,7 +437,7 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 		TmapVariable oldWmapVariable = wmapVariable;
 		wmapVariable = newWmapVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__WMAP_VARIABLE, oldWmapVariable, wmapVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldWmapVariable, wmapVariable));
 	}
 
 	/**
@@ -429,25 +448,25 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_CONTEXT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				if (resolve) return getT1atlContext();
 				return basicGetT1atlContext();
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_DEFINITION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				if (resolve) return getT1atlDefinition();
 				return basicGetT1atlDefinition();
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_HELPER:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				if (resolve) return getT1atlHelper();
 				return basicGetT1atlHelper();
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_RETURN_TYPE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				if (resolve) return getT1atlReturnType();
 				return basicGetT1atlReturnType();
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T2QVTR_FUNCTION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				if (resolve) return getT2qvtrFunction();
 				return basicGetT2qvtrFunction();
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T2QVTR_PARAMETER:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				if (resolve) return getT2qvtrParameter();
 				return basicGetT2qvtrParameter();
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__WMAP_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				if (resolve) return getWmapVariable();
 				return basicGetWmapVariable();
 		}
@@ -462,25 +481,25 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_CONTEXT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				setT1atlContext((OclContextDefinition)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_DEFINITION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setT1atlDefinition((OclFeatureDefinition)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_HELPER:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT1atlHelper((Helper)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_RETURN_TYPE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT1atlReturnType((OclType)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T2QVTR_FUNCTION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setT2qvtrFunction((Function)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T2QVTR_PARAMETER:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				setT2qvtrParameter((FunctionParameter)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__WMAP_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				setWmapVariable((TmapVariable)newValue);
 				return;
 		}
@@ -495,25 +514,25 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_CONTEXT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				setT1atlContext((OclContextDefinition)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_DEFINITION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setT1atlDefinition((OclFeatureDefinition)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_HELPER:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT1atlHelper((Helper)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_RETURN_TYPE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT1atlReturnType((OclType)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T2QVTR_FUNCTION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setT2qvtrFunction((Function)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T2QVTR_PARAMETER:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				setT2qvtrParameter((FunctionParameter)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__WMAP_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				setWmapVariable((TmapVariable)null);
 				return;
 		}
@@ -528,22 +547,23 @@ public class TmapHelper_ContextImpl extends ExecutionImpl implements TmapHelper_
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_CONTEXT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				return t1atlContext != null;
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_DEFINITION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return t1atlDefinition != null;
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_HELPER:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				return t1atlHelper != null;
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T1ATL_RETURN_TYPE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				return t1atlReturnType != null;
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T2QVTR_FUNCTION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				return t2qvtrFunction != null;
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__T2QVTR_PARAMETER:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				return t2qvtrParameter != null;
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT__WMAP_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				return wmapVariable != null;
 		}
 		return super.eIsSet(featureID);
 	}
+
 
 } //TmapHelper_ContextImpl

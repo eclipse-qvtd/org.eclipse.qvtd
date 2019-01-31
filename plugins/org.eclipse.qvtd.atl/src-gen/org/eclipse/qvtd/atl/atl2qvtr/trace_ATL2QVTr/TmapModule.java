@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2015, 2018 Willink Transformations and others.
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/legal/epl-v20.html
  * 
  * Contributors:
  *   E.D.Willink - Initial API and implementation
@@ -30,10 +30,10 @@ import org.eclipse.qvtd.runtime.qvttrace.Execution;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT0txName <em>T0tx Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT1atlModule <em>T1atl Module</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_1 <em>T2 1</em>}</li>
- *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_2 <em>T2 2</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_3 <em>T2 3</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_4 <em>T2 4</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_5 <em>T2 5</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_6 <em>T2 6</em>}</li>
  *   <li>{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2qvtrTransformation <em>T2qvtr Transformation</em>}</li>
  * </ul>
  *
@@ -98,60 +98,6 @@ public interface TmapModule extends Execution {
 	void setT1atlModule(org.eclipse.m2m.atl.common.ATL.Module value);
 
 	/**
-	 * Returns the value of the '<em><b>T2 1</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2 1</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2 1</em>' reference.
-	 * @see #setT2_1(org.eclipse.ocl.pivot.Package)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapModule_T2_1()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
-	 * @generated
-	 */
-	org.eclipse.ocl.pivot.Package getT2_1();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_1 <em>T2 1</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2 1</em>' reference.
-	 * @see #getT2_1()
-	 * @generated
-	 */
-	void setT2_1(org.eclipse.ocl.pivot.Package value);
-
-	/**
-	 * Returns the value of the '<em><b>T2 2</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>T2 2</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>T2 2</em>' reference.
-	 * @see #setT2_2(ParameterVariable)
-	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapModule_T2_2()
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
-	 * @generated
-	 */
-	ParameterVariable getT2_2();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_2 <em>T2 2</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>T2 2</em>' reference.
-	 * @see #getT2_2()
-	 * @generated
-	 */
-	void setT2_2(ParameterVariable value);
-
-	/**
 	 * Returns the value of the '<em><b>T2 3</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -160,13 +106,13 @@ public interface TmapModule extends Execution {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>T2 3</em>' reference.
-	 * @see #setT2_3(TypedModel)
+	 * @see #setT2_3(org.eclipse.ocl.pivot.Package)
 	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapModule_T2_3()
 	 * @model required="true"
 	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
 	 * @generated
 	 */
-	TypedModel getT2_3();
+	org.eclipse.ocl.pivot.Package getT2_3();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_3 <em>T2 3</em>}' reference.
@@ -176,7 +122,7 @@ public interface TmapModule extends Execution {
 	 * @see #getT2_3()
 	 * @generated
 	 */
-	void setT2_3(TypedModel value);
+	void setT2_3(org.eclipse.ocl.pivot.Package value);
 
 	/**
 	 * Returns the value of the '<em><b>T2 4</b></em>' reference.
@@ -204,6 +150,60 @@ public interface TmapModule extends Execution {
 	 * @generated
 	 */
 	void setT2_4(RelationModel value);
+
+	/**
+	 * Returns the value of the '<em><b>T2 5</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>T2 5</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T2 5</em>' reference.
+	 * @see #setT2_5(ParameterVariable)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapModule_T2_5()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
+	 * @generated
+	 */
+	ParameterVariable getT2_5();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_5 <em>T2 5</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T2 5</em>' reference.
+	 * @see #getT2_5()
+	 * @generated
+	 */
+	void setT2_5(ParameterVariable value);
+
+	/**
+	 * Returns the value of the '<em><b>T2 6</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>T2 6</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>T2 6</em>' reference.
+	 * @see #setT2_6(TypedModel)
+	 * @see org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage#getTmapModule_T2_6()
+	 * @model required="true"
+	 *        annotation="http://www.eclipse.org/qvt#Domains referredDomain='qvtr'"
+	 * @generated
+	 */
+	TypedModel getT2_6();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapModule#getT2_6 <em>T2 6</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>T2 6</em>' reference.
+	 * @see #getT2_6()
+	 * @generated
+	 */
+	void setT2_6(TypedModel value);
 
 	/**
 	 * Returns the value of the '<em><b>T2qvtr Transformation</b></em>' reference.

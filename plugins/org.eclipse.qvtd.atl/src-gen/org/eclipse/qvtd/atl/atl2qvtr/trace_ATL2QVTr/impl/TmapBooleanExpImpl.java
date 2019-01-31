@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2015, 2018 Willink Transformations and others.
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/legal/epl-v20.html
  * 
  * Contributors:
  *   E.D.Willink - Initial API and implementation
@@ -24,6 +24,8 @@ import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapOclExpression;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapBooleanExp;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage;
 
+import org.eclipse.qvtd.runtime.qvttrace.impl.DispatchImpl;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Tmap Boolean Exp</b></em>'.
@@ -39,6 +41,25 @@ import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage;
  * @generated
  */
 public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBooleanExp {
+	/**
+	 * The number of structural features of the '<em>Tmap Boolean Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_BOOLEAN_EXP_FEATURE_COUNT = ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Tmap Boolean Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_BOOLEAN_EXP_OPERATION_COUNT = ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
+
+
 	/**
 	 * The default value of the '{@link #isT0symbol() <em>T0symbol</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -85,7 +106,7 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 	 */
 	@Override
 	public DmapOclExpression getDispatcher() {
-		if (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_BOOLEAN_EXP__DISPATCHER) return null;
+		if (eContainerFeatureID() != (ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0)) return null;
 		return (DmapOclExpression)eInternalContainer();
 	}
 
@@ -95,7 +116,7 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 	 * @generated
 	 */
 	public NotificationChain basicSetDispatcher(DmapOclExpression newDispatcher, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newDispatcher, trace_ATL2QVTrPackage.TMAP_BOOLEAN_EXP__DISPATCHER, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newDispatcher, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, msgs);
 		return msgs;
 	}
 
@@ -106,19 +127,19 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 	 */
 	@Override
 	public void setDispatcher(DmapOclExpression newDispatcher) {
-		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_BOOLEAN_EXP__DISPATCHER && newDispatcher != null)) {
+		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != (ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0) && newDispatcher != null)) {
 			if (EcoreUtil.isAncestor(this, newDispatcher))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newDispatcher != null)
-				msgs = ((InternalEObject)newDispatcher).eInverseAdd(this, trace_ATL2QVTrPackage.DMAP_OCL_EXPRESSION__DOMAP_BOOLEAN_EXP, DmapOclExpression.class, msgs);
+				msgs = ((InternalEObject)newDispatcher).eInverseAdd(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 2, DmapOclExpression.class, msgs);
 			msgs = basicSetDispatcher(newDispatcher, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_BOOLEAN_EXP__DISPATCHER, newDispatcher, newDispatcher));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, newDispatcher, newDispatcher));
 	}
 
 	/**
@@ -141,7 +162,7 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 		boolean oldT0symbol = t0symbol;
 		t0symbol = newT0symbol;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_BOOLEAN_EXP__T0SYMBOL, oldT0symbol, t0symbol));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1, oldT0symbol, t0symbol));
 	}
 
 	/**
@@ -152,7 +173,7 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_BOOLEAN_EXP__DISPATCHER:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetDispatcher((DmapOclExpression)otherEnd, msgs);
@@ -168,7 +189,7 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_BOOLEAN_EXP__DISPATCHER:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
 				return basicSetDispatcher(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -182,8 +203,8 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case trace_ATL2QVTrPackage.TMAP_BOOLEAN_EXP__DISPATCHER:
-				return eInternalContainer().eInverseRemove(this, trace_ATL2QVTrPackage.DMAP_OCL_EXPRESSION__DOMAP_BOOLEAN_EXP, DmapOclExpression.class, msgs);
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
+				return eInternalContainer().eInverseRemove(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 2, DmapOclExpression.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -196,9 +217,9 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_BOOLEAN_EXP__DISPATCHER:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
 				return getDispatcher();
-			case trace_ATL2QVTrPackage.TMAP_BOOLEAN_EXP__T0SYMBOL:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1:
 				return isT0symbol();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -212,10 +233,10 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_BOOLEAN_EXP__DISPATCHER:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
 				setDispatcher((DmapOclExpression)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_BOOLEAN_EXP__T0SYMBOL:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1:
 				setT0symbol((Boolean)newValue);
 				return;
 		}
@@ -230,10 +251,10 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_BOOLEAN_EXP__DISPATCHER:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
 				setDispatcher((DmapOclExpression)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_BOOLEAN_EXP__T0SYMBOL:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1:
 				setT0symbol(T0SYMBOL_EDEFAULT);
 				return;
 		}
@@ -248,9 +269,9 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_BOOLEAN_EXP__DISPATCHER:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
 				return getDispatcher() != null;
-			case trace_ATL2QVTrPackage.TMAP_BOOLEAN_EXP__T0SYMBOL:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1:
 				return t0symbol != T0SYMBOL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -271,5 +292,6 @@ public class TmapBooleanExpImpl extends ImapOclExpressionImpl implements TmapBoo
 		result.append(')');
 		return result.toString();
 	}
+
 
 } //TmapBooleanExpImpl

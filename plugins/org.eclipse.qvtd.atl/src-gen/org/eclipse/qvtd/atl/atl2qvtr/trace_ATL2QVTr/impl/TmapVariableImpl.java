@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2015, 2018 Willink Transformations and others.
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/legal/epl-v20.html
  * 
  * Contributors:
  *   E.D.Willink - Initial API and implementation
@@ -42,6 +42,25 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * @generated
  */
 public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
+	/**
+	 * The number of structural features of the '<em>Tmap Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_VARIABLE_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Tmap Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_VARIABLE_OPERATION_COUNT = ExecutionImpl.EXECUTION_OPERATION_COUNT + 0;
+
+
 	/**
 	 * The default value of the '{@link #getSuccess() <em>Success</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -121,7 +140,7 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 		Boolean oldSuccess = success;
 		success = newSuccess;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_VARIABLE__SUCCESS, oldSuccess, success));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldSuccess, success));
 	}
 
 	/**
@@ -132,11 +151,11 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	@Override
 	public LocatedElement getT1atlVariable() {
 		if (t1atlVariable != null && t1atlVariable.eIsProxy()) {
-			InternalEObject oldT1atlVariable = (InternalEObject)t1atlVariable;
+			InternalEObject oldT1atlVariable = t1atlVariable;
 			t1atlVariable = (LocatedElement)eResolveProxy(oldT1atlVariable);
 			if (t1atlVariable != oldT1atlVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_VARIABLE__T1ATL_VARIABLE, oldT1atlVariable, t1atlVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlVariable, t1atlVariable));
 			}
 		}
 		return t1atlVariable;
@@ -161,7 +180,7 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 		LocatedElement oldT1atlVariable = t1atlVariable;
 		t1atlVariable = newT1atlVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_VARIABLE__T1ATL_VARIABLE, oldT1atlVariable, t1atlVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlVariable, t1atlVariable));
 	}
 
 	/**
@@ -176,7 +195,7 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 			t2qvtrVariable = (VariableDeclaration)eResolveProxy(oldT2qvtrVariable);
 			if (t2qvtrVariable != oldT2qvtrVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_VARIABLE__T2QVTR_VARIABLE, oldT2qvtrVariable, t2qvtrVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT2qvtrVariable, t2qvtrVariable));
 			}
 		}
 		return t2qvtrVariable;
@@ -201,7 +220,7 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 		VariableDeclaration oldT2qvtrVariable = t2qvtrVariable;
 		t2qvtrVariable = newT2qvtrVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_VARIABLE__T2QVTR_VARIABLE, oldT2qvtrVariable, t2qvtrVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT2qvtrVariable, t2qvtrVariable));
 	}
 
 	/**
@@ -212,12 +231,12 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE__SUCCESS:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				return getSuccess();
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE__T1ATL_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				if (resolve) return getT1atlVariable();
 				return basicGetT1atlVariable();
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE__T2QVTR_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				if (resolve) return getT2qvtrVariable();
 				return basicGetT2qvtrVariable();
 		}
@@ -232,13 +251,13 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE__SUCCESS:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				setSuccess((Boolean)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE__T1ATL_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setT1atlVariable((LocatedElement)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE__T2QVTR_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT2qvtrVariable((VariableDeclaration)newValue);
 				return;
 		}
@@ -253,13 +272,13 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE__SUCCESS:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				setSuccess(SUCCESS_EDEFAULT);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE__T1ATL_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setT1atlVariable((LocatedElement)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE__T2QVTR_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT2qvtrVariable((VariableDeclaration)null);
 				return;
 		}
@@ -274,11 +293,11 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE__SUCCESS:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				return SUCCESS_EDEFAULT == null ? success != null : !SUCCESS_EDEFAULT.equals(success);
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE__T1ATL_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return t1atlVariable != null;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE__T2QVTR_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				return t2qvtrVariable != null;
 		}
 		return super.eIsSet(featureID);
@@ -299,5 +318,6 @@ public class TmapVariableImpl extends ExecutionImpl implements TmapVariable {
 		result.append(')');
 		return result.toString();
 	}
+
 
 } //TmapVariableImpl

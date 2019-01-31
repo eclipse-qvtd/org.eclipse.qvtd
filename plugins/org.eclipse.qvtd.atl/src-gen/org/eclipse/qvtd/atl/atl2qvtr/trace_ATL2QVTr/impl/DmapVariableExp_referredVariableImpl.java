@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2015, 2018 Willink Transformations and others.
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/legal/epl-v20.html
  * 
  * Contributors:
  *   E.D.Willink - Initial API and implementation
@@ -46,6 +46,25 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.DispatchImpl;
  * @generated
  */
 public class DmapVariableExp_referredVariableImpl extends DispatchImpl implements DmapVariableExp_referredVariable {
+	/**
+	 * The number of structural features of the '<em>Dmap Variable Exp referred Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT = DispatchImpl.DISPATCH_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of operations of the '<em>Dmap Variable Exp referred Variable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DMAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT = DispatchImpl.DISPATCH_OPERATION_COUNT + 0;
+
+
 	/**
 	 * The cached value of the '{@link #getD1atlExpression() <em>D1atl Expression</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -123,11 +142,11 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	@Override
 	public VariableExp getD1atlExpression() {
 		if (d1atlExpression != null && d1atlExpression.eIsProxy()) {
-			InternalEObject oldD1atlExpression = (InternalEObject)d1atlExpression;
+			InternalEObject oldD1atlExpression = d1atlExpression;
 			d1atlExpression = (VariableExp)eResolveProxy(oldD1atlExpression);
 			if (d1atlExpression != oldD1atlExpression) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__D1ATL_EXPRESSION, oldD1atlExpression, d1atlExpression));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 0, oldD1atlExpression, d1atlExpression));
 			}
 		}
 		return d1atlExpression;
@@ -152,7 +171,7 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 		VariableExp oldD1atlExpression = d1atlExpression;
 		d1atlExpression = newD1atlExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__D1ATL_EXPRESSION, oldD1atlExpression, d1atlExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 0, oldD1atlExpression, d1atlExpression));
 	}
 
 	/**
@@ -167,7 +186,7 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 			d2qvtrExpression = (org.eclipse.ocl.pivot.VariableExp)eResolveProxy(oldD2qvtrExpression);
 			if (d2qvtrExpression != oldD2qvtrExpression) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__D2QVTR_EXPRESSION, oldD2qvtrExpression, d2qvtrExpression));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 1, oldD2qvtrExpression, d2qvtrExpression));
 			}
 		}
 		return d2qvtrExpression;
@@ -192,7 +211,7 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 		org.eclipse.ocl.pivot.VariableExp oldD2qvtrExpression = d2qvtrExpression;
 		d2qvtrExpression = newD2qvtrExpression;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__D2QVTR_EXPRESSION, oldD2qvtrExpression, d2qvtrExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 1, oldD2qvtrExpression, d2qvtrExpression));
 	}
 
 	/**
@@ -214,7 +233,7 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 		TmapVariableExp_referredVariable_Helper oldDomapVariableExp_referredVariable_Helper = domapVariableExp_referredVariable_Helper;
 		domapVariableExp_referredVariable_Helper = newDomapVariableExp_referredVariable_Helper;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER, oldDomapVariableExp_referredVariable_Helper, newDomapVariableExp_referredVariable_Helper);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 2, oldDomapVariableExp_referredVariable_Helper, newDomapVariableExp_referredVariable_Helper);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -230,14 +249,14 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 		if (newDomapVariableExp_referredVariable_Helper != domapVariableExp_referredVariable_Helper) {
 			NotificationChain msgs = null;
 			if (domapVariableExp_referredVariable_Helper != null)
-				msgs = ((InternalEObject)domapVariableExp_referredVariable_Helper).eInverseRemove(this, trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER, TmapVariableExp_referredVariable_Helper.class, msgs);
+				msgs = ((InternalEObject)domapVariableExp_referredVariable_Helper).eInverseRemove(this, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0, TmapVariableExp_referredVariable_Helper.class, msgs);
 			if (newDomapVariableExp_referredVariable_Helper != null)
-				msgs = ((InternalEObject)newDomapVariableExp_referredVariable_Helper).eInverseAdd(this, trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER, TmapVariableExp_referredVariable_Helper.class, msgs);
+				msgs = ((InternalEObject)newDomapVariableExp_referredVariable_Helper).eInverseAdd(this, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0, TmapVariableExp_referredVariable_Helper.class, msgs);
 			msgs = basicSetDomapVariableExp_referredVariable_Helper(newDomapVariableExp_referredVariable_Helper, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER, newDomapVariableExp_referredVariable_Helper, newDomapVariableExp_referredVariable_Helper));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 2, newDomapVariableExp_referredVariable_Helper, newDomapVariableExp_referredVariable_Helper));
 	}
 
 	/**
@@ -259,7 +278,7 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 		TmapVariableExp_referredVariable_VariableDeclaration oldDomapVariableExp_referredVariable_VariableDeclaration = domapVariableExp_referredVariable_VariableDeclaration;
 		domapVariableExp_referredVariable_VariableDeclaration = newDomapVariableExp_referredVariable_VariableDeclaration;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION, oldDomapVariableExp_referredVariable_VariableDeclaration, newDomapVariableExp_referredVariable_VariableDeclaration);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 3, oldDomapVariableExp_referredVariable_VariableDeclaration, newDomapVariableExp_referredVariable_VariableDeclaration);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -275,14 +294,14 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 		if (newDomapVariableExp_referredVariable_VariableDeclaration != domapVariableExp_referredVariable_VariableDeclaration) {
 			NotificationChain msgs = null;
 			if (domapVariableExp_referredVariable_VariableDeclaration != null)
-				msgs = ((InternalEObject)domapVariableExp_referredVariable_VariableDeclaration).eInverseRemove(this, trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__DISPATCHER, TmapVariableExp_referredVariable_VariableDeclaration.class, msgs);
+				msgs = ((InternalEObject)domapVariableExp_referredVariable_VariableDeclaration).eInverseRemove(this, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0, TmapVariableExp_referredVariable_VariableDeclaration.class, msgs);
 			if (newDomapVariableExp_referredVariable_VariableDeclaration != null)
-				msgs = ((InternalEObject)newDomapVariableExp_referredVariable_VariableDeclaration).eInverseAdd(this, trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__DISPATCHER, TmapVariableExp_referredVariable_VariableDeclaration.class, msgs);
+				msgs = ((InternalEObject)newDomapVariableExp_referredVariable_VariableDeclaration).eInverseAdd(this, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0, TmapVariableExp_referredVariable_VariableDeclaration.class, msgs);
 			msgs = basicSetDomapVariableExp_referredVariable_VariableDeclaration(newDomapVariableExp_referredVariable_VariableDeclaration, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION, newDomapVariableExp_referredVariable_VariableDeclaration, newDomapVariableExp_referredVariable_VariableDeclaration));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 3, newDomapVariableExp_referredVariable_VariableDeclaration, newDomapVariableExp_referredVariable_VariableDeclaration));
 	}
 
 	/**
@@ -297,7 +316,7 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 			result = (ImapVariableExp_referredVariable)eResolveProxy(oldResult);
 			if (result != oldResult) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__RESULT, oldResult, result));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, DispatchImpl.DISPATCH_FEATURE_COUNT + 4, oldResult, result));
 			}
 		}
 		return result;
@@ -322,7 +341,7 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 		ImapVariableExp_referredVariable oldResult = result;
 		result = newResult;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__RESULT, oldResult, result));
+			eNotify(new ENotificationImpl(this, Notification.SET, DispatchImpl.DISPATCH_FEATURE_COUNT + 4, oldResult, result));
 	}
 
 	/**
@@ -333,13 +352,13 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				if (domapVariableExp_referredVariable_Helper != null)
-					msgs = ((InternalEObject)domapVariableExp_referredVariable_Helper).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER, null, msgs);
+					msgs = ((InternalEObject)domapVariableExp_referredVariable_Helper).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (DispatchImpl.DISPATCH_FEATURE_COUNT + 2), null, msgs);
 				return basicSetDomapVariableExp_referredVariable_Helper((TmapVariableExp_referredVariable_Helper)otherEnd, msgs);
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 3:
 				if (domapVariableExp_referredVariable_VariableDeclaration != null)
-					msgs = ((InternalEObject)domapVariableExp_referredVariable_VariableDeclaration).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION, null, msgs);
+					msgs = ((InternalEObject)domapVariableExp_referredVariable_VariableDeclaration).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (DispatchImpl.DISPATCH_FEATURE_COUNT + 3), null, msgs);
 				return basicSetDomapVariableExp_referredVariable_VariableDeclaration((TmapVariableExp_referredVariable_VariableDeclaration)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -353,9 +372,9 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				return basicSetDomapVariableExp_referredVariable_Helper(null, msgs);
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 3:
 				return basicSetDomapVariableExp_referredVariable_VariableDeclaration(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -369,17 +388,17 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__D1ATL_EXPRESSION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
 				if (resolve) return getD1atlExpression();
 				return basicGetD1atlExpression();
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__D2QVTR_EXPRESSION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
 				if (resolve) return getD2qvtrExpression();
 				return basicGetD2qvtrExpression();
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				return getDomapVariableExp_referredVariable_Helper();
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 3:
 				return getDomapVariableExp_referredVariable_VariableDeclaration();
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__RESULT:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 4:
 				if (resolve) return getResult();
 				return basicGetResult();
 		}
@@ -394,19 +413,19 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__D1ATL_EXPRESSION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
 				setD1atlExpression((VariableExp)newValue);
 				return;
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__D2QVTR_EXPRESSION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
 				setD2qvtrExpression((org.eclipse.ocl.pivot.VariableExp)newValue);
 				return;
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				setDomapVariableExp_referredVariable_Helper((TmapVariableExp_referredVariable_Helper)newValue);
 				return;
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 3:
 				setDomapVariableExp_referredVariable_VariableDeclaration((TmapVariableExp_referredVariable_VariableDeclaration)newValue);
 				return;
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__RESULT:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 4:
 				setResult((ImapVariableExp_referredVariable)newValue);
 				return;
 		}
@@ -421,19 +440,19 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__D1ATL_EXPRESSION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
 				setD1atlExpression((VariableExp)null);
 				return;
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__D2QVTR_EXPRESSION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
 				setD2qvtrExpression((org.eclipse.ocl.pivot.VariableExp)null);
 				return;
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				setDomapVariableExp_referredVariable_Helper((TmapVariableExp_referredVariable_Helper)null);
 				return;
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 3:
 				setDomapVariableExp_referredVariable_VariableDeclaration((TmapVariableExp_referredVariable_VariableDeclaration)null);
 				return;
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__RESULT:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 4:
 				setResult((ImapVariableExp_referredVariable)null);
 				return;
 		}
@@ -448,18 +467,19 @@ public class DmapVariableExp_referredVariableImpl extends DispatchImpl implement
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__D1ATL_EXPRESSION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 0:
 				return d1atlExpression != null;
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__D2QVTR_EXPRESSION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 1:
 				return d2qvtrExpression != null;
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 2:
 				return domapVariableExp_referredVariable_Helper != null;
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 3:
 				return domapVariableExp_referredVariable_VariableDeclaration != null;
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__RESULT:
+			case DispatchImpl.DISPATCH_FEATURE_COUNT + 4:
 				return result != null;
 		}
 		return super.eIsSet(featureID);
 	}
+
 
 } //DmapVariableExp_referredVariableImpl

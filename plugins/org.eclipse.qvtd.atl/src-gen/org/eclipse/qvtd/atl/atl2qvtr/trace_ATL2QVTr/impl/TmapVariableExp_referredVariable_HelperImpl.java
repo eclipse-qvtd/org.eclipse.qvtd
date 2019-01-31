@@ -1,10 +1,10 @@
 /**
- * Copyright (c) 2015, 2018 Willink Transformations and others.
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
+ * http://www.eclipse.org/legal/epl-v20.html
+ * 
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -26,6 +26,8 @@ import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapVariableExp_referredVari
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp_referredVariable_Helper;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage;
 
+import org.eclipse.qvtd.runtime.qvttrace.impl.DispatchImpl;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Tmap Variable Exp referred Variable Helper</b></em>'.
@@ -42,6 +44,25 @@ import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage;
  * @generated
  */
 public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp_referredVariableImpl implements TmapVariableExp_referredVariable_Helper {
+	/**
+	 * The number of structural features of the '<em>Tmap Variable Exp referred Variable Helper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_FEATURE_COUNT = ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Tmap Variable Exp referred Variable Helper</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER_OPERATION_COUNT = ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_OPERATION_COUNT + 0;
+
+
 	/**
 	 * The cached value of the '{@link #getT1atlVariable() <em>T1atl Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -88,7 +109,7 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	 */
 	@Override
 	public DmapVariableExp_referredVariable getDispatcher() {
-		if (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER) return null;
+		if (eContainerFeatureID() != (ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0)) return null;
 		return (DmapVariableExp_referredVariable)eInternalContainer();
 	}
 
@@ -98,7 +119,7 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	 * @generated
 	 */
 	public NotificationChain basicSetDispatcher(DmapVariableExp_referredVariable newDispatcher, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newDispatcher, trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newDispatcher, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0, msgs);
 		return msgs;
 	}
 
@@ -109,19 +130,19 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	 */
 	@Override
 	public void setDispatcher(DmapVariableExp_referredVariable newDispatcher) {
-		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER && newDispatcher != null)) {
+		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != (ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0) && newDispatcher != null)) {
 			if (EcoreUtil.isAncestor(this, newDispatcher))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newDispatcher != null)
-				msgs = ((InternalEObject)newDispatcher).eInverseAdd(this, trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER, DmapVariableExp_referredVariable.class, msgs);
+				msgs = ((InternalEObject)newDispatcher).eInverseAdd(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 2, DmapVariableExp_referredVariable.class, msgs);
 			msgs = basicSetDispatcher(newDispatcher, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER, newDispatcher, newDispatcher));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0, newDispatcher, newDispatcher));
 	}
 
 	/**
@@ -136,7 +157,7 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 			t1atlVariable = (VariableDeclaration)eResolveProxy(oldT1atlVariable);
 			if (t1atlVariable != oldT1atlVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_VARIABLE, oldT1atlVariable, t1atlVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1, oldT1atlVariable, t1atlVariable));
 			}
 		}
 		return t1atlVariable;
@@ -161,7 +182,7 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 		VariableDeclaration oldT1atlVariable = t1atlVariable;
 		t1atlVariable = newT1atlVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_VARIABLE, oldT1atlVariable, t1atlVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1, oldT1atlVariable, t1atlVariable));
 	}
 
 	/**
@@ -176,7 +197,7 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 			t2qvtrVariable = (org.eclipse.ocl.pivot.VariableDeclaration)eResolveProxy(oldT2qvtrVariable);
 			if (t2qvtrVariable != oldT2qvtrVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T2QVTR_VARIABLE, oldT2qvtrVariable, t2qvtrVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2, oldT2qvtrVariable, t2qvtrVariable));
 			}
 		}
 		return t2qvtrVariable;
@@ -201,7 +222,7 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 		org.eclipse.ocl.pivot.VariableDeclaration oldT2qvtrVariable = t2qvtrVariable;
 		t2qvtrVariable = newT2qvtrVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T2QVTR_VARIABLE, oldT2qvtrVariable, t2qvtrVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2, oldT2qvtrVariable, t2qvtrVariable));
 	}
 
 	/**
@@ -212,7 +233,7 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER:
+			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetDispatcher((DmapVariableExp_referredVariable)otherEnd, msgs);
@@ -228,7 +249,7 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER:
+			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0:
 				return basicSetDispatcher(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -242,8 +263,8 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER:
-				return eInternalContainer().eInverseRemove(this, trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER, DmapVariableExp_referredVariable.class, msgs);
+			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0:
+				return eInternalContainer().eInverseRemove(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 2, DmapVariableExp_referredVariable.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -256,12 +277,12 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER:
+			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0:
 				return getDispatcher();
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_VARIABLE:
+			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1:
 				if (resolve) return getT1atlVariable();
 				return basicGetT1atlVariable();
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T2QVTR_VARIABLE:
+			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2:
 				if (resolve) return getT2qvtrVariable();
 				return basicGetT2qvtrVariable();
 		}
@@ -276,13 +297,13 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER:
+			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0:
 				setDispatcher((DmapVariableExp_referredVariable)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_VARIABLE:
+			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1:
 				setT1atlVariable((VariableDeclaration)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T2QVTR_VARIABLE:
+			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2:
 				setT2qvtrVariable((org.eclipse.ocl.pivot.VariableDeclaration)newValue);
 				return;
 		}
@@ -297,13 +318,13 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER:
+			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0:
 				setDispatcher((DmapVariableExp_referredVariable)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_VARIABLE:
+			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1:
 				setT1atlVariable((VariableDeclaration)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T2QVTR_VARIABLE:
+			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2:
 				setT2qvtrVariable((org.eclipse.ocl.pivot.VariableDeclaration)null);
 				return;
 		}
@@ -318,14 +339,15 @@ public class TmapVariableExp_referredVariable_HelperImpl extends ImapVariableExp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER:
+			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0:
 				return getDispatcher() != null;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_VARIABLE:
+			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1:
 				return t1atlVariable != null;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T2QVTR_VARIABLE:
+			case ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2:
 				return t2qvtrVariable != null;
 		}
 		return super.eIsSet(featureID);
 	}
+
 
 } //TmapVariableExp_referredVariable_HelperImpl

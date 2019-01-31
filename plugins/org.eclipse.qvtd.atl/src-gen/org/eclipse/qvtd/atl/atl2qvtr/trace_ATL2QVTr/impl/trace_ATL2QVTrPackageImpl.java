@@ -1,10 +1,10 @@
 /**
- * Copyright (c) 2015, 2018 Willink Transformations and others.
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- *
+ * 
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -72,6 +72,9 @@ import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 
 import org.eclipse.qvtd.runtime.qvttrace.QVTtracePackage;
+
+import org.eclipse.qvtd.runtime.qvttrace.impl.DispatchImpl;
+import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -1016,6 +1019,16 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
+	public EAttribute getTmapHelper_Attribute_LocalSuccess() {
+		return (EAttribute)tmapHelper_AttributeEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTmapHelper_Context() {
 		return tmapHelper_ContextEClass;
 	}
@@ -1226,6 +1239,16 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
+	public EAttribute getTmapHelper_Operation_LocalSuccess() {
+		return (EAttribute)tmapHelper_OperationEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTmapIfExp() {
 		return tmapIfExpEClass;
 	}
@@ -1328,6 +1351,16 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	@Override
 	public EReference getTmapIfExp_WmapOclExpression2() {
 		return (EReference)tmapIfExpEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTmapIfExp_LocalSuccess() {
+		return (EAttribute)tmapIfExpEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -1636,7 +1669,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapMatchedRule_T2_1() {
+	public EReference getTmapMatchedRule_T2_5() {
 		return (EReference)tmapMatchedRuleEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -1776,7 +1809,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapModule_T2_1() {
+	public EReference getTmapModule_T2_3() {
 		return (EReference)tmapModuleEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -1786,7 +1819,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapModule_T2_2() {
+	public EReference getTmapModule_T2_4() {
 		return (EReference)tmapModuleEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1796,7 +1829,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapModule_T2_3() {
+	public EReference getTmapModule_T2_5() {
 		return (EReference)tmapModuleEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -1806,7 +1839,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
-	public EReference getTmapModule_T2_4() {
+	public EReference getTmapModule_T2_6() {
 		return (EReference)tmapModuleEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -1936,6 +1969,16 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
+	public EAttribute getTmapNavigationOrAttributeCallExp_Helper_LocalSuccess() {
+		return (EAttribute)tmapNavigationOrAttributeCallExp_HelperEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTmapNavigationOrAttributeCallExp_Property() {
 		return tmapNavigationOrAttributeCallExp_PropertyEClass;
 	}
@@ -1988,6 +2031,16 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	@Override
 	public EReference getTmapNavigationOrAttributeCallExp_Property_WmapOclExpression() {
 		return (EReference)tmapNavigationOrAttributeCallExp_PropertyEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTmapNavigationOrAttributeCallExp_Property_LocalSuccess() {
+		return (EAttribute)tmapNavigationOrAttributeCallExp_PropertyEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -2326,6 +2379,16 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	 * @generated
 	 */
 	@Override
+	public EAttribute getTmapOperationCallExp_Helper_LocalSuccess() {
+		return (EAttribute)tmapOperationCallExp_HelperEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getTmapOperationCallExp_Operation() {
 		return tmapOperationCallExp_OperationEClass;
 	}
@@ -2378,6 +2441,16 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	@Override
 	public EReference getTmapOperationCallExp_Operation_WmapOclExpression() {
 		return (EReference)tmapOperationCallExp_OperationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTmapOperationCallExp_Operation_LocalSuccess() {
+		return (EAttribute)tmapOperationCallExp_OperationEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -2528,6 +2601,16 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	@Override
 	public EReference getTmapOperatorCallExp_WmapOclExpression() {
 		return (EReference)tmapOperatorCallExpEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EAttribute getTmapOperatorCallExp_LocalSuccess() {
+		return (EAttribute)tmapOperatorCallExpEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -3119,310 +3202,318 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		isCreated = true;
 
 		// Create classes and their features
-		cmapVariableExp_referredVariable_HelperEClass = createEClass(CMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER);
+		cmapVariableExp_referredVariable_HelperEClass = createEClass(0);
 
-		cmapVariableExp_referredVariable_VariableDeclarationEClass = createEClass(CMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION);
+		cmapVariableExp_referredVariable_VariableDeclarationEClass = createEClass(1);
 
-		dmapHelperEClass = createEClass(DMAP_HELPER);
-		createEReference(dmapHelperEClass, DMAP_HELPER__D1ATL_HELPER);
-		createEReference(dmapHelperEClass, DMAP_HELPER__D2QVTR_FUNCTION);
-		createEReference(dmapHelperEClass, DMAP_HELPER__DOMAP_HELPER_ATTRIBUTE);
-		createEReference(dmapHelperEClass, DMAP_HELPER__DOMAP_HELPER_OPERATION);
-		createEReference(dmapHelperEClass, DMAP_HELPER__RESULT);
+		dmapHelperEClass = createEClass(2);
+		createEReference(dmapHelperEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 0);
+		createEReference(dmapHelperEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 1);
+		createEReference(dmapHelperEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 2);
+		createEReference(dmapHelperEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 3);
+		createEReference(dmapHelperEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 4);
 
-		dmapOclExpressionEClass = createEClass(DMAP_OCL_EXPRESSION);
-		createEReference(dmapOclExpressionEClass, DMAP_OCL_EXPRESSION__D1ATL_EXPRESSION);
-		createEReference(dmapOclExpressionEClass, DMAP_OCL_EXPRESSION__D2QVTR_EXPRESSION);
-		createEReference(dmapOclExpressionEClass, DMAP_OCL_EXPRESSION__DOMAP_BOOLEAN_EXP);
-		createEReference(dmapOclExpressionEClass, DMAP_OCL_EXPRESSION__DOMAP_IF_EXP);
-		createEReference(dmapOclExpressionEClass, DMAP_OCL_EXPRESSION__DOMAP_INTEGER_EXP);
-		createEReference(dmapOclExpressionEClass, DMAP_OCL_EXPRESSION__DOMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER);
-		createEReference(dmapOclExpressionEClass, DMAP_OCL_EXPRESSION__DOMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY);
-		createEReference(dmapOclExpressionEClass, DMAP_OCL_EXPRESSION__DOMAP_OPERATION_CALL_EXP_HELPER);
-		createEReference(dmapOclExpressionEClass, DMAP_OCL_EXPRESSION__DOMAP_OPERATION_CALL_EXP_OPERATION);
-		createEReference(dmapOclExpressionEClass, DMAP_OCL_EXPRESSION__DOMAP_OPERATOR_CALL_EXP);
-		createEReference(dmapOclExpressionEClass, DMAP_OCL_EXPRESSION__DOMAP_STRING_EXP);
-		createEReference(dmapOclExpressionEClass, DMAP_OCL_EXPRESSION__DOMAP_VARIABLE_EXP);
-		createEReference(dmapOclExpressionEClass, DMAP_OCL_EXPRESSION__RESULT);
+		dmapOclExpressionEClass = createEClass(3);
+		createEReference(dmapOclExpressionEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 0);
+		createEReference(dmapOclExpressionEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 1);
+		createEReference(dmapOclExpressionEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 2);
+		createEReference(dmapOclExpressionEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 3);
+		createEReference(dmapOclExpressionEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 4);
+		createEReference(dmapOclExpressionEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 5);
+		createEReference(dmapOclExpressionEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 6);
+		createEReference(dmapOclExpressionEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 7);
+		createEReference(dmapOclExpressionEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 8);
+		createEReference(dmapOclExpressionEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 9);
+		createEReference(dmapOclExpressionEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 10);
+		createEReference(dmapOclExpressionEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 11);
+		createEReference(dmapOclExpressionEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 12);
 
-		dmapVariableExp_referredVariableEClass = createEClass(DMAP_VARIABLE_EXP_REFERRED_VARIABLE);
-		createEReference(dmapVariableExp_referredVariableEClass, DMAP_VARIABLE_EXP_REFERRED_VARIABLE__D1ATL_EXPRESSION);
-		createEReference(dmapVariableExp_referredVariableEClass, DMAP_VARIABLE_EXP_REFERRED_VARIABLE__D2QVTR_EXPRESSION);
-		createEReference(dmapVariableExp_referredVariableEClass, DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER);
-		createEReference(dmapVariableExp_referredVariableEClass, DMAP_VARIABLE_EXP_REFERRED_VARIABLE__DOMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION);
-		createEReference(dmapVariableExp_referredVariableEClass, DMAP_VARIABLE_EXP_REFERRED_VARIABLE__RESULT);
+		dmapVariableExp_referredVariableEClass = createEClass(4);
+		createEReference(dmapVariableExp_referredVariableEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 0);
+		createEReference(dmapVariableExp_referredVariableEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 1);
+		createEReference(dmapVariableExp_referredVariableEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 2);
+		createEReference(dmapVariableExp_referredVariableEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 3);
+		createEReference(dmapVariableExp_referredVariableEClass, DispatchImpl.DISPATCH_FEATURE_COUNT + 4);
 
-		imapHelperEClass = createEClass(IMAP_HELPER);
-		createEAttribute(imapHelperEClass, IMAP_HELPER__SUCCESS);
+		imapHelperEClass = createEClass(5);
+		createEAttribute(imapHelperEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
 
-		imapOclExpressionEClass = createEClass(IMAP_OCL_EXPRESSION);
-		createEAttribute(imapOclExpressionEClass, IMAP_OCL_EXPRESSION__SUCCESS);
+		imapOclExpressionEClass = createEClass(6);
+		createEAttribute(imapOclExpressionEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
 
-		imapVariableExp_referredVariableEClass = createEClass(IMAP_VARIABLE_EXP_REFERRED_VARIABLE);
-		createEAttribute(imapVariableExp_referredVariableEClass, IMAP_VARIABLE_EXP_REFERRED_VARIABLE__SUCCESS);
+		imapVariableExp_referredVariableEClass = createEClass(7);
+		createEAttribute(imapVariableExp_referredVariableEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
 
-		tmapBindingEClass = createEClass(TMAP_BINDING);
-		createEAttribute(tmapBindingEClass, TMAP_BINDING__T0PROPERTY_NAME);
-		createEReference(tmapBindingEClass, TMAP_BINDING__T1ATL_BINDING);
-		createEReference(tmapBindingEClass, TMAP_BINDING__T1ATL_EXPRESSION);
-		createEReference(tmapBindingEClass, TMAP_BINDING__T1ATL_OUT_PATTERN_ELEMENT);
-		createEReference(tmapBindingEClass, TMAP_BINDING__T2QVTR_EXPRESSION);
-		createEReference(tmapBindingEClass, TMAP_BINDING__T2QVTR_PART);
-		createEReference(tmapBindingEClass, TMAP_BINDING__T2QVTR_TEMPLATE);
-		createEReference(tmapBindingEClass, TMAP_BINDING__WMAP_OCL_EXPRESSION);
-		createEReference(tmapBindingEClass, TMAP_BINDING__WMAP_SIMPLE_OUT_PATTERN_ELEMENT);
+		tmapBindingEClass = createEClass(8);
+		createEAttribute(tmapBindingEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
+		createEReference(tmapBindingEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEReference(tmapBindingEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapBindingEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapBindingEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapBindingEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
+		createEReference(tmapBindingEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
+		createEReference(tmapBindingEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7);
+		createEReference(tmapBindingEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8);
 
-		tmapBooleanExpEClass = createEClass(TMAP_BOOLEAN_EXP);
-		createEReference(tmapBooleanExpEClass, TMAP_BOOLEAN_EXP__DISPATCHER);
-		createEAttribute(tmapBooleanExpEClass, TMAP_BOOLEAN_EXP__T0SYMBOL);
+		tmapBooleanExpEClass = createEClass(9);
+		createEReference(tmapBooleanExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
+		createEAttribute(tmapBooleanExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
 
-		tmapHelper_AttributeEClass = createEClass(TMAP_HELPER_ATTRIBUTE);
-		createEReference(tmapHelper_AttributeEClass, TMAP_HELPER_ATTRIBUTE__DISPATCHER);
-		createEAttribute(tmapHelper_AttributeEClass, TMAP_HELPER_ATTRIBUTE__T0ATTRIBUTE_NAME);
-		createEReference(tmapHelper_AttributeEClass, TMAP_HELPER_ATTRIBUTE__T1ATL_DEFINITION);
-		createEReference(tmapHelper_AttributeEClass, TMAP_HELPER_ATTRIBUTE__T1ATL_EXPRESSION);
-		createEReference(tmapHelper_AttributeEClass, TMAP_HELPER_ATTRIBUTE__T1ATL_FEATURE);
-		createEReference(tmapHelper_AttributeEClass, TMAP_HELPER_ATTRIBUTE__T1ATL_MODULE);
-		createEReference(tmapHelper_AttributeEClass, TMAP_HELPER_ATTRIBUTE__T1ATL_TYPE);
-		createEReference(tmapHelper_AttributeEClass, TMAP_HELPER_ATTRIBUTE__T2QVTR_EXPRESSION);
-		createEReference(tmapHelper_AttributeEClass, TMAP_HELPER_ATTRIBUTE__T2QVTR_TRANSFORMATION);
-		createEReference(tmapHelper_AttributeEClass, TMAP_HELPER_ATTRIBUTE__WMAP_HELPER_CONTEXT);
-		createEReference(tmapHelper_AttributeEClass, TMAP_HELPER_ATTRIBUTE__WMAP_MODULE);
-		createEReference(tmapHelper_AttributeEClass, TMAP_HELPER_ATTRIBUTE__WMAP_OCL_EXPRESSION);
+		tmapHelper_AttributeEClass = createEClass(10);
+		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0);
+		createEAttribute(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 1);
+		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 2);
+		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 3);
+		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 4);
+		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 5);
+		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 6);
+		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 7);
+		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 8);
+		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 9);
+		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 10);
+		createEReference(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 11);
+		createEAttribute(tmapHelper_AttributeEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 12);
 
-		tmapHelper_ContextEClass = createEClass(TMAP_HELPER_CONTEXT);
-		createEReference(tmapHelper_ContextEClass, TMAP_HELPER_CONTEXT__T1ATL_CONTEXT);
-		createEReference(tmapHelper_ContextEClass, TMAP_HELPER_CONTEXT__T1ATL_DEFINITION);
-		createEReference(tmapHelper_ContextEClass, TMAP_HELPER_CONTEXT__T1ATL_HELPER);
-		createEReference(tmapHelper_ContextEClass, TMAP_HELPER_CONTEXT__T1ATL_RETURN_TYPE);
-		createEReference(tmapHelper_ContextEClass, TMAP_HELPER_CONTEXT__T2QVTR_FUNCTION);
-		createEReference(tmapHelper_ContextEClass, TMAP_HELPER_CONTEXT__T2QVTR_PARAMETER);
-		createEReference(tmapHelper_ContextEClass, TMAP_HELPER_CONTEXT__WMAP_VARIABLE);
+		tmapHelper_ContextEClass = createEClass(11);
+		createEReference(tmapHelper_ContextEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
+		createEReference(tmapHelper_ContextEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEReference(tmapHelper_ContextEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapHelper_ContextEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapHelper_ContextEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapHelper_ContextEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
+		createEReference(tmapHelper_ContextEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
 
-		tmapHelper_OperationEClass = createEClass(TMAP_HELPER_OPERATION);
-		createEReference(tmapHelper_OperationEClass, TMAP_HELPER_OPERATION__DISPATCHER);
-		createEAttribute(tmapHelper_OperationEClass, TMAP_HELPER_OPERATION__T0OPERATION_NAME);
-		createEReference(tmapHelper_OperationEClass, TMAP_HELPER_OPERATION__T1ATL_DEFINITION);
-		createEReference(tmapHelper_OperationEClass, TMAP_HELPER_OPERATION__T1ATL_EXPRESSION);
-		createEReference(tmapHelper_OperationEClass, TMAP_HELPER_OPERATION__T1ATL_FEATURE);
-		createEReference(tmapHelper_OperationEClass, TMAP_HELPER_OPERATION__T1ATL_MODULE);
-		createEReference(tmapHelper_OperationEClass, TMAP_HELPER_OPERATION__T1ATL_TYPE);
-		createEReference(tmapHelper_OperationEClass, TMAP_HELPER_OPERATION__T2QVTR_EXPRESSION);
-		createEReference(tmapHelper_OperationEClass, TMAP_HELPER_OPERATION__T2QVTR_TRANSFORMATION);
-		createEReference(tmapHelper_OperationEClass, TMAP_HELPER_OPERATION__WMAP_HELPER_CONTEXT);
-		createEReference(tmapHelper_OperationEClass, TMAP_HELPER_OPERATION__WMAP_MODULE);
-		createEReference(tmapHelper_OperationEClass, TMAP_HELPER_OPERATION__WMAP_OCL_EXPRESSION);
+		tmapHelper_OperationEClass = createEClass(12);
+		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 0);
+		createEAttribute(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 1);
+		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 2);
+		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 3);
+		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 4);
+		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 5);
+		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 6);
+		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 7);
+		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 8);
+		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 9);
+		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 10);
+		createEReference(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 11);
+		createEAttribute(tmapHelper_OperationEClass, ImapHelperImpl.IMAP_HELPER_FEATURE_COUNT + 12);
 
-		tmapIfExpEClass = createEClass(TMAP_IF_EXP);
-		createEReference(tmapIfExpEClass, TMAP_IF_EXP__DISPATCHER);
-		createEReference(tmapIfExpEClass, TMAP_IF_EXP__T1ATL_CONDITION);
-		createEReference(tmapIfExpEClass, TMAP_IF_EXP__T1ATL_ELSE);
-		createEReference(tmapIfExpEClass, TMAP_IF_EXP__T1ATL_THEN);
-		createEReference(tmapIfExpEClass, TMAP_IF_EXP__T2QVTR_CONDITION);
-		createEReference(tmapIfExpEClass, TMAP_IF_EXP__T2QVTR_ELSE);
-		createEReference(tmapIfExpEClass, TMAP_IF_EXP__T2QVTR_THEN);
-		createEReference(tmapIfExpEClass, TMAP_IF_EXP__WMAP_OCL_EXPRESSION);
-		createEReference(tmapIfExpEClass, TMAP_IF_EXP__WMAP_OCL_EXPRESSION1);
-		createEReference(tmapIfExpEClass, TMAP_IF_EXP__WMAP_OCL_EXPRESSION2);
+		tmapIfExpEClass = createEClass(13);
+		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
+		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
+		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2);
+		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3);
+		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 4);
+		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 5);
+		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 6);
+		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 7);
+		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 8);
+		createEReference(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 9);
+		createEAttribute(tmapIfExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 10);
 
-		tmapInPatternEClass = createEClass(TMAP_IN_PATTERN);
-		createEAttribute(tmapInPatternEClass, TMAP_IN_PATTERN__SUCCESS);
-		createEReference(tmapInPatternEClass, TMAP_IN_PATTERN__T1ATL_MODEL);
-		createEReference(tmapInPatternEClass, TMAP_IN_PATTERN__T1ATL_PATTERN);
-		createEReference(tmapInPatternEClass, TMAP_IN_PATTERN__T1ATL_RULE);
-		createEReference(tmapInPatternEClass, TMAP_IN_PATTERN__T2QVTR_DOMAIN);
-		createEReference(tmapInPatternEClass, TMAP_IN_PATTERN__T2QVTR_RELATION);
-		createEReference(tmapInPatternEClass, TMAP_IN_PATTERN__T2QVTR_TYPED_MODEL);
-		createEReference(tmapInPatternEClass, TMAP_IN_PATTERN__WMAP_MATCHED_RULE);
-		createEReference(tmapInPatternEClass, TMAP_IN_PATTERN__WMAP_OCL_METAMODEL);
+		tmapInPatternEClass = createEClass(14);
+		createEAttribute(tmapInPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
+		createEReference(tmapInPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEReference(tmapInPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapInPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapInPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapInPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
+		createEReference(tmapInPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
+		createEReference(tmapInPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7);
+		createEReference(tmapInPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8);
 
-		tmapInPattern_filterEClass = createEClass(TMAP_IN_PATTERN_FILTER);
-		createEReference(tmapInPattern_filterEClass, TMAP_IN_PATTERN_FILTER__T1ATL_EXPRESSION);
-		createEReference(tmapInPattern_filterEClass, TMAP_IN_PATTERN_FILTER__T1ATL_PATTERN);
-		createEReference(tmapInPattern_filterEClass, TMAP_IN_PATTERN_FILTER__T1ATL_RULE);
-		createEReference(tmapInPattern_filterEClass, TMAP_IN_PATTERN_FILTER__T2P);
-		createEReference(tmapInPattern_filterEClass, TMAP_IN_PATTERN_FILTER__T2QVTR_DOMAIN);
-		createEReference(tmapInPattern_filterEClass, TMAP_IN_PATTERN_FILTER__T2QVTR_EXPRESSION);
-		createEReference(tmapInPattern_filterEClass, TMAP_IN_PATTERN_FILTER__T2QVTR_RELATION);
-		createEReference(tmapInPattern_filterEClass, TMAP_IN_PATTERN_FILTER__T2W);
-		createEReference(tmapInPattern_filterEClass, TMAP_IN_PATTERN_FILTER__WMAP_IN_PATTERN);
-		createEReference(tmapInPattern_filterEClass, TMAP_IN_PATTERN_FILTER__WMAP_MATCHED_RULE);
-		createEReference(tmapInPattern_filterEClass, TMAP_IN_PATTERN_FILTER__WMAP_OCL_EXPRESSION);
+		tmapInPattern_filterEClass = createEClass(15);
+		createEReference(tmapInPattern_filterEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
+		createEReference(tmapInPattern_filterEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEReference(tmapInPattern_filterEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapInPattern_filterEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapInPattern_filterEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapInPattern_filterEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
+		createEReference(tmapInPattern_filterEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
+		createEReference(tmapInPattern_filterEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7);
+		createEReference(tmapInPattern_filterEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8);
+		createEReference(tmapInPattern_filterEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9);
+		createEReference(tmapInPattern_filterEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10);
 
-		tmapIntegerExpEClass = createEClass(TMAP_INTEGER_EXP);
-		createEReference(tmapIntegerExpEClass, TMAP_INTEGER_EXP__DISPATCHER);
-		createEAttribute(tmapIntegerExpEClass, TMAP_INTEGER_EXP__T0SYMBOL);
+		tmapIntegerExpEClass = createEClass(16);
+		createEReference(tmapIntegerExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
+		createEAttribute(tmapIntegerExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
 
-		tmapMatchedRuleEClass = createEClass(TMAP_MATCHED_RULE);
-		createEAttribute(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__SUCCESS);
-		createEAttribute(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__T0RULE_NAME);
-		createEReference(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__T1ATL_MODULE);
-		createEReference(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__T1MATCHED_RULE);
-		createEReference(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__T2_1);
-		createEReference(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__T2QVTR_RELATION);
-		createEReference(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__T2QVTR_TRANSFORMATION);
-		createEReference(tmapMatchedRuleEClass, TMAP_MATCHED_RULE__WMAP_MODULE);
+		tmapMatchedRuleEClass = createEClass(17);
+		createEAttribute(tmapMatchedRuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
+		createEAttribute(tmapMatchedRuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEReference(tmapMatchedRuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapMatchedRuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapMatchedRuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapMatchedRuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
+		createEReference(tmapMatchedRuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
+		createEReference(tmapMatchedRuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7);
 
-		tmapMatchedRule_superEClass = createEClass(TMAP_MATCHED_RULE_SUPER);
-		createEReference(tmapMatchedRule_superEClass, TMAP_MATCHED_RULE_SUPER__T1ATL_CHILD_RULE);
-		createEReference(tmapMatchedRule_superEClass, TMAP_MATCHED_RULE_SUPER__T1ATL_SUPER_RULE);
-		createEReference(tmapMatchedRule_superEClass, TMAP_MATCHED_RULE_SUPER__T2QVTR_OVERRIDDEN_RELATION);
-		createEReference(tmapMatchedRule_superEClass, TMAP_MATCHED_RULE_SUPER__T2QVTR_OVERRIDES_RELATION);
-		createEReference(tmapMatchedRule_superEClass, TMAP_MATCHED_RULE_SUPER__WMAP_MATCHED_RULE);
-		createEReference(tmapMatchedRule_superEClass, TMAP_MATCHED_RULE_SUPER__WMAP_MATCHED_RULE1);
+		tmapMatchedRule_superEClass = createEClass(18);
+		createEReference(tmapMatchedRule_superEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
+		createEReference(tmapMatchedRule_superEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEReference(tmapMatchedRule_superEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapMatchedRule_superEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapMatchedRule_superEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapMatchedRule_superEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
 
-		tmapModuleEClass = createEClass(TMAP_MODULE);
-		createEAttribute(tmapModuleEClass, TMAP_MODULE__T0TX_NAME);
-		createEReference(tmapModuleEClass, TMAP_MODULE__T1ATL_MODULE);
-		createEReference(tmapModuleEClass, TMAP_MODULE__T2_1);
-		createEReference(tmapModuleEClass, TMAP_MODULE__T2_2);
-		createEReference(tmapModuleEClass, TMAP_MODULE__T2_3);
-		createEReference(tmapModuleEClass, TMAP_MODULE__T2_4);
-		createEReference(tmapModuleEClass, TMAP_MODULE__T2QVTR_TRANSFORMATION);
+		tmapModuleEClass = createEClass(19);
+		createEAttribute(tmapModuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
+		createEReference(tmapModuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEReference(tmapModuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapModuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapModuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapModuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
+		createEReference(tmapModuleEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
 
-		tmapNavigationOrAttributeCallExp_HelperEClass = createEClass(TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER);
-		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__DISPATCHER);
-		createEAttribute(tmapNavigationOrAttributeCallExp_HelperEClass, TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__T0PROPERTY_NAME);
-		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__T1ATL_SOURCE);
-		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__T2QVTR_OPERATION);
-		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__T2QVTR_SOURCE);
-		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__T2QVTR_SOURCE_ARGUMENT);
-		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__T2QVTR_TRANSFORMATION);
-		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__WMAP_HELPER);
-		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__WMAP_MODULE);
-		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER__WMAP_OCL_EXPRESSION);
+		tmapNavigationOrAttributeCallExp_HelperEClass = createEClass(20);
+		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
+		createEAttribute(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
+		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2);
+		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3);
+		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 4);
+		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 5);
+		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 6);
+		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 7);
+		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 8);
+		createEReference(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 9);
+		createEAttribute(tmapNavigationOrAttributeCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 10);
 
-		tmapNavigationOrAttributeCallExp_PropertyEClass = createEClass(TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY);
-		createEReference(tmapNavigationOrAttributeCallExp_PropertyEClass, TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__DISPATCHER);
-		createEAttribute(tmapNavigationOrAttributeCallExp_PropertyEClass, TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__T0PROPERTY_NAME);
-		createEReference(tmapNavigationOrAttributeCallExp_PropertyEClass, TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__T1ATL_SOURCE);
-		createEReference(tmapNavigationOrAttributeCallExp_PropertyEClass, TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__T2QVTR_SOURCE);
-		createEReference(tmapNavigationOrAttributeCallExp_PropertyEClass, TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY__WMAP_OCL_EXPRESSION);
+		tmapNavigationOrAttributeCallExp_PropertyEClass = createEClass(21);
+		createEReference(tmapNavigationOrAttributeCallExp_PropertyEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
+		createEAttribute(tmapNavigationOrAttributeCallExp_PropertyEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
+		createEReference(tmapNavigationOrAttributeCallExp_PropertyEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2);
+		createEReference(tmapNavigationOrAttributeCallExp_PropertyEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3);
+		createEReference(tmapNavigationOrAttributeCallExp_PropertyEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 4);
+		createEAttribute(tmapNavigationOrAttributeCallExp_PropertyEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 5);
 
-		tmapOclMetamodelEClass = createEClass(TMAP_OCL_METAMODEL);
-		createEAttribute(tmapOclMetamodelEClass, TMAP_OCL_METAMODEL__T0TM_NAME);
-		createEReference(tmapOclMetamodelEClass, TMAP_OCL_METAMODEL__T1OCL_METAMODEL);
-		createEReference(tmapOclMetamodelEClass, TMAP_OCL_METAMODEL__T2QVTR_TYPED_MODEL);
+		tmapOclMetamodelEClass = createEClass(22);
+		createEAttribute(tmapOclMetamodelEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
+		createEReference(tmapOclMetamodelEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEReference(tmapOclMetamodelEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
 
-		tmapOclModel_INEClass = createEClass(TMAP_OCL_MODEL_IN);
-		createEAttribute(tmapOclModel_INEClass, TMAP_OCL_MODEL_IN__T0TM_NAME);
-		createEReference(tmapOclModel_INEClass, TMAP_OCL_MODEL_IN__T1ATL_MODULE);
-		createEReference(tmapOclModel_INEClass, TMAP_OCL_MODEL_IN__T1OCL_METAMODEL);
-		createEReference(tmapOclModel_INEClass, TMAP_OCL_MODEL_IN__T1OCL_MODEL);
-		createEReference(tmapOclModel_INEClass, TMAP_OCL_MODEL_IN__T2QVTR_TRANSFORMATION);
-		createEReference(tmapOclModel_INEClass, TMAP_OCL_MODEL_IN__T2QVTR_TYPED_MODEL);
-		createEReference(tmapOclModel_INEClass, TMAP_OCL_MODEL_IN__WMAP_MODULE);
-		createEReference(tmapOclModel_INEClass, TMAP_OCL_MODEL_IN__WMAP_OCL_METAMODEL);
+		tmapOclModel_INEClass = createEClass(23);
+		createEAttribute(tmapOclModel_INEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
+		createEReference(tmapOclModel_INEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEReference(tmapOclModel_INEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapOclModel_INEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapOclModel_INEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapOclModel_INEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
+		createEReference(tmapOclModel_INEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
+		createEReference(tmapOclModel_INEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7);
 
-		tmapOclModel_OUTEClass = createEClass(TMAP_OCL_MODEL_OUT);
-		createEAttribute(tmapOclModel_OUTEClass, TMAP_OCL_MODEL_OUT__T0TM_NAME);
-		createEReference(tmapOclModel_OUTEClass, TMAP_OCL_MODEL_OUT__T1ATL_MODULE);
-		createEReference(tmapOclModel_OUTEClass, TMAP_OCL_MODEL_OUT__T1OCL_METAMODEL);
-		createEReference(tmapOclModel_OUTEClass, TMAP_OCL_MODEL_OUT__T1OCL_MODEL);
-		createEReference(tmapOclModel_OUTEClass, TMAP_OCL_MODEL_OUT__T2QVTR_TRANSFORMATION);
-		createEReference(tmapOclModel_OUTEClass, TMAP_OCL_MODEL_OUT__T2QVTR_TYPED_MODEL);
-		createEReference(tmapOclModel_OUTEClass, TMAP_OCL_MODEL_OUT__WMAP_MODULE);
-		createEReference(tmapOclModel_OUTEClass, TMAP_OCL_MODEL_OUT__WMAP_OCL_METAMODEL);
+		tmapOclModel_OUTEClass = createEClass(24);
+		createEAttribute(tmapOclModel_OUTEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
+		createEReference(tmapOclModel_OUTEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEReference(tmapOclModel_OUTEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapOclModel_OUTEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapOclModel_OUTEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapOclModel_OUTEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
+		createEReference(tmapOclModel_OUTEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
+		createEReference(tmapOclModel_OUTEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7);
 
-		tmapOperationCallExp_HelperEClass = createEClass(TMAP_OPERATION_CALL_EXP_HELPER);
-		createEReference(tmapOperationCallExp_HelperEClass, TMAP_OPERATION_CALL_EXP_HELPER__DISPATCHER);
-		createEAttribute(tmapOperationCallExp_HelperEClass, TMAP_OPERATION_CALL_EXP_HELPER__T0OPERATION_NAME);
-		createEReference(tmapOperationCallExp_HelperEClass, TMAP_OPERATION_CALL_EXP_HELPER__T1ATL_SOURCE);
-		createEReference(tmapOperationCallExp_HelperEClass, TMAP_OPERATION_CALL_EXP_HELPER__T2QVTR_OPERATION);
-		createEReference(tmapOperationCallExp_HelperEClass, TMAP_OPERATION_CALL_EXP_HELPER__T2QVTR_SOURCE);
-		createEReference(tmapOperationCallExp_HelperEClass, TMAP_OPERATION_CALL_EXP_HELPER__T2QVTR_SOURCE_ARGUMENT);
-		createEReference(tmapOperationCallExp_HelperEClass, TMAP_OPERATION_CALL_EXP_HELPER__T2QVTR_TRANSFORMATION);
-		createEReference(tmapOperationCallExp_HelperEClass, TMAP_OPERATION_CALL_EXP_HELPER__WMAP_HELPER);
-		createEReference(tmapOperationCallExp_HelperEClass, TMAP_OPERATION_CALL_EXP_HELPER__WMAP_MODULE);
-		createEReference(tmapOperationCallExp_HelperEClass, TMAP_OPERATION_CALL_EXP_HELPER__WMAP_OCL_EXPRESSION);
+		tmapOperationCallExp_HelperEClass = createEClass(25);
+		createEReference(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
+		createEAttribute(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
+		createEReference(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2);
+		createEReference(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3);
+		createEReference(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 4);
+		createEReference(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 5);
+		createEReference(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 6);
+		createEReference(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 7);
+		createEReference(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 8);
+		createEReference(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 9);
+		createEAttribute(tmapOperationCallExp_HelperEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 10);
 
-		tmapOperationCallExp_OperationEClass = createEClass(TMAP_OPERATION_CALL_EXP_OPERATION);
-		createEReference(tmapOperationCallExp_OperationEClass, TMAP_OPERATION_CALL_EXP_OPERATION__DISPATCHER);
-		createEAttribute(tmapOperationCallExp_OperationEClass, TMAP_OPERATION_CALL_EXP_OPERATION__T0OPERATION_NAME);
-		createEReference(tmapOperationCallExp_OperationEClass, TMAP_OPERATION_CALL_EXP_OPERATION__T1ATL_SOURCE);
-		createEReference(tmapOperationCallExp_OperationEClass, TMAP_OPERATION_CALL_EXP_OPERATION__T2QVTR_SOURCE);
-		createEReference(tmapOperationCallExp_OperationEClass, TMAP_OPERATION_CALL_EXP_OPERATION__WMAP_OCL_EXPRESSION);
+		tmapOperationCallExp_OperationEClass = createEClass(26);
+		createEReference(tmapOperationCallExp_OperationEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
+		createEAttribute(tmapOperationCallExp_OperationEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
+		createEReference(tmapOperationCallExp_OperationEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2);
+		createEReference(tmapOperationCallExp_OperationEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3);
+		createEReference(tmapOperationCallExp_OperationEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 4);
+		createEAttribute(tmapOperationCallExp_OperationEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 5);
 
-		tmapOperationCallExp_argumentEClass = createEClass(TMAP_OPERATION_CALL_EXP_ARGUMENT);
-		createEReference(tmapOperationCallExp_argumentEClass, TMAP_OPERATION_CALL_EXP_ARGUMENT__T1ATL_ARGUMENT);
-		createEReference(tmapOperationCallExp_argumentEClass, TMAP_OPERATION_CALL_EXP_ARGUMENT__T1ATL_PARENT);
-		createEReference(tmapOperationCallExp_argumentEClass, TMAP_OPERATION_CALL_EXP_ARGUMENT__T2QVTR_ARGUMENT);
-		createEReference(tmapOperationCallExp_argumentEClass, TMAP_OPERATION_CALL_EXP_ARGUMENT__T2QVTR_PARENT);
-		createEReference(tmapOperationCallExp_argumentEClass, TMAP_OPERATION_CALL_EXP_ARGUMENT__WMAP_OCL_EXPRESSION);
-		createEReference(tmapOperationCallExp_argumentEClass, TMAP_OPERATION_CALL_EXP_ARGUMENT__WMAP_OCL_EXPRESSION1);
+		tmapOperationCallExp_argumentEClass = createEClass(27);
+		createEReference(tmapOperationCallExp_argumentEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
+		createEReference(tmapOperationCallExp_argumentEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEReference(tmapOperationCallExp_argumentEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapOperationCallExp_argumentEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapOperationCallExp_argumentEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapOperationCallExp_argumentEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
 
-		tmapOperatorCallExpEClass = createEClass(TMAP_OPERATOR_CALL_EXP);
-		createEReference(tmapOperatorCallExpEClass, TMAP_OPERATOR_CALL_EXP__DISPATCHER);
-		createEAttribute(tmapOperatorCallExpEClass, TMAP_OPERATOR_CALL_EXP__T0OPERATION_NAME);
-		createEReference(tmapOperatorCallExpEClass, TMAP_OPERATOR_CALL_EXP__T1ATL_SOURCE);
-		createEReference(tmapOperatorCallExpEClass, TMAP_OPERATOR_CALL_EXP__T2QVTR_SOURCE);
-		createEReference(tmapOperatorCallExpEClass, TMAP_OPERATOR_CALL_EXP__T2QVTR_TRANSFORMATION);
-		createEReference(tmapOperatorCallExpEClass, TMAP_OPERATOR_CALL_EXP__WMAP_MODULE);
-		createEReference(tmapOperatorCallExpEClass, TMAP_OPERATOR_CALL_EXP__WMAP_OCL_EXPRESSION);
+		tmapOperatorCallExpEClass = createEClass(28);
+		createEReference(tmapOperatorCallExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
+		createEAttribute(tmapOperatorCallExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
+		createEReference(tmapOperatorCallExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2);
+		createEReference(tmapOperatorCallExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3);
+		createEReference(tmapOperatorCallExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 4);
+		createEReference(tmapOperatorCallExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 5);
+		createEReference(tmapOperatorCallExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 6);
+		createEAttribute(tmapOperatorCallExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 7);
 
-		tmapOutPatternEClass = createEClass(TMAP_OUT_PATTERN);
-		createEAttribute(tmapOutPatternEClass, TMAP_OUT_PATTERN__SUCCESS);
-		createEReference(tmapOutPatternEClass, TMAP_OUT_PATTERN__T1ATL_PATTERN);
-		createEReference(tmapOutPatternEClass, TMAP_OUT_PATTERN__T1ATL_RULE);
-		createEReference(tmapOutPatternEClass, TMAP_OUT_PATTERN__T2QVTR_DOMAIN);
-		createEReference(tmapOutPatternEClass, TMAP_OUT_PATTERN__T2QVTR_RELATION);
-		createEReference(tmapOutPatternEClass, TMAP_OUT_PATTERN__T2QVTR_TYPED_MODEL);
-		createEReference(tmapOutPatternEClass, TMAP_OUT_PATTERN__WMAP_MATCHED_RULE);
-		createEReference(tmapOutPatternEClass, TMAP_OUT_PATTERN__WMAP_OCL_METAMODEL);
+		tmapOutPatternEClass = createEClass(29);
+		createEAttribute(tmapOutPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
+		createEReference(tmapOutPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEReference(tmapOutPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapOutPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapOutPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapOutPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
+		createEReference(tmapOutPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
+		createEReference(tmapOutPatternEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7);
 
-		tmapSimpleInPatternElementEClass = createEClass(TMAP_SIMPLE_IN_PATTERN_ELEMENT);
-		createEAttribute(tmapSimpleInPatternElementEClass, TMAP_SIMPLE_IN_PATTERN_ELEMENT__T0ELEMENT_NAME);
-		createEReference(tmapSimpleInPatternElementEClass, TMAP_SIMPLE_IN_PATTERN_ELEMENT__T1ATL_ELEMENT);
-		createEReference(tmapSimpleInPatternElementEClass, TMAP_SIMPLE_IN_PATTERN_ELEMENT__T1ATL_PATTERN);
-		createEReference(tmapSimpleInPatternElementEClass, TMAP_SIMPLE_IN_PATTERN_ELEMENT__T1ATL_RULE);
-		createEReference(tmapSimpleInPatternElementEClass, TMAP_SIMPLE_IN_PATTERN_ELEMENT__T2QVTR_DOMAIN);
-		createEReference(tmapSimpleInPatternElementEClass, TMAP_SIMPLE_IN_PATTERN_ELEMENT__T2QVTR_PATTERN);
-		createEReference(tmapSimpleInPatternElementEClass, TMAP_SIMPLE_IN_PATTERN_ELEMENT__T2QVTR_RELATION);
-		createEReference(tmapSimpleInPatternElementEClass, TMAP_SIMPLE_IN_PATTERN_ELEMENT__T2QVTR_TEMPLATE);
-		createEReference(tmapSimpleInPatternElementEClass, TMAP_SIMPLE_IN_PATTERN_ELEMENT__T2QVTR_VARIABLE);
-		createEReference(tmapSimpleInPatternElementEClass, TMAP_SIMPLE_IN_PATTERN_ELEMENT__WMAP_IN_PATTERN);
-		createEReference(tmapSimpleInPatternElementEClass, TMAP_SIMPLE_IN_PATTERN_ELEMENT__WMAP_MATCHED_RULE);
-		createEReference(tmapSimpleInPatternElementEClass, TMAP_SIMPLE_IN_PATTERN_ELEMENT__WMAP_VARIABLE);
+		tmapSimpleInPatternElementEClass = createEClass(30);
+		createEAttribute(tmapSimpleInPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
+		createEReference(tmapSimpleInPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEReference(tmapSimpleInPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapSimpleInPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapSimpleInPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapSimpleInPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
+		createEReference(tmapSimpleInPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
+		createEReference(tmapSimpleInPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7);
+		createEReference(tmapSimpleInPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8);
+		createEReference(tmapSimpleInPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9);
+		createEReference(tmapSimpleInPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10);
+		createEReference(tmapSimpleInPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 11);
 
-		tmapSimpleOutPatternElementEClass = createEClass(TMAP_SIMPLE_OUT_PATTERN_ELEMENT);
-		createEAttribute(tmapSimpleOutPatternElementEClass, TMAP_SIMPLE_OUT_PATTERN_ELEMENT__SUCCESS);
-		createEAttribute(tmapSimpleOutPatternElementEClass, TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T0ELEMENT_NAME);
-		createEReference(tmapSimpleOutPatternElementEClass, TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_ELEMENT);
-		createEReference(tmapSimpleOutPatternElementEClass, TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_PATTERN);
-		createEReference(tmapSimpleOutPatternElementEClass, TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_RULE);
-		createEReference(tmapSimpleOutPatternElementEClass, TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_DOMAIN);
-		createEReference(tmapSimpleOutPatternElementEClass, TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_PATTERN);
-		createEReference(tmapSimpleOutPatternElementEClass, TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_RELATION);
-		createEReference(tmapSimpleOutPatternElementEClass, TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_TEMPLATE);
-		createEReference(tmapSimpleOutPatternElementEClass, TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_VARIABLE);
-		createEReference(tmapSimpleOutPatternElementEClass, TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_MATCHED_RULE);
-		createEReference(tmapSimpleOutPatternElementEClass, TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_OUT_PATTERN);
-		createEReference(tmapSimpleOutPatternElementEClass, TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_VARIABLE);
+		tmapSimpleOutPatternElementEClass = createEClass(31);
+		createEAttribute(tmapSimpleOutPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
+		createEAttribute(tmapSimpleOutPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEReference(tmapSimpleOutPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
+		createEReference(tmapSimpleOutPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3);
+		createEReference(tmapSimpleOutPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4);
+		createEReference(tmapSimpleOutPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5);
+		createEReference(tmapSimpleOutPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6);
+		createEReference(tmapSimpleOutPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7);
+		createEReference(tmapSimpleOutPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8);
+		createEReference(tmapSimpleOutPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9);
+		createEReference(tmapSimpleOutPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10);
+		createEReference(tmapSimpleOutPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 11);
+		createEReference(tmapSimpleOutPatternElementEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 12);
 
-		tmapStringExpEClass = createEClass(TMAP_STRING_EXP);
-		createEReference(tmapStringExpEClass, TMAP_STRING_EXP__DISPATCHER);
-		createEAttribute(tmapStringExpEClass, TMAP_STRING_EXP__T0SYMBOL);
+		tmapStringExpEClass = createEClass(32);
+		createEReference(tmapStringExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
+		createEAttribute(tmapStringExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
 
-		tmapVariableEClass = createEClass(TMAP_VARIABLE);
-		createEAttribute(tmapVariableEClass, TMAP_VARIABLE__SUCCESS);
-		createEReference(tmapVariableEClass, TMAP_VARIABLE__T1ATL_VARIABLE);
-		createEReference(tmapVariableEClass, TMAP_VARIABLE__T2QVTR_VARIABLE);
+		tmapVariableEClass = createEClass(33);
+		createEAttribute(tmapVariableEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0);
+		createEReference(tmapVariableEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1);
+		createEReference(tmapVariableEClass, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2);
 
-		tmapVariableExpEClass = createEClass(TMAP_VARIABLE_EXP);
-		createEReference(tmapVariableExpEClass, TMAP_VARIABLE_EXP__DISPATCHER);
-		createEAttribute(tmapVariableExpEClass, TMAP_VARIABLE_EXP__T0VAR_NAME);
-		createEReference(tmapVariableExpEClass, TMAP_VARIABLE_EXP__T1ATL_VARIABLE);
-		createEReference(tmapVariableExpEClass, TMAP_VARIABLE_EXP__WMAP_VARIABLE_EXP_REFERRED_VARIABLE);
+		tmapVariableExpEClass = createEClass(34);
+		createEReference(tmapVariableExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0);
+		createEAttribute(tmapVariableExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1);
+		createEReference(tmapVariableExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2);
+		createEReference(tmapVariableExpEClass, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3);
 
-		tmapVariableExp_referredVariable_HelperEClass = createEClass(TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER);
-		createEReference(tmapVariableExp_referredVariable_HelperEClass, TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__DISPATCHER);
-		createEReference(tmapVariableExp_referredVariable_HelperEClass, TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T1ATL_VARIABLE);
-		createEReference(tmapVariableExp_referredVariable_HelperEClass, TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER__T2QVTR_VARIABLE);
+		tmapVariableExp_referredVariable_HelperEClass = createEClass(35);
+		createEReference(tmapVariableExp_referredVariable_HelperEClass, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0);
+		createEReference(tmapVariableExp_referredVariable_HelperEClass, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1);
+		createEReference(tmapVariableExp_referredVariable_HelperEClass, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2);
 
-		tmapVariableExp_referredVariable_VariableDeclarationEClass = createEClass(TMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION);
-		createEReference(tmapVariableExp_referredVariable_VariableDeclarationEClass, TMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__DISPATCHER);
-		createEReference(tmapVariableExp_referredVariable_VariableDeclarationEClass, TMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__T1ATL_VARIABLE);
-		createEReference(tmapVariableExp_referredVariable_VariableDeclarationEClass, TMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION__T2QVTR_VARIABLE);
+		tmapVariableExp_referredVariable_VariableDeclarationEClass = createEClass(36);
+		createEReference(tmapVariableExp_referredVariable_VariableDeclarationEClass, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 0);
+		createEReference(tmapVariableExp_referredVariable_VariableDeclarationEClass, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 1);
+		createEReference(tmapVariableExp_referredVariable_VariableDeclarationEClass, ImapVariableExp_referredVariableImpl.IMAP_VARIABLE_EXP_REFERRED_VARIABLE_FEATURE_COUNT + 2);
 	}
 
 	/**
@@ -3571,6 +3662,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getTmapHelper_Attribute_WmapHelper_Context(), this.getTmapHelper_Context(), null, "wmapHelper_Context", null, 0, 1, TmapHelper_Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapHelper_Attribute_WmapModule(), this.getTmapModule(), null, "wmapModule", null, 0, 1, TmapHelper_Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapHelper_Attribute_WmapOclExpression(), this.getDmapOclExpression(), null, "wmapOclExpression", null, 0, 1, TmapHelper_Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTmapHelper_Attribute_LocalSuccess(), ecorePackage.getEBooleanObject(), "localSuccess", null, 0, 1, TmapHelper_Attribute.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tmapHelper_ContextEClass, TmapHelper_Context.class, "TmapHelper_Context", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTmapHelper_Context_T1atlContext(), theOCLPackage.getOclContextDefinition(), null, "t1atlContext", null, 1, 1, TmapHelper_Context.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3594,6 +3686,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getTmapHelper_Operation_WmapHelper_Context(), this.getTmapHelper_Context(), null, "wmapHelper_Context", null, 0, 1, TmapHelper_Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapHelper_Operation_WmapModule(), this.getTmapModule(), null, "wmapModule", null, 0, 1, TmapHelper_Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapHelper_Operation_WmapOclExpression(), this.getDmapOclExpression(), null, "wmapOclExpression", null, 0, 1, TmapHelper_Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTmapHelper_Operation_LocalSuccess(), ecorePackage.getEBooleanObject(), "localSuccess", null, 0, 1, TmapHelper_Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tmapIfExpEClass, TmapIfExp.class, "TmapIfExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTmapIfExp_Dispatcher(), this.getDmapOclExpression(), this.getDmapOclExpression_DomapIfExp(), "dispatcher", null, 1, 1, TmapIfExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3606,6 +3699,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getTmapIfExp_WmapOclExpression(), this.getDmapOclExpression(), null, "wmapOclExpression", null, 0, 1, TmapIfExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapIfExp_WmapOclExpression1(), this.getDmapOclExpression(), null, "wmapOclExpression1", null, 0, 1, TmapIfExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapIfExp_WmapOclExpression2(), this.getDmapOclExpression(), null, "wmapOclExpression2", null, 0, 1, TmapIfExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTmapIfExp_LocalSuccess(), ecorePackage.getEBooleanObject(), "localSuccess", null, 0, 1, TmapIfExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tmapInPatternEClass, TmapInPattern.class, "TmapInPattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTmapInPattern_Success(), ecorePackage.getEBooleanObject(), "success", null, 0, 1, TmapInPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3640,7 +3734,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEAttribute(getTmapMatchedRule_T0ruleName(), ecorePackage.getEString(), "t0ruleName", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_T1atlModule(), theATLPackage.getModule(), null, "t1atlModule", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_T1matchedRule(), theATLPackage.getMatchedRule(), null, "t1matchedRule", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTmapMatchedRule_T2_1(), theQVTrelationPackage.getSharedVariable(), null, "t2_1", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTmapMatchedRule_T2_5(), theQVTrelationPackage.getSharedVariable(), null, "t2_5", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_T2qvtrRelation(), theQVTrelationPackage.getRelation(), null, "t2qvtrRelation", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_T2qvtrTransformation(), theQVTrelationPackage.getRelationalTransformation(), null, "t2qvtrTransformation", null, 1, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapMatchedRule_WmapModule(), this.getTmapModule(), null, "wmapModule", null, 0, 1, TmapMatchedRule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3656,10 +3750,10 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEClass(tmapModuleEClass, TmapModule.class, "TmapModule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTmapModule_T0txName(), ecorePackage.getEString(), "t0txName", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapModule_T1atlModule(), theATLPackage.getModule(), null, "t1atlModule", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTmapModule_T2_1(), thePivotPackage.getPackage(), null, "t2_1", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTmapModule_T2_2(), thePivotPackage.getParameterVariable(), null, "t2_2", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTmapModule_T2_3(), theQVTbasePackage.getTypedModel(), null, "t2_3", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTmapModule_T2_3(), thePivotPackage.getPackage(), null, "t2_3", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapModule_T2_4(), theQVTrelationPackage.getRelationModel(), null, "t2_4", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTmapModule_T2_5(), thePivotPackage.getParameterVariable(), null, "t2_5", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTmapModule_T2_6(), theQVTbasePackage.getTypedModel(), null, "t2_6", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapModule_T2qvtrTransformation(), theQVTrelationPackage.getRelationalTransformation(), null, "t2qvtrTransformation", null, 1, 1, TmapModule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tmapNavigationOrAttributeCallExp_HelperEClass, TmapNavigationOrAttributeCallExp_Helper.class, "TmapNavigationOrAttributeCallExp_Helper", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3673,6 +3767,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getTmapNavigationOrAttributeCallExp_Helper_WmapHelper(), this.getDmapHelper(), null, "wmapHelper", null, 0, 1, TmapNavigationOrAttributeCallExp_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapNavigationOrAttributeCallExp_Helper_WmapModule(), this.getTmapModule(), null, "wmapModule", null, 0, 1, TmapNavigationOrAttributeCallExp_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapNavigationOrAttributeCallExp_Helper_WmapOclExpression(), this.getDmapOclExpression(), null, "wmapOclExpression", null, 0, 1, TmapNavigationOrAttributeCallExp_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTmapNavigationOrAttributeCallExp_Helper_LocalSuccess(), ecorePackage.getEBooleanObject(), "localSuccess", null, 0, 1, TmapNavigationOrAttributeCallExp_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tmapNavigationOrAttributeCallExp_PropertyEClass, TmapNavigationOrAttributeCallExp_Property.class, "TmapNavigationOrAttributeCallExp_Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTmapNavigationOrAttributeCallExp_Property_Dispatcher(), this.getDmapOclExpression(), this.getDmapOclExpression_DomapNavigationOrAttributeCallExp_Property(), "dispatcher", null, 1, 1, TmapNavigationOrAttributeCallExp_Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3680,6 +3775,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getTmapNavigationOrAttributeCallExp_Property_T1atlSource(), theOCLPackage.getOclExpression(), null, "t1atlSource", null, 1, 1, TmapNavigationOrAttributeCallExp_Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapNavigationOrAttributeCallExp_Property_T2qvtrSource(), thePivotPackage.getOCLExpression(), null, "t2qvtrSource", null, 1, 1, TmapNavigationOrAttributeCallExp_Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapNavigationOrAttributeCallExp_Property_WmapOclExpression(), this.getDmapOclExpression(), null, "wmapOclExpression", null, 0, 1, TmapNavigationOrAttributeCallExp_Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTmapNavigationOrAttributeCallExp_Property_LocalSuccess(), ecorePackage.getEBooleanObject(), "localSuccess", null, 0, 1, TmapNavigationOrAttributeCallExp_Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tmapOclMetamodelEClass, TmapOclMetamodel.class, "TmapOclMetamodel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTmapOclMetamodel_T0tmName(), ecorePackage.getEString(), "t0tmName", null, 1, 1, TmapOclMetamodel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3717,6 +3813,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getTmapOperationCallExp_Helper_WmapHelper(), this.getDmapHelper(), null, "wmapHelper", null, 0, 1, TmapOperationCallExp_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapOperationCallExp_Helper_WmapModule(), this.getTmapModule(), null, "wmapModule", null, 0, 1, TmapOperationCallExp_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapOperationCallExp_Helper_WmapOclExpression(), this.getDmapOclExpression(), null, "wmapOclExpression", null, 0, 1, TmapOperationCallExp_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTmapOperationCallExp_Helper_LocalSuccess(), ecorePackage.getEBooleanObject(), "localSuccess", null, 0, 1, TmapOperationCallExp_Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tmapOperationCallExp_OperationEClass, TmapOperationCallExp_Operation.class, "TmapOperationCallExp_Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTmapOperationCallExp_Operation_Dispatcher(), this.getDmapOclExpression(), this.getDmapOclExpression_DomapOperationCallExp_Operation(), "dispatcher", null, 1, 1, TmapOperationCallExp_Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3724,6 +3821,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getTmapOperationCallExp_Operation_T1atlSource(), theOCLPackage.getOclExpression(), null, "t1atlSource", null, 1, 1, TmapOperationCallExp_Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapOperationCallExp_Operation_T2qvtrSource(), thePivotPackage.getOCLExpression(), null, "t2qvtrSource", null, 1, 1, TmapOperationCallExp_Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapOperationCallExp_Operation_WmapOclExpression(), this.getDmapOclExpression(), null, "wmapOclExpression", null, 0, 1, TmapOperationCallExp_Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTmapOperationCallExp_Operation_LocalSuccess(), ecorePackage.getEBooleanObject(), "localSuccess", null, 0, 1, TmapOperationCallExp_Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tmapOperationCallExp_argumentEClass, TmapOperationCallExp_argument.class, "TmapOperationCallExp_argument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTmapOperationCallExp_argument_T1atlArgument(), theOCLPackage.getOclExpression(), null, "t1atlArgument", null, 1, 1, TmapOperationCallExp_argument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3741,6 +3839,7 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 		initEReference(getTmapOperatorCallExp_T2qvtrTransformation(), theQVTrelationPackage.getRelationalTransformation(), null, "t2qvtrTransformation", null, 1, 1, TmapOperatorCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapOperatorCallExp_WmapModule(), this.getTmapModule(), null, "wmapModule", null, 0, 1, TmapOperatorCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTmapOperatorCallExp_WmapOclExpression(), this.getDmapOclExpression(), null, "wmapOclExpression", null, 0, 1, TmapOperatorCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTmapOperatorCallExp_LocalSuccess(), ecorePackage.getEBooleanObject(), "localSuccess", null, 0, 1, TmapOperatorCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tmapOutPatternEClass, TmapOutPattern.class, "TmapOutPattern", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTmapOutPattern_Success(), ecorePackage.getEBooleanObject(), "success", null, 0, 1, TmapOutPattern.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3825,221 +3924,221 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	protected void createEmofAnnotations() {
 		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		(getDmapHelper_D1atlHelper(),
-			source,
-			new String[] {
-				"body", "DmapHelper"
-		});
+		  (getDmapHelper_D1atlHelper(),
+		   source,
+		   new String[] {
+			   "body", "DmapHelper"
+		   });
 		addAnnotation
-		(getDmapHelper_D2qvtrFunction(),
-			source,
-			new String[] {
-				"body", "DmapHelper"
-		});
+		  (getDmapHelper_D2qvtrFunction(),
+		   source,
+		   new String[] {
+			   "body", "DmapHelper"
+		   });
 		addAnnotation
-		(getDmapOclExpression_D1atlExpression(),
-			source,
-			new String[] {
-				"body", "DmapOclExpression"
-		});
+		  (getDmapOclExpression_D1atlExpression(),
+		   source,
+		   new String[] {
+			   "body", "DmapOclExpression"
+		   });
 		addAnnotation
-		(getDmapOclExpression_D2qvtrExpression(),
-			source,
-			new String[] {
-				"body", "DmapOclExpression"
-		});
+		  (getDmapOclExpression_D2qvtrExpression(),
+		   source,
+		   new String[] {
+			   "body", "DmapOclExpression"
+		   });
 		addAnnotation
-		(getDmapVariableExp_referredVariable_D1atlExpression(),
-			source,
-			new String[] {
-				"body", "DmapVariableExp_referredVariable"
-		});
+		  (getDmapVariableExp_referredVariable_D1atlExpression(),
+		   source,
+		   new String[] {
+			   "body", "DmapVariableExp_referredVariable"
+		   });
 		addAnnotation
-		(getDmapVariableExp_referredVariable_D2qvtrExpression(),
-			source,
-			new String[] {
-				"body", "DmapVariableExp_referredVariable"
-		});
+		  (getDmapVariableExp_referredVariable_D2qvtrExpression(),
+		   source,
+		   new String[] {
+			   "body", "DmapVariableExp_referredVariable"
+		   });
 		addAnnotation
-		(getTmapBinding_T1atlBinding(),
-			source,
-			new String[] {
-				"body", "TmapBinding"
-		});
+		  (getTmapBinding_T1atlBinding(),
+		   source,
+		   new String[] {
+			   "body", "TmapBinding"
+		   });
 		addAnnotation
-		(getTmapBinding_T2qvtrPart(),
-			source,
-			new String[] {
-				"body", "TmapBinding"
-		});
+		  (getTmapBinding_T2qvtrPart(),
+		   source,
+		   new String[] {
+			   "body", "TmapBinding"
+		   });
 		addAnnotation
-		(getTmapHelper_Context_T1atlHelper(),
-			source,
-			new String[] {
-				"body", "TmapHelper_Context"
-		});
+		  (getTmapHelper_Context_T1atlHelper(),
+		   source,
+		   new String[] {
+			   "body", "TmapHelper_Context"
+		   });
 		addAnnotation
-		(getTmapHelper_Context_T2qvtrFunction(),
-			source,
-			new String[] {
-				"body", "TmapHelper_Context"
-		});
+		  (getTmapHelper_Context_T2qvtrFunction(),
+		   source,
+		   new String[] {
+			   "body", "TmapHelper_Context"
+		   });
 		addAnnotation
-		(getTmapInPattern_T1atlPattern(),
-			source,
-			new String[] {
-				"body", "TmapInPattern"
-		});
+		  (getTmapInPattern_T1atlPattern(),
+		   source,
+		   new String[] {
+			   "body", "TmapInPattern"
+		   });
 		addAnnotation
-		(getTmapInPattern_T2qvtrDomain(),
-			source,
-			new String[] {
-				"body", "TmapInPattern"
-		});
+		  (getTmapInPattern_T2qvtrDomain(),
+		   source,
+		   new String[] {
+			   "body", "TmapInPattern"
+		   });
 		addAnnotation
-		(getTmapInPattern_filter_T1atlPattern(),
-			source,
-			new String[] {
-				"body", "TmapInPattern_filter"
-		});
+		  (getTmapInPattern_filter_T1atlPattern(),
+		   source,
+		   new String[] {
+			   "body", "TmapInPattern_filter"
+		   });
 		addAnnotation
-		(getTmapInPattern_filter_T2qvtrDomain(),
-			source,
-			new String[] {
-				"body", "TmapInPattern_filter"
-		});
+		  (getTmapInPattern_filter_T2qvtrDomain(),
+		   source,
+		   new String[] {
+			   "body", "TmapInPattern_filter"
+		   });
 		addAnnotation
-		(getTmapMatchedRule_T1matchedRule(),
-			source,
-			new String[] {
-				"body", "TmapMatchedRule"
-		});
+		  (getTmapMatchedRule_T1matchedRule(),
+		   source,
+		   new String[] {
+			   "body", "TmapMatchedRule"
+		   });
 		addAnnotation
-		(getTmapMatchedRule_T2qvtrRelation(),
-			source,
-			new String[] {
-				"body", "TmapMatchedRule"
-		});
+		  (getTmapMatchedRule_T2qvtrRelation(),
+		   source,
+		   new String[] {
+			   "body", "TmapMatchedRule"
+		   });
 		addAnnotation
-		(getTmapMatchedRule_super_T1atlChildRule(),
-			source,
-			new String[] {
-				"body", "TmapMatchedRule_super"
-		});
+		  (getTmapMatchedRule_super_T1atlChildRule(),
+		   source,
+		   new String[] {
+			   "body", "TmapMatchedRule_super"
+		   });
 		addAnnotation
-		(getTmapMatchedRule_super_T2qvtrOverridesRelation(),
-			source,
-			new String[] {
-				"body", "TmapMatchedRule_super"
-		});
+		  (getTmapMatchedRule_super_T2qvtrOverridesRelation(),
+		   source,
+		   new String[] {
+			   "body", "TmapMatchedRule_super"
+		   });
 		addAnnotation
-		(getTmapModule_T1atlModule(),
-			source,
-			new String[] {
-				"body", "TmapModule"
-		});
+		  (getTmapModule_T1atlModule(),
+		   source,
+		   new String[] {
+			   "body", "TmapModule"
+		   });
 		addAnnotation
-		(getTmapModule_T2qvtrTransformation(),
-			source,
-			new String[] {
-				"body", "TmapModule"
-		});
+		  (getTmapModule_T2qvtrTransformation(),
+		   source,
+		   new String[] {
+			   "body", "TmapModule"
+		   });
 		addAnnotation
-		(getTmapOclMetamodel_T1oclMetamodel(),
-			source,
-			new String[] {
-				"body", "TmapOclMetamodel"
-		});
+		  (getTmapOclMetamodel_T1oclMetamodel(),
+		   source,
+		   new String[] {
+			   "body", "TmapOclMetamodel"
+		   });
 		addAnnotation
-		(getTmapOclMetamodel_T2qvtrTypedModel(),
-			source,
-			new String[] {
-				"body", "TmapOclMetamodel"
-		});
+		  (getTmapOclMetamodel_T2qvtrTypedModel(),
+		   source,
+		   new String[] {
+			   "body", "TmapOclMetamodel"
+		   });
 		addAnnotation
-		(getTmapOclModel_IN_T1oclModel(),
-			source,
-			new String[] {
-				"body", "TmapOclModel_IN"
-		});
+		  (getTmapOclModel_IN_T1oclModel(),
+		   source,
+		   new String[] {
+			   "body", "TmapOclModel_IN"
+		   });
 		addAnnotation
-		(getTmapOclModel_IN_T2qvtrTypedModel(),
-			source,
-			new String[] {
-				"body", "TmapOclModel_IN"
-		});
+		  (getTmapOclModel_IN_T2qvtrTypedModel(),
+		   source,
+		   new String[] {
+			   "body", "TmapOclModel_IN"
+		   });
 		addAnnotation
-		(getTmapOclModel_OUT_T1oclModel(),
-			source,
-			new String[] {
-				"body", "TmapOclModel_OUT"
-		});
+		  (getTmapOclModel_OUT_T1oclModel(),
+		   source,
+		   new String[] {
+			   "body", "TmapOclModel_OUT"
+		   });
 		addAnnotation
-		(getTmapOclModel_OUT_T2qvtrTypedModel(),
-			source,
-			new String[] {
-				"body", "TmapOclModel_OUT"
-		});
+		  (getTmapOclModel_OUT_T2qvtrTypedModel(),
+		   source,
+		   new String[] {
+			   "body", "TmapOclModel_OUT"
+		   });
 		addAnnotation
-		(getTmapOperationCallExp_argument_T1atlArgument(),
-			source,
-			new String[] {
-				"body", "TmapOperationCallExp_argument"
-		});
+		  (getTmapOperationCallExp_argument_T1atlArgument(),
+		   source,
+		   new String[] {
+			   "body", "TmapOperationCallExp_argument"
+		   });
 		addAnnotation
-		(getTmapOperationCallExp_argument_T2qvtrArgument(),
-			source,
-			new String[] {
-				"body", "TmapOperationCallExp_argument"
-		});
+		  (getTmapOperationCallExp_argument_T2qvtrArgument(),
+		   source,
+		   new String[] {
+			   "body", "TmapOperationCallExp_argument"
+		   });
 		addAnnotation
-		(getTmapOutPattern_T1atlPattern(),
-			source,
-			new String[] {
-				"body", "TmapOutPattern"
-		});
+		  (getTmapOutPattern_T1atlPattern(),
+		   source,
+		   new String[] {
+			   "body", "TmapOutPattern"
+		   });
 		addAnnotation
-		(getTmapOutPattern_T2qvtrDomain(),
-			source,
-			new String[] {
-				"body", "TmapOutPattern"
-		});
+		  (getTmapOutPattern_T2qvtrDomain(),
+		   source,
+		   new String[] {
+			   "body", "TmapOutPattern"
+		   });
 		addAnnotation
-		(getTmapSimpleInPatternElement_T1atlElement(),
-			source,
-			new String[] {
-				"body", "TmapSimpleInPatternElement"
-		});
+		  (getTmapSimpleInPatternElement_T1atlElement(),
+		   source,
+		   new String[] {
+			   "body", "TmapSimpleInPatternElement"
+		   });
 		addAnnotation
-		(getTmapSimpleInPatternElement_T2qvtrTemplate(),
-			source,
-			new String[] {
-				"body", "TmapSimpleInPatternElement"
-		});
+		  (getTmapSimpleInPatternElement_T2qvtrTemplate(),
+		   source,
+		   new String[] {
+			   "body", "TmapSimpleInPatternElement"
+		   });
 		addAnnotation
-		(getTmapSimpleOutPatternElement_T1atlElement(),
-			source,
-			new String[] {
-				"body", "TmapSimpleOutPatternElement"
-		});
+		  (getTmapSimpleOutPatternElement_T1atlElement(),
+		   source,
+		   new String[] {
+			   "body", "TmapSimpleOutPatternElement"
+		   });
 		addAnnotation
-		(getTmapSimpleOutPatternElement_T2qvtrTemplate(),
-			source,
-			new String[] {
-				"body", "TmapSimpleOutPatternElement"
-		});
+		  (getTmapSimpleOutPatternElement_T2qvtrTemplate(),
+		   source,
+		   new String[] {
+			   "body", "TmapSimpleOutPatternElement"
+		   });
 		addAnnotation
-		(getTmapVariable_T1atlVariable(),
-			source,
-			new String[] {
-				"body", "TmapVariable"
-		});
+		  (getTmapVariable_T1atlVariable(),
+		   source,
+		   new String[] {
+			   "body", "TmapVariable"
+		   });
 		addAnnotation
-		(getTmapVariable_T2qvtrVariable(),
-			source,
-			new String[] {
-				"body", "TmapVariable"
-		});
+		  (getTmapVariable_T2qvtrVariable(),
+		   source,
+		   new String[] {
+			   "body", "TmapVariable"
+		   });
 	}
 
 	/**
@@ -4051,971 +4150,971 @@ public class trace_ATL2QVTrPackageImpl extends EPackageImpl implements trace_ATL
 	protected void createQvtDomainsAnnotations() {
 		String source = "http://www.eclipse.org/qvt#Domains";
 		addAnnotation
-		(getDmapHelper_D1atlHelper(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getDmapHelper_D2qvtrFunction(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getDmapHelper_DomapHelper_Attribute(),
-			source,
-			new String[] {
-				"referredDomain", "middle"
-		});
-		addAnnotation
-		(getDmapHelper_DomapHelper_Operation(),
-			source,
-			new String[] {
-				"referredDomain", "middle"
-		});
-		addAnnotation
-		(getDmapOclExpression_D1atlExpression(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getDmapOclExpression_D2qvtrExpression(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getDmapOclExpression_DomapBooleanExp(),
-			source,
-			new String[] {
-				"referredDomain", "middle"
-		});
-		addAnnotation
-		(getDmapOclExpression_DomapIfExp(),
-			source,
-			new String[] {
-				"referredDomain", "middle"
-		});
-		addAnnotation
-		(getDmapOclExpression_DomapIntegerExp(),
-			source,
-			new String[] {
-				"referredDomain", "middle"
-		});
-		addAnnotation
-		(getDmapOclExpression_DomapNavigationOrAttributeCallExp_Helper(),
-			source,
-			new String[] {
-				"referredDomain", "middle"
-		});
-		addAnnotation
-		(getDmapOclExpression_DomapNavigationOrAttributeCallExp_Property(),
-			source,
-			new String[] {
-				"referredDomain", "middle"
-		});
-		addAnnotation
-		(getDmapOclExpression_DomapOperationCallExp_Helper(),
-			source,
-			new String[] {
-				"referredDomain", "middle"
-		});
-		addAnnotation
-		(getDmapOclExpression_DomapOperationCallExp_Operation(),
-			source,
-			new String[] {
-				"referredDomain", "middle"
-		});
-		addAnnotation
-		(getDmapOclExpression_DomapOperatorCallExp(),
-			source,
-			new String[] {
-				"referredDomain", "middle"
-		});
-		addAnnotation
-		(getDmapOclExpression_DomapStringExp(),
-			source,
-			new String[] {
-				"referredDomain", "middle"
-		});
-		addAnnotation
-		(getDmapOclExpression_DomapVariableExp(),
-			source,
-			new String[] {
-				"referredDomain", "middle"
-		});
-		addAnnotation
-		(getDmapVariableExp_referredVariable_D1atlExpression(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getDmapVariableExp_referredVariable_D2qvtrExpression(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getDmapVariableExp_referredVariable_DomapVariableExp_referredVariable_Helper(),
-			source,
-			new String[] {
-				"referredDomain", "middle"
-		});
-		addAnnotation
-		(getDmapVariableExp_referredVariable_DomapVariableExp_referredVariable_VariableDeclaration(),
-			source,
-			new String[] {
-				"referredDomain", "middle"
-		});
-		addAnnotation
-		(getTmapBinding_T0propertyName(),
-			source,
-			new String[] {
-				"referredDomain", "$primitive$"
-		});
-		addAnnotation
-		(getTmapBinding_T1atlBinding(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapBinding_T1atlExpression(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapBinding_T1atlOutPatternElement(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapBinding_T2qvtrExpression(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapBinding_T2qvtrPart(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapBinding_T2qvtrTemplate(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapBooleanExp_T0symbol(),
-			source,
-			new String[] {
-				"referredDomain", "$primitive$"
-		});
-		addAnnotation
-		(getTmapHelper_Attribute_T0attributeName(),
-			source,
-			new String[] {
-				"referredDomain", "$primitive$"
-		});
-		addAnnotation
-		(getTmapHelper_Attribute_T1atlDefinition(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapHelper_Attribute_T1atlExpression(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapHelper_Attribute_T1atlFeature(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapHelper_Attribute_T1atlModule(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapHelper_Attribute_T1atlType(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapHelper_Attribute_T2qvtrExpression(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapHelper_Attribute_T2qvtrTransformation(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapHelper_Context_T1atlContext(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapHelper_Context_T1atlDefinition(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapHelper_Context_T1atlHelper(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapHelper_Context_T1atlReturnType(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapHelper_Context_T2qvtrFunction(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapHelper_Context_T2qvtrParameter(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapHelper_Operation_T0operationName(),
-			source,
-			new String[] {
-				"referredDomain", "$primitive$"
-		});
-		addAnnotation
-		(getTmapHelper_Operation_T1atlDefinition(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapHelper_Operation_T1atlExpression(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapHelper_Operation_T1atlFeature(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapHelper_Operation_T1atlModule(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapHelper_Operation_T1atlType(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapHelper_Operation_T2qvtrExpression(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapHelper_Operation_T2qvtrTransformation(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapIfExp_T1atlCondition(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapIfExp_T1atlElse(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapIfExp_T1atlThen(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapIfExp_T2qvtrCondition(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapIfExp_T2qvtrElse(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapIfExp_T2qvtrThen(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapInPattern_T1atlModel(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapInPattern_T1atlPattern(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapInPattern_T1atlRule(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapInPattern_T2qvtrDomain(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapInPattern_T2qvtrRelation(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapInPattern_T2qvtrTypedModel(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapInPattern_filter_T1atlExpression(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapInPattern_filter_T1atlPattern(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapInPattern_filter_T1atlRule(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapInPattern_filter_T2p(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapInPattern_filter_T2qvtrDomain(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapInPattern_filter_T2qvtrExpression(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapInPattern_filter_T2qvtrRelation(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapInPattern_filter_T2w(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapIntegerExp_T0symbol(),
-			source,
-			new String[] {
-				"referredDomain", "$primitive$"
-		});
-		addAnnotation
-		(getTmapMatchedRule_T0ruleName(),
-			source,
-			new String[] {
-				"referredDomain", "$primitive$"
-		});
-		addAnnotation
-		(getTmapMatchedRule_T1atlModule(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapMatchedRule_T1matchedRule(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapMatchedRule_T2_1(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapMatchedRule_T2qvtrRelation(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapMatchedRule_T2qvtrTransformation(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapMatchedRule_super_T1atlChildRule(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapMatchedRule_super_T1atlSuperRule(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapMatchedRule_super_T2qvtrOverriddenRelation(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapMatchedRule_super_T2qvtrOverridesRelation(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapModule_T0txName(),
-			source,
-			new String[] {
-				"referredDomain", "$primitive$"
-		});
-		addAnnotation
-		(getTmapModule_T1atlModule(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapModule_T2_1(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapModule_T2_2(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapModule_T2_3(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapModule_T2_4(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapModule_T2qvtrTransformation(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapNavigationOrAttributeCallExp_Helper_T0propertyName(),
-			source,
-			new String[] {
-				"referredDomain", "$primitive$"
-		});
-		addAnnotation
-		(getTmapNavigationOrAttributeCallExp_Helper_T1atlSource(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapNavigationOrAttributeCallExp_Helper_T2qvtrOperation(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapNavigationOrAttributeCallExp_Helper_T2qvtrSource(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapNavigationOrAttributeCallExp_Helper_T2qvtrSourceArgument(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapNavigationOrAttributeCallExp_Helper_T2qvtrTransformation(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapNavigationOrAttributeCallExp_Property_T0propertyName(),
-			source,
-			new String[] {
-				"referredDomain", "$primitive$"
-		});
-		addAnnotation
-		(getTmapNavigationOrAttributeCallExp_Property_T1atlSource(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapNavigationOrAttributeCallExp_Property_T2qvtrSource(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapOclMetamodel_T0tmName(),
-			source,
-			new String[] {
-				"referredDomain", "$primitive$"
-		});
-		addAnnotation
-		(getTmapOclMetamodel_T1oclMetamodel(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapOclMetamodel_T2qvtrTypedModel(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapOclModel_IN_T0tmName(),
-			source,
-			new String[] {
-				"referredDomain", "$primitive$"
-		});
-		addAnnotation
-		(getTmapOclModel_IN_T1atlModule(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapOclModel_IN_T1oclMetamodel(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapOclModel_IN_T1oclModel(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapOclModel_IN_T2qvtrTransformation(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapOclModel_IN_T2qvtrTypedModel(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapOclModel_OUT_T0tmName(),
-			source,
-			new String[] {
-				"referredDomain", "$primitive$"
-		});
-		addAnnotation
-		(getTmapOclModel_OUT_T1atlModule(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapOclModel_OUT_T1oclMetamodel(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapOclModel_OUT_T1oclModel(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapOclModel_OUT_T2qvtrTransformation(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapOclModel_OUT_T2qvtrTypedModel(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapOperationCallExp_Helper_T0operationName(),
-			source,
-			new String[] {
-				"referredDomain", "$primitive$"
-		});
-		addAnnotation
-		(getTmapOperationCallExp_Helper_T1atlSource(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapOperationCallExp_Helper_T2qvtrOperation(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapOperationCallExp_Helper_T2qvtrSource(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapOperationCallExp_Helper_T2qvtrSourceArgument(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapOperationCallExp_Helper_T2qvtrTransformation(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapOperationCallExp_Operation_T0operationName(),
-			source,
-			new String[] {
-				"referredDomain", "$primitive$"
-		});
-		addAnnotation
-		(getTmapOperationCallExp_Operation_T1atlSource(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapOperationCallExp_Operation_T2qvtrSource(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapOperationCallExp_argument_T1atlArgument(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapOperationCallExp_argument_T1atlParent(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapOperationCallExp_argument_T2qvtrArgument(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapOperationCallExp_argument_T2qvtrParent(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapOperatorCallExp_T0operationName(),
-			source,
-			new String[] {
-				"referredDomain", "$primitive$"
-		});
-		addAnnotation
-		(getTmapOperatorCallExp_T1atlSource(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapOperatorCallExp_T2qvtrSource(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapOperatorCallExp_T2qvtrTransformation(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapOutPattern_T1atlPattern(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapOutPattern_T1atlRule(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapOutPattern_T2qvtrDomain(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapOutPattern_T2qvtrRelation(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapOutPattern_T2qvtrTypedModel(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapSimpleInPatternElement_T0elementName(),
-			source,
-			new String[] {
-				"referredDomain", "$primitive$"
-		});
-		addAnnotation
-		(getTmapSimpleInPatternElement_T1atlElement(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapSimpleInPatternElement_T1atlPattern(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapSimpleInPatternElement_T1atlRule(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapSimpleInPatternElement_T2qvtrDomain(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapSimpleInPatternElement_T2qvtrPattern(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapSimpleInPatternElement_T2qvtrRelation(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapSimpleInPatternElement_T2qvtrTemplate(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapSimpleInPatternElement_T2qvtrVariable(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapSimpleOutPatternElement_T0elementName(),
-			source,
-			new String[] {
-				"referredDomain", "$primitive$"
-		});
-		addAnnotation
-		(getTmapSimpleOutPatternElement_T1atlElement(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapSimpleOutPatternElement_T1atlPattern(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapSimpleOutPatternElement_T1atlRule(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapSimpleOutPatternElement_T2qvtrDomain(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapSimpleOutPatternElement_T2qvtrPattern(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapSimpleOutPatternElement_T2qvtrRelation(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapSimpleOutPatternElement_T2qvtrTemplate(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapSimpleOutPatternElement_T2qvtrVariable(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapStringExp_T0symbol(),
-			source,
-			new String[] {
-				"referredDomain", "$primitive$"
-		});
-		addAnnotation
-		(getTmapVariable_T1atlVariable(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapVariable_T2qvtrVariable(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapVariableExp_T0varName(),
-			source,
-			new String[] {
-				"referredDomain", "$primitive$"
-		});
-		addAnnotation
-		(getTmapVariableExp_T1atlVariable(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapVariableExp_referredVariable_Helper_T1atlVariable(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapVariableExp_referredVariable_Helper_T2qvtrVariable(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
-		addAnnotation
-		(getTmapVariableExp_referredVariable_VariableDeclaration_T1atlVariable(),
-			source,
-			new String[] {
-				"referredDomain", "atl"
-		});
-		addAnnotation
-		(getTmapVariableExp_referredVariable_VariableDeclaration_T2qvtrVariable(),
-			source,
-			new String[] {
-				"referredDomain", "qvtr"
-		});
+		  (getDmapHelper_D1atlHelper(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getDmapHelper_D2qvtrFunction(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getDmapHelper_DomapHelper_Attribute(),
+		   source,
+		   new String[] {
+			   "referredDomain", "middle"
+		   });
+		addAnnotation
+		  (getDmapHelper_DomapHelper_Operation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "middle"
+		   });
+		addAnnotation
+		  (getDmapOclExpression_D1atlExpression(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getDmapOclExpression_D2qvtrExpression(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getDmapOclExpression_DomapBooleanExp(),
+		   source,
+		   new String[] {
+			   "referredDomain", "middle"
+		   });
+		addAnnotation
+		  (getDmapOclExpression_DomapIfExp(),
+		   source,
+		   new String[] {
+			   "referredDomain", "middle"
+		   });
+		addAnnotation
+		  (getDmapOclExpression_DomapIntegerExp(),
+		   source,
+		   new String[] {
+			   "referredDomain", "middle"
+		   });
+		addAnnotation
+		  (getDmapOclExpression_DomapNavigationOrAttributeCallExp_Helper(),
+		   source,
+		   new String[] {
+			   "referredDomain", "middle"
+		   });
+		addAnnotation
+		  (getDmapOclExpression_DomapNavigationOrAttributeCallExp_Property(),
+		   source,
+		   new String[] {
+			   "referredDomain", "middle"
+		   });
+		addAnnotation
+		  (getDmapOclExpression_DomapOperationCallExp_Helper(),
+		   source,
+		   new String[] {
+			   "referredDomain", "middle"
+		   });
+		addAnnotation
+		  (getDmapOclExpression_DomapOperationCallExp_Operation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "middle"
+		   });
+		addAnnotation
+		  (getDmapOclExpression_DomapOperatorCallExp(),
+		   source,
+		   new String[] {
+			   "referredDomain", "middle"
+		   });
+		addAnnotation
+		  (getDmapOclExpression_DomapStringExp(),
+		   source,
+		   new String[] {
+			   "referredDomain", "middle"
+		   });
+		addAnnotation
+		  (getDmapOclExpression_DomapVariableExp(),
+		   source,
+		   new String[] {
+			   "referredDomain", "middle"
+		   });
+		addAnnotation
+		  (getDmapVariableExp_referredVariable_D1atlExpression(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getDmapVariableExp_referredVariable_D2qvtrExpression(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getDmapVariableExp_referredVariable_DomapVariableExp_referredVariable_Helper(),
+		   source,
+		   new String[] {
+			   "referredDomain", "middle"
+		   });
+		addAnnotation
+		  (getDmapVariableExp_referredVariable_DomapVariableExp_referredVariable_VariableDeclaration(),
+		   source,
+		   new String[] {
+			   "referredDomain", "middle"
+		   });
+		addAnnotation
+		  (getTmapBinding_T0propertyName(),
+		   source,
+		   new String[] {
+			   "referredDomain", "$primitive$"
+		   });
+		addAnnotation
+		  (getTmapBinding_T1atlBinding(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapBinding_T1atlExpression(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapBinding_T1atlOutPatternElement(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapBinding_T2qvtrExpression(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapBinding_T2qvtrPart(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapBinding_T2qvtrTemplate(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapBooleanExp_T0symbol(),
+		   source,
+		   new String[] {
+			   "referredDomain", "$primitive$"
+		   });
+		addAnnotation
+		  (getTmapHelper_Attribute_T0attributeName(),
+		   source,
+		   new String[] {
+			   "referredDomain", "$primitive$"
+		   });
+		addAnnotation
+		  (getTmapHelper_Attribute_T1atlDefinition(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapHelper_Attribute_T1atlExpression(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapHelper_Attribute_T1atlFeature(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapHelper_Attribute_T1atlModule(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapHelper_Attribute_T1atlType(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapHelper_Attribute_T2qvtrExpression(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapHelper_Attribute_T2qvtrTransformation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapHelper_Context_T1atlContext(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapHelper_Context_T1atlDefinition(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapHelper_Context_T1atlHelper(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapHelper_Context_T1atlReturnType(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapHelper_Context_T2qvtrFunction(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapHelper_Context_T2qvtrParameter(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapHelper_Operation_T0operationName(),
+		   source,
+		   new String[] {
+			   "referredDomain", "$primitive$"
+		   });
+		addAnnotation
+		  (getTmapHelper_Operation_T1atlDefinition(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapHelper_Operation_T1atlExpression(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapHelper_Operation_T1atlFeature(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapHelper_Operation_T1atlModule(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapHelper_Operation_T1atlType(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapHelper_Operation_T2qvtrExpression(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapHelper_Operation_T2qvtrTransformation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapIfExp_T1atlCondition(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapIfExp_T1atlElse(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapIfExp_T1atlThen(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapIfExp_T2qvtrCondition(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapIfExp_T2qvtrElse(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapIfExp_T2qvtrThen(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapInPattern_T1atlModel(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapInPattern_T1atlPattern(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapInPattern_T1atlRule(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapInPattern_T2qvtrDomain(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapInPattern_T2qvtrRelation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapInPattern_T2qvtrTypedModel(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapInPattern_filter_T1atlExpression(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapInPattern_filter_T1atlPattern(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapInPattern_filter_T1atlRule(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapInPattern_filter_T2p(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapInPattern_filter_T2qvtrDomain(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapInPattern_filter_T2qvtrExpression(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapInPattern_filter_T2qvtrRelation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapInPattern_filter_T2w(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapIntegerExp_T0symbol(),
+		   source,
+		   new String[] {
+			   "referredDomain", "$primitive$"
+		   });
+		addAnnotation
+		  (getTmapMatchedRule_T0ruleName(),
+		   source,
+		   new String[] {
+			   "referredDomain", "$primitive$"
+		   });
+		addAnnotation
+		  (getTmapMatchedRule_T1atlModule(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapMatchedRule_T1matchedRule(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapMatchedRule_T2_5(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapMatchedRule_T2qvtrRelation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapMatchedRule_T2qvtrTransformation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapMatchedRule_super_T1atlChildRule(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapMatchedRule_super_T1atlSuperRule(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapMatchedRule_super_T2qvtrOverriddenRelation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapMatchedRule_super_T2qvtrOverridesRelation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapModule_T0txName(),
+		   source,
+		   new String[] {
+			   "referredDomain", "$primitive$"
+		   });
+		addAnnotation
+		  (getTmapModule_T1atlModule(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapModule_T2_3(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapModule_T2_4(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapModule_T2_5(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapModule_T2_6(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapModule_T2qvtrTransformation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapNavigationOrAttributeCallExp_Helper_T0propertyName(),
+		   source,
+		   new String[] {
+			   "referredDomain", "$primitive$"
+		   });
+		addAnnotation
+		  (getTmapNavigationOrAttributeCallExp_Helper_T1atlSource(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapNavigationOrAttributeCallExp_Helper_T2qvtrOperation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapNavigationOrAttributeCallExp_Helper_T2qvtrSource(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapNavigationOrAttributeCallExp_Helper_T2qvtrSourceArgument(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapNavigationOrAttributeCallExp_Helper_T2qvtrTransformation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapNavigationOrAttributeCallExp_Property_T0propertyName(),
+		   source,
+		   new String[] {
+			   "referredDomain", "$primitive$"
+		   });
+		addAnnotation
+		  (getTmapNavigationOrAttributeCallExp_Property_T1atlSource(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapNavigationOrAttributeCallExp_Property_T2qvtrSource(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapOclMetamodel_T0tmName(),
+		   source,
+		   new String[] {
+			   "referredDomain", "$primitive$"
+		   });
+		addAnnotation
+		  (getTmapOclMetamodel_T1oclMetamodel(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapOclMetamodel_T2qvtrTypedModel(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapOclModel_IN_T0tmName(),
+		   source,
+		   new String[] {
+			   "referredDomain", "$primitive$"
+		   });
+		addAnnotation
+		  (getTmapOclModel_IN_T1atlModule(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapOclModel_IN_T1oclMetamodel(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapOclModel_IN_T1oclModel(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapOclModel_IN_T2qvtrTransformation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapOclModel_IN_T2qvtrTypedModel(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapOclModel_OUT_T0tmName(),
+		   source,
+		   new String[] {
+			   "referredDomain", "$primitive$"
+		   });
+		addAnnotation
+		  (getTmapOclModel_OUT_T1atlModule(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapOclModel_OUT_T1oclMetamodel(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapOclModel_OUT_T1oclModel(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapOclModel_OUT_T2qvtrTransformation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapOclModel_OUT_T2qvtrTypedModel(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapOperationCallExp_Helper_T0operationName(),
+		   source,
+		   new String[] {
+			   "referredDomain", "$primitive$"
+		   });
+		addAnnotation
+		  (getTmapOperationCallExp_Helper_T1atlSource(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapOperationCallExp_Helper_T2qvtrOperation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapOperationCallExp_Helper_T2qvtrSource(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapOperationCallExp_Helper_T2qvtrSourceArgument(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapOperationCallExp_Helper_T2qvtrTransformation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapOperationCallExp_Operation_T0operationName(),
+		   source,
+		   new String[] {
+			   "referredDomain", "$primitive$"
+		   });
+		addAnnotation
+		  (getTmapOperationCallExp_Operation_T1atlSource(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapOperationCallExp_Operation_T2qvtrSource(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapOperationCallExp_argument_T1atlArgument(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapOperationCallExp_argument_T1atlParent(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapOperationCallExp_argument_T2qvtrArgument(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapOperationCallExp_argument_T2qvtrParent(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapOperatorCallExp_T0operationName(),
+		   source,
+		   new String[] {
+			   "referredDomain", "$primitive$"
+		   });
+		addAnnotation
+		  (getTmapOperatorCallExp_T1atlSource(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapOperatorCallExp_T2qvtrSource(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapOperatorCallExp_T2qvtrTransformation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapOutPattern_T1atlPattern(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapOutPattern_T1atlRule(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapOutPattern_T2qvtrDomain(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapOutPattern_T2qvtrRelation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapOutPattern_T2qvtrTypedModel(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapSimpleInPatternElement_T0elementName(),
+		   source,
+		   new String[] {
+			   "referredDomain", "$primitive$"
+		   });
+		addAnnotation
+		  (getTmapSimpleInPatternElement_T1atlElement(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapSimpleInPatternElement_T1atlPattern(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapSimpleInPatternElement_T1atlRule(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapSimpleInPatternElement_T2qvtrDomain(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapSimpleInPatternElement_T2qvtrPattern(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapSimpleInPatternElement_T2qvtrRelation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapSimpleInPatternElement_T2qvtrTemplate(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapSimpleInPatternElement_T2qvtrVariable(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapSimpleOutPatternElement_T0elementName(),
+		   source,
+		   new String[] {
+			   "referredDomain", "$primitive$"
+		   });
+		addAnnotation
+		  (getTmapSimpleOutPatternElement_T1atlElement(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapSimpleOutPatternElement_T1atlPattern(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapSimpleOutPatternElement_T1atlRule(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapSimpleOutPatternElement_T2qvtrDomain(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapSimpleOutPatternElement_T2qvtrPattern(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapSimpleOutPatternElement_T2qvtrRelation(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapSimpleOutPatternElement_T2qvtrTemplate(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapSimpleOutPatternElement_T2qvtrVariable(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapStringExp_T0symbol(),
+		   source,
+		   new String[] {
+			   "referredDomain", "$primitive$"
+		   });
+		addAnnotation
+		  (getTmapVariable_T1atlVariable(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapVariable_T2qvtrVariable(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapVariableExp_T0varName(),
+		   source,
+		   new String[] {
+			   "referredDomain", "$primitive$"
+		   });
+		addAnnotation
+		  (getTmapVariableExp_T1atlVariable(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapVariableExp_referredVariable_Helper_T1atlVariable(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapVariableExp_referredVariable_Helper_T2qvtrVariable(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
+		addAnnotation
+		  (getTmapVariableExp_referredVariable_VariableDeclaration_T1atlVariable(),
+		   source,
+		   new String[] {
+			   "referredDomain", "atl"
+		   });
+		addAnnotation
+		  (getTmapVariableExp_referredVariable_VariableDeclaration_T2qvtrVariable(),
+		   source,
+		   new String[] {
+			   "referredDomain", "qvtr"
+		   });
 	}
 
 } //trace_ATL2QVTrPackageImpl

@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2015, 2018 Willink Transformations and others.
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/legal/epl-v20.html
  * 
  * Contributors:
  *   E.D.Willink - Initial API and implementation
@@ -56,6 +56,25 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * @generated
  */
 public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
+	/**
+	 * The number of structural features of the '<em>Tmap In Pattern</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_IN_PATTERN_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 9;
+
+	/**
+	 * The number of operations of the '<em>Tmap In Pattern</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_IN_PATTERN_OPERATION_COUNT = ExecutionImpl.EXECUTION_OPERATION_COUNT + 0;
+
+
 	/**
 	 * The default value of the '{@link #getSuccess() <em>Success</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -195,7 +214,7 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 		Boolean oldSuccess = success;
 		success = newSuccess;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_IN_PATTERN__SUCCESS, oldSuccess, success));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldSuccess, success));
 	}
 
 	/**
@@ -206,11 +225,11 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 	@Override
 	public OclModel getT1atlModel() {
 		if (t1atlModel != null && t1atlModel.eIsProxy()) {
-			InternalEObject oldT1atlModel = (InternalEObject)t1atlModel;
+			InternalEObject oldT1atlModel = t1atlModel;
 			t1atlModel = (OclModel)eResolveProxy(oldT1atlModel);
 			if (t1atlModel != oldT1atlModel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T1ATL_MODEL, oldT1atlModel, t1atlModel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlModel, t1atlModel));
 			}
 		}
 		return t1atlModel;
@@ -235,7 +254,7 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 		OclModel oldT1atlModel = t1atlModel;
 		t1atlModel = newT1atlModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T1ATL_MODEL, oldT1atlModel, t1atlModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT1atlModel, t1atlModel));
 	}
 
 	/**
@@ -246,11 +265,11 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 	@Override
 	public InPattern getT1atlPattern() {
 		if (t1atlPattern != null && t1atlPattern.eIsProxy()) {
-			InternalEObject oldT1atlPattern = (InternalEObject)t1atlPattern;
+			InternalEObject oldT1atlPattern = t1atlPattern;
 			t1atlPattern = (InPattern)eResolveProxy(oldT1atlPattern);
 			if (t1atlPattern != oldT1atlPattern) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T1ATL_PATTERN, oldT1atlPattern, t1atlPattern));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlPattern, t1atlPattern));
 			}
 		}
 		return t1atlPattern;
@@ -275,7 +294,7 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 		InPattern oldT1atlPattern = t1atlPattern;
 		t1atlPattern = newT1atlPattern;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T1ATL_PATTERN, oldT1atlPattern, t1atlPattern));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlPattern, t1atlPattern));
 	}
 
 	/**
@@ -286,11 +305,11 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 	@Override
 	public MatchedRule getT1atlRule() {
 		if (t1atlRule != null && t1atlRule.eIsProxy()) {
-			InternalEObject oldT1atlRule = (InternalEObject)t1atlRule;
+			InternalEObject oldT1atlRule = t1atlRule;
 			t1atlRule = (MatchedRule)eResolveProxy(oldT1atlRule);
 			if (t1atlRule != oldT1atlRule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T1ATL_RULE, oldT1atlRule, t1atlRule));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlRule, t1atlRule));
 			}
 		}
 		return t1atlRule;
@@ -315,7 +334,7 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 		MatchedRule oldT1atlRule = t1atlRule;
 		t1atlRule = newT1atlRule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T1ATL_RULE, oldT1atlRule, t1atlRule));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlRule, t1atlRule));
 	}
 
 	/**
@@ -330,7 +349,7 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 			t2qvtrDomain = (RelationDomain)eResolveProxy(oldT2qvtrDomain);
 			if (t2qvtrDomain != oldT2qvtrDomain) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T2QVTR_DOMAIN, oldT2qvtrDomain, t2qvtrDomain));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2qvtrDomain, t2qvtrDomain));
 			}
 		}
 		return t2qvtrDomain;
@@ -355,7 +374,7 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 		RelationDomain oldT2qvtrDomain = t2qvtrDomain;
 		t2qvtrDomain = newT2qvtrDomain;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T2QVTR_DOMAIN, oldT2qvtrDomain, t2qvtrDomain));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT2qvtrDomain, t2qvtrDomain));
 	}
 
 	/**
@@ -370,7 +389,7 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 			t2qvtrRelation = (Relation)eResolveProxy(oldT2qvtrRelation);
 			if (t2qvtrRelation != oldT2qvtrRelation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T2QVTR_RELATION, oldT2qvtrRelation, t2qvtrRelation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2qvtrRelation, t2qvtrRelation));
 			}
 		}
 		return t2qvtrRelation;
@@ -395,7 +414,7 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 		Relation oldT2qvtrRelation = t2qvtrRelation;
 		t2qvtrRelation = newT2qvtrRelation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T2QVTR_RELATION, oldT2qvtrRelation, t2qvtrRelation));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2qvtrRelation, t2qvtrRelation));
 	}
 
 	/**
@@ -410,7 +429,7 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 			t2qvtrTypedModel = (TypedModel)eResolveProxy(oldT2qvtrTypedModel);
 			if (t2qvtrTypedModel != oldT2qvtrTypedModel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T2QVTR_TYPED_MODEL, oldT2qvtrTypedModel, t2qvtrTypedModel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT2qvtrTypedModel, t2qvtrTypedModel));
 			}
 		}
 		return t2qvtrTypedModel;
@@ -435,7 +454,7 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 		TypedModel oldT2qvtrTypedModel = t2qvtrTypedModel;
 		t2qvtrTypedModel = newT2qvtrTypedModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T2QVTR_TYPED_MODEL, oldT2qvtrTypedModel, t2qvtrTypedModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT2qvtrTypedModel, t2qvtrTypedModel));
 	}
 
 	/**
@@ -450,7 +469,7 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 			wmapMatchedRule = (TmapMatchedRule)eResolveProxy(oldWmapMatchedRule);
 			if (wmapMatchedRule != oldWmapMatchedRule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_IN_PATTERN__WMAP_MATCHED_RULE, oldWmapMatchedRule, wmapMatchedRule));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldWmapMatchedRule, wmapMatchedRule));
 			}
 		}
 		return wmapMatchedRule;
@@ -475,7 +494,7 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 		TmapMatchedRule oldWmapMatchedRule = wmapMatchedRule;
 		wmapMatchedRule = newWmapMatchedRule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_IN_PATTERN__WMAP_MATCHED_RULE, oldWmapMatchedRule, wmapMatchedRule));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldWmapMatchedRule, wmapMatchedRule));
 	}
 
 	/**
@@ -490,7 +509,7 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 			wmapOclMetamodel = (TmapOclMetamodel)eResolveProxy(oldWmapOclMetamodel);
 			if (wmapOclMetamodel != oldWmapOclMetamodel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_IN_PATTERN__WMAP_OCL_METAMODEL, oldWmapOclMetamodel, wmapOclMetamodel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldWmapOclMetamodel, wmapOclMetamodel));
 			}
 		}
 		return wmapOclMetamodel;
@@ -515,7 +534,7 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 		TmapOclMetamodel oldWmapOclMetamodel = wmapOclMetamodel;
 		wmapOclMetamodel = newWmapOclMetamodel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_IN_PATTERN__WMAP_OCL_METAMODEL, oldWmapOclMetamodel, wmapOclMetamodel));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldWmapOclMetamodel, wmapOclMetamodel));
 	}
 
 	/**
@@ -526,30 +545,30 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__SUCCESS:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				return getSuccess();
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T1ATL_MODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				if (resolve) return getT1atlModel();
 				return basicGetT1atlModel();
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T1ATL_PATTERN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				if (resolve) return getT1atlPattern();
 				return basicGetT1atlPattern();
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T1ATL_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				if (resolve) return getT1atlRule();
 				return basicGetT1atlRule();
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T2QVTR_DOMAIN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				if (resolve) return getT2qvtrDomain();
 				return basicGetT2qvtrDomain();
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T2QVTR_RELATION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				if (resolve) return getT2qvtrRelation();
 				return basicGetT2qvtrRelation();
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T2QVTR_TYPED_MODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				if (resolve) return getT2qvtrTypedModel();
 				return basicGetT2qvtrTypedModel();
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__WMAP_MATCHED_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				if (resolve) return getWmapMatchedRule();
 				return basicGetWmapMatchedRule();
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__WMAP_OCL_METAMODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				if (resolve) return getWmapOclMetamodel();
 				return basicGetWmapOclMetamodel();
 		}
@@ -564,31 +583,31 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__SUCCESS:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				setSuccess((Boolean)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T1ATL_MODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setT1atlModel((OclModel)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T1ATL_PATTERN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT1atlPattern((InPattern)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T1ATL_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT1atlRule((MatchedRule)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T2QVTR_DOMAIN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setT2qvtrDomain((RelationDomain)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T2QVTR_RELATION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				setT2qvtrRelation((Relation)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T2QVTR_TYPED_MODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				setT2qvtrTypedModel((TypedModel)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__WMAP_MATCHED_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				setWmapMatchedRule((TmapMatchedRule)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__WMAP_OCL_METAMODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				setWmapOclMetamodel((TmapOclMetamodel)newValue);
 				return;
 		}
@@ -603,31 +622,31 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__SUCCESS:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				setSuccess(SUCCESS_EDEFAULT);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T1ATL_MODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setT1atlModel((OclModel)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T1ATL_PATTERN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT1atlPattern((InPattern)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T1ATL_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT1atlRule((MatchedRule)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T2QVTR_DOMAIN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setT2qvtrDomain((RelationDomain)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T2QVTR_RELATION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				setT2qvtrRelation((Relation)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T2QVTR_TYPED_MODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				setT2qvtrTypedModel((TypedModel)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__WMAP_MATCHED_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				setWmapMatchedRule((TmapMatchedRule)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__WMAP_OCL_METAMODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				setWmapOclMetamodel((TmapOclMetamodel)null);
 				return;
 		}
@@ -642,23 +661,23 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__SUCCESS:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				return SUCCESS_EDEFAULT == null ? success != null : !SUCCESS_EDEFAULT.equals(success);
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T1ATL_MODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return t1atlModel != null;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T1ATL_PATTERN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				return t1atlPattern != null;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T1ATL_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				return t1atlRule != null;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T2QVTR_DOMAIN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				return t2qvtrDomain != null;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T2QVTR_RELATION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				return t2qvtrRelation != null;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__T2QVTR_TYPED_MODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				return t2qvtrTypedModel != null;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__WMAP_MATCHED_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				return wmapMatchedRule != null;
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN__WMAP_OCL_METAMODEL:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				return wmapOclMetamodel != null;
 		}
 		return super.eIsSet(featureID);
@@ -679,5 +698,6 @@ public class TmapInPatternImpl extends ExecutionImpl implements TmapInPattern {
 		result.append(')');
 		return result.toString();
 	}
+
 
 } //TmapInPatternImpl

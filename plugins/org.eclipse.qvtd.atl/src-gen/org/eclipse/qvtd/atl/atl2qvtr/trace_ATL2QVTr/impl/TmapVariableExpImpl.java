@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2015, 2018 Willink Transformations and others.
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/legal/epl-v20.html
  * 
  * Contributors:
  *   E.D.Willink - Initial API and implementation
@@ -27,6 +27,8 @@ import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.DmapVariableExp_referredVari
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.TmapVariableExp;
 import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage;
 
+import org.eclipse.qvtd.runtime.qvttrace.impl.DispatchImpl;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Tmap Variable Exp</b></em>'.
@@ -44,6 +46,25 @@ import org.eclipse.qvtd.atl.atl2qvtr.trace_ATL2QVTr.trace_ATL2QVTrPackage;
  * @generated
  */
 public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVariableExp {
+	/**
+	 * The number of structural features of the '<em>Tmap Variable Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_VARIABLE_EXP_FEATURE_COUNT = ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>Tmap Variable Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_VARIABLE_EXP_OPERATION_COUNT = ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_OPERATION_COUNT + 0;
+
+
 	/**
 	 * The default value of the '{@link #getT0varName() <em>T0var Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -110,7 +131,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	 */
 	@Override
 	public DmapOclExpression getDispatcher() {
-		if (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__DISPATCHER) return null;
+		if (eContainerFeatureID() != (ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0)) return null;
 		return (DmapOclExpression)eInternalContainer();
 	}
 
@@ -120,7 +141,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	 * @generated
 	 */
 	public NotificationChain basicSetDispatcher(DmapOclExpression newDispatcher, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newDispatcher, trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__DISPATCHER, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newDispatcher, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, msgs);
 		return msgs;
 	}
 
@@ -131,19 +152,19 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	 */
 	@Override
 	public void setDispatcher(DmapOclExpression newDispatcher) {
-		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__DISPATCHER && newDispatcher != null)) {
+		if (newDispatcher != eInternalContainer() || (eContainerFeatureID() != (ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0) && newDispatcher != null)) {
 			if (EcoreUtil.isAncestor(this, newDispatcher))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newDispatcher != null)
-				msgs = ((InternalEObject)newDispatcher).eInverseAdd(this, trace_ATL2QVTrPackage.DMAP_OCL_EXPRESSION__DOMAP_VARIABLE_EXP, DmapOclExpression.class, msgs);
+				msgs = ((InternalEObject)newDispatcher).eInverseAdd(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 11, DmapOclExpression.class, msgs);
 			msgs = basicSetDispatcher(newDispatcher, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__DISPATCHER, newDispatcher, newDispatcher));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0, newDispatcher, newDispatcher));
 	}
 
 	/**
@@ -166,7 +187,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 		String oldT0varName = t0varName;
 		t0varName = newT0varName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__T0VAR_NAME, oldT0varName, t0varName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1, oldT0varName, t0varName));
 	}
 
 	/**
@@ -177,11 +198,11 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	@Override
 	public VariableDeclaration getT1atlVariable() {
 		if (t1atlVariable != null && t1atlVariable.eIsProxy()) {
-			InternalEObject oldT1atlVariable = (InternalEObject)t1atlVariable;
+			InternalEObject oldT1atlVariable = t1atlVariable;
 			t1atlVariable = (VariableDeclaration)eResolveProxy(oldT1atlVariable);
 			if (t1atlVariable != oldT1atlVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__T1ATL_VARIABLE, oldT1atlVariable, t1atlVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2, oldT1atlVariable, t1atlVariable));
 			}
 		}
 		return t1atlVariable;
@@ -206,7 +227,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 		VariableDeclaration oldT1atlVariable = t1atlVariable;
 		t1atlVariable = newT1atlVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__T1ATL_VARIABLE, oldT1atlVariable, t1atlVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2, oldT1atlVariable, t1atlVariable));
 	}
 
 	/**
@@ -221,7 +242,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 			wmapVariableExp_referredVariable = (DmapVariableExp_referredVariable)eResolveProxy(oldWmapVariableExp_referredVariable);
 			if (wmapVariableExp_referredVariable != oldWmapVariableExp_referredVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__WMAP_VARIABLE_EXP_REFERRED_VARIABLE, oldWmapVariableExp_referredVariable, wmapVariableExp_referredVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3, oldWmapVariableExp_referredVariable, wmapVariableExp_referredVariable));
 			}
 		}
 		return wmapVariableExp_referredVariable;
@@ -246,7 +267,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 		DmapVariableExp_referredVariable oldWmapVariableExp_referredVariable = wmapVariableExp_referredVariable;
 		wmapVariableExp_referredVariable = newWmapVariableExp_referredVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__WMAP_VARIABLE_EXP_REFERRED_VARIABLE, oldWmapVariableExp_referredVariable, wmapVariableExp_referredVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3, oldWmapVariableExp_referredVariable, wmapVariableExp_referredVariable));
 	}
 
 	/**
@@ -257,7 +278,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__DISPATCHER:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetDispatcher((DmapOclExpression)otherEnd, msgs);
@@ -273,7 +294,7 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__DISPATCHER:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
 				return basicSetDispatcher(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -287,8 +308,8 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__DISPATCHER:
-				return eInternalContainer().eInverseRemove(this, trace_ATL2QVTrPackage.DMAP_OCL_EXPRESSION__DOMAP_VARIABLE_EXP, DmapOclExpression.class, msgs);
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
+				return eInternalContainer().eInverseRemove(this, DispatchImpl.DISPATCH_FEATURE_COUNT + 11, DmapOclExpression.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -301,14 +322,14 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__DISPATCHER:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
 				return getDispatcher();
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__T0VAR_NAME:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1:
 				return getT0varName();
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__T1ATL_VARIABLE:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2:
 				if (resolve) return getT1atlVariable();
 				return basicGetT1atlVariable();
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__WMAP_VARIABLE_EXP_REFERRED_VARIABLE:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3:
 				if (resolve) return getWmapVariableExp_referredVariable();
 				return basicGetWmapVariableExp_referredVariable();
 		}
@@ -323,16 +344,16 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__DISPATCHER:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
 				setDispatcher((DmapOclExpression)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__T0VAR_NAME:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1:
 				setT0varName((String)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__T1ATL_VARIABLE:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2:
 				setT1atlVariable((VariableDeclaration)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__WMAP_VARIABLE_EXP_REFERRED_VARIABLE:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3:
 				setWmapVariableExp_referredVariable((DmapVariableExp_referredVariable)newValue);
 				return;
 		}
@@ -347,16 +368,16 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__DISPATCHER:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
 				setDispatcher((DmapOclExpression)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__T0VAR_NAME:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1:
 				setT0varName(T0VAR_NAME_EDEFAULT);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__T1ATL_VARIABLE:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2:
 				setT1atlVariable((VariableDeclaration)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__WMAP_VARIABLE_EXP_REFERRED_VARIABLE:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3:
 				setWmapVariableExp_referredVariable((DmapVariableExp_referredVariable)null);
 				return;
 		}
@@ -371,13 +392,13 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__DISPATCHER:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 0:
 				return getDispatcher() != null;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__T0VAR_NAME:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 1:
 				return T0VAR_NAME_EDEFAULT == null ? t0varName != null : !T0VAR_NAME_EDEFAULT.equals(t0varName);
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__T1ATL_VARIABLE:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 2:
 				return t1atlVariable != null;
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP__WMAP_VARIABLE_EXP_REFERRED_VARIABLE:
+			case ImapOclExpressionImpl.IMAP_OCL_EXPRESSION_FEATURE_COUNT + 3:
 				return wmapVariableExp_referredVariable != null;
 		}
 		return super.eIsSet(featureID);
@@ -398,5 +419,6 @@ public class TmapVariableExpImpl extends ImapOclExpressionImpl implements TmapVa
 		result.append(')');
 		return result.toString();
 	}
+
 
 } //TmapVariableExpImpl

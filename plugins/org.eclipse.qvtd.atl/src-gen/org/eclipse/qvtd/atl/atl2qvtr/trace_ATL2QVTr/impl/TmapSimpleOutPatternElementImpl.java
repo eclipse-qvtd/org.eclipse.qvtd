@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2015, 2018 Willink Transformations and others.
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/legal/epl-v20.html
  * 
  * Contributors:
  *   E.D.Willink - Initial API and implementation
@@ -62,6 +62,25 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * @generated
  */
 public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements TmapSimpleOutPatternElement {
+	/**
+	 * The number of structural features of the '<em>Tmap Simple Out Pattern Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_SIMPLE_OUT_PATTERN_ELEMENT_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 13;
+
+	/**
+	 * The number of operations of the '<em>Tmap Simple Out Pattern Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TMAP_SIMPLE_OUT_PATTERN_ELEMENT_OPERATION_COUNT = ExecutionImpl.EXECUTION_OPERATION_COUNT + 0;
+
+
 	/**
 	 * The default value of the '{@link #getSuccess() <em>Success</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -251,7 +270,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 		Boolean oldSuccess = success;
 		success = newSuccess;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__SUCCESS, oldSuccess, success));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldSuccess, success));
 	}
 
 	/**
@@ -274,7 +293,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 		String oldT0elementName = t0elementName;
 		t0elementName = newT0elementName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T0ELEMENT_NAME, oldT0elementName, t0elementName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 1, oldT0elementName, t0elementName));
 	}
 
 	/**
@@ -285,11 +304,11 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 	@Override
 	public SimpleOutPatternElement getT1atlElement() {
 		if (t1atlElement != null && t1atlElement.eIsProxy()) {
-			InternalEObject oldT1atlElement = (InternalEObject)t1atlElement;
+			InternalEObject oldT1atlElement = t1atlElement;
 			t1atlElement = (SimpleOutPatternElement)eResolveProxy(oldT1atlElement);
 			if (t1atlElement != oldT1atlElement) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_ELEMENT, oldT1atlElement, t1atlElement));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlElement, t1atlElement));
 			}
 		}
 		return t1atlElement;
@@ -314,7 +333,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 		SimpleOutPatternElement oldT1atlElement = t1atlElement;
 		t1atlElement = newT1atlElement;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_ELEMENT, oldT1atlElement, t1atlElement));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 2, oldT1atlElement, t1atlElement));
 	}
 
 	/**
@@ -325,11 +344,11 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 	@Override
 	public OutPattern getT1atlPattern() {
 		if (t1atlPattern != null && t1atlPattern.eIsProxy()) {
-			InternalEObject oldT1atlPattern = (InternalEObject)t1atlPattern;
+			InternalEObject oldT1atlPattern = t1atlPattern;
 			t1atlPattern = (OutPattern)eResolveProxy(oldT1atlPattern);
 			if (t1atlPattern != oldT1atlPattern) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_PATTERN, oldT1atlPattern, t1atlPattern));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlPattern, t1atlPattern));
 			}
 		}
 		return t1atlPattern;
@@ -354,7 +373,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 		OutPattern oldT1atlPattern = t1atlPattern;
 		t1atlPattern = newT1atlPattern;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_PATTERN, oldT1atlPattern, t1atlPattern));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 3, oldT1atlPattern, t1atlPattern));
 	}
 
 	/**
@@ -365,11 +384,11 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 	@Override
 	public MatchedRule getT1atlRule() {
 		if (t1atlRule != null && t1atlRule.eIsProxy()) {
-			InternalEObject oldT1atlRule = (InternalEObject)t1atlRule;
+			InternalEObject oldT1atlRule = t1atlRule;
 			t1atlRule = (MatchedRule)eResolveProxy(oldT1atlRule);
 			if (t1atlRule != oldT1atlRule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_RULE, oldT1atlRule, t1atlRule));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT1atlRule, t1atlRule));
 			}
 		}
 		return t1atlRule;
@@ -394,7 +413,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 		MatchedRule oldT1atlRule = t1atlRule;
 		t1atlRule = newT1atlRule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_RULE, oldT1atlRule, t1atlRule));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 4, oldT1atlRule, t1atlRule));
 	}
 
 	/**
@@ -409,7 +428,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 			t2qvtrDomain = (RelationDomain)eResolveProxy(oldT2qvtrDomain);
 			if (t2qvtrDomain != oldT2qvtrDomain) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_DOMAIN, oldT2qvtrDomain, t2qvtrDomain));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2qvtrDomain, t2qvtrDomain));
 			}
 		}
 		return t2qvtrDomain;
@@ -434,7 +453,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 		RelationDomain oldT2qvtrDomain = t2qvtrDomain;
 		t2qvtrDomain = newT2qvtrDomain;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_DOMAIN, oldT2qvtrDomain, t2qvtrDomain));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 5, oldT2qvtrDomain, t2qvtrDomain));
 	}
 
 	/**
@@ -449,7 +468,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 			t2qvtrPattern = (DomainPattern)eResolveProxy(oldT2qvtrPattern);
 			if (t2qvtrPattern != oldT2qvtrPattern) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_PATTERN, oldT2qvtrPattern, t2qvtrPattern));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT2qvtrPattern, t2qvtrPattern));
 			}
 		}
 		return t2qvtrPattern;
@@ -474,7 +493,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 		DomainPattern oldT2qvtrPattern = t2qvtrPattern;
 		t2qvtrPattern = newT2qvtrPattern;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_PATTERN, oldT2qvtrPattern, t2qvtrPattern));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 6, oldT2qvtrPattern, t2qvtrPattern));
 	}
 
 	/**
@@ -489,7 +508,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 			t2qvtrRelation = (Relation)eResolveProxy(oldT2qvtrRelation);
 			if (t2qvtrRelation != oldT2qvtrRelation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_RELATION, oldT2qvtrRelation, t2qvtrRelation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT2qvtrRelation, t2qvtrRelation));
 			}
 		}
 		return t2qvtrRelation;
@@ -514,7 +533,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 		Relation oldT2qvtrRelation = t2qvtrRelation;
 		t2qvtrRelation = newT2qvtrRelation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_RELATION, oldT2qvtrRelation, t2qvtrRelation));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 7, oldT2qvtrRelation, t2qvtrRelation));
 	}
 
 	/**
@@ -529,7 +548,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 			t2qvtrTemplate = (ObjectTemplateExp)eResolveProxy(oldT2qvtrTemplate);
 			if (t2qvtrTemplate != oldT2qvtrTemplate) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_TEMPLATE, oldT2qvtrTemplate, t2qvtrTemplate));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldT2qvtrTemplate, t2qvtrTemplate));
 			}
 		}
 		return t2qvtrTemplate;
@@ -554,7 +573,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 		ObjectTemplateExp oldT2qvtrTemplate = t2qvtrTemplate;
 		t2qvtrTemplate = newT2qvtrTemplate;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_TEMPLATE, oldT2qvtrTemplate, t2qvtrTemplate));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 8, oldT2qvtrTemplate, t2qvtrTemplate));
 	}
 
 	/**
@@ -569,7 +588,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 			t2qvtrVariable = (TemplateVariable)eResolveProxy(oldT2qvtrVariable);
 			if (t2qvtrVariable != oldT2qvtrVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_VARIABLE, oldT2qvtrVariable, t2qvtrVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9, oldT2qvtrVariable, t2qvtrVariable));
 			}
 		}
 		return t2qvtrVariable;
@@ -594,7 +613,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 		TemplateVariable oldT2qvtrVariable = t2qvtrVariable;
 		t2qvtrVariable = newT2qvtrVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_VARIABLE, oldT2qvtrVariable, t2qvtrVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 9, oldT2qvtrVariable, t2qvtrVariable));
 	}
 
 	/**
@@ -609,7 +628,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 			wmapMatchedRule = (TmapMatchedRule)eResolveProxy(oldWmapMatchedRule);
 			if (wmapMatchedRule != oldWmapMatchedRule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_MATCHED_RULE, oldWmapMatchedRule, wmapMatchedRule));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10, oldWmapMatchedRule, wmapMatchedRule));
 			}
 		}
 		return wmapMatchedRule;
@@ -634,7 +653,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 		TmapMatchedRule oldWmapMatchedRule = wmapMatchedRule;
 		wmapMatchedRule = newWmapMatchedRule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_MATCHED_RULE, oldWmapMatchedRule, wmapMatchedRule));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 10, oldWmapMatchedRule, wmapMatchedRule));
 	}
 
 	/**
@@ -649,7 +668,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 			wmapOutPattern = (TmapOutPattern)eResolveProxy(oldWmapOutPattern);
 			if (wmapOutPattern != oldWmapOutPattern) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_OUT_PATTERN, oldWmapOutPattern, wmapOutPattern));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 11, oldWmapOutPattern, wmapOutPattern));
 			}
 		}
 		return wmapOutPattern;
@@ -674,7 +693,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 		TmapOutPattern oldWmapOutPattern = wmapOutPattern;
 		wmapOutPattern = newWmapOutPattern;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_OUT_PATTERN, oldWmapOutPattern, wmapOutPattern));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 11, oldWmapOutPattern, wmapOutPattern));
 	}
 
 	/**
@@ -689,7 +708,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 			wmapVariable = (TmapVariable)eResolveProxy(oldWmapVariable);
 			if (wmapVariable != oldWmapVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_VARIABLE, oldWmapVariable, wmapVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExecutionImpl.EXECUTION_FEATURE_COUNT + 12, oldWmapVariable, wmapVariable));
 			}
 		}
 		return wmapVariable;
@@ -714,7 +733,7 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 		TmapVariable oldWmapVariable = wmapVariable;
 		wmapVariable = newWmapVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_VARIABLE, oldWmapVariable, wmapVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 12, oldWmapVariable, wmapVariable));
 	}
 
 	/**
@@ -725,41 +744,41 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__SUCCESS:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				return getSuccess();
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T0ELEMENT_NAME:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return getT0elementName();
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_ELEMENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				if (resolve) return getT1atlElement();
 				return basicGetT1atlElement();
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_PATTERN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				if (resolve) return getT1atlPattern();
 				return basicGetT1atlPattern();
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				if (resolve) return getT1atlRule();
 				return basicGetT1atlRule();
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_DOMAIN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				if (resolve) return getT2qvtrDomain();
 				return basicGetT2qvtrDomain();
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_PATTERN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				if (resolve) return getT2qvtrPattern();
 				return basicGetT2qvtrPattern();
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_RELATION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				if (resolve) return getT2qvtrRelation();
 				return basicGetT2qvtrRelation();
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_TEMPLATE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				if (resolve) return getT2qvtrTemplate();
 				return basicGetT2qvtrTemplate();
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
 				if (resolve) return getT2qvtrVariable();
 				return basicGetT2qvtrVariable();
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_MATCHED_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 10:
 				if (resolve) return getWmapMatchedRule();
 				return basicGetWmapMatchedRule();
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_OUT_PATTERN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 11:
 				if (resolve) return getWmapOutPattern();
 				return basicGetWmapOutPattern();
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 12:
 				if (resolve) return getWmapVariable();
 				return basicGetWmapVariable();
 		}
@@ -774,43 +793,43 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__SUCCESS:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				setSuccess((Boolean)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T0ELEMENT_NAME:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setT0elementName((String)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_ELEMENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT1atlElement((SimpleOutPatternElement)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_PATTERN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT1atlPattern((OutPattern)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setT1atlRule((MatchedRule)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_DOMAIN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				setT2qvtrDomain((RelationDomain)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_PATTERN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				setT2qvtrPattern((DomainPattern)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_RELATION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				setT2qvtrRelation((Relation)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_TEMPLATE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				setT2qvtrTemplate((ObjectTemplateExp)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
 				setT2qvtrVariable((TemplateVariable)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_MATCHED_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 10:
 				setWmapMatchedRule((TmapMatchedRule)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_OUT_PATTERN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 11:
 				setWmapOutPattern((TmapOutPattern)newValue);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 12:
 				setWmapVariable((TmapVariable)newValue);
 				return;
 		}
@@ -825,43 +844,43 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__SUCCESS:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				setSuccess(SUCCESS_EDEFAULT);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T0ELEMENT_NAME:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				setT0elementName(T0ELEMENT_NAME_EDEFAULT);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_ELEMENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				setT1atlElement((SimpleOutPatternElement)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_PATTERN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				setT1atlPattern((OutPattern)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				setT1atlRule((MatchedRule)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_DOMAIN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				setT2qvtrDomain((RelationDomain)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_PATTERN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				setT2qvtrPattern((DomainPattern)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_RELATION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				setT2qvtrRelation((Relation)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_TEMPLATE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				setT2qvtrTemplate((ObjectTemplateExp)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
 				setT2qvtrVariable((TemplateVariable)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_MATCHED_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 10:
 				setWmapMatchedRule((TmapMatchedRule)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_OUT_PATTERN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 11:
 				setWmapOutPattern((TmapOutPattern)null);
 				return;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 12:
 				setWmapVariable((TmapVariable)null);
 				return;
 		}
@@ -876,31 +895,31 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__SUCCESS:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				return SUCCESS_EDEFAULT == null ? success != null : !SUCCESS_EDEFAULT.equals(success);
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T0ELEMENT_NAME:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 1:
 				return T0ELEMENT_NAME_EDEFAULT == null ? t0elementName != null : !T0ELEMENT_NAME_EDEFAULT.equals(t0elementName);
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_ELEMENT:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 2:
 				return t1atlElement != null;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_PATTERN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 3:
 				return t1atlPattern != null;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T1ATL_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 4:
 				return t1atlRule != null;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_DOMAIN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 5:
 				return t2qvtrDomain != null;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_PATTERN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 6:
 				return t2qvtrPattern != null;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_RELATION:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 7:
 				return t2qvtrRelation != null;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_TEMPLATE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 8:
 				return t2qvtrTemplate != null;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__T2QVTR_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 9:
 				return t2qvtrVariable != null;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_MATCHED_RULE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 10:
 				return wmapMatchedRule != null;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_OUT_PATTERN:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 11:
 				return wmapOutPattern != null;
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT__WMAP_VARIABLE:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 12:
 				return wmapVariable != null;
 		}
 		return super.eIsSet(featureID);
@@ -923,5 +942,6 @@ public class TmapSimpleOutPatternElementImpl extends ExecutionImpl implements Tm
 		result.append(')');
 		return result.toString();
 	}
+
 
 } //TmapSimpleOutPatternElementImpl

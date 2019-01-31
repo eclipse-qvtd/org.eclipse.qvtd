@@ -1,9 +1,9 @@
 /**
- * Copyright (c) 2015, 2018 Willink Transformations and others.
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/legal/epl-v20.html
  * 
  * Contributors:
  *   E.D.Willink - Initial API and implementation
@@ -35,6 +35,25 @@ import org.eclipse.qvtd.runtime.qvttrace.impl.ExecutionImpl;
  * @generated
  */
 public abstract class ImapOclExpressionImpl extends ExecutionImpl implements ImapOclExpression {
+	/**
+	 * The number of structural features of the '<em>Imap Ocl Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int IMAP_OCL_EXPRESSION_FEATURE_COUNT = ExecutionImpl.EXECUTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Imap Ocl Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int IMAP_OCL_EXPRESSION_OPERATION_COUNT = ExecutionImpl.EXECUTION_OPERATION_COUNT + 0;
+
+
 	/**
 	 * The default value of the '{@link #getSuccess() <em>Success</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -94,7 +113,7 @@ public abstract class ImapOclExpressionImpl extends ExecutionImpl implements Ima
 		Boolean oldSuccess = success;
 		success = newSuccess;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, trace_ATL2QVTrPackage.IMAP_OCL_EXPRESSION__SUCCESS, oldSuccess, success));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExecutionImpl.EXECUTION_FEATURE_COUNT + 0, oldSuccess, success));
 	}
 
 	/**
@@ -105,7 +124,7 @@ public abstract class ImapOclExpressionImpl extends ExecutionImpl implements Ima
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.IMAP_OCL_EXPRESSION__SUCCESS:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				return getSuccess();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -119,7 +138,7 @@ public abstract class ImapOclExpressionImpl extends ExecutionImpl implements Ima
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.IMAP_OCL_EXPRESSION__SUCCESS:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				setSuccess((Boolean)newValue);
 				return;
 		}
@@ -134,7 +153,7 @@ public abstract class ImapOclExpressionImpl extends ExecutionImpl implements Ima
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.IMAP_OCL_EXPRESSION__SUCCESS:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				setSuccess(SUCCESS_EDEFAULT);
 				return;
 		}
@@ -149,7 +168,7 @@ public abstract class ImapOclExpressionImpl extends ExecutionImpl implements Ima
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case trace_ATL2QVTrPackage.IMAP_OCL_EXPRESSION__SUCCESS:
+			case ExecutionImpl.EXECUTION_FEATURE_COUNT + 0:
 				return SUCCESS_EDEFAULT == null ? success != null : !SUCCESS_EDEFAULT.equals(success);
 		}
 		return super.eIsSet(featureID);
@@ -170,5 +189,6 @@ public abstract class ImapOclExpressionImpl extends ExecutionImpl implements Ima
 		result.append(')');
 		return result.toString();
 	}
+
 
 } //ImapOclExpressionImpl

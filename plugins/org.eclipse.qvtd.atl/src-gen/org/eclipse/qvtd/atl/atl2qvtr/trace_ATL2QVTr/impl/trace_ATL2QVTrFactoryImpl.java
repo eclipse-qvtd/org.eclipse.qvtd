@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015, 2018 Willink Transformations and others.
+ * Copyright (c) 2015, 2017 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -64,40 +64,40 @@ public class trace_ATL2QVTrFactoryImpl extends EFactoryImpl implements trace_ATL
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case trace_ATL2QVTrPackage.CMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER: return createCmapVariableExp_referredVariable_Helper();
-			case trace_ATL2QVTrPackage.CMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION: return createCmapVariableExp_referredVariable_VariableDeclaration();
-			case trace_ATL2QVTrPackage.DMAP_HELPER: return createDmapHelper();
-			case trace_ATL2QVTrPackage.DMAP_OCL_EXPRESSION: return createDmapOclExpression();
-			case trace_ATL2QVTrPackage.DMAP_VARIABLE_EXP_REFERRED_VARIABLE: return createDmapVariableExp_referredVariable();
-			case trace_ATL2QVTrPackage.TMAP_BINDING: return createTmapBinding();
-			case trace_ATL2QVTrPackage.TMAP_BOOLEAN_EXP: return createTmapBooleanExp();
-			case trace_ATL2QVTrPackage.TMAP_HELPER_ATTRIBUTE: return createTmapHelper_Attribute();
-			case trace_ATL2QVTrPackage.TMAP_HELPER_CONTEXT: return createTmapHelper_Context();
-			case trace_ATL2QVTrPackage.TMAP_HELPER_OPERATION: return createTmapHelper_Operation();
-			case trace_ATL2QVTrPackage.TMAP_IF_EXP: return createTmapIfExp();
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN: return createTmapInPattern();
-			case trace_ATL2QVTrPackage.TMAP_IN_PATTERN_FILTER: return createTmapInPattern_filter();
-			case trace_ATL2QVTrPackage.TMAP_INTEGER_EXP: return createTmapIntegerExp();
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE: return createTmapMatchedRule();
-			case trace_ATL2QVTrPackage.TMAP_MATCHED_RULE_SUPER: return createTmapMatchedRule_super();
-			case trace_ATL2QVTrPackage.TMAP_MODULE: return createTmapModule();
-			case trace_ATL2QVTrPackage.TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_HELPER: return createTmapNavigationOrAttributeCallExp_Helper();
-			case trace_ATL2QVTrPackage.TMAP_NAVIGATION_OR_ATTRIBUTE_CALL_EXP_PROPERTY: return createTmapNavigationOrAttributeCallExp_Property();
-			case trace_ATL2QVTrPackage.TMAP_OCL_METAMODEL: return createTmapOclMetamodel();
-			case trace_ATL2QVTrPackage.TMAP_OCL_MODEL_IN: return createTmapOclModel_IN();
-			case trace_ATL2QVTrPackage.TMAP_OCL_MODEL_OUT: return createTmapOclModel_OUT();
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_HELPER: return createTmapOperationCallExp_Helper();
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_OPERATION: return createTmapOperationCallExp_Operation();
-			case trace_ATL2QVTrPackage.TMAP_OPERATION_CALL_EXP_ARGUMENT: return createTmapOperationCallExp_argument();
-			case trace_ATL2QVTrPackage.TMAP_OPERATOR_CALL_EXP: return createTmapOperatorCallExp();
-			case trace_ATL2QVTrPackage.TMAP_OUT_PATTERN: return createTmapOutPattern();
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_IN_PATTERN_ELEMENT: return createTmapSimpleInPatternElement();
-			case trace_ATL2QVTrPackage.TMAP_SIMPLE_OUT_PATTERN_ELEMENT: return createTmapSimpleOutPatternElement();
-			case trace_ATL2QVTrPackage.TMAP_STRING_EXP: return createTmapStringExp();
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE: return createTmapVariable();
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP: return createTmapVariableExp();
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_HELPER: return createTmapVariableExp_referredVariable_Helper();
-			case trace_ATL2QVTrPackage.TMAP_VARIABLE_EXP_REFERRED_VARIABLE_VARIABLE_DECLARATION: return createTmapVariableExp_referredVariable_VariableDeclaration();
+			case 0: return createCmapVariableExp_referredVariable_Helper();
+			case 1: return createCmapVariableExp_referredVariable_VariableDeclaration();
+			case 2: return createDmapHelper();
+			case 3: return createDmapOclExpression();
+			case 4: return createDmapVariableExp_referredVariable();
+			case 8: return createTmapBinding();
+			case 9: return createTmapBooleanExp();
+			case 10: return createTmapHelper_Attribute();
+			case 11: return createTmapHelper_Context();
+			case 12: return createTmapHelper_Operation();
+			case 13: return createTmapIfExp();
+			case 14: return createTmapInPattern();
+			case 15: return createTmapInPattern_filter();
+			case 16: return createTmapIntegerExp();
+			case 17: return createTmapMatchedRule();
+			case 18: return createTmapMatchedRule_super();
+			case 19: return createTmapModule();
+			case 20: return createTmapNavigationOrAttributeCallExp_Helper();
+			case 21: return createTmapNavigationOrAttributeCallExp_Property();
+			case 22: return createTmapOclMetamodel();
+			case 23: return createTmapOclModel_IN();
+			case 24: return createTmapOclModel_OUT();
+			case 25: return createTmapOperationCallExp_Helper();
+			case 26: return createTmapOperationCallExp_Operation();
+			case 27: return createTmapOperationCallExp_argument();
+			case 28: return createTmapOperatorCallExp();
+			case 29: return createTmapOutPattern();
+			case 30: return createTmapSimpleInPatternElement();
+			case 31: return createTmapSimpleOutPatternElement();
+			case 32: return createTmapStringExp();
+			case 33: return createTmapVariable();
+			case 34: return createTmapVariableExp();
+			case 35: return createTmapVariableExp_referredVariable_Helper();
+			case 36: return createTmapVariableExp_referredVariable_VariableDeclaration();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
