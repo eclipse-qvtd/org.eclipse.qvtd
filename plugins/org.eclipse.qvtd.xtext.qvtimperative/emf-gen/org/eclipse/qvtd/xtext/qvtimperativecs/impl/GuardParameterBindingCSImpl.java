@@ -43,6 +43,15 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  */
 public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl implements GuardParameterBindingCS {
 	/**
+	 * The number of structural features of the '<em>Guard Parameter Binding CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GUARD_PARAMETER_BINDING_CS_FEATURE_COUNT = MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 3;
+
+	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -113,7 +122,7 @@ public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl i
 			value = (ConnectionVariable)eResolveProxy(oldValue);
 			if (value != oldValue) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS__VALUE, oldValue, value));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0, oldValue, value));
 			}
 		}
 		return value;
@@ -138,7 +147,7 @@ public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl i
 		ConnectionVariable oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0, oldValue, value));
 	}
 
 	/**
@@ -153,7 +162,7 @@ public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl i
 			referredVariable = (GuardParameter)eResolveProxy(oldReferredVariable);
 			if (referredVariable != oldReferredVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS__REFERRED_VARIABLE, oldReferredVariable, referredVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1, oldReferredVariable, referredVariable));
 			}
 		}
 		return referredVariable;
@@ -178,7 +187,7 @@ public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl i
 		GuardParameter oldReferredVariable = referredVariable;
 		referredVariable = newReferredVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS__REFERRED_VARIABLE, oldReferredVariable, referredVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1, oldReferredVariable, referredVariable));
 	}
 
 	/**
@@ -201,7 +210,7 @@ public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl i
 		boolean oldIsCheck = isCheck;
 		isCheck = newIsCheck;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS__IS_CHECK, oldIsCheck, isCheck));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2, oldIsCheck, isCheck));
 	}
 
 	/**
@@ -222,13 +231,13 @@ public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl i
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS__VALUE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
 				if (resolve) return getValue();
 				return basicGetValue();
-			case QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS__REFERRED_VARIABLE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
 				if (resolve) return getReferredVariable();
 				return basicGetReferredVariable();
-			case QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS__IS_CHECK:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2:
 				return isIsCheck();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -242,13 +251,13 @@ public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl i
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS__VALUE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
 				setValue((ConnectionVariable)newValue);
 				return;
-			case QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS__REFERRED_VARIABLE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
 				setReferredVariable((GuardParameter)newValue);
 				return;
-			case QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS__IS_CHECK:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2:
 				setIsCheck((Boolean)newValue);
 				return;
 		}
@@ -263,13 +272,13 @@ public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl i
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS__VALUE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
 				setValue((ConnectionVariable)null);
 				return;
-			case QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS__REFERRED_VARIABLE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
 				setReferredVariable((GuardParameter)null);
 				return;
-			case QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS__IS_CHECK:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2:
 				setIsCheck(IS_CHECK_EDEFAULT);
 				return;
 		}
@@ -284,11 +293,11 @@ public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl i
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS__VALUE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
 				return value != null;
-			case QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS__REFERRED_VARIABLE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
 				return referredVariable != null;
-			case QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS__IS_CHECK:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2:
 				return isCheck != IS_CHECK_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

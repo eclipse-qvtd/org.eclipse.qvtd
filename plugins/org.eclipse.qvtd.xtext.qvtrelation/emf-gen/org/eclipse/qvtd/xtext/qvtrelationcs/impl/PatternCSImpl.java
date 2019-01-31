@@ -41,6 +41,14 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  */
 public class PatternCSImpl extends ModelElementCSImpl implements PatternCS {
 	/**
+	 * The number of structural features of the '<em>Pattern CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PATTERN_CS_FEATURE_COUNT = ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
+	/**
 	 * The cached value of the '{@link #getOwnedPredicates() <em>Owned Predicates</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -76,7 +84,7 @@ public class PatternCSImpl extends ModelElementCSImpl implements PatternCS {
 	@Override
 	public EList<PredicateCS> getOwnedPredicates() {
 		if (ownedPredicates == null) {
-			ownedPredicates = new EObjectContainmentEList<PredicateCS>(PredicateCS.class, this, QVTrelationCSPackage.PATTERN_CS__OWNED_PREDICATES);
+			ownedPredicates = new EObjectContainmentEList<PredicateCS>(PredicateCS.class, this, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 		}
 		return ownedPredicates;
 	}
@@ -89,7 +97,7 @@ public class PatternCSImpl extends ModelElementCSImpl implements PatternCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PATTERN_CS__OWNED_PREDICATES:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedPredicates()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -103,7 +111,7 @@ public class PatternCSImpl extends ModelElementCSImpl implements PatternCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PATTERN_CS__OWNED_PREDICATES:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return getOwnedPredicates();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -118,7 +126,7 @@ public class PatternCSImpl extends ModelElementCSImpl implements PatternCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PATTERN_CS__OWNED_PREDICATES:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				getOwnedPredicates().clear();
 				getOwnedPredicates().addAll((Collection<? extends PredicateCS>)newValue);
 				return;
@@ -134,7 +142,7 @@ public class PatternCSImpl extends ModelElementCSImpl implements PatternCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PATTERN_CS__OWNED_PREDICATES:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				getOwnedPredicates().clear();
 				return;
 		}
@@ -149,7 +157,7 @@ public class PatternCSImpl extends ModelElementCSImpl implements PatternCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PATTERN_CS__OWNED_PREDICATES:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return ownedPredicates != null && !ownedPredicates.isEmpty();
 		}
 		return super.eIsSet(featureID);

@@ -66,20 +66,20 @@ public class QVTcoreCSFactoryImpl extends EFactoryImpl implements QVTcoreCSFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case QVTcoreCSPackage.BOTTOM_PATTERN_CS: return createBottomPatternCS();
-			case QVTcoreCSPackage.DIRECTION_CS: return createDirectionCS();
-			case QVTcoreCSPackage.DOMAIN_CS: return createDomainCS();
-			case QVTcoreCSPackage.ENFORCEMENT_OPERATION_CS: return createEnforcementOperationCS();
-			case QVTcoreCSPackage.GUARD_PATTERN_CS: return createGuardPatternCS();
-			case QVTcoreCSPackage.MAPPING_CS: return createMappingCS();
-			case QVTcoreCSPackage.PARAM_DECLARATION_CS: return createParamDeclarationCS();
-			case QVTcoreCSPackage.PREDICATE_CS: return createPredicateCS();
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS: return createPredicateOrAssignmentCS();
-			case QVTcoreCSPackage.QUERY_CS: return createQueryCS();
-			case QVTcoreCSPackage.REALIZED_VARIABLE_CS: return createRealizedVariableCS();
-			case QVTcoreCSPackage.TOP_LEVEL_CS: return createTopLevelCS();
-			case QVTcoreCSPackage.TRANSFORMATION_CS: return createTransformationCS();
-			case QVTcoreCSPackage.UNREALIZED_VARIABLE_CS: return createUnrealizedVariableCS();
+			case 1: return createBottomPatternCS();
+			case 2: return createDirectionCS();
+			case 3: return createDomainCS();
+			case 4: return createEnforcementOperationCS();
+			case 5: return createGuardPatternCS();
+			case 6: return createMappingCS();
+			case 7: return createParamDeclarationCS();
+			case 9: return createPredicateCS();
+			case 10: return createPredicateOrAssignmentCS();
+			case 11: return createQueryCS();
+			case 13: return createRealizedVariableCS();
+			case 14: return createTopLevelCS();
+			case 15: return createTransformationCS();
+			case 16: return createUnrealizedVariableCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

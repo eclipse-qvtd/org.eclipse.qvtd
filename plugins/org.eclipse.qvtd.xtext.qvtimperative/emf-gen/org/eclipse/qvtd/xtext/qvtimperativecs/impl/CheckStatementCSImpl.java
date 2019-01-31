@@ -49,6 +49,14 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  */
 public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatementCS {
 	/**
+	 * The number of structural features of the '<em>Check Statement CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int CHECK_STATEMENT_CS_FEATURE_COUNT = StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 2;
+	/**
 	 * The cached value of the '{@link #getObservedProperties() <em>Observed Properties</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -94,7 +102,7 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 	@Override
 	public EList<PathNameCS> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, QVTimperativeCSPackage.CHECK_STATEMENT_CS__OBSERVED_PROPERTIES);
+			observedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0);
 		}
 		return observedProperties;
 	}
@@ -118,7 +126,7 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 		ExpCS oldOwnedCondition = ownedCondition;
 		ownedCondition = newOwnedCondition;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.CHECK_STATEMENT_CS__OWNED_CONDITION, oldOwnedCondition, newOwnedCondition);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1, oldOwnedCondition, newOwnedCondition);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -134,14 +142,14 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 		if (newOwnedCondition != ownedCondition) {
 			NotificationChain msgs = null;
 			if (ownedCondition != null)
-				msgs = ((InternalEObject)ownedCondition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.CHECK_STATEMENT_CS__OWNED_CONDITION, null, msgs);
+				msgs = ((InternalEObject)ownedCondition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			if (newOwnedCondition != null)
-				msgs = ((InternalEObject)newOwnedCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.CHECK_STATEMENT_CS__OWNED_CONDITION, null, msgs);
+				msgs = ((InternalEObject)newOwnedCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetOwnedCondition(newOwnedCondition, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.CHECK_STATEMENT_CS__OWNED_CONDITION, newOwnedCondition, newOwnedCondition));
+			eNotify(new ENotificationImpl(this, Notification.SET, StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1, newOwnedCondition, newOwnedCondition));
 	}
 
 	/**
@@ -152,9 +160,9 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.CHECK_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getObservedProperties()).basicRemove(otherEnd, msgs);
-			case QVTimperativeCSPackage.CHECK_STATEMENT_CS__OWNED_CONDITION:
+			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1:
 				return basicSetOwnedCondition(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -168,9 +176,9 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.CHECK_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
 				return getObservedProperties();
-			case QVTimperativeCSPackage.CHECK_STATEMENT_CS__OWNED_CONDITION:
+			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1:
 				return getOwnedCondition();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -185,11 +193,11 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.CHECK_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends PathNameCS>)newValue);
 				return;
-			case QVTimperativeCSPackage.CHECK_STATEMENT_CS__OWNED_CONDITION:
+			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedCondition((ExpCS)newValue);
 				return;
 		}
@@ -204,10 +212,10 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.CHECK_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				return;
-			case QVTimperativeCSPackage.CHECK_STATEMENT_CS__OWNED_CONDITION:
+			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedCondition((ExpCS)null);
 				return;
 		}
@@ -222,9 +230,9 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.CHECK_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
 				return observedProperties != null && !observedProperties.isEmpty();
-			case QVTimperativeCSPackage.CHECK_STATEMENT_CS__OWNED_CONDITION:
+			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1:
 				return ownedCondition != null;
 		}
 		return super.eIsSet(featureID);
@@ -239,7 +247,7 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatementCS.class) {
 			switch (derivedFeatureID) {
-				case QVTimperativeCSPackage.CHECK_STATEMENT_CS__OBSERVED_PROPERTIES: return QVTimperativeCSPackage.OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES;
+				case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0: return StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -255,7 +263,7 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatementCS.class) {
 			switch (baseFeatureID) {
-				case QVTimperativeCSPackage.OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES: return QVTimperativeCSPackage.CHECK_STATEMENT_CS__OBSERVED_PROPERTIES;
+				case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0: return StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}

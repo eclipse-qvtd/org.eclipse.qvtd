@@ -34,6 +34,15 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  */
 public class PrimitiveTypeDomainPatternCSImpl extends TemplateVariableCSImpl implements PrimitiveTypeDomainPatternCS {
 	/**
+	 * The number of structural features of the '<em>Primitive Type Domain Pattern CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PRIMITIVE_TYPE_DOMAIN_PATTERN_CS_FEATURE_COUNT = TemplateVariableCSImpl.TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

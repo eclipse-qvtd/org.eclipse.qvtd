@@ -40,6 +40,14 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  */
 public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	/**
+	 * The number of structural features of the '<em>Model Decl CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MODEL_DECL_CS_FEATURE_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	/**
 	 * The cached value of the '{@link #getMetamodelIds() <em>Metamodel Ids</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -84,7 +92,7 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	@Override
 	public EList<Namespace> getMetamodelIds() {
 		if (metamodelIds == null) {
-			metamodelIds = new EObjectResolvingEList<Namespace>(Namespace.class, this, QVTrelationCSPackage.MODEL_DECL_CS__METAMODEL_IDS);
+			metamodelIds = new EObjectResolvingEList<Namespace>(Namespace.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0);
 		}
 		return metamodelIds;
 	}
@@ -97,7 +105,7 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	@Override
 	public EList<TypedModel> getDependsOn() {
 		if (dependsOn == null) {
-			dependsOn = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, QVTrelationCSPackage.MODEL_DECL_CS__DEPENDS_ON);
+			dependsOn = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1);
 		}
 		return dependsOn;
 	}
@@ -110,9 +118,9 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.MODEL_DECL_CS__METAMODEL_IDS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return getMetamodelIds();
-			case QVTrelationCSPackage.MODEL_DECL_CS__DEPENDS_ON:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return getDependsOn();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -127,11 +135,11 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.MODEL_DECL_CS__METAMODEL_IDS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				getMetamodelIds().clear();
 				getMetamodelIds().addAll((Collection<? extends Namespace>)newValue);
 				return;
-			case QVTrelationCSPackage.MODEL_DECL_CS__DEPENDS_ON:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				getDependsOn().clear();
 				getDependsOn().addAll((Collection<? extends TypedModel>)newValue);
 				return;
@@ -147,10 +155,10 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.MODEL_DECL_CS__METAMODEL_IDS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				getMetamodelIds().clear();
 				return;
-			case QVTrelationCSPackage.MODEL_DECL_CS__DEPENDS_ON:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				getDependsOn().clear();
 				return;
 		}
@@ -165,9 +173,9 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.MODEL_DECL_CS__METAMODEL_IDS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return metamodelIds != null && !metamodelIds.isEmpty();
-			case QVTrelationCSPackage.MODEL_DECL_CS__DEPENDS_ON:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return dependsOn != null && !dependsOn.isEmpty();
 		}
 		return super.eIsSet(featureID);

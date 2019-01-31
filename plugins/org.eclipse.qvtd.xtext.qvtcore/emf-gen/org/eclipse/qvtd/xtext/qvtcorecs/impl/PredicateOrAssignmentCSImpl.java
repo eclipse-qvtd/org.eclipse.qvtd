@@ -53,6 +53,15 @@ import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;
  */
 public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateOrAssignmentCS {
 	/**
+	 * The number of structural features of the '<em>Predicate Or Assignment CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PREDICATE_OR_ASSIGNMENT_CS_FEATURE_COUNT = ExpCSImpl.EXP_CS_FEATURE_COUNT + 4;
+
+	/**
 	 * The default value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -151,7 +160,7 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 		boolean oldIsDefault = isDefault;
 		isDefault = newIsDefault;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT, oldIsDefault, isDefault));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExpCSImpl.EXP_CS_FEATURE_COUNT + 0, oldIsDefault, isDefault));
 	}
 
 	/**
@@ -174,7 +183,7 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 		boolean oldIsPartial = isPartial;
 		isPartial = newIsPartial;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_PARTIAL, oldIsPartial, isPartial));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExpCSImpl.EXP_CS_FEATURE_COUNT + 1, oldIsPartial, isPartial));
 	}
 
 	/**
@@ -196,7 +205,7 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 		ExpCS oldOwnedTarget = ownedTarget;
 		ownedTarget = newOwnedTarget;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET, oldOwnedTarget, newOwnedTarget);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpCSImpl.EXP_CS_FEATURE_COUNT + 2, oldOwnedTarget, newOwnedTarget);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -212,14 +221,14 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 		if (newOwnedTarget != ownedTarget) {
 			NotificationChain msgs = null;
 			if (ownedTarget != null)
-				msgs = ((InternalEObject)ownedTarget).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET, null, msgs);
+				msgs = ((InternalEObject)ownedTarget).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ExpCSImpl.EXP_CS_FEATURE_COUNT + 2), null, msgs);
 			if (newOwnedTarget != null)
-				msgs = ((InternalEObject)newOwnedTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET, null, msgs);
+				msgs = ((InternalEObject)newOwnedTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ExpCSImpl.EXP_CS_FEATURE_COUNT + 2), null, msgs);
 			msgs = basicSetOwnedTarget(newOwnedTarget, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET, newOwnedTarget, newOwnedTarget));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExpCSImpl.EXP_CS_FEATURE_COUNT + 2, newOwnedTarget, newOwnedTarget));
 	}
 
 	/**
@@ -241,7 +250,7 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 		ExpCS oldOwnedInitExpression = ownedInitExpression;
 		ownedInitExpression = newOwnedInitExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION, oldOwnedInitExpression, newOwnedInitExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpCSImpl.EXP_CS_FEATURE_COUNT + 3, oldOwnedInitExpression, newOwnedInitExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -257,14 +266,14 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 		if (newOwnedInitExpression != ownedInitExpression) {
 			NotificationChain msgs = null;
 			if (ownedInitExpression != null)
-				msgs = ((InternalEObject)ownedInitExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)ownedInitExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ExpCSImpl.EXP_CS_FEATURE_COUNT + 3), null, msgs);
 			if (newOwnedInitExpression != null)
-				msgs = ((InternalEObject)newOwnedInitExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newOwnedInitExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ExpCSImpl.EXP_CS_FEATURE_COUNT + 3), null, msgs);
 			msgs = basicSetOwnedInitExpression(newOwnedInitExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION, newOwnedInitExpression, newOwnedInitExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExpCSImpl.EXP_CS_FEATURE_COUNT + 3, newOwnedInitExpression, newOwnedInitExpression));
 	}
 
 	/**
@@ -285,9 +294,9 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 2:
 				return basicSetOwnedTarget(null, msgs);
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				return basicSetOwnedInitExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -301,13 +310,13 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 0:
 				return isIsDefault();
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_PARTIAL:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 1:
 				return isIsPartial();
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 2:
 				return getOwnedTarget();
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				return getOwnedInitExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -321,16 +330,16 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 0:
 				setIsDefault((Boolean)newValue);
 				return;
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_PARTIAL:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 1:
 				setIsPartial((Boolean)newValue);
 				return;
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 2:
 				setOwnedTarget((ExpCS)newValue);
 				return;
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				setOwnedInitExpression((ExpCS)newValue);
 				return;
 		}
@@ -345,16 +354,16 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 0:
 				setIsDefault(IS_DEFAULT_EDEFAULT);
 				return;
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_PARTIAL:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 1:
 				setIsPartial(IS_PARTIAL_EDEFAULT);
 				return;
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 2:
 				setOwnedTarget((ExpCS)null);
 				return;
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				setOwnedInitExpression((ExpCS)null);
 				return;
 		}
@@ -369,13 +378,13 @@ public class PredicateOrAssignmentCSImpl extends ExpCSImpl implements PredicateO
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 0:
 				return isDefault != IS_DEFAULT_EDEFAULT;
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__IS_PARTIAL:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 1:
 				return isPartial != IS_PARTIAL_EDEFAULT;
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 2:
 				return ownedTarget != null;
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				return ownedInitExpression != null;
 		}
 		return super.eIsSet(featureID);

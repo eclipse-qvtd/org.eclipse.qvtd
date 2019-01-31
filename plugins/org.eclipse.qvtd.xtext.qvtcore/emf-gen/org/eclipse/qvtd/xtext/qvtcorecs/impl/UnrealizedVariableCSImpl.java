@@ -48,6 +48,14 @@ import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;
  */
 public class UnrealizedVariableCSImpl extends RealizeableVariableCSImpl implements UnrealizedVariableCS {
 	/**
+	 * The number of structural features of the '<em>Unrealized Variable CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int UNREALIZED_VARIABLE_CS_FEATURE_COUNT = RealizeableVariableCSImpl.REALIZEABLE_VARIABLE_CS_FEATURE_COUNT + 1;
+	/**
 	 * The cached value of the '{@link #getOwnedInitExpression() <em>Owned Init Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -95,7 +103,7 @@ public class UnrealizedVariableCSImpl extends RealizeableVariableCSImpl implemen
 		ExpCS oldOwnedInitExpression = ownedInitExpression;
 		ownedInitExpression = newOwnedInitExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION, oldOwnedInitExpression, newOwnedInitExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RealizeableVariableCSImpl.REALIZEABLE_VARIABLE_CS_FEATURE_COUNT + 0, oldOwnedInitExpression, newOwnedInitExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -111,14 +119,14 @@ public class UnrealizedVariableCSImpl extends RealizeableVariableCSImpl implemen
 		if (newOwnedInitExpression != ownedInitExpression) {
 			NotificationChain msgs = null;
 			if (ownedInitExpression != null)
-				msgs = ((InternalEObject)ownedInitExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSPackage.UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)ownedInitExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (RealizeableVariableCSImpl.REALIZEABLE_VARIABLE_CS_FEATURE_COUNT + 0), null, msgs);
 			if (newOwnedInitExpression != null)
-				msgs = ((InternalEObject)newOwnedInitExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSPackage.UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newOwnedInitExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (RealizeableVariableCSImpl.REALIZEABLE_VARIABLE_CS_FEATURE_COUNT + 0), null, msgs);
 			msgs = basicSetOwnedInitExpression(newOwnedInitExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION, newOwnedInitExpression, newOwnedInitExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, RealizeableVariableCSImpl.REALIZEABLE_VARIABLE_CS_FEATURE_COUNT + 0, newOwnedInitExpression, newOwnedInitExpression));
 	}
 
 	/**
@@ -129,7 +137,7 @@ public class UnrealizedVariableCSImpl extends RealizeableVariableCSImpl implemen
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcoreCSPackage.UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION:
+			case RealizeableVariableCSImpl.REALIZEABLE_VARIABLE_CS_FEATURE_COUNT + 0:
 				return basicSetOwnedInitExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -143,7 +151,7 @@ public class UnrealizedVariableCSImpl extends RealizeableVariableCSImpl implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcoreCSPackage.UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION:
+			case RealizeableVariableCSImpl.REALIZEABLE_VARIABLE_CS_FEATURE_COUNT + 0:
 				return getOwnedInitExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -157,7 +165,7 @@ public class UnrealizedVariableCSImpl extends RealizeableVariableCSImpl implemen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcoreCSPackage.UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION:
+			case RealizeableVariableCSImpl.REALIZEABLE_VARIABLE_CS_FEATURE_COUNT + 0:
 				setOwnedInitExpression((ExpCS)newValue);
 				return;
 		}
@@ -172,7 +180,7 @@ public class UnrealizedVariableCSImpl extends RealizeableVariableCSImpl implemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION:
+			case RealizeableVariableCSImpl.REALIZEABLE_VARIABLE_CS_FEATURE_COUNT + 0:
 				setOwnedInitExpression((ExpCS)null);
 				return;
 		}
@@ -187,7 +195,7 @@ public class UnrealizedVariableCSImpl extends RealizeableVariableCSImpl implemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION:
+			case RealizeableVariableCSImpl.REALIZEABLE_VARIABLE_CS_FEATURE_COUNT + 0:
 				return ownedInitExpression != null;
 		}
 		return super.eIsSet(featureID);

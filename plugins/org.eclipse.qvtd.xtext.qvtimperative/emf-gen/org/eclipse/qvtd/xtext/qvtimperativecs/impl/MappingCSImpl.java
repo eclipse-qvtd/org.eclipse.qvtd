@@ -50,6 +50,14 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  */
 public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	/**
+	 * The number of structural features of the '<em>Mapping CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_CS_FEATURE_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6;
+	/**
 	 * The default value of the '{@link #isIsStrict() <em>Is Strict</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -169,7 +177,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 		boolean oldIsStrict = isStrict;
 		isStrict = newIsStrict;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__IS_STRICT, oldIsStrict, isStrict));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0, oldIsStrict, isStrict));
 	}
 
 	/**
@@ -191,7 +199,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 		PathNameCS oldOwnedInPathName = ownedInPathName;
 		ownedInPathName = newOwnedInPathName;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME, oldOwnedInPathName, newOwnedInPathName);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1, oldOwnedInPathName, newOwnedInPathName);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -207,14 +215,14 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 		if (newOwnedInPathName != ownedInPathName) {
 			NotificationChain msgs = null;
 			if (ownedInPathName != null)
-				msgs = ((InternalEObject)ownedInPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME, null, msgs);
+				msgs = ((InternalEObject)ownedInPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			if (newOwnedInPathName != null)
-				msgs = ((InternalEObject)newOwnedInPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME, null, msgs);
+				msgs = ((InternalEObject)newOwnedInPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetOwnedInPathName(newOwnedInPathName, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME, newOwnedInPathName, newOwnedInPathName));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1, newOwnedInPathName, newOwnedInPathName));
 	}
 
 	/**
@@ -225,7 +233,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public EList<MappingParameterCS> getOwnedParameters() {
 		if (ownedParameters == null) {
-			ownedParameters = new EObjectContainmentEList<MappingParameterCS>(MappingParameterCS.class, this, QVTimperativeCSPackage.MAPPING_CS__OWNED_PARAMETERS);
+			ownedParameters = new EObjectContainmentEList<MappingParameterCS>(MappingParameterCS.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2);
 		}
 		return ownedParameters;
 	}
@@ -238,7 +246,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public EList<StatementCS> getOwnedStatements() {
 		if (ownedStatements == null) {
-			ownedStatements = new EObjectContainmentEList<StatementCS>(StatementCS.class, this, QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS);
+			ownedStatements = new EObjectContainmentEList<StatementCS>(StatementCS.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3);
 		}
 		return ownedStatements;
 	}
@@ -263,7 +271,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 		Integer oldFirstPass = firstPass;
 		firstPass = newFirstPass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__FIRST_PASS, oldFirstPass, firstPass));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4, oldFirstPass, firstPass));
 	}
 
 	/**
@@ -286,7 +294,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 		Integer oldLastPass = lastPass;
 		lastPass = newLastPass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__LAST_PASS, oldLastPass, lastPass));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5, oldLastPass, lastPass));
 	}
 
 	/**
@@ -307,11 +315,11 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return basicSetOwnedInPathName(null, msgs);
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_PARAMETERS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getOwnedParameters()).basicRemove(otherEnd, msgs);
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return ((InternalEList<?>)getOwnedStatements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -325,17 +333,17 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CS__IS_STRICT:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return isIsStrict();
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return getOwnedInPathName();
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_PARAMETERS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return getOwnedParameters();
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return getOwnedStatements();
-			case QVTimperativeCSPackage.MAPPING_CS__FIRST_PASS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
 				return getFirstPass();
-			case QVTimperativeCSPackage.MAPPING_CS__LAST_PASS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5:
 				return getLastPass();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -350,24 +358,24 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CS__IS_STRICT:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				setIsStrict((Boolean)newValue);
 				return;
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedInPathName((PathNameCS)newValue);
 				return;
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_PARAMETERS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				getOwnedParameters().clear();
 				getOwnedParameters().addAll((Collection<? extends MappingParameterCS>)newValue);
 				return;
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
 				getOwnedStatements().clear();
 				getOwnedStatements().addAll((Collection<? extends StatementCS>)newValue);
 				return;
-			case QVTimperativeCSPackage.MAPPING_CS__FIRST_PASS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
 				setFirstPass((Integer)newValue);
 				return;
-			case QVTimperativeCSPackage.MAPPING_CS__LAST_PASS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5:
 				setLastPass((Integer)newValue);
 				return;
 		}
@@ -382,22 +390,22 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CS__IS_STRICT:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				setIsStrict(IS_STRICT_EDEFAULT);
 				return;
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedInPathName((PathNameCS)null);
 				return;
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_PARAMETERS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				getOwnedParameters().clear();
 				return;
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
 				getOwnedStatements().clear();
 				return;
-			case QVTimperativeCSPackage.MAPPING_CS__FIRST_PASS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
 				setFirstPass(FIRST_PASS_EDEFAULT);
 				return;
-			case QVTimperativeCSPackage.MAPPING_CS__LAST_PASS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5:
 				setLastPass(LAST_PASS_EDEFAULT);
 				return;
 		}
@@ -412,17 +420,17 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CS__IS_STRICT:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return isStrict != IS_STRICT_EDEFAULT;
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return ownedInPathName != null;
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_PARAMETERS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return ownedParameters != null && !ownedParameters.isEmpty();
-			case QVTimperativeCSPackage.MAPPING_CS__OWNED_STATEMENTS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return ownedStatements != null && !ownedStatements.isEmpty();
-			case QVTimperativeCSPackage.MAPPING_CS__FIRST_PASS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
 				return FIRST_PASS_EDEFAULT == null ? firstPass != null : !FIRST_PASS_EDEFAULT.equals(firstPass);
-			case QVTimperativeCSPackage.MAPPING_CS__LAST_PASS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5:
 				return LAST_PASS_EDEFAULT == null ? lastPass != null : !LAST_PASS_EDEFAULT.equals(lastPass);
 		}
 		return super.eIsSet(featureID);

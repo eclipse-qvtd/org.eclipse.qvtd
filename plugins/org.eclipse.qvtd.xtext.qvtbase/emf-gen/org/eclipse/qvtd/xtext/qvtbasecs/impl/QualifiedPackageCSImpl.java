@@ -47,6 +47,14 @@ import org.eclipse.qvtd.xtext.qvtbasecs.util.QVTbaseCSVisitor;
 public class QualifiedPackageCSImpl extends PackageCSImpl implements QualifiedPackageCS
 {
 	/**
+	 * The number of structural features of the '<em>Qualified Package CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int QUALIFIED_PACKAGE_CS_FEATURE_COUNT = PackageCSImpl.PACKAGE_CS_FEATURE_COUNT + 1;
+	/**
 	 * The cached value of the '{@link #getOwnedPathName() <em>Owned Path Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -99,7 +107,7 @@ public class QualifiedPackageCSImpl extends PackageCSImpl implements QualifiedPa
 		ownedPathName = newOwnedPathName;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTbaseCSPackage.QUALIFIED_PACKAGE_CS__OWNED_PATH_NAME, oldOwnedPathName, newOwnedPathName);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, PackageCSImpl.PACKAGE_CS_FEATURE_COUNT + 0, oldOwnedPathName, newOwnedPathName);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -117,14 +125,14 @@ public class QualifiedPackageCSImpl extends PackageCSImpl implements QualifiedPa
 		{
 			NotificationChain msgs = null;
 			if (ownedPathName != null)
-				msgs = ((InternalEObject)ownedPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTbaseCSPackage.QUALIFIED_PACKAGE_CS__OWNED_PATH_NAME, null, msgs);
+				msgs = ((InternalEObject)ownedPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (PackageCSImpl.PACKAGE_CS_FEATURE_COUNT + 0), null, msgs);
 			if (newOwnedPathName != null)
-				msgs = ((InternalEObject)newOwnedPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTbaseCSPackage.QUALIFIED_PACKAGE_CS__OWNED_PATH_NAME, null, msgs);
+				msgs = ((InternalEObject)newOwnedPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (PackageCSImpl.PACKAGE_CS_FEATURE_COUNT + 0), null, msgs);
 			msgs = basicSetOwnedPathName(newOwnedPathName, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTbaseCSPackage.QUALIFIED_PACKAGE_CS__OWNED_PATH_NAME, newOwnedPathName, newOwnedPathName));
+			eNotify(new ENotificationImpl(this, Notification.SET, PackageCSImpl.PACKAGE_CS_FEATURE_COUNT + 0, newOwnedPathName, newOwnedPathName));
 	}
 
 	/**
@@ -137,7 +145,7 @@ public class QualifiedPackageCSImpl extends PackageCSImpl implements QualifiedPa
 	{
 		switch (featureID)
 		{
-			case QVTbaseCSPackage.QUALIFIED_PACKAGE_CS__OWNED_PATH_NAME:
+			case PackageCSImpl.PACKAGE_CS_FEATURE_COUNT + 0:
 				return basicSetOwnedPathName(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -153,7 +161,7 @@ public class QualifiedPackageCSImpl extends PackageCSImpl implements QualifiedPa
 	{
 		switch (featureID)
 		{
-			case QVTbaseCSPackage.QUALIFIED_PACKAGE_CS__OWNED_PATH_NAME:
+			case PackageCSImpl.PACKAGE_CS_FEATURE_COUNT + 0:
 				return getOwnedPathName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -169,7 +177,7 @@ public class QualifiedPackageCSImpl extends PackageCSImpl implements QualifiedPa
 	{
 		switch (featureID)
 		{
-			case QVTbaseCSPackage.QUALIFIED_PACKAGE_CS__OWNED_PATH_NAME:
+			case PackageCSImpl.PACKAGE_CS_FEATURE_COUNT + 0:
 				setOwnedPathName((PathNameCS)newValue);
 				return;
 		}
@@ -186,7 +194,7 @@ public class QualifiedPackageCSImpl extends PackageCSImpl implements QualifiedPa
 	{
 		switch (featureID)
 		{
-			case QVTbaseCSPackage.QUALIFIED_PACKAGE_CS__OWNED_PATH_NAME:
+			case PackageCSImpl.PACKAGE_CS_FEATURE_COUNT + 0:
 				setOwnedPathName((PathNameCS)null);
 				return;
 		}
@@ -203,7 +211,7 @@ public class QualifiedPackageCSImpl extends PackageCSImpl implements QualifiedPa
 	{
 		switch (featureID)
 		{
-			case QVTbaseCSPackage.QUALIFIED_PACKAGE_CS__OWNED_PATH_NAME:
+			case PackageCSImpl.PACKAGE_CS_FEATURE_COUNT + 0:
 				return ownedPathName != null;
 		}
 		return super.eIsSet(featureID);

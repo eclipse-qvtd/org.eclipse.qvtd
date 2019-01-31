@@ -87,7 +87,7 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case QVTcoreCSPackage.AREA_CS: {
+			case 0: {
 				AreaCS areaCS = (AreaCS)theEObject;
 				T result = caseAreaCS(areaCS);
 				if (result == null) result = caseNamedElementCS(areaCS);
@@ -97,7 +97,7 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcoreCSPackage.BOTTOM_PATTERN_CS: {
+			case 1: {
 				BottomPatternCS bottomPatternCS = (BottomPatternCS)theEObject;
 				T result = caseBottomPatternCS(bottomPatternCS);
 				if (result == null) result = casePatternCS(bottomPatternCS);
@@ -107,7 +107,7 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcoreCSPackage.DIRECTION_CS: {
+			case 2: {
 				DirectionCS directionCS = (DirectionCS)theEObject;
 				T result = caseDirectionCS(directionCS);
 				if (result == null) result = caseNamedElementCS(directionCS);
@@ -117,7 +117,7 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcoreCSPackage.DOMAIN_CS: {
+			case 3: {
 				DomainCS domainCS = (DomainCS)theEObject;
 				T result = caseDomainCS(domainCS);
 				if (result == null) result = caseAreaCS(domainCS);
@@ -128,7 +128,7 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcoreCSPackage.ENFORCEMENT_OPERATION_CS: {
+			case 4: {
 				EnforcementOperationCS enforcementOperationCS = (EnforcementOperationCS)theEObject;
 				T result = caseEnforcementOperationCS(enforcementOperationCS);
 				if (result == null) result = caseModelElementCS(enforcementOperationCS);
@@ -137,7 +137,7 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcoreCSPackage.GUARD_PATTERN_CS: {
+			case 5: {
 				GuardPatternCS guardPatternCS = (GuardPatternCS)theEObject;
 				T result = caseGuardPatternCS(guardPatternCS);
 				if (result == null) result = casePatternCS(guardPatternCS);
@@ -147,7 +147,7 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcoreCSPackage.MAPPING_CS: {
+			case 6: {
 				MappingCS mappingCS = (MappingCS)theEObject;
 				T result = caseMappingCS(mappingCS);
 				if (result == null) result = caseNamedElementCS(mappingCS);
@@ -157,7 +157,7 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcoreCSPackage.PARAM_DECLARATION_CS: {
+			case 7: {
 				ParamDeclarationCS paramDeclarationCS = (ParamDeclarationCS)theEObject;
 				T result = caseParamDeclarationCS(paramDeclarationCS);
 				if (result == null) result = caseTypedElementCS(paramDeclarationCS);
@@ -168,7 +168,7 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcoreCSPackage.PATTERN_CS: {
+			case 8: {
 				PatternCS patternCS = (PatternCS)theEObject;
 				T result = casePatternCS(patternCS);
 				if (result == null) result = caseModelElementCS(patternCS);
@@ -177,7 +177,7 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcoreCSPackage.PREDICATE_CS: {
+			case 9: {
 				PredicateCS predicateCS = (PredicateCS)theEObject;
 				T result = casePredicateCS(predicateCS);
 				if (result == null) result = caseExpCS(predicateCS);
@@ -187,7 +187,7 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcoreCSPackage.PREDICATE_OR_ASSIGNMENT_CS: {
+			case 10: {
 				PredicateOrAssignmentCS predicateOrAssignmentCS = (PredicateOrAssignmentCS)theEObject;
 				T result = casePredicateOrAssignmentCS(predicateOrAssignmentCS);
 				if (result == null) result = caseExpCS(predicateOrAssignmentCS);
@@ -197,7 +197,7 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcoreCSPackage.QUERY_CS: {
+			case 11: {
 				QueryCS queryCS = (QueryCS)theEObject;
 				T result = caseQueryCS(queryCS);
 				if (result == null) result = caseTypedElementCS(queryCS);
@@ -209,7 +209,7 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcoreCSPackage.REALIZEABLE_VARIABLE_CS: {
+			case 12: {
 				RealizeableVariableCS realizeableVariableCS = (RealizeableVariableCS)theEObject;
 				T result = caseRealizeableVariableCS(realizeableVariableCS);
 				if (result == null) result = caseTypedElementCS(realizeableVariableCS);
@@ -220,7 +220,7 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcoreCSPackage.REALIZED_VARIABLE_CS: {
+			case 13: {
 				RealizedVariableCS realizedVariableCS = (RealizedVariableCS)theEObject;
 				T result = caseRealizedVariableCS(realizedVariableCS);
 				if (result == null) result = caseRealizeableVariableCS(realizedVariableCS);
@@ -232,7 +232,7 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcoreCSPackage.TOP_LEVEL_CS: {
+			case 14: {
 				TopLevelCS topLevelCS = (TopLevelCS)theEObject;
 				T result = caseTopLevelCS(topLevelCS);
 				if (result == null) result = caseRootPackageCS(topLevelCS);
@@ -244,7 +244,7 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcoreCSPackage.TRANSFORMATION_CS: {
+			case 15: {
 				TransformationCS transformationCS = (TransformationCS)theEObject;
 				T result = caseTransformationCS(transformationCS);
 				if (result == null) result = caseAbstractTransformationCS(transformationCS);
@@ -258,7 +258,7 @@ public class QVTcoreCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTcoreCSPackage.UNREALIZED_VARIABLE_CS: {
+			case 16: {
 				UnrealizedVariableCS unrealizedVariableCS = (UnrealizedVariableCS)theEObject;
 				T result = caseUnrealizedVariableCS(unrealizedVariableCS);
 				if (result == null) result = caseRealizeableVariableCS(unrealizedVariableCS);

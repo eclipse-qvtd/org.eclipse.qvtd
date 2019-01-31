@@ -82,26 +82,26 @@ public class QVTrelationCSFactoryImpl extends EFactoryImpl implements QVTrelatio
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS: return createCollectionTemplateCS();
-			case QVTrelationCSPackage.DEFAULT_VALUE_CS: return createDefaultValueCS();
-			case QVTrelationCSPackage.DOMAIN_CS: return createDomainCS();
-			case QVTrelationCSPackage.DOMAIN_PATTERN_CS: return createDomainPatternCS();
-			case QVTrelationCSPackage.ELEMENT_TEMPLATE_CS: return createElementTemplateCS();
-			case QVTrelationCSPackage.KEY_DECL_CS: return createKeyDeclCS();
-			case QVTrelationCSPackage.MODEL_DECL_CS: return createModelDeclCS();
-			case QVTrelationCSPackage.OBJECT_TEMPLATE_CS: return createObjectTemplateCS();
-			case QVTrelationCSPackage.PARAM_DECLARATION_CS: return createParamDeclarationCS();
-			case QVTrelationCSPackage.PATTERN_CS: return createPatternCS();
-			case QVTrelationCSPackage.PREDICATE_CS: return createPredicateCS();
-			case QVTrelationCSPackage.PRIMITIVE_TYPE_DOMAIN_CS: return createPrimitiveTypeDomainCS();
-			case QVTrelationCSPackage.PRIMITIVE_TYPE_DOMAIN_PATTERN_CS: return createPrimitiveTypeDomainPatternCS();
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS: return createPropertyTemplateCS();
-			case QVTrelationCSPackage.QUERY_CS: return createQueryCS();
-			case QVTrelationCSPackage.RELATION_CS: return createRelationCS();
-			case QVTrelationCSPackage.TOP_LEVEL_CS: return createTopLevelCS();
-			case QVTrelationCSPackage.TRANSFORMATION_CS: return createTransformationCS();
-			case QVTrelationCSPackage.VAR_DECLARATION_CS: return createVarDeclarationCS();
-			case QVTrelationCSPackage.VAR_DECLARATION_ID_CS: return createVarDeclarationIdCS();
+			case 1: return createCollectionTemplateCS();
+			case 2: return createDefaultValueCS();
+			case 3: return createDomainCS();
+			case 4: return createDomainPatternCS();
+			case 5: return createElementTemplateCS();
+			case 6: return createKeyDeclCS();
+			case 7: return createModelDeclCS();
+			case 8: return createObjectTemplateCS();
+			case 9: return createParamDeclarationCS();
+			case 10: return createPatternCS();
+			case 11: return createPredicateCS();
+			case 12: return createPrimitiveTypeDomainCS();
+			case 13: return createPrimitiveTypeDomainPatternCS();
+			case 14: return createPropertyTemplateCS();
+			case 15: return createQueryCS();
+			case 16: return createRelationCS();
+			case 19: return createTopLevelCS();
+			case 20: return createTransformationCS();
+			case 21: return createVarDeclarationCS();
+			case 22: return createVarDeclarationIdCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

@@ -51,6 +51,15 @@ import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;
  */
 public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	/**
+	 * The number of structural features of the '<em>Mapping CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_CS_FEATURE_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6;
+
+	/**
 	 * The default value of the '{@link #isIsAbstract() <em>Is Abstract</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -159,7 +168,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 		boolean oldIsAbstract = isAbstract;
 		isAbstract = newIsAbstract;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.MAPPING_CS__IS_ABSTRACT, oldIsAbstract, isAbstract));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0, oldIsAbstract, isAbstract));
 	}
 
 	/**
@@ -170,7 +179,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public EList<MappingCS> getOwnedComposedMappings() {
 		if (ownedComposedMappings == null) {
-			ownedComposedMappings = new EObjectContainmentEList<MappingCS>(MappingCS.class, this, QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS);
+			ownedComposedMappings = new EObjectContainmentEList<MappingCS>(MappingCS.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1);
 		}
 		return ownedComposedMappings;
 	}
@@ -183,7 +192,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public EList<DomainCS> getOwnedDomains() {
 		if (ownedDomains == null) {
-			ownedDomains = new EObjectContainmentEList<DomainCS>(DomainCS.class, this, QVTcoreCSPackage.MAPPING_CS__OWNED_DOMAINS);
+			ownedDomains = new EObjectContainmentEList<DomainCS>(DomainCS.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2);
 		}
 		return ownedDomains;
 	}
@@ -207,7 +216,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 		PathNameCS oldOwnedInPathName = ownedInPathName;
 		ownedInPathName = newOwnedInPathName;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME, oldOwnedInPathName, newOwnedInPathName);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3, oldOwnedInPathName, newOwnedInPathName);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -223,14 +232,14 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 		if (newOwnedInPathName != ownedInPathName) {
 			NotificationChain msgs = null;
 			if (ownedInPathName != null)
-				msgs = ((InternalEObject)ownedInPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME, null, msgs);
+				msgs = ((InternalEObject)ownedInPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3), null, msgs);
 			if (newOwnedInPathName != null)
-				msgs = ((InternalEObject)newOwnedInPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME, null, msgs);
+				msgs = ((InternalEObject)newOwnedInPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3), null, msgs);
 			msgs = basicSetOwnedInPathName(newOwnedInPathName, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME, newOwnedInPathName, newOwnedInPathName));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3, newOwnedInPathName, newOwnedInPathName));
 	}
 
 	/**
@@ -252,7 +261,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 		DomainCS oldOwnedMiddle = ownedMiddle;
 		ownedMiddle = newOwnedMiddle;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.MAPPING_CS__OWNED_MIDDLE, oldOwnedMiddle, newOwnedMiddle);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4, oldOwnedMiddle, newOwnedMiddle);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -268,14 +277,14 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 		if (newOwnedMiddle != ownedMiddle) {
 			NotificationChain msgs = null;
 			if (ownedMiddle != null)
-				msgs = ((InternalEObject)ownedMiddle).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSPackage.MAPPING_CS__OWNED_MIDDLE, null, msgs);
+				msgs = ((InternalEObject)ownedMiddle).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4), null, msgs);
 			if (newOwnedMiddle != null)
-				msgs = ((InternalEObject)newOwnedMiddle).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSPackage.MAPPING_CS__OWNED_MIDDLE, null, msgs);
+				msgs = ((InternalEObject)newOwnedMiddle).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4), null, msgs);
 			msgs = basicSetOwnedMiddle(newOwnedMiddle, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.MAPPING_CS__OWNED_MIDDLE, newOwnedMiddle, newOwnedMiddle));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4, newOwnedMiddle, newOwnedMiddle));
 	}
 
 	/**
@@ -286,7 +295,7 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public EList<Mapping> getRefines() {
 		if (refines == null) {
-			refines = new EObjectResolvingEList<Mapping>(Mapping.class, this, QVTcoreCSPackage.MAPPING_CS__REFINES);
+			refines = new EObjectResolvingEList<Mapping>(Mapping.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5);
 		}
 		return refines;
 	}
@@ -309,13 +318,13 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return ((InternalEList<?>)getOwnedComposedMappings()).basicRemove(otherEnd, msgs);
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_DOMAINS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getOwnedDomains()).basicRemove(otherEnd, msgs);
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return basicSetOwnedInPathName(null, msgs);
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_MIDDLE:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
 				return basicSetOwnedMiddle(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -329,17 +338,17 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcoreCSPackage.MAPPING_CS__IS_ABSTRACT:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return isIsAbstract();
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return getOwnedComposedMappings();
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_DOMAINS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return getOwnedDomains();
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return getOwnedInPathName();
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_MIDDLE:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
 				return getOwnedMiddle();
-			case QVTcoreCSPackage.MAPPING_CS__REFINES:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5:
 				return getRefines();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -354,24 +363,24 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcoreCSPackage.MAPPING_CS__IS_ABSTRACT:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				setIsAbstract((Boolean)newValue);
 				return;
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				getOwnedComposedMappings().clear();
 				getOwnedComposedMappings().addAll((Collection<? extends MappingCS>)newValue);
 				return;
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_DOMAINS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				getOwnedDomains().clear();
 				getOwnedDomains().addAll((Collection<? extends DomainCS>)newValue);
 				return;
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
 				setOwnedInPathName((PathNameCS)newValue);
 				return;
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_MIDDLE:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
 				setOwnedMiddle((DomainCS)newValue);
 				return;
-			case QVTcoreCSPackage.MAPPING_CS__REFINES:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5:
 				getRefines().clear();
 				getRefines().addAll((Collection<? extends Mapping>)newValue);
 				return;
@@ -387,22 +396,22 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.MAPPING_CS__IS_ABSTRACT:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				setIsAbstract(IS_ABSTRACT_EDEFAULT);
 				return;
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				getOwnedComposedMappings().clear();
 				return;
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_DOMAINS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				getOwnedDomains().clear();
 				return;
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
 				setOwnedInPathName((PathNameCS)null);
 				return;
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_MIDDLE:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
 				setOwnedMiddle((DomainCS)null);
 				return;
-			case QVTcoreCSPackage.MAPPING_CS__REFINES:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5:
 				getRefines().clear();
 				return;
 		}
@@ -417,17 +426,17 @@ public class MappingCSImpl extends NamedElementCSImpl implements MappingCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.MAPPING_CS__IS_ABSTRACT:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return isAbstract != IS_ABSTRACT_EDEFAULT;
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return ownedComposedMappings != null && !ownedComposedMappings.isEmpty();
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_DOMAINS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return ownedDomains != null && !ownedDomains.isEmpty();
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_IN_PATH_NAME:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return ownedInPathName != null;
-			case QVTcoreCSPackage.MAPPING_CS__OWNED_MIDDLE:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
 				return ownedMiddle != null;
-			case QVTcoreCSPackage.MAPPING_CS__REFINES:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5:
 				return refines != null && !refines.isEmpty();
 		}
 		return super.eIsSet(featureID);

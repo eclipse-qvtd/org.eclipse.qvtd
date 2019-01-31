@@ -30,6 +30,15 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  */
 public class AppendParameterCSImpl extends MappingParameterCSImpl implements AppendParameterCS {
 	/**
+	 * The number of structural features of the '<em>Append Parameter CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int APPEND_PARAMETER_CS_FEATURE_COUNT = MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

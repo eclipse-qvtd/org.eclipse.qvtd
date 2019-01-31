@@ -42,6 +42,15 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  */
 public class AppendParameterBindingCSImpl extends MappingParameterBindingCSImpl implements AppendParameterBindingCS {
 	/**
+	 * The number of structural features of the '<em>Append Parameter Binding CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int APPEND_PARAMETER_BINDING_CS_FEATURE_COUNT = MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2;
+
+	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -92,7 +101,7 @@ public class AppendParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 			value = (ConnectionVariable)eResolveProxy(oldValue);
 			if (value != oldValue) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativeCSPackage.APPEND_PARAMETER_BINDING_CS__VALUE, oldValue, value));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0, oldValue, value));
 			}
 		}
 		return value;
@@ -117,7 +126,7 @@ public class AppendParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 		ConnectionVariable oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.APPEND_PARAMETER_BINDING_CS__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0, oldValue, value));
 	}
 
 	/**
@@ -132,7 +141,7 @@ public class AppendParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 			referredVariable = (AppendParameter)eResolveProxy(oldReferredVariable);
 			if (referredVariable != oldReferredVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativeCSPackage.APPEND_PARAMETER_BINDING_CS__REFERRED_VARIABLE, oldReferredVariable, referredVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1, oldReferredVariable, referredVariable));
 			}
 		}
 		return referredVariable;
@@ -157,7 +166,7 @@ public class AppendParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 		AppendParameter oldReferredVariable = referredVariable;
 		referredVariable = newReferredVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.APPEND_PARAMETER_BINDING_CS__REFERRED_VARIABLE, oldReferredVariable, referredVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1, oldReferredVariable, referredVariable));
 	}
 
 	/**
@@ -168,10 +177,10 @@ public class AppendParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.APPEND_PARAMETER_BINDING_CS__VALUE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
 				if (resolve) return getValue();
 				return basicGetValue();
-			case QVTimperativeCSPackage.APPEND_PARAMETER_BINDING_CS__REFERRED_VARIABLE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
 				if (resolve) return getReferredVariable();
 				return basicGetReferredVariable();
 		}
@@ -186,10 +195,10 @@ public class AppendParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.APPEND_PARAMETER_BINDING_CS__VALUE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
 				setValue((ConnectionVariable)newValue);
 				return;
-			case QVTimperativeCSPackage.APPEND_PARAMETER_BINDING_CS__REFERRED_VARIABLE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
 				setReferredVariable((AppendParameter)newValue);
 				return;
 		}
@@ -204,10 +213,10 @@ public class AppendParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.APPEND_PARAMETER_BINDING_CS__VALUE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
 				setValue((ConnectionVariable)null);
 				return;
-			case QVTimperativeCSPackage.APPEND_PARAMETER_BINDING_CS__REFERRED_VARIABLE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
 				setReferredVariable((AppendParameter)null);
 				return;
 		}
@@ -222,9 +231,9 @@ public class AppendParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.APPEND_PARAMETER_BINDING_CS__VALUE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
 				return value != null;
-			case QVTimperativeCSPackage.APPEND_PARAMETER_BINDING_CS__REFERRED_VARIABLE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
 				return referredVariable != null;
 		}
 		return super.eIsSet(featureID);

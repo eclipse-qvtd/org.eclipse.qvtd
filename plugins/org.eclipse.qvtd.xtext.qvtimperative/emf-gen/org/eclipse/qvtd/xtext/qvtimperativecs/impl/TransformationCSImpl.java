@@ -54,6 +54,14 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  */
 public class TransformationCSImpl extends AbstractTransformationCSImpl implements TransformationCS {
 	/**
+	 * The number of structural features of the '<em>Transformation CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TRANSFORMATION_CS_FEATURE_COUNT = AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2;
+	/**
 	 * The cached value of the '{@link #getOwnedDirections() <em>Owned Directions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -103,7 +111,7 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	@Override
 	public EList<DirectionCS> getOwnedDirections() {
 		if (ownedDirections == null) {
-			ownedDirections = new EObjectContainmentEList<DirectionCS>(DirectionCS.class, this, QVTimperativeCSPackage.TRANSFORMATION_CS__OWNED_DIRECTIONS);
+			ownedDirections = new EObjectContainmentEList<DirectionCS>(DirectionCS.class, this, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1);
 		}
 		return ownedDirections;
 	}
@@ -116,7 +124,7 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.TRANSFORMATION_CS__OWNED_DIRECTIONS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1:
 				return ((InternalEList<?>)getOwnedDirections()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -130,9 +138,9 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.TRANSFORMATION_CS__PACKAGE:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 0:
 				return getPackage();
-			case QVTimperativeCSPackage.TRANSFORMATION_CS__OWNED_DIRECTIONS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1:
 				return getOwnedDirections();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -147,7 +155,7 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.TRANSFORMATION_CS__OWNED_DIRECTIONS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1:
 				getOwnedDirections().clear();
 				getOwnedDirections().addAll((Collection<? extends DirectionCS>)newValue);
 				return;
@@ -163,7 +171,7 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.TRANSFORMATION_CS__OWNED_DIRECTIONS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1:
 				getOwnedDirections().clear();
 				return;
 		}
@@ -178,9 +186,9 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.TRANSFORMATION_CS__PACKAGE:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 0:
 				return getPackage() != null;
-			case QVTimperativeCSPackage.TRANSFORMATION_CS__OWNED_DIRECTIONS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1:
 				return ownedDirections != null && !ownedDirections.isEmpty();
 		}
 		return super.eIsSet(featureID);

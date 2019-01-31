@@ -41,6 +41,14 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  */
 public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	/**
+	 * The number of structural features of the '<em>Top Level CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TOP_LEVEL_CS_FEATURE_COUNT = RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 1;
+	/**
 	 * The cached value of the '{@link #getOwnedTransformations() <em>Owned Transformations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,7 +86,7 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public @NonNull EList<TransformationCS> getOwnedTransformations() {
 		if (ownedTransformations == null) {
-			ownedTransformations = new EObjectContainmentEList<TransformationCS>(TransformationCS.class, this, QVTrelationCSPackage.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS);
+			ownedTransformations = new EObjectContainmentEList<TransformationCS>(TransformationCS.class, this, RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 0);
 		}
 		return ownedTransformations;
 	}
@@ -91,7 +99,7 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedTransformations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -105,7 +113,7 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 0:
 				return getOwnedTransformations();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -120,7 +128,7 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 0:
 				getOwnedTransformations().clear();
 				getOwnedTransformations().addAll((Collection<? extends TransformationCS>)newValue);
 				return;
@@ -136,7 +144,7 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 0:
 				getOwnedTransformations().clear();
 				return;
 		}
@@ -151,7 +159,7 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 0:
 				return ownedTransformations != null && !ownedTransformations.isEmpty();
 		}
 		return super.eIsSet(featureID);

@@ -45,6 +45,15 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  */
 public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	/**
+	 * The number of structural features of the '<em>Direction CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DIRECTION_CS_FEATURE_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+
+	/**
 	 * The cached value of the '{@link #getImports() <em>Imports</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -121,7 +130,7 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	@Override
 	public EList<org.eclipse.ocl.pivot.Package> getImports() {
 		if (imports == null) {
-			imports = new EObjectResolvingEList<org.eclipse.ocl.pivot.Package>(org.eclipse.ocl.pivot.Package.class, this, QVTimperativeCSPackage.DIRECTION_CS__IMPORTS);
+			imports = new EObjectResolvingEList<org.eclipse.ocl.pivot.Package>(org.eclipse.ocl.pivot.Package.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0);
 		}
 		return imports;
 	}
@@ -146,7 +155,7 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 		boolean oldIsChecked = isChecked;
 		isChecked = newIsChecked;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.DIRECTION_CS__IS_CHECKED, oldIsChecked, isChecked));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1, oldIsChecked, isChecked));
 	}
 
 	/**
@@ -169,7 +178,7 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 		boolean oldIsEnforced = isEnforced;
 		isEnforced = newIsEnforced;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.DIRECTION_CS__IS_ENFORCED, oldIsEnforced, isEnforced));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2, oldIsEnforced, isEnforced));
 	}
 
 	/**
@@ -190,11 +199,11 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.DIRECTION_CS__IMPORTS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return getImports();
-			case QVTimperativeCSPackage.DIRECTION_CS__IS_CHECKED:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return isIsChecked();
-			case QVTimperativeCSPackage.DIRECTION_CS__IS_ENFORCED:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return isIsEnforced();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -209,14 +218,14 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.DIRECTION_CS__IMPORTS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				getImports().clear();
 				getImports().addAll((Collection<? extends org.eclipse.ocl.pivot.Package>)newValue);
 				return;
-			case QVTimperativeCSPackage.DIRECTION_CS__IS_CHECKED:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				setIsChecked((Boolean)newValue);
 				return;
-			case QVTimperativeCSPackage.DIRECTION_CS__IS_ENFORCED:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				setIsEnforced((Boolean)newValue);
 				return;
 		}
@@ -231,13 +240,13 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.DIRECTION_CS__IMPORTS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				getImports().clear();
 				return;
-			case QVTimperativeCSPackage.DIRECTION_CS__IS_CHECKED:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				setIsChecked(IS_CHECKED_EDEFAULT);
 				return;
-			case QVTimperativeCSPackage.DIRECTION_CS__IS_ENFORCED:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				setIsEnforced(IS_ENFORCED_EDEFAULT);
 				return;
 		}
@@ -252,11 +261,11 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.DIRECTION_CS__IMPORTS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return imports != null && !imports.isEmpty();
-			case QVTimperativeCSPackage.DIRECTION_CS__IS_CHECKED:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return isChecked != IS_CHECKED_EDEFAULT;
-			case QVTimperativeCSPackage.DIRECTION_CS__IS_ENFORCED:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return isEnforced != IS_ENFORCED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

@@ -43,6 +43,15 @@ import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;
  */
 public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	/**
+	 * The number of structural features of the '<em>Direction CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DIRECTION_CS_FEATURE_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+
+	/**
 	 * The cached value of the '{@link #getImports() <em>Imports</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -89,7 +98,7 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	@Override
 	public EList<org.eclipse.ocl.pivot.Package> getImports() {
 		if (imports == null) {
-			imports = new EObjectResolvingEList<org.eclipse.ocl.pivot.Package>(org.eclipse.ocl.pivot.Package.class, this, QVTcoreCSPackage.DIRECTION_CS__IMPORTS);
+			imports = new EObjectResolvingEList<org.eclipse.ocl.pivot.Package>(org.eclipse.ocl.pivot.Package.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0);
 		}
 		return imports;
 	}
@@ -102,7 +111,7 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	@Override
 	public EList<TypedModel> getUses() {
 		if (uses == null) {
-			uses = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, QVTcoreCSPackage.DIRECTION_CS__USES);
+			uses = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1);
 		}
 		return uses;
 	}
@@ -115,9 +124,9 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcoreCSPackage.DIRECTION_CS__IMPORTS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return getImports();
-			case QVTcoreCSPackage.DIRECTION_CS__USES:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return getUses();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -132,11 +141,11 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcoreCSPackage.DIRECTION_CS__IMPORTS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				getImports().clear();
 				getImports().addAll((Collection<? extends org.eclipse.ocl.pivot.Package>)newValue);
 				return;
-			case QVTcoreCSPackage.DIRECTION_CS__USES:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				getUses().clear();
 				getUses().addAll((Collection<? extends TypedModel>)newValue);
 				return;
@@ -152,10 +161,10 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.DIRECTION_CS__IMPORTS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				getImports().clear();
 				return;
-			case QVTcoreCSPackage.DIRECTION_CS__USES:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				getUses().clear();
 				return;
 		}
@@ -170,9 +179,9 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.DIRECTION_CS__IMPORTS:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return imports != null && !imports.isEmpty();
-			case QVTcoreCSPackage.DIRECTION_CS__USES:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return uses != null && !uses.isEmpty();
 		}
 		return super.eIsSet(featureID);

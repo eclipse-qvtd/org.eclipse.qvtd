@@ -16,6 +16,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
+import org.eclipse.ocl.xtext.basecs.impl.ClassCSImpl;
+import org.eclipse.ocl.xtext.basecs.impl.ElementCSImpl;
+import org.eclipse.ocl.xtext.basecs.impl.PackageCSImpl;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.AbstractTransformationCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS;
@@ -232,16 +235,16 @@ public class QVTbaseCSPackageImpl extends EPackageImpl implements QVTbaseCSPacka
 		isCreated = true;
 
 		// Create classes and their features
-		abstractTransformationCSEClass = createEClass(ABSTRACT_TRANSFORMATION_CS);
-		createEReference(abstractTransformationCSEClass, ABSTRACT_TRANSFORMATION_CS__OWNED_PATH_NAME);
+		abstractTransformationCSEClass = createEClass(0);
+		createEReference(abstractTransformationCSEClass, ClassCSImpl.CLASS_CS_FEATURE_COUNT + 0);
 
-		javaClassCSEClass = createEClass(JAVA_CLASS_CS);
+		javaClassCSEClass = createEClass(1);
 
-		javaImplementationCSEClass = createEClass(JAVA_IMPLEMENTATION_CS);
-		createEReference(javaImplementationCSEClass, JAVA_IMPLEMENTATION_CS__IMPLEMENTATION);
+		javaImplementationCSEClass = createEClass(2);
+		createEReference(javaImplementationCSEClass, ElementCSImpl.ELEMENT_CS_FEATURE_COUNT + 0);
 
-		qualifiedPackageCSEClass = createEClass(QUALIFIED_PACKAGE_CS);
-		createEReference(qualifiedPackageCSEClass, QUALIFIED_PACKAGE_CS__OWNED_PATH_NAME);
+		qualifiedPackageCSEClass = createEClass(3);
+		createEReference(qualifiedPackageCSEClass, PackageCSImpl.PACKAGE_CS_FEATURE_COUNT + 0);
 	}
 
 	/**

@@ -49,6 +49,15 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  */
 public class MappingLoopCSImpl extends MappingStatementCSImpl implements MappingLoopCS {
 	/**
+	 * The number of structural features of the '<em>Mapping Loop CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_LOOP_CS_FEATURE_COUNT = MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 4;
+
+	/**
 	 * The cached value of the '{@link #getObservedProperties() <em>Observed Properties</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -115,7 +124,7 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public EList<PathNameCS> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, QVTimperativeCSPackage.MAPPING_LOOP_CS__OBSERVED_PROPERTIES);
+			observedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0);
 		}
 		return observedProperties;
 	}
@@ -139,7 +148,7 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 		VariableCS oldOwnedIterator = ownedIterator;
 		ownedIterator = newOwnedIterator;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_ITERATOR, oldOwnedIterator, newOwnedIterator);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1, oldOwnedIterator, newOwnedIterator);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -155,14 +164,14 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 		if (newOwnedIterator != ownedIterator) {
 			NotificationChain msgs = null;
 			if (ownedIterator != null)
-				msgs = ((InternalEObject)ownedIterator).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_ITERATOR, null, msgs);
+				msgs = ((InternalEObject)ownedIterator).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			if (newOwnedIterator != null)
-				msgs = ((InternalEObject)newOwnedIterator).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_ITERATOR, null, msgs);
+				msgs = ((InternalEObject)newOwnedIterator).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetOwnedIterator(newOwnedIterator, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_ITERATOR, newOwnedIterator, newOwnedIterator));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1, newOwnedIterator, newOwnedIterator));
 	}
 
 	/**
@@ -184,7 +193,7 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 		ExpCS oldOwnedInExpression = ownedInExpression;
 		ownedInExpression = newOwnedInExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_IN_EXPRESSION, oldOwnedInExpression, newOwnedInExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2, oldOwnedInExpression, newOwnedInExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -200,14 +209,14 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 		if (newOwnedInExpression != ownedInExpression) {
 			NotificationChain msgs = null;
 			if (ownedInExpression != null)
-				msgs = ((InternalEObject)ownedInExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_IN_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)ownedInExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2), null, msgs);
 			if (newOwnedInExpression != null)
-				msgs = ((InternalEObject)newOwnedInExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_IN_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newOwnedInExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2), null, msgs);
 			msgs = basicSetOwnedInExpression(newOwnedInExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_IN_EXPRESSION, newOwnedInExpression, newOwnedInExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2, newOwnedInExpression, newOwnedInExpression));
 	}
 
 	/**
@@ -218,7 +227,7 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public EList<MappingStatementCS> getOwnedMappingStatements() {
 		if (ownedMappingStatements == null) {
-			ownedMappingStatements = new EObjectContainmentEList<MappingStatementCS>(MappingStatementCS.class, this, QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_STATEMENTS);
+			ownedMappingStatements = new EObjectContainmentEList<MappingStatementCS>(MappingStatementCS.class, this, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 3);
 		}
 		return ownedMappingStatements;
 	}
@@ -231,13 +240,13 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OBSERVED_PROPERTIES:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getObservedProperties()).basicRemove(otherEnd, msgs);
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_ITERATOR:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1:
 				return basicSetOwnedIterator(null, msgs);
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_IN_EXPRESSION:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2:
 				return basicSetOwnedInExpression(null, msgs);
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_STATEMENTS:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 3:
 				return ((InternalEList<?>)getOwnedMappingStatements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -251,13 +260,13 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OBSERVED_PROPERTIES:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0:
 				return getObservedProperties();
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_ITERATOR:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1:
 				return getOwnedIterator();
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_IN_EXPRESSION:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2:
 				return getOwnedInExpression();
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_STATEMENTS:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 3:
 				return getOwnedMappingStatements();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -272,17 +281,17 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OBSERVED_PROPERTIES:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends PathNameCS>)newValue);
 				return;
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_ITERATOR:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedIterator((VariableCS)newValue);
 				return;
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_IN_EXPRESSION:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2:
 				setOwnedInExpression((ExpCS)newValue);
 				return;
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_STATEMENTS:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 3:
 				getOwnedMappingStatements().clear();
 				getOwnedMappingStatements().addAll((Collection<? extends MappingStatementCS>)newValue);
 				return;
@@ -298,16 +307,16 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OBSERVED_PROPERTIES:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				return;
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_ITERATOR:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedIterator((VariableCS)null);
 				return;
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_IN_EXPRESSION:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2:
 				setOwnedInExpression((ExpCS)null);
 				return;
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_STATEMENTS:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 3:
 				getOwnedMappingStatements().clear();
 				return;
 		}
@@ -322,13 +331,13 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OBSERVED_PROPERTIES:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0:
 				return observedProperties != null && !observedProperties.isEmpty();
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_ITERATOR:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1:
 				return ownedIterator != null;
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_IN_EXPRESSION:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2:
 				return ownedInExpression != null;
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS__OWNED_MAPPING_STATEMENTS:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 3:
 				return ownedMappingStatements != null && !ownedMappingStatements.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -343,7 +352,7 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatementCS.class) {
 			switch (derivedFeatureID) {
-				case QVTimperativeCSPackage.MAPPING_LOOP_CS__OBSERVED_PROPERTIES: return QVTimperativeCSPackage.OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES;
+				case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0: return StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -359,7 +368,7 @@ public class MappingLoopCSImpl extends MappingStatementCSImpl implements Mapping
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatementCS.class) {
 			switch (baseFeatureID) {
-				case QVTimperativeCSPackage.OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES: return QVTimperativeCSPackage.MAPPING_LOOP_CS__OBSERVED_PROPERTIES;
+				case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0: return MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}

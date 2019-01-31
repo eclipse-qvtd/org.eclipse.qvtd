@@ -24,6 +24,15 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
  */
 public abstract class AbstractDomainCSImpl extends ModelElementCSImpl implements AbstractDomainCS {
 	/**
+	 * The number of structural features of the '<em>Abstract Domain CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ABSTRACT_DOMAIN_CS_FEATURE_COUNT = ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

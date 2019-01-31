@@ -36,6 +36,14 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  */
 public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements ElementTemplateCS {
 	/**
+	 * The number of structural features of the '<em>Element Template CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ELEMENT_TEMPLATE_CS_FEATURE_COUNT = TemplateVariableCSImpl.TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 1;
+	/**
 	 * The cached value of the '{@link #getIdentifier() <em>Identifier</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -76,7 +84,7 @@ public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements Ele
 			identifier = (SharedVariable)eResolveProxy(oldIdentifier);
 			if (identifier != oldIdentifier) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTrelationCSPackage.ELEMENT_TEMPLATE_CS__IDENTIFIER, oldIdentifier, identifier));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TemplateVariableCSImpl.TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0, oldIdentifier, identifier));
 			}
 		}
 		return identifier;
@@ -101,7 +109,7 @@ public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements Ele
 		SharedVariable oldIdentifier = identifier;
 		identifier = newIdentifier;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.ELEMENT_TEMPLATE_CS__IDENTIFIER, oldIdentifier, identifier));
+			eNotify(new ENotificationImpl(this, Notification.SET, TemplateVariableCSImpl.TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0, oldIdentifier, identifier));
 	}
 
 	/**
@@ -112,7 +120,7 @@ public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements Ele
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.ELEMENT_TEMPLATE_CS__IDENTIFIER:
+			case TemplateVariableCSImpl.TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0:
 				if (resolve) return getIdentifier();
 				return basicGetIdentifier();
 		}
@@ -127,7 +135,7 @@ public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements Ele
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.ELEMENT_TEMPLATE_CS__IDENTIFIER:
+			case TemplateVariableCSImpl.TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0:
 				setIdentifier((SharedVariable)newValue);
 				return;
 		}
@@ -142,7 +150,7 @@ public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements Ele
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.ELEMENT_TEMPLATE_CS__IDENTIFIER:
+			case TemplateVariableCSImpl.TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0:
 				setIdentifier((SharedVariable)null);
 				return;
 		}
@@ -157,7 +165,7 @@ public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements Ele
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.ELEMENT_TEMPLATE_CS__IDENTIFIER:
+			case TemplateVariableCSImpl.TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0:
 				return identifier != null;
 		}
 		return super.eIsSet(featureID);

@@ -44,6 +44,15 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  */
 public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl implements SimpleParameterBindingCS {
 	/**
+	 * The number of structural features of the '<em>Simple Parameter Binding CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SIMPLE_PARAMETER_BINDING_CS_FEATURE_COUNT = MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 3;
+
+	/**
 	 * The cached value of the '{@link #getOwnedValue() <em>Owned Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -121,7 +130,7 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 		ExpCS oldOwnedValue = ownedValue;
 		ownedValue = newOwnedValue;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__OWNED_VALUE, oldOwnedValue, newOwnedValue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0, oldOwnedValue, newOwnedValue);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -137,14 +146,14 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 		if (newOwnedValue != ownedValue) {
 			NotificationChain msgs = null;
 			if (ownedValue != null)
-				msgs = ((InternalEObject)ownedValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__OWNED_VALUE, null, msgs);
+				msgs = ((InternalEObject)ownedValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0), null, msgs);
 			if (newOwnedValue != null)
-				msgs = ((InternalEObject)newOwnedValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__OWNED_VALUE, null, msgs);
+				msgs = ((InternalEObject)newOwnedValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0), null, msgs);
 			msgs = basicSetOwnedValue(newOwnedValue, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__OWNED_VALUE, newOwnedValue, newOwnedValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0, newOwnedValue, newOwnedValue));
 	}
 
 	/**
@@ -159,7 +168,7 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 			referredVariable = (SimpleParameter)eResolveProxy(oldReferredVariable);
 			if (referredVariable != oldReferredVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__REFERRED_VARIABLE, oldReferredVariable, referredVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1, oldReferredVariable, referredVariable));
 			}
 		}
 		return referredVariable;
@@ -184,7 +193,7 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 		SimpleParameter oldReferredVariable = referredVariable;
 		referredVariable = newReferredVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__REFERRED_VARIABLE, oldReferredVariable, referredVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1, oldReferredVariable, referredVariable));
 	}
 
 	/**
@@ -207,7 +216,7 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 		boolean oldIsCheck = isCheck;
 		isCheck = newIsCheck;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__IS_CHECK, oldIsCheck, isCheck));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2, oldIsCheck, isCheck));
 	}
 
 	/**
@@ -228,7 +237,7 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__OWNED_VALUE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
 				return basicSetOwnedValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -242,12 +251,12 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__OWNED_VALUE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
 				return getOwnedValue();
-			case QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__REFERRED_VARIABLE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
 				if (resolve) return getReferredVariable();
 				return basicGetReferredVariable();
-			case QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__IS_CHECK:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2:
 				return isIsCheck();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -261,13 +270,13 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__OWNED_VALUE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
 				setOwnedValue((ExpCS)newValue);
 				return;
-			case QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__REFERRED_VARIABLE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
 				setReferredVariable((SimpleParameter)newValue);
 				return;
-			case QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__IS_CHECK:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2:
 				setIsCheck((Boolean)newValue);
 				return;
 		}
@@ -282,13 +291,13 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__OWNED_VALUE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
 				setOwnedValue((ExpCS)null);
 				return;
-			case QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__REFERRED_VARIABLE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
 				setReferredVariable((SimpleParameter)null);
 				return;
-			case QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__IS_CHECK:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2:
 				setIsCheck(IS_CHECK_EDEFAULT);
 				return;
 		}
@@ -303,11 +312,11 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__OWNED_VALUE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
 				return ownedValue != null;
-			case QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__REFERRED_VARIABLE:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
 				return referredVariable != null;
-			case QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS__IS_CHECK:
+			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2:
 				return isCheck != IS_CHECK_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

@@ -40,6 +40,15 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
  */
 public abstract class MappingParameterBindingCSImpl extends ExpCSImpl implements MappingParameterBindingCS {
 	/**
+	 * The number of structural features of the '<em>Mapping Parameter Binding CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT = ExpCSImpl.EXP_CS_FEATURE_COUNT + 1;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -65,7 +74,7 @@ public abstract class MappingParameterBindingCSImpl extends ExpCSImpl implements
 	 */
 	@Override
 	public MappingCallCS getOwningMappingCall() {
-		if (eContainerFeatureID() != QVTimperativeCSPackage.MAPPING_PARAMETER_BINDING_CS__OWNING_MAPPING_CALL) return null;
+		if (eContainerFeatureID() != (ExpCSImpl.EXP_CS_FEATURE_COUNT + 0)) return null;
 		return (MappingCallCS)eInternalContainer();
 	}
 
@@ -75,7 +84,7 @@ public abstract class MappingParameterBindingCSImpl extends ExpCSImpl implements
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningMappingCall(MappingCallCS newOwningMappingCall, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningMappingCall, QVTimperativeCSPackage.MAPPING_PARAMETER_BINDING_CS__OWNING_MAPPING_CALL, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningMappingCall, ExpCSImpl.EXP_CS_FEATURE_COUNT + 0, msgs);
 		return msgs;
 	}
 
@@ -86,19 +95,19 @@ public abstract class MappingParameterBindingCSImpl extends ExpCSImpl implements
 	 */
 	@Override
 	public void setOwningMappingCall(MappingCallCS newOwningMappingCall) {
-		if (newOwningMappingCall != eInternalContainer() || (eContainerFeatureID() != QVTimperativeCSPackage.MAPPING_PARAMETER_BINDING_CS__OWNING_MAPPING_CALL && newOwningMappingCall != null)) {
+		if (newOwningMappingCall != eInternalContainer() || (eContainerFeatureID() != (ExpCSImpl.EXP_CS_FEATURE_COUNT + 0) && newOwningMappingCall != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningMappingCall))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningMappingCall != null)
-				msgs = ((InternalEObject)newOwningMappingCall).eInverseAdd(this, QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS, MappingCallCS.class, msgs);
+				msgs = ((InternalEObject)newOwningMappingCall).eInverseAdd(this, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2, MappingCallCS.class, msgs);
 			msgs = basicSetOwningMappingCall(newOwningMappingCall, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_PARAMETER_BINDING_CS__OWNING_MAPPING_CALL, newOwningMappingCall, newOwningMappingCall));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExpCSImpl.EXP_CS_FEATURE_COUNT + 0, newOwningMappingCall, newOwningMappingCall));
 	}
 
 	/**
@@ -109,7 +118,7 @@ public abstract class MappingParameterBindingCSImpl extends ExpCSImpl implements
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_PARAMETER_BINDING_CS__OWNING_MAPPING_CALL:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningMappingCall((MappingCallCS)otherEnd, msgs);
@@ -125,7 +134,7 @@ public abstract class MappingParameterBindingCSImpl extends ExpCSImpl implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_PARAMETER_BINDING_CS__OWNING_MAPPING_CALL:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 0:
 				return basicSetOwningMappingCall(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -139,8 +148,8 @@ public abstract class MappingParameterBindingCSImpl extends ExpCSImpl implements
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTimperativeCSPackage.MAPPING_PARAMETER_BINDING_CS__OWNING_MAPPING_CALL:
-				return eInternalContainer().eInverseRemove(this, QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS, MappingCallCS.class, msgs);
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 0:
+				return eInternalContainer().eInverseRemove(this, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2, MappingCallCS.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -153,7 +162,7 @@ public abstract class MappingParameterBindingCSImpl extends ExpCSImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_PARAMETER_BINDING_CS__OWNING_MAPPING_CALL:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 0:
 				return getOwningMappingCall();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -167,7 +176,7 @@ public abstract class MappingParameterBindingCSImpl extends ExpCSImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_PARAMETER_BINDING_CS__OWNING_MAPPING_CALL:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 0:
 				setOwningMappingCall((MappingCallCS)newValue);
 				return;
 		}
@@ -182,7 +191,7 @@ public abstract class MappingParameterBindingCSImpl extends ExpCSImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_PARAMETER_BINDING_CS__OWNING_MAPPING_CALL:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 0:
 				setOwningMappingCall((MappingCallCS)null);
 				return;
 		}
@@ -197,7 +206,7 @@ public abstract class MappingParameterBindingCSImpl extends ExpCSImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_PARAMETER_BINDING_CS__OWNING_MAPPING_CALL:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 0:
 				return getOwningMappingCall() != null;
 		}
 		return super.eIsSet(featureID);

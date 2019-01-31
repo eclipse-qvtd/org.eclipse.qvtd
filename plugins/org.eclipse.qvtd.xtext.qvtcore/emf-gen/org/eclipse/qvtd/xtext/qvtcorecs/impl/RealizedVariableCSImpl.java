@@ -34,6 +34,15 @@ import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;
  */
 public class RealizedVariableCSImpl extends RealizeableVariableCSImpl implements RealizedVariableCS {
 	/**
+	 * The number of structural features of the '<em>Realized Variable CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int REALIZED_VARIABLE_CS_FEATURE_COUNT = RealizeableVariableCSImpl.REALIZEABLE_VARIABLE_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

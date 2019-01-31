@@ -84,27 +84,27 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case QVTimperativeCSPackage.ADD_STATEMENT_CS: return createAddStatementCS();
-			case QVTimperativeCSPackage.APPEND_PARAMETER_BINDING_CS: return createAppendParameterBindingCS();
-			case QVTimperativeCSPackage.APPEND_PARAMETER_CS: return createAppendParameterCS();
-			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS: return createBufferStatementCS();
-			case QVTimperativeCSPackage.CHECK_STATEMENT_CS: return createCheckStatementCS();
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS: return createDeclareStatementCS();
-			case QVTimperativeCSPackage.DIRECTION_CS: return createDirectionCS();
-			case QVTimperativeCSPackage.GUARD_PARAMETER_BINDING_CS: return createGuardParameterBindingCS();
-			case QVTimperativeCSPackage.GUARD_PARAMETER_CS: return createGuardParameterCS();
-			case QVTimperativeCSPackage.LOOP_PARAMETER_BINDING_CS: return createLoopParameterBindingCS();
-			case QVTimperativeCSPackage.MAPPING_CS: return createMappingCS();
-			case QVTimperativeCSPackage.MAPPING_CALL_CS: return createMappingCallCS();
-			case QVTimperativeCSPackage.MAPPING_LOOP_CS: return createMappingLoopCS();
-			case QVTimperativeCSPackage.NEW_STATEMENT_CS: return createNewStatementCS();
-			case QVTimperativeCSPackage.PARAM_DECLARATION_CS: return createParamDeclarationCS();
-			case QVTimperativeCSPackage.QUERY_CS: return createQueryCS();
-			case QVTimperativeCSPackage.SET_STATEMENT_CS: return createSetStatementCS();
-			case QVTimperativeCSPackage.SIMPLE_PARAMETER_BINDING_CS: return createSimpleParameterBindingCS();
-			case QVTimperativeCSPackage.SIMPLE_PARAMETER_CS: return createSimpleParameterCS();
-			case QVTimperativeCSPackage.TOP_LEVEL_CS: return createTopLevelCS();
-			case QVTimperativeCSPackage.TRANSFORMATION_CS: return createTransformationCS();
+			case 0: return createAddStatementCS();
+			case 1: return createAppendParameterBindingCS();
+			case 2: return createAppendParameterCS();
+			case 3: return createBufferStatementCS();
+			case 4: return createCheckStatementCS();
+			case 5: return createDeclareStatementCS();
+			case 6: return createDirectionCS();
+			case 7: return createGuardParameterBindingCS();
+			case 8: return createGuardParameterCS();
+			case 9: return createLoopParameterBindingCS();
+			case 10: return createMappingCS();
+			case 11: return createMappingCallCS();
+			case 12: return createMappingLoopCS();
+			case 16: return createNewStatementCS();
+			case 18: return createParamDeclarationCS();
+			case 19: return createQueryCS();
+			case 20: return createSetStatementCS();
+			case 21: return createSimpleParameterBindingCS();
+			case 22: return createSimpleParameterCS();
+			case 24: return createTopLevelCS();
+			case 25: return createTransformationCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

@@ -50,6 +50,15 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  */
 public class TransformationCSImpl extends AbstractTransformationCSImpl implements TransformationCS {
 	/**
+	 * The number of structural features of the '<em>Transformation CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TRANSFORMATION_CS_FEATURE_COUNT = AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 5;
+
+	/**
 	 * The cached value of the '{@link #getOwnedModelDecls() <em>Owned Model Decls</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -126,7 +135,7 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	@Override
 	public EList<ModelDeclCS> getOwnedModelDecls() {
 		if (ownedModelDecls == null) {
-			ownedModelDecls = new EObjectContainmentEList<ModelDeclCS>(ModelDeclCS.class, this, QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_MODEL_DECLS);
+			ownedModelDecls = new EObjectContainmentEList<ModelDeclCS>(ModelDeclCS.class, this, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 0);
 		}
 		return ownedModelDecls;
 	}
@@ -139,7 +148,7 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	@Override
 	public EList<Transformation> getExtends() {
 		if (extends_ == null) {
-			extends_ = new EObjectResolvingEList<Transformation>(Transformation.class, this, QVTrelationCSPackage.TRANSFORMATION_CS__EXTENDS);
+			extends_ = new EObjectResolvingEList<Transformation>(Transformation.class, this, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1);
 		}
 		return extends_;
 	}
@@ -152,7 +161,7 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	@Override
 	public EList<KeyDeclCS> getOwnedKeyDecls() {
 		if (ownedKeyDecls == null) {
-			ownedKeyDecls = new EObjectContainmentEList<KeyDeclCS>(KeyDeclCS.class, this, QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_KEY_DECLS);
+			ownedKeyDecls = new EObjectContainmentEList<KeyDeclCS>(KeyDeclCS.class, this, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2);
 		}
 		return ownedKeyDecls;
 	}
@@ -165,7 +174,7 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	@Override
 	public EList<QueryCS> getOwnedQueries() {
 		if (ownedQueries == null) {
-			ownedQueries = new EObjectContainmentEList<QueryCS>(QueryCS.class, this, QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_QUERIES);
+			ownedQueries = new EObjectContainmentEList<QueryCS>(QueryCS.class, this, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 3);
 		}
 		return ownedQueries;
 	}
@@ -178,7 +187,7 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	@Override
 	public EList<RelationCS> getOwnedRelations() {
 		if (ownedRelations == null) {
-			ownedRelations = new EObjectContainmentEList<RelationCS>(RelationCS.class, this, QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_RELATIONS);
+			ownedRelations = new EObjectContainmentEList<RelationCS>(RelationCS.class, this, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 4);
 		}
 		return ownedRelations;
 	}
@@ -191,13 +200,13 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_MODEL_DECLS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedModelDecls()).basicRemove(otherEnd, msgs);
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_KEY_DECLS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getOwnedKeyDecls()).basicRemove(otherEnd, msgs);
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_QUERIES:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 3:
 				return ((InternalEList<?>)getOwnedQueries()).basicRemove(otherEnd, msgs);
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_RELATIONS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 4:
 				return ((InternalEList<?>)getOwnedRelations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -211,15 +220,15 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_MODEL_DECLS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 0:
 				return getOwnedModelDecls();
-			case QVTrelationCSPackage.TRANSFORMATION_CS__EXTENDS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1:
 				return getExtends();
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_KEY_DECLS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2:
 				return getOwnedKeyDecls();
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_QUERIES:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 3:
 				return getOwnedQueries();
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_RELATIONS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 4:
 				return getOwnedRelations();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -234,23 +243,23 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_MODEL_DECLS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 0:
 				getOwnedModelDecls().clear();
 				getOwnedModelDecls().addAll((Collection<? extends ModelDeclCS>)newValue);
 				return;
-			case QVTrelationCSPackage.TRANSFORMATION_CS__EXTENDS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1:
 				getExtends().clear();
 				getExtends().addAll((Collection<? extends Transformation>)newValue);
 				return;
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_KEY_DECLS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2:
 				getOwnedKeyDecls().clear();
 				getOwnedKeyDecls().addAll((Collection<? extends KeyDeclCS>)newValue);
 				return;
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_QUERIES:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 3:
 				getOwnedQueries().clear();
 				getOwnedQueries().addAll((Collection<? extends QueryCS>)newValue);
 				return;
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_RELATIONS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 4:
 				getOwnedRelations().clear();
 				getOwnedRelations().addAll((Collection<? extends RelationCS>)newValue);
 				return;
@@ -266,19 +275,19 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_MODEL_DECLS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 0:
 				getOwnedModelDecls().clear();
 				return;
-			case QVTrelationCSPackage.TRANSFORMATION_CS__EXTENDS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1:
 				getExtends().clear();
 				return;
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_KEY_DECLS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2:
 				getOwnedKeyDecls().clear();
 				return;
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_QUERIES:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 3:
 				getOwnedQueries().clear();
 				return;
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_RELATIONS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 4:
 				getOwnedRelations().clear();
 				return;
 		}
@@ -293,15 +302,15 @@ public class TransformationCSImpl extends AbstractTransformationCSImpl implement
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_MODEL_DECLS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 0:
 				return ownedModelDecls != null && !ownedModelDecls.isEmpty();
-			case QVTrelationCSPackage.TRANSFORMATION_CS__EXTENDS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1:
 				return extends_ != null && !extends_.isEmpty();
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_KEY_DECLS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2:
 				return ownedKeyDecls != null && !ownedKeyDecls.isEmpty();
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_QUERIES:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 3:
 				return ownedQueries != null && !ownedQueries.isEmpty();
-			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_RELATIONS:
+			case AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 4:
 				return ownedRelations != null && !ownedRelations.isEmpty();
 		}
 		return super.eIsSet(featureID);

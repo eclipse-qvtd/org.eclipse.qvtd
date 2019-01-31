@@ -45,6 +45,14 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  */
 public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferStatementCS {
 	/**
+	 * The number of structural features of the '<em>Buffer Statement CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BUFFER_STATEMENT_CS_FEATURE_COUNT = TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4;
+	/**
 	 * The default value of the '{@link #isIsStrict() <em>Is Strict</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -148,7 +156,7 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 		boolean oldIsStrict = isStrict;
 		isStrict = newIsStrict;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.BUFFER_STATEMENT_CS__IS_STRICT, oldIsStrict, isStrict));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0, oldIsStrict, isStrict));
 	}
 
 	/**
@@ -170,7 +178,7 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 		ExpCS oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -186,14 +194,14 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -216,7 +224,7 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 		Integer oldFirstPass = firstPass;
 		firstPass = newFirstPass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.BUFFER_STATEMENT_CS__FIRST_PASS, oldFirstPass, firstPass));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2, oldFirstPass, firstPass));
 	}
 
 	/**
@@ -239,7 +247,7 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 		Integer oldLastPass = lastPass;
 		lastPass = newLastPass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.BUFFER_STATEMENT_CS__LAST_PASS, oldLastPass, lastPass));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3, oldLastPass, lastPass));
 	}
 
 	/**
@@ -260,7 +268,7 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -274,13 +282,13 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__IS_STRICT:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return isIsStrict();
-			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return getOwnedExpression();
-			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__FIRST_PASS:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return getFirstPass();
-			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__LAST_PASS:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return getLastPass();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -294,16 +302,16 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__IS_STRICT:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				setIsStrict((Boolean)newValue);
 				return;
-			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedExpression((ExpCS)newValue);
 				return;
-			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__FIRST_PASS:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
 				setFirstPass((Integer)newValue);
 				return;
-			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__LAST_PASS:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				setLastPass((Integer)newValue);
 				return;
 		}
@@ -318,16 +326,16 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__IS_STRICT:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				setIsStrict(IS_STRICT_EDEFAULT);
 				return;
-			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedExpression((ExpCS)null);
 				return;
-			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__FIRST_PASS:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
 				setFirstPass(FIRST_PASS_EDEFAULT);
 				return;
-			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__LAST_PASS:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				setLastPass(LAST_PASS_EDEFAULT);
 				return;
 		}
@@ -342,13 +350,13 @@ public class BufferStatementCSImpl extends TypedElementCSImpl implements BufferS
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__IS_STRICT:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return isStrict != IS_STRICT_EDEFAULT;
-			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__OWNED_EXPRESSION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return ownedExpression != null;
-			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__FIRST_PASS:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return FIRST_PASS_EDEFAULT == null ? firstPass != null : !FIRST_PASS_EDEFAULT.equals(firstPass);
-			case QVTimperativeCSPackage.BUFFER_STATEMENT_CS__LAST_PASS:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return LAST_PASS_EDEFAULT == null ? lastPass != null : !LAST_PASS_EDEFAULT.equals(lastPass);
 		}
 		return super.eIsSet(featureID);

@@ -30,6 +30,15 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
  */
 public abstract class MappingParameterCSImpl extends TypedElementCSImpl implements MappingParameterCS {
 	/**
+	 * The number of structural features of the '<em>Mapping Parameter CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_PARAMETER_CS_FEATURE_COUNT = TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

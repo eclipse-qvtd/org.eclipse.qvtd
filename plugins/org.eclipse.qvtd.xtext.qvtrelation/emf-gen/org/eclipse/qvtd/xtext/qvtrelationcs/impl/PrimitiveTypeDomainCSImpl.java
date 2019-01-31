@@ -39,6 +39,14 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  */
 public class PrimitiveTypeDomainCSImpl extends AbstractDomainCSImpl implements PrimitiveTypeDomainCS {
 	/**
+	 * The number of structural features of the '<em>Primitive Type Domain CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PRIMITIVE_TYPE_DOMAIN_CS_FEATURE_COUNT = AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 1;
+	/**
 	 * The cached value of the '{@link #getOwnedPatterns() <em>Owned Patterns</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -74,7 +82,7 @@ public class PrimitiveTypeDomainCSImpl extends AbstractDomainCSImpl implements P
 	@Override
 	public EList<PrimitiveTypeDomainPatternCS> getOwnedPatterns() {
 		if (ownedPatterns == null) {
-			ownedPatterns = new EObjectContainmentEList<PrimitiveTypeDomainPatternCS>(PrimitiveTypeDomainPatternCS.class, this, QVTrelationCSPackage.PRIMITIVE_TYPE_DOMAIN_CS__OWNED_PATTERNS);
+			ownedPatterns = new EObjectContainmentEList<PrimitiveTypeDomainPatternCS>(PrimitiveTypeDomainPatternCS.class, this, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0);
 		}
 		return ownedPatterns;
 	}
@@ -87,7 +95,7 @@ public class PrimitiveTypeDomainCSImpl extends AbstractDomainCSImpl implements P
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PRIMITIVE_TYPE_DOMAIN_CS__OWNED_PATTERNS:
+			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedPatterns()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -101,7 +109,7 @@ public class PrimitiveTypeDomainCSImpl extends AbstractDomainCSImpl implements P
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PRIMITIVE_TYPE_DOMAIN_CS__OWNED_PATTERNS:
+			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0:
 				return getOwnedPatterns();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -116,7 +124,7 @@ public class PrimitiveTypeDomainCSImpl extends AbstractDomainCSImpl implements P
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PRIMITIVE_TYPE_DOMAIN_CS__OWNED_PATTERNS:
+			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0:
 				getOwnedPatterns().clear();
 				getOwnedPatterns().addAll((Collection<? extends PrimitiveTypeDomainPatternCS>)newValue);
 				return;
@@ -132,7 +140,7 @@ public class PrimitiveTypeDomainCSImpl extends AbstractDomainCSImpl implements P
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PRIMITIVE_TYPE_DOMAIN_CS__OWNED_PATTERNS:
+			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0:
 				getOwnedPatterns().clear();
 				return;
 		}
@@ -147,7 +155,7 @@ public class PrimitiveTypeDomainCSImpl extends AbstractDomainCSImpl implements P
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PRIMITIVE_TYPE_DOMAIN_CS__OWNED_PATTERNS:
+			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0:
 				return ownedPatterns != null && !ownedPatterns.isEmpty();
 		}
 		return super.eIsSet(featureID);

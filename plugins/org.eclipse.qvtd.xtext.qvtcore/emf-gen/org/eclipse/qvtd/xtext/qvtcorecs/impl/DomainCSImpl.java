@@ -49,6 +49,15 @@ import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;
  */
 public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	/**
+	 * The number of structural features of the '<em>Domain CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DOMAIN_CS_FEATURE_COUNT = AreaCSImpl.AREA_CS_FEATURE_COUNT + 3;
+
+	/**
 	 * The default value of the '{@link #isIsCheck() <em>Is Check</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -137,7 +146,7 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 		boolean oldIsCheck = isCheck;
 		isCheck = newIsCheck;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.DOMAIN_CS__IS_CHECK, oldIsCheck, isCheck));
+			eNotify(new ENotificationImpl(this, Notification.SET, AreaCSImpl.AREA_CS_FEATURE_COUNT + 0, oldIsCheck, isCheck));
 	}
 
 	/**
@@ -160,7 +169,7 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 		boolean oldIsEnforce = isEnforce;
 		isEnforce = newIsEnforce;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.DOMAIN_CS__IS_ENFORCE, oldIsEnforce, isEnforce));
+			eNotify(new ENotificationImpl(this, Notification.SET, AreaCSImpl.AREA_CS_FEATURE_COUNT + 1, oldIsEnforce, isEnforce));
 	}
 
 	/**
@@ -175,7 +184,7 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 			direction = (TypedModel)eResolveProxy(oldDirection);
 			if (direction != oldDirection) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTcoreCSPackage.DOMAIN_CS__DIRECTION, oldDirection, direction));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AreaCSImpl.AREA_CS_FEATURE_COUNT + 2, oldDirection, direction));
 			}
 		}
 		return direction;
@@ -200,7 +209,7 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 		TypedModel oldDirection = direction;
 		direction = newDirection;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.DOMAIN_CS__DIRECTION, oldDirection, direction));
+			eNotify(new ENotificationImpl(this, Notification.SET, AreaCSImpl.AREA_CS_FEATURE_COUNT + 2, oldDirection, direction));
 	}
 
 	/**
@@ -221,11 +230,11 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcoreCSPackage.DOMAIN_CS__IS_CHECK:
+			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 0:
 				return isIsCheck();
-			case QVTcoreCSPackage.DOMAIN_CS__IS_ENFORCE:
+			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 1:
 				return isIsEnforce();
-			case QVTcoreCSPackage.DOMAIN_CS__DIRECTION:
+			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 2:
 				if (resolve) return getDirection();
 				return basicGetDirection();
 		}
@@ -240,13 +249,13 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcoreCSPackage.DOMAIN_CS__IS_CHECK:
+			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 0:
 				setIsCheck((Boolean)newValue);
 				return;
-			case QVTcoreCSPackage.DOMAIN_CS__IS_ENFORCE:
+			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 1:
 				setIsEnforce((Boolean)newValue);
 				return;
-			case QVTcoreCSPackage.DOMAIN_CS__DIRECTION:
+			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 2:
 				setDirection((TypedModel)newValue);
 				return;
 		}
@@ -261,13 +270,13 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.DOMAIN_CS__IS_CHECK:
+			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 0:
 				setIsCheck(IS_CHECK_EDEFAULT);
 				return;
-			case QVTcoreCSPackage.DOMAIN_CS__IS_ENFORCE:
+			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 1:
 				setIsEnforce(IS_ENFORCE_EDEFAULT);
 				return;
-			case QVTcoreCSPackage.DOMAIN_CS__DIRECTION:
+			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 2:
 				setDirection((TypedModel)null);
 				return;
 		}
@@ -282,11 +291,11 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.DOMAIN_CS__IS_CHECK:
+			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 0:
 				return isCheck != IS_CHECK_EDEFAULT;
-			case QVTcoreCSPackage.DOMAIN_CS__IS_ENFORCE:
+			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 1:
 				return isEnforce != IS_ENFORCE_EDEFAULT;
-			case QVTcoreCSPackage.DOMAIN_CS__DIRECTION:
+			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 2:
 				return direction != null;
 		}
 		return super.eIsSet(featureID);

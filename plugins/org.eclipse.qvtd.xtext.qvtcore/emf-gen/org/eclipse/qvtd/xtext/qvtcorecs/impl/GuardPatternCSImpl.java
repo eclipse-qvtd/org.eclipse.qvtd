@@ -51,6 +51,14 @@ import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;
  */
 public class GuardPatternCSImpl extends PatternCSImpl implements GuardPatternCS {
 	/**
+	 * The number of structural features of the '<em>Guard Pattern CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int GUARD_PATTERN_CS_FEATURE_COUNT = PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 1;
+	/**
 	 * The cached value of the '{@link #getOwnedPredicates() <em>Owned Predicates</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -87,7 +95,7 @@ public class GuardPatternCSImpl extends PatternCSImpl implements GuardPatternCS 
 	@Override
 	public EList<PredicateCS> getOwnedPredicates() {
 		if (ownedPredicates == null) {
-			ownedPredicates = new EObjectContainmentEList<PredicateCS>(PredicateCS.class, this, QVTcoreCSPackage.GUARD_PATTERN_CS__OWNED_PREDICATES);
+			ownedPredicates = new EObjectContainmentEList<PredicateCS>(PredicateCS.class, this, PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0);
 		}
 		return ownedPredicates;
 	}
@@ -100,7 +108,7 @@ public class GuardPatternCSImpl extends PatternCSImpl implements GuardPatternCS 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcoreCSPackage.GUARD_PATTERN_CS__OWNED_PREDICATES:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedPredicates()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -114,7 +122,7 @@ public class GuardPatternCSImpl extends PatternCSImpl implements GuardPatternCS 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcoreCSPackage.GUARD_PATTERN_CS__OWNED_PREDICATES:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
 				return getOwnedPredicates();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -129,7 +137,7 @@ public class GuardPatternCSImpl extends PatternCSImpl implements GuardPatternCS 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcoreCSPackage.GUARD_PATTERN_CS__OWNED_PREDICATES:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
 				getOwnedPredicates().clear();
 				getOwnedPredicates().addAll((Collection<? extends PredicateCS>)newValue);
 				return;
@@ -145,7 +153,7 @@ public class GuardPatternCSImpl extends PatternCSImpl implements GuardPatternCS 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.GUARD_PATTERN_CS__OWNED_PREDICATES:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
 				getOwnedPredicates().clear();
 				return;
 		}
@@ -160,7 +168,7 @@ public class GuardPatternCSImpl extends PatternCSImpl implements GuardPatternCS 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.GUARD_PATTERN_CS__OWNED_PREDICATES:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
 				return ownedPredicates != null && !ownedPredicates.isEmpty();
 		}
 		return super.eIsSet(featureID);

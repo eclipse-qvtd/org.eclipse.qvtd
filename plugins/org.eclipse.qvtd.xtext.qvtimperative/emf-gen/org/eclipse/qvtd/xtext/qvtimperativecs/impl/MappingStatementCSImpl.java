@@ -23,6 +23,15 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
  */
 public abstract class MappingStatementCSImpl extends StatementCSImpl implements MappingStatementCS {
 	/**
+	 * The number of structural features of the '<em>Mapping Statement CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int MAPPING_STATEMENT_CS_FEATURE_COUNT = StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

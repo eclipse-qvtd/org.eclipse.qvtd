@@ -72,8 +72,8 @@ public class QVTbaseCSFactoryImpl extends EFactoryImpl implements QVTbaseCSFacto
 	{
 		switch (eClass.getClassifierID())
 		{
-			case QVTbaseCSPackage.JAVA_CLASS_CS: return createJavaClassCS();
-			case QVTbaseCSPackage.QUALIFIED_PACKAGE_CS: return createQualifiedPackageCS();
+			case 1: return createJavaClassCS();
+			case 3: return createQualifiedPackageCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}

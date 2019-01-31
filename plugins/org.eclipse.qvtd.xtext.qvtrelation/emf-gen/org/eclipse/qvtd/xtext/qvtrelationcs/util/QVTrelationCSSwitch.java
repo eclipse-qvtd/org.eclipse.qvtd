@@ -110,7 +110,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case QVTrelationCSPackage.ABSTRACT_DOMAIN_CS: {
+			case 0: {
 				AbstractDomainCS abstractDomainCS = (AbstractDomainCS)theEObject;
 				T result = caseAbstractDomainCS(abstractDomainCS);
 				if (result == null) result = caseModelElementCS(abstractDomainCS);
@@ -119,7 +119,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS: {
+			case 1: {
 				CollectionTemplateCS collectionTemplateCS = (CollectionTemplateCS)theEObject;
 				T result = caseCollectionTemplateCS(collectionTemplateCS);
 				if (result == null) result = caseTemplateCS(collectionTemplateCS);
@@ -132,7 +132,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.DEFAULT_VALUE_CS: {
+			case 2: {
 				DefaultValueCS defaultValueCS = (DefaultValueCS)theEObject;
 				T result = caseDefaultValueCS(defaultValueCS);
 				if (result == null) result = caseModelElementCS(defaultValueCS);
@@ -141,7 +141,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.DOMAIN_CS: {
+			case 3: {
 				DomainCS domainCS = (DomainCS)theEObject;
 				T result = caseDomainCS(domainCS);
 				if (result == null) result = caseAbstractDomainCS(domainCS);
@@ -151,7 +151,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.DOMAIN_PATTERN_CS: {
+			case 4: {
 				DomainPatternCS domainPatternCS = (DomainPatternCS)theEObject;
 				T result = caseDomainPatternCS(domainPatternCS);
 				if (result == null) result = caseModelElementCS(domainPatternCS);
@@ -160,7 +160,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.ELEMENT_TEMPLATE_CS: {
+			case 5: {
 				ElementTemplateCS elementTemplateCS = (ElementTemplateCS)theEObject;
 				T result = caseElementTemplateCS(elementTemplateCS);
 				if (result == null) result = caseTemplateVariableCS(elementTemplateCS);
@@ -171,7 +171,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.KEY_DECL_CS: {
+			case 6: {
 				KeyDeclCS keyDeclCS = (KeyDeclCS)theEObject;
 				T result = caseKeyDeclCS(keyDeclCS);
 				if (result == null) result = caseModelElementCS(keyDeclCS);
@@ -180,7 +180,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.MODEL_DECL_CS: {
+			case 7: {
 				ModelDeclCS modelDeclCS = (ModelDeclCS)theEObject;
 				T result = caseModelDeclCS(modelDeclCS);
 				if (result == null) result = caseNamedElementCS(modelDeclCS);
@@ -190,7 +190,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.OBJECT_TEMPLATE_CS: {
+			case 8: {
 				ObjectTemplateCS objectTemplateCS = (ObjectTemplateCS)theEObject;
 				T result = caseObjectTemplateCS(objectTemplateCS);
 				if (result == null) result = caseTemplateCS(objectTemplateCS);
@@ -203,7 +203,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.PARAM_DECLARATION_CS: {
+			case 9: {
 				ParamDeclarationCS paramDeclarationCS = (ParamDeclarationCS)theEObject;
 				T result = caseParamDeclarationCS(paramDeclarationCS);
 				if (result == null) result = caseTypedElementCS(paramDeclarationCS);
@@ -214,7 +214,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.PATTERN_CS: {
+			case 10: {
 				PatternCS patternCS = (PatternCS)theEObject;
 				T result = casePatternCS(patternCS);
 				if (result == null) result = caseModelElementCS(patternCS);
@@ -223,7 +223,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.PREDICATE_CS: {
+			case 11: {
 				PredicateCS predicateCS = (PredicateCS)theEObject;
 				T result = casePredicateCS(predicateCS);
 				if (result == null) result = caseModelElementCS(predicateCS);
@@ -232,7 +232,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.PRIMITIVE_TYPE_DOMAIN_CS: {
+			case 12: {
 				PrimitiveTypeDomainCS primitiveTypeDomainCS = (PrimitiveTypeDomainCS)theEObject;
 				T result = casePrimitiveTypeDomainCS(primitiveTypeDomainCS);
 				if (result == null) result = caseAbstractDomainCS(primitiveTypeDomainCS);
@@ -242,7 +242,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.PRIMITIVE_TYPE_DOMAIN_PATTERN_CS: {
+			case 13: {
 				PrimitiveTypeDomainPatternCS primitiveTypeDomainPatternCS = (PrimitiveTypeDomainPatternCS)theEObject;
 				T result = casePrimitiveTypeDomainPatternCS(primitiveTypeDomainPatternCS);
 				if (result == null) result = caseTemplateVariableCS(primitiveTypeDomainPatternCS);
@@ -253,7 +253,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS: {
+			case 14: {
 				PropertyTemplateCS propertyTemplateCS = (PropertyTemplateCS)theEObject;
 				T result = casePropertyTemplateCS(propertyTemplateCS);
 				if (result == null) result = caseModelElementCS(propertyTemplateCS);
@@ -262,7 +262,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.QUERY_CS: {
+			case 15: {
 				QueryCS queryCS = (QueryCS)theEObject;
 				T result = caseQueryCS(queryCS);
 				if (result == null) result = caseTypedElementCS(queryCS);
@@ -274,7 +274,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.RELATION_CS: {
+			case 16: {
 				RelationCS relationCS = (RelationCS)theEObject;
 				T result = caseRelationCS(relationCS);
 				if (result == null) result = caseNamedElementCS(relationCS);
@@ -284,7 +284,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.TEMPLATE_CS: {
+			case 17: {
 				TemplateCS templateCS = (TemplateCS)theEObject;
 				T result = caseTemplateCS(templateCS);
 				if (result == null) result = caseExpCS(templateCS);
@@ -296,7 +296,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.TEMPLATE_VARIABLE_CS: {
+			case 18: {
 				TemplateVariableCS templateVariableCS = (TemplateVariableCS)theEObject;
 				T result = caseTemplateVariableCS(templateVariableCS);
 				if (result == null) result = caseNamedElementCS(templateVariableCS);
@@ -306,7 +306,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.TOP_LEVEL_CS: {
+			case 19: {
 				TopLevelCS topLevelCS = (TopLevelCS)theEObject;
 				T result = caseTopLevelCS(topLevelCS);
 				if (result == null) result = caseRootPackageCS(topLevelCS);
@@ -318,7 +318,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.TRANSFORMATION_CS: {
+			case 20: {
 				TransformationCS transformationCS = (TransformationCS)theEObject;
 				T result = caseTransformationCS(transformationCS);
 				if (result == null) result = caseAbstractTransformationCS(transformationCS);
@@ -332,7 +332,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.VAR_DECLARATION_CS: {
+			case 21: {
 				VarDeclarationCS varDeclarationCS = (VarDeclarationCS)theEObject;
 				T result = caseVarDeclarationCS(varDeclarationCS);
 				if (result == null) result = caseModelElementCS(varDeclarationCS);
@@ -341,7 +341,7 @@ public class QVTrelationCSSwitch<@Nullable T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTrelationCSPackage.VAR_DECLARATION_ID_CS: {
+			case 22: {
 				VarDeclarationIdCS varDeclarationIdCS = (VarDeclarationIdCS)theEObject;
 				T result = caseVarDeclarationIdCS(varDeclarationIdCS);
 				if (result == null) result = caseNamedElementCS(varDeclarationIdCS);

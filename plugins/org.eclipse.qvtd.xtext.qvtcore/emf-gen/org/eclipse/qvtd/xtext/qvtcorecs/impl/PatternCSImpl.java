@@ -47,6 +47,14 @@ import org.eclipse.qvtd.xtext.qvtcorecs.UnrealizedVariableCS;
  */
 public abstract class PatternCSImpl extends ModelElementCSImpl implements PatternCS {
 	/**
+	 * The number of structural features of the '<em>Pattern CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PATTERN_CS_FEATURE_COUNT = ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
+	/**
 	 * The cached value of the '{@link #getOwnedUnrealizedVariables() <em>Owned Unrealized Variables</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,7 +91,7 @@ public abstract class PatternCSImpl extends ModelElementCSImpl implements Patter
 	@Override
 	public EList<UnrealizedVariableCS> getOwnedUnrealizedVariables() {
 		if (ownedUnrealizedVariables == null) {
-			ownedUnrealizedVariables = new EObjectContainmentEList<UnrealizedVariableCS>(UnrealizedVariableCS.class, this, QVTcoreCSPackage.PATTERN_CS__OWNED_UNREALIZED_VARIABLES);
+			ownedUnrealizedVariables = new EObjectContainmentEList<UnrealizedVariableCS>(UnrealizedVariableCS.class, this, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 		}
 		return ownedUnrealizedVariables;
 	}
@@ -96,7 +104,7 @@ public abstract class PatternCSImpl extends ModelElementCSImpl implements Patter
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcoreCSPackage.PATTERN_CS__OWNED_UNREALIZED_VARIABLES:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedUnrealizedVariables()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -110,7 +118,7 @@ public abstract class PatternCSImpl extends ModelElementCSImpl implements Patter
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcoreCSPackage.PATTERN_CS__OWNED_UNREALIZED_VARIABLES:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return getOwnedUnrealizedVariables();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -125,7 +133,7 @@ public abstract class PatternCSImpl extends ModelElementCSImpl implements Patter
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcoreCSPackage.PATTERN_CS__OWNED_UNREALIZED_VARIABLES:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				getOwnedUnrealizedVariables().clear();
 				getOwnedUnrealizedVariables().addAll((Collection<? extends UnrealizedVariableCS>)newValue);
 				return;
@@ -141,7 +149,7 @@ public abstract class PatternCSImpl extends ModelElementCSImpl implements Patter
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.PATTERN_CS__OWNED_UNREALIZED_VARIABLES:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				getOwnedUnrealizedVariables().clear();
 				return;
 		}
@@ -156,7 +164,7 @@ public abstract class PatternCSImpl extends ModelElementCSImpl implements Patter
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.PATTERN_CS__OWNED_UNREALIZED_VARIABLES:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return ownedUnrealizedVariables != null && !ownedUnrealizedVariables.isEmpty();
 		}
 		return super.eIsSet(featureID);

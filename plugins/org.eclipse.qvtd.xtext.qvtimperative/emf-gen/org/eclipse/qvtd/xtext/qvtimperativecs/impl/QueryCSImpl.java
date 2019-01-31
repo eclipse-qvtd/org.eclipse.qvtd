@@ -33,6 +33,7 @@ import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 
+import org.eclipse.ocl.xtext.basecs.impl.ElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
 
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
@@ -43,7 +44,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 import org.eclipse.qvtd.xtext.qvtbasecs.JavaClassCS;
 import org.eclipse.qvtd.xtext.qvtbasecs.JavaImplementationCS;
-import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QueryCS;
@@ -69,6 +69,15 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * @generated
  */
 public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
+	/**
+	 * The number of structural features of the '<em>Query CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int QUERY_CS_FEATURE_COUNT = TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 6;
+
 	/**
 	 * The cached value of the '{@link #getImplementation() <em>Implementation</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -160,7 +169,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 			implementation = (JavaClassCS)eResolveProxy(oldImplementation);
 			if (implementation != oldImplementation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativeCSPackage.QUERY_CS__IMPLEMENTATION, oldImplementation, implementation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0, oldImplementation, implementation));
 			}
 		}
 		return implementation;
@@ -185,7 +194,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		JavaClassCS oldImplementation = implementation;
 		implementation = newImplementation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.QUERY_CS__IMPLEMENTATION, oldImplementation, implementation));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0, oldImplementation, implementation));
 	}
 
 	/**
@@ -207,7 +216,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		PathNameCS oldOwnedPathName = ownedPathName;
 		ownedPathName = newOwnedPathName;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.QUERY_CS__OWNED_PATH_NAME, oldOwnedPathName, newOwnedPathName);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1, oldOwnedPathName, newOwnedPathName);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -223,14 +232,14 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		if (newOwnedPathName != ownedPathName) {
 			NotificationChain msgs = null;
 			if (ownedPathName != null)
-				msgs = ((InternalEObject)ownedPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.QUERY_CS__OWNED_PATH_NAME, null, msgs);
+				msgs = ((InternalEObject)ownedPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			if (newOwnedPathName != null)
-				msgs = ((InternalEObject)newOwnedPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.QUERY_CS__OWNED_PATH_NAME, null, msgs);
+				msgs = ((InternalEObject)newOwnedPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetOwnedPathName(newOwnedPathName, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.QUERY_CS__OWNED_PATH_NAME, newOwnedPathName, newOwnedPathName));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1, newOwnedPathName, newOwnedPathName));
 	}
 
 	/**
@@ -254,7 +263,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public EList<ParamDeclarationCS> getOwnedParameters() {
 		if (ownedParameters == null) {
-			ownedParameters = new EObjectContainmentEList<ParamDeclarationCS>(ParamDeclarationCS.class, this, QVTimperativeCSPackage.QUERY_CS__OWNED_PARAMETERS);
+			ownedParameters = new EObjectContainmentEList<ParamDeclarationCS>(ParamDeclarationCS.class, this, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3);
 		}
 		return ownedParameters;
 	}
@@ -278,7 +287,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		ExpCS oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.QUERY_CS__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -294,14 +303,14 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.QUERY_CS__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.QUERY_CS__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.QUERY_CS__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -324,7 +333,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		boolean oldIsTransient = isTransient;
 		isTransient = newIsTransient;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.QUERY_CS__IS_TRANSIENT, oldIsTransient, isTransient));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 5, oldIsTransient, isTransient));
 	}
 
 	/**
@@ -345,11 +354,11 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.QUERY_CS__OWNED_PATH_NAME:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return basicSetOwnedPathName(null, msgs);
-			case QVTimperativeCSPackage.QUERY_CS__OWNED_PARAMETERS:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return ((InternalEList<?>)getOwnedParameters()).basicRemove(otherEnd, msgs);
-			case QVTimperativeCSPackage.QUERY_CS__OWNED_EXPRESSION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -363,18 +372,18 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.QUERY_CS__IMPLEMENTATION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				if (resolve) return getImplementation();
 				return basicGetImplementation();
-			case QVTimperativeCSPackage.QUERY_CS__OWNED_PATH_NAME:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return getOwnedPathName();
-			case QVTimperativeCSPackage.QUERY_CS__TRANSFORMATION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return getTransformation();
-			case QVTimperativeCSPackage.QUERY_CS__OWNED_PARAMETERS:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return getOwnedParameters();
-			case QVTimperativeCSPackage.QUERY_CS__OWNED_EXPRESSION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4:
 				return getOwnedExpression();
-			case QVTimperativeCSPackage.QUERY_CS__IS_TRANSIENT:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 5:
 				return isIsTransient();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -389,20 +398,20 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.QUERY_CS__IMPLEMENTATION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				setImplementation((JavaClassCS)newValue);
 				return;
-			case QVTimperativeCSPackage.QUERY_CS__OWNED_PATH_NAME:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedPathName((PathNameCS)newValue);
 				return;
-			case QVTimperativeCSPackage.QUERY_CS__OWNED_PARAMETERS:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				getOwnedParameters().clear();
 				getOwnedParameters().addAll((Collection<? extends ParamDeclarationCS>)newValue);
 				return;
-			case QVTimperativeCSPackage.QUERY_CS__OWNED_EXPRESSION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4:
 				setOwnedExpression((ExpCS)newValue);
 				return;
-			case QVTimperativeCSPackage.QUERY_CS__IS_TRANSIENT:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 5:
 				setIsTransient((Boolean)newValue);
 				return;
 		}
@@ -417,19 +426,19 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.QUERY_CS__IMPLEMENTATION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				setImplementation((JavaClassCS)null);
 				return;
-			case QVTimperativeCSPackage.QUERY_CS__OWNED_PATH_NAME:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedPathName((PathNameCS)null);
 				return;
-			case QVTimperativeCSPackage.QUERY_CS__OWNED_PARAMETERS:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				getOwnedParameters().clear();
 				return;
-			case QVTimperativeCSPackage.QUERY_CS__OWNED_EXPRESSION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4:
 				setOwnedExpression((ExpCS)null);
 				return;
-			case QVTimperativeCSPackage.QUERY_CS__IS_TRANSIENT:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 5:
 				setIsTransient(IS_TRANSIENT_EDEFAULT);
 				return;
 		}
@@ -444,17 +453,17 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.QUERY_CS__IMPLEMENTATION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return implementation != null;
-			case QVTimperativeCSPackage.QUERY_CS__OWNED_PATH_NAME:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return ownedPathName != null;
-			case QVTimperativeCSPackage.QUERY_CS__TRANSFORMATION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return getTransformation() != null;
-			case QVTimperativeCSPackage.QUERY_CS__OWNED_PARAMETERS:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return ownedParameters != null && !ownedParameters.isEmpty();
-			case QVTimperativeCSPackage.QUERY_CS__OWNED_EXPRESSION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4:
 				return ownedExpression != null;
-			case QVTimperativeCSPackage.QUERY_CS__IS_TRANSIENT:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 5:
 				return isTransient != IS_TRANSIENT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -469,7 +478,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == JavaImplementationCS.class) {
 			switch (derivedFeatureID) {
-				case QVTimperativeCSPackage.QUERY_CS__IMPLEMENTATION: return QVTbaseCSPackage.JAVA_IMPLEMENTATION_CS__IMPLEMENTATION;
+				case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0: return ElementCSImpl.ELEMENT_CS_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -485,7 +494,7 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == JavaImplementationCS.class) {
 			switch (baseFeatureID) {
-				case QVTbaseCSPackage.JAVA_IMPLEMENTATION_CS__IMPLEMENTATION: return QVTimperativeCSPackage.QUERY_CS__IMPLEMENTATION;
+				case ElementCSImpl.ELEMENT_CS_FEATURE_COUNT + 0: return TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}

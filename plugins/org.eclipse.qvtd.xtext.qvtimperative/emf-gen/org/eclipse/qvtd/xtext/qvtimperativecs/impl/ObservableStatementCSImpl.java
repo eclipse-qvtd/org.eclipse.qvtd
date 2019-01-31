@@ -41,6 +41,14 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
  */
 public abstract class ObservableStatementCSImpl extends StatementCSImpl implements ObservableStatementCS {
 	/**
+	 * The number of structural features of the '<em>Observable Statement CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int OBSERVABLE_STATEMENT_CS_FEATURE_COUNT = StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1;
+	/**
 	 * The cached value of the '{@link #getObservedProperties() <em>Observed Properties</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -77,7 +85,7 @@ public abstract class ObservableStatementCSImpl extends StatementCSImpl implemen
 	@Override
 	public EList<PathNameCS> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, QVTimperativeCSPackage.OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES);
+			observedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0);
 		}
 		return observedProperties;
 	}
@@ -90,7 +98,7 @@ public abstract class ObservableStatementCSImpl extends StatementCSImpl implemen
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getObservedProperties()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -104,7 +112,7 @@ public abstract class ObservableStatementCSImpl extends StatementCSImpl implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
 				return getObservedProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -119,7 +127,7 @@ public abstract class ObservableStatementCSImpl extends StatementCSImpl implemen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends PathNameCS>)newValue);
 				return;
@@ -135,7 +143,7 @@ public abstract class ObservableStatementCSImpl extends StatementCSImpl implemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				return;
 		}
@@ -150,7 +158,7 @@ public abstract class ObservableStatementCSImpl extends StatementCSImpl implemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
 				return observedProperties != null && !observedProperties.isEmpty();
 		}
 		return super.eIsSet(featureID);

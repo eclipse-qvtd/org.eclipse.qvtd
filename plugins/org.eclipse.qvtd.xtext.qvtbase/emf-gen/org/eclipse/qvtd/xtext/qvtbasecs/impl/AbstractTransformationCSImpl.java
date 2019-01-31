@@ -41,6 +41,14 @@ import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
 public abstract class AbstractTransformationCSImpl extends ClassCSImpl implements AbstractTransformationCS
 {
 	/**
+	 * The number of structural features of the '<em>Abstract Transformation CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT = ClassCSImpl.CLASS_CS_FEATURE_COUNT + 1;
+	/**
 	 * The cached value of the '{@link #getOwnedPathName() <em>Owned Path Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -93,7 +101,7 @@ public abstract class AbstractTransformationCSImpl extends ClassCSImpl implement
 		ownedPathName = newOwnedPathName;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTbaseCSPackage.ABSTRACT_TRANSFORMATION_CS__OWNED_PATH_NAME, oldOwnedPathName, newOwnedPathName);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ClassCSImpl.CLASS_CS_FEATURE_COUNT + 0, oldOwnedPathName, newOwnedPathName);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -111,14 +119,14 @@ public abstract class AbstractTransformationCSImpl extends ClassCSImpl implement
 		{
 			NotificationChain msgs = null;
 			if (ownedPathName != null)
-				msgs = ((InternalEObject)ownedPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTbaseCSPackage.ABSTRACT_TRANSFORMATION_CS__OWNED_PATH_NAME, null, msgs);
+				msgs = ((InternalEObject)ownedPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ClassCSImpl.CLASS_CS_FEATURE_COUNT + 0), null, msgs);
 			if (newOwnedPathName != null)
-				msgs = ((InternalEObject)newOwnedPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTbaseCSPackage.ABSTRACT_TRANSFORMATION_CS__OWNED_PATH_NAME, null, msgs);
+				msgs = ((InternalEObject)newOwnedPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ClassCSImpl.CLASS_CS_FEATURE_COUNT + 0), null, msgs);
 			msgs = basicSetOwnedPathName(newOwnedPathName, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTbaseCSPackage.ABSTRACT_TRANSFORMATION_CS__OWNED_PATH_NAME, newOwnedPathName, newOwnedPathName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ClassCSImpl.CLASS_CS_FEATURE_COUNT + 0, newOwnedPathName, newOwnedPathName));
 	}
 
 	/**
@@ -131,7 +139,7 @@ public abstract class AbstractTransformationCSImpl extends ClassCSImpl implement
 	{
 		switch (featureID)
 		{
-			case QVTbaseCSPackage.ABSTRACT_TRANSFORMATION_CS__OWNED_PATH_NAME:
+			case ClassCSImpl.CLASS_CS_FEATURE_COUNT + 0:
 				return basicSetOwnedPathName(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -147,7 +155,7 @@ public abstract class AbstractTransformationCSImpl extends ClassCSImpl implement
 	{
 		switch (featureID)
 		{
-			case QVTbaseCSPackage.ABSTRACT_TRANSFORMATION_CS__OWNED_PATH_NAME:
+			case ClassCSImpl.CLASS_CS_FEATURE_COUNT + 0:
 				return getOwnedPathName();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -163,7 +171,7 @@ public abstract class AbstractTransformationCSImpl extends ClassCSImpl implement
 	{
 		switch (featureID)
 		{
-			case QVTbaseCSPackage.ABSTRACT_TRANSFORMATION_CS__OWNED_PATH_NAME:
+			case ClassCSImpl.CLASS_CS_FEATURE_COUNT + 0:
 				setOwnedPathName((PathNameCS)newValue);
 				return;
 		}
@@ -180,7 +188,7 @@ public abstract class AbstractTransformationCSImpl extends ClassCSImpl implement
 	{
 		switch (featureID)
 		{
-			case QVTbaseCSPackage.ABSTRACT_TRANSFORMATION_CS__OWNED_PATH_NAME:
+			case ClassCSImpl.CLASS_CS_FEATURE_COUNT + 0:
 				setOwnedPathName((PathNameCS)null);
 				return;
 		}
@@ -197,7 +205,7 @@ public abstract class AbstractTransformationCSImpl extends ClassCSImpl implement
 	{
 		switch (featureID)
 		{
-			case QVTbaseCSPackage.ABSTRACT_TRANSFORMATION_CS__OWNED_PATH_NAME:
+			case ClassCSImpl.CLASS_CS_FEATURE_COUNT + 0:
 				return ownedPathName != null;
 		}
 		return super.eIsSet(featureID);

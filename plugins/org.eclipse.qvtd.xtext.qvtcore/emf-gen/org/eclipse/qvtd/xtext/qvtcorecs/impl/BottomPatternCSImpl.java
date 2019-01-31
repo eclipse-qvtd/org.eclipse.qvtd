@@ -55,6 +55,15 @@ import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;
  */
 public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternCS {
 	/**
+	 * The number of structural features of the '<em>Bottom Pattern CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BOTTOM_PATTERN_CS_FEATURE_COUNT = PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 3;
+
+	/**
 	 * The cached value of the '{@link #getOwnedEnforcementOperations() <em>Owned Enforcement Operations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -111,7 +120,7 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public EList<EnforcementOperationCS> getOwnedEnforcementOperations() {
 		if (ownedEnforcementOperations == null) {
-			ownedEnforcementOperations = new EObjectContainmentEList<EnforcementOperationCS>(EnforcementOperationCS.class, this, QVTcoreCSPackage.BOTTOM_PATTERN_CS__OWNED_ENFORCEMENT_OPERATIONS);
+			ownedEnforcementOperations = new EObjectContainmentEList<EnforcementOperationCS>(EnforcementOperationCS.class, this, PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0);
 		}
 		return ownedEnforcementOperations;
 	}
@@ -124,7 +133,7 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public EList<RealizedVariableCS> getOwnedRealizedVariables() {
 		if (ownedRealizedVariables == null) {
-			ownedRealizedVariables = new EObjectContainmentEList<RealizedVariableCS>(RealizedVariableCS.class, this, QVTcoreCSPackage.BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES);
+			ownedRealizedVariables = new EObjectContainmentEList<RealizedVariableCS>(RealizedVariableCS.class, this, PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 1);
 		}
 		return ownedRealizedVariables;
 	}
@@ -137,7 +146,7 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public EList<PredicateOrAssignmentCS> getOwnedConstraints() {
 		if (ownedConstraints == null) {
-			ownedConstraints = new EObjectContainmentEList<PredicateOrAssignmentCS>(PredicateOrAssignmentCS.class, this, QVTcoreCSPackage.BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS);
+			ownedConstraints = new EObjectContainmentEList<PredicateOrAssignmentCS>(PredicateOrAssignmentCS.class, this, PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 2);
 		}
 		return ownedConstraints;
 	}
@@ -150,11 +159,11 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcoreCSPackage.BOTTOM_PATTERN_CS__OWNED_ENFORCEMENT_OPERATIONS:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedEnforcementOperations()).basicRemove(otherEnd, msgs);
-			case QVTcoreCSPackage.BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 1:
 				return ((InternalEList<?>)getOwnedRealizedVariables()).basicRemove(otherEnd, msgs);
-			case QVTcoreCSPackage.BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getOwnedConstraints()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -168,11 +177,11 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcoreCSPackage.BOTTOM_PATTERN_CS__OWNED_ENFORCEMENT_OPERATIONS:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
 				return getOwnedEnforcementOperations();
-			case QVTcoreCSPackage.BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 1:
 				return getOwnedRealizedVariables();
-			case QVTcoreCSPackage.BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 2:
 				return getOwnedConstraints();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -187,15 +196,15 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcoreCSPackage.BOTTOM_PATTERN_CS__OWNED_ENFORCEMENT_OPERATIONS:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
 				getOwnedEnforcementOperations().clear();
 				getOwnedEnforcementOperations().addAll((Collection<? extends EnforcementOperationCS>)newValue);
 				return;
-			case QVTcoreCSPackage.BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 1:
 				getOwnedRealizedVariables().clear();
 				getOwnedRealizedVariables().addAll((Collection<? extends RealizedVariableCS>)newValue);
 				return;
-			case QVTcoreCSPackage.BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 2:
 				getOwnedConstraints().clear();
 				getOwnedConstraints().addAll((Collection<? extends PredicateOrAssignmentCS>)newValue);
 				return;
@@ -211,13 +220,13 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.BOTTOM_PATTERN_CS__OWNED_ENFORCEMENT_OPERATIONS:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
 				getOwnedEnforcementOperations().clear();
 				return;
-			case QVTcoreCSPackage.BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 1:
 				getOwnedRealizedVariables().clear();
 				return;
-			case QVTcoreCSPackage.BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 2:
 				getOwnedConstraints().clear();
 				return;
 		}
@@ -232,11 +241,11 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.BOTTOM_PATTERN_CS__OWNED_ENFORCEMENT_OPERATIONS:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
 				return ownedEnforcementOperations != null && !ownedEnforcementOperations.isEmpty();
-			case QVTcoreCSPackage.BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 1:
 				return ownedRealizedVariables != null && !ownedRealizedVariables.isEmpty();
-			case QVTcoreCSPackage.BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS:
+			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 2:
 				return ownedConstraints != null && !ownedConstraints.isEmpty();
 		}
 		return super.eIsSet(featureID);

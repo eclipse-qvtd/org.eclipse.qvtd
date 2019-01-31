@@ -48,6 +48,15 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  */
 public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	/**
+	 * The number of structural features of the '<em>Key Decl CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int KEY_DECL_CS_FEATURE_COUNT = ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4;
+
+	/**
 	 * The cached value of the '{@link #getOwnedPathName() <em>Owned Path Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -115,7 +124,7 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 		PathNameCS oldOwnedPathName = ownedPathName;
 		ownedPathName = newOwnedPathName;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.KEY_DECL_CS__OWNED_PATH_NAME, oldOwnedPathName, newOwnedPathName);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0, oldOwnedPathName, newOwnedPathName);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -131,14 +140,14 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 		if (newOwnedPathName != ownedPathName) {
 			NotificationChain msgs = null;
 			if (ownedPathName != null)
-				msgs = ((InternalEObject)ownedPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.KEY_DECL_CS__OWNED_PATH_NAME, null, msgs);
+				msgs = ((InternalEObject)ownedPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0), null, msgs);
 			if (newOwnedPathName != null)
-				msgs = ((InternalEObject)newOwnedPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.KEY_DECL_CS__OWNED_PATH_NAME, null, msgs);
+				msgs = ((InternalEObject)newOwnedPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0), null, msgs);
 			msgs = basicSetOwnedPathName(newOwnedPathName, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.KEY_DECL_CS__OWNED_PATH_NAME, newOwnedPathName, newOwnedPathName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0, newOwnedPathName, newOwnedPathName));
 	}
 
 	/**
@@ -149,7 +158,7 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	@Override
 	public EList<Property> getPropertyIds() {
 		if (propertyIds == null) {
-			propertyIds = new EObjectResolvingEList<Property>(Property.class, this, QVTrelationCSPackage.KEY_DECL_CS__PROPERTY_IDS);
+			propertyIds = new EObjectResolvingEList<Property>(Property.class, this, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
 		}
 		return propertyIds;
 	}
@@ -162,7 +171,7 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	@Override
 	public EList<PathNameCS> getOwnedOppositePropertyIds() {
 		if (ownedOppositePropertyIds == null) {
-			ownedOppositePropertyIds = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, QVTrelationCSPackage.KEY_DECL_CS__OWNED_OPPOSITE_PROPERTY_IDS);
+			ownedOppositePropertyIds = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2);
 		}
 		return ownedOppositePropertyIds;
 	}
@@ -175,9 +184,9 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_PATH_NAME:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return basicSetOwnedPathName(null, msgs);
-			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_OPPOSITE_PROPERTY_IDS:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getOwnedOppositePropertyIds()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -191,13 +200,13 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_PATH_NAME:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return getOwnedPathName();
-			case QVTrelationCSPackage.KEY_DECL_CS__PROPERTY_IDS:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return getPropertyIds();
-			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_OPPOSITE_PROPERTY_IDS:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				return getOwnedOppositePropertyIds();
-			case QVTrelationCSPackage.KEY_DECL_CS__CLASS_ID:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				return getClassId();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -212,14 +221,14 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_PATH_NAME:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				setOwnedPathName((PathNameCS)newValue);
 				return;
-			case QVTrelationCSPackage.KEY_DECL_CS__PROPERTY_IDS:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				getPropertyIds().clear();
 				getPropertyIds().addAll((Collection<? extends Property>)newValue);
 				return;
-			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_OPPOSITE_PROPERTY_IDS:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				getOwnedOppositePropertyIds().clear();
 				getOwnedOppositePropertyIds().addAll((Collection<? extends PathNameCS>)newValue);
 				return;
@@ -235,13 +244,13 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_PATH_NAME:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				setOwnedPathName((PathNameCS)null);
 				return;
-			case QVTrelationCSPackage.KEY_DECL_CS__PROPERTY_IDS:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				getPropertyIds().clear();
 				return;
-			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_OPPOSITE_PROPERTY_IDS:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				getOwnedOppositePropertyIds().clear();
 				return;
 		}
@@ -256,13 +265,13 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_PATH_NAME:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return ownedPathName != null;
-			case QVTrelationCSPackage.KEY_DECL_CS__PROPERTY_IDS:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return propertyIds != null && !propertyIds.isEmpty();
-			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_OPPOSITE_PROPERTY_IDS:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				return ownedOppositePropertyIds != null && !ownedOppositePropertyIds.isEmpty();
-			case QVTrelationCSPackage.KEY_DECL_CS__CLASS_ID:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				return getClassId() != null;
 		}
 		return super.eIsSet(featureID);

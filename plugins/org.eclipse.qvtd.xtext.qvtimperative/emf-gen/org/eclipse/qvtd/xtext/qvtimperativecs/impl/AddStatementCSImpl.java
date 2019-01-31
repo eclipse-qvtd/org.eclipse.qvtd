@@ -51,6 +51,15 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  */
 public class AddStatementCSImpl extends MappingStatementCSImpl implements AddStatementCS {
 	/**
+	 * The number of structural features of the '<em>Add Statement CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ADD_STATEMENT_CS_FEATURE_COUNT = MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 3;
+
+	/**
 	 * The cached value of the '{@link #getObservedProperties() <em>Observed Properties</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -107,7 +116,7 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	@Override
 	public EList<PathNameCS> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, QVTimperativeCSPackage.ADD_STATEMENT_CS__OBSERVED_PROPERTIES);
+			observedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0);
 		}
 		return observedProperties;
 	}
@@ -131,7 +140,7 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 		ExpCS oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.ADD_STATEMENT_CS__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -147,14 +156,14 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.ADD_STATEMENT_CS__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.ADD_STATEMENT_CS__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.ADD_STATEMENT_CS__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -169,7 +178,7 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 			targetVariable = (ConnectionVariable)eResolveProxy(oldTargetVariable);
 			if (targetVariable != oldTargetVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativeCSPackage.ADD_STATEMENT_CS__TARGET_VARIABLE, oldTargetVariable, targetVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2, oldTargetVariable, targetVariable));
 			}
 		}
 		return targetVariable;
@@ -194,7 +203,7 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 		ConnectionVariable oldTargetVariable = targetVariable;
 		targetVariable = newTargetVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.ADD_STATEMENT_CS__TARGET_VARIABLE, oldTargetVariable, targetVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2, oldTargetVariable, targetVariable));
 	}
 
 	/**
@@ -205,9 +214,9 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.ADD_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getObservedProperties()).basicRemove(otherEnd, msgs);
-			case QVTimperativeCSPackage.ADD_STATEMENT_CS__OWNED_EXPRESSION:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -221,11 +230,11 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.ADD_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0:
 				return getObservedProperties();
-			case QVTimperativeCSPackage.ADD_STATEMENT_CS__OWNED_EXPRESSION:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1:
 				return getOwnedExpression();
-			case QVTimperativeCSPackage.ADD_STATEMENT_CS__TARGET_VARIABLE:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2:
 				if (resolve) return getTargetVariable();
 				return basicGetTargetVariable();
 		}
@@ -241,14 +250,14 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.ADD_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends PathNameCS>)newValue);
 				return;
-			case QVTimperativeCSPackage.ADD_STATEMENT_CS__OWNED_EXPRESSION:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedExpression((ExpCS)newValue);
 				return;
-			case QVTimperativeCSPackage.ADD_STATEMENT_CS__TARGET_VARIABLE:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2:
 				setTargetVariable((ConnectionVariable)newValue);
 				return;
 		}
@@ -263,13 +272,13 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.ADD_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				return;
-			case QVTimperativeCSPackage.ADD_STATEMENT_CS__OWNED_EXPRESSION:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedExpression((ExpCS)null);
 				return;
-			case QVTimperativeCSPackage.ADD_STATEMENT_CS__TARGET_VARIABLE:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2:
 				setTargetVariable((ConnectionVariable)null);
 				return;
 		}
@@ -284,11 +293,11 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.ADD_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0:
 				return observedProperties != null && !observedProperties.isEmpty();
-			case QVTimperativeCSPackage.ADD_STATEMENT_CS__OWNED_EXPRESSION:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1:
 				return ownedExpression != null;
-			case QVTimperativeCSPackage.ADD_STATEMENT_CS__TARGET_VARIABLE:
+			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2:
 				return targetVariable != null;
 		}
 		return super.eIsSet(featureID);
@@ -303,7 +312,7 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatementCS.class) {
 			switch (derivedFeatureID) {
-				case QVTimperativeCSPackage.ADD_STATEMENT_CS__OBSERVED_PROPERTIES: return QVTimperativeCSPackage.OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES;
+				case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0: return StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -319,7 +328,7 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatementCS.class) {
 			switch (baseFeatureID) {
-				case QVTimperativeCSPackage.OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES: return QVTimperativeCSPackage.ADD_STATEMENT_CS__OBSERVED_PROPERTIES;
+				case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0: return MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}

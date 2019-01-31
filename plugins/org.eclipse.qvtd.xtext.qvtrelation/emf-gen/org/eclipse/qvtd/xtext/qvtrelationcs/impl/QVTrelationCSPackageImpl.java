@@ -17,11 +17,17 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
+import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
+import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
+import org.eclipse.ocl.xtext.basecs.impl.RootPackageCSImpl;
+import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
 import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
+import org.eclipse.ocl.xtext.essentialoclcs.impl.ExpCSImpl;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
+import org.eclipse.qvtd.xtext.qvtbasecs.impl.AbstractTransformationCSImpl;
 import org.eclipse.qvtd.xtext.qvtrelationcs.AbstractDomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS;
@@ -1035,100 +1041,100 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		isCreated = true;
 
 		// Create classes and their features
-		abstractDomainCSEClass = createEClass(ABSTRACT_DOMAIN_CS);
+		abstractDomainCSEClass = createEClass(0);
 
-		collectionTemplateCSEClass = createEClass(COLLECTION_TEMPLATE_CS);
-		createEReference(collectionTemplateCSEClass, COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS);
-		createEReference(collectionTemplateCSEClass, COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER);
+		collectionTemplateCSEClass = createEClass(1);
+		createEReference(collectionTemplateCSEClass, TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0);
+		createEReference(collectionTemplateCSEClass, TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1);
 
-		defaultValueCSEClass = createEClass(DEFAULT_VALUE_CS);
-		createEReference(defaultValueCSEClass, DEFAULT_VALUE_CS__OWNED_INIT_EXPRESSION);
-		createEReference(defaultValueCSEClass, DEFAULT_VALUE_CS__PROPERTY_ID);
+		defaultValueCSEClass = createEClass(2);
+		createEReference(defaultValueCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
+		createEReference(defaultValueCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
 
-		domainCSEClass = createEClass(DOMAIN_CS);
-		createEAttribute(domainCSEClass, DOMAIN_CS__IMPLEMENTED_BY);
-		createEAttribute(domainCSEClass, DOMAIN_CS__IS_CHECKONLY);
-		createEAttribute(domainCSEClass, DOMAIN_CS__IS_ENFORCE);
-		createEReference(domainCSEClass, DOMAIN_CS__MODEL_ID);
-		createEAttribute(domainCSEClass, DOMAIN_CS__IS_REPLACE);
-		createEReference(domainCSEClass, DOMAIN_CS__OWNED_PATTERNS);
-		createEReference(domainCSEClass, DOMAIN_CS__OWNED_DEFAULT_VALUES);
-		createEReference(domainCSEClass, DOMAIN_CS__OWNED_IMPLEMENTED_BY);
+		domainCSEClass = createEClass(3);
+		createEAttribute(domainCSEClass, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0);
+		createEAttribute(domainCSEClass, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 1);
+		createEAttribute(domainCSEClass, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 2);
+		createEReference(domainCSEClass, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 3);
+		createEAttribute(domainCSEClass, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 4);
+		createEReference(domainCSEClass, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 5);
+		createEReference(domainCSEClass, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 6);
+		createEReference(domainCSEClass, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 7);
 
-		domainPatternCSEClass = createEClass(DOMAIN_PATTERN_CS);
-		createEReference(domainPatternCSEClass, DOMAIN_PATTERN_CS__OWNED_TEMPLATE);
+		domainPatternCSEClass = createEClass(4);
+		createEReference(domainPatternCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 
-		elementTemplateCSEClass = createEClass(ELEMENT_TEMPLATE_CS);
-		createEReference(elementTemplateCSEClass, ELEMENT_TEMPLATE_CS__IDENTIFIER);
+		elementTemplateCSEClass = createEClass(5);
+		createEReference(elementTemplateCSEClass, TemplateVariableCSImpl.TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0);
 
-		keyDeclCSEClass = createEClass(KEY_DECL_CS);
-		createEReference(keyDeclCSEClass, KEY_DECL_CS__OWNED_PATH_NAME);
-		createEReference(keyDeclCSEClass, KEY_DECL_CS__PROPERTY_IDS);
-		createEReference(keyDeclCSEClass, KEY_DECL_CS__OWNED_OPPOSITE_PROPERTY_IDS);
-		createEReference(keyDeclCSEClass, KEY_DECL_CS__CLASS_ID);
+		keyDeclCSEClass = createEClass(6);
+		createEReference(keyDeclCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
+		createEReference(keyDeclCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
+		createEReference(keyDeclCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2);
+		createEReference(keyDeclCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3);
 
-		modelDeclCSEClass = createEClass(MODEL_DECL_CS);
-		createEReference(modelDeclCSEClass, MODEL_DECL_CS__METAMODEL_IDS);
-		createEReference(modelDeclCSEClass, MODEL_DECL_CS__DEPENDS_ON);
+		modelDeclCSEClass = createEClass(7);
+		createEReference(modelDeclCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0);
+		createEReference(modelDeclCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1);
 
-		objectTemplateCSEClass = createEClass(OBJECT_TEMPLATE_CS);
-		createEReference(objectTemplateCSEClass, OBJECT_TEMPLATE_CS__OWNED_PROPERTY_TEMPLATES);
+		objectTemplateCSEClass = createEClass(8);
+		createEReference(objectTemplateCSEClass, TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0);
 
-		paramDeclarationCSEClass = createEClass(PARAM_DECLARATION_CS);
+		paramDeclarationCSEClass = createEClass(9);
 
-		patternCSEClass = createEClass(PATTERN_CS);
-		createEReference(patternCSEClass, PATTERN_CS__OWNED_PREDICATES);
+		patternCSEClass = createEClass(10);
+		createEReference(patternCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 
-		predicateCSEClass = createEClass(PREDICATE_CS);
-		createEReference(predicateCSEClass, PREDICATE_CS__OWNED_CONDITION);
+		predicateCSEClass = createEClass(11);
+		createEReference(predicateCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 
-		primitiveTypeDomainCSEClass = createEClass(PRIMITIVE_TYPE_DOMAIN_CS);
-		createEReference(primitiveTypeDomainCSEClass, PRIMITIVE_TYPE_DOMAIN_CS__OWNED_PATTERNS);
+		primitiveTypeDomainCSEClass = createEClass(12);
+		createEReference(primitiveTypeDomainCSEClass, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0);
 
-		primitiveTypeDomainPatternCSEClass = createEClass(PRIMITIVE_TYPE_DOMAIN_PATTERN_CS);
+		primitiveTypeDomainPatternCSEClass = createEClass(13);
 
-		propertyTemplateCSEClass = createEClass(PROPERTY_TEMPLATE_CS);
-		createEReference(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__OWNING_OBJECT_TEMPLATE);
-		createEReference(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__PROPERTY_ID);
-		createEReference(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__OWNED_OPPOSITE_PROPERTY_ID);
-		createEReference(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__OWNED_EXPRESSION);
+		propertyTemplateCSEClass = createEClass(14);
+		createEReference(propertyTemplateCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
+		createEReference(propertyTemplateCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
+		createEReference(propertyTemplateCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2);
+		createEReference(propertyTemplateCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3);
 
-		queryCSEClass = createEClass(QUERY_CS);
-		createEReference(queryCSEClass, QUERY_CS__OWNED_PARAMETERS);
-		createEReference(queryCSEClass, QUERY_CS__OWNED_EXPRESSION);
-		createEAttribute(queryCSEClass, QUERY_CS__IS_TRANSIENT);
+		queryCSEClass = createEClass(15);
+		createEReference(queryCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1);
+		createEReference(queryCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2);
+		createEAttribute(queryCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3);
 
-		relationCSEClass = createEClass(RELATION_CS);
-		createEAttribute(relationCSEClass, RELATION_CS__IS_ABSTRACT);
-		createEAttribute(relationCSEClass, RELATION_CS__IS_TOP);
-		createEReference(relationCSEClass, RELATION_CS__OVERRIDDEN);
-		createEReference(relationCSEClass, RELATION_CS__OWNED_VAR_DECLARATIONS);
-		createEReference(relationCSEClass, RELATION_CS__OWNED_DOMAINS);
-		createEReference(relationCSEClass, RELATION_CS__OWNED_WHEN);
-		createEReference(relationCSEClass, RELATION_CS__OWNED_WHERE);
+		relationCSEClass = createEClass(16);
+		createEAttribute(relationCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0);
+		createEAttribute(relationCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1);
+		createEReference(relationCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2);
+		createEReference(relationCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3);
+		createEReference(relationCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4);
+		createEReference(relationCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5);
+		createEReference(relationCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 6);
 
-		templateCSEClass = createEClass(TEMPLATE_CS);
-		createEReference(templateCSEClass, TEMPLATE_CS__OWNED_GUARD_EXPRESSION);
+		templateCSEClass = createEClass(17);
+		createEReference(templateCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 2);
 
-		templateVariableCSEClass = createEClass(TEMPLATE_VARIABLE_CS);
-		createEReference(templateVariableCSEClass, TEMPLATE_VARIABLE_CS__OWNED_TYPE);
+		templateVariableCSEClass = createEClass(18);
+		createEReference(templateVariableCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0);
 
-		topLevelCSEClass = createEClass(TOP_LEVEL_CS);
-		createEReference(topLevelCSEClass, TOP_LEVEL_CS__OWNED_TRANSFORMATIONS);
+		topLevelCSEClass = createEClass(19);
+		createEReference(topLevelCSEClass, RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 0);
 
-		transformationCSEClass = createEClass(TRANSFORMATION_CS);
-		createEReference(transformationCSEClass, TRANSFORMATION_CS__OWNED_MODEL_DECLS);
-		createEReference(transformationCSEClass, TRANSFORMATION_CS__EXTENDS);
-		createEReference(transformationCSEClass, TRANSFORMATION_CS__OWNED_KEY_DECLS);
-		createEReference(transformationCSEClass, TRANSFORMATION_CS__OWNED_QUERIES);
-		createEReference(transformationCSEClass, TRANSFORMATION_CS__OWNED_RELATIONS);
+		transformationCSEClass = createEClass(20);
+		createEReference(transformationCSEClass, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 0);
+		createEReference(transformationCSEClass, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1);
+		createEReference(transformationCSEClass, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 2);
+		createEReference(transformationCSEClass, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 3);
+		createEReference(transformationCSEClass, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 4);
 
-		varDeclarationCSEClass = createEClass(VAR_DECLARATION_CS);
-		createEReference(varDeclarationCSEClass, VAR_DECLARATION_CS__OWNED_INIT_EXPRESSION);
-		createEReference(varDeclarationCSEClass, VAR_DECLARATION_CS__OWNED_TYPE);
-		createEReference(varDeclarationCSEClass, VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS);
+		varDeclarationCSEClass = createEClass(21);
+		createEReference(varDeclarationCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
+		createEReference(varDeclarationCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
+		createEReference(varDeclarationCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2);
 
-		varDeclarationIdCSEClass = createEClass(VAR_DECLARATION_ID_CS);
+		varDeclarationIdCSEClass = createEClass(22);
 	}
 
 	/**

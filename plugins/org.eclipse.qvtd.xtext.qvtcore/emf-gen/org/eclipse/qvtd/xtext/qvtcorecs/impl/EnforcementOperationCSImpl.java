@@ -51,6 +51,15 @@ import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;
  */
 public class EnforcementOperationCSImpl extends ModelElementCSImpl implements EnforcementOperationCS {
 	/**
+	 * The number of structural features of the '<em>Enforcement Operation CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int ENFORCEMENT_OPERATION_CS_FEATURE_COUNT = ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
+
+	/**
 	 * The default value of the '{@link #isIsDeletion() <em>Is Deletion</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -119,7 +128,7 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 		boolean oldIsDeletion = isDeletion;
 		isDeletion = newIsDeletion;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.ENFORCEMENT_OPERATION_CS__IS_DELETION, oldIsDeletion, isDeletion));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0, oldIsDeletion, isDeletion));
 	}
 
 	/**
@@ -141,7 +150,7 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 		NameExpCS oldOwnedOperationCall = ownedOperationCall;
 		ownedOperationCall = newOwnedOperationCall;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL, oldOwnedOperationCall, newOwnedOperationCall);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1, oldOwnedOperationCall, newOwnedOperationCall);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -157,14 +166,14 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 		if (newOwnedOperationCall != ownedOperationCall) {
 			NotificationChain msgs = null;
 			if (ownedOperationCall != null)
-				msgs = ((InternalEObject)ownedOperationCall).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSPackage.ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL, null, msgs);
+				msgs = ((InternalEObject)ownedOperationCall).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			if (newOwnedOperationCall != null)
-				msgs = ((InternalEObject)newOwnedOperationCall).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSPackage.ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL, null, msgs);
+				msgs = ((InternalEObject)newOwnedOperationCall).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetOwnedOperationCall(newOwnedOperationCall, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL, newOwnedOperationCall, newOwnedOperationCall));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1, newOwnedOperationCall, newOwnedOperationCall));
 	}
 
 	/**
@@ -185,7 +194,7 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcoreCSPackage.ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return basicSetOwnedOperationCall(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -199,9 +208,9 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcoreCSPackage.ENFORCEMENT_OPERATION_CS__IS_DELETION:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return isIsDeletion();
-			case QVTcoreCSPackage.ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return getOwnedOperationCall();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -215,10 +224,10 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcoreCSPackage.ENFORCEMENT_OPERATION_CS__IS_DELETION:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				setIsDeletion((Boolean)newValue);
 				return;
-			case QVTcoreCSPackage.ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedOperationCall((NameExpCS)newValue);
 				return;
 		}
@@ -233,10 +242,10 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.ENFORCEMENT_OPERATION_CS__IS_DELETION:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				setIsDeletion(IS_DELETION_EDEFAULT);
 				return;
-			case QVTcoreCSPackage.ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedOperationCall((NameExpCS)null);
 				return;
 		}
@@ -251,9 +260,9 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.ENFORCEMENT_OPERATION_CS__IS_DELETION:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return isDeletion != IS_DELETION_EDEFAULT;
-			case QVTcoreCSPackage.ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return ownedOperationCall != null;
 		}
 		return super.eIsSet(featureID);

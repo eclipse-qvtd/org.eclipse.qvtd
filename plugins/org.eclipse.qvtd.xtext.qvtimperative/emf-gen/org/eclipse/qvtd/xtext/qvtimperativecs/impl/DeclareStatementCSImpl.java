@@ -52,6 +52,15 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  */
 public class DeclareStatementCSImpl extends TypedElementCSImpl implements DeclareStatementCS {
 	/**
+	 * The number of structural features of the '<em>Declare Statement CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DECLARE_STATEMENT_CS_FEATURE_COUNT = TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3;
+
+	/**
 	 * The cached value of the '{@link #getObservedProperties() <em>Observed Properties</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -118,7 +127,7 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 	@Override
 	public EList<PathNameCS> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OBSERVED_PROPERTIES);
+			observedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0);
 		}
 		return observedProperties;
 	}
@@ -142,7 +151,7 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 		ExpCS oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -158,14 +167,14 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -188,7 +197,7 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 		boolean oldIsCheck = isCheck;
 		isCheck = newIsCheck;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECK, oldIsCheck, isCheck));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2, oldIsCheck, isCheck));
 	}
 
 	/**
@@ -209,9 +218,9 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getObservedProperties()).basicRemove(otherEnd, msgs);
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -225,11 +234,11 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return getObservedProperties();
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return getOwnedExpression();
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECK:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return isIsCheck();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -244,14 +253,14 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends PathNameCS>)newValue);
 				return;
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedExpression((ExpCS)newValue);
 				return;
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECK:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
 				setIsCheck((Boolean)newValue);
 				return;
 		}
@@ -266,13 +275,13 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				return;
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedExpression((ExpCS)null);
 				return;
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECK:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
 				setIsCheck(IS_CHECK_EDEFAULT);
 				return;
 		}
@@ -287,11 +296,11 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OBSERVED_PROPERTIES:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return observedProperties != null && !observedProperties.isEmpty();
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OWNED_EXPRESSION:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return ownedExpression != null;
-			case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__IS_CHECK:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return isCheck != IS_CHECK_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -311,7 +320,7 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 		}
 		if (baseClass == ObservableStatementCS.class) {
 			switch (derivedFeatureID) {
-				case QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OBSERVED_PROPERTIES: return QVTimperativeCSPackage.OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES;
+				case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0: return StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -332,7 +341,7 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 		}
 		if (baseClass == ObservableStatementCS.class) {
 			switch (baseFeatureID) {
-				case QVTimperativeCSPackage.OBSERVABLE_STATEMENT_CS__OBSERVED_PROPERTIES: return QVTimperativeCSPackage.DECLARE_STATEMENT_CS__OBSERVED_PROPERTIES;
+				case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0: return TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}

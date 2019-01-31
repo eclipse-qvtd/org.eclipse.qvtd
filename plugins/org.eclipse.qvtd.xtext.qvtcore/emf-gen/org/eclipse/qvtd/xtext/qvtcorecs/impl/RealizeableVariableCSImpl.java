@@ -30,6 +30,15 @@ import org.eclipse.qvtd.xtext.qvtcorecs.RealizeableVariableCS;
  */
 public abstract class RealizeableVariableCSImpl extends TypedElementCSImpl implements RealizeableVariableCS {
 	/**
+	 * The number of structural features of the '<em>Realizeable Variable CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int REALIZEABLE_VARIABLE_CS_FEATURE_COUNT = TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

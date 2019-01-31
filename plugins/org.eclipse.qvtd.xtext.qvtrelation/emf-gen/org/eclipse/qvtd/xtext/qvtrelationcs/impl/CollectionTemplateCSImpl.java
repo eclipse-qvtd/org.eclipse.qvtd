@@ -44,6 +44,15 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  */
 public class CollectionTemplateCSImpl extends TemplateCSImpl implements CollectionTemplateCS {
 	/**
+	 * The number of structural features of the '<em>Collection Template CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COLLECTION_TEMPLATE_CS_FEATURE_COUNT = TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 2;
+
+	/**
 	 * The cached value of the '{@link #getOwnedMemberIdentifiers() <em>Owned Member Identifiers</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,7 +99,7 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	@Override
 	public EList<TemplateVariableCS> getOwnedMemberIdentifiers() {
 		if (ownedMemberIdentifiers == null) {
-			ownedMemberIdentifiers = new EObjectContainmentEList<TemplateVariableCS>(TemplateVariableCS.class, this, QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS);
+			ownedMemberIdentifiers = new EObjectContainmentEList<TemplateVariableCS>(TemplateVariableCS.class, this, TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0);
 		}
 		return ownedMemberIdentifiers;
 	}
@@ -114,7 +123,7 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 		ElementTemplateCS oldOwnedRestIdentifier = ownedRestIdentifier;
 		ownedRestIdentifier = newOwnedRestIdentifier;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER, oldOwnedRestIdentifier, newOwnedRestIdentifier);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1, oldOwnedRestIdentifier, newOwnedRestIdentifier);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -130,14 +139,14 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 		if (newOwnedRestIdentifier != ownedRestIdentifier) {
 			NotificationChain msgs = null;
 			if (ownedRestIdentifier != null)
-				msgs = ((InternalEObject)ownedRestIdentifier).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER, null, msgs);
+				msgs = ((InternalEObject)ownedRestIdentifier).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1), null, msgs);
 			if (newOwnedRestIdentifier != null)
-				msgs = ((InternalEObject)newOwnedRestIdentifier).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER, null, msgs);
+				msgs = ((InternalEObject)newOwnedRestIdentifier).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetOwnedRestIdentifier(newOwnedRestIdentifier, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER, newOwnedRestIdentifier, newOwnedRestIdentifier));
+			eNotify(new ENotificationImpl(this, Notification.SET, TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1, newOwnedRestIdentifier, newOwnedRestIdentifier));
 	}
 
 	/**
@@ -148,9 +157,9 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS:
+			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedMemberIdentifiers()).basicRemove(otherEnd, msgs);
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER:
+			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1:
 				return basicSetOwnedRestIdentifier(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -164,9 +173,9 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS:
+			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0:
 				return getOwnedMemberIdentifiers();
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER:
+			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1:
 				return getOwnedRestIdentifier();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -181,11 +190,11 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS:
+			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0:
 				getOwnedMemberIdentifiers().clear();
 				getOwnedMemberIdentifiers().addAll((Collection<? extends TemplateVariableCS>)newValue);
 				return;
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER:
+			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1:
 				setOwnedRestIdentifier((ElementTemplateCS)newValue);
 				return;
 		}
@@ -200,10 +209,10 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS:
+			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0:
 				getOwnedMemberIdentifiers().clear();
 				return;
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER:
+			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1:
 				setOwnedRestIdentifier((ElementTemplateCS)null);
 				return;
 		}
@@ -218,9 +227,9 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS:
+			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0:
 				return ownedMemberIdentifiers != null && !ownedMemberIdentifiers.isEmpty();
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_REST_IDENTIFIER:
+			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1:
 				return ownedRestIdentifier != null;
 		}
 		return super.eIsSet(featureID);

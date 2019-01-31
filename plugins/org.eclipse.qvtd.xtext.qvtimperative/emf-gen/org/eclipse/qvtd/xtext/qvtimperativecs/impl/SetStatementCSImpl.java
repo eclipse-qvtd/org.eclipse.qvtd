@@ -47,6 +47,15 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  */
 public class SetStatementCSImpl extends ObservableStatementCSImpl implements SetStatementCS {
 	/**
+	 * The number of structural features of the '<em>Set Statement CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int SET_STATEMENT_CS_FEATURE_COUNT = ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 5;
+
+	/**
 	 * The cached value of the '{@link #getReferredProperty() <em>Referred Property</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -147,7 +156,7 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 			referredProperty = (Property)eResolveProxy(oldReferredProperty);
 			if (referredProperty != oldReferredProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativeCSPackage.SET_STATEMENT_CS__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 0, oldReferredProperty, referredProperty));
 			}
 		}
 		return referredProperty;
@@ -172,7 +181,7 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 		Property oldReferredProperty = referredProperty;
 		referredProperty = newReferredProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.SET_STATEMENT_CS__REFERRED_PROPERTY, oldReferredProperty, referredProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 0, oldReferredProperty, referredProperty));
 	}
 
 	/**
@@ -187,7 +196,7 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 			referredVariable = (VariableDeclaration)eResolveProxy(oldReferredVariable);
 			if (referredVariable != oldReferredVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTimperativeCSPackage.SET_STATEMENT_CS__REFERRED_VARIABLE, oldReferredVariable, referredVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 1, oldReferredVariable, referredVariable));
 			}
 		}
 		return referredVariable;
@@ -212,7 +221,7 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 		VariableDeclaration oldReferredVariable = referredVariable;
 		referredVariable = newReferredVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.SET_STATEMENT_CS__REFERRED_VARIABLE, oldReferredVariable, referredVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 1, oldReferredVariable, referredVariable));
 	}
 
 	/**
@@ -234,7 +243,7 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 		ExpCS oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.SET_STATEMENT_CS__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -250,14 +259,14 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.SET_STATEMENT_CS__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.SET_STATEMENT_CS__OWNED_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.SET_STATEMENT_CS__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -280,7 +289,7 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 		boolean oldIsNotify = isNotify;
 		isNotify = newIsNotify;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.SET_STATEMENT_CS__IS_NOTIFY, oldIsNotify, isNotify));
+			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 3, oldIsNotify, isNotify));
 	}
 
 	/**
@@ -303,7 +312,7 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 		boolean oldIsPartial = isPartial;
 		isPartial = newIsPartial;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.SET_STATEMENT_CS__IS_PARTIAL, oldIsPartial, isPartial));
+			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 4, oldIsPartial, isPartial));
 	}
 
 	/**
@@ -324,7 +333,7 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__OWNED_EXPRESSION:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -338,17 +347,17 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__REFERRED_PROPERTY:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 0:
 				if (resolve) return getReferredProperty();
 				return basicGetReferredProperty();
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__REFERRED_VARIABLE:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 1:
 				if (resolve) return getReferredVariable();
 				return basicGetReferredVariable();
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__OWNED_EXPRESSION:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2:
 				return getOwnedExpression();
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_NOTIFY:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 3:
 				return isIsNotify();
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_PARTIAL:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 4:
 				return isIsPartial();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -362,19 +371,19 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__REFERRED_PROPERTY:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 0:
 				setReferredProperty((Property)newValue);
 				return;
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__REFERRED_VARIABLE:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 1:
 				setReferredVariable((VariableDeclaration)newValue);
 				return;
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__OWNED_EXPRESSION:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2:
 				setOwnedExpression((ExpCS)newValue);
 				return;
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_NOTIFY:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 3:
 				setIsNotify((Boolean)newValue);
 				return;
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_PARTIAL:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 4:
 				setIsPartial((Boolean)newValue);
 				return;
 		}
@@ -389,19 +398,19 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__REFERRED_PROPERTY:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 0:
 				setReferredProperty((Property)null);
 				return;
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__REFERRED_VARIABLE:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 1:
 				setReferredVariable((VariableDeclaration)null);
 				return;
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__OWNED_EXPRESSION:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2:
 				setOwnedExpression((ExpCS)null);
 				return;
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_NOTIFY:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 3:
 				setIsNotify(IS_NOTIFY_EDEFAULT);
 				return;
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_PARTIAL:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 4:
 				setIsPartial(IS_PARTIAL_EDEFAULT);
 				return;
 		}
@@ -416,15 +425,15 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__REFERRED_PROPERTY:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 0:
 				return referredProperty != null;
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__REFERRED_VARIABLE:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 1:
 				return referredVariable != null;
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__OWNED_EXPRESSION:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2:
 				return ownedExpression != null;
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_NOTIFY:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 3:
 				return isNotify != IS_NOTIFY_EDEFAULT;
-			case QVTimperativeCSPackage.SET_STATEMENT_CS__IS_PARTIAL:
+			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 4:
 				return isPartial != IS_PARTIAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

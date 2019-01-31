@@ -17,10 +17,16 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
+import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
+import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
+import org.eclipse.ocl.xtext.basecs.impl.RootPackageCSImpl;
+import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
 import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
+import org.eclipse.ocl.xtext.essentialoclcs.impl.ExpCSImpl;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.xtext.qvtbasecs.QVTbaseCSPackage;
+import org.eclipse.qvtd.xtext.qvtbasecs.impl.AbstractTransformationCSImpl;
 import org.eclipse.qvtd.xtext.qvtcorecs.AreaCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.DirectionCS;
@@ -795,75 +801,75 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 		isCreated = true;
 
 		// Create classes and their features
-		areaCSEClass = createEClass(AREA_CS);
-		createEReference(areaCSEClass, AREA_CS__OWNED_GUARD_PATTERN);
-		createEReference(areaCSEClass, AREA_CS__OWNED_BOTTOM_PATTERN);
+		areaCSEClass = createEClass(0);
+		createEReference(areaCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0);
+		createEReference(areaCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1);
 
-		bottomPatternCSEClass = createEClass(BOTTOM_PATTERN_CS);
-		createEReference(bottomPatternCSEClass, BOTTOM_PATTERN_CS__OWNED_ENFORCEMENT_OPERATIONS);
-		createEReference(bottomPatternCSEClass, BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES);
-		createEReference(bottomPatternCSEClass, BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS);
+		bottomPatternCSEClass = createEClass(1);
+		createEReference(bottomPatternCSEClass, PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0);
+		createEReference(bottomPatternCSEClass, PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 1);
+		createEReference(bottomPatternCSEClass, PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 2);
 
-		directionCSEClass = createEClass(DIRECTION_CS);
-		createEReference(directionCSEClass, DIRECTION_CS__IMPORTS);
-		createEReference(directionCSEClass, DIRECTION_CS__USES);
+		directionCSEClass = createEClass(2);
+		createEReference(directionCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0);
+		createEReference(directionCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1);
 
-		domainCSEClass = createEClass(DOMAIN_CS);
-		createEAttribute(domainCSEClass, DOMAIN_CS__IS_CHECK);
-		createEAttribute(domainCSEClass, DOMAIN_CS__IS_ENFORCE);
-		createEReference(domainCSEClass, DOMAIN_CS__DIRECTION);
+		domainCSEClass = createEClass(3);
+		createEAttribute(domainCSEClass, AreaCSImpl.AREA_CS_FEATURE_COUNT + 0);
+		createEAttribute(domainCSEClass, AreaCSImpl.AREA_CS_FEATURE_COUNT + 1);
+		createEReference(domainCSEClass, AreaCSImpl.AREA_CS_FEATURE_COUNT + 2);
 
-		enforcementOperationCSEClass = createEClass(ENFORCEMENT_OPERATION_CS);
-		createEAttribute(enforcementOperationCSEClass, ENFORCEMENT_OPERATION_CS__IS_DELETION);
-		createEReference(enforcementOperationCSEClass, ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL);
+		enforcementOperationCSEClass = createEClass(4);
+		createEAttribute(enforcementOperationCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
+		createEReference(enforcementOperationCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
 
-		guardPatternCSEClass = createEClass(GUARD_PATTERN_CS);
-		createEReference(guardPatternCSEClass, GUARD_PATTERN_CS__OWNED_PREDICATES);
+		guardPatternCSEClass = createEClass(5);
+		createEReference(guardPatternCSEClass, PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0);
 
-		mappingCSEClass = createEClass(MAPPING_CS);
-		createEAttribute(mappingCSEClass, MAPPING_CS__IS_ABSTRACT);
-		createEReference(mappingCSEClass, MAPPING_CS__OWNED_COMPOSED_MAPPINGS);
-		createEReference(mappingCSEClass, MAPPING_CS__OWNED_DOMAINS);
-		createEReference(mappingCSEClass, MAPPING_CS__OWNED_IN_PATH_NAME);
-		createEReference(mappingCSEClass, MAPPING_CS__OWNED_MIDDLE);
-		createEReference(mappingCSEClass, MAPPING_CS__REFINES);
+		mappingCSEClass = createEClass(6);
+		createEAttribute(mappingCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0);
+		createEReference(mappingCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1);
+		createEReference(mappingCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2);
+		createEReference(mappingCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3);
+		createEReference(mappingCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4);
+		createEReference(mappingCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5);
 
-		paramDeclarationCSEClass = createEClass(PARAM_DECLARATION_CS);
+		paramDeclarationCSEClass = createEClass(7);
 
-		patternCSEClass = createEClass(PATTERN_CS);
-		createEReference(patternCSEClass, PATTERN_CS__OWNED_UNREALIZED_VARIABLES);
+		patternCSEClass = createEClass(8);
+		createEReference(patternCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 
-		predicateCSEClass = createEClass(PREDICATE_CS);
-		createEReference(predicateCSEClass, PREDICATE_CS__OWNED_CONDITION);
+		predicateCSEClass = createEClass(9);
+		createEReference(predicateCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 0);
 
-		predicateOrAssignmentCSEClass = createEClass(PREDICATE_OR_ASSIGNMENT_CS);
-		createEAttribute(predicateOrAssignmentCSEClass, PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT);
-		createEAttribute(predicateOrAssignmentCSEClass, PREDICATE_OR_ASSIGNMENT_CS__IS_PARTIAL);
-		createEReference(predicateOrAssignmentCSEClass, PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET);
-		createEReference(predicateOrAssignmentCSEClass, PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION);
+		predicateOrAssignmentCSEClass = createEClass(10);
+		createEAttribute(predicateOrAssignmentCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 0);
+		createEAttribute(predicateOrAssignmentCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 1);
+		createEReference(predicateOrAssignmentCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 2);
+		createEReference(predicateOrAssignmentCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 3);
 
-		queryCSEClass = createEClass(QUERY_CS);
-		createEReference(queryCSEClass, QUERY_CS__OWNED_PATH_NAME);
-		createEReference(queryCSEClass, QUERY_CS__TRANSFORMATION);
-		createEReference(queryCSEClass, QUERY_CS__OWNED_PARAMETERS);
-		createEReference(queryCSEClass, QUERY_CS__OWNED_EXPRESSION);
-		createEAttribute(queryCSEClass, QUERY_CS__IS_TRANSIENT);
+		queryCSEClass = createEClass(11);
+		createEReference(queryCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1);
+		createEReference(queryCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 2);
+		createEReference(queryCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3);
+		createEReference(queryCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 4);
+		createEAttribute(queryCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 5);
 
-		realizeableVariableCSEClass = createEClass(REALIZEABLE_VARIABLE_CS);
+		realizeableVariableCSEClass = createEClass(12);
 
-		realizedVariableCSEClass = createEClass(REALIZED_VARIABLE_CS);
+		realizedVariableCSEClass = createEClass(13);
 
-		topLevelCSEClass = createEClass(TOP_LEVEL_CS);
-		createEReference(topLevelCSEClass, TOP_LEVEL_CS__OWNED_MAPPINGS);
-		createEReference(topLevelCSEClass, TOP_LEVEL_CS__OWNED_QUERIES);
-		createEReference(topLevelCSEClass, TOP_LEVEL_CS__OWNED_TRANSFORMATIONS);
+		topLevelCSEClass = createEClass(14);
+		createEReference(topLevelCSEClass, RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 0);
+		createEReference(topLevelCSEClass, RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 1);
+		createEReference(topLevelCSEClass, RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 2);
 
-		transformationCSEClass = createEClass(TRANSFORMATION_CS);
-		createEReference(transformationCSEClass, TRANSFORMATION_CS__PACKAGE);
-		createEReference(transformationCSEClass, TRANSFORMATION_CS__OWNED_DIRECTIONS);
+		transformationCSEClass = createEClass(15);
+		createEReference(transformationCSEClass, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 0);
+		createEReference(transformationCSEClass, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1);
 
-		unrealizedVariableCSEClass = createEClass(UNREALIZED_VARIABLE_CS);
-		createEReference(unrealizedVariableCSEClass, UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION);
+		unrealizedVariableCSEClass = createEClass(16);
+		createEReference(unrealizedVariableCSEClass, RealizeableVariableCSImpl.REALIZEABLE_VARIABLE_CS_FEATURE_COUNT + 0);
 	}
 
 	/**

@@ -47,6 +47,14 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  */
 public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDeclarationCS {
 	/**
+	 * The number of structural features of the '<em>Var Declaration CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int VAR_DECLARATION_CS_FEATURE_COUNT = ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3;
+	/**
 	 * The cached value of the '{@link #getOwnedInitExpression() <em>Owned Init Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -111,7 +119,7 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 		ExpCS oldOwnedInitExpression = ownedInitExpression;
 		ownedInitExpression = newOwnedInitExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_INIT_EXPRESSION, oldOwnedInitExpression, newOwnedInitExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0, oldOwnedInitExpression, newOwnedInitExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -127,14 +135,14 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 		if (newOwnedInitExpression != ownedInitExpression) {
 			NotificationChain msgs = null;
 			if (ownedInitExpression != null)
-				msgs = ((InternalEObject)ownedInitExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_INIT_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)ownedInitExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0), null, msgs);
 			if (newOwnedInitExpression != null)
-				msgs = ((InternalEObject)newOwnedInitExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_INIT_EXPRESSION, null, msgs);
+				msgs = ((InternalEObject)newOwnedInitExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0), null, msgs);
 			msgs = basicSetOwnedInitExpression(newOwnedInitExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_INIT_EXPRESSION, newOwnedInitExpression, newOwnedInitExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0, newOwnedInitExpression, newOwnedInitExpression));
 	}
 
 	/**
@@ -145,7 +153,7 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 	@Override
 	public EList<VarDeclarationIdCS> getOwnedVarDeclarationIds() {
 		if (ownedVarDeclarationIds == null) {
-			ownedVarDeclarationIds = new EObjectContainmentEList<VarDeclarationIdCS>(VarDeclarationIdCS.class, this, QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS);
+			ownedVarDeclarationIds = new EObjectContainmentEList<VarDeclarationIdCS>(VarDeclarationIdCS.class, this, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2);
 		}
 		return ownedVarDeclarationIds;
 	}
@@ -169,7 +177,7 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 		TypedRefCS oldOwnedType = ownedType;
 		ownedType = newOwnedType;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_TYPE, oldOwnedType, newOwnedType);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1, oldOwnedType, newOwnedType);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -185,14 +193,14 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 		if (newOwnedType != ownedType) {
 			NotificationChain msgs = null;
 			if (ownedType != null)
-				msgs = ((InternalEObject)ownedType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_TYPE, null, msgs);
+				msgs = ((InternalEObject)ownedType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			if (newOwnedType != null)
-				msgs = ((InternalEObject)newOwnedType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_TYPE, null, msgs);
+				msgs = ((InternalEObject)newOwnedType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetOwnedType(newOwnedType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_TYPE, newOwnedType, newOwnedType));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1, newOwnedType, newOwnedType));
 	}
 
 	/**
@@ -203,11 +211,11 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_INIT_EXPRESSION:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return basicSetOwnedInitExpression(null, msgs);
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_TYPE:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return basicSetOwnedType(null, msgs);
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getOwnedVarDeclarationIds()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -221,11 +229,11 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_INIT_EXPRESSION:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return getOwnedInitExpression();
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_TYPE:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return getOwnedType();
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				return getOwnedVarDeclarationIds();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -240,13 +248,13 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_INIT_EXPRESSION:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				setOwnedInitExpression((ExpCS)newValue);
 				return;
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_TYPE:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedType((TypedRefCS)newValue);
 				return;
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				getOwnedVarDeclarationIds().clear();
 				getOwnedVarDeclarationIds().addAll((Collection<? extends VarDeclarationIdCS>)newValue);
 				return;
@@ -262,13 +270,13 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_INIT_EXPRESSION:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				setOwnedInitExpression((ExpCS)null);
 				return;
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_TYPE:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedType((TypedRefCS)null);
 				return;
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				getOwnedVarDeclarationIds().clear();
 				return;
 		}
@@ -283,11 +291,11 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_INIT_EXPRESSION:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return ownedInitExpression != null;
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_TYPE:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return ownedType != null;
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				return ownedVarDeclarationIds != null && !ownedVarDeclarationIds.isEmpty();
 		}
 		return super.eIsSet(featureID);

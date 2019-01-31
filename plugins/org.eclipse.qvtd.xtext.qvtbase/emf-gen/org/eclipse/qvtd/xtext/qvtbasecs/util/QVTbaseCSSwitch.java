@@ -92,7 +92,7 @@ public class QVTbaseCSSwitch<@Nullable T> extends Switch<T>
 	{
 		switch (classifierID)
 		{
-			case QVTbaseCSPackage.ABSTRACT_TRANSFORMATION_CS:
+			case 0:
 			{
 				AbstractTransformationCS abstractTransformationCS = (AbstractTransformationCS)theEObject;
 				T result = caseAbstractTransformationCS(abstractTransformationCS);
@@ -106,7 +106,7 @@ public class QVTbaseCSSwitch<@Nullable T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTbaseCSPackage.JAVA_CLASS_CS:
+			case 1:
 			{
 				JavaClassCS javaClassCS = (JavaClassCS)theEObject;
 				T result = caseJavaClassCS(javaClassCS);
@@ -117,7 +117,7 @@ public class QVTbaseCSSwitch<@Nullable T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTbaseCSPackage.JAVA_IMPLEMENTATION_CS:
+			case 2:
 			{
 				JavaImplementationCS javaImplementationCS = (JavaImplementationCS)theEObject;
 				T result = caseJavaImplementationCS(javaImplementationCS);
@@ -125,7 +125,7 @@ public class QVTbaseCSSwitch<@Nullable T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTbaseCSPackage.QUALIFIED_PACKAGE_CS:
+			case 3:
 			{
 				QualifiedPackageCS qualifiedPackageCS = (QualifiedPackageCS)theEObject;
 				T result = caseQualifiedPackageCS(qualifiedPackageCS);

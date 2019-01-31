@@ -45,6 +45,15 @@ import org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage;
  */
 public abstract class AreaCSImpl extends NamedElementCSImpl implements AreaCS {
 	/**
+	 * The number of structural features of the '<em>Area CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int AREA_CS_FEATURE_COUNT = NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+
+	/**
 	 * The cached value of the '{@link #getOwnedGuardPattern() <em>Owned Guard Pattern</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -102,7 +111,7 @@ public abstract class AreaCSImpl extends NamedElementCSImpl implements AreaCS {
 		GuardPatternCS oldOwnedGuardPattern = ownedGuardPattern;
 		ownedGuardPattern = newOwnedGuardPattern;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.AREA_CS__OWNED_GUARD_PATTERN, oldOwnedGuardPattern, newOwnedGuardPattern);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0, oldOwnedGuardPattern, newOwnedGuardPattern);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -118,14 +127,14 @@ public abstract class AreaCSImpl extends NamedElementCSImpl implements AreaCS {
 		if (newOwnedGuardPattern != ownedGuardPattern) {
 			NotificationChain msgs = null;
 			if (ownedGuardPattern != null)
-				msgs = ((InternalEObject)ownedGuardPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSPackage.AREA_CS__OWNED_GUARD_PATTERN, null, msgs);
+				msgs = ((InternalEObject)ownedGuardPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0), null, msgs);
 			if (newOwnedGuardPattern != null)
-				msgs = ((InternalEObject)newOwnedGuardPattern).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSPackage.AREA_CS__OWNED_GUARD_PATTERN, null, msgs);
+				msgs = ((InternalEObject)newOwnedGuardPattern).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0), null, msgs);
 			msgs = basicSetOwnedGuardPattern(newOwnedGuardPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.AREA_CS__OWNED_GUARD_PATTERN, newOwnedGuardPattern, newOwnedGuardPattern));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0, newOwnedGuardPattern, newOwnedGuardPattern));
 	}
 
 	/**
@@ -147,7 +156,7 @@ public abstract class AreaCSImpl extends NamedElementCSImpl implements AreaCS {
 		BottomPatternCS oldOwnedBottomPattern = ownedBottomPattern;
 		ownedBottomPattern = newOwnedBottomPattern;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.AREA_CS__OWNED_BOTTOM_PATTERN, oldOwnedBottomPattern, newOwnedBottomPattern);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1, oldOwnedBottomPattern, newOwnedBottomPattern);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -163,14 +172,14 @@ public abstract class AreaCSImpl extends NamedElementCSImpl implements AreaCS {
 		if (newOwnedBottomPattern != ownedBottomPattern) {
 			NotificationChain msgs = null;
 			if (ownedBottomPattern != null)
-				msgs = ((InternalEObject)ownedBottomPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSPackage.AREA_CS__OWNED_BOTTOM_PATTERN, null, msgs);
+				msgs = ((InternalEObject)ownedBottomPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			if (newOwnedBottomPattern != null)
-				msgs = ((InternalEObject)newOwnedBottomPattern).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreCSPackage.AREA_CS__OWNED_BOTTOM_PATTERN, null, msgs);
+				msgs = ((InternalEObject)newOwnedBottomPattern).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetOwnedBottomPattern(newOwnedBottomPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreCSPackage.AREA_CS__OWNED_BOTTOM_PATTERN, newOwnedBottomPattern, newOwnedBottomPattern));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1, newOwnedBottomPattern, newOwnedBottomPattern));
 	}
 
 	/**
@@ -181,9 +190,9 @@ public abstract class AreaCSImpl extends NamedElementCSImpl implements AreaCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcoreCSPackage.AREA_CS__OWNED_GUARD_PATTERN:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return basicSetOwnedGuardPattern(null, msgs);
-			case QVTcoreCSPackage.AREA_CS__OWNED_BOTTOM_PATTERN:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return basicSetOwnedBottomPattern(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -197,9 +206,9 @@ public abstract class AreaCSImpl extends NamedElementCSImpl implements AreaCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcoreCSPackage.AREA_CS__OWNED_GUARD_PATTERN:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return getOwnedGuardPattern();
-			case QVTcoreCSPackage.AREA_CS__OWNED_BOTTOM_PATTERN:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return getOwnedBottomPattern();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -213,10 +222,10 @@ public abstract class AreaCSImpl extends NamedElementCSImpl implements AreaCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcoreCSPackage.AREA_CS__OWNED_GUARD_PATTERN:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				setOwnedGuardPattern((GuardPatternCS)newValue);
 				return;
-			case QVTcoreCSPackage.AREA_CS__OWNED_BOTTOM_PATTERN:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedBottomPattern((BottomPatternCS)newValue);
 				return;
 		}
@@ -231,10 +240,10 @@ public abstract class AreaCSImpl extends NamedElementCSImpl implements AreaCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.AREA_CS__OWNED_GUARD_PATTERN:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				setOwnedGuardPattern((GuardPatternCS)null);
 				return;
-			case QVTcoreCSPackage.AREA_CS__OWNED_BOTTOM_PATTERN:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedBottomPattern((BottomPatternCS)null);
 				return;
 		}
@@ -249,9 +258,9 @@ public abstract class AreaCSImpl extends NamedElementCSImpl implements AreaCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.AREA_CS__OWNED_GUARD_PATTERN:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return ownedGuardPattern != null;
-			case QVTcoreCSPackage.AREA_CS__OWNED_BOTTOM_PATTERN:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return ownedBottomPattern != null;
 		}
 		return super.eIsSet(featureID);

@@ -45,6 +45,15 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  */
 public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	/**
+	 * The number of structural features of the '<em>Top Level CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int TOP_LEVEL_CS_FEATURE_COUNT = RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 3;
+
+	/**
 	 * The cached value of the '{@link #getOwnedMappings() <em>Owned Mappings</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -100,7 +109,7 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public EList<MappingCS> getOwnedMappings() {
 		if (ownedMappings == null) {
-			ownedMappings = new EObjectContainmentEList<MappingCS>(MappingCS.class, this, QVTimperativeCSPackage.TOP_LEVEL_CS__OWNED_MAPPINGS);
+			ownedMappings = new EObjectContainmentEList<MappingCS>(MappingCS.class, this, RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 0);
 		}
 		return ownedMappings;
 	}
@@ -113,7 +122,7 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public EList<QueryCS> getOwnedQueries() {
 		if (ownedQueries == null) {
-			ownedQueries = new EObjectContainmentEList<QueryCS>(QueryCS.class, this, QVTimperativeCSPackage.TOP_LEVEL_CS__OWNED_QUERIES);
+			ownedQueries = new EObjectContainmentEList<QueryCS>(QueryCS.class, this, RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 1);
 		}
 		return ownedQueries;
 	}
@@ -126,7 +135,7 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public EList<TransformationCS> getOwnedTransformations() {
 		if (ownedTransformations == null) {
-			ownedTransformations = new EObjectContainmentEList<TransformationCS>(TransformationCS.class, this, QVTimperativeCSPackage.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS);
+			ownedTransformations = new EObjectContainmentEList<TransformationCS>(TransformationCS.class, this, RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 2);
 		}
 		return ownedTransformations;
 	}
@@ -139,11 +148,11 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.TOP_LEVEL_CS__OWNED_MAPPINGS:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedMappings()).basicRemove(otherEnd, msgs);
-			case QVTimperativeCSPackage.TOP_LEVEL_CS__OWNED_QUERIES:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 1:
 				return ((InternalEList<?>)getOwnedQueries()).basicRemove(otherEnd, msgs);
-			case QVTimperativeCSPackage.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getOwnedTransformations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -157,11 +166,11 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.TOP_LEVEL_CS__OWNED_MAPPINGS:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 0:
 				return getOwnedMappings();
-			case QVTimperativeCSPackage.TOP_LEVEL_CS__OWNED_QUERIES:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 1:
 				return getOwnedQueries();
-			case QVTimperativeCSPackage.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 2:
 				return getOwnedTransformations();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -176,15 +185,15 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.TOP_LEVEL_CS__OWNED_MAPPINGS:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 0:
 				getOwnedMappings().clear();
 				getOwnedMappings().addAll((Collection<? extends MappingCS>)newValue);
 				return;
-			case QVTimperativeCSPackage.TOP_LEVEL_CS__OWNED_QUERIES:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 1:
 				getOwnedQueries().clear();
 				getOwnedQueries().addAll((Collection<? extends QueryCS>)newValue);
 				return;
-			case QVTimperativeCSPackage.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 2:
 				getOwnedTransformations().clear();
 				getOwnedTransformations().addAll((Collection<? extends TransformationCS>)newValue);
 				return;
@@ -200,13 +209,13 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.TOP_LEVEL_CS__OWNED_MAPPINGS:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 0:
 				getOwnedMappings().clear();
 				return;
-			case QVTimperativeCSPackage.TOP_LEVEL_CS__OWNED_QUERIES:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 1:
 				getOwnedQueries().clear();
 				return;
-			case QVTimperativeCSPackage.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 2:
 				getOwnedTransformations().clear();
 				return;
 		}
@@ -221,11 +230,11 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.TOP_LEVEL_CS__OWNED_MAPPINGS:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 0:
 				return ownedMappings != null && !ownedMappings.isEmpty();
-			case QVTimperativeCSPackage.TOP_LEVEL_CS__OWNED_QUERIES:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 1:
 				return ownedQueries != null && !ownedQueries.isEmpty();
-			case QVTimperativeCSPackage.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS:
+			case RootPackageCSImpl.ROOT_PACKAGE_CS_FEATURE_COUNT + 2:
 				return ownedTransformations != null && !ownedTransformations.isEmpty();
 		}
 		return super.eIsSet(featureID);
