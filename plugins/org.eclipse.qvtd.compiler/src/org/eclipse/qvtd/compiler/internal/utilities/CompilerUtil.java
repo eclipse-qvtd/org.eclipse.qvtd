@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.compiler.internal.utilities;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -209,18 +208,6 @@ public class CompilerUtil extends QVTscheduleUtil
 			}
 		}
 		return classProjectNames;
-	}
-
-	public static @NonNull List<@NonNull String> createClassPathProjectList(@NonNull URIConverter uriConverter, @NonNull List<@NonNull String> projectNames) {
-		List<@NonNull String> classpathProjectList = new ArrayList<@NonNull String>();
-		for (@NonNull String projectName : projectNames) {
-			File path = JavaFileUtil.getProjectBinFolder(uriConverter, projectName);
-			if (path != null) {
-				classpathProjectList.add(String.valueOf(path));
-			}
-		}
-		//		}
-		return classpathProjectList;
 	}
 
 	/**
