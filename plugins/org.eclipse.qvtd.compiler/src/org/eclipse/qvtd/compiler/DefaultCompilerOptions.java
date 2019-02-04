@@ -13,7 +13,6 @@ package org.eclipse.qvtd.compiler;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
@@ -22,6 +21,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.URIUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
@@ -55,7 +55,9 @@ public class DefaultCompilerOptions extends AbstractCompilerOptions
 	}
 
 	private void setClassStepOptions(@NonNull String projectName, @NonNull URI classURI) throws IOException {
-		setOption(CompilerChain.CLASS_STEP, CompilerChain.CLASS_PROJECT_NAMES_KEY, CompilerUtil.createClasspathProjectNameList(projectName));
+		JavaClasspath classpath = CompilerUtil.createDefaultQVTiClasspath();
+		//	classpath.add(projectName); -- only used for QVTd launches -- ?? OSGI only ?? -- ?? project will be added later ??
+		setOption(CompilerChain.CLASS_STEP, CompilerChain.CLASSPATH_KEY, classpath);
 		IFile classFiles = URIUtil.getResolvedFile(classURI);
 		if (classFiles != null) {
 			setOption(CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, URI.createFileURI(classFiles.getLocation().toString()));
@@ -70,11 +72,11 @@ public class DefaultCompilerOptions extends AbstractCompilerOptions
 		setOption(CompilerChain.QVTS_STEP, CompilerChain.SCHEDULER_YED_GRAPHS, yedGraphs);
 	}
 
-	public void setGenerateClassesOptions(@NonNull URI srcFileURI, @NonNull URI binFileURI, @NonNull List<@NonNull String> projectNames, boolean isIncremental) {
+	public void setGenerateClassesOptions(@NonNull URI srcFileURI, @NonNull URI binFileURI, @NonNull JavaClasspath classpath, boolean isIncremental) {
 		setOption(CompilerChain.JAVA_STEP, CompilerChain.URI_KEY, srcFileURI);
 		setOption(CompilerChain.JAVA_STEP, CompilerChain.JAVA_INCREMENTAL_KEY, isIncremental);
 		setOption(CompilerChain.JAVA_STEP, CompilerChain.JAVA_GENERATED_DEBUG_KEY, true);
-		setOption(CompilerChain.CLASS_STEP, CompilerChain.CLASS_PROJECT_NAMES_KEY, projectNames);
+		setOption(CompilerChain.CLASS_STEP, CompilerChain.CLASSPATH_KEY, classpath);
 		setOption(CompilerChain.CLASS_STEP, CompilerChain.URI_KEY, binFileURI);
 	}
 

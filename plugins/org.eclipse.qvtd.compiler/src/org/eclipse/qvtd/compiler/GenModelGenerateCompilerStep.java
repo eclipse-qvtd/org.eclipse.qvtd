@@ -18,6 +18,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.tools.JavaFileObject;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -36,10 +38,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.genmodel.OCLGenModelUtil;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
-import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 
 /**
  * GenModelCompilerStep activates the EMF GenModel tooling to generate the Java classes from the
@@ -98,7 +100,7 @@ public class GenModelGenerateCompilerStep extends AbstractCompilerStep
 		Resource genmodelResource = environmentFactory.getResourceSet().getResource(genmodelURI, true);
 		assert genmodelResource != null;
 		GenModel genModel = (GenModel) genmodelResource.getContents().get(0);
-		List<@NonNull String> classProjectNames = compilerChain.basicGetOption(QVTrCompilerChain.CLASS_STEP, QVTrCompilerChain.CLASS_PROJECT_NAMES_KEY);
+		JavaClasspath classpath = compilerChain.basicGetOption(QVTrCompilerChain.CLASS_STEP, QVTrCompilerChain.CLASSPATH_KEY);
 		URI classFileURI = compilerChain.basicGetOption(QVTrCompilerChain.CLASS_STEP, QVTrCompilerChain.URI_KEY);
 		URI traceURI = compilerChain.getURI(QVTrCompilerChain.TRACE_STEP, QVTrCompilerChain.URI_KEY);
 		if (classFileURI != null) {
@@ -106,7 +108,7 @@ public class GenModelGenerateCompilerStep extends AbstractCompilerStep
 			//			File zbinFile;
 			String classFilePath;
 			String sourceFilePathPrefix;
-			List<@NonNull String> classpathProjects;
+			//	List<@NonNull String> classpathProjects;
 			if (EcorePlugin.IS_ECLIPSE_RUNNING) {
 				IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 				IProject binProject = root.getProject(binProjectName);
@@ -116,10 +118,10 @@ public class GenModelGenerateCompilerStep extends AbstractCompilerStep
 				IFile genIFile = root.getFile(new Path(genModel.getModelDirectory()));
 				File genFile = URIUtil.toFile(genIFile.getLocationURI());
 				sourceFilePathPrefix = genFile.getAbsolutePath().replace("\\", "/");
-				if (classProjectNames == null) {
-					classProjectNames = CompilerUtil.createClasspathProjectNameList(binProjectName);
-				}
-				classpathProjects = JavaFileUtil.createClassPathProjectList(environmentFactory.getResourceSet().getURIConverter(), classProjectNames);
+				//	if (classpath == null) {
+				//		classpath = CompilerUtil.createClasspathProjectNameList(binProjectName);
+				//	}
+				//	classpathProjects = null;//JavaFileUtil.createClassPathProjectList(environmentFactory.getResourceSet().getURIConverter(), classProjectNames);
 			}
 			else {
 				//				ResourceSet resourceSet = environmentFactory.getResourceSet();
@@ -129,7 +131,7 @@ public class GenModelGenerateCompilerStep extends AbstractCompilerStep
 				//				binFile = new File(objectPath);
 				URI genModelDirectoryURI = URI.createPlatformResourceURI(genModel.getModelDirectory(), true);
 				sourceFilePathPrefix = environmentFactory.getResourceSet().getURIConverter().normalize(genModelDirectoryURI).toFileString() + "/";
-				classpathProjects = null;
+				//	classpathProjects = null;
 			}
 			assert classFilePath != null;
 			if (keepOldJavaFiles != Boolean.TRUE) {
@@ -141,17 +143,19 @@ public class GenModelGenerateCompilerStep extends AbstractCompilerStep
 			}
 			generateModels(genModel);
 			new File(classFilePath).mkdirs();
+			List<@NonNull JavaFileObject> compilationUnits = new ArrayList<@NonNull JavaFileObject>();
 			Set<@NonNull String> basePackages = new HashSet<>();
 			for (GenPackage genPackage : genModel.getGenPackages()) {
 				String basePackage = genPackage.getBasePackage();
 				basePackage = basePackage != null ? ("/" + basePackage.replace(".", "/")) : "";
 				if (basePackages.add(basePackage)) {
 					String sourceFilePath = sourceFilePathPrefix + basePackage;
-					String problemMessage = JavaFileUtil.compileClasses(sourceFilePath, classFilePath, classpathProjects);
-					if (problemMessage != null) {
-						addProblem(new CompilerChainException(problemMessage));
-					}
+					JavaFileUtil.gatherCompilationUnits(compilationUnits, new File(sourceFilePath));
 				}
+			}
+			String problemMessage = JavaFileUtil.compileClasses(compilationUnits, sourceFilePathPrefix, classFilePath, classpath);
+			if (problemMessage != null) {
+				addProblem(new CompilerChainException(problemMessage));
 			}
 		}
 		throwCompilerChainExceptionForErrors();

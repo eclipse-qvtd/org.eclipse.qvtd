@@ -10,17 +10,17 @@
  *******************************************************************************/
 package org.eclipse.qvtd.cs2as.compiler;
 
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 
 public interface CS2ASJavaCompilerParameters extends OCL2JavaTxCompilerParams {
 
 	public @Nullable ClassLoader getClassLoader();
 
-	public @Nullable List<@NonNull String> getClassPathProjectNames();
+	public @Nullable JavaClasspath getClasspath();
 
 	/**
 	 * @return the fully qualified name of the lookup resolver class

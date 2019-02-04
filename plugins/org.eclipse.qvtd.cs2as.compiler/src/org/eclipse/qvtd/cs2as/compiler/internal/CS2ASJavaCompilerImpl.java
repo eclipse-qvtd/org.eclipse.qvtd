@@ -34,6 +34,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
@@ -448,13 +449,13 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 	private @Nullable Log log = null;
 
 	// Copied from QVTiCompilerTest
-	protected Class<? extends CS2ASTransformer> compileTransformation(@NonNull File explicitClassPath, @NonNull QVTiCodeGenerator cg, @Nullable List<@NonNull String> classPathProjectNames, @Nullable ClassLoader classLoader) throws Exception {
+	protected Class<? extends CS2ASTransformer> compileTransformation(@NonNull File explicitClassPath, @NonNull QVTiCodeGenerator cg, @Nullable JavaClasspath classpath, @Nullable ClassLoader classLoader) throws Exception {
 		String qualifiedClassName = cg.getQualifiedName();
 		String javaCodeSource = cg.generateClassFile();
 		//		String problem = OCL2JavaFileObject.saveClass(String.valueOf(explicitClassPath), qualifiedClassName, javaCodeSource, classPathProjectNames);
 		List<@NonNull JavaFileObject> compilationUnits = Collections.singletonList(new OCL2JavaFileObject(qualifiedClassName, javaCodeSource));
-		List<@NonNull String> classpathProjects = classPathProjectNames != null ? JavaFileUtil.createClassPathProjectList(cg.getEnvironmentFactory().getResourceSet().getURIConverter(), classPathProjectNames) : null;
-		String problem = JavaFileUtil.compileClasses(compilationUnits, qualifiedClassName, String.valueOf(explicitClassPath), classpathProjects);
+		// List<@NonNull String> classpathProjects = classPathProjectNames != null ? JavaFileUtil.createClassPathProjectList(cg.getEnvironmentFactory().getResourceSet().getURIConverter(), classpath) : null;
+		String problem = JavaFileUtil.compileClasses(compilationUnits, qualifiedClassName, String.valueOf(explicitClassPath), classpath);
 		if (problem != null) {
 			throw new CompilerChainException(problem);
 		}
@@ -508,7 +509,7 @@ public class CS2ASJavaCompilerImpl implements CS2ASJavaCompiler {
 		}
 		File explicitClassPath = new File(new File(savePath).getParentFile(), JavaFileUtil.TEST_BIN_FOLDER_NAME);
 		explicitClassPath.mkdir();
-		return ClassUtil.nonNullState(compileTransformation(explicitClassPath, cg, params.getClassPathProjectNames(), params.getClassLoader()));
+		return ClassUtil.nonNullState(compileTransformation(explicitClassPath, cg, params.getClasspath(), params.getClassLoader()));
 	}
 
 	public void setLog(@Nullable Log log) {

@@ -10,13 +10,12 @@
  *******************************************************************************/
 package org.eclipse.qvtd.cs2as.compiler.internal;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.qvtd.cs2as.compiler.CS2ASJavaCompilerParameters;
 
 public class CS2ASJavaCompilerParametersImpl implements CS2ASJavaCompilerParameters  {
@@ -28,7 +27,7 @@ public class CS2ASJavaCompilerParametersImpl implements CS2ASJavaCompilerParamet
 	//	private @NonNull String namedElementClassName;
 	private boolean isIncremental = false;
 	private @NonNull Map<@NonNull String, @NonNull String> packageRenameMap = new HashMap<@NonNull String, @NonNull String>();
-	private @Nullable List<@NonNull String> classpathProjectNames = null;
+	private @Nullable JavaClasspath classpath = null;
 	private @Nullable ClassLoader classLoader = null;
 
 
@@ -39,14 +38,6 @@ public class CS2ASJavaCompilerParametersImpl implements CS2ASJavaCompilerParamet
 		this.lookupSolverName = lookupSolverClassName;
 		this.savePath = savePath;
 		this.lookupResultName = lookupResultClassName;
-	}
-
-	public void addClassPathProjectName(@NonNull String classpathProjectName) {
-		List<@NonNull String> classpathProjectNames2 = classpathProjectNames;
-		if (classpathProjectNames2 == null) {
-			classpathProjectNames = classpathProjectNames2 = new ArrayList<>();
-		}
-		classpathProjectNames2.add(classpathProjectName);
 	}
 
 	/**
@@ -62,8 +53,8 @@ public class CS2ASJavaCompilerParametersImpl implements CS2ASJavaCompilerParamet
 	}
 
 	@Override
-	public @Nullable List<@NonNull String> getClassPathProjectNames() {
-		return classpathProjectNames;
+	public @Nullable JavaClasspath getClasspath() {
+		return classpath;
 	}
 
 	/**
@@ -110,6 +101,11 @@ public class CS2ASJavaCompilerParametersImpl implements CS2ASJavaCompilerParamet
 
 	public void setClassLoader(@Nullable ClassLoader classLoader) {
 		this.classLoader = classLoader;
+	}
+
+	public void setClasspath(@NonNull JavaClasspath classpath) {
+		assert this.classpath == null;
+		this.classpath = classpath;
 	}
 
 	@Override

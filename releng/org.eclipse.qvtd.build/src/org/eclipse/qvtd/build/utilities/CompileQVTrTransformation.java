@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.build.utilities;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -26,6 +27,7 @@ import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestFile;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystem;
@@ -53,8 +55,8 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 {
 	protected class MyQVT extends AbstractTestQVT
 	{
-		public MyQVT(@NonNull ProjectManager projectManager, @NonNull String testProjectName, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) {
-			super(projectManager, testProjectName, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
+		public MyQVT(@NonNull ProjectManager projectManager, @NonNull TestProject testProject, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) throws IOException {
+			super(projectManager, testProject, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
 		}
 
 		@Override
@@ -215,52 +217,56 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 
 	@Override
 	public void invokeInternal(WorkflowContext ctx, ProgressMonitor arg1, Issues issues) {
-		configurePlatformResources();
-		EcorePackage.eINSTANCE.getClass();						// Workaround Bug 425841
-		OCLstdlib.install();
-		QVTrelationStandaloneSetup.doSetup();
-		QVTcorePivotStandaloneSetup.doSetup();
-		QVTimperativeStandaloneSetup.doSetup();
-		log.info("Compiling '" + qvtrModel + "'");
-
-		String testProjectName = getTestProjectName();
-		URI testBundleURI = getTestBundleURI();
-		URI txURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/model/ATL2QVTr.qvtr", true);
-		ProjectManager testProjectManager = getTestProjectManager();
-		URI intermediateFileNamePrefixURI = getTestURI("atl2qvtr");
-		URI srcFileURI = getTestFileURI(JavaFileUtil.TEST_SRC_FOLDER_NAME + "/");
-		URI binFileURI = getTestFileURI(JavaFileUtil.TEST_BIN_FOLDER_NAME + "/");
-		MyQVT myQVT = new MyQVT(testProjectManager, testProjectName, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
-		myQVT.addClasspathProjectName("org.eclipse.m2m.atl.common");
-		myQVT.addClasspathProjectName("org.eclipse.qvtd.atl");
-		myQVT.addClasspathProjectName("org.eclipse.qvtd.pivot.qvtbase");
-		myQVT.addClasspathProjectName("org.eclipse.qvtd.pivot.qvtrelation");
-		myQVT.addClasspathProjectName("org.eclipse.qvtd.pivot.qvttemplate");
-		myQVT.setCopyright("Copyright (c) 2015, 2017 Willink Transformations and others.\nAll rights reserved. This program and the accompanying materials\nare made available under the terms of the Eclipse Public License v2.0\nwhich accompanies this distribution, and is available at\nhttp://www.eclipse.org/legal/epl-v20.html\n\nContributors:\n  E.D.Willink - Initial API and implementation");
-		//
-		//	Install the GenPackages and ensure that their nsURIs redirect to their *.ecores.
-		//
-		for (@NonNull String usedGenPackage : usedGenPackages2) {
-			int separator = usedGenPackage.indexOf("#");
-			String projectPath = usedGenPackage.substring(0, separator);
-			String genPackageFragment = usedGenPackage.substring(separator+1);
-			GenPackage genPackage = myQVT.addUsedGenPackage(projectPath, genPackageFragment);
-			EPackage ePackage = genPackage.getEcorePackage();
-			String nsURI = ePackage.getNsURI();
-			URI uri = URI.createURI(nsURI);
-			testProjectManager.getPackageDescriptor(uri).configure(myQVT.getResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE,
-				StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
-			testProjectManager.getPackageDescriptor(uri).configure(myQVT.getMetamodelManager().getASResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE,
-				StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
-		}
+		MyQVT myQVT = null;
 		try {
+			configurePlatformResources();
+			EcorePackage.eINSTANCE.getClass();						// Workaround Bug 425841
+			OCLstdlib.install();
+			QVTrelationStandaloneSetup.doSetup();
+			QVTcorePivotStandaloneSetup.doSetup();
+			QVTimperativeStandaloneSetup.doSetup();
+			log.info("Compiling '" + qvtrModel + "'");
+
+			TestProject testProject = getTestProject();
+			URI testBundleURI = getTestBundleURI();
+			URI txURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/model/ATL2QVTr.qvtr", true);
+			ProjectManager testProjectManager = getTestProjectManager();
+			URI intermediateFileNamePrefixURI = getTestURI("atl2qvtr");
+			URI srcFileURI = getTestFileURI(JavaFileUtil.TEST_SRC_FOLDER_NAME + "/");
+			URI binFileURI = getTestFileURI(JavaFileUtil.TEST_BIN_FOLDER_NAME + "/");
+			myQVT = new MyQVT(testProjectManager, testProject, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
+			JavaClasspath classpath = myQVT.getClasspath();
+			classpath.addClass(org.eclipse.m2m.atl.common.ATLLaunchConstants.class);
+			classpath.addClass(org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr.class);
+			classpath.addClass(org.eclipse.qvtd.pivot.qvtbase.BaseModel.class);
+			classpath.addClass(org.eclipse.qvtd.pivot.qvtrelation.RelationModel.class);
+			classpath.addClass(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp.class);
+			myQVT.setCopyright("Copyright (c) 2015, 2017 Willink Transformations and others.\nAll rights reserved. This program and the accompanying materials\nare made available under the terms of the Eclipse Public License v2.0\nwhich accompanies this distribution, and is available at\nhttp://www.eclipse.org/legal/epl-v20.html\n\nContributors:\n  E.D.Willink - Initial API and implementation");
+			//
+			//	Install the GenPackages and ensure that their nsURIs redirect to their *.ecores.
+			//
+			for (@NonNull String usedGenPackage : usedGenPackages2) {
+				int separator = usedGenPackage.indexOf("#");
+				String projectPath = usedGenPackage.substring(0, separator);
+				String genPackageFragment = usedGenPackage.substring(separator+1);
+				GenPackage genPackage = myQVT.addUsedGenPackage(projectPath, genPackageFragment);
+				EPackage ePackage = genPackage.getEcorePackage();
+				String nsURI = ePackage.getNsURI();
+				URI uri = URI.createURI(nsURI);
+				testProjectManager.getPackageDescriptor(uri).configure(myQVT.getResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE,
+					StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
+				testProjectManager.getPackageDescriptor(uri).configure(myQVT.getMetamodelManager().getASResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE,
+					StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
+			}
 			@SuppressWarnings("unused")
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("qvtr", false); //,
 		} catch (Exception e) {
 			issues.addError(this, "Failed to compile 'ATL2QVTr.qvtr'", null, e, null);
 		}
 		finally {
-			myQVT.dispose();
+			if (myQVT != null) {
+				myQVT.dispose();
+			}
 			//			myQVT.removeRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage");
 			//			myQVT.removeRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage");
 		}

@@ -19,12 +19,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.tools.JavaFileObject;
+
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -32,7 +33,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.ExplicitClassLoader;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
+import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -43,7 +46,6 @@ import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTc2QVTu;
 import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
-import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc;
 import org.eclipse.qvtd.compiler.internal.qvts2qvti.QVTs2QVTi;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.QVTs2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvtu2qvtm.QVTu2QVTm;
@@ -107,12 +109,12 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 		}
 
 		public @NonNull Class<? extends Transformer> execute(@NonNull URI txURI, @NonNull JavaResult javaResult) throws Exception {
-			List<@NonNull String> classPathProjectNames = basicGetOption(CLASS_PROJECT_NAMES_KEY);
+			JavaClasspath classpath = basicGetOption(CLASSPATH_KEY);
 			URIConverter uriConverter = compilerChain.getEnvironmentFactory().getResourceSet().getURIConverter();
 			assert uriConverter != null;
 			//			System.out.println("classPathProjectNames = " + classPathProjectNames);
-			List<@NonNull String> classpathProjects;
-			if (EcorePlugin.IS_ECLIPSE_RUNNING) {
+			// List<@NonNull String> classpathProjects;
+			/*	if (EcorePlugin.IS_ECLIPSE_RUNNING) {
 				URI classFileURI = compilerChain.basicGetOption(QVTrCompilerChain.CLASS_STEP, QVTrCompilerChain.URI_KEY);
 				assert classFileURI != null;
 				String classFilePath2 = classFileURI.toFileString();
@@ -122,10 +124,14 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 				classpathProjects = CompilerUtil.createClassPathProjectList(uriConverter, binProjectName, classFilePath2, classPathProjectNames);
 			}
 			else {
-				classpathProjects = classPathProjectNames != null ? JavaFileUtil.createClassPathProjectList(uriConverter, classPathProjectNames) : null;
-			}
+				classpathProjects = classpath;
+			} */
+			//			URI platformURI = URI.createPlatformResourceURI(compilerChain.get, true);
+			//			URI pathURI = environmentFactory.getResourceSet().getURIConverter().normalize(platformURI);
 			//			System.out.println("classpathProjects = " + classpathProjects);
-			String problemMessage = JavaFileUtil.compileClass(javaResult.qualifiedClassName, javaResult.code, javaResult.classPath, classpathProjects);
+			JavaFileObject compilationUnit = new OCL2JavaFileObject(javaResult.qualifiedClassName, javaResult.code);
+			List<@NonNull JavaFileObject> compilationUnits = Collections.singletonList(compilationUnit);
+			String problemMessage = JavaFileUtil.compileClasses(compilationUnits, javaResult.qualifiedClassName, javaResult.classPath, classpath);
 			if (problemMessage != null) {
 				throw new CompilerChainException(problemMessage);
 			}

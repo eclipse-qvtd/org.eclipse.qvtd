@@ -11,13 +11,14 @@
 package org.eclipse.qvtd.xtext.qvtcore.tests;
 
 import java.io.IOException;
-import java.util.List;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
+import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
@@ -81,8 +82,8 @@ public class QVTcCompilerTests extends LoadTestCase
 			}
 		}
 
-		public MyQVT(@NonNull ProjectManager projectManager, @NonNull String testProjectName, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) {
-			super(projectManager, testProjectName, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
+		public MyQVT(@NonNull ProjectManager projectManager, @NonNull TestProject testProject, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) throws IOException {
+			super(projectManager, testProject, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
 		}
 
 		@Override
@@ -99,10 +100,10 @@ public class QVTcCompilerTests extends LoadTestCase
 		}
 
 		@Override
-		protected @NonNull List<@NonNull String> createClassProjectNames() {
-			List<@NonNull String> classProjectNames = super.createClassProjectNames();
-			classProjectNames.add(0, "org.eclipse.qvtd.xtext.qvtcore.tests");
-			return classProjectNames;
+		protected @NonNull JavaClasspath createClassProjectNames() {
+			JavaClasspath classpath = super.createClassProjectNames();
+			classpath.addClass(/*0,*/ getClass());
+			return classpath;
 		}
 
 		@Override
@@ -121,7 +122,7 @@ public class QVTcCompilerTests extends LoadTestCase
 		URI intermediateFileNamePrefixURI = getTestURI(resultPrefix);
 		URI srcFileURI = getTestFileURI(JavaFileUtil.TEST_SRC_FOLDER_NAME + "/");
 		URI binFileURI = getTestFileURI(JavaFileUtil.TEST_BIN_FOLDER_NAME + "/");
-		return new MyQVT(testProjectManager, getTestProject().getName(), getTestBundleURI(), txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
+		return new MyQVT(testProjectManager, getTestProject(), getTestBundleURI(), txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
 	}
 
 	/* (non-Javadoc)
@@ -469,7 +470,8 @@ public class QVTcCompilerTests extends LoadTestCase
 		String exampleProjectName = "org.eclipse.qvtd.examples.qvtcore.uml2rdbms";
 		URI txURI = URI.createPlatformResourceURI("/" + exampleProjectName + "/model/SimpleUML2RDBMS.qvtc", true);
 		MyQVT myQVT = createQVT("SimpleUML2RDBMS", txURI);
-		myQVT.addClasspathProjectName(exampleProjectName);
+		JavaClasspath classpath = myQVT.getClasspath();
+		classpath.addClass(org.eclipse.qvtd.examples.qvtcore.uml2rdbms.simpleuml2rdbms.UmlToRdbmsModelElement.class);
 		myQVT.setSuppressFailureDiagnosis(true);					// FIXME BUG 511028
 		try {
 			Class<? extends Transformer> txClass = myQVT.buildTransformation("rdbms", false, "SimpleUML2RDBMS.genmodel");

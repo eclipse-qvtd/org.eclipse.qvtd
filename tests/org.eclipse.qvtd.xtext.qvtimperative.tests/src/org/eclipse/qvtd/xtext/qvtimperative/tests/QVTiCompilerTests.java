@@ -12,6 +12,7 @@ package org.eclipse.qvtd.xtext.qvtimperative.tests;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -20,20 +21,31 @@ import java.util.Map;
 
 import javax.tools.JavaFileObject;
 
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
+import org.eclipse.ocl.examples.codegen.utilities.CGUtil;
 import org.eclipse.ocl.examples.pivot.tests.PivotTestCase.GlobalStateMemento;
 import org.eclipse.ocl.examples.xtext.tests.TestFile;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
@@ -76,6 +88,7 @@ import org.eclipse.qvtd.runtime.internal.evaluation.ModificationMonitor;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.ModelNormalizer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
+import org.osgi.framework.Bundle;
 
 import com.google.common.collect.Iterables;
 import junit.framework.TestCase;
@@ -102,14 +115,14 @@ public class QVTiCompilerTests extends LoadTestCase
 			this.testProject = testProject;
 		}
 
-		private Class<? extends Transformer> compileTransformation(@NonNull File explicitClassPath, @NonNull QVTiCodeGenerator cg, @NonNull List<@NonNull String> extraClasspathProjects) throws Exception {
+		private Class<? extends Transformer> compileTransformation(@NonNull File explicitClassPath, @NonNull QVTiCodeGenerator cg, @NonNull JavaClasspath classpath) throws Exception {
 			String qualifiedClassName = cg.getQualifiedName();
 			String javaCodeSource = cg.generateClassFile();
 			String string = explicitClassPath.toString();
 			assert string != null;
 			//			String message = OCL2JavaFileObject.saveClass(string, qualifiedClassName, javaCodeSource, extraClasspathProjects);
 			List<@NonNull JavaFileObject> compilationUnits = Collections.singletonList(new OCL2JavaFileObject(qualifiedClassName, javaCodeSource));
-			String message = JavaFileUtil.compileClasses(compilationUnits, qualifiedClassName, string, extraClasspathProjects);
+			String message = JavaFileUtil.compileClasses(compilationUnits, qualifiedClassName, string, classpath);
 			if (message != null) {
 				fail(message);
 			}
@@ -173,17 +186,167 @@ public class QVTiCompilerTests extends LoadTestCase
 			TestFile binPath = testProject.getOutputFolder(JavaFileUtil.TEST_BIN_FOLDER_NAME);
 			//			cg.saveSourceFile("../org.eclipse.qvtd.xtext.qvtimperative.tests/test-gen/");
 			cg.saveSourceFile(srcPath.getFileString());
-			List<@NonNull String> projectNames = CompilerUtil.createClasspathProjectNameList("org.eclipse.qvtd.xtext.qvtimperative.tests");
+			JavaClasspath classpath = CompilerUtil.createDefaultQVTiClasspath();
+			classpath.addClass(getClass());
 			// System.out.println("projectNames => " + projectNames);
-			List<@NonNull String> classpathList = JavaFileUtil.createClassPathProjectList(asTransformation.eResource().getResourceSet().getURIConverter(), projectNames);
+			// List<@NonNull String> classpathList = classpath.getClasspathProjectList();
 			// System.out.println("classpathList => " + classpathList);
 
-			Class<? extends Transformer> txClass = compileTransformation(binPath.getFile(), cg, classpathList);
+			Class<? extends Transformer> txClass = compileTransformation(binPath.getFile(), cg, classpath);
 			if (txClass == null) {
 				TestCase.fail("Failed to compile transformation");
 				throw new UnsupportedOperationException();
 			}
 			return txClass;
+		}
+
+		public static @NonNull List<@NonNull String> my_createClassPathProjectList(@NonNull URIConverter uriConverter, @NonNull List<@NonNull String> projectNames) {
+			List<@NonNull String> classpathProjectList = new ArrayList<@NonNull String>();
+			for (@NonNull String projectName : projectNames) {
+				File path = my_getProjectBinFolder(uriConverter, projectName);
+				if (path != null) {
+					classpathProjectList.add(String.valueOf(path));
+				}
+			}
+			//		}
+			return classpathProjectList;
+		}
+
+		private static final @NonNull String MAVEN_TYCHO_BIN_FOLDER_NAME = "target/classes";
+		private static final @NonNull String REGULAR_BIN_FOLDER_NAME = "bin";
+
+		/**
+		 * Return the file system folder suitable for use as a javac classpath entry.
+		 *
+		 * For workspace projects this is the "bin" folder. For plugins it is the jar file.
+		 */
+		public static @Nullable File my_getProjectBinFolder(@NonNull URIConverter uriConverter, @NonNull String projectName) {
+			Class<?> class1 = QVTiCompilerTests.class;
+			String modifiedProjectName = projectName.replace('.', '/');
+			URL projectResource = class1.getResource("/" + modifiedProjectName);
+			if (projectResource != null) {
+				String projectString = projectResource.toString();
+				String pathString = projectString.substring(0, projectString.length() - modifiedProjectName.length());
+				URI pathURI = URI.createURI(pathString);
+				return new File(pathURI.isFile() ? pathURI.toFileString() : pathURI.toString());
+			}
+			//			String externalForm = resource2.toExternalForm();
+			//			java.net.URI uri2;
+			//			try {
+			//				uri2 = resource2.toURI();
+			//			} catch (URISyntaxException e) {
+			//				// TODO Auto-generated catch block
+			//				e.printStackTrace();
+			//			}
+			//			String string = resource2.toString();
+			String path = null;
+			String binDir = CGUtil.isMavenSurefire() || CGUtil.isTychoSurefire() ? MAVEN_TYCHO_BIN_FOLDER_NAME : REGULAR_BIN_FOLDER_NAME;  // FIXME determine "bin" from JDT
+			URI platformURI = URI.createPlatformResourceURI("/" + projectName + "/", true);
+			URI pathURI = uriConverter.normalize(platformURI);
+			String location = null;
+			if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+				Bundle bundle = Platform.getBundle(projectName);
+				if (bundle != null) {
+					try {
+						File bundleFilePath = my_getOSGIClassPath(bundle);
+						location = bundle.getLocation();
+						path = bundleFilePath.toString();
+					} catch (IOException e) {
+						// Doesn't fail for sensible names.
+					}
+				}
+				if (path == null) {					// platform:/resource
+					IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+					IResource project = workspaceRoot.findMember(projectName);
+					if (project != null) {
+						location = String.valueOf(project.getLocation());
+						path = location + "/" + JavaFileUtil.TEST_BIN_FOLDER_NAME;
+					}
+				}
+			}
+			else if (pathURI.isArchive()) {
+				path = pathURI.toString();
+				if (path.startsWith("archive:file:") && path.endsWith("!/")) {
+					path = path.substring(13, path.length()-2);
+				}
+			}
+			else {
+				path = pathURI.toFileString();
+				if (path != null) {
+					if (!new File(path + "/META-INF").exists()) {
+						path = path + JavaFileUtil.TEST_BIN_FOLDER_NAME;
+					}
+					else {
+						path = path + binDir;
+					}
+				}
+			}
+			if (JavaFileUtil.CLASS_PATH.isActive()) {
+				StringBuilder s = new StringBuilder();
+				s.append(projectName);
+				s.append(" => ");
+				s.append(pathURI);
+				s.append(" => ");
+				if (location != null) {
+					s.append(location);
+					s.append(" => ");
+				}
+				s.append(path);
+				System.out.println(s.toString());
+			}
+			return path != null ? new File(path) : null;
+		}
+
+		/**
+		 * Return the absolute path to the 'bin' folder of a workspace bundle or the jar of a plugin.
+		 */
+		public static @NonNull File my_getOSGIClassPath(@NonNull Bundle bundle) throws IOException {
+			//
+			//  We could be helpful and use the classes from  a project, but that would be really confusing
+			//  since template classes would come from the development project whereas referenced classes
+			//  would come from the run-time plugin. Ignore the project files.
+			//
+			File bundleFile = FileLocator.getBundleFile(bundle);
+			if (bundleFile.isDirectory()) {
+				File outputPath = my_getOutputClassPath(bundleFile);
+				if (outputPath != null) {
+					return outputPath;
+				}
+			}
+			return bundleFile;
+		}
+
+		/**
+		 * Search the .classpath of bundle to locate the output classpathEntry and return the corresponding path
+		 * or null if no .classpath or output classpathentry.
+		 */
+		private static @Nullable File my_getOutputClassPath(@NonNull File bundleDirectory) throws IOException {
+			if (CGUtil.isMavenSurefire() || CGUtil.isTychoSurefire()) {
+				return new File(bundleDirectory, MAVEN_TYCHO_BIN_FOLDER_NAME);
+			}
+			File classpathEntry = new File(bundleDirectory, ".classpath");
+			if (classpathEntry.isFile()) {
+				URI uri = URI.createFileURI(classpathEntry.toString());
+				Resource resource = new GenericXMLResourceFactoryImpl().createResource(uri);
+				resource.load(null);
+				for (EObject eRoot : resource.getContents()) {
+					EClass eDocumentRoot = eRoot.eClass();
+					EStructuralFeature classpathentryRef = eDocumentRoot.getEStructuralFeature("classpathentry");
+					EStructuralFeature kindRef = eDocumentRoot.getEStructuralFeature("kind");
+					EStructuralFeature pathRef = eDocumentRoot.getEStructuralFeature("path");
+					for (EObject eObject : eRoot.eContents()) {
+						for (EObject eChild : eObject.eContents()) {
+							if (eChild.eContainmentFeature() == classpathentryRef) {
+								if ("output".equals(eChild.eGet(kindRef))) {
+									String outputPath = String.valueOf(eChild.eGet(pathRef));
+									return new File(bundleDirectory, outputPath);
+								}
+							}
+						}
+					}
+				}
+			}
+			return null;
 		}
 
 		@Override

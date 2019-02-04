@@ -18,7 +18,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -34,7 +33,10 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
+import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.PivotTables;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
@@ -148,7 +150,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 	/**
 	 * Project names needed on the classpath in addition to the defaults.
 	 */
-	private @Nullable List<@NonNull String> additionalProjectNames = null;
+	private final @NonNull JavaClasspath classpath;
 
 	private final @NonNull Map<@NonNull Class<? extends Partition>, @NonNull Integer> partitionClass2count = new HashMap<>();
 
@@ -158,20 +160,22 @@ public abstract class AbstractTestQVT extends QVTimperative
 	private Set<@NonNull String> nsURIs = new HashSet<@NonNull String>();
 	private boolean suppressFailureDiagnosis = false;				// FIXME BUG 511028
 
-	protected final @NonNull String testProjectName;
+	protected final @NonNull TestProject testProject;
 	private Collection<@NonNull GenPackage> usedGenPackages = null;
 	private Collection<@NonNull EPackage> loadedEPackages = null;
 	private @Nullable String copyright = null;
 
-	public AbstractTestQVT(@NonNull ProjectManager projectManager, @NonNull String testProjectName, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) {
+	public AbstractTestQVT(@NonNull ProjectManager projectManager, @NonNull TestProject testProject, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) throws IOException {
 		super(new QVTiEnvironmentFactory(projectManager, null));
 		assert testBundleURI.isPlatform();
-		this.testProjectName = testProjectName;
+		this.testProject = testProject;
 		this.testBundleURI = testBundleURI;
 		this.txURI = txURI;
 		this.intermediateFileNamePrefixURI = intermediateFileNamePrefixURI;
 		this.srcFileURI = srcFileURI;
 		this.binFileURI = binFileURI;
+		this.classpath = CompilerUtil.createDefaultQVTiClasspath();
+		this.classpath.addFile(testProject.getOutputFile(JavaFileUtil.TEST_BIN_FOLDER_NAME).getFile());
 		assert srcFileURI.isFile();
 		assert srcFileURI.hasAbsolutePath();
 		assert binFileURI.isFile();
@@ -189,12 +193,8 @@ public abstract class AbstractTestQVT extends QVTimperative
 		addUsedGenPackage(AbstractTransformer.TRACE_GENMODEL, AbstractTransformer.TRACE_GENMODEL_FRAGMENT);
 	}
 
-	public void addClasspathProjectName(@NonNull String projectName) {
-		List<@NonNull String> additionalProjectNames2 = additionalProjectNames;
-		if (additionalProjectNames2 == null) {
-			additionalProjectNames = additionalProjectNames2 = new ArrayList<>();
-		}
-		additionalProjectNames2.add(projectName);
+	public void addClasspathClass(@NonNull Class<?> classpathClass) {
+		classpath.addClass(classpathClass);
 	}
 
 	public void addRegisteredPackage(@NonNull String ePackageClassName) throws Exception {
@@ -263,7 +263,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		return doCompile(txURI, intermediateFileNamePrefixURI, outputName, createCompilerChainOptions());
 	}
 
-	protected @NonNull CompilerOptions createBuildCompilerChainOptions(boolean isIncremental) {
+	protected @NonNull CompilerOptions createBuildCompilerChainOptions(boolean isIncremental) throws IOException {
 		DefaultCompilerOptions compilerOptions = createCompilerChainOptions();
 		compilerOptions.setGenerateClassesOptions(srcFileURI, binFileURI, createClassProjectNames(), isIncremental);
 		if (generateGenModel()) {
@@ -275,16 +275,11 @@ public abstract class AbstractTestQVT extends QVTimperative
 
 	/**
 	 * Return a list of project names that need to be on the class path.
+	 * @throws IOException
 	 */
-	protected @NonNull List<@NonNull String> createClassProjectNames() {
-		List<@NonNull String> classProjectNames = CompilerUtil.createClasspathProjectNameList();
-		if (additionalProjectNames != null) {
-			for (@NonNull String projectName : additionalProjectNames) {
-				classProjectNames.add(0, projectName);
-			}
-		}
-		classProjectNames.add(0, testProjectName);
-		return classProjectNames;
+	protected @NonNull JavaClasspath createClassProjectNames() {
+		classpath.addClass(getClass()); //testProjectName);
+		return classpath;
 	}
 
 	protected abstract @NonNull AbstractCompilerChain createCompilerChain(@NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI,
@@ -473,6 +468,10 @@ public abstract class AbstractTestQVT extends QVTimperative
 	}
 
 	protected abstract @NonNull String getBasePrefix();
+
+	public @NonNull JavaClasspath getClasspath() {
+		return classpath;
+	}
 
 	@Override
 	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {

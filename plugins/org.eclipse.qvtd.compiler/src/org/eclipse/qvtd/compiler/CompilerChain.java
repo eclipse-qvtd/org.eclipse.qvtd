@@ -12,7 +12,6 @@ package org.eclipse.qvtd.compiler;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
@@ -20,6 +19,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
@@ -60,7 +60,7 @@ public interface CompilerChain
 	public static final CompilerOptions.@NonNull Key<@Nullable URI> URI_KEY = new CompilerOptions.Key<>("uri");
 	public static final CompilerOptions.@NonNull Key<Boolean> VALIDATE_KEY = new CompilerOptions.Key<>("validate");
 
-	public static final CompilerOptions.@NonNull Key<@NonNull List<@NonNull String>> CLASS_PROJECT_NAMES_KEY = new CompilerOptions.Key<>("classProjectNames");
+	public static final CompilerOptions.@NonNull Key<@NonNull JavaClasspath> CLASSPATH_KEY = new CompilerOptions.Key<>("classpath");
 
 	public static final CompilerOptions.@NonNull Key<@Nullable String> JAVA_EXTRA_PREFIX_KEY = new CompilerOptions.Key<>("javaExtraPrefix");
 	public static final CompilerOptions.@NonNull Key<@Nullable Boolean> JAVA_GENERATED_DEBUG_KEY = new CompilerOptions.Key<>("javaGeneratedDebug");

@@ -22,8 +22,10 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.m2m.atl.dsls.core.EMFTCSInjector;
 import org.eclipse.m2m.atl.emftvm.compiler.AtlResourceFactoryImpl;
 import org.eclipse.m2m.atl.engine.parser.AtlParser;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
+import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
@@ -94,13 +96,13 @@ public class QVTrCompilerTests extends LoadTestCase
 
 		private boolean keepOldJavaFiles = false;
 
-		public MyQVT(@NonNull ProjectManager projectManager, @NonNull String testProjectName, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) {
-			super(projectManager, testProjectName, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
+		public MyQVT(@NonNull ProjectManager projectManager, @NonNull TestProject testProject, @NonNull URI testBundleURI, @NonNull URI txURI, @NonNull URI intermediateFileNamePrefixURI, @NonNull URI srcFileURI, @NonNull URI binFileURI) throws IOException {
+			super(projectManager, testProject, testBundleURI, txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
 			getEnvironmentFactory().setSafeNavigationValidationSeverity(StatusCodes.Severity.WARNING);
 		}
 
 		@Override
-		protected @NonNull CompilerOptions createBuildCompilerChainOptions(boolean isIncremental) {
+		protected @NonNull CompilerOptions createBuildCompilerChainOptions(boolean isIncremental) throws IOException {
 			CompilerOptions options = super.createBuildCompilerChainOptions(isIncremental);
 			if (keepOldJavaFiles) {
 				options.setOption(CompilerChain.GENMODEL_STEP, CompilerChain.KEEP_OLD_JAVA_FILES_KEY, Boolean.TRUE);
@@ -167,7 +169,7 @@ public class QVTrCompilerTests extends LoadTestCase
 		URI intermediateFileNamePrefixURI = getTestURI(resultPrefix);
 		URI srcFileURI = getTestFileURI(JavaFileUtil.TEST_SRC_FOLDER_NAME + "/");
 		URI binFileURI = getTestFileURI(JavaFileUtil.TEST_BIN_FOLDER_NAME + "/");
-		return new MyQVT(testProjectManager, getTestProject().getName(), getTestBundleURI(), txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
+		return new MyQVT(testProjectManager, getTestProject(), getTestBundleURI(), txURI, intermediateFileNamePrefixURI, srcFileURI, binFileURI);
 	}
 
 	@Override
@@ -245,11 +247,12 @@ public class QVTrCompilerTests extends LoadTestCase
 		myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel", "//qvtbase");
 		myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel", "//qvtrelation");
 		myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel", "//qvttemplate");
-		myQVT1.addClasspathProjectName("org.eclipse.m2m.atl.common");
-		myQVT1.addClasspathProjectName("org.eclipse.qvtd.pivot.qvtbase");
-		myQVT1.addClasspathProjectName("org.eclipse.qvtd.pivot.qvtrelation");
-		myQVT1.addClasspathProjectName("org.eclipse.qvtd.pivot.qvttemplate");
-		myQVT1.addClasspathProjectName("org.eclipse.qvtd.atl");
+		JavaClasspath classpath1 = myQVT1.getClasspath();
+		classpath1.addClass(org.eclipse.m2m.atl.common.ATLLaunchConstants.class);
+		classpath1.addClass(org.eclipse.qvtd.pivot.qvtbase.BaseModel.class);
+		classpath1.addClass(org.eclipse.qvtd.pivot.qvtrelation.RelationModel.class);
+		classpath1.addClass(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp.class);
+		classpath1.addClass(org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr.class);
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
 			assert classLoader != null;
@@ -290,11 +293,12 @@ public class QVTrCompilerTests extends LoadTestCase
 		MyQVT myQVT3 = createQVT("Families2Persons", txURI2);
 		// Avoid the Java files being deleted, and add their classPath since we will compile them again Ugh! use different packge prefix
 		myQVT3.setKeepOldJavaFiles();
-		myQVT3.addClasspathProjectName("org.eclipse.m2m.atl.common");
-		myQVT3.addClasspathProjectName("org.eclipse.qvtd.pivot.qvtbase");
-		myQVT3.addClasspathProjectName("org.eclipse.qvtd.pivot.qvtrelation");
-		myQVT3.addClasspathProjectName("org.eclipse.qvtd.pivot.qvttemplate");
-		myQVT3.addClasspathProjectName("org.eclipse.qvtd.atl");
+		JavaClasspath classpath3 = myQVT3.getClasspath();
+		classpath3.addClass(org.eclipse.m2m.atl.common.ATLLaunchConstants.class);
+		classpath3.addClass(org.eclipse.qvtd.pivot.qvtbase.BaseModel.class);
+		classpath3.addClass(org.eclipse.qvtd.pivot.qvtrelation.RelationModel.class);
+		classpath3.addClass(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp.class);
+		classpath3.addClass(org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr.class);
 		//		MyQVT myQVT3 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", "samples");
 		//		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.models.families2persons.Families.FamiliesPackage");
 		//		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.models.families2persons.Persons.PersonsPackage");

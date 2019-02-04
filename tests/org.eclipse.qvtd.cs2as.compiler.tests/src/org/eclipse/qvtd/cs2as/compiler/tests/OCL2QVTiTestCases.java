@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
@@ -285,13 +286,13 @@ public class OCL2QVTiTestCases extends LoadTestCase
 		return new AbstractCompilerOptions() {};
 	}
 
-	private @NonNull CS2ASJavaCompilerParameters createParameters(@NonNull String lookupSolverClassName, @NonNull String lookupResultClassName) {
+	private @NonNull CS2ASJavaCompilerParameters createParameters(@NonNull String lookupSolverClassName, @NonNull String lookupResultClassName) throws IOException {
 		CS2ASJavaCompilerParametersImpl cgParams = new CS2ASJavaCompilerParametersImpl(lookupSolverClassName, lookupResultClassName,
 			getTestProject().getOutputFile(JavaFileUtil.TEST_SRC_FOLDER_NAME).getFileString());
 		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
-			for (@NonNull String projectName : CompilerUtil.createClasspathProjectNameList(getTestBundleName())) {
-				cgParams.addClassPathProjectName(projectName);
-			}
+			JavaClasspath classpath = CompilerUtil.createDefaultQVTiClasspath();
+			classpath.addClass(getClass()/*getTestBundleName()*/);
+			cgParams.setClasspath(classpath);
 		}
 		cgParams.setClassLoader(getClass().getClassLoader());
 		return cgParams;
