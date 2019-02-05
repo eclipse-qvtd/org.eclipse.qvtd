@@ -16,6 +16,7 @@ import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.xtext.base.ui.model.BaseCSorASDocumentProvider;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 import org.eclipse.qvtd.xtext.qvtcore.ui.QVTcoreUiModule;
 import org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage;
 
@@ -42,7 +43,7 @@ public class QVTcoreDocumentProvider extends BaseCSorASDocumentProvider
 
 	@Override
 	protected @NonNull String getFileExtension() {
-		return "qvtc";
+		return QVTcoreUtil.QVTC_FILE_EXTENSION;
 	}
 
 	@Override

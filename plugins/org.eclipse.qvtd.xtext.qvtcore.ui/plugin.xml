@@ -13,6 +13,7 @@
               icon="icons/QVTcModelFile.gif"
               id="org.eclipse.qvtd.xtext.qvtcore.QVTcore"
               name="%MF_QVTcoreEditor">
+           <contentTypeBinding contentTypeId="org.eclipse.qvtd.xtext.qvtcore"/>
         </editor>
     </extension>
     <extension

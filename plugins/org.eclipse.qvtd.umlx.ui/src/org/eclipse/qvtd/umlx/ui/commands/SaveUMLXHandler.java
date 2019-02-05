@@ -24,6 +24,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.osgi.util.NLS;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.umlx.qvtr2umlx.QVTr2UMLX;
 import org.eclipse.qvtd.umlx.ui.messages.UMLXUIMessages;
 import org.eclipse.swt.widgets.Shell;
@@ -79,7 +80,7 @@ public class SaveUMLXHandler extends AbstractHandler
 		IFile srcFile = ((IFileEditorInput)editorInput).getFile();
 		IProject srcProject = srcFile.getProject();
 		URI projectURI = URI.createPlatformResourceURI(srcProject.getFullPath().toString() + "/", true);
-		URI outURI = asURI.deresolve(projectURI).trimFileExtension().appendFileExtension("umlx");
+		URI outURI = asURI.deresolve(projectURI).trimFileExtension().appendFileExtension(QVTbaseUtil.UMLX_FILE_EXTENSION);
 		IPath outPath = new Path(outURI.toString());
 		IFile outFile = srcProject.getFile(outPath);
 		Shell shell = editor.getEditorSite().getShell();

@@ -8,6 +8,15 @@
 
 <plugin>
 
+  <extension point="org.eclipse.core.contenttype.contentTypes">
+	<content-type id="org.eclipse.qvtd.xtext.qvtcore" name="%QVTcoreName" 
+		base-type="org.eclipse.core.runtime.text"
+		file-extensions="qvtc"
+        default-charset="UTF-8">
+         <describer class="org.eclipse.ocl.xtext.base.utilities.NotXMLContentHandlerImpl$Describer"/>
+      </content-type>
+  </extension>
+
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.eclipse.org/qvt/2015/QVTcoreCS"

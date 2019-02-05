@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  */
@@ -35,6 +35,7 @@ import org.eclipse.ocl.pivot.utilities.ASSaverNormalizeVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverResolveVisitor;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.NotXMLContentHandlerImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 
 /**
@@ -63,14 +64,18 @@ public class QVTimperativeASResourceFactory extends AbstractASResourceFactory
 		return INSTANCE;
 	}
 
-	private static final @NonNull ContentHandler CONTENT_HANDLER = new RootXMLContentHandlerImpl(
+	private static final @NonNull ContentHandler AS_CONTENT_HANDLER = new RootXMLContentHandlerImpl(
 		QVTimperativePackage.eCONTENT_TYPE, new String[]{FILE_EXTENSION},
 		RootXMLContentHandlerImpl.XMI_KIND, QVTimperativePackage.eNS_URI, null);
-	
+
+	private static final @NonNull ContentHandler CS_CONTENT_HANDLER =
+			new NotXMLContentHandlerImpl(new @NonNull String[]{QVTimperativeUtil.QVTI_FILE_EXTENSION});
+
 	static {
-		installContentHandler(ContentHandler.Registry.NORMAL_PRIORITY, CONTENT_HANDLER);
+		installContentHandler(ContentHandler.Registry.NORMAL_PRIORITY, AS_CONTENT_HANDLER);
+		installContentHandler(ContentHandler.Registry.NORMAL_PRIORITY, CS_CONTENT_HANDLER);
 	}
-	
+
 	/**
 	 * Creates an instance of the resource factory.
 	 */

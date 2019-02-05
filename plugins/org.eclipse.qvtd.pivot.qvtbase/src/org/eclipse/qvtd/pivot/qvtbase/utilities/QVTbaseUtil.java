@@ -58,6 +58,11 @@ public class QVTbaseUtil extends PivotUtil
 	public static final @NonNull String TRACE_CLASS_NAME = "trace";
 	public static final @NonNull String TRACE_TYPED_MODEL_NAME = "middle"; //"$trace$";
 
+	public static final @NonNull String QVTC_FILE_EXTENSION = "qvtc";
+	public static final @NonNull String QVTI_FILE_EXTENSION = "qvti";
+	public static final @NonNull String QVTR_FILE_EXTENSION = "qvtr";
+	public static final @NonNull String UMLX_FILE_EXTENSION = "umlx";
+
 	// Smallest first Collection size sort
 	public static final class CollectionSizeComparator implements Comparator<@NonNull Collection<?>>
 	{

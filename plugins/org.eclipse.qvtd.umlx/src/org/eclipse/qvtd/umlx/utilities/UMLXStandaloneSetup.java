@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ocl.pivot.labels.ILabelGenerator;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.umlx.UMLXPackage;
 import org.eclipse.qvtd.umlx.labels.RelPatternEdgeLabelGenerator;
 import org.eclipse.qvtd.umlx.labels.UMLXModelLabelGenerator;
@@ -50,7 +51,7 @@ public class UMLXStandaloneSetup
 
 	public static void init() {
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
-			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("umlx", new UMLXResourceFactoryImpl());
+			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(QVTbaseUtil.UMLX_FILE_EXTENSION, new UMLXResourceFactoryImpl());
 		}
 		EPackage.Registry.INSTANCE.put(UMLXPackage.eNS_URI, UMLXPackage.eINSTANCE);
 		EValidator.Registry.INSTANCE.put(UMLXPackage.eINSTANCE, UMLXValidator.INSTANCE);

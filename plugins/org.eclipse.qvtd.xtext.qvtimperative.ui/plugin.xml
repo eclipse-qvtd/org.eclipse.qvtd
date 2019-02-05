@@ -13,6 +13,7 @@
               icon="icons/QVTiModelFile.gif"
               id="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative"
               name="%MF_QVTimperativeEditor">
+           <contentTypeBinding contentTypeId="org.eclipse.qvtd.xtext.qvtimperative"/>
         </editor>
     </extension>
     <extension

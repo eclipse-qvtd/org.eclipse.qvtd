@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.xtext.base.ui.builder.AbstractValidatingBuilder;
 import org.eclipse.ocl.xtext.base.ui.builder.AbstractBuildSelector;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.xtext.qvtbase.ui.QVTdProjectHelper;
 
 /**
@@ -43,16 +44,16 @@ public class QVTdBuilder extends AbstractValidatingBuilder
 		@Override
 		protected @NonNull String getMarkerId(@NonNull IFile iFile) {
 			String fileExtension = iFile.getFileExtension();
-			if ("qvtc".equals(fileExtension)) {
+			if (QVTbaseUtil.QVTC_FILE_EXTENSION.equals(fileExtension)) {
 				return "org.eclipse.qvtd.xtext.qvtcore.ui.Marker"; //QVTcoreUiModule.MARKER_ID;
 			}
-			else if ("qvti".equals(fileExtension)) {
+			else if (QVTbaseUtil.QVTI_FILE_EXTENSION.equals(fileExtension)) {
 				return "org.eclipse.qvtd.xtext.qvtimperative.ui.Marker"; //QVTimperativeUiModule.MARKER_ID;
 			}
-			else if ("qvtr".equals(fileExtension)) {
+			else if (QVTbaseUtil.QVTR_FILE_EXTENSION.equals(fileExtension)) {
 				return "org.eclipse.qvtd.xtext.qvtrelation.ui.Marker"; //QVTrelationUiModule.MARKER_ID;
 			}
-			else if ("umlx".equals(fileExtension)) {
+			else if (QVTbaseUtil.UMLX_FILE_EXTENSION.equals(fileExtension)) {
 				return "org.eclipse.qvtd.umlx.ui.Marker"; //...UMLX....MARKER_ID;
 			}
 			return super.getMarkerId(iFile);
