@@ -36,9 +36,9 @@ public class QVTrLaunchConfigurationDelegate extends QVTiLaunchConfigurationDele
 	public static final @NonNull String @NonNull [] compileStepKeys = new @NonNull String[] {
 		CompilerChain.QVTR_STEP,
 		CompilerChain.TRACE_STEP,
-		CompilerChain.QVTC_STEP,
-		CompilerChain.QVTU_STEP,
-		CompilerChain.QVTM_STEP,
+		//	CompilerChain.QVTC_STEP,
+		//	CompilerChain.QVTU_STEP,
+		//	CompilerChain.QVTM_STEP,
 		CompilerChain.QVTS_STEP,
 		CompilerChain.QVTI_STEP
 	};
