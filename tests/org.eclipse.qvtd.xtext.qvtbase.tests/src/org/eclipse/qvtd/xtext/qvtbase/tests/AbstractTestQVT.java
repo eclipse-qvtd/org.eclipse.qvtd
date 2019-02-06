@@ -72,7 +72,6 @@ import org.eclipse.qvtd.pivot.qvtschedule.Region;
 import org.eclipse.qvtd.pivot.qvtschedule.ScheduleModel;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleUtil;
-import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.xtext.resource.XtextResource;
@@ -189,8 +188,6 @@ public abstract class AbstractTestQVT extends QVTimperative
 		URI ecoreURI = URI.createURI(EcorePackage.eNS_URI);
 		getProjectManager().getPackageDescriptor(ecoreURI).configure(getResourceSet(), StandaloneProjectMap.LoadFirstStrategy.INSTANCE,
 			StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
-
-		addUsedGenPackage(AbstractTransformer.TRACE_GENMODEL, AbstractTransformer.TRACE_GENMODEL_FRAGMENT);
 	}
 
 	public void addClasspathClass(@NonNull Class<?> classpathClass) {
@@ -208,11 +205,7 @@ public abstract class AbstractTestQVT extends QVTimperative
 		if (usedGenPackages == null) {
 			usedGenPackages = new ArrayList<>();
 		}
-		URI uri = URI.createPlatformResourceURI(resourcePath, false);
-		if (fragment != null) {
-			uri = uri.appendFragment(fragment);
-		}
-		GenPackage genPackage = ClassUtil.nonNullState((GenPackage)getResourceSet().getEObject(uri, true));
+		GenPackage genPackage = CompilerUtil.getGenPackage(getResourceSet(), resourcePath, fragment);
 		usedGenPackages.add(genPackage);
 		return genPackage;
 	}

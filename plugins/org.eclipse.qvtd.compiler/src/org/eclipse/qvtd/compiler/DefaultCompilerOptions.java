@@ -10,21 +10,30 @@
  ******************************************************************************/
 package org.eclipse.qvtd.compiler;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IWorkspaceRoot;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaClasspath;
+import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.URIUtil;
 import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
+import org.osgi.framework.Bundle;
 
 /**
  * The DefaultCompilerOptions provides the standard configuration of the CompilerChain.
@@ -48,6 +57,42 @@ public class DefaultCompilerOptions extends AbstractCompilerOptions
 		setOption(CompilerChain.DEFAULT_STEP, CompilerChain.SAVE_OPTIONS_KEY, getSaveOptions());
 	}
 
+	private static File getProjectFolder(@NonNull String projectName) throws IOException {
+		assert EMFPlugin.IS_ECLIPSE_RUNNING;		// used by launch
+		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
+		IResource project = workspaceRoot.findMember(projectName);
+		if (project != null) {
+			String location = String.valueOf(project.getLocation());
+			File projectFile = new File(location);
+			File outputClassPath = JavaFileUtil.getOutputClassPath(projectFile);
+			if (outputClassPath != null) {
+				return outputClassPath;
+			}
+		}
+		//	String path = null;
+		Bundle bundle = Platform.getBundle(projectName);
+		if (bundle != null) {
+			try {
+				File bundleFile = FileLocator.getBundleFile(bundle);
+				if (bundleFile.isDirectory()) {
+					//	File outputPath = getOutputClassPath(bundleFile);
+					//	if (outputPath != null) {
+					//		addFile(outputPath);
+					//	}
+				}
+
+				//	File bundleFilePath = getOSGIClassPath(bundle);
+				//	location = bundle.getLocation();
+				//	path = bundleFilePath.toString();
+			} catch (IOException e) {
+				// Doesn't fail for sensible names.
+			}
+		}
+		//	if (path == null) {					// platform:/resource
+		//	}
+		return null;
+	}
+
 	public @NonNull Map<Object, Object> getSaveOptions() {
 		Map<Object, Object> saveOptions = new HashMap<Object, Object>(defaultSavingOptions);
 		saveOptions.put(ASResource.OPTION_NORMALIZE_CONTENTS, Boolean.TRUE);
@@ -55,8 +100,12 @@ public class DefaultCompilerOptions extends AbstractCompilerOptions
 	}
 
 	private void setClassStepOptions(@NonNull String projectName, @NonNull URI classURI) throws IOException {
+		assert EMFPlugin.IS_ECLIPSE_RUNNING;		// used by launch
 		JavaClasspath classpath = CompilerUtil.createDefaultQVTiClasspath();
-		//	classpath.add(projectName); -- only used for QVTd launches -- ?? OSGI only ?? -- ?? project will be added later ??
+		File projectFolder = getProjectFolder(projectName);
+		if (projectFolder != null) {
+			classpath.addFile(projectFolder);
+		}
 		setOption(CompilerChain.CLASS_STEP, CompilerChain.CLASSPATH_KEY, classpath);
 		IFile classFiles = URIUtil.getResolvedFile(classURI);
 		if (classFiles != null) {
@@ -97,6 +146,7 @@ public class DefaultCompilerOptions extends AbstractCompilerOptions
 
 	public void setQVTcGenerateOptions(@NonNull String projectName, @NonNull URI txURI,
 			@NonNull URI genModelURI, @NonNull URI javaURI, @NonNull URI classURI) throws IOException {
+		assert EMFPlugin.IS_ECLIPSE_RUNNING;		// used by launch
 		setOption(CompilerChain.GENMODEL_STEP, CompilerChain.URI_KEY, genModelURI);
 		IFile javaFiles = URIUtil.getResolvedFile(javaURI);
 		if (javaFiles != null) {
@@ -110,7 +160,9 @@ public class DefaultCompilerOptions extends AbstractCompilerOptions
 
 	public void setQVTrGenerateOptions(@NonNull String projectName, @NonNull URI txURI,
 			@NonNull URI genModelURI, @NonNull URI javaURI, @NonNull URI classURI) throws IOException {
+		assert EMFPlugin.IS_ECLIPSE_RUNNING;		// used by launch
 		setOption(CompilerChain.GENMODEL_STEP, CompilerChain.URI_KEY, genModelURI);
+		setOption(CompilerChain.GENMODEL_STEP, CompilerChain.GENMODEL_MODEL_DIRECTORY_KEY, javaURI.toPlatformString(false));
 		String copyright = null; // "Copyright (c) 2015, 2016 Willink Transformations and others.\n;All rights reserved. This program and the accompanying materials\n;are made available under the terms of the Eclipse Public License v2.0\n;which accompanies this distribution, and is available at\n;http://www.eclipse.org/legal/epl-v20.html\n;\n;Contributors:\n;  E.D.Willink - Initial API and implementation");
 		String basePrefix = projectName;
 		Collection<@NonNull GenPackage> usedGenPackages = null;

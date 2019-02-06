@@ -87,6 +87,7 @@ public interface CompilerChain
 	@NonNull Resource createResource(@NonNull URI uri) throws IOException;
 	void dispose();
 	@NonNull QVTbaseEnvironmentFactory getEnvironmentFactory();
+	//	@Nullable File getTraceClassesFolder();
 	@NonNull URI getURI(@NonNull String stepKey, CompilerOptions.@NonNull Key<URI> uriKey);
 	void removeListener(@NonNull Listener listener);
 	void saveResource(@NonNull Resource asResource, @NonNull String stepKey) throws IOException;

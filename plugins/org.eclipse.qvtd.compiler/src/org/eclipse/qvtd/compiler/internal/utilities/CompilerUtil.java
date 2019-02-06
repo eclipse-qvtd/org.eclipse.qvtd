@@ -11,6 +11,8 @@
 package org.eclipse.qvtd.compiler.internal.utilities;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -20,9 +22,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
@@ -45,6 +49,7 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.OperationId;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.Nameable;
@@ -108,6 +113,17 @@ public class CompilerUtil extends QVTscheduleUtil
 	{
 		@NonNull Iterable<@NonNull PR> getProducers();
 	}
+
+	/**
+	 * Add the URI to the list of classpath elememnts.
+	 *
+	 * @throws MalformedURLException
+	 */
+	@Deprecated /* Promote to JavaClasspath */
+	public static void addURI(@NonNull JavaClasspath classpath, @NonNull URI uri) throws MalformedURLException {
+		classpath.addURL(new URL(uri.isFile() ? uri.toString() : uri.toFileString()));
+	}
+
 
 	public static void assertNoResourceErrors(@NonNull String prefix, @NonNull Resource resource) {
 		String message = PivotUtil.formatResourceDiagnostics(resource.getErrors(), prefix, "\n\t");
@@ -505,6 +521,14 @@ public class CompilerUtil extends QVTscheduleUtil
 			}
 		}
 		return allPartitionAnalyses;
+	}
+
+	public static @NonNull GenPackage getGenPackage(@NonNull ResourceSet resourceSet, @NonNull String resourcePath, @Nullable String fragment) {
+		URI uri = URI.createPlatformResourceURI(resourcePath, false);
+		if (fragment != null) {
+			uri = uri.appendFragment(fragment);
+		}
+		return ClassUtil.nonNullState((GenPackage)resourceSet.getEObject(uri, true));
 	}
 
 	public static void indent(@NonNull StringBuilder s, int depth) {

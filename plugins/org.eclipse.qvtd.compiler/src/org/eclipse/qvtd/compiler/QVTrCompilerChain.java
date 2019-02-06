@@ -55,6 +55,7 @@ import org.eclipse.qvtd.compiler.internal.qvtc2qvtu.QVTuConfiguration;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.QVTr2QVTc.GenPackageComparator;
 import org.eclipse.qvtd.compiler.internal.qvtr2qvts.QVTr2QVTs;
 import org.eclipse.qvtd.compiler.internal.qvts2qvts.QVTs2QVTs;
+import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory.CreateStrategy;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -64,6 +65,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.RootRegion;
+import org.eclipse.qvtd.runtime.evaluation.AbstractTransformer;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 
 /**
@@ -176,15 +178,21 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				//
 				//	Create and Save GenModel
 				//
+				String genModelDirectory = compilerChain.basicGetOption(GENMODEL_STEP, GENMODEL_MODEL_DIRECTORY_KEY);
 				URI genModelURI = compilerChain.getURI(GENMODEL_STEP, URI_KEY);
 				saveOptions = compilerChain.basicGetOption(GENMODEL_STEP, SAVE_OPTIONS_KEY);
 				if (saveOptions == null) {
 					saveOptions = XMIUtil.createSaveOptions();
 				}
 				saveOptions.put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
-				Collection<@NonNull ? extends GenPackage> usedGenPackages = compilerChain.basicGetOption(GENMODEL_STEP, GENMODEL_USED_GENPACKAGES_KEY);
-				saveGenModel(this, traceResource, genModelURI, compilerChain.basicGetOption(GENMODEL_STEP, GENMODEL_OPTIONS_KEY), saveOptions, usedGenPackages);
-				//					>>>>>>> fd5dac8 [529130] Change to QVTr-to-QVTs+trace in CompilerChain
+				Set<@NonNull GenPackage> usedGenPackages = new HashSet<>();
+				GenPackage traceGenPackage = CompilerUtil.getGenPackage(environmentFactory.getResourceSet(), AbstractTransformer.TRACE_GENMODEL, AbstractTransformer.TRACE_GENMODEL_FRAGMENT);
+				usedGenPackages.add(traceGenPackage);
+				Collection<@NonNull ? extends GenPackage> moreUsedGenPackages = compilerChain.basicGetOption(GENMODEL_STEP, GENMODEL_USED_GENPACKAGES_KEY);
+				if (moreUsedGenPackages != null) {
+					usedGenPackages.addAll(moreUsedGenPackages);
+				}
+				saveGenModel(this, traceResource, genModelURI, compilerChain.basicGetOption(GENMODEL_STEP, GENMODEL_OPTIONS_KEY), genModelDirectory, saveOptions, usedGenPackages);
 			}
 			finally {
 				environmentFactory.setCreateStrategy(savedStrategy);
@@ -223,7 +231,7 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 			}
 		}
 
-		public @NonNull GenModel saveGenModel(@NonNull ProblemHandler problemHandler, @NonNull Resource asResource, @NonNull URI genModelURI, @Nullable Map<@NonNull String, @Nullable String> genModelOptions, @NonNull Map<Object, Object> saveOptions2, @Nullable Collection<@NonNull ? extends GenPackage> usedGenPackages) throws IOException {
+		public @NonNull GenModel saveGenModel(@NonNull ProblemHandler problemHandler, @NonNull Resource asResource, @NonNull URI genModelURI, @Nullable Map<@NonNull String, @Nullable String> genModelOptions, @Nullable String genModelDirectory, @NonNull Map<Object, Object> saveOptions2, @Nullable Collection<@NonNull ? extends GenPackage> usedGenPackages) throws IOException {
 			URI traceURI = asResource.getURI();
 			assert traceURI != null;
 			@NonNull URI ecoreURI = PivotUtilInternal.getNonASURI(traceURI);
@@ -244,7 +252,12 @@ public class QVTrCompilerChain extends AbstractCompilerChain
 				Collections.sort(allUsedGenPackages, GenPackageComparator.INSTANCE);
 				genModel.getUsedGenPackages().addAll(allUsedGenPackages);
 			}
-			genModel.setModelDirectory("/" + projectName + "/" + JavaFileUtil.TEST_SRC_FOLDER_NAME);
+			if (genModelDirectory != null) {
+				genModel.setModelDirectory(genModelDirectory);
+			}
+			else {
+				genModel.setModelDirectory("/" + projectName + "/" + JavaFileUtil.TEST_SRC_FOLDER_NAME);
+			}
 			genModel.setModelPluginID(projectName);
 			genModel.setModelName(trimFileExtension.lastSegment());
 			genModel.setBundleManifest(false);

@@ -28,7 +28,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -110,25 +109,7 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 
 		public @NonNull Class<? extends Transformer> execute(@NonNull URI txURI, @NonNull JavaResult javaResult) throws Exception {
 			JavaClasspath classpath = basicGetOption(CLASSPATH_KEY);
-			URIConverter uriConverter = compilerChain.getEnvironmentFactory().getResourceSet().getURIConverter();
-			assert uriConverter != null;
-			//			System.out.println("classPathProjectNames = " + classPathProjectNames);
-			// List<@NonNull String> classpathProjects;
-			/*	if (EcorePlugin.IS_ECLIPSE_RUNNING) {
-				URI classFileURI = compilerChain.basicGetOption(QVTrCompilerChain.CLASS_STEP, QVTrCompilerChain.URI_KEY);
-				assert classFileURI != null;
-				String classFilePath2 = classFileURI.toFileString();
-				assert classFilePath2 != null;
-				URI traceURI = compilerChain.getURI(QVTrCompilerChain.TRACE_STEP, QVTrCompilerChain.URI_KEY);
-				String binProjectName = QVTr2QVTc.getProjectName(traceURI);
-				classpathProjects = CompilerUtil.createClassPathProjectList(uriConverter, binProjectName, classFilePath2, classPathProjectNames);
-			}
-			else {
-				classpathProjects = classpath;
-			} */
-			//			URI platformURI = URI.createPlatformResourceURI(compilerChain.get, true);
-			//			URI pathURI = environmentFactory.getResourceSet().getURIConverter().normalize(platformURI);
-			//			System.out.println("classpathProjects = " + classpathProjects);
+			assert classpath != null;
 			JavaFileObject compilationUnit = new OCL2JavaFileObject(javaResult.qualifiedClassName, javaResult.code);
 			List<@NonNull JavaFileObject> compilationUnits = Collections.singletonList(compilationUnit);
 			String problemMessage = JavaFileUtil.compileClasses(compilationUnits, javaResult.qualifiedClassName, javaResult.classPath, classpath);
@@ -137,7 +118,6 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 			}
 			File classFilePath = new File(javaResult.classPath);
 			List<@NonNull String> packagePaths = JavaFileUtil.gatherPackageNames(classFilePath, null);
-			//			Class<? extends Transformer> txClass = (Class<? extends Transformer>) JavaSourceFileObject.loadExplicitClass(explicitClassPath, qualifiedClassName.toString());
 			ClassLoader testClassLoader = compilerChain.getClass().getClassLoader();
 			ExplicitClassLoader classLoader = new ExplicitClassLoader(classFilePath, packagePaths, testClassLoader);
 			@SuppressWarnings("unchecked")
@@ -525,6 +505,27 @@ public abstract class AbstractCompilerChain extends CompilerUtil implements Comp
 	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
 		return environmentFactory;
 	}
+
+	/*	@Override
+	public @Nullable File getTraceClassesFolder() {
+		String classFilePath;
+		URI traceURI = getURI(QVTrCompilerChain.TRACE_STEP, QVTrCompilerChain.URI_KEY);
+		String binProjectName = QVTr2QVTc.getProjectName(traceURI);
+		if (EcorePlugin.IS_ECLIPSE_RUNNING) {
+			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+			IProject binProject = root.getProject(binProjectName);
+			IFolder binFolder = binProject.getFolder(JavaFileUtil.TEST_BIN_FOLDER_NAME);
+			File binFile = URIUtil.toFile(binFolder.getLocationURI());
+			classFilePath = binFile.toString()/*.replace(".", "/")* /.replace("\\", "/");		// FIXME deduce/parameterize bin
+		}
+		else {
+			URI classFileURI = basicGetOption(QVTrCompilerChain.CLASS_STEP, QVTrCompilerChain.URI_KEY);
+			if (classFileURI != null) {
+				classFilePath = classFileURI.toFileString();
+			}
+		}
+		return null;
+	} */
 
 	@Override
 	public @NonNull URI getURI(@NonNull String stepKey, CompilerOptions.@NonNull Key<URI> uriKey) {
