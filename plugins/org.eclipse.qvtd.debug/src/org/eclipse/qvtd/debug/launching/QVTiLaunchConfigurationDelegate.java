@@ -96,7 +96,7 @@ public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate
 
 				@Override
 				public void run() throws Exception {
-					QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), null);
+					QVTiEnvironmentFactory environmentFactory = new QVTiEnvironmentFactory(BasicProjectManager.CLASS_PATH, null);
 					if (traceEvaluation) {
 						environmentFactory.setEvaluationTracingEnabled(true);
 					}
