@@ -50,6 +50,7 @@ import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.SetValue;
+import org.eclipse.qvtd.pivot.qvtbase.impl.PatternImpl;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
@@ -114,7 +115,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	 */
 	@Override
 	public Area getArea() {
-		if (eContainerFeatureID() != (CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0)) return null;
+		if (eContainerFeatureID() != (PatternImpl.PATTERN_FEATURE_COUNT + 1)) return null;
 		return (Area)eInternalContainer();
 	}
 
@@ -124,7 +125,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	 * @generated
 	 */
 	public NotificationChain basicSetArea(Area newArea, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newArea, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newArea, PatternImpl.PATTERN_FEATURE_COUNT + 1, msgs);
 		return msgs;
 	}
 
@@ -135,7 +136,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	 */
 	@Override
 	public void setArea(Area newArea) {
-		if (newArea != eInternalContainer() || (eContainerFeatureID() != (CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0) && newArea != null)) {
+		if (newArea != eInternalContainer() || (eContainerFeatureID() != (PatternImpl.PATTERN_FEATURE_COUNT + 1) && newArea != null)) {
 			if (EcoreUtil.isAncestor(this, newArea))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -147,7 +148,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0, newArea, newArea));
+			eNotify(new ENotificationImpl(this, Notification.SET, PatternImpl.PATTERN_FEATURE_COUNT + 1, newArea, newArea));
 	}
 
 	/**
@@ -236,7 +237,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetArea((Area)otherEnd, msgs);
@@ -252,7 +253,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 1:
 				return basicSetArea(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -266,7 +267,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 1:
 				return eInternalContainer().eInverseRemove(this, ElementImpl.ELEMENT_FEATURE_COUNT + 0, Area.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -280,7 +281,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 1:
 				return getArea();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -294,7 +295,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 1:
 				setArea((Area)newValue);
 				return;
 		}
@@ -309,7 +310,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 1:
 				setArea((Area)null);
 				return;
 		}
@@ -324,7 +325,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 1:
 				return getArea() != null;
 		}
 		return super.eIsSet(featureID);
@@ -339,7 +340,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case CorePatternImpl.CORE_PATTERN_OPERATION_COUNT + 0:
+			case PatternImpl.PATTERN_OPERATION_COUNT + 1:
 				return validateVariablesAreGuardVariables((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

@@ -25,6 +25,7 @@ import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.NavigableEdge;
@@ -134,7 +135,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		boolean oldPartial = partial;
 		partial = newPartial;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 0, oldPartial, partial));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 10, oldPartial, partial));
 	}
 
 	/**
@@ -149,7 +150,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 			referredProperty = (Property)eResolveProxy(oldReferredProperty);
 			if (referredProperty != oldReferredProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1, oldReferredProperty, referredProperty));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 11, oldReferredProperty, referredProperty));
 			}
 		}
 		return referredProperty;
@@ -174,7 +175,7 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 		Property oldReferredProperty = referredProperty;
 		referredProperty = newReferredProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1, oldReferredProperty, referredProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 11, oldReferredProperty, referredProperty));
 	}
 
 	/**
@@ -185,9 +186,9 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				return isPartial();
-			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				if (resolve) return getReferredProperty();
 				return basicGetReferredProperty();
 		}
@@ -202,10 +203,10 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setPartial((Boolean)newValue);
 				return;
-			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				setReferredProperty((Property)newValue);
 				return;
 		}
@@ -220,10 +221,10 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setPartial(PARTIAL_EDEFAULT);
 				return;
-			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				setReferredProperty((Property)null);
 				return;
 		}
@@ -238,9 +239,9 @@ public class NavigationEdgeImpl extends NavigableEdgeImpl implements NavigationE
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				return partial != PARTIAL_EDEFAULT;
-			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				return referredProperty != null;
 		}
 		return super.eIsSet(featureID);

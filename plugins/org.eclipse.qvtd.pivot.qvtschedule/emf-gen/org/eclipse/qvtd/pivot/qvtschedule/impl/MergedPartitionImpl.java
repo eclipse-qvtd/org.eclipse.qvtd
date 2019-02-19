@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MergedPartition;
@@ -101,7 +102,7 @@ public class MergedPartitionImpl extends BasicPartitionImpl implements MergedPar
 	@Override
 	public List<BasicPartition> getOwnedMergedPartitions() {
 		if (ownedMergedPartitions == null) {
-			ownedMergedPartitions = new EObjectContainmentWithInverseEList<BasicPartition>(BasicPartition.class, this, BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 0, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15);
+			ownedMergedPartitions = new EObjectContainmentWithInverseEList<BasicPartition>(BasicPartition.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 24, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 23);
 		}
 		return ownedMergedPartitions;
 	}
@@ -115,7 +116,7 @@ public class MergedPartitionImpl extends BasicPartitionImpl implements MergedPar
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 24:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedMergedPartitions()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -129,7 +130,7 @@ public class MergedPartitionImpl extends BasicPartitionImpl implements MergedPar
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 24:
 				return ((InternalEList<?>)getOwnedMergedPartitions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -143,7 +144,7 @@ public class MergedPartitionImpl extends BasicPartitionImpl implements MergedPar
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 24:
 				return getOwnedMergedPartitions();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -158,7 +159,7 @@ public class MergedPartitionImpl extends BasicPartitionImpl implements MergedPar
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 24:
 				getOwnedMergedPartitions().clear();
 				getOwnedMergedPartitions().addAll((Collection<? extends BasicPartition>)newValue);
 				return;
@@ -174,7 +175,7 @@ public class MergedPartitionImpl extends BasicPartitionImpl implements MergedPar
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 24:
 				getOwnedMergedPartitions().clear();
 				return;
 		}
@@ -189,7 +190,7 @@ public class MergedPartitionImpl extends BasicPartitionImpl implements MergedPar
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 24:
 				return ownedMergedPartitions != null && !ownedMergedPartitions.isEmpty();
 		}
 		return super.eIsSet(featureID);

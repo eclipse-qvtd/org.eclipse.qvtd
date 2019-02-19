@@ -33,6 +33,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
@@ -160,7 +161,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	@Override
 	public EList<Property> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0);
+			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 		}
 		return observedProperties;
 	}
@@ -177,7 +178,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 			targetVariable = (ConnectionVariable)eResolveProxy(oldTargetVariable);
 			if (targetVariable != oldTargetVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1, oldTargetVariable, targetVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, oldTargetVariable, targetVariable));
 			}
 		}
 		return targetVariable;
@@ -202,7 +203,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 		ConnectionVariable oldTargetVariable = targetVariable;
 		targetVariable = newTargetVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1, oldTargetVariable, targetVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, oldTargetVariable, targetVariable));
 	}
 
 	/**
@@ -225,7 +226,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 		boolean oldIsEnforcedUnique = isEnforcedUnique;
 		isEnforcedUnique = newIsEnforcedUnique;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2, oldIsEnforcedUnique, isEnforcedUnique));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, oldIsEnforcedUnique, isEnforcedUnique));
 	}
 
 	/**
@@ -247,7 +248,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 		OCLExpression oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -263,14 +264,14 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3), null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3), null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -346,7 +347,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -360,14 +361,14 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return getObservedProperties();
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				if (resolve) return getTargetVariable();
 				return basicGetTargetVariable();
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return isIsEnforcedUnique();
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -382,17 +383,17 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setTargetVariable((ConnectionVariable)newValue);
 				return;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setIsEnforcedUnique((Boolean)newValue);
 				return;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)newValue);
 				return;
 		}
@@ -407,16 +408,16 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				return;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setTargetVariable((ConnectionVariable)null);
 				return;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setIsEnforcedUnique(IS_ENFORCED_UNIQUE_EDEFAULT);
 				return;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)null);
 				return;
 		}
@@ -431,13 +432,13 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return observedProperties != null && !observedProperties.isEmpty();
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return targetVariable != null;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return isEnforcedUnique != IS_ENFORCED_UNIQUE_EDEFAULT;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
@@ -452,7 +453,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatement.class) {
 			switch (derivedFeatureID) {
-				case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0: return StatementImpl.STATEMENT_FEATURE_COUNT + 0;
+				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -468,7 +469,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatement.class) {
 			switch (baseFeatureID) {
-				case StatementImpl.STATEMENT_FEATURE_COUNT + 0: return MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0;
+				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -484,7 +485,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case MappingStatementImpl.MAPPING_STATEMENT_OPERATION_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 1:
 				return validateCompatibleTypeForValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

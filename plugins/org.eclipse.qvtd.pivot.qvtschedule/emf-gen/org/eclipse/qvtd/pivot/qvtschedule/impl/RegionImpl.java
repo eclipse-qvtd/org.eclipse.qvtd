@@ -252,9 +252,9 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 		if (newRootRegion != rootRegion) {
 			NotificationChain msgs = null;
 			if (rootRegion != null)
-				msgs = ((InternalEObject)rootRegion).eInverseRemove(this, RegionImpl.REGION_FEATURE_COUNT + 0, RootRegion.class, msgs);
+				msgs = ((InternalEObject)rootRegion).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, RootRegion.class, msgs);
 			if (newRootRegion != null)
-				msgs = ((InternalEObject)newRootRegion).eInverseAdd(this, RegionImpl.REGION_FEATURE_COUNT + 0, RootRegion.class, msgs);
+				msgs = ((InternalEObject)newRootRegion).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, RootRegion.class, msgs);
 			msgs = basicSetRootRegion(newRootRegion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -709,7 +709,7 @@ public abstract class RegionImpl extends NamedElementImpl implements Region {
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedClusters()).basicAdd(otherEnd, msgs);
 			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				if (rootRegion != null)
-					msgs = ((InternalEObject)rootRegion).eInverseRemove(this, RegionImpl.REGION_FEATURE_COUNT + 0, RootRegion.class, msgs);
+					msgs = ((InternalEObject)rootRegion).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, RootRegion.class, msgs);
 				return basicSetRootRegion((RootRegion)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);

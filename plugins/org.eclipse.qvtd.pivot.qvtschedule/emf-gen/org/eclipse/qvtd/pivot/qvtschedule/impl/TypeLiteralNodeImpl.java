@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -103,7 +104,7 @@ public class TypeLiteralNodeImpl extends OperationNodeImpl implements TypeLitera
 			typeValue = (Type)eResolveProxy(oldTypeValue);
 			if (typeValue != oldTypeValue) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldTypeValue, typeValue));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 10, oldTypeValue, typeValue));
 			}
 		}
 		return typeValue;
@@ -128,7 +129,7 @@ public class TypeLiteralNodeImpl extends OperationNodeImpl implements TypeLitera
 		Type oldTypeValue = typeValue;
 		typeValue = newTypeValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldTypeValue, typeValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 10, oldTypeValue, typeValue));
 	}
 
 	/**
@@ -139,7 +140,7 @@ public class TypeLiteralNodeImpl extends OperationNodeImpl implements TypeLitera
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				if (resolve) return getTypeValue();
 				return basicGetTypeValue();
 		}
@@ -154,7 +155,7 @@ public class TypeLiteralNodeImpl extends OperationNodeImpl implements TypeLitera
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setTypeValue((Type)newValue);
 				return;
 		}
@@ -169,7 +170,7 @@ public class TypeLiteralNodeImpl extends OperationNodeImpl implements TypeLitera
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setTypeValue((Type)null);
 				return;
 		}
@@ -184,7 +185,7 @@ public class TypeLiteralNodeImpl extends OperationNodeImpl implements TypeLitera
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				return typeValue != null;
 		}
 		return super.eIsSet(featureID);

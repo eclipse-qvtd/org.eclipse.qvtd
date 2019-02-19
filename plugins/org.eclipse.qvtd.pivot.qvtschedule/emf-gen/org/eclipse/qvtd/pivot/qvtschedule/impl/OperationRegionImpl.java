@@ -29,6 +29,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.internal.ModelImpl;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationRegion;
@@ -134,7 +135,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@Override
 	public List<Node> getDependencyNodes() {
 		if (dependencyNodes == null) {
-			dependencyNodes = new EObjectResolvingEList<Node>(Node.class, this, RegionImpl.REGION_FEATURE_COUNT + 0);
+			dependencyNodes = new EObjectResolvingEList<Node>(Node.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
 		}
 		return dependencyNodes;
 	}
@@ -147,7 +148,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@Override
 	public List<Node> getHeadNodes() {
 		if (headNodes == null) {
-			headNodes = new EObjectResolvingEList<Node>(Node.class, this, RegionImpl.REGION_FEATURE_COUNT + 1);
+			headNodes = new EObjectResolvingEList<Node>(Node.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6);
 		}
 		return headNodes;
 	}
@@ -164,7 +165,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 			referredOperation = (Operation)eResolveProxy(oldReferredOperation);
 			if (referredOperation != oldReferredOperation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RegionImpl.REGION_FEATURE_COUNT + 2, oldReferredOperation, referredOperation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7, oldReferredOperation, referredOperation));
 			}
 		}
 		return referredOperation;
@@ -189,7 +190,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 		Operation oldReferredOperation = referredOperation;
 		referredOperation = newReferredOperation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 2, oldReferredOperation, referredOperation));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7, oldReferredOperation, referredOperation));
 	}
 
 	/**
@@ -204,7 +205,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 			resultNode = (Node)eResolveProxy(oldResultNode);
 			if (resultNode != oldResultNode) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RegionImpl.REGION_FEATURE_COUNT + 3, oldResultNode, resultNode));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8, oldResultNode, resultNode));
 			}
 		}
 		return resultNode;
@@ -229,7 +230,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 		Node oldResultNode = resultNode;
 		resultNode = newResultNode;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 3, oldResultNode, resultNode));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8, oldResultNode, resultNode));
 	}
 
 	/**
@@ -239,7 +240,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	 */
 	@Override
 	public ScheduleModel getOwningScheduleModel() {
-		if (eContainerFeatureID() != (RegionImpl.REGION_FEATURE_COUNT + 4)) return null;
+		if (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9)) return null;
 		return (ScheduleModel)eInternalContainer();
 	}
 
@@ -249,7 +250,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningScheduleModel(ScheduleModel newOwningScheduleModel, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningScheduleModel, RegionImpl.REGION_FEATURE_COUNT + 4, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningScheduleModel, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9, msgs);
 		return msgs;
 	}
 
@@ -260,7 +261,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	 */
 	@Override
 	public void setOwningScheduleModel(ScheduleModel newOwningScheduleModel) {
-		if (newOwningScheduleModel != eInternalContainer() || (eContainerFeatureID() != (RegionImpl.REGION_FEATURE_COUNT + 4) && newOwningScheduleModel != null)) {
+		if (newOwningScheduleModel != eInternalContainer() || (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9) && newOwningScheduleModel != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningScheduleModel))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -272,7 +273,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 4, newOwningScheduleModel, newOwningScheduleModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9, newOwningScheduleModel, newOwningScheduleModel));
 	}
 
 	/**
@@ -283,7 +284,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningScheduleModel((ScheduleModel)otherEnd, msgs);
@@ -299,7 +300,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				return basicSetOwningScheduleModel(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -313,7 +314,7 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case RegionImpl.REGION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				return eInternalContainer().eInverseRemove(this, ModelImpl.MODEL_FEATURE_COUNT + 2, ScheduleModel.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -327,17 +328,17 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return getDependencyNodes();
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return getHeadNodes();
-			case RegionImpl.REGION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				if (resolve) return getReferredOperation();
 				return basicGetReferredOperation();
-			case RegionImpl.REGION_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				if (resolve) return getResultNode();
 				return basicGetResultNode();
-			case RegionImpl.REGION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				return getOwningScheduleModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -352,21 +353,21 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				getDependencyNodes().clear();
 				getDependencyNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				getHeadNodes().clear();
 				getHeadNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				setReferredOperation((Operation)newValue);
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				setResultNode((Node)newValue);
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				setOwningScheduleModel((ScheduleModel)newValue);
 				return;
 		}
@@ -381,19 +382,19 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				getDependencyNodes().clear();
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				getHeadNodes().clear();
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				setReferredOperation((Operation)null);
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				setResultNode((Node)null);
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				setOwningScheduleModel((ScheduleModel)null);
 				return;
 		}
@@ -408,15 +409,15 @@ public class OperationRegionImpl extends RegionImpl implements OperationRegion {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return dependencyNodes != null && !dependencyNodes.isEmpty();
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return headNodes != null && !headNodes.isEmpty();
-			case RegionImpl.REGION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				return referredOperation != null;
-			case RegionImpl.REGION_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return resultNode != null;
-			case RegionImpl.REGION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				return getOwningScheduleModel() != null;
 		}
 		return super.eIsSet(featureID);

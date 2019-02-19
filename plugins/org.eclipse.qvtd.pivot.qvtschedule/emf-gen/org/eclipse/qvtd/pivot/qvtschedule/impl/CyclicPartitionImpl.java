@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
@@ -131,7 +132,7 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	 */
 	@Override
 	public CompositePartition getOwningCompositePartition() {
-		if (eContainerFeatureID() != (CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0)) return null;
+		if (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4)) return null;
 		return (CompositePartition)eInternalContainer();
 	}
 
@@ -141,7 +142,7 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningCompositePartition(CompositePartition newOwningCompositePartition, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningCompositePartition, CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningCompositePartition, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4, msgs);
 		return msgs;
 	}
 
@@ -152,19 +153,19 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	 */
 	@Override
 	public void setOwningCompositePartition(CompositePartition newOwningCompositePartition) {
-		if (newOwningCompositePartition != eInternalContainer() || (eContainerFeatureID() != (CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0) && newOwningCompositePartition != null)) {
+		if (newOwningCompositePartition != eInternalContainer() || (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4) && newOwningCompositePartition != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningCompositePartition))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningCompositePartition != null)
-				msgs = ((InternalEObject)newOwningCompositePartition).eInverseAdd(this, PartitionImpl.PARTITION_FEATURE_COUNT + 0, CompositePartition.class, msgs);
+				msgs = ((InternalEObject)newOwningCompositePartition).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, CompositePartition.class, msgs);
 			msgs = basicSetOwningCompositePartition(newOwningCompositePartition, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0, newOwningCompositePartition, newOwningCompositePartition));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4, newOwningCompositePartition, newOwningCompositePartition));
 	}
 
 	/**
@@ -179,7 +180,7 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 			referedMappingRegion = (MappingRegion)eResolveProxy(oldReferedMappingRegion);
 			if (referedMappingRegion != oldReferedMappingRegion) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1, oldReferedMappingRegion, referedMappingRegion));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, oldReferedMappingRegion, referedMappingRegion));
 			}
 		}
 		return referedMappingRegion;
@@ -203,7 +204,7 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 		MappingRegion oldReferedMappingRegion = referedMappingRegion;
 		referedMappingRegion = newReferedMappingRegion;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1, oldReferedMappingRegion, newReferedMappingRegion);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, oldReferedMappingRegion, newReferedMappingRegion);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -219,14 +220,14 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 		if (newReferedMappingRegion != referedMappingRegion) {
 			NotificationChain msgs = null;
 			if (referedMappingRegion != null)
-				msgs = ((InternalEObject)referedMappingRegion).eInverseRemove(this, RegionImpl.REGION_FEATURE_COUNT + 1, MappingRegion.class, msgs);
+				msgs = ((InternalEObject)referedMappingRegion).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6, MappingRegion.class, msgs);
 			if (newReferedMappingRegion != null)
-				msgs = ((InternalEObject)newReferedMappingRegion).eInverseAdd(this, RegionImpl.REGION_FEATURE_COUNT + 1, MappingRegion.class, msgs);
+				msgs = ((InternalEObject)newReferedMappingRegion).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6, MappingRegion.class, msgs);
 			msgs = basicSetReferedMappingRegion(newReferedMappingRegion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1, newReferedMappingRegion, newReferedMappingRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, newReferedMappingRegion, newReferedMappingRegion));
 	}
 
 	/**
@@ -252,7 +253,7 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 			rootPartition = (RootPartition)eResolveProxy(oldRootPartition);
 			if (rootPartition != oldRootPartition) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 3, oldRootPartition, rootPartition));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7, oldRootPartition, rootPartition));
 			}
 		}
 		return rootPartition;
@@ -275,7 +276,7 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	@Override
 	public List<BasicPartition> getExplicitSuccessors() {
 		if (explicitSuccessors == null) {
-			explicitSuccessors = new EObjectWithInverseResolvingEList.ManyInverse<BasicPartition>(BasicPartition.class, this, CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 4, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 4);
+			explicitSuccessors = new EObjectWithInverseResolvingEList.ManyInverse<BasicPartition>(BasicPartition.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 12);
 		}
 		return explicitSuccessors;
 	}
@@ -289,15 +290,15 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningCompositePartition((CompositePartition)otherEnd, msgs);
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				if (referedMappingRegion != null)
-					msgs = ((InternalEObject)referedMappingRegion).eInverseRemove(this, RegionImpl.REGION_FEATURE_COUNT + 1, MappingRegion.class, msgs);
+					msgs = ((InternalEObject)referedMappingRegion).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6, MappingRegion.class, msgs);
 				return basicSetReferedMappingRegion((MappingRegion)otherEnd, msgs);
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExplicitSuccessors()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -311,11 +312,11 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return basicSetOwningCompositePartition(null, msgs);
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return basicSetReferedMappingRegion(null, msgs);
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return ((InternalEList<?>)getExplicitSuccessors()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -329,8 +330,8 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
-				return eInternalContainer().eInverseRemove(this, PartitionImpl.PARTITION_FEATURE_COUNT + 0, CompositePartition.class, msgs);
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
+				return eInternalContainer().eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, CompositePartition.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -343,18 +344,18 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return getOwningCompositePartition();
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				if (resolve) return getReferedMappingRegion();
 				return basicGetReferedMappingRegion();
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				if (resolve) return getRegion();
 				return basicGetRegion();
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				if (resolve) return getRootPartition();
 				return basicGetRootPartition();
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return getExplicitSuccessors();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -369,13 +370,13 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setOwningCompositePartition((CompositePartition)newValue);
 				return;
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setReferedMappingRegion((MappingRegion)newValue);
 				return;
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				getExplicitSuccessors().clear();
 				getExplicitSuccessors().addAll((Collection<? extends BasicPartition>)newValue);
 				return;
@@ -391,13 +392,13 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setOwningCompositePartition((CompositePartition)null);
 				return;
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setReferedMappingRegion((MappingRegion)null);
 				return;
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				getExplicitSuccessors().clear();
 				return;
 		}
@@ -412,15 +413,15 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return getOwningCompositePartition() != null;
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return referedMappingRegion != null;
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return basicGetRegion() != null;
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				return rootPartition != null;
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return explicitSuccessors != null && !explicitSuccessors.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -435,11 +436,11 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == MappingPartition.class) {
 			switch (derivedFeatureID) {
-				case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0: return PartitionImpl.PARTITION_FEATURE_COUNT + 0;
-				case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1: return PartitionImpl.PARTITION_FEATURE_COUNT + 1;
-				case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 2: return PartitionImpl.PARTITION_FEATURE_COUNT + 2;
-				case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 3: return PartitionImpl.PARTITION_FEATURE_COUNT + 3;
-				case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 4: return PartitionImpl.PARTITION_FEATURE_COUNT + 4;
+				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3;
+				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4;
+				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5;
+				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6;
+				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7;
 				default: return -1;
 			}
 		}
@@ -455,11 +456,11 @@ public class CyclicPartitionImpl extends CompositePartitionImpl implements Cycli
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == MappingPartition.class) {
 			switch (baseFeatureID) {
-				case PartitionImpl.PARTITION_FEATURE_COUNT + 0: return CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0;
-				case PartitionImpl.PARTITION_FEATURE_COUNT + 1: return CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1;
-				case PartitionImpl.PARTITION_FEATURE_COUNT + 2: return CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 2;
-				case PartitionImpl.PARTITION_FEATURE_COUNT + 3: return CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 3;
-				case PartitionImpl.PARTITION_FEATURE_COUNT + 4: return CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 4;
+				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4;
+				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5;
+				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6;
+				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7;
+				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8;
 				default: return -1;
 			}
 		}

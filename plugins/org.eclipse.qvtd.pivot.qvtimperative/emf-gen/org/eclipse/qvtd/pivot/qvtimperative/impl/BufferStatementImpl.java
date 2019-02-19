@@ -37,6 +37,7 @@ import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.NamedElementImpl;
+import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
@@ -179,7 +180,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	@Override
 	public EList<Property> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0);
+			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1);
 		}
 		return observedProperties;
 	}
@@ -203,7 +204,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		OCLExpression oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -219,14 +220,14 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1), null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1), null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -249,7 +250,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		Integer oldFirstPass = firstPass;
 		firstPass = newFirstPass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 2, oldFirstPass, firstPass));
+			eNotify(new ENotificationImpl(this, Notification.SET, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3, oldFirstPass, firstPass));
 	}
 
 	/**
@@ -272,7 +273,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		Integer oldLastPass = lastPass;
 		lastPass = newLastPass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 3, oldLastPass, lastPass));
+			eNotify(new ENotificationImpl(this, Notification.SET, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 4, oldLastPass, lastPass));
 	}
 
 	/**
@@ -402,7 +403,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -416,13 +417,13 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				return getObservedProperties();
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				return getOwnedExpression();
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 2:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				return getFirstPass();
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 3:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 4:
 				return getLastPass();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -437,17 +438,17 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				setOwnedExpression((OCLExpression)newValue);
 				return;
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 2:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				setFirstPass((Integer)newValue);
 				return;
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 3:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 4:
 				setLastPass((Integer)newValue);
 				return;
 		}
@@ -462,16 +463,16 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				getObservedProperties().clear();
 				return;
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				setOwnedExpression((OCLExpression)null);
 				return;
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 2:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				setFirstPass(FIRST_PASS_EDEFAULT);
 				return;
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 3:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 4:
 				setLastPass(LAST_PASS_EDEFAULT);
 				return;
 		}
@@ -486,13 +487,13 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				return observedProperties != null && !observedProperties.isEmpty();
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				return ownedExpression != null;
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 2:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				return FIRST_PASS_EDEFAULT == null ? firstPass != null : !FIRST_PASS_EDEFAULT.equals(firstPass);
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 3:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 4:
 				return LAST_PASS_EDEFAULT == null ? lastPass != null : !LAST_PASS_EDEFAULT.equals(lastPass);
 		}
 		return super.eIsSet(featureID);
@@ -517,7 +518,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		}
 		if (baseClass == ObservableStatement.class) {
 			switch (derivedFeatureID) {
-				case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0: return StatementImpl.STATEMENT_FEATURE_COUNT + 0;
+				case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -543,7 +544,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 		}
 		if (baseClass == ObservableStatement.class) {
 			switch (baseFeatureID) {
-				case StatementImpl.STATEMENT_FEATURE_COUNT + 0: return ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0;
+				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0: return VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1;
 				default: return -1;
 			}
 		}
@@ -559,7 +560,7 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
 		if (baseClass == Statement.class) {
 			switch (baseOperationID) {
-				case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0: return ConnectionVariableImpl.CONNECTION_VARIABLE_OPERATION_COUNT + 0;
+				case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0: return VariableDeclarationImpl.VARIABLE_DECLARATION_OPERATION_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -585,9 +586,9 @@ public class BufferStatementImpl extends ConnectionVariableImpl implements Buffe
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_OPERATION_COUNT + 1:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_OPERATION_COUNT + 1:
 				return validateCompatibleTypeForValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_OPERATION_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_OPERATION_COUNT + 0:
 				return joinNames((EList<String>)arguments.get(0));
 		}
 		return super.eInvoke(operationID, arguments);

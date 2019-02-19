@@ -31,6 +31,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
@@ -180,7 +181,7 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 			classDatum = (ClassDatum)eResolveProxy(oldClassDatum);
 			if (classDatum != oldClassDatum) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ConnectionImpl.CONNECTION_FEATURE_COUNT + 0, oldClassDatum, classDatum));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 7, oldClassDatum, classDatum));
 			}
 		}
 		return classDatum;
@@ -205,7 +206,7 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 		ClassDatum oldClassDatum = classDatum;
 		classDatum = newClassDatum;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ConnectionImpl.CONNECTION_FEATURE_COUNT + 0, oldClassDatum, classDatum));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 7, oldClassDatum, classDatum));
 	}
 
 	/**
@@ -255,14 +256,14 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				if (resolve) return getClassDatum();
 				return basicGetClassDatum();
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return getMandatoryTargetNodes();
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 2:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				return getPassedTargetNodes();
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 3:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				return getPreferredTargetNodes();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -277,18 +278,18 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setClassDatum((ClassDatum)newValue);
 				return;
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				getMandatoryTargetNodes().clear();
 				getMandatoryTargetNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 2:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				getPassedTargetNodes().clear();
 				getPassedTargetNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 3:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				getPreferredTargetNodes().clear();
 				getPreferredTargetNodes().addAll((Collection<? extends Node>)newValue);
 				return;
@@ -304,16 +305,16 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setClassDatum((ClassDatum)null);
 				return;
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				getMandatoryTargetNodes().clear();
 				return;
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 2:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				getPassedTargetNodes().clear();
 				return;
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 3:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				getPreferredTargetNodes().clear();
 				return;
 		}
@@ -328,13 +329,13 @@ public class NodeConnectionImpl extends ConnectionImpl implements NodeConnection
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				return classDatum != null;
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return mandatoryTargetNodes != null && !mandatoryTargetNodes.isEmpty();
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 2:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				return passedTargetNodes != null && !passedTargetNodes.isEmpty();
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 3:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				return preferredTargetNodes != null && !preferredTargetNodes.isEmpty();
 		}
 		return super.eIsSet(featureID);

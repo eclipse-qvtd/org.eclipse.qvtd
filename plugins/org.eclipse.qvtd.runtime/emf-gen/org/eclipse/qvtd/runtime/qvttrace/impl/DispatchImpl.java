@@ -114,7 +114,7 @@ public abstract class DispatchImpl extends TraceInstanceImpl implements Dispatch
 		Boolean oldSuccess = success;
 		success = newSuccess;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TraceInstanceImpl.TRACE_INSTANCE_FEATURE_COUNT + 0, oldSuccess, success));
+			eNotify(new ENotificationImpl(this, Notification.SET, 1, oldSuccess, success));
 	}
 
 	/**
@@ -125,7 +125,7 @@ public abstract class DispatchImpl extends TraceInstanceImpl implements Dispatch
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TraceInstanceImpl.TRACE_INSTANCE_FEATURE_COUNT + 0:
+			case 1:
 				return getSuccess();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -139,7 +139,7 @@ public abstract class DispatchImpl extends TraceInstanceImpl implements Dispatch
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TraceInstanceImpl.TRACE_INSTANCE_FEATURE_COUNT + 0:
+			case 1:
 				setSuccess((Boolean)newValue);
 				return;
 		}
@@ -154,7 +154,7 @@ public abstract class DispatchImpl extends TraceInstanceImpl implements Dispatch
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TraceInstanceImpl.TRACE_INSTANCE_FEATURE_COUNT + 0:
+			case 1:
 				setSuccess(SUCCESS_EDEFAULT);
 				return;
 		}
@@ -169,7 +169,7 @@ public abstract class DispatchImpl extends TraceInstanceImpl implements Dispatch
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TraceInstanceImpl.TRACE_INSTANCE_FEATURE_COUNT + 0:
+			case 1:
 				return SUCCESS_EDEFAULT == null ? success != null : !SUCCESS_EDEFAULT.equals(success);
 		}
 		return super.eIsSet(featureID);

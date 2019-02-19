@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.CompositePartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -93,7 +94,7 @@ public abstract class CompositePartitionImpl extends PartitionImpl implements Co
 	@Override
 	public List<MappingPartition> getOwnedMappingPartitions() {
 		if (ownedMappingPartitions == null) {
-			ownedMappingPartitions = new EObjectContainmentWithInverseEList<MappingPartition>(MappingPartition.class, this, PartitionImpl.PARTITION_FEATURE_COUNT + 0, PartitionImpl.PARTITION_FEATURE_COUNT + 0);
+			ownedMappingPartitions = new EObjectContainmentWithInverseEList<MappingPartition>(MappingPartition.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
 		}
 		return ownedMappingPartitions;
 	}
@@ -107,7 +108,7 @@ public abstract class CompositePartitionImpl extends PartitionImpl implements Co
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case PartitionImpl.PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedMappingPartitions()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -121,7 +122,7 @@ public abstract class CompositePartitionImpl extends PartitionImpl implements Co
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case PartitionImpl.PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return ((InternalEList<?>)getOwnedMappingPartitions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -135,7 +136,7 @@ public abstract class CompositePartitionImpl extends PartitionImpl implements Co
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case PartitionImpl.PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return getOwnedMappingPartitions();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -150,7 +151,7 @@ public abstract class CompositePartitionImpl extends PartitionImpl implements Co
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case PartitionImpl.PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getOwnedMappingPartitions().clear();
 				getOwnedMappingPartitions().addAll((Collection<? extends MappingPartition>)newValue);
 				return;
@@ -166,7 +167,7 @@ public abstract class CompositePartitionImpl extends PartitionImpl implements Co
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case PartitionImpl.PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				getOwnedMappingPartitions().clear();
 				return;
 		}
@@ -181,7 +182,7 @@ public abstract class CompositePartitionImpl extends PartitionImpl implements Co
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case PartitionImpl.PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return ownedMappingPartitions != null && !ownedMappingPartitions.isEmpty();
 		}
 		return super.eIsSet(featureID);

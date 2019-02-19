@@ -56,6 +56,7 @@ import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.SetValue;
+import org.eclipse.qvtd.pivot.qvtbase.impl.PatternImpl;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.Assignment;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -157,7 +158,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 */
 	@Override
 	public Area getArea() {
-		if (eContainerFeatureID() != (CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0)) return null;
+		if (eContainerFeatureID() != (PatternImpl.PATTERN_FEATURE_COUNT + 1)) return null;
 		return (Area)eInternalContainer();
 	}
 
@@ -167,7 +168,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * @generated
 	 */
 	public NotificationChain basicSetArea(Area newArea, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newArea, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newArea, PatternImpl.PATTERN_FEATURE_COUNT + 1, msgs);
 		return msgs;
 	}
 
@@ -178,7 +179,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 */
 	@Override
 	public void setArea(Area newArea) {
-		if (newArea != eInternalContainer() || (eContainerFeatureID() != (CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0) && newArea != null)) {
+		if (newArea != eInternalContainer() || (eContainerFeatureID() != (PatternImpl.PATTERN_FEATURE_COUNT + 1) && newArea != null)) {
 			if (EcoreUtil.isAncestor(this, newArea))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -190,7 +191,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0, newArea, newArea));
+			eNotify(new ENotificationImpl(this, Notification.SET, PatternImpl.PATTERN_FEATURE_COUNT + 1, newArea, newArea));
 	}
 
 	/**
@@ -201,7 +202,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public EList<Assignment> getAssignment() {
 		if (assignment == null) {
-			assignment = new EObjectContainmentWithInverseEList<Assignment>(Assignment.class, this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 1, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
+			assignment = new EObjectContainmentWithInverseEList<Assignment>(Assignment.class, this, PatternImpl.PATTERN_FEATURE_COUNT + 2, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
 		}
 		return assignment;
 	}
@@ -214,7 +215,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public EList<EnforcementOperation> getEnforcementOperation() {
 		if (enforcementOperation == null) {
-			enforcementOperation = new EObjectContainmentWithInverseEList<EnforcementOperation>(EnforcementOperation.class, this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
+			enforcementOperation = new EObjectContainmentWithInverseEList<EnforcementOperation>(EnforcementOperation.class, this, PatternImpl.PATTERN_FEATURE_COUNT + 3, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
 		}
 		return enforcementOperation;
 	}
@@ -227,7 +228,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public EList<RealizedVariable> getRealizedVariable() {
 		if (realizedVariable == null) {
-			realizedVariable = new EObjectContainmentEList<RealizedVariable>(RealizedVariable.class, this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 3);
+			realizedVariable = new EObjectContainmentEList<RealizedVariable>(RealizedVariable.class, this, PatternImpl.PATTERN_FEATURE_COUNT + 4);
 		}
 		return realizedVariable;
 	}
@@ -319,13 +320,13 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetArea((Area)otherEnd, msgs);
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 1:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 2:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAssignment()).basicAdd(otherEnd, msgs);
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEnforcementOperation()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -339,13 +340,13 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 1:
 				return basicSetArea(null, msgs);
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 1:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getAssignment()).basicRemove(otherEnd, msgs);
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 3:
 				return ((InternalEList<?>)getEnforcementOperation()).basicRemove(otherEnd, msgs);
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 3:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 4:
 				return ((InternalEList<?>)getRealizedVariable()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -359,7 +360,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 1:
 				return eInternalContainer().eInverseRemove(this, ElementImpl.ELEMENT_FEATURE_COUNT + 1, Area.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -373,13 +374,13 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 1:
 				return getArea();
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 1:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 2:
 				return getAssignment();
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 3:
 				return getEnforcementOperation();
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 3:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 4:
 				return getRealizedVariable();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -394,18 +395,18 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 1:
 				setArea((Area)newValue);
 				return;
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 1:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 2:
 				getAssignment().clear();
 				getAssignment().addAll((Collection<? extends Assignment>)newValue);
 				return;
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 3:
 				getEnforcementOperation().clear();
 				getEnforcementOperation().addAll((Collection<? extends EnforcementOperation>)newValue);
 				return;
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 3:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 4:
 				getRealizedVariable().clear();
 				getRealizedVariable().addAll((Collection<? extends RealizedVariable>)newValue);
 				return;
@@ -421,16 +422,16 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 1:
 				setArea((Area)null);
 				return;
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 1:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 2:
 				getAssignment().clear();
 				return;
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 3:
 				getEnforcementOperation().clear();
 				return;
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 3:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 4:
 				getRealizedVariable().clear();
 				return;
 		}
@@ -445,13 +446,13 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 1:
 				return getArea() != null;
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 1:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 2:
 				return assignment != null && !assignment.isEmpty();
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 3:
 				return enforcementOperation != null && !enforcementOperation.isEmpty();
-			case CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 3:
+			case PatternImpl.PATTERN_FEATURE_COUNT + 4:
 				return realizedVariable != null && !realizedVariable.isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -466,7 +467,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case CorePatternImpl.CORE_PATTERN_OPERATION_COUNT + 0:
+			case PatternImpl.PATTERN_OPERATION_COUNT + 1:
 				return validateVariablesAreBottomVariables((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

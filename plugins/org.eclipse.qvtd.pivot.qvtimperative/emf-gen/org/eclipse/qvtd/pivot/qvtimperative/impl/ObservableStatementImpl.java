@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.ObservableStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 
@@ -90,7 +91,7 @@ public abstract class ObservableStatementImpl extends StatementImpl implements O
 	@Override
 	public EList<Property> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, StatementImpl.STATEMENT_FEATURE_COUNT + 0);
+			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 		}
 		return observedProperties;
 	}
@@ -103,7 +104,7 @@ public abstract class ObservableStatementImpl extends StatementImpl implements O
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StatementImpl.STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return getObservedProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -118,7 +119,7 @@ public abstract class ObservableStatementImpl extends StatementImpl implements O
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StatementImpl.STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
@@ -134,7 +135,7 @@ public abstract class ObservableStatementImpl extends StatementImpl implements O
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StatementImpl.STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				return;
 		}
@@ -149,7 +150,7 @@ public abstract class ObservableStatementImpl extends StatementImpl implements O
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StatementImpl.STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return observedProperties != null && !observedProperties.isEmpty();
 		}
 		return super.eIsSet(featureID);

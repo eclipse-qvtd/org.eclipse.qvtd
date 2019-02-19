@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtschedule.Region;
@@ -96,7 +97,7 @@ public abstract class VariableNodeImpl extends MappingNodeImpl implements Variab
 			referredVariable = (VariableDeclaration)eResolveProxy(oldReferredVariable);
 			if (referredVariable != oldReferredVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingNodeImpl.MAPPING_NODE_FEATURE_COUNT + 0, oldReferredVariable, referredVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 10, oldReferredVariable, referredVariable));
 			}
 		}
 		return referredVariable;
@@ -121,7 +122,7 @@ public abstract class VariableNodeImpl extends MappingNodeImpl implements Variab
 		VariableDeclaration oldReferredVariable = referredVariable;
 		referredVariable = newReferredVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingNodeImpl.MAPPING_NODE_FEATURE_COUNT + 0, oldReferredVariable, referredVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 10, oldReferredVariable, referredVariable));
 	}
 
 	/**
@@ -132,7 +133,7 @@ public abstract class VariableNodeImpl extends MappingNodeImpl implements Variab
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MappingNodeImpl.MAPPING_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				if (resolve) return getReferredVariable();
 				return basicGetReferredVariable();
 		}
@@ -147,7 +148,7 @@ public abstract class VariableNodeImpl extends MappingNodeImpl implements Variab
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MappingNodeImpl.MAPPING_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setReferredVariable((VariableDeclaration)newValue);
 				return;
 		}
@@ -162,7 +163,7 @@ public abstract class VariableNodeImpl extends MappingNodeImpl implements Variab
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MappingNodeImpl.MAPPING_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setReferredVariable((VariableDeclaration)null);
 				return;
 		}
@@ -177,7 +178,7 @@ public abstract class VariableNodeImpl extends MappingNodeImpl implements Variab
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MappingNodeImpl.MAPPING_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				return referredVariable != null;
 		}
 		return super.eIsSet(featureID);

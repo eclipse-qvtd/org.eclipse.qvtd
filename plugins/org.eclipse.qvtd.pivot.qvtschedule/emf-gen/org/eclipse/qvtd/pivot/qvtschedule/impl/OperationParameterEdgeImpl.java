@@ -25,6 +25,7 @@ import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.pivot.Parameter;
 
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -127,7 +128,7 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 			referredParameter = (Parameter)eResolveProxy(oldReferredParameter);
 			if (referredParameter != oldReferredParameter) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0, oldReferredParameter, referredParameter));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 6, oldReferredParameter, referredParameter));
 			}
 		}
 		return referredParameter;
@@ -152,7 +153,7 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 		Parameter oldReferredParameter = referredParameter;
 		referredParameter = newReferredParameter;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0, oldReferredParameter, referredParameter));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 6, oldReferredParameter, referredParameter));
 	}
 
 	/**
@@ -175,7 +176,7 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 		int oldParameterIndex = parameterIndex;
 		parameterIndex = newParameterIndex;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 1, oldParameterIndex, parameterIndex));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 7, oldParameterIndex, parameterIndex));
 	}
 
 	/**
@@ -186,10 +187,10 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				if (resolve) return getReferredParameter();
 				return basicGetReferredParameter();
-			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				return getParameterIndex();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -203,10 +204,10 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setReferredParameter((Parameter)newValue);
 				return;
-			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setParameterIndex((Integer)newValue);
 				return;
 		}
@@ -221,10 +222,10 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setReferredParameter((Parameter)null);
 				return;
-			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setParameterIndex(PARAMETER_INDEX_EDEFAULT);
 				return;
 		}
@@ -239,9 +240,9 @@ public class OperationParameterEdgeImpl extends ArgumentEdgeImpl implements Oper
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				return referredParameter != null;
-			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				return parameterIndex != PARAMETER_INDEX_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

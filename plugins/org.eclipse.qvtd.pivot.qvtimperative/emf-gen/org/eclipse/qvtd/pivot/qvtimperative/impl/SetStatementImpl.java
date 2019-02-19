@@ -37,6 +37,7 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
 import org.eclipse.ocl.pivot.library.LibraryIteration.LibraryIterationExtension;
@@ -227,7 +228,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			targetVariable = (VariableDeclaration)eResolveProxy(oldTargetVariable);
 			if (targetVariable != oldTargetVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0, oldTargetVariable, targetVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, oldTargetVariable, targetVariable));
 			}
 		}
 		return targetVariable;
@@ -252,7 +253,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		VariableDeclaration oldTargetVariable = targetVariable;
 		targetVariable = newTargetVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0, oldTargetVariable, targetVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, oldTargetVariable, targetVariable));
 	}
 
 	/**
@@ -267,7 +268,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			targetProperty = (Property)eResolveProxy(oldTargetProperty);
 			if (targetProperty != oldTargetProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 1, oldTargetProperty, targetProperty));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, oldTargetProperty, targetProperty));
 			}
 		}
 		return targetProperty;
@@ -292,7 +293,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		Property oldTargetProperty = targetProperty;
 		targetProperty = newTargetProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 1, oldTargetProperty, targetProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, oldTargetProperty, targetProperty));
 	}
 
 	/**
@@ -315,7 +316,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		boolean oldIsPartial = isPartial;
 		isPartial = newIsPartial;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 2, oldIsPartial, isPartial));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, oldIsPartial, isPartial));
 	}
 
 	/**
@@ -338,7 +339,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		boolean oldIsOpposite = isOpposite;
 		isOpposite = newIsOpposite;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 4, oldIsOpposite, isOpposite));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, oldIsOpposite, isOpposite));
 	}
 
 	/**
@@ -361,7 +362,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		boolean oldIsNotify = isNotify;
 		isNotify = newIsNotify;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 3, oldIsNotify, isNotify));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4, oldIsNotify, isNotify));
 	}
 
 	/**
@@ -383,7 +384,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		OCLExpression oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -399,14 +400,14 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5), null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5), null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -971,7 +972,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -985,21 +986,21 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				if (resolve) return getTargetVariable();
 				return basicGetTargetVariable();
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				if (resolve) return getTargetProperty();
 				return basicGetTargetProperty();
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return isIsPartial();
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return isIsNotify();
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return isIsOpposite();
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return getOwnedExpression();
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 6:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				return getResolvedProperty();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -1013,22 +1014,22 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setTargetVariable((VariableDeclaration)newValue);
 				return;
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setTargetProperty((Property)newValue);
 				return;
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setIsPartial((Boolean)newValue);
 				return;
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setIsNotify((Boolean)newValue);
 				return;
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setIsOpposite((Boolean)newValue);
 				return;
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				setOwnedExpression((OCLExpression)newValue);
 				return;
 		}
@@ -1043,22 +1044,22 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setTargetVariable((VariableDeclaration)null);
 				return;
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setTargetProperty((Property)null);
 				return;
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setIsPartial(IS_PARTIAL_EDEFAULT);
 				return;
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setIsNotify(IS_NOTIFY_EDEFAULT);
 				return;
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setIsOpposite(IS_OPPOSITE_EDEFAULT);
 				return;
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				setOwnedExpression((OCLExpression)null);
 				return;
 		}
@@ -1073,19 +1074,19 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return targetVariable != null;
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return targetProperty != null;
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return isPartial != IS_PARTIAL_EDEFAULT;
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return isNotify != IS_NOTIFY_EDEFAULT;
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return isOpposite != IS_OPPOSITE_EDEFAULT;
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return ownedExpression != null;
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 6:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				return getResolvedProperty() != null;
 		}
 		return super.eIsSet(featureID);
@@ -1100,15 +1101,15 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 1:
 				return validateCompatibleClassForProperty((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 2:
 				return validateCompatibleTypeForPartialValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 3:
 				return validateCompatibleTypeForTotalValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 4:
 				return validateValueDoesNotNavigateFromRealizedVariables((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 5:
 				return validateTargetPropertyIsNotReadOnly((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

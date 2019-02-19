@@ -25,6 +25,7 @@ import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.pivot.MapLiteralPart;
 
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.MapPartEdge;
@@ -104,7 +105,7 @@ public class MapPartEdgeImpl extends ArgumentEdgeImpl implements MapPartEdge {
 			referredPart = (MapLiteralPart)eResolveProxy(oldReferredPart);
 			if (referredPart != oldReferredPart) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0, oldReferredPart, referredPart));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 6, oldReferredPart, referredPart));
 			}
 		}
 		return referredPart;
@@ -129,7 +130,7 @@ public class MapPartEdgeImpl extends ArgumentEdgeImpl implements MapPartEdge {
 		MapLiteralPart oldReferredPart = referredPart;
 		referredPart = newReferredPart;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0, oldReferredPart, referredPart));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 6, oldReferredPart, referredPart));
 	}
 
 	/**
@@ -140,7 +141,7 @@ public class MapPartEdgeImpl extends ArgumentEdgeImpl implements MapPartEdge {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				if (resolve) return getReferredPart();
 				return basicGetReferredPart();
 		}
@@ -155,7 +156,7 @@ public class MapPartEdgeImpl extends ArgumentEdgeImpl implements MapPartEdge {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setReferredPart((MapLiteralPart)newValue);
 				return;
 		}
@@ -170,7 +171,7 @@ public class MapPartEdgeImpl extends ArgumentEdgeImpl implements MapPartEdge {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setReferredPart((MapLiteralPart)null);
 				return;
 		}
@@ -185,7 +186,7 @@ public class MapPartEdgeImpl extends ArgumentEdgeImpl implements MapPartEdge {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				return referredPart != null;
 		}
 		return super.eIsSet(featureID);

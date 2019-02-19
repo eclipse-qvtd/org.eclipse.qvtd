@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.QVTschedulePackage;
@@ -121,7 +122,7 @@ public class StringLiteralNodeImpl extends OperationNodeImpl implements StringLi
 		String oldStringValue = stringValue;
 		stringValue = newStringValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldStringValue, stringValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 10, oldStringValue, stringValue));
 	}
 
 	/**
@@ -132,7 +133,7 @@ public class StringLiteralNodeImpl extends OperationNodeImpl implements StringLi
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				return getStringValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -146,7 +147,7 @@ public class StringLiteralNodeImpl extends OperationNodeImpl implements StringLi
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setStringValue((String)newValue);
 				return;
 		}
@@ -161,7 +162,7 @@ public class StringLiteralNodeImpl extends OperationNodeImpl implements StringLi
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setStringValue(STRING_VALUE_EDEFAULT);
 				return;
 		}
@@ -176,7 +177,7 @@ public class StringLiteralNodeImpl extends OperationNodeImpl implements StringLi
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				return STRING_VALUE_EDEFAULT == null ? stringValue != null : !STRING_VALUE_EDEFAULT.equals(stringValue);
 		}
 		return super.eIsSet(featureID);

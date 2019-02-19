@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.qvtd.pivot.qvtschedule.BooleanLiteralNode;
@@ -124,7 +125,7 @@ public class BooleanLiteralNodeImpl extends OperationNodeImpl implements Boolean
 		boolean oldBooleanValue = booleanValue;
 		booleanValue = newBooleanValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldBooleanValue, booleanValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 10, oldBooleanValue, booleanValue));
 	}
 
 	/**
@@ -135,7 +136,7 @@ public class BooleanLiteralNodeImpl extends OperationNodeImpl implements Boolean
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				return isBooleanValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -149,7 +150,7 @@ public class BooleanLiteralNodeImpl extends OperationNodeImpl implements Boolean
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setBooleanValue((Boolean)newValue);
 				return;
 		}
@@ -164,7 +165,7 @@ public class BooleanLiteralNodeImpl extends OperationNodeImpl implements Boolean
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setBooleanValue(BOOLEAN_VALUE_EDEFAULT);
 				return;
 		}
@@ -179,7 +180,7 @@ public class BooleanLiteralNodeImpl extends OperationNodeImpl implements Boolean
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				return booleanValue != BOOLEAN_VALUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

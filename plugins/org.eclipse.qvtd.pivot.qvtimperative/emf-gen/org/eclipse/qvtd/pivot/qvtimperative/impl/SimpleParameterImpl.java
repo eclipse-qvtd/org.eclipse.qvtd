@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
@@ -96,7 +97,7 @@ public class SimpleParameterImpl extends MappingParameterImpl implements SimpleP
 			referredTypedModel = (ImperativeTypedModel)eResolveProxy(oldReferredTypedModel);
 			if (referredTypedModel != oldReferredTypedModel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1, oldReferredTypedModel, referredTypedModel));
 			}
 		}
 		return referredTypedModel;
@@ -121,7 +122,7 @@ public class SimpleParameterImpl extends MappingParameterImpl implements SimpleP
 		ImperativeTypedModel oldReferredTypedModel = referredTypedModel;
 		referredTypedModel = newReferredTypedModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1, oldReferredTypedModel, referredTypedModel));
 	}
 
 	/**
@@ -132,7 +133,7 @@ public class SimpleParameterImpl extends MappingParameterImpl implements SimpleP
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				if (resolve) return getReferredTypedModel();
 				return basicGetReferredTypedModel();
 		}
@@ -147,7 +148,7 @@ public class SimpleParameterImpl extends MappingParameterImpl implements SimpleP
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				setReferredTypedModel((ImperativeTypedModel)newValue);
 				return;
 		}
@@ -162,7 +163,7 @@ public class SimpleParameterImpl extends MappingParameterImpl implements SimpleP
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				setReferredTypedModel((ImperativeTypedModel)null);
 				return;
 		}
@@ -177,7 +178,7 @@ public class SimpleParameterImpl extends MappingParameterImpl implements SimpleP
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				return referredTypedModel != null;
 		}
 		return super.eIsSet(featureID);

@@ -46,6 +46,7 @@ import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.impl.PatternImpl;
 import org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl;
 import org.eclipse.qvtd.pivot.qvtcore.Area;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
@@ -196,9 +197,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		if (newGuardPattern != guardPattern) {
 			NotificationChain msgs = null;
 			if (guardPattern != null)
-				msgs = ((InternalEObject)guardPattern).eInverseRemove(this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0, GuardPattern.class, msgs);
+				msgs = ((InternalEObject)guardPattern).eInverseRemove(this, PatternImpl.PATTERN_FEATURE_COUNT + 1, GuardPattern.class, msgs);
 			if (newGuardPattern != null)
-				msgs = ((InternalEObject)newGuardPattern).eInverseAdd(this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0, GuardPattern.class, msgs);
+				msgs = ((InternalEObject)newGuardPattern).eInverseAdd(this, PatternImpl.PATTERN_FEATURE_COUNT + 1, GuardPattern.class, msgs);
 			msgs = basicSetGuardPattern(newGuardPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -241,9 +242,9 @@ public class MappingImpl extends RuleImpl implements Mapping {
 		if (newBottomPattern != bottomPattern) {
 			NotificationChain msgs = null;
 			if (bottomPattern != null)
-				msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0, BottomPattern.class, msgs);
+				msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, PatternImpl.PATTERN_FEATURE_COUNT + 1, BottomPattern.class, msgs);
 			if (newBottomPattern != null)
-				msgs = ((InternalEObject)newBottomPattern).eInverseAdd(this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0, BottomPattern.class, msgs);
+				msgs = ((InternalEObject)newBottomPattern).eInverseAdd(this, PatternImpl.PATTERN_FEATURE_COUNT + 1, BottomPattern.class, msgs);
 			msgs = basicSetBottomPattern(newBottomPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}

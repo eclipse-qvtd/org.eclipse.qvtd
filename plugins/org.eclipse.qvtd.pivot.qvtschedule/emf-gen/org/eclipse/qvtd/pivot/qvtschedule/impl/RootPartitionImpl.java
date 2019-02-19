@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
@@ -99,7 +100,7 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	 */
 	@Override
 	public RootRegion getOwningRootRegion() {
-		if (eContainerFeatureID() != (CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0)) return null;
+		if (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4)) return null;
 		return (RootRegion)eInternalContainer();
 	}
 
@@ -109,7 +110,7 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningRootRegion(RootRegion newOwningRootRegion, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningRootRegion, CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningRootRegion, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4, msgs);
 		return msgs;
 	}
 
@@ -120,19 +121,19 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	 */
 	@Override
 	public void setOwningRootRegion(RootRegion newOwningRootRegion) {
-		if (newOwningRootRegion != eInternalContainer() || (eContainerFeatureID() != (CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0) && newOwningRootRegion != null)) {
+		if (newOwningRootRegion != eInternalContainer() || (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4) && newOwningRootRegion != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningRootRegion))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningRootRegion != null)
-				msgs = ((InternalEObject)newOwningRootRegion).eInverseAdd(this, RegionImpl.REGION_FEATURE_COUNT + 5, RootRegion.class, msgs);
+				msgs = ((InternalEObject)newOwningRootRegion).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10, RootRegion.class, msgs);
 			msgs = basicSetOwningRootRegion(newOwningRootRegion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0, newOwningRootRegion, newOwningRootRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4, newOwningRootRegion, newOwningRootRegion));
 	}
 
 	/**
@@ -147,7 +148,7 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 			loadingPartition = (LoadingPartition)eResolveProxy(oldLoadingPartition);
 			if (loadingPartition != oldLoadingPartition) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1, oldLoadingPartition, loadingPartition));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, oldLoadingPartition, loadingPartition));
 			}
 		}
 		return loadingPartition;
@@ -172,7 +173,7 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 		LoadingPartition oldLoadingPartition = loadingPartition;
 		loadingPartition = newLoadingPartition;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1, oldLoadingPartition, loadingPartition));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, oldLoadingPartition, loadingPartition));
 	}
 
 	/**
@@ -183,7 +184,7 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningRootRegion((RootRegion)otherEnd, msgs);
@@ -199,7 +200,7 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return basicSetOwningRootRegion(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -213,8 +214,8 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
-				return eInternalContainer().eInverseRemove(this, RegionImpl.REGION_FEATURE_COUNT + 5, RootRegion.class, msgs);
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
+				return eInternalContainer().eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10, RootRegion.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -227,9 +228,9 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return getOwningRootRegion();
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				if (resolve) return getLoadingPartition();
 				return basicGetLoadingPartition();
 		}
@@ -244,10 +245,10 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setOwningRootRegion((RootRegion)newValue);
 				return;
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setLoadingPartition((LoadingPartition)newValue);
 				return;
 		}
@@ -262,10 +263,10 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				setOwningRootRegion((RootRegion)null);
 				return;
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setLoadingPartition((LoadingPartition)null);
 				return;
 		}
@@ -280,9 +281,9 @@ public class RootPartitionImpl extends CompositePartitionImpl implements RootPar
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return getOwningRootRegion() != null;
-			case CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return loadingPartition != null;
 		}
 		return super.eIsSet(featureID);

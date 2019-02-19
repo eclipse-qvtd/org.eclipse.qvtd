@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.EnumerationLiteral;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.qvtd.pivot.qvtschedule.EnumLiteralNode;
@@ -104,7 +105,7 @@ public class EnumLiteralNodeImpl extends OperationNodeImpl implements EnumLitera
 			enumValue = (EnumerationLiteral)eResolveProxy(oldEnumValue);
 			if (enumValue != oldEnumValue) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldEnumValue, enumValue));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 10, oldEnumValue, enumValue));
 			}
 		}
 		return enumValue;
@@ -129,7 +130,7 @@ public class EnumLiteralNodeImpl extends OperationNodeImpl implements EnumLitera
 		EnumerationLiteral oldEnumValue = enumValue;
 		enumValue = newEnumValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldEnumValue, enumValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 10, oldEnumValue, enumValue));
 	}
 
 	/**
@@ -140,7 +141,7 @@ public class EnumLiteralNodeImpl extends OperationNodeImpl implements EnumLitera
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				if (resolve) return getEnumValue();
 				return basicGetEnumValue();
 		}
@@ -155,7 +156,7 @@ public class EnumLiteralNodeImpl extends OperationNodeImpl implements EnumLitera
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setEnumValue((EnumerationLiteral)newValue);
 				return;
 		}
@@ -170,7 +171,7 @@ public class EnumLiteralNodeImpl extends OperationNodeImpl implements EnumLitera
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setEnumValue((EnumerationLiteral)null);
 				return;
 		}
@@ -185,7 +186,7 @@ public class EnumLiteralNodeImpl extends OperationNodeImpl implements EnumLitera
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				return enumValue != null;
 		}
 		return super.eIsSet(featureID);

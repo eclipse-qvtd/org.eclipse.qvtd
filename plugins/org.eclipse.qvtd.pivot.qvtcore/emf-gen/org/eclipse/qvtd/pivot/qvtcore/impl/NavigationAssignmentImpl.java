@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.ocl.pivot.OCLExpression;
 
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.qvtd.pivot.qvtcore.NavigationAssignment;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 
@@ -105,7 +106,7 @@ public abstract class NavigationAssignmentImpl extends AssignmentImpl implements
 		OCLExpression oldSlotExpression = slotExpression;
 		slotExpression = newSlotExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0, oldSlotExpression, newSlotExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 4, oldSlotExpression, newSlotExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -121,14 +122,14 @@ public abstract class NavigationAssignmentImpl extends AssignmentImpl implements
 		if (newSlotExpression != slotExpression) {
 			NotificationChain msgs = null;
 			if (slotExpression != null)
-				msgs = ((InternalEObject)slotExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0), null, msgs);
+				msgs = ((InternalEObject)slotExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ElementImpl.ELEMENT_FEATURE_COUNT + 4), null, msgs);
 			if (newSlotExpression != null)
-				msgs = ((InternalEObject)newSlotExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0), null, msgs);
+				msgs = ((InternalEObject)newSlotExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ElementImpl.ELEMENT_FEATURE_COUNT + 4), null, msgs);
 			msgs = basicSetSlotExpression(newSlotExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0, newSlotExpression, newSlotExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 4, newSlotExpression, newSlotExpression));
 	}
 
 	/**
@@ -139,7 +140,7 @@ public abstract class NavigationAssignmentImpl extends AssignmentImpl implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				return basicSetSlotExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -153,7 +154,7 @@ public abstract class NavigationAssignmentImpl extends AssignmentImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				return getSlotExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -167,7 +168,7 @@ public abstract class NavigationAssignmentImpl extends AssignmentImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				setSlotExpression((OCLExpression)newValue);
 				return;
 		}
@@ -182,7 +183,7 @@ public abstract class NavigationAssignmentImpl extends AssignmentImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				setSlotExpression((OCLExpression)null);
 				return;
 		}
@@ -197,7 +198,7 @@ public abstract class NavigationAssignmentImpl extends AssignmentImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				return slotExpression != null;
 		}
 		return super.eIsSet(featureID);

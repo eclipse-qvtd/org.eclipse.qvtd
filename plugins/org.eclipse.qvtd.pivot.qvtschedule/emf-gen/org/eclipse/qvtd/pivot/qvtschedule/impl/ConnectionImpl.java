@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.ToGraphHelper;
 import org.eclipse.qvtd.pivot.qvtbase.graphs.GraphStringBuilder.GraphNode;
@@ -239,7 +240,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningRootRegion != null)
-				msgs = ((InternalEObject)newOwningRootRegion).eInverseAdd(this, RegionImpl.REGION_FEATURE_COUNT + 1, RootRegion.class, msgs);
+				msgs = ((InternalEObject)newOwningRootRegion).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6, RootRegion.class, msgs);
 			msgs = basicSetOwningRootRegion(newOwningRootRegion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -398,7 +399,7 @@ public abstract class ConnectionImpl extends ElementImpl implements Connection {
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
-				return eInternalContainer().eInverseRemove(this, RegionImpl.REGION_FEATURE_COUNT + 1, RootRegion.class, msgs);
+				return eInternalContainer().eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6, RootRegion.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

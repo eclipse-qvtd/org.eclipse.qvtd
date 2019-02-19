@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
@@ -110,7 +111,7 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 			referredTypedModel = (ImperativeTypedModel)eResolveProxy(oldReferredTypedModel);
 			if (referredTypedModel != oldReferredTypedModel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1, oldReferredTypedModel, referredTypedModel));
 			}
 		}
 		return referredTypedModel;
@@ -135,7 +136,7 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 		ImperativeTypedModel oldReferredTypedModel = referredTypedModel;
 		referredTypedModel = newReferredTypedModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1, oldReferredTypedModel, referredTypedModel));
 	}
 
 	/**
@@ -150,7 +151,7 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 			successProperty = (Property)eResolveProxy(oldSuccessProperty);
 			if (successProperty != oldSuccessProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 1, oldSuccessProperty, successProperty));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2, oldSuccessProperty, successProperty));
 			}
 		}
 		return successProperty;
@@ -175,7 +176,7 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 		Property oldSuccessProperty = successProperty;
 		successProperty = newSuccessProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 1, oldSuccessProperty, successProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2, oldSuccessProperty, successProperty));
 	}
 
 	/**
@@ -186,10 +187,10 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				if (resolve) return getReferredTypedModel();
 				return basicGetReferredTypedModel();
-			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 1:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				if (resolve) return getSuccessProperty();
 				return basicGetSuccessProperty();
 		}
@@ -204,10 +205,10 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				setReferredTypedModel((ImperativeTypedModel)newValue);
 				return;
-			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 1:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				setSuccessProperty((Property)newValue);
 				return;
 		}
@@ -222,10 +223,10 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				setReferredTypedModel((ImperativeTypedModel)null);
 				return;
-			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 1:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				setSuccessProperty((Property)null);
 				return;
 		}
@@ -240,9 +241,9 @@ public class GuardParameterImpl extends MappingParameterImpl implements GuardPar
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				return referredTypedModel != null;
-			case MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 1:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				return successProperty != null;
 		}
 		return super.eIsSet(featureID);

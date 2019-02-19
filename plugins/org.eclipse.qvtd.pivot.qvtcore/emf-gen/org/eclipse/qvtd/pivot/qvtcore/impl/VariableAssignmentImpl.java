@@ -34,6 +34,7 @@ import org.eclipse.ocl.pivot.Variable;
 
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanOrOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
@@ -123,7 +124,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 			targetVariable = (Variable)eResolveProxy(oldTargetVariable);
 			if (targetVariable != oldTargetVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0, oldTargetVariable, targetVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 4, oldTargetVariable, targetVariable));
 			}
 		}
 		return targetVariable;
@@ -148,7 +149,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 		Variable oldTargetVariable = targetVariable;
 		targetVariable = newTargetVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0, oldTargetVariable, targetVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 4, oldTargetVariable, targetVariable));
 	}
 
 	/**
@@ -284,7 +285,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				if (resolve) return getTargetVariable();
 				return basicGetTargetVariable();
 		}
@@ -299,7 +300,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				setTargetVariable((Variable)newValue);
 				return;
 		}
@@ -314,7 +315,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				setTargetVariable((Variable)null);
 				return;
 		}
@@ -329,7 +330,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 4:
 				return targetVariable != null;
 		}
 		return super.eIsSet(featureID);
@@ -344,7 +345,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case AssignmentImpl.ASSIGNMENT_OPERATION_COUNT + 0:
+			case ElementImpl.ELEMENT_OPERATION_COUNT + 0:
 				return validateCompatibleTypeForValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

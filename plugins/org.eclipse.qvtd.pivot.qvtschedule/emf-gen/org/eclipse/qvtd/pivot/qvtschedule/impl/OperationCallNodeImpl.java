@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.OperationCallNode;
@@ -102,7 +103,7 @@ public class OperationCallNodeImpl extends OperationNodeImpl implements Operatio
 			referredOperation = (Operation)eResolveProxy(oldReferredOperation);
 			if (referredOperation != oldReferredOperation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldReferredOperation, referredOperation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 10, oldReferredOperation, referredOperation));
 			}
 		}
 		return referredOperation;
@@ -127,7 +128,7 @@ public class OperationCallNodeImpl extends OperationNodeImpl implements Operatio
 		Operation oldReferredOperation = referredOperation;
 		referredOperation = newReferredOperation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldReferredOperation, referredOperation));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 10, oldReferredOperation, referredOperation));
 	}
 
 	/**
@@ -138,7 +139,7 @@ public class OperationCallNodeImpl extends OperationNodeImpl implements Operatio
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				if (resolve) return getReferredOperation();
 				return basicGetReferredOperation();
 		}
@@ -153,7 +154,7 @@ public class OperationCallNodeImpl extends OperationNodeImpl implements Operatio
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setReferredOperation((Operation)newValue);
 				return;
 		}
@@ -168,7 +169,7 @@ public class OperationCallNodeImpl extends OperationNodeImpl implements Operatio
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setReferredOperation((Operation)null);
 				return;
 		}
@@ -183,7 +184,7 @@ public class OperationCallNodeImpl extends OperationNodeImpl implements Operatio
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				return referredOperation != null;
 		}
 		return super.eIsSet(featureID);

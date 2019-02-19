@@ -430,18 +430,18 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 
 		// Create classes and their features
 		collectionTemplateExpEClass = createEClass(0);
-		createEReference(collectionTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0);
-		createEReference(collectionTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1);
-		createEReference(collectionTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 2);
-		createEOperation(collectionTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 0);
-		createEOperation(collectionTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 1);
-		createEOperation(collectionTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 2);
+		createEReference(collectionTemplateExpEClass, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 2);
+		createEReference(collectionTemplateExpEClass, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 3);
+		createEReference(collectionTemplateExpEClass, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 4);
+		createEOperation(collectionTemplateExpEClass, LiteralExpImpl.LITERAL_EXP_OPERATION_COUNT + 2);
+		createEOperation(collectionTemplateExpEClass, LiteralExpImpl.LITERAL_EXP_OPERATION_COUNT + 3);
+		createEOperation(collectionTemplateExpEClass, LiteralExpImpl.LITERAL_EXP_OPERATION_COUNT + 4);
 
 		objectTemplateExpEClass = createEClass(1);
-		createEReference(objectTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0);
-		createEReference(objectTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1);
-		createEOperation(objectTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 0);
-		createEOperation(objectTemplateExpEClass, TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 1);
+		createEReference(objectTemplateExpEClass, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 2);
+		createEReference(objectTemplateExpEClass, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 3);
+		createEOperation(objectTemplateExpEClass, LiteralExpImpl.LITERAL_EXP_OPERATION_COUNT + 2);
+		createEOperation(objectTemplateExpEClass, LiteralExpImpl.LITERAL_EXP_OPERATION_COUNT + 3);
 
 		propertyTemplateItemEClass = createEClass(2);
 		createEReference(propertyTemplateItemEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 0);

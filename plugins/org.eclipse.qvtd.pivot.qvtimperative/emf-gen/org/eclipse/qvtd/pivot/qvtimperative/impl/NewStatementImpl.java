@@ -34,6 +34,8 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
+import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
@@ -164,7 +166,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	@Override
 	public EList<Property> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0);
+			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0);
 		}
 		return observedProperties;
 	}
@@ -189,7 +191,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 		boolean oldIsContained = isContained;
 		isContained = newIsContained;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 1, oldIsContained, isContained));
+			eNotify(new ENotificationImpl(this, Notification.SET, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1, oldIsContained, isContained));
 	}
 
 	/**
@@ -204,7 +206,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 			referredTypedModel = (ImperativeTypedModel)eResolveProxy(oldReferredTypedModel);
 			if (referredTypedModel != oldReferredTypedModel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2, oldReferredTypedModel, referredTypedModel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2, oldReferredTypedModel, referredTypedModel));
 			}
 		}
 		return referredTypedModel;
@@ -229,7 +231,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 		ImperativeTypedModel oldReferredTypedModel = referredTypedModel;
 		referredTypedModel = newReferredTypedModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2, oldReferredTypedModel, referredTypedModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2, oldReferredTypedModel, referredTypedModel));
 	}
 
 	/**
@@ -251,7 +253,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 		OCLExpression oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -267,14 +269,14 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3), null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3), null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -399,7 +401,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -413,14 +415,14 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				return getObservedProperties();
-			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 1:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				return isIsContained();
-			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				if (resolve) return getReferredTypedModel();
 				return basicGetReferredTypedModel();
-			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -435,17 +437,17 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
-			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 1:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				setIsContained((Boolean)newValue);
 				return;
-			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				setReferredTypedModel((ImperativeTypedModel)newValue);
 				return;
-			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)newValue);
 				return;
 		}
@@ -460,16 +462,16 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				return;
-			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 1:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				setIsContained(IS_CONTAINED_EDEFAULT);
 				return;
-			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				setReferredTypedModel((ImperativeTypedModel)null);
 				return;
-			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)null);
 				return;
 		}
@@ -484,13 +486,13 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
 				return observedProperties != null && !observedProperties.isEmpty();
-			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 1:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				return isContained != IS_CONTAINED_EDEFAULT;
-			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2:
 				return referredTypedModel != null;
-			case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3:
 				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
@@ -505,7 +507,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatement.class) {
 			switch (derivedFeatureID) {
-				case VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0: return StatementImpl.STATEMENT_FEATURE_COUNT + 0;
+				case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -521,7 +523,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatement.class) {
 			switch (baseFeatureID) {
-				case StatementImpl.STATEMENT_FEATURE_COUNT + 0: return VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 0;
+				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0: return VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -537,9 +539,9 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case VariableStatementImpl.VARIABLE_STATEMENT_OPERATION_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_OPERATION_COUNT + 1:
 				return validateCompatibleTypeForValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case VariableStatementImpl.VARIABLE_STATEMENT_OPERATION_COUNT + 1:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_OPERATION_COUNT + 2:
 				return validateNonDataTypeForType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

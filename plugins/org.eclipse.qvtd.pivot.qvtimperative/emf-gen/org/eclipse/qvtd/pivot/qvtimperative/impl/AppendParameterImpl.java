@@ -87,7 +87,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	 */
 	@Override
 	public Mapping getOwningMapping() {
-		if (eContainerFeatureID() != (ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0)) return null;
+		if (eContainerFeatureID() != (VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1)) return null;
 		return (Mapping)eInternalContainer();
 	}
 
@@ -97,7 +97,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningMapping(Mapping newOwningMapping, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningMapping, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningMapping, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1, msgs);
 		return msgs;
 	}
 
@@ -108,7 +108,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	 */
 	@Override
 	public void setOwningMapping(Mapping newOwningMapping) {
-		if (newOwningMapping != eInternalContainer() || (eContainerFeatureID() != (ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0) && newOwningMapping != null)) {
+		if (newOwningMapping != eInternalContainer() || (eContainerFeatureID() != (VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1) && newOwningMapping != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningMapping))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -120,7 +120,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0, newOwningMapping, newOwningMapping));
+			eNotify(new ENotificationImpl(this, Notification.SET, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1, newOwningMapping, newOwningMapping));
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningMapping((Mapping)otherEnd, msgs);
@@ -147,7 +147,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				return basicSetOwningMapping(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -161,7 +161,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				return eInternalContainer().eInverseRemove(this, RuleImpl.RULE_FEATURE_COUNT + 1, Mapping.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -175,7 +175,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				return getOwningMapping();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -189,7 +189,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				setOwningMapping((Mapping)newValue);
 				return;
 		}
@@ -204,7 +204,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				setOwningMapping((Mapping)null);
 				return;
 		}
@@ -219,7 +219,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0:
+			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1:
 				return getOwningMapping() != null;
 		}
 		return super.eIsSet(featureID);
@@ -234,7 +234,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == MappingParameter.class) {
 			switch (derivedFeatureID) {
-				case ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0: return VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0;
+				case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1: return VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -250,7 +250,7 @@ public class AppendParameterImpl extends ConnectionVariableImpl implements Appen
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == MappingParameter.class) {
 			switch (baseFeatureID) {
-				case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0: return ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 0;
+				case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0: return VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1;
 				default: return -1;
 			}
 		}

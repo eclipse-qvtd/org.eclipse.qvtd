@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
@@ -106,7 +107,7 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 			referredLoadingRegion = (LoadingRegion)eResolveProxy(oldReferredLoadingRegion);
 			if (referredLoadingRegion != oldReferredLoadingRegion) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0, oldReferredLoadingRegion, referredLoadingRegion));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8, oldReferredLoadingRegion, referredLoadingRegion));
 			}
 		}
 		return referredLoadingRegion;
@@ -130,7 +131,7 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 		LoadingRegion oldReferredLoadingRegion = referredLoadingRegion;
 		referredLoadingRegion = newReferredLoadingRegion;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0, oldReferredLoadingRegion, newReferredLoadingRegion);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8, oldReferredLoadingRegion, newReferredLoadingRegion);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -146,14 +147,14 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 		if (newReferredLoadingRegion != referredLoadingRegion) {
 			NotificationChain msgs = null;
 			if (referredLoadingRegion != null)
-				msgs = ((InternalEObject)referredLoadingRegion).eInverseRemove(this, RegionImpl.REGION_FEATURE_COUNT + 0, LoadingRegion.class, msgs);
+				msgs = ((InternalEObject)referredLoadingRegion).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, LoadingRegion.class, msgs);
 			if (newReferredLoadingRegion != null)
-				msgs = ((InternalEObject)newReferredLoadingRegion).eInverseAdd(this, RegionImpl.REGION_FEATURE_COUNT + 0, LoadingRegion.class, msgs);
+				msgs = ((InternalEObject)newReferredLoadingRegion).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, LoadingRegion.class, msgs);
 			msgs = basicSetReferredLoadingRegion(newReferredLoadingRegion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0, newReferredLoadingRegion, newReferredLoadingRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8, newReferredLoadingRegion, newReferredLoadingRegion));
 	}
 
 	/**
@@ -164,9 +165,9 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				if (referredLoadingRegion != null)
-					msgs = ((InternalEObject)referredLoadingRegion).eInverseRemove(this, RegionImpl.REGION_FEATURE_COUNT + 0, LoadingRegion.class, msgs);
+					msgs = ((InternalEObject)referredLoadingRegion).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, LoadingRegion.class, msgs);
 				return basicSetReferredLoadingRegion((LoadingRegion)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -180,7 +181,7 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return basicSetReferredLoadingRegion(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -194,7 +195,7 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				if (resolve) return getReferredLoadingRegion();
 				return basicGetReferredLoadingRegion();
 		}
@@ -209,7 +210,7 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				setReferredLoadingRegion((LoadingRegion)newValue);
 				return;
 		}
@@ -224,7 +225,7 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				setReferredLoadingRegion((LoadingRegion)null);
 				return;
 		}
@@ -239,7 +240,7 @@ public class LoadingPartitionImpl extends MappingPartitionImpl implements Loadin
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return referredLoadingRegion != null;
 		}
 		return super.eIsSet(featureID);

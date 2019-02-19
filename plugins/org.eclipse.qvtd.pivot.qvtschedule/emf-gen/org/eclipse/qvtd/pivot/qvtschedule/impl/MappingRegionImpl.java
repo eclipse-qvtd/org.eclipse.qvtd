@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.ModelImpl;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -118,7 +119,7 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public List<Node> getHeadNodes() {
 		if (headNodes == null) {
-			headNodes = new EObjectResolvingEList<Node>(Node.class, this, RegionImpl.REGION_FEATURE_COUNT + 0);
+			headNodes = new EObjectResolvingEList<Node>(Node.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
 		}
 		return headNodes;
 	}
@@ -131,7 +132,7 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public List<MappingPartition> getMappingPartitions() {
 		if (mappingPartitions == null) {
-			mappingPartitions = new EObjectWithInverseResolvingEList<MappingPartition>(MappingPartition.class, this, RegionImpl.REGION_FEATURE_COUNT + 1, PartitionImpl.PARTITION_FEATURE_COUNT + 1);
+			mappingPartitions = new EObjectWithInverseResolvingEList<MappingPartition>(MappingPartition.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
 		}
 		return mappingPartitions;
 	}
@@ -143,7 +144,7 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	 */
 	@Override
 	public ScheduleModel getOwningScheduleModel() {
-		if (eContainerFeatureID() != (RegionImpl.REGION_FEATURE_COUNT + 2)) return null;
+		if (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7)) return null;
 		return (ScheduleModel)eInternalContainer();
 	}
 
@@ -153,7 +154,7 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningScheduleModel(ScheduleModel newOwningScheduleModel, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningScheduleModel, RegionImpl.REGION_FEATURE_COUNT + 2, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningScheduleModel, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7, msgs);
 		return msgs;
 	}
 
@@ -164,7 +165,7 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	 */
 	@Override
 	public void setOwningScheduleModel(ScheduleModel newOwningScheduleModel) {
-		if (newOwningScheduleModel != eInternalContainer() || (eContainerFeatureID() != (RegionImpl.REGION_FEATURE_COUNT + 2) && newOwningScheduleModel != null)) {
+		if (newOwningScheduleModel != eInternalContainer() || (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7) && newOwningScheduleModel != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningScheduleModel))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -176,7 +177,7 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 2, newOwningScheduleModel, newOwningScheduleModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7, newOwningScheduleModel, newOwningScheduleModel));
 	}
 
 	/**
@@ -188,9 +189,9 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMappingPartitions()).basicAdd(otherEnd, msgs);
-			case RegionImpl.REGION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningScheduleModel((ScheduleModel)otherEnd, msgs);
@@ -206,9 +207,9 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return ((InternalEList<?>)getMappingPartitions()).basicRemove(otherEnd, msgs);
-			case RegionImpl.REGION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				return basicSetOwningScheduleModel(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -222,7 +223,7 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case RegionImpl.REGION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				return eInternalContainer().eInverseRemove(this, ModelImpl.MODEL_FEATURE_COUNT + 1, ScheduleModel.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -236,11 +237,11 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return getHeadNodes();
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return getMappingPartitions();
-			case RegionImpl.REGION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				return getOwningScheduleModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -255,15 +256,15 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				getHeadNodes().clear();
 				getHeadNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				getMappingPartitions().clear();
 				getMappingPartitions().addAll((Collection<? extends MappingPartition>)newValue);
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				setOwningScheduleModel((ScheduleModel)newValue);
 				return;
 		}
@@ -278,13 +279,13 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				getHeadNodes().clear();
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				getMappingPartitions().clear();
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				setOwningScheduleModel((ScheduleModel)null);
 				return;
 		}
@@ -299,11 +300,11 @@ public abstract class MappingRegionImpl extends RegionImpl implements MappingReg
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return headNodes != null && !headNodes.isEmpty();
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return mappingPartitions != null && !mappingPartitions.isEmpty();
-			case RegionImpl.REGION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				return getOwningScheduleModel() != null;
 		}
 		return super.eIsSet(featureID);

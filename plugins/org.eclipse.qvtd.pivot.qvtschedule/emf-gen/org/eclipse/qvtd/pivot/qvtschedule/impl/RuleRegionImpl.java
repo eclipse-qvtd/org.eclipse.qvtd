@@ -25,6 +25,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtschedule.RuleRegion;
@@ -99,7 +100,7 @@ public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				if (resolve) return getReferredRule();
 				return basicGetReferredRule();
 		}
@@ -114,7 +115,7 @@ public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				setReferredRule((Rule)newValue);
 				return;
 		}
@@ -129,7 +130,7 @@ public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				setReferredRule((Rule)null);
 				return;
 		}
@@ -144,7 +145,7 @@ public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return referredRule != null;
 		}
 		return super.eIsSet(featureID);
@@ -182,7 +183,7 @@ public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
 			referredRule = (Rule)eResolveProxy(oldReferredRule);
 			if (referredRule != oldReferredRule) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0, oldReferredRule, referredRule));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8, oldReferredRule, referredRule));
 			}
 		}
 		return referredRule;
@@ -207,7 +208,7 @@ public class RuleRegionImpl extends MappingRegionImpl implements RuleRegion {
 		Rule oldReferredRule = referredRule;
 		referredRule = newReferredRule;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0, oldReferredRule, referredRule));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8, oldReferredRule, referredRule));
 	}
 
 	@Override

@@ -28,6 +28,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingNode;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -126,7 +127,7 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 		boolean oldMatched = matched;
 		matched = newMatched;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NodeImpl.NODE_FEATURE_COUNT + 0, oldMatched, matched));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 9, oldMatched, matched));
 	}
 
 	/**
@@ -137,7 +138,7 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				return isMatched();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -151,7 +152,7 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				setMatched((Boolean)newValue);
 				return;
 		}
@@ -166,7 +167,7 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				setMatched(MATCHED_EDEFAULT);
 				return;
 		}
@@ -181,7 +182,7 @@ public abstract class MappingNodeImpl extends NodeImpl implements MappingNode {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case NodeImpl.NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				return matched != MATCHED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

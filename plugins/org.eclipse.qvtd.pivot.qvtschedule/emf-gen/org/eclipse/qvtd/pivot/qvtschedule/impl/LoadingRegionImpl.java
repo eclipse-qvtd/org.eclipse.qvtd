@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.LoadingPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -104,7 +105,7 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 			loadingPartition = (LoadingPartition)eResolveProxy(oldLoadingPartition);
 			if (loadingPartition != oldLoadingPartition) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RegionImpl.REGION_FEATURE_COUNT + 0, oldLoadingPartition, loadingPartition));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, oldLoadingPartition, loadingPartition));
 			}
 		}
 		return loadingPartition;
@@ -128,7 +129,7 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 		LoadingPartition oldLoadingPartition = loadingPartition;
 		loadingPartition = newLoadingPartition;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 0, oldLoadingPartition, newLoadingPartition);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, oldLoadingPartition, newLoadingPartition);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -144,14 +145,14 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 		if (newLoadingPartition != loadingPartition) {
 			NotificationChain msgs = null;
 			if (loadingPartition != null)
-				msgs = ((InternalEObject)loadingPartition).eInverseRemove(this, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0, LoadingPartition.class, msgs);
+				msgs = ((InternalEObject)loadingPartition).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8, LoadingPartition.class, msgs);
 			if (newLoadingPartition != null)
-				msgs = ((InternalEObject)newLoadingPartition).eInverseAdd(this, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0, LoadingPartition.class, msgs);
+				msgs = ((InternalEObject)newLoadingPartition).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8, LoadingPartition.class, msgs);
 			msgs = basicSetLoadingPartition(newLoadingPartition, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 0, newLoadingPartition, newLoadingPartition));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, newLoadingPartition, newLoadingPartition));
 	}
 
 	/**
@@ -161,7 +162,7 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	 */
 	@Override
 	public RootRegion getOwningRootRegion() {
-		if (eContainerFeatureID() != (RegionImpl.REGION_FEATURE_COUNT + 1)) return null;
+		if (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6)) return null;
 		return (RootRegion)eInternalContainer();
 	}
 
@@ -171,7 +172,7 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningRootRegion(RootRegion newOwningRootRegion, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningRootRegion, RegionImpl.REGION_FEATURE_COUNT + 1, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningRootRegion, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6, msgs);
 		return msgs;
 	}
 
@@ -182,19 +183,19 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	 */
 	@Override
 	public void setOwningRootRegion(RootRegion newOwningRootRegion) {
-		if (newOwningRootRegion != eInternalContainer() || (eContainerFeatureID() != (RegionImpl.REGION_FEATURE_COUNT + 1) && newOwningRootRegion != null)) {
+		if (newOwningRootRegion != eInternalContainer() || (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6) && newOwningRootRegion != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningRootRegion))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningRootRegion != null)
-				msgs = ((InternalEObject)newOwningRootRegion).eInverseAdd(this, RegionImpl.REGION_FEATURE_COUNT + 2, RootRegion.class, msgs);
+				msgs = ((InternalEObject)newOwningRootRegion).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7, RootRegion.class, msgs);
 			msgs = basicSetOwningRootRegion(newOwningRootRegion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 1, newOwningRootRegion, newOwningRootRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6, newOwningRootRegion, newOwningRootRegion));
 	}
 
 	/**
@@ -205,11 +206,11 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				if (loadingPartition != null)
-					msgs = ((InternalEObject)loadingPartition).eInverseRemove(this, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0, LoadingPartition.class, msgs);
+					msgs = ((InternalEObject)loadingPartition).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8, LoadingPartition.class, msgs);
 				return basicSetLoadingPartition((LoadingPartition)otherEnd, msgs);
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningRootRegion((RootRegion)otherEnd, msgs);
@@ -225,9 +226,9 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return basicSetLoadingPartition(null, msgs);
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return basicSetOwningRootRegion(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -241,8 +242,8 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
-				return eInternalContainer().eInverseRemove(this, RegionImpl.REGION_FEATURE_COUNT + 2, RootRegion.class, msgs);
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
+				return eInternalContainer().eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7, RootRegion.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -255,10 +256,10 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				if (resolve) return getLoadingPartition();
 				return basicGetLoadingPartition();
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return getOwningRootRegion();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -272,10 +273,10 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setLoadingPartition((LoadingPartition)newValue);
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				setOwningRootRegion((RootRegion)newValue);
 				return;
 		}
@@ -290,10 +291,10 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				setLoadingPartition((LoadingPartition)null);
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				setOwningRootRegion((RootRegion)null);
 				return;
 		}
@@ -308,9 +309,9 @@ public class LoadingRegionImpl extends RegionImpl implements LoadingRegion {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return loadingPartition != null;
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return getOwningRootRegion() != null;
 		}
 		return super.eIsSet(featureID);

@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
 import org.eclipse.qvtd.pivot.qvtschedule.NumericLiteralNode;
@@ -120,7 +121,7 @@ public class NumericLiteralNodeImpl extends OperationNodeImpl implements Numeric
 		Number oldNumericValue = numericValue;
 		numericValue = newNumericValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldNumericValue, numericValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 10, oldNumericValue, numericValue));
 	}
 
 	/**
@@ -131,7 +132,7 @@ public class NumericLiteralNodeImpl extends OperationNodeImpl implements Numeric
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				return getNumericValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -145,7 +146,7 @@ public class NumericLiteralNodeImpl extends OperationNodeImpl implements Numeric
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setNumericValue((Number)newValue);
 				return;
 		}
@@ -160,7 +161,7 @@ public class NumericLiteralNodeImpl extends OperationNodeImpl implements Numeric
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setNumericValue(NUMERIC_VALUE_EDEFAULT);
 				return;
 		}
@@ -175,7 +176,7 @@ public class NumericLiteralNodeImpl extends OperationNodeImpl implements Numeric
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				return NUMERIC_VALUE_EDEFAULT == null ? numericValue != null : !NUMERIC_VALUE_EDEFAULT.equals(numericValue);
 		}
 		return super.eIsSet(featureID);

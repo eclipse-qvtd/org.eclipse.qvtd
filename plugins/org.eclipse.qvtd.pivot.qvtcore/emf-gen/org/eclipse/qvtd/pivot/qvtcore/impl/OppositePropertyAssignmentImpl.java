@@ -36,6 +36,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanOrOperation;
@@ -129,7 +130,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 			targetProperty = (Property)eResolveProxy(oldTargetProperty);
 			if (targetProperty != oldTargetProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_FEATURE_COUNT + 0, oldTargetProperty, targetProperty));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 5, oldTargetProperty, targetProperty));
 			}
 		}
 		return targetProperty;
@@ -154,7 +155,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 		Property oldTargetProperty = targetProperty;
 		targetProperty = newTargetProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_FEATURE_COUNT + 0, oldTargetProperty, targetProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 5, oldTargetProperty, targetProperty));
 	}
 
 	/**
@@ -560,7 +561,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				if (resolve) return getTargetProperty();
 				return basicGetTargetProperty();
 		}
@@ -575,7 +576,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				setTargetProperty((Property)newValue);
 				return;
 		}
@@ -590,7 +591,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				setTargetProperty((Property)null);
 				return;
 		}
@@ -605,7 +606,7 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 5:
 				return targetProperty != null;
 		}
 		return super.eIsSet(featureID);
@@ -620,15 +621,15 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 0:
+			case ElementImpl.ELEMENT_OPERATION_COUNT + 0:
 				return getReferredTargetProperty();
-			case NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 1:
+			case ElementImpl.ELEMENT_OPERATION_COUNT + 1:
 				return validateCompatibleTypeForPartialValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 2:
+			case ElementImpl.ELEMENT_OPERATION_COUNT + 2:
 				return validateCompatibleTypeForTotalValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 3:
+			case ElementImpl.ELEMENT_OPERATION_COUNT + 3:
 				return validateOppositePropertyIsImplicit((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 4:
+			case ElementImpl.ELEMENT_OPERATION_COUNT + 4:
 				return validateTargetPropetyIsSlotProperty((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

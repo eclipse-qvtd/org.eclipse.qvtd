@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
 import org.eclipse.qvtd.pivot.qvtschedule.Node;
@@ -116,7 +117,7 @@ public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 		boolean oldPrimary = primary;
 		primary = newPrimary;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EdgeImpl.EDGE_FEATURE_COUNT + 0, oldPrimary, primary));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 6, oldPrimary, primary));
 	}
 
 	/**
@@ -127,7 +128,7 @@ public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case EdgeImpl.EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				return isPrimary();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -141,7 +142,7 @@ public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case EdgeImpl.EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setPrimary((Boolean)newValue);
 				return;
 		}
@@ -156,7 +157,7 @@ public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case EdgeImpl.EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setPrimary(PRIMARY_EDEFAULT);
 				return;
 		}
@@ -171,7 +172,7 @@ public class RecursionEdgeImpl extends EdgeImpl implements RecursionEdge {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case EdgeImpl.EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				return primary != PRIMARY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

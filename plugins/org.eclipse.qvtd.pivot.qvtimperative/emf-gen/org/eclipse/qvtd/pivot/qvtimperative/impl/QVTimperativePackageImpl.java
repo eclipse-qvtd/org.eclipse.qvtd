@@ -1390,41 +1390,41 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 
 		// Create classes and their features
 		addStatementEClass = createEClass(0);
-		createEReference(addStatementEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1);
-		createEAttribute(addStatementEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2);
-		createEReference(addStatementEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3);
-		createEOperation(addStatementEClass, MappingStatementImpl.MAPPING_STATEMENT_OPERATION_COUNT + 0);
+		createEReference(addStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
+		createEAttribute(addStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
+		createEReference(addStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
+		createEOperation(addStatementEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 1);
 
 		appendParameterEClass = createEClass(1);
 
 		appendParameterBindingEClass = createEClass(2);
-		createEReference(appendParameterBindingEClass, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0);
+		createEReference(appendParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
 
 		bufferStatementEClass = createEClass(3);
-		createEReference(bufferStatementEClass, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 1);
-		createEAttribute(bufferStatementEClass, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 2);
-		createEAttribute(bufferStatementEClass, ConnectionVariableImpl.CONNECTION_VARIABLE_FEATURE_COUNT + 3);
-		createEOperation(bufferStatementEClass, ConnectionVariableImpl.CONNECTION_VARIABLE_OPERATION_COUNT + 1);
+		createEReference(bufferStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2);
+		createEAttribute(bufferStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3);
+		createEAttribute(bufferStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 4);
+		createEOperation(bufferStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_OPERATION_COUNT + 1);
 
 		checkStatementEClass = createEClass(4);
-		createEReference(checkStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0);
-		createEOperation(checkStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 0);
+		createEReference(checkStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
+		createEOperation(checkStatementEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 1);
 
 		connectionVariableEClass = createEClass(5);
 		createEAttribute(connectionVariableEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0);
 
 		declareStatementEClass = createEClass(6);
-		createEAttribute(declareStatementEClass, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 1);
-		createEReference(declareStatementEClass, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2);
-		createEOperation(declareStatementEClass, VariableStatementImpl.VARIABLE_STATEMENT_OPERATION_COUNT + 0);
+		createEAttribute(declareStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1);
+		createEReference(declareStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2);
+		createEOperation(declareStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_OPERATION_COUNT + 1);
 
 		guardParameterEClass = createEClass(7);
-		createEReference(guardParameterEClass, MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0);
-		createEReference(guardParameterEClass, MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 1);
+		createEReference(guardParameterEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1);
+		createEReference(guardParameterEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2);
 
 		guardParameterBindingEClass = createEClass(8);
-		createEReference(guardParameterBindingEClass, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0);
-		createEAttribute(guardParameterBindingEClass, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1);
+		createEReference(guardParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
+		createEAttribute(guardParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
 
 		imperativeModelEClass = createEClass(9);
 
@@ -1439,8 +1439,8 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEOperation(imperativeTypedModelEClass, TypedModelImpl.TYPED_MODEL_OPERATION_COUNT + 1);
 
 		loopParameterBindingEClass = createEClass(12);
-		createEReference(loopParameterBindingEClass, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0);
-		createEAttribute(loopParameterBindingEClass, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1);
+		createEReference(loopParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
+		createEAttribute(loopParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
 
 		loopVariableEClass = createEClass(13);
 		createEReference(loopVariableEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0);
@@ -1456,20 +1456,20 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		createEOperation(mappingEClass, RuleImpl.RULE_OPERATION_COUNT + 2);
 
 		mappingCallEClass = createEClass(15);
-		createEReference(mappingCallEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0);
-		createEAttribute(mappingCallEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1);
-		createEAttribute(mappingCallEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2);
-		createEReference(mappingCallEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3);
-		createEAttribute(mappingCallEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 4);
-		createEAttribute(mappingCallEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 5);
-		createEOperation(mappingCallEClass, MappingStatementImpl.MAPPING_STATEMENT_OPERATION_COUNT + 1);
-		createEOperation(mappingCallEClass, MappingStatementImpl.MAPPING_STATEMENT_OPERATION_COUNT + 2);
-		createEOperation(mappingCallEClass, MappingStatementImpl.MAPPING_STATEMENT_OPERATION_COUNT + 3);
+		createEReference(mappingCallEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
+		createEAttribute(mappingCallEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
+		createEAttribute(mappingCallEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
+		createEReference(mappingCallEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
+		createEAttribute(mappingCallEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
+		createEAttribute(mappingCallEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
+		createEOperation(mappingCallEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 2);
+		createEOperation(mappingCallEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 3);
+		createEOperation(mappingCallEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 4);
 
 		mappingLoopEClass = createEClass(16);
-		createEReference(mappingLoopEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1);
-		createEReference(mappingLoopEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2);
-		createEReference(mappingLoopEClass, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3);
+		createEReference(mappingLoopEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
+		createEReference(mappingLoopEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
+		createEReference(mappingLoopEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
 
 		mappingParameterEClass = createEClass(17);
 		createEReference(mappingParameterEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0);
@@ -1482,37 +1482,37 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		mappingStatementEClass = createEClass(19);
 
 		newStatementEClass = createEClass(20);
-		createEAttribute(newStatementEClass, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 1);
-		createEReference(newStatementEClass, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 2);
-		createEReference(newStatementEClass, VariableStatementImpl.VARIABLE_STATEMENT_FEATURE_COUNT + 3);
-		createEOperation(newStatementEClass, VariableStatementImpl.VARIABLE_STATEMENT_OPERATION_COUNT + 0);
-		createEOperation(newStatementEClass, VariableStatementImpl.VARIABLE_STATEMENT_OPERATION_COUNT + 1);
+		createEAttribute(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1);
+		createEReference(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 2);
+		createEReference(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 3);
+		createEOperation(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_OPERATION_COUNT + 1);
+		createEOperation(newStatementEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_OPERATION_COUNT + 2);
 
 		observableStatementEClass = createEClass(21);
-		createEReference(observableStatementEClass, StatementImpl.STATEMENT_FEATURE_COUNT + 0);
+		createEReference(observableStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 
 		setStatementEClass = createEClass(22);
-		createEReference(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0);
-		createEReference(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 1);
-		createEAttribute(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 2);
-		createEAttribute(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 3);
-		createEAttribute(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 4);
-		createEReference(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 5);
-		createEReference(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 6);
-		createEOperation(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 0);
-		createEOperation(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 1);
-		createEOperation(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 2);
-		createEOperation(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 3);
-		createEOperation(setStatementEClass, ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 4);
+		createEReference(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1);
+		createEReference(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
+		createEAttribute(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
+		createEAttribute(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
+		createEAttribute(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5);
+		createEReference(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6);
+		createEReference(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7);
+		createEOperation(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 1);
+		createEOperation(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 2);
+		createEOperation(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 3);
+		createEOperation(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 4);
+		createEOperation(setStatementEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 5);
 
 		simpleParameterEClass = createEClass(23);
-		createEReference(simpleParameterEClass, MappingParameterImpl.MAPPING_PARAMETER_FEATURE_COUNT + 0);
+		createEReference(simpleParameterEClass, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 1);
 
 		simpleParameterBindingEClass = createEClass(24);
-		createEReference(simpleParameterBindingEClass, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0);
-		createEAttribute(simpleParameterBindingEClass, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1);
-		createEOperation(simpleParameterBindingEClass, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_OPERATION_COUNT + 0);
-		createEOperation(simpleParameterBindingEClass, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_OPERATION_COUNT + 1);
+		createEReference(simpleParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
+		createEAttribute(simpleParameterBindingEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
+		createEOperation(simpleParameterBindingEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 1);
+		createEOperation(simpleParameterBindingEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 2);
 
 		statementEClass = createEClass(25);
 		createEOperation(statementEClass, NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 0);

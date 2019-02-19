@@ -33,6 +33,7 @@ import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.internal.LiteralExpImpl;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
@@ -128,7 +129,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	@Override
 	public EList<PropertyTemplateItem> getPart() {
 		if (part == null) {
-			part = new EObjectContainmentWithInverseEList<PropertyTemplateItem>(PropertyTemplateItem.class, this, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
+			part = new EObjectContainmentWithInverseEList<PropertyTemplateItem>(PropertyTemplateItem.class, this, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 2, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
 		}
 		return part;
 	}
@@ -145,7 +146,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 			referredClass = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldReferredClass);
 			if (referredClass != oldReferredClass) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1, oldReferredClass, referredClass));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 3, oldReferredClass, referredClass));
 			}
 		}
 		return referredClass;
@@ -170,7 +171,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 		org.eclipse.ocl.pivot.Class oldReferredClass = referredClass;
 		referredClass = newReferredClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1, oldReferredClass, referredClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 3, oldReferredClass, referredClass));
 	}
 
 	/**
@@ -295,7 +296,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 2:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPart()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -309,7 +310,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getPart()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -323,9 +324,9 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 2:
 				return getPart();
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 3:
 				if (resolve) return getReferredClass();
 				return basicGetReferredClass();
 		}
@@ -341,11 +342,11 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 2:
 				getPart().clear();
 				getPart().addAll((Collection<? extends PropertyTemplateItem>)newValue);
 				return;
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 3:
 				setReferredClass((org.eclipse.ocl.pivot.Class)newValue);
 				return;
 		}
@@ -360,10 +361,10 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 2:
 				getPart().clear();
 				return;
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 3:
 				setReferredClass((org.eclipse.ocl.pivot.Class)null);
 				return;
 		}
@@ -378,9 +379,9 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 2:
 				return part != null && !part.isEmpty();
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 3:
 				return referredClass != null;
 		}
 		return super.eIsSet(featureID);
@@ -395,9 +396,9 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 0:
+			case LiteralExpImpl.LITERAL_EXP_OPERATION_COUNT + 2:
 				return validatePartPropertyIsUnique((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 1:
+			case LiteralExpImpl.LITERAL_EXP_OPERATION_COUNT + 3:
 				return validateTypeisObjectType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

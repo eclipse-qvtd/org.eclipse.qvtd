@@ -30,6 +30,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringLogDiagnosticOperation;
@@ -119,7 +120,7 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 		OCLExpression oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -135,14 +136,14 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0), null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0), null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -198,7 +199,7 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -212,7 +213,7 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -226,7 +227,7 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setOwnedExpression((OCLExpression)newValue);
 				return;
 		}
@@ -241,7 +242,7 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setOwnedExpression((OCLExpression)null);
 				return;
 		}
@@ -256,7 +257,7 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
@@ -271,7 +272,7 @@ public class CheckStatementImpl extends ObservableStatementImpl implements Check
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case ObservableStatementImpl.OBSERVABLE_STATEMENT_OPERATION_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 1:
 				return validateTypeIsBoolean((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

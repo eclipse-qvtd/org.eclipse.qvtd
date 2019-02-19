@@ -48,7 +48,7 @@
         <details key="originalName" value="NoSuperKeys"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#x9;&#x9;&#x9;-- see Bugzilla 512532 discussion&#xA;&#x9;transformation&lt;> null implies &#xA;&#x9;let superClasses = identifies.superClasses->closure(superClasses) in&#xA;&#x9;let otherKeys = transformation.ownedKey->excluding(self) in&#xA;&#x9;otherKeys.identifies->excludesAll(superClasses)&#xA;&#xA;"/>
+        <details key="body" value="&#x9;&#x9;&#x9;-- see Bugzilla 512532 discussion&#xA;&#x9;transformation &lt;> null implies &#xA;&#x9;let superClasses = identifies.superClasses->closure(superClasses) in&#xA;&#x9;let otherKeys = transformation.ownedKey->excluding(self) in&#xA;&#x9;otherKeys.identifies->excludesAll(superClasses)&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">
@@ -63,7 +63,7 @@
         <details key="originalName" value="IdentifiesIsUnique"/>
       </eAnnotations>
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="&#xA;&#x9;transformation&lt;> null implies &#xA;&#x9;let otherKeys = transformation.ownedKey->excluding(self) in&#xA;&#x9;otherKeys.identifies->excludes(identifies)&#xA;&#xA;"/>
+        <details key="body" value="&#xA;&#x9;transformation &lt;> null implies &#xA;&#x9;let otherKeys = transformation.ownedKey->excluding(self) in&#xA;&#x9;otherKeys.identifies->excludes(identifies)&#xA;&#xA;"/>
       </eAnnotations>
       <eParameters name="diagnostics" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDiagnosticChain"/>
       <eParameters name="context">

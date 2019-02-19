@@ -85,7 +85,7 @@ public abstract class TraceInstanceImpl extends TraceElementImpl implements Trac
 	 */
 	@Override
 	public TraceModel getOwningModel() {
-		if (eContainerFeatureID() != (TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0)) return null;
+		if (eContainerFeatureID() != (0)) return null;
 		return (TraceModel)eInternalContainer();
 	}
 
@@ -95,7 +95,7 @@ public abstract class TraceInstanceImpl extends TraceElementImpl implements Trac
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningModel(TraceModel newOwningModel, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningModel, TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningModel, 0, msgs);
 		return msgs;
 	}
 
@@ -106,19 +106,19 @@ public abstract class TraceInstanceImpl extends TraceElementImpl implements Trac
 	 */
 	@Override
 	public void setOwningModel(TraceModel newOwningModel) {
-		if (newOwningModel != eInternalContainer() || (eContainerFeatureID() != (TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0) && newOwningModel != null)) {
+		if (newOwningModel != eInternalContainer() || (eContainerFeatureID() != (0) && newOwningModel != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningModel))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningModel != null)
-				msgs = ((InternalEObject)newOwningModel).eInverseAdd(this, TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0, TraceModel.class, msgs);
+				msgs = ((InternalEObject)newOwningModel).eInverseAdd(this, 0, TraceModel.class, msgs);
 			msgs = basicSetOwningModel(newOwningModel, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0, newOwningModel, newOwningModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, 0, newOwningModel, newOwningModel));
 	}
 
 	/**
@@ -129,7 +129,7 @@ public abstract class TraceInstanceImpl extends TraceElementImpl implements Trac
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0:
+			case 0:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningModel((TraceModel)otherEnd, msgs);
@@ -145,7 +145,7 @@ public abstract class TraceInstanceImpl extends TraceElementImpl implements Trac
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0:
+			case 0:
 				return basicSetOwningModel(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -159,8 +159,8 @@ public abstract class TraceInstanceImpl extends TraceElementImpl implements Trac
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0:
-				return eInternalContainer().eInverseRemove(this, TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0, TraceModel.class, msgs);
+			case 0:
+				return eInternalContainer().eInverseRemove(this, 0, TraceModel.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -173,7 +173,7 @@ public abstract class TraceInstanceImpl extends TraceElementImpl implements Trac
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0:
+			case 0:
 				return getOwningModel();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -187,7 +187,7 @@ public abstract class TraceInstanceImpl extends TraceElementImpl implements Trac
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0:
+			case 0:
 				setOwningModel((TraceModel)newValue);
 				return;
 		}
@@ -202,7 +202,7 @@ public abstract class TraceInstanceImpl extends TraceElementImpl implements Trac
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0:
+			case 0:
 				setOwningModel((TraceModel)null);
 				return;
 		}
@@ -217,7 +217,7 @@ public abstract class TraceInstanceImpl extends TraceElementImpl implements Trac
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TraceElementImpl.TRACE_ELEMENT_FEATURE_COUNT + 0:
+			case 0:
 				return getOwningModel() != null;
 		}
 		return super.eIsSet(featureID);

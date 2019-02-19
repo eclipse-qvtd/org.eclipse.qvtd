@@ -32,6 +32,7 @@ import org.eclipse.ocl.pivot.internal.ElementImpl;
 
 import org.eclipse.ocl.pivot.util.Visitor;
 
+import org.eclipse.qvtd.pivot.qvtbase.impl.PatternImpl;
 import org.eclipse.qvtd.pivot.qvtcore.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcore.EnforcementMode;
 import org.eclipse.qvtd.pivot.qvtcore.EnforcementOperation;
@@ -180,7 +181,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newBottomPattern != null)
-				msgs = ((InternalEObject)newBottomPattern).eInverseAdd(this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2, BottomPattern.class, msgs);
+				msgs = ((InternalEObject)newBottomPattern).eInverseAdd(this, PatternImpl.PATTERN_FEATURE_COUNT + 3, BottomPattern.class, msgs);
 			msgs = basicSetBottomPattern(newBottomPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -284,7 +285,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 1:
-				return eInternalContainer().eInverseRemove(this, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2, BottomPattern.class, msgs);
+				return eInternalContainer().eInverseRemove(this, PatternImpl.PATTERN_FEATURE_COUNT + 3, BottomPattern.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

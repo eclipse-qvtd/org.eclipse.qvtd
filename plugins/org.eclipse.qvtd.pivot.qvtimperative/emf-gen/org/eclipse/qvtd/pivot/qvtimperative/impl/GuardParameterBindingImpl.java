@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameterBinding;
@@ -119,7 +120,7 @@ public class GuardParameterBindingImpl extends MappingParameterBindingImpl imple
 			value = (ConnectionVariable)eResolveProxy(oldValue);
 			if (value != oldValue) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0, oldValue, value));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 2, oldValue, value));
 			}
 		}
 		return value;
@@ -144,7 +145,7 @@ public class GuardParameterBindingImpl extends MappingParameterBindingImpl imple
 		ConnectionVariable oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 2, oldValue, value));
 	}
 
 	/**
@@ -167,7 +168,7 @@ public class GuardParameterBindingImpl extends MappingParameterBindingImpl imple
 		boolean oldIsCheck = isCheck;
 		isCheck = newIsCheck;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1, oldIsCheck, isCheck));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 3, oldIsCheck, isCheck));
 	}
 
 	/**
@@ -188,10 +189,10 @@ public class GuardParameterBindingImpl extends MappingParameterBindingImpl imple
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				if (resolve) return getValue();
 				return basicGetValue();
-			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return isIsCheck();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -205,10 +206,10 @@ public class GuardParameterBindingImpl extends MappingParameterBindingImpl imple
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setValue((ConnectionVariable)newValue);
 				return;
-			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setIsCheck((Boolean)newValue);
 				return;
 		}
@@ -223,10 +224,10 @@ public class GuardParameterBindingImpl extends MappingParameterBindingImpl imple
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setValue((ConnectionVariable)null);
 				return;
-			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setIsCheck(IS_CHECK_EDEFAULT);
 				return;
 		}
@@ -241,9 +242,9 @@ public class GuardParameterBindingImpl extends MappingParameterBindingImpl imple
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return value != null;
-			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return isCheck != IS_CHECK_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

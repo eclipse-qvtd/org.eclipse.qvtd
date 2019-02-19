@@ -32,6 +32,7 @@ import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.internal.LiteralExpImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanAndOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanImpliesOperation;
@@ -185,7 +186,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newObjContainer != null)
-				msgs = ((InternalEObject)newObjContainer).eInverseAdd(this, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0, ObjectTemplateExp.class, msgs);
+				msgs = ((InternalEObject)newObjContainer).eInverseAdd(this, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 2, ObjectTemplateExp.class, msgs);
 			msgs = basicSetObjContainer(newObjContainer, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -987,7 +988,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
-				return eInternalContainer().eInverseRemove(this, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0, ObjectTemplateExp.class, msgs);
+				return eInternalContainer().eInverseRemove(this, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 2, ObjectTemplateExp.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

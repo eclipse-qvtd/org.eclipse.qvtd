@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtschedule.CastEdge;
@@ -100,9 +101,9 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				return getProperty();
-			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				if (resolve) return getReferredClass();
 				return basicGetReferredClass();
 		}
@@ -117,7 +118,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				setReferredClass((org.eclipse.ocl.pivot.Class)newValue);
 				return;
 		}
@@ -132,7 +133,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				setReferredClass((org.eclipse.ocl.pivot.Class)null);
 				return;
 		}
@@ -147,9 +148,9 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				return getProperty() != null;
-			case NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 11:
 				return referredClass != null;
 		}
 		return super.eIsSet(featureID);
@@ -191,7 +192,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 			referredClass = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldReferredClass);
 			if (referredClass != oldReferredClass) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1, oldReferredClass, referredClass));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 11, oldReferredClass, referredClass));
 			}
 		}
 		return referredClass;
@@ -216,7 +217,7 @@ public class CastEdgeImpl extends NavigableEdgeImpl implements CastEdge {
 		org.eclipse.ocl.pivot.Class oldReferredClass = referredClass;
 		referredClass = newReferredClass;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, NavigableEdgeImpl.NAVIGABLE_EDGE_FEATURE_COUNT + 1, oldReferredClass, referredClass));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 11, oldReferredClass, referredClass));
 	}
 
 	@Override

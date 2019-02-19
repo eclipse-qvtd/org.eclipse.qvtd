@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
@@ -113,7 +114,7 @@ public class LoopVariableImpl extends VariableDeclarationImpl implements LoopVar
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningMappingLoop != null)
-				msgs = ((InternalEObject)newOwningMappingLoop).eInverseAdd(this, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1, MappingLoop.class, msgs);
+				msgs = ((InternalEObject)newOwningMappingLoop).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, MappingLoop.class, msgs);
 			msgs = basicSetOwningMappingLoop(newOwningMappingLoop, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -160,7 +161,7 @@ public class LoopVariableImpl extends VariableDeclarationImpl implements LoopVar
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0:
-				return eInternalContainer().eInverseRemove(this, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1, MappingLoop.class, msgs);
+				return eInternalContainer().eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, MappingLoop.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.ModelImpl;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.pivot.qvtschedule.MappingRegion;
@@ -132,7 +133,7 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	@Override
 	public List<ClassDatum> getOwnedClassDatums() {
 		if (ownedClassDatums == null) {
-			ownedClassDatums = new EObjectContainmentWithInverseEList<ClassDatum>(ClassDatum.class, this, ModelImpl.MODEL_FEATURE_COUNT + 0, AbstractDatumImpl.ABSTRACT_DATUM_FEATURE_COUNT + 2);
+			ownedClassDatums = new EObjectContainmentWithInverseEList<ClassDatum>(ClassDatum.class, this, ModelImpl.MODEL_FEATURE_COUNT + 0, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3);
 		}
 		return ownedClassDatums;
 	}
@@ -145,7 +146,7 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	@Override
 	public List<OperationRegion> getOwnedOperationRegions() {
 		if (ownedOperationRegions == null) {
-			ownedOperationRegions = new EObjectContainmentWithInverseEList<OperationRegion>(OperationRegion.class, this, ModelImpl.MODEL_FEATURE_COUNT + 2, RegionImpl.REGION_FEATURE_COUNT + 4);
+			ownedOperationRegions = new EObjectContainmentWithInverseEList<OperationRegion>(OperationRegion.class, this, ModelImpl.MODEL_FEATURE_COUNT + 2, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9);
 		}
 		return ownedOperationRegions;
 	}
@@ -158,7 +159,7 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	@Override
 	public List<RootRegion> getOwnedRootRegions() {
 		if (ownedRootRegions == null) {
-			ownedRootRegions = new EObjectContainmentWithInverseEList<RootRegion>(RootRegion.class, this, ModelImpl.MODEL_FEATURE_COUNT + 3, RegionImpl.REGION_FEATURE_COUNT + 3);
+			ownedRootRegions = new EObjectContainmentWithInverseEList<RootRegion>(RootRegion.class, this, ModelImpl.MODEL_FEATURE_COUNT + 3, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8);
 		}
 		return ownedRootRegions;
 	}
@@ -171,7 +172,7 @@ public class ScheduleModelImpl extends ModelImpl implements ScheduleModel {
 	@Override
 	public List<MappingRegion> getOwnedMappingRegions() {
 		if (ownedMappingRegions == null) {
-			ownedMappingRegions = new EObjectContainmentWithInverseEList<MappingRegion>(MappingRegion.class, this, ModelImpl.MODEL_FEATURE_COUNT + 1, RegionImpl.REGION_FEATURE_COUNT + 2);
+			ownedMappingRegions = new EObjectContainmentWithInverseEList<MappingRegion>(MappingRegion.class, this, ModelImpl.MODEL_FEATURE_COUNT + 1, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7);
 		}
 		return ownedMappingRegions;
 	}

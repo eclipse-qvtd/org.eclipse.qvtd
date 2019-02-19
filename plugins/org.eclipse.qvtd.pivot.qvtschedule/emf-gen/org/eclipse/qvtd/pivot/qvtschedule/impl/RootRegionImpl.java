@@ -162,7 +162,7 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 	@Override
 	public List<Region> getActiveRegions() {
 		if (activeRegions == null) {
-			activeRegions = new EObjectWithInverseResolvingEList<Region>(Region.class, this, RegionImpl.REGION_FEATURE_COUNT + 0, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
+			activeRegions = new EObjectWithInverseResolvingEList<Region>(Region.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4);
 		}
 		return activeRegions;
 	}
@@ -175,7 +175,7 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 	@Override
 	public List<Connection> getOwnedConnections() {
 		if (ownedConnections == null) {
-			ownedConnections = new EObjectContainmentWithInverseEList<Connection>(Connection.class, this, RegionImpl.REGION_FEATURE_COUNT + 1, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
+			ownedConnections = new EObjectContainmentWithInverseEList<Connection>(Connection.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6, ElementImpl.ELEMENT_FEATURE_COUNT + 1);
 		}
 		return ownedConnections;
 	}
@@ -199,7 +199,7 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 		LoadingRegion oldOwnedLoadingRegion = ownedLoadingRegion;
 		ownedLoadingRegion = newOwnedLoadingRegion;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 2, oldOwnedLoadingRegion, newOwnedLoadingRegion);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7, oldOwnedLoadingRegion, newOwnedLoadingRegion);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -215,14 +215,14 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 		if (newOwnedLoadingRegion != ownedLoadingRegion) {
 			NotificationChain msgs = null;
 			if (ownedLoadingRegion != null)
-				msgs = ((InternalEObject)ownedLoadingRegion).eInverseRemove(this, RegionImpl.REGION_FEATURE_COUNT + 1, LoadingRegion.class, msgs);
+				msgs = ((InternalEObject)ownedLoadingRegion).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6, LoadingRegion.class, msgs);
 			if (newOwnedLoadingRegion != null)
-				msgs = ((InternalEObject)newOwnedLoadingRegion).eInverseAdd(this, RegionImpl.REGION_FEATURE_COUNT + 1, LoadingRegion.class, msgs);
+				msgs = ((InternalEObject)newOwnedLoadingRegion).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6, LoadingRegion.class, msgs);
 			msgs = basicSetOwnedLoadingRegion(newOwnedLoadingRegion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 2, newOwnedLoadingRegion, newOwnedLoadingRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7, newOwnedLoadingRegion, newOwnedLoadingRegion));
 	}
 
 	/**
@@ -232,7 +232,7 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 	 */
 	@Override
 	public ScheduleModel getOwningScheduleModel() {
-		if (eContainerFeatureID() != (RegionImpl.REGION_FEATURE_COUNT + 3)) return null;
+		if (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8)) return null;
 		return (ScheduleModel)eInternalContainer();
 	}
 
@@ -242,7 +242,7 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningScheduleModel(ScheduleModel newOwningScheduleModel, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningScheduleModel, RegionImpl.REGION_FEATURE_COUNT + 3, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningScheduleModel, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8, msgs);
 		return msgs;
 	}
 
@@ -253,7 +253,7 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 	 */
 	@Override
 	public void setOwningScheduleModel(ScheduleModel newOwningScheduleModel) {
-		if (newOwningScheduleModel != eInternalContainer() || (eContainerFeatureID() != (RegionImpl.REGION_FEATURE_COUNT + 3) && newOwningScheduleModel != null)) {
+		if (newOwningScheduleModel != eInternalContainer() || (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8) && newOwningScheduleModel != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningScheduleModel))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
@@ -265,7 +265,7 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 3, newOwningScheduleModel, newOwningScheduleModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8, newOwningScheduleModel, newOwningScheduleModel));
 	}
 
 	/**
@@ -280,7 +280,7 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 			referredTransformation = (Transformation)eResolveProxy(oldReferredTransformation);
 			if (referredTransformation != oldReferredTransformation) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RegionImpl.REGION_FEATURE_COUNT + 4, oldReferredTransformation, referredTransformation));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9, oldReferredTransformation, referredTransformation));
 			}
 		}
 		return referredTransformation;
@@ -305,7 +305,7 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 		Transformation oldReferredTransformation = referredTransformation;
 		referredTransformation = newReferredTransformation;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 4, oldReferredTransformation, referredTransformation));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9, oldReferredTransformation, referredTransformation));
 	}
 
 	/**
@@ -327,7 +327,7 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 		RootPartition oldOwnedRootPartition = ownedRootPartition;
 		ownedRootPartition = newOwnedRootPartition;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 5, oldOwnedRootPartition, newOwnedRootPartition);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10, oldOwnedRootPartition, newOwnedRootPartition);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -343,14 +343,14 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 		if (newOwnedRootPartition != ownedRootPartition) {
 			NotificationChain msgs = null;
 			if (ownedRootPartition != null)
-				msgs = ((InternalEObject)ownedRootPartition).eInverseRemove(this, CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0, RootPartition.class, msgs);
+				msgs = ((InternalEObject)ownedRootPartition).eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4, RootPartition.class, msgs);
 			if (newOwnedRootPartition != null)
-				msgs = ((InternalEObject)newOwnedRootPartition).eInverseAdd(this, CompositePartitionImpl.COMPOSITE_PARTITION_FEATURE_COUNT + 0, RootPartition.class, msgs);
+				msgs = ((InternalEObject)newOwnedRootPartition).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4, RootPartition.class, msgs);
 			msgs = basicSetOwnedRootPartition(newOwnedRootPartition, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RegionImpl.REGION_FEATURE_COUNT + 5, newOwnedRootPartition, newOwnedRootPartition));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10, newOwnedRootPartition, newOwnedRootPartition));
 	}
 
 	/**
@@ -362,21 +362,21 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getActiveRegions()).basicAdd(otherEnd, msgs);
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedConnections()).basicAdd(otherEnd, msgs);
-			case RegionImpl.REGION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				if (ownedLoadingRegion != null)
-					msgs = ((InternalEObject)ownedLoadingRegion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (RegionImpl.REGION_FEATURE_COUNT + 2), null, msgs);
+					msgs = ((InternalEObject)ownedLoadingRegion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7), null, msgs);
 				return basicSetOwnedLoadingRegion((LoadingRegion)otherEnd, msgs);
-			case RegionImpl.REGION_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningScheduleModel((ScheduleModel)otherEnd, msgs);
-			case RegionImpl.REGION_FEATURE_COUNT + 5:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10:
 				if (ownedRootPartition != null)
-					msgs = ((InternalEObject)ownedRootPartition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (RegionImpl.REGION_FEATURE_COUNT + 5), null, msgs);
+					msgs = ((InternalEObject)ownedRootPartition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10), null, msgs);
 				return basicSetOwnedRootPartition((RootPartition)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -390,15 +390,15 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return ((InternalEList<?>)getActiveRegions()).basicRemove(otherEnd, msgs);
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return ((InternalEList<?>)getOwnedConnections()).basicRemove(otherEnd, msgs);
-			case RegionImpl.REGION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				return basicSetOwnedLoadingRegion(null, msgs);
-			case RegionImpl.REGION_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return basicSetOwningScheduleModel(null, msgs);
-			case RegionImpl.REGION_FEATURE_COUNT + 5:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10:
 				return basicSetOwnedRootPartition(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -412,7 +412,7 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case RegionImpl.REGION_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return eInternalContainer().eInverseRemove(this, ModelImpl.MODEL_FEATURE_COUNT + 3, ScheduleModel.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
@@ -426,18 +426,18 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return getActiveRegions();
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return getOwnedConnections();
-			case RegionImpl.REGION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				return getOwnedLoadingRegion();
-			case RegionImpl.REGION_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return getOwningScheduleModel();
-			case RegionImpl.REGION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				if (resolve) return getReferredTransformation();
 				return basicGetReferredTransformation();
-			case RegionImpl.REGION_FEATURE_COUNT + 5:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10:
 				return getOwnedRootPartition();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -452,24 +452,24 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				getActiveRegions().clear();
 				getActiveRegions().addAll((Collection<? extends Region>)newValue);
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				getOwnedConnections().clear();
 				getOwnedConnections().addAll((Collection<? extends Connection>)newValue);
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				setOwnedLoadingRegion((LoadingRegion)newValue);
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				setOwningScheduleModel((ScheduleModel)newValue);
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				setReferredTransformation((Transformation)newValue);
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 5:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10:
 				setOwnedRootPartition((RootPartition)newValue);
 				return;
 		}
@@ -484,22 +484,22 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				getActiveRegions().clear();
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				getOwnedConnections().clear();
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				setOwnedLoadingRegion((LoadingRegion)null);
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				setOwningScheduleModel((ScheduleModel)null);
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				setReferredTransformation((Transformation)null);
 				return;
-			case RegionImpl.REGION_FEATURE_COUNT + 5:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10:
 				setOwnedRootPartition((RootPartition)null);
 				return;
 		}
@@ -514,17 +514,17 @@ public class RootRegionImpl extends RegionImpl implements RootRegion {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RegionImpl.REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return activeRegions != null && !activeRegions.isEmpty();
-			case RegionImpl.REGION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 6:
 				return ownedConnections != null && !ownedConnections.isEmpty();
-			case RegionImpl.REGION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7:
 				return ownedLoadingRegion != null;
-			case RegionImpl.REGION_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return getOwningScheduleModel() != null;
-			case RegionImpl.REGION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				return referredTransformation != null;
-			case RegionImpl.REGION_FEATURE_COUNT + 5:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10:
 				return ownedRootPartition != null;
 		}
 		return super.eIsSet(featureID);

@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.internal.VariableDeclarationImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtimperative.LoopVariable;
@@ -136,7 +137,7 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	@Override
 	public EList<Property> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0);
+			observedProperties = new EObjectResolvingEList<Property>(Property.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0);
 		}
 		return observedProperties;
 	}
@@ -149,7 +150,7 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	@Override
 	public EList<LoopVariable> getOwnedIterators() {
 		if (ownedIterators == null) {
-			ownedIterators = new EObjectContainmentWithInverseEList<LoopVariable>(LoopVariable.class, this, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0);
+			ownedIterators = new EObjectContainmentWithInverseEList<LoopVariable>(LoopVariable.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, VariableDeclarationImpl.VARIABLE_DECLARATION_FEATURE_COUNT + 0);
 		}
 		return ownedIterators;
 	}
@@ -162,7 +163,7 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	@Override
 	public EList<MappingStatement> getOwnedMappingStatements() {
 		if (ownedMappingStatements == null) {
-			ownedMappingStatements = new EObjectContainmentEList<MappingStatement>(MappingStatement.class, this, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2);
+			ownedMappingStatements = new EObjectContainmentEList<MappingStatement>(MappingStatement.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2);
 		}
 		return ownedMappingStatements;
 	}
@@ -186,7 +187,7 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 		OCLExpression oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -202,14 +203,14 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3), null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3), null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -221,7 +222,7 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedIterators()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -235,11 +236,11 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return ((InternalEList<?>)getOwnedIterators()).basicRemove(otherEnd, msgs);
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getOwnedMappingStatements()).basicRemove(otherEnd, msgs);
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -253,13 +254,13 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return getObservedProperties();
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return getOwnedIterators();
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return getOwnedMappingStatements();
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -274,19 +275,19 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends Property>)newValue);
 				return;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getOwnedIterators().clear();
 				getOwnedIterators().addAll((Collection<? extends LoopVariable>)newValue);
 				return;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getOwnedMappingStatements().clear();
 				getOwnedMappingStatements().addAll((Collection<? extends MappingStatement>)newValue);
 				return;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)newValue);
 				return;
 		}
@@ -301,16 +302,16 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				return;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				getOwnedIterators().clear();
 				return;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				getOwnedMappingStatements().clear();
 				return;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setOwnedExpression((OCLExpression)null);
 				return;
 		}
@@ -325,13 +326,13 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return observedProperties != null && !observedProperties.isEmpty();
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return ownedIterators != null && !ownedIterators.isEmpty();
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return ownedMappingStatements != null && !ownedMappingStatements.isEmpty();
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
@@ -346,7 +347,7 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatement.class) {
 			switch (derivedFeatureID) {
-				case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0: return StatementImpl.STATEMENT_FEATURE_COUNT + 0;
+				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -362,7 +363,7 @@ public class MappingLoopImpl extends MappingStatementImpl implements MappingLoop
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatement.class) {
 			switch (baseFeatureID) {
-				case StatementImpl.STATEMENT_FEATURE_COUNT + 0: return MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0;
+				case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0: return NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}

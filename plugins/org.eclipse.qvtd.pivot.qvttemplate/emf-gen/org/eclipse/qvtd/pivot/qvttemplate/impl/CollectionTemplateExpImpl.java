@@ -34,6 +34,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.LiteralExpImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
@@ -141,7 +142,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	@Override
 	public EList<OCLExpression> getMember() {
 		if (member == null) {
-			member = new EObjectContainmentEList<OCLExpression>(OCLExpression.class, this, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0);
+			member = new EObjectContainmentEList<OCLExpression>(OCLExpression.class, this, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 2);
 		}
 		return member;
 	}
@@ -158,7 +159,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 			referredCollectionType = (CollectionType)eResolveProxy(oldReferredCollectionType);
 			if (referredCollectionType != oldReferredCollectionType) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1, oldReferredCollectionType, referredCollectionType));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 3, oldReferredCollectionType, referredCollectionType));
 			}
 		}
 		return referredCollectionType;
@@ -183,7 +184,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 		CollectionType oldReferredCollectionType = referredCollectionType;
 		referredCollectionType = newReferredCollectionType;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1, oldReferredCollectionType, referredCollectionType));
+			eNotify(new ENotificationImpl(this, Notification.SET, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 3, oldReferredCollectionType, referredCollectionType));
 	}
 
 	/**
@@ -198,7 +199,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 			rest = (Variable)eResolveProxy(oldRest);
 			if (rest != oldRest) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 2, oldRest, rest));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 4, oldRest, rest));
 			}
 		}
 		return rest;
@@ -223,7 +224,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 		Variable oldRest = rest;
 		rest = newRest;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 2, oldRest, rest));
+			eNotify(new ENotificationImpl(this, Notification.SET, LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 4, oldRest, rest));
 	}
 
 	/**
@@ -441,7 +442,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getMember()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -455,12 +456,12 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 2:
 				return getMember();
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 3:
 				if (resolve) return getReferredCollectionType();
 				return basicGetReferredCollectionType();
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 2:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 4:
 				if (resolve) return getRest();
 				return basicGetRest();
 		}
@@ -476,14 +477,14 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 2:
 				getMember().clear();
 				getMember().addAll((Collection<? extends OCLExpression>)newValue);
 				return;
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 3:
 				setReferredCollectionType((CollectionType)newValue);
 				return;
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 2:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 4:
 				setRest((Variable)newValue);
 				return;
 		}
@@ -498,13 +499,13 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 2:
 				getMember().clear();
 				return;
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 3:
 				setReferredCollectionType((CollectionType)null);
 				return;
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 2:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 4:
 				setRest((Variable)null);
 				return;
 		}
@@ -519,11 +520,11 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 0:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 2:
 				return member != null && !member.isEmpty();
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 1:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 3:
 				return referredCollectionType != null;
-			case TemplateExpImpl.TEMPLATE_EXP_FEATURE_COUNT + 2:
+			case LiteralExpImpl.LITERAL_EXP_FEATURE_COUNT + 4:
 				return rest != null;
 		}
 		return super.eIsSet(featureID);
@@ -538,11 +539,11 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 0:
+			case LiteralExpImpl.LITERAL_EXP_OPERATION_COUNT + 2:
 				return validateMemberTypeisCollectionElementType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 1:
+			case LiteralExpImpl.LITERAL_EXP_OPERATION_COUNT + 3:
 				return validateRestTypeisCollectionType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case TemplateExpImpl.TEMPLATE_EXP_OPERATION_COUNT + 2:
+			case LiteralExpImpl.LITERAL_EXP_OPERATION_COUNT + 4:
 				return validateTypeisCollectionType((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

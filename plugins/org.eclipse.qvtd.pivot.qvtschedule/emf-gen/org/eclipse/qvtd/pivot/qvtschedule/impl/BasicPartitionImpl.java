@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.BasicPartition;
 import org.eclipse.qvtd.pivot.qvtschedule.Edge;
@@ -356,7 +357,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public List<Node> getHeadNodes() {
 		if (headNodes == null) {
-			headNodes = new EObjectResolvingEList<Node>(Node.class, this, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 5);
+			headNodes = new EObjectResolvingEList<Node>(Node.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 13);
 		}
 		return headNodes;
 	}
@@ -485,7 +486,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	 */
 	@Override
 	public MergedPartition getOwningMergedPartition() {
-		if (eContainerFeatureID() != (MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15)) return null;
+		if (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 23)) return null;
 		return (MergedPartition)eInternalContainer();
 	}
 
@@ -495,7 +496,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	 * @generated
 	 */
 	public NotificationChain basicSetOwningMergedPartition(MergedPartition newOwningMergedPartition, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOwningMergedPartition, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newOwningMergedPartition, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 23, msgs);
 		return msgs;
 	}
 
@@ -506,19 +507,19 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	 */
 	@Override
 	public void setOwningMergedPartition(MergedPartition newOwningMergedPartition) {
-		if (newOwningMergedPartition != eInternalContainer() || (eContainerFeatureID() != (MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15) && newOwningMergedPartition != null)) {
+		if (newOwningMergedPartition != eInternalContainer() || (eContainerFeatureID() != (NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 23) && newOwningMergedPartition != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningMergedPartition))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningMergedPartition != null)
-				msgs = ((InternalEObject)newOwningMergedPartition).eInverseAdd(this, BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 0, MergedPartition.class, msgs);
+				msgs = ((InternalEObject)newOwningMergedPartition).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 24, MergedPartition.class, msgs);
 			msgs = basicSetOwningMergedPartition(newOwningMergedPartition, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15, newOwningMergedPartition, newOwningMergedPartition));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 23, newOwningMergedPartition, newOwningMergedPartition));
 	}
 
 	/**
@@ -530,9 +531,9 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 12:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getExplicitPredecessors()).basicAdd(otherEnd, msgs);
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 23:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetOwningMergedPartition((MergedPartition)otherEnd, msgs);
@@ -548,9 +549,9 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 12:
 				return ((InternalEList<?>)getExplicitPredecessors()).basicRemove(otherEnd, msgs);
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 23:
 				return basicSetOwningMergedPartition(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -564,8 +565,8 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15:
-				return eInternalContainer().eInverseRemove(this, BasicPartitionImpl.BASIC_PARTITION_FEATURE_COUNT + 0, MergedPartition.class, msgs);
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 23:
+				return eInternalContainer().eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 24, MergedPartition.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -578,7 +579,7 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public List<MappingPartition> getExplicitPredecessors() {
 		if (explicitPredecessors == null) {
-			explicitPredecessors = new EObjectWithInverseResolvingEList.ManyInverse<MappingPartition>(MappingPartition.class, this, MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 4, PartitionImpl.PARTITION_FEATURE_COUNT + 4);
+			explicitPredecessors = new EObjectWithInverseResolvingEList.ManyInverse<MappingPartition>(MappingPartition.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 12, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 7);
 		}
 		return explicitPredecessors;
 	}
@@ -591,37 +592,37 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return getConstantEdges();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				return getConstantNodes();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10:
 				return getConstantSuccessFalseNodes();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 11:
 				return getConstantSuccessTrueNodes();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 12:
 				return getExplicitPredecessors();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 5:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 13:
 				return getHeadNodes();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 6:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 14:
 				return getLoadedEdges();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 7:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 15:
 				return getLoadedNodes();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 8:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 16:
 				return getPredicatedEdges();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 9:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 17:
 				return getPredicatedNodes();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 10:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 18:
 				return getRealizedEdges();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 11:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 19:
 				return getRealizedNodes();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 12:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 20:
 				return getSpeculatedEdges();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 13:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 21:
 				return getSpeculatedNodes();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 14:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 22:
 				return getSpeculationNodes();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 23:
 				return getOwningMergedPartition();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -636,67 +637,67 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				getConstantEdges().clear();
 				getConstantEdges().addAll((Collection<? extends Edge>)newValue);
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				getConstantNodes().clear();
 				getConstantNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10:
 				getConstantSuccessFalseNodes().clear();
 				getConstantSuccessFalseNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 11:
 				getConstantSuccessTrueNodes().clear();
 				getConstantSuccessTrueNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 12:
 				getExplicitPredecessors().clear();
 				getExplicitPredecessors().addAll((Collection<? extends MappingPartition>)newValue);
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 5:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 13:
 				getHeadNodes().clear();
 				getHeadNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 6:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 14:
 				getLoadedEdges().clear();
 				getLoadedEdges().addAll((Collection<? extends Edge>)newValue);
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 7:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 15:
 				getLoadedNodes().clear();
 				getLoadedNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 8:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 16:
 				getPredicatedEdges().clear();
 				getPredicatedEdges().addAll((Collection<? extends Edge>)newValue);
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 9:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 17:
 				getPredicatedNodes().clear();
 				getPredicatedNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 10:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 18:
 				getRealizedEdges().clear();
 				getRealizedEdges().addAll((Collection<? extends Edge>)newValue);
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 11:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 19:
 				getRealizedNodes().clear();
 				getRealizedNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 12:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 20:
 				getSpeculatedEdges().clear();
 				getSpeculatedEdges().addAll((Collection<? extends Edge>)newValue);
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 13:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 21:
 				getSpeculatedNodes().clear();
 				getSpeculatedNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 14:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 22:
 				getSpeculationNodes().clear();
 				getSpeculationNodes().addAll((Collection<? extends Node>)newValue);
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 23:
 				setOwningMergedPartition((MergedPartition)newValue);
 				return;
 		}
@@ -711,52 +712,52 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				getConstantEdges().clear();
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				getConstantNodes().clear();
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10:
 				getConstantSuccessFalseNodes().clear();
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 11:
 				getConstantSuccessTrueNodes().clear();
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 12:
 				getExplicitPredecessors().clear();
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 5:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 13:
 				getHeadNodes().clear();
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 6:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 14:
 				getLoadedEdges().clear();
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 7:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 15:
 				getLoadedNodes().clear();
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 8:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 16:
 				getPredicatedEdges().clear();
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 9:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 17:
 				getPredicatedNodes().clear();
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 10:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 18:
 				getRealizedEdges().clear();
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 11:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 19:
 				getRealizedNodes().clear();
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 12:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 20:
 				getSpeculatedEdges().clear();
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 13:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 21:
 				getSpeculatedNodes().clear();
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 14:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 22:
 				getSpeculationNodes().clear();
 				return;
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 23:
 				setOwningMergedPartition((MergedPartition)null);
 				return;
 		}
@@ -771,37 +772,37 @@ public class BasicPartitionImpl extends MappingPartitionImpl implements BasicPar
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return constantEdges != null && !constantEdges.isEmpty();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				return constantNodes != null && !constantNodes.isEmpty();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 10:
 				return constantSuccessFalseNodes != null && !constantSuccessFalseNodes.isEmpty();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 11:
 				return constantSuccessTrueNodes != null && !constantSuccessTrueNodes.isEmpty();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 12:
 				return explicitPredecessors != null && !explicitPredecessors.isEmpty();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 5:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 13:
 				return headNodes != null && !headNodes.isEmpty();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 6:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 14:
 				return loadedEdges != null && !loadedEdges.isEmpty();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 7:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 15:
 				return loadedNodes != null && !loadedNodes.isEmpty();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 8:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 16:
 				return predicatedEdges != null && !predicatedEdges.isEmpty();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 9:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 17:
 				return predicatedNodes != null && !predicatedNodes.isEmpty();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 10:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 18:
 				return realizedEdges != null && !realizedEdges.isEmpty();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 11:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 19:
 				return realizedNodes != null && !realizedNodes.isEmpty();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 12:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 20:
 				return speculatedEdges != null && !speculatedEdges.isEmpty();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 13:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 21:
 				return speculatedNodes != null && !speculatedNodes.isEmpty();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 14:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 22:
 				return speculationNodes != null && !speculationNodes.isEmpty();
-			case MappingPartitionImpl.MAPPING_PARTITION_FEATURE_COUNT + 15:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 23:
 				return getOwningMergedPartition() != null;
 		}
 		return super.eIsSet(featureID);

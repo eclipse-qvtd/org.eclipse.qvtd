@@ -29,6 +29,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.library.classifier.OclTypeConformsToOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanImpliesOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
@@ -146,7 +147,7 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 		OCLExpression oldValue = value;
 		value = newValue;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0, oldValue, newValue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 2, oldValue, newValue);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -162,14 +163,14 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 		if (newValue != value) {
 			NotificationChain msgs = null;
 			if (value != null)
-				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0), null, msgs);
+				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ElementImpl.ELEMENT_FEATURE_COUNT + 2), null, msgs);
 			if (newValue != null)
-				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0), null, msgs);
+				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ElementImpl.ELEMENT_FEATURE_COUNT + 2), null, msgs);
 			msgs = basicSetValue(newValue, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0, newValue, newValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 2, newValue, newValue));
 	}
 
 	/**
@@ -192,7 +193,7 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 		boolean oldIsCheck = isCheck;
 		isCheck = newIsCheck;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1, oldIsCheck, isCheck));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 3, oldIsCheck, isCheck));
 	}
 
 	/**
@@ -341,7 +342,7 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return basicSetValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -355,9 +356,9 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return getValue();
-			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return isIsCheck();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -371,10 +372,10 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setValue((OCLExpression)newValue);
 				return;
-			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setIsCheck((Boolean)newValue);
 				return;
 		}
@@ -389,10 +390,10 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				setValue((OCLExpression)null);
 				return;
-			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				setIsCheck(IS_CHECK_EDEFAULT);
 				return;
 		}
@@ -407,9 +408,9 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 2:
 				return value != null;
-			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 3:
 				return isCheck != IS_CHECK_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
@@ -424,9 +425,9 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_OPERATION_COUNT + 0:
+			case ElementImpl.ELEMENT_OPERATION_COUNT + 1:
 				return validateCompatibleTypeForCheckedValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case MappingParameterBindingImpl.MAPPING_PARAMETER_BINDING_OPERATION_COUNT + 1:
+			case ElementImpl.ELEMENT_OPERATION_COUNT + 2:
 				return validateCompatibleTypeForUncheckedValue((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
 		}
 		return super.eInvoke(operationID, arguments);

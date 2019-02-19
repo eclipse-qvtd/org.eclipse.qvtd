@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.pivot.CollectionLiteralPart;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.qvtd.pivot.qvtschedule.CollectionPartEdge;
@@ -103,7 +104,7 @@ public class CollectionPartEdgeImpl extends ArgumentEdgeImpl implements Collecti
 			referredPart = (CollectionLiteralPart)eResolveProxy(oldReferredPart);
 			if (referredPart != oldReferredPart) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0, oldReferredPart, referredPart));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 6, oldReferredPart, referredPart));
 			}
 		}
 		return referredPart;
@@ -128,7 +129,7 @@ public class CollectionPartEdgeImpl extends ArgumentEdgeImpl implements Collecti
 		CollectionLiteralPart oldReferredPart = referredPart;
 		referredPart = newReferredPart;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0, oldReferredPart, referredPart));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 6, oldReferredPart, referredPart));
 	}
 
 	/**
@@ -139,7 +140,7 @@ public class CollectionPartEdgeImpl extends ArgumentEdgeImpl implements Collecti
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				if (resolve) return getReferredPart();
 				return basicGetReferredPart();
 		}
@@ -154,7 +155,7 @@ public class CollectionPartEdgeImpl extends ArgumentEdgeImpl implements Collecti
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setReferredPart((CollectionLiteralPart)newValue);
 				return;
 		}
@@ -169,7 +170,7 @@ public class CollectionPartEdgeImpl extends ArgumentEdgeImpl implements Collecti
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				setReferredPart((CollectionLiteralPart)null);
 				return;
 		}
@@ -184,7 +185,7 @@ public class CollectionPartEdgeImpl extends ArgumentEdgeImpl implements Collecti
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ArgumentEdgeImpl.ARGUMENT_EDGE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 6:
 				return referredPart != null;
 		}
 		return super.eIsSet(featureID);

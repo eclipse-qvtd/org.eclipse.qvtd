@@ -30,6 +30,7 @@ import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.library.collection.CollectionIncludesOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanEqualOperation;
 import org.eclipse.ocl.pivot.library.string.CGStringGetSeverityOperation;
@@ -140,7 +141,7 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningMappingCall != null)
-				msgs = ((InternalEObject)newOwningMappingCall).eInverseAdd(this, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0, MappingCall.class, msgs);
+				msgs = ((InternalEObject)newOwningMappingCall).eInverseAdd(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0, MappingCall.class, msgs);
 			msgs = basicSetOwningMappingCall(newOwningMappingCall, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -279,7 +280,7 @@ public abstract class MappingParameterBindingImpl extends ElementImpl implements
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case ElementImpl.ELEMENT_FEATURE_COUNT + 0:
-				return eInternalContainer().eInverseRemove(this, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0, MappingCall.class, msgs);
+				return eInternalContainer().eInverseRemove(this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0, MappingCall.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

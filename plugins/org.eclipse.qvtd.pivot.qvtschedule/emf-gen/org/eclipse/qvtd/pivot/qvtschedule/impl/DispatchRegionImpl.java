@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.qvtd.pivot.qvtschedule.DispatchRegion;
@@ -102,7 +103,7 @@ public class DispatchRegionImpl extends RuleRegionImpl implements DispatchRegion
 			referredRuleRegion = (RuleRegion)eResolveProxy(oldReferredRuleRegion);
 			if (referredRuleRegion != oldReferredRuleRegion) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, RuleRegionImpl.RULE_REGION_FEATURE_COUNT + 0, oldReferredRuleRegion, referredRuleRegion));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9, oldReferredRuleRegion, referredRuleRegion));
 			}
 		}
 		return referredRuleRegion;
@@ -127,7 +128,7 @@ public class DispatchRegionImpl extends RuleRegionImpl implements DispatchRegion
 		RuleRegion oldReferredRuleRegion = referredRuleRegion;
 		referredRuleRegion = newReferredRuleRegion;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RuleRegionImpl.RULE_REGION_FEATURE_COUNT + 0, oldReferredRuleRegion, referredRuleRegion));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9, oldReferredRuleRegion, referredRuleRegion));
 	}
 
 	/**
@@ -138,7 +139,7 @@ public class DispatchRegionImpl extends RuleRegionImpl implements DispatchRegion
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case RuleRegionImpl.RULE_REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				if (resolve) return getReferredRuleRegion();
 				return basicGetReferredRuleRegion();
 		}
@@ -153,7 +154,7 @@ public class DispatchRegionImpl extends RuleRegionImpl implements DispatchRegion
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case RuleRegionImpl.RULE_REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				setReferredRuleRegion((RuleRegion)newValue);
 				return;
 		}
@@ -168,7 +169,7 @@ public class DispatchRegionImpl extends RuleRegionImpl implements DispatchRegion
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case RuleRegionImpl.RULE_REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				setReferredRuleRegion((RuleRegion)null);
 				return;
 		}
@@ -183,7 +184,7 @@ public class DispatchRegionImpl extends RuleRegionImpl implements DispatchRegion
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case RuleRegionImpl.RULE_REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 9:
 				return referredRuleRegion != null;
 		}
 		return super.eIsSet(featureID);

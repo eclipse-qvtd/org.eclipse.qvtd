@@ -35,6 +35,7 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.IdResolver.IdResolverExtension;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSingleIterationManager;
 import org.eclipse.ocl.pivot.library.AbstractBinaryOperation;
 import org.eclipse.ocl.pivot.library.LibraryIteration.LibraryIterationExtension;
@@ -187,7 +188,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	@Override
 	public EList<MappingParameterBinding> getOwnedMappingParameterBindings() {
 		if (ownedMappingParameterBindings == null) {
-			ownedMappingParameterBindings = new EObjectContainmentWithInverseEList<MappingParameterBinding>(MappingParameterBinding.class, this, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
+			ownedMappingParameterBindings = new EObjectContainmentWithInverseEList<MappingParameterBinding>(MappingParameterBinding.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0, ElementImpl.ELEMENT_FEATURE_COUNT + 0);
 		}
 		return ownedMappingParameterBindings;
 	}
@@ -204,7 +205,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			referredMapping = (Mapping)eResolveProxy(oldReferredMapping);
 			if (referredMapping != oldReferredMapping) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3, oldReferredMapping, referredMapping));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, oldReferredMapping, referredMapping));
 			}
 		}
 		return referredMapping;
@@ -229,7 +230,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		Mapping oldReferredMapping = referredMapping;
 		referredMapping = newReferredMapping;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3, oldReferredMapping, referredMapping));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3, oldReferredMapping, referredMapping));
 	}
 
 	/**
@@ -595,7 +596,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		boolean oldIsInstall = isInstall;
 		isInstall = newIsInstall;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1, oldIsInstall, isInstall));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1, oldIsInstall, isInstall));
 	}
 
 	/**
@@ -618,7 +619,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 		boolean oldIsInvoke = isInvoke;
 		isInvoke = newIsInvoke;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2, oldIsInvoke, isInvoke));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2, oldIsInvoke, isInvoke));
 	}
 
 	/**
@@ -630,7 +631,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedMappingParameterBindings()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -644,7 +645,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedMappingParameterBindings()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -658,18 +659,18 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return getOwnedMappingParameterBindings();
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return isIsInstall();
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return isIsInvoke();
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				if (resolve) return getReferredMapping();
 				return basicGetReferredMapping();
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return getReferredNames();
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 5:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return getReferringNames();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -684,17 +685,17 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getOwnedMappingParameterBindings().clear();
 				getOwnedMappingParameterBindings().addAll((Collection<? extends MappingParameterBinding>)newValue);
 				return;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setIsInstall((Boolean)newValue);
 				return;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setIsInvoke((Boolean)newValue);
 				return;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setReferredMapping((Mapping)newValue);
 				return;
 		}
@@ -709,16 +710,16 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				getOwnedMappingParameterBindings().clear();
 				return;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				setIsInstall(IS_INSTALL_EDEFAULT);
 				return;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				setIsInvoke(IS_INVOKE_EDEFAULT);
 				return;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				setReferredMapping((Mapping)null);
 				return;
 		}
@@ -733,17 +734,17 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 0:
 				return ownedMappingParameterBindings != null && !ownedMappingParameterBindings.isEmpty();
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 1:
 				return isInstall != IS_INSTALL_EDEFAULT;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 2:
 				return isInvoke != IS_INVOKE_EDEFAULT;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 3:
 				return referredMapping != null;
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 4:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 4:
 				return !getReferredNames().isEmpty();
-			case MappingStatementImpl.MAPPING_STATEMENT_FEATURE_COUNT + 5:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 5:
 				return !getReferringNames().isEmpty();
 		}
 		return super.eIsSet(featureID);
@@ -758,7 +759,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
 		if (baseClass == ReferringElement.class) {
 			switch (baseOperationID) {
-				case 0: return MappingStatementImpl.MAPPING_STATEMENT_OPERATION_COUNT + 0;
+				case 0: return NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 1;
 				default: return -1;
 			}
 		}
@@ -774,13 +775,13 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
-			case MappingStatementImpl.MAPPING_STATEMENT_OPERATION_COUNT + 1:
+			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 2:
 				return validateMatchingCallBindings((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case MappingStatementImpl.MAPPING_STATEMENT_OPERATION_COUNT + 2:
+			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 3:
 				return validateNotBothInstallAndInvoke((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case MappingStatementImpl.MAPPING_STATEMENT_OPERATION_COUNT + 3:
+			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 4:
 				return validateUniqueCallBindings((DiagnosticChain)arguments.get(0), (Map<Object, Object>)arguments.get(1));
-			case MappingStatementImpl.MAPPING_STATEMENT_OPERATION_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_OPERATION_COUNT + 1:
 				return getReferredElement();
 		}
 		return super.eInvoke(operationID, arguments);

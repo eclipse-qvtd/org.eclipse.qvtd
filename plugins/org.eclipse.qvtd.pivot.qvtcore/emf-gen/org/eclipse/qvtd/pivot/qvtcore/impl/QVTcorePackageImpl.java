@@ -874,11 +874,11 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		createEAttribute(assignmentEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 3);
 
 		bottomPatternEClass = createEClass(2);
-		createEReference(bottomPatternEClass, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0);
-		createEReference(bottomPatternEClass, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 1);
-		createEReference(bottomPatternEClass, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 2);
-		createEReference(bottomPatternEClass, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 3);
-		createEOperation(bottomPatternEClass, CorePatternImpl.CORE_PATTERN_OPERATION_COUNT + 0);
+		createEReference(bottomPatternEClass, PatternImpl.PATTERN_FEATURE_COUNT + 1);
+		createEReference(bottomPatternEClass, PatternImpl.PATTERN_FEATURE_COUNT + 2);
+		createEReference(bottomPatternEClass, PatternImpl.PATTERN_FEATURE_COUNT + 3);
+		createEReference(bottomPatternEClass, PatternImpl.PATTERN_FEATURE_COUNT + 4);
+		createEOperation(bottomPatternEClass, PatternImpl.PATTERN_OPERATION_COUNT + 1);
 
 		bottomVariableEClass = createEClass(3);
 		createEOperation(bottomVariableEClass, VariableImpl.VARIABLE_OPERATION_COUNT + 0);
@@ -897,8 +897,8 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		createEReference(enforcementOperationEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 2);
 
 		guardPatternEClass = createEClass(8);
-		createEReference(guardPatternEClass, CorePatternImpl.CORE_PATTERN_FEATURE_COUNT + 0);
-		createEOperation(guardPatternEClass, CorePatternImpl.CORE_PATTERN_OPERATION_COUNT + 0);
+		createEReference(guardPatternEClass, PatternImpl.PATTERN_FEATURE_COUNT + 1);
+		createEOperation(guardPatternEClass, PatternImpl.PATTERN_OPERATION_COUNT + 1);
 
 		guardVariableEClass = createEClass(9);
 		createEOperation(guardVariableEClass, VariableImpl.VARIABLE_OPERATION_COUNT + 0);
@@ -913,30 +913,30 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		createEOperation(mappingEClass, RuleImpl.RULE_OPERATION_COUNT + 2);
 
 		navigationAssignmentEClass = createEClass(11);
-		createEReference(navigationAssignmentEClass, AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0);
+		createEReference(navigationAssignmentEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 4);
 
 		oppositePropertyAssignmentEClass = createEClass(12);
-		createEReference(oppositePropertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_FEATURE_COUNT + 0);
-		createEOperation(oppositePropertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 0);
-		createEOperation(oppositePropertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 1);
-		createEOperation(oppositePropertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 2);
-		createEOperation(oppositePropertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 3);
-		createEOperation(oppositePropertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 4);
+		createEReference(oppositePropertyAssignmentEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 5);
+		createEOperation(oppositePropertyAssignmentEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 0);
+		createEOperation(oppositePropertyAssignmentEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 1);
+		createEOperation(oppositePropertyAssignmentEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 2);
+		createEOperation(oppositePropertyAssignmentEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 3);
+		createEOperation(oppositePropertyAssignmentEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 4);
 
 		propertyAssignmentEClass = createEClass(13);
-		createEReference(propertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_FEATURE_COUNT + 0);
-		createEOperation(propertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 0);
-		createEOperation(propertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 1);
-		createEOperation(propertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 2);
-		createEOperation(propertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 3);
-		createEOperation(propertyAssignmentEClass, NavigationAssignmentImpl.NAVIGATION_ASSIGNMENT_OPERATION_COUNT + 4);
+		createEReference(propertyAssignmentEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 5);
+		createEOperation(propertyAssignmentEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 0);
+		createEOperation(propertyAssignmentEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 1);
+		createEOperation(propertyAssignmentEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 2);
+		createEOperation(propertyAssignmentEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 3);
+		createEOperation(propertyAssignmentEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 4);
 
 		realizedVariableEClass = createEClass(14);
 		createEOperation(realizedVariableEClass, VariableImpl.VARIABLE_OPERATION_COUNT + 0);
 
 		variableAssignmentEClass = createEClass(15);
-		createEReference(variableAssignmentEClass, AssignmentImpl.ASSIGNMENT_FEATURE_COUNT + 0);
-		createEOperation(variableAssignmentEClass, AssignmentImpl.ASSIGNMENT_OPERATION_COUNT + 0);
+		createEReference(variableAssignmentEClass, ElementImpl.ELEMENT_FEATURE_COUNT + 4);
+		createEOperation(variableAssignmentEClass, ElementImpl.ELEMENT_OPERATION_COUNT + 0);
 
 		// Create enums
 		enforcementModeEEnum = createEEnum(16);

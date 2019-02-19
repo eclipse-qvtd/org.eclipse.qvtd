@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionEnd;
 import org.eclipse.qvtd.pivot.qvtschedule.ConnectionRole;
@@ -165,7 +166,7 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 			referredProperty = (Property)eResolveProxy(oldReferredProperty);
 			if (referredProperty != oldReferredProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ConnectionImpl.CONNECTION_FEATURE_COUNT + 0, oldReferredProperty, referredProperty));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 7, oldReferredProperty, referredProperty));
 			}
 		}
 		return referredProperty;
@@ -190,7 +191,7 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 		Property oldReferredProperty = referredProperty;
 		referredProperty = newReferredProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ConnectionImpl.CONNECTION_FEATURE_COUNT + 0, oldReferredProperty, referredProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 7, oldReferredProperty, referredProperty));
 	}
 
 	/**
@@ -227,12 +228,12 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				if (resolve) return getReferredProperty();
 				return basicGetReferredProperty();
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return getMandatoryTargetEdges();
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 2:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				return getPreferredTargetEdges();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -247,14 +248,14 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setReferredProperty((Property)newValue);
 				return;
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				getMandatoryTargetEdges().clear();
 				getMandatoryTargetEdges().addAll((Collection<? extends NavigableEdge>)newValue);
 				return;
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 2:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				getPreferredTargetEdges().clear();
 				getPreferredTargetEdges().addAll((Collection<? extends NavigableEdge>)newValue);
 				return;
@@ -270,13 +271,13 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				setReferredProperty((Property)null);
 				return;
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				getMandatoryTargetEdges().clear();
 				return;
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 2:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				getPreferredTargetEdges().clear();
 				return;
 		}
@@ -291,11 +292,11 @@ public class EdgeConnectionImpl extends ConnectionImpl implements EdgeConnection
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 7:
 				return referredProperty != null;
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 1:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 8:
 				return mandatoryTargetEdges != null && !mandatoryTargetEdges.isEmpty();
-			case ConnectionImpl.CONNECTION_FEATURE_COUNT + 2:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 9:
 				return preferredTargetEdges != null && !preferredTargetEdges.isEmpty();
 		}
 		return super.eIsSet(featureID);

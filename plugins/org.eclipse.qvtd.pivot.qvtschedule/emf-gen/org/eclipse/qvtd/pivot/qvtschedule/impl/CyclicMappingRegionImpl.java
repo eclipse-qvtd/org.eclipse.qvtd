@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import org.eclipse.ocl.pivot.internal.NamedElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.qvtd.pivot.qvtschedule.CyclicMappingRegion;
@@ -100,7 +101,7 @@ public class CyclicMappingRegionImpl extends MappingRegionImpl implements Cyclic
 	@Override
 	public List<MappingRegion> getElementRegions() {
 		if (elementRegions == null) {
-			elementRegions = new EObjectResolvingEList<MappingRegion>(MappingRegion.class, this, MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0);
+			elementRegions = new EObjectResolvingEList<MappingRegion>(MappingRegion.class, this, NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8);
 		}
 		return elementRegions;
 	}
@@ -113,7 +114,7 @@ public class CyclicMappingRegionImpl extends MappingRegionImpl implements Cyclic
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return getElementRegions();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -128,7 +129,7 @@ public class CyclicMappingRegionImpl extends MappingRegionImpl implements Cyclic
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				getElementRegions().clear();
 				getElementRegions().addAll((Collection<? extends MappingRegion>)newValue);
 				return;
@@ -144,7 +145,7 @@ public class CyclicMappingRegionImpl extends MappingRegionImpl implements Cyclic
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				getElementRegions().clear();
 				return;
 		}
@@ -159,7 +160,7 @@ public class CyclicMappingRegionImpl extends MappingRegionImpl implements Cyclic
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MappingRegionImpl.MAPPING_REGION_FEATURE_COUNT + 0:
+			case NamedElementImpl.NAMED_ELEMENT_FEATURE_COUNT + 8:
 				return elementRegions != null && !elementRegions.isEmpty();
 		}
 		return super.eIsSet(featureID);

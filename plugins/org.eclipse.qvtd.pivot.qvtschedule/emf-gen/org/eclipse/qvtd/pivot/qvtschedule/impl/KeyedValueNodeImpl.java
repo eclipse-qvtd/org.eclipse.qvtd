@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import org.eclipse.ocl.pivot.internal.ElementImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 
 import org.eclipse.qvtd.pivot.qvtschedule.ClassDatum;
@@ -104,7 +105,7 @@ public class KeyedValueNodeImpl extends OperationNodeImpl implements KeyedValueN
 			classDatumValue = (ClassDatum)eResolveProxy(oldClassDatumValue);
 			if (classDatumValue != oldClassDatumValue) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldClassDatumValue, classDatumValue));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ElementImpl.ELEMENT_FEATURE_COUNT + 10, oldClassDatumValue, classDatumValue));
 			}
 		}
 		return classDatumValue;
@@ -129,7 +130,7 @@ public class KeyedValueNodeImpl extends OperationNodeImpl implements KeyedValueN
 		ClassDatum oldClassDatumValue = classDatumValue;
 		classDatumValue = newClassDatumValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0, oldClassDatumValue, classDatumValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, ElementImpl.ELEMENT_FEATURE_COUNT + 10, oldClassDatumValue, classDatumValue));
 	}
 
 	/**
@@ -140,7 +141,7 @@ public class KeyedValueNodeImpl extends OperationNodeImpl implements KeyedValueN
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				if (resolve) return getClassDatumValue();
 				return basicGetClassDatumValue();
 		}
@@ -155,7 +156,7 @@ public class KeyedValueNodeImpl extends OperationNodeImpl implements KeyedValueN
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setClassDatumValue((ClassDatum)newValue);
 				return;
 		}
@@ -170,7 +171,7 @@ public class KeyedValueNodeImpl extends OperationNodeImpl implements KeyedValueN
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				setClassDatumValue((ClassDatum)null);
 				return;
 		}
@@ -185,7 +186,7 @@ public class KeyedValueNodeImpl extends OperationNodeImpl implements KeyedValueN
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case OperationNodeImpl.OPERATION_NODE_FEATURE_COUNT + 0:
+			case ElementImpl.ELEMENT_FEATURE_COUNT + 10:
 				return classDatumValue != null;
 		}
 		return super.eIsSet(featureID);
