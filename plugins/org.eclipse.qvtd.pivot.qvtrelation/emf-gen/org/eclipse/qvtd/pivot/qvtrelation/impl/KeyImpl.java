@@ -397,7 +397,7 @@ public class KeyImpl extends ElementImpl implements Key {
 			 *           superClasses : Set(Class) = identifies.superClasses->closure(superClasses)
 			 *         in
 			 *           let
-			 *             otherKeys : Set(qvtrelation::Key) = transformation.ownedKey->excluding(self)
+			 *             otherKeys : Set(qvtrelation::Key) = transformation?.ownedKey?->excluding(self)
 			 *           in otherKeys.identifies->excludesAll(superClasses)
 			 *       in
 			 *         'Key::NoSuperKeys'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
@@ -447,13 +447,20 @@ public class KeyImpl extends ElementImpl implements Key {
 						final @NonNull ExecutorSingleIterationManager MGR_superClasses_2 = new ExecutorSingleIterationManager(executor, QVTrelationTables.SET_CLSSid_Class, BODY_superClasses_2, BOXED_superClasses_0, ACC_superClasses_2);
 						@SuppressWarnings("null")
 						final /*@Thrown*/ @NonNull SetValue superClasses = (@NonNull SetValue)IMPL_superClasses_2.evaluateIteration(MGR_superClasses_2);
-						if (transformation == null) {
-							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTrelation\'::RelationalTransformation::ownedKey\'");
+						final /*@NonInvalid*/ @NonNull Object ownedKey = transformation == null;
+						/*@Thrown*/ @Nullable SetValue safe_ownedKey_source;
+						if (ownedKey == Boolean.TRUE) {
+							safe_ownedKey_source = null;
 						}
-						@SuppressWarnings("null")
-						final /*@Thrown*/ @NonNull List<Key> ownedKey = transformation.getOwnedKey();
-						final /*@Thrown*/ @NonNull SetValue BOXED_ownedKey = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Key, ownedKey);
-						final /*@Thrown*/ @NonNull SetValue otherKeys = (@Nullable SetValue)CollectionExcludingOperation.INSTANCE.evaluate(BOXED_ownedKey, this);
+						else {
+							assert transformation != null;
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull List<Key> ownedKey_0 = transformation.getOwnedKey();
+							final /*@Thrown*/ @NonNull SetValue BOXED_ownedKey_0 = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Key, ownedKey_0);
+							safe_ownedKey_source = BOXED_ownedKey_0;
+						}
+						final /*@Thrown*/ @NonNull SetValue safe_excluding_sources = (@Nullable SetValue)CollectionExcludingOperation.INSTANCE.evaluate(safe_ownedKey_source, (Object)null);
+						final /*@Thrown*/ @NonNull SetValue otherKeys = (@Nullable SetValue)CollectionExcludingOperation.INSTANCE.evaluate(safe_excluding_sources, this);
 						/*@Thrown*/ org.eclipse.ocl.pivot.values.BagValue.@NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTrelationTables.BAG_CLSSid_Class);
 						@NonNull Iterator<Object> ITERATOR__1_0 = otherKeys.iterator();
 						/*@Thrown*/ @NonNull BagValue collect;
@@ -511,7 +518,7 @@ public class KeyImpl extends ElementImpl implements Key {
 			 *     else
 			 *       let result : Boolean[?] = transformation <> null implies
 			 *         let
-			 *           otherKeys : Set(qvtrelation::Key) = transformation.ownedKey->excluding(self)
+			 *           otherKeys : Set(qvtrelation::Key) = transformation?.ownedKey?->excluding(self)
 			 *         in otherKeys.identifies->excludes(identifies)
 			 *       in
 			 *         'Key::IdentifiesIsUnique'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
@@ -532,13 +539,20 @@ public class KeyImpl extends ElementImpl implements Key {
 					final /*@NonInvalid*/ boolean ne = transformation != null;
 					/*@Thrown*/ boolean result;
 					if (ne) {
-						if (transformation == null) {
-							throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/2015/QVTrelation\'::RelationalTransformation::ownedKey\'");
+						final /*@NonInvalid*/ @NonNull Object ownedKey = transformation == null;
+						/*@Thrown*/ @Nullable SetValue safe_ownedKey_source;
+						if (ownedKey == Boolean.TRUE) {
+							safe_ownedKey_source = null;
 						}
-						@SuppressWarnings("null")
-						final /*@Thrown*/ @NonNull List<Key> ownedKey = transformation.getOwnedKey();
-						final /*@Thrown*/ @NonNull SetValue BOXED_ownedKey = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Key, ownedKey);
-						final /*@Thrown*/ @NonNull SetValue otherKeys = (@Nullable SetValue)CollectionExcludingOperation.INSTANCE.evaluate(BOXED_ownedKey, this);
+						else {
+							assert transformation != null;
+							@SuppressWarnings("null")
+							final /*@Thrown*/ @NonNull List<Key> ownedKey_0 = transformation.getOwnedKey();
+							final /*@Thrown*/ @NonNull SetValue BOXED_ownedKey_0 = idResolver.createSetOfAll(QVTrelationTables.SET_CLSSid_Key, ownedKey_0);
+							safe_ownedKey_source = BOXED_ownedKey_0;
+						}
+						final /*@Thrown*/ @NonNull SetValue safe_excluding_sources = (@Nullable SetValue)CollectionExcludingOperation.INSTANCE.evaluate(safe_ownedKey_source, (Object)null);
+						final /*@Thrown*/ @NonNull SetValue otherKeys = (@Nullable SetValue)CollectionExcludingOperation.INSTANCE.evaluate(safe_excluding_sources, this);
 						/*@Thrown*/ org.eclipse.ocl.pivot.values.BagValue.@NonNull Accumulator accumulator = ValueUtil.createBagAccumulatorValue(QVTrelationTables.BAG_CLSSid_Class);
 						@NonNull Iterator<Object> ITERATOR__1 = otherKeys.iterator();
 						/*@Thrown*/ @NonNull BagValue collect;
