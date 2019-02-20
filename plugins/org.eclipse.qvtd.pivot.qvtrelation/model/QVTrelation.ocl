@@ -63,7 +63,7 @@ inv RelationDomainAssignmentsAreUnique:
 
 context RelationDomainAssignment
 inv CompatibleTypeForValue:
-	valueExp.type.conformsTo(variable.type)
+	valueExp.type?.conformsTo(variable.type)
 
 context RelationalTransformation
 --inv KeysAreUnique:

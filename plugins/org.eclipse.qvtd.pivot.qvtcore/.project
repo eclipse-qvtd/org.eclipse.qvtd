@@ -5,7 +5,28 @@
 	<projects>
 	</projects>
 	<buildSpec>
-=		<buildCommand>
+		<buildCommand>
+			<name>org.eclipse.ocl.pivot.ui.oclbuilder</name>
+			<arguments>
+				<dictionary>
+					<key>disabledExtensions</key>
+					<value>*,essentialocl</value>
+				</dictionary>
+				<dictionary>
+					<key>disabledPaths</key>
+					<value>bin/**,target/**</value>
+				</dictionary>
+				<dictionary>
+					<key>enabledExtensions</key>
+					<value>ecore,ocl,oclinecore,oclstdlib,uml</value>
+				</dictionary>
+				<dictionary>
+					<key>enabledPaths</key>
+					<value>**</value>
+				</dictionary>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
 			<name>org.eclipse.jdt.core.javabuilder</name>
 			<arguments>
 			</arguments>
@@ -24,5 +45,6 @@
 	<natures>
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
-=	</natures>
+		<nature>org.eclipse.ocl.pivot.ui.oclnature</nature>
+	</natures>
 </projectDescription>

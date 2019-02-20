@@ -8,7 +8,7 @@ import 'QVTimperative.ecore'
 package qvtimperative
 
 context AddStatement
-inv CompatibleTypeForValue: ownedExpression.type.conformsTo(targetVariable.type)
+inv CompatibleTypeForValue: ownedExpression.type?.conformsTo(targetVariable.type)
 
 context BufferStatement
 inv CompatibleTypeForValue: ownedExpression <> null implies ownedExpression.type.oclAsType(ocl::CollectionType).elementType.conformsTo(type)
@@ -18,7 +18,7 @@ inv TypeIsBoolean: ownedExpression.type = Boolean
 
 context DeclareStatement
 --inv CompatibleTypeForCheckedValue: isCheck implies type.conformsTo(ownedExpression.type)
-inv CompatibleTypeForUncheckedValue: not isCheck implies ownedExpression.type.conformsTo(type)
+inv CompatibleTypeForUncheckedValue: not isCheck implies ownedExpression.type?.conformsTo(type)
 
 --context GuardParameter
 --FIXME completeType inv TypedModelContainsType: referredTypedModel.allUsedPackages->includes(type.oclContainer())
@@ -48,7 +48,7 @@ context MappingParameterBinding
 inv ParameterIsMappingParameter: owningMappingCall.referredMapping.ownedMappingParameters->includes(boundVariable)
 
 context NewStatement
-inv CompatibleTypeForValue: ownedExpression <> null implies ownedExpression.type.conformsTo(type)
+inv CompatibleTypeForValue: ownedExpression <> null implies ownedExpression.type?.conformsTo(type)
 inv NonDataTypeForType: not type.oclIsKindOf(ocl::DataType)
 --FIXME completeType inv TypedModelContainsType: referredTypedModel.allUsedPackages->includes(type.oclContainer())
 
@@ -59,7 +59,7 @@ inv CompatibleClassForProperty:
 	let requiredType = resolvedProperty.owningClass in
 	let actualType = targetVariable.type in
 	Tuple{
-		status : Boolean = actualType.conformsTo(requiredType),
+		status : Boolean = actualType?.conformsTo(requiredType),
 		message : String = 'SetStatement::CompatibleClassForProperty: ' + actualType?.name + ' must conform to ' + requiredType?.name
 	}.status
 
@@ -68,7 +68,7 @@ inv CompatibleTypeForPartialValue:
 		let requiredType = resolvedProperty.type.oclAsType(ocl::CollectionType).elementType in
 		let actualType = ownedExpression.type in
 		Tuple{
-			status : Boolean = actualType.conformsTo(requiredType),
+			status : Boolean = actualType?.conformsTo(requiredType),
 			message : String = 'SetStatement::CompatibleTypeForPartialValue: ' + actualType?.name + ' must conform to ' + requiredType.name
 		}.status
 
@@ -77,7 +77,7 @@ inv CompatibleTypeForTotalValue:
 		let requiredType = resolvedProperty.type in
 		let actualType = ownedExpression.type in
 		Tuple{
-			status : Boolean = actualType.conformsTo(requiredType),
+			status : Boolean = actualType?.conformsTo(requiredType),
 			message : String = 'SetStatement::CompatibleTypeForTotalValue: ' + actualType?.name + ' must conform to ' + requiredType?.name
 		}.status
 
@@ -88,8 +88,8 @@ inv TargetPropertyIsNotReadOnly:
 not resolvedProperty.isReadOnly
 
 context SimpleParameterBinding
-inv CompatibleTypeForCheckedValue: isCheck implies boundVariable.type.conformsTo(value.type)
-inv CompatibleTypeForUncheckedValue: not isCheck implies value.type.conformsTo(boundVariable.type)
+inv CompatibleTypeForCheckedValue: isCheck implies boundVariable.type?.conformsTo(value.type)
+inv CompatibleTypeForUncheckedValue: not isCheck implies value.type?.conformsTo(boundVariable.type)
 
 context Statement
 def: joinNames(names : OrderedSet(String)) : String = '{' + names/*->sortedBy(n | n)*/->iterate(n; s : String = '' | if s = '' then n else s + ';' + n endif) + '}'

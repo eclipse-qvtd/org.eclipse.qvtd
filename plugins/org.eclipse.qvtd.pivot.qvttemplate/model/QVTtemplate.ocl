@@ -4,7 +4,7 @@ package qvttemplate
 
 context CollectionTemplateExp
 inv MemberTypeisCollectionElementType:
-	member->forAll(type.conformsTo(referredCollectionType.elementType))
+	member->forAll(type?.conformsTo(referredCollectionType.elementType))
 
 inv RestTypeisCollectionType:
 	rest <> null implies
@@ -31,15 +31,15 @@ inv CompatibleTypeForObjectValue(value.type?.name + ' must conform to ' + resolv
 	not resolvedProperty.type.oclIsKindOf(ocl::CollectionType) implies
 		let propertyType = resolvedProperty.type in
 		let valueType = value.type in
-			valueType.conformsTo(propertyType)
-			or propertyType.conformsTo(valueType)
+			valueType?.conformsTo(propertyType)
+			or propertyType?.conformsTo(valueType)
 
 inv CompatibleTypeForCollectionElementValue(value.type?.name + ' must conform to ' + resolvedProperty.type.oclAsType(ocl::CollectionType).elementType.name + ' or vice-versa'):
 	resolvedProperty.type.oclIsKindOf(ocl::CollectionType)
 	and not value.type.oclIsKindOf(ocl::CollectionType) implies
 		let propertyType = resolvedProperty.type.oclAsType(ocl::CollectionType).elementType in
 		let valueType = value.type in
-			valueType.conformsTo(propertyType)
+			valueType?.conformsTo(propertyType)
 			or propertyType.conformsTo(valueType)
 
 inv CompatibleTypeForCollectionValue(value.type.oclAsType(ocl::CollectionType).elementType.name + ' must conform to ' + resolvedProperty.type.oclAsType(ocl::CollectionType).elementType.name + ' or vice-versa'):
