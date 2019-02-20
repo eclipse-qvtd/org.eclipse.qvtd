@@ -766,7 +766,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 		  (getCollectionTemplateExp__ValidateMemberTypeisCollectionElementType__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tmember->forAll(type.conformsTo(referredCollectionType.elementType))\n\n"
+			   "body", "\n\tmember->forAll(type?.conformsTo(referredCollectionType.elementType))\n\n"
 		   });
 		addAnnotation
 		  (getCollectionTemplateExp__ValidateRestTypeisCollectionType__DiagnosticChain_Map(),
@@ -802,13 +802,13 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 		  (getPropertyTemplateItem__ValidateCompatibleTypeForObjectValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "Tuple {\n\tmessage : String = value.type?.name + \' must conform to \' + resolvedProperty.type?.name + \' or vice-versa\',\n\tstatus : Boolean = \n\tnot resolvedProperty.type.oclIsKindOf(ocl::CollectionType) implies\n\t\tlet propertyType = resolvedProperty.type in\n\t\tlet valueType = value.type in\n\t\t\tvalueType.conformsTo(propertyType)\n\t\t\tor propertyType.conformsTo(valueType)\n\n\n}.status"
+			   "body", "Tuple {\n\tmessage : String = value.type?.name + \' must conform to \' + resolvedProperty.type?.name + \' or vice-versa\',\n\tstatus : Boolean = \n\tnot resolvedProperty.type.oclIsKindOf(ocl::CollectionType) implies\n\t\tlet propertyType = resolvedProperty.type in\n\t\tlet valueType = value.type in\n\t\t\tvalueType?.conformsTo(propertyType)\n\t\t\tor propertyType?.conformsTo(valueType)\n\n\n}.status"
 		   });
 		addAnnotation
 		  (getPropertyTemplateItem__ValidateCompatibleTypeForCollectionElementValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "Tuple {\n\tmessage : String = value.type?.name + \' must conform to \' + resolvedProperty.type.oclAsType(ocl::CollectionType).elementType.name + \' or vice-versa\',\n\tstatus : Boolean = \n\tresolvedProperty.type.oclIsKindOf(ocl::CollectionType)\n\tand not value.type.oclIsKindOf(ocl::CollectionType) implies\n\t\tlet propertyType = resolvedProperty.type.oclAsType(ocl::CollectionType).elementType in\n\t\tlet valueType = value.type in\n\t\t\tvalueType.conformsTo(propertyType)\n\t\t\tor propertyType.conformsTo(valueType)\n\n\n}.status"
+			   "body", "Tuple {\n\tmessage : String = value.type?.name + \' must conform to \' + resolvedProperty.type.oclAsType(ocl::CollectionType).elementType.name + \' or vice-versa\',\n\tstatus : Boolean = \n\tresolvedProperty.type.oclIsKindOf(ocl::CollectionType)\n\tand not value.type.oclIsKindOf(ocl::CollectionType) implies\n\t\tlet propertyType = resolvedProperty.type.oclAsType(ocl::CollectionType).elementType in\n\t\tlet valueType = value.type in\n\t\t\tvalueType?.conformsTo(propertyType)\n\t\t\tor propertyType.conformsTo(valueType)\n\n\n}.status"
 		   });
 		addAnnotation
 		  (getPropertyTemplateItem__ValidateCompatibleTypeForCollectionValue__DiagnosticChain_Map(),

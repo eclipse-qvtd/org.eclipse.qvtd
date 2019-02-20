@@ -297,7 +297,7 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 			 *     then true
 			 *     else
 			 *       let result : Boolean[?] = ownedExpression <> null implies
-			 *         ownedExpression.type.conformsTo(type)
+			 *         ownedExpression.type?.conformsTo(type)
 			 *       in
 			 *         'NewStatement::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
@@ -310,19 +310,34 @@ public class NewStatementImpl extends VariableStatementImpl implements NewStatem
 				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_result;
+				/*@Caught*/ @Nullable Object CAUGHT_result;
 				try {
 					final /*@NonInvalid*/ @Nullable OCLExpression ownedExpression = this.getOwnedExpression();
 					final /*@NonInvalid*/ boolean ne = ownedExpression != null;
-					/*@Thrown*/ boolean result;
+					/*@Thrown*/ @Nullable Boolean result;
 					if (ne) {
 						if (ownedExpression == null) {
 							throw new InvalidValueException("Null source for \'TypedElement::type\'");
 						}
 						final /*@Thrown*/ @Nullable Type type = ownedExpression.getType();
-						final /*@NonInvalid*/ @Nullable Type type_0 = this.getType();
-						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-						result = conformsTo;
+						/*@Caught*/ @Nullable Object CAUGHT_type;
+						try {
+							CAUGHT_type = type;
+						}
+						catch (Exception e) {
+							CAUGHT_type = ValueUtil.createInvalidValue(e);
+						}
+						final /*@NonInvalid*/ @NonNull Object conformsTo = CAUGHT_type == null;
+						/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
+						if (conformsTo == Boolean.TRUE) {
+							safe_conformsTo_source = null;
+						}
+						else {
+							final /*@NonInvalid*/ @Nullable Type type_0 = this.getType();
+							final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+							safe_conformsTo_source = conformsTo_0;
+						}
+						result = safe_conformsTo_source;
 					}
 					else {
 						result = ValueUtil.TRUE_VALUE;

@@ -171,8 +171,8 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 			 *     else
 			 *       let
 			 *         result : OclAny[1] = let
-			 *           status : Boolean[?] = targetVariable.type.conformsTo(value.type) or
-			 *           value.type.conformsTo(targetVariable.type)
+			 *           status : Boolean[?] = targetVariable.type?.conformsTo(value.type) or
+			 *           value.type?.conformsTo(targetVariable.type)
 			 *         in
 			 *           if status = true
 			 *           then true
@@ -194,35 +194,51 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 			else {
 				/*@Caught*/ @NonNull Object CAUGHT_symbol_1;
 				try {
-					/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+					/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
 					try {
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull Variable targetVariable = this.getTargetVariable();
 						final /*@NonInvalid*/ @Nullable Type type = targetVariable.getType();
-						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
-						final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
-						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-						CAUGHT_conformsTo = conformsTo;
+						final /*@NonInvalid*/ @NonNull Object conformsTo = type == null;
+						/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
+						if (conformsTo == Boolean.TRUE) {
+							safe_conformsTo_source = null;
+						}
+						else {
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
+							final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
+							final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+							safe_conformsTo_source = conformsTo_0;
+						}
+						CAUGHT_safe_conformsTo_source = safe_conformsTo_source;
 					}
 					catch (Exception e) {
-						CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
+						CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
 					}
-					/*@Caught*/ @NonNull Object CAUGHT_conformsTo_0;
+					/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source_0;
 					try {
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull OCLExpression value_0 = this.getValue();
 						final /*@NonInvalid*/ @Nullable Type type_1 = value_0.getType();
-						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull Variable targetVariable_0 = this.getTargetVariable();
-						final /*@NonInvalid*/ @Nullable Type type_2 = targetVariable_0.getType();
-						final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type_1, type_2).booleanValue();
-						CAUGHT_conformsTo_0 = conformsTo_0;
+						final /*@NonInvalid*/ @NonNull Object conformsTo_1 = type_1 == null;
+						/*@Thrown*/ @Nullable Boolean safe_conformsTo_source_0;
+						if (conformsTo_1 == Boolean.TRUE) {
+							safe_conformsTo_source_0 = null;
+						}
+						else {
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull Variable targetVariable_0 = this.getTargetVariable();
+							final /*@NonInvalid*/ @Nullable Type type_2 = targetVariable_0.getType();
+							final /*@Thrown*/ boolean conformsTo_2 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type_1, type_2).booleanValue();
+							safe_conformsTo_source_0 = conformsTo_2;
+						}
+						CAUGHT_safe_conformsTo_source_0 = safe_conformsTo_source_0;
 					}
 					catch (Exception e) {
-						CAUGHT_conformsTo_0 = ValueUtil.createInvalidValue(e);
+						CAUGHT_safe_conformsTo_source_0 = ValueUtil.createInvalidValue(e);
 					}
-					final /*@Thrown*/ @Nullable Boolean status = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_conformsTo, CAUGHT_conformsTo_0);
+					final /*@Thrown*/ @Nullable Boolean status = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_safe_conformsTo_source, CAUGHT_safe_conformsTo_source_0);
 					final /*@Thrown*/ boolean eq = status == Boolean.TRUE;
 					/*@Thrown*/ @NonNull Object symbol_1;
 					if (eq) {

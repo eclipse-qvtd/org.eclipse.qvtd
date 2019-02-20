@@ -292,7 +292,7 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 			 *     then true
 			 *     else
 			 *       let
-			 *         result : Boolean[1] = ownedExpression.type.conformsTo(targetVariable.type)
+			 *         result : Boolean[?] = ownedExpression.type?.conformsTo(targetVariable.type)
 			 *       in
 			 *         'AddStatement::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
@@ -305,21 +305,29 @@ public class AddStatementImpl extends MappingStatementImpl implements AddStateme
 				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_result;
+				/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
 				try {
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
 					final /*@NonInvalid*/ @Nullable Type type = ownedExpression.getType();
-					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull ConnectionVariable targetVariable = this.getTargetVariable();
-					final /*@NonInvalid*/ @Nullable Type type_0 = targetVariable.getType();
-					final /*@Thrown*/ boolean result = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-					CAUGHT_result = result;
+					final /*@NonInvalid*/ @NonNull Object conformsTo = type == null;
+					/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
+					if (conformsTo == Boolean.TRUE) {
+						safe_conformsTo_source = null;
+					}
+					else {
+						@SuppressWarnings("null")
+						final /*@NonInvalid*/ @NonNull ConnectionVariable targetVariable = this.getTargetVariable();
+						final /*@NonInvalid*/ @Nullable Type type_0 = targetVariable.getType();
+						final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+						safe_conformsTo_source = conformsTo_0;
+					}
+					CAUGHT_safe_conformsTo_source = safe_conformsTo_source;
 				}
 				catch (Exception e) {
-					CAUGHT_result = ValueUtil.createInvalidValue(e);
+					CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_AddStatement_c_c_CompatibleTypeForValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_AddStatement_c_c_CompatibleTypeForValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_safe_conformsTo_source, QVTimperativeTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;

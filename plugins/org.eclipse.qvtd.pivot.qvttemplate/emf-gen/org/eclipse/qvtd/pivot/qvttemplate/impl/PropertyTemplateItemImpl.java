@@ -438,8 +438,8 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 			 *           in
 			 *             let valueType : Type[?] = value.type
 			 *             in
-			 *               valueType.conformsTo(propertyType) or
-			 *               propertyType.conformsTo(valueType)
+			 *               valueType?.conformsTo(propertyType) or
+			 *               propertyType?.conformsTo(valueType)
 			 *         in
 			 *           if status = true
 			 *           then true
@@ -483,23 +483,39 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
 						final /*@NonInvalid*/ @Nullable Type valueType = value.getType();
-						/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+						/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
 						try {
-							final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, valueType, propertyType).booleanValue();
-							CAUGHT_conformsTo = conformsTo;
+							final /*@NonInvalid*/ @NonNull Object conformsTo = valueType == null;
+							/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
+							if (conformsTo == Boolean.TRUE) {
+								safe_conformsTo_source = null;
+							}
+							else {
+								final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, valueType, propertyType).booleanValue();
+								safe_conformsTo_source = conformsTo_0;
+							}
+							CAUGHT_safe_conformsTo_source = safe_conformsTo_source;
 						}
 						catch (Exception e) {
-							CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
+							CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
 						}
-						/*@Caught*/ @NonNull Object CAUGHT_conformsTo_0;
+						/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source_0;
 						try {
-							final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, propertyType, valueType).booleanValue();
-							CAUGHT_conformsTo_0 = conformsTo_0;
+							final /*@NonInvalid*/ @NonNull Object conformsTo_1 = propertyType == null;
+							/*@Thrown*/ @Nullable Boolean safe_conformsTo_source_0;
+							if (conformsTo_1 == Boolean.TRUE) {
+								safe_conformsTo_source_0 = null;
+							}
+							else {
+								final /*@Thrown*/ boolean conformsTo_2 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, propertyType, valueType).booleanValue();
+								safe_conformsTo_source_0 = conformsTo_2;
+							}
+							CAUGHT_safe_conformsTo_source_0 = safe_conformsTo_source_0;
 						}
 						catch (Exception e) {
-							CAUGHT_conformsTo_0 = ValueUtil.createInvalidValue(e);
+							CAUGHT_safe_conformsTo_source_0 = ValueUtil.createInvalidValue(e);
 						}
-						final /*@Thrown*/ @Nullable Boolean or = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_conformsTo, CAUGHT_conformsTo_0);
+						final /*@Thrown*/ @Nullable Boolean or = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_safe_conformsTo_source, CAUGHT_safe_conformsTo_source_0);
 						CAUGHT_or = or;
 					}
 					catch (Exception e) {
@@ -585,7 +601,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 			 *           in
 			 *             let valueType : Type[?] = value.type
 			 *             in
-			 *               valueType.conformsTo(propertyType) or
+			 *               valueType?.conformsTo(propertyType) or
 			 *               propertyType.conformsTo(valueType)
 			 *         in
 			 *           if status = true
@@ -663,29 +679,37 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull OCLExpression value_0 = this.getValue();
 						final /*@NonInvalid*/ @Nullable Type valueType = value_0.getType();
-						/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+						/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
+						try {
+							final /*@NonInvalid*/ @NonNull Object conformsTo = valueType == null;
+							/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
+							if (conformsTo == Boolean.TRUE) {
+								safe_conformsTo_source = null;
+							}
+							else {
+								if (CAUGHT_propertyType instanceof InvalidValueException) {
+									throw (InvalidValueException)CAUGHT_propertyType;
+								}
+								final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, valueType, CAUGHT_propertyType).booleanValue();
+								safe_conformsTo_source = conformsTo_0;
+							}
+							CAUGHT_safe_conformsTo_source = safe_conformsTo_source;
+						}
+						catch (Exception e) {
+							CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
+						}
+						/*@Caught*/ @NonNull Object CAUGHT_conformsTo_1;
 						try {
 							if (CAUGHT_propertyType instanceof InvalidValueException) {
 								throw (InvalidValueException)CAUGHT_propertyType;
 							}
-							final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, valueType, CAUGHT_propertyType).booleanValue();
-							CAUGHT_conformsTo = conformsTo;
+							final /*@Thrown*/ boolean conformsTo_1 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, CAUGHT_propertyType, valueType).booleanValue();
+							CAUGHT_conformsTo_1 = conformsTo_1;
 						}
 						catch (Exception e) {
-							CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
+							CAUGHT_conformsTo_1 = ValueUtil.createInvalidValue(e);
 						}
-						/*@Caught*/ @NonNull Object CAUGHT_conformsTo_0;
-						try {
-							if (CAUGHT_propertyType instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_propertyType;
-							}
-							final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, CAUGHT_propertyType, valueType).booleanValue();
-							CAUGHT_conformsTo_0 = conformsTo_0;
-						}
-						catch (Exception e) {
-							CAUGHT_conformsTo_0 = ValueUtil.createInvalidValue(e);
-						}
-						final /*@Thrown*/ @Nullable Boolean or = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_conformsTo, CAUGHT_conformsTo_0);
+						final /*@Thrown*/ @Nullable Boolean or = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_safe_conformsTo_source, CAUGHT_conformsTo_1);
 						CAUGHT_or = or;
 					}
 					catch (Exception e) {

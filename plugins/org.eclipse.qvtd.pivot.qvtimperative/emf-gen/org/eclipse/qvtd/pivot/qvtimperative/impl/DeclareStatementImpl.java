@@ -243,7 +243,7 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 			 *     then true
 			 *     else
 			 *       let result : Boolean[?] = not isCheck implies
-			 *         ownedExpression.type.conformsTo(type)
+			 *         ownedExpression.type?.conformsTo(type)
 			 *       in
 			 *         'DeclareStatement::CompatibleTypeForUncheckedValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
@@ -260,19 +260,27 @@ public class DeclareStatementImpl extends VariableStatementImpl implements Decla
 				try {
 					final /*@NonInvalid*/ boolean isCheck = this.isIsCheck();
 					final /*@NonInvalid*/ @Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isCheck);
-					/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+					/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
 					try {
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
 						final /*@NonInvalid*/ @Nullable Type type = ownedExpression.getType();
-						final /*@NonInvalid*/ @Nullable Type type_0 = this.getType();
-						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-						CAUGHT_conformsTo = conformsTo;
+						final /*@NonInvalid*/ @NonNull Object conformsTo = type == null;
+						/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
+						if (conformsTo == Boolean.TRUE) {
+							safe_conformsTo_source = null;
+						}
+						else {
+							final /*@NonInvalid*/ @Nullable Type type_0 = this.getType();
+							final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+							safe_conformsTo_source = conformsTo_0;
+						}
+						CAUGHT_safe_conformsTo_source = safe_conformsTo_source;
 					}
 					catch (Exception e) {
-						CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
+						CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
 					}
-					final /*@Thrown*/ @Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(not, CAUGHT_conformsTo);
+					final /*@Thrown*/ @Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(not, CAUGHT_safe_conformsTo_source);
 					CAUGHT_result = result;
 				}
 				catch (Exception e) {

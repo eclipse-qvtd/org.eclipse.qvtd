@@ -246,7 +246,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 			 *     else
 			 *       let
 			 *         result : Boolean[?] = member->forAll(
-			 *           type.conformsTo(referredCollectionType.elementType))
+			 *           type?.conformsTo(referredCollectionType.elementType))
 			 *       in
 			 *         'CollectionTemplateExp::MemberTypeisCollectionElementType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
@@ -270,7 +270,10 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 					/*@Thrown*/ @Nullable Boolean result;
 					while (true) {
 						if (!ITERATOR__1.hasNext()) {
-							if (accumulator == ValueUtil.TRUE_VALUE) {
+							if (accumulator == null) {
+								result = null;
+							}
+							else if (accumulator == ValueUtil.TRUE_VALUE) {
 								result = ValueUtil.TRUE_VALUE;
 							}
 							else {
@@ -282,31 +285,44 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 						/*@NonInvalid*/ @NonNull OCLExpression _1 = (@NonNull OCLExpression)ITERATOR__1.next();
 						/**
 						 *
-						 * type.conformsTo(referredCollectionType.elementType)
+						 * type?.conformsTo(referredCollectionType.elementType)
 						 */
-						/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+						/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
 						try {
 							final /*@NonInvalid*/ @Nullable Type type = _1.getType();
-							@SuppressWarnings("null")
-							final /*@NonInvalid*/ @NonNull CollectionType referredCollectionType = this.getReferredCollectionType();
-							@SuppressWarnings("null")
-							final /*@NonInvalid*/ @NonNull Type elementType = referredCollectionType.getElementType();
-							final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, elementType).booleanValue();
-							CAUGHT_conformsTo = conformsTo;
+							final /*@NonInvalid*/ @NonNull Object conformsTo = type == null;
+							/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
+							if (conformsTo == Boolean.TRUE) {
+								safe_conformsTo_source = null;
+							}
+							else {
+								@SuppressWarnings("null")
+								final /*@NonInvalid*/ @NonNull CollectionType referredCollectionType = this.getReferredCollectionType();
+								@SuppressWarnings("null")
+								final /*@NonInvalid*/ @NonNull Type elementType = referredCollectionType.getElementType();
+								final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, elementType).booleanValue();
+								safe_conformsTo_source = conformsTo_0;
+							}
+							CAUGHT_safe_conformsTo_source = safe_conformsTo_source;
 						}
 						catch (Exception e) {
-							CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
+							CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
 						}
 						//
-						if (CAUGHT_conformsTo == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
+						if (CAUGHT_safe_conformsTo_source == ValueUtil.FALSE_VALUE) {					// Normal unsuccessful body evaluation result
 							result = ValueUtil.FALSE_VALUE;
 							break;														// Stop immediately
 						}
-						else if (CAUGHT_conformsTo == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
+						else if (CAUGHT_safe_conformsTo_source == ValueUtil.TRUE_VALUE) {				// Normal successful body evaluation result
 							;															// Carry on
 						}
-						else if (CAUGHT_conformsTo instanceof InvalidValueException) {		// Abnormal exception evaluation result
-							accumulator = CAUGHT_conformsTo;									// Cache an exception failure
+						else if (CAUGHT_safe_conformsTo_source == null) {								// Abnormal null body evaluation result
+							if (accumulator == ValueUtil.TRUE_VALUE) {
+								accumulator = null;										// Cache a null failure
+							}
+						}
+						else if (CAUGHT_safe_conformsTo_source instanceof InvalidValueException) {		// Abnormal exception evaluation result
+							accumulator = CAUGHT_safe_conformsTo_source;									// Cache an exception failure
 						}
 						else {															// Impossible badly typed result
 							accumulator = new InvalidValueException(PivotMessages.NonBooleanBody, "forAll");

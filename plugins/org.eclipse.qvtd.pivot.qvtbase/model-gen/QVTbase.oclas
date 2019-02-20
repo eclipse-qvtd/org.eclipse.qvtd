@@ -20,7 +20,7 @@
         <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;ownedParameters->forAll(oclIsKindOf(FunctionParameter))&#xA;&#xA;"/>
       </ownedInvariants>
       <ownedInvariants xmi:id="5hGIF" isCallable="true" name="ReturnTypeIsQueryType">
-        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;queryExpression &lt;> null implies queryExpression.type.conformsTo(type)&#xA;&#xA;"/>
+        <ownedSpecification xsi:type="pivot:ExpressionInOCL" body="&#xA;&#x9;queryExpression &lt;> null implies queryExpression.type?.conformsTo(type)&#xA;&#xA;"/>
       </ownedInvariants>
       <ownedProperties xmi:id="r1ilM" isComposite="true" isRequired="false" name="queryExpression" type="pivot:Class ../../org.eclipse.ocl.pivot/model/Pivot.ecore.oclas#BFtK4"/>
     </ownedClasses>

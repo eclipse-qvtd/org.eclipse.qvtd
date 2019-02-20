@@ -1422,7 +1422,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		  (getRelationDomainAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tvalueExp.type.conformsTo(variable.type)\n\n"
+			   "body", "\n\tvalueExp.type?.conformsTo(variable.type)\n\n"
 		   });
 		addAnnotation
 		  (getRelationalTransformation__ValidateRulesAreRelations__DiagnosticChain_Map(),

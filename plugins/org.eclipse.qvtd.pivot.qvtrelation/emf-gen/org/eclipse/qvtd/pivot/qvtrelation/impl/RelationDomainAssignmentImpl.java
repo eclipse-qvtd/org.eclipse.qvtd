@@ -262,7 +262,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 			 *     then true
 			 *     else
 			 *       let
-			 *         result : Boolean[1] = valueExp.type.conformsTo(variable.type)
+			 *         result : Boolean[?] = valueExp.type?.conformsTo(variable.type)
 			 *       in
 			 *         'RelationDomainAssignment::CompatibleTypeForValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
@@ -275,21 +275,29 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_result;
+				/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
 				try {
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ @NonNull OCLExpression valueExp = this.getValueExp();
 					final /*@NonInvalid*/ @Nullable Type type = valueExp.getType();
-					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull Variable variable = this.getVariable();
-					final /*@NonInvalid*/ @Nullable Type type_0 = variable.getType();
-					final /*@Thrown*/ boolean result = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-					CAUGHT_result = result;
+					final /*@NonInvalid*/ @NonNull Object conformsTo = type == null;
+					/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
+					if (conformsTo == Boolean.TRUE) {
+						safe_conformsTo_source = null;
+					}
+					else {
+						@SuppressWarnings("null")
+						final /*@NonInvalid*/ @NonNull Variable variable = this.getVariable();
+						final /*@NonInvalid*/ @Nullable Type type_0 = variable.getType();
+						final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+						safe_conformsTo_source = conformsTo_0;
+					}
+					CAUGHT_safe_conformsTo_source = safe_conformsTo_source;
 				}
 				catch (Exception e) {
-					CAUGHT_result = ValueUtil.createInvalidValue(e);
+					CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_RelationDomainAssignment_c_c_CompatibleTypeForValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_RelationDomainAssignment_c_c_CompatibleTypeForValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_safe_conformsTo_source, QVTrelationTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;

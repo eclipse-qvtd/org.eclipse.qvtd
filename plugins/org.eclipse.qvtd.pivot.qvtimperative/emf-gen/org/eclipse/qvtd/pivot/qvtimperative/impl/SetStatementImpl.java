@@ -460,7 +460,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			 *           let actualType : Type[?] = targetVariable.type
 			 *           in
 			 *             let
-			 *               status : Boolean[1] = actualType.conformsTo(requiredType)
+			 *               status : Boolean[?] = actualType?.conformsTo(requiredType)
 			 *             in
 			 *               if status = true
 			 *               then true
@@ -488,9 +488,18 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ @NonNull VariableDeclaration targetVariable = this.getTargetVariable();
 					final /*@NonInvalid*/ @Nullable Type actualType = targetVariable.getType();
-					final /*@Thrown*/ boolean status = OclTypeConformsToOperation.INSTANCE.evaluate(executor, actualType, requiredType).booleanValue();
+					final /*@NonInvalid*/ @NonNull Object conformsTo = actualType == null;
+					/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
+					if (conformsTo == Boolean.TRUE) {
+						safe_conformsTo_source = null;
+					}
+					else {
+						final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, actualType, requiredType).booleanValue();
+						safe_conformsTo_source = conformsTo_0;
+					}
+					final /*@Thrown*/ boolean eq = safe_conformsTo_source == Boolean.TRUE;
 					/*@Thrown*/ @NonNull Object symbol_1;
-					if (status) {
+					if (eq) {
 						symbol_1 = ValueUtil.TRUE_VALUE;
 					}
 					else {
@@ -517,7 +526,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 							safe_name_source_0 = name_2;
 						}
 						final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, safe_name_source_0);
-						final /*@Thrown*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, status);
+						final /*@Thrown*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, safe_conformsTo_source);
 						symbol_1 = symbol_0;
 					}
 					CAUGHT_symbol_1 = symbol_1;
@@ -561,7 +570,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			 *             let actualType : Type[?] = ownedExpression.type
 			 *             in
 			 *               let
-			 *                 status : Boolean[1] = actualType.conformsTo(requiredType)
+			 *                 status : Boolean[?] = actualType?.conformsTo(requiredType)
 			 *               in
 			 *                 if status = true
 			 *                 then true
@@ -600,9 +609,18 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
 						final /*@NonInvalid*/ @Nullable Type actualType = ownedExpression.getType();
-						final /*@Thrown*/ boolean status = OclTypeConformsToOperation.INSTANCE.evaluate(executor, actualType, requiredType).booleanValue();
+						final /*@NonInvalid*/ @NonNull Object conformsTo = actualType == null;
+						/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
+						if (conformsTo == Boolean.TRUE) {
+							safe_conformsTo_source = null;
+						}
+						else {
+							final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, actualType, requiredType).booleanValue();
+							safe_conformsTo_source = conformsTo_0;
+						}
+						final /*@Thrown*/ boolean eq = safe_conformsTo_source == Boolean.TRUE;
 						/*@Thrown*/ @NonNull Object symbol_1;
-						if (status) {
+						if (eq) {
 							symbol_1 = ValueUtil.TRUE_VALUE;
 						}
 						else {
@@ -620,7 +638,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 							final /*@Thrown*/ @NonNull String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, QVTimperativeTables.STR__32_must_32_conform_32_to_32);
 							final /*@Thrown*/ @Nullable String name_1 = requiredType.getName();
 							final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, name_1);
-							final /*@Thrown*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, status);
+							final /*@Thrown*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, safe_conformsTo_source);
 							symbol_1 = symbol_0;
 						}
 						result = symbol_1;
@@ -668,7 +686,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 			 *             let actualType : Type[?] = ownedExpression.type
 			 *             in
 			 *               let
-			 *                 status : Boolean[1] = actualType.conformsTo(requiredType)
+			 *                 status : Boolean[?] = actualType?.conformsTo(requiredType)
 			 *               in
 			 *                 if status = true
 			 *                 then true
@@ -705,9 +723,18 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull OCLExpression ownedExpression = this.getOwnedExpression();
 						final /*@NonInvalid*/ @Nullable Type actualType = ownedExpression.getType();
-						final /*@Thrown*/ boolean status = OclTypeConformsToOperation.INSTANCE.evaluate(executor, actualType, requiredType).booleanValue();
+						final /*@NonInvalid*/ @NonNull Object conformsTo = actualType == null;
+						/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
+						if (conformsTo == Boolean.TRUE) {
+							safe_conformsTo_source = null;
+						}
+						else {
+							final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, actualType, requiredType).booleanValue();
+							safe_conformsTo_source = conformsTo_0;
+						}
+						final /*@Thrown*/ boolean eq = safe_conformsTo_source == Boolean.TRUE;
 						/*@Thrown*/ @NonNull Object symbol_1;
-						if (status) {
+						if (eq) {
 							symbol_1 = ValueUtil.TRUE_VALUE;
 						}
 						else {
@@ -734,7 +761,7 @@ public class SetStatementImpl extends ObservableStatementImpl implements SetStat
 								safe_name_source_0 = name_2;
 							}
 							final /*@Thrown*/ @NonNull String sum_1 = StringConcatOperation.INSTANCE.evaluate(sum_0, safe_name_source_0);
-							final /*@Thrown*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, status);
+							final /*@Thrown*/ @NonNull TupleValue symbol_0 = ValueUtil.createTupleOfEach(QVTimperativeTables.TUPLid_, sum_1, safe_conformsTo_source);
 							symbol_1 = symbol_0;
 						}
 						result = symbol_1;

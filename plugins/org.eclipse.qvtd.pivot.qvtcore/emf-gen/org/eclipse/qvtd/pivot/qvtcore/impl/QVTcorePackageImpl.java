@@ -1454,13 +1454,13 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		  (getOppositePropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tisPartial implies\n\t\tlet propertyType = getReferredTargetProperty().type.oclAsType(ocl::CollectionType).elementType in\n\t\tlet valueType = value.type in\n\t\tTuple{\n\t\t\tstatus : Boolean = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),\n\t\t\tmessage : String = \'OppositePropertyAssignment::CompatibleTypeForPartialValue: \' + valueType?.name + \' must conform to \' + propertyType.name + \' or vice-versa\'\n\t\t}.status\n\n"
+			   "body", "\n\tisPartial implies\n\t\tlet propertyType = getReferredTargetProperty().type.oclAsType(ocl::CollectionType).elementType in\n\t\tlet valueType = value.type in\n\t\tTuple{\n\t\t\tstatus : Boolean = valueType?.conformsTo(propertyType) or propertyType.conformsTo(valueType),\n\t\t\tmessage : String = \'OppositePropertyAssignment::CompatibleTypeForPartialValue: \' + valueType?.name + \' must conform to \' + propertyType.name + \' or vice-versa\'\n\t\t}.status\n\n"
 		   });
 		addAnnotation
 		  (getOppositePropertyAssignment__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tnot isPartial implies\n\t\tlet propertyType = getReferredTargetProperty().type in\n\t\tlet valueType = value.type in\n\t\tTuple{\n\t\t\tstatus : Boolean = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),\n\t\t\tmessage : String = \'OppositePropertyAssignment::CompatibleTypeForTotalValue: \' + valueType?.name + \' must conform to \' + propertyType?.name + \' or vice-versa\'\n\t\t}.status\n\n"
+			   "body", "\n\tnot isPartial implies\n\t\tlet propertyType = getReferredTargetProperty().type in\n\t\tlet valueType = value.type in\n\t\tTuple{\n\t\t\tstatus : Boolean = valueType?.conformsTo(propertyType) or propertyType?.conformsTo(valueType),\n\t\t\tmessage : String = \'OppositePropertyAssignment::CompatibleTypeForTotalValue: \' + valueType?.name + \' must conform to \' + propertyType?.name + \' or vice-versa\'\n\t\t}.status\n\n"
 		   });
 		addAnnotation
 		  (getOppositePropertyAssignment__ValidateOppositePropertyIsImplicit__DiagnosticChain_Map(),
@@ -1472,7 +1472,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		  (getOppositePropertyAssignment__ValidateTargetPropetyIsSlotProperty__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tslotExpression.type.conformsTo(getReferredTargetProperty().owningClass)\n\n"
+			   "body", "\n\tslotExpression.type?.conformsTo(getReferredTargetProperty().owningClass)\n\n"
 		   });
 		addAnnotation
 		  (getPropertyAssignment__GetReferredTargetProperty(),
@@ -1484,13 +1484,13 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		  (getPropertyAssignment__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tisPartial implies\n\t\tlet propertyType = getReferredTargetProperty().type.oclAsType(ocl::CollectionType).elementType in\n\t\tlet valueType = value.type in\n\t\tTuple{\n\t\t\tstatus : Boolean = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),\n\t\t\tmessage : String = \'PropertyAssignment::CompatibleTypeForPartialValue: \' + valueType?.name + \' must conform to \' + propertyType.name + \' or vice-versa\'\n\t\t}.status\n\n"
+			   "body", "\n\tisPartial implies\n\t\tlet propertyType = getReferredTargetProperty().type.oclAsType(ocl::CollectionType).elementType in\n\t\tlet valueType = value.type in\n\t\tTuple{\n\t\t\tstatus : Boolean = valueType?.conformsTo(propertyType) or propertyType.conformsTo(valueType),\n\t\t\tmessage : String = \'PropertyAssignment::CompatibleTypeForPartialValue: \' + valueType?.name + \' must conform to \' + propertyType.name + \' or vice-versa\'\n\t\t}.status\n\n"
 		   });
 		addAnnotation
 		  (getPropertyAssignment__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tnot isPartial implies\n\t\tlet propertyType = getReferredTargetProperty().type in\n\t\tlet valueType = value.type in\n\t\tTuple{\n\t\t\tstatus : Boolean = valueType.conformsTo(propertyType) or propertyType.conformsTo(valueType),\n\t\t\tmessage : String = \'PropertyAssignment::CompatibleTypeForTotalValue: \' + valueType?.name + \' must conform to \' + propertyType?.name + \' or vice-versa\'\n\t\t}.status\n\n"
+			   "body", "\n\tnot isPartial implies\n\t\tlet propertyType = getReferredTargetProperty().type in\n\t\tlet valueType = value.type in\n\t\tTuple{\n\t\t\tstatus : Boolean = valueType?.conformsTo(propertyType) or propertyType?.conformsTo(valueType),\n\t\t\tmessage : String = \'PropertyAssignment::CompatibleTypeForTotalValue: \' + valueType?.name + \' must conform to \' + propertyType?.name + \' or vice-versa\'\n\t\t}.status\n\n"
 		   });
 		addAnnotation
 		  (getPropertyAssignment__ValidatePropertyIsNotImplicit__DiagnosticChain_Map(),
@@ -1502,7 +1502,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		  (getPropertyAssignment__ValidateTargetPropertyIsSlotProperty__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tslotExpression.type.conformsTo(getReferredTargetProperty().owningClass)\n\n"
+			   "body", "\n\tslotExpression.type?.conformsTo(getReferredTargetProperty().owningClass)\n\n"
 		   });
 		addAnnotation
 		  (getRealizedVariable__ValidateNonDataTypeForType__DiagnosticChain_Map(),
@@ -1514,7 +1514,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 		  (getVariableAssignment__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "Tuple {\n\tmessage : String = \'VariableAssignment::CompatibleTypeForValue: \' + value.type?.name + \' must conform to \' + targetVariable.type?.name + \' or vice-versa\',\n\tstatus : Boolean = \n\ttargetVariable.type.conformsTo(value.type)\n\tor value.type.conformsTo(targetVariable.type)\n\n\n}.status"
+			   "body", "Tuple {\n\tmessage : String = \'VariableAssignment::CompatibleTypeForValue: \' + value.type?.name + \' must conform to \' + targetVariable.type?.name + \' or vice-versa\',\n\tstatus : Boolean = \n\ttargetVariable.type?.conformsTo(value.type)\n\tor value.type?.conformsTo(targetVariable.type)\n\n\n}.status"
 		   });
 	}
 

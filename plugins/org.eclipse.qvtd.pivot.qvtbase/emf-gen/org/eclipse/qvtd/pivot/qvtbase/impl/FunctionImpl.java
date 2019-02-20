@@ -251,7 +251,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 			 *     then true
 			 *     else
 			 *       let result : Boolean[?] = queryExpression <> null implies
-			 *         queryExpression.type.conformsTo(type)
+			 *         queryExpression.type?.conformsTo(type)
 			 *       in
 			 *         'Function::ReturnTypeIsQueryType'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
@@ -264,19 +264,34 @@ public class FunctionImpl extends OperationImpl implements Function {
 				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_result;
+				/*@Caught*/ @Nullable Object CAUGHT_result;
 				try {
 					final /*@NonInvalid*/ @Nullable OCLExpression queryExpression = this.getQueryExpression();
 					final /*@NonInvalid*/ boolean ne = queryExpression != null;
-					/*@Thrown*/ boolean result;
+					/*@Thrown*/ @Nullable Boolean result;
 					if (ne) {
 						if (queryExpression == null) {
 							throw new InvalidValueException("Null source for \'TypedElement::type\'");
 						}
 						final /*@Thrown*/ @Nullable Type type = queryExpression.getType();
-						final /*@NonInvalid*/ @Nullable Type type_0 = this.getType();
-						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-						result = conformsTo;
+						/*@Caught*/ @Nullable Object CAUGHT_type;
+						try {
+							CAUGHT_type = type;
+						}
+						catch (Exception e) {
+							CAUGHT_type = ValueUtil.createInvalidValue(e);
+						}
+						final /*@NonInvalid*/ @NonNull Object conformsTo = CAUGHT_type == null;
+						/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
+						if (conformsTo == Boolean.TRUE) {
+							safe_conformsTo_source = null;
+						}
+						else {
+							final /*@NonInvalid*/ @Nullable Type type_0 = this.getType();
+							final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+							safe_conformsTo_source = conformsTo_0;
+						}
+						result = safe_conformsTo_source;
 					}
 					else {
 						result = ValueUtil.TRUE_VALUE;

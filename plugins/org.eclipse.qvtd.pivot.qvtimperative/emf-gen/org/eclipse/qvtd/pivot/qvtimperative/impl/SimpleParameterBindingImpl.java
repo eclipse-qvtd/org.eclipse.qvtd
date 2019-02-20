@@ -214,7 +214,7 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 			 *     then true
 			 *     else
 			 *       let result : Boolean[?] = isCheck implies
-			 *         boundVariable.type.conformsTo(value.type)
+			 *         boundVariable.type?.conformsTo(value.type)
 			 *       in
 			 *         'SimpleParameterBinding::CompatibleTypeForCheckedValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
@@ -227,19 +227,27 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_result;
+				/*@Caught*/ @Nullable Object CAUGHT_result;
 				try {
 					final /*@NonInvalid*/ boolean isCheck = this.isIsCheck();
-					/*@Thrown*/ boolean result;
+					/*@Thrown*/ @Nullable Boolean result;
 					if (isCheck) {
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull MappingParameter boundVariable = this.getBoundVariable();
 						final /*@NonInvalid*/ @Nullable Type type = boundVariable.getType();
-						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
-						final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
-						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-						result = conformsTo;
+						final /*@NonInvalid*/ @NonNull Object conformsTo = type == null;
+						/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
+						if (conformsTo == Boolean.TRUE) {
+							safe_conformsTo_source = null;
+						}
+						else {
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
+							final /*@NonInvalid*/ @Nullable Type type_0 = value.getType();
+							final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+							safe_conformsTo_source = conformsTo_0;
+						}
+						result = safe_conformsTo_source;
 					}
 					else {
 						result = ValueUtil.TRUE_VALUE;
@@ -277,7 +285,7 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 			 *     then true
 			 *     else
 			 *       let result : Boolean[?] = not isCheck implies
-			 *         value.type.conformsTo(boundVariable.type)
+			 *         value.type?.conformsTo(boundVariable.type)
 			 *       in
 			 *         'SimpleParameterBinding::CompatibleTypeForUncheckedValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
@@ -294,21 +302,29 @@ public class SimpleParameterBindingImpl extends MappingParameterBindingImpl impl
 				try {
 					final /*@NonInvalid*/ boolean isCheck = this.isIsCheck();
 					final /*@NonInvalid*/ @Nullable Boolean not = BooleanNotOperation.INSTANCE.evaluate(isCheck);
-					/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+					/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
 					try {
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
 						final /*@NonInvalid*/ @Nullable Type type = value.getType();
-						@SuppressWarnings("null")
-						final /*@NonInvalid*/ @NonNull MappingParameter boundVariable = this.getBoundVariable();
-						final /*@NonInvalid*/ @Nullable Type type_0 = boundVariable.getType();
-						final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
-						CAUGHT_conformsTo = conformsTo;
+						final /*@NonInvalid*/ @NonNull Object conformsTo = type == null;
+						/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
+						if (conformsTo == Boolean.TRUE) {
+							safe_conformsTo_source = null;
+						}
+						else {
+							@SuppressWarnings("null")
+							final /*@NonInvalid*/ @NonNull MappingParameter boundVariable = this.getBoundVariable();
+							final /*@NonInvalid*/ @Nullable Type type_0 = boundVariable.getType();
+							final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, type_0).booleanValue();
+							safe_conformsTo_source = conformsTo_0;
+						}
+						CAUGHT_safe_conformsTo_source = safe_conformsTo_source;
 					}
 					catch (Exception e) {
-						CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
+						CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
 					}
-					final /*@Thrown*/ @Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(not, CAUGHT_conformsTo);
+					final /*@Thrown*/ @Nullable Boolean result = BooleanImpliesOperation.INSTANCE.evaluate(not, CAUGHT_safe_conformsTo_source);
 					CAUGHT_result = result;
 				}
 				catch (Exception e) {

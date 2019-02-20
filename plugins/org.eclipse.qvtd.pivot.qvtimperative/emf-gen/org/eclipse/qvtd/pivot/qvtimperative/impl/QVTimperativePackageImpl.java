@@ -2093,7 +2093,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		  (getAddStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "ownedExpression.type.conformsTo(targetVariable.type)\n\n"
+			   "body", "ownedExpression.type?.conformsTo(targetVariable.type)\n\n"
 		   });
 		addAnnotation
 		  (getBufferStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
@@ -2111,7 +2111,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		  (getDeclareStatement__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "not isCheck implies ownedExpression.type.conformsTo(type)\n\n"
+			   "body", "not isCheck implies ownedExpression.type?.conformsTo(type)\n\n"
 		   });
 		addAnnotation
 		  (getImperativeTransformation__ValidateallRulesAreMappings__DiagnosticChain_Map(),
@@ -2177,7 +2177,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		  (getNewStatement__ValidateCompatibleTypeForValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "ownedExpression <> null implies ownedExpression.type.conformsTo(type)\n"
+			   "body", "ownedExpression <> null implies ownedExpression.type?.conformsTo(type)\n"
 		   });
 		addAnnotation
 		  (getNewStatement__ValidateNonDataTypeForType__DiagnosticChain_Map(),
@@ -2189,19 +2189,19 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		  (getSetStatement__ValidateCompatibleClassForProperty__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tlet requiredType = resolvedProperty.owningClass in\n\tlet actualType = targetVariable.type in\n\tTuple{\n\t\tstatus : Boolean = actualType.conformsTo(requiredType),\n\t\tmessage : String = \'SetStatement::CompatibleClassForProperty: \' + actualType?.name + \' must conform to \' + requiredType?.name\n\t}.status\n\n"
+			   "body", "\n\tlet requiredType = resolvedProperty.owningClass in\n\tlet actualType = targetVariable.type in\n\tTuple{\n\t\tstatus : Boolean = actualType?.conformsTo(requiredType),\n\t\tmessage : String = \'SetStatement::CompatibleClassForProperty: \' + actualType?.name + \' must conform to \' + requiredType?.name\n\t}.status\n\n"
 		   });
 		addAnnotation
 		  (getSetStatement__ValidateCompatibleTypeForPartialValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tisPartial implies\n\t\tlet requiredType = resolvedProperty.type.oclAsType(ocl::CollectionType).elementType in\n\t\tlet actualType = ownedExpression.type in\n\t\tTuple{\n\t\t\tstatus : Boolean = actualType.conformsTo(requiredType),\n\t\t\tmessage : String = \'SetStatement::CompatibleTypeForPartialValue: \' + actualType?.name + \' must conform to \' + requiredType.name\n\t\t}.status\n\n"
+			   "body", "\n\tisPartial implies\n\t\tlet requiredType = resolvedProperty.type.oclAsType(ocl::CollectionType).elementType in\n\t\tlet actualType = ownedExpression.type in\n\t\tTuple{\n\t\t\tstatus : Boolean = actualType?.conformsTo(requiredType),\n\t\t\tmessage : String = \'SetStatement::CompatibleTypeForPartialValue: \' + actualType?.name + \' must conform to \' + requiredType.name\n\t\t}.status\n\n"
 		   });
 		addAnnotation
 		  (getSetStatement__ValidateCompatibleTypeForTotalValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\tnot isPartial implies\n\t\tlet requiredType = resolvedProperty.type in\n\t\tlet actualType = ownedExpression.type in\n\t\tTuple{\n\t\t\tstatus : Boolean = actualType.conformsTo(requiredType),\n\t\t\tmessage : String = \'SetStatement::CompatibleTypeForTotalValue: \' + actualType?.name + \' must conform to \' + requiredType?.name\n\t\t}.status\n\n"
+			   "body", "\n\tnot isPartial implies\n\t\tlet requiredType = resolvedProperty.type in\n\t\tlet actualType = ownedExpression.type in\n\t\tTuple{\n\t\t\tstatus : Boolean = actualType?.conformsTo(requiredType),\n\t\t\tmessage : String = \'SetStatement::CompatibleTypeForTotalValue: \' + actualType?.name + \' must conform to \' + requiredType?.name\n\t\t}.status\n\n"
 		   });
 		addAnnotation
 		  (getSetStatement__ValidateValueDoesNotNavigateFromRealizedVariables__DiagnosticChain_Map(),
@@ -2219,13 +2219,13 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		  (getSimpleParameterBinding__ValidateCompatibleTypeForCheckedValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "isCheck implies boundVariable.type.conformsTo(value.type)\n"
+			   "body", "isCheck implies boundVariable.type?.conformsTo(value.type)\n"
 		   });
 		addAnnotation
 		  (getSimpleParameterBinding__ValidateCompatibleTypeForUncheckedValue__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "not isCheck implies value.type.conformsTo(boundVariable.type)\n\n"
+			   "body", "not isCheck implies value.type?.conformsTo(boundVariable.type)\n\n"
 		   });
 		addAnnotation
 		  (getStatement__JoinNames__EList(),

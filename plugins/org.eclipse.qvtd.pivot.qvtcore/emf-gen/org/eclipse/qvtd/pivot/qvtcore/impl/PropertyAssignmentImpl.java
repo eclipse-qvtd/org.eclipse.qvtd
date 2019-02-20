@@ -200,7 +200,7 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 			 *             let valueType : Type[?] = value.type
 			 *             in
 			 *               let
-			 *                 status : Boolean[?] = valueType.conformsTo(propertyType) or
+			 *                 status : Boolean[?] = valueType?.conformsTo(propertyType) or
 			 *                 propertyType.conformsTo(valueType)
 			 *               in
 			 *                 if status = true
@@ -247,29 +247,37 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
 						final /*@NonInvalid*/ @Nullable Type valueType = value.getType();
-						/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+						/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
+						try {
+							final /*@NonInvalid*/ @NonNull Object conformsTo = valueType == null;
+							/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
+							if (conformsTo == Boolean.TRUE) {
+								safe_conformsTo_source = null;
+							}
+							else {
+								if (CAUGHT_propertyType instanceof InvalidValueException) {
+									throw (InvalidValueException)CAUGHT_propertyType;
+								}
+								final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, valueType, CAUGHT_propertyType).booleanValue();
+								safe_conformsTo_source = conformsTo_0;
+							}
+							CAUGHT_safe_conformsTo_source = safe_conformsTo_source;
+						}
+						catch (Exception e) {
+							CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
+						}
+						/*@Caught*/ @NonNull Object CAUGHT_conformsTo_1;
 						try {
 							if (CAUGHT_propertyType instanceof InvalidValueException) {
 								throw (InvalidValueException)CAUGHT_propertyType;
 							}
-							final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, valueType, CAUGHT_propertyType).booleanValue();
-							CAUGHT_conformsTo = conformsTo;
+							final /*@Thrown*/ boolean conformsTo_1 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, CAUGHT_propertyType, valueType).booleanValue();
+							CAUGHT_conformsTo_1 = conformsTo_1;
 						}
 						catch (Exception e) {
-							CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
+							CAUGHT_conformsTo_1 = ValueUtil.createInvalidValue(e);
 						}
-						/*@Caught*/ @NonNull Object CAUGHT_conformsTo_0;
-						try {
-							if (CAUGHT_propertyType instanceof InvalidValueException) {
-								throw (InvalidValueException)CAUGHT_propertyType;
-							}
-							final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, CAUGHT_propertyType, valueType).booleanValue();
-							CAUGHT_conformsTo_0 = conformsTo_0;
-						}
-						catch (Exception e) {
-							CAUGHT_conformsTo_0 = ValueUtil.createInvalidValue(e);
-						}
-						final /*@Thrown*/ @Nullable Boolean status = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_conformsTo, CAUGHT_conformsTo_0);
+						final /*@Thrown*/ @Nullable Boolean status = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_safe_conformsTo_source, CAUGHT_conformsTo_1);
 						final /*@Thrown*/ boolean eq = status == Boolean.TRUE;
 						/*@Thrown*/ @NonNull Object symbol_1;
 						if (eq) {
@@ -342,8 +350,8 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 			 *             let valueType : Type[?] = value.type
 			 *             in
 			 *               let
-			 *                 status : Boolean[?] = valueType.conformsTo(propertyType) or
-			 *                 propertyType.conformsTo(valueType)
+			 *                 status : Boolean[?] = valueType?.conformsTo(propertyType) or
+			 *                 propertyType?.conformsTo(valueType)
 			 *               in
 			 *                 if status = true
 			 *                 then true
@@ -380,23 +388,39 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 						@SuppressWarnings("null")
 						final /*@NonInvalid*/ @NonNull OCLExpression value = this.getValue();
 						final /*@NonInvalid*/ @Nullable Type valueType = value.getType();
-						/*@Caught*/ @NonNull Object CAUGHT_conformsTo;
+						/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
 						try {
-							final /*@Thrown*/ boolean conformsTo = OclTypeConformsToOperation.INSTANCE.evaluate(executor, valueType, propertyType).booleanValue();
-							CAUGHT_conformsTo = conformsTo;
+							final /*@NonInvalid*/ @NonNull Object conformsTo = valueType == null;
+							/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
+							if (conformsTo == Boolean.TRUE) {
+								safe_conformsTo_source = null;
+							}
+							else {
+								final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, valueType, propertyType).booleanValue();
+								safe_conformsTo_source = conformsTo_0;
+							}
+							CAUGHT_safe_conformsTo_source = safe_conformsTo_source;
 						}
 						catch (Exception e) {
-							CAUGHT_conformsTo = ValueUtil.createInvalidValue(e);
+							CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
 						}
-						/*@Caught*/ @NonNull Object CAUGHT_conformsTo_0;
+						/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source_0;
 						try {
-							final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, propertyType, valueType).booleanValue();
-							CAUGHT_conformsTo_0 = conformsTo_0;
+							final /*@NonInvalid*/ @NonNull Object conformsTo_1 = propertyType == null;
+							/*@Thrown*/ @Nullable Boolean safe_conformsTo_source_0;
+							if (conformsTo_1 == Boolean.TRUE) {
+								safe_conformsTo_source_0 = null;
+							}
+							else {
+								final /*@Thrown*/ boolean conformsTo_2 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, propertyType, valueType).booleanValue();
+								safe_conformsTo_source_0 = conformsTo_2;
+							}
+							CAUGHT_safe_conformsTo_source_0 = safe_conformsTo_source_0;
 						}
 						catch (Exception e) {
-							CAUGHT_conformsTo_0 = ValueUtil.createInvalidValue(e);
+							CAUGHT_safe_conformsTo_source_0 = ValueUtil.createInvalidValue(e);
 						}
-						final /*@Thrown*/ @Nullable Boolean status = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_conformsTo, CAUGHT_conformsTo_0);
+						final /*@Thrown*/ @Nullable Boolean status = BooleanOrOperation.INSTANCE.evaluate(CAUGHT_safe_conformsTo_source, CAUGHT_safe_conformsTo_source_0);
 						final /*@Thrown*/ boolean eq = status == Boolean.TRUE;
 						/*@Thrown*/ @NonNull Object symbol_1;
 						if (eq) {
@@ -512,7 +536,7 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 			 *     then true
 			 *     else
 			 *       let
-			 *         result : Boolean[1] = slotExpression.type.conformsTo(
+			 *         result : Boolean[?] = slotExpression.type?.conformsTo(
 			 *           getReferredTargetProperty().owningClass)
 			 *       in
 			 *         'PropertyAssignment::TargetPropertyIsSlotProperty'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
@@ -526,21 +550,29 @@ public class PropertyAssignmentImpl extends NavigationAssignmentImpl implements 
 				symbol_0 = ValueUtil.TRUE_VALUE;
 			}
 			else {
-				/*@Caught*/ @NonNull Object CAUGHT_result;
+				/*@Caught*/ @Nullable Object CAUGHT_safe_conformsTo_source;
 				try {
 					@SuppressWarnings("null")
 					final /*@NonInvalid*/ @NonNull OCLExpression slotExpression = this.getSlotExpression();
 					final /*@NonInvalid*/ @Nullable Type type = slotExpression.getType();
-					@SuppressWarnings("null")
-					final /*@NonInvalid*/ @NonNull Property getReferredTargetProperty = this.getReferredTargetProperty();
-					final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class owningClass = getReferredTargetProperty.getOwningClass();
-					final /*@Thrown*/ boolean result = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, owningClass).booleanValue();
-					CAUGHT_result = result;
+					final /*@NonInvalid*/ @NonNull Object conformsTo = type == null;
+					/*@Thrown*/ @Nullable Boolean safe_conformsTo_source;
+					if (conformsTo == Boolean.TRUE) {
+						safe_conformsTo_source = null;
+					}
+					else {
+						@SuppressWarnings("null")
+						final /*@NonInvalid*/ @NonNull Property getReferredTargetProperty = this.getReferredTargetProperty();
+						final /*@NonInvalid*/ org.eclipse.ocl.pivot.@Nullable Class owningClass = getReferredTargetProperty.getOwningClass();
+						final /*@Thrown*/ boolean conformsTo_0 = OclTypeConformsToOperation.INSTANCE.evaluate(executor, type, owningClass).booleanValue();
+						safe_conformsTo_source = conformsTo_0;
+					}
+					CAUGHT_safe_conformsTo_source = safe_conformsTo_source;
 				}
 				catch (Exception e) {
-					CAUGHT_result = ValueUtil.createInvalidValue(e);
+					CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_PropertyAssignment_c_c_TargetPropertyIsSlotProperty, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_PropertyAssignment_c_c_TargetPropertyIsSlotProperty, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_safe_conformsTo_source, QVTcoreTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
