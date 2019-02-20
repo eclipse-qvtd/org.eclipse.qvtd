@@ -10,6 +10,7 @@
  */
 package org.eclipse.qvtd.xtext.qvtcore.ui;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.base.ui.BaseEditor;
 import org.eclipse.qvtd.xtext.qvtcore.ui.internal.QVTcoreActivator;
 
@@ -19,6 +20,11 @@ public class QVTcoreEditor extends BaseEditor
 
 	public QVTcoreEditor() {
 		super();
+	}
+
+	@Override
+	public @NonNull String getMarkerId() {
+		return QVTcoreUiModule.MARKER_ID;
 	}
 
 	@Override

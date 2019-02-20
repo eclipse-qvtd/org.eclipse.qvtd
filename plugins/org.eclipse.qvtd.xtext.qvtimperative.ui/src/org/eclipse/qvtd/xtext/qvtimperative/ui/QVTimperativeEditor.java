@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.ui;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.base.ui.BaseEditor;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.internal.QVTimperativeActivator;
 
@@ -19,6 +20,11 @@ public class QVTimperativeEditor extends BaseEditor
 
 	public QVTimperativeEditor() {
 		super();
+	}
+
+	@Override
+	public @NonNull String getMarkerId() {
+		return QVTimperativeUiModule.MARKER_ID;
 	}
 
 	@Override

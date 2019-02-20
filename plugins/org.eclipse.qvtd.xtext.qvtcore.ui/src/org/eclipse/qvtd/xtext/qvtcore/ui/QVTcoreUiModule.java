@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcore.ui;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.base.ui.commands.ToggleNatureCommand;
 import org.eclipse.qvtd.xtext.qvtbase.ui.QVTbaseJavaClassPathResourceForIEditorInputFactory;
 import org.eclipse.qvtd.xtext.qvtbase.ui.commands.ToggleQVTdNatureCommand;
@@ -24,9 +25,10 @@ import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
  */
 public class QVTcoreUiModule extends org.eclipse.qvtd.xtext.qvtcore.ui.AbstractQVTcoreUiModule
 {
-	public static final String PLUGIN_ID = "org.eclipse.qvtd.xtext.qvtcore.ui";
-	public static final String EDITOR_ID = QVTcoreActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTCORE_QVTCORE;
-	public static final String MARKER_ID = "org.eclipse.qvtd.xtext.qvtcore.ui.Marker";
+	public static final @NonNull String PLUGIN_ID = "org.eclipse.qvtd.xtext.qvtcore.ui";
+	@SuppressWarnings("null")
+	public static final @NonNull String EDITOR_ID = QVTcoreActivator.ORG_ECLIPSE_QVTD_XTEXT_QVTCORE_QVTCORE;
+	public static final @NonNull String MARKER_ID = "org.eclipse.qvtd.xtext.qvtcore.ui.Marker";
 
 	public QVTcoreUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
