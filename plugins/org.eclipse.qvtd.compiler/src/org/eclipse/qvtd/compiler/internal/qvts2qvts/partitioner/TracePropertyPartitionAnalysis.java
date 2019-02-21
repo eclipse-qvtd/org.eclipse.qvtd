@@ -39,6 +39,10 @@ public class TracePropertyPartitionAnalysis extends TraceElementPartitionAnalysi
 		return tracePropertyDatum.getName();
 	}
 
+	public @NonNull PropertyDatum getPropertyDatum() {
+		return tracePropertyDatum;
+	}
+
 	public @NonNull Property getTraceProperty() {
 		return QVTscheduleUtil.getReferredProperty(tracePropertyDatum);
 	}

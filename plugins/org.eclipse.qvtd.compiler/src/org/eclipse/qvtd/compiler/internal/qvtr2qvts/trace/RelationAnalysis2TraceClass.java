@@ -244,10 +244,10 @@ public class RelationAnalysis2TraceClass extends AbstractRelationAnalysis2Middle
 	protected void analyzeGlobalSuccessNode(@Nullable RelationAnalysis2TraceInterface baseRelationAnalysis2traceInterface) {
 		boolean hasTraceInterface = baseRelationAnalysis2traceInterface != null;
 		boolean hasWhenInvocation = getRuleAnalysis().hasIncomingWhenInvocationAnalyses();
-		if (hasTraceInterface) {
+		if (hasTraceInterface) {		// FIXME Bug 540797 - this is used by e.g. mapBooleanExp in ATL2QVTr
 			return;
 		}
-		if (!hasWhenInvocation) {
+		if (!hasWhenInvocation) {		// FIXME enforced guard needs globalSucess
 			return;
 		}
 		if (!QVTrelationUtil.hasOverrides(relation)) {

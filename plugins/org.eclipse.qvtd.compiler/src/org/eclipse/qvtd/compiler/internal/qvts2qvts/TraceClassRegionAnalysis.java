@@ -99,7 +99,7 @@ public class TraceClassRegionAnalysis extends TraceElementRegionAnalysis impleme
 		for (@NonNull RegionAnalysis producer : producers) {
 			Map<@NonNull Property, @NonNull NavigableEdge> property2edge = new HashMap<>();
 			partitioner2property2edge.put(producer, property2edge);
-			for (@NonNull Node traceNode : producer.getTraceNodes()) {
+			for (@NonNull Node traceNode : producer.getTraceNodes()) {	// FIXME Bug 488647 discriminate output classes too
 				for (@NonNull NavigationEdge edge : traceNode.getRealizedNavigationEdges()) {
 					if (!edge.getEdgeTarget().isRealized()) {
 						property2edge.put(QVTscheduleUtil.getProperty(edge), edge);
