@@ -216,12 +216,7 @@ public class RelationAnalysis extends RuleAnalysis
 		}
 
 		protected void synthesizeDispatchHierarchy(@NonNull Node traceNode, @NonNull RelationAnalysis2DispatchClass relationAnalysis2dispatchClass, @NonNull Relation relation) {
-			if (relation.isIsAbstract()) {						// Cannot test abstract -must test all its overrides
-				for (@NonNull Relation overridingRelation : QVTrelationUtil.getOverrides(relation)) {
-					synthesizeDispatchHierarchy(traceNode, relationAnalysis2dispatchClass, overridingRelation);
-				}
-			}
-			else {
+			if (!relation.isIsAbstract()) {						// Cannot test abstract -must test all its overrides
 				//
 				//	Create a predicated node for the overriding relation's trace
 				//
@@ -240,6 +235,9 @@ public class RelationAnalysis extends RuleAnalysis
 				//
 				Property successProperty = relationAnalysis2TraceInterface.getGlobalSuccessProperty();
 				createPredicatedSuccess(dispatchedNode, successProperty, false);
+			}
+			for (@NonNull Relation overridingRelation : QVTrelationUtil.getOverrides(relation)) {
+				synthesizeDispatchHierarchy(traceNode, relationAnalysis2dispatchClass, overridingRelation);
 			}
 		}
 

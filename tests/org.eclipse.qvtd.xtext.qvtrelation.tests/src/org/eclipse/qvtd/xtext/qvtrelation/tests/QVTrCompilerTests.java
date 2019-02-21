@@ -280,15 +280,15 @@ public class QVTrCompilerTests extends LoadTestCase
 		//		MyQVT myQVT2 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", null);
 		try {
 			myQVT2.createGeneratedExecutor(txClass1);
-			if (EMFPlugin.IS_ECLIPSE_RUNNING) {
-				EMFTCSInjector.class.getName();				// Hidden ATL dependency
-				AtlParser.class.getName();					// Hidden ATL dependency
-				myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
-				myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl"));
-			}
-			else {
-				myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
-			}
+			//	if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+			EMFTCSInjector.class.getName();				// Hidden ATL dependency
+			AtlParser.class.getName();					// Hidden ATL dependency
+			myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
+			myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl"));
+			//	}
+			//	else {
+			//		myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
+			//	}
 			ToStringVisitor.addFactory(new PivotQVTrelationToStringFactory());
 			myQVT2.executeTransformation();
 			myQVT2.saveOutput("qvtr", txURI2, getModelsURI("families2persons/Families2Persons_expected.qvtras"), QVTrNormalizer.INSTANCE);	// FIXME normalization unnecessary once Relation domains ordered by tx
@@ -335,6 +335,129 @@ public class QVTrCompilerTests extends LoadTestCase
 			myQVT4.dispose();
 		}
 	}
+
+	/*	@Test
+	public void testQVTrCompiler_ATL2QVTr_reverse_CG() throws Exception {
+		//		Splitter.GROUPS.setState(true);
+		//		Splitter.RESULT.setState(true);
+		//		Splitter.STAGES.setState(true);
+		//		AbstractTransformer.ASSIGNMENTS.setState(true);
+		//		AbstractTransformer.CREATIONS.setState(true);
+		//		AbstractTransformer.EXCEPTIONS.setState(true);
+		//		AbstractTransformer.GETTINGS.setState(true);
+		//		AbstractTransformer.INVOCATIONS.setState(true);
+		//		QVTm2QVTp.PARTITIONING.setState(true);
+		//		AbstractMerger.EARLY.setState(true);
+		//		AbstractMerger.FAILURE.setState(true);
+		//		AbstractMerger.LATE.setState(true);
+		//		AbstractQVTb2QVTs.REGION_ORDER.setState(true);
+		//		AbstractQVTb2QVTs.REGION_STACK.setState(true);
+		//		QVTscheduleConstants.POLLED_PROPERTIES.setState(true);
+		//		QVTscheduleConstants.CONNECTION_CREATION.setState(true);
+		//		FallibilityAnalysis.LOCAL.setState(true);;
+		//		TransformationPartitioner.CYCLES.setState(true);;
+		//		TransformationPartitioner.DISCRIMINATION.setState(true);;
+		//		TransformationPartitioner.PREDECESSORS.setState(true);;
+		//		TransformationPartitioner.SUCCESSORS.setState(true);;
+		//		QVTscheduleConstants.CONNECTION_CREATION.setState(true);;
+		//		ConnectivityChecker.CONNECTIVITY_CLASSDATUMS.setState(true);
+		//		ConnectivityChecker.CONNECTIVITY_CONNECTIONS.setState(true);
+		//		ConnectivityChecker.CONNECTIVITY_EDGES.setState(true);
+		//		ConnectivityChecker.CONNECTIVITY_NODES.setState(true);
+		//		QVTm2QVTs.DUMP_CLASS_TO_REALIZED_NODES.setState(true);
+		//		QVTm2QVTs.DUMP_CLASS_TO_CONSUMING_NODES.setState(true);
+		Class<? extends Transformer> txClass1 = null;
+		URI txURI1 = getModelsURI("newATL2QVTr/NewATL2QVTr.qvtr");
+		MyQVT myQVT1 = createQVT("NewATL2QVTr", txURI1);
+		//		URI txURI1 = URI.createPlatformResourceURI("/org.eclipse.qvtd.atl/model/ATL2QVTr.qvtr", true);
+		//		MyQVT myQVT1 = createQVT("ATL2QVTr", txURI1);
+		myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//ATL");
+		myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//OCL");
+		myQVT1.addUsedGenPackage("org.eclipse.m2m.atl.common/model/ATL.genmodel", "//PrimitiveTypes");
+		myQVT1.addUsedGenPackage("org.eclipse.ocl.pivot/model/Pivot.genmodel", "//pivot");
+		myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel", "//qvtbase");
+		myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.genmodel", "//qvtrelation");
+		myQVT1.addUsedGenPackage("org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.genmodel", "//qvttemplate");
+		JavaClasspath classpath1 = myQVT1.getClasspath();
+		classpath1.addClass(org.eclipse.m2m.atl.common.ATLLaunchConstants.class);
+		classpath1.addClass(org.eclipse.qvtd.pivot.qvtbase.BaseModel.class);
+		classpath1.addClass(org.eclipse.qvtd.pivot.qvtrelation.RelationModel.class);
+		classpath1.addClass(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp.class);
+		classpath1.addClass(org.eclipse.qvtd.atl.atl2qvtr.ATL2QVTr.class);
+		try {
+			ClassLoader classLoader = getClass().getClassLoader();
+			assert classLoader != null;
+			((PivotMetamodelManager)myQVT1.getMetamodelManager()).getImplementationManager().getClassLoaders().add(classLoader);
+			txClass1 = myQVT1.buildTransformation("atl", false);
+			//			Class<? extends Transformer> txClass = ATL2QVTr.class;
+			//
+			//			myQVT1.assertRegionCount(BasicMappingRegionImpl.class, 0);
+			//			myQVT1.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0)
+			//			myQVT1.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			//			myQVT1.assertRegionCount(MicroMappingRegionImpl.class, 8);
+		}
+		finally {
+			myQVT1.dispose();
+		}
+		/*		URI txURI2 = getTestURI("Families2Persons_CG.qvtras");
+		MyQVT myQVT2 = createQVT("ATL2QVTr", txURI1);
+		//		MyQVT myQVT2 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", null);
+		try {
+			myQVT2.createGeneratedExecutor(txClass1);
+			if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+				EMFTCSInjector.class.getName();				// Hidden ATL dependency
+				AtlParser.class.getName();					// Hidden ATL dependency
+				myQVT2.getResourceSet().getResourceFactoryRegistry().getExtensionToFactoryMap().put("atl", new AtlResourceFactoryImpl());
+				myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl"));
+			}
+			else {
+				myQVT2.loadInput("atl", getModelsURI("families2persons/Families2Persons.atl.xmi"));		// FIXME Working around BUG 514604
+			}
+			ToStringVisitor.addFactory(new PivotQVTrelationToStringFactory());
+			myQVT2.executeTransformation();
+			myQVT2.saveOutput("qvtr", txURI2, getModelsURI("families2persons/Families2Persons_expected.qvtras"), QVTrNormalizer.INSTANCE);	// FIXME normalization unnecessary once Relation domains ordered by tx
+		}
+		finally {
+			myQVT2.dispose();
+		}
+		Class<? extends Transformer> txClass3;
+		MyQVT myQVT3 = createQVT("Families2Persons", txURI2);
+		// Avoid the Java files being deleted, and add their classPath since we will compile them again Ugh! use different packge prefix
+		myQVT3.setKeepOldJavaFiles();
+		myQVT3.addClasspathProjectName("org.eclipse.m2m.atl.common");
+		myQVT3.addClasspathProjectName("org.eclipse.qvtd.pivot.qvtbase");
+		myQVT3.addClasspathProjectName("org.eclipse.qvtd.pivot.qvtrelation");
+		myQVT3.addClasspathProjectName("org.eclipse.qvtd.pivot.qvttemplate");
+		myQVT3.addClasspathProjectName("org.eclipse.qvtd.atl");
+		//		MyQVT myQVT3 = new MyQVT(createTestProjectManager(), getTestBundleURI(), "models/families2persons", "samples");
+		//		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.models.families2persons.Families.FamiliesPackage");
+		//		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.models.families2persons.Persons.PersonsPackage");
+		//		myQVT3.addRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.models.families2persons.trace_Families2Persons.trace_Families2PersonsPackage");
+		try {
+			txClass3 = myQVT3.buildTransformation("Persons", false);//,
+			myQVT3.assertRegionCount(RuleRegionImpl.class, 0);
+			//			myQVT3.assertRegionCount(EarlyMerger.EarlyMergedMappingRegion.class, 0);
+			//			myQVT3.assertRegionCount(LateConsumerMerger.LateMergedMappingRegion.class, 0);
+			//			myQVT3.assertRegionCount(MicroMappingRegionImpl.class, 4);
+		}
+		finally {
+			myQVT3.dispose();
+		}
+		MyQVT myQVT4 = createQVT("Families2Persons", txURI2);
+		try {
+			myQVT4.loadEPackage(txClass3, "Families.FamiliesPackage");
+			myQVT4.loadEPackage(txClass3, "Persons.PersonsPackage");
+			myQVT4.loadEPackage(txClass3, "trace_Families2Persons.trace_Families2PersonsPackage");
+			//
+			myQVT4.createGeneratedExecutor(txClass3);
+			myQVT4.loadInput("Families", getModelsURI("families2persons/samples/Families.xmi"));
+			myQVT4.executeTransformation();
+			myQVT4.saveOutput("Persons", getTestURI("Persons_CG.xmi"), getModelsURI("families2persons/samples/Persons_expected.xmi"), Families2PersonsNormalizer.INSTANCE);
+		}
+		finally {
+			myQVT4.dispose();
+		} * /
+} */
 
 	/*	@Test
 	public void testQVTrCompiler_ATL2QVTr_CG_exec() throws Exception {

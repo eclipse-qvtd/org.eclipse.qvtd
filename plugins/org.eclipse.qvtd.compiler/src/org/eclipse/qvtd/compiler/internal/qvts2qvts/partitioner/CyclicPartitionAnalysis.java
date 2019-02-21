@@ -69,7 +69,7 @@ public class CyclicPartitionAnalysis extends AbstractCompositePartitionAnalysis<
 		partitionedTransformationAnalysis.addPartitionAnalysis(this);
 
 
-
+		// FIXME WIP
 		Set<@NonNull PartitionAnalysis> cyclicPartitionAnalyses = partitionAnalysis2predecessors.keySet();
 		Set<@NonNull TracePropertyPartitionAnalysis> containmentTracePropertyPartitionAnalyses = new HashSet<>();
 		Set<@NonNull TracePropertyPartitionAnalysis> containerTracePropertyPartitionAnalyses = new HashSet<>();
