@@ -92,6 +92,7 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 	private Logger log = Logger.getLogger(getClass());
 
 	private String qvtrModel = null;
+	private String copyright = null;
 	private List<@NonNull String> usedGenPackages2 = new ArrayList<>();
 
 	/**
@@ -241,7 +242,7 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 			classpath.addClass(org.eclipse.qvtd.pivot.qvtbase.BaseModel.class);
 			classpath.addClass(org.eclipse.qvtd.pivot.qvtrelation.RelationModel.class);
 			classpath.addClass(org.eclipse.qvtd.pivot.qvttemplate.TemplateExp.class);
-			myQVT.setCopyright("Copyright (c) 2015, 2017 Willink Transformations and others.\nAll rights reserved. This program and the accompanying materials\nare made available under the terms of the Eclipse Public License v2.0\nwhich accompanies this distribution, and is available at\nhttp://www.eclipse.org/legal/epl-v20.html\n\nContributors:\n  E.D.Willink - Initial API and implementation");
+			myQVT.setCopyright(copyright);
 			//
 			//	Install the GenPackages and ensure that their nsURIs redirect to their *.ecores.
 			//
@@ -270,6 +271,13 @@ public class CompileQVTrTransformation extends AbstractWorkflowComponent
 			//			myQVT.removeRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.doublylinkedlist.doublylinkedlistPackage");
 			//			myQVT.removeRegisteredPackage("org.eclipse.qvtd.xtext.qvtrelation.tests.forward2reverse.PForward2Reverse.PForward2ReversePackage");
 		}
+	}
+
+	/**
+	 * Define the copyright in the GenModel and so in the generated code.
+	 */
+	public void setCopyright(@NonNull String copyright) {
+		this.copyright = copyright;
 	}
 
 	/**
