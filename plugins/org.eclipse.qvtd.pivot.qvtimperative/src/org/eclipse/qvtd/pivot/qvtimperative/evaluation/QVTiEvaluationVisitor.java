@@ -69,6 +69,7 @@ import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.InvocationConstructor;
 import org.eclipse.qvtd.runtime.evaluation.InvocationFailedException;
+import org.eclipse.qvtd.runtime.evaluation.ModeFactory;
 
 import com.google.common.collect.Iterables;
 
@@ -298,9 +299,10 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 		OCLExpression ownedExpression = object.getOwnedExpression();
 		String name = object.getName();
 		assert name != null;
+		ModeFactory incrementalMode = ModeFactory.NON_INCREMENTAL;  // ?? FIXME get from AbstractTransformationInternal
 		if (ownedExpression != null) {
 			Object initValue = ownedExpression.accept(undecoratedVisitor);
-			connection = interval.createConnection(name, ownedExpression.getTypeId(), object.isIsStrict());
+			connection = interval.createConnection(name, ownedExpression.getTypeId(), object.isIsStrict(), incrementalMode);
 			if (initValue != null) {
 				for (Object value : (Iterable<?>)initValue) {
 					assert value != null;
@@ -309,7 +311,7 @@ public class QVTiEvaluationVisitor extends BasicEvaluationVisitor implements IQV
 			}
 		}
 		else {
-			connection = interval.createConnection(name, object.getTypeId(), object.isIsStrict());
+			connection = interval.createConnection(name, object.getTypeId(), object.isIsStrict(), incrementalMode);
 		}
 		return executor.replace(object, connection, false);
 	}
