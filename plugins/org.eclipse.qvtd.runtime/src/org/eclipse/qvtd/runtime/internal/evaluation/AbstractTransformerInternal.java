@@ -371,9 +371,7 @@ public abstract class AbstractTransformerInternal /*extends AbstractModelManager
 
 		/**
 		 * This is solely used by the Model::objectsOfKind Operation which is not needed by synthesized QVTr.
-		 * @deprecated
 		 */
-		@Deprecated
 		@Override
 		public @NonNull Iterable<@NonNull Object> getObjectsOfKind(org.eclipse.ocl.pivot.@NonNull Class type) {
 			TypeId classId = type.getTypeId();

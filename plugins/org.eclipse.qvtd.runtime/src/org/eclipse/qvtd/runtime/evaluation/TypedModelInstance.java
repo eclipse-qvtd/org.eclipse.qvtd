@@ -33,10 +33,8 @@ public interface TypedModelInstance
 	@Nullable String getName();
 
 	/**
-	 * This is solely used by the Model::objectsOfKind Operation which is not needed by synthesized QVTr.
-	 * @deprecated
+	 * Return all objects in the model that conform to type.
 	 */
-	@Deprecated
 	@NonNull Iterable<@NonNull ? extends Object> getObjectsOfKind(org.eclipse.ocl.pivot.@NonNull Class type);
 
 	/**
