@@ -989,10 +989,12 @@ public class XMLmodelResourceImpl extends XMIResourceImpl
 					doc2.addCDATA(getCharacters(cdata));
 				}
 				else if (eObject instanceof DTD) {
+					@SuppressWarnings("unused")
 					DTD dtd = (DTD)eObject;
 					//	doc2.addDTD(dtd.getName(), dtd.getPublicId(), dtd.getSystemId());
 				}
 				else if (eObject instanceof Entity) {
+					@SuppressWarnings("unused")
 					Entity entity = (Entity)eObject;
 					//	doc2.addEntity(entity.getName());
 				}

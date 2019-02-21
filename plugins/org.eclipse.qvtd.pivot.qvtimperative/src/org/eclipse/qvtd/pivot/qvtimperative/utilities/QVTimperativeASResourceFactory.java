@@ -26,10 +26,8 @@ import org.eclipse.ocl.pivot.internal.resource.ASResourceFactory;
 import org.eclipse.ocl.pivot.internal.resource.ASSaver;
 import org.eclipse.ocl.pivot.internal.resource.AbstractASResourceFactory;
 import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
-import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.utilities.AS2MonikerVisitor;
-import org.eclipse.ocl.pivot.utilities.AS2XMIidVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverLocateVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverNormalizeVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverResolveVisitor;
@@ -94,8 +92,9 @@ public class QVTimperativeASResourceFactory extends AbstractASResourceFactory
 		return new QVTimperativeAS2MonikerVisitor(as2moniker);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
-	public @NonNull AS2XMIidVisitor createAS2XMIidVisitor(@NonNull AS2XMIid as2id) {
+	public org.eclipse.ocl.pivot.utilities.@NonNull AS2XMIidVisitor createAS2XMIidVisitor(org.eclipse.ocl.pivot.internal.utilities.@NonNull AS2XMIid as2id) {
 		return new QVTimperativeAS2XMIidVisitor(as2id);
 	}
 

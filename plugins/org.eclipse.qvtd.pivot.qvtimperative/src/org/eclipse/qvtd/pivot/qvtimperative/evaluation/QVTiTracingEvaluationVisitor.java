@@ -224,7 +224,7 @@ public class QVTiTracingEvaluationVisitor extends AbstractMergedQVTimperativeVis
 	/** @deprecated moved to Executor. */
 	@Deprecated
 	@Override
-	public @NonNull Class getStaticTypeOf(@Nullable Object value, @Nullable Object... values) {
+	public @NonNull Class getStaticTypeOf(@Nullable Object value, @Nullable Object @NonNull ... values) {
 		return context.getStaticTypeOf(value, values);
 	}
 

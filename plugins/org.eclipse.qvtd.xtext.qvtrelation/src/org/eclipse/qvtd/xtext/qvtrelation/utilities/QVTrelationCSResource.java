@@ -39,7 +39,7 @@ import org.eclipse.qvtd.xtext.qvtrelation.cs2as.QVTrelationCS2AS;
 public class QVTrelationCSResource extends QVTbaseCSResource
 {
 	@Override
-	public @NonNull AS2CS createAS2CS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap,
+	public @NonNull AS2CS createAS2CS(@NonNull Map<@NonNull ? extends BaseCSResource, @NonNull ? extends ASResource> cs2asResourceMap,
 			@NonNull EnvironmentFactoryInternal environmentFactory) {
 		return new QVTrelationAS2CS(cs2asResourceMap, environmentFactory);
 	}

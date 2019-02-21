@@ -42,7 +42,7 @@ import org.eclipse.qvtd.xtext.qvtimperative.cs2as.QVTimperativeCS2AS;
 public class QVTimperativeCSResource extends QVTbaseCSResource
 {
 	@Override
-	public @NonNull AS2CS createAS2CS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap,
+	public @NonNull AS2CS createAS2CS(@NonNull Map<@NonNull ? extends BaseCSResource, @NonNull ? extends ASResource> cs2asResourceMap,
 			@NonNull EnvironmentFactoryInternal environmentFactory) {
 		return new QVTimperativeAS2CS(cs2asResourceMap, environmentFactory);
 	}

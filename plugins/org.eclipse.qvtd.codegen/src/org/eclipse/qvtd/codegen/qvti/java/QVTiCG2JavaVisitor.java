@@ -1266,6 +1266,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<@NonNull QVTiCodeGenerato
 		js.appendString(PivotUtil.getName(invocationWrapper));
 		js.append(") {\n");
 		js.pushIndentation(null);
+		js.append("@Override\n");
 		js.append("public boolean execute() {\n");
 		js.pushIndentation(null);
 	}

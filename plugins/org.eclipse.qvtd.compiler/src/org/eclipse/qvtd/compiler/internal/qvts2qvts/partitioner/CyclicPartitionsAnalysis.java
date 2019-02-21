@@ -208,32 +208,32 @@ public class CyclicPartitionsAnalysis
 				Collections.sort(partitions2, NameUtil.NAMEABLE_COMPARATOR);
 				for (@NonNull PartitionAnalysis partition : partitions2) {
 					s.append("\n\t" + partition);
-					Iterable<@NonNull ? extends TraceClassPartitionAnalysis> consumedTraceClassAnalyses = cyclicPartitionAnalysis.getConsumedTraceClassAnalyses();
+					Iterable<@NonNull ? extends TraceClassPartitionAnalysis> consumedTraceClassAnalyses = partition.getConsumedTraceClassAnalyses();
 					if (consumedTraceClassAnalyses != null) {
 						for (@NonNull TraceClassPartitionAnalysis traceClassAnalysis : consumedTraceClassAnalyses) {
 							s.append("\n\t  =>" + traceClassAnalysis);
 						}
 					}
-					Iterable<@NonNull ? extends TraceClassPartitionAnalysis> producedTraceClassAnalyses = cyclicPartitionAnalysis.getProducedTraceClassAnalyses();
+					Iterable<@NonNull ? extends TraceClassPartitionAnalysis> producedTraceClassAnalyses = partition.getProducedTraceClassAnalyses();
 					if (producedTraceClassAnalyses != null) {
 						for (@NonNull TraceClassPartitionAnalysis traceClassAnalysis : producedTraceClassAnalyses) {
 							s.append("\n\t  <=" + traceClassAnalysis);
 						}
 					}
-					Iterable<@NonNull ? extends TracePropertyPartitionAnalysis> consumedTracePropertyAnalyses = cyclicPartitionAnalysis.getConsumedTracePropertyAnalyses();
+					Iterable<@NonNull ? extends TracePropertyPartitionAnalysis> consumedTracePropertyAnalyses = partition.getConsumedTracePropertyAnalyses();
 					if (consumedTracePropertyAnalyses != null) {
 						for (@NonNull TracePropertyPartitionAnalysis tracePropertyAnalysis : consumedTracePropertyAnalyses) {
 							s.append("\n\t  =>" + tracePropertyAnalysis);
 						}
 					}
-					Iterable<@NonNull ? extends TracePropertyPartitionAnalysis> producedTracePropertyAnalyses = cyclicPartitionAnalysis.getProducedTracePropertyAnalyses();
+					Iterable<@NonNull ? extends TracePropertyPartitionAnalysis> producedTracePropertyAnalyses = partition.getProducedTracePropertyAnalyses();
 					if (producedTracePropertyAnalyses != null) {
 						for (@NonNull TracePropertyPartitionAnalysis tracePropertyAnalysis : producedTracePropertyAnalyses) {
 							s.append("\n\t  <=" + tracePropertyAnalysis);
 						}
 					}
 				}
-				s.append("\n  TraceClassAnalyses:");
+				/*				s.append("\n  TraceClassAnalyses:");
 				List<@NonNull TraceClassPartitionAnalysis> traceClassAnalyses = Lists.newArrayList(cyclicPartitionAnalysis.getTraceClassAnalyses());
 				Collections.sort(traceClassAnalyses, NameUtil.NAMEABLE_COMPARATOR);
 				for (@NonNull TraceClassPartitionAnalysis traceClassAnalysis : traceClassAnalyses) {
@@ -244,7 +244,7 @@ public class CyclicPartitionsAnalysis
 				Collections.sort(tracePropertyAnalyses, NameUtil.NAMEABLE_COMPARATOR);
 				for (@NonNull TracePropertyPartitionAnalysis tracePropertyAnalysis : tracePropertyAnalyses) {
 					s.append("\n\t" + tracePropertyAnalysis);
-				}
+				} */
 				TransformationPartitioner.CYCLES.println(s.toString());
 			}
 		}

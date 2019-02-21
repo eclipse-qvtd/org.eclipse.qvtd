@@ -12,13 +12,13 @@ inv IdentifiesIsAUsedPackageClass:
 	transformation<> null implies transformation.modelParameter.usedPackage->includes(identifies.owningPackage)
 
 inv NoSuperKeys:			-- see Bugzilla 512532 discussion
-	transformation<> null implies 
+	transformation <> null implies 
 	let superClasses = identifies.superClasses->closure(superClasses) in
 	let otherKeys = transformation?.ownedKey?->excluding(self) in
 	otherKeys.identifies->excludesAll(superClasses)
 
 inv IdentifiesIsUnique:
-	transformation<> null implies 
+	transformation <> null implies 
 	let otherKeys = transformation?.ownedKey?->excluding(self) in
 	otherKeys.identifies->excludes(identifies)
 

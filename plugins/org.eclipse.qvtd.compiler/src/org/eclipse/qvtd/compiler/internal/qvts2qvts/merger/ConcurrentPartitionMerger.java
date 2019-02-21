@@ -49,26 +49,26 @@ public class ConcurrentPartitionMerger extends AbstractMerger
 		for (int i = 0; i < partitionSchedule.size(); i++) {
 			Concurrency oldConcurrency = partitionSchedule.get(i);
 			if (oldConcurrency.size() > 1) {
-				Map<@NonNull Region, @NonNull List<@NonNull PartitionAnalysis>> region2partitions = new HashMap<>();
+				Map<@NonNull Region, @NonNull List<@NonNull PartitionAnalysis>> region2partitionAnalyses = new HashMap<>();
 				for (@NonNull PartitionAnalysis partitionAnalysis : oldConcurrency) {
 					Partition partition = partitionAnalysis.getPartition();
 					if (!(partition instanceof CyclicPartition)) {
 						Region region = QVTscheduleUtil.getRegion(partition);
-						List<@NonNull PartitionAnalysis> partitions = region2partitions.get(region);
-						if (partitions == null) {
-							partitions = new ArrayList<>();
-							region2partitions.put(region, partitions);
+						List<@NonNull PartitionAnalysis> partitionAnalyses = region2partitionAnalyses.get(region);
+						if (partitionAnalyses == null) {
+							partitionAnalyses = new ArrayList<>();
+							region2partitionAnalyses.put(region, partitionAnalyses);
 						}
-						partitions.add(partitionAnalysis);
+						partitionAnalyses.add(partitionAnalysis);
 					}
 				}
 				Set<@NonNull PartitionAnalysis> concurrentPartitionAnalyses = null;
-				for (@NonNull Region region : region2partitions.keySet()) {
+				for (@NonNull Region region : region2partitionAnalyses.keySet()) {
 					if (!(region instanceof CyclicMappingRegion)) {
-						List<@NonNull PartitionAnalysis> partitions = region2partitions.get(region);
-						assert partitions != null;
-						if (partitions.size() > 1) {
-							ConcurrentPartitionMerger concurrentMerger = new ConcurrentPartitionMerger(partitionedTransformationAnalysis, partitions);
+						List<@NonNull PartitionAnalysis> partitionAnalyses = region2partitionAnalyses.get(region);
+						assert partitionAnalyses != null;
+						if (partitionAnalyses.size() > 1) {
+							ConcurrentPartitionMerger concurrentMerger = new ConcurrentPartitionMerger(partitionedTransformationAnalysis, partitionAnalyses);
 							Map<@NonNull PartitionAnalysis, @Nullable PartitionAnalysis> old2new = concurrentMerger.merge();
 							if (old2new != null) {
 								if (concurrentPartitionAnalyses == null) {
