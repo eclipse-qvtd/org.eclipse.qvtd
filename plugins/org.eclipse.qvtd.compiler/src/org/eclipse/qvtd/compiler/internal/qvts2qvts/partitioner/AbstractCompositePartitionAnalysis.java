@@ -47,17 +47,23 @@ public abstract class AbstractCompositePartitionAnalysis<P extends CompositePart
 	 * to further additional concurrencies similarly merged concurrencies.
 	 */
 	protected void appendConcurrency(@NonNull List<@NonNull Concurrency> partitionSchedule, @NonNull Iterable<@NonNull PartitionAnalysis> partitionAnalyses) {
-		int initialPass = partitionSchedule.size();
-		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {
+		Concurrency nonCompositeConcurrency = null;
+		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {		// FIXME alphabetical for determinism
+			if (!(partitionAnalysis instanceof CompositePartitionAnalysis)) {
+				if (nonCompositeConcurrency == null) {
+					nonCompositeConcurrency = new Concurrency();
+				}
+				nonCompositeConcurrency.add(partitionAnalysis);
+			}
+		}
+		if (nonCompositeConcurrency != null) {
+			partitionSchedule.add(nonCompositeConcurrency);
+		}
+		int compositeConcurrencyPass = partitionSchedule.size();
+		for (@NonNull PartitionAnalysis partitionAnalysis : partitionAnalyses) {		// FIXME alphabetical for determinism
 			if (partitionAnalysis instanceof CompositePartitionAnalysis) {
 				Iterable<@NonNull Concurrency> nestedConcurrencies = ((CompositePartitionAnalysis)partitionAnalysis).getPartitionSchedule();
-				overlayConcurrency(partitionSchedule, initialPass, nestedConcurrencies);
-			}
-			else {
-				if (partitionSchedule.size() <= initialPass) {
-					partitionSchedule.add(new Concurrency());
-				}
-				partitionSchedule.get(initialPass).add(partitionAnalysis);
+				overlayConcurrency(partitionSchedule, compositeConcurrencyPass, nestedConcurrencies);
 			}
 		}
 	}
