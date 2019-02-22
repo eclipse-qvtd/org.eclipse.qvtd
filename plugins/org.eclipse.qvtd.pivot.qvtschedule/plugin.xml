@@ -42,7 +42,7 @@
 
   <extension point="org.eclipse.ocl.pivot.as_resource_factory">
      <factory class="org.eclipse.qvtd.pivot.qvtschedule.utilities.QVTscheduleASResourceFactory"
-     	extension="qvtschedule" contentType="org.eclipse.qvtd.qvtschedule"/>
+     	extension="qvts" contentType="org.eclipse.qvtd.qvtschedule"/>
   </extension>
 
   <extension point="org.eclipse.team.core.fileTypes">

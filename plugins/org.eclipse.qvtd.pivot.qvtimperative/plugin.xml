@@ -50,7 +50,7 @@
 
   <extension point="org.eclipse.ocl.pivot.as_resource_factory">
      <factory class="org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASResourceFactory"
-     	extension="qvtimperative" contentType="org.eclipse.qvtd.qvtimperative"/>
+     	extension="qvti" contentType="org.eclipse.qvtd.qvtimperative"/>
   </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">

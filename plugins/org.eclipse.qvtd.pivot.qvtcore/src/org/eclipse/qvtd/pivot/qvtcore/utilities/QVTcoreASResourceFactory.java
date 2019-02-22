@@ -30,6 +30,7 @@ import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.AS2MonikerVisitor;
 import org.eclipse.ocl.pivot.utilities.AS2XMIidVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverLocateVisitor;
@@ -62,7 +63,7 @@ public class QVTcoreASResourceFactory extends AbstractASResourceFactory
 				INSTANCE = new QVTcoreASResourceFactory();														// Create our own singleton
 			}
 			assert INSTANCE != null;
-			INSTANCE.install(null,  null);
+			INSTANCE.install("qvtc",  null);
 		}
 		assert INSTANCE != null;
 		return INSTANCE;
@@ -116,6 +117,11 @@ public class QVTcoreASResourceFactory extends AbstractASResourceFactory
 	@Override
 	public @NonNull ASSaverResolveVisitor createASSaverResolveVisitor(@NonNull ASSaver asSaver) {
 		return new QVTcoreASSaverResolveVisitor(asSaver);
+	}
+
+	@Override
+	public @NonNull EnvironmentFactoryInternal createEnvironmentFactory(@NonNull ProjectManager projectManager) {
+		return new QVTcEnvironmentFactory(projectManager, null);
 	}
 
 	@Override

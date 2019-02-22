@@ -27,6 +27,7 @@ import org.eclipse.ocl.pivot.internal.resource.ASSaver;
 import org.eclipse.ocl.pivot.internal.resource.AbstractASResourceFactory;
 import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.AS2MonikerVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverLocateVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverNormalizeVisitor;
@@ -35,6 +36,7 @@ import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.NotXMLContentHandlerImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
 /**
  * QVTimperativeASResourceFactory supports creation of a QVTimperative AS resource and associated artefacts.
@@ -56,7 +58,7 @@ public class QVTimperativeASResourceFactory extends AbstractASResourceFactory
 				INSTANCE = new QVTimperativeASResourceFactory();													// Create our own singleton
 			}
 			assert INSTANCE != null;
-			INSTANCE.install(null,  null);
+			INSTANCE.install("qvti",  null);
 		}
 		assert INSTANCE != null;
 		return INSTANCE;
@@ -111,6 +113,11 @@ public class QVTimperativeASResourceFactory extends AbstractASResourceFactory
 	@Override
 	public @NonNull ASSaverResolveVisitor createASSaverResolveVisitor(@NonNull ASSaver asSaver) {
 		return new QVTimperativeASSaverResolveVisitor(asSaver);
+	}
+
+	@Override
+	public @NonNull EnvironmentFactoryInternal createEnvironmentFactory(@NonNull ProjectManager projectManager) {
+		return new QVTiEnvironmentFactory(projectManager, null);
 	}
 
 	@Override
