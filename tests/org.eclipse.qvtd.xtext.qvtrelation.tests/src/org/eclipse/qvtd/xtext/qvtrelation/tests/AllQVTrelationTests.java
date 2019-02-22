@@ -14,6 +14,8 @@ package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
 import java.util.Arrays;
 
+import org.eclipse.emf.common.EMFPlugin;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -38,6 +40,9 @@ public class AllQVTrelationTests extends TestCase
 		//		}
 		result.addTestSuite(QVTrSerializeTests.class);
 		result.addTestSuite(QVTrCompilerTests.class);
+		if (EMFPlugin.IS_ECLIPSE_RUNNING) {
+			result.addTestSuite(QVTrBuilderTests.class);
+		}
 		return result;
 	}
 
