@@ -182,8 +182,8 @@ public class QVTiCompilerTests extends LoadTestCase
 			options.setUseNullAnnotations(true);
 			//			options.setPackagePrefix("cg_qvtimperative_tests");
 			cg.generateClassFile();
-			TestFile srcPath = testProject.getOutputFolder(JavaFileUtil.TEST_SRC_FOLDER_NAME);
-			TestFile binPath = testProject.getOutputFolder(JavaFileUtil.TEST_BIN_FOLDER_NAME);
+			TestFile srcPath = testProject.getOutputFolder(JavaFileUtil.TEST_SRC_FOLDER_NAME + "/");
+			TestFile binPath = testProject.getOutputFolder(JavaFileUtil.TEST_BIN_FOLDER_NAME + "/");
 			//			cg.saveSourceFile("../org.eclipse.qvtd.xtext.qvtimperative.tests/test-gen/");
 			cg.saveSourceFile(srcPath.getFileString());
 			JavaClasspath classpath = CompilerUtil.createDefaultQVTiClasspath();

@@ -20,6 +20,7 @@ import org.eclipse.ocl.pivot.internal.resource.EnvironmentFactoryAdapter;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 
@@ -37,7 +38,7 @@ public class QVTrLoadTests extends LoadTestCase
 	protected void doLoad_Concrete(@NonNull URI inputURI, @NonNull URI pivotURI, @NonNull String @NonNull [] messages) throws Exception {
 		ClassLoader cl0 = getClass().getClassLoader();
 		assert cl0 != null;
-		OCL ocl = OCL.newInstance(getTestProjectManager());
+		OCL ocl = QVTrelation.newInstance(getTestProjectManager());
 		EnvironmentFactoryAdapter environmentFactoryAdapter = EnvironmentFactoryAdapter.find(ocl.getResourceSet());
 		assert environmentFactoryAdapter != null;
 		ImplementationManager implementationManager = environmentFactoryAdapter.getMetamodelManager().getImplementationManager();

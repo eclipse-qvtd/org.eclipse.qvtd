@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.tests;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -30,7 +28,6 @@ import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.debug.core.model.IVariable;
 import org.eclipse.emf.common.EMFPlugin;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -69,13 +66,6 @@ import test.middle.HSV2HSL.HSV2HSLPackage;
  */
 public class QVTiDebuggerTests extends XtextTestCase
 {
-	public static @NonNull TestFile copyFile(@NonNull TestProject testProject, @NonNull URIConverter uriConverter, @NonNull URI sourceURI) throws IOException {
-		InputStream inputStream = uriConverter.createInputStream(sourceURI);
-		String lastSegment = sourceURI.lastSegment();
-		assert lastSegment != null;
-		return testProject.getOutputFile(lastSegment, inputStream);
-	}
-
 	private void checkPosition(@NonNull IThread vmThread, int lineNumber, int charStart, int charEnd) throws DebugException {
 		IStackFrame topStackFrame = vmThread.getTopStackFrame();
 		assertEquals("lineNumber", lineNumber, topStackFrame.getLineNumber());
@@ -151,11 +141,11 @@ public class QVTiDebuggerTests extends XtextTestCase
 		OCL ocl = OCL.newInstance(OCL.CLASS_PATH);
 		URIConverter uriConverter = ocl.getResourceSet().getURIConverter();
 		TestProject testProject = getTestProject();
-		TestFile txFile = copyFile(testProject, uriConverter, getModelsURI("HSV2HSL/HSV2HSL.qvti"));
-		TestFile inFile = copyFile(testProject, uriConverter, getModelsURI("HSV2HSL/HSVNode.xmi"));
-		copyFile(testProject, uriConverter, getModelsURI("HSV2HSL/HSVTree.ecore"));
-		copyFile(testProject, uriConverter, getModelsURI("HSV2HSL/HSLTree.ecore"));
-		copyFile(testProject, uriConverter, getModelsURI("HSV2HSL/HSV2HSL.ecore"));
+		TestFile txFile = testProject.copyFile(uriConverter, null, getModelsURI("HSV2HSL/HSV2HSL.qvti"));
+		TestFile inFile = testProject.copyFile(uriConverter, null, getModelsURI("HSV2HSL/HSVNode.xmi"));
+		testProject.copyFile(uriConverter, null, getModelsURI("HSV2HSL/HSVTree.ecore"));
+		testProject.copyFile(uriConverter, null, getModelsURI("HSV2HSL/HSLTree.ecore"));
+		testProject.copyFile(uriConverter, null, getModelsURI("HSV2HSL/HSV2HSL.ecore"));
 		TestFile outFile = testProject.getOutputFile("HSLNode.xmi");
 		TestFile middleFile = testProject.getOutputFile("HSV2HSLNode.xmi");
 		Map<String,String> inMap = new HashMap<>();
@@ -213,11 +203,11 @@ public class QVTiDebuggerTests extends XtextTestCase
 		OCL ocl = OCL.newInstance(OCL.CLASS_PATH);
 		URIConverter uriConverter = ocl.getResourceSet().getURIConverter();
 		TestProject testProject = getTestProject();
-		TestFile txFile = copyFile(testProject, uriConverter, getModelsURI("HSV2HSL/HSV2HSL.qvti"));
-		TestFile inFile = copyFile(testProject, uriConverter, getModelsURI("HSV2HSL/HSVNode.xmi"));
-		copyFile(testProject, uriConverter, getModelsURI("HSV2HSL/HSVTree.ecore"));
-		copyFile(testProject, uriConverter, getModelsURI("HSV2HSL/HSLTree.ecore"));
-		copyFile(testProject, uriConverter, getModelsURI("HSV2HSL/HSV2HSL.ecore"));
+		TestFile txFile = testProject.copyFile(uriConverter, null, getModelsURI("HSV2HSL/HSV2HSL.qvti"));
+		TestFile inFile = testProject.copyFile(uriConverter, null, getModelsURI("HSV2HSL/HSVNode.xmi"));
+		testProject.copyFile(uriConverter, null, getModelsURI("HSV2HSL/HSVTree.ecore"));
+		testProject.copyFile(uriConverter, null, getModelsURI("HSV2HSL/HSLTree.ecore"));
+		testProject.copyFile(uriConverter, null, getModelsURI("HSV2HSL/HSV2HSL.ecore"));
 		TestFile outFile = testProject.getOutputFile("HSLNode.xmi");
 		TestFile middleFile = testProject.getOutputFile("HSV2HSLNode.xmi");
 		Map<String,String> inMap = new HashMap<>();
