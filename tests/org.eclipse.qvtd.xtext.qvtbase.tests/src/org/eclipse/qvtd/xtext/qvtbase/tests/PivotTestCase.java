@@ -359,7 +359,7 @@ public class PivotTestCase extends TestCase
 	protected void tearDown()
 			throws Exception {
 		// TODO Auto-generated method stub
-		long time = System.nanoTime() - startTime;
+		//	long time = System.nanoTime() - startTime;
 		super.tearDown();
 	}
 }

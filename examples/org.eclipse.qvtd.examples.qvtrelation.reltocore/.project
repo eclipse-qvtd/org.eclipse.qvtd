@@ -35,7 +35,7 @@
 				</dictionary>
 				<dictionary>
 					<key>disabledPaths</key>
-					<value>target/**</value>
+					<value>target/**,model/FlatRelToCore.qvtr,model/SimplerRelToCore.qvtr</value>
 				</dictionary>
 				<dictionary>
 					<key>enabledExtensions</key>

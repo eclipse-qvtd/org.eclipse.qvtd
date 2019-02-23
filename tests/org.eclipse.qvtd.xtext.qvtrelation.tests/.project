@@ -14,7 +14,7 @@
 				</dictionary>
 				<dictionary>
 					<key>disabledPaths</key>
-					<value>target/**</value>
+					<value>target/**,models/rel2core/**,models/uml2owl/**,models/misc/**</value>
 				</dictionary>
 				<dictionary>
 					<key>enabledExtensions</key>
@@ -22,7 +22,7 @@
 				</dictionary>
 				<dictionary>
 					<key>enabledPaths</key>
-					<value>model/**</value>
+					<value>models/**</value>
 				</dictionary>
 			</arguments>
 		</buildCommand>
