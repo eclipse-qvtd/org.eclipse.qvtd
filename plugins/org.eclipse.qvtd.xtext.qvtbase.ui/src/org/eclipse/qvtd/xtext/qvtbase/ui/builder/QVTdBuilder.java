@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.xtext.base.ui.builder.AbstractValidatingBuilder;
 import org.eclipse.ocl.xtext.base.ui.builder.AbstractBuildSelector;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.xtext.qvtbase.ui.QVTbaseUiModule;
 import org.eclipse.qvtd.xtext.qvtbase.ui.QVTdProjectHelper;
 
 /**
@@ -87,5 +88,10 @@ public class QVTdBuilder extends AbstractValidatingBuilder
 	@Override
 	protected Logger getLog() {
 		return log;
+	}
+
+	@Override
+	protected @NonNull String getMarkerId() {
+		return QVTbaseUiModule.MARKER_ID;
 	}
 }

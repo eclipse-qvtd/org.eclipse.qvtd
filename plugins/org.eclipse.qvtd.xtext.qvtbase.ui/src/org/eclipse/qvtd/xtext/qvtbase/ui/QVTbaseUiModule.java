@@ -10,12 +10,17 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtbase.ui;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
  * Use this class to register components to be used within the IDE.
  */
-public class QVTbaseUiModule extends org.eclipse.qvtd.xtext.qvtbase.ui.AbstractQVTbaseUiModule {
+public class QVTbaseUiModule extends org.eclipse.qvtd.xtext.qvtbase.ui.AbstractQVTbaseUiModule
+{
+	public static final @NonNull String PLUGIN_ID = "org.eclipse.qvtd.xtext.qvtbase.ui";
+	public static final @NonNull String MARKER_ID = "org.eclipse.qvtd.xtext.qvtbase.ui.Marker";
+
 	public QVTbaseUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}

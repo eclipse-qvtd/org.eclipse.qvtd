@@ -11,6 +11,13 @@
      </builder>
    </extension>
   
+    <extension point="org.eclipse.core.resources.markers"
+      id="Marker" name="%MF_Problem">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+
+  
    <extension point="org.eclipse.core.resources.natures"
         id="org.eclipse.qvtd.xtext.qvtbase.ui.qvtdnature" name="%QVTdNature.name">
      <runtime>
