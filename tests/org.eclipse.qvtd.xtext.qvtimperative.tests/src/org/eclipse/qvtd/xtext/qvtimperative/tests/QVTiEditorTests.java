@@ -13,6 +13,7 @@ package org.eclipse.qvtd.xtext.qvtimperative.tests;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
@@ -24,6 +25,11 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
  */
 public class QVTiEditorTests extends LoadTestCase
 {
+	@Override
+	protected @NonNull OCLInternal createOCL() {
+		return QVTimperative.newInstance(getTestProjectManager(), null);
+	}
+
 	@Override
 	public void doLoad_Concrete(@NonNull URI inputURI, @NonNull String @Nullable [] messages) throws Exception {
 		OCL ocl = QVTimperative.newInstance(getTestProjectManager(), null);

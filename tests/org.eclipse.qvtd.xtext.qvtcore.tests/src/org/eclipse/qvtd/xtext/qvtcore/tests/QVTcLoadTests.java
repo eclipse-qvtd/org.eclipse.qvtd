@@ -10,7 +10,10 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcore.tests;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 
@@ -19,6 +22,11 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
  */
 public class QVTcLoadTests extends LoadTestCase
 {
+	@Override
+	protected @NonNull OCLInternal createOCL() {
+		return QVTcore.newInstance(getTestProjectManager(), null);
+	}
+
 	@Override
 	protected void setUp() throws Exception {
 		BaseLinkingService.DEBUG_RETRY.setState(true);
@@ -48,6 +56,10 @@ public class QVTcLoadTests extends LoadTestCase
 
 	public void testQVTcLoad_HSV2HLS_qvtc() throws Exception {
 		doLoad_Concrete(getModelsURI("misc/HSV2HLS.qvtc"), NO_MESSAGES);
+	}
+
+	public void testQVTcLoad_HSV2HLS2_qvtc() throws Exception {
+		doLoad_Concrete(getModelsURI("hsv2hsl/HSV2HSL.qvtc"), NO_MESSAGES);
 	}
 
 	public void testQVTcLoad_Class2RDBMS_qvtc() throws Exception {

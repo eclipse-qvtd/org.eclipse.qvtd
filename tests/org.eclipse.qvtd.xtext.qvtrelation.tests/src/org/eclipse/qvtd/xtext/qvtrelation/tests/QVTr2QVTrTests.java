@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Model;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
@@ -21,6 +22,7 @@ import org.eclipse.qvtd.compiler.internal.qvtr2qvtc.analysis.QVTrelationDomainUs
 import org.eclipse.qvtd.compiler.internal.qvtr2qvtr.AbstractQVTr2QVTr;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 import org.eclipse.qvtd.xtext.qvtcore.tests.AbstractDomainUsageTests;
@@ -59,6 +61,11 @@ public class QVTr2QVTrTests extends AbstractDomainUsageTests
 		protected @NonNull UpdateVisitor createUpdateVisitor() {
 			return new UpdateVisitor(this);
 		}
+	}
+
+	@Override
+	protected @NonNull OCLInternal createOCL() {
+		return QVTrelation.newInstance(getTestProjectManager(), null);
 	}
 
 	protected @NonNull MyQVT createQVT() throws Exception {

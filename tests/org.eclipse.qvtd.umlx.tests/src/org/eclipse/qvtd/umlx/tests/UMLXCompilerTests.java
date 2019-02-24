@@ -21,6 +21,7 @@ import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestFileSystemHelper;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
@@ -29,6 +30,7 @@ import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
 import org.eclipse.qvtd.compiler.internal.qvtb2qvts.ScheduleManager;
 import org.eclipse.qvtd.compiler.internal.qvtm2qvts.QVTm2QVTs;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtschedule.impl.RuleRegionImpl;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
@@ -102,6 +104,11 @@ public class UMLXCompilerTests extends LoadTestCase
 		protected @NonNull ProjectManager getTestProjectManager() throws Exception {
 			return EMFPlugin.IS_ECLIPSE_RUNNING ? new ProjectMap(true) : UMLXCompilerTests.this.getTestProjectManager();
 		}
+	}
+
+	@Override
+	protected @NonNull OCLInternal createOCL() {
+		return QVTbase.newInstance(getTestProjectManager(), null);
 	}
 
 	protected @NonNull MyQVT createQVT(@NonNull String resultPrefix, @NonNull URI txURI) throws Exception {

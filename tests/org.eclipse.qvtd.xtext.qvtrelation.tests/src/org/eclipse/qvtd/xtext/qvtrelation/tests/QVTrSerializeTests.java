@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
@@ -35,6 +36,11 @@ import org.eclipse.xtext.resource.XtextResource;
  */
 public class QVTrSerializeTests extends LoadTestCase
 {
+	@Override
+	protected @NonNull OCLInternal createOCL() {
+		return QVTrelation.newInstance(getTestProjectManager(), null);
+	}
+
 	protected void doSerializeRoundTripFromAS(@NonNull URI inputURI) throws Exception {
 		URI referenceURI = getTestURIWithExtension(inputURI, "ref.qvtras");
 		URI serializedInputURI = getTestURIWithExtension(inputURI, "serialized.qvtr");

@@ -27,6 +27,7 @@ import org.eclipse.m2m.atl.emftvm.compiler.AtlResourceFactoryImpl;
 import org.eclipse.m2m.atl.engine.parser.AtlParser;
 import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestProject;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
@@ -34,6 +35,7 @@ import org.eclipse.qvtd.compiler.AbstractCompilerChain;
 import org.eclipse.qvtd.compiler.CompilerOptions;
 import org.eclipse.qvtd.compiler.QVTrCompilerChain;
 import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
+import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelation;
 import org.eclipse.qvtd.runtime.evaluation.InvalidEvaluationException;
 import org.eclipse.qvtd.runtime.evaluation.Transformer;
 import org.eclipse.qvtd.xtext.qvtbase.tests.AbstractTestQVT;
@@ -94,6 +96,11 @@ public class ATLExampleTests extends LoadTestCase
 			saveOptions.put(ASResource.OPTION_NORMALIZE_CONTENTS, Boolean.TRUE);
 			return saveOptions;
 		}
+	}
+
+	@Override
+	protected @NonNull OCLInternal createOCL() {
+		return QVTrelation.newInstance(getTestProjectManager(), null);
 	}
 
 	protected @NonNull MyQVT createQVT(@NonNull String resultPrefix, @NonNull URI txURI) throws Exception {

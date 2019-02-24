@@ -31,6 +31,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -40,6 +41,7 @@ import org.eclipse.qvtd.compiler.internal.utilities.CompilerUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationFactory;
@@ -65,6 +67,11 @@ import com.google.common.collect.Lists;
  */
 public class UMLXSerializeTests extends LoadTestCase
 {
+	@Override
+	protected @NonNull OCLInternal createOCL() {
+		return QVTbase.newInstance(getTestProjectManager(), null);
+	}
+
 	/*	protected void doLoad_QVTr(URI inputURI, URI pivotURI) throws IOException {
 		OCL ocl = OCL.newInstance(getProjectMap());
 		doLoad_Concrete(ocl, inputURI, pivotURI, null);

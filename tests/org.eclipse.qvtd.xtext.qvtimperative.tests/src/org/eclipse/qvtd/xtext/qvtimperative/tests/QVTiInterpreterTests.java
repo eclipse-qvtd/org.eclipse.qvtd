@@ -224,6 +224,11 @@ public class QVTiInterpreterTests extends LoadTestCase
 		ocl.dispose();
 	}
 
+	@Override
+	protected @NonNull OCLInternal createOCL() {
+		return QVTimperative.newInstance(getTestProjectManager(), null);
+	}
+
 	protected @NonNull MyQVT createQVT() throws Exception {
 		ProjectManager projectManager = getTestProjectManager();
 		MyQVT myQVT = new MyQVT(new QVTiEnvironmentFactory(projectManager, null));

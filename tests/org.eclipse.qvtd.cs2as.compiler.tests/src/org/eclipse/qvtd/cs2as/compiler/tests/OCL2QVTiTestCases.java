@@ -30,6 +30,7 @@ import org.eclipse.ocl.examples.codegen.dynamic.JavaFileUtil;
 import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
@@ -284,6 +285,11 @@ public class OCL2QVTiTestCases extends LoadTestCase
 
 	protected @NonNull CompilerOptions createCompilerOptions() {
 		return new AbstractCompilerOptions() {};
+	}
+
+	@Override
+	protected @NonNull OCLInternal createOCL() {
+		return QVTimperative.newInstance(getTestProjectManager(), null);
 	}
 
 	private @NonNull CS2ASJavaCompilerParameters createParameters(@NonNull String lookupSolverClassName, @NonNull String lookupResultClassName) throws IOException {

@@ -14,14 +14,22 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.qvtd.doc.MiniOCLCSStandaloneSetup;
 import org.eclipse.qvtd.doc.minioclcs.RootCS;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-public class MiniOCLCSParsingTest extends LoadTestCase {
+public class MiniOCLCSParsingTest extends LoadTestCase
+{
+	@Override
+	protected @NonNull OCLInternal createOCL() {
+		return QVTbase.newInstance(getTestProjectManager(), null);
+	}
 
 	@Before
 	@Override

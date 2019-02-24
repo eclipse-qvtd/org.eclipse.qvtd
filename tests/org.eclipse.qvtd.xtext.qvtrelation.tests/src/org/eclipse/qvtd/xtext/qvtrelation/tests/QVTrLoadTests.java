@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.library.ImplementationManager;
 import org.eclipse.ocl.pivot.internal.resource.EnvironmentFactoryAdapter;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
@@ -29,6 +30,11 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
  */
 public class QVTrLoadTests extends LoadTestCase
 {
+	@Override
+	protected @NonNull OCLInternal createOCL() {
+		return QVTrelation.newInstance(getTestProjectManager(), null);
+	}
+
 	public void doLoad_ModelMorf(@NonNull String stem, @NonNull String @NonNull [] messages) throws Exception {
 		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.modelmorf/models/" + stem + ".qvtr", true);
 		URI pivotURI = getTestURI(stem + ".qvtras");

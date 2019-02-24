@@ -12,9 +12,11 @@ package org.eclipse.qvtd.xtext.qvtcore.tests;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.analysis.QVTcoreDomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
 
 /**
@@ -22,6 +24,11 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.XtextCompilerUtil;
  */
 public class QVTcDomainUsageTests extends AbstractDomainUsageTests
 {
+	@Override
+	protected @NonNull OCLInternal createOCL() {
+		return QVTcore.newInstance(getTestProjectManager(), null);
+	}
+
 	protected @NonNull MyQVT createQVT() throws Exception {
 		QVTcEnvironmentFactory myEnvironmentFactory = new QVTcEnvironmentFactory(getTestProjectManager(), null);
 		return new MyQVT(myEnvironmentFactory, new QVTcoreDomainUsageAnalysis(myEnvironmentFactory));

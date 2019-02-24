@@ -22,26 +22,29 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.compiler.DefaultCompilerOptions;
-import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbase;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
  */
-public class LoadTestCase extends XtextTestCase
+public abstract class LoadTestCase extends XtextTestCase
 {
 	public static final @NonNull String @NonNull [] NO_MESSAGES = new @NonNull String[] {};
 
 	public void doLoad_Concrete(@NonNull URI inputURI, @NonNull String @Nullable [] messages) throws Exception {
-		OCL ocl = QVTbase.newInstance(getTestProjectManager(), null);
+		OCL ocl = createOCL();
+		//	((EnvironmentFactoryInternal)ocl.getEnvironmentFactory()).setSafeNavigationValidationSeverity(StatusCodes.Severity.ERROR);
 		//		OCL ocl = OCL.newInstance(getProjectMap());
 		URI pivotURI = getTestURIWithExtension(inputURI, "qvtias");
 		doLoad_Concrete(ocl, inputURI, pivotURI, messages);
 		ocl.dispose();
 	}
+
+	protected abstract @NonNull OCLInternal createOCL();
 
 	//	public Resource doLoad_Concrete(@NonNull OCL ocl, @NonNull String inputName, @NonNull String outputName, @NonNull String @Nullable [] messages) throws IOException {
 	//		URI inputURI = getProjectFileURI(inputName);

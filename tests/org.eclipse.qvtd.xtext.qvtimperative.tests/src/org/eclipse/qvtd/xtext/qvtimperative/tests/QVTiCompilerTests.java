@@ -75,6 +75,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.Execution2GraphVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperative;
 import org.eclipse.qvtd.runtime.evaluation.Connection;
 import org.eclipse.qvtd.runtime.evaluation.Interval;
 import org.eclipse.qvtd.runtime.evaluation.Invocation;
@@ -425,6 +426,11 @@ public class QVTiCompilerTests extends LoadTestCase
 		ObjectManager objectManager = executor.getTransformer().getObjectManager();
 		Iterable<@NonNull ? extends Object> allObjects = objectManager.getObjects();
 		assertEquals("All objects post-clear", 0, Iterables.size(allObjects));
+	}
+
+	@Override
+	protected @NonNull OCLInternal createOCL() {
+		return QVTimperative.newInstance(getTestProjectManager(), null);
 	}
 
 	protected @NonNull MyQVT createQVT() throws Exception {
