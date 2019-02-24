@@ -12,6 +12,7 @@ package org.eclipse.qvtd.xtext.qvtcore.tests;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
+import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcore;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -55,11 +56,11 @@ public class QVTcLoadTests extends LoadTestCase
 	}
 
 	public void testQVTcLoad_HSV2HLS_qvtc() throws Exception {
-		doLoad_Concrete(getModelsURI("misc/HSV2HLS.qvtc"), NO_MESSAGES);
+		doLoad_Concrete(getModelsURI("misc/HSV2HLS.qvtc"), NO_MESSAGES, StatusCodes.Severity.ERROR);
 	}
 
 	public void testQVTcLoad_HSV2HLS2_qvtc() throws Exception {
-		doLoad_Concrete(getModelsURI("hsv2hsl/HSV2HSL.qvtc"), NO_MESSAGES);
+		doLoad_Concrete(getModelsURI("hsv2hsl/HSV2HSL.qvtc"), NO_MESSAGES, StatusCodes.Severity.ERROR);
 	}
 
 	public void testQVTcLoad_Class2RDBMS_qvtc() throws Exception {

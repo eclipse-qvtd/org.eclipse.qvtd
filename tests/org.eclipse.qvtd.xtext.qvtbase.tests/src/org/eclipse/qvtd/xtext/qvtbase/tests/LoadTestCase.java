@@ -22,7 +22,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
+import org.eclipse.ocl.pivot.messages.StatusCodes;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -36,9 +38,12 @@ public abstract class LoadTestCase extends XtextTestCase
 	public static final @NonNull String @NonNull [] NO_MESSAGES = new @NonNull String[] {};
 
 	public void doLoad_Concrete(@NonNull URI inputURI, @NonNull String @Nullable [] messages) throws Exception {
+		doLoad_Concrete(inputURI, messages, StatusCodes.Severity.IGNORE);
+	}
+
+	public void doLoad_Concrete(@NonNull URI inputURI, @NonNull String @Nullable [] messages, StatusCodes.@NonNull Severity severity) throws Exception {
 		OCL ocl = createOCL();
-		//	((EnvironmentFactoryInternal)ocl.getEnvironmentFactory()).setSafeNavigationValidationSeverity(StatusCodes.Severity.ERROR);
-		//		OCL ocl = OCL.newInstance(getProjectMap());
+		((EnvironmentFactoryInternal)ocl.getEnvironmentFactory()).setSafeNavigationValidationSeverity(severity);
 		URI pivotURI = getTestURIWithExtension(inputURI, "qvtias");
 		doLoad_Concrete(ocl, inputURI, pivotURI, messages);
 		ocl.dispose();

@@ -20,6 +20,8 @@ import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.cs2as.SingleContinuation;
+import org.eclipse.ocl.xtext.basecs.MultiplicityCS;
+import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -84,6 +86,13 @@ public class QVTcoreCSPreOrderVisitor extends AbstractQVTcoreCSPreOrderVisitor
 			Variable pivotElement = PivotUtil.getPivot(Variable.class, csElement);
 			if (pivotElement != null) {
 				context.refreshRequiredType(pivotElement, csElement);
+				TypedRefCS csType = csElement.getOwnedType();
+				if (csType != null) {
+					MultiplicityCS csMultiplicity = csType.getOwnedMultiplicity();
+					if (csMultiplicity == null) {
+						pivotElement.setIsRequired(true);
+					}
+				}
 			}
 			return null;
 		}
