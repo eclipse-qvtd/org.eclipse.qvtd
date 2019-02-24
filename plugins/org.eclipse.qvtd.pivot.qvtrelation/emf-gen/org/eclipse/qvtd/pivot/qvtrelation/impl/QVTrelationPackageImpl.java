@@ -1344,13 +1344,13 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		  (getKey__ValidateNoSuperKeys__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\t\t\t-- see Bugzilla 512532 discussion\n\ttransformation<> null implies \n\tlet superClasses = identifies.superClasses->closure(superClasses) in\n\tlet otherKeys = transformation?.ownedKey?->excluding(self) in\n\totherKeys.identifies->excludesAll(superClasses)\n\n"
+			   "body", "\t\t\t-- see Bugzilla 512532 discussion\n\ttransformation <> null implies \n\tlet superClasses = identifies.superClasses->closure(superClasses) in\n\tlet otherKeys = transformation?.ownedKey?->excluding(self) in\n\totherKeys.identifies->excludesAll(superClasses)\n\n"
 		   });
 		addAnnotation
 		  (getKey__ValidateIdentifiesIsUnique__DiagnosticChain_Map(),
 		   source,
 		   new String[] {
-			   "body", "\n\ttransformation<> null implies \n\tlet otherKeys = transformation?.ownedKey?->excluding(self) in\n\totherKeys.identifies->excludes(identifies)\n\n"
+			   "body", "\n\ttransformation <> null implies \n\tlet otherKeys = transformation?.ownedKey?->excluding(self) in\n\totherKeys.identifies->excludes(identifies)\n\n"
 		   });
 		addAnnotation
 		  (getKey__ValidateOppositePartsHaveOpposites__DiagnosticChain_Map(),

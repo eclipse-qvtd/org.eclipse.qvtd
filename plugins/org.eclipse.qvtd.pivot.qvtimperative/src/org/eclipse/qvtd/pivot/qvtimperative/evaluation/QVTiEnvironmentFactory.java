@@ -13,12 +13,15 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.internal.manager.FlowAnalysis;
 import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTransformation;
 import org.eclipse.qvtd.pivot.qvtimperative.model.QVTimperativeLibrary;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeFlowAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeTemplateParameterSubstitutionVisitor;
 
 public class QVTiEnvironmentFactory extends QVTbaseEnvironmentFactory
@@ -46,6 +49,11 @@ public class QVTiEnvironmentFactory extends QVTbaseEnvironmentFactory
 
 	public @NonNull QVTiModelsManager createModelsManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
 		return new QVTiModelsManager(transformationAnalysis);
+	}
+
+	@Override
+	public @NonNull FlowAnalysis createFlowAnalysis(@NonNull OCLExpression contextExpression) {
+		return new QVTimperativeFlowAnalysis(this, contextExpression);
 	}
 
 	public @NonNull QVTiTransformationAnalysis createTransformationAnalysis(@NonNull ImperativeTransformation transformation) {
