@@ -92,7 +92,7 @@ query hsv2hsl::hsl2rgb(color : HSLTree::HSL) : HSV2HSL::RGB[1]
 	HSV2HSL::RGB{value=color}
 }
 
-query hsv2hsl::hsv2rgb(color : HSVTree::HSV) : HSV2HSL::RGB[1]
+query hsv2hsl::hsv2rgb(color : HSVTree::HSV[1]) : HSV2HSL::RGB[1]
 {
 	let hsv : Sequence(String) = color.tokenize(',') in
 	let h : Integer = hsv->at(1).toReal().round() in
@@ -116,7 +116,7 @@ query hsv2hsl::hsv2rgb(color : HSVTree::HSV) : HSV2HSL::RGB[1]
 	HSV2HSL::RGB{value=r.toString() + ',' + g.toString() + ',' + b.toString()}
 }
 
-query hsv2hsl::rgb2hsl(color : HSV2HSL::RGB) : HSLTree::HSL[1]
+query hsv2hsl::rgb2hsl(color : HSV2HSL::RGB[1]) : HSLTree::HSL[1]
 {
 	let rgb : Sequence(String) = color.tokenize(',') in
 	let r : Real = rgb->at(1).toReal()/255.0 in

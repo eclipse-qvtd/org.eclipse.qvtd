@@ -14,7 +14,7 @@
 				</dictionary>
 				<dictionary>
 					<key>disabledPaths</key>
-					<value>target/**,models/rel2core/**,models/uml2owl/**,models/misc/**</value>
+					<value>target/**,models/rel2core/**,models/uml2owl/**,models/misc/Keys.qvtr</value>
 				</dictionary>
 				<dictionary>
 					<key>enabledExtensions</key>
