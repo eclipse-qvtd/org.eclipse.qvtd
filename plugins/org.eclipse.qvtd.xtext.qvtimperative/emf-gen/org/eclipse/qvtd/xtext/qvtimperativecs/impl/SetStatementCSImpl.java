@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
@@ -156,7 +157,7 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 			referredProperty = (Property)eResolveProxy(oldReferredProperty);
 			if (referredProperty != oldReferredProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 0, oldReferredProperty, referredProperty));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1, oldReferredProperty, referredProperty));
 			}
 		}
 		return referredProperty;
@@ -181,7 +182,7 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 		Property oldReferredProperty = referredProperty;
 		referredProperty = newReferredProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 0, oldReferredProperty, referredProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1, oldReferredProperty, referredProperty));
 	}
 
 	/**
@@ -196,7 +197,7 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 			referredVariable = (VariableDeclaration)eResolveProxy(oldReferredVariable);
 			if (referredVariable != oldReferredVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 1, oldReferredVariable, referredVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2, oldReferredVariable, referredVariable));
 			}
 		}
 		return referredVariable;
@@ -221,7 +222,7 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 		VariableDeclaration oldReferredVariable = referredVariable;
 		referredVariable = newReferredVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 1, oldReferredVariable, referredVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2, oldReferredVariable, referredVariable));
 	}
 
 	/**
@@ -243,7 +244,7 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 		ExpCS oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -259,14 +260,14 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2), null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2), null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -289,7 +290,7 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 		boolean oldIsNotify = isNotify;
 		isNotify = newIsNotify;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 3, oldIsNotify, isNotify));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4, oldIsNotify, isNotify));
 	}
 
 	/**
@@ -312,7 +313,7 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 		boolean oldIsPartial = isPartial;
 		isPartial = newIsPartial;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 4, oldIsPartial, isPartial));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 5, oldIsPartial, isPartial));
 	}
 
 	/**
@@ -333,7 +334,7 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -347,17 +348,17 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				if (resolve) return getReferredProperty();
 				return basicGetReferredProperty();
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				if (resolve) return getReferredVariable();
 				return basicGetReferredVariable();
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				return getOwnedExpression();
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 3:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4:
 				return isIsNotify();
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 4:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 5:
 				return isIsPartial();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -371,19 +372,19 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				setReferredProperty((Property)newValue);
 				return;
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				setReferredVariable((VariableDeclaration)newValue);
 				return;
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				setOwnedExpression((ExpCS)newValue);
 				return;
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 3:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4:
 				setIsNotify((Boolean)newValue);
 				return;
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 4:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 5:
 				setIsPartial((Boolean)newValue);
 				return;
 		}
@@ -398,19 +399,19 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				setReferredProperty((Property)null);
 				return;
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				setReferredVariable((VariableDeclaration)null);
 				return;
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				setOwnedExpression((ExpCS)null);
 				return;
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 3:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4:
 				setIsNotify(IS_NOTIFY_EDEFAULT);
 				return;
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 4:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 5:
 				setIsPartial(IS_PARTIAL_EDEFAULT);
 				return;
 		}
@@ -425,15 +426,15 @@ public class SetStatementCSImpl extends ObservableStatementCSImpl implements Set
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return referredProperty != null;
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				return referredVariable != null;
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				return ownedExpression != null;
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 3:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4:
 				return isNotify != IS_NOTIFY_EDEFAULT;
-			case ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 4:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 5:
 				return isPartial != IS_PARTIAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

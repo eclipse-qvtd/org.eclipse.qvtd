@@ -861,13 +861,13 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		cgConnectionVariableEClass = createEClass(1);
 
 		cgEcoreContainerAssignmentEClass = createEClass(2);
-		createEReference(cgEcoreContainerAssignmentEClass, CGPropertyAssignmentImpl.CG_PROPERTY_ASSIGNMENT_FEATURE_COUNT + 0);
+		createEReference(cgEcoreContainerAssignmentEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5);
 
 		cgEcorePropertyAssignmentEClass = createEClass(3);
-		createEReference(cgEcorePropertyAssignmentEClass, CGPropertyAssignmentImpl.CG_PROPERTY_ASSIGNMENT_FEATURE_COUNT + 0);
+		createEReference(cgEcorePropertyAssignmentEClass, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5);
 
 		cgEcoreRealizedVariableEClass = createEClass(4);
-		createEReference(cgEcoreRealizedVariableEClass, CGRealizedVariableImpl.CG_REALIZED_VARIABLE_FEATURE_COUNT + 0);
+		createEReference(cgEcoreRealizedVariableEClass, CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3);
 
 		cgFunctionEClass = createEClass(5);
 

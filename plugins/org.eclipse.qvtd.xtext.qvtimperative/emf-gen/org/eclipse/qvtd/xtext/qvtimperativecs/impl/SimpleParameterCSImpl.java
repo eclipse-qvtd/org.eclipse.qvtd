@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
@@ -88,7 +89,7 @@ public class SimpleParameterCSImpl extends MappingParameterCSImpl implements Sim
 			referredTypedModel = (ImperativeTypedModel)eResolveProxy(oldReferredTypedModel);
 			if (referredTypedModel != oldReferredTypedModel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
 			}
 		}
 		return referredTypedModel;
@@ -113,7 +114,7 @@ public class SimpleParameterCSImpl extends MappingParameterCSImpl implements Sim
 		ImperativeTypedModel oldReferredTypedModel = referredTypedModel;
 		referredTypedModel = newReferredTypedModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
 	}
 
 	/**
@@ -124,7 +125,7 @@ public class SimpleParameterCSImpl extends MappingParameterCSImpl implements Sim
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 0:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				if (resolve) return getReferredTypedModel();
 				return basicGetReferredTypedModel();
 		}
@@ -139,7 +140,7 @@ public class SimpleParameterCSImpl extends MappingParameterCSImpl implements Sim
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 0:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				setReferredTypedModel((ImperativeTypedModel)newValue);
 				return;
 		}
@@ -154,7 +155,7 @@ public class SimpleParameterCSImpl extends MappingParameterCSImpl implements Sim
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 0:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				setReferredTypedModel((ImperativeTypedModel)null);
 				return;
 		}
@@ -169,7 +170,7 @@ public class SimpleParameterCSImpl extends MappingParameterCSImpl implements Sim
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 0:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return referredTypedModel != null;
 		}
 		return super.eIsSet(featureID);

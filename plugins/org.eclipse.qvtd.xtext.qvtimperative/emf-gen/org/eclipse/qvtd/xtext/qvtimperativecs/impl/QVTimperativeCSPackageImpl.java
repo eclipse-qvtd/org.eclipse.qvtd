@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
+import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.impl.RootPackageCSImpl;
 import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
@@ -1203,12 +1204,12 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		// Create classes and their features
 		addStatementCSEClass = createEClass(0);
-		createEReference(addStatementCSEClass, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1);
-		createEReference(addStatementCSEClass, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2);
+		createEReference(addStatementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
+		createEReference(addStatementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2);
 
 		appendParameterBindingCSEClass = createEClass(1);
-		createEReference(appendParameterBindingCSEClass, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0);
-		createEReference(appendParameterBindingCSEClass, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1);
+		createEReference(appendParameterBindingCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 1);
+		createEReference(appendParameterBindingCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 2);
 
 		appendParameterCSEClass = createEClass(2);
 
@@ -1219,7 +1220,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEAttribute(bufferStatementCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3);
 
 		checkStatementCSEClass = createEClass(4);
-		createEReference(checkStatementCSEClass, StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1);
+		createEReference(checkStatementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
 
 		declareStatementCSEClass = createEClass(5);
 		createEReference(declareStatementCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1);
@@ -1231,18 +1232,18 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEAttribute(directionCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2);
 
 		guardParameterBindingCSEClass = createEClass(7);
-		createEReference(guardParameterBindingCSEClass, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0);
-		createEReference(guardParameterBindingCSEClass, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1);
-		createEAttribute(guardParameterBindingCSEClass, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2);
+		createEReference(guardParameterBindingCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 1);
+		createEReference(guardParameterBindingCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 2);
+		createEAttribute(guardParameterBindingCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 3);
 
 		guardParameterCSEClass = createEClass(8);
-		createEReference(guardParameterCSEClass, MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 0);
-		createEReference(guardParameterCSEClass, MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 1);
+		createEReference(guardParameterCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0);
+		createEReference(guardParameterCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1);
 
 		loopParameterBindingCSEClass = createEClass(9);
-		createEReference(loopParameterBindingCSEClass, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0);
-		createEReference(loopParameterBindingCSEClass, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1);
-		createEAttribute(loopParameterBindingCSEClass, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2);
+		createEReference(loopParameterBindingCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 1);
+		createEReference(loopParameterBindingCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 2);
+		createEAttribute(loopParameterBindingCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 3);
 
 		mappingCSEClass = createEClass(10);
 		createEAttribute(mappingCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0);
@@ -1253,16 +1254,16 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEAttribute(mappingCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 5);
 
 		mappingCallCSEClass = createEClass(11);
-		createEAttribute(mappingCallCSEClass, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0);
-		createEAttribute(mappingCallCSEClass, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1);
-		createEReference(mappingCallCSEClass, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2);
-		createEReference(mappingCallCSEClass, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 3);
-		createEReference(mappingCallCSEClass, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 4);
+		createEAttribute(mappingCallCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
+		createEAttribute(mappingCallCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
+		createEReference(mappingCallCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2);
+		createEReference(mappingCallCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3);
+		createEReference(mappingCallCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4);
 
 		mappingLoopCSEClass = createEClass(12);
-		createEReference(mappingLoopCSEClass, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1);
-		createEReference(mappingLoopCSEClass, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2);
-		createEReference(mappingLoopCSEClass, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 3);
+		createEReference(mappingLoopCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
+		createEReference(mappingLoopCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2);
+		createEReference(mappingLoopCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3);
 
 		mappingParameterCSEClass = createEClass(13);
 
@@ -1277,7 +1278,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEReference(newStatementCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 3);
 
 		observableStatementCSEClass = createEClass(17);
-		createEReference(observableStatementCSEClass, StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0);
+		createEReference(observableStatementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 
 		paramDeclarationCSEClass = createEClass(18);
 
@@ -1289,19 +1290,19 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 		createEAttribute(queryCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 5);
 
 		setStatementCSEClass = createEClass(20);
-		createEReference(setStatementCSEClass, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 0);
-		createEReference(setStatementCSEClass, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 1);
-		createEReference(setStatementCSEClass, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 2);
-		createEAttribute(setStatementCSEClass, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 3);
-		createEAttribute(setStatementCSEClass, ObservableStatementCSImpl.OBSERVABLE_STATEMENT_CS_FEATURE_COUNT + 4);
+		createEReference(setStatementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
+		createEReference(setStatementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2);
+		createEReference(setStatementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3);
+		createEAttribute(setStatementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4);
+		createEAttribute(setStatementCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 5);
 
 		simpleParameterBindingCSEClass = createEClass(21);
-		createEReference(simpleParameterBindingCSEClass, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0);
-		createEReference(simpleParameterBindingCSEClass, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1);
-		createEAttribute(simpleParameterBindingCSEClass, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2);
+		createEReference(simpleParameterBindingCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 1);
+		createEReference(simpleParameterBindingCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 2);
+		createEAttribute(simpleParameterBindingCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 3);
 
 		simpleParameterCSEClass = createEClass(22);
-		createEReference(simpleParameterCSEClass, MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 0);
+		createEReference(simpleParameterCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0);
 
 		statementCSEClass = createEClass(23);
 

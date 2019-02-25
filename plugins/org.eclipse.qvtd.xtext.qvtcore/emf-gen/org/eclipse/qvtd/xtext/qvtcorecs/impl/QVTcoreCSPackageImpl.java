@@ -806,25 +806,25 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 		createEReference(areaCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1);
 
 		bottomPatternCSEClass = createEClass(1);
-		createEReference(bottomPatternCSEClass, PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0);
-		createEReference(bottomPatternCSEClass, PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 1);
-		createEReference(bottomPatternCSEClass, PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 2);
+		createEReference(bottomPatternCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
+		createEReference(bottomPatternCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2);
+		createEReference(bottomPatternCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3);
 
 		directionCSEClass = createEClass(2);
 		createEReference(directionCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0);
 		createEReference(directionCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1);
 
 		domainCSEClass = createEClass(3);
-		createEAttribute(domainCSEClass, AreaCSImpl.AREA_CS_FEATURE_COUNT + 0);
-		createEAttribute(domainCSEClass, AreaCSImpl.AREA_CS_FEATURE_COUNT + 1);
-		createEReference(domainCSEClass, AreaCSImpl.AREA_CS_FEATURE_COUNT + 2);
+		createEAttribute(domainCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2);
+		createEAttribute(domainCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3);
+		createEReference(domainCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4);
 
 		enforcementOperationCSEClass = createEClass(4);
 		createEAttribute(enforcementOperationCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 		createEReference(enforcementOperationCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
 
 		guardPatternCSEClass = createEClass(5);
-		createEReference(guardPatternCSEClass, PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0);
+		createEReference(guardPatternCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
 
 		mappingCSEClass = createEClass(6);
 		createEAttribute(mappingCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 0);
@@ -869,7 +869,7 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 		createEReference(transformationCSEClass, AbstractTransformationCSImpl.ABSTRACT_TRANSFORMATION_CS_FEATURE_COUNT + 1);
 
 		unrealizedVariableCSEClass = createEClass(16);
-		createEReference(unrealizedVariableCSEClass, RealizeableVariableCSImpl.REALIZEABLE_VARIABLE_CS_FEATURE_COUNT + 0);
+		createEReference(unrealizedVariableCSEClass, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0);
 	}
 
 	/**

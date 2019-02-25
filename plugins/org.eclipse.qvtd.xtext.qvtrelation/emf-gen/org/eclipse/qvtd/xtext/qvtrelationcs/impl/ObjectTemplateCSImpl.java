@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
+import org.eclipse.ocl.xtext.essentialoclcs.impl.ExpCSImpl;
 import org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
@@ -84,7 +85,7 @@ public class ObjectTemplateCSImpl extends TemplateCSImpl implements ObjectTempla
 	@Override
 	public EList<PropertyTemplateCS> getOwnedPropertyTemplates() {
 		if (ownedPropertyTemplates == null) {
-			ownedPropertyTemplates = new EObjectContainmentWithInverseEList<PropertyTemplateCS>(PropertyTemplateCS.class, this, TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
+			ownedPropertyTemplates = new EObjectContainmentWithInverseEList<PropertyTemplateCS>(PropertyTemplateCS.class, this, ExpCSImpl.EXP_CS_FEATURE_COUNT + 3, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 		}
 		return ownedPropertyTemplates;
 	}
@@ -98,7 +99,7 @@ public class ObjectTemplateCSImpl extends TemplateCSImpl implements ObjectTempla
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedPropertyTemplates()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -112,7 +113,7 @@ public class ObjectTemplateCSImpl extends TemplateCSImpl implements ObjectTempla
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				return ((InternalEList<?>)getOwnedPropertyTemplates()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -126,7 +127,7 @@ public class ObjectTemplateCSImpl extends TemplateCSImpl implements ObjectTempla
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				return getOwnedPropertyTemplates();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -141,7 +142,7 @@ public class ObjectTemplateCSImpl extends TemplateCSImpl implements ObjectTempla
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				getOwnedPropertyTemplates().clear();
 				getOwnedPropertyTemplates().addAll((Collection<? extends PropertyTemplateCS>)newValue);
 				return;
@@ -157,7 +158,7 @@ public class ObjectTemplateCSImpl extends TemplateCSImpl implements ObjectTempla
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				getOwnedPropertyTemplates().clear();
 				return;
 		}
@@ -172,7 +173,7 @@ public class ObjectTemplateCSImpl extends TemplateCSImpl implements ObjectTempla
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				return ownedPropertyTemplates != null && !ownedPropertyTemplates.isEmpty();
 		}
 		return super.eIsSet(featureID);

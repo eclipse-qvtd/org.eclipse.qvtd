@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 
 import org.eclipse.qvtd.xtext.qvtcorecs.BottomPatternCS;
@@ -120,7 +121,7 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public EList<EnforcementOperationCS> getOwnedEnforcementOperations() {
 		if (ownedEnforcementOperations == null) {
-			ownedEnforcementOperations = new EObjectContainmentEList<EnforcementOperationCS>(EnforcementOperationCS.class, this, PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0);
+			ownedEnforcementOperations = new EObjectContainmentEList<EnforcementOperationCS>(EnforcementOperationCS.class, this, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
 		}
 		return ownedEnforcementOperations;
 	}
@@ -133,7 +134,7 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public EList<RealizedVariableCS> getOwnedRealizedVariables() {
 		if (ownedRealizedVariables == null) {
-			ownedRealizedVariables = new EObjectContainmentEList<RealizedVariableCS>(RealizedVariableCS.class, this, PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 1);
+			ownedRealizedVariables = new EObjectContainmentEList<RealizedVariableCS>(RealizedVariableCS.class, this, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2);
 		}
 		return ownedRealizedVariables;
 	}
@@ -146,7 +147,7 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public EList<PredicateOrAssignmentCS> getOwnedConstraints() {
 		if (ownedConstraints == null) {
-			ownedConstraints = new EObjectContainmentEList<PredicateOrAssignmentCS>(PredicateOrAssignmentCS.class, this, PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 2);
+			ownedConstraints = new EObjectContainmentEList<PredicateOrAssignmentCS>(PredicateOrAssignmentCS.class, this, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3);
 		}
 		return ownedConstraints;
 	}
@@ -159,11 +160,11 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return ((InternalEList<?>)getOwnedEnforcementOperations()).basicRemove(otherEnd, msgs);
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getOwnedRealizedVariables()).basicRemove(otherEnd, msgs);
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				return ((InternalEList<?>)getOwnedConstraints()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -177,11 +178,11 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return getOwnedEnforcementOperations();
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				return getOwnedRealizedVariables();
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				return getOwnedConstraints();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -196,15 +197,15 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				getOwnedEnforcementOperations().clear();
 				getOwnedEnforcementOperations().addAll((Collection<? extends EnforcementOperationCS>)newValue);
 				return;
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				getOwnedRealizedVariables().clear();
 				getOwnedRealizedVariables().addAll((Collection<? extends RealizedVariableCS>)newValue);
 				return;
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				getOwnedConstraints().clear();
 				getOwnedConstraints().addAll((Collection<? extends PredicateOrAssignmentCS>)newValue);
 				return;
@@ -220,13 +221,13 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				getOwnedEnforcementOperations().clear();
 				return;
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				getOwnedRealizedVariables().clear();
 				return;
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				getOwnedConstraints().clear();
 				return;
 		}
@@ -241,11 +242,11 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return ownedEnforcementOperations != null && !ownedEnforcementOperations.isEmpty();
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				return ownedRealizedVariables != null && !ownedRealizedVariables.isEmpty();
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				return ownedConstraints != null && !ownedConstraints.isEmpty();
 		}
 		return super.eIsSet(featureID);

@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.xtext.basecs.NamedElementCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
-import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.impl.ExpCSImpl;
@@ -276,13 +275,13 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 		switch (featureID) {
 			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 0:
 				setName((String)newValue);
-				return;
+			return;
 			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 1:
 				setOwnedType((TypedRefCS)newValue);
-				return;
+			return;
 			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 2:
 				setOwnedGuardExpression((ExpCS)newValue);
-				return;
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -297,13 +296,13 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 		switch (featureID) {
 			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 0:
 				setName(NAME_EDEFAULT);
-				return;
+			return;
 			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 1:
 				setOwnedType((TypedRefCS)null);
-				return;
+			return;
 			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 2:
 				setOwnedGuardExpression((ExpCS)null);
-				return;
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -335,7 +334,7 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == NamedElementCS.class) {
 			switch (derivedFeatureID) {
-				case ExpCSImpl.EXP_CS_FEATURE_COUNT + 0: return ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
+				case ExpCSImpl.EXP_CS_FEATURE_COUNT + 0: return 5;
 				default: return -1;
 			}
 		}
@@ -357,7 +356,7 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == NamedElementCS.class) {
 			switch (baseFeatureID) {
-				case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0: return ExpCSImpl.EXP_CS_FEATURE_COUNT + 0;
+				case 5: return ExpCSImpl.EXP_CS_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}

@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
+import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.impl.ExpCSImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
@@ -166,7 +167,7 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 		boolean oldIsInstall = isInstall;
 		isInstall = newIsInstall;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0, oldIsInstall, isInstall));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0, oldIsInstall, isInstall));
 	}
 
 	/**
@@ -189,7 +190,7 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 		boolean oldIsInvoke = isInvoke;
 		isInvoke = newIsInvoke;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1, oldIsInvoke, isInvoke));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1, oldIsInvoke, isInvoke));
 	}
 
 	/**
@@ -212,7 +213,7 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 		Mapping oldReferredMapping = referredMapping;
 		referredMapping = newReferredMapping;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 4, oldReferredMapping, referredMapping));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4, oldReferredMapping, referredMapping));
 	}
 
 	/**
@@ -233,7 +234,7 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public EList<MappingParameterBindingCS> getOwnedBindings() {
 		if (ownedBindings == null) {
-			ownedBindings = new EObjectContainmentWithInverseEList<MappingParameterBindingCS>(MappingParameterBindingCS.class, this, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2, ExpCSImpl.EXP_CS_FEATURE_COUNT + 0);
+			ownedBindings = new EObjectContainmentWithInverseEList<MappingParameterBindingCS>(MappingParameterBindingCS.class, this, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2, ExpCSImpl.EXP_CS_FEATURE_COUNT + 0);
 		}
 		return ownedBindings;
 	}
@@ -257,7 +258,7 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 		PathNameCS oldOwnedPathName = ownedPathName;
 		ownedPathName = newOwnedPathName;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 3, oldOwnedPathName, newOwnedPathName);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3, oldOwnedPathName, newOwnedPathName);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -273,14 +274,14 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 		if (newOwnedPathName != ownedPathName) {
 			NotificationChain msgs = null;
 			if (ownedPathName != null)
-				msgs = ((InternalEObject)ownedPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 3), null, msgs);
+				msgs = ((InternalEObject)ownedPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3), null, msgs);
 			if (newOwnedPathName != null)
-				msgs = ((InternalEObject)newOwnedPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 3), null, msgs);
+				msgs = ((InternalEObject)newOwnedPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3), null, msgs);
 			msgs = basicSetOwnedPathName(newOwnedPathName, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 3, newOwnedPathName, newOwnedPathName));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3, newOwnedPathName, newOwnedPathName));
 	}
 
 	/**
@@ -292,7 +293,7 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedBindings()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -306,9 +307,9 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				return ((InternalEList<?>)getOwnedBindings()).basicRemove(otherEnd, msgs);
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 3:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				return basicSetOwnedPathName(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -322,15 +323,15 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return isIsInstall();
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return isIsInvoke();
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				return getOwnedBindings();
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 3:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				return getOwnedPathName();
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 4:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4:
 				return getReferredMapping();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -345,20 +346,20 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				setIsInstall((Boolean)newValue);
 				return;
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				setIsInvoke((Boolean)newValue);
 				return;
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				getOwnedBindings().clear();
 				getOwnedBindings().addAll((Collection<? extends MappingParameterBindingCS>)newValue);
 				return;
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 3:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				setOwnedPathName((PathNameCS)newValue);
 				return;
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 4:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4:
 				setReferredMapping((Mapping)newValue);
 				return;
 		}
@@ -373,19 +374,19 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				setIsInstall(IS_INSTALL_EDEFAULT);
 				return;
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				setIsInvoke(IS_INVOKE_EDEFAULT);
 				return;
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				getOwnedBindings().clear();
 				return;
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 3:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				setOwnedPathName((PathNameCS)null);
 				return;
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 4:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4:
 				setReferredMapping((Mapping)null);
 				return;
 		}
@@ -400,15 +401,15 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return isInstall != IS_INSTALL_EDEFAULT;
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return isInvoke != IS_INVOKE_EDEFAULT;
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				return ownedBindings != null && !ownedBindings.isEmpty();
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 3:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				return ownedPathName != null;
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 4:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4:
 				return referredMapping != null;
 		}
 		return super.eIsSet(featureID);

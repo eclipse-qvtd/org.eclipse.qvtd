@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 
 import org.eclipse.qvtd.xtext.qvtcorecs.GuardPatternCS;
@@ -95,7 +96,7 @@ public class GuardPatternCSImpl extends PatternCSImpl implements GuardPatternCS 
 	@Override
 	public EList<PredicateCS> getOwnedPredicates() {
 		if (ownedPredicates == null) {
-			ownedPredicates = new EObjectContainmentEList<PredicateCS>(PredicateCS.class, this, PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0);
+			ownedPredicates = new EObjectContainmentEList<PredicateCS>(PredicateCS.class, this, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
 		}
 		return ownedPredicates;
 	}
@@ -108,7 +109,7 @@ public class GuardPatternCSImpl extends PatternCSImpl implements GuardPatternCS 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return ((InternalEList<?>)getOwnedPredicates()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -122,7 +123,7 @@ public class GuardPatternCSImpl extends PatternCSImpl implements GuardPatternCS 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return getOwnedPredicates();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -137,7 +138,7 @@ public class GuardPatternCSImpl extends PatternCSImpl implements GuardPatternCS 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				getOwnedPredicates().clear();
 				getOwnedPredicates().addAll((Collection<? extends PredicateCS>)newValue);
 				return;
@@ -153,7 +154,7 @@ public class GuardPatternCSImpl extends PatternCSImpl implements GuardPatternCS 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				getOwnedPredicates().clear();
 				return;
 		}
@@ -168,7 +169,7 @@ public class GuardPatternCSImpl extends PatternCSImpl implements GuardPatternCS 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case PatternCSImpl.PATTERN_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return ownedPredicates != null && !ownedPredicates.isEmpty();
 		}
 		return super.eIsSet(featureID);

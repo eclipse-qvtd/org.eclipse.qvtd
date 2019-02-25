@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGVariableImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
@@ -91,7 +92,7 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 		EClassifier oldEClassifier = eClassifier;
 		eClassifier = newEClassifier;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGRealizedVariableImpl.CG_REALIZED_VARIABLE_FEATURE_COUNT + 0, oldEClassifier, eClassifier));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3, oldEClassifier, eClassifier));
 	}
 
 	/**
@@ -102,7 +103,7 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CGRealizedVariableImpl.CG_REALIZED_VARIABLE_FEATURE_COUNT + 0:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3:
 				return getEClassifier();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -116,7 +117,7 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CGRealizedVariableImpl.CG_REALIZED_VARIABLE_FEATURE_COUNT + 0:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3:
 				setEClassifier((EClassifier)newValue);
 				return;
 		}
@@ -131,7 +132,7 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CGRealizedVariableImpl.CG_REALIZED_VARIABLE_FEATURE_COUNT + 0:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3:
 				setEClassifier((EClassifier)null);
 				return;
 		}
@@ -146,7 +147,7 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CGRealizedVariableImpl.CG_REALIZED_VARIABLE_FEATURE_COUNT + 0:
+			case CGVariableImpl.CG_VARIABLE_FEATURE_COUNT + 3:
 				return eClassifier != null;
 		}
 		return super.eIsSet(featureID);

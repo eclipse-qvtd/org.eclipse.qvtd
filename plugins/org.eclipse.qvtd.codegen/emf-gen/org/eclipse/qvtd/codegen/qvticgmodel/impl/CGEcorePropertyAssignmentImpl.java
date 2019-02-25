@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
@@ -91,7 +92,7 @@ public class CGEcorePropertyAssignmentImpl extends CGPropertyAssignmentImpl impl
 		EStructuralFeature oldEStructuralFeature = eStructuralFeature;
 		eStructuralFeature = newEStructuralFeature;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, CGPropertyAssignmentImpl.CG_PROPERTY_ASSIGNMENT_FEATURE_COUNT + 0, oldEStructuralFeature, eStructuralFeature));
+			eNotify(new ENotificationImpl(this, Notification.SET, CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5, oldEStructuralFeature, eStructuralFeature));
 	}
 
 	/**
@@ -102,7 +103,7 @@ public class CGEcorePropertyAssignmentImpl extends CGPropertyAssignmentImpl impl
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case CGPropertyAssignmentImpl.CG_PROPERTY_ASSIGNMENT_FEATURE_COUNT + 0:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5:
 				return getEStructuralFeature();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -116,7 +117,7 @@ public class CGEcorePropertyAssignmentImpl extends CGPropertyAssignmentImpl impl
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case CGPropertyAssignmentImpl.CG_PROPERTY_ASSIGNMENT_FEATURE_COUNT + 0:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5:
 				setEStructuralFeature((EStructuralFeature)newValue);
 				return;
 		}
@@ -131,7 +132,7 @@ public class CGEcorePropertyAssignmentImpl extends CGPropertyAssignmentImpl impl
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case CGPropertyAssignmentImpl.CG_PROPERTY_ASSIGNMENT_FEATURE_COUNT + 0:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5:
 				setEStructuralFeature((EStructuralFeature)null);
 				return;
 		}
@@ -146,7 +147,7 @@ public class CGEcorePropertyAssignmentImpl extends CGPropertyAssignmentImpl impl
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case CGPropertyAssignmentImpl.CG_PROPERTY_ASSIGNMENT_FEATURE_COUNT + 0:
+			case CGValuedElementImpl.CG_VALUED_ELEMENT_FEATURE_COUNT + 5:
 				return eStructuralFeature != null;
 		}
 		return super.eIsSet(featureID);

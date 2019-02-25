@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
+import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
@@ -320,7 +321,7 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 		}
 		if (baseClass == ObservableStatementCS.class) {
 			switch (derivedFeatureID) {
-				case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0: return StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0;
+				case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0: return ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -341,7 +342,7 @@ public class DeclareStatementCSImpl extends TypedElementCSImpl implements Declar
 		}
 		if (baseClass == ObservableStatementCS.class) {
 			switch (baseFeatureID) {
-				case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0: return TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+				case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0: return TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}

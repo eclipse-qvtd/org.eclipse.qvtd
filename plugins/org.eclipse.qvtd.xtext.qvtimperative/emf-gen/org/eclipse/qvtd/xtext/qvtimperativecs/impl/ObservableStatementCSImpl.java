@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
+import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.qvtd.xtext.qvtimperativecs.ObservableStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 
@@ -85,7 +86,7 @@ public abstract class ObservableStatementCSImpl extends StatementCSImpl implemen
 	@Override
 	public EList<PathNameCS> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0);
+			observedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 		}
 		return observedProperties;
 	}
@@ -98,7 +99,7 @@ public abstract class ObservableStatementCSImpl extends StatementCSImpl implemen
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getObservedProperties()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -112,7 +113,7 @@ public abstract class ObservableStatementCSImpl extends StatementCSImpl implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return getObservedProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -127,7 +128,7 @@ public abstract class ObservableStatementCSImpl extends StatementCSImpl implemen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends PathNameCS>)newValue);
 				return;
@@ -143,7 +144,7 @@ public abstract class ObservableStatementCSImpl extends StatementCSImpl implemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				return;
 		}
@@ -158,7 +159,7 @@ public abstract class ObservableStatementCSImpl extends StatementCSImpl implemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return observedProperties != null && !observedProperties.isEmpty();
 		}
 		return super.eIsSet(featureID);

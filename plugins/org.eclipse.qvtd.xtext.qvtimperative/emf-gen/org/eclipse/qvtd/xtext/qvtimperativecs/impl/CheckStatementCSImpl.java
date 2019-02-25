@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
+import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.CheckStatementCS;
@@ -102,7 +103,7 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 	@Override
 	public EList<PathNameCS> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0);
+			observedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 		}
 		return observedProperties;
 	}
@@ -126,7 +127,7 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 		ExpCS oldOwnedCondition = ownedCondition;
 		ownedCondition = newOwnedCondition;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1, oldOwnedCondition, newOwnedCondition);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1, oldOwnedCondition, newOwnedCondition);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -142,14 +143,14 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 		if (newOwnedCondition != ownedCondition) {
 			NotificationChain msgs = null;
 			if (ownedCondition != null)
-				msgs = ((InternalEObject)ownedCondition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1), null, msgs);
+				msgs = ((InternalEObject)ownedCondition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			if (newOwnedCondition != null)
-				msgs = ((InternalEObject)newOwnedCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1), null, msgs);
+				msgs = ((InternalEObject)newOwnedCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetOwnedCondition(newOwnedCondition, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1, newOwnedCondition, newOwnedCondition));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1, newOwnedCondition, newOwnedCondition));
 	}
 
 	/**
@@ -160,9 +161,9 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getObservedProperties()).basicRemove(otherEnd, msgs);
-			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return basicSetOwnedCondition(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -176,9 +177,9 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return getObservedProperties();
-			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return getOwnedCondition();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -193,11 +194,11 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends PathNameCS>)newValue);
 				return;
-			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedCondition((ExpCS)newValue);
 				return;
 		}
@@ -212,10 +213,10 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				return;
-			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedCondition((ExpCS)null);
 				return;
 		}
@@ -230,9 +231,9 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return observedProperties != null && !observedProperties.isEmpty();
-			case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return ownedCondition != null;
 		}
 		return super.eIsSet(featureID);
@@ -247,7 +248,7 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatementCS.class) {
 			switch (derivedFeatureID) {
-				case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0: return StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0;
+				case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0: return ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -263,7 +264,7 @@ public class CheckStatementCSImpl extends StatementCSImpl implements CheckStatem
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatementCS.class) {
 			switch (baseFeatureID) {
-				case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0: return StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0;
+				case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0: return ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}

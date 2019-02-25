@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainPatternCS;
@@ -82,7 +83,7 @@ public class PrimitiveTypeDomainCSImpl extends AbstractDomainCSImpl implements P
 	@Override
 	public EList<PrimitiveTypeDomainPatternCS> getOwnedPatterns() {
 		if (ownedPatterns == null) {
-			ownedPatterns = new EObjectContainmentEList<PrimitiveTypeDomainPatternCS>(PrimitiveTypeDomainPatternCS.class, this, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0);
+			ownedPatterns = new EObjectContainmentEList<PrimitiveTypeDomainPatternCS>(PrimitiveTypeDomainPatternCS.class, this, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 		}
 		return ownedPatterns;
 	}
@@ -95,7 +96,7 @@ public class PrimitiveTypeDomainCSImpl extends AbstractDomainCSImpl implements P
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getOwnedPatterns()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -109,7 +110,7 @@ public class PrimitiveTypeDomainCSImpl extends AbstractDomainCSImpl implements P
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return getOwnedPatterns();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -124,7 +125,7 @@ public class PrimitiveTypeDomainCSImpl extends AbstractDomainCSImpl implements P
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				getOwnedPatterns().clear();
 				getOwnedPatterns().addAll((Collection<? extends PrimitiveTypeDomainPatternCS>)newValue);
 				return;
@@ -140,7 +141,7 @@ public class PrimitiveTypeDomainCSImpl extends AbstractDomainCSImpl implements P
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				getOwnedPatterns().clear();
 				return;
 		}
@@ -155,7 +156,7 @@ public class PrimitiveTypeDomainCSImpl extends AbstractDomainCSImpl implements P
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return ownedPatterns != null && !ownedPatterns.isEmpty();
 		}
 		return super.eIsSet(featureID);

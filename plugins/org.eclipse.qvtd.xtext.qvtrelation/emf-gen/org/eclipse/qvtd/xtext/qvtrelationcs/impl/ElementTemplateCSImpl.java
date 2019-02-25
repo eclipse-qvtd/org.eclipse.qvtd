@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.pivot.qvtrelation.SharedVariable;
 import org.eclipse.qvtd.xtext.qvtrelationcs.ElementTemplateCS;
@@ -84,7 +85,7 @@ public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements Ele
 			identifier = (SharedVariable)eResolveProxy(oldIdentifier);
 			if (identifier != oldIdentifier) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TemplateVariableCSImpl.TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0, oldIdentifier, identifier));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1, oldIdentifier, identifier));
 			}
 		}
 		return identifier;
@@ -109,7 +110,7 @@ public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements Ele
 		SharedVariable oldIdentifier = identifier;
 		identifier = newIdentifier;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TemplateVariableCSImpl.TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0, oldIdentifier, identifier));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1, oldIdentifier, identifier));
 	}
 
 	/**
@@ -120,7 +121,7 @@ public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements Ele
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TemplateVariableCSImpl.TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				if (resolve) return getIdentifier();
 				return basicGetIdentifier();
 		}
@@ -135,7 +136,7 @@ public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements Ele
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TemplateVariableCSImpl.TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				setIdentifier((SharedVariable)newValue);
 				return;
 		}
@@ -150,7 +151,7 @@ public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements Ele
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TemplateVariableCSImpl.TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				setIdentifier((SharedVariable)null);
 				return;
 		}
@@ -165,7 +166,7 @@ public class ElementTemplateCSImpl extends TemplateVariableCSImpl implements Ele
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TemplateVariableCSImpl.TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return identifier != null;
 		}
 		return super.eIsSet(featureID);

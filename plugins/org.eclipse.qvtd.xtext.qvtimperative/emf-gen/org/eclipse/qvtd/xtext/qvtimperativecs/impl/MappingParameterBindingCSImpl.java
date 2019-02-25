@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.xtext.essentialoclcs.impl.ExpCSImpl;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingParameterBindingCS;
@@ -102,7 +103,7 @@ public abstract class MappingParameterBindingCSImpl extends ExpCSImpl implements
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningMappingCall != null)
-				msgs = ((InternalEObject)newOwningMappingCall).eInverseAdd(this, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2, MappingCallCS.class, msgs);
+				msgs = ((InternalEObject)newOwningMappingCall).eInverseAdd(this, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2, MappingCallCS.class, msgs);
 			msgs = basicSetOwningMappingCall(newOwningMappingCall, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -149,7 +150,7 @@ public abstract class MappingParameterBindingCSImpl extends ExpCSImpl implements
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 0:
-				return eInternalContainer().eInverseRemove(this, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2, MappingCallCS.class, msgs);
+				return eInternalContainer().eInverseRemove(this, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2, MappingCallCS.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

@@ -22,6 +22,7 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.impl.ExpCSImpl;
 import org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
@@ -137,7 +138,7 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningObjectTemplate != null)
-				msgs = ((InternalEObject)newOwningObjectTemplate).eInverseAdd(this, TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0, ObjectTemplateCS.class, msgs);
+				msgs = ((InternalEObject)newOwningObjectTemplate).eInverseAdd(this, ExpCSImpl.EXP_CS_FEATURE_COUNT + 3, ObjectTemplateCS.class, msgs);
 			msgs = basicSetOwningObjectTemplate(newOwningObjectTemplate, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -318,7 +319,7 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
-				return eInternalContainer().eInverseRemove(this, TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0, ObjectTemplateCS.class, msgs);
+				return eInternalContainer().eInverseRemove(this, ExpCSImpl.EXP_CS_FEATURE_COUNT + 3, ObjectTemplateCS.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

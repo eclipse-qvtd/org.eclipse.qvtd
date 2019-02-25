@@ -1044,28 +1044,28 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		abstractDomainCSEClass = createEClass(0);
 
 		collectionTemplateCSEClass = createEClass(1);
-		createEReference(collectionTemplateCSEClass, TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0);
-		createEReference(collectionTemplateCSEClass, TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1);
+		createEReference(collectionTemplateCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 3);
+		createEReference(collectionTemplateCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 4);
 
 		defaultValueCSEClass = createEClass(2);
 		createEReference(defaultValueCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 		createEReference(defaultValueCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
 
 		domainCSEClass = createEClass(3);
-		createEAttribute(domainCSEClass, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0);
-		createEAttribute(domainCSEClass, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 1);
-		createEAttribute(domainCSEClass, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 2);
-		createEReference(domainCSEClass, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 3);
-		createEAttribute(domainCSEClass, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 4);
-		createEReference(domainCSEClass, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 5);
-		createEReference(domainCSEClass, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 6);
-		createEReference(domainCSEClass, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 7);
+		createEAttribute(domainCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
+		createEAttribute(domainCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1);
+		createEAttribute(domainCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2);
+		createEReference(domainCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3);
+		createEAttribute(domainCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4);
+		createEReference(domainCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 5);
+		createEReference(domainCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 6);
+		createEReference(domainCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 7);
 
 		domainPatternCSEClass = createEClass(4);
 		createEReference(domainPatternCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 
 		elementTemplateCSEClass = createEClass(5);
-		createEReference(elementTemplateCSEClass, TemplateVariableCSImpl.TEMPLATE_VARIABLE_CS_FEATURE_COUNT + 0);
+		createEReference(elementTemplateCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1);
 
 		keyDeclCSEClass = createEClass(6);
 		createEReference(keyDeclCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
@@ -1078,7 +1078,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		createEReference(modelDeclCSEClass, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 1);
 
 		objectTemplateCSEClass = createEClass(8);
-		createEReference(objectTemplateCSEClass, TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0);
+		createEReference(objectTemplateCSEClass, ExpCSImpl.EXP_CS_FEATURE_COUNT + 3);
 
 		paramDeclarationCSEClass = createEClass(9);
 
@@ -1089,7 +1089,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		createEReference(predicateCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 
 		primitiveTypeDomainCSEClass = createEClass(12);
-		createEReference(primitiveTypeDomainCSEClass, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0);
+		createEReference(primitiveTypeDomainCSEClass, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 
 		primitiveTypeDomainPatternCSEClass = createEClass(13);
 

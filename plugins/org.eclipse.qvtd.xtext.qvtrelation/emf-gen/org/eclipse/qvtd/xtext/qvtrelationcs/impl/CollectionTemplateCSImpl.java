@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
+import org.eclipse.ocl.xtext.essentialoclcs.impl.ExpCSImpl;
 import org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.ElementTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
@@ -99,7 +100,7 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	@Override
 	public EList<TemplateVariableCS> getOwnedMemberIdentifiers() {
 		if (ownedMemberIdentifiers == null) {
-			ownedMemberIdentifiers = new EObjectContainmentEList<TemplateVariableCS>(TemplateVariableCS.class, this, TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0);
+			ownedMemberIdentifiers = new EObjectContainmentEList<TemplateVariableCS>(TemplateVariableCS.class, this, ExpCSImpl.EXP_CS_FEATURE_COUNT + 3);
 		}
 		return ownedMemberIdentifiers;
 	}
@@ -123,7 +124,7 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 		ElementTemplateCS oldOwnedRestIdentifier = ownedRestIdentifier;
 		ownedRestIdentifier = newOwnedRestIdentifier;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1, oldOwnedRestIdentifier, newOwnedRestIdentifier);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpCSImpl.EXP_CS_FEATURE_COUNT + 4, oldOwnedRestIdentifier, newOwnedRestIdentifier);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -139,14 +140,14 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 		if (newOwnedRestIdentifier != ownedRestIdentifier) {
 			NotificationChain msgs = null;
 			if (ownedRestIdentifier != null)
-				msgs = ((InternalEObject)ownedRestIdentifier).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1), null, msgs);
+				msgs = ((InternalEObject)ownedRestIdentifier).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ExpCSImpl.EXP_CS_FEATURE_COUNT + 4), null, msgs);
 			if (newOwnedRestIdentifier != null)
-				msgs = ((InternalEObject)newOwnedRestIdentifier).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1), null, msgs);
+				msgs = ((InternalEObject)newOwnedRestIdentifier).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ExpCSImpl.EXP_CS_FEATURE_COUNT + 4), null, msgs);
 			msgs = basicSetOwnedRestIdentifier(newOwnedRestIdentifier, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1, newOwnedRestIdentifier, newOwnedRestIdentifier));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExpCSImpl.EXP_CS_FEATURE_COUNT + 4, newOwnedRestIdentifier, newOwnedRestIdentifier));
 	}
 
 	/**
@@ -157,9 +158,9 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				return ((InternalEList<?>)getOwnedMemberIdentifiers()).basicRemove(otherEnd, msgs);
-			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 4:
 				return basicSetOwnedRestIdentifier(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -173,9 +174,9 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				return getOwnedMemberIdentifiers();
-			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 4:
 				return getOwnedRestIdentifier();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -190,11 +191,11 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				getOwnedMemberIdentifiers().clear();
 				getOwnedMemberIdentifiers().addAll((Collection<? extends TemplateVariableCS>)newValue);
 				return;
-			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 4:
 				setOwnedRestIdentifier((ElementTemplateCS)newValue);
 				return;
 		}
@@ -209,10 +210,10 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				getOwnedMemberIdentifiers().clear();
 				return;
-			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 4:
 				setOwnedRestIdentifier((ElementTemplateCS)null);
 				return;
 		}
@@ -227,9 +228,9 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				return ownedMemberIdentifiers != null && !ownedMemberIdentifiers.isEmpty();
-			case TemplateCSImpl.TEMPLATE_CS_FEATURE_COUNT + 1:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 4:
 				return ownedRestIdentifier != null;
 		}
 		return super.eIsSet(featureID);

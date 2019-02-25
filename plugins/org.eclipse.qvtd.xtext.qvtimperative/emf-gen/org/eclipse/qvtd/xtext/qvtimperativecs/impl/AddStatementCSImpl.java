@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
+import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
@@ -116,7 +117,7 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	@Override
 	public EList<PathNameCS> getObservedProperties() {
 		if (observedProperties == null) {
-			observedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0);
+			observedProperties = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0);
 		}
 		return observedProperties;
 	}
@@ -140,7 +141,7 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 		ExpCS oldOwnedExpression = ownedExpression;
 		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1, oldOwnedExpression, newOwnedExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -156,14 +157,14 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
 			if (ownedExpression != null)
-				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1), null, msgs);
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			if (newOwnedExpression != null)
-				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1), null, msgs);
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1, newOwnedExpression, newOwnedExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -178,7 +179,7 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 			targetVariable = (ConnectionVariable)eResolveProxy(oldTargetVariable);
 			if (targetVariable != oldTargetVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2, oldTargetVariable, targetVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2, oldTargetVariable, targetVariable));
 			}
 		}
 		return targetVariable;
@@ -203,7 +204,7 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 		ConnectionVariable oldTargetVariable = targetVariable;
 		targetVariable = newTargetVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2, oldTargetVariable, targetVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2, oldTargetVariable, targetVariable));
 	}
 
 	/**
@@ -214,9 +215,9 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return ((InternalEList<?>)getObservedProperties()).basicRemove(otherEnd, msgs);
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -230,11 +231,11 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return getObservedProperties();
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return getOwnedExpression();
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				if (resolve) return getTargetVariable();
 				return basicGetTargetVariable();
 		}
@@ -250,14 +251,14 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				getObservedProperties().addAll((Collection<? extends PathNameCS>)newValue);
 				return;
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedExpression((ExpCS)newValue);
 				return;
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				setTargetVariable((ConnectionVariable)newValue);
 				return;
 		}
@@ -272,13 +273,13 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				getObservedProperties().clear();
 				return;
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				setOwnedExpression((ExpCS)null);
 				return;
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				setTargetVariable((ConnectionVariable)null);
 				return;
 		}
@@ -293,11 +294,11 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return observedProperties != null && !observedProperties.isEmpty();
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return ownedExpression != null;
-			case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				return targetVariable != null;
 		}
 		return super.eIsSet(featureID);
@@ -312,7 +313,7 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatementCS.class) {
 			switch (derivedFeatureID) {
-				case MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0: return StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0;
+				case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0: return ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}
@@ -328,7 +329,7 @@ public class AddStatementCSImpl extends MappingStatementCSImpl implements AddSta
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ObservableStatementCS.class) {
 			switch (baseFeatureID) {
-				case StatementCSImpl.STATEMENT_CS_FEATURE_COUNT + 0: return MappingStatementCSImpl.MAPPING_STATEMENT_CS_FEATURE_COUNT + 0;
+				case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0: return ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 				default: return -1;
 			}
 		}

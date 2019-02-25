@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
+import org.eclipse.ocl.xtext.essentialoclcs.impl.ExpCSImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.ConnectionVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.GuardParameter;
 import org.eclipse.qvtd.xtext.qvtimperativecs.GuardParameterBindingCS;
@@ -122,7 +123,7 @@ public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl i
 			value = (ConnectionVariable)eResolveProxy(oldValue);
 			if (value != oldValue) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0, oldValue, value));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExpCSImpl.EXP_CS_FEATURE_COUNT + 1, oldValue, value));
 			}
 		}
 		return value;
@@ -147,7 +148,7 @@ public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl i
 		ConnectionVariable oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExpCSImpl.EXP_CS_FEATURE_COUNT + 1, oldValue, value));
 	}
 
 	/**
@@ -162,7 +163,7 @@ public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl i
 			referredVariable = (GuardParameter)eResolveProxy(oldReferredVariable);
 			if (referredVariable != oldReferredVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1, oldReferredVariable, referredVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExpCSImpl.EXP_CS_FEATURE_COUNT + 2, oldReferredVariable, referredVariable));
 			}
 		}
 		return referredVariable;
@@ -187,7 +188,7 @@ public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl i
 		GuardParameter oldReferredVariable = referredVariable;
 		referredVariable = newReferredVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1, oldReferredVariable, referredVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExpCSImpl.EXP_CS_FEATURE_COUNT + 2, oldReferredVariable, referredVariable));
 	}
 
 	/**
@@ -210,7 +211,7 @@ public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl i
 		boolean oldIsCheck = isCheck;
 		isCheck = newIsCheck;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2, oldIsCheck, isCheck));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExpCSImpl.EXP_CS_FEATURE_COUNT + 3, oldIsCheck, isCheck));
 	}
 
 	/**
@@ -231,13 +232,13 @@ public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl i
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 1:
 				if (resolve) return getValue();
 				return basicGetValue();
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 2:
 				if (resolve) return getReferredVariable();
 				return basicGetReferredVariable();
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				return isIsCheck();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -251,13 +252,13 @@ public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl i
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 1:
 				setValue((ConnectionVariable)newValue);
 				return;
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 2:
 				setReferredVariable((GuardParameter)newValue);
 				return;
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				setIsCheck((Boolean)newValue);
 				return;
 		}
@@ -272,13 +273,13 @@ public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl i
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 1:
 				setValue((ConnectionVariable)null);
 				return;
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 2:
 				setReferredVariable((GuardParameter)null);
 				return;
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				setIsCheck(IS_CHECK_EDEFAULT);
 				return;
 		}
@@ -293,11 +294,11 @@ public class GuardParameterBindingCSImpl extends MappingParameterBindingCSImpl i
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 1:
 				return value != null;
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 2:
 				return referredVariable != null;
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				return isCheck != IS_CHECK_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

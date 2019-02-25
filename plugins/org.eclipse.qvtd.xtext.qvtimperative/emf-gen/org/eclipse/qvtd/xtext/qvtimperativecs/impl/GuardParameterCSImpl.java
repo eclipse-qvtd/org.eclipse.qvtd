@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeTypedModel;
@@ -108,7 +109,7 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 			referredTypedModel = (ImperativeTypedModel)eResolveProxy(oldReferredTypedModel);
 			if (referredTypedModel != oldReferredTypedModel) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
 			}
 		}
 		return referredTypedModel;
@@ -133,7 +134,7 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 		ImperativeTypedModel oldReferredTypedModel = referredTypedModel;
 		referredTypedModel = newReferredTypedModel;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0, oldReferredTypedModel, referredTypedModel));
 	}
 
 	/**
@@ -148,7 +149,7 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 			successProperty = (Property)eResolveProxy(oldSuccessProperty);
 			if (successProperty != oldSuccessProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 1, oldSuccessProperty, successProperty));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1, oldSuccessProperty, successProperty));
 			}
 		}
 		return successProperty;
@@ -173,7 +174,7 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 		Property oldSuccessProperty = successProperty;
 		successProperty = newSuccessProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 1, oldSuccessProperty, successProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1, oldSuccessProperty, successProperty));
 	}
 
 	/**
@@ -184,10 +185,10 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 0:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				if (resolve) return getReferredTypedModel();
 				return basicGetReferredTypedModel();
-			case MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 1:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				if (resolve) return getSuccessProperty();
 				return basicGetSuccessProperty();
 		}
@@ -202,10 +203,10 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 0:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				setReferredTypedModel((ImperativeTypedModel)newValue);
 				return;
-			case MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 1:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				setSuccessProperty((Property)newValue);
 				return;
 		}
@@ -220,10 +221,10 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 0:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				setReferredTypedModel((ImperativeTypedModel)null);
 				return;
-			case MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 1:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				setSuccessProperty((Property)null);
 				return;
 		}
@@ -238,9 +239,9 @@ public class GuardParameterCSImpl extends MappingParameterCSImpl implements Guar
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 0:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 0:
 				return referredTypedModel != null;
-			case MappingParameterCSImpl.MAPPING_PARAMETER_CS_FEATURE_COUNT + 1:
+			case TypedElementCSImpl.TYPED_ELEMENT_CS_FEATURE_COUNT + 1:
 				return successProperty != null;
 		}
 		return super.eIsSet(featureID);

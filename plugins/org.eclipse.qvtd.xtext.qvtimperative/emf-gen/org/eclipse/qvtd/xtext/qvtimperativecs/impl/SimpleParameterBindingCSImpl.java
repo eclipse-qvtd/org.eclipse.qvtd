@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.impl.ExpCSImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.SimpleParameter;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.SimpleParameterBindingCS;
@@ -130,7 +131,7 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 		ExpCS oldOwnedValue = ownedValue;
 		ownedValue = newOwnedValue;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0, oldOwnedValue, newOwnedValue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ExpCSImpl.EXP_CS_FEATURE_COUNT + 1, oldOwnedValue, newOwnedValue);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -146,14 +147,14 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 		if (newOwnedValue != ownedValue) {
 			NotificationChain msgs = null;
 			if (ownedValue != null)
-				msgs = ((InternalEObject)ownedValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0), null, msgs);
+				msgs = ((InternalEObject)ownedValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ExpCSImpl.EXP_CS_FEATURE_COUNT + 1), null, msgs);
 			if (newOwnedValue != null)
-				msgs = ((InternalEObject)newOwnedValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0), null, msgs);
+				msgs = ((InternalEObject)newOwnedValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ExpCSImpl.EXP_CS_FEATURE_COUNT + 1), null, msgs);
 			msgs = basicSetOwnedValue(newOwnedValue, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0, newOwnedValue, newOwnedValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExpCSImpl.EXP_CS_FEATURE_COUNT + 1, newOwnedValue, newOwnedValue));
 	}
 
 	/**
@@ -168,7 +169,7 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 			referredVariable = (SimpleParameter)eResolveProxy(oldReferredVariable);
 			if (referredVariable != oldReferredVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1, oldReferredVariable, referredVariable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExpCSImpl.EXP_CS_FEATURE_COUNT + 2, oldReferredVariable, referredVariable));
 			}
 		}
 		return referredVariable;
@@ -193,7 +194,7 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 		SimpleParameter oldReferredVariable = referredVariable;
 		referredVariable = newReferredVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1, oldReferredVariable, referredVariable));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExpCSImpl.EXP_CS_FEATURE_COUNT + 2, oldReferredVariable, referredVariable));
 	}
 
 	/**
@@ -216,7 +217,7 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 		boolean oldIsCheck = isCheck;
 		isCheck = newIsCheck;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2, oldIsCheck, isCheck));
+			eNotify(new ENotificationImpl(this, Notification.SET, ExpCSImpl.EXP_CS_FEATURE_COUNT + 3, oldIsCheck, isCheck));
 	}
 
 	/**
@@ -237,7 +238,7 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 1:
 				return basicSetOwnedValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -251,12 +252,12 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 1:
 				return getOwnedValue();
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 2:
 				if (resolve) return getReferredVariable();
 				return basicGetReferredVariable();
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				return isIsCheck();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -270,13 +271,13 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 1:
 				setOwnedValue((ExpCS)newValue);
 				return;
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 2:
 				setReferredVariable((SimpleParameter)newValue);
 				return;
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				setIsCheck((Boolean)newValue);
 				return;
 		}
@@ -291,13 +292,13 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 1:
 				setOwnedValue((ExpCS)null);
 				return;
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 2:
 				setReferredVariable((SimpleParameter)null);
 				return;
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				setIsCheck(IS_CHECK_EDEFAULT);
 				return;
 		}
@@ -312,11 +313,11 @@ public class SimpleParameterBindingCSImpl extends MappingParameterBindingCSImpl 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 0:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 1:
 				return ownedValue != null;
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 1:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 2:
 				return referredVariable != null;
-			case MappingParameterBindingCSImpl.MAPPING_PARAMETER_BINDING_CS_FEATURE_COUNT + 2:
+			case ExpCSImpl.EXP_CS_FEATURE_COUNT + 3:
 				return isCheck != IS_CHECK_EDEFAULT;
 		}
 		return super.eIsSet(featureID);

@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.jdt.annotation.NonNull;
 
+import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -146,7 +147,7 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 		boolean oldIsCheck = isCheck;
 		isCheck = newIsCheck;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AreaCSImpl.AREA_CS_FEATURE_COUNT + 0, oldIsCheck, isCheck));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2, oldIsCheck, isCheck));
 	}
 
 	/**
@@ -169,7 +170,7 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 		boolean oldIsEnforce = isEnforce;
 		isEnforce = newIsEnforce;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AreaCSImpl.AREA_CS_FEATURE_COUNT + 1, oldIsEnforce, isEnforce));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3, oldIsEnforce, isEnforce));
 	}
 
 	/**
@@ -184,7 +185,7 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 			direction = (TypedModel)eResolveProxy(oldDirection);
 			if (direction != oldDirection) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AreaCSImpl.AREA_CS_FEATURE_COUNT + 2, oldDirection, direction));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4, oldDirection, direction));
 			}
 		}
 		return direction;
@@ -209,7 +210,7 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 		TypedModel oldDirection = direction;
 		direction = newDirection;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AreaCSImpl.AREA_CS_FEATURE_COUNT + 2, oldDirection, direction));
+			eNotify(new ENotificationImpl(this, Notification.SET, NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4, oldDirection, direction));
 	}
 
 	/**
@@ -230,11 +231,11 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 0:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return isIsCheck();
-			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 1:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return isIsEnforce();
-			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 2:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
 				if (resolve) return getDirection();
 				return basicGetDirection();
 		}
@@ -249,13 +250,13 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 0:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				setIsCheck((Boolean)newValue);
 				return;
-			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 1:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
 				setIsEnforce((Boolean)newValue);
 				return;
-			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 2:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
 				setDirection((TypedModel)newValue);
 				return;
 		}
@@ -270,13 +271,13 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 0:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				setIsCheck(IS_CHECK_EDEFAULT);
 				return;
-			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 1:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
 				setIsEnforce(IS_ENFORCE_EDEFAULT);
 				return;
-			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 2:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
 				setDirection((TypedModel)null);
 				return;
 		}
@@ -291,11 +292,11 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 0:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 2:
 				return isCheck != IS_CHECK_EDEFAULT;
-			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 1:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 3:
 				return isEnforce != IS_ENFORCE_EDEFAULT;
-			case AreaCSImpl.AREA_CS_FEATURE_COUNT + 2:
+			case NamedElementCSImpl.NAMED_ELEMENT_CS_FEATURE_COUNT + 4:
 				return direction != null;
 		}
 		return super.eIsSet(featureID);

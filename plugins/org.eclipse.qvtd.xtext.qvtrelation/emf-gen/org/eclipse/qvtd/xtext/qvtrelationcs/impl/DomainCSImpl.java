@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -219,7 +220,7 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 		String oldImplementedBy = implementedBy;
 		implementedBy = newImplementedBy;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0, oldImplementedBy, implementedBy));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0, oldImplementedBy, implementedBy));
 	}
 
 	/**
@@ -242,7 +243,7 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 		boolean oldIsCheckonly = isCheckonly;
 		isCheckonly = newIsCheckonly;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 1, oldIsCheckonly, isCheckonly));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1, oldIsCheckonly, isCheckonly));
 	}
 
 	/**
@@ -265,7 +266,7 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 		boolean oldIsEnforce = isEnforce;
 		isEnforce = newIsEnforce;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 2, oldIsEnforce, isEnforce));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2, oldIsEnforce, isEnforce));
 	}
 
 	/**
@@ -280,7 +281,7 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 			modelId = (TypedModel)eResolveProxy(oldModelId);
 			if (modelId != oldModelId) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 3, oldModelId, modelId));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3, oldModelId, modelId));
 			}
 		}
 		return modelId;
@@ -305,7 +306,7 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 		TypedModel oldModelId = modelId;
 		modelId = newModelId;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 3, oldModelId, modelId));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3, oldModelId, modelId));
 	}
 
 	/**
@@ -328,7 +329,7 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 		boolean oldIsReplace = isReplace;
 		isReplace = newIsReplace;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 4, oldIsReplace, isReplace));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4, oldIsReplace, isReplace));
 	}
 
 	/**
@@ -339,7 +340,7 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@Override
 	public EList<DomainPatternCS> getOwnedPatterns() {
 		if (ownedPatterns == null) {
-			ownedPatterns = new EObjectContainmentEList<DomainPatternCS>(DomainPatternCS.class, this, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 5);
+			ownedPatterns = new EObjectContainmentEList<DomainPatternCS>(DomainPatternCS.class, this, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 5);
 		}
 		return ownedPatterns;
 	}
@@ -352,7 +353,7 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@Override
 	public EList<DefaultValueCS> getOwnedDefaultValues() {
 		if (ownedDefaultValues == null) {
-			ownedDefaultValues = new EObjectContainmentEList<DefaultValueCS>(DefaultValueCS.class, this, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 6);
+			ownedDefaultValues = new EObjectContainmentEList<DefaultValueCS>(DefaultValueCS.class, this, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 6);
 		}
 		return ownedDefaultValues;
 	}
@@ -376,7 +377,7 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 		ExpCS oldOwnedImplementedBy = ownedImplementedBy;
 		ownedImplementedBy = newOwnedImplementedBy;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 7, oldOwnedImplementedBy, newOwnedImplementedBy);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 7, oldOwnedImplementedBy, newOwnedImplementedBy);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -392,14 +393,14 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 		if (newOwnedImplementedBy != ownedImplementedBy) {
 			NotificationChain msgs = null;
 			if (ownedImplementedBy != null)
-				msgs = ((InternalEObject)ownedImplementedBy).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 7), null, msgs);
+				msgs = ((InternalEObject)ownedImplementedBy).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - (ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 7), null, msgs);
 			if (newOwnedImplementedBy != null)
-				msgs = ((InternalEObject)newOwnedImplementedBy).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 7), null, msgs);
+				msgs = ((InternalEObject)newOwnedImplementedBy).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - (ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 7), null, msgs);
 			msgs = basicSetOwnedImplementedBy(newOwnedImplementedBy, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 7, newOwnedImplementedBy, newOwnedImplementedBy));
+			eNotify(new ENotificationImpl(this, Notification.SET, ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 7, newOwnedImplementedBy, newOwnedImplementedBy));
 	}
 
 	/**
@@ -420,11 +421,11 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 5:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 5:
 				return ((InternalEList<?>)getOwnedPatterns()).basicRemove(otherEnd, msgs);
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 6:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 6:
 				return ((InternalEList<?>)getOwnedDefaultValues()).basicRemove(otherEnd, msgs);
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 7:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 7:
 				return basicSetOwnedImplementedBy(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -438,22 +439,22 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return getImplementedBy();
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return isIsCheckonly();
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				return isIsEnforce();
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 3:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				if (resolve) return getModelId();
 				return basicGetModelId();
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 4:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4:
 				return isIsReplace();
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 5:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 5:
 				return getOwnedPatterns();
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 6:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 6:
 				return getOwnedDefaultValues();
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 7:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 7:
 				return getOwnedImplementedBy();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -468,30 +469,30 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				setImplementedBy((String)newValue);
 				return;
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				setIsCheckonly((Boolean)newValue);
 				return;
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				setIsEnforce((Boolean)newValue);
 				return;
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 3:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				setModelId((TypedModel)newValue);
 				return;
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 4:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4:
 				setIsReplace((Boolean)newValue);
 				return;
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 5:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 5:
 				getOwnedPatterns().clear();
 				getOwnedPatterns().addAll((Collection<? extends DomainPatternCS>)newValue);
 				return;
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 6:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 6:
 				getOwnedDefaultValues().clear();
 				getOwnedDefaultValues().addAll((Collection<? extends DefaultValueCS>)newValue);
 				return;
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 7:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 7:
 				setOwnedImplementedBy((ExpCS)newValue);
 				return;
 		}
@@ -506,28 +507,28 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				setImplementedBy(IMPLEMENTED_BY_EDEFAULT);
 				return;
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				setIsCheckonly(IS_CHECKONLY_EDEFAULT);
 				return;
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				setIsEnforce(IS_ENFORCE_EDEFAULT);
 				return;
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 3:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				setModelId((TypedModel)null);
 				return;
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 4:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4:
 				setIsReplace(IS_REPLACE_EDEFAULT);
 				return;
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 5:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 5:
 				getOwnedPatterns().clear();
 				return;
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 6:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 6:
 				getOwnedDefaultValues().clear();
 				return;
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 7:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 7:
 				setOwnedImplementedBy((ExpCS)null);
 				return;
 		}
@@ -542,21 +543,21 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 0:
 				return IMPLEMENTED_BY_EDEFAULT == null ? implementedBy != null : !IMPLEMENTED_BY_EDEFAULT.equals(implementedBy);
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 1:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 1:
 				return isCheckonly != IS_CHECKONLY_EDEFAULT;
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 2:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 2:
 				return isEnforce != IS_ENFORCE_EDEFAULT;
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 3:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 3:
 				return modelId != null;
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 4:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 4:
 				return isReplace != IS_REPLACE_EDEFAULT;
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 5:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 5:
 				return ownedPatterns != null && !ownedPatterns.isEmpty();
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 6:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 6:
 				return ownedDefaultValues != null && !ownedDefaultValues.isEmpty();
-			case AbstractDomainCSImpl.ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 7:
+			case ModelElementCSImpl.MODEL_ELEMENT_CS_FEATURE_COUNT + 7:
 				return ownedImplementedBy != null;
 		}
 		return super.eIsSet(featureID);
