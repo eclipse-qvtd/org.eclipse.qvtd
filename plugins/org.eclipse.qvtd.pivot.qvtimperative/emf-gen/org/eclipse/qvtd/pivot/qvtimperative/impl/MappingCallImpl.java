@@ -52,6 +52,7 @@ import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.BagValue;
 import org.eclipse.ocl.pivot.values.BagValue.Accumulator;
 import org.eclipse.ocl.pivot.values.IntegerValue;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
@@ -374,12 +375,12 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	 */
 	@Override
 	public boolean validateMatchingCallBindings(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "MappingCall::MatchingCallBindings";
 		try {
 			/**
 			 *
 			 * inv MatchingCallBindings:
-			 *   let
-			 *     severity : Integer[1] = 'MappingCall::MatchingCallBindings'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -396,12 +397,22 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			 *             }
 			 *           endif
 			 *       in
-			 *         'MappingCall::MatchingCallBindings'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_MappingCall_c_c_MatchingCallBindings);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.MAPPING_CALL___VALIDATE_MATCHING_CALL_BINDINGS__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ @NonNull Object symbol_2;
 			if (le) {
 				symbol_2 = ValueUtil.TRUE_VALUE;
@@ -438,13 +449,13 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 				catch (Exception e) {
 					CAUGHT_symbol_1 = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_MappingCall_c_c_MatchingCallBindings, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_symbol_1, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_symbol_1, QVTimperativeTables.INT_0).booleanValue();
 				symbol_2 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_2;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("MappingCall::MatchingCallBindings", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -455,24 +466,34 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	 */
 	@Override
 	public boolean validateNotBothInstallAndInvoke(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "MappingCall::NotBothInstallAndInvoke";
 		try {
 			/**
 			 *
 			 * inv NotBothInstallAndInvoke:
-			 *   let
-			 *     severity : Integer[1] = 'MappingCall::NotBothInstallAndInvoke'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
 			 *     else
 			 *       let result : Boolean[?] = not (isInstall and isInvoke)
 			 *       in
-			 *         'MappingCall::NotBothInstallAndInvoke'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_MappingCall_c_c_NotBothInstallAndInvoke);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.MAPPING_CALL___VALIDATE_NOT_BOTH_INSTALL_AND_INVOKE__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -488,13 +509,13 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 					and = ValueUtil.FALSE_VALUE;
 				}
 				final /*@NonInvalid*/ @Nullable Boolean result = BooleanNotOperation.INSTANCE.evaluate(and);
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_MappingCall_c_c_NotBothInstallAndInvoke, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, QVTimperativeTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("MappingCall::NotBothInstallAndInvoke", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -505,11 +526,12 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	 */
 	@Override
 	public boolean validateUniqueCallBindings(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "MappingCall::UniqueCallBindings";
 		try {
 			/**
 			 *
 			 * inv UniqueCallBindings:
-			 *   let severity : Integer[1] = 'MappingCall::UniqueCallBindings'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -517,13 +539,23 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 			 *       let
 			 *         result : Boolean[1] = ownedMappingParameterBindings->isUnique(boundVariable)
 			 *       in
-			 *         'MappingCall::UniqueCallBindings'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativeTables.STR_MappingCall_c_c_UniqueCallBindings);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTimperativeTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTimperativePackage.Literals.MAPPING_CALL___VALIDATE_UNIQUE_CALL_BINDINGS__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTimperativeTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -556,13 +588,13 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 						accumulator.add(boundVariable);
 					}
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTimperativeTables.STR_MappingCall_c_c_UniqueCallBindings, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTimperativeTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, QVTimperativeTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("MappingCall::UniqueCallBindings", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 

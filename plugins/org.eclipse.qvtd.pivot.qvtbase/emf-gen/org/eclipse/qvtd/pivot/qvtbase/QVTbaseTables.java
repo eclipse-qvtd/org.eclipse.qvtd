@@ -23,7 +23,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtbase;
 
-import java.lang.String;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.ParameterTypes;
 import org.eclipse.ocl.pivot.PivotTables;
@@ -96,18 +95,6 @@ public class QVTbaseTables
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Variable = QVTbaseTables.PACKid_$metamodel$.getClassId("Variable", 0);
 	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_0 = ValueUtil.integerValueOf("0");
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SEQ_PRIMid_String = TypeId.SEQUENCE.getSpecializedId(TypeId.STRING);
-	public static final /*@NonInvalid*/ @NonNull String STR_Domain_c_c_NameIsTypedModelName = "Domain::NameIsTypedModelName";
-	public static final /*@NonInvalid*/ @NonNull String STR_Domain_c_c_TypedModelIsTransformationModelParameter = "Domain::TypedModelIsTransformationModelParameter";
-	public static final /*@NonInvalid*/ @NonNull String STR_Function_c_c_ParametersAreFunctionParameter = "Function::ParametersAreFunctionParameter";
-	public static final /*@NonInvalid*/ @NonNull String STR_Function_c_c_ReturnTypeIsQueryType = "Function::ReturnTypeIsQueryType";
-	public static final /*@NonInvalid*/ @NonNull String STR_Predicate_c_c_ConditionIsBoolean = "Predicate::ConditionIsBoolean";
-	public static final /*@NonInvalid*/ @NonNull String STR_Rule_c_c_DomainNameIsUnique = "Rule::DomainNameIsUnique";
-	public static final /*@NonInvalid*/ @NonNull String STR_Rule_c_c_NoOverridesCycle = "Rule::NoOverridesCycle";
-	public static final /*@NonInvalid*/ @NonNull String STR_Rule_c_c_OverridingRuleOverridesAllDomains = "Rule::OverridingRuleOverridesAllDomains";
-	public static final /*@NonInvalid*/ @NonNull String STR_Transformation_c_c_ContextTypeIsTransformation = "Transformation::ContextTypeIsTransformation";
-	public static final /*@NonInvalid*/ @NonNull String STR_Transformation_c_c_ExtendedTypedModelIsExtended = "Transformation::ExtendedTypedModelIsExtended";
-	public static final /*@NonInvalid*/ @NonNull String STR_Transformation_c_c_ModelParameterIsUnique = "Transformation::ModelParameterIsUnique";
-	public static final /*@NonInvalid*/ @NonNull String STR_Transformation_c_c_NoExtendsCycle = "Transformation::NoExtendsCycle";
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_Domain = TypeId.BAG.getSpecializedId(QVTbaseTables.CLSSid_Domain);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Domain = TypeId.ORDERED_SET.getSpecializedId(QVTbaseTables.CLSSid_Domain);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Parameter = TypeId.ORDERED_SET.getSpecializedId(QVTbaseTables.CLSSid_Parameter);

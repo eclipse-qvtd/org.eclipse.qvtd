@@ -204,12 +204,12 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 	 */
 	@Override
 	public boolean validateMatchingArgumentCount(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "RelationCallExp::MatchingArgumentCount";
 		try {
 			/**
 			 *
 			 * inv MatchingArgumentCount:
-			 *   let
-			 *     severity : Integer[1] = 'RelationCallExp::MatchingArgumentCount'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -219,13 +219,23 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 			 *         self.referredRelation.domain.oclAsType(RelationDomain)
 			 *         .rootVariable->size()
 			 *       in
-			 *         'RelationCallExp::MatchingArgumentCount'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_RelationCallExp_c_c_MatchingArgumentCount);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION_CALL_EXP___VALIDATE_MATCHING_ARGUMENT_COUNT__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -288,13 +298,13 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_RelationCallExp_c_c_MatchingArgumentCount, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("RelationCallExp::MatchingArgumentCount", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -305,12 +315,12 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 	 */
 	@Override
 	public boolean validateWhereInvocationIsANonTopRelation(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "RelationCallExp::WhereInvocationIsANonTopRelation";
 		try {
 			/**
 			 *
 			 * inv WhereInvocationIsANonTopRelation:
-			 *   let
-			 *     severity : Integer[1] = 'RelationCallExp::WhereInvocationIsANonTopRelation'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -329,14 +339,24 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 			 *             ->first()
 			 *           in relation.where = pattern implies not referredRelation.isTopLevel
 			 *       in
-			 *         'RelationCallExp::WhereInvocationIsANonTopRelation'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
 			final /*@NonInvalid*/ @NonNull StandardLibrary standardLibrary = idResolver.getStandardLibrary();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_RelationCallExp_c_c_WhereInvocationIsANonTopRelation);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION_CALL_EXP___VALIDATE_WHERE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -437,13 +457,13 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 				catch (Exception e) {
 					CAUGHT_implies = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_RelationCallExp_c_c_WhereInvocationIsANonTopRelation, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_implies, QVTrelationTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_implies, QVTrelationTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("RelationCallExp::WhereInvocationIsANonTopRelation", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -454,12 +474,12 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 	 */
 	@Override
 	public boolean validateDataTypeInvocationIsANonTopRelation(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "RelationCallExp::DataTypeInvocationIsANonTopRelation";
 		try {
 			/**
 			 *
 			 * inv DataTypeInvocationIsANonTopRelation:
-			 *   let
-			 *     severity : Integer[1] = 'RelationCallExp::DataTypeInvocationIsANonTopRelation'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -469,13 +489,23 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 			 *           type.oclIsKindOf(DataType) and
 			 *           not type.oclIsKindOf(CollectionType)) implies not referredRelation.isTopLevel
 			 *       in
-			 *         'RelationCallExp::DataTypeInvocationIsANonTopRelation'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationTables.STR_RelationCallExp_c_c_DataTypeInvocationIsANonTopRelation);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTrelationTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTrelationPackage.Literals.RELATION_CALL_EXP___VALIDATE_DATA_TYPE_INVOCATION_IS_ANON_TOP_RELATION__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTrelationTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -575,13 +605,13 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTrelationTables.STR_RelationCallExp_c_c_DataTypeInvocationIsANonTopRelation, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, QVTrelationTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("RelationCallExp::DataTypeInvocationIsANonTopRelation", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 

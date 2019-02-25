@@ -184,12 +184,12 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 	 */
 	@Override
 	public boolean validateCompatibleTypeForPartialValue(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "OppositePropertyAssignment::CompatibleTypeForPartialValue";
 		try {
 			/**
 			 *
 			 * inv CompatibleTypeForPartialValue:
-			 *   let
-			 *     severity : Integer[1] = 'OppositePropertyAssignment::CompatibleTypeForPartialValue'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -216,13 +216,23 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 			 *         else true
 			 *         endif
 			 *       in
-			 *         'OppositePropertyAssignment::CompatibleTypeForPartialValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
 			final /*@NonInvalid*/ @NonNull IdResolver idResolver = executor.getIdResolver();
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_OppositePropertyAssignment_c_c_CompatibleTypeForPartialValue);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_PARTIAL_VALUE__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ @NonNull Object symbol_2;
 			if (le) {
 				symbol_2 = ValueUtil.TRUE_VALUE;
@@ -319,13 +329,13 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_OppositePropertyAssignment_c_c_CompatibleTypeForPartialValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
 				symbol_2 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_2;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("OppositePropertyAssignment::CompatibleTypeForPartialValue", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -336,12 +346,12 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 	 */
 	@Override
 	public boolean validateCompatibleTypeForTotalValue(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "OppositePropertyAssignment::CompatibleTypeForTotalValue";
 		try {
 			/**
 			 *
 			 * inv CompatibleTypeForTotalValue:
-			 *   let
-			 *     severity : Integer[1] = 'OppositePropertyAssignment::CompatibleTypeForTotalValue'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -366,12 +376,22 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 			 *         else true
 			 *         endif
 			 *       in
-			 *         'OppositePropertyAssignment::CompatibleTypeForTotalValue'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_OppositePropertyAssignment_c_c_CompatibleTypeForTotalValue);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_COMPATIBLE_TYPE_FOR_TOTAL_VALUE__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ @NonNull Object symbol_2;
 			if (le) {
 				symbol_2 = ValueUtil.TRUE_VALUE;
@@ -468,13 +488,13 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 				catch (Exception e) {
 					CAUGHT_result = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_OppositePropertyAssignment_c_c_CompatibleTypeForTotalValue, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_result, QVTcoreTables.INT_0).booleanValue();
 				symbol_2 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_2;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("OppositePropertyAssignment::CompatibleTypeForTotalValue", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -485,24 +505,34 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 	 */
 	@Override
 	public boolean validateOppositePropertyIsImplicit(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "OppositePropertyAssignment::OppositePropertyIsImplicit";
 		try {
 			/**
 			 *
 			 * inv OppositePropertyIsImplicit:
-			 *   let
-			 *     severity : Integer[1] = 'OppositePropertyAssignment::OppositePropertyIsImplicit'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
 			 *     else
 			 *       let result : Boolean[1] = getReferredTargetProperty().isImplicit
 			 *       in
-			 *         'OppositePropertyAssignment::OppositePropertyIsImplicit'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_OppositePropertyAssignment_c_c_OppositePropertyIsImplicit);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_OPPOSITE_PROPERTY_IS_IMPLICIT__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -511,13 +541,13 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 				@SuppressWarnings("null")
 				final /*@NonInvalid*/ @NonNull Property getReferredTargetProperty = this.getReferredTargetProperty();
 				final /*@NonInvalid*/ boolean result = getReferredTargetProperty.isIsImplicit();
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_OppositePropertyAssignment_c_c_OppositePropertyIsImplicit, this, (Object)null, diagnostics, context, (Object)null, severity_0, result, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, result, QVTcoreTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("OppositePropertyAssignment::OppositePropertyIsImplicit", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 
@@ -528,12 +558,12 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 	 */
 	@Override
 	public boolean validateTargetPropetyIsSlotProperty(final DiagnosticChain diagnostics, final Map<Object, Object> context) {
+		final @NonNull String constraintName = "OppositePropertyAssignment::TargetPropetyIsSlotProperty";
 		try {
 			/**
 			 *
 			 * inv TargetPropetyIsSlotProperty:
-			 *   let
-			 *     severity : Integer[1] = 'OppositePropertyAssignment::TargetPropetyIsSlotProperty'.getSeverity()
+			 *   let severity : Integer[1] = constraintName.getSeverity()
 			 *   in
 			 *     if severity <= 0
 			 *     then true
@@ -542,12 +572,22 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 			 *         result : Boolean[?] = slotExpression.type?.conformsTo(
 			 *           getReferredTargetProperty().owningClass)
 			 *       in
-			 *         'OppositePropertyAssignment::TargetPropetyIsSlotProperty'.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
+			 *         constraintName.logDiagnostic(self, null, diagnostics, context, null, severity, result, 0)
 			 *     endif
 			 */
 			final /*@NonInvalid*/ @NonNull Executor executor = PivotUtil.getExecutor(this, context);
-			final /*@NonInvalid*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcoreTables.STR_OppositePropertyAssignment_c_c_TargetPropetyIsSlotProperty);
-			final /*@NonInvalid*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, severity_0, QVTcoreTables.INT_0).booleanValue();
+			/*@Caught*/ @NonNull Object CAUGHT_severity_0;
+			try {
+				final /*@Thrown*/ @NonNull IntegerValue severity_0 = CGStringGetSeverityOperation.INSTANCE.evaluate(executor, QVTcorePackage.Literals.OPPOSITE_PROPERTY_ASSIGNMENT___VALIDATE_TARGET_PROPETY_IS_SLOT_PROPERTY__DIAGNOSTICCHAIN_MAP);
+				CAUGHT_severity_0 = severity_0;
+			}
+			catch (Exception e) {
+				CAUGHT_severity_0 = ValueUtil.createInvalidValue(e);
+			}
+			if (CAUGHT_severity_0 instanceof InvalidValueException) {
+				throw (InvalidValueException)CAUGHT_severity_0;
+			}
+			final /*@Thrown*/ boolean le = OclComparableLessThanEqualOperation.INSTANCE.evaluate(executor, CAUGHT_severity_0, QVTcoreTables.INT_0).booleanValue();
 			/*@NonInvalid*/ boolean symbol_0;
 			if (le) {
 				symbol_0 = ValueUtil.TRUE_VALUE;
@@ -575,13 +615,13 @@ public class OppositePropertyAssignmentImpl extends NavigationAssignmentImpl imp
 				catch (Exception e) {
 					CAUGHT_safe_conformsTo_source = ValueUtil.createInvalidValue(e);
 				}
-				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, QVTcoreTables.STR_OppositePropertyAssignment_c_c_TargetPropetyIsSlotProperty, this, (Object)null, diagnostics, context, (Object)null, severity_0, CAUGHT_safe_conformsTo_source, QVTcoreTables.INT_0).booleanValue();
+				final /*@NonInvalid*/ boolean logDiagnostic = CGStringLogDiagnosticOperation.INSTANCE.evaluate(executor, TypeId.BOOLEAN, constraintName, this, (Object)null, diagnostics, context, (Object)null, CAUGHT_severity_0, CAUGHT_safe_conformsTo_source, QVTcoreTables.INT_0).booleanValue();
 				symbol_0 = logDiagnostic;
 			}
 			return Boolean.TRUE == symbol_0;
 		}
 		catch (Throwable e) {
-			return ValueUtil.validationFailedDiagnostic("OppositePropertyAssignment::TargetPropetyIsSlotProperty", this, diagnostics, context, e);
+			return ValueUtil.validationFailedDiagnostic(constraintName, this, diagnostics, context, e);
 		}
 	}
 

@@ -23,7 +23,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtrelation;
 
-import java.lang.String;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.PivotTables;
 import org.eclipse.ocl.pivot.ids.ClassId;
@@ -105,25 +104,6 @@ public class QVTrelationTables
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_TypedModel = QVTrelationTables.PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_2015_s_QVTbase.getClassId("TypedModel", 0);
 	public static final /*@NonInvalid*/ @NonNull ClassId CLSSid_Variable = QVTrelationTables.PACKid_$metamodel$.getClassId("Variable", 0);
 	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_0 = ValueUtil.integerValueOf("0");
-	public static final /*@NonInvalid*/ @NonNull String STR_Key_c_c_IdentifiesIsAUsedPackageClass = "Key::IdentifiesIsAUsedPackageClass";
-	public static final /*@NonInvalid*/ @NonNull String STR_Key_c_c_IdentifiesIsNotAbstract = "Key::IdentifiesIsNotAbstract";
-	public static final /*@NonInvalid*/ @NonNull String STR_Key_c_c_IdentifiesIsUnique = "Key::IdentifiesIsUnique";
-	public static final /*@NonInvalid*/ @NonNull String STR_Key_c_c_NoSuperKeys = "Key::NoSuperKeys";
-	public static final /*@NonInvalid*/ @NonNull String STR_Key_c_c_OppositePartsAreOppositeParts = "Key::OppositePartsAreOppositeParts";
-	public static final /*@NonInvalid*/ @NonNull String STR_Key_c_c_OppositePartsHaveOpposites = "Key::OppositePartsHaveOpposites";
-	public static final /*@NonInvalid*/ @NonNull String STR_Key_c_c_PartsAreParts = "Key::PartsAreParts";
-	public static final /*@NonInvalid*/ @NonNull String STR_Key_c_c_PartsAreUnique = "Key::PartsAreUnique";
-	public static final /*@NonInvalid*/ @NonNull String STR_RelationCallExp_c_c_DataTypeInvocationIsANonTopRelation = "RelationCallExp::DataTypeInvocationIsANonTopRelation";
-	public static final /*@NonInvalid*/ @NonNull String STR_RelationCallExp_c_c_MatchingArgumentCount = "RelationCallExp::MatchingArgumentCount";
-	public static final /*@NonInvalid*/ @NonNull String STR_RelationCallExp_c_c_WhereInvocationIsANonTopRelation = "RelationCallExp::WhereInvocationIsANonTopRelation";
-	public static final /*@NonInvalid*/ @NonNull String STR_RelationDomainAssignment_c_c_CompatibleTypeForValue = "RelationDomainAssignment::CompatibleTypeForValue";
-	public static final /*@NonInvalid*/ @NonNull String STR_RelationDomain_c_c_RelationDomainAssignmentsAreUnique = "RelationDomain::RelationDomainAssignmentsAreUnique";
-	public static final /*@NonInvalid*/ @NonNull String STR_Relation_c_c_DomainsAreRelationDomains = "Relation::DomainsAreRelationDomains";
-	public static final /*@NonInvalid*/ @NonNull String STR_Relation_c_c_TopRelationOverriddenByTopRelation = "Relation::TopRelationOverriddenByTopRelation";
-	public static final /*@NonInvalid*/ @NonNull String STR_Relation_c_c_TransformationIsRelationalTransformation = "Relation::TransformationIsRelationalTransformation";
-	public static final /*@NonInvalid*/ @NonNull String STR_RelationalTransformation_c_c_RulesAreRelations = "RelationalTransformation::RulesAreRelations";
-	public static final /*@NonInvalid*/ @NonNull String STR_SharedVariable_c_c_CompatibleNullityForInitializer = "SharedVariable::CompatibleNullityForInitializer";
-	public static final /*@NonInvalid*/ @NonNull String STR_SharedVariable_c_c_CompatibleTypeForInitializer = "SharedVariable::CompatibleTypeForInitializer";
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_Class = TypeId.BAG.getSpecializedId(QVTrelationTables.CLSSid_Class);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId BAG_CLSSid_Property = TypeId.BAG.getSpecializedId(QVTrelationTables.CLSSid_Property);
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId ORD_CLSSid_Domain = TypeId.ORDERED_SET.getSpecializedId(QVTrelationTables.CLSSid_Domain);

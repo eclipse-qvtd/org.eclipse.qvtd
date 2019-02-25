@@ -88,16 +88,6 @@ public class QVTtemplateTables
 	public static final /*@NonInvalid*/ @NonNull IntegerValue INT_0 = ValueUtil.integerValueOf("0");
 	public static final /*@NonInvalid*/ @NonNull TuplePartId PARTid_ = IdManager.getTuplePartId(0, "message", TypeId.STRING);
 	public static final /*@NonInvalid*/ @NonNull TuplePartId PARTid__0 = IdManager.getTuplePartId(1, "status", TypeId.BOOLEAN);
-	public static final /*@NonInvalid*/ @NonNull String STR_CollectionTemplateExp_c_c_MemberTypeisCollectionElementType = "CollectionTemplateExp::MemberTypeisCollectionElementType";
-	public static final /*@NonInvalid*/ @NonNull String STR_CollectionTemplateExp_c_c_RestTypeisCollectionType = "CollectionTemplateExp::RestTypeisCollectionType";
-	public static final /*@NonInvalid*/ @NonNull String STR_CollectionTemplateExp_c_c_TypeisCollectionType = "CollectionTemplateExp::TypeisCollectionType";
-	public static final /*@NonInvalid*/ @NonNull String STR_ObjectTemplateExp_c_c_PartPropertyIsUnique = "ObjectTemplateExp::PartPropertyIsUnique";
-	public static final /*@NonInvalid*/ @NonNull String STR_ObjectTemplateExp_c_c_TypeisObjectType = "ObjectTemplateExp::TypeisObjectType";
-	public static final /*@NonInvalid*/ @NonNull String STR_PropertyTemplateItem_c_c_CompatibleClassForProperty = "PropertyTemplateItem::CompatibleClassForProperty";
-	public static final /*@NonInvalid*/ @NonNull String STR_PropertyTemplateItem_c_c_CompatibleTypeForCollectionElementValue = "PropertyTemplateItem::CompatibleTypeForCollectionElementValue";
-	public static final /*@NonInvalid*/ @NonNull String STR_PropertyTemplateItem_c_c_CompatibleTypeForCollectionValue = "PropertyTemplateItem::CompatibleTypeForCollectionValue";
-	public static final /*@NonInvalid*/ @NonNull String STR_PropertyTemplateItem_c_c_CompatibleTypeForObjectValue = "PropertyTemplateItem::CompatibleTypeForObjectValue";
-	public static final /*@NonInvalid*/ @NonNull String STR_TemplateExp_c_c_WhereIsBoolean = "TemplateExp::WhereIsBoolean";
 	public static final /*@NonInvalid*/ @NonNull String STR__32_must_32_conform_32_to_32 = " must conform to ";
 	public static final /*@NonInvalid*/ @NonNull String STR__32_or_32_vice_m_versa = " or vice-versa";
 	public static final /*@NonInvalid*/ @NonNull CollectionTypeId SET_CLSSid_OCLExpression = TypeId.SET.getSpecializedId(QVTtemplateTables.CLSSid_OCLExpression);
